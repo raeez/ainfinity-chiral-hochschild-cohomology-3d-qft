@@ -1,0 +1,1080 @@
+% Repository-ready section file.
+% Assumes: amsmath, amssymb, amsthm, mathtools, enumitem.
+% If theorem environments are not already defined upstream, uncomment the block below.
+%
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{conjecture}[theorem]{Conjecture}
+% \theoremstyle{definition}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{remark}[theorem]{Remark}
+% \newtheorem{problem}[theorem]{Problem}
+%
+% The status conventions in this file are:
+%   - Theorems/Propositions/Lemmas with proofs are formal or representation-theoretic statements
+%     proved in this section.
+%   - Conjectures are physically motivated or modular-completion statements.
+%   - The final ``provisional'' subsection records exact low-mode coefficient identities discussed in
+%     the working thread, but labels them explicitly as unverified and not used elsewhere.
+
+\providecommand{\A}{\mathcal A}
+\providecommand{\B}{\mathcal B}
+\providecommand{\C}{\mathbb C}
+\providecommand{\D}{\mathcal D}
+\providecommand{\E}{\mathcal E}
+\providecommand{\F}{\mathcal F}
+\providecommand{\G}{\mathfrak G}
+\providecommand{\M}{\mathcal M}
+\providecommand{\N}{\mathcal N}
+\providecommand{\Q}{\mathbb Q}
+\providecommand{\R}{\mathbb R}
+\providecommand{\Z}{\mathbb Z}
+\providecommand{\mc}{\mathfrak m}
+\providecommand{\h}{\hbar}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\Hom}{\operatorname{Hom}}
+\providecommand{\MC}{\operatorname{MC}}
+\providecommand{\Cone}{\operatorname{Cone}}
+\providecommand{\Obs}{\operatorname{Obs}}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Tr}{\operatorname{Tr}}
+\providecommand{\Span}{\operatorname{Span}}
+\providecommand{\End}{\operatorname{End}}
+\providecommand{\Ext}{\operatorname{Ext}}
+\providecommand{\Defcyc}{\operatorname{Def}_{\mathrm{cyc}}}
+\providecommand{\Ran}{\operatorname{Ran}}
+\providecommand{\gr}{\operatorname{gr}}
+\providecommand{\Hb}{H_b^{0,\bullet}(S^3)}
+\providecommand{\HCR}{H_{\mathrm{CR}}^{0,\bullet}(S^3)}
+\providecommand{\delbar}{\bar\partial}
+\providecommand{\delbarb}{\bar\partial_b}
+\providecommand{\ot}{\widehat\otimes}
+\providecommand{\ov}[1]{\overline{#1}}
+
+\section{Modular twisted/celestial holography from first principles}
+\label{sec:modular-twisted-celestial-first-principles}
+
+\subsection{The problem, restated at its true level}
+\label{subsec:problem-restated-true-level}
+
+The disk-level story is already visible in the existing literature.  Zeng shows that the
+Kaluza--Klein reduction of a class of $6$-dimensional holomorphic theories produces a
+$3$-dimensional holomorphic--topological theory whose effective interactions are obtained by
+homotopy transfer, and that with a suitable transverse boundary condition the resulting
+boundary chiral algebra coincides with the universal defect chiral algebra of the unreduced
+model \cite{ZengTwistedHolography}.  Costello--Dimofte--Gaiotto identify the basic
+bulk--boundary package in the holomorphic twist of $3$d $\mathcal N=2$ theories: the bulk
+chiral algebra is commutative and carries a shifted Poisson bracket, while boundary chiral
+algebras are modules for the bulk and are expected to carry higher $A_\infty$-type operations
+\cite{CostelloDimofteGaiottoBoundary}.  Gaiotto--Kulp--Wu then supply the perturbative
+higher-operation language in which regularized Feynman diagrams satisfy quadratic/Wess--
+Zumino identities and control holomorphic--topological OPE data, including defect and
+boundary operations \cite{GaiottoKulpWuHigher}.  Finally, Gui--Li--Zeng formulate chiral
+quadratic duality by Maurer--Cartan theory, showing in the quadratic setting that morphisms
+$A\to B$ are controlled by Maurer--Cartan elements in $A^!\otimes B$, and making precise
+how curvature enters via twisted pairs and curved chiral DG structures
+\cite{GuiLiZengQuadraticDuality}.
+
+Taken together, these results do \emph{not} merely suggest a new slogan.  They force a
+reorganization of the problem.
+
+The correct object is not the boundary vertex algebra by itself.  It is the full modular
+Maurer--Cartan lift of the boundary algebra, of which the familiar disk-level boundary OPE is
+only the genus-$0$ truncation.  In other words:
+\begin{quote}
+\emph{twisted/celestial holography is naturally a modular lifting problem for the boundary
+chiral algebra.}
+\end{quote}
+
+The rest of this section turns that principle into a concrete mathematical package.
+
+\subsection{The abstract modular package}
+\label{subsec:abstract-modular-package}
+
+We isolate the minimum formal structure needed to speak about modular completion.
+
+\begin{definition}[Complete genus-filtered cyclic deformation package]
+\label{def:complete-genus-filtered-package}
+A \emph{complete genus-filtered cyclic deformation package} consists of the following data.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item A complete $\h$-adically filtered graded vector space
+\[
+\mathfrak g^{\mathrm{mod}}=\prod_{g\ge 0}\h^g\mathfrak g^{(g)}.
+\]
+\item A family of multilinear operations
+\[
+\ell_k^{(g)}: \Sym^k(\mathfrak g^{\mathrm{mod}})\longrightarrow
+\mathfrak g^{\mathrm{mod}}[2-k],
+\qquad g\ge 0,\ k\ge 1,
+\]
+which together define a complete cyclic $L_\infty$-algebra.
+\item A distinguished genus-$0$ Maurer--Cartan element
+\[
+\pi\in \mathfrak g^{(0),1}
+\]
+solving the genus-$0$ Maurer--Cartan equation
+\[
+\sum_{k\ge 1}\frac1{k!}\,\ell_k^{(0)}(\pi^{\otimes k})=0.
+\]
+\end{enumerate}
+A \emph{modular lift} of $\pi$ is a formal series
+\[
+\Pi(\h)=\pi+\sum_{g\ge 1}\h^g\Theta^{(g)}
+\]
+satisfying the full Maurer--Cartan equation
+\begin{equation}
+\label{eq:full-modular-mc}
+\sum_{r\ge 0}\h^r\sum_{k\ge 1}\frac1{k!}\,
+\ell_k^{(r)}\!\bigl(\Pi(\h)^{\otimes k}\bigr)=0.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+In the applications we have in mind, $\mathfrak g^{\mathrm{mod}}$ is the completed cyclic
+boundary deformation complex tensored with a genus package such as
+$R\Gamma(\ov{\M}_{\bullet,\bullet},\Q)$, or equivalently the graph/Feynman transform of the
+genus-$0$ deformation theory.  The point of Definition
+\ref{def:complete-genus-filtered-package} is to separate the formal deformation theory from the
+physical realization.
+\end{remark}
+
+\begin{conjecture}[Modular twisted/celestial holography]
+\label{conj:modular-twisted-celestial}
+Let $(T,\mathfrak b)$ be a twisted or celestial holographic model whose disk-level boundary
+algebra $\A_\partial=\A_\partial(T,\mathfrak b)$ is identified, for a transverse boundary
+condition, with the universal defect chiral algebra of the unreduced theory.  Then there exists
+a complete genus-filtered cyclic deformation package
+\[
+\mathfrak g^{\mathrm{mod}}_\partial=\prod_{g\ge 0}\h^g\mathfrak g^{(g)}_\partial
+\]
+and a distinguished genus-$0$ Maurer--Cartan element
+\[
+\pi_\partial\in \mathfrak g_\partial^{(0),1}
+\]
+such that:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the disk-level boundary OPE and transferred $A_\infty$-module structure are encoded by
+$\pi_\partial$;
+\item the full twisted/celestial holographic dictionary is equivalent to a modular lift
+\[
+\Pi_\partial(\h)=\pi_\partial+\sum_{g\ge 1}\h^g\Theta_\partial^{(g)}
+\]
+of $\pi_\partial$;
+\item the coefficients $\Theta_\partial^{(g)}$ are the genus-$g$/loop/$1/N$ corrections to the
+bulk--boundary dictionary;
+\item under the appropriate bulk--boundary Koszul/Verdier comparison, this modular lift is the
+same deformation problem as the corresponding bulk modular lift.
+\end{enumerate}
+Equivalently: the known boundary chiral algebra is the genus-$0$ shadow of a canonical
+modular Maurer--Cartan element.
+\end{conjecture}
+
+\subsection{Order-by-order obstruction theory}
+\label{subsec:order-by-order-obstruction-theory}
+
+The first substantial gain from the modular viewpoint is that higher-genus corrections stop
+being ad hoc and become obstruction classes in a precise cohomology.
+
+\begin{definition}[Twisted differential and linearized genus-$0$ complex]
+\label{def:twisted-differential}
+Given $\pi\in\mathfrak g^{(0),1}$ as in Definition
+\ref{def:complete-genus-filtered-package}, define
+\begin{equation}
+\label{eq:twisted-differential}
+d_\pi(x):=\sum_{m\ge 0}\frac1{m!}\,\ell_{m+1}^{(0)}(\pi^{\otimes m},x).
+\end{equation}
+This is the linearization of the genus-$0$ Maurer--Cartan equation at $\pi$.
+\end{definition}
+
+\begin{theorem}[The first modular obstruction]
+\label{thm:first-modular-obstruction}
+Let $\mathfrak g^{\mathrm{mod}}$ be a complete genus-filtered cyclic deformation package and let
+$\pi\in \mathfrak g^{(0),1}$ be its genus-$0$ Maurer--Cartan element.  Define the genus-$1$
+source term
+\begin{equation}
+\label{eq:omega-one}
+\omega_1(\pi):=\sum_{k\ge 1}\frac1{k!}\,\ell_k^{(1)}(\pi^{\otimes k})
+\in \mathfrak g^{(1),2}.
+\end{equation}
+Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $d_\pi^2=0$;
+\item $d_\pi\omega_1(\pi)=0$;
+\item there is therefore a canonical cohomology class
+\[
+\Obs_1(\pi):=[\omega_1(\pi)]
+\in H^2\bigl(\mathfrak g^{(1)},d_\pi\bigr);
+\]
+\item a genus-$1$ correction $\Theta^{(1)}\in\mathfrak g^{(1),1}$ exists modulo gauge if and
+only if $\Obs_1(\pi)=0$;
+\item if such genus-$1$ corrections exist, their gauge-equivalence classes form a torsor for
+$H^1(\mathfrak g^{(1)},d_\pi)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The linearization of the Maurer--Cartan equation at a Maurer--Cartan point always squares to
+zero; this is the standard $L_\infty$ identity for the twisted unary bracket, proving $d_\pi^2=0$.
+Now insert the ansatz
+\[
+\Pi(\h)=\pi+\h\Theta^{(1)}+O(\h^2)
+\]
+into \eqref{eq:full-modular-mc}.  The coefficient of $\h^0$ is the genus-$0$ Maurer--Cartan
+equation for $\pi$, while the coefficient of $\h^1$ is exactly
+\[
+d_\pi\Theta^{(1)}+\omega_1(\pi)=0.
+\]
+Applying $d_\pi$ and using $d_\pi^2=0$ gives $d_\pi\omega_1(\pi)=0$, so
+$\omega_1(\pi)$ defines a degree-$2$ cohomology class.  The displayed equation also shows that
+a genus-$1$ lift exists precisely when this cocycle is exact.  Finally, if
+$\Theta^{(1)}$ and $\widetilde\Theta^{(1)}$ are two solutions then their difference is
+$d_\pi$-closed, and a genus-$1$ gauge transformation changes the difference by a
+$d_\pi$-exact term.  This yields the torsor statement.
+\end{proof}
+
+\begin{definition}[Higher source terms]
+\label{def:higher-source-terms}
+Let
+\[
+\Pi_{<G}:=\pi+\sum_{1\le h<G}\h^h\Theta^{(h)}
+\]
+be a partial lift satisfying the Maurer--Cartan equation modulo $\h^G$.  The
+\emph{$G$-th source term} is the coefficient
+\begin{equation}
+\label{eq:higher-source-term}
+\omega_G(\Pi_{<G})
+:=
+[\h^G]\,
+\sum_{r\ge 0}\sum_{k\ge 1}\frac1{k!}\,
+\h^r\ell_k^{(r)}\!\bigl(\Pi_{<G}^{\otimes k}\bigr)
+\in \mathfrak g^{(G),2}.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[All-genus obstruction tower]
+\label{thm:all-genus-obstruction-tower}
+For every $G\ge 1$, the source term $\omega_G(\Pi_{<G})$ is $d_\pi$-closed.  Hence there is a
+canonical obstruction class
+\[
+\Obs_G(\Pi_{<G})
+:=
+[\omega_G(\Pi_{<G})]
+\in H^2\bigl(\mathfrak g^{(G)},d_\pi\bigr).
+\]
+Moreover:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the partial lift $\Pi_{<G}$ extends to order $G$ if and only if
+$\Obs_G(\Pi_{<G})=0$;
+\item if extensions exist, their gauge-equivalence classes form a torsor for
+$H^1(\mathfrak g^{(G)},d_\pi)$;
+\item if $H^2(\mathfrak g^{(G)},d_\pi)=0$ for all $G\ge 1$, then $\pi$ admits a full modular
+lift;
+\item if, in addition, $H^1(\mathfrak g^{(G)},d_\pi)=0$ for all $G\ge 1$, then the modular lift
+is unique up to gauge.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+E(\Pi):=\sum_{r\ge 0}\sum_{k\ge 1}\frac1{k!}\,\h^r\ell_k^{(r)}(\Pi^{\otimes k})
+\]
+be the Maurer--Cartan functional.  Since $\Pi_{<G}$ solves the MC equation modulo $\h^G$, one
+has
+\[
+E(\Pi_{<G})=\h^G\omega_G(\Pi_{<G})+O(\h^{G+1}).
+\]
+For any $x\in\mathfrak g^{(G),1}$,
+\[
+E(\Pi_{<G}+\h^Gx)=\h^G\bigl(\omega_G(\Pi_{<G})+d_\pi x\bigr)+O(\h^{G+1}),
+\]
+because the only terms linear in $x$ of total order $G$ arise from genus-$0$ brackets with all
+other entries equal to $\pi$.  Thus extension to order $G$ is equivalent to solving
+\[
+d_\pi x+\omega_G(\Pi_{<G})=0,
+\]
+which proves part \textup{(i)}.
+
+To prove closure, apply the linearized Maurer--Cartan operator at $\Pi_{<G}$ to
+$E(\Pi_{<G})$.  The $L_\infty$ identities imply the Bianchi-type identity
+\[
+d_{\Pi_{<G}}E(\Pi_{<G})=0.
+\]
+Reducing modulo $\h^{G+1}$ and using $d_{\Pi_{<G}}\equiv d_\pi \pmod{\h}$ yields
+$d_\pi\omega_G(\Pi_{<G})=0$.
+
+If $x$ and $x'$ are two order-$G$ lifts, then $x-x'$ is $d_\pi$-closed; order-$G$ gauge
+transformations shift the difference by a $d_\pi$-exact term.  This gives part \textup{(ii)}.
+The remaining statements follow by induction on $G$.
+\end{proof}
+
+\begin{corollary}[Existence and uniqueness by vanishing]
+\label{cor:existence-uniqueness-vanishing}
+If
+\[
+H^2\bigl(\mathfrak g^{(G)},d_\pi\bigr)=0\qquad \forall G\ge 1,
+\]
+then every genus-$0$ Maurer--Cartan class lifts to all genera.  If moreover
+\[
+H^1\bigl(\mathfrak g^{(G)},d_\pi\bigr)=0\qquad \forall G\ge 1,
+\]
+then the lift is unique up to gauge.
+\end{corollary}
+
+\subsection{Bulk--boundary comparison as a cone problem}
+\label{subsec:bulk-boundary-cone-problem}
+
+The obstruction tower becomes genuinely holographic only when bulk and boundary lifting
+problems can be compared.  The right formal object is the cone of the linearized
+bulk--boundary map.
+
+\begin{definition}[Linearized bulk--boundary map]
+\label{def:linearized-bulk-boundary-map}
+Let
+\[
+F:\mathfrak g^{\mathrm{mod}}_{\mathrm{bulk}}\longrightarrow \mathfrak g^{\mathrm{mod}}_{\partial}
+\]
+be a filtered $L_\infty$-morphism, and let
+$\pi_{\mathrm{bulk}}\in\mathfrak g_{\mathrm{bulk}}^{(0),1}$,
+$\pi_\partial\in\mathfrak g_\partial^{(0),1}$
+be genus-$0$ Maurer--Cartan elements such that $F_*(\pi_{\mathrm{bulk}})$ is gauge-equivalent to
+$\pi_\partial$.  The \emph{linearized bulk--boundary map} is the induced cochain map
+\[
+F_\pi:(\mathfrak g^{\mathrm{mod}}_{\mathrm{bulk}},d_{\pi_{\mathrm{bulk}}})
+\longrightarrow
+(\mathfrak g^{\mathrm{mod}}_{\partial},d_{\pi_\partial}).
+\]
+\end{definition}
+
+\begin{theorem}[Relative bulk--boundary reconstruction]
+\label{thm:relative-bulk-boundary-reconstruction}
+Assume the hypotheses of Definition \ref{def:linearized-bulk-boundary-map}.  If
+\[
+H^1\bigl(\Cone(F_\pi)\bigr)=H^2\bigl(\Cone(F_\pi)\bigr)=0,
+\]
+then the genus-by-genus modular lift problem for $\pi_{\mathrm{bulk}}$ is equivalent, up to gauge,
+to the genus-by-genus modular lift problem for $\pi_\partial$.  In particular:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item every boundary modular lift uniquely determines a compatible bulk modular lift;
+\item every bulk modular lift uniquely determines a compatible boundary modular lift;
+\item all extension obstructions and ambiguities are measured by the same cone cohomology.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Compatible pairs of bulk and boundary lifts form the Maurer--Cartan space of the homotopy
+fiber of $F$ over $\pi_\partial$.  The tangent complex of that homotopy fiber at the point
+$(\pi_{\mathrm{bulk}},\pi_\partial)$ is $\Cone(F_\pi)[-1]$.  Standard obstruction theory for formal
+moduli problems therefore places the extension obstruction in
+$H^2(\Cone(F_\pi))$ and the ambiguity in $H^1(\Cone(F_\pi))$.  When both groups vanish,
+compatible lifts exist and are unique at each order in $\h$, hence by induction through the
+entire genus filtration.
+\end{proof}
+
+\begin{corollary}[Boundary determination of the modular bulk]
+\label{cor:boundary-determines-bulk}
+If the linearized bulk--boundary map is a quasi-isomorphism in degrees $1$ and $2$, then the
+full modular bulk deformation problem is controlled by the boundary algebra.  Equivalently,
+under this hypothesis the holographic dictionary is reconstructible from the boundary modular
+lift alone.
+\end{corollary}
+
+\subsection{The boundary modular class}
+\label{subsec:boundary-modular-class}
+
+The genus-$1$ source term admits a canonical graph-theoretic incarnation.  This gives the
+first genuinely modular invariant of the boundary algebra.
+
+\begin{definition}[Loop-generated modular model]
+\label{def:loop-generated-model}
+A modular deformation package is \emph{loop-generated} if its first positive-genus operations
+are generated entirely by connected stable graphs of first Betti number $1$ whose vertices are
+decorated by genus-$0$ operations.  Equivalently, there are no primitive genus-$1$ vertices:
+all genus-$1$ information is produced by a single loop with tree-level vertex decorations.
+\end{definition}
+
+\begin{definition}[One-wheel sum and boundary modular class]
+\label{def:one-wheel-sum-and-class}
+Let $(A,m_\bullet)$ be a cyclic minimal $A_\infty$-algebra, and suppose its modular
+deformation package is loop-generated.  Let $\mathsf{Wheel}_1$ denote the set of connected
+stable graphs of first Betti number $1$, modulo isomorphism.  For
+$\Gamma\in\mathsf{Wheel}_1$, let $B_\Gamma(m_\bullet)$ be the graph contraction obtained by
+placing the transferred vertices $m_n$ at the vertices of $\Gamma$ and contracting internal edges
+using the cyclic pairing.  Define the completed one-wheel sum
+\begin{equation}
+\label{eq:one-wheel-sum}
+W_1(A):=
+\sum_{\Gamma\in\mathsf{Wheel}_1}^{\mathrm{comp}}
+\frac{w_\Gamma}{|\Aut(\Gamma)|}
+B_\Gamma(m_\bullet)
+\in \mathfrak g_A^{(1),2},
+\end{equation}
+where $w_\Gamma$ denotes the regularized weight of the wheel type.  The cohomology class
+\begin{equation}
+\label{eq:boundary-modular-class}
+\mathfrak W(A):=[W_1(A)]\in H^2(\mathfrak g_A^{(1)},d_{\pi_A})
+\end{equation}
+is called the \emph{boundary modular class} of $A$.
+\end{definition}
+
+\begin{theorem}[One-wheel reduction]
+\label{thm:one-wheel-reduction}
+Assume the modular deformation package of $(A,m_\bullet)$ is loop-generated.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $W_1(A)$ is $d_{\pi_A}$-closed;
+\item its cohomology class agrees with the first obstruction class,
+\[
+\mathfrak W(A)=\Obs_1(A,\pi_A);
+\]
+\item $\mathfrak W(A)$ depends only on the cyclic $A_\infty$ quasi-isomorphism class of $A$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+In a loop-generated model, the coefficient of $\h$ in the Maurer--Cartan functional is a sum
+over connected stable graphs of first Betti number $1$.  Each such graph has a unique loop.
+Collapse every maximal tree attached to this loop by cyclic homological perturbation.  Each
+collapsed tree becomes a single effective vertex labeled by one of the transferred operations
+$m_n$.  The resulting expression is exactly the completed one-wheel sum \eqref{eq:one-wheel-sum}.
+Therefore the order-$\h$ Maurer--Cartan equation reads
+\[
+d_{\pi_A}\Theta_A^{(1)}+W_1(A)=0,
+\]
+so $W_1(A)$ is closed and its cohomology class is the obstruction class.
+
+Finally, cyclic $A_\infty$ quasi-isomorphisms induce quasi-isomorphisms of the corresponding
+cyclic deformation complexes; the obstruction class of the Maurer--Cartan lifting problem is
+therefore invariant under cyclic $A_\infty$ quasi-isomorphism.
+\end{proof}
+
+\begin{corollary}[Vanishing criterion and additivity]
+\label{cor:vanishing-criterion-and-additivity}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item A genus-$1$ modular lift exists if and only if $\mathfrak W(A)=0$.
+\item If moreover $H^1(\mathfrak g_A^{(1)},d_{\pi_A})=0$, then the genus-$1$ lift is unique up to
+gauge.
+\item If $A=A_1\oplus A_2$ is an orthogonal direct sum of cyclic minimal $A_\infty$-algebras,
+then
+\[
+\mathfrak W(A)=\mathfrak W(A_1)\oplus\mathfrak W(A_2).
+\]
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Parts \textup{(i)} and \textup{(ii)} are immediate from Theorems
+\ref{thm:first-modular-obstruction} and \ref{thm:one-wheel-reduction}.  For
+\textup{(iii)}, the cyclic pairing and all transferred products split block-diagonally, so every
+one-wheel contraction is supported on exactly one summand.
+\end{proof}
+
+\subsection{The holomorphic BF model on $S^3$}
+\label{subsec:holomorphic-bf-model-on-s3}
+
+We now specialize the abstract theory to Zeng's holomorphic BF example.
+
+\begin{definition}[The CR-cohomological boundary algebra]
+\label{def:cr-cohomological-boundary-algebra}
+Let
+\[
+A:=\Hb = H_b^{0,0}(S^3)\oplus H_b^{0,1}(S^3).
+\]
+By the harmonic decomposition of the tangential Cauchy--Riemann complex and the computation
+of CR cohomology, one has
+\[
+H_b^{0,0}(S^3)\cong \C[w_1,w_2],
+\qquad
+H_b^{0,1}(S^3)\cong \C[\ov w_1,\ov w_2]\,\epsilon,
+\]
+where $\epsilon$ is the $SU(2)$-invariant generator of $\Omega_b^{0,1}(S^3)$
+\cite{ZengTwistedHolography}.  We write
+\[
+A^0:=\C[w_1,w_2],
+\qquad
+A^1:=\C[\ov w_1,\ov w_2]\,\epsilon.
+\]
+\end{definition}
+
+\begin{definition}[Monomial bases and trace pairing]
+\label{def:monomial-bases-and-trace-pairing}
+For $p,q,r,s\ge 0$, define
+\[
+a_{p,q}:=w_1^p w_2^q\in A^0,
+\qquad
+b_{r,s}:=\frac{(r+s+1)!}{r!\,s!}\,\ov w_1^r\ov w_2^s\,\epsilon\in A^1.
+\]
+The cyclic trace pairing is normalized by
+\[
+\Tr(a_{p,q}b_{r,s})=\delta_{pr}\delta_{qs}.
+\]
+\end{definition}
+
+\begin{remark}[The cyclic SDR]
+\label{rem:cyclic-sdr}
+Zeng constructs a special deformation retract
+\[
+h\,(\Omega_b^{0,\bullet}(S^3),\delbar_b)
+\underset{i}{\overset{p}{\rightleftarrows}}
+(\HCR,0)
+\]
+with $h\circ i=0$, $p\circ h=0$, $h^2=0$, and $\id-ip=\delbar_b h+h\delbar_b$.
+Moreover the retract is compatible with the cyclic structure, and therefore transfers the
+commutative dg algebra structure on $\Omega_b^{0,\bullet}(S^3)$ to a cyclic $A_\infty$ (indeed
+$C_\infty$) structure $m_\bullet=\{m_n\}_{n\ge 2}$ on $A$ \cite{ZengTwistedHolography}.
+This is the transferred boundary algebra governing the KK interactions.
+\end{remark}
+
+\subsection{A concrete one-vertex calculus}
+\label{subsec:concrete-one-vertex-calculus}
+
+The first genuinely modular information enters through cyclic traces of the transferred
+operations.  The one-vertex sectors already exhibit a surprisingly rigid arithmetic structure.
+
+\begin{proposition}[The $m_2$ shift formula]
+\label{prop:m2-shift-formula}
+For all $p,q,r,s\ge 0$,
+\[
+m_2(a_{p,q},b_{r,s})=
+\begin{cases}
+ b_{r-p,s-q},& p\le r,\ q\le s,\\[4pt]
+ 0,& \text{otherwise.}
+\end{cases}
+\]
+\end{proposition}
+
+\begin{proof}
+Zeng's explicit formula for the transferred binary product is
+\[
+m_2\!\left(w_1^p w_2^q,
+\frac{(r+s+1)!}{r!s!}\,\ov w_1^r \ov w_2^s\epsilon\right)
+=
+\frac{(r+s-p-q+1)!}{(r-p)!(s-q)!}\,\ov w_1^{r-p}\ov w_2^{s-q}\epsilon.
+\]
+Recognizing the right-hand side as $b_{r-p,s-q}$ proves the claim.
+\end{proof}
+
+\begin{definition}[One-vertex traced sectors]
+\label{def:one-vertex-traced-sectors}
+For $n\ge 2$ and $\beta_1,\dots,\beta_{n-1}\in A^1$, define the traced one-vertex sector
+\begin{equation}
+\label{eq:one-vertex-traced-sector}
+Q_n(\beta_1,\dots,\beta_{n-1})
+:=
+\sum_{p,q\ge 0}
+\Tr\!\bigl(a_{p,q}\,m_n(a_{p,q},\beta_1,\dots,\beta_{n-1})\bigr).
+\end{equation}
+For $n=2$, write
+\[
+\theta_{r,s}:=Q_2(b_{r,s}).
+\]
+\end{definition}
+
+\begin{theorem}[The tadpole projector]
+\label{thm:tadpole-projector}
+The coefficients $\theta_{r,s}$ satisfy
+\[
+\theta_{r,s}=
+\begin{cases}
+1,& r,s\ \text{both even},\\
+0,& \text{otherwise}.
+\end{cases}
+\]
+Equivalently,
+\[
+W^{(2)}_{\mathrm{alg}}:=\sum_{r,s\ge 0}\theta_{r,s}b_{r,s}
+=\sum_{m,n\ge 0} b_{2m,2n}.
+\]
+In particular, the quadratic one-vertex wheel is the projector onto the even--even KK lattice.
+\end{theorem}
+
+\begin{proof}
+By Proposition \ref{prop:m2-shift-formula},
+\[
+\theta_{r,s}
+=
+\sum_{p,q\ge 0}\Tr\bigl(a_{p,q} b_{r-p,s-q}\bigr)
+=
+\sum_{p,q\ge 0}\delta_{p,r-p}\delta_{q,s-q}.
+\]
+This has a solution if and only if $2p=r$ and $2q=s$, i.e. if and only if $r$ and $s$ are both
+even.  When a solution exists it is unique, so the sum equals $1$.
+\end{proof}
+
+\begin{corollary}[Lowest-mode tadpole]
+\label{cor:lowest-mode-tadpole}
+Let
+\[
+L:=\Span\{b_{0,0},b_{1,0},b_{0,1}\}\subset A^1.
+\]
+Then the tadpole projector restricts to
+\[
+W^{(2)}_{\mathrm{alg}}\big|_L=b_{0,0}.
+\]
+If one restores the geometric genus-$1$ weight $w_2$, the physical tadpole truncation on the
+lowest modes is $w_2\,b_{0,0}$.
+\end{corollary}
+
+\begin{theorem}[One-vertex trace selection rule]
+\label{thm:one-vertex-trace-selection-rule}
+Let $n\ge 2$, and let $\beta_i=b_{r_i,s_i}\in A^1$ for $1\le i\le n-1$.  Set
+\[
+R:=\sum_{i=1}^{n-1} r_i,
+\qquad
+S:=\sum_{i=1}^{n-1} s_i.
+\]
+Then for every $p,q\ge 0$ one has
+\[
+m_n(a_{p,q},b_{r_1,s_1},\dots,b_{r_{n-1},s_{n-1}})
+\in
+\C\cdot b_{R-p+n-2,\,S-q+n-2}.
+\]
+Consequently,
+\[
+Q_n(b_{r_1,s_1},\dots,b_{r_{n-1},s_{n-1}})\neq 0
+\]
+can occur only if
+\begin{equation}
+\label{eq:selection-rule}
+2p=R+n-2,
+\qquad
+2q=S+n-2.
+\end{equation}
+In particular, for fixed external labels there is at most one internal KK mode contributing to
+the one-vertex trace.
+\end{theorem}
+
+\begin{proof}
+Zeng's explicit formula for $m_n$ in the orthonormal $SU(2)$ basis shows that the output of
+\[
+m_n\bigl(e_{m_0}^{(j_0)},\ov e_{m_1}^{(\ov j_1)}\epsilon,\dots,
+\ov e_{m_{n-1}}^{(\ov j_{n-1})}\epsilon\bigr)
+\]
+lies in the unique representation
+\[
+\ov e_{M_{n-1}}^{(\ov J_{n-1}-j_0+n-2)}\epsilon,
+\qquad
+\ov J_{n-1}=\sum_{i=1}^{n-1}\ov j_i,
+\qquad
+M_{n-1}=m_0+\sum_{i=1}^{n-1}m_i.
+\]
+Translate this to monomial labels by
+\[
+j_0=\frac{p+q}{2},\qquad m_0=\frac{p-q}{2},
+\qquad
+\ov j_i=\frac{r_i+s_i}{2},\qquad m_i=\frac{s_i-r_i}{2}.
+\]
+Writing the output as $b_{u,v}$ means
+\[
+\frac{u+v}{2}=\ov J_{n-1}-j_0+n-2,
+\qquad
+\frac{v-u}{2}=M_{n-1}.
+\]
+Solving for $(u,v)$ gives
+\[
+u=R-p+n-2,
+\qquad
+v=S-q+n-2.
+\]
+Tracing against $a_{p,q}$ forces $(u,v)=(p,q)$, which is exactly
+\eqref{eq:selection-rule}.  Therefore there is at most one internal mode.
+\end{proof}
+
+\begin{theorem}[Low-mode parity law]
+\label{thm:low-mode-parity-law}
+Restrict the one-vertex sectors to the lowest-mode space
+\[
+L=\Span\{b_{0,0},b_{1,0},b_{0,1}\}.
+\]
+For a tensor in $L^{\otimes(n-1)}$, let $N_{10}$ denote the number of $b_{1,0}$ inputs and
+$N_{01}$ the number of $b_{0,1}$ inputs.  Then
+\[
+Q_n\big|_{L^{\otimes(n-1)}}\neq 0
+\qquad\Longrightarrow\qquad
+N_{10}\equiv N_{01}\equiv n\pmod 2.
+\]
+\end{theorem}
+
+\begin{proof}
+On $L$, one has $R=N_{10}$ and $S=N_{01}$.  By Theorem
+\ref{thm:one-vertex-trace-selection-rule}, nonvanishing requires
+$R+n-2$ and $S+n-2$ to be even.  Since $n-2\equiv n\pmod 2$, the statement follows.
+\end{proof}
+
+\begin{corollary}[Cubic support on the lowest modes]
+\label{cor:cubic-support-lowest-modes}
+For $n=3$, the only nonzero low-mode one-vertex channels are the mixed ordered pairs
+\[
+(b_{1,0},b_{0,1})
+\qquad\text{and}\qquad
+(b_{0,1},b_{1,0}).
+\]
+No ordered pair involving $b_{0,0}$ contributes to $Q_3|_{L^{\otimes 2}}$.
+\end{corollary}
+
+\begin{proof}
+For $n=3$, Theorem \ref{thm:low-mode-parity-law} requires
+$N_{10}\equiv N_{01}\equiv 1\pmod 2$.  Since there are only two inputs, the only possibility is
+one copy of $b_{1,0}$ and one copy of $b_{0,1}$.
+\end{proof}
+
+\begin{proposition}[Vanishing of the symmetric cubic one-vertex sector]
+\label{prop:vanishing-symmetric-cubic-one-vertex-sector}
+The symmetric cubic one-vertex sector vanishes on the lowest modes.  Equivalently, the
+trilinear form $Q_3|_{L^{\otimes 2}}$ factors through an alternating $2$-form
+\[
+\omega_{\mathrm{pm}}\in \Lambda^2 L^*,
+\]
+which we call the \emph{low-mode pre-modular two-form}.
+\end{proposition}
+
+\begin{proof}
+By Corollary \ref{cor:cubic-support-lowest-modes}, the only nonzero channels are the two mixed
+ordered pairs.  Zeng's antisymmetry relation for the cubic coefficients shows that swapping the
+two $A^1$ inputs reverses the coefficient.  Therefore the symmetric combination cancels, and the
+result factors through $\Lambda^2L^*$.
+\end{proof}
+
+\begin{theorem}[Quartic support theorem on the lowest modes]
+\label{thm:quartic-support-theorem-lowest-modes}
+For $n=4$, the one-vertex low-mode sector is supported on exactly three unordered channels:
+\[
+(b_{0,0},b_{0,0},b_{0,0}),
+\qquad
+(b_{1,0},b_{1,0},b_{0,0}),
+\qquad
+(b_{0,1},b_{0,1},b_{0,0}).
+\]
+Equivalently, on $\Sym^3(L)$ one has a unique decomposition
+\begin{equation}
+\label{eq:q4-normal-form}
+Q_4\big|_{\Sym^3(L)}
+=
+Q_{000}\,b_{0,0}^3
++
+Q_{110}\,b_{1,0}^2b_{0,0}
++
+Q_{011}\,b_{0,1}^2b_{0,0},
+\end{equation}
+for uniquely defined scalars $Q_{000},Q_{110},Q_{011}\in\C$.
+\end{theorem}
+
+\begin{proof}
+For $n=4$, Theorem \ref{thm:low-mode-parity-law} gives
+$N_{10}\equiv N_{01}\equiv 0\pmod 2$.  Since there are three inputs,
+\[
+N_{10}+N_{01}+N_{00}=3,
+\]
+so the only possible triples are
+\[
+(N_{10},N_{01},N_{00})=(0,0,3),\ (2,0,1),\ (0,2,1).
+\]
+These are exactly the three unordered channels above.
+\end{proof}
+
+\begin{corollary}[The charged quartic sector is two-dimensional]
+\label{cor:charged-quartic-sector-two-dimensional}
+After removing the neutral channel $b_{0,0}^3$, the first charged one-vertex quartic sector on
+low modes lies in the $2$-dimensional space
+\[
+\Span\{b_{1,0}^2b_{0,0},\ b_{0,1}^2b_{0,0}\}.
+\]
+Thus the first charged quartic modular datum is encoded by the pair $(Q_{110},Q_{011})$.
+\end{corollary}
+
+\begin{remark}[Tiny internal support]
+\label{rem:tiny-internal-support}
+The trace selection rule determines the internal test mode uniquely.  For the three quartic
+channels of Theorem \ref{thm:quartic-support-theorem-lowest-modes}, one finds
+\[
+Q_{000}: \ a_{1,1},
+\qquad
+Q_{110}: \ a_{2,1},
+\qquad
+Q_{011}: \ a_{1,2}.
+\]
+So the charged quartic coefficients are algebraically finite before any regularization issue can
+arise.  This is already a striking contrast with the generic loop sectors of the KK theory,
+where infinite KK sums do appear \cite{ZengTwistedHolography}.
+\end{remark}
+
+\subsection{The first two-vertex bubble and the exceptional finite locus}
+\label{subsec:first-two-vertex-bubble-exceptional-finite-locus}
+
+The first genuinely loop-shaped graph is the two-vertex cubic--cubic wheel.  Even here, the
+lowest-mode sector remains exceptionally rigid.
+
+\begin{theorem}[Support of the first mixed cubic--cubic bubble]
+\label{thm:support-first-mixed-cubic-cubic-bubble}
+Consider the first two-vertex wheel built from two cubic vertices.  Restricted to the lowest-mode
+subspace $L$, its symmetric external content is supported on a single monomial:
+\[
+b_{1,0}^2 b_{0,1}^2.
+\]
+No monomial involving $b_{0,0}$ occurs in this first cubic--cubic bubble sector.
+\end{theorem}
+
+\begin{proof}
+By Corollary \ref{cor:cubic-support-lowest-modes}, each cubic vertex is nonzero only if its two
+$A^1$ inputs are one copy of $b_{1,0}$ and one copy of $b_{0,1}$.  Therefore every nonzero
+cubic--cubic wheel contributes exactly one $b_{1,0}$ and one $b_{0,1}$ from each vertex.  The
+total external monomial is thus forced to be $b_{1,0}^2b_{0,1}^2$.
+\end{proof}
+
+\begin{theorem}[Exceptional finiteness of the first mixed bubble]
+\label{thm:exceptional-finiteness-first-mixed-bubble}
+The first mixed cubic--cubic bubble on the lowest modes is finite before regularization.  More
+precisely, for the mixed cubic sector one has
+\[
+m_3(a_{p,q},b_{1,0},b_{0,1})\in \C\cdot b_{2-p,2-q},
+\]
+and therefore only the finite range
+\[
+0\le p,q\le 2
+\]
+can contribute to the first mixed bubble coefficient.  In particular, the first mixed bubble is a
+finite algebraic contraction of finitely many cubic structure constants.
+\end{theorem}
+
+\begin{proof}
+Apply Theorem \ref{thm:one-vertex-trace-selection-rule} with $n=3$ and external labels
+$(r_1,s_1)=(1,0)$, $(r_2,s_2)=(0,1)$.  Then $R=S=1$, so the cubic output is
+\[
+b_{R-p+1,S-q+1}=b_{2-p,2-q}.
+\]
+For this to make sense in $A^1$, one must have $2-p\ge 0$ and $2-q\ge 0$, hence
+$0\le p,q\le 2$.  Thus the internal mode sum is finite.
+\end{proof}
+
+\begin{definition}[The low-mode charged modular jet]
+\label{def:low-mode-charged-modular-jet}
+The \emph{low-mode charged modular jet} of the holomorphic BF boundary algebra is the triple
+\begin{equation}
+\label{eq:charged-modular-jet}
+\mathfrak J_{\mathrm{ch}}^{\mathrm{low}}:=(Q_{110},Q_{011},B_{\mathrm{mix}}),
+\end{equation}
+where $Q_{110}$ and $Q_{011}$ are the charged one-vertex quartic coefficients of
+\eqref{eq:q4-normal-form}, and $B_{\mathrm{mix}}$ is the coefficient of
+$b_{1,0}^2b_{0,1}^2$ in the first cubic--cubic bubble sector.
+\end{definition}
+
+\begin{theorem}[Low-mode modular normal form]
+\label{thm:low-mode-modular-normal-form}
+Up to and including the first cubic--cubic bubble order, the symmetric modular shadow of the
+holomorphic BF boundary algebra on the lowest-mode sector has the form
+\begin{equation}
+\label{eq:low-mode-modular-normal-form}
+W_{\mathrm{low}}
+=
+w_2\,b_{0,0}
++
+Q_{000}\,b_{0,0}^3
++
+Q_{110}\,b_{1,0}^2b_{0,0}
++
+Q_{011}\,b_{0,1}^2b_{0,0}
++
+B_{\mathrm{mix}}\,b_{1,0}^2b_{0,1}^2
++
+\textup{(higher sectors)}.
+\end{equation}
+No other symmetric low-mode monomial can appear at this order.
+\end{theorem}
+
+\begin{proof}
+The first term is the tadpole contribution from Corollary
+\ref{cor:lowest-mode-tadpole}.  The one-vertex cubic symmetric contribution vanishes by
+Proposition \ref{prop:vanishing-symmetric-cubic-one-vertex-sector}.  The one-vertex quartic
+contribution is exhausted by Theorem \ref{thm:quartic-support-theorem-lowest-modes}.  The
+first two-vertex bubble contribution is exhausted by Theorem
+\ref{thm:support-first-mixed-cubic-cubic-bubble}.  No further symmetric low-mode monomial can
+occur before higher-valence or higher-vertex sectors enter.
+\end{proof}
+
+\begin{remark}[What has been proved]
+\label{rem:what-has-been-proved}
+Theorem \ref{thm:low-mode-modular-normal-form} is the sharpest rigorous reduction obtained
+in this section.  It does \emph{not} compute the three charged numbers
+$Q_{110},Q_{011},B_{\mathrm{mix}}$, but it proves that these are the \emph{only} charged low-mode
+symmetric modular coefficients that can appear at the first nontrivial orders.  This converts an
+infinite KK/modular problem into a finite jet problem.
+\end{remark}
+
+\subsection{A strengthened frontier: new structures and new targets}
+\label{subsec:strengthened-frontier-new-structures}
+
+The reduction above produces several new mathematical structures.
+
+\begin{definition}[The low-mode pre-modular package]
+\label{def:low-mode-pre-modular-package}
+The \emph{low-mode pre-modular package} of the holomorphic BF boundary algebra is the pair
+\[
+\bigl(\omega_{\mathrm{pm}},\mathfrak J_{\mathrm{ch}}^{\mathrm{low}}\bigr),
+\]
+where $\omega_{\mathrm{pm}}\in \Lambda^2L^*$ is the alternating cubic one-vertex shadow of
+Proposition \ref{prop:vanishing-symmetric-cubic-one-vertex-sector}, and
+$\mathfrak J_{\mathrm{ch}}^{\mathrm{low}}$ is the charged modular jet of Definition
+\ref{def:low-mode-charged-modular-jet}.
+\end{definition}
+
+\begin{proposition}[Functoriality under cyclic equivalence on the lowest modes]
+\label{prop:functoriality-lowest-modes}
+Let $A$ and $A'$ be cyclic minimal $A_\infty$ models whose lowest-mode sectors are identified
+by a cyclic $A_\infty$ quasi-isomorphism preserving the subspace
+$L=\Span\{b_{0,0},b_{1,0},b_{0,1}\}$.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the low-mode pre-modular two-form $\omega_{\mathrm{pm}}$ is carried to the corresponding
+$\omega_{\mathrm{pm}}'$;
+\item the support constraints of Theorems
+\ref{thm:quartic-support-theorem-lowest-modes} and
+\ref{thm:support-first-mixed-cubic-cubic-bubble} are preserved;
+\item the charged modular jet transforms functorially.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The support theorems depend only on the transferred $A_\infty$ structure, the cyclic pairing,
+and the grading/weight bookkeeping encoded by the selection rule.  A cyclic
+$A_\infty$ quasi-isomorphism preserving $L$ transports all of this data.  Therefore the induced
+trilinear and quartic forms on $L$ and the first bubble coefficient transform functorially.
+\end{proof}
+
+\begin{problem}[The quartic Wigner identity problem]
+\label{prob:quartic-wigner-identity}
+Find a closed-form representation-theoretic identity, directly in terms of Clebsch--Gordan and
+Wigner-symbol data, for the charged quartic coefficients
+\[
+Q_{110}=\Tr\bigl(a_{2,1}\,m_4(a_{2,1},b_{1,0},b_{1,0},b_{0,0})\bigr),
+\qquad
+Q_{011}=\Tr\bigl(a_{1,2}\,m_4(a_{1,2},b_{0,1},b_{0,1},b_{0,0})\bigr).
+\]
+The support theory developed above shows that these are finite, tiny-support Wigner sums.
+The missing theorem is a conceptual closed-form evaluation.
+\end{problem}
+
+\begin{problem}[Universal finite-locus theorem]
+\label{prob:universal-finite-locus}
+Characterize, in an arbitrary loop-generated cyclic $A_\infty$ model, exactly which low-mode
+wheel sectors remain finite before regularization.  The holomorphic BF calculation suggests the
+existence of an \emph{exceptional finite locus}: a representation-theoretically defined region of
+external weight space on which loop diagrams collapse to finite algebraic contractions even
+though generic loop sectors diverge.
+\end{problem}
+
+\begin{problem}[The modular bootstrap problem]
+\label{prob:modular-bootstrap}
+Use the quadratic identities of the BRST anomaly/higher-operation formalism to bootstrap the
+first genuinely modular boundary coefficients from associativity and stable-graph factorization,
+rather than direct Feynman summation.  The expected endpoint is a boundary modular analog of
+the bootstrap constraints on celestial one-loop OPE data.
+\end{problem}
+
+\begin{problem}[Quantization of the boundary modular class]
+\label{prob:quantization-boundary-modular-class}
+Relate the genus-$1$ boundary modular class and the charged modular jet to deformation
+quantization of the underlying coisson/Poisson-vertex structure.  The natural bridge is the
+$3$d holomorphic--topological Poisson-vertex framework of Khan--Zeng, together with the
+configuration-space/Feynman realization of higher operations and their quadratic identities.
+\end{problem}
+
+\subsection{Thread-complete provisional data package}
+\label{subsec:thread-complete-provisional-data-package}
+
+This subsection records, in a quarantined form, the exact low-mode coefficient identities that
+were discussed in the working thread.  They are included \emph{only} to preserve completeness of
+the development.  They are \emph{not} used anywhere else in this file, and they should be treated
+as provisional until independently verified by a direct symbolic derivation from Zeng's explicit
+$A_\infty$ formulas.
+
+\begin{conjecture}[Low mixed cubic reflection law --- provisional]
+\label{conj:low-mixed-cubic-reflection-law-provisional}
+Let
+\[
+A:=b_{1,0},
+\qquad
+B:=b_{0,1}.
+\]
+Suppose the low mixed cubic coefficients are defined by
+\[
+m_3(a_{p,q},A,B)=c^{AB}_{p,q}\,b_{2-p,2-q},
+\qquad
+m_3(a_{p,q},B,A)=c^{BA}_{p,q}\,b_{2-p,2-q},
+\qquad 0\le p,q\le 2.
+\]
+Then one expects the exact reflection identity
+\[
+c^{BA}_{p,q}=-c^{AB}_{2-p,2-q}.
+\]
+This should be the sharp low-mode shadow of Zeng's antisymmetry relation for $m_3$.
+\end{conjecture}
+
+\begin{conjecture}[Explicit charged quartic jet --- provisional]
+\label{conj:explicit-charged-quartic-jet-provisional}
+The ordered charged quartic coefficients satisfy
+\[
+Q_{110}=Q_{011}=-\frac1{15},
+\]
+and after symmetrization in the boundary OPE one obtains
+\[
+Q_{110}^{\mathrm{sym}}=Q_{011}^{\mathrm{sym}}=\frac1{18}.
+\]
+\end{conjecture}
+
+\begin{conjecture}[First mixed bubble coefficient --- provisional]
+\label{conj:first-mixed-bubble-coefficient-provisional}
+The algebraic first mixed cubic--cubic bubble coefficient is
+\[
+B_{\mathrm{mix}}^{\mathrm{alg}}=-\frac{11}{9}.
+\]
+Equivalently, if $w_{3,3}$ denotes the geometric/Feynman weight of the $(3,3)$ wheel type,
+then the full coefficient is expected to be
+\[
+B_{\mathrm{mix}}=-\frac{11}{9}\,w_{3,3}.
+\]
+\end{conjecture}
+
+\begin{remark}[How the provisional package should be used]
+\label{rem:how-to-use-provisional-package}
+The rigorous content of the present section is the reduction to the three-parameter jet
+$(Q_{110},Q_{011},B_{\mathrm{mix}})$ together with the vanishing/support/finiteness theorems that
+force this reduction.  The three exact rational values recorded in Conjectures
+\ref{conj:explicit-charged-quartic-jet-provisional} and
+\ref{conj:first-mixed-bubble-coefficient-provisional} should therefore be viewed as
+\emph{targets} for the next theorem-sized computation, not as premises for further arguments.
+\end{remark}
+
+\subsection{The distilled picture}
+\label{subsec:distilled-picture}
+
+The entire thread can now be summarized in a single hierarchy.
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Disk level.}
+The KK reduction of Zeng produces a cyclic transferred $A_\infty$ algebra on
+$\Hb$, and the boundary OPE of the holomorphic BF model is built from the operations
+$m_2,m_3,m_4,\dots$.
+
+\item \textbf{Modular level.}
+The correct higher object is a modular Maurer--Cartan lift of the disk-level class.  The first
+obstruction is the genus-$1$ class $\Obs_1$, and in loop-generated models it is represented by
+the one-wheel class $\mathfrak W(A)$.
+
+\item \textbf{Holographic level.}
+Twisted/celestial holography becomes the assertion that bulk and boundary modular lifting
+problems coincide.
+
+\item \textbf{Concrete BF level.}
+On the lowest KK sector, the first symmetric modular problem collapses to the finite normal
+form \eqref{eq:low-mode-modular-normal-form}.  Hence the first charged symmetric modular
+information is controlled by the single jet
+\[
+\mathfrak J_{\mathrm{ch}}^{\mathrm{low}}=(Q_{110},Q_{011},B_{\mathrm{mix}}).
+\]
+\end{enumerate}
+
+That is the strengthened, fortified, first-principles form of the story.  The disk-level boundary
+VOA is not the end of the theory.  It is the shadow of a modular Maurer--Cartan problem; the
+first modular class is a new invariant of the boundary algebra; and in the holomorphic BF test
+case the infinite KK problem reduces, at low modes and low modular order, to a finite and
+rigid charged jet.
