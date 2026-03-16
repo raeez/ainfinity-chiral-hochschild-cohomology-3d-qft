@@ -30,9 +30,11 @@ Every chapter depends on Vol I's five theorems. Cross-references to Vol I labels
 
 ## Five Parts
 
-**I. From the Bar Complex to the Swiss-Cheese Operad.** The bridge from Vol I to three dimensions. SC^{ch,top} is constructed: closed color = FM_k(ℂ), open color = FM_k(ℂ) × E₁(m). The closed color recovers BD chiral algebras (ProvedHere). Recognition theorem: an A∞ chiral algebra satisfying (H1)–(H4) is an SC^{ch,top}-algebra (Conjectured). Raviolo descent: SC-algebra → raviolo vertex algebra → Poisson vertex algebra on cohomology (ProvedHere). The raviolo is the algebraic avatar of the ℂ × ℝ geometry. Axiomatics: sesquilinearity, A∞ relations with spectral substitution, cluster factorization from Stokes on FM compactifications.
+**I. From the Bar Complex to the Swiss-Cheese Operad.** The bridge from Vol I to three dimensions. SC^{ch,top} is constructed: closed color = FM_k(ℂ), open color = FM_k(ℂ) × E₁(m). The closed color recovers BD chiral algebras (ProvedHere). Recognition theorem: an A∞ chiral algebra satisfying (H1)–(H4) is an SC^{ch,top}-algebra (ProvedHere). Homotopy-Koszulity of SC^{ch,top} proved via Kontsevich formality + transfer from classical Swiss-cheese (ProvedHere). Raviolo descent: SC-algebra → raviolo vertex algebra → Poisson vertex algebra on cohomology (ProvedHere). The raviolo is the algebraic avatar of the ℂ × ℝ geometry. Axiomatics: sesquilinearity, A∞ relations with spectral substitution, cluster factorization from Stokes on FM compactifications.
 
-**II. Descent, Duality, and the Genus Tower.** Two descent mechanisms: cohomological (bar → PVA via Arnold/Stokes) and genus (curved bar over M̄_g). PVA on cohomology H•(A,Q) is a (−1)-shifted Poisson vertex algebra — all axioms verified (ProvedHere). The **bulk-boundary-line Koszul triangle**: bulk algebra A, boundary algebra A! (Koszul dual), line operators as A!-modules — three vertices of a single triangle, with Koszul duality mediating each edge. Corrected form: bulk ≃ derived center of boundary, NOT bulk = boundary. Spectral braiding: R(z) from bulk-boundary composition solves Yang-Baxter via Stokes on FM₃; classical limit r(z) = Laplace of λ-bracket. Celestial transfer: the boundary PVA descends to a celestial OPE algebra.
+**II. The Descent Calculus.** Two descent mechanisms: cohomological (bar → PVA via Arnold/Stokes) and genus (curved bar over M̄_g). PVA on cohomology H•(A,Q) is a (−1)-shifted Poisson vertex algebra — all axioms verified (ProvedHere). FM calculus, chiral Hochschild cohomology, and the bar-cobar review (Quillen equivalence, filtered Koszul duality).
+
+**III. Dualities and the Bulk-Boundary-Line Triangle.** The **bulk-boundary-line Koszul triangle**: bulk algebra A, boundary algebra A! (Koszul dual), line operators as A!-modules — three vertices of a single triangle, with Koszul duality mediating each edge. Corrected form: bulk ≃ derived center of boundary, NOT bulk = boundary. Spectral braiding: R(z) from bulk-boundary composition solves Yang-Baxter via Stokes on FM₃; classical limit r(z) = Laplace of λ-bracket. Celestial transfer: the boundary PVA descends to a celestial OPE algebra.
 
 **III. The Standard Landscape.** Three worked examples verify (H1)–(H4) and ground the abstract machinery:
 - *Free multiplet*: all m_{k≥3} = 0 (no interaction vertices). The trivial case that calibrates signs.
@@ -40,13 +42,13 @@ Every chapter depends on Vol I's five theorems. Cross-references to Vol I labels
 - *Abelian Chern-Simons*: boundary = û(1)_k, OPE computed directly from propagator.
 - Plus: *Virasoro* (truncation at m₇, Q² = 0, recursive m_k from BV master equation), *W₃* (classical YBE from λ-bracket Jacobi, central charge shift from ghost counting).
 
-**IV. The Quantization Programme.** PVA quantization via the modular bar complex. Affine half-space BV (solved for the affine case). Planted-forest L∞ obstructions parametrize the higher-genus deformation: the FM₃ planted forest residues give the first nontrivial obstruction class. The formality failure at d' = 1 is not a pathology — it IS the genus-1 curvature d² = κ(A)·ω₁. Existence → computation: given a classical PVA, does the logarithm have an exponential?
+**IV. The Standard Landscape.** Three worked examples verify (H1)–(H4) and ground the abstract machinery: free multiplet, LG cubic, abelian CS, plus Virasoro and W₃.
 
-**V. The Holographic Programme.** YM boundary packages: the Koszul dual of a bulk 3d HT theory produces boundary chiral algebras. Celestial holography: the celestial OPE algebra is the PVA descended from the boundary. Logarithmic HT monodromy: the logarithm's monodromy (from Vol I) reappears as log-monodromy in the HT direction. The **anomaly-completed Koszul triangle**: transgression algebra B_Θ, secondary anomaly u = η², genus-Clifford dichotomy — the holographic dictionary is presented by the transgression algebra, as the Swiss-cheese algebra is presented by the bar complex. Filtration is the universal organizing force: bar filtration for obstruction towers, weight filtration for spectral convergence.
+**V. Quantization and Holography.** PVA quantization via the modular bar complex. Affine half-space BV (solved for the affine case). Planted-forest L∞ obstructions. YM boundary packages. Celestial holography. Logarithmic HT monodromy. The **anomaly-completed Koszul triangle**: transgression algebra B_Θ, secondary anomaly u = η², genus-Clifford dichotomy — the holographic dictionary is presented by the transgression algebra, as the Swiss-cheese algebra is presented by the bar complex.
 
 ## Standing Hypotheses
 
-All results conditional on four analytic axioms, verified in the three worked examples but not proved in general:
+**No conjectural algebraic inputs remain.** Both Recognition and Homotopy-Koszulity are proved. All algebraic results are unconditional. The only conditional inputs are four analytic axioms, verified in the three worked examples but not proved in general:
 
 | | Content | Status |
 |---|---------|--------|
@@ -71,16 +73,18 @@ All results conditional on four analytic axioms, verified in the three worked ex
 - Formality fails at d' = 1: this is NOT a defect. The non-vanishing of higher A∞ operations IS the curved bar structure d² = κ(A)·ω₁ from Vol I.
 - The corrected bulk/boundary/line triangle: **bulk ≃ derived CENTER of boundary**, NOT bulk = boundary.
 - Chiral Koszulness from physics is **OPEN**: (H1)–(H4) + BV-BRST should imply it, but this is not proved.
-- Line operators ≃ A!-modules is **CONDITIONAL** on homotopy-Koszulity of SC^{ch,top} (Conjectured, evidence in three examples).
+- **Homotopy-Koszulity of SC^{ch,top} is PROVED** (Theorem thm:homotopy-Koszul): via Kontsevich formality + transfer from classical Swiss-cheese (Livernet). ALL formerly conditional results (bar-cobar Quillen equivalence, filtered Koszul duality, C_line ≃ A!-mod, dg-shifted Yangian) are now unconditional.
 - The **Koszul dual is the boundary**, not the bulk: A! lives on the boundary ℝ, not in the bulk ℂ × ℝ.
 
 ## Cross-Volume Bridges
 
 | Bridge | Vol II claim | Vol I anchor | Status |
 |--------|-------------|--------------|--------|
-| Bar-cobar | SC^{ch,top} bar-cobar specializes Vol I Thm A when curve = ℂ, topological = ℝ | Theorem A | Conjectured |
+| Bar-cobar | SC^{ch,top} bar-cobar specializes Vol I Thm A when curve = ℂ, topological = ℝ | Theorem A | Proved |
+| DS-bar | Bar-cobar commutes with DS reduction | Theorem ds-koszul-intertwine | Proved (Vol I) |
 | Hochschild | BV-BRST origin of Vol I's Theorem H complex | Theorem H | Conjectured |
-| DK/YBE | r(z) = Laplace of λ-bracket provides DK-0 shadow | MC3 (DK extension) | Conjectured |
+| DK/YBE | r(z) = ∫₀^∞ e^{-λz}{·_λ·}dλ provides DK-0 shadow | MC3 (DK extension) | Proved (Laplace) |
+| PVA-Coisson | PVA descent at X = pt recovers Coisson structure | Deformation theory | Conjectured |
 | W-algebras | Feynman-diagrammatic m_k matches bar differential at genus 0 | MC5 (BRST = bar) | Conjectured |
 
 ## Build
@@ -124,7 +128,7 @@ All commits authored by Raeez Lorgat. **Never credit an LLM.** No "co-authored-b
 - concordance: **status ledger** and cross-volume bridges (constitutional for Vol II)
 - bar-cobar-review: bar-cobar adjunction and filtered Koszul duality in the SC setting
 - hochschild: brace algebra on HC cochains, Gerstenhaber bracket, bulk ≃ chiral Hochschild
-- line-operators: C_line ≃ A!-mod (conditional on homotopy-Koszulity)
+- line-operators: C_line ≃ A!-mod (unconditional; homotopy-Koszulity proved)
 - spectral-braiding: R(z) from bulk-boundary, Yang-Baxter from Stokes on FM₃
 - ht_bulk_boundary_line: the Koszul triangle — bulk, boundary, line
 - celestial_holography, celestial_boundary_transfer: celestial OPE and boundary transfer
