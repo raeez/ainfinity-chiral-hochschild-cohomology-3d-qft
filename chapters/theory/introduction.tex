@@ -1,6 +1,9 @@
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
+\providecommand{\cH}{\mathcal{H}}
+\providecommand{\fg}{\mathfrak{g}}
+
 The bar complex of a chiral algebra carries a differential that
 lives in~$\C$ and a coproduct that lives in~$\R$.
 
@@ -10,18 +13,38 @@ it records how operators interact when they collide in the
 holomorphic variable~$z$.  The coproduct~$\Delta$ splits an
 ordered sequence of tensor factors into two sub-sequences: it
 records how an interval is cut at a point in the topological
-variable~$t$.  A bar element of degree~$k$ is parametrized by
+variable~$t$.  A bar element of degree~$k$ is parametrised by
 the product
 \[
 \FM_k(\C) \times \Conf_k(\R).
 \]
 The differential sees the first factor.  The coproduct sees the
-second.  This product is the operation space of a two-colored
+second.  This product is the operation space of a two-coloured
 operad---the holomorphic--topological Swiss-cheese operad
 $\SCchtop$---and the bar complex, equipped with both structures,
 is an algebra over it.  That identification is the central theorem
-of this volume.  To see it at work, consider the simplest chiral
-algebra with nontrivial content.
+of this volume.
+
+If Volume~I built the categorical logarithm and its modular tower,
+Volume~II asks what that logarithm actually does in three
+dimensions.  The answer is not ``it produces a few extra
+operations.''  The answer is: it becomes a full
+holomorphic--topological organism.  The bar complex is re-read as
+a Swiss-cheese object; its cohomological shadow becomes a Poisson
+vertex algebra; its dual open sector becomes a category of lines;
+its interactions are governed by brace operations, spectral
+$R$-matrices, and bulk--boundary--line triangles; and the full
+homotopy package---$\Ainf$, $\Linf$, brace---becomes the natural
+language rather than a background correction.  Every strict dg
+structure in this volume is the visible spine of a larger
+homotopy-coherent world.  In the three-dimensional
+holomorphic--topological setting, this is exactly what physics
+forces on us: BRST anomaly brackets, defect operations, line
+OPE's, and boundary transfer are higher operations \emph{before}
+they are strict algebras.
+
+To see all of this at work, consider the simplest chiral algebra
+with nontrivial content.
 
 
 \section*{The Heisenberg atom}
@@ -48,7 +71,7 @@ singularities and there are no composite fields to produce them.
 The coproduct is deconcatenation.  Together---differential from
 $\FM_2(\C)$, coproduct from $\Conf_k(\R)$, no higher
 interactions---the bar complex is a Swiss-cheese algebra, and a
-formal one: the $\R$-factorization is exact.
+formal one: the $\R$-factorisation is exact.
 
 On cohomology $H^\bullet(\cH_k, Q) = \C[J]$, the binary
 operation~$m_2$ decomposes.  Its regular part is a commutative
@@ -66,6 +89,20 @@ The Laplace transform of the $\lambda$-bracket produces the
 classical $r$-matrix $r(z) = k/z^2$, and the quantum $R$-matrix
 $R(z) = \exp(k/z)$---the exponential of a single pole---trivially
 satisfies Yang--Baxter.
+
+The Koszul dual is $\cH_k^! = \cH_{-k}$: the Heisenberg at the
+\emph{opposite} level.  Line operators are
+$\cH_{-k}\text{-mod} = \Vect$---a single simple object, the vacuum
+module---and the category is trivially braided with $R$-matrix
+$R(z) = \exp(k/z)$.  The bulk--boundary--line triangle collapses:
+\[
+\cH_k
+\;\simeq\;
+Z_{\mathrm{der}}(\cH_{-k})
+\;\simeq\;
+\HH^\bullet(\cH_{-k}),
+\]
+with $\cH_{-k}$ as the boundary vertex algebra of the 3d theory.
 
 At genus~$1$, the Arnold relation acquires a defect from the
 period matrix of the elliptic curve.  The bar differential
@@ -85,35 +122,123 @@ that each identification instantiates the corresponding theorem of
 Volume~I.
 
 
-\section*{Presentations}
+\section*{The Swiss-cheese operad and the recognition theorem}
 
 The Heisenberg computation exhibits a general phenomenon.  The
-product $\FM_k(\C) \times \Conf_k(\R)$ that parametrizes bar
-elements is the operation space of the two-colored Swiss-cheese
+product $\FM_k(\C) \times \Conf_k(\R)$ that parametrises bar
+elements is the operation space of the two-coloured Swiss-cheese
 operad $\SCchtop$ (Definition~\ref{def:SC}), whose closed
-(holomorphic) color has operations on $\FM_k(\C)$ and whose open
-(topological) color has operations on
+(holomorphic) colour has operations on $\FM_k(\C)$ and whose open
+(topological) colour has operations on
 $\FM_k(\C) \times \Eone(m)$.  The bar complex is an algebra over
-this operad (Theorem~\ref{thm:bar-swiss-cheese}).  The Recognition
-Theorem (Theorem~\ref{conj:recognition}) characterizes which
-$\Ainf$ chiral algebras carry this structure: any algebra
-satisfying the four standing analytic hypotheses
-\textup{(H1)--(H4)} is $\SCchtop$-structured.  The directionality
-axiom---open inputs cannot produce closed outputs---is the
-mathematical expression of bulk-to-boundary restriction.
+this operad (Theorem~\ref{thm:bar-swiss-cheese}).
 
-Homotopy-Koszulity of~$\SCchtop$
-(Theorem~\ref{thm:homotopy-Koszul}, proved via Kontsevich
-formality and transfer from the classical Swiss-cheese operad)
-ensures that the bar-cobar adjunction is a Quillen equivalence.
-The bar complex therefore \emph{presents} the Swiss-cheese
-algebra: it determines the algebra up to quasi-isomorphism, as a
-free resolution determines a module.
+The construction is explicit.  Define $\SCchtop$ as follows
+(Section~\ref{sec:foundations}, Section~\ref{sec:HT-operad}).  The
+set of colours is $\{\mathsf{ch}, \mathsf{top}\}$---closed
+(holomorphic) and open (topological).  The spaces of operations are:
+\begin{itemize}
+\item \textbf{Closed--to--closed} (pure holomorphic):
+  $\SCchtop(\mathsf{ch}^k;\,\mathsf{ch}) = \FM_k(\C)$, the
+  Fulton--MacPherson compactification of~$k$ points in~$\C$.
+\item \textbf{Mixed--to--open} (holomorphic + topological):
+  $\SCchtop(\mathsf{ch}^k, \mathsf{top}^m;\,\mathsf{top})
+  = \FM_k(\C) \times \Eone(m)$, the product of holomorphic
+  configuration space with the little-intervals operad.
+\item \textbf{Open--to--closed} (\emph{forbidden}):
+  $\SCchtop(\ldots, \mathsf{top}, \ldots;\,\mathsf{ch}) = \varnothing$.
+  Open inputs cannot produce closed outputs.
+\end{itemize}
+The directionality axiom---open-to-closed is empty---is the
+operadic expression of the physical principle that bulk interactions
+restrict to boundaries, but not conversely.  Composition in
+$\SCchtop$ is by substitution: holomorphic nesting via the FM
+operad structure, topological nesting via $\Eone$ composition, and
+mixed operations combine both (Definition~\ref{def:SC-composition}).
 
-The word \emph{presents} is precise and has a classical model.
+The $\Ainf$ chiral operations $m_k$ are the bar-complex
+cogenerators, parametrised by $\FM_k(\C)$: the operation~$m_k$
+maps $A^{\otimes k}$ to the space of Laurent series in
+$(\lambda_1, \ldots, \lambda_{k-1})$ and satisfies the hierarchy
+of $\Ainf$ relations
+\[
+\sum_{p+q=n+1} \sum_{j} (-1)^{\epsilon}\, m_p(\ldots, m_q(\ldots), \ldots) = 0,
+\]
+which are precisely the boundary decompositions of $\FM_n(\C)$
+(Section~\ref{sec:axioms-Ainfty-chiral},
+Section~\ref{sec:FM_calculus}).  The concrete axioms---sesquilinearity
+(Definition~\ref{def:sesquilinearity}), the $\Ainf$ relations
+(Definition~\ref{def:ainfty-relations}), and their compatibility
+with the spectral parameters~$\lambda_i$---are extracted from the
+operad in Section~\ref{sec:equivalence} and shown to be equivalent
+to $W(\SCchtop)$-algebra structure for tame algebras
+(Theorem~\ref{thm:rectification}).
+
+\begin{maintheorem}[Recognition; Theorem~\textup{\ref{thm:recognition}}]
+\label{thm:intro-recognition}
+Let $\cA$ be an $\Ainf$ chiral algebra satisfying the standing
+analytic hypotheses \textrm{(H1)--(H4)}.  Then $\cA$ carries the
+structure of a $C_\ast(W(\SCchtop))$-algebra.  The bar differential
+$d_{\barB}$ is the holomorphic factorisation; the bar coproduct
+$\Delta$ is the topological factorisation.
+\end{maintheorem}
+
+\noindent
+The Recognition Theorem is proved in Section~\ref{sec:foundations}
+(product decomposition and retract argument,
+Proposition~\ref{prop:compatibility}).  Its content is that the
+combined data---differential from~$\C$, coproduct from~$\R$,
+higher operations from $\FM_k(\C)$---are not independent choices
+but a single package, once the holomorphic factorisation of
+Volume~I is granted and the four analytic hypotheses are verified.
+
+
+\section*{Homotopy-Koszulity and the Quillen equivalence}
+
+The Recognition Theorem asserts that the bar complex
+\emph{presents} the Swiss-cheese algebra.  But in what sense?
+The bar complex is not the algebra itself; it is a coalgebraic
+resolution.  The word ``presents'' is precise: the bar-cobar
+adjunction for the two-coloured operad $\SCchtop$ is a Quillen
+equivalence, so the bar complex determines the algebra up to
+quasi-isomorphism, as a free resolution determines a module.
+
+The decisive input is homotopy-Koszulity.
+
+\begin{maintheorem}[Homotopy-Koszulity; Theorem~\textup{\ref{thm:homotopy-Koszul}}]
+\label{thm:intro-homotopy-Koszul}
+The two-coloured topological operad $\SCchtop$ is
+homotopy-Koszul: the canonical map
+$\Omega \mathbf{B}(\SCchtop) \xrightarrow{\,\sim\,} \SCchtop$
+is a quasi-isomorphism of dg operads.
+\end{maintheorem}
+
+\noindent
+The proof (Section~\ref{sec:bar-cobar}) proceeds in three steps.
+\textbf{Step~1}: the classical Swiss-cheese operad
+$\mathsf{SC}$---built from the individually Koszul operads
+$\Etwo$ and $\Ass = \Eone$ via a distributive law---is Koszul.
+\textbf{Step~2}: Kontsevich formality provides a quasi-isomorphism
+$\Phi \colon \SCchtop \to \mathsf{SC}$ of two-coloured dg operads
+(the identity on the open colour, the formality map
+$C_\ast(\FM_k(\C)) \to \Etwo(k)$ on the closed colour).
+\textbf{Step~3}: bar and cobar functors preserve quasi-isomorphisms
+between augmented operads, so the two-out-of-three property gives
+$\Omega \mathbf{B}(\SCchtop) \simeq \SCchtop$.
+
+The consequence (Theorem~\ref{thm:bar-cobar-adjunction}) is that
+the bar-cobar adjunction $(\Omega, \mathbf{B})$ on the category
+of $\SCchtop$-algebras is a Quillen equivalence.  The further
+result (Theorem~\ref{thm:filtered-koszul}) extends this beyond the
+quadratic locus: for filtered chiral algebras with OPE poles of
+arbitrary order, the filtered bar-cobar adjunction is still a
+Quillen equivalence, incorporating the full Gui--Li--Zeng
+framework~\cite{GLZ22} of chiral Koszul duality.
+
+The word \emph{presents} now has a classical model.
 The Steinberg variety
 $\widetilde{\mathcal{N}} \times_{\mathcal{N}}
-\widetilde{\mathcal{N}}$---the fiber product of the Springer
+\widetilde{\mathcal{N}}$---the fibre product of the Springer
 resolution with itself over the nilpotent cone---carries a
 convolution product from composition of correspondences and a
 stratification from the Bruhat decomposition.  The convolution
@@ -157,34 +282,6 @@ $d^2 = \kappa(\cA) \cdot \omega_g$ from the Hodge bundle, and the
 Swiss-cheese algebra curves---just as the Hecke algebra deforms
 with its parameter~$q$.
 
-Each of Volume~I's five theorems acquires a three-dimensional
-reading through this lens:
-
-\begin{center}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{p{0.06\textwidth}p{0.25\textwidth}p{0.56\textwidth}}
-\textbf{Thm} & \textbf{Volume~I} &
-  \textbf{Three-dimensional reading} \\
-\hline
-\textbf{(A)} & Bar-cobar adjunction
-  & Swiss-cheese presentation; Quillen equivalence
-    (\S\ref{sec:foundations}, \S\ref{sec:bar_cobar}) \\[3pt]
-\textbf{(B)} & Bar-cobar inversion
-  & Raviolo VA descent; boundary VA as cobar
-    (Appendix~\ref{sec:raviolo}) \\[3pt]
-\textbf{(C)} & Complementarity
-  & The Koszul triangle inherits the
-    $(-1)$-shifted symplectic structure
-    (\S\ref{sec:ht-bulk-boundary-line}) \\[3pt]
-\textbf{(D)} & Modular characteristic
-  & Curved Swiss-cheese over $\overline{\mathcal{M}}_g$
-    (\S\ref{sec:bar_cobar}) \\[3pt]
-\textbf{(H)} & Hochschild ring
-  & Bulk $\simeq$ chiral Hochschild; BV-BRST origin
-    (\S\ref{sec:chiral_hochschild_expanded})
-\end{tabular}
-\end{center}
-
 
 \section*{What the bar complex computes}
 
@@ -193,15 +290,34 @@ bar complex.
 
 \emph{Cohomological descent} produces the $(-1)$-shifted Poisson
 vertex algebra on $H^\bullet(\cA, Q)$
-(Theorem~\ref{thm:cohomology_PVA}).  The higher operations
-$m_{k \geq 3}$ vanish on cohomology via homotopies from the
-contractibility of the topological factor in
-$\FM_k(\C) \times \Conf_k(\R)$; the binary operation~$m_2$
-decomposes into commutative product (regular part) and
-$\lambda$-bracket (singular part); the PVA axioms---Jacobi,
-Leibniz, skewsymmetry---follow from Arnold relations and Stokes'
-theorem on $\FM_3(\C)$, the same identities that make
-$d_{\barB}^2 = 0$ in Volume~I.
+(Theorem~\ref{thm:cohomology_PVA};
+Section~\ref{sec:PVA_descent}).  The
+mechanism is as follows.  The binary operation~$m_2$ on
+$\FM_2(\C)$ decomposes into a regular part and a singular part
+via Laurent projection:
+\[
+m_2(a, b)(\lambda) = a \cdot b + \{a \,{}_\lambda\, b\},
+\]
+where $a \cdot b = m_2(a,b)|_{\lambda = 0}^{\mathrm{reg}}$ is a
+commutative product and $\{a {}_\lambda b\}$ collects the singular
+terms---a $\lambda$-bracket
+(Definition~\ref{def:lambda-bracket}).  The higher operations
+$m_{k \geq 3}$ vanish on cohomology: the topological factor
+$\Conf_k(\R)$ in $\FM_k(\C) \times \Conf_k(\R)$ is
+contractible for $k \geq 3$, and the resulting homotopies from
+the Fulton--MacPherson calculus (Section~\ref{sec:FM_calculus})
+kill the chain-level operations
+(Proposition~\ref{prop:m3_vanish}).  The PVA
+axioms---Jacobi (Theorem~\ref{thm:Jacobi}), Leibniz
+(Theorem~\ref{thm:Leibniz}), skew-symmetry
+(Proposition~\ref{prop:sesqui-skew})---follow from Arnold relations
+and Stokes' theorem on $\FM_3(\C)$
+(Proposition~\ref{prop:AOS-implies-Jacobi}), the same identities
+that make $d_{\barB}^2 = 0$ in Volume~I.  This is the content of
+Section~\ref{sec:Ainfty-to-PVA}: a controlled forgetting map from
+the full $\Ainf$ chiral structure to a Poisson vertex algebra,
+retaining the product and $\lambda$-bracket while compressing the
+higher operations into homotopies.
 
 \emph{Spectral descent} produces the $R$-matrix from the
 $\lambda$-bracket.  The bridge is the Laplace transform
@@ -210,46 +326,398 @@ $\lambda$-bracket.  The bridge is the Laplace transform
 r(z) \;=\; \int_0^\infty e^{-\lambda z}\,
 \{{\cdot}\,{}_\lambda\,{\cdot}\}\, d\lambda,
 \end{equation}
-converting the PVA datum into a Yang--Baxter datum.  The quantum
-$R$-matrix $R(z)$ from bulk-boundary composition
-(Section~\ref{sec:spectral_braiding}) deformation-quantizes this
-classical limit.
+converting the PVA datum into a Yang--Baxter datum
+(Section~\ref{sec:spectral_braiding}).  The
+quantum $R$-matrix $R(z)$ from bulk-boundary composition
+(Definition~\ref{def:spectral-braiding}) deformation-quantises
+this classical limit and satisfies the Yang--Baxter equation
+(Theorem~\ref{thm:YBE}) as a consequence of Stokes' theorem on
+$\FM_3(\C)$---the same geometry, viewed from the spectral side.
+For the Heisenberg atom, $r(z) = k/z^2$ and $R(z) = \exp(k/z)$.
+For affine $\widehat{\fg}_k$, the classical $r$-matrix is the
+standard Lie-algebraic $r(z) = \Omega/z$ and the quantum
+$R$-matrix is the Yangian $R$-matrix of Drinfeld.  For Virasoro
+and $\mathcal{W}_3$, the $\lambda$-bracket produces a classical
+$r$-matrix satisfying the CYBE on the Virasoro Lie algebra,
+with the central charge playing the role of the level
+(Proposition~\ref{prop:vir-m2},
+Theorem~\ref{thm:w3-CYBE}).
 
 \emph{Genus descent} produces the curved Swiss-cheese algebras
 over~$\overline{\mathcal{M}}_g$.  The curvature
 $d^2 = \kappa(\cA) \cdot \omega_g$ couples the
-$\R$-factorization to the Hodge bundle; the non-vanishing of
+$\R$-factorisation to the Hodge bundle; the non-vanishing of
 higher $\Ainf$ operations at the chain level IS this curved bar
 structure---formality fails precisely because the categorical
-logarithm acquires monodromy.
+logarithm acquires monodromy.  The full genus tower of curved
+$\SCchtop$-algebras is developed in Section~\ref{sec:bar_cobar}
+and Part~V (Section~\ref{ch:modular-pva-quantization}).
 
-The three descents converge on the \emph{bulk-boundary-line
-Koszul triangle}: the bulk chiral algebra
-$\cA_{\mathrm{bulk}}$ on $\C \times \R$; the boundary vertex
-algebra $\cA^!$ (Koszul dual) on~$\R$; the line category
-$\mathcal{C}_{\mathrm{line}} \simeq
-\cA^!\text{-}\mathbf{mod}$
-(Theorem~\ref{thm:lines_as_modules}).  The three vertices are
-related by
+
+\section*{The bulk--boundary--line Koszul triangle}
+
+The three descents converge on the fundamental organising
+structure of three-dimensional holomorphic--topological QFT:
+the \emph{bulk--boundary--line Koszul triangle}
+(Section~\ref{sec:ht-bulk-boundary-line}).
+
+A 3d HT theory on $\C \times \R$ produces three algebraic
+objects: the bulk chiral algebra $A_{\mathrm{bulk}}$ on
+$\C \times \R$; the boundary vertex algebra $\cA^!$
+(the Koszul dual) on~$\R$; and the line category
+$\mathcal{C}_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}$
+(Theorem~\ref{thm:lines_as_modules}).  The naive identification
+``bulk $\simeq$ boundary $\simeq$ line'' is false.  The corrected
+triangle is:
 \[
 A_{\mathrm{bulk}} \;\simeq\;
 Z_{\mathrm{der}}(B_\partial) \;\simeq\;
-\mathrm{HH}^\bullet(\cA^!)\text{:}
+\HH^\bullet(\cA^!)\text{:}
 \]
-the bulk is the \emph{derived center} of the boundary.  This is
+the bulk is the \emph{derived centre} of the boundary.  This is
 the mathematical content of the holographic principle in the
 holomorphic--topological setting.
 
-Beyond the Heisenberg atom, three families test the full
-machine.  The Landau--Ginzburg model provides the first
-\emph{interacting} example: a genuine $m_3$ from a cubic
-superpotential, truncating by degree.  Abelian Chern--Simons
-provides the first \emph{braided} example, with an explicit
-spectral $R$-matrix from the CS propagator and boundary
-$\widehat{\mathfrak{u}(1)}_k$.  The Virasoro and $\mathcal{W}_3$
-algebras connect to Volume~I's Drinfeld--Sokolov framework, with
-recursive $m_k$ from the BV master equation and classical
-Yang--Baxter from the $\lambda$-bracket Jacobi identity.
+The triangle is proved in two stages.  At the exact
+boundary-linear level (Section~\ref{sec:boundary-linear}), the
+bulk--boundary theorem
+(Theorem~\ref{thm:boundary-linear-bulk-boundary}) identifies the
+bulk algebra with the derived centre of the boundary dga, using
+derived critical locus technology
+(Theorem~\ref{thm:dcrit-shiftedcot}).  Line operators at this
+level are presented by one-step Jacobi coalgebras
+(Theorem~\ref{thm:exact-line}), and boundary Kuranishi elimination
+(Theorem~\ref{thm:boundary-kuranishi}) reduces the algebra of
+pointed lines to a minimal model with explicit recursive
+coefficients (Proposition~\ref{prop:recursive-kuranishi}).  The
+passage to the full non-linear triangle requires the Koszul dual
+Yangian (Theorem~\ref{thm:Koszul_dual_Yangian}): the endomorphism
+algebra of the fibre functor on
+$\mathcal{C}_{\mathrm{line}}$ is identified with a
+dg-shifted Yangian $Y_\cA^{\mathrm{dg}}(z)$
+(Definition~\ref{def:dg_Yangian}), whose RTT
+presentation governs the spectral $R$-matrix via the
+factorisation quantum group
+(Definition~\ref{def:factorisation_QG},
+Theorem~\ref{thm:lines_factorisationQG}).
+
+Each vertex of the triangle is represented in practice by a
+chosen strict model---a dg algebra, an $\Ainf$ boundary algebra,
+or a dg category of modules---but the triangle itself is
+invariant only up to derived/Morita and $\Linf$ equivalence
+(Remark~\ref{rem:triangle-homotopy-first}).  This is the central
+instance of the homotopy upgrade: the strict presentations are
+legible coordinates on an invariant homotopy-coherent object, and
+the triangle becomes false or badly distorted if any corner is
+artificially strictified too early.
+
+
+\section*{Volume~I in three dimensions}
+
+Each of Volume~I's five theorems acquires a three-dimensional
+reading through the Swiss-cheese lens:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{0.06\textwidth}p{0.25\textwidth}p{0.56\textwidth}}
+\textbf{Thm} & \textbf{Volume~I} &
+  \textbf{Three-dimensional reading} \\
+\hline
+\textbf{(A)} & Bar-cobar adjunction
+  & Swiss-cheese presentation; Quillen equivalence for
+    $\SCchtop$-algebras
+    (\S\ref{sec:foundations}, \S\ref{sec:bar-cobar}) \\[3pt]
+\textbf{(B)} & Bar-cobar inversion
+  & Raviolo VA descent; boundary VA as cobar
+    (Appendix~\ref{sec:raviolo}) \\[3pt]
+\textbf{(C)} & Complementarity
+  & The Koszul triangle inherits the
+    $(-1)$-shifted symplectic structure;
+    complementarity is the non-degeneracy of the bulk--boundary
+    pairing
+    (\S\ref{sec:ht-bulk-boundary-line},
+    \S\ref{sec:ambient-complementarity-chain-level}) \\[3pt]
+\textbf{(D)} & Modular characteristic
+  & Curved Swiss-cheese over $\overline{\mathcal{M}}_g$;
+    genus-$1$ obstruction
+    (\S\ref{sec:bar-cobar},
+    \S\ref{ch:modular-pva-quantization}) \\[3pt]
+\textbf{(H)} & Hochschild ring
+  & Bulk $\simeq$ chiral Hochschild cochains; BV-BRST origin
+    (\S\ref{sec:chiral_hochschild_expanded},
+    \S\ref{sec:chiral-Hochschild})
+\end{tabular}
+\end{center}
+
+\noindent
+The qualitative shift is from ``the categorical logarithm exists''
+to ``here is what its Taylor jets produce in the Swiss-cheese
+setting, and here is how to read the output.''  Volume~I
+establishes the five theorems as structural results about chiral
+algebras on curves.  Volume~II shows that these results, read
+through the prism of $\FM_k(\C) \times \Conf_k(\R)$, compute the
+observables, braiding, and holographic content of
+three-dimensional HT field theory.
+
+
+\section*{The homotopy upgrade}
+
+The strict dg structures that appear throughout this volume---dg
+Lie algebras, dg categories, bar and cobar complexes---are never
+the full story.  They are coordinates on larger homotopy-coherent
+objects.  This principle, already present in Volume~I's treatment
+of the convolution dg Lie algebra as a strict model for the
+modular $\Linf$ structure, becomes inescapable in three
+dimensions.
+
+The reason is physical.  A 3d HT theory on $\C \times \R$
+produces local operators, boundary operators, and line operators.
+The OPE of local operators is governed by $\FM_k(\C)$, which is
+formal (Kontsevich); but the OPE of line operators is governed by
+$\Eone$, which is \emph{not} formal in the presence of
+holomorphic dependence.  Nested collisions---a cluster of
+holomorphic operators colliding with a cluster of topological
+operators---generate higher $\Ainf$ and brace operations
+automatically.  The BV-BRST construction
+(Section~\ref{sec:BV_construction}) makes this explicit: the BV
+differential on the space of observables on $\C \times \R$ is the
+BRST charge of a gauge-fixed action, and the anomaly brackets
+that correct it at each loop order are the higher operations~$m_k$
+(Theorem~\ref{thm:Obs-is-SC}).  The $\Ainf$ chiral axioms of
+Section~\ref{sec:axioms-Ainfty-chiral} are the minimal package
+needed to capture this content honestly.
+
+The homotopy upgrade manifests concretely at five points in the
+volume:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The $\SCchtop$-algebra structure is a
+  $C_\ast(W(\SCchtop))$-algebra, not a strict operad algebra.
+  The rectification theorem
+  (Theorem~\ref{thm:rectification}) identifies when strict and
+  homotopy-coherent presentations coincide.
+\item Chiral Hochschild cochains form a brace algebra
+  (Section~\ref{sec:chiral-Hochschild}), whose Gerstenhaber
+  bracket is the binary Taylor coefficient of the filtered
+  $\Linf$-structure governing deformations.
+\item The bulk--boundary--line triangle is invariant only up to
+  derived/Morita and $\Linf$ equivalence.  The triangle becomes
+  false if any vertex is artificially strictified.
+\item The spectral $R$-matrix is a component of a
+  homotopy-coherent braiding on the $\Ainf$-module category; the
+  Yang--Baxter equation is one coherence law among many.
+\item The genus tower of curved Swiss-cheese algebras over
+  $\overline{\mathcal{M}}_g$ is a genus-filtered $\Linf$-object;
+  the strict dg model at each genus is a truncation whose
+  higher coherences are the source of the modular corrections
+  from Volume~I's Theorem~D.
+\end{enumerate}
+
+\noindent
+The convention throughout this volume
+(Convention~\ref{conv:vol2-strict-models}) is: whenever a strict dg
+structure appears, the reader should understand that it is one chart
+on an underlying homotopy deformation object.  The strict model is
+used for computation; the homotopy-coherent package is the
+invariant.
+
+
+\section*{Plan of the volume}
+
+The volume has five parts, each building on the previous.
+
+\medskip
+\noindent\textbf{Part~I: From the Bar Complex to the Swiss-Cheese
+Operad} (\S\ref{sec:foundations}--\S\ref{sec:BV_construction}).
+The structural heart of the volume.  The two-coloured operad
+$\SCchtop$ is defined
+(Section~\ref{sec:HT-operad}), and the bar complex of a chiral
+algebra is shown to be an algebra over it
+(Section~\ref{sec:foundations}).  The concrete $\Ainf$ chiral
+axioms are extracted
+(Section~\ref{sec:axioms-Ainfty-chiral}) and proved equivalent to
+$W(\SCchtop)$-algebra structure
+(Section~\ref{sec:equivalence}).  The Fulton--MacPherson calculus
+(Section~\ref{sec:FM_calculus}) supplies the geometric proofs: the
+$\Ainf$ relations are Stokes' theorem on boundary strata of
+$\FM_k(\C)$, with explicit formulas for~$m_2$ and~$m_3$
+(Propositions~\ref{prop:m2_formula} and~\ref{prop:m3_formula}).
+The BV-BRST construction
+(Section~\ref{sec:BV_construction}) shows that BV quantisation of
+a 3d HT field theory on $\C \times \R$ produces exactly these
+bar complexes (Theorem~\ref{thm:Obs-is-SC}).
+
+\medskip
+\noindent\textbf{Part~II: The Descent Calculus}
+(\S\ref{sec:FM_calculus}--\S\ref{sec:chiral-Hochschild}).
+Two descent mechanisms extract invariants from the bar complex.
+Cohomological descent produces the $(-1)$-shifted PVA on
+cohomology (Theorem~\ref{thm:cohomology_PVA}), with the
+regular/singular decomposition of~$m_2$ yielding the product and
+$\lambda$-bracket (Section~\ref{sec:PVA_descent},
+Section~\ref{sec:Ainfty-to-PVA}).  Chiral Hochschild cohomology
+(Section~\ref{sec:chiral_hochschild_expanded}) identifies bulk
+observables with Hochschild-type cochains, bridging the 2d Poisson
+sigma model to the 3d HT setting via dimensional descent
+(Theorem~\ref{thm:2d_PSM_Hochschild}).  The chiral bar--cobar
+review (Section~\ref{sec:bar_cobar}) places the quadratic duality
+of Gui--Li--Zeng in context and extends it beyond the quadratic
+locus.  Chiral Hochschild cochains are shown to form a brace
+algebra on $\FM(\C) \times \Conf(\R)$
+(Section~\ref{sec:chiral-Hochschild}), whose Gerstenhaber bracket
+governs deformations.
+
+\medskip
+\noindent\textbf{Part~III: Dualities and the Bulk--Boundary--Line
+Triangle}
+(\S\ref{sec:line_operators}--\S\ref{sec:bv_ht_physics}).
+The Koszul triangle is constructed from first principles.
+Homotopy-Koszulity of~$\SCchtop$ is proved
+(Theorem~\ref{thm:homotopy-Koszul}), yielding the Quillen
+equivalence (Theorem~\ref{thm:bar-cobar-adjunction}).  Line
+operators are identified with $\cA^!$-modules
+(Theorem~\ref{thm:lines_as_modules}), the spectral $R$-matrix
+is constructed (Definition~\ref{def:spectral-braiding}) and shown
+to satisfy Yang--Baxter (Theorem~\ref{thm:YBE}), and the
+dg-shifted Yangian is identified as the Koszul dual endomorphism
+algebra (Theorem~\ref{thm:Koszul_dual_Yangian}).  The
+bulk--boundary--line chapter
+(Section~\ref{sec:ht-bulk-boundary-line}) proves the corrected
+triangle in the exact boundary-linear sector
+(Theorem~\ref{thm:boundary-linear-bulk-boundary}) and develops
+the full machinery of Thom--Sebastiani multiplicativity
+(Theorem~\ref{thm:TS}), Clifford stabilisation
+(Theorem~\ref{thm:clifford-stab}), boundary Kuranishi elimination
+(Theorem~\ref{thm:boundary-kuranishi}), and polarised
+reconstruction (Theorem~\ref{thm:polarized-reconstruction}).  The
+celestial boundary transfer chapter
+(Section~\ref{sec:modular-twisted-celestial-first-principles})
+lifts the triangle to celestial and twisted holography.  The
+physical origins chapter connects to 4d/2d correspondences, gauge
+theories, and D-brane algebras.  The holomorphic--topological
+chapter gives the field-theoretic habitat.
+
+\medskip
+\noindent\textbf{Part~IV: The Standard Landscape}
+(\S\ref{sec:rosetta-stone}--\S\ref{sec:W-algebras}).
+The machine is tested on five families.  The Heisenberg Rosetta
+Stone (Section~\ref{sec:rosetta-stone}) translates every new
+object---Swiss-cheese operations, brace structure, PVA,
+$R$-matrix, line operators, curved genus-$1$ complex, Hochschild
+duality---into the simplest concrete language, verifying each
+against the corresponding theorem of Volume~I
+(Theorem~\ref{thm:rosetta-swiss-cheese},
+Proposition~\ref{prop:rosetta-pva},
+Theorem~\ref{thm:rosetta-curved}).  The free multiplet has
+$m_{k \geq 3} = 0$: the bar complex is strictly coassociative,
+the Swiss-cheese algebra is formal, the PVA is polynomial
+(Proposition~\ref{prop:free_cohomology_complete}).  The
+Landau--Ginzburg model has nontrivial~$m_3$---a genuine $\Ainf$
+correction from the superpotential---with truncation controlled
+by degree (Theorem~\ref{thm:LG_truncation},
+Proposition~\ref{prop:LG_m3_formula}).  Abelian Chern--Simons
+with boundary produces an explicit spectral $R$-matrix solving
+Yang--Baxter (Theorem~\ref{thm:CS_boundary}).  The affine
+$\widehat{\mathfrak{su}(2)}_k$ example tests the full non-abelian
+machine: non-trivial $\lambda$-bracket, $m_3$ from the Jacobi
+identity, truncation, PVA, Yangian, and genus-$1$ curvature
+$\kappa = k \dim \fg$ (Propositions~\ref{prop:su2-lambda-bracket}
+--\ref{prop:su2-curvature}).  The $\mathcal{W}$-algebra chapter
+(Section~\ref{sec:W-algebras}) treats Virasoro and~$\mathcal{W}_3$
+as the decisive non-linear tests: recursive $m_k$ from the BV
+master equation (Theorem~\ref{thm:vir-recursive},
+Theorem~\ref{thm:w3-recursive}), classical Yang--Baxter from the
+$\lambda$-bracket Jacobi identity
+(Theorem~\ref{thm:w3-CYBE}), and the central-charge shift under
+bar--cobar (Theorem~\ref{thm:central-charge-shift}).
+
+\medskip
+\noindent\textbf{Part~V: Quantisation and Holography}
+(\S\ref{ch:modular-pva-quantization}--\S\ref{app:anomaly-completed-topological-holography}).
+The frontier.  The quantisation question: given a classical PVA,
+does the logarithm have an exponential?  The modular PVA
+quantisation chapter
+(Section~\ref{ch:modular-pva-quantization}) develops the
+stable-graph modular bar construction
+(Theorem~\ref{thm:modular-bar}), the universal genus-$1$
+obstruction (Theorem~\ref{thm:Ob1}), the higher-genus recursion
+(Theorem~\ref{thm:Obg}), and the variational modular class
+(Theorem~\ref{thm:modclass}).  The affine half-space BV theorem
+(Theorem~\ref{thm:affine-half-space-bv}) solves the quantisation
+problem for affine Kac--Moody algebras: half-space BV quantisation
+produces~$\widehat{\fg}_k$ at a shifted level, with
+Drinfeld--Sokolov reduction transporting the result to Virasoro
+and~$\mathcal{W}_3$.  The FM$_3$ planted-forest synthesis
+(Section~\ref{chap:fm3-planted-forest-synthesis}) isolates the
+first nonlinear obstruction via the planted-forest $\Linf$ model.
+The holographic programme proceeds through four movements:
+Yang--Mills boundary theory with instanton completion and
+screening (Section~\ref{sec:ym-platonic-ideal-synthesis});
+celestial and twisted holography made modular
+(Section~\ref{sec:modular-twisted-celestial-first-principles});
+logarithmic HT monodromy from shifted KZ connections and the
+$\Ainf$ collision theory
+(Section~\ref{chap:log-ht-monodromy},
+Theorem~\ref{thm:synthesis}, Theorem~\ref{thm:master-curvature});
+and anomaly-completed topological holography
+(Section~\ref{app:anomaly-completed-topological-holography}),
+where the transgression algebra packages the bulk--boundary--line
+triangle with its genus tower into a single dg algebra.
+
+\medskip
+\noindent\textbf{Appendices.}  Raviolo vertex algebras
+(Appendix~\ref{sec:raviolo}) supply the comparison with the
+Garner--Williams framework: restriction to time-slices recovers
+raviolo VAs via the bar-cobar counit
+(Proposition~\ref{prop:raviolo-VA},
+Theorem~\ref{thm:raviolo-PVA}).
+The expanded raviolo restriction
+(Appendix~\ref{sec:raviolo-expanded}) develops the \v{C}ech/Thom--Sullivan
+model and coinvariants.  Further appendices collect brace-algebra
+sign conventions, FM orientation conventions, and expanded PVA
+proofs.
+
+
+\section*{Beyond the Heisenberg atom: the standard landscape}
+
+Beyond the Heisenberg atom, four families test the full
+machine and exhibit the range of phenomena that the formalism
+captures.
+
+The \emph{Landau--Ginzburg model} provides the first
+\emph{interacting} example: a genuine~$m_3$ from a cubic
+superpotential, with the bar complex acquiring a non-trivial
+higher coderivation and the shifted PVA inheriting a non-trivial
+$\lambda$-bracket.  Truncation by polynomial degree
+(Proposition~\ref{prop:truncation_criterion}) shows that $m_k = 0$
+for $k > \deg W$, so the $\Ainf$ structure is finite.  This is the
+simplest setting where the homotopy transfer theorem of Volume~I
+produces transferred operations as tree-level Feynman sums.
+
+\emph{Abelian Chern--Simons with boundary} provides the first
+\emph{braided} example: an explicit spectral $R$-matrix
+from the CS propagator, with the boundary vertex algebra
+$\widehat{\mathfrak{u}(1)}_k$ and line operators the modules of
+the affine algebra.  The Yang--Baxter equation is verified
+directly from $\FM_3(\C)$.
+
+\emph{Affine $\widehat{\mathfrak{su}(2)}_k$} tests the full
+non-abelian Swiss-cheese machine.  The
+$\lambda$-bracket is the affine Lie bracket, $m_3$ is non-zero
+(from the cubic Casimir structure of the Jacobi identity), and the
+$R$-matrix is the Yangian $R$-matrix of Drinfeld.  At genus~$1$,
+the curvature is $\kappa = k \dim \fg$, reproducing Volume~I's
+computation.
+
+The \emph{Virasoro and $\mathcal{W}_3$ algebras} are the decisive
+non-linear tests.  These are precisely the examples that punish
+any attempt to remain in a strictly quadratic or dg world: the OPE
+has poles of order~$4$ (Virasoro) and~$6$ ($\mathcal{W}_3$), so
+the bar complex has non-vanishing coderivations in all arities, and
+the $\Ainf$ structure is genuinely infinite.  The recursive
+construction of~$m_k$ from the BV master equation, the classical
+Yang--Baxter equation from the $\lambda$-bracket, and the
+central-charge shift $c \mapsto 26 - c$ under Koszul duality all
+pass through this non-linear regime.
 
 
 \section*{Reading this volume}
@@ -268,11 +736,11 @@ Yang--Baxter from the $\lambda$-bracket Jacobi identity.
   BV construction (\S\ref{sec:BV_construction}) $\to$
   FM calculus (\S\ref{sec:FM_calculus}) $\to$
   Examples (\S\ref{sec:examples_complete}) $\to$
-  YM synthesis (\S\ref{sec:ym-synthesis}).
+  YM synthesis (\S\ref{sec:ym-platonic-ideal-synthesis}).
 \end{enumerate}
 Part~I builds the Swiss-cheese identification.  Part~II develops
 the descent calculus.  Part~III develops the Koszul triangle and
 its consequences.  Part~IV tests the machine on five families.
-Part~V pushes the frontier: quantization, Yang--Mills, celestial
+Part~V pushes the frontier: quantisation, Yang--Mills, celestial
 holography, anomaly completion.  The examples of Part~IV are
 independent of Parts~III and~V.
