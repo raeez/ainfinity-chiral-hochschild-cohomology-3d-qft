@@ -148,12 +148,12 @@ The interaction term produces a \textbf{cubic vertex}:
 
 \subsubsection{BV-BRST Differential}
 
-On the algebra of local observables $\A_{\text{LG}} = \C[\phi_n, \psi_n]$, the linear part of the BV-BRST differential is identical to the free theory:
+On the algebra of local observables $\A_{\text{LG}} = \C[\phi_n, \psi_n]$, the BV-BRST differential decomposes as a linear part (identical to the free theory) plus an interaction part from the superpotential:
 \begin{align}
-Q \cdot \phi_n &= \psi_n, \label{eq:Q_LG_phi} \\
-Q \cdot \psi_n &= 0. \label{eq:Q_LG_psi}
+m_1(\phi_n) &= \psi_n + W'(\phi_n) = \psi_n + \lambda_3 \phi_n^2, \label{eq:Q_LG_phi} \\
+m_1(\psi_n) &= 0. \label{eq:Q_LG_psi}
 \end{align}
-Nilpotency $Q^2 = 0$ holds because $Q$ is the \emph{linear} part of the BV-BRST differential: $Q(\phi_n) = \psi_n$ and $Q(\psi_n) = 0$, giving $Q^2(\phi_n) = Q(\psi_n) = 0$ and $Q^2(\psi_n) = 0$ trivially. The superpotential $W(\phi) = \phi^3/3$ does \emph{not} modify $m_1 = Q$; rather, it enters through the higher operations $m_2$ and $m_3$ via the interaction vertex $\int W'(\phi)\psi\,dz\,dt$ in the BV action. The full BV differential is $\{S_{\mathrm{BV}}, -\}_{\mathrm{BV}} = Q + m_2(W''(\phi)\cdot-) + \cdots$, but the $A_\infty$ framework separates this into $m_1 = Q$ (linear) and $m_k$ for $k \ge 2$ (interaction). Since $Q$ is the differential of the free theory (which is manifestly nilpotent), $Q^2 = 0$ is independent of $W$.
+Nilpotency $m_1^2 = 0$ follows from the BV master equation $\{S_{\mathrm{BV}}, S_{\mathrm{BV}}\} = 0$, which holds on the full BV complex including antifield pairings.  The linear part $Q(\phi_n) = \psi_n$ is the differential of the underlying free theory; the superpotential contributes $W'(\phi) = \lambda_3\phi^2$ to $m_1$, making the cohomology the Jacobian ring $J(W) = \C[\phi]/(\lambda_3 \phi^2)$ rather than the free-theory cohomology~$\C$.
 
 \subsubsection{Computing $m_2$: Modified $\lambda$-Bracket}
 
@@ -169,25 +169,22 @@ At tree level (classical), the $\lambda$-bracket is:
 
 \subsubsection{Computing $m_3$: First Nontrivial Higher Operation}
 
-The operation $m_3$ arises from Feynman diagrams with three external legs. The simplest contributing diagram is the \textbf{triangle (Y-graph)}:
+The operation $m_3$ arises from the tree-level Feynman diagram with three external legs and one internal cubic vertex (a \textbf{Y-graph}):
 
 \begin{center}
 \begin{tikzpicture}
-\node[circle, fill, inner sep=2pt] (v1) at (0,0) {};
-\node[circle, fill, inner sep=2pt] (v2) at (2,0) {};
-\node[circle, fill, inner sep=2pt] (v3) at (1,1.73) {};
+\node[circle, fill, inner sep=2pt, label=above:{$z_v$}] (v) at (1,0.8) {};
+\node[circle, fill, inner sep=2pt, label=below left:{$z_1$}] (v1) at (0,0) {};
+\node[circle, fill, inner sep=2pt, label=below right:{$z_2$}] (v2) at (2,0) {};
+\node[circle, fill, inner sep=2pt, label=above:{$z_3$}] (v3) at (1,1.8) {};
 
-\draw[thick] (v1) -- node[below] {$\phi$} (v2);
-\draw[thick] (v2) -- node[right] {$\phi$} (v3);
-\draw[thick] (v3) -- node[left] {$\phi$} (v1);
-
-\node[below left] at (v1) {$z_1$};
-\node[below right] at (v2) {$z_2$};
-\node[above] at (v3) {$z_3$};
+\draw[thick] (v1) -- (v);
+\draw[thick] (v2) -- (v);
+\draw[thick] (v3) -- (v);
 \end{tikzpicture}
 \end{center}
 
-Each edge represents a propagator $\frac{1}{z_i - z_j}$, and each vertex contributes a factor of $W''' = 2$.
+Each edge represents a propagator $G(z_i, z_v) \sim \frac{1}{z_i - z_v}$, and the single cubic vertex contributes $W''' = 2\lambda_3$.
 
 \begin{proposition}[Explicit Formula for $m_3$; \ClaimStatusProvedHere]
 \label{prop:LG_m3_formula}
@@ -353,11 +350,15 @@ For superpotentials with higher-degree terms (e.g., $W(\phi) = \frac{1}{3}\phi^3
 \subsubsection{Cohomology and PVA Structure}
 
 \begin{proposition}[Cohomology of LG Cubic; \ClaimStatusProvedHere]
-Since the linear differential $Q$ on $\A_{\text{LG}}$ is the same as for the free theory (each $(\phi_n, \psi_n)$ is an acyclic doublet), the cohomology $H^\bullet(\A_{\text{LG}}, Q) = \C$ is one-dimensional. The Jacobian ring structure
+The full $A_\infty$ differential $m_1$ acts by multiplication by $W'(\phi) = \lambda_3 \phi^2$, so
+the cohomology is the Jacobian ring
 \begin{equation}
-\C[\phi]/(W'(\phi)) = \C[\phi]/(\phi^2)
+H^\bullet(\A_{\text{LG}}, m_1) \;\cong\; J(W) = \C[\phi]/(W'(\phi)) = \C[\phi]/(\lambda_3 \phi^2),
 \end{equation}
-emerges at the level of the descended PVA after accounting for the $A_\infty$ homotopy transfer: the operations $m_2$ and $m_3$ (which encode the superpotential) induce a nontrivial PVA structure on cohomology representatives.
+a $2$-dimensional algebra with basis $\{1, \phi\}$.
+(The higher modes $(\phi_n, \psi_n)$ for $n \geq 2$ form acyclic $m_1$-doublets.)
+The homotopy-transferred $A_\infty$ structure on $J(W)$ inherits a nonvanishing ternary
+operation $m_3^{J(W)}$ encoding the residual cubic coupling.
 \end{proposition}
 
 \subsection{Example III: Abelian Gauge Theory with Chern--Simons}
