@@ -40,7 +40,7 @@ Every chapter depends on Vol I's five theorems. Cross-references to Vol I labels
 - *Free multiplet*: all m_{k≥3} = 0 (no interaction vertices). The trivial case that calibrates signs.
 - *Landau-Ginzburg cubic*: truncation at m₃ by degree counting. The simplest interacting example.
 - *Abelian Chern-Simons*: boundary = û(1)_k, OPE computed directly from propagator.
-- Plus: *Virasoro* (truncation at m₇, Q² = 0, recursive m_k from BV master equation), *W₃* (classical YBE from λ-bracket Jacobi, central charge shift from ghost counting).
+- Plus: *Virasoro* (genuinely infinite A∞ -- all m_k != 0 via wheel diagrams, Q² = 0, recursive m_k from BV master equation), *W₃* (classical YBE from λ-bracket Jacobi, central charge shift from ghost counting).
 
 **IV. The Standard Landscape.** Three worked examples verify (H1)–(H4) and ground the abstract machinery: free multiplet, LG cubic, abelian CS, plus Virasoro and W₃.
 

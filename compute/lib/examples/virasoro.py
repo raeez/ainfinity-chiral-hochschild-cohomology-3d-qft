@@ -12,7 +12,7 @@ Key claims to verify:
 - This lambda-bracket satisfies PVA skew-symmetry
 - This lambda-bracket satisfies Jacobi identity
 - The coefficient c/12 (not c/2) in the lambda-bracket vs c/2 in OPE
-- Truncation: the A-infinity structure truncates at m_7
+- No truncation: the A-infinity structure is genuinely infinite (m_k != 0 for all k >= 3)
 
 Paper references: Section 20 (w-algebras.tex).
 

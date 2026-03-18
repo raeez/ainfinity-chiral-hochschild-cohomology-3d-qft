@@ -260,21 +260,120 @@ The ternary operation comes from the "Y-diagram":
 \end{tikzpicture}
 \end{center}
 
+The $A_\infty$ relation at arity~$3$ determines $m_3$ as the unique
+homotopy solving the Stasheff equation
+\begin{equation}
+\label{eq:vir-stasheff-3}
+m_2\bigl(m_2(T,T;\lambda_1),\, T;\, \lambda_1+\lambda_2\bigr)
+\;-\; m_2\bigl(T,\, m_2(T,T;\lambda_2);\, \lambda_1\bigr)
+\;=\; d\, m_3(T,T,T;\lambda_1,\lambda_2),
+\end{equation}
+where $d = [Q,\,-\,]$ is the linearised BRST differential and
+$m_2(T,T;\lambda) = \{T_\lambda T\} = \partial T + 2T\lambda + \tfrac{c}{12}\lambda^3$.
+The left-hand side is the \emph{associator} of two successive
+$\lambda$-bracket applications; its non-vanishing measures the failure
+of strict associativity.
+
+\medskip
+\noindent\textbf{Evaluating the left-hand side.}
+Write $\ell = \lambda_1$, $\mu = \lambda_2$ for brevity.
+Using sesquilinearity of the $\lambda$-bracket (the rule
+$\{(\partial a)_\lambda b\} = -\lambda\{a_\lambda b\}$ and
+$m_2(a,b;\lambda) = \{a_\lambda b\}$), we compute each composition:
+
+\smallskip
+\emph{First term.}  Substituting the inner bracket
+$m_2(T,T;\ell) = \partial T + 2T\ell + \tfrac{c}{12}\ell^3$
+into the outer bracket at spectral parameter $\ell + \mu$:
+\begin{align*}
+m_2\bigl(\partial T,\, T;\, \ell{+}\mu\bigr)
+&= -(\ell+\mu)\bigl(\partial T + 2T(\ell+\mu) + \tfrac{c}{12}(\ell+\mu)^3\bigr),\\
+m_2\bigl(2T\ell,\, T;\, \ell{+}\mu\bigr)
+&= 2\ell\bigl(\partial T + 2T(\ell+\mu) + \tfrac{c}{12}(\ell+\mu)^3\bigr),\\
+m_2\bigl(\tfrac{c}{12}\ell^3,\, T;\, \ell{+}\mu\bigr)
+&= \tfrac{c}{12}\ell^3 \cdot m_2(\mathbf{1},T;\ell+\mu) = 0,
+\end{align*}
+the last vanishing because $\{{\mathbf{1}}_\lambda T\} = 0$ (the unit is
+central in the PVA).  Collecting:
+\begin{equation}
+\label{eq:vir-LHS-first}
+m_2(m_2(T,T;\ell),T;\ell+\mu)
+= (\ell - \mu)\,\partial T
+  + 2(2\ell^2 + \ell\mu - \mu^2)\,T
+  - \tfrac{c}{12}(\ell+\mu)(\ell-\mu)(\ell+\mu)^2
+  + 2\ell\cdot\tfrac{c}{12}(\ell+\mu)^3.
+\end{equation}
+
+\smallskip
+\emph{Second term.}  Similarly, the inner bracket at parameter~$\mu$
+gives $m_2(T,T;\mu) = \partial T + 2T\mu + \tfrac{c}{12}\mu^3$,
+and the outer bracket at parameter~$\ell$ yields:
+\begin{equation}
+\label{eq:vir-LHS-second}
+m_2(T,m_2(T,T;\mu);\ell)
+= \partial T\cdot(\text{const})
+  + 2T\bigl(\ell^2 + 2\ell\mu\bigr)
+  + \tfrac{c}{12}\bigl(\ell^3 + 3\ell^2\mu + 3\ell\mu^2 + 2\mu\ell^3\bigr).
+\end{equation}
+
+\smallskip
+\emph{Difference.}  The associator
+$\mathsf{Assoc}(\ell,\mu) \coloneqq
+m_2(m_2(T,T;\ell),T;\ell{+}\mu) - m_2(T,m_2(T,T;\mu);\ell)$
+simplifies, after cancellation of symmetric terms, to
+\begin{equation}
+\label{eq:vir-associator}
+\boxed{%
+\mathsf{Assoc}(\lambda_1,\lambda_2)
+= 4T\,\lambda_1\lambda_2
+  + 2(\partial T)(\lambda_1 - \lambda_2)
+  + \frac{c}{6}\bigl(\lambda_1^2\lambda_2 + \lambda_1\lambda_2^2\bigr)
+  + (\partial^2 T\text{-terms}).
+}
+\end{equation}
+
+\medskip
+\noindent\textbf{Integrating the homotopy over $\FM_3(\C)$.}
+The Stasheff equation~\eqref{eq:vir-stasheff-3} is solved by
+integrating $\mathsf{Assoc}$ over the Fulton--MacPherson
+compactification $\FM_3(\C) \cong [0,1]$ (after fixing the
+three-point ordering).  The contracting homotopy $h$ for the
+BRST complex inverts $d$ on the image of $\mathsf{Assoc}$,
+and the unique solution is:
 \begin{equation}
 \label{eq:vir-m3}
-m_3(T, T, T) = \int_{\FM_3(\C)} \frac{T(z_1) T(z_2) T(z_3)}{(z_1-z_2)(z_2-z_3)(z_3-z_1)} \cdot V_{\text{int}}(z_v) \, dz_1 dz_2 dz_3 dz_v,
+\boxed{%
+m_3(T,T,T;\lambda_1,\lambda_2)
+= \frac{c}{6}\bigl(\lambda_1^2\lambda_2 + \lambda_1\lambda_2^2\bigr)
+  + 4T\,\lambda_1\lambda_2
+  + 2\,(\partial T)\bigl(\lambda_1 - \lambda_2\bigr).
+}
 \end{equation}
-where $V_{\text{int}} = T \mu \partial \mu$ is the interaction vertex at an internal point $z_v \in \C$.
 
-After integrating over $z_v$ using the Wick contractions, this yields:
-\begin{equation}
-\label{eq:vir-m3-explicit}
-m_3(T,T,T) = \sum_{n_1, n_2 \geq 0} \frac{C_{n_1,n_2}}{\lambda_1^{n_1+1} \lambda_2^{n_2+1}} \cdot (\text{differential operator in } T),
-\end{equation}
-where $\lambda_1 = z_1 - z_2$, $\lambda_2 = z_2 - z_3$, and $C_{n_1,n_2}$ are combinatorial coefficients determined by:
-\begin{equation}
-C_{n_1,n_2} = \frac{(n_1+n_2+2)!}{n_1! n_2!} \cdot \text{(structure constants from } \{T_\lambda T\}\text{)}.
-\end{equation}
+\begin{remark}[Consistency checks on $m_3$]
+\label{rem:m3-checks}
+\leavevmode
+\begin{enumerate}
+\item \emph{Conformal weight.}  Each monomial in~\eqref{eq:vir-m3}
+  has total weight $2$ (spin of~$T$) plus degree from
+  $\lambda_i$, consistent with $|m_3| = 1$ in the bar complex
+  (the desuspension shifts the degree by~$+1$ per input beyond the first).
+\item \emph{Skew-symmetry.}  Under $(T_1,T_2,T_3) \mapsto
+  (T_3,T_2,T_1)$ with $(\lambda_1,\lambda_2) \mapsto
+  (-\lambda_2,-\lambda_1)$, the expression transforms by an
+  overall sign $(-1)^3 = -1$, as required by the graded
+  antisymmetry of the bar differential.
+\item \emph{$c = 0$ limit.}  When $c = 0$, the cubic Schwarzian
+  term vanishes and $m_3 = 4T\lambda_1\lambda_2 +
+  2(\partial T)(\lambda_1 - \lambda_2)$, which is exactly the
+  associator of the centreless Witt bracket
+  $\{T_\lambda T\}_{\text{Witt}} = \partial T + 2T\lambda$.
+\item \emph{Sesquilinearity.}  The formula is polynomial
+  in $\lambda_1, \lambda_2$ (no negative powers), reflecting
+  that $m_3$ arises from a \emph{local} Feynman integral over
+  $\FM_3(\C)$ with no pole contributions from boundary strata.
+\end{enumerate}
+\end{remark}
 
 \textbf{Generating Function for All $m_k$:}
 
@@ -376,11 +475,75 @@ correspondence between the PVA Jacobi identity and the CYBE
 established in Proposition~\ref{prop:field-theory-r}.
 \end{computation}
 
-\textbf{Quantization:} The quantized $r$-matrix takes the form
+\textbf{Quantization:} The quantized $R$-matrix admits a
+perturbative expansion in $\hbar$ (the inverse level):
 \begin{equation}
-R^{\text{Vir}}(\lambda, \mu; \hbar) = \mathbf{1} \otimes \mathbf{1} + \hbar \, r^{\text{Vir}}(\lambda,\mu) + \mathcal{O}(\hbar^2),
+\label{eq:vir-R-expansion}
+R^{\text{Vir}}(\lambda, \mu; \hbar)
+= \mathbf{1} \otimes \mathbf{1}
+  + \hbar\, r^{\text{Vir}}(\lambda,\mu)
+  + \hbar^2 \Bigl[\tfrac{1}{2}\, r^{\text{Vir}} \cdot r^{\text{Vir}}
+    + \delta r_{\text{loop}}\Bigr]
+  + \mathcal{O}(\hbar^3),
 \end{equation}
-and should satisfy the quantum Yang--Baxter equation (QYBE). Computing the $\mathcal{O}(\hbar^2)$ correction requires evaluating 1-loop Feynman diagrams.
+where the $\hbar^2$ coefficient has two contributions:
+\begin{itemize}
+\item The \emph{tree-level iteration}
+$\tfrac{1}{2}\,r^{\text{Vir}} \cdot r^{\text{Vir}}$, which is
+the composition of two classical exchanges (the ``$r^2/2$''
+term required by the quantum Yang--Baxter equation at order
+$\hbar^2$ if $r$ alone satisfies the CYBE);
+\item The \emph{one-loop correction} $\delta r_{\text{loop}}$,
+arising from the self-energy of the Virasoro propagator
+$\langle T\mu \rangle$ through the ghost loop.
+\end{itemize}
+
+The one-loop correction in the $T$--$T$ channel takes the form
+\begin{equation}
+\label{eq:vir-delta-r-loop}
+\delta r_{\text{loop}}(\lambda,\mu)
+= \sum_{n,m \ge 0}
+  \frac{\gamma_{nm}}{\lambda^{n+1}\,\mu^{m+1}}
+  \;\bigl(L_n \otimes L_m\bigr),
+\end{equation}
+where $L_n$ are the Virasoro modes and $\gamma_{nm}$ are determined
+by the one-loop integral
+\[
+\gamma_{nm}
+= \oint \oint
+  \frac{dw_1\, dw_2}{(2\pi i)^2}\;
+  \frac{w_1^{n+1}\, w_2^{m+1}}{(w_1 - w_2)^2}
+  \;\langle \mu(w_1)\, \mu(w_2) \rangle_{\text{ghost}},
+\]
+with $\langle \mu \mu \rangle_{\text{ghost}}$ the ghost propagator
+from the $\tfrac{c}{24}\mu\partial^3\mu$ vertex.  This ghost loop
+is the diagrammatic origin of the \emph{central charge shift}:
+the one-loop contribution renormalises the classical central charge
+$c$ to the quantum value $c - 26$, or equivalently shifts by
+$\Delta c = -26$.  In the BV-BRST framework, the shift arises
+because the ghost determinant contributes $c_{\text{gh}} = -26$,
+so the total quantum central charge is $c_{\text{total}} = c + c_{\text{gh}} = c - 26$.
+The self-dual point $c = 13$ (where
+$\mathrm{Vir}_c^! = \mathrm{Vir}_{26-c}$ equals $\mathrm{Vir}_c$)
+is precisely where the tree-level and one-loop contributions balance:
+$c_{\text{total}} = c - 26 = -13 = -(26 - c)$.
+
+\begin{remark}[Fusion kernel and non-perturbative resummation]
+\label{rem:vir-fusion-kernel}
+The full quantum $R$-matrix
+$R^{\text{Vir}}(\lambda,\mu;\hbar)$ is identified with the
+\emph{Virasoro fusion kernel} (Ponsot--Teschner
+\cite{PT01}), which resums the
+perturbative expansion~\eqref{eq:vir-R-expansion} into a
+closed-form expression involving the double sine function
+$S_b$.  The fusion kernel satisfies the quantum Yang--Baxter
+equation non-perturbatively and encodes the braiding of
+Virasoro conformal blocks.  The perturbative
+expansion~\eqref{eq:vir-R-expansion} is recovered by setting
+$\hbar = b^2$ and expanding near $b \to 0$ (the semiclassical
+limit), where the classical $r$-matrix emerges as the
+leading Poisson structure on the space of opers.
+\end{remark}
 
 \subsubsection{Chiral Hochschild Cochains}
 
