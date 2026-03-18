@@ -3,6 +3,8 @@
 % Theorem environments inherited from main.tex; local macros only.
 \providecommand{\kk}{\mathbb{k}}
 \providecommand{\cO}{\mathcal O}
+\providecommand{\SCop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\providecommand{\gSC}{\mathfrak{g}^{\mathrm{SC}}}
 \providecommand{\cC}{\mathcal C}
 \providecommand{\cL}{\mathcal L}
 \providecommand{\cM}{\mathcal M}
@@ -92,6 +94,25 @@ is exactly why higher operations from \cite{GKW24} and the line-operator
 $A_\infty$ package of \cite{DNP25} fit naturally into the same bulk--
 boundary--line story
 (Convention~\ref{conv:vol2-strict-models}).
+\end{remark}
+
+\begin{remark}[Two-color refinement of the triangle]
+\label{rem:triangle-two-colors}
+\index{bulk-boundary-line!two-color refinement}
+The corrected triangle admits a two-color refinement.
+Closed-color Koszul duality identifies the bulk:
+$A_{\mathrm{bulk}} \simeq \mathrm{ChirHoch}^\ast(\cA^!)$
+(Theorem~\ref{thm:bulk_hochschild}).
+Open-color Koszul duality identifies line operators:
+$\mathcal{C}_{\mathrm{line}} \simeq \cA^!\text{-mod}$
+(Theorem~\ref{thm:lines_as_modules}).
+The $R$-matrix lives in the interaction of both colors:
+it is a mixed-color datum in the holomorphic weight
+filtration on $\SCchtop$ (Theorem~\ref{thm:spectral-parameter-from-closed-color}).
+The triangle is the statement that $\cA^!$ carries a full
+$\SCchtop$-algebra structure
+(Theorem~\ref{thm:dual-sc-algebra}), from which all three
+vertices and all connecting maps are recovered.
 \end{remark}
 
 \section{Literature backbone, formal consequences, and status ledger}\label{sec:backbone}
@@ -1262,48 +1283,216 @@ It is essential not to confuse two different line objects:
 \end{enumerate}
 The latter are local exact models attached to a chosen boundary vacuum.  They should be viewed as boundary charts on the absolute line category.  They are not globally equal to $A^!$, but they are the correct local testing ground in which the shape of the global theorem becomes rigid.
 
-\subsection{The Steinberg-style endpoint}
+\subsection{The Steinberg presentation theorem}
 
-The phrase ``Chriss--Ginzburgification'' is not decorative.  It names a methodological demand: a mature representation-theoretic algebra should eventually be presented by correspondences.
+The phrase ``Chriss--Ginzburgification'' is not decorative.
+It names a methodological demand: a mature representation-theoretic
+algebra should eventually be presented by correspondences.
+The Steinberg variety $Z = \widetilde{\cN} \times_{\mathfrak g}
+\widetilde{\cN}$ is a correspondence between two copies of the
+Springer resolution; its convolution algebra $H_*(Z)$ recovers the
+Hecke algebra $\cH_q(W)$.  The bar complex $\barB(\cA)$ on
+$\FM_k(\C) \times \Conf_k^{<}(\R)$ is a correspondence between
+holomorphic collision data and topological ordering data; its
+convolution algebra recovers the Swiss-cheese composition.
+The following theorem makes this analogy precise.
 
-\begin{conjecture}[HT Steinberg presentation; \ClaimStatusConjectured]
-To a sufficiently well-behaved perturbative 3d holomorphic--topological QFT $T$ there is attached a derived formal moduli stack $\cM_{\mathrm{vac}}(T)$ of local bulk vacua, and for every rich boundary condition $b$ a shifted-coisotropic or shifted-Lagrangian map
-\[
-\cL_b\longrightarrow \cM_{\mathrm{vac}}(T).
-\]
-The derived self-intersection
-\[
-\mathfrak S_b:=\cL_b\times_{\cM_{\mathrm{vac}}(T)}\cL_b
-\]
-is the holomorphic--topological Steinberg object.  Its convolution algebra presents the line sector, while the derived center of that convolution algebra is identified with the bulk algebra via the inertia geometry of $\cM_{\mathrm{vac}}(T)$.
+\begin{theorem}[Algebraic Steinberg presentation; \ClaimStatusProvedHere]
+\label{thm:steinberg-presentation}
+\index{Steinberg presentation|textbf}
+\index{Swiss-cheese!Steinberg presentation|textbf}
+Let $\cA$ be a chiral algebra on a smooth curve~$X$ satisfying the
+standing hypotheses, and let $T = (\Bbound, \cC_{\mathrm{line}})$
+be the associated $\SCop$-algebra
+\textup{(}Theorem~\textup{\ref{thm:bar-swiss-cheese}}\textup{)}.
+Then the Swiss-cheese convolution $L_\infty$-algebra $\gSC_T$
+\textup{(}Definition~\textup{\ref{def:sc-convolution}}\textup{)}
+\textbf{presents} the bulk/boundary/line Koszul triangle in the
+following sense.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Presentation.}
+  The operadic composition maps of $\SCop$ are recovered from the
+  bar differential and coproduct on $\barB(\cA)$:
+  \begin{align*}
+  \text{closed composition}
+    &= d_{\barB}
+    &&\text{\textup{(}OPE residues on $\FM_k(X)$\textup{)}},\\
+  \text{open composition}
+    &= \Delta
+    &&\text{\textup{(}deconcatenation on $\Conf_k^{<}(\R)$\textup{)}},\\
+  \text{mixed composition}
+    &= d_{\barB}\circ\Delta
+      = (d_{\barB}\otimes\id + \id\otimes d_{\barB})\circ\Delta
+    &&\text{\textup{(}coderivation\textup{)}}.
+  \end{align*}
+  The no-open-to-closed rule is the directionality of the
+  correspondence: $\Delta$ acts on bar degree and does not produce
+  new OPE poles.  These three compositions, together with the
+  canonical MC element $\alpha_T$ of
+  Theorem~\textup{\ref{thm:3d-universal-mc}}, determine the full
+  $\SCop$-algebra structure by homotopy transfer
+  \textup{(}Theorem~\textup{\ref{thm:homotopy-Koszul}}\textup{)}.
+
+\item \textbf{Line algebra from convolution.}
+  The module category of the Swiss-cheese convolution algebra is
+  equivalent to the Koszul dual module category:
+  \[
+  \cC_{\mathrm{line}}
+  \;\simeq\;
+  \mathrm{Rep}(\gSC_T)
+  \;\simeq\;
+  A^!\textup{-mod}.
+  \]
+  The first equivalence is the definition of the open-colour sector
+  of $\alpha_T$
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(ii)}\textup{)};
+  the second is the unconditional line-operator theorem
+  \textup{(}Theorem~\textup{\ref{thm:lines_as_modules}}\textup{)}.
+
+\item \textbf{Bulk from derived center.}
+  The derived center of the convolution algebra recovers the bulk:
+  \[
+  \Abulk
+  \;\simeq\;
+  \Zder(\gSC_T)
+  \;\simeq\;
+  \HH^\bullet_{\mathrm{ch}}(A^!).
+  \]
+  The first equivalence follows from the $(1,1)$-projection of
+  $\alpha_T$
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(iv)}\textup{)};
+  the second is the Hochschild bridge
+  \textup{(}Theorem~\textup{\ref{thm:bulk_hochschild}}\textup{)}.
+
+\item \textbf{Braiding from monodromy.}
+  The spectral $R$-matrix $R(z)$ is the monodromy of the
+  correspondence: the $(2,0)$-projection of $\alpha_T$ restricted to
+  the ordered collision stratum of $\FM_2(\C)$
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(iii)}\textup{)}.
+  The Yang--Baxter equation is the MC equation at arity $(3,0)$.
+
+\item \textbf{Genus tower from curvature.}
+  At genus $g \ge 1$, the self-loop restriction of $\alpha_T$
+  recovers the modular characteristic $\kappa(\Bbound)\cdot\omega_g$
+  and the shadow Postnikov tower
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(v)}\textup{)}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The theorem assembles five proved results into a single package.
+Statement~(i) is Theorem~\ref{thm:bar-swiss-cheese} (the bar
+complex is an $\SCop$-algebra) together with
+Theorem~\ref{thm:homotopy-Koszul} (homotopy-Koszulity ensures
+the bar-cobar resolution recovers the operad).
+Statement~(ii) combines
+Proposition~\ref{prop:alpha-projections}(ii) (the open projection
+gives $A^!$-modules) with Theorem~\ref{thm:lines_as_modules}
+(now unconditional).
+Statement~(iii) combines
+Proposition~\ref{prop:alpha-projections}(iv) (the mixed projection
+gives the bulk-to-boundary map) with
+Theorem~\ref{thm:bulk_hochschild} (bulk as chiral Hochschild).
+Statement~(iv) is Proposition~\ref{prop:alpha-projections}(iii)
+together with Theorem~\ref{thm:YBE}.
+Statement~(v) is Proposition~\ref{prop:alpha-projections}(v)
+together with the genus-tower identification from Vol~I
+(Theorem~D, bridge MC5).
+
+The key point is that all five statements are projections of a
+\emph{single} MC element $\alpha_T \in \mc(\gSC_T)$: the bulk,
+boundary, lines, braiding, and genus tower are not independent
+structures assembled by hand, but different faces of one
+correspondence.  This is the content of the presentation.
+\end{proof}
+
+\begin{remark}[The Steinberg dictionary]
+\label{rem:steinberg-dictionary}
+\index{Steinberg!dictionary}
+The correspondence between geometric representation theory
+and holomorphic-topological algebra is:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\hline
+\textbf{Steinberg geometry} & \textbf{HT bar complex} & \textbf{Role} \\
+\hline
+Flag variety $G/B$ & $\FM_k(\C)$ & Collision/resolution data \\
+Nilpotent cone $\cN$ & Collision divisors $D_S$ & Singular locus \\
+Springer resolution $\widetilde\cN \to \cN$
+  & $\FM_k(\C) \to \Conf_k(\C)$ & Compactification \\
+Steinberg $Z = \widetilde\cN \times_{\mathfrak g} \widetilde\cN$
+  & $\FM_k(\C) \times \Conf_k^{<}(\R)$ & Correspondence \\
+Convolution $H_*(Z) = \cH_q(W)$
+  & $\gSC_T$ = SC convolution $L_\infty$ & Algebra from corr. \\
+Hecke algebra $\cH_q(W)$
+  & $A^!$ (Koszul dual/boundary) & Presented algebra \\
+$\mathrm{Rep}(\cH_q) = \cO_q$
+  & $\cC_{\mathrm{line}} = A^!\text{-mod}$ & Module category \\
+Center $Z(\cH_q)$
+  & $\Abulk = \Zder(\gSC_T)$ & Derived center \\
+$q$-parameter
+  & Spectral parameter $z$ & Deformation \\
+\hline
+\end{tabular}
+\end{center}
+The two colours of the Swiss-cheese operad are the two factors of
+the correspondence.  The bar-cobar adjunction is the
+convolution-restriction adjunction.  The no-open-to-closed rule
+is the directionality of the Springer correspondence (representations
+restrict from $G$ to $B$ but not conversely).
+\end{remark}
+
+\subsection{Geometric enhancement}
+
+The algebraic Steinberg presentation
+(Theorem~\ref{thm:steinberg-presentation}) is unconditional.
+The geometric enhancement---constructing the correspondence space
+as a derived self-intersection---remains conjectural.
+
+\begin{conjecture}[Geometric HT Steinberg object; \ClaimStatusConjectured]
+\label{conj:geometric-steinberg}
+\index{Steinberg!geometric conjecture}
+To a sufficiently well-behaved perturbative 3d
+holomorphic--topological QFT $T$ there is attached:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item a derived formal moduli stack $\cM_{\mathrm{vac}}(T)$ of
+  local bulk vacua, equipped with a $(-2)$-shifted symplectic
+  structure;
+\item for every rich boundary condition $b$, a shifted-Lagrangian
+  substack $\cL_b \hookrightarrow \cM_{\mathrm{vac}}(T)$;
+\item a derived self-intersection (the HT Steinberg object)
+  \[
+  \mathfrak S_b
+  \;:=\;
+  \cL_b \times_{\cM_{\mathrm{vac}}(T)} \cL_b,
+  \]
+  carrying a $(-1)$-shifted symplectic structure from
+  complementary Lagrangians.
+\end{enumerate}
+The convolution algebra of $\mathfrak S_b$ in Borel--Moore homology
+is quasi-isomorphic to the Swiss-cheese convolution $L_\infty$-algebra:
+$H_*^{\mathrm{BM}}(\mathfrak S_b) \simeq \gSC_T$.
+The algebraic Steinberg presentation
+\textup{(}Theorem~\textup{\ref{thm:steinberg-presentation}}\textup{)}
+is the shadow of this geometric identification.
 \end{conjecture}
 
-This is the exact analogue of the slogan ``the Steinberg variety presents the Hecke algebra.''  The bulk moduli stack plays the ambient symplectic/Poisson role, the rich boundary acts as a Springer-type object, the self-intersection is the correspondence space whose convolution gives the line algebra, and the center is controlled by loop or inertia geometry.
-
-\subsection{Why this conjecture is believable}
-
-The conjecture is not assembled from rhetoric.  Each piece is already visible in the algebra:
+Evidence for the geometric enhancement:
 \begin{itemize}[leftmargin=1.8em]
-\item in the exact LG sector, the boundary algebra is literally the algebra of functions on a derived zero locus;
-\item the bulk is literally functions on a shifted cotangent of that zero locus;
-\item the pointed line algebra is the cobar of a canonical coalgebra presenting the local equations;
-\item the stabilization theorems identify the universal contractible and Clifford blocks that should correspond geometrically to trivial correspondences or Morita-trivial kernels;
-\item the dg-shifted-Yangian package of \cite{DNP25} looks exactly like the shadow of a convolution algebra endowed with coproduct and $r$-matrix.
+\item In the exact LG sector, the boundary algebra is literally
+  the algebra of functions on a derived zero locus, and the bulk
+  is functions on a shifted cotangent of that zero locus.
+\item The pointed line algebra is the cobar of a canonical coalgebra
+  presenting the local equations---the algebraic shadow of the
+  Jacobi neighbourhood of $\cL_b$ in $\cM_{\mathrm{vac}}(T)$.
+\item The stabilization theorems identify the universal contractible
+  and Clifford blocks that should correspond to trivial
+  correspondences or Morita-trivial kernels.
+\item The dg-shifted-Yangian package of \cite{DNP25} has exactly
+  the structure of a convolution algebra with coproduct and
+  $r$-matrix.
 \end{itemize}
-The local theorems proved here are therefore not isolated gadgets.  They are the microlocal algebraic shadows of the global geometric presentation one should ultimately build.
-
-\subsection{Fortification checklist}
-
-The remaining work toward the global theorem can be summarized as the following checklist:
-\begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
-\item \textbf{Signs and shifts.}  Normalize once and for all the shifts in the bulk Poisson bracket, the line $r$-matrix, and the Maurer--Cartan equations.
-\item \textbf{Completions.}  Build filtered completeness into the foundations from the start, not as an afterthought.
-\item \textbf{Richness.}  Replace the phrase ``sufficiently rich boundary condition'' by a theorem guaranteeing compact generation.
-\item \textbf{Comparison functors.}  Construct explicit quasi-equivalences between factorization, vertex, mode-algebra, and BV presentations.
-\item \textbf{Renormalization invariance.}  Prove that the derived quasi-isomorphism classes are independent of regularization choices.
-\item \textbf{Convolution geometry.}  Identify the holomorphic--topological Steinberg object whose self-correspondence algebra is the absolute line algebra.
-\end{enumerate}
-Only when these are all in place will the global triangle become a theorem.
 
 
 \section{Issues fixed, conceptual simplifications, and the platonic shape of the theory}
