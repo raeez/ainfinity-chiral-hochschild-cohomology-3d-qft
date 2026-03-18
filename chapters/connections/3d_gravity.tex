@@ -1,0 +1,327 @@
+\providecommand{\Abulk}{A_{\mathrm{bulk}}}
+\providecommand{\Bbound}{B_{\partial}}
+\providecommand{\Zder}{\operatorname{Z}_{\mathrm{der}}}
+\providecommand{\mc}{\operatorname{MC}}
+\providecommand{\gSC}{\mathfrak{g}^{\mathrm{SC}}}
+\providecommand{\Res}{\operatorname{Res}}
+\providecommand{\HH}{\operatorname{HH}}
+\providecommand{\RHom}{\operatorname{RHom}}
+
+\section{Three-dimensional gravity from $E_1$-chiral Koszul duality}
+\label{sec:3d-gravity}
+\index{3d gravity|textbf}
+\index{Chern--Simons!gravitational}
+\index{Brown--Henneaux central charge}
+\index{BTZ black hole}
+
+Three-dimensional Einstein gravity with negative cosmological
+constant is classically equivalent to $SL(2,\R) \times SL(2,\R)$
+Chern--Simons theory.  This section constructs the full bar-cobar
+and Swiss-cheese framework for this theory, producing the Virasoro
+boundary algebra, the dual line category, the gravitational
+$R$-matrix, and the 3d MC element $\alpha_T$ whose shadow tower is
+the perturbative expansion of quantum gravity around AdS$_3$.
+
+
+\subsection{The Chern--Simons formulation}
+\label{subsec:cs-gravity}
+
+Let $\ell > 0$ be the AdS radius and $G > 0$ Newton's constant.
+The dreibein $e^a_\mu$ and spin connection $\omega^a_\mu$
+($a = 0, 1, 2$, $\mu = 0, 1, 2$) combine into two
+$\mathfrak{sl}(2,\R)$-valued connections
+\begin{equation}\label{eq:gravity-cs-connection}
+A_\pm^a \;=\; \omega^a \;\pm\; \frac{1}{\ell}\,e^a.
+\end{equation}
+The Einstein--Hilbert action with cosmological constant
+$\Lambda = -1/\ell^2$ becomes
+\begin{equation}\label{eq:gravity-cs-action}
+S_{\mathrm{EH}}
+\;=\;
+\frac{1}{16\pi G}\int \bigl(R + \frac{2}{\ell^2}\bigr)
+\operatorname{vol}
+\;=\;
+S_{\mathrm{CS}}[A_+;\, k] \;-\; S_{\mathrm{CS}}[A_-;\, k],
+\end{equation}
+where the Chern--Simons level is
+\begin{equation}\label{eq:cs-level-gravity}
+k \;=\; \frac{\ell}{4G}
+\end{equation}
+and the CS action is
+\[
+S_{\mathrm{CS}}[A;\, k]
+\;=\;
+\frac{k}{4\pi}\int
+\operatorname{tr}\!\bigl(
+  A \wedge dA + \tfrac{2}{3}\,A \wedge A \wedge A
+\bigr).
+\]
+The trace is the Killing form of $\mathfrak{sl}(2,\R)$,
+normalised so that $\operatorname{tr}(J_a J_b) =
+\tfrac{1}{2}\eta_{ab}$.  Flat connections $F_\pm = dA_\pm +
+A_\pm \wedge A_\pm = 0$ correspond to constant-curvature
+geometries: AdS$_3$ is the connection $A_\pm = g_\pm^{-1}dg_\pm$
+for $g_\pm \in SL(2,\R)$.
+
+
+\subsection{The boundary Virasoro algebra}
+\label{subsec:boundary-virasoro}
+
+Place the theory on $\R_+ \times \C$, with the half-line
+$\R_+ = \{t \ge 0\}$ as the topological direction and
+$\C = \{z\}$ as the holomorphic direction.  The boundary
+$\{t = 0\} \times \C$ carries a chiral algebra.
+
+\begin{theorem}[Brown--Henneaux; \ClaimStatusProvedElsewhere]
+\label{thm:brown-henneaux}
+\index{Brown--Henneaux central charge|textbf}
+The asymptotic symmetry algebra of $SL(2,\R)$ Chern--Simons
+theory at level~$k$ on $\R_+ \times \C$ is the Virasoro algebra
+at central charge
+\begin{equation}\label{eq:brown-henneaux}
+c \;=\; 6k \;=\; \frac{3\ell}{2G}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The boundary conditions at $t = 0$ fix the leading asymptotic
+behaviour of $A_z$; the residual gauge transformations preserving
+these boundary conditions form a Lie algebra whose Poisson bracket
+with respect to the CS symplectic form is the Virasoro algebra.
+The central charge arises from the Schwinger term in the Poisson
+bracket: $\{T(z), T(w)\}_{\mathrm{PB}} = (c/2)\delta'''(z-w) +
+2T(w)\delta'(z-w) + T'(w)\delta(z-w)$ with $c = 6k$.
+\end{proof}
+
+The boundary algebra is therefore $\Bbound = \mathrm{Vir}_c$ with
+$c = 6k$.  The bar complex $\barBch(\mathrm{Vir}_c)$ carries the
+infinite-depth $\Ainf$ structure of the Virasoro algebra:
+\begin{equation}\label{eq:vir-bar-ops}
+m_2(T,T;\lambda) = \frac{c}{2}\lambda^3 + 2T\lambda + \partial T,
+\qquad
+m_3 \ne 0, \quad m_4 \ne 0, \quad \ldots
+\end{equation}
+The shadow Postnikov tower $\Theta_{\mathrm{Vir}_c}^{\le r}$
+(Vol~I, \S\ref{subsec:shadow-postnikov-tower-intro}) has infinite
+depth: $o_5(\mathrm{Vir}_c) \ne 0$, and every finite truncation
+carries new data.
+
+
+\subsection{Koszul duality and the dual line category}
+\label{subsec:koszul-gravity}
+
+\begin{proposition}[Gravitational Koszul dual;
+\ClaimStatusProvedHere]
+\label{prop:gravity-koszul-dual}
+\index{Koszul dual!Virasoro!gravitational}
+The Koszul dual of $\mathrm{Vir}_c$ is $\mathrm{Vir}_{26-c}$
+\textup{(}Vol~I, Theorem~\textup{\ref{thm:virasoro-koszul-dual-early}}\textup{)}.
+For 3d gravity at level $k = \ell/(4G)$:
+\[
+\Bbound^!
+\;=\;
+\mathrm{Vir}_{26 - 6k}.
+\]
+At the semiclassical limit $k \to \infty$ ($G \to 0$,
+$c \to \infty$): $c' = 26 - c \to -\infty$, the dual Virasoro has
+large negative central charge.  Self-duality at
+$c = 13$, i.e., $k = 13/6$.
+\end{proposition}
+
+Line operators along $\R_+ \times \{0\}$ are
+$\mathrm{Vir}_{26-c}$-modules.  For $c \gg 26$: the dual central
+charge $c' = 26 - c \ll 0$ places the line category in the
+strongly quantum regime of the Virasoro algebra.  This is the
+algebraic manifestation of UV/IR mixing in AdS$_3$/CFT$_2$:
+semiclassical gravity on the bulk side corresponds to strongly
+quantum Virasoro representation theory on the boundary side.
+
+The Koszul complementarity (Vol~I, Theorem~C) gives
+\[
+\kappa(\mathrm{Vir}_c) + \kappa(\mathrm{Vir}_{26-c})
+\;=\;
+\frac{c - 26}{2} + \frac{(26-c) - 26}{2}
+\;=\; 0.
+\]
+The gravitational anomaly and the dual anomaly cancel.
+
+
+\subsection{The gravitational $R$-matrix}
+\label{subsec:gravity-r-matrix}
+
+\begin{definition}[Gravitational $R$-matrix]
+\label{def:gravity-r-matrix}
+\index{R-matrix@$R$-matrix!gravitational}
+\index{Virasoro fusion kernel}
+The spectral braiding on $\mathrm{Vir}_{26-c}$-modules is the
+\emph{Virasoro fusion kernel}: for highest-weight modules
+$V_{h_1}, V_{h_2}$,
+\[
+R_{h_1, h_2}(z) \colon V_{h_1} \otimes V_{h_2}
+\;\xrightarrow{\;\sim\;}\;
+V_{h_2} \otimes V_{h_1}
+\]
+is the Virasoro $6j$-symbol evaluated at spectral
+separation~$z$.
+\end{definition}
+
+\begin{proposition}[Gravitational YBE; \ClaimStatusProvedHere]
+\label{prop:gravity-ybe}
+The Virasoro fusion kernel satisfies the Yang--Baxter equation
+\[
+R_{12}(z_{12})\,R_{13}(z_{13})\,R_{23}(z_{23})
+\;=\;
+R_{23}(z_{23})\,R_{13}(z_{13})\,R_{12}(z_{12})
+\]
+as a consequence of the pentagon identity for Virasoro fusion
+matrices, which is the boundary cancellation on $\FM_3(\C)$
+\textup{(}Theorem~\textup{\ref{thm:YBE}}\textup{)}.
+\end{proposition}
+
+The classical limit $c \to \infty$ of the Virasoro fusion kernel
+is the Liouville reflection coefficient.  The leading-order
+classical $r$-matrix $r(z) = \alpha_T|_{(2,0)}$ encodes graviton
+exchange between two conical defects in AdS$_3$: two massive
+particles at boundary positions $z_1, z_2$ interact through a bulk
+graviton, and the spectral parameter $z = z_1 - z_2$ is the
+boundary separation.
+
+
+\subsection{The 3d MC element for quantum gravity}
+\label{subsec:gravity-mc}
+
+\begin{theorem}[Gravitational MC element; \ClaimStatusProvedHere]
+\label{thm:gravity-mc}
+\index{universal MC element!3d!gravitational}
+The $SL(2,\R)$ CS theory at level~$k$ on $\R_+ \times \C$
+determines a MC element
+$\alpha_{\mathrm{grav}} \in \mc(\gSC_T)$ whose projections are:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Closed face:} $\mathrm{Vir}_c$ with
+  $c = 6k$ and the full infinite-depth $\Ainf$ structure.
+\item \emph{Open face:} $\mathrm{Vir}_{26-c}\text{-mod}$
+  (highest-weight modules at the dual central charge).
+\item \emph{Spectral $R$-matrix:} the Virasoro fusion kernel
+  $R_{h_1,h_2}(z)$, satisfying YBE by
+  Proposition~\textup{\ref{prop:gravity-ybe}}.
+\item \emph{Bulk-to-boundary:}
+  $\Abulk \simeq \Zder(\mathrm{Vir}_c)$.
+\item \emph{Genus face:}
+  $\alpha_{\mathrm{grav}}|_{\text{closed}} =
+  \Theta_{\mathrm{Vir}_c}$.  The genus expansion
+  $\sum_g \hbar^g \alpha_{\mathrm{grav}}^{(g)}$ is the loop
+  expansion of quantum gravity:
+  \begin{itemize}
+  \item genus~$0$: tree-level classical geometry,
+  \item genus~$1$: one-loop gravitational anomaly
+    ($\kappa = (c-26)/2$),
+  \item genus~$2$: two-loop modular interference,
+  \item genus~$g$: $g$-loop quantum gravity corrections.
+  \end{itemize}
+\item \emph{PVA descent:}
+  $\{T_\lambda T\} = (c/2)\lambda^3 + 2T\lambda + \partial T$
+  (the Virasoro PVA).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:3d-universal-mc}, $\alpha_T$ exists for any
+$\SCchtop$-algebra satisfying~(H1)--(H4).  The
+$SL(2,\R)$ CS theory satisfies these hypotheses (the BV-BRST
+complex is well defined on $\R_+ \times \C$).  Each projection is
+the specialisation of Proposition~\ref{prop:alpha-projections} to
+$\Bbound = \mathrm{Vir}_c$:
+(i) is the Virasoro $\Ainf$ structure;
+(ii) is the Virasoro Koszul dual module category
+(Proposition~\ref{prop:gravity-koszul-dual});
+(iii) is the fusion kernel (Definition~\ref{def:gravity-r-matrix});
+(iv)-(v) are the Vol~I Virasoro MC element and its genus tower;
+(vi) is PVA descent (Theorem~\ref{thm:pva-from-ainf}).
+\end{proof}
+
+
+\subsection{The shadow tower as gravitational perturbation theory}
+\label{subsec:gravity-shadow-tower}
+
+The Virasoro shadow Postnikov tower of Vol~I acquires a
+gravitational interpretation:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lll}
+\textbf{Shadow} & \textbf{Algebra (Vol~I)} & \textbf{Gravity} \\
+\hline
+$\kappa = (c-26)/2$
+  & modular characteristic
+  & one-loop gravitational anomaly \\[2pt]
+$\mathfrak{C}(\mathrm{Vir}_c)$
+  & cubic shadow
+  & three-graviton vertex \\[2pt]
+$\mathfrak{Q} = 10/[c(5c+22)]$
+  & quartic contact
+  & four-graviton contact interaction \\[2pt]
+$o_5 \ne 0$
+  & quintic obstruction
+  & five-graviton vertex (nonvanishing) \\[2pt]
+$h_K \approx 0.567$
+  & completion entropy
+  & growth rate of graviton vertices
+\end{tabular}
+\end{center}
+
+\begin{remark}[Gravitational resonances]
+\label{rem:gravity-resonances}
+The quartic contact invariant $\mathfrak{Q} = 10/[c(5c+22)]$
+has poles at $c = 0$ and $c = -22/5$.  In the gravitational
+interpretation:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $c = 0$: $k = 0$, the zero-level limit.  Newton's constant
+  $G = \ell/(4k) \to \infty$: the gravitational coupling diverges.
+  The quartic vertex blows up because gravity becomes
+  infinitely strong.
+\item $c = -22/5$: the Lee--Yang minimal model.  This is the
+  critical point $k = -11/15$ of the gravitational partition
+  function, where a level-$4$ Kac null vector appears in the
+  Virasoro representation theory and the shadow tower reorganises.
+\end{enumerate}
+\end{remark}
+
+
+\subsection{BTZ black holes as MC deformations}
+\label{subsec:btz}
+
+\begin{definition}[BTZ deformation]
+\label{def:btz-deformation}
+\index{BTZ black hole!as MC deformation}
+A BTZ black hole of mass~$M$ and angular momentum~$J$ in
+AdS$_3$ corresponds to a highest-weight state
+$|h, \bar h\rangle$ with
+\[
+h \;=\; \frac{M\ell + J}{2}, \qquad
+\bar h \;=\; \frac{M\ell - J}{2}.
+\]
+In the bar-cobar framework: the BTZ black hole is a MC
+deformation $\delta\alpha \in \gSC_T$ of the vacuum element
+$\alpha_{\mathrm{grav}}$, satisfying the linearised MC equation
+\[
+D_{\alpha_{\mathrm{grav}}}(\delta\alpha) \;=\; 0,
+\]
+where $D_{\alpha_{\mathrm{grav}}} = D +
+[\alpha_{\mathrm{grav}}, -]$ is the twisted differential.
+\end{definition}
+
+\begin{proposition}[Cardy formula from MC moduli;
+\ClaimStatusConjectured]
+\label{prop:cardy-mc}
+\index{Cardy formula!from MC moduli}
+The asymptotic density of MC deformations of
+$\alpha_{\mathrm{grav}}$ at high weight $h \gg 1$ reproduces the
+Cardy formula:
+\[
+S_{\mathrm{BTZ}}
+\;=\;
+2\pi\sqrt{\frac{ch}{6}}
+\;+\;
+2\pi\sqrt{\frac{c\bar h}{6}}.
+\]
+\end{proposition}
