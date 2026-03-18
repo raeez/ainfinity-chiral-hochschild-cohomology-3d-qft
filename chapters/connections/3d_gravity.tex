@@ -83,28 +83,175 @@ c \;=\; 6k \;=\; \frac{3\ell}{2G}.
 \end{equation}
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-The boundary conditions at $t = 0$ fix the leading asymptotic
-behaviour of $A_z$; the residual gauge transformations preserving
-these boundary conditions form a Lie algebra whose Poisson bracket
-with respect to the CS symplectic form is the Virasoro algebra.
-The central charge arises from the Schwinger term in the Poisson
-bracket: $\{T(z), T(w)\}_{\mathrm{PB}} = (c/2)\delta'''(z-w) +
-2T(w)\delta'(z-w) + T'(w)\delta(z-w)$ with $c = 6k$.
+\begin{proof}
+\emph{Step~1: boundary conditions.}\enspace
+Write the $\mathfrak{sl}(2,\R)$ generators as $J_0, J_\pm$ with
+$[J_0, J_\pm] = \pm J_\pm$, $[J_+, J_-] = 2J_0$.  On
+$\R_+ \times \C$ with coordinates $(t, z, \bar z)$, decompose
+$A = A_t\,dt + A_z\,dz + A_{\bar z}\,d\bar z$.  The
+holomorphic--topological twist sets $A_{\bar z} = 0$ (holomorphic
+gauge).  The boundary condition at $t = 0$ is
+\begin{equation}\label{eq:gravity-bc}
+A_z\big|_{t=0}
+\;=\;
+\begin{pmatrix} 0 & T(z) \\ 1 & 0 \end{pmatrix}
+\;=\;
+J_- + T(z)\,J_+,
+\end{equation}
+where $T(z)$ is an arbitrary holomorphic function---the stress
+tensor.  The lower-left entry is fixed to $1$ by the AdS$_3$
+asymptotics (it is the leading term of the Fefferman--Graham
+expansion of the dreibein); the upper-right entry $T(z)$ is the
+free boundary data.
+
+\emph{Step~2: residual gauge transformations.}\enspace
+A gauge transformation $g = \exp(\epsilon(z)\,J_+)$ preserves the
+form~\eqref{eq:gravity-bc} and acts on $T$ by
+\begin{equation}\label{eq:gravity-gauge-T}
+\delta_\epsilon T(z)
+\;=\;
+\epsilon'(z)\,T(z) + 2\epsilon(z)\,T'(z)
++ \frac{c}{12}\,\epsilon'''(z),
+\end{equation}
+where $c = 6k$.  This is the infinitesimal conformal
+transformation with Schwarzian anomaly.
+
+\emph{Step~3: the Poisson bracket.}\enspace
+The Chern--Simons symplectic form on the boundary is
+\[
+\omega_{\mathrm{CS}}
+\;=\;
+\frac{k}{2\pi}\int_\C
+\operatorname{tr}(\delta A_z \wedge \delta A_{\bar z})\,
+dz \wedge d\bar z.
+\]
+In the holomorphic gauge $A_{\bar z} = 0$, the constraint
+$F_{z\bar z} = 0$ reduces the phase space to the space of $T(z)$,
+and the induced Poisson bracket on boundary data is
+\begin{equation}\label{eq:virasoro-poisson}
+\{T(z),\, T(w)\}_{\mathrm{PB}}
+\;=\;
+\frac{c}{2}\,\delta'''(z-w)
+\;+\;
+2T(w)\,\delta'(z-w)
+\;+\;
+T'(w)\,\delta(z-w).
+\end{equation}
+This is the Virasoro OPE
+$T(z)\,T(w) \sim \frac{c/2}{(z-w)^4} + \frac{2T(w)}{(z-w)^2}
++ \frac{\partial T(w)}{z-w}$
+in distribution form.  The central charge $c = 6k = 3\ell/(2G)$.
 \end{proof}
 
-The boundary algebra is therefore $\Bbound = \mathrm{Vir}_c$ with
-$c = 6k$.  The bar complex $\barBch(\mathrm{Vir}_c)$ carries the
-infinite-depth $\Ainf$ structure of the Virasoro algebra:
-\begin{equation}\label{eq:vir-bar-ops}
-m_2(T,T;\lambda) = \frac{c}{2}\lambda^3 + 2T\lambda + \partial T,
-\qquad
-m_3 \ne 0, \quad m_4 \ne 0, \quad \ldots
+\subsection{The bar complex of the gravitational boundary algebra}
+\label{subsec:gravity-bar}
+
+The boundary algebra $\Bbound = \mathrm{Vir}_c$ has a single
+strong generator $T$ of conformal weight~$2$.  Its bar complex
+$\barBch(\mathrm{Vir}_c) = T^c(s^{-1}\overline{\mathrm{Vir}}_c)$
+is the cofree coalgebra on the desuspended augmentation ideal,
+with the derivative tower $\{T, \partial T, \partial^2 T, \ldots\}$
+as cogenerators.
+
+\subsubsection*{The binary operation $m_2$}
+
+From the OPE $T(z)\,T(w) \sim \frac{c/2}{(z-w)^4} +
+\frac{2T(w)}{(z-w)^2} + \frac{\partial T(w)}{z-w}$, the bar
+differential on a degree-$2$ element is
+\[
+d_{\barB}[s^{-1}T \,|\, s^{-1}T]
+\;=\;
+\Res_{z_1 = z_2}\!\left[
+  \left(\frac{c/2}{(z_{12})^4}
+  + \frac{2T}{(z_{12})^2}
+  + \frac{\partial T}{z_{12}}\right)
+  \cdot \frac{dz_{12}}{z_{12}}
+\right].
+\]
+The residue extracts the coefficient of $z_{12}^{-1}$:
+\[
+d_{\barB}[s^{-1}T \,|\, s^{-1}T]
+\;=\;
+\partial T.
+\]
+In spectral parametrisation (Borel transform
+$(z_{12})^{-n-1} \mapsto \lambda^{(n)}/n!$):
+\begin{equation}\label{eq:gravity-m2}
+m_2(T, T;\, \lambda)
+\;=\;
+\frac{c}{2}\,\lambda^3
+\;+\; 2T\,\lambda
+\;+\; \partial T.
 \end{equation}
-The shadow Postnikov tower $\Theta_{\mathrm{Vir}_c}^{\le r}$
-(Vol~I, \S\ref{subsec:shadow-postnikov-tower-intro}) has infinite
-depth: $o_5(\mathrm{Vir}_c) \ne 0$, and every finite truncation
-carries new data.
+The three terms correspond to the three poles of the TT OPE:
+the quartic pole gives $\frac{c}{2}\lambda^3$ (the central
+extension), the double pole gives $2T\lambda$ (the conformal
+weight), and the simple pole gives $\partial T$ (the derivative).
+
+\subsubsection*{The ternary operation $m_3$}
+
+The $n = 3$ Stasheff relation on $\FM_3(\C)$ requires $m_3$ to
+correct the failure of $m_2$ to be associative.  Compute:
+\begin{align*}
+&m_2(m_2(T, T;\lambda_{12}), T;\, \lambda_{13})
+\;-\;
+m_2(T, m_2(T, T;\lambda_{23});\, \lambda_{12})
+\\
+&\qquad =\;
+m_2\bigl(\tfrac{c}{2}\lambda_{12}^3 + 2T\lambda_{12} +
+\partial T,\; T;\, \lambda_{13}\bigr)
+\;-\;
+m_2\bigl(T,\; \tfrac{c}{2}\lambda_{23}^3 + 2T\lambda_{23} +
+\partial T;\, \lambda_{12}\bigr).
+\end{align*}
+The terms involving $T$ in the first argument of $m_2$ produce:
+$m_2(T, T;\lambda_{13}) = \frac{c}{2}\lambda_{13}^3 + 2T\lambda_{13}
++ \partial T$ multiplied by $2\lambda_{12}$; and similarly for the
+second.  The difference is proportional to
+$\lambda_{12} - \lambda_{23}$, which is the spectral substitution
+from $\FM_3(\C)$: the internal parameter of the colliding pair
+is absorbed into the effective parameter of the composite.
+
+The homotopy $m_3(T, T, T;\, \lambda_{12}, \lambda_{23})$ is the
+integral over the interval $\FM_3(\C) \cong [0, 1]$ that
+interpolates between the two boundary contributions $D_{12}$ and
+$D_{23}$.  Its explicit value is determined by the sesquilinearity
+constraint and the requirement that
+$m_1(m_3) + m_2(m_2, \id) - m_2(\id, m_2) + m_3(m_1, \id, \id)
++ \cdots = 0$.  For the Virasoro algebra, $m_3 \ne 0$ because the
+$TT$ OPE has a quartic pole: the four-fold singularity prevents the
+binary operation from being associative, and the correction
+lives on the one-dimensional moduli space $\FM_3(\C)$.
+
+\subsubsection*{The quartic operation $m_4$ and the contact invariant}
+
+At $n = 4$, $\FM_4(\C)$ is a compact surface with corners.  The
+bar differential involves $m_2$, $m_3$, and $m_4$.  The quartic
+operation $m_4$ is the integral over the interior of $\FM_4(\C)$;
+its obstruction class is the quartic contact invariant
+\begin{equation}\label{eq:gravity-quartic}
+\mathfrak{Q}^{\mathrm{contact}}_{\mathrm{Vir}}
+\;=\;
+\frac{10}{c(5c+22)}
+\;=\;
+\frac{10}{6k(30k+22)}
+\;=\;
+\frac{5}{3k(15k+11)}.
+\end{equation}
+At $c = 0$ ($k = 0$, $G = \infty$): the contact invariant
+diverges.  At $c = -22/5$ ($k = -11/15$): the Kac determinant
+at level~$4$ vanishes, a null vector appears, and the shadow tower
+reorganises.
+
+\subsubsection*{Infinite depth: the non-termination theorem}
+
+The Virasoro shadow tower does not terminate:
+$o_5(\mathrm{Vir}_c) \ne 0$ for generic~$c$
+(Vol~I, Theorem~\ref{thm:nms-virasoro-quartic-explicit}).  Every
+finite truncation $\Theta_{\mathrm{Vir}_c}^{\le r}$ carries
+genuinely new gravitational data: the $r$-th shadow is the
+$r$-graviton vertex correction, and no finite set of vertices
+determines the full perturbative quantum gravity.
 
 
 \subsection{Koszul duality and the dual line category}
