@@ -54,6 +54,12 @@
 \def\hyper@nopatch@caption{}
 \makeatother
 \usepackage[unicode,pdfencoding=auto,psdextra]{hyperref}
+% Cross-volume label import from Vol I
+\usepackage{xr-hyper}
+\makeatletter
+\@ifundefined{XR@ext}{}{}
+\makeatother
+\externaldocument[V1-]{../chiral-bar-cobar/main}
 \usepackage{geometry}
 \geometry{top=1.2in, bottom=1.2in, left=1.25in, right=1.25in, footskip=0.5in}
 \setlength{\headheight}{28pt}
@@ -240,6 +246,20 @@
 % HT-specific
 \newcommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch,top}}}
 \newcommand{\OHT}{C_\ast\!\bigl(W(\SCchtop)\bigr)}
+
+% Shared macros used across multiple chapters
+\providecommand{\Zder}{\operatorname{Z}_{\mathrm{der}}}
+\providecommand{\Abulk}{A_{\mathrm{bulk}}}
+\providecommand{\Bbound}{B_{\partial}}
+\providecommand{\gSC}{\mathfrak{g}^{\mathrm{SC}}}
+\providecommand{\RHom}{\operatorname{RHom}}
+\providecommand{\Der}{\operatorname{Der}}
+\providecommand{\Perf}{\operatorname{Perf}}
+\providecommand{\lines}{\mathsf{Lines}}
+\providecommand{\im}{\operatorname{im}}
+\providecommand{\coker}{\operatorname{coker}}
+\providecommand{\Cl}{\operatorname{Cl}}
+\providecommand{\dCrit}{\operatorname{dCrit}}
 
 % Shorthand
 \newcommand{\hh}{\hbar}
@@ -690,44 +710,32 @@ examples but not proved in general:
 
 \input{chapters/theory/introduction}
 
-% ======================================================================
-%
-%                       PLATONIC INTRODUCTION
-%
-% The refounded editorial posture for Volume II: every strict dg structure
-% is the visible spine of a larger homotopy-coherent world.  The full
-% Swiss-cheese/bulk-boundary-line architecture read through the modular
-% L-infinity lens.
-%
-% ======================================================================
-
-% \input{platonic_introduction_volume_II} % removed: editorial instructions, not monograph content
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{From the Bar Complex to the Swiss-Cheese Operad}
+\label{part:swiss-cheese}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent
-Volume~I's bar complex $\barB^{\mathrm{ch}}(\cA)$ carries two structures: a
-differential $d_{\barB}$ (from OPE residues on $\FM_k(\C)$) and
-a coassociative coproduct~$\Delta$ (from ordered deconcatenation of
-tensor factors).  The differential sees the holomorphic direction;
-the coproduct sees the topological direction.  Together they make
-the bar complex a factorization coalgebra on
-$\FM_k(\C) \times \Conf_k(\R)$---an algebra over the Swiss-cheese
-operad $\SCchtop$.  This part identifies the operad, extracts
-the concrete higher operations $m_k$ that the bar complex encodes,
-and shows that BV quantization of holomorphic--topological theories
-on $\C \times \R$ produces exactly these bar complexes.
+This part identifies the two-colored Swiss-cheese operad $\SCchtop$,
+proves that the bar complex of Volume~I is an $\SCchtop$-algebra,
+extracts the concrete higher operations~$m_k$, and shows that BV
+quantization of holomorphic--topological theories on $\C \times \R$
+produces exactly these bar complexes.  The raviolo vertex
+algebra---the algebraic avatar of the $\C \times \R$ geometry---is
+constructed from the Swiss-cheese structure via \v{C}ech/Thom--Sullivan
+descent.
 
 \input{chapters/theory/foundations}
 \input{chapters/theory/locality}
 \input{chapters/theory/axioms}
 \input{chapters/theory/equivalence}
 \input{chapters/theory/bv-construction}
+\input{chapters/theory/raviolo}
+\input{chapters/theory/raviolo-restriction}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{The Descent Calculus}
+\label{part:descent}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent
@@ -742,48 +750,45 @@ Volume~I.  \emph{Genus descent}: the curved bar complex
 $\barB^{(g)}(\cA)$ at genus~$g$ produces a family of curved
 Swiss-cheese algebras over $\overline{\mathcal{M}}_g$, with
 curvature $\kappa(\cA) \cdot \omega_g$ controlled by Volume~I's
-Theorem~D.  The convolution Lie algebra
-$\Hom(\barB(\cA), \cA)$---whose Maurer--Cartan elements are the
-twisting morphisms of Volume~I---governs deformations via the brace
-algebra on $\FM(\C) \times \Conf(\R)$.
+Theorem~D.
 
 \input{chapters/theory/fm-calculus}
 \input{chapters/theory/pva-descent-repaired}
-%\input{chapters/theory/pva-preview}  % commented out: duplicate labels resolved by repaired section
-\input{chapters/connections/hochschild}
-\input{chapters/connections/bar-cobar-review}
-\input{chapters/connections/brace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Dualities and the Bulk-Boundary-Line Triangle}
+\part{The Bulk-Boundary-Line Core}
+\label{part:bbl-core}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent
-Bar--cobar duality in the two-colored setting yields three further
-constructions.  The spectral braiding chapter extracts the spectral
+The convolution Lie algebra
+$\Hom(\barB(\cA), \cA)$---whose Maurer--Cartan elements are the
+twisting morphisms of Volume~I---governs deformations via the brace
+algebra on $\FM(\C) \times \Conf(\R)$.  Chiral Hochschild cohomology
+identifies the bulk algebra as the derived center of the boundary.
+Bar--cobar duality in the two-colored setting yields the spectral
 $R$-matrix $R(z)$ solving Yang--Baxter directly from the
-$\lambda$-bracket.  The bulk/boundary/line chapter
-develops the full $3$d holomorphic-topological theory: the corrected
-triangle
+$\lambda$-bracket, the line category
+$\mathcal{C}_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}$,
+and the corrected Koszul triangle
 $A_{\mathrm{bulk}}\simeq
 \operatorname{Z}_{\mathrm{der}}(B_\partial)\simeq
-\operatorname{HH}^\bullet(A^!)$
-from first principles of locality, Koszul duality, and Hochschild
-theory, with the microlocal algebraic core proved in the exact
-boundary-linear sector.  The celestial boundary transfer chapter
-lifts this to celestial and twisted holography via Kaluza--Klein
-reduction.
+\operatorname{HH}^\bullet(A^!)$.
+The celestial boundary transfer chapter lifts this to celestial and
+twisted holography via Kaluza--Klein reduction.
 
+\input{chapters/connections/hochschild}
+\input{chapters/connections/brace}
+\input{chapters/connections/bar-cobar-review}
 \input{chapters/connections/line-operators}
-\input{chapters/connections/spectral-braiding}
-\input{chapters/connections/ht_bulk_boundary_line}
-\input{chapters/connections/celestial_boundary_transfer}
-\input{chapters/connections/physical_origins}
-\input{chapters/connections/holomorphic_topological}
-\input{chapters/connections/bv_ht_physics}
+\input{chapters/connections/spectral-braiding-core}
+\input{chapters/connections/ht_bulk_boundary_line_core}
+\input{chapters/connections/celestial_boundary_transfer_core}
+\input{chapters/connections/ht_physical_origins}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{The Standard Landscape}
+\part{The Standard HT Landscape}
+\label{part:examples}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent
@@ -793,15 +798,12 @@ both a Volume~I theorem and a Volume~II physical identification.
 Three further families test the bar-complex bridge between the
 volumes.  The free multiplet has $m_k = 0$ for $k \geq 3$:
 the bar complex is strictly coassociative, the Swiss-cheese algebra
-is formal, and the $\R$-factorization is exact---this is Volume~I's
-Heisenberg atom lifted to $\C \times \R$.  The Landau--Ginzburg
-model has nontrivial $m_3$ (a genuine $\Ainf$ correction): the bar
-complex acquires higher coderivations, the shifted PVA is
-nontrivial, and the homotopy transfer theorem of Volume~I produces
+is formal, and the $\R$-factorization is exact.  The Landau--Ginzburg
+model has nontrivial $m_3$: the bar complex acquires higher
+coderivations, and the homotopy transfer theorem of Volume~I produces
 the transferred operations as tree-level Feynman sums.  Abelian
 Chern--Simons with boundary produces an explicit spectral
-$R$-matrix $R(z)$ solving Yang--Baxter---the braided atom that
-Volume~I's Yangian chapter studies from the Koszul duality side.
+$R$-matrix $R(z)$ solving Yang--Baxter.
 The $\mathcal{W}$-algebra computations connect to Volume~I's
 Drinfeld--Sokolov framework: the bar-cobar adjunction commutes
 with DS reduction, so the full Swiss-cheese structure descends
@@ -809,75 +811,99 @@ through the BRST functor.
 
 \input{chapters/examples/rosetta_stone}
 \input{chapters/examples/examples-computing}
-\input{chapters/examples/examples-complete}
+\input{chapters/examples/examples-complete-proved}
 \input{chapters/examples/examples-worked}
-\input{chapters/examples/w-algebras}
+\input{chapters/examples/w-algebras-virasoro}
+\input{chapters/examples/w-algebras-w3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{Quantization and Holography}
+\part{Quantization and Obstruction Theory}
+\label{part:quantization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \noindent
-Volume~I's five main theorems establish modular Koszul duality.
-This part computes its three-dimensional content.
+\emph{Given a classical Poisson vertex algebra, does the logarithm have
+an exponential?}  The affine case is already a theorem: half-space BV
+quantization produces the affine Kac--Moody vertex algebra at a shifted
+level, with Drinfeld--Sokolov reduction transporting the modulus to
+Virasoro and~$\mathcal{W}_3$.  The planted-forest $L_\infty$ model
+on~$\FM_3$ isolates the first nonlinear obstruction.  Three-dimensional
+gravity provides the first test of the full obstruction tower.
 
-The quantization question comes first: \emph{given a classical Poisson
-vertex algebra, does the logarithm have an exponential?}  The affine
-case is already a theorem: half-space BV quantization produces the
-affine Kac--Moody vertex algebra at a shifted level, with
-Drinfeld--Sokolov reduction transporting the modulus to Virasoro
-and~$\mathcal{W}_3$.  The planted-forest $L_\infty$ model on~$\FM_3$
-isolates the first nonlinear obstruction.
-
-\input{chapters/connections/modular_pva_quantization}
+\input{chapters/connections/modular_pva_quantization_core}
 \input{chapters/connections/affine_half_space_bv}
 \input{chapters/connections/fm3_planted_forest_synthesis}
-
-\medskip\noindent
-The holographic question comes second.  A three-dimensional
-holomorphic--topological theory on $\C \times \R$ produces three
-algebraic objects: a bulk chiral algebra, a boundary vertex algebra,
-and a line category.  The relationship between them is
-\emph{anomaly-completed Koszul duality}: the transgression algebra
-$B_\Theta$ of Volume~I's universal class packages the obstruction
-into a single dg algebra with genus-Clifford completion.
-
-The holographic programme proceeds through four movements.  First,
-Yang--Mills boundary packages with
-instanton completion and screening, reducing the mass-gap
-question to a screening domination estimate internal to the
-formalism.  Second, celestial and twisted holography made
-modular via~$\Theta_\cA$.  Third, logarithmic monodromy
-from shifted KZ connections on
-$\FM_k(\C) \times \Conf_k(\R)$, where the $A_\infty$
-collision theory and the HT associator realize the genus
-tower of Volume~I as an analytic object.  Fourth, the
-anomaly-completed Koszul duality principle itself: the
-bulk--boundary--line triangle
-$A_{\mathrm{bulk}} \simeq Z_{\mathrm{der}}(\text{boundary})
-\simeq \mathrm{HH}^\bullet(\cA^!)$ as a single
-transgression algebra, with the secondary anomaly
-$u = \eta^2$ controlling the genus dichotomy (Morita-trivial
-after inverting~$u$, exterior $H_1(\Sigma_g)$ modulo~$u$).
-
 \input{chapters/connections/3d_gravity}
-\input{chapters/connections/ym_synthesis}
-\input{chapters/connections/celestial_holography}
-\input{chapters/connections/log_ht_monodromy}
-\input{chapters/connections/anomaly_completed_topological_holography}
-
-% From dg-shifted Yangians to spectral factorization quantum groups.
-\input{chapters/connections/dg_shifted_factorization_bridge}
-
-% Ordered associative chiral Koszul duality (diagonal bicomodule, open trace).
-\input{chapters/connections/ordered_associative_chiral_kd}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CONCLUSION AND STATUS
+\part{The Ordered/Open Sector and Transport}
+\label{part:ordered}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+The ordered associative side of chiral Koszul duality---the
+$E_1$-colored wing of the Swiss-cheese operad---carries its own
+bar--cobar theory, diagonal bicomodule, and open trace.  This part
+develops ordered associative chiral Koszul duality as an equal
+partner to the commutative/chiral wing, and connects it to
+dg-shifted Yangians and spectral factorization quantum groups.
+
+\input{chapters/connections/ordered_associative_chiral_kd_core}
+\input{chapters/connections/dg_shifted_factorization_bridge}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Holographic and Celestial Frontier}
+\label{part:holography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+A three-dimensional holomorphic--topological theory on
+$\C \times \R$ produces three algebraic objects: a bulk chiral
+algebra, a boundary vertex algebra, and a line category.  The
+relationship between them is \emph{anomaly-completed Koszul duality}:
+the transgression algebra $B_\Theta$ of Volume~I's universal class
+packages the obstruction into a single dg algebra with
+genus-Clifford completion.  This part develops the holographic
+programme through Yang--Mills boundary packages, celestial and
+twisted holography, logarithmic monodromy, and the anomaly-completed
+Koszul duality principle itself.
+
+\input{chapters/connections/ym_synthesis_core}
+\input{chapters/connections/celestial_holography_core}
+\input{chapters/connections/log_ht_monodromy_core}
+\input{chapters/connections/anomaly_completed_core}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{Extensions, Conditional Results, and Frontier}
+\label{part:frontier}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent
+The chapters in this part extend the proved core of
+Parts~I--VII into conditional, conjectural, and frontier territory.
+Every result here either depends on unproved analytic hypotheses
+beyond (H1)--(H4), carries conjectural status, or develops
+directions that are not yet fully resolved.  No earlier part
+depends on material in this part.
+
+% --- Frontier extensions from core chapter splits ---
+\input{chapters/connections/spectral-braiding-frontier}
+\input{chapters/connections/ht_bulk_boundary_line_frontier}
+\input{chapters/connections/celestial_boundary_transfer_frontier}
+\input{chapters/examples/examples-complete-conditional}
+\input{chapters/examples/w-algebras-frontier}
+\input{chapters/connections/modular_pva_quantization_frontier}
+\input{chapters/connections/ordered_associative_chiral_kd_frontier}
+\input{chapters/connections/ym_synthesis_frontier}
+\input{chapters/connections/celestial_holography_frontier}
+\input{chapters/connections/log_ht_monodromy_frontier}
+\input{chapters/connections/anomaly_completed_frontier}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part*{Conclusion and Aftermatter}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{chapters/connections/conclusion}
-\input{chapters/connections/concordance}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % APPENDICES
@@ -885,8 +911,6 @@ after inverting~$u$, exterior $H_1(\Sigma_g)$ modulo~$u$).
 
 \appendix
 
-\input{chapters/theory/raviolo}
-\input{chapters/theory/raviolo-restriction}
 \input{appendices/brace-signs}
 \input{appendices/orientations}
 \input{appendices/fm-proofs}

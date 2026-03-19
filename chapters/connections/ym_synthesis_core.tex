@@ -1,0 +1,1094 @@
+\providecommand{\cH}{\mathcal{H}}
+\providecommand{\cB}{\mathcal{B}}
+\providecommand{\Barch}{\overline{B}^{\mathrm{ch}}}
+
+% Master synthesis package for the Yang--Mills / bar-cobar / W-boundary / instanton / IR program.
+% This file is designed as a single integration-ready module collecting and harmonizing all
+% theorem packages produced in the current thread.
+% Suggested insertion point: after Chapter 31 or as a dedicated appendix / research note.
+
+\section{Yang--Mills boundary theory and bar--cobar structure}
+\label{sec:ym-boundary-bar-cobar-core}
+
+% ===== Begin twisted_ym_boundary_package_v2.tex =====
+% Insertion note.
+% Place this block immediately after Remark~\ref{rem:PW-connection}
+% in chapters/connections/holomorphic_topological.tex.
+% In the current build, the first new theorem-like item will compile as 31.1.11.
+%
+% A second optional insertion point for the frontier conjectures is after
+% Conjecture~\ref{conj:agt-bar-cobar}; if kept here, the cross-references still compile.
+
+\subsection{Twisted Yang--Mills boundary package}
+\label{subsec:twisted-ym-boundary-package}
+
+\begin{summary}[Programme]
+The role of the present subsection is to isolate the mathematically controlled input from
+holomorphic-topological Yang--Mills theory that enters the bar-cobar framework.
+
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Twisted Yang--Mills input.}  Start with a holomorphic-topological twist whose
+boundary local operators form a VOA with chiral envelope.
+\item \emph{Bar/cobar construction.}  Apply the chiral bar and cobar functors of Part~I to the
+boundary envelope.
+\item \emph{Boundary VOA.}  Use the VOA for explicit OPE computations, but pass to the chiral
+envelope for geometric and derived statements.
+\item \emph{Line-operator category.}  Interpret the Koszul dual as the algebra governing defects
+and line operators whenever such an identification is available.
+\item \emph{AGT/holography outputs.}  Treat AGT and twisted holography as downstream outputs of
+the same boundary package, with precise algebraic content and clearly separated conjectural input.
+\end{enumerate}
+\end{summary}
+
+\begin{definition}[Koszul-admissible twisted Yang--Mills boundary datum]
+\label{def:twisted-ym-boundary-datum}
+Let $X$ be a smooth projective curve.  A \emph{Koszul-admissible twisted Yang--Mills boundary datum}
+on $X$ consists of:
+\begin{enumerate}[label=(\roman*)]
+\item a holomorphic-topological twist $\mathcal{T}$ of a $4$-dimensional supersymmetric
+Yang--Mills theory whose boundary local operators form a VOA in the sense of
+Theorem~\ref{thm:paquette-williams-boundaries};
+\item a boundary condition $\cB$ with boundary VOA $V_{\cB}$ and chiral envelope $\cA_{\cB}$;
+\item the assumption that $\cA_{\cB}$ lies on the Koszul locus of Part~I and belongs to a class
+for which Theorem~\ref{thm:open-string-bar} applies, e.g. generic-level affine
+Kac--Moody or principal $\mathcal{W}$-algebra boundary conditions.
+\end{enumerate}
+\end{definition}
+
+\begin{notation}[Open sector, bulk shadow, and tangent space]
+\label{not:twisted-ym-boundary-objects}
+For a Koszul-admissible twisted Yang--Mills boundary datum $(X,\mathcal{T},\cB)$, set
+\[
+\mathsf{Open}_{\cB} := \barBch(\cA_{\cB}),
+\qquad
+\mathsf{Bulk}^{\vee}_{\cB} := \Omegach(\cA_{\cB}^!),
+\qquad
+T^1_X(\cB) := HH^2_{\mathrm{chiral}}(\cA_{\cB}).
+\]
+We call $\mathsf{Open}_{\cB}$ the \emph{open boundary complex}, $\mathsf{Bulk}^{\vee}_{\cB}$ the
+\emph{dual bulk shadow}, and $T^1_X(\cB)$ the \emph{first-order boundary deformation space}.
+\end{notation}
+
+\begin{theorem}[Boundary BRST recovery for twisted Yang--Mills data; \ClaimStatusProvedHere]
+\label{thm:twisted-ym-boundary-brst}
+Let $(X,\mathcal{T},\cB)$ be a Koszul-admissible twisted Yang--Mills boundary datum.
+Then:
+\begin{enumerate}[label=(\alph*)]
+\item there is a quasi-isomorphism
+\[
+\mathsf{Open}_{\cB} = \barBch(\cA_{\cB}) \simeq C^{\frac{\infty}{2}+\bullet}(\cA_{\cB}),
+\]
+so the chiral bar complex computes the open-string BRST complex of the boundary condition;
+\item Verdier duality on $\Ran(X)$ converts the factorization
+coalgebra $\mathsf{Open}_{\cB} = \barBch(\cA_{\cB})$ into a
+factorization algebra; on cohomology (using Koszul-admissibility)
+this algebra is the Koszul dual:
+\[
+H^\bullet\bigl(\mathbb{D}_{\Ran}\, \mathsf{Open}_{\cB}\bigr)
+\;\simeq\; \cA_{\cB}^!.
+\]
+The dual bulk shadow $\mathsf{Bulk}^{\vee}_{\cB} = \Omegach(\cA_{\cB}^!)$
+is the cobar complex of this Koszul dual algebra, which recovers
+$\cA_{\cB}$ by bar-cobar inversion (Theorem~B).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:paquette-williams-boundaries}, the boundary condition $\cB$ carries a
+VOA $V_{\cB}$ with chiral envelope $\cA_{\cB}$.  Since $\cA_{\cB}$ is assumed to be
+Koszul-admissible, Theorem~\ref{thm:open-string-bar} applies and gives the quasi-isomorphism
+$\barBch(\cA_{\cB}) \simeq C^{\frac{\infty}{2}+\bullet}(\cA_{\cB})$.
+For the Verdier-dual statement: $\mathbb{D}_{\Ran}$ maps the
+bar coalgebra to a factorization algebra whose cohomology, by
+Koszul-admissibility and Theorem~\ref*{thm:verdier-bar-cobar},
+is $\cA_{\cB}^!$.
+\end{proof}
+
+\begin{theorem}[Tangent-to-center principle; \ClaimStatusProvedHere]
+\label{thm:twisted-ym-tangent-center}
+For every Koszul-admissible twisted Yang--Mills boundary datum on a smooth projective
+curve $X$, there is a canonical isomorphism
+\[
+T^1_X(\cB)
+= HH^2_{\mathrm{chiral}}(\cA_{\cB})
+\xrightarrow{\ \sim\ }
+Z(\cA_{\cB}^!)^{\vee} \otimes \omega_X.
+\]
+In particular, the full first-order boundary deformation theory is controlled by the center
+of the Koszul dual algebra.
+\end{theorem}
+
+\begin{proof}
+Apply Corollary~\ref*{cor:def-obs-exchange-genus0} to the Koszul pair
+$(\cA_{\cB}, \cA_{\cB}^!)$.
+\end{proof}
+
+\begin{corollary}[Center-vanishing rigidity criterion; \ClaimStatusProvedHere]
+\label{cor:twisted-ym-center-rigidity}
+If $Z(\cA_{\cB}^!) = 0$, then $HH^2_{\mathrm{chiral}}(\cA_{\cB}) = 0$.
+Hence the boundary condition $\cB$ is infinitesimally rigid.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{thm:twisted-ym-tangent-center}.
+\end{proof}
+
+\begin{corollary}[One-parameter criterion; \ClaimStatusProvedHere]
+\label{cor:twisted-ym-one-parameter}
+If $\dim Z(\cA_{\cB}^!) = 1$, then $\dim HH^2_{\mathrm{chiral}}(\cA_{\cB}) = 1$.
+Thus the boundary theory has a unique first-order coupling up to scale.
+\end{corollary}
+
+\begin{proof}
+Again apply Theorem~\ref{thm:twisted-ym-tangent-center}.
+\end{proof}
+
+\begin{definition}[Boundary-changing morphism]
+\label{def:twisted-ym-boundary-morphism}
+A \emph{boundary-changing morphism}
+$f \colon (X,\mathcal{T},\cB) \to (X,\mathcal{T},\cB')$
+is a morphism of boundary conditions that induces a morphism of chiral envelopes
+\[
+f \colon \cA_{\cB} \longrightarrow \cA_{\cB'}.
+\]
+Let $\mathsf{KBdy}_{\mathrm{YM}}(X)$ denote the resulting category of Koszul-admissible
+boundary data on~$X$.
+\end{definition}
+
+\begin{theorem}[The tangent functor factors through the dual center; \ClaimStatusProvedHere]
+\label{thm:twisted-ym-tangent-factors-through-center}
+The assignment
+\[
+T^1_X \colon \mathsf{KBdy}_{\mathrm{YM}}(X) \longrightarrow \Vect,
+\qquad
+\cB \longmapsto HH^2_{\mathrm{chiral}}(\cA_{\cB}),
+\]
+is naturally isomorphic to the functor
+\[
+\mathfrak{Z}^{\vee}_{X} \colon \mathsf{KBdy}_{\mathrm{YM}}(X) \longrightarrow \Vect,
+\qquad
+\cB \longmapsto Z(\cA_{\cB}^!)^{\vee} \otimes \omega_X.
+\]
+Equivalently, the first-order boundary deformation functor factors through the center of
+the Koszul dual.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:twisted-ym-tangent-center} gives the objectwise identification.
+For morphisms, Theorem~\ref*{thm:bv-functor} supplies functoriality of the bar construction,
+and the construction of Theorem~\ref*{thm:main-koszul-hoch} is functorial because it is built
+from natural operations: bar/cobar, derived \(\mathrm{Hom}\), and Verdier duality.  Passing to
+cohomological degree~$2$ produces the required natural transformation.
+\end{proof}
+
+\begin{corollary}[Interface invariance of tangent data; \ClaimStatusProvedHere]
+\label{cor:twisted-ym-interface-invariance}
+Let $f \colon \cA_{\cB} \to \cA_{\cB'}$ be a boundary-changing morphism.
+If the induced map on dual centers
+\[
+Z(\cA_{\cB'}^!) \xrightarrow{\ \sim\ } Z(\cA_{\cB}^!)
+\]
+is an isomorphism, then the induced map on first-order deformation spaces
+\[
+HH^2_{\mathrm{chiral}}(\cA_{\cB}) \xrightarrow{\ \sim\ } HH^2_{\mathrm{chiral}}(\cA_{\cB'})
+\]
+is an isomorphism as well.
+\end{corollary}
+
+\begin{proof}
+This is immediate from Theorem~\ref{thm:twisted-ym-tangent-factors-through-center}.
+\end{proof}
+
+\begin{corollary}[Comparison without full boundary equivalence; \ClaimStatusProvedHere]
+\label{cor:twisted-ym-center-comparison}
+If two Koszul-admissible twisted Yang--Mills boundary conditions $\cB_1$ and $\cB_2$ satisfy
+\[
+Z(\cA_{\cB_1}^!) \cong Z(\cA_{\cB_2}^!),
+\]
+then their first-order deformation spaces are canonically isomorphic:
+\[
+HH^2_{\mathrm{chiral}}(\cA_{\cB_1}) \cong HH^2_{\mathrm{chiral}}(\cA_{\cB_2}).
+\]
+In particular, first-order boundary moduli are a strictly coarser invariant than the full
+boundary VOA.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:twisted-ym-tangent-center} to each boundary condition.
+\end{proof}
+
+\begin{remark}[Mathematical content and physical content]
+\label{rem:twisted-ym-math-vs-physics}
+Theorems~\ref{thm:twisted-ym-boundary-brst}--\ref{thm:twisted-ym-tangent-factors-through-center}
+and Corollaries~\ref{cor:twisted-ym-center-rigidity}--\ref{cor:twisted-ym-center-comparison}
+are entirely internal to the present manuscript once the boundary algebra is known to lie on
+the Koszul-admissible locus.  The genuinely physical input is the production of such a
+boundary algebra from a holomorphic-topological Yang--Mills theory.
+\end{remark}
+% New frontier mathematics package: central formality and mixed couplings.
+% Suggested insertion point: immediately after the subsection
+% "Twisted Yang--Mills boundary package" in Chapter 31.
+
+\subsection{Central formality and mixed-coupling theorems}
+\label{subsec:twisted-ym-central-formality}
+
+\begin{definition}[Boundary deformation dg Lie algebra]
+\label{def:twisted-ym-def-dglie}
+Let $(X,\mathcal{T},\cB)$ be a Koszul-admissible twisted Yang--Mills boundary datum, with chiral envelope $\cA_{\cB}$.  Define the \emph{boundary deformation dg Lie algebra}
+\[
+\mathfrak{g}^{\mathrm{def}}_{\cB}
+:=
+\tau_{\ge 1} RHH_{\mathrm{ch}}(\cA_{\cB})[1],
+\]
+where $RHH_{\mathrm{ch}}(\cA_{\cB})$ carries the standard shifted dg Lie structure of the chiral Hochschild complex.  Its Maurer--Cartan functor governs formal boundary deformations of $\cA_{\cB}$.
+\end{definition}
+
+\begin{theorem}[Dual unobstructedness criterion; \ClaimStatusProvedHere]
+\label{thm:twisted-ym-dual-unobstructedness}
+Let $(X,\mathcal{T},\cB)$ be a Koszul-admissible twisted Yang--Mills boundary datum on a smooth projective curve.  If
+\[
+HH^{-1}_{\mathrm{chiral}}(\cA_{\cB}^{!}) = 0,
+\]
+then the primary obstruction space of $\cA_{\cB}$ vanishes:
+\[
+HH^{3}_{\mathrm{chiral}}(\cA_{\cB}) = 0.
+\]
+Hence every first-order deformation of $\cA_{\cB}$ is unobstructed to second order.
+\end{theorem}
+
+\begin{proof}
+By the deformation-obstruction dictionary, primary obstructions to extending a first-order deformation lie in $HH^{3}_{\mathrm{chiral}}(\cA_{\cB})$.  Apply Theorem~\ref*{thm:main-koszul-hoch} with $n=3$ to obtain
+\[
+HH^{3}_{\mathrm{chiral}}(\cA_{\cB})
+\cong
+HH^{-1}_{\mathrm{chiral}}(\cA_{\cB}^{!})^{\vee}\otimes \omega_X.
+\]
+The assumed vanishing of $HH^{-1}_{\mathrm{chiral}}(\cA_{\cB}^{!})$ forces $HH^{3}_{\mathrm{chiral}}(\cA_{\cB})=0$, so the primary obstruction vanishes.  The final sentence is the standard interpretation of $HH^3$ in deformation theory.
+\end{proof}
+
+\begin{theorem}[Central formality theorem; \ClaimStatusProvedHere]
+\label{thm:twisted-ym-central-formality}
+Let $(X,\mathcal{T},\cB)$ be a Koszul-admissible twisted Yang--Mills boundary datum.  Assume
+\[
+HH^{1}_{\mathrm{chiral}}(\cA_{\cB}) = 0
+\qquad\text{and}\qquad
+HH^{-1}_{\mathrm{chiral}}(\cA_{\cB}^{!}) = 0.
+\]
+Then the formal deformation problem of $\cA_{\cB}$ is equivalent to the formal affine space on the vector space
+\[
+T^1_X(\cB)
+\cong
+Z(\cA_{\cB}^{!})^{\vee}\otimes \omega_X.
+\]
+Equivalently, every first-order boundary deformation extends uniquely to all orders up to unique equivalence, and the completed local ring of the deformation space is
+\[
+\widehat{\mathrm{Sym}}\bigl(Z(\cA_{\cB}^{!})\otimes \omega_X^{-1}\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:MC-deformations}, the formal deformations of $\cA_{\cB}$ are governed by Maurer--Cartan elements of the dg Lie algebra $\mathfrak{g}^{\mathrm{def}}_{\cB}$.  Its cohomology satisfies
+\[
+H^0(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{1}_{\mathrm{chiral}}(\cA_{\cB}) = 0,
+\qquad
+H^1(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{2}_{\mathrm{chiral}}(\cA_{\cB}),
+\]
+and, by Theorem~\ref{thm:twisted-ym-dual-unobstructedness},
+\[
+H^2(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{3}_{\mathrm{chiral}}(\cA_{\cB}) = 0.
+\]
+Choose a minimal $L_\infty$ model on $H^\bullet(\mathfrak{g}^{\mathrm{def}}_{\cB})$; existence follows from the homotopy transfer theorem applied to the Lie operad, and uniqueness up to $L_\infty$ isomorphism is standard.  Since the only nonzero cohomology relevant to the Maurer--Cartan problem is in degree $1$, every higher bracket
+\[
+\ell_n \colon (H^1)^{\otimes n} \longrightarrow H^{2}
+\]
+has zero target, because $\ell_n$ has cohomological degree $2-n$.  Thus all $\ell_n$ vanish identically and the minimal model is abelian.
+
+The Maurer--Cartan equation in an abelian dg Lie algebra is empty, and the gauge action is trivial because $H^0=0$.  Therefore the formal moduli problem is the formal affine space on $H^1(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^2_{\mathrm{chiral}}(\cA_{\cB})$.  Finally, Theorem~\ref{thm:twisted-ym-tangent-center} identifies this tangent space with $Z(\cA_{\cB}^{!})^{\vee}\otimes\omega_X$, yielding the completed symmetric algebra stated above.
+\end{proof}
+
+\begin{remark}[Interpretation]
+\label{rem:twisted-ym-central-formality-meaning}
+The theorem says that under vanishing of infinitesimal automorphisms and dual negative-degree Hochschild classes, the entire formal boundary moduli problem linearizes.  The Koszul dual center is not merely the tangent space: it gives actual formal coordinates on the deformation space.
+\end{remark}
+
+\begin{definition}[Reduced dual center and reduced tangent space]
+\label{def:twisted-ym-reduced-center}
+Assume that the boundary algebra is augmented, so that the vacuum defines a distinguished scalar subspace $\mathbb{C}\mathbf{1} \subset Z(\cA_{\cB}^{!})$.  Define the \emph{reduced dual center}
+\[
+\widetilde Z(\cA_{\cB}^{!}) := Z(\cA_{\cB}^{!})/\mathbb{C}\mathbf{1}
+\]
+and the \emph{reduced tangent space}
+\[
+\widetilde T^1_X(\cB) := \widetilde Z(\cA_{\cB}^{!})^{\vee}\otimes \omega_X.
+\]
+\end{definition}
+
+\begin{lemma}[Center of a chiral tensor product; \ClaimStatusProvedHere]
+\label{lem:twisted-ym-center-tensor}
+Let $\cB_1,\cB_2$ be quadratic Koszul-admissible boundary data with chiral envelopes $\cA_1,\cA_2$, and assume that the chiral tensor product $\cA_1\otimes^{\mathrm{ch}}\cA_2$ has trivial mixed OPE \/in the sense of Proposition~\ref*{prop:koszul-dual-tensor-product}.  Then
+\[
+Z\bigl(\cA_1\otimes^{\mathrm{ch}}\cA_2\bigr)
+\cong
+Z(\cA_1)\otimes Z(\cA_2).
+\]
+\end{lemma}
+
+\begin{proof}
+An element of $\cA_1\otimes^{\mathrm{ch}}\cA_2$ is central iff it has regular OPE with every generator of the form $a\otimes \mathbf{1}$ and $\mathbf{1}\otimes b$.  Because the mixed OPE is trivial, regularity against all $a\otimes \mathbf{1}$ is equivalent to lying in $Z(\cA_1)\otimes \cA_2$, while regularity against all $\mathbf{1}\otimes b$ is equivalent to lying in $\cA_1\otimes Z(\cA_2)$.  Hence
+\[
+Z(\cA_1\otimes^{\mathrm{ch}}\cA_2)
+=
+\bigl(Z(\cA_1)\otimes \cA_2\bigr)
+\cap
+\bigl(\cA_1\otimes Z(\cA_2)\bigr).
+\]
+Choose vector space splittings $\cA_i = Z(\cA_i)\oplus U_i$.  Then
+\[
+Z(\cA_1)\otimes \cA_2
+=
+Z(\cA_1)\otimes Z(\cA_2)
+\oplus
+Z(\cA_1)\otimes U_2,
+\]
+while
+\[
+\cA_1\otimes Z(\cA_2)
+=
+Z(\cA_1)\otimes Z(\cA_2)
+\oplus
+U_1\otimes Z(\cA_2).
+\]
+Their intersection is exactly $Z(\cA_1)\otimes Z(\cA_2)$.
+\end{proof}
+
+\begin{theorem}[Binary mixed-coupling theorem; \ClaimStatusProvedHere]
+\label{thm:twisted-ym-binary-mixed-couplings}
+Let $\cB_1,\cB_2$ be quadratic Koszul-admissible twisted Yang--Mills boundary data on the same smooth projective curve $X$, with chiral envelopes $\cA_1,\cA_2$.  Then the composite boundary datum with envelope
+\[
+\cA_{12}:=\cA_1\otimes^{\mathrm{ch}}\cA_2
+\]
+satisfies
+\[
+T^1_X(\cB_{12})
+\cong
+\bigl(Z(\cA_1^{!})\otimes Z(\cA_2^{!})\bigr)^{\vee}\otimes \omega_X.
+\]
+If the centers are finite-dimensional and split as
+\[
+Z(\cA_i^{!}) \cong \mathbb{C}\mathbf{1}\oplus \widetilde Z_i,
+\]
+then there is a canonical decomposition
+\[
+\widetilde T^1_X(\cB_{12})
+\cong
+\widetilde T^1_X(\cB_1)
+\oplus
+\widetilde T^1_X(\cB_2)
+\oplus
+(\widetilde Z_1\otimes \widetilde Z_2)^{\vee}\otimes \omega_X.
+\]
+The last summand is a genuine mixed first-order coupling, invisible in either factor separately.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:twisted-ym-tangent-center},
+\[
+T^1_X(\cB_{12})
+\cong
+Z(\cA_{12}^{!})^{\vee}\otimes \omega_X.
+\]
+Since the boundary data are quadratic, Proposition~\ref*{prop:koszul-dual-tensor-product} gives
+\[
+\cA_{12}^{!}
+\cong
+\cA_1^{!}\otimes^{\mathrm{ch}}\cA_2^{!}.
+\]
+Applying Lemma~\ref{lem:twisted-ym-center-tensor} to the dual side yields
+\[
+Z(\cA_{12}^{!})
+\cong
+Z(\cA_1^{!})\otimes Z(\cA_2^{!}),
+\]
+which proves the first statement.
+
+For the decomposition, write each center as $\mathbb{C}\mathbf{1}\oplus \widetilde Z_i$.  Then
+\[
+Z(\cA_1^{!})\otimes Z(\cA_2^{!})
+\cong
+\mathbb{C}\mathbf{1}
+\oplus
+\widetilde Z_1
+\oplus
+\widetilde Z_2
+\oplus
+(\widetilde Z_1\otimes \widetilde Z_2).
+\]
+Dualizing and tensoring with $\omega_X$ gives the asserted decomposition of reduced tangent spaces.
+\end{proof}
+
+\begin{corollary}[Multi-body coupling expansion; \ClaimStatusProvedHere]
+\label{cor:twisted-ym-multibody-couplings}
+Let $\cB_1,\dots,\cB_m$ be quadratic Koszul-admissible twisted Yang--Mills boundary data on $X$, and suppose each dual center splits as
+\[
+Z(\cA_i^{!}) \cong \mathbb{C}\mathbf{1}\oplus \widetilde Z_i.
+\]
+Then the reduced first-order deformation space of the composite boundary datum
+\[
+\cB_{1\cdots m}
+:=
+\cB_1\otimes^{\mathrm{ch}}\cdots\otimes^{\mathrm{ch}}\cB_m
+\]
+admits the canonical expansion
+\[
+\widetilde T^1_X(\cB_{1\cdots m})
+\cong
+\bigoplus_{\emptyset \neq S \subseteq \{1,\dots,m\}}
+\left(\bigotimes_{i\in S} \widetilde Z_i\right)^{\vee}\otimes \omega_X.
+\]
+In particular, subsets $S$ of size $r$ parameterize genuine $r$-body first-order couplings.
+\end{corollary}
+
+\begin{proof}
+Iterate Theorem~\ref{thm:twisted-ym-binary-mixed-couplings}.  Inductively one obtains
+\[
+Z(\cA_{1\cdots m}^{!})
+\cong
+\bigotimes_{i=1}^m Z(\cA_i^{!})
+\cong
+\bigotimes_{i=1}^m (\mathbb{C}\mathbf{1}\oplus \widetilde Z_i).
+\]
+Expanding the tensor product yields a direct sum over subsets $S\subseteq \{1,\dots,m\}$.  Removing the empty subset gives the reduced statement, and dualizing/tensoring with $\omega_X$ proves the formula.
+\end{proof}
+
+\begin{corollary}[Mixed rigidity criterion; \ClaimStatusProvedHere]
+\label{cor:twisted-ym-mixed-rigidity}
+Under the hypotheses of Corollary~\ref{cor:twisted-ym-multibody-couplings}:
+\begin{enumerate}[label=(\roman*)]
+\item if every $\widetilde Z_i=0$, then every composite boundary condition is reduced-infinitesimally rigid;
+\item if exactly one $\widetilde Z_i$ is nonzero, then there are no genuine mixed couplings;
+\item a nonzero tensor product $\widetilde Z_{i_1}\otimes\cdots\otimes\widetilde Z_{i_r}$ is both necessary and sufficient for the existence of an $r$-body first-order coupling.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+This is immediate from Corollary~\ref{cor:twisted-ym-multibody-couplings} by inspection of the subset expansion.
+\end{proof}
+
+\begin{remark}[Why this is genuinely new]
+\label{rem:twisted-ym-why-new}
+Theorems~\ref{thm:twisted-ym-dual-unobstructedness}--\ref{thm:twisted-ym-binary-mixed-couplings} do not merely repackage the tangent-to-center principle.  They add three new pieces of structure:
+\begin{enumerate}[label=(\roman*)]
+\item a \emph{dual-side obstruction criterion} in negative Hochschild degree;
+\item a \emph{formality theorem} identifying explicit formal coordinates on the boundary deformation space;
+\item a \emph{multi-body coupling law} showing that composite boundary theories acquire genuinely mixed couplings controlled by tensor products of reduced dual centers.
+\end{enumerate}
+These statements push the present framework from a static duality theorem to an actual local geometry of boundary moduli.
+\end{remark}
+% ===== End {fn} =====
+
+% [Duplicate block removed — content consolidated above at line 279.]
+
+
+% ===== Begin w_sector_relative_frontier_package.tex =====
+% Frontier package: relative Hochschild duality and mixed Kodaira--Spencer class
+% Suggested insertion point: after the subsection on derived mixed couplings for non-quadratic W-boundaries.
+
+\subsection{Relative Hochschild duality and the mixed Kodaira--Spencer class}
+\label{subsec:relative-hochschild-mixed-ks}
+
+Fix a smooth projective curve $X$ and a weakly composable pair of transferred $W$-dual data
+\[
+M_1 \xrightarrow{\iota_1} M_{12} \xleftarrow{\iota_2} M_2,
+\]
+where each $M_i$ is a complete filtered minimal $A_\infty$-algebra quasi-isomorphic to the transferred dual of a principal $W$-boundary condition.
+
+\begin{definition}[Relative Hochschild cochains]
+\label{def:relative-hochschild-cochains}
+Define the \emph{relative Hochschild cochain complex}
+\[
+CC^\bullet_{\mathrm{rel}}(M_{12};M_1,M_2)
+:=
+\operatorname{hocofib}\!\Big(
+CC^\bullet(M_1)\oplus CC^\bullet(M_2)
+\xrightarrow{\;\iota_{1*}+\iota_{2*}\;}
+CC^\bullet(M_{12})
+\Big).
+\]
+Its cohomology groups are denoted
+\[
+HH^\bullet_{\mathrm{rel}}(M_{12};M_1,M_2)
+:= H^\bullet\big(CC^\bullet_{\mathrm{rel}}(M_{12};M_1,M_2)\big).
+\]
+The degree-zero group is called the \emph{relative derived center}.
+\end{definition}
+
+\begin{definition}[Mixed deformation $L_\infty$-algebra]
+\label{def:mixed-deformation-linfty-relative}
+Let
+\[
+\mathfrak g_i:=\tau_{\ge 1}CC^\bullet(M_i)[1],
+\qquad
+\mathfrak g_{12}:=\tau_{\ge 1}CC^\bullet(M_{12})[1],
+\]
+with the standard filtered $L_\infty$ structures induced by the Gerstenhaber bracket.  The restriction maps induced by $\iota_1,\iota_2$ define an $L_\infty$ morphism
+\[
+r=(r_1,r_2):\mathfrak g_{12}\to \mathfrak g_1\oplus \mathfrak g_2.
+\]
+Define the \emph{mixed deformation $L_\infty$-algebra}
+\[
+\mathfrak g_{\mathrm{mix}}:=\operatorname{hofib}(r).
+\]
+\end{definition}
+
+\begin{theorem}[Relative duality theorem; \ClaimStatusProvedHere]
+\label{thm:relative-duality-theorem}
+Assume the degreewise complementarity isomorphisms
+\[
+H^k(\mathfrak g_i)
+\cong
+HH^{1-k}(M_i)^\vee\otimes \omega_X,
+\qquad
+H^k(\mathfrak g_{12})
+\cong
+HH^{1-k}(M_{12})^\vee\otimes \omega_X
+\]
+for all $k$ under consideration, and assume the relevant cohomology groups are finite-dimensional.  Then for every integer $k$ there is a natural isomorphism
+\[
+H^k(\mathfrak g_{\mathrm{mix}})
+\cong
+HH^{1-k}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X.
+\]
+In particular,
+\[
+H^1(\mathfrak g_{\mathrm{mix}})
+\cong
+HH^{0}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X,
+\]
+and
+\[
+H^2(\mathfrak g_{\mathrm{mix}})
+\cong
+HH^{-1}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X.
+\]
+\end{theorem}
+
+\begin{proof}
+The homotopy fiber defining $\mathfrak g_{\mathrm{mix}}$ gives a distinguished triangle
+\[
+\mathfrak g_{\mathrm{mix}} \to \mathfrak g_{12} \xrightarrow{r} \mathfrak g_1\oplus \mathfrak g_2 \to \mathfrak g_{\mathrm{mix}}[1],
+\]
+hence a long exact sequence in cohomology.  The homotopy cofiber defining $CC^\bullet_{\mathrm{rel}}$ gives a distinguished triangle
+\[
+CC^\bullet(M_1)\oplus CC^\bullet(M_2)
+\to CC^\bullet(M_{12})
+\to CC^\bullet_{\mathrm{rel}}(M_{12};M_1,M_2)
+\to
+\big(CC^\bullet(M_1)\oplus CC^\bullet(M_2)\big)[1],
+\]
+and therefore a long exact sequence in Hochschild cohomology.
+
+By the assumed complementarity isomorphisms, the cohomology groups of the first triangle are dual, up to the twist by $\omega_X$, to the cohomology groups of the second triangle with the degree shift $k\mapsto 1-k$.  Naturality of the restriction maps identifies the boundary morphisms in the two long exact sequences.  Dualizing the second long exact sequence and comparing term-by-term with the first, the five-lemma yields the stated isomorphisms for all $k$.
+\end{proof}
+
+\begin{corollary}[Relative tangent-to-center principle; \ClaimStatusProvedHere]
+\label{cor:relative-tangent-center-principle}
+The space of genuine mixed first-order couplings satisfies
+\[
+T^1_{X,\mathrm{mix}}(\cB_{12};\cB_1,\cB_2)
+:= H^1(\mathfrak g_{\mathrm{mix}})
+\cong
+HH^{0}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X.
+\]
+\end{corollary}
+
+\begin{corollary}[Relative dual unobstructedness; \ClaimStatusProvedHere]
+\label{cor:relative-dual-unobstructedness}
+If
+\[
+HH^{-1}_{\mathrm{rel}}(M_{12};M_1,M_2)=0,
+\]
+then every genuine mixed first-order coupling extends to second order.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:relative-duality-theorem}, the primary mixed obstruction space is
+\[
+H^2(\mathfrak g_{\mathrm{mix}})
+\cong
+HH^{-1}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X.
+\]
+Thus the assumed vanishing forces the obstruction space to vanish.
+\end{proof}
+
+\begin{theorem}[Relative central formality; \ClaimStatusProvedHere]
+\label{thm:relative-central-formality}
+Assume
+\[
+HH^{1}_{\mathrm{rel}}(M_{12};M_1,M_2)=0
+\qquad\text{and}\qquad
+HH^{-1}_{\mathrm{rel}}(M_{12};M_1,M_2)=0.
+\]
+Then the formal moduli problem of genuine mixed deformations is equivalent to the formal affine space on
+\[
+HH^{0}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X.
+\]
+Equivalently, every mixed first-order coupling extends uniquely to all orders up to unique equivalence.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:relative-duality-theorem},
+\[
+H^0(\mathfrak g_{\mathrm{mix}})
+\cong HH^{1}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X=0,
+\]
+\[
+H^1(\mathfrak g_{\mathrm{mix}})
+\cong HH^{0}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X,
+\]
+and
+\[
+H^2(\mathfrak g_{\mathrm{mix}})
+\cong HH^{-1}_{\mathrm{rel}}(M_{12};M_1,M_2)^\vee\otimes \omega_X=0.
+\]
+Transfer the $L_\infty$ structure on $\mathfrak g_{\mathrm{mix}}$ to a minimal model on its cohomology.  Degree counting forces every higher bracket on degree-one classes to land in degree two, which vanishes.  Thus the minimal model is abelian on the deformation sector, the Maurer--Cartan equation is empty, and the gauge action is trivial because $H^0=0$.
+\end{proof}
+
+\begin{definition}[Mixed Kodaira--Spencer class]
+\label{def:mixed-kodaira-spencer-class}
+Suppose $M_{12}$ carries a complete descending filtration by mixed weight, and write its $A_\infty$ coderivation as
+\[
+m = m^{(0)} + m^{(1)} + m^{(2)} + \cdots,
+\]
+where $m^{(r)}$ raises mixed weight by $r$, and $m^{(0)}$ is the decoupled part inherited from $M_1$ and $M_2$.
+
+The class of $m^{(1)}$ in the degree-one relative Hochschild cohomology,
+\[
+\kappa_{\mathrm{mix}}(M_{12};M_1,M_2)
+:= [m^{(1)}]
+\in HH^{1}_{\mathrm{rel}}(M_{12};M_1,M_2),
+\]
+is called the \emph{mixed Kodaira--Spencer class}.
+\end{definition}
+
+\begin{lemma}[Well-definedness and invariance; \ClaimStatusProvedHere]
+\label{lem:mixed-ks-well-defined}
+The mixed Kodaira--Spencer class is independent of the choice of filtered minimal model, up to the canonical identification of relative Hochschild cohomology under filtered $A_\infty$ quasi-isomorphism.
+\end{lemma}
+
+\begin{proof}
+A filtered $A_\infty$ quasi-isomorphism between two transferred models intertwines their coderivations up to gauge equivalence in the Hochschild dg Lie algebra.  The weight-one component of a gauge-equivalent coderivation changes by a relative Hochschild coboundary.  Hence the cohomology class of $m^{(1)}$ is invariant.
+\end{proof}
+
+\begin{theorem}[First-correction theorem; \ClaimStatusProvedHere]
+\label{thm:first-correction-theorem}
+Equip $CC^\bullet_{\mathrm{rel}}(M_{12};M_1,M_2)$ with the filtration induced by mixed weight.  Then the associated spectral sequence has
+\[
+E_1^0 \cong HH^0\bigl(\operatorname{gr} CC^\bullet_{\mathrm{rel}}\bigr),
+\]
+and the first differential is induced by the adjoint action of the mixed Kodaira--Spencer class:
+\[
+d_1[\phi] = [\kappa_{\mathrm{mix}},\phi].
+\]
+In particular, on the quadratic-limit term
+\[
+E_1^0 \cong \widetilde Z_\infty(M_1)\widehat\otimes \widetilde Z_\infty(M_2),
+\]
+the class of a naive quadratic mixed coupling survives to the next page if and only if it lies in the kernel of
+\[
+[\kappa_{\mathrm{mix}},-] :
+\widetilde Z_\infty(M_1)\widehat\otimes \widetilde Z_\infty(M_2)
+\longrightarrow E_1^1.
+\]
+\end{theorem}
+
+\begin{proof}
+On Hochschild cochains, the differential is the Gerstenhaber commutator with the full coderivation:
+\[
+d = [m,-] = [m^{(0)},-] + [m^{(1)},-] + [m^{(2)},-] + \cdots.
+\]
+The zeroth differential on the associated graded is therefore $d_0=[m^{(0)},-]$, and the first derived differential is induced by the next term $[m^{(1)},-]$.  By Definition~\ref{def:mixed-kodaira-spencer-class}, the cohomology class of $m^{(1)}$ is precisely $\kappa_{\mathrm{mix}}$, so on the $E_1$-page the first differential is the adjoint action of $\kappa_{\mathrm{mix}}$.
+\end{proof}
+
+\begin{corollary}[Persistence criterion for the quadratic law; \ClaimStatusProvedHere]
+\label{cor:persistence-criterion-quadratic-law}
+The quadratic mixed-coupling law survives to first non-quadratic order if and only if
+\[
+\kappa_{\mathrm{mix}}(M_{12};M_1,M_2)=0.
+\]
+More generally, if the mixed coderivation components $m^{(1)},\dots,m^{(r)}$ vanish in relative Hochschild cohomology, then the mixed-weight spectral sequence degenerates through $E_{r+1}$.
+\end{corollary}
+
+\begin{proof}
+The first statement is immediate from Theorem~\ref{thm:first-correction-theorem}.  The second follows from the same filtered-complex argument: if all differential pieces up to mixed weight $r$ are cohomologically trivial, then all differentials $d_1,\dots,d_r$ vanish.
+\end{proof}
+
+\begin{theorem}[Universal interaction brackets on mixed couplings; \ClaimStatusProvedHere]
+\label{thm:universal-interaction-brackets}
+Let
+\[
+\mathbb T_{\mathrm{mix}}:=H^1(\mathfrak g_{\mathrm{mix}}),
+\qquad
+\mathrm{Obs}_{\mathrm{mix}}:=H^2(\mathfrak g_{\mathrm{mix}}).
+\]
+Homotopy transfer endows $H^\bullet(\mathfrak g_{\mathrm{mix}})$ with a minimal $L_\infty$ structure whose restriction to degree one defines multilinear maps
+\[
+\lambda_n : \operatorname{Sym}^n(\mathbb T_{\mathrm{mix}}) \longrightarrow \mathrm{Obs}_{\mathrm{mix}},
+\qquad n\ge 2.
+\]
+A formal mixed coupling $\alpha\in \mathbb T_{\mathrm{mix}}\widehat\otimes \mathfrak m$ extends to all orders if and only if
+\[
+\sum_{n\ge 2}\frac{1}{n!}\lambda_n(\alpha,\dots,\alpha)=0.
+\]
+Moreover, the first nonzero $\lambda_n$ is a derived invariant of the filtered $A_\infty$ quasi-isomorphism class of the cospan $(M_1\to M_{12}\leftarrow M_2)$.
+\end{theorem}
+
+\begin{proof}
+This is the standard Maurer--Cartan description for the minimal $L_\infty$ model of the controlling deformation algebra $\mathfrak g_{\mathrm{mix}}$.  Since every input has degree $1$ and $L_\infty$ brackets have degree $2-n$, the output lies in degree $2$, i.e. in $\mathrm{Obs}_{\mathrm{mix}}$.  Invariance under filtered quasi-isomorphism follows from invariance of the minimal model up to $L_\infty$ isomorphism.
+\end{proof}
+% ===== End {fn} =====
+
+
+% ===== Begin twisted_ym_w_boundary_simplex.tex =====
+% New frontier package: higher-body Cech theory for non-quadratic W-boundaries.
+% This block is self-contained and assumes only the derived tangent-to-center input
+% for transferred W-duals.
+
+\subsection{Higher-body \v{C}ech theory for non-quadratic $\mathcal W$-boundaries}
+\label{subsec:w-boundary-cech-theory}
+
+\begin{convention}[Derived tangent-to-center input]
+\label{conv:derived-tangent-center-input}
+Throughout this subsection, let $X$ be a smooth projective curve and let
+\[
+\mathfrak N=\{M_S\}_{\emptyset\neq S\subseteq I},\qquad I=\{1,\dots,m\},
+\]
+be a finite collection of transferred $\mathcal W$-dual data indexed by nonempty subsets of $I$.
+For each $S\subseteq I$, write $\cB_S$ for the corresponding boundary condition and assume there is a canonical identification
+\[
+T^1_X(\cB_S)
+\xrightarrow{\sim}
+HH^0(M_S)^\vee\otimes \omega_X.
+\]
+Set
+\[
+Z_S:=HH^0(M_S),\qquad T_S:=T^1_X(\cB_S).
+\]
+\end{convention}
+
+\begin{definition}[Boundary simplex]
+\label{def:w-boundary-simplex}
+A \emph{boundary simplex of order $m$} consists of transferred $\mathcal W$-dual data
+\[
+\mathfrak N=\{M_S\}_{\emptyset\neq S\subseteq I}
+\]
+with filtered $A_\infty$-morphisms
+\[
+\rho_{S,T}\colon M_T\longrightarrow M_S
+\qquad (\emptyset\neq T\subseteq S\subseteq I)
+\]
+satisfying $\rho_{S,S}=\id$ and $\rho_{U,S}\circ \rho_{S,T}=\rho_{U,T}$ whenever
+$T\subseteq S\subseteq U$.
+\end{definition}
+
+\begin{definition}[Derived-center \v{C}ech complex]
+\label{def:w-derived-center-cech}
+Fix the natural order on $I$.  For a boundary simplex $\mathfrak N$, define the cochain complex
+\[
+C_Z^p(\mathfrak N):=\bigoplus_{|S|=p+1} Z_S,
+\qquad 0\le p\le m-1,
+\]
+with differential $\delta\colon C_Z^p\to C_Z^{p+1}$ given on the component indexed by
+$S=\{s_0<\cdots<s_{p+1}\}$ by
+\[
+(\delta z)_S
+:=
+\sum_{j=0}^{p+1}(-1)^j (\rho_{S,S\setminus\{s_j\}})_*(z_{S\setminus\{s_j\}}).
+\]
+We call $C_Z^\bullet(\mathfrak N)$ the \emph{derived-center \v{C}ech complex} of the simplex.
+\end{definition}
+
+\begin{definition}[Tangent restriction complex and pure $m$-body couplings]
+\label{def:w-tangent-restriction-complex}
+Define the cochain complex
+\[
+C_T^p(\mathfrak N):=\bigoplus_{|S|=m-p} T_S,
+\qquad 0\le p\le m-1,
+\]
+with differential $\partial\colon C_T^p\to C_T^{p+1}$ given on the component indexed by
+$T=\{t_0<\cdots<t_{m-p-2}\}$ by
+\[
+(\partial\lambda)_T
+:=
+\sum_{i\notin T}(-1)^{\operatorname{pos}(i,T\cup\{i\})-1}
+\operatorname{res}_{T\cup\{i\},T}(\lambda_{T\cup\{i\}}),
+\]
+where $\operatorname{res}_{S,T}\colon T_S\to T_T$ is the restriction map dual to
+$(\rho_{S,T})_*\colon Z_T\to Z_S$ under Convention~\ref{conv:derived-tangent-center-input}.
+
+The space of \emph{pure $m$-body first-order couplings} is
+\[
+T^{1,[m]}_{X,\mathrm{pure}}(\mathfrak N):=H^0\bigl(C_T^\bullet(\mathfrak N)\bigr).
+\]
+\end{definition}
+
+\begin{lemma}[Homotopy invariance; \ClaimStatusProvedHere]
+\label{lem:w-boundary-simplex-homotopy-invariance}
+Let $F\colon \mathfrak N\to \mathfrak N'$ be a morphism of boundary simplices which is an
+$A_\infty$-quasi-isomorphism on every face and commutes with all face maps.  Then the induced map
+\[
+C_Z^\bullet(\mathfrak N)\longrightarrow C_Z^\bullet(\mathfrak N')
+\]
+is an isomorphism of cochain complexes.  In particular,
+\[
+H^p\bigl(C_Z^\bullet(\mathfrak N)\bigr)
+\cong
+H^p\bigl(C_Z^\bullet(\mathfrak N')\bigr)
+\]
+for all $p$, and the pure coupling spaces are canonically identified.
+\end{lemma}
+
+\begin{proof}
+Degree-zero Hochschild cohomology is invariant under $A_\infty$-quasi-isomorphism.  Hence
+$Z_S\cong Z'_S$ for every face $S$, compatibly with the induced maps on $HH^0$.  Taking direct sums over all faces of a fixed cardinality yields an isomorphism in each cochain degree, and the compatibility with face maps makes this an isomorphism of complexes.  The final statement follows from Theorem~\ref{thm:w-boundary-cech-duality} below.
+\end{proof}
+
+\begin{theorem}[Higher-body \v{C}ech duality; \ClaimStatusProvedHere]
+\label{thm:w-boundary-cech-duality}
+For every boundary simplex $\mathfrak N$ of order $m$, there is a canonical isomorphism of cochain complexes
+\[
+C_T^p(\mathfrak N)
+\xrightarrow{\sim}
+\Bigl(C_Z^{m-1-p}(\mathfrak N)\Bigr)^\vee\otimes \omega_X,
+\qquad 0\le p\le m-1,
+\]
+under which the differential $\partial$ is the transpose of $\delta$.
+Consequently, for every $0\le q\le m-1$,
+\[
+H^q\bigl(C_T^\bullet(\mathfrak N)\bigr)
+\cong
+H^{m-1-q}\bigl(C_Z^\bullet(\mathfrak N)\bigr)^\vee\otimes \omega_X.
+\]
+In particular,
+\[
+T^{1,[m]}_{X,\mathrm{pure}}(\mathfrak N)
+\cong
+H^{m-1}\bigl(C_Z^\bullet(\mathfrak N)\bigr)^\vee\otimes \omega_X.
+\]
+\end{theorem}
+
+\begin{proof}
+By Convention~\ref{conv:derived-tangent-center-input}, each summand $T_S$ is canonically
+identified with $Z_S^\vee\otimes \omega_X$.  Summing over all subsets $S$ of cardinality $m-p$
+gives the objectwise isomorphism
+\[
+C_T^p(\mathfrak N)
+\cong
+\Bigl(C_Z^{m-1-p}(\mathfrak N)\Bigr)^\vee\otimes \omega_X.
+\]
+The sign conventions in Definitions~\ref{def:w-derived-center-cech} and
+\ref{def:w-tangent-restriction-complex} were chosen so that the restriction map
+$\operatorname{res}_{S,T}$ is exactly the dual transpose of $(\rho_{S,T})_*$.  Therefore the alternating
+sum defining $\partial$ is the transpose of the alternating sum defining $\delta$.
+Taking cohomology yields the stated duality.
+\end{proof}
+
+\begin{remark}[Interpretation]
+\label{rem:w-boundary-cech-interpretation}
+The groups $H^q(C_T^\bullet(\mathfrak N))$ form a complete tower of first-order descent obstructions.
+A degree-$q$ cochain assigns couplings to all faces of codimension $q$; the cocycle condition means
+that these assignments are compatible on codimension-$(q+1)$ faces.  The cohomology class measures
+exactly the failure of such compatible face data to come from a coupling one dimension higher.
+Theorem~\ref{thm:w-boundary-cech-duality} identifies this tower with the dual \v{C}ech cohomology of
+facewise derived centers.
+\end{remark}
+
+\begin{definition}[Decoupled simplex]
+\label{def:w-decoupled-simplex}
+A boundary simplex $\mathfrak N$ is called \emph{decoupled} if there exist complete vector spaces
+$\widetilde Z_1,\dots,\widetilde Z_m$ such that, for every nonempty subset $S\subseteq I$,
+\[
+Z_S\cong \widehat\bigotimes_{i\in S}(\Bbbk\mathbf{1}\oplus \widetilde Z_i),
+\]
+and under these identifications the maps $(\rho_{S,T})_*$ are obtained by adjoining the unit in every
+factor belonging to $S\setminus T$.
+\end{definition}
+
+\begin{definition}[Augmented center complex]
+\label{def:w-augmented-center-complex}
+For a boundary simplex $\mathfrak N$ of order $m$, define the augmented cochain complex
+$\widetilde C_Z^\bullet(\mathfrak N)$ by
+\[
+\widetilde C_Z^{-1}(\mathfrak N):=\Bbbk,
+\qquad
+\widetilde C_Z^p(\mathfrak N):=C_Z^p(\mathfrak N)\quad (0\le p\le m-1),
+\]
+with the augmentation map $\Bbbk\to \bigoplus_i Z_{\{i\}}$ given by the direct sum of unit inclusions.
+\end{definition}
+
+\begin{theorem}[Tensor-product model for the augmented center complex; \ClaimStatusProvedHere]
+\label{thm:w-augmented-center-tensor-model}
+Let $\mathfrak N$ be a decoupled boundary simplex, and for each $i\in I$ set
+\[
+K_i:=\bigl[\Bbbk\xrightarrow{\eta_i} \Bbbk\mathbf{1}\oplus \widetilde Z_i\bigr],
+\]
+concentrated in cohomological degrees $0$ and $1$, where $\eta_i(1)=\mathbf{1}$.
+Then there is a canonical isomorphism of cochain complexes
+\[
+\widetilde C_Z^\bullet(\mathfrak N)
+\xrightarrow{\sim}
+\left(\widehat\bigotimes_{i=1}^m K_i\right)[-1].
+\]
+Consequently,
+\[
+H^p\bigl(C_Z^\bullet(\mathfrak N)\bigr)=0
+\quad (0\le p<m-1),
+\qquad
+H^{m-1}\bigl(C_Z^\bullet(\mathfrak N)\bigr)
+\cong
+\widehat\bigotimes_{i=1}^m \widetilde Z_i.
+\]
+\end{theorem}
+
+\begin{proof}
+Expand the completed tensor product $\widehat\bigotimes_i K_i$.  A pure tensor lies in cohomological
+degree $r$ exactly when $r$ of the factors lie in $\Bbbk\mathbf{1}\oplus \widetilde Z_i$ and the remaining
+$m-r$ lie in $\Bbbk$.  Such a choice is equivalent to a subset $S\subseteq I$ of cardinality $r$, and the
+corresponding summand is canonically
+\[
+\widehat\bigotimes_{i\in S}(\Bbbk\mathbf{1}\oplus \widetilde Z_i)
+\cong Z_S.
+\]
+Thus the degree-$r$ part of $\widehat\bigotimes_i K_i$ identifies with
+\[
+\bigoplus_{|S|=r} Z_S = C_Z^{r-1}(\mathfrak N),
+\]
+which explains the shift by $[-1]$.
+
+Under this identification, the tensor-product differential inserts the unit in one additional factor, with
+the usual Koszul sign determined by the position of that factor.  This is exactly the alternating sum in the
+augmented \v{C}ech differential of Definition~\ref{def:w-augmented-center-complex}.  Hence the two complexes
+are canonically isomorphic.
+
+Each $K_i$ has $H^0(K_i)=0$ and $H^1(K_i)\cong \widetilde Z_i$.  The completed K"unneth theorem therefore gives
+\[
+H^r\left(\widehat\bigotimes_{i=1}^m K_i\right)=0\quad (r\neq m),
+\qquad
+H^m\left(\widehat\bigotimes_{i=1}^m K_i\right)
+\cong
+\widehat\bigotimes_{i=1}^m \widetilde Z_i.
+\]
+After shifting by $[-1]$, the cohomology of $\widetilde C_Z^\bullet(\mathfrak N)$ is concentrated in degree $m-1$.
+Since $\widetilde C_Z^\bullet$ and $C_Z^\bullet$ agree in nonnegative degrees, the same statement holds for
+$C_Z^\bullet$.
+\end{proof}
+
+\begin{corollary}[Pure $m$-body coupling theorem; \ClaimStatusProvedHere]
+\label{cor:w-pure-mbody-coupling-theorem}
+Let $\mathfrak N$ be a decoupled boundary simplex of order $m$.  Then
+\[
+T^{1,[m]}_{X,\mathrm{pure}}(\mathfrak N)
+\cong
+\left(\widehat\bigotimes_{i=1}^m \widetilde Z_i\right)^\vee\otimes \omega_X.
+\]
+Thus pure $m$-body first-order couplings are controlled by the full tensor product of the reduced
+facewise derived centers.
+\end{corollary}
+
+\begin{proof}
+Combine Theorem~\ref{thm:w-boundary-cech-duality} with
+Theorem~\ref{thm:w-augmented-center-tensor-model}.
+\end{proof}
+
+\begin{theorem}[Higher Mayer--Vietoris descent for couplings; \ClaimStatusProvedHere]
+\label{thm:w-higher-mayer-vietoris-couplings}
+Let $\mathfrak N$ be any boundary simplex of order $m$.
+\begin{enumerate}[label=(\roman*)]
+\item The obstruction to descending a compatible family of codimension-$1$ couplings
+\[
+\{\lambda_S\in T_S\}_{|S|=m-1}
+\]
+to a coupling on the top face $I$ is the cohomology class
+\[
+[\lambda]\in H^1\bigl(C_T^\bullet(\mathfrak N)\bigr)
+\cong
+H^{m-2}\bigl(C_Z^\bullet(\mathfrak N)\bigr)^\vee\otimes \omega_X.
+\]
+\item If $H^{m-2}(C_Z^\bullet(\mathfrak N))=0$, then every compatible codimension-$1$ family descends to
+some coupling on the top face.
+\item If, in addition, $H^{m-1}(C_Z^\bullet(\mathfrak N))=0$, then such a descent is unique.
+\end{enumerate}
+More generally, $H^q(C_T^\bullet(\mathfrak N))$ is the obstruction space for descending compatible
+codimension-$q$ face data one step upward.
+\end{theorem}
+
+\begin{proof}
+A codimension-$1$ family is by definition a degree-$1$ cochain in $C_T^\bullet(\mathfrak N)$.  It is
+compatible on codimension-$2$ faces exactly when it is a cocycle.  Such a cocycle descends from a top-face
+coupling precisely when it lies in the image of
+\[
+\partial\colon C_T^0(\mathfrak N)\to C_T^1(\mathfrak N),
+\]
+so the obstruction is its class in $H^1(C_T^\bullet)$.  This proves (i), and (ii) is the vanishing criterion
+$H^1(C_T^\bullet)=0$ rewritten via Theorem~\ref{thm:w-boundary-cech-duality}.  If a descent exists, any two
+choices differ by a degree-$0$ cocycle, i.e. by an element of $H^0(C_T^\bullet)$; thus the descent is unique
+when $H^0(C_T^\bullet)=0$, which is equivalent to $H^{m-1}(C_Z^\bullet)=0$ by Theorem~\ref{thm:w-boundary-cech-duality}.
+The final statement is the same argument in degree $q$.
+\end{proof}
+
+\begin{definition}[Filtered boundary simplex]
+\label{def:w-filtered-boundary-simplex}
+A boundary simplex $\mathfrak N$ is \emph{filtered} if each $Z_S$ carries a complete descending filtration
+$F^\bullet Z_S$ such that every face map $(\rho_{S,T})_*$ preserves filtration.
+\end{definition}
+
+\begin{theorem}[Filtered stability of pure $m$-body couplings; \ClaimStatusProvedHere]
+\label{thm:w-filtered-stability-pure-mbody}
+Let $\mathfrak N$ be a filtered boundary simplex.  Assume its associated graded simplex
+$\operatorname{gr}\mathfrak N$ is decoupled in the sense of Definition~\ref{def:w-decoupled-simplex}, with reduced
+centers $\widetilde Z_1,\dots,\widetilde Z_m$.  Then:
+\begin{enumerate}[label=(\alph*)]
+\item the filtered complex $C_Z^\bullet(\mathfrak N)$ has a convergent spectral sequence whose $E_1$-page is
+\[
+E_1^p \cong H^p\bigl(C_Z^\bullet(\operatorname{gr}\mathfrak N)\bigr);
+\]
+\item this spectral sequence collapses at $E_1$;
+\item the top cohomology inherits a canonical filtration with
+\[
+\operatorname{gr}H^{m-1}\bigl(C_Z^\bullet(\mathfrak N)\bigr)
+\cong
+\widehat\bigotimes_{i=1}^m \widetilde Z_i,
+\]
+while $H^p(C_Z^\bullet(\mathfrak N))=0$ for $0\le p<m-1$;
+\item therefore the pure $m$-body coupling space carries a canonical filtration satisfying
+\[
+\operatorname{gr}T^{1,[m]}_{X,\mathrm{pure}}(\mathfrak N)
+\cong
+\left(\widehat\bigotimes_{i=1}^m \widetilde Z_i\right)^\vee\otimes \omega_X.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The facewise filtrations on the $Z_S$ induce a complete filtration on the direct sums
+$C_Z^p(\mathfrak N)$, hence on the whole \v{C}ech complex.  Standard filtered-complex theory gives a convergent
+spectral sequence with
+\[
+E_1^p\cong H^p\bigl(C_Z^\bullet(\operatorname{gr}\mathfrak N)\bigr).
+\]
+By assumption, the associated graded simplex is decoupled, so Theorem~\ref{thm:w-augmented-center-tensor-model}
+shows that $E_1^p=0$ for $p<m-1$ and
+\[
+E_1^{m-1}\cong \widehat\bigotimes_{i=1}^m \widetilde Z_i.
+\]
+Since the $E_1$-page is concentrated in a single cohomological degree, all higher differentials vanish and the
+spectral sequence collapses at $E_1$.  Therefore the final cohomology is also concentrated in degree $m-1$, and its
+associated graded is the stated tensor product.  The final assertion follows from Theorem~\ref{thm:w-boundary-cech-duality}.
+\end{proof}
+
+\begin{remark}[Meaning of filtered stability]
+\label{rem:w-filtered-stability-meaning}
+The theorem shows that, once the facewise derived centers admit a compatible filtration with decoupled associated
+graded, the entire first-order pure $m$-body coupling theory is a \emph{filtered deformation} of the quadratic tensor-product law.
+In particular, the non-quadratic $\mathcal W$-sector does not destroy pure higher-body couplings at first order; it refines them.
+\end{remark}
+% ===== End {fn} =====

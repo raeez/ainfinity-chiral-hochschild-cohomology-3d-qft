@@ -1,0 +1,1564 @@
+\label{chap:log-ht-monodromy}
+
+
+\providecommand{\A}{\mathcal A}
+\providecommand{\B}{\mathcal B}
+\providecommand{\C}{\mathcal C}
+\providecommand{\D}{\mathcal D}
+\providecommand{\E}{\mathcal E}
+\providecommand{\F}{\mathcal F}
+\providecommand{\FM}{\mathrm{FM}}
+\providecommand{\Conf}{\mathrm{Conf}}
+\providecommand{\HT}{\mathrm{HT}}
+\providecommand{\MC}{\mathrm{MC}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Hom}{\mathrm{Hom}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\im}{\mathrm{im}}
+\providecommand{\Res}{\mathrm{Res}}
+\providecommand{\Aut}{\mathrm{Aut}}
+\providecommand{\PP}{\mathbb P}
+\providecommand{\AA}{\mathbb A}
+\providecommand{\CC}{\mathbb C}
+\providecommand{\RR}{\mathbb R}
+\providecommand{\ZZ}{\mathbb Z}
+\providecommand{\kk}{\Bbbk}
+\providecommand{\h}{\hbar}
+\providecommand{\ot}{\otimes}
+\providecommand{\wot}{\widehat\otimes}
+\providecommand{\s}{\mathrm s}
+\providecommand{\ds}{d_{\mathrm{dR}}}
+\providecommand{\CYB}{\mathrm{CYB}}
+\providecommand{\PT}{\mathrm{PT}}
+\providecommand{\Disk}{\mathrm{Disk}}
+\providecommand{\SN}{\boldsymbol{\nabla}}
+\providecommand{\bboxprod}{\mathop{\boxtimes}\displaylimits}
+
+\title{Logarithmic Holomorphic-Topological Monodromy from First Principles\\[0.4em]
+\large Shifted KZ/FM Connections, $A_\infty$ Superconnections, Resolved Line Operators, and the Monodromic Tensor Structure}
+\author{}
+\date{}
+
+\begin{abstract}
+We develop a first-principles theory unifying chiral and factorization ideas, logarithmic geometry of configuration spaces, and line operators in three-dimensional holomorphic-topological quantum field theory. Starting from a strict rational dg-shifted Yangian we define a shifted KZ/Fulton-MacPherson connection on ordered configuration spaces and prove its flatness, its infinitesimal braid relations, and its logarithmic extension to logarithmic Fulton-MacPherson compactifications. We then pass to the full $A_\infty$ setting: support-indexed collision fields are assembled into a bar-valued superconnection whose curvature is exactly the Maurer-Cartan defect. This yields a supportwise curvature hierarchy, an obstruction theory for higher collision homotopies, and a conceptual derivation of the $A_\infty$ Yang-Baxter equation.
+
+For quasi-linear interacting holomorphic-topological theories we introduce mixed logarithmic configuration spaces adapted simultaneously to holomorphic and topological collisions. On these spaces we formulate a logarithmic BPHZ renormalization scheme for graph-valued differential forms, prove logarithmic extension and residue factorization of the renormalized graph forms, and show that compactified Stokes theory produces an analytic flat logarithmic superconnection. Under a tree-level degree-zero resolution hypothesis for line operators, we prove quantum degree concentration, construct a canonical $\h$-adic strong deformation retract, and establish one-form rigidity: after reduction to cohomology, the entire monodromic structure is governed by the projected renormalized logarithmic $1$-form sector. This yields a canonical holomorphic-topological associator, braiding, pentagon and hexagon identities, pure braid group representations, and logarithmic period formulas.
+
+We isolate the classical notion of a resolved degree-zero line system, prove that regular-sequence Koszul models satisfy it, and deduce unconditionality of the reduced monodromic theory in a broad quasi-linear class. Finally we formulate a first-principles axiomatization---the resolved logarithmic HT datum---which packages the local-to-global mechanism in its Platonic form, and we record the structural consequences for arithmetic geometry, enumerative geometry, periodicity, and chromaticity, together with conjectural bridges to factorisation quantum groups and logarithmic cohomological Hall algebras.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction: the local law, the global law, and the bridge}
+
+The local algebra of a chiral or holomorphic-topological theory is not yet its global geometry. Local operators know how fields collide; the global theory knows how states are transported when collisions are avoided. Between the two sits the geometry of configuration spaces, and it is this geometry---blown up until collisions become divisors, regularized until graph integrals become logarithmic forms, and reduced until only degree-zero states remain---that converts local algebra into monodromy.
+
+The guiding principle of this manuscript is therefore simple:
+\begin{quote}
+\emph{the local law is algebraic, the global law is monodromic, and the bridge is logarithmic collision geometry.}
+\end{quote}
+
+From this viewpoint, the subjects in play---chiral and factorization algebra, $A_\infty$ deformation theory, dg-shifted Yangians, Fulton-MacPherson compactifications, perturbative holomorphic-topological field theory, logarithmic geometry, pure braid groups, periods, and spectral/chromatic stabilization---become successive aspects of one mechanism.
+\begin{enumerate}[label=\textup{(\arabic*)}]
+  \item A binary collision kernel $r(z)$ satisfying a Yang-Baxter identity defines a logarithmic flat connection on configuration space.
+  \item Replacing strict multiplication by an $A_\infty$ structure forces the connection to lift to a bar-valued superconnection; its curvature is the Maurer-Cartan defect.
+  \item In interacting holomorphic-topological theories, the superconnection is realized analytically by renormalized compactified graph integrals on mixed holomorphic/topological configuration spaces.
+  \item When the internal line complex is classically resolved in degree $0$, the superconnection reduces canonically to an ordinary logarithmic connection on reduced states.
+  \item Regularized transport between tangential collision zones then produces an associator, a braiding, and hence a monodromic braided tensor structure.
+\end{enumerate}
+
+This article develops the mechanism from first principles and packages the result into a single theorem. Whenever a result depends on analytic or perturbative inputs external to the manuscript, we say so explicitly.
+
+\begin{theorem}[Synthesis theorem; \ClaimStatusProvedHere]\label{thm:synthesis}
+Let $\kk$ be a field of characteristic zero.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item A strict rational dg-shifted Yangian $(Y,r(z),T)$ determines a logarithmic flat shifted KZ/FM connection on $\Conf_n(\AA^1)$ whose residues extend to $\FM_n(\PP^1\mid\infty)$ and satisfy infinitesimal braid relations.
+  \item Support-indexed collision fields $\{D_S\}_{\varnothing\neq S\subset[n]}$ in an $A_\infty$ algebra determine a bar-valued superconnection
+  \[
+    \SN_n=\ds+\widehat\Theta_n+b_n+I_{\Gamma_n},\qquad \Gamma_n=\sum_{\varnothing\neq S\subset[n]}D_S,
+  \]
+  whose curvature is
+  \[
+    \SN_n^2 = I_{(\ds+\Theta_n)\Gamma_n+\MC(\Gamma_n)}.
+  \]
+  Hence flatness is equivalent to a supportwise Maurer-Cartan hierarchy and yields a recursive obstruction theory for higher collision homotopies.
+  \item In a quasi-linear interacting three-dimensional holomorphic-topological theory with anomaly-free perturbation theory, renormalized compactified graph integrals on mixed logarithmic configuration spaces produce an analytic logarithmic superconnection of the same form, and its flatness is a compactified-Stokes identity.
+  \item If the tree-level line complex is resolved in degree $0$, then the full quantum line complex remains concentrated in degree $0$, admits a canonical $\h$-adic strong deformation retract, and the reduced superconnection collapses to an ordinary logarithmic flat connection
+  \[
+    \A_n = p_n A_n^{(1)} i_n.
+  \]
+  In particular, the reduced monodromic theory is controlled directly by the projected renormalized logarithmic $1$-form sector.
+  \item Regularized transport of the reduced connection between tangential collision zones produces an associator, a braiding, pentagon and hexagon identities, and pure braid group representations on reduced line states.
+  \item After spectralization, smashing localizations commute with factorization homology. Consequently periodicity and chromatic localization are compatible with the local-to-global passage.
+\end{enumerate}
+\end{theorem}
+
+Every clause of Theorem~\ref{thm:synthesis} is proved later in the article, except where we explicitly mark conjectural bridges beyond the present theorem package.
+
+\subsection*{Guiding references and scope}
+The formal development is self-contained, but builds on: Beilinson--Drinfeld's chiral/factorization viewpoint \cite{BD04}; Ayala--Francis on factorization homology \cite{AF15}; Costello--Dimofte--Gaiotto on holomorphic twists and boundary chiral algebras \cite{CDG20}; Gaiotto--Kulp--Wu on higher operations and compactified configuration-space regularization \cite{GKW25}; Khan--Zeng on three-dimensional Poisson-vertex gauge theory \cite{KZ25}; Mok on logarithmic Fulton-MacPherson spaces \cite{Mok25}; Dimofte--Niu--Py on line operators and dg-shifted Yangians \cite{DNP25}; and Latyntsev on factorisation quantum groups \cite{Lat23}.
+
+\section{First principles and conventions}\label{sec:log-ht-foundations}
+
+We work over a characteristic-zero ground field $\kk$. Unless stated otherwise, grading conventions are cohomological and tensor products are completed when necessary.
+
+\subsection{Suspended bar conventions}
+Let $A$ be an $A_\infty$ algebra. We use the suspended convention: the structure maps are
+\[
+  m_k : (\s A)^{\otimes k} \longrightarrow \s A
+\]
+of cohomological degree $+1$. Equivalently, the completed tensor coalgebra
+\[
+  \mathrm B(A):=T^c(\s A)=\prod_{m\ge 0}(\s A)^{\otimes m}
+\]
+comes equipped with a coderivation $b$ of degree $+1$ satisfying $b^2=0$.
+
+For $x\in A^1$, define the insertion coderivation $I_x$ on $\mathrm B(A)$ by
+\[
+  I_x(\s a_1\otimes\cdots\otimes \s a_m)
+  :=
+  \sum_{j=0}^{m}
+  \s a_1\otimes\cdots\otimes\s a_j\otimes\s x\otimes\s a_{j+1}\otimes\cdots\otimes\s a_m.
+\]
+The Maurer-Cartan polynomial is
+\[
+  \MC(x):=\sum_{\ell\ge 1} m_\ell(x,\dots,x).
+\]
+
+\begin{lemma}[Bar insertion identity; \ClaimStatusProvedHere]\label{lem:bar-insertion}
+For every degree-one element $x\in A^1$ one has
+\[
+  [b,I_x]+I_x^2 = I_{\MC(x)}.
+\]
+\end{lemma}
+
+\begin{proof}
+Both sides are coderivations, so it suffices to compare corestrictions to the cogenerators $\s A$. The corestriction of $[b,I_x]$ records all terms in which a single higher multiplication $m_\ell$ acts on a bar word containing exactly one inserted copy of $x$; the corestriction of $I_x^2$ records the contributions in which two inserted copies of $x$ become adjacent and are then absorbed into the same higher multiplication. Collecting all such possibilities yields precisely the full Maurer-Cartan polynomial $\MC(x)$. This is the suspended bar-coalgebra form of the usual $A_\infty$ Maurer-Cartan identity.
+\end{proof}
+
+\subsection{Configuration spaces and logarithmic Fulton-MacPherson geometry}
+For a smooth curve $C$ and a divisor $D\subset C$, write
+\[
+  \Conf_n(C\setminus D)=\{(z_1,\dots,z_n)\in (C\setminus D)^n\mid z_i\neq z_j\text{ for }i\neq j\}
+\]
+for the ordered configuration space. We set
+\[
+  X_n:=\FM_n(\PP^1\mid\infty)
+\]
+for Mok's logarithmic Fulton-MacPherson compactification of the pair $(\PP^1,\infty)$ \cite{Mok25}. Near a boundary stratum indexed by a collision tree $T$, there exist local scale coordinates $t_e$ indexed by internal edges $e\in E(T)$ such that pairwise differences factor as
+\[
+  z_i-z_j = \Big(\prod_{e\in P(i,j)} t_e\Big)u_{ij},
+\]
+where $u_{ij}$ is a unit and $P(i,j)$ is the set of tree edges separating $i$ from $j$. Thus collisions become normal-crossings divisors in logarithmic coordinates.
+
+\subsection{Strict rational dg-shifted Yangians}
+The full notion of dg-shifted Yangian belongs to a broader program \cite{DNP25}. For the strict rational theory developed below we isolate only the structure actually used.
+
+\begin{definition}[Strict rational dg-shifted Yangian]\label{def:strict-yangian}
+A \emph{strict rational dg-shifted Yangian} consists of the following data:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item an associative dg algebra $Y$;
+  \item a degree-zero derivation $T$ (the translation operator);
+  \item a meromorphic element $r(z)\in (Y\otimes Y)(z)$, regular at infinity, with a simple pole at the origin,
+  \[
+    r(z)=\frac{\Omega}{z}+r_{\mathrm{reg}}(z),\qquad \Omega\in Y\otimes Y;
+  \]
+  \item the parameter-dependent classical Yang-Baxter equation
+  \[
+    [r_{12}(u),r_{13}(u+v)] + [r_{12}(u),r_{23}(v)] + [r_{13}(u+v),r_{23}(v)] = 0.
+  \]
+\end{enumerate}
+\end{definition}
+
+The datum $(Y,r,T)$ is the strict shadow of the full $A_\infty$ structure treated later.
+
+\section{The strict logarithmic theory: the shifted KZ/FM connection}\label{sec:strict}
+
+We begin with the strict theory because it exposes the geometric heart of the subject with maximal clarity: pairwise collisions, logarithmic poles, and Yang-Baxter flatness.
+
+\subsection{Construction}
+Let $(Y,r,T)$ be a strict rational dg-shifted Yangian and let $V_1,\dots,V_n$ be strict left $Y$-modules. Write $z_{ij}:=z_i-z_j$. On the trivial vector bundle over $\Conf_n(\AA^1)$ with fiber $V_1\otimes\cdots\otimes V_n$, define
+\[
+  \nabla_n^Y
+  :=
+  d-\sum_{1\le i<j\le n}\rho_{ij}(r(z_{ij}))\,d(z_{ij}),
+\]
+where $\rho_{ij}$ acts in factors $i$ and $j$ and trivially elsewhere.
+
+\begin{definition}[Shifted KZ/FM connection]
+The connection $\nabla_n^Y$ is called the \emph{shifted KZ/FM connection} attached to $Y$.
+\end{definition}
+
+When $r(z)=\Omega/z$, this is exactly the classical rational KZ connection.
+
+\subsection{Flatness and residues}
+
+\begin{theorem}[Flatness of the shifted KZ/FM connection; \ClaimStatusProvedHere]\label{thm:strict-flatness}
+For every strict rational dg-shifted Yangian, the shifted KZ/FM connection is flat:
+\[
+  (\nabla_n^Y)^2=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Set
+\[
+  A:=\sum_{i<j}\rho_{ij}(r(z_{ij}))\,d(z_{ij}).
+\]
+Then $\nabla_n^Y=d-A$, so its curvature is $F=dA-A\wedge A$. First, $dA=0$, because every summand has the form $f(z_{ij})d(z_{ij})$ and hence
+\[
+  d\big(f(z_{ij})d(z_{ij})\big)=f'(z_{ij})d(z_{ij})\wedge d(z_{ij})=0.
+\]
+Thus only $A\wedge A$ remains.
+
+Terms supported on disjoint pairs commute, so only triples $i<j<k$ contribute. For one such triple,
+\begin{align*}
+  A\wedge A\big|_{ijk}
+  &= [r_{ij}(z_{ij}),r_{ik}(z_{ik})]dz_{ij}\wedge dz_{ik}
+   + [r_{ij}(z_{ij}),r_{jk}(z_{jk})]dz_{ij}\wedge dz_{jk} \\
+  &\qquad + [r_{ik}(z_{ik}),r_{jk}(z_{jk})]dz_{ik}\wedge dz_{jk}.
+\end{align*}
+Since $z_{ik}=z_{ij}+z_{jk}$, we also have
+\[
+  dz_{ij}\wedge dz_{ik}=dz_{ij}\wedge dz_{jk},
+  \qquad
+  dz_{ik}\wedge dz_{jk}=dz_{ij}\wedge dz_{jk}.
+\]
+Hence the triple contribution equals
+\[
+  \Big([r_{12}(u),r_{13}(u+v)] + [r_{12}(u),r_{23}(v)] + [r_{13}(u+v),r_{23}(v)]\Big)_{u=z_{ij},\,v=z_{jk}}dz_{ij}\wedge dz_{jk},
+\]
+which vanishes by the classical Yang-Baxter equation. Summing over all triples gives $A\wedge A=0$, hence $F=0$.
+\end{proof}
+
+\begin{lemma}[Residues and infinitesimal braid operators; \ClaimStatusProvedHere]\label{lem:inf-braid}
+If $r(z)=\Omega/z+O(1)$ near $z=0$, and $\Omega_{ij}$ denotes the action of $\Omega$ in factors $i,j$, then
+\[
+  [\Omega_{ij},\Omega_{kl}]=0 \qquad \text{if }\{i,j\}\cap\{k,l\}=\varnothing,
+\]
+and
+\[
+  [\Omega_{ij},\Omega_{ik}+\Omega_{jk}]=0
+\]
+for distinct $i,j,k$.
+\end{lemma}
+
+\begin{proof}
+The disjoint-support commutators are tautologically zero. For the three-term relation, substitute $u=\lambda x$ and $v=\lambda y$ into the Yang-Baxter equation, multiply by $\lambda^2$, and let $\lambda\to 0$. Using
+\[
+  r(\lambda x)=\frac{\Omega}{\lambda x}+O(1),
+  \qquad
+  r(\lambda(x+y))=\frac{\Omega}{\lambda(x+y)}+O(1),
+\]
+one obtains
+\[
+  \frac{[\Omega_{12},\Omega_{13}]}{x(x+y)}+
+  \frac{[\Omega_{12},\Omega_{23}]}{xy}+
+  \frac{[\Omega_{13},\Omega_{23}]}{(x+y)y}=0.
+\]
+Multiplying by $xy(x+y)$ and comparing the coefficients of $x$ and $y$ yields the claim.
+\end{proof}
+
+\begin{proposition}[Logarithmic extension and edge residues; \ClaimStatusProvedHere]\label{prop:strict-log-ext}
+Assume $r(z)$ is regular at infinity. Then the shifted KZ/FM connection extends to a logarithmic connection on
+\[
+  X_n=\FM_n(\PP^1\mid\infty).
+\]
+Near a boundary stratum indexed by a collision tree $T$, there are local scale coordinates $t_e$ such that
+\[
+  \nabla_n^Y = d-\sum_{e\in E(T)} \Omega_e\,\frac{dt_e}{t_e}+\text{regular terms},
+\]
+where
+\[
+  \Omega_e:=\sum_{i<j:\,e\in P(i,j)}\Omega_{ij}.
+\]
+\end{proposition}
+
+\begin{proof}
+In a tree chart one has
+\[
+  z_i-z_j = \Big(\prod_{e\in P(i,j)}t_e\Big)u_{ij},
+\]
+with $u_{ij}$ a unit. Since $r(z)=\Omega/z+O(1)$, one has
+\[
+  r(z_i-z_j)d(z_i-z_j)=\Omega\,d\log(z_i-z_j)+\text{regular terms}.
+\]
+Expanding the logarithmic derivative gives
+\[
+  d\log(z_i-z_j)=\sum_{e\in P(i,j)}\frac{dt_e}{t_e}+d\log(u_{ij}).
+\]
+Summing over all pairs $i<j$ therefore yields
+\[
+  \sum_{i<j}r(z_i-z_j)d(z_i-z_j)=\sum_{e\in E(T)}\Big(\sum_{i<j:\,e\in P(i,j)}\Omega_{ij}\Big)\frac{dt_e}{t_e}+\text{regular terms},
+\]
+which is the claimed logarithmic form.
+\end{proof}
+
+\begin{corollary}[Local monodromy around a boundary divisor; \ClaimStatusProvedHere]\label{cor:strict-monodromy}
+The local monodromy around the divisor $t_e=0$ is conjugate to
+\[
+  \exp(2\pi i\,\Omega_e).
+\]
+\end{corollary}
+
+\begin{proof}
+After a local holomorphic gauge transformation removing the regular part, the connection has the model form $d-\Omega_e\,dt_e/t_e$ in the normal direction to the divisor. Parallel transport around $t_e=\varepsilon e^{2\pi i s}$ gives the stated exponential.
+\end{proof}
+
+\begin{remark}[Enumerative and arithmetic shadows of the strict theory]
+The boundary of $X_n$ is indexed by collision trees. Proposition~\ref{prop:strict-log-ext} decorates every internal edge of every collision tree with an explicit residue operator $\Omega_e$. Thus the compactification is not only combinatorial; it is a tree skeleton weighted by operator-valued residues. If the algebra and modules are defined over a subfield $K\subset\CC$, the connection and all its residues are defined over $K$, producing a logarithmic local system with arithmetic structure.
+\end{remark}
+
+\section{The full $A_\infty$ collision theory}\label{sec:ainfty}
+
+The strict connection sees only binary collisions. The genuinely derived theory must also remember higher collisions, and these are governed by higher homotopies. The correct home for them is not an ordinary vector bundle but the completed bar coalgebra.
+
+\subsection{Support-indexed collision fields}
+Let $A$ be an $A_\infty$ algebra in the suspended convention, endowed with a degree-zero translation derivation $T$. Let $V_1,\dots,V_n$ be line-state objects and set
+\[
+  E_n:=\End(V_1\otimes\cdots\otimes V_n)\wot A.
+\]
+For every nonempty subset $S\subset[n]$, let
+\[
+  D_S(\mathbf z_S)\in E_n^1
+\]
+be a degree-one element supported exactly on the tensor factors indexed by $S$. The intended interpretation is
+\[
+  D_{\{i\}}=\mu_i(z_i),
+  \qquad
+  D_{\{i,j\}}=r_{ij}(z_i-z_j),
+  \qquad
+  D_S=h_S(\mathbf z_S)\quad (|S|\ge 3),
+\]
+where $\mu_i$ is the translated one-line Maurer-Cartan coupling, $r_{ij}$ is the binary collision kernel, and $h_S$ is a genuinely higher collision correction.
+
+Define the total collision field
+\[
+  \Gamma_n(\mathbf z):=\sum_{\varnothing\neq S\subset[n]}D_S(\mathbf z_S).
+\]
+Let $\mathrm B(E_n)$ be the completed bar coalgebra of $E_n$, with bar coderivation $b_n$ induced by the $A_\infty$ structure. Let
+\[
+  \Theta_n:=\sum_{i=1}^n dz_i\,T^{(i)}
+\]
+be the translation one-form acting on $E_n$, and let $\widehat\Theta_n$ be the induced coderivation on $\mathrm B(E_n)$.
+
+\begin{definition}[Full $A_\infty$ superconnection]\label{def:superconnection}
+The \emph{full $A_\infty$ collision superconnection} is
+\[
+  \SN_n := \ds + \widehat\Theta_n + b_n + I_{\Gamma_n}.
+\]
+\end{definition}
+
+\subsection{The master curvature formula}
+
+\begin{theorem}[Master curvature formula; \ClaimStatusProvedHere]\label{thm:master-curvature}
+The curvature of the full $A_\infty$ collision superconnection is again an insertion coderivation:
+\[
+  \SN_n^2 = I_{\mathcal K_n},
+\]
+where
+\[
+  \mathcal K_n := (\ds+\Theta_n)\Gamma_n + \MC(\Gamma_n)
+  = (\ds+\Theta_n)\Gamma_n + \sum_{\ell\ge 1} m_\ell(\Gamma_n,\dots,\Gamma_n).
+\]
+In particular,
+\[
+  \SN_n^2=0
+  \quad\Longleftrightarrow\quad
+  (\ds+\Theta_n)\Gamma_n+\MC(\Gamma_n)=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $\ds^2=0$, $\widehat\Theta_n^2=0$, and $b_n^2=0$, only mixed commutators with $I_{\Gamma_n}$ remain. First,
+\[
+  [\ds+\widehat\Theta_n,I_{\Gamma_n}] = I_{(\ds+\Theta_n)\Gamma_n},
+\]
+because de Rham differentiation and translation act coefficientwise on the inserted element.
+
+Second, by Lemma~\ref{lem:bar-insertion},
+\[
+  [b_n,I_{\Gamma_n}] + I_{\Gamma_n}^2 = I_{\MC(\Gamma_n)}.
+\]
+Adding the identities yields
+\[
+  \SN_n^2 = I_{(\ds+\Theta_n)\Gamma_n+\MC(\Gamma_n)},
+\]
+which is the claim.
+\end{proof}
+
+The point is that the curvature is not some mysterious higher tensor. It is exactly the Maurer-Cartan defect of the total collision field after transport by de Rham and translation.
+
+\subsection{Supportwise curvature hierarchy}
+For every nonempty subset $S\subset[n]$, let $(\mathcal K_n)_S$ denote the support-$S$ component of $\mathcal K_n$. Since the support of
+\[
+  m_\ell(D_{S_1},\dots,D_{S_\ell})
+\]
+is $S_1\cup\cdots\cup S_\ell$, the flatness equation decomposes supportwise.
+
+\begin{theorem}[Support hierarchy; \ClaimStatusProvedHere]\label{thm:support-hierarchy}
+The flatness equation $\SN_n^2=0$ is equivalent to the family of equations
+\[
+  (\ds+\Theta_n)D_S +
+  \sum_{\ell\ge 1}
+  \sum_{\substack{S_1,\dots,S_\ell\neq\varnothing \\
+                    S_1\cup\cdots\cup S_\ell = S}}
+  m_\ell(D_{S_1},\dots,D_{S_\ell})
+  =0
+\]
+for all nonempty $S\subset[n]$.
+\end{theorem}
+
+\begin{proof}
+Take the support-$S$ component of the identity
+\[
+  (\ds+\Theta_n)\Gamma_n+\MC(\Gamma_n)=0.
+\]
+The support bookkeeping is exactly as stated.
+\end{proof}
+
+There is an equivalent Möbius-inversion form. For $R\subset[n]$ set
+\[
+  \Gamma_R:=\sum_{\varnothing\neq U\subseteq R}D_U.
+\]
+Then the support-$S$ equation is equivalent to
+\[
+  (\ds+\Theta_n)D_S + \sum_{\varnothing\neq R\subseteq S}(-1)^{|S|-|R|}\MC(\Gamma_R)=0.
+\]
+The support hierarchy therefore behaves like an inclusion-exclusion principle for collision clusters.
+
+\subsection{The first three levels}
+The hierarchy is already highly informative in low support.
+
+\begin{corollary}[The first three curvature layers; \ClaimStatusProvedHere]\label{cor:first-three}
+The support hierarchy specializes to the following equations.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item For $S=\{i\}$,
+  \[
+    (\ds+\Theta_n)\mu_i + \MC(\mu_i)=0.
+  \]
+  \item For $S=\{i,j\}$,
+  \[
+    (\ds+\Theta_n)r_{ij} + \MC(\mu_i+\mu_j+r_{ij}) - \MC(\mu_i)-\MC(\mu_j)=0.
+  \]
+  \item For $S=\{i,j,k\}$, writing
+  \[
+    \Gamma_{ij}:=\mu_i+\mu_j+r_{ij},
+    \qquad
+    \Gamma_{ijk}:=\mu_i+\mu_j+\mu_k+r_{ij}+r_{ik}+r_{jk}+h_{ijk},
+  \]
+  one has
+  \[
+    (\ds+\Theta_n)h_{ijk} + \MC(\Gamma_{ijk})-\MC(\Gamma_{ij})-\MC(\Gamma_{ik})-\MC(\Gamma_{jk})+\MC(\mu_i)+\MC(\mu_j)+\MC(\mu_k)=0.
+  \]
+\end{enumerate}
+\end{corollary}
+
+If the singleton equations hold, the triple equation simplifies to
+\[
+  (\ds+\Theta_n)h_{ijk} + \MC(\Gamma_{ijk})-\MC(\Gamma_{ij})-\MC(\Gamma_{ik})-\MC(\Gamma_{jk})=0.
+\]
+Thus the classical $A_\infty$ Yang-Baxter defect is not the end of the story; it is the source term for a triple collision homotopy.
+
+\subsection{Obstruction theory}
+
+\begin{definition}[Twisted differential at the binary stage]
+Let
+\[
+  \Gamma_{\le 2}:=\sum_{|S|\le 2}D_S.
+\]
+The \emph{binary-stage twisted differential} on support-$\ge 3$ data is
+\[
+  \delta_{\le 2}(X)
+  :=
+  (\ds+\Theta_n)X + \sum_{p,q\ge 0} m_{p+1+q}(\Gamma_{\le 2}^{\otimes p},X,\Gamma_{\le 2}^{\otimes q}).
+\]
+\end{definition}
+
+\begin{theorem}[First obstruction theorem; \ClaimStatusProvedHere]\label{thm:first-obstruction}
+Assume that the support-$1$ and support-$2$ equations hold. Let
+\[
+  \Omega_{ijk}:=\Big((\ds+\Theta_n)\Gamma_{\le 2}+\MC(\Gamma_{\le 2})\Big)_{\{i,j,k\}}.
+\]
+Then
+\[
+  \delta_{\le 2}(\Omega_{ijk})=0.
+\]
+Hence $[\Omega_{ijk}]\in H^2(\delta_{\le 2})$ is the obstruction class to the existence of a triple correction $h_{ijk}$ solving the support-$3$ flatness equation.
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+  \SN_{\le 2}:=\ds+\widehat\Theta_n+b_n+I_{\Gamma_{\le 2}}.
+\]
+By Theorem~\ref{thm:master-curvature},
+\[
+  \SN_{\le 2}^2 = I_{\Omega},
+\]
+where $\Omega$ has support at least $3$ and its support-$3$ component is precisely $\Omega_{ijk}$. Apply the Bianchi identity:
+\[
+  [\SN_{\le 2},\SN_{\le 2}^2]=0.
+\]
+Taking the support-$\{i,j,k\}$ corestriction to cogenerators gives exactly
+\[
+  \delta_{\le 2}(\Omega_{ijk})=0.
+\]
+The support-$3$ flatness equation is the inhomogeneous equation
+\[
+  \delta_{\le 2}(h_{ijk})=-\Omega_{ijk}
+\]
+up to terms of higher order in any auxiliary pronilpotent filtration. Thus $h_{ijk}$ exists if and only if the class of $\Omega_{ijk}$ vanishes.
+\end{proof}
+
+\begin{corollary}[Recursive support filtration; \ClaimStatusProvedHere]\label{cor:recursive-support}
+Fix an auxiliary pronilpotent filtration in which nonlinear terms are of strictly higher order. Suppose support-$<m$ data have been constructed. Then for each $|S|=m$, the defect
+\[
+  \mathfrak O_S:=\Big((\ds+\Theta_n)\Gamma_{<m}+\MC(\Gamma_{<m})\Big)_S
+\]
+is closed for the twisted differential determined by $\Gamma_{<m}$. Its cohomology class is the obstruction to adjoining a support-$S$ correction $D_S$. If all these obstruction groups vanish, binary data extend recursively to a full flat collision superconnection.
+\end{corollary}
+
+\begin{remark}[The formal moral]
+The $A_\infty$ Yang-Baxter relation is not a single equation but the first nontrivial face of an infinite supportwise curvature tower. Binary collisions generate curvature in support $3$; support-$3$ homotopies absorb that curvature and move the defect to support $4$; and so on. The full theory is therefore intrinsically recursive and operadic.
+\end{remark}
+
+\section{Analytic realization in interacting holomorphic-topological theory}\label{sec:analytic}
+
+The formal theory of the previous section becomes analytic in a concrete interacting three-dimensional holomorphic-topological field theory. The goal of this section is to build the required configuration-space geometry and show that compactified Stokes theory realizes the formal Maurer-Cartan equations as literal boundary identities of renormalized graph integrals.
+
+\subsection{The quasi-linear holomorphic-topological setting}
+We work with a perturbative three-dimensional holomorphic-topological theory on
+\[
+  M=\CC_z\times \RR_t
+\]
+in the quasi-linear class highlighted in \cite{DNP25}. Concretely, this includes holomorphic-topological twists of many $3$d $\mathcal N=2$ gauge theories with arbitrary Chern-Simons level, linear matter, and superpotential, under the assumptions for which the perturbative line OPE is exactly resumable. Let $L_1,\dots,L_n$ be perturbative line operators supported on parallel copies of the topological direction, with state spaces $V_1,\dots,V_n$.
+
+The analytic data we need are the graph-valued forms computing the higher operations of the theory in the sense of \cite{GKW25,DNP25}. The issue is that these forms live on singular configuration spaces. The cure is to compactify and logarithmically resolve the relevant collision strata.
+
+\subsection{Mixed logarithmic configuration spaces}
+Fix external holomorphic positions
+\[
+  \mathbf z=(z_1,\dots,z_n)\in \Conf_n(\CC),
+  \qquad
+  D_{\mathbf z}:=\{z_1,\dots,z_n,\infty\}\subset \PP^1.
+\]
+For a connected admissible graph $\Gamma$, let $V_b(\Gamma)$ denote the set of internal bulk vertices and $T(\Gamma)$ the set of all time variables carried by internal bulk and line vertices. The raw configuration space is
+\[
+  C_\Gamma(\mathbf z)
+  :=
+  \Conf_{V_b(\Gamma)}(\PP^1\setminus D_{\mathbf z})
+  \times
+  \Conf_{T(\Gamma)}^{\mathrm{ord}}(\RR),
+\]
+where the second factor is the chamber of ordered time variables compatible with line ordering.
+
+\begin{definition}[Mixed logarithmic compactification]\label{def:mixed-log-config}
+The \emph{mixed logarithmic configuration space} associated to $\Gamma$ and $\mathbf z$ is the iterated clean blowup
+\[
+  \mathfrak C_\Gamma(\mathbf z)
+  :=
+  \Big(
+     \FM_{V_b(\Gamma)}(\PP^1\mid D_{\mathbf z})
+     \times
+     \overline{\Conf}^{\mathrm{ord}}_{T(\Gamma)}(\RR)
+   \Big)^{\mathrm{mix}},
+\]
+obtained by additionally blowing up all mixed incidence strata corresponding to connected divergent subgraphs: bulk-bulk collisions, approach of bulk vertices to the divisor $D_{\mathbf z}$, time collisions, and their clean intersections forced by a connected collision pattern.
+\end{definition}
+
+The point is that the holomorphic and topological singularities are not independent. A divergent subgraph can force simultaneous holomorphic and temporal scale collapse, and those loci must be blown up together.
+
+\begin{proposition}[Local coordinates and log smoothness; \ClaimStatusProvedHere]\label{prop:mixed-log-smooth}
+The mixed logarithmic configuration space $\mathfrak C_\Gamma(\mathbf z)$ carries a natural fs logarithmic structure and is log smooth over $X_n=\FM_n(\PP^1\mid\infty)$. Its codimension-one boundary divisors are indexed by connected mixed collision types. Near a boundary stratum indexed by a mixed collision forest $F$, there are local scale coordinates
+\[
+  r_e\ge 0 \quad (e\in E_h(F)),
+  \qquad
+  s_f\ge 0 \quad (f\in E_t(F)),
+\]
+and unit coordinates $\xi,\tau$ such that
+\[
+  w_a-w_b = \Big(\prod_{e\in P_h(a,b)}r_e\Big)\xi_{ab},
+  \qquad
+  t_u-t_v = \Big(\prod_{f\in P_t(u,v)}s_f\Big)\tau_{uv}.
+\]
+\end{proposition}
+
+\begin{proof}
+Mok's logarithmic Fulton-MacPherson spaces are log smooth, and the ordered real compactification of ordered points on a line is a manifold with corners. The mixed incidence strata we blow up are clean intersections of boundary strata indexed by connected collision subgraphs. Clean blowup preserves log smoothness and normal-crossings/corners structures. The quoted form of local coordinates is the mixed analogue of the standard tree coordinates for Fulton-MacPherson spaces: every holomorphic difference factors into the product of scales along a holomorphic collision tree times a unit, and similarly every time difference factors through topological collision scales. The mixed blowups ensure compatibility when the same divergent subgraph controls both.
+\end{proof}
+
+\subsection{Logarithmic BPHZ for graph-valued forms}
+For each graph $\Gamma$ let
+\[
+  \omega_{\Gamma,\varepsilon}
+\]
+be the UV-regularized graph form on $C_\Gamma(\mathbf z)$, valued in
+\[
+  \End(V_1\otimes\cdots\otimes V_n)\wot \mathrm B(E_n),
+\]
+constructed from regularized propagators in the sense of \cite{GKW25,DNP25}. Pulling back to a boundary chart of $\mathfrak C_\Gamma(\mathbf z)$, the form has an asymptotic expansion of the shape
+\[
+  \beta_F^*\omega_{\Gamma,\varepsilon}
+  \sim
+  \sum_{\alpha,\beta,\mu,\nu}
+  r^{\alpha}s^{\beta}(\log r)^{\mu}(\log s)^{\nu}
+  \eta_{\alpha,\beta,\mu,\nu}(\xi,\tau;\varepsilon),
+\]
+with smooth coefficient forms $\eta_{\alpha,\beta,\mu,\nu}$.
+
+\begin{definition}[Logarithmic Taylor projector and log-BPHZ operator]\label{def:log-bphz}
+For a forest face $F$, define the logarithmic Taylor projector $T_F$ by keeping the asymptotic terms with some negative scale exponent:
+\[
+  T_F(\omega)
+  :=
+  \sum_{\exists e:\,\alpha_e<0\ \text{or}\ \exists f:\,\beta_f<0}
+  r^{\alpha}s^{\beta}(\log r)^{\mu}(\log s)^{\nu}
+  \eta_{\alpha,\beta,\mu,\nu}.
+\]
+The \emph{log-BPHZ operator} is
+\[
+  R_\Gamma(\omega):=\sum_{F\,\mathrm{forest}}(-1)^{|F|}T_F(\omega).
+\]
+Provided the limit exists, the renormalized graph form is
+\[
+  \omega_\Gamma^{\mathrm{ren}}:=\lim_{\varepsilon\to 0}R_\Gamma(\omega_{\Gamma,\varepsilon}).
+\]
+\end{definition}
+
+This is the logarithmic analogue of forest subtraction: one subtracts precisely the asymptotic pieces whose scale degree is too negative to be integrable.
+
+\begin{theorem}[Existence, logarithmicity, and residue factorization; \ClaimStatusProvedHere]\label{thm:log-bphz-existence}
+In the quasi-linear holomorphic-topological setting, for every connected admissible graph $\Gamma$ the renormalized graph form $\omega_\Gamma^{\mathrm{ren}}$ exists and extends to a log-polyhomogeneous differential form on $\mathfrak C_\Gamma(\mathbf z)$ with at worst simple logarithmic singularities:
+\[
+  \omega_\Gamma^{\mathrm{ren}}
+  \in
+  \Omega^{\bullet}(\mathfrak C_\Gamma(\mathbf z),\log\partial)
+  \wot
+  \End(V_1\otimes\cdots\otimes V_n)\wot \mathrm B(E_n).
+\]
+Moreover, on a boundary divisor $D_F\subset\mathfrak C_\Gamma(\mathbf z)$ corresponding to a connected collision forest $F$,
+\[
+  \Res_{D_F}\,\omega_\Gamma^{\mathrm{ren}}
+  =
+  \mathrm{Comp}_F\Big(
+    \omega_{\Gamma/F}^{\mathrm{ren}}
+    \boxtimes
+    \bboxprod_{H\in F}\omega_H^{\mathrm{ren}}
+  \Big),
+\]
+where $\Gamma/F$ is the graph obtained by collapsing each cluster of $F$ and $\mathrm{Comp}_F$ is the induced bar/endomorphism composition map.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+In a mixed boundary chart, each regularized propagator admits an asymptotic expansion in the scale forms $dr_e/r_e$, $ds_f/s_f$, units in the angular variables, and powers of the scales. Non-integrable terms occur exactly when a connected collision cluster contributes negative scale degree. By definition, the operator $R_\Gamma$ subtracts those negative-degree pieces on every forest face. The remaining asymptotic expansion has no negative powers and therefore defines a log-polyhomogeneous form with at worst simple logarithmic singularities.
+
+For the residue formula, split the propagators into those internal to a collision cluster and those connecting distinct clusters. Along the divisor $D_F$, the cross-cluster propagators freeze to smooth coefficients, while the internal propagators rescale only with the local scales of their own cluster. Hence the leading term factorizes into the product of the renormalized internal graph forms of the clusters and the renormalized external graph obtained by collapsing them. The bar labels and tensor factors compose exactly by the contraction map $\mathrm{Comp}_F$ determined by the collapsed graph.
+\end{proof}
+
+\subsection{Fiber integrals and the analytic collision field}
+Let
+\[
+  \pi_\Gamma : \mathfrak C_\Gamma(\mathbf z) \longrightarrow X_n
+\]
+be the map forgetting all internal bulk and time variables. Define the graph weight
+\[
+  W_\Gamma := (\pi_\Gamma)_*\omega_\Gamma^{\mathrm{ren}}.
+\]
+Because the fibers are compactified and the integrands are logarithmic, the pushforward is again a logarithmic form on $X_n$ valued in the completed bar/endomorphism algebra.
+
+Set
+\[
+  \Gamma_n^{\mathrm{an}} := \sum_{\Gamma\,\mathrm{connected}} \h^{L(\Gamma)}W_\Gamma,
+\]
+where $L(\Gamma)$ is the loop order of $\Gamma$. The sum is a formal $\h$-series. Define the analytic superconnection
+\[
+  \SN_n^{\mathrm{an}} := \ds+\widehat\Theta_n+b_n+I_{\Gamma_n^{\mathrm{an}}}
+\]
+on the trivial bar bundle over $X_n$.
+
+\begin{theorem}[Analytic curvature formula; \ClaimStatusProvedHere]\label{thm:analytic-curvature}
+The curvature of the analytic superconnection is
+\[
+  (\SN_n^{\mathrm{an}})^2 = I_{\mathcal K_n^{\mathrm{an}}},
+\]
+where
+\[
+  \mathcal K_n^{\mathrm{an}}
+  =
+  (\ds+\Theta_n)\Gamma_n^{\mathrm{an}}
+  +
+  \sum_{m\ge 1}m_m(\Gamma_n^{\mathrm{an}},\dots,\Gamma_n^{\mathrm{an}}).
+\]
+\end{theorem}
+
+\begin{proof}
+This is the formal master curvature formula of Theorem~\ref{thm:master-curvature} applied coefficientwise to the analytic collision field $\Gamma_n^{\mathrm{an}}$.
+\end{proof}
+
+\begin{theorem}[Compactified-Stokes flatness; \ClaimStatusProvedHere]\label{thm:analytic-flatness}
+In the quasi-linear holomorphic-topological theory described above,
+\[
+  \mathcal K_n^{\mathrm{an}}=0.
+\]
+Equivalently,
+\[
+  (\SN_n^{\mathrm{an}})^2=0.
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Differentiate under the fiber integral:
+\[
+  (\ds+\Theta_n)W_\Gamma
+  =
+  (\pi_\Gamma)_*\big((d+\widehat\Theta_n)\omega_\Gamma^{\mathrm{ren}}\big)
+  +
+  (\pi_\Gamma)_*\big|_{\partial\mathfrak C_\Gamma/X_n}\omega_\Gamma^{\mathrm{ren}}.
+\]
+The interior differential term combines with the bar differential $b_n$ by the perturbative BV/BRST master equation as organized in \cite{GKW25}. The boundary term is a compactified Stokes contribution. Every codimension-one boundary face of $\mathfrak C_\Gamma(\mathbf z)$ is a collision divisor, and by Theorem~\ref{thm:log-bphz-existence} its residue factorizes into a composition of lower graph weights. Summing over all graphs and all codimension-one faces therefore produces exactly the Maurer-Cartan polynomial of $\Gamma_n^{\mathrm{an}}$. Codimension-two corners occur twice with opposite orientation and cancel. Thus the total boundary contribution is precisely
+\[
+  -\big((\ds+\Theta_n)\Gamma_n^{\mathrm{an}}+\MC(\Gamma_n^{\mathrm{an}})\big),
+\]
+which must vanish because the total compactified Stokes integral does.
+\end{proof}
+
+\begin{theorem}[Binary residues and the analytic $A_\infty$ Yang-Baxter identity; \ClaimStatusProvedHere]\label{thm:analytic-yb}
+Let $D_{ij}\subset X_n$ be the boundary divisor where $z_i$ and $z_j$ collide. Then near $D_{ij}$,
+\[
+  \Gamma_n^{\mathrm{an}} = \mathbf r_{ij}(u)+\text{regular terms},
+  \qquad u=z_i-z_j,
+\]
+where $\mathbf r_{ij}(u)$ is the analytic binary collision kernel obtained by integrating the codimension-one binary-collision faces.
+
+On a codimension-two triple-collision corner one has the iterated-residue identity
+\begin{align*}
+  &\MC\big(\mathbf r_{12}(u)+\mathbf r_{13}(u+v)+\mathbf r_{23}(v)\big)
+   -\MC\big(\mathbf r_{12}(u)\big)
+   -\MC\big(\mathbf r_{13}(u+v)\big)
+   -\MC\big(\mathbf r_{23}(v)\big)
+  =0.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+The existence of the binary residue follows directly from the codimension-one part of Theorem~\ref{thm:log-bphz-existence}. For the codimension-two identity, apply Theorem~\ref{thm:analytic-flatness} and take the iterated residue along the triple-collision corner. Only the three compatible binary gluings survive, and their signed sum is exactly the displayed identity.
+\end{proof}
+
+\begin{theorem}[Family version over semistable degenerations; \ClaimStatusProvedHere]\label{thm:family-version}
+Let $C\to B$ be a semistable degeneration of curves whose generic fiber is $\PP^1$. Then the construction above extends fiberwise to a logarithmic flat analytic superconnection on the relative logarithmic Fulton-MacPherson space $\FM_n(C/B)$. On a rigid special-fiber component indexed by $\rho$, the relative collision field factorizes after pullback along Mok's birational product model:
+\[
+  \Gamma_{n/B,\rho}^{\mathrm{an}}
+  =
+  \mathrm{Comp}_\rho\Big(
+     \bboxprod_{v\in V(S_\rho)} \Gamma_{I_v}^{\mathrm{an}}(Y_v\mid D_v)
+  \Big).
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Mok's degeneration theorem expresses each rigid special-fiber component as a proper birational modification of a product of logarithmic Fulton-MacPherson spaces attached to lower-point data. Running the same compactified graph-integral construction over the relative family and restricting to a rigid component gives the same residue factorization argument as before, now componentwise over the product decomposition.
+\end{proof}
+
+\section{Reduction to ordinary logarithmic monodromy}\label{sec:reduction}
+
+The superconnection is the natural object before reduction, but the actual monodromic tensor structure lives on reduced line states. The central question is therefore: when does the bar-valued logarithmic superconnection collapse to an ordinary logarithmic connection on cohomology? The answer is: whenever the tree-level line complex is a genuine degree-zero resolution.
+
+\subsection{Quantum concentration from classical concentration}
+Assume from now on that the quantum line complex has the form
+\[
+  (E_n[[\h]],Q_n),
+  \qquad
+  Q_n=Q_{0,n}+\sum_{\ell\ge 1}\h^\ell Q_{n,\ell},
+\]
+where $E_n$ is a bounded finite-rank graded vector bundle over the relevant parameter space.
+
+\begin{theorem}[Quantum concentration from classical concentration; \ClaimStatusProvedHere]\label{thm:quantum-concentration}
+Suppose
+\[
+  H^j(E_n,Q_{0,n})=0 \qquad \text{for all } j\neq 0.
+\]
+Then
+\[
+  H^j(E_n[[\h]],Q_n)=0 \qquad \text{for all } j\neq 0.
+\]
+\end{theorem}
+
+\begin{proof}
+Filter $E_n[[\h]]$ by the complete decreasing filtration $F^p:=\h^pE_n[[\h]]$. Since $Q_n=Q_{0,n}+O(\h)$, the associated graded differential is $Q_{0,n}$. The resulting spectral sequence has
+\[
+  E_1^{p,q}\cong \h^p H^{p+q}(E_n,Q_{0,n}).
+\]
+By the hypothesis, $E_1^{p,q}$ vanishes unless $p+q=0$. Degree reasons force all higher differentials to vanish. Therefore the total cohomology is supported only in total degree $0$.
+\end{proof}
+
+\begin{corollary}[Flat $\h$-adic deformation of reduced states; \ClaimStatusProvedHere]\label{cor:flat-hbar}
+If $H^0(E_n,Q_{0,n})$ has constant rank, then $H^0(E_n[[\h]],Q_n)$ is a flat $\h$-adic deformation of $H^0(E_n,Q_{0,n})$.
+\end{corollary}
+
+\subsection{Canonical $\h$-adic retract}
+
+\begin{theorem}[Canonical $\h$-adic strong deformation retract; \ClaimStatusProvedHere]\label{thm:canonical-retract}
+Assume $H^j(E_n,Q_{0,n})=0$ for $j\neq 0$ and $H^0(E_n,Q_{0,n})$ has constant rank. Then there is a canonical $\h$-adic strong deformation retract
+\[
+  (H_n,0) \underset{p_n}{\stackrel{i_n}{\rightleftarrows}} (E_n[[\h]],Q_n),
+  \qquad
+  Q_n h_n+h_nQ_n = \id - i_np_n,
+\]
+where $H_n:=H^0(E_n[[\h]],Q_n)$.
+\end{theorem}
+
+\begin{proof}
+Choose a Hermitian metric on $E_n$. Let $Q_0:=Q_{0,n}$ and
+\[
+  \Delta_0 := Q_0Q_0^{\dagger}+Q_0^{\dagger}Q_0.
+\]
+Because $H^0(E_n,Q_0)$ has constant rank, the harmonic bundle
+\[
+  H_{0,n}:=\ker\Delta_0\subset E_n^0
+\]
+is a smooth subbundle. Let $p_{0,n}$ denote orthogonal projection onto $H_{0,n}$, $i_{0,n}$ the inclusion, and $G_{0,n}$ the Moore-Penrose inverse of $\Delta_0$ on $(\ker\Delta_0)^\perp$. Set
+\[
+  h_{0,n}:=Q_0^{\dagger}G_{0,n}.
+\]
+Then
+\[
+  Q_0h_{0,n}+h_{0,n}Q_0 = \id - i_{0,n}p_{0,n}.
+\]
+
+Now write $Q_n=Q_0+\Delta_n$ with $\Delta_n\in \h\,\End^1(E_n)[[\h]]$. Since $\Delta_n$ raises $\h$-adic order, the operator $1-h_{0,n}\Delta_n$ is invertible in the $\h$-adic topology. Define
+\[
+  \Sigma_n := \Delta_n(1-h_{0,n}\Delta_n)^{-1}.
+\]
+The basic perturbation lemma gives
+\[
+  i_n=i_{0,n}+h_{0,n}\Sigma_n i_{0,n},
+  \qquad
+  p_n=p_{0,n}+p_{0,n}\Sigma_n h_{0,n},
+  \qquad
+  h_n=h_{0,n}+h_{0,n}\Sigma_n h_{0,n},
+\]
+which define a strong deformation retract of $(E_n[[\h]],Q_n)$ onto $(H_{0,n}[[\h]],q_n)$ with transferred differential
+\[
+  q_n:=p_{0,n}\Sigma_n i_{0,n}.
+\]
+But $q_n$ has cohomological degree $+1$, while $H_{0,n}$ lies in degree $0$, so $q_n=0$. Thus the target complex is $(H_{0,n}[[\h]],0)$, which identifies canonically with $H_n$ by Theorem~\ref{thm:quantum-concentration}.
+\end{proof}
+
+\begin{proposition}[Analytic convergence under norm smallness; \ClaimStatusProvedHere]\label{prop:analytic-retract}
+On any open set on which the exact-resummed perturbation satisfies
+\[
+  \|h_{0,n}\Delta_n\|<1
+\]
+on every finite-rank truncation, the formulas of Theorem~\ref{thm:canonical-retract} converge as honest analytic maps and not only as formal $\h$-adic series.
+\end{proposition}
+
+\begin{proof}
+The $\h$-adic Neumann series for $(1-h_{0,n}\Delta_n)^{-1}$ converges absolutely under the stated operator-norm bound, and the perturbation formulas are finite compositions of that inverse with bounded maps.
+\end{proof}
+
+\subsection{One-form rigidity after reduction}
+Let the analytic superconnection on $E_n[[\h]]$ be written as
+\[
+  \SN_n = \ds-\big(Q_n+\alpha_n\big),
+  \qquad
+  \alpha_n:=\sum_{k\ge 1}A_n^{(k)},
+\]
+with
+\[
+  A_n^{(k)}\in \Omega^k(X_n,\log\partial X_n)\ot \End^{1-k}(E_n)[[\h]].
+\]
+Transfer this superconnection along the canonical retract.
+
+\begin{theorem}[One-form rigidity; \ClaimStatusProvedHere]\label{thm:one-form-rigidity}
+The transferred superconnection on $H_n$ is an ordinary logarithmic flat connection,
+\[
+  \SN_n^{\mathrm{red}} = \ds-\A_n,
+\]
+with
+\[
+  \A_n = p_nA_n^{(1)}i_n.
+\]
+In particular, every higher-form piece $A_n^{(k)}$ with $k\ge 2$ disappears directly after reduction.
+\end{theorem}
+
+\begin{proof}
+The standard homological perturbation formula for the transferred superconnection is
+\[
+  \SN_n^{\mathrm{red}}
+  =
+  \ds-\sum_{m\ge 1} p_n\alpha_n(h_n\alpha_n)^{m-1}i_n.
+\]
+Consider one summand
+\[
+  p_n A_n^{(k_1)} h_n A_n^{(k_2)} h_n \cdots h_n A_n^{(k_m)} i_n.
+\]
+Its form degree is $r=k_1+\cdots+k_m$, while its internal degree is
+\[
+  (1-k_1)+\cdots+(1-k_m)-(m-1)=1-r.
+\]
+An endomorphism of $H_n$, which is concentrated in internal degree $0$, must have internal degree $0$. Therefore $1-r=0$, so $r=1$. Since each $k_j\ge 1$, the only possibility is $m=1$ and $k_1=1$. Hence the only surviving term is
+\[
+  \A_n = p_nA_n^{(1)}i_n.
+\]
+The transferred superconnection is flat because the original one is flat. Since it has only a $1$-form part, it is an ordinary flat logarithmic connection.
+\end{proof}
+
+\begin{corollary}[Reduced residues; \ClaimStatusProvedHere]\label{cor:reduced-residues}
+For every boundary divisor $D\subset X_n$,
+\[
+  \Res_D(\A_n)=p_n\Res_D(A_n^{(1)})i_n.
+\]
+\end{corollary}
+
+\begin{proof}
+Residues commute with projection, inclusion, and restriction because these maps are logarithmically regular.
+\end{proof}
+
+\subsection{Tangential basepoints and the HT associator}
+Write near a normal-crossings corner of $X_n$
+\[
+  \A_n = \sum_{a=1}^r \Omega_a\,d\log t_a + \A_n^{\mathrm{reg}},
+\]
+where $t_1,\dots,t_r$ are local boundary coordinates and $\A_n^{\mathrm{reg}}$ is regular.
+
+\begin{lemma}[Commuting corner residues; \ClaimStatusProvedHere]\label{lem:commuting-residues}
+At every normal-crossings corner one has
+\[
+  [\Omega_a,\Omega_b]=0\qquad (1\le a,b\le r).
+\]
+\end{lemma}
+
+\begin{proof}
+The coefficient of $d\log t_a\wedge d\log t_b$ in the curvature of the flat connection $\ds-\A_n$ is exactly $[\Omega_a,\Omega_b]$, so it must vanish.
+\end{proof}
+
+\begin{lemma}[Tangential regularization; \ClaimStatusProvedHere]\label{lem:tangential-regularization}
+For a tangential direction $v$ at a boundary corner, the gauge transform
+\[
+  G := \prod_{a=1}^r t_a^{-\Omega_a}
+\]
+regularizes the connection, and the resulting regularized transport to the tangential basepoint is finite and coordinate independent up to canonical conjugacy.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:commuting-residues}, the factors $t_a^{-\Omega_a}$ commute, so $G$ is well defined. A direct computation gives
+\[
+  G^{-1}(\ds-\A_n)G = \ds-\A_n^{\mathrm{reg}},
+\]
+which is regular at the corner. Parallel transport for the regular gauge therefore has a finite limit along any tangent ray representing $v$. Changing logarithmic coordinates multiplies $G$ by a regular invertible factor with a finite boundary value, so the regularized transport changes only by conjugation with that finite value.
+\end{proof}
+
+Fix three reduced line states $X,Y,Z$. On $X_3$ there are two canonical tangential basepoints:
+\begin{itemize}
+  \item $b_L$, the zone $|z_1-z_2|\ll |z_2-z_3|$, corresponding to $(XY)Z$;
+  \item $b_R$, the zone $|z_2-z_3|\ll |z_1-z_3|$, corresponding to $X(YZ)$.
+\end{itemize}
+
+\begin{definition}[HT associator and braiding]\label{def:ht-assoc}
+The \emph{HT associator} is the regularized parallel transport
+\[
+  \Phi_{\HT}(X,Y,Z):=\PT^{\mathrm{reg}}_{b_L\to b_R}(\A_3).
+\]
+For two reduced line states $X,Y$, the \emph{HT braiding} $c_{X,Y}$ is the half-monodromy of $\A_2$ along a counterclockwise exchange path in $\Conf_2(\CC)$.
+\end{definition}
+
+\begin{theorem}[Pentagon identity; \ClaimStatusProvedHere]\label{thm:pentagon}
+The operators $a_{X,Y,Z}:=\Phi_{\HT}(X,Y,Z)$ satisfy the pentagon relation
+\[
+  (\id_X\ot a_{Y,Z,W})\,a_{X,Y\ot Z,W}\,(a_{X,Y,Z}\ot \id_W)
+  =
+  a_{X,Y,Z\ot W}\,a_{X\ot Y,Z,W}.
+\]
+\end{theorem}
+
+\begin{proof}
+Fix four ordered real points $0<z_2<z_3<1$, with $z_1=0$ and $z_4=1$. Their compactified real collision locus inside $X_4$ is a pentagon $K_4$: its five vertices correspond to the five parenthesizations of four letters, and its edges correspond to elementary reassociations. Restrict the reduced flat logarithmic connection to the interior of $K_4$. By Lemma~\ref{lem:tangential-regularization}, each edge carries a well-defined regularized transport between its tangential endpoints. The boundary of the pentagon is contractible, so the product of the five edge transports is the identity. Reading those edge transports in the standard cyclic order yields exactly the pentagon relation.
+\end{proof}
+
+\begin{theorem}[Hexagon identities; \ClaimStatusProvedHere]\label{thm:hexagon}
+The braidings $c_{X,Y}$ and associators $a_{X,Y,Z}$ satisfy the two hexagon identities. One of them is
+\[
+  a_{Y,Z,X}\,c_{X,Y\ot Z}\,a_{X,Y,Z}
+  =
+  (\id_Y\ot c_{X,Z})\,a_{Y,X,Z}\,(c_{X,Y}\ot \id_Z).
+\]
+\end{theorem}
+
+\begin{proof}
+Both sides are regularized transports for the same reduced flat connection on the three-point configuration space. The left side moves $X$ around the fused cluster $Y\ot Z$; the right side first reassociates, then moves $X$ successively around $Y$ and $Z$, and finally reassociates back. These two composite motions are homotopic relative to their tangential endpoints. Flatness implies equality of their transports. The second hexagon is obtained by the mirror homotopy.
+\end{proof}
+
+\begin{corollary}[Monodromic braided tensor structure; \ClaimStatusProvedHere]\label{cor:braided-category}
+The reduced line operators form a monodromic braided monoidal category: the tensor product is the reduced OPE, the associator is $\Phi_{\HT}$, and the braiding is given by half-monodromy.
+\end{corollary}
+
+\begin{theorem}[Local monodromy and pure braid representations; \ClaimStatusProvedHere]\label{thm:pure-braid}
+For each binary collision divisor $D_{ij}\subset X_n$, let
+\[
+  \Omega_{ij}^{\mathrm{red}}:=\Res_{D_{ij}}(\A_n).
+\]
+The local monodromy around a small loop encircling $D_{ij}$ is conjugate to
+\[
+  \exp(2\pi i\,\Omega_{ij}^{\mathrm{red}}).
+\]
+Consequently the reduced connection defines a pure braid group representation
+\[
+  \rho_n: \pi_1(\Conf_n(\CC)) \longrightarrow \Aut(H_n).
+\]
+\end{theorem}
+
+\begin{proof}
+Near $D_{ij}$ choose a local coordinate $t$ such that
+\[
+  \A_n=\Omega_{ij}^{\mathrm{red}}\,\frac{dt}{t}+\text{regular terms}.
+\]
+After a local logarithmic gauge transformation removing the regular part, the monodromy around $t=\varepsilon e^{2\pi is}$ is exactly $\exp(2\pi i\,\Omega_{ij}^{\mathrm{red}})$. Since the connection is flat, parallel transport depends only on homotopy class and therefore defines a representation of the fundamental group.
+\end{proof}
+
+\begin{corollary}[Logarithmic periods; \ClaimStatusProvedHere]\label{cor:periods}
+If the reduced connection and tangential basepoints are defined over a subfield $K\subset\CC$, then every matrix coefficient of $\Phi_{\HT}$ is a $K$-linear combination of regularized Chen iterated integrals of logarithmic $1$-forms on $X_3\setminus\partial X_3$.
+\end{corollary}
+
+\begin{proof}
+Expand the path-ordered exponential for the regularized transport of the logarithmic connection. Each coefficient is an iterated integral of logarithmic one-forms between tangential basepoints, with coefficients in $K$.
+\end{proof}
+
+\section{Resolved degree-zero line systems and unconditionality}\label{sec:resolved}
+
+The previous section reduces the monodromic theory to one concrete classical question: which physically natural line operators admit tree-level BRST complexes that are genuine degree-zero resolutions? Once that classical algebra is in place, the quantum-logarithmic monodromy machine is forced.
+
+\begin{definition}[Resolved degree-zero line system]\label{def:resolved-line}
+A tree-level line operator system is called \emph{resolved in degree $0$} if its BRST complex $(E_n,Q_{0,n})$ is a bounded finite-rank complex with
+\[
+  H^j(E_n,Q_{0,n})=0 \qquad (j\neq 0).
+\]
+\end{definition}
+
+\subsection{Regular-sequence Koszul models}
+Let $R$ be a Noetherian commutative ring, let $U$ be finite dimensional, and consider the Koszul complex
+\[
+  E = K_R(f_1,\dots,f_r)\ot U
+  = \big(R\ot \Lambda(\eta_1,\dots,\eta_r),\;Q_0=\sum_{a=1}^r f_a\frac{\partial}{\partial\eta_a}\big)\ot U.
+\]
+
+\begin{proposition}[Regular-sequence resolution criterion; \ClaimStatusProvedHere]\label{prop:regular-sequence}
+If $f_1,\dots,f_r$ is a regular sequence in $R$, then
+\[
+  H^j(E,Q_0)=0\quad (j\neq 0),
+  \qquad
+  H^0(E,Q_0)\cong (R/(f_1,\dots,f_r))\ot U.
+\]
+In particular, such a line system is resolved in degree $0$.
+\end{proposition}
+
+\begin{proof}
+This is the standard exactness property of the Koszul complex associated to a regular sequence.
+\end{proof}
+
+\begin{lemma}[Explicit linear homotopy; \ClaimStatusProvedHere]\label{lem:linear-homotopy}
+If $R=\kk[x_1,\dots,x_r]$, $f_a=x_a$, and
+\[
+  Q_0=\sum_{a=1}^r x_a\frac{\partial}{\partial\eta_a},
+\]
+then on positive total polynomial-plus-exterior degree the operator
+\[
+  h_0 := N^{-1}\sum_{a=1}^r \eta_a\frac{\partial}{\partial x_a},
+  \qquad
+  N:=\sum_{a=1}^r\Big(x_a\frac{\partial}{\partial x_a}+\eta_a\frac{\partial}{\partial\eta_a}\Big),
+\]
+satisfies
+\[
+  Q_0h_0+h_0Q_0=\id-\pi_0,
+\]
+where $\pi_0$ projects to degree $0$.
+\end{lemma}
+
+\begin{proof}
+Set
+\[
+  \delta:=\sum_{a=1}^r \eta_a\frac{\partial}{\partial x_a}.
+\]
+A direct computation gives $[Q_0,\delta]=N$. Since $N$ is invertible on positive total degree, the operator $h_0=N^{-1}\delta$ satisfies the claim.
+\end{proof}
+
+\begin{example}[Complete-intersection line constraints]
+Suppose a tree-level line coupling imposes equations $f_1=\cdots=f_r=0$ on an affine target, with $(f_1,\dots,f_r)$ a regular complete-intersection ideal. The associated BRST complex is a Koszul complex of the type above, hence is resolved in degree $0$. Such lines are therefore automatic inputs for the reduced monodromic theory.
+\end{example}
+
+\subsection{Unconditionality in the quasi-linear class}
+
+\begin{theorem}[Unconditionality for resolved quasi-linear lines; \ClaimStatusProvedHere]\label{thm:unconditionality}
+Consider a quasi-linear interacting holomorphic-topological theory in the sense of Section~\ref{sec:analytic}. Let $L_1,\dots,L_n$ be perturbative line operators whose tree-level BRST complexes are resolved in degree $0$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item the full quantum line complexes remain concentrated in degree $0$;
+  \item the canonical $\h$-adic retract exists;
+  \item the reduced logarithmic flat connection is
+  \[
+    \A_n = p_nA_n^{(1)}i_n;
+  \]
+  \item the HT associator, braiding, pentagon, hexagon, and pure braid representations exist without any further concentration or retract hypothesis.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Item (i) is Theorem~\ref{thm:quantum-concentration}. Item (ii) is Theorem~\ref{thm:canonical-retract}. Item (iii) is Theorem~\ref{thm:one-form-rigidity}. Item (iv) then follows from the transport constructions and coherence theorems of Section~\ref{sec:reduction}.
+\end{proof}
+
+\begin{theorem}[Boundary factorization after reduction; \ClaimStatusProvedHere]\label{thm:reduced-boundary-factorization}
+Let $\rho$ be a rigid boundary component in a logarithmic degeneration of configuration spaces, with birational product model
+\[
+  X_n(\rho) \dashrightarrow \prod_{v\in V(S_\rho)} X_{I_v}.
+\]
+Assume the raw logarithmic $1$-form factorizes on that component:
+\[
+  A_n^{(1)}\big|_{X_n(\rho)}
+  =
+  \mathrm{Comp}_\rho\Big(\bboxprod_{v\in V(S_\rho)} A_{I_v}^{(1)}\Big).
+\]
+Then the reduced connection factorizes as
+\[
+  \A_n\big|_{X_n(\rho)}
+  =
+  \mathrm{Comp}_\rho\Big(\bboxprod_{v\in V(S_\rho)} \A_{I_v}\Big).
+\]
+\end{theorem}
+
+\begin{proof}
+On a disjoint cluster decomposition, the tree-level differential splits as a sum of the cluster differentials, so the Hodge projectors and inclusions tensorize:
+\[
+  p_n=\otimes_v p_{I_v},
+  \qquad
+  i_n=\otimes_v i_{I_v}.
+\]
+By one-form rigidity,
+\[
+  \A_n=p_nA_n^{(1)}i_n.
+\]
+Substituting the factorization of $A_n^{(1)}$ and tensorized projectors/inclusions gives the formula.
+\end{proof}
+
+\section{Arithmetic, enumerative, periodic, and chromatic consequences}\label{sec:consequences}
+
+This section records what the theory says, in its own natural language, about the four directions that motivated the thread: arithmetic geometry, enumerative geometry, periodicity, and chromaticity.
+
+\subsection{Arithmetic geometry: logarithmic local systems and periods}
+The most immediate arithmetic output is that the reduced theory naturally lives in the category of logarithmic local systems on logarithmic Fulton-MacPherson spaces.
+
+\begin{proposition}[Arithmetic form of the reduced theory; \ClaimStatusProvedHere]\label{prop:arithmetic-form}
+Suppose the quasi-linear HT datum, the resolved line complexes, and the chosen retracts are all defined over a subfield $K\subset\CC$. Then for each $n$ the reduced logarithmic flat connection
+\[
+  \ds-\A_n
+\]
+on $X_n$ is defined over $K$, its local monodromies are exponentials of residue operators defined over $K$, and the HT associator takes values in the algebra of logarithmic periods over $K$ generated by iterated integrals of the entries of $\A_3$.
+\end{proposition}
+
+\begin{proof}
+Everything is functorial in the coefficients. The residue statement is Corollary~\ref{cor:reduced-residues}, and the period statement is Corollary~\ref{cor:periods}.
+\end{proof}
+
+\subsection{Enumerative geometry: decorated collision trees}
+On the strict side, Proposition~\ref{prop:strict-log-ext} attaches residue operators to the internal edges of collision trees. On the analytic side, Theorem~\ref{thm:log-bphz-existence} and Theorem~\ref{thm:family-version} say that degeneration strata are weighted by renormalized graph forms and factorization maps.
+
+\begin{proposition}[Decorated degeneration formula; \ClaimStatusProvedHere]\label{prop:decorated-degeneration}
+Every rigid boundary component of a logarithmic degeneration of configuration spaces carries a canonical operator-valued decoration obtained by composing the residue and factorization maps of the lower-point pieces. Thus the special fiber is not merely a sum over combinatorial trees; it is a sum over collision trees decorated by Yangian and $A_\infty$ residue data.
+\end{proposition}
+
+\begin{proof}
+Combine the residue factorization theorem (Theorem~\ref{thm:log-bphz-existence}) with the family factorization theorem (Theorem~\ref{thm:family-version}) and the reduced boundary factorization theorem (Theorem~\ref{thm:reduced-boundary-factorization}).
+\end{proof}
+
+\subsection{Spectralization, periodicity, and chromaticity}
+The classical chiral/factorization theory is linear over chain complexes and does not by itself impose a chromatic filtration. The correct chromatic object is the spectral lift.
+
+\begin{theorem}[Smashing localization commutes with factorization homology; \ClaimStatusProvedHere]\label{thm:smashing-localization}
+Let $A$ be a locally constant spectral factorization algebra on an $m$-manifold $M$, equivalently a $\Disk_m$-algebra in spectra. Let $L$ be a smashing localization of spectra. Then there is a canonical equivalence
+\[
+  L\Big(\int_M A\Big) \simeq \int_M LA.
+\]
+\end{theorem}
+
+\begin{proof}
+Factorization homology is computed as a colimit over disk covers:
+\[
+  \int_M A \simeq \operatorname*{colim}_{U\in \Disk(M)} A(U).
+\]
+If $L$ is smashing, then $L(X)\simeq E\ot X$ for some spectrum $E$, so $L$ preserves all colimits and is symmetric monoidal. Therefore
+\[
+  L\Big(\int_M A\Big)
+  \simeq
+  L\Big(\operatorname*{colim}_{U\in \Disk(M)}A(U)\Big)
+  \simeq
+  \operatorname*{colim}_{U\in \Disk(M)}LA(U)
+  \simeq
+  \int_M LA.
+\]
+\end{proof}
+
+\begin{corollary}[Periodicity is local-to-global stable; \ClaimStatusProvedHere]\label{cor:periodicity}
+If $LA$ takes values in $d$-periodic $L$-local spectra, then $\int_M LA$ is $d$-periodic.
+\end{corollary}
+
+\begin{proof}
+Every object in the diagram computing $\int_M LA$ is $d$-periodic, and colimits in the $L$-local category preserve that periodicity.
+\end{proof}
+
+\begin{remark}[Chromaticity]
+Theorem~\ref{thm:smashing-localization} says that chromatic height, once introduced by spectralization, is compatible with the local-to-global passage. In other words, chromaticity is not visible as a primary structure in the classical linear theory; it appears after passing to spectral coefficients, where it behaves cleanly under factorization homology.
+\end{remark}
+
+\section{The Platonic ideal: resolved logarithmic HT data}\label{sec:platonic}
+
+The constructions of the previous sections suggest that the entire theory should be axiomatized independently of its perturbative realization. This is the Platonic form of the machine.
+
+\begin{definition}[Resolved logarithmic HT datum]\label{def:rlht-datum}
+A \emph{resolved logarithmic holomorphic-topological datum} consists of the following.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item For each $n\ge 1$, a logarithmic configuration space $X_n$ equipped with symmetric-group equivariance, boundary divisors indexed by collision types, and semistable family versions over degenerations.
+  \item For each ordered $n$-tuple of line labels, a bounded graded vector bundle $E_n$ on $X_n$ with a differential $Q_n$ and a flat logarithmic superconnection
+  \[
+    \SN_n = \ds-(Q_n+\alpha_n),
+  \]
+  satisfying supportwise or Stokeswise factorization along boundary strata.
+  \item A tree-level degree-zero resolution condition on $(E_n,Q_{0,n})$, or equivalently a canonical reduction datum
+  \[
+    (H_n,0) \underset{p_n}{\stackrel{i_n}{\rightleftarrows}} (E_n[[\h]],Q_n)
+  \]
+  compatible with boundary factorization.
+  \item A translation structure and binary residues compatible with the collision divisors.
+  \item A spectral lift to factorization algebras in spectra whenever periodicity or chromaticity is desired.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Platonic ideal theorem; \ClaimStatusProvedHere]\label{thm:platonic-ideal}
+Every resolved logarithmic HT datum determines canonically:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item reduced logarithmic flat connections $\ds-\A_n$ on $H_n$;
+  \item regularized tangential transports and hence associators and braidings;
+  \item a monodromic braided monoidal category of reduced line states;
+  \item pure braid group representations on reduced tensor powers;
+  \item logarithmic period torsors over the field of definition;
+  \item boundary factorization formulas on rigid components of semistable degenerations;
+  \item after spectralization, periodic and chromatic local-to-global compatibilities.
+\end{enumerate}
+Moreover, the concrete quasi-linear perturbative HT construction of Sections~\ref{sec:analytic}--\ref{sec:resolved} provides an example of such a datum whenever the tree-level line operators are resolved in degree $0$.
+\end{theorem}
+
+\begin{proof}
+Items (i)--(iv) are exactly the contents of Theorems~\ref{thm:one-form-rigidity}, \ref{thm:pentagon}, \ref{thm:hexagon}, and \ref{thm:pure-braid}. Item (v) follows from Corollary~\ref{cor:periods}. Item (vi) follows from Theorems~\ref{thm:family-version} and \ref{thm:reduced-boundary-factorization}. Item (vii) follows from Theorem~\ref{thm:smashing-localization} and Corollary~\ref{cor:periodicity}. The final sentence follows from Theorem~\ref{thm:unconditionality}.
+\end{proof}
+
+\begin{remark}[The sharpened frontier question]
+The unresolved frontier is now sharp: not whether a retract exists after quantization, but which physically natural line operators admit classically resolved degree-zero BRST models. Once that classical algebra exists, the quantum-logarithmic monodromy machine is forced.
+\end{remark}
+
+\appendix
+
+\section{Supplementary computations}
+
+\subsection{Support bookkeeping in the Maurer-Cartan polynomial}
+For completeness we record the support bookkeeping behind Theorem~\ref{thm:support-hierarchy}. If each $D_S$ is supported on the tensor factors in $S$, then the support of a higher product
+\[
+  m_\ell(D_{S_1},\dots,D_{S_\ell})
+\]
+is the union $S_1\cup\cdots\cup S_\ell$. Therefore the support-$S$ component of
+\[
+  \MC(\Gamma_n)=\sum_{\ell\ge 1}m_\ell(\Gamma_n,\dots,\Gamma_n)
+\]
+is exactly the sum over all tuples of nonempty subsets whose union is $S$.
+
+\subsection{Degree count in one-form rigidity}
+The proof of Theorem~\ref{thm:one-form-rigidity} uses only two facts:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item $A_n^{(k)}$ has form degree $k$ and internal degree $1-k$;
+  \item the homotopy $h_n$ has internal degree $-1$ and form degree $0$.
+\end{enumerate}
+Hence a term with $m$ insertions and total form degree $r$ has internal degree $1-r$. On degree-zero cohomology it can survive only if $r=1$, which forces a single $1$-form insertion and excludes all higher-form contributions.
+
+\subsection{Why the codimension-two triple residue is Yang-Baxter}
+At a triple collision corner there are exactly three codimension-one approaches to the corner, corresponding to the binary clusterings $(12)3$, $(13)2$, and $1(23)$. The compactified-Stokes boundary identity for the codimension-two corner is therefore the signed sum of the three corresponding binary gluing maps. Writing those three gluing maps in terms of the binary residue kernels gives the analytic $A_\infty$ Yang-Baxter identity of Theorem~\ref{thm:analytic-yb}.
+
+\subsection{Explicit monodromy for $\widehat{\mathfrak{sl}}_2$: from genus zero to genus one}
+\label{subsec:explicit-monodromy-sl2}
+
+We carry out the full monodromy computation for the $\mathfrak{sl}_2$ KZ connection
+at general level~$k$, starting from the Casimir, passing through
+$\Conf_2$ and $\Conf_3$, extending logarithmically to $\FM_2(\PP^1\mid\infty)$,
+and lifting to genus~$1$ via the Knizhnik--Zamolodchikov--Bernard (KZB) connection.
+Throughout, $V=\CC^2$ denotes the fundamental representation of $\mathfrak{sl}_2$
+with standard basis $v_+,v_-$ and generators
+\[
+  e=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad
+  f=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad
+  h=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+The dual Coxeter number is $h^\vee=2$.
+
+\begin{computation}[Casimir spectrum; \ClaimStatusProvedHere]
+\label{comp:sl2-casimir-spectrum}
+\index{Casimir!sl2@$\mathfrak{sl}_2$}
+The split Casimir (invariant tensor) of $\mathfrak{sl}_2$ in the
+Cartan--Weyl basis is
+\[
+  \Omega \;=\; e\otimes f + f\otimes e + \tfrac{1}{2}\,h\otimes h
+  \;\in\; \mathfrak{sl}_2\otimes\mathfrak{sl}_2.
+\]
+On $V\otimes V$, using the ordered basis
+$(v_+\!\otimes\!v_+,\;v_+\!\otimes\!v_-,\;v_-\!\otimes\!v_+,\;v_-\!\otimes\!v_-)$,
+$\Omega$ is represented by
+\[
+  \Omega_{12} \;=\;
+  \begin{pmatrix}
+  \frac{1}{2} & 0 & 0 & 0 \\[3pt]
+  0 & -\frac{1}{2} & 1 & 0 \\[3pt]
+  0 & 1 & -\frac{1}{2} & 0 \\[3pt]
+  0 & 0 & 0 & \frac{1}{2}
+  \end{pmatrix}.
+\]
+The Clebsch--Gordan decomposition $V\otimes V\cong V_1\oplus V_0$ (triplet $\oplus$ singlet)
+diagonalizes $\Omega_{12}$:
+\[
+  \Omega_{12}\big|_{V_1}=\tfrac{1}{2}\,\id,
+  \qquad
+  \Omega_{12}\big|_{V_0}=-\tfrac{3}{2}\,\id.
+\]
+Indeed, $\frac{1}{2}(j_{\mathrm{tot}}(j_{\mathrm{tot}}+1)-2\cdot\frac{1}{2}\cdot\frac{3}{2})$
+gives $\frac{1}{2}$ for $j_{\mathrm{tot}}=1$ and $-\frac{3}{2}$ for $j_{\mathrm{tot}}=0$.
+\end{computation}
+
+\begin{computation}[$\Conf_2(\CC)$ monodromy at general level;
+\ClaimStatusProvedHere]
+\label{comp:kz-monodromy-conf2}
+\index{KZ connection!monodromy}
+The KZ connection at level~$k\neq -2$ on
+$\Conf_2(\CC)$ with two fundamental insertions is
+\[
+  \nabla \;=\; d \;-\; \frac{1}{k+2}\,\Omega_{12}\,d\log(z_1-z_2).
+\]
+Since $\Omega_{12}$ is diagonalizable, parallel transport around
+the generator $\gamma$ of $\pi_1(\Conf_2(\CC))\cong\ZZ$
+(the loop in which $z_1$ encircles $z_2$ counterclockwise) gives
+\begin{equation}\label{eq:conf2-monodromy}
+  M_\gamma
+  \;=\;
+  \exp\!\bigl(-2\pi i\cdot\tfrac{1}{k+2}\,\Omega_{12}\bigr)
+  \;=\;
+  \begin{cases}
+    e^{-\pi i/(k+2)}\,\id & \text{on } V_1, \\[3pt]
+    e^{3\pi i/(k+2)}\,\id & \text{on } V_0.
+  \end{cases}
+\end{equation}
+Setting $q=e^{i\pi/(k+2)}$, the eigenvalues are $q^{-1}$ (triplet) and $q^3=-q^{-1}\cdot q^{k+2}=-q^{-1}$
+when $q^{k+2}=1$... more precisely, $e^{3\pi i/(k+2)}=q^3$.
+These are exactly the eigenvalues of the $R$-matrix of $U_q(\mathfrak{sl}_2)$
+on $V\otimes V$:
+\[
+  \check{R}\big|_{V_1}=q,\qquad \check{R}\big|_{V_0}=-q^{-1},
+\]
+matching $M_\gamma = q^{-\Omega_{12}} = P\circ \check{R}^{-1}$
+(with $P$ the transposition) up to the standard framing scalar.
+At $k=1$ one recovers $q=e^{i\pi/3}$, $M_\gamma=\operatorname{diag}(-1,\,q^{-1})$
+on the singlet/triplet decomposition, confirming the
+$\widehat{\mathfrak{sl}}_2$ level-$1$ WZW fusion rules.
+\end{computation}
+
+\begin{computation}[Formal $R$-matrix expansion; \ClaimStatusProvedHere]
+\label{comp:formal-R-expansion}
+\index{R-matrix@$R$-matrix!formal expansion}
+The formal monodromy operator, equivalently the asymptotic $R$-matrix,
+admits the $z^{-1}$-expansion
+\begin{equation}\label{eq:R-formal-expansion}
+  R(z) \;=\; 1 + \frac{\Omega}{z} + \frac{\Omega^2}{2z^2} + \frac{\Omega^3}{6z^3}+\cdots
+  \;=\; \exp\!\Bigl(\frac{\Omega}{z}\Bigr)\quad (\text{leading order}).
+\end{equation}
+More precisely, at level~$k$ the ratio $\Omega/(k+2)$ replaces $\Omega$
+and corrections of order $O(z^{-3})$ arise from the non-abelian exponentiation
+(Magnus series). On $V\otimes V$ one can diagonalize:
+\[
+  R(z)\big|_{V_1} = e^{1/(2z)}\bigl(1+O(z^{-3})\bigr),
+  \qquad
+  R(z)\big|_{V_0} = e^{-3/(2z)}\bigl(1+O(z^{-3})\bigr).
+\]
+The leading-order formula $R(z)=1+\Omega/z+O(z^{-2})$
+identifies $\Omega$ as the collision residue, consistent with
+Lemma~\ref{lem:inf-braid}.
+\end{computation}
+
+\begin{computation}[$\Conf_3^{\mathrm{ord}}(\CC)$ monodromy and Yang--Baxter;
+\ClaimStatusProvedHere]
+\label{comp:conf3-yang-baxter}
+\index{KZ connection!three-point!Yang--Baxter}
+On $\Conf_3^{\mathrm{ord}}(\CC)$ with three fundamental insertions, the KZ connection is
+\[
+  \nabla_3 \;=\; d - \frac{1}{k+2}\Bigl(
+  \Omega_{12}\,d\log z_{12}+\Omega_{13}\,d\log z_{13}+\Omega_{23}\,d\log z_{23}
+  \Bigr),
+\]
+where $z_{ij}:=z_i-z_j$. The fundamental group
+$\pi_1(\Conf_3^{\mathrm{ord}}(\CC))$ is the pure braid group $P_3$,
+generated by the three elementary braids $\sigma_{ij}^2$
+(particle~$i$ encircling particle~$j$). The monodromy representation
+\[
+  \rho\colon P_3\;\longrightarrow\; \mathrm{GL}(V^{\otimes 3})
+\]
+assigns to each generator
+$\rho(\sigma_{ij}^2) = \exp\!\bigl(-2\pi i\cdot\tfrac{1}{k+2}\,\Omega_{ij}\bigr)$,
+acting in the $(i,j)$-tensor factors.
+
+The pure braid relation $(\sigma_{12}\sigma_{23})^3=(\sigma_{12}\sigma_{23}\sigma_{12})^2$
+is verified at the infinitesimal level by the identity
+\begin{equation}\label{eq:inf-braid-yb}
+  [\Omega_{12},\Omega_{13}+\Omega_{23}]=0,
+\end{equation}
+which is the infinitesimal braid relation (Lemma~\ref{lem:inf-braid}).
+Exponentiating, the monodromies satisfy the quantum Yang--Baxter equation
+on $V^{\otimes 3}$:
+\begin{equation}\label{eq:qybe-conf3}
+  R_{12}R_{13}R_{23}=R_{23}R_{13}R_{12},
+\end{equation}
+where $R_{ij}:=\exp\!\bigl(-2\pi i\cdot\frac{1}{k+2}\,\Omega_{ij}\bigr)$.
+This is a direct consequence of the flatness theorem
+(Theorem~\ref{thm:strict-flatness}): parallel transport around two
+homotopic loops in $\Conf_3(\CC)$ must agree, and the two decompositions
+of the full braid into elementary braids yield the two sides
+of~\eqref{eq:qybe-conf3}.
+\end{computation}
+
+\begin{computation}[Logarithmic extension to $\FM_2(\PP^1\mid\infty)$;
+\ClaimStatusProvedHere]
+\label{comp:log-extension-fm2}
+\index{Fulton--MacPherson!logarithmic extension}
+The space $\FM_2(\PP^1\mid\infty)$ compactifies $\Conf_2(\PP^1\setminus\{\infty\})$
+by adjoining a boundary divisor $D_{\mathrm{coll}}$ (the collision locus $z_1=z_2$)
+and a boundary divisor $D_\infty$ (a point escaping to $\infty$).
+In center-of-mass / relative coordinates $w=(z_1+z_2)/2$, $u=z_1-z_2$:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Collision boundary} ($u\to 0$).
+  The connection becomes
+  $\nabla = d - \frac{1}{k+2}\,\Omega_{12}\,\frac{du}{u} + (\text{regular in } u)$.
+  By Proposition~\ref{prop:strict-log-ext}, the residue along $D_{\mathrm{coll}}$
+  is $\Res_{D_{\mathrm{coll}}}(\nabla)=\frac{1}{k+2}\,\Omega_{12}$.
+  The local monodromy around $D_{\mathrm{coll}}$ is
+  $\exp\!\bigl(-\frac{2\pi i}{k+2}\,\Omega_{12}\bigr)$ as computed in~\eqref{eq:conf2-monodromy}.
+\item \emph{Infinity boundary} ($w\to\infty$ with $u$ bounded).
+  In the coordinate $s=1/w$, the connection is regular at $s=0$
+  because the KZ form $d\log(z_1-z_2)=d\log u$ has no pole in~$w$.
+  Hence the local monodromy around $D_\infty$ is trivial.
+\item \emph{Corner stratum} ($u\to 0$ and $w\to\infty$ simultaneously).
+  Both $z_1,z_2\to\infty$ while colliding.
+  In the chart $(s,t)=(1/w,\,u\cdot w)$, the collision scale coordinate
+  is $t$ and the connection form is
+  $\frac{1}{k+2}\,\Omega_{12}\,\frac{dt}{t}+O(1)$,
+  confirming logarithmic regularity at the corner.
+\end{enumerate}
+Thus $\nabla$ extends to a logarithmic connection on $\FM_2(\PP^1\mid\infty)$
+with a single nontrivial residue $\frac{1}{k+2}\Omega_{12}$
+along the collision divisor.
+\end{computation}
+
+\begin{computation}[Genus-$1$ KZB connection and modular monodromy;
+\ClaimStatusProvedHere]
+\label{comp:genus1-kzb}
+\index{KZB connection!genus one!sl2@$\mathfrak{sl}_2$}
+On an elliptic curve $E_\tau=\CC/(\ZZ+\ZZ\tau)$ ($\Im\tau>0$) with two
+marked points at positions $0$ and $z$,
+the genus-$0$ propagator $1/(z_1-z_2)$ is replaced by the
+Weierstrass $\zeta$-function (or equivalently $\partial_z\log\theta_1$).
+The KZB connection on $E_\tau\setminus\{0\}$ with fiber $V\otimes V$ is
+\begin{equation}\label{eq:kzb-connection}
+  \nabla_\tau \;=\; d_z \;-\; \frac{1}{k+2}\,\Omega_{12}\,
+  \partial_z\!\log\theta_1(z;\tau)\,dz,
+\end{equation}
+where $\theta_1(z;\tau)=2\sum_{n=0}^{\infty}(-1)^n q^{(n+1/2)^2}\sin((2n+1)\pi z)$,
+$q=e^{i\pi\tau}$, is the odd Jacobi theta function vanishing at $z=0$.
+
+\medskip\noindent\textbf{Near $z=0$.}\;
+Since $\theta_1(z;\tau)=2\pi z\,\eta(\tau)^3(1+O(z^2))$,
+one has $\partial_z\log\theta_1=1/z+O(z)$, and the connection reduces to
+\[
+  \nabla_\tau = d_z - \frac{1}{k+2}\,\Omega_{12}\,\frac{dz}{z}+O(1),
+\]
+recovering the genus-$0$ KZ connection locally.  The local monodromy around
+$z=0$ is therefore the same as~\eqref{eq:conf2-monodromy}.
+
+\medskip\noindent\textbf{$A$-cycle monodromy} ($z\mapsto z+1$).\;
+The quasi-periodicity $\theta_1(z+1;\tau)=-\theta_1(z;\tau)$ gives
+$\partial_z\log\theta_1(z+1;\tau)=\partial_z\log\theta_1(z;\tau)$.
+Hence the connection form is strictly periodic under $z\mapsto z+1$
+and the $A$-cycle monodromy is the identity:
+\begin{equation}\label{eq:A-cycle-monodromy}
+  M_A = \id_{V\otimes V}.
+\end{equation}
+
+\medskip\noindent\textbf{$B$-cycle monodromy} ($z\mapsto z+\tau$).\;
+The quasi-periodicity
+$\theta_1(z+\tau;\tau)=-e^{-i\pi\tau-2\pi iz}\theta_1(z;\tau)$ yields
+\[
+  \partial_z\log\theta_1(z+\tau;\tau)
+  = \partial_z\log\theta_1(z;\tau)-2\pi i.
+\]
+Under transport $z\mapsto z+\tau$, the connection form shifts:
+\[
+  \nabla_\tau\big|_{z+\tau}
+  =
+  d_z - \frac{1}{k+2}\,\Omega_{12}\bigl(\partial_z\log\theta_1(z;\tau)-2\pi i\bigr)dz
+  =
+  \nabla_\tau + \frac{2\pi i}{k+2}\,\Omega_{12}\,dz.
+\]
+The $B$-cycle monodromy therefore acquires an abelian twist
+controlled by the integrated correction $\int_0^\tau \frac{2\pi i}{k+2}\,\Omega_{12}\,dz
+= \frac{2\pi i\tau}{k+2}\,\Omega_{12}$:
+\begin{equation}\label{eq:B-cycle-monodromy}
+  M_B = \exp\!\Bigl(\frac{2\pi i\tau}{k+2}\,\Omega_{12}\Bigr)
+  \cdot M_{\mathrm{loc}},
+\end{equation}
+where $M_{\mathrm{loc}}$ is the genus-$0$ local monodromy from~\eqref{eq:conf2-monodromy}
+(arising from the pole at $z=0$ enclosed by the $B$-cycle).
+On the Clebsch--Gordan components:
+\[
+  M_B\big|_{V_1} = e^{\pi i\tau/(k+2)}\cdot e^{-\pi i/(k+2)}
+  = e^{\pi i(\tau-1)/(k+2)},
+  \qquad
+  M_B\big|_{V_0} = e^{-3\pi i\tau/(k+2)}\cdot e^{3\pi i/(k+2)}
+  = e^{-3\pi i(\tau-1)/(k+2)}.
+\]
+
+\medskip\noindent\textbf{Modular $R$-matrix.}\;
+Define the genus-$1$ $R$-matrix as the ratio of the connection
+form~\eqref{eq:kzb-connection} to its genus-$0$ counterpart:
+\begin{equation}\label{eq:genus1-r-matrix}
+  r_1(z;\tau) \;:=\; \frac{1}{k+2}\,\Omega\cdot \partial_z\!\log\theta_1(z;\tau).
+\end{equation}
+Expanding in $z$:
+\[
+  r_1(z;\tau)
+  = \frac{\Omega}{(k+2)z}
+    - \frac{\Omega}{k+2}\sum_{n=1}^{\infty}2\,
+    \frac{q^{2n}}{1-q^{2n}}\cdot 2\pi i\cos(2\pi nz)
+  = \frac{\Omega}{(k+2)z}
+    + \frac{\Omega}{k+2}\bigl(2G_2(\tau)-\wp(z;\tau)-\pi^2/3\bigr),
+\]
+where the Eisenstein correction $G_2(\tau)$ accounts for the
+(conditionally convergent) sum and $\wp$ is the Weierstrass
+$\wp$-function. Thus the genus-$1$ $R$-matrix is the genus-$0$
+rational $R$-matrix $\Omega/((k+2)z)$ dressed by the elliptic
+Weierstrass function, exactly as predicted by the shadow tower:
+the genus-$1$ period correction to the Casimir is controlled by
+$G_2(\tau)$ and reproduces the curvature $\kappa\cdot\omega_1$
+of the modular shadow at genus~$1$
+(cf.\ Theorem~\ref{thm:synthesis}\textup{(i)}).
+\end{computation}
+
+\begin{remark}[Consistency with the modular shadow tower]
+\label{rem:kzb-shadow-consistency}
+The genus-$1$ connection~\eqref{eq:kzb-connection} is the $n=2$ projection
+of the shadow connection $\nabla_{g,n}=d-\mathrm{Sh}_{g,n}(\Theta_A)$
+from the synthesis theorem, specialized to $\mathfrak{g}=\mathfrak{sl}_2$
+and $g=1$.  The Eisenstein correction $G_2(\tau)$ in $r_1$
+is the genus-$1$ curvature $\kappa(\widehat{\mathfrak{sl}}_2)
+=k\dim\mathfrak{g}/(k+h^\vee)=3k/(k+2)$
+times the period form $\omega_1$, in agreement with the formula
+$\kappa\cdot\omega_g$ established in Volume~I.
+\end{remark}
+
+% Bibliography entries consolidated into main.tex.

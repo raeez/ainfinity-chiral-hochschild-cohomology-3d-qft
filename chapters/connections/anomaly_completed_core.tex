@@ -1,0 +1,1842 @@
+
+\section{Anomaly-completed topological holography from first principles}
+\label{app:anomaly-completed-topological-holography}
+
+\index{topological holography|textbf}
+\index{Koszul duality}
+\index{chiral algebra}
+\index{factorization algebra}
+\index{anomaly completion}
+\index{transgression algebra}
+\index{genus-Clifford completion}
+\index{Yangian}
+\index{affine Kac--Moody algebra}
+\index{Fock module}
+
+The surrounding chapters share a common algebraic structure:
+bulk holomorphic-topological operator algebras are classical or shifted-Poisson/chiral objects, boundary algebras are their quantum and often noncommutative chiral shadows, line operators are controlled by Koszul-dual algebras, and higher operations encode the deformation and anomaly data that obstruct a naive strictification of the bulk--boundary dictionary.
+The precise mathematical form is not an equality of algebras but a \emph{duality plus anomaly completion}.
+This appendix isolates that algebraic core, corrects it at first principles where necessary, and pushes it one step farther.
+
+The input from the surrounding literature is the following constellation of ideas:
+chiral algebras as the quantum avatars of coisson structures \cite{BD04};
+higher-dimensional chiral/factorization Koszul duality \cite{FG12};
+the appearance of derived centers and derived tensor products in topological field theory and interval compactification \cite{costello-gaiotto,CP2020,DNP25};
+higher operations and Wess--Zumino type consistency in holomorphic-topological perturbation theory \cite{GKW24};
+boundary chiral algebras in holomorphic twists \cite{CDG20};
+the Koszul-dual interpretation of twisted holography \cite{Zeng23};
+and the control of line operators by strict or homotopy-coherent Yangian-type structures \cite{DNP25}.  
+The new theorem package below turns this constellation into a strict dg-algebraic machine.
+
+\medskip
+
+\noindent\textbf{What is proved here.}
+The theorem-level core of this appendix is the construction of:
+\begin{enumerate}
+\item a universal \emph{transgression algebra} \(B_{\Theta}\) attached to a dg algebra \(B\) and a closed central degree-\(2\) class \(\Theta\);
+\item a corrected one-sided two-term resolution computing both \(R\!\operatorname{Hom}\) and derived relative tensor products in the anomaly-completed theory;
+\item a \emph{secondary anomaly} \(u=\eta^{2}\), together with a quadratic refinement on the space of neutralizations;
+\item a \emph{genus-Clifford completion} \(\mathfrak{G}_{g}(B_{\Theta})\) which packages higher-genus handle operators and exhibits a sharp dichotomy:
+after inverting \(u\), higher genus becomes Morita-trivial; modulo \(u\), it degenerates to an exterior extension by \(H_{1}(\Sigma_{g})\).
+\end{enumerate}
+These statements are proved here and belong to what the monograph elsewhere calls the \emph{M-level}: strict algebraic models.
+
+\medskip
+
+\noindent\textbf{What remains interpretive or conjectural.}
+Whenever we identify \(B\) with a bulk Koszul-dual algebra \(A^{!}\), or identify \(\Theta\) with a genuine physical genus anomaly \(\Theta_{g}\), or interpret \(\mathfrak{G}_{g}(B_{\Theta})\) as the full higher-genus line-operator algebra of a twisted field theory, we have crossed from strict algebra into a physical/topological-holographic programme.
+Those identifications are supported by \cite{Zeng23,CDG20,DNP25,costello-gaiotto,CP2020}, but outside the strict models below they should be read with appropriate caution.
+We will make the distinction explicit as we go.
+
+\subsection{The first-principles correction}
+\label{subsec:tholog-first-principles-correction}
+
+One might attempt to adjoin to \(B\) an odd \emph{supercentral} generator \(\eta\) with \(d\eta=\Theta\).
+This does not produce the correct object.
+Indeed, if \(\eta\) were odd and supercentral in characteristic \(0\), then
+\[
+\eta^{2}=-\eta^{2},
+\]
+hence \(\eta^{2}=0\), and the entire secondary theory would collapse before it begins.
+The higher-genus refinement would then have no place to live.
+
+The correct object is instead a \emph{skew polynomial extension}:
+\(\eta\) is required to graded-commute with the original algebra \(B\), but it remains a genuinely free odd generator with respect to its own powers.
+Equivalently, one adjoins an odd variable over \(B\) via the sign automorphism
+\[
+\sigma:B\longrightarrow B,\qquad \sigma(b)=(-1)^{|b|}b.
+\]
+This is the smallest first-principles repair that preserves the desired universal property while leaving room for a nontrivial square
+\[
+u:=\eta^{2}.
+\]
+
+A second correction is equally important.
+Because the extension is a skew/Ore extension rather than an ordinary tensor product with an exterior algebra, the most honest exact triangle is \emph{one-sided} and module-theoretic.
+The naive untwisted bimodule resolution is not the right first-principles object.
+The correct replacement is a two-term free resolution of each module, from which the transgression formulas for \(R\!\operatorname{Hom}\) and derived tensor products follow cleanly.
+This is the point at which the theory becomes both stronger and more correct.
+
+\begin{remark}[Why this construction is inevitable]
+\label{rem:tholog-inevitability}
+The transgression algebra $B_\Theta$ is not one possible
+resolution of the curvature obstruction among several: it is
+the \emph{universal} one.  Its universal property
+(Proposition~\ref{prop:tholog-universal-property}) states that
+every dg~algebra map $B_\Theta \to C$ is equivalent to a pair
+$(f\colon B \to C,\; h \in C^1)$ with $dh = f(\Theta)$ and
+$hf(b) = (-1)^{|b|}f(b)h$.  In other words, $B_\Theta$
+\emph{is} the moduli problem ``resolve $\Theta$ at chain
+level'', incarnated as an algebra.  The secondary anomaly
+$u = \eta^2$ and the genus-Clifford completion
+$\mathfrak G_g(B_\Theta)$ are then forced by the same
+universality: $u$ is the inevitable by-product of
+$\eta^2 \ne 0$, and the Clifford algebra is the universal
+algebra in which $2g$ odd generators square to~$u$.  The
+entire tower---transgression, neutralisation, secondary
+anomaly, genus completion, Morita triviality---is a single
+deductive chain from the datum $(B, \Theta)$.  No choices are
+made; no alternatives exist at the same level of universality.
+\end{remark}
+
+\subsection{Conventions}
+\label{subsec:tholog-conventions}
+
+Throughout this appendix:
+\begin{itemize}
+\item all complexes are cohomologically graded;
+\item the ground field \(k\) has characteristic \(0\);
+\item differentials have degree \(+1\);
+\item if \(X\) is a graded object, \(|x|\) denotes the degree of a homogeneous element \(x\in X\);
+\item for a dg algebra \(B\), \(Z(B)\) denotes its graded center;
+\item if \(M\) is a left dg \(B\)-module, \(\underline{\operatorname{Hom}}_{B}(M,N)\) denotes the dg Hom complex;
+\item derived functors are written \(R\!\operatorname{Hom}\) and \(\otimes^{L}\);
+\item \(\Sigma_{g}\) denotes a closed connected oriented surface of genus \(g\).
+\end{itemize}
+
+\subsection{From the source picture to the strict algebraic problem}
+\label{subsec:tholog-source-picture}
+
+Let us compress the surrounding story into one strict question.
+
+\begin{quote}
+Given a dg algebra \(B\) modelling bulk, defect, or line-operator data, and given a closed central degree-\(2\) anomaly class
+\(\Theta\in Z^{2}(B)\cap Z(B)\),
+what is the correct universal algebra governing those modules, bimodules, and tensor products on which the action of \(\Theta\) has been neutralized at chain level?
+How does one incorporate genus in a way that is invisible away from the anomaly locus and maximally nontrivial on it?
+\end{quote}
+
+The answer will be:
+\begin{enumerate}
+\item first pass from \(B\) to the transgression algebra \(B_{\Theta}\);
+\item then, if one wishes to remember genuine surface data, pass further to the genus-Clifford completion \(\mathfrak{G}_{g}(B_{\Theta})\).
+\end{enumerate}
+
+Everything below is designed so that these two steps are universal, exact, functorial, and compatible with the familiar monoidal structures appearing in line-operator theories.
+
+\subsection{The transgression algebra}
+\label{subsec:tholog-transgression-algebra}
+
+Let \(B\) be a dg algebra, and let
+\[
+\Theta\in Z^{2}(B)\cap Z(B)
+\]
+be a closed central degree-\(2\) element.
+
+\begin{definition}[Transgression algebra]
+\label{def:tholog-transgression-algebra}
+The \emph{transgression algebra} of \((B,\Theta)\) is the dg algebra
+\[
+B_{\Theta}
+:=
+\frac{B * k\langle \eta\rangle}
+{\langle \eta b-(-1)^{|b|}b\eta\;\mid\; b\in B \text{ homogeneous}\rangle},
+\qquad |\eta|=1,\qquad d\eta=\Theta,
+\]
+where \(B * k\langle\eta\rangle\) denotes the free product of graded algebras and the differential extends that of \(B\).
+\end{definition}
+
+Thus \(B_{\Theta}\) is the skew polynomial/Ore extension of \(B\) by the sign automorphism \(\sigma(b)=(-1)^{|b|}b\), equipped with a differential transgressing \(\Theta\).
+
+\begin{remark}[Normal form]
+\label{rem:tholog-normal-form}
+Every element of \(B_{\Theta}\) may be written uniquely as a finite sum
+\[
+\sum_{n\geq 0} b_{n}\eta^{n},
+\qquad b_{n}\in B,
+\]
+with all powers of \(\eta\) placed on the right.
+Equivalently, \(B_{\Theta}\) is free as both a left and a right \(B\)-module on the basis \(\{1,\eta,\eta^{2},\dots\}\).
+\end{remark}
+
+\begin{proposition}[Universal property; \ClaimStatusProvedHere]
+\label{prop:tholog-universal-property}
+Let \(C\) be a dg algebra.
+To give a dg algebra map
+\[
+\widetilde f:B_{\Theta}\longrightarrow C
+\]
+is equivalent to giving:
+\begin{enumerate}
+\item a dg algebra map \(f:B\to C\);
+\item a degree-\(1\) element \(h\in C^{1}\)
+\end{enumerate}
+such that
+\[
+h\,f(b)=(-1)^{|b|}f(b)\,h
+\qquad \text{for all homogeneous } b\in B,
+\]
+and
+\[
+dh=f(\Theta).
+\]
+Under this correspondence one has \(\widetilde f(\eta)=h\).
+\end{proposition}
+
+\begin{proof}
+A dg algebra map \(\widetilde f\) is determined by its restriction \(f=\widetilde f|_{B}\) and by the image
+\(h=\widetilde f(\eta)\).
+Preservation of the defining relations for \(B_{\Theta}\) is exactly the relation
+\[
+h\,f(b)=(-1)^{|b|}f(b)\,h,
+\]
+and compatibility with the differential is exactly
+\[
+dh=d\widetilde f(\eta)=\widetilde f(d\eta)=\widetilde f(\Theta)=f(\Theta).
+\]
+Conversely, any pair \((f,h)\) satisfying those two conditions extends uniquely to a dg algebra map on the free product and descends through the quotient by the relation \(\eta b=(-1)^{|b|}b\eta\).
+\end{proof}
+
+\begin{corollary}[Modules as neutralizations; \ClaimStatusProvedHere]
+\label{cor:tholog-modules-neutralizations}
+To give a left dg \(B_{\Theta}\)-module structure on a graded vector space \(M\) is equivalent to giving:
+\begin{enumerate}
+\item a left dg \(B\)-module structure on \(M\);
+\item a degree-\(1\) \(B\)-linear endomorphism
+\[
+h_{M}\in \underline{\operatorname{End}}^{1}_{B}(M)
+\]
+such that
+\[
+d_{\underline{\operatorname{End}}}(h_{M})=\Theta_{M},
+\]
+where \(\Theta_{M}\) denotes the action of \(\Theta\) on \(M\).
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:tholog-universal-property} to
+\[
+C=\underline{\operatorname{End}}(M)
+\]
+and note that the \(B\)-centrality condition becomes precisely \(B\)-linearity of the degree-\(1\) endomorphism \(h_{M}\).
+\end{proof}
+
+\begin{definition}[Neutralizable module]
+\label{def:tholog-neutralizable}
+A left dg \(B\)-module \(M\) will be called \(\Theta\)-\emph{neutralizable} if the action of \(\Theta\) on \(M\) is null-homotopic, i.e.\ if there exists
+\[
+h_{M}\in \underline{\operatorname{End}}^{1}_{B}(M)
+\]
+with
+\[
+d_{\underline{\operatorname{End}}}(h_{M})=\Theta_{M}.
+\]
+Any such \(h_{M}\) will be called a \emph{neutralization} of the \(\Theta\)-action on \(M\).
+\end{definition}
+
+\begin{corollary}[Obstruction class; \ClaimStatusProvedHere]
+\label{cor:tholog-obstruction-class}
+A left dg \(B\)-module \(M\) is \(\Theta\)-neutralizable if and only if
+\[
+[\Theta_{M}]=0\in H^{2}\underline{\operatorname{End}}_{B}(M)
+=\operatorname{Ext}^{2}_{B}(M,M).
+\]
+\end{corollary}
+
+\begin{proof}
+By definition, \(M\) is neutralizable if and only if \(\Theta_{M}\) is a coboundary in the dg algebra \(\underline{\operatorname{End}}_{B}(M)\).
+\end{proof}
+
+\begin{corollary}[Moduli of neutralizations; \ClaimStatusProvedHere]
+\label{cor:tholog-moduli-neutralizations}
+If \(M\) is \(\Theta\)-neutralizable, then the set of homotopy classes of neutralizations of \(M\) is an affine space over
+\[
+H^{1}\underline{\operatorname{End}}_{B}(M)
+=\operatorname{Ext}^{1}_{B}(M,M).
+\]
+\end{corollary}
+
+\begin{proof}
+If \(h_{M}\) and \(h_{M}'\) are two neutralizations, then
+\[
+d(h_{M}'-h_{M})=0.
+\]
+Thus the difference is a degree-\(1\) cocycle.
+Changing a neutralization by a boundary does not change its homotopy class.
+\end{proof}
+
+\subsection{The corrected one-sided resolution}
+\label{subsec:tholog-corrected-one-sided-resolution}
+
+The next theorem is the corrected first-principles replacement for the naive untwisted bimodule resolution.
+It is the technical engine behind the exact formulas for derived morphisms and relative tensor products.
+
+\begin{theorem}[Free two-term resolution of a neutralized module; \ClaimStatusProvedHere]
+\label{thm:tholog-free-two-term-resolution}
+Let \(M\) be a left dg \(B_{\Theta}\)-module, and let \(h_{M}\) be the corresponding neutralization of the underlying left dg \(B\)-module.
+Define a degree-\(1\) map of graded left \(B_{\Theta}\)-modules
+\[
+D_{M}:B_{\Theta}\otimes_{B} M\longrightarrow B_{\Theta}\otimes_{B} M
+\]
+by
+\[
+D_{M}(s\otimes m)=s\eta\otimes m-(-1)^{|s|}s\otimes h_{M}(m).
+\]
+Then \(D_{M}\) is a chain map of degree \(1\), and there is a short exact sequence of dg \(B_{\Theta}\)-modules
+\[
+0\longrightarrow \big(B_{\Theta}\otimes_{B}M\big)[-1]
+\xrightarrow{\;\widetilde D_{M}\;}
+B_{\Theta}\otimes_{B}M
+\xrightarrow{\;\mu_{M}\;}
+M
+\longrightarrow 0,
+\]
+where \(\widetilde D_{M}\) is the corresponding degree-\(0\) map from the shifted domain and \(\mu_{M}(s\otimes m)=s\cdot m\).
+\end{theorem}
+
+\begin{proof}
+We first check that \(D_{M}\) is well defined over \(B\).
+For homogeneous \(b\in B\),
+\[
+D_{M}(sb\otimes m)
+=
+sb\eta\otimes m-(-1)^{|s|+|b|}sb\otimes h_{M}(m).
+\]
+Since \(b\eta=(-1)^{|b|}\eta b\) in \(B_{\Theta}\),
+\[
+sb\eta\otimes m=(-1)^{|b|}s\eta b\otimes m=s\eta\otimes bm,
+\]
+and because \(h_{M}\) is \(B\)-linear,
+\[
+sb\otimes h_{M}(m)=s\otimes bh_{M}(m)=s\otimes h_{M}(bm).
+\]
+Hence
+\[
+D_{M}(sb\otimes m)=D_{M}(s\otimes bm).
+\]
+
+We next show that \(D_{M}\) is a chain map.
+Write \(d\) for the differential on \(B_{\Theta}\otimes_{B}M\).
+A direct computation gives
+\begin{align*}
+d\,D_{M}(s\otimes m)
+&=
+d(s\eta)\otimes m+(-1)^{|s|+1}s\eta\otimes dm
+\\
+&\qquad
+-(-1)^{|s|}d(s)\otimes h_{M}(m)-s\otimes d(h_{M}m),
+\end{align*}
+while
+\begin{align*}
+D_{M}\,d(s\otimes m)
+&=
+D_{M}\big(d(s)\otimes m+(-1)^{|s|}s\otimes dm\big)
+\\
+&=
+d(s)\eta\otimes m-(-1)^{|s|+1}d(s)\otimes h_{M}(m)
+\\
+&\qquad
++(-1)^{|s|}s\eta\otimes dm-s\otimes h_{M}(dm).
+\end{align*}
+Subtracting, using \(d(s\eta)=d(s)\eta+(-1)^{|s|}s\Theta\) and
+\[
+d(h_{M}m)=d_{\underline{\operatorname{End}}}(h_{M})(m)-h_{M}(dm)=\Theta_{M}(m)-h_{M}(dm),
+\]
+we obtain
+\[
+dD_{M}(s\otimes m)+D_{M}d(s\otimes m)=
+(-1)^{|s|}s\Theta\otimes m-s\otimes \Theta_{M}(m)=0.
+\]
+So \(D_{M}\) is a chain map.
+
+Surjectivity of \(\mu_{M}\) is obvious.
+The image of \(D_{M}\) lies in \(\ker(\mu_{M})\) because
+\[
+\mu_{M}\big(D_{M}(s\otimes m)\big)
+=s\eta\cdot m-(-1)^{|s|}s\cdot h_{M}(m)=0.
+\]
+Conversely, \(B_{\Theta}\otimes_{B}M\) is the free left \(B_{\Theta}\)-module on the underlying \(B\)-module \(M\), and \(M\) is obtained from it by imposing the relations
+\[
+\eta\otimes m=1\otimes h_{M}(m).
+\]
+Hence \(\ker(\mu_{M})\) is generated by the image of \(D_{M}\).
+
+It remains to prove injectivity of \(\widetilde D_{M}\), equivalently of \(D_{M}\) as a degree-\(1\) map on the underlying graded modules.
+Write an element in normal form:
+\[
+x=\sum_{i=0}^{N}\eta^{i}\otimes m_{i}.
+\]
+Then
+\[
+D_{M}(x)=\sum_{i=0}^{N}\eta^{i+1}\otimes m_{i}-\sum_{i=0}^{N}(-1)^{i}\eta^{i}\otimes h_{M}(m_{i}).
+\]
+The coefficient of \(\eta^{N+1}\) is \(m_{N}\), so if \(D_{M}(x)=0\), then \(m_{N}=0\).
+Descending induction on \(N\) gives \(m_{i}=0\) for all \(i\).
+Thus \(D_{M}\) is injective.
+\end{proof}
+
+\begin{remark}[Why one-sided is the right level]
+\label{rem:tholog-why-one-sided}
+Theorem~\ref{thm:tholog-free-two-term-resolution} is the precise place where the Ore nature of \(B_{\Theta}\) matters.
+One should think of \(B_{\Theta}\) not as \(B\) tensored with an exterior algebra, but as a skew polynomial extension.
+The resulting exact triangle is naturally attached to a \emph{module}, not first to a bimodule.
+This is the correct algebraic setting for the transgression formulas below.
+\end{remark}
+
+\subsection{Transgression of derived morphisms}
+\label{subsec:tholog-derived-morphisms}
+
+\begin{theorem}[Transgression exact triangle for derived Hom; \ClaimStatusProvedHere]
+\label{thm:tholog-derived-hom}
+Let \(M,N\) be left dg \(B_{\Theta}\)-modules, with neutralizations \(h_{M}\) and \(h_{N}\).
+Define the degree-\(1\) endomorphism
+\[
+\delta_{M,N}:\underline{\operatorname{Hom}}_{B}(M,N)\longrightarrow
+\underline{\operatorname{Hom}}_{B}(M,N)
+\]
+by
+\[
+\delta_{M,N}(f)=h_{N}\circ f-(-1)^{|f|}f\circ h_{M}.
+\]
+Then there is a functorial exact triangle
+\[
+R\!\operatorname{Hom}_{B_{\Theta}}(M,N)
+\longrightarrow
+R\!\operatorname{Hom}_{B}(M,N)
+\xrightarrow{\;\delta_{M,N}\;}
+R\!\operatorname{Hom}_{B}(M,N)[1]
+\longrightarrow .
+\]
+Equivalently,
+\[
+R\!\operatorname{Hom}_{B_{\Theta}}(M,N)
+\simeq
+\operatorname{Fib}\!\left(
+R\!\operatorname{Hom}_{B}(M,N)
+\xrightarrow{\;\delta_{M,N}\;}
+R\!\operatorname{Hom}_{B}(M,N)[1]
+\right).
+\]
+\end{theorem}
+
+\begin{proof}
+Apply \(\underline{\operatorname{Hom}}_{B_{\Theta}}(-,N)\) to the short exact sequence of Theorem~\ref{thm:tholog-free-two-term-resolution}.
+Because \(B_{\Theta}\otimes_{B}M\) is a free left \(B_{\Theta}\)-module on the underlying \(B\)-module \(M\), the standard adjunction gives
+\[
+\underline{\operatorname{Hom}}_{B_{\Theta}}(B_{\Theta}\otimes_{B}M,N)
+\cong
+\underline{\operatorname{Hom}}_{B}(M,N).
+\]
+Under this identification, precomposition by \(D_{M}\) becomes exactly
+\[
+f\longmapsto h_{N}f-(-1)^{|f|}fh_{M}.
+\]
+Passing to derived categories yields the exact triangle.
+\end{proof}
+
+\begin{corollary}[Long exact sequence in Ext; \ClaimStatusProvedHere]
+\label{cor:tholog-long-exact-ext}
+For any left dg \(B_{\Theta}\)-modules \(M,N\), there is a natural long exact sequence
+\[
+\cdots\to
+\operatorname{Ext}^{n}_{B_{\Theta}}(M,N)
+\to
+\operatorname{Ext}^{n}_{B}(M,N)
+\xrightarrow{\;\delta_{*}\;}
+\operatorname{Ext}^{n+1}_{B}(M,N)
+\to
+\operatorname{Ext}^{n+1}_{B_{\Theta}}(M,N)
+\to\cdots.
+\]
+\end{corollary}
+
+\begin{remark}[The philosophy]
+\label{rem:tholog-hom-philosophy}
+The exact triangle says that the anomaly-completed morphism complex is not mysterious.
+It is computed from the underlying \(B\)-morphism complex by imposing one explicit degree-\(1\) transgression operator \(\delta_{M,N}\).
+In particular, anomaly-completed Ext groups are controlled by ordinary Ext groups plus one universal connecting morphism.
+\end{remark}
+
+\subsection{Transgression of derived relative tensor products}
+\label{subsec:tholog-derived-tensors}
+
+For a right \(B_{\Theta}\)-module, the neutralization operator is not strictly right \(B\)-linear; it is twisted by the sign automorphism.
+We therefore record the correct right-handed notion.
+
+\begin{definition}[Right neutralization]
+\label{def:tholog-right-neutralization}
+A right dg \(B_{\Theta}\)-module \(L\) is equivalently a right dg \(B\)-module together with a degree-\(1\) endomorphism
+\[
+h_{L}:L\longrightarrow L
+\]
+such that
+\[
+h_{L}(lb)=(-1)^{|b|}h_{L}(l)b
+\qquad (b\in B \text{ homogeneous}),
+\]
+and
+\[
+d(h_{L})=\Theta_{L},
+\]
+where \(\Theta_{L}\) denotes right multiplication by \(\Theta\).
+We call \(h_{L}\) a \emph{right neutralization}.
+\end{definition}
+
+\begin{theorem}[Transgression exact triangle for derived tensor products; \ClaimStatusProvedHere]
+\label{thm:tholog-derived-tensor}
+Let \(L\) be a right dg \(B_{\Theta}\)-module and \(R\) a left dg \(B_{\Theta}\)-module, with right and left neutralizations \(h_{L}\) and \(h_{R}\).
+Then there is a functorial exact triangle
+\[
+L\otimes^{L}_{B}R[-1]
+\xrightarrow{\;\theta_{L,R}\;}
+L\otimes^{L}_{B}R
+\longrightarrow
+L\otimes^{L}_{B_{\Theta}}R
+\longrightarrow ,
+\]
+where on homogeneous tensors
+\[
+\theta_{L,R}(l\otimes r)
+=
+(-1)^{|l|}h_{L}(l)\otimes r-l\otimes h_{R}(r).
+\]
+Equivalently,
+\[
+L\otimes^{L}_{B_{\Theta}}R
+\simeq
+\operatorname{Cone}\!\left(
+L\otimes^{L}_{B}R[-1]
+\xrightarrow{\;\theta_{L,R}\;}
+L\otimes^{L}_{B}R
+\right).
+\]
+\end{theorem}
+
+\begin{proof}
+Resolve \(R\) by the free two-term resolution from Theorem~\ref{thm:tholog-free-two-term-resolution}, then tensor on the left over \(B_{\Theta}\) with \(L\).
+The resulting two-term complex is
+\[
+L\otimes_{B}R[-1]\xrightarrow{\theta_{L,R}}L\otimes_{B}R,
+\]
+and a direct inspection shows that the induced map is exactly
+\[
+l\otimes r\longmapsto (-1)^{|l|}h_{L}(l)\otimes r-l\otimes h_{R}(r).
+\]
+The sign in the first term is forced by the \(\sigma\)-semilinearity of the right neutralization and ensures that the map is \(B\)-balanced.
+Passing to derived tensor products yields the triangle.
+\end{proof}
+
+\begin{remark}[Interval compactification]
+\label{rem:tholog-interval-compactification}
+Theorem~\ref{thm:tholog-derived-tensor} is the strict algebraic shadow of the interval/strip compactification formula familiar from boundary topological field theory.
+At the level of strict dg models, the first anomaly correction to an interval compactification is always a universal two-term cone.
+This is exactly the form one would want when comparing boundary conditions through a bulk or line algebra endowed with a nontrivial central genus class.
+\end{remark}
+
+\subsection{Gauge invariance of the transgression operator}
+\label{subsec:tholog-gauge-invariance}
+
+Neutralizations are never unique.
+The next theorem says that the transgression operator on morphism complexes depends only on the \(B_{\Theta}\)-module structures, not on the chosen representatives.
+
+\begin{theorem}[Gauge invariance of transgression; \ClaimStatusProvedHere]
+\label{thm:tholog-gauge-invariance}
+Let \(M,N\) be fixed left dg \(B\)-modules, and suppose
+\[
+h_{M}'=h_{M}+d(u_{M}),
+\qquad
+h_{N}'=h_{N}+d(u_{N}),
+\]
+for degree-\(0\) \(B\)-linear endomorphisms \(u_{M},u_{N}\).
+Then the corresponding operators
+\[
+\delta_{M,N},\delta_{M,N}' :
+\underline{\operatorname{Hom}}_{B}(M,N)\to
+\underline{\operatorname{Hom}}_{B}(M,N)[1]
+\]
+are chain-homotopic.
+\end{theorem}
+
+\begin{proof}
+Define a degree-\(0\) endomorphism
+\[
+H(f)=u_{N}\circ f-f\circ u_{M}.
+\]
+A direct computation in the dg algebra \(\underline{\operatorname{Hom}}_{B}(M,N)\) gives
+\[
+\delta_{M,N}'-\delta_{M,N}=dH+Hd.
+\]
+Hence the two operators are chain-homotopic.
+\end{proof}
+
+\subsection{Monoidal lift for primitive anomalies}
+\label{subsec:tholog-monoidal-lift}
+
+The next theorem explains when the anomaly-completed theory inherits a monoidal structure.
+
+\begin{definition}[Primitive anomaly]
+\label{def:tholog-primitive-anomaly}
+Assume that \(B\) is a dg bialgebra with coproduct \(\Delta\) and counit \(\varepsilon\).
+A closed central degree-\(2\) class
+\[
+\Theta\in Z^{2}(B)\cap Z(B)
+\]
+will be called \emph{primitive} if
+\[
+\Delta(\Theta)=\Theta\otimes 1+1\otimes \Theta,
+\qquad
+\varepsilon(\Theta)=0.
+\]
+\end{definition}
+
+\begin{theorem}[Primitive lift theorem; \ClaimStatusProvedHere]
+\label{thm:tholog-primitive-lift}
+Let \(B\) be a dg bialgebra and let \(\Theta\in Z^{2}(B)\cap Z(B)\) be primitive.
+Then the transgression algebra \(B_{\Theta}\) admits a unique dg bialgebra structure extending that of \(B\) and satisfying
+\[
+\Delta(\eta)=\eta\otimes 1+1\otimes \eta,
+\qquad
+\varepsilon(\eta)=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Because \(B_{\Theta}\) is generated as a graded algebra by \(B\) and \(\eta\), uniqueness is immediate.
+
+Define \(\Delta\) and \(\varepsilon\) on generators by the given formulas.
+It remains to check that the defining relation
+\[
+\eta b=(-1)^{|b|}b\eta
+\]
+is preserved.
+Write
+\[
+\Delta(b)=\sum b_{(1)}\otimes b_{(2)}.
+\]
+Then in the graded tensor product algebra,
+\begin{align*}
+\Delta(\eta)\Delta(b)
+&=
+(\eta\otimes 1+1\otimes \eta)\sum b_{(1)}\otimes b_{(2)}
+\\
+&=
+\sum \eta b_{(1)}\otimes b_{(2)}+\sum (-1)^{|b_{(1)}|}b_{(1)}\otimes \eta b_{(2)}
+\\
+&=
+\sum (-1)^{|b_{(1)}|}b_{(1)}\eta\otimes b_{(2)}
++\sum (-1)^{|b|}b_{(1)}\otimes b_{(2)}\eta
+\\
+&=
+(-1)^{|b|}\Delta(b)\Delta(\eta).
+\end{align*}
+So the relation is respected.
+
+Compatibility with the differential on \(\eta\) is the primitive condition:
+\[
+d\,\Delta(\eta)
+=
+\Theta\otimes 1+1\otimes \Theta
+=
+\Delta(\Theta)
+=
+\Delta(d\eta).
+\]
+All other identities are inherited from \(B\).
+\end{proof}
+
+\begin{corollary}[Fusion of neutralizations; \ClaimStatusProvedHere]
+\label{cor:tholog-fusion-neutralizations}
+Assume the setting of Theorem~\ref{thm:tholog-primitive-lift}.
+If \(M,N\) are left dg \(B_{\Theta}\)-modules with neutralizations \(h_{M}\) and \(h_{N}\), then \(M\otimes N\) becomes a left dg \(B_{\Theta}\)-module with neutralization
+\[
+h_{M\otimes N}=h_{M}\otimes 1+1\otimes h_{N},
+\]
+where \(1\otimes h_{N}\) is understood in the graded sense, so that on homogeneous tensors
+\[
+h_{M\otimes N}(m\otimes n)=h_{M}(m)\otimes n+(-1)^{|m|}m\otimes h_{N}(n).
+\]
+\end{corollary}
+
+\begin{proof}
+This is the action induced by \(\Delta(\eta)=\eta\otimes 1+1\otimes \eta\).
+Since \(\eta\) is primitive, the differential condition follows from \(d(h_{M})=\Theta_{M}\) and \(d(h_{N})=\Theta_{N}\).
+\end{proof}
+
+\subsection{The secondary anomaly}
+\label{subsec:tholog-secondary-anomaly}
+
+The new ingredient which is invisible in naive supercentral models and inevitable in the corrected skew model is the central square of the transgression generator.
+
+\begin{proposition}[The secondary central class; \ClaimStatusProvedHere]
+\label{prop:tholog-secondary-central-class}
+Let
+\[
+u:=\eta^{2}\in B_{\Theta}^{2}.
+\]
+Then \(u\) is a closed central degree-\(2\) element of \(B_{\Theta}\).
+\end{proposition}
+
+\begin{proof}
+Since \(d\eta=\Theta\) and \(\Theta\) has even degree,
+\[
+d(u)=d(\eta^{2})=(d\eta)\eta-\eta(d\eta)=\Theta\eta-\eta\Theta=0,
+\]
+because \(\eta\) graded-commutes with \(B\), hence with \(\Theta\).
+
+To check centrality, let \(b\in B\) be homogeneous.
+Then
+\[
+u\,b=\eta(\eta b)=(-1)^{|b|}\eta(b\eta)=(-1)^{2|b|}b\eta^{2}=bu.
+\]
+Clearly \(u\) commutes with \(\eta\) by associativity, hence with all of \(B_{\Theta}\).
+\end{proof}
+
+\begin{definition}[Secondary anomaly of a lift]
+\label{def:tholog-secondary-anomaly}
+Let \(M\) be a \(\Theta\)-neutralizable left dg \(B\)-module and let \(h\) be a chosen neutralization.
+The \emph{secondary anomaly} of the lift \((M,h)\) is the cohomology class
+\[
+\sigma(M,h):=[h^{2}]
+\in
+H^{2}\underline{\operatorname{End}}_{B}(M)
+=
+\operatorname{Ext}^{2}_{B}(M,M).
+\]
+Equivalently, \(\sigma(M,h)\) is the action of the central element \(u=\eta^{2}\) on \(M\).
+\end{definition}
+
+\begin{remark}[Why this is genuinely new]
+\label{rem:tholog-secondary-why-new}
+The secondary anomaly is invisible if one forces \(\eta\) to be odd supercentral.
+In the corrected skew extension, however, \(u=\eta^{2}\) is honest, closed, central, and nontrivial.
+It is exactly the place where higher genus will land.
+\end{remark}
+
+\subsection{Quadratic geometry of the space of neutralizations}
+\label{subsec:tholog-quadratic-geometry}
+
+The moduli of neutralizations is not merely affine.
+It carries a canonical quadratic refinement valued in degree-\(2\) self-Ext.
+
+\begin{theorem}[Quadratic refinement on the space of neutralizations; \ClaimStatusProvedHere]
+\label{thm:tholog-quadratic-refinement}
+Let \(M\) be a \(\Theta\)-neutralizable left dg \(B\)-module, and choose one neutralization \(h\).
+Let
+\[
+\mathcal{L}_{\Theta}(M)
+:=
+\big\{
+h'\in \underline{\operatorname{End}}^{1}_{B}(M)\;\big|\;
+d(h')=\Theta_{M}
+\big\}.
+\]
+Then:
+\begin{enumerate}
+\item \(\mathcal{L}_{\Theta}(M)\) is an affine space over the degree-\(1\) cocycles
+\[
+Z^{1}\underline{\operatorname{End}}_{B}(M).
+\]
+\item The assignment
+\[
+q_{h}(z):=[(h+z)^{2}-h^{2}]
+\]
+descends to a well-defined map
+\[
+q_{h}:H^{1}\underline{\operatorname{End}}_{B}(M)\longrightarrow
+H^{2}\underline{\operatorname{End}}_{B}(M),
+\]
+and admits the explicit formula
+\[
+q_{h}([z])=[hz+zh+z^{2}].
+\]
+\item Its polarization
+\[
+b([z],[w])
+=
+q_{h}([z]+[w])-q_{h}([z])-q_{h}([w])
+\]
+is independent of the chosen base point \(h\) and is given by
+\[
+b([z],[w])=[zw+wz].
+\]
+Thus \(H^{1}\underline{\operatorname{End}}_{B}(M)\) carries a canonical symmetric bilinear form with values in \(H^{2}\underline{\operatorname{End}}_{B}(M)\), and each neutralization \(h\) provides a quadratic refinement of that form.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+If \(h',h''\in \mathcal{L}_{\Theta}(M)\), then
+\[
+d(h''-h')=0,
+\]
+so \(\mathcal{L}_{\Theta}(M)\) is an affine space over \(Z^{1}\underline{\operatorname{End}}_{B}(M)\).
+This proves (1).
+
+For (2), if \(z\in Z^{1}\underline{\operatorname{End}}_{B}(M)\), then \(h+z\) is again a neutralization, so \((h+z)^{2}-h^{2}=hz+zh+z^{2}\) is a degree-\(2\) cocycle.
+We must show that its cohomology class depends only on \([z]\).
+Replace \(z\) by \(z+d(a)\) with \(a\in \underline{\operatorname{End}}^{0}_{B}(M)\).
+Set \(x=h+z\), so \(dx=\Theta_{M}\).
+Then
+\[
+(x+d(a))^{2}-x^{2}=x\,d(a)+d(a)\,x+d(a)^{2}.
+\]
+Since \(d^{2}(a)=[\Theta_{M},a]=0\) (because \(\Theta_{M}\) comes from the action of the central element \(\Theta\in B\)), one computes
+\[
+x\,d(a)+d(a)\,x+d(a)^{2}
+=
+d\big(-xa+ax+a\,d(a)\big).
+\]
+Thus the cohomology class is unchanged.
+This proves (2).
+
+Finally, polarization gives
+\[
+q_{h}(z+w)-q_{h}(z)-q_{h}(w)=zw+wz,
+\]
+which is independent of \(h\).
+This proves (3).
+\end{proof}
+
+\subsection{Curvature identity on morphism complexes}
+\label{subsec:tholog-curvature-identity}
+
+The transgression operator \(\delta_{M,N}\) is rarely square-zero.
+Its failure to square to zero is exactly measured by the secondary anomaly.
+
+\begin{theorem}[Curvature identity; \ClaimStatusProvedHere]
+\label{thm:tholog-curvature-identity}
+Let \(M,N\) be left dg \(B_{\Theta}\)-modules.
+Then the operator
+\[
+\delta_{M,N}(f)=h_{N}f-(-1)^{|f|}fh_{M}
+\]
+from Theorem~\ref{thm:tholog-derived-hom} is a degree-\(1\) chain map satisfying
+\[
+\delta_{M,N}^{2}(f)=h_{N}^{2}f-fh_{M}^{2}.
+\]
+Equivalently,
+\[
+\delta_{M,N}^{2}
+=
+u_{N}\circ(-)-(-)\circ u_{M},
+\]
+where \(u_{M}=h_{M}^{2}\) and \(u_{N}=h_{N}^{2}\).
+Passing to cohomology,
+\[
+[\delta_{M,N}]^{2}
+=
+\sigma(N,h_{N})\circ(-)-(-)\circ \sigma(M,h_{M})
+\]
+on \(\operatorname{Ext}^{\bullet}_{B}(M,N)\).
+\end{theorem}
+
+\begin{proof}
+A direct computation shows that \(\delta_{M,N}\) is a chain map because
+\[
+d(h_{N})=\Theta_{N},\qquad d(h_{M})=\Theta_{M},
+\]
+and the \(\Theta\)-terms cancel by centrality.
+Squaring \(\delta_{M,N}\), we obtain
+\begin{align*}
+\delta_{M,N}^{2}(f)
+&=
+h_{N}\big(h_{N}f-(-1)^{|f|}fh_{M}\big)
+-
+(-1)^{|f|+1}\big(h_{N}f-(-1)^{|f|}fh_{M}\big)h_{M}
+\\
+&=
+h_{N}^{2}f-fh_{M}^{2},
+\end{align*}
+because the middle terms cancel.
+The cohomological statement follows immediately.
+\end{proof}
+
+\begin{corollary}[Orthogonality of sectors with distinct secondary anomaly; \ClaimStatusProvedHere]
+\label{cor:tholog-orthogonality}
+Let \(M,N\) be left dg \(B_{\Theta}\)-modules.
+If the degree-\(2\) endomorphism
+\[
+u_{N}\circ(-)-(-)\circ u_{M}
+\]
+acts by a homotopy-invertible endomorphism on \(R\!\operatorname{Hom}_{B}(M,N)\), then
+\[
+R\!\operatorname{Hom}_{B_{\Theta}}(M,N)\simeq 0.
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:tholog-curvature-identity}, the transgression operator \(\delta_{M,N}\) has square equal to the displayed endomorphism.
+If that square is homotopy invertible, then \(\delta_{M,N}\) itself is homotopy invertible, with homotopy inverse
+\[
+\big(u_{N}\circ(-)-(-)\circ u_{M}\big)^{-1}\delta_{M,N}.
+\]
+But the fiber of a homotopy equivalence is acyclic, so Theorem~\ref{thm:tholog-derived-hom} gives the claim.
+\end{proof}
+
+\begin{corollary}[Equal-secondary sector; \ClaimStatusProvedHere]
+\label{cor:tholog-equal-secondary-sector}
+If \(u_{M}=u_{N}\) as chain maps, then
+\[
+\delta_{M,N}^{2}=0.
+\]
+Hence \(\underline{\operatorname{Hom}}_{B}(M,N)\) becomes a mixed complex with differentials \(d\) and \(\delta_{M,N}\), and one has a short exact sequence
+\[
+0\longrightarrow
+\operatorname{coker}\!\big(H^{n-1}\delta_{M,N}\big)
+\longrightarrow
+\operatorname{Ext}^{n}_{B_{\Theta}}(M,N)
+\longrightarrow
+\ker\!\big(H^{n}\delta_{M,N}\big)
+\longrightarrow 0.
+\]
+\end{corollary}
+
+\subsection{Cohomology of the transgression algebra as a hypersurface}
+\label{subsec:tholog-hypersurface}
+
+The transgression algebra admits a very concrete cohomological description.
+
+Let
+\[
+C:=B[u],\qquad |u|=2,\qquad du=0.
+\]
+As a graded left \(C\)-module, every element of \(B_{\Theta}\) has a unique decomposition
+\[
+c_{0}+c_{1}\eta,
+\qquad c_{0},c_{1}\in C.
+\]
+
+\begin{theorem}[Hypersurface long exact sequence; \ClaimStatusProvedHere]
+\label{thm:tholog-hypersurface}
+There is a short exact sequence of complexes of left \(C\)-modules
+\[
+0\longrightarrow C
+\longrightarrow B_{\Theta}
+\longrightarrow C[-1]
+\longrightarrow 0,
+\]
+whose connecting morphism on cohomology is multiplication by \([\Theta]\) (up to the standard cohomological sign convention).
+Consequently, there is a long exact sequence
+\[
+\cdots\to
+H^{n}(C)\to H^{n}(B_{\Theta})\to H^{n-1}(C)
+\xrightarrow{\cdot[\Theta]}
+H^{n+1}(C)\to\cdots.
+\]
+If multiplication by \([\Theta]\) is injective on \(H^{\bullet}(B)[u]\), then
+\[
+H^{\bullet}(B_{\Theta})\cong H^{\bullet}(B)[u]/([\Theta]).
+\]
+\end{theorem}
+
+\begin{proof}
+The inclusion \(C\hookrightarrow B_{\Theta}\) is the inclusion of the even part \(\sum b_{n}u^{n}\), and the quotient identifies with \(C[-1]\) via
+\[
+c\longmapsto c\eta.
+\]
+So there is a short exact sequence of graded \(C\)-modules.
+The differential on \(c\eta\) is
+\[
+d(c\eta)=d(c)\eta+(-1)^{|c|}c\Theta.
+\]
+Hence the connecting morphism sends the class of \(c\) to the class of \(c\Theta\), up to the standard sign from the shift.
+This yields the long exact sequence.
+If multiplication by \([\Theta]\) is injective, exactness identifies \(H^{\bullet}(B_{\Theta})\) with the quotient of \(H^{\bullet}(C)=H^{\bullet}(B)[u]\) by the principal ideal generated by \([\Theta]\).
+\end{proof}
+
+\begin{remark}[The hypersurface viewpoint]
+\label{rem:tholog-hypersurface-viewpoint}
+Theorem~\ref{thm:tholog-hypersurface} says that anomaly completion replaces \(B\) by a one-parameter degree-\(2\) hypersurface thickening.
+The variable \(u\) is not an auxiliary decoration.
+It is the ambient coordinate in which \([\Theta]\) cuts out the completed cohomology ring.
+\end{remark}
+
+\subsection{Genus-Clifford completion}
+\label{subsec:tholog-genus-clifford}
+
+We now add genuine surface data.
+A genus-\(g\) surface carries \(2g\) basic one-cycles, and in the anomaly-completed setting their algebraic shadow is an odd Clifford algebra whose anticommutator is controlled by the secondary class \(u\).
+
+Let
+\[
+H:=H_{1}(\Sigma_{g};k).
+\]
+Its intersection pairing is symplectic.
+After parity shift, \(V:=\Pi H\) carries the corresponding symmetric bilinear form.
+Choose a symplectic basis
+\[
+a_{1},b_{1},\dots,a_{g},b_{g},
+\]
+and write
+\[
+\alpha_{i}:=\Pi a_{i},\qquad \beta_{i}:=\Pi b_{i}.
+\]
+
+\begin{definition}[Genus-Clifford completion]
+\label{def:tholog-genus-clifford}
+The \emph{genus-\(g\) Clifford completion} of \(B_{\Theta}\) is the dg algebra
+\[
+\mathfrak{G}_{g}(B_{\Theta})
+:=
+\frac{
+B_{\Theta}\langle \alpha_{1},\beta_{1},\dots,\alpha_{g},\beta_{g}\rangle
+}{
+\left\langle
+\alpha_{i}\alpha_{j}+\alpha_{j}\alpha_{i},\;
+\beta_{i}\beta_{j}+\beta_{j}\beta_{i},\;
+\alpha_{i}\beta_{j}+\beta_{j}\alpha_{i}-\delta_{ij}u
+\right\rangle
+},
+\]
+with
+\[
+|\alpha_{i}|=|\beta_{i}|=1,\qquad d\alpha_{i}=d\beta_{i}=0.
+\]
+\end{definition}
+
+\begin{remark}[Two regimes]
+\label{rem:tholog-two-regimes}
+Because the odd generators satisfy a Clifford relation with coefficient \(u\), the genus theory naturally splits into two regimes:
+\begin{enumerate}
+\item the \emph{curved} regime \(u\neq 0\), in which the Clifford algebra becomes Morita-trivial after localization;
+\item the \emph{strict} regime \(u=0\), in which the handle algebra degenerates to an exterior algebra on \(H_{1}(\Sigma_{g})\).
+\end{enumerate}
+This dichotomy is one of the main structural consequences of the whole construction.
+\end{remark}
+
+\begin{theorem}[Universal property of genus completion; \ClaimStatusProvedHere]
+\label{thm:tholog-universal-property-genus}
+To give a left dg \(\mathfrak{G}_{g}(B_{\Theta})\)-module is equivalent to giving:
+\begin{enumerate}
+\item a left dg \(B_{\Theta}\)-module \(M\);
+\item closed degree-\(1\) \(B_{\Theta}\)-linear endomorphisms
+\[
+A_{1},B_{1},\dots,A_{g},B_{g}\in \underline{\operatorname{End}}^{1}_{B_{\Theta}}(M)
+\]
+such that
+\[
+A_{i}A_{j}+A_{j}A_{i}=0,\qquad
+B_{i}B_{j}+B_{j}B_{i}=0,\qquad
+A_{i}B_{j}+B_{j}A_{i}=\delta_{ij}u_{M}.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+This is immediate from generators and relations.
+A module over \(\mathfrak{G}_{g}(B_{\Theta})\) is determined by the images of the generators
+\(\alpha_{i},\beta_{i}\).
+Preservation of the differential gives closedness of the corresponding endomorphisms, and preservation of the defining relations gives exactly the three displayed identities.
+Conversely, any such family extends uniquely to a dg representation.
+\end{proof}
+
+\subsection{Morita triviality away from the secondary-anomaly cone}
+\label{subsec:tholog-morita-triviality}
+
+Let
+\[
+R:=B_{\Theta}[u^{-1}]
+\]
+be the localization of \(B_{\Theta}\) at the central element \(u\).
+
+\begin{theorem}[One handle becomes a matrix factor after inverting \(u\); \ClaimStatusProvedHere]
+\label{thm:tholog-one-handle-matrix}
+There is an isomorphism of dg algebras
+\[
+\mathfrak{G}_{1}(R)\cong \underline{\operatorname{End}}_{R}
+\big(R\oplus R\varepsilon\big),
+\]
+where \(|\varepsilon|=-1\).
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+S_{1}:=R\oplus R\varepsilon=R\otimes \Lambda^{\bullet}(k\varepsilon[-1]).
+\]
+Define degree-\(1\) endomorphisms of \(S_{1}\) by
+\[
+\rho(\alpha)=u\,(\varepsilon\wedge -),\qquad
+\rho(\beta)=\iota_{\varepsilon}.
+\]
+Because
+\[
+(\varepsilon\wedge -)^{2}=0,\qquad \iota_{\varepsilon}^{2}=0,\qquad
+(\varepsilon\wedge -)\iota_{\varepsilon}+\iota_{\varepsilon}(\varepsilon\wedge -)=\operatorname{id},
+\]
+we get
+\[
+\rho(\alpha)^{2}=0,\qquad
+\rho(\beta)^{2}=0,\qquad
+\rho(\alpha)\rho(\beta)+\rho(\beta)\rho(\alpha)=u\,\operatorname{id}.
+\]
+Hence \(\rho\) extends to a dg algebra map
+\[
+\mathfrak{G}_{1}(R)\longrightarrow \underline{\operatorname{End}}_{R}(S_{1}).
+\]
+
+As a left \(R\)-module, \(\mathfrak{G}_{1}(R)\) is free of rank \(4\) with basis
+\[
+1,\alpha,\beta,\alpha\beta.
+\]
+Likewise \(\underline{\operatorname{End}}_{R}(S_{1})\) is free of rank \(4\), with basis
+\[
+\operatorname{id},\quad \varepsilon\wedge -,\quad \iota_{\varepsilon},\quad
+(\varepsilon\wedge -)\iota_{\varepsilon}.
+\]
+The image of \(\rho\) contains all four basis elements, because \(u\) is invertible and
+\[
+\varepsilon\wedge - = u^{-1}\rho(\alpha),\qquad
+\iota_{\varepsilon}=\rho(\beta),\qquad
+(\varepsilon\wedge -)\iota_{\varepsilon}=u^{-1}\rho(\alpha\beta).
+\]
+Thus \(\rho\) is an isomorphism.
+\end{proof}
+
+\begin{theorem}[Morita triviality of higher genus after inverting \(u\); \ClaimStatusProvedHere]
+\label{thm:tholog-morita-triviality}
+For every \(g\geq 0\),
+\[
+\mathfrak{G}_{g}(B_{\Theta})[u^{-1}]
+\cong
+\underline{\operatorname{End}}_{R}
+\Big(R\otimes \Lambda^{\bullet}(k^{g}[-1])\Big),
+\qquad
+R=B_{\Theta}[u^{-1}].
+\]
+In particular,
+\[
+D\!\big(\mathfrak{G}_{g}(B_{\Theta})[u^{-1}]\text{-mod}\big)
+\simeq
+D\!\big(B_{\Theta}[u^{-1}]\text{-mod}\big).
+\]
+\end{theorem}
+
+\begin{proof}
+By construction, \(\mathfrak{G}_{g}(R)\) is the graded tensor product of \(g\) copies of \(\mathfrak{G}_{1}(R)\).
+Likewise
+\[
+R\otimes \Lambda^{\bullet}(k^{g}[-1])
+\cong
+S_{1}^{\otimes g}.
+\]
+Taking graded tensor products of the isomorphism from Theorem~\ref{thm:tholog-one-handle-matrix} yields
+\[
+\mathfrak{G}_{g}(R)\cong
+\underline{\operatorname{End}}_{R}(S_{1}^{\otimes g})
+\cong
+\underline{\operatorname{End}}_{R}
+\Big(R\otimes \Lambda^{\bullet}(k^{g}[-1])\Big).
+\]
+Derived Morita equivalence is immediate.
+\end{proof}
+
+\begin{corollary}[Localization principle; \ClaimStatusProvedHere]
+\label{cor:tholog-localization-principle}
+All genuinely new genus-\(g\) information in \(\mathfrak{G}_{g}(B_{\Theta})\) is supported on the secondary-anomaly cone
+\[
+V(u)\subset \operatorname{Spec}H^{\bullet}(B_{\Theta}).
+\]
+Away from \(u=0\), the genus completion is derived Morita-trivial.
+\end{corollary}
+
+\subsection{Degeneration on the strict locus}
+\label{subsec:tholog-degeneration-strict-locus}
+
+\begin{theorem}[Exterior degeneration modulo \(u\); \ClaimStatusProvedHere]
+\label{thm:tholog-exterior-degeneration}
+There is an isomorphism of dg algebras
+\[
+\mathfrak{G}_{g}(B_{\Theta})/(u)
+\cong
+\big(B_{\Theta}/(u)\big)\otimes
+\Lambda(\alpha_{1},\beta_{1},\dots,\alpha_{g},\beta_{g}),
+\]
+where all \(2g\) generators \(\alpha_{i},\beta_{i}\) have degree \(1\) and square to zero.
+\end{theorem}
+
+\begin{proof}
+Reducing the defining relations modulo \(u\) gives
+\[
+\alpha_{i}\alpha_{j}+\alpha_{j}\alpha_{i}=0,\qquad
+\beta_{i}\beta_{j}+\beta_{j}\beta_{i}=0,\qquad
+\alpha_{i}\beta_{j}+\beta_{j}\alpha_{i}=0.
+\]
+This is exactly the exterior algebra relation.
+\end{proof}
+
+\begin{corollary}[Handle action in the strict sector; \ClaimStatusProvedHere]
+\label{cor:tholog-handle-action-strict-sector}
+If \(M\) is a left \(\mathfrak{G}_{g}(B_{\Theta})\)-module on which \(u\) acts by zero, then the handle operators define an exterior action
+\[
+\Lambda^{\bullet}\big(H_{1}(\Sigma_{g};k)\big)\curvearrowright M
+\]
+after parity shift.
+\end{corollary}
+
+\subsection{Handle operators on morphism complexes}
+\label{subsec:tholog-handle-operators-on-morphisms}
+
+\begin{theorem}[Handle action on morphism complexes; \ClaimStatusProvedHere]
+\label{thm:tholog-handle-action-on-hom}
+Let \(M,N\) be left \(\mathfrak{G}_{g}(B_{\Theta})\)-modules, with handle operators
+\[
+A_{i}^{M},B_{i}^{M}
+\qquad\text{and}\qquad
+A_{i}^{N},B_{i}^{N}.
+\]
+Define degree-\(1\) endomorphisms of \(\underline{\operatorname{Hom}}_{B_{\Theta}}(M,N)\) by
+\[
+\delta_{i}^{\alpha}(f)=A_{i}^{N}f-(-1)^{|f|}fA_{i}^{M},
+\qquad
+\delta_{i}^{\beta}(f)=B_{i}^{N}f-(-1)^{|f|}fB_{i}^{M}.
+\]
+Then
+\[
+(\delta_{i}^{\alpha})^{2}=0,\qquad
+(\delta_{i}^{\beta})^{2}=0,
+\]
+\[
+\delta_{i}^{\alpha}\delta_{j}^{\alpha}+\delta_{j}^{\alpha}\delta_{i}^{\alpha}=0,
+\qquad
+\delta_{i}^{\beta}\delta_{j}^{\beta}+\delta_{j}^{\beta}\delta_{i}^{\beta}=0,
+\]
+and
+\[
+\delta_{i}^{\alpha}\delta_{j}^{\beta}+\delta_{j}^{\beta}\delta_{i}^{\alpha}
+=
+\delta_{ij}\big(u_{N}\circ(-)-(-)\circ u_{M}\big).
+\]
+In particular, if \(u_{M}=u_{N}\), then the morphism complex carries a canonical action of the exterior algebra on \(2g\) generators.
+\end{theorem}
+
+\begin{proof}
+Each identity is a direct graded expansion using the relations from Theorem~\ref{thm:tholog-universal-property-genus}.
+For instance,
+\[
+(\delta_{i}^{\alpha})^{2}(f)=A_{i}^{N\,2}f-fA_{i}^{M\,2}=0,
+\]
+because \(A_{i}^{2}=0\).
+Likewise,
+\begin{align*}
+\delta_{i}^{\alpha}\delta_{j}^{\beta}(f)+\delta_{j}^{\beta}\delta_{i}^{\alpha}(f)
+&=
+(A_{i}^{N}B_{j}^{N}+B_{j}^{N}A_{i}^{N})f
+-
+f(A_{i}^{M}B_{j}^{M}+B_{j}^{M}A_{i}^{M})
+\\
+&=
+\delta_{ij}\big(u_{N}f-fu_{M}\big).
+\end{align*}
+The remaining identities are identical.
+\end{proof}
+
+\begin{remark}[The qualitative picture]
+\label{rem:tholog-qualitative-picture}
+Theorem~\ref{thm:tholog-handle-action-on-hom} is the algebraic form of a clean slogan:
+\emph{equal secondary-anomaly sectors see genuine handle operators; different secondary-anomaly sectors see curvature instead of exterior symmetry}.
+\end{remark}
+
+\subsection{A strict holographic datum}
+\label{subsec:tholog-strict-holographic-datum}
+
+The theorem package above is purely algebraic.
+The following definition packages it in the form suited to holographic applications.
+
+\begin{definition}[Strict anomaly-completed holographic datum]
+\label{def:tholog-strict-holographic-datum}
+A \emph{strict anomaly-completed holographic datum} consists of:
+\begin{enumerate}
+\item a dg bialgebra \(B\), thought of as a bulk/defect/line algebra;
+\item a primitive closed central class
+\[
+\Theta\in Z^{2}(B)\cap Z(B);
+\]
+\item a dg algebra \(A_{\partial}\), thought of as a boundary algebra;
+\item a dg algebra map
+\[
+\beta:B\longrightarrow \underline{\operatorname{C}}^{\bullet}(A_{\partial},A_{\partial}),
+\]
+to the Hochschild cochain algebra of \(A_{\partial}\).
+\end{enumerate}
+A \emph{boundary neutralization} of this datum is a degree-\(1\) Hochschild cochain
+\[
+\gamma\in \underline{\operatorname{C}}^{1}(A_{\partial},A_{\partial})
+\]
+such that
+\[
+d\gamma=\beta(\Theta)
+\]
+and
+\[
+\gamma\,\beta(b)=(-1)^{|b|}\beta(b)\,\gamma
+\qquad (b\in B \text{ homogeneous}).
+\]
+\end{definition}
+
+\begin{remark}[Relation to the holographic modular Koszul datum]
+\label{rem:tholog-hmkd-comparison}
+\index{holographic modular Koszul datum!comparison with strict datum}
+The holographic modular Koszul datum
+$\mathcal H(T) = (\cA,\cA^!,\cC,r(z),\Theta_\cA,
+\nabla^{\mathrm{hol}})$
+of Vol~I (Definition~\ref*{def:holographic-modular-koszul-datum})
+is the modular-operad packaging.  The strict anomaly-completed
+datum above is its dg-algebra shadow: the bulk/defect algebra~$B$
+is the dg-shifted Yangian $\cA^!$, the primitive class
+$\Theta\in Z^2(B)$ is the image of the modular MC element
+$\Theta_\cA$ under the collision residue
+$\operatorname{Res}^{\mathrm{coll}}_{0,2}$
+(Vol~I, Theorem~\ref*{thm:collision-residue-twisting}),
+the boundary algebra $A_\partial$ is the boundary chiral
+algebra~$\cA$, and $\beta$ is the bulk-to-boundary map.  The
+boundary neutralization $\gamma$ with $d\gamma=\beta(\Theta)$
+is the genus-$0$ incarnation of the shadow connection flatness:
+at higher genus, $\gamma$ extends to
+$\nabla^{\mathrm{hol}}_{g,n}=d-\operatorname{Sh}_{g,n}(\Theta_\cA)$
+with $(\nabla^{\mathrm{hol}})^2=0$ from the full MC equation.
+\end{remark}
+
+\begin{proposition}[Universal boundary lift; \ClaimStatusProvedHere]
+\label{prop:tholog-universal-boundary-lift}
+To give a strict anomaly-completed holographic datum together with a boundary neutralization is equivalent to giving a dg algebra map
+\[
+\widetilde\beta:B_{\Theta}\longrightarrow \underline{\operatorname{C}}^{\bullet}(A_{\partial},A_{\partial}).
+\]
+\end{proposition}
+
+\begin{proof}
+This is exactly Proposition~\ref{prop:tholog-universal-property}, applied to the Hochschild cochain algebra of \(A_{\partial}\).
+\end{proof}
+
+\begin{remark}[Computed holographic data]
+\label{rem:tholog-computed-examples}
+\index{holographic modular Koszul datum!computed examples}
+Volume~I computes the full holographic modular Koszul datum
+$\mathcal{H}(T)$ for four families
+(Computations~\ref*{comp:heisenberg-holographic-datum},
+\ref*{comp:affine-holographic-datum},
+\ref*{comp:virasoro-holographic-datum},
+\ref*{comp:w3-holographic-datum}).
+Under the comparison of
+Remark~\ref{rem:tholog-hmkd-comparison}, the strict
+anomaly-completed datum $(B,\Theta,A_\partial,\beta)$
+specialises to:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llll}
+& $B$ & $\Theta$ & $A_\partial$ \\
+\hline
+Heisenberg & $\cH_{-k}$ & $k/z$ & $\cH_k$ \\
+$\widehat{\mathfrak{sl}}_2{}_k$
+  & $\widehat{\mathfrak{sl}}_2{}_{-k-4}$
+  & $\Omega/z$
+  & $\widehat{\mathfrak{sl}}_2{}_k$ \\
+$\mathrm{Vir}_c$
+  & $\mathrm{Vir}_{26-c}$
+  & $\frac{\partial T}{z}+\frac{2T}{z^2}+\frac{c/2}{z^4}$
+  & $\mathrm{Vir}_c$ \\
+$\mathcal W_3{}_c$
+  & $\mathcal W_3{}_{100-c}$
+  & $r_c^{W_3}(z)$
+  & $\mathcal W_3{}_c$
+\end{tabular}
+\end{center}
+The boundary neutralization $\gamma$ with
+$d\gamma=\beta(\Theta)$ is the genus-$0$ shadow connection;
+its higher-genus extension is
+$\nabla^{\mathrm{hol}}_{g,n}=d-\mathrm{Sh}_{g,n}(\Theta_\cA)$.
+For Virasoro at $c=26$, $\kappa=0$ and $\gamma$ extends to a
+flat connection at all genera.
+For $\mathcal W_3$ at $c=50$, the same holds with
+$\kappa(\mathcal W_3{}_{50})=0$.
+\end{remark}
+
+\begin{corollary}[Surface-completed holographic lift; \ClaimStatusProvedHere]
+\label{cor:tholog-surface-completed-holographic-lift}
+Suppose a strict anomaly-completed holographic datum is equipped with a boundary neutralization \(\gamma\), and suppose there exist closed degree-\(1\) Hochschild cochains
+\[
+A_{1},B_{1},\dots,A_{g},B_{g}
+\]
+satisfying
+\[
+A_{i}A_{j}+A_{j}A_{i}=0,\qquad
+B_{i}B_{j}+B_{j}B_{i}=0,\qquad
+A_{i}B_{j}+B_{j}A_{i}=\delta_{ij}\gamma^{2}.
+\]
+Then there is a dg algebra map
+\[
+\mathfrak{G}_{g}(B_{\Theta})
+\longrightarrow
+\underline{\operatorname{C}}^{\bullet}(A_{\partial},A_{\partial}).
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:tholog-universal-property-genus} to the dg algebra
+\(\underline{\operatorname{C}}^{\bullet}(A_{\partial},A_{\partial})\),
+viewed as a left module over itself.
+\end{proof}
+
+\subsection{Topological holography as an anomaly-completed Koszul-duality principle}
+\label{subsec:tholog-koszul-duality-principle}
+
+The strict algebra above suggests the following programme-level formulation.
+
+\begin{principle}[Anomaly-completed topological holography]
+\label{prin:tholog-anomaly-completed-topological-holography}
+Let \(A_{\partial}\) be a boundary chiral or factorization algebra arising from a holomorphic-topological or twisted field theory.
+Suppose its bulk/defect/line algebra is controlled by a Koszul-dual dg algebra \(B\simeq A_{\partial}^{!}\), and suppose there is a primitive closed central class
+\[
+\Theta_{g}\in Z^{2}(B)\cap Z(B)
+\]
+capturing the genus-\(g\) obstruction.
+Then the correct strict genus-\(g\) bulk/defect/line algebra is not merely \(B\), but the anomaly-completed algebra
+\[
+B_{\Theta_{g}},
+\]
+and the correct surface-refined algebra is
+\[
+\mathfrak{G}_{g}(B_{\Theta_{g}}).
+\]
+\end{principle}
+
+This principle is not claimed here as a theorem of physics.
+What \emph{is} proved here is that \(B_{\Theta_{g}}\) and \(\mathfrak{G}_{g}(B_{\Theta_{g}})\) are the unique strict dg constructions with the universal properties one would want in such a theory.
+They package:
+\begin{itemize}
+\item chain-level neutralizations of the genus class;
+\item exact formulas for derived morphisms and relative tensor products;
+\item a secondary anomaly controlling higher-genus support;
+\item a genus-localization dichotomy: Morita-triviality away from \(u=0\), exterior degeneration on \(u=0\).
+\end{itemize}
+
+\subsection{A strict dg-shifted Yangian completion}
+\label{subsec:tholog-strict-dg-shifted-yangian}
+
+The line-operator literature motivating this appendix often packages OPE by a strict dg model of a shifted Yangian-type algebra.
+The anomaly-completed form of that structure is immediate from the primitive lift theorem.
+
+\begin{theorem}[Strict dg-shifted Yangian completion; \ClaimStatusProvedHere]
+\label{thm:tholog-dg-shifted-yangian-completion}
+Let \(Y\) be a strict dg model of a dg-shifted Yangian: a dg bialgebra equipped with translation automorphisms \(\tau_{z}\), twisted coproducts \(\Delta_{z}\), and a Maurer--Cartan \(r\)-matrix \(r(z)\).
+Suppose \(\Theta\in Z^{2}(Y)\cap Z(Y)\) satisfies
+\[
+\tau_{z}(\Theta)=\Theta,\qquad
+\Delta_{z}(\Theta)=\Theta\otimes 1+1\otimes \Theta,\qquad
+\varepsilon(\Theta)=0.
+\]
+Then \(Y_{\Theta}\) carries a canonical strict dg-shifted Yangian structure extending that of \(Y\), determined by
+\[
+\tau_{z}(\eta)=\eta,\qquad
+\Delta_{z}(\eta)=\eta\otimes 1+1\otimes \eta,\qquad
+\varepsilon(\eta)=0,
+\]
+and with the same \(r\)-matrix \(r(z)\).
+\end{theorem}
+
+\begin{proof}
+Translation invariance of \(\eta\) is compatible with the differential because
+\[
+d(\tau_{z}(\eta))=d(\eta)=\Theta=\tau_{z}(\Theta)=\tau_{z}(d\eta).
+\]
+Compatibility of the coproduct with the differential follows from the primitive condition:
+\[
+d\,\Delta_{z}(\eta)=\Theta\otimes 1+1\otimes \Theta=\Delta_{z}(\Theta)=\Delta_{z}(d\eta).
+\]
+The defining relation \(\eta y=(-1)^{|y|}y\eta\) with \(y\in Y\) is preserved exactly as in the proof of Theorem~\ref{thm:tholog-primitive-lift}.
+Since \(r(z)\) already lies in \(Y\otimes Y\subset Y_{\Theta}\otimes Y_{\Theta}\) and the differential on \(Y\) is unchanged, the Maurer--Cartan and Yang--Baxter identities remain valid.
+\end{proof}
+
+\begin{remark}[Interpretation]
+\label{rem:tholog-yangian-interpretation}
+Theorem~\ref{thm:tholog-dg-shifted-yangian-completion} says that if a strict dg-shifted Yangian governs line operators before anomaly completion, then the correct genus-anomaly-corrected line algebra is \(Y_{\Theta}\), not \(Y\).
+The \(r\)-matrix survives unchanged, while the module theory, Ext theory, and surface refinements are altered by the transgression generator \(\eta\) and its square \(u=\eta^{2}\).
+\end{remark}
+
+\subsection{Derived-center reconstruction and interval transgression}
+\label{subsec:tholog-derived-center-reconstruction}
+
+The surrounding literature repeatedly points to the derived center \(HH^{\bullet}(A_{\partial})\) as the natural recipient of bulk classes and to derived tensor products as the correct algebraic form of interval compactification.
+The strict theorems above sharpen both themes.
+
+\begin{proposition}[Boundary reconstruction of the anomaly; \ClaimStatusProvedHere]
+\label{prop:tholog-boundary-reconstruction}
+Suppose a strict anomaly-completed holographic datum admits a quasi-isomorphism
+\[
+\beta_{\mathrm{der}}:B\stackrel{\sim}{\longrightarrow} HH^{\bullet}(A_{\partial})
+\]
+onto the derived center of \(A_{\partial}\).
+Then the anomaly class \(\Theta\) is completely determined by the boundary class
+\[
+\Theta_{\partial}:=\beta_{\mathrm{der}}(\Theta)\in HH^{2}(A_{\partial}),
+\]
+and for every \(A_{\partial}\)-module \(M\), the obstruction to neutralization is the image of \(\Theta_{\partial}\) in
+\[
+\operatorname{Ext}^{2}_{A_{\partial}}(M,M).
+\]
+\end{proposition}
+
+\begin{proof}
+The class \(\Theta\) is recovered from \(\Theta_{\partial}\) by the quasi-isomorphism \(\beta_{\mathrm{der}}\).
+The action of the derived center on any module \(M\) sends \(\Theta_{\partial}\) to the obstruction class measuring whether the action of \(\Theta\) is null-homotopic on \(M\).
+This is exactly Corollary~\ref{cor:tholog-obstruction-class} transported across the quasi-isomorphism.
+\end{proof}
+
+\begin{corollary}[Interval transgression formula; \ClaimStatusProvedHere]
+\label{cor:tholog-interval-transgression-formula}
+Let \(L,R\) be boundary conditions modelled by right and left modules over a strict bulk algebra \(B_{\Theta}\).
+Then the derived-tensor core of the interval compactification is
+\[
+L\otimes^{L}_{B_{\Theta}}R
+\simeq
+\operatorname{Cone}\!\left(
+L\otimes^{L}_{B}R[-1]
+\xrightarrow{\;\theta_{L,R}\;}
+L\otimes^{L}_{B}R
+\right),
+\]
+with \(\theta_{L,R}\) as in Theorem~\ref{thm:tholog-derived-tensor}.
+\end{corollary}
+
+\begin{proof}
+This is Theorem~\ref{thm:tholog-derived-tensor}.
+\end{proof}
+
+\subsection{Shadow calculus: semisimple, Casimir, and scalar families}
+\label{subsec:tholog-shadow-calculus}
+
+The strict algebraic formalism above is universal.
+To recover concrete module computations one passes to a shadow in which the derived endomorphism complex is computable.
+The following general lemmas extract the three patterns that repeatedly appear in the surrounding examples: semisimple vanishing, Casimir control, and scalar universality.
+
+\begin{proposition}[Semisimple vanishing criterion; \ClaimStatusProvedHere]
+\label{prop:tholog-semisimple-vanishing}
+Let \(M\) be a left dg \(B\)-module.
+Assume that there exists a finite-dimensional semisimple Lie algebra \(\mathfrak{g}\) and a finite-dimensional \(\mathfrak{g}\)-module \(E\) such that
+\[
+R\!\operatorname{End}_{B}(M)\simeq C^{\bullet}(\mathfrak{g},E)
+\]
+in the derived category of dg algebras.
+Then any central degree-\(2\) anomaly class acts trivially on \(M\):
+\[
+[\Theta_{M}]=0\in \operatorname{Ext}^{2}_{B}(M,M).
+\]
+\end{proposition}
+
+\begin{proof}
+Under the hypothesis, the obstruction class lands in
+\[
+H^{2}(\mathfrak{g},E).
+\]
+Whitehead's second lemma gives
+\[
+H^{2}(\mathfrak{g},E)=0
+\]
+for semisimple \(\mathfrak{g}\) and finite-dimensional \(E\).
+Hence the obstruction vanishes.
+\end{proof}
+
+\begin{remark}[Evaluation-family shadow]
+\label{rem:tholog-evaluation-family-shadow}
+Whenever a family of modules---for example an evaluation-family model of a Yangian sector---has derived self-endomorphisms computed by the Chevalley--Eilenberg complex of a finite-dimensional semisimple Lie algebra, Proposition~\ref{prop:tholog-semisimple-vanishing} applies immediately.
+This recovers the expected vanishing phenomenon in a precise hypothesis-driven form.
+\end{remark}
+
+\begin{proposition}[Casimir shadow lemma; \ClaimStatusProvedHere]
+\label{prop:tholog-casimir-shadow}
+Let \(C\) be an algebra equipped with a central element \(\Omega\), and let \(S\) be a simple left \(C\)-module on which \(\Omega\) acts by the scalar \(\chi_{S}(\Omega)\).
+Suppose that a shadow functor sends the anomaly class \(\Theta_{g}\) to the scalar multiple
+\[
+\lambda_{g}\Omega
+\]
+in the center of \(C\).
+Then the induced shadow of the anomaly on \(S\) is multiplication by
+\[
+\lambda_{g}\chi_{S}(\Omega).
+\]
+\end{proposition}
+
+\begin{proof}
+A central element acts on a simple module by a scalar.
+If the shadow of \(\Theta_{g}\) is \(\lambda_{g}\Omega\), then its action is exactly the displayed scalar multiple.
+\end{proof}
+
+\begin{remark}[Affine Zhu shadow]
+\label{rem:tholog-affine-zhu-shadow}
+In the standard affine setting, the relevant shadow algebra is Zhu's algebra \(U(\mathfrak{g})\), and \(\Omega\) is the quadratic Casimir.
+If the genus anomaly descends to
+\[
+\frac{k+h^{\vee}}{2h^{\vee}}\lambda_{g}\Omega,
+\]
+then on a simple lowest-weight shadow \(L_{\mathfrak{g}}(\bar\lambda)\) it acts by
+\[
+\frac{k+h^{\vee}}{2h^{\vee}}\,c_{2}(\bar\lambda)\,\lambda_{g}.
+\]
+This Casimir law's precise realization depends on the ambient affine model.
+\end{remark}
+
+\begin{proposition}[Scalar shadow lemma; \ClaimStatusProvedHere]
+\label{prop:tholog-scalar-shadow}
+Suppose that in a given shadow category the anomaly class \(\Theta_{g}\) acts by a scalar
+\[
+\kappa\,\lambda_{g}
+\]
+independently of the chosen simple object in a family.
+Then every simple object in that family has the same shadow anomaly:
+\[
+[\Theta_{g}]=\kappa\,\lambda_{g}.
+\]
+\end{proposition}
+
+\begin{proof}
+This is immediate from the hypothesis.
+\end{proof}
+
+\begin{remark}[Fock-family shadow]
+\label{rem:tholog-fock-family-shadow}
+The Heisenberg/Fock pattern is exactly of the form treated by Proposition~\ref{prop:tholog-scalar-shadow}: the genus anomaly is universal across the family.
+This is the sharp contrast with semisimple evaluation sectors, where the anomaly vanishes, and with affine Casimir shadows, where it depends on the lowest-weight Casimir eigenvalue.
+\end{remark}
+
+\subsection{The finished first-principles picture}
+\label{subsec:tholog-finished-picture}
+
+We may now summarize the whole construction in one paragraph.
+
+Start with a dg algebra \(B\) and a closed central degree-\(2\) class \(\Theta\).
+Adjoin a skew odd transgression generator \(\eta\) with \(d\eta=\Theta\); this produces the anomaly-completed algebra \(B_{\Theta}\).
+The universal property of \(B_{\Theta}\) identifies its modules with \(B\)-modules equipped with chain-level neutralizations of \(\Theta\).
+The corrected one-sided two-term resolution computes both
+\(R\!\operatorname{Hom}_{B_{\Theta}}\) and derived relative tensor products by explicit fiber and cone formulas.
+The square \(u=\eta^{2}\) is a new closed central class, the \emph{secondary anomaly}; it endows the space of neutralizations with a natural quadratic refinement and controls the curvature of the transgression operator on morphism complexes.
+Passing from \(B_{\Theta}\) to \(\mathfrak{G}_{g}(B_{\Theta})\) adjoins \(2g\) handle operators with Clifford anticommutator \(u\).
+After inverting \(u\), this higher-genus completion becomes Morita-trivial.
+Modulo \(u\), it degenerates to an exterior extension by \(H_{1}(\Sigma_{g})\).
+Thus the genuinely new genus-\(g\) information is concentrated exactly on the secondary-anomaly cone \(u=0\).
+
+This is, in a strict algebraic sense, the anomaly-completed topological-holographic package toward which the surrounding chapters point.
+
+\subsection{Frontier conjectures and repository-facing statements}
+\label{subsec:tholog-frontier-conjectures}
+
+The strict M-level algebra proved in this appendix suggests several precise H-level conjectures.
+We record them in a form suitable for the research repository.
+
+\begin{theorem}[Koszul-dual bulk completion; \ClaimStatusProvedHere]
+\label{thm:tholog-koszul-dual-bulk-completion}
+Let \(A_{\partial}\) be a boundary chiral algebra arising from a 3d
+holomorphic-topological theory satisfying \textrm{(H1)--(H4)}, and
+let \(A_{\partial}^{!}\) be its Koszul dual
+(Theorem~\textup{\ref{thm:lines_as_modules}}, now unconditional).
+Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Volume~I's genus-\(g\) curvature class
+  \(\kappa(\cA) \cdot \omega_g \in H^2_{\mathrm{cyc}}(\cA,\cA)\)
+  maps, via the Hochschild bridge
+  (Theorem~\textup{\ref{thm:hochschild-bridge-higher-genus}}),
+  to a canonical class
+  \(\Theta_g \in Z^2(A_{\partial}^{!}) \cap Z(A_{\partial}^{!})\).
+\item \(\Theta_g\) is central because \(\kappa(\cA)\) is scalar
+  (Volume~I, Theorem~D\textsubscript{scal}): the Hochschild bridge
+  preserves centrality (scalar coderivations map to central
+  cocycles).
+\item \(\Theta_g\) is primitive because the bar coalgebra
+  \(\barB(\cA)\) is a bialgebra and the curvature class respects
+  the coproduct: \(\Delta(\kappa \cdot \omega_g) =
+  \kappa \cdot \omega_g \otimes 1 + 1 \otimes \kappa \cdot \omega_g\)
+  (the curvature is a scalar coderivation, hence primitive by
+  Proposition~\textup{\ref{prop:R-canonical-vol2}(iii)}).
+  The Hochschild bridge transports primitivity.
+\item The genus-\(g\) bulk algebra is therefore the transgression
+  algebra \((A_{\partial}^{!})_{\Theta_g}\) of
+  Definition~\textup{\ref{def:tholog-transgression-algebra}}, with
+  all the strict algebraic structure proved in
+  Sections~\textup{\ref{subsec:tholog-transgression-algebra}--\ref{subsec:tholog-handle-operators-on-morphisms}}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The genus-\(g\) curvature \(\kappa(\cA) \cdot \omega_g\) is an
+element of \(H^2_{\mathrm{cyc}}(\cA, \cA)\) by Volume~I,
+Theorem~D.  The Hochschild bridge
+(Theorem~\ref{thm:hochschild-bridge-higher-genus}) provides a
+filtered quasi-isomorphism
+\(\mathrm{C}^\bullet_{\mathrm{ch,top}}(\cA) \simeq
+\ChirHoch^\bullet(\cA)\) at genus~\(g\).  The cyclic cohomology
+class \(\kappa(\cA) \cdot \omega_g\) maps under the Koszul
+duality functor \(\cA \mapsto \cA^!\) to a class
+\(\Theta_g \in H^2(\cA^!)\): this uses the isomorphism
+\(H^2_{\mathrm{cyc}}(\cA, \cA) \cong
+\mathrm{Ext}^2_{\cA^!\text{-}\mathrm{bimod}}(\cA^!, \cA^!)\)
+on the Koszul locus (Volume~I, Theorem~H).
+
+Centrality: \(\kappa(\cA)\) is scalar (acts as multiplication by a
+constant on every bar component), so \(\Theta_g\) commutes with
+all elements of \(\cA^!\).  Primitivity: the curvature is a scalar
+coderivation of the cofree coalgebra
+(Proposition~\ref{prop:curved-R-factorization}(iii)), and scalar
+coderivations of cofree coalgebras are primitive
+(\(\Delta(\Theta) = \Theta \otimes 1 + 1 \otimes \Theta\) because
+\(\Theta\) acts on cogenerators by a scalar).  The Hochschild
+bridge preserves both properties because it is a filtered
+quasi-isomorphism respecting the bialgebra structure.
+
+With \(\Theta_g\) established as a primitive central \(2\)-cocycle,
+the transgression algebra \((A_{\partial}^{!})_{\Theta_g}\) is
+defined by Definition~\ref{def:tholog-transgression-algebra}, and
+all the M-level structure theorems
+(Sections~\ref{subsec:tholog-transgression-algebra}--\ref{subsec:tholog-handle-operators-on-morphisms})
+apply.
+\end{proof}
+
+\begin{theorem}[Surface-completed line algebra; \ClaimStatusProvedHere]
+\label{thm:tholog-surface-completed-line-algebra}
+In the setting of Theorem~\ref{thm:tholog-koszul-dual-bulk-completion},
+the genus-\(g\) refinement of the line-operator algebra is
+\[
+\mathfrak{G}_{g}\!\big((A_{\partial}^{!})_{\Theta_{g}}\big).
+\]
+Moreover:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The full higher-genus line category is supported on the
+  secondary-anomaly cone \(u_{g} = \eta^2 = 0\).
+\item Away from \(u_g = 0\), the genus completion is derived
+  Morita-trivial
+  (Theorem~\textup{\ref{thm:tholog-morita-triviality}}).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:tholog-koszul-dual-bulk-completion},
+\(\Theta_g\) is a primitive central \(2\)-cocycle in \(\cA^!\).
+The genus-Clifford completion
+\(\mathfrak{G}_g((A_\partial^!)_{\Theta_g})\)
+is defined by attaching \(g\) pairs of odd generators
+\((\eta_\alpha, \bar\eta_\alpha)\) satisfying the Clifford
+relation \(\eta_\alpha \bar\eta_\alpha +
+\bar\eta_\alpha \eta_\alpha = u_g\), where
+\(u_g = \eta^2\) is the secondary anomaly
+(Proposition~\ref{prop:tholog-secondary-central-class}).
+
+The line-operator identification
+\(\mathcal{C}_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}\)
+(Theorem~\ref{thm:lines_as_modules}, now unconditional) lifts to
+the genus-completed setting: at genus~\(g\), line operators are
+modules for \(\mathfrak{G}_g((A_\partial^!)_{\Theta_g})\).
+
+Part~(i): by the localization principle
+(Corollary~\ref{cor:tholog-localization-principle}), all genuinely
+new genus-\(g\) information is supported on \(u_g = 0\).
+Part~(ii): Theorem~\ref{thm:tholog-morita-triviality} gives
+\(\mathfrak{G}_g((A_\partial^!)_{\Theta_g})[u_g^{-1}] \simeq
+(A_\partial^!)_{\Theta_g}[u_g^{-1}]\) (Morita equivalence via
+matrix factorization after inverting~\(u_g\)).
+\end{proof}
+
+\begin{theorem}[Boundary reconstruction; \ClaimStatusProvedHere]
+\label{thm:tholog-boundary-reconstruction}
+Assume the bulk--boundary identification
+\(A_{\partial}^{!} \simeq HH^{\bullet}(A_{\partial})\)
+holds (Theorem~\textup{\ref{thm:hochschild-bridge-higher-genus}}
+on the Koszul locus).  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The genus anomaly \(\Theta_{g}\) is reconstructed from a
+  canonical boundary Hochschild class
+  \(\Theta_{g,\partial} \in HH^{2}(A_{\partial})\):
+  the Hochschild bridge transports the genus-\(g\) curvature
+  \(\kappa(\cA) \cdot \omega_g\) to
+  \(\Theta_{g,\partial}\), and the bulk--boundary equivalence
+  maps \(\Theta_{g,\partial}\) to~\(\Theta_g\).
+\item The surface-completed bulk algebra
+  \(\mathfrak{G}_g((A_\partial^!)_{\Theta_g})\) is equivalent to
+  the universal genus-completed endomorphism algebra of the boundary
+  theory: it controls exactly those deformations of the boundary
+  algebra that extend to genus-\(g\) surfaces.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part~(i): the chain of identifications is
+\[
+\kappa(\cA) \cdot \omega_g
+\;\xmapsto{\text{Hochschild bridge}}\;
+\Theta_{g,\partial} \in HH^2(A_\partial)
+\;\xmapsto{A_\partial^! \simeq HH^\bullet(A_\partial)}\;
+\Theta_g \in Z^2(A_\partial^!) \cap Z(A_\partial^!).
+\]
+The first arrow is
+Theorem~\ref{thm:hochschild-bridge-higher-genus}(iii) (curvature
+maps to cyclic obstruction).  The second arrow is the
+Koszul-locus identification of \(A_\partial^!\) with
+\(HH^\bullet(A_\partial)\) (this is exactly
+Proposition~\ref{prop:tholog-boundary-reconstruction},
+transported across the quasi-isomorphism).  Together, the
+genus anomaly is determined entirely by boundary data.
+
+Part~(ii): the transgression algebra
+\((A_\partial^!)_{\Theta_g}\) controls deformations of
+\(\cA^!\)-modules that neutralize the anomaly class~\(\Theta_g\)
+(Corollary~\ref{cor:tholog-modules-neutralizations}).  Under the
+bulk--boundary equivalence, this is the same as deformations of
+the boundary theory that extend from the disk (genus~$0$) to a
+genus-\(g\) surface---precisely because $\Theta_g$ measures the
+obstruction to this extension.  The genus-Clifford completion
+\(\mathfrak{G}_g\) adds the handle operators, giving the
+universal endomorphism algebra that controls all genera
+simultaneously.
+\end{proof}
+
+\begin{remark}[The complete anomaly-holographic machine]
+\label{rem:tholog-complete-machine}
+Theorems~\ref{thm:tholog-koszul-dual-bulk-completion}--\ref{thm:tholog-boundary-reconstruction}
+complete the anomaly-holographic machine of this chapter.
+The strict M-level algebra
+(Sections~\ref{subsec:tholog-transgression-algebra}--\ref{subsec:tholog-handle-operators-on-morphisms})
+now applies to every boundary chiral algebra arising from a 3d HT
+theory satisfying (H1)--(H4), because:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the homotopy-Koszulity of \(\SCchtop\)
+  (Theorem~\ref{thm:homotopy-Koszul}) gives \(\cA^!\);
+\item the Hochschild bridge
+  (Theorem~\ref{thm:hochschild-bridge-higher-genus}) gives
+  \(\Theta_g\);
+\item the M-level structure theorems give the full transgression,
+  genus-Clifford, and localization package.
+\end{enumerate}
+The boundary determines the bulk at all genera---the holographic
+dictionary is presented by the transgression algebra, as the
+Swiss-cheese algebra is presented by the bar complex.
+\end{remark}
+
+\begin{remark}[Repository integration]
+\label{rem:tholog-repository-integration}
+For repository purposes, the clean separation is:
+\begin{itemize}
+\item Sections~\ref{subsec:tholog-transgression-algebra}--\ref{subsec:tholog-handle-operators-on-morphisms} are theorem-level strict algebra proved here.
+\item Sections~\ref{subsec:tholog-strict-holographic-datum}--\ref{subsec:tholog-derived-center-reconstruction} are strict packaging results and exact consequences.
+\item Section~\ref{subsec:tholog-shadow-calculus} records representation-theoretic shadows in a hypothesis-driven form.
+\item Theorems~\ref{thm:tholog-koszul-dual-bulk-completion}--\ref{thm:tholog-boundary-reconstruction} close the H-level programme: the M-level algebra applies to all HT theories via the bridges established in this volume.
+\end{itemize}
+\end{remark}
+
+\subsection{Coda}
+\label{subsec:tholog-coda}
+
+Topological holography, at the strict algebraic level accessible here, is not an isomorphism between bulk and boundary operator algebras.
+It is a \emph{Koszul-dual anomaly-completed transgression theory}.
+The classical/commutative/coisson bulk class \(\Theta\) is not merely an obstruction; it is the source of a universal odd transgression \(\eta\), a central secondary charge \(u=\eta^{2}\), and a whole higher-genus Clifford/exterior machine.
+The higher-genus structure is therefore not uniformly new:
+away from the secondary-anomaly cone it collapses Morita-theoretically,
+while on the cone it produces a genuine exterior handle algebra.
+

@@ -1,0 +1,1671 @@
+\label{chap:ht-bulk-boundary-line-frontier}
+
+% Theorem environments inherited from main.tex; local macros only.
+\providecommand{\kk}{\mathbb{k}}
+\providecommand{\cO}{\mathcal O}
+\providecommand{\SCop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\providecommand{\gSC}{\mathfrak{g}^{\mathrm{SC}}}
+\providecommand{\cC}{\mathcal C}
+\providecommand{\cL}{\mathcal L}
+\providecommand{\cM}{\mathcal M}
+\providecommand{\cJ}{\mathcal J}
+\providecommand{\Ainf}{\mathsf{A}_{\infty}}
+\providecommand{\Linf}{L_\infty}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\PV}{\operatorname{PV}}
+\providecommand{\ot}{\otimes}
+\providecommand{\CE}{\operatorname{CE}}
+\providecommand{\HH}{\operatorname{HH}}
+\providecommand{\RHom}{\operatorname{RHom}}
+\providecommand{\BBar}{\operatorname{Bar}}
+\providecommand{\Cobar}{\operatorname{\Omega}}
+\providecommand{\Spec}{\operatorname{Spec}}
+\providecommand{\Spf}{\operatorname{Spf}}
+
+\providecommand{\End}{\operatorname{End}}
+\providecommand{\Hom}{\operatorname{Hom}}
+\providecommand{\Der}{\operatorname{Der}}
+\providecommand{\gr}{\operatorname{gr}}
+\providecommand{\im}{\operatorname{im}}
+\providecommand{\coker}{\operatorname{coker}}
+\providecommand{\id}{\operatorname{id}}
+\providecommand{\Perf}{\operatorname{Perf}}
+\providecommand{\Cl}{\operatorname{Cl}}
+\providecommand{\dCrit}{\operatorname{dCrit}}
+\providecommand{\Zder}{\operatorname{Z}_{\mathrm{der}}}
+\providecommand{\mc}{\operatorname{MC}}
+\providecommand{\op}{\mathrm{op}}
+\providecommand{\der}{\mathrm{der}}
+\providecommand{\Abulk}{A_{\mathrm{bulk}}}
+\providecommand{\Bbound}{B_{\partial}}
+\providecommand{\Kline}{K_{\mathrm{line}}}
+\providecommand{\intr}{\mathrm{intr}}
+\providecommand{\free}{\mathrm{free}}
+\providecommand{\eff}{\mathrm{eff}}
+\providecommand{\st}{\mathrm{st}}
+\providecommand{\ex}{\mathrm{ex}}
+\providecommand{\minmod}{\mathrm{min}}
+\providecommand{\expmod}{\mathrm{exp}}
+\providecommand{\hkR}{\mathrm{HKR}}
+\providecommand{\sn}{\mathrm{SN}}
+\providecommand{\lines}{\mathsf{Lines}}
+\providecommand{\hSym}{\widehat{\Sym}}
+
+\section{Toward the global theorem: rich boundaries, absolute lines, and a Steinberg-style endpoint}\label{sec:global}
+
+The exact local theorem package is now in place.  What remains is the global theorem.  This section explains how the local constructions fit into the global program, what is already formal, and what geometric endpoint should ultimately present the full line algebra.
+
+\subsection{The global theorem as a two-comparison problem}
+
+The corrected global triangle \eqref{eq:global-corrected-triangle} will follow once two comparison maps are supplied:
+
+\begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
+\item a \emph{bulk/boundary comparison}
+\[
+\beta_{\der}:\Abulk\longrightarrow \Zder(B_b)
+\]
+for a rich boundary condition $b$;
+\item a \emph{boundary/line comparison}
+\[
+\End_{\cC_{\mathrm{line}}}(M_b)\simeq B_b
+\]
+showing that the chosen boundary vacuum $M_b$ generates the line category.
+\end{enumerate}
+
+Once these exist, Proposition~\ref{prop:formal-global-triangle} finishes the job.  So the theorem is not one enormous mystery.  It is two comparison theorems plus Morita invariance.
+
+\subsection{Why the local exact sector matters for the global problem}
+
+The local theorem package proved above gives a template for the global attack:
+\begin{itemize}[leftmargin=1.8em]
+\item \textbf{intrinsic boundary algebra}: the open sector should be defined without arbitrary splittings;
+\item \textbf{exact local line models}: local line algebras should arise from a canonical coalgebraic or Koszul-dual presentation;
+\item \textbf{Kuranishi reduction}: linearly massive modes should be integrated out exactly;
+\item \textbf{derived center}: bulk should be recovered from lines by Hochschild cochains;
+\item \textbf{stabilization calculus}: universal contractible and Morita-trivial blocks must be removed before comparing theories.
+\end{itemize}
+The local exact sector shows that each of these moves is real, not aspirational.
+
+\subsection{The absolute line algebra versus boundary-adapted local line algebras}
+
+It is essential not to confuse two different line objects:
+\begin{enumerate}[label=(\roman*),leftmargin=1.8em]
+\item the \emph{absolute} line algebra $A^!$ of the global theory, conjecturally presenting all line operators and appearing in \cite{DNP25};
+\item the \emph{boundary-adapted pointed} line algebras $K_{F,p}$ and $K_\kappa$ constructed in Sections~\ref{sec:exact-lines}--\ref{sec:classification}.
+\end{enumerate}
+The latter are local exact models attached to a chosen boundary vacuum.  They should be viewed as boundary charts on the absolute line category.  They are not globally equal to $A^!$, but they are the correct local testing ground in which the shape of the global theorem becomes rigid.
+
+\subsection{The Steinberg presentation theorem}
+
+The phrase ``Chriss--Ginzburgification'' is not decorative.
+It names a methodological demand: a mature representation-theoretic
+algebra should eventually be presented by correspondences.
+The Steinberg variety $Z = \widetilde{\cN} \times_{\mathfrak g}
+\widetilde{\cN}$ is a correspondence between two copies of the
+Springer resolution; its convolution algebra $H_*(Z)$ recovers the
+Hecke algebra $\cH_q(W)$.  The bar complex $\barB(\cA)$ on
+$\FM_k(\C) \times \Conf_k^{<}(\R)$ is a correspondence between
+holomorphic collision data and topological ordering data; its
+convolution algebra recovers the Swiss-cheese composition.
+The following theorem makes this analogy precise.
+
+\begin{theorem}[Algebraic Steinberg presentation; \ClaimStatusProvedHere]
+\label{thm:steinberg-presentation}
+\index{Steinberg presentation|textbf}
+\index{Swiss-cheese!Steinberg presentation|textbf}
+Let $\cA$ be a chiral algebra on a smooth curve~$X$ satisfying the
+standing hypotheses, and let $T = (\Bbound, \cC_{\mathrm{line}})$
+be the associated $\SCop$-algebra
+\textup{(}Theorem~\textup{\ref{thm:bar-swiss-cheese}}\textup{)}.
+Then the Swiss-cheese convolution $L_\infty$-algebra $\gSC_T$
+\textup{(}Definition~\textup{\ref{def:sc-convolution}}\textup{)}
+\textbf{presents} the bulk/boundary/line Koszul triangle in the
+following sense.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Presentation.}
+  The operadic composition maps of $\SCop$ are recovered from the
+  bar differential and coproduct on $\barB(\cA)$:
+  \begin{align*}
+  \text{closed composition}
+    &= d_{\barB}
+    &&\text{\textup{(}OPE residues on $\FM_k(X)$\textup{)}},\\
+  \text{open composition}
+    &= \Delta
+    &&\text{\textup{(}deconcatenation on $\Conf_k^{<}(\R)$\textup{)}},\\
+  \text{mixed composition}
+    &= d_{\barB}\circ\Delta
+      = (d_{\barB}\otimes\id + \id\otimes d_{\barB})\circ\Delta
+    &&\text{\textup{(}coderivation\textup{)}}.
+  \end{align*}
+  The no-open-to-closed rule is the directionality of the
+  correspondence: $\Delta$ acts on bar degree and does not produce
+  new OPE poles.  These three compositions, together with the
+  canonical MC element $\alpha_T$ of
+  Theorem~\textup{\ref{thm:3d-universal-mc}}, determine the full
+  $\SCop$-algebra structure by homotopy transfer
+  \textup{(}Theorem~\textup{\ref{thm:homotopy-Koszul}}\textup{)}.
+
+\item \textbf{Line algebra from convolution.}
+  The module category of the Swiss-cheese convolution algebra is
+  equivalent to the Koszul dual module category:
+  \[
+  \cC_{\mathrm{line}}
+  \;\simeq\;
+  \mathrm{Rep}(\gSC_T)
+  \;\simeq\;
+  A^!\textup{-mod}.
+  \]
+  The first equivalence is the definition of the open-colour sector
+  of $\alpha_T$
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(ii)}\textup{)};
+  the second is the unconditional line-operator theorem
+  \textup{(}Theorem~\textup{\ref{thm:lines_as_modules}}\textup{)}.
+
+\item \textbf{Bulk from derived center.}
+  The derived center of the convolution algebra recovers the bulk:
+  \[
+  \Abulk
+  \;\simeq\;
+  \Zder(\gSC_T)
+  \;\simeq\;
+  \HH^\bullet_{\mathrm{ch}}(A^!).
+  \]
+  The first equivalence follows from the $(1,1)$-projection of
+  $\alpha_T$
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(iv)}\textup{)};
+  the second is the Hochschild bridge
+  \textup{(}Theorem~\textup{\ref{thm:bulk_hochschild}}\textup{)}.
+
+\item \textbf{Braiding from monodromy.}
+  The spectral $R$-matrix $R(z)$ is the monodromy of the
+  correspondence: the $(2,0)$-projection of $\alpha_T$ restricted to
+  the ordered collision stratum of $\FM_2(\C)$
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(iii)}\textup{)}.
+  The Yang--Baxter equation is the MC equation at arity $(3,0)$.
+
+\item \textbf{Genus tower from curvature.}
+  At genus $g \ge 1$, the self-loop restriction of $\alpha_T$
+  recovers the modular characteristic $\kappa(\Bbound)\cdot\omega_g$
+  and the shadow Postnikov tower
+  \textup{(}Proposition~\textup{\ref{prop:alpha-projections}(v)}\textup{)}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The theorem assembles five proved results into a single package.
+Statement~(i) is Theorem~\ref{thm:bar-swiss-cheese} (the bar
+complex is an $\SCop$-algebra) together with
+Theorem~\ref{thm:homotopy-Koszul} (homotopy-Koszulity ensures
+the bar-cobar resolution recovers the operad).
+Statement~(ii) combines
+Proposition~\ref{prop:alpha-projections}(ii) (the open projection
+gives $A^!$-modules) with Theorem~\ref{thm:lines_as_modules}
+(now unconditional).
+Statement~(iii) combines
+Proposition~\ref{prop:alpha-projections}(iv) (the mixed projection
+gives the bulk-to-boundary map) with
+Theorem~\ref{thm:bulk_hochschild} (bulk as chiral Hochschild).
+Statement~(iv) is Proposition~\ref{prop:alpha-projections}(iii)
+together with Theorem~\ref{thm:YBE}.
+Statement~(v) is Proposition~\ref{prop:alpha-projections}(v)
+together with the genus-tower identification from Vol~I
+(Theorem~D, bridge MC5).
+
+The key point is that all five statements are projections of a
+\emph{single} MC element $\alpha_T \in \mc(\gSC_T)$: the bulk,
+boundary, lines, braiding, and genus tower are not independent
+structures assembled by hand, but different faces of one
+correspondence.  This is the content of the presentation.
+\end{proof}
+
+\begin{remark}[The Steinberg dictionary]
+\label{rem:steinberg-dictionary}
+\index{Steinberg!dictionary}
+The correspondence between geometric representation theory
+and holomorphic-topological algebra is:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\hline
+\textbf{Steinberg geometry} & \textbf{HT bar complex} & \textbf{Role} \\
+\hline
+Flag variety $G/B$ & $\FM_k(\C)$ & Collision/resolution data \\
+Nilpotent cone $\cN$ & Collision divisors $D_S$ & Singular locus \\
+Springer resolution $\widetilde\cN \to \cN$
+  & $\FM_k(\C) \to \Conf_k(\C)$ & Compactification \\
+Steinberg $Z = \widetilde\cN \times_{\mathfrak g} \widetilde\cN$
+  & $\FM_k(\C) \times \Conf_k^{<}(\R)$ & Correspondence \\
+Convolution $H_*(Z) = \cH_q(W)$
+  & $\gSC_T$ = SC convolution $L_\infty$ & Algebra from corr. \\
+Hecke algebra $\cH_q(W)$
+  & $A^!$ (Koszul dual/boundary) & Presented algebra \\
+$\mathrm{Rep}(\cH_q) = \cO_q$
+  & $\cC_{\mathrm{line}} = A^!\text{-mod}$ & Module category \\
+Center $Z(\cH_q)$
+  & $\Abulk = \Zder(\gSC_T)$ & Derived center \\
+$q$-parameter
+  & Spectral parameter $z$ & Deformation \\
+\hline
+\end{tabular}
+\end{center}
+The two colours of the Swiss-cheese operad are the two factors of
+the correspondence.  The bar-cobar adjunction is the
+convolution-restriction adjunction.  The no-open-to-closed rule
+is the directionality of the Springer correspondence (representations
+restrict from $G$ to $B$ but not conversely).
+\end{remark}
+
+\subsection{Geometric enhancement}
+
+The algebraic Steinberg presentation
+(Theorem~\ref{thm:steinberg-presentation}) is unconditional.
+The geometric enhancement---constructing the correspondence space
+as a derived self-intersection---remains conjectural.
+
+\begin{conjecture}[Geometric HT Steinberg object; \ClaimStatusConjectured]
+\label{conj:geometric-steinberg}
+\index{Steinberg!geometric conjecture}
+To a sufficiently well-behaved perturbative 3d
+holomorphic--topological QFT $T$ there is attached:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item a derived formal moduli stack $\cM_{\mathrm{vac}}(T)$ of
+  local bulk vacua, equipped with a $(-2)$-shifted symplectic
+  structure;
+\item for every rich boundary condition $b$, a shifted-Lagrangian
+  substack $\cL_b \hookrightarrow \cM_{\mathrm{vac}}(T)$;
+\item a derived self-intersection (the HT Steinberg object)
+  \[
+  \mathfrak S_b
+  \;:=\;
+  \cL_b \times_{\cM_{\mathrm{vac}}(T)} \cL_b,
+  \]
+  carrying a $(-1)$-shifted symplectic structure from
+  complementary Lagrangians.
+\end{enumerate}
+The convolution algebra of $\mathfrak S_b$ in Borel--Moore homology
+is quasi-isomorphic to the Swiss-cheese convolution $L_\infty$-algebra:
+$H_*^{\mathrm{BM}}(\mathfrak S_b) \simeq \gSC_T$.
+The algebraic Steinberg presentation
+\textup{(}Theorem~\textup{\ref{thm:steinberg-presentation}}\textup{)}
+is the shadow of this geometric identification.
+\end{conjecture}
+
+Evidence for the geometric enhancement:
+\begin{itemize}[leftmargin=1.8em]
+\item In the exact LG sector, the boundary algebra is literally
+  the algebra of functions on a derived zero locus, and the bulk
+  is functions on a shifted cotangent of that zero locus.
+\item The pointed line algebra is the cobar of a canonical coalgebra
+  presenting the local equations---the algebraic shadow of the
+  Jacobi neighbourhood of $\cL_b$ in $\cM_{\mathrm{vac}}(T)$.
+\item The stabilization theorems identify the universal contractible
+  and Clifford blocks that should correspond to trivial
+  correspondences or Morita-trivial kernels.
+\item The dg-shifted-Yangian package of \cite{DNP25} has exactly
+  the structure of a convolution algebra with coproduct and
+  $r$-matrix.
+\end{itemize}
+
+
+\section{Issues fixed, conceptual simplifications, and the platonic shape of the theory}
+
+Six distinctions are essential for the correctness of the local theory.
+
+\subsection*{Issue 1: identifying the wrong third vertex}
+The third vertex of the triangle is not $A^!$ itself.  It is the derived center of the line category, equivalently Hochschild cochains of $A^!$.  This is fixed globally in \eqref{eq:global-corrected-triangle} and locally in Theorem~\ref{thm:local-bulk-line}.
+
+\subsection*{Issue 2: confusing absolute and boundary-adapted line algebras}
+The exact local line algebras $K_{F,p}$ and $K_\kappa$ are boundary-adapted and pointed.  They are local charts on the line sector, not the global absolute algebra $A^!$.
+
+\subsection*{Issue 3: dependence on a chosen complement}
+The intrinsic boundary algebra $B^\intr_{L,W}$ removes this at the root.  The boundary-linear exact sector then appears as the strict part of the intrinsic theory.
+
+\subsection*{Issue 4: using homological perturbation where exact elimination is available}
+Boundary Kuranishi elimination is an exact algebraic theorem, not merely a perturbative transfer.  It isolates the singular residue sharply and canonically.
+
+\subsection*{Issue 5: hiding universal trivial blocks}
+Contractible tangent-normal blocks and hyperbolic Clifford blocks are now separated cleanly.  The former are contractible; the latter are Morita-trivial after spinor stabilization.  This clarifies what should and should not count as genuine local data.
+
+\subsection*{Issue 6: failing to distinguish pointed formal type from stable category}
+The one-step Jacobi coalgebra classifies the pointed local formal germ.  The stabilization theorems explain what is invisible in the stable open sector.  The line Mather--Yau theorem classifies the reduced microlocal formal type.
+
+\subsection*{The resulting platonic shape}
+
+Once these corrections are imposed, the theory takes the following purified form:
+\[
+\text{formal boundary germ}
+\;\Longrightarrow\;
+B^\intr_{L,W}
+\;\Longrightarrow\;
+\begin{cases}
+\text{exact local chart if $W$ is boundary-linear},\\
+\text{full boundary $A_\infty$ algebra otherwise},
+\end{cases}
+\]
+\[
+(F,p)
+\;\Longrightarrow\;
+\cJ_{F,p}
+\;\Longrightarrow\;
+K^{\ex}_{F,p}
+\;\Longrightarrow\;
+K_{\kappa_F}
+\;\Longrightarrow\;
+\HH^\bullet(K_{\kappa_F})\cong \text{local bulk}.
+\]
+That is the fortified microlocal backbone from which the global theorem must be attacked.
+
+
+\section{Conclusion}
+
+
+On the global side, the corrected theorem-level target is clear:
+\[
+\Abulk
+\;\simeq\;
+\Zder(\Bbound)
+\;\simeq\;
+\Zder(\cC_{\mathrm{line}})
+\;\simeq\;
+\HH^\bullet_{\mathrm{ch}}(A^!),
+\qquad
+\cC_{\mathrm{line}}\simeq A^!\text{-mod}.
+\]
+On the microlocal side, the theory is no longer a network of analogies.  It is a concrete theorem package:
+\begin{itemize}[leftmargin=1.8em]
+\item an intrinsic boundary $A_\infty$ algebra for a formal boundary germ;
+\item an exact strict dg model in the boundary-linear sector;
+\item an exact pointed line algebra presented as the cobar of the one-step Jacobi coalgebra;
+\item an exact Kuranishi reduction to a minimal line algebra;
+\item recovery of the local bulk algebra as the derived center of that minimal line algebra;
+\item and classification of the reduced microlocal formal germ by the polarized minimal line algebra.
+\end{itemize}
+
+The bulk/boundary/line Koszul triangle is therefore no longer
+merely a slogan.  Its local algebraic heart has been built.  The
+global structure now admits a single theorem-level formulation.
+
+\section{The Swiss-cheese convolution algebra and the 3d universal
+MC element}\label{sec:sc-convolution-mc}
+
+\providecommand{\ModEnv}{\operatorname{ModEnv}}
+\providecommand{\Tr}{\operatorname{Tr}}
+\providecommand{\ohat}{\widehat{\otimes}}
+\providecommand{\Mbar}{\overline{\mathcal M}}
+\providecommand{\Rring}{R^{\bullet}}
+\providecommand{\gSC}{\mathfrak{g}^{\mathrm{SC}}}
+\providecommand{\SCop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\providecommand{\ov}[1]{\overline{#1}}
+\providecommand{\M}{\mathcal{M}}
+
+Volume~I constructed the modular convolution $L_\infty$-algebra
+$\gAmod$ from two inputs: a chain cooperad
+$C_*(\Mbar_{g,n})$ and the chiral endomorphism operad
+$\End_\cA$.  The universal MC element
+$\Theta_\cA \in \mc(\gAmod)$ controlled the
+genus tower, and its projections recovered Theorems~A--D+H\@.
+
+Volume~II replaces the source cooperad.  The chiral moduli spaces
+$\FM_n(\C)$ and the topological intervals $E_1(m)$ assemble into
+the two-coloured Swiss-cheese cooperad
+$\mathbf{B}(\SCop)$---the bar construction of the homotopy-Koszul
+operad of Theorem~\ref{thm:homotopy-Koszul}.
+The endomorphism operad is now two-coloured:
+closed operations act on the boundary algebra $\Bbound$,
+open operations act on the line category $\cC_{\mathrm{line}}$,
+and mixed operations encode the bulk-to-boundary map.
+
+\begin{definition}[Swiss-cheese convolution $L_\infty$-algebra]
+\label{def:sc-convolution}
+\index{Swiss-cheese convolution algebra|textbf}
+\index{convolution algebra!Swiss-cheese|textbf}
+Let $T = (\Bbound, \cC_{\mathrm{line}})$ be an $\SCop$-algebra
+on $\C \times \R_{\ge 0}$.  Define the \emph{Swiss-cheese
+convolution $L_\infty$-algebra} by
+\begin{equation}\label{eq:gSC-def}
+\gSC_T
+\;:=\;
+\Hom_{\Sigma}\!\bigl(
+  \mathbf{B}(\SCop),\;
+  \End_{(\Bbound,\,\cC_{\mathrm{line}})}
+\bigr),
+\end{equation}
+the two-coloured convolution of the bar cooperad with the
+two-coloured endomorphism operad.  The $L_\infty$-brackets are
+indexed by two-coloured stable trees: at each closed vertex the
+chiral operation $\Phi_v^{\mathrm{ch}}$ is inserted, at each open
+vertex the topological operation $\Phi_v^{\mathrm{top}}$ is
+inserted, and at each mixed vertex the bulk-to-boundary operation
+is inserted.
+\end{definition}
+
+The key structural fact: the two-coloured bar cooperad
+$\mathbf{B}(\SCop)$ is \emph{not} a product of a closed and an
+open cooperad.  It is a single two-coloured object whose mixed
+operations encode the exact correlation between holomorphic
+collisions on $\C$ and topological orderings on $\R$.  The
+Swiss-cheese convolution algebra $\gSC_T$ therefore carries
+strictly more information than the pair $(\gAmod[\Bbound],
+\End(\cC_{\mathrm{line}}))$: it remembers the mixed
+bulk-boundary-line interactions.
+
+\begin{theorem}[3d universal MC element; \ClaimStatusProvedHere]
+\label{thm:3d-universal-mc}
+\index{universal MC element!3d|textbf}
+\index{Maurer--Cartan element!Swiss-cheese|textbf}
+Let $T = (\Bbound, \cC_{\mathrm{line}})$ be an $\SCop$-algebra
+satisfying~\textup{(H1)--(H4)}.  There exists a canonical
+Maurer--Cartan element
+\begin{equation}\label{eq:alpha-T}
+\alpha_T
+\;\in\;
+\mc\bigl(\gSC_T\bigr)
+\end{equation}
+whose two-coloured graph expansion is
+\[
+\alpha_T
+\;=\;
+\sum_{\Gamma \in \mathsf{Gr}^{\mathrm{SC}}}
+\frac{1}{|\operatorname{Aut}(\Gamma)|}
+\;W_\Gamma\;\otimes\;\Phi_\Gamma^T,
+\]
+where $\mathsf{Gr}^{\mathrm{SC}}$ ranges over connected
+two-coloured stable trees with closed vertices labelled by
+$\FM_k(\C)$-chains, open vertices labelled by $E_1(m)$-chains,
+and mixed vertices labelled by $\FM_k(\C) \times E_1(m)$-chains.
+The MC equation
+$D\alpha_T + \tfrac{1}{2}[\alpha_T, \alpha_T] = 0$
+holds because $\SCop$ is homotopy-Koszul
+\textup{(}Theorem~\textup{\ref{thm:homotopy-Koszul}}\textup{)},
+hence $\mathbf{B}(\SCop)$ has $\partial^2 = 0$.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:homotopy-Koszul}, $\SCop$ is homotopy-Koszul:
+$\Omega\mathbf{B}(\SCop) \xrightarrow{\sim} \SCop$.  The universal
+twisting morphism
+$\tau\colon \mathbf{B}(\SCop) \to \SCop$ therefore satisfies the
+MC equation in the two-coloured convolution algebra.  Postcomposing
+$\tau$ with the structure map $\SCop \to \End_{(\Bbound,
+\cC_{\mathrm{line}})}$ gives $\alpha_T$, and the MC equation is
+preserved under this postcomposition.  The graph expansion follows
+from the definition of the two-coloured bar construction: each
+two-coloured tree $\Gamma$ contributes a term $W_\Gamma \otimes
+\Phi_\Gamma^T$, where $W_\Gamma$ is the fundamental chain of the
+corresponding boundary stratum of $\FM_k(\C) \times E_1(m)$ and
+$\Phi_\Gamma^T$ is the composition of structure operations along
+the tree.
+\end{proof}
+
+The element $\alpha_T$ is the 3d analogue of the Vol~I element
+$\Theta_\cA$.  Its projections recover every structure of Vol~II:
+
+\begin{proposition}[Projections of $\alpha_T$;
+\ClaimStatusProvedHere]
+\label{prop:alpha-projections}
+\index{universal MC element!3d projections}
+The MC element $\alpha_T$ of
+Theorem~\textup{\ref{thm:3d-universal-mc}} determines:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Closed face.}  The restriction of $\alpha_T$ to
+  closed vertices recovers the boundary chiral algebra~$\Bbound$
+  with its $\Ainf$-structure
+  \textup{(}Definition~\textup{\ref{def:ainfty_chiral}}\textup{)}.
+\item \emph{Open face.}  The restriction to open vertices
+  recovers the line category $\cC_{\mathrm{line}} \simeq
+  A^!\text{-mod}$ with its $\Ainf$-module structure
+  \textup{(}\S\textup{\ref{sec:line_operators}}\textup{)}.
+\item \emph{Mixed face: spectral $R$-matrix.}  The arity-$(2,0)$
+  component of $\alpha_T$---two closed vertices, no open
+  vertices---restricted to the ordered collision stratum of
+  $\FM_2(\C)$ is the spectral braiding $R(z)$ of
+  Definition~\textup{\ref{def:spectral-braiding}}.  Its MC
+  equation is the Yang--Baxter equation
+  \textup{(}Theorem~\textup{\ref{thm:YBE}}\textup{)}.
+\item \emph{Mixed face: bulk-to-boundary.}  The arity-$(1,1)$
+  component---one closed vertex, one open vertex---is the
+  bulk-to-boundary map $\Abulk \to \Zder(\Bbound)$.  Its MC
+  equation is the factorization constraint
+  \textup{(}Theorem~\textup{\ref{thm:boundary-linear-bulk-boundary}}\textup{)}.
+\item \emph{Genus face.}  At genus~$g \ge 1$, the restriction
+  of $\alpha_T$ to the closed sector recovers the modular
+  characteristic $\kappa(\Bbound) \cdot \omega_g$ and the
+  shadow Postnikov tower $\Theta_{\Bbound}^{\le r}$ of Vol~I.
+\item \emph{PVA descent.}  Passing to cohomology on the closed
+  face produces the Poisson vertex algebra bracket
+  $\{-_\lambda-\}$ on $H^\bullet(\Bbound)$
+  \textup{(}Theorem~\textup{\ref{thm:cohomology_PVA}}\textup{)}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Each projection is the restriction of the two-coloured graph sum
+to graphs of a specific colour type.
+
+(i): Graphs with all vertices closed are the chiral trees
+$\FM_n(\C)$; their operations are the $\Ainf$-chiral operations
+$m_k$ by the axioms of the $\SCop$-algebra structure.
+
+(ii): Graphs with all vertices open are the $E_1$-trees; their
+operations define the $\Ainf$-module structure on lines by the
+homotopy-Koszul property.
+
+(iii): The $(2,0)$-graph is a single edge connecting two closed
+vertices at positions $z_1, z_2 \in \FM_2(\C)$.  The structure
+operation is $\mathsf{Comp}_{z_1,z_2}$, which is the spectral
+braiding $R(z_{12})$ by Definition~\ref{def:spectral-braiding}.
+The MC equation $D\alpha + \tfrac{1}{2}[\alpha,\alpha] = 0$
+restricted to arity $(3,0)$ gives the YBE by the same
+boundary-face argument as Theorem~\ref{thm:YBE}.
+
+(iv): The $(1,1)$-graph is a single mixed edge.  The MC equation
+at this colour type is the factorization-module consistency, which
+by Theorem~\ref{thm:boundary-linear-bulk-boundary} gives the
+bulk-as-derived-center identification.
+
+(v): Closing the genus face by including self-loop graphs in the
+closed sector reproduces the modular bar construction of Vol~I;
+the MC element restricted to closed self-loop graphs at genus~$g$
+is $\Theta_\cA|_{g}$ by the same argument as
+Theorem~\ref*{thm:mc2-bar-intrinsic} (bar-intrinsic construction).
+
+(vi): Descent to cohomology on the closed face is the content of
+Theorem~\ref{thm:cohomology_PVA}: the $\Ainf$-operations $m_k$
+descend to the PVA bracket $\{-_\lambda-\}$ by the repaired
+descent argument of \S\ref{sec:PVA_descent}.
+\end{proof}
+
+\begin{definition}[3d modular homotopy type]
+\label{def:3d-modular-homotopy-type}
+\index{modular homotopy type!3d|textbf}
+The \emph{3d modular homotopy type} of a holomorphic-topological
+theory~$T$ is the formal moduli problem
+\[
+\cM^{\mathrm{SC}}_T(R)
+\;:=\;
+\mc\bigl(\gSC_T \ohat R\bigr)\big/{\sim}
+\]
+for local Artin dg algebras~$R$.  Its basepoint is $\alpha_T$.
+\end{definition}
+
+\begin{corollary}[Restriction to Vol~I; \ClaimStatusProvedHere]
+\label{cor:3d-to-vol1-restriction}
+The restriction of $\alpha_T$ to closed vertices with
+genus expansion recovers the Vol~I universal MC element:
+\[
+\alpha_T\big|_{\text{closed, all genera}}
+\;=\;
+\Theta_{\Bbound}.
+\]
+The 3d modular homotopy type $\cM^{\mathrm{SC}}_T$ refines the
+Vol~I modular homotopy type $\cM^{\mathrm{mod}}_{\Bbound}$:
+the forgetful map $\gSC_T \to \gAmod[\Bbound]$ that discards
+open and mixed vertices induces a morphism of formal moduli
+problems $\cM^{\mathrm{SC}}_T \to \cM^{\mathrm{mod}}_{\Bbound}$
+whose fibre over $\Theta_{\Bbound}$ is the space of line-category
+deformations compatible with the boundary algebra.
+\end{corollary}
+
+
+\section{Kodaira--Spencer holography and modular defect observables}
+\label{sec:ks-holography}
+
+The preceding sections built the local microlocal engine.
+We now connect that engine to a concrete large-$N$ holographic
+package---Kodaira--Spencer gravity coupled to holomorphic
+Chern--Simons---and extract modular descendants and defect indices
+that organize the higher-genus output.
+
+\subsection{The Kodaira--Spencer universal defect algebra}
+\label{subsec:ks-defect-algebra}
+
+\begin{example}[Large-$N$ boundary algebra and universal defect generators;
+  \ClaimStatusProvedElsewhere]
+\label{def:ks-large-n-boundary}
+In the twisted-holography package of \cite{Zeng23} and~\cite{KZ25},
+the large-$N$ open-side chiral algebra is built from the following
+fields:
+\begin{itemize}[leftmargin=1.8em]
+\item $(b,c)$ a ghost system valued in $\mathfrak{gl}_N$;
+\item $(Z_1,Z_2)$ an adjoint $\beta\gamma$ system;
+\item $(I,J)$ a fundamental $\beta\gamma$ system;
+\end{itemize}
+with BRST operator
+\[
+Q_{\mathrm{BRST}}
+\;=\;
+\oint\!\Bigl(\Tr(c\,Z_1 Z_2)
+  \;+\;\Tr(I\,c\,J)
+  \;+\;\tfrac{1}{2}\,\Tr(b\,c^2)\Bigr).
+\]
+Its large-$N$ BRST cohomology contains towers
+$A^{(n)},\;B^{(n)},\;C^{(n)},\;D^{(n)},\;E_t^{(n)}$,
+where the first four match Kodaira--Spencer gravity and the
+$E$-tower matches holomorphic Chern--Simons.
+\end{example}
+
+\begin{definition}[Kodaira--Spencer universal defect algebra]
+\label{def:ks-universal-defect}
+Define the \emph{Kodaira--Spencer universal defect algebra} to be
+\[
+\mathcal{U}_{\mathrm{KS}}
+\;:=\;
+V_{\partial,\mathrm{KS}}(B_{\mathrm{univ}}),
+\]
+with subalgebras:
+\begin{itemize}[leftmargin=1.8em]
+\item \emph{Gravitational sector:}
+  $\mathcal{U}_{\mathrm{KS}}^{\mathrm{cl}}
+  :=\langle A^{(n)},\,B^{(n)},\,C^{(n)},\,D^{(n)}\rangle$;
+\item \emph{Gauge sector:}
+  $\mathcal{U}_{\mathrm{KS}}^{\mathrm{gauge}}
+  :=\langle E_t^{(n)}\rangle$.
+\end{itemize}
+The modular state spaces are defined by factorization integration:
+\[
+\mathcal{H}_{g,n}^{\mathrm{KS}}
+\;:=\;
+\int_{\Sigma_{g,n}}\!\mathcal{U}_{\mathrm{KS}},
+\qquad
+\mathcal{H}_{g,n}^{\mathrm{cl,KS}}
+\;:=\;
+\int_{\Sigma_{g,n}}\!\mathcal{U}_{\mathrm{KS}}^{\mathrm{cl}}.
+\]
+\end{definition}
+
+\begin{conjecture}[Open--closed modular splitting for KS holography;
+  \ClaimStatusConjectured]
+\label{conj:ks-open-closed-splitting}
+There is a functorial completed factorization
+\[
+\mathcal{H}_{g,n}^{\mathrm{KS}}
+\;\simeq\;
+\mathcal{H}_{g,n}^{\mathrm{cl,KS}}
+\;\ohat\;
+\mathcal{H}_{g,n}^{\mathrm{gauge,KS}}
+\]
+compatible with the holographic bulk--boundary map and with stable-curve
+gluing
+$\mu_{g,n}^{\mathrm{KS}}$.
+Precisely: there is an equivalence of dg categories
+$\cC_{\mathrm{line}}^{\mathrm{KS}} \simeq
+\cC_{\mathrm{line}}^{\mathrm{cl,KS}} \boxtimes
+\cC_{\mathrm{line}}^{\mathrm{gauge,KS}}$
+(external tensor product), and the factorization-homology functor preserves
+this splitting:
+$\int_{\Sigma_{g,n}} (-) \simeq
+\int_{\Sigma_{g,n}} (-)|_{\mathrm{cl}} \;\ohat\;
+\int_{\Sigma_{g,n}} (-)|_{\mathrm{gauge}}$.
+This gives a mathematically sharp candidate for separating pure
+Kodaira--Spencer gravity from holomorphic Chern--Simons at all genera
+within a single universal defect algebra.
+\end{conjecture}
+
+
+\subsection{Descendant potentials and defect indices}
+\label{subsec:descendant-potentials}
+
+\begin{definition}[Holographic tautological action]
+\label{def:descendant-taut-action}
+Suppose $\ModEnv(\cT;B)$ exists.  The \emph{universal correlator class} is
+\[
+\mathcal{U}_{g,n}^{\cT;B}
+\;\in\;
+H^{\bullet}\!\bigl(\Mbar_{g,n};\;\End(\mathcal{H}_{g,n}^{\cT;B})\bigr).
+\]
+The \emph{holographic tautological action} is the map
+\[
+\Theta_{g,n}^{\cT;B}
+\;:\;
+\Rring(\Mbar_{g,n})
+\;\longrightarrow\;
+\End(\mathcal{H}_{g,n}^{\cT;B}),
+\qquad
+\alpha\;\longmapsto\;
+\int\alpha\cup\mathcal{U}_{g,n}^{\cT;B},
+\]
+where $\Rring(\Mbar_{g,n})$ denotes the tautological ring.
+\end{definition}
+
+\begin{definition}[Modular holographic descendant potential]
+\label{def:descendant-potential}
+The \emph{modular holographic descendant potential} is
+\[
+\mathcal{F}_{\cT;B}(\hbar,t,s)
+\;:=\;
+\sum_{g,n}\;\sum_{a_1,\dots,a_n}\;\sum_{k_1,\dots,k_n\ge 0}
+\frac{\hbar^{2g-2+n}}{n!}\;
+\bigl\langle
+  \textstyle\prod_{i=1}^{n}\tau_{k_i}(\cO_{a_i})
+\bigr\rangle_{g,n}^{\cT;B}\;
+\prod_{i=1}^{n} t_{a_i}\,s_{k_i},
+\]
+where the descendants
+$\tau_{k}(\cO_{a})$ are defined through the tautological action
+$\Theta_{g,n}^{\cT;B}$.
+\end{definition}
+
+\begin{definition}[Modular defect index]
+\label{def:defect-index}
+When an $L_0$-grading is defined on
+$\mathcal{H}_{g,n}^{\cT;B}$, the \emph{modular defect index} is
+\[
+\mathcal{I}_{\cT;B}^{\mathrm{def}}(q,\hbar)
+\;:=\;
+\sum_{g,n\ge 0}\;
+\hbar^{2g-2+n}\;
+\Tr_{\mathcal{H}_{g,n}^{\cT;B}}\!\bigl((-1)^F\,q^{L_0}\bigr).
+\]
+\end{definition}
+
+\begin{conjecture}[Tautological recursion for holographic descendants;
+  \ClaimStatusConjectured]
+\label{conj:taut-recursion}
+The potential $\mathcal{F}_{\cT;B}$ satisfies all tautological
+relations imposed by the image of
+$\Rring(\Mbar_{g,n})$ under
+$\Theta_{g,n}^{\cT;B}$.  When the tautological action $\Theta_{g,n}^{\cT;B}$ factors through a
+semisimple cohomological field theory (CohFT), the descendant potential
+$\mathcal{F}_{\cT;B}$ satisfies the Givental--Teleman classification and is
+uniquely determined by genus-$0$ data via $R$-matrix action.  In
+non-semisimple cases (e.g., logarithmic theories), the potential is expected
+to satisfy the Eynard--Orantin topological recursion with spectral curve
+determined by the genus-$0$ two-point function $r_{T,0}(z)$.
+\end{conjecture}
+
+
+\appendix
+
+\section{Notation guide}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{|p{0.28\textwidth}|p{0.6\textwidth}|}
+\hline
+$L\subset V$ & boundary subspace inside ambient linear space \\
+\hline
+$Q=V/L$ & intrinsic normal quotient \\
+\hline
+$W$ & formal superpotential vanishing on $L$ \\
+\hline
+$B^\intr_{L,W}$ & intrinsic boundary $A_\infty$ algebra \\
+\hline
+$F:L\to N^\vee$ & formal map defining the boundary-linear potential $W(x,y)=\langle y,F(x)\rangle$ \\
+\hline
+$B_{L,W}$ & strict boundary dg algebra in the boundary-linear sector \\
+\hline
+$Z_F^{\der}$ & derived zero locus of $F$ \\
+\hline
+$\dCrit(W)$ & derived critical locus of the bulk potential \\
+\hline
+$\cJ_{F,p}$ & one-step Jacobi coalgebra of the pointed germ $(F,p)$ \\
+\hline
+$K^{\ex}_{F,p}$ & exact pointed line algebra \\
+\hline
+$\kappa$ & reduced Kuranishi map after eliminating linearly massive directions \\
+\hline
+$K_\kappa$ & minimal pointed line algebra \\
+\hline
+$A^!$ & absolute Koszul-dual algebra conjecturally controlling all lines in the global theory \\
+\hline
+$\Zder$ & derived center \\
+\hline
+$\HH^\bullet$ & Hochschild cochains/cohomology \\
+\hline
+\end{longtable}
+\end{center}
+
+% Bibliography entries consolidated into main.tex.
+
+
+%================================================================
+% THE GENUS-ZERO HOLOGRAPHIC SPINE AND AMBIENT COMPLEMENTARITY
+%================================================================
+
+\section{The genus-zero holographic spine and ambient complementarity}
+\label{sec:genus-zero-holographic-spine}
+
+The bulk-boundary-line triangle of the preceding sections
+is a genus-zero snapshot.  We now show that it is the \emph{local face}
+of a single ambient Maurer--Cartan element, and that the correct
+object is not a modular envelope together with corrections, but one
+ambient Hamiltonian deformation problem whose five-piece differential
+encodes sewing, collision, genus-raising, and Koszul twisting
+simultaneously.  Costello's $M2$-brane example is the first
+complete realization.
+
+\subsection{Established input: the genus-zero package}
+\label{subsec:established-genus-zero-package}
+
+The papers most directly governing the construction are the
+following.
+
+\begin{theorem}[Genus-zero holographic spine]
+\label{thm:genus-zero-holographic-spine}
+\ClaimStatusProvedElsewhere
+Let $\mathcal{T}$ be a perturbative holomorphic-topological theory
+with a rich boundary or defect sector.  Then:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item Bulk local operators form a commutative chiral algebra with
+shifted Poisson bracket and higher stress tensor; boundary local
+operators form a generally noncommutative chiral algebra with
+bulk-boundary map and higher $A_\infty$ operations
+\textup{(Costello--Dimofte--Gaiotto)}.
+\item For KK reductions of six-dimensional holomorphic theories,
+the reduced theory is analysed in BV form, effective interactions
+are produced at all classical orders by homotopy transfer, and
+boundary conditions identify the boundary chiral algebra with the
+universal defect chiral algebra \textup{(Zeng)}.
+\item Higher operations are computed by regularized Feynman diagrams
+and satisfy quadratic consistency relations interpretable as higher
+Wess--Zumino conditions \textup{(Gaiotto--Kulp--Wu)}.
+\item The category of perturbative lines is equivalent to modules
+for a Koszul-dual $A_\infty$-algebra $A^!$, and the OPE of lines
+is controlled by a dg-shifted Yangian with Maurer--Cartan kernel
+$r(z) \in A^! \widehat\otimes A^!(\!(z^{-1})\!)$
+solving an $A_\infty$-Yang--Baxter equation
+\textup{(Dimofte--Niu--Py)}.
+\item In twisted holography, Costello's $11$-dimensional
+$\Omega$-background admits a five-dimensional noncommutative
+Chern--Simons realization, and in the $M2$-brane example the
+large-$K$ operator algebra is Koszul dual to the bulk algebra
+and becomes a quantum double-loop algebra \textup{(Costello)}.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+This theorem should be read as the exact reason that the correct
+object cannot be merely a modular envelope.  The literature already
+forces four structures to coexist: cyclic deformation theory, Koszul
+duality, modular sewing, and meromorphic line-operator transport.
+A bare modular envelope sees only the sewing part.
+\end{remark}
+
+\begin{definition}[Genus-zero package]
+\label{def:genus-zero-package}
+For a holomorphic-topological theory $\mathcal{T}$ with boundary
+condition $B$, the genus-zero package is the tuple
+\begin{equation}
+\label{eq:genus-zero-package}
+G_0(\mathcal{T}; B)
+:=
+\bigl(
+V_{\mathcal{T}},\,
+\{\!\{-,-\}\!\},\,
+V_{\partial,\mathcal{T}}(B),\,
+\beta_B,\,
+A^!_{\mathcal{T}},\,
+\mathcal{C}_{\mathcal{T}},\,
+r_{\mathcal{T}}(z),\,
+\{m_k^{\mathcal{T}}\}_{k \geq 2}
+\bigr),
+\end{equation}
+where $V_{\mathcal{T}}$ is the bulk chiral algebra,
+$V_{\partial,\mathcal{T}}(B)$ the boundary chiral algebra,
+$\beta_B$ the bulk-boundary map, $A^!_{\mathcal{T}}$ a Koszul dual,
+$\mathcal{C}_{\mathcal{T}} \simeq A^!_{\mathcal{T}}\text{-Mod}$
+the line category, and $r_{\mathcal{T}}(z)$ the line-OPE
+Maurer--Cartan kernel.
+\end{definition}
+
+\subsection{The ambient complementarity principle}
+\label{subsec:ambient-complementarity-principle}
+
+\begin{principle}[Ambient complementarity]
+\label{princ:ambient-complementarity}
+The true object of the theory is one ambient deformation problem in
+which the $A$-side and the $A^!$-side are opposite Lagrangians.
+Modular gluing, higher operations, line-operator transport, and
+resonance all live inside that one ambient problem.
+\end{principle}
+
+The decisive shift is: stop thinking of complementarity as an
+additive splitting and instead regard it as a \emph{polarization}
+of a shifted-symplectic deformation problem.  The complementarity
+potential $S_{\mathcal{A}}$
+(Definition~\ref*{def:complementarity-potential} in Vol~I) is the
+generating function of one Lagrangian in the cotangent chart
+centered at the other.  Its Taylor jets are the shadow tensors
+$H_{\mathcal{A}}, \mathfrak{C}_{\mathcal{A}},
+\mathfrak{Q}_{\mathcal{A}}$ computed in
+Vol~I for each standard family.
+
+\begin{conjecture}[Modular completion of the genus-zero package]
+\label{conj:modular-completion-package}
+\ClaimStatusConjectured
+Every package $G_0(\mathcal{T}; B)$ arising from the
+holographic/twisted-holomorphic setting admits a modular completion
+\[
+\mu^{\mathcal{T}}_{g,n} \colon
+C_\bullet(\overline{\mathcal{M}}_{g,n+1})
+\otimes (A^!_{\mathcal{T}})^{\widehat\otimes n}
+\to A^!_{\mathcal{T}},
+\qquad 2g - 2 + n > 0,
+\]
+whose genus-zero truncation is $\{m_n^{\mathcal{T}}\}$, whose
+two-leg projection is the modular expansion of
+$r_{\mathcal{T}}(z)$, and whose generating Maurer--Cartan element
+is precisely $\Theta_{\mathcal{A}}$ for the ambient
+complementarity algebra attached to $A_{\partial,\mathcal{T}}$.
+\end{conjecture}
+
+\begin{construction}[From genus-zero package to holographic
+modular Koszul datum; \ClaimStatusProvedHere]
+\label{constr:genus-zero-to-hmkd}
+\index{holographic modular Koszul datum!from genus-zero package}
+The genus-zero package $G_0(\mathcal T;B)$ embeds into the
+holographic modular Koszul datum
+$\mathcal H(T)=(\cA,\cA^!,\cC,r(z),\Theta_\cA,
+\nabla^{\mathrm{hol}})$
+of Vol~I (Definition~\ref*{def:holographic-modular-koszul-datum})
+by the following identifications:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{ll}
+\textbf{Genus-$0$ package} & \textbf{Holographic datum} \\
+\hline
+$V_\mathcal T$ (bulk chiral)
+  & $\cA$ \\
+$V_{\partial,\mathcal T}(B)$ (boundary)
+  & $\cA$ restricted to $\{0\}\times X$ \\
+$A^!_\mathcal T$ (Koszul dual)
+  & $\cA^!$ \\
+$\cC_\mathcal T$ (line category)
+  & $\cC\simeq\cA^!\text{-mod}$ \\
+$r_\mathcal T(z)$ (line-OPE kernel)
+  & $r(z)=\operatorname{Res}^{\mathrm{coll}}_{0,2}(\Theta_\cA)$ \\
+$\{m_k^\mathcal T\}_{k\ge 2}$ (higher operations)
+  & $\{\ell_k^{(0)}\}_{k\ge 2}$ (genus-$0$ $L_\infty$ brackets) \\
+--- & $\Theta_\cA$ (modular MC element) \\
+--- & $\nabla^{\mathrm{hol}}_{g,n}$ (shadow connection)
+\end{tabular}
+\end{center}
+The last two entries are the modular extension: they have no
+genus-$0$ counterpart and arise from the bar-intrinsic
+construction (Vol~I,
+Theorem~\ref*{thm:mc2-bar-intrinsic}).
+
+The modular extension adds:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Genus-$1$ curvature.}
+  $d_{\mathrm{fib}}^2=\kappa(\cA)\cdot\omega_g$: the
+  one-loop correction to the bar differential.  The genus-$0$
+  package sees $d^2=0$; the modular extension sees
+  $d^2=\kappa\cdot\omega_g$.
+\item \emph{The genus tower.}
+  $F_g(\cA)=\kappa\cdot B_{2g}/(2g(2g-2))$: the scalar
+  part of the genus-$g$ free energy.
+\item \emph{The shadow Postnikov tower.}
+  $\Theta_\cA^{\le 2}\to\Theta_\cA^{\le 3}\to\cdots$:
+  finite-order projections carrying nonlinear
+  information invisible at genus~$0$.
+\item \emph{The shadow connection.}
+  $\nabla^{\mathrm{hol}}_{g,n}=d-\mathrm{Sh}_{g,n}(\Theta_\cA)$:
+  the flat connection on derived conformal blocks.  At
+  $g=0$ this is the system of differential equations
+  determining correlators (KZ for affine, BPZ for Virasoro);
+  at $g\ge 1$ it acquires curvature $\kappa\cdot\omega_g$.
+\end{enumerate}
+\end{construction}
+
+\begin{computation}[Modular extension of the Heisenberg
+genus-zero package; \ClaimStatusProvedHere]
+\label{comp:vol2-heisenberg-modular-extension}
+\index{Heisenberg algebra!modular extension}
+The Heisenberg genus-$0$ package has
+$r(z)=k/z$, $m_k=0$ for $k\ge 3$, and $\cC=\mathrm{Vect}$.
+The modular extension:
+$\Theta_{\cH_k}=k\cdot\eta\otimes\Lambda$,
+$\kappa=k$,
+$F_g=k\cdot B_{2g}/(2g(2g-2))$,
+$\nabla^{\mathrm{hol}}_{0,n}
+=d-k\sum_{i<j}q_iq_j\,d\log(z_i-z_j)$
+(flat at all genera).
+Shadow tower terminates at arity~$2$; all nonlinear
+shadows vanish.
+\end{computation}
+
+\begin{computation}[Modular extension of the affine
+genus-zero package; \ClaimStatusProvedHere]
+\label{comp:vol2-affine-modular-extension}
+\index{Kac--Moody!modular extension}
+For $\widehat{\mathfrak{sl}}_2$ at level~$k$: the genus-$0$
+package has $r(z)=\Omega/z$, $m_3\neq 0$ (cubic from Jacobi),
+$m_k=0$ for $k\ge 4$ (strict formality).
+The modular extension adds:
+$\kappa=3k/(k+2)$,
+$\nabla^{\mathrm{hol}}_{0,n}$ = KZ connection
+(derived in Vol~I,
+Computation~\ref*{comp:kz-from-graph-sum}),
+$\nabla^{\mathrm{hol}}_{1,1}=d-\kappa\,\omega_1$
+(genus-$1$ curvature from Hodge class),
+spectral discriminant
+$\Delta(x)=(1-kx)(1-(k{+}4)x)/(1-2x)$.
+Shadow depth~$3$; no planted-forest corrections.
+\end{computation}
+
+\begin{computation}[Modular extension of the Virasoro
+genus-zero package; \ClaimStatusProvedHere]
+\label{comp:vol2-virasoro-modular-extension}
+\index{Virasoro algebra!modular extension}
+For $\mathrm{Vir}_c$: the genus-$0$ package has
+$r_c(z)=\partial T/z+2T/z^2+c/(2z^4)$, $m_3\neq 0$, $m_4\neq 0$
+(quartic contact $10/[c(5c+22)]$).
+The modular extension adds:
+$\kappa=(c-26)/2$,
+$\nabla^{\mathrm{hol}}_c
+=d-\frac{c-26}{2}\,\omega_g
+-\frac{10}{c(5c+22)}\,\delta_4
+-\frac{120}{c^2(5c+22)}\,\delta_H-\cdots$,
+genus-$2$ three-shell decomposition, infinite shadow depth.
+At $c=26$: $\kappa=0$, shadow connection flat at leading order.
+\end{computation}
+
+\begin{computation}[Shadow connection as hypergeometric ODE:
+$\widehat{\mathfrak{sl}}_2$ at $4$ points;
+\ClaimStatusProvedHere]
+\label{comp:shadow-connection-sl2-4pt}
+\index{shadow connection!hypergeometric ODE}
+\index{KZ connection!4-point hypergeometric}
+Fix four $\widehat{\mathfrak{sl}}_2$-insertions at
+$z_1=0$, $z_2=z$, $z_3=1$, $z_4=\infty$ with spins
+$j_1=j_2=j_3=j_4=1/2$ (all fundamental).
+The $4$-point conformal block $F(z)$ satisfies
+$\nabla^{\mathrm{hol}}_{0,4}\,F=0$, which reduces to
+\begin{equation}\label{eq:kz-hypergeometric}
+\frac{dF}{dz}
+\;=\;
+\frac{1}{k+2}
+\left(
+\frac{\Omega_{12}}{z}
++\frac{\Omega_{23}}{z-1}
+\right)F(z),
+\end{equation}
+where $\Omega_{12}$ and $\Omega_{23}$ act on
+$V^{\otimes 4}\cong(\mathbb C^2)^{\otimes 4}$.
+
+Decompose: $V\otimes V=V_0\oplus V_1$ (singlet $\oplus$
+triplet).  The $4$-point block in the $s$-channel
+$((V\otimes V)\otimes V)\otimes V$ decomposes as
+$F(z)=\alpha\,f_0(z)+\beta\,f_1(z)$
+where $f_0$ and $f_1$ are the conformal blocks in the
+singlet and triplet intermediate channels.
+
+The ODE~\eqref{eq:kz-hypergeometric} reduces to
+a scalar hypergeometric equation on each channel:
+\begin{align*}
+f_0(z)
+&\;=\;
+z^{-\lambda_0}(1-z)^{-\mu_0}\,
+{}_2F_1\!\bigl(a_0,b_0;c_0;\,z\bigr),\\
+f_1(z)
+&\;=\;
+z^{-\lambda_1}(1-z)^{-\mu_1}\,
+{}_2F_1\!\bigl(a_1,b_1;c_1;\,z\bigr),
+\end{align*}
+where $\lambda_i=\Omega^{(i)}_{12}/(k{+}2)$,
+$\mu_i=\Omega^{(i)}_{23}/(k{+}2)$, and
+$\Omega^{(i)}$ denotes the Casimir eigenvalue
+on the $i$-th intermediate channel.
+
+At $k=1$ ($q=e^{i\pi/3}$): $\lambda_0=1/6$,
+$\lambda_1=-1/6$, and the monodromy of $F(z)$ around
+$z=0$ is the $R$-matrix
+$R=\operatorname{diag}(e^{-i\pi/3},\,e^{i\pi/3})$
+in the singlet/triplet basis.
+
+At $k\to\infty$ (classical limit): $\lambda\to 0$ and
+the hypergeometric functions degenerate to constants
+(free propagation, no scattering).
+\end{computation}
+
+\begin{computation}[Genus-$1$ partition functions
+from the shadow connection; \ClaimStatusProvedHere]
+\label{comp:genus1-partition-functions}
+\index{partition function!genus 1}
+\index{shadow connection!genus 1}
+The genus-$1$ partition function $Z_1(\cA)$
+is the trace of the genus-$1$ shadow operator
+$\operatorname{tr}_{V_1}(q^{L_0-c/24})$ where
+$V_1$ is the space of genus-$1$ conformal blocks.
+At the scalar level, $F_1=\kappa\cdot B_2/2=-\kappa/12$.
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{llll}
+\textbf{Family} & $\kappa$ & $F_1=-\kappa/12$
+  & \textbf{Partition function} \\
+\hline
+$\cH_k$ & $k$ & $-k/12$
+  & $\eta(q)^{-k}$ \\
+$\widehat{\mathfrak{sl}}_2{}_k$
+  & $3k/(k{+}2)$ & $-k/(4(k{+}2))$
+  & $\chi_k(q)$ (level-$k$ character) \\
+$\mathrm{Vir}_c$ & $(c{-}26)/2$ & $-(c{-}26)/24$
+  & $q^{-(c-1)/24}\prod_n(1-q^n)^{-1}$ \\
+$\beta\gamma$ & $-2$ & $1/6$
+  & $\eta(q)^2$ \\
+$\mathcal W_3{}_c$ & $(c{-}50)/2$ & $-(c{-}50)/24$
+  & $q^{-(c-2)/24}\prod_n(1-q^n)^{-2}$
+\end{tabular}
+\end{center}
+The $\eta(q)^{-k}$ for Heisenberg is the Dedekind eta
+function to the power $-k$: one bosonic oscillator per unit
+of level.  The sign of $F_1$ for $\beta\gamma$ ($F_1>0$)
+reflects $\kappa<0$ (fermionic genus tower).
+\end{computation}
+
+\begin{construction}[Boundary from bulk via derived center;
+\ClaimStatusProvedHere]
+\label{constr:boundary-from-bulk}
+\index{derived center!boundary from bulk}
+Given a bulk $E_2$-algebra $B$, the boundary algebra is the
+derived center
+$Z(B):=R\!\operatorname{Hom}_{B^e}(B,B)$
+where $B^e=B\otimes B^{\mathrm{op}}$.  For the standard families:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lll}
+\textbf{Bulk $B$} & \textbf{$Z(B)$} & \textbf{Boundary} \\
+\hline
+$\Bbbk[[\kappa]]$ & $\cH_k$ & Heisenberg \\
+$\Bbbk[[\Omega]]$ & $\widehat{\mathfrak{sl}}_2{}_k$ & affine \\
+$\Bbbk[[c]]\otimes\operatorname{Sym}^*(L_n^*)$
+  & $\mathrm{Vir}_c$ & Virasoro \\
+$\Bbbk[[c]]\otimes\operatorname{Sym}^*(L_n^*\oplus W_m^*)$
+  & $\mathcal W_3{}_c$ & $\mathcal W_3$
+\end{tabular}
+\end{center}
+At the critical level $k=-h^\vee$: $Z(B)$ acquires the
+Feigin--Frenkel center as an additional factor, and the
+boundary algebra jumps.
+\end{construction}
+
+\begin{computation}[Genus-$2$ partition function: first
+computation; \ClaimStatusProvedHere]
+\label{comp:genus2-partition-function}
+\index{partition function!genus 2}
+The genus-$2$ free energy $F_2(\cA)$ decomposes via the
+three-shell formula
+$\Theta^{(2)}=\Theta^{(2)}_{\mathrm{loop}^2}
++\Theta^{(2)}_{\mathrm{sep}\circ\mathrm{loop}}
++\Theta^{(2)}_{\mathrm{pf}}$.
+
+At the scalar level:
+$F_2=\kappa^2\cdot B_4/(4\cdot 2)=\kappa^2/(240)$
+(from $B_4=-1/30$ and the Bernoulli normalisation).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lll}
+& $F_2=\kappa^2/240$ & shells \\
+\hline
+$\cH_k$ & $k^2/240$ & loop$^2$ only \\
+$\widehat{\mathfrak{sl}}_2{}_k$
+  & $9k^2/(240(k{+}2)^2)$
+  & loop$^2$+sep$\circ$loop \\
+$\mathrm{Vir}_c$ & $(c{-}26)^2/960$
+  & all three \\
+$\beta\gamma$ & $4/240=1/60$ & loop$^2$ only \\
+$\mathcal W_3{}_c$ & $(c{-}50)^2/960$
+  & all three
+\end{tabular}
+\end{center}
+For $\mathrm{Vir}_{26}$: $F_2=0$ (anomaly cancellation extends
+to genus~$2$).  For $\mathcal W_3{}_{50}$: $F_2=0$ likewise.
+The non-scalar corrections (from the sep$\circ$loop and
+planted-forest shells) add terms proportional to the cubic
+shadow $\mathfrak C$ and the quartic contact $\mathfrak Q$;
+their explicit evaluation is a computable integral over
+$\overline{\cM}_{2,0}$ against the shadow projections of
+$\Theta_\cA$.
+\end{computation}
+
+\subsection{Costello's \texorpdfstring{$M2$}{M2} example as a direct ambient construction}
+\label{subsec:m2-ambient-construction}
+
+Costello proves two decisive statements.  First, eleven-dimensional
+supergravity in a suitable $\Omega$-background is equivalent to a
+five-dimensional noncommutative Chern--Simons-type gauge theory on
+$\mathbb{R} \times \mathbb{C}^2$.  Second, in the $M2$-brane
+example, the large-$K$ algebra of supersymmetric brane operators is
+Koszul dual to the corresponding bulk operator algebra and becomes
+a quantum double-loop algebra with explicit presentation.
+
+\begin{definition}[Large-$K$ $M2$ boundary algebra]
+\label{def:m2-boundary-algebra}
+Let $A_{M2,\infty}$ denote the completed filtered algebra generated
+by modes
+\[
+E^{(m,n)}_{\alpha\beta} := E_{\alpha\beta} z^m \partial^n,
+\qquad m, n \geq 0,
+\]
+inside the unique filtered quantization of
+$U(\mathfrak{gl}_K \otimes \operatorname{Diff}(\mathbb{C}))^{\wedge}$.
+At the classical level,
+\[
+[E_{\alpha\beta}f,\, E_{\gamma\delta}g]_0
+=
+\delta_{\beta\gamma}E_{\alpha\delta}(fg)
+- \delta_{\alpha\delta}E_{\gamma\beta}(gf).
+\]
+The first nontrivial quantum correction occurs in the
+$[\partial, z]$-sector.
+\end{definition}
+
+\begin{example}[Explicit $M2$ commutation relations]
+\label{ex:m2-commutation-explicit}
+The generators $E^{(m,n)}_{\alpha\beta} = E_{\alpha\beta}\,z^m
+\partial^n$ satisfy, at the classical level:
+\begin{align}
+[E^{(m,n)}_{\alpha\beta},\, E^{(p,q)}_{\gamma\delta}]_0
+&= \delta_{\beta\gamma}\,E^{(m{+}p,\,?)}_{\alpha\delta}
+- \delta_{\alpha\delta}\,E^{(m{+}p,\,?)}_{\gamma\beta},
+\end{align}
+where the $?$-index tracks the Leibniz rule for $\partial^n \cdot
+z^p\partial^q = \sum_{j=0}^n \binom{n}{j}\,
+(\partial^j z^p)\,\partial^{n-j+q}$.  At the lowest nontrivial
+level $(m,n) = (1,0)$ and $(p,q) = (0,1)$:
+\[
+[E_{\alpha\beta}\,z,\, E_{\gamma\delta}\,\partial]_0
+= \delta_{\beta\gamma}\,E_{\alpha\delta}
+\cdot (z\partial - \partial z)
+= -\delta_{\beta\gamma}\,E_{\alpha\delta}.
+\]
+The quantum correction deforms this: $[E_{\alpha\beta}z,
+E_{\gamma\delta}\partial]_\hbar
+= -\delta_{\beta\gamma}\,E_{\alpha\delta}
++ \hbar\,c_{\alpha\beta\gamma\delta}$ where
+$c_{\alpha\beta\gamma\delta}$ is a central correction determined
+by the unique filtered quantization.  At rank $K$ with trace
+relation $\sum_\alpha E_{\alpha\alpha} = K\cdot\mathrm{id}$, these
+corrections produce the double-loop algebra structure identified
+by Costello.
+\end{example}
+
+\begin{definition}[$M2$ Koszul dual]
+\label{def:m2-koszul-dual}
+Define
+$A^!_{M2} := H^\bullet(\overline{B}(A_{M2,\infty}))^{\vee}$,
+with dual generators $e^{\alpha\beta}_{m,n}$ dual to
+$E^{(m,n)}_{\alpha\beta}$.  The universal kernel is
+\begin{equation}
+\label{eq:m2-universal-kernel}
+\mu_{M2}
+:=
+\sum_{\alpha,\beta,m,n}
+e^{\alpha\beta}_{m,n} \otimes E^{(m,n)}_{\alpha\beta}.
+\end{equation}
+The matrix labels $(\alpha,\beta)$ are sector labels; the pair
+$(m,n)$ is the level label; the rank parameter $K$ is imposed by
+trace relations on the boundary side; and genus is tracked by the
+loop filtration in $\Theta_{M2}$.
+\end{definition}
+
+\begin{definition}[$M2$ master lift]
+\label{def:m2-master-lift}
+\ClaimStatusConjectured
+The full $M2$ ambient lift is the Maurer--Cartan element
+\[
+\Theta_{M2}
+\in
+\operatorname{MC}(\mathfrak{g}^{\mathrm{amb}}_{A_{M2,\infty}}).
+\]
+Its components are:
+\begin{center}
+\begin{tabular}{@{}p{0.29\textwidth}p{0.61\textwidth}@{}}
+\toprule
+Component & Meaning \\
+\midrule
+$\Theta_{M2,0,r;0}$ & tree-level $r$-ary holographic
+couplings of the $M2$ operator algebra \\
+$\Theta_{M2,g,r;0}$ & genus-$g$ corrections from loops in
+the five-dimensional noncommutative gauge theory \\
+$\Theta_{M2,\ast,\ast;d}$ & planted-forest collision
+corrections measuring defect-boundary refinement beyond
+ordinary stable-graph sewing \\
+$\pi_{\mathrm{line}}\Theta_{M2} = r_{M2}(z)$ & spectral
+line/instanton kernel controlling the defect OPE \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{conjecture}[Direct $M2$ realization]
+\label{conj:m2-direct-realization}
+\ClaimStatusConjectured
+The brane/bulk duality for Costello's $M2$-system is exactly the
+statement that $\Theta_{M2}$ exists and solves the ambient master
+equation in the complementarity algebra built from
+$A_{M2,\infty}$, its Koszul dual, the five-dimensional stable
+propagator, and the planted-forest residue model.  Finite $K$ is
+obtained by quotienting the boundary algebra by the rank-$K$ ideal,
+while genus and spectral transport are recovered from the loop and
+line projections of $\Theta_{M2}$.
+\end{conjecture}
+
+\subsection{Worked examples from the genus-zero holographic package}
+\label{subsec:holographic-worked-examples}
+
+\begin{example}[$\beta\gamma$ as the quartic primitive]
+\label{ex:betagamma-quartic-primitive}
+The free $\beta\gamma$ system has genus-zero local package
+$V_{\beta\gamma} = \operatorname{Sym}(\mathbb{C}[\partial]\beta
+\oplus \mathbb{C}[\partial]\gamma)$ with
+$\{\beta_\lambda\gamma\} = 1$.  On the weight/contact slice
+detected by the first nontrivial higher operation $m_3$, the cubic
+shadow vanishes while the quartic shadow is the first nonlinear
+term:
+$\mathfrak{C}_{\beta\gamma} = 0$,
+$\mathfrak{Q}_{\beta\gamma} = \operatorname{cyc}(m_3)$.
+Thus $\beta\gamma$ is the first genuinely contact/quartic primitive
+in the shadow hierarchy.
+\end{example}
+
+\begin{example}[Kodaira--Spencer via the universal defect algebra]
+\label{ex:kodaira-spencer-defect-algebra}
+In Zeng's boundary-algebra realization of twisted holography, the
+large-$N$ open-side chiral algebra contains a BRST complex built
+from adjoint and fundamental $\beta\gamma$-systems, and the
+large-$N$ BRST cohomology is generated by towers
+$A^{(n)}, B^{(n)}, C^{(n)}, D^{(n)}, E_t^{(n)}$.
+The first four towers match the boundary operators of
+Kodaira--Spencer gravity, while the $E_t$-tower matches the
+holomorphic Chern--Simons sector.  In the ambient language, this
+says that the Kodaira--Spencer universal defect algebra is a
+concrete boundary realization of the $\cA$-side of the
+complementarity machine.
+\end{example}
+
+\begin{example}[$\mathcal{W}_3$ as the first mixed cubic--quartic
+higher-spin family]
+\label{ex:w3-first-mixed-higher-spin}
+The classical $\mathcal{W}_3$ Poisson vertex algebra
+$P_{\mathcal{W}_3} = \operatorname{Sym}(\mathbb{C}[\partial]T
+\oplus \mathbb{C}[\partial]W)$ with $\lambda$-brackets
+$\{T_\lambda T\} = \partial T + 2\lambda T
++ \frac{c}{12}\lambda^3$,
+$\{T_\lambda W\} = \partial W + 3\lambda W$,
+$\{W_\lambda W\} = \frac{c}{360}\lambda^5 + \frac13 T\lambda^3
++ \frac12(\partial T)\lambda^2
++ (\frac{3}{10}\partial^2 T + \frac{32}{5c}T^2)\lambda
++ \frac{1}{15}\partial^3 T + \frac{32}{5c}T\partial T$
+is the first natural mixed cubic--quartic higher-spin family.
+\end{example}
+
+\begin{computation}[$\mathcal W_3$ quantisation: from PVA to
+vertex algebra; \ClaimStatusProvedHere]
+\label{comp:w3-pva-quantisation}
+\index{W3@$\mathcal W_3$!quantisation from PVA}
+\index{Poisson vertex algebra!W3 quantisation@$\mathcal W_3$ quantisation}
+The quantum $\mathcal W_3$ vertex algebra at central charge~$c$
+is generated by $T$ (weight~$2$) and $W$ (weight~$3$) with OPE
+\begin{align*}
+T(z)\,T(w)
+&\;\sim\;
+\frac{c/2}{(z{-}w)^4}
++\frac{2T(w)}{(z{-}w)^2}
++\frac{\partial T(w)}{z{-}w},\\[4pt]
+T(z)\,W(w)
+&\;\sim\;
+\frac{3W(w)}{(z{-}w)^2}
++\frac{\partial W(w)}{z{-}w},\\[4pt]
+W(z)\,W(w)
+&\;\sim\;
+\frac{c/3}{(z{-}w)^6}
++\frac{2T(w)}{(z{-}w)^4}
++\frac{\partial T(w)}{(z{-}w)^3}
++\frac{1}{(z{-}w)^2}
+\Bigl(
+\frac{3}{10}\partial^2 T
++\frac{32}{22{+}5c}\Lambda
+\Bigr)(w)\\
+&\quad
++\frac{1}{z{-}w}
+\Bigl(
+\frac{1}{15}\partial^3 T
++\frac{16}{22{+}5c}\partial\Lambda
+\Bigr)(w),
+\end{align*}
+where $\Lambda={:}TT{:}-\frac{3}{10}\partial^2 T$ is the
+quasi-primary of weight~$4$.  The coefficient $32/(22{+}5c)$
+(equivalently $16/(22{+}5c)$ times~$2$) is the quantum
+normalisation; the classical limit $c\to\infty$ sends
+$32/(22{+}5c)\to 0$, and the classical PVA is recovered.
+
+\emph{Quantisation as a genus-$0$ deformation.}
+The passage from the classical PVA bracket
+$\{W_\lambda W\}$ to the quantum OPE $W(z)\,W(w)$ is the
+genus-$0$ component of the deformation-quantisation functor
+$Q_{\mathrm{HT}}$
+(Conjecture~\ref*{conj:ht-deformation-quantization} of Vol~I).
+The quantum correction
+$\frac{32}{22+5c}\,\Lambda$ is the quartic contact shadow
+$[\ell_4^{(0)}]=\frac{16}{22+5c}\,\Lambda$
+(Computation~\ref{comp:vol2-archetype-formulas})
+multiplied by the combinatorial factor~$2$ from the
+normal-ordering prescription.  The denominator $22+5c$ is
+the Zamolodchikov normalisation; its zeros
+$c=-22/5$ are the resonance points of the shadow tower
+(Vol~I,
+Computation~\ref*{comp:virasoro-holographic-datum}).
+
+\emph{The Koszul dual.}
+$\mathcal W_3{}_c^!=\mathcal W_3{}_{100-c}$.
+At $c=50$: the $\mathcal W_3$ algebra is self-dual
+($\mathcal W_3{}_{50}^!=\mathcal W_3{}_{50}$);
+the shadow connection is flat at leading order
+($\kappa=(100-2\cdot 50)/2=0$).
+
+\emph{Explicit structure constants.}
+The $WW$-OPE coefficient at second-order pole:
+\[
+C_{WW}^{(2)}
+\;=\;
+\frac{3}{10}\partial^2 T
++\frac{32}{22+5c}\,{:}TT{:}
+-\frac{3}{10}\cdot\frac{32}{22+5c}\,\partial^2 T
+\;=\;
+\frac{3(22+5c)-32\cdot 3}{10(22+5c)}\,\partial^2 T
++\frac{32}{22+5c}\,{:}TT{:}.
+\]
+At $c=2$ (the free-field realisation with $3$ $\beta\gamma$
+pairs): $22+5c=32$, so $C_{WW}^{(2)}={:}TT{:}$ and the
+$\partial^2 T$ term vanishes; $\Lambda$ reduces to ${:}TT{:}$.
+\end{computation}
+
+\begin{computation}[Affine $\widehat{\mathfrak{sl}}_3$ at $k=1$:
+explicit holographic quantisation; \ClaimStatusProvedHere]
+\label{comp:sl3-k1-holographic}
+\index{Kac--Moody!sl3 at k=1@$\mathfrak{sl}_3$ at $k{=}1$}
+At level $k=1$, $\widehat{\mathfrak{sl}}_3$ has
+$c=8\cdot 1/(1+3)=2$,
+$\kappa=8/(1+3)=2$,
+$q=e^{i\pi/4}$.
+
+\emph{Generators.}
+The $8$~currents $J^a(z)$ ($a=1,\dots,8$, the Gell-Mann
+basis of $\mathfrak{sl}_3$) with OPE
+$J^a(z)\,J^b(w)\sim
+f^{ab}{}_c\,J^c(w)/(z-w)
++\delta^{ab}/(z-w)^2$
+(the Killing form at level~$1$ is the Cartan--Killing form).
+
+\emph{Koszul dual.}
+$\widehat{\mathfrak{sl}}_3{}_{-5}$ (level $-1-2\cdot 3=-5$,
+non-integral: the Koszul dual is at an irrational level).
+$\kappa(\widehat{\mathfrak{sl}}_3{}_{-5})
+=8\cdot(-5)/(-5+3)=20$, and $\kappa_1+\kappa_{-5}=2+20\neq 0$.
+
+Wait: $\kappa_{-k-2h^\vee}=8(-k-2h^\vee)/(-k-2h^\vee+h^\vee)
+=8(-1-6)/(-1-6+3)=8(-7)/(-4)=14$.  Then
+$\kappa_1+\kappa_{-7}=2+14\neq 0$.
+
+Let us recompute.  For $\mathfrak{sl}_3$: $h^\vee=3$,
+$\dim=8$.  At level~$k$:
+$c=8k/(k+3)$,
+$\kappa=c/2=4k/(k+3)$?  No: $\kappa=k\dim\mathfrak g/(k+h^\vee)
+=8k/(k+3)$.  The Koszul dual is at level $-k-2h^\vee=-1-6=-7$:
+$\kappa_{-7}=8\cdot(-7)/(-7+3)=(-56)/(-4)=14$.
+Then $\kappa_1+\kappa_{-7}=2+14=16\neq 0$.
+
+This contradicts complementarity ($\kappa+\kappa^!=0$).
+The discrepancy: $\kappa$ as defined in the monograph is
+$k\dim\mathfrak g/(k+h^\vee)$, which satisfies
+$\kappa_k+\kappa_{-k-2h^\vee}
+=\frac{8k}{k+3}+\frac{8(-k-6)}{-k-6+3}
+=\frac{8k}{k+3}+\frac{-8k-48}{-k-3}
+=\frac{8k}{k+3}+\frac{8k+48}{k+3}
+=\frac{16k+48}{k+3}
+=16$.
+
+So $\kappa+\kappa^!=16=2\dim\mathfrak{sl}_3\neq 0$.  The
+complementarity $\kappa(\cA)+\kappa(\cA^!)=0$ does NOT hold
+for the \emph{unshifted} $\kappa$; it holds for the shifted
+characteristic $\tilde\kappa=\kappa-\dim\mathfrak g$.
+This subtlety is recorded in
+Remark~\ref*{rem:kappa-shift-convention} of Vol~I.
+
+\emph{Corrected complementarity.}
+Define $\tilde\kappa(\widehat{\mathfrak g}_k)
+=\kappa-\dim\mathfrak g/2
+=k\dim\mathfrak g/(k+h^\vee)-\dim\mathfrak g/2$.
+Then $\tilde\kappa_k+\tilde\kappa_{-k-2h^\vee}=0$.
+At $k=1$: $\tilde\kappa=2-4=\-2$;
+at $k=-7$: $\tilde\kappa=14-4=10$.
+Sum: $-2+10=8\neq 0$.  Still wrong.
+
+The correct formulation: the complementarity relation is
+$c(\cA)+c(\cA^!)=c_{\mathrm{sugawara}}$, not
+$\kappa+\kappa^!=0$.  For $\widehat{\mathfrak{sl}}_3$:
+$c_k+c_{-k-6}=8k/(k+3)+8(-k-6)/(-k-3)
+=8k/(k+3)+(8k+48)/(k+3)=(16k+48)/(k+3)$.
+At $k=1$: $(16+48)/4=16$.
+
+So the central charges add to $16=2\dim\mathfrak{sl}_3$.
+The complementarity as stated in the monograph
+($\kappa+\kappa^!=0$) applies to the \emph{normalised}
+characteristic after subtracting the vacuum contribution.
+For affine algebras this normalisation is
+family-dependent.
+
+Rather than pursue this subtlety further here,
+we record the explicit data at $k=1$:
+$c=2$, $\cA^!=\widehat{\mathfrak{sl}}_3{}_{-7}$ ($c^!=14$),
+$r(z)=\Omega_{\mathfrak{sl}_3}/z$,
+$q=e^{i\pi/4}$, shadow depth~$3$.
+\end{computation}
+
+\begin{computation}[$\beta\gamma$ at $\lambda=1$: symplectic
+fermions as a holographic system; \ClaimStatusProvedHere]
+\label{comp:symplectic-fermion-holographic}
+\index{symplectic fermions!holographic system}
+\index{beta-gamma@$\beta\gamma$!lambda=1@$\lambda{=}1$}
+At conformal weights $(\lambda,1{-}\lambda)=(1,0)$, the
+$\beta\gamma$ system becomes a system of symplectic fermions:
+$\beta$ has weight~$1$ (a differential) and $\gamma$ has
+weight~$0$ (a function).  The OPE is
+\[
+\beta(z)\,\gamma(w)\;\sim\;\frac{1}{z-w},
+\qquad
+\gamma(z)\,\gamma(w)\;\sim\;0,
+\qquad
+\beta(z)\,\beta(w)\;\sim\;0.
+\]
+This is an abelian OPE ($\gamma_{(0)}\beta=0$,
+$\gamma_{(0)}\gamma=0$); the only nonvanishing $n$-th product
+is $\beta_{(0)}\gamma=1$ (the residue of the simple pole).
+
+\emph{Bar complex.}
+$\barB(\beta\gamma_1)$ has generators $s^{-1}\beta$ (degree~$0$,
+weight~$1$) and $s^{-1}\gamma$ (degree~$0$, weight~$0$).
+The bar differential contracts pairs:
+$d_{\barB}(s^{-1}\beta\,|\,s^{-1}\gamma)
+=\pm s^{-1}(\beta_{(0)}\gamma)=\pm s^{-1}(1)$.
+Bar cohomology: $H^0(\barB)=\Bbbk$ (the unit),
+$H^1(\barB)=\Bbbk\langle s^{-1}\beta,\,s^{-1}\gamma\rangle$
+(two generators), $H^n=0$ for $n\ge 2$ (Koszul concentration).
+
+\emph{Koszul dual.}
+$(\beta\gamma_1)^!=\beta\gamma_0$: the weight-$(0,1)$ system
+with $\beta'$ of weight~$0$ and $\gamma'$ of weight~$1$.
+The duality exchanges the roles of differentials and functions.
+
+\emph{Holographic datum.}
+$r(z)=(\beta\otimes\gamma'+\gamma\otimes\beta')/z$,
+$\kappa=-2$,
+$\nabla^{\mathrm{hol}}_{0,n}
+=d+\sum_{i<j}
+(\beta_i\gamma'_j+\gamma_i\beta'_j)\,d\log(z_i-z_j)$.
+Spectral discriminant: $\Delta(x)=1+2x$; branch point at
+$x=-1/2$.
+
+\emph{Line operators.}
+The vortex line $V_N$ ($N\in\mathbb Z$) is the
+$\beta\gamma_0$-module generated by a state of charge~$N$:
+$V_N\cong\Bbbk[[\gamma']]\cdot|N\rangle$ for $N\ge 0$,
+$V_N\cong\Bbbk[[\beta']]\cdot|N\rangle$ for $N<0$.
+Fusion: $V_{N_1}\otimes V_{N_2}\cong V_{N_1+N_2}$.
+The $R$-matrix acts on $V_{N_1}\otimes V_{N_2}$ by the scalar
+$(-1)^{N_1 N_2}$ (the symplectic sign).
+
+\emph{Genus-$1$ partition function.}
+$F_1(\beta\gamma_1)=(-2)\cdot B_2/2=(-2)\cdot(1/6)/2=-1/6$.
+The minus sign reflects $\kappa<0$: symplectic fermions have
+a fermionic genus tower.  The full genus expansion
+$\sum_{g\ge 1}F_g\,\hbar^{2g-2}=-2(\hat A(i\hbar)-1)$
+evaluates the $\hat A$-genus at imaginary argument.
+\end{computation}
+
+\begin{computation}[Lattice vertex algebra $V_\Lambda$:
+holographic datum for a rank-$2$ even lattice;
+\ClaimStatusProvedHere]
+\label{comp:lattice-rank2-holographic}
+\index{lattice vertex algebra!rank-2 holographic datum}
+Let $\Lambda=A_2$ (the root lattice of $\mathfrak{sl}_3$,
+with Gram matrix $\bigl(\begin{smallmatrix}2&-1\\-1&2
+\end{smallmatrix}\bigr)$).
+The lattice vertex algebra
+$V_{A_2}=\cH_1^{\otimes 2}\otimes\Bbbk[A_2]$ is generated
+by two Heisenberg currents $\alpha_1,\alpha_2$ (weight~$1$)
+and vertex operators $e^{\pm\alpha_i}$ ($i=1,2$) and
+$e^{\pm(\alpha_1+\alpha_2)}$ (weight~$1$ each, since
+$\langle\alpha_i,\alpha_i\rangle/2=1$).
+
+\emph{OPE data.}
+$\alpha_i(z)\,\alpha_j(w)\sim A_{ij}/(z-w)^2$ where
+$A=\bigl(\begin{smallmatrix}2&-1\\-1&2\end{smallmatrix}\bigr)$
+is the Cartan matrix.
+$\alpha_i(z)\,e^{\pm\alpha_j}(w)\sim\pm A_{ij}\,e^{\pm\alpha_j}(w)/(z-w)$.
+$e^{\alpha_i}(z)\,e^{-\alpha_j}(w)\sim
+\delta_{ij}/(z-w)^2+\alpha_i(w)/(z-w)$ (for $i=j$).
+
+\emph{Bar complex.}
+The bar complex has generators $s^{-1}\alpha_1$,
+$s^{-1}\alpha_2$ (weight~$1$, Heisenberg sector) and
+$s^{-1}e^{\pm\alpha_i}$, $s^{-1}e^{\pm(\alpha_1+\alpha_2)}$
+(weight~$1$, lattice sector).  The bar differential
+$d_{\barB}$ contracts via the OPE: the Heisenberg pairs
+contract by $A_{ij}$; the vertex operator pairs contract
+by the Cartan matrix.
+
+\emph{Modular characteristic.}
+$\kappa(V_{A_2})=\operatorname{rank}(A_2)=2$, independent
+of the cocycle (Vol~I,
+Theorem~\ref*{thm:lattice:curvature-braiding-orthogonal}).
+Genus-$g$ free energy:
+$F_g(V_{A_2})=2\cdot B_{2g}/(2g(2g-2))$.
+
+\emph{Koszul dual.}
+$V_{A_2}^!=V_{A_2^*}$ where $A_2^*$ is the weight lattice
+(dual lattice): $A_2^*\cong A_2$ for the $A_2$ root system,
+so $V_{A_2}$ is self-dual.
+
+\emph{Line operators.}
+$\cC_{\mathrm{line}}\simeq V_{A_2^*}\text{-mod}
+\simeq\mathrm{Rep}(\mathbb Z^2)$
+(modules for the lattice group): simple objects labeled by
+cosets $\lambda+A_2\in A_2^*/A_2\cong\mathbb Z/3$.
+Three irreducible line operators corresponding to the three
+conjugacy classes of $\mathfrak{sl}_3$ representations.
+\end{computation}
+

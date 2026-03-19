@@ -1,0 +1,1397 @@
+\chapter{Celestial and boundary transfer: wedge algebras, obstruction towers, and the Airy--Witt realization}
+\label{ch:celestial-boundary-transfer}
+
+The Kaluza--Klein reduction of six-dimensional holomorphic theories to
+three-dimensional holomorphic--topological theories, together with the
+appearance of boundary chiral algebras in twisted and celestial
+holography, produces a concrete algebraic package: transferred
+$\Ainf$ and $\Linf$ structures on the tangential Cauchy--Riemann
+cohomology $H_b^{0,\bullet}(S^3)$ and its natural Lie-theoretic
+avatars.  The source papers of Zeng, Costello--Dimofte--Gaiotto, and
+Khan--Zeng supply the structural input: boundary chiral algebras,
+special deformation retracts, rooted-tree transfer formulas, the
+identification of the binary Poisson bracket with
+$T^*[1]\operatorname{Ham}(\mathbb{C}^2)$, and Poisson vertex algebra models of
+$W$-type and higher-spin flavor.
+
+This chapter consolidates the mathematics developed across the
+celestial and twisted holography thread into one coherent account and
+adds a further representation-theoretic theorem.  The core results
+are:
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2.2em]
+\item the \emph{wedge $\Ainf$-algebra} construction and the
+  single-particle transfer theorem;
+\item nonlinear obstruction classes $\operatorname{Ob}_r$ for filtered celestial
+  $\Ainf$-algebras, together with their spectral-sequence realization
+  and lowest-nonlinearity dominance for Poisson vertex algebras;
+\item an explicit gauge-invariant cubic asymmetry invariant for
+  holomorphic BF, implying $\operatorname{Ob}_1\neq 0$ and
+  non-strictifiability;
+\item closed all-arity highest-weight ladder formulas for holomorphic
+  BF and for the induced higher Kac--Moody minimal model;
+\item closed all-arity odd highest-weight ladder formulas and
+  $\pi_n$-coefficients for Poisson BF;
+\item a new \emph{Airy--Witt normal form}: the odd highest-weight
+  ladder sector of the transferred $\Linf$ deformation of
+  $T^*[1]\operatorname{Ham}(\mathbb{C}^2)$ is canonically realized by first-order
+  differential operators
+  \[
+  D_m=-\partial_t\circ M_{t^{2m+2}}
+  \]
+  on $\mathbb{C}[t]$, equivalently by the odd positive Witt modes
+  acting on the density line.
+\end{enumerate}
+The theme is that the boundary/celestial algebra is a filtered
+cotangent deformation; its wedge quotient is the linear shadow, its
+obstruction classes measure irreducible nonlinear curvature, and its
+highest-weight ladders are exact solvable sectors on which the
+transfer collapses to explicit simplex formulas and one-dimensional
+differential-operator geometry.
+
+
+\section{Orientation and provenance}
+\label{sec:cbt-orientation}
+
+The background established in the archive can be organized into three source facts.
+
+\begin{enumerate}[label=\textbf{S\arabic*.},leftmargin=2.3em]
+\item \textbf{Boundary chiral algebras and higher operations.}
+The holomorphic twist of $3d$ $\mathcal N=2$ theories produces bulk and boundary chiral algebras; the bulk algebra is commutative with shifted Poisson structure, the boundary algebra is a bulk module, and higher $\Ainf$-like operations appear naturally (Costello--Dimofte--Gaiotto, 2020).
+
+\item \textbf{Transferred $\Ainf$ and $\Linf$ structures from Kaluza--Klein reduction.}
+For the Kaluza--Klein reduction of six-dimensional holomorphic theories on $\mathbb{C}^3\setminus \mathbb{C}$, Zeng constructs a special deformation retract on the CR complex of $S^3$ and obtains:
+\begin{itemize}[leftmargin=1.8em]
+\item a transferred $\Ainf$-algebra on $H_b^{0,\bullet}(S^3)$ for holomorphic BF-type theories;
+\item a transferred $\Linf$-algebra on $H_b^{0,\bullet}(S^3)$ for Poisson BF-type theories;
+\item an identification of the binary Poisson bracket with $T^*[1]\operatorname{Ham}(\mathbb{C}^2)$ once higher brackets are omitted;
+\item explicit rooted-tree formulas for higher products and brackets (Zeng, 2023).
+\end{itemize}
+
+\item \textbf{Poisson vertex algebras and $W$-type higher-spin models.}
+Khan and Zeng construct mixed holomorphic-topological gauge theories from freely generated Poisson vertex algebras; the $\lambda$-bracket supplies the structure constants, gauge invariance is equivalent to the Jacobi identity, and the paper includes Virasoro, super-Virasoro, and $W_3$ examples with explicit higher-spin interpretations (Khan--Zeng, 2025).
+\end{enumerate}
+
+The present chapter does \emph{not} attempt to re-prove these source facts. Instead it distills the algebra they suggest, pushes it in several new directions, and presents the resulting package in a form suitable for direct inclusion in a mathematical monograph.
+
+\begin{convention}[provenance]
+\label{def:cbt-provenance}
+Unless explicitly labeled ``source fact'' or attributed to the literature in the statement, all theorems, propositions, lemmas, constructions, invariants, and corollaries in this chapter are new to the present synthesis. Some use standard filtered homological perturbation theory as input; the novelty lies in the specific package assembled here, the exact computations, and the new representation-theoretic normal form in \S\ref{sec:cbt-airy-witt}.
+\end{convention}
+
+A useful schematic is
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\text{bulk dg algebra / PVA data}
+  \arrow[r,"\text{KK reduction + SDR}"]
+  \arrow[d,"\text{linearization}"'] &
+\text{boundary/celestial } \Ainf \text{ or } \Linf
+  \arrow[d,"\text{composite filtration}"]
+  \arrow[r,"\text{highest-weight restriction}"] &
+\text{exact ladder formulas} \\
+\text{linearized Lie conformal algebra}
+  \arrow[r,"\text{homotopy transfer}"] &
+\text{wedge } \Ainf
+  \arrow[r,"\text{bar filtration}"] &
+\text{obstruction classes } \operatorname{Ob}_r .
+\end{tikzcd}
+\]
+
+The remaining sections make each arrow explicit.
+
+\section{First principles: wedge quotients, obstruction classes, and Poisson-vertex control}
+\label{sec:cbt-first-principles}
+
+\subsection{Filtered transfer and the wedge $\Ainf$-algebra}
+\label{sec:cbt-filtered-transfer}
+
+Let $\mathbb{k}$ be a field of characteristic $0$.
+
+\begin{definition}[filtered celestial $\Ainf$-algebra]
+\label{def:cbt-filtered-celestial}
+A \emph{filtered celestial $\Ainf$-algebra} is a filtered $\Ainf$-algebra
+\[
+(C,\mu_1,\mu_2,\mu_3,\ldots),
+\qquad
+C=F^0C\supset F^1C\supset F^2C\supset \cdots,
+\]
+with complete descending filtration preserved by all structure maps:
+\[
+\mu_n(F^{a_1}C,\dots,F^{a_n}C)\subseteq F^{a_1+\cdots+a_n}C.
+\]
+We think of $F^1C$ as the \emph{composite ideal}. The quotient
+\[
+L:=C/F^1C
+\]
+is the \emph{single-particle sector}.
+\end{definition}
+
+Assume that modulo $F^1C$:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+\item all higher multiplications vanish,
+\[
+\mu_n\equiv 0 \pmod{F^1C},
+\qquad n\geq 3;
+\]
+\item the differential $\mu_1$ induces a unary map $\bar\mu_1$ on $L$;
+\item the binary product $\mu_2$ induces a binary product $\bar\mu_2$ on $L$.
+\end{enumerate}
+Thus $(L,\bar\mu_1,\bar\mu_2)$ is a dg algebra.
+
+Choose a filtration-preserving strong deformation retract
+\[
+(H,0)\xrightarrow{i}(C,\mu_1)\xrightarrow{p}(H,0),
+\qquad
+ip-\id_C=\mu_1 h+h\mu_1,
+\]
+with $i,p,h$ all filtration-preserving. Let $m_n$ be the transferred minimal $\Ainf$-structure on $H$, and define
+\[
+F^rH:=p(F^rC),
+\qquad
+H_{\mathrm{sp}}:=H/F^1H.
+\]
+
+\begin{theorem}[single-particle transfer theorem]
+\label{thm:cbt-single-particle-transfer}
+\ClaimStatusProvedHere
+Under the hypotheses above, the quotient $H_{\mathrm{sp}}$ inherits a canonical minimal $\Ainf$-structure by reducing the transferred operations $m_n$ modulo $F^1H$, and this reduced structure is exactly the homotopy transfer of the dg algebra $(L,\bar\mu_1,\bar\mu_2)$.
+
+Equivalently:
+\begin{enumerate}[label=\textup{(\alph*)},leftmargin=2em]
+\item every contribution from $\mu_n$ with $n\ge 3$ disappears in the single-particle quotient;
+\item every contribution from the nonlinear part of $\mu_2$ disappears in the single-particle quotient;
+\item the entire single-particle $\Ainf$-algebra depends only on the linearized dg algebra $(L,\bar\mu_1,\bar\mu_2)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Kadeishvili's tree formula, each transferred operation $m_n$ is a sum over planar rooted trees $T$ with $n$ leaves:
+\[
+m_n=\sum_{T\in \mathrm{PT}_n}\pm\,p\,\mu_T\,i^{\otimes n},
+\]
+where each internal vertex of valence $r$ is labeled by $\mu_r$, every internal edge is labeled by $h$, and the root by $p$.
+
+Because $i,p,h$ preserve filtration, a tree contributes nontrivially modulo $F^1H$ only if the composite map $\mu_T i^{\otimes n}$ lands in filtration degree $0$. But every vertex labeled by $\mu_r$ with $r\ge 3$ lands in $F^1C$ after reduction to $L$, and every use of the nonlinear part of $\mu_2$ also lands in $F^1C$. Hence every tree containing at least one such vertex has output in $F^1C$, and vanishes after applying $p$ and reducing modulo $F^1H$.
+
+The only surviving trees are those whose internal vertices are all labeled by the linearized binary operation $\bar\mu_2$. Those are precisely the trees that compute the homotopy transfer of the dg algebra $(L,\bar\mu_1,\bar\mu_2)$. Therefore the reduced transferred structure on $H_{\mathrm{sp}}$ coincides with that transfer.
+\end{proof}
+
+\begin{definition}[wedge $\Ainf$-algebra]
+\label{def:cbt-wedge-ainfty}
+The \emph{wedge $\Ainf$-algebra} of $C$ is
+\[
+\mathbb{W}(C):=H_{\mathrm{sp}}=H/F^1H
+\]
+equipped with the reduced transferred operations of Theorem~\ref{thm:cbt-single-particle-transfer}.
+\end{definition}
+
+\begin{corollary}[single-particle rigidity]
+\label{cor:cbt-single-particle-rigidity}
+\ClaimStatusProvedHere
+If the linearized dg algebra $(L,\bar\mu_1,\bar\mu_2)$ is formal, then $\mathbb{W}(C)$ is formal. In particular, all higher $\Ainf$-operations vanish on the single-particle quotient after a filtered $\Ainf$-equivalence.
+\end{corollary}
+
+\begin{corollary}[where the nonlinear celestial data live]
+\label{cor:cbt-nonlinear-location}
+\ClaimStatusProvedHere
+If $(L,\bar\mu_1,\bar\mu_2)$ is formal and concentrated in cohomological degree $0$, then every genuinely nonlinear piece of the full transferred boundary/celestial $\Ainf$-algebra lands in the composite sector $F^1H$.
+\end{corollary}
+
+\begin{remark}
+\label{def:cbt-wedge-functorial}
+In the holographic language, the usual wedge or global symmetry Lie algebra is the strict shadow of $\mathbb{W}(C)$. The point is not merely that one may discard composites; rather, the quotient by composites is an intrinsic functorial object.
+\end{remark}
+
+\subsection{Nonlinear normal forms and obstruction classes}
+\label{sec:cbt-nonlinear-normal}
+
+We now pass from the single-particle quotient to the first irreducibly nonlinear datum beyond it.
+
+Let $H$ be a graded vector space with complete separated descending filtration
+\[
+H=F^0H\supset F^1H\supset F^2H\supset \cdots,
+\qquad
+H\simeq \varprojlim_p H/F^pH.
+\]
+Let
+\[
+B(H):=\overline{T}^c(sH)
+\]
+be the reduced tensor coalgebra on the suspension, with induced filtration
+\[
+F^pB(H)=
+\sum_{r\ge1}\ \sum_{p_1+\cdots+p_r\ge p}
+(sF^{p_1}H)\otimes\cdots\otimes(sF^{p_r}H).
+\]
+
+A filtered $\Ainf$-structure on $H$ is equivalent to a degree-$1$ coderivation
+\[
+b\in \operatorname{Coder}^1(B(H)),
+\qquad
+b^2=0,
+\qquad
+b(F^pB(H))\subseteq F^pB(H).
+\]
+
+Fix a filtered splitting so that every filtration-preserving coderivation admits a unique decomposition
+\[
+b=b_0+b_1+b_2+\cdots
+\]
+where $b_r$ raises filtration by exactly $r$. Let
+\[
+\mathfrak g:=\operatorname{Coder}(\gr_FB(H)),
+\qquad
+\delta_0(x):=[b_0,x].
+\]
+
+\begin{definition}[$r$-normal form]
+\label{def:cbt-r-normal-form}
+A filtered $\Ainf$-model $b$ is in \emph{$r$-normal form} if
+\[
+b_1=b_2=\cdots=b_{r-1}=0.
+\]
+\end{definition}
+
+\begin{lemma}
+\label{lem:cbt-br-closed}
+\ClaimStatusProvedHere
+If $b$ is in $r$-normal form, then $b_r$ is $\delta_0$-closed:
+\[
+[b_0,b_r]=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Expand $b^2=0$ by filtration degree. Since the lower positive-filtration pieces vanish, the filtration-$r$ component is precisely $[b_0,b_r]=0$.
+\end{proof}
+
+\begin{lemma}
+\label{lem:cbt-gauge-change-order-r}
+\ClaimStatusProvedHere
+Suppose $b$ and $b'$ are gauge-equivalent filtered $\Ainf$-structures, both in $r$-normal form, via
+\[
+b'=e^{\operatorname{ad}_\theta}(b),
+\qquad
+\theta=\theta_1+\theta_2+\cdots
+\]
+with $\theta_s$ of filtration degree $s$. Then
+\[
+b_r'-b_r=\delta_0(\theta_r).
+\]
+\end{lemma}
+
+\begin{proof}
+Compare filtration degrees in
+\[
+b'=b+[\theta,b]+\frac12[\theta,[\theta,b]]+\cdots.
+\]
+Because both $b$ and $b'$ are in $r$-normal form, the order-$s$ components for $s<r$ imply $[b_0,\theta_s]=0$. At order $r$, every nested commutator involving some $\theta_s$ with $s<r$ vanishes for this reason, while any term involving $b_t$ with $t\ge r$ has order $>r$ unless $t=r$, in which case only the linear term contributes. Thus
+\[
+b_r'=b_r+[\theta_r,b_0]=b_r-\,[b_0,\theta_r],
+\]
+which is the claim up to the sign convention absorbed into $\delta_0$.
+\end{proof}
+
+\begin{definition}[nonlinear obstruction classes]
+\label{def:cbt-obstruction-classes}
+Assume $b$ has been put into $r$-normal form. The cohomology class
+\[
+\operatorname{Ob}_r(b):=[b_r]\in H^1(\mathfrak g,\delta_0)
+\]
+is the \emph{$r$th nonlinear obstruction class}.
+\end{definition}
+
+By Lemma~\ref{lem:cbt-br-closed} and Lemma~\ref{lem:cbt-gauge-change-order-r}, $\operatorname{Ob}_r(b)$ is independent of the chosen $r$-normal form.
+
+\begin{theorem}[recursive linearization criterion]
+\label{thm:cbt-recursive-linearization}
+\ClaimStatusProvedHere
+Fix $R\ge1$. The following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+\item $b$ is gauge-equivalent to an $(R+1)$-normal form;
+\item $\operatorname{Ob}_1(b)=\operatorname{Ob}_2(b)=\cdots=\operatorname{Ob}_R(b)=0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+If an $(R+1)$-normal form exists, all classes vanish. Conversely, suppose $b$ has been put into $r$-normal form with $r\le R$. If $\operatorname{Ob}_r(b)=0$, choose $\theta_r$ with $b_r=\delta_0(\theta_r)$. Gauge-transform by $e^{-\operatorname{ad}_{\theta_r}}$. This removes the order-$r$ term without affecting lower orders. Iterating for $r=1,\dots,R$ yields an $(R+1)$-normal form.
+\end{proof}
+
+\begin{corollary}[relative formality criterion]
+\label{cor:cbt-relative-formality}
+\ClaimStatusProvedHere
+If $H^1(\mathfrak g,\delta_0)^{(r)}=0$ for every $r\ge1$, then every filtered $\Ainf$-structure with fixed linear part $b_0$ is gauge-equivalent to $b_0$ itself.
+\end{corollary}
+
+\subsection{The composite spectral sequence}
+\label{sec:cbt-composite-spectral}
+
+The filtration on $(B(H),b)$ yields a spectral sequence.
+
+\begin{proposition}
+\label{prop:cbt-E1-page}
+\ClaimStatusProvedHere
+The $E_1$ page is the homology of the linearized/wedge sector:
+\[
+E_1\cong H(\gr_FB(H),b_0).
+\]
+\end{proposition}
+
+\begin{proof}
+The $d_0$ differential on the associated graded is exactly $b_0$.
+\end{proof}
+
+There is a natural representation
+\[
+\rho:H^\ast(\mathfrak g,\delta_0)\longrightarrow
+\End\big(H^\ast(\gr_FB(H),b_0)\big),
+\qquad
+\rho([c])([x])=[c(x)].
+\]
+
+\begin{theorem}[spectral realization of the first surviving obstruction]
+\label{thm:cbt-spectral-obstruction}
+\ClaimStatusProvedHere
+Assume $b$ has been put into $r$-normal form. Then
+\[
+E_1\cong E_2\cong\cdots\cong E_r,
+\]
+and the first possible nontrivial differential is
+\[
+d_r=\rho(\operatorname{Ob}_r(b)).
+\]
+\end{theorem}
+
+\begin{proof}
+Because $b_1=\cdots=b_{r-1}=0$, all differentials of order $<r$ vanish. The order-$r$ piece of the total differential is induced by $b_r$ on the $b_0$-homology of the associated graded. Passing from the cocycle $b_r$ to its cohomology class yields the formula.
+\end{proof}
+
+\begin{corollary}
+\label{cor:cbt-spectral-noncollapse}
+\ClaimStatusProvedHere
+If $\rho(\operatorname{Ob}_r(b))\neq0$, then the composite spectral sequence does not collapse before page $r$.
+\end{corollary}
+
+\subsection{Lowest-nonlinearity dominance for Poisson vertex algebras}
+\label{sec:cbt-lowest-nonlinearity}
+
+Let
+\[
+V=\Sym(\mathbb{k}[\partial]\otimes U)
+\]
+be a freely generated Poisson vertex algebra, and write the generator $\lambda$-brackets as
+\[
+\{u_i{}_\lambda u_j\}
+=
+\Pi^{(1)}_{ij}
++\Pi^{(2)}_{ij}
++\Pi^{(3)}_{ij}
++\cdots,
+\]
+where $\Pi^{(m)}_{ij}$ is homogeneous of polynomial degree $m$ in the jet variables. Thus $\Pi^{(1)}$ is the linearized Lie conformal bracket.
+
+Assume a tree-level boundary/celestial construction associates to $V$ a filtered $\Ainf$-algebra whose contraction data respect composite degree.
+
+\begin{theorem}[lowest-nonlinearity dominance]
+\label{thm:cbt-lowest-nonlinearity}
+\ClaimStatusProvedHere
+Let $q\ge2$ be the smallest degree with some $\Pi^{(q)}_{ij}\neq0$. Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+\item $\operatorname{Ob}_1=\cdots=\operatorname{Ob}_{q-2}=0$;
+\item the order-$(q-1)$ term is represented by Kadeishvili trees with \emph{exactly one} vertex decorated by $\Pi^{(q)}$ and every other vertex decorated by $\Pi^{(1)}$;
+\item hence the first candidate nonlinear invariant depends only on $(\Pi^{(1)},\Pi^{(q)})$ and the chosen contraction data.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+In the transfer formula, a vertex decorated by $\Pi^{(m)}$ raises composite degree by $m-1$. Trees made only from linear vertices contribute filtration degree $0$. Because $q$ is the smallest nonlinear degree, no positive-filtration contribution can appear below degree $q-1$. To contribute exactly at degree $q-1$, a tree must contain one and only one nonlinear vertex, and that vertex must be decorated by $\Pi^{(q)}$.
+\end{proof}
+
+\begin{corollary}[quadratic control]
+\label{cor:cbt-quadratic-control}
+\ClaimStatusProvedHere
+If the first nonlinear piece of the PVA bracket is quadratic, then $\operatorname{Ob}_1$ depends only on the linearized conformal algebra and the quadratic part of the $\lambda$-bracket.
+\end{corollary}
+
+\begin{corollary}[current-type rigidity]
+\label{cor:cbt-current-type-rigidity}
+\ClaimStatusProvedHere
+If the PVA bracket is purely linear, then every positive-filtration obstruction class vanishes.
+\end{corollary}
+
+\begin{remark}
+\label{def:cbt-bridge-to-w-type}
+This theorem is exactly the abstract bridge to $W$-type PVAs. It isolates the first higher-spin correction before any explicit transfer computation is carried out.
+\end{remark}
+
+\section{Holomorphic BF: the first nonlinear obstruction and its cubic asymmetry}
+\label{sec:cbt-holomorphic-bf-obstruction}
+
+Let
+\[
+A_{\mathrm{BF}}:=H_b^{0,\bullet}(S^3)\cong \mathbb{C}[w_1,w_2]\oplus \mathbb{C}[\bar w_1,\bar w_2]\epsilon
+\]
+with the transferred minimal $\Ainf$-structure from holomorphic BF theory. The binary product $m_2$ is CR multiplication, while the first nonlinear term is $m_3$.
+
+We filter $A_{\mathrm{BF}}$ by the composite ideal
+\[
+F^1A_{\mathrm{BF}}:=\langle \text{products of at least two positive-weight generators}\rangle.
+\]
+Thus
+\[
+1,\; w_1,\; w_2,\; \epsilon \notin F^1A_{\mathrm{BF}}.
+\]
+
+Let
+\[
+\pi_{\mathbf 1}:A_{\mathrm{BF}}\to \mathbb{C}\cdot 1
+\]
+be projection to the holomorphic unit.
+
+\begin{definition}[unit-projected cubic coefficients]
+\label{def:cbt-unit-projected-cubic}
+For integers $r\ge0$ and $s\ge1$, define
+\[
+\mathfrak c^L_{r,s}:=
+\pi_{\mathbf 1}\,m_3\bigl(w_1,\;w_1^rw_2^s,\;\bar w_1^r\bar w_2^{s-1}\epsilon\bigr),
+\]
+\[
+\mathfrak c^R_{r,s}:=
+\pi_{\mathbf 1}\,m_3\bigl(w_1^rw_2^s,\;w_1,\;\bar w_1^r\bar w_2^{s-1}\epsilon\bigr).
+\]
+Their difference
+\[
+\Delta_{r,s}:=\mathfrak c^L_{r,s}-\mathfrak c^R_{r,s}
+\]
+is the \emph{cubic asymmetry invariant}.
+\end{definition}
+
+The explicit formulas for Zeng's $m_3$ coefficients imply the following.
+
+\begin{proposition}[explicit cubic coefficients]
+\label{prop:cbt-cubic-coeffs}
+\ClaimStatusProvedHere
+For every $r\ge0$ and $s\ge1$,
+\[
+\mathfrak c^L_{r,s}=-\frac{s}{r+s+1},
+\qquad
+\mathfrak c^R_{r,s}=\frac{s}{(r+s)(r+s+1)}.
+\]
+\end{proposition}
+
+\begin{proof}
+Zeng gives
+\[
+(m_3)^{1,0;r,s}_{u,v}
+= - \frac{r!s!(u+v+1)!(r+s-u-v-1)!}{(r+s+1)!\,u!v!(r-u)!(s-v-1)!},
+\]
+\[
+(m_3)^{r,s;1,0}_{u,v}
+= \frac{r!s!(u+v)!(r+s-u-v)!}{(r+s+1)!\,u!v!(r-u)!(s-v-1)!}.
+\]
+Projecting to the unit forces $u=r$ and $v=s-1$. Substitution yields
+\[
+\mathfrak c^L_{r,s}=-\frac{r!s!(r+s)!}{(r+s+1)!\,r!(s-1)!}
+=-\frac{s}{r+s+1},
+\]
+and
+\[
+\mathfrak c^R_{r,s}=\frac{r!s!(r+s-1)!}{(r+s+1)!\,r!(s-1)!}
+=\frac{s}{(r+s)(r+s+1)}.
+\]
+\end{proof}
+
+\begin{theorem}[gauge invariance of the unit projection]
+\label{thm:cbt-unit-projection-gauge-invariant}
+\ClaimStatusProvedHere
+Let $\phi$ be any filtration-preserving Hochschild $2$-cochain on $(A_{\mathrm{BF}},m_2)$ tangent to the identity at the linearized level. Then
+\[
+\pi_{\mathbf 1}(\delta_{m_2}\phi)
+\bigl(w_1,\;w_1^rw_2^s,\;\bar w_1^r\bar w_2^{s-1}\epsilon\bigr)=0
+\]
+and likewise after exchanging the first two inputs. Consequently $\mathfrak c^L_{r,s}$, $\mathfrak c^R_{r,s}$, and $\Delta_{r,s}$ depend only on the cohomology class of $m_3$, hence only on $\operatorname{Ob}_1$.
+\end{theorem}
+
+\begin{proof}
+Because the transferred structure is minimal, the first gauge variation of $m_3$ is
+\[
+m_3\mapsto m_3+\delta_{m_2}\phi,
+\]
+with
+\[
+(\delta_{m_2}\phi)(a,b,c)
+=
+a\phi(b,c)-\phi(ab,c)+\phi(a,bc)-\phi(a,b)c.
+\]
+Set
+\[
+a=w_1,\qquad
+b=w_1^rw_2^s,\qquad
+c=\bar w_1^r\bar w_2^{s-1}\epsilon.
+\]
+Then:
+\begin{enumerate}[label=\textup{(\arabic*)},leftmargin=2em]
+\item $a\phi(b,c)$ is divisible by $w_1$, so it has zero unit projection;
+\item $ab=w_1^{r+1}w_2^s\in F^1$, hence $\phi(ab,c)\in F^1$ and has zero unit projection;
+\item $bc=w_1^rw_2^s\bar w_1^r\bar w_2^{s-1}\epsilon\in F^1$, hence $\phi(a,bc)\in F^1$ and has zero unit projection;
+\item $\phi(a,b)c$ lies in the $\epsilon$-sector, so its unit projection vanishes.
+\end{enumerate}
+The same argument applies after exchanging the first two inputs.
+\end{proof}
+
+\begin{theorem}[explicit nonzero first obstruction]
+\label{thm:cbt-explicit-ob1}
+\ClaimStatusProvedHere
+For every $r\ge0$ and $s\ge1$,
+\[
+\Delta_{r,s}=-\frac{s}{r+s}.
+\]
+In particular $\Delta_{r,s}\neq0$, so $\operatorname{Ob}_1\neq0$ for holomorphic BF.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:cbt-cubic-coeffs},
+\[
+\Delta_{r,s}
+=
+-\frac{s}{r+s+1}-\frac{s}{(r+s)(r+s+1)}
+=
+-\frac{s}{r+s}.
+\]
+By Theorem~\ref{thm:cbt-unit-projection-gauge-invariant}, this quantity depends only on the cohomology class of $m_3$. Since it is nonzero, that class is nonzero.
+\end{proof}
+
+\begin{corollary}[lowest mode]
+\label{cor:cbt-lowest-mode}
+\ClaimStatusProvedHere
+At $(r,s)=(0,1)$,
+\[
+m_3(w_1,w_2,\epsilon)=-\frac12\,1,
+\qquad
+m_3(w_2,w_1,\epsilon)=+\frac12\,1,
+\qquad
+\Delta_{0,1}=-1.
+\]
+Thus the first obstruction is already visible on the $4$-dimensional truncation
+\[
+\mathrm{span}\{1,w_1,w_2,\epsilon\}\subset A_{\mathrm{BF}}.
+\]
+\end{corollary}
+
+\begin{corollary}[non-strictifiability]
+\label{cor:cbt-non-strictifiability}
+\ClaimStatusProvedHere
+No filtration-preserving $\Ainf$-equivalence tangent to the identity can strictify the holomorphic-BF celestial $\Ainf$-algebra to its linearized wedge algebra.
+\end{corollary}
+
+\begin{proof}
+If such a strictification existed, the cubic term would become Hochschild-exact, so the gauge-invariant quantities $\Delta_{r,s}$ would vanish. They do not.
+\end{proof}
+
+\begin{corollary}[asymmetry law]
+\label{cor:cbt-asymmetry-law}
+\ClaimStatusProvedHere
+The ratio of left-ordered and right-ordered cubic coefficients is
+\[
+\frac{\mathfrak c^L_{r,s}}{\mathfrak c^R_{r,s}}=-(r+s).
+\]
+So the ordering asymmetry of the first nonlinear celestial correction is exactly the total holomorphic degree.
+\end{corollary}
+
+\section{Holomorphic BF: highest-weight ladders, simplex coefficients, and higher Kac--Moody brackets}
+\label{sec:cbt-bf-ladders}
+
+We now turn from the first obstruction to an all-arity exact sector.
+
+\subsection{The ladder sector}
+\label{sec:cbt-ladder-sector}
+
+Let
+\[
+H_b^{0,0}(S^3)=\mathbb{C}[w_1,w_2],
+\qquad
+H_b^{0,1}(S^3)=\mathbb{C}[\bar w_1,\bar w_2]\,\epsilon.
+\]
+Following Zeng's special deformation retract, the homotopy operator acts on highest-weight vectors by
+\[
+h\bigl(w_1^{2j}\bar w_2^{2\bar j}\epsilon\bigr)
+=
+\frac{1}{2\bar j+1}w_1^{2j-1}\bar w_2^{2\bar j+1},
+\qquad j>0,
+\]
+and vanishes on $H_b^{0,1}(S^3)$ when the holomorphic degree is zero.
+
+We isolate the highest-weight ladder
+\[
+L_a:=w_1^a,
+\qquad
+\eta_b:=\bar w_2^b\epsilon,
+\qquad a,b\in \mathbb Z_{\ge0}.
+\]
+
+\begin{lemma}[ladder closure]
+\label{lem:cbt-ladder-closure-bf}
+\ClaimStatusProvedHere
+For all $a,b,c\ge0$,
+\[
+M(w_1^a\bar w_2^b,\eta_c)=w_1^a\bar w_2^{b+c}\epsilon,
+\]
+and
+\[
+h(w_1^a\bar w_2^b\epsilon)=
+\begin{cases}
+\dfrac{1}{b+1}w_1^{a-1}\bar w_2^{b+1}, & a>0,\\[1ex]
+0, & a=0.
+\end{cases}
+\]
+\end{lemma}
+
+\begin{proof}
+The monomial $w_1^a\bar w_2^b$ is harmonic, hence already the highest-weight vector of $H_{a/2,b/2}$. Multiplication by $\eta_c$ therefore produces the highest-weight vector
+\[
+w_1^a\bar w_2^{b+c}\epsilon.
+\]
+The formula for $h$ is the highest-weight formula from the special deformation retract, and $h=0$ on holomorphic degree $0$ because $h\circ i=0$ on cohomology representatives.
+\end{proof}
+
+\subsection{The ordered all-arity formula}
+\label{sec:cbt-ordered-all-arity}
+
+For $n\ge3$, set
+\[
+B_k:=b_1+\cdots+b_k,
+\qquad
+B:=B_{n-1}.
+\]
+
+\begin{theorem}[highest-weight selection rule and ordered ladder formula]
+\label{thm:cbt-bf-ladder}
+\ClaimStatusProvedHere
+Let $n\ge3$ and $a,b_1,\dots,b_{n-1}\ge0$.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+\item The pre-projected iterated operation is
+\[
+\mu_n(L_a;\eta_{b_1},\dots,\eta_{b_{n-1}})
+=
+\begin{cases}
+0, & a<n-2,\\[2ex]
+\left(\prod_{k=1}^{n-2}\dfrac{1}{B_k+k}\right)
+w_1^{a-n+2}\bar w_2^{B+n-2}\epsilon, & a\ge n-2.
+\end{cases}
+\]
+\item After projection to cohomology,
+\[
+m_n(L_a,\eta_{b_1},\dots,\eta_{b_{n-1}})
+=
+\delta_{a,n-2}
+\left(\prod_{k=1}^{n-2}\frac{1}{B_k+k}\right)\eta_{B+n-2}.
+\]
+\end{enumerate}
+Thus the ladder product is nonzero if and only if the initial holomorphic degree is exactly $n-2$.
+\end{theorem}
+
+\begin{proof}
+Proceed by induction on $n$.
+
+For $n=3$,
+\[
+\mu_3(L_a;\eta_{b_1},\eta_{b_2})
+=
+M\bigl(hM(L_a,\eta_{b_1}),\eta_{b_2}\bigr).
+\]
+By Lemma~\ref{lem:cbt-ladder-closure-bf},
+\[
+M(L_a,\eta_{b_1})=w_1^a\bar w_2^{b_1}\epsilon.
+\]
+If $a=0$, the homotopy kills it. If $a\ge1$, then
+\[
+h(w_1^a\bar w_2^{b_1}\epsilon)
+=
+\frac{1}{b_1+1}w_1^{a-1}\bar w_2^{b_1+1},
+\]
+hence
+\[
+\mu_3(L_a;\eta_{b_1},\eta_{b_2})
+=
+\frac{1}{b_1+1}w_1^{a-1}\bar w_2^{b_1+b_2+1}\epsilon.
+\]
+
+Assume the formula for $\mu_n$. Then
+\[
+\mu_{n+1}(L_a;\eta_{b_1},\dots,\eta_{b_n})
+=
+M\bigl(h\mu_n(L_a;\eta_{b_1},\dots,\eta_{b_{n-1}}),\eta_{b_n}\bigr).
+\]
+If $a<n-2$, the induction hypothesis gives $\mu_n=0$, hence $\mu_{n+1}=0$. If $a\ge n-2$, then
+\[
+\mu_n=
+\left(\prod_{k=1}^{n-2}\frac{1}{B_k+k}\right)
+w_1^{a-n+2}\bar w_2^{B_{n-1}+n-2}\epsilon.
+\]
+If $a=n-2$, this already lies in $H_b^{0,1}(S^3)$, so $h$ kills it and $\mu_{n+1}=0$ as required. If $a\ge n-1$, then one more use of Lemma~\ref{lem:cbt-ladder-closure-bf} gives
+\[
+h\mu_n=
+\left(\prod_{k=1}^{n-2}\frac{1}{B_k+k}\right)
+\frac{1}{B_{n-1}+n-1}
+w_1^{a-n+1}\bar w_2^{B_{n-1}+n-1},
+\]
+and hence
+\[
+\mu_{n+1}=
+\left(\prod_{k=1}^{n-1}\frac{1}{B_k+k}\right)
+w_1^{a-(n+1)+2}\bar w_2^{B_n+(n+1)-2}\epsilon.
+\]
+
+Finally, $m_n=p\mu_n$. If $a>n-2$, the result has positive holomorphic degree and is killed by the projection to $H_b^{0,1}(S^3)$. Only $a=n-2$ survives.
+\end{proof}
+
+\begin{corollary}[all arities are nonzero]
+\label{cor:cbt-all-arities-nonzero}
+\ClaimStatusProvedHere
+For every $n\ge3$,
+\[
+m_n(w_1^{n-2},\epsilon,\dots,\epsilon)
+=
+\frac{1}{(n-2)!}\,\bar w_2^{n-2}\epsilon\neq0.
+\]
+So the canonical transferred $\Ainf$-model is nontrivial in every arity.
+\end{corollary}
+
+\subsection{Simplex geometry}
+\label{sec:cbt-simplex-geometry}
+
+Define the ordered coefficient
+\[
+C_n(b_1,\dots,b_{n-1})
+:=
+\prod_{k=1}^{n-2}\frac{1}{B_k+k}.
+\]
+Set
+\[
+x_i:=b_i+1,
+\qquad
+X:=x_1+\cdots+x_{n-1}=B+n-1.
+\]
+
+\begin{proposition}[simplex integral]
+\label{prop:cbt-simplex-integral}
+\ClaimStatusProvedHere
+One has
+\[
+C_n(b_1,\dots,b_{n-1})
+=
+\int_{0<t_1<\cdots<t_{n-2}<1}
+t_1^{x_1-1}t_2^{x_2-1}\cdots t_{n-2}^{x_{n-2}-1}\,
+dt_1\cdots dt_{n-2}.
+\]
+\end{proposition}
+
+\begin{proof}
+Iterated integration gives
+\[
+\int_0^{t_2}t_1^{x_1-1}dt_1=\frac{t_2^{x_1}}{x_1},
+\]
+then
+\[
+\int_0^{t_3}\frac{t_2^{x_1+x_2-1}}{x_1}dt_2
+=
+\frac{t_3^{x_1+x_2}}{x_1(x_1+x_2)},
+\]
+and continuing gives the required denominator.
+\end{proof}
+
+\begin{theorem}[simplex summation law]
+\label{thm:cbt-simplex-sum-bf}
+\ClaimStatusProvedHere
+For every $n\ge3$ and every $b_1,\dots,b_{n-1}\ge0$,
+\[
+\sum_{\sigma\in S_{n-1}}
+C_n(b_{\sigma(1)},\dots,b_{\sigma(n-1)})
+=
+\frac{B+n-1}{\prod_{i=1}^{n-1}(b_i+1)}.
+\]
+Equivalently,
+\[
+\sum_{\sigma\in S_{n-1}}
+m_n\bigl(w_1^{n-2},\eta_{b_{\sigma(1)}},\dots,\eta_{b_{\sigma(n-1)}}\bigr)
+=
+\frac{B+n-1}{\prod_{i=1}^{n-1}(b_i+1)}\eta_{B+n-2}.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $m=n-1$ and partition the cube $[0,1]^m$ into the order simplices
+\[
+\Delta_\sigma:=\{0<u_{\sigma(1)}<\cdots<u_{\sigma(m)}<1\},
+\qquad \sigma\in S_m.
+\]
+Since
+\[
+\int_{[0,1]^m}u_1^{x_1-1}\cdots u_m^{x_m-1}\,du_1\cdots du_m
+=
+\prod_{i=1}^m\frac1{x_i},
+\]
+and the integral over each $\Delta_\sigma$ yields
+\[
+\frac{1}{x_{\sigma(1)}(x_{\sigma(1)}+x_{\sigma(2)})\cdots
+(x_{\sigma(1)}+\cdots+x_{\sigma(m)})},
+\]
+summing over all $\sigma$ gives the classical cube-to-simplex identity
+\[
+\sum_{\sigma\in S_m}
+\frac{1}{x_{\sigma(1)}(x_{\sigma(1)}+x_{\sigma(2)})\cdots
+(x_{\sigma(1)}+\cdots+x_{\sigma(m)})}
+=
+\frac{1}{x_1\cdots x_m}.
+\]
+Multiplying by the permutation-independent final partial sum
+\[
+X=x_1+\cdots+x_m
+\]
+proves the formula.
+\end{proof}
+
+\subsection{Higher Kac--Moody minimal model}
+\label{sec:cbt-higher-km}
+
+Let $\mathfrak g$ be a Lie algebra and consider the canonical transferred $\Linf$ structure on
+\[
+H_b^{0,\bullet}(S^3)\otimes \mathfrak g.
+\]
+The source paper gives
+\[
+\begin{aligned}
+&l_n(a_0\otimes x_0,\bar a_1\epsilon\otimes x_1,\dots,\bar a_{n-1}\epsilon\otimes x_{n-1})\\
+&\qquad =
+\sum_{\sigma\in S_{n-1}}
+m_n(a_0,\bar a_{\sigma(1)}\epsilon,\dots,\bar a_{\sigma(n-1)}\epsilon)\,
+[\cdots[[x_0,x_{\sigma(1)}],x_{\sigma(2)}],\dots,x_{\sigma(n-1)}].
+\end{aligned}
+\]
+
+\begin{theorem}[all-order ladder brackets for the higher Kac--Moody minimal model]
+\label{thm:cbt-km-ladder}
+\ClaimStatusProvedHere
+For every $n\ge3$,
+\[
+\begin{aligned}
+&l_n\bigl(w_1^{n-2}\otimes x_0,\eta_{b_1}\otimes x_1,\dots,\eta_{b_{n-1}}\otimes x_{n-1}\bigr)\\
+&\qquad=
+\eta_{B+n-2}\otimes
+\sum_{\sigma\in S_{n-1}}
+\left(\prod_{k=1}^{n-2}\frac{1}{b_{\sigma(1)}+\cdots+b_{\sigma(k)}+k}\right)
+[\cdots[[x_0,x_{\sigma(1)}],x_{\sigma(2)}],\dots,x_{\sigma(n-1)}].
+\end{aligned}
+\]
+In particular, if all $b_i=b$, then
+\[
+\begin{aligned}
+&l_n\bigl(w_1^{n-2}\otimes x_0,\eta_b\otimes x_1,\dots,\eta_b\otimes x_{n-1}\bigr)\\
+&\qquad=
+\frac{1}{(b+1)^{n-2}(n-2)!}\,
+\eta_{(b+1)(n-1)-1}\otimes
+\sum_{\sigma\in S_{n-1}}
+[\cdots[[x_0,x_{\sigma(1)}],x_{\sigma(2)}],\dots,x_{\sigma(n-1)}].
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+Substitute Theorem~\ref{thm:cbt-bf-ladder} into the tensor-product formula. In the equal-degree case the scalar coefficient is independent of $\sigma$ and factors out.
+\end{proof}
+
+\begin{remark}
+\label{def:cbt-km-remark}
+This gives an explicit all-arity family of higher brackets in a minimal model of the four-dimensional higher Kac--Moody algebra. The coefficients are not merely existential; they are closed rational functions determined by simplex geometry.
+\end{remark}
+
+\section{Poisson BF: odd highest-weight ladders and all-order $\pi_n$ coefficients}
+\label{sec:cbt-poisson-bf}
+
+We now pass to the transferred $\Linf$-operations
+\[
+L_n:=\{\cdot,\dots,\cdot\}_{\bar\pi,n}
+\]
+on $H_b^{0,\bullet}(S^3)$ induced from Poisson BF theory.
+
+\subsection{The raw highest-weight bracket}
+\label{sec:cbt-raw-hw-bracket}
+
+For integers $A\ge1$, $B,c\ge0$, define
+\[
+F_{A,B}:=w_1^A\bar w_2^B\in \Omega_b^{0,0}(S^3),
+\qquad
+\eta_c:=\bar w_2^c\epsilon\in H_b^{0,1}(S^3).
+\]
+
+\begin{lemma}[raw highest-weight bracket]
+\label{lem:cbt-raw-poisson}
+\ClaimStatusProvedHere
+For all $A\ge1$ and $B,c\ge0$,
+\[
+\{F_{A,B},\eta_c\}_\pi
+=
+-A(c+2)\,w_1^{A-1}\bar w_2^{B+c+1}\epsilon.
+\]
+\end{lemma}
+
+\begin{proof}
+Using Zeng's explicit inverse map $K^{-1}$,
+\[
+K^{-1}(F_{A,B})=z_1^A\bar z_2^B\,u^{-B},
+\qquad
+u:=z_1\bar z_1+z_2\bar z_2,
+\]
+and
+\[
+K^{-1}(\eta_c)=\bar z_2^c\,\omega\,u^{-c-2},
+\qquad
+\omega:=\bar z_1\,d\bar z_2-\bar z_2\,d\bar z_1.
+\]
+Since the holomorphic Poisson tensor is $\pi=\partial_{z_1}\wedge \partial_{z_2}$, the bracket becomes
+\[
+\{K^{-1}(F_{A,B}),K^{-1}(\eta_c)\}_\pi
+=
+\partial_{z_1}(z_1^A\bar z_2^Bu^{-B})\,\partial_{z_2}(\bar z_2^cu^{-c-2})\,\omega
+-
+\partial_{z_2}(z_1^A\bar z_2^Bu^{-B})\,\partial_{z_1}(\bar z_2^cu^{-c-2})\,\omega.
+\]
+The terms arising from differentiating the radial factor $u^{-B}$ cancel identically. What remains is
+\[
+-(c+2)A\,z_1^{A-1}\bar z_2^{B+c+1}u^{-B-c-3}\omega.
+\]
+Applying $K$ gives the stated formula.
+\end{proof}
+
+\begin{lemma}[propagator on the ladder]
+\label{lem:cbt-propagator-poisson}
+\ClaimStatusProvedHere
+For all $A\ge1$ and $D\ge0$,
+\[
+h\bigl(w_1^A\bar w_2^D\epsilon\bigr)=\frac{1}{D+1}w_1^{A-1}\bar w_2^{D+1}.
+\]
+Hence
+\[
+h\{F_{A,B},\eta_c\}_\pi
+=
+-A\,\frac{c+2}{B+c+2}\,F_{A-2,B+c+2}.
+\]
+\end{lemma}
+
+\begin{proof}
+The homotopy formula is the same highest-weight formula as before. Combining it with Lemma~\ref{lem:cbt-raw-poisson} yields the recursion.
+\end{proof}
+
+\subsection{Ordered comb coefficients}
+\label{sec:cbt-ordered-comb}
+
+Fix $n\ge2$, $a\ge0$, and $b_1,\dots,b_{n-1}\ge0$. For a permutation $\sigma\in S_{n-1}$ define
+\[
+\mathcal C_{\sigma,n}(a;b_1,\dots,b_{n-1})
+:=
+p\{\cdots h\{h\{w_1^a,\eta_{b_{\sigma(1)}}\},\eta_{b_{\sigma(2)}}\},\dots,\eta_{b_{\sigma(n-1)}}\}.
+\]
+Let
+\[
+S_k^\sigma:=b_{\sigma(1)}+\cdots+b_{\sigma(k)},
+\qquad
+B:=b_1+\cdots+b_{n-1}.
+\]
+
+\begin{proposition}[ordered comb formula]
+\label{prop:cbt-ordered-comb}
+\ClaimStatusProvedHere
+For $1\le k\le n-2$, the $k$-fold propagator-bracket is
+\[
+X_k^\sigma:=
+h\{\cdots h\{h\{w_1^a,\eta_{b_{\sigma(1)}}\},\eta_{b_{\sigma(2)}}\},\dots,\eta_{b_{\sigma(k)}}\}
+=
+(-1)^k\left(\prod_{j=1}^k
+\frac{(a-2j+2)(b_{\sigma(j)}+2)}{S_j^\sigma+2j}
+\right)
+w_1^{a-2k}\bar w_2^{S_k^\sigma+2k}.
+\]
+Consequently,
+\[
+\mathcal C_{\sigma,n}(a;\mathbf b)=0
+\qquad\text{unless}\qquad
+a=2n-3,
+\]
+and for $a=2n-3$,
+\[
+\mathcal C_{\sigma,n}(2n-3;\mathbf b)
+=
+(-1)^{n-1}(2n-3)!!\,
+(b_{\sigma(n-1)}+2)
+\prod_{k=1}^{n-2}
+\frac{b_{\sigma(k)}+2}{S_k^\sigma+2k}\;
+\bar w_2^{B+2n-3}\epsilon.
+\]
+\end{proposition}
+
+\begin{proof}
+Induct on $k$ using the recursion from Lemma~\ref{lem:cbt-propagator-poisson}. At the final step, projection to $H_b^{0,1}(S^3)$ is nonzero only when the holomorphic exponent is zero, namely when
+\[
+a-2n+3=0.
+\]
+Substituting $a=2n-3$ gives the closed coefficient and the double factorial
+\[
+\prod_{j=1}^{n-2}(2n-2j-1)=(2n-3)!!.
+\]
+\end{proof}
+
+\subsection{A shifted simplex identity}
+\label{sec:cbt-shifted-simplex}
+
+Set
+\[
+a_i:=b_i+2>0.
+\]
+Then the coefficient from Proposition~\ref{prop:cbt-ordered-comb} becomes
+\[
+(b_{\sigma(n-1)}+2)\prod_{k=1}^{n-2}
+\frac{b_{\sigma(k)}+2}{S_k^\sigma+2k}
+=
+A\prod_{k=1}^{n-1}
+\frac{a_{\sigma(k)}}{a_{\sigma(1)}+\cdots+a_{\sigma(k)}},
+\qquad
+A:=a_1+\cdots+a_{n-1}=B+2n-2.
+\]
+
+\begin{theorem}[shifted simplex identity]
+\label{thm:cbt-shifted-simplex}
+\ClaimStatusProvedHere
+For positive real numbers $a_1,\dots,a_m$,
+\[
+\sum_{\sigma\in S_m}
+\prod_{k=1}^{m}
+\frac{a_{\sigma(k)}}{a_{\sigma(1)}+\cdots+a_{\sigma(k)}}=1.
+\]
+Equivalently, for nonnegative integers $b_1,\dots,b_m$,
+\[
+\sum_{\sigma\in S_m}
+(b_{\sigma(m)}+2)\prod_{k=1}^{m-1}
+\frac{b_{\sigma(k)}+2}{b_{\sigma(1)}+\cdots+b_{\sigma(k)}+2k}
+=
+\sum_{i=1}^{m}b_i+2m.
+\]
+\end{theorem}
+
+\begin{proof}
+Consider the density
+\[
+\rho(t_1,\dots,t_m):=\prod_{i=1}^m a_i\,t_i^{a_i-1}
+\]
+on the unit cube $[0,1]^m$. Its total integral is $1$. Partition the cube into the order simplices
+\[
+\Delta_\sigma:=\{0<t_{\sigma(1)}<\cdots<t_{\sigma(m)}<1\}.
+\]
+A direct iterated integral on $\Delta_\sigma$ gives
+\[
+\int_{\Delta_\sigma}\rho
+=
+\prod_{k=1}^{m}
+\frac{a_{\sigma(k)}}{a_{\sigma(1)}+\cdots+a_{\sigma(k)}}.
+\]
+Summing over $\sigma$ yields the first identity, and multiplying by the common last partial sum
+\[
+A=a_1+\cdots+a_m
+\]
+yields the second.
+\end{proof}
+
+\subsection{The all-order Poisson ladder theorem}
+\label{sec:cbt-poisson-ladder}
+
+\begin{theorem}[odd-degree highest-weight ladder]
+\label{thm:cbt-poisson-ladder}
+\ClaimStatusProvedHere
+For every $n\ge2$ and every $b_1,\dots,b_{n-1}\ge0$,
+\[
+L_n\bigl(w_1^{2n-3},\bar w_2^{b_1}\epsilon,\dots,\bar w_2^{b_{n-1}}\epsilon\bigr)
+=
+(-1)^{n-1}(2n-3)!!\,(B+2n-2)\,\bar w_2^{B+2n-3}\epsilon,
+\]
+where $B=b_1+\cdots+b_{n-1}$. Moreover,
+\[
+L_n\bigl(w_1^a,\bar w_2^{b_1}\epsilon,\dots,\bar w_2^{b_{n-1}}\epsilon\bigr)=0
+\qquad\text{for } a\neq 2n-3.
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:cbt-ordered-comb},
+\[
+L_n\bigl(w_1^{2n-3},\eta_{b_1},\dots,\eta_{b_{n-1}}\bigr)
+=
+(-1)^{n-1}(2n-3)!!
+\sum_{\sigma\in S_{n-1}}
+(b_{\sigma(n-1)}+2)\prod_{k=1}^{n-2}
+\frac{b_{\sigma(k)}+2}{S_k^\sigma+2k}\,
+\bar w_2^{B+2n-3}\epsilon.
+\]
+The sum is exactly $B+2n-2$ by Theorem~\ref{thm:cbt-shifted-simplex}. The vanishing statement is already in Proposition~\ref{prop:cbt-ordered-comb}.
+\end{proof}
+
+\begin{corollary}[all symmetrized $\pi_n$ coefficients on the ladder]
+\label{cor:cbt-pi-n-formula}
+\ClaimStatusProvedHere
+On the sector
+\[
+(r,s)=(2n-3,0),
+\qquad
+(u_i,v_i)=(0,b_i),
+\qquad
+(p,q)=(0,B+2n-3),
+\]
+the fully symmetrized coefficient package satisfies
+\[
+\sum_{\sigma\in S_{n-1}}
+(\pi_n)^{0,\,B+2n-3;\,2n-3,\,0}_{0,b_{\sigma(1)},\dots,0,b_{\sigma(n-1)}}
+=
+(-1)^{n-1}(2n-3)!!\prod_{i=1}^{n-1}(b_i+1).
+\]
+\end{corollary}
+
+\begin{proof}
+Zeng's relation between $\pi_n$ and the transferred brackets multiplies by the input normalization factor $\prod_i (b_i+1)$ and divides by the output factor $q+1=B+2n-2$. Since Theorem~\ref{thm:cbt-poisson-ladder} gives precisely the bracket coefficient $(-1)^{n-1}(2n-3)!!(B+2n-2)$, the final factor cancels.
+\end{proof}
+
+\begin{corollary}[examples]
+\label{cor:cbt-poisson-examples}
+\ClaimStatusProvedHere
+\[
+L_2(w_1,\bar w_2^b\epsilon)=-(b+2)\bar w_2^{b+1}\epsilon,
+\]
+\[
+L_3(w_1^3,\bar w_2^{b_1}\epsilon,\bar w_2^{b_2}\epsilon)=
+3(b_1+b_2+4)\bar w_2^{b_1+b_2+3}\epsilon,
+\]
+\[
+L_4(w_1^5,\bar w_2^{b_1}\epsilon,\bar w_2^{b_2}\epsilon,\bar w_2^{b_3}\epsilon)=
+-15(b_1+b_2+b_3+6)\bar w_2^{b_1+b_2+b_3+5}\epsilon.
+\]
+\end{corollary}
+
+\begin{remark}
+\label{def:cbt-slope-comparison}
+Holomorphic BF selected slope $1$:
+\[
+\deg_{w_1}=n-2.
+\]
+Poisson BF selects slope $2$:
+\[
+\deg_{w_1}=2n-3.
+\]
+The extra slope comes from the fact that each anti-holomorphic insertion consumes one holomorphic degree through the Poisson bracket and one more through the propagator.
+\end{remark}
+
+\section{An Airy--Witt normal form for the odd ladder sector of \texorpdfstring{$T^*[1]\operatorname{Ham}(\mathbb{C}^2)$}{T*[1]Ham(C2)}}
+\label{sec:cbt-airy-witt}
+
+Zeng proves that if one omits higher brackets, the binary Poisson algebra on $H_b^{0,\bullet}(S^3)$ is naturally identified with
+\[
+T^*[1]\operatorname{Ham}(\mathbb{C}^2).
+\]
+The odd highest-weight ladder computed in Theorem~\ref{thm:cbt-poisson-ladder} is therefore a concrete sector of the transferred $\Linf$ deformation of this cotangent Lie algebra. We now convert that sector into a one-dimensional differential-operator model.
+
+\subsection{A classification lemma for homogeneous first-order operators}
+\label{sec:cbt-classification-lemma}
+
+\begin{proposition}[homogeneous first-order operators on $\mathbb{C}\lbrack t\rbrack$]
+\label{prop:cbt-first-order-homogeneous}
+\ClaimStatusProvedHere
+Fix an integer $d\ge0$. A linear operator $Q:\mathbb{C}[t]\to\mathbb{C}[t]$ is a first-order differential operator homogeneous of degree $d$, in the sense that
+\[
+Q(t^B)\in \mathbb{C}\, t^{B+d}\qquad\text{for all }B\ge0,
+\]
+if and only if there exist unique scalars $a,b\in\mathbb{C}$ such that
+\[
+Q=a\,t^{d+1}\partial_t+b\,t^d.
+\]
+Equivalently,
+\[
+Q(t^B)=(aB+b)t^{B+d}\qquad (B\ge0).
+\]
+\end{proposition}
+
+\begin{proof}
+A first-order differential operator on $\mathbb{C}[t]$ has the form
+\[
+Q=f(t)\partial_t+g(t)
+\]
+for unique polynomials $f,g\in\mathbb{C}[t]$. Applying $Q$ to $t^B$ gives
+\[
+Q(t^B)=Bf(t)t^{B-1}+g(t)t^B.
+\]
+If $Q(t^B)$ always has degree exactly $B+d$, then $f$ must be homogeneous of degree $d+1$ and $g$ homogeneous of degree $d$. Hence
+\[
+f(t)=a\,t^{d+1},
+\qquad
+g(t)=b\,t^d
+\]
+for unique $a,b\in\mathbb{C}$. Substituting yields the formula on monomials. The converse is immediate.
+\end{proof}
+
+\subsection{Renormalized odd generators and the polynomial model}
+\label{sec:cbt-renormalized-odd}
+
+Define renormalized degree-$0$ elements
+\[
+\xi_m:=\frac{(-1)^m}{(2m+1)!!}\,w_1^{2m+1},
+\qquad m\ge0,
+\]
+and degree-$1$ basis vectors
+\[
+v_b:=\bar w_2^b\epsilon,
+\qquad b\ge0.
+\]
+Let
+\[
+M:=\bigoplus_{b\ge0}\mathbb{C}\,v_b.
+\]
+Because the $v_b$ are odd in the cohomological grading, the $\Linf$ bracket is symmetric in them. For each $m\ge0$, define the $(m+1)$-linear map
+\[
+R_m:\Sym^{m+1}(M)\longrightarrow M,
+\qquad
+R_m(y_1,\dots,y_{m+1}):=
+L_{m+2}(\xi_m,y_1,\dots,y_{m+1}).
+\]
+
+Identify $M$ with $\mathbb{C}[t]$ via
+\[
+\Phi:M\xrightarrow{\;\sim\;}\mathbb{C}[t],
+\qquad
+\Phi(v_b)=t^b.
+\]
+
+\begin{theorem}[Airy--Witt normal form]
+\label{thm:cbt-airy-witt}
+\ClaimStatusProvedHere
+For every $m\ge0$ and every $y_1,\dots,y_{m+1}\in M$,
+\[
+\Phi\bigl(R_m(y_1,\dots,y_{m+1})\bigr)
+=
+-\partial_t\!\left(
+t^{2m+2}\prod_{i=1}^{m+1}\Phi(y_i)
+\right).
+\]
+Equivalently, if
+\[
+D_m:=-\partial_t\circ M_{t^{2m+2}}
+=
+-t^{2m+2}\partial_t-(2m+2)t^{2m+1},
+\]
+then
+\[
+\Phi\bigl(R_m(y_1,\dots,y_{m+1})\bigr)
+=
+D_m\!\left(\prod_{i=1}^{m+1}\Phi(y_i)\right).
+\]
+In particular, the odd ladder sector admits a canonical realization by homogeneous first-order differential operators on $\mathbb{C}[t]$.
+\end{theorem}
+
+\begin{proof}
+It suffices to evaluate on basis vectors. Let $y_i=v_{b_i}$. Writing $B=b_1+\cdots+b_{m+1}$ and using Theorem~\ref{thm:cbt-poisson-ladder} with $n=m+2$, we obtain
+\[
+R_m(v_{b_1},\dots,v_{b_{m+1}})
+=
+-(B+2m+2)\,v_{B+2m+1}.
+\]
+Applying $\Phi$ gives
+\[
+\Phi\bigl(R_m(v_{b_1},\dots,v_{b_{m+1}})\bigr)
+=
+-(B+2m+2)\,t^{B+2m+1}.
+\]
+On the other hand,
+\[
+-\partial_t\!\left(
+t^{2m+2}\prod_{i=1}^{m+1}t^{b_i}
+\right)
+=
+-\partial_t\bigl(t^{B+2m+2}\bigr)
+=
+-(B+2m+2)\,t^{B+2m+1}.
+\]
+Thus the two expressions agree on a basis and hence everywhere by multilinearity.
+
+The uniqueness of the first-order model follows from Proposition~\ref{prop:cbt-first-order-homogeneous}: the monomial coefficient is affine in $B$, so there is a unique homogeneous first-order operator producing it, namely $D_m$.
+\end{proof}
+
+\begin{corollary}[faithfulness]
+\label{cor:cbt-faithfulness}
+\ClaimStatusProvedHere
+The assignment
+\[
+\xi_m\longmapsto D_m
+\]
+is injective. Hence the odd highest-weight ladder of the transferred deformation of $T^*[1]\operatorname{Ham}(\mathbb{C}^2)$ is faithfully represented on $\mathbb{C}[t]$.
+\end{corollary}
+
+\begin{proof}
+If $\sum_{m=0}^N c_mD_m=0$, apply the operator to $1$. One gets
+\[
+\sum_{m=0}^N c_m(-2m-2)t^{2m+1}=0.
+\]
+The monomials $t^{2m+1}$ are linearly independent, so each $c_m=0$.
+\end{proof}
+
+\subsection{The density-line interpretation}
+\label{sec:cbt-density-line}
+
+Let
+\[
+\Psi:\mathbb{C}[t]\to \mathbb{C}[t]\,dt
+\]
+be the tautological identification with polynomial $1$-densities. For a vector field $X=f(t)\partial_t$, the Lie derivative on $1$-densities is
+\[
+\mathcal L_X\bigl(g(t)\,dt\bigr)
+=
+\bigl(fg'+f'g\bigr)\,dt.
+\]
+
+\begin{corollary}[odd positive Witt realization]
+\label{cor:cbt-witt-density}
+\ClaimStatusProvedHere
+Define
+\[
+X_{2m+1}:=-t^{2m+2}\partial_t.
+\]
+Then for every $m\ge0$ and every $y_1,\dots,y_{m+1}\in M$,
+\[
+\Psi\Phi\bigl(R_m(y_1,\dots,y_{m+1})\bigr)
+=
+\mathcal L_{X_{2m+1}}
+\left(
+\prod_{i=1}^{m+1}\Phi(y_i)\,dt
+\right).
+\]
+Thus the odd ladder sector is the odd positive Witt family acting on the density line.
+\end{corollary}
+
+\begin{proof}
+If $g(t)=\prod_i\Phi(y_i)$, then
+\[
+\mathcal L_{X_{2m+1}}(g\,dt)
+=
+-\bigl(t^{2m+2}g'+(2m+2)t^{2m+1}g\bigr)\,dt
+=
+-\partial_t(t^{2m+2}g)\,dt.
+\]
+Now apply Theorem~\ref{thm:cbt-airy-witt}.
+\end{proof}
+
+\begin{remark}[what this does and does not say]
+\label{def:cbt-witt-caveat}
+The span of the odd positive Witt modes is \emph{not} a Lie subalgebra of the Witt algebra: the bracket of two odd modes is even. Accordingly, the theorem should be read as a representation-theoretic statement about a computed sector of the full transferred $\Linf$ deformation, not as a claim that the odd ladder closes as a Lie algebra by itself. The missing even modes should arise from brackets involving further degree-$0$ highest-weight sectors of $H_b^{0,0}(S^3)$.
+\end{remark}
+
+\begin{remark}[why ``Airy--Witt''?]
+\label{def:cbt-airy-witt-name}
+The formula
+\[
+D_m=-\partial_t\circ M_{t^{2m+2}}
+\]
+packages each higher bracket as one multiplication followed by one derivative. This is the one-dimensional normal form that remains after the full three-dimensional transfer is collapsed onto the odd ladder. It is ``Witt'' because it is precisely the weight-one tensor-density representation of the vector field $-t^{2m+2}\partial_t$, and ``Airy'' because the operator takes the exact shape of a first-order creation-annihilation composite.
+\end{remark}

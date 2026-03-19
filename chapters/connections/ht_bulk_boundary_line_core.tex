@@ -1,0 +1,1225 @@
+\label{chap:ht-bulk-boundary-line}
+
+% Local macros (not in main.tex preamble).
+\providecommand{\kk}{\mathbb{k}}
+\providecommand{\SCop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\providecommand{\cJ}{\mathcal J}
+\providecommand{\cL}{\mathcal L}
+\providecommand{\PV}{\operatorname{PV}}
+\providecommand{\ot}{\otimes}
+\providecommand{\BBar}{\operatorname{Bar}}
+\providecommand{\Cobar}{\operatorname{\Omega}}
+\providecommand{\Spf}{\operatorname{Spf}}
+\providecommand{\mc}{\operatorname{MC}}
+\providecommand{\op}{\mathrm{op}}
+\providecommand{\der}{\mathrm{der}}
+\providecommand{\Kline}{K_{\mathrm{line}}}
+\providecommand{\intr}{\mathrm{intr}}
+\providecommand{\free}{\mathrm{free}}
+\providecommand{\eff}{\mathrm{eff}}
+\providecommand{\st}{\mathrm{st}}
+\providecommand{\ex}{\mathrm{ex}}
+\providecommand{\minmod}{\mathrm{min}}
+\providecommand{\expmod}{\mathrm{exp}}
+\providecommand{\hkR}{\mathrm{HKR}}
+\providecommand{\sn}{\mathrm{SN}}
+\providecommand{\hSym}{\widehat{\Sym}}
+
+
+\section{The bulk-boundary-line Koszul triangle}
+\label{sec:ht-bulk-boundary-line}
+
+A three-dimensional holomorphic--topological theory on
+$\C \times \R$ produces three algebraic objects: bulk local
+operators, boundary local operators, and line operators.  The
+naive identification ``bulk $\simeq$ boundary $\simeq$ line'' is
+false.  The corrected triangle, derived from locality and
+Hochschild theory, is
+\begin{equation}\label{eq:global-corrected-triangle}
+\Abulk
+\;\simeq\;
+\Zder(\Bbound)
+\;\simeq\;
+\Zder(\cC_{\mathrm{line}})
+\;\simeq\;
+\HH^\bullet(A^!),
+\qquad
+\cC_{\mathrm{line}}\simeq A^!\text{-mod}.
+\end{equation}
+The bulk is the \emph{derived center} of the boundary, not the
+boundary itself; line operators are modules for the Koszul
+dual~$A^!$, not for the bulk algebra.  This is the 3d
+holomorphic--topological analogue of the strongest open/closed
+statements in 2d TFT and the B-model.
+
+Three principles guide the constructions that follow: (P1)~intrinsic
+formulations before complement-dependent presentations;
+(P2)~derived or $A_\infty$ models before cohomology-level data;
+(P3)~local exact theorems before global categorical comparisons.
+
+\begin{remark}[All three vertices are homotopy objects first]
+\label{rem:triangle-homotopy-first}
+\index{bulk-boundary-line!homotopy first}
+Each vertex of the corrected triangle is represented in practice by a
+chosen strict model---a dg or chiral algebra, an $A_\infty$ boundary
+algebra, or a dg category of modules---but the triangle itself is
+invariant only up to derived/Morita and $L_\infty$ equivalence.  This
+is exactly why higher operations from \cite{GKW24} and the line-operator
+$A_\infty$ package of \cite{DNP25} fit naturally into the same bulk--
+boundary--line story
+(Convention~\ref{conv:vol2-strict-models}).
+\end{remark}
+
+\begin{remark}[Two-color refinement of the triangle]
+\label{rem:triangle-two-colors}
+\index{bulk-boundary-line!two-color refinement}
+The corrected triangle admits a two-color refinement.
+Closed-color Koszul duality identifies the bulk:
+$A_{\mathrm{bulk}} \simeq \mathrm{ChirHoch}^\ast(\cA^!)$
+(Theorem~\ref{thm:bulk_hochschild}).
+Open-color Koszul duality identifies line operators:
+$\mathcal{C}_{\mathrm{line}} \simeq \cA^!\text{-mod}$
+(Theorem~\ref{thm:lines_as_modules}).
+The $R$-matrix lives in the interaction of both colors:
+it is a mixed-color datum in the holomorphic weight
+filtration on $\SCchtop$ (Theorem~\ref{thm:spectral-parameter-from-closed-color}).
+The triangle is the statement that $\cA^!$ carries a full
+$\SCchtop$-algebra structure
+(Theorem~\ref{thm:dual-sc-algebra}), from which all three
+vertices and all connecting maps are recovered.
+
+Algebraically, the open-color structure is controlled by the
+$\mathsf{E}_1$ modular convolution algebra
+$\mathfrak{g}_\cA^{\mathrm{mod},E_1}$
+of Vol~I (\S\ref{sec:e1-holographic-bridge}): the
+Maurer--Cartan element $\Theta_\cA^{E_1}$ specialises at
+arity~$2$ to the spectral $R$-matrix $r(z)$, at arity~$3$ to
+the Drinfeld associator, and its $\Sigma_r$-coinvariant
+recovers the closed-color shadow tower $\kappa, C, Q, \ldots$
+of the bulk algebra.
+\end{remark}
+
+\section{Literature backbone, formal consequences, and status ledger}\label{sec:backbone}
+
+Before constructing anything new, we fix the status of the foundational inputs.
+
+\subsection{What is already in the literature}
+
+The boundary-chiral-algebra paper \cite{CDG20} establishes the cohomology-level bulk algebra, its shifted Poisson bracket, the action of bulk on boundary operators, and the expectation of higher derived operations and of a derived bulk--boundary comparison map.  Zeng's 2023 paper \cite{Zeng23} gives strong evidence for the bulk/boundary comparison by identifying boundary chiral algebras with universal defect algebras in families of examples.  The higher-operations paper \cite{GKW24} supplies the perturbative technology that constructs higher operations and proves the quadratic identities they satisfy in a broad holomorphic--topological setting.  The 2025 line paper \cite{DNP25} identifies line operators with modules over a Koszul-dual $A_\infty$ algebra and constructs the dg-shifted-Yangian structures organizing their OPE.
+
+These are the literature-backed pillars on which the present development stands.
+
+\subsection{Formal consequences}
+
+Once one has:
+\begin{enumerate}[label=(\roman*),leftmargin=1.8em]
+\item a rich boundary condition $b$ whose boundary algebra $B_b$ generates the line category;
+\item an equivalence $\cC_{\mathrm{line}}\simeq B_b\text{-mod}$ or, more invariantly, a compact generator $M_b\in \cC_{\mathrm{line}}$ with $B_b\simeq \End_{\cC_{\mathrm{line}}}(M_b)$;
+\item and a quasi-isomorphism $\beta_{\der}:\Abulk\to \Zder(B_b)$,
+\end{enumerate}
+the global triangle \eqref{eq:global-corrected-triangle} becomes formal: centers are Morita invariant, so $\Zder(B_b)\simeq \Zder(\cC_{\mathrm{line}})$; if $\cC_{\mathrm{line}}\simeq A^!\text{-mod}$, then $\Zder(\cC_{\mathrm{line}})\simeq \HH^\bullet_{\mathrm{ch}}(A^!)$.
+
+This part is not new mathematics.  It is the clean formal envelope inside which the real work must be done.
+
+\begin{proposition}[Formal reduction of the global triangle; \ClaimStatusProvedHere]\label{prop:formal-global-triangle}
+Assume there is a boundary condition $b$ such that:
+\begin{enumerate}[label=(\roman*),leftmargin=1.8em]
+\item $b$ defines a compact generator $M_b$ of the line category $\cC_{\mathrm{line}}$;
+\item $B_b:=\End_{\cC_{\mathrm{line}}}(M_b)$ is a model for the boundary open sector;
+\item the derived bulk--boundary map $\beta_{\der}:\Abulk\to \Zder(B_b)$ is a quasi-isomorphism;
+\item $\cC_{\mathrm{line}}\simeq A^!\text{-mod}$ for a Koszul-dual $A_\infty$ algebra $A^!$.
+\end{enumerate}
+Then there are canonical quasi-isomorphisms
+\[
+\Abulk
+\;\simeq\;
+\Zder(B_b)
+\;\simeq\;
+\Zder(\cC_{\mathrm{line}})
+\;\simeq\;
+\HH^\bullet_{\mathrm{ch}}(A^!).
+\]
+\end{proposition}
+
+\begin{proof}
+The first equivalence is hypothesis (iii).  Since $M_b$ is a compact generator, $\cC_{\mathrm{line}}$ is derived Morita equivalent to $B_b\text{-mod}$.  Derived centers are Morita invariant, giving $\Zder(B_b)\simeq \Zder(\cC_{\mathrm{line}})$.  Hypothesis (iv) identifies $\cC_{\mathrm{line}}$ with $A^!\text{-mod}$, and the derived center of the module category is Hochschild cochains of $A^!$.
+\end{proof}
+
+\subsection{What is new in this manuscript}
+
+The novelty of this note lies elsewhere: it strengthens the microlocal algebraic core.  We prove, inside a large but exact local sector, that the boundary, line, and bulk vertices can each be constructed explicitly and compared by theorems rather than analogies.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{|p{0.24\textwidth}|p{0.23\textwidth}|p{0.43\textwidth}|}
+\hline
+\textbf{Layer} & \textbf{Status} & \textbf{Content} \\
+\hline
+Bulk shifted Poisson/chiral algebra; boundary module structure & literature & Costello--Dimofte--Gaiotto \cite{CDG20}. \\
+\hline
+Higher perturbative operations and quadratic identities & literature & Gaiotto--Kulp--Wu \cite{GKW24}. \\
+\hline
+Universal defect evidence for the bulk/boundary comparison & literature & Zeng \cite{Zeng23}. \\
+\hline
+Line category as modules over $A^!$; dg-shifted Yangian package & literature & Dimofte--Niu--Py \cite{DNP25}. \\
+\hline
+Formal implication ``rich boundary + bulk/boundary comparison $\Rightarrow$ corrected triangle'' & formal & Proposition~\ref{prop:formal-global-triangle}. \\
+\hline
+Intrinsic boundary $A_\infty$ algebra from normal Taylor classes & new, proved here & Theorem~\ref{thm:intrinsic-boundary}. \\
+\hline
+Boundary Thom--Sebastiani and stabilization calculus & new, proved here & Theorems~\ref{thm:TS}, \ref{thm:contractible-stab}, \ref{thm:clifford-stab}, \ref{thm:relative-morse}. \\
+\hline
+Boundary-linear LG theorem: bulk $=$ shifted cotangent of the derived boundary zero locus & new, proved here & Theorems~\ref{thm:dcrit-shiftedcot}, \ref{thm:boundary-linear-bulk-boundary}. \\
+\hline
+One-step Jacobi coalgebra and exact pointed line algebra & new, proved here & Theorems~\ref{thm:exact-line}, \ref{thm:mc-vacua}, \ref{thm:polarized-reconstruction}. \\
+\hline
+Boundary Kuranishi elimination and minimal line algebra & new, proved here & Theorems~\ref{thm:boundary-kuranishi}, \ref{thm:minimal-pointed-line}. \\
+\hline
+Boundary-linear line Mather--Yau theorem and microlocal classification & new, proved here & Theorem~\ref{thm:line-mather-yau}. \\
+\hline
+All-theory global Koszul triangle & conjectural & See Section~\ref{sec:global}. \\
+\hline
+\end{longtable}
+\end{center}
+
+
+\section{First principles: locality, centers, and the correct shape of open/closed/line structures}\label{sec:first-principles}
+
+The boundary and line sectors do not stand beside the bulk as parallel commutative algebras.  They sit one categorical level lower.  The local operator algebra is bulk.  The algebra of endomorphisms of a boundary vacuum or of a line defect is an open-sector presentation.  The bridge from open data back to bulk data is the derived center.
+
+This principle is older than the present subject.  In 2d open/closed TFT and in the B-model, the closed sector is recovered from the derived center of the open sector.  In representation theory, centers are traced not by forgetting categories to algebras but by passing from convolution algebras to inertia geometry.  The same architecture reappears here.
+
+\subsection{Why centers must appear}
+
+Suppose $\cC$ is a dg or $A_\infty$ category representing a line sector.  Its center is not a subalgebra of a chosen endomorphism algebra; it is the derived endomorphism algebra of the identity functor.  If $\cC\simeq A\text{-mod}$, then the center of $\cC$ is Hochschild cochains of $A$:
+\[
+\Zder(\cC)\simeq \RHom_{\operatorname{Fun}(\cC,\cC)}(\id_{\cC},\id_{\cC})\simeq \HH^\bullet(A).
+\]
+This is the precise sense in which bulk can be the center of the line sector while lines themselves are controlled by a noncommutative algebra.
+
+\subsection{Why Morita invariance matters}
+
+If a rich boundary condition $b$ generates the line category and $M_b$ denotes the corresponding boundary vacuum object, then $B_b=\End(M_b)$ is only a presentation.  Different generators yield different algebras but equivalent module categories.  Bulk reconstruction therefore cannot depend on the chosen presentation.  Derived center and Hochschild cochains are the correct invariants precisely because they are Morita invariant.
+
+\subsection{Why the exact local sector is decisive}
+
+A global theorem comparing bulk, boundary, and line categories in every holomorphic--topological theory is too large to attack head-on.  One needs a local exact sector where the objects admit literal formulas.  The boundary-linear Landau--Ginzburg sector plays that role.  In that sector:
+\begin{itemize}[leftmargin=1.8em]
+\item the boundary algebra is an explicit commutative dg algebra;
+\item the local pointed line algebra is an explicit $A_\infty$ algebra;
+\item the derived center can be computed directly;
+\item Kuranishi elimination is exact rather than merely homotopy-theoretic.
+\end{itemize}
+What follows is the construction of that exact local backbone.
+
+
+\section{Intrinsic boundary $A_\infty$ algebra from first principles}\label{sec:intrinsic}
+
+Let $V$ be a finite-dimensional vector space, let $L\subset V$ be a linear subspace, and let
+\[
+Q:=V/L.
+\]
+Let $I_L\subset \hSym(V^\vee)$ denote the ideal of functions vanishing on $L$, so the completed formal neighborhood of $L$ in $V$ is
+\[
+\widehat{V}_L:=\Spf\bigl(\hSym(V^\vee)^\wedge_{I_L}\bigr).
+\]
+Assume $W\in \hSym(V^\vee)^\wedge_{I_L}$ vanishes on $L$, equivalently $W\in I_L$.
+
+The aim is to define a boundary $A_\infty$ algebra depending only on the formal germ of $W$ along $L$, with no choice of complement.
+
+\subsection{Intrinsic normal Taylor classes}
+
+The normal Taylor coefficients of $W$ along $L$ are the classes
+\[
+\tau_n(W)\in I_L^n/I_L^{n+1}\cong \widehat{\cO}(L)\ot \Sym^n(Q^\vee),
+\qquad n\ge 1.
+\]
+Thus $W$ determines and is determined by the sequence $\{\tau_n(W)\}_{n\ge 1}$.
+
+Choose, only locally for writing formulas, a splitting $V=L\oplus N$.  Then $Q\cong N$ and we may write
+\[
+W(x,y)=\sum_{n\ge 1} W_n(x;y),
+\qquad
+W_n(x;\lambda y)=\lambda^n W_n(x;y).
+\]
+Then $\tau_n(W)$ is exactly the class of $W_n(x;y)$.
+
+\subsection{The underlying graded algebra}
+
+Set
+\[
+B^{\intr,\gr}_{L,W}:=\widehat{\cO}(L)\ot \Lambda(Q),
+\]
+where the copy of $Q$ sits in cohomological degree $1$.  If $q_1,\dots,q_r$ is a basis of $Q$ and $\psi_1,\dots,\psi_r$ the corresponding degree-$1$ generators, then $B^{\intr,\gr}_{L,W}$ is the free completed graded-commutative algebra on $\widehat{\cO}(L)$ and the odd variables $\psi_a$.
+
+The intrinsic Taylor classes of $W$ will produce higher multiderivations on this free algebra.
+
+\subsection{From Taylor classes to multiderivations}
+
+Fix a splitting temporarily and choose coordinates $x_i$ on $L$ and basis vectors $e_a$ of $Q$.  Write
+\[
+\tau_n(W)=\sum_{a_1,\dots,a_n} f_{a_1\cdots a_n}(x)\, e_{a_1}^\vee\cdots e_{a_n}^\vee.
+\]
+Define an $n$-ary Hochschild cochain $\mu_n$ on $B^{\intr,\gr}_{L,W}$ by
+\begin{equation}\label{eq:intrinsic-mu}
+\mu_n(a_1,\dots,a_n)
+:=
+\sum_{a_1,\dots,a_n}
+f_{a_1\cdots a_n}(x)\,
+(\partial_{\psi_{a_1}}a_1)\cdots(\partial_{\psi_{a_n}}a_n).
+\end{equation}
+Each $\mu_n$ is a multiderivation of the free graded-commutative product.
+
+The point is that the collection $\{\mu_n\}_{n\ge 1}$ is not arbitrary.  It comes from the single function $W$, hence satisfies the Stasheff system.
+
+\begin{theorem}[Intrinsic boundary $A_\infty$ algebra; \ClaimStatusProvedHere]\label{thm:intrinsic-boundary}
+For every formal pair $(L\subset V,W)$ with $W|_L=0$, the operations
+\[
+m_1=\mu_1,\qquad
+m_2=m_2^{\free}+\mu_2,\qquad
+m_n=\mu_n\quad (n\ge 3),
+\]
+define a complete filtered $A_\infty$ algebra structure on
+\[
+B^\intr_{L,W}:= \bigl(B^{\intr,\gr}_{L,W},\{m_n\}_{n\ge 1}\bigr).
+\]
+Its quasi-isomorphism class depends only on the formal germ of $W$ along $L$ and is independent of the chosen complement $V=L\oplus N$.
+\end{theorem}
+
+\begin{proof}
+The only substantive issue is the Stasheff identities.  Since every $\mu_n$ is a multiderivation, the full set of identities is equivalent to the vanishing of the Gerstenhaber bracket of the total Hochschild cochain
+\[
+\mu:=\sum_{n\ge 1}\mu_n.
+\]
+Under the Hochschild--Kostant--Rosenberg map, $\mu$ corresponds to the formal odd polyvector field obtained by replacing the normal variables in the Taylor expansion of $W$ by the odd derivations $\partial_{\psi_a}$.  Concretely, in split coordinates
+\[
+\Theta_W:=\sum_{n\ge 1}
+\sum_{a_1,\dots,a_n}
+f_{a_1\cdots a_n}(x)\,
+\partial_{\psi_{a_1}}\wedge\cdots\wedge \partial_{\psi_{a_n}}.
+\]
+Because the coefficients $f_{a_1\cdots a_n}(x)$ depend only on tangent coordinates and the odd derivations $\partial_{\psi_a}$ supercommute, one has
+\[
+[\Theta_W,\Theta_W]_{\sn}=0.
+\]
+Transporting back through HKR gives $[\mu,\mu]_G=0$.  Since $m_2^{\free}$ is associative and each $\mu_n$ is a multiderivation for $m_2^{\free}$, one also has
+\[
+[m_2^{\free},\mu]_G=0,
+\qquad
+[m_2^{\free},m_2^{\free}]_G=0.
+\]
+Hence the total coderivation squares to zero.
+
+If one changes the complement $N$, the intrinsic Taylor classes $\tau_n(W)$ do not change, so the resulting $A_\infty$ structures are identified after transporting along the induced algebra isomorphism.  Therefore the quasi-isomorphism class depends only on the formal germ.
+\end{proof}
+
+\begin{corollary}[Formal-neighborhood invariance; \ClaimStatusProvedHere]\label{cor:formal-neighborhood}
+If two pairs $(L\subset V,W)$ and $(L'\subset V',W')$ have isomorphic formal neighborhoods carrying $W$ to $W'$, then their intrinsic boundary $A_\infty$ algebras are $A_\infty$-isomorphic.
+\end{corollary}
+
+\begin{proof}
+An isomorphism of formal neighborhoods identifies the ideals $I_L/I_L^{n+1}$ with $I_{L'}/I_{L'}^{n+1}$ and therefore identifies the Taylor classes $\tau_n(W)$ and $\tau_n(W')$.  Formula \eqref{eq:intrinsic-mu} then produces the same higher operations.
+\end{proof}
+
+\begin{corollary}[Boundary-linear strictness; \ClaimStatusProvedHere]\label{cor:boundary-linear-strict}
+If all Taylor classes $\tau_n(W)$ vanish for $n\ge 2$, equivalently if $W$ is linear in the normal directions, then $B^\intr_{L,W}$ is a strict commutative dg algebra.
+\end{corollary}
+
+\begin{proof}
+In that case only $\mu_1$ survives, so $m_n=0$ for $n\ge 3$ and the only deformation of the free product is the differential $m_1$.
+\end{proof}
+
+\begin{remark}
+This corollary is the gateway to the exact local sector treated later.  The boundary-linear Landau--Ginzburg models are exactly the models in which the intrinsic $A_\infty$ boundary algebra collapses to a strict dg algebra, making exact computation possible.
+\end{remark}
+
+
+\section{Multiplicativity and stabilization: Thom--Sebastiani, contractible blocks, and Clifford blocks}\label{sec:ts-knorrer}
+
+The intrinsic boundary construction should behave like a stable algebraic object.  Three operations test this stability: external sums, tangent-normal hyperbolic stabilizations, and pure-normal hyperbolic stabilizations.
+
+\subsection{Thom--Sebastiani}
+
+Let $(L_i\subset V_i,W_i)$, $i=1,2$, be two formal pairs with $W_i|_{L_i}=0$.  Form
+\[
+(L_1\oplus L_2 \subset V_1\oplus V_2,\; W_1\boxplus W_2),
+\qquad
+(W_1\boxplus W_2)(v_1,v_2)=W_1(v_1)+W_2(v_2).
+\]
+
+\begin{theorem}[Boundary Thom--Sebastiani; \ClaimStatusProvedHere]\label{thm:TS}
+There is a natural filtered $A_\infty$ isomorphism
+\[
+B^\intr_{L_1\oplus L_2,\;W_1\boxplus W_2}
+\cong
+B^\intr_{L_1,W_1}\,\widehat{\otimes}\, B^\intr_{L_2,W_2}.
+\]
+\end{theorem}
+
+\begin{proof}
+The ideal filtration of the product neighborhood splits, and the normal Taylor classes add:
+\[
+\tau_n(W_1\boxplus W_2)=\tau_n(W_1)\oplus \tau_n(W_2).
+\]
+Therefore the multiderivations defining the $A_\infty$ structure on the left are exactly the sums of the multiderivations from the two factors, which is the completed tensor product $A_\infty$ structure.
+\end{proof}
+
+\subsection{Tangent-normal hyperbolic stabilization}
+
+Suppose $U$ is a finite-dimensional vector space and consider the enlarged data
+\[
+V':=V\oplus U\oplus U^\vee,
+\qquad
+L':=L\oplus U,
+\qquad
+W':=W+\langle u,v\rangle,
+\]
+where $u\in U$ is tangent to the boundary and $v\in U^\vee$ is normal.  Then one leg of the hyperbolic pair is tangent and one leg is normal.
+
+\begin{theorem}[Contractible stabilization; \ClaimStatusProvedHere]\label{thm:contractible-stab}
+With the above notation,
+\[
+B^\intr_{L',W'}
+\cong
+B^\intr_{L,W}\,\widehat{\otimes}\,
+\bigl(\widehat{\Sym}(U^\vee)\ot \Lambda(U^\vee),\, d\xi=u\bigr),
+\]
+where the second factor is the ordinary completed Koszul resolution of $\kk$.  In particular
+\[
+B^\intr_{L',W'}\simeq B^\intr_{L,W}
+\]
+as $A_\infty$ algebras.
+\end{theorem}
+
+\begin{proof}
+The new potential is the external sum of $W$ and the linear-normal function $\langle u,v\rangle$ on $U\oplus U^\vee$ relative to the boundary $U\subset U\oplus U^\vee$.  By Theorem~\ref{thm:TS} it suffices to compute the second factor.  But that factor is exactly the strict dg algebra with even variables $u$ and odd variables $\xi$ corresponding to the normal directions, with differential $d\xi=u$.  This is contractible.
+\end{proof}
+
+\subsection{Pure-normal hyperbolic stabilization}
+
+Now suppose both legs of the hyperbolic pair are normal:
+\[
+V' := V\oplus U\oplus U^\vee,
+\qquad
+L' := L,
+\qquad
+W' := W+\langle u,v\rangle,
+\]
+where both $u$ and $v$ are normal directions.
+
+\begin{theorem}[Hyperbolic Clifford stabilization; \ClaimStatusProvedHere]\label{thm:clifford-stab}
+There is a natural dg isomorphism
+\[
+B^\intr_{L,W+\langle u,v\rangle}
+\cong
+B^\intr_{L,W}\,\widehat{\otimes}\, \Cl(U\oplus U^\vee),
+\]
+where $\Cl(U\oplus U^\vee)$ denotes the completed hyperbolic Clifford algebra.  Consequently
+\[
+\Perf\bigl(B^\intr_{L,W+\langle u,v\rangle}\bigr)
+\simeq
+\Perf\bigl(B^\intr_{L,W}\bigr)
+\]
+after stabilization by the spinor module $\Lambda(U)$.
+\end{theorem}
+
+\begin{proof}
+In the pure-normal case, the new Taylor data are quadratic and nondegenerate entirely in the normal variables.  The intrinsic $A_\infty$ operations contributed by the pair $(u,v)$ assemble into the standard hyperbolic Clifford relation.  The resulting factor is exactly $\Cl(U\oplus U^\vee)$.  Since this Clifford algebra is Morita equivalent to $\kk$ via the spinor module $\Lambda(U)$, tensoring with it does not change the perfect module category.
+\end{proof}
+
+\begin{remark}
+This is the boundary-level zero-mode shadow of Kn\"orrer periodicity.  What matters is not a periodicity statement in a triangulated category, but the explicit identification of the open-sector factor that is being added: a hyperbolic Clifford block.
+\end{remark}
+
+\subsection{Relative formal Morse splitting}
+
+The preceding theorems combine with a formal Morse lemma relative to the boundary.
+
+\begin{theorem}[Relative formal Morse splitting; \ClaimStatusProvedHere]\label{thm:relative-morse}
+Let $V=L\oplus K\oplus U\oplus U^\vee$ and let
+\[
+W(x,k,u,v)
+\]
+be a formal potential vanishing on $L$ whose quadratic part in the $(u,v)$ variables is the split hyperbolic form $\langle u,v\rangle$.  Assume there are no linear terms in $u$ or $v$ and no mixed quadratic terms between $(u,v)$ and the residual normal directions $K$.  Then there is a formal automorphism preserving $L$ and fixing the residual normal directions to first order such that
+\[
+W \sim W_{\mathrm{red}}(x,k)+\langle u,v\rangle.
+\]
+Consequently
+\[
+B^\intr_{L,W}
+\simeq
+B^\intr_{L,W_{\mathrm{red}}}\,\widehat{\otimes}\,\Cl(U\oplus U^\vee)
+\]
+in the pure-normal case, and analogously with a contractible Koszul factor in the tangent-normal case.
+\end{theorem}
+
+\begin{proof}
+The formal automorphism is constructed inductively by degree.  Because the quadratic form on $(u,v)$ is split and nondegenerate, the homological operator given by contraction with $\langle u,v\rangle$ is invertible on all higher monomials involving at least one $u$ or $v$.  Therefore every higher interaction involving the hyperbolic directions can be killed order by order.  The factorization of the boundary algebra then follows from Theorems~\ref{thm:contractible-stab} and \ref{thm:clifford-stab}.
+\end{proof}
+
+\begin{remark}
+This theorem is the reduction machine behind the later exact sector.  It says that split hyperbolic directions are not merely harmless; they are explicitly removable.  What remains after their removal is the genuine singular residue.
+\end{remark}
+
+
+\section{The exact boundary-linear Landau--Ginzburg sector}\label{sec:boundary-linear}
+
+We now pass to the exact sector where the intrinsic $A_\infty$ algebra becomes a strict dg algebra and every object can be written explicitly.
+
+Let $V=L\oplus N$ and let
+\[
+F:L\longrightarrow N^\vee
+\]
+be a formal map.  Define the superpotential
+\[
+W(x,y):=\langle y, F(x)\rangle,
+\qquad
+x\in L,\; y\in N.
+\]
+Then $W$ vanishes on $L$ and is linear in the normal variables $y$.
+
+\subsection{Boundary dg algebra and derived zero locus}
+
+Choose a basis $n_a$ of $N$ and odd generators $\eta_a$ dual to $n_a$.  The boundary algebra is the strict commutative dg algebra
+\begin{equation}\label{eq:boundary-linear-dga}
+B_{L,W}
+:=
+\bigl(\widehat{\cO}(L)\ot \Lambda(N),\ d\eta_a=F_a(x),\ dx_i=0\bigr).
+\end{equation}
+This is the Koszul algebra of the equations $F_a(x)=0$.
+
+\begin{definition}
+The derived boundary zero locus of $F$ is
+\[
+Z_F^{\der}:=\Spec(B_{L,W}).
+\]
+\end{definition}
+
+\begin{remark}
+In ordinary geometry $Z_F$ would be the vanishing locus $F^{-1}(0)\subset L$.  The dg algebra $B_{L,W}$ remembers the derived structure and therefore the higher obstruction theory of the equations.
+\end{remark}
+
+\subsection{The bulk critical locus as a shifted cotangent}
+
+The bulk derived critical locus of $W$ is the dg scheme cut out by the equations
+\[
+\frac{\partial W}{\partial y_a}=F_a(x)=0,
+\qquad
+\frac{\partial W}{\partial x_i}
+=
+\sum_a y_a\frac{\partial F_a}{\partial x_i}(x)=0.
+\]
+This is precisely the shifted cotangent to the derived zero locus.
+
+\begin{theorem}[Derived critical locus theorem; \ClaimStatusProvedHere]\label{thm:dcrit-shiftedcot}
+For the boundary-linear superpotential $W(x,y)=\langle y,F(x)\rangle$ there is a canonical equivalence of formal dg schemes
+\[
+\dCrit(W)\simeq T^*[-1] Z_F^{\der}.
+\]
+\end{theorem}
+
+\begin{proof}
+The shifted cotangent algebra of $Z_F^{\der}$ is the algebra of polyvector fields on $Z_F^{\der}$:
+\[
+\cO\bigl(T^*[-1]Z_F^{\der}\bigr)\cong \PV(Z_F^{\der}).
+\]
+Using the Koszul model \eqref{eq:boundary-linear-dga}, this algebra is generated by:
+\begin{itemize}[leftmargin=1.8em]
+\item even coordinates $x_i$ on $L$,
+\item odd coordinates $\eta_a$ from the derived equations $F_a(x)=0$,
+\item odd tangent polyvectors $\theta_i$ dual to $x_i$,
+\item even tangent polyvectors $y_a$ dual to $\eta_a$.
+\end{itemize}
+Its differential is induced by the boundary differential and is exactly
+\[
+d\theta_i
+=
+\sum_a y_a\frac{\partial F_a}{\partial x_i}(x),
+\qquad
+dy_a=0,
+\qquad
+d\eta_a=F_a(x),
+\qquad
+dx_i=0.
+\]
+But this is exactly the standard dg algebra of functions on the derived critical locus of $W(x,y)=\langle y,F(x)\rangle$.  Hence the two dg schemes are canonically equivalent.
+\end{proof}
+
+\subsection{Derived center of the boundary algebra}
+
+The usual HKR theorem identifies Hochschild cochains of a smooth commutative algebra with polyvector fields.  In the present dg setting, the same philosophy gives the derived center of the boundary dg algebra as the shifted cotangent algebra of the derived boundary zero locus.  Because the bulk critical locus is exactly that shifted cotangent, the bulk is recovered from the boundary algebra.
+
+\begin{theorem}[Boundary-linear bulk/boundary theorem; \ClaimStatusProvedHere]\label{thm:boundary-linear-bulk-boundary}
+For $W(x,y)=\langle y,F(x)\rangle$ there is a canonical quasi-isomorphism
+\[
+\Zder(B_{L,W})
+\simeq
+\HH^\bullet(B_{L,W})
+\simeq
+\cO\bigl(T^*[-1]Z_F^{\der}\bigr)
+\simeq
+\cO\bigl(\dCrit(W)\bigr).
+\]
+In particular the derived center of the boundary algebra equals the bulk algebra in the boundary-linear sector.
+\end{theorem}
+
+\begin{proof}
+Because $B_{L,W}$ is a cofibrant completed commutative dg algebra, its derived center is modeled by Hochschild cochains.  The dg HKR map identifies Hochschild cochains with polyvector fields on the derived affine dg scheme $Z_F^{\der}$.  Theorem~\ref{thm:dcrit-shiftedcot} identifies those polyvectors with functions on the bulk critical locus.
+\end{proof}
+
+\subsection{The free polarization theorem as the zero superpotential case}
+
+Setting $F=0$ gives the free model.  Then
+\[
+B_L^{\free}
+=
+\widehat{\Sym}(L^\vee)\ot \Lambda(N),
+\qquad
+Z_0^{\der}=L\oplus N^\vee[1].
+\]
+The bulk algebra is
+\[
+A_{\mathrm{bulk}}^{\free}(V)
+=
+\widehat{\Sym}(V^\vee)\ot \Lambda(V).
+\]
+
+\begin{corollary}[Free polarization theorem; \ClaimStatusProvedHere]\label{cor:free-polarization}
+For a linear boundary condition $L\subset V$ with quotient $Q=V/L$ one has
+\[
+B_L^{\free}\cong \widehat{\Sym}(L^\vee)\ot \Lambda(Q),
+\qquad
+K_L^{\free}\simeq \widehat{\Sym}(Q^\vee)\ot \Lambda(L),
+\]
+and
+\[
+\HH^\bullet(B_L^{\free})
+\cong
+\HH^\bullet(K_L^{\free})
+\cong
+\widehat{\Sym}(V^\vee)\ot \Lambda(V).
+\]
+Thus the boundary and line algebras are opposite Koszul polarizations of the full free bulk algebra.
+\end{corollary}
+
+\begin{proof}
+The first identity is the boundary dg algebra with $F=0$.  The second is ordinary completed Koszul duality.  The final statement follows from Theorem~\ref{thm:boundary-linear-bulk-boundary} and the Morita invariance of Hochschild cohomology.
+\end{proof}
+
+
+\section{Exact pointed lines, one-step Jacobi coalgebras, and vacuum twisting}\label{sec:exact-lines}
+
+The boundary-linear sector is exact enough not only to compute the boundary algebra but also to compute the line algebra attached to a \emph{pointed} boundary vacuum.
+
+Fix a point
+\[
+p\in F^{-1}(0)\subset L.
+\]
+Complete at $p$ and set
+\[
+U:=T_pL,
+\qquad
+R:=N^\vee.
+\]
+The completed local boundary algebra is
+\[
+B_{F,p}
+=
+\bigl(\kk[[U^\vee]]\ot \Lambda(R^\vee),\ d\eta_\alpha=F_\alpha(x)\bigr).
+\]
+
+\subsection{The one-step Jacobi coalgebra}
+
+The Taylor coefficients of $F$ at $p$ assemble into a canonical dg coalgebra.
+
+\begin{definition}[One-step Jacobi coalgebra]
+The one-step Jacobi coalgebra of the pointed germ $(F,p)$ is
+\[
+\cJ_{F,p}:=\bigl(S^c(sU\oplus R),\, b_F\bigr),
+\]
+where $S^c$ denotes the cofree cocommutative coalgebra and the coderivation $b_F$ is determined by its Taylor coefficients
+\[
+b_{F,n}: S^n(sU)\longrightarrow R
+\]
+given by the $n$-th derivatives of $F$ at $p$.
+\end{definition}
+
+The terminology is deliberate: this coalgebra is the local coalgebraic envelope of the boundary equations.  It is the object from which both the local boundary algebra and the pointed line algebra can be recovered.
+
+\begin{theorem}[Exact presentation theorem; \ClaimStatusProvedHere]\label{thm:exact-line}
+There are canonical identifications
+\[
+B_{F,p}\cong \cJ_{F,p}^\vee,
+\qquad
+K^{\ex}_{F,p}:=\Cobar(\cJ_{F,p})
+\simeq
+\RHom_{B_{F,p}}(\kk,\kk).
+\]
+Equivalently, the pointed line algebra is the cobar algebra of the local Jacobi coalgebra.
+\end{theorem}
+
+\begin{proof}
+The completed dual of the cofree coalgebra $S^c(sU\oplus R)$ is the completed free commutative algebra on $U^\vee$ and $R^\vee[-1]$, which is exactly the underlying graded algebra of $B_{F,p}$.  The coderivation $b_F$ dualizes to the differential $d\eta_\alpha=F_\alpha(x)$, so $B_{F,p}\cong \cJ_{F,p}^\vee$.
+
+Standard bar--cobar/Koszul duality for complete augmented commutative dg algebras identifies the derived endomorphisms of the residue field with the cobar of the dual coalgebra.  Applying this to $B_{F,p}$ yields
+\[
+\RHom_{B_{F,p}}(\kk,\kk)\simeq \Cobar(\cJ_{F,p}).
+\]
+\end{proof}
+
+\subsection{Explicit formula for the pointed line algebra}
+
+Choose coordinates $x_1,\dots,x_u$ on $U$ centered at $p$, a basis $r_\alpha$ of $R$, odd generators $\lambda_i$ of degree $1$ dual to $x_i$, and even generators $c_\alpha$ of degree $2$ dual to $r_\alpha$.
+
+Define the graded algebra
+\[
+K_{F,p}^{\gr}:=\Sym(R)\ot \Lambda(U)=\kk[c_\alpha]\ot \Lambda(\lambda_i).
+\]
+For $n\ge 1$ define Hochschild cochains
+\begin{equation}\label{eq:mu-F-explicit}
+\mu_n(a_1,\dots,a_n)
+:=
+\sum_{\alpha}
+c_\alpha
+\sum_{i_1,\dots,i_n}
+\frac{1}{n!}
+\frac{\partial^n F_\alpha}{\partial x_{i_1}\cdots \partial x_{i_n}}(p)
+\bigl(\partial_{\lambda_{i_1}}a_1\bigr)\cdots \bigl(\partial_{\lambda_{i_n}}a_n\bigr).
+\end{equation}
+Set
+\[
+m_1=\mu_1,
+\qquad
+m_2=m_2^{\free}+\mu_2,
+\qquad
+m_n=\mu_n\quad (n\ge 3).
+\]
+
+\begin{corollary}[Explicit pointed line algebra; \ClaimStatusProvedHere]\label{cor:explicit-line}
+The operations above define a complete filtered $A_\infty$ algebra structure on $K_{F,p}^{\gr}$, denoted $K^{\expmod}_{F,p}$, and there is an $A_\infty$ quasi-isomorphism
+\[
+K^{\expmod}_{F,p}\simeq K^{\ex}_{F,p}\simeq \RHom_{B_{F,p}}(\kk,\kk).
+\]
+\end{corollary}
+
+\begin{proof}
+Under the HKR map, the total cochain $\mu=\sum_n \mu_n$ corresponds to the odd polyvector field obtained from the Taylor expansion of $F$ by replacing the tangent variables with the odd derivations $\partial_{\lambda_i}$.  Since these odd derivations supercommute and the coefficients are scalar functions, the Schouten bracket vanishes.  Exactly as in the proof of Theorem~\ref{thm:intrinsic-boundary}, this implies the Stasheff identities.  The comparison with $\Cobar(\cJ_{F,p})$ is tautological from the construction of $b_F$.
+\end{proof}
+
+\subsection{Vacua as Maurer--Cartan elements}
+
+One of the most satisfying features of the one-step Jacobi coalgebra is that classical vacua become internal Maurer--Cartan data.
+
+\begin{theorem}[Maurer--Cartan vacuum theorem; \ClaimStatusProvedHere]\label{thm:mc-vacua}
+Let $q$ be a formal point of $L$ near $p$.  Then the following are equivalent:
+\begin{enumerate}[label=(\roman*),leftmargin=1.8em]
+\item $q$ is a boundary vacuum, that is, $F(q)=0$;
+\item the displacement $u=q-p\in U$ defines a Maurer--Cartan element of the coalgebra $\cJ_{F,p}$;
+\item $u$ defines a Maurer--Cartan element of the $A_\infty$ algebra $K^{\ex}_{F,p}$.
+\end{enumerate}
+Moreover twisting $\cJ_{F,p}$ by the Maurer--Cartan element corresponding to $q$ yields the recentered coalgebra:
+\[
+\cJ_{F,p}^{\,q}\cong \cJ_{F,q}.
+\]
+\end{theorem}
+
+\begin{proof}
+The Maurer--Cartan equation in $\cJ_{F,p}$ is
+\[
+\sum_{n\ge 1}\frac{1}{n!} b_{F,n}(u,\dots,u)=0,
+\]
+which is precisely the Taylor expansion of $F(p+u)=0$.  The equivalence with the $A_\infty$ Maurer--Cartan equation follows under the bar--cobar correspondence.  Twisting by $u$ simply translates the Taylor expansion from the base point $p$ to the base point $q$.
+\end{proof}
+
+\subsection{Polarized reconstruction}
+
+The exact line algebra remembers more than its quasi-isomorphism class: it remembers a primitive polarization.
+
+\begin{definition}[Primitive polarization]
+The primitive part of the bar coalgebra of $K^{\ex}_{F,p}$ is
+\[
+\mathrm{Prim}\bigl(\BBar K^{\ex}_{F,p}\bigr)\cong sU\oplus R.
+\]
+A \emph{polarization} is the decomposition of this primitive space into its odd tangent piece $sU$ and its even obstruction piece $R$.
+\end{definition}
+
+\begin{theorem}[Polarized reconstruction; \ClaimStatusProvedHere]\label{thm:polarized-reconstruction}
+The polarized bar coalgebra
+\[
+\bigl(\BBar K^{\ex}_{F,p},\; \mathrm{Prim}=sU\oplus R\bigr)
+\]
+reconstructs the full pointed formal germ of the map $F$ at $p$.  Equivalently, the polarized coalgebra $\cJ_{F,p}$ is a complete invariant of the pointed boundary-linear formal germ.
+\end{theorem}
+
+\begin{proof}
+The coderivation of $\cJ_{F,p}$ is determined exactly by the maps
+\[
+b_{F,n}:S^n(sU)\to R.
+\]
+These are the Taylor coefficients of $F$ at $p$.  Conversely, given the polarized coalgebra, the maps $b_{F,n}$ may be read off from the component of the coderivation landing in the $R$-summand of the primitive part.  Reassembling these Taylor coefficients recovers the formal map $F$.
+\end{proof}
+
+\begin{remark}
+This theorem is the first local incarnation of the guiding slogan that the line sector should not merely receive data from the boundary equations; it should \emph{present} them.
+\end{remark}
+
+
+\section{Boundary Kuranishi elimination and the minimal pointed line algebra}\label{sec:kuranishi}
+
+The exact pointed line algebra $K_{F,p}^{\ex}$ is canonical, but it is not yet minimal.  If the linearization of $F$ at $p$ is nonzero, then the line algebra has a nontrivial unary operation.  The next theorem integrates out the linearly massive directions exactly and produces a minimal local model.
+
+\subsection{Splitting the linearized equations}
+
+Let
+\[
+dF_p:U\to R.
+\]
+Choose splittings
+\[
+U=T\oplus M,
+\qquad
+R=I\oplus C,
+\]
+with
+\[
+T=\ker(dF_p),
+\qquad
+I=\im(dF_p),
+\qquad
+C\cong \coker(dF_p),
+\]
+and such that
+\[
+A:=dF_p|_M:M\xrightarrow{\sim} I
+\]
+is an isomorphism.
+
+Choose coordinates $(u,v)$ on $T\oplus M$ and decompose
+\[
+F=(F_I,F_C),
+\qquad
+F_I\in I[[u,v]],
+\quad
+F_C\in C[[u,v]].
+\]
+
+\begin{lemma}[Formal implicit solution; \ClaimStatusProvedHere]\label{lem:formal-implicit}
+There exists a unique formal map
+\[
+\varphi(u)\in M[[u]]
+\]
+with no constant or linear term such that
+\[
+F_I\bigl(u,\varphi(u)\bigr)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Expand $\varphi(u)=\sum_{n\ge 2}\varphi_n(u)$ by total degree in $u$.  At each order $n$, the equation takes the form
+\[
+A\,\varphi_n + (\text{known term of degree }n)=0.
+\]
+Since $A$ is invertible, $\varphi_n$ is uniquely determined recursively.
+\end{proof}
+
+\begin{definition}[Effective obstruction map]
+The reduced Kuranishi map is
+\begin{equation}\label{eq:kappa-def}
+\kappa(u):=F_C\bigl(u,\varphi(u)\bigr)\in C[[u]].
+\end{equation}
+It has no constant or linear term.
+\end{definition}
+
+\subsection{Exact splitting of the boundary dg algebra}
+
+Set
+\[
+w:=v-\varphi(u).
+\]
+Then $F_I(u,\varphi(u)+w)$ vanishes at $w=0$, so it factors by $w$.
+
+\begin{lemma}[Factorization of the massive equations; \ClaimStatusProvedHere]\label{lem:factorization}
+There exist formal matrix-valued power series
+\[
+\mathcal A(u,w)\in \End(M,I)[[u,w]],
+\qquad
+\mathcal B(u,w)\in \Hom(M,C)[[u,w]],
+\]
+with $\mathcal A(0,0)=A$ invertible, such that
+\[
+F_I\bigl(u,\varphi(u)+w\bigr)=\mathcal A(u,w)\,w,
+\qquad
+F_C\bigl(u,\varphi(u)+w\bigr)=\kappa(u)+\mathcal B(u,w)\,w.
+\]
+\end{lemma}
+
+\begin{proof}
+This is the formal Taylor expansion in the $w$-variables around $w=0$, using the fact that the constant term of $F_I$ vanishes by definition of $\varphi$.
+\end{proof}
+
+\begin{theorem}[Boundary Kuranishi elimination; \ClaimStatusProvedHere]\label{thm:boundary-kuranishi}
+After the changes of variables
+\[
+v=\varphi(u)+w
+\]
+and the odd change of generators
+\[
+\xi:=\mathcal A(u,w)^{-1}\eta_I,
+\qquad
+\zeta:=\eta_C-\mathcal B(u,w)\mathcal A(u,w)^{-1}\eta_I,
+\]
+the completed local boundary dg algebra becomes
+\[
+B_{F,p}
+\cong
+\bigl(\kk[[u,w]]\ot \Lambda(\xi,\zeta),\ d\xi=w,\ d\zeta=\kappa(u)\bigr).
+\]
+Consequently there is a canonical dg quasi-isomorphism
+\[
+B_{F,p}\simeq B_\kappa
+:=
+\bigl(\kk[[u]]\ot \Lambda(C^\vee),\ d\zeta=\kappa(u)\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+The displayed formula follows by a direct calculation:
+\[
+d\xi=\mathcal A^{-1}d\eta_I=\mathcal A^{-1}\mathcal A w=w,
+\]
+and
+\[
+d\zeta=d\eta_C-\mathcal B\mathcal A^{-1}d\eta_I
+=(\kappa+\mathcal Bw)-\mathcal B\mathcal A^{-1}\mathcal A w
+=\kappa.
+\]
+The factor $\bigl(\kk[[w]]\ot \Lambda(\xi),d\xi=w\bigr)$ is the completed Koszul resolution of $\kk$ and is therefore contractible.  Removing it gives the reduced dg algebra $B_\kappa$.
+\end{proof}
+
+\begin{remark}
+This theorem is stronger than ordinary homological perturbation.  It does not merely assert that a smaller model exists.  It constructs an explicit nonlinear change of generators that exhibits the massive directions as a contractible factor.  For that reason it is genuinely a nonlinear Schur complement.
+\end{remark}
+
+\subsection{The minimal pointed line algebra}
+
+Apply the exact line construction to the reduced map $\kappa:T\to C$.
+
+Let
+\[
+K_\kappa^{\gr}:=\Sym(C)\ot \Lambda(T).
+\]
+For $n\ge 2$ define
+\begin{equation}\label{eq:mu-kappa}
+\mu_n^\kappa(a_1,\dots,a_n)
+:=
+\sum_{\alpha}
+c_\alpha
+\sum_{i_1,\dots,i_n}
+\frac{1}{n!}
+\frac{\partial^n\kappa_\alpha}{\partial u_{i_1}\cdots \partial u_{i_n}}(0)
+\bigl(\partial_{\lambda_{i_1}}a_1\bigr)\cdots \bigl(\partial_{\lambda_{i_n}}a_n\bigr),
+\end{equation}
+and set
+\[
+m_1^\kappa=0,
+\qquad
+m_2^\kappa=m_2^{\free}+\mu_2^\kappa,
+\qquad
+m_n^\kappa=\mu_n^\kappa\quad (n\ge 3).
+\]
+
+\begin{theorem}[Minimal pointed line algebra; \ClaimStatusProvedHere]\label{thm:minimal-pointed-line}
+The operations above define a minimal $A_\infty$ algebra
+\[
+K_\kappa
+=
+\bigl(\Sym(C)\ot \Lambda(T),\{m_n^\kappa\}_{n\ge 2}\bigr),
+\]
+and there are $A_\infty$ quasi-isomorphisms
+\[
+K_{F,p}^{\ex}
+\simeq
+K_\kappa.
+\]
+Equivalently, the exact pointed line algebra is governed, up to quasi-isomorphism, by the reduced Kuranishi map $\kappa$.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:boundary-kuranishi} identifies $B_{F,p}$ with the tensor product of $B_\kappa$ and a contractible Koszul factor.  Derived endomorphisms of the residue field are invariant under tensoring with such a factor, so
+\[
+\RHom_{B_{F,p}}(\kk,\kk)\simeq \RHom_{B_\kappa}(\kk,\kk).
+\]
+Applying Theorem~\ref{thm:exact-line} to $\kappa$ identifies the right-hand side with the explicit $A_\infty$ algebra above.  Since $\kappa$ has no linear term, the resulting $A_\infty$ algebra is minimal.
+\end{proof}
+
+\subsection{Recursive formulas and the first effective couplings}
+
+The reduced map $\kappa$ admits exact recursive formulas.  Write
+\[
+\Phi(u):=(u,\varphi(u))=\sum_{n\ge 1}\frac{1}{n!}\Phi_n(u,\dots,u),
+\qquad
+\kappa(u)=\sum_{n\ge 2}\frac{1}{n!}\kappa_n(u,\dots,u).
+\]
+Write the Taylor expansion of $F_I$ and $F_C$ at the origin as
+\[
+F_I=\sum_{q\ge 1}F_q^I,
+\qquad
+F_C=\sum_{q\ge 1}F_q^C.
+\]
+
+\begin{proposition}[Recursive Kuranishi coefficients; \ClaimStatusProvedHere]\label{prop:recursive-kuranishi}
+The multilinear maps $\Phi_n$ and $\kappa_n$ are uniquely determined by
+\begin{align}
+A\Phi_n
+&=
+-
+\sum_{q=2}^{n}
+\frac{1}{q!}
+\sum_{\substack{n_1+\cdots+n_q=n\\ n_i\ge 1}}
+\operatorname{Sym}\Bigl(F_q^I\bigl(\Phi_{n_1},\dots,\Phi_{n_q}\bigr)\Bigr),
+\label{eq:phi-recursion}
+\\[0.5em]
+\kappa_n
+&=
+\sum_{q=2}^{n}
+\frac{1}{q!}
+\sum_{\substack{n_1+\cdots+n_q=n\\ n_i\ge 1}}
+\operatorname{Sym}\Bigl(F_q^C\bigl(\Phi_{n_1},\dots,\Phi_{n_q}\bigr)\Bigr).
+\label{eq:kappa-recursion}
+\end{align}
+\end{proposition}
+
+\begin{proof}
+Insert the exponential expansions into the defining equations
+\[
+F_I(\Phi(u))=0,
+\qquad
+\kappa(u)=F_C(\Phi(u)),
+\]
+and compare homogeneous components of degree $n$.
+\end{proof}
+
+\begin{corollary}[Quadratic and cubic effective couplings; \ClaimStatusProvedHere]\label{cor:low-order-kappa}
+The first two Kuranishi coefficients are
+\begin{align}
+\kappa_2(t_1,t_2)
+&=
+F_2^C(t_1,t_2),
+\label{eq:kappa2}
+\\[0.5em]
+\kappa_3(t_1,t_2,t_3)
+&=
+F_3^C(t_1,t_2,t_3)
+-
+\sum_{\mathrm{cyc}}
+F_2^C\Bigl(t_1,\,A^{-1}F_2^I(t_2,t_3)\Bigr).
+\label{eq:kappa3}
+\end{align}
+Consequently
+\[
+m_2^\kappa(\lambda_{t_1},\lambda_{t_2})
+=
+\lambda_{t_1}\wedge \lambda_{t_2}
++\frac{1}{2}\kappa_2(t_1,t_2),
+\qquad
+m_3^\kappa(\lambda_{t_1},\lambda_{t_2},\lambda_{t_3})
+=
+\frac{1}{6}\kappa_3(t_1,t_2,t_3).
+\]
+\end{corollary}
+
+\begin{proof}
+At quadratic order only the quadratic target component $F_2^C$ contributes.  At cubic order there are two kinds of contributions: the direct cubic term $F_3^C$ and the indirect term obtained by feeding two tangent inputs into the massive channel through $F_2^I$, propagating back via $A^{-1}$, and returning to the obstruction space through $F_2^C$.
+\end{proof}
+
+\begin{remark}
+Formula \eqref{eq:kappa3} is the algebraic avatar of integrating out a massive propagator.  The effective cubic interaction is not the raw cubic Taylor coefficient of the original equations; it is the raw cubic term corrected by the tree-level exchange through the massive sector.
+\end{remark}
+
+\subsection{Smooth vacua}
+
+\begin{corollary}[Smooth-point formality; \ClaimStatusProvedHere]\label{cor:smooth-formality}
+If $p$ is a smooth point of the classical zero locus $F^{-1}(0)$, then $C=0$ and the minimal pointed line algebra is the exterior algebra
+\[
+K_\kappa\simeq \Lambda(T_pF^{-1}(0)).
+\]
+\end{corollary}
+
+\begin{proof}
+Smoothness is equivalent to surjectivity of $dF_p$, hence $C=\coker(dF_p)=0$.  Therefore $\kappa=0$ and only the free exterior algebra on $T=\ker(dF_p)$ remains.
+\end{proof}
+
+
+\section{Local bulk from local lines, and the boundary-linear line Mather--Yau theorem}\label{sec:classification}
+
+The previous section produces the minimal pointed line algebra $K_\kappa$ attached to a boundary vacuum.  We now prove two culmination theorems:
+\begin{enumerate}[label=(\arabic*),leftmargin=1.8em]
+\item the local bulk algebra is recovered from $K_\kappa$ by Hochschild cochains;
+\item the polarized quasi-isomorphism class of $K_\kappa$ classifies the reduced microlocal formal germ.
+\end{enumerate}
+
+\subsection{Local bulk from local lines}
+
+Let $\gamma$ denote the coordinate on $C^\vee$.  The effective boundary-linear potential determined by the Kuranishi map is
+\[
+W_{\eff}(u,\gamma):=\langle \gamma,\kappa(u)\rangle.
+\]
+Its boundary dg algebra is exactly $B_\kappa$.
+
+\begin{theorem}[Local bulk/line theorem; \ClaimStatusProvedHere]\label{thm:local-bulk-line}
+For every pointed boundary-linear germ $(F,p)$ one has canonical quasi-isomorphisms
+\[
+\HH^\bullet(K_{F,p})
+\simeq
+\HH^\bullet(K_\kappa)
+\simeq
+\HH^\bullet(B_\kappa)
+\simeq
+\cO\bigl(\dCrit(W_{\eff})\bigr).
+\]
+Equivalently, the completed local bulk algebra depends only on the minimal pointed line algebra.
+\end{theorem}
+
+\begin{proof}
+The first equivalence is Theorem~\ref{thm:minimal-pointed-line}.  Since $K_\kappa$ and $B_\kappa$ are Koszul dual presentations of the same pointed local category, their Hochschild cochains agree by Morita invariance.  The last equivalence is the boundary-linear bulk/boundary theorem applied to the reduced map $\kappa:T\to C$.
+\end{proof}
+
+\begin{remark}
+This is the exact local shadow of the global triangle \eqref{eq:global-corrected-triangle}.  The line algebra does not equal the bulk algebra; the bulk is the derived center of the line algebra, and in the exact local sector that center is computable.
+\end{remark}
+
+\subsection{Polarized quasi-isomorphisms}
+
+The reconstruction theorem showed that the polarized bar coalgebra of the exact pointed line algebra recovers the pointed formal germ.  After Kuranishi reduction the same statement becomes stronger: it classifies the \emph{reduced} microlocal germ, which is exactly the singular residue left after all linearly massive directions have been eliminated.
+
+\begin{definition}[Polarized $A_\infty$ isomorphism]
+Let
+\[
+K_\kappa=\Sym(C)\ot \Lambda(T),
+\qquad
+K_{\kappa'}=\Sym(C')\ot \Lambda(T')
+\]
+be minimal pointed line algebras.  A \emph{polarized $A_\infty$ isomorphism}
+\[
+\Phi:K_\kappa\longrightarrow K_{\kappa'}
+\]
+is an $A_\infty$ isomorphism whose induced bar-coalgebra isomorphism
+\[
+\BBar \Phi:\BBar K_\kappa\to \BBar K_{\kappa'}
+\]
+preserves the primitive decomposition
+\[
+\mathrm{Prim}(\BBar K_\kappa)=sT\oplus C,
+\qquad
+\mathrm{Prim}(\BBar K_{\kappa'})=sT'\oplus C'.
+\]
+\end{definition}
+
+\begin{definition}[Formal equivalence of reduced germs]
+Two reduced Kuranishi maps
+\[
+\kappa:T\to C,
+\qquad
+\kappa':T'\to C'
+\]
+are \emph{formally equivalent} if there exist formal linear isomorphisms on source and target, together with higher formal changes of tangent coordinates preserving the base point, carrying the Taylor expansion of $\kappa$ to that of $\kappa'$.
+\end{definition}
+
+\begin{theorem}[Boundary-linear line Mather--Yau theorem; \ClaimStatusProvedHere]\label{thm:line-mather-yau}
+Let $(F,p)$ and $(G,q)$ be pointed boundary-linear germs with reduced Kuranishi maps
+\[
+\kappa_F:T_F\to C_F,
+\qquad
+\kappa_G:T_G\to C_G.
+\]
+Then the following are equivalent:
+\begin{enumerate}[label=(\roman*),leftmargin=1.8em]
+\item $\kappa_F$ and $\kappa_G$ are formally equivalent;
+\item the minimal pointed line algebras $K_{\kappa_F}$ and $K_{\kappa_G}$ are polarized $A_\infty$-isomorphic;
+\item the one-step Jacobi coalgebras $\cJ_{\kappa_F}$ and $\cJ_{\kappa_G}$ are polarized isomorphic.
+\end{enumerate}
+Whenever these conditions hold, the completed local bulk algebras are canonically quasi-isomorphic:
+\[
+\cO\bigl(\dCrit(W_{\eff,F})\bigr)\simeq \cO\bigl(\dCrit(W_{\eff,G})\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+\emph{(i)$\Rightarrow$(iii).}
+A formal equivalence of reduced germs identifies all Taylor coefficients of $\kappa_F$ with those of $\kappa_G$ after transport by the induced source and target changes.  By definition these Taylor coefficients are exactly the structure maps of the one-step Jacobi coalgebras, so the coalgebras are polarized isomorphic.
+
+\emph{(iii)$\Rightarrow$(ii).}
+Cobar sends a polarized coalgebra isomorphism to an $A_\infty$ isomorphism between the corresponding cobar algebras.  But $K_{\kappa_F}\simeq \Cobar(\cJ_{\kappa_F})$ and similarly for $G$.
+
+\emph{(ii)$\Rightarrow$(iii).}
+Apply the bar construction.  Because the algebras are minimal, the bar construction recovers a complete filtered coalgebra with primitive part equal to $sT\oplus C$.  The polarization hypothesis guarantees that the induced isomorphism preserves the tangent and obstruction summands separately, so it is a polarized coalgebra isomorphism.
+
+\emph{(iii)$\Rightarrow$(i).}
+By the polarized reconstruction theorem, a polarized coalgebra recovers the full reduced formal map.  Therefore a polarized coalgebra isomorphism yields a formal equivalence of Kuranishi maps.
+
+The final statement about bulk algebras follows from Theorem~\ref{thm:local-bulk-line}.
+\end{proof}
+
+\begin{corollary}[Microlocal classification theorem; \ClaimStatusProvedHere]\label{cor:microlocal-classification}
+The assignment
+\[
+(F,p)\longmapsto K_{\kappa_F}
+\]
+induces a bijection between reduced microlocal formal types of pointed boundary-linear vacua and polarized $A_\infty$ isomorphism classes of minimal pointed line algebras.
+\end{corollary}
+
+\begin{proof}
+This is a restatement of Theorem~\ref{thm:line-mather-yau}.
+\end{proof}
+
+\subsection{What is stable and what is invisible}
+
+The reduced microlocal formal type is obtained only after discarding linearly massive directions.  The stabilization theorems of Section~\ref{sec:ts-knorrer} show that additional tangent-normal contractible blocks and pure-normal hyperbolic Clifford blocks are also invisible to the stable open sector.
+
+\begin{corollary}[Stable invisibility of universal blocks; \ClaimStatusProvedHere]\label{cor:stable-invisibility}
+The following operations do not change the stable open-sector content of a boundary model:
+\begin{enumerate}[label=(\roman*),leftmargin=1.8em]
+\item adding a tangent-normal hyperbolic pair $u v$ with one tangent and one normal leg;
+\item adding a pure-normal hyperbolic pair $uv$ with both legs normal, after spinor stabilization.
+\end{enumerate}
+Hence the genuinely nontrivial local data of a pointed boundary-linear model are concentrated in the reduced Kuranishi map $\kappa$ and therefore in the polarized minimal pointed line algebra $K_\kappa$.
+\end{corollary}
+
+\begin{proof}
+Part (i) is Theorem~\ref{thm:contractible-stab}.  Part (ii) is Theorem~\ref{thm:clifford-stab}.  The final assertion follows because Theorem~\ref{thm:boundary-kuranishi} removes the linearly massive directions explicitly and Theorem~\ref{thm:line-mather-yau} classifies what remains.
+\end{proof}
+
+\subsection{The fortified local triangle}
+
+We may now summarize the exact local picture in one theorem.
+
+\begin{theorem}[Fortified local bulk/boundary/line triangle; \ClaimStatusProvedHere]\label{thm:fortified-local-triangle}
+For every pointed boundary-linear formal germ $(F,p)$ there is a canonical chain of identifications
+\[
+(F,p)
+\rightsquigarrow
+\cJ_{F,p}
+\rightsquigarrow
+K^{\ex}_{F,p}
+\simeq
+K_{\kappa_F}
+\rightsquigarrow
+\HH^\bullet(K_{\kappa_F})
+\simeq
+\cO\bigl(\dCrit(W_{\eff,F})\bigr).
+\]
+Here:
+\begin{itemize}[leftmargin=1.8em]
+\item $\cJ_{F,p}$ is the one-step Jacobi coalgebra presenting the pointed local boundary equations;
+\item $K^{\ex}_{F,p}$ is the exact pointed line algebra;
+\item $K_{\kappa_F}$ is the minimal pointed line algebra obtained by exact Kuranishi elimination;
+\item and $\cO(\dCrit(W_{\eff,F}))$ is the completed local bulk algebra of the effective reduced potential.
+\end{itemize}
+Moreover the polarized $A_\infty$ isomorphism class of $K_{\kappa_F}$ determines the reduced microlocal formal type of $(F,p)$.
+\end{theorem}
+
+\begin{proof}
+Combine Theorems~\ref{thm:exact-line}, \ref{thm:minimal-pointed-line}, \ref{thm:local-bulk-line}, and \ref{thm:line-mather-yau}.
+\end{proof}
+
+
