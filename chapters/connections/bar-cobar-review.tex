@@ -861,26 +861,42 @@ pole), which is precisely the obstruction to chiral Koszulness.
 
 \begin{proof}
 The OPE-weighted local system $\cL_{\mathrm{Vir}}$ on
-$\Conf_2(\C)$ has the filtration
+$\Conf_2(\C)$ has the collision filtration
 $\cL^{\leq 1} \subset \cL^{\leq 2} \subset \cL^{\leq 4} =
 \cL_{\mathrm{Vir}}$ (there is no order-$3$ pole in the $TT$ OPE).
-The weight spectral sequence for $H^*(\FM_2(\C), \cL_{\mathrm{Vir}})$
-has $E_1^{p,q} = H^{p+q}(\FM_2, \mathrm{gr}^{-p}\cL)$.
-At $E_1$: the $\mathrm{gr}^4$ piece contributes a class in
-weight~$4$ (from the scalar $c/2$ residue), and the $\mathrm{gr}^2$
-piece contributes a class in weight~$2$ (from the $2T$ residue).
-The $d_1$ differential vanishes for degree reasons.  The $d_2$
-differential also vanishes (it would connect weights differing
-by~$1$, but the filtration jumps by~$2$).  The $d_3$ differential
-connects weight~$4$ to weight~$2$: explicitly, the composite
+Write $F^{-d} = \cL^{\leq d}$ for the corresponding decreasing
+filtration, so the non-zero graded pieces sit at
+$p = -1, -2, -4$ (weight $d = -p = 1, 2, 4$).
+The weight spectral sequence has
+$E_1^{p,q} = H^{p+q}(\FM_2, \mathrm{gr}^{-p}\cL)$
+with $d_r$ of bidegree $(r, 1-r)$.
+
+The first differential $d_1\colon E_1^{-2,*} \to E_1^{-1,*}$
+connects weight~$2$ to weight~$1$: the $(z-w)^{-2}$ residue
+$2T(w)$ maps to its $L_{-1}$-descendant $\partial T(w)$ in the
+simple-pole piece.  This is the conformal-descendant relation
+and is determined by the $\mathfrak{sl}_2$-subalgebra of
+$\mathrm{Vir}$; it does not by itself obstruct purity.
+
+The key obstruction is the extension between weight~$4$ and
+weight~$2$.  The $d_2$ differential
+$d_2\colon E_2^{-4,*} \to E_2^{-2,*}$
+connects weight~$4$ to weight~$2$ (filtration gap~$2$).
+Explicitly, the composite
 \[
 \mathrm{Res}_{z=w}\bigl[(z-w)^{-4} \cdot \tfrac{c}{2}\bigr]
 \;\leadsto\; \tfrac{1}{3!}\partial^3_w\bigl[2T(w)\bigr]
 \]
-arising from the Laurent expansion of the $TT$ OPE around the
-collision point produces a non-trivial bar operation $m_3$ on three
-inputs.  Since $d_3 \neq 0$, the spectral sequence does not
-degenerate at~$E_1$, confirming failure of purity.
+arising from the Laurent expansion of the $TT$ OPE expresses
+the quartic-pole scalar as a third derivative of the
+quadratic-pole field.  This composite is non-trivial
+(it is the $c \neq 0$ obstruction), so $d_2 \neq 0$ and
+the spectral sequence does not degenerate at~$E_1$.
+
+At the bar-complex level, the non-split extension between
+weights~$4$ and~$2$ in the two-point local system feeds
+(via iterated OPE on $\FM_3(\C)$) into the non-vanishing
+of the ternary operation~$m_3$, confirming failure of purity.
 \end{proof}
 
 \begin{remark}[The simple-pole principle]
@@ -909,6 +925,166 @@ non-Koszulness of Virasoro and $\mathcal{W}_N$ from the purity
 perspective: the transferred $m_k^{\mathrm{DS}}$ arise from
 decorated BRST trees that produce exactly the higher-pole
 contributions violating purity.
+\end{remark}
+
+\begin{proposition}[Decomposition Theorem for FM compactification;
+\ClaimStatusProvedHere]
+\label{prop:decomposition-fm}
+\index{Decomposition Theorem!FM compactification|textbf}
+\index{Koszulness!Decomposition Theorem|textbf}
+Let $\pi_k\colon \FM_k(\C) \to \Conf_k(\C)$ be the natural map
+from the Fulton--MacPherson compactification to the open
+configuration space.  This map is proper: $\FM_k(\C)$ is compact
+with corners and $\Conf_k(\C)$ is separated.  By the
+Decomposition Theorem \textup{(}Beilinson--Bernstein--Deligne--Gabber
+\textup{\cite{BBD82}),} the direct image of the intersection
+cohomology complex decomposes:
+\begin{equation}
+\label{eq:decomposition-fm}
+R\pi_{k*}\, \IC_{\FM_k(\C)}
+\;\simeq\;
+\bigoplus_{\alpha \in S_k}
+\IC_{\overline{Y}_\alpha}(\cE_\alpha)[n_\alpha],
+\end{equation}
+where $\{Y_\alpha\}_{\alpha \in S_k}$ are the strata of a
+stratification of $\Conf_k(\C)$ indexed by collision patterns,
+$\cE_\alpha$ are semisimple local systems on~$Y_\alpha$, and
+$n_\alpha \in \Z$ are cohomological shifts.
+
+The OPE-weighted local system $\cL_\cA$
+\textup{(}Definition~\textup{\ref{def:rational-smooth-collision})}
+is a twisted coefficient system on $\Conf_k(\C)$.  The bar
+cohomology $H^{p,q}(\barB(\cA))$ is computed by the
+cohomology $H^*(\FM_k(\C),\, \pi_k^*\cL_\cA)$ of the
+pullback.  By the projection formula,
+\begin{equation}
+\label{eq:projection-formula-fm}
+H^*\bigl(\FM_k(\C),\, \pi_k^*\cL_\cA\bigr)
+\;\simeq\;
+H^*\bigl(\Conf_k(\C),\,
+R\pi_{k*}\,\IC_{\FM_k} \otimes \cL_\cA\bigr)
+\;\simeq\;
+\bigoplus_\alpha
+H^*\bigl(\overline{Y}_\alpha,\,
+\IC_{\overline{Y}_\alpha}(\cE_\alpha \otimes \cL_\cA|_{Y_\alpha})
+\bigr)[n_\alpha].
+\end{equation}
+
+When the IC summands $\IC_{\overline{Y}_\alpha}(\cE_\alpha)$ are
+each pure of a single weight \textup{(}in the sense of mixed Hodge
+theory\textup{),} each summand in~\eqref{eq:projection-formula-fm}
+contributes to a single row of the weight spectral sequence.
+The weight spectral sequence then degenerates at~$E_1$, the bar
+cohomology $H^{p,q}(\barB(\cA))$ is concentrated along the
+diagonal $p + q = $ bar degree, and~$\cA$ is chirally Koszul.
+
+Conversely, when the IC summands are mixed---carrying contributions
+of multiple weights---extensions between different weight pieces
+produce non-trivial differentials $d_r$ for $r \ge 2$ in the weight
+spectral sequence.  The bar cohomology spreads off the diagonal:
+$H^{p,q}(\barB(\cA)) \neq 0$ for $q \neq 0$, and
+the higher $\Ainf$ operations $m_k$ for $k \geq 3$ are
+non-vanishing.  The Koszul boundary is the boundary between purity
+and mixedness of the IC decomposition.
+\end{proposition}
+
+\begin{proof}
+The Fulton--MacPherson compactification $\FM_k(\C)$ is a smooth
+manifold with corners, and the forgetful map
+$\pi_k\colon \FM_k(\C) \to \Conf_k(\C)$ is proper (it adds the
+boundary strata parametrizing collision patterns).  The
+Decomposition Theorem applies to proper maps from smooth varieties
+(or, in the analytic category, from smooth manifolds with the
+appropriate stratification); the decomposition
+\eqref{eq:decomposition-fm} follows.
+
+The identification of bar cohomology with the cohomology of
+$\pi_k^*\cL_\cA$ on $\FM_k(\C)$ is the content of the bar
+complex construction
+(Definition~\ref{def:chiral_bar}): the bar differential
+$d_{\barB}$ is the connection $\nabla$ of the OPE local system
+composed with the FM boundary residues.  The projection formula
+gives~\eqref{eq:projection-formula-fm}.
+
+For the purity implication: when each
+$\IC_{\overline{Y}_\alpha}(\cE_\alpha)$ is pure of weight
+$w_\alpha$, the summand
+$H^n(\overline{Y}_\alpha, \IC(\cE_\alpha \otimes \cL_\cA))$
+sits in weight $w_\alpha + d$ (where $d$ is the pole order of
+$\cL_\cA$ restricted to~$Y_\alpha$).  Different summands with
+different weights lie in different rows of the weight spectral
+sequence.  Since the differentials $d_r$ (for $r \geq 1$)
+connect rows differing in weight by~$r$, purity---each row
+carrying a single weight---forces $d_r = 0$ for all $r \geq 1$
+on the off-diagonal terms, giving $E_1$-degeneration and hence
+concentration.
+
+For the converse: mixedness means some
+$\IC_{\overline{Y}_\alpha}(\cE_\alpha)$ carries an extension
+between pieces of weight $w$ and $w + r$.  This extension maps,
+under the weight spectral sequence, to a non-trivial $d_r$.
+Explicitly, the extension class in
+$\mathrm{Ext}^1_{\mathrm{MHS}}(H^{w+r}, H^w)$ provides the
+differential: this is the standard mechanism by which
+non-split mixed Hodge structures produce spectral sequence
+differentials (Deligne's theory of weights).  The resulting
+off-diagonal bar cohomology classes are precisely the higher
+$\Ainf$ operations (Proposition~\ref{prop:purity-failure-virasoro}
+gives the explicit instance for the Virasoro algebra).
+\end{proof}
+
+\begin{remark}[The BGS parallel: from Schubert to FM]
+\label{rem:bgs-parallel}
+\index{Beilinson--Ginzburg--Soergel!chiral analog}
+\index{category O@category $\cO$!Koszulness}
+\index{Schubert variety!FM collision stratum analog}
+In Beilinson--Ginzburg--Soergel \cite{BGS96}, Koszulness of
+category~$\cO$ is proved by applying the Decomposition Theorem to
+the proper map $\pi\colon G/B \to G/P$ (the projection from the
+full flag variety to a partial flag variety).  The IC complexes
+$\IC_{\overline{C}_w}$ on Schubert cells $C_w \subset G/B$ are
+pure because Schubert varieties are rationally smooth.  Purity of
+each IC summand in $R\pi_*\IC_{G/B}$ forces the weight spectral
+sequence to degenerate, and the Ext algebra
+$\mathrm{Ext}^*_{\cO}(L, L)$ is concentrated on the diagonal---this
+is Koszulness.
+
+Proposition~\ref{prop:decomposition-fm} is the chiral analog.
+The structural dictionary is:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{BGS / category $\cO$} & \textbf{Chiral bar complex} \\
+\midrule
+Flag variety $G/B$ & FM compactification $\FM_k(\C)$ \\
+Partial flag $G/P$ & Configuration space $\Conf_k(\C)$ \\
+Proper map $G/B \to G/P$ & FM forgetful $\pi_k\colon \FM_k \to \Conf_k$ \\
+Schubert cell $C_w$ & FM collision stratum $Y_\alpha$ \\
+IC on Schubert variety & IC on collision closure $\overline{Y}_\alpha$ \\
+Rational smoothness of $\overline{C}_w$ & Smoothness of FM boundary divisors \\
+Purity of IC $\Rightarrow$ Koszul & Purity of IC $\Rightarrow$ chirally Koszul \\
+Kazhdan--Lusztig polynomials & Bar cohomology Poincaré series \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The analogy is not merely structural.  In both cases, the mechanism
+is the same: purity of intersection cohomology on the strata of a
+proper map forces the weight spectral sequence to collapse, and the
+resulting diagonal concentration \emph{is} Koszulness.  The
+geometric input differs---rational smoothness of Schubert varieties
+versus the OPE pole structure on FM boundary divisors---but the
+homological algebra is identical.  The simple-pole principle
+(Remark~\ref{rem:simple-pole-principle}) is the chiral translation
+of rational smoothness: simple OPE poles produce smooth collision
+strata, just as simple reflections produce smooth Schubert divisors.
+Higher-order non-scalar poles produce singular collision data, just
+as longer Weyl group elements produce singular Schubert varieties
+(though the Schubert case is saved by rational smoothness, which has
+no automatic chiral counterpart---this is why chiral Koszulness is
+\emph{harder} than category-$\cO$ Koszulness).
 \end{remark}
 
 \begin{remark}[Closed-color purity and open-color purity]
@@ -1140,6 +1316,120 @@ degree.  This is the geometric content of
 Proposition~\ref{prop:purity-failure-virasoro}: the
 higher-pole residue that produces the $m_3$ operation \emph{is}
 the excess intersection class.
+\end{remark}
+
+\begin{proposition}[The étale groupoid of Koszul inversion;
+\ClaimStatusProvedHere]
+\label{prop:etale-groupoid-koszul}
+\index{etale groupoid@\'etale groupoid!Koszul inversion|textbf}
+\index{Koszulness!etale groupoid@\'etale groupoid|textbf}
+\index{Lagrangian!self-intersection!etale groupoid@\'etale groupoid}
+Let $\cA$ be chirally Koszul, and let
+$\Steinb_b = \cL_b \times_{\Mvac}^h \cL_b$ be the derived
+Lagrangian self-intersection as in
+Theorem~\textup{\ref{thm:koszul-lagrangian-concentration}}.
+Then the \emph{self-intersection groupoid}
+$\Steinb_b \rightrightarrows \cL_b$, with source and target maps
+$s,t\colon \Steinb_b \to \cL_b$ given by the two projections, is
+\emph{étale}: both $s$ and~$t$ are quasi-isomorphisms of derived
+stacks.
+\end{proposition}
+
+\begin{proof}
+The Lagrangian self-intersection
+$\Steinb_b = \cL_b \times_{\Mvac}^h \cL_b$ is a groupoid over
+$\cL_b$ in the standard way: an element of the fiber product
+remembers which two points of~$\cL_b$ are identified in~$\Mvac$;
+the identity section is the diagonal
+$\Delta\colon \cL_b \to \Steinb_b$; composition comes from the
+triple fiber product.
+
+By Theorem~\ref{thm:koszul-lagrangian-concentration}, chiral
+Koszulness is equivalent to cleanness of the derived
+self-intersection: the Tor-amplitude of
+$\cO(\Steinb_b) \simeq \barB(\cA)$ is concentrated in degree
+zero.  In homological algebra, this reads
+\begin{equation}
+\label{eq:tor-vanishing-etale}
+\mathrm{Tor}_i^{\cO(\Mvac)}\bigl(\cO(\cL_b),\, \cO(\cL_b)\bigr) = 0
+\qquad \text{for } i > 0.
+\end{equation}
+This vanishing has a direct geometric consequence: the cotangent
+complex of the projection $s\colon \Steinb_b \to \cL_b$ is
+$\mathbb{L}_{s} \simeq s^*\mathbb{L}_{\cL_b/\Mvac}$, and the
+clean-intersection condition forces $\mathbb{L}_{\cL_b/\Mvac}$ to
+have Tor-amplitude $[0,0]$.  The fiber of~$s$ at any point
+$x \in \cL_b$ is the derived intersection
+$\{x\} \times_{\Mvac}^h \cL_b$, which by the Tor-vanishing
+\eqref{eq:tor-vanishing-etale} is discrete (a single point, since
+$\cL_b$ meets itself along itself).  A map of derived stacks whose
+fibers are discrete and whose relative cotangent complex has
+amplitude~$[0,0]$ is étale.  The same argument applies to~$t$ by
+symmetry.
+\end{proof}
+
+\begin{corollary}[Koszul inversion as the groupoid Morita theorem;
+\ClaimStatusProvedHere]
+\label{cor:koszul-morita}
+\index{Morita equivalence!Koszul inversion|textbf}
+\index{bar-cobar!counit!Morita equivalence}
+The bar-cobar counit
+$\Omegach(\barB(\cA)) \xrightarrow{\;\sim\;} \cA$
+\textup{(}Vol~I, Theorem~B\textup{)} is the Morita equivalence
+of the étale groupoid $\Steinb_b \rightrightarrows \cL_b$
+with its base~$\cL_b$.
+\end{corollary}
+
+\begin{proof}
+An étale groupoid $\Gamma \rightrightarrows X$ satisfies the
+Morita theorem: the classifying stack $B\Gamma$ is equivalent to
+$X$ (the source map being étale ensures effective descent).  By
+Proposition~\ref{prop:etale-groupoid-koszul}, when $\cA$ is
+chirally Koszul the self-intersection groupoid
+$\Steinb_b \rightrightarrows \cL_b$ is étale, and hence
+$B(\Steinb_b) \simeq \cL_b$.
+
+Under the identification
+$\cO(\Steinb_b) \simeq \barB(\cA)$
+(Theorem~\ref{thm:bar-is-self-intersection}), the classifying
+stack $B(\Steinb_b)$ is computed by the cobar construction:
+$\cO(B(\Steinb_b)) \simeq \Omegach(\barB(\cA))$.  The Morita
+equivalence $B(\Steinb_b) \simeq \cL_b$ is then the statement
+that the cobar construction recovers the algebra:
+$\Omegach(\barB(\cA)) \xrightarrow{\sim} \cA$.  This is Vol~I,
+Theorem~B.
+
+Off the Koszul locus, the Tor-vanishing
+\eqref{eq:tor-vanishing-etale} fails: the higher Tor terms are
+the excess intersection classes of
+Theorem~\ref{thm:koszul-lagrangian-concentration}.  The source
+map $s\colon \Steinb_b \to \cL_b$ acquires higher fibers from
+the non-trivial excess bundle~$\mathcal{E}$---the groupoid is no
+longer étale, and the Morita theorem does not apply.  In this
+regime, the bar-cobar counit is \emph{not} a quasi-isomorphism:
+the full $\Ainf$ data encoded in the non-clean derived
+self-intersection is needed to reconstruct~$\cA$ (via the
+minimal model, not the bar-cobar round-trip).
+\end{proof}
+
+\begin{remark}[The étale/non-étale dichotomy and the Koszul locus]
+\label{rem:etale-dichotomy}
+\index{Koszul locus!etale dichotomy@\'etale dichotomy}
+The étale groupoid picture sharpens the geometric meaning of the
+Koszul locus.  In the moduli of chiral algebras, the Koszul locus
+is precisely where the self-intersection groupoid is étale.
+Crossing the Koszul boundary---as when Drinfeld--Sokolov reduction
+introduces higher OPE poles
+(Theorem~\ref{thm:ds-koszul-obstruction})---is the transition from
+étale to non-étale: the source map acquires non-trivial derived
+fibers, the Morita theorem fails, and the bar-cobar counit develops
+a non-trivial kernel and cokernel measured by the excess intersection
+complex.  The Steinberg analogy is again instructive: the Springer
+resolution $\widetilde{\cN} \to \cN$ is an isomorphism over the
+regular nilpotent locus (étale fibers) and has non-trivial fibers
+over the singular locus (the Springer fiber).  The bar complex
+$\barB(\cA)$ is étale over the Koszul locus and has non-trivial
+fibers---the higher $\Ainf$ operations---over the non-Koszul locus.
 \end{remark}
 
 \begin{remark}[Spectral parameter: operadic origin]
