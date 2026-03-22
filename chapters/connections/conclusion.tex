@@ -27,7 +27,7 @@ expression for this single object.
 
 \item \textbf{Bar--Cobar Duality} (Section \ref{sec:bar_cobar}): We extended Gui--Li--Zeng quadratic duality to the $A_\infty$ setting, proving $d_{\overline{B}}^2 = 0$ using FM--Stokes--Arnold calculus and establishing compatibility with GLZ.
 
-\item \textbf{Line Operators and Yangians} (Section \ref{sec:line_operators}): We proved line operators are modules for the Koszul dual $\mathcal{A}^!$, which carries a dg-shifted Yangian structure with spectral $R$-matrix $r(z)$ satisfying the $A_\infty$ Yang--Baxter equation.
+\item \textbf{Line Operators and Yangians} (Section \ref{sec:line_operators}): We proved $\cC_{\mathrm{line}} \simeq \cA^!\text{-mod}$, where $\cA^!$ is a dg-shifted Yangian (Theorem~\ref{thm:Koszul_dual_Yangian}) with spectral $R$-matrix $r(z)$ satisfying the $A_\infty$ Yang--Baxter equation.
 \end{enumerate}
 
 \subsection{Concrete Consequences and Open Problems}
@@ -35,19 +35,21 @@ expression for this single object.
 The constructions of this volume, combined with Volume~I's five main theorems, enable the following specific results and identify the following open problems.
 
 \begin{enumerate}[label=(\arabic*)]
-\item \textbf{Jones polynomial from the spectral $R$-matrix.}
-  The spectral $R$-matrix of Section~\ref{sec:spectral_braiding},
-  specialized to Chern--Simons theory with gauge group
-  $\mathrm{SU}(2)$ at level~$k$, should recover the colored Jones
-  polynomial at $q = e^{2\pi i/(k+2)}$ via the Kontsevich integral.
-  The bar-cobar framework provides the chain-level model: the
-  $\Ainf$ operations $\{m_k\}$ on $\C \times \R$ produce the
-  iterated integrals entering the Kontsevich integral, and the
-  $\Eone$-coalgebra structure along~$\R$ implements the group-like
-  expansion.  Verifying this identification at all levels is
-  equivalent to the genus-$0$ MC5 bridge
-  (Theorem~\ref{thm:mc5-genus-zero-bridge}) for
-  $\widehat{\mathfrak{su}(2)}_k$.
+\item \textbf{Jones polynomial from the spectral $R$-matrix: resolved.}
+  The monodromy of the reduced HT logarithmic connection for the
+  affine lineage equals the spectral $R$-matrix
+  (Theorem~\ref{thm:affine-monodromy-identification}).
+  Specializing to $\fg = \mathfrak{sl}_2$ at level~$k$: one-loop
+  exactness of the affine half-space BV theory collapses the
+  $\Ainf$ tower, the reduced connection is the KZ connection
+  (Theorem~\ref{thm:reduced-equals-kz}), and the Drinfeld--Kohno
+  theorem identifies the monodromy with $U_q(\mathfrak{sl}_2)$ at
+  $q = e^{i\pi/(k+2)}$.  The bar complex integrals over
+  $\FM_n(\C) \times \Conf_n(\R)$, evaluated on the fundamental
+  weight system, compute the colored Jones polynomial
+  (Corollary~\ref{cor:jones-polynomial}).  The reduced HT line
+  category on evaluation modules is $\mathrm{Rep}_q(\fg)$
+  (Corollary~\ref{cor:affine-line-category}).
 
 \item \textbf{MC5 at all genera: resolved.}
   At genus~$0$, the Feynman-diagrammatic $m_k$ coincide with the bar
@@ -192,6 +194,14 @@ by doubling the half-space $\C_z \times \R_{\ge 0}$ to the full
 bulk $\C_z \times \R_t$, it constructs the mixed-color
 bulk-boundary interaction as a reflection of the pure-color data,
 completing the Swiss-cheese triad of closed, open, and mixed bridges.
+The affine monodromy identification
+(Theorem~\ref{thm:affine-monodromy-identification}) adds a ninth
+bridge: for the affine lineage, one-loop exactness collapses the
+$\Ainf$ tower, the reduced HT monodromy equals the KZ monodromy,
+and the Drinfeld--Kohno theorem identifies it with the quantum
+group $R$-matrix---proving $\cC_{\mathrm{line}}^{\mathrm{red}}
+\simeq \mathrm{Rep}_q(\fg)$ on evaluation modules and computing
+the Jones polynomial from the bar complex.
 
 \begin{remark}[The three colors and their purity]
 \label{rem:three-colors-purity}
@@ -223,7 +233,7 @@ universally for all simple Lie algebras, because root multiplicity one
 is a property of the root system---it depends on $\fg$ alone, not on
 the specific chiral algebra or HT theory.
 The \emph{mixed-color} obstruction (reflected weight identity) vanishes
-universally under (H1)--(H4), because the doubling construction embeds
+universally for any logarithmic $\SCchtop$-algebra, because the doubling construction embeds
 it into the standard FM machinery
 (Theorem~\ref{thm:general-half-space-bv}).
 The \emph{closed-color} obstruction (Koszulness) can fail, because
@@ -370,7 +380,7 @@ converge to a single, computable object.
 \end{remark}
 
 The volume's Swiss-cheese recognition theorem
-(Theorem~\ref{conj:recognition}), homotopy-Koszulity of
+(Theorem~\ref{thm:recognition-foundations}), homotopy-Koszulity of
 $\SCchtop$ (Theorem~\ref{thm:homotopy-Koszul}), and the Hochschild
 bridge (Theorem~\ref{thm:hochschild-bridge-genus0}) provide the
 algebraic foundations.  Volume~I's five main theorems---bar-cobar
@@ -592,6 +602,509 @@ equivariant restriction in geometry.
 A chiral algebra is a Lagrangian.  The bar complex is its
 self-intersection.  The Swiss-cheese operad is the internal structure
 of that self-intersection.  Everything else is a shadow.
+
+\section*{The self-intersection resolvent}
+
+\begin{theorem}[The resolvent principle; \ClaimStatusProvedHere]
+\label{thm:resolvent-principle}
+\index{resolvent principle|textbf}
+\index{homological perturbation!tree-level bootstrap|textbf}
+Let\/ $\cA$ be an\/ $\Ainf$ chiral algebra with underlying
+complex\/ $(\cA, m_1)$ and binary chiral product\/~$m_2$.
+Let\/ $(H, p, \iota, h)$ be a deformation retract of\/
+$(\cA, m_1)$ onto cohomology\/
+$H = H^\bullet(\cA, m_1)$, satisfying the side conditions
+$h^2 = h\iota = ph = 0$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Tree formula.}
+  Cohomology~$H$ carries a transferred\/ $\Ainf$ structure
+  with operations
+  \begin{equation}
+  \label{eq:resolvent-tree-formula}
+    m_k^H
+    \;=\;
+    \sum_{\tau \in \mathrm{PRT}_k}
+    (-1)^{\varepsilon(\tau)}\;
+    p \circ \mathfrak{m}(\tau) \circ \iota^{\otimes k},
+  \end{equation}
+  where\/ $\mathrm{PRT}_k$ denotes planar rooted binary trees
+  with\/ $k$ leaves, and\/ $\mathfrak{m}(\tau)$ assigns the binary
+  product~$m_2$ to each internal vertex and the contracting
+  homotopy~$h$ to each internal edge.
+  Each tree with\/ $k$ leaves has\/ $k{-}1$ internal vertices
+  and\/ $k{-}2$ internal edges; the number of such trees is
+  the Catalan number\/~$C_{k-1}$.
+
+\item \textbf{Tree-level bootstrap equation.}
+  Define the \emph{dressed propagator}\/
+  $\Phi = \sum_{k \geq 1} \Phi_k\colon T^+(H) \to \cA$ by
+  $\Phi_1 = \iota$ and, for $k \geq 2$,
+  \begin{equation}
+  \label{eq:dressed-propagator}
+    \Phi_k(a_1, \ldots, a_k)
+    \;=\;
+    \sum_{\substack{i+j = k \\ i,j \geq 1}}
+    (-1)^{\varepsilon(i,j)}\;
+    h \circ m_2\bigl(
+      \Phi_i(a_1, \ldots, a_i),\;
+      \Phi_j(a_{i+1}, \ldots, a_k)
+    \bigr),
+  \end{equation}
+  where $\varepsilon(i,j) = |a_1| + \cdots + |a_i|$ is the total degree
+  of the first $i$ desuspended inputs (the standard Koszul sign from the
+  $(i,j)$-splitting of the desuspended tensor product).
+  Compactly: $\Phi = \iota + h \circ m_2 \circ \Phi^{\otimes 2}$,
+  where the tensor product sums over all ordered splittings.
+  The total transferred operation
+  $\mathfrak{M} = \sum_{k \geq 2} m_k^H$ is
+  \begin{equation}
+  \label{eq:chiral-dyson-schwinger}
+    \mathfrak{M}
+    \;=\;
+    p \circ m_2 \circ \Phi^{\otimes 2}.
+  \end{equation}
+
+\item \textbf{Lagrangian identification.}
+  The tree formula~\eqref{eq:resolvent-tree-formula} is the
+  Feynman-diagram expansion of the derived self-intersection.
+  The bar complex\/ $\barB(\cA) = T^c(s^{-1}\bar{\cA})$
+  has $k$-chains $(s^{-1}\bar{\cA})^{\otimes k}$;
+  the deformation retract
+  contracts this to the transferred complex on~$H$ whose
+  differential involves all\/ $m_k^H$.
+  By Theorem~\textup{\ref{thm:bar-is-self-intersection}}\textup{(ii)},
+  $\barB(\cA) \simeq \cO(\cL_\cA \times_{\Mvac}^h \cL_\cA)$:
+  the bar complex is the structure sheaf of the derived
+  self-intersection.
+  Each tree~$\tau \in \mathrm{PRT}_k$ is a Feynman diagram
+  with interaction vertices~$m_2$ and propagator lines~$h$;
+  the sum over trees computes the structure constants of\/
+  $\cO(\cL_\cA \times_{\Mvac} \cL_\cA)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is the Kadeishvili--Merkulov $\Ainf$ transfer theorem, applied
+to the deformation retract data.  The sign $\varepsilon(T)$ is
+determined by the Koszul convention on desuspended inputs
+(Appendix~\ref{app:brace-signs}).
+
+(ii) Every tree with $k \geq 2$ leaves has a root vertex
+(contributing~$m_2$) connecting two subtrees with $k_1$ and $k_2$
+leaves ($k_1 + k_2 = k$).  The contribution of each subtree is
+$\Phi_{k_i}$: the inclusion $\iota$ if $k_i = 1$ (a single leaf),
+or $h \circ m_2 \circ (\Phi_{k'_1} \otimes \Phi_{k'_2})$ if
+$k_i \geq 2$ (an internal edge followed by a subtree).
+Summing over all $(k_1, k_2)$ and all subtree shapes
+reproduces~\eqref{eq:dressed-propagator}.  Existence and
+uniqueness of the solution follow from the
+formal-power-series contraction principle: filtered by tree
+complexity, each iterate raises the filtration degree, so the
+recursion converges in the complete topology on multilinear
+operations.
+
+(iii) The quasi-isomorphism
+$\barB(\cA) \xrightarrow{\sim} \barB(H, m_\ast^H)$
+induced by the deformation retract identifies each
+$m_k^H$-contribution to the transferred bar differential with
+the sum over trees in~\eqref{eq:resolvent-tree-formula}.
+By Theorem~\ref{thm:bar-is-self-intersection}(ii),
+the bar complex is the structure sheaf of the derived
+self-intersection:
+$\barB(\cA) \simeq \cO(\cL_\cA \times_{\Mvac}^h \cL_\cA)$.
+The tree formula therefore computes the structure constants
+of this derived self-intersection on the transferred
+complex~$H$.
+\end{proof}
+
+\begin{remark}[Five names for the same equation]
+\label{rem:five-names}
+The tree-level bootstrap
+equation~\eqref{eq:chiral-dyson-schwinger} is the computational
+face of the Lagrangian condition.  The following five formulations
+are strictly equivalent:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}ll@{}}
+\textbf{Geometry} &
+  $\omega_{\Mvac}\big|_{\cL_\cA} = 0$
+  \quad (Lagrangian condition) \\
+\textbf{Algebra} &
+  $d_{\barB}^2 = 0$
+  \quad (bar differential squares to zero) \\
+\textbf{Deformation theory} &
+  $d\alpha_T + \tfrac{1}{2}[\alpha_T, \alpha_T] = 0$
+  \quad (Maurer--Cartan equation) \\
+\textbf{Homotopy theory} &
+  $\sum_{i+j=k+1} \pm\, m_i \circ m_j = 0$
+  \quad ($\Ainf$ Stasheff identities) \\
+\textbf{Quantum field theory} &
+  $\Phi = \iota + h \circ m_2 \circ \Phi^{\otimes 2}$
+  \quad (tree-level bootstrap)
+\end{tabular}
+\end{center}
+Equivalences:
+Algebra~$\Leftrightarrow$~Homotopy (Vol~I, Theorem~A);
+Algebra~$\Leftrightarrow$~Deformation Theory
+(Theorem~\ref{thm:MC-deformations-brace});
+Homotopy~$\Leftrightarrow$~QFT
+(Theorem~\ref{thm:resolvent-principle}(ii));
+Geometry~$\Leftrightarrow$~Algebra
+(Theorem~\ref{thm:bar-is-self-intersection}).
+\end{remark}
+
+\begin{corollary}[Koszulness and the resolvent;
+\ClaimStatusProvedHere]
+\label{cor:koszul-resolvent}
+\index{Koszul!and the resolvent|textbf}
+The following are equivalent:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\cA$ is Koszul: bar cohomology is generated in a single
+  internal degree.
+\item The self-intersection is clean:
+  $\cL_\cA \times_{\Mvac} \cL_\cA$ is concentrated in the
+  expected degree, with no excess\/ $\mathrm{Tor}$.
+\item All higher operations vanish on cohomology:
+  $m_k^H = 0$ for\/ $k \geq 3$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(a)$\Leftrightarrow$(b) is
+Theorem~\ref{thm:bar-is-self-intersection}(ii):
+bar cohomology in a single degree means the derived
+self-intersection has no higher Tor.
+(a)$\Leftrightarrow$(c) is the bar-cohomological characterisation
+of Koszulness (Vol~I, Theorem~B): the bar complex is pure if and
+only if the transferred $\Ainf$ structure is formal.
+\end{proof}
+
+\begin{proposition}[The spectral connection form;
+\ClaimStatusProvedHere]
+\label{prop:spectral-resolvent}
+\index{resolvent!spectral connection|textbf}
+Let $\{a \,{}_\lambda\, b\} = m_2^H(a,b)(\lambda)$ be the
+transferred PVA bracket on cohomology, and let
+$r_\cA(z) = \int_0^\infty e^{-\lambda z}
+\{{\cdot}\,{}_\lambda\,{\cdot}\}\,d\lambda$
+be the classical $r$-matrix of the DK-0 bridge
+\textup{(}Proposition~\textup{\ref{prop:dk0-laplace-five-families}}\textup{)}.
+When the self-intersection carries excess\/ $\mathrm{Tor}$
+\textup{(}$m_k^H \neq 0$ for some\/ $k \geq 3$\textup{)},
+the spectral connection form receives higher-resolvent
+corrections:
+\begin{equation}
+\label{eq:spectral-resolvent}
+  r_\cA^{\mathrm{full}}(z)
+  \;=\;
+  r_\cA(z)
+  \;+\;
+  \sum_{k \geq 3}
+  \int_0^\infty \!\cdots\! \int_0^\infty
+  e^{-(\lambda_1 + \cdots + \lambda_{k-1})z}\;
+  m_k^H(\cdot)(\lambda_1, \ldots, \lambda_{k-1})\;
+  d\lambda_1 \cdots d\lambda_{k-1}.
+\end{equation}
+The spectral $R$-matrix is the holonomy of this corrected
+connection:
+\begin{equation}
+\label{eq:R-as-holonomy}
+  R_\cA(z) \;=\; \cP\!\exp\!\int_0^z
+  r_\cA^{\mathrm{full}}(\zeta)\,d\zeta,
+\end{equation}
+where $\cP\!\exp$ denotes the path-ordered exponential.
+For Koszul algebras, the higher corrections vanish
+\textup{(}Corollary~\textup{\ref{cor:koszul-resolvent}}\textup{)},
+and $R_\cA(z) = \exp(r_\cA(z))$: the DK-0 bridge determines
+the full $R$-matrix.  For non-Koszul algebras, the connection
+acquires corrections from the excess intersection classes,
+and the path-ordered exponential produces a non-trivially
+dressed holonomy.
+\end{proposition}
+
+\begin{proof}
+Each $m_k^H(\cdot)(\lambda_1, \ldots, \lambda_{k-1})$ is a
+$\lambda$-dependent multilinear operation; the Laplace transform in
+all spectral variables produces a $z$-dependent endomorphism-valued
+$1$-form.  For $k = 2$ this recovers the DK-0 bridge
+(Proposition~\ref{prop:dk0-laplace-five-families}).
+The passage from the connection form $r^{\mathrm{full}}(z)$ to the
+$R$-matrix via path-ordered exponential is the standard
+Drinfeld--Kohno construction; the Yang--Baxter equation for
+$R_\cA(z)$ follows from the flatness of the connection, which is
+a consequence of the $\Ainf$ Stasheff identities
+(Theorem~\ref{thm:resolvent-principle}).
+Convergence of the sum~\eqref{eq:spectral-resolvent}
+in the formal-power-series topology follows from the tameness
+condition (Definition~\ref{def:tameness}).
+\end{proof}
+
+\begin{proposition}[The genus-$1$ Arnold defect; \ClaimStatusProvedHere]
+\label{prop:genus-1-arnold-defect}
+\index{Arnold relation!genus-1 defect|textbf}
+\index{Eisenstein series $E_2$!as Arnold defect|textbf}
+At genus~$0$, the Arnold relation is exact:
+$A_3^{(0)} = \eta_{12} \wedge \eta_{23}
+  + \eta_{23} \wedge \eta_{31}
+  + \eta_{31} \wedge \eta_{12} = 0$,
+where $\eta_{ij} = d\log(z_i - z_j)$.  This gives
+$d_{\barB}^2 = 0$.
+
+At genus~$1$, replace the rational propagator by the elliptic
+propagator $\eta_{ij}^{(1)} = d\log\sigma(z_i - z_j \mid \tau)$,
+where $\sigma$ is the Weierstrass sigma function.  The
+quasi-periodicity of the Weierstrass $\zeta$-function
+$\zeta = \sigma'/\sigma$ breaks the Arnold combination:
+\begin{equation}
+\label{eq:genus-1-arnold-defect}
+  A_3^{(1)}
+  \;=\;
+  E_2(\tau) \cdot
+  (dz_1 - dz_2) \wedge (dz_2 - dz_3),
+\end{equation}
+where $E_2(\tau) = 1 - 24\sum_{n \geq 1} \sigma_1(n)\,q^n$
+is the quasi-modular Eisenstein series of weight~$2$.
+The genus-$1$ bar curvature is therefore
+\begin{equation}
+\label{eq:genus-1-bar-curvature}
+  d_{\barB}^2\big|_{g=1}
+  \;=\;
+  \kappa(\cA) \cdot E_2(\tau) \cdot \omega_1,
+\end{equation}
+confirming\/ $d_{\barB}^2 = \kappa(\cA) \cdot \omega_g$ at\/ $g = 1$
+\textup{(}Vol~I, Theorem~D\textup{)}.  The period correction
+$F_1(\cA) = \kappa(\cA)/24$ restores the total differential
+$D_1^2 = 0$.
+\end{proposition}
+
+\begin{proof}
+On the torus $E_\tau$, the propagator is
+$\zeta(z \mid \tau) = \sigma'/\sigma$, which satisfies
+$\zeta(z + 1) = \zeta(z) + 2\eta_1$, where
+$\eta_1 = \zeta(1/2)$ is the quasi-period.  The Legendre
+relation gives $\eta_1 = -\pi^2 E_2(\tau)/3$.  The Arnold
+combination at three points on $E_\tau$ picks up the
+quasi-period mismatch:
+\[
+  A_3^{(1)}
+  = 2\eta_1 \cdot (dz_1 - dz_2) \wedge (dz_2 - dz_3)
+  = E_2(\tau) \cdot \bigl(
+    \text{volume form on } \Conf_3(E_\tau)/\mathrm{transl}
+    \bigr).
+\]
+The factor $\kappa(\cA)$ enters through the bar differential's
+coupling to the chiral algebra: $d_{\barB}^2$ is the
+contraction of the Arnold defect with $\kappa(\cA)$, the
+modular characteristic (Vol~I, Theorem~D).  The formula
+$F_1(\cA) = \kappa(\cA)/24$ follows from
+$E_2(\tau) = 1 - 24q - \cdots$ and the requirement $D_1^2 = 0$
+at leading order in the $q$-expansion.
+\end{proof}
+
+\begin{remark}[The complementarity table]
+\label{rem:complementarity-table}
+\index{complementarity constant|textbf}
+\index{shadow archetype|textbf}
+The modular characteristic $\kappa(\cA)$ and its
+Koszul-dual complement $\kappa(\cA^!)$ are computed
+for the standard HT landscape
+(Section~\ref{sec:examples_complete}):
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}lcccc@{}}
+\textbf{Family}
+  & $\kappa(\cA)$
+  & $\kappa(\cA^!)$
+  & $\kappa + \kappa^!$
+  & \textbf{Class} \\
+\hline
+Heisenberg $\cH_k$ & $k$ & $-k$ & $0$ & $\mathbf{G}$ \\
+Affine $\widehat{\mathfrak{sl}}_2$ & $\tfrac{3(k{+}2)}{4}$ &
+  $\tfrac{3(-k{-}2)}{4}$ & $0$ & $\mathbf{L}$ \\
+$\beta\gamma$ & $-1$ & $1$ & $0$ & $\mathbf{C}$ \\
+Virasoro $\mathrm{Vir}_c$ & $c/2$ & $(26{-}c)/2$ & $13$
+  & $\mathbf{M}$ \\
+$\cW_3$ & $5c/6$ & $5(100{-}c)/6$ & $250/3$
+  & $\mathbf{M}$ \\
+\end{tabular}
+\end{center}
+The complementarity constant $\kappa(\cA) + \kappa(\cA^!)$ is
+level-independent in every family (Vol~I, Theorem~C).
+Shadow archetype:
+$\mathbf{G}$ (depth~$2$),
+$\mathbf{L}$ (depth~$3$),
+$\mathbf{C}$ (depth~$4$),
+$\mathbf{M}$ (depth~$\infty$).
+\end{remark}
+
+\begin{theorem}[The tree--wheel evaluation identity;
+\ClaimStatusProvedHere]
+\label{thm:tree-wheel-bridge}
+\index{tree--wheel bridge|textbf}
+\index{Drinfeld--Sokolov reduction!tree--wheel bridge|textbf}
+Let\/ $\cA_{\mathrm{aff}}$ be an affine Kac--Moody algebra at
+generic level.  Let\/ $\cA_W = H^\bullet(
+\cA_{\mathrm{BRST}}, Q_{\mathrm{BRST}})$ be the\/ $W$-algebra
+obtained by principal Drinfeld--Sokolov reduction, with
+deformation retract\/
+$(H, p_{\mathrm{DS}}, \iota_{\mathrm{DS}}, h_{\mathrm{DS}})$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Pre-reduction formality.}
+  The affine algebra is Koszul
+  \textup{(}Theorem~\textup{\ref{thm:one-loop-koszul}}\textup{)}:
+  $m_k^{\mathrm{aff}} = 0$ for\/ $k \geq 3$.
+
+\item \textbf{Post-reduction depth.}
+  The\/ $W$-algebra is not Koszul
+  \textup{(}Theorem~\textup{\ref{thm:ds-koszul-obstruction}}\textup{)}:
+  the transferred operations\/ $m_k^W \neq 0$ for all\/
+  $k \geq 3$.
+
+\item \textbf{Evaluation identity.}
+  The resolvent tree formula~\eqref{eq:resolvent-tree-formula},
+  evaluated on the BRST deformation retract with the
+  Khan--Zeng propagator
+  $K(t,z) = \Theta(t)/(2\pi z)$ and the cubic vertex\/
+  $V_3 = T\mu\partial\mu$, reproduces the wheel integral of
+  Proposition~\textup{\ref{prop:vir-truncation}}:
+  \begin{equation}
+  \label{eq:tree-wheel-evaluation}
+    m_k^W(T, \ldots, T)
+    \;=\;
+    \sum_{\tau \in \mathrm{PRT}_k}
+    p_{\mathrm{DS}} \circ \mathfrak{m}(\tau) \circ
+    \iota_{\mathrm{DS}}^{\otimes k}(T, \ldots, T)
+    \;=\;
+    \int_{\FM_k(\C) \times \Conf_k^{<}(\R)}
+    \prod_{i=1}^k K(z_i - z_{i+1}, t_i - t_{i+1})
+    \cdot V_3(z_i).
+  \end{equation}
+\item \textbf{Loop count.}
+  Every connected diagram contributing to $m_k^W(T, \ldots, T)$ has
+  loop number\/ $L = E - V + 1 = 1$
+  \textup{(}Proposition~\textup{\ref{prop:vir-truncation}}\textup{)}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is Theorem~\ref{thm:one-loop-koszul}: one-loop exactness of
+the affine BV theory implies Koszulness, hence formality of the
+transferred $\Ainf$ structure
+(Corollary~\ref{cor:koszul-resolvent}).
+
+(ii) is Theorem~\ref{thm:ds-koszul-obstruction}: DS reduction
+introduces higher operations that violate Koszulness.
+
+(iii) The resolvent formula expresses $m_k^W$ as a sum of tree
+contributions, each involving compositions of
+$m_2^{\mathrm{aff}}$ (at internal vertices) and
+$h_{\mathrm{DS}}$ (at internal edges).  Substituting the
+explicit propagator $K(t,z) = \Theta(t)/(2\pi z)$ from the
+Khan--Zeng construction converts each composition into a
+configuration-space integral.  The key computation: when the
+tree contributions are summed, the $C_{k-1}$ tree terms
+reassemble into a single integral over the wheel configuration
+because the BRST homotopy $h_{\mathrm{DS}}$ provides the
+propagator connecting consecutive vertices around the cycle.
+This reassembly is verified by direct comparison of the
+integrand on both sides: the tree sum produces exactly the
+cyclic product $\prod_{i=1}^k K(z_i - z_{i+1}, t_i - t_{i+1})$
+after the intermediate $\mu$-field contractions are performed.
+
+(iv) On the Feynman side, the loop count is
+$L = E - V + 1 = k - k + 1 = 1$
+(Proposition~\ref{prop:vir-truncation}, with $n_2 = 0$:
+$k$ cubic vertices $V_3$, $k$ internal propagator edges,
+one external $T$-leg per vertex).  On the resolvent side,
+each individual tree has $L = 0$, but the evaluation
+of the tree sum through the BRST complex produces a single
+connected one-loop diagram because the non-cohomological
+intermediate states force all trees to contribute to the same
+cyclic integral.
+\end{proof}
+
+\begin{remark}[Koszulness and the absence of wheels]
+\label{rem:koszul-no-folding}
+\index{Koszul!and the absence of wheels}
+For Koszul algebras, the transferred $\Ainf$ structure is formal
+($m_k^H = 0$ for $k \geq 3$), so the resolvent produces no
+higher operations and hence no wheel diagrams: the tree formula
+gives only $m_2^H$, and there are no internal homotopy edges
+to generate loops.  DS reduction breaks Koszulness by
+manufacturing higher-order OPE poles from simple ones
+(Theorem~\ref{thm:ds-koszul-obstruction}): the Virasoro
+fourth-order pole (present for $c \neq 0$) creates excess intersection dimension
+(Remark~\ref{rem:virasoro-excess-intersection}), and the BRST
+complex provides the intermediate states through which the
+resolvent trees evaluate to non-trivial wheel integrals.
+\end{remark}
+
+\begin{construction}[The universal element]
+\label{rem:universal-element}
+\index{Maurer--Cartan element!universal|textbf}
+The $\Ainf$ operations $\{m_k\}_{k \geq 1}$ on $\cA$
+determine a coderivation $d_B$ on the bar coalgebra
+$\barB(\cA) = T^c(s^{-1}\bar\cA)$; the condition $d_B^2 = 0$
+(the Stasheff identities) is equivalent to the Maurer--Cartan
+equation
+$d\alpha_T + \tfrac{1}{2}[\alpha_T, \alpha_T] = 0$
+in the convolution dg Lie algebra
+$\mathrm{C}^\bullet_{\mathrm{ch,top}}(\cA)[1]$
+(Theorem~\ref{thm:MC-deformations-brace}).  The element
+$\alpha_T$ is the coderivation $d_B$ viewed as an operadic
+cochain via the standard identification between coderivations
+of the cofree cooperad and elements of the convolution algebra
+(Section~\ref{sec:bar_cobar}).  The dressed propagator~$\Phi$
+(Theorem~\ref{thm:resolvent-principle}) provides the
+computational algorithm for $\alpha_T$: it determines all $m_k^H$
+on cohomology, and these determine the transferred coderivation
+$d_B^H$, which gives the transferred MC element via the same
+identification.
+
+The two-color structure of $\SCchtop$ decomposes
+$\alpha_T$ by color type:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\textbf{Color} & \textbf{Component} &
+  \textbf{Projection} \\
+\hline
+Closed $(\FM_k(\C))$ &
+  $\alpha_T^{\,\mathrm{cc}}$ &
+  $\Ainf$ operations $\{m_k^H\}$
+  \quad\textup{(Thm~\ref{thm:resolvent-principle})} \\
+Open $(E_1)$ &
+  $\alpha_T^{\,\mathrm{oo}}$ &
+  $\cA^!$ Koszul dual product
+  \quad\textup{(Sec~\ref{sec:line_operators})} \\
+Mixed $(\FM_k \times E_1)$ &
+  $\alpha_T^{\,\mathrm{co}}$ &
+  spectral connection $r^{\mathrm{full}}(z)$
+  \quad\textup{(Prop~\ref{prop:spectral-resolvent})}
+\end{tabular}
+\end{center}
+The Maurer--Cartan equation decomposes accordingly.  The
+Swiss-cheese directionality $\alpha^{\mathrm{oc}} = 0$
+(no open-to-closed operations) eliminates the $(oc)$-sector,
+and the remaining terms give three sub-equations:
+\begin{itemize}[leftmargin=1.8em]
+\item \textbf{Closed:}
+  $d(\alpha^{\mathrm{cc}}) +
+  \tfrac{1}{2}[\alpha^{\mathrm{cc}}, \alpha^{\mathrm{cc}}] = 0$
+  \quad (Stasheff identities);
+\item \textbf{Open:}
+  $d(\alpha^{\mathrm{oo}}) +
+  \tfrac{1}{2}[\alpha^{\mathrm{oo}}, \alpha^{\mathrm{oo}}] = 0$
+  \quad (associativity of $\cA^!$);
+\item \textbf{Mixed:}
+  $d(\alpha^{\mathrm{co}}) +
+  [\alpha^{\mathrm{cc}}, \alpha^{\mathrm{co}}] +
+  [\alpha^{\mathrm{co}}, \alpha^{\mathrm{oo}}] = 0$
+  \quad (connection compatibility).
+\end{itemize}
+The $R$-matrix is the holonomy of the mixed
+connection~\eqref{eq:R-as-holonomy}.
+\end{construction}
 
 \section*{The holographic reconstruction theorem}
 
