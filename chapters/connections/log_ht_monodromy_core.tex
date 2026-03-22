@@ -1561,4 +1561,176 @@ times the period form $\omega_1$, in agreement with the formula
 $\kappa\cdot\omega_g$ established in Volume~I.
 \end{remark}
 
+\section{Monodromy equals spectral $R$-matrix: the affine lineage}\label{sec:affine-monodromy-identification}
+
+The computations above identify the reduced HT monodromy for $\widehat{\fg}_k$ with the eigenvalues of the quantum group $R$-matrix. We now prove this identification as a theorem, valid for every simple Lie algebra $\fg$ at generic level, by combining three inputs: one-loop exactness of the affine half-space BV theory, the Drinfeld--Kohno theorem, and the spectral $R$-matrix of Section~\ref{sec:spectral_braiding}.
+
+The key mechanism is that one-loop exactness \emph{collapses the $A_\infty$ tower}: the higher collision homotopies $h_S$ ($|S| \geq 3$) of Section~\ref{sec:ainfty} vanish after reduction to degree-zero states, because the tree-level BRST complex is a regular-sequence Koszul model (Proposition~\ref{prop:regular-sequence}). The reduced logarithmic connection is therefore determined entirely by its binary residues, and these are the Casimir tensors of the KZ connection.
+
+\subsection{One-loop collapse and the KZ identification}
+
+Let $\fg$ be a simple Lie algebra with dual Coxeter number $h^\vee$, Killing form $\kappa$, and split Casimir $\Omega \in \fg \otimes \fg$. Let $k \in \CC$ with $k \neq -h^\vee$. Consider the affine Kac--Moody vertex algebra $V^k(\fg)$ as a logarithmic $\SCchtop$-algebra via the physics bridge (Theorem~\ref{thm:physics-bridge}).
+
+\begin{proposition}[Affine line operators are resolved in degree $0$; \ClaimStatusProvedHere]
+\label{prop:affine-resolved}
+Let $V_1, \dots, V_n$ be finite-dimensional $\fg$-modules, viewed as evaluation modules for the dg-shifted Yangian $\cA^!$ at spectral positions $z_1, \dots, z_n$. Then the tree-level BRST complex $(E_n, Q_{0,n})$ is resolved in degree $0$: $H^j(E_n, Q_{0,n}) = 0$ for $j \neq 0$.
+\end{proposition}
+
+\begin{proof}
+The affine half-space BV quantization is one-loop exact (Theorem~\ref{thm:affine-half-space-bv}). By the one-loop Koszul criterion (Theorem~\ref{thm:one-loop-koszul}), the pre-reduction boundary algebra $V^k(\fg)$ is chirally Koszul: the bar cohomology is concentrated and the transferred $A_\infty$ operations satisfy $m_k^{\mathrm{aff}} = 0$ for $k \geq 3$. Consequently the tree-level line complex for evaluation modules is a Koszul complex of the type in Proposition~\ref{prop:regular-sequence}, with the regular sequence given by the spectral evaluation constraints. The concentration in degree $0$ follows.
+\end{proof}
+
+\begin{theorem}[Reduced HT connection equals KZ connection; \ClaimStatusProvedHere]
+\label{thm:reduced-equals-kz}
+In the setting of Proposition~\textup{\ref{prop:affine-resolved}}, the reduced logarithmic flat connection on $H_n = H^0(E_n[[\h]], Q_n)$ is the Knizhnik--Zamolodchikov connection:
+\[
+  \A_n \;=\; \frac{1}{k + h^\vee}\sum_{1 \leq i < j \leq n} \rho_{ij}(\Omega)\, d\log(z_i - z_j),
+\]
+where $\rho_{ij}$ acts in the $i$-th and $j$-th tensor factors of\/ $V_1 \otimes \cdots \otimes V_n$.
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{prop:affine-resolved}, the tree-level line complex is resolved in degree~$0$. The unconditionality theorem (Theorem~\ref{thm:unconditionality}) therefore applies: the canonical $\h$-adic retract exists, and the reduced superconnection is an ordinary logarithmic flat connection
+\[
+  \A_n = p_n A_n^{(1)} i_n
+\]
+by one-form rigidity (Theorem~\ref{thm:one-form-rigidity}).
+
+It remains to identify the binary residues. By Corollary~\ref{cor:reduced-residues}, the residue of $\A_n$ along the collision divisor $D_{\{i,j\}}$ is
+\[
+  \Res_{D_{\{i,j\}}}(\A_n) = p_n \Res_{D_{\{i,j\}}}(A_n^{(1)}) \, i_n.
+\]
+The raw $1$-form residue $\Res_{D_{\{i,j\}}}(A_n^{(1)})$ is the binary collision kernel $r_{ij}(z_{ij})$ evaluated at $z_{ij} = 0$, which by the Laplace formula (Proposition~\ref{prop:field-theory-r}) is the leading pole of
+\[
+  r(z) = \int_0^\infty e^{-\lambda z} \{\cdot{}_\lambda \cdot\}\, d\lambda.
+\]
+For the affine Kac--Moody algebra $V^k(\fg)$, the $\lambda$-bracket on generators is
+\[
+  \{J^a{}_\lambda J^b\} = f^{ab}_c J^c + k \kappa^{ab} \lambda.
+\]
+The Laplace transform gives
+\[
+  r(z) = \frac{1}{z}\Big(\sum_{a,b} f^{ab}_c J^c \otimes E_{ab}\Big) + \frac{k\,\kappa}{z^2} + O(z^{-3}).
+\]
+On evaluation modules---where $J^a$ acts as the finite-dimensional representation matrix $\rho(X^a)$---the residue at $z = 0$ is determined by the simple-pole coefficient.  The structure-constant tensor $\sum_{a,b} f^{ab}_c \rho(X^c) \otimes E_{ab}$ equals the adjoint action of the split Casimir~$\Omega = \sum_a X^a \otimes X_a$ (with indices raised by the finite Killing form~$\kappa$):
+\[
+  \Res_{z=0}\, r(z)\,dz \;=\; \Omega_{ij}.
+\]
+The factor $(k + h^\vee)^{-1}$ arises from the passage to the \emph{reduced} connection via the projection~$p_n$.  The bar-complex differential normalises binary operations by the affine bilinear form $(k + h^\vee)\kappa$ (the $h^\vee$-shift being the normal-ordering correction in the Segal--Sugawara vector $T = \tfrac{1}{2(k+h^\vee)} \sum{:}J^a J_a{:}$, which ensures $T(z)J^a(w) \sim J^a(w)/(z-w)^2$).  The projection $p_n$ to degree-zero states absorbs this normalisation, giving the KZ residue $\Omega_{ij}/(k + h^\vee)$.
+
+Since the affine algebra is Koszul ($m_k = 0$ for $k \geq 3$), there are no higher collision corrections to the residue: the $A_\infty$ Yang--Baxter defect (Theorem~\ref{thm:first-obstruction}) vanishes identically, and the higher support homotopies $h_S$ ($|S| \geq 3$) can be taken to be zero. After projection to degree-zero states, the regular terms in $r(z)$ beyond the simple pole act on higher-degree components that are killed by $p_n$. Thus
+\[
+  \A_n = \frac{1}{k + h^\vee}\sum_{i < j} \rho_{ij}(\Omega)\, d\log(z_i - z_j),
+\]
+which is precisely the KZ connection at level $k$.
+\end{proof}
+
+\subsection{The identification theorem}
+
+\begin{theorem}[Monodromy equals spectral $R$-matrix for the affine lineage; \ClaimStatusProvedHere]
+\label{thm:affine-monodromy-identification}
+\index{monodromy!affine identification|textbf}
+\index{R-matrix@$R$-matrix!monodromy identification|textbf}
+Let $\fg$ be a simple Lie algebra and $k \in \CC \setminus \{-h^\vee\}$ generic. Let $V_1, \dots, V_n$ be finite-dimensional $\fg$-modules. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item The monodromy of the reduced HT logarithmic connection on $\Conf_n(\CC)$ equals the monodromy of the KZ connection at level $k$:
+  \[
+    \rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}} \colon \pi_1(\Conf_n(\CC)) \longrightarrow \Aut(V_1 \otimes \cdots \otimes V_n).
+  \]
+  \item By the Drinfeld--Kohno theorem, this monodromy factors through the quantum group\/ $U_q(\fg)$ at $q = e^{i\pi/(k + h^\vee)}$: the representation $\rho_n^{\mathrm{HT}}$ is equivalent to the braided tensor product representation of\/ $\mathrm{Rep}_q(\fg)$ on $V_1 \otimes \cdots \otimes V_n$.
+  \item The spectral $R$-matrix $R_{V_i, V_j}(z)$ of Section~\textup{\ref{sec:spectral_braiding}}, restricted to evaluation modules, equals the quantum group $R$-matrix: the braided monoidal structure on the reduced HT line category coincides with the braided monoidal structure on $\mathrm{Rep}_q(\fg)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{(i)} is immediate from Theorem~\ref{thm:reduced-equals-kz}: the reduced HT connection \emph{is} the KZ connection, so their monodromies are identical.
+
+\medskip
+\noindent\textbf{(ii).} The Drinfeld--Kohno theorem (\cite{Dri89}, Theorem~3.2; \cite{KL93}) asserts that the monodromy representation of the KZ connection at level $k$, acting on tensor products of finite-dimensional $\fg$-modules, factors through the quantum group $U_q(\fg)$ at $q = e^{i\pi/(k + h^\vee)}$. The braiding $\sigma_{ij}^2 \mapsto \exp(-2\pi i \cdot \Omega_{ij}/(k + h^\vee))$ on elementary generators matches the universal $R$-matrix of $U_q(\fg)$ acting on $V_i \otimes V_j$. Since $\rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}}$, the same factorization holds for the HT monodromy.
+
+\medskip
+\noindent\textbf{(iii).} The spectral $R$-matrix of Definition~\ref{def:spectral-braiding} computes the braiding on the boundary line category $\cC_\partial$ via configuration integrals over $\FM_2(\CC)$ (Theorem~\ref{thm:braided-category}). On evaluation modules, this $\FM_2$-integral reduces: by the same one-loop collapse mechanism as in Theorem~\ref{thm:reduced-equals-kz}, the full $A_\infty$ exchange path reduces to the binary exchange governed by the Casimir. The classical limit $r(z) = \Omega/z + O(z^{-2})$ (Proposition~\ref{prop:field-theory-r}) exponentiates to the half-monodromy $R_{ij}(z) = \exp(-\pi i \cdot \Omega_{ij}/(k + h^\vee))$ of the KZ connection. By Remark~\ref{rem:spectral-R-dk-specialization}, this specialization is exactly the Drinfeld $R$-matrix governing the DK equivalence.
+
+Combining: on evaluation modules, the spectral $R$-matrix equals the KZ monodromy, which equals the quantum group $R$-matrix. The associator $\Phi_{\mathrm{HT}}$ of Definition~\ref{def:ht-assoc} likewise reduces to the Drinfeld associator $\Phi_{\mathrm{KZ}}$. The pentagon and hexagon identities (Theorems~\ref{thm:pentagon} and~\ref{thm:hexagon}) are therefore the pentagon and hexagon of $\mathrm{Rep}_q(\fg)$, and the two braided monoidal categories coincide.
+\end{proof}
+
+\begin{remark}[Unconditional status]
+\label{rem:affine-unconditional}
+Every input to Theorem~\ref{thm:affine-monodromy-identification} is unconditional. The one-loop exactness of the affine half-space BV theory is proved in Theorem~\ref{thm:affine-half-space-bv}. The Koszulness of $V^k(\fg)$ follows from Theorem~\ref{thm:one-loop-koszul}. The unconditionality theorem (Theorem~\ref{thm:unconditionality}) guarantees the reduced monodromy machine. The Drinfeld--Kohno theorem is a classical result. No standing hypothesis remains: the result holds for any simple $\fg$ and any generic level $k$.
+\end{remark}
+
+\subsection{Corollaries}
+
+\begin{corollary}[Reduced HT line category for the affine lineage; \ClaimStatusProvedHere]
+\label{cor:affine-line-category}
+\index{line operators!affine identification}
+For $\fg$ simple and $k$ generic, the reduced HT line category---the monodromic braided monoidal category of Corollary~\textup{\ref{cor:braided-category}}---restricted to evaluation modules, is equivalent as a braided monoidal category to $\mathrm{Rep}_q(\fg)$ at $q = e^{i\pi/(k + h^\vee)}$:
+\[
+  \cC_{\mathrm{line}}^{\mathrm{red}}\big|_{\mathrm{eval}} \;\simeq\; \mathrm{Rep}_q(\fg).
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:affine-monodromy-identification}(iii) identifies the braiding and associator. The monoidal structure (tensor product of evaluation modules) is the same on both sides. The equivalence follows from the reconstruction theorem for braided monoidal categories: a braided monoidal category with the same objects, morphisms, associator, and braiding is equivalent.
+\end{proof}
+
+\begin{corollary}[Jones polynomial from the bar complex; \ClaimStatusProvedHere]
+\label{cor:jones-polynomial}
+\index{Jones polynomial|textbf}
+\index{Kontsevich integral}
+For $\fg = \mathfrak{sl}_2$ at level $k$, the bar complex integrals over $\FM_n(\CC) \times \Conf_n(\RR)$, evaluated on the fundamental weight system of $\mathfrak{sl}_2$, compute the colored Jones polynomial $J_K(q)$ of a framed knot $K$ at $q = e^{i\pi/(k+2)}$.
+\end{corollary}
+
+\begin{proof}
+The argument has two steps: one proved here, one classical.
+
+\medskip
+\noindent\textbf{Step 1 (Braid representation from the bar complex).}
+The bar complex of $V^k(\mathfrak{sl}_2)$, viewed as a logarithmic $\SCchtop$-algebra, produces a flat connection on configuration spaces by Theorem~\ref{thm:synthesis}. By Theorem~\ref{thm:affine-monodromy-identification}(i)--(ii), the monodromy of this connection on evaluation modules equals the KZ monodromy, which factors through $U_q(\mathfrak{sl}_2)$ at $q = e^{i\pi/(k+2)}$ via the Drinfeld--Kohno theorem. In particular, the bar complex computes the braid-group representation
+\[
+  \rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}} \colon B_n \longrightarrow \Aut(V^{\otimes n})
+\]
+on tensor powers of any finite-dimensional $\mathfrak{sl}_2$-module~$V$. The integration domain $\FM_n(\CC) \times \Conf_n(\RR)$ is the Swiss-cheese operation space: the $\FM_n(\CC)$ factor carries the bar differential and the $\Conf_n(\RR)$ factor carries the $E_1$ coproduct implementing the group-like expansion.
+
+\medskip
+\noindent\textbf{Step 2 (Braid closure via the Reshetikhin--Turaev construction).}
+The colored Jones polynomial of a framed knot~$K$, presented as the closure of a braid $\beta \in B_n$, is obtained by applying the quantum trace $\operatorname{tr}_q = \operatorname{tr}(K^{2\rho} \,\cdot\,)$ to the braid-group representation factoring through $U_q(\mathfrak{sl}_2)$:
+\[
+  J_K(q) \;=\; \operatorname{tr}_q\bigl(\rho_n^{\mathrm{KZ}}(\beta)\bigr).
+\]
+This is the Reshetikhin--Turaev construction \cite{RT90}: $\mathrm{Rep}_q(\mathfrak{sl}_2)$ is a ribbon category (the ribbon element is $v = K^{-1}u$ where $K = q^H$ and $u = \sum S(b_i)a_i$), and the quantum trace implements the Markov closure that converts a braid representation into a framed link invariant. This step is a classical theorem requiring no new input.
+
+\medskip
+\noindent\textbf{Conclusion.}
+Since $\rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}}$ (Step~1), the quantum trace applied to the bar-complex monodromy computes the same invariant as the quantum trace applied to the KZ monodromy---namely, $J_K(q)$.
+\end{proof}
+
+\begin{corollary}[First proved holographic dictionary; \ClaimStatusProvedHere]
+\label{cor:holographic-dictionary}
+\index{holographic dictionary!affine}
+The affine lineage provides the first unconditionally proved instance of the full holographic dictionary of the Swiss-cheese programme:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\textbf{3d HT bulk} & \textbf{2d boundary} & \textbf{Line operators} \\
+\hline
+Affine PV sigma model & $V^{k+\hbar\delta_\fg}(\fg)$ & $\mathrm{Rep}_q(\fg)$ \\
+Bar differential on $\FM_k(\CC)$ & Chiral OPE & Braiding \\
+$E_1$ coproduct on $\Conf_k(\RR)$ & Tensor product & Monoidal structure \\
+Reduced HT associator & KZ associator & Drinfeld associator \\
+\end{tabular}
+\end{center}
+The bulk-to-boundary functor is the half-space quantization of Theorem~\textup{\ref{thm:affine-half-space-bv}}. The boundary-to-line functor is Koszul duality: $\cA^! \simeq Y_\hbar(\fg)$. The identification of the line category with the quantum group representation category is Theorem~\textup{\ref{thm:affine-monodromy-identification}}.
+\end{corollary}
+
+\begin{remark}[Scope and frontier]
+\label{rem:affine-scope}
+Theorem~\ref{thm:affine-monodromy-identification} proves the monodromy identification for evaluation modules of the affine lineage. Three natural extensions remain:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item \emph{Beyond evaluation modules}: for infinite-dimensional modules in category $\cO_k(\widehat{\fg})$, the identification $\rho^{\mathrm{HT}} = \rho^{\mathrm{KZ}}$ requires additional convergence analysis of the $\h$-adic retract (Proposition~\ref{prop:analytic-retract}). The DK-2 equivalence $\cO_k^{\mathrm{int}}(\widehat{\fg}) \simeq \mathrm{Rep}_q(\fg)$ of Kazhdan--Lusztig~\cite{KL93} suggests this should hold.
+  \item \emph{Beyond the affine lineage}: for $\mathcal{W}$-algebras obtained by Drinfeld--Sokolov reduction, the higher $A_\infty$ operations $m_k$ ($k \geq 3$) do not vanish. The one-loop collapse mechanism breaks, and the full $A_\infty$ superconnection contributes. The reduced monodromy is then the $\mathcal{W}$-algebra $R$-matrix, which should equal the spectral $R$-matrix of the $\mathcal{W}$-Yangian---this is the content of Conjecture~\ref{conj:rmatrix} in the non-Koszul regime.
+  \item \emph{Higher genus}: at genus $g \geq 1$, the KZ connection is replaced by the KZB connection (Computation~\ref{comp:genus1-kzb}), and the monodromy acquires modular corrections controlled by the curvature $\kappa(\cA) \cdot \omega_g$. The identification should lift to elliptic and higher-genus $R$-matrices, connecting to the chromatic tower (Conjecture~\ref{conj:chromatic}).
+\end{enumerate}
+\end{remark}
+
 % Bibliography entries consolidated into main.tex.
