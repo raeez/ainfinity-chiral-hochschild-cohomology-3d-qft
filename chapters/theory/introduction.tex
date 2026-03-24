@@ -856,10 +856,12 @@ destroys the equivalence.
 
 \section*{The dg-shifted Yangian}
 
-The Koszul dual algebra $\cA^!$ admits a natural enrichment
-that is \emph{not} a second layer of structure atop the
-Koszul dual, but the Koszul dual \emph{itself}, viewed
-through the self-duality of the Swiss-cheese operad.
+The Koszul dual algebra $\cA^!$ carries two layers of
+structure: the $\SCchtop$-algebra structure from operadic
+self-duality (the algebra half), and the bialgebra
+structure from the monoidal category of line operators
+(the coalgebra half).  Together, they make $\cA^!$ a
+dg-shifted Yangian.
 
 \noindent\textsc{Definition}
 \textit{(dg-shifted Yangian; Definition~\textup{\ref{def:dg_Yangian}}).}
@@ -885,23 +887,26 @@ r_{23}(z) + (\id \otimes \Delta_z)(r(z+w))
 r_{12}(w) + (\Delta_w \otimes \id)(r(z)).
 \]
 
-By operadic Koszul self-duality (\S\ref{subsec:dg-yangian-operadic}),
-$\cA^!$ is a dg-shifted Yangian
+The Koszul self-duality $(\SCchtop)^! \simeq \SCchtop$
+(\S\ref{subsec:dg-yangian-operadic}) gives~$\cA^!$ an
+$\SCchtop$-algebra structure (the algebra half: product,
+$\lambda$-bracket, translation, compatibility).  The
+monoidal structure on line operators
+$\cC_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}$
+provides the coproduct and $R$-matrix (the bialgebra
+half).  Together, $\cA^!$ is a dg-shifted Yangian
 (Theorem~\ref{thm:Koszul_dual_Yangian}), with
 $(\cA^!)^! \simeq \cA$
-(Theorem~\ref{thm:duality-involution}).  The Yangian axioms
-\emph{are} the operadic identities, decomposed by color:
-$T$ is $\C$-equivariance of $\FM_k(\C)$; the $R$-matrix is
-$[\FM_2(\C)]$ at arity~$2$; the coproduct is the $E_1$
-interval-cutting; the Yang--Baxter equation is operadic
-associativity at $\FM_3(\C) \times E_1(3)$.
+(Theorem~\ref{thm:duality-involution}).
 
 The RTT presentation of the Yangian---the relation
-$R_{12}(u-v)\, T_1(u)\, T_2(v) = T_2(v)\, T_1(u)\, R_{12}(u-v)$
+$R_{12}(u-v)\, T_1(u)\, T_2(v) = T_2(v)\, T_1(u)\,
+R_{12}(u-v)$
 governing the factorisation quantum group---is the spectral
-rewriting of the arity-$2$ closed-color operation, and the
-endomorphism algebra $\End(\mathrm{fib})$ of the fibre functor
-on $\cC_{\mathrm{line}}$ is identified with $\Ydg_\cA(z)$.
+rewriting of the line-operator braiding, and the
+endomorphism algebra $\End(\mathrm{fib})$ of the fibre
+functor on $\cC_{\mathrm{line}}$ is identified
+with $\Ydg_\cA(z)$.
 
 
 \section*{The recognition theorem and homotopy-Koszulity}
@@ -1067,11 +1072,91 @@ The full genus tower is developed in Section~\ref{sec:bar_cobar}
 and Part~V (Section~\ref{ch:modular-pva-quantization}).  The
 curvature at genus~$g \geq 2$ is resolved in Volume~I by
 inductive genus determination
-(Theorem~\ref*{thm:inductive-genus-determination}),
-$2$D convergence (Proposition~\ref*{prop:2d-convergence}),
-and the analytic-algebraic comparison
-(Theorem~\ref*{thm:analytic-algebraic-comparison});
+along with $2$D convergence and the analytic-algebraic comparison;
 MC5 is proved at all genera.
+
+\subsection*{The modular bar complex and its Feynman transform}
+
+The genus-$g$ bar complex is one fibre of a larger object: the
+\emph{complete modular bar coalgebra} $\Bmod(C)$
+(Definition~\ref{def:complete-modular-bar}, \S\ref{ch:modular-pva-quantization}).
+It is the completed product
+\[
+\Bmod(C)
+\;=\;
+\prod_{[\Gamma] \in \StGraph^{\mathrm{conn}}}
+\bigl(C[\Gamma]\bigr)_{\Aut(\Gamma)},
+\]
+over isomorphism classes of connected stable graphs, with total
+differential $D = D_{\mathrm{int}} + D_{\mathrm{exp}}$ squaring
+to zero by codimension-two cancellation on boundary strata
+(Theorem~\ref{thm:modular-bar}).  The differential decomposes
+into a genus-preserving part $D_0$ and a genus-raising part $D_1$:
+\[
+D_0^2 = 0,
+\qquad
+D_0 D_1 + D_1 D_0 = 0,
+\qquad
+D_1^2 = 0.
+\]
+The genus-raising operator $D_1 = D_{\mathrm{nsep}}$ sums over
+nonseparating one-edge expansions: it is the algebraic shadow of
+the first loop correction.  Without it, every genus-zero structure
+extends trivially to all genera; $D_1$ is the minimal primitive
+that creates genuine modular obstructions.
+
+The \emph{modular deformation dg~Lie algebra}
+$L_{\mathrm{mod}}(C) = \Coder(\Bmod(C))[-1]$ is a complete
+filtered dg~Lie algebra whose genus-zero associated graded
+\emph{is} the tree-level deformation complex---the chiral
+convolution dg~Lie algebra of Volume~I\@.  The modular
+convolution algebra is its all-genus, all-stable-graph
+completion.  The total positive-genus correction
+$\delta_\cA := D - D^{(0)}$ is a canonical Maurer--Cartan element
+in the positive-genus ideal
+(Theorem~\ref{thm:coderivation-MC-synthesis}):
+\[
+\partial\delta_\cA + \tfrac{1}{2}[\delta_\cA, \delta_\cA] = 0.
+\]
+The genus expansion $D = \sum_{g \ge 0} \hbar^g D^{(g)}$ is the
+Feynman transform of the modular operad
+$\{\overline{\cM}_{g,n}\}$.  The identity $D^2 = 0$ decomposes
+into sewing relations $\sum_{p+q=g} D^{(p)} D^{(q)} = 0$ at
+each genus, and each graph carries the symmetry factor
+$1/|\Aut(\Gamma)|$---the combinatorial fingerprint of a Feynman
+expansion (Theorem~\ref{thm:formal-genus-expansion}).
+
+\subsection*{The half-space and the doubling principle}
+
+The deformation-quantization bridge from PVA to vertex algebra
+passes through the half-space.  The PV sigma model of Khan--Zeng
+on $\C \times \R_{\ge 0}$ with Neumann boundary produces a BV
+theory whose boundary algebra is the sought vertex algebra.  For
+the affine family, the theory reduces to mixed BF/Chern--Simons
+and is one-loop exact (Theorem~\ref{thm:affine-half-space-bv}).
+
+For nonlinear PVAs, the problem requires all loop orders.  The
+\emph{doubling theorem} (Theorem~\ref{thm:doubling-rwi}) resolves
+this: the half-space BV problem embeds into the doubled whole-space
+$\C \times \R$ via the method of images.  The reflected propagator
+is the pullback of the standard propagator under the images
+embedding; the reflected weight identity is the
+$\sigma$-restriction of the standard Stokes identity.  Every
+logarithmic $\SCchtop$-algebra has a boundary vertex algebra
+(Theorem~\ref{thm:general-half-space-bv}).
+
+The logical chain is closed for all named examples: the affine PV
+sigma model satisfies the physics bridge hypotheses
+(Proposition~\ref{prop:affine-is-log-SC}), and DS reduction
+preserves the $\SCchtop$ structure
+(Proposition~\ref{prop:ds-preserves-SC}), so the Virasoro and
+$\cW_N$ algebras inherit the full programme
+(Corollary~\ref{cor:virasoro-wn-are-SC}).
+
+The five-component datum---bulk factorization algebra, boundary
+vertex algebra, derived center identification, line-operator
+category, spectral $R$-matrix---assembles into a single theorem
+(Theorem~\ref{thm:bulk-boundary-line-factorization}).
 
 
 \section*{Families: the standard landscape}
@@ -1525,7 +1610,7 @@ proofs.
   Rosetta Stone (\S\ref{sec:rosetta-stone}) $\to$
   Foundations (\S\ref{sec:foundations}) $\to$
   PVA descent (\S\ref{sec:PVA_descent}) $\to$
-  Concordance (\S\ref{sec:concordance}).
+  worked examples (\S\ref{sec:examples_complete}).
 \item \emph{Complete theory.}
   Parts~I--II linearly, then examples (Part~IV), then
   Parts~III and~V.

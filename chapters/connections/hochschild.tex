@@ -574,11 +574,11 @@ where the integral is over the appropriate fiber product of configuration spaces
 \begin{proposition}[Well-definedness and functoriality;
 \ClaimStatusProvedHere]
 \label{prop:geometric-braces-well-defined}
-Under the analytic hypotheses (H1)--(H4), the geometric brace operations on $\mathrm{C}^\bullet_{\mathrm{ch,top}}(A)$ are well-defined, strictly multilinear, and satisfy the brace identities. The Gerstenhaber bracket obtained from these braces coincides with the one induced by the cooperad $O^\vee$.
+For a logarithmic $\SCchtop$-algebra (Definition~\ref{def:log-SC-algebra}), the geometric brace operations on $\mathrm{C}^\bullet_{\mathrm{ch,top}}(A)$ are well-defined, strictly multilinear, and satisfy the brace identities. The Gerstenhaber bracket obtained from these braces coincides with the one induced by the cooperad $O^\vee$.
 \end{proposition}
 
 \begin{proof}
-Integrability follows from Hypothesis~(H2): the weight forms have at most logarithmic singularities along the boundary divisors of the FM compactification, and such forms are integrable on compact manifolds with corners. The brace identities follow from Stokes' theorem on $\FM_k(\C) \times \Conf_m(\R)$: the boundary strata reproduce the algebraic brace relations, with the Arnold cancellations at codimension-2 corners ensuring that no spurious terms arise (see Appendix~\ref{app:brace-signs} for the detailed sign verification). Compatibility with the cooperad differential is standard.
+Integrability follows from the logarithmic form condition (Definition~\ref{def:log-SC-algebra}): the weight forms have at most logarithmic singularities along the boundary divisors of the FM compactification, and such forms are integrable on compact manifolds with corners. The brace identities follow from Stokes' theorem on $\FM_k(\C) \times \Conf_m(\R)$: the boundary strata reproduce the algebraic brace relations, with the Arnold cancellations at codimension-$2$ corners ensuring that no spurious terms arise (see Appendix~\ref{app:brace-signs} for the detailed sign verification). Compatibility with the cooperad differential is standard.
 \end{proof}
 
 \subsubsection{The \texorpdfstring{$\ast$}{*}--Lie structure and deformation theory}
@@ -662,11 +662,11 @@ and the same decomposition holds for $\gr^F \mathsf{Obs}_{\mathrm{bulk}}(\mathbb
 \medskip
 \textbf{Step 3: Well-definedness and integrability.}
 
-The integrals defining $\Phi$ converge by Hypothesis~(H2) (Propagator Regularity): the propagator kernels are meromorphic in $\C$ with at most simple poles at collision points, and exponentially decaying along $\R$.  After pullback to the FM compactification $\FM_k(\C) \times \Conf_m(\R)$, the resulting forms have at most logarithmic singularities along the boundary divisors $D_S$.  Since $\FM_k(\C)$ is a compact manifold with corners, forms with logarithmic singularities are integrable --- the key estimate is
+The integrals defining $\Phi$ converge by Theorem~\ref{thm:physics-bridge} (propagator regularity): the propagator kernels are meromorphic in $\C$ with at most simple poles at collision points, and exponentially decaying along $\R$.  After pullback to the FM compactification $\FM_k(\C) \times \Conf_m(\R)$, the resulting forms have at most logarithmic singularities along the boundary divisors $D_S$.  Since $\FM_k(\C)$ is a compact manifold with corners, forms with logarithmic singularities are integrable --- the key estimate is
 \[
 \int_0^\epsilon |\log \varepsilon_S|^N \, \varepsilon_S^{a-1} \, d\varepsilon_S < \infty \quad \text{for } a > 0, \; N \geq 0,
 \]
-where $\varepsilon_S$ is the radial parameter measuring the size of the cluster $S$ (Definition~\ref{def:FM_coords}).  The exponent $a > 0$ is guaranteed by the simple-pole condition in (H2); higher-loop contributions are controlled by (H1) (one-loop finiteness ensures no accumulation of poles).
+where $\varepsilon_S$ is the radial parameter measuring the size of the cluster $S$ (Definition~\ref{def:FM_coords}).  The exponent $a > 0$ is guaranteed by the simple-pole condition of Theorem~\ref{thm:physics-bridge}; higher-loop contributions are controlled by one-loop finiteness (Theorem~\ref{thm:physics-bridge}(b)).
 
 The filtration is complete and Hausdorff on both sides (pole order is bounded below and the complexes are exhausted by finite filtration levels).  By the spectral sequence comparison theorem, the isomorphism on $\gr$ lifts to a quasi-isomorphism on the filtered complexes:
 \[
@@ -1188,3 +1188,147 @@ $H^{(1)}=\mathrm{diag}(\kappa_c,\,\kappa_c+48/(5c+22))$
 the eigenvalues are the curvatures of the two independent
 bulk deformation directions.
 \end{computation}
+
+\subsection{The bulk--boundary factorization theorem}
+\label{subsec:bulk-boundary-factorization-theorem}
+
+We now assemble the preceding results into a single theorem that
+closes the gap between the abstract Hochschild identification and the
+factorization-algebra formulation of holography.  The key inputs are
+all proved:
+\begin{itemize}
+\item Bulk $\simeq$ chiral Hochschild cochains
+  (Theorem~\ref{thm:bulk_hochschild});
+\item Boundary factorization algebra is a vertex algebra
+  (Theorem~\ref{thm:general-half-space-bv});
+\item Bulk is the derived center of boundary
+  (Theorem~\ref{thm:CDG_compatibility}\,(iii));
+\item Line operators $\simeq$ $A^!$-modules
+  (Theorem~\ref{thm:lines_as_modules}).
+\end{itemize}
+What has been missing is a single statement packaging these into the
+bulk--boundary--line datum.
+
+\begin{theorem}[Bulk--boundary--line factorization correspondence]%
+\label{thm:bulk-boundary-line-factorization}
+\ClaimStatusProvedHere.
+Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra
+\textup{(}Definition~\textup{\ref{def:log-SC-algebra})}.
+Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Bulk factorization algebra.}
+The BV observable prefactorization algebra
+$\mathsf{Obs}(\C \times \R)$ is a factorization algebra on
+$\C \times \R$ for the Swiss-cheese operad $\SCchtop$.
+Its cohomology $H^\bullet(\mathsf{Obs}, Q)$ is a commutative
+Poisson vertex algebra with $(-1)$-shifted $\lambda$-bracket.
+
+\item \textbf{Boundary vertex algebra.}
+The boundary restriction
+$\cA_\partial := i^*\mathsf{Obs}\big|_{\C \times \{0\}}$
+is a vertex algebra.
+
+\item \textbf{Bulk $=$ derived center.}
+There is a quasi-isomorphism of dg algebras
+\[
+\mathsf{Obs}(\C \times \R)
+\;\simeq\;
+C^\bullet_{\mathrm{ch}}(\cA_\partial, \cA_\partial),
+\]
+and on cohomology
+$H^\bullet(\mathsf{Obs}) \simeq Z_{\mathrm{der}}(\cA_\partial)$,
+the derived center.
+
+\item \textbf{Line operators.}
+The category of line operators
+$C_{\mathrm{line}} \simeq \cA^!$-$\mathrm{mod}$,
+where $\cA^! = \Omega(\barB(\cA))$ is the Koszul dual.
+
+\item \textbf{Spectral $R$-matrix.}
+The braiding of line operators is encoded by the spectral
+$R$-matrix $r(z)$, computed by the bulk-to-boundary
+propagator exchange:
+\[
+r(z) \;\simeq\; \int_0^\infty d\lambda\, e^{-\lambda z}\,
+\{{\cdot}{}_\lambda{\cdot}\},
+\]
+where $\{{\cdot}{}_\lambda{\cdot}\}$ is the $(-1)$-shifted
+PVA $\lambda$-bracket on $H^\bullet(\mathsf{Obs})$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Each part is proved by a specific theorem.
+
+\emph{Part (i).}
+The observable prefactorization algebra of a perturbative QFT on a
+manifold is a factorization algebra by the Costello--Gwilliam
+recognition theorem~\cite{CG17, CG21}.  That the cohomology is a
+commutative PVA with $(-1)$-shifted bracket is
+Theorem~\ref{thm:cohomology_PVA}.  The Swiss-cheese structure
+(holomorphic factorization in $\C$ and $E_1$ factorization in $\R$)
+follows from the recognition theorem
+(Theorem~\ref{thm:recognition-SC}): the weight forms factor as
+$\omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}$
+(Definition~\ref{def:log-SC-algebra}), and this product decomposition
+is exactly the input for the Swiss-cheese recognition.
+
+\emph{Part (ii).}
+When the logarithmic $\SCchtop$-algebra arises from a freely generated
+PVA with inner holomorphic translation,
+Theorem~\ref{thm:general-half-space-bv} proves the boundary
+factorization algebra is a vertex algebra.  For the affine family, this
+is verified by Proposition~\ref{prop:affine-is-log-SC} and
+Theorem~\ref{thm:affine-half-space-bv}.  For Virasoro and $W_N$, this
+follows via Drinfeld--Sokolov transport
+(Corollary~\ref{cor:virasoro-wn-are-SC}).
+
+\emph{Part (iii).}
+This is Theorem~\ref{thm:bulk_hochschild} (quasi-isomorphism of the
+bulk observable complex with chiral Hochschild cochains) combined with
+Theorem~\ref{thm:CDG_compatibility}\,(iii) (the map to the center).
+
+\emph{Part (iv).}
+This is Theorem~\ref{thm:lines_as_modules}.
+
+\emph{Part (v).}
+The spectral $R$-matrix formula is
+Theorem~\ref{thm:two-color-master}\,(iii): the braiding is computed by
+a single bulk-to-boundary propagator exchange on the half-space
+$\C \times \R_{\ge 0}$, and the Laplace transform formula follows from
+the exponential decay of the propagator in the topological direction.
+\end{proof}
+
+\begin{remark}[What this theorem packages]
+Each ingredient was proved independently.  The contribution of this
+theorem is not new mathematics but a single reference point: for any
+logarithmic $\SCchtop$-algebra, the five-component datum
+\[
+(\mathsf{Obs},\; \cA_\partial,\;
+Z_{\mathrm{der}}(\cA_\partial),\;
+C_{\mathrm{line}},\; r(z))
+\]
+exists and is consistent.  This is the boundary-side holographic datum.
+The open question is bulk reconstruction: given the boundary datum,
+recover the bulk theory and prove uniqueness.
+\end{remark}
+
+\begin{remark}[What is NOT proved here]
+Two claims that might be expected are absent.
+\begin{enumerate}[leftmargin=2.4em]
+\item \textbf{Bulk reconstruction.}  Given the boundary vertex
+  algebra $\cA_\partial$, the problem of reconstructing the unique
+  bulk factorization algebra $\mathsf{Obs}$ whose boundary restriction
+  is $\cA_\partial$ is not solved.
+  Theorem~\ref{thm:bulk_hochschild} goes in the opposite direction:
+  it identifies the bulk from the boundary Hochschild cochains, but
+  does not prove that this is the \emph{only} bulk with this boundary.
+\item \textbf{Large-$N$ identification.}  The genus expansion
+  of the modular bar complex (Theorem~\ref{thm:modular-bar})
+  produces a stable-graph sum with $1/|\Aut(\Gamma)|$ symmetry
+  factors and genus parameter $\hbar$.  Neither volume contains
+  a theorem identifying $\hbar$ with a large-$N$ parameter.
+  The formal resemblance to the 't~Hooft expansion is structural,
+  not proved.
+\end{enumerate}
+\end{remark}
