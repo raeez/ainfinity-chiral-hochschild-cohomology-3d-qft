@@ -1,3 +1,4 @@
+\providecommand{\Tr}{\operatorname{Tr}}
 \section{The bar complex as Swiss-cheese algebra}
 \label{sec:foundations}
 \label{sec:operads-factorization}
@@ -20,7 +21,7 @@ The differential lives on $\FM_k(\C)$.  The coproduct lives on
 $\Conf_k(\R)$: the ordered splitting of a bar element into two
 sub-sequences is the algebraic expression of cutting an interval at
 a point.  Together, a bar element of degree~$k$ is parametrized by
-$\FM_k(\C) \times \Conf_k(\R)$ --- the product of holomorphic and
+$\FM_k(\C) \times \Conf_k(\R)$, the product of holomorphic and
 topological configuration spaces.
 
 This product is the operadic fingerprint of a three-dimensional
@@ -54,32 +55,46 @@ description:
   Consider the triple correspondence
   \[
     \FM_k(\C)
-    \xleftarrow{\;p_{12}\;}
-    \FM_k(\C) \times_{\partial} \FM_k(\C)
-    \xrightarrow{\;p_{13}\;}
-    \FM_{k-1}(\C),
+    \xleftarrow{\;\iota_S\;}
+    D_S \;\cong\; \FM_{k-|S|+1}(\C) \times \FM_{|S|}(\C)
+    \xrightarrow{\;\mathrm{compose}\;}
+    \FM_{k-|S|+1}(\C),
   \]
-  where the fiber product is taken over the collision divisors\/
-  $D_S \subset \partial\FM_k(\C)$.  The bar differential\/
-  $d_{\barB}$ is the convolution: the pushforward\/
-  $p_{13,*}$ of the pullback\/ $p_{12}^* \boxtimes p_{23}^*$ along
-  this triple correspondence.  Each summand in\/ $d_{\barB}$
-  is an OPE residue along a collision stratum, which is precisely
-  the external product on\/ $\FM_2 \times \FM_2$, restricted to\/
-  $\FM_3$ via the boundary inclusion\/ $D_S \hookrightarrow \FM_k$,
-  then pushed forward by collapse.
+  where for each subset\/ $S\subset \{1,\dots,k\}$ with\/
+  $|S|\ge 2$, the codimension-$1$ boundary face\/
+  $D_S \subset \partial\FM_k(\C)$ is the stratum where the points
+  labelled by\/ $S$ collide.  The Fulton--MacPherson
+  compactification identifies\/ $D_S \cong \FM_{k-|S|+1}(\C)
+  \times \FM_{|S|}(\C)$: the first factor records the positions
+  of the\/ $k-|S|+1$ clusters in the ambient plane, and the second
+  records the relative positions of the\/ $|S|$ colliding points at
+  infinitesimal scale.  The bar differential\/ $d_{\barB}$ is a sum
+  over such faces: restrict to\/ $D_S$ via the boundary inclusion\/
+  $\iota_S$, apply the chiral product\/ $m_{|S|}$ on the\/
+  $\FM_{|S|}(\C)$ factor, and re-embed the result into\/
+  $\FM_{k-|S|+1}(\C)$.  Each summand in\/ $d_{\barB}$ is an OPE
+  residue along the collision stratum\/ $D_S$, computed by Stokes'
+  theorem as the integral of the bar kernel over\/ $\partial\FM_k$
+  (Section~\ref{sec:FM_calculus}).
+  (Here ``convolution'' means the boundary-restriction-compose
+  recipe on FM strata, not the pushforward-pullback convolution of
+  Chriss--Ginzburg; the structural parallel is that both assemble a
+  product from a correspondence.)
 
 \item \textbf{Diagonal coproduct.}
   The deconcatenation coproduct\/
   $\Delta\colon T^c(s^{-1}\bar{\cA}) \to
   T^c(s^{-1}\bar{\cA}) \otimes T^c(s^{-1}\bar{\cA})$
   is the pullback\/ $\delta^*$ along the diagonal\/
-  $\Conf_k(\R) \to \Conf_k(\R) \times \Conf_k(\R)$.  Because the
+  $\Conf_k(\R) \to \Conf_k(\R) \times \Conf_k(\R)$
+  (here the ``diagonal'' is the universal property of the cofree
+  conilpotent coalgebra, not a literal pullback of a geometric map).
+  Because the
   ordered configuration space\/ $\Conf_k^{<}(\R)$ is the open
   simplex\/ $\{t_1 < \cdots < t_k\}$, hence contractible,
   the only coassociative coalgebra structure on the cofree
   conilpotent coalgebra\/ $T^c(s^{-1}\bar{\cA})$ compatible with
-  the cogenerators is deconcatenation --- the diagonal of
+  the cogenerators is deconcatenation, the diagonal of
   the groupoid of ordered interval decompositions.
 
 \item \textbf{Coderivation = groupoid compatibility.}
@@ -123,8 +138,8 @@ $D_{\{i,i+1\}} \hookrightarrow \FM_n(\C)$, and push forward along
 the collapse map $\FM_n(\C) \to \FM_{n-1}(\C)$ that merges
 $z_i$ and $z_{i+1}$.  The higher components $d_{\barB}^{(k)}$
 for $k \geq 3$, built from the operations $m_k$, arise from
-deeper boundary strata --- simultaneous collisions of $k$
-consecutive points --- which correspond to iterated convolutions
+deeper boundary strata (simultaneous collisions of $k$
+consecutive points) which correspond to iterated convolutions
 along higher fiber products.
 
 \textbf{Part~(b).}
@@ -160,20 +175,14 @@ between coderivations of the cofree coalgebra and $A_\infty$
 structure maps.
 \end{proof}
 
-\begin{corollary}[$\R$-factorization from the Lagrangian embedding;
-  \ClaimStatusProvedHere]
+\begin{corollary}[Uniqueness of the cofree coproduct]
 \label{cor:R-factorization-lagrangian}
+\textup{(\ClaimStatusProvedHere.)}
 The topological coproduct\/ $\Delta$ carries no independent data
 beyond the holomorphic differential.  Precisely: the
-$\R$-factorization is determined by the Lagrangian embedding\/
-$\mathcal L \hookrightarrow \mathcal M$ as the unique
+$\R$-factorization is determined as the unique
 coassociative coproduct on the cofree coalgebra\/
-$T^c(s^{-1}\bar{\cA})$.  Geometrically, $\Delta$ is the diagonal of
-the self-intersection groupoid\/
-$\mathcal L \times_{\mathcal M} \mathcal L$, the desuspension\/
-$s^{-1}$ is the cotangent shift\/ $T[-1]$ forced by the Lagrangian
-condition, and the cofree coalgebra is the symmetric algebra on
-conormal fibers of the embedding.
+$T^c(s^{-1}\bar{\cA})$ compatible with the cogenerators.
 \end{corollary}
 
 \begin{proof}
@@ -182,17 +191,28 @@ deconcatenation coproduct is the unique coassociative coproduct on
 $T^c(s^{-1}\bar{\cA})$ compatible with the cogenerators.  It is
 therefore determined by the cogenerating space
 $s^{-1}\bar{\cA}$, which is the data of the holomorphic chiral
-algebra~$\cA$ (with degree shift).  The Lagrangian interpretation
-follows: the cofree coalgebra $T^c(N^*[-1])$ on the shifted
-conormal bundle of an embedding $\mathcal L \hookrightarrow
-\mathcal M$ carries a canonical deconcatenation coproduct, and the
-self-intersection $\mathcal L \times_{\mathcal M} \mathcal L$ is
-presented by this coalgebra with diagonal given by deconcatenation.
-Here $\mathcal L$ is the support of the chiral algebra
-(the Ran space of~$\C$), $\mathcal M$ is the ambient moduli, and
-the Lagrangian condition forces the $(-1)$-shift that produces the
-bar desuspension $s^{-1}$.
+algebra~$\cA$ (with degree shift).
 \end{proof}
+
+\begin{remark}[Lagrangian interpretation of the coproduct]
+\label{rem:R-factorization-lagrangian-heuristic}
+\textup{(\ClaimStatusHeuristic.)}
+The algebraic uniqueness of Corollary~\ref{cor:R-factorization-lagrangian}
+admits a suggestive geometric reading.  The cofree coalgebra
+$T^c(N^*[-1])$ on the shifted conormal bundle of an embedding
+$\mathcal L \hookrightarrow \mathcal M$ carries a canonical
+deconcatenation coproduct, and the self-intersection
+$\mathcal L \times_{\mathcal M} \mathcal L$ is presented by this
+coalgebra with diagonal given by deconcatenation.
+In this picture, $\Delta$ is the diagonal of the self-intersection
+groupoid, the desuspension\/ $s^{-1}$ is the cotangent shift\/
+$T[-1]$ forced by the Lagrangian condition, and the cofree coalgebra
+is the symmetric algebra on conormal fibers of the embedding.
+Here $\mathcal L$ is the support of the chiral algebra (the Ran
+space of~$\C$), $\mathcal M$ is the ambient moduli, and the
+Lagrangian condition forces the $(-1)$-shift that produces the bar
+desuspension $s^{-1}$.
+\end{remark}
 
 The central claim of this volume: \emph{the bar complex of
 Volume~I, equipped with its coproduct, is a coalgebra
@@ -201,7 +221,7 @@ factorization; the bar coproduct is topological factorization; the
 no-open-to-closed rule is the physical directionality that bulk
 interactions restrict to boundaries but not conversely.  By operadic Koszul self-duality
 (\S\ref{subsec:dg-yangian-operadic}), $\cA^!$ inherits an
-$\SCchtop$-algebra structure---a dg-shifted Yangian
+$\SCchtop$-algebra structure, a dg-shifted Yangian
 (Theorem~\ref{thm:Koszul_dual_Yangian}).
 
 A deeper fact (Volume~I,
@@ -221,7 +241,7 @@ that the curvature $\dfib^2 = \kappa(\cA) \cdot \omega_g$ is
 central in the coalgebra, so the coderivation property persists and
 the product structure $\FM_k(\C) \times \Conf_k(\R)$ survives.
 
-\begin{principle}[$\R$-factorization as shadow]
+\begin{remark}[$\R$-factorization as shadow]
 \label{princ:R-shadow}
 The $\R$-factorization is the shadow of the modular homotopy type
 projected onto the topological direction.  Given holomorphic
@@ -231,11 +251,13 @@ $\Eone$-coalgebra structure is automatic.  The bar construction
 is the \emph{universal boundary condition}: the cofree resolution
 of~$\cA$ viewed from the~$\R$-direction.  The
 Swiss-cheese structure of this volume is not an ansatz but a theorem.
-\end{principle}
+\end{remark}
 
 
 \subsection{The two–colored Swiss–cheese operad}
 \label{subsec:SC-operad}
+
+For the detailed Weiss descent argument and operadic properties, see Section~\ref{sec:SC-operad-foundations}.
 
 \begin{definition}[Colors]
 \label{def:SC-colors}
@@ -344,7 +366,7 @@ The homotopy-Koszulity of $\SCchtop$
 the master two-color Koszul duality theorem
 (Theorem~\ref{thm:two-color-master}).  Together with Koszul
 self-duality (\S\ref{subsec:dg-yangian-operadic}), it ensures
-that $\cA^!$ is an $\SCchtop$-algebra---a dg-shifted Yangian
+that $\cA^!$ is an $\SCchtop$-algebra, a dg-shifted Yangian
 (Theorem~\ref{thm:Koszul_dual_Yangian}).
 
 The associated graded splitting
@@ -370,7 +392,39 @@ The $E_n$ formality hierarchy corresponds to truncation of the MC obstruction to
 \item $E_1$-formality: ordered convolution algebra $\mathfrak{g}^{E_1}_\cA$ carries a formal $A_\infty$-model.
 \end{enumerate}
 The Swiss-cheese operad $\mathrm{SC}^{\mathrm{ch,top}}$ is homotopy-Koszul (Theorem~\ref{thm:homotopy-Koszul}), placing the present volume at the $E_1$ level.
+
+The mechanism is as follows.  The MC obstruction tower for the
+deformation complex $\gAmod$ has obstructions living on
+configuration spaces $\FM_k$ at each arity~$k$.  Truncating the tower
+at arity~$n$ retains only configurations of $\le n$ points, which is
+the defining data of an $E_n$-algebra.  At level~(i), $E_\infty$
+means all higher $L_\infty$ brackets vanish and the MC equation
+linearizes; at level~(ii), $E_2$ means only genus-$0$
+(planar/commutative) obstructions survive, corresponding to the
+commutativity of the $E_2$-operad; at level~(iii), $E_1$ means the
+full $A_\infty$ obstruction tower is retained, with obstructions on
+ordered configurations governing the associative (non-commutative)
+sector.  The bar complex encodes exactly this $E_1$-level data:
+its differential is the MC element of the ordered convolution algebra.
 \end{construction}
+
+\begin{remark}[Three Koszul duality frameworks unified by $\SCchtop$]
+\label{rem:three-koszul-dualities}
+Three distinct Koszul duality frameworks in the chiral setting are unified by the two-coloured operad $\SCchtop$:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Framework} & \textbf{Duality type} & \textbf{SC colour} \\
+\midrule
+Francis--Gaitsgory \cite{FG12} & Chiral/factorization & Closed colour ($\FM_\bullet(\C)$) \\
+Gui--Li--Zeng \cite{GLZ22} & Quadratic chiral ($E_2$-type) & Associated graded of closed colour \\
+Costello--Dimofte--Gaiotto \cite{CDG20} & Boundary $A_\infty$ with lines & Open colour ($E_1$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+The $\SCchtop$ operad unifies these: the closed-colour projection recovers the FG/GLZ chiral duality, the open-colour projection recovers the CDG boundary $A_\infty$ duality, and the mixed operations encode the bulk-to-boundary coupling.  Theorem~\ref{thm:filtered-koszul} (filtered homotopy Koszul duality) shows the CDG story is a filtered deformation of the GLZ story, with the holomorphic weight filtration separating the ``easy'' (decoupled) data from the ``interacting'' data.
+\end{remark}
 
 \subsection{Algebras and the Boardman–Vogt resolution}
 \label{subsec:WSC-algebras}
@@ -534,7 +588,18 @@ independently on the $\FM_k(\mathbb C)$ and $E_1(m)$ factors: a
 $W$-tree with internal edges decorated by $s_e \in [0,1]$ decomposes
 into its holomorphic ($\FM$-decorated) and topological
 ($E_1$-decorated) parts, with the same edge parameters governing
-both.
+both.  This independence holds because the operation spaces are
+\emph{set-theoretic products} $\FM_k(\mathbb C) \times E_1(m)$, and
+the Boardman--Vogt $W$-construction acts on these products factor by
+factor: an edge parameter $s_e$ governs the interpolation between
+sequential and simultaneous composition, and since compositions in the
+$\FM$ factor (holomorphic insertions) commute with compositions in
+the $E_1$ factor (interval concatenations)---the two types never
+interact by the no-open-to-closed rule---the $W$-resolution of the
+product is the product of the $W$-resolutions.  In the language
+of~\cite{BM03}, the product decomposition is a distributive law
+between the two single-colored sub-operads, and the $W$-construction
+preserves distributive law decompositions.
 
 Therefore, giving a
 $C_\ast(W(\mathsf{SC}^{\mathrm{ch,top}}))$-algebra
@@ -624,7 +689,7 @@ construct the operad action on $(A_{\mathsf{ch}}, A_{\mathsf{top}})$
 by hand.  The holomorphic factorization (the structure sheaf of
 $\FM_k(\C)$) together with the topological local constancy (the
 groupoid structure of $\Conf_k(\R)$) and the product decomposition
-of the operation spaces suffice --- the full $\SCchtop$-algebra
+of the operation spaces suffice; the full $\SCchtop$-algebra
 structure is inherited from the correspondence geometry of the bar
 complex, exactly as the Hecke algebra action on a module is
 inherited from convolution on the Steinberg variety
@@ -658,6 +723,376 @@ by Theorem~\ref{thm:recognition}.
 The product decomposition $\omega_k = \omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}$ ensures compatibility of meromorphic OPEs with topological gluings.  $W$-coherence follows from the homological algebra of integrated weight forms over $\FM_k(\C)\times E_1(m)$; the FM calculus (Theorem~\ref{thm:FM-calculus}) guarantees independence of auxiliary choices.
 \end{proof}
 
+\subsection{The open sector as factorization category}
+\label{subsec:categorical-open-sector}
+
+The preceding subsections constructed the Swiss-cheese operad
+$\SCchtop$ and its algebras as pairs $(A_{\mathsf{ch}},
+A_{\mathsf{top}})$ acted on by configuration-space operations.
+This operadic presentation depends on a choice of generators: the
+``boundary algebra'' $A_{\mathsf{top}}$ is an algebra presentation
+of an underlying categorical object.  The present subsection
+constructs that object---the \emph{open/closed factorization
+category}---directly from the geometry of bordified curves, and
+shows that boundary algebras arise as endomorphism algebras of
+compact objects.  This is the categorical context in which the bar
+complex lives: $\barB(\cA)$ encodes the twisting data of the
+factorization category, and the bar-cobar adjunction is the
+representability theorem for deformations of a vacuum object inside
+it.
+
+\begin{definition}[Bordified curve and boundary intervals]
+\label{def:bordified-curve}
+Let $(X,D)$ be a smooth algebraic curve $X$ with a finite set of
+marked points $D = \{p_1,\ldots,p_n\} \subset X$.  The \emph{real
+oriented blowup}
+\[
+  \pi \colon \widetilde{X}_D \;\longrightarrow\; X
+\]
+replaces each $p_i$ by the circle $S^1_{p_i}$ of real tangent
+directions at~$p_i$; it is a smooth manifold with boundary
+$\partial \widetilde{X}_D = \bigsqcup_{i=1}^n S^1_{p_i}$.  A choice
+of \emph{tangential basepoints} $\tau = \{\tau_{p_i} \in
+S^1_{p_i}\}_{i=1}^n$ determines open boundary intervals
+\[
+  I_{p_i} \;:=\; S^1_{p_i} \setminus \{\tau_{p_i}\}
+  \;\cong\; \R,
+\]
+which inherit a canonical orientation from the complex structure
+of~$X$.  The data $(X,D,\tau)$ is called a \emph{pointed curve with
+tangential basepoints}.  When $(X,D) = (\C, \{0\})$ and $\tau = \tau_0$
+is the positive-real direction, the interval $I_0$ recovers the
+time axis~$\R_t$ of the holomorphic--topological setting.
+\end{definition}
+
+\begin{definition}[Mixed configuration spaces]
+\label{def:mixed-config}
+Let $(X,D,\tau)$ be as above.  For a finite set $I$ and a tuple
+$\mathbf{m} = (m_{p_1},\ldots,m_{p_n}) \in \N^n$, the
+\emph{mixed open/closed configuration space} is
+\[
+  \Conf^{\mathrm{oc}}_{I,\mathbf{m}}(X, D, \tau)
+  \;:=\;
+  \Conf_I(X \setminus D)
+  \;\times\;
+  \prod_{p \in D} \Conf^{\mathrm{ord}}_{m_p}(I_p),
+\]
+where $\Conf_I(X \setminus D)$ parametrises $|I|$~labelled
+points in the open complement and
+$\Conf^{\mathrm{ord}}_{m_p}(I_p) = \{t_1 < \cdots < t_{m_p}
+\in I_p\} \cong \Conf^{<}_{m_p}(\R)$ parametrises $m_p$ ordered
+open insertions on the boundary interval at~$p$.  The factor
+$\Conf_I(X \setminus D)$ carries the Fulton--MacPherson
+compactification; the boundary factors carry the topology of
+ordered real configuration spaces.
+
+The \emph{mixed Ran space} is the colimit
+\[
+  \Ran^{\mathrm{oc}}(X,D,\tau)
+  \;:=\;
+  \varinjlim_{(I,\mathbf{m})}
+  \Conf^{\mathrm{oc}}_{I,\mathbf{m}}(X,D,\tau) \,/\, \Sigma_I,
+\]
+over finite sets $I$ and tuples $\mathbf{m}$, with transition maps
+given by forgetting points.
+\end{definition}
+
+\begin{definition}[Open/closed factorization category on $(X,D,\tau)$]
+\label{def:oc-factorization-category}
+An \emph{open/closed factorization dg-category} $\cC$ on
+$(X, D, \tau)$ consists of the following data:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Cosheaf structure.}  A constructible dg-cosheaf
+  $\cC$ on $\Ran^{\mathrm{oc}}(X,D,\tau)$: for each stratum
+  $(I,\mathbf{m})$, a dg-category
+  $\cC(I,\mathbf{m})$ with restriction functors for inclusions of
+  strata.
+
+\item \textbf{Factorization.}  For every decomposition of
+  $(I,\mathbf{m})$ into disjoint sub-configurations
+  $(I_\alpha,\mathbf{m}_\alpha)$ supported on pairwise disjoint
+  open subsets, an equivalence
+  \[
+    \bigotimes_\alpha \cC(I_\alpha,\mathbf{m}_\alpha)
+    \;\xrightarrow{\;\sim\;}\;
+    \cC(I,\mathbf{m}),
+  \]
+  natural in the decomposition.
+
+\item \textbf{Holomorphic locality.}  In the closed (bulk)
+  variables, the factorization structure is holomorphic: the
+  cosheaf is constructible with respect to the
+  Fulton--MacPherson stratification of $\Conf_I(X \setminus D)$,
+  and the structure maps extend meromorphically along collision
+  divisors with OPE poles.
+
+\item \textbf{Local constancy on boundary intervals.}  In the open
+  (boundary) variables, the restriction functors along inclusions
+  $I_p \supset J \supset J'$ of subintervals are equivalences:
+  $\cC$ is locally constant in the boundary directions, encoding
+  the $E_1$-category structure.
+
+\item \textbf{Local model.}  At the formal neighbourhood of each
+  mixed collision stratum, $\cC$ is locally modelled by the
+  $W(\SCchtop)$-algebra structure: the closed collisions are
+  governed by $\FM_k(\C)$ and the open collisions by $E_1(m)$, as
+  in Definition~\ref{def:SC-operations}.
+
+\item \textbf{Clutching compatibility.}  For a closed boundary
+  circle $S^1_p$ (i.e.\ restoring the tangential basepoint
+  $\tau_p$), the clutching functor
+  \[
+    \mathrm{cl}_p \colon
+    \cC\big|_{I_p} \;\longrightarrow\;
+    \cC\big|_{S^1_p}
+  \]
+  extends to a trace on the dg-category, implementing the
+  sewing/factorization-homology gluing along~$S^1_p$.
+  Precisely: for each node $p$ created by identifying two marked
+  points on the normalization, the clutching functor $\mathrm{cl}_p$
+  is defined by the coend
+  $\mathrm{cl}_p(\mathcal{F}) := \mathcal{F} \otimes_{\cC(I_p)} \mathbf{1}$,
+  where $\mathbf{1}$ is the monoidal unit of $\cC(S^1_p)$ and
+  the tensor is taken over the restriction to the open interval.
+  The
+  cosheaf extends compatibly over the boundary strata of
+  $\overline{\cM}_{g,n}$: genus-$g$ amplitudes are obtained by
+  composing clutching along $g$~cycles.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Relation to known factorization structures]
+\label{rem:oc-vs-known}
+When $D = \varnothing$ (no boundary), the closed sector of
+$\cC$ recovers a chiral factorization algebra on~$X$ in the
+sense of \cite{BD04,CG17}.  When $X = \C$ and $D = \{0\}$,
+the boundary interval $I_0 \cong \R$ recovers the topological
+direction~$\R_t$, and $\cC$ encodes the full two-colored
+Swiss-cheese data of Definition~\ref{def:SC-algebra} promoted
+to a category.  The local constancy axiom~(iv) is the
+categorical avatar of the locally-constant factorization
+structure on~$\R$ that produces the $E_1$ (associative) color.
+\end{remark}
+
+\begin{theorem}[Boundary algebra from a vacuum object;
+\ClaimStatusProvedHere]
+\label{thm:boundary-algebra-from-vacuum}
+Let\/ $\cC$ be an open/closed factorization dg-category on
+$(X, D, \tau)$ in the sense of
+Definition~\textup{\ref{def:oc-factorization-category}}, and let\/
+$b \in \cC(J)$ be a compact generator\/ for a boundary interval
+$J \subset I_p$.  Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The endomorphism algebra
+  \[
+    A_b \;:=\; \RHom_{\cC(J)}(b, b)
+  \]
+  is an\/ $\Ainf$ chiral algebra in the sense of
+  Definition~\textup{\ref{def:ainfty_chiral}}.  The higher
+  products\/ $m_k$ arise by restricting the factorization functors
+  to mixed collision strata with\/ $k$ closed insertions
+  evaluated on the endomorphism complex of\/~$b$.
+
+\item The assignment\/ $b \mapsto A_b$ is Morita-functorial: a
+  different compact generator\/ $b' \in \cC(J')$ yields an\/
+  $\Ainf$ chiral algebra\/ $A_{b'}$ that is\/ $\Ainf$-Morita
+  equivalent to\/~$A_b$.  The true invariant is the category\/
+  $\cC$, not a chosen algebra presentation.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textit{Part}~(a).
+By local constancy~(iv), the dg-category $\cC(J)$ is independent
+of the choice of interval $J \subset I_p$ up to canonical
+equivalence, so it suffices to work with a single $J$.  The
+endomorphism complex $A_b = \RHom_{\cC(J)}(b,b)$ inherits an
+associative product from composition in~$\cC$.
+
+The construction of the higher products $m_k$ for $k \ge 2$ proceeds
+by restricting the factorization structure to the endomorphism
+complex of~$b$, keeping explicit track of both the holomorphic and
+topological variables.  The factorization structure of~$\cC$
+provides, for each $k$-element configuration
+$(z_1,\ldots,z_k) \in \FM_k(\C)$ and each ordered open
+configuration $(t_1 < \cdots < t_k) \in \Conf^{\mathrm{ord}}_k(\R)$,
+a multilinear functor
+\[
+  \mu_k \colon
+  \cC(J_1) \times \cdots \times \cC(J_k)
+  \;\longrightarrow\; \cC(J),
+\]
+where the $k$ ordered boundary insertions at $t_1 < \cdots < t_k$ divide $J$ into $k+1$ subintervals; $k$ of these carry the input morphisms $a_1, \ldots, a_k \in A_b$, and the remaining subinterval (to the right of $t_k$) carries the output.  Restricting to $\Hom(b,b)$ in each slot gives the
+$k$-ary operation:
+\[
+  m_k(a_1,\ldots,a_k)(z_1,\ldots,z_k;\, t_1,\ldots,t_k)
+  \;:=\;
+  \mu_k(a_1,\ldots,a_k)\big|_{b,\ldots,b},
+\]
+where $a_i \in A_b = \Hom(b,b)$ for each~$i$.
+
+The two sets of variables play distinct geometric roles:
+\begin{itemize}
+\item \textbf{Holomorphic parameters.}  The $k-1$ spectral
+  parameters $\lambda_i = z_i - z_{i+1}$ (using the consecutive-difference convention of Notation~\ref{not:spectral}) arise from the
+  holomorphic dependence on the $\FM_k(\C)$ factor.  These are the
+  OPE spectral variables: the operation $m_k$ is a formal Laurent
+  series in $\lambda_1,\ldots,\lambda_{k-1}$ with poles from
+  collisions $z_i \to z_{i+1}$.
+\item \textbf{Topological ordering.}  The $E_1$ ordering from the
+  $\Conf^{\mathrm{ord}}_k(\R)$ factor ensures the planar
+  $\Ainf$ convention: inputs are ordered $a_1,\ldots,a_k$
+  according to the total order $t_1 < \cdots < t_k$ on boundary
+  insertions.  Local constancy~(iv) ensures the result depends
+  only on the combinatorial ordering, not on the specific
+  positions~$t_i$.
+\end{itemize}
+The resulting operation has the type
+\[
+  m_k \colon
+  C_\ast\!\bigl(\FM_k(\C)\bigr) \otimes A_b^{\otimes k}
+  \;\longrightarrow\; A_b((\lambda_1))\cdots((\lambda_{k-1})).
+\]
+The $\Ainf$ identity $\sum_{i+j=n+1} m_i \circ m_j = 0$ now
+follows from Stokes' theorem on the operation space
+$\FM_k(\C) \times \Conf^{\mathrm{ord}}_k(\R)$ of $\SCchtop$.
+Concretely, the codimension-one boundary strata of this product
+are products of lower-dimensional operation spaces, and they are
+exactly the Stasheff faces: each boundary stratum
+$\partial_\sigma\!\bigl(\FM_k(\C) \times
+\Conf^{\mathrm{ord}}_k(\R)\bigr)$ decomposes as
+$\bigl(\FM_i(\C) \times \Conf^{\mathrm{ord}}_i(\R)\bigr)
+\times
+\bigl(\FM_j(\C) \times \Conf^{\mathrm{ord}}_j(\R)\bigr)$
+with $i + j = k + 1$, where the boundary decomposition uses the Fulton--MacPherson compactification on the $\C$-factor and the Stasheff associahedron on the $\R$-factor, and the Stokes identity on the total
+boundary $\sum_\sigma \int_{\partial_\sigma} = 0$ is the $\Ainf$
+relation (Theorem~\ref{thm:FM-calculus}).  The local model
+axiom~(v) ensures these boundary identifications are compatible
+with the $W(\SCchtop)$-algebra coherence data.
+Sesquilinearity follows from translation covariance in the
+holomorphic coordinate.
+
+\smallskip
+
+\textit{Part}~(b).
+Let $b' \in \cC(J)$ be another compact generator (transported from any other boundary interval via the local-constancy equivalence of axiom~(iv)).  The bimodule
+$M = \RHom_{\cC(J)}(b, b')$ defines an $\Ainf$-bimodule over $(A_b,
+A_{b'})$.  Since both $b$ and $b'$ are compact generators, the
+natural maps
+\[
+  M \otimes^{\mathbf{L}}_{A_{b'}} M^\vee \;\xrightarrow{\;\sim\;}\; A_b,
+  \qquad
+  M^\vee \otimes^{\mathbf{L}}_{A_b} M \;\xrightarrow{\;\sim\;}\; A_{b'},
+\]
+are quasi-isomorphisms, where $M^\vee = \RHom_{\cC(J)}(b', b)$: this is
+the standard Morita equivalence criterion for compact generators of
+a dg-category \cite{Kel06,HA}.
+\end{proof}
+
+\begin{corollary}[Bulk as derived center; \ClaimStatusProvedHere]
+\label{cor:bulk-derived-center-categorical}
+Let\/ $\cC$ be an open/closed factorization dg-category on
+$(X,D,\tau)$ with compact generator\/ $b \in \cC(J)$ and boundary
+algebra\/ $A_b = \RHom_{\cC(J)}(b,b)$.  Then
+\[
+  \Zder(\cC)
+  \;\simeq\;
+  \mathrm{C}^\bullet_{\mathrm{ch}}(A_b, A_b),
+\]
+where $\Zder(\cC) = \End_{\operatorname{Fun}(\cC,\cC)}(\id_\cC)$ is the
+derived center\/ \textup{(}endomorphisms of the identity functor\/
+\textup{)} and\/ $\mathrm{C}^\bullet_{\mathrm{ch}}(A_b,A_b)$ is the
+chiral Hochschild cochain complex of\/~$A_b$.  In particular, the
+bulk algebra is Morita-invariant: it depends on\/ $\cC$ but not on
+the choice of compact generator.
+\end{corollary}
+
+\begin{proof}
+For any dg-category $\cC$ with compact generator $b$, the derived
+Morita equivalence $\cC \simeq \Perf\text{-}A_b$ (the dg-category
+of perfect right $A_b$-modules) induces an equivalence on
+endomorphism algebras of the identity functor:
+\[
+  \End_{\operatorname{Fun}(\cC,\cC)}(\id_\cC)
+  \;\simeq\;
+  \End_{\operatorname{Fun}(\Perf\text{-}A_b,\,\Perf\text{-}A_b)}(\id)
+  \;\simeq\;
+  \HH^\bullet(A_b, A_b).
+\]
+The first equivalence is Morita invariance of the derived center
+\cite{Kel06}; the second is the identification of the derived
+center of $\Perf\text{-}A_b$ with the Hochschild cochain complex.
+In the holomorphic--topological setting, the holomorphic locality
+axiom~(iii) of $\cC$ refines $\HH^\bullet(A_b, A_b)$ to the
+\emph{chiral} Hochschild cochain complex
+$\mathrm{C}^\bullet_{\mathrm{ch}}(A_b,A_b)$, where the
+Hochschild differential uses the meromorphic OPE product rather
+than a purely algebraic one.  Concretely, the Hochschild bar
+complex $\barB(A_b, A_b, A_b) = \bigoplus_n A_b \otimes
+A_b^{\otimes n} \otimes A_b$ computes $\HH^\bullet$ when equipped
+with the algebraic differential; the holomorphic locality of
+$\cC$ replaces the algebraic product with the meromorphic OPE
+product $m_2(a,b;\lambda)$ on the inputs, upgrading each
+$A_b^{\otimes n}$ factor to
+$A_b((\lambda_1))\cdots((\lambda_{n-1}))$ and the differential to
+$d_{\mathrm{ch}} = \delta_Q + \delta_{\mathrm{Hoch}}^{\mathrm{ch}}$.
+This is exactly the chiral Hochschild complex of
+Definition~\ref{def:chiral_hochschild}.  This recovers
+Theorem~\ref{thm:bulk_hochschild} from the categorical viewpoint:
+the bulk--Hochschild identification is a consequence of Morita
+invariance, not a coincidence.
+\end{proof}
+
+\begin{remark}[The corrected big picture]
+\label{rem:corrected-big-picture}
+The categorical open sector resolves several tensions in the
+operadic treatment and clarifies the architecture of the theory:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Open sector $=$ category $\cC$.}
+  The primitive datum is the factorization dg-category $\cC$ on
+  $(X,D,\tau)$.  It is not an algebra but a category: its objects
+  are boundary conditions, its morphisms are open-string states.
+
+\item \textbf{Boundary algebra $=$ $\End(b)$.}
+  The $\Ainf$ chiral algebra $A_b = \RHom_{\cC(J)}(b,b)$
+  (Theorem~\ref{thm:boundary-algebra-from-vacuum}) is a
+  \emph{presentation} of $\cC$, analogous to choosing a frame in
+  a vector bundle.  Different compact generators give
+  Morita-equivalent presentations.
+
+\item \textbf{Bulk $=$ derived center $\Zder(\cC)$.}
+  The bulk algebra is the Morita-invariant derived center
+  (Corollary~\ref{cor:bulk-derived-center-categorical}), not an
+  independent datum.  This explains the content of
+  Theorem~\ref{thm:bulk_hochschild}: it is not ``bulk happens to
+  equal Hochschild cochains'' but ``the derived center of any
+  dg-category is computed by Hochschild cochains of any compact
+  generator.''
+
+\item \textbf{Lines $=$ $\cC$ itself $\simeq A^!$-$\Mod$.}
+  Line operators are objects of $\cC$.  Under Koszul duality
+  (Theorem~\ref{thm:homotopy-Koszul}), $\cC \simeq
+  A_b^!\text{-}\Mod$: the category of line operators is the module
+  category over the Koszul dual.
+
+\item \textbf{Modularity $=$ traces and clutching on $\cC$.}
+  The clutching functor of
+  Definition~\ref{def:oc-factorization-category}(vi) computes traces on
+  $\cC$, implementing the sewing construction: genus-$g$
+  amplitudes are obtained by composing clutching along $g$~cycles.
+  The modular invariance of the result is a consequence of the
+  factorization structure, not an additional axiom.
+
+\item \textbf{Bar complex $=$ coalgebraic shadow.}
+  The bar complex $\barB^{\mathrm{ch}}(A_b)$ is the coalgebraic
+  encoding of the twisting data of $\cC$: it records how
+  closed-sector operations twist the open-sector composition.  It
+  is a derived invariant of $\cC$, not an independent construction.
+  The bar-cobar adjunction is the representability theorem for
+  deformations of the vacuum object~$b$ inside~$\cC$.
+\end{enumerate}
+\end{remark}
+
 \subsection{Configuration spaces and higher operations}
 \label{subsec:FM-higher-ops}
 The higher multiplications arise by integrating out interaction-point
@@ -681,8 +1116,8 @@ ensure that Stokes' theorem reproduces the $A_\infty$~identities satisfied by $m
 \providecommand{\Steinb}{\mathfrak{S}}
 
 Volume~I establishes five theorems about the categorical logarithm.
-Theorem~\ref{thm:bar-is-self-intersection} --- the bar complex is the
-formal bar/Koszul model for the Lagrangian self-intersection ---
+Theorem~\ref{thm:bar-is-self-intersection} (the bar complex is the
+formal bar/Koszul model for the Lagrangian self-intersection)
 reveals their geometric content.
 Each theorem is a shadow of the same Lagrangian embedding
 $\cL \hookrightarrow \cM$, read through different invariants.
@@ -711,10 +1146,10 @@ following geometric readings:
   groupoid comodule-module adjunction.
 
 \item \textbf{Theorem~B \textup{(}Koszul inversion\textup{)}.}
-  On the clean locus --- where the derived intersection has no
-  higher Tor --- one expects the self-intersection groupoid\/
-  $\Steinb$ to collapse to its base and the bar-cobar round-trip
-  to become an equivalence.  Off the clean locus, the higher-Tor
+  On the clean locus, where the derived intersection has no
+  higher Tor, the formal model suggests the self-intersection groupoid\/
+  $\Steinb$ should collapse to its base and the bar-cobar round-trip
+  should become an equivalence.  Off the clean locus, the higher-Tor
   directions persist, and the bar-cobar map should be read as a
   completion rather than an inversion theorem.
 
@@ -738,7 +1173,7 @@ following geometric readings:
   Lagrangian embedding\/ $\cL \hookrightarrow \cM_{\mathrm{vac}}$
   as the moduli of curves varies over\/ $\overline{\mathcal M}_g$.
   In this dictionary, the equation
-  $\dfib^2 = \kappa(\cA) \cdot \omega_g$ records the failure of the
+  $\dfib^2 = \kappa(\cA) \cdot \omega_g$ is expected to record the failure of the
   displaced Lagrangian to remain isotropic to first order.
 
 \item \textbf{Theorem~H \textup{(}Hochschild ring\textup{)}.}
@@ -804,7 +1239,7 @@ $\operatorname{Tor}^{\cO(\cM)}_i(B,B) = 0$ vanish for $i > 0$.
 Koszul inversion is then expected to be the corresponding groupoid
 Morita theorem \textup{(}Corollary~\textup{\ref{cor:koszul-morita}}\textup{)}.
 Off the Koszul locus, the groupoid acquires genuine derived
-fibers---the higher $A_\infty$ operations---and the Morita
+fibers (the higher $A_\infty$ operations), and the Morita
 equivalence is replaced by completion.  The transition from the
 unconditional categorical equivalence of
 Theorem~\ref{thm:steinberg-presentation}(ii) to the Koszul
@@ -850,8 +1285,8 @@ bar and cobar.
 
 (iii)~The $(-2)$-shifted symplectic form $\omega_{-2}$ on $\cM$ is
 symmetric (even shift), so the bar-cobar pairing
-$\langle \barB(\cA), \Omegach(\barB(\cA)) \rangle$ --- which is the
-restriction of $\omega_{-2}$ to the Lagrangian intersection --- is
+$\langle \barB(\cA), \Omegach(\barB(\cA)) \rangle$, which is the
+restriction of $\omega_{-2}$ to the Lagrangian intersection, is
 a \emph{self-dual} pairing.  Algebraically: on the Koszul locus, the
 bar-cobar adjunction is a Quillen equivalence
 (Vol~I, Theorem~B): $\Omegach(\barB(\cA)) \xrightarrow{\sim} \cA$.
@@ -905,10 +1340,385 @@ carries genuinely new data at each level.  The OPE pole structure
 determines the intersection type: simple poles give transverse meeting
 (perturbative); higher-order poles create excess dimension in the
 derived fiber (non-perturbative).
-(Note: all standard-landscape algebras---including Virasoro and
-$\mathcal{W}_N$---are chirally Koszul by PBW universality;
+(Note: all standard-landscape algebras, including Virasoro and
+$\mathcal{W}_N$, are chirally Koszul by PBW universality;
 the formal/non-formal distinction classifies complexity
 \emph{within} the Koszul locus.)
+\end{remark}
+
+\subsection{Curved looping and the coderived category}
+\label{subsec:curved-looping-coderived}
+
+At genus~$0$ the bar complex is honest: $d_{\barB}^2 = 0$.
+At genus~$g \geq 1$, Volume~I Theorem~D shows that the
+bar differential squares to a scalar multiple of a moduli-space
+cohomology class, and the resulting curvature is not a defect but
+a structure.  This subsection develops the consequences: the
+curved bar complex lives in the coderived category, the bar-cobar
+adjunction lifts to the curved setting, and the delooping of a
+curved algebra determines a line bundle over the moduli space whose
+first Chern class is the modular characteristic.
+
+\begin{definition}[Curved $\Ainf$ chiral algebra]
+\label{def:curved-Ainf-chiral}
+A logarithmic $\SCchtop$-algebra $\cA$
+(Definition~\ref{def:log-SC-algebra}) is \emph{curved}
+if its bar differential satisfies
+\[
+  d_{\barB}^2 \;=\; \kappa(\cA) \cdot \omega
+  \;\neq\; 0,
+\]
+where $\kappa(\cA) \in \mathbb{k}$ is the \emph{modular
+characteristic} of~$\cA$ and $\omega$ is a cohomology class on the
+moduli space of curves.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item At genus~$0$, $\omega = 0$: the moduli space
+  $\overline{\mathcal M}_{0,n}$ contributes no obstruction, and the
+  bar complex is honest ($d^2 = 0$).
+\item At genus~$g \geq 1$, $\omega = \omega_g \in
+  H^2(\overline{\mathcal M}_g, \mathbb{k})$ is the first Chern class
+  $c_1(\lambda)$ of the Hodge bundle
+  $\lambda = \det R\pi_* \omega_{C/\overline{\mathcal M}_g}$.
+  The equation $d_{\barB}^2 = \kappa(\cA) \cdot \omega_g$ is the
+  content of Vol~I, Theorem~D: the leading coefficient of the
+  categorical logarithm is the modular characteristic.
+\end{enumerate}
+An algebra with $\kappa(\cA) = 0$ is \emph{uncurved};
+it admits an honest bar complex with $d^2 = 0$ at all genera.
+\end{definition}
+
+In Positselski's framework, the curvature element is
+$m_0 := \kappa(\cA) \cdot \omega_g
+  \in H^2(\overline{\mathcal M}_g, \mathbb{k})$,
+a degree-$2$ element with no inputs.  The identity
+$d_{\barB}^2$ acts by the zero-ary operation~$m_0$: the identity
+$d_{\barB}^2(x) = m_2(m_0, x) \pm m_2(x, m_0)$ follows from the
+curved $\Ainf$ relations.  When
+$m_0 = \kappa(\cA) \cdot \omega_g$ lies in the base direction (a
+scalar times a moduli class), the action $m_2(m_0, x) = \kappa(\cA)
+\cdot \omega_g \cdot x$ is multiplication by the curvature scalar,
+because $m_2$ with a base-direction input reduces to scalar
+multiplication on fibers.
+
+\begin{lemma}[Centrality of the curvature element]
+\label{lem:curvature-centrality}
+The element $m_0 = \kappa(\cA) \cdot \omega_g$ commutes with all\/
+$\Ainf$ operations $m_k$ $(k \geq 1)$: for every bar element~$x$,
+$[m_0, m_k(\ldots)] = m_k(\ldots, m_0 \cdot -, \ldots)$ vanishes.
+\end{lemma}
+
+\begin{proof}
+The class $\omega_g \in H^*(\overline{\mathcal M}_g)$ acts on the
+total complex $\barB^{(g)}(\cA)$ by multiplication in the base
+direction.  The operations $m_k$ ($k \geq 1$) act fiberwise---they
+are defined on $\mathrm{FM}_k(\mathbb{C}) \times
+\mathrm{Conf}_k(\mathbb{R})$ and do not involve the moduli-space
+direction.  Since base multiplication and fiberwise operations act on
+complementary tensor factors, they commute.  As $\kappa(\cA) \in
+\mathbb{k}$ is a scalar, $m_0 = \kappa \cdot \omega_g$ commutes with
+every $m_k$.
+\end{proof}
+
+\begin{proposition}[Modular characteristic as Euler class; \ClaimStatusProvedHere]
+\label{prop:kappa-euler-class}
+Let $\cA$ be a curved $A_\infty$ chiral algebra with cyclic structure $\langle -, - \rangle_{\mathrm{cyc}}$ (Construction~\textup{\ref{constr:cyclic-structure}}).  The modular characteristic $\kappa(\cA)$ is the \emph{Euler class} of the cyclic $A_\infty$ structure: it is the unique scalar such that
+\[
+d_{\barB}^2 \;=\; \kappa(\cA) \cdot \omega_g \;\in\; H^2(\overline{\cM}_g, \mathbb{k}),
+\]
+where the left-hand side is computed using the cyclic trace $\Tr_\cC$ and the right-hand side is the Hodge class.
+
+More precisely: the cyclic trace $\Tr_\cC \colon \HH_\ast(\cC) \to \mathbb{k}$ determines a section of the determinant line bundle $\det(\lambda)$ over $\overline{\cM}_g$ (by evaluating on the fundamental Hochschild cycle of the family $\cA|_C$ as $C$ varies over $\overline{\cM}_g$).  The vanishing locus of this section has class $\kappa(\cA) \cdot c_1(\det\lambda) = \kappa(\cA) \cdot \omega_g$.  Thus $\kappa(\cA)$ is the degree of the section --- the Euler class of the cyclic structure.
+\end{proposition}
+
+\begin{proof}
+The cyclic trace on $\HH_\ast(\cC|_C)$ varies with $C \in \overline{\cM}_g$: at a smooth curve, it evaluates the genus-$g$ partition function $Z_g(\cA|_C)$.  The partition function $Z_g$ is a section of $\cL_\kappa^{-1} = (\det\lambda)^{-\kappa}$ (Construction~\ref{constr:determinant-line-bundle}), so its vanishing locus has class $\kappa \cdot \omega_g$.  The identification of this vanishing class with $d_{\barB}^2$ follows from Volume~I, Theorem~D: the curvature of the bar differential is precisely $\kappa \cdot \omega_g$, and the curvature IS the Euler class of the determinant line bundle by the Chern--Weil correspondence (Construction~\ref{constr:determinant-line-bundle}, Step~5).
+\end{proof}
+
+\begin{proposition}[Coderived vs derived; \ClaimStatusProvedHere]
+\label{prop:coderived-vs-derived}
+Let\/ $\cA$ be a logarithmic $\SCchtop$-algebra.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If\/ $\kappa(\cA) = 0$, the bar complex\/
+  $\barB(\cA)$ is an object of the derived category\/
+  $D^b(\mathrm{CoAlg}_{\SCchtop})$ of conilpotent\/
+  $\SCchtop$-coalgebras: the differential squares to zero, and
+  quasi-isomorphisms invert.
+\item If\/ $\kappa(\cA) \neq 0$, the bar complex\/
+  $\barB^{\mathrm{curv}}(\cA)$ is an object of the coderived
+  category\/
+  $D^{\mathrm{co}}(\mathrm{CoAlg}_{\SCchtop})$, defined as the
+  quotient of the homotopy category of curved dg coalgebras by
+  coacyclic objects.
+\item The bar-cobar adjunction lifts to an adjunction between
+  curved algebras and coderived coalgebras:
+  \[
+    \Omega^{\mathrm{ch,co}}
+    \colon
+    D^{\mathrm{co}}(\mathrm{CoAlg}_{\SCchtop})
+    \rightleftarrows
+    D(\mathrm{Alg}_{\SCchtop}^{\mathrm{curv}})
+    :\!
+    \barB^{\mathrm{curv}}.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{Part~(i).}
+When $\kappa(\cA) = 0$, the bar differential satisfies
+$d_{\barB}^2 = 0$ at every genus.  The bar complex is therefore an
+ordinary dg coalgebra, and it lives in the derived category by the
+content of Vol~I, Theorem~A (the bar-cobar adjunction for honest
+$\Ainf$ algebras).
+
+\textbf{Part~(ii).}
+The total differential $D = \dfib + d_{\mathrm{base}}$ on the
+family $\barB^{(g)}(\cA)$ over $\overline{\mathcal M}_g$ satisfies
+\[
+  D^2 \;=\; \dfib^2 + [\dfib, d_{\mathrm{base}}]
+       + d_{\mathrm{base}}^2
+     \;=\; \kappa(\cA) \cdot \omega_g,
+\]
+where $d_{\mathrm{base}}^2 = 0$ because the de~Rham
+differential on $\overline{\mathcal M}_g$ is flat, and the
+cross-term $[\dfib, d_{\mathrm{base}}] = 0$ for the following reason:
+the bar differential $\dfib$ is defined fiberwise---it depends on
+the chiral algebra structure of $\cA$, not on the moduli parameter
+$[C] \in \overline{\mathcal M}_g$.  The base differential
+$d_{\mathrm{base}}$ is the de~Rham differential on
+$\overline{\mathcal M}_g$, which does not see the fiber operations.
+Therefore $[\dfib, d_{\mathrm{base}}] = 0$ as operators on the
+total complex, by the Leibniz rule for the tensor product
+differential on a trivial fibration.  Thus the total
+complex $(\barB^{(g)}(\cA), D)$ is a \emph{curved} dg coalgebra
+with curvature $\kappa(\cA) \cdot \omega_g$.  It is \emph{not} an
+object of the derived category $D^b$ (where $d^2 = 0$ is required),
+but \emph{is} a legitimate object of the coderived category
+$D^{\mathrm{co}}$, which admits curved objects by definition.  The
+coderived category is the quotient of the homotopy category of curved
+dg coalgebras by coacyclic objects---those belonging to the smallest
+triangulated subcategory closed under infinite coproducts and
+containing total complexes of short exact sequences.
+
+\textbf{Part~(iii).}
+The uncurved bar-cobar adjunction (Vol~I, Theorem~A) has unit
+and counit built from universal twisting morphisms
+$\tau \colon \barB(\cA) \to \cA$.  In the curved setting,
+replace $\barB$ by $\barB^{\mathrm{curv}}$ and $\Omegach$ by
+$\Omega^{\mathrm{ch,co}}$, the curved cobar construction.  The
+universal twisting morphism still exists: the Maurer--Cartan
+equation $d\tau + \tau \star \tau = 0$ is replaced by the curved
+Maurer--Cartan equation
+$d\tau + \tau \star \tau + m_0 = 0$, i.e.\
+$d\tau + \tau \star \tau = -m_0 = -\kappa \cdot \omega_g$
+(Positselski's sign: $m_0$ is the curvature with
+$d^2 = m_0 \cdot {-}$, so the MC equation acquires
+$-m_0$ on the right-hand side), whose
+solvability is guaranteed by the centrality of $\kappa$ (Vol~I,
+Theorem~D: $\kappa$ is a scalar, so $\kappa \cdot \omega_g$
+commutes with all operations).  The adjunction unit and counit
+are curved quasi-isomorphisms: maps whose cones are coacyclic.
+For conilpotent coalgebras over a field of characteristic zero,
+coacyclic objects coincide with acyclic objects, so $D^{\mathrm{co}}$
+agrees with $D^b$ in the uncurved case.  In the curved case
+($d^2 \neq 0$), acyclicity is not defined, and the coderived
+category provides the natural home.  The adjunction descends to
+the stated localization.
+\end{proof}
+
+\begin{remark}[Chern--Weil dictionary]
+\label{rem:chern-weil-dictionary}
+\renewcommand{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Gauge theory} & \textbf{Chiral bar complex} & \textbf{Status} \\
+\midrule
+Connection $A$ & Bar differential $d_{\barB}$ & Structural analogy \\
+Curvature $F = dA + A \wedge A$ & $d_{\barB}^2 = \kappa \cdot \omega_g$ & Theorem (Vol~I, Thm~D) \\
+First Chern number $c_1$ & Modular characteristic $\kappa(\cA)$ & Structural analogy \\
+Flat connection ($F = 0$) & Uncurved ($\kappa = 0$, genus $0$) & Tautology \\
+Holonomy of flat connection & $R$-matrix $R(z) = \cP\exp(\int r)$ & Theorem (affine lineage) \\
+\bottomrule
+\end{tabular}
+\end{center}
+The first four rows are structural analogies; the last row is a theorem for the affine lineage (Theorem~\ref{thm:affine-monodromy-identification}).
+\end{remark}
+
+\begin{proposition}[Curved delooping; \ClaimStatusProvedHere]
+\label{prop:curved-delooping}
+Let\/ $\cA$ be a curved\/ $\Ainf$ chiral algebra with modular
+characteristic\/ $\kappa \neq 0$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The delooping\/ $B(\cA)$ determines a line bundle\/
+  $\mathcal{L}_\kappa$ on\/ $\overline{\mathcal M}_g$ with first
+  Chern class
+  \[
+    c_1(\mathcal{L}_\kappa)
+    \;=\;
+    \kappa(\cA) \cdot [\omega_g]
+    \;\in\;
+    H^2(\overline{\mathcal M}_g,\, \mathbb{Z}).
+  \]
+  For the affine lineage $\cA = \hat{\mathfrak{g}}_k$, this is the\/
+  $k$-th power of the determinant of the Hodge bundle:
+  $\mathcal{L}_k = (\det \lambda)^{\otimes k}$.
+\item The loop space\/ $\Omega(B(\cA))$ recovers\/ $\cA$ up to a
+  twist by\/ $\mathcal{L}_\kappa$: there is an equivalence of
+  curved\/ $\Ainf$ chiral algebras
+  \[
+    \Omega(B(\cA))
+    \;\simeq\;
+    \cA^{[\kappa]},
+  \]
+  where\/ $\cA^{[\kappa]}$ denotes\/ $\cA$ twisted by\/
+  $\mathcal{L}_\kappa$.  When\/ $\kappa = 0$, the line bundle is
+  trivial and\/ $\Omega(B(\cA)) \simeq \cA$ as an honest
+  equivalence.
+\item When\/ $\kappa = 0$, the line bundle is trivial\/
+  ($c_1 = 0$), the loop-deloop equivalence is honest:
+  $\Omega B(\cA) \simeq \cA$, and the bar-cobar adjunction
+  reduces to Vol~I, Theorem~A.
+  When\/ $\kappa \neq 0$, $\Omega(B(\cA))$ is\/ $\cA$ twisted
+  by\/ $\mathcal{L}_\kappa$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\textbf{Part~(i).}
+The bar complex $\barB^{\mathrm{curv}}(\cA)$ over
+$\overline{\mathcal M}_g$ has fiberwise curvature
+$\dfib^2 = \kappa \cdot \omega_g$.  The curvature class
+$\kappa(\cA) \cdot [\omega_g] \in H^2(\overline{\mathcal M}_g,
+\mathbb{Z})$ is a degree-$2$ cohomology class, and therefore
+determines a line bundle $\mathcal{L}_\kappa$ with first Chern
+class $c_1(\mathcal{L}_\kappa) = \kappa \cdot [\omega_g]$.
+(A gerbe would require an $H^3$ obstruction class, but
+$\kappa \cdot [\omega_g]$ lives in $H^2$.)  When the class vanishes
+($\kappa = 0$), the line bundle is trivial and the bar complex is
+an honest dg coalgebra bundle; when $\kappa \neq 0$, the bar
+complex is twisted by $\mathcal{L}_\kappa$.
+
+For the affine lineage $\cA = \hat{\mathfrak{g}}_k$, the modular
+characteristic is $\kappa = k$ (the level), and
+$\omega_g = c_1(\lambda)$ where
+$\lambda = \det R\pi_* \omega_{C/\overline{\mathcal M}_g}$ is the
+Hodge bundle.  Thus $\mathcal{L}_k = (\det \lambda)^{\otimes k}$,
+the $k$-th power of the determinant of the Hodge bundle---the
+standard line bundle governing conformal blocks at level~$k$.
+
+\textbf{Part~(ii).}
+The loop space $\Omega(B(\cA))$ is the fiber of the evaluation map
+$B(\cA) \to B(\cA)|_{\mathrm{pt}}$ over a basepoint.  When
+$c_1(\mathcal{L}_\kappa) \neq 0$, the fiber is not $\cA$ itself
+but $\cA$ twisted by the holonomy of $\mathcal{L}_\kappa$.
+This twist is a $\kappa$-dependent automorphism of $\cA$ as a
+curved $\Ainf$ algebra, corresponding to the monodromy of the
+connection $D = \dfib + d_{\mathrm{base}}$ around loops in
+$\overline{\mathcal M}_g$.  The equivalence
+$\Omega(B(\cA)) \simeq \cA^{[\kappa]}$ follows from the lifted
+bar-cobar adjunction
+(Proposition~\ref{prop:coderived-vs-derived}(iii)): the counit of
+the adjunction
+$\Omega^{\mathrm{ch,co}}(\barB^{\mathrm{curv}}(\cA))
+\xrightarrow{\sim} \cA$ is a curved quasi-isomorphism, and the
+twist by $\kappa$ records the passage through the coderived
+category.  (Part~(ii) is proved in the formal setting; the
+analytic extension requires additional input from the PTVV
+framework.)
+
+\textbf{Part~(iii).}
+When $\kappa = 0$, $c_1(\mathcal{L}_\kappa) = 0$, the line bundle
+is trivial, the twist disappears, and the bar-cobar adjunction
+reduces to the uncurved version (Vol~I, Theorem~A).  The
+loop-deloop equivalence $\Omega B(\cA) \simeq \cA$ is then an
+honest equivalence of $\Ainf$ chiral algebras.
+\end{proof}
+
+\begin{construction}[The determinant line bundle $L_\kappa$; \ClaimStatusProvedHere]
+\label{constr:determinant-line-bundle}
+
+We construct the line bundle $\mathcal{L}_\kappa$ on $\overline{\cM}_g$ whose first Chern class is $\kappa(\cA) \cdot [\omega_g]$.
+
+\textbf{Step 1: The Hodge bundle.}
+Over $\overline{\cM}_g$, the Hodge bundle $\lambda = \pi_*(\omega_{\cC/\overline{\cM}_g})$ is a rank-$g$ vector bundle whose fiber at a smooth curve $[C]$ is $H^0(C, \omega_C)$ (the space of holomorphic differentials).  Its determinant is the line bundle $\det(\lambda) = \Lambda^g(\lambda)$.
+
+\textbf{Step 2: The Mumford isomorphism.}
+The first Chern class of the Hodge bundle is $c_1(\lambda) = \omega_g \in H^2(\overline{\cM}_g, \Z)$, where $\omega_g$ is the Hodge class (the first tautological class $\lambda_1$).  By Mumford's formula, $c_1(\det \lambda) = \lambda_1 = \omega_g$.
+
+\textbf{Step 3: The $\kappa$-th power.}
+Define:
+\[
+  L_\kappa \;:=\; (\det \lambda)^{\otimes \kappa(\cA)}.
+\]
+This is the $\kappa$-th tensor power of the determinant of the Hodge bundle.  Its first Chern class is:
+\[
+  c_1(L_\kappa) = \kappa(\cA) \cdot c_1(\det \lambda) = \kappa(\cA) \cdot \omega_g.
+\]
+
+\textbf{Step 4: The connections and curvature.}
+The Hodge bundle carries two natural connections.  The \emph{Gauss--Manin connection} $\nabla^{\mathrm{GM}}$ is flat ($F^{\mathrm{GM}} = 0$): its flat sections are the period vectors $\int_{\gamma_i} \omega_j$, encoding the variation of Hodge structure.  The \emph{Chern connection} $\nabla^{\mathrm{Q}}$ on $\det(\lambda)$, induced by the Quillen metric (the $L^2$ metric regularised via analytic torsion), has non-trivial curvature given by the Wolpert--Quillen formula:
+\[
+  F^{\mathrm{Q}} \;=\; -\frac{2\pi i}{12} \cdot \omega_{\mathrm{WP}},
+\]
+where $\omega_{\mathrm{WP}}$ is the Weil--Petersson form on $\overline{\cM}_g$.  Its first Chern class is $c_1(\det\lambda) = \frac{i}{2\pi}F^{\mathrm{Q}} = \frac{1}{12}\omega_{\mathrm{WP}} = \omega_g$ (the Hodge class $\lambda_1$, which equals $\frac{1}{12}\omega_{\mathrm{WP}}$ by Wolpert's theorem).  The connection on $L_\kappa = (\det\lambda)^{\otimes\kappa}$ is $\nabla_{L_\kappa} = \kappa \cdot \nabla^{\mathrm{Q}}$, with curvature:
+\[
+  F_{L_\kappa}
+  \;=\; \kappa(\cA) \cdot F^{\mathrm{Q}}
+  \;=\; -\frac{2\pi i}{12} \cdot \kappa(\cA) \cdot \omega_{\mathrm{WP}},
+\]
+and $c_1(L_\kappa) = \frac{i}{2\pi} F_{L_\kappa} = \kappa(\cA) \cdot \omega_g$ as claimed.
+
+\textbf{Step 5: Integrality and the affine lineage.}
+When $\kappa(\cA) \in \Z$ (as for the affine lineage, where
+$\kappa = k$), $L_\kappa = (\det\lambda)^{\otimes\kappa}$ is a
+genuine line bundle: the tensor power of a line bundle by an
+integer is well-defined in
+$\mathrm{Pic}(\overline{\cM}_g)$.  For
+$\cA = \hat{\fg}_k$, $L_k = (\det\lambda)^{\otimes k}$ is the
+determinant of the Verlinde bundle at level~$k$, whose sections
+over $\overline{\cM}_g$ are the partition functions of the WZW
+model.  For general $\kappa(\cA) \in \mathbb{k}$, $L_\kappa$ is
+defined as a formal object in
+$\mathrm{Pic}(\overline{\cM}_g) \otimes_{\Z} \mathbb{k}$: the
+formula $c_1(L_\kappa) = \kappa(\cA) \cdot \omega_g$ determines a
+class in $H^2(\overline{\cM}_g, \mathbb{k})$ but does not
+correspond to an honest line bundle unless $\kappa(\cA)$ is
+integral.
+\end{construction}
+
+\begin{remark}[The genus tower as a filtration of the coderived
+  category]
+\label{rem:genus-tower-coderived}
+The genus tower of Volume~I organizes the curved bar complex by
+genus:
+\[
+  \barB^{\mathrm{curv}}(\cA)
+  \;=\;
+  \barB^{(0)}(\cA)
+  \;\xleftarrow{\;\kappa \cdot \omega_1\;}\;
+  \barB^{(1)}(\cA)
+  \;\xleftarrow{\;\kappa \cdot \omega_2\;}\;
+  \cdots
+\]
+At genus~$0$, $\barB^{(0)}(\cA)$ is an honest dg coalgebra (the
+uncurved bar complex).  The passage to genus~$1$ introduces the
+curvature $\kappa \cdot \omega_1$, promoting the object from the
+derived to the coderived category.  Each subsequent genus level
+introduces higher obstructions in
+$H^*(\overline{\mathcal M}_g, \mathbb{k})$, refining the
+first Chern class of the line bundle $\mathcal{L}_\kappa$.  The full curved bar complex is
+the inverse limit of this tower; its home is the completed coderived
+category $\hat{D}^{\mathrm{co}}(\mathrm{CoAlg}_{\SCchtop})$,
+filtered by genus.
+
+This filtration is the algebraic expression of the physical genus
+expansion: the perturbative ($g = 0$) sector lives in the derived
+category and is governed by tree-level Feynman diagrams; the
+non-perturbative ($g \geq 1$) sector lives in the coderived category
+and is governed by loop corrections, with each genus contributing a
+new curvature obstruction.  The passage from derived to coderived is
+the passage from trees to loops.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

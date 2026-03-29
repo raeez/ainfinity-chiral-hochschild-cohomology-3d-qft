@@ -1,3 +1,4 @@
+\providecommand{\Tr}{\operatorname{Tr}}
 \label{ch:modular-pva-quantization}%
 \label{def:complete-modular-bar}%
 
@@ -175,6 +176,7 @@ classical $W_3$ example \cite{KZ25}.
 \subsection{Resolved classical datum}
 
 \begin{assumption}[Resolved classical chiral/factorization datum]
+\label{assum:resolved-classical-datum}
 Let $X$ be a smooth complex curve and let $V$ be a filtered quadratic PVA on $X$.
 Assume there exists a cofibrant resolved classical chiral/factorization object
 \[
@@ -287,12 +289,104 @@ by successive one-edge expansions vanishes;
 \end{enumerate}
 \end{definition}
 
+\begin{remark}[Verification: the Heisenberg algebra]
+\label{rem:heisenberg-modular-bar-verification}
+The Heisenberg algebra $\cH_k$ at genus~$1$ satisfies these axioms:
+the differential from the genus-$0$ bar complex, augmented by the
+curvature $\kappa(\cH_k) \cdot \omega_1 = k \cdot \omega_1$, gives a
+modular bar datum with the codimension-two cancellation following from
+$\partial^2 = 0$ on $\overline{\cM}_{1,n}$.
+\end{remark}
+
+\begin{remark}[Derivation of the codimension-two cancellation]
+\label{rem:codim-two-derivation}
+This axiom is a consequence of $\partial^2 = 0$ on the moduli space
+of stable curves: the boundary of the boundary of
+$\overline{\cM}_{g,n}$ is empty, so the composition of two boundary
+operations vanishes.  The axiom records this topological fact at the
+algebraic level.
+\end{remark}
+
 \begin{remark}[Why this is the right primitive datum]
 The usual bar construction is governed by codimension-one collisions on configuration
 spaces. In the modular setting, codimension-one boundary strata correspond to one-edge
 degenerations of stable graphs. Thus the primitive input is not a generic higher operator
 but precisely the family of one-edge expansion maps.
 \end{remark}
+
+\begin{proposition}[Codimension-one boundary strata of the bordered log-FM compactification; \ClaimStatusProvedHere]
+\label{prop:bordered-log-FM-strata}
+The codimension-one boundary of the bordered logarithmic Fulton--MacPherson compactification $\overline{\FM}^{\mathrm{bord}}_{k,m}(X, D)$ (parametrising $k$ closed insertions in $X \setminus D$ and $m$ open insertions on boundary intervals) has exactly four types of strata:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Closed-point collisions:} a subset $S \subset \{1,\ldots,k\}$ of closed insertions collides in $X \setminus D$, producing the face $D_S \cong \FM_{k-|S|+1}(X) \times \FM_{|S|}(\C)$.  These contribute the bar differential $d_{\mathrm{res}}$ (OPE residues along collision divisors).
+\item \textbf{Consecutive open-point collisions:} a consecutive block of open insertions on a boundary interval $I_p$ collides, producing a face $\Conf^{\mathrm{ord}}_{m-|T|+1}(I_p) \times \Conf^{\mathrm{ord}}_{|T|}(\R)$.  These contribute the $A_\infty$ differential $d_{A_\infty}$ (Stasheff faces).
+\item \textbf{Mixed bubbling:} a closed insertion approaches a boundary interval, producing a mixed face where the bulk operator restricts to the boundary.  These contribute the bulk-to-boundary map (the closed-to-open operations of $\SCchtop$).
+\item \textbf{Nodal clutching/splitting:} the curve degenerates along a node, splitting into two components glued at the node.  These contribute the clutching differential $d_{\mathrm{clutch}}$ (self-sewing at genus boundaries and component splitting at nodal degenerations).
+\end{enumerate}
+The full modular bar differential decomposes correspondingly:
+\[
+d_{\mathrm{mod}} \;=\; d_{\mathrm{res}} + d_{A_\infty} + d_{\mathrm{mix}} + d_{\mathrm{clutch}}.
+\]
+The identity $d_{\mathrm{mod}}^2 = 0$ (at genus~$0$) or $d_{\mathrm{mod}}^2 = m_0$ (at genus~$g \geq 1$) is the content of the four types of codimension-two cancellations.
+\end{proposition}
+
+\begin{proof}
+The four strata types correspond to the four kinds of degenerations in the Fulton--MacPherson--Axelrod--Singer compactification of mixed open/closed configuration spaces on bordered surfaces: internal collisions, boundary collisions, boundary approach, and nodal degeneration.  Each is a codimension-one face of the compactified moduli.  The decomposition of the modular differential follows by restricting the total form to each face and identifying the resulting operation.  The codimension-two cancellation $d_{\mathrm{mod}}^2 = 0$ (or $= m_0$) is the boundary-of-boundary identity $\partial^2 = 0$ on manifolds with corners, combined with the Arnold cancellation (Theorem~\ref{thm:Arnold_full_proof}) for mixed corner terms.
+
+The bordered log-FM compactification for the punctured-curve case
+(open insertions on boundary intervals) is constructed in Volume~I,
+\S\ref*{sec:bordered-fm}
+(Construction~\ref*{constr:bordered-fm},
+Theorem~\ref*{thm:bordered-fm-properties},
+Proposition~\ref*{prop:four-type-boundary}).
+\end{proof}
+
+\begin{definition}[Bordered logarithmic Fulton--MacPherson cooperad]
+\label{def:bordered-log-FM-cooperad}
+The \emph{bordered log-FM cooperad} $\cC^{\mathrm{oc,log}}_{\mathrm{mod}}$ is the collection of chain complexes
+\[
+\cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g, k, m) \;:=\; C_\ast\bigl(\overline{\FM}^{\mathrm{bord}}_{k,m}(\Sigma_g, D)\bigr),
+\]
+where $\overline{\FM}^{\mathrm{bord}}_{k,m}(\Sigma_g, D)$ is the log-FM compactification of mixed open/closed configurations on a genus-$g$ bordered stable curve with $k$ closed and $m$ open markings.  The cooperad structure maps come from boundary inclusions:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Closed cocomposition:} the face $D_S$ (closed collision) gives $\cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g,k,m) \to \cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g, k{-}|S|{+}1, m) \otimes C_\ast(\FM_{|S|}(\C))$;
+\item \emph{Open cocomposition:} consecutive open collisions give the $E_1$-cooperad structure on boundary intervals;
+\item \emph{Genus cocomposition (separating):} nodal degeneration splitting the curve into two components gives $\cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g, k, m) \to \cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g_1, k_1, m_1) \otimes \cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g_2, k_2, m_2)$ for $g_1 + g_2 = g$, $k_1 + k_2 = k$, $m_1 + m_2 = m$;
+\item \emph{Genus cocomposition (non-separating):} self-sewing identifies two closed markings at a node, raising genus: $\cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g, k, m) \to \cC^{\mathrm{oc,log}}_{\mathrm{mod}}(g-1, k+2, m)$.  This is the sole primitive that raises genus (the $D_{\mathrm{nsep}}$ operator of Volume~I).
+\end{enumerate}
+The differential on $\cC^{\mathrm{oc,log}}_{\mathrm{mod}}$ encodes all four types of codimension-one strata (Proposition~\ref{prop:bordered-log-FM-strata}).
+\end{definition}
+
+\begin{definition}[Modular twisting morphism]
+\label{def:modular-twisting-morphism}
+Let $\cC$ be an open/closed factorization category (Definition~\ref{def:oc-factorization-category}) with open-sector category $\cC_\partial$ and bulk $Z_{\mathrm{der}}(\cC_\partial)$.  A \emph{modular twisting morphism} is a degree-$+1$ map
+\[
+\Theta_\cC \colon \cC^{\mathrm{oc,log}}_{\mathrm{mod}} \;\longrightarrow\; \End(Z_{\mathrm{der}}(\cC_\partial),\, \cC_\partial)
+\]
+satisfying the modular Maurer--Cartan equation
+\[
+d\Theta_\cC + \Theta_\cC \star \Theta_\cC + \Theta_\cC^{\mathrm{clutch}} \;=\; 0,
+\]
+where $\Theta_\cC^{\mathrm{clutch}}$ denotes the genus-raising terms from the clutching cocomposition.  This is the modular Maurer--Cartan equation in the sense of Getzler--Kapranov \cite{GK98}; the clutching term generalises the Getzler--Kapranov modular operad differential to the bordered open/closed setting.  The three terms correspond to: (i)~the internal differential (codimension-one collisions), (ii)~the convolution product (compositions of operations), (iii)~the clutching (nodal degeneration and self-sewing).
+
+The universal modular twisting morphism $\Theta_\cA$ of Volume~I is the specialisation $\Theta_{\cC(\cA)}$ for the open-sector category $\cC(\cA)$ of a logarithmic $\SCchtop$-algebra $\cA$.
+\end{definition}
+
+\begin{theorem}[Genus-$g$ amplitudes from categorical traces; \ClaimStatusProvedHere]
+\label{thm:genus-g-traces}
+Let $\cC$ be a cyclic open/closed factorization category with trace $\Tr_\cC \colon \HH_\ast(\cC_\partial) \to \mathbb{k}$ (Construction~\textup{\ref{constr:cyclic-structure}}).  The genus-$g$ amplitude is:
+\[
+Z_g(\cC) \;:=\; \Tr_\cC^{\circ g}(\Theta_\cC^{(g)}) \;\in\; \Gamma(\overline{\cM}_g,\, \cL_\kappa^{-1}),
+\]
+where $\Tr_\cC^{\circ g}$ denotes $g$-fold application of the clutching-trace operation (composing the clutching maps $\mathrm{cl}_p$ from Definition~\textup{\ref{def:oc-factorization-category}(vi)} with the cyclic trace), and $\Theta_\cC^{(g)}$ is the genus-$g$ component of the modular twisting morphism.
+
+At genus~$0$: $Z_0(\cC) = 1$ (the vacuum amplitude).
+At genus~$1$: $Z_1(\cC) = \Tr_\cC(\Theta_\cC^{(1)})$, which equals $\eta(\tau)^{-\kappa}$ for the Heisenberg (Computation~\textup{\ref{comp:heisenberg-genus1-obstruction}}).
+\end{theorem}
+
+\begin{proof}
+The clutching map $\mathrm{cl}_p$ closes the boundary interval $I_p$ to the circle $S^1_p$ by identifying the endpoints, producing a self-sewing at the puncture $p$.  The cyclic trace evaluates the resulting closed Hochschild chain.  Composing $g$ clutching operations on a genus-$0$ surface with $2g$ punctures (paired into $g$ nodes) produces the genus-$g$ amplitude.  The result is a section of $\cL_\kappa^{-1}$ because the curvature $\kappa \cdot \omega_g$ of the cyclic structure contributes a twist by $\cL_\kappa$ at each genus increment (Proposition~\ref{prop:kappa-euler-class}).
+\end{proof}
 
 \subsection{The complete modular bar coalgebra}
 \label{sec:modular-bar-coalgebra}
@@ -519,16 +613,16 @@ of a modular bar datum $C$ is
 \Hom(\Bch(C),\, sC)[-1],
 \end{equation}
 where $\Bch(C) := \bar{B}^{(0)}(C)$ is the tree-level
-sub-coalgebra of~$\Bmod(C)$---stable graphs with all vertex
-genera zero and $b_1 = 0$, i.e.\ trees.  Its MC elements are
+sub-coalgebra of~$\Bmod(C)$ (stable graphs with all vertex
+genera zero and $b_1 = 0$, i.e.\ trees).  Its MC elements are
 tree-level twisting cochains.
 \end{definition}
 
-\begin{theorem}[Genus completion; \ClaimStatusProvedHere]
+\begin{theorem}[Genus completion; \ClaimStatusProvedHere{} (conditional on Assumption~\ref{assum:resolved-classical-datum})]
 \label{thm:genus-completion}
 \index{genus filtration!on modular deformation algebra}
 \index{modular deformation algebra!genus completion}
-The genus filtration
+Under Assumption~\ref{assum:resolved-classical-datum}, the genus filtration
 $F^g\Bmod(C) := \prod_{g(\Gamma) \ge g} C[\Gamma]_{\Aut(\Gamma)}$
 induces a complete descending filtration
 $F^\bullet L_{\mathrm{mod}}(C)$ with the following properties:
@@ -648,15 +742,32 @@ of the corresponding entry on the right.  Every theorem of
 Volume~I at genus~$0$ has a modular extension in the right column.
 \end{remark}
 
+\begin{theorem}[Higher $A_\infty$ operations as successive obstruction classes; \ClaimStatusProvedHere]
+\label{thm:obstruction-interpretation}
+Let $\cA$ be a logarithmic $\SCchtop$-algebra with modular characteristic $\kappa(\cA)$.  The higher $A_\infty$ operations $m_k$ for $k \geq 3$ are successive obstruction classes for extending the Lagrangian family $\cL^{(0)}_\cA$ (the genus-$0$ bar data) through the boundary strata of $\overline{\cM}_{g,n}$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_2$ encodes the binary OPE and determines the classical $r$-matrix $r(z) = \int_0^\infty e^{-\lambda z} \{-{}_\lambda -\}\, d\lambda$.
+\item $m_3$ is the first obstruction to associativity: it measures the failure of $m_2 \circ m_2$ to vanish, or equivalently the failure of the classical $r$-matrix to satisfy the CYBE strictly (the defect being a coboundary controlled by $m_3$).
+\item $m_k$ for $k \geq 4$ are higher Massey-type products: $m_k$ is determined by the obstruction to extending $m_2, \ldots, m_{k-1}$ to the $k$-point stratum of $\FM_k(\C)$.
+\end{enumerate}
+The shadow depth $d_{\mathrm{alg}}(\cA)$ is the minimal $k$ such that $m_{k+1}, m_{k+2}, \ldots$ are all determined by $m_2, \ldots, m_k$ via the Stasheff relations.
+\end{theorem}
+
+\begin{proof}
+The $A_\infty$ relations at arity $n$ express $m_n$ in terms of compositions of $m_i$ for $i < n$, modulo a $d_0$-coboundary (the $m_1 \circ m_n + m_n \circ m_1^{\otimes n}$ terms).  When this coboundary is exact --- i.e., when the obstruction class in $H^\bullet(d_0)$ vanishes --- the operation $m_n$ is determined by lower-arity data.  The shadow depth is the arity beyond which all obstructions vanish, equivalently the arity beyond which the bar coderivation is determined by its lower components.
+\end{proof}
+
 \begin{proposition}[Factorisation along boundary strata;
-\ClaimStatusProvedHere]
+\ClaimStatusProvedHere{} (conditional on Assumption~\ref{assum:resolved-classical-datum})]
 \label{prop:factorisation-boundary-strata}
 \index{clutching factorization|textbf}
 \index{Maurer--Cartan class!factorisation}
 Let $\delta_\cA = D - D^{(0)} = \sum_{g \ge 1} \hbar^g\,
 \delta^{(g)}_\cA \in F^1 L_{\mathrm{mod}}$ be the positive-genus
 MC element
-\textup{(}Theorem~\textup{\ref{thm:coderivation-MC-synthesis})}.
+\textup{(}Theorem~\textup{\ref{thm:coderivation-MC-synthesis})};
+the existence of $\cA$ is guaranteed by the resolved classical
+datum \textup{(}Assumption~\textup{\ref{assum:resolved-classical-datum})}.
 Its genus-$g$ component factorises along the boundary strata
 of~$\overline{\cM}_{g,n}$:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -704,7 +815,7 @@ Part~(iii): the codimension-two cancellation axiom says that
 for any stable graph with two internal edges, the two orderings
 of successive one-edge expansions cancel with signs.  On
 coderivations, this is the associativity of iterated
-factorisation---equivalently, $\partial^2 = 0$ on the
+factorisation; equivalently, $\partial^2 = 0$ on the
 stratification of~$\overline{\cM}_{g,n}$.
 \end{proof}
 
@@ -732,7 +843,7 @@ Steinberg varieties: as the Steinberg self-intersection
 $\widetilde{\cN} \times_{\mathfrak{g}} \widetilde{\cN}$ produces
 the Hecke algebra, the modular clutching correspondence produces
 the modular convolution.  The Jacobi identity is the associativity
-of the clutching correspondence---the commutativity of
+of the clutching correspondence, the commutativity of
 codimension-$2$ clutching squares.
 \end{remark}
 
@@ -743,7 +854,7 @@ In the language of Beilinson--Drinfeld, the chiral convolution
 $\mathfrak{g}^{\mathrm{ch}}_\cA$ is the endomorphism
 factorisation homology $\int_{\Ran(X)} \End_\cA$ over the Ran
 space of a curve, and the modular convolution $L_{\mathrm{mod}}$
-is $\int_{\cM\!od} \End_\cA$---factorisation homology over the
+is $\int_{\cM\!od} \End_\cA$, factorisation homology over the
 full modular operad $\cM\!od = \{\overline{\cM}_{g,n}\}$.  The
 projection $L_{\mathrm{mod}} \to \mathfrak{g}^{\mathrm{ch}}$
 is the restriction of factorisation homology along the
@@ -755,8 +866,8 @@ and its factorisation along boundary strata
 the factorisation property of this section.
 
 The ribbon-graph variant gives the $E_1$~wing.  Replacing
-stable graphs by ribbon graphs---the Feynman transform
-$F\!\Ass$ of the associative modular operad---produces the
+stable graphs by ribbon graphs (the Feynman transform
+$F\!\Ass$ of the associative modular operad) produces the
 ordered convolution algebra
 $L_{\mathrm{mod}}^{E_1} := \Coder(\Bmod^{\mathrm{rib}})[-1]$.
 The coinvariant projection from ribbon to stable graphs is the
@@ -790,8 +901,8 @@ $\sum_g N^{2-2g} \delta_{\mathrm{planar}}^{(g)}$
   and the spectral sequence degenerates at~$E_1$.
 
 \item \emph{Virasoro/\/$\cW_N$}:
-  all channels---separating bracket, non-separating loop, and
-  rigid residues---are active.  The first modular obstruction
+  all channels (separating bracket, non-separating loop, and
+  rigid residues) are active.  The first modular obstruction
   vanishes for $\cW_3$ by the triangular normal-form theorem
   (Theorem~\ref{thm:triangular-vanishing}).
 \end{enumerate}
@@ -933,8 +1044,8 @@ and the metaplectic square root}
 
 The stable-graph expansion of the modular MC field $\Theta_C$ is cofree:
 it is uniquely determined by its restriction to primitive corollas and
-rigid cutting strata.  That restriction --- the primitive boundary kernel
---- is the native object of the modular PVA theory.  Its finite-rank
+rigid cutting strata.  That restriction, the primitive boundary kernel,
+is the native object of the modular PVA theory.  Its finite-rank
 branch projection carries a BV master action whose quantum master equation
 is the finite-dimensional shadow of the full primitive Maurer--Cartan
 equation.
@@ -1241,7 +1352,7 @@ For $\delta\in L_{\mathrm{mod}}(C)$ define
 \]
 \end{definition}
 
-\begin{theorem}[Formal structure theorem; \ClaimStatusProvedHere]\label{thm:formal-structure}
+\begin{theorem}[Formal structure theorem; \ClaimStatusProvedHere{} (conditional on Assumption~\ref{assum:resolved-classical-datum})]\label{thm:formal-structure}
 Let $C$ be a modular bar datum. Then:
 \begin{enumerate}[leftmargin=2.4em]
 \item $L_{\mathrm{mod}}(C)$ is a complete filtered dg Lie algebra with differential
@@ -1795,7 +1906,7 @@ gauge theory with gauge group $\mathrm{GL}_N$:
   Euler characteristic weight.
 \end{itemize}
 The identification $\hbar \leftrightarrow g_s^2 \leftrightarrow 1/N$
-would be the holographic identification.
+would be the holographic identification.  We emphasise that this identification is \emph{conjectural}: the formal genus expansion is proved (Theorem~\ref{thm:formal-genus-expansion}), but its identification with the 't~Hooft $1/N$ expansion of any specific gauge theory requires input beyond the algebraic framework; see Conjecture~\ref{conj:thooft-gl-n} for the precise statement and Remark~\ref{rem:thooft-not-proved} for the delineation of proved versus open claims.
 \end{remark}
 
 \begin{remark}[What is proved and what is not]

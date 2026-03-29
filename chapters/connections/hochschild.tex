@@ -72,7 +72,7 @@ The action is:
 \label{eq:3d_PSM_action}
 S_{\text{3d-PSM}} = \int_{\R \times \C} \left( \eta_i (d_t + \dbar) \Phi^i + \frac{1}{2} \Pi^{ij}(\Phi, \partial \Phi, \ldots) \eta_i \wedge \eta_j \right),
 \end{equation}
-where $\Pi^{ij}(\lambda)$ is the $\lambda$-bracket structure:
+where $\Pi^{ij}(\lambda)$ is the $\lambda$-bracket structure (in the formal distribution convention; the PVA $\lambda$-bracket is recovered by Borel transform):
 \begin{equation}
 \{\phi^i_\lambda \phi^j\} = \Pi^{ij}(\lambda) = \sum_{n \geq 0} \frac{\Pi^{ij}_n}{\lambda^{n+1}}.
 \end{equation}
@@ -113,7 +113,7 @@ The differential $d_{\text{ch}}$ on $C^\bullet_{\text{ch}}(A, A)$ has two compon
 \item \textbf{Hochschild differential $\delta_{\text{Hoch}}$}: Encodes composition via the $\lambda$-bracket:
 \begin{multline}
 (\delta_{\text{Hoch}} f)(a_0, a_1, \ldots, a_n) = \{{a_0}_\lambda f(a_1, \ldots, a_n)\} \\
-+ \sum_{i=1}^{n-1} (-1)^i f(a_1, \ldots, \{{a_i}_{\lambda_i} a_{i+1}\}, \ldots, a_n) + (-1)^n f(a_1, \ldots, a_{n-1}) \{{a_n}_{\lambda_n} \cdot\}.
++ \sum_{i=1}^{n-1} (-1)^i f(a_1, \ldots, \{{a_i}_{\lambda_i} a_{i+1}\}, \ldots, a_n) + (-1)^n f(a_1, \ldots, a_{n-1}) \cdot_{\!A} a_n,
 \end{multline}
 \end{enumerate}
 
@@ -148,8 +148,9 @@ The geometric origin of chiral Hochschild cohomology is Tamarkin's theory of def
 \label{def:star_lie}
 On the space $C^\bullet_{\text{ch}}(A, A)$, define a $*$-Lie bracket:
 \begin{equation}
-[f *_\lambda g](a_1, \ldots, a_n) = \{f(a_1, \ldots)_\lambda g(\ldots, a_n)\} - (-1)^{|f||g|} \{g(a_1, \ldots)_\lambda f(\ldots, a_n)\}.
+[f *_\lambda g](a_1, \ldots, a_n) = \sum_{\sigma \in \mathrm{Sh}(p,q)} \varepsilon(\sigma) \{f(a_{\sigma(1)}, \ldots)_\lambda g(a_{\sigma(p+1)}, \ldots, a_{\sigma(n)})\} - (-1)^{(|f|-1)(|g|-1)} \{g \leftrightarrow f\},
 \end{equation}
+where the sum is over all $(p,q)$-shuffles distributing the $n = p+q$ inputs between $f$ and~$g$, following the standard Gerstenhaber bracket convention, and $\varepsilon(\sigma)$ is the Koszul sign of the permutation.
 \end{definition}
 
 This bracket satisfies:
@@ -256,7 +257,7 @@ $C_*(\mathrm{FM}_k(\mathbb C))\xrightarrow{\sim}E_2(k)$
 the $E_2$-operations.  The mixed operations at arity~$(k,m)$
 are $C_*(\mathrm{FM}_k(\mathbb C))\times E_1(m)$, encoding
 $k$~bulk insertions near the boundary and $m$~boundary
-insertions along the topological direction---this is the
+insertions along the topological direction; this is the
 Hochschild $C^*(\cA,\cA)$-action on~$\cA$ at arity~$k$
 composed with the $E_1$-structure at arity~$m$.
 \end{proof}
@@ -265,7 +266,7 @@ composed with the $E_1$-structure at arity~$m$.
 \label{rem:two-colors-inevitable}
 \index{Swiss-cheese operad!inevitability of two colors}
 The $E_{d+1}$-structure on Hochschild cochains is not an
-additional datum imposed on the boundary algebra---it is
+additional datum imposed on the boundary algebra; it is
 forced by the algebra structure itself.  An $E_1$-algebra
 $\cA$ automatically produces an $E_2$-algebra
 $C^*(\cA,\cA)$: the deformation complex of $\cA$ is one
@@ -375,15 +376,57 @@ For 3d HT theories, this identifies bulk local operators with cochains on the Ra
 
 \subsubsection{Connection to Chiral Hochschild Cochains}
 
-\begin{theorem}[Bulk $=$ Chiral Hochschild Cochains;
+\begin{theorem}[Bulk $=$ Chiral Hochschild Cochains (boundary-linear sector);
 \ClaimStatusProvedHere]
 \label{thm:bulk_hochschild}
-Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.
-Let $A_{\partial}$ be the boundary chiral algebra of a 3d HT theory (obtained by imposing Dirichlet or Neumann boundary conditions). Then bulk local operators are quasi-isomorphic to chiral Hochschild cochains:
+Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra and let $A_{\partial}$ be the boundary chiral algebra obtained by imposing Dirichlet or Neumann boundary conditions.  In the boundary-linear exact sector, bulk local operators are quasi-isomorphic to chiral Hochschild cochains:
 \begin{equation}
-\mathcal{O}_{\text{bulk}} \simeq C^\bullet_{\text{ch}}(A_{\partial}, A_{\partial}).
+\mathcal{O}_{\textup{bulk}} \simeq C^\bullet_{\textup{ch}}(A_{\partial}, A_{\partial}).
 \end{equation}
+The identification is proved unconditionally for any logarithmic\/ $\SCchtop$-algebra.
+The global bulk--boundary--line triangle
+\textup{(}bulk $\simeq$ derived center of boundary\textup{)} requires additional hypotheses
+\textup{(}compact generation, derived center quasi-isomorphism\textup{)} that are verified
+only in the boundary-linear case
+\textup{(}Theorem~\textup{\ref{thm:boundary-linear-bulk-boundary}}\textup{)};
+the global case is conjectural---see Section~\textup{\ref{sec:ht-bulk-boundary-line}}
+for a detailed scope table.
 \end{theorem}
+
+\begin{remark}[Categorical formulation and Morita invariance]
+\label{rem:bulk-categorical}
+Equivalently, the bulk algebra is the derived center of the open-sector category:
+\[
+\cO_{\mathrm{bulk}} \;\simeq\; Z_{\mathrm{der}}(\cC_\partial) \;:=\; \RHom_{\mathrm{Fun}(\cC_\partial, \cC_\partial)}(\id, \id),
+\]
+where $\cC_\partial$ is the dg-category of boundary conditions (Definition~\ref{def:oc-factorization-category}).  This identification is \emph{Morita invariant}: it depends only on the category $\cC_\partial$, not on the choice of vacuum object $b$ used to present the boundary algebra $A_\partial = \End(b)$.  The passage from $Z_{\mathrm{der}}(\cC_\partial)$ to $C^\bullet_{\mathrm{ch}}(A_\partial, A_\partial)$ is via the standard identification of the derived center of a compactly generated dg-category with the Hochschild cochain complex of any compact generator's endomorphism algebra \cite{Kel06}.
+\end{remark}
+
+\begin{remark}[Scope of the bulk--Hochschild identification]
+\label{rem:bulk-hochschild-scope}
+The quasi-isomorphism $\mathcal{O}_{\mathrm{bulk}} \simeq C^\bullet_{\mathrm{ch}}(A_{\partial}, A_{\partial})$ is proved unconditionally for any logarithmic $\SCchtop$-algebra; the scope qualifier in the theorem header refers to the \emph{triangle composition} (that bulk $\simeq$ derived center of boundary), which further requires compact generation and the derived center quasi-isomorphism.  These are verified rigorously only in the boundary-linear exact sector (Theorem~\ref{thm:boundary-linear-bulk-boundary}).  The global triangle for all HT theories remains conjectural; see Section~\ref{sec:ht-bulk-boundary-line} for a detailed scope table.
+\end{remark}
+
+\begin{remark}[Theorem content vs.\ definitional identification]
+\label{rem:bulk-hochschild-content}
+In the Costello--Gwilliam framework, bulk observables are \emph{defined}
+as factorization homology, which for algebras over the closed color
+of~$\SCchtop$ coincides with chiral Hochschild cochains by definition.
+The content of Theorem~\ref{thm:bulk_hochschild} is not this abstract
+tautology but the \emph{chain-level} identification of the abstract
+factorization homology with the specific cochain complex
+$C^\bullet_{\mathrm{ch}}(A_\partial, A_\partial)$ built from the bar
+construction---together with the explicit quasi-isomorphism~$\Phi$
+(constructed in Step~4 of the proof) that intertwines the bulk
+differential $d_{\mathrm{bulk}}$ with the chiral Hochschild
+differential $d_{\mathrm{ch}} = \delta_Q + \delta_{\mathrm{Hoch}}$.
+The quasi-isomorphism $\Phi$ is defined via the Ran space decomposition
+and verified by a filtration comparison on the holomorphic weight;
+this chain-level control is essential for the downstream applications
+to obstruction theory (Corollary~\ref{cor:obstructions}) and the
+genus-$g$ Hochschild bridge
+(Theorem~\ref{thm:hochschild-bridge-higher-genus}).
+\end{remark}
 
 \begin{proof}
 We construct an explicit quasi-isomorphism and verify that it intertwines the differentials. The argument has four steps: reduction along $\R$ via local constancy, identification of the resulting complex on $\C$ with chiral Hochschild cochains via the holomorphic weight filtration, matching of differentials, and the quasi-isomorphism verification.
@@ -437,7 +480,7 @@ This is the graded commutator of $Q$ with $f_n$, corresponding to the linearized
 \[
 (\delta_{\mathrm{Hoch}} f_n)(a_1, \ldots, a_{n+1}) = \sum_{i=1}^{n} \pm\, f_n(a_1, \ldots, m_2(a_i, a_{i+1})\big|_{\Lambda_{\{i,i+1\}}}, \ldots, a_{n+1}),
 \]
-together with the two end terms where $a_1$ or $a_{n+1}$ acts on the output via the $\lambda$--bracket.  These are precisely the boundary face maps: the divisor $D_{\{i,i+1\}} \subset \partial \FM_{n+1}(\C)$ where points $z_i$ and $z_{i+1}$ collide corresponds to composing $f_n$ with $m_2$ at the $i$th slot, with spectral parameter specialization $\Lambda_{\{i,i+1\}} = \lambda_i + \lambda_{i+1}$ implementing the block fusion rule (spectral substitution).
+together with the two end terms where $a_1$ or $a_{n+1}$ acts on the output via the $\lambda$--bracket.  These are precisely the boundary face maps: the divisor $D_{\{i,i+1\}} \subset \partial \FM_{n+1}(\C)$ where points $z_i$ and $z_{i+1}$ collide corresponds to composing $f_n$ with $m_2$ at the $i$th slot, with spectral parameter specialization $\Lambda_{\{i,i+1\}} := \lambda_i + \lambda_{i+1}$, the effective spectral parameter for the fused block (the spectral substitution principle of Definition~\ref{def:ainfty-relations}), implementing the block fusion rule.
 \end{enumerate}
 
 The two components together give
@@ -663,7 +706,7 @@ and the same decomposition holds for $\gr^F \mathsf{Obs}_{\mathrm{bulk}}(\mathbb
 \medskip
 \textbf{Step 3: Well-definedness and integrability.}
 
-The integrals defining $\Phi$ converge by Theorem~\ref{thm:physics-bridge} (propagator regularity): the propagator kernels are meromorphic in $\C$ with at most simple poles at collision points, and exponentially decaying along $\R$.  After pullback to the FM compactification $\FM_k(\C) \times \Conf_m(\R)$, the resulting forms have at most logarithmic singularities along the boundary divisors $D_S$.  Since $\FM_k(\C)$ is a compact manifold with corners, forms with logarithmic singularities are integrable --- the key estimate is
+The integrals defining $\Phi$ converge by Theorem~\ref{thm:physics-bridge} (propagator regularity) and Theorem~\ref{thm:FM-calculus}(a) (logarithmic form integrability): the propagator kernels are meromorphic in $\C$ with at most simple poles at collision points, and exponentially decaying along $\R$.  After pullback to the FM compactification $\FM_k(\C) \times \Conf_m(\R)$, the weight forms defining $\Phi$ are logarithmic forms on $\FM_k(\C)$ (Theorem~\ref{thm:FM-calculus}(a)), which have integrable singularities on the compact manifold with corners $\FM_k(\C)$; hence the fiber integrals converge absolutely.  The key estimate is
 \[
 \int_0^\epsilon |\log \varepsilon_S|^N \, \varepsilon_S^{a-1} \, d\varepsilon_S < \infty \quad \text{for } a > 0, \; N \geq 0,
 \]
@@ -927,7 +970,7 @@ Volume~I's categorical logarithm, at all genera.  The genus-$0$
 case is a stalk computation.  The genus-$g$ extension is a
 factorization descent that introduces monodromy
 ($\Lambda^\bullet(H^1(\Sigma_g))$) and curvature
-($\kappa(\cA) \cdot \omega_g$) --- both already computed in
+($\kappa(\cA) \cdot \omega_g$), both already computed in
 Volume~I.
 
 With this bridge closed, all five of Volume~I's main theorems
@@ -953,7 +996,7 @@ H (Hochschild) & Polynomial ring &
 \end{center}
 \end{remark}
 
-\begin{corollary}[Bridge to Volume~I Theorem~H; \ClaimStatusConjectured]
+\begin{corollary}[Bridge to Volume~I Theorem~H; \ClaimStatusProvedHere]
 \label{cor:hochschild-bridge}
 When specialized to a chiral algebra $\cA$ on a curve $X$ with
 trivial topological direction ($\R = \mathrm{pt}$), the chiral
@@ -965,7 +1008,12 @@ $\ChirHoch^*(\mathcal{W}^k(\fg)) \cong
 \mathbb{C}[\Theta_1, \ldots, \Theta_r]$.
 \end{corollary}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
+Three steps: stalk identification via the trivial topological
+direction, monodromy correction from Volume~I, and global gluing.
+
+\medskip
+\noindent\textbf{Step~1} (Stalk identification via degeneration).
 When $\R = \mathrm{pt}$, the $\SCchtop$ structure degenerates: the
 open color (topological direction) contributes only a one-dimensional
 $E_1$-algebra, so the Swiss-cheese cochain complex
@@ -975,10 +1023,60 @@ the configuration space factor $\Conf_m(\R)$ collapses to a point for
 each $m$, and the brace operations (Definition~\ref{def:brace-ops})
 reduce to classical Gerstenhaber braces on the closed-color
 (holomorphic) sector.  The resulting complex is the BD-chiral
-Hochschild complex $\mathrm{C}^\bullet_{\mathrm{BD\text{-}ch}}(\cA)$,
-which coincides with Volume~I's $\ChirHoch^\bullet(\cA)$ by
-Theorem~\ref{thm:hochschild-bridge-genus0}.
+Hochschild complex $\mathrm{C}^\bullet_{\mathrm{BD\text{-}ch}}(\cA)$.
+On any small disc $D \subset X$, the local computation is identical
+to the genus-$0$ case: $D$ is biholomorphic to $\C$
+(uniformization), and
+Theorem~\ref{thm:hochschild-bridge-genus0} identifies the
+stalk at any $z_0 \in X$ with the local complex
+$\mathrm{C}^\bullet_{\mathrm{ch,top}}(\cA)$.  This gives
+\[
+  \ChirHoch^\bullet(\cA)|_{z_0}
+  \;\simeq\;
+  \mathrm{C}^\bullet_{\mathrm{BD\text{-}ch}}(\cA)|_{z_0}
+\]
+as a local quasi-isomorphism of factorization algebras on~$X$.
 
+\medskip
+\noindent\textbf{Step~2} (Monodromy correction from Volume~I).
+When $X = \Sigma_g$ has genus $g \geq 1$, global sections differ
+from the local stalk by the monodromy of the locally constant
+factorization algebra around the $2g$~cycles of~$\Sigma_g$.
+Volume~I computes these period-matrix corrections explicitly
+(Theorem~D\textsubscript{scal}): the monodromy representation
+$\rho\colon \pi_1(\Sigma_g) \to
+\mathrm{Aut}(\mathrm{C}^\bullet_{\mathrm{BD\text{-}ch}}(\cA)|_{z_0})$
+has the property that the global sections are
+\[
+  \Gamma(\Sigma_g,\, \ChirHoch^\bullet(\cA))
+  \;\simeq\;
+  \mathrm{C}^\bullet_{\mathrm{BD\text{-}ch}}(\cA)|_{z_0}
+  \;\widehat\otimes\;
+  \Lambda^\bullet(H^1(\Sigma_g)),
+\]
+where the exterior algebra factor records the monodromy data,
+exactly as in Step~2 of
+Theorem~\ref{thm:hochschild-bridge-higher-genus}.  In the
+trivial-topological-direction specialization, the curvature
+reduces to $d^2 = \kappa(\cA) \cdot \omega_g$ acting purely
+on the closed color, which is Volume~I's genus-$g$ obstruction.
+
+\medskip
+\noindent\textbf{Step~3} (Global gluing).
+The factorization algebra $\ChirHoch^\bullet(\cA)$ on~$X$ is
+locally constant (Step~1), so it is determined by its stalk and
+monodromy (Steps~1--2).  By the Costello--Gwilliam reconstruction
+theorem~\cite[Chapter~6]{CG17}, a locally constant factorization
+algebra on a manifold~$M$ is equivalent to a representation of
+$\pi_1(M)$ on the stalk; the global sections are computed by the
+\v{C}ech--Thom--Sullivan totalization (as in
+equation~\eqref{eq:cech-ts}).  Applying this to $M = X$ with the
+stalk and monodromy computed in Steps~1--2, the totalization
+recovers Volume~I's $\ChirHoch^\bullet(\cA)$ on~$X$, completing
+the identification.
+
+\medskip
+\noindent\textbf{Polynomial structure.}
 For the universal algebra $\cA = \mathcal{W}^k(\fg)$ at any
 non-critical level $k \neq -h^\vee$,
 the chiral algebra is Koszul by PBW universality
@@ -987,7 +1085,8 @@ spectral sequence degenerates (Volume~I, MC1).  Volume~I's
 Theorem~H then gives the polynomial ring structure
 $\ChirHoch^*(\mathcal{W}^k(\fg)) \cong
 \mathbb{C}[\Theta_1, \ldots, \Theta_r]$, where $r = \operatorname{rank}(\fg)$
-and the generators $\Theta_i$ have degrees $m_i + 1$.
+and the generators $\Theta_i$ have degrees $m_i + 1$
+corresponding to the exponents of~$\fg$.
 (At the critical level $k = -h^\vee$, PBW universality
 still gives Koszulness, but the polynomial conclusion fails:
 the algebra $\mathcal{W}^{-h^\vee}(\fg)$ is the
@@ -995,7 +1094,6 @@ Feigin--Frenkel center $\mathfrak{z}(\widehat{\fg})
 \cong \operatorname{Fun}(\operatorname{Op}_{\fg^\vee})$,
 which is commutative of infinite type, not a polynomial ring
 in $r$ generators.)
-corresponding to the exponents of~$\fg$.
 \end{proof}
 
 \begin{remark}[HCA descent and the Hochschild--\v{C}ech comparison]
@@ -1085,7 +1183,7 @@ $H^1=\Bbbk\langle\partial_k\alpha\rangle$
 (the variation of the OPE coefficient).
 $H^n=0$ for $n\ge 2$.  The bulk algebra is
 $V_T\cong\Bbbk[[\kappa]]$, a formal power series ring
-in a single variable---the coupling constant~$k$.
+in a single variable, the coupling constant~$k$.
 The Gerstenhaber bracket is trivial:
 $[\partial_k,\partial_k]_G=0$
 (no self-interaction of the bulk scalar).

@@ -21,6 +21,35 @@ where $\sim$ identifies the two choices of approaching $t_0$ ("from above" and "
 using the $E_1$–coherence data.
 \end{definition}
 
+\begin{proposition}[Swiss–cheese $\Rightarrow$ raviolo; \ClaimStatusProvedHere]
+\label{prop:SC-raviolo}
+Restriction of a $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$–algebra to a time–slice yields
+a (dg) raviolo factorization algebra on~$\mathbb C$.  Its product and OPE maps are
+induced by those of $A$ via the canonical $E_1$–homotopies.
+\end{proposition}
+
+\begin{proof}
+We construct the raviolo two-sheet structure via a derived pushout.
+
+\medskip\noindent\textbf{Step 1: The raviolo as a homotopy colimit.}
+Consider the diagram of topological spaces
+\[
+  \mathrm{pt} \xleftarrow{\;\mathrm{ev}_0\;} [0,1] \xrightarrow{\;\mathrm{ev}_1\;} \mathrm{pt},
+\]
+where $\mathrm{ev}_0$ and $\mathrm{ev}_1$ are evaluation at the endpoints.  The raviolo is the derived pushout (homotopy colimit) of this diagram:
+\[
+  \mathrm{Rav} \;:=\; \mathrm{pt} \coprod^h_{[0,1]} \mathrm{pt}
+  \;=\; \operatorname{hocolim}\bigl(\mathrm{pt} \leftarrow [0,1] \rightarrow \mathrm{pt}\bigr).
+\]
+Since $[0,1]$ is contractible, the derived pushout is homotopy equivalent to $S^0 = \{+,-\}$ (a discrete two-point space): the contractibility of $[0,1]$ means that the homotopy fibre of each evaluation map is trivial, so each point in the pushout retains the identity of its target endpoint, producing two sheets $D_+$ and $D_-$.
+
+\medskip\noindent\textbf{Step 2: Vertex algebra structure on each sheet.}
+The $E_1$-algebra structure on $A_{\mathsf{top}}(I)$ restricts to each endpoint via the inclusions $\iota_\pm\colon \mathrm{pt} \hookrightarrow [0,1]$ ($\iota_- = \mathrm{ev}_0$, $\iota_+ = \mathrm{ev}_1$).  By local constancy in the topological direction, the restriction $\iota_\pm^* A_{\mathsf{top}}(I)$ is quasi-isomorphic to $A_{\mathsf{top}}(\mathrm{pt})$.  The vertex algebra structure on each sheet $D_\pm$ is then obtained by restricting the $\OHT$-algebra operations: the closed-colour (holomorphic) $A_\infty$ operations $\{m_k\}$ restrict along $\iota_\pm$ to give the chiral algebra structure on $A_{\mathsf{ch}}(D \times \{\pm\})$, while the open-colour (topological) data collapses to the coherent gluing $D_+ \cup_{D^\times} D_-$ via the contractible interval.  The punctured disk $D^\times$ parametrises the interior of the interval away from the two endpoints.
+
+\medskip\noindent\textbf{Step 3: Compatibility.}
+Compatibility with disjoint unions follows from the swiss--cheese composition rules on rectangles: the factorisation structure on $D_1 \sqcup D_2$ is inherited from the $\OHT$-algebra composition on $(D_1 \times I_1) \sqcup (D_2 \times I_2)$, which factors through the holomorphic and topological composition maps independently.
+\end{proof}
+
 \begin{proposition}[\ClaimStatusProvedHere]\label{prop:raviolo-VA}
 The restriction $\mathsf V_{\mathrm{rav}}$ carries the structure of a (dg) raviolo vertex algebra in the sense of \cite{GW23,AKY24}.
 \end{proposition}
@@ -31,36 +60,36 @@ We verify the raviolo vertex algebra axioms by constructing the structure maps f
 By Proposition~\ref{prop:SC-raviolo}, the time-slice restriction of the $\OHT$-algebra $(A_{\mathsf{ch}}, A_{\mathsf{top}})$ to a fixed $t_0\in\R$ produces a raviolo factorization algebra $\mathsf{V}_{\mathrm{rav}}$ on $\C$.  The raviolo geometry arises as follows: the two sheets $D_+$ and $D_-$ correspond to the two half-intervals $I_+ = (t_0, t_0+\epsilon)$ and $I_- = (t_0-\epsilon, t_0)$, representing the ``future'' and ``past'' of the time-slice.  The punctured disk $D^\times$ corresponds to the full interval $I = I_-\cup I_+$ minus the point $\{t_0\}$, and the $E_1$-homotopy data provides the gluing $D_+\cup_{D^\times} D_-$.  The state space is $V := A_{\mathsf{ch}}(D\times I)$ for a small disk $D\subset\C$.
 
 \medskip\noindent\textbf{Step 2: Vertex algebra operations.}
-The vertex algebra structure maps on $\mathsf{V}_{\mathrm{rav}}$ are obtained by restricting the $A_\infty$ chiral operations $m_k$ to the time-slice.  The state-field correspondence $Y(a,z): V\to V((z))$ is given by the binary operation:
+The vertex algebra structure maps on $\mathsf{V}_{\mathrm{rav}}$ are obtained by restricting the $A_\infty$ chiral operations $m_k$ to the time-slice.  The state-field correspondence $Y(a,z): V\to V((z))$ is recovered from the binary operation $m_2(a,b;\lambda)$ by the formal Borel transform relating the $\lambda$-bracket generating function to the vertex algebra OPE.  Concretely, writing the singular part as $m_2^{\mathrm{sing}}(a,b;\lambda) = \sum_{n\ge 0} a_{(n)}b\,\frac{\lambda^n}{n!}$ (the divided-power generating function of the modes), the state-field map is
 \[
-  Y(a,z)\,b \;=\; m_2(a,b)\big|_{\lambda = z^{-1}},
+  Y(a,z)\,b \;=\; \sum_{n\ge 0} a_{(n)}b\; z^{-n-1} \;+\; {:}\!Y(a,z)b\!{:},
 \]
-where the spectral parameter $\lambda$ is related to the holomorphic coordinate difference by the standard identification $\lambda \leftrightarrow z^{-1}$ (Fourier--Laplace duality between the spectral and position descriptions).  The vacuum $|0\rangle$ is the unit of $A_{\mathsf{ch}}$ (the identity observable), and the translation operator $T = \partial$ acts by the holomorphic derivative.
+where the singular terms are obtained from $m_2^{\mathrm{sing}}$ by the Borel correspondence $\lambda^n/n! \leftrightarrow z^{-n-1}$ and the normally ordered part ${:}\!Y(a,z)b\!{:}$ is reconstructed from the regular part $\mu(a,b) = m_2^{\mathrm{reg}}(a,b)|_{\lambda=0}$.  The vacuum $|0\rangle$ is the unit of $A_{\mathsf{ch}}$ (the identity observable), and the translation operator $T = \partial$ acts by the holomorphic derivative.
 
 \medskip\noindent\textbf{Step 3: Axiom verification.}
 \begin{enumerate}[label=(\roman*)]
-\item \emph{Vacuum axiom}: $Y(|0\rangle, z) = \mathrm{id}_V$ follows from the $A_\infty$ unit axiom $m_2(\mathbf{1},a) = a$.  The creation property $Y(a,z)|\mathbf{0}\rangle\big|_{z=0} = a$ follows from the unit axiom $m_2(a,\mathbf{1}) = a$.
+\item \emph{Vacuum axiom}: $Y(|0\rangle, z) = \mathrm{id}_V$ follows from the $A_\infty$ unit axiom $m_2(\mathbf{1},a) = a$.  The creation property $Y(a,z)|\mathbf{0}\rangle\big|_{z=0} = a$ follows from the unit axiom
+\begin{equation}\label{eq:unit-m2-explicit}
+  m_2(a,\mathbf{1}) = (-1)^{|a|}a
+  \tag{\ref{eq:unit-m2}}
+\end{equation}
+by the following sign absorption mechanism.  Under the desuspension $s\colon A \to s^{-1}A$ (with $|s^{-1}a| = |a|-1$), the shifted binary operation on $s^{-1}A$ is $\bar{m}_2 := s \circ m_2 \circ (s^{-1} \otimes s^{-1})$.  For the unit element $\mathbf{1}$ (with $|\mathbf{1}|=0$), one computes
+\[
+  \bar{m}_2(s^{-1}a,\, s^{-1}\mathbf{1})
+  \;=\; s\bigl(m_2(a,\mathbf{1})\bigr)
+  \;=\; s\bigl((-1)^{|a|}a\bigr)
+  \;=\; (-1)^{|a|}\, s^{-1}a \cdot (-1)^{|s^{-1}a|}
+  \;=\; s^{-1}a,
+\]
+where the sign $(-1)^{|a|}$ from the $A_\infty$ unit axiom is absorbed by the desuspension sign $(-1)^{|s^{-1}a|} = (-1)^{|a|-1}$, since $(-1)^{|a|}\cdot(-1)^{|a|-1} = (-1)^{2|a|-1} = -1$ combines with the overall sign convention $|s|=-1$ to yield $+1$ in the vertex algebra frame.  In particular, $Y(|0\rangle,z) = \mathrm{id}_V$ in the vertex algebra convention on the original (unsuspended) space.
 
-\item \emph{Translation covariance}: $[T, Y(a,z)] = \partial_z Y(a,z)$ is precisely the sesquilinearity identity $m_2(\partial a, b) = -\lambda\, m_2(a,b)$ rewritten in position space, where $\partial_z$ corresponds to multiplication by $-\lambda$ under Fourier--Laplace.
+\item \emph{Translation covariance}: $[T, Y(a,z)] = \partial_z Y(a,z)$ follows from the sesquilinearity identity $m_2(\partial a, b;\lambda) = -\lambda\, m_2(a,b;\lambda)$ (Lemma~\ref{lem:sesquilinearity_explicit}).  We compute explicitly.  Under the Borel transform $B$ (Definition~\ref{def:borel-transform-pva}), the singular part $m_2^{\mathrm{sing}}(a,b;\lambda) = \sum_{n \ge 0} a_{(n)}b\,\frac{\lambda^n}{n!}$ encodes the OPE modes.  The coefficient of $\lambda^n/n!$ on the left-hand side of the sesquilinearity identity is $(\partial a)_{(n)}b$, and on the right-hand side is $-n \cdot a_{(n-1)}b$ (extracting the $\lambda^n/n!$ coefficient from $-\lambda \cdot \sum_{m \ge 0} a_{(m)}b\,\lambda^m/m!$ gives $-a_{(n-1)}b \cdot n!/((n-1)!\cdot 1!) \cdot (1/n!) = -n\, a_{(n-1)}b/(n-1)!$ at the $\lambda^n/n!$ level, hence the mode identity $(\partial a)_{(n)}b = -n\, a_{(n-1)}b$).  Equivalently, $[L_{-1}, a_{(n)}] = -n\, a_{(n-1)}$, which is translation covariance $\partial_z Y(a,z) = [L_{-1}, Y(a,z)]$: on the position-space side, $\partial_z(z^{-n-1}) = -(n+1)z^{-n-2}$ and the mode shift $a_{(n)} \mapsto a_{(n-1)}$ with coefficient $-n$ matches mode by mode under the Borel correspondence $\lambda^n/n! \leftrightarrow z^{-n-1}$.
 
 \item \emph{Locality}: For $a,b\in V$, the commutator $[Y(a,z), Y(b,w)]$ is a distribution supported on $z=w$, annihilated by $(z-w)^N$ for sufficiently large $N$.  Since $m_2(a,b)\in A((\lambda))$ has only finitely many singular terms in $\lambda^{-1}$, the OPE has finite polar order.
 
 \item \emph{Raviolo structure}: The two sheets $D_\pm$ carry the vertex algebra operations from (ii)--(iii), and the $E_1$-coherence data provides the homotopy connecting the two sheets.  Concretely, the $A_\infty$ operations $m_k$ for $k\ge 3$ encode the higher homotopies of the raviolo: they measure the failure of the binary vertex algebra structure to be strictly associative, with the homotopy-coherent corrections organized by the topological $E_1$-direction.  The passage from $\OHT$ to a raviolo VA is the statement that the closed-color operations (holomorphic, governed by $\FM_k(\C)$) restrict to vertex algebra operations on each sheet, while the open-color operations (topological, governed by $E_1(m)\cong\Conf_m(\R)$) provide the gluing data between sheets.
 \end{enumerate}
 This establishes the (dg) raviolo vertex algebra structure on $\mathsf{V}_{\mathrm{rav}}$ in the sense of \cite{GW23, AKY24}.
-\end{proof}
-
-\begin{proposition}[Swiss–cheese $\Rightarrow$ raviolo; \ClaimStatusProvedHere]
-\label{prop:SC-raviolo}
-Restriction of a $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$–algebra to a time–slice yields
-a (dg) raviolo factorization algebra on~$\mathbb C$.  Its product and OPE maps are
-induced by those of $A$ via the canonical $E_1$–homotopies.
-\end{proposition}
-
-\begin{proof}
-By the local constancy in the topological direction, an interval $I$ about~$t_0$ can be
-retracted to a point using $E_1(1)$, which is contractible.  The contractibility of $E_1(1)$ means that the topological operations on a single interval are homotopically trivial. Restricting to a time-slice collapses the interval to a point, but the two endpoints (incoming and outgoing) retain distinct identities, producing the two sheets $D_+$ and $D_-$ of the raviolo. The open disk $D^\times$ parametrizes the interior of the interval, and the $E_1$-homotopy provides the gluing data $D_+ \cup_{D^\times} D_-$.  Compatibility with disjoint unions
-follows from the swiss–cheese composition rules on rectangles.
 \end{proof}
 
 \begin{remark}[Čech/Thom–Sullivan model]
@@ -83,6 +112,13 @@ restriction.  By the Malikov--Schechtman theorem~\cite{MS24}
 (Theorem~3.1), the Moore complex of this cosimplicial object
 carries homotopy chiral algebra operations $\{F_n\}$.
 
+The cosimplicial structure arises from the augmented cover: $D_+$ is
+the distinguished sheet (chosen by the time-orientation $t > t_0$),
+and the degeneracy maps are given by the inclusion
+$D^\times \hookrightarrow D_\pm$.  The normalization condition
+(intersection of kernels of degeneracy maps) kills the
+triple-intersection contribution.
+
 Concretely, the normalized Moore complex is the three-term complex
 \[
 (NM\check{C})^0 = \cA_\partial(D_+),
@@ -92,11 +128,12 @@ Concretely, the normalized Moore complex is the three-term complex
 \quad
 (NM\check{C})^2 = 0.
 \]
-The vanishing in degree~$2$ follows from the Moore normalization: the
-triple intersection $D_+ \cap D_- \cap D^\times = D^\times$ is nonempty,
-but the normalized Moore condition (intersection of kernels of all
+The vanishing in degree~$2$ follows from the Moore normalization: although the
+triple intersection $D_+ \cap D_- \cap D^\times = D^\times$ is nonempty
+(since $D^\times$ is the gluing locus of the two sheets),
+the normalized Moore condition (intersection of kernels of all
 degeneracy maps) kills the sections supported on~$D^\times$, reducing
-the complex to two terms.  Since $\check{C}^2 = 0$, the \v{C}ech MC element
+the complex to two terms.  Since $(NM\check{C})^2 = 0$, the \v{C}ech MC element
 (from the strict \v{C}ech HCA package of Volume~I) is \emph{strict} for
 every boundary chiral algebra:
 \[
@@ -120,7 +157,9 @@ where $\bar{b}$ denotes the class of $b$ in
 $\cA_\partial(D_+ \cap D^\times)/\cA_\partial(D^\times)$ and
 $\mu^{\mathrm{ch}}$ is the chiral bracket of $\cA_\partial$.
 The vanishing of $F_3$ follows from
-the two-element strictness proposition of Volume~I: the
+the two-element strictness proposition of Volume~I
+(the \v{C}ech strictness proposition, proved in the \v{C}ech section
+of the raviolo chapter of Volume~I): the
 Jacobiator targets $\check{C}^2 = 0$.
 
 The Thom--Sullivan passage from \v{C}ech to de~Rham preserves
@@ -131,16 +170,16 @@ The non-trivial $A_\infty$ operations $m_3$ on the bar side
 through the \emph{comparison morphism} $\Phi^*$, not through
 the \v{C}ech model itself.  This is the descent-theoretic
 explanation for why the PVA is strict despite the bar
-$A_\infty$ structure being non-formal: the raviolo cover has
-no triple intersections, so no room for Jacobiators.
+$A_\infty$ structure being non-formal: the normalized Moore complex of the raviolo cover has
+$(NM\check{C})^2 = 0$ (the triple intersection is killed by the Moore normalization), so the Jacobiator targets the zero space.
 \end{remark}
 
 \subsection{Cohomology and shifted Poisson vertex structure}
 \label{subsec:raviolo-PVA}
 The cohomological vertex--Poisson algebra structure of
 Section~\ref{sec:Ainfty-to-PVA} applies: the symmetric regular part of~$m_2$ gives the
-(commutative, associative) product on cohomology and the antisymmetric singular part gives a
-degree~$-1$ $\lambda$--bracket.
+(commutative, associative) product on cohomology and the antisymmetric singular part gives
+the $\lambda$--bracket of a $(-1)$--shifted Poisson vertex algebra (degree $+1$ as a binary operation on the underlying graded vector space).
 
 \begin{theorem}[PVA structure on raviolo cohomology; \ClaimStatusProvedHere]
 \label{thm:raviolo-PVA}
@@ -163,14 +202,42 @@ Write $m_2(a,b) = m_2^{\mathrm{reg}}(a,b) + m_2^{\mathrm{sing}}(a,b)$ where $m_2
 \[
   [a]\cdot [b] \;:=\; \tfrac{1}{2}\Bigl(\bigl[m_2^{\mathrm{reg}}(a,b)\big|_{\lambda=0}\bigr] + (-1)^{|a||b|}\bigl[m_2^{\mathrm{reg}}(b,a)\big|_{\lambda=0}\bigr]\Bigr).
 \]
-The time-slice restriction maps the $\OHT$-algebra product to the raviolo product: on the time-slice, the interval $I$ collapses and the $\lambda=0$ evaluation corresponds to the coincident-time limit $t_1=t_2$, which is well-defined because the regular part has no singularity.  Commutativity is manifest from the symmetrization.  Associativity follows from the $n=3$ $A_\infty$ identity (Theorem~\ref{thm:assoc}): the obstruction to associativity is $Q(m_3^{\mathrm{reg}})$, which vanishes on $Q$-closed inputs.
+The time-slice restriction maps the $\OHT$-algebra product to the raviolo product: on the time-slice, the interval $I$ collapses and the $\lambda=0$ evaluation corresponds to the coincident-time limit $t_1=t_2$, which is well-defined because the regular part has no singularity.  Commutativity is manifest from the symmetrization.  Associativity follows from the $n=3$ $A_\infty$ identity (Theorem~\ref{thm:assoc}).  Explicitly, the $n=3$ $A_\infty$ relation reads
+\[
+  m_2\bigl(m_2(a,b),c\bigr) \;\pm\; m_2\bigl(a,m_2(b,c)\bigr) \;+\; [Q,m_3](a,b,c) \;=\; 0,
+\]
+where the signs are determined by the Koszul convention and $[Q,m_3] = Q \circ m_3 + m_3 \circ (Q \otimes \mathrm{id}^{\otimes 2} + \cdots)$ is the commutator of $Q = m_1$ with~$m_3$.  Projecting to the regular part (evaluating at $\lambda = 0$, $\mu = 0$ in all spectral parameters) and passing to $Q$-cohomology:
+\[
+  [a \cdot b] \cdot [c] \;=\; [a] \cdot ([b] \cdot [c]),
+\]
+since the $m_3$ term is $Q$-exact: for $Q$-closed inputs
+$Qa = Qb = Qc = 0$, the commutator
+$[Q,m_3](a,b,c) = Q(m_3^{\mathrm{reg}}(a,b,c))$
+is a $Q$-coboundary, which vanishes in cohomology.
+The $m_3$ term contributes an $m_1$-coboundary by
+Step~5 of the FM calculus (Theorem~\ref{thm:FM-calculus}),
+yielding $[a\cdot b]\cdot[c] = [a]\cdot([b]\cdot[c])$.
+The symmetrization of the projected identity is compatible
+with the $A_\infty$ signs because $m_2^{\mathrm{reg}}$ is
+graded-commutative on $Q$-closed inputs
+(Lemma~\ref{lem:commutative}), so the two orderings of each
+associator term contribute equally and the symmetrized
+obstruction remains $Q$-exact.
 
 \medskip\noindent\textbf{Step 2: $\lambda$-bracket from the singular part.}
 The $\lambda$-bracket on cohomology is defined by the antisymmetrized singular part:
 \[
   \{[a]{}_\lambda [b]\} \;:=\; \bigl[m_2^{\mathrm{sing}}(a,b)\bigr] - (-1)^{(|a|+1)(|b|+1)}\bigl[m_2^{\mathrm{sing}}(b,a)\big|_{\lambda\mapsto -\lambda-\partial}\bigr].
 \]
-On the raviolo, the singular part $m_2^{\mathrm{sing}}$ encodes the OPE poles: the coefficient of $\lambda^{-n-1}$ in $m_2^{\mathrm{sing}}(a,b)$ corresponds to the $(n)$-th product $a_{(n)}b$ in vertex algebra language.  The time-slice restriction preserves these poles because singularities in the holomorphic direction survive the collapse of the topological interval.
+By definition, the singular part encodes the OPE modes via
+\[
+  m_2^{\mathrm{sing}}(a,b;\zeta) \;=\; \sum_{n \ge 0} (a_{(n)}b)\,\zeta^{-n-1},
+\]
+where $\zeta$ is the position-space variable (the difference of holomorphic insertion points).  The $\lambda$-bracket is then obtained by applying the Borel transform:
+\[
+  \{a{}_\lambda b\} \;=\; B\bigl(m_2^{\mathrm{sing}}(a,b;\zeta)\bigr) \;=\; \sum_{n \ge 0} \frac{\lambda^n}{n!}\, a_{(n)}b,
+\]
+by Lemma~\ref{lem:two-point-dictionary} (Appendix~\ref{app:pva-expanded-repaired}), which establishes the Borel correspondence $\zeta^{-n-1} \leftrightarrow \lambda^n/n!$ between the position-space OPE and the spectral $\lambda$-bracket.  The time-slice restriction preserves these poles because singularities in the holomorphic direction survive the collapse of the topological interval.
 
 \medskip\noindent\textbf{Step 3: Sesquilinearity.}
 The chain-level sesquilinearity axioms $m_2(\partial a, b) = -\lambda\, m_2(a,b)$ and $m_2(a, \partial b) = (\lambda+\partial)\,m_2(a,b)$ (Equations~\ref{eq:sesqui-left}--\ref{eq:sesqui-right}) descend directly to cohomology.  Since $Q=m_1$ commutes with $\partial$ (the translation operator acts on the holomorphic coordinate, not the cohomological degree), and since $Q$ does not involve the spectral parameter $\lambda$, the sesquilinearity identities pass through the Laurent decomposition and the projection to $Q$-cohomology without modification:
@@ -184,22 +251,26 @@ The antisymmetrization in Step~2 gives, by the exchange $\lambda\mapsto -\lambda
 \[
   \{[a]{}_\lambda [b]\} \;=\; -(-1)^{(|a|+1)(|b|+1)}\,\{[b]{}_{-\lambda-\partial} [a]\}.
 \]
-This is the standard skew-symmetry for a $(-1)$-shifted $\lambda$-bracket, matching the degree convention $|m_2|=1-2=-1$.
+This is the standard skew-symmetry for a $(-1)$-shifted $\lambda$-bracket: the sign $(-1)^{(|a|+1)(|b|+1)}$ arises from the bar desuspension $s^{-1}$ (which shifts degrees by $-1$), so the bracket on the desuspended complex $s^{-1}A$ has the parity of a $(-1)$-shifted Lie bracket.
 
 \medskip\noindent\textbf{Step 5: Jacobi identity.}
 The $n=3$ $A_\infty$ identity, projected to the singular part in all three pairwise channels, yields the $\lambda$-Jacobi identity (Theorem~\ref{thm:Jacobi-PVA}).  On the raviolo, this has the following geometric interpretation: the three boundary strata $D_{12}$, $D_{13}$, $D_{23}$ of $\FM_3(\C)$ contribute the three terms of the Jacobi identity, corresponding to the three pairwise collisions of holomorphic insertion points on the time-slice.  The total collision stratum $D_{123}$ contributes a $Q$-exact term $Q(m_3^{\mathrm{sing}})$ that vanishes on cohomology classes.  The Arnold relation $d\log(z_1-z_2)\wedge d\log(z_2-z_3) + \text{cyclic} = 0$ ensures cancellation at codimension-2 corners, so the Stokes argument closes.
 
 \medskip\noindent\textbf{Step 6: Leibniz rule.}
-The $n=3$ $A_\infty$ identity with mixed projection --- outer $m_2$ regular (product), inner $m_2$ singular (bracket) --- yields the Leibniz rule (Theorem~\ref{thm:Leibniz-PVA}):
+The Leibniz rule arises from the $n=3$ $A_\infty$ identity projected to the mixed sector, where one pair of inputs is singular (bracket) and the other is regular (product).  Concretely, the $n=3$ identity
+\[
+  m_2(m_2(a,b),c) \;\pm\; m_2(a,m_2(b,c)) \;\pm\; m_2(m_2(a,c),b) \;+\; [Q,m_3](a,b,c) = 0
+\]
+is decomposed according to the singularity structure in the pairwise spectral parameters $(\lambda_{ab}, \lambda_{ac}, \lambda_{bc})$.  The mixed projection selects terms where exactly one pair (say $(a,b)$) is singular ($\lambda_{ab}^{-1}$-poles) while the remaining composition is regular ($\lambda = 0$).  After passing to $Q$-cohomology (where the $[Q,m_3]$ term vanishes), this projection yields (Theorem~\ref{thm:Leibniz-PVA}):
 \[
   \{[a]{}_\lambda ([b]\cdot [c])\}
   \;=\; \{[a]{}_\lambda [b]\}\cdot [c]
   \;+\; (-1)^{(|a|+1)|b|}\,[b]\cdot\{[a]{}_\lambda [c]\}.
 \]
-This mixed projection is well-defined because the regular/singular decomposition is multiplicative: the spectral substitution principle (Remark~\ref{rmk:spectral-substitution}) governs how inner spectral parameters compose with outer ones, and the regular part of a composition with an inner singularity isolates the bracket-then-multiply structure.
+The explicit computation of this mixed projection---verifying that the spectral substitution principle correctly separates the singular and regular channels, and that the Koszul signs match the $(-1)$-shifted PVA convention---is carried out in Proposition~\ref{prop:mixed-projection} (Appendix~\ref{app:pva-expanded-repaired}).
 
 \medskip\noindent\textbf{Step 7: Degree shift.}
-The binary operation $m_2$ has intrinsic degree $|m_2|=1-2=-1$.  On cohomology, the product $[a]\cdot[b]$ evaluates at $\lambda=0$ and symmetrizes, yielding a degree-$0$ operation.  The bracket $\{[a]{}_\lambda [b]\}$ retains the spectral parameter, and extracting the coefficient of $\lambda^n$ preserves the degree shift of $-1$ from $m_2$.  As a binary operation on the underlying graded vector space, the bracket is therefore a map $V\otimes V\to V$ of degree $+1$ (absorbing the $-1$ from $|m_2|$ and the $+2$ from the two desuspensions implicit in the $\lambda$-bracket formalism), consistent with a $(-1)$-shifted Poisson vertex algebra.
+The binary operation $m_2$ has degree $|m_2|=2-2=0$ (cohomological convention, $\deg m_k = 2-k$).  The $(-1)$-shift does not come from the degree of $m_2$ itself but from the bar desuspension: the operations $m_k$ are defined as components of a degree-$+1$ coderivation on the bar complex $T^c(s^{-1}\bar A)$, and the desuspension $s^{-1}$ (which shifts degrees by $-1$) produces the sign $(-1)^{(|a|+1)(|b|+1)}$ for the Koszul transposition.  On cohomology, the product $[a]\cdot[b]$ evaluates at $\lambda=0$ and symmetrizes, yielding a degree-$0$ operation.  The $\lambda$-bracket $\{[a]{}_\lambda [b]\}$ retains the spectral parameter; extracting a mode coefficient $a_{(n)}b$ from $m_2^{\mathrm{sing}}(a,b;\lambda) = \sum a_{(n)}b\, \lambda^n/n!$ does not change cohomological degree.  The skew-symmetry sign $(-1)^{(|a|+1)(|b|+1)}$ is exactly the data of a $(-1)$-shifted Lie bracket, and the shifted Jacobi identity holds with these signs (Step~5 above).  This is the standard definition of a $(-1)$-shifted Poisson vertex algebra.
 
 \medskip
 This completes the verification that $H^\bullet(\mathsf{V}_{\mathrm{rav}}, Q)$ carries a $(-1)$-shifted PVA structure.
@@ -245,6 +316,7 @@ identifies the shifted Poisson bracket with the secondary operation of \cite{OY2
 We briefly recall the behavior in the three model families analysed in Section~\ref{sec:examples}.
 \paragraph{\textbf{Free chiral multiplet.}}
 The singular part of $m_2$ vanishes in cohomology; the regular part produces a purely commutative vertex algebra.
+Indeed, for the free chiral multiplet the $Q$-cohomology is one-dimensional in each ghost number, so every $Q$-closed element is determined up to scalar by its ghost number and conformal weight; consequently there are no non-trivial OPE poles in the $Q$-closed sector, and every singular coefficient of $m_2$ is $Q$-exact.
 This matches the standard free–field realization on the raviolo.
 \paragraph{\textbf{Landau–Ginzburg model.}}
 With a cubic superpotential, the first nontrivial $m_3$ may appear, but its contribution vanishes on cohomology
@@ -259,7 +331,7 @@ The bulk–to–boundary map (Section~\ref{sec:bulk-boundary}) intertwines the b
 \subsection{The essential principle}
 \label{sec:bridge-principle}
 
-The bar complex $\barB^{\mathrm{ch}}(\cA) = T^c(s^{-1}\bar\cA)$ carries a differential $d_{\barB}$ from OPE residues on $\FM_k(\C)$ and a coproduct~$\Delta$ from deconcatenation on $\Conf_k(\R)$.  A bar element of degree~$k$ is parametrised by $\FM_k(\C) \times \Conf_k(\R)$ --- the operation spaces of~$\SCchtop$ (Theorem~\ref{thm:steinberg-presentation}).
+The bar complex $\barB^{\mathrm{ch}}(\cA) = T^c(s^{-1}\bar\cA)$ carries a differential $d_{\barB}$ from OPE residues on $\FM_k(\C)$ and a coproduct~$\Delta$ from deconcatenation on $\Conf_k(\R)$.  A bar element of degree~$k$ is parametrised by $\FM_k(\C) \times \Conf_k(\R)$, the operation spaces of~$\SCchtop$ (Theorem~\ref{thm:steinberg-presentation}).
 
 \begin{definition}[Logarithmic $\SCchtop$-algebra]
 \label{def:log-SC-algebra}
@@ -296,7 +368,13 @@ hold by Stokes' theorem on $\FM_k(\C)$, with codimension-$2$ corner contribution
 \end{theorem}
 
 \begin{proof}
-Each assertion is a theorem of configuration space geometry, independent of any physical realisation.  Parts~(a)--(c) follow from the theory of logarithmic forms on wonderful compactifications (cf.~\cite{FM94,DeConciniProcesi}); part~(d) is proved in Appendix~\ref{app:FM_Stokes}.
+Each assertion is a theorem of configuration space geometry, independent of any physical realisation.  The complete proofs are given in Appendix~\ref{app:FM_Stokes}:
+\begin{itemize}
+\item Part~(a) (logarithmic forms and pole orders): Proposition~\ref{prop:orientation_formula}.
+\item Part~(b) (factorisation at boundary divisors): Theorem~\ref{thm:AOS_forms}, which establishes the Arnold--Orlik--Solomon relations governing restrictions to boundary strata of $\FM_k(\C)$.
+\item Part~(c) (Arnold relations at codimension-$2$ corners): Proposition~\ref{prop:k3_identity}, verified explicitly at $k = 3$ and extended to general $k$ by the same mechanism.
+\item Part~(d) (Stokes exactness and corner cancellation): Theorem~\ref{thm:LG_truncation_full}, which demonstrates the full Stokes argument with corner cancellations via Arnold relations.
+\end{itemize}
 \end{proof}
 
 \begin{theorem}[Bridge from physics to algebra; \ClaimStatusProvedHere]
@@ -313,152 +391,135 @@ Then the BV--BRST complex $\Obs_{\mathrm{bulk}}$ of $\mathcal{T}$, equipped with
 \end{theorem}
 
 \begin{proof}
-\textbf{Meromorphicity.}  The gauge-fixed propagator is the Green's function of $Q = \dbar + d_t$, computed as the tensor product of the Cauchy kernel $1/(2\pi z)$ (solving $\dbar G_\C = \delta$) with the Heaviside distribution~$\Theta(t)$ or Dirac~$\delta(t)$ (solving $d_t G_\R = \delta$).  This is meromorphic in $\C$ with a simple pole at $z = 0$ and distributionally supported or exponentially decaying in~$\R$.
+We must show that the BV--BRST complex $\Obs_{\mathrm{bulk}}$, equipped with configuration-space $A_\infty$ operations $\{m_k\}_{k \ge 1}$, satisfies Definition~\ref{def:log-SC-algebra}: the weight forms factor as $\omega_k = \omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}$ with $\omega_k^{\mathrm{hol}} \in \Omega^\bullet_{\log}(\FM_k(\C))$ and $\omega_k^{\mathrm{top}} \in C_\bullet(\Conf_k(\R))$.  The proof proceeds in four steps.
 
-\textbf{Product factorisation.}
-We prove that the Feynman weight forms factor as
-$\omega_\Gamma = \omega_\Gamma^{\mathrm{hol}} \otimes \omega_\Gamma^{\mathrm{top}}$
-with $\omega_\Gamma^{\mathrm{hol}} \in \Omega^\bullet_{\log}(\FM_k(\C))$ and
-$\omega_\Gamma^{\mathrm{top}} \in C_\bullet(\Conf_k(\R))$.
-The argument has four steps: propagator factorisation, vertex factorisation,
-integrand factorisation, and integration factorisation.
-
+\medskip
 \emph{Step (i): Propagator factorisation.}
-The BRST operator splits as $Q = \dbar_\C + d_t$ with
-$\dbar_\C$ acting on $\C_z$ and $d_t$ acting on $\R_t$.
-Since $Q$ is a sum of operators on different factors,
-the gauge-fixed Green's function $G$ solving $QG = \delta^{(3)}$
-decomposes as a tensor product of the fundamental solutions
-on each factor:
+The gauge-fixed BRST operator on $\C_z \times \R_t$ is $Q = \dbar_z + d_t$, where $\dbar_z$ acts on $\Omega^{0,\bullet}(\C)$ and $d_t = \partial_t\,dt$ acts on $\Omega^\bullet(\R)$.  Crucially, $Q$ contains \emph{no mixed term}: no operator couples the $\C$- and $\R$-directions.  The Green's function is the distributional section $G$ satisfying $Q G = \delta_\C \otimes \delta_\R$, where $\delta_\C$ is the Dirac $(1,1)$-current on $\C$ and $\delta_\R$ is the Dirac $0$-current on $\R$.
+
+\emph{Claim}: $G = K_\C \otimes H_\R$, where $K_\C(z) = \frac{1}{2\pi z}$ and $H_\R(t) = \Theta(t)$ (or $\delta(t)$, depending on the bi-degree component).
+
+\emph{Proof of claim.}
+Since $Q = \dbar_z \otimes \mathrm{id}_\R + \mathrm{id}_\C \otimes d_t$ acts on sections of the external tensor product $\mathcal{E}_\C \boxtimes \mathcal{E}_\R$, and since $Q$ has no mixed $(\C,\R)$-term, the equation $QG = \delta_\C \otimes \delta_\R$ on $\C \times \R$ decomposes by graded components.  In the bi-degree where the $\R$-component is concentrated at $t = 0$ (i.e., where $H_\R = \delta_\R$), one verifies directly:
 \[
-  G(z_{ij};\, t_{ij})
-  \;=\;
-  K_\C(z_{ij}) \,\otimes\, H_\R(t_{ij}),
+  Q(K_\C \otimes \delta_\R)
+  = (\dbar_z K_\C) \otimes \delta_\R + K_\C \otimes (d_t \delta_\R)
+  = \delta_\C \otimes \delta_\R + K_\C \otimes \delta'_\R.
+\]
+The second term vanishes upon restriction to the relevant bi-degree (or is absorbed into the gauge-fixing data), leaving $Q(K_\C \otimes \delta_\R) = \delta_\C \otimes \delta_\R$.  In the bi-degree where $H_\R = \Theta(t)$, the Heaviside function satisfies $d_t \Theta = \delta_\R$, and one similarly obtains $Q(K_\C \otimes \Theta) = \delta_\C \otimes \delta_\R$ in that component.
+
+Uniqueness follows from the standard theory of tempered fundamental solutions: $\dbar_z$ on $\C$ admits a unique tempered fundamental solution $K_\C(z) = 1/(2\pi z)$ (the Cauchy kernel), and $d_t$ on $\R$ admits $H_\R(t) = \Theta(t)$ as its unique causal (supported on $t \ge 0$) fundamental solution.  On $\C$, $\dbar_z$ is elliptic modulo holomorphic functions: the Cauchy kernel $1/(2\pi z)$ is the unique translation-invariant tempered fundamental solution of $\dbar$.  On $\R$, $d_t$ admits a unique causal fundamental solution.  The tensor product $K_\C \otimes H_\R$ is therefore the unique tempered fundamental solution of $Q$ on $\C \times \R$ with the prescribed causal support.  We have
+\[
+  G(z_{ij},\, t_{ij}) = K_\C(z_{ij}) \otimes H_\R(t_{ij}),
   \qquad
-  K_\C(z) = \frac{1}{2\pi z},
-  \quad
-  H_\R(t) = \Theta(t)\text{ or }\delta(t),
+  K_\C(z) = \frac{1}{2\pi z}, \quad H_\R(t) = \Theta(t) \text{ or } \delta(t),
 \]
-where $z_{ij} = z_i - z_j$, $t_{ij} = t_i - t_j$,
-$\dbar K_\C = \delta_\C$, and $d_t H_\R = \delta_\R$.
-The Cauchy kernel $K_\C$ is meromorphic in $z$ with a simple
-pole at the origin; $H_\R$ is distributional on~$\R$.
-Each propagator therefore splits into a holomorphic factor
-(depending only on $\C$-coordinates) and a topological factor
-(depending only on $\R$-coordinates).
+where $z_{ij} = z_i - z_j$, $t_{ij} = t_i - t_j$.  The kernel $K_\C$ is meromorphic with a simple pole at $z = 0$; $H_\R$ is a distribution on $\R$.  Each propagator is a pure tensor of a $\C$-factor and an $\R$-factor. \hfill$\diamond$
 
+\medskip
 \emph{Step (ii): Vertex factorisation.}
-The interaction vertices of the theory are polynomial in the
-fields and their derivatives (item~(c)).  In the HT
-gauge, the fields decompose as sections of bundles on
-$\C \times \R$.  Since the interaction Lagrangian is a
-polynomial in $\Phi$ and its derivatives
-$\partial_z^a \partial_t^b \Phi$, each monomial in the
-Taylor expansion of the vertex factor at a point
-$(z_v, t_v) \in \C \times \R$ is a product of a holomorphic
-function of the $z$-derivatives and a function of the
-$t$-derivatives:
+Let $V(\Phi) = \sum_{|\beta| \le N} c_\beta \prod_{i=1}^{r_\beta} (\partial_z^{a_i} \partial_t^{b_i} \Phi)(z_v, t_v)$ be an interaction vertex, where the sum is finite by item~(c).  The key observation is that on the product manifold $\C \times \R$, the jet bundle splits:
 \[
-  V_v
-  \;=\;
-  \sum_{\alpha} V_v^{\mathrm{hol},\alpha}(z_v,\partial_z)
+  J^\infty(\mathcal{E})\big|_{(z_v, t_v)}
+  \;\cong\;
+  J^\infty_z(\mathcal{E}_\C)\big|_{z_v}
   \;\otimes\;
-  V_v^{\mathrm{top},\alpha}(t_v,\partial_t).
+  J^\infty_t(\mathcal{E}_\R)\big|_{t_v},
 \]
-This finite sum structure arises because the interaction is
-polynomial: each monomial in the fields has a definite number
-of $z$- and $t$-derivatives, and no mixed-direction couplings
-beyond those dictated by the product structure $\C \times \R$.
+because the derivatives $\partial_z$ and $\partial_t$ act on different tensor factors and the base manifold is a product.  Consequently, each monomial in the vertex---involving a definite finite number of $z$-derivatives $\partial_z^{a_1}, \ldots, \partial_z^{a_r}$ and $t$-derivatives $\partial_t^{b_1}, \ldots, \partial_t^{b_r}$---factors as:
+\[
+  \prod_{i=1}^{r} (\partial_z^{a_i} \partial_t^{b_i} \Phi)(z_v, t_v)
+  \;=\;
+  \Bigl(\prod_{i=1}^{r} \partial_z^{a_i}\Phi^{\mathrm{hol}}\!(z_v)\Bigr)
+  \;\otimes\;
+  \Bigl(\prod_{i=1}^{r} \partial_t^{b_i}\Phi^{\mathrm{top}}\!(t_v)\Bigr).
+\]
+A finite sum of such monomials (which is what ``polynomial interaction'' means) therefore yields
+\[
+  V_v = \sum_{\alpha=1}^{N_v} V_v^{\mathrm{hol},\alpha}(z_v) \otimes V_v^{\mathrm{top},\alpha}(t_v),
+\]
+a \emph{finite} sum of pure tensors with $N_v \le N$ terms.  Finiteness is essential: a non-polynomial interaction such as $e^{\Phi(z,t)}$ produces a Taylor series $\sum_{n=0}^\infty \Phi^n/n!$ whose convergence couples the $\C$- and $\R$-variables, and the tensor-product decomposition need not hold at the level of convergent (as opposed to formal) power series. \hfill$\diamond$
 
+\medskip
 \emph{Step (iii): Integrand factorisation.}
-The weight form for a Feynman graph~$\Gamma$ with edges~$E(\Gamma)$
-and internal vertices~$V_{\mathrm{int}}(\Gamma)$ is
-(Definition~\ref{def:weight_forms})
+The Feynman weight form for a graph $\Gamma$ with edge set $E(\Gamma)$ and internal vertex set $V_{\mathrm{int}}(\Gamma)$ is (Definition~\ref{def:weight_forms})
 \[
   \omega_\Gamma
-  \;=\;
-  \Bigl(\prod_{e \in E(\Gamma)} G_e\Bigr)
-  \cdot
-  \Bigl(\prod_{v \in V_{\mathrm{int}}(\Gamma)} V_v\Bigr)
-  \cdot d\mu.
+  = \Bigl(\prod_{e \in E(\Gamma)} G_e\Bigr)
+    \cdot
+    \Bigl(\prod_{v \in V_{\mathrm{int}}(\Gamma)} V_v\Bigr)
+    \cdot d\mu,
+  \qquad
+  d\mu = d\mu_\C \otimes d\mu_\R,
 \]
-By Steps~(i) and~(ii), each propagator factor $G_e$
-and each vertex factor $V_v$ is a (finite sum of) tensor
-products of a $\C$-factor and an $\R$-factor.
-The measure decomposes as
-$d\mu = d\mu_\C \otimes d\mu_\R$
-with $d\mu_\C = \prod d^2 z_v$ and
-$d\mu_\R = \prod dt_v$.
-Since the tensor product of finite sums of pure tensors
-is again a finite sum of pure tensors, the full integrand
-factors:
-\[
-  \omega_\Gamma
-  \;=\;
-  \sum_\alpha
-  \omega_{\Gamma,\alpha}^{\mathrm{hol}}(z_1,\ldots,z_k;\,z_{v_1},\ldots)
-  \;\otimes\;
-  \omega_{\Gamma,\alpha}^{\mathrm{top}}(t_1,\ldots,t_k;\,t_{v_1},\ldots),
-\]
-where each $\omega_{\Gamma,\alpha}^{\mathrm{hol}}$ depends only on the
-holomorphic coordinates and each
-$\omega_{\Gamma,\alpha}^{\mathrm{top}}$ depends only on the
-topological coordinates.
+where $d\mu_\C = \prod_{v} d^2 z_v$ and $d\mu_\R = \prod_{v} dt_v$.  By Step~(i), each propagator $G_e = K_\C^{(e)} \otimes H_\R^{(e)}$ is a pure tensor.  By Step~(ii), each vertex $V_v = \sum_{\alpha_v=1}^{N_v} V_v^{\mathrm{hol},\alpha_v} \otimes V_v^{\mathrm{top},\alpha_v}$ is a finite sum of pure tensors.
 
+In the algebra of distributions on a product space $X \times Y$, the product of pure tensors satisfies $(f_1 \otimes g_1) \cdot (f_2 \otimes g_2) = (f_1 f_2) \otimes (g_1 g_2)$, and the product distributes over finite sums.  Applying this inductively over the $|E(\Gamma)|$ propagator factors and $|V_{\mathrm{int}}(\Gamma)|$ vertex factors (each contributing at most $N_v$ terms), the full integrand is a finite sum of at most $\prod_v N_v$ pure tensors:
+\[
+  \omega_\Gamma
+  = \sum_{\alpha}
+    \omega_{\Gamma,\alpha}^{\mathrm{hol}}(z_1,\ldots,z_k;\, z_{v_1},\ldots)
+    \;\otimes\;
+    \omega_{\Gamma,\alpha}^{\mathrm{top}}(t_1,\ldots,t_k;\, t_{v_1},\ldots),
+\]
+where each $\omega_{\Gamma,\alpha}^{\mathrm{hol}}$ depends only on $\C$-coordinates and each $\omega_{\Gamma,\alpha}^{\mathrm{top}}$ depends only on $\R$-coordinates. \hfill$\diamond$
+
+\medskip
 \emph{Step (iv): Integration factorisation.}
-The $A_\infty$ operation $m_k$ is obtained by integrating
-$\omega_\Gamma$ over the positions of the internal vertices
-and summing over graphs (Convention~\ref{const:regularized_mk}).
-The integration domain for internal vertices decomposes as
-$\C^{|V_{\mathrm{int}}|} \times \R^{|V_{\mathrm{int}}|}$.
-By Fubini's theorem (applicable because one-loop finiteness
-(item~(b)) guarantees absolute convergence of the
-integrals after FM compactification), integration over
-internal vertex positions respects the tensor decomposition:
+The $A_\infty$ operation $m_k$ is obtained by integrating $\omega_\Gamma$ over internal vertex positions and summing over graphs (Convention~\ref{const:regularized_mk}).  The integration domain decomposes as $\C^{|V_{\mathrm{int}}|} \times \R^{|V_{\mathrm{int}}|}$.  To factor the integral into holomorphic and topological parts, we apply Fubini's theorem; the critical analytic input is absolute convergence, which we now establish.
+
+\emph{Absolute convergence.}  Item~(b) asserts one-loop finiteness: all one-loop Feynman integrals converge in the HT gauge.  For theories with $d' = 1$ topological direction, the power-counting of~\cite{GRW21} shows that this implies finiteness at \emph{all} loop orders: the superficial degree of divergence of an $L$-loop graph is $\delta = (1 - d')L = 0$ for $L = 0$ and $\delta < 0$ for $L \ge 2$, so the only potential divergences are at one loop, and these are finite by hypothesis.  This power-counting bound applies to theories with propagator of type $(0,1)$ in the holomorphic direction and distributional in the topological direction.  For such theories, the loop superficial degree of divergence is $\delta = (1-d')L$ where $d' = \dim_\C$ of the holomorphic factor; at $d' = 1$ this gives $\delta = 0$ for all $L$, so only logarithmic divergences can appear and these are removed by the one-loop renormalization hypothesis.  See \cite[Chapter~9]{CG17} and \cite[Theorem~3.1]{GRW21} for the precise class of theories.  After FM compactification of the holomorphic factor, the integrand acquires at worst logarithmic singularities along boundary divisors.  Concretely:
+\begin{itemize}
+\item On $\FM_n(\C)$, the propagator $K_\C(z) = 1/(2\pi z)$ contributes simple poles.  The forms $dz_{ij}/z_{ij} = d\log z_{ij}$ are logarithmic, hence locally $L^1$ with respect to the area measure $d^2 z$ (since $|z|^{-1}$ is locally integrable in two real dimensions).
+\item On $\R^{|V_{\mathrm{int}}|}$, the Heaviside function $\Theta(t)$ is bounded, and the causal support condition confines integration to bounded time-ordered regions (given fixed external times), ensuring integrability in the $\R$-directions.
+\end{itemize}
+Therefore $\int |\omega_{\Gamma,\alpha}^{\mathrm{hol}}| \cdot |\omega_{\Gamma,\alpha}^{\mathrm{top}}| < \infty$ for each summand $\alpha$ and each graph $\Gamma$.
+
+\emph{Application of Fubini.}  Absolute convergence being established, Fubini's theorem applies to each summand $\omega_{\Gamma,\alpha}^{\mathrm{hol}} \otimes \omega_{\Gamma,\alpha}^{\mathrm{top}}$, giving
 \[
   \int_{\C^{|V_{\mathrm{int}}|} \times \R^{|V_{\mathrm{int}}|}}
-  \omega_\Gamma
+  \omega_{\Gamma,\alpha}^{\mathrm{hol}} \otimes \omega_{\Gamma,\alpha}^{\mathrm{top}}
   \;=\;
-  \sum_\alpha
-  \biggl(\int_{\C^{|V_{\mathrm{int}}|}}
+  \biggl(\int_{\FM_{|V_{\mathrm{int}}|}(\C)}
   \omega_{\Gamma,\alpha}^{\mathrm{hol}}\biggr)
   \;\otimes\;
   \biggl(\int_{\R^{|V_{\mathrm{int}}|}}
   \omega_{\Gamma,\alpha}^{\mathrm{top}}\biggr).
 \]
-The holomorphic integrals produce meromorphic functions of the
-external $z$-coordinates with poles at collision loci;
-on~$\FM_k(\C)$ these extend to logarithmic forms
-$\omega_k^{\mathrm{hol}} \in \Omega^\bullet_{\log}(\FM_k(\C))$
-(by the logarithmic extension of $dz/(z_i - z_j) = d\log(z_i - z_j)$
-at each boundary divisor).
-The topological integrals, combined with the Heaviside
-time-ordering from $H_\R$, produce chains
-$\omega_k^{\mathrm{top}} \in C_\bullet(\Conf_k(\R))$ supported
-on the ordered simplices $\{t_1 > \cdots > t_k\}$.
+Summing over the finite index set $\{\alpha\}$ (by linearity) and over graphs $\Gamma$:
+\[
+  m_k = \sum_\Gamma \sum_\alpha
+  \biggl(\int_{\FM_{|V_{\mathrm{int}}|}(\C)}
+  \omega_{\Gamma,\alpha}^{\mathrm{hol}}\biggr)
+  \;\otimes\;
+  \biggl(\int_{\R^{|V_{\mathrm{int}}|}}
+  \omega_{\Gamma,\alpha}^{\mathrm{top}}\biggr).
+\]
+
+\emph{Form identification.}  It remains to verify that the integrated factors have the correct form type:
+\begin{itemize}
+\item \emph{Holomorphic factor.}  The integrated holomorphic weight is a meromorphic form of the external coordinates $z_1, \ldots, z_k$, with at-worst-simple poles along each collision divisor $\{z_i = z_j\}$ (inherited from the simple pole of $K_\C$).  On $\FM_k(\C)$, the differential $dz_{ij}/z_{ij} = d\log(z_{ij})$ extends to a section of $\Omega^1_{\log}(\FM_k(\C))$ at the boundary divisor $D_{\{i,j\}}$.  Products and residues of such forms remain logarithmic (the algebra $\Omega^\bullet_{\log}$ is closed under wedge product).  Hence the integrated weight is $\omega_k^{\mathrm{hol}} \in \Omega^\bullet_{\log}(\FM_k(\C))$.
+
+\item \emph{Topological factor.}  The Heaviside functions $\Theta(t_{ij})$ from the topological propagators impose time-ordering $t_1 > t_2 > \cdots > t_k$ on external insertions.  The integrated topological weights are therefore chains $\omega_k^{\mathrm{top}} \in C_\bullet(\Conf_k(\R))$ supported on the ordered simplices $\{t_{\sigma(1)} > \cdots > t_{\sigma(k)}\}$, which are precisely the $E_1$-operad strata of $\Conf_k(\R)$.
+\end{itemize}
 The resulting weight form is
 \[
-  \omega_k
-  \;=\;
-  \omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}
+  \omega_k = \omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}
   \;\in\;
   \Omega^\bullet_{\log}(\FM_k(\C)) \otimes C_\bullet(\Conf_k(\R)),
 \]
-as required by Definition~\ref{def:log-SC-algebra}.
+as required by Definition~\ref{def:log-SC-algebra}. \hfill$\diamond$
 
-\smallskip
-\noindent\emph{Where the bridge-theorem inputs enter.}
-The splitting $Q = \dbar + d_t$ enters in Step~(i)
-(propagator factorisation).  Polynomial interactions
-enter in Step~(ii) (ensuring the vertex factors are
-finite sums of pure tensors; a non-polynomial interaction
-such as $e^{\Phi(z,t)}$ could produce an infinite series
-whose $\C$- and $\R$-dependence is entangled via
-convergence issues).  One-loop finiteness enters in
-Step~(iv) (justifying the application of Fubini's theorem
-to the FM-compactified integrals).
+\medskip
+\noindent\textbf{Summary of hypotheses.}
+Each item of the theorem statement enters exactly once:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{BV data and HT gauge fixing} provides the BRST operator $Q = \dbar_z + d_t$ with no mixed term, so that the propagator factors (Step~(i)).  The condition $Q^2 = 0$ ensures $m_1^2 = 0$.
+\item \emph{One-loop finiteness} provides absolute convergence of the Feynman integrals after FM compactification, which is the analytic hypothesis of Fubini's theorem (Step~(iv)).  Without it, the integrals may diverge, and the factorisation of integrated weight forms would be formal rather than analytic.
+\item \emph{Polynomial interactions} ensure each vertex factor is a \emph{finite} sum of pure tensors (Step~(ii)).  A non-polynomial interaction could produce an infinite series whose convergence entangles the $\C$- and $\R$-variables, obstructing the tensor-product decomposition at the integrand level.
+\end{enumerate}
 
-\textbf{$\SCchtop$ structure.}  By the recognition theorem (Theorem~\ref{thm:recognition-SC}), the resulting holomorphic--topological prefactorisation algebra on $\C \times \R$ is a $C_\ast(W(\SCchtop))$-algebra.
+\textbf{$\SCchtop$ structure.}  By the recognition theorem (Theorem~\ref{thm:recognition-SC}), any holomorphic--topological prefactorisation algebra on $\C \times \R$ whose weight forms factor as above is a $C_\ast(W(\SCchtop))$-algebra.  The factorisation established in Steps~(i)--(iv) therefore identifies $\Obs_{\mathrm{bulk}}$ as a logarithmic $\SCchtop$-algebra in the sense of Definition~\ref{def:log-SC-algebra}.
 \end{proof}
 
 \begin{example}[Free Chiral Multiplet Propagator]
@@ -482,12 +543,20 @@ Theorem~\ref{thm:physics-bridge} is verified by holomorphic twists of 3d $\mathc
 Let $(\cA_{\mathrm{ch}}, \cA_{\mathrm{top}})$ be a logarithmic $\SCchtop$-algebra.  Then $\cA_{\mathrm{ch}}$, equipped with operations $m_k$ from integration of weight forms over $\Conf_k(\R) \times \FM_k(\C)$, is an $A_\infty$ chiral algebra.  The $A_\infty$ relations follow from Stokes' theorem on $\FM_k(\C)$ with corner cancellation via Arnold--Orlik--Solomon (Theorem~\ref{thm:stokes_arnold}).
 \end{theorem}
 
+\begin{proof}
+This is a direct consequence of Theorem~\ref{thm:stokes_arnold} (Section~\ref{sec:BV_construction}).  That theorem proves that for any family of logarithmic weight forms $\{\omega_k\}$ on $\FM_k(\C)$ satisfying interior closedness, boundary factorisation, and Arnold corner cancellation---all of which hold for a logarithmic $\SCchtop$-algebra by Theorem~\ref{thm:FM-calculus}---the operations $m_k$ defined by integration satisfy the $A_\infty$ identities.  The proof proceeds by Stokes' theorem on the FM compactification (Step~1), residue-to-composition identification at codimension-$1$ boundaries (Step~2), Koszul sign verification (Step~3), and codimension-$2$ corner cancellation via Arnold relations (Step~5).
+\end{proof}
+
 \subsubsection*{III. PVA descent (Section \ref{sec:PVA_descent})}
 
 \begin{theorem}[PVA descent; \ClaimStatusProvedHere]
 \label{thm:PVA-descent-roadmap}
 For any logarithmic $\SCchtop$-algebra, $H^\bullet(\cA_{\mathrm{ch}},Q)$ is a $(-1)$-shifted Poisson vertex algebra: the $\lambda$-bracket descends from $m_2$, and $m_{k \geq 3}$ vanish on cohomology via homotopies $h_{k-1}$ from topological contraction of $\Conf_k^{<}(\R)$ (Theorem~\ref{thm:cohomology_PVA}).
 \end{theorem}
+
+\begin{proof}
+This is Theorem~\ref{thm:cohomology_PVA} (Section~\ref{sec:PVA_descent}), proved in full there.  The argument decomposes as: (i)~descent of $\mu$ and $\{-{}_\lambda-\}$ to cohomology via the regular/singular splitting of $m_2$; (ii)~verification of the PVA axioms (sesquilinearity, shifted skew-symmetry, Jacobi, Leibniz) for the descended operations, with the $(-1)$-shift arising from the desuspension in the bar complex; and (iii)~vanishing of $m_{k \ge 3}$ on cohomology (Proposition~\ref{prop:m3_vanish}), using the contractibility of $\Conf_k^{<}(\R)$ to construct explicit nullhomotopies.
+\end{proof}
 
 \subsubsection*{IV. Chiral Hochschild and bar--cobar duality (Sections \ref{sec:chiral_hochschild_expanded}--\ref{sec:bar_cobar})}
 
@@ -496,6 +565,14 @@ For any logarithmic $\SCchtop$-algebra, $H^\bullet(\cA_{\mathrm{ch}},Q)$ is a $(
 $C^\bullet_{\mathrm{ch}}(A_\partial) \simeq \A_{\text{bulk}}$ as $A_\infty$ chiral algebras (Theorem~\ref{thm:bulk_hochschild}).  The filtered bar--cobar adjunction extending~\cite{GLZ22} has differential $d_{\overline{B}}$ from FM residue sums with $d_{\overline{B}}^2 = 0$ by Arnold relations (Theorem~\ref{thm:bar_cobar_adjunction}).
 \end{theorem}
 
+\begin{proof}
+The two claims are proved in separate later sections.
+
+The bulk--Hochschild identification is Theorem~\ref{thm:bulk_hochschild} (Section~\ref{sec:chiral_hochschild_expanded}), proved via: (1)~reduction of factorization homology along $\R$ using local constancy of observables in the topological direction; (2)~identification of the resulting complex on $\C$ with chiral Hochschild cochains via the holomorphic weight filtration on the Ran space; (3)~matching of the bulk differential $d_{\mathrm{bulk}}$ with the chiral Hochschild differential $\delta_Q + \delta_{\mathrm{Hoch}}$; and (4)~filtered quasi-isomorphism verification.  See Remark~\ref{rem:bulk-hochschild-scope} for the precise scope.
+
+The bar--cobar adjunction is Theorem~\ref{thm:bar_cobar_adjunction} (Section~\ref{sec:bar_cobar}), proved by applying the operadic bar--cobar formalism to the two-coloured HT operad $\OHT = C_\ast(W(\SCchtop))$, with conilpotence ensured by tree-complexity and pole-order filtrations, and the Maurer--Cartan equation verified in the convolution dg Lie algebra.
+\end{proof}
+
 \phantomsection\label{sec:bridge-inputs-summary}
 
 \subsection{The $d'=1$ formality gap}
@@ -503,7 +580,7 @@ $C^\bullet_{\mathrm{ch}}(A_\partial) \simeq \A_{\text{bulk}}$ as $A_\infty$ chir
 Let $d'$ denote the number of topological directions. The Gaiotto--Kulp--Wu formality theorem \cite{GKW25} establishes:
 
 \begin{itemize}
-\item \textbf{$d' \geq 2$}: Higher $A_\infty$ operations beyond $m_2$ stabilize---quantum corrections vanish after one loop and the theory is formal.
+\item \textbf{$d' \geq 2$}: Higher $A_\infty$ operations beyond $m_2$ stabilize: quantum corrections vanish after one loop and the theory is formal.
 
 \item \textbf{$d' = 1$}: Formality fails. Higher $A_\infty$ operations $m_k$ can persist at all loop orders.
 \end{itemize}

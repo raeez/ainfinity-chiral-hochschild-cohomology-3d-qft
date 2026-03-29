@@ -55,6 +55,11 @@ Kac--Moody or principal $\mathcal{W}$-algebra boundary conditions.
 \end{enumerate}
 \end{definition}
 
+\begin{remark}[Which examples are Koszul-admissible]
+\label{rem:koszul-admissible-examples}
+The Koszul-admissibility condition is satisfied by the standard class of examples: generic-level affine Kac--Moody algebras (by Theorem~\ref{thm:one-loop-koszul}) and principal $\cW$-algebras obtained by Drinfeld--Sokolov reduction (by Theorem~\ref{thm:ds-koszul-obstruction}).  Beyond the affine lineage, Koszul-admissibility must be verified case by case.
+\end{remark}
+
 \begin{notation}[Open sector, bulk shadow, and tangent space]
 \label{not:twisted-ym-boundary-objects}
 For a Koszul-admissible twisted Yang--Mills boundary datum $(X,\mathcal{T},\cB)$, set
@@ -69,7 +74,7 @@ We call $\mathsf{Open}_{\cB}$ the \emph{open boundary complex}, $\mathsf{Bulk}^{
 \emph{dual bulk shadow}, and $T^1_X(\cB)$ the \emph{first-order boundary deformation space}.
 \end{notation}
 
-\begin{theorem}[Boundary BRST recovery for twisted Yang--Mills data; \ClaimStatusProvedHere]
+\begin{theorem}[Boundary BRST recovery for twisted Yang--Mills data; \ClaimStatusProvedElsewhere]
 \label{thm:twisted-ym-boundary-brst}
 Let $(X,\mathcal{T},\cB)$ be a Koszul-admissible twisted Yang--Mills boundary datum.
 Then:
@@ -104,7 +109,7 @@ Koszul-admissibility and the Verdier-dual bar/cobar comparison theorem of Volume
 is $\cA_{\cB}^!$.
 \end{proof}
 
-\begin{theorem}[Tangent-to-center principle; \ClaimStatusProvedHere]
+\begin{theorem}[Tangent-to-center principle; \ClaimStatusProvedElsewhere]
 \label{thm:twisted-ym-tangent-center}
 For every Koszul-admissible twisted Yang--Mills boundary datum on a smooth projective
 curve $X$, there is a canonical isomorphism
@@ -120,7 +125,9 @@ of the Koszul dual algebra.
 
 \begin{proof}
 Apply the genus-zero deformation/obstruction exchange for Koszul pairs
-proved in Volume~I to $(\cA_{\cB}, \cA_{\cB}^!)$.
+proved in Volume~I (the Koszul--Hochschild comparison theorem, which establishes
+$HH^n_{\mathrm{chiral}}(\cA) \cong HH^{2-n}_{\mathrm{chiral}}(\cA^!)^{\vee}\otimes \omega_X$
+for chirally Koszul pairs) to $(\cA_{\cB}, \cA_{\cB}^!)$.
 \end{proof}
 
 \begin{corollary}[Center-vanishing rigidity criterion; \ClaimStatusProvedHere]
@@ -257,7 +264,7 @@ Hence every first-order deformation of $\cA_{\cB}$ is unobstructed to second ord
 \end{theorem}
 
 \begin{proof}
-By the deformation-obstruction dictionary, primary obstructions to extending a first-order deformation lie in $HH^{3}_{\mathrm{chiral}}(\cA_{\cB})$.  Apply the main Koszul--Hochschild comparison theorem of Volume~I with $n=3$ to obtain
+By the deformation-obstruction dictionary, primary obstructions to extending a first-order deformation lie in $HH^{3}_{\mathrm{chiral}}(\cA_{\cB})$.  Apply the Koszul--Hochschild comparison theorem of Volume~I (the degree shift $n \mapsto 2-n$ for chirally Koszul pairs) with $n=3$ to obtain
 \[
 HH^{3}_{\mathrm{chiral}}(\cA_{\cB})
 \cong
@@ -287,21 +294,40 @@ Equivalently, every first-order boundary deformation extends uniquely to all ord
 \end{theorem}
 
 \begin{proof}
-By Theorem~\ref{thm:MC-deformations}, the formal deformations of $\cA_{\cB}$ are governed by Maurer--Cartan elements of the dg Lie algebra $\mathfrak{g}^{\mathrm{def}}_{\cB}$.  Its cohomology satisfies
+The argument proceeds in three stages: (i) identify the controlling dg Lie algebra and its cohomology, (ii) verify the vanishing hypotheses for the affine lineage via the Koszul property, and (iii) apply the Schlessinger--Stasheff criterion to conclude formality.
+
+\medskip\noindent\textbf{Stage 1: Controlling dg Lie algebra.}
+By Theorem~\ref{thm:MC-deformations}, the formal deformations of $\cA_{\cB}$ are governed by Maurer--Cartan elements of the dg Lie algebra $\mathfrak{g}^{\mathrm{def}}_{\cB} = \tau_{\ge 1}RHH_{\mathrm{ch}}(\cA_{\cB})[1]$.  Its cohomology satisfies
 \[
-H^0(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{1}_{\mathrm{chiral}}(\cA_{\cB}) = 0,
+H^0(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{1}_{\mathrm{chiral}}(\cA_{\cB}),
 \qquad
 H^1(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{2}_{\mathrm{chiral}}(\cA_{\cB}),
+\qquad
+H^2(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{3}_{\mathrm{chiral}}(\cA_{\cB}).
 \]
-and, by Theorem~\ref{thm:twisted-ym-dual-unobstructedness},
+For central formality we need $H^0 = 0$ (no infinitesimal automorphisms) and $H^2 = 0$ (no obstructions).
+
+\medskip\noindent\textbf{Stage 2: Koszul resolution and Hochschild vanishing.}
+For the affine lineage (generic-level affine Kac--Moody and principal $\cW$-algebras obtained by Drinfeld--Sokolov reduction), the Koszul property (Theorem~\ref{thm:one-loop-koszul}) ensures that the chiral bar complex $\barBch(\cA_{\cB})$ is a resolution of $\cA_{\cB}^!$.  Chiral Hochschild cohomology is then computed by the bar resolution:
 \[
-H^2(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^{3}_{\mathrm{chiral}}(\cA_{\cB}) = 0.
+HH^n_{\mathrm{chiral}}(\cA_{\cB},\cA_{\cB})
+\;\cong\;
+\mathrm{Ext}^n_{\cA_{\cB}\text{-}\mathrm{bimod}}(\cA_{\cB},\cA_{\cB}),
 \]
-Choose a minimal $L_\infty$ model on $H^\bullet(\mathfrak{g}^{\mathrm{def}}_{\cB})$; existence follows from the homotopy transfer theorem applied to the Lie operad, and uniqueness up to $L_\infty$ isomorphism is standard.  Since the only nonzero cohomology relevant to the Maurer--Cartan problem is in degree $1$, every higher bracket
+where the Ext is taken in the category of chiral bimodules using the bar resolution $\barBch(\cA_{\cB}) \to \cA_{\cB}^!$.  The Koszul--Hochschild comparison (Volume~I, degree shift $n \mapsto 2-n$ for chirally Koszul pairs) gives
+\[
+HH^n_{\mathrm{chiral}}(\cA_{\cB})
+\;\cong\;
+HH^{2-n}_{\mathrm{chiral}}(\cA_{\cB}^!)^{\vee} \otimes \omega_X.
+\]
+For $n=1$: $HH^1_{\mathrm{chiral}}(\cA_{\cB}) \cong HH^{1}_{\mathrm{chiral}}(\cA_{\cB}^!)^{\vee} \otimes \omega_X$.  In the affine lineage, the Koszul dual $\cA_{\cB}^!$ has no degree-$1$ chiral Hochschild classes (the quadratic-dual algebra inherits a weight grading from the root-space decomposition that excludes degree-$1$ self-extensions), so $HH^1_{\mathrm{chiral}}(\cA_{\cB}) = 0$.  For $n=3$: Theorem~\ref{thm:twisted-ym-dual-unobstructedness} gives $HH^3_{\mathrm{chiral}}(\cA_{\cB}) = 0$ from the vanishing $HH^{-1}_{\mathrm{chiral}}(\cA_{\cB}^!) = 0$, which holds because the bar complex is concentrated in non-negative degrees.
+
+\medskip\noindent\textbf{Stage 3: Schlessinger--Stasheff formality.}
+With $H^0(\mathfrak{g}^{\mathrm{def}}_{\cB}) = 0$ and $H^2(\mathfrak{g}^{\mathrm{def}}_{\cB}) = 0$ established, choose a minimal $L_\infty$ model on $H^\bullet(\mathfrak{g}^{\mathrm{def}}_{\cB})$; existence follows from the homotopy transfer theorem applied to the Lie operad, and uniqueness up to $L_\infty$ isomorphism is standard \cite{LV12}.  Since the only nonzero cohomology relevant to the Maurer--Cartan problem is in degree $1$, every higher bracket
 \[
 \ell_n \colon (H^1)^{\otimes n} \longrightarrow H^{2}
 \]
-has zero target, because $\ell_n$ has cohomological degree $2-n$.  Thus all $\ell_n$ vanish identically and the minimal model is abelian.
+has zero target, because $\ell_n$ has cohomological degree $2-n$.  Thus all $\ell_n$ vanish identically and the minimal model is abelian.  This is the Schlessinger--Stasheff criterion (see \cite{LV12}, \S12): a formal moduli problem with $H^0 = 0$ (trivial gauge group) and $H^2 = 0$ (no obstructions) has smooth, hence affine, formal neighborhood.
 
 The Maurer--Cartan equation in an abelian dg Lie algebra is empty, and the gauge action is trivial because $H^0=0$.  Therefore the formal moduli problem is the formal affine space on $H^1(\mathfrak{g}^{\mathrm{def}}_{\cB}) = HH^2_{\mathrm{chiral}}(\cA_{\cB})$.  Finally, Theorem~\ref{thm:twisted-ym-tangent-center} identifies this tangent space with $Z(\cA_{\cB}^{!})^{\vee}\otimes\omega_X$, yielding the completed symmetric algebra stated above.
 \end{proof}
@@ -360,6 +386,11 @@ U_1\otimes Z(\cA_2).
 \]
 Their intersection is exactly $Z(\cA_1)\otimes Z(\cA_2)$.
 \end{proof}
+
+\begin{remark}[Triviality on the dual side]
+\label{rem:mixed-ope-dual-side}
+Lemma~\ref{lem:twisted-ym-center-tensor} assumes trivial mixed OPE on the original side $\cA_1\otimes^{\mathrm{ch}}\cA_2$ in order to invoke the Koszul-dual tensor-product theorem of Volume~I, which then computes $(\cA_1\otimes^{\mathrm{ch}}\cA_2)^! \cong \cA_1^!\otimes^{\mathrm{ch}}\cA_2^!$.  For the center computation to descend to the dual side, one needs that the mixed OPE is also trivial on the Koszul-dual tensor product $\cA_1^!\otimes^{\mathrm{ch}}\cA_2^!$.  This holds because triviality of the mixed OPE is a quadratic-data condition: it depends only on the quadratic relations in the chiral envelope, and the Koszul-dual tensor-product theorem preserves the quadratic splitting.  Explicitly, if the generators of $\cA_1$ and $\cA_2$ have mutually regular OPE (no singular terms), then the dual generators (which are determined by the orthogonal complement of the quadratic relations) inherit the same mutual regularity.
+\end{remark}
 
 \begin{theorem}[Binary mixed-coupling theorem; \ClaimStatusProvedHere]
 \label{thm:twisted-ym-binary-mixed-couplings}

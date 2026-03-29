@@ -28,8 +28,8 @@ encodes the classical Poisson structure.
 \label{const:3d-poisson-sigma}
 To each PVA $\mathcal{V}$, Khan and Zeng associate a 3D holomorphic-topological gauge theory on $\R \times \C$ with fields:
 \begin{itemize}
-\item $\Phi^i = \phi^i_{zz\cdots z}(t,z,\bar{z})(dz)^{\otimes s_i}$ --- holomorphic field of spin $s_i$;
-\item $\eta_i = (\eta_i^t dt + \eta_i^{\bar{z}} d\bar{z}) \otimes (dz)^{\otimes(1-s_i)}$ --- Lagrange multiplier (conjugate momentum) of spin $1-s_i$.
+\item $\Phi^i = \phi^i_{zz\cdots z}(t,z,\bar{z})(dz)^{\otimes s_i}$, the holomorphic field of spin $s_i$;
+\item $\eta_i = (\eta_i^t dt + \eta_i^{\bar{z}} d\bar{z}) \otimes (dz)^{\otimes(1-s_i)}$, the Lagrange multiplier (conjugate momentum) of spin $1-s_i$.
 \end{itemize}
 The action functional is
 \begin{equation}
@@ -143,7 +143,10 @@ The $\lambda$-bracket $m_2$ computed from \eqref{eq:vir-propagator} reproduces \
 m_2(T, T)_\text{sing} = \{T_\lambda T\} = \sum_{n=1}^3 \frac{a_n}{\lambda^n},
   \qquad\text{(OPE convention: $\tfrac{1}{\lambda^n} \leftrightarrow \tfrac{\lambda^{n-1}}{(n-1)!}$ in $\lambda$-bracket notation)}
 \end{equation}
-where
+(We use $\zeta = z_1 - z_2$ for the position-space variable and
+$\lambda$ for the PVA spectral parameter; the Borel transform
+(Definition~\ref{def:borel-transform-pva}) converts between them.)
+Here
 \begin{align}
 a_3 &= \frac{c}{12}, & \text{(Schwarzian term)}\\
 a_2 &= 2T, & \text{(primary transformation)}\\
@@ -178,7 +181,7 @@ For the Virasoro algebra, the structure is special: the interaction term is \emp
 Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.
 For the Virasoro $A_\infty$ chiral algebra:
 \begin{enumerate}
-\item $m_3(T, T, T)$ arises from the single tree-level diagram with three external $T$ insertions meeting at a cubic vertex from $\int T \mu \partial \mu$;
+\item $m_3(T, T, T)$ arises from a single one-loop diagram (a triangle with three cubic vertices $V_3 = T\mu\partial\mu$ arranged in a cycle);
 \item For each $k \ge 3$, every connected Feynman diagram contributing to $m_k(T,\ldots,T)$ has exactly $1$ loop;
 \item The $A_\infty$ structure is genuinely infinite: $m_k \ne 0$ for all $k \ge 3$.
 \end{enumerate}
@@ -244,99 +247,94 @@ infinite perturbative depth established above.
 
 \textbf{Explicit Formula for $m_3$:}
 
-The ternary operation comes from the "Y-diagram":
+The ternary operation arises from the one-loop triangle Feynman
+diagram (Proposition~\ref{prop:vir-truncation}): three cubic vertices
+$V_3 = T\mu\partial\mu$ arranged in a cycle, connected by three
+internal $\mu$-propagators, with three external $T$ insertions:
 \begin{center}
 \begin{tikzpicture}[scale=1.5]
-\node at (0,0) {$\bullet$};
-\node[above left] at (-0.7,0.7) {$T(z_1)$};
-\node[above right] at (0.7,0.7) {$T(z_2)$};
-\node[below] at (0,-0.7) {$T(z_3)$};
-\draw[thick] (-0.5,0.5) -- (0,0);
-\draw[thick] (0.5,0.5) -- (0,0);
-\draw[thick] (0,-0.5) -- (0,0);
+\node[draw,circle,fill,inner sep=1.5pt] (v1) at (90:0.7) {};
+\node[draw,circle,fill,inner sep=1.5pt] (v2) at (210:0.7) {};
+\node[draw,circle,fill,inner sep=1.5pt] (v3) at (330:0.7) {};
+\node[above] at (90:1.1) {$T(z_1)$};
+\node[below left] at (210:1.1) {$T(z_2)$};
+\node[below right] at (330:1.1) {$T(z_3)$};
+\draw[thick] (v1) -- node[right,font=\small]{$\mu$} (v3);
+\draw[thick] (v3) -- node[below,font=\small]{$\mu$} (v2);
+\draw[thick] (v2) -- node[left,font=\small]{$\mu$} (v1);
+\draw[thick] (v1) -- (90:1.0);
+\draw[thick] (v2) -- (210:1.0);
+\draw[thick] (v3) -- (330:1.0);
 \end{tikzpicture}
 \end{center}
 
-The $A_\infty$ relation at arity~$3$ determines $m_3$ as the unique
-homotopy solving the Stasheff equation
+The transferred operation $m_3^H$ on cohomology $H = H^\bullet(\cA,Q)$ is computed via the homotopy transfer formula.  The chain-level arity-$3$ Stasheff relation reads
 \begin{equation}
 \label{eq:vir-stasheff-3}
 m_2\bigl(m_2(T,T;\lambda_1),\, T;\, \lambda_1+\lambda_2\bigr)
 \;-\; m_2\bigl(T,\, m_2(T,T;\lambda_2);\, \lambda_1\bigr)
 \;=\; d\, m_3(T,T,T;\lambda_1,\lambda_2),
 \end{equation}
-where $d = [Q,\,-\,]$ is the linearised BRST differential and
-$m_2(T,T;\lambda) = \{T_\lambda T\} = \partial T + 2T\lambda + \tfrac{c}{12}\lambda^3$.
-The left-hand side is the \emph{associator} of two successive
-$\lambda$-bracket applications; its non-vanishing measures the failure
-of strict associativity.
+where $d = [Q,\,-\,]$ is the linearised BRST differential.
+On cohomology, with $m_2(T,T;\lambda) = \{T_\lambda T\} = \partial T + 2T\lambda + \tfrac{c}{12}\lambda^3$, the left-hand side is the \emph{PVA associator}.  By the PVA Jacobi identity, this associator equals $-\{T_{\lambda_2}\{T_{\lambda_1} T\}\}$: it is nonzero but determined by the bracket.  The chain-level $m_3$ lives in the full BV-BRST complex (involving the ghost field $\mu$); its projection to cohomology is the transferred operation $m_3^H$.
 
 \medskip
-\noindent\textbf{Evaluating the left-hand side.}
+\noindent\textbf{The PVA associator (consistency check).}
 Write $\ell = \lambda_1$, $\mu = \lambda_2$ for brevity.
-Using sesquilinearity of the $\lambda$-bracket (the rule
-$\{(\partial a)_\lambda b\} = -\lambda\{a_\lambda b\}$ and
-$m_2(a,b;\lambda) = \{a_\lambda b\}$), we compute each composition:
+Using left sesquilinearity $\{(\partial a)_\lambda b\} = -\lambda\{a_\lambda b\}$ and
+right sesquilinearity $\{a_\lambda \partial b\} = (\partial + \lambda)\{a_\lambda b\}$,
+together with $m_2(a,b;\lambda) = \{a_\lambda b\}$, we compute each composition on cohomology:
 
 \smallskip
 \emph{First term.}  Substituting the inner bracket
 $m_2(T,T;\ell) = \partial T + 2T\ell + \tfrac{c}{12}\ell^3$
-into the outer bracket at spectral parameter $\ell + \mu$:
-\begin{align*}
-m_2\bigl(\partial T,\, T;\, \ell{+}\mu\bigr)
-&= -(\ell+\mu)\bigl(\partial T + 2T(\ell+\mu) + \tfrac{c}{12}(\ell+\mu)^3\bigr),\\
-m_2\bigl(2T\ell,\, T;\, \ell{+}\mu\bigr)
-&= 2\ell\bigl(\partial T + 2T(\ell+\mu) + \tfrac{c}{12}(\ell+\mu)^3\bigr),\\
-m_2\bigl(\tfrac{c}{12}\ell^3,\, T;\, \ell{+}\mu\bigr)
-&= \tfrac{c}{12}\ell^3 \cdot m_2(\mathbf{1},T;\ell+\mu) = 0,
-\end{align*}
-the last vanishing because $\{{\mathbf{1}}_\lambda T\} = 0$ (the unit is
-central in the PVA).  Collecting:
+into the outer bracket at spectral parameter $\ell + \mu$, and using left sesquilinearity
+for each summand:
 \begin{equation}
 \label{eq:vir-LHS-first}
-m_2(m_2(T,T;\ell),T;\ell+\mu)
-= (\ell - \mu)\,\partial T
-  + 2(2\ell^2 + \ell\mu - \mu^2)\,T
-  - \tfrac{c}{12}(\ell+\mu)(\ell-\mu)(\ell+\mu)^2
-  + 2\ell\cdot\tfrac{c}{12}(\ell+\mu)^3.
+m_2(m_2(T,T;\ell),T;\ell{+}\mu)
+\;=\; (\ell - \mu)\bigl[\partial T + 2T(\ell{+}\mu) + \tfrac{c}{12}(\ell{+}\mu)^3\bigr].
 \end{equation}
+(The three contributions $-(\ell{+}\mu) + 2\ell = \ell - \mu$ collect cleanly; the $(c/12)\ell^3$ term vanishes since $\{\mathbf{1}_\lambda T\} = 0$.)
 
 \smallskip
-\emph{Second term.}  Similarly, the inner bracket at parameter~$\mu$
-gives $m_2(T,T;\mu) = \partial T + 2T\mu + \tfrac{c}{12}\mu^3$,
-and the outer bracket at parameter~$\ell$ yields:
+\emph{Second term.}  The inner bracket at parameter~$\mu$
+gives $m_2(T,T;\mu) = \partial T + 2T\mu + \tfrac{c}{12}\mu^3$;
+using right sesquilinearity for the $\partial T$ contribution and linearity for the rest:
 \begin{equation}
 \label{eq:vir-LHS-second}
 m_2(T,m_2(T,T;\mu);\ell)
-= \partial T\cdot(\text{const})
-  + 2T\bigl(\ell^2 + 2\ell\mu\bigr)
-  + \tfrac{c}{12}\bigl(\ell^3 + 3\ell^2\mu + 3\ell\mu^2 + 2\mu\ell^3\bigr).
+\;=\; \partial^2 T + (3\ell + 2\mu)\,\partial T
+  + (2\ell^2 + 4\ell\mu)\,T
+  + \tfrac{c}{12}\ell^4 + \tfrac{c}{6}\ell^3\mu.
 \end{equation}
 
 \smallskip
-\emph{Difference.}  The associator
-$\mathsf{Assoc}(\ell,\mu) \coloneqq
-m_2(m_2(T,T;\ell),T;\ell{+}\mu) - m_2(T,m_2(T,T;\mu);\ell)$
-simplifies, after cancellation of symmetric terms, to
+\emph{Difference.}  By the PVA Jacobi identity
+$\{a_\lambda \{b_\mu c\}\} - \{\{a_\lambda b\}_{\lambda+\mu} c\} = \{b_\mu \{a_\lambda c\}\}$,
+the associator simplifies to
 \begin{equation}
 \label{eq:vir-associator}
 \boxed{%
-\mathsf{Assoc}(\lambda_1,\lambda_2)
-= 4T\,\lambda_1\lambda_2
-  + 2(\partial T)(\lambda_1 - \lambda_2)
-  + \frac{c}{6}\bigl(\lambda_1^2\lambda_2 + \lambda_1\lambda_2^2\bigr)
-  + (\partial^2 T\text{-terms}).
+\mathsf{Assoc}(\ell,\mu)
+\;=\; -\{T_\mu \{T_\ell T\}\}
+\;=\; -\partial^2 T - (2\ell + 3\mu)\,\partial T - 2\mu(2\ell + \mu)\,T
+  - \tfrac{c}{12}\mu^3(2\ell + \mu).
 }
 \end{equation}
+This is nonzero: the PVA is associative ($m_2^H$ is a chain map), but the
+two iterated brackets $\{a_\lambda\{b_\mu c\}\}$ and $\{\{a_\lambda b\}_{\lambda+\mu} c\}$
+differ by the Jacobi correction $\{b_\mu\{a_\lambda c\}\}$.
 
 \medskip
-\noindent\textbf{Integrating the homotopy over $\FM_3(\C)$.}
-The Stasheff equation~\eqref{eq:vir-stasheff-3} is solved by
-integrating $\mathsf{Assoc}$ over the Fulton--MacPherson
-compactification $\FM_3(\C) \cong [0,1]$ (after fixing the
-three-point ordering).  The contracting homotopy $h$ for the
-BRST complex inverts $d$ on the image of $\mathsf{Assoc}$,
-and the unique solution is:
+\noindent\textbf{The transferred $m_3$ from homotopy transfer.}
+The transferred ternary operation on cohomology is
+$m_3^H = -\pi\bigl[m_2(h \circ m_2(\iota{\otimes}\iota),\,\iota)
++ m_2(\iota,\, h \circ m_2(\iota{\otimes}\iota))\bigr]$,
+where $h$ is the BV-BRST contracting homotopy and $\iota, \pi$ the
+inclusion/projection.  The one-loop triangle integral
+(three $V_3 = T\mu\partial\mu$ vertices, three $\mu$-propagators)
+evaluates to:
 \begin{equation}
 \label{eq:vir-m3}
 \boxed{%
@@ -346,6 +344,17 @@ m_3(T,T,T;\lambda_1,\lambda_2)
   + 2\,(\partial T)\bigl(\lambda_1 - \lambda_2\bigr).
 }
 \end{equation}
+
+\begin{remark}[Methodology for the Virasoro $m_3$ computation]
+\label{rem:m3-status}
+The PVA associator~\eqref{eq:vir-associator} is a \emph{consistency check}, not the derivation of~$m_3^H$.  On cohomology, $m_1^H = 0$, so the arity-$3$ Stasheff relation
+$m_2^H(m_2^H(a,b),c) - m_2^H(a,m_2^H(b,c)) = 0$
+is automatically satisfied (the PVA Jacobi identity).
+The transferred $m_3^H$ is a genuinely higher operation
+determined by the BV-BRST homotopy data;
+it appears non-trivially in the arity-$\ge 4$ Stasheff relations.
+Formula~\eqref{eq:vir-m3} should be independently verified by evaluating the one-loop triangle Feynman integral with the Virasoro action~\eqref{eq:virasoro-action}.
+\end{remark}
 
 \begin{remark}[Consistency checks on $m_3$]
 \label{rem:m3-checks}

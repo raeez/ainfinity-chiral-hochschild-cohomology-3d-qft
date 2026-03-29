@@ -15,12 +15,36 @@ We equip $A$ with:
   \begin{equation}
     \label{eq:mk-type}
     m_k \colon A^{\otimes k}\longrightarrow A((\lambda_1))\cdots((\lambda_{k-1})),
-    \qquad \deg m_k = 1-k,
+    \qquad \deg m_k = 2-k,
   \end{equation}
   where $A((\lambda))$ denotes the space of formal Laurent series in $\lambda$ with coefficients in $A$, and $A((\lambda_1))\cdots((\lambda_{k-1}))$ is the iterated Laurent series ring.\footnote{We work in the completed topology so that infinite sums are allowed.}
 \end{itemize}
 We regard $\lambda_1,\dots,\lambda_{k-1}$ as spectral parameters associated to the \emph{differences} of the holomorphic coordinates of inputs $1,\dots,k-1$ relative to the $k$-th input (the ``rightmost'' slot).
 The axioms imposed on this data are stated in Definition~\ref{def:sesquilinearity}--\ref{def:symmetry-grading} below.
+\end{definition}
+
+\begin{remark}[Categorical origin of the $A_\infty$ chiral algebra]
+\label{rem:categorical-origin}
+The $A_\infty$ chiral algebra $A$ defined above is the endomorphism algebra $A_b = \RHom_{\cC(J)}(b,b)$ of a vacuum object $b$ in the open-sector factorization category $\cC$ (Definition~\ref{def:oc-factorization-category}).  The multilinear operations $m_k$ arise from restricting the factorization functors of~$\cC$ to iterated self-$\Hom$'s of~$b$ (Theorem~\ref{thm:boundary-algebra-from-vacuum}).  The complete invariant of the open sector is the Morita class of~$\cC$, not the quasi-isomorphism class of~$A_b$: different compact generators $b, b'$ produce Morita-equivalent algebras $A_b \sim_M A_{b'}$ with equivalent module categories.
+\end{remark}
+
+\begin{definition}[Curved $A_\infty$ chiral algebra]
+\label{def:curved-ainfty-chiral}
+A \emph{curved $A_\infty$ chiral algebra} over a base $S$ (e.g., $S = \overline{\cM}_g$ for genus-$g$ modular theory) is the data of Definition~\ref{def:ainfty_chiral} together with:
+\begin{itemize}
+\item a \emph{curvature element} $m_0 \in \Gamma(S, \cO_S)$ of cohomological degree~$2$ (a section of the structure sheaf of the base, with no algebra inputs),
+\end{itemize}
+subject to the \emph{curved $A_\infty$ relations}: for each $n \geq 0$,
+\[
+\sum_{\substack{i+j = n+1 \\ i,j \geq 0}} \sum_{s=0}^{n-j} (-1)^{\epsilon(s,j)}\, m_i\bigl(\ldots, m_j(\ldots), \ldots\bigr) \;=\; 0,
+\]
+where the $j=0$ terms contribute $m_0$ insertions.  The first three cases are:
+\begin{itemize}
+\item \textbf{At $n=0$:}\; $m_1(m_0) = 0$.  The curvature element $m_0$ is closed under the differential~$m_1$.
+\item \textbf{At $n=1$:}\; $m_1^2(x) = -m_2(m_0, x) - (-1)^{|x|}\, m_2(x, m_0)$.  The differential does not square to zero; rather, it squares to minus the commutator (graded) with the curvature.
+\item \textbf{At $n=2$:}\; $m_1(m_2(x,y)) + m_2(m_1(x),y) + (-1)^{|x|}\,m_2(x,m_1(y)) + m_3(m_0,x,y) \pm m_3(x,m_0,y) \pm m_3(x,y,m_0) = 0$.  The binary product is $m_1$-linear up to homotopies controlled by $m_3$ and curvature insertions (setting $m_0=0$, this is the graded Leibniz rule: $m_1$ is a derivation of~$m_2$).
+\end{itemize}
+When $m_0 = \kappa(\cA) \cdot \omega_g$ for a scalar $\kappa$ and a base class $\omega_g$, the $n=1$ relation reduces to $d_{\barB}^2 = \kappa \cdot \omega_g$ (Volume~I, Theorem~D): the bar differential fails to square to zero by exactly the curvature obstruction, and this failure IS the non-formality at genus $g \geq 1$.  Setting $m_0 = 0$ recovers Definition~\ref{def:ainfty_chiral}.
 \end{definition}
 
 \begin{notation}[Spectral bookkeeping]
@@ -55,13 +79,23 @@ variable. In this convention, sesquilinearity reads
 $m_k(\ldots,\partial a_i,\ldots) = -\lambda_i\cdot m_k(\ldots)$ for
 $1\le i\le k-1$. The alternative \emph{consecutive-difference convention}
 used in Lemma~\ref{lem:sesquilinearity_explicit} defines $\lambda_i$ as the
-difference $z_i - z_{i+1}$ between adjacent insertion points; in that
-convention, translating the $i$-th insertion $z_i\mapsto z_i+\varepsilon$
-shifts both $\lambda_{i-1}$ (by $+\varepsilon$) and $\lambda_i$ (by
-$-\varepsilon$), giving the formula of
-equation~\eqref{eq:sesqui_explicit_i}. See
-Lemma~\ref{lem:sesquilinearity_explicit} for details and the reconciliation
-of the two forms.
+difference $z_i - z_{i+1}$ between adjacent insertion points.
+The two conventions are related by the change of variables
+\begin{equation}\label{eq:indep-to-consec}
+  \lambda_i^{\mathrm{indep}} = z_i - z_k
+  = \sum_{j=i}^{k-1} (z_j - z_{j+1})
+  = \sum_{j=i}^{k-1} \lambda_j^{\mathrm{consec}},
+  \qquad 1\le i\le k-1.
+\end{equation}
+In the consecutive convention, the sesquilinearity identities
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} become: for
+$1\le i\le k-1$,
+$m_k(\ldots,\partial a_i,\ldots) = -(\lambda_i+\cdots+\lambda_{k-1})
+\cdot m_k(\ldots)$, and for $i=k$,
+$m_k(\ldots,\partial a_k) = (\partial + \sum_{j=1}^{k-1} j\,\lambda_j)
+\,m_k(\ldots)$.
+(The factor $j\,\lambda_j$ arises from the change of variables: $\sum_{i=1}^{k-1}\lambda_i^{\mathrm{indep}} = \sum_{i=1}^{k-1}\sum_{j=i}^{k-1}\lambda_j^{\mathrm{consec}} = \sum_{j=1}^{k-1}\bigl(\sum_{i=1}^{j}1\bigr)\lambda_j^{\mathrm{consec}} = \sum_{j=1}^{k-1}j\,\lambda_j^{\mathrm{consec}}$, where the double sum is reordered by noting that $\lambda_j^{\mathrm{consec}}$ appears for each $i\le j$.)
+See Lemma~\ref{lem:sesquilinearity_explicit} for the complete derivation.
 
 For $k=1$, $m_1=Q$ and sesquilinearity is $[Q,\partial]=0$.
 There is a (strict) unit $\mathbf 1$ such that
@@ -75,10 +109,15 @@ m_k(\ldots,\mathbf 1,\ldots)&=0\quad \text{for all $k\neq 2$, whenever a unit is
 \end{align}
 \noindent
 \emph{Sign justification.}\; The sign $(-1)^{|a|}$ in
-$m_2(a,\mathbf{1})=(-1)^{|a|}a$ arises from the Koszul sign rule: the
-shifted operation $m_2$ carries degree $|m_2|=-1$ (cohomological convention),
-so passing $m_2$ past the element $a$ to reduce the unit insertion to the
-identity incurs $(-1)^{|m_2|\cdot|a|}=(-1)^{(-1)(|a|)}=(-1)^{|a|}$.
+$m_2(a,\mathbf{1})=(-1)^{|a|}a$ arises from the bar desuspension: the
+operations $m_k$ are defined as the components of a degree-$+1$
+coderivation on the bar complex $T^c(s^{-1}\bar A)$, and the
+desuspension $s^{-1}$ produces a Koszul sign $(-1)^{|a|}$ when
+passing through the first input.  Concretely, the unshifted product
+$\mu_2$ satisfies $\mu_2(a,\mathbf{1}) = a$, and the shifted operation
+$m_2 = s \circ \mu_2 \circ (s^{-1} \otimes s^{-1})$ acquires the
+sign $(-1)^{|a|}$ from the desuspension isomorphism acting on the
+first tensor factor.
 \end{definition}
 
 \subsection{Planar $A_\infty$ relations with spectral substitution}
@@ -86,17 +125,19 @@ identity incurs $(-1)^{|m_2|\cdot|a|}=(-1)^{(-1)(|a|)}=(-1)^{|a|}$.
 
 \begin{definition}[$A_\infty$ relations with spectral substitution]
 \label{def:ainfty-relations}
-For each $n\ge 1$, the following \emph{planar} $A_\infty$ identity holds (degree $2-n$):
-\begin{equation}
+For each $n\ge 1$, the following \emph{planar} $A_\infty$ identity holds (degree $3-n$):
+\begin{multline}
 \label{eq:ainfty-relation-raw}
 \sum_{\substack{i+j=n+1\\ i,j\ge1}}\;\sum_{s=0}^{n-j}
 (-1)^{\epsilon(s,j)}\;
 m_i\!\Bigl(
 a_1,\dots,a_s,\
-m_j(a_{s+1},\dots,a_{s+j}\,;\,\lambda_{s+1},\dots,\lambda_{s+j-1})\ \Big|\ \Lambda_{[s+1,\dots,s+j]}
+m_j(a_{s+1},\dots,a_{s+j}\,;\,\lambda_{s+1},\dots,\lambda_{s+j-1})
+\ \Big|\\
+\Lambda_{[s+1,\dots,s+j]}
 ,\ a_{s+j+1},\dots,a_n;\ \bm\lambda^{\mathrm{out}} \Bigr)
 \;=\;0.
-\end{equation}
+\end{multline}
 Here:
 \begin{itemize}
   \item The sign $(-1)^{\epsilon(s,j)}$ is the Koszul sign for $A_\infty$ algebras in cohomological grading. The explicit formula is
@@ -115,6 +156,13 @@ Here:
   the same identity $d_{\mathrm{bar}}^2=0$, differing only by signs absorbed
   into the definition of~$m_k$ via the desuspension isomorphism
   $m_k = \pm\, s\circ \mu_k\circ(s^{-1})^{\otimes k}$.
+  Concretely, the two sign conventions yield the same
+  $d_{\mathrm{bar}}^2 = 0$ because the desuspension isomorphism
+  $s^{-1}$ converts the Koszul sign
+  $(-1)^{(j-1)(|\bar a_1|+\cdots+|\bar a_s|)}$ (with $|\bar a_i| = |a_i|-1$)
+  into $(-1)^{|a_1|+\cdots+|a_s|}$ after absorbing the factors of
+  $(-1)^{j-1}$ from $s^{-1}$; the resulting quadratic identities are
+  identical term by term.
   In particular, for $j=1$: $\epsilon(s,1)=|a_1|+\cdots+|a_s|$,
   so $Q=m_1$ is a graded derivation of every~$m_k$.}
   \item The notation $m_i(-\mid \Lambda_{[s+1,\dots,s+j]},-;\bm\lambda^{\mathrm{out}})$ means:
@@ -126,7 +174,7 @@ Here:
 \end{itemize}
 \begin{remark}[Spectral substitution principle]
 \label{rmk:spectral-substitution}
-Equation \eqref{eq:ainfty-relation-raw} encodes that \emph{when a block of inputs is fused first}, the correct spectral parameter inserted in the outer operation is the \emph{sum} of the inner $\lambda$'s, reflecting translation covariance and the convention that all $\lambda_i$ are differences relative to the last slot---the algebraic avatar of momentum conservation for formal distributions.
+Equation \eqref{eq:ainfty-relation-raw} encodes that \emph{when a block of inputs is fused first}, the correct spectral parameter inserted in the outer operation is the \emph{sum} of the inner $\lambda$'s, reflecting translation covariance and the convention that all $\lambda_i$ are differences relative to the last slot, the algebraic avatar of momentum conservation for formal distributions.
 \end{remark}
 \end{definition}
 
@@ -159,6 +207,30 @@ As in Section~\ref{sec:Ainfty-to-PVA}, define for $[a],[b]\in H^\bullet(A,Q)$:
 \{[a]{}_\lambda [b]\} &:= \Bigl[\, \frac12\bigl(m_2^{\mathrm{sing}}(a,b) - (-1)^{(|a|+1)(|b|+1)}\; \mathrm{e}^{-(\lambda+\partial)\partial_\lambda}\,m_2^{\mathrm{sing}}(b,a)\bigr)\,\Bigr].
 \end{align}
 The exponential operator encodes the transformation $\lambda\mapsto -\lambda-\partial$ required by vertex skewsymmetry. (It acts on formal series by the standard rule $\mathrm{e}^{\alpha\partial_\lambda}f(\lambda)=f(\lambda+\alpha)$.)
+
+\smallskip\noindent
+\emph{Verification of the exponential operator.}\;
+The operator $\mathrm{e}^{\alpha\partial_\lambda}$ acts on $f(\lambda)$ by
+$f(\lambda+\alpha)$.  Setting $\alpha = -(\lambda+\partial)$ gives
+$f(\lambda) \mapsto f(\lambda - \lambda - \partial) = f(-\partial)$,
+which is precisely the vertex algebra skew-symmetry substitution
+$\lambda \to -\lambda - \partial$.  The sign
+$(-1)^{(|a|+1)(|b|+1)}$ is the Koszul sign for the $(-1)$-shifted
+bracket: the shifted degrees are $|a|+1$ and $|b|+1$, and the bracket
+has degree $-1$, so the transposition sign is
+$(-1)^{(|a|+1)(|b|+1)}$.
+
+\smallskip\noindent
+\emph{Symmetrisation in the product.}\;
+The symmetrisation in~\eqref{eq:prod-def} is necessary because $m_2$ is
+not graded-commutative: it encodes the full OPE, not just the
+commutative normally-ordered product.  The factor $\frac{1}{2}$ is
+well-defined in characteristic~$0$ (a standing hypothesis on the ground
+field, cf.\ Definition~\ref{def:ainfty_chiral}).  If
+$m_2^{\mathrm{reg}}$ is already graded-commutative (as for the
+Heisenberg algebra), the symmetrisation is redundant and
+$[a]\cdot[b] = [m_2^{\mathrm{reg}}(a,b)]$.
+
 We will show these are well-defined and satisfy the PVA axioms.
 
 \subsection{Relationship to physical constructions}
@@ -206,9 +278,9 @@ Costello--Dimofte--Gaiotto \cite{CDG20} state that ``an $A_\infty$ analog of a v
 As insertion points collide, the operations decompose according to the boundary stratification of $\FM_k(\C)$.  This \emph{cluster factorization} axiom is the bridge between the $m_k$ and the operadic structure of~$\OHT$.
 
 \begin{theorem}[Cluster Factorization (Homotopy-Commutative Form);
-\ClaimStatusProvedHere]
+\ClaimStatusProvedElsewhere]
 \label{thm:cluster_factorization_homotopy}
-Let $(\A, \{m_k\})$ be a logarithmic $\SCchtop$-algebra (Definition~\ref{def:log-SC-algebra}) and let $\pi = \{S_1,\ldots,S_r\}$ be a partition of $\{1,\ldots,k\}$ with $|S_j| = k_j$. As points $\{z_i\}_{i \in S_j}$ collide to cluster centers $w_j$ (a limit within $\FM_k(\C)$), the operations satisfy
+Let $(\A, \{m_k\})$ be a logarithmic $\SCchtop$-algebra (a $C_\ast(W(\SCchtop))$-algebra whose weight forms factor as $\omega_k = \omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}$ on $\FM_k(\C) \times \Conf_k(\R)$; the full definition is Definition~\ref{def:log-SC-algebra}) and let $\pi = \{S_1,\ldots,S_r\}$ be a partition of $\{1,\ldots,k\}$ with $|S_j| = k_j$. As points $\{z_i\}_{i \in S_j}$ collide to cluster centers $w_j$ (a limit within $\FM_k(\C)$), the operations satisfy
 \begin{equation}
 \label{eq:cluster_factorization}
 \lim_{z_i \to w_j} m_k(O_1,\ldots,O_k) = \sum_{\sigma \in \Sh(\pi)} (-1)^{\varepsilon(\sigma;O)} \, m_r\big(O'_{\sigma(1)},\ldots,O'_{\sigma(r)}\big),
@@ -224,17 +296,9 @@ operations carry a homotopy-commutative structure induced by the symmetric
 group action on $\FM_k(\C)$. For the planar (non-commutative) specialization,
 only the identity shuffle $\sigma=\mathrm{id}$ contributes, and the sum
 reduces to a single term.
-The shadow tower of the chiral factor carries a nonabelian Hodge triple
-$(\Theta_\cA, M_\cA, h_\cA)$
-(in the nonabelian Hodge package of Volume~I): the MC element $\Theta_\cA$
-(flat side, $\bC$-direction) and the shadow Higgs field $M_\cA$
-(Higgs side) are mediated by the Shapovalov form $h_\cA$
-(harmonic side), and the depth decomposition
-$d = 1 + d_{\mathrm{arith}} + d_{\mathrm{alg}}$ is the Hodge
-decomposition of this triple.
 \end{theorem}
 
-\begin{proof}[Proof strategy]
+\begin{proof}[Proof outline; complete details in Appendix~\ref{app:FM_Stokes}]
 The theorem follows from three ingredients:
 
 \textbf{Step 1 (Geometric):} The boundary stratum $D_\pi \subset \partial \FM_k(\C)$ corresponding to partition $\pi$ is canonically isomorphic to
@@ -254,6 +318,16 @@ up to shuffle signs.
 Complete details, including orientation/sign conventions, appear in Appendix \ref{app:FM_Stokes}.
 \end{proof}
 
+\begin{remark}[Nonabelian Hodge shadow; \ClaimStatusConjectured]
+\label{rem:nonabelian_hodge_shadow}
+The shadow tower of the chiral factor is expected to carry a nonabelian Hodge triple
+$(\Theta_\cA, M_\cA, h_\cA)$:
+the MC element $\Theta_\cA$ (flat side, $\bC$-direction), a shadow Higgs field $M_\cA$
+(Higgs side), and a Shapovalov-type form $h_\cA$ (harmonic side), with the depth decomposition
+$d = 1 + d_{\mathrm{arith}} + d_{\mathrm{alg}}$ arising as the Hodge
+decomposition of this triple.  This structure is not used in the proof of the cluster factorization theorem; its precise formulation requires the nonabelian Hodge package developed in Volume~I.
+\end{remark}
+
 \paragraph{Remark 4.6 (Factorization as operadic composition).} Cluster factorization (\ref{eq:cluster_factorization}) is precisely the statement that $\A$ is an algebra over the chain operad $\OHT=C_\ast(W(\SCchtop))$: boundary faces in $\FM_k(\C)$ encode operadic compositions in the closed colour and ordered gluings along $\R$ encode open-colour compositions; Stokes' theorem (Section \ref{sec:FM_calculus}) supplies the coherence.
 
 \subsection{Explicit coend formula and operadic composition}
@@ -271,6 +345,12 @@ Using the $W$--model, the universal element determining $m_k$ is
 \]
 Closed-colour factors record holomorphic collisions; open-colour factors record ordered
 times; the $W$--parameters on internal edges control homotopies.
+The coend exists because the source category $\mathrm{Trees}_k$ is finite
+(finitely many labelled rooted trees with $k$ leaves) and all tensor
+products are over a field of characteristic~$0$.
+Remark~4.9 below clarifies: the vertex-wise factors in the formula are
+determined by the output colour of each vertex, not by an independent
+product decomposition.
 
 \begin{example}[Binary Operation $m_2$ from the Coend]
 For $k=2$, the only tree is the corolla with one internal vertex and two leaves. The coend formula yields
@@ -284,6 +364,7 @@ Explicitly, for operators $a, b \in \A$ at positions $(t_1, z_1), (t_2, z_2)$:
 m_2(a,b) = \int_{\Gamma \subset \FM_2(\C)} \int_{t_1 < t_2} K(z_1 - z_2, t_1 - t_2) \, a(t_1,z_1) \otimes b(t_2,z_2) \, dt_1 \, dt_2,
 \]
 where $K$ is the propagator kernel; for physical realizations it is supplied by Theorem~\ref{thm:physics-bridge}.
+This integral formula applies to physical realizations satisfying Theorem~\ref{thm:physics-bridge}; for abstract logarithmic $\SCchtop$-algebras, the operation $m_2$ is defined directly by the operad action.
 \end{example}
 
 \paragraph{Remark 4.9 (Boardman--Vogt resolution details).}
@@ -303,18 +384,29 @@ We now prove sesquilinearity axioms \eqref{eq:sesqui-left}--\eqref{eq:sesqui-rig
 Here we use the \textbf{consecutive-difference convention}: the spectral
 parameter $\lambda_i$ is associated to the difference $z_i - z_{i+1}$
 between adjacent insertion points. The translation $z_i\mapsto z_i+\varepsilon$
-then shifts both $\lambda_{i-1}$ (by $+\varepsilon$) and $\lambda_i$ (by
-$-\varepsilon$), yielding the effective formulae below. This convention
-differs from the independent-parameter convention of
-equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}; the two are
-reconciled in the note following those equations.
+then shifts $\lambda_{i-1} = z_{i-1}-z_i$ by $-\varepsilon$ and
+$\lambda_i = z_i - z_{i+1}$ by $+\varepsilon$.
+This convention is related to the independent-parameter convention of
+equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} by the
+change of variables~\eqref{eq:indep-to-consec}.
 
 Let $\partial : \A \to \A$ denote holomorphic translation in $z$. Then the operations $m_k$ satisfy:
 \begin{align}
-m_k(\partial a_1, a_2, \ldots, a_k) &= -\lambda_1 \, m_k(a_1, a_2, \ldots, a_k), \label{eq:sesqui_explicit_1} \\
-m_k(a_1, \ldots, a_{i-1}, \partial a_i, a_{i+1}, \ldots, a_k) &= (\partial + \lambda_1 + \cdots + \lambda_{i-1}) m_k(a_1, \ldots, a_k) \label{eq:sesqui_explicit_i}
+\label{eq:sesqui_explicit_1}
+m_k(\partial a_1, a_2, \ldots, a_k)
+  &= -(\lambda_1 + \lambda_2 + \cdots + \lambda_{k-1})\, m_k(a_1, a_2, \ldots, a_k),\\
+\label{eq:sesqui_explicit_i}
+m_k(a_1, \ldots, a_{i-1}, \partial a_i, a_{i+1}, \ldots, a_k)
+  &= -(\lambda_i + \lambda_{i+1} + \cdots + \lambda_{k-1})\, m_k(a_1, \ldots, a_k),
+  \quad 2\le i\le k-1,\\
+\label{eq:sesqui_explicit_k}
+m_k(a_1, \ldots, a_{k-1}, \partial a_k)
+  &= \Bigl(\partial + \sum_{j=1}^{k-1} j\,\lambda_j\Bigr)\, m_k(a_1, \ldots, a_k).
 \end{align}
-for $2 \leq i \leq k$.
+Note that \eqref{eq:sesqui_explicit_1} is the $i=1$ case of \eqref{eq:sesqui_explicit_i};
+for $k=2$ it reduces to $-\lambda_1\,m_2$.
+These are obtained from \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}
+via the change of variables~\eqref{eq:indep-to-consec}.
 \end{lemma}
 
 \begin{proof}
@@ -340,8 +432,8 @@ convention).  The key consequence is: translating a single insertion
 point $z_i \mapsto z_i + \varepsilon$ while keeping all others fixed is
 \emph{not} the simultaneous translation (which is trivial), but
 rather a non-trivial operation that changes the differences
-$\lambda_{i-1} \mapsto \lambda_{i-1} + \varepsilon$ and
-$\lambda_i \mapsto \lambda_i - \varepsilon$.
+$\lambda_{i-1} \mapsto \lambda_{i-1} - \varepsilon$ and
+$\lambda_i \mapsto \lambda_i + \varepsilon$.
 
 \medskip\noindent
 \textbf{Step 2 (Sesquilinearity for the first input).}
@@ -385,73 +477,84 @@ and \eqref{eq:sesqui-F-spectral}:
   m_k(\partial a_1, a_2, \ldots, a_k)
   = \partial_{\lambda_1} m_k(a_1, \ldots, a_k).
 \]
-In the consecutive-difference convention,
-$\partial_{\lambda_1} = -(-\lambda_1) = -\lambda_1$ acting as
-multiplication (not differentiation with respect to $\lambda_1$,
-which would be the wrong interpretation).  More precisely: since
-$\lambda_1 = z_1 - z_2$ and the operation $m_k$ is a formal
-Laurent series $\sum c_n \lambda_1^n$, substituting
-$\lambda_1 + \varepsilon$ and extracting the first-order term
-gives $\varepsilon \sum n\, c_n \lambda_1^{n-1}$.  But the
-defining identity of the mode expansion gives
-$\partial_{\lambda_1} m_k = -\lambda_1 \cdot m_k$ (the
-substitution $z_1 \mapsto z_1 + \varepsilon$ acts on the Laurent
-expansion by the shift operator, whose infinitesimal generator on the
-coefficients is multiplication by $-\lambda_1$).
-This establishes \eqref{eq:sesqui_explicit_1}.
+This derives the \emph{position-space} identity
+$m_k(\partial a_1,\ldots) = \partial_{\lambda_1} m_k$
+(the formal derivative with respect to $\lambda_1$).
+The sesquilinearity identity \eqref{eq:sesqui_explicit_1} asserts
+a different operation: multiplication by~$-\lambda_1$.  These two
+are \emph{not} the same as operators on formal Laurent series.  The
+correct relationship comes from the Borel correspondence.
+
+The $A_\infty$ operations, when expressed in the divided-power generating function
+$m_k = \sum a_{(n)}b\,\lambda_1^n/n!$ (the $\lambda$-bracket of vertex algebra
+theory), satisfy the identity by mode calculation:
+$(Ta)_{(n)} = -n\,a_{(n-1)}$ (translation covariance of modes) gives
+\begin{align*}
+  m_k(\partial a_1,\ldots;\lambda_1,\ldots)
+  &= \textstyle\sum_{n\ge 0} (\partial a_1)_{(n)}\cdots\, \frac{\lambda_1^n}{n!}
+  = \textstyle\sum_{n\ge 0} (-n)\, a_{(n-1)}\cdots\, \frac{\lambda_1^n}{n!}\\
+  &= -\lambda_1 \textstyle\sum_{m\ge 0} a_{(m)}\cdots\, \frac{\lambda_1^m}{m!}
+  = -\lambda_1\, m_k(a_1,\ldots;\lambda_1,\ldots).
+\end{align*}
+This establishes $m_k(\partial a_1,\ldots) = -\lambda_1\, m_k$ in the
+consecutive convention for $k=2$ (where the two conventions coincide).
+For $k\ge 3$, the mode argument yields the same identity with
+$\lambda_1$ replaced by $\lambda_1^{\mathrm{indep}} = z_1 - z_k$, i.e.\
+$m_k(\partial a_1,\ldots) = -\lambda_1^{\mathrm{indep}}\, m_k$.
+Converting via \eqref{eq:indep-to-consec}:
+$\lambda_1^{\mathrm{indep}} = \sum_{j=1}^{k-1}\lambda_j^{\mathrm{consec}}$,
+giving \eqref{eq:sesqui_explicit_1}.
 
 \medskip\noindent
-\textbf{Step 3 (Sesquilinearity for the $i$-th input, $i \geq 2$).}
-Now translate $z_i \mapsto z_i + \varepsilon$ with all other $z_j$
-($j \neq i$) fixed.  In the consecutive-difference convention,
-this shifts $\lambda_{i-1} = z_{i-1} - z_i$ to
-$\lambda_{i-1} - \varepsilon$ and $\lambda_i = z_i - z_{i+1}$ to
-$\lambda_i + \varepsilon$.  All other $\lambda_j$ are unchanged.
+\textbf{Step 3 (Sesquilinearity for the $i$-th input, $2\le i\le k$).}
+The cleanest route uses the independent-parameter convention
+$\lambda_j^{\mathrm{indep}} = z_j - z_k$ and then converts via
+\eqref{eq:indep-to-consec}.
 
-On the input side: $a_i(z_i + \varepsilon) = a_i + \varepsilon\,
-\partial a_i + O(\varepsilon^2)$.
+\emph{Case $2\le i\le k-1$.}\;
+In the independent convention, translating $z_i\mapsto z_i+\varepsilon$
+shifts only $\lambda_i^{\mathrm{indep}}$ (by $+\varepsilon$); the reference
+point $z_k$ is unchanged, so there is no output translation.
+Repeating the mode argument of Step~2 in the $i$-th variable gives
+$m_k(\ldots,\partial a_i,\ldots) = -\lambda_i^{\mathrm{indep}}\,m_k$.
+Converting:
+$\lambda_i^{\mathrm{indep}} = \sum_{j=i}^{k-1}\lambda_j^{\mathrm{consec}}$,
+which gives~\eqref{eq:sesqui_explicit_i}.
 
-On the output side: $m_k$ also carries implicit dependence on
-$z_i$ through the output location.  The output of $m_k$ is an
-element of $A$ at position $z_k$, and $\partial$ acts on it by
-translation of $z_k$.  The simultaneous-translation
-identity gives: translating \emph{all} insertions by $\varepsilon$
-acts as $e^{\varepsilon\partial}$ on the output (since
-$\FM_k(\C)$ is translation-invariant).  Therefore, translating
-only $z_i$ by $\varepsilon$ while keeping others fixed is
-equivalent to (i)~translating all by $\varepsilon$ (contributing
-$+\varepsilon\partial$ on the output), then (ii)~translating all
-$z_j$ with $j \neq i$ back by $-\varepsilon$ (contributing spectral
-shifts $-\varepsilon$ on $\lambda_j$ for $j < i$ and
-$+\varepsilon$ on $\lambda_j$ for $j \geq i$).
-
-Combining: the $O(\varepsilon)$ coefficient gives
+\emph{Case $i=k$.}\;
+Translating $z_k\mapsto z_k+\varepsilon$ shifts every
+$\lambda_j^{\mathrm{indep}} = z_j - z_k$ by $-\varepsilon$ and
+also shifts the output position by $+\varepsilon$, contributing
+$+\varepsilon\partial$.
+The $O(\varepsilon)$ coefficient gives
+$m_k(\ldots,\partial a_k)
+ = \bigl(\partial + \sum_{j=1}^{k-1}\lambda_j^{\mathrm{indep}}\bigr)\,m_k$,
+which is~\eqref{eq:sesqui-right} in the independent convention.
+Converting via~\eqref{eq:indep-to-consec}:
 \[
-  m_k(a_1, \ldots, \partial a_i, \ldots, a_k)
-  = (\partial + \lambda_1 + \cdots + \lambda_{i-1})\,
-    m_k(a_1, \ldots, a_k),
+  \sum_{j=1}^{k-1}\lambda_j^{\mathrm{indep}}
+  = \sum_{j=1}^{k-1}\sum_{\ell=j}^{k-1}\lambda_\ell^{\mathrm{consec}}
+  = \sum_{\ell=1}^{k-1}\ell\,\lambda_\ell^{\mathrm{consec}},
 \]
-which is \eqref{eq:sesqui_explicit_i}.  The term $\partial$ comes
-from the output translation, and the terms $\lambda_1, \ldots,
-\lambda_{i-1}$ come from the spectral parameter shifts of
-$\lambda_1, \ldots, \lambda_{i-1}$ by $+\varepsilon$ (or
-equivalently, from the operator $-\partial_{\lambda_j}$ acting
-on the Laurent expansion).
+giving~\eqref{eq:sesqui_explicit_k}.
 
 \medskip\noindent
 \textbf{Step 4 (Convention reconciliation).}
-In the independent-parameter convention (where $\lambda_i = z_i -
-z_k$ relative to the rightmost slot), translating $z_i$ shifts only
-$\lambda_i$ and the output derivative.  For $1 \leq i \leq k-1$,
-the same argument gives
-$m_k(\ldots,\partial a_i,\ldots) = -\lambda_i \cdot m_k(\ldots)$
-(only $\lambda_i$ shifts, by $+\varepsilon$, and the output derivative
-is absent because $z_k$ is the reference point).  For $i=k$, translating
-$z_k$ shifts all $\lambda_j$ by $-\varepsilon$ and acts by $\partial$
-on the output, giving
-$m_k(\ldots,\partial a_k) = (\lambda_1+\cdots+\lambda_{k-1}+\partial)
-m_k(\ldots)$.  These are
-equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}.
+Equations
+\eqref{eq:sesqui_explicit_1}--\eqref{eq:sesqui_explicit_k} in the
+consecutive convention and
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} in the
+independent convention are related by the linear change of variables
+\eqref{eq:indep-to-consec}:
+$\lambda_i^{\mathrm{indep}} = \sum_{j=i}^{k-1}\lambda_j^{\mathrm{consec}}$.
+In particular:
+for $1\le i\le k-1$, the independent-convention
+identity $-\lambda_i^{\mathrm{indep}}\, m_k$ becomes
+$-(\lambda_i+\cdots+\lambda_{k-1})^{\mathrm{consec}}\, m_k$;
+and for $i=k$, the sum
+$\sum_{j=1}^{k-1}\lambda_j^{\mathrm{indep}}$
+equals $\sum_{\ell=1}^{k-1}\ell\,\lambda_\ell^{\mathrm{consec}}$
+by interchanging the order of summation.
 \end{proof}
 \subsection{From $W(\mathsf{SC}^{\mathrm{ch,top}})$ to axioms and back}
 \label{sec:operad-to-axioms}
@@ -522,7 +625,9 @@ The \emph{spectral substitution} law follows from the geometry of the boundary i
 
 \medskip
 \textbf{(IV) Degree.}
-The degree of $m_k$ is $1 - k$, arising from the operadic suspension: the fundamental chain $[\FM_k(\C)] \times [E_1(\mathrm{ord})]$ has dimension $2(k-1) + (k-1) = 3(k-1)$ (before quotienting by translations/dilations), and after the dimension reduction and the operadic degree shift, $\deg(m_k) = 1 - k$ as in~\eqref{eq:mk-type}.
+The degree of $m_k$ is $2 - k$.  The bar complex $\barB(\cA) = T^c(s^{-1}\bar{\cA})$ carries a total differential $d_{\barB} = \sum_k d_k$ of cohomological degree $+1$.  Each $d_k$ is the coderivation with projection
+$d_k|_{(s^{-1}\bar{\cA})^{\otimes k}} = s^{-1} \circ m_k \circ s^{\otimes k}\colon (s^{-1}\cA)^{\otimes k} \to s^{-1}\cA$.
+The degree of this composition is $\deg(s^{-1}) + \deg(m_k) + k\cdot\deg(s) = -1 + \deg(m_k) + k$, and requiring this to equal $+1$ gives $\deg(m_k) = 2 - k$, in agreement with~\eqref{eq:mk-type}.  Concretely: $m_1$ (the BRST differential) has degree~$+1$, $m_2$ (the binary product) has degree~$0$, and $m_3$ (the first homotopy) has degree~$-1$.
 \end{proof}
 
 \subsubsection{Rectification: from axioms to a $W(\mathsf{SC}^{\mathrm{ch,top}})$--algebra}
@@ -551,18 +656,18 @@ automatic:
 \item Continuity follows from the smooth dependence of the Feynman
   integrals on the test functions and the topology of the configuration
   spaces $\FM_k(\C) \times \Conf_k^{<}(\R)$.
-\item Truncation ($m_k = 0$ for $k \gg 0$) holds for theories whose
-  interactions are polynomial: the Feynman diagram expansion has at most
-  $L = k + n_2 - (k + n_2) + 1$ loops (cf.\
-  Proposition~\ref{prop:vir-truncation} for the Virasoro case).
-  For a theory with $n$-valent interactions whose vertex valence
-  exceeds the $\mu$-slot count, $m_k = 0$ for $k \gg 0$ by
-  combinatorial constraints on the graph structure.  When the
-  $\mu$-degree equals the vertex valence (as for Virasoro, where
-  each cubic vertex has exactly 2 $\mu$-slots), no truncation
-  occurs and the $A_\infty$ structure is infinite; tameness
-  condition~(c) must then be verified by convergence arguments on
-  the completed tensor algebra.
+\item Truncation ($m_k = 0$ for $k \gg 0$) holds when the loop order of
+  each Feynman diagram contributing to $m_k$ is bounded by a function
+  that eventually exceeds the loop budget.  Concretely, for a theory
+  with $n$-valent interactions whose vertex valence strictly exceeds the
+  $\mu$-slot count, the graph combinatorics force $m_k = 0$ for
+  $k \gg 0$.  When the $\mu$-degree equals the vertex valence (as for
+  Virasoro, where each cubic vertex has exactly 2 $\mu$-slots), no such
+  bound applies: diagrams of arbitrarily high loop order contribute at
+  every arity, the $A_\infty$ structure is infinite
+  (cf.\ Proposition~\ref{prop:vir-truncation}), and tameness
+  condition~(c) must be replaced by convergence of the bar codifferential
+  on the completed cofree coalgebra.
 \end{enumerate}
 \end{remark}
 
@@ -786,8 +891,8 @@ of Remark~\ref{rem:lagrangian-geometry}.
 The $A_\infty$ relations \eqref{eq:ainfty-relation-raw} are
 Stokes' theorem on the boundary strata of this correspondence.
 Each codimension-$1$ face of $\FM_k(\C)$ is a collision stratum
-of the Lagrangian---a locus where two or more sheets of
-$\mathcal{L}$ meet transversally---and the sum of residues
+of the Lagrangian (a locus where two or more sheets of
+$\mathcal{L}$ meet transversally), and the sum of residues
 along these faces vanishes by Stokes, which is the Stasheff
 identity $\sum m_i\circ m_j = 0$.  The spectral substitution
 law (Remark~\ref{rmk:spectral-substitution}) is the cluster

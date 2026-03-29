@@ -149,7 +149,7 @@ We verify each term vanishes:
 
 This is precisely the FM--Stokes--Arnold package developed in Section \ref{sec:FM_calculus} and Appendix \ref{app:FM_Stokes}.
 
-\textbf{(iii) $d_{A_\infty}^2 = 0$:} This is the $A_\infty$ identity (Definition \ref{def:ainfty_chiral}, equation \eqref{eq:ainfty-relation-raw}). Explicitly:
+\textbf{(iii) $d_{A_\infty}^2 = 0$:} The full condition $d_{\overline{B}}^2 = 0$ is equivalent to the $A_\infty$ identity.  The six-term decomposition shows that this total condition factors into three individual conditions ($d_Q^2 = 0$, $d_{\mathrm{res}}^2 = 0$, $d_{A_\infty}^2 = 0$) and three compatibility conditions.  Item~(iii) encodes the purely algebraic part of the $A_\infty$ identity (the composition relations among the $m_k$ (Definition \ref{def:ainfty_chiral}, equation \eqref{eq:ainfty-relation-raw})) while items~(i)--(ii) and (iv)--(vi) encode the compatibility with the differential~$Q$, the residue structure, and the cluster factorization.  Explicitly:
 \begin{equation}
 \sum_{i+j=k+1} (-1)^{\varepsilon(i,j)} m_i \circ m_j = 0.
 \end{equation}
@@ -283,6 +283,748 @@ The GLZ Koszul dual is recovered because, in the quadratic case, the cobar const
 The Maurer--Cartan bijection follows from the standard argument: morphisms $\mathcal{A} \to \mathcal{B}$ correspond to twisting cochains $\tau : \overline{B}_{\text{ch}}(\mathcal{A}) \to \mathcal{B}$ satisfying $d\tau + \frac{1}{2}[\tau, \tau] = 0$.
 \end{proof}
 
+\subsection{ChiralBar as classifying space}
+\label{subsec:chiralbar-classifying-space}
+
+The bar-cobar adjunction (Theorem~\ref{thm:bar_cobar_adjunction})
+and its GLZ specialization (Theorem~\ref{thm:GLZ_compatibility})
+produce a bijection between coalgebra maps into the bar complex
+and Maurer--Cartan elements in a convolution algebra.  This is
+the $0$-simplex shadow of a richer statement: the bar complex
+$\barB_{\mathrm{ch}}(\cA)$ is the \emph{classifying space} of
+$\cA$-deformations, in the sense that it represents the formal
+moduli functor of Maurer--Cartan elements as a simplicial set.
+The Lurie--Pridham correspondence between formal moduli problems
+and dg Lie algebras, when read through the bar-cobar lens,
+identifies $\barB_{\mathrm{ch}}(\cA)$ as the universal target
+for twisting morphisms --- the chiral analogue of the classifying
+space $BG$ for principal bundles.
+
+\begin{theorem}[Representability; \ClaimStatusProvedHere]
+\label{thm:bar-representability}
+\index{bar complex!representability|textbf}
+\index{classifying space!chiral bar complex|textbf}
+\index{Maurer--Cartan!simplicial set!representability}
+For any logarithmic $\SCchtop$-algebra~$\cA$, the bar
+construction $\barB_{\mathrm{ch}}(\cA)$ represents the functor
+of Maurer--Cartan elements: for any conilpotent
+$\SCchtop$-coalgebra~$\cC$,
+\begin{equation}\label{eq:bar-representability}
+\mathrm{Map}_{\mathrm{CoAlg}}(\cC,\, \barB(\cA))
+\;\simeq\;
+\MC_\bullet\!\bigl(\mathrm{Conv}(\cC, \cA)\bigr)
+\end{equation}
+as simplicial sets, where $\MC_\bullet$ is the Dupont--Sullivan
+simplicial Maurer--Cartan space.  This is the Lurie--Pridham
+correspondence: $\barB(\cA)$ represents the formal moduli problem
+of $\cA$-deformations.
+\end{theorem}
+
+\begin{proof}
+The proof proceeds in two stages: the set-level bijection
+(already established) and the simplicial upgrade.
+
+\medskip\noindent
+\textbf{Stage 1: $0$-simplices.}
+By Theorem~\ref{thm:bar_cobar_adjunction}, there is a natural
+bijection
+\[
+\Hom_{\mathrm{CoAlg}}(\cC,\, \barB(\cA))
+\;\cong\;
+\mathrm{Tw}(\cC, \cA)
+\;\cong\;
+\MC\!\bigl(\mathrm{Conv}(\cC, \cA)\bigr),
+\]
+where $\mathrm{Tw}(\cC, \cA)$ denotes twisting morphisms and
+$\mathrm{Conv}(\cC, \cA)
+= \Hom(\cC, \cA)$ is the convolution dg Lie algebra
+(the strict model $\Convstr$ of
+Convention~\ref{conv:vol2-strict-models}).  A twisting morphism
+$\tau\colon \cC \to \cA$ is precisely a degree-$(-1)$ element
+satisfying $d\tau + \frac{1}{2}[\tau,\tau] = 0$ in
+$\mathrm{Conv}(\cC, \cA)$, hence a Maurer--Cartan element.
+
+\begin{remark}[Two convolution structures]
+\label{rem:two-convolutions}
+The convolution dg Lie algebra $\mathrm{Conv}(\cC, \cA)$ arises in two equivalent ways: (i)~when $\cC = \barB(\cA)$ is the bar construction, the cooperad structure on $\barB(\cA)$ and the operad structure on $\mathrm{End}_\cA$ give an $L_\infty$-algebra via the operadic convolution of \cite{LV12}, Chapter~6; (ii)~for a general conilpotent coalgebra $\cC$ and algebra $\cA$, the associative convolution product $f \star g = \mu_\cA \circ (f \otimes g) \circ \Delta_\cC$ on $\mathrm{Hom}(\cC, \cA)$ yields a dg Lie algebra by taking graded commutators.  When $\cC = \barB(\cA)$, the two constructions agree because the cooperad structure on $\barB(\cA)$ is determined by the coalgebra structure via the cofree property.  In the representability theorems above, we use convention~(ii) for general $\cC$ and convention~(i) when $\cC = \barB(\cA)$.
+\end{remark}
+
+The universal twisting morphism
+$\tau_{\mathrm{univ}}\colon \barB(\cA) \twoheadrightarrow
+s^{-1}\bar{\cA}$ witnesses the universality: every
+$\tau\colon \cC \to \cA$ factors uniquely through
+$\tau_{\mathrm{univ}}$ via a coalgebra map
+$f\colon \cC \to \barB(\cA)$.  This establishes the bijection on
+$0$-simplices.
+
+\medskip\noindent
+\textbf{Stage 2: Simplicial enrichment.}
+The $n$-simplices of $\MC_\bullet(\mathrm{Conv}(\cC, \cA))$
+are Maurer--Cartan elements in
+$\mathrm{Conv}(\cC, \cA) \otimes \Omega_n$,
+where $\Omega_n = \Omega^\bullet_{\mathrm{poly}}(\Delta^n)$
+is the Sullivan algebra of polynomial differential forms
+on the standard $n$-simplex
+(Dupont~\cite{Dup76}; Robert-Nicoud--Vallette~\cite{RNV20},
+\S3).  The face and degeneracy maps are induced by the
+cosimplicial structure of $\{\Omega_n\}_{n \geq 0}$.
+
+The coalgebra structure on $\barB(\cA) \otimes \Omega_n$ arises from the diagonal on $\Omega_n$: the Sullivan algebra $\Omega_n$ is a commutative dg algebra, hence carries a cocommutative coalgebra structure via the multiplication map $\mu: \Omega_n \otimes \Omega_n \to \Omega_n$ dualized.  Tensoring a conilpotent coalgebra with a coalgebra of finite type (over a field of characteristic zero) produces a conilpotent coalgebra.  Since $\Omega_n$ is of finite type (finite-dimensional in each degree), $\barB(\cA) \otimes \Omega_n$ is conilpotent.
+The bar-cobar adjunction commutes with this
+tensoring:
+\[
+\Hom_{\mathrm{CoAlg}}\!\bigl(\cC,\,
+  \barB(\cA) \otimes \Omega_n\bigr)
+\;\cong\;
+\MC\!\bigl(\mathrm{Conv}(\cC, \cA) \otimes \Omega_n\bigr).
+\]
+The left-hand side, assembled over all~$n$, gives the simplicial
+mapping space
+$\mathrm{Map}_{\mathrm{CoAlg}}(\cC, \barB(\cA))$;
+the right-hand side gives
+$\MC_\bullet(\mathrm{Conv}(\cC, \cA))$.
+Naturality in~$n$ (functoriality of the cosimplicial structure)
+ensures the isomorphism is simplicial.
+
+\medskip\noindent
+\textbf{Formal moduli interpretation.}
+By the Lurie--Pridham correspondence
+(Lurie~\cite{Lur11}, Theorem~5.3;
+Pridham~\cite{Pri10}, Theorem~4.26),
+formal moduli problems over a field of characteristic zero are
+equivalent to dg Lie algebras up to quasi-isomorphism.
+(Completeness of $\mathrm{Conv}(\cC, \cA)$, required for $\MC_\bullet$ to be well-defined, follows from the conilpotence of $\cC$: the coradical filtration dualises to an inverse-limit filtration making $\mathrm{Conv}(\cC, \cA)$ a complete filtered dg Lie algebra; see the proof of Theorem~\ref{thm:formal-moduli-twisting} below for the detailed argument.)
+The dg
+Lie algebra governing $\cA$-deformations is
+$\mathrm{Conv}(\cC, \cA)$, and its associated formal moduli
+problem is the functor
+$\cC \mapsto \MC_\bullet(\mathrm{Conv}(\cC, \cA))$.
+The representability~\eqref{eq:bar-representability} says this
+functor is representable by~$\barB(\cA)$: the bar complex
+\emph{is} the classifying space of the formal moduli problem.
+\end{proof}
+
+\begin{definition}[Chiral $\cA$-torsor]
+\label{def:chiral-torsor}
+\index{torsor!chiral|textbf}
+\index{chiral torsor|textbf}
+Let $\cA$ be a logarithmic $\SCchtop$-algebra on a smooth
+curve~$X$.  A \emph{chiral $\cA$-torsor} on~$X$ is a
+factorization module $\cT$ over~$\cA$ on $\Ran(X)$ equipped with:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item A free transitive action
+  $\mu\colon \cA \boxtimes \cT \to \Delta_!(\cT)$
+  compatible with the chiral product: the diagram
+  \[
+  \begin{gathered}
+  \cA \boxtimes \cA \boxtimes \cT
+    \xrightarrow{\;\mu_{12} \boxtimes \mathrm{id}\;}
+    \Delta_!(\cA) \boxtimes \cT
+    \xrightarrow{\;\mu\;}
+    \Delta_!(\cT) \\
+  \Big\Vert \\
+  \cA \boxtimes \cA \boxtimes \cT
+    \xrightarrow{\;\mathrm{id} \boxtimes \mu\;}
+    \cA \boxtimes \Delta_!(\cT)
+    \xrightarrow{\;\mu\;}
+    \Delta_!(\cT)
+  \end{gathered}
+  \]
+  commutes, expressing associativity of the action through the
+  chiral product $\mu_{12}$.
+\item A trivialization: the fiber of~$\cT$ at each point
+  $x \in X$ is quasi-isomorphic to~$\cA$ as an
+  $\cA$-module.
+\item Factorization compatibility: for $x \neq y$,
+  $\cT(x,y) \simeq \cT(x) \otimes \cT(y)$.
+\end{enumerate}
+\end{definition}
+
+\begin{corollary}[Classifying space interpretation;
+\ClaimStatusProvedHere]
+\label{cor:classifying-space}
+\index{classifying space!chiral torsors|textbf}
+\index{torsor!classification by bar complex}
+The space of isomorphism classes of chiral $\cA$-torsors on~$X$
+is
+\begin{equation}\label{eq:classifying-space}
+\pi_0\!\Big(\MC_\bullet\!\bigl(
+  \mathrm{Conv}(\barB(\cA),\, \mathrm{End}_\cA)
+\bigr)\Big)
+\;\simeq\;
+\pi_0\!\Big(
+  \mathrm{Map}_{\mathrm{CoAlg}}\!\bigl(
+    \barB(\cA),\, \barB(\cA)
+  \bigr)
+\Big).
+\end{equation}
+In other words, $\barB(\cA)$ classifies chiral $\cA$-torsors,
+analogously to $BG$ classifying principal $G$-bundles.
+\end{corollary}
+
+\begin{proof}
+A chiral $\cA$-torsor (Definition~\ref{def:chiral-torsor}) is a
+factorization module locally isomorphic to~$\cA$, hence a
+twisting of the tautological $\cA$-module by a Maurer--Cartan
+element $\alpha \in
+\MC\!\bigl(\mathrm{Conv}(\barB(\cA), \mathrm{End}_\cA)\bigr)$.
+By the representability theorem
+(Theorem~\ref{thm:bar-representability}), such a twisting
+morphism $\tau\colon \barB(\cA) \to \mathrm{End}_\cA$ corresponds
+to a coalgebra map $f_\tau\colon \barB(\cA) \to
+\barB(\mathrm{End}_\cA)$.
+
+For \emph{self-torsors} ($\cA$ acting on itself),
+since $\cA$ acts on itself via the regular representation,
+the bar construction $\barB(\mathrm{End}_\cA)$ is Morita equivalent
+to $\barB(\cA)$; on the Koszul locus, this Morita equivalence
+promotes to a quasi-isomorphism of the underlying coalgebras.  The twisting
+morphism $\tau$ thus determines a coalgebra endomorphism
+$f_\tau\colon \barB(\cA) \to \barB(\cA)$.
+
+Two torsors $\cT, \cT'$ are isomorphic if and only if their
+Maurer--Cartan elements $\alpha, \alpha'$ are gauge-equivalent:
+connected by a path in
+$\MC_\bullet(\mathrm{Conv}(\barB(\cA), \mathrm{End}_\cA))$.
+Passing to $\pi_0$ identifies isomorphism classes of torsors with
+path-components of the simplicial set
+$\mathrm{Map}_{\mathrm{CoAlg}}(\barB(\cA), \barB(\cA))$.
+\end{proof}
+
+\begin{construction}[The tautological chiral module; \ClaimStatusProvedHere]
+\label{constr:tautological-bundle}
+
+Over the classifying coalgebra $\barB(\cA)$, we construct the universal chiral $\cA$-module $\cE_{\mathrm{univ}}$ with its flat connection.
+
+\textbf{Step 1: Fibers.} For a bar chain $\phi = [s^{-1}a_1 | \cdots | s^{-1}a_n] \in \barB^n(\cA)$ (a degree-$n$ element of the tensor coalgebra), define the fiber:
+$$\cE_{\mathrm{univ}}|_\phi \;:=\; \cA \cdot \{a_1, \ldots, a_n\}$$
+the $\cA$-module generated by the insertions $a_1, \ldots, a_n$. Concretely, this is the submodule of $\cA^{\otimes n}$ generated by applying all chiral operations to the tensor $a_1 \otimes \cdots \otimes a_n$.
+
+\textbf{Step 2: Connection.} The connection $\nabla$ on $\cE_{\mathrm{univ}}$ is the bar differential acting on the base:
+$$\nabla_\phi(v) \;:=\; d_{\barB}(\phi) \cdot v$$
+for $v \in \cE_{\mathrm{univ}}|_\phi$. Here $d_{\barB}(\phi)$ is the bar differential of the base point, and $\cdot$ denotes the module action extending by the Leibniz rule.
+
+\textbf{Step 3: Flatness.} The flatness of the connection is equivalent to $d_{\barB}^2 = 0$:
+$$\nabla^2(\phi)(v) = d_{\barB}^2(\phi) \cdot v = 0 \qquad \text{(at genus 0)}$$
+This is exactly the content of Volume~I Theorem~A: the bar differential squares to zero, equivalently, the $\Ainf$ relations hold.
+
+\textbf{Step 4: Curvature at genus $g \geq 1$.} At genus $g$, the connection acquires curvature:
+$$\nabla^2(\phi)(v) = d_{\barB}^2(\phi) \cdot v = \kappa(\cA) \cdot \omega_g \cdot v$$
+The tautological module is no longer flat --- it carries the conformal anomaly $\kappa(\cA) \cdot \omega_g$ as its curvature $2$-form. The sections of $\cE_{\mathrm{univ}}$ over $\overline{\cM}_g$ (the moduli of curves) are the conformal blocks of the chiral algebra $\cA$, and the curvature is the failure of conformal blocks to form a flat bundle.
+
+\textbf{Step 5: Pullback.} For any twisting morphism $\tau: \cC \to \cA$ (equivalently, a coalgebra map $f_\tau: \cC \to \barB(\cA)$ by Theorem~\ref{thm:bar-terminality}), the pullback $f_\tau^* \cE_{\mathrm{univ}}$ is a chiral $\cA$-module on $\cC$:
+$$f_\tau^* \cE_{\mathrm{univ}}|_c \;=\; \cE_{\mathrm{univ}}|_{f_\tau(c)} \;=\; \cA \cdot \{\tau(c^{(1)}), \ldots, \tau(c^{(n)})\}$$
+where $\Delta^{(n-1)}(c) = \sum c^{(1)} \otimes \cdots \otimes c^{(n)}$ is the iterated coproduct. The MC equation $\partial\tau + \tau \star \tau = 0$ ensures the pulled-back connection is compatible with the $\cA$-action.
+\end{construction}
+
+\begin{example}[Affine Kac--Moody]
+\label{ex:affine-classifying-space}
+\index{Kac--Moody!classifying space|textbf}
+\index{conformal block!as chiral torsor}
+For $\cA = \hat{\fg}_k$ (the affine Kac--Moody vertex algebra at
+level~$k$), the classifying space interpretation takes a
+concrete and classical form.
+
+\medskip\noindent
+\textbf{Torsors, conformal blocks, and opers.}
+A chiral $\hat{\fg}_k$-torsor on $X$ is a \emph{principal chiral
+$\hat{\fg}_k$-module} on $X$: a factorization module over
+$\hat{\fg}_k$ on $\Ran(X)$ that is locally isomorphic to
+$\hat{\fg}_k$ as a module over itself.  In the
+Beilinson--Drinfeld framework, this corresponds to a twisted
+$\cD$-module on $\operatorname{Bun}_G(X)$.  The space of \emph{conformal
+blocks} at marked points $(x_1,\ldots,x_n)$ with representations
+$(V_1,\ldots,V_n)$ is obtained from a chiral torsor by taking
+coinvariants:
+$\langle V_1,\ldots,V_n \rangle_X = H_0(X, \hat{\fg}_k \otimes
+\cT)$.  At the critical level $k = -h^\vee$, where the
+Feigin--Frenkel center acts, chiral torsors reduce to opers
+(flat $\check{G}$-connections on $X$).
+
+Concretely, the data of
+Definition~\ref{def:chiral-torsor} specialize to:
+\begin{itemize}
+\item The free transitive action $\mu$ is the current algebra
+  action $J^a(z) \cdot \cT \to \cT$ (the affine Lie algebra
+  $\hat{\fg}$ at level~$k$ acting on the module~$\cT$).
+\item The trivialization condition says $\cT$ is locally free as a
+  $\hat{\fg}_k$-module: at each $x \in X$, the fiber
+  $\cT_x \simeq \hat{\fg}_k$ as a representation.
+\item Factorization compatibility is the sewing axiom for
+  conformal blocks: insertions at disjoint points factorize.
+\end{itemize}
+The classifying space $\barB(\hat{\fg}_k)$ parametrizes these
+torsors: by Corollary~\ref{cor:classifying-space},
+$\pi_0(\mathrm{Map}_{\mathrm{CoAlg}}(\barB(\hat{\fg}_k),
+\barB(\hat{\fg}_k)))$ classifies chiral $\hat{\fg}_k$-torsors
+on~$X$ up to isomorphism.
+
+\medskip\noindent
+\textbf{Koszul dual and dual conformal blocks.}
+The Koszul dual $\cA^! = \hat{\fg}_{-k-2h^\vee}$ (at the
+dual level, via Feigin--Frenkel duality) governs the
+\emph{dual} conformal blocks: the contragredient representations
+at level $-k - 2h^\vee$.  The representability theorem
+(Theorem~\ref{thm:bar-representability}) gives
+\[
+\MC_\bullet\!\bigl(\mathrm{Conv}(\cC, \hat{\fg}_k)\bigr)
+\;\simeq\;
+\mathrm{Map}_{\mathrm{CoAlg}}(\cC, \barB(\hat{\fg}_k))
+\]
+for any conilpotent coalgebra~$\cC$, and the Koszul duality
+involution $(\cA^!)^! \simeq \cA$
+(Theorem~\ref{thm:duality-involution}) interchanges
+the two classifying spaces:
+$\barB(\hat{\fg}_k)^! \simeq \barB(\hat{\fg}_{-k-2h^\vee})$.
+
+\medskip\noindent
+\textbf{Genus $g \geq 1$: the conformal anomaly as gerbe.}
+At genus~$g \geq 1$, the tautological bundle acquires curvature
+$\kappa \cdot \omega_g$ (Construction~\ref{constr:tautological-bundle}).
+The modular characteristic $\kappa(\hat{\fg}_k)$ is defined in
+Volume~I as the leading coefficient of the bar obstruction; for
+the affine lineage it equals the level for the Heisenberg algebra
+and involves the Sugawara central charge for non-abelian~$\fg$.
+Explicitly, $\kappa(\cH_k) = k$ for the Heisenberg ($\dim\fg = 1$),
+while for simple~$\fg$ the modular characteristic is
+$\kappa(\hat{\fg}_k) = \dim\fg\cdot(k+h^\vee)\,/\,(2h^\vee)$
+(Volume~I, Theorem~D), with
+$\kappa(\hat{\fg}_{-k-2h^\vee}) = -\kappa(\hat{\fg}_k)$.  The
+genus-$g$ bar complex $\barB^{(g)}(\hat{\fg}_k)$ is a
+\emph{gerbe} over $\overline{\mathcal{M}}_g$ with
+characteristic class $k \cdot \lambda_g$, where
+$\lambda_g = c_1(\mathbb{E})$ is the first Chern class of the
+Hodge bundle $\mathbb{E} \to \overline{\mathcal{M}}_g$.
+Concretely:
+\begin{itemize}
+\item The curvature $\dfib^{\,2} = \kappa(\hat{\fg}_k) \cdot
+  \omega_g$ is the conformal anomaly: the failure of the
+  partition function $Z_{g,k}$ to be a function (rather than a
+  section of a line bundle) on~$\overline{\mathcal{M}}_g$.
+\item The characteristic class
+  $\kappa(\hat{\fg}_k) \cdot \lambda_g \in H^2(\overline{\mathcal{M}}_g)$,
+  with $\kappa(\hat{\fg}_k) = \dim\fg\cdot(k+h^\vee)\,/\,(2h^\vee)$, is
+  the modular characteristic times the Hodge class (Vol~I,
+  Theorem~D).
+\item At the critical level $k = -h^\vee$, the modular
+  characteristic is $\kappa(\hat{\fg}_{-h^\vee}) = 0$:
+  the bar complex is \emph{uncurved}.
+  The Sugawara construction is undefined at
+  $k = -h^\vee$ (not merely singular), and the Feigin--Frenkel
+  center $\mathfrak{z}(\hat{\fg}_{-h^\vee})$ provides a large
+  commutative subalgebra.
+\item The complementarity theorem (Vol~I, Theorem~C) gives
+  $\kappa(\hat{\fg}_k) + \kappa(\hat{\fg}_{-k-2h^\vee}) = 0$
+  exactly: the Feigin--Frenkel involution
+  $k\mapsto -k-2h^\vee$ negates the shifted level $k+h^\vee$,
+  hence negates~$\kappa$.  The tensor product
+  $\barB^{(g)}(\hat{\fg}_k) \otimes
+  \barB^{(g)}(\hat{\fg}_{-k-2h^\vee})$ has vanishing total
+  curvature at every genus.
+\end{itemize}
+\end{example}
+
+\subsection{The universal property: initiality, terminality, and formal moduli}
+\label{subsec:universal-property-twisting}
+
+The classifying-space theorem
+(Theorem~\ref{thm:bar-representability}) identifies the bar complex
+as the representing object for a formal moduli functor.  The
+present subsection refines this in two directions: first, it
+isolates the \emph{set-level} universal properties ---
+terminality of bar, initiality of cobar --- that underlie the
+representability; second, it promotes the representability to the
+full Lurie--Pridham correspondence between formal moduli problems
+and complete dg Lie algebras.  The result is the platonic form of
+the bar--cobar adjunction: a single bifunctor of twisting morphisms,
+representable on both sides, whose derived moduli space is the
+simplicial Maurer--Cartan space of the convolution algebra.
+
+\begin{theorem}[Terminality of the bar construction;
+\ClaimStatusProvedHere]
+\label{thm:bar-terminality}
+\index{bar construction!terminality|textbf}
+\index{twisting morphism!universal property|textbf}
+The bar construction $\barB(\cA)$ is terminal in the category of
+conilpotent $\SCchtop$-coalgebras equipped with a twisting morphism
+to~$\cA$.  Explicitly: for any conilpotent coalgebra~$\cC$ and any
+twisting morphism $\tau\colon \cC \to \cA$, there exists a unique
+coalgebra morphism $f_\tau\colon \cC \to \barB(\cA)$ such that
+$\tau = \pi \circ f_\tau$, where
+$\pi\colon \barB(\cA) \twoheadrightarrow s^{-1}\bar{\cA}$ is the
+universal twisting morphism \textup{(}the bar projection onto
+cogenerators\textup{)}.
+\end{theorem}
+
+\begin{proof}
+The map $f_\tau$ is constructed explicitly.  On a coalgebra element
+$c \in \cC$, apply the iterated coproduct
+$\Delta^{(n-1)}\colon \cC \to \cC^{\otimes n}$, then apply
+$\tau^{\otimes n}$, then embed into
+$T^c(s^{-1}\bar{\cA}) = \barB(\cA)$.  The resulting sum
+\begin{equation}\label{eq:bar-terminality-formula}
+f_\tau(c)
+\;=\;
+\sum_{n \geq 1} \tau^{\otimes n} \circ \Delta^{(n-1)}(c)
+\end{equation}
+converges because $\cC$ is conilpotent: the coradical filtration
+$F_0\cC \subset F_1\cC \subset \cdots$ is exhaustive, and for
+$c \in F_k\cC$ the iterated coproduct $\Delta^{(n-1)}(c) = 0$ for
+$n > k$, so the sum is finite.
+
+\medskip\noindent
+\textbf{$f_\tau$ is a coalgebra morphism.}
+We must verify $(f_\tau \otimes f_\tau) \circ \Delta_\cC
+= \Delta_{\barB} \circ f_\tau$, where $\Delta_{\barB}$ is the
+deconcatenation coproduct on $T^c(s^{-1}\bar{\cA})$.
+By the coassociativity of~$\Delta_\cC$ and the definition
+of~\eqref{eq:bar-terminality-formula}, the left-hand side
+decomposes as
+\[
+\sum_{p+q = n}
+(\tau^{\otimes p} \otimes \tau^{\otimes q})
+\circ \Delta^{(p-1,q-1)}_\cC(c),
+\]
+where $\Delta^{(p-1,q-1)}_\cC$ denotes the $(p,q)$-component of
+the iterated coproduct.  This is precisely the deconcatenation of
+the $n$-fold tensor $\tau^{\otimes n} \circ \Delta^{(n-1)}(c)$,
+which is $\Delta_{\barB} \circ f_\tau(c)$.
+
+\medskip\noindent
+\textbf{$f_\tau$ intertwines the differentials.}
+The Maurer--Cartan equation
+$\partial\tau + \tau \star \tau = 0$
+guarantees that $f_\tau$ commutes with the bar differential.
+(The expanded form carries standard desuspension signs
+$(-1)^{k(k-1)/2}$ on each $m_k$ term; see
+Loday--Vallette~\cite{LV12}, Proposition~1.3.3.  We use the
+compact form $\partial\tau + \tau\star\tau = 0$, which absorbs
+these signs into the convolution product~$\star$.)
+Concretely, the MC equation is the condition that the
+cogenerator projection of $d_{\barB} \circ f_\tau - f_\tau \circ
+d_\cC$ vanishes, and for a map into a cofree coalgebra, vanishing
+of the cogenerator projection implies vanishing of the full map
+(Loday--Vallette~\cite{LV12}, Theorem~2.2.9).
+
+\medskip\noindent
+\textbf{Uniqueness.}
+A coalgebra morphism $g\colon \cC \to T^c(s^{-1}\bar{\cA})$ into
+a cofree conilpotent coalgebra is uniquely determined by its
+projection onto cogenerators
+$\pi \circ g\colon \cC \to s^{-1}\bar{\cA}$
+(Loday--Vallette~\cite{LV12}, Proposition~1.2.6).
+The condition $\tau = \pi \circ f_\tau$ pins down this projection;
+hence $f_\tau$ is the unique solution.
+\end{proof}
+
+\begin{theorem}[Initiality of the cobar construction;
+\ClaimStatusProvedHere]
+\label{thm:cobar-initiality}
+\index{cobar construction!initiality|textbf}
+Dually, $\Omegach(\cC)$ is initial in the category of
+$\SCchtop$-algebras equipped with a twisting morphism from~$\cC$.
+For any algebra~$\cA$ and any twisting morphism
+$\tau\colon \cC \to \cA$, there exists a unique algebra morphism
+$g_\tau\colon \Omegach(\cC) \to \cA$ such that
+$\tau = g_\tau \circ \iota$, where
+$\iota\colon s\bar{\cC} \hookrightarrow \Omegach(\cC)$ is the
+universal twisting morphism \textup{(}the cobar inclusion of
+generators\textup{)}.
+\end{theorem}
+
+\begin{proof}
+The cobar construction $\Omegach(\cC) = T(s\bar{\cC})$ is the free
+algebra on the suspension of the coaugmentation coideal.  By the
+universal property of free algebras, the linear map
+$\tau\colon s\bar{\cC} \to \cA$ extends uniquely to an algebra
+morphism $g_\tau\colon T(s\bar{\cC}) \to \cA$.  It remains to
+verify that $g_\tau$ intertwines the cobar differential
+$d_\Omega$ on $T(s\bar{\cC})$ with the differential $d_\cA$
+on~$\cA$.
+
+The cobar differential $d_\Omega$ is the unique derivation of
+$T(s\bar{\cC})$ whose restriction to generators $s\bar{\cC}$ is
+\[
+d_\Omega(sx)
+\;=\;
+-s(d_\cC\, x)
+\;-\;
+\sum (-1)^{|x'|}\, sx' \otimes sx'',
+\]
+where $\bar\Delta(x) = \sum x' \otimes x''$ is the reduced
+coproduct (Loday--Vallette~\cite{LV12}, Theorem~2.2.5).  The
+signs arise from the Koszul rule applied to the suspension~$s$:
+the first term carries a sign from $s \circ d_\cC \circ s^{-1}
+= -s\, d_\cC$ (since $|s|=1$ and $|d_\cC|=1$), while the
+second carries the desuspension sign $(-1)^{|x'|}$ from
+commuting $s$ past each tensor factor.  The formula encodes
+the internal differential and the coproduct of~$\cC$.
+The Maurer--Cartan equation for $\tau$ ensures that
+$g_\tau \circ d_\Omega = d_\cA \circ g_\tau$ on generators; since
+both sides are derivations of $T(s\bar{\cC})$, agreement on
+generators implies agreement everywhere.
+
+Uniqueness: an algebra morphism from a free algebra is determined
+by its restriction to generators, and the condition
+$\tau = g_\tau \circ \iota$ fixes this restriction.
+\end{proof}
+
+\begin{corollary}[The bar--cobar adjunction as representability;
+\ClaimStatusProvedHere]
+\label{cor:bar-cobar-representability}
+\index{bar-cobar adjunction!representability|textbf}
+\index{twisting morphism!bifunctor|textbf}
+The pair $(\barB, \Omegach)$ represents the bifunctor of twisting
+morphisms:
+\begin{equation}\label{eq:bar-cobar-representability}
+\Hom_{\mathrm{Alg}}(\Omegach(\cC), \cA)
+\;\cong\;
+\mathrm{Tw}(\cC, \cA)
+\;\cong\;
+\Hom_{\mathrm{CoAlg}}(\cC, \barB(\cA))
+\end{equation}
+naturally in both\/ $\cC$ \textup{(}conilpotent
+$\SCchtop$-coalgebras\textup{)} and\/ $\cA$
+\textup{(}$\SCchtop$-algebras\textup{)}.  This is the bar--cobar
+adjunction: $\Omegach \dashv \barB$.
+\end{corollary}
+
+\begin{proof}
+The left bijection is
+Theorem~\ref{thm:cobar-initiality}: a twisting morphism
+$\tau \in \mathrm{Tw}(\cC, \cA)$ determines a unique algebra map
+$g_\tau\colon \Omegach(\cC) \to \cA$, and conversely every such
+algebra map restricts to a twisting morphism via the inclusion of
+generators.  The right bijection is
+Theorem~\ref{thm:bar-terminality}: $\tau$ determines a unique
+coalgebra map $f_\tau\colon \cC \to \barB(\cA)$, and conversely
+every such coalgebra map projects to a twisting morphism via the
+bar projection onto cogenerators.
+
+Naturality in $\cC$ follows from functoriality of the free algebra
+construction (for the left bijection) and from the universal
+property of cofree coalgebras (for the right).  Naturality in $\cA$
+is dual.  The composite bijection
+$\Hom_{\mathrm{Alg}}(\Omegach(\cC), \cA)
+\cong \Hom_{\mathrm{CoAlg}}(\cC, \barB(\cA))$
+is the adjunction $\Omegach \dashv \barB$.
+\end{proof}
+
+\begin{proposition}[Naturality of the bar--cobar adjunction;
+\ClaimStatusProvedHere]
+\label{prop:bar-cobar-naturality}
+\index{bar-cobar adjunction!naturality|textbf}
+\index{Drinfeld--Sokolov reduction!bar intertwining|textbf}
+The bar--cobar adjunction $\Omegach \dashv \barB$ is natural in the
+following sense:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Functoriality in $\cA$:} A morphism
+  $f\colon \cA \to \cA'$ of $\SCchtop$-algebras induces a coalgebra
+  morphism $\barB(f)\colon \barB(\cA) \to \barB(\cA')$ and an algebra
+  morphism
+  $\Omegach(f^*)\colon \Omegach(\barB(\cA')) \to \Omegach(\barB(\cA))$.
+  These are compatible with the bar--cobar counit:
+  $\varepsilon_{\cA'} \circ \Omegach(\barB(f)) = f \circ \varepsilon_{\cA}$.
+
+\item \textbf{Under Drinfeld--Sokolov reduction:} For a nilpotent
+  element $\chi \in \fg$ and the DS reduction functor
+  $\mathrm{DS}_\chi$, the bar construction commutes:
+  $\barB(\mathrm{DS}_\chi(\cA))
+  \simeq \mathrm{DS}_\chi(\barB(\cA))$ as $\SCchtop$-coalgebras.
+  This is Volume~I, Theorem~\textup{\ref*{thm:ds-koszul-intertwine}}.
+
+\item \textbf{Under level change:} For the affine lineage
+  $\cA = \hat{\fg}_k$, the family
+  $\{\barB(\hat{\fg}_k)\}_{k \in \mathbb{k} \setminus \{-h^\vee\}}$
+  forms a flat family of $\SCchtop$-coalgebras parametrised by the
+  affine line $\mathbb{A}^1 \setminus \{-h^\vee\}$.  The fiber at~$k$
+  is $\barB(\hat{\fg}_k)$; the monodromy around $k = -h^\vee$
+  \textup{(}the critical level\textup{)} is the Feigin--Frenkel
+  involution.
+
+\item \textbf{Modular characteristic transforms:} Under
+  $f\colon \cA \to \cA'$, the modular characteristic satisfies
+  $\kappa(\cA') = \kappa(\cA) + \delta\kappa(f)$, where
+  $\delta\kappa(f)$ is the anomaly of the morphism \textup{(}zero for
+  strict morphisms, nonzero for filtered quasi-isomorphisms that shift
+  the central charge\textup{)}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i) follows from the functoriality of the tensor coalgebra:
+$\barB(\cA) = T^c(s^{-1}\bar{\cA})$ and $f$ induces
+$s^{-1}\bar{f}\colon s^{-1}\bar{\cA} \to s^{-1}\bar{\cA}'$, which
+extends uniquely to the cofree coalgebra.  The compatibility with the
+counit is the commutativity of
+\[
+\begin{tikzcd}
+\Omegach(\barB(\cA)) \ar[r,"\varepsilon_{\cA}"] \ar[d,"\Omegach(\barB(f))"'] & \cA \ar[d,"f"] \\
+\Omegach(\barB(\cA')) \ar[r,"\varepsilon_{\cA'}"'] & \cA'
+\end{tikzcd}
+\]
+which holds because the counit is the universal twisting morphism and
+$f$ preserves the twisting morphism structure
+(Theorem~\ref{thm:cobar-initiality}).
+
+Part~(ii) is Volume~I's DS--bar intertwining theorem: the DS functor
+is a morphism of operads (it preserves the $\SCchtop$-algebra
+structure), so the bar construction, being functorial, commutes with
+it.  The key point is that DS reduction acts on the generators
+$s^{-1}\bar{\cA}$ of the cofree coalgebra and the bar differential
+$d_{\barB}$ restricts to the BRST differential of $\mathrm{DS}_\chi$.
+
+Part~(iii) follows from the polynomial dependence of the OPE
+coefficients on~$k$: the structure constants of $\hat{\fg}_k$ are
+polynomial in~$k$, so $\barB(\hat{\fg}_k)$ is a polynomial family of
+coalgebras.  The singularity at $k = -h^\vee$ is the Sugawara pole
+(the Sugawara tensor is \emph{undefined} at the critical level, not
+infinite --- cf.\ Volume~I).  The monodromy statement follows from the
+Feigin--Frenkel duality $k \leftrightarrow -k - 2h^\vee$, which acts
+on the base $\mathbb{A}^1 \setminus \{-h^\vee\}$ as the reflection
+fixing $-h^\vee$ and exchanges $\barB(\hat{\fg}_k)$ with the
+Langlands dual bar complex.
+
+Part~(iv) is a consequence of the genus-$1$ obstruction equation:
+$\kappa$ appears as the coefficient of $\omega_1$ in $d_{\barB}^2$,
+and a morphism that changes the genus-$1$ bar data changes $\kappa$ by
+the anomaly~$\delta\kappa$.  For a strict morphism (one preserving the
+filtration and the central charge), the genus-$1$ data is unchanged,
+so $\delta\kappa = 0$.  For a filtered quasi-isomorphism that shifts
+the central charge by $\delta c$, one has
+$\delta\kappa(f)$ is determined by the change in the genus-$1$ bar obstruction class (Volume~I, Theorem~D).  For the Virasoro algebra, $\kappa = c/2$ and the anomaly is $\delta\kappa = \delta c/2$; for affine algebras, the relation between $\kappa$ and $c$ is more involved (see the formula $\kappa = \dim\fg \cdot (k+h^\vee)/(2h^\vee)$ above).
+\end{proof}
+
+\begin{theorem}[Formal moduli interpretation; \ClaimStatusProvedHere]
+\label{thm:formal-moduli-twisting}
+\index{formal moduli!twisting morphisms|textbf}
+\index{Lurie--Pridham correspondence!twisting morphisms|textbf}
+The simplicial Maurer--Cartan space
+$\MC_\bullet(\mathrm{Conv}(\cC, \cA))$ is the derived moduli space
+of twisting morphisms from $\cC$ to $\cA$.  It satisfies the
+Lurie--Pridham correspondence:
+\begin{equation}\label{eq:formal-moduli-twisting}
+\MC_\bullet\bigl(\mathrm{Conv}(\cC, \cA)\bigr)
+\;\simeq\;
+\mathrm{Map}_{\mathrm{CoAlg}}(\cC, \barB(\cA))
+\;\simeq\;
+\mathrm{Map}_{\mathrm{Alg}}(\Omegach(\cC), \cA)
+\end{equation}
+as simplicial sets \textup{(}equivalently, as objects of the
+$\infty$-category of spaces\textup{)}.  The bar construction is
+the representing object for the formal moduli problem associated
+to the deformation theory of~$\cA$.
+\end{theorem}
+
+\begin{proof}
+The convolution dg Lie algebra
+$\mathrm{Conv}(\cC, \cA)
+= \Hom(s^{-1}\bar{\cC},\, \cA)$
+is complete: its underlying graded vector space is a product, not
+a sum, because $\cC$ is conilpotent.  Concretely, the coradical
+filtration $F_\bullet\cC$ dualizes to an inverse-limit filtration
+$F^\bullet\mathrm{Conv}(\cC, \cA)
+= \varprojlim_k \Hom(\cC/F_k\cC, \cA)$, and completeness is the
+statement that $\mathrm{Conv}(\cC, \cA)
+= \varprojlim_k \mathrm{Conv}(\cC, \cA)/F^k$.
+
+For complete dg Lie algebras, the simplicial Maurer--Cartan functor
+$\MC_\bullet$ is well-defined: its $n$-simplices are MC elements
+in $\mathfrak{g} \otimes \Omega_n$, where $\Omega_n$ is the
+Sullivan algebra of polynomial forms on the standard
+$n$-simplex~$\Delta^n$
+(Robert-Nicoud--Vallette~\cite{RNV20}, \S3; this is the
+$\Linf$-generalization of the Hinich--Goldman--Millson
+construction).  The resulting simplicial set
+$\MC_\bullet(\mathfrak{g})$
+is a Kan complex whose homotopy type depends only on the
+$\Linf$ quasi-isomorphism class of~$\mathfrak{g}$
+(\cite{RNV20}, Theorem~4.1).
+
+The identification with mapping spaces follows from the
+representability of
+Corollary~\ref{cor:bar-cobar-representability}, extended to the
+simplicial enrichment.  The key step: for each~$n$, the set of
+$n$-simplices of
+$\mathrm{Map}_{\mathrm{CoAlg}}(\cC, \barB(\cA))$ is
+\[
+\Hom_{\mathrm{CoAlg}}\!\bigl(\cC,\,
+  \barB(\cA) \otimes \Omega_n\bigr)
+\;\cong\;
+\mathrm{Tw}(\cC, \cA \otimes \Omega_n)
+\;\cong\;
+\MC\!\bigl(\mathrm{Conv}(\cC, \cA) \otimes \Omega_n\bigr),
+\]
+which is the set of $n$-simplices of
+$\MC_\bullet(\mathrm{Conv}(\cC, \cA))$.
+This identification is natural in the simplicial direction
+(functoriality of the cosimplicial structure of
+$\{\Omega_n\}_{n \geq 0}$), giving the equivalence of simplicial
+sets~\eqref{eq:formal-moduli-twisting}.  The right-hand equivalence
+in~\eqref{eq:formal-moduli-twisting} follows by the same argument
+applied to the cobar side, using
+Theorem~\ref{thm:cobar-initiality} in place of
+Theorem~\ref{thm:bar-terminality}.
+
+By the Lurie--Pridham theorem
+(Lurie~\cite{Lur11}, Theorem~5.3;
+Pridham~\cite{Pri10}, Theorem~4.26),
+the functor $\MC_\bullet$ establishes an equivalence between
+complete dg Lie algebras (up to $\Linf$ quasi-isomorphism) and
+formal moduli problems (up to equivalence of the associated
+deformation functors).  The passage from coalgebras to formal moduli
+problems uses Koszul duality: a conilpotent coalgebra~$\cC$
+corresponds to the complete local cdga~$\cC^\vee$ (the linear dual
+with completed tensor product), and
+$\MC_\bullet(\mathrm{Conv}(\cC, \cA)) \simeq
+\MC_\bullet(\mathfrak{g} \widehat{\otimes} \cC^\vee)$
+where $\mathfrak{g}$ is the dg Lie algebra governing the
+deformation theory of~$\cA$.  The functor
+$R \mapsto \MC_\bullet(\mathfrak{g} \widehat{\otimes} \mathfrak{m}_R)$
+for Artinian~$R$ is the formal moduli problem in Lurie's sense,
+and Pridham's theorem \cite[Theorem~4.26]{Pri10} identifies it
+with~$\mathfrak{g}$ up to quasi-isomorphism.
+The bar construction $\barB(\cA)$ is
+therefore the coalgebra that \emph{corepresents} the formal moduli
+problem $\mathrm{Def}_\cA$ of deformations of~$\cA$: the derived
+deformation space of~$\cA$ is
+$\MC_\bullet(\mathrm{Conv}(\cC, \cA))$ for any cofibrant
+replacement $\cC \xrightarrow{\sim} \barB(\cA)$, and this is
+independent of the choice by the homotopy invariance of
+$\MC_\bullet$.
+\end{proof}
+
+\begin{remark}[The modular upgrade]
+\label{rem:modular-upgrade-universal}
+\index{modular twisting morphism!universal property}
+At the modular level, the same universal property holds with the
+modular convolution algebra
+$\mathrm{Conv}^{\mathrm{mod}}\bigl(
+  \cC^{\mathrm{logFM}}_{\mathrm{mod}},\,
+  \mathrm{End}_{Ch_\infty}(\cA^{\mathrm{ch}}_\infty)
+\bigr)$
+replacing the genus-$0$ convolution algebra.  The universal modular
+twisting morphism~$\Theta_\cA$
+(Construction~\ref{constr:vol2-genus-g-mc})
+is the base-point of the derived moduli space
+$\MC_\bullet\bigl(\mathrm{Def}^{\mathrm{mod}}_{\infty,\log}(\cA)
+\bigr)$.
+
+Every structure in this monograph is a shadow of this single
+universal object under a projection: the bar differential $d_{\barB}$
+is the cogenerator projection of~$\Theta_\cA$; the
+$R$-matrix is the closed-color monodromy of the open-color tensor
+product parametrized by~$\Theta_\cA$; the genus-$g$ curvature
+$\kappa(\cA) \cdot \omega_g$ is the scalar trace of the modular
+extension of~$\Theta_\cA$; the five theorems of Volume~I
+(Construction~\ref{constr:vol2-five-theorems-projections}) are five
+projections of a single MC element.  The universal property of
+twisting morphisms --- terminality of bar, initiality of cobar,
+representability of the bifunctor --- is the reason the single
+object $\Theta_\cA$ suffices: it is the terminal twisting morphism,
+the one through which all others factor.
+\end{remark}
+
 \subsection{Example: Heisenberg Vertex Algebra and Its Koszul Dual}
 \begin{example}[Heisenberg and Its Koszul Dual]
 \label{ex:Heisenberg_Koszul}
@@ -321,7 +1063,7 @@ the Chevalley--Eilenberg complex of the Heisenberg Lie algebra (not the vertex a
 \end{equation}
 a symmetric algebra (commutative).
 
-In contrast, the Koszul dual $\mathcal{H}_k^!$ is the CE complex, which is \textbf{non-commutative} and has a nontrivial differential encoding the Lie bracket.
+In contrast, the Koszul dual $\mathcal{H}_k^!$ is the CE complex, which is a \textbf{commutative} dga (an exterior algebra with differential encoding the Lie bracket).
 
 Koszul duality exchanges algebraic structures (commutative $\leftrightarrow$ Lie); the quadratic projection instead forgets higher operations.
 \end{example}
@@ -368,9 +1110,11 @@ d_{\mathrm{res}}[J\,|\,J\,|\,J]
 &= [k\,|\,J] + [J\,|\,k]
 \;=\; k\,\bigl([1\,|\,J] + [J\,|\,1]\bigr),
 \end{align*}
-where $\{J_\lambda J\}\big|_{\mathrm{res}} = k$ denotes the OPE residue
-(the coefficient of $(z_1-z_2)^{-2}$ in the position-space OPE, extracted
-by the bar differential), and $1$ denotes the vacuum.
+where $\{J_\lambda J\}\big|_{\mathrm{res}} = k$ denotes the OPE residue:
+the bar differential encodes the full singular OPE kernel of
+$J(z)J(w) \sim k/(z-w)^2$; the spectral parameter version is
+$m_2(J,J;\lambda) = k\lambda$, where $k\lambda$ is the Borel transform
+of $k\zeta^{-2}$.  Here $1$ denotes the vacuum.
 In the reduced bar complex $\barB = T^c(s^{-1}\bar{\mathcal{H}})$
 (augmentation ideal only), the terms involving the vacuum reduce to
 lower-bar-degree elements.
@@ -401,14 +1145,11 @@ For curved $A_\infty$ algebras (where $m_0 \neq 0$, i.e., a curvature term), the
 \begin{equation}
 d_{\overline{B}} = m_0 + d_Q + d_{\text{res}} + d_{A_\infty},
 \end{equation}
-where $m_0 \in \mathcal{A}$ is a degree-2 element (curvature). The Maurer--Cartan equation becomes:
-\begin{equation}
-m_0 + d\tau + \frac{1}{2}[\tau, \tau] + \sum_{k \geq 3} m_k(\tau^{\otimes k}) = 0.
-\end{equation}
+where $m_0 \in \mathcal{A}$ is a degree-2 element (curvature). The Maurer--Cartan equation becomes $\partial\tau + \tau\star\tau = 0$ (the compact form absorbs the standard desuspension signs $(-1)^{k(k-1)/2}$ on each $m_k$ term into the convolution product~$\star$; see Loday--Vallette~\cite{LV12}, Proposition~1.3.3).
 
 The key consequence is that curvature obstructs $m_1$ from being a differential:
 $m_1^2(a) = m_2(m_0, a) - (-1)^{|a|}m_2(a, m_0) = [m_0, a]_{m_2}$,
-so $m_1^2 \neq 0$ whenever $m_0 \neq 0$ (the MINUS sign in the commutator is essential).
+so $m_1^2 \neq 0$ whenever $m_0 \neq 0$ (the minus sign in the commutator is forced by the Koszul sign rule for the degree-$(-1)$ operation $m_2$ passing the element~$a$).
 This controls \emph{curved deformations} of chiral algebras, relevant for non-flat connections in quantum field theory.
 \end{remark}
 
@@ -492,7 +1233,7 @@ coproduct $\Delta$ without naming it operadically.
 Theorem~\ref{thm:bar-swiss-cheese} identifies $\Delta$ as the
 open color of a Swiss-cheese algebra and proves the compatibility:
 the two structures jointly satisfy the Swiss-cheese composition
-law on $\FM_k(\C) \times \Conf_k(\R)$.
+law on $\FM_k(\C) \times \Conf_m(\R)$ (the indices $k$ and $m$ are in general different: $k$ counts closed-colour insertions while $m$ counts open-colour intervals).
 \end{remark}
 
 \begin{remark}[The Steinberg analogy]
@@ -505,7 +1246,7 @@ recovers the Hecke algebra~$H_W$.  The bar complex
 $\barB(\cA)$ plays the same structural role: it is a
 correspondence between $\FM_n(\C)$ (holomorphic collision data)
 and $\Conf_n^{<}(\R)$ (topological ordering data), and its
-convolution algebra---via the bar-cobar counit---recovers the
+convolution algebra, via the bar-cobar counit, recovers the
 $\Ainf$ chiral algebra.  The two colors of the Swiss-cheese
 operad are the two factors of the correspondence; the bar-cobar
 adjunction is the convolution-restriction adjunction.
@@ -519,8 +1260,8 @@ Theorem~\ref{thm:steinberg-presentation} below.
 The Steinberg variety $Z = \widetilde{\mathcal{N}}
 \times_{\mathfrak{g}} \widetilde{\mathcal{N}}$ presents the
 Hecke algebra: $H_*(Z) \cong H_W$.  Every representation-theoretic
-fact about~$H_W$---cells, Kazhdan--Lusztig polynomials, canonical
-bases---is a shadow of a geometric fact about~$Z$.  The Hecke
+fact about~$H_W$ (cells, Kazhdan--Lusztig polynomials, canonical
+bases) is a shadow of a geometric fact about~$Z$.  The Hecke
 algebra does not know it is a convolution algebra; the Steinberg
 variety knows nothing else.
 
@@ -532,7 +1273,7 @@ $\FM_n(\C) \times \Conf_n^{<}(\R)$.  The bar differential is
 convolution; the coproduct is restriction; the bar-cobar counit
 recovers the algebra.  Every structural fact about $\cA$, $\cA^!$,
 the line category, the $R$-matrix, the genus tower, the PVA
-shadow---is a projection of the single object~$\barB(\cA)$.
+shadow, is a projection of the single object~$\barB(\cA)$.
 By operadic Koszul self-duality
 (\S\ref{subsec:dg-yangian-operadic}), dualizing the
 correspondence reproduces the same type of algebra:
@@ -564,7 +1305,7 @@ presents the chiral algebraic structure of\/~$\cA$:
   Theorems~\textup{\ref{thm:bar-cobar-adjunction}}
   and~\textup{\ref{thm:homotopy-Koszul}}.
   The convolution algebra of the chiral Steinberg correspondence
-  recovers the original algebra---the chiral analogue of
+  recovers the original algebra, the chiral analogue of
   $H_\ast^{\mathrm{BM}}(Z) \cong H_W$.
 
 \item \textbf{Categorical equivalence
@@ -623,13 +1364,16 @@ presents the chiral algebraic structure of\/~$\cA$:
     & Deconcatenation $\Delta$ \\
   $H_\ast^{\mathrm{BM}}(Z) \cong H_W$
     & $\Omegach(\barB(\cA)) \simeq \cA$ \\
-  $\operatorname{Rep}(H_W) \simeq \cO$
+  $\cO_0 \simeq H_W\text{-}\mathbf{mod}^{\mathrm{fd}}$ (Soergel)
     & $\cC_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}$ \\
   KZ connection / $U_q(\fg)$
     & Spectral connection $\nabla_z$ / $\mathrm{Rep}_q(\fg)$
       (Thm~\ref{thm:affine-monodromy-identification}) \\
   IC purity (Decomposition Theorem)
-    & Koszulness (clean intersection) \\
+    & Koszulness (clean intersection)%
+      \footnote{Row~6 (IC purity $\leftrightarrow$ Koszulness) is
+      Conjecture~\ref{conj:purity-koszul}, verified in three cases
+      (Proposition~\ref{prop:purity-koszul-examples}).} \\
   $H_W$ self-dual ($\mathsf{SC}^! \simeq \mathsf{SC}$)
     & $(\SCchtop)^! \simeq \SCchtop$
       (Thm~\ref{thm:SC-self-duality}) \\
@@ -646,14 +1390,14 @@ presents the chiral algebraic structure of\/~$\cA$:
   Remark~\textup{\ref{rem:steinberg-lagrangian-origin}};
   the operation spaces parametrising the correspondence
   are $\FM_k(\C) \times \Conf_k^{<}(\R)$, a Cartesian
-  product---not a fiber product---reflecting the independent
+  product, not a fiber product, reflecting the independent
   holomorphic and topological directions of $\C_z \times \R_t$.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Part~(i) combines Theorem~\ref{thm:bar-swiss-cheese}---the bar complex
-is an $\SCchtop$-coalgebra---with the Quillen equivalence of
+Part~(i) combines Theorem~\ref{thm:bar-swiss-cheese} (the bar complex
+is an $\SCchtop$-coalgebra) with the Quillen equivalence of
 Theorem~\ref{thm:bar-cobar-adjunction}, unconditional by
 homotopy-Koszulity (Theorem~\ref{thm:homotopy-Koszul}).
 
@@ -689,17 +1433,180 @@ is Theorem~\ref{thm:koszul-dodecahedron}: twelve equivalent
 conditions radiating from a single concentration.
 \end{proof}
 
-\begin{remark}[Lagrangian origin]
+\begin{theorem}[Master projection theorem; \ClaimStatusProvedHere]
+\label{thm:master-projection}
+\index{master projection theorem|textbf}
+\index{Swiss-cheese!master projection|textbf}
+Let\/ $\cA$ be a logarithmic $\SCchtop$-algebra with open-sector
+category\/~$\cC$
+\textup{(}Definition~\textup{\ref{def:oc-factorization-category})}.
+The MC element\/ $\alpha_T$ in the Swiss-cheese convolution algebra\/
+$\mathfrak{g}^{\mathrm{SC}}_T$
+\textup{(}Definition~\textup{\ref{def:sc-convolution})} determines:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Closed face:} the $A_\infty$ chiral algebra
+  $A_b = \mathrm{End}_\cC(b)$ for any vacuum object\/~$b$
+  \textup{(}Theorem~\textup{\ref{thm:boundary-algebra-from-vacuum})};
+\item \emph{Open face:} the line category
+  $\cC_{\mathrm{line}} \simeq \cA^!\textup{-}\mathbf{mod}$
+  \textup{(}Theorem~\textup{\ref{thm:lines_as_modules})};
+\item \emph{Spectral face:} the $R$-matrix $R(z)$ satisfying the
+  quantum Yang--Baxter equation
+  \textup{(}Theorem~\textup{\ref{thm:YBE})};
+\item \emph{Holographic face:} the bulk
+  $= Z_{\mathrm{der}}(\cC) \simeq
+  C^\bullet_{\mathrm{ch}}(A_b, A_b)$
+  \textup{(}Corollary~\textup{\ref{cor:bulk-derived-center-categorical})};
+\item \emph{Modular face:} the genus tower with line bundle
+  $\cL_\kappa = (\det\lambda)^{\otimes\kappa}$ and curvature
+  $\kappa(\cA) \cdot \omega_g$
+  \textup{(}Construction~\textup{\ref{constr:determinant-line-bundle})};
+\item \emph{Affine face}
+  \textup{(}for the affine lineage\textup{):}
+  $\cC_{\mathrm{line}}^{\mathrm{red}}|_{\mathrm{eval}} \simeq
+  \mathrm{Rep}_q(\fg)$, computing the Jones polynomial
+  \textup{(}Theorem~\textup{\ref{thm:affine-monodromy-identification})}.
+\end{enumerate}
+Moreover, $\cA \mapsto (\mathfrak{g}^{\mathrm{SC}}_T, \alpha_T)$ is
+functorial
+\textup{(}Proposition~\textup{\ref{prop:bar-cobar-naturality})}, and
+the six projections are natural transformations.
+\end{theorem}
+
+\begin{proof}
+This is the conjunction of the six cited theorems, unified by the
+Swiss-cheese convolution algebra framework.  The MC element
+$\alpha_T$ encodes the full $\SCchtop$-algebra structure by the
+representability theorem
+(Theorem~\ref{thm:bar-representability}); each projection extracts
+one face of this structure by restricting to the appropriate colour
+profile.
+
+\smallskip
+\noindent\textit{Functoriality.}
+By Proposition~\ref{prop:bar-cobar-naturality}(i), a morphism
+$f \colon \cA \to \cA'$ of $\SCchtop$-algebras induces a dg
+coalgebra map $\barB(f) \colon \barB(\cA) \to \barB(\cA')$,
+which transports the MC element via the functorial MC
+correspondence: $\barB(f)_\ast(\alpha_T) = \alpha_{T'}$, where
+$\alpha_{T'}$ is the MC element of~$\cA'$.
+
+\smallskip
+\noindent\textit{Naturality of the projections.}
+Each projection $\pi_i$ is defined by restricting the MC element
+$\alpha_T$ to a specific colour profile of the $\SCchtop$ operad:
+$\pi_i(\alpha_T)$ is the evaluation of $\alpha_T$ at a fixed
+colour profile (closed-only for face~(i), open-only for
+face~(ii), mixed with spectral parameter for face~(iii), etc.).
+Given a morphism $f \colon \cA \to \cA'$, we have
+\[
+  \pi_i(\alpha_{T'})
+  \;=\; \pi_i\!\bigl(\barB(f)_\ast(\alpha_T)\bigr)
+  \;=\; \barB(f)_\ast\!\bigl(\pi_i(\alpha_T)\bigr),
+\]
+where the second equality holds because $\pi_i$ is an evaluation
+map at a fixed colour profile: it commutes with the pushforward
+$\barB(f)_\ast$, which acts on the coefficient algebra but does
+not alter the colour profile at which the evaluation is performed.
+This is the naturality square
+\[
+  \begin{tikzcd}
+    (\mathfrak{g}^{\mathrm{SC}}_T, \alpha_T) \ar[r, "\barB(f)_\ast"] \ar[d, "\pi_i"'] &
+    (\mathfrak{g}^{\mathrm{SC}}_{T'}, \alpha_{T'}) \ar[d, "\pi_i"] \\
+    \mathrm{Face}_i(\cA) \ar[r, "f_i"'] &
+    \mathrm{Face}_i(\cA')
+  \end{tikzcd}
+\]
+for each face $i \in \{\mathrm{i},\ldots,\mathrm{vi}\}$, where
+$f_i$ is the induced map on the $i$-th face.  The commutativity of
+this square is the statement that the six projections are natural
+transformations from the convolution-algebra functor to the
+respective face functors.
+\end{proof}
+
+\providecommand{\Steinb}{\mathfrak{S}}
+
+\begin{theorem}[Formal bar model for the Lagrangian self-intersection;
+\ClaimStatusProvedHere]
+\label{thm:bar-is-self-intersection}
+\index{bar complex!as Lagrangian self-intersection|textbf}
+\index{Lagrangian!self-intersection!bar complex|textbf}
+\index{Steinberg!as bar complex|textbf}
+Let $\cM$ be a $(-2)$-shifted symplectic derived stack and
+$\cL \hookrightarrow \cM$ a Lagrangian.  Write
+$B = \cO(\cL)$ for the algebra of functions on~$\cL$.
+Then:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+\item The derived self-intersection
+  $\Steinb := \cL \times_{\cM}^h \cL$
+  carries a $(-1)$-shifted symplectic structure
+  \textup{(}PTVV \cite{PTVV13}, Theorem~2.9\textup{)}.
+\item The derived tensor product
+  $\cO(\Steinb)=B\otimes^{\mathbb L}_{\cO(\cM)}B$
+  admits, in the formal neighborhood of~$\cL$, a standard
+  two-sided bar/Koszul model quasi-isomorphic to
+  \[
+  \barB(B)
+  \;=\;
+  T^c(s^{-1}\bar B).
+  \]
+  The bar differential $d_{\barB}$ encodes the derived
+  intersection data \textup{(}the failure of the intersection to be
+  transverse\textup{)}, and the cofree coalgebra structure models
+  the diagonal
+  $\Steinb \to \Steinb \times_{\cL} \Steinb$.
+\item Under the HKR identification, Hochschild cochains of~$B$
+  are functions on the $(-1)$-shifted cotangent~$T^*[-1]\cL$:
+  \[
+  \HH^\bullet(B)
+  \;\simeq\;
+  \cO\bigl(T^*[-1]\cL\bigr).
+  \]
+  This shifted-cotangent algebra is the formal local model on
+  which the formal Darboux theorem expresses the completion of
+  $\cM$ along~$\cL$; recovering the actual formal neighborhood
+  requires the additional $(-1)$-shifted closed $1$-form of that
+  theorem.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is PTVV \cite{PTVV13}, Theorem~2.9: the derived intersection
+of two Lagrangians in a $(-n)$-shifted symplectic stack carries a
+$(-(n-1))$-shifted symplectic structure.  For $n = 2$ and two
+copies of the same Lagrangian, this gives shift~$-1$.
+
+(ii) The derived self-intersection
+$\cL \times_\cM^h \cL$ is the derived tensor product
+$B \otimes^{\mathbb{L}}_{\cO(\cM)} B$.  The Lagrangian condition
+gives $\mathbb{L}_{\cL/\cM} \simeq \mathbb{T}_\cL[-1]$
+(PTVV~\cite{PTVV13}, \S2; Calaque~\cite{Cal15}, Proposition~2.3).
+The two-sided bar resolution models this derived tensor product as
+the cofree tensor coalgebra $T^c(s^{-1}\bar B)$
+(Calaque~\cite{Cal15}, Theorem~3.2 for the shifted case;
+Arinkin--C\u{a}ld\u{a}raru~\cite{AC12} for the unshifted case).
+
+(iii) The HKR theorem gives
+$\HH^\bullet(B) \simeq \cO(T^*[-1]\cL)$.
+The formal Darboux theorem
+(Brav--Bussi--Joyce~\cite{BBJ19}, Theorem~4.1) then implies that
+the formal completion $\hat{\cM}_\cL$ is determined by a
+$(-1)$-shifted closed $1$-form on $T^*[-1]\cL$.
+See Part~VIII (\S\ref{ssec:bar-as-self-intersection}) for the
+detailed proof with all intermediate steps.
+\end{proof}
+
+\begin{remark}[Lagrangian origin of the Steinberg presentation]
 \label{rem:steinberg-lagrangian-origin}
-The Steinberg presentation has a geometric origin: the derived
-self-intersection $\Steinb_b = \mathscr{L} \times_{\mathscr{M}}^h
-\mathscr{L}$ of the Lagrangian
-$\mathscr{L} \hookrightarrow \mathscr{M}$ determined by the chiral
-algebra admits the bar complex $\barB(\cA)$ as its standard formal
-bar/Koszul model
-\textup{(}Theorem~\textup{\ref{thm:bar-is-self-intersection}(ii)}\textup{)}.
-In the classical
-setting, the Steinberg variety
+The Steinberg presentation
+(Theorem~\ref{thm:steinberg-presentation}) has a geometric origin:
+the derived self-intersection
+$\Steinb_b = \mathscr{L} \times_{\mathscr{M}}^h \mathscr{L}$
+of the Lagrangian $\mathscr{L} \hookrightarrow \mathscr{M}$
+determined by the chiral algebra admits the bar complex
+$\barB(\cA)$ as its standard formal bar/Koszul model
+(Theorem~\ref{thm:bar-is-self-intersection}(ii)).
+In the classical setting, the Steinberg variety
 $\widetilde{\mathcal{N}} \times_{\mathfrak{g}}
 \widetilde{\mathcal{N}}$ is the self-intersection of the Springer
 resolution in the nilpotent cone.  Here, $\mathscr{M}$ is the
@@ -707,6 +1614,10 @@ $(-2)$-shifted symplectic stack of vacua, $\mathscr{L}$ is the
 Lagrangian boundary condition, and $\Steinb_b$ is the chiral
 Steinberg variety whose formal correspondence structure generates
 all of~(i)--(iv) above.
+The Lagrangian self-intersection interpretation is heuristic at the
+global level: constructing $\mathscr{M}$ as a global derived stack
+remains a separate problem.  Theorem~\ref{thm:bar-is-self-intersection}
+proves the formal-local statement unconditionally.
 \end{remark}
 
 \begin{remark}[The genus tower deforms the presentation]
@@ -722,8 +1633,8 @@ the curved bar equation.
 The curved bar equation $\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$
 records that the genus-$g$ ``Steinberg variety''
 $\mathscr{L}_g \times_{\mathscr{M}}^h \mathscr{L}_g$
-is \emph{not} a self-intersection in the strict sense---the two
-copies of the Lagrangian no longer coincide---and the failure
+is \emph{not} a self-intersection in the strict sense: the two
+copies of the Lagrangian no longer coincide, and the failure
 is controlled by the scalar $\kappa(\cA)$ tensored with the Hodge
 class~$\omega_g$.  The open colour is immune: the deconcatenation
 coproduct $\Delta$ is a purely combinatorial operation that does
@@ -740,7 +1651,7 @@ the derived fibers $\operatorname{Tor}^{\cO(\mathscr{M})}_i$
 vanish for $i > 0$, the groupoid $\Steinb_b \rightrightarrows
 \mathscr{L}$ is \'etale
 (Remark~\ref{rem:etale-cross-ref}), and the bar-cobar unit is a
-quasi-isomorphism---the theory is perturbatively exact.
+quasi-isomorphism; the theory is perturbatively exact.
 Off the Koszul locus the self-intersection has \emph{excess}: the
 derived fibers carry higher cohomology, higher $\Ainf$ operations
 proliferate, and the homotopy Koszul dual $\cA^!_\infty$ is non-formal
@@ -807,10 +1718,10 @@ but the converse remains open.}
   The bar-cobar counit
   $\Omegach(\barB(\cA)) \xrightarrow{\;\sim\;} \cA$ is a
   quasi-isomorphism: the cobar of the bar coalgebra resolves~$\cA$.
-  This is the ``small'' resolution.  The ``big'' resolution---the
+  This is the ``small'' resolution.  The ``big'' resolution (the
   homotopy Koszul dual
   $\cA^!_\infty := \mathbb{D}_{\operatorname{Ran}}\barB(\cA)$
-  obtained from Verdier duality---exists unconditionally for
+  obtained from Verdier duality) exists unconditionally for
   every~$\cA$, Koszul or not.  On the Koszul locus, the big
   resolution is \emph{formal}: $\cA^!_\infty \simeq \cA^!$, and
   the small and big constructions agree.  Off the Koszul locus,
@@ -931,7 +1842,7 @@ operations that $\cA^!$ does not encode.  The Virasoro algebra at
 $c \neq 13$ is the archetype: $\mathrm{Vir}_c^! = \mathrm{Vir}_{26-c}$
 is the small Koszul dual, but the big Koszul dual
 $(\mathrm{Vir}_c)^!_\infty$ carries nonvanishing $m_k$ for all
-$k \geq 3$---the infinite tower of wheel diagrams in the
+$k \geq 3$, the infinite tower of wheel diagrams in the
 Feynman-diagrammatic computation.  The bar complex is genuinely
 non-formal; the higher operations \emph{are} the curved bar
 structure $\dfib^{\,2} = \kappa(\cA) \cdot \omega_1$ of Volume~I.
@@ -939,14 +1850,14 @@ structure $\dfib^{\,2} = \kappa(\cA) \cdot \omega_1$ of Volume~I.
 The Swiss-cheese operad $\SCchtop$ is \emph{homotopy-Koszul}
 (Theorem~\ref{thm:homotopy-Koszul}): this is a property of the
 operad, not of individual algebras.  It means the bar-cobar
-adjunction on $\SCchtop$-algebras is a Quillen equivalence---the
+adjunction on $\SCchtop$-algebras is a Quillen equivalence: the
 ``small resolution'' works at the operadic level.  Individual algebras may have formal or non-formal Swiss-cheese
 structure; the operad is always homotopy-Koszul.
 In the Steinberg presentation
 (Theorem~\ref{thm:steinberg-presentation}), the distinction is:
-part~(ii)---the categorical equivalence---uses only operad-level
-homotopy-Koszulity and is unconditional; part~(iii)---the
-identification with $\cA^!$-modules and line operators---requires
+part~(ii), the categorical equivalence, uses only operad-level
+homotopy-Koszulity and is unconditional; part~(iii), the
+identification with $\cA^!$-modules and line operators, requires
 algebra-level Koszulness so that big $=$ small.
 \end{remark}
 
@@ -964,7 +1875,7 @@ formal and non-formal Swiss-cheese structure is controlled by the pole
 structure of the OPE: simple poles give formal algebras; higher-order
 poles create the higher operations that break formality.  The ``miracle'' that classical examples are
 Koszul is, in this picture, the statement that their OPEs have only
-simple poles in the relevant range---a condition that can be verified
+simple poles in the relevant range, a condition that can be verified
 example by example but not yet proved in general.
 \end{remark}
 
@@ -976,8 +1887,8 @@ proceeds by establishing \emph{purity} of intersection cohomology on
 Schubert varieties.  The key input is the Decomposition Theorem (BBD):
 for the proper map $\pi\colon G/B \to G/P$, the direct image
 $R\pi_* \IC_{G/B}$ decomposes into shifts of IC complexes, each pure
-of a single weight.  Concentration of the associated graded---hence
-Koszulness---follows.  This is the classical mechanism behind the
+of a single weight.  Concentration of the associated graded, hence
+Koszulness, follows.  This is the classical mechanism behind the
 final row of the Steinberg dictionary
 (Theorem~\ref{thm:steinberg-presentation}(iv):
 IC purity $\leftrightarrow$ Koszulness).
@@ -1060,7 +1971,8 @@ The purity criterion holds for the three Koszul examples:
   cohomology is pure of weight~$2$.  The non-central OPE data
   that feeds the bar differential has pole order at most one:
   for the abelian current algebra $[J,J]$ is central, and there
-  are no non-central fields with $\Delta \leq 1$ beyond~$J$ itself.
+  are no non-central fields with $\Delta \leq 1$ beyond~$J$ itself
+  (the only field of conformal dimension~$1$ is $J$, which is central: $[J,J] = k\cdot\mathbf{1}$).
   Thus $\mathrm{gr}^1\cL_{\cA}$ is also a local system of pure
   weight~$1$, and purity holds.
 \end{enumerate}
@@ -1234,8 +2146,8 @@ The weight spectral sequence then degenerates at~$E_1$, the bar
 cohomology $H^{p,q}(\barB(\cA))$ is concentrated along the
 diagonal $p + q = $ bar degree, and~$\cA$ is chirally Koszul.
 
-Conversely, when the IC summands are mixed---carrying contributions
-of multiple weights---extensions between different weight pieces
+Conversely, when the IC summands are mixed (carrying contributions
+of multiple weights), extensions between different weight pieces
 produce non-trivial differentials $d_r$ for $r \ge 2$ in the weight
 spectral sequence.  The bar cohomology spreads off the diagonal:
 $H^{p,q}(\barB(\cA)) \neq 0$ for $q \neq 0$, and
@@ -1313,8 +2225,8 @@ $\cL_\cA$ restricted to~$Y_\alpha$, i.e.\ the $V$-filtration
 index).  Different summands with
 different weights lie in different rows of the weight spectral
 sequence.  Since the differentials $d_r$ (for $r \geq 1$)
-connect rows differing in weight by~$r$, purity---each row
-carrying a single weight---forces $d_r = 0$ for all $r \geq 1$
+connect rows differing in weight by~$r$, purity (each row
+carrying a single weight) forces $d_r = 0$ for all $r \geq 1$
 on the off-diagonal terms, giving $E_1$-degeneration and hence
 concentration.
 
@@ -1345,7 +2257,7 @@ $\IC_{\overline{C}_w}$ on Schubert cells $C_w \subset G/B$ are
 pure because Schubert varieties are rationally smooth.  Purity of
 each IC summand in $R\pi_*\IC_{G/B}$ forces the weight spectral
 sequence to degenerate, and the Ext algebra
-$\mathrm{Ext}^*_{\cO}(L, L)$ is concentrated on the diagonal---this
+$\mathrm{Ext}^*_{\cO}(L, L)$ is concentrated on the diagonal; this
 is Koszulness.
 
 Proposition~\ref{prop:decomposition-fm} is the chiral analog.
@@ -1373,8 +2285,8 @@ The analogy is not merely structural.  In both cases, the mechanism
 is the same: purity of intersection cohomology on the strata of a
 proper map forces the weight spectral sequence to collapse, and the
 resulting diagonal concentration \emph{is} Koszulness.  The
-geometric input differs---rational smoothness of Schubert varieties
-versus the OPE pole structure on FM boundary divisors---but the
+geometric input differs (rational smoothness of Schubert varieties
+versus the OPE pole structure on FM boundary divisors), but the
 homological algebra is identical.  The simple-pole principle
 (Remark~\ref{rem:simple-pole-principle}) is the chiral translation
 of rational smoothness: simple OPE poles produce smooth collision
@@ -1382,7 +2294,7 @@ strata, just as simple reflections produce smooth Schubert divisors.
 Higher-order non-scalar poles produce singular collision data, just
 as longer Weyl group elements produce singular Schubert varieties
 (though the Schubert case is saved by rational smoothness, which has
-no automatic chiral counterpart---this is why chiral Koszulness is
+no automatic chiral counterpart; this is why chiral Koszulness is
 \emph{harder} than category-$\cO$ Koszulness).
 \end{remark}
 
@@ -1544,7 +2456,7 @@ Theorem~\ref{thm:koszul-lagrangian-concentration} identifies with
 clean self-intersection.
 \emph{(ii)} Spectral collapse (no higher differentials in the PBW
 spectral sequence) means the virtual class
-$[\Steinb_b]^{\mathrm{vir}}$ equals the fundamental class---i.e.,
+$[\Steinb_b]^{\mathrm{vir}}$ equals the fundamental class, i.e.,
 the excess bundle $\mathcal{E}$ is trivial.
 \emph{(iii)} Formality ($m_k = 0$ for $k \geq 3$) means
 the derived structure on $\Steinb_b$ is formal: the derived
@@ -1570,7 +2482,7 @@ self-intersection $\Steinb_b$ is explicitly smooth:
   is a $(-2)$-shifted cotangent bundle $T^*[-2]V$ for a vector
   space~$V$.  The zero section $\cL_b = V$ is a linear Lagrangian,
   and $\Steinb_b = V \times_{T^*[-2]V}^h V \simeq T^*[-1]V$
-  is a $(-1)$-shifted cotangent bundle---smooth.  Bar cohomology
+  is a $(-1)$-shifted cotangent bundle, smooth.  Bar cohomology
   is in degree~$1$: the simple pole $\beta(z)\gamma(w) \sim
   (z-w)^{-1}$ gives a single intersection generator.
 
@@ -1662,9 +2574,9 @@ Heuristically, the étale groupoid picture sharpens the geometric
 meaning of the
 Koszul locus.  In the moduli of chiral algebras, the Koszul locus
 is precisely where the self-intersection groupoid is étale.
-Crossing the Koszul boundary---as when Drinfeld--Sokolov reduction
+Crossing the Koszul boundary, as when Drinfeld--Sokolov reduction
 introduces higher OPE poles
-(Theorem~\ref{thm:ds-koszul-obstruction})---is the transition from
+(Theorem~\ref{thm:ds-koszul-obstruction}), is the transition from
 étale to non-étale: the source map acquires non-trivial derived
 fibers, the Morita theorem fails, and the bar-cobar counit develops
 a non-trivial kernel and cokernel measured by the excess intersection
@@ -1673,7 +2585,7 @@ resolution $\widetilde{\cN} \to \cN$ is an isomorphism over the
 regular nilpotent locus (étale fibers) and has non-trivial fibers
 over the singular locus (the Springer fiber).  The bar complex
 $\barB(\cA)$ is étale over the Koszul locus and has non-trivial
-fibers---the higher $\Ainf$ operations---over the non-formal locus.
+fibers, the higher $\Ainf$ operations, over the non-formal locus.
 \end{remark}
 
 \begin{remark}[Spectral parameter: operadic origin]
@@ -1717,7 +2629,7 @@ an equivariant structure datum for the $E_1$-composition.
 The deconcatenation coproduct $\Delta$ is the unique
 $E_1$-coalgebra structure on the bar complex
 $\barB(\cA) = T^c(s^{-1}\bar{\cA})$ compatible with the
-cofree conilpotent coalgebra structure---this is the standard
+cofree conilpotent coalgebra structure; this is the standard
 result that $T^c(V)$ carries a unique conilpotent coproduct
 (Loday--Vallette, Proposition~1.2.6).  The
 $\SCchtop$-compatibility condition then requires that $d_{\barB}$
@@ -1906,7 +2818,7 @@ is a coderivation by the universal property of cofree coalgebras
 the unique coassociative coproduct on the cofree coalgebra, every
 coderivation is determined by its cogenerator projection, and the
 period insertion's projection is the $A$-cycle integral of the
-curvature class---a well-defined linear map on cogenerators.
+curvature class, a well-defined linear map on cogenerators.
 
 Therefore $\Dg{g} = \dfib + \delta_{\mathrm{per}}$ is a sum of
 coderivations, hence a coderivation, and
@@ -1968,7 +2880,6 @@ ingredients establish this.
 \ClaimStatusProvedElsewhere{}
 (Volume~I, Theorem~\ref*{thm:R-fact-canonical})]
 \label{prop:R-canonical-vol2}%
-\label{thm:R-fact-canonical}%
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item \emph{Uniqueness of the coproduct.}
   The bar complex $\barB(\cA) = T^c(s^{-1}\bar{\cA})$ is a
@@ -1995,7 +2906,7 @@ ingredients establish this.
   at all genera.  The corrected differential~$\Dg{g}$
   introduces period integrals coupling the tensor ordering to
   the Hodge bundle, but these corrections are themselves
-  determined by $\kappa(\cA)$ and the period matrix --- both
+  determined by $\kappa(\cA)$ and the period matrix, both
   data of the modular homotopy type.
 \end{enumerate}
 \end{proposition}
@@ -2004,9 +2915,9 @@ ingredients establish this.
 \label{rem:R-canonical-consequence}
 The canonicity of~$\Delta$ means the entire Swiss-cheese
 programme rests on Volume~I's proved core.  Every result
-that invokes the $\SCchtop$ structure---recognition
+that invokes the $\SCchtop$ structure (recognition
 (Theorem~\ref{thm:recognition-foundations}), descent, Feynman $m_k$
-integrals---inherits its $\R$-direction data from the
+integrals) inherits its $\R$-direction data from the
 modular homotopy type.  The $\R$-factorization is a
 \emph{consequence} of chiral Koszul duality, not a
 companion to it.

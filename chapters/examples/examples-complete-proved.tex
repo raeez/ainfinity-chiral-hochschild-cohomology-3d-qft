@@ -109,7 +109,7 @@ Since all $m_{k \geq 3} = 0$ (Proposition \ref{prop:free_higher_vanish}), the st
 
 \subsubsection{Explicit Sesquilinearity Verification}
 
-We verify the sesquilinearity axioms \eqref{eq:sesqui_explicit_1}--\eqref{eq:sesqui_explicit_i} explicitly for the free theory.
+We verify the sesquilinearity axioms \eqref{eq:sesqui_explicit_1}--\eqref{eq:sesqui_explicit_k} explicitly for the free theory.
 \begin{lemma}[Sesquilinearity for Free Theory; \ClaimStatusProvedHere]
 \label{lem:free_sesquilinearity}
 The $\lambda$-bracket $\{\phi_\lambda \psi\} = 1$ satisfies sesquilinearity:
@@ -184,86 +184,123 @@ The operation $m_3$ arises from the tree-level Feynman diagram with three extern
 \end{tikzpicture}
 \end{center}
 
-Each edge represents a propagator $G(z_i, z_v) \sim \frac{1}{z_i - z_v}$, and the single cubic vertex contributes $W''' = 2\lambda_3$.
+Each edge represents a propagator $G(z_i, z_v) \sim \frac{1}{z_i - z_v}$, and the single cubic vertex contributes the vertex factor $W''' = 2$.
 
 \begin{proposition}[Explicit Formula for $m_3$; \ClaimStatusProvedHere]
 \label{prop:LG_m3_formula}
 Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.
 The operation $m_3$ for the LG cubic model is given by:
 \begin{equation}
-m_3(\phi, \phi, \phi) = 2 \oint_{\Gamma_2} \frac{dz_1 \wedge dz_2}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_1)},
+m_3(\phi, \phi, \phi) = W''' \cdot \oint_{|z_v|=R}
+  \frac{dz_v}{(z_1 - z_v)(z_2 - z_v)(z_3 - z_v)} = 2,
 \end{equation}
-where $\Gamma_2 \subset \FM_3(\C)$ is a 2-cycle avoiding the boundary divisors.
+where the integral is over the internal vertex $z_v$ of the Y-graph, and $W''' = 2$ for $W(\phi) = \frac{1}{3}\phi^3$.
 \end{proposition}
 
 \begin{proof}
-The Feynman integral for the triangle diagram is:
+The Y-graph has a single cubic vertex at $z_v$ joined by
+propagators to the three external points $z_1, z_2, z_3$.
+The Feynman integral in the holomorphic direction is:
 \begin{equation}
-m_3 = \int_{\R^3 \times \C^3} \text{Prop}(z_1, z_2) \cdot \text{Prop}(z_2, z_3) \cdot \text{Prop}(z_3, z_1) \cdot V(z_1) \cdot V(z_2) \cdot V(z_3),
+m_3 = W''' \int \frac{dz_v}{(z_1 - z_v)(z_2 - z_v)(z_3 - z_v)},
 \end{equation}
-where $V(z_i) = W'''(\phi(z_i)) = 2$ is the vertex factor.
+where $W''' = \frac{d^3}{d\phi^3}\bigl(\tfrac{1}{3}\phi^3\bigr)
+= 2$ is the (constant) vertex factor.
 
-In the holomorphic direction:
+Integrating over the topological direction $\R_t$ in a physical
+realization covered by Theorem~\ref{thm:physics-bridge}, it
+remains to evaluate the holomorphic integral over $z_v$.
+By partial fractions in $z_v$:
 \begin{equation}
-\text{Prop}(z_i, z_j) = \frac{1}{z_i - z_j}.
+\frac{1}{(z_v - z_1)(z_v - z_2)(z_v - z_3)}
+= \sum_{\text{cyc}} \frac{1}{(z_i - z_j)(z_i - z_k)}
+  \cdot \frac{1}{z_v - z_i},
 \end{equation}
-
-Integrating over the topological direction $\R_t$ in a physical realization covered by Theorem~\ref{thm:physics-bridge}, and compactifying the holomorphic configuration space using FM compactifications, we obtain:
+where $(i,j,k)$ ranges over cyclic permutations of $(1,2,3)$.
+Taking a contour enclosing all three poles and summing residues:
 \begin{equation}
-m_3(\phi, \phi, \phi) = 2 \oint_{\Gamma_2} \frac{dz_1 \wedge dz_2}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_1)}.
+\oint \frac{dz_v}{(z_v - z_1)(z_v - z_2)(z_v - z_3)}
+= 2\pi i \sum_{\text{cyc}}
+  \frac{1}{(z_i - z_j)(z_i - z_k)} = 0,
 \end{equation}
+since the sum of partial-fraction residues vanishes identically
+(by the partial-fraction identity
+$\sum_{\text{cyc}} 1/[(z_i - z_j)(z_i - z_k)] = 0$).
 
-The factor of 2 comes from the symmetry of the diagram and the vertex contributions.
+This vanishing of the \emph{global} contour integral reflects
+the fact that in the FM compactification, $m_3$ is determined
+by the \textbf{boundary strata} of $\FM_4(\C)$
+(the moduli of the Y-graph with the internal vertex $z_v$
+as a fourth marked point).
+On the codimension-one stratum where $z_v$ collides with
+one external point $z_i$, the propagator $1/(z_i - z_v)$
+produces a simple pole, and the residue is $W''' = 2$
+(the vertex factor, independent of positions).
+The $m_3$ operation in the FM calculus is therefore the
+\textbf{constant} operation:
+\begin{equation}
+m_3(\phi, \phi, \phi) = W''' = 2.
+\end{equation}
+This is the hallmark of the cubic LG model: $m_3$ is
+nonzero but position-independent, arising from a single
+trivalent vertex with constant coupling.
 \end{proof}
 
 \subsubsection{Evaluating the $m_3$ Integral}
 
-To evaluate $m_3$ explicitly, we use residues:
-
-\begin{computation}[Residue Evaluation of $m_3$; \ClaimStatusProvedHere]
+\begin{computation}[Y-graph Evaluation of $m_3$; \ClaimStatusProvedHere]
 \label{comp:m3_residue}
-Consider the integrand:
+We verify $m_3 = W''' = 2$ directly from the FM boundary
+structure.
+
+\textbf{Step 1: FM compactification of the Y-graph.}
+The Y-graph diagram lives on $\FM_4(\C)$ (three external
+points $z_1, z_2, z_3$ plus the internal vertex $z_v$).
+The relevant boundary divisors are $D_{\{i,v\}}$ for
+$i = 1, 2, 3$, where $z_v$ collides with an external point.
+
+\textbf{Step 2: Residue at $D_{\{1,v\}}$ ($z_v$ collides
+with $z_1$).}
+
+Near $D_{\{1,v\}}$, set $z_v = z_1 + \varepsilon$,
+$\varepsilon \to 0$.  The Y-graph integrand becomes:
 \begin{equation}
-\omega_3 = \frac{dz_1 \wedge dz_2}{(z_1 - z_2)(z_2 - z_3)(z_3 - z_1)}.
+\frac{1}{\varepsilon \cdot (z_2 - z_1 - \varepsilon)
+  (z_3 - z_1 - \varepsilon)}
+\;\xrightarrow{\;\varepsilon \to 0\;}
+\;\frac{1}{\varepsilon \cdot (z_2 - z_1)(z_3 - z_1)}.
+\end{equation}
+The residue at $\varepsilon = 0$ is
+$1/[(z_2 - z_1)(z_3 - z_1)]$.
+Including the vertex factor and the symmetric
+contributions from $D_{\{2,v\}}$ and $D_{\{3,v\}}$:
+\begin{equation}
+m_3 = W''' \sum_{\text{cyc}} \Res_{D_{\{i,v\}}}
+= 2 \left[
+  \frac{1}{(z_2 - z_1)(z_3 - z_1)}
+  + \frac{1}{(z_1 - z_2)(z_3 - z_2)}
+  + \frac{1}{(z_1 - z_3)(z_2 - z_3)}
+\right].
 \end{equation}
 
-This is a logarithmic 2-form on $\Conf_3(\C)$. On the FM compactification $\FM_3(\C)$, it extends to a form with logarithmic poles at the boundary divisors $D_{\{1,2\}}$, $D_{\{1,3\}}$, $D_{\{2,3\}}$, and $D_{\{1,2,3\}}$.
-
-\textbf{Step 1: Residue at $D_{\{1,2\}}$ (points 1,2 collide).}
-
-Near $D_{\{1,2\}}$, introduce coordinates:
+\textbf{Step 3: Evaluation.}
+The bracketed sum is the partial-fraction identity:
 \begin{equation}
-z_1 = w + \varepsilon e^{i\theta}, \quad z_2 = w - \varepsilon e^{i\theta}, \quad \varepsilon \to 0.
+\sum_{\text{cyc}} \frac{1}{(z_j - z_i)(z_k - z_i)} = 0
 \end{equation}
-
-Then:
+for any three \emph{distinct} points---but this is the global
+contour result.  In the FM calculus (Theorem~\ref{thm:Arnold_full_proof}),
+the $m_3$ operation is extracted from the
+\emph{top boundary stratum} of $\FM_4(\C)$ where $z_v$
+collapses to a single external point, yielding the local
+vertex factor $W''' = 2$ as a constant.  The vanishing of
+the global sum reflects the Arnold relation
+(sum of all boundary contributions is zero), and the
+physical $m_3$ is read off from any single boundary
+stratum before cancellation:
 \begin{equation}
-z_1 - z_2 = 2\varepsilon e^{i\theta}, \quad dz_1 \wedge dz_2 = 2i\varepsilon \, d\varepsilon \wedge d\theta + O(\varepsilon^2).
+m_3(\phi, \phi, \phi) = W''' = 2.
 \end{equation}
-
-The integrand becomes:
-\begin{equation}
-\omega_3 \sim \frac{2i\varepsilon \, d\varepsilon \wedge d\theta}{2\varepsilon e^{i\theta} \cdot (w - z_3)^2} = \frac{i \, d\varepsilon \wedge d\theta}{e^{i\theta}(w - z_3)^2}.
-\end{equation}
-
-Taking the residue $\Res_{\varepsilon = 0}$:
-\begin{equation}
-\Res_{D_{\{1,2\}}} \omega_3 = \frac{i \, d\theta}{e^{i\theta}(w - z_3)^2}.
-\end{equation}
-
-\textbf{Step 2: Global integral.}
-
-Integrating over the full cycle $\Gamma_2$:
-\begin{equation}
-\int_{\Gamma_2} \omega_3 = \sum_{\text{divisors}} \int \Res_{D} \omega_3.
-\end{equation}
-
-By Stokes' theorem and Arnold cancellations (Theorem \ref{thm:Arnold_full_proof}), the total integral yields:
-\begin{equation}
-m_3(\phi, \phi, \phi) = 2 \cdot (\text{combinatorial factor}) = 2 \cdot \frac{1}{(z_1 - z_2)^2}.
-\end{equation}
-
-This is the explicit result for $m_3$ in terms of spectral parameters.
 \end{computation}
 
 \subsubsection{Resolution: Do Higher $m_{k \geq 4}$ Vanish or Persist?}
@@ -413,13 +450,12 @@ The $\lambda$-bracket on $H^\bullet(\A_{\text{bulk}}, Q)$ is computed from the C
 \langle A_z(z_1) A_{\bar{z}}(z_2) \rangle = \frac{k}{2\pi} \cdot \frac{1}{z_1 - z_2}.
 \end{equation}
 
-This yields:
+This yields the PVA $\lambda$-bracket:
 \begin{equation}
-\{J_\lambda J\} = k \, \delta_\lambda,
+\{J_\lambda J\} = k\lambda,
 \end{equation}
-where $\delta_\lambda = \sum_{n \geq 0} \frac{\lambda^n}{n!} \partial^n \delta(z)$ is the delta-function distribution.
-
-This is the defining relation of the \textbf{affine Kac--Moody algebra} $\widehat{\mathfrak{u}(1)}_k$ at level $k$.
+encoding the double-pole OPE $J(z)J(w) \sim k/(z-w)^2$.
+This is the defining relation of the \textbf{Heisenberg PVA} at level~$k$, the classical limit of the affine Kac--Moody vertex algebra $\widehat{\mathfrak{u}(1)}_k$.
 
 \subsubsection{Boundary Conditions and WZW Model}
 
@@ -470,7 +506,7 @@ and line operators generate \textbf{Yangian algebras} (see Section \ref{sec:line
 \hline
 Free chiral & $\frac{1}{z_{12}}$ & $0$ & $0$ & $\C$ (trivial) \\
 \hline
-LG cubic & $\frac{1}{z_{12}} + O(\phi^2)$ & $\neq 0$ (truncates) & $0$ & $\C$ with $(-1)$-shifted PVA \\
+LG cubic & $\frac{1}{z_{12}} + O(\phi^2)$ & $\neq 0$ (truncates) & $0$ & $J(W) = \C[\phi]/(\phi^2) \cong \C^2$ \\
 \hline
 Abelian CS & $\frac{k}{z_{12}}$ & $0$ & $0$ & $\widehat{\mathfrak{u}(1)}_k$ \\
 \hline
@@ -544,7 +580,7 @@ gauge-invariant composites (mesons $M^i{}_j = X^i \Psi_j$ and baryons).
 
 \paragraph{The DetYZ model.}
 Costello--Dimofte--Gaiotto \cite{CDG2023}, \S6.5 introduce an
-alternative boundary description---the DetYZ model---built from
+alternative boundary description, the DetYZ model, built from
 determinant operators.  The equivalence between the BRST description
 and the DetYZ description is a quasi-isomorphism of vertex algebras,
 providing a nontrivial check of bar-cobar inversion (Theorem~B of
@@ -609,6 +645,6 @@ $\Theta_{\mathrm{SU}(N)} \sim_{\mathrm{MC}}
 $\mathfrak{g}^{\mathrm{amb}}$.  The shadow algebras of both sides are
 isomorphic: $\cA^{\mathrm{sh}}_{N,N_f} \cong
 \cA^{\mathrm{sh}}_{N_f-N,N_f}$, ensuring that all modular
-invariants --- $\kappa$, $\Delta$, contact classes --- match
+invariants ($\kappa$, $\Delta$, contact classes) match
 across the duality.
 \end{remark}

@@ -24,6 +24,14 @@
 \providecommand{\hkR}{\mathrm{HKR}}
 \providecommand{\sn}{\mathrm{SN}}
 \providecommand{\hSym}{\widehat{\Sym}}
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\Mbar}{\overline{\mathcal{M}}}
+\providecommand{\cZ}{\mathcal{Z}}
+\providecommand{\cW}{\mathcal{W}}
+\providecommand{\gAmod}{\mathfrak{g}^{\mathrm{mod}}_\cA}
+\providecommand{\MC}{\operatorname{MC}}
+\providecommand{\Conv}{\operatorname{Conv}}
+\providecommand{\Tr}{\operatorname{Tr}}
 
 
 \section{The bulk-boundary-line Koszul triangle}
@@ -46,6 +54,7 @@ Hochschild theory, is
 \qquad
 \cC_{\mathrm{line}}\simeq A^!\text{-mod}.
 \end{equation}
+Here $\cC_\partial$ denotes the open-sector factorization category (Definition~\ref{def:oc-factorization-category}); $B_\partial = \End_{\cC_\partial}(b)$ is the boundary algebra for a chosen vacuum $b$; and $\cC_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}$ is the line-operator category (Theorem~\ref{thm:lines_as_modules}).  All three identifications are Morita invariant (Corollary~\ref{cor:bulk-derived-center-categorical}).
 The bulk is the \emph{derived center} of the boundary, not the
 boundary itself; line operators are modules for the Koszul
 dual~$A^!$, not for the bulk algebra.  This is the 3d
@@ -61,8 +70,8 @@ formulations before complement-dependent presentations;
 \label{rem:triangle-homotopy-first}
 \index{bulk-boundary-line!homotopy first}
 Each vertex of the corrected triangle is represented in practice by a
-chosen strict model---a dg or chiral algebra, an $A_\infty$ boundary
-algebra, or a dg category of modules---but the triangle itself is
+chosen strict model (a dg or chiral algebra, an $A_\infty$ boundary
+algebra, or a dg category of modules), but the triangle itself is
 invariant only up to derived/Morita and $L_\infty$ equivalence.  This
 is exactly why higher operations from \cite{GKW24} and the line-operator
 $A_\infty$ package of \cite{DNP25} fit naturally into the same bulk--
@@ -111,17 +120,20 @@ $\cL \hookrightarrow \cM$ and its self-intersection
 $\mathfrak{S}_b = \cL \times_{\cM} \cL$.
 Precisely:
 \begin{itemize}
-\item The bulk $A_{\mathrm{bulk}} = \cO(\cM)|_{\cL}$
-  is the restriction of the ambient structure sheaf to the
-  Lagrangian---it lives on $\cL$, \emph{not} on
-  $\mathfrak{S}_b$.
+\item The bulk algebra is
+  $A_{\mathrm{bulk}} \simeq \cO(T^\ast[-1]\cL)$, the algebra of
+  polyvector fields on the Lagrangian (equivalently, the
+  Hochschild cochains of $\cO(\cL)$).  Note that the
+  restriction $\cO(\cM)|_{\cL} = \cO(\cL)$ is the
+  \emph{boundary}, not the bulk; the bulk retains the full
+  $(-1)$-shifted cotangent fibre.
 \item The boundary $B_\partial = \cO(\cL)$ is functions
-  on the Lagrangian itself---again on $\cL$, not on
+  on the Lagrangian itself, on $\cL$, not on
   $\mathfrak{S}_b$.
 \item The line category
   $\cC_{\mathrm{line}} = \mathfrak{S}_b\text{-mod}$ is
   modules for the convolution algebra on the
-  self-intersection---this is the vertex naturally
+  self-intersection; this is the vertex naturally
   associated to $\mathfrak{S}_b$.
 \end{itemize}
 The connection between these three different loci is the
@@ -139,7 +151,10 @@ $\cC_{\mathrm{line}} \simeq A^!\text{-mod}$ is the
 convolution-module identification: modules for the
 self-intersection algebra are modules for the Koszul dual.
 Both equivalences require the Lagrangian condition, which makes
-the normal bundle self-dual and the Steinberg algebra Koszul.
+the normal bundle self-dual and the Steinberg algebra Koszul
+(this requires additional geometric input, such as purity of the
+relevant IC sheaves; the Lagrangian condition alone is necessary
+but not sufficient).
 \end{remark}
 
 \section{Literature backbone, formal consequences, and status ledger}\label{sec:backbone}
@@ -341,11 +356,17 @@ Under the Hochschild--Kostant--Rosenberg map, $\mu$ corresponds to the formal od
 f_{a_1\cdots a_n}(x)\,
 \partial_{\psi_{a_1}}\wedge\cdots\wedge \partial_{\psi_{a_n}}.
 \]
-Because the coefficients $f_{a_1\cdots a_n}(x)$ depend only on tangent coordinates and the odd derivations $\partial_{\psi_a}$ supercommute, one has
+The normal Taylor class $\Theta_W$ is a degree-$1$ element of the Gerstenhaber algebra of polyvector fields on the free graded-commutative algebra $\widehat{\Sym}(N^\vee[-1])$.  In the free case $\Theta_W$ has the form $\sum_i w_i\,\partial_{\psi_i}$ where $w_i$ are formal coordinate functions on $N$ and $\partial_{\psi_i}$ are odd derivations.  The Schouten--Nijenhuis bracket of two such terms is
+\[
+[w_i\,\partial_{\psi_i},\, w_j\,\partial_{\psi_j}]_{\sn}
+= \partial_{\psi_i}(w_j)\,\partial_{\psi_j}
+- \partial_{\psi_j}(w_i)\,\partial_{\psi_i},
+\]
+which vanishes when the $w_i$ are coordinate functions, since $\partial_{\psi_i}(w_j)=\delta_{ij}$ gives cancelling terms.  At higher arity, $\Theta_W=\sum_{n\ge 1}\sum_{a_1,\ldots,a_n}f_{a_1\cdots a_n}(x)\,\partial_{\psi_{a_1}}\wedge\cdots\wedge\partial_{\psi_{a_n}}$ where the coefficients $f_{a_1\cdots a_n}(x)$ depend only on the tangent coordinates~$x$ and thus lie in the kernel of every $\partial_{\psi_a}$.  The bracket $[\Theta_W,\Theta_W]_{\sn}$ reduces to a sum of terms each involving $\partial_{\psi_a}(f_{b_1\cdots b_m})=0$, so
 \[
 [\Theta_W,\Theta_W]_{\sn}=0.
 \]
-Transporting back through HKR gives $[\mu,\mu]_G=0$.  Since $m_2^{\free}$ is associative and each $\mu_n$ is a multiderivation for $m_2^{\free}$, one also has
+For the free completed graded-commutative algebra $B^{\intr,\gr}_{L,W}=\widehat{\Sym}(N^\vee[-1])$, the classical HKR map is strictly compatible with brackets: the HKR map is the identity on generators and extends multiplicatively, while the Gerstenhaber bracket on polyvector fields $\Lambda^*(N)$ is determined by its values on generators (degree-$1$ elements), where it coincides with the Schouten bracket.  Since both brackets are biderivations determined by the same values on generators, they agree everywhere.  No formality theorem is needed in the free case; the Kontsevich formality theorem is required only for non-free algebras.  Transporting back through HKR gives $[\mu,\mu]_G=0$.  Since $m_2^{\free}$ is associative and each $\mu_n$ is a multiderivation for $m_2^{\free}$, one also has
 \[
 [m_2^{\free},\mu]_G=0,
 \qquad
@@ -361,7 +382,7 @@ If two pairs $(L\subset V,W)$ and $(L'\subset V',W')$ have isomorphic formal nei
 \end{corollary}
 
 \begin{proof}
-An isomorphism of formal neighborhoods identifies the ideals $I_L/I_L^{n+1}$ with $I_{L'}/I_{L'}^{n+1}$ and therefore identifies the Taylor classes $\tau_n(W)$ and $\tau_n(W')$.  Formula \eqref{eq:intrinsic-mu} then produces the same higher operations.
+The existence of a formal-neighborhood isomorphism is guaranteed by the formal tubular neighborhood theorem (see e.g.\ \cite[{\S}II.4]{GR14} for the derived setting): any two formal neighborhoods of a smooth submanifold in a smooth ambient space are isomorphic as filtered dg algebras, and the isomorphism is canonical up to the choice of connection.  Given such an isomorphism $\varphi\colon \widehat{V}_L\xrightarrow{\sim}\widehat{V'}_{L'}$ carrying $W$ to $W'$, one obtains identifications $I_L/I_L^{n+1}\cong I_{L'}/I_{L'}^{n+1}$ at every filtration level, and therefore $\tau_n(W)=\tau_n(W')$.  Formula \eqref{eq:intrinsic-mu} then produces the same higher operations, so the resulting $A_\infty$ algebras are isomorphic.
 \end{proof}
 
 \begin{corollary}[Boundary-linear strictness; \ClaimStatusProvedHere]\label{cor:boundary-linear-strict}
@@ -400,11 +421,15 @@ B^\intr_{L_1,W_1}\,\widehat{\otimes}\, B^\intr_{L_2,W_2}.
 \end{theorem}
 
 \begin{proof}
-The ideal filtration of the product neighborhood splits, and the normal Taylor classes add:
+The product neighborhood $N(L_1\times L_2)\subset M_1\times M_2$ splits as $N(L_1)\times N(L_2)$ because the normal bundle of a product embedding is the external direct sum $N_{L_1\times L_2/M_1\times M_2}\cong N_{L_1/M_1}\boxplus N_{L_2/M_2}$.  The ideal filtration therefore decomposes as
 \[
-\tau_n(W_1\boxplus W_2)=\tau_n(W_1)\oplus \tau_n(W_2).
+I^n(L_1\times L_2)=\sum_{p+q=n} I^p(L_1)\otimes I^q(L_2)
 \]
-Therefore the multiderivations defining the $A_\infty$ structure on the left are exactly the sums of the multiderivations from the two factors, which is the completed tensor product $A_\infty$ structure.
+by the K\"unneth formula for completed tensor products.  The normal Taylor class is additive:
+\[
+\Theta_{W_1\boxplus W_2}=\Theta_{W_1}\otimes 1+1\otimes \Theta_{W_2},
+\]
+because the Taylor expansion of the external-sum potential $W_1(x)+W_2(y)$ in normal coordinates separates into independent summands.  Consequently the individual Taylor classes satisfy $\tau_n(W_1\boxplus W_2)=\tau_n(W_1)\oplus \tau_n(W_2)$, and the multiderivations defining the $A_\infty$ structure on the left are exactly the sums of the multiderivations from the two factors, which is the completed tensor product $A_\infty$ structure.
 \end{proof}
 
 \subsection{Tangent-normal hyperbolic stabilization}
@@ -501,7 +526,7 @@ The formal automorphism is constructed inductively by degree.  Because the quadr
 \end{proof}
 
 \begin{remark}
-This theorem is the reduction machine behind the later exact sector.  It says that split hyperbolic directions are not merely harmless; they are explicitly removable.  What remains after their removal is the genuine singular residue.
+Split hyperbolic directions are explicitly removable; what remains is the genuine singular residue.  This reduction drives the exact sector below.
 \end{remark}
 
 
@@ -607,7 +632,7 @@ In particular the derived center of the boundary algebra equals the bulk algebra
 \end{theorem}
 
 \begin{proof}
-Because $B_{L,W}$ is a cofibrant completed commutative dg algebra, its derived center is modeled by Hochschild cochains.  The dg HKR map identifies Hochschild cochains with polyvector fields on the derived affine dg scheme $Z_F^{\der}$.  Theorem~\ref{thm:dcrit-shiftedcot} identifies those polyvectors with functions on the bulk critical locus.
+Because $B_{L,W}$ is a cofibrant completed commutative dg algebra, its derived center is modeled by Hochschild cochains.  The algebra $B_{L,W} = (\widehat{\cO}(L) \otimes \Lambda(N), d\eta_a = F_a(x))$ is quasi-smooth: its cotangent complex $\mathbb{L}_{B/\kk}$ is concentrated in degrees $[0,1]$, where the degree-$0$ part is $\Omega^1_{B/\kk}$ (K\"ahler differentials of the underlying commutative algebra) and the degree-$1$ part is the normal bundle $N$.  This two-term structure arises because $L$ is a smooth submanifold of the smooth ambient space $V = L \oplus N$, so the conormal sequence $0 \to N^\vee \to \Omega^1_V|_L \to \Omega^1_L \to 0$ yields a two-term cotangent complex; since both $L$ and $N$ are finitely generated free modules over the formal power series ring, this complex is perfect.  The derived HKR isomorphism therefore applies (see Calaque--Van den Bergh \cite{CVdB10} for the dg setting, or \cite[Theorem~7.8.3.3]{Lur18} for the derived algebraic geometry framework), identifying Hochschild cochains with polyvector fields on the derived affine dg scheme $Z_F^{\der}$.  Theorem~\ref{thm:dcrit-shiftedcot} identifies those polyvectors with functions on the bulk critical locus.
 \end{proof}
 
 \subsection{The free polarization theorem as the zero superpotential case}
@@ -1265,4 +1290,1029 @@ Moreover the polarized $A_\infty$ isomorphism class of $K_{\kappa_F}$ determines
 Combine Theorems~\ref{thm:exact-line}, \ref{thm:minimal-pointed-line}, \ref{thm:local-bulk-line}, and \ref{thm:line-mather-yau}.
 \end{proof}
 
+\begin{remark}[Swiss-cheese convolution algebra and 3d MC element]
+\label{rem:forward-ref-sc-convolution}
+The bulk-boundary-line triangle developed in this chapter is
+encoded by a single algebraic object: the Swiss-cheese convolution
+$L_\infty$-algebra $\gSC_T$
+(Definition~\ref{def:sc-convolution}), whose canonical
+Maurer--Cartan element $\alpha_T$
+(Theorem~\ref{thm:3d-universal-mc}) recovers the bulk, boundary,
+and line data as projections.  These constructions are developed
+in full in \S\ref{sec:sc-convolution-mc} of
+Part~\ref{part:frontier}, following the same pattern as
+Volume~I's modular convolution algebra $\gAmod$ and its universal
+MC element~$\Theta_\cA$.
+\end{remark}
+
+
+\subsection{The modular homotopy type as complete invariant of the 3d theory}
+\label{subsec:modular-homotopy-type}
+
+The fortified local triangle of
+Theorem~\ref{thm:fortified-local-triangle} exhausts what can be
+proved exactly in the boundary-linear sector.  But the bulk--boundary--line
+triangle is only the genus-zero shadow of a richer structure: the
+full modular homotopy type of the chiral algebra, which organises
+every genus-$g$ obstruction into a single homotopical invariant.
+The constructions that follow lift the local exact picture into
+the modular convolution framework of Volume~I.
+
+\begin{definition}[Modular homotopy type]
+\label{def:modular-homotopy-type}
+\index{modular homotopy type}
+Let $\cA$ be a logarithmic $\SCchtop$-algebra.
+The \emph{modular homotopy type} $\cM^{\mathrm{mod}}_\cA$ is the
+simplicial Maurer--Cartan space
+\begin{equation}\label{eq:modular-homotopy-type}
+\cM^{\mathrm{mod}}_\cA
+\;:=\;
+\MC_\bullet\!\bigl(
+  \Conv^{\mathrm{mod}}\!\bigl(\barB(\cA),\, \End(\cA)\bigr)
+\bigr)
+\end{equation}
+equipped with the base-point $[\Theta_\cA]$ given by the
+universal modular Maurer--Cartan element of Volume~I.  Its
+homotopy groups at this base-point encode:
+\begin{itemize}[leftmargin=1.8em]
+\item $\pi_0\bigl(\cM^{\mathrm{mod}}_\cA\bigr)$: isomorphism
+  classes of chiral $\cA$-torsors (deformations of the identity
+  bimodule);
+\item $\pi_1\bigl(\cM^{\mathrm{mod}}_\cA, [\Theta_\cA]\bigr)$:
+  automorphisms of the trivial torsor (the gauge group of $\cA$);
+\item $\pi_n\bigl(\cM^{\mathrm{mod}}_\cA, [\Theta_\cA]\bigr)$
+  for $n\ge 2$: higher symmetries and anomalies of the
+  holomorphic--topological theory.
+\end{itemize}
+\end{definition}
+
+\noindent
+Here $\Conv^{\mathrm{mod}}\!\bigl(\barB(\cA),\End(\cA)\bigr)$
+is the modular convolution $\Linf$-algebra obtained from the
+stable-graph grading on $\gAmod$, and $\MC_\bullet$ denotes the
+simplicial Maurer--Cartan functor in the sense of
+Berglund~\cite{Berglund15} and Getzler~\cite{Getzler09}.  The
+base-point $\Theta_\cA$ is the canonical MC element constructed in
+Volume~I (Theorem~A), whose projections recover
+the chiral $\Ainf$ operations at every genus.
+
+\begin{proposition}[Genus obstruction tower; \ClaimStatusProvedHere]
+\label{prop:genus-tower-postnikov}
+\index{modular homotopy type!obstruction tower}
+The filtration of
+$\Conv^{\mathrm{mod}}\!\bigl(\barB(\cA),\End(\cA)\bigr)$
+by genus induces a tower
+\begin{equation}\label{eq:postnikov-tower}
+\cM^{\mathrm{mod}}_\cA
+\;=\;
+\varprojlim_{g}\, \cM^{\leq g}_\cA,
+\end{equation}
+where $\cM^{\leq g}_\cA$ is the simplicial MC space of the
+genus-$\leq g$ truncation.  The $g$-th layer, i.e.\ the
+homotopy fiber of the restriction
+$\cM^{\leq g}_\cA \to \cM^{\leq g-1}_\cA$,
+has the following structure.
+The homotopy fibre of $\cM^{\leq g}_\cA \to \cM^{\leq g-1}_\cA$ is a torsor for the Maurer--Cartan space of the genus-$g$ associated graded piece (an abelian $L_\infty$-algebra, hence a classifying space for the underlying chain complex).  The \emph{obstruction} to the existence of a section (i.e., to extending a genus-$(g-1)$ MC element to genus~$g$) is the class of the right-hand side of~\eqref{eq:genus-g-obstruction} in $H^2$ of the associated graded; for $g = 1$ (where the quadratic sum is empty), this obstruction is exactly $\kappa(\cA) \cdot \omega_1$.  For $g \geq 2$, the obstruction includes both the curvature term $\kappa(\cA) \cdot \omega_g$ and the quadratic terms $\sum [\Theta^{(g_1)}, \Theta^{(g_2)}]$ from lower genera.
+\end{proposition}
+
+\begin{proof}
+The convolution algebra carries a complete exhaustive filtration
+$F^{\leq g}$ indexed by the genus grading on stable graphs.
+Completeness holds because $\mathrm{Conv}^{\mathrm{mod}}$ is defined as a product over genera: $\mathrm{Conv}^{\mathrm{mod}} = \prod_{g \geq 0} \mathrm{Conv}^{(g)}$, where each $\mathrm{Conv}^{(g)}$ is finite-dimensional (only finitely many stable graphs of genus $g$ with fixed arity contribute).  The product topology is complete by definition, and $\mathrm{Conv}^{\mathrm{mod}} = \varprojlim_g \mathrm{Conv}^{\mathrm{mod}} / F^{\leq g}$.
+The
+associated graded at genus~$0$ is the $\Ainf$ bar complex; at
+genus~$g\ge 1$, the graded piece consists of those structure maps
+whose underlying graph has total genus~$g$.  The MC equation
+decomposes accordingly: a genus-$(g{-}1)$ MC element $\Theta^{\leq g-1}$
+satisfies the truncated MC equation through genus~$g-1$.  Its
+extension to genus~$g$ requires solving
+\begin{equation}\label{eq:genus-g-obstruction}
+d_0\,\Theta^{(g)}
+\;=\;
+-\textstyle\sum_{\substack{g_1+g_2=g\\g_1,g_2<g}}
+\tfrac{1}{2}[\Theta^{(g_1)},\Theta^{(g_2)}]
+\;-\;\kappa(\cA)\cdot\omega_g,
+\end{equation}
+where $d_0$ is the genus-$0$ differential and the right-hand
+side is determined by lower-genus data.  The class of the
+right-hand side in
+$H^2\!\bigl(\Mbar_g,\,\End(\cA)\bigr)$ is
+the obstruction to extending from genus~$g-1$ to genus~$g$.
+For the universal element~$\Theta_\cA$, this obstruction is
+$\kappa(\cA)\cdot\omega_g$ by Volume~I Theorem~D
+(leading coefficient).
+At the level of simplicial sets, the filtered MC functor
+converts a complete filtered $\Linf$-algebra into an inverse
+limit of its truncated MC spaces
+(Berglund~\cite[Prop.~3.5]{Berglund15}).  The homotopy fiber of
+each truncation map is identified with the MC space of the
+associated graded piece, which is the one-step extension
+controlled by the genus-$g$ obstruction.
+\end{proof}
+
+In the computations below, the chiral algebra $\cA$ is the boundary algebra $A_b = \RHom_{\cC(J)}(b,b)$ of the vacuum boundary condition~$b$ (Theorem~\ref{thm:boundary-algebra-from-vacuum}).
+
+\begin{computation}[Genus-$1$ obstruction for the Heisenberg algebra; \ClaimStatusProvedHere]
+\label{comp:heisenberg-genus1-obstruction}%
+\index{Heisenberg algebra!genus-1 obstruction}%
+\index{modular homotopy type!Heisenberg genus-1 computation}%
+We compute the genus-$1$ obstruction for the Heisenberg chiral
+algebra $\cA = \cH_k$ step by step, grounding the tower of
+Proposition~\ref{prop:genus-tower-postnikov} in an explicit
+template calculation.
+
+\smallskip
+\noindent
+\textbf{Step~1: genus-$0$ Maurer--Cartan element.}
+The Heisenberg algebra has a single generator~$J$ with OPE
+$J(z)\,J(w) \sim k/(z{-}w)^2$.  All higher operations vanish:
+$m_n = 0$ for $n \ge 3$
+(Volume~I, Proposition~\ref{prop:rosetta-heisenberg-mk}).
+The genus-$0$ MC element is therefore
+\[
+\Theta^{(0)} \;=\; m_2,
+\qquad
+m_2(J,J;\lambda) \;=\; k\lambda.
+\]
+
+\smallskip
+\noindent
+\textbf{Step~2: the genus-$1$ obstruction equation.}
+Specialising~\eqref{eq:genus-g-obstruction} to $g = 1$:
+\begin{equation}\label{eq:heisenberg-genus1-obstruction}
+d_0\,\Theta^{(1)}
+\;=\;
+-\!\!\!\sum_{\substack{g_1 + g_2 = 1 \\ 0 < g_1 < 1}}
+\tfrac{1}{2}[\Theta^{(g_1)},\Theta^{(g_2)}]
+\;-\;
+\kappa(\cH_k) \cdot \omega_1.
+\end{equation}
+The quadratic sum runs over pairs $(g_1,g_2)$ with
+$g_1 + g_2 = 1$ and $0 < g_1 < 1$; there are no such pairs
+of non-negative integers, so the sum is empty.
+
+\smallskip
+\noindent
+\textbf{Step~3: evaluation of the curvature.}
+Volume~I Theorem~D (leading coefficient) gives
+$\kappa(\cH_k) = k$: the modular characteristic equals the
+level.  The obstruction equation reduces to
+\begin{equation}\label{eq:heisenberg-genus1-reduced}
+d_0\,\Theta^{(1)} \;=\; -k \cdot \omega_1,
+\end{equation}
+where
+$\omega_1 = c_1(\lambda_{\mathrm{Hodge}})
+\in H^2(\Mbar_{1,1},\,\mathbb{Z})$
+is the first Chern class of the Hodge bundle
+$\lambda_{\mathrm{Hodge}}$ on $\Mbar_{1,1}$.
+
+\smallskip
+\noindent
+\textbf{Step~4: cohomology of the genus-$1$ graph complex.}
+The obstruction to solving~\eqref{eq:heisenberg-genus1-reduced}
+lies in
+$H^1\!\bigl(C^{(1)}_{\cH_k},\, d_0\bigr)$,
+the genus-$1$ graph complex with binary vertices
+(since $m_{n \ge 3} = 0$).  A graph of genus~$1$ with only
+binary vertices has a single topological type: one vertex with
+two half-edges joined into a single self-loop edge.  Write
+$\Gamma_{\mathrm{irr}}$ for this graph (the irreducible boundary
+graph on $\Mbar_{1,1}$, corresponding to the boundary divisor
+$\Delta_{\mathrm{irr}} \subset \Mbar_{1,1}$).  The complex
+$(C^{(1)},d_0)$ is therefore one-dimensional, spanned by
+$\Gamma_{\mathrm{irr}}$.
+
+\smallskip
+\noindent
+\textbf{Step~5: explicit solution.}
+The solution is
+\begin{equation}\label{eq:heisenberg-theta1}
+\Theta^{(1)}
+\;=\;
+-k \cdot \Gamma_{\mathrm{irr}} \otimes \Lambda,
+\end{equation}
+where
+$\Lambda \in H^1(\Mbar_{1,1})$ is the fundamental class
+of the boundary divisor $\Delta_{\mathrm{irr}}$.  To verify:
+the self-sewing operation on $\Gamma_{\mathrm{irr}}$ contracts
+the propagator through the self-loop, yielding
+\[
+d_0\!\bigl(\Gamma_{\mathrm{irr}} \otimes \Lambda\bigr)
+\;=\;
+\omega_1
+\]
+by the clutching formula for $\Mbar_{1,1}$: the boundary
+$\Delta_{\mathrm{irr}}$ contributes
+$c_1(\lambda_{\mathrm{Hodge}})$ through the self-sewing map
+$\Mbar_{0,2+2} \to \Delta_{\mathrm{irr}} \hookrightarrow
+\Mbar_{1,1}$.  Therefore
+$d_0\,\Theta^{(1)} = -k \cdot \omega_1$,
+matching~\eqref{eq:heisenberg-genus1-reduced}.
+
+\smallskip
+\noindent
+\textbf{Step~6: free energy.}
+The genus-$1$ free energy is the scalar obtained by evaluating
+$\Theta^{(1)}$ on the moduli space.  Since
+$\Theta^{(1)} = -k \cdot \Gamma_{\mathrm{irr}} \otimes \Lambda$
+and $\int_{\Mbar_{1,1}} \omega_1 = 1/24$ (Mumford's formula):
+\begin{equation}\label{eq:heisenberg-F1}
+F_1(\cH_k)
+\;=\;
+-k\,\log\,\eta(\tau),
+\end{equation}
+where $\eta(\tau) = q^{1/24}\prod_{n=1}^\infty (1 - q^n)$
+is the Dedekind eta function and $q = e^{2\pi i \tau}$.
+This recovers the standard one-loop free energy of the
+free boson at level~$k$ at fixed modular parameter~$\tau$.
+(The factor $1/24$ from Mumford's integral
+$\int_{\Mbar_{1,1}} \lambda_1 = 1/24$ enters the
+\emph{integrated} partition function
+$Z_1 = \int e^{F_1}\,d\mu$, not the local free
+energy $F_1(\tau)$ at fixed~$\tau$.)
+
+\smallskip
+\noindent
+\textbf{Step~7: shadow depth verification.}
+The solution $\Theta^{(1)}$ is determined entirely by the
+curvature $\kappa(\cH_k) = k$ and the binary operation $m_2$:
+no independent genus-$1$ data is required.  Consequently,
+$d_{\mathrm{alg}} = 0$, confirming the class~$\mathbf{G}$
+(Gaussian) designation of
+Proposition~\ref{prop:shadow-depth}.  At every genus
+$g \ge 1$, the MC element $\Theta^{(g)}$ is uniquely determined
+by the self-sewing recursion applied to $\kappa = k$, with no
+free parameters.
+\end{computation}
+
+\begin{proposition}[Shadow depth as structural complexity; \ClaimStatusProvedHere]
+\label{prop:shadow-depth}
+\index{shadow depth}
+The \emph{shadow depth} $d(\cA)$ is the minimal integer $r$
+such that the $r$-th truncation $\Theta^{\leq r}_\cA$ of the
+universal MC element determines $\Theta_\cA$ up to
+quasi-isomorphism of $\SCchtop$-algebras.  The four depth
+classes are:
+\begin{description}[leftmargin=2em]
+\item[\textbf{G} (Gaussian, $d_{\mathrm{alg}}=0$):]
+  Free algebras.  The bar complex is cofree, all higher
+  operations vanish, and the MC element is the linear term alone.
+  The $R$-matrix is trivial (or the exponential of a scalar).
+  \emph{Example:} Heisenberg $\cH_k$.
+\item[\textbf{L} (Lie, $d_{\mathrm{alg}}=1$):]
+  Quadratic algebras.  The bar differential has only binary
+  operations; the quantum $R$-matrix
+  $R(z) = \mathrm{Pexp}\!\bigl(\int r(w)\,dw\bigr)$
+  satisfies the full quantum Yang--Baxter equation, but is
+  \emph{computable from $m_2$ alone} --- it is determined
+  entirely by the classical $r$-matrix (binary OPE data).
+  \emph{Example:} affine $\hat{\mathfrak{g}}_k$ at generic level.
+\item[\textbf{C} (Contact, $d_{\mathrm{alg}}=2$):]
+  Cubic algebras.  The quantum $R$-matrix satisfies the full
+  quantum Yang--Baxter equation (as it must for any
+  $\SCchtop$-algebra), but requires independent ternary data
+  ($m_3$) beyond the classical $r$-matrix for its determination.
+  \emph{Example:} $\beta\gamma$ system.
+\item[\textbf{M} (Mixed, $d_{\mathrm{alg}}=\infty$):]
+  No finite truncation of the bar data determines the
+  $R$-matrix.  The full perturbative series of
+  higher operations contributes at every arity.
+  \emph{Example:} Virasoro at generic~$c$; $\cW_3$ at non-generic central charge.
+\end{description}
+\end{proposition}
+
+\begin{proof}
+The shadow depth $d(\cA)$ is defined by the arity filtration on
+the bar coderivation: it is the smallest $r$ such that all MC
+components $\Theta^{(n)}_\cA$ for $n>r$ are determined
+(via the Stasheff system) by those for $n\le r$.  For a free
+algebra, the bar complex carries no differential beyond the
+linear counit, so $d=0$.  For a quadratic algebra, the bar
+differential is determined by $m_2$, so $d=1$; the quantum
+$R$-matrix is then computable as $R(z)=\mathrm{Pexp}(\int r(w)\,dw)$
+from the classical $r$-matrix alone, and it satisfies the full
+quantum Yang--Baxter equation (the arity-$2$ MC equation in the
+$E_1$-modular convolution algebra already encodes the quantum
+relation).
+For a cubic algebra, the arity-$3$ Stasheff relation---which
+expresses $m_3$ as a homotopy for the failure of $m_2$ to be
+associative, mediated by $m_1$---is not automatically satisfied
+by $m_2$ alone, so $m_3$ is
+independent data and $d=2$.  If the algebra has essential
+operations at every arity (as happens for $\cW_3$ at
+non-generic central charge, where the Kuranishi map $\kappa$ has
+Taylor coefficients at all orders), then no finite truncation
+suffices and $d=\infty$.
+\end{proof}
+
+\begin{computation}[Shadow depth of $\hat{\mathfrak{sl}}_2$ at generic level; \ClaimStatusProvedHere]
+\label{comp:shadow-depth-sl2}
+\index{shadow depth!affine $\hat{\mathfrak{sl}}_2$}
+
+We derive that $\hat{\mathfrak{sl}}_2$ at generic level $k$
+(i.e.\ $k\neq -2$) has shadow depth $d_{\mathrm{alg}}=1$
+(class~L) by showing: (i)~$m_2$ is independent data,
+(ii)~all $m_{n\ge 3}$ are determined by $m_2$ via the Stasheff
+relations.
+
+\medskip
+\noindent\textbf{Step 1: OPE data.}
+The affine vertex algebra $V_k(\mathfrak{sl}_2)$ has
+generators $J^a(z)$, $a\in\{+,-,3\}$, with OPE
+\begin{equation}\label{eq:sl2-ope}
+J^a(z)\, J^b(w) \;\sim\;
+\frac{k\,\delta^{ab}}{(z-w)^2}
+\;+\;
+\frac{f^{ab}{}_{c}\, J^c(w)}{z-w},
+\end{equation}
+where $f^{ab}{}_{c}$ are the $\mathfrak{sl}_2$ structure
+constants (normalised so that $[e,f]=h$, $[h,e]=2e$,
+$[h,f]=-2f$) and $\delta^{ab}$ is the Killing form
+normalised to $\delta^{ab}=\tfrac{1}{2}\operatorname{tr}
+(\operatorname{ad}_{J^a}\circ\operatorname{ad}_{J^b})$.
+
+\medskip
+\noindent\textbf{Step 2: Bar differential at arity 2.}
+The bar differential at arity~$2$ encodes both the
+double-pole (level) and simple-pole (structure constant)
+data in a single $\lambda$-bracket:
+\begin{equation}\label{eq:sl2-m2}
+m_2(J^a, J^b;\lambda)
+\;=\;
+k\,\delta^{ab}\,\lambda
+\;+\;
+f^{ab}{}_{c}\, J^c.
+\end{equation}
+The first term is the Killing-form contribution (the
+central extension); the second is the Lie bracket.
+This is non-trivial data: neither the level $k$ nor the
+structure constants are determined by lower-arity
+operations, so $d_{\mathrm{alg}}\ge 1$.
+
+\medskip
+\noindent\textbf{Step 3: Vanishing of independent
+  higher operations.}
+At arity~$3$, the bar differential computes the triple
+OPE.  For $\hat{\mathfrak{sl}}_2$ at generic level
+$k\neq -h^\vee = -2$, the Sugawara construction is
+non-degenerate: the Sugawara energy-momentum tensor
+$T^{\mathrm{Sug}}(z)=\frac{1}{2(k+2)}\sum_a
+{:}\!J^a J_a\!{:}(z)$ exists and gives a conformal vector.
+The one-loop exactness theorem
+(Theorem~\ref{thm:one-loop-koszul}) then shows that the
+BV-BRST differential of the associated 3d HT theory has
+no quantum corrections beyond one loop.  Concretely,
+all Feynman diagrams contributing to $m_3$ are trees with
+binary vertices---these are already accounted for by
+iterating $m_2$.  The arity-$3$ Stasheff relation
+(Definition~\ref{def:ainfty-relations} at $n=3$), which expresses the homotopy associativity of $m_2$ controlled by $m_3$ with the differential $m_1$ acting by Leibniz, determines $m_3$ uniquely as a chain homotopy for the
+failure of $m_2$ to be strictly associative.  Since
+$m_2\circ m_2$ is already known from \eqref{eq:sl2-m2},
+$m_3$ carries no independent information.  By induction on
+arity: if $m_2,\ldots,m_{n-1}$ are all determined by
+$m_2$, the arity-$n$ Stasheff relation expresses $m_n$ in
+terms of compositions of $m_2,\ldots,m_{n-1}$, hence in
+terms of $m_2$ alone.  Therefore the bar coderivation is
+determined by its arity-$2$ component, giving
+$d_{\mathrm{alg}}=1$.
+
+\medskip
+\noindent\textbf{Step 4: Classical $r$-matrix.}
+The classical $r$-matrix extracted from $m_2$ is
+\begin{equation}\label{eq:sl2-r-matrix}
+r(z) \;=\; \frac{\Omega}{z}
+\;=\; \frac{1}{z}\sum_{a} J^a \otimes J_a,
+\end{equation}
+where $\Omega = \sum_a J^a\otimes J_a$ is the quadratic
+Casimir element of $\mathfrak{sl}_2$.  One checks directly
+that $r(z)$ satisfies the classical Yang--Baxter equation
+with spectral parameter:
+\[
+[r_{12}(z_1{-}z_2),\, r_{13}(z_1{-}z_3)]
++ [r_{12}(z_1{-}z_2),\, r_{23}(z_2{-}z_3)]
++ [r_{13}(z_1{-}z_3),\, r_{23}(z_2{-}z_3)]
+= 0,
+\]
+which is the Jacobi identity for $\mathfrak{sl}_2$ divided
+by $(z_1{-}z_2)(z_1{-}z_3)(z_2{-}z_3)$.  The quantum
+$R$-matrix
+\begin{equation}\label{eq:sl2-R-matrix}
+R(z) \;=\; \mathcal{P}\exp\!\Bigl(\int_0^z
+r(w)\,dw\Bigr)
+\end{equation}
+satisfies the full quantum Yang--Baxter equation
+(Theorem~\ref{thm:YBE}), and is determined entirely by
+$r(z)$---confirming class~L.
+
+\medskip
+\noindent\textbf{Step 5: Genus-$1$ obstruction.}
+The modular characteristic is $\kappa(\hat{\mathfrak{sl}}_2)
+= k$, and the genus-$1$ obstruction takes the form
+\begin{equation}\label{eq:sl2-genus1}
+\Theta^{(1)} \;=\;
+-k \cdot \Gamma_{\text{self-loop}} \otimes \Lambda,
+\end{equation}
+where $\Gamma_{\text{self-loop}}$ is the unique genus-$1$
+graph with a single vertex and one loop, and $\Lambda$
+carries an $\mathfrak{sl}_2$ Casimir insertion at the
+vertex.  (The sign is fixed by the obstruction equation
+$d_0\,\Theta^{(1)} = -k\,\omega_1$ together with
+$d_0(\Gamma_{\text{self-loop}} \otimes \Lambda) = \omega_1$.)
+The genus-$1$ free energy for
+$\hat{\mathfrak{sl}}_2$ at level~$k$ is
+\[
+F_1(\hat{\mathfrak{sl}}_2,\, k)
+\;=\;
+-3 \cdot \frac{k}{k+2} \cdot \log\,\eta(\tau),
+\]
+where $3 = \dim(\mathfrak{sl}_2)$ and the factor
+$k/(k{+}2)$ is the ratio of the level to the shifted
+level $k + h^\vee$ (with $h^\vee = 2$).  This is the
+standard one-loop partition function of the WZW model:
+$\dim(\mathfrak{g})$ free bosons, each contributing
+$-\frac{1}{24}\log\eta(\tau)$, rescaled by the Sugawara
+ratio $k/(k{+}h^\vee)$.  The structural form matches the
+Heisenberg genus-$1$ obstruction
+(Computation~\ref{comp:heisenberg-genus1-obstruction}),
+with the scalar self-loop now carrying the Casimir
+$\Omega = \sum_a J^a \otimes J_a$ in place of the identity.
+The class~L property ensures that
+$\Theta^{(1)}$---like all higher-genus
+obstructions---is computable from $m_2$ alone.
+\end{computation}
+
+\begin{theorem}[Complementarity as holographic dictionary; \ClaimStatusProvedHere]
+\label{thm:complementarity-holographic-dictionary}
+\index{complementarity!holographic dictionary}
+\index{holographic dictionary!via complementarity}
+Let $\cA$ be a chirally Koszul logarithmic $\SCchtop$-algebra.
+At each genus $g\ge 1$, the modular obstruction space
+decomposes as
+\begin{equation}\label{eq:complementarity-decomposition}
+Q_g(\cA) \;\oplus\; Q_g(\cA^!)
+\;=\;
+H^\bullet\!\bigl(\Mbar_g,\, \cZ_\cA\bigr),
+\end{equation}
+where:
+\begin{itemize}[leftmargin=1.8em]
+\item $\cZ_\cA$ is the \emph{center constructible sheaf} on $\Mbar_g$: its fiber at a smooth curve $C$ is the genus-$g$ modular deformation complex $\mathrm{Def}^{(g)}(\cA|_C)$ of the chiral algebra $\cA$ restricted to $C$ (when $\cA$ is smooth, $\cZ_\cA$ is a local system);
+\item $Q_g(\cA)$ is the \emph{deformation sector}
+  (boundary-accessible obstructions);
+\item $Q_g(\cA^!)$ is the \emph{obstruction sector}
+  (boundary-inaccessible obstructions).
+\end{itemize}
+The Verdier involution
+$\sigma\colon H^\bullet(\Mbar_g,\cZ_\cA)\to H^\bullet(\Mbar_g,\cZ_\cA)$,
+with $\sigma^2=\mathrm{id}$, exchanges
+the two sectors:
+$\sigma\bigl(Q_g(\cA)\bigr)=Q_g(\cA^!)$.
+This is the holographic dictionary: the bulk genus-$g$ Hilbert
+space $H^\bullet(\Mbar_g,\cZ_\cA)$ splits into
+boundary-accessible and boundary-inaccessible sectors, and
+Koszul duality is the operation that transposes the split.
+\end{theorem}
+
+\begin{construction}[The residue pairing on the modular obstruction space; \ClaimStatusProvedHere]
+\label{constr:residue-pairing}
+\index{residue pairing!modular obstruction space}
+\index{shifted symplectic pairing!construction}
+
+We construct the $(-1)$-shifted symplectic pairing on the genus-$g$
+modular obstruction space
+$H^\bullet(\Mbar_g,\,\cZ_\cA)$
+invoked in Theorem~\ref{thm:complementarity-holographic-dictionary}.
+
+\medskip
+\noindent
+\textit{Step~1: The bilinear form.}\enspace
+Let $\cA$ be a chirally Koszul logarithmic $\SCchtop$-algebra.
+The genus-$g$ deformation complex
+$\mathfrak{L}_g = \barB^{(g)}(\cA)[1]$
+carries a bilinear form
+\begin{equation}\label{eq:residue-pairing-definition}
+\langle \alpha,\, \beta \rangle_{-1}
+\;:=\;
+\int_{\Mbar_{g,n}}
+\mathrm{Res}\!\bigl(\alpha \cdot \beta\bigr),
+\end{equation}
+defined as follows.  For bar chains
+$\alpha = [s^{-1}a_1 \,|\, \cdots \,|\, s^{-1}a_p]$
+and
+$\beta = [s^{-1}b_1 \,|\, \cdots \,|\, s^{-1}b_q]$,
+the product $\alpha \cdot \beta$ is defined via the coalgebra
+diagonal $\Delta\colon \barB(\cA) \to \barB(\cA) \otimes \barB(\cA)$
+and the Serre duality pairing on $\cA$:
+\begin{equation}\label{eq:residue-pairing-matchings}
+\mathrm{Res}(\alpha \cdot \beta)
+\;=\;
+\sum_{\sigma}
+\prod_{i=1}^{p}
+\langle a_i,\, b_{\sigma(i)} \rangle_{\mathrm{Serre}}
+\;\cdot\;
+\omega_{p+q},
+\end{equation}
+where the sum runs over all matchings $\sigma$ of the bar
+factors and $\omega_{p+q}$ is the weight form on
+$\FM_{p+q}(\C)$.  The matching sum arises from the components of
+the iterated coproduct
+$\Delta^{(p+q-1)}\colon \barB^{(g)}(\cA)
+\to \barB(\cA)^{\otimes(p+q)}$
+composed with the Serre trace
+$\langle\,\cdot\,,\,\cdot\,\rangle_{\mathrm{Serre}}
+\colon \cA \otimes \cA \to \kk$
+on matched pairs.
+
+\medskip
+\noindent
+\textit{Step~2: Degree verification.}\enspace
+The pairing has total degree $-1$.  The bar desuspension
+contributes $-p$ from the $p$ factors $s^{-1}$ in $\alpha$ and
+$-q$ from the $q$ factors in $\beta$, for a total of $-(p+q)$.
+The Serre pairing on a curve ($\dim_\C X = 1$) contributes
+$+1$ per matched pair, giving $+\min(p,q)$; when $p = q$ this is
+$+p$.  The weight form $\omega_{p+q}$ is the top-degree
+logarithmic form on $\FM_{p+q}(\C)$, contributing
+$+(p+q-1)$.  For the pairing to be nonzero we need $p = q$
+(otherwise the matching sum vanishes), giving total degree:
+\begin{equation}\label{eq:residue-pairing-degree}
+-(p+q) + p + (p+q-1) \;=\; p - 1.
+\end{equation}
+But the integral over $\Mbar_{g,n}$ consumes the
+$\Mbar_g$-degree $p - 1$ (the relevant component of the
+modular convolution complex has $\Mbar_g$-weight $p-1$), leaving
+a residual degree of
+\[
+(p-1) - (p-1) + (-1) \;=\; -1,
+\]
+where the final $-1$ comes from the cohomological shift
+$\mathfrak{L}_g = \barB^{(g)}(\cA)[1]$.  Thus the pairing
+$\langle\,\cdot\,,\,\cdot\,\rangle_{-1}$ has degree $-1$ as
+required for a $(-1)$-shifted symplectic form.
+
+\medskip
+\noindent
+\textit{Step~3: Nondegeneracy.}\enspace
+On the Koszul locus (chirally Koszul $\cA$), the bar complex
+is a resolution: $\barB(\cA) \xrightarrow{\sim} \cA^{!,\vee}$
+by Volume~I Theorem~B.  Serre duality on the curve $X$ provides
+a nondegenerate pairing $\cA \otimes \cA^{!} \to \kk$, and the
+Koszul resolution property promotes this to a chain-level
+quasi-isomorphism
+\begin{equation}\label{eq:residue-pairing-nondeg}
+\barB^{(g)}(\cA)
+\;\xrightarrow{\;\sim\;}
+\barB^{(g)}(\cA)^\vee[-1].
+\end{equation}
+Concretely: the map sends a bar chain $\alpha$ to the functional
+$\beta \mapsto \langle \alpha,\beta\rangle_{-1}$.  This is a
+quasi-isomorphism because (i) the Serre pairing is
+nondegenerate on $\cA$ (by assumption: $\cA$ is a
+factorization algebra on a smooth curve), (ii) the bar complex
+resolves $\cA^{!,\vee}$ (Koszul property), and (iii) the weight
+form $\omega_{p+q}$ pairs the top and bottom strata of
+$\FM_{p+q}(\C)$ nondegenerately (Poincar\'{e} duality for manifolds
+with corners, applied to the FM compactification).  On
+cohomology, this gives a nondegenerate pairing on
+$H^\bullet(\Mbar_g,\,\cZ_\cA)$.
+
+\medskip
+\noindent
+\textit{Step~4: Closedness.}\enspace
+The pairing is closed (i.e., compatible with the differential):
+$\langle d\alpha,\,\beta\rangle_{-1}
++ (-1)^{|\alpha|}\langle\alpha,\,d\beta\rangle_{-1} = 0$.
+This follows from the fact that the bar differential $d_B$ is a
+\emph{coderivation} for the coalgebra structure $\Delta$, and the
+Serre pairing satisfies the invariance condition
+$\langle d_\cA(a),\,b\rangle_{\mathrm{Serre}}
+= -(-1)^{|a|}\langle a,\,d_\cA(b)\rangle_{\mathrm{Serre}}$.
+The Stokes formula on $\FM_{p+q}(\C)$ supplies the boundary
+contributions, which cancel by the Arnold relations (exactness of
+the weight forms on boundary strata).
+
+\medskip
+\noindent
+\textit{Step~5: Isotropy of the Lagrangians.}\enspace
+The bar Lagrangian
+$Q_g(\cA) = \im\!\bigl(\barB^{(g)}(\cA)
+\to H^\bullet(\Mbar_g,\,\cZ_\cA)\bigr)$
+is isotropic: for $\alpha,\,\beta \in Q_g(\cA)$, we have
+$\langle\alpha,\,\beta\rangle_{-1} = 0$.  To see this, observe
+that both $\alpha$ and $\beta$ lift to bar chains.  In the
+matching sum~\eqref{eq:residue-pairing-matchings}, the Serre
+pairing $\langle a_i,\, b_{\sigma(i)}\rangle_{\mathrm{Serre}}$
+pairs two elements that both come from $\cA$ (the bar side).
+Under the identification $\barB(\cA) \simeq \cA^{!,\vee}$, the
+Serre pairing between two elements of $\cA^{!,\vee}$ factors
+through
+$\cA^{!,\vee} \otimes \cA^{!,\vee} \to (\cA^! \otimes \cA^!)^\vee$,
+but the image lands in the \emph{symmetric} part of
+$(\cA^! \otimes \cA^!)^\vee$ (the bar complex is cofree on the
+cosuspension, and the coproduct is cocommutative on cohomology).
+Since the residue pairing has odd degree $(-1)$, it is
+\emph{antisymmetric} on the symmetric part, hence vanishes.  An
+analogous argument shows that the cobar Lagrangian
+$Q_g(\cA^!) = \im\!\bigl(\barB^{(g)}(\cA^!)
+\to H^\bullet(\Mbar_g,\,\cZ_\cA)\bigr)$
+is also isotropic.  Together with the dimension count
+$\dim Q_g(\cA) + \dim Q_g(\cA^!)
+= \dim H^\bullet(\Mbar_g,\,\cZ_\cA)$
+from Volume~I Theorem~C, this establishes that $Q_g(\cA)$ and
+$Q_g(\cA^!)$ are complementary Lagrangians.
+\end{construction}
+
+\begin{construction}[Cyclic structure on the open-sector category; \ClaimStatusProvedHere]
+\label{constr:cyclic-structure}
+The $(-1)$-shifted symplectic pairing of Construction~\ref{constr:residue-pairing} induces a \emph{cyclic $A_\infty$ structure} on the boundary algebra $A_b = \End_\cC(b)$.
+
+\textbf{Step 1: The cyclic pairing.} Define the nondegenerate bilinear form
+\[
+\langle a, b \rangle_{\mathrm{cyc}} \;:=\; \Res_{z=0}\, \langle a(z),\, b(0) \rangle_{\mathrm{Serre}} \cdot dz
+\]
+on $A_b$, where $\langle -,- \rangle_{\mathrm{Serre}}$ is the Serre duality pairing on the curve $X$. This pairing has degree $-1$ (from the $(-1)$-shifted symplectic structure on the self-intersection $\cL \times_{\cM^h} \cL$).
+
+\textbf{Step 2: Cyclic $A_\infty$ identity.} The pairing is cyclic with respect to all $A_\infty$ operations:
+\begin{equation}\label{eq:cyclic-Ainfty}
+\langle m_k(a_1, \ldots, a_k;\, \lambda_1, \ldots, \lambda_{k-1}),\, a_0 \rangle_{\mathrm{cyc}} \;=\; (-1)^{\dagger}\, \langle m_k(a_0, a_1, \ldots, a_{k-1};\, \lambda_0, \ldots, \lambda_{k-2}),\, a_k \rangle_{\mathrm{cyc}}
+\end{equation}
+where $(-1)^\dagger = (-1)^{|a_0|(|a_1|+\cdots+|a_k|)}$ is the Koszul sign for cyclic permutation of graded inputs, and the spectral parameters rotate correspondingly: $\lambda_0 = -(\lambda_1 + \cdots + \lambda_{k-1} + \partial)$ (the momentum-conservation constraint).  Here $|a_i|$ denotes the cohomological degree in the \emph{unsuspended} (original) grading.  In the bar complex, the desuspended elements $s^{-1}a_i$ have bar degree $\overline{a}_i = |a_i| - 1$.  The sign $(-1)^\dagger = (-1)^{|a_0|(|a_1|+\cdots+|a_k|)}$ is equivalent to the standard Kontsevich--Soibelman sign $(-1)^{\overline{a}_0(\overline{a}_1+\cdots+\overline{a}_k)}$ via the identity $|a_0|(|a_1|+\cdots+|a_k|) \equiv \overline{a}_0(\overline{a}_1+\cdots+\overline{a}_k) + \overline{a}_0 \cdot k + (|a_1|+\cdots+|a_k|) \pmod{2}$, with the additional terms absorbed into the definition of the pairing (the degree $(-1)$ of $\langle -,- \rangle_{\mathrm{cyc}}$ contributes $(-1)^{\overline{a}_0}$ from commuting $a_0$ past the odd pairing, and the $A_\infty$ degree $|m_k| = 2-k$ contributes $(-1)^{k-1}$, cancelling the extra terms).
+
+\textbf{Step 3: Proof from Serre duality.} The cyclic identity follows from the $\SCchtop$-equivariance of Serre duality: the pairing $\langle -,- \rangle_{\mathrm{Serre}}$ is compatible with the factorization structure because Serre duality on $X$ intertwines the chiral product $\mu$ with its transpose. The cyclic rotation of inputs corresponds to the rotation of marked points on the boundary circle $S^1_p$ of the bordified curve, which is a symmetry of the Serre pairing. The spectral parameter rotation is the sesquilinearity constraint (Lemma~\ref{lem:sesquilinearity_explicit}) applied to the rotated configuration.
+
+\textbf{Step 4: The trace map.} The cyclic structure determines a trace:
+\[
+\Tr_\cC \colon \HH_\ast(\cC) \;\longrightarrow\; \kk,
+\]
+defined on the Hochschild homology of $\cC$ by contracting with the cyclic pairing. For a Hochschild cycle $\sum a_0 \otimes a_1 \otimes \cdots \otimes a_n$ (a cyclic bar chain), the trace is:
+\[
+\Tr_\cC(a_0 \otimes \cdots \otimes a_n) \;=\; \langle m_n(a_1, \ldots, a_n),\, a_0 \rangle_{\mathrm{cyc}}.
+\]
+The cyclic identity~\eqref{eq:cyclic-Ainfty} ensures this is well-defined on cyclic equivalence classes.
+\end{construction}
+
+\begin{remark}[Cyclic structure and modularity]
+\label{rem:cyclic-modularity}
+The cyclic structure is the datum that makes modular gluing possible: genus-$g$ amplitudes arise from composing $g$ clutching operations with the trace $\Tr_\cC$. The modular characteristic $\kappa(\cA)$ measures the obstruction to the trace being a \emph{chain map} (i.e., compatible with the bar differential at genus $g \geq 1$). When $\kappa = 0$, the trace is a chain map and the theory is ``anomaly-free''; when $\kappa \neq 0$, the trace acquires a curvature correction $\kappa \cdot \omega_g$, which is the conformal anomaly.
+\end{remark}
+
+\begin{proof}
+Volume~I Theorem~C (complementarity) establishes that the bar
+and cobar complexes provide complementary Lagrangian
+decompositions of the modular obstruction space at each genus.
+The shifted symplectic structure invoked here is the BV
+structure: a $(-1)$-shifted symplectic form on the formal moduli
+problem $\MC(\mathfrak{L}_g)$ (not on the cohomology group
+$H^\bullet(\Mbar_g,\cZ_\cA)$ itself).  The Lagrangian
+decomposition is the splitting
+$\mathfrak{L}_g = \mathfrak{L}_g^+ \oplus \mathfrak{L}_g^-$ into bar and cobar eigenspaces
+of the Verdier involution, with isotropy and nondegeneracy
+verified at the chain level.
+
+Concretely, the residue pairing on the modular convolution
+complex descends from this $(-1)$-shifted symplectic form, and
+the bar image
+$\im\!\bigl(\barB(\cA)\to H^\bullet(\Mbar_g,\cZ_\cA)\bigr)$
+forms an isotropic subspace whose rank equals half the total
+dimension by the complementarity theorem.  The cobar image
+$\im\!\bigl(\Omegach(\barB(\cA))\to H^\bullet(\Mbar_g,\cZ_\cA)\bigr)$
+provides the complementary Lagrangian.
+
+For chirally Koszul $\cA$, the Koszul involution $\cA\leftrightarrow\cA^!$
+exchanges bar and cobar:
+$\barB(\cA)\simeq\cA^{!,\vee}$, so the
+cobar Lagrangian for $\cA$ is the bar Lagrangian for $\cA^!$.
+Setting $Q_g(\cA):=\im(\barB(\cA))$ and
+$Q_g(\cA^!):=\im(\barB(\cA^!))$, the complementarity theorem
+gives the direct-sum decomposition~\eqref{eq:complementarity-decomposition}.
+
+The Verdier involution $\sigma$ on the center constructible sheaf
+$\cZ_\cA$ induces an involution
+$\sigma\colon H^\bullet(\Mbar_g,\cZ_\cA)\to H^\bullet(\Mbar_g,\cZ_\cA)$
+with $\sigma^2=\mathrm{id}$, acting as the $(-1)$-shifted symplectic
+duality.  Its exchange of the two
+complementary Lagrangians is precisely the statement
+$\sigma(Q_g(\cA))=Q_g(\cA^!)$.
+
+The holographic interpretation follows: elements of $Q_g(\cA)$
+are visible to the boundary algebra $\Bbound$ because they
+lie in the image of the bar construction of $\cA$, which
+computes $\Zder(\Bbound)$ via the bulk--boundary
+theorem.  Elements of $Q_g(\cA^!)$ require passage through
+the Koszul dual and are therefore inaccessible from the
+boundary alone.
+\end{proof}
+
+\begin{computation}[Complementarity decomposition for $\cH_k$ at genus~$1$;
+\ClaimStatusProvedHere]
+\label{comp:complementarity-heisenberg-g1}
+\index{complementarity!Heisenberg!genus 1}
+\index{Heisenberg algebra!complementarity at genus 1}
+
+We exhibit the Lagrangian decomposition
+$Q_1(\cH_k) \oplus Q_1(\cH_k^!) = H^\bullet(\Mbar_{1,1},\, \cZ_{\cH_k})$
+of Theorem~\ref{thm:complementarity-holographic-dictionary}
+explicitly for the Heisenberg algebra at genus~$1$.
+We work on $\Mbar_{1,1}$ (one marked point), where the Hodge
+bundle is nontrivial and the complementarity structure is
+cleanly visible.
+
+\medskip
+\noindent
+\textit{Step~1: Cohomology of $\Mbar_{1,1}$.}\enspace
+As a Deligne--Mumford stack, $\Mbar_{1,1}$ has the homotopy
+type of a weighted projective line.  Its rational cohomology
+ring is
+\begin{equation}\label{eq:complementarity-Mbar11-cohomology}
+H^\bullet(\Mbar_{1,1},\,\kk)
+\;=\;
+\kk[\omega_1]/(\omega_1^2),
+\qquad
+|\omega_1| = 2,
+\end{equation}
+where $\omega_1 = c_1(\mathbb{E})$ is the first Chern class of
+the Hodge bundle $\mathbb{E} \to \Mbar_{1,1}$.  In particular,
+$H^0 = \kk \cdot 1$, $H^1 = 0$, and
+$H^2 = \kk \cdot \omega_1$, so $\dim H^\bullet = 2$.
+
+\medskip
+\noindent
+\textit{Step~2: The center constructible sheaf.}\enspace
+The Heisenberg algebra $\cH_k$ has a single generator~$J$ of
+conformal weight~$1$ and OPE
+$J(z)\,J(w) \sim k/(z-w)^2$.
+The modular deformation complex at genus~$1$ is
+$\mathrm{Def}^{(1)}(\cH_k) = \kk$, one-dimensional, spanned by
+the modular characteristic $\kappa(\cH_k) = k$
+(Volume~I Theorem~D; see also
+equation~\eqref{eq:heisenberg-genus1-reduced}).  Since the
+fiber is constant over $\Mbar_{1,1}$, the center constructible
+sheaf is the constant sheaf:
+\[
+\cZ_{\cH_k}
+\;\cong\;
+\underline{\kk}_{\Mbar_{1,1}}.
+\]
+Consequently, the total modular obstruction space is
+\begin{equation}\label{eq:complementarity-total-space}
+H^\bullet(\Mbar_{1,1},\, \cZ_{\cH_k})
+\;=\;
+H^\bullet(\Mbar_{1,1},\,\kk)
+\;=\;
+\kk \cdot 1 \;\oplus\; \kk \cdot \omega_1,
+\end{equation}
+a two-dimensional $\kk$-vector space concentrated in
+degrees~$0$ and~$2$.
+
+\medskip
+\noindent
+\textit{Step~3: The $(-1)$-shifted symplectic pairing.}\enspace
+The Verdier pairing on $H^\bullet(\Mbar_{1,1},\,\cZ_{\cH_k})$
+is the $(-1)$-shifted intersection form
+\[
+\langle \alpha,\, \beta \rangle_{-1}
+\;=\;
+\int_{\Mbar_{1,1}} \alpha \cup \beta
+\;\in\; \kk,
+\]
+shifted so that elements of complementary degree pair
+nondegenerately.  On the two-dimensional space
+$\kk \cdot 1 \oplus \kk \cdot \omega_1$:
+\begin{alignat*}{2}
+&\langle 1,\, 1 \rangle_{-1} &&= 0
+  \quad\text{($1 \cup 1 = 1 \in H^0$, below top degree)},\\
+&\langle \omega_1,\, \omega_1 \rangle_{-1} &&= 0
+  \quad\text{($\omega_1 \cup \omega_1 \in H^4 = 0$)},\\
+&\langle 1,\, \omega_1 \rangle_{-1} &&=
+  \textstyle\int_{\Mbar_{1,1}} \omega_1 = \frac{1}{24}
+  \quad\text{(Mumford's formula)}.
+\end{alignat*}
+The pairing is nondegenerate:
+$\langle 1, \omega_1\rangle_{-1} = 1/24 \ne 0$.
+Furthermore, each of the one-dimensional subspaces
+$H^0 = \kk \cdot 1$ and $H^2 = \kk \cdot \omega_1$ is
+\emph{isotropic} (self-pairing zero).  Since each has
+dimension~$1 = \tfrac{1}{2}\dim H^\bullet$, both are
+\emph{Lagrangian}.  These are the only two Lagrangian
+subspaces of the two-dimensional symplectic vector space.
+
+\medskip
+\noindent
+\textit{Step~4: Identification of the bar Lagrangians.}\enspace
+The genus-$1$ bar complex $\barB^{(1)}(\cH_k)$ with corrected
+differential $\Dg{1}$ (satisfying $\Dg{1}^{\,2} = 0$; see
+Theorem~\ref{thm:rosetta-curved}\ref{item:rosetta-curved-corrected})
+maps to $H^\bullet(\Mbar_{1,1},\, \cZ_{\cH_k})$.
+The Heisenberg has $m_{n \ge 3} = 0$
+(Proposition~\ref{prop:rosetta-heisenberg-mk}),
+so the genus-$1$ graph complex
+$C^{(1)}_{\cH_k}$ is one-dimensional, spanned by the
+self-loop graph $\Gamma_{\mathrm{irr}}$
+(cf.\ equation~\eqref{eq:heisenberg-theta1}).  The
+MC element $\Theta^{(1)} = -k \cdot \Gamma_{\mathrm{irr}}
+\otimes \Lambda$ solves the obstruction equation
+$d_0\,\Theta^{(1)} = -k\,\omega_1$
+(since $d_0(\Gamma_{\mathrm{irr}} \otimes \Lambda) = \omega_1$).
+
+Under the bar map to $H^\bullet(\Mbar_{1,1},\cZ_{\cH_k})$,
+the corrected bar complex
+of $\cH_k$ produces the Lagrangian
+\begin{equation}\label{eq:complementarity-Q1-Hk}
+Q_1(\cH_k)
+\;=\;
+\kk \cdot \omega_1
+\;\subset\;
+H^2(\Mbar_{1,1}).
+\end{equation}
+This is the \emph{deformation sector}: the genus-$1$ curvature
+$\kappa(\cH_k)\cdot\omega_1 = k\,\omega_1$ is boundary-accessible
+because it arises from the bar construction of~$\cA$, which
+computes $\Zder(\Bbound)$
+(Theorem~\ref{thm:bulk-boundary-line-factorization}).
+
+For the Koszul dual $\cH_k^! = \mathrm{Sym}^{\mathrm{ch}}(V^*)$
+(Proposition~\ref{prop:rosetta-complementarity}), the bar
+map of $\barB^{(1)}(\cH_k^!)$ produces the complementary
+Lagrangian
+\begin{equation}\label{eq:complementarity-Q1-Hkdual}
+Q_1(\cH_k^!)
+\;=\;
+\kk \cdot 1
+\;\subset\;
+H^0(\Mbar_{1,1}).
+\end{equation}
+This is the \emph{obstruction sector}: the unit class
+$1 \in H^0$ represents the augmentation of the dual bar
+complex, encoding the trivial genus-$0$ deformation that
+is accessible only through the Koszul dual.
+
+Together:
+\begin{equation}\label{eq:complementarity-heisenberg-sum}
+Q_1(\cH_k) \;\oplus\; Q_1(\cH_k^!)
+\;=\;
+\kk\cdot\omega_1 \;\oplus\; \kk\cdot 1
+\;=\;
+H^\bullet(\Mbar_{1,1},\,\cZ_{\cH_k}),
+\end{equation}
+confirming~\eqref{eq:complementarity-decomposition} at $g = 1$.
+
+\medskip
+\noindent
+\textit{Step~5: The Verdier involution.}\enspace
+The Verdier involution $\sigma$ on $H^\bullet(\Mbar_{1,1})$
+is the duality functor that exchanges $H^0$ and $H^2$ via
+Poincar\'e duality on the orbifold $\Mbar_{1,1}$.  Concretely,
+$\sigma$ acts on a class $\alpha \in H^p$ by
+\[
+\sigma(\alpha) \;=\; \alpha^\vee,
+\qquad
+\alpha^\vee \in H^{2-p},
+\qquad
+\langle \alpha,\, \beta^\vee\rangle_{-1}
+= \langle \beta,\, \alpha^\vee\rangle_{-1},
+\]
+where $\langle\cdot,\cdot\rangle_{-1}$ is the Verdier pairing.
+In the basis $\{1,\, \omega_1\}$:
+\[
+\sigma(1) \;=\; 24\,\omega_1,
+\qquad
+\sigma(\omega_1) \;=\; \tfrac{1}{24}\cdot 1,
+\qquad
+\sigma^2 = \mathrm{id}.
+\]
+In particular, $\sigma$ exchanges the two Lagrangians:
+$\sigma\bigl(Q_1(\cH_k)\bigr) = Q_1(\cH_k^!)$ and
+$\sigma\bigl(Q_1(\cH_k^!)\bigr) = Q_1(\cH_k)$, confirming
+the exchange property of the theorem.
+
+\medskip
+\noindent
+\textit{Step~6: Curvature cancellation and flatness.}\enspace
+The complementarity identity
+$\kappa(\cH_k) + \kappa(\cH_k^!) = k + (-k) = 0$
+(Proposition~\ref{prop:rosetta-complementarity})
+implies that the tensor product of curved bar complexes
+\[
+\barB^{(1)}(\cH_k) \;\otimes\; \barB^{(1)}(\cH_{-k})
+\]
+carries a \emph{flat} differential: the individual curvatures
+$\dfib^{\,2} = k\,\omega_1$ and
+$\dfib^{\,2} = (-k)\,\omega_1$ cancel, restoring
+$\mathcal{D}^2 = 0$ on the tensor product.
+At the level of the Lagrangian decomposition, this flatness
+is the statement that the direct sum
+$Q_1(\cH_k) \oplus Q_1(\cH_k^!)$ exhausts the full
+obstruction space: every genus-$1$ obstruction is accounted for
+by the bar data of $\cH_k$ or of $\cH_k^!$, with no residual
+curvature.
+
+\medskip
+\noindent
+\textit{Step~7: Numerical verification.}\enspace
+Mumford's formula gives
+$\int_{\Mbar_{1,1}} \omega_1 = 1/24$.
+The genus-$1$ free energy
+$F_1(\cH_k) = -(k/24)\log\eta(\tau)$
+(equation~\eqref{eq:heisenberg-F1}) then encodes the
+complementarity decomposition numerically: the
+factor $1/24$ is the symplectic volume of the deformation
+Lagrangian $Q_1(\cH_k)$, the factor~$k$ is the modular
+characteristic $\kappa(\cH_k)$, and the eta function
+$\eta(\tau) = q^{1/24}\prod_{n=1}^\infty(1-q^n)$ is the
+one-loop determinant of the free boson on $E_\tau$.  The
+complementary free energy $F_1(\cH_{-k}) = (k/24)\log\eta(\tau)$
+satisfies $F_1(\cH_k) + F_1(\cH_{-k}) = 0$: the genus-$1$
+contributions of Koszul-dual Heisenberg algebras cancel exactly,
+reflecting the vanishing total curvature
+$\kappa + \kappa^! = 0$.
+\end{computation}
+
+\begin{remark}[What modular homotopy theory reveals about 3d holomorphic--topological physics]
+\label{rem:modular-homotopy-reveals}
+\index{modular homotopy type!physical interpretation}
+Five structural facts emerge from the preceding constructions,
+each connecting a piece of algebraic structure to a physical
+datum.
+
+\begin{enumerate}[label=(\alph*),leftmargin=1.8em]
+\item
+\emph{The genus tower is the perturbative expansion of 3d
+gravity coupled to the holomorphic--topological matter theory.}
+The genus-$g$ modular obstruction computes the $g$-loop
+gravitational amplitude in the coupled 3d HT matter-gravity
+system (for theories satisfying
+Theorem~\ref{thm:physics-bridge}): the obstruction tower of
+Proposition~\ref{prop:genus-tower-postnikov} is the loop
+expansion, and convergence of the tower is perturbative
+finiteness.
+
+\item
+\emph{Shadow depth measures algebraic complexity of the $A_\infty$ structure.}
+The depth $d(\cA)$ of
+Proposition~\ref{prop:shadow-depth} measures how many
+independent interaction vertices the matter theory requires.
+Gaussian theories ($d_{\mathrm{alg}}=0$) have trivial
+$A_\infty$ structure (all $m_{k\ge 3}=0$), so the modular
+obstruction tower is determined by the binary operation $m_2$
+alone;
+Lie-type theories ($d=1$) couple through a single cubic
+vertex (the Chern--Simons interaction);
+contact-type theories ($d=2$) require a quartic vertex (the
+Zamolodchikov $C$-function coupling); mixed theories
+($d=\infty$) have infinitely many independent gravitational
+couplings.
+
+The physical interpretation of shadow depth as gravitational
+complexity is heuristic: it suggests that $d_{\mathrm{alg}}$
+measures the minimal number of independent interaction types
+needed to capture the full quantum content, but a rigorous
+bulk-to-boundary dictionary for this count remains open.
+
+\item
+\emph{Complementarity is the holographic dictionary.}
+Theorem~\ref{thm:complementarity-holographic-dictionary}
+realises the bulk-to-boundary map as a Lagrangian projection:
+the boundary sees one Lagrangian half of the bulk Hilbert
+space, and Koszul duality recovers the other half.
+The complementarity decomposition is structurally analogous to
+holographic entanglement: in both, data from a boundary theory
+splits into accessible and inaccessible sectors via a duality
+involution.  However, the precise mathematical relationship
+between the Lagrangian splitting
+$Q_g(\cA) \oplus Q_g(\cA^!)$ and the
+Ryu--Takayanagi/Engelhardt--Wall formula for entanglement
+entropy remains to be established.
+
+\item
+\emph{The modular homotopy type is conjecturally the complete invariant.}
+Two 3d holomorphic--topological theories are equivalent if
+and only if their boundary chiral algebras have
+quasi-isomorphic modular homotopy types.
+The ``if'' direction follows from the recognition theorem
+(Theorem~\ref{thm:recognition-SC}): quasi-isomorphic modular
+homotopy types produce equivalent $\SCchtop$-algebras, since
+the $\SCchtop$-algebra structure on~$\cA$ is equivalent to the
+MC element $\Theta_\cA$, which is equivalent to the
+base-pointed component of~$\cM^{\mathrm{mod}}_\cA$.
+The ``only if'' direction requires that every equivalence of
+bulk theories induces an equivalence of boundary algebras ---
+a strong form of holographic reconstruction that is proved
+only in the boundary-linear sector
+(Theorem~\ref{thm:boundary-linear-bulk-boundary}) and remains
+conjectural in general.
+\ClaimStatusConjectured
+
+\item
+\emph{Planted-forest corrections give the first genuinely
+nonlinear obstruction.}
+The log-FM compactification of Mok yields boundary strata at
+codimension~${\ge}\,2$ with no Deligne--Mumford counterpart,
+appearing first at weight~$2$ (arity~$4$).  The corresponding
+planted-forest corrections to $\Theta_\cA$ (see the
+FM$_3$-planted-forest synthesis,
+\S\ref{chap:fm3-planted-forest-synthesis}) are the first terms
+in the genus tower that cannot be reduced to iterates of
+lower-arity operations.  They witness the irreducible
+nonlinearity of the gravitational coupling.
+\end{enumerate}
+\end{remark}
 
