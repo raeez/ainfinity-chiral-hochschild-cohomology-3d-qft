@@ -99,11 +99,11 @@ class TestKappaBBDvsMPQ:
         assert simplify(bbd - mpq) == 0
 
     @pytest.mark.xfail(reason=(
-        "Convention: BBD uses kappa(bg)=1/2 (c=1), MPQ uses kappa(bg)=1 (c=2). "
-        "Monograph ground truth: kappa=-1 (conclusion.tex:926). Three-way disagreement."
+        "Vol I/Vol II sign discrepancy: BBD uses κ(βγ)=-1 (Vol II rosetta_stone.tex:1996), "
+        "MPQ uses κ(βγ)=+1 (Vol I preface:3800). Unresolved convention."
     ))
     def test_betagamma(self):
-        """kappa(betagamma): BBD vs MPQ — KNOWN DISCREPANCY."""
+        """kappa(betagamma): BBD vs MPQ — UNRESOLVED SIGN CONVENTION."""
         bbd = _bbd_pair('betagamma').kappa
         mpq = _mpq_data('betagamma')['kappa']
         assert simplify(bbd - mpq) == 0
@@ -134,22 +134,18 @@ class TestKappaBBDvsHBB:
         hbb = _hbb_data('w3').kappa
         assert simplify(bbd - hbb) == 0
 
-    @pytest.mark.xfail(reason=(
-        "Convention: HBB uses kappa(H_k)=k (Vol I / rosetta_stone.tex:457), "
-        "BBD uses kappa(H_k)=k/2. Monograph ground truth: k (conclusion.tex:923)."
-    ))
     def test_heisenberg(self):
-        """kappa(H_k): BBD vs HBB — KNOWN DISCREPANCY."""
+        """kappa(H_k): BBD = HBB = k."""
         bbd = _bbd_pair('heisenberg').kappa
         hbb = _hbb_data('heisenberg').kappa
         assert simplify(bbd - hbb) == 0
 
     @pytest.mark.xfail(reason=(
-        "Convention: HBB uses kappa(bg)=1, BBD uses 1/2. "
-        "Monograph ground truth: -1 (conclusion.tex:926). All three disagree."
+        "Vol I/Vol II sign discrepancy: BBD uses κ(βγ)=-1 (Vol II), "
+        "HBB uses κ(βγ)=+1 (Vol I). Unresolved convention."
     ))
     def test_betagamma(self):
-        """kappa(betagamma): BBD vs HBB — KNOWN DISCREPANCY."""
+        """kappa(betagamma): BBD vs HBB — UNRESOLVED SIGN CONVENTION."""
         bbd = _bbd_pair('betagamma').kappa
         hbb = _hbb_data('betagamma').kappa
         assert simplify(bbd - hbb) == 0
@@ -181,7 +177,7 @@ class TestKappaBBDvsG1:
         assert simplify(bbd - g1) == 0
 
     def test_heisenberg(self):
-        """kappa(H_k): BBD = G1 (both use k/2)."""
+        """kappa(H_k): BBD = G1 = k."""
         bbd = _bbd_pair('heisenberg').kappa
         g1 = _g1_kappa('abelian_cs', k=k)
         assert simplify(bbd - g1) == 0
@@ -361,16 +357,14 @@ class TestGroundTruthTable:
         assert _bbd_pair('w3').kappa_sum == Rational(250, 3)
         assert _hbb_data('w3').kappa_sum == Rational(250, 3)
 
-    @pytest.mark.xfail(reason=(
-        "BBD/MPQ/G1 use kappa(H_k)=k/2 but ground truth (conclusion.tex:923, "
-        "rosetta_stone.tex:457) says kappa(H_k)=k. Only HBB matches ground truth."
-    ))
     def test_heisenberg_kappa_ground_truth(self):
-        """Ground truth: kappa(H_k) = k. BBD/MPQ disagree (use k/2)."""
+        """Ground truth: kappa(H_k) = k. All engines now agree."""
         expected = k
         assert simplify(_bbd_pair('heisenberg').kappa - expected) == 0
-
-    def test_heisenberg_kappa_hbb_matches_ground_truth(self):
-        """HBB matches ground truth: kappa(H_k) = k."""
-        expected = k
         assert simplify(_hbb_data('heisenberg').kappa - expected) == 0
+        assert simplify(_mpq_data('heisenberg', k=k)['kappa'] - expected) == 0
+
+    def test_betagamma_complementarity_sum_zero(self):
+        """All engines agree: kappa(betagamma) + kappa(betagamma!) = 0."""
+        assert _bbd_pair('betagamma').kappa_sum == 0
+        assert _hbb_data('betagamma').kappa_sum == 0

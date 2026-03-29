@@ -624,15 +624,15 @@ def genus2_obstruction_full(family: str, **params):
 def verify_F2_heisenberg(k_val=None):
     """Verify F_2 for Heisenberg at level k.
 
-    F_2(H_k) = kappa * 7/5760 = (k/2) * 7/5760 = 7k/11520
+    F_2(H_k) = kappa * 7/5760 = k * 7/5760 = 7k/5760
 
-    Cross-check: at k=1 (standard Heisenberg), F_2 = 7/11520.
+    Cross-check: at k=1 (standard Heisenberg), F_2 = 7/5760.
     """
     k = Symbol('k') if k_val is None else S(k_val)
-    kappa = k / 2
+    kappa = k
     F_2 = F_g_free_energy(kappa, 2)
 
-    expected = 7 * k / 11520
+    expected = 7 * k / 5760
 
     return {
         'family': 'heisenberg',
@@ -912,7 +912,7 @@ def graph_decomposition_F2_heisenberg(k_val=None):
     This is the simplest case: the entire F_2 comes from the smooth stratum.
     """
     k = Symbol('k') if k_val is None else S(k_val)
-    kappa = k / 2
+    kappa = k
 
     graphs = genus2_stable_graphs_n0()
     contributions = {}

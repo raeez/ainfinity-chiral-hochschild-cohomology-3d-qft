@@ -85,11 +85,11 @@ class TestClassicalMCElement:
         assert simplify(mc['beta_squared'] - expected) == 0
 
     def test_heisenberg_mc_kappa(self):
-        """Heisenberg kappa = k/2."""
+        """Heisenberg kappa = k."""
         from lib.modular_obstruction_engine import classical_mc_element
         k = Symbol('k')
         mc = classical_mc_element('heisenberg', k=k)
-        assert simplify(mc['kappa'] - k / 2) == 0
+        assert simplify(mc['kappa'] - k) == 0
 
     def test_affine_sl2_mc_kappa(self):
         """Affine sl_2: kappa = 3(k+2)/4."""
@@ -148,13 +148,13 @@ class TestGenusRaisingD1:
         assert simplify(d1['D1_theta0'] - 5 * c / 6) == 0
 
     def test_heisenberg_D1(self):
-        """D_1(Theta_0) = k/2 for Heisenberg."""
+        """D_1(Theta_0) = k for Heisenberg."""
         from lib.modular_obstruction_engine import (
             classical_mc_element, genus_raising_operator_D1)
         k = Symbol('k')
         mc = classical_mc_element('heisenberg', k=k)
         d1 = genus_raising_operator_D1(mc)
-        assert simplify(d1['D1_theta0'] - k / 2) == 0
+        assert simplify(d1['D1_theta0'] - k) == 0
 
 
 # ===================================================================
@@ -271,11 +271,11 @@ class TestGenus1Correction:
         assert simplify(g1['theta_1'] - 5 * c / 144) == 0
 
     def test_heisenberg_theta1(self):
-        """Heisenberg Theta_1 = k/48."""
+        """Heisenberg Theta_1 = k/24 (κ=k)."""
         from lib.modular_obstruction_engine import genus1_correction
         k = Symbol('k')
         g1 = genus1_correction('heisenberg', k=k)
-        assert simplify(g1['theta_1'] - k / 48) == 0
+        assert simplify(g1['theta_1'] - k / 24) == 0
 
     def test_mc_order1_satisfied(self):
         """MC equation at order hbar^1 is satisfied."""
@@ -610,7 +610,7 @@ class TestAdditivity:
             ('heisenberg', {'k': k}),
             ('virasoro', {'c': c}),
         ])
-        assert simplify(result['sum'] - (k / 2 + c / 2)) == 0
+        assert simplify(result['sum'] - (k + c / 2)) == 0
 
     def test_additivity_holds(self):
         """Additivity structural flag."""

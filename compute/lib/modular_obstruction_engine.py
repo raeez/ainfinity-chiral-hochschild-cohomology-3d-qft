@@ -265,7 +265,7 @@ def classical_mc_element(family, **params):
             },
             'generators': ['J'],
             'conformal_weights': {'J': 1},
-            'kappa': k / 2,
+            'kappa': k,
             'central_charge': S.One,
             'description': 'Heisenberg PVA: {J_lam J} = k*lam',
         }
@@ -1137,8 +1137,8 @@ def obstruction_complementarity(family, **params):
 
     elif family == 'heisenberg':
         k = params.get('k', Symbol('k'))
-        kappa_A = k / 2
-        kappa_dual = -k / 2  # Heisenberg NOT self-dual
+        kappa_A = k
+        kappa_dual = -k  # Heisenberg NOT self-dual
         comp_sum = simplify(kappa_A + kappa_dual)
         return {
             'family': 'heisenberg',

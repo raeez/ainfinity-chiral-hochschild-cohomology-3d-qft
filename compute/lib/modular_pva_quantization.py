@@ -145,7 +145,7 @@ def genus0_classical_data(family, **params):
             'family': 'heisenberg',
             'bracket_type': '{J_lam J} = k*lam',
             'central_charge': S.One,
-            'kappa': k / 2,
+            'kappa': k,
             'shadow_depth': 2,
             'shadow_archetype': 'G',
             'r_matrix_pole': 2,
@@ -981,7 +981,7 @@ def kappa_dual_standard(family, **params):
     """Return kappa(A!) for the Koszul dual of a standard family."""
     if family == 'heisenberg':
         k = params.get('k', Symbol('k'))
-        return -k / 2
+        return -k
     elif family in ('affine_sl2', 'affine_sl3'):
         k = params.get('k', Symbol('k'))
         lie_type = 'sl2' if family == 'affine_sl2' else 'sl3'

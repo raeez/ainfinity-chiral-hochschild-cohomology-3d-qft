@@ -494,7 +494,7 @@ def heisenberg_sc_data(k=1):
 
     Mixed: J acts on the boundary as a position operator.
 
-    kappa(H_k) = k/2.
+    kappa(H_k) = k (the level IS the curvature).
 
     Shadow archetype: Gaussian (G), depth 2.
     """
@@ -518,7 +518,7 @@ def heisenberg_sc_data(k=1):
         'mu_open': mu_open,
         'mu_mix': mu_mix,
         'killing': killing,
-        'kappa': Fraction(k, 2),
+        'kappa': Fraction(k),
         'shadow_depth': 2,
         'shadow_class': 'G',
         'generators_closed': ['J'],
@@ -536,7 +536,7 @@ def betagamma_sc_data():
 
     Open sector: polynomial algebra in two variables.
 
-    kappa(betagamma) = 1/2 (c = 1 for bc/betagamma at standard normalization).
+    kappa(betagamma) = -1 (Vol II convention; see rosetta_stone.tex:1996).
 
     Shadow archetype: Contact (C), depth 4.
     """
@@ -563,7 +563,7 @@ def betagamma_sc_data():
         'mu_open': mu_open,
         'mu_mix': mu_mix,
         'killing': killing,
-        'kappa': Fraction(1, 2),
+        'kappa': Fraction(-1),
         'shadow_depth': 4,
         'shadow_class': 'C',
         'generators_closed': ['beta', 'gamma'],

@@ -142,24 +142,20 @@ _register_family(
 
 
 def _kappa_abelian_cs(**kw):
-    """Abelian CS U(1) at level k: κ = k/2.
+    """Abelian CS U(1) at level k: κ = k.
 
-    The Heisenberg algebra H_k has κ(H_k) = k.
-    The abelian CS boundary algebra has c = k, so κ = c/2 = k/2.
+    The Heisenberg algebra H_k has κ(H_k) = k (the level IS the curvature).
+    d²_B = k·ω_g (Vol I Theorem D, Vol II foundations.tex:1603).
 
-    CORRECTION: for the Heisenberg algebra as presented in Vol I,
-    κ(H_k) = k (the level IS the curvature). For the Vol II abelian
-    CS boundary with standard normalization, κ = k/2.
-
-    We use the Vol II convention: κ = k/2.
+    Ground truth: rosetta_stone.tex:457, conclusion.tex:923.
     """
     k = kw.get('k', Symbol('k'))
-    return k / 2
+    return k
 
 
 def _kappa_abelian_cs_dual(**kw):
     k = kw.get('k', Symbol('k'))
-    return -k / 2
+    return -k
 
 
 _register_family(
@@ -330,7 +326,7 @@ def genus1_free_energy_table() -> Dict[str, Dict[str, object]]:
 
     Expected values:
         free_multiplet:   F₁ = 1/48
-        abelian_cs:       F₁ = k/48
+        abelian_cs:       F₁ = k/24
         nonabelian_cs:    F₁ = 3(k+2)/4 · 1/24 = (k+2)/32
         virasoro:         F₁ = c/48
         lg_cubic:         F₁ = c/48
@@ -353,8 +349,8 @@ def genus1_free_energy_table() -> Dict[str, Dict[str, object]]:
     table['abelian_cs'] = {
         'kappa': ka,
         'F1': ka * Rational(1, 24),
-        'expected': k / 48,
-        'match': simplify(ka * Rational(1, 24) - k / 48) == 0,
+        'expected': k / 24,
+        'match': simplify(ka * Rational(1, 24) - k / 24) == 0,
     }
 
     # Nonabelian CS SU(2)

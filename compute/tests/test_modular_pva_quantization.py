@@ -26,11 +26,11 @@ class TestGenus0ClassicalData:
     """Verify classical PVA data for all standard families."""
 
     def test_heisenberg_kappa(self):
-        """Heisenberg: kappa = k/2."""
+        """Heisenberg: kappa = k."""
         from lib.modular_pva_quantization import genus0_classical_data
         k = Symbol('k')
         data = genus0_classical_data('heisenberg', k=k)
-        assert simplify(data['kappa'] - k / 2) == 0
+        assert simplify(data['kappa'] - k) == 0
 
     def test_heisenberg_shadow_depth(self):
         """Heisenberg: Gaussian archetype, depth 2."""
@@ -214,11 +214,11 @@ class TestGenus1LoopEquation:
     """Verify the genus-1 correction Theta_1 = kappa/24."""
 
     def test_heisenberg_theta1(self):
-        """Heisenberg: Theta_1 = k/48."""
+        """Heisenberg: Theta_1 = k/24 (κ=k)."""
         from lib.modular_pva_quantization import genus1_loop_equation
         k = Symbol('k')
         eq = genus1_loop_equation('heisenberg', k=k)
-        assert simplify(eq['theta_1'] - k / 48) == 0
+        assert simplify(eq['theta_1'] - k / 24) == 0
 
     def test_virasoro_theta1(self):
         """Virasoro: Theta_1 = c/48."""
@@ -317,11 +317,11 @@ class TestModularBarCurvature:
             assert curv['d_squared'] == 0
 
     def test_genus1_heisenberg_curvature(self):
-        """Heisenberg at genus 1: d^2 = k/2 * omega_1."""
+        """Heisenberg at genus 1: d^2 = k * omega_1."""
         from lib.modular_pva_quantization import modular_bar_curvature
         k = Symbol('k')
         curv = modular_bar_curvature('heisenberg', 1, k=k)
-        assert simplify(curv['d_squared'] - k / 2) == 0
+        assert simplify(curv['d_squared'] - k) == 0
 
     def test_genus1_virasoro_curvature(self):
         """Virasoro at genus 1: d^2 = c/2 * omega_1."""
@@ -603,11 +603,11 @@ class TestQuantumCorrectionFormula:
     """Verify explicit Theta_g formulas."""
 
     def test_genus1_formula_heisenberg(self):
-        """Heisenberg: Theta_1 = k/48."""
+        """Heisenberg: Theta_1 = k/24 (κ=k)."""
         from lib.modular_pva_quantization import quantum_correction_formula
         k = Symbol('k')
         result = quantum_correction_formula('heisenberg', 1, k=k)
-        assert simplify(result['theta_g'] - k / 48) == 0
+        assert simplify(result['theta_g'] - k / 24) == 0
         assert result['lambda_g_FP'] == Rational(1, 24)
 
     def test_genus1_formula_virasoro(self):

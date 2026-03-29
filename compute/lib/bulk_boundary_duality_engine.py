@@ -89,9 +89,12 @@ def heisenberg_koszul_pair(k_val=None):
 
     The pairing: H_k tensor H_k^! -> C.
 
-    kappa(H_k) = k/2 (for k = level).
-    kappa(H_k^!) = -k/2.
+    kappa(H_k) = k (the level IS the curvature: d²_B = k·ω_g).
+    kappa(H_k^!) = -k.
     kappa_sum = 0 (Theorem C: free field complementarity).
+
+    Ground truth: Vol I Theorem D, Vol II foundations.tex:1603,
+    rosetta_stone.tex:457, conclusion.tex:923.
     """
     k = Symbol('k') if k_val is None else S(k_val)
 
@@ -101,8 +104,8 @@ def heisenberg_koszul_pair(k_val=None):
         dual_generators=['phi'],
         central_charge=S.One,
         dual_central_charge=S.One,
-        kappa=k / 2,
-        dual_kappa=-k / 2,
+        kappa=k,
+        dual_kappa=-k,
         kappa_sum=S.Zero,
         conformal_weights={'J': 1},
         dual_conformal_weights={'phi': 0},
@@ -182,29 +185,17 @@ def affine_sl2_koszul_pair(k_val=None):
 
 
 def betagamma_koszul_pair():
-    """Koszul dual pair for beta-gamma.
+    """Koszul dual pair for beta-gamma at standard weight lambda=1.
 
     A = betagamma system: two generators beta (weight 1), gamma (weight 0).
-    A! = bc system: two generators b (weight 1), c (weight 0).
+    A! = bc ghost system at (1, 0).
 
-    More precisely: the beta-gamma and bc systems are Koszul dual
-    under the free-field Koszul duality.
-
-    c(betagamma) = -1, c(bc) = 2. So c + c' = 1 (NOT zero).
-    kappa(betagamma) = -1/2, kappa(bc) = 1.
-    Actually: kappa = c/2 for free fields, so kappa(bg) = -1/2, kappa(bc) = 1.
-    kappa_sum = 1/2.
-
-    WAIT: the betagamma system has c = -1 (ghost number current has c = -2,
-    but the standard bc ghost with weights (1,0) has c = -2; betagamma with
-    weights (1,0) has c = 1). Let me be more careful.
-
-    Standard: beta-gamma with (h_beta, h_gamma) = (1, 0) has c = 1.
-    The bc ghosts with (h_b, h_c) = (2, -1) have c = -26.
-
-    For the standard betagamma: c = 1, kappa = 1/2.
-    Koszul dual: the OPPOSITE betagamma, kappa' = -1/2.
-    kappa_sum = 0.
+    UNRESOLVED SIGN CONVENTION:
+      Vol I preface:3800 says kappa(bg) = +1.
+      Vol II rosetta_stone.tex:1996 says kappa(bg) = -1.
+      Vol II line-operators.tex:1015 says kappa(bg) = +1.
+      Formula kappa = 6*lambda^2 - 6*lambda + 1 at lambda=1 gives +1.
+    This engine uses the Vol II majority convention (kappa = -1).
 
     Shadow archetype: Contact (C), depth 4.
     """
@@ -212,10 +203,10 @@ def betagamma_koszul_pair():
         name='Beta-gamma',
         algebra_generators=['beta', 'gamma'],
         dual_generators=['beta_dual', 'gamma_dual'],
-        central_charge=S.One,
-        dual_central_charge=S.One,
-        kappa=Rational(1, 2),
-        dual_kappa=Rational(-1, 2),
+        central_charge=S(2),
+        dual_central_charge=S(-2),
+        kappa=S.NegativeOne,
+        dual_kappa=S.One,
         kappa_sum=S.Zero,
         conformal_weights={'beta': 1, 'gamma': 0},
         dual_conformal_weights={'beta_dual': 1, 'gamma_dual': 0},

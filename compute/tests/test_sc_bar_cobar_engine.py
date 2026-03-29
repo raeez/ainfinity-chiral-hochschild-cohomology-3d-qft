@@ -458,19 +458,19 @@ class TestExampleAlgebras:
     """Test example algebra data is consistent."""
 
     def test_heisenberg_kappa(self):
-        """Heisenberg at k=1: kappa = 1/2."""
+        """Heisenberg at k=1: kappa = 1."""
         data = heisenberg_sc_data(k=1)
-        assert data['kappa'] == Fraction(1, 2)
-
-    def test_heisenberg_kappa_k2(self):
-        """Heisenberg at k=2: kappa = 1."""
-        data = heisenberg_sc_data(k=2)
         assert data['kappa'] == Fraction(1)
 
+    def test_heisenberg_kappa_k2(self):
+        """Heisenberg at k=2: kappa = 2."""
+        data = heisenberg_sc_data(k=2)
+        assert data['kappa'] == Fraction(2)
+
     def test_betagamma_kappa(self):
-        """Beta-gamma: kappa = 1/2."""
+        """Beta-gamma: kappa = -1 (Vol II convention)."""
         data = betagamma_sc_data()
-        assert data['kappa'] == Fraction(1, 2)
+        assert data['kappa'] == Fraction(-1)
 
     def test_betagamma_shadow_depth(self):
         """Beta-gamma: shadow depth = 4 (Contact class)."""

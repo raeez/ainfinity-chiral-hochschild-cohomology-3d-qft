@@ -168,16 +168,16 @@ class TestGenus1Curvature:
         assert simplify(corr['F1'] - Rational(1, 48)) == 0
 
     def test_heisenberg_F1(self):
-        """F₁(H_k) = (k/2)/24 = k/48 (Vol II convention κ=k/2)."""
+        """F₁(H_k) = k/24 (κ=k, Vol I Thm D)."""
         k = Symbol('k')
         corr = period_correction('abelian_cs', k=k)
-        assert simplify(corr['F1'] - k / 48) == 0
+        assert simplify(corr['F1'] - k / 24) == 0
 
     def test_abelian_cs_F1(self):
-        """F₁(U(1)_k) = k/48."""
+        """F₁(U(1)_k) = k/24."""
         k = Symbol('k')
         corr = period_correction('abelian_cs', k=k)
-        assert simplify(corr['F1'] - k / 48) == 0
+        assert simplify(corr['F1'] - k / 24) == 0
 
     def test_virasoro_F1(self):
         """F₁(Vir_c) = c/48."""
