@@ -214,8 +214,9 @@ def lattice_data(rank=1):
     Dimensions: [binom(r,0), binom(r,1), ..., binom(r,r), 0, ...].
 
     Central charge: c = rank(Lambda).
-    kappa(V_Lambda) = rank(Lambda)/2 (= c/2, independent of cocycle).
-    This is thm:lattice:curvature-braiding-orthogonal.
+    kappa(V_Lambda) = rank(Lambda) (= c, NOT c/2).
+    The lattice VOA is H_1^{tensor d}, so kappa = d * kappa(H_1) = d * 1 = d.
+    This matches the master table in landscape_census.tex.
 
     Shadow archetype: Gaussian (G), depth 2.
     """
@@ -224,8 +225,8 @@ def lattice_data(rank=1):
         num_generators=rank,
         central_charge=S(rank),
         dual_central_charge=S(rank),
-        kappa=Rational(rank, 2),
-        dual_kappa=-Rational(rank, 2),
+        kappa=S(rank),
+        dual_kappa=-S(rank),
         kappa_sum=S.Zero,
         shadow_depth=2,
         shadow_class="G",
@@ -456,11 +457,15 @@ def kappa_value(family: str, rank: Optional[int] = None):
     """Return kappa(A) for a standard family.
 
     kappa(A) is the modular characteristic (Theorem D).
-    For all standard families, kappa = c/2 where c is the central charge,
-    EXCEPT for Kac-Moody algebras where kappa = dim(g)*(k+h^v)/(2*h^v).
-
-    This is NOT c/2 for KM: the central charge c = k*dim(g)/(k+h^v)
-    gives c/2 = k*dim(g)/(2*(k+h^v)), which differs from kappa.
+    The formula depends on the family:
+    - Virasoro/W-algebras: kappa = c * varrho(g) where varrho = sum 1/(m_i+1)
+      (= c/2 for Vir, 5c/6 for W_3, c*(H_N-1) for W_N)
+    - Kac-Moody: kappa = (k+h^v)*dim(g)/(2*h^v) (NOT c/2)
+    - Heisenberg at level k: kappa = k (= c for level 1)
+    - Lattice V_Lambda: kappa = rank(Lambda) (= c)
+    - bc/betagamma: kappa = c/2
+    - Free fermion: kappa = c/2 = 1/4
+    AP1 warning: do NOT assume kappa = c/2 for all families.
     """
     if family.startswith("lattice") and rank is not None:
         data = lattice_data(rank)

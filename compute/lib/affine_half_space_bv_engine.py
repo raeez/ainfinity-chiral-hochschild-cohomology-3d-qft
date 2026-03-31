@@ -428,7 +428,12 @@ def verify_level_shift_ds_compatible(
 def kappa_kac_moody(k, lie_type: str, rank: int):
     """Compute the modular Koszul curvature kappa for Kac-Moody at level k.
 
-    kappa(KM) = c/2 = k * dim(g) / (2 * (k + h^vee))
+    kappa(KM) = (k + h^vee) * dim(g) / (2 * h^vee)
+
+    This is NOT c/2.  The central charge is c = k*dim(g)/(k+h^vee),
+    so c/2 = k*dim(g)/(2*(k+h^vee)), which differs from kappa.
+    The correct formula uses t = k + h^vee in the numerator and
+    h^vee in the denominator.
 
     AP1 warning: do NOT copy between families without recomputing.
     """
@@ -437,7 +442,7 @@ def kappa_kac_moody(k, lie_type: str, rank: int):
     h_vee = Rational(dual_coxeter_number(lie_type, rank))
     if k + h_vee == 0:
         return None  # Critical level
-    return k * dim_g / (2 * (k + h_vee))
+    return (k + h_vee) * dim_g / (2 * h_vee)
 
 
 def central_charge_sugawara(k, lie_type: str, rank: int):

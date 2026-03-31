@@ -228,21 +228,39 @@ class TestDSCompatibility:
 # =========================================================================
 
 class TestKappaConsistency:
-    """Cross-check kappa = c/2 for Kac-Moody algebras."""
+    """Cross-check kappa = (k+h^vee)*dim(g)/(2*h^vee) for Kac-Moody algebras.
 
-    def test_kappa_equals_c_over_2_sl2(self):
-        """kappa(sl_2, k) = c(sl_2, k)/2 for generic k."""
+    CORRECTED: kappa(KM) != c/2.  The correct formula is
+    kappa = t*d/(2*h^vee) where t = k + h^vee.
+    This was an AP10 violation (wrong code + wrong test = passing test).
+    """
+
+    def test_kappa_correct_formula_sl2(self):
+        """kappa(sl_2, k) = 3(k+2)/4 for generic k (NOT c/2)."""
         k = Rational(7)
         kap = kappa_kac_moody(k, 'A', 1)
+        # sl_2: d=3, h^vee=2, so kappa = (k+2)*3/4
+        assert kap == Rational(3, 4) * (k + 2)
+        # Verify NOT equal to c/2
         c = central_charge_sugawara(k, 'A', 1)
-        assert kap == c / 2
+        assert kap != c / 2
 
-    def test_kappa_equals_c_over_2_sl3(self):
-        """kappa(sl_3, k) = c(sl_3, k)/2 for generic k."""
+    def test_kappa_correct_formula_sl3(self):
+        """kappa(sl_3, k) = 4(k+3)/3 for generic k (NOT c/2)."""
         k = Rational(5)
         kap = kappa_kac_moody(k, 'A', 2)
+        # sl_3: d=8, h^vee=3, so kappa = (k+3)*8/6 = 4(k+3)/3
+        assert kap == Rational(4, 3) * (k + 3)
+        # Verify NOT equal to c/2
         c = central_charge_sugawara(k, 'A', 2)
-        assert kap == c / 2
+        assert kap != c / 2
+
+    def test_kappa_antisymmetry_sl2(self):
+        """kappa(sl_2, k) + kappa(sl_2, -k-4) = 0."""
+        k = Rational(7)
+        kap = kappa_kac_moody(k, 'A', 1)
+        kap_dual = kappa_kac_moody(-k - 4, 'A', 1)
+        assert kap + kap_dual == 0
 
     def test_kappa_critical_returns_none(self):
         """At the critical level k = -h^vee, kappa is undefined."""
@@ -254,3 +272,9 @@ class TestKappaConsistency:
         kap = kappa_kac_moody(31, 'E', 8)
         assert kap is not None
         assert kap > 0
+
+    def test_kappa_E8_formula(self):
+        """kappa(E_8, k) = 62(k+30)/15."""
+        k = Rational(31)
+        kap = kappa_kac_moody(k, 'E', 8)
+        assert kap == Rational(62, 15) * (k + 30)
