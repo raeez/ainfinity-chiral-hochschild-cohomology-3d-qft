@@ -53,6 +53,121 @@ For any nontrivial task, follow this order:
 - Do not preserve a beautiful but false formulation when a narrower true statement is available.
 - Do not "repair" by rhetoric alone; if the mathematical content changes, update theorem status, hypotheses, and downstream uses.
 
+## Deep Beilinson Audit — Codex Procedure
+
+When instructed to perform a deep Beilinson audit on Vol II, execute the loop on the **live manuscript surface**: `main.tex`, the files currently `\input`'d, the dirty git diff, the active build logs, and the narrowest relevant compute/tests slice.
+
+### Core stance
+
+- Falsification comes first. The task is to break claims before trusting them.
+- Treat `AGENTS.md` and `CLAUDE.md` as operational guides, not mathematical ground truth.
+- Prefer a smaller true statement to a larger false one.
+- If a correction is not independently verified, mark the gap explicitly rather than silently "repairing" it.
+
+### Initialization and loop state
+
+- Start with a short `commentary` update naming the target and first verification step.
+- Use `update_plan` to track the target, iteration number, current stage, and open findings count. Update the plan at each stage boundary.
+- Record findings in `compute/audit/linear_read_notes.md`. Each entry should include date, target, severity, class, exact file/line, issue, fix, and status.
+- Unless the user explicitly asks for sub-agents or parallel agent work, keep the audit local. In Codex, parallel shell inspection happens through `multi_tool_use.parallel`; agent fan-out via `spawn_agent` is reserved for explicit user-authorized delegation.
+
+### Per-claim verification protocol
+
+For every nontrivial claim on the target surface:
+
+1. Identify the exact statement, labels, hypotheses, and dependencies.
+2. Check conventions first: grading, signs, bar/cobar objects, Swiss-cheese directionality, shifted PVA parity, and Vol I/Vol II terminology.
+3. Recompute formulas independently. Do not correct by pattern or majority vote.
+4. Trace proof steps line by line. Verify cited results really state what is being used and that their hypotheses are satisfied.
+5. Check scope honestly: genus, arity, filtration, algebra family, open/closed colour, ambient versus convolution level.
+6. Propagate across the repo: introduction, current chapter, examples, appendices, compute layer, superseded splits, and both volumes when the claim is cross-volume.
+7. Run the narrowest relevant verification before declaring success: targeted `pytest`, targeted grep, log inspection, or `make fast`.
+
+### The Six Hostile Examiners, Codex edition
+
+Apply these lenses explicitly on dense passages:
+
+- **Beilinson**: is the claim really proved, or merely asserted?
+- **Witten**: does the mathematics match the physical claim, and is the scope qualified?
+- **Costello**: are the factorization and Ran-space constructions actually well-formed?
+- **Gaiotto**: do the VOA and W-algebra identifications survive edge cases and reductions?
+- **Drinfeld**: are the quantum-group and transport statements structurally correct?
+- **Kontsevich**: are the operadic/formality statements precise, functorial, and non-circular?
+
+### Severity and classification
+
+- Severity: `CRITICAL`, `SERIOUS`, `MODERATE`, `MINOR`
+- Class:
+  - `A` logical/circular
+  - `B` formula/computation
+  - `C` structural/label/dependency
+  - `D` status/scope qualification
+  - `E` editorial wording that affects truth conditions or mathematical readability
+
+## Beilinson Rectification Loop — Codex Protocol
+
+When instructed to run the Beilinson loop on a target chapter or on the live Vol II surface, iterate until convergence. Convergence means: no actionable findings at severity `MODERATE` or above remain on the modified surface, and the narrowest relevant verification passes.
+
+### Stage 0 — Initialize
+
+- Register the target in `update_plan`.
+- Read the target file, its neighboring context, the active `\input` map from `main.tex`, and the current git diff before editing.
+- Prefer the active split/core files over superseded files, but audit superseded files when they advertise the same claim.
+
+### Stage 1 — Audit
+
+Run three passes, locally by default:
+
+- **RED pass**: logic, formulas, signs, scope, status tags, dependency honesty.
+- **BLUE pass**: consistency, stale status prose, duplicate or conflicting formulations, AP5 propagation failures, build-log collisions, compute/test mismatches.
+- **GREEN pass**: missing definitions, dangling forward references, unproved lemmas, over-conditional statements that can now be strengthened, and load-bearing structural gaps.
+
+Codex execution rules:
+
+- Use `multi_tool_use.parallel` for independent reads, greps, log checks, and targeted test invocations that can run concurrently.
+- Use `exec_command` for sequential shell work, `git diff`, `git log`, `make fast`, and `pytest`.
+- Only if the user explicitly authorizes delegation may RED/BLUE/GREEN be split across `spawn_agent`; otherwise they are three local passes in one session.
+
+Merge the findings into a single register, deduplicate them, and classify them by severity and class.
+
+### Stage 2 — Rectify
+
+Fix findings in dependency order, starting with severity `CRITICAL` and `SERIOUS`, then `MODERATE`.
+
+For each fix:
+
+1. Re-read the local context.
+2. Compute the correction independently.
+3. Announce the intended edit in `commentary`.
+4. Edit with `apply_patch`.
+5. Grep for all variant forms across the active Vol II surface and, when relevant, `~/chiral-bar-cobar`.
+6. Run the narrowest verification that can actually falsify the change.
+
+Build discipline:
+
+- After every three fixes, or after any load-bearing theorem/proof rewrite, run `make fast` unless a narrower check is clearly sufficient.
+- If a structural rewrite needs isolation, create a temporary `git worktree` with `exec_command`, inspect the diff, and only then port the successful change back. Never overwrite unrelated user edits.
+
+### Stage 3 — Re-audit
+
+- Re-run RED/BLUE/GREEN on every modified location and on any nearby statements whose truth conditions changed.
+- Treat Stage 3 as hostile verification of your own rewrite, not a rubber stamp.
+- If any actionable finding at severity `MODERATE` or higher remains, start the next iteration with those findings as input.
+
+### Finalize
+
+- Run the narrowest defensible closing verification. For broad manuscript changes, that usually means `make fast`; for compute-facing claims, the relevant `pytest` slice as well.
+- Update `compute/audit/linear_read_notes.md` with final statuses.
+- Mark the `update_plan` entry complete only after verification, not after edits.
+
+### Execution rules
+
+- Never edit without reading first.
+- Never trust repetition as evidence.
+- Never upgrade a claim to `\ClaimStatusProvedHere` in the same pass as its first unchecked proof draft.
+- After every substantive correction, search for downstream advertisements of the old claim and update them in the same session.
+- Treat contradictions between manuscript, compute, tests, and build logs as mathematical bugs, not as "documentation drift."
+
 ## Vol I Theorems Used Here
 
 Every chapter depends on Vol I's five theorems. Cross-references to Vol I labels resolve as "undefined" — expected for a multi-volume work.
