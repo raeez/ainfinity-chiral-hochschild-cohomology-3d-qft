@@ -220,13 +220,16 @@ def collision_purity_check(algebra_type: str, rank: int = 2,
     # For semisimple residues, the theorem predicts:
     # purity <=> Koszulness
     # Known Koszul status:
+    # All standard-landscape algebras are chirally Koszul (PBW universality).
+    # Semisimple purity is a SUFFICIENT condition for Koszulness, not necessary.
+    # Virasoro is Koszul despite non-semisimple residues (AP14: shadow depth ≠ Koszulness).
     known_koszul = {
         'heisenberg': True,
         'free_betagamma': True,
         'abelian_cs': True,
         'affine_sl2': True,
         'lg': True,
-        'virasoro': False,
+        'virasoro': True,  # Koszul (PBW universality), but non-semisimple residues
     }
 
     koszul = known_koszul.get(algebra_type)
@@ -237,8 +240,8 @@ def collision_purity_check(algebra_type: str, rank: int = 2,
         'is_semisimple': ss,
         'eigenvalues': eigenvals,
         'is_koszul': koszul,
-        'purity_prediction': ss,  # semisimple => pure
-        'theorem_consistent': (ss and koszul) or (not ss and not koszul) or (not ss),
+        'purity_prediction': ss,  # semisimple => Koszul (sufficient, not necessary)
+        'theorem_consistent': (ss and koszul) or (not ss),  # converse may fail
     }
 
 
@@ -386,21 +389,22 @@ class TestSemisimplePurityCriterion:
         assert result['is_koszul'] is True
         assert result['theorem_consistent'] is True
 
-    # --- Test 5: Impurity + non-Koszulness for Virasoro ---
+    # --- Test 5: Virasoro is Koszul despite non-semisimple residues ---
 
-    def test_virasoro_non_semisimple_non_koszul(self):
-        """Virasoro: non-scalar quartic pole, Jordan block, NOT Koszul.
+    def test_virasoro_non_semisimple_but_koszul(self):
+        """Virasoro: non-semisimple residues, yet chirally Koszul.
 
-        This is the KEY FALSIFICATION test: if the theorem were wrong,
-        we might find a semisimple algebra that's not Koszul, or a
-        non-semisimple one that IS Koszul. The Virasoro algebra verifies
-        the non-Koszul direction.
+        The Virasoro algebra has a quartic OPE pole creating a Jordan
+        block in the effective residue matrix.  Despite this, it IS
+        chirally Koszul (PBW universality: freely strongly generated).
+        This shows the purity criterion is sufficient but NOT necessary:
+        non-semisimple residues do not obstruct Koszulness.
         """
         result = collision_purity_check('virasoro')
         assert result['is_semisimple'] is False, \
             "Virasoro effective residue should be NON-semisimple (Jordan block)"
-        assert result['is_koszul'] is False, \
-            "Virasoro is NOT chirally Koszul"
+        assert result['is_koszul'] is True, \
+            "Virasoro IS chirally Koszul (PBW universality)"
         assert result['theorem_consistent'] is True
 
     def test_virasoro_jordan_block_explicit(self):
@@ -533,19 +537,21 @@ class TestSemisimplePurityCriterion:
     # --- Test 10: The biconditional for the full standard landscape ---
 
     def test_biconditional_standard_landscape(self):
-        """The biconditional (semisimple+pure <=> Koszul) holds across
-        the entire standard landscape.
+        """Semisimple purity is SUFFICIENT for Koszulness across the
+        standard landscape.
 
-        For each algebra: if semisimple, then Koszul (and vice versa
-        within the semisimple class). This is the theorem's main content.
+        For semisimple algebras: semisimple+pure => Koszul.
+        The converse need not hold: Virasoro is Koszul (PBW universality)
+        despite non-semisimple collision residues.
         """
         algebras = [
+            # (name, expected_semisimple, expected_koszul)
             ('heisenberg', True, True),
             ('free_betagamma', True, True),
             ('abelian_cs', True, True),
             ('affine_sl2', True, True),
             ('lg', True, True),
-            ('virasoro', False, False),
+            ('virasoro', False, True),  # Koszul via PBW, not via semisimple purity
         ]
         for name, expected_ss, expected_koszul in algebras:
             result = collision_purity_check(name, rank=3 if name == 'lg' else 2)

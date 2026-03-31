@@ -67,7 +67,7 @@ All results in Parts I–VII hold unconditionally for any logarithmic SC^{ch,top
 
 ## Beilinson Rectification Loop
 
-The full loop protocol is defined in Vol I's CLAUDE.md (`~/chiral-bar-cobar/CLAUDE.md`, section "Beilinson Rectification Loop — Chapter-Level Protocol"). It uses parallel Agent dispatch (RED/BLUE/GREEN audit), TaskCreate/TaskUpdate for persistent state, worktree isolation for speculative reconstitution, and build-gated fixing. Run `run the Beilinson loop on [TARGET]` to invoke on any Vol II chapter.
+The Vol I `CLAUDE.md` supplies the source protocol. For Vol II, the Codex-native enactment now lives locally in `AGENTS.md`: use `update_plan` for loop state, local RED/BLUE/GREEN passes by default, `multi_tool_use.parallel` for shell fan-out, `exec_command` for build/test/worktree steps, `apply_patch` for fixes, and `compute/audit/linear_read_notes.md` as the findings register. Run the Beilinson loop on the live Vol II surface or on a named target chapter, and treat convergence as "no actionable findings at severity MODERATE or above after re-audit plus the relevant verification passes."
 
 ## Critical Pitfalls
 
