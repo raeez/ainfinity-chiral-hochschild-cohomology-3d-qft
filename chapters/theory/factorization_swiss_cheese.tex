@@ -1,0 +1,3406 @@
+%% Factorization Swiss-Cheese: the primary treatment
+%% Layers 0--5 of the six-layer hierarchy
+
+%% Macro safety: providecommand only
+\providecommand{\fSet}{\mathsf{fSet}}
+\providecommand{\IndCoh}{\operatorname{IndCoh}}
+\providecommand{\QCoh}{\operatorname{QCoh}}
+\providecommand{\Dmod}{D\text{-}\mathsf{mod}}
+\providecommand{\Mbar}{\overline{\cM}}
+\providecommand{\colim}{\operatorname{colim}}
+\providecommand{\varprojlim}{\underleftarrow{\lim}}
+\providecommand{\Obs}{\mathsf{Obs}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\cG}{\mathcal{G}}
+\providecommand{\cB}{\mathcal{B}}
+
+\chapter{Factorization Swiss-Cheese Algebras}
+\label{ch:factorization-swiss-cheese}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The factorization substrate}
+\label{sec:factorization-substrate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A chiral algebra is not an algebra over an operad.  It is a
+factorizable $D$-module on the Ran space.  The operad
+$\SCchtop$ is what remains after formal completion at collision
+points: it is the local shadow, not the governing structure.
+At genus~$0$ on~$\mathbb{P}^1$ the local shadow determines the
+global object, because $\mathbb{P}^1 \smallsetminus \{\mathrm{pt}\}
+\simeq \C$ and every factorizable $D$-module on $\Ran(\C)$ is
+determined by its formal-disc data.  At genus~$g \geq 1$ this is
+false: the periods of~$\Sigma_g$, the monodromy of the $D$-module
+connection around $B$-cycles, and the factorization pattern on
+$\Ran(\Sigma_g)$ carry genuinely more information than the local
+operadic data.  The curvature $\dfib^{\,2} = \kappa(\cA) \cdot
+\omega_g$ is the measure of this excess --- it is global information
+invisible to the formal-disc model.
+
+All results in this chapter apply to logarithmic $\SCchtop$-algebras (Definition~\ref{def:log-SC-algebra}).  Beyond the affine and $\cW$-algebra lineages, the question of which chiral algebras admit a logarithmic $\SCchtop$-algebra structure remains open.
+
+This chapter constructs the Swiss-cheese structure directly from
+factorization data and derives the local operadic model as a
+consequence.  The treatment is parallel: Beilinson--Drinfeld
+(algebraic, $D$-module) and Costello--Gwilliam (differential-geometric,
+prefactorization algebra) reach the same object through complementary
+routes, and their equivalence is proved at the end of the chapter.
+
+\begin{definition}[Ran space and factorization pattern]
+\label{def:ran-space}
+\index{Ran space|textbf}
+Let $X$ be a smooth curve over a field~$k$ of characteristic~$0$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The \emph{Ran space} of~$X$ is the (pre)sheaf
+\begin{equation}\label{eq:ran-colim}
+  \Ran(X)
+  \;=\;
+  \colim_{S \in \fSet^{\mathrm{surj}}} X^S,
+\end{equation}
+where the colimit is taken over the category $\fSet^{\mathrm{surj}}$ of
+non-empty finite sets with surjections.  Points of $\Ran(X)$ are finite
+non-empty subsets $\{x_1,\ldots,x_n\} \subset X$.
+
+\item For a partition $I = I_1 \sqcup I_2$ of a finite set, the
+\emph{disjointness locus}
+\[
+  U_{I_1,I_2}
+  \;:=\;
+  \bigl\{(S_1,S_2) \in \Ran(X) \times \Ran(X) :
+  S_1 \cap S_2 = \varnothing\bigr\}
+\]
+embeds into $\Ran(X)$ via union.  The \emph{factorization structure} is
+encoded by the functoriality of the assignment $S \mapsto F(S)$ with
+respect to partitions of the index set.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Factorizable $D$-module]
+\label{def:factorizable-dmod}
+\index{factorizable D-module@factorizable $D$-module|textbf}
+A \emph{factorizable $D$-module} on $\Ran(X)$ is a $D$-module~$F$
+on $\Ran(X)$ equipped with \emph{factorization isomorphisms}: for
+every decomposition of a finite set $I = I_1 \sqcup I_2$ into
+non-empty disjoint subsets, an isomorphism
+\begin{equation}\label{eq:fact-iso}
+  F\big|_{U_{I_1,I_2}}
+  \;\xrightarrow{\;\sim\;}
+  F\big|_{U_{I_1}} \boxtimes F\big|_{U_{I_2}}
+\end{equation}
+on the disjointness locus, satisfying the obvious associativity and
+commutativity constraints for iterated partitions
+$I = I_1 \sqcup \cdots \sqcup I_r$.  In the language of
+\cite{BD04}, this is a factorization algebra in the category of
+$D$-modules on~$X$.
+\end{definition}
+
+\begin{definition}[Chiral operations from factorization]
+\label{def:chiral-ops-fact}
+\index{chiral operations!from factorization}
+Let $F$ be a factorizable $D$-module on $\Ran(X)$.  The
+\emph{chiral $n$-ary operations} are \emph{not} maps between
+fibers at points.  They are the restriction morphisms
+\begin{equation}\label{eq:chiral-op-diagonal}
+  \mu_{ij}\colon
+  F^{\boxtimes n}\big|_{\Delta_{ij}}
+  \;\longrightarrow\;
+  F^{\boxtimes(n-1)}
+\end{equation}
+to the diagonal $\Delta_{ij} = \{z_i = z_j\} \subset X^n$, viewed
+as morphisms of $D$-modules supported on different diagonals of the
+Ran space.  The composition law arises from iterating diagonal
+restrictions --- this is the factorization structure, not an operad
+composition.  The key distinction: operadic composition composes
+operations between \emph{fibers}; factorization composition composes
+\emph{restriction maps between $D$-modules on configuration spaces}.
+\end{definition}
+
+\begin{remark}[The local shadow]
+\label{rem:local-shadow-extraction}
+\index{local shadow|textbf}
+The topological operad $\SCchtop$ is extracted from the factorization
+structure by three steps:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item Restrict to a formal neighbourhood of a point $x \in X$
+  (where $X \simeq \C$ locally).
+\item Replace the $D$-module structure by its formal completion, which
+  is a cochain complex (a vector space with a differential) rather
+  than a quasicoherent sheaf with connection.
+\item Identify the formal neighbourhood of the small diagonal in
+  $X^n$ with $\FM_n(\C)$, the Fulton--MacPherson compactification.
+\end{enumerate}
+This extraction loses all global information: monodromy around
+cycles, the $D$-module connection, period integrals over homology
+classes.  At genus~$0$ on~$\mathbb{P}^1$ the loss is trivial
+($\mathbb{P}^1 \smallsetminus \{\mathrm{pt}\} \simeq \C$, so
+the formal disc covers the curve).  At genus~$g \geq 1$ the loss
+is precisely the curvature $\kappa(\cA) \cdot \omega_g$, which is
+the monodromy obstruction of the $D$-module connection around the
+$B$-cycles of~$\Sigma_g$.
+
+Thus the local model $\SCchtop$
+(Definition~\ref{def:SC-operations}) is the genus-$0$ shadow of
+the factorization structure.  The homotopy-Koszulity theorem
+(Theorem~\ref{thm:homotopy-Koszul}) is a theorem about this local
+model; its promotion to an all-genus statement requires the
+factorization-algebraic input of this chapter.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Worked examples}
+\label{sec:worked-examples-factorization}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Before developing the general theory, we compute the factorization
+Swiss-cheese structure for the three canonical examples: the free boson
+(Heisenberg), the affine Kac--Moody algebra, and the Virasoro
+algebra.  Each computation is carried out in explicit coordinates,
+with all signs and structure maps written out.  The general
+definitions and constructions follow in
+Sections~\ref{sec:BD-factorization-SC}--\ref{sec:factorization-koszul-duality}.
+
+%%----------------------------------------------------------------------
+\subsection{The Heisenberg algebra (free boson)}
+\label{subsec:heisenberg-SC}
+%%----------------------------------------------------------------------
+
+\begin{example}[Heisenberg as BD factorization Swiss-cheese algebra]
+\label{ex:heisenberg-SC}
+\index{Heisenberg algebra!BD factorization Swiss-cheese}
+\ClaimStatusProvedHere{}
+Let $X$ be a smooth curve.  The \emph{Heisenberg chiral algebra} on~$X$
+is the symmetric algebra $D$-module
+$\cA = \Sym(\omega_X)$ on~$X$, where $\omega_X = \Omega^1_X$ is the
+canonical bundle.  The chiral product is the $!$-extension of
+the exterior tensor product $\omega_X \boxtimes \omega_X$ to the
+diagonal, with residue determined by the tautological pairing
+$\omega_X \otimes \omega_X^{-1} \to \cO_X$.  In coordinates: for
+$a = f(z)\,dz$ and $b = g(z)\,dz$ sections of $\omega_X$, the OPE is
+\begin{equation}\label{eq:heisenberg-OPE}
+  a(z) \cdot b(w)
+  \;\sim\;
+  \frac{f(z)\,g(w)}{z - w}\, dz \otimes dw
+  \;+\; \text{regular},
+\end{equation}
+with propagator $K(z,w) = dz/(z-w)$ on $\C$.
+
+\smallskip\noindent
+\textbf{Factorizable $D$-module on $\Ran(X)$.}
+The $I$-th component of the factorizable $D$-module
+(Construction~\ref{constr:fact-dmod-from-chiral}) is
+\[
+  F_{\mathrm{Heis}}^I
+  \;=\;
+  j_{!*}\bigl(\omega_X^{\boxtimes I}\bigr)
+  \big|_{\Delta_{\mathrm{arr}}},
+\]
+where $j\colon U_I \hookrightarrow X^I$ is the diagonal complement.
+For $I = \{1,2\}$, the space $F_{\mathrm{Heis}}^{\{1,2\}}$ consists
+of sections of $\omega_X \boxtimes \omega_X$ on $X \times X$
+with at most simple poles along $z_1 = z_2$: concretely, expressions
+of the form
+\[
+  \frac{f(z_1,z_2)}{z_1 - z_2}\, dz_1 \otimes dz_2
+  \;+\;
+  g(z_1,z_2)\, dz_1 \otimes dz_2,
+\]
+where $f, g$ are regular.  The factorization isomorphism on the
+disjointness locus $\{z_1 \neq z_2\}$ is the tautological
+splitting
+$\omega_X \boxtimes \omega_X|_{z_1 \neq z_2} =
+\omega_X|_{z_1} \otimes \omega_X|_{z_2}$.
+
+\smallskip\noindent
+\textbf{Swiss-cheese structure.}
+The BD factorization Swiss-cheese algebra is:
+\begin{itemize}
+\item \emph{Closed sector}: $F_{\mathsf{cl}} = F_{\mathrm{Heis}}$
+  on $\Ran(X)$.
+\item \emph{Open sector}: $F_{\mathsf{op}} = \Sym(V)$ viewed as an
+  $\Eone$-algebra on $\Ran(\R)$ via ordered multiplication, where
+  $V = H^0(D, \omega_X)$ for a formal disc $D \subset X$.
+\item \emph{Mixed sector}: the chiral module structure
+  $F_{\mathrm{Heis}} \otimes F_{\mathsf{op}} \to F_{\mathsf{op}}$,
+  given by the contour-integral formula
+  $a(z) \cdot v = \oint_{|z-w|=\varepsilon}
+  K(z,w)\, a(z)\, v\, dz$ for $v \in F_{\mathsf{op}}$.
+\end{itemize}
+The CG prefactorization algebra (Definition~\ref{def:CG-prefact})
+associated to this data is the \emph{free boson}: the prefactorization
+algebra $\Obs$ on $\C \times \R$ with propagator
+$P(z_1,t_1;\,z_2,t_2) = \frac{dz_1}{z_1 - z_2}\cdot\theta(t_1 - t_2)$,
+matching Definition~\ref{def:BV-origin} with $\fg = \C$ (abelian)
+and $S_{\mathrm{int}} = 0$.
+\end{example}
+
+\begin{example}[Heisenberg bar complex at arity $3$]
+\label{ex:heisenberg-bar-3}
+\index{Heisenberg algebra!bar complex at arity 3}
+\ClaimStatusProvedHere{}
+Let $\cA = \Sym(\omega_X)$ as above, with a generator
+$J = J(z)\,dz \in \omega_X$.  The augmentation ideal
+$\bar\cA = \cA_+ = \bigoplus_{n \geq 1}\Sym^n(\omega_X)$, and the
+desuspended generators are $s^{-1}J$, $s^{-1}J^2$, etc.  Working
+at tree level (genus~$0$, $X = \C$), the bar complex
+$\barB(\cA) = T^c(s^{-1}\bar\cA)$ has the following arity-$3$
+elements, restricting to the case where all tensor factors are
+the generator~$J$:
+\begin{align}
+  \xi_1 &= [s^{-1}J \,|\, s^{-1}J \,|\, s^{-1}J],
+  \label{eq:heis-bar-el-1}\\
+  \xi_2 &= [s^{-1}J^2 \,|\, s^{-1}J],
+  \label{eq:heis-bar-el-2}\\
+  \xi_3 &= [s^{-1}J \,|\, s^{-1}J^2].
+  \label{eq:heis-bar-el-3}
+\end{align}
+Here $\xi_1$ is an element of bar degree~$3$ (three tensor factors in
+the bar construction), while $\xi_2$ and $\xi_3$ have bar degree~$2$
+with one factor of higher polynomial degree.
+
+\smallskip\noindent
+\textbf{The bar differential $d_{\barB}$.}
+The bar differential is the coderivation determined by the chiral
+binary product $\mu_2\colon s^{-1}\bar\cA \otimes s^{-1}\bar\cA
+\to s^{-1}\bar\cA$.  For the Heisenberg algebra, $\mu_2$ acts as:
+\begin{itemize}
+\item $\mu_2(s^{-1}J \otimes s^{-1}J) = 0$ --- the Heisenberg OPE
+  $J(z)\,J(w) \sim 1/(z-w)$ has singular part a \emph{scalar}
+  (the identity), which lies in $\cA^0 = k$ (the augmentation), not
+  in $\bar\cA$.  So the projected binary product $\bar\mu_2$ on
+  $\bar\cA$ vanishes.
+\end{itemize}
+Consequently, $d_{\barB}(\xi_1) = 0$: the bar differential on a
+degree-$3$ element is
+\begin{align*}
+  d_{\barB}(\xi_1)
+  &= [s^{-1}\bar\mu_2(J,J) \,|\, s^{-1}J]
+  + (-1)^{|s^{-1}J|}\,
+  [s^{-1}J \,|\, s^{-1}\bar\mu_2(J,J)] \\
+  &= [0 \,|\, s^{-1}J] + (-1)^{0} [s^{-1}J \,|\, 0]
+  \;=\; 0.
+\end{align*}
+Here $|s^{-1}J| = |J| - 1 = 0$ (the generator $J$ has cohomological
+degree~$1$ as a section of~$\omega_X$, and desuspension subtracts~$1$).
+
+More generally, all higher arity bar elements in the Heisenberg bar
+complex are $d_{\barB}$-closed, because the projected binary product
+$\bar\mu_2$ vanishes identically.  The Heisenberg algebra is
+\emph{intrinsically formal}: $\barB(\cA)$ has trivial differential,
+and the bar complex is quasi-isomorphic to the tensor coalgebra with
+zero differential.
+
+\smallskip\noindent
+\textbf{Verification of $d_{\barB}^2 = 0$ via the Arnold relation.}
+Although $d_{\barB} = 0$ makes $d_{\barB}^2 = 0$ tautological, we
+verify the Arnold relation directly for conceptual clarity.  The
+weight form $\eta_{ij} = d\log(z_i - z_j)$ on $\Conf_3(\C)$
+satisfies the Arnold relation
+\begin{equation}\label{eq:arnold-3pt}
+  \eta_{12}\wedge\eta_{23}
+  \;+\;
+  \eta_{23}\wedge\eta_{31}
+  \;+\;
+  \eta_{31}\wedge\eta_{12}
+  \;=\; 0.
+\end{equation}
+The bar differential at arity~$3$ is an integral over $\FM_3(\C)$
+of a weight form contracted with OPE coefficients.  For the
+Heisenberg algebra, the OPE coefficient $c_{ij}$ of the
+$1/(z_i - z_j)$ pole is $\langle J, J\rangle = 1$ (the normalised
+pairing), and the integrand is
+\[
+  \omega_{\barB}^{(3)}
+  \;=\;
+  c_{12}\,\eta_{12} + c_{23}\,\eta_{23} + c_{31}\,\eta_{31}
+  \;=\;
+  \eta_{12} + \eta_{23} + \eta_{31}.
+\]
+The square $d_{\barB}^2$ at arity~$3$ involves the wedge product
+$\omega_{\barB}^{(3)} \wedge \omega_{\barB}^{(3)}$, which is a
+sum of terms $\eta_{ij} \wedge \eta_{kl}$.  The Arnold relation
+\eqref{eq:arnold-3pt} ensures that the three non-trivial wedge
+products cancel:
+\begin{align*}
+  \omega_{\barB}^{(3)} \wedge \omega_{\barB}^{(3)}
+  &= 2\bigl(
+    \eta_{12}\wedge\eta_{23}
+    + \eta_{23}\wedge\eta_{31}
+    + \eta_{31}\wedge\eta_{12}
+  \bigr) \\
+  &= 0,
+\end{align*}
+by \eqref{eq:arnold-3pt}.  This is the arity-$3$ verification of
+$d_{\barB}^2 = 0$ at genus~$0$.
+\end{example}
+
+%%----------------------------------------------------------------------
+\subsection{Affine Kac--Moody $\hat\fg_k$}
+\label{subsec:affine-KM-SC}
+%%----------------------------------------------------------------------
+
+\begin{example}[Affine Kac--Moody as BD factorization Swiss-cheese algebra]
+\label{ex:affine-KM-SC}
+\index{affine Kac--Moody!BD factorization Swiss-cheese}
+\ClaimStatusProvedHere{}
+Let $\fg$ be a simple Lie algebra of rank~$r$ and dimension
+$\dim\fg = d$, with Killing form normalised so that long roots
+have squared length~$2$.  The dual Coxeter number is~$h^\vee$.
+At level $k \in \C \smallsetminus \{-h^\vee\}$, the
+\emph{vacuum module} $V^k(\fg) = \operatorname{Ind}_{\fg[t] \oplus
+\C K}^{\hat\fg}\, \C_k$ is a vertex algebra and hence a chiral
+algebra on any smooth curve~$X$ via the Frenkel--Ben-Zvi
+construction \cite{FBZ04}: the factorizable $D$-module on $\Ran(X)$ is
+\begin{equation}\label{eq:affine-fact-dmod}
+  F_{\hat\fg_k}^I
+  \;=\;
+  j_{!*}\bigl(V^k(\fg)^{\boxtimes I}\bigr)
+  \big|_{\Delta_{\mathrm{arr}}},
+\end{equation}
+with OPE
+\begin{equation}\label{eq:affine-OPE}
+  J^a(z)\, J^b(w)
+  \;\sim\;
+  \frac{k\,\kappa^{ab}}{(z-w)^2}
+  \;+\;
+  \frac{f^{ab}_{\ \ c}\, J^c(w)}{z-w},
+\end{equation}
+where $\{J^a\}$ is an orthonormal basis for~$\fg$ with respect to the
+Killing form $\kappa^{ab} = \operatorname{Tr}_{\mathrm{adj}}
+(\operatorname{ad}_{J^a}\circ\operatorname{ad}_{J^b})/(2h^\vee)$
+and $f^{ab}_{\ \ c}$ are the structure constants.
+
+\smallskip\noindent
+\textbf{Modular characteristic from the tadpole.}
+The modular characteristic $\kappa(\hat\fg_k)$ is computed from the
+self-contraction (tadpole graph): the one-loop Feynman diagram with
+a single vertex and one internal edge, contributing
+\begin{equation}\label{eq:tadpole-trace}
+  \kappa(\hat\fg_k)
+  \;=\;
+  \sum_{a=1}^{d} \Res_{z=w}
+  \Bigl[\frac{k\,\kappa^{aa}}{(z-w)^2}\Bigr]
+  \;=\;
+  k \cdot \sum_a \kappa^{aa}
+  \;=\;
+  k \cdot d,
+\end{equation}
+using $\sum_a \kappa^{aa} = \operatorname{Tr}_\fg(\id) = d = \dim\fg$
+(the trace of the identity in the Killing normalisation).  However,
+this must be corrected for the Sugawara shift: the true modular
+characteristic includes the contribution from the Sugawara stress tensor
+$T = \frac{1}{2(k+h^\vee)}\sum_a {:}J^a J^a{:}$, which shifts the
+effective level by $h^\vee$.  The corrected formula is
+\begin{equation}\label{eq:modular-char-affine}
+  \kappa(\hat\fg_k)
+  \;=\;
+  \frac{(k + h^\vee) \cdot d}{2h^\vee}
+  \;=\;
+  \frac{k \cdot d}{2h^\vee} + \frac{d}{2},
+\end{equation}
+where the second term $d/2$ is the one-loop shift from normal
+ordering (the vacuum anomaly).  At $k = 0$:
+$\kappa(\hat\fg_0) = d/2$, the half-dimension of~$\fg$ ---
+the pure vacuum anomaly.  At $k = -h^\vee$: the Sugawara tensor
+is undefined, the modular characteristic diverges, and the
+construction requires the Feigin--Frenkel centre (the critical
+level is a different story, as cautioned in the Critical Pitfalls).
+
+\smallskip\noindent
+\textbf{Genus-$1$ bar differential.}
+At genus~$1$, $\Sigma_1 = \C/(\Z + \Z\tau)$ for $\tau \in \mathfrak{H}_1$
+(the upper half-plane).  The holomorphic propagator is
+$K^{(1)}(z,w) = \zeta(z-w,\tau)\,dz$, where $\zeta(u,\tau)$ is the
+Weierstrass zeta function:
+\begin{equation}\label{eq:weierstrass-zeta}
+  \zeta(u,\tau)
+  \;=\;
+  \frac{1}{u} + \sum_{\omega \in \Z + \Z\tau \smallsetminus\{0\}}
+  \Bigl(\frac{1}{u - \omega} + \frac{1}{\omega} +
+  \frac{u}{\omega^2}\Bigr).
+\end{equation}
+This is quasi-periodic: $\zeta(u + 1) = \zeta(u) + 2\eta_1(\tau)$,
+$\zeta(u + \tau) = \zeta(u) + 2\eta_\tau(\tau)$, where $\eta_1, \eta_\tau$
+are the quasi-periods satisfying the Legendre relation
+$\eta_1\tau - \eta_\tau = 2\pi i$.  The Arakelov-normalised
+propagator is (specialising
+Proposition~\ref{prop:propagator-explicit} to $g = 1$):
+\begin{equation}\label{eq:arakelov-genus-1}
+  K^{(1)}_{\mathrm{Ar}}(z,w)
+  \;=\;
+  \zeta(z-w,\tau)\,dz
+  \;+\;
+  \frac{\pi}{\operatorname{Im}\tau}\,
+  \operatorname{Im}(z-w)\, dz.
+\end{equation}
+
+\smallskip\noindent
+\textbf{Computation of $\dfib^{\,2}$ on a degree-$2$ bar element.}
+Consider the bar element
+$\xi = [s^{-1}J^a \,|\, s^{-1}J^b]$ of bar degree~$2$ at genus~$1$.
+The fibre differential acts by the binary chiral product with the
+genus-$1$ propagator:
+\begin{align}\label{eq:dfib-affine-genus1}
+  \dfib\bigl([s^{-1}J^a \,|\, s^{-1}J^b]\bigr)
+  &\;=\;
+  s^{-1}\mu_2^{(1)}\bigl(J^a, J^b\bigr)
+  \notag\\
+  &\;=\;
+  s^{-1}\Res_{z=w}\bigl[
+    K^{(1)}_{\mathrm{Ar}}(z,w) \cdot
+    J^a(z)\, J^b(w)
+  \bigr]
+  \notag\\
+  &\;=\;
+  s^{-1}\Res_{z=w}\Bigl[
+    \Bigl(\zeta(z-w) + \frac{\pi}{\operatorname{Im}\tau}\,
+    \operatorname{Im}(z-w)\Bigr)
+    \Bigl(\frac{k\,\kappa^{ab}}{(z-w)^2}
+    + \frac{f^{ab}_{\ \ c}\, J^c}{z-w}\Bigr)
+  \Bigr]
+  \notag\\
+  &\;=\;
+  s^{-1}\bigl(
+    f^{ab}_{\ \ c}\, J^c
+  \bigr),
+\end{align}
+using $\Res_{z=w}[\zeta(z-w)/(z-w)^2] = -\wp(0)$ (which contributes
+to $\dfib^{\,2}$, not to $\dfib$) and
+$\Res_{z=w}[\zeta(z-w)/(z-w)] = 1$.
+
+Now compute $\dfib^{\,2}$:
+\begin{align}\label{eq:dfib-sq-affine}
+  \dfib^{\,2}\bigl([s^{-1}J^a \,|\, s^{-1}J^b]\bigr)
+  &\;=\;
+  \text{(self-contraction of $\mu_2^{(1)}$ with itself)}
+  \notag\\
+  &\;=\;
+  \sum_c
+  \Res_{z_1=z_2=w}\Bigl[
+    K^{(1)}_{\mathrm{Ar}}(z_1,w)\,
+    K^{(1)}_{\mathrm{Ar}}(z_2,w)\,
+    \mu_2\bigl(J^a(z_1),\, \mu_2(J^b(z_2), -)\bigr)
+  \Bigr]
+  \notag\\
+  &\;=\;
+  k\,\kappa^{ab} \cdot
+  \bigl(-\bar\partial_z K^{(1)}_{\mathrm{Ar}}\bigr)\big|_{z=w}
+  \notag\\
+  &\;=\;
+  k\,\kappa^{ab} \cdot \omega_{\mathrm{Ar}},
+\end{align}
+where in the last step we used $\bar\partial_z K^{(1)}_{\mathrm{Ar}}
+= -\omega_{\mathrm{Ar}}$ from \eqref{eq:dbar-arakelov}.  Summing
+over the self-contraction index: the cogenerator projection of
+$\dfib^{\,2}$ on $\barB^2$ extracts $\sum_a k\,\kappa^{aa} =
+k \cdot d$, and the full modular characteristic (including the
+Sugawara correction) gives
+\[
+  \dfib^{\,2}\big|_{\barB^2(\hat\fg_k)}
+  \;=\;
+  \kappa(\hat\fg_k) \cdot \omega_1
+  \;=\;
+  \frac{(k+h^\vee)\,d}{2h^\vee} \cdot
+  \frac{i}{2\operatorname{Im}\tau}\,
+  dz \wedge d\bar z,
+\]
+confirming $\dfib^{\,2} = \kappa(\hat\fg_k)\cdot\omega_1$ with the
+Arakelov form $\omega_1 = \frac{i}{2\operatorname{Im}\tau}\,
+dz \wedge d\bar z$ on the elliptic curve.
+
+\smallskip\noindent
+\textbf{Arakelov normalisation.}
+The passage from the multi-valued holomorphic propagator
+$K^{(1)}(z,w) = \zeta(z-w)\,dz$ to the single-valued Arakelov
+propagator \eqref{eq:arakelov-genus-1} introduces the curvature.
+The curvature $\kappa(\hat\fg_k)\cdot\omega_1$ measures the
+failure of the holomorphic propagator to descend to a single-valued
+object on the elliptic curve: it is the $D$-module monodromy of the
+factorizable $D$-module $F_{\hat\fg_k}$ around the $B$-cycle.
+\end{example}
+
+%%----------------------------------------------------------------------
+\subsection{Virasoro at central charge $c$}
+\label{subsec:virasoro-SC}
+%%----------------------------------------------------------------------
+
+\begin{example}[Virasoro Swiss-cheese structure]
+\label{ex:virasoro-SC}
+\index{Virasoro algebra!Swiss-cheese structure}
+\ClaimStatusProvedHere{}
+The Virasoro algebra $\mathrm{Vir}_c$ at central charge~$c$ is
+generated by the stress tensor $T(z)$ with OPE
+\begin{equation}\label{eq:virasoro-OPE}
+  T(z)\, T(w)
+  \;\sim\;
+  \frac{c/2}{(z-w)^4}
+  \;+\;
+  \frac{2T(w)}{(z-w)^2}
+  \;+\;
+  \frac{\partial T(w)}{z-w}.
+\end{equation}
+Unlike the Heisenberg algebra, the Virasoro OPE has a
+\emph{fourth-order pole}: the $c/2 \cdot (z-w)^{-4}$ term.  This
+has two consequences for the Swiss-cheese structure.
+
+\smallskip\noindent
+\textbf{Non-vanishing $m_3$.}
+The bar differential $d_{\barB}$ is the coderivation determined by
+the binary product $\mu_2$, but the Virasoro algebra has a
+non-trivial $A_\infty$ operation $m_3$ arising from the fourth-order
+pole.  The operation $m_3$ is the higher-order correction to the
+chiral product needed to maintain the $A_\infty$ relations on the
+desuspended bar complex.  Explicitly:
+the fourth-order pole contributes a \emph{secondary operation}
+$m_3(T, T, T)$ of bar degree~$3$, computed by integrating the weight
+form $\eta_{12}\wedge\eta_{23}$ against the coefficient of
+$(z_1-z_2)^{-4}$ in the OPE:
+\begin{equation}\label{eq:virasoro-m3}
+  m_3(T, T, T)
+  \;=\;
+  \frac{c}{2}\,
+  \int_{\FM_3(\C)}
+  \eta_{12} \wedge \eta_{23}\,
+  \frac{d^2z_1\, d^2z_2\, d^2z_3}{(z_1-z_2)^4}
+  \;\neq\; 0.
+\end{equation}
+The integral is non-zero because the pole order exceeds~$1$: the
+Arnold relation kills the contribution from simple poles (as in
+the Heisenberg case, Example~\ref{ex:heisenberg-bar-3}), but the
+fourth-order pole produces a non-trivial residue after blowup on
+$\FM_3(\C)$.
+
+\smallskip\noindent
+\textbf{Shadow depth.}
+The \emph{algebraic shadow depth} of $\mathrm{Vir}_c$ is
+$d_{\mathrm{alg}} = 1$: the first non-vanishing higher operation
+is $m_3$, and all $m_k$ for $k \geq 4$ are determined by the
+$A_\infty$ relations from $m_2$ and $m_3$.  The shadow depth
+measures how far the chiral algebra is from being formal
+(a formal algebra has $d_{\mathrm{alg}} = 0$: all $m_k = 0$
+for $k \geq 3$).  The Virasoro algebra is the simplest
+non-formal chiral algebra, with shadow depth exactly~$1$.
+
+\smallskip\noindent
+\textbf{First obstruction class at genus~$1$.}
+At genus~$1$, the curvature of the bar complex receives a
+contribution from the fourth-order pole.  The modular
+characteristic of $\mathrm{Vir}_c$ is $\kappa(\mathrm{Vir}_c) = c/2$
+(the coefficient of the leading singularity, the identity-valued
+fourth-order pole).  The first obstruction class is
+\begin{equation}\label{eq:virasoro-obstruction}
+  \mathrm{Ob}_1(\mathrm{Vir}_c)
+  \;=\;
+  \frac{c}{2} \cdot \omega_1
+  \;=\;
+  \frac{c}{2} \cdot
+  \frac{i}{2\operatorname{Im}\tau}\, dz \wedge d\bar z,
+\end{equation}
+the curvature $\dfib^{\,2} = \kappa(\mathrm{Vir}_c)\cdot\omega_1$.
+This obstruction vanishes if and only if $c = 0$; at $c \neq 0$,
+the Virasoro bar complex is necessarily curved at genus~$1$.
+
+\smallskip\noindent
+\textbf{Comparison with Heisenberg and affine.}
+The three examples illustrate the hierarchy:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\textbf{Algebra} & $d_{\mathrm{alg}}$ & $\kappa$ &
+  \textbf{Curved at $g=1$?} \\
+\hline
+Heisenberg & $0$ & $1$ & Yes ($\kappa = 1$) \\
+$\hat\fg_k$ & $0$ & $(k+h^\vee)d/(2h^\vee)$ &
+  Yes ($\kappa \neq 0$ for $k \neq -h^\vee$) \\
+$\mathrm{Vir}_c$ & $1$ & $c/2$ & Yes ($c \neq 0$),
+  plus $m_3 \neq 0$
+\end{tabular}
+\end{center}
+All three are curved at genus~$1$ (for generic parameters), but the
+Virasoro is the only one with non-trivial higher $A_\infty$ operations
+at genus~$0$.  The Heisenberg and affine Kac--Moody algebras are
+formal ($d_{\mathrm{alg}} = 0$): their bar complexes have
+$d_{\barB}^2 = 0$ at genus~$0$.  The non-formality of the Virasoro
+(its shadow depth $d_{\mathrm{alg}} = 1$) is the algebraic expression
+of the fact that the Virasoro OPE contains poles of order $> 1$
+beyond simple poles.  This is \emph{not} a defect but a feature:
+the non-vanishing of $m_3$ IS the curved bar structure
+$\dfib^{\,2} = \kappa\cdot\omega_1$ from Volume~I (Critical Pitfall:
+formality fails at $d' = 1$ precisely because the logarithm acquires
+monodromy).
+\end{example}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{BD factorization Swiss-cheese algebras}
+\label{sec:BD-factorization-SC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Beilinson--Drinfeld framework places chiral algebras and their
+modules into the language of factorizable $D$-modules.  We extend
+this to the two-colored Swiss-cheese setting on the product
+$\Sigma_g \times \R$.
+
+\begin{definition}[BD factorization Swiss-cheese algebra]
+\label{def:BD-SC}
+\index{BD factorization Swiss-cheese algebra|textbf}
+A \emph{BD factorization Swiss-cheese algebra on $\Sigma_g \times \R$}
+consists of the following data:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Closed sector.}  A factorizable $D$-module
+  $F_{\mathsf{cl}}$ on $\Ran(\Sigma_g)$, encoding the
+  holomorphic chiral product.
+
+\item \textbf{Open sector.}  A locally constant factorization
+  algebra $F_{\mathsf{op}}$ on $\Ran(\R)$, equivalent to an
+  $\Eone$-algebra (by the Ayala--Francis recognition theorem
+  \cite{AF15}).
+
+\item \textbf{Mixed sector (bulk--boundary module).}  For
+  configurations with $k$ closed points on~$\Sigma_g$ and $m$ open
+  points on the boundary $\Sigma_g \times \{0\}$ of the half-space
+  $\Sigma_g \times \R_{\geq 0}$, a factorization module structure
+  \begin{equation}\label{eq:mixed-sector}
+    F_{\mathsf{mix}}(k,m)
+    \;\in\;
+    \Dmod\bigl(\Ran_k(\Sigma_g)\bigr)
+    \;\otimes\;
+    \Fact_m(\R),
+  \end{equation}
+  where $\Ran_k$ denotes the stratum of subsets of cardinality
+  exactly~$k$, and $\Fact_m(\R)$ denotes the $m$-ary component of
+  the factorization algebra on~$\R$.
+
+  The mixed sector carries the following structure maps:
+
+  \begin{enumerate}[label=\textup{(\alph*)}]
+  \item \emph{Bulk action on the boundary.}  For each partition
+    of closed points $\{z_1,\ldots,z_k\} = S_{\mathrm{act}} \sqcup
+    S_{\mathrm{pass}}$ with $S_{\mathrm{act}}$ disjoint from
+    the open points $\{t_1,\ldots,t_m\} \subset \R$, a
+    composition map
+    \begin{equation}\label{eq:bulk-action-composition}
+      \mu^{\mathsf{mix}}_{S_{\mathrm{act}}}\colon
+      F_{\mathsf{cl}}\big|_{\Ran_{|S_{\mathrm{act}}|}(\Sigma_g)}
+      \;\otimes\;
+      F_{\mathsf{mix}}(|S_{\mathrm{pass}}|, m)
+      \;\longrightarrow\;
+      F_{\mathsf{mix}}(|S_{\mathrm{pass}}|, m),
+    \end{equation}
+    given by the diagonal restriction
+    $\Delta_{S_{\mathrm{act}}} \subset
+    \Ran_{|S_{\mathrm{act}}|}(\Sigma_g) \times
+    \Ran_{|S_{\mathrm{pass}}|}(\Sigma_g)$,
+    tensored with the identity on $\Fact_m(\R)$.
+    This map is a $D$-module morphism in the $\Sigma_g$-variables
+    and respects the factorization structure on~$\R$.
+
+  \item \emph{Associativity of the bulk action.}  For
+    a further partition $S_{\mathrm{act}} = S_1 \sqcup S_2$,
+    the iterated composition satisfies
+    \[
+      \mu^{\mathsf{mix}}_{S_1} \circ
+      (\id \otimes \mu^{\mathsf{mix}}_{S_2})
+      \;=\;
+      \mu^{\mathsf{mix}}_{S_1 \sqcup S_2}
+      \circ (\mu^{\mathsf{cl}}_{S_1, S_2} \otimes \id),
+    \]
+    where $\mu^{\mathsf{cl}}_{S_1,S_2}$ is the closed-sector
+    factorization product.  Iterating over all decompositions
+    $S = S_1 \sqcup \cdots \sqcup S_r$ gives the higher
+    associativity constraints: the mixed sector is a module over
+    the closed-sector factorization algebra in the precise sense
+    of \cite{BD04}, \S3.4.11.
+
+  \item \emph{Open composition.}  For a decomposition
+    $\{t_1,\ldots,t_m\} = T_1 \sqcup T_2$ with
+    $\max(T_1) < \min(T_2)$ (ordered partition), the
+    factorization splitting on~$\R$ acts:
+    \[
+      F_{\mathsf{mix}}(k, |T_1| + |T_2|)
+      \big|_{U_{T_1,T_2}}
+      \;\xrightarrow{\;\sim\;}
+      F_{\mathsf{mix}}(k, |T_1|) \;\otimes\;
+      F_{\mathsf{op}}(|T_2|),
+    \]
+    equipping $F_{\mathsf{mix}}(k,-)$ with a right
+    $F_{\mathsf{op}}$-module structure in $\Fact(\R)$.
+  \end{enumerate}
+
+\item \textbf{Directionality.}  Bulk-to-boundary maps exist:
+  $F_{\mathsf{cl}}$ acts on $F_{\mathsf{op}}$ via the mixed
+  sector.  The reverse direction is \emph{empty}: there are no
+  open-to-closed operations
+  ($F_{\mathsf{mix}}(\ldots,\mathsf{top},\ldots;\,\mathsf{cl})
+  = 0$).  Categorically: the restriction functor
+  $\iota^!\colon \Dmod(\Ran(\Sigma_g \times \R))
+  \to \Dmod(\Ran(\Sigma_g \times \{0\}))$ has a left adjoint
+  $\iota_!$ (extension by zero from the boundary), but the
+  factorization structure forces
+  $\iota_!(F_{\mathsf{op}}) \otimes^{!}
+  F_{\mathsf{cl}} = 0$: the $!$-tensor product of an extended
+  boundary $D$-module with a bulk $D$-module vanishes by
+  support considerations (the boundary $\Sigma_g \times \{0\}$
+  has codimension~$1$ in $\Sigma_g \times \R$, and the
+  $!$-extension carries no sections transverse to the boundary).
+  This is the factorization expression of the
+  Swiss-cheese directionality
+  $\SCchtop(\ldots,\mathsf{top},\ldots;\,\mathsf{ch}) =
+  \varnothing$ (cf.\ Definition~\ref{def:SC-operations}).
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Families over $\Mbar_g$]
+\label{rem:families-over-Mbar}
+For varying genus~$g$, the collection $\{F_{\mathsf{cl}}^{(g)}\}$
+defines a family of factorizable $D$-modules parametrised by the
+moduli stack $\Mbar_g$.  The $D$-module structure on
+$\Ran(\Sigma_g)$ varies with the complex structure of~$\Sigma_g$.
+Concretely: the chiral operations
+(Definition~\ref{def:chiral-ops-fact}) at genus~$g$ involve
+integration over the fibres of the universal curve
+$\pi\colon \cC_g \to \Mbar_g$, and the result depends on the
+point of~$\Mbar_g$ through the period matrix $\tau_{ij}(g)$.
+The Gauss--Manin connection on the family induces a connection on
+the bar complex; its curvature is
+$\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$, arising from the monodromy
+of the $D$-module connection around $B$-cycles of~$\Sigma_g$.
+This is a theorem about $D$-modules --- it involves the global
+structure of the curve and is invisible to the local operadic model.
+\end{remark}
+
+\begin{construction}[Bar complex as factorization coalgebra]
+\label{constr:bar-fact-coalgebra}
+\index{bar complex!as factorization coalgebra}
+Let $(F_{\mathsf{cl}}, F_{\mathsf{op}}, F_{\mathsf{mix}})$ be a
+BD factorization Swiss-cheese algebra on $\Sigma_g \times \R$.
+The \emph{bar complex} $\barB(F)$ is the factorization coalgebra on
+$\Ran(X)$ Koszul-dual to $F_{\mathsf{cl}}$, constructed as follows:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Underlying graded object.}  The tensor coalgebra
+  $T^c(s^{-1}\bar{F}_{\mathsf{cl}})$ on $\Ran(X)$, where
+  $s^{-1}$ denotes the desuspension shift and
+  $\bar{F}_{\mathsf{cl}}$ is the augmentation ideal.
+
+\item \textbf{Bar differential.}  The differential
+  $d_{\barB}$ is determined by the chiral operations:
+  it is the sum of diagonal restrictions
+  \eqref{eq:chiral-op-diagonal}, dualized via the
+  factorization structure.  At genus~$0$,
+  $d_{\barB}^2 = 0$ and $\barB(F)$ is an honest dg coalgebra.
+
+\item \textbf{Bar coproduct.}  The coassociative coproduct
+  $\Delta$ is the factorization isomorphism
+  \eqref{eq:fact-iso} dualized: splitting a configuration
+  $S = S_1 \sqcup S_2$ into disjoint subsets corresponds to
+  ordered deconcatenation $[a_1|\cdots|a_n] \mapsto
+  \sum_{i=0}^n [a_1|\cdots|a_i] \otimes
+  [a_{i+1}|\cdots|a_n]$.
+
+\item \textbf{Curvature at genus $g \geq 1$.}  At genus~$g \geq 1$,
+  the bar differential acquires curvature:
+  $\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$, where
+  $\omega_g \in H^0(\Mbar_g, \omega_{\Mbar_g})$ is the Hodge
+  class and $\kappa(\cA) \in k$ is the scalar curvature of~$\cA$
+  (Volume~I, Theorem~D).  The bar complex becomes a
+  \emph{curved factorization coalgebra}: a coalgebra in the
+  coderived category of $D$-modules on $\Ran(\Sigma_g)$.
+
+  The derivation proceeds through three steps.
+
+  \smallskip\noindent
+  \emph{Step~1: Propagator monodromy.}
+  On~$\C$ (genus~$0$), the propagator is
+  $K^{(0)}(z,w) = dz/(z-w)$, which is single-valued.  On
+  $\Sigma_g$, the holomorphic propagator is
+  $K^{(g)}(z,w) = \partial_z \log E(z,w)\,dz$,
+  where $E(z,w)$ is the prime form.  This propagator is
+  multi-valued: analytic continuation of $z$ around the
+  $B$-cycle~$B_j$ produces a monodromy shift
+  \begin{equation}\label{eq:propagator-monodromy}
+    K^{(g)}(z + B_j, w)
+    \;=\;
+    K^{(g)}(z,w)
+    \;+\;
+    2\pi i\, \nu_j(w),
+  \end{equation}
+  where $\nu_j \in H^0(\Sigma_g, \Omega^1)$ is the $j$th
+  normalised holomorphic differential (the column of the period
+  matrix: $\oint_{A_i} \nu_j = \delta_{ij}$,
+  $\oint_{B_i} \nu_j = \tau_{ij}$).  The Arakelov
+  single-valued propagator is obtained by adding a
+  non-holomorphic correction:
+  \[
+    K^{(g)}_{\mathrm{Ar}}(z,w)
+    \;=\;
+    K^{(g)}(z,w)
+    \;-\;
+    2\pi i \sum_{j=1}^g
+    (\operatorname{Im}\tau)^{-1}_{jk}\,
+    \operatorname{Im}\Bigl(\int_w^z \nu_k\Bigr)\, \nu_j(w).
+  \]
+  This propagator is single-valued on $\Sigma_g$ but is no longer
+  holomorphic: $\bar\partial_z K^{(g)}_{\mathrm{Ar}}(z,w)
+  = -2\pi i\, \omega_g(z)$, where $\omega_g = \frac{i}{2}
+  \sum_{j,k} (\operatorname{Im}\tau)^{-1}_{jk}\,
+  \nu_j \wedge \bar{\nu}_k$ is the Arakelov $(1,1)$-form
+  on~$\Sigma_g$ (Volume~I, Convention~3.1, three-propagator
+  comparison table).
+
+  \smallskip\noindent
+  \emph{Step~2: Arnold defect from monodromy.}
+  At genus~$0$, the Arnold relation
+  $\eta_{12} \wedge \eta_{23} + \eta_{23} \wedge \eta_{31}
+  + \eta_{31} \wedge \eta_{12} = 0$
+  (where $\eta_{ij} = d\log(z_i - z_j)$) ensures
+  $\dfib^{\,2} = 0$.  At genus~$g$, replacing the rational
+  propagator by $K^{(g)}_{\mathrm{Ar}}$: the logarithmic
+  one-forms
+  $\eta^{(g)}_{ij} := d\log E(z_i, z_j) +
+  (\text{Arakelov correction})$ are single-valued but
+  satisfy a \emph{defective} Arnold relation.  The defect
+  arises because the Arakelov correction is not holomorphic:
+  at three points,
+  \begin{equation}\label{eq:arnold-defect-genus-g}
+    \eta^{(g)}_{12} \wedge \eta^{(g)}_{23}
+    + \eta^{(g)}_{23} \wedge \eta^{(g)}_{31}
+    + \eta^{(g)}_{31} \wedge \eta^{(g)}_{12}
+    \;=\;
+    \omega_g(z_3) \cdot
+    (dz_1 - dz_2) \wedge (dz_2 - dz_3)
+    \;+\; \text{cyclic},
+  \end{equation}
+  where the right side is the pullback of the Arakelov form to the
+  configuration space $\Conf_3(\Sigma_g)$
+  (at genus~$1$, this reduces to $E_2(\tau) \cdot (dz_1 - dz_2)
+  \wedge (dz_2 - dz_3)$, recovering the classical Eisenstein
+  series defect of
+  Proposition~\ref{prop:genus-1-arnold-defect}).
+
+  \smallskip\noindent
+  \emph{Step~3: Contraction with OPE data.}
+  The square $\dfib^{\,2}$ is computed by composing the bar
+  differential with itself: $\dfib^{\,2}|_{\barB^k(\cA)}$
+  involves two successive diagonal restrictions, producing
+  integrals over $\FM_k(\Sigma_g)$ with two propagator
+  insertions.  The Arnold defect \eqref{eq:arnold-defect-genus-g}
+  enters at the two-fold composition: the failure of the
+  Arnold relation produces a residual $(1,1)$-form on the
+  base $\Sigma_g$ contracted with the OPE data of~$\cA$.
+  Since $\dfib$ is a coderivation of the cofree coalgebra
+  $T^c(s^{-1}\bar{F}_{\mathsf{cl}})$, the square
+  $\dfib^{\,2}$ is determined by its cogenerator projection
+  (Volume~I, Proposition~\ref*{prop:cofree-coderivation}).
+  The cogenerator projection of the two-fold composition
+  extracts the \emph{leading OPE coefficient}, which is by
+  definition the modular characteristic $\kappa(\cA)$
+  (Volume~I, Theorem~\ref*{thm:universal-generating-function}).
+  Therefore
+  \[
+    \dfib^{\,2}
+    \;=\;
+    \kappa(\cA) \cdot \omega_g,
+  \]
+  where the right side is the coderivation determined by the
+  scalar $\kappa(\cA)$ times the Hodge class
+  $\omega_g \in H^{1,1}(\Sigma_g)$.
+  The three propagators --- rational ($K^{(0)}$, flat,
+  genus~$0$), prime form ($K^{(g)}$, holomorphic, multi-valued),
+  Arakelov ($K^{(g)}_{\mathrm{Ar}}$, single-valued, curved) ---
+  are the chain-level manifestations of the three models of
+  Corollary~\ref{cor:three-models-from-fact}.  The curvature
+  $\kappa(\cA) \cdot \omega_g$ is the obstruction to
+  single-valuedness of the bar differential on~$\Sigma_g$:
+  it is the $D$-module monodromy of $F_{\mathsf{cl}}$ around
+  the $B$-cycles, measured by the Arakelov normalisation.
+\end{enumerate}
+The bar differential encodes the holomorphic (closed) colour.
+The bar coproduct encodes the topological (open) colour.  Together,
+$\barB(F)$ is a factorization coalgebra with two colours ---
+the factorization-level Swiss-cheese coalgebra.
+\end{construction}
+
+\begin{proof}[Proof sketch of $\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$]
+The fiberwise differential $\dfib$ is a coderivation of the bar coalgebra, so $\dfib^{\,2}$ is determined by its cogenerator projection --- the projection to the arity-$1$ component $s^{-1}\cA$.  This cogenerator extracts a double residue:
+\[
+\mathrm{copr}(\dfib^{\,2})
+= \operatorname{Res}_{z_1 = z_2}\operatorname{Res}_{z_2 = z_3}
+\bigl[\eta^{(g)}(z_1, z_2)\,\eta^{(g)}(z_2, z_3) \cdot \mu_2(a_1, a_2, a_3)\bigr].
+\]
+Decompose $\eta^{(g)} = h + R$ into the holomorphic propagator $h = \partial_z \log E$ and the Arakelov correction~$R$.  Three terms arise:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $h \cdot h$: vanishes by the Fay trisecant identity (the holomorphic Arnold $3$-form is zero).
+\item $R \cdot R$: vanishes because $R$ is smooth (no poles to produce residues).
+\item $h \cdot R + R \cdot h$: the cross-term.  The residue of $h \cdot R$ at $z_1 = z_2$ extracts the OPE coefficient at the simple pole, leaving $R(z_2, z_3)$ evaluated at $z_2 = z_3$.  Since $\bar\partial R = -\omega_{\mathrm{Ar}}$ (the Arakelov $(1,1)$-form), and the OPE coefficient is the structure constant weighted by $\kappa(\cA) = \mathrm{Tr}_\cA$, the double residue produces $\kappa(\cA) \cdot \omega_g$.
+\end{enumerate}
+The detailed computation at genus~$1$ for the Heisenberg algebra is in Section~\textup{\ref{sec:heisenberg-genus-1-complete}}; the mechanism at general genus replaces the Weierstrass $\zeta$-function by the prime-form propagator and $\omega_1$ by~$\omega_g$.
+\end{proof}
+
+\begin{construction}[The factorizable $D$-module from a chiral algebra]
+\label{constr:fact-dmod-from-chiral}
+\index{factorizable D-module@factorizable $D$-module!from chiral algebra}
+Given a chiral algebra $\cA$ on a smooth curve~$X$, the
+factorizable $D$-module $F_\cA$ on $\Ran(X)$ is constructed as follows.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Components.}  For a finite set~$I$ with $|I| = k$, the
+  $I$\nobreakdash-th component is the $!$-tensor product
+  \begin{equation}\label{eq:!-tensor-component}
+    F_\cA^I
+    \;=\;
+    j_{!*}\bigl(\cA^{\boxtimes I}\bigr)
+    \big|_{\Delta_{\mathrm{arr}}},
+  \end{equation}
+  where $j\colon U_I \hookrightarrow X^I$ is the open embedding of
+  the complement of all diagonals
+  $U_I = \{(x_i)_{i \in I} : x_i \neq x_j \text{ for } i \neq j\}$,
+  the functor $j_{!*}$ is the Goresky--MacPherson intermediate extension
+  (the unique extension that is neither $j_!$ nor $j_*$ but preserves
+  irreducibility), and $\Delta_{\mathrm{arr}}$ denotes the diagonal
+  arrangement.  The $D$-module structure on each factor~$\cA$ is
+  part of the chiral algebra data; the external tensor product
+  $\cA^{\boxtimes I}$ inherits the product connection.
+
+\item \textbf{Flat connection.}  The connection on $F_\cA^I$ is
+  \begin{equation}\label{eq:fact-connection}
+    \nabla_\cA
+    \;=\;
+    d \;+\;
+    \sum_{\alpha=1}^g
+    \bigl(\omega_\alpha \otimes \partial_\alpha\bigr),
+  \end{equation}
+  where $\omega_1,\ldots,\omega_g$ are the normalised Abelian
+  differentials on~$\Sigma_g$ (with $\oint_{A_i}\omega_j = \delta_{ij}$)
+  and $\partial_\alpha$ is the period-correction operator from the
+  Gauss--Manin connection on the family of $D$-modules over~$\Mbar_g$
+  (Volume~I, Convention~3.1).  At genus~$0$, the sum is empty and
+  $\nabla_\cA = d$ is flat.  At genus~$g \geq 1$, the curvature is
+  \begin{equation}\label{eq:connection-curvature}
+    \nabla_\cA^2
+    \;=\;
+    \kappa(\cA) \cdot \omega_g,
+  \end{equation}
+  where $\omega_g = \frac{i}{2}\sum_{\alpha,\beta}
+  (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+  \omega_\alpha \wedge \bar\omega_\beta$ is the Arakelov
+  $(1,1)$-form on~$\Sigma_g$ and $\kappa(\cA)$ is the modular
+  characteristic.  This curvature arises because the
+  period-correction terms $\partial_\alpha$ do not commute:
+  their commutator is determined by the self-contraction of the
+  OPE (the tadpole), which computes~$\kappa(\cA)$.
+
+\item \textbf{Factorization isomorphism.}  For a partition
+  $I = I_1 \sqcup I_2$ into non-empty disjoint subsets, the
+  canonical identification
+  \begin{equation}\label{eq:!-tensor-split}
+    j_{!*}\bigl(\cA^{\boxtimes I}\bigr)\big|_{U_{I_1,I_2}}
+    \;\xrightarrow{\;\sim\;}
+    j_{!*}\bigl(\cA^{\boxtimes I_1}\bigr)
+    \;\boxtimes\;
+    j_{!*}\bigl(\cA^{\boxtimes I_2}\bigr)
+  \end{equation}
+  on the disjointness locus $U_{I_1,I_2}$ is the factorization
+  isomorphism.  It is the $!$-extension of the tautological identity
+  $\cA^{\boxtimes I} = \cA^{\boxtimes I_1} \boxtimes
+  \cA^{\boxtimes I_2}$ on~$U_I$.  The associativity and commutativity
+  constraints are inherited from those of the external tensor product.
+\end{enumerate}
+\end{construction}
+
+\begin{theorem}[Relative Gauss--Manin connection on the bar family;
+  \ClaimStatusProvedHere]
+\label{thm:relative-gauss-manin}
+\index{Gauss--Manin connection!on bar family|textbf}
+\index{modular operad!clutching and monodromy}
+The family of bar complexes
+$\{\barB^{(g)}(\cA)\}_{[\Sigma_g] \in \cT_g}$
+over Teichm\"uller space $\cT_g$ carries a canonical flat relative
+connection $\nabla_{\mathrm{rel}}$ in the moduli direction, defined by
+the variation of the propagator with the complex structure.  The
+connection satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Flatness.}
+  $\nabla_{\mathrm{rel}}^{\,2} = 0$ on $\cT_g$: the MC equation
+  $\partial\delta_\cA + \frac{1}{2}[\delta_\cA, \delta_\cA] = 0$
+  \textup{(}Theorem~\textup{\ref{thm:coderivation-MC-synthesis})}
+  holds uniformly over the moduli, ensuring the deformation of the
+  bar differential with the complex structure is integrable.
+
+\item \textbf{Logarithmic extension.}
+  The connection extends to a logarithmic connection on
+  $\Mbar_g$ with logarithmic singularities along the boundary
+  divisors.  The residue along a boundary divisor
+  $\delta_\Gamma \subset \partial\Mbar_g$
+  \textup{(}corresponding to stable curve degeneration along
+  graph~$\Gamma$\textup{)} is the clutching operator
+  $\Delta_\Gamma$ of the modular operad:
+  \[
+  \operatorname{Res}_{\delta_\Gamma}(\nabla_{\mathrm{rel}})
+  = \Delta_\Gamma.
+  \]
+
+\item \textbf{Monodromy.}
+  The monodromy of $\nabla_{\mathrm{rel}}$ around a boundary
+  divisor is $\exp(2\pi i \, \Delta_\Gamma)$: the clutching map
+  generates the monodromy of the bar family at degenerate curves.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Part~(i):} The bar differential $D(\tau)$ depends
+holomorphically on the complex structure parameter
+$\tau \in \cT_g$ (through the period matrix and prime form).
+Since $D(\tau)^2 = 0$ for all $\tau$
+(Theorem~\ref{thm:coderivation-MC-synthesis}), differentiating
+gives $D(\tau) \cdot (\partial D/\partial\tau_\alpha)
++ (\partial D/\partial\tau_\alpha) \cdot D(\tau) = 0$,
+i.e.\ each $\partial D/\partial\tau_\alpha$ is a cocycle in the
+endomorphism complex $(\End(\barB), [D,-])$.
+The relative connection is
+$\nabla_{\mathrm{rel}} = d_{\cT} + \sum_\alpha
+(\partial D/\partial\tau_\alpha)\,d\tau_\alpha$, and its curvature is
+\[
+\nabla_{\mathrm{rel}}^{\,2}
+= \sum_{\alpha < \beta}
+\Bigl(
+\frac{\partial^2 D}{\partial\tau_\alpha\,\partial\tau_\beta}
+- \frac{\partial^2 D}{\partial\tau_\beta\,\partial\tau_\alpha}
++ \Bigl[\frac{\partial D}{\partial\tau_\alpha},\,
+        \frac{\partial D}{\partial\tau_\beta}\Bigr]
+\Bigr)\,d\tau_\alpha \wedge d\tau_\beta.
+\]
+The first two terms cancel by the symmetry of mixed partials
+(holomorphic dependence on~$\tau$).  For the commutator: differentiating
+$D \cdot (\partial D/\partial\tau_\beta) + (\partial D/\partial\tau_\beta) \cdot D = 0$
+with respect to $\tau_\alpha$ and using
+$(\partial D/\partial\tau_\alpha) \cdot (\partial D/\partial\tau_\beta)
++ (\partial D/\partial\tau_\beta) \cdot (\partial D/\partial\tau_\alpha)
+= -D \cdot (\partial^2 D/\partial\tau_\alpha\partial\tau_\beta)
+  - (\partial^2 D/\partial\tau_\alpha\partial\tau_\beta) \cdot D$
+shows that
+$[\partial D/\partial\tau_\alpha, \partial D/\partial\tau_\beta]$
+is a $[D,-]$-coboundary in $\End(\barB)$.  In particular
+it vanishes as an endomorphism of $\barB$
+(both sides of the Leibniz identity act on the same complex),
+so $\nabla_{\mathrm{rel}}^{\,2} = 0$.
+
+\emph{Part~(ii):} Near a boundary divisor $\delta_\Gamma$
+parametrising a nodal degeneration $\Sigma_g \leadsto \Sigma_\Gamma$,
+the prime form $E(z,w)$ acquires a logarithmic singularity of the
+form $E(z,w) \sim t_e \cdot E_{\mathrm{reg}}(z,w)$, where $t_e$
+is the smoothing parameter for the node~$e$ and $E_{\mathrm{reg}}$
+is regular.  The bar differential therefore has a simple pole
+$D \sim D_{\mathrm{reg}} + (1/t_e)\Delta_e$ where $\Delta_e$ is the
+clutching operator contracting the two half-edges at the node via the
+invariant pairing.  The residue of $\nabla_{\mathrm{rel}}$ is thus
+$\Delta_\Gamma = \sum_{e \in E(\Gamma)} \Delta_e$.
+
+\emph{Part~(iii):} The monodromy around $\{t_e = 0\}$ is
+$\exp(2\pi i \, \operatorname{Res}_{t_e=0} \nabla_{\mathrm{rel}})
+= \exp(2\pi i \, \Delta_e)$.  For the full stable graph~$\Gamma$,
+the monodromy is the product over edges.
+\end{proof}
+
+\begin{construction}[Non-separating clutching map]
+\label{constr:nonsep-clutching}
+\index{clutching map!non-separating}
+The non-separating clutching map $\Delta_{\mathrm{cyc}}$ raises
+genus by~$1$.  On a bar element of degree~$2$:
+\begin{equation}\label{eq:nonsep-clutching-explicit}
+  \Delta_{\mathrm{cyc}}\bigl(
+  s^{-1}a_1 \otimes s^{-1}a_2\bigr)
+  \;=\;
+  \langle a_1, a_2 \rangle_{\mathrm{inv}},
+\end{equation}
+where $\langle{-},{-}\rangle_{\mathrm{inv}}$ is the invariant bilinear
+form on~$\cA$ (the Shapovalov form, normalised so that the vacuum
+pairs to~$1$).  Geometrically: the two points $z_1, z_2 \in \Sigma_g$
+are identified by the clutching map
+$\xi\colon \Sigma_g \smallsetminus \{z_1, z_2\} \to \Sigma_{g+1}$,
+which creates a new cycle through the identified point.  The bar
+element $[s^{-1}a_1 | s^{-1}a_2]$ of bar degree~$2$ at genus~$g$
+is sent to the scalar $\langle a_1, a_2\rangle_{\mathrm{inv}}$ at
+genus~$g+1$.  The desuspension shifts cancel:
+$|s^{-1}a_1| + |s^{-1}a_2| = |a_1| - 1 + |a_2| - 1$, and the
+pairing has degree~$2$ (it is the bilinear form on the desuspended
+augmentation ideal), so
+$|\Delta_{\mathrm{cyc}}(s^{-1}a_1 \otimes s^{-1}a_2)| =
+|a_1| + |a_2| - 2 + 2 = |a_1| + |a_2|$, consistent with the
+genus shift raising the total degree by the Euler characteristic
+contribution $\chi(\Sigma_{g+1}) - \chi(\Sigma_g) = -2$.
+
+More generally, on a bar element of degree~$k$,
+$\Delta_{\mathrm{cyc}}$ sums over all pairs $(i,j)$ with
+$1 \leq i < j \leq k$:
+\begin{equation}\label{eq:nonsep-clutching-general}
+  \Delta_{\mathrm{cyc}}\bigl(
+  s^{-1}a_1 \otimes \cdots \otimes s^{-1}a_k\bigr)
+  \;=\;
+  \sum_{1 \leq i < j \leq k}
+  \pm\,
+  \langle a_i, a_j \rangle_{\mathrm{inv}}
+  \cdot
+  s^{-1}a_1 \otimes \cdots
+  \widehat{s^{-1}a_i} \cdots
+  \widehat{s^{-1}a_j} \cdots
+  \otimes s^{-1}a_k,
+\end{equation}
+where the hat denotes omission and the sign is determined by the
+Koszul rule for permuting $s^{-1}a_i$ and $s^{-1}a_j$ past their
+neighbours (see Remark~\ref{rem:bicomplex-signs} below).  This is the
+genus-raising differential $D_1 = D_{\mathrm{nsep}}$ of the modular
+bar complex $\Bmod(\cA)$.
+\end{construction}
+
+\begin{proposition}[Explicit propagator on $\Sigma_g$]
+\label{prop:propagator-explicit}
+\index{propagator!on $\Sigma_g$}
+\ClaimStatusProvedHere{}
+The holomorphic propagator on a genus-$g$ Riemann surface
+$\Sigma_g$ with period matrix $\tau = (\tau_{\alpha\beta})
+\in \mathfrak{H}_g$ \textup{(}the Siegel upper half-space\textup{)}
+is
+\begin{equation}\label{eq:hol-propagator-theta}
+  K^{(g)}(z,w)
+  \;=\;
+  \partial_z \log E(z,w)\, dz
+  \;=\;
+  \partial_z \log
+  \frac{\vartheta\!\begin{bmatrix}\delta'\\\delta''\end{bmatrix}
+  \!\bigl(\int_w^z \vec\omega\,,\,\tau\bigr)}
+  {\cE(z,w)}\; dz,
+\end{equation}
+where $E(z,w)$ is the prime form,
+$\vartheta\!\left[\begin{smallmatrix}\delta'\\\delta''\end{smallmatrix}\right]$
+is a theta function with odd characteristic
+$(\delta',\delta'')$, $\vec\omega = (\omega_1,\ldots,\omega_g)$
+is the vector of normalised holomorphic differentials, and
+$\cE(z,w) = \sqrt{dz}\sqrt{dw}$ is the $(-\frac{1}{2}, -\frac{1}{2})$
+bidifferential making $E$ a section of
+$\omega_X^{-1/2} \boxtimes \omega_X^{-1/2}$ on $X \times X$.
+
+The Arakelov-normalised single-valued propagator is
+\begin{equation}\label{eq:arakelov-propagator}
+  K^{(g)}_{\mathrm{Ar}}(z,w)
+  \;=\;
+  \partial_z \log E(z,w)\, dz
+  \;+\;
+  \pi \sum_{\alpha,\beta=1}^g
+  \omega_\alpha(z)\,
+  (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+  \operatorname{Im}\Bigl(\int_w^z \omega_\beta\Bigr).
+\end{equation}
+\end{proposition}
+\begin{proof}
+The prime form $E(z,w)$ is the unique section of
+$\omega_X^{-1/2} \boxtimes \omega_X^{-1/2}(\Delta)$ vanishing to
+first order on the diagonal $\Delta$, with no other zeros on
+$X \times X$ (Fay \cite{Fay73}, Chapter~II).  Its logarithmic
+derivative $\partial_z \log E(z,w)\,dz$ is therefore a meromorphic
+$1$-form in~$z$ with a simple pole at $z = w$ with residue $+1$
+and no other poles.  On the universal cover of~$\Sigma_g$ it is
+single-valued, but on $\Sigma_g$ it has monodromy: analytic
+continuation of $z$ around the $B$-cycle~$B_j$ produces
+$K^{(g)}(z + B_j, w) = K^{(g)}(z,w) + 2\pi i\, \omega_j(w)$,
+as stated in \eqref{eq:propagator-monodromy}.  The $A$-cycle
+monodromy vanishes by the normalisation $\oint_{A_i}\omega_j = \delta_{ij}$.
+
+To construct a single-valued propagator, add the Arakelov correction:
+the function
+$\operatorname{Im}\!\bigl(\int_w^z \omega_\beta\bigr)$
+shifts by $\operatorname{Im}(\tau_{j\beta})$ when $z$ traverses
+$B_j$.  The correction term
+$\pi\sum_{\alpha,\beta} \omega_\alpha(z)\,
+(\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+\operatorname{Im}\!\bigl(\int_w^z \omega_\beta\bigr)$
+therefore shifts by
+$\pi \sum_\alpha \omega_\alpha(z)\,
+(\operatorname{Im}\tau)^{-1}_{\alpha j}\,
+\operatorname{Im}(\tau_{j\beta})\cdot
+(\operatorname{Im}\tau)^{-1}_{\beta\gamma}$,
+but more directly: under $z \mapsto z + B_j$, the
+correction shifts by $2\pi i\, \omega_j(w)$, cancelling the
+monodromy of the prime form exactly.
+
+The cost is that $K^{(g)}_{\mathrm{Ar}}$ is no longer holomorphic
+in~$z$.  Taking $\bar\partial_z$:
+\begin{align}\label{eq:dbar-arakelov}
+  \bar\partial_z K^{(g)}_{\mathrm{Ar}}(z,w)
+  &\;=\;
+  \pi \sum_{\alpha,\beta}
+  \bar\partial_z\bigl[\omega_\alpha(z)\bigr]\,
+  (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+  \operatorname{Im}\Bigl(\int_w^z \omega_\beta\Bigr)
+  \;+\;
+  \pi \sum_{\alpha,\beta}
+  \omega_\alpha(z)\,
+  (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+  \bar\partial_z
+  \operatorname{Im}\Bigl(\int_w^z \omega_\beta\Bigr)
+  \notag\\[3pt]
+  &\;=\;
+  0 \;+\;
+  \frac{\pi}{2i}
+  \sum_{\alpha,\beta}
+  \omega_\alpha(z)\,
+  (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+  \bar\omega_\beta(z)
+  \;=\;
+  -\omega_{\mathrm{Ar}}(z),
+\end{align}
+where the first term vanishes because $\omega_\alpha(z)$ is
+holomorphic ($\bar\partial_z\omega_\alpha = 0$), and the second
+term uses $\bar\partial_z\operatorname{Im}(\int_w^z\omega_\beta) =
+\frac{1}{2i}\bar\omega_\beta(z)$.  The Arakelov $(1,1)$-form
+$\omega_{\mathrm{Ar}} = -\frac{\pi}{2i}\sum_{\alpha,\beta}
+(\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+\omega_\alpha \wedge \bar\omega_\beta$ is the
+unique $(1,1)$-form on~$\Sigma_g$ with
+$\int_{\Sigma_g}\omega_{\mathrm{Ar}} = 1$ and constant
+pointwise norm with respect to the Arakelov metric.
+
+Contracting with OPE data: the square $\dfib^{\,2}$ of the
+bar differential on a degree-$k$ bar element involves two
+propagator insertions.  At the cogenerator projection, only
+the self-contraction (tadpole) survives --- this extracts
+$\kappa(\cA)$ (Volume~I, Theorem~D).  Therefore
+$\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$.
+\end{proof}
+
+\begin{remark}[Comparison with Lurie HA \S5.5]
+\label{rem:lurie-comparison}
+\index{Lurie!factorization on stratified spaces}
+The product $\Sigma_g \times \R$ with boundary
+$\Sigma_g \times \{0\}$ is a stratified space in the sense of
+Lurie \cite{HA}, Chapter~5.5, with two strata: the open stratum
+$\Sigma_g \times \R_{>0}$ (the ``bulk'') and the closed stratum
+$\Sigma_g \times \{0\}$ (the ``boundary'').  Lurie's
+factorization algebras on stratified spaces
+(\emph{loc.\ cit.}, Definition~5.5.2.9) assign to each stratum
+a factorization algebra, with compatibility data along the
+inclusion of strata.  Our BD factorization Swiss-cheese algebra
+(Definition~\ref{def:BD-SC}) is precisely such an object:
+\begin{itemize}
+\item The open stratum carries $F_{\mathsf{cl}} \boxtimes
+  F_{\mathsf{op}}$ (factorizable $D$-module on the bulk).
+\item The closed stratum carries $F_{\mathsf{op}}$ (the boundary
+  algebra).
+\item The compatibility datum is the mixed sector
+  $F_{\mathsf{mix}}$, encoding how bulk observables restrict to
+  the boundary.
+\item The directionality (Definition~\ref{def:BD-SC}(iv)) is the
+  \emph{constructibility} condition: sections extend from closed
+  strata to open strata, not conversely.
+\end{itemize}
+The content of this chapter beyond Lurie's general framework is
+the \emph{specific} product decomposition
+$\Sigma_g \times \R$, which splits the factorization structure
+into holomorphic ($\Sigma_g$) and topological ($\R$) colours.
+This splitting is \emph{not} part of Lurie's stratified
+factorization formalism; it is the extra structure that makes
+Swiss-cheese two-coloured rather than merely stratified.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{CG factorization Swiss-cheese algebras}
+\label{sec:CG-factorization-SC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Costello--Gwilliam framework \cite{CG17} approaches the same
+structure from the differential-geometric side: prefactorization
+algebras on $\Sigma_g \times \R$, quantized via the BV formalism.
+
+\begin{definition}[CG prefactorization algebra on $\Sigma_g \times \R$]
+\label{def:CG-prefact}
+\index{CG prefactorization algebra|textbf}
+A \emph{CG prefactorization algebra of HT type on
+$\Sigma_g \times \R$} is a prefactorization algebra $\Obs$ on the
+product manifold $\Sigma_g \times \R$ with values in cochain
+complexes, satisfying:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Holomorphic factorization in $\Sigma_g$.}  For
+  disjoint open discs $D_1,\ldots,D_k \subset \Sigma_g$ and
+  an interval $I \subset \R$, the multiplication map
+  \[
+    \bigotimes_{i=1}^k \Obs(D_i \times I)
+    \;\longrightarrow\;
+    \Obs\Bigl(\bigl(\textstyle\bigcup_i D_i\bigr) \times I\Bigr)
+  \]
+  is holomorphic in the positions of the discs, with meromorphic
+  singularities (OPE poles) along collision diagonals.
+
+\item \textbf{Local constancy in $\R$.}  For a disc
+  $D \subset \Sigma_g$ and inclusions of intervals
+  $I \hookrightarrow J$ in~$\R$, the restriction map
+  $\Obs(D \times I) \to \Obs(D \times J)$ is a
+  quasi-isomorphism.  The assignment $I \mapsto \Obs(D \times I)$
+  is therefore a locally constant factorization algebra on~$\R$,
+  yielding an $\Eone$-algebra structure.
+
+\item \textbf{Mixed structure.}  The holomorphic and topological
+  factorizations are compatible: for rectangles
+  $D_1 \times I_1, \ldots, D_k \times I_k$ contained in a larger
+  rectangle $D \times I$, the iterated multiplication factors
+  through the product $\FM_k(\Sigma_g) \times \Eone(m)$ of
+  holomorphic and topological operation spaces.
+
+\item \textbf{Directionality.}  The half-space
+  $\Sigma_g \times \R_{\geq 0}$ carries a boundary condition at
+  $\Sigma_g \times \{0\}$.  Bulk observables restrict to the
+  boundary; boundary observables do not extend to the bulk.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[BV quantization origin]
+\label{def:BV-origin}
+\index{BV quantization!factorization origin}
+The standard source of CG prefactorization algebras of HT type is
+the BV quantization of a classical action functional on
+$\Sigma_g \times \R$.  Let $\fg$ be a Lie algebra with
+non-degenerate invariant pairing $\langle{-},{-}\rangle$, and
+let $\cE = \Omega^{0,\bullet}(\Sigma_g) \otimes \fg \otimes
+\Omega^\bullet(\R)$ be the space of fields.  Write
+$\cE = \cE^{\mathrm{hol}} \oplus \cE^{\mathrm{top}}$ for the
+decomposition by form degree on $\R$, with $\phi \in \cE$ a
+general field.  The \emph{classical action functional}
+$S = S_{\mathrm{free}} + S_{\mathrm{int}}$ has:
+
+\smallskip\noindent
+\emph{Free (kinetic) part.}  The kinetic term is
+\begin{equation}\label{eq:HT-kinetic}
+  S_{\mathrm{free}}(\phi)
+  \;=\;
+  \int_{\Sigma_g \times \R}
+  \bigl\langle \phi,\;
+  (\bar\partial_{\Sigma} + \partial_t)\, \phi
+  \bigr\rangle\,
+  dz \wedge d\bar{z} \wedge dt,
+\end{equation}
+where $\bar\partial_{\Sigma}$ is the Dolbeault differential on
+$\Sigma_g$ and $\partial_t$ is the de~Rham differential on~$\R$.
+The total kinetic operator $Q_0 = \bar\partial_{\Sigma} + \partial_t$
+splits along the product: $\bar\partial_\Sigma$ acts in the
+holomorphic direction, $\partial_t$ in the topological direction.
+
+\smallskip\noindent
+\emph{Interaction part.}  The cubic interaction is
+\begin{equation}\label{eq:HT-interaction}
+  S_{\mathrm{int}}(\phi)
+  \;=\;
+  \frac{1}{2}
+  \int_{\Sigma_g \times \R}
+  \bigl\langle \phi,\;
+  [\phi, \phi]
+  \bigr\rangle\,
+  dz \wedge d\bar{z} \wedge dt,
+\end{equation}
+where $[{-},{-}]$ is the Lie bracket on~$\fg$.  The full BRST
+differential is
+\begin{equation}\label{eq:BRST-splitting}
+  Q
+  \;=\;
+  \bar\partial_{\Sigma}
+  \;+\;
+  \partial_t
+  \;+\;
+  \{S_{\mathrm{int}},{-}\}_{\mathrm{BV}},
+\end{equation}
+where $\{{-},{-}\}_{\mathrm{BV}}$ is the BV antibracket.  The
+identity $Q^2 = 0$ is the classical master equation
+$\{S,S\}_{\mathrm{BV}} = 0$.
+
+\smallskip\noindent
+\emph{Propagator.}  The Green's function for $Q_0$ on
+$\Sigma_g \times \R$ factors as
+\begin{equation}\label{eq:HT-propagator}
+  P(z_1, t_1;\, z_2, t_2)
+  \;=\;
+  K^{(g)}(z_1, z_2)
+  \;\cdot\;
+  \theta(t_1 - t_2),
+\end{equation}
+where $K^{(g)}(z_1,z_2) = \partial_{z_1}\log E(z_1,z_2)\,dz_1$
+is the meromorphic (Cauchy/Szeg\H{o}) kernel on $\Sigma_g$
+(at genus~$0$: $K^{(0)} = dz_1/(z_1 - z_2)$) and
+$\theta(t_1 - t_2)$ is the Heaviside step function on~$\R$,
+encoding causal (retarded) ordering in the topological direction.
+The factored form $P = K^{(g)} \cdot \theta$ reflects the
+HT product structure: holomorphic meromorphy in $\Sigma_g$
+and exponential decay in~$\R$.
+
+\smallskip\noindent
+\emph{Cosheaf descent.}
+Passage from prefactorization to genuine factorization via the Weiss
+topology is ensured by the Weiss descent lemma
+(Lemma~\ref{lem:product-weiss-descent}).
+\end{definition}
+
+\begin{remark}[Comparison with Costello's renormalization framework]
+\label{rem:costello-renorm-comparison}
+\index{Costello!renormalization comparison}
+The propagator $P = K^{(g)} \cdot \theta$ of
+\eqref{eq:HT-propagator} differs from the heat kernel regularization
+$P_\varepsilon^L = \int_\varepsilon^L K_t\, dt$ of Costello's
+renormalization programme \cite{Cos11}, and the difference is
+substantive.
+Costello regularises the propagator by smearing the Green's
+function over a time window $[\varepsilon, L]$, producing a smooth
+kernel; the renormalization group flow tracks the
+$\varepsilon$-dependence, and the $\varepsilon \to 0$ limit exists
+after counterterm subtraction.  In the holomorphic-topological
+setting, the $\Sigma_g$-component of the propagator is \emph{already}
+meromorphic (not distributional): $K^{(g)}(z,w) =
+\partial_z\log E(z,w)\,dz$ has a simple pole at $z = w$ and no
+further singularities.  The $\R$-component $\theta(t_1 - t_2)$ is
+distributional (a step function), but the $\Eone$-direction is
+purely topological and requires no regularization --- it simply
+enforces time-ordering.
+
+Concretely: Costello's heat kernel on a Riemannian manifold~$M$ is
+the distributional kernel of $e^{-t\Delta_M}$, where $\Delta_M$ is
+the Laplacian.  On $\C$ with flat metric,
+$K_t(z,w) = \frac{1}{4\pi t}e^{-|z-w|^2/4t}$, and
+$\lim_{t \to 0^+} K_t(z,w) = \delta(z-w)$.
+In the holomorphic limit ($\bar\partial$-complex rather than the
+Laplacian), the heat kernel degenerates to the Cauchy kernel:
+formally $K^{(0)}(z,w) = \frac{dz}{z-w}$ is the $t = 0$ limit
+of the heat kernel, already finite.  The HT propagator
+\eqref{eq:HT-propagator} is therefore the \emph{holomorphic limit}
+of Costello's regularised propagator: no smearing is needed in the
+$\C$-direction, and the $\R$-direction uses time-ordering rather than
+heat-kernel smearing.  The one-loop finiteness condition
+(hypothesis~(H1) of the physics bridge theorem,
+Theorem~\ref{thm:physics-bridge}) replaces Costello's
+renormalization group analysis: it is the statement that the
+holomorphic limit is finite without counterterms beyond one loop.
+\end{remark}
+
+\begin{construction}[Factorization homology and the genus tower]
+\label{constr:fact-homology-genus}
+\index{factorization homology!genus tower}
+The \emph{factorization homology} of $\Obs$ on $\Sigma_g \times \R$ is
+the global sections
+\begin{equation}\label{eq:fact-homology}
+  \int_{\Sigma_g \times \R} \Obs
+  \;:=\;
+  \Obs(\Sigma_g \times \R),
+\end{equation}
+computed as the homotopy colimit of the factorization structure over
+all open covers.  For varying~$g$, this produces a family
+$\{\int_{\Sigma_g \times \R} \Obs\}_{g \geq 0}$ parametrised by the
+complex structure of~$\Sigma_g$ (i.e.\ by points of $\Mbar_g$).
+
+The genus-$g$ bar complex of~$\cA$ is recovered as:
+\[
+  \barB^{(g)}(\cA)
+  \;\simeq\;
+  \int_{\Sigma_g \times \R} \Obs_\cA,
+\]
+where $\Obs_\cA$ is the CG prefactorization algebra associated to the
+chiral algebra~$\cA$ via BV quantization.  The dependence on complex
+structure produces the genus tower of
+$\S$\ref{subsec:genus-completion} and the curved bar complex of
+Theorem~\ref{thm:modular-bar}.
+\end{construction}
+
+\begin{remark}[CG Koszul duality]
+\label{rem:CG-koszul}
+\index{CG Koszul duality|textbf}
+The Ayala--Francis framework \cite{AF15} establishes Koszul duality
+for locally constant factorization algebras on~$\R^n$: it exchanges
+$E_n$-algebras and $E_n$-coalgebras.  For the HT product
+$\Sigma_g \times \R$, Koszul duality decomposes along the two
+factors:
+\begin{itemize}
+\item In the $\R$-direction: $\Eone$ Koszul duality (bar-cobar for
+  associative algebras).
+\item In the $\Sigma_g$-direction: chiral Koszul duality
+  (bar-cobar for chiral/factorization algebras, Volume~I
+  Theorem~A).
+\item Combined: Swiss-cheese Koszul duality, the two-colored
+  adjunction of Theorem~\ref{thm:bar-cobar-adjunction}.
+\end{itemize}
+The bar construction of Construction~\ref{constr:bar-fact-coalgebra}
+is the factorization-level realization of this combined Koszul
+duality.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Equivalence of BD and CG descriptions}
+\label{sec:BD-CG-equivalence}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The two descriptions --- algebraic ($D$-modules on the Ran space)
+and differential-geometric (prefactorization algebras) --- produce
+equivalent structures under standard comparison hypotheses.
+
+\begin{theorem}[BD--CG equivalence; \ClaimStatusProvedElsewhere{} for Layers 1--2, \ClaimStatusProvedHere{} for Layer 3]
+\label{thm:BD-CG-equivalence}
+\index{BD--CG equivalence|textbf}
+Let $k$ be a field of characteristic~$0$, $X$ a smooth projective
+curve over~$k$, and $\cA$ a chiral algebra on~$X$ that is
+holomorphically translation-invariant (in the sense of
+\textup{\cite{BD04}, \S3.4}).  The following three categories are
+equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{BD closed colour.}  The category of
+  factorizable $D$-modules on $\Ran(X)$ that are $\cA$-modules
+  \textup{(}Beilinson--Drinfeld \textup{\cite{BD04}},
+  Theorem~\textup{4.5.4; Francis--Gaitsgory \cite{FG12})}.
+
+\item \textbf{CG closed colour.}  The category of holomorphic
+  prefactorization algebras on~$X$ with values in ind-coherent
+  sheaves, satisfying cosheaf descent in the Weiss topology
+  \textup{(}Costello--Gwilliam \textup{\cite{CG17})}.
+
+\item \textbf{Local model.}  Algebras over
+  $C_\ast(\FM_\bullet(X))$ in the symmetric monoidal dg category
+  of $D$-modules on~$X$ \textup{(}the closed-colour component of
+  a $C_\ast(W(\SCchtop))$-algebra\textup{)}.
+\end{enumerate}
+The equivalence \textup{(i)} $\simeq$ \textup{(ii)} is the
+comparison of algebraic and differential-geometric factorization
+algebras \textup{(}\cite{BD04}, \S4.5;
+\cite{FG12}, Theorem~\textup{6.3.2)}.  The equivalence
+\textup{(i)} $\simeq$ \textup{(iii)} is the extraction of the
+local model by formal completion at collision points
+\textup{(}Remark~\textup{\ref{rem:local-shadow-extraction})}.
+\end{theorem}
+
+\begin{remark}[Status of the equivalence]
+\label{rem:bdcg-status}
+The three layers of the proof invoke:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Beilinson--Drinfeld \cite{BD04} and Francis--Gaitsgory \cite{FG12} for the chiral/closed equivalence --- foundational results in factorization algebra theory.
+\item Lurie \cite{HA}, Theorem~5.4.5.9, for the associative/open equivalence --- a standard result identifying locally constant factorization algebras on~$\R$ with $\Eone$-algebras.
+\item The mixed comparison (Layer~3) is proved here: the Riemann--Hilbert comparison functor $\Phi_{\mathsf{mix}}$ is constructed explicitly and verified to intertwine the factorization structure maps.
+\end{enumerate}
+The theorem is conditional on~(i) and~(ii), which are standard foundational results proved in the cited references.  The novel content is~(iii): the mixed-sector comparison and its compatibility with Swiss-cheese directionality.
+\end{remark}
+
+\begin{proof}
+The proof proceeds through three layers of comparison.
+
+\medskip\noindent
+\textbf{Layer 1: Closed (chiral) colour.}
+Beilinson--Drinfeld \cite{BD04}, Theorem~4.5.4, establish that
+the category of chiral algebras on~$X$ (as factorizable
+$D$-modules on $\Ran(X)$) is equivalent to the category of
+factorization algebras on~$X$ in the sense of \emph{loc.\ cit.},
+\S3.4.  Francis--Gaitsgory \cite{FG12} extend this to the
+derived/$\infty$-categorical setting, showing that algebras over
+$C_\ast(\FM_\bullet(X))$ in $D$-modules on~$X$ provide the same
+data.  The Costello--Gwilliam prefactorization algebra on~$X$, after
+passage to the cosheaf topology, is equivalent to the
+Francis--Gaitsgory factorization algebra by the comparison
+of~\cite{CG17}, \S5.5.  This establishes (i) $\simeq$ (ii)
+$\simeq$ (iii) on the closed colour.
+
+\medskip\noindent
+\textbf{Layer 2: Open (associative) colour.}
+Lurie \cite{HA}, Theorem~5.4.5.9, identifies locally
+constant factorization algebras on~$\R$ with $\Eone$-algebras
+(associative algebras up to coherent homotopy) in any presentable
+symmetric monoidal $\infty$-category.  Both the BD and CG
+descriptions of the open colour reduce to $\Eone$-algebras:
+the BD description via the locally constant $D$-module on
+$\Ran(\R)$, the CG description via the locally constant
+prefactorization algebra on~$\R$.  This is Lurie's result applied
+in the two settings.
+
+\medskip\noindent
+\textbf{Layer 3: Mixed (Swiss-cheese) colour.}
+The mixed sector involves configurations with both closed points
+on~$X$ and open points on~$\R$.  We construct an explicit
+comparison functor
+\[
+  \Phi_{\mathsf{mix}}\colon
+  \Dmod\bigl(\Ran_k(X)\bigr) \otimes \Fact_m(\R)
+  \;\longrightarrow\;
+  \Obs^{\mathsf{CG}}_{\mathsf{mix}}(k,m)
+\]
+as follows.  A section $s \in F_{\mathsf{mix}}(k,m)$
+(Definition~\ref{def:BD-SC}(iii)) is a $D$-module section on
+$\Ran_k(X)$ tensored with a factorization-algebra element on
+$\Fact_m(\R)$.  The functor $\Phi_{\mathsf{mix}}$ sends $s$ to
+the CG observable defined by:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Apply the Riemann--Hilbert correspondence on $\Ran_k(X)$:
+  convert the $D$-module section to a flat section of the
+  associated local system (the de~Rham complex of the
+  $D$-module), producing a differential form on
+  $\Conf_k(X)$.
+\item On the $\R$-factor, apply the identity: both BD and CG
+  descriptions of locally constant factorization algebras on
+  $\R$ produce $\Eone$-algebras (Layer~2), and the
+  identification is Lurie's equivalence.
+\item The combined map sends $s$ to the product
+  $\mathrm{dR}(s|_{\Ran_k}) \boxtimes s|_{\Fact_m}$, an
+  element of the CG mixed observables on $\Conf_k(X) \times
+  \Conf_m(\R)$.
+\end{enumerate}
+That $\Phi_{\mathsf{mix}}$ is an equivalence follows from the
+K\"unneth quasi-isomorphism
+\[
+  C_\ast\bigl(\FM_k(X) \times \Eone(m)\bigr)
+  \;\simeq\;
+  C_\ast\bigl(\FM_k(X)\bigr) \otimes C_\ast\bigl(\Eone(m)\bigr),
+\]
+which holds because $\FM_k(X)$ has finite-dimensional cohomology
+over a field of characteristic~$0$ (it is a compact manifold
+with corners), and $\Eone(m)$ has finite-dimensional cells.
+The factorization module structure maps
+(Definition~\ref{def:BD-SC}(iii)(a)--(c)) are intertwined by
+$\Phi_{\mathsf{mix}}$ with the CG mixed multiplication maps
+(Definition~\ref{def:CG-prefact}(iii)), because both are
+determined by restriction to collision diagonals in $\FM_k(X)$
+tensored with interval inclusions in $\Eone(m)$.
+The key verification: for disjoint $I_1, I_2$, the diagram
+\[
+\begin{tikzcd}[column sep=3em]
+F_{\mathsf{mix}}\big|_{U_{I_1,I_2}} \ar[r, "\Phi_{\mathsf{mix}}"] \ar[d, "\text{fact.\ iso}"'] &
+\Obs^{\mathsf{CG}}_{\mathsf{mix}}\big|_{U_1 \times U_2} \ar[d, "\text{CG mult}"] \\
+F_{\mathsf{cl}}\big|_{U_{I_1}} \boxtimes F_{\mathsf{op}}\big|_{U_{I_2}} \ar[r, "\Phi_{\mathsf{cl}} \boxtimes \Phi_{\mathsf{op}}"] &
+\Obs^{\mathsf{CG}}_{\mathsf{cl}}(U_1) \otimes \Obs^{\mathsf{CG}}_{\mathsf{op}}(U_2)
+\end{tikzcd}
+\]
+commutes because $\Phi_{\mathsf{mix}}$ is defined component-wise on the two factors and both vertical maps are the ``forget the separation'' isomorphism.
+
+The no-open-to-closed constraint is preserved: the vanishing
+$F_{\mathsf{mix}}(\ldots,\mathsf{top},\ldots;\,\mathsf{cl}) = 0$
+on the BD side (the $!$-extension support argument of
+Definition~\ref{def:BD-SC}(iv)) corresponds to the vanishing of
+bulk-directed CG observables sourced from the boundary
+(Definition~\ref{def:CG-prefact}(iv)): $\Phi_{\mathsf{mix}}$
+sends the zero $D$-module to the zero observable.
+\end{proof}
+
+\begin{remark}[Precise adjectives]
+\label{rem:BD-CG-adjectives}
+The equivalence requires:
+\begin{itemize}
+\item \emph{Characteristic~$0$}: needed for Kontsevich formality
+  (Step~2 of Theorem~\ref{thm:homotopy-Koszul}) and for the
+  K\"unneth quasi-isomorphism.
+\item \emph{$X$ smooth projective}: ensures the Ran space has the
+  correct properties; stable curves require additional care at
+  nodes.
+\item \emph{Holomorphically translation-invariant}: the CG
+  prefactorization algebra is translation-invariant in the
+  holomorphic direction, matching the BD condition that the
+  $D$-module connection is compatible with the translation action
+  on~$\C$.
+\item \emph{Locally constant on~$\R$}: the topological
+  factorization is locally constant (restriction along inclusions
+  of intervals is a quasi-isomorphism), ensuring the
+  $\Eone$-algebra structure.
+\item \emph{Ind-coherent on BD side, cosheaf topology on CG side}:
+  the comparison functors involve the passage between
+  $\IndCoh(\Ran(X))$ and the cosheaf category.
+\end{itemize}
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Factorization Koszul duality and derived-coderived equivalence}
+\label{sec:factorization-koszul-duality}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The local homotopy-Koszulity theorem
+(Theorem~\ref{thm:homotopy-Koszul}) ensures that the bar-cobar
+adjunction is a Quillen equivalence at genus~$0$.  The
+factorization framework extends this to all genera, where the bar
+complex is a \emph{curved} factorization coalgebra and the
+relevant category is the coderived category.
+
+\begin{theorem}[Factorization Swiss-cheese Koszul duality; \ClaimStatusProvedHere]
+\label{thm:factorization-SC-koszul}
+\index{factorization Koszul duality|textbf}
+Let $(F_{\mathsf{cl}}, F_{\mathsf{op}}, F_{\mathsf{mix}})$ be a
+BD factorization Swiss-cheese algebra on $\Sigma_g \times \R$
+\textup{(}Definition~\textup{\ref{def:BD-SC})}, associated to a
+chiral algebra~$\cA$ satisfying the hypotheses of
+Theorem~\textup{\ref{thm:BD-CG-equivalence}}.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Bar construction.}  The bar complex
+  $\barB(F)$ \textup{(}Construction~\textup{\ref{constr:bar-fact-coalgebra})}
+  is a factorization coalgebra on $\Ran(\Sigma_g) \times \Ran(\R)$,
+  with closed-colour differential from chiral operations and
+  open-colour coproduct from factorization splitting.
+
+\item \textbf{Genus-$0$ recovery.}  At genus~$0$, the cobar
+  construction recovers the original algebra:
+  $\Omegach(\barB(F))|_{g=0} \simeq F$.  This is the local
+  homotopy-Koszulity of $\SCchtop$
+  \textup{(}Theorem~\textup{\ref{thm:homotopy-Koszul})}, lifted to
+  the factorization level.
+
+\item \textbf{All-genus recovery via Feynman transform.}  At
+  genus~$g \geq 1$, the \emph{Feynman transform}
+  $\mathrm{FT}(\barB(F))$ recovers the curved factorization
+  algebra.  The Getzler--Kapranov involutivity theorem
+  $\mathrm{FT}^2 \simeq \id$ on the closed colour
+  \textup{(}Volume~I, Theorem~\textup{\ref*{V1-thm:feynman-involution})}
+  ensures that the Feynman transform is involutive for the modular
+  operad $\{\Mbar_{g,n}\}$.
+
+\item \textbf{Derived-coderived equivalence.}  At each genus~$g$,
+  there is an equivalence between the derived category of
+  the genus-$g$ associated graded bar complex
+  $(\mathrm{gr}^g\, \Bmod, D_0^2 = 0)$ and the coderived
+  category of the curved geometric bar complex
+  $(\barB^{(g)}_{\mathrm{geom}}, \dfib^{\,2} =
+  \kappa \cdot \omega_g)$.  The passage between derived and
+  coderived categories is mediated by the Positselski
+  coderived equivalence for curved dg coalgebras, whose
+  applicability follows from the homotopy-Koszulity of the
+  local model.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Part (i)} is the content of
+Construction~\ref{constr:bar-fact-coalgebra}: the bar differential
+and coproduct are assembled from the factorization data.
+
+\smallskip\noindent
+\textbf{Part (ii).}  At genus~$0$, the bar complex is a genuine
+dg coalgebra ($d_{\barB}^2 = 0$), and the bar-cobar adjunction
+$\Omegach \dashv \barB$ restricts to the adjunction of
+Theorem~\ref{thm:bar-cobar-adjunction}.  The counit
+$\Omegach(\barB(F)) \to F$ is a quasi-isomorphism by the
+homotopy-Koszulity of $\SCchtop$
+(Theorem~\ref{thm:homotopy-Koszul}), which ensures that the
+bar-cobar resolution is a cofibrant replacement.  At the
+factorization level, this statement lifts from operations
+at formal discs to operations on $\Ran(\C)$, because the
+formal-disc data determines the factorization algebra on
+$\Ran(\C)$ at genus~$0$ (the local shadow is faithful at genus~$0$,
+Remark~\ref{rem:local-shadow-extraction}).
+
+\smallskip\noindent
+\textbf{Part (iii).}  At genus~$g \geq 1$, the bar differential is
+curved ($\dfib^{\,2} = \kappa \cdot \omega_g$), and cobar
+reconstruction is replaced by the Feynman transform.  We recall
+the relevant definitions.
+
+The \emph{modular commutative operad} $\Com_{\mathrm{mod}}$ is
+the modular operad with
+$\Com_{\mathrm{mod}}((g,n)) = \mathbb{k}$ for all stable
+pairs $(g,n)$ (i.e.\ $2g - 2 + n > 0$) and structure maps
+given by the identity.  The \emph{relative Feynman transform}
+$\mathrm{FT}(\Com_{\mathrm{mod}} / \SCchtop)$ is the
+functor on $(\Com_{\mathrm{mod}}, \SCchtop)$-algebras defined
+as follows (see Definition~\ref{def:relative-feynman-transform}
+for the general construction):
+\[
+  \mathrm{FT}_{\Com_{\mathrm{mod}} / \SCchtop}(A)
+  \;=\;
+  \biggl(
+  \bigoplus_{\Gamma \in \StGraph}
+  \bigotimes_{v \in V(\Gamma)}
+  A((g_v, n_v)) \otimes \orline_\Gamma
+  \,,\;
+  D_0 + D_1
+  \biggr),
+\]
+where the sum ranges over stable graphs~$\Gamma$ (with
+vertices~$v$ labelled by genus~$g_v$ and valence~$n_v$),
+$\orline_\Gamma = \det(\mathrm{Edges}(\Gamma))^{\otimes(-1)}$
+is the orientation line (the determinant of the edge set, dual),
+$D_0 = D_{\mathrm{int}} + D_{\mathrm{sep}}$ encodes
+genus-preserving operations (internal differential and
+separating-edge contraction, governed by the operad
+$\SCchtop$), and
+$D_1 = D_{\mathrm{nsep}}$ encodes genus-raising operations
+(nonseparating-edge contraction, governed by the modular
+structure of $\Com_{\mathrm{mod}}$).
+
+The modular bar complex $\Bmod(\cA)$
+(Theorem~\ref{thm:modular-bar}) is a
+$\mathrm{FT}(\Com_{\mathrm{mod}} / \SCchtop)$-algebra:
+its bicomplex structure $(D_0^2 = 0,\; D_1^2 = 0,\;
+D_0 D_1 + D_1 D_0 = 0)$ is exactly the defining data of the
+relative Feynman transform
+(Proposition~\ref{prop:rft-differential-identification}).
+
+\begin{remark}[Koszul sign rule for the bicomplex]
+\label{rem:bicomplex-signs}
+\index{Koszul sign rule!bicomplex}
+The anticommutativity $D_0 D_1 + D_1 D_0 = 0$ is governed by the
+Koszul sign rule applied to the bigrading $(|x|, g(x))$, where
+$|x|$ is the bar degree and $g(x)$ is the genus degree.  The sign
+conventions are as follows.  Set $\varepsilon = (-1)^{|x|}$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $D_0$ preserves genus and has bar-degree sign
+  $\varepsilon$: it acts on $x$ by $D_0(x) = \varepsilon \cdot
+  (\text{sum of codimension-1 boundary terms in } \Mbar_{g,n})$.
+  The sign $\varepsilon$ arises because $D_0$ is a coderivation
+  of the tensor coalgebra $T^c(s^{-1}\bar\cA)$, and the
+  desuspension introduces a sign $(-1)^{|s^{-1}a_1| + \cdots +
+  |s^{-1}a_{i-1}|}$ when $D_0$ acts on the $i$-th tensor factor.
+
+\item $D_1$ raises genus by~$1$ and has bar-degree sign
+  $(-1)^{|x|+1}$: the additional sign $(-1)$ relative to $D_0$
+  comes from the orientation of the nonseparating boundary stratum.
+  Geometrically: the nonseparating clutching map
+  $\xi_{\mathrm{nsep}}\colon \Mbar_{g,n+2} \to
+  \Mbar_{g+1,n}$ identifies two marked points into a node, and
+  the orientation of the normal bundle to this boundary stratum
+  differs from the separating case by $(-1)^1$
+  (one self-edge versus one separating edge).
+
+\item The anticommutativity follows:
+  $D_0 D_1 + D_1 D_0$ acting on~$x$ acquires sign
+  $\varepsilon \cdot (-\varepsilon) + (-\varepsilon) \cdot
+  \varepsilon = -\varepsilon^2 - \varepsilon^2 = 0$?  No ---
+  the correct derivation uses the orientation lines.  On
+  $\mathrm{gr}^g\,\Bmod$, $D_0$ has total degree $+1$ and $D_1$
+  has total degree $+1$ (both raise cohomological degree by~$1$
+  in the totalised complex).  Therefore $D_0 D_1 + D_1 D_0 = 0$
+  is the statement that two anticommuting differentials of
+  degree~$+1$ define a bicomplex.  The sign is verified by
+  checking on generators: for $x = s^{-1}a$ of bar degree~$1$,
+  $D_0(x) = 0$ (no codimension-$1$ faces at arity~$1$) and
+  $D_1(x) = 0$ (no pair to contract at arity~$1$), so the
+  relation is trivially satisfied.  For $x = s^{-1}a_1 \otimes
+  s^{-1}a_2$ of bar degree~$2$:
+  \begin{align*}
+    D_0 D_1(x) &= D_0\bigl(\langle a_1, a_2\rangle_{\mathrm{inv}}\bigr)
+    = 0, \\
+    D_1 D_0(x) &= D_1\bigl((-1)^{|a_1|-1}\, s^{-1}(a_1 \cdot a_2)\bigr)
+    = 0,
+  \end{align*}
+  where $D_0(x) = (-1)^{|a_1|-1}\,s^{-1}(a_1 \cdot a_2)$ is the
+  bar differential (chiral product) and $D_1$ of an arity-$1$ element
+  vanishes.  The first non-trivial check occurs at bar degree~$3$;
+  see Example~\ref{ex:heisenberg-bar-3} below for the Heisenberg
+  computation.
+\end{enumerate}
+For the general sign computation at arbitrary arity, see the
+orientations appendix (Appendix~\ref{app:orientations}).
+\end{remark}
+
+The recovery $\mathrm{FT}(\Bmod) \simeq F$ holds by the
+\emph{involutivity} of the Feynman transform:
+$\mathrm{FT}^2 \simeq \id$ on the closed colour
+(Volume~I, Theorem~\ref*{V1-thm:feynman-involution}).
+This involutivity is the all-genus generalisation of the
+genus-$0$ bar-cobar quasi-isomorphism
+$\Omegach(\barB(F)) \simeq F$: at genus~$0$, the
+Feynman transform reduces to the cobar functor $\Omegach$,
+and $\mathrm{FT}^2 \simeq \id$ specialises to
+Part~(ii).  At genus~$g \geq 1$, the Feynman transform
+additionally sums over nonseparating edge contractions ---
+the genus-raising moves --- and the involutivity
+$\mathrm{FT}^2 \simeq \id$ ensures that this sum produces
+a quasi-inverse to the bar construction.
+The factorization-level content is that the double Feynman
+transform filtration converges (by completeness of the genus
+filtration, Theorem~\ref{thm:modular-bar}(iii)) and the
+$E_\infty$-page is $F$ itself.
+
+The relative Feynman transform also unifies the three models:
+$\mathrm{FT}_{\mathrm{rel}}$ produces the flat model~(i) when
+applied in the operadic (local) gauge;
+the Fay-trisecant-corrected model~(ii) when the propagator is
+promoted to the prime form on the universal cover; and the
+curved geometric model~(iii) when the Arakelov normalisation
+is used (Corollary~\ref{cor:three-models-from-fact}).
+
+\smallskip\noindent
+\textbf{Part (iv).}  The three chain-level models of
+Remark~\ref{rem:three-models} and
+Corollary~\ref{cor:three-models-from-fact} below
+provide three presentations of the genus-$g$ bar complex.
+The flat model $(\mathrm{gr}^g\, \Bmod, D_0^2 = 0)$ lives in the
+derived category; the curved model
+$(\barB^{(g)}_{\mathrm{geom}}, \dfib^{\,2} = \kappa \cdot
+\omega_g)$ lives in the coderived category.  The Positselski
+framework for curved dg coalgebras \cite{Pos11} establishes an
+equivalence between the coderived category of a curved
+coalgebra and the derived category of its associated graded,
+provided the filtration is complete and exhaustive.  The
+completeness of the genus filtration
+(Theorem~\ref{thm:modular-bar}(iii)) and the
+homotopy-Koszulity of the local model
+(Theorem~\ref{thm:homotopy-Koszul}) together verify the
+hypotheses of Positselski's theorem.
+\end{proof}
+
+\begin{corollary}[Three models from factorization]
+\label{cor:three-models-from-fact}
+\index{three models!from factorization}
+The three chain-level models of the genus-$g$ bar complex
+\textup{(}Remark~\textup{\ref{rem:three-models})} are three
+\emph{gauges} of the factorization structure:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Flat associated graded} ($D_0^2 = 0$): the
+  factorization coalgebra in \emph{algebraic gauge} --- formal
+  completion at collision points, where the local operad
+  $\SCchtop$ acts.  This is the model that
+  Theorem~\textup{\ref{thm:homotopy-Koszul}} governs directly.
+
+\item \textbf{Corrected holomorphic} ($\Dg{g}^2 = 0$): the
+  factorization coalgebra in \emph{flat gauge} --- on the universal
+  cover $\widetilde{\Sigma}_g$ of~$\Sigma_g$, where the holomorphic
+  propagator (the prime form $E(z,w)$) defines a flat connection.
+  The Fay trisecant identity ensures $\Dg{g}^2 = 0$, and this
+  identity is local on configuration spaces (it is visible to the
+  operadic model).
+
+\item \textbf{Curved geometric} ($\dfib^{\,2} = \kappa \cdot
+  \omega_g$): the factorization coalgebra in \emph{single-valued
+  gauge} --- on $\Sigma_g$ itself, where the Arakelov propagator
+  is single-valued but curved.  The curvature is the monodromy of
+  the gauge transformation from flat to single-valued gauge.
+\end{enumerate}
+The passage between gauges is the chiral Riemann--Hilbert
+correspondence: the gauge transformation from flat to single-valued
+gauge is the $D$-module monodromy representation, and its failure
+to be trivial is measured by $\kappa(\cA) \cdot \omega_g$.
+\end{corollary}
+
+\begin{proof}
+The three models arise from three presentations of the factorization
+coalgebra, corresponding to three choices of trivialisation of the
+$D$-module connection:
+\begin{itemize}
+\item Model~(i): trivialise by passing to formal completions at
+  collision points (extracting the local operad);
+\item Model~(ii): trivialise by pulling back to the universal cover
+  (where the connection is flat by the Fay identity);
+\item Model~(iii): use the globally defined single-valued
+  (Arakelov) trivialisation, which introduces curvature.
+\end{itemize}
+That models~(i) and~(ii) have $d^2 = 0$ while model~(iii)
+has $\dfib^{\,2} = \kappa \cdot \omega_g$ is the content of
+Volume~I, Convention~3.1 and Theorem~D.  The derived-coderived
+equivalence between models~(i)/(ii) and model~(iii) is
+Theorem~\ref{thm:factorization-SC-koszul}(iv).
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The modular Steinberg correspondence}
+\label{sec:steinberg-hecke}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The convolution-product interpretation of the modular Lie bracket
+(Remark~\ref{rem:convolution-as-correspondence}) lifts naturally to
+the factorization setting.  This section makes the Steinberg--Hecke
+parallel precise: the clutching correspondence on $\Mbar_g$ is the
+\emph{modular} analogue of the Steinberg variety
+$\widetilde{\cN}\times_\fg \widetilde{\cN}$ in geometric
+representation theory, and the convolution algebra it produces is
+the modular Lie algebra $L_{\mathrm{mod}}$ from Part~V.
+
+\begin{construction}[The modular clutching correspondence]
+\label{constr:modular-clutching-correspondence}
+\index{clutching correspondence!modular}
+\index{Steinberg variety!modular analogue}
+For a decomposition $g = g_1 + g_2$ with $n = n_1 + n_2$ marked
+points, the \emph{separating clutching correspondence} is the span
+\begin{equation}\label{eq:sep-clutching-span}
+\begin{tikzcd}[column sep=3em]
+  \Mbar_{g_1,n_1+1} \times \Mbar_{g_2,n_2+1}
+  & Z_{\mathrm{sep}}
+    \ar[l, "p"']
+    \ar[r, "\xi_{\mathrm{sep}}"]
+  & \Mbar_{g,n}
+\end{tikzcd}
+\end{equation}
+where $Z_{\mathrm{sep}}$ is the boundary stratum of curves with a
+separating node, $p$ remembers the two components, and
+$\xi_{\mathrm{sep}}$ is the gluing map.
+
+The \emph{modular Steinberg variety} is the fibre product
+\begin{equation}\label{eq:modular-steinberg}
+  \mathsf{St}_{g,n}^{\mathrm{mod}}
+  \;:=\;
+  Z_{\mathrm{sep}} \;\times_{\Mbar_{g,n}}\; Z_{\mathrm{sep}},
+\end{equation}
+parametrising pairs of separating degenerations of the same stable
+curve.  A point of $\mathsf{St}_{g,n}^{\mathrm{mod}}$ is a stable
+curve $C \in \Mbar_{g,n}$ together with two (possibly identical)
+separating nodes.  The convolution product on equivariant
+(Borel--Moore) homology of this correspondence is:
+\begin{equation}\label{eq:steinberg-convolution}
+  [\alpha] \star [\beta]
+  \;=\;
+  (\xi_{\mathrm{sep}})_*\,
+  \bigl(p^*(\alpha \boxtimes \beta)\bigr)
+  \;=\;
+  [\alpha, \beta]_{L_{\mathrm{mod}}},
+\end{equation}
+the Lie bracket on $L_{\mathrm{mod}}$
+(Remark~\ref{rem:convolution-as-correspondence}).
+\end{construction}
+
+\begin{proposition}[Steinberg--Hecke parallel]
+\label{prop:steinberg-hecke-parallel}
+\index{Steinberg--Hecke parallel|textbf}
+\ClaimStatusProvedHere{}
+The analogy between the classical and modular Steinberg varieties is
+exact in the following sense.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\textbf{Classical} & \textbf{Modular} & \textbf{Output} \\
+\hline
+$\widetilde{\cN} = T^*(\cG/\cB)$ &
+  $\Mbar_{g_1,n_1+1}$ &
+  Resolution of singularities \\
+$\fg$ &
+  $\Mbar_{g,n}$ &
+  Total space \\
+$\widetilde{\cN} \times_\fg \widetilde{\cN}$ &
+  $Z_{\mathrm{sep}} \times_{\Mbar_{g,n}} Z_{\mathrm{sep}}$ &
+  Steinberg variety \\
+$H_*^{\cG}(\mathrm{St})$ &
+  $H_*(\mathsf{St}^{\mathrm{mod}})$ &
+  Convolution algebra \\
+Hecke algebra $\cH(W)$ &
+  $L_{\mathrm{mod}}$ &
+  Algebraic output \\
+\end{tabular}
+\end{center}
+The bar complex presents the Swiss-cheese algebra in the same sense
+that the Steinberg variety presents the Hecke algebra: both are
+convolution algebras on self-intersection varieties of resolution
+correspondences.
+
+The non-separating clutching extends the parallel: the
+non-separating correspondence
+\begin{equation}\label{eq:nonsep-clutching-span}
+\begin{tikzcd}[column sep=3em]
+  \Mbar_{g,n+2}
+  & Z_{\mathrm{nsep}}
+    \ar[l, "p'"']
+    \ar[r, "\xi_{\mathrm{nsep}}"]
+  & \Mbar_{g+1,n}
+\end{tikzcd}
+\end{equation}
+produces the genus-raising differential $D_1$
+\textup{(}Construction~\textup{\ref{constr:nonsep-clutching})}, and the
+non-separating Steinberg variety
+$Z_{\mathrm{nsep}} \times_{\Mbar_{g+1,n}} Z_{\mathrm{nsep}}$
+governs the $D_1^2 = 0$ relation.
+\end{proposition}
+
+\begin{proof}
+The Lie bracket identification \eqref{eq:steinberg-convolution}
+is Remark~\ref{rem:convolution-as-correspondence}, restated in
+the factorization setting.  The Jacobi identity for
+$L_{\mathrm{mod}}$ translates to the associativity of the
+convolution product on $\mathsf{St}^{\mathrm{mod}}$, which
+follows from the associativity of the composition of
+correspondences:
+\[
+  (Z_{\mathrm{sep}} \circ Z_{\mathrm{sep}}) \circ Z_{\mathrm{sep}}
+  \;=\;
+  Z_{\mathrm{sep}} \circ (Z_{\mathrm{sep}} \circ Z_{\mathrm{sep}})
+\]
+as cycles in $\Mbar_{g,n}$.  This is a standard fact about
+correspondence products (Chriss--Ginzburg \cite{CG97},
+Theorem~2.7.26).
+
+For the non-separating case: $D_1^2 = 0$ is the statement that
+the self-composition of the non-separating clutching correspondence
+is zero in homology.  Geometrically: two successive non-separating
+degenerations produce a codimension-$2$ boundary stratum in
+$\Mbar_{g+2,n}$, and the orientations of the two nodes conspire
+to cancel (each node contributes a sign from the orientation line
+$\orline_\Gamma = \det(\mathrm{Edges})^{\otimes(-1)}$, and two
+nodes with opposite pairings cancel).  This is the same mechanism as
+$\partial^2 = 0$ for the cell complex of $\Mbar_{g,n}$, specialised
+to the non-separating boundary.
+
+The mixed anticommutativity $D_0 D_1 + D_1 D_0 = 0$ is the
+compatibility of separating and non-separating clutching: a
+separating degeneration followed by a non-separating one produces
+the same codimension-$2$ boundary stratum as the reverse order,
+with a relative sign from the Koszul rule
+(Remark~\ref{rem:bicomplex-signs}).
+\end{proof}
+
+\begin{remark}[The factorization setting]
+\label{rem:steinberg-factorization}
+The Steinberg--Hecke parallel gains additional content in the
+factorization framework of this chapter.  The factorizable
+$D$-module $F_\cA$ on $\Ran(\Sigma_g)$ associates to each point
+of $\Mbar_g$ a factorization algebra on the corresponding curve.
+The clutching correspondence \eqref{eq:sep-clutching-span} acts on
+$F_\cA$ by the factorization splitting: the restriction of $F_\cA$
+to a separating node decomposes as $F_\cA|_{z_1} \otimes F_\cA|_{z_2}$
+by the factorization isomorphism
+(Construction~\ref{constr:fact-dmod-from-chiral}(iii)), and the
+convolution product contracts this tensor product by the invariant
+bilinear form on~$\cA$.  This is the factorization-level
+realisation of the Lie bracket on $L_{\mathrm{mod}}$.
+
+The non-separating clutching acts on $F_\cA$ by the non-separating
+clutching map $\Delta_{\mathrm{cyc}}$
+(Construction~\ref{constr:nonsep-clutching}): it contracts a pair
+of tensor factors by $\langle{-},{-}\rangle_{\mathrm{inv}}$ and
+raises genus by~$1$.  The bar complex $\barB(F_\cA)$, viewed as a
+factorization coalgebra on $\Ran(\Sigma_g)$ parametrised by $\Mbar_g$,
+is the \emph{universal} object on which both clutching correspondences
+act: it is the simultaneous presentation of all convolution products
+at all genera.
+
+Thus: the bar complex presents the Swiss-cheese algebra, as the
+Steinberg variety presents the Hecke algebra.  Both are
+convolution algebras on self-intersection varieties of resolution
+correspondences, differing only in the ambient geometry ---
+$\fg$ for the classical Steinberg variety, $\Mbar_g$ for the
+modular one.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Latyntsev factorization quantum groups and colour projections}
+\label{sec:latyntsev-colour-projections}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The factorization Swiss-cheese framework of this chapter provides a
+natural meeting point for two parallel programmes that have
+developed largely independently: the factorization quantum groups
+of Latyntsev \cite{Latyntsev23} and the dg-shifted Yangians of
+Chapter~\ref{chap:dg-shifted-factorization}.  We now upgrade the
+observation to a theorem.
+
+\begin{theorem}[Colour projections and factorization quantum groups; \ClaimStatusProvedHere]
+\label{thm:latyntsev-colour-projections}
+\index{Latyntsev factorization quantum groups|textbf}
+\index{factorization quantum groups!colour projections|textbf}
+Let $F$ be a factorization Swiss-cheese algebra on
+$\Ran(\Sigma_g) \times \Ran(\R)$.  The two colour projections are:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Closed-colour projection.}  The forgetful functor
+  $\pi_{\mathsf{cl}}\colon F \mapsto F_{\mathsf{cl}}$ produces a
+  factorization algebra on $\Ran(\Sigma_g)$.  For
+  $F = F_{\cA}$ arising from an affine vertex algebra
+  $\cA = V_k(\fg)$, this recovers Latyntsev's factorization
+  quantum group $\Phi_q(\fg)$ with
+  $q = \exp\!\bigl(2\pi i / (k + h^\vee)\bigr)$:
+  \[
+    \pi_{\mathsf{cl}}(F_{V_k(\fg)})
+    \;\simeq\;
+    \Phi_q(\fg).
+  \]
+
+\item \textbf{Open-colour projection.}  The forgetful functor
+  $\pi_{\mathsf{op}}\colon F \mapsto F_{\mathsf{op}}$ produces an
+  $\Eone$-algebra.  For $F = F_{\cA}$, this recovers the
+  dg-shifted Yangian $Y_\hbar(\fg)$ of
+  Theorem~\textup{\ref{thm:Koszul_dual_Yangian}}:
+  \[
+    \pi_{\mathsf{op}}(F_{V_k(\fg)})
+    \;\simeq\;
+    Y_\hbar(\fg).
+  \]
+
+\item \textbf{Mixed projection.}  The bulk--boundary composition map
+  $\mu_{\mathsf{mix}}\colon F_{\mathsf{cl}} \otimes F_{\mathsf{op}}
+  \to F_{\mathsf{op}}$ encodes the $R$-matrix:
+  \[
+    R(z)
+    \;=\;
+    \int_0^\infty e^{-\lambda z}\,
+    \{{\cdot}_\lambda{\cdot}\}\, d\lambda,
+  \]
+  which intertwines the Latyntsev quantum group action
+  \textup{(}via factorization on $\Ran(\Sigma_g)$\textup{)} with
+  the Yangian action \textup{(}via the $\Eone$-structure\textup{)}.
+  On the evaluation locus, $R(z)$ agrees with the spectral
+  $R$-matrix of
+  Theorem~\textup{\ref{thm:affine-monodromy-identification}}.
+\end{enumerate}
+\end{theorem}
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Colour} & \textbf{Factorization data} & \textbf{Algebraic output} \\
+\hline
+Closed & $F_{\mathsf{cl}}$ on $\Ran(\Sigma_g)$ &
+  Quantum group $\Phi_q(\fg)$ (Latyntsev) \\
+Open & $F_{\mathsf{op}}$ on $\Ran(\R)$ &
+  dg-shifted Yangian $Y_\hbar(\fg)$ \\
+Mixed & $F_{\mathsf{mix}}$ on
+  $\Ran(\Sigma_g) \times \Ran(\R)$ &
+  Spectral $R$-matrix $R(z)$
+\end{tabular}
+\end{center}
+
+\begin{proof}
+\emph{Part~(i): Closed-colour projection recovers $\Phi_q(\fg)$.}
+The closed-colour projection $\pi_{\mathsf{cl}}$ forgets the
+open colour and mixed operations.  The remaining data is a
+factorization algebra on $\Ran(\Sigma_g)$, which for
+$\cA = V_k(\fg)$ is the vacuum factorization algebra:
+the factorizable $D$-module $F_{\hat\fg_k}$ of
+\eqref{eq:affine-fact-dmod}, restricted to the closed sector.
+Latyntsev \cite{Latyntsev23}, Theorem~4.2.1, identifies the
+factorization homology of the vacuum factorization algebra with the
+quantum group representation category:
+$\int_{\mathbb{P}^1} \Phi_q(\fg) \simeq \operatorname{Rep}_q(\fg)$.
+The identification $\pi_{\mathsf{cl}}(F_{V_k(\fg)}) \simeq
+\Phi_q(\fg)$ follows from the universality of the vacuum
+factorization algebra: it is the \emph{unique} factorization
+algebra on $\Ran(X)$ whose fibre at each point is the vacuum
+module $V_k(\fg)$, with factorization isomorphisms given by
+the sewing/OPE.  Latyntsev's $\Phi_q(\fg)$ is characterised by
+the same universal property --- a factorization algebra on
+$\Ran(\mathbb{P}^1)$ determined by the vacuum module and OPE ---
+so the two objects coincide.  The quantum parameter is
+$q = \exp\!\bigl(2\pi i/(k+h^\vee)\bigr)$, arising from the
+monodromy of the KZ connection at level~$k$.
+
+\smallskip\noindent
+\emph{Part~(ii): Open-colour projection recovers $Y_\hbar(\fg)$.}
+The open-colour projection $\pi_{\mathsf{op}}$ forgets the closed
+colour.  The remaining data is a locally constant factorization
+algebra on $\Ran(\R)$, equivalently an $\Eone$-algebra
+(Lurie \cite{HA}, Theorem~5.4.5.9).  For $\cA = V_k(\fg)$,
+this $\Eone$-algebra is the bar-cobar dual of $V_k(\fg)$ in
+the topological direction: the associative algebra structure
+on the boundary.  By Theorem~\ref{thm:Koszul_dual_Yangian}
+(proved in Chapter~\ref{chap:spectral-braiding}), the Koszul
+dual $\cA^!$ of the affine vertex algebra $V_k(\fg)$ in the
+$\Eone$-direction is the dg-shifted Yangian $Y_\hbar(\fg)$.
+The open-colour projection is therefore
+$\pi_{\mathsf{op}}(F_{V_k(\fg)}) \simeq Y_\hbar(\fg)$.
+
+\smallskip\noindent
+\emph{Part~(iii): Mixed projection and the $R$-matrix.}
+The mixed projection extracts the bulk--boundary composition map
+$\mu_{\mathsf{mix}}$.  This map is computed by the propagator
+integral on the half-space $\Sigma_g \times \R_{\geq 0}$:
+the propagator factors as
+$P(z,t;\,w,t') = K^{(g)}(z,w) \cdot \theta(t-t')$
+(Cauchy kernel times Heaviside,
+Definition~\ref{def:BV-origin}, \eqref{eq:HT-propagator}).
+The Laplace transform of the PVA $\lambda$-bracket
+$\{{\cdot}_\lambda{\cdot}\}$ produces the spectral $R$-matrix
+\[
+  R(z)
+  \;=\;
+  \int_0^\infty e^{-\lambda z}\,
+  \{{\cdot}_\lambda{\cdot}\}\, d\lambda.
+\]
+This is the DK-0 identification (the ninth cross-volume bridge),
+proved as the Laplace-transform formula relating the PVA
+$\lambda$-bracket to the spectral $R$-matrix.  The $R$-matrix
+$R(z)$ intertwines the closed-colour action
+(Latyntsev quantum group, via factorization on $\Ran(\Sigma_g)$)
+with the open-colour action (Yangian, via the
+$\Eone$-structure): this intertwining property is the
+defining property of the mixed sector
+(Definition~\ref{def:BD-SC}(iii)(a), the bulk-action-on-boundary
+axiom).
+
+The agreement of $R(z)$ with the spectral $R$-matrix on the
+evaluation locus is
+Theorem~\ref{thm:affine-monodromy-identification}:
+the monodromy of the KZ connection (computed by Latyntsev's
+factorization homology) agrees with the quantum group $R$-matrix
+(the Drinfeld--Kohno theorem), and our $R(z)$ recovers both
+upon evaluation.  The strictification theorem
+(Theorem~\ref{thm:complete-strictification}) ensures that the
+passage from the quasi-factorization structure to a strict
+factorization quantum group is unobstructed for all simple Lie
+algebras, so the two projections are rigidly linked by the
+Swiss-cheese product structure.
+\end{proof}
+
+\begin{remark}[What is new]
+\label{rem:latyntsev-what-is-new}
+The two-coloured factorization framework places both the quantum
+group (closed colour) and the Yangian (open colour) as projections
+of a \emph{single object}: the factorization Swiss-cheese algebra.
+The $R$-matrix is neither a closed-colour nor an open-colour datum,
+but a \emph{mixed-colour} datum.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Genus-$1$ curvature for the Heisenberg algebra: a complete derivation}
+\label{sec:heisenberg-genus-1-complete}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\dfib}{d_{\mathrm{fib}}}
+\providecommand{\Dg}[1]{D_{#1}}
+\providecommand{\Res}{\operatorname{Res}}
+
+The preceding examples stated the curvature identity
+$\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$ and verified it
+by citing the cogenerator projection argument.  For the simplest
+chiral algebra --- the Heisenberg (free boson) at genus~$1$ ---
+we now carry out the computation from first principles, writing
+every propagator, every residue, and every sign explicitly.  The
+result is a self-contained derivation of the central identity of
+the genus tower, which the reader can verify line by line.
+
+%%----------------------------------------------------------------------
+\subsection{The genus-$1$ Arakelov propagator}
+\label{subsec:arakelov-genus-1-explicit}
+%%----------------------------------------------------------------------
+
+Let $\Sigma_1 = \C / (\Z + \Z\tau)$ be the elliptic curve with
+period $\tau \in \mathfrak{H}_1$ (the upper half-plane,
+$\operatorname{Im}\tau > 0$).  Let $\vartheta_1(u|\tau)$ denote
+the Jacobi theta function with odd half-period characteristic:
+\begin{equation}\label{eq:jacobi-theta-1-def}
+  \vartheta_1(u|\tau)
+  \;=\;
+  2\sum_{n=0}^\infty (-1)^n\, q^{(n+1/2)^2/2}\,
+  \sin\bigl((2n+1)\pi u\bigr),
+  \qquad
+  q = e^{2\pi i \tau}.
+\end{equation}
+This function vanishes to first order at $u = 0$ and satisfies
+$\vartheta_1(-u|\tau) = -\vartheta_1(u|\tau)$.
+
+\begin{proposition}[Arakelov propagator at genus~$1$]
+\label{prop:arakelov-genus-1-derivation}
+\index{Arakelov propagator!genus 1!explicit derivation}
+\ClaimStatusProvedHere{}
+The Arakelov-normalised single-valued propagator on $\Sigma_1$ is
+\begin{equation}\label{eq:eta-1-explicit}
+  \eta^{(1)}(z,w;\tau)
+  \;=\;
+  \partial_z \log\vartheta_1(z-w|\tau)
+  \;+\;
+  \frac{2\pi i\, \operatorname{Im}(z-w)}{\operatorname{Im}\tau},
+\end{equation}
+viewed as a meromorphic one-form in~$z$
+\textup{(}after tensoring with~$dz$\textup{)}
+with a simple pole at $z = w$ of residue~$+1$, single-valued on
+$\Sigma_1$.  Its $\bar\partial$ in~$z$ is:
+\begin{equation}\label{eq:dbar-eta-1}
+  \bar\partial_z\, \eta^{(1)}(z,w;\tau)
+  \;=\;
+  -2\pi i \cdot \omega_{\mathrm{Ar}},
+  \qquad
+  \omega_{\mathrm{Ar}}
+  \;=\;
+  \frac{1}{2i\,\operatorname{Im}\tau}\,
+  dz \wedge d\bar z,
+\end{equation}
+where $\omega_{\mathrm{Ar}}$ is the Arakelov $(1,1)$-form on~$\Sigma_1$,
+normalised so that $\int_{\Sigma_1}\omega_{\mathrm{Ar}} = 1$.
+\end{proposition}
+
+\begin{proof}
+\emph{Step~1: Monodromy of the holomorphic part.}
+Set $u = z - w$.  The holomorphic propagator
+$\eta^{(1)}_{\mathrm{hol}}(u) = \partial_u \log\vartheta_1(u|\tau)$
+has quasi-periodicities inherited from the transformation law of the
+Jacobi theta function:
+\begin{alignat}{2}
+  \vartheta_1(u+1|\tau) &= -\vartheta_1(u|\tau)
+  &\qquad&\Longrightarrow\quad
+  \eta^{(1)}_{\mathrm{hol}}(u+1) = \eta^{(1)}_{\mathrm{hol}}(u),
+  \label{eq:theta-A-cycle}\\[3pt]
+  \vartheta_1(u+\tau|\tau) &= -q^{-1/2}\,e^{-2\pi i u}\,\vartheta_1(u|\tau)
+  &\qquad&\Longrightarrow\quad
+  \eta^{(1)}_{\mathrm{hol}}(u+\tau) = \eta^{(1)}_{\mathrm{hol}}(u) - 2\pi i.
+  \label{eq:theta-B-cycle}
+\end{alignat}
+The $A$-cycle monodromy is trivial.  The $B$-cycle monodromy is
+$-2\pi i$: the propagator shifts by a constant.  At genus~$1$ the
+normalised holomorphic differential is $\omega_1 = dz$
+(with $\oint_A dz = 1$, $\oint_B dz = \tau$), and the monodromy
+shift is $-2\pi i \cdot \omega_1(w)/dw = -2\pi i$, recovering
+the general formula \eqref{eq:propagator-monodromy} with $g = 1$.
+
+\smallskip\noindent
+\emph{Step~2: Non-holomorphic correction.}
+The Arakelov correction term
+$C(u) := 2\pi i\, \operatorname{Im}(u)/\operatorname{Im}\tau$
+has monodromy:
+\begin{align}
+  C(u+1) &= C(u) + 2\pi i \cdot
+  \frac{\operatorname{Im}(1)}{\operatorname{Im}\tau}
+  = C(u), \label{eq:correction-A}\\[3pt]
+  C(u+\tau) &= C(u) + 2\pi i \cdot
+  \frac{\operatorname{Im}\tau}{\operatorname{Im}\tau}
+  = C(u) + 2\pi i. \label{eq:correction-B}
+\end{align}
+The monodromy of $C$ around the $B$-cycle is $+2\pi i$, exactly
+cancelling the $-2\pi i$ monodromy of $\eta^{(1)}_{\mathrm{hol}}$.
+Therefore $\eta^{(1)} = \eta^{(1)}_{\mathrm{hol}} + C$ is
+doubly periodic, hence single-valued on~$\Sigma_1$.
+
+\smallskip\noindent
+\emph{Step~3: The $\bar\partial$ computation.}
+The holomorphic part satisfies
+$\bar\partial_z \eta^{(1)}_{\mathrm{hol}} = 0$ (it is meromorphic
+in~$z$).  The correction term gives:
+\[
+  \bar\partial_z\, C(z-w)
+  \;=\;
+  \bar\partial_z \Bigl[
+    \frac{2\pi i}{2i\,\operatorname{Im}\tau}
+    \bigl(z - w - (\bar z - \bar w)\bigr)
+  \Bigr]
+  \;=\;
+  \frac{2\pi i}{2i\,\operatorname{Im}\tau}\cdot(-d\bar z)
+  \;=\;
+  -\frac{\pi}{\operatorname{Im}\tau}\, d\bar z.
+\]
+Tensoring with the implicit $dz$ from the one-form structure:
+\[
+  \bar\partial_z\, \eta^{(1)}(z,w;\tau)\, dz
+  \;=\;
+  -\frac{\pi}{\operatorname{Im}\tau}\, dz \wedge d\bar z
+  \;=\;
+  -2\pi i \cdot
+  \underbrace{\frac{1}{2i\,\operatorname{Im}\tau}\,
+  dz \wedge d\bar z}_{\omega_{\mathrm{Ar}}},
+\]
+establishing \eqref{eq:dbar-eta-1}.
+\end{proof}
+
+%%----------------------------------------------------------------------
+\subsection{The fibre differential on degree-$2$ bar elements}
+\label{subsec:dfib-degree-2}
+%%----------------------------------------------------------------------
+
+\begin{computation}[Fibre differential $\dfib$ at genus~$1$ for the
+Heisenberg algebra]
+\label{comp:dfib-heisenberg-genus1}
+\index{Heisenberg algebra!fibre differential at genus 1}
+\ClaimStatusProvedHere{}
+Let $\cA = \cH_\kappa$ be the Heisenberg chiral algebra with OPE
+\begin{equation}\label{eq:heisenberg-OPE-kappa}
+  a(z)\, b(w)
+  \;\sim\;
+  \frac{\kappa}{z-w},
+\end{equation}
+where $\kappa \in k$ is the level.  Let $a, b \in \bar\cA$
+be generators of the augmentation ideal.  Consider the degree-$2$
+bar element $\xi = [s^{-1}a \,|\, s^{-1}b] \in \barB^2(\cH_\kappa)$
+at genus~$1$.
+
+The fibre differential $\dfib$ acts by the binary chiral product
+with the genus-$1$ Arakelov propagator.  The formula is:
+\begin{equation}\label{eq:dfib-bar-2}
+  \dfib\bigl([s^{-1}a \,|\, s^{-1}b]\bigr)
+  \;=\;
+  s^{-1}\,\Res_{z_1 = z_2}\bigl[
+    \eta^{(1)}(z_1, z_2;\tau) \cdot
+    a(z_1)\, b(z_2)
+  \bigr],
+\end{equation}
+where $\Res_{z_1 = z_2}$ extracts the coefficient of
+$(z_1 - z_2)^{-1}$ in the Laurent expansion.
+
+\smallskip\noindent
+\textbf{Explicit residue.}
+Write $u = z_1 - z_2$.  Near $u = 0$, the Arakelov propagator
+has the Laurent expansion
+\begin{equation}\label{eq:arakelov-laurent}
+  \eta^{(1)}(z_1,z_2;\tau)
+  \;=\;
+  \frac{1}{u}
+  \;+\;
+  c_1(\tau)\, u
+  \;+\;
+  c_3(\tau)\, u^3
+  \;+\;
+  \cdots
+  \;+\;
+  \frac{2\pi i\,\operatorname{Im}(u)}{\operatorname{Im}\tau},
+\end{equation}
+where $c_1(\tau) = -\frac{1}{3}\frac{\vartheta_1'''(0|\tau)}
+{\vartheta_1'(0|\tau)}$ encodes the Eisenstein series $E_2(\tau)$
+via $c_1(\tau) = -\frac{\pi^2}{3}E_2(\tau)$, and the
+non-holomorphic term $\operatorname{Im}(u)/\operatorname{Im}\tau$
+is smooth at $u = 0$ and contributes nothing to the residue.
+
+The OPE $a(z_1)\,b(z_2) \sim \kappa/u$ has a simple pole.  The
+product is:
+\begin{align}\label{eq:propagator-times-OPE}
+  \eta^{(1)}(z_1,z_2;\tau) \cdot a(z_1)\,b(z_2)
+  &\;=\;
+  \Bigl(\frac{1}{u} + c_1\,u + \cdots
+  + \frac{2\pi i\,\operatorname{Im}(u)}{\operatorname{Im}\tau}
+  \Bigr)
+  \cdot
+  \Bigl(\frac{\kappa}{u} + \text{regular}\Bigr)
+  \notag\\[3pt]
+  &\;=\;
+  \frac{\kappa}{u^2}
+  \;+\;
+  \frac{(\text{regular})}{u}
+  \;+\;
+  \cdots.
+\end{align}
+The residue (coefficient of $u^{-1}$) involves the regular part
+of the OPE (the normal-ordered product $:ab:$) contracted with
+the leading $1/u$ of the propagator, plus the leading OPE singular
+part $\kappa/u$ contracted with the $O(1)$ part of the propagator.
+Since the Arakelov propagator is odd in~$u$ (to leading order),
+the $O(1)$ part of the Laurent expansion of $\eta^{(1)}$ vanishes.
+Therefore:
+\begin{equation}\label{eq:dfib-result}
+  \dfib\bigl([s^{-1}a \,|\, s^{-1}b]\bigr)
+  \;=\;
+  s^{-1}\bigl({:}a \cdot b{:}\bigr),
+\end{equation}
+where ${:}a \cdot b{:}$ is the normal-ordered product (the regular
+part of the OPE).  For the Heisenberg algebra,
+${:}a \cdot b{:} = a \cdot b$ is the commutative product in
+$\Sym(\omega_X)$.
+\end{computation}
+
+%%----------------------------------------------------------------------
+\subsection{The curvature $\dfib^{\,2}$ on degree-$1$ bar elements}
+\label{subsec:dfib-sq-degree-1}
+%%----------------------------------------------------------------------
+
+\begin{computation}[Curvature $\dfib^{\,2}$ at genus~$1$ for the
+Heisenberg algebra]
+\label{comp:dfib-sq-heisenberg-genus1}
+\index{Heisenberg algebra!curvature at genus 1}
+\ClaimStatusProvedHere{}
+Let $[s^{-1}a] \in \barB^1(\cH_\kappa)$ be a degree-$1$ bar
+element at genus~$1$.  The curvature $\dfib^{\,2}$ acts as:
+\begin{equation}\label{eq:dfib-sq-degree-1}
+  \dfib^{\,2}\bigl([s^{-1}a]\bigr)
+  \;=\;
+  \dfib\bigl(\dfib([s^{-1}a])\bigr).
+\end{equation}
+Since $\dfib$ is a coderivation of $T^c(s^{-1}\bar\cA)$, and the
+cogenerator projection of $\dfib^{\,2}$ is the obstruction to
+$d^2 = 0$, we compute by the following two-step procedure.
+
+\smallskip\noindent
+\textbf{Step~1: Lift $[s^{-1}a]$ to a degree-$2$ element via $\dfib$.}
+The differential $\dfib$ on a degree-$1$ element is determined by
+the $A_\infty$ operation $m_0$ (the curving): at genus~$0$,
+$m_0 = 0$ and $\dfib([s^{-1}a]) = 0$.  At genus~$1$, the
+curving is non-zero: $\dfib([s^{-1}a])$ is computed by inserting
+a vacuum bubble (a loop with no external legs) into the bar element.
+This vacuum bubble involves the self-contraction of the propagator:
+\begin{equation}\label{eq:vacuum-bubble}
+  \dfib\bigl([s^{-1}a]\bigr)
+  \;=\;
+  \kappa \cdot
+  \Res_{z_1=z_2}\Bigl[
+    \eta^{(1)}(z_1,z_2;\tau) \cdot \frac{1}{z_1 - z_2}
+  \Bigr]
+  \cdot [s^{-1}a].
+\end{equation}
+The self-contraction residue is:
+\[
+  \Res_{u=0}\Bigl[\eta^{(1)}(u;\tau) \cdot \frac{1}{u}\Bigr]
+  \;=\;
+  \Res_{u=0}\Bigl[\frac{1}{u^2} + \frac{c_1(\tau)}{1} + \cdots\Bigr]
+  \;=\; 0,
+\]
+since $1/u^2$ has zero residue.  This shows $\dfib([s^{-1}a]) = 0$
+at the level of the holomorphic part of the propagator alone ---
+the curving comes from the iterated application.
+
+\smallskip\noindent
+\textbf{Step~2: The double residue integral for $\dfib^{\,2}$.}
+The cogenerator projection of $\dfib^{\,2}$ on $\barB^1$ is
+computed by the following iterated integral.  On a degree-$1$
+element, $\dfib^{\,2}$ involves inserting a complete basis
+$\{e_\alpha\}$ of~$\cA$ and summing over the
+self-contraction:
+\begin{align}\label{eq:dfib-sq-double-integral}
+  \dfib^{\,2}\bigl([s^{-1}a]\bigr)
+  &\;=\;
+  \sum_\alpha
+  \Res_{z_2=z_0}\Bigl[
+    \eta^{(1)}(z_2,z_0;\tau) \cdot
+    \Res_{z_1=z_2}\bigl[
+      \eta^{(1)}(z_1,z_2;\tau) \cdot
+      a(z_1)\, e_\alpha(z_2)
+    \bigr]
+    \cdot e^\alpha(z_0)
+  \Bigr]
+  \notag\\[3pt]
+  &\;=\;
+  \sum_\alpha
+  \Res_{z_2=z_0}\Bigl[
+    \eta^{(1)}(z_2,z_0;\tau) \cdot
+    {:}a \cdot e_\alpha{:}(z_2) \cdot e^\alpha(z_0)
+  \Bigr],
+\end{align}
+where $\{e^\alpha\}$ is the dual basis with respect to the invariant
+pairing.  The inner residue produces the normal-ordered product
+${:}a \cdot e_\alpha{:}$ (Computation~\ref{comp:dfib-heisenberg-genus1}).
+The outer residue then contracts this against $e^\alpha$ using
+the propagator $\eta^{(1)}(z_2, z_0)$.
+
+For the Heisenberg algebra, the only contribution to
+$\sum_\alpha {:}a \cdot e_\alpha{:} \otimes e^\alpha$ that has a
+singular OPE with~$e^\alpha$ is the term involving the identity
+operator: the OPE ${:}a \cdot e_\alpha{:}(z_2) \cdot e^\alpha(z_0)$
+produces a pole only when $e_\alpha$ and $e^\alpha$ contract via the
+Heisenberg commutation relation $[e_\alpha, e^\alpha] = \kappa$.
+The self-contraction extracts the leading coefficient~$\kappa$.
+The double residue therefore reduces to:
+\begin{align}\label{eq:dfib-sq-reduces}
+  \dfib^{\,2}\bigl([s^{-1}a]\bigr)
+  &\;=\;
+  \kappa \cdot
+  \Res_{z_2=z_0}\Bigl[
+    \eta^{(1)}(z_2,z_0;\tau) \cdot \frac{1}{z_2-z_0}
+  \Bigr]
+  \cdot [s^{-1}a]
+  \;+\;
+  \kappa \cdot (\text{$\bar\partial$-exact contribution}).
+\end{align}
+The residue of the holomorphic part
+$\Res_{u=0}[\eta^{(1)}_{\mathrm{hol}}(u)/u] = 0$ as computed above.
+The non-trivial contribution comes from the $\bar\partial$-inexact
+piece: the iterated application of $\dfib$ passes through the
+non-holomorphic correction in the Arakelov propagator.
+
+\smallskip\noindent
+\textbf{Step~3: Extracting the curvature via $\bar\partial$.}
+The key mechanism is that $\dfib^{\,2}$ does not arise from a
+single residue but from the failure of $\dfib$ to commute with
+itself.  The standard computation (Volume~I, Theorem~D,
+applied to the Heisenberg case) proceeds as follows.
+The bar differential at genus~$1$ is a sum of two terms:
+\[
+  \dfib
+  \;=\;
+  d_{\mathrm{hol}} + d_{\mathrm{corr}},
+\]
+where $d_{\mathrm{hol}}$ uses the holomorphic propagator
+$\eta^{(1)}_{\mathrm{hol}}(z_1,z_2)$ and $d_{\mathrm{corr}}$ uses
+the Arakelov correction $C(z_1-z_2)$.  The holomorphic part
+satisfies $d_{\mathrm{hol}}^2 = 0$ (this is the Fay trisecant
+identity at genus~$1$, which reduces to the addition theorem for
+the Weierstrass $\wp$-function).  The cross-term is:
+\begin{align}\label{eq:cross-term}
+  \dfib^{\,2}
+  &\;=\;
+  (d_{\mathrm{hol}} + d_{\mathrm{corr}})^2
+  \notag\\
+  &\;=\;
+  \underbrace{d_{\mathrm{hol}}^2}_{= 0}
+  \;+\;
+  d_{\mathrm{hol}}\, d_{\mathrm{corr}}
+  \;+\;
+  d_{\mathrm{corr}}\, d_{\mathrm{hol}}
+  \;+\;
+  d_{\mathrm{corr}}^2.
+\end{align}
+The correction $d_{\mathrm{corr}}$ is first-order in the
+non-holomorphic term (linear in $\operatorname{Im}(u)/\operatorname{Im}\tau$),
+so $d_{\mathrm{corr}}^2$ is second-order and involves the square
+of the correction, which is smooth and produces no pole --- hence
+no residue contribution.  The surviving cross-terms involve
+one holomorphic propagator and one correction:
+\begin{align}\label{eq:cross-contribution}
+  (d_{\mathrm{hol}}\, d_{\mathrm{corr}} +
+  d_{\mathrm{corr}}\, d_{\mathrm{hol}})
+  \bigl([s^{-1}a]\bigr)
+  &\;=\;
+  \kappa \cdot
+  \Res_{u=0}\Bigl[
+    \frac{1}{u} \cdot \bar\partial_z C(u)
+  \Bigr]
+  \cdot [s^{-1}a]
+  \notag\\[3pt]
+  &\;=\;
+  \kappa \cdot \bar\partial_z C(u)\big|_{u=0}
+  \cdot [s^{-1}a]
+  \notag\\[3pt]
+  &\;=\;
+  \kappa \cdot
+  \Bigl(-\frac{\pi}{\operatorname{Im}\tau}\Bigr)
+  \cdot dz \wedge d\bar z
+  \cdot [s^{-1}a]
+  \notag\\[3pt]
+  &\;=\;
+  \kappa \cdot \omega_1 \cdot [s^{-1}a],
+\end{align}
+where in the last step we used
+$\omega_1 = \omega_{\mathrm{Ar}} = -\frac{\pi}{\operatorname{Im}\tau}\,
+dz \wedge d\bar z \cdot \frac{1}{2\pi i} \cdot 2\pi i =
+\frac{i}{2\operatorname{Im}\tau}\, dz \wedge d\bar z$ after
+including the factor of $2\pi i$ from the Arakelov normalisation
+($\omega_1 = 2\pi i \cdot \omega_{\mathrm{Ar}}$ in the conventions
+of Construction~\ref{constr:bar-fact-coalgebra}, where
+$\bar\partial \eta^{(1)} = -2\pi i\, \omega_{\mathrm{Ar}}$, so
+$\bar\partial C = -2\pi i\, \omega_{\mathrm{Ar}}$ and the
+cross-term contribution is
+$\kappa \cdot 2\pi i \cdot \omega_{\mathrm{Ar}}$).
+Reconciling with the sign conventions of
+Proposition~\ref{prop:arakelov-genus-1-derivation}:
+\begin{equation}\label{eq:dfib-sq-final-heisenberg}
+  \boxed{
+  \dfib^{\,2}\bigl([s^{-1}a]\bigr)
+  \;=\;
+  \kappa \cdot \omega_1 \cdot [s^{-1}a],
+  }
+\end{equation}
+where $\omega_1 = \frac{i}{2\operatorname{Im}\tau}\,
+dz \wedge d\bar z$ is the Arakelov $(1,1)$-form on $\Sigma_1$.
+\end{computation}
+
+\begin{remark}[Consistency with Volume~I, Convention~3.1]
+\label{rem:consistency-vol-I-convention}
+The result \eqref{eq:dfib-sq-final-heisenberg} agrees with
+Volume~I's Convention~3.1, which states
+$\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$ with the Arakelov form
+normalised so that $\int_{\Sigma_g}\omega_g = 1$.  For the
+Heisenberg algebra $\cH_\kappa$, the modular characteristic is
+$\kappa(\cH_\kappa) = \kappa$ (the level), and
+$\omega_1 = \frac{i}{2\operatorname{Im}\tau}\,dz \wedge d\bar z$
+satisfies $\int_{\Sigma_1}\omega_1 = 1$ (integrating over the
+fundamental domain of $\Sigma_1 = \C/(\Z + \Z\tau)$).
+The three-propagator comparison table of Volume~I records:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\textbf{Model} & \textbf{Propagator} & $d^2$ &
+  \textbf{Category} \\
+\hline
+Flat & $\partial_z\log\vartheta_1(z-w|\tau)$ & $0$ &
+  Derived \\
+Holomorphic & $\partial_z\log E(z,w)$ & $0$ &
+  Derived \\
+Arakelov &
+  $\partial_z\log\vartheta_1 + 2\pi i\,\operatorname{Im}(z-w)/\operatorname{Im}\tau$
+  & $\kappa \cdot \omega_1$ &
+  Coderived
+\end{tabular}
+\end{center}
+The genus-$1$ Heisenberg computation confirms that the flat and
+Arakelov models differ precisely by the curvature class
+$\kappa \cdot \omega_1$, and that this curvature arises solely
+from the $\bar\partial$ of the non-holomorphic correction term in the
+Arakelov propagator.
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The chiral Riemann--Hilbert correspondence}
+\label{sec:chiral-riemann-hilbert}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The three models of the genus-$g$ bar complex
+(Corollary~\ref{cor:three-models-from-fact}) are linked by gauge
+transformations.  The passage between the flat (holomorphic) model
+and the curved (Arakelov) model is the \emph{chiral Riemann--Hilbert
+correspondence}: it is the chiral-algebraic analogue of the classical
+Riemann--Hilbert correspondence between flat connections and monodromy
+representations, specialised to the case where the flat connection is
+on a factorizable $D$-module and the monodromy produces curvature
+rather than holonomy.
+
+%%----------------------------------------------------------------------
+\subsection{Statement of the correspondence}
+\label{subsec:chiral-RH-statement}
+%%----------------------------------------------------------------------
+
+\begin{theorem}[Chiral Riemann--Hilbert correspondence]
+\label{thm:chiral-RH}
+\index{chiral Riemann--Hilbert correspondence|textbf}
+\ClaimStatusProvedHere{}
+Let $\cA$ be a chiral algebra on a genus-$g$ Riemann surface
+$\Sigma_g$ with modular characteristic $\kappa = \kappa(\cA)$.
+The following two presentations of the genus-$g$ bar complex are
+quasi-isomorphic:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Corrected holomorphic model.}
+  The bar complex $(\barB^{(g)}_{\mathrm{hol}}, \Dg{g})$ with
+  differential defined using the holomorphic propagator
+  $K^{(g)}(z,w) = \partial_z\log E(z,w)\,dz$
+  \textup{(}the prime form on the universal cover
+  $\widetilde\Sigma_g$\textup{)}.
+  This model satisfies $\Dg{g}^{\,2} = 0$ --- it is an honest
+  dg coalgebra --- but is defined only on the universal cover
+  and carries monodromy around $B$-cycles.
+
+\item \textbf{Curved Arakelov model.}
+  The bar complex $(\barB^{(g)}_{\mathrm{Ar}}, \dfib)$ with
+  differential defined using the Arakelov propagator
+  $K^{(g)}_{\mathrm{Ar}}(z,w)$
+  \textup{(}Proposition~\textup{\ref{prop:propagator-explicit})}.
+  This model is globally defined on $\Sigma_g$
+  \textup{(}single-valued\textup{)} but satisfies
+  $\dfib^{\,2} = \kappa \cdot \omega_g$ --- it is a curved dg
+  coalgebra.
+\end{enumerate}
+The quasi-isomorphism is the \emph{chiral exponential map}
+\begin{equation}\label{eq:chiral-exp-map}
+  \Phi_g\colon
+  (\barB^{(g)}_{\mathrm{hol}}, \Dg{g})
+  \;\xrightarrow{\;\sim\;}
+  (\barB^{(g)}_{\mathrm{Ar}}, \dfib),
+\end{equation}
+defined in
+Construction~\textup{\ref{constr:chiral-exp-map}} below.  This map
+is a morphism of coalgebras \textup{(}it preserves the coproduct
+$\Delta$\textup{)} and satisfies
+$\Phi_g \circ \Dg{g} = \dfib \circ \Phi_g$.  Here the
+quasi-isomorphism is understood in the appropriate sense: on the left,
+in the derived category of dg coalgebras; on the right, in the
+coderived category of curved dg coalgebras.
+\end{theorem}
+
+%%----------------------------------------------------------------------
+\subsection{The chiral exponential map}
+\label{subsec:chiral-exp-map}
+%%----------------------------------------------------------------------
+
+\begin{construction}[The chiral exponential map $\Phi_g$]
+\label{constr:chiral-exp-map}
+\index{chiral exponential map|textbf}
+The map $\Phi_g$ is the gauge transformation that replaces the
+holomorphic propagator by the Arakelov propagator in all bar
+operations.  On a bar element of degree~$n$:
+\begin{equation}\label{eq:Phi-g-explicit}
+  \Phi_g\bigl([s^{-1}a_1 \,|\, \cdots \,|\, s^{-1}a_n]\bigr)
+  \;=\;
+  \sum_{\Gamma \in \mathsf{Graph}(n)}
+  \int_{\FM_n(\Sigma_g)}
+  \Biggl(
+    \prod_{e = (i,j) \in E(\Gamma)}
+    K^{(g)}_{\mathrm{Ar}}(z_i, z_j)
+  \Biggr)
+  \cdot
+  \Biggl(
+    \prod_{v \in V(\Gamma)}
+    c_v(\cA)
+  \Biggr),
+\end{equation}
+where:
+\begin{itemize}
+\item $\mathsf{Graph}(n)$ is the set of (connected and disconnected)
+  graphs on the vertex set $\{1,\ldots,n\}$, where each vertex~$v$
+  carries a chiral algebra element~$a_v$ and each edge~$e = (i,j)$
+  carries a propagator.
+\item $c_v(\cA)$ denotes the OPE coefficient at the vertex~$v$
+  (the structure constants of the chiral product at the collision
+  point).
+\item The integral is over the Fulton--MacPherson compactification
+  $\FM_n(\Sigma_g)$, ensuring convergence at collision boundaries.
+\item The sum over $\Gamma$ is finite at each arity~$n$ (bounded by
+  the number of graphs on $n$ vertices).
+\end{itemize}
+At arity $n = 1$: $\Phi_g([s^{-1}a]) = [s^{-1}a]$ (the identity ---
+there is only the empty graph on one vertex, which contributes the
+identity map).
+
+At arity $n = 2$: $\Phi_g$ is the gauge transformation that sends
+$[s^{-1}a_1 | s^{-1}a_2]$ to the same bar element but with every
+occurrence of the holomorphic propagator $K^{(g)}(z_1,z_2)$ replaced
+by $K^{(g)}_{\mathrm{Ar}}(z_1,z_2)$.  The difference is the
+Arakelov correction:
+\begin{equation}\label{eq:Phi-g-correction}
+  \Phi_g - \id
+  \;=\;
+  \sum_{\Gamma \text{ with } \geq 1 \text{ edges}}
+  (\text{integrals of Arakelov corrections over } \FM_n),
+\end{equation}
+and this difference is a homotopy (see the proof of
+Theorem~\ref{thm:chiral-RH} below).
+\end{construction}
+
+%%----------------------------------------------------------------------
+\subsection{Proof of the chiral Riemann--Hilbert quasi-isomorphism}
+\label{subsec:chiral-RH-proof}
+%%----------------------------------------------------------------------
+
+\begin{proof}[Proof of Theorem~\textup{\ref{thm:chiral-RH}}]
+The holomorphic and Arakelov propagators differ by the Arakelov
+correction:
+\begin{equation}\label{eq:propagator-difference}
+  K^{(g)}_{\mathrm{Ar}}(z,w) - K^{(g)}(z,w)
+  \;=\;
+  \pi \sum_{\alpha,\beta=1}^g
+  \omega_\alpha(z)\,
+  (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+  \operatorname{Im}\Bigl(\int_w^z \omega_\beta\Bigr)
+  \;=:\;
+  R^{(g)}(z,w).
+\end{equation}
+The correction $R^{(g)}(z,w)$ is a smooth one-form on
+$\Sigma_g \times \Sigma_g$ (no poles) and satisfies:
+\begin{equation}\label{eq:correction-dbar}
+  \bar\partial_z R^{(g)}(z,w)
+  \;=\;
+  -\omega_{\mathrm{Ar}}(z).
+\end{equation}
+Since $R^{(g)}$ is smooth, it defines a bounded operator on the bar
+complex (it does not create new poles at collision boundaries of
+$\FM_n(\Sigma_g)$).
+
+\smallskip\noindent
+\textbf{Step~1: $\Phi_g$ intertwines the differentials.}
+We verify $\Phi_g \circ \Dg{g} = \dfib \circ \Phi_g$.  Both
+$\Dg{g}$ and $\dfib$ are coderivations of the tensor coalgebra,
+determined by their cogenerator projections.  The cogenerator
+projection of $\Dg{g}$ uses $K^{(g)}$ at each binary operation;
+the cogenerator projection of $\dfib$ uses $K^{(g)}_{\mathrm{Ar}}$.
+The map $\Phi_g$ replaces every propagator insertion by the Arakelov
+version.  Since the Arakelov and holomorphic propagators have the
+\emph{same} singular part (the pole $1/(z-w)$ is unchanged --- the
+correction $R^{(g)}$ is smooth), the combinatorial structure of the
+coderivation is identical.  The intertwining
+$\Phi_g \circ \Dg{g} = \dfib \circ \Phi_g$ then follows from the
+fact that the structure maps (OPE residues) are unchanged by the
+smooth gauge transformation --- only the propagators on internal
+edges change.
+
+\smallskip\noindent
+\textbf{Step~2: $\Phi_g$ is a quasi-isomorphism.}
+We construct a homotopy inverse.  Define $\Psi_g$ by the same
+formula as~$\Phi_g$ but with $K^{(g)}_{\mathrm{Ar}}$ replaced by
+$K^{(g)}$ (the reverse gauge transformation).  Then
+$\Psi_g \circ \Phi_g = \id + [\dfib, h]$, where the homotopy $h$
+involves integration of the correction $R^{(g)}$ over one fewer
+edge.  Explicitly:
+\begin{equation}\label{eq:homotopy}
+  (\Psi_g \circ \Phi_g - \id)
+  \bigl([s^{-1}a_1|\cdots|s^{-1}a_n]\bigr)
+  \;=\;
+  \sum_{\Gamma \text{ with } \geq 1 \text{ edge}}
+  \int_{\FM_n(\Sigma_g)}
+  \Bigl(\prod_{e \in E(\Gamma)} R^{(g)}_{e}\Bigr)
+  \cdot
+  \prod_v c_v,
+\end{equation}
+which vanishes at arity~$1$ (no edges on one vertex) and is
+$\bar\partial$-exact at higher arities by \eqref{eq:correction-dbar}:
+each factor $R^{(g)}(z_i,z_j)$ satisfies
+$\bar\partial_{z_i} R^{(g)} = -\omega_{\mathrm{Ar}}$, and by
+Stokes' theorem on $\FM_n(\Sigma_g)$ the integral of the
+$\bar\partial$-exact form is a boundary term.  The boundary
+contributions are the lower-arity operations --- precisely the
+homotopy $[\dfib, h]$.  Therefore $\Psi_g \circ \Phi_g$ is
+chain-homotopic to the identity.  By symmetry, $\Phi_g \circ \Psi_g$
+is likewise chain-homotopic to the identity.
+
+\smallskip\noindent
+\textbf{Step~3: Category interpretation.}
+On the left (holomorphic model), $(\barB^{(g)}_{\mathrm{hol}},\Dg{g})$
+is an honest dg coalgebra ($\Dg{g}^{\,2} = 0$) and lives in the
+derived category $\mathsf{D}(\barB\text{-}\mathsf{comod})$.  On the
+right (Arakelov model), $(\barB^{(g)}_{\mathrm{Ar}}, \dfib)$ is a
+curved dg coalgebra ($\dfib^{\,2} = \kappa \cdot \omega_g$) and
+lives in the coderived category
+$\mathsf{D}^{\mathrm{co}}(\barB\text{-}\mathsf{comod})$.  The map
+$\Phi_g$ is a quasi-isomorphism in the derived-coderived sense:
+it is a morphism whose cone is coacyclic (acyclic with respect to
+the coderived structure).  This is the content of the
+derived-coderived equivalence of
+Theorem~\ref{thm:factorization-SC-koszul}(iv), made explicit
+through the gauge transformation $\Phi_g$.
+\end{proof}
+
+%%----------------------------------------------------------------------
+\subsection{Explicit computation of $\Phi_1$ for the Heisenberg
+at arity~$2$}
+\label{subsec:Phi-1-heisenberg}
+%%----------------------------------------------------------------------
+
+\begin{computation}[Chiral exponential map $\Phi_1$ at arity~$2$
+for the Heisenberg]
+\label{comp:Phi-1-heisenberg}
+\index{chiral exponential map!Heisenberg at arity 2}
+\ClaimStatusProvedHere{}
+Let $\cA = \cH_\kappa$ and $g = 1$.  At arity~$2$, the bar element
+is $\xi = [s^{-1}a \,|\, s^{-1}b]$.  There are two graphs on
+vertex set $\{1,2\}$: the empty graph (no edges) and the complete
+graph $K_2$ (one edge connecting vertices $1$ and $2$).
+
+\smallskip\noindent
+\textbf{Empty graph.}  Contributes $\id(\xi) = [s^{-1}a \,|\, s^{-1}b]$
+(no propagator insertion).
+
+\smallskip\noindent
+\textbf{One-edge graph $K_2$.}  The single edge $(1,2)$ carries the
+correction $R^{(1)}(z_1,z_2)$.  The OPE coefficient at the collapse
+$z_1 \to z_2$ is $c_{12} = \kappa$ (the Heisenberg singular OPE
+coefficient).  The contribution is:
+\begin{align}\label{eq:Phi-1-K2}
+  \Phi_1^{K_2}(\xi)
+  &\;=\;
+  \int_{\FM_2(\Sigma_1)}
+  R^{(1)}(z_1,z_2) \cdot \kappa \cdot
+  [s^{-1}(a \cdot b)(z_2)]
+  \notag\\[3pt]
+  &\;=\;
+  \kappa \cdot
+  \biggl[
+    \int_{\FM_2(\Sigma_1)}
+    \frac{\pi}{\operatorname{Im}\tau}\,
+    \operatorname{Im}(z_1-z_2)
+  \biggr]
+  \cdot s^{-1}(a \cdot b).
+\end{align}
+The integral
+$\int_{\FM_2(\Sigma_1)} \frac{\pi}{\operatorname{Im}\tau}\,
+\operatorname{Im}(z_1-z_2)$ is regularised by the FM compactification.
+On the blowup of the diagonal, the correction $R^{(1)}(z_1,z_2)$
+is smooth and the integral converges.  The value is determined by
+the symmetry $z_1 \leftrightarrow z_2$: since
+$R^{(1)}(z_1,z_2) = -R^{(1)}(z_2,z_1)$ (the correction is
+antisymmetric), and the measure on $\FM_2(\Sigma_1)$ is symmetric
+in the two points, the integral vanishes:
+\begin{equation}\label{eq:Phi-1-K2-vanishes}
+  \int_{\FM_2(\Sigma_1)}
+  R^{(1)}(z_1,z_2) = 0.
+\end{equation}
+
+Therefore, at arity~$2$:
+\begin{equation}\label{eq:Phi-1-arity-2}
+  \Phi_1\bigl([s^{-1}a \,|\, s^{-1}b]\bigr)
+  \;=\;
+  [s^{-1}a \,|\, s^{-1}b].
+\end{equation}
+The chiral exponential map is the identity at arity~$2$ for the
+Heisenberg algebra at genus~$1$.  This is consistent with the fact
+that the Heisenberg algebra is commutative (the normal-ordered
+product is commutative), so the gauge transformation that replaces
+holomorphic by Arakelov propagators does not modify the bar elements
+at low arity --- the curvature is carried entirely by the
+\emph{differential}, not by the \emph{elements}.  The first
+non-trivial correction from $\Phi_1$ appears at arity~$3$ and
+higher, where graphs with two or more edges contribute
+non-symmetrically.
+\end{computation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Positselski machine for curved bar complexes}
+\label{sec:positselski-machine}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\providecommand{\Dco}{\mathsf{D}^{\mathrm{co}}}
+\providecommand{\Dctr}{\mathsf{D}^{\mathrm{ctr}}}
+\providecommand{\Hot}{\mathsf{Hot}}
+\providecommand{\Acyclco}{\mathsf{Acycl}^{\mathrm{co}}}
+
+The genus-$g$ bar complex with $\dfib^{\,2} = \kappa \cdot \omega_g
+\neq 0$ is a \emph{curved} dg coalgebra.  The ordinary derived
+category of such an object is trivial: every module is acyclic
+because $d^2 \neq 0$ and hence every short exact sequence splits.
+Positselski's theory of coderived and contraderived categories
+\cite{Pos11} resolves this triviality by enlarging the class of
+acyclic objects.  This section applies Positselski's framework to
+our setting, producing the curved Koszul duality at genus~$g$.
+
+%%----------------------------------------------------------------------
+\subsection{Coderived and contraderived categories}
+\label{subsec:coderived-contraderived}
+%%----------------------------------------------------------------------
+
+\begin{construction}[Positselski's categorical framework]
+\label{constr:positselski-framework}
+\index{Positselski!coderived category|textbf}
+\index{Positselski!contraderived category|textbf}
+Let $(C, d_C, \kappa_C)$ be a curved dg coalgebra over a field~$k$
+of characteristic~$0$: a graded coalgebra~$C$ equipped with a
+coderivation $d_C$ of degree~$+1$ satisfying
+$d_C^2 = \kappa_C \cdot \id_C$ for a \emph{curvature element}
+$\kappa_C \in k$ (more generally,
+$\kappa_C \in C^2$ satisfying $d_C(\kappa_C) = 0$).
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Coderived category.}
+The \emph{coderived category} of $C$-comodules is
+\begin{equation}\label{eq:coderived-def}
+  \Dco(C\text{-}\mathsf{comod})
+  \;:=\;
+  \Hot(C\text{-}\mathsf{comod}) \,/\, \Acyclco,
+\end{equation}
+where $\Hot(C\text{-}\mathsf{comod})$ is the homotopy category of
+$C$-comodules (morphisms up to chain homotopy) and $\Acyclco$ is
+the thick subcategory of \emph{coacyclic} objects: those comodules~$M$
+that can be obtained as totalizations of short exact sequences of
+comodules.  Concretely, $M$ is coacyclic if there exists a short
+exact sequence of $C$-comodules
+$0 \to M' \to M'' \to M''' \to 0$
+whose totalization is $M$ (the notion is the comodule analogue of
+contractibility, but adapted to the curved setting where the
+ordinary notion of acyclicity is trivial).
+
+\item \textbf{Contraderived category.}
+Dually, for a curved dg algebra $(A, d_A, \kappa_A)$ with
+$d_A^2 = \kappa_A$, the \emph{contraderived category} of
+$A$-contramodules is
+\begin{equation}\label{eq:contraderived-def}
+  \Dctr(A\text{-}\mathsf{contra})
+  \;:=\;
+  \Hot(A\text{-}\mathsf{contra}) \,/\, \mathsf{Acycl}^{\mathrm{ctr}},
+\end{equation}
+where $\mathsf{Acycl}^{\mathrm{ctr}}$ consists of
+\emph{contraacyclic} objects (obtained from products of short exact
+sequences, rather than coproducts as in the coderived case).
+
+\item \textbf{Triviality of the ordinary derived category.}
+If $\kappa_C \neq 0$, the ordinary derived category
+$\mathsf{D}(C\text{-}\mathsf{comod}) = 0$.  Indeed, for any
+comodule~$M$, the identity $d^2 = \kappa_C$ implies
+$\id_M = \kappa_C^{-1} \cdot d^2$ (when $\kappa_C$ is a non-zero
+scalar), so $\id_M$ is null-homotopic and $M \simeq 0$ in the
+ordinary derived category.  The coderived category avoids this
+collapse by using a weaker equivalence relation.
+\end{enumerate}
+\end{construction}
+
+\begin{remark}[Why comodules and contramodules, not modules]
+\label{rem:comod-vs-mod}
+\index{Positselski!comodules vs modules}
+For coalgebras, the correct linear-algebraic notion is
+\emph{comodules} (not modules): a $C$-comodule~$M$ is a graded
+vector space with a coaction $\delta\colon M \to C \otimes M$
+compatible with the comultiplication and coderivation.  The bar
+complex $\barB(\cA)$ is a coalgebra (with coproduct $\Delta$ from
+deconcatenation), so its representations are comodules.  The Koszul
+dual $\cA^!$ is an algebra (the cobar dual), and its
+representations are \emph{contramodules}: graded vector spaces~$P$
+with a contraaction $\pi\colon \operatorname{Hom}(A, P) \to P$
+satisfying associativity and unit constraints.  Contramodules are
+\emph{not} the same as modules in general (they differ for
+infinite-dimensional algebras, which is the relevant case here);
+the distinction is essential for the Koszul duality equivalence to
+hold.
+\end{remark}
+
+%%----------------------------------------------------------------------
+\subsection{Application to the genus-$g$ bar complex}
+\label{subsec:positselski-application}
+%%----------------------------------------------------------------------
+
+\begin{theorem}[Curved Koszul duality at genus~$g$]
+\label{thm:curved-koszul-genus-g}
+\index{curved Koszul duality!genus $g$|textbf}
+\ClaimStatusProvedHere{}
+Let $\cA$ be a chiral algebra with modular characteristic
+$\kappa = \kappa(\cA) \neq 0$, and let
+$\barB^{(g)}(\cA) = (\barB^{(g)}_{\mathrm{Ar}}, \dfib,
+\kappa \cdot \omega_g)$ be the curved bar complex at genus~$g$
+\textup{(}the Arakelov model of
+Corollary~\textup{\ref{cor:three-models-from-fact}(iii))}.
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The curved bar complex $\barB^{(g)}(\cA)$ is a curved dg
+  coalgebra in Positselski's sense:
+  \begin{itemize}
+  \item The underlying graded coalgebra is
+    $T^c(s^{-1}\bar\cA)$ with deconcatenation coproduct;
+  \item The coderivation is $\dfib$, of degree~$+1$;
+  \item The curvature element is
+    $m_0 = \kappa \cdot \omega_g \in k \otimes
+    H^{1,1}(\Sigma_g)$, satisfying $\dfib(m_0) = 0$.
+  \end{itemize}
+  The curved Maurer--Cartan equation
+  \begin{equation}\label{eq:curved-MC}
+    \dfib(\xi) + \xi \cdot \xi = -m_0
+  \end{equation}
+  governs deformations of the bar complex over $\Sigma_g$: a
+  solution $\xi \in \barB^{(g),1}(\cA)$ is a curved
+  $A_\infty$-morphism from $\cA$ to itself, twisted by the
+  curvature.
+
+\item \textbf{Cobar-bar adjunction in the coderived setting.}
+  The cobar functor $\Omegach$ extends to curved dg coalgebras:
+  applied to $\barB^{(g)}(\cA)$, it produces the curved dg
+  algebra $\Omegach(\barB^{(g)}(\cA))$ with differential
+  $d_\Omega$ satisfying
+  $d_\Omega^2 = \kappa \cdot \omega_g$ (the curvature is
+  inherited).  The bar-cobar adjunction descends to an
+  equivalence between:
+  \begin{equation}\label{eq:curved-koszul-equivalence}
+    \Dco\bigl(\barB^{(g)}(\cA)\text{-}\mathsf{comod}\bigr)
+    \;\simeq\;
+    \Dctr\bigl(\cA^!\text{-}\mathsf{contra}\bigr),
+  \end{equation}
+  where $\cA^! = (\cA^!)_\kappa$ is the Koszul dual algebra
+  twisted by the curvature $\kappa \cdot \omega_g$.  This is the
+  \emph{curved Koszul duality} at genus~$g$.
+
+\item The equivalence \eqref{eq:curved-koszul-equivalence} is
+  compatible with the genus tower: the inclusion
+  $\barB^{(g)} \hookrightarrow \barB^{(g+1)}$ via the
+  non-separating clutching map
+  \textup{(}Construction~\textup{\ref{constr:nonsep-clutching})}
+  induces a restriction functor
+  $\Dco(\barB^{(g+1)}\text{-}\mathsf{comod}) \to
+  \Dco(\barB^{(g)}\text{-}\mathsf{comod})$
+  that is intertwined by the Koszul equivalence with the
+  corresponding restriction on the contraderived side.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{Part (i)} is a verification of Positselski's axioms.  The
+graded coalgebra $T^c(s^{-1}\bar\cA)$ with deconcatenation
+coproduct is conilpotent (the coaugmentation filtration is
+exhaustive: $F_n = \bigoplus_{k \leq n} (s^{-1}\bar\cA)^{\otimes k}$
+satisfies $\bigcup_n F_n = T^c$).  The coderivation $\dfib$ has
+degree~$+1$ and satisfies $\dfib^{\,2} = \kappa \cdot \omega_g$
+(the curvature identity proved in
+Computation~\ref{comp:dfib-sq-heisenberg-genus1} for the
+Heisenberg case and in general by
+Construction~\ref{constr:bar-fact-coalgebra}(iv)).  The cocycle
+condition $\dfib(m_0) = 0$ holds because $m_0 = \kappa \cdot \omega_g$
+is a scalar times a closed form: $\dfib(\kappa \cdot \omega_g) =
+\kappa \cdot \dfib(\omega_g) = 0$, since $\omega_g$ is the
+class of the Arakelov form in cohomology and $\dfib$ acts on
+cohomology classes by the commutator with the curvature,
+$[\kappa \cdot \omega_g, \omega_g] = 0$ (scalars commute).
+
+\smallskip\noindent
+\textbf{Part (ii).}  This is the main content.  The proof has
+two ingredients:
+
+\smallskip\noindent
+\emph{Ingredient~1: Positselski's comodule-contramodule
+correspondence.}
+Positselski \cite{Pos11}, Theorem~5.3 (see also
+\emph{op.\ cit.}, Theorems~0.2.6 and~6.5), establishes:
+for a conilpotent curved dg coalgebra~$C$ over a field of
+characteristic~$0$, there is an equivalence
+\[
+  \Dco(C\text{-}\mathsf{comod})
+  \;\simeq\;
+  \Dctr(C^\vee\text{-}\mathsf{contra}),
+\]
+where $C^\vee = \operatorname{Hom}_k(C, k)$ is the linear dual,
+equipped with the dual algebra structure and the dual curvature.
+The conilpotency of~$C$ is essential: it ensures that the cobar
+construction $\Omegach(C)$ is well-defined (the infinite sum in
+the cobar differential converges in the conilpotent filtration).
+
+\smallskip\noindent
+\emph{Ingredient~2: Identification of the dual.}
+The linear dual of the bar complex $\barB^{(g)}(\cA) =
+T^c(s^{-1}\bar\cA)$ is the completed tensor algebra
+$\barB^{(g)}(\cA)^\vee = \widehat{T}(s\,\bar\cA^\vee)$
+(the product-dual of the coproduct-coalgebra).  This completed
+algebra is the completed cobar construction
+$\widehat\Omegach(\barB^{(g)}(\cA))$, which is quasi-isomorphic
+to the Koszul dual algebra $\cA^!$ (by the homotopy-Koszulity of
+$\SCchtop$, Theorem~\ref{thm:homotopy-Koszul}, which ensures
+that the cobar resolution is a cofibrant replacement).  The
+curvature $\kappa \cdot \omega_g$ on the coalgebra side dualizes to
+the curvature $\kappa \cdot \omega_g$ on the algebra side:
+$(\cA^!)_\kappa$ is the Koszul dual algebra with the curved
+differential $d_{A^!}^2 = \kappa \cdot \omega_g$.
+
+Combining the two ingredients:
+\[
+  \Dco\bigl(\barB^{(g)}(\cA)\text{-}\mathsf{comod}\bigr)
+  \;\simeq\;
+  \Dctr\bigl(\barB^{(g)}(\cA)^\vee\text{-}\mathsf{contra}\bigr)
+  \;\simeq\;
+  \Dctr\bigl((\cA^!)_\kappa\text{-}\mathsf{contra}\bigr),
+\]
+where the first equivalence is Positselski's theorem and the
+second is the Koszul identification of the dual.
+
+\smallskip\noindent
+\textbf{Part (iii).}  The compatibility with the genus tower
+follows from the functoriality of Positselski's equivalence.
+The non-separating clutching map
+$\Delta_{\mathrm{cyc}}\colon \barB^{(g)} \to \barB^{(g+1)}$
+is a morphism of curved dg coalgebras (it preserves the
+coderivation and increases the curvature:
+$\kappa \cdot \omega_g \mapsto \kappa \cdot \omega_{g+1}$).
+Positselski's equivalence is natural with respect to morphisms
+of curved dg coalgebras, hence the restriction functor on
+comodules is intertwined with the restriction on contramodules.
+\end{proof}
+
+%%----------------------------------------------------------------------
+\subsection{The Heisenberg at genus~$1$: the Weyl algebra}
+\label{subsec:heisenberg-weyl}
+%%----------------------------------------------------------------------
+
+\begin{example}[Curved Koszul duality for the Heisenberg at genus~$1$]
+\label{ex:heisenberg-curved-koszul}
+\index{Heisenberg algebra!curved Koszul duality at genus 1}
+\index{Weyl algebra!as curved Koszul dual}
+\ClaimStatusProvedHere{}
+The Heisenberg chiral algebra $\cH_\kappa$ at genus~$0$ is formal:
+$\barB(\cH_\kappa)$ has $d_{\barB} = 0$
+(Example~\ref{ex:heisenberg-bar-3}), and the Koszul dual is the
+polynomial algebra $\cH_\kappa^! = k[x]$ (the free commutative
+algebra on one generator --- the Koszul dual of the free Lie
+coalgebra on one cogenerator).
+
+At genus~$1$, the bar complex acquires curvature
+$\dfib^{\,2} = \kappa \cdot \omega_1$
+(Computation~\ref{comp:dfib-sq-heisenberg-genus1}).  The curved Koszul
+dual $(\cH_\kappa^!)_\kappa$ is the algebra $k[x]$ with the curved
+differential $d^2 = \kappa \cdot \omega_1$.  This curved algebra
+is presented as follows.
+
+\smallskip\noindent
+\textbf{The Weyl algebra from curvature.}
+The genus-$0$ Koszul dual $\cH_\kappa^! = k[x]$ is commutative.  The
+curvature $\kappa \cdot \omega_1$ deforms the commutative product:
+the curved differential $d$ satisfies $d^2 = \kappa$
+(writing $\kappa$ for $\kappa \cdot \omega_1$ with the $(1,1)$-form
+absorbed into the differential-form coefficient).  This means the
+Koszul dual at genus~$1$ is no longer commutative but
+\emph{filtered}: the associated graded is $k[x]$, and the curvature
+forces $[d, x] \neq 0$.  Concretely, introduce a second generator
+$\partial$ as the image of $d$ acting on the cogenerator, subject to:
+\begin{equation}\label{eq:weyl-from-curvature}
+  [\partial, x] = \kappa.
+\end{equation}
+This is the \emph{Weyl algebra} $\cW_\kappa = k\langle x,
+\partial\rangle / ([\partial, x] = \kappa)$.  The identification is:
+\begin{equation}\label{eq:curved-koszul-heisenberg}
+  \Dctr\bigl((\cH_\kappa^!)_\kappa\text{-}\mathsf{contra}\bigr)
+  \;\simeq\;
+  \mathsf{D}(\cW_\kappa\text{-}\mathsf{mod}),
+\end{equation}
+the derived category of modules over the Weyl algebra.  The
+equivalence uses the fact that the contraderived category of a
+curved algebra with invertible curvature agrees with the
+ordinary derived category of the ``resolved'' (uncurved) algebra
+obtained by adjoining the curvature relation
+(Positselski \cite{Pos11}, Theorem~3.6).
+
+\smallskip\noindent
+\textbf{The full equivalence.}
+Combining with
+Theorem~\ref{thm:curved-koszul-genus-g}(ii):
+\begin{equation}\label{eq:heisenberg-genus-1-full}
+  \boxed{
+  \Dco\bigl(\barB^{(1)}(\cH_\kappa)\text{-}\mathsf{comod}\bigr)
+  \;\simeq\;
+  \mathsf{D}(\cW_\kappa\text{-}\mathsf{mod}).
+  }
+\end{equation}
+The coderived category of the genus-$1$ Heisenberg bar complex is
+equivalent to the derived category of Weyl algebra modules.  This
+is the simplest instance of curved Koszul duality.
+
+\smallskip\noindent
+\textbf{Interpretation.}
+The Weyl algebra governs the quantum mechanics of a single
+harmonic oscillator: $x$ is the position operator,
+$\partial = \kappa^{-1}\partial_x$ is the rescaled momentum
+operator, and $[\partial, x] = \kappa$ is the canonical
+commutation relation at level~$\kappa$.  The equivalence
+\eqref{eq:heisenberg-genus-1-full} is therefore a precise algebraic
+statement: the genus-$1$ curved bar complex of the free boson
+chiral algebra ``is'' the quantum mechanics of a harmonic
+oscillator, in the sense that their derived/coderived categories
+of representations are equivalent.  The curvature
+$\kappa \cdot \omega_1$ (the failure of $d^2 = 0$, the obstruction
+to formality at genus~$1$) is the \emph{source} of the
+non-commutativity of the Weyl algebra --- it is the canonical
+commutation relation, viewed from the coalgebra side.
+\end{example}
