@@ -37,6 +37,12 @@ STAMP     := .build_stamp
 OUT_DIR   := out
 OUT_PDF   := $(OUT_DIR)/ainfinity_chiral_algebras.pdf
 
+# Working notes
+WN_DIR    := archive/source_tex
+WN_TEX    := $(WN_DIR)/working_notes.tex
+WN_PDF    := $(WN_DIR)/working_notes.pdf
+OUT_WN    := $(OUT_DIR)/working_notes.pdf
+
 # If PDF was externally deleted but stamp remains, force a rebuild.
 ifeq (,$(wildcard $(PDF)))
   $(shell rm -f $(STAMP))
@@ -58,11 +64,11 @@ endef
 #  Targets
 # ============================================================================
 
-.PHONY: all fast clean veryclean count check test dist release help publish
+.PHONY: all fast clean veryclean count check test dist release help publish working-notes
 
 ## all: Full build → out/
 ##   Idempotent: no-op if no .tex files changed since last successful build.
-all: $(STAMP) publish
+all: $(STAMP) working-notes publish
 
 $(STAMP): $(SOURCES)
 	@echo "══════════════════════════════════════════════════════════"
@@ -136,18 +142,36 @@ fast:
 	fi
 	@echo "     Logs: $(LOG_DIR)/ and $(MAIN).log"
 
-## publish: Copy final PDF to out/ (does not trigger a rebuild).
+## publish: Copy final PDFs to out/ (does not trigger a rebuild).
 publish:
 	@mkdir -p $(OUT_DIR)
 	@if [ -f $(PDF) ]; then cp $(PDF) $(OUT_PDF); echo "  ✓  $(OUT_PDF)"; \
 	else echo "  ⚠  $(PDF) not found — run 'make fast' first."; fi
+	@if [ -f $(WN_PDF) ]; then cp $(WN_PDF) $(OUT_WN); echo "  ✓  $(OUT_WN)"; fi
 
-## release: Clean rebuild + named release PDF at root.
+## working-notes: Build the working notes (standalone document).
+working-notes: $(OUT_WN)
+
+$(OUT_WN): $(WN_TEX)
+	@echo "  ── Building working notes ──"
+	@mkdir -p $(OUT_DIR) $(LOG_DIR)
+	@cd $(WN_DIR) && \
+		$(TEX) $(TEXFLAGS) working_notes.tex >../../$(LOG_DIR)/wn-pass1.log 2>&1 || true && \
+		$(TEX) $(TEXFLAGS) working_notes.tex >../../$(LOG_DIR)/wn-pass2.log 2>&1 || true
+	@if [ -f $(WN_PDF) ]; then \
+		cp $(WN_PDF) $(OUT_WN); \
+		echo "  ✓  $(OUT_WN)"; \
+	else \
+		echo "  ✗  Working notes build failed."; \
+		exit 1; \
+	fi
+
+## release: Clean rebuild + named release PDF + working notes at root.
 release:
-	@rm -f $(STAMP) $(PDF)
+	@rm -f $(STAMP) $(PDF) $(WN_PDF)
 	@rm -rf $(OUT_DIR)
 	@mkdir -p $(LOG_DIR) $(OUT_DIR)
-	@$(MAKE) --no-print-directory $(STAMP) publish
+	@$(MAKE) --no-print-directory $(STAMP) working-notes publish
 	@cp $(PDF) Ainfinity_Chiral_Algebras_and_Chiral_Hochschild_Cohomology.pdf
 	@echo "  ✓  Ainfinity_Chiral_Algebras_and_Chiral_Hochschild_Cohomology.pdf"
 

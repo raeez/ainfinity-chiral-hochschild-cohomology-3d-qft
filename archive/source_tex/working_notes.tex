@@ -1,0 +1,275 @@
+% ============================================================
+%
+%   WORKING NOTES ON A-INFINITY CHIRAL ALGEBRAS AND 3D HT QFT
+%
+%   Raeez Lorgat, 2024--2026
+%
+%   Compile standalone: pdflatex working_notes.tex
+%
+% ============================================================
+
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\frenchspacing
+
+\usepackage[cmintegrals,cmbraces,noamssymbols]{newtxmath}
+\usepackage{ebgaramond}
+
+\usepackage[
+  activate={true,nocompatibility}, final,
+  tracking=true, kerning=true, spacing=true,
+  factor=1100, stretch=10, shrink=10
+]{microtype}
+
+\usepackage{mleftright}\mleftright
+
+\let\Bbbk\undefined \let\openbox\undefined
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage[margin=1.15in]{geometry}
+\usepackage[unicode]{hyperref}
+\usepackage{tikz-cd}
+
+\setlength{\emergencystretch}{3em}
+\raggedbottom
+
+% --- Environments ---
+\usepackage{thmtools}
+\declaretheoremstyle[
+  spaceabove=\topsep, spacebelow=\topsep,
+  headfont=\normalfont\scshape,
+  notefont=\normalfont\itshape,
+  bodyfont=\normalfont,
+  postheadspace=0.5em, headpunct={.}
+]{notesthm}
+\declaretheoremstyle[
+  spaceabove=\topsep, spacebelow=\topsep,
+  headfont=\normalfont\itshape,
+  notefont=\normalfont\itshape,
+  bodyfont=\normalfont,
+  postheadspace=0.5em, headpunct={.}
+]{notesdef}
+
+\declaretheorem[style=notesthm, name=Theorem, numberwithin=section]{theorem}
+\declaretheorem[style=notesthm, name=Lemma, sibling=theorem]{lemma}
+\declaretheorem[style=notesthm, name=Proposition, sibling=theorem]{proposition}
+\declaretheorem[style=notesthm, name=Corollary, sibling=theorem]{corollary}
+\declaretheorem[style=notesdef, name=Definition, sibling=theorem]{definition}
+\declaretheorem[style=notesdef, name=Remark, sibling=theorem]{remark}
+\declaretheorem[style=notesdef, name=Example, sibling=theorem]{example}
+\declaretheorem[style=notesdef, name=Conjecture, sibling=theorem]{conjecture}
+
+% --- Macros ---
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\fg}{\mathfrak{g}}
+\newcommand{\fh}{\mathfrak{h}}
+\newcommand{\fsl}{\mathfrak{sl}}
+\newcommand{\barB}{\overline{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\newcommand{\Ass}{\mathsf{Ass}}
+\newcommand{\Com}{\mathsf{Com}}
+\newcommand{\Lie}{\mathsf{Lie}}
+\newcommand{\Eone}{\mathsf{E}_1}
+\newcommand{\Etwo}{\mathsf{E}_2}
+\newcommand{\Einf}{\mathsf{E}_{\infty}}
+\newcommand{\Linf}{\mathsf{L}_{\infty}}
+\newcommand{\Ainf}{\mathsf{A}_{\infty}}
+\newcommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\FM}{\mathrm{FM}}
+\newcommand{\MC}{\mathrm{MC}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\ChirHoch}{\mathrm{ChirHoch}}
+\newcommand{\gAmod}{\mathfrak{g}^{\mathrm{mod}}_\cA}
+\newcommand{\dzero}{d_0}
+\newcommand{\dfib}{d_{\mathrm{fib}}}
+\newcommand{\CompCl}{\operatorname{CompCl}}
+
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Spec}{Spec}
+
+% Separator
+\newcommand{\sep}{\bigskip\begin{center}$*$\end{center}\medskip}
+
+\title{\textit{Working Notes on $A_\infty$ Chiral Algebras\\
+and 3D Holomorphic-Topological QFT}}
+\author{Raeez Lorgat}
+\date{2024--2026}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\itshape
+These notes record the passage from the bar complex of a chiral
+algebra to the Swiss-cheese operad on $\C \times \R$, and from
+there to 3D holomorphic-topological quantum field theory.
+\end{quote}
+
+\tableofcontents
+
+
+% =================================================================
+\section{The Swiss-cheese direction}
+\label{sec:sc-direction}
+% =================================================================
+
+The bar complex of a chiral algebra~$\cA$ on a curve~$X$ is a
+cosheaf on $\Ran(X)$.  Its differential encodes collisions in the
+$\C$-direction (the holomorphic plane).  Its coproduct encodes
+separation in the $\R$-direction (the topological line).  Together:
+a Swiss-cheese algebra on
+$\FM_k(\C) \times \mathrm{Conf}_k(\R)$.
+
+At genus~$0$, the Swiss-cheese structure is uncurved: the
+$m_k^{\mathrm{SC}}$ operations satisfy the $\SCchtop$ axioms
+without obstruction.  At genus~$g \geq 1$, curvature appears:
+$\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$, where $\kappa$ is
+the modular characteristic from Volume~I and $\omega_g$ is the
+K\"ahler form on~$\cM_g$.
+
+The recognition theorem (Weiss cosheaf descent) identifies
+$\SCchtop$-algebras with factorization algebras on
+$\C \times \R$ satisfying a local constancy condition along~$\R$.
+The proof uses the product Weiss topology: a cover of
+$U \times I \subset \C \times \R$ is a collection of products
+$\{U_\alpha \times I_\beta\}$ refining the product open cover.
+
+
+% =================================================================
+\section{PVA descent}
+\label{sec:pva-descent}
+% =================================================================
+
+The descent from chiral algebras to Poisson vertex algebras (PVAs)
+is controlled by six axioms D1--D6.  At genus~$0$:
+
+\begin{enumerate}[label=D\arabic*.]
+\item \emph{Leibniz rule}: $\{a_\lambda bc\} = \{a_\lambda b\}c + b\{a_\lambda c\}$.
+\item \emph{Sesquilinearity}: $\{\partial a_\lambda b\} = -\lambda\{a_\lambda b\}$.
+\item \emph{Skew-symmetry}: $\{b_\lambda a\} = -\{a_{-\lambda-\partial} b\}$.
+\item \emph{Jacobi}: $\{a_\lambda\{b_\mu c\}\} - \{b_\mu\{a_\lambda c\}\} = \{\{a_\lambda b\}_{\lambda+\mu} c\}$.
+\item \emph{Commutativity}: $ab = ba$.
+\item \emph{Unit}: $\{a_\lambda 1\} = 0$.
+\end{enumerate}
+
+D2--D5 are proved via geometric arguments: the exchange cylinder
+and three-face Stokes identity on $\FM_3(\C)$.  D6 uses the
+factorization of $H_3(a)$ and topological contractibility.
+
+The bridge from the $\SCchtop$ operad to PVA axioms operates
+in two directions:
+\begin{itemize}
+\item Operad $\Rightarrow$ axioms (F4): the $\SCchtop$
+  structure maps project to PVA operations.  Proved.
+\item Axioms $\Rightarrow$ operad (F5, rectification): a PVA
+  satisfying D1--D6 lifts to an $\SCchtop$-algebra.  Proved
+  via homotopy-Koszulity of $\SCchtop$.
+\end{itemize}
+
+
+% =================================================================
+\section{Homotopy-Koszulity of $\SCchtop$}
+\label{sec:homotopy-koszul}
+% =================================================================
+
+\begin{theorem}
+The chiral-topological Swiss-cheese operad $\SCchtop$ is
+homotopy-Koszul.
+\end{theorem}
+
+The proof has three steps:
+\begin{enumerate}
+\item The classical Swiss-cheese operad is Koszul
+  (Livernet, Voronov, Ginzburg--Kapranov).
+\item Kontsevich formality gives a quasi-isomorphism
+  $\Phi\colon \SCchtop \to \mathrm{SC}$.
+\item Transfer: bar-cobar preserves quasi-isomorphisms;
+  two-out-of-three gives the result.
+\end{enumerate}
+
+The consequence: bar-cobar on $\SCchtop$-algebras is a
+Quillen \emph{equivalence}, not merely an adjunction.
+Lines (boundary conditions) are unconditionally $\cA^!$-modules.
+The dg-shifted Yangian is unconditional.
+
+
+% =================================================================
+\section{The modular Swiss-cheese operad}
+\label{sec:modular-sc}
+% =================================================================
+
+The modular extension replaces trees by stable graphs with
+mixed ($\C$-direction and $\R$-direction) edges.  The
+relative Feynman transform $F_{\mathrm{rel}}\cO$ sums
+over stable graphs with two edge colours:
+
+\begin{itemize}
+\item \emph{Closed edges} (genus direction): carry the
+  $\hbar$-weight, record non-separating degenerations.
+\item \emph{Open edges} (boundary direction): carry the
+  boundary insertion data, record separation of marked
+  points along~$\R$.
+\end{itemize}
+
+The differential contracts one edge; $d^2 = 0$ is the
+codimension-$2$ boundary cancellation on the moduli space
+of bordered Riemann surfaces.
+
+At genus~$g \geq 1$, the curvature
+$\dfib^{\,2} = \kappa \cdot \omega_g$ forces a passage
+from ordinary to \emph{curved} Swiss-cheese algebras.
+The curvature is the genus-$1$ shadow $\kappa$ from
+Volume~I; it measures the failure of the genus-$0$
+Swiss-cheese structure to extend uncurved to higher genus.
+
+
+% =================================================================
+\section{3D holomorphic-topological QFT}
+\label{sec:3d-ht}
+% =================================================================
+
+A 3D HT theory on $\C \times \R$ has:
+\begin{itemize}
+\item Boundary condition on $\{0\} \times \R$: a chiral
+  algebra~$\cA$ (the ``boundary VOA'').
+\item Bulk: a factorization algebra on $\C \times \R$
+  (the $\SCchtop$-algebra from the recognition theorem).
+\item Lines: $\cA^!$-modules (boundary conditions for the
+  bulk theory restricted to $\R$).
+\end{itemize}
+
+The bar-cobar adjunction $B \dashv \Omega$ encodes
+boundary data into the bar coalgebra $\barB(\cA)$ and
+recovers it via the cobar construction.  On the Koszul
+locus, the recovery is exact (Theorem~B from Volume~I).
+
+The holographic modular Koszul datum
+$\cH(\cA) = (\cA, \cA^!, \cC, r(z), \Theta_\cA,
+\nabla^{\mathrm{hol}})$
+packages the complete HT system into a single modular
+Maurer--Cartan problem.  The five theorem targets from
+Volume~I (A--D, H) are projections of this datum.
+
+
+\end{document}
