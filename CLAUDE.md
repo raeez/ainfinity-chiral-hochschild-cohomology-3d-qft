@@ -103,6 +103,10 @@ All Vol I anti-patterns AP1-AP18 apply here. The following five (AP19-AP23) enco
 
 **AP23 — Flat section vs weighted transport.** √(Q_L) is the flat section of ∇^sh. The shadow generating function H(t) = t²√(Q_L) is NOT horizontal — the t² is the arity offset.
 
+**AP24 — The complementarity sum is not universally zero.** κ + κ! = 0 for KM/free fields/lattice/principal W. For Virasoro: κ + κ! = 13 ≠ 0. The anti-symmetry was overclaimed in 20+ locations. The Feigin-Frenkel involution ensures anti-symmetry for KM; the Virasoro involution c ↦ 26−c is anti-symmetric around 13, not 0.
+
+**AP25 — Three functors, three outputs: bar ≠ Verdier dual ≠ cobar.** B(A) = coalgebra. D_Ran(B(A)) ≃ B(A!) = Verdier dual (an ALGEBRA). Ω(B(A)) ≃ A = cobar (recovers the ORIGINAL). The Koszul dual A! is obtained by Verdier duality, NOT by cobar. Found conflated in 16 files.
+
 ## Cross-Volume Bridges
 
 | Bridge | Vol II claim | Vol I anchor | Status |
