@@ -347,20 +347,18 @@ The integral $\int_0^\infty \lambda\, e^{-\lambda z}\, d\lambda
 $r(z) = k\, (J \otimes J)/z^2$.
 
 \medskip
-\noindent\textbf{Step 3: Collision residue verification.}
-Equivalently, the collision residue on $\FM_2(\C)$ is
+\noindent\textbf{Step 3: Laplace kernel and collision residue.}
+The formula $r^L(z) = k\, (J \otimes J)/z^2$ is the Laplace
+kernel (OPE generating function).  The bar-theoretic collision
+residue absorbs the $d\log$ measure, reducing pole orders by
+one (cf.\ the Virasoro computation in Step~3 below):
 \[
-\Res^{\mathrm{coll}}_{0,2}(\Theta_\cA)
-= \Res_{z_1 = z_2}
-\bigl[\Theta_{\cH_k}^{(0,2)}(z_1, z_2)\bigr]
-= \Res_{w = 0} \left[\frac{k}{w^2}\, J(z_2) \otimes J(z_2)
-\, dw\right]
-= \frac{k}{z^2}\, J \otimes J,
+r^{\mathrm{coll}}(z) = \frac{k}{z}\, J \otimes J.
 \]
-where $w = z_1 - z_2 = z$ is the collision coordinate on
-$\FM_2(\C)$.  The double pole reflects the fact that the
-Heisenberg OPE $J(z_1) J(z_2) \sim k/(z_1 - z_2)^2$ has a
-second-order singularity and no first-order pole.
+The double pole in the OPE $J(z_1) J(z_2) \sim k/(z_1 - z_2)^2$
+becomes a simple pole in $r^{\mathrm{coll}}$, and the absence
+of a first-order OPE pole means $r^{\mathrm{coll}}$ has no
+regular ($z^0$) term.
 
 \medskip
 \noindent\textbf{Step 4: CYBE verification.}
@@ -457,7 +455,7 @@ The second term $k\,\kappa^{ab}\, (t_a \otimes t_b)/z^2 = k\,
 structure to the Heisenberg $r$-matrix.
 
 \medskip
-\noindent\textbf{Step 3: Collision residue.}
+\noindent\textbf{Step 3: Laplace kernel and collision residue.}
 On $\FM_2(\C)$ with collision coordinate $w = z_1 - z_2$, the
 genus-$0$ arity-$2$ component of $\Theta_{\widehat{\fg}_k}$ is
 \[
@@ -466,8 +464,12 @@ genus-$0$ arity-$2$ component of $\Theta_{\widehat{\fg}_k}$ is
 + \frac{k\,\kappa^{ab}}{w^2}\, t_a \otimes t_b
 + O(w^0).
 \]
-The collision residue $\Res_{w=0}^{\mathrm{coll}}$ extracts the
-polar part, giving~\eqref{eq:affine-r-explicit}.
+The Laplace kernel~\eqref{eq:affine-r-explicit} reproduces these
+OPE poles.  The bar-theoretic collision residue absorbs the
+$d\log$ measure, reducing pole orders by one: the double-pole
+term $k\kappa^{ab}/w^2$ becomes a simple pole in
+$r^{\mathrm{coll}}$, and the simple-pole structure-constant term
+becomes a regular contribution.
 
 \medskip
 \noindent\textbf{Step 4: CYBE verification.}
@@ -553,15 +555,15 @@ k\,\kappa^{ab}/(z_1 - z_2)^2$.
 \index{Virasoro algebra!classical r-matrix|textbf}
 \index{classical r-matrix!Virasoro}
 
-\begin{theorem}[Virasoro $r$-matrix from collision residue;
+\begin{theorem}[Virasoro OPE kernel and collision residue;
 \ClaimStatusProvedHere]
 % label removed: thm:virasoro-r-matrix
 For the Virasoro algebra $\mathrm{Vir}_c$ at central charge $c$,
-the classical $r$-matrix is
+the Laplace kernel (OPE generating function) is
 \begin{equation}
 % label removed: eq:virasoro-r-explicit
 \boxed{
-r_{\mathrm{Vir}_c}(z)
+r^L_{\mathrm{Vir}_c}(z)
 \;=\;
 \frac{c}{2\,z^4}
 \;+\;
@@ -576,13 +578,26 @@ is understood (for each pole, the tensor structure distributes the
 action across the two copies of $\mathrm{Vir}_c$).  More precisely,
 \begin{equation}
 % label removed: eq:virasoro-r-tensor
-r_{\mathrm{Vir}_c}(z)
+r^L_{\mathrm{Vir}_c}(z)
 = \frac{c/2}{z^4}\, \mathbf{1} \otimes \mathbf{1}
 + \frac{2}{z^2}\, T \otimes \mathbf{1}
 + \frac{1}{z}\, \partial T \otimes \mathbf{1}
 + (\text{regular at } z = 0),
 \end{equation}
 where we write the ``first slot acts'' convention.
+The collision residue
+$r^{\mathrm{coll}}_{\mathrm{Vir}_c}(z)
+= \operatorname{Res}^{\mathrm{coll}}_{0,2}(\Theta_{\mathrm{Vir}_c})$
+has pole orders one lower, since the $d\log$ kernel on
+$\FM_2(\C)$ absorbs one power of~$z$
+\textup{(}Volume~I, Remark~\textup{\ref{rem:three-r-matrices}}\textup{)}:
+\begin{equation}
+r^{\mathrm{coll}}_{\mathrm{Vir}_c}(z)
+\;=\;
+\frac{c/2}{z^3}\,\mathbf{1}\otimes\mathbf{1}
+\;+\;
+\frac{2T}{z}\,\otimes\,\mathbf{1}.
+\end{equation}
 \end{theorem}
 
 \begin{proof}
@@ -596,7 +611,7 @@ $c_3 = c/12$.
 \medskip
 \noindent\textbf{Step 2: The Laplace integral.}
 \begin{align*}
-r(z) &= \int_0^\infty d\lambda\; e^{-\lambda z}\,
+r^L(z) &= \int_0^\infty d\lambda\; e^{-\lambda z}\,
 \{T {}_\lambda T\} \\
 &= \int_0^\infty d\lambda\; e^{-\lambda z}\,
 \bigl(\partial T + 2\lambda\, T + \tfrac{c}{12}\,\lambda^3\bigr) \\
@@ -608,26 +623,35 @@ using $\int_0^\infty \lambda^n\, e^{-\lambda z}\, d\lambda
 = n!/z^{n+1}$.
 
 \medskip
-\noindent\textbf{Step 3: Collision residue.}
-On $\FM_2(\C)$, the Virasoro OPE
+\noindent\textbf{Step 3: From Laplace kernel to collision residue.}
+The Laplace kernel $r^L(z)$ is the OPE generating function: it
+reproduces the position-space OPE
 $T(z_1)\, T(z_2) \sim c/(2w^4) + 2T(z_2)/w^2 + \partial T(z_2)/w$
-(where $w = z_1 - z_2$) gives the collision residue
-$\Res^{\mathrm{coll}}_{0,2}(\Theta_{\mathrm{Vir}_c})
-= c/(2z^4) + 2T/z^2 + \partial T/z$,
-matching~\eqref{eq:virasoro-r-explicit} (with the identification
-$c/2 = c/12 \cdot 3!$).
+(where $w = z_1 - z_2$).
+The bar-theoretic collision residue
+$r^{\mathrm{coll}}(z) =
+\Res^{\mathrm{coll}}_{0,2}(\Theta_{\mathrm{Vir}_c})$
+extracts residues along $d\log(z_1 - z_2)$ rather than
+$dz/(z_1 - z_2)$; the $d\log$ measure absorbs one power of~$w$,
+so the pole orders in $r^{\mathrm{coll}}$ are one lower than
+in the OPE:
+$r^{\mathrm{coll}}(z) = (c/2)/z^3 + 2T/z$.
+In particular, for bosonic algebras the collision residue has no
+even-order poles ($z^{-2n}$ in the OPE maps to $z^{-(2n-1)}$ in
+$r^{\mathrm{coll}}$).
 
 \medskip
 \noindent\textbf{Step 4: Pole structure and shadow depth.}
-The quartic pole $c/(2z^4)$ is the signature of the Virasoro: no
-simple Lie algebra produces a pole of order higher than~$2$ (the
-affine $r$-matrix has at most a double pole).  The quartic pole is
-the geometric manifestation of the conformal anomaly $c$: it
-arises from the $\lambda^3$ term in the $\lambda$-bracket, which
-encodes the failure of the energy-momentum tensor to transform as
-a primary field.  In the shadow depth classification, the quartic
-pole places the Virasoro in the $M$ (mixed) class: the shadow
-tower does not terminate, and the full Maurer--Cartan element
+The quartic pole in $r^L(z)$ (equivalently, the cubic pole in
+$r^{\mathrm{coll}}(z)$) is the signature of the Virasoro: no
+simple Lie algebra produces a pole of order higher than~$2$ in the
+Laplace kernel (the affine $r$-matrix has at most a double pole).
+The anomalous pole arises from the $\lambda^3$ term in the
+$\lambda$-bracket, which encodes the failure of the
+energy-momentum tensor to transform as a primary field.
+In the shadow depth classification, this higher-order pole places
+the Virasoro in the $M$ (mixed) class: the shadow tower does not
+terminate, and the full Maurer--Cartan element
 $\Theta_{\mathrm{Vir}_c}$ requires infinitely many arity
 corrections beyond the binary $r$-matrix.
 \end{proof}
@@ -757,11 +781,11 @@ spin content of the chiral algebra:
 \textbf{Family} & \textbf{Highest pole} & \textbf{Source} &
 \textbf{Shadow class} \\
 \hline
-$\cH_k$ & $k/z^2$ & $\lambda$-bracket $k\lambda$ & $G$ \\
-$\widehat{\fg}_k$ & $\Omega/z$ & structure constants $f^{ab}_c$ & $L$ \\
-$\beta\gamma_\lambda$ & $1/z$ & contact OPE & $C$ \\
-$\mathrm{Vir}_c$ & $c/(2z^4)$ & conformal anomaly $\lambda^3$ & $M$ \\
-$\mathcal{W}_N$ & $c_{W_N}/z^{2N}$ & spin-$N$ self-OPE & $M$ \\
+$\cH_k$ & $k/z^2$ [Laplace] & $\lambda$-bracket $k\lambda$ & $G$ \\
+$\widehat{\fg}_k$ & $\Omega/z + k\kappa/z^2$ [Laplace] & structure constants $f^{ab}_c$ & $L$ \\
+$\beta\gamma_\lambda$ & $1/z$ [Laplace] & contact OPE & $C$ \\
+$\mathrm{Vir}_c$ & $c/(2z^4)$ [Laplace] & conformal anomaly $\lambda^3$ & $M$ \\
+$\mathcal{W}_N$ & $c_{W_N}/z^{2N}$ [Laplace] & spin-$N$ self-OPE & $M$ \\
 \end{tabular}
 \end{center}
 The pole order determines the leading behavior of the spectral
@@ -1217,8 +1241,10 @@ self-dual at $c = 13$, NOT $c = 26$).
 The gravitational Yangian
 $Y_T^{\mathrm{mod}}(\mathrm{Vir}_c)$ has the following properties:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item \emph{Genus-$0$ $r$-matrix:}
-$r_0(z) = c/(2z^4) + 2T/z^2 + \partial T/z$
+\item \emph{Genus-$0$ Laplace kernel:}
+$r^L_0(z) = c/(2z^4) + 2T/z^2 + \partial T/z$;
+equivalently, collision residue
+$r^{\mathrm{coll}}_0(z) = (c/2)/z^3 + 2T/z$
 (Theorem~\ref{thm:virasoro-r-matrix}).
 
 \item \emph{Non-formality at all genera:}
@@ -1267,7 +1293,7 @@ Remark~\ref*{rem:virasoro-resonance-model}): it is the image of
 the finite-dimensional resonance truncation $R_{\mathrm{Vir}}$,
 not the final Koszul dual.  The genuine $\mathcal{W}_\infty$-type
 dual requires the full resonance-filtered completion
-(Volume~I, Conjecture~\ref*{conj:platonic-completion}).  The
+(Volume~I, Theorem~\ref*{V1-thm:platonic-completion}).  The
 gravitational Yangian $Y_T^{\mathrm{mod}}(\mathrm{Vir}_c)$ is
 therefore defined using the resonance shadow as a first
 approximation; the full gravitational quantum group requires

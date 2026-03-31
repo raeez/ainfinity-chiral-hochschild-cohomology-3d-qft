@@ -189,11 +189,17 @@ At $c = 26$:
   $\mathbf{Q}_g(\mathrm{Vir}_{26})$ is the full Lagrangian
   with $\kappa = 13$, and $\mathbf{Q}_g(\mathrm{Vir}_0)$
   is the zero-curvature Lagrangian.
-\item $F_g(\mathrm{Vir}_{26}) = 0$ for all $g \ge 1$:
-  the partition function is identically~$1$.
-\item The genus tower is carried entirely by the dual side:
-  $F_g(\mathrm{Vir}_0) = -13 \int_{\overline{\cM}_g}
-  \lambda_g$.
+% RECTIFICATION-FLAG (AP20): F_g(Vir_26) = kappa(Vir_26)*lambda_g = 13*lambda_g ≠ 0.
+% What vanishes is F_g^eff of the combined system Vir_26 ⊗ bc_2.
+% Similarly, F_g(Vir_0) = 0 (kappa=0), not -13*lambda_g.
+% The -13 belongs to F_g^eff(Vir_0 ⊗ bc_2).
+\item $F_g^{\mathrm{eff}}(\mathrm{Vir}_{26} \otimes bc_2) = 0$ for all $g \ge 1$:
+  the combined matter--ghost partition function is identically~$1$,
+  since $\kappa_{\mathrm{eff}} = \kappa(\mathrm{Vir}_{26}) + \kappa(bc_2)
+  = 13 - 13 = 0$.
+\item The effective genus tower of the dual side is
+  $F_g^{\mathrm{eff}}(\mathrm{Vir}_0 \otimes bc_2) = -13 \int_{\overline{\cM}_g}
+  \lambda_g$, since $\kappa_{\mathrm{eff}} = 0 + (-13) = -13$.
 \end{enumerate}
 \end{proposition}
 
@@ -315,22 +321,24 @@ $26-c$, the gravitational $S$-duality on conformal blocks.
 
 For affine Kac--Moody $\hat{\mathfrak{g}}_k$, the Koszul dual is
 $\hat{\mathfrak{g}}_{-k-2h^\vee}$ and the complementarity constant
-is
+vanishes:
 \[
 K_{\hat{\mathfrak{g}}}
 \;=\;
 \kappa(\hat{\mathfrak{g}}_k)
 + \kappa(\hat{\mathfrak{g}}_{-k-2h^\vee})
 \;=\;
-\frac{k \dim\mathfrak{g}}{k + h^\vee}
-+ \frac{(-k-2h^\vee)\dim\mathfrak{g}}{-k-h^\vee}
+\frac{(k+h^\vee)\dim\mathfrak{g}}{2h^\vee}
++ \frac{(-k-h^\vee)\dim\mathfrak{g}}{2h^\vee}
 \;=\;
-\dim\mathfrak{g}.
+0.
 \]
-For $\mathfrak{g} = \mathfrak{sl}_2$:
-$K = 3$, $h^\vee = 2$, and the Koszul involution
-$k \mapsto -k - 4$ is the Feigin--Frenkel duality at the critical
-level $k = -2$.
+This is the Feigin--Frenkel anti-symmetry: $\kappa$ is an odd function
+of the shifted level~$k + h^\vee$.  The Koszul involution
+$k \mapsto -k - 2h^\vee$ is the Feigin--Frenkel duality, with
+self-dual point $k = -h^\vee$ (the critical level).
+In contrast, Virasoro and $\cW$-algebras have nonzero complementarity
+constants.
 
 \begin{center}
 \small
@@ -341,20 +349,26 @@ level $k = -2$.
 \hline
 $\mathrm{Vir}_c$ & $c \mapsto 26-c$ & $13$ & $c = 13$ \\[2pt]
 $\hat{\mathfrak{g}}_k$ & $k \mapsto -k-2h^\vee$ &
-  $\dim\mathfrak{g}$ & $k = -h^\vee$ (critical) \\[2pt]
+  $0$ & $k = -h^\vee$ (critical) \\[2pt]
 Heisenberg $\cH_k$ & $k \mapsto -k$ & $0$ &
   $k = 0$ (degenerate) \\[2pt]
-$\beta\gamma$ & fixed & $-1$ & (always self-dual) \\[2pt]
+$\beta\gamma$ & fixed & $0$ & (always self-dual) \\[2pt]
 $\cW_N(\mathfrak{sl}_N)$ &
-  $k \mapsto -k - N$ & $\frac{(N-1)(N^2+N+1)}{N}$ &
-  $k = -N/2$
+  $c \mapsto c^*_N - c$ & $(H_N{-}1)\,c^*_N$ &
+  $c = c^*_N/2$
 \end{tabular}
 \end{center}
 
-The table encodes the entire gravitational duality landscape: each
-row is a chiral algebra, its Koszul involution, the total anomaly $K$,
-and the self-dual point where the gravitational theory is its own
-$S$-dual.
+Here $H_N = \sum_{j=1}^N 1/j$ is the $N$-th harmonic number
+($H_2 - 1 = 1/2$, $H_3 - 1 = 5/6$) and
+$c^*_N$ is the Koszul critical sum
+($c^*_2 = 26$, $c^*_3 = 100$).
+The affine lineage ($\hat{\mathfrak{g}}_k$, $\cH_k$, $\beta\gamma$)
+has $K = 0$; the $\cW$-algebra lineage has $K \neq 0$, reflecting the
+shift introduced by Drinfeld--Sokolov reduction (Theorem~\ref{thm:ds-koszul-obstruction}).
+Each row gives the chiral algebra, its Koszul involution, the total
+anomaly $K = \kappa + \kappa^!$, and the self-dual point where the
+gravitational theory is its own $S$-dual.
 
 \subsubsection*{The duality map on partition functions}
 
@@ -1135,9 +1149,10 @@ double poles at the positions of the hard operators.
 The shadow connection at genus~$0$ and arity~$2$ is the
 projection of $\Theta_{\mathrm{Vir}_c}$ to the binary stratum:
 $S_2 = \operatorname{Sh}_2(\Theta_{\mathrm{Vir}_c})|_{g=0}$.
-This is determined by the OPE kernel
-$r(z) = (c/2)/z^4 + 2T/z^2 + \partial T/z$
-(\S\ref{subsec:gravity-r-matrix}).
+This is determined by the Laplace kernel
+$r^L(z) = (c/2)/z^4 + 2T/z^2 + \partial T/z$
+(\S\ref{subsec:gravity-r-matrix}); equivalently, the collision
+residue $r^{\mathrm{coll}}(z) = (c/2)/z^3 + 2T/z$.
 Acting on a correlator of primary fields $\cO_i$ with conformal
 weights $h_i$, the OPE at the $i$-th insertion gives
 \[
@@ -1983,6 +1998,12 @@ M & $\mathrm{Vir}_c$ & $\infty$
   & $\kappa_{\mathrm{eff}}(\hat A(i\hbar)-1)$ & $\mathfrak{Q}_{\mathrm{Vir}}$
 \end{tabular}
 \end{center}
+
+\noindent
+Here $\hbar$ is the genus-counting parameter with
+$\sum_{g \geq 1} F_g \hbar^{2g} = \kappa_{\mathrm{eff}}(\hat A(i\hbar)-1)$
+(note: $\hat A(i\hbar)-1$ starts at $\hbar^2$, matching
+$F_1 \sim \hbar^2$).
 
 \noindent
 The Fredholm property is equivalent to class~G: only Gaussian
