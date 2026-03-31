@@ -238,9 +238,9 @@ class TestSignConventions:
         assert data['num_terms'] == 6
 
     def test_arity4_relation(self):
-        """Arity-4 relation has 14 terms (K_5 associahedron)."""
+        """Arity-4 relation: K_5 has 9 codim-1 faces."""
         data = ainfty_sign_arity4()
-        assert data['num_terms'] == 14
+        assert data['num_terms'] == 9
 
     def test_all_families_uncurved_g0(self):
         """All families are uncurved at genus 0."""

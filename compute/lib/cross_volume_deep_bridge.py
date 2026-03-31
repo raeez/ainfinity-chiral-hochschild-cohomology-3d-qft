@@ -481,7 +481,7 @@ def ainfty_sign_arity4() -> Dict[str, Any]:
     return {
         'relation': 'sum over tree compositions at arity 4 = 0',
         'involves': ['m_4, m_3, m_2, m_1'],
-        'num_terms': 14,  # 14 faces of K_5
+        'num_terms': 9,  # 9 codim-1 faces of K_5 (NOT 14 = Catalan C_4 = vertices)
         'geometric_source': 'K_5 (3-dimensional associahedron)',
         'convention': 'cohomological, Koszul signs',
     }
