@@ -54,7 +54,7 @@ class ChiralAlgebraData:
     num_generators: int
     central_charge: object          # c(A), symbolic or numeric
     dual_central_charge: object     # c(A!)
-    kappa: object                   # kappa(A) = c(A)/2
+    kappa: object                   # kappa(A): family-dependent (NOT always c/2)
     dual_kappa: object              # kappa(A!)
     kappa_sum: object               # kappa(A) + kappa(A!), should be level-independent
     shadow_depth: object            # r_max: 2=G, 3=L, 4=C, oo=M
