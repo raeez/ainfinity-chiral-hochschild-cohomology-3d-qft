@@ -435,7 +435,7 @@ def ainfty_sign_m1_squared() -> Dict[str, Any]:
         'relation': 'm_1^2 = 0',
         'convention': 'cohomological (|m_1| = +1)',
         'sign': '+1 (no sign: m_1 composed with m_1)',
-        'curved_version': 'm_1^2(a) = [m_0, a] = m_2(m_0, a) - (-1)^{|a|} m_2(a, m_0)',
+        'curved_version': 'm_1^2(a) = [m_0, a] = m_2(m_0, a) - m_2(a, m_0)',
     }
 
 
