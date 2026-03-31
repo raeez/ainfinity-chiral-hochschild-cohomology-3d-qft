@@ -1,9 +1,9 @@
 # ============================================================================
-#  Makefile — A∞ Chiral Algebras and 3D Holomorphic-Topological QFT (Vol II)
+#  Makefile — A-infinity Chiral Algebras and 3D HT QFT (Vol II)
 # ============================================================================
 #
 #  Usage:
-#    make            Full build (up to 6 passes, stamp-based idempotent)
+#    make            Full build → out/
 #    make fast       Quick build (up to 4 passes) for rapid iteration
 #    make clean      Remove all LaTeX build artifacts (preserves stamp)
 #    make veryclean  Remove artifacts AND compiled PDFs (forces rebuild)
@@ -34,6 +34,8 @@ SOURCES   := $(wildcard *.tex) \
 # Output
 PDF       := $(MAIN).pdf
 STAMP     := .build_stamp
+OUT_DIR   := out
+OUT_PDF   := $(OUT_DIR)/ainfinity_chiral_algebras.pdf
 
 # If PDF was externally deleted but stamp remains, force a rebuild.
 ifeq (,$(wildcard $(PDF)))
@@ -56,11 +58,11 @@ endef
 #  Targets
 # ============================================================================
 
-.PHONY: all fast clean veryclean count check test help
+.PHONY: all fast clean veryclean count check test help publish
 
-## all: Full build — up to PASSES pdflatex passes, stopping when converged.
+## all: Full build → out/
 ##   Idempotent: no-op if no .tex files changed since last successful build.
-all: $(STAMP)
+all: $(STAMP) publish
 
 $(STAMP): $(SOURCES)
 	@echo "══════════════════════════════════════════════════════════"
@@ -134,6 +136,12 @@ fast:
 	fi
 	@echo "     Logs: $(LOG_DIR)/ and $(MAIN).log"
 
+## publish: Copy final PDF to out/ (does not trigger a rebuild).
+publish:
+	@mkdir -p $(OUT_DIR)
+	@if [ -f $(PDF) ]; then cp $(PDF) $(OUT_PDF); echo "  ✓  $(OUT_PDF)"; \
+	else echo "  ⚠  $(PDF) not found — run 'make fast' first."; fi
+
 ## check: Halt on first error — use for CI or pre-commit validation.
 check:
 	@echo "  ── Error check (halt-on-error) ──"
@@ -157,10 +165,11 @@ clean:
 	@rm -f texput.log
 	@echo "  ✓  Clean (stamp preserved — make will skip rebuild if sources unchanged)."
 
-## veryclean: Remove EVERYTHING including PDF and build stamp (forces full rebuild).
+## veryclean: Remove EVERYTHING including PDF, out/, and build stamp (forces full rebuild).
 veryclean: clean
 	@rm -f $(PDF) $(STAMP)
-	@echo "  ✓  Stamp and PDF removed — next make will rebuild."
+	@rm -rf $(OUT_DIR)
+	@echo "  ✓  Stamp, PDF, and out/ removed — next make will rebuild."
 
 ## count: Manuscript statistics.
 count:
@@ -212,7 +221,7 @@ help:
 	@echo "  Vol II — Build System"
 	@echo "  ─────────────────────"
 	@echo ""
-	@echo "  make            Full build ($(PASSES) passes, stamp-based idempotent)"
+	@echo "  make            Full build → out/ ($(PASSES) passes, stamp-based)"
 	@echo "  make fast       Quick converging build (up to $(FAST_PASSES) passes)"
 	@echo "  make check      Halt-on-error validation"
 	@echo "  make clean      Remove build debris (preserves stamp)"
