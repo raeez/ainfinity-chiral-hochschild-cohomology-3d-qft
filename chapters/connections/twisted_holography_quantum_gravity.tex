@@ -600,9 +600,11 @@ respect to:
   by level $k$, the datum $\mathcal{H}(\cA_k)$ varies algebraically
   in $k$ away from the critical locus.
 \item \textbf{Drinfeld--Sokolov reduction}: For principal DS reduction
-  $\mathcal{W}_k(\mathfrak{g}) = H^0_{\mathrm{DS}}(V_k(\mathfrak{g}))$,
+  of the total current-plus-ghost system
+  $V_k(\mathfrak{g})\otimes F_{\mathrm{gh}}$,
   the holographic datum transforms as
-  $\mathcal{H}(\mathcal{W}_k) = \mathrm{DS}(\mathcal{H}(V_k))$.
+  $\mathcal{H}(\mathcal{W}_k)
+  = \mathrm{DS}(\mathcal{H}(V_k\otimes F_{\mathrm{gh}}))$.
 \end{enumerate}
 \end{theorem}
 
@@ -611,8 +613,10 @@ respect to:
 (Volume~I, Theorem~\ref{thm:shadow-homotopy-invariance}).
 (ii)~follows from the algebraic family rigidity theorem
 (Volume~I, Theorem~\ref{thm:algebraic-family-rigidity}).
-(iii)~follows from the compatibility of bar-cobar with principal DS
-reduction (Volume~I, Chapter~\ref{chap:w-algebras}).
+(iii)~follows from the principal-current-plus-ghost DS descent
+statement for the platonic package and universal MC class
+(Volume~I, Theorem~\ref{thm:ds-platonic-functor} and
+Corollary~\ref{cor:ds-theta-descent}).
 \end{proof}
 
 
@@ -804,9 +808,13 @@ the corresponding $S$-duality transformation.
 \index{classical Yang--Baxter equation!gravitational scattering}
 The collision residue $r(z) = \Res^{\mathrm{coll}}_{0,2}(\Theta_\cA)$
 satisfies the classical Yang--Baxter equation~\eqref{eq:thqg-cybe}.
-It defines a dg-shifted Yangian $\Ydg(\cA^!)$ whose RTT realization is the
-gravitational scattering matrix.  The line-operator category is
-$\mathcal{C} \simeq \cA^!\text{-}\mathsf{mod}$.
+On the affine lineage, this residue recovers the proved dg-shifted
+Yangian realization of Theorem~\ref{thm:Koszul_dual_Yangian};
+more generally it is the classical input for the conjectural
+perturbative gravitational-Yangian package.  Independently, the
+line-operator category is the open-colour module category
+$\mathcal{C} \simeq \cA^!\text{-}\mathsf{mod}$
+\textup{(}Theorem~\textup{\ref{thm:lines_as_modules})}.
 \end{theorem}
 
 \begin{proof}[Proof sketch]
@@ -823,12 +831,14 @@ Arnold relations on $H^\bullet(\overline{C}_3(X))$
 identification $[\Theta^{(0,2)}, \Theta^{(0,2)}]_{0,3} = 0$
 modulo $D_\cA$-exact terms gives the CYBE for $r(z)$.
 
-The dg-shifted Yangian $\Ydg(\cA^!)$ is defined by the RTT
-formalism applied to $r(z)$
-(Volume~I, Definition~\ref*{V1-def:modular-yangian-pro}).
-Its module category coincides with $\cA^!\text{-}\mathsf{mod}$
-by the line-operator theorem (Chapter~\ref{chap:ht-bulk-boundary-line},
-Theorem~\ref{thm:lines_as_modules}).
+On the affine lineage, Theorem~\ref{thm:Koszul_dual_Yangian}
+identifies the proved bar-side dg-shifted Yangian recovered from this
+collision residue.  Independently, the line-operator theorem
+(Chapter~\ref{chap:ht-bulk-boundary-line},
+Theorem~\ref{thm:lines_as_modules}) identifies the line category
+with $\cA^!\text{-}\mathsf{mod}$.  Beyond that affine/proved lane,
+packaging the same residue into a general perturbative
+gravitational-Yangian realization remains frontier material.
 \end{proof}
 
 
@@ -1477,9 +1487,11 @@ $\nabla^{\mathrm{hol}}_{M2}$
 The $M2$ boundary algebra has shadow depth $r_{\max}(A_{M2,\infty}) = \infty$
 (class M: mixed).  The first four shadow layers are:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $\kappa(A_{M2,\infty}) = K^2$: the modular characteristic equals
-  $\dim(\mathfrak{gl}_K) = K^2$ (the weight-$0$ generators contribute
-  $K^2$ and higher weights contribute zero by cancellation).
+\item $\kappa(A_{M2,\infty})$: the modular characteristic is
+  open (the DDCA is not a tensor product of standard chiral
+  algebras, and the self-sewing trace on the full cyclic
+  pairing of $A(K)$ has not been computed).
+  \ClaimStatusOpen
 \item $\mathfrak{C}(A_{M2,\infty}) \ne 0$: the cubic shadow is
   nontrivial, arising from the Lie bracket of $\mathfrak{gl}_K$.
 \item $\mathfrak{Q}(A_{M2,\infty}) \ne 0$: the quartic shadow is
@@ -1494,12 +1506,12 @@ structure, producing an infinite tower.
 \end{proposition}
 
 \begin{proof}
-The modular characteristic:
-$\kappa = \operatorname{str}(\id|_{V^{(0)}}) = \dim(\mathfrak{gl}_K)
-= K^2$.  (The weight-$0$ space is $\mathfrak{gl}_K$ with trivial
-ghost number; higher weights do not contribute to $\kappa$ because
-the supertrace over pairs $(E_{\alpha\beta}z^m\partial^n,
-E_{\alpha\beta}z^n\partial^m)$ cancels for $m+n \ge 1$.)
+The modular characteristic $\kappa(A_{M2,\infty})$ is open:
+the self-sewing trace requires the full cyclic pairing
+on the DDCA generators, which has not been computed.
+(The naive computation $\operatorname{str}(\id|_{V^{(0)}}) = K^2$
+conflates the identity supertrace with the cyclic self-sewing
+trace; these coincide only for free-field algebras.)
 
 The cubic shadow is nontrivial because $\mathfrak{gl}_K$ is nonabelian
 for $K \ge 2$: the structure constants $f^{\alpha\beta,\gamma\delta}_{
@@ -2306,18 +2318,19 @@ non-principal DS reduction.
 % label removed: conj:thqg-ds-functor
 \index{Drinfeld--Sokolov reduction!as holographic functor}
 For principal DS reduction, the Drinfeld--Sokolov functor
-$\mathrm{DS}: V_k(\mathfrak{g}) \mapsto \mathcal{W}_k(\mathfrak{g})$
+$\mathrm{DS}: V_k(\mathfrak{g})\otimes F_{\mathrm{gh}}
+\mapsto \mathcal{W}_k(\mathfrak{g})$
 lifts to a functor on holographic modular Koszul data:
 \begin{equation}% label removed: eq:thqg-ds-functor
-\mathrm{DS}: \mathcal{H}(V_k(\mathfrak{g}))
+\mathrm{DS}: \mathcal{H}(V_k(\mathfrak{g})\otimes F_{\mathrm{gh}})
 \;\longrightarrow\;
 \mathcal{H}(\mathcal{W}_k(\mathfrak{g})),
 \end{equation}
 commuting with all six components.  In particular:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $\mathrm{DS}(\Theta_{V_k}) = \Theta_{\mathcal{W}_k}$.
-\item $\mathrm{DS}(r_{V_k}(z)) = r_{\mathcal{W}_k}(z)$.
-\item $\mathrm{DS}(\nabla^{\mathrm{hol}}_{V_k})
+\item $\mathrm{DS}(\Theta_{V_k\otimes F_{\mathrm{gh}}}) = \Theta_{\mathcal{W}_k}$.
+\item $\mathrm{DS}(r_{V_k\otimes F_{\mathrm{gh}}}(z)) = r_{\mathcal{W}_k}(z)$.
+\item $\mathrm{DS}(\nabla^{\mathrm{hol}}_{V_k\otimes F_{\mathrm{gh}}})
   = \nabla^{\mathrm{hol}}_{\mathcal{W}_k}$.
 \end{enumerate}
 \end{conjecture}
@@ -2558,40 +2571,29 @@ the quadratic part: $\Theta = \Theta^{\le 2}$.
 \subsection{MC3 categorical lift: all simple types}
 % label removed: subsec:thqg-mc3-frontier
 
-\begin{theorem}[MC3 in type A; \ClaimStatusProvedElsewhere]
+\begin{theorem}[Type-$A$ MC3 reduction beyond the evaluation-generated core; \ClaimStatusProvedElsewhere]
 % label removed: thm:thqg-mc3-type-a
 \index{MC3!type A resolution}
-For $\mathfrak{g} = \mathfrak{sl}_N$, the thick generation of
-$D^b(\cO_q(\mathfrak{sl}_N))$ by prefundamental representations
-$L^\pm$ is proved at the character level:
-\begin{equation}% label removed: eq:thqg-mc3-character
-[M(\lambda)] \in K_0\text{-}\mathrm{span}\{[V_n] \cdot [L^-]\}
-\quad \text{for all } \lambda.
-\end{equation}
-The DK construction gives a derived equivalence
-\begin{equation}% label removed: eq:thqg-mc3-dk
-D^b(\cO_q(\mathfrak{sl}_N))
-\;\simeq\;
-\Perf(\Ydg(\widehat{\mathfrak{sl}}_N^!))
-\end{equation}
-on compact objects, once the character-level generation is lifted
-to a categorical statement.
+For $\mathfrak{g} = \mathfrak{sl}_N$, Volume~I proves the DK
+comparison on the evaluation-generated core and, beyond that core,
+establishes the shifted-prefundamental-generation and pro-Weyl
+packets on the type-$A$ shifted/completed side.  The only remaining
+post-core step is the compact-completion extension/comparison packet.
 \end{theorem}
 
-\begin{theorem}[MC3 for all simple types; \ClaimStatusProvedElsewhere]
+\begin{theorem}[All-types MC3 on the evaluation-generated core; \ClaimStatusProvedElsewhere]
 % label removed: conj:thqg-mc3-arbitrary
 \index{MC3!all simple types}
-For all simple $\mathfrak{g}$, the prefundamental Clebsch--Gordan
-closure holds
-(Vol~I, Corollary~\ref*{V1-cor:mc3-all-types}),
-giving DK equivalences for the dg-shifted Yangian $\Ydg(\cA^!)$ for
-all chirally Koszul $\cA$ in the affine family.
-The proof replaces the minuscule hypothesis of the type-$A$ argument
-with the strictly weaker multiplicity-free $\ell$-weight property
-(Chari--Moura, 2006), which holds for all simple types.
+For all simple $\mathfrak{g}$, Volume~I proves the categorical
+Clebsch--Gordan part of MC3 via the multiplicity-free
+$\ell$-weight property and separately proves the DK comparison on the
+evaluation-generated core.  Beyond that core, only type~$A$ currently
+has a theorematic reduction to a single compact-completion gap; the
+analogous post-core mechanism in other types remains conditional on
+additional shifted/completed inputs.
 \end{theorem}
 
-\begin{remark}[The Hern\'andez--Jimbo obstruction: resolved]
+\begin{remark}[The Hern\'andez--Jimbo obstruction: resolved for categorical CG]
 % label removed: rem:thqg-hernandez-jimbo
 The original obstruction to extending MC3 beyond type $A$ was the
 absence of a suitable set of prefundamental representations for the
@@ -2601,7 +2603,10 @@ multiplicity-free $\ell$-weight approach
 (Vol~I, Theorem~\ref*{V1-thm:categorical-cg-all-types}): the
 Chari--Moura property (every tensor product $V_{\omega_i} \otimes L^-$
 has multiplicity-free $\ell$-weight spaces) replaces the minuscule
-hypothesis entirely, and holds for all simple Lie algebras.
+hypothesis entirely, and holds for all simple Lie algebras.  What this
+resolves is the categorical-CG obstruction and the resulting
+evaluation-generated-core comparison, not the full post-core MC3
+extension problem.
 \end{remark}
 
 

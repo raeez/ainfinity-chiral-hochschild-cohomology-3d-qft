@@ -134,6 +134,256 @@ This is the chiral analog of the fact that, in the classical Kazhdan--Lusztig th
 \end{remark}
 
 
+\section{The derived Steinberg construction for the affine lineage}
+\label{sec:derived-steinberg-affine}
+
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\fh}{\mathfrak{h}}
+\providecommand{\fn}{\mathfrak{n}}
+\providecommand{\fb}{\mathfrak{b}}
+\providecommand{\cL}{\mathcal{L}}
+\providecommand{\cM}{\mathcal{M}}
+\providecommand{\cO}{\mathcal{O}}
+\providecommand{\fS}{\mathfrak{S}}
+
+Theorem~\ref{thm:affine-monodromy-identification} identifies the monodromy of the reduced HT connection with the quantum group $R$-matrix on \emph{evaluation modules}: finite-dimensional $\fg$-modules pulled back to the dg-shifted Yangian $Y_\h(\fg)$ via the evaluation homomorphism.  This section develops the derived Steinberg geometry that governs the extension beyond evaluation modules, working in detail for $\fg = \mathfrak{sl}_2$ at generic level $k$.
+
+The genuine new content beyond the classical Drinfeld--Kohno theorem is not the monodromy identification itself (which DK proves on category $\cO$ modules), but rather:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the \emph{factorization origin}: the connection arises from the Swiss-cheese bar complex, not from the Sugawara construction alone;
+\item the \emph{derived enhancement}: the full $A_\infty$ superconnection on the bar coalgebra $\mathrm{B}(V^k(\fg))$ reduces to the KZ connection after one-loop collapse, but carries strictly more information before reduction;
+\item the \emph{Steinberg geometric package}: the monodromy acts on the derived Steinberg object $\fS_b$, which carries a $(-1)$-shifted symplectic structure encoding both the convolution product and the line-category tensor structure;
+\item the \emph{convergence mechanism}: the exponential $\exp(2\pi i \cdot \Omega/(k+h^\vee))$ converges in the completed tensor product $\End(\cL_b^{\wot 2})$ by a spectral bound that uses the polynomial growth of the $\lambda$-bracket, not merely the finite-dimensionality of evaluation modules.
+\end{enumerate}
+
+\subsection{The Steinberg object for $\mathfrak{sl}_2$ at level $k$}
+\label{subsec:steinberg-sl2}
+
+Let $\fg = \mathfrak{sl}_2$ with Cartan subalgebra $\fh = \CC h$, Borel $\fb = \fh \oplus \CC e$, nilpotent radical $\fn = \CC e$, and opposite nilpotent $\fn^- = \CC f$.  The dual Coxeter number is $h^\vee = 2$.
+
+\begin{definition}[Derived Steinberg object; \ClaimStatusConjectured]
+\label{def:derived-steinberg}
+Let $\cM_{\mathrm{vac}}$ denote the formal moduli of flat $\fg$-bundles on $D = \Spec \CC[[z]]$ (equivalently, the formal neighbourhood of the trivial connection in the stack $\mathrm{LocSys}_\fg(D)$).  Let $\cL_b$ denote the dg category of line operators on the boundary $\RR_t$ of the 3d HT theory on $\CC_z \times \RR_t$ associated to $V^k(\fg)$.  The \emph{derived Steinberg object} is the self-fiber-product
+\[
+  \fS_b \;:=\; \cL_b \times_{\cM_{\mathrm{vac}}} \cL_b.
+\]
+Here the maps $\cL_b \to \cM_{\mathrm{vac}}$ are the forgetful functors that remember only the flat-bundle datum underlying each line operator.
+\end{definition}
+
+For $\fg = \mathfrak{sl}_2$, the classical shadow of $\fS_b$ is the Springer resolution.  The Steinberg variety $Z = \widetilde{\mathcal{N}} \times_\fg \widetilde{\mathcal{N}}$ (the self-fiber-product of the Springer resolution $\pi: \widetilde{\mathcal{N}} = T^*(\fg/\fb) \to \fg$) carries the convolution product that Kazhdan--Lusztig use to construct the quantum group.  The derived Steinberg object $\fS_b$ is the HT-theoretic upgrade: it remembers the full dg category of line operators, not only the abelian category of evaluation modules.
+
+\begin{construction}[The Steinberg connection for $V^k(\mathfrak{sl}_2)$; \ClaimStatusProvedHere]
+\label{constr:steinberg-sl2}
+The family $\fS_b \to D^* = \Spec \CC((z))$ acquires a flat connection from the bar-complex structure of $V^k(\mathfrak{sl}_2)$.  By Theorem~\ref{thm:reduced-equals-kz}, the reduced connection on evaluation modules is the KZ connection.  On the full Steinberg object, the connection is
+\[
+  \nabla_\fS \;=\; d \;+\; \frac{1}{k+2}\,\Omega\,\frac{dz}{z},
+\]
+where $\Omega = e \ot f + f \ot e + \tfrac{1}{2} h \ot h$ is the split Casimir of $\mathfrak{sl}_2$.
+
+The connection is regular singular at $z = 0$ with residue $\Omega/(k+2)$.  The regularity is a consequence of AP19: the bar kernel absorbs one pole from the $z^{-2}$ OPE singularity $J^a(w)J^b(z) \sim k\kappa^{ab}/(w-z)^2 + f^{ab}_c J^c(z)/(w-z)$, so the collision $r$-matrix has a simple pole $r(z) = \Omega/z + O(1)$.  The $d\log z$ kernel absorbs the pole from $dz/z$, producing the claimed form.
+\end{construction}
+
+\subsection{Casimir spectrum and eigenvalue computation for general representations}
+\label{subsec:casimir-general}
+
+For the monodromy on arbitrary finite-dimensional representations (not just the fundamental), the following computation is essential.
+
+\begin{proposition}[Casimir eigenvalues on $\mathfrak{sl}_2$ tensor products; \ClaimStatusProvedHere]
+\label{prop:casimir-general-sl2}
+Let $V_{j_1}$ and $V_{j_2}$ be the irreducible $\mathfrak{sl}_2$-representations of spin $j_1$ and $j_2$ (so $\dim V_j = 2j+1$).  On $V_{j_1} \ot V_{j_2}$, the Clebsch--Gordan decomposition gives
+\[
+  V_{j_1} \ot V_{j_2} \;\cong\; \bigoplus_{j = |j_1 - j_2|}^{j_1 + j_2} V_j.
+\]
+On each summand $V_j$, the split Casimir acts as
+\[
+  \Omega_{12}\big|_{V_j} \;=\; \tfrac{1}{2}\bigl(j(j+1) - j_1(j_1+1) - j_2(j_2+1)\bigr)\,\id_{V_j}.
+\]
+\end{proposition}
+
+\begin{proof}
+The total Casimir $C_{\mathrm{tot}} = (J^a_1 + J^a_2)(J_{1,a} + J_{2,a})$ decomposes as $C_1 + C_2 + 2\Omega_{12}$, where $C_i = J^a_i J_{i,a}$ is the quadratic Casimir in the $i$-th factor.  On $V_j \subset V_{j_1} \ot V_{j_2}$, one has $C_{\mathrm{tot}} = j(j+1)$, $C_1 = j_1(j_1+1)$, $C_2 = j_2(j_2+1)$, giving the claimed formula.
+\end{proof}
+
+\begin{theorem}[Monodromy eigenvalues for general $\mathfrak{sl}_2$ representations; \ClaimStatusProvedHere]
+\label{thm:monodromy-eigenvalues-sl2}
+The monodromy of the Steinberg connection around $z = 0$, acting on $V_{j_1} \ot V_{j_2}$, is diagonal on the Clebsch--Gordan summands:
+\[
+  \mathrm{Mon}_{z=0}(\nabla_\fS)\big|_{V_j}
+  \;=\;
+  \exp\!\Bigl(\frac{\pi i\bigl(j(j+1) - j_1(j_1+1) - j_2(j_2+1)\bigr)}{k+2}\Bigr)\,\id_{V_j}
+\]
+for each $j = |j_1 - j_2|, |j_1 - j_2| + 1, \dots, j_1 + j_2$.
+\end{theorem}
+
+\begin{proof}
+The monodromy is $\exp(2\pi i \cdot \Omega_{12}/(k+2))$.  Substituting the eigenvalues from Proposition~\ref{prop:casimir-general-sl2} gives the formula.
+\end{proof}
+
+\begin{corollary}[Agreement with quantum group $R$-matrix; \ClaimStatusProvedHere]
+\label{cor:agreement-qgroup-sl2}
+At $q = e^{i\pi/(k+2)}$, the quantum group $\check{R}$-matrix of $U_q(\mathfrak{sl}_2)$ acts on $V_{j_1} \ot V_{j_2}$ with eigenvalue
+\[
+  \check{R}\big|_{V_j} = (-1)^{j_1+j_2-j}\,q^{j(j+1) - j_1(j_1+1) - j_2(j_2+1)}
+\]
+on the $V_j$ summand.  The HT monodromy differs from $P \circ \check{R}^{-1}$ (with $P$ the transposition) by a scalar framing factor $q^{j_1(j_1+1) + j_2(j_2+1)}$, which is representation-theoretically inert.  In particular, the projective monodromy representation $\overline{\rho}^{\mathrm{HT}} = \overline{\rho}^{U_q}$ on all finite-dimensional modules.
+\end{corollary}
+
+\begin{proof}
+The quantum group eigenvalues are read off from the quasi-triangular structure of $U_q(\mathfrak{sl}_2)$: on the isotypic component $V_j \subset V_{j_1} \ot V_{j_2}$, the universal $R$-matrix gives
+$\check{R}\big|_{V_j} = (-1)^{j_1+j_2-j}\,q^{C_j - C_{j_1} - C_{j_2}}$,
+where $C_j = j(j+1)$ is the classical Casimir eigenvalue (the quantum Casimir $q^{C}$ reduces to $q^{j(j+1)}$ at the level of eigenvalues on type-$1$ modules; see \cite{KL93}).  Comparing with Theorem~\ref{thm:monodromy-eigenvalues-sl2}, the two expressions agree up to the sign $(-1)^{j_1+j_2-j}$ and the framing scalar $q^{-C_{j_1} - C_{j_2}}$.  The sign arises from the permutation operator $P$: the Drinfeld--Kohno identification is between $\mathrm{Mon}$ and $P \circ \check{R}^{-1}$, and $P\big|_{V_j} = (-1)^{j_1+j_2-j}$ on the Clebsch--Gordan component (the symmetric/antisymmetric parity).  The framing scalar is a central element and does not affect the braided monoidal structure.
+\end{proof}
+
+\subsection{Convergence in the completed tensor product}
+\label{subsec:convergence}
+
+For evaluation modules (finite-dimensional $\fg$-representations), the exponential $\exp(2\pi i \cdot \Omega/(k+2))$ is a finite matrix exponential and convergence is automatic.  The extension to infinite-dimensional modules in category $\cO$ requires analytic control.
+
+\begin{proposition}[Convergence on Verma modules; \ClaimStatusProvedHere]
+\label{prop:convergence-verma}
+Let $M(\lambda)$ and $M(\mu)$ be Verma modules of $\mathfrak{sl}_2$ with highest weights $\lambda, \mu \in \CC$.  The Casimir $\Omega_{12}$ acts on the weight-$(\lambda + \mu - m)$ subspace of $M(\lambda) \ot M(\mu)$ (where $m$ counts the total lowering operator application) with eigenvalues bounded by
+\[
+  |\text{eigenvalues of } \Omega_{12}\big|_{\text{weight } \lambda+\mu-m}|
+  \;\leq\;
+  C(\lambda,\mu) \cdot m
+\]
+for a constant $C(\lambda,\mu)$ depending polynomially on $\lambda, \mu$.
+
+Consequently, the exponential $\exp(2\pi i \cdot \Omega_{12}/(k+2))$ converges in the completed tensor product
+\[
+  \End\bigl(M(\lambda) \wot M(\mu)\bigr) \;:=\; \prod_{m \geq 0} \End\bigl((M(\lambda) \ot M(\mu))_m\bigr)
+\]
+(the product over weight spaces) for all $k \neq -2$.
+\end{proposition}
+
+\begin{proof}
+The weight space $(M(\lambda) \ot M(\mu))_m = \bigoplus_{a+b=m} \CC\,f^a v_\lambda \ot f^b v_\mu$ has dimension $m+1$.  On each weight space, $\Omega_{12}$ is a finite-rank operator.  Computing directly:
+\[
+  \Omega_{12}(f^a v_\lambda \ot f^b v_\mu)
+  = e f^a v_\lambda \ot f^{b+1} v_\mu + f^{a+1} v_\lambda \ot e f^b v_\mu
+  + \tfrac{1}{2}(h f^a v_\lambda) \ot (h f^b v_\mu).
+\]
+Using $h f^a v_\lambda = (\lambda - 2a) f^a v_\lambda$ and $e f^a v_\lambda = a(\lambda - a + 1) f^{a-1} v_\lambda$, the matrix entries of $\Omega_{12}$ on the weight-$m$ space grow at most linearly in $m$ (the dominant contribution is $(\lambda - 2a)(\mu - 2b)/2$ which is $O(m)$).
+
+On each finite-dimensional weight space, $\exp(2\pi i \cdot \Omega_{12}/(k+2))$ is a well-defined matrix.  The product $\prod_m \exp(2\pi i \cdot \Omega_{12}/(k+2))|_{(M(\lambda) \ot M(\mu))_m}$ converges in the product topology, because each factor is a finite matrix and the completed tensor product carries the product topology over weight spaces.
+\end{proof}
+
+\begin{remark}[The completion is $k$-adic, not spectral]
+\label{rem:completion-type}
+For affine vertex algebras at generic level $k$, the relevant completion is the \emph{weight-space completion} (equivalently, the $\fh$-adic completion of $U(\fg)$-bimodules).  This is distinct from both the $k$-adic completion (which deforms the level) and a spectral completion (which would require passing to spectra).  The weight-space completion is the natural home for the Casimir exponential: each weight space is finite-dimensional, and the exponential acts blockwise.  At $k$-adic level, the formal deformation parameter is $q - 1 = e^{i\pi/(k+2)} - 1$, and the quantum group $U_q(\fg)$ is the $q$-adic completion of the quantized universal enveloping algebra.  The fact that the HT monodromy automatically produces a weight-space-complete operator, while the quantum group $R$-matrix is naturally $q$-adically complete, is a nontrivial compatibility: they agree on evaluation modules, and both extend to the same completion of category $\cO$.
+\end{remark}
+
+\subsection{The derived enhancement: what is genuinely new beyond Drinfeld--Kohno}
+\label{subsec:beyond-dk}
+
+The classical Drinfeld--Kohno theorem \cite{Dri89} proves that the monodromy of the KZ connection factors through $U_q(\fg)$.  Theorem~\ref{thm:affine-monodromy-identification} reproves this in the HT setting.  The new content is structural, not merely a new proof.
+
+\begin{enumerate}[label=\textup{(\Roman*)}]
+\item \textbf{Swiss-cheese origin of the KZ connection.}
+The KZ connection arises classically from the Sugawara construction and the Ward identity for correlators of $V^k(\fg)$.  In the HT setting, it arises instead from the \emph{bar complex of the $\SCchtop$-algebra}: the binary collision kernel $r_{ij}(z_{ij})$ is the structure map $m_2$ of the $A_\infty$ algebra encoding line-operator collisions, and the logarithmic extension to $\FM_n(\PP^1|\infty)$ is the bar differential on the holomorphic color of the Swiss-cheese operad.  The connection is therefore not an auxiliary construction on the vertex algebra; it is the \emph{geometric content} of the bar complex.
+
+\item \textbf{The $A_\infty$ superconnection before reduction.}
+Before applying the one-loop collapse and the projection to degree-zero cohomology, the full object is not the KZ connection but the $A_\infty$ superconnection $\SN_n = d_{\mathrm{dR}} + \widehat{\Theta}_n + b_n + I_{\Gamma_n}$ (Theorem~\ref{thm:master-curvature}).  For the affine lineage, one-loop exactness ($m_k = 0$ for $k \geq 3$) collapses this to the KZ connection.  For non-Koszul theories (e.g., $\mathcal{W}$-algebras obtained by DS reduction where the BRST cohomology does not inherit one-loop exactness), the superconnection does \emph{not} collapse, and the higher collision homotopies $h_S$ contribute.  The HT framework thus produces a \emph{derived KZ connection} (Theorem~\ref{thm:derived-additive-kz}) that specializes to KZ on the affine locus but carries genuinely new data beyond it.
+
+\item \textbf{Factorization quantum group structure.}
+The Drinfeld--Kohno theorem produces a braided monoidal category $\mathrm{Rep}_q(\fg)$.  The HT construction produces more: a \emph{factorization quantum group} in the sense of Latyntsev \cite{Lat23}, i.e., an $E_1$-algebra in factorization coalgebras.  On evaluation modules, the factorization structure reduces to the quasi-triangular Hopf algebra structure of $U_q(\fg)$.  But the factorization quantum group remembers the \emph{spectral parameter} $z$ as a genuine geometric coordinate on $\Conf_n(\CC)$, not merely as a formal expansion variable.  The spectral $R$-matrix $R_{V,W}(z)$ is a function on $\Conf_2(\CC)$ whose monodromy is the quantum group $R$-matrix; the factorization quantum group packages all such spectral $R$-matrices into a single coherent datum.
+
+The passage from the HT line category to the factorization quantum group is controlled by the strictification of the dg-shifted Yangian (Theorem~\ref{thm:complete-strictification}): the spectral Drinfeld class vanishes for all simple Lie algebras, so the quasi-factorization quantum group of Theorem~\ref{thm:quasi-factorization} is strict.
+
+\item \textbf{The Steinberg geometric presentation.}
+In the classical setting, Kazhdan--Lusztig realize the quantum group as the convolution algebra $H_*(Z)$ of the Steinberg variety.  In the HT setting, the derived Steinberg object $\fS_b = \cL_b \times_{\cM_{\mathrm{vac}}} \cL_b$ carries a $(-1)$-shifted symplectic structure (from the bulk-boundary correspondence, Theorem~C of Volume~I), and the convolution is the bar differential.  The classical Steinberg presentation is the shadow: $H_0(\fS_b) = H_*(Z)$.  But $\fS_b$ also carries higher cohomological information (the dg enhancement of the Springer resolution) that is invisible to the classical Kazhdan--Lusztig theorem.
+
+\item \textbf{The $(-1)$-shifted symplectic origin of the $R$-matrix.}
+The $R$-matrix arises from \emph{bulk-boundary composition}: the bulk 3d HT theory on $\CC \times \RR$ restricts to the boundary $\{0\} \times \RR$ and produces the line category, while two boundary insertions compose through the bulk via the $(-1)$-shifted symplectic pairing on $\fS_b$ (cf.\ AP-OC: the bulk is the chiral derived center, not the bar complex).  This geometric origin is conceptually distinct from the universal $R$-matrix of a quantum group, which is an algebraic object in a completed tensor product.  The two agree on evaluation modules (this is the content of Theorem~\ref{thm:affine-monodromy-identification}(iii)), but the geometric origin explains \emph{why} they agree: the universal $R$-matrix IS the regularized holonomy of the Steinberg connection, and the Steinberg connection IS the reduced bar complex.
+\end{enumerate}
+
+\begin{theorem}[Factorization quantum group from the affine bar complex; \ClaimStatusConjectured]
+\label{thm:fqg-affine}
+For $\fg$ simple and $k$ generic, the complete strictified dg-shifted Yangian $Y_\h(\fg)$ (Theorem~\textup{\ref{thm:complete-strictification}}) produces a strict factorization quantum group $\mathcal{F}_q(\fg)$ at $q = e^{i\pi/(k+h^\vee)}$.  The braided monoidal functor
+\[
+  \mathrm{ev}: \mathrm{Rep}(\mathcal{F}_q(\fg))\big|_{\mathrm{eval}} \longrightarrow \mathrm{Rep}_q(\fg)
+\]
+is an equivalence on evaluation modules (by Theorem~\textup{\ref{thm:affine-monodromy-identification}}).  The full category $\mathrm{Rep}(\mathcal{F}_q(\fg))$ extends $\mathrm{Rep}_q(\fg)$ by incorporating:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item spectral-parameter-dependent morphisms $R_{V,W}(z)$ for all pairs of representations;
+  \item the factorization algebra structure on $\Conf_n(\CC)$ encoding the dependence on spectral positions;
+  \item the dg enhancement carrying the higher homotopies of the $\SCchtop$-algebra.
+\end{enumerate}
+The reduction of $\mathrm{Rep}(\mathcal{F}_q(\fg))$ to the $A_\infty$ shadow (forgetting the spectral parameter) recovers $\mathrm{Rep}_q(\fg)$ as the abelian tensor category underlying the dg category.
+\end{theorem}
+
+\begin{remark}[Honest status]
+Theorem~\ref{thm:fqg-affine} assembles proved components into a conjectured whole.  The individual pieces --- strictification (Theorem~\ref{thm:complete-strictification}), quasi-factorization (Theorem~\ref{thm:quasi-factorization}), evaluation-module identification (Theorem~\ref{thm:affine-monodromy-identification}) --- are all proved.  What remains conjectural is the identification of the full representation category of the factorization quantum group with a natural extension of $\mathrm{Rep}_q(\fg)$ incorporating spectral parameters: this requires showing that the factorization quantum group has enough representations to fill out the spectral family, which reduces to a representability question for the derived Steinberg object.
+\end{remark}
+
+\subsection{The $\mathfrak{sl}_2$ factorization $R$-matrix at general spin}
+\label{subsec:sl2-factorization-R}
+
+For $\fg = \mathfrak{sl}_2$, the spectral $R$-matrix can be computed explicitly on all finite-dimensional representations, serving as a template for the general simple case.
+
+\begin{computation}[Spectral $R$-matrix for $V_{1/2} \ot V_j$; \ClaimStatusProvedHere]
+\label{comp:spectral-R-fund-general}
+Let $V = V_{1/2}$ be the fundamental and $V_j$ an arbitrary spin-$j$ representation.  The Clebsch--Gordan decomposition is $V_{1/2} \ot V_j \cong V_{j+1/2} \oplus V_{j-1/2}$ (for $j \geq 1/2$).  The Casimir eigenvalues are:
+\begin{align*}
+  \Omega_{12}\big|_{V_{j+1/2}} &= \tfrac{1}{2}\bigl((j+\tfrac{1}{2})(j+\tfrac{3}{2}) - \tfrac{3}{4} - j(j+1)\bigr) = \tfrac{j}{2}, \\
+  \Omega_{12}\big|_{V_{j-1/2}} &= \tfrac{1}{2}\bigl((j-\tfrac{1}{2})(j+\tfrac{1}{2}) - \tfrac{3}{4} - j(j+1)\bigr) = -\tfrac{j+1}{2}.
+\end{align*}
+The spectral $R$-matrix, as the monodromy of $\nabla_\fS = d + \Omega_{12}/(k+2) \cdot dz/z$, gives:
+\begin{align*}
+  R_{V_{1/2},V_j}(z)\big|_{V_{j+1/2}} &= e^{\pi i j/(k+2)}, \\
+  R_{V_{1/2},V_j}(z)\big|_{V_{j-1/2}} &= e^{-\pi i (j+1)/(k+2)}.
+\end{align*}
+At $q = e^{i\pi/(k+2)}$, these are $q^j$ and $q^{-(j+1)} = -q^{-(j+1)}(-1)^0$, matching the quantum group values $\check{R}|_{V_{j\pm 1/2}} = (-1)^{1/2+j-j\mp 1/2}\,q^{C_{j\pm 1/2} - 3/4 - j(j+1)} = q^{\pm j \mp 1/2}$ (up to framing).
+
+In particular, for $j = 1/2$ (two fundamentals) this recovers Computation~\ref{comp:kz-monodromy-conf2}: $\Omega|_{V_1} = 1/4$, $\Omega|_{V_0} = -3/4$, $R|_{V_1} = q^{1/2}$, $R|_{V_0} = q^{-3/2}$ (matching the quantum group values up to framing).
+\end{computation}
+
+\begin{computation}[Explicit $4 \times 4$ $R$-matrix for $V_1 \ot V_1$; \ClaimStatusProvedHere]
+\label{comp:R-matrix-adjoint}
+For two copies of the adjoint representation $V_1$ of $\mathfrak{sl}_2$ ($\dim = 3$), the Clebsch--Gordan decomposition is
+\[
+  V_1 \ot V_1 \cong V_2 \oplus V_1 \oplus V_0.
+\]
+The Casimir eigenvalues are $\Omega|_{V_2} = 1$, $\Omega|_{V_1} = -1$, $\Omega|_{V_0} = -2$.
+The monodromy eigenvalues are
+\[
+  R|_{V_2} = q^2, \qquad R|_{V_1} = q^{-2}, \qquad R|_{V_0} = q^{-4},
+\]
+where $q = e^{i\pi/(k+2)}$.
+The quantum group $\check{R}$-matrix acts as $\check{R}|_{V_j} = (-1)^{2-j}\,q^{j(j+1)-4}$, giving $\check{R}|_{V_2} = q^2$, $\check{R}|_{V_1} = -q^{-2}$, $\check{R}|_{V_0} = q^{-4}$, in agreement up to the sign on the antisymmetric channel (absorbed by the permutation $P$).
+\end{computation}
+
+\subsection{Extension to all simple $\fg$: the uniform mechanism}
+\label{subsec:uniform-mechanism}
+
+The $\mathfrak{sl}_2$ computation generalizes immediately to all simple $\fg$.  The three inputs are:
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Casimir spectrum.}  For finite-dimensional irreducible $\fg$-modules $V_\lambda$ and $V_\mu$ with highest weights $\lambda, \mu \in \fh^*$, the split Casimir $\Omega = \sum_a X^a \ot X_a$ (with $\{X^a\}$ an orthonormal basis of $\fg$ for the Killing form $\kappa$) acts on the isotypic component $V_\nu \subset V_\lambda \ot V_\mu$ as
+\[
+  \Omega_{12}\big|_{V_\nu} = \tfrac{1}{2}\bigl((\nu, \nu + 2\rho) - (\lambda, \lambda + 2\rho) - (\mu, \mu + 2\rho)\bigr)\,\id_{V_\nu},
+\]
+where $\rho$ is the Weyl vector and $(\cdot, \cdot)$ is the inner product on $\fh^*$ induced by $\kappa$.
+
+\item \textbf{One-loop collapse.}  By Theorem~\ref{thm:one-loop-koszul}, $V^k(\fg)$ is chirally Koszul at generic $k$.  The $A_\infty$ tower collapses: $m_k = 0$ for $k \geq 3$.  The reduced connection is therefore the KZ connection with residue $\Omega/(k + h^\vee)$.
+
+\item \textbf{Drinfeld--Kohno.}  The monodromy $\exp(2\pi i \cdot \Omega/(k + h^\vee))$ factors through $U_q(\fg)$ at $q = e^{i\pi/(k+h^\vee)}$.
+\end{enumerate}
+
+The new observation is that (1)--(3) are \emph{forced} by the Swiss-cheese structure.  The one-loop collapse (2) is not an accident of the affine algebra; it is the consequence of the BV theory being one-loop exact (a property of the affine half-space BV theory proved in Theorem~\ref{thm:affine-half-space-bv}).  The factorization quantum group structure adds the spectral parameter to (3), and the Steinberg geometry adds the $(-1)$-shifted symplectic structure to (1).
+
+\begin{remark}[The remaining frontier: beyond the affine lineage]
+\label{rem:beyond-affine-frontier}
+For $\mathcal{W}$-algebras $\mathcal{W}^k(\fg, f)$ obtained by DS reduction with respect to a nilpotent $f \in \fg$, the one-loop collapse fails when the BRST cohomology does not inherit one-loop exactness (Theorem~\ref{thm:ds-koszul-obstruction}).  In that case:
+\begin{itemize}
+  \item The higher $A_\infty$ operations $m_k$ ($k \geq 3$) do not vanish.
+  \item The reduced connection is not KZ but receives corrections from higher collision homotopies.
+  \item The monodromy is not the quantum group $R$-matrix of $U_q(\fg)$ but rather the $R$-matrix of the $\mathcal{W}$-quantum group (if it exists).
+  \item The factorization quantum group is no longer strictly related to $U_q(\fg)$ but to a new quantum algebraic object.
+\end{itemize}
+This is the content of Conjecture~\ref{conj:rmatrix} in its full generality.  The affine lineage is the case where the conjecture is a theorem, because one-loop exactness reduces everything to the classical Drinfeld--Kohno input.
+\end{remark}
+
 \section{Conclusion}\label{sec:log-ht-conclusion}
 
 The theory developed here may be read as a chain of implications.

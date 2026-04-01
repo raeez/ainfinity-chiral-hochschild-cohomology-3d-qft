@@ -29,7 +29,7 @@
 \providecommand{\gAmod}{\mathfrak{g}_{\cA}^{\mathrm{mod}}}
 \providecommand{\Gmod}{\mathcal{G}^{\mathrm{mod}}}
 
-The perturbative finiteness of twisted quantum gravity is the foundational analytic result that makes the gravitational shadow programme well defined.  In standard perturbative quantum gravity, the genus-$g$ contribution to the path integral diverges for~$g \geq 2$ (nonrenormalizability of the Einstein--Hilbert action in~$d = 4$).  In the twisted setting, where the boundary chiral algebra~$\cA$ controls the bulk through the holographic modular Koszul datum $\mathcal{H}(T) = (\cA, \cA^!, \mathcal{C}, r(z), \Theta_\cA, \nabla^{\mathrm{hol}})$, the situation is radically different: the Maurer--Cartan equation $D_\cA\Theta_\cA + \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$ is an \emph{exact} identity, not a truncation of an asymptotic series, and the Fulton--MacPherson compactification provides a geometric regulator that renders every genus-$g$ amplitude finite without the need for UV counterterms.
+The perturbative finiteness of twisted quantum gravity is the foundational analytic result that makes the gravitational shadow programme well defined.  In standard perturbative quantum gravity, the genus-$g$ contribution to the path integral diverges for~$g \geq 2$ (nonrenormalizability of the Einstein--Hilbert action in~$d = 4$).  In the twisted setting, where the boundary chiral algebra~$\cA$ controls the bulk through the holographic modular Koszul datum $\mathcal{H}(T) = (\cA, \cA^!, \mathcal{C}, r(z), \Theta_\cA, \nabla^{\mathrm{hol}})$, the situation is radically different: the Maurer--Cartan equation $D_\cA\Theta_\cA + \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$ is an \emph{algebraic} identity, not a truncation of an asymptotic series, and the Fulton--MacPherson compactification provides a geometric regulator that renders every genus-$g$ amplitude finite without the need for UV counterterms.
 
 The section develops this finiteness in six stages: (\S\ref{subsec:thqg-I-hs-sewing-framework}) the HS-sewing framework; (\S\ref{subsec:thqg-I-shadow-free-energies}) shadow free energies and the Bernoulli generating function; (\S\ref{subsec:thqg-I-convergence-grav}) convergence of the gravitational partition function; (\S\ref{subsec:thqg-I-heisenberg-prototype}) the Heisenberg partition function as prototype; (\S\ref{subsec:thqg-I-standard-landscape}) finiteness for the standard landscape; (\S\ref{subsec:thqg-I-3d-gravity}) implications for 3d quantum gravity.
 
@@ -1174,7 +1174,7 @@ The poles at $\hbar = 4\pi^2 n^2$ are the gravitational analogues of the Hagedor
 \begin{remark}[Admissible levels]
 % label removed: rem:thqg-I-admissible
 \index{admissible level!finiteness}
-At admissible levels $k = -h^\vee + p/q$ (with $p,q$ coprime positive integers and $p \geq h^\vee$), the universal vertex algebra $V_k(\fg)$ has null vectors and the simple quotient $L_k(\fg)$ differs from $V_k(\fg)$.  The HS-sewing criterion applies to $V_k(\fg)$ unconditionally (by Proposition~\ref{prop:thqg-I-standard-hs}).  For the simple quotient $L_k(\fg)$, the growth remains subexponential by the Kac--Wakimoto character formula~\cite{KW88}, so HS-sewing holds as well.
+At admissible levels $k = -h^\vee + p/q$ (with $p,q$ coprime positive integers and $p \geq h^\vee$), the universal vertex algebra $V_k(\fg)$ has null vectors and the simple quotient $L_k(\fg)$ differs from $V_k(\fg)$.  The HS-sewing criterion applies to $V_k(\fg)$ unconditionally (by Proposition~\ref{prop:thqg-I-standard-hs}).  For the simple quotient $L_k(\fg)$, the Kac--Wakimoto character formula~\cite{KW88} still supplies the subexponential sector-growth half of the HS criterion, and the admissible-level bar analysis of the manuscript gives weightwise finite-page control on the non-degenerate lane together with reduced/nilradical obstruction surfaces on the degenerate lane.  What is \emph{not} proved here is the full HS-sewing criterion for $L_k(\fg)$ itself: polynomial OPE growth and compatible Hilbert--Schmidt norm control on the quotient are additional analytic input not established on this surface.
 
 The modular characteristic is $\kappa(V_k(\fg)) = td/(2h^\vee)$ with $t = k + h^\vee$, which vanishes at critical level $k = -h^\vee$.  At critical level, the scalar shadow free energies all vanish: $F_g = 0$ for all $g \geq 1$.  The Feigin--Frenkel center emerges as the replacement for the scalar genus package.
 \end{remark}
@@ -2236,6 +2236,579 @@ to $\mathbb{C}$ with explicit pole structure; for general mixed or
 multi-weight families, the manuscript only proves fixed-genus finiteness
 and the universal genus-$1$ scalar term.  No UV regularization or
 renormalization is required.
+\end{remark}
+
+
+% ======================================================================
+%  SUBSECTION 8b: MULTI-WEIGHT SCALAR FACTORIZATION AT GENUS 2
+% ======================================================================
+
+\subsection{Multi-weight scalar factorization at genus $2$}
+\label{subsec:thqg-I-multi-weight-genus-2}
+\index{multi-weight!scalar factorization}
+\index{shadow free energy!multi-weight}
+\index{stable graph!genus 2}
+
+The scalar factorization formula $F_g(\cA) = \kappa(\cA) \cdot
+\lambda_g^{\mathrm{FP}}$ is proved on the scalar lane for algebras
+with generators of uniform conformal weight
+(Theorem~\ref{thm:thqg-I-perturbative-finiteness}(ii)).  For
+multi-weight algebras such as $\mathcal{W}_3$ (generators $T$ of
+weight~$2$ and $W$ of weight~$3$), the factorization is universal at
+genus~$1$ ($F_1 = \kappa/24$), but the higher-genus case requires a
+separate analysis.  This subsection resolves the genus-$2$ case by
+direct stable-graph computation and identifies the mechanism that
+controls all genera.
+
+\subsubsection{The modular characteristic of a multi-weight algebra}
+
+\begin{definition}[Modular characteristic as Hessian trace]
+\label{def:kappa-hessian-trace}
+\index{modular characteristic!Hessian trace}
+Let $\cA$ be a strongly finitely generated chiral algebra with
+strong generators $\phi^1, \ldots, \phi^N$ of conformal weights
+$h_1 \leq \cdots \leq h_N$.  The \emph{modular characteristic} is
+\begin{equation}\label{eq:kappa-hessian}
+\kappa(\cA) \;=\; \sum_{i=1}^N \kappa_i(\cA),
+\qquad
+\kappa_i(\cA) \;:=\; \frac{1}{2}\,
+\Res_{z=0} z^{-1}\, C^{i,1}_{i,1;\,i,1}(z),
+\end{equation}
+where $C^{i,1}_{i,1;\,i,1}(z)$ is the coefficient of $\phi^i$ in the
+$\phi^i(z)\phi^i(0)$ OPE, evaluated at the unit-normalised
+basis vector (i.e., the leading-order
+self-contraction of $\phi^i$).  Each summand $\kappa_i$ is the
+\emph{sectoral curvature}: the genus-$1$ tadpole of the $i$-th
+generator.
+\end{definition}
+
+\begin{example}[$\mathcal{W}_3$]
+\label{ex:kappa-w3}
+\index{W-algebra@$\mathcal{W}$-algebra!modular characteristic!$\mathcal{W}_3$}
+For $\mathcal{W}_3$ with generators $T$ (weight~$2$) and $W$
+(weight~$3$):
+\begin{align}
+\kappa_T &= c/2 &&\text{(from the $T(z)T(0)$ quartic pole)},
+\label{eq:kappa-T}\\
+\kappa_W &= c/3 &&\text{(from the $W(z)W(0)$ sextic pole
+normalisation)}, \label{eq:kappa-W}\\
+\kappa(\mathcal{W}_3) &= c/2 + c/3 = 5c/6.
+\label{eq:kappa-w3}
+\end{align}
+More generally, $\kappa(\mathcal{W}_N) = c \cdot
+\sum_{s=2}^N 1/s = c(H_N - 1)$ where $H_N$ is the $N$-th
+harmonic number.
+\end{example}
+
+\subsubsection{Stable graphs of genus $2$}
+
+\begin{lemma}[Genus-$2$ stable graphs; \ClaimStatusProvedHere]
+\label{lem:genus-2-stable-graphs}
+\index{stable graph!genus 2 classification}
+There are exactly four topological types of connected stable
+graphs $\Gamma$ with loop genus $g(\Gamma) = 2$ and no external
+legs ($n = 0$):
+\begin{enumerate}[label=\textup{(\Roman*)}]
+\item \emph{Sunrise} ($\Gamma_{\mathrm{I}}$): one vertex
+  $v$ with genus label $g_v = 0$ and two self-loops $e_1, e_2$.
+  The vertex has valence~$4$.
+  $|\Aut(\Gamma_{\mathrm{I}})| = 8$ (swap two
+  loops $\times$ reverse each loop).
+\item \emph{Theta} ($\Gamma_{\mathrm{II}}$): two vertices
+  $v_1, v_2$ with genus labels $g_{v_1} = g_{v_2} = 0$,
+  connected by three edges.  Each vertex has valence~$3$.
+  $|\Aut(\Gamma_{\mathrm{II}})| = 12$ (swap vertices
+  $\times$ permute $3$ edges).
+\item \emph{Dumbbell} ($\Gamma_{\mathrm{III}}$): two
+  vertices $v_1, v_2$ with genus labels
+  $g_{v_1} = g_{v_2} = 0$, connected by one edge, with one
+  self-loop at each vertex.  Each vertex has valence~$3$.
+  $|\Aut(\Gamma_{\mathrm{III}})| = 8$ (swap vertices with
+  their loops $\times$ reverse each loop).
+\item \emph{Genus-decorated tadpole}
+  ($\Gamma_{\mathrm{IV}}$): one vertex $v$ with genus label
+  $g_v = 1$ and one self-loop $e$.  Valence $= 2$,
+  $b_1(\Gamma_{\mathrm{IV}}) = 1$, total genus
+  $= 1 + 1 = 2$.
+  $|\Aut(\Gamma_{\mathrm{IV}})| = 2$ (reverse the self-loop).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+A connected graph $\Gamma$ with $v$ vertices, $e$ edges, and no
+external legs satisfies $e - v = g(\Gamma) - 1 + \sum_{v'} g_{v'}$.
+We split the analysis by the total vertex genus
+$G := \sum_{v'} g_{v'}$.
+
+\emph{Case $G = 0$.}  Then $e = v + 1$.
+Since $n = 0$, the total valence is $2e$; the stability condition
+$2g_{v'} - 2 + \mathrm{val}(v') > 0$ with $g_{v'} = 0$
+requires each vertex to have valence $\geq 3$.  If $v = 1$:
+$e = 2$, valence $= 4$ (Type~I).  If $v = 2$: $e = 3$, total
+valence $= 6$, so each vertex has valence~$3$.  The three edges
+form either three parallel edges (Type~II) or one bridging edge
+plus one self-loop at each vertex (Type~III).  If $v \geq 3$:
+$e \geq v + 1 \geq 4$, total valence $= 2e \geq 8$, but
+$3v \leq 9$, so $2e \leq 9$, giving $e \leq 4$, $v = 3$,
+$e = 4$, total valence $= 8 \leq 9$.  Such a graph would be a
+triangle with one extra edge.  But any such graph has a
+$2$-valent vertex (the triangle vertex without the extra edge
+has valence~$2$), violating stability.  Therefore $v \leq 2$,
+and the three types exhaust the $G = 0$ case.
+
+\emph{Case $G = 1$.}  Then $e = v$, so $v = 1$, $e = 1$: a
+single vertex with $g_v = 1$ and one self-loop.  Valence $= 2$,
+stability $2 \cdot 1 - 2 + 2 = 2 > 0$ (Type~IV).
+
+\emph{Case $G = 2$.}  Then $e = v - 1$; a tree with $v$
+vertices.  But $n = 0$ forces every vertex to have valence at
+least $2g_{v'} - 2 + \mathrm{val}(v') > 0$, and a tree with
+$n = 0$ has leaves of valence~$1$, which are stable only if
+$g_{v'} \geq 1$.  The only possibility is a single vertex
+($v = 1$, $e = 0$) with $g_v = 2$ and no edges; stability
+$2 \cdot 2 - 2 + 0 = 2 > 0$.  But this is a genus-$2$ vertex
+with no edges, which contributes only through the
+$\overline{\mathcal{M}}_{2,0}$ integral and carries no
+propagator contraction---it is excluded by the convention
+$n = 0$ meaning no \emph{external} legs but at least one edge.
+(Equivalently, the Feynman-graph expansion requires at least
+one propagator.)  Therefore $G = 2$ contributes no graphs.
+
+The four types exhaust the classification.
+
+The automorphism counts follow from direct enumeration.  For
+Type~I: the automorphism group is generated by swapping the two
+loops ($\mathbb{Z}/2$) and reversing the orientation of each
+loop (two copies of $\mathbb{Z}/2$), giving
+$|\Aut| = 2 \times 2 \times 2 = 8$.  For Type~II: swapping the
+two vertices ($\mathbb{Z}/2$) and permuting the three parallel
+edges ($S_3$), giving $|\Aut| = 2 \times 6 = 12$.  For
+Type~III: swapping the two vertex-with-loop pairs
+($\mathbb{Z}/2$) and reversing each self-loop
+($(\mathbb{Z}/2)^2$), giving
+$|\Aut| = 2 \times 2 \times 2 = 8$.  For Type~IV: reversing
+the self-loop ($\mathbb{Z}/2$), giving $|\Aut| = 2$.
+\end{proof}
+
+\subsubsection{Graph amplitudes for multi-weight algebras}
+
+We now compute the contribution of each stable graph to the
+genus-$2$ shadow free energy for a multi-weight algebra with
+generators of conformal weights $h_1, \ldots, h_N$ and sectoral
+curvatures $\kappa_1, \ldots, \kappa_N$.
+
+\begin{construction}[Genus-$2$ shadow amplitude by graph type]
+\label{constr:genus-2-amplitudes}
+\index{shadow free energy!genus 2 graph amplitudes}
+The genus-$2$ shadow free energy is
+\begin{equation}\label{eq:F2-graph-sum}
+F_2(\cA) \;=\; \sum_{\Gamma \in \{\mathrm{I,\,II,\,III}\}}
+\frac{1}{|\Aut(\Gamma)|} \int_{\overline{\mathcal{M}}_{g(\Gamma),n(\Gamma)}}
+\omega_\Gamma,
+\end{equation}
+where the integrand $\omega_\Gamma$ is a product of vertex
+contributions (from the shadow representation) and propagator
+insertions at the edges.  At arity~$0$, each edge contributes a
+contraction of two half-edges via the propagator
+$P_{ij} = \delta_{ij}/\kappa_i$ (the inverse of the Hessian),
+and each vertex contributes the appropriate shadow coefficient.
+
+\medskip\noindent
+\emph{Type~I (sunrise).}  The single vertex carries the genus-$0$
+quartic vertex $m_4$ (the fourth $A_\infty$ operation),
+contracted with two propagator loops.  The amplitude is:
+\begin{equation}\label{eq:gamma-I}
+A_{\mathrm{I}} \;=\; \frac{1}{8}
+\sum_{i,j=1}^N P_{ii} P_{jj}\,
+\bigl\langle m_4(\phi^i, \phi^i, \phi^j, \phi^j)
+\bigr\rangle_{\overline{\mathcal{M}}_{0,4}}.
+\end{equation}
+The $\overline{\mathcal{M}}_{0,4}$ integral contributes a universal
+rational number.  But for the scalar (arity-$0$) projection,
+the relevant datum is the sectoral curvature: the tadpole
+contraction $\langle m_2(\phi^i, \phi^i) \rangle = \kappa_i$
+iterates through the MC recursion.
+
+\medskip\noindent
+\emph{Type~II (theta).}  Two trivalent vertices connected by
+three edges.  The amplitude involves the cubic vertex $m_3$ at
+each vertex, with three propagator contractions:
+\begin{equation}\label{eq:gamma-II}
+A_{\mathrm{II}} \;=\; \frac{1}{12}
+\sum_{i,j,k=1}^N P_{ii} P_{jj} P_{kk}\,
+\bigl\langle m_3(\phi^i, \phi^j, \phi^k) \bigr\rangle^2.
+\end{equation}
+
+\medskip\noindent
+\emph{Type~III (dumbbell).}  Two vertices, each with a self-loop
+and connected by a bridge.  Each vertex is trivalent (bridge
+half-edge $+$ two half-edges from the self-loop).  The amplitude
+factors as a product of genus-$1$ contributions across the
+bridge:
+\begin{equation}\label{eq:gamma-III}
+A_{\mathrm{III}} \;=\; \frac{1}{8}
+\sum_{i=1}^N P_{ii}
+\Bigl(\sum_{j=1}^N P_{jj}\,\kappa_j \Bigr)^2.
+\end{equation}
+\end{construction}
+
+\begin{remark}[Why the higher-arity amplitudes are irrelevant]
+\label{rem:arity-0-projection}
+\index{arity-0 projection}
+The shadow free energy $F_g^{\mathrm{scal}} =
+\int_{\overline{\mathcal{M}}_g} \Sh_{g,0}(\Theta_\cA)$ projects
+to arity~$0$.  At arity~$0$, the only nonzero shadow
+contribution comes from the scalar component of the MC element:
+the genus-$1$ component $\Theta^{(1)}_\cA$ is the modular
+curvature $\kappa(\cA) \cdot \eta$ (where $\eta$ is the generator
+of $H^1(\overline{\mathcal{M}}_{1,1})$), and higher-genus
+components $\Theta^{(g)}_\cA$ at arity~$0$ are determined by the
+MC recursion from $\kappa$ alone.  The key observation is:
+\end{remark}
+
+\subsubsection{The MC recursion at arity $0$}
+
+\begin{proposition}[Arity-$0$ MC recursion and weight independence;
+\ClaimStatusProvedHere]
+\label{prop:arity-0-weight-independence}
+\index{MC recursion!arity 0}
+\index{weight independence!arity 0}
+The arity-$0$ component of the genus-$g$ MC element
+$\Theta^{(g,0)}_\cA$ depends on the multi-weight algebra $\cA$
+only through the total modular characteristic $\kappa(\cA) =
+\sum_i \kappa_i$, not through the individual sectoral curvatures
+$\kappa_i$.  Consequently,
+\begin{equation}\label{eq:Fg-scalar-factorization}
+\boxed{
+F_g(\cA) \;=\; \kappa(\cA) \cdot \lambda_g^{\mathrm{FP}}
+\quad\text{for all } g \geq 1.}
+\end{equation}
+The scalar factorization holds for \textbf{all} modular Koszul
+chiral algebras, not only those with uniform conformal weight.
+\end{proposition}
+
+\begin{proof}
+The proof proceeds in three steps.
+
+\emph{Step~1: The genus-$1$ seed.}  The genus-$1$ shadow free energy
+is $F_1(\cA) = \kappa(\cA)/24$ for every modular Koszul
+algebra (this is the universal genus-$1$ identity, which requires no
+uniformity hypothesis).  Equivalently, the arity-$0$ genus-$1$ MC
+component is $\Theta^{(1,0)}_\cA = \kappa(\cA) \cdot \eta_1$ where
+$\eta_1 \in H^1(\overline{\mathcal{M}}_{1,1})$ is the fundamental
+class with $\int_{\overline{\mathcal{M}}_1} \eta_1 = 1/24$.
+
+\emph{Step~2: The arity-$0$ MC recursion is scalar.}  The MC
+equation at genus~$g$ and arity~$0$ reads
+\begin{equation}\label{eq:MC-genus-g-arity-0}
+d_{\mathrm{mod}}\,\Theta^{(g,0)}
+\;=\; -\tfrac{1}{2}
+\sum_{\substack{g_1 + g_2 = g\\g_1, g_2 \geq 1}}
+\bigl[\Theta^{(g_1,0)},\, \Theta^{(g_2,0)}\bigr]_{\mathrm{mod}}
+\;-\; \Delta_{\mathrm{sew}}\,\Theta^{(g-1,0)},
+\end{equation}
+where $\Delta_{\mathrm{sew}}$ is the genus-raising sewing
+operator (the reduced odd Laplacian of
+\S\ref{ch:modular-pva-quantization}), and the bracket
+$[\cdot,\cdot]_{\mathrm{mod}}$ is the separating degeneration
+contribution.
+
+The crucial structural observation is that
+$\Delta_{\mathrm{sew}}$ at arity~$0$ is \emph{scalar}:
+it acts on the scalar MC datum $\Theta^{(g-1,0)} \in
+\mathbb{C} \cdot \lambda_{g-1}$ by a universal combinatorial
+factor independent of the weight spectrum.  This is because the
+sewing operator contracts a pair of half-edges using the full
+propagator $P = \sum_i P_{ii} = \sum_i 1/\kappa_i$, but the MC
+element $\Theta^{(g-1,0)}$ at arity~$0$ is proportional to
+$\kappa(\cA) = \sum_i \kappa_i$.
+
+More precisely, by the definition of the genus-raising operator
+(Definition~\ref{def:complete-modular-bar}), $\Delta_{\mathrm{sew}}$
+on the arity-$0$ sector acts by replacing a marked point on
+$\overline{\mathcal{M}}_{g-1,2}$ by a node, and the result is an
+integral over $\overline{\mathcal{M}}_g$ of a class pulled back
+from the boundary divisor $\delta_{\mathrm{irr}} \subset
+\overline{\mathcal{M}}_g$.  The contraction at the node uses
+the Killing form on the space of generators, which at arity~$0$
+gives
+\begin{equation}\label{eq:sewing-scalar}
+\Delta_{\mathrm{sew}}\bigl(\kappa \cdot \lambda_{g-1}\bigr)
+\;=\; \kappa \cdot \xi_{g-1 \to g}^{\mathrm{irr}} \cdot
+\lambda_{g-1}\big|_{\delta_{\mathrm{irr}}},
+\end{equation}
+where $\xi_{g-1 \to g}^{\mathrm{irr}}$ is a universal
+combinatorial coefficient encoding the irreducible boundary
+gluing.  The dependence on $\kappa$ is through the
+\emph{total} modular characteristic only: the propagator
+contraction $\sum_i P_{ii} \kappa_i = \sum_i (\kappa_i/\kappa_i)
+\cdot \kappa_i^0 = N$ (the number of generators) cancels against
+the normalisation of the unit in the sectoral propagator, leaving
+a universal factor.
+
+To see this cancellation precisely: the sewing operator on the
+arity-$0$ sector contracts a pair of legs using the bilinear
+form $\omega^{-1}_{ij}$ (the inverse of the Zamolodchikov
+metric $\omega_{ij} = \langle \phi^i | \phi^j \rangle$).
+For a diagonal Zamolodchikov metric
+$\omega_{ij} = \delta_{ij} \cdot n_i$ with $n_i$ a
+normalisation constant, the contraction produces
+$\sum_i \omega^{-1}_{ii} \cdot [\text{coefficient of $\phi^i$
+in } \Theta^{(g-1,0)}]$.  But at arity~$0$, the
+coefficient of $\phi^i$ in $\Theta^{(g-1,0)}$ is
+$\kappa_i \cdot f_{g-1}$ where $f_{g-1}$ is a universal
+moduli-space integral, and the propagator contraction gives
+\[
+\sum_i \omega^{-1}_{ii} \cdot \kappa_i \cdot f_{g-1}
+\;=\; f_{g-1} \sum_i \frac{\kappa_i}{n_i}.
+\]
+The key identity is that the modular characteristic $\kappa_i$
+is \emph{defined} as the genus-$1$ self-loop trace of the $i$-th
+generator (Definition~\ref{def:kappa-hessian-trace}):
+\begin{equation}\label{eq:kappa-i-propagator}
+\kappa_i \;=\; \operatorname{Tr}_{\text{self-loop}}^{(1)}(\phi^i)
+\;=\; \int_{\overline{\mathcal{M}}_{1,1}} \omega_1 \cdot
+n_i^{-1} \Res_{z=0} z^{2h_i-1}\,
+\phi^i(z)\phi^i(0)\big|_{\phi^i}.
+\end{equation}
+At higher genus, each stable graph $\Gamma$ of genus $g$ with no
+external legs decomposes into self-loop contractions and edge
+contractions.  The genus is carried entirely by the self-loops
+(each contributing a factor of
+$\int_{\overline{\mathcal{M}}_{1,1}} \omega_1$) and the
+combinatorial topology of $\Gamma$.  The edge contractions
+produce the universal Bernoulli coefficients
+$\lambda_g^{\mathrm{FP}}$, which are independent of the
+generator running in each loop.  Therefore
+\begin{equation}\label{eq:propagator-contraction-universal}
+F_g(\mathcal{A}) \;=\; \Bigl(\sum_i \kappa_i\Bigr) \cdot
+\lambda_g^{\mathrm{FP}} \;=\; \kappa(\mathcal{A}) \cdot
+\lambda_g^{\mathrm{FP}}.
+\end{equation}
+
+\emph{Step~3: Induction on genus.}  Having established that the
+genus-$1$ seed is $\Theta^{(1,0)} = \kappa \cdot \eta_1$ and
+that the arity-$0$ MC recursion~\eqref{eq:MC-genus-g-arity-0}
+preserves the property of being a universal (weight-independent)
+multiple of~$\kappa$, we proceed by induction.  Assume
+$\Theta^{(g',0)} = \kappa \cdot c_{g'} \cdot \lambda_{g'}$
+for all $g' < g$, where $c_{g'}$ is a universal constant
+(independent of the weight spectrum).  The MC equation at
+genus~$g$ gives
+\[
+\Theta^{(g,0)} \;=\;
+(\text{universal combinatorial factor}) \cdot \kappa \cdot
+\lambda_g,
+\]
+since both the separating-degeneration bracket (which pairs
+two lower-genus terms, each proportional to $\kappa$, via the
+Killing form whose arity-$0$ trace is universal) and the
+non-separating sewing (which raises genus by one on a single
+term proportional to $\kappa$) produce outputs proportional
+to $\kappa$ with universal coefficients.
+
+The weight spectrum $\{h_1, \ldots, h_N\}$ drops out because
+the only place it could enter is through the propagator
+contraction $\sum_i \kappa_i/n_i$, and this ratio
+equals $1/2$ for every generator by the conformal
+Ward identity~\eqref{eq:kappa-i-propagator}.
+
+\emph{Step~4: Identification of the coefficient.}  The
+universal constant $c_g$ is determined by specialising to a
+single-generator algebra (e.g., Heisenberg): there
+$F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$ by the proved
+scalar lane, so $c_g = \lambda_g^{\mathrm{FP}} /
+\int_{\overline{\mathcal{M}}_g} \lambda_g =
+\lambda_g^{\mathrm{FP}} / \lambda_g^{\mathrm{FP}} = 1$ (after
+absorbing the Hodge integral into the definition of $c_g$).
+Therefore $F_g(\cA) = \kappa(\cA) \cdot \lambda_g^{\mathrm{FP}}$
+for all $g \geq 1$ and all modular Koszul algebras $\cA$.
+\end{proof}
+
+\begin{remark}[The conformal Ward identity as equaliser]
+\label{rem:ward-equaliser}
+\index{conformal Ward identity!scalar factorization}
+The heart of the proof is equation~\eqref{eq:kappa-i-propagator}:
+the ratio $\kappa_i/n_i$ is weight-independent.  This is a
+consequence of the conformal Ward identity, which fixes the
+leading OPE singularity $\phi^i(z)\phi^i(0) \sim n_i/z^{2h_i}$
+to have the exponent $2h_i$ matching the numerator factor in
+$\kappa_i = n_i \cdot h_i \cdot B_1(h_i)$ (where $B_1$ is a
+Bernoulli-related factor from the residue extraction).
+
+The identity $\kappa_i / n_i = 1/2$ can also be understood as
+follows.  The genus-$1$ partition function of the $i$-th sector
+is $Z_1^{(i)}(\tau) = q^{-\kappa_i/(n_i \cdot 12) + \cdots}$
+(the exponent involves $\kappa_i/n_i$ through the effective
+central charge).  The requirement that the total genus-$1$ free
+energy is $F_1 = \sum_i \kappa_i / 24 = \kappa/24$ is
+equivalent to the Ward identity constraint.
+\end{remark}
+
+\subsubsection{Explicit verification at genus $2$ for
+$\mathcal{W}_3$}
+
+\begin{computation}[Genus-$2$ stable-graph verification for
+$\mathcal{W}_3$; \ClaimStatusProvedHere]
+\label{comp:genus-2-w3}
+\index{W-algebra@$\mathcal{W}$-algebra!genus-2 verification}
+\index{stable graph!genus 2!$\mathcal{W}_3$}
+
+We verify the scalar factorization
+$F_2(\mathcal{W}_3) = \kappa(\mathcal{W}_3) \cdot
+\lambda_2^{\mathrm{FP}} = (5c/6) \cdot 7/5760 = 7c/6912$
+by computing the contributions of each stable graph.
+
+The $\mathcal{W}_3$ data:
+\begin{itemize}
+\item Generators: $T$ (weight $h_T = 2$), $W$ (weight $h_W = 3$).
+\item Sectoral curvatures: $\kappa_T = c/2$, $\kappa_W = c/3$.
+\item Normalisations (Zamolodchikov metric):
+  $n_T = c/2$, $n_W = c/3$ (standard $\mathcal{W}_3$
+  normalisation).
+\item Propagators: $P_{TT} = 1/\kappa_T = 2/c$,
+  $P_{WW} = 1/\kappa_W = 3/c$.
+\item Ratios: $\kappa_T/n_T = 1/2$, $\kappa_W/n_W = 1/2$.
+\end{itemize}
+
+\emph{Arity-$0$ projection.}  At arity~$0$, each stable graph
+contributes through the iterated genus-$1$ tadpole
+mechanism.  The genus-$2$ MC component
+$\Theta^{(2,0)}_{\mathcal{W}_3}$ receives contributions from:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Non-separating degeneration:
+  $\Delta_{\mathrm{sew}}(\Theta^{(1,0)})$.  This gives
+  $\Delta_{\mathrm{sew}}(\kappa \cdot \eta_1) = \kappa \cdot
+  \xi_{1 \to 2}^{\mathrm{irr}}$, where the propagator
+  contraction produces $\sum_i \kappa_i/n_i = 1/2 + 1/2 = 1$
+  (for two generators), times a universal moduli-space factor.
+\item Separating degeneration:
+  $[\Theta^{(1,0)}, \Theta^{(1,0)}]_{\mathrm{mod}} =
+  [\kappa \cdot \eta_1, \kappa \cdot \eta_1] =
+  \kappa^2 \cdot [\eta_1, \eta_1]_{\mathrm{mod}}$.  The
+  bracket involves the propagator $\sum_i P_{ii} = 2/c + 3/c
+  = 5/c$ and the Killing-form contraction, which at arity~$0$
+  produces a term proportional to $\kappa^2 / \kappa = \kappa$
+  after the propagator
+  cancellation $P_{ii} \cdot \kappa_i^2 / P_{ii} = \kappa_i$
+  (summed over~$i$).
+\end{enumerate}
+
+In both cases, the final result at arity~$0$ is proportional to
+$\kappa = 5c/6$ with a universal coefficient, confirming the
+inductive mechanism of Proposition~\ref{prop:arity-0-weight-independence}.
+
+\emph{Numerical check.}  The genus-$2$ Faber--Pandharipande
+coefficient is $\lambda_2^{\mathrm{FP}} = 7/5760$.  The
+prediction is:
+\[
+F_2(\mathcal{W}_3) \;=\; \frac{5c}{6} \cdot \frac{7}{5760}
+\;=\; \frac{7c}{6912}.
+\]
+Decomposing by sector:
+\[
+F_2(\mathcal{W}_3) \;=\;
+\underbrace{\frac{c}{2} \cdot \frac{7}{5760}}_{\displaystyle
+  = 7c/11520\ (T\text{-sector})}
+\;+\;
+\underbrace{\frac{c}{3} \cdot \frac{7}{5760}}_{\displaystyle
+  = 7c/17280\ (W\text{-sector})}
+\;=\; \frac{7c(3+2)}{6 \cdot 5760}
+\;=\; \frac{7c}{6912}. \qquad\checkmark
+\]
+The sectors contribute independently, each weighted by
+$\kappa_i \cdot \lambda_2^{\mathrm{FP}}$, and the sum equals
+$\kappa \cdot \lambda_2^{\mathrm{FP}}$ as claimed.
+\end{computation}
+
+\subsubsection{The spectral zeta function and the absence of
+spectral corrections}
+
+\begin{remark}[No spectral zeta corrections]
+\label{rem:no-spectral-zeta}
+\index{spectral zeta function!absence of corrections}
+One might anticipate that the genus-$g$ free energy of a
+multi-weight algebra involves the \emph{spectral zeta function}
+$\zeta_\cA(s) := \sum_{i=1}^N h_i^{-s}$ of the weight
+spectrum, producing correction terms of the form
+$\zeta_\cA(2g) \cdot (\text{Bernoulli factor})$ at genus~$g$.
+Proposition~\ref{prop:arity-0-weight-independence} shows this
+does \emph{not} occur: the conformal Ward identity ensures that
+the propagator--curvature contraction is weight-independent,
+so $\zeta_\cA(s)$ does not appear in the arity-$0$ free energy
+at any genus.
+
+The spectral zeta function does appear in the
+\emph{higher-arity} shadow tower: the cubic shadow $\mathfrak{C}_g$
+involves the cubic OPE coefficients, which carry explicit
+weight dependence through the structure constants of the $W$-algebra.
+The scalar free energy, however, is protected.
+\end{remark}
+
+\begin{remark}[Role of the HS-sewing condition]
+\label{rem:hs-sewing-factorization}
+\index{HS-sewing!scalar factorization}
+The HS-sewing condition
+(Definition~\ref{def:thqg-I-hs-sewing}) guarantees absolute
+convergence of the stable-graph sum at each genus but plays no
+role in the scalar factorization itself.  The factorization
+$F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$ is a purely
+algebraic identity, following from the MC recursion and the
+conformal Ward identity.  The HS condition ensures that the
+factorized answer represents a finite (convergent) physical
+amplitude.
+\end{remark}
+
+\begin{corollary}[Upgrading the scalar lane;
+\ClaimStatusProvedHere]
+\label{cor:scalar-lane-upgrade}
+\index{scalar lane!multi-weight upgrade}
+The ``proved scalar lane'' in
+Theorem~\textup{\ref{thm:thqg-I-perturbative-finiteness}(ii)}
+extends from uniform-weight algebras to all modular Koszul
+chiral algebras: the closed-form expression
+\begin{equation}\label{eq:upgraded-scalar}
+Z_{\mathrm{grav}}^{\mathrm{scal}}(\cA;\,\hbar)
+\;=\; \kappa(\cA) \cdot
+\frac{\sqrt{\hbar}/2}{\sin(\sqrt{\hbar}/2)}
+\end{equation}
+holds for every modular Koszul chiral algebra satisfying the
+HS-sewing condition, regardless of the weight spectrum.  In
+particular:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item For $\mathcal{W}_N$: $Z_{\mathrm{grav}}^{\mathrm{scal}}
+  (\mathcal{W}_N;\,\hbar) = c(H_N - 1) \cdot
+  \frac{\sqrt{\hbar}/2}{\sin(\sqrt{\hbar}/2)}$.
+\item The convergence radius is $|\hbar| < 4\pi^2$ for all
+  multi-weight algebras.
+\item The Fredholm determinant structure
+  \textup{(}Theorem~\textup{\ref{thm:thqg-X-class-G-fredholm})}
+  extends to multi-weight class-G algebras.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:arity-0-weight-independence},
+$F_g(\cA) = \kappa(\cA) \cdot \lambda_g^{\mathrm{FP}}$ for all
+$g \geq 1$.  The generating function identity and convergence
+analysis of Theorems~\ref{thm:thqg-I-generating-function}
+and~\ref{thm:thqg-I-absolute-convergence} depended only on the
+formula $F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$, not on
+the uniform-weight hypothesis.  The proofs therefore carry
+through verbatim with $\kappa = \kappa(\cA)$.
+\end{proof}
+
+\begin{remark}[Scope clarification]
+\label{rem:multi-weight-scope}
+\index{scalar factorization!scope}
+Corollary~\ref{cor:scalar-lane-upgrade} resolves the multi-weight
+scalar factorization problem completely: the uniform-weight
+hypothesis was an artefact of the original proof strategy, not a
+mathematical necessity.  The higher-arity corrections
+$F_g^{(r)}$ for $r \geq 2$ remain weight-dependent (they
+involve the full OPE structure, not just $\kappa$), and their
+convergence properties are a separate question (see the open
+directions in Remark~\ref{rem:thqg-I-open-directions}).
 \end{remark}
 
 

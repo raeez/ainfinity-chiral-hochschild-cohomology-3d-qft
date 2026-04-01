@@ -1,10 +1,11 @@
-r"""Gauge Orbit Unification Engine: three models, torsor, connection, MC lifts.
+r"""Gauge Orbit Unification Engine: three models, Arakelov-family gauge transport, connection, MC lifts.
 
 Implements computationally testable claims from four gauge-orbit unification
 theorems in relative_feynman_transform.tex (Section subsec:gauge-orbit-canonical):
 
   Theorem I  (thm:three-models-gauge-orbit) — Three models as gauge orbits
-  Theorem II (thm:gauge-torsor) — Torsor structure of curved models
+  Theorem II (thm:gauge-torsor) — Gauge transport on the
+               Arakelov-representative curved-model locus
   Theorem III — Relative connection (Gauss-Manin flatness, clutching residues)
   Theorem IV  — MC equation controls lifts (bicomplex equivalence, obstructions)
 
@@ -198,19 +199,18 @@ def heisenberg_bar_arity2(k=None):
 
 
 def three_models_same_cohomology(k=None):
-    r"""Verify all three models compute the same invariants for Heisenberg.
+    r"""Verify the shared scalar invariant across the three Heisenberg models.
 
     For the Heisenberg algebra at level k:
       Model 1 (flat): D_0^2 = 0, differential on the associated graded.
       Model 2 (holomorphic): D^(g)^2 = 0, corrected by prime form.
       Model 3 (curved): d_fib^2 = k * omega_g, Arakelov propagator.
 
-    At arity 2, Heisenberg is 1-dimensional.  All three models give:
-      - At genus 0: H^*(B^2, d) = k (arity-2 bar cohomology).
-      - At genus g >= 1: the curvature k * omega_g is the only obstruction.
-
-    The key invariant is kappa = k, which is the same in all three models
-    (Theorem thm:three-models-gauge-orbit, conclusion).
+    At arity 2, Heisenberg is 1-dimensional.  The flat models are honest
+    chain complexes, while the curved model is the coderived avatar.  The
+    compute surface checked here is the common scalar coefficient
+    kappa = k, which is the same in all three models
+    (Theorem thm:three-models-gauge-orbit, narrowed conclusion).
 
     Parameters
     ----------
@@ -423,7 +423,7 @@ def curvature_invariant_under_gauge(kappa_val, n_gauges=3):
 
 
 def torsor_action_consistency(kappa_val):
-    r"""Verify the torsor property: composing two gauge transformations.
+    r"""Verify group-action consistency on the Arakelov-representative family.
 
     If Phi_1 and Phi_2 are two gauge transformations, their composition
     Phi_1 . Phi_2 is also a gauge transformation, and:
@@ -431,7 +431,8 @@ def torsor_action_consistency(kappa_val):
         (Phi_1 . Phi_2)^{-1} . D . (Phi_1 . Phi_2) =
         Phi_2^{-1} . (Phi_1^{-1} . D . Phi_1) . Phi_2
 
-    This is the torsor/group action property.
+    This is the group-action consistency behind the Arakelov-family
+    gauge-transport theorem.
 
     Parameters
     ----------
@@ -440,7 +441,7 @@ def torsor_action_consistency(kappa_val):
 
     Returns
     -------
-    dict with torsor verification
+    dict with group-action verification
     """
     kappa = S(kappa_val)
     h1, h2 = Rational(1, 3), Rational(2, 5)

@@ -8,11 +8,13 @@ The bar complex carries two structures: a **differential** d_B from OPE residues
 
 This product is the operadic fingerprint of a 3d holomorphic-topological QFT on ℂ_z × ℝ_t, where observables factorize holomorphically in z and associatively in t. The two-colored Swiss-cheese operad SC^{ch,top} has operation spaces FM_k(ℂ) × E₁(m). The bar differential is the closed (holomorphic) color. The bar coproduct is the open (topological) color. The no-open-to-closed rule reflects that bulk interactions restrict to boundaries but not conversely. **The bar complex presents the Swiss-cheese algebra, as the Steinberg variety presents the Hecke algebra.**
 
+**CRITICAL DISTINCTION (AP-OC):** The bar complex classifies *twisting morphisms* (universal couplings between A and A!). The bulk algebra — the observables of the 3d theory — is a DIFFERENT object: the chiral derived center Z^der_ch(A) = C^•_ch(A_b, A_b), realized as chiral Hochschild cochains of any boundary chart A_b (Vol I, thm:thqg-swiss-cheese). Bar classifies couplings; derived center classifies bulk observables. The primitive object is the open-sector factorization dg-category C_op; the boundary algebra A_b = End(b) is a chart, not an essence (Morita invariance: thm:thqg-local-global-bridge(iii)).
+
 At genus g ≥ 1: curved Swiss-cheese with curvature κ(A)·ω_g from the Hodge bundle. The non-vanishing of higher A∞ operations IS the curved bar structure d² = κ(A)·ω₁ — formality fails precisely because the logarithm acquires monodromy.
 
 ## The Monograph
 
-Two volumes by Raeez Lorgat. Vol I (~1,960pp, ~/chiral-bar-cobar) proves the machine. Vol II (~450pp, this repo) shows what it computes and how to read the output.
+Two volumes by Raeez Lorgat. Vol I (~2,200pp, ~/chiral-bar-cobar) proves the machine. Vol II (~900pp, this repo) shows what it computes and how to read the output.
 
 Every theorem proved, every physical identification precise, every construction functorial. When claims outrun proofs, strengthen the proof first. Target: Annals/Astérisque grade.
 
@@ -28,25 +30,27 @@ Every chapter depends on Vol I's five theorems. Cross-references to Vol I labels
 | **(D)** Leading coefficient | Curvature κ(A)·ω_g governs the genus tower; curved Swiss-cheese = Swiss-cheese + Hodge deformation |
 | **(H)** Hochschild ring | BV-BRST origin of the deformation ring; bulk ≃ chiral Hochschild (Theorem H gets its physical explanation) |
 
-## Nine Parts (Treatise Architecture)
+## Ten Parts (Treatise Architecture)
 
-**I. From the Bar Complex to the Swiss-Cheese Operad.** The bridge from Vol I to three dimensions. SC^{ch,top} constructed, recognition theorem, homotopy-Koszulity proved. Raviolo descent: SC-algebra → raviolo VA → PVA on cohomology. Axiomatics: sesquilinearity, A∞ relations, cluster factorization.
+**I. The Open Primitive** (part:swiss-cheese). The primitive datum is a category, not an algebra: the open/closed factorization dg-category C on a tangential log curve. SC^{ch,top} constructed, recognition theorem, homotopy-Koszulity proved. Chapters: foundations, locality, axioms, equivalence, BV construction, factorization Swiss-cheese.
 
-**II. The Descent Calculus.** Two descent mechanisms: cohomological (bar → PVA via Arnold/Stokes) and genus (curved bar over M̄_g). FM calculus and PVA descent.
+**II. The Universal Bulk** (part:bbl-core). The bulk is the chiral derived center Z^der_ch(A), not the bar complex. Chiral Hochschild cochains, brace dg algebra, bar-cobar review, line operators, spectral braiding (proved core), Koszul triangle (proved core), celestial boundary transfer (proved core).
 
-**III. The Bulk-Boundary-Line Core.** Chiral Hochschild, brace algebra, bar-cobar review, line operators, spectral braiding (proved core), Koszul triangle (proved core), celestial boundary transfer (proved core), physical origins (merged chapter).
+**III. Modularity as Trace and Clutching** (part:modularity). Modularity arises from trace and clutching on the open sector, not as an axiom on the closed algebra. Modular Swiss-cheese operad, relative Feynman transform, modular PVA quantization (core), physical origins.
 
-**IV. The Standard HT Landscape.** Worked examples: Rosetta stone, free multiplet, LG, CS (proved), W-algebras (stable framework).
+**IV. Descent and the Classical Shadow** (part:descent). Extracts classical PVA from the quantum SC structure. Raviolo VA, raviolo restriction, FM calculus, PVA descent (D2-D6 all proved).
 
-**V. Quantization and Obstruction Theory.** Modular PVA quantization (core), affine half-space BV, planted-forest L∞, 3d gravity.
+**V. The Standard HT Landscape** (part:examples). Worked examples: Rosetta stone, free multiplet, LG, CS (proved), Virasoro, W_3.
 
-**VI. The Ordered/Open Sector and Transport.** Ordered associative chiral KD (core), dg-shifted factorization bridge. The E₁ wing as equal partner.
+**VI. Three-Dimensional Quantum Gravity** (part:quantization). Modular Koszul duality of Virasoro IS 3d quantum gravity. Affine half-space BV, planted-forest synthesis, gravitational complexity, 3d gravity movements, perturbative finiteness, soft graviton theorems, critical string dichotomy, symplectic polarization.
 
-**VII. Holographic and Celestial Frontier.** YM synthesis (core), celestial holography (core), logarithmic HT monodromy (core), anomaly-completed holography (core).
+**VII. The Ordered Sector and Factorization Transport** (part:ordered). The E_1 wing: ordered associative chiral KD (core), dg-shifted factorization bridge, gravitational Yangian.
 
-**VIII. Extensions, Conditional Results, and Frontier.** All frontier/conjectural material from splits. No earlier part depends on this part.
+**VIII. Holographic and Celestial Frontier** (part:holography). YM synthesis (core), celestial holography (core), logarithmic HT monodromy (core), anomaly-completed holography (core), modular bootstrap.
 
-**IX. Conclusion and Aftermatter.** Conclusion, appendices (brace signs, orientations, FM proofs, PVA expanded).
+**IX. Extensions, Conditional Results, and Frontier** (part:frontier). All frontier/conjectural material from chapter splits. No earlier part depends on this part.
+
+**Conclusion and Aftermatter** (unnumbered). Conclusion, appendices (brace signs, orientations, FM proofs, PVA expanded).
 
 ## Standing Hypotheses — MADE EXPLICIT
 
@@ -91,7 +95,9 @@ The Vol I `CLAUDE.md` supplies the source protocol. For Vol II, the Codex-native
 
 ## Anti-Patterns (inherited from Vol I + Vol II-specific)
 
-All Vol I anti-patterns AP1-AP18 apply here. The following five (AP19-AP23) encode deep mathematical errors found propagated across both volumes:
+All Vol I anti-patterns AP1-AP32 apply here. The following encode deep mathematical errors found propagated across both volumes:
+
+**AP-OC — Bar = bulk conflation.** The bar complex B(A) classifies TWISTING MORPHISMS (universal couplings between A and A!). The BULK OBSERVABLES are a DIFFERENT object: the chiral derived center Z^der_ch(A) = C^•_ch(A_b, A_b). The PRIMITIVE OBJECT is the open-sector factorization dg-category C_op; the boundary algebra A_b = End(b) is a CHART (Morita-invariant). Modularity belongs to TRACE + CLUTCHING on the open sector, not to the closed algebra alone. Found at: ht_physical_origins.tex lines 359-361 (corrected), celestial_holography_frontier.tex line 846 (corrected), thqg_bv_ht_extensions.tex lines 218/302/704 (corrected), plus 4 superseded files.
 
 **AP19 — The bar kernel absorbs a pole.** The collision residue r(z) has pole orders ONE LESS than the OPE — the d log(z-w) kernel absorbs one power. Virasoro r-matrix: (c/2)/z³ + 2T/z, NOT (c/2)/z⁴ + 2T/z² + ∂T/z.
 

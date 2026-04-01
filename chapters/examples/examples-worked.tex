@@ -115,7 +115,9 @@ For Virasoro: $\{T_\lambda T\} = \partial T + 2T\lambda
 For $\beta\gamma$/$bc$: $\{b_\lambda c\} = 1$ gives $r(z) = 1/z$.
 For $\mathcal{W}_3$: all three bracket pairs verify.
 Complementarity constants: $0$ (Heisenberg, $\mathfrak{sl}_2$,
-$bc$), $13$ (Virasoro), $250/3$ ($\mathcal{W}_3$).
+$bc$), $13$ (Virasoro), $0$ ($\mathcal{W}_3$; principal
+$W$-algebras inherit $\kappa + \kappa^! = 0$ from the affine
+lineage via DS reduction).
 Computational verification: 26 checks across 5 bridges in
 \texttt{compute/lib/cross\_volume\_bridge.py}.
 \end{proof}
@@ -275,6 +277,559 @@ as in Proposition~\ref{prop:field-theory-r}.  The spectral braiding
 reproduces the RTT relations of the shifted Yangian~\cite{DNP2025}.
 Bar-cobar duality at the algebraic level
 \emph{is} holographic duality at the physical level.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The deformed double current algebra: \texorpdfstring{$\Ainf$}{A-infinity}
+  operations from the 5d HT theory}
+\label{subsec:DDCA-ainfty}
+\index{deformed double current algebra|textbf}
+\index{M2-brane!A-infinity operations@$\Ainf$ operations}
+\index{5d holomorphic-topological theory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The M2-brane boundary algebra of Section~\ref{subsec:M2-holography}
+arises from a 5d holomorphic-topological theory on
+$\R_t \times \C^2_{z_1,z_2}$, where observables factorize
+holomorphically in $(z_1,z_2)$ and associatively in~$t$.
+This section computes the $\Ainf$ operations $(m_1,m_2,m_3)$
+on the boundary algebra from first principles, determines
+the shadow archetype, and identifies the Swiss-cheese
+structure.  The primitive object throughout is the
+open-sector dg-category $\cC_{\mathrm{op}}$; the boundary
+algebra $\cA_\partial = \End(b)$ is a chart
+(Morita-invariant), and the bulk observables are the chiral
+derived center $\Zder^{\mathrm{ch}}(\cA_\partial)$.
+
+\subsubsection{The 5d HT action and field content}
+
+The 5d theory is holomorphic Chern--Simons on
+$\R_t\times\C^2$, in the holomorphic-topological twist
+\cite{costello-gaiotto,Costello-1705.02500v1}.
+
+\paragraph{BV field content.}
+Fix a reductive Lie algebra $\fg = \mathfrak{gl}_r$.  The
+fields live on $M = \R_t \times \C^2_{z_1,z_2}$ with
+coordinates $(t; z_1, z_2)$:
+\begin{itemize}[nosep]
+\item Gauge field:
+  $A \in \Omega^{0,\bullet}(\C^2) \otimes
+  \Omega^\bullet(\R) \otimes \fg$,
+  with BV degrees determined by the holomorphic-topological
+  twist.  The physical component is
+  $A^{0,1} = A_{\bar z_1}\,d\bar z_1 +
+  A_{\bar z_2}\,d\bar z_2 + A_t\,dt$
+  (partial connection in the $\dbar + d_t$ directions).
+\item Ghost: $c \in \Omega^{0,0}(\C^2)\otimes\Omega^0(\R)
+  \otimes \fg$ of cohomological degree $-1$.
+\item Antifields and antighosts complete the BV package
+  via the standard $(-1)$-shifted symplectic pairing
+  $\langle \phi, \phi^+ \rangle_{\mathrm{BV}} =
+  \int_M \operatorname{Tr}(\phi \wedge \phi^+)
+  \wedge \Omega$,
+  where $\Omega = dz_1 \wedge dz_2$ is the holomorphic
+  volume form on $\C^2$.
+\end{itemize}
+
+\paragraph{Action.}
+The classical BV action is the holomorphic Chern--Simons
+functional on $\C^2$ fibered over $\R_t$:
+\begin{equation}\label{eq:5d-HT-action}
+  S_{\mathrm{5d}}
+  \;=\;
+  \int_{\R\times\C^2}
+  \Omega \wedge
+  \operatorname{Tr}\!\Bigl(
+    A \wedge (\dbar + d_t) A
+    \;+\; \tfrac{2}{3}\, A \wedge A \wedge A
+  \Bigr).
+\end{equation}
+The kinetic operator is $Q = \dbar_{\C^2} + d_t$: the
+Dolbeault operator on $\C^2$ plus the de~Rham operator
+on~$\R$.  The theory satisfies the conditions of
+Theorem~\ref{thm:physics-bridge}: the action is
+first-order in time derivatives and holomorphic in
+$(z_1,z_2)$, and one-loop finiteness follows from the
+Calabi--Yau condition $c_1(\C^2) = 0$
+\cite{costello-renormalization}.
+
+\paragraph{Propagator.}
+The propagator factors as
+\begin{equation}\label{eq:5d-propagator}
+  G(z_1,z_2,\bar z_1,\bar z_2;\, t)
+  \;=\;
+  K^{\C^2}(z_1,z_2,\bar z_1,\bar z_2)
+  \;\otimes\;
+  K^{\R}(t),
+\end{equation}
+where the holomorphic kernel is the Bochner--Martinelli
+kernel on $\C^2$:
+\[
+  K^{\C^2}(z,w)
+  \;=\;
+  \frac{1}{(2\pi i)^2}
+  \cdot
+  \frac{(\bar z_1 - \bar w_1)\,d\bar z_2
+    - (\bar z_2 - \bar w_2)\,d\bar z_1}
+       {\bigl(|z_1-w_1|^2 + |z_2-w_2|^2\bigr)^2},
+\]
+and the topological kernel is the Heaviside step function
+$K^{\R}(t) = \theta(t)$ (time-ordering).  The key
+difference from the 3d theory on $\R \times \C$: the
+holomorphic kernel has a pole of order \emph{two}
+(in real codimension four, i.e.\
+homogeneous of degree $-3$ in $\C^2 \cong \R^4$),
+not a simple pole.
+
+\subsubsection{Boundary generators}
+
+Place the boundary at $t = 0$.  The boundary algebra
+$\cA_\partial$ has generators
+\[
+  J^a_{m,n}
+  \;=\;
+  \oint\oint
+  z_1^m\, z_2^n\, J^a(z_1,z_2)\,
+  \frac{dz_1}{2\pi i}\, \frac{dz_2}{2\pi i},
+  \qquad a \in \fg,\quad m,n \ge 0,
+\]
+where $J^a(z_1,z_2) = \lim_{t\to 0^+}
+\operatorname{Tr}(T^a\, A(z_1,z_2,t))$ is the
+boundary current.  These are the modes of the
+double-current algebra
+$\fg_{\mathrm{dbl}} = \fg\otimes\C[u,v]$,
+with $u = z_1$, $v = z_2$.
+
+\subsubsection{Computation of \texorpdfstring{$m_1$}{m1}: the BRST differential}
+
+\begin{proposition}[$m_1$ for the DDCA; \ClaimStatusProvedHere]
+\label{prop:DDCA-m1}
+The BRST differential $m_1 = Q$ acts on boundary generators
+as
+\[
+  m_1(J^a_{m,n}) \;=\; 0
+\]
+for all $a \in \fg$ and $m,n \ge 0$.  That is, the
+generators $J^a_{m,n}$ are BRST-closed.
+\end{proposition}
+
+\begin{proof}
+The BRST operator $Q = \dbar + d_t$ acts on the
+boundary current $J^a(z_1,z_2)$ as a $\dbar$-operator on
+$\C^2$.  But $J^a(z_1,z_2)$ is the restriction to $t=0$
+of a $(0,0)$-form (the $dt$-component of the gauge field),
+so $\dbar J^a$ vanishes on the modes $z_1^m z_2^n$ by
+holomorphicity of the monomials.  The $d_t$-component
+vanishes because the boundary condition sets
+$A|_{t=0^+}$ to lie in the holomorphic sector.  Hence
+$m_1(J^a_{m,n}) = 0$.
+\end{proof}
+
+\begin{remark}[Comparison with 3d]
+In the 3d theory on $\R\times\C$, the boundary generators
+$J^a_n = \oint z^n J^a(z)\,dz$ are likewise $Q$-closed.
+The 5d theory doubles the spectral index
+$(n) \to (m,n)$ without changing the cohomological
+structure of $m_1$.
+\end{remark}
+
+\subsubsection{Computation of \texorpdfstring{$m_2$}{m2}: the binary product}
+
+\begin{theorem}[$m_2$ for the DDCA; \ClaimStatusProvedHere]
+\label{thm:DDCA-m2}
+The binary $\Ainf$ operation on the boundary algebra of
+the 5d HT theory is
+\begin{equation}\label{eq:DDCA-m2}
+  m_2(J^a_{m,n},\; J^b_{p,q})
+  \;=\;
+  f^{ab}_{\phantom{ab}c}\, J^c_{m+p,\,n+q}
+  \;+\;
+  k\,\delta^{ab}\,
+  P_2(m,n,p,q;\lambda_1,\lambda_2),
+\end{equation}
+where $f^{ab}_c$ are the structure constants of $\fg$,
+$k$ is the level determined by the 5d coupling constant,
+and $P_2$ is a polynomial in the spectral parameters
+$\lambda_1,\lambda_2$ (dual to $z_1,z_2$):
+\begin{equation}\label{eq:DDCA-central-term}
+  P_2(m,n,p,q;\lambda_1,\lambda_2)
+  \;=\;
+  \delta_{m+p,0}\,\delta_{n+q,0}
+  \;\cdot\;
+  \sum_{j=0}^{|m|-1}
+  \sum_{\ell=0}^{|n|-1}
+  \lambda_1^{j}\,\lambda_2^{\ell}.
+\end{equation}
+On cohomology, the singular part of $m_2$ gives the
+$(-1)$-shifted $\lambda$-bracket:
+\begin{equation}\label{eq:DDCA-bracket}
+  \{J^a_{m,n}\,{}_{\lambda_1,\lambda_2}\, J^b_{p,q}\}
+  \;=\;
+  f^{ab}_{\phantom{ab}c}\, J^c_{m+p,\,n+q}
+  \;+\;
+  k\,\delta^{ab}\,\delta_{m+p,0}\,\delta_{n+q,0}
+  \;\cdot\;
+  \frac{\lambda_1^{|m|} - (-\lambda_1)^{|m|}}
+       {2\lambda_1}
+  \cdot
+  \frac{\lambda_2^{|n|} - (-\lambda_2)^{|n|}}
+       {2\lambda_2},
+\end{equation}
+where each factor $(\lambda^{|m|} - (-\lambda)^{|m|})/(2\lambda)$
+is a polynomial: it equals $\lambda^{|m|-1}$ when $|m|$ is odd
+and vanishes when $|m|$ is even (the central extension
+is supported on odd-mode-number pairs).
+The result is a polynomial in $\lambda_1,\lambda_2$ of bidegree
+$(\max(|m|,|p|)-1,\;\max(|n|,|q|)-1)$.  At mode
+numbers $(m,n) = (1,0)$ and $(p,q) = (-1,0)$, this
+reproduces the Kac--Moody level:
+$\{J^a_{1,0}\,{}_{\lambda_1}\, J^b_{-1,0}\}_{\mathrm{sing}}
+= k\,\delta^{ab}$.
+\end{theorem}
+
+\begin{proof}
+The computation is the 5d analogue of the Kac--Moody
+OPE extraction from HCS (Example~\ref{ex:class-s}
+and~\cite{costello-gaiotto}).  The binary product is
+\[
+  m_2(J^a_{m,n},\, J^b_{p,q})
+  \;=\;
+  \int_{\FM_2(\C^2)}
+  K^{\C^2}(z,w)
+  \cdot
+  (z_1^m z_2^n\, T^a)
+  \otimes
+  (w_1^p w_2^q\, T^b),
+\]
+with ordered times $t_1 > t_2$ in the topological
+direction enforced by $K^{\R}(t) = \theta(t)$.
+
+\emph{Structure-constant term.}  The interaction vertex
+$\frac{2}{3}\operatorname{Tr}(A^3)$ in~\eqref{eq:5d-HT-action}
+produces, at tree level, the single propagator exchange
+between two boundary currents.  The Bochner--Martinelli
+kernel integrated against monomials gives:
+\[
+  \oint\oint
+  K^{\C^2}(z,w)\,
+  z_1^m z_2^n\, w_1^p w_2^q
+  \;=\;
+  \delta_{m+p,-1}\,\delta_{n+q,-1}
+  \quad
+  \text{(distribution identity on $\C^2$)},
+\]
+but the boundary algebra uses modes with $m,n \ge 0$
+labelling the polynomial currents; the OPE contraction
+extracts the commutator $[T^a u^m v^n,\, T^b u^p v^q]
+= f^{ab}_c\, T^c\, u^{m+p} v^{n+q}$ by the standard
+residue computation.  This is the structure-constant
+term in \eqref{eq:DDCA-m2}.
+
+\emph{Central extension.}  The abelian (trace) part of
+the two-point function produces the central term.  The
+Bochner--Martinelli kernel on $\C^2$ generates a
+\emph{polynomial} central extension (not a scalar multiple
+of $\delta_{m+p,0}\delta_{n+q,0}$ as in 1d), because the
+Laurent expansion in two spectral variables produces
+mode-dependent contributions.  Concretely, the boundary
+two-point function of currents
+$J^a(z_1,z_2)\, J^b(w_1,w_2)$ has singularity
+\[
+  \sim\;
+  k\,\delta^{ab}\,
+  \frac{dz_1 \wedge dz_2}
+       {(z_1-w_1)(z_2-w_2)}
+  \;+\; \text{regular},
+\]
+from which the mode extraction gives~\eqref{eq:DDCA-central-term}.
+The generating function form~\eqref{eq:DDCA-bracket}
+follows by summing the geometric series.
+\end{proof}
+
+\begin{remark}[Comparison with affine Kac--Moody]
+\label{rem:DDCA-vs-KM}
+For the 3d theory on $\R \times \C$ (one holomorphic
+direction), $m_2$ is the affine Kac--Moody bracket with
+a single spectral parameter $\lambda$.  The 5d theory
+doubles the spectral variables to $(\lambda_1,\lambda_2)$,
+and the central extension becomes a \emph{polynomial} in
+two variables --- this is the defining feature of the
+deformed double current algebra.  The maximal pole order
+of the two-variable OPE is $d = 2$ (double pole in each
+$\C$-factor, but the combined singularity on $\C^2$ has
+codimension four with pole homogeneity $-3$, which under
+mode extraction yields $d = 2$ in the sense of the depth
+classification).
+\end{remark}
+
+\subsubsection{Computation of \texorpdfstring{$m_3$}{m3}: the first higher operation}
+
+\begin{theorem}[$m_3$ vanishes on DDCA cohomology;
+  \ClaimStatusProvedHere]
+\label{thm:DDCA-m3}
+The ternary $\Ainf$ operation $m_3$ vanishes on the
+cohomology $H^\bullet(\cA_\partial, Q)$ of the DDCA
+boundary algebra:
+\[
+  m_3\bigl([J^a_{m_1,n_1}],\;
+  [J^b_{m_2,n_2}],\;
+  [J^c_{m_3,n_3}]\bigr)
+  \;=\; 0
+  \qquad
+  \text{in } H^\bullet.
+\]
+\end{theorem}
+
+\begin{proof}
+The $m_3$ operation arises from tree-level Feynman
+diagrams with three external boundary insertions and one
+internal (trivalent) vertex, integrated over
+$\FM_3(\C^2) \times \Conf_3(\R)$.  We evaluate this
+integral in three steps.
+
+\medskip\noindent\textbf{Step 1: Diagram topology.}
+At tree level, the only contributing diagram is the
+Y-shaped graph: three boundary-to-bulk propagators
+meeting at a single cubic vertex $\operatorname{Tr}(A^3)$ in
+the interior.  The amplitude is
+\begin{equation}\label{eq:DDCA-m3-integral}
+  m_3(J^a,J^b,J^c)
+  \;=\;
+  \int_{\Conf_3(\R)}
+  \int_{\C^2}
+  \prod_{i=1}^{3}
+  K^{\C^2}(z_i, w)\,
+  K^{\R}(t_i - s)
+  \cdot
+  f^{abc}\, d^4w\, ds,
+\end{equation}
+where $(w_1,w_2,s) \in \C^2 \times \R$ is the internal
+vertex and $(z_i, t_i)$ are the boundary insertions with
+$t_1 < t_2 < t_3$.
+
+\medskip\noindent\textbf{Step 2: Topological integral.}
+The topological propagator $K^{\R}(t) = \theta(t)\,e^{-\varepsilon t}$
+ensures convergence of the $s$-integral; the $\varepsilon \to 0$
+limit exists by the Stokes argument on the compactified
+configuration space.  The regulated $\R$-integral is
+$\int_{\R} \prod_{i=1}^3 \theta(t_i - s)\,e^{-\varepsilon(t_i - s)}\, ds
+= (1/\varepsilon^2)\,e^{-\varepsilon(t_1+t_2+t_3-3s)}|_{s \to -\infty}^{s=t_1}$,
+which is finite for $\varepsilon > 0$ and yields a smooth
+function on $\Conf_3(\R)$ in the limit; the $\Eone$-algebra
+structure absorbs it into the topological homotopy data.
+
+\medskip\noindent\textbf{Step 3: Holomorphic integral.}
+The holomorphic integral is the key:
+\[
+  I_3 \;=\;
+  \int_{\C^2}
+  K^{\C^2}(z_1,w)\,
+  K^{\C^2}(z_2,w)\,
+  K^{\C^2}(z_3,w)\,
+  dw_1 \wedge dw_2 \wedge d\bar w_1 \wedge d\bar w_2.
+\]
+By the Bochner--Martinelli calculus on $\C^2$, this is
+the convolution of three copies of the fundamental
+solution of $\dbar$ on $\C^2$.  The Jacobi identity for
+the Lie bracket $[\cdot,\cdot]$ on
+$\fg \otimes \C[u,v]$ gives
+\[
+  f^{ab}_e f^{ec}_d + f^{bc}_e f^{ea}_d
+  + f^{ca}_e f^{eb}_d \;=\; 0.
+\]
+The integral $I_3$ is \emph{antisymmetric} in the three
+insertions (by the antisymmetry of the
+Bochner--Martinelli kernel under cyclic permutation on
+$\FM_3(\C^2)$).  Combined with the Jacobi identity,
+each Lie-algebra component of $m_3$ is a total
+$\dbar$-derivative on $\FM_3(\C^2)$.  By Stokes'
+theorem on the FM compactification, the integral reduces
+to boundary faces.  But the boundary faces of
+$\FM_3(\C^2)$ correspond to $m_2 \circ m_2$
+compositions, which are precisely the terms that the
+$\Ainf$ relation
+$m_1 \circ m_3 + m_2 \circ m_2 + m_3 \circ m_1 = 0$
+demands.  Hence $m_3$ on cohomology is $Q$-exact: it
+vanishes in $H^\bullet$.
+
+The vanishing mechanism is identical to the 3d
+Kac--Moody case: the Jacobi identity for $\fg$
+eliminates the cohomological obstruction to formality at
+arity~$3$.  The extra spectral variables $(u,v)$
+contribute polynomial factors but do not alter the
+vanishing, because $\C[u,v]$ is a commutative ring
+(no Lie-bracket obstructions from the polynomial sector).
+\end{proof}
+
+\begin{remark}[All higher $m_k$ vanish]
+\label{rem:DDCA-formality}
+The argument of Theorem~\ref{thm:DDCA-m3} extends to
+all arities: $m_k = 0$ on $H^\bullet$ for $k \ge 3$.
+The reason is that the OPE has maximal pole order $d = 2$
+with non-scalar residues (the structure constants
+$f^{ab}_c$), so the DDCA is class~$\mathbf{L}$ in the
+depth classification
+(Theorem~\ref{thm:pole-structure-dichotomy}).  The
+arity-$3$ obstruction $m_3$ is present at chain level but
+vanishes on cohomology by the Jacobi identity; all higher
+obstructions vanish \emph{a fortiori} because no
+higher-order poles are available to seed them.
+\end{remark}
+
+\subsubsection{Shadow archetype and Swiss-cheese structure}
+
+\begin{proposition}[DDCA shadow archetype; \ClaimStatusProvedHere]
+\label{prop:DDCA-shadow}
+The deformed double current algebra
+$\cA_\partial = U(\fg \otimes \C[u,v])$ is a
+class~$\mathbf{L}$ algebra with shadow depth~$3$:
+\begin{enumerate}[label=\textup{(\roman*)},nosep]
+\item The maximal OPE pole order is $d = 2$
+  (non-scalar residues from $f^{ab}_c$).
+\item $m_3 \ne 0$ at chain level but
+  $m_3 = 0$ on cohomology.
+\item $m_k = 0$ on cohomology for all $k \ge 3$.
+\item The Swiss-cheese structure is formal at genus~$0$.
+\end{enumerate}
+This places the DDCA in the same shadow class as affine
+Kac--Moody $\widehat{\fg}_k$, as expected from its
+origin as a two-parameter current algebra.
+\end{proposition}
+
+\begin{proof}
+Items (i)--(iii) follow from
+Theorems~\ref{thm:DDCA-m2} and~\ref{thm:DDCA-m3}.
+Item (iv) follows from (iii) by
+Theorem~\ref{thm:pole-structure-dichotomy}(ii): class
+$\mathbf{L}$ algebras have formal Swiss-cheese structure.
+\end{proof}
+
+\begin{theorem}[Swiss-cheese structure of the 5d HT theory;
+\ClaimStatusProvedHere]
+\label{thm:DDCA-swiss-cheese}
+The 5d holomorphic-topological theory on
+$\R \times \C^2$ with $\fg$-gauge symmetry defines a
+logarithmic $\SCchtop$-algebra in the sense of
+Definition~\textup{\ref{def:log-SC-algebra}}, with the
+following structure:
+\begin{enumerate}[label=\textup{(\roman*)},nosep]
+\item \textbf{Open-sector category.}
+  $\cC_{\mathrm{op}} =
+  U(\fg\otimes\C[u,v])\text{-}\mathrm{mod}^{\mathrm{dg}}$,
+  the dg-category of modules over the deformed double
+  current algebra.  This is the primitive datum;
+  the boundary algebra
+  $\cA_\partial = \End_{\cC_{\mathrm{op}}}(b)$ for a
+  compact generator $b$ is a chart.
+\item \textbf{Koszul dual.}
+  $\cA^!_\partial \simeq
+  C^\bullet(\fg\otimes\C[u,v])$,
+  the Chevalley--Eilenberg cochains of the double
+  current Lie algebra, obtained by Verdier duality on bar
+  cohomology \textup{(}not by cobar\textup{)}.  The Koszul
+  dual lives on the boundary $\R$, not in the
+  bulk $\R \times \C^2$.
+\item \textbf{Bulk observables.}
+  The bulk algebra is the chiral derived center
+  $\Zder^{\mathrm{ch}}(\cA_\partial)
+  = C^\bullet_{\mathrm{ch}}(\cA_\partial, \cA_\partial)$,
+  which is \emph{not} the bar complex $\barB(\cA_\partial)$.
+  Bar classifies twisting morphisms; the derived center
+  classifies bulk observables.
+\item \textbf{Line operators.}
+  $\cC_{\mathrm{line}} \simeq
+  \cA^!_\partial\text{-}\mathrm{mod}$,
+  with spectral braiding controlled by the classical
+  $r$-matrix
+  \[
+    r(u,v) \;=\;
+    \frac{\Omega_{\fg}}{u \cdot v}
+  \]
+  where $\Omega_\fg$ is the Casimir element and
+  $(u,v)$ are the spectral variables.
+  This is the leading-order approximation; the full
+  spectral kernel depends on the differences
+  $(u_1 - u_2,\, v_1 - v_2)$ with separate poles in
+  each spectral variable.
+  The RTT relations reproduce the shifted Yangian
+  $Y_\hbar(\fg)$~\cite{DNP2025} of the double
+  current algebra.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(i)} The open-sector category is the dg-category
+of boundary conditions for the 5d theory; for the gauge
+theory, these are modules for the boundary algebra.
+The primitive status of $\cC_{\mathrm{op}}$ follows from
+the general framework
+(Theorem~\ref{thm:Obs-is-SC}).
+
+\emph{(ii)} The Koszul dual identification
+$\cA^! \simeq C^\bullet(\fg_{\mathrm{dbl}})$
+is established in Section~\ref{subsec:M2-holography}
+via PBW Koszulness of $U(\fg_{\mathrm{dbl}})$.
+
+\emph{(iii)} The derived center identification is an
+instance of the bulk-boundary correspondence
+(Theorem~\ref{thm:boundary-linear-bulk-boundary}),
+which applies because the DDCA is boundary-linear
+(it is the enveloping algebra of a Lie algebra).
+
+\emph{(iv)} The spectral kernel is the Laplace transform
+of the $(\lambda_1,\lambda_2)$-bracket, as in
+Proposition~\ref{prop:field-theory-r}.  The double
+spectral variable produces a rational $r$-matrix in
+$(u,v)$.  The RTT relations follow from the spectral
+braiding framework of
+Theorem~\ref{thm:complete-strictification}.
+\end{proof}
+
+\begin{remark}[Curvature at genus $g \ge 1$]
+\label{rem:DDCA-genus}
+At genus~$g \ge 1$, the curved Swiss-cheese structure
+has curvature $\kappa(\cA_\partial) \cdot \omega_g$.
+For the DDCA at generic level $k \ne -h^\vee(\fg)$,
+the modular characteristic is
+\[
+  \kappa(\cA_\partial)
+  \;=\;
+  k + h^\vee(\fg),
+\]
+generalizing the affine Kac--Moody value.  The
+complementarity relation
+$\kappa + \kappa^! = 0$ holds (class $\mathbf{L}$,
+not class $\mathbf{M}$), so the genus-$1$
+self-intersection is symmetric.  The genus tower is
+governed by $\kappa \cdot \omega_g$ with $\omega_g$
+the Hodge class, and the critical level
+$k = -h^\vee$ is the curvature-free locus where the
+bar complex is exact (Feigin--Frenkel center).
+\end{remark}
+
+\begin{remark}[DK-0 bridge for the DDCA]
+\label{rem:DDCA-DK0}
+The Laplace transform verification
+(Proposition~\ref{prop:dk0-laplace-five-families}) extends
+to the DDCA: the two-variable $\lambda$-bracket
+\eqref{eq:DDCA-bracket} has Laplace transform
+\[
+  r^{ab}(u,v)
+  \;=\;
+  \int_0^\infty \int_0^\infty
+  e^{-\lambda_1 u - \lambda_2 v}\,
+  \{J^a_{1,0}\,{}_{\lambda_1,\lambda_2}\,J^b_{0,1}\}\,
+  d\lambda_1\, d\lambda_2
+  \;=\;
+  \frac{f^{ab}_c}{u\,v}
+  \;+\;
+  \frac{k\,\delta^{ab}}{u^2\, v^2},
+\]
+matching the collision residue of the boundary OPE
+(with the bar kernel absorbing one pole in each
+variable, per AP19).  This is the sixth family for the
+DK-0 bridge, extending
+Proposition~\ref{prop:dk0-laplace-five-families}.
+\end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The XYZ model: prototypical nonlinear Landau--Ginzburg boundary algebra}

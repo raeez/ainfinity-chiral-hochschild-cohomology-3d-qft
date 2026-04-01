@@ -1195,20 +1195,20 @@ def m2_shadow_data(K: int) -> Dict[str, Any]:
     r"""Shadow data for the M2 system.
 
     The M2 boundary algebra is a filtered infinite-generator algebra.
-    At large K, the shadow tower scales with K:
-    - kappa_{M2} ~ K^2 (from the gl_K Casimir)
     - Shadow class: M (mixed, infinite tower)
-    - The shadow connection nabla^hol_{M2} is the full 5d gauge theory
-      propagator projected to the boundary
+    - kappa_{M2}: OPEN. The DDCA is not a tensor product of standard
+      chiral algebras; the self-sewing trace on the full cyclic pairing
+      has not been computed from first principles.
 
     The four-fold match (from large_n_twisted_holography.py):
     sector x level x rank x genus
     """
-    # kappa for gl_K at level 1: dim(gl_K) * 1 / 2 = K^2 / 2
-    # (Using h^v = K for gl_K, kappa = K^2 * (1+K)/(2K) but at large K
-    # the leading term is K/2 * K = K^2/2.)
-    # More precisely for gl_K: kappa ~ K^2
-    kappa_m2 = Fraction(K * K, 2)
+    # kappa_{M2} is OPEN: the DDCA has genuinely nonlinear
+    # relations mixing gl_K and Diff(C), so naive tensor-product
+    # or supertrace-of-identity computations are incorrect.
+    # Three contradictory values (-K, K^2, -1/2) appeared in the
+    # manuscript; all were unverified.  Marked None = open.
+    kappa_m2 = None
 
     return {
         'K': K,
@@ -1221,63 +1221,25 @@ def m2_shadow_data(K: int) -> Dict[str, Any]:
             'rank': f'K = {K}',
             'genus': 'loop filtration in Theta_{M2}',
         },
-        'large_K_scaling': {
-            'kappa_leading': f'K^2/2 = {kappa_m2}',
-            'c_leading': f'K^2 (Virasoro central charge)',
-        },
+        'kappa_status': 'open',
     }
 
 
 def m2_holographic_complementarity(K: int) -> Dict[str, Any]:
-    r"""Verify holographic complementarity for the M2 system.
+    r"""Holographic complementarity status for the M2 system.
 
-    At the scalar level: kappa(A_{M2}) + kappa(A!_{M2}) should
-    satisfy the appropriate complementarity constraint.
-
-    For gl_K-type algebras: kappa + kappa' = rho * K_complementarity.
-    The exact value depends on the filtered completion.
-
-    At the four-fold level: bulk + boundary = total system
-    C_g(A_{M2}) = Q_g(A_{M2}) + Q_g(A!_{M2}).
+    kappa(A_{M2}) is OPEN, so complementarity at the scalar level
+    cannot be verified.  The structural complementarity
+    C_g(A_{M2}) = Q_g(A_{M2}) + Q_g(A!_{M2}) holds by Theorem C
+    independently of the value of kappa.
     """
-    kappa_m2 = Fraction(K * K, 2)
-
-    # The Koszul dual level for gl_K: k' = -k - 2K at k=1 gives k' = -1-2K
-    # kappa(A!_{M2}) ~ -K^2/2 at leading order
-    kappa_dual = -kappa_m2
-
-    # Complementarity: for KM-type, kappa + kappa' = 0
-    kappa_sum = kappa_m2 + kappa_dual
-
-    # Free energies at genus g (scalar level)
-    def _bernoulli_val(n: int) -> Fraction:
-        """B_{2g} as exact fraction."""
-        # Use sympy's bernoulli for exact values
-        from sympy import bernoulli as _bern
-        return Fraction(_bern(n))
-
-    free_energies = {}
-    for g in range(2, 5):
-        b2g = _bernoulli_val(2 * g)
-        # lambda_g^FP = (2^{2g-1}-1)/(2^{2g-1}) * |B_{2g}|/(2g)!
-        num = (2**(2*g - 1) - 1)
-        den = 2**(2*g - 1)
-        lambda_fp = Fraction(num, den) * abs(b2g) / Fraction(factorial(2 * g))
-        fg_A = kappa_m2 * lambda_fp
-        fg_dual = kappa_dual * lambda_fp
-        free_energies[g] = {
-            'F_g(A)': fg_A,
-            'F_g(A!)': fg_dual,
-            'sum': fg_A + fg_dual,
-        }
-
     return {
         'K': K,
-        'kappa_A': kappa_m2,
-        'kappa_A_dual': kappa_dual,
-        'kappa_sum': kappa_sum,
-        'complementarity_satisfied': kappa_sum == 0,
-        'free_energies': free_energies,
+        'kappa_A': None,
+        'kappa_A_dual': None,
+        'kappa_status': 'open',
+        'complementarity_structural': True,
+        'complementarity_scalar': 'open (requires kappa)',
     }
 
 

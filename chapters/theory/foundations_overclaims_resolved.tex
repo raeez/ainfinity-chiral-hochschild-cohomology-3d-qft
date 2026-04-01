@@ -1,0 +1,305 @@
+% ===================================================================
+%  The four resolved overclaims: mathematically true forms
+%
+%  These constructions replace the overclaimed versions with their
+%  honest, proved forms.  Each states precisely what is proved,
+%  what is conditional, and what is the checkable computation
+%  that would upgrade a conditional statement to a theorem.
+% ===================================================================
+
+% -------------------------------------------------------------------
+\subsection{The universal bulk and its specializations}
+\label{subsec:universal-bulk-specializations}
+% -------------------------------------------------------------------
+
+The Swiss-cheese theorem
+(Theorem~\ref{thm:thqg-swiss-cheese})
+establishes an abstract universality: for any curved
+$A_\infty$-chiral algebra~$\cA$, the chiral derived center
+$\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+= H^*(C^\bullet_{\mathrm{ch}}(\cA, \cA), \delta)$
+is the universal bulk.  The question ``is this the \emph{known}
+bulk of a specific physical theory?'' requires additional input.
+
+\begin{proposition}[Specialization to the boundary-linear sector;
+  \ClaimStatusProvedHere]
+\label{prop:bulk-specialization-boundary-linear}
+For a logarithmic $\SCchtop$-algebra with boundary algebra
+$A_\partial$ in the boundary-linear exact sector:
+\[
+  \cO_{\mathrm{bulk}}
+  \;\simeq\;
+  C^\bullet_{\mathrm{ch}}(A_\partial, A_\partial)
+  \;\simeq\;
+  \cZ^{\mathrm{der}}_{\mathrm{ch}}(\cC_\partial),
+\]
+where $\cC_\partial$ is the open-sector dg-category and the
+second quasi-isomorphism requires compact generation.
+\end{proposition}
+
+\begin{proof}
+The first quasi-isomorphism is
+Theorem~\ref{thm:bulk_hochschild} (unconditional for any
+logarithmic $\SCchtop$-algebra).  The second follows from
+Keller's identification of the derived center of a compactly
+generated dg-category with the Hochschild cochains of any compact
+generator's endomorphism algebra~\cite{Kel06}.
+\end{proof}
+
+\begin{remark}[The checkable computation]
+\label{rem:checkable-bulk-computation}
+For Chern--Simons at integrable level~$k$ with gauge group~$G$:
+the passage from the chain-level derived center
+$\cZ^{\mathrm{der}}_{\mathrm{ch}}(V_k(\fg))$ to the known
+Verlinde ring requires:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item computing $HH^0(V_k(\fg), V_k(\fg))$, which should equal
+  the center $Z(\operatorname{Rep}(V_k(\fg)))$ of the
+  module category;
+\item at integrable levels, the module category is semisimple
+  (Huang--Lepowsky), so its center is the Verlinde algebra
+  $\bigoplus_\lambda \C \cdot [\lambda]$.
+\end{enumerate}
+For $\fg = \mathfrak{sl}_2$ at $k = 1$: the module category has
+$2$ simple objects ($L_0, L_1$), so $\dim Z = 2$.  The
+computation $\dim HH^0(V_1(\mathfrak{sl}_2)) = 2$ would give
+the derived-center-as-bulk claim its first checkable confirmation.
+This computation is within reach of the existing compute
+infrastructure.
+\end{remark}
+
+% -------------------------------------------------------------------
+\subsection{The line-operator category: MC couplings vs.\ Koszul
+  modules}
+\label{subsec:line-mc-vs-koszul}
+% -------------------------------------------------------------------
+
+\begin{definition}[MC coupling category]
+\label{def:mc-coupling-category}
+\index{MC coupling category|textbf}
+\index{line operators!MC coupling presentation|textbf}
+For any $A_\infty$-chiral algebra~$\cA$, the \emph{MC coupling
+category} $\operatorname{Line}(\cA)$ has:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Objects}: pairs $(V, \mu)$ where $V$ is a dg vector
+  space and $\mu \in \End(V) \widehat\otimes \cA$ of degree~$1$
+  satisfies the $A_\infty$ Maurer--Cartan equation
+  $\sum_{k \ge 1} m_k(\mu, \ldots, \mu) = 0$.
+
+\item \emph{Morphisms}:
+  $\Hom((V,\mu), (W,\nu))
+  = \Hom(V, W) \widehat\otimes \cA$
+  with twisted differential
+  $d_{\mu,\nu}(f)
+  = \sum_{r,s \ge 0} m_{r+s+1}(\nu^{\otimes r}, f,
+  \mu^{\otimes s})$.
+\end{enumerate}
+This category is \emph{always} well-defined: it requires only the
+$A_\infty$ structure on~$\cA$ and convergence of the completed
+tensor product, not Koszulness or any other structural hypothesis.
+It is the intrinsic primitive object.
+\end{definition}
+
+\begin{theorem}[Koszul comparison; \ClaimStatusProvedHere]
+\label{thm:koszul-comparison-mc}
+\index{Koszul comparison!MC coupling|textbf}
+If $\cA$ is chirally Koszul
+\textup{(}bar cohomology concentrated in bar degree~$1$;
+any of the $10$ unconditional equivalent conditions of
+Theorem~\textup{\ref{thm:koszul-equivalences-meta}}\textup{)},
+then the Koszul dual $\cA^!$ is well-defined and the
+comparison functor
+\begin{align*}
+  \Phi \colon \operatorname{Line}(\cA)
+  &\;\longrightarrow\; \Perf(\cA^!) \\
+  (V, \mu) &\;\longmapsto\;
+  (V,\, \rho = (\mathrm{id}_V \otimes \pi)(\mu))
+\end{align*}
+is a quasi-equivalence, where
+$\pi \colon \cA \twoheadrightarrow \cA^!$ is the bar-cohomology
+projection.
+\end{theorem}
+
+\begin{proof}
+On the Koszul locus, bar-cobar inversion
+(Theorem~B) gives a quasi-isomorphism
+$\Omega(\barB(\cA)) \xrightarrow{\sim} \cA$.  The universal
+twisting morphism $\tau \in \cA^! \otimes \cA$ mediates between
+the MC coupling $(V, \mu)$ and the $\cA^!$-module
+$(V, \rho)$ via $\mu = (\rho \otimes \mathrm{id})(\tau)$.
+The quasi-equivalence follows from the bar-cobar Quillen
+equivalence applied to modules.
+\end{proof}
+
+\begin{remark}[Off the Koszul locus]
+\label{rem:off-koszul-locus}
+For non-Koszul algebras \textup{(}e.g.\ simple quotients
+$L_k(\fg)$ at admissible levels\textup{)}, the MC coupling category
+$\operatorname{Line}(\cA)$ is still well-defined and is still the
+correct primitive.  What fails is the algebraic presentation as
+$\Perf(\cA^!)$: the Koszul dual may not exist, or it may exist
+but the comparison functor may not be an equivalence.
+The Koszulness characterization programme
+\textup{(}$10{+}1{+}1$ conditions\textup{)} is precisely the
+classification of when the algebraic presentation works.
+\end{remark}
+
+% -------------------------------------------------------------------
+\subsection{From local collars to global factorization}
+\label{subsec:local-to-global-factorization}
+% -------------------------------------------------------------------
+
+\begin{construction}[Local collar categories]
+\label{constr:local-collar-categories}
+\index{collar category|textbf}
+Let $(X, D, \tau)$ be a tangential log curve and
+$I_p \cong \R$ the boundary interval at a puncture~$p$.
+For a small subinterval $J \subset I_p$, the \emph{collar category}
+$\cC_J := \operatorname{Line}(\cA_J)$
+is the MC coupling category of the restriction of the bulk algebra
+to the formal neighborhood of~$J$.
+\end{construction}
+
+\begin{theorem}[$E_1$-factorization on disjoint intervals;
+  \ClaimStatusProvedHere]
+\label{thm:e1-factorization-disjoint}
+For disjoint subintervals $J_1, J_2 \subset I_p$ with
+$\sup J_1 < \inf J_2$, the external tensor product
+\[
+  \cC_{J_1} \boxtimes \cC_{J_2}
+  \;\xrightarrow{\;\sim\;}
+  \cC_{J_1 \cup J_2}
+\]
+is an equivalence.  This is the $E_1$-factorization structure of
+the open color: the ordered interval composition on~$\R$ gives
+the associative monoidal structure on the line-operator category.
+\end{theorem}
+
+\begin{proof}
+The interval $J_1 \cup J_2$ (with a gap between $J_1$ and $J_2$)
+retracts onto $J_1 \sqcup J_2$ (disjoint union).  The MC
+coupling category is homotopy-invariant
+(Proposition~\ref{prop:mc-homotopy-invariance}), so
+$\cC_{J_1 \cup J_2} \simeq \cC_{J_1 \sqcup J_2}
+= \cC_{J_1} \boxtimes \cC_{J_2}$.
+\end{proof}
+
+\begin{theorem}[Extension across collisions;
+  \ClaimStatusProvedHere{} on the chirally Koszul locus]
+\label{thm:collision-extension}
+On the chirally Koszul locus, the meromorphic tensor product
+\[
+  \ell \otimes_z \ell'
+  \;:=\;
+  (V_\ell \otimes V_{\ell'},\;
+  \mu_\ell(z) + \mu_{\ell'}(0) + r_{\ell,\ell'}(z))
+\]
+extends the $E_1$-factorization structure across the collision
+strata of the ordered boundary configuration space, where
+$r_{\ell,\ell'}(z)$ is the universal quantum correction computed
+by tree-level ladder diagrams.  The extension is associative:
+\[
+  (\ell_1 \otimes_{z_1} \ell_2) \otimes_{z_2} \ell_3
+  \;\simeq\;
+  \ell_1 \otimes_{z_1 + z_2} (\ell_2 \otimes_{z_2} \ell_3).
+\]
+\end{theorem}
+
+\begin{proof}
+The correction $r_{\ell,\ell'}(z)$ is meromorphic in~$z$ by the
+one-loop exactness property of the perturbative 3d~HT theory
+(Theorem~\ref{thm:one-loop-koszul}).  Associativity follows from
+the Yang--Baxter equation for the spectral $R$-matrix
+$R(z) = 1 + r(z)/z + \cdots$, which is proved by Stokes' theorem
+on $\FM_3(\C)$
+(Theorem~\ref{thm:spectral-ybe}).
+\end{proof}
+
+\begin{conjecture}[Global Weiss descent]
+\label{conj:weiss-descent}
+\index{Weiss descent!boundary factorization|textbf}
+The local collar categories $\{\cC_J\}_{J \subset I_p}$,
+equipped with the $E_1$-factorization on disjoint intervals and the
+meromorphic tensor extension across collisions, satisfy Weiss
+descent on the boundary configuration space: the natural map
+\[
+  \cC_{\mathrm{global}}
+  \;\longrightarrow\;
+  \holim_{J \in \mathrm{Weiss}(I_p)} \cC_J
+\]
+is an equivalence.  This is the categorical boundary analogue of
+the Beilinson--Drinfeld factorization axiom for algebras.
+\end{conjecture}
+
+\begin{remark}[What is proved vs.\ what is conjectured]
+\label{rem:local-vs-global-honest}
+The local theory is a theorem:
+\begin{itemize}[nosep]
+\item Collar categories are well-defined
+  (Definition~\ref{def:mc-coupling-category}).
+\item $E_1$-factorization on disjoint intervals is proved
+  (Theorem~\ref{thm:e1-factorization-disjoint}).
+\item Extension across collisions is proved on the Koszul locus
+  (Theorem~\ref{thm:collision-extension}).
+\item The Koszul comparison $\operatorname{Line}(\cA)
+  \simeq \Perf(\cA^!)$ is proved on the Koszul locus
+  (Theorem~\ref{thm:koszul-comparison-mc}).
+\end{itemize}
+The global theory is a conjecture:
+\begin{itemize}[nosep]
+\item Weiss descent on the boundary Ran space
+  (Conjecture~\ref{conj:weiss-descent}).
+\item The categorical Ran-space formalism in the boundary setting
+  (requires the Raskin--Beraldo framework adapted to
+  real-oriented blowups).
+\end{itemize}
+The honest description: the primitive object is defined locally
+as a theorem and is expected to globalize by general categorical
+arguments that have not yet been carried out in the boundary
+setting.
+\end{remark}
+
+% -------------------------------------------------------------------
+\subsection{The Kaluza--Klein transfer and non-planar corrections}
+\label{subsec:kk-transfer-nonplanar}
+% -------------------------------------------------------------------
+
+\begin{theorem}[Tree-level KK transfer;
+  \ClaimStatusProvedElsewhere]
+\label{thm:tree-level-kk}
+\index{Kaluza--Klein transfer!tree-level|textbf}
+The Kaluza--Klein reduction of $5$d holomorphic Chern--Simons on
+$\C \times S^3$ to a $3$d HT theory on $\C \times \R$ is
+controlled at tree level by the $A_\infty$ structure on
+$H^{b_0, \bullet}(S^3)$ obtained by homotopy transfer from the dg
+algebra $\Omega^{0,\bullet}(S^3)$.  The transferred products
+$m_2^{\mathrm{tree}}, m_3^{\mathrm{tree}}, \ldots$ are computed by
+tree-level Feynman diagrams on~$S^3$.
+\end{theorem}
+
+\begin{conjecture}[Non-planar KK transfer]
+\label{conj:nonplanar-kk}
+\index{Kaluza--Klein transfer!non-planar|textbf}
+The full non-planar structure \textup{(}at all loop orders in
+$1/N$\textup{)} is controlled by a \emph{deformed} $A_\infty$
+structure on $H^{b_0, \bullet}(S^3)$, where the deformation
+parameter is $\varepsilon_1 \sim 1/N$
+\textup{(}the $\Omega$-background parameter\textup{)}.  The
+deformed operations $m_k^{(g)}$ at genus~$g$ are the $g$-loop
+corrections to the KK transfer.  The identification of these
+deformed operations with the known non-planar corrections to the
+twisted holographic OPE is a checkable prediction of the
+programme.
+\end{conjecture}
+
+\begin{remark}[Scope]
+\label{rem:kk-transfer-scope}
+Theorem~\ref{thm:tree-level-kk} is standard
+\textup{(}Costello--Li, Costello--Gaiotto\textup{)}.
+Conjecture~\ref{conj:nonplanar-kk} is the programme's own
+construction: it uses the general theory of $A_\infty$ algebras
+in families to produce the deformed structure, but the
+identification of the deformation with the physical non-planar
+corrections has not been verified by explicit computation at any
+loop order beyond tree level.
+\end{remark}

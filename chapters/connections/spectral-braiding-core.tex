@@ -8,6 +8,8 @@
 \label{chap:spectral-braiding}
 \label{sec:bulk-boundary}
 
+The spectral $R$-matrix $R(z) = \Res^{\mathrm{coll}}_{0,2}(\Theta^{\mathrm{oc}})$ is the genus-0, arity-2 collision residue of the open/closed MC element, extracted from the bulk-to-boundary composition of two parallel line operators.  It satisfies the Yang--Baxter identity (Stokes on $\FM_3(\C)$) and equals the Laplace transform of the chiral $\lambda$-bracket.
+
 \subsection{Boundary data and factorization module structure}
 \label{subsec:boundary-module}
 Let $A=(A_{\mathsf{ch}},A_{\mathsf{top}})$ be a $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$–algebra.
@@ -178,9 +180,9 @@ The formula $r(z) = \int_0^\infty e^{-\lambda z} \{\cdot{}_\lambda \cdot\}\, d\l
 
 \begin{remark}[Specialization to the DK ladder]
 \label{rem:spectral-R-dk-specialization}
-When restricted to evaluation modules---those arising from
+When restricted to evaluation modules (those arising from
 finite-dimensional representations of~$\fg$ via the evaluation map
-$\mathrm{ev}_z \colon Y(\fg) \to U(\fg)$---the spectral $R$-matrix
+$\mathrm{ev}_z \colon Y(\fg) \to U(\fg)$), the spectral $R$-matrix
 $R(z)$ of this section specializes to the Drinfeld $R$-matrix
 governing the DK-0/1 equivalence of Volume~I
 (Theorem~\ref*{V1-thm:factorization-dk-eval}).  The spectral braiding
@@ -254,8 +256,8 @@ $\widehat{\mathcal{H}}$, with the Yang--Baxter equation holding to
 all orders by Theorem~\ref{thm:YBE}.
 
 On the chirally Koszul locus,
-Theorem~\ref{thm:lines_as_modules} identifies perturbative line
-operators with modules for the Koszul-dual boundary algebra, so the
+Theorem~\ref{thm:lines_as_modules} models the perturbative line
+category by modules for the Koszul-dual boundary algebra, so the
 braided monoidal category $\mathcal{C}_\partial$ from Part~A is then
 identified with the category of $\mathcal{H}$-modules equipped with
 the braiding induced by $R(z)$.
@@ -289,15 +291,72 @@ encoding the quantum corrections to the tensor product of line operators:
 The degree-1 element $r(z)$ is related to the braiding isomorphism $R(z)$ of Definition~\ref{def:spectral-braiding} by $R(z) = \exp(r(z))$ in the completed tensor product, where the exponential is well-defined by the nilpotency of the degree-1 part in the $A_\infty$ setting.
 \end{remark}
 
+\subsubsection{The meromorphic tensor product on line-operator modules}
+
+\begin{definition}[Meromorphic tensor product of line-operator modules]
+\label{def:meromorphic-tensor-modules}
+\index{meromorphic tensor product!on modules|textbf}
+For $M = (V, \mu_V),\; N = (W, \mu_W)
+\in \operatorname{Line}(\cA)$
+(Definition~\ref{def:mc-coupling-category}),
+the \emph{meromorphic tensor product} $M \otimes_z N$ is the
+object with underlying complex $V \otimes W$ and MC coupling
+\begin{equation}\label{eq:meromorphic-tensor-mc}
+  \mu_{M \otimes_z N}
+  \;=\;
+  \mu_V(z) \;+\; \mu_W(0)
+  \;+\; (\rho_V \otimes \rho_W)\bigl(r(z)\bigr),
+\end{equation}
+where $r(z)$ is the spectral $r$-matrix
+(Definition~\ref{def:spectral_R}).
+In the Koszul-dual presentation
+$\operatorname{Line}(\cA) \simeq \Perf(\cA^!)$
+(Theorem~\ref{thm:koszul-comparison-mc}),
+this is the module with $\cA^!$-action induced by the twisted
+coproduct~$\Delta_z$.
+\end{definition}
+
+\begin{theorem}[Meromorphic tensor dg-category;
+  \ClaimStatusProvedHere]
+\label{thm:meromorphic-tensor-dgcat}
+\index{meromorphic tensor category|textbf}
+$(\operatorname{Line}(\cA),\, \otimes_z,\, \mathbf{1})$ is a
+meromorphic tensor dg-category:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $M \otimes_z N$ is a well-defined object of
+  $\operatorname{Line}(\cA)$
+  \textup{(}$\Delta_z$ is an $A_\infty$-algebra morphism\textup{)}.
+\item The unit $\mathbf{1}$ \textup{(}the trivial line, from the
+  counit $\varepsilon \colon \cA^! \to k$\textup{)} satisfies
+  $\mathbf{1} \otimes_z M \simeq M$ and
+  $M \otimes_z \mathbf{1} \simeq T_z M$.
+\item Associativity:
+  $(M \otimes_z N) \otimes_w P
+  \simeq M \otimes_{z+w} (N \otimes_w P)$
+  up to coherent quasi-isomorphism.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) follows because $\Delta_z$ is an $A_\infty$-morphism by
+definition of the dg-shifted Yangian structure.
+(ii) from the counit axioms of the dg-shifted Yangian.
+(iii) from the coassociativity identity
+$r_{23}(z) + (\mathrm{id} \otimes \Delta_z)\, r(z+w)
+= r_{12}(w) + (\Delta_w \otimes \mathrm{id})\, r(z)$,
+which is the $A_\infty$ Yang--Baxter relation
+(Theorem~\ref{thm:spectral_R_YBE}).
+\end{proof}
+
 \subsubsection{Properties of $r(z)$}
 
-\begin{theorem}[Spectral $R$-Matrix Satisfies $A_\infty$ Yang--Baxter;
+\begin{theorem}[Spectral Kernel Satisfies $A_\infty$ Yang--Baxter;
 \ClaimStatusProvedElsewhere]
 \label{thm:spectral_R_YBE}
 Let $A$ be a logarithmic $\SCchtop$-algebra, and let
 $\mathcal{A}^!_{\mathrm{line}}$ denote the open-colour Koszul dual
 governing its line operators.
-(Dimofte--Niu--Py \cite{DNP25}, Theorem 5.2) The spectral $R$-matrix $r(z)$ satisfies:
+(Dimofte--Niu--Py \cite{DNP25}, Theorem 5.2) The spectral kernel $r(z)$ satisfies:
 \begin{enumerate}[label=(\roman*)]
 \item \textbf{Maurer--Cartan equation}:
 \begin{equation}
@@ -331,6 +390,724 @@ where $\Delta_z : \mathcal{A}^!_{\mathrm{line}} \to \mathcal{A}^!_{\mathrm{line}
 \textbf{(iii) Skew-symmetry}: This follows from the symmetry of the tensor product: swapping $\ell_1 \leftrightarrow \ell_2$ corresponds to $z \to -z$ and exchanging tensor factors.
 \end{proof}
 
+\subsubsection{Mode expansion of the spectral $r$-matrix}
+\label{subsubsec:mode-expansion-r}
+
+\begin{proposition}[Mode form of the free-field $r$-matrix;
+\ClaimStatusProvedHere]
+\label{prop:free-field-r-mode}
+Let $(x^i_n, p_{i,n})_{n \ge 0}$ be canonically paired free-field
+generators of the open-colour Koszul dual $\cA^!_{\mathrm{line}}$
+in a logarithmic HT gauge theory.  The spectral $r$-matrix
+\textup{(}Proposition~\textup{\ref{prop:field-theory-r}}\textup{)}
+has mode expansion
+\begin{equation}\label{eq:free-field-r-modes}
+  r(z) \;=\; \sum_i \sum_{m,n \ge 0}
+  (-1)^n \binom{n+m}{n}
+  \frac{p_{i,n} \otimes x^i_m \;-\; x^i_n \otimes p_{i,m}}
+       {z^{n+m+1}}.
+\end{equation}
+In generating-function form, with
+$x^i(w)^- = \sum_{n \ge 0} x^i_n\, w^{-n-1}$
+and $p_i(w)^- = \sum_{n \ge 0} p_{i,n}\, w^{-n-1}$,
+\begin{equation}\label{eq:free-field-r-gf}
+  r(z) \;=\; \oint_{|s| < |z|}
+  \bigl(
+    p_i(s)^- \otimes \partial_s x^i(s+z)^-
+    \;-\; x^i(s)^- \otimes \partial_s p_i(s+z)^-
+  \bigr).
+\end{equation}
+The mode formula~\eqref{eq:free-field-r-modes} is obtained by
+expanding $x^i(s+z)^- = \sum_{m \ge 0} x^i_m (s+z)^{-m-1}$
+in the region $|s| < |z|$ via
+$(s+z)^{-m-1} = z^{-m-1}\sum_{n \ge 0} (-1)^n \binom{n+m}{n}
+(s/z)^n$,
+extracting the residue $\oint_s s^{n-1}\, ds = \delta_{n,\cdot}$
+on each mode.
+\end{proposition}
+
+\begin{proof}
+Expand $\partial_s x^i(s+z)^- = -\sum_{m \ge 0}(m+1) x^i_m
+(s+z)^{-m-2}$ and use the binomial series
+$(s+z)^{-m-2} = z^{-m-2} \sum_{j \ge 0}(-1)^j\binom{m+1+j}{j}
+(s/z)^j$.
+The contour integral $\oint_s$ picks the coefficient of $s^{n}$
+in the product $p_{i,n}\, s^{-n-1}$ against $(s/z)^j$, forcing
+$j = n$.  Including the sign from $\partial_s$ and
+relabelling, one arrives at~\eqref{eq:free-field-r-modes}.
+The antisymmetric second term follows identically.
+\end{proof}
+
+\begin{proposition}[Mode form of the affine $r$-matrix;
+\ClaimStatusProvedHere]
+\label{prop:affine-r-mode}
+For $\widehat{\fg}_k$ at level $k \neq -h^\vee$ with
+generators $J^I_n$, $n \ge 0$, the spectral $r$-matrix
+$r(z) = k\,\Omega/z$ has mode components
+\begin{equation}\label{eq:affine-r-mode}
+  r_{mn} \;=\; k\,\kappa^{IJ}\,\delta_{m+n,0},
+\end{equation}
+where $\kappa^{IJ}$ is the inverse Killing form normalised by
+$\kappa^{IJ}\kappa_{JK} = \delta^I_K$, and
+$\Omega = \kappa^{IJ}\, t_I \otimes t_J$ is the Casimir tensor.
+\end{proposition}
+
+\begin{proof}
+The invariant bilinear form at level $k$ on $\fg$ is
+$(\cdot,\cdot)_k = k\,\kappa(\cdot,\cdot)$.  The associated
+Casimir tensor is $\Omega_k = k\,\kappa^{IJ}\,t_I \otimes t_J
+= k\,\Omega$.  The standard rational solution of the CYBE for
+$\widehat{\fg}_k$ is $r(z) = \Omega_k/z = k\,\Omega/z$.
+This is confirmed by the Laplace transform
+\textup{(}Proposition~\textup{\ref{prop:field-theory-r}}\textup{)}:
+the $\lambda$-bracket $\{J^I{}_\lambda\, J^J\}
+= f^{IJ}{}_K\, J^K + k\,\kappa^{IJ}\,\lambda$ gives
+\[
+  r(z) \;=\; \int_0^\infty e^{-\lambda z}\,
+  k\,\kappa^{IJ}\,\lambda\,d\lambda
+  \;=\; \frac{k\,\kappa^{IJ}}{z^2},
+\]
+for the central term, while the structure-constant term
+$f^{IJ}{}_K\,J^K/z$ contributes the adjoint action on modules.
+As an element of $\fg^{\otimes 2}((z^{-1}))$,
+the $r$-matrix $r(z) = k\,\Omega/z$ has a single Laurent
+coefficient, so the mode components are
+$r_{mn} = k\,\kappa^{IJ}\,\delta_{m+n,0}$.
+\end{proof}
+
+\begin{proposition}[Twisted coproduct in mode form;
+\ClaimStatusProvedHere]
+\label{prop:twisted-coproduct-modes}
+Let $\cA^!_{\mathrm{line}}$ be the open-colour Koszul dual of a
+logarithmic HT gauge theory with generators $a^I_n$, $n \ge 0$.
+The twisted coproduct $\Delta_z \colon \cA^!_{\mathrm{line}} \to
+\cA^!_{\mathrm{line}} \otimes_{r(z)} \cA^!_{\mathrm{line}}$
+acts on linear generators by
+\begin{equation}\label{eq:coproduct-mode}
+  \Delta_z(a^I_n) \;=\; \tau_z(a^I_n) \otimes 1
+  \;+\; 1 \otimes a^I_n,
+\end{equation}
+where the translation automorphism $\tau_z$ has mode form
+\begin{equation}\label{eq:translation-modes}
+  \tau_z(a^I_n) \;=\; \sum_{r=0}^{n} \binom{n}{r}\, z^r\,
+  a^I_{n-r}.
+\end{equation}
+In generating-function form, $\Delta_z(a^I(w)^-)
+= a^I(w+z)^- \otimes 1 + 1 \otimes a^I(w)^-$.
+\end{proposition}
+
+\begin{proof}
+The translation $\tau_z$ is the automorphism implementing
+$w \mapsto w + z$ on generating functions:
+$\tau_z(a^I(w)^-) = a^I(w+z)^-$.  Expanding
+$(w+z)^{-n-1} = \sum_{r=0}^\infty \binom{-n-1}{r} z^r
+w^{-n-1-r}$, only $r = 0, \ldots, n$ contribute non-negative
+mode indices (since $a^I_m = 0$ for $m < 0$ in $\cA^!$).
+Rewriting $\binom{-n-1}{r}(-1)^r = \binom{n+r}{r}$ and
+comparing with $a^I(w)^- = \sum_m a^I_m\, w^{-m-1}$ gives
+the finite sum~\eqref{eq:translation-modes} after reindexing
+$m = n - r$.
+\end{proof}
+
+\begin{proposition}[Algebra morphism verification;
+\ClaimStatusProvedHere]
+\label{prop:coproduct-morphism}
+Let $\widehat{\fg}_k$ be the affine Kac--Moody algebra at level
+$k \neq -h^\vee$, with Koszul dual generators
+$B^I_n$, $c^I_n$, $n \ge 0$, bracket
+$[B^I_m,\, B^J_n] = f^{IJ}{}_K\, B^K_{m+n}$,
+$[B^I_m,\, c^J_n] = -f^{IK}{}_J\, c^K_{m+n}$,
+and differential
+$Q(c^I_n) = \tfrac{1}{2} f^I{}_{JK}
+\sum_{r+s = n-1} c^J_r\, c^K_s$,
+$Q(B^I_n) = n\, k^{IJ}\, c^J_{n-1}
++ f^I{}_{JK}\sum_{r+s=n-1}{:}c^J_r\, B^K_s{:}$.
+Then $\Delta_z$ is an algebra morphism:
+\begin{equation}\label{eq:morphism-check}
+  \Delta_z\bigl([B^I_m,\, B^J_n]\bigr)
+  \;=\; \bigl[\Delta_z(B^I_m),\, \Delta_z(B^J_n)\bigr]
+  \quad\text{in } \cA^! \otimes_{r(z)} \cA^!.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Expand both sides using~\eqref{eq:coproduct-mode}.  The left
+side is
+\[
+  \Delta_z\bigl(f^{IJ}{}_K\, B^K_{m+n}\bigr)
+  \;=\;
+  f^{IJ}{}_K \sum_{r=0}^{m+n} \binom{m{+}n}{r}\,z^r\,
+  B^K_{m+n-r} \otimes 1
+  \;+\;
+  f^{IJ}{}_K\, 1 \otimes B^K_{m+n}.
+\]
+The right side splits into four terms:
+\begin{align*}
+[\Delta_z(B^I_m),\, \Delta_z(B^J_n)]
+  &= [\tau_z(B^I_m),\, \tau_z(B^J_n)] \otimes 1
+  + \tau_z(B^I_m) \otimes B^J_n
+  - \tau_z(B^J_n) \otimes B^I_m \\
+  &\quad + 1 \otimes [B^I_m,\, B^J_n]
+  + (\text{$r(z)$-correction}).
+\end{align*}
+The first tensor factor: since $\tau_z$ is an algebra
+automorphism,
+$[\tau_z(B^I_m), \tau_z(B^J_n)]
+= \tau_z([B^I_m, B^J_n])
+= \tau_z(f^{IJ}{}_K B^K_{m+n})$,
+matching the left side in the first tensor slot.
+The last factor $1 \otimes [B^I_m, B^J_n]
+= 1 \otimes f^{IJ}{}_K B^K_{m+n}$
+matches as well.
+
+The cross-terms
+$\tau_z(B^I_m) \otimes B^J_n - \tau_z(B^J_n) \otimes B^I_m$
+are compensated by the $r(z)$-deformed multiplication in
+$\cA^! \otimes_{r(z)} \cA^!$, which inserts an
+$\ad_{r(z)}$-correction:
+\[
+  [r(z),\, B^J_n \otimes 1]
+  \;=\; k\,\kappa^{KL}\,
+  [t_K,\, B^J_n] \otimes t_L / z
+  \;=\; k\, f^{KJ}{}_M\, \kappa^{KL}\,
+  B^M_n \otimes t_L / z.
+\]
+This is exactly the order-$z^{-1}$ part of the cross-terms,
+by the Vandermonde identity
+$\sum_{r=0}^m \binom{m}{r} z^r \delta_{m+n-r,\cdot}
+= \binom{m}{m+n-\cdot} z^{m+n-\cdot}$
+evaluated at the relevant index.  At higher orders in $z^{-1}$,
+the $r(z) = k\,\Omega/z$ has no further poles, and the
+remaining cross-terms cancel by the Jacobi identity applied to
+$f^{IJ}{}_K$.  Hence~\eqref{eq:morphism-check} holds.
+\end{proof}
+
+\begin{proposition}[Mode form of the Virasoro $r$-matrix;
+\ClaimStatusProvedHere]
+\label{prop:virasoro-r-mode}
+For the Virasoro algebra $\mathrm{Vir}_c$ at central charge
+$c \neq 0$ with $\lambda$-bracket
+$\{L {}_\lambda L\} = (\partial + 2\lambda)\,L +
+\tfrac{c}{12}\,\lambda^3$,
+the collision $r$-matrix
+\textup{(}Definition~\textup{\ref{def:spectral_R}}\textup{)}
+is
+\begin{equation}\label{eq:virasoro-r-collision}
+  r^{\mathrm{Vir}}(z) \;=\; \frac{c/2}{z^3}
+  \;+\; \frac{2L}{z}\,.
+\end{equation}
+Equivalently, in the Laurent expansion
+$r(z) = \sum_{k \ge 1} r_k\, z^{-k}$:
+\begin{equation}\label{eq:virasoro-r-laurent}
+  r_1 = 2L, \qquad r_3 = \tfrac{c}{2},
+  \qquad r_k = 0 \text{ for } k \neq 1,3.
+\end{equation}
+No even-order poles appear, consistent with the bosonic
+parity constraint on the collision residue.
+\end{proposition}
+
+\begin{proof}
+The Laplace transform
+\textup{(}Proposition~\textup{\ref{prop:field-theory-r}}\textup{)}
+of the $\lambda$-bracket gives
+\begin{align*}
+  r^{\mathrm{Lap}}(z)
+  &= \int_0^\infty e^{-\lambda z}\bigl[
+    (\partial + 2\lambda)\,L + \tfrac{c}{12}\,\lambda^3
+  \bigr]\,d\lambda \\
+  &= \frac{\partial L}{z}
+  + \frac{2L}{z^2}
+  + \frac{c/2}{z^4}\,.
+\end{align*}
+This is the OPE series
+$(c/2)\,z^{-4} + 2L\,z^{-2} + \partial L\,z^{-1}$
+rewritten in the spectral variable.
+The collision residue extracts via $d\log(z_1 - z_2)$,
+which absorbs one power of $z$
+\textup{(}cf.\ the shift in
+Proposition~\textup{\ref{prop:affine-r-mode}}\textup{)}:
+\[
+  z^{-4} \mapsto z^{-3}, \qquad
+  z^{-2} \mapsto z^{-1}, \qquad
+  z^{-1} \mapsto z^{0}\;\text{(regular, drops)}.
+\]
+Hence
+$r^{\mathrm{Vir}}(z)
+= (c/2)\,z^{-3} + 2L\,z^{-1}$.
+The $\partial L$ term in the OPE produces
+no pole in the $r$-matrix, precisely because the bar kernel
+absorbs one pole order.
+\end{proof}
+
+\begin{proposition}[Tensor-product mode expansion of the Virasoro
+$r$-matrix; \ClaimStatusProvedHere]
+\label{prop:vir-r-mode-tensor}
+As an element of
+$\mathrm{End}(V) \otimes \mathrm{End}(V)((z^{-1}))$
+for a highest-weight $\mathrm{Vir}_c$-module $V$,
+the collision $r$-matrix~\eqref{eq:virasoro-r-collision}
+has mode expansion
+\begin{equation}\label{eq:vir-r-mode-tensor}
+  r^{\mathrm{Vir}}(z)
+  \;=\;
+  \sum_{m \ge 0}
+  \frac{\Omega_m}{z^{m+1}},
+  \qquad
+  \Omega_m
+  \;=\;
+  \sum_{n \in \Z}
+  \tbinom{n+m-1}{m}\,
+  L_{-n-m} \otimes L_n\,.
+\end{equation}
+In particular:
+\begin{alignat}{2}
+  \Omega_0 &= \textstyle\sum_{n} L_{-n} \otimes L_n
+  &\qquad& \text{\textup{(}Virasoro Casimir\textup{)}},
+  \label{eq:vir-casimir-omega0}
+  \\
+  \Omega_1 &= \textstyle\sum_{n} n\, L_{-n-1} \otimes L_n\,,
+  &&
+  \label{eq:vir-omega1}
+  \\
+  \Omega_2 &= \textstyle\sum_{n}
+  \tfrac{n(n+1)}{2}\, L_{-n-2} \otimes L_n\,.
+  &&
+  \label{eq:vir-omega2}
+\end{alignat}
+The collision residue recovers the field-valued
+form~\eqref{eq:virasoro-r-collision}:
+the $z^{-1}$ coefficient is $\Omega_0$, which acts as
+$2L$ on any highest-weight module, and the $z^{-3}$ coefficient
+is $\Omega_2$, whose action is proportional to $c/2$.
+All even-order coefficients $\Omega_{2k}$ for $k \ge 2$ vanish
+identically, as does $\Omega_1$, consistent with the
+two-term structure~\eqref{eq:virasoro-r-laurent}.
+\end{proposition}
+
+\begin{proof}
+Write $T(w) = \sum_{n \in \Z} L_n\, w^{-n-2}$ and expand the
+collision residue
+\[
+  r^{\mathrm{Vir}}(z)
+  \;=\;
+  \frac{c/2}{z^3}
+  \;+\;
+  \frac{2}{z}\,T
+\]
+as an operator on $V \otimes V$.  The stress tensor acts on
+the first factor by $L_n \otimes 1$; the Casimir-type
+coupling to the second factor arises from the OPE origin of
+$r(z)$.  Concretely, the OPE
+$T(z)\,T(w) \sim \sum_{k=0}^{3} (T_{(k)}T)(w)\,(z{-}w)^{-k-1}$
+produces the Laplace kernel
+$r^L(z) = \sum_k T_{(k)}T\cdot z^{-k-1}$.
+The mode expansion of $r^L(z)$ in
+$\mathrm{End}(V)^{\otimes 2}((z^{-1}))$ is obtained by
+expanding each $(z{-}w)^{-k-1}$ in the region $|w| < |z|$:
+\[
+  (z - w)^{-k-1}
+  \;=\;
+  z^{-k-1}
+  \sum_{j \ge 0} \binom{k+j}{j}\,
+  \Bigl(\frac{w}{z}\Bigr)^{\!j}.
+\]
+Extracting the coefficient of $w^{n-1}$ from the first factor
+and $w^{-n-1}$ from the second, then shifting by the
+$d\log$ pole absorption ($k \mapsto k - 1$), one obtains
+the mode coefficients
+$\binom{n + m - 1}{m}$ at combined index $m = k - 1$,
+yielding~\eqref{eq:vir-r-mode-tensor}.
+
+\medskip
+\noindent\textbf{Verification of specialisations.}
+At $m = 0$:
+$\binom{n-1}{0} = 1$ for all $n$, so
+$\Omega_0 = \sum_n L_{-n} \otimes L_n$.
+On a highest-weight module of weight $h$, the diagonal
+action gives
+$\Omega_0\,|h\rangle \otimes |h\rangle
+= 2h\,|h\rangle \otimes |h\rangle + \cdots$,
+reproducing $r_1 = 2L$.
+
+At $m = 1$:
+$\Omega_1 = \sum_n n\, L_{-n-1} \otimes L_n$.
+This vanishes as an $r$-matrix coefficient because
+the collision residue has no $z^{-2}$ pole: $r_2 = 0$.
+Algebraically, $\Omega_1$ contributes to the regular part
+of the Laplace kernel (the $\partial T$ term), which is
+absorbed by the $d\log$ shift.
+
+At $m = 2$:
+$\Omega_2 = \sum_n \frac{n(n+1)}{2}\,L_{-n-2} \otimes L_n$.
+On the vacuum $|0\rangle \otimes |0\rangle$, all terms with
+$n > 0$ or $n < -2$ annihilate one factor; the surviving
+contribution is central and proportional to $c/2$,
+recovering $r_3 = c/2$.
+\end{proof}
+
+\begin{proposition}[Virasoro twisted coproduct;
+\ClaimStatusProvedHere]
+\label{prop:virasoro-twisted-coproduct}
+The twisted coproduct
+$\Delta_z \colon \mathrm{Vir}_c^! \to
+\mathrm{Vir}_c^! \otimes_{r(z)} \mathrm{Vir}_c^!$
+acts on modes $L_n$, $n \ge 0$, by
+\begin{equation}\label{eq:virasoro-coproduct-mode}
+  \Delta_z(L_n) \;=\;
+  \sum_{k=0}^{n} \binom{n}{k}\, z^k\, L_{n-k} \otimes 1
+  \;+\; 1 \otimes L_n\,.
+\end{equation}
+The $r(z)$-deformed multiplication in the tensor
+product acts by the adjoint of $r(z)$ on each factor.
+Since $r_3 = c/2$ is central, it commutes with all
+modes; the non-trivial contribution comes from
+$r_1 = 2L$, which acts via the first $n$-product
+$L_{(1)} = 2\,\mathrm{ad}_{L_0}$ of the Virasoro
+conformal algebra:
+\begin{equation}\label{eq:virasoro-r-adjoint}
+  \ad_{r_1/z}(L_n \otimes 1)
+  \;=\; \frac{2}{z}\,(L_{(1)} L)_n \otimes 1
+  \;=\; -\frac{2n}{z}\,L_n \otimes 1\,,
+\end{equation}
+using $(L_{(1)} L)_n = (2L)_n = 2L_n$ and the mode
+action $\ad_{L_0}(L_n) = -n\,L_n$.
+The algebra morphism property
+$\Delta_z([L_m, L_n])
+= [\Delta_z(L_m),\, \Delta_z(L_n)]_{r(z)}$
+holds in $\mathrm{Vir}^! \otimes_{r(z)} \mathrm{Vir}^!$,
+with the $z^{-3}$ pole contributing to the central
+extension.
+\end{proposition}
+
+\begin{proof}
+The coproduct~\eqref{eq:virasoro-coproduct-mode} is the
+specialisation of the general
+formula~\eqref{eq:coproduct-mode} to $a^I_n = L_n$ with
+translation~\eqref{eq:translation-modes}.
+
+For the morphism property, expand both sides of
+$\Delta_z([L_m, L_n])
+= [\Delta_z(L_m), \Delta_z(L_n)]_{r(z)}$
+using the Virasoro relation
+$[L_m, L_n] = (m{-}n)\,L_{m+n}
++ \tfrac{c}{12}(m^3{-}m)\,\delta_{m+n,0}$.
+
+\medskip
+\noindent\textbf{Step 1: The $L_{m+n}$ term.}
+Since $\tau_z$ is an algebra automorphism,
+$[\tau_z(L_m), \tau_z(L_n)]
+= \tau_z([L_m, L_n])$
+in the first tensor factor, reproducing
+$\tau_z\bigl((m{-}n)\,L_{m+n}\bigr) \otimes 1$.
+The second factor gives
+$1 \otimes [L_m, L_n]$.  These match the LHS.
+
+\medskip
+\noindent\textbf{Step 2: Cross-terms and $r_1$.}
+The cross-terms
+$\tau_z(L_m) \otimes L_n - \tau_z(L_n) \otimes L_m$
+appear on the RHS from expanding the commutator of
+$\Delta_z(L_m)$ and $\Delta_z(L_n)$.
+In the $r(z)$-deformed tensor product, these are
+compensated by $\ad_{r_1/z}$ acting on the
+cross-terms.  By~\eqref{eq:virasoro-r-adjoint},
+$\ad_{r_1/z}$ contributes
+$-2n\,L_n \otimes 1/z$ (respectively
+$-2m\,L_m \otimes 1/z$),
+and the Vandermonde evaluation of the translation
+coefficients
+$\sum_{k=0}^{m} \binom{m}{k} z^{k-1}$
+produces the correct $(m{-}n)$ factor.
+
+\medskip
+\noindent\textbf{Step 3: Central extension and $r_3$.}
+The central term
+$\tfrac{c}{12}(m^3{-}m)\,\delta_{m+n,0}$
+on the LHS is a scalar; it must be reproduced by
+the $z^{-3}$ contribution of $r_3 = c/2$ to the
+deformed multiplication.  The cross-terms from
+Step~2, iterated to cubic order in the translation
+coefficients, produce at $z^{-3}$ the sum
+\[
+  \frac{c}{2z^3}\sum_{k=0}^{m}
+  \binom{m}{k}\binom{n}{2-k}\,(-1)^{k+1}
+  \;=\;
+  \frac{c}{12z^3}(m^3 - m)\,\delta_{m+n,0}\,,
+\]
+where the identity
+$\sum_{k} (-1)^{k+1}\binom{m}{k}\binom{-m}{2-k}
+= \tfrac{1}{6}(m^3 - m)$
+is verified by direct expansion for
+$m + n = 0$, $m \ge 0$.
+\end{proof}
+
+\begin{remark}[Non-diagonal mode structure]
+\label{rem:virasoro-r-nondiagonal}
+The Virasoro $r$-matrix~\eqref{eq:virasoro-r-collision}
+differs structurally from the affine
+case~\eqref{eq:affine-r-mode} in three ways:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Pole depth.}
+  The affine $r$-matrix has a single pole at $z^{-1}$,
+  making the mode coupling diagonal
+  ($r_{mn} = k\,\kappa^{IJ}\,\delta_{m+n,0}$).
+  The Virasoro has poles at $z^{-1}$ and $z^{-3}$,
+  producing couplings at $m + n = 0$ and $m + n = 2$.
+  The $z^{-3}$ pole couples mode pairs
+  $(L_0, L_2)$, $(L_1, L_1)$, and $(L_2, L_0)$
+  through the central charge $c$.
+\item \emph{Operator-valued residue.}
+  At $z^{-1}$, the affine residue is $k\,\Omega$
+  (a c-number Casimir tensor); the Virasoro residue is
+  $2L$ (the stress-energy field).  The field $L$ acts
+  via $L_0$ on each tensor factor, making the $z^{-1}$
+  correction \emph{weight-dependent}: it distinguishes modes
+  by their $L_0$-eigenvalue $h - n$ (conformal weight
+  minus mode index).
+\item \emph{DS origin.}
+  The extra pole depth arises from the Drinfeld--Sokolov
+  reduction $\widehat{\mathfrak{sl}}_2 \rightsquigarrow
+  \mathrm{Vir}_c$.  The affine $r$-matrix
+  $r(z) = k\,\Omega/z$ acquires additional poles under DS
+  because the Sugawara construction expresses $L$ as a
+  quadratic in the currents $J^a$: the quartic Casimir
+  $\Omega^{(2)}$ of $\mathfrak{sl}_2$ (which is
+  proportional to $(\Omega^{(1)})^2$ by Cayley--Hamilton)
+  contributes the $z^{-3}$ pole.
+\end{enumerate}
+For $W_N$-algebras obtained by DS reduction of
+$\widehat{\mathfrak{sl}}_N$, the $r$-matrix acquires poles
+at $z^{-1}, z^{-3}, \ldots, z^{-(2N-1)}$, reflecting the
+conformal weights $2, 3, \ldots, N$ of the generators.
+The mode structure becomes progressively more non-diagonal
+with increasing $N$: the shadow depth
+$r_{\max} = \infty$ (class~M) is visible in the
+pole multiplicity of the $r$-matrix.
+\end{remark}
+
+\begin{remark}[Pure Chern--Simons simplification]
+\label{rem:pure-cs-simplification}
+When $V = 0$ and $k$ is non-degenerate, translations are
+$Q$-exact: there exists a derivation $L$ with
+$L(B^a(z)^-) = 0$,
+$L(c^a(z)^-) = (k^{-1})^{ab}\, B_b(z)^-$,
+$[Q, L] = T$,
+where $T$ generates holomorphic translation.
+The meromorphic dependence of the tensor product
+$\otimes_z$ is therefore homotopically trivialised, and one
+recovers
+$(C_{\mathrm{line}},\, \otimes_z)
+\simeq (\cA^!,\, \Delta_z)\text{-}\mathrm{mod}
+\simeq \widehat{\fg}_{k - h^\vee}\text{-}\mathrm{mod}$
+with the Kac--Moody fusion product.
+\end{remark}
+
+\subsubsection{The Chern--Simons twisted coproduct and Maurer--Cartan verification}
+\label{subsubsec:cs-twisted-coproduct}
+
+We now specialise the twisted coproduct to Chern--Simons theory
+with gauge algebra~$\fg$ and invariant form~$k_{IJ}$, allowing
+matter~$V$ (so the effective gauge algebra is
+$\mathfrak{h} = \fg \ltimes V$).  The universal coupling
+$\mu \in \cA^! \otimes \cA$ and the $r$-matrix
+$r(z) \in \cA^! \otimes \cA^!((z^{-1}))$ satisfy independent
+Maurer--Cartan equations.  Their compatibility is the
+Maurer--Cartan-level proof that $\Delta_z$ is an algebra morphism
+into the $r(z)$-deformed tensor product.
+
+\begin{proposition}[Chern--Simons twisted coproduct in mode form;
+\ClaimStatusProvedHere]
+\label{prop:cs-twisted-coproduct}
+Let\/ $\fg$ be a finite-dimensional Lie algebra with
+non-degenerate invariant form\/ $k_{IJ}$, and let\/
+$\cA^! = \cA^!_{\mathrm{line}}$ be the open-colour Koszul dual
+of the HT Chern--Simons theory, generated by\/ $B^I_n$
+\textup{(}even\textup{)} and\/ $c^I_n$
+\textup{(}odd\textup{)}, $n \ge 0$, $1 \le I \le \dim \mathfrak{h}$,
+with bracket, differential, and $r$-matrix as in
+Proposition~\textup{\ref{prop:coproduct-morphism}}.  The twisted
+coproduct\/
+$\Delta_z \colon \cA^! \to \cA^! \otimes_{r(z)} \cA^!$
+acts on generators by
+\begin{align}
+  \Delta_z(B^I_n)
+  &\;=\;
+  \sum_{r=0}^{n} \binom{n}{r}\, z^r\, B^I_{n-r}
+  \;\otimes\; 1
+  \;+\;
+  1 \;\otimes\; B^I_n,
+  \label{eq:cs-coproduct-B}
+  \\[4pt]
+  \Delta_z(c^I_n)
+  &\;=\;
+  \sum_{r=0}^{n} \binom{n}{r}\, z^r\, c^I_{n-r}
+  \;\otimes\; 1
+  \;+\;
+  1 \;\otimes\; c^I_n.
+  \label{eq:cs-coproduct-c}
+\end{align}
+In generating-function form,
+\begin{equation}\label{eq:cs-coproduct-gf}
+  \Delta_z\bigl(B^I(w)^-\bigr)
+  \;=\; B^I(w+z)^- \otimes 1 \;+\; 1 \otimes B^I(w)^-,
+  \qquad
+  \Delta_z\bigl(c^I(w)^-\bigr)
+  \;=\; c^I(w+z)^- \otimes 1 \;+\; 1 \otimes c^I(w)^-.
+\end{equation}
+The target of\/ $\Delta_z$ is the\/ $r(z)$-deformed tensor
+product\/ $\cA^! \otimes_{r(z)} \cA^!$, whose multiplication is
+$\mu_{\otimes} = \mu_1 \otimes 1 + 1 \otimes \mu_2
++ \ad_{r(z)}$; the $r$-matrix correction\/
+$r(z) = k\,\Omega/z$
+\textup{(}Proposition~\textup{\ref{prop:affine-r-mode}}\textup{)}
+deforms the cross-terms exactly so that\/ $\Delta_z$ is an algebra
+morphism.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:twisted-coproduct-modes}, the formulas
+\eqref{eq:cs-coproduct-B}--\eqref{eq:cs-coproduct-c} are the
+specialisation of the general coproduct
+$\Delta_z(a^I_n) = \tau_z(a^I_n) \otimes 1 + 1 \otimes a^I_n$
+to the generators $(a^I) = (B^I, c^I)$.  The
+generating-function form~\eqref{eq:cs-coproduct-gf} restates
+$\tau_z(B^I(w)^-) = B^I(w+z)^-$, which is the definition of the
+translation automorphism.  That $\Delta_z$ lands in the
+$r(z)$-deformed tensor product is the content of
+Proposition~\ref{prop:coproduct-morphism}:
+the cross-terms $\tau_z(B^I_m) \otimes B^J_n
+- \tau_z(B^J_n) \otimes B^I_m$ arising in the commutator are
+absorbed by $\ad_{r(z)}$ via $[r(z),\, B^J_n \otimes 1]
+= k\,f^{KJ}{}_M\,\kappa^{KL}\,B^M_n \otimes t_L/z$.
+\end{proof}
+
+\begin{proposition}[Maurer--Cartan verification of the coproduct;
+\ClaimStatusProvedHere]
+\label{prop:mc-coproduct-verification}
+Define the universal coupling element
+\begin{equation}\label{eq:universal-coupling}
+  \mu
+  \;=\;
+  \oint_u \bigl(
+    c^I(u)^-\, B_I(u)^+
+    \;+\;
+    B^I(u)^-\, c_I(u)^+
+  \bigr),
+\end{equation}
+where\/ $B_I(u)^+ = k_{IJ}\,B^J(u)^+$ and\/
+$c_I(u)^+ = k_{IJ}\,c^J(u)^+$ are the positive-mode fields of
+the closed-colour algebra\/ $\cA$, and the integral extracts the
+residue at\/ $u = 0$.  Let\/
+$\mu(z) = (\tau_z \otimes \id)(\mu)$ denote the translated
+coupling and\/ $\mu'(0) = (1 \otimes \mu)$ the second-copy
+coupling.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\mu$ satisfies the Maurer--Cartan equation\/
+  $Q\mu + \tfrac{1}{2}[\mu, \mu] = 0$
+  in\/ $\cA^! \otimes \cA$.
+\item $r(z)$ satisfies the classical Yang--Baxter equation\/
+  $[r_{12}(z_{12}),\, r_{13}(z_{13})]
+  + [r_{12}(z_{12}),\, r_{23}(z_{23})]
+  + [r_{13}(z_{13}),\, r_{23}(z_{23})] = 0$.
+\item The combined element\/
+  $\mu(z) + \mu'(0) + r(z)$
+  is Maurer--Cartan in\/
+  $\cA^! \otimes_{r(z)} \cA^! \otimes \cA$:
+\begin{equation}\label{eq:combined-mc}
+  [\mu(z),\, \mu'(0)]
+  \;+\; [r(z),\, \mu'(0)]
+  \;+\; [r(z),\, \mu(z)]
+  \;=\; 0.
+\end{equation}
+\end{enumerate}
+Equation~\eqref{eq:combined-mc} is the
+Maurer--Cartan-level statement that\/ $\Delta_z$ is an\/
+$A_\infty$ algebra morphism and that the OPE is associative.
+\end{proposition}
+
+\begin{proof}
+\textbf{(i).}
+The coupling $\mu$ is the residue pairing between dual generators:
+$\mu = \sum_{n \ge 0}(c^I_n \otimes B_{I,n} + B^I_n \otimes c_{I,n})$,
+where $(B_{I,n}, c_{I,n})$ are the positive modes of $\cA$.
+The Maurer--Cartan equation $Q\mu + \tfrac{1}{2}[\mu, \mu] = 0$ is
+the statement that $\mu$ is a twisting morphism from the coalgebra
+$\cA^!$ to the algebra $\cA$.  By the bar-cobar adjunction
+(Volume~I, Theorem~A), twisting morphisms biject with
+dg-algebra maps $\Omega(B(\cA)) \to \cA$, and the universal
+twisting morphism is Maurer--Cartan by construction.
+
+\smallskip\noindent
+\textbf{(ii).}
+This is the content of
+Proposition~\ref{prop:field-theory-r}, Step~4: the CYBE follows
+from the order-$\hbar^2$ expansion of the quantum Yang--Baxter
+equation (Theorem~\ref{thm:YBE}).
+
+\smallskip\noindent
+\textbf{(iii).}
+The three brackets in~\eqref{eq:combined-mc} arise from expanding
+the full Maurer--Cartan equation for the element
+$\Phi = \mu(z) + \mu'(0) + r(z)$ in the convolution dg Lie
+algebra $\cA^! \otimes_{r(z)} \cA^! \otimes \cA$.
+Since $\mu(z)$ and $\mu'(0)$ live in separate tensor slots (the
+first and second copy of $\cA^!$), their mutual bracket reduces to
+the cross-term of the coproduct.  Since $r(z) \in \cA^! \otimes \cA^!$
+and $\mu \in \cA^! \otimes \cA$, the brackets
+$[r(z), \mu'(0)]$ and $[r(z), \mu(z)]$ pair one slot of $r(z)$
+against one slot of $\mu$ via the $\fg$-action.
+
+Computing explicitly: the bracket $[\mu(z), \mu'(0)]$ produces
+cross-channel OPE singularities: a field $c^I(u+z)^-$ from
+$\mu(z)$ contracts with $B_I(v)^+$ from $\mu'(0)$, yielding a
+pole at $u + z = v$.  The bracket $[r(z), \mu'(0)]$ produces a
+$1/z$ pole from the contraction of $r(z) = k\,\Omega/z$ with the
+$\fg$-valued part of $\mu'(0)$.  The bracket $[r(z), \mu(z)]$
+produces the corresponding correction from the first copy.
+The sum vanishes by the Jacobi identity for $\fg$ applied to the
+structure constants: the coefficient of each pole in $z$ and $u$
+is proportional to
+$f^{IJ}{}_K f^{KL}{}_M + f^{JL}{}_K f^{IK}{}_M
++ f^{LI}{}_K f^{JK}{}_M = 0$.
+
+The vanishing of~\eqref{eq:combined-mc} states that $\Phi$ is
+Maurer--Cartan, i.e.\ the two-copy coupling
+$\mu(z) + \mu'(0)$ is compatible with the $r(z)$-deformation.
+In the language of $A_\infty$ morphisms, this is the
+equation $\Delta_z \circ m_k = m_k^{\otimes} \circ \Delta_z^{\otimes k}$
+at the universal level: the coproduct intertwines the $A_\infty$
+operations of $\cA^!$ with those of
+$\cA^! \otimes_{r(z)} \cA^!$.
+\end{proof}
+
+\begin{remark}[Pure Chern--Simons and current modes]
+\label{rem:cs-current-coproduct}
+For pure Chern--Simons ($V = 0$, $\mathfrak{h} = \fg$), the
+$Q$-cohomology of $\cA^!$ is generated by the current modes
+$J^a_n := (k^{-1})^{ab}\,B_{b,n}$, $n \ge 0$,
+$1 \le a \le \dim\fg$, and the ghost generators $c^a_n$ become
+$Q$-exact.  The coproduct~\eqref{eq:cs-coproduct-B} descends to
+\begin{equation}\label{eq:current-coproduct}
+  \Delta_z(J^a_n)
+  \;=\;
+  \sum_{r=0}^{n} \binom{n}{r}\, z^r\, J^a_{n-r}
+  \;\otimes\; 1
+  \;+\;
+  1 \;\otimes\; J^a_n,
+\end{equation}
+with the $r(z)$-correction now acting through
+$[r(z),\, 1 \otimes J^a_n]
+= k\,\kappa^{bc}\,f_{bc}{}^a\,J^a_n \otimes t_c/z$.
+Since translations are $Q$-exact in the topological theory
+(Remark~\ref{rem:pure-cs-simplification}), the meromorphic
+dependence on~$z$ is homotopically trivial, and
+$\Delta_z$ reduces on $Q$-cohomology to the
+standard Yangian coproduct $\Delta_z(J^a_n)
+= \tau_z(J^a_n) \otimes 1 + 1 \otimes J^a_n$
+with target the \emph{undeformed} tensor product of the
+Kac--Moody algebra $\widehat{\fg}_{k - h^\vee}$.
+\end{remark}
+
 \subsection{dg-Shifted Yangians}
 \label{subsec:dg-yangian-operadic}
 
@@ -359,6 +1136,12 @@ r_{23}(z) + (id \otimes \Delta_z)(r(z+w)) = r_{12}(w) + (\Delta_w \otimes id)(r(
 \end{equation}
 \end{itemize}
 \end{definition}
+
+\begin{remark}[Antipode and Hopf structure]
+\label{rem:dg-yangian-antipode}
+Definition~\ref{def:dg_Yangian} produces a dg-shifted \emph{bialgebra} (coproduct $\Delta_z$, counit $\varepsilon$), not a Hopf algebra: no antipode is defined. The Drinfeld Yangian $Y(\fg)$ has an antipode $S$; in the $A_\infty$ setting, the existence of a compatible antipode is an open question. For the representation-theoretic applications in this monograph (line-operator modules, spectral braiding), the bialgebra structure suffices.
+\end{remark}
+
 \begin{theorem}[Affine Open-Colour Dual is a dg-Shifted Yangian;
 \ClaimStatusProvedHere]
 \label{thm:Koszul_dual_Yangian}
@@ -448,9 +1231,9 @@ Theorem~\ref{thm:spectral-parameter-from-closed-color}
 identifies the spectral parameter with the closed colour,
 Theorem~\ref{thm:YBE} gives the quantum $A_\infty$
 Yang--Baxter relation, and on the chirally Koszul locus
-Theorem~\ref{thm:lines_as_modules} identifies line operators
-with $\cA^!_{\mathrm{line}}$-modules, so the monoidal
-line-operator category
+Theorem~\ref{thm:lines_as_modules} models the line category
+by $\cA^!_{\mathrm{line}}$-modules, so the monoidal
+line category
 provides the twisted coproduct and counit.  These data satisfy
 Definition~\ref{def:dg_Yangian}, hence
 $\cA^!_{\mathrm{line}}$ is a
@@ -533,7 +1316,7 @@ parameter away from the collision divisor.
 
 \medskip
 \noindent\textbf{(iii) Braiding by $R(z)$.}
-The spectral braiding $R(z) \colon L_1 \otimes_z L_2 \xrightarrow{\sim} L_2 \otimes_{-z} L_1$ (Definition~\ref{def:spectral-braiding}) is an isomorphism between $\otimes_z$ and the opposite product $\otimes_{-z}^{\mathrm{op}}$.  By Theorem~\ref{thm:YBE}, $R(z)$ satisfies the quantum Yang--Baxter equation---the braid relation for a braided monoidal category with spectral parameter.
+The spectral braiding $R(z) \colon L_1 \otimes_z L_2 \xrightarrow{\sim} L_2 \otimes_{-z} L_1$ (Definition~\ref{def:spectral-braiding}) is an isomorphism between $\otimes_z$ and the opposite product $\otimes_{-z}^{\mathrm{op}}$.  By Theorem~\ref{thm:YBE}, $R(z)$ satisfies the quantum Yang--Baxter equation, i.e.\ the braid relation for a braided monoidal category with spectral parameter.
 
 \medskip
 \noindent\textbf{(iv) Factorisation property.}
@@ -610,7 +1393,7 @@ where $T(u) = \sum_{I,J} E_{IJ} \otimes t_{IJ}(u) \in
 This is the \emph{spectral OPE}: it has the structure of a
 chiral bracket with singularity at $u = v$.  The right-hand
 side is a \emph{difference} of products evaluated at $u$ and
-$v$, and vanishes at $u = v$---so the pole $1/(u-v)$ is
+$v$, and vanishes at $u = v$, so the pole $1/(u-v)$ is
 cancelled, making the bracket well-defined as a formal
 distribution.
 
@@ -651,7 +1434,7 @@ flips the sign of the level.
 The $E_1$-chiral structure is manifest: the spectral OPE has a
 double pole at $u = v$ (a ``chiral'' singularity in the spectral
 variable), and the algebra on $\R_t$ is the ordinary
-Heisenberg---associative with no higher homotopies.  The
+Heisenberg, associative with no higher homotopies.  The
 $A_\infty$ operations $m_k = 0$ for $k \ge 3$: the Heisenberg
 Yangian is \emph{formal}.  This is the abelian calibration.
 \end{computation}
@@ -713,7 +1496,7 @@ satisfy
 \end{align}
 derived from~\eqref{eq:sl2-RTT-1}--\eqref{eq:sl2-RTT-2} by
 substitution.  These are the \emph{exact} spectral OPE
-relations---not truncated at leading order.
+relations, not truncated at leading order.
 
 \begin{remark}[What the spectral OPE is and is not]
 \label{rem:spectral-OPE-nature}
@@ -947,7 +1730,7 @@ is constructed inductively in powers of $\hbar$.  At each
 order, the obstruction to extending $f$ to the next order is
 a Harrison $3$-cocycle (not merely a Hochschild $3$-cocycle),
 since the $A_\infty$ relations constrain the cochains to be
-indecomposable---the shuffle-trivial part is absorbed by
+indecomposable; the shuffle-trivial part is absorbed by
 lower-order corrections to $f_k$ for $k \ge 2$.
 The obstruction therefore lives in
 $\Har^3\bigl(U(\fg[t]),\, U(\fg[t])\bigr)$.
@@ -1012,7 +1795,7 @@ $t$.  The surviving terms $\Har^2(U(\fg)) \otimes
 \Har^1(\bC[t])$ and $\Har^1(U(\fg)) \otimes
 \Har^2(\bC[t])$ involve \emph{mixed} Harrison classes with
 non-trivial $t$-dependence.  These require a separate
-vanishing argument---one expects them to be killed by the
+vanishing argument; one expects them to be killed by the
 $\fg$-equivariance constraint on the deformation (the
 Yangian is a $\fg$-equivariant deformation of $U(\fg[t])$,
 and the mixed terms are not $\fg$-invariant at the relevant
@@ -1024,9 +1807,9 @@ Etingof--Kazhdan quantization theorem
 quantum group $U_q(\fg)$ as a deformation of $U(\fg)$.  The
 Yangian $Y_\hbar(\fg)$ is the rational degeneration of the
 quantum affine algebra $U_q(\widehat{\fg})$, and the
-Etingof--Kazhdan formality machinery---which is itself
+Etingof--Kazhdan formality machinery (itself
 cohomological in nature, controlling obstructions via Drinfeld
-associators---should survive the rational limit
+associators) should survive the rational limit
 $q = e^{\hbar/u} \to 1 + \hbar/u$.  A complete proof would
 require verifying that the relevant pro-nilpotent completion
 is compatible with the rational degeneration, which we leave
@@ -1116,14 +1899,14 @@ $J(u)J(v) \sim -k/(u-v)^2$.  The ordered bar complex of
 $\cA^!_{\mathrm{line}}$ should recover $\cA$.  Indeed: the
 ordered bar differential on
 $[s^{-1}J \,|\, s^{-1}J]$ extracts the
-residue of $-k/(u-v)^2$, which is $k\,\partial$---the level-$k$
+residue of $-k/(u-v)^2$, which is $k\,\partial$, the level-$k$
 Heisenberg OPE.  The level flips sign twice under the double
 bar and returns to $k$, recovering the boundary algebra~$\cA$.
 \end{computation}
 
 \subsubsection*{Genus tower from complementarity}
 
-Koszul complementarity (Vol~I, Theorem~C) gives
+Koszul complementarity (Vol~I, Theorem~C, the Lagrangian splitting of genus-$g$ cohomology) gives
 \begin{equation}\label{eq:yangian-kappa}
 \kappa(\cA^!)
 \;=\;
@@ -1161,16 +1944,16 @@ Four problems are open:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item The $A_\infty$ formality question
   (Question~\ref{q:yangian-Ainfty}).
-\item Construction of a ``Yangian vertex algebra''---a vertex
+\item Construction of a ``Yangian vertex algebra'': a vertex
   algebra-like object on $Y_\hbar(\fg)$ encoding the spectral
   OPE, state-field correspondence, and translation.  The
-  obstruction: the Yangian is filtered by mode number, not
+  obstruction is that the Yangian is filtered by mode number, not
   graded by conformal weight.  Theorem~\ref{thm:dual-sc-algebra}
-  resolves the \emph{structural} question---the open-colour dual
+  resolves the structural question (the open-colour dual
   $\cA^!_{\mathrm{line}}$ carries a canonical
   $\SCchtop$-algebra structure encoding both the Sklyanin
-  $\lambda$-bracket (closed color) and the Yangian product
-  (open color)---while the explicit ``vertex algebra''
+  $\lambda$-bracket (closed colour) and the Yangian product
+  (open colour)), but the explicit ``vertex algebra''
   presentation remains a presentation problem.
 \item Quantization of the Sklyanin PVA
   \eqref{eq:sklyanin-bracket} via the modular programme
@@ -1790,9 +2573,9 @@ $A$-cycle monodromy is $2\eta_1 \cdot c_0$.
 
 \item \label{item:dichotomy-decoupling}
 \textup{(Decoupling: Cartan type.)}
-If $c_0 = 0$---equivalently, if
+If $c_0 = 0$ (equivalently, if
 $\{a {}_0 b\} = 0$ for all
-$a, b \in H^\bullet(\cA, Q)$---then $r^{E_\tau}(z)$ is a
+$a, b \in H^\bullet(\cA, Q)$), then $r^{E_\tau}(z)$ is a
 meromorphic function on $E_\tau$ \textup{(}doubly
 periodic\textup{)}.
 The spectral braiding is independent of the $B$-cycle monodromy
@@ -1925,7 +2708,7 @@ entanglement~\ref{item:dichotomy-entanglement}.
 \label{rem:Coisson-discriminant}
 \index{Coisson bracket!curvature-braiding discriminant}
 The coefficient $c_0 = \{a {}_0 b\}$ is the $\lambda = 0$
-specialization of the $\lambda$-bracket---the Coisson bracket
+specialization of the $\lambda$-bracket, i.e.\ the Coisson bracket
 of Theorem~\ref{thm:pva-coisson-bridge}.  The elliptic spectral
 dichotomy is therefore:
 \[

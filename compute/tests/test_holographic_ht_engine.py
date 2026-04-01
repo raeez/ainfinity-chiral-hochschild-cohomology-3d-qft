@@ -438,16 +438,17 @@ class TestM2Brane:
         data = m2_shadow_data(K=3)
         assert data['shadow_class'] == 'M'
 
-    def test_m2_shadow_data_kappa(self):
-        """kappa_{M2} = K^2/2."""
+    def test_m2_shadow_data_kappa_open(self):
+        """kappa_{M2} is open (not computed from first principles)."""
         data = m2_shadow_data(K=3)
-        assert data['kappa'] == Fraction(9, 2)
+        assert data['kappa'] is None
+        assert data['kappa_status'] == 'open'
 
-    def test_m2_complementarity_kappa_sum(self):
-        """kappa(A_{M2}) + kappa(A!_{M2}) = 0 (KM-type)."""
+    def test_m2_complementarity_structural(self):
+        """Structural complementarity holds regardless of kappa value."""
         result = m2_holographic_complementarity(K=3)
-        assert result['complementarity_satisfied']
-        assert result['kappa_sum'] == 0
+        assert result['complementarity_structural']
+        assert result['kappa_status'] == 'open'
 
     def test_m2_four_fold_match(self):
         """M2 system has four-fold parametrization."""

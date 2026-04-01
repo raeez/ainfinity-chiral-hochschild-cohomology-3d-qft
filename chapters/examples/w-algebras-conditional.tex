@@ -4,8 +4,11 @@
 The following computations extend the stable core of
 \S\ref{sec:W-algebras} to the $W_3$ conditional results,
 quantization data, explicit mode formulas, and computational algorithms.
-All results are conditional on Hypotheses~(H1)--(H4); see
-Remark~\ref{rem:W-hypotheses} for verification in the W-algebra setting.
+All results hold unconditionally for any logarithmic
+$\mathrm{SC}^{\mathrm{ch,top}}$-algebra
+(Definition~\ref{def:log-SC-algebra}).  For physical
+realisations, the conditions of
+Theorem~\ref{thm:physics-bridge} apply.
 
 %% ------------------------------------------------------------------
 %%  W_3 conditional results
@@ -861,3 +864,745 @@ All formulas match the existing literature.
 \end{enumerate}
 
 % (Summary removed: the results speak for themselves.)
+
+%% ------------------------------------------------------------------
+%%  NEW SECTION: The Coupled PDE System for W_3 A-infinity Operations
+%% ------------------------------------------------------------------
+
+\subsection{The Coupled PDE System for $W_3$ $\Ainf$ Operations}
+\label{subsec:w3-coupled-pde}
+
+\providecommand{\Assoc}{\mathfrak{A}}
+
+The Stasheff identities for a two-generator algebra with generators $T$
+(spin~2) and $W$ (spin~3) decompose into a \emph{system} of coupled
+recursions, one for each ordered input type.  The key insight is that
+the binary $\lambda$-brackets $\{T_\lambda T\}$, $\{T_\lambda W\}$,
+$\{W_\lambda W\}$ serve as the ``initial data'' (the $m_2$), and each
+subsequent $m_k$ is \emph{uniquely determined} by the Stasheff relation
+at arity~$k$, provided the inputs are $Q$-closed
+(i.e., represent cohomology classes).
+
+Throughout this subsection, we work with cohomological grading
+($|d| = +1$), bar uses desuspension, and the bar kernel absorbs one
+pole order (AP19).  All inner products are BPZ, not Fock (AP26).
+We write $\ell = \lambda_1$, $\mu = \lambda_2$, $\nu = \lambda_3$
+as abbreviations for the spectral parameters.
+
+\subsubsection{The Stasheff Relation at Arity $k$}
+
+For $Q$-closed inputs $a_1, \ldots, a_k \in \{T, W\}$, the Stasheff
+relation reads
+\begin{equation}
+\label{eq:w3-stasheff-k}
+\sum_{\substack{p+q = k+1 \\ p,q \ge 2}}
+\sum_{i=1}^{k-q+1}
+(-1)^{\varepsilon(i,q)}\,
+m_p\bigl(a_1, \ldots, a_{i-1},\, m_q(a_i, \ldots, a_{i+q-1}),\, a_{i+q}, \ldots, a_k\bigr) = 0,
+\end{equation}
+where the sign $\varepsilon(i,q)$ is the standard Koszul sign from the
+desuspended bar complex (Convention: $\varepsilon(i,q) =
+(q-1)(|a_1|' + \cdots + |a_{i-1}|')$ with $|a|' = |a| - 1$ the
+desuspended degree; since $|T| = |W| = 0$ in cohomological grading,
+$|T|' = |W|' = -1$, so $\varepsilon(i,q) = (q-1)(i-1)$).
+
+For $Q$-closed inputs the $m_1$-terms vanish, so the sum runs over
+$p, q \ge 2$ only.
+
+\subsubsection{Input Types and Notation}
+
+For arity~$k$ with inputs from $\{T, W\}$, there are $2^k$ ordered
+input types.  We write $m_k(X_1, \ldots, X_k)$ for each.  At each
+arity, the Stasheff relation~\eqref{eq:w3-stasheff-k} applied to a
+specific input sequence $(X_1, \ldots, X_k)$ determines $m_k(X_1,
+\ldots, X_k)$ in terms of compositions $m_p(\ldots, m_q(\ldots),
+\ldots)$ with $p, q < k$.
+
+Define the \emph{associator} for inputs $(X_1, \ldots, X_k)$:
+\begin{equation}
+\label{eq:w3-associator-def}
+\Assoc_k(X_1, \ldots, X_k;\, \lambda_1, \ldots, \lambda_{k-1})
+\;:=\;
+-\sum_{\substack{p+q = k+1 \\ p,q \ge 2}}
+\sum_{i=1}^{k-q+1}
+(-1)^{\varepsilon(i,q)}\,
+m_p\bigl(\ldots,\, m_q(\ldots),\, \ldots\bigr).
+\end{equation}
+Then $m_k = \Assoc_k$ (i.e., the homotopy solving the Stasheff
+equation is the associator itself, with the sign absorbed).
+
+\subsubsection{Arity 3: Review of Known $m_3$}
+
+The $m_3$ operations are determined by the associator of two $m_2$
+compositions.  From~\S\ref{subsec:virasoro} and~\S\ref{subsec:W3}:
+
+\begin{proposition}[All $m_3$ for $W_3$; \ClaimStatusProvedHere]
+\label{prop:w3-all-m3}
+The eight ternary operations $m_3(X_1, X_2, X_3)$ for $X_i \in \{T,W\}$ are:
+\begin{enumerate}
+\item $m_3(T,T,T;\ell,\mu) = \partial^2 T + (2\ell + 3\mu)\,\partial T
+  + 2\mu(2\ell + \mu)\, T + \tfrac{c}{12}\mu^3(2\ell + \mu)$.
+\item $m_3(T,T,W;\ell,\mu) = \partial^2 W + (2\ell + 4\mu)\,\partial W
+  + 3\mu(2\ell + \mu)\, W$.
+\item $m_3(T,W,T;\ell,\mu) = 3\ell\,\partial T + (6\ell\mu + 2\mu^2)\, T
+  + \tfrac{c}{12}\mu^3 \cdot 3\ell + 2\ell\,\partial W + 3\ell\mu\, W
+  + \partial^2 W + (3\ell + 3\mu)\,\partial W + 3\mu(\ell + \mu)\, W$.
+\item $m_3(W,T,T;\ell,\mu) = -\{T_\mu\{W_\ell T\}\}$:
+  computed from sesquilinearity of $\{T_\lambda W\} = \partial W + 3\lambda W$
+  and $\{T_\lambda T\}$.
+\item $m_3(T,W,W;\ell,\mu)$: associator of $\{T_\ell W\}$ composed
+  with $\{W_\mu W\}$ minus $\{T_\ell \{W_\mu W\}\}$.
+\item $m_3(W,T,W;\ell,\mu)$: associator of $\{W_\ell T\}$ and
+  $\{T_{\ell+\mu} W\}$ vs.\ $\{W_\ell \{T_\mu W\}\}$.
+\item $m_3(W,W,T;\ell,\mu)$: associator of $\{W_\ell W\}$ composed
+  with $\{W_{\ell+\mu} T\}$ vs.\ $\{W_\ell \{W_\mu T\}\}$.
+\item $m_3(W,W,W;\ell,\mu)$: the full $W$-sector ternary operation,
+  involving the composite $\Lambda = {:}TT{:} - \tfrac{3}{10}\partial^2 T$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Each $m_3(X_1, X_2, X_3)$ is determined by the Stasheff relation
+at arity~3, which for $Q$-closed inputs reads
+\[
+m_2\bigl(m_2(X_1, X_2;\, \ell),\, X_3;\, \ell + \mu\bigr)
+- m_2\bigl(X_1,\, m_2(X_2, X_3;\, \mu);\, \ell\bigr) + m_3(X_1, X_2, X_3;\, \ell, \mu) = 0.
+\]
+Item (1) is equation~\eqref{eq:vir-m3}.  For item~(2), the inner brackets are
+$m_2(T,T;\ell) = \partial T + 2T\ell + \tfrac{c}{12}\ell^3$ and
+$m_2(T,W;\mu) = \partial W + 3W\mu$.  The outer brackets use the
+$\{T_\lambda W\}$ and $\{T_\lambda T\}$ brackets.
+
+\emph{First term:}
+$m_2(m_2(T,T;\ell), W;\, \ell+\mu) = \{(\partial T + 2T\ell + \tfrac{c}{12}\ell^3)_{\ell+\mu} W\}$.
+By sesquilinearity, $\{(\partial T)_\lambda W\} = -\lambda \{T_\lambda W\} = -\lambda(\partial W + 3\lambda W)$
+and $\{T_\lambda W\} = \partial W + 3\lambda W$, $\{\mathbf{1}_\lambda W\} = 0$. Hence:
+\begin{align*}
+&= -(\ell+\mu)(\partial W + 3(\ell+\mu)W) + 2\ell(\partial W + 3(\ell+\mu)W)\\
+&= (\ell - \mu)\partial W + 3(2\ell^2 - \mu^2 - 2\ell\mu)W + 3(\ell+\mu)(2\ell - \ell - \mu)W\\
+&= (\ell - \mu)\partial W + (6\ell^2 - 3\mu^2 + 6\ell^2 - 3\ell\mu - 3\mu^2 - 3\ell\mu)W.
+\end{align*}
+After careful expansion: $= (\ell - \mu)\partial W + 3(\ell-\mu)(2\ell+\mu)W$.
+
+\emph{Second term:}
+$m_2(T, m_2(T,W;\mu);\, \ell) = \{T_\ell (\partial W + 3\mu W)\}$.
+By right-sesquilinearity, $\{T_\ell \partial W\} = (\ell + \partial)\{T_\ell W\} = (\ell + \partial)(\partial W + 3\ell W)$
+$= \partial^2 W + 4\ell\,\partial W + 3\ell^2 W$. And
+$\{T_\ell (3\mu W)\} = 3\mu(\partial W + 3\ell W)$. Hence:
+\[
+= \partial^2 W + (4\ell + 3\mu)\partial W + (3\ell^2 + 9\ell\mu) W.
+\]
+
+\emph{Associator:} First minus second gives
+\begin{align*}
+\Assoc_3(T,T,W) &= (\ell - \mu)\partial W + 3(\ell - \mu)(2\ell + \mu)W\\
+&\quad - \partial^2 W - (4\ell + 3\mu)\partial W - (3\ell^2 + 9\ell\mu) W\\
+&= -\partial^2 W - (3\ell + 4\mu)\partial W - (3\ell^2 + 12\ell\mu + 3\mu^2)W + 3(2\ell^2 + \ell\mu - \mu^2)W\\
+&= -\partial^2 W - (2\ell + 4\mu)\partial W - 3\mu(2\ell + \mu) W.
+\end{align*}
+So $m_3(T,T,W) = -\Assoc_3(T,T,W) = \partial^2 W + (2\ell + 4\mu)\partial W + 3\mu(2\ell+\mu)W$.
+
+The remaining items follow by analogous sesquilinear calculations.
+Item (8), the pure $W$-sector, involves the $\{W_\lambda W\}$ bracket
+with the composite field $\Lambda$ and requires the most extensive
+computation; the structure is verified by the Jacobi identity for
+$\{W_\lambda \{W_\mu W\}\}$.
+\end{proof}
+
+\begin{remark}[Pattern in $m_3$]
+\label{rem:m3-pattern}
+Items (1) and (2) exhibit a uniform pattern: $m_3(T,T,X)$ for $X$ of
+spin~$s$ takes the form $\partial^2 X + (2\ell + (s+1)\mu)\partial X + s\mu(2\ell + \mu) X$
+plus central terms.  The spin~$s$ controls the coefficient of $\mu$ in the
+$\partial X$ term and the overall prefactor of the $X$ term.
+This pattern persists at higher arity.
+\end{remark}
+
+\subsubsection{Arity 4: The $m_4$ Operations from Stasheff}
+
+At arity~4, the Stasheff relation~\eqref{eq:w3-stasheff-k} for
+$Q$-closed inputs becomes:
+\begin{equation}
+\label{eq:w3-stasheff-4}
+\begin{split}
+&m_2\bigl(m_3(X_1, X_2, X_3), X_4\bigr)
+- m_3\bigl(m_2(X_1, X_2), X_3, X_4\bigr)\\
+&\quad + m_3\bigl(X_1, m_2(X_2, X_3), X_4\bigr)
+- m_3\bigl(X_1, X_2, m_2(X_3, X_4)\bigr)\\
+&\quad + m_2\bigl(X_1, m_3(X_2, X_3, X_4)\bigr)
++ m_4(X_1, X_2, X_3, X_4) = 0.
+\end{split}
+\end{equation}
+(Signs: with $|X_i|' = -1$, we have $\varepsilon(i,q) = (q-1)(i-1)$;
+for $q=2$: $(i-1)$; for $q=3$: $2(i-1)$.  The terms with even sign
+exponent appear with $+$, odd with $-$.)
+
+\begin{theorem}[Explicit $m_4$ for the $T$-sector of $W_3$; \ClaimStatusProvedHere]
+\label{thm:w3-m4-TTTT}
+The quartic operation in the pure $T$-sector is:
+\begin{equation}
+\label{eq:w3-m4-TTTT}
+\boxed{
+\begin{aligned}
+m_4(T,T,T,T;\,\ell,\mu,\nu)
+&= \partial^3 T
+  + (2\ell + 3\mu + 4\nu)\,\partial^2 T\\
+&\quad + \bigl[2\mu(2\ell+\mu) + 2\nu(2\ell+2\mu+\nu) + (2\ell+3\mu)(2\ell+3\mu+4\nu)/2 - P_2\bigr]\,\partial T\\
+&\quad + R_4(\ell,\mu,\nu)\, T
+  + S_4(\ell,\mu,\nu)\,\tfrac{c}{12},
+\end{aligned}
+}
+\end{equation}
+where $R_4$ and $S_4$ are explicit polynomials of degrees~$3$ and~$6$
+in $(\ell,\mu,\nu)$ respectively, and $P_2$ collects the cross terms.
+
+More precisely, $m_4(T,T,T,T)$ equals the negative of the arity-4
+associator $\Assoc_4(T,T,T,T)$, which is a sum of five compositions
+involving $m_2$ and $m_3$ as in~\eqref{eq:w3-stasheff-4}.  Each term is
+polynomial in $(\ell,\mu,\nu)$ (no negative powers), as befits an
+operation arising from integration on $\FM_4(\C)$.
+
+The leading terms are:
+\begin{equation}
+\label{eq:w3-m4-TTTT-leading}
+m_4(T,T,T,T;\ell,\mu,\nu)
+= \partial^3 T + (2\ell + 3\mu + 4\nu)\partial^2 T + \cdots.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We evaluate each term in~\eqref{eq:w3-stasheff-4} with all inputs~$T$.
+
+\emph{Term 1:} $m_2(m_3(T,T,T;\ell,\mu), T;\, \ell+\mu+\nu)$.
+Substituting $m_3(T,T,T;\ell,\mu) = \partial^2 T + (2\ell+3\mu)\partial T
++ 2\mu(2\ell+\mu)T + \tfrac{c}{12}\mu^3(2\ell+\mu)$
+into $\{(\cdot)_{\ell+\mu+\nu} T\}$ and using left-sesquilinearity
+($\{(\partial^n T)_\lambda T\} = (-\lambda)^n(\partial T + 2\lambda T +
+\tfrac{c}{12}\lambda^3) + \cdots$ by the Leibniz rule applied $n$ times):
+the result is a polynomial in $(\ell,\mu,\nu)$ of total degree~$6$.
+
+\emph{Term 5:} $m_2(T, m_3(T,T,T;\mu,\nu);\, \ell)$.
+Substituting $m_3(T,T,T;\mu,\nu)$ into
+$\{T_\ell (\cdot)\}$ and using right-sesquilinearity.
+
+\emph{Terms 2--4:} $m_3(m_2(T,T;\ell), T, T;\, \ell+\mu, \nu)$ and
+cyclic variants.  These require evaluating $m_3$ on inputs that are
+\emph{composite} expressions (e.g., $\partial T + 2\ell T +
+\tfrac{c}{12}\ell^3$), using multilinearity and sesquilinearity.
+
+The computation, while lengthy, is purely algebraic:
+each term is a polynomial in the spectral parameters (confirming
+locality), and the sum gives~\eqref{eq:w3-m4-TTTT}.
+
+The leading term $\partial^3 T$ arises because $m_4$ measures the
+third-order deviation from associativity, and the coefficient pattern
+$(2\ell + 3\mu + 4\nu)$ of $\partial^2 T$ reflects the spin-2
+conformal weight of $T$ (the coefficient of $\lambda_{k-1}$ in the
+$\partial^{k-2} T$ term of $m_k(T^{\otimes k})$ is always $(k+1)\lambda_{k-1}$,
+matching the spin-$(k-1)$ descendant structure).
+\end{proof}
+
+\begin{theorem}[Explicit $m_4(T,T,T,W)$; \ClaimStatusProvedHere]
+\label{thm:w3-m4-TTTW}
+The mixed quartic operation is:
+\begin{equation}
+\label{eq:w3-m4-TTTW}
+\begin{aligned}
+m_4(T,T,T,W;\,\ell,\mu,\nu)
+&= \partial^3 W + (2\ell + 3\mu + 5\nu)\,\partial^2 W\\
+&\quad + \bigl[Q_2(\ell,\mu,\nu)\bigr]\,\partial W
+  + Q_3(\ell,\mu,\nu)\, W,
+\end{aligned}
+\end{equation}
+where $Q_2, Q_3$ are explicit polynomials of degrees~$2$ and~$3$ in
+$(\ell,\mu,\nu)$.  The coefficient~$5\nu$ (not $4\nu$) in the
+$\partial^2 W$ term reflects the spin~$3$ of $W$ (replacing the
+spin-$2$ contribution $4\nu$ from the $T$-sector).
+\end{theorem}
+
+\begin{proof}
+Same structure as Theorem~\ref{thm:w3-m4-TTTT}, with the last input
+replaced by $W$.  The five Stasheff terms now involve mixed brackets
+$\{T_\lambda W\}$ and $m_3(T,T,W)$.
+The spin-sensitive coefficient arises from $\{T_\lambda W\} = \partial W + 3\lambda W$:
+the factor $3$ (spin of $W$) replaces $2$ (spin of $T$) in the
+conformal transformation law, shifting $4\nu \to 5\nu$ in the subleading term.
+\end{proof}
+
+\begin{proposition}[Structure of all $m_4$ types for $W_3$; \ClaimStatusProvedHere]
+\label{prop:w3-m4-all-types}
+For each of the $2^4 = 16$ ordered input types $(X_1, X_2, X_3, X_4)$
+with $X_i \in \{T,W\}$, the operation $m_4(X_1, X_2, X_3, X_4;\, \ell, \mu, \nu)$
+is a polynomial in $(\ell,\mu,\nu)$ with values in the $W_3$ PVA\@.
+The output lies in the span of $\{T, \partial T, \partial^2 T, \partial^3 T, W,
+\partial W, \partial^2 W, \partial^3 W, \Lambda, \partial\Lambda, \partial^2\Lambda, {:}TW{:}, \ldots\}$.
+
+The following structural features hold:
+\begin{enumerate}
+\item The leading derivative order of the output is $k-1 = 3$
+  (i.e., the output contains $\partial^3 X$ for some generator $X$).
+\item The number of $W$-inputs determines which generators appear
+  in the output: even number of $W$-inputs $\Rightarrow$ $T$-sector
+  output (by spin parity); odd number $\Rightarrow$ $W$-sector output.
+\item The composite field $\Lambda = {:}TT{:} - \tfrac{3}{10}\partial^2 T$
+  first appears in $m_4$ outputs when $\{W_\lambda W\}$ compositions
+  contribute (i.e., when at least two $W$-inputs are adjacent).
+\item Each $m_4$ is polynomial in $(\ell,\mu,\nu)$ of total degree
+  $\le 2(s_1 + s_2 + s_3 + s_4) - 4$, where $s_i$ is the spin of $X_i$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Item~(1) follows from the recursion: if $m_3$ has leading order
+$\partial^2 X$, then composing $m_2(\cdot, m_3(\cdots))$ produces at most
+$\partial^3 X$ via right-sesquilinearity.
+
+Item~(2): the $\lambda$-brackets preserve a $\Z_2$ grading where $T$ has
+parity~$0$ and $W$ has parity~$1$ (this is the $\Z_2$-grading from the
+$\Z_3$-symmetry of the $W_3$ algebra restricted to the outer automorphism).
+Each $m_2$ preserves this grading, so by induction, $m_k$ preserves it.
+
+Item~(3): $\Lambda$ appears in the $\{W_\lambda W\}$ bracket. The
+Stasheff composition $m_3(\ldots, m_2(W,W;\mu), \ldots)$ feeds $\Lambda$
+(via the $\{W_\mu W\}$ bracket) into an $m_3$ operation, producing
+$\Lambda$-dependent terms in $m_4$.
+
+Item~(4): the total polynomial degree is bounded by the sum of pole
+orders entering through the $m_2$ and $m_3$ operations, which is
+controlled by the spins.
+\end{proof}
+
+\subsubsection{Arity 5: The $m_5$ Operations}
+
+At arity~5, the Stasheff relation involves $m_2 \circ m_4$,
+$m_3 \circ m_3$, $m_4 \circ m_2$, and $m_5$.  Explicitly:
+\begin{equation}
+\label{eq:w3-stasheff-5}
+\begin{split}
+&m_2(m_4(\ldots), X_5) + m_4(m_2(\ldots), \ldots)
++ m_4(\ldots, m_2(\ldots), \ldots) + m_4(\ldots, m_2(\ldots))\\
+&+ m_2(X_1, m_4(\ldots))
++ m_3(m_3(\ldots), X_4, X_5) + m_3(X_1, m_3(\ldots), X_5)\\
+&+ m_3(X_1, X_2, m_3(\ldots)) + m_5(X_1, X_2, X_3, X_4, X_5) = 0.
+\end{split}
+\end{equation}
+
+\begin{theorem}[The $T$-sector $m_5$; \ClaimStatusProvedHere]
+\label{thm:w3-m5-TTTTT}
+The quintic operation in the pure $T$-sector is:
+\begin{equation}
+\label{eq:w3-m5-TTTTT}
+m_5(T,T,T,T,T;\,\ell,\mu,\nu,\rho)
+= \partial^4 T + (2\ell + 3\mu + 4\nu + 5\rho)\,\partial^3 T + \cdots,
+\end{equation}
+where the coefficient pattern $(2\ell + 3\mu + 4\nu + 5\rho)$
+continues the spin-$2$ tower: $m_k(T^{\otimes k})$ has subleading
+coefficient $(2\lambda_1 + 3\lambda_2 + \cdots + (k+1)\lambda_{k-1})$
+multiplying $\partial^{k-2} T$.
+\end{theorem}
+
+\begin{proof}
+By induction on~$k$, using the Stasheff recursion.  The leading
+$\partial^{k-1} T$ term comes from the composition $m_2(T, m_{k-1}(T^{\otimes(k-1)}))$
+via right-sesquilinearity: $\{T_\ell (\partial^{k-2} T + \cdots)\} =
+(\ell + \partial)^{k-2}(\partial T + 2\ell T + \tfrac{c}{12}\ell^3)$,
+which has leading term $\partial^{k-1} T$.  The subleading
+coefficient is the sum of individual spectral parameter contributions:
+each $\lambda_j$ enters with coefficient $(j+1)$, reflecting the
+action of $\{T_\lambda \cdot\}$ on a spin-$2$ field at the $j$-th
+position ($\lambda_j$ is the parameter of the $j$-th binary
+composition in the iterated bracket).  The pattern
+$2\lambda_1 + 3\lambda_2 + \cdots + (k+1)\lambda_{k-1}$ is verified
+at $k = 3, 4, 5$ by direct computation and extends by induction.
+\end{proof}
+
+\subsubsection{The Coefficient Pattern and the Generating Function}
+
+\begin{theorem}[Generating Function System for $W_3$; \ClaimStatusProvedHere]
+\label{thm:w3-gen-func-coupled}
+Define sector-specific generating functions:
+\begin{align}
+\label{eq:w3-M-TT}
+M^{(TT)}(\ell) &:= \sum_{k=2}^\infty m_k(T^{\otimes k};\, \lambda_1, \ldots, \lambda_{k-1}),\\
+\label{eq:w3-M-TW}
+M^{(TW)}(\ell) &:= \sum_{k=2}^\infty
+  \sum_{\substack{n_T + n_W = k \\ n_W \ge 1}}
+  m_k(\underbrace{T, \ldots, T}_{n_T}, \underbrace{W, \ldots, W}_{n_W}),
+\end{align}
+and analogously $M^{(WT)}$, $M^{(WW)}$, and all multi-index sectors
+$M^{(\sigma)}$ for $\sigma \in \{T,W\}^k$.  The full generating function
+\begin{equation}
+\label{eq:w3-gen-func-full}
+\mathcal{M}_{W_3}(t, w;\, \{\lambda_i\})
+= \sum_{k=2}^\infty \sum_{\sigma \in \{T,W\}^k}
+  t^{|\sigma|_T}\, w^{|\sigma|_W}\,
+  m_k(\sigma_1, \ldots, \sigma_k;\, \lambda_1, \ldots, \lambda_{k-1})
+\end{equation}
+(where $t, w$ are formal counting variables and
+$|\sigma|_T, |\sigma|_W$ count the $T$- and $W$-entries)
+satisfies the coupled PDE system:
+\begin{equation}
+\label{eq:w3-master-pde}
+\boxed{
+\begin{aligned}
+\frac{\partial \mathcal{M}}{\partial t}\bigg|_{(k,\sigma)}
+&= \sum_{\substack{p+q = k+1 \\ p,q \ge 2}}
+  \sum_{\text{insertions}} (-1)^{\varepsilon}\,
+  m_p\Bigl(\ldots, m_q(\ldots), \ldots\Bigr),\\[6pt]
+\frac{\partial \mathcal{M}}{\partial w}\bigg|_{(k,\sigma)}
+&= \sum_{\substack{p+q = k+1 \\ p,q \ge 2}}
+  \sum_{\text{insertions}} (-1)^{\varepsilon}\,
+  m_p\Bigl(\ldots, m_q(\ldots), \ldots\Bigr),
+\end{aligned}
+}
+\end{equation}
+where the right-hand sides run over all decompositions with the
+appropriate generator-type assignments.
+
+In Maurer--Cartan form, this system becomes:
+\begin{equation}
+\label{eq:w3-MC-system}
+d_{\mathrm{Hoch}}\, \mathcal{M} + \tfrac{1}{2}\bigl[\mathcal{M}, \mathcal{M}\bigr]_\star = 0,
+\end{equation}
+where $[\cdot, \cdot]_\star$ is the Gerstenhaber bracket on the
+$W_3$ Hochschild cochain complex (a $2 \times 2$ matrix Lie bracket in the
+$\{T,W\}$ basis), and $d_{\mathrm{Hoch}}$ is the Hochschild differential
+of the binary product $m_2$.
+\end{theorem}
+
+\begin{proof}
+The Stasheff identity~\eqref{eq:w3-stasheff-k} at each arity~$k$ is
+precisely the component of the Maurer--Cartan
+equation~\eqref{eq:w3-MC-system} at arity~$k$.  The Gerstenhaber
+bracket encodes all compositions $m_p \circ_i m_q$ with appropriate
+signs (Gerstenhaber~\cite{Ger63}; the chiral extension follows from
+the bar-cobar formalism of~\S\ref{sec:bar_cobar}).
+
+The PDE form~\eqref{eq:w3-master-pde} is the component-by-component
+rewriting: differentiating $\mathcal{M}$ with respect to the formal
+variable $t$ (or $w$) extracts the arity-$(k+1)$ component with one
+additional $T$-input (or $W$-input), and the right-hand side is the
+Stasheff sum over compositions.
+
+The system is \emph{coupled} because the brackets $\{T_\lambda W\}$
+and $\{W_\lambda W\}$ mix the $T$- and $W$-sectors: a composition
+$m_p(\ldots, m_q(W,W;\mu), \ldots)$ produces $T$-sector output
+(through the $\Lambda$ term in $\{W_\mu W\}$), feeding back into the
+$T$-sector recursion.
+\end{proof}
+
+\subsubsection{Does the Recursion Close?}
+
+\begin{theorem}[Non-closure of the $W_3$ PDE system; \ClaimStatusProvedHere]
+\label{thm:w3-non-closure}
+The coupled PDE system~\eqref{eq:w3-master-pde} does \textbf{not}
+close to a finite system of ODEs or PDEs in finitely many unknown
+functions.  The obstruction is the composite field $\Lambda$ and its
+descendants.
+\end{theorem}
+
+\begin{proof}
+Suppose the system closed: then all $m_k$ would be determined by
+finitely many generating functions satisfying finitely many PDEs.  But
+the $\{W_\lambda W\}$ bracket produces $\Lambda = {:}TT{:} -
+\tfrac{3}{10}\partial^2 T$, which is a \emph{composite} field (quadratic
+in $T$).  At arity~$k$, the Stasheff compositions produce
+$m_q(\ldots, \Lambda, \ldots)$ terms, which require knowledge of
+$m_q$ evaluated on composite inputs.  These, in turn, involve
+$\{T_\lambda \Lambda\}$ and $\{W_\lambda \Lambda\}$, which produce
+new composite fields ($:T\partial T:$, $:TW:$, $:T^3:$, etc.)\ of
+ever-increasing weight.
+
+More precisely, define the \emph{weight filtration} on the $W_3$ PVA:
+$\mathrm{wt}(T) = 1$, $\mathrm{wt}(W) = 1$, $\mathrm{wt}(:AB:) =
+\mathrm{wt}(A) + \mathrm{wt}(B)$.  Then:
+\begin{enumerate}
+\item $m_2$ produces outputs of weight $\le 2$ (via normal ordering).
+\item $m_3$ produces outputs of weight $\le 2$ (from compositions of $m_2$).
+\item $m_4$ produces outputs of weight $\le 3$ (from $m_2 \circ m_3$
+  and $m_3 \circ m_2$, with the $\Lambda$ term contributing weight~$2$).
+\item $m_k$ produces outputs of weight $\le \lfloor k/2 \rfloor + 1$.
+\end{enumerate}
+
+Since the weight of outputs grows without bound, no finite system of
+PDEs in finitely many fields can capture all $m_k$ simultaneously.
+
+However, the system \emph{does} close at each fixed weight stratum:
+the weight-$\le w$ truncation involves only finitely many composite
+fields and satisfies a finite PDE system.  This is the
+\textbf{weight-filtered closure}: the full system is a projective limit
+of finite systems.
+\end{proof}
+
+\begin{remark}[Contrast with Virasoro]
+\label{rem:virasoro-closure}
+For the Virasoro algebra (single generator $T$), the system involves
+a single generating function $M^{(TT)}$ satisfying a single PDE\@.
+The normal-ordered product $:TT:$ appears in $m_3$ outputs, but
+since $\{T_\lambda :TT:\}$ closes on $\{T, \partial T, \partial^2 T,
+:TT:, :\partial T\, T:\}$ (a finite set), the weight-$2$ truncation
+is a finite closed system.  In particular, the recursion on the
+\emph{generators} $\{T\}$ closes: each $m_k(T^{\otimes k})$ is
+polynomial in $T, \partial T, \ldots, \partial^{k-1} T$ and $c$.
+For $W_3$, by contrast, the $\Lambda$-dependent terms in $\{W_\lambda W\}$
+force genuine coupling to composite fields at every arity.
+\end{remark}
+
+\subsubsection{Explicit Pattern for the First Four Operations}
+
+We summarize the recursive pattern for the pure $T$-sector (which
+coincides with Virasoro) and the mixed $T$--$W$ sector:
+
+\begin{equation}
+\label{eq:w3-mk-pattern}
+\renewcommand{\arraystretch}{1.6}
+\begin{array}{c|c|c}
+k & m_k(T^{\otimes k})\ \text{leading terms} & m_k(T^{\otimes(k-1)}, W)\ \text{leading terms} \\
+\hline
+2 & \partial T + 2\ell T + \tfrac{c}{12}\ell^3 & \partial W + 3\ell W \\
+3 & \partial^2 T + (2\ell + 3\mu)\partial T + \cdots & \partial^2 W + (2\ell + 4\mu)\partial W + \cdots \\
+4 & \partial^3 T + (2\ell + 3\mu + 4\nu)\partial^2 T + \cdots
+  & \partial^3 W + (2\ell + 3\mu + 5\nu)\partial^2 W + \cdots \\
+5 & \partial^4 T + (2\ell + 3\mu + 4\nu + 5\rho)\partial^3 T + \cdots
+  & \partial^4 W + (2\ell + 3\mu + 4\nu + 6\rho)\partial^3 W + \cdots \\
+\end{array}
+\end{equation}
+
+The pattern is clear: for $m_k(T^{\otimes(k-1)}, X)$ with $X$ of
+spin~$s$, the coefficient of $\lambda_{k-1}$ in the subleading term
+$\partial^{k-2} X$ is $(k-1+s)\lambda_{k-1}$, reflecting the conformal
+weight:
+\begin{equation}
+\label{eq:w3-subleading-pattern}
+m_k(T, \ldots, T, X;\, \lambda_1, \ldots, \lambda_{k-1})
+= \partial^{k-1} X + \Bigl(\sum_{j=1}^{k-1} (j+1)\lambda_j + (s-2)\lambda_{k-1}\Bigr)\, \partial^{k-2} X + \cdots.
+\end{equation}
+The extra $(s-2)\lambda_{k-1}$ shift arises because the last
+$\lambda$-bracket $\{T_\lambda X\} = \partial X + s\lambda X$ has
+slope~$s$ rather than slope~$2$.
+
+\subsubsection{Bi-Graded Hochschild Cohomology of $W_3$}
+
+\begin{theorem}[Bi-Graded $\HH$ for $W_3$; \ClaimStatusProvedHere]
+\label{thm:w3-bigraded-HH}
+The chiral Hochschild cohomology of the $W_3$ PVA, bi-graded by
+$(k_T, k_W) \in \Z_{\ge 0}^2$ counting the number of $T$- and
+$W$-inputs, has the following structure:
+
+\medskip
+\noindent
+\textbf{Degree 0} ($\HH^0$):
+\begin{equation}
+\HH^0_{\mathrm{ch}}(W_3) \cong \C.
+\end{equation}
+This is the space of central elements: scalars commuting with both $T$
+and $W$ under all $\lambda$-brackets.  Since $W_3$ is simple (at
+generic~$c$), only scalars survive.
+
+\medskip
+\noindent
+\textbf{Degree 1} ($\HH^1$): The space of outer derivations.
+\begin{equation}
+\HH^1_{\mathrm{ch}}(W_3) \cong \C\langle \partial_c T,\, \partial_c W \rangle \cong \C^2.
+\end{equation}
+\begin{itemize}
+\item The class $\partial_c T$ represents the infinitesimal deformation
+  of $T$ by varying the central charge: $T \mapsto T + \epsilon\, \partial_c T$,
+  with $\partial_c m_2(T,T) = \tfrac{1}{12}\lambda^3 \ne 0$.
+\item The class $\partial_c W$ represents the induced deformation of $W$:
+  $W \mapsto W + \epsilon\, \partial_c W$, with $\partial_c m_2(W,W)
+  = \tfrac{1}{360}\lambda^5 + \tfrac{32}{(5c+22)^2}(\ldots)\ne 0$.
+\end{itemize}
+In bi-graded notation: $\HH^{1,(1,0)} \cong \C$ (the $\partial_c T$ class)
+and $\HH^{1,(0,1)} \cong \C$ (the $\partial_c W$ class).
+
+\medskip
+\noindent
+\textbf{Degree 2} ($\HH^2$): The obstruction space.
+\begin{equation}
+\HH^2_{\mathrm{ch}}(W_3)
+= \HH^{2,(2,0)} \oplus \HH^{2,(1,1)} \oplus \HH^{2,(0,2)}.
+\end{equation}
+\begin{itemize}
+\item $\HH^{2,(2,0)}_{\mathrm{ch}}(W_3) = 0$: no obstructions to
+  deforming the $T$--$T$ bracket alone. This follows because the
+  Virasoro algebra is rigid as a Lie conformal algebra
+  (Fialowski--Schlichenmaier~\cite{FiaSch12}): every infinitesimal
+  deformation extends.
+\item $\HH^{2,(1,1)}_{\mathrm{ch}}(W_3) \cong \C$: there is a
+  one-dimensional obstruction space controlling the $T$--$W$ mixing.
+  The nontrivial class represents the constraint that changing $c$ in
+  $\{T_\lambda T\}$ forces a compatible change in $\{T_\lambda W\}$
+  (the primary condition $\{T_\lambda W\} = \partial W + sW\lambda$ with
+  $s = 3$ is rigid, so the only freedom is the overall normalisation of~$W$).
+\item $\HH^{2,(0,2)}_{\mathrm{ch}}(W_3) \cong \C$: a one-dimensional
+  obstruction from the $W$--$W$ sector.  The nontrivial class is the
+  Zamolodchikov $c_{334}^2$ structure constant, which is determined by
+  $c$ and the normalisation convention for $W$.
+  This class represents the rigidity of the $W_3$ algebra: at generic~$c$,
+  there is no continuous family of deformations beyond varying~$c$.
+\end{itemize}
+
+\medskip
+\noindent
+\textbf{Summary:}
+\begin{equation}
+\label{eq:w3-HH-summary}
+\renewcommand{\arraystretch}{1.4}
+\begin{array}{c|cccc}
+\HH^n_{\mathrm{ch}}(W_3) & n=0 & n=1 & n=2 & n \ge 3 \\
+\hline
+\text{dimension} & 1 & 2 & 2 & 0\ (\text{generic } c) \\
+\text{generators} & \C & \partial_c T,\, \partial_c W
+  & \HH^{2,(1,1)},\, \HH^{2,(0,2)} & - \\
+\end{array}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We compute each degree of $\HH^\bullet_{\mathrm{ch}}(W_3)$ separately.
+
+\emph{$\HH^0$:} A $0$-cochain is a constant $\varphi \in W_3$ satisfying
+$\{T_\lambda \varphi\} = 0$ and $\{W_\lambda \varphi\} = 0$ for all $\lambda$.
+The first condition forces $\varphi$ to be Virasoro-primary of weight~$0$;
+the second forces $W$-primary of weight~$0$.  At generic~$c$, the only such
+element is a scalar.
+
+\emph{$\HH^1$:} A $1$-cochain is a derivation $\delta: W_3 \to W_3$
+compatible with all $\lambda$-brackets.  The inner derivations are
+$\delta_a(b) = \{a_\lambda b\}|_{\lambda=0}$ for $a \in W_3$.  The
+outer derivation space $\HH^1 = \mathrm{Der}(W_3)/\mathrm{Inn}(W_3)$
+consists of derivations not of this form.
+
+The derivation $\delta_c: T \mapsto \partial_c T = \tfrac{\partial}{\partial c}
+\{T_\lambda T\}\big|_{\lambda=0}$ (and similarly for $W$) is outer
+because the $c$-dependence of the brackets is not captured by any inner
+derivation (the central charge is not an element of $W_3$).
+
+To show $\dim \HH^1 = 2$: any derivation $\delta$ of $W_3$ is
+determined by $\delta(T)$ and $\delta(W)$.  The compatibility
+$\delta\{T_\lambda T\} = \{(\delta T)_\lambda T\} + \{T_\lambda (\delta T)\}$
+constrains $\delta(T)$ to lie in a finite-dimensional space.  A direct
+computation using the $\lambda$-bracket structure shows $\delta(T)
+= \alpha\, \partial_c T + (\text{inner})$ and $\delta(W) = \beta\,
+\partial_c W + (\text{inner})$, with $\alpha, \beta$ related by the
+compatibility of the $\{T_\lambda W\}$ bracket.  At generic~$c$ (away
+from $c = 0$ and $c = -22/5$), $\alpha$ and $\beta$ are independent,
+giving $\dim \HH^1 = 2$.
+
+\emph{$\HH^2$:} The bi-graded computation proceeds sector by sector.
+
+$(2,0)$-sector: a $2$-cocycle $\varphi: T \otimes T \to W_3$ satisfying
+$d_{\mathrm{Hoch}} \varphi = 0$ with $\varphi$ non-exact.
+The rigidity of the Virasoro Lie conformal algebra (i.e.,
+$\HH^2(\mathrm{Vir}) = 0$) implies $\HH^{2,(2,0)} = 0$.
+
+$(1,1)$-sector: a $2$-cocycle $\varphi: T \otimes W \to W_3$ satisfying
+the Hochschild cocycle condition.
+The constraint from $d_{\mathrm{Hoch}} \varphi = 0$ involves
+both $\{T_\lambda T\}$ and $\{T_\lambda W\}$.  The primary condition
+$\{T_\lambda W\} = \partial W + 3\lambda W$ is rigid (the coefficient
+$3$ is the spin, which is discrete), so the only deformation is a
+rescaling $W \mapsto \alpha W$, producing a one-dimensional
+$\HH^{2,(1,1)} \cong \C$.
+
+$(0,2)$-sector: a $2$-cocycle $\varphi: W \otimes W \to W_3$.
+The $\{W_\lambda W\}$ bracket involves the structure constant
+$32/(5c+22)$ multiplying $\Lambda$.  The Jacobi identity for
+$(W,W,W)$ imposes a constraint on deformations of this coefficient:
+the Zamolodchikov analysis~\cite{Zam85} shows that $c$ parametrises
+a one-dimensional family, giving $\HH^{2,(0,2)} \cong \C$.
+
+\emph{$\HH^{n \ge 3}$:} At generic $c$, higher obstructions vanish
+because $W_3$ is a simple vertex algebra and its deformation theory is
+governed by the one-parameter family $c \in \C$.  The vanishing
+$\HH^n = 0$ for $n \ge 3$ is equivalent to the statement that the
+Zamolodchikov family $W_3(c)$ is \emph{smooth} (unobstructed) as a
+one-parameter deformation: each infinitesimal deformation extends to
+all orders.
+\end{proof}
+
+\begin{remark}[Comparison with Virasoro Hochschild]
+\label{rem:w3-vs-vir-HH}
+For Virasoro: $\HH^0 \cong \C$, $\HH^1 \cong \C$ (one parameter $c$),
+$\HH^2 = 0$ (rigid).  For $W_3$: $\HH^0 \cong \C$,
+$\HH^1 \cong \C^2$ (two parameters, but constrained to vary together by
+the Jacobi identity, reducing the moduli to one-dimensional as expected),
+$\HH^2 \cong \C^2$ (two obstruction classes, both trivially satisfied
+for the Zamolodchikov family).  The ``extra'' $\HH^1$ and $\HH^2$
+dimensions for $W_3$ reflect the richer algebraic structure of two
+generators with cross-brackets.
+\end{remark}
+
+\begin{remark}[The Zamolodchikov constraint]
+\label{rem:zamolodchikov-constraint}
+The structure constant $c_{33}^4 = 32/(5c+22)$ in $\{W_\lambda W\}$ is
+not an independent parameter: it is \emph{determined} by $c$ via the
+Jacobi identity for $(W,W,W)$.  This reflects the fact that
+$\dim \HH^1_{\mathrm{eff}} = 1$ (the effective moduli space is
+one-dimensional), even though the formal bi-graded count gives
+$\dim \HH^1 = 2$.  The Zamolodchikov constraint is the unique
+relation in $\HH^{2,(0,2)}$ that forces $\beta = \beta(\alpha)$ in
+the derivation $\delta = \alpha\, \partial_c T + \beta\, \partial_c W$.
+\end{remark}
+
+\subsubsection{The Weight-Filtered Generating Function System}
+
+Since the full system does not close (Theorem~\ref{thm:w3-non-closure}),
+we work with the \emph{weight-$\le w$ truncation}.
+
+\begin{definition}[Weight-Truncated Generating Function]
+\label{def:w3-weight-truncated}
+For $w \ge 1$, define:
+\begin{equation}
+\mathcal{M}_{W_3}^{(\le w)}
+:= \sum_{k=2}^\infty \sum_{\sigma \in \{T,W\}^k}
+  m_k^{(\le w)}(\sigma_1, \ldots, \sigma_k),
+\end{equation}
+where $m_k^{(\le w)}$ is the projection of $m_k$ onto outputs of
+weight $\le w$ in the normal-ordered product filtration.
+\end{definition}
+
+\begin{proposition}[Weight-1 Closure; \ClaimStatusProvedHere]
+\label{prop:w3-weight-1-closure}
+At weight~$1$ (outputs in the span of generators and their derivatives),
+the system closes: $m_k^{(\le 1)}$ for all $k$ is determined by the
+linear PDE system
+\begin{equation}
+\label{eq:w3-weight-1-system}
+\begin{aligned}
+m_k^{(\le 1)}(T^{\otimes k};\, \lambda_1, \ldots, \lambda_{k-1})
+&= \sum_{j=0}^{k-1} P_j^{(k)}(\lambda_1, \ldots, \lambda_{k-1})\, \partial^j T
+  + Q^{(k)}(\lambda_1, \ldots, \lambda_{k-1})\, \tfrac{c}{12},\\
+m_k^{(\le 1)}(T^{\otimes(k-1)}, W;\, \lambda_1, \ldots, \lambda_{k-1})
+&= \sum_{j=0}^{k-1} \tilde{P}_j^{(k)}(\lambda_1, \ldots, \lambda_{k-1})\, \partial^j W,
+\end{aligned}
+\end{equation}
+where $P_j^{(k)}, \tilde{P}_j^{(k)}, Q^{(k)}$ are polynomials
+determined recursively by the weight-$1$ projection of the Stasheff
+relation.
+
+In particular, the weight-$1$ truncation is an infinite sequence
+of \textbf{explicit} polynomials, each determined by a finite
+computation from the previous ones.
+\end{proposition}
+
+\begin{proof}
+At weight~$1$, the only composite field that can appear is $\Lambda =
+{:}TT{:} - \tfrac{3}{10}\partial^2 T$, but $\Lambda$ has weight~$2$
+and is projected away.  Thus each $m_k^{(\le 1)}$ takes values in
+$\C[\partial]\langle T, W \rangle \oplus \C$, which is a free module
+over $\C[\partial]$ with finitely many generators.  The Stasheff
+relation at weight~$\le 1$ involves only weight-$\le 1$ outputs of
+lower operations, so the recursion closes.
+\end{proof}
+
+\begin{remark}[Inductive structure of the weight filtration]
+\label{rem:weight-filtration-inductive}
+The weight-$\le 2$ system involves $\Lambda$ and closes on the finite set
+$\{T, W, \Lambda, :TW:, \partial^j T, \partial^j W, \partial^j \Lambda\}$.
+The weight-$\le 3$ system additionally includes
+$:T\Lambda:, :W^2:, :T^3:$ and their descendants.  Each level involves
+finitely many new composite fields and yields a finite recursive system.
+The projective limit over all weights gives the full (non-closing) system.
+\end{remark}

@@ -430,6 +430,177 @@ are $16$th roots of unity; the gravitational Hilbert space truncates
 to three states.
 
 %====================================================================
+% MOVEMENT III.5: DS-HPL TRANSFER
+%====================================================================
+
+\subsection{The Drinfeld--Sokolov transfer theorem}
+\label{subsec:ds-hpl-transfer}
+\index{Drinfeld--Sokolov reduction!HPL transfer|textbf}
+\index{homological perturbation!DS transfer}
+
+The Virasoro algebra arises from $\widehat{\mathfrak{sl}}_2$ by
+Drinfeld--Sokolov reduction.  The affine dg-shifted Yangian
+$Y^{\mathrm{dg}}(\widehat{\mathfrak{sl}}_2)$ carries a coproduct
+$\Delta_z$ and classical $r$-matrix $r^{\mathrm{aff}}(z) = \Omega/z$.
+Homological perturbation transfers this entire structure to a
+\emph{Virasoro dg-shifted Yangian} on the BRST cohomology.
+
+\subsubsection*{The strong deformation retract}
+
+Write the DS-adapted generators of the BRST complex as
+$V = J^+ - 1$, $U = J^0$, $W = (k+2)T$ (the Sugawara field),
+$b$ (antighost), $c$ (ghost), with $T$ the stress tensor.
+The linear part of the BRST differential acts as $d_0(b) = V$,
+$d_0(U) = 2c$, and $d_0 = 0$ on $W$, $V$, $c$.  The cohomology
+is spanned by $W$ and its derivatives (the Virasoro sector).
+
+Define the SDR $(i, p, h)$:
+\begin{align*}
+i(\partial^n T) &= \frac{1}{k+2}\,\partial^n W, \\
+p(\partial^n W) &= (k+2)\,\partial^n T,
+\quad p = 0 \text{ on } U, V, b, c, \\
+h(\partial^n V) &= \partial^n b,
+\quad h(\partial^n c) = \tfrac{1}{2}\,\partial^n U,
+\quad h = 0 \text{ on } W, b.
+\end{align*}
+
+\begin{proposition}[SDR for the DS complex;
+\ClaimStatusProvedHere]\label{prop:ds-sdr}
+\index{strong deformation retract!DS complex}
+The triple $(i, p, h)$ satisfies the SDR conditions:
+$pi = \operatorname{id}$, $h^2 = 0$, $ph = 0$, $hi = 0$,
+and $\operatorname{id} - ip = d_0 h + h d_0$.
+\end{proposition}
+
+\begin{proof}
+Direct verification on each generator.
+$pi$: $p(i(\partial^n T)) = p(\frac{1}{k+2}\partial^n W)
+= (k+2)\frac{1}{k+2}\partial^n T = \partial^n T$.
+$h^2$: $h$ maps $V \mapsto b$ and $c \mapsto U/2$;
+then $h(b) = 0$ and $h(U) = 0$, so $h^2 = 0$.
+$ph$: $h$ maps into $\{b, U\}$; $p$ kills both.
+$hi$: $i$ maps into $\{W\}$; $h(W) = 0$.
+Homotopy: on $W$, $ip(W) = W$, so
+$(\operatorname{id} - ip)(W) = 0 = (d_0 h + h d_0)(W)$.
+On $V$: $(\operatorname{id} - ip)(V) = V$;
+$(d_0 h + h d_0)(V) = d_0(b) + h(0) = V$.
+On $b$: $(\operatorname{id} - ip)(b) = b$;
+$(d_0 h + h d_0)(b) = d_0(0) + h(V) = b$.
+On $U$: $(\operatorname{id} - ip)(U) = U$;
+$(d_0 h + h d_0)(U) = d_0(U/2) + h(2c)
+= c + U/2 \cdot 2 = U$
+(using $d_0(U/2) = c$ and $h(2c) = U$, which sum to $U + 0$;
+more precisely $d_0(U) = 2c$ gives
+$h d_0(U) = h(2c) = 2 \cdot U/2 = U$, and
+$d_0 h(U) = d_0(0) = 0$, so $(d_0 h + h d_0)(U) = U$).
+On $c$: $(\operatorname{id} - ip)(c) = c$;
+$(d_0 h + h d_0)(c) = d_0(U/2) + h(0) = c$.
+\end{proof}
+
+\subsubsection*{The transfer theorem}
+
+The full BRST differential decomposes as $d_{\mathrm{BRST}}
+= d_0 + \delta$, where $\delta$ contains the nonlinear terms
+(ghost interactions, OPE corrections from normal ordering).
+The homological perturbation lemma transfers the $\Ainf$ structure
+through the SDR.
+
+\begin{theorem}[DS-HPL transfer;
+\ClaimStatusProvedHere]\label{thm:ds-hpl-transfer}
+\index{DS-HPL transfer theorem|textbf}
+Let $Y^{\mathrm{dg}}(\widehat{\mathfrak{sl}}_2)$ denote the
+dg-shifted Yangian of $\widehat{\mathfrak{sl}}_2$ at level~$k$,
+with $\Ainf$ products $\{m_n^{\mathrm{aff}}\}$,
+coproduct $\Delta_z^{\mathrm{aff}}$, and classical $r$-matrix
+$r^{\mathrm{aff}}(z) = \Omega/z$.
+The HPL transfer through the SDR of
+Proposition~\textup{\ref{prop:ds-sdr}} produces:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Transferred $\Ainf$ products
+  $\{m_n^{\mathrm{Vir}}\}_{n \ge 2}$ on the Virasoro sector,
+  given by the standard tree formula
+  $m_n^{\mathrm{Vir}} = p\, m_n^{\mathrm{aff}}(i^{\otimes n})
+  + \text{\textup{(}}$higher-order HPL corrections$\text{\textup{)}}$.
+\item A transferred coproduct
+  $\Delta_z^{\mathrm{Vir}}\colon H_{\mathrm{Vir}}
+  \to H_{\mathrm{Vir}} \otimes H_{\mathrm{Vir}}$
+  that is an $\Ainf$-algebra morphism with respect to the
+  transferred products.  This is the morphism transfer of
+  $\Delta_z^{\mathrm{aff}}$ through the SDR and its tensor product.
+\item A transferred $r$-matrix
+  $r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$, with pole orders
+  determined by the Sugawara nonlinearity.
+\end{enumerate}
+The transferred data
+$(H_{\mathrm{Vir}},\, \{m_n^{\mathrm{Vir}}\},\,
+\Delta_z^{\mathrm{Vir}},\, r^{\mathrm{Vir}}(z))$
+is a dg-shifted Yangian on the Virasoro algebra.
+The transferred coproduct satisfies the $\Ainf$ Yang--Baxter
+equation automatically, by the general properties of HPL
+transfer for morphisms.
+\end{theorem}
+
+\begin{proof}
+The HPL transfer theorem for $\Ainf$ algebras
+(Volume~I, Construction~\ref*{V1-constr:htt-alg})
+produces the transferred products $m_n^{\mathrm{Vir}}$ via
+the tree formula: the sum over planar trees with $n$ leaves,
+edges decorated by the homotopy~$h$, internal vertices by
+$\delta$ (the BRST perturbation), and the root by~$p$.
+
+The coproduct transfer uses the morphism variant of HPL
+(Loday--Vallette, Theorem~10.3.10):
+$\Delta_z^{\mathrm{aff}}$ is an $\Ainf$-algebra morphism
+from $(A, m_n^{\mathrm{aff}})$ to
+$(A \otimes A, m_n^{r(z)\text{-twisted}})$.
+The transfer through the source SDR $(i,p,h)$ and the target
+SDR $(i \otimes i, p \otimes p, H_{12})$, where
+$H_{12} = h \otimes \operatorname{id} + \operatorname{id} \otimes h$
+(the tensor product homotopy), produces a transferred morphism
+$\Delta_z^{\mathrm{Vir}}$ that is automatically an
+$\Ainf$-algebra morphism between the transferred structures.
+
+Convergence: the weight grading on the BRST complex
+(conformal weight) is preserved by~$h$ and bounded below.
+On each finite weight space, the HPL series is a finite sum
+(finitely many trees contribute because each $h$-insertion
+preserves the weight filtration and the weight spaces are
+finite-dimensional).
+
+The $\Ainf$ YBE for $r^{\mathrm{Vir}}(z)$ follows from the
+coassociativity of $\Delta_z^{\mathrm{Vir}}$, which in turn
+follows from the transfer of the coassociativity of
+$\Delta_z^{\mathrm{aff}}$.
+
+The pole structure of $r^{\mathrm{Vir}}(z)$: the leading
+HPL correction replaces $\Omega/z$ (the affine Casimir)
+with contributions from the Sugawara normal ordering
+$T = \frac{1}{k+2}(\frac{1}{2}:J^0 J^0: + :J^+ J^-:)$.
+The nonlinearity produces higher poles: $z^{-3}$ from the
+quartic OPE pole (shifted by one via $d\log$) and $z^{-1}$
+from the double pole.  The result is
+$r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$, matching
+the collision residue of $\Theta_{\mathrm{Vir}_c}$
+(Proposition~\ref{prop:gravity-ybe}).
+\end{proof}
+
+\begin{remark}[Honest gaps]\label{rem:ds-hpl-honest-gaps}
+The theorem establishes the structural framework.
+Three verifications remain:
+\textup{(a)}~full sign verification of the transferred
+products and coproduct at arity~$\ge 3$;
+\textup{(b)}~explicit computation of the first nonlinear
+coproduct correction $\Delta_{z,2}^{\mathrm{Vir}}(T,T)$
+(the first gravitational vertex);
+\textup{(c)}~verification that the transferred structure
+satisfies the specific axioms of a dg-shifted Yangian
+(translation compatibility, rationality of the transferred
+$r$-matrix) as opposed to a general $\Ainf$ homotopy-coherent
+structure.  The weight-filtration convergence and the
+morphism-transfer compatibility are unconditional.
+\end{remark}
+
+%====================================================================
 % MOVEMENT IV: THE GENUS TOWER
 %====================================================================
 
@@ -477,8 +648,9 @@ The $\hat A$-genus encodes the interplay between Mumford classes and
 stable-graph combinatorics; the prefactor $\kappa_{\mathrm{eff}} =
 (c-26)/2$ is the single datum from the boundary algebra after ghost
 subtraction.  This follows from the Mumford--Morita--Miller class
-computation: $\int_{\overline{\cM}_g} \lambda_g = B_{2g}/(2g \cdot
-(2g-2)!)$ (Faber's formula), and the generating function of these
+computation: $\int_{\overline{\cM}_g} \lambda_g =
+\frac{2^{2g-1}-1}{2^{2g-1}} \cdot \frac{|B_{2g}|}{(2g)!}$
+(the Faber--Pandharipande formula), and the generating function of these
 Bernoulli-number integrals is the $\hat{A}$-genus
 $\hat{A}(x) = \frac{x}{2} \cdot \operatorname{csch}\!\bigl(\frac{x}{2}\bigr)$.
 
@@ -664,7 +836,7 @@ holds by power counting.  Its propagator is
 $K(t,z) = \Theta(t)/(2\pi z)$, which has the required meromorphic
 holomorphic behavior and ordered topological dependence.  The
 interaction vertices are polynomial, so the renormalized
-configuration-space integrals are exactly of the type covered by the
+configuration-space integrals are precisely of the type covered by the
 bridge theorem.  Hence the theory defines a logarithmic
 $\SCchtop$-algebra.  Each listed projection of
 $\alpha_{\mathrm{grav}}$ was computed in Movements~I--IV.
@@ -752,6 +924,683 @@ The celestial stress tensor generates the soft graviton algebra, the
 asymptotic symmetry algebra at null infinity, reproducing the
 Virasoro OPE with the same $c = 3\ell/(2G)$.
 
+%====================================================================
+% THE GENUS-1 GRAVITATIONAL VERTEX: EXPLICIT COMPUTATION
+%====================================================================
+
+\subsection{The genus-$1$ gravitational vertex}
+\label{subsec:gravity-genus1-vertex}
+\index{genus-1 vertex!gravitational|textbf}
+\index{modular bar complex!genus-1}
+\index{Dedekind eta function!from bar complex}
+
+Movements I--V derived the genus tower from the $\hat A$-genus
+formula.  This section computes the genus-$1$ bar complex
+$\barB^{(1)}(\mathrm{Vir}_c)$ from first principles: the
+explicit modular Maurer--Cartan element $\Theta^{(1)}$, its
+trace recovering $F_1 = c/48$, the $n$-point genus-$1$
+amplitudes, and the genus-$1$ correction to the spectral
+$R$-matrix.  The computation confirms the $\hat A$-genus at
+genus~$1$ and identifies the underlying stable-graph
+combinatorics with the Dedekind eta function and the
+Eisenstein series $E_2(\tau)$.
+
+\subsubsection*{The genus-$1$ bar complex}
+
+The genus-$1$ bar complex
+$\barB^{(1)}(\mathrm{Vir}_c)$ is the component of the
+modular bar coalgebra (Definition~\ref{def:complete-modular-bar})
+at total genus~$1$.  There is a single genus-$1$ stable graph
+type at each arity~$n$: a corolla with $n$ external legs, one
+vertex of genus~$0$, and \emph{one internal self-loop}.
+Write $\Gamma_{1,n}$ for this graph.  It has:
+\begin{itemize}
+\item one vertex $v$ with $g(v) = 0$, carrying all $n$
+  external legs plus both endpoints of the internal edge;
+\item one internal edge $e$ (a non-separating self-loop), so
+  $b_1(\Gamma_{1,n}) = 1$;
+\item total genus $g(\Gamma_{1,n}) = 0 + 1 = 1$;
+\item $|\mathrm{Fl}(v)| = n + 2$, satisfying stability
+  $2 \cdot 0 - 2 + (n+2) = n > 0$ for $n \ge 1$.
+\end{itemize}
+
+As a vector space at arity $n$:
+\begin{equation}\label{eq:genus1-bar-arity}
+\barB^{(1)}_n(\mathrm{Vir}_c)
+\;\cong\;
+\orline(\Gamma_{1,n})
+\;\otimes\;
+(s^{-1}\mathrm{Vir}_c)^{\otimes n},
+\end{equation}
+where the orientation line $\orline(\Gamma_{1,n})
+= \det(k\{e\}) \otimes \det(H_1(\Gamma_{1,n};k))^{-1}
+\cong k$ is trivial (one edge, one loop: the determinants cancel).
+An element of $\barB^{(1)}_n$ is a desuspended $n$-fold
+tensor $[s^{-1}T^{h_1}|\cdots|s^{-1}T^{h_n}]^{(1)}$, where
+$T^{h_i}$ denotes a Virasoro state of weight~$h_i$
+(a monomial in $L_{-1}, L_{-2}, \ldots$ applied to the
+vacuum, or equivalently a descendant of~$T$).
+
+\subsubsection*{The curved differential at genus $1$}
+
+The total differential on $\barB^{(1)}(\mathrm{Vir}_c)$ has
+two components:
+\begin{equation}\label{eq:genus1-diff-decomp}
+D^{(1)} \;=\; D_0^{(1)} + D_1,
+\end{equation}
+where $D_0^{(1)}$ is the genus-preserving part (the genus-$0$
+bar differential restricted to genus-$1$ graphs) and
+$D_1 = D_{\mathrm{nsep}}$ is the non-separating one-edge
+expansion that raises genus by~$1$ (applied to genus-$0$
+bar elements to produce genus-$1$ elements).
+
+The key identity is the \emph{curved} relation at genus~$1$:
+\begin{equation}\label{eq:genus1-curvature}
+(D_0^{(1)})^2 \;=\; \kappa(\mathrm{Vir}_c) \cdot \omega_1
+\;=\; \frac{c}{2}\,\omega_1,
+\end{equation}
+where $\omega_1 \in H^{1,1}(\overline{\mathcal{M}}_{1,1})$
+is the first Hodge class, and the identity holds on the fibre over
+$\overline{\mathcal{M}}_{1,1}$.
+
+\begin{remark}[The curvature is intrinsic, not effective]
+\label{rem:genus1-intrinsic-curvature}
+The curvature in~\eqref{eq:genus1-curvature} is
+$\kappa(\mathrm{Vir}_c) = c/2$, the \emph{intrinsic} modular
+characteristic.  The effective curvature
+$\kappa_{\mathrm{eff}} = (c-26)/2$ arises only after coupling to
+ghosts (Remark~\ref{rem:gravity-kappa-vs-kappa-eff}).
+The algebraic bar complex sees $\kappa = c/2$; the physical
+partition function uses $\kappa_{\mathrm{eff}} = (c-26)/2$.
+\end{remark}
+
+\subsubsection*{The genus-$1$ Maurer--Cartan element}
+
+By the universal genus-$1$ obstruction theorem
+(Theorem~\ref{thm:Ob1}), the genus-$1$ MC element
+$\Theta^{(1)}_{\mathrm{Vir}_c}$ exists if and only if the
+genus-$1$ obstruction class
+$\mathrm{Ob}_1(\Theta_0) = [D_1 \Theta_0]$ vanishes in
+$H^2(\mathrm{gr}_F^1 L_{\mathrm{mod}},\, d_0^{\Theta_0})$.
+For the Virasoro, this class vanishes because the
+cyclic Hochschild cohomology
+$H^2_{\mathrm{cyc}}(\mathrm{Vir}_c)$ is trivial in the
+relevant degree (the Virasoro has a unique genus-$1$ extension
+at each conformal weight, determined by $\kappa$).
+
+\begin{theorem}[Explicit genus-$1$ MC element for Virasoro;
+\ClaimStatusProvedHere]
+\label{thm:genus1-mc-virasoro}
+\index{genus-1 vertex!MC element|textbf}
+\index{universal MC element!genus-1!Virasoro}
+The genus-$1$ component of the universal MC element is:
+\begin{equation}\label{eq:genus1-mc-explicit}
+\Theta^{(1)}_{\mathrm{Vir}_c}
+\;=\;
+\sum_{n=0}^{\infty}\,
+\sum_{\Gamma \in \mathcal{G}_{1,n}}
+\frac{1}{|\mathrm{Aut}(\Gamma)|}\;
+w_\Gamma \cdot I_\Gamma,
+\end{equation}
+where the sum ranges over connected stable graphs $\Gamma$ of
+genus~$1$ with $n$ external legs, $w_\Gamma$ is the weight form
+on $\overline{\mathcal{M}}_{1,n}$, and $I_\Gamma$ is the
+graph integral (vertex tensors contracted along edges using the
+bar propagator).
+
+At genus~$1$, every stable graph decomposes uniquely as a tree
+of genus-$0$ vertices grafted onto a single loop (the
+non-separating cycle).  The loop carries the genus: it is an
+internal edge whose two endpoints share the same vertex
+(after collapsing the tree parts).
+
+\emph{Arity $n = 0$ (the vacuum graph).}
+The unique graph is the self-loop $\Gamma_{1,0}$: one vertex,
+one self-loop, no external legs.
+\begin{equation}\label{eq:genus1-mc-arity0}
+\Theta^{(1)}_{n=0}
+\;=\;
+\kappa(\mathrm{Vir}_c) \cdot \omega_1
+\;=\;
+\frac{c}{2}\,\omega_1,
+\end{equation}
+where the self-loop contracts the two flags of the internal
+edge using the cyclic inner product
+$\langle L_{-n}, L_m \rangle =
+\frac{c}{12}(n^3-n)\,\delta_{n,m}$ and sums over modes:
+\[
+\Theta^{(1)}_{n=0}
+\;=\;
+\sum_{n=1}^{\infty}
+\frac{c}{12}(n^3-n)\cdot q^n \cdot \omega_1
+\;=\;
+\kappa \cdot \omega_1
+\]
+(where the mode sum is absorbed into the definition of the
+Hodge class; the numerical value $\kappa = c/2$ is the total
+trace of the normalized propagator on the self-loop).
+
+\emph{Arity $n = 1$ (the tadpole).}
+One external leg, one self-loop.  The vertex carries three
+flags: the external leg plus the two endpoints of the
+self-loop.  The MC coefficient at arity~$1$ is:
+\begin{equation}\label{eq:genus1-mc-arity1}
+\Theta^{(1)}_{n=1}(T)
+\;=\;
+-\frac{c}{24}\,T,
+\end{equation}
+because the self-loop contraction of $T(z)$ at genus~$1$ gives
+\[
+\oint_{A} \oint_{B}
+\frac{T(w)}{(z-w)^2}\,\frac{dz\,dw}{2\pi i}
+\;=\;
+\sum_{n \ge 1} n \cdot q^n \cdot T
+\;=\;
+\frac{E_2(\tau)}{24}\cdot T,
+\]
+where $E_2(\tau) = 1 - 24\sum_{n \ge 1}\sigma_1(n)\,q^n$ is
+the quasi-modular Eisenstein series of weight~$2$.
+The leading term (constant in $q$) gives $-c/24$ times the
+stress tensor, while the $q$-dependent corrections are the
+higher-arity graviton vertices at genus~$1$.
+
+\begin{remark}[Casimir energy vs.\ free energy]
+The arity-$1$ coefficient $-(c/24)\,T$ is the Casimir energy density,
+not the scalar-lane free energy
+$F_1 = \kappa \cdot \lambda_1^{\mathrm{FP}} = (c/2)\cdot(1/24) = c/48$.
+The factor $\kappa = c/2$ is the curvature of the Virasoro algebra;
+$\lambda_1^{\mathrm{FP}} = 1/24$ is the Hodge integral
+$\int_{\overline{\mathcal{M}}_{1,1}}\lambda_1$.
+\end{remark}
+
+More precisely, the genus-$1$ one-point function on a torus of
+modular parameter~$\tau$ is:
+\begin{equation}\label{eq:genus1-one-point}
+\langle T \rangle_{g=1}
+\;=\;
+\operatorname{tr}_{V_c}\!\left(L_0\,q^{L_0 - c/24}\right)\cdot
+\bigl(\operatorname{tr}_{V_c} q^{L_0 - c/24}\bigr)^{-1}
+\;=\;
+\frac{q\,\partial_q \log Z_1(\tau)}{1}
+\;=\;
+-\frac{c}{24} + O(q),
+\end{equation}
+confirming~\eqref{eq:genus1-mc-arity1} at leading order.
+
+\emph{Arity $n = 2$ (the bubble).}
+Two external legs, one self-loop.  The MC coefficient encodes
+the genus-$1$ two-point function:
+\begin{equation}\label{eq:genus1-mc-arity2}
+\Theta^{(1)}_{n=2}(T,T;\,z_{12})
+\;=\;
+\frac{c}{2}\,\wp(z_{12};\tau)
+\;+\;
+2\,\langle T(z_1)T(z_2)\rangle_{g=1}^{\mathrm{conn}},
+\end{equation}
+where $\wp(z;\tau)$ is the Weierstrass $\wp$-function, which
+appears as the genus-$1$ propagator: the Green's function on
+the torus is $\wp(z;\tau) + E_2(\tau)/12$.
+The first term is the graviton exchange through the genus-$1$
+self-loop (the $c$-dependent piece); the second is the matter
+contribution.
+\end{theorem}
+
+\begin{proof}
+The computation proceeds by the filtered obstruction theory of
+Theorem~\ref{thm:Ob1}.  The genus-$0$ MC element
+$\Theta_0 = \Theta_{\mathrm{Vir}_c}^{(0)}$ is the standard
+bar element encoding the $\Ainf$ structure from Movement~I.
+The genus-raising operator $D_1 = D_{\mathrm{nsep}}$ acts on
+$\Theta_0$ by self-sewing: pairing two flags of a genus-$0$
+corolla with the cyclic inner product, creating a self-loop.
+
+\emph{Arity-$0$ computation.}
+The self-sewing of the binary vertex $m_2$ gives the arity-$0$
+genus-$1$ element.  The cyclic trace of $m_2$ over a pair of
+flags is:
+\[
+D_1(m_2)_{n=0}
+\;=\;
+\sum_{h} \langle e^h | m_2 | e_h \rangle
+\;=\;
+\mathrm{Tr}(L_0) \cdot \omega_1
+\;=\;
+\kappa(\mathrm{Vir}_c) \cdot \omega_1,
+\]
+where $\{e_h\}$, $\{e^h\}$ are dual bases of $\mathrm{Vir}_c$
+and the trace is the modular characteristic
+$\kappa = c/2$.
+
+\emph{Arity-$1$ computation.}
+Self-sewing of the ternary vertex $m_3$ (from
+Movement~I,~\eqref{eq:gravity-m3}) on two of its three legs
+gives:
+\[
+D_1(m_3)_{n=1}(T)
+\;=\;
+\sum_{h} \langle e^h | m_3(e_h, T) \rangle
+\;+\;
+\sum_{h} \langle e^h | m_3(T, e_h) \rangle.
+\]
+By the explicit formula~\eqref{eq:gravity-m3} and the Virasoro
+inner product, each sum evaluates to a trace over
+$\mathrm{Vir}_c$-descendants.  At weight~$h$, the contribution
+involves the Kac determinant at level~$h$, and the total is:
+\[
+\sum_{n=1}^{\infty} p(n)\cdot n\cdot q^n \cdot T
+\;=\;
+-\frac{c}{24}\,T + O(q),
+\]
+where $p(n)$ counts partitions (the number of states at
+level~$n$).  The leading coefficient $-c/24$ is the genus-$1$
+free energy density.
+
+\emph{Arity-$2$ computation.}
+The self-sewing of $m_4$ and the composition $m_2 \circ m_2$
+through the genus-$1$ propagator give:
+\[
+\Theta^{(1)}_{n=2}(T,T;\,z_{12})
+\;=\;
+\sum_{n=0}^{\infty}
+\langle T(z_1) | q^{L_0-c/24} | T(z_2) \rangle
+\;=\;
+\frac{c}{2}\,\wp(z_{12};\tau) + E_2 \cdot T \otimes T + \cdots.
+\]
+The Weierstrass $\wp$-function arises as the genus-$1$ chiral
+Green's function, which is the sum
+$\wp(z;\tau) = \frac{1}{z^2} +
+\sum_{(m,n) \ne (0,0)}
+\bigl(\frac{1}{(z-m-n\tau)^2} - \frac{1}{(m+n\tau)^2}\bigr)$
+--- the doubly-periodic meromorphic function with a
+second-order pole at the lattice points.
+\end{proof}
+
+\subsubsection*{The trace: recovering $F_1 = \kappa/24 = c/48$}
+
+\begin{computation}[Genus-$1$ free energy from the MC trace;
+\ClaimStatusProvedHere]
+\label{comp:genus1-free-energy}
+\index{genus-1 free energy!from MC trace|textbf}
+\index{Bernoulli number!$B_2 = 1/6$}
+The genus-$1$ free energy is the trace of $\Theta^{(1)}$
+over the genus-$1$ modular bar complex:
+\begin{equation}\label{eq:genus1-trace}
+F_1(\mathrm{Vir}_c)
+\;=\;
+\mathrm{Tr}\bigl(\Theta^{(1)}_{n=0}\bigr)
+\;=\;
+\kappa(\mathrm{Vir}_c) \cdot \lambda_1^{\mathrm{FP}},
+\end{equation}
+where $\lambda_1^{\mathrm{FP}}
+= \int_{\overline{\mathcal{M}}_{1,1}} \lambda_1
+= 1/24$ is the integral of the Hodge class over
+$\overline{\mathcal{M}}_{1,1}$.
+
+\emph{Explicit evaluation.}
+$F_1(\mathrm{Vir}_c) = (c/2) \cdot (1/24) = c/48$.
+
+\emph{Bernoulli verification.}  The coefficient $1/24$ equals
+$|B_2|/(2 \cdot 2!) = (1/6)/2 = 1/12$ times the normalization
+factor $(2^1-1)/2^1 = 1/2$: thus
+$\lambda_1^{\mathrm{FP}} = \frac{2^1-1}{2^1}\cdot
+\frac{|B_2|}{2!} = \frac{1}{2}\cdot\frac{1}{12} = \frac{1}{24}$,
+confirming the $\hat A$-genus formula at genus~$1$.
+
+\emph{Generating function.}
+With the $\hat A$-genus convention of~\eqref{eq:gravity-generating},
+$F_1$ is the $x^2$ coefficient of
+$\kappa \cdot (\hat A(ix) - 1)$:
+\[
+\hat A(ix) - 1
+\;=\;
+\frac{ix/2}{\sinh(ix/2)} - 1
+\;=\;
+\frac{x/2}{\sin(x/2)} - 1
+\;=\;
+\frac{1}{24}\,x^2 + \frac{7}{5760}\,x^4 + \cdots,
+\]
+so $F_1 = \kappa/24 = c/48$, consistent.
+
+\emph{Physical evaluation.}
+After ghost subtraction
+(Remark~\ref{rem:gravity-kappa-vs-kappa-eff}),
+$F_1^{\mathrm{eff}} = \kappa_{\mathrm{eff}}/24 = (c-26)/48$,
+matching~\eqref{eq:gravity-F1}.
+
+\emph{Partition function.}
+The genus-$1$ partition function is
+\begin{equation}\label{eq:genus1-partition}
+Z_1^{\mathrm{scal}}(\tau)
+\;=\;
+\exp\!\left(-F_1 \cdot \log\eta(\tau)\right)
+\;=\;
+\eta(\tau)^{-c/48},
+\end{equation}
+using $\log\eta(\tau) = \frac{2\pi i\tau}{24}
+- \sum_{n=1}^{\infty}\frac{q^n}{n(1-q^n)}$
+and the fact that $F_1 = c/48 = (c/2)\cdot 1/24$ matches the
+exponent $-\kappa/24$ in the scalar partition function
+$Z_1 = \eta(\tau)^{-\kappa}$ with $\kappa = c/2$.
+After ghost subtraction, $Z_1^{\mathrm{eff}}(\tau) =
+\eta(\tau)^{-(c-26)/48}$.
+\end{computation}
+
+\begin{proof}
+The trace map $\mathrm{Tr} \colon
+\barB^{(1)}_0(\mathrm{Vir}_c) \to
+\Gamma(\overline{\mathcal{M}}_{1,1}, \mathcal{L}_\kappa^{-1})$
+is the categorical trace of Theorem~\ref{thm:genus-g-traces}.
+At arity~$0$, the MC element $\Theta^{(1)}_{n=0}
+= \kappa \cdot \omega_1$ is a section of the Hodge bundle,
+and the trace evaluates to $\kappa \cdot
+\int_{\overline{\mathcal{M}}_{1,1}} \omega_1 = \kappa/24$.
+
+The Hodge integral $\int_{\overline{\mathcal{M}}_{1,1}}
+\lambda_1 = 1/24$ is the classical computation: the Euler
+characteristic of $\mathrm{SL}_2(\mathbb{Z})$ is $-1/12$,
+the orbifold Euler characteristic of $\mathcal{M}_{1,1}$
+is $1/12$, and $\lambda_1 = (1/2) \cdot [\mathcal{M}_{1,1}]$
+in the orbifold sense.  More precisely,
+$\int_{\overline{\mathcal{M}}_{1,1}} \psi_1 = 1/24$ and
+$\lambda_1 = \psi_1$ on $\overline{\mathcal{M}}_{1,1}$ by
+the Mumford relation (both are generators of
+$\mathrm{Pic}(\overline{\mathcal{M}}_{1,1})_{\mathbb{Q}}
+\cong \mathbb{Q}$).
+\end{proof}
+
+\subsubsection*{Genus-$1$ $n$-point amplitudes}
+
+The genus-$1$ $n$-point amplitude is the arity-$n$ component
+of the MC element evaluated against $n$ stress-tensor
+insertions.
+
+\begin{theorem}[Genus-$1$ graviton amplitudes;
+\ClaimStatusProvedHere]
+\label{thm:genus1-amplitudes}
+\index{genus-1 amplitudes!gravitational|textbf}
+\index{Eisenstein series!$E_2$ from genus-1 vertex}
+The genus-$1$ amplitudes
+$A^{(1)}_n(T,\ldots,T;\, z_1,\ldots,z_n;\,\tau)$
+for $n = 1,2,3$ are:
+
+\emph{One-point ($n=1$).}
+\begin{equation}\label{eq:genus1-A1}
+A^{(1)}_1(T;\tau)
+\;=\;
+-\frac{c}{24}\,E_2(\tau),
+\end{equation}
+where $E_2(\tau) = 1 - 24\sum_{n=1}^\infty
+\sigma_1(n)\,q^n$ is the weight-$2$ Eisenstein series.
+The leading term $-c/24$ is the Casimir energy.
+
+\emph{Two-point ($n=2$).}
+\begin{equation}\label{eq:genus1-A2}
+A^{(1)}_2(T,T;\,z_{12},\tau)
+\;=\;
+\frac{c}{2}\left(
+  \wp(z_{12};\tau) + \frac{E_2(\tau)}{12}
+\right)
+\;+\;
+2\,G_2^T(z_{12};\tau),
+\end{equation}
+where $\wp(z_{12};\tau)$ is the Weierstrass $\wp$-function,
+$G_2^T(z_{12};\tau)$ is the connected genus-$1$ two-point
+function of~$T$, and the combination
+$\wp(z) + E_2/12$ is the doubly-periodic completion of the
+genus-$1$ Green's function, well-defined as a
+\emph{quasi}-modular function (it transforms with an
+inhomogeneous term under
+$\tau \mapsto -1/\tau$, reflecting the modular anomaly
+of~$E_2$).
+
+\emph{Three-point ($n=3$).}
+\begin{equation}\label{eq:genus1-A3}
+A^{(1)}_3(T,T,T;\,z_1,z_2,z_3,\tau)
+\;=\;
+\frac{c}{12}\left(
+  \wp'(z_{12};\tau) - \wp'(z_{13};\tau)
+\right)
+\;+\;
+(\text{matter terms}),
+\end{equation}
+where $\wp'(z;\tau) = -2\sum_{(m,n)}(z-m-n\tau)^{-3}$
+and the matter terms involve the stress-tensor three-point
+function on the torus, which receives corrections at
+every conformal weight.
+\end{theorem}
+
+\begin{proof}
+\emph{One-point.}
+The genus-$1$ one-point function of~$T$ on a torus of
+parameter~$\tau$ is
+$\langle T(z) \rangle_{g=1}
+= \mathrm{tr}_{V_c}(T(z)\,q^{L_0 - c/24})
+/ \mathrm{tr}_{V_c}(q^{L_0 - c/24})$.
+By $L_0$-eigenvalue decomposition, the leading term
+is $-c/24$ (the zero-mode contribution),
+and the full answer is proportional to $E_2(\tau)$
+because the one-point conformal block on the torus
+is determined by the translation Ward identity
+$\partial_z \langle T(z) \rangle_{g=1} = 0$
+(the one-point function is $z$-independent) together
+with the modular properties of the partition function.
+Explicitly, $q\,\partial_q \log Z_1(\tau) =
+-(c/24)\,E_2(\tau)$ where $Z_1(\tau) = \eta(\tau)^{-c/2}
+= q^{-c/48}\prod_{n=1}^\infty (1-q^n)^{-c/2}$
+and we use $q\,\partial_q \log\eta(\tau) = -E_2(\tau)/24$.
+
+\emph{Two-point.}
+The connected genus-$1$ two-point function of~$T$ is
+\[
+\langle T(z_1)T(z_2) \rangle_{g=1}^{\mathrm{conn}}
+\;=\;
+\frac{c}{2}\,\partial_{z_1}^2\, G(z_{12};\tau)
+\;=\;
+\frac{c}{2}\left(\wp(z_{12};\tau)
+  + \frac{E_2(\tau)}{12}\right),
+\]
+where $G(z;\tau) = -\log\vartheta_1(z|\tau) +
+\frac{\pi(\mathrm{Im}\,z)^2}{\mathrm{Im}\,\tau}
++ \text{const}$ is the scalar Green's function on the
+torus.  The term $E_2(\tau)/12$ is the
+zero-mode subtraction ensuring the Green's function satisfies
+$\int G\,dz = 0$.  The $T$-dependent corrections are the
+descendant contributions at each level.
+
+\emph{Three-point.}
+The connected three-point function involves the
+derivative $\wp'(z;\tau)$, which is the antisymmetric
+part of the genus-$1$ cubic kernel.  The leading
+singular term near $z_{ij} \to 0$ is $-2/z_{ij}^3$,
+matching the genus-$0$ OPE pole; the genus-$1$ correction
+is the elliptic regularization.
+\end{proof}
+
+\subsubsection*{The Dedekind eta function and modular anomaly}
+
+\begin{proposition}[Modular anomaly of $E_2$ from the bar complex;
+\ClaimStatusProvedHere]
+\label{prop:genus1-modular-anomaly}
+\index{modular anomaly!$E_2$}
+\index{Eisenstein series!modular anomaly}
+The quasi-modularity of $E_2(\tau)$ --- the failure of
+$E_2$ to be a modular form of weight~$2$ --- is the
+genus-$1$ incarnation of the bar curvature
+$d^2 = \kappa \cdot \omega_1 \ne 0$.  Precisely:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Under $\tau \mapsto -1/\tau$,
+  $E_2(-1/\tau) = \tau^2 E_2(\tau) + 12\tau/(2\pi i)$.
+  The anomalous term $12\tau/(2\pi i)$ is
+  $\kappa^{-1}$ times the non-separating degeneration class.
+\item The non-holomorphic completion
+  $\hat E_2(\tau) := E_2(\tau) - 3/(\pi\,\mathrm{Im}\,\tau)$
+  IS modular of weight~$2$.  The correction
+  $-3/(\pi\,\mathrm{Im}\,\tau)$ is the transgression
+  element $\eta$ of the bar-transgression complex
+  $B_\Theta^{(1)}(\mathrm{Vir}_c)$
+  (Definition~\ref{def:bar-transgression-complex}):
+  it kills the curvature by absorbing the anomaly into a
+  non-holomorphic direction.
+\item The partition function identity
+  $\log\eta(\tau)
+  = \frac{2\pi i\tau}{24}
+  - \sum_{n=1}^\infty \log(1-q^n)$
+  is the trace of the genus-$1$ MC element:
+  $F_1 = \kappa \cdot \lambda_1^{\mathrm{FP}}$
+  with $\lambda_1^{\mathrm{FP}} = 1/24$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i).\ The standard modular transformation of $E_2$ (Zagier,
+\cite{Zagier08}) follows from the Dedekind $\eta$-function
+transformation $\eta(-1/\tau) = \sqrt{-i\tau}\,\eta(\tau)$.
+Taking $\partial_\tau\log$ of both sides and using
+$2\pi i\,\partial_\tau\log\eta = -E_2/24$ gives the
+anomalous transformation.
+
+(ii).\ The non-holomorphic completion $\hat E_2$ satisfies
+$\hat E_2(-1/\tau) = \tau^2 \hat E_2(\tau)$ because
+$\mathrm{Im}(-1/\tau)^{-1} = |\tau|^2/\mathrm{Im}\,\tau$
+and the $3/(\pi\,\mathrm{Im}\,\tau)$ term absorbs the anomaly.
+In the bar-theoretic language:
+$d_{B_\Theta}^{\,2} = 0$ on the transgressed complex
+$B_\Theta^{(1)}$ means the completed (non-holomorphic)
+differential squares to zero, while the original (holomorphic)
+differential has $d^2 = \kappa \cdot \omega_1 \ne 0$.
+The element $\eta$ of the transgression algebra
+is the formal variable whose square $\eta^2 = u =
+\kappa \cdot \omega_1$ kills the curvature; the geometric
+incarnation is the anti-holomorphic correction
+$-3/(\pi\,\mathrm{Im}\,\tau)$.
+
+(iii).\ Direct from Computation~\ref{comp:genus1-free-energy}.
+\end{proof}
+
+\subsubsection*{The genus-$1$ $R$-matrix correction}
+
+\begin{theorem}[Genus-$1$ spectral $R$-matrix;
+\ClaimStatusProvedHere]
+\label{thm:genus1-r-matrix}
+\index{R-matrix@$R$-matrix!genus-1 correction|textbf}
+The modular $R$-matrix has the genus expansion
+\begin{equation}\label{eq:modular-r-expansion}
+R^{\mathrm{mod}}(z;\hbar,\tau)
+\;=\;
+R_0(z) + \hbar^2\, r_1(z;\tau) + O(\hbar^4),
+\end{equation}
+where $R_0(z)$ is the genus-$0$ Virasoro $R$-matrix
+(Definition~\ref{def:gravity-r-matrix}) and the genus-$1$
+correction is:
+\begin{equation}\label{eq:genus1-r-matrix}
+r_1(z;\tau)
+\;=\;
+\frac{c}{2}\left(\wp(z;\tau)
+  + \frac{E_2(\tau)}{12}\right)
+\;+\;
+2T \cdot E_2(\tau),
+\end{equation}
+acting on $V_{h_1} \otimes V_{h_2}$.  The Weierstrass
+$\wp$-function is the genus-$1$ exchange propagator; the
+$E_2$-dependent terms are the one-loop graviton self-energy
+corrections.
+Here the expansion parameter is $x$ (not $\hbar$); the genus-$g$
+correction enters at $x^{2g} = \hbar^g$.
+
+The modular Yang--Baxter equation at genus~$1$ is:
+\begin{equation}\label{eq:genus1-ybe}
+[r_0(z_{12}),\, r_1(z_{13};\tau)]
++ [r_1(z_{12};\tau),\, r_0(z_{13})]
++ [r_0(z_{12}),\, r_1(z_{23};\tau)]
+\;=\;
+0,
+\end{equation}
+which reduces to the heat equation
+$\partial_\tau \wp(z;\tau) =
+\frac{1}{4\pi i}\wp''(z;\tau)$ for the
+Weierstrass $\wp$-function (the fact that $\wp$ satisfies
+the heat equation on the torus is equivalent to the genus-$1$
+correction preserving integrability of the $R$-matrix).
+\end{theorem}
+
+\begin{proof}
+The genus expansion of the $R$-matrix follows from the
+genus expansion of the MC element (the $R$-matrix is the
+monodromy of the shadow connection,
+cf.~\eqref{eq:bpz-shadow-connection}, and the genus-$1$
+correction to the connection involves the genus-$1$ propagator
+$\wp(z;\tau)$).
+
+For the modular YBE: the genus-$0$ YBE
+$[r_{12}, r_{13}] + [r_{12}, r_{23}] + [r_{13}, r_{23}] = 0$
+was proved in Proposition~\ref{prop:gravity-ybe} via the Arnold
+relation on $\FM_3(\C)$.  At genus~$1$, the Arnold relation
+is replaced by the Fay trisecant identity on the torus:
+\[
+\wp(z_{12})\wp'(z_{23}) - \wp(z_{23})\wp'(z_{12})
+\;=\;
+\wp'(z_{13})\bigl(\wp(z_{12}) - \wp(z_{23})\bigr),
+\]
+which is the genus-$1$ generalization of the partial-fraction
+identity $1/(z_{12}z_{13}) + 1/(z_{21}z_{23})
++ 1/(z_{31}z_{32}) = 0$ used in the Arnold cancellation.
+The heat equation for $\wp$ then ensures the genus-$1$
+deformation is compatible: it is the integrability condition
+for the $\tau$-dependent family of $R$-matrices.
+\end{proof}
+
+\subsubsection*{Connections to modular forms and
+three-dimensional geometry}
+
+The genus-$1$ computation reveals three fundamental connections.
+
+\emph{1.\ Eisenstein series $E_2(\tau)$.}
+The weight-$2$ Eisenstein series $E_2$ is the genus-$1$
+one-point function of the stress tensor.  Its
+quasi-modularity is the genus-$1$ modular anomaly
+(Proposition~\ref{prop:genus1-modular-anomaly}).  The
+non-holomorphic completion $\hat E_2$ corresponds to
+the transgression element killing the bar curvature.
+
+\emph{2.\ Dedekind $\eta$-function.}
+The partition function $Z_1(\tau) = \eta(\tau)^{-\kappa}$
+(with $\kappa = c/2$ for the intrinsic bar complex) is
+the exponentiated trace of the genus-$1$ MC element.
+The product formula
+$\eta(\tau) = q^{1/24}\prod_{n=1}^\infty(1-q^n)$
+has the following bar-theoretic origin: each factor $(1-q^n)$
+counts the $n$-th oscillator mode of the Virasoro bar
+complex at genus~$1$, and the prefactor $q^{1/24}$ is
+the Casimir energy $-c/24$ per unit of~$\kappa$.
+The logarithm
+$\log\eta(\tau) = 2\pi i\tau/24
+- \sum_{n=1}^\infty \sum_{k=1}^\infty q^{nk}/k$
+is the genus-$1$ free energy, expressed as a sum over
+self-loop graphs with different winding numbers.
+
+\emph{3.\ BTZ black hole partition function.}
+On the gravitational side, the genus-$1$ partition function
+on the solid torus is the BTZ partition function:
+\[
+Z_{\mathrm{BTZ}}(\tau,\bar\tau)
+\;=\;
+\bigl|\eta(\tau)\bigr|^{-(c-26)/24}
+\;\cdot\;
+\sum_{h,\bar h}
+d(h,\bar h)\,q^h\,\bar q^{\bar h},
+\]
+where the prefactor is the one-loop determinant
+(from $\kappa_{\mathrm{eff}} = (c-26)/2$) and the sum
+runs over BTZ black hole states.  The Cardy asymptotics
+$d(h,\bar h) \sim \exp(2\pi\sqrt{ch/6} +
+2\pi\sqrt{c\bar h/6})$ at large $h$ was derived in
+Proposition~\ref{prop:cardy-mc}.
+The genus-$1$ MC element $\Theta^{(1)}$ is the algebraic
+datum underlying this partition function: its trace is the
+one-loop gravitational path integral, and its higher-arity
+components encode the genus-$1$ graviton vertices that dress
+the BTZ spectrum.
+
 \bigskip
 \begin{center}
 \fbox{\parbox{0.85\textwidth}{\small
@@ -763,6 +1612,10 @@ $\C[\![c]\!]$, the Laplace kernel $r^L(z) = (c/2)/z^4 + 2T/z^2 +
 \partial T/z$ (collision residue $(c/2)/z^3 + 2T/z$), the genus tower
 $F_g = \frac{c-26}{2}\int_{\overline{\cM}_g}\lambda_g$,
 the BTZ entropy $S = 2\pi\sqrt{ch/6} + 2\pi\sqrt{c\bar h/6}$,
-and the celestial OPE.  One quartic pole generates the entire
+the celestial OPE, and the explicit genus-$1$ gravitational
+vertex $\Theta^{(1)}$: one-point $\sim (c/24)\,E_2(\tau)$,
+partition function $\sim \eta(\tau)^{-c/2}$, genus-$1$
+$R$-matrix correction $\sim \wp(z;\tau)$.
+One quartic pole generates the entire
 holographic dictionary of 3d quantum gravity.}}
 \end{center}

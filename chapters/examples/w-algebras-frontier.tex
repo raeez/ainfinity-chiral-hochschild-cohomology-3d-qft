@@ -391,8 +391,8 @@ Print["m_3(T,T,T) = ", m3Result];
 (* Define W_3 W-W lambda-bracket *)
 W3LambdaBracket[c_, lambda_] :=
   c/360 / lambda^5 + T/3 / lambda^3 + D[T, z]/2 / lambda^2
-  + (3/10 * D[T, {z, 2}] + 32/(5*c)) / lambda
-  + 1/15 * D[T, {z, 3}] + 32/(5*c) * T * D[T, z];
+  + (3/10 * D[T, {z, 2}] + 32/(5*c + 22)) / lambda
+  + 1/15 * D[T, {z, 3}] + 32/(5*c + 22) * T * D[T, z];
 
 (* Expand *)
 m2WWsing = ExpandLambdaBracket[W3LambdaBracket[c, lambda], lambda, 7];
@@ -568,4 +568,176 @@ and computes the explicit weight-$4$ structure constant
 c_{334}^2=\frac{42c^2(5c+22)}{(c+24)(7c+68)(3c+46)}.
 \]
 \end{remark}
+
+%% ------------------------------------------------------------------
+%%  W_4 and W_5: explicit shadow depth analysis
+%% ------------------------------------------------------------------
+
+\subsection{$\mathcal{W}_4$ and $\mathcal{W}_5$:
+Explicit Shadow Depth Analysis}
+\label{subsec:w4-w5-analysis}
+
+Theorem~\ref{thm:wn-class-M} establishes Class~$\mathbf{M}$
+for all $\mathcal{W}_N$ uniformly via the Virasoro sub-sector.
+Here we give explicit computations for $\mathcal{W}_4$
+(spins $2,3,4$) and $\mathcal{W}_5$ (spins $2,3,4,5$),
+exhibiting the OPE pole structure, interaction vertices,
+and non-vanishing ternary operation $m_3$.
+
+\subsubsection{$\mathcal{W}_4$ OPE structure and field content}
+
+The $\mathcal{W}_4$ PVA has generators $T$ (spin~$2$), $W_3$
+(spin~$3$), and $W_4$ (spin~$4$), with field pairs
+$(T, \mu)$, $(W_3, \chi_3)$, $(W_4, \chi_4)$ in the
+Khan--Zeng 3D HT action.  The OPE pole orders are:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+OPE & Max pole & $r$-matrix pole & Source \\
+\midrule
+$T(z)\,T(w)$ & $z^{-4}$ & $z^{-3}$ & Virasoro \\
+$T(z)\,W_3(w)$ & $z^{-2}$ & $z^{-1}$ & Primary, spin $3$ \\
+$T(z)\,W_4(w)$ & $z^{-2}$ & $z^{-1}$ & Primary, spin $4$ \\
+$W_3(z)\,W_3(w)$ & $z^{-6}$ & $z^{-5}$ & From $\mathcal{W}_3$ \\
+$W_3(z)\,W_4(w)$ & $z^{-7}$ & $z^{-6}$ & Cross-sector \\
+$W_4(z)\,W_4(w)$ & $z^{-8}$ & $z^{-7}$ & Highest pole \\
+\bottomrule
+\end{tabular}
+\end{center}
+The $r$-matrix poles are one lower than the OPE poles by the
+bar kernel absorption principle (AP19: the $d\log(z-w)$ kernel
+absorbs one power of $(z-w)^{-1}$).
+
+\begin{proposition}[$\mathcal{W}_4$ non-vanishing $m_3$;
+\ClaimStatusConditional]
+\label{prop:w4-m3}
+\index{W4@$\mathcal{W}_4$!ternary operation}%
+Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.
+The ternary operation $m_3$ on $\mathcal{W}_4$ satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_3(T,T,T) = m_3^{\mathrm{Vir}}(T,T,T) \ne 0$
+  \textup{(}identical to Virasoro, by sector decoupling\textup{)}.
+\item $m_3(T,T,W_3) \ne 0$, with leading term controlled by
+  the $\{T_\lambda \{T_\mu W_3\}\}$ associator.
+\item $m_3(T,T,W_4) \ne 0$, with leading term from
+  the $\{T_\lambda \{T_\mu W_4\}\}$ associator.
+\item $m_3(W_4, W_4, W_4) \ne 0$: the $W_4$ self-OPE has
+  poles up to order~$8$, producing a nonzero associator
+  from the iterated $\{W_{4\,\lambda} \{W_{4\,\mu} W_4\}\}$
+  bracket via nonlinear composite fields
+  $\Lambda = {:}TT{:} - \tfrac{3}{10}\partial^2 T$,
+  $U = {:}TW_3{:} - \ldots$, etc.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i) follows from Proposition~\ref{prop:vir-all-mk}
+and the sector decoupling~\eqref{eq:wn-sector-decoupling}.
+For parts~(ii)--(iv), the ternary operation $m_3$ is the
+negative of the associator of the $\lambda$-bracket:
+\[
+m_3(X, Y, Z;\, \lambda, \mu)
+= -A_3(X, Y, Z;\, \lambda, \mu),
+\quad
+A_3 = m_2(m_2(X, Y;\lambda),\, Z;\, \lambda+\mu)
+  - m_2(X,\, m_2(Y, Z;\mu);\, \lambda).
+\]
+
+For part~(ii), the inputs $T, T, W_3$ give:
+$A_3(T,T,W_3;\lambda,\mu)
+= \{(\partial W_3 + 2\lambda W_3 + \cdots)_{\lambda+\mu}\, W_3\}
+- \{T_\lambda\, (\partial W_3 + 3\mu W_3)\}$.
+Since $\{T_\lambda W_s\} = \partial W_s + s\lambda W_s$
+for a primary field $W_s$ of spin~$s$, the associator
+evaluates to terms involving
+$2\lambda \cdot s\mu = 2s \lambda\mu$ cross-terms that
+do not cancel (the failure of strict associativity between
+primary and stress tensor sectors).
+
+For part~(iv), $A_3(W_4, W_4, W_4;\lambda,\mu)$ involves
+the full $\{W_{4\,\lambda} W_4\}$ bracket, which contains
+terms up to $\lambda^7$ (pole order $8$ minus $1$ from bar
+kernel).  The iterated bracket
+$\{W_{4\,\lambda}\{W_{4\,\mu} W_4\}\}$ produces composite
+fields at spin~$8$ and lower, generating a nonzero
+polynomial in $\lambda, \mu$ of total degree up to $14$.
+The non-vanishing follows because the $W_4$ algebra is
+not associative at the $\lambda$-bracket level:
+the nonlinear composite field $\Lambda$ (and its
+higher-spin analogues) prevents the associator from
+vanishing, just as in the $\mathcal{W}_3$ case.
+\end{proof}
+
+\subsubsection{$\mathcal{W}_5$ structure}
+
+The $\mathcal{W}_5$ PVA adds a generator $W_5$ of spin~$5$, with
+field pair $(W_5, \chi_5)$.  The highest-pole OPE is
+$W_5(z)\,W_5(w) \sim (z-w)^{-10} + \cdots$,
+giving $r$-matrix poles up to $(z-w)^{-9}$.
+
+\begin{proposition}[$\mathcal{W}_5$ shadow depth;
+\ClaimStatusConditional]
+\label{prop:w5-shadow-depth}
+\index{W5@$\mathcal{W}_5$!shadow depth}%
+Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.
+The $\mathcal{W}_5$ algebra has:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_k(T, \ldots, T) \ne 0$ for all $k \ge 3$
+  \textup{(}from Theorem~\textup{\ref{thm:wn-class-M})}.
+\item At arity~$k$, the maximum loop order is
+  $\lfloor (k-1)(s_{\max}-1)/k \rfloor$ from the
+  $W_5$-sector, where $s_{\max} = 5$.
+\item The complementarity constant is
+  $\alpha_5 = 488$, with self-dual point $c = 244$.
+\item $\dim H^1(C^*_{\mathrm{ch}}(\mathcal{W}_5,
+  \mathcal{W}_5)) = 4$, with basis
+  $\{\partial_c T, \partial_c W_3, \partial_c W_4,
+  \partial_c W_5\}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i) is Theorem~\ref{thm:wn-class-M}.
+Part~(iii) is Proposition~\ref{prop:wn-complementarity}
+at $N = 5$: $\alpha_5 = 2 \cdot 4 \cdot (50 + 10 + 1) = 488$.
+Part~(iv) follows from the same argument as
+Computation~\ref{comp:bulk-wn}: $\mathcal{W}_5$ is simple
+for generic~$c$, so every outer derivation is generated by
+$\partial_c$ acting on each generator.
+\end{proof}
+
+\subsubsection{$\mathcal{W}_4$ spectral $r$-matrix}
+
+\begin{computation}[$\mathcal{W}_4$ spectral $r$-matrix;
+\ClaimStatusConditional]
+\label{comp:w4-r-matrix}
+\index{W4@$\mathcal{W}_4$!r-matrix}%
+The $\mathcal{W}_4$ $r$-matrix is a $3 \times 3$ matrix in the
+$\{T, W_3, W_4\}$ basis.  The diagonal components are:
+\begin{align}
+r^{TT}(\lambda) &= \frac{c/12}{\lambda^3}
+  + \frac{2T}{\lambda} + \frac{\partial T}{\lambda^0},
+  \\
+r^{W_3 W_3}(\lambda) &= \frac{c/360}{\lambda^5}
+  + \frac{T/3}{\lambda^3}
+  + \frac{\partial T/2}{\lambda^2}
+  + \frac{(32/(5c+22))\Lambda}{\lambda}
+  + \cdots, \\
+r^{W_4 W_4}(\lambda) &= \frac{c_4}{\lambda^7}
+  + \frac{T_4}{\lambda^5}
+  + \cdots
+  + \frac{\Xi}{\lambda} + \cdots,
+\end{align}
+where $c_4$ is the leading central coefficient of the
+$\{W_{4\,\lambda} W_4\}$ bracket, and $\Xi$ is a composite
+field of spin~$6$ built from $T$, $W_3$, $W_4$, and their
+derivatives.  The off-diagonal components encode the
+cross-OPE structure.
+
+The $r$-matrix pole orders satisfy AP19: the collision residue
+$r^{\mathrm{coll}}$ has poles one order lower than the OPE,
+so $r^{W_4 W_4}_{\mathrm{coll}}$ has poles up to
+$\lambda^{-7}$ (from the $z^{-8}$ OPE pole).
+\end{computation}
 

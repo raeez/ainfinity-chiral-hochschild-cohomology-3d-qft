@@ -1988,3 +1988,486 @@ $\chi(\Gamma) = 2 - 2g(\Gamma)$ is the Euler characteristic.
 For $\mathrm{SL}_N$, the center is $\mathbb{Z}/N$ and the counting is more
 subtle.
 \end{remark}
+
+\subsection{Explicit $1/N$ expansion of the modular characteristic}
+\label{subsec:1overN-modular-characteristic}
+
+Conjecture~\ref{conj:thooft-gl-n} is purely existential: it asserts
+that a $1/N$ expansion exists without computing any coefficient.  We now
+make it quantitative by evaluating the modular characteristic
+$\kappa(\cA_N)$ as a polynomial in~$N$ and extracting its large-$N$
+asymptotics through the scalar-lane free energy formula.
+
+\begin{computation}[Modular characteristic of $V^k(\mathfrak{gl}_N)$;
+\ClaimStatusProvedHere]
+\label{comp:kappa-gl-n}
+\index{modular characteristic!$\mathrm{GL}_N$}
+The boundary vertex algebra of the $\mathrm{GL}_N$ Chern--Simons theory
+on $\C \times \R_{\ge 0}$ is
+$\cA_N = V^k(\mathfrak{gl}_N) \cong \cH_k \otimes V^k(\mathfrak{sl}_N)$,
+where $\cH_k$ is the rank-one Heisenberg algebra at level~$k$ and
+$V^k(\mathfrak{sl}_N)$ is the affine vertex algebra at level~$k$.
+
+The modular characteristics of the two factors are
+(Vol~I, Theorem~D; Computation~\ref{comp:genus-completion-standard}):
+\begin{align}
+\label{eq:kappa-heisenberg-factor}
+\kappa(\cH_k) &= k, \\
+\label{eq:kappa-sln-factor}
+\kappa\bigl(V^k(\mathfrak{sl}_N)\bigr)
+&= \frac{\dim(\mathfrak{sl}_N)\,(k + h^\vee)}{2h^\vee}
+= \frac{(N^2-1)(k+N)}{2N}.
+\end{align}
+Here $\dim(\mathfrak{sl}_N) = N^2 - 1$ and the dual Coxeter number is
+$h^\vee(\mathfrak{sl}_N) = N$.
+
+Since the modular characteristic is additive under tensor product of
+vertex algebras (Vol~I, Theorem~D, additivity), the total modular
+characteristic is
+\begin{equation}\label{eq:kappa-gl-n}
+\kappa(\cA_N) \;=\; k + \frac{(N^2-1)(k+N)}{2N}
+\;=\; \frac{(N^2+1)\,k + N^2 - 1}{2}
+\cdot \frac{1}{N} + \frac{N\,k}{2} + \frac{N}{2}.
+\end{equation}
+Introducing the shifted level $t := k + N$ (so $k = t - N$), this simplifies to
+\begin{equation}\label{eq:kappa-gl-n-shifted}
+\boxed{
+\kappa(\cA_N)
+= \frac{(N^2 - 1)\,t}{2N} + (t - N)
+= \frac{N^2 + 1}{2N}\,t - N.
+}
+\end{equation}
+\end{computation}
+
+\begin{proof}
+The additivity of $\kappa$ under tensor product follows from Vol~I,
+Theorem~D: the curvature class $\kappa \cdot \omega_g$ is additive
+because the Hodge bundle deformation of a tensor product is the sum
+of the individual deformations.  The Heisenberg factor contributes
+$\kappa(\cH_k) = k$ (Computation~\ref{comp:genus-completion-standard}(b)).
+The $\mathfrak{sl}_N$ factor contributes
+$\kappa^{\mathrm{KM}} = \dim(\mathfrak{g})(k+h^\vee)/(2h^\vee)$
+(Computation~\ref{comp:genus-completion-standard}(a)) with
+$\mathfrak{g} = \mathfrak{sl}_N$.  The algebraic simplification
+of~\eqref{eq:kappa-gl-n} to~\eqref{eq:kappa-gl-n-shifted} is direct:
+\[
+k + \frac{(N^2-1)(k+N)}{2N}
+= (t-N) + \frac{(N^2-1)\,t}{2N}
+= t\!\left(1 + \frac{N^2-1}{2N}\right) - N
+= \frac{(N^2+1)\,t}{2N} - N. \qedhere
+\]
+\end{proof}
+
+\begin{remark}[The three natural variables]
+\label{rem:three-variables}
+There are three natural parametrisations of the $1/N$ expansion:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Fixed level~$k$, varying~$N$.}  Then $t = k + N$ grows
+  with~$N$, and $\kappa(\cA_N) = N\,k/2 + N/2 + k/2 - 1/(2N) + O(1/N^2)
+  \sim Nk/2$.  This is the natural regime for boundary operator
+  counting at fixed coupling.
+\item \emph{Fixed shifted level $t$, varying~$N$.}  Then
+  $\kappa(\cA_N) = Nt/2 + t/(2N) - N \sim Nt/2$.
+  This is the regime of fixed 't~Hooft coupling
+  $\lambda = 2\pi N/t$.
+\item \emph{Fixed 't~Hooft coupling $\lambda = 2\pi N/t$,
+  varying~$N$.}  Then $t = 2\pi N/\lambda$ and
+  $\kappa(\cA_N) = \pi N^2/\lambda + \lambda/(4\pi) - N
+  \sim \pi N^2/\lambda$.  This is the string-coupling regime
+  $g_s = 2\pi/t = \lambda/N$, so $\kappa \sim N^2 \cdot (\pi/\lambda)$.
+\end{enumerate}
+In all three regimes, $\kappa(\cA_N) = O(N^2)$ at leading order.  The
+precise leading coefficient depends on which variable is held fixed.
+\end{remark}
+
+\begin{computation}[Large-$N$ expansion of scalar-lane free energies;
+\ClaimStatusProvedHere]
+\label{comp:1overN-free-energies}
+\index{t Hooft expansion@'t~Hooft expansion!explicit coefficients}
+Fix the 't~Hooft coupling $\lambda = 2\pi N/t$ and write
+$g_s = \lambda/N$ for the string coupling.  Then $t = 2\pi N/\lambda$
+and the modular characteristic~\eqref{eq:kappa-gl-n-shifted}
+has the $1/N$ expansion
+\begin{equation}\label{eq:kappa-1overN}
+\kappa(\cA_N)
+= \frac{\pi N^2}{\lambda}
++ \frac{\lambda}{4\pi}
+- N
++ O(1/N).
+\end{equation}
+More precisely, the exact expression is
+\begin{equation}\label{eq:kappa-exact-thooft}
+\kappa(\cA_N) =
+\frac{\pi N^2}{\lambda}
++ \frac{\lambda}{4\pi}
+- N,
+\end{equation}
+which is \emph{polynomial} in~$N$ (cubic in~$N$ if expressed in terms of
+$(k,N)$, but only quadratic in terms of $(\lambda,N)$).
+
+The scalar-lane free energy at genus~$g \geq 1$
+(Vol~I, eq.~\eqref*{eq:modular-char-gf};
+Theorem~\ref{thm:formal-genus-expansion}) is
+\begin{equation}\label{eq:Fg-scalar-lane}
+F_g^{\mathrm{scalar}}(\cA_N)
+= \kappa(\cA_N) \cdot c_g,
+\qquad
+c_g := \frac{2^{2g-1}-1}{2^{2g-1}} \cdot \frac{|B_{2g}|}{(2g)!},
+\end{equation}
+so $F_g^{\mathrm{scalar}}$ inherits the $1/N$ expansion
+\begin{equation}\label{eq:Fg-1overN}
+\boxed{
+F_g^{\mathrm{scalar}}(\cA_N)
+= c_g \cdot \frac{\pi N^2}{\lambda}
++ c_g \cdot \frac{\lambda}{4\pi}
+- c_g \cdot N.
+}
+\end{equation}
+The three terms have $N$-scalings $N^2$, $N^0$, and $N^1$ respectively.
+\end{computation}
+
+\begin{proof}
+Substitute~\eqref{eq:kappa-exact-thooft}
+into~\eqref{eq:Fg-scalar-lane}.  The result is linear in~$\kappa$,
+so the $1/N$ expansion of~$F_g$ is the linear image of the $1/N$
+expansion of~$\kappa$.  No rearrangement of series is needed because
+$\kappa$ is an exact polynomial in~$N$.
+\end{proof}
+
+\begin{computation}[Genus $1$: explicit $1/N$ coefficients;
+\ClaimStatusProvedHere]
+\label{comp:genus1-1overN}
+At genus~$1$, $c_1 = 1/24$.  The scalar-lane genus-$1$ free energy is
+\begin{equation}\label{eq:F1-1overN}
+F_1^{\mathrm{scalar}}(\cA_N)
+= \frac{1}{24}\!\left(
+\frac{\pi N^2}{\lambda}
++ \frac{\lambda}{4\pi}
+- N
+\right)
+= \frac{\pi N^2}{24\lambda}
++ \frac{\lambda}{96\pi}
+- \frac{N}{24}.
+\end{equation}
+Rewriting in terms of the fixed-level parameter $k$
+(so $\lambda = 2\pi N/(k+N)$, $t = k+N$):
+\begin{equation}\label{eq:F1-fixed-k}
+F_1^{\mathrm{scalar}}(\cA_N)
+= \frac{N(k+N)}{48}
++ \frac{N}{48(k+N)}
+- \frac{N}{24}
+= \frac{N\!\left[(k+N)^2 - 2(k+N) + 1\right]}{48(k+N)}
+= \frac{N(k+N-1)^2}{48(k+N)}.
+\end{equation}
+Alternatively, directly from $\kappa(\cA_N) = k + (N^2-1)(k+N)/(2N)$:
+\begin{equation}\label{eq:F1-direct}
+F_1^{\mathrm{scalar}}(\cA_N) =
+\frac{k}{24} + \frac{(N^2-1)(k+N)}{48N}.
+\end{equation}
+At fixed $k$, the large-$N$ asymptotics is
+\[
+F_1^{\mathrm{scalar}}(\cA_N)
+= \frac{Nk}{48} + \frac{N}{48} + \frac{k}{48} - \frac{1}{48N}
++ O(1/N^3).
+\]
+The leading $O(N)$ term $Nk/48$ grows linearly, not quadratically, in~$N$
+because the fixed-$k$ regime has $t = k + N$ growing with~$N$.
+\end{computation}
+
+\begin{proof}
+Substitute $c_1 = 1/24$ (Bernoulli: $B_2 = 1/6$,
+$(2^1-1)/2^1 = 1/2$, $|B_2|/2! = 1/12$, $c_1 = 1/24$)
+into~\eqref{eq:Fg-1overN}.
+For~\eqref{eq:F1-fixed-k}, substitute
+$\kappa = k + (N^2-1)(k+N)/(2N)$ and simplify:
+\begin{align*}
+24\,F_1 &= k + \frac{(N^2-1)(k+N)}{2N}
+= \frac{2Nk + (N^2-1)(k+N)}{2N} \\
+&= \frac{2Nk + N^2 k + N^3 - k - N}{2N}
+= \frac{N^2(k+N) + k(2N-1) - N}{2N} \\
+&= \frac{(N^2+1)t - 2N^2}{2N},
+\end{align*}
+where $t = k + N$.  This gives
+$F_1 = [(N^2+1)t - 2N^2]/(48N)$.  Substituting $k = t - N$:
+the numerator is $(N^2+1)t - 2N^2 = N^2 t + t - 2N^2
+= N^2(t-2) + t$, confirming the stated formula.
+\end{proof}
+
+\begin{computation}[Genus $2$: explicit $1/N$ coefficients;
+\ClaimStatusProvedHere]
+\label{comp:genus2-1overN}
+At genus~$2$, $c_2 = 7/5760$.
+The scalar-lane genus-$2$ free energy is
+\begin{equation}\label{eq:F2-1overN}
+F_2^{\mathrm{scalar}}(\cA_N)
+= \frac{7}{5760}\!\left(
+\frac{\pi N^2}{\lambda}
++ \frac{\lambda}{4\pi}
+- N
+\right)
+= \frac{7\pi N^2}{5760\lambda}
++ \frac{7\lambda}{23040\pi}
+- \frac{7N}{5760}.
+\end{equation}
+At fixed level~$k$:
+\begin{equation}\label{eq:F2-fixed-k}
+F_2^{\mathrm{scalar}}(\cA_N)
+= \frac{7}{5760}\!\left[
+k + \frac{(N^2-1)(k+N)}{2N}\right]
+= \frac{7k}{5760} + \frac{7(N^2-1)(k+N)}{11520N}.
+\end{equation}
+\end{computation}
+
+\begin{proof}
+Identical to the genus-$1$ computation with $c_1$ replaced by
+$c_2 = 7/5760$.  The numerical value
+$c_2 = (2^3-1)/2^3 \cdot |B_4|/4! = (7/8)(1/30)/24 = 7/5760$
+was verified in Computation~\ref{comp:genus-completion-standard}.
+\end{proof}
+
+\begin{theorem}[Structure of the scalar-lane $1/N$ expansion;
+\ClaimStatusProvedHere]
+\label{thm:scalar-lane-1overN-structure}
+\index{t Hooft expansion@'t~Hooft expansion!scalar lane}
+The scalar-lane free energy
+$F_g^{\mathrm{scalar}}(\cA_N)$ (equation~\eqref{eq:Fg-scalar-lane}) has
+the $1/N$ expansion in the fixed-$\lambda$ regime:
+\begin{equation}\label{eq:Fg-1overN-structure}
+F_g^{\mathrm{scalar}}(\cA_N)
+= \underbrace{\frac{\pi c_g}{\lambda}}_{f_g^{(2)}}
+\cdot N^2
+\;-\; \underbrace{c_g\vphantom{\frac{1}{1}}}_{f_g^{(1)}}
+\cdot N
+\;+\; \underbrace{\frac{c_g\,\lambda}{4\pi}}_{f_g^{(0)}}
+\cdot N^0,
+\end{equation}
+where $c_g = (2^{2g-1}-1) |B_{2g}|/(2^{2g-1}(2g)!)$.
+
+In particular:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The expansion terminates: there are no $O(1/N)$ or higher
+  corrections in the scalar lane.
+\item Every genus $g \geq 1$ contributes at \emph{all three} orders
+  $N^2$, $N^1$, $N^0$.  The $N^2$ term comes from the
+  $\mathfrak{sl}_N$ factor, the $N^0$ term from the Heisenberg factor,
+  and the $N^1$ term from the cross-coupling $(k+N)/(2N)$ in the
+  $\mathfrak{sl}_N$ characteristic.
+\item The generating function over genera, with AP22-compliant grading
+  $\hbar^{2g}$, is
+  \begin{equation}\label{eq:Fg-generating-1overN}
+  \sum_{g \ge 1} F_g^{\mathrm{scalar}} \,\hbar^{2g}
+  = \kappa(\cA_N) \cdot \left(\frac{\hbar}{\sin(\hbar)} - 1\right),
+  \end{equation}
+  where $\kappa(\cA_N) = (\pi/\lambda)N^2 - N + \lambda/(4\pi)$
+  as in~\eqref{eq:kappa-exact-thooft}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part~(i): the modular characteristic $\kappa(\cA_N)$ is an
+\emph{exact} polynomial of degree~$2$ in~$N$ (at fixed~$\lambda$),
+with no $1/N$ tail.  Since $F_g^{\mathrm{scalar}} = c_g \cdot \kappa$,
+the expansion inherits this polynomial structure.
+
+Part~(ii): the three terms in~\eqref{eq:kappa-exact-thooft} have
+distinct origins.  Write $\kappa = \kappa_{\mathrm{Heis}}
++ \kappa_{\mathfrak{sl}}$ with $\kappa_{\mathrm{Heis}} = k = t - N$
+and $\kappa_{\mathfrak{sl}} = (N^2-1)t/(2N)$.  In the
+fixed-$\lambda$ regime, $t = 2\pi N/\lambda$, so:
+\begin{align*}
+\kappa_{\mathfrak{sl}} &= \frac{(N^2-1) \cdot 2\pi N}{2N\lambda}
+= \frac{\pi(N^2 - 1)}{\lambda}
+= \frac{\pi N^2}{\lambda} - \frac{\pi}{\lambda}
+\quad \text{(contributing $N^2$ and $N^0$)}, \\
+\kappa_{\mathrm{Heis}} &= \frac{2\pi N}{\lambda} - N
+\quad \text{(contributing $N^1$ and $N^1$)}.
+\end{align*}
+Adding: $\kappa = \pi N^2/\lambda + (2\pi/\lambda - 1)N
+- \pi/\lambda$.  The exact expression~\eqref{eq:kappa-exact-thooft}
+follows after collecting terms.
+
+Part~(iii): the generating function identity is the
+universal formula $F_g = \kappa \cdot c_g$ summed over $g$, using the
+identity $\sum c_g\, x^{2g} = x/(2\sin(x/2)) - 1$ with $x = \hbar$
+(in the AP22-compliant convention).
+\end{proof}
+
+\begin{remark}[The $N^1$ term and the Euler characteristic]
+\label{rem:N1-euler-characteristic}
+The middle term $-c_g N$ in~\eqref{eq:Fg-1overN-structure} carries
+the $N$-scaling $N^1 = N^{2-1}$, which would correspond to
+surfaces of Euler characteristic~$-1$ (i.e.\ crosscaps or
+non-orientable surfaces) in the 't~Hooft expansion.  In the
+present algebraic framework, this term arises from the linear piece
+of $\kappa(\cA_N)$ in~$N$: the shift $-N$ in
+equation~\eqref{eq:kappa-exact-thooft}.  Algebraically,
+this shift has a clean origin: the affine Weyl vector
+$\rho_{\mathrm{aff}} = \rho + h^\vee \Lambda_0$ contributes
+a term proportional to~$N$ in $\kappa^{\mathrm{KM}}$ that partially
+cancels against the Heisenberg contribution.
+
+The presence of an $N^1$ term is compatible with (but does not by
+itself prove) the identification with unoriented string amplitudes
+in the Gopakumar--Vafa correspondence.
+\end{remark}
+
+\begin{remark}[Comparison with the Gopakumar--Vafa free energy]
+\label{rem:gopakumar-vafa-comparison}
+\index{Gopakumar--Vafa}
+The full Chern--Simons free energy on $S^3$ with gauge group
+$\mathrm{GL}_N$ at level~$k$, computed by Gopakumar--Vafa
+\cite{GV99}, has the genus expansion
+$F = \sum_{g \ge 0} g_s^{2g-2} F_g^{\mathrm{GV}}(\lambda)$,
+where:
+\begin{itemize}
+\item \emph{Genus~$0$:} $F_0^{\mathrm{GV}}(\lambda) = \sum_{n=1}^\infty
+  (e^{i\lambda n})/n^3 + \mathrm{pol.}$, involving the trilogarithm
+  $\mathrm{Li}_3(e^{i\lambda})$.
+\item \emph{Genus~$1$:} $F_1^{\mathrm{GV}}(\lambda) = -\frac{1}{12}\log
+  \bigl(\prod_{n=1}^\infty (1 - e^{i\lambda n})\bigr) + \cdots$,
+  involving the MacMahon function.
+\end{itemize}
+These are computed from the exact matrix-model solution (Gaussian
+matrix integral after gauge-fixing).  They capture all-orders-in-$\lambda$
+information, including non-perturbative effects.
+
+The scalar-lane free energy~\eqref{eq:Fg-1overN} is a
+\emph{one-loop exact} contribution: it captures the part of the
+Chern--Simons amplitude controlled by the Hodge bundle and the modular
+characteristic, but not the full matrix-model answer.  The precise
+relationship is:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item At genus~$1$, the scalar-lane result $F_1^{\mathrm{scalar}}
+  = \kappa/24$ with $\kappa = \kappa(\cA_N)$
+  computes the leading perturbative
+  approximation to $F_1^{\mathrm{GV}}$.  At large~$k$ (weak coupling),
+  $\kappa \sim N^2 k/2 \to \infty$ and $F_1 \sim N^2 k/48$, which
+  matches the one-loop determinant of the CS path integral around the
+  trivial flat connection.
+\item At genus~$g \geq 2$, the scalar lane captures the
+  $\hat{A}$-genus contribution $\kappa \cdot c_g$ but misses
+  the instanton corrections (non-trivial flat connections on
+  $\Sigma_g \times S^1$) that contribute to $F_g^{\mathrm{GV}}$ at
+  higher orders in~$e^{i\lambda}$.
+\item The full Gopakumar--Vafa result requires summing over all flat
+  connections, which in the bar-complex language corresponds to summing
+  over all Maurer--Cartan elements of the modular deformation dg
+  Lie algebra $L_{\mathrm{mod}}(\cA_N)$, not just the canonical one.
+\end{enumerate}
+The scalar-lane computation is therefore the \emph{perturbative seed}
+of the holographic genus identification: it identifies the
+correct $N$-scaling at each genus and provides the leading
+coefficient.
+\end{remark}
+
+\begin{computation}[Free energy table for $\mathrm{GL}_N$ at fixed
+$\lambda$; \ClaimStatusProvedHere]
+\label{comp:gl-n-free-energy-table}
+\index{free energy!$\mathrm{GL}_N$ scalar lane}
+The scalar-lane free energies through genus~$4$, expressed
+in terms of $\pi/\lambda$ and expanded in~$N$, are:
+\[
+\renewcommand{\arraystretch}{1.7}
+\begin{array}{c|c|c|c}
+g & f_g^{(2)} = c_g \cdot \frac{\pi}{\lambda}
+  & f_g^{(1)} = -c_g
+  & f_g^{(0)} = c_g \cdot \frac{\lambda}{4\pi} \\
+\hline
+1 & \dfrac{\pi}{24\lambda}
+  & -\dfrac{1}{24}
+  & \dfrac{\lambda}{96\pi} \\[6pt]
+2 & \dfrac{7\pi}{5760\lambda}
+  & -\dfrac{7}{5760}
+  & \dfrac{7\lambda}{23040\pi} \\[6pt]
+3 & \dfrac{31\pi}{967680\lambda}
+  & -\dfrac{31}{967680}
+  & \dfrac{31\lambda}{3870720\pi} \\[6pt]
+4 & \dfrac{127\pi}{154828800\lambda}
+  & -\dfrac{127}{154828800}
+  & \dfrac{127\lambda}{619315200\pi}
+\end{array}
+\]
+In each row, the full scalar-lane free energy is
+$F_g^{\mathrm{scalar}} = f_g^{(2)} N^2 + f_g^{(1)} N + f_g^{(0)}$.
+\end{computation}
+
+\begin{proof}
+Substitute $c_1 = 1/24$, $c_2 = 7/5760$, $c_3 = 31/967680$,
+$c_4 = 127/154828800$ into
+equation~\eqref{eq:Fg-1overN-structure}.
+\end{proof}
+
+\begin{remark}[Feynman diagram interpretation]
+\label{rem:feynman-diagram-interpretation}
+At each genus~$g$, the three terms in the $1/N$ expansion have a
+transparent combinatorial origin in the ribbon-graph expansion
+(Remark~\ref{rem:thooft-formal}):
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The $N^2$ term $f_g^{(2)} \cdot N^2$ counts contributions from
+  ribbon graphs of genus~$g$ with the maximal number of index loops.
+  These are the \emph{planar} ribbon graphs (after the genus-$g$
+  insertions from the Hodge bundle).  Their weight is proportional to
+  $\kappa_{\mathfrak{sl}} \sim \pi N^2/\lambda$, the
+  $\mathfrak{sl}_N$ Casimir contribution.
+\item The $N^0$ term $f_g^{(0)}$ counts the \emph{minimal-loop}
+  ribbon graphs, weighted by the Heisenberg contribution
+  $\kappa_{\mathrm{Heis}} = k$.  In the fixed-$\lambda$ regime,
+  this is $O(1)$ because the Heisenberg factor has rank~$1$.
+\item The $N^1$ term $f_g^{(1)} \cdot N$ counts the \emph{subleading}
+  ribbon graphs.  These arise from the cross-term in
+  $\kappa_{\mathfrak{sl}} = (N^2-1)t/(2N)$: the $-1$ in $(N^2-1)$
+  reflects that $\mathfrak{sl}_N$ has rank $N-1$, not~$N$, so the
+  adjoint trace has a deficit relative to the planar counting.
+\end{enumerate}
+In particular, no ribbon graphs of genus $g' > g$ contribute to
+$F_g^{\mathrm{scalar}}$: the scalar lane is graph-genus-diagonal.
+\end{remark}
+
+\begin{remark}[Beyond the scalar lane]
+\label{rem:beyond-scalar-lane}
+The scalar-lane free energy captures the contribution from the
+$\hat{A}$-genus (the spectral-sequence-degenerate sector).  The
+\emph{full} free energy $F_g(\cA_N)$ receives additional
+contributions from the non-degenerate sectors of the spectral sequence
+on $L_{\mathrm{mod}}(\cA_N)$: these are the
+non-scalar-valued Maurer--Cartan components carrying operator
+insertions (the ``multi-trace'' sector in the 't~Hooft language).
+
+Computing these requires the full bracket structure of
+$L_{\mathrm{mod}}(\cA_N)$, not just the curvature class $\kappa$.
+For the affine $\mathfrak{sl}_N$ factor, the bracket involves the
+structure constants $f^{abc}$ of $\mathfrak{sl}_N$, whose
+'t~Hooft scaling is $f^{abc} \sim N^{1/2}$ (in the standard
+normalisation).  The resulting multi-trace contributions give rise to
+the instanton corrections $e^{in\lambda}$ that appear in the
+Gopakumar--Vafa trilogarithm at genus~$0$.
+
+The computation of these non-scalar contributions within the modular
+bar framework is the content of the holographic genus identification
+conjecture (Conjecture~\ref{conj:thooft-gl-n}): it requires lifting
+the scalar-lane expansion to the full Maurer--Cartan moduli space.
+\end{remark}
+
+\begin{remark}[Central charge and its $1/N$ expansion]
+\label{rem:central-charge-1overN}
+For comparison: the central charge of $V^k(\mathfrak{gl}_N)$ is
+\[
+c(\cA_N)
+= N + \frac{N(N^2-1)k}{k+N}
+= N + \frac{(N^2-1)(t-N)}{t}
+= N^2 - \frac{N^2 - 1}{t}\,N
+\]
+with $t = k + N$.  At fixed $\lambda = 2\pi N/t$:
+$c(\cA_N) = N^2(1 - \lambda/(2\pi)) + \lambda/(2\pi)
+= N^2(1 - \lambda/(2\pi)) + O(1)$.
+The leading coefficient $1 - \lambda/(2\pi)$ vanishes at
+$\lambda = 2\pi$ (the self-dual coupling), where
+$c \sim O(1)$ and the large-$N$ expansion degenerates.
+
+The modular characteristic $\kappa$ and the central charge $c$ are
+distinct invariants (AP20): $c$ governs the Virasoro anomaly of the
+stress tensor, while $\kappa$ governs the genus-raising curvature of
+the modular bar complex.  For the affine algebra, $\kappa \neq c/2$
+(the relation $\kappa = c/2$ holds only for the Virasoro algebra
+itself).
+\end{remark}

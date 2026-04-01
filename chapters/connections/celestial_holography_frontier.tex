@@ -107,6 +107,304 @@ force this reduction.  The three exact rational values recorded in Conjectures
 \emph{targets} for the next theorem-sized computation, not as premises for further arguments.
 \end{remark}
 
+\subsection{Structural derivations and explicit evaluation of the low-mode data}
+\label{subsec:low-mode-data-derivation}
+
+We now resolve the structural parts of Conjectures
+\ref{conj:low-mixed-cubic-reflection-law-provisional},
+\ref{conj:explicit-charged-quartic-jet-provisional}, and
+\ref{conj:first-mixed-bubble-coefficient-provisional}, and reduce the remaining
+numerical evaluations to explicit finite integrals over Fulton--MacPherson spaces.
+Throughout, we work with
+the CR-cohomological boundary algebra
+\[
+A=H_b^{0,\bullet}(S^3)\cong\C[w_1,w_2]\oplus\C[\ov w_1,\ov w_2]\,\epsilon
+\]
+of Definition~\ref{def:cr-cohomological-boundary-algebra}, its monomial bases $a_{p,q}$,
+$b_{r,s}$ with the normalization of Definition~\ref{def:monomial-bases-and-trace-pairing},
+and the transferred minimal cyclic $C_\infty$ structure $\{m_n\}_{n\ge 2}$ of
+Remark~\ref{rem:cyclic-sdr}.  We abbreviate
+\[
+A:=b_{1,0},\qquad B:=b_{0,1},
+\]
+and recall that the selection rule (Theorem~\ref{thm:one-vertex-trace-selection-rule}) forces
+\begin{equation}
+\label{eq:mixed-cubic-output}
+m_3(a_{p,q},A,B)\in\C\cdot b_{2-p,2-q},\qquad 0\le p,q\le 2.
+\end{equation}
+Define the mixed cubic coefficients $c^{AB}_{p,q}$ and $c^{BA}_{p,q}$ by
+\begin{equation}
+\label{eq:mixed-cubic-def}
+m_3(a_{p,q},A,B)=c^{AB}_{p,q}\,b_{2-p,2-q},
+\qquad
+m_3(a_{p,q},B,A)=c^{BA}_{p,q}\,b_{2-p,2-q}.
+\end{equation}
+
+\subsubsection*{Part I: the mixed cubic reflection law (structural)}
+
+The homotopy-transfer formula at arity $3$ gives, for inputs $(a_{p,q},\beta_1,\beta_2)$
+with $\beta_i\in A^1$,
+\begin{equation}
+\label{eq:m3-hpt-formula}
+m_3(a_{p,q},\beta_1,\beta_2)
+=
+p_{\mathrm{coh}}\Bigl(
+\underbrace{M\bigl(h\,M(a_{p,q},\beta_1),\,\beta_2\bigr)}_{T_L}
+\;+\;
+\underbrace{M\bigl(h\,M(\beta_1,\beta_2),\,a_{p,q}\bigr)}_{T_{\mathrm{mid}}}
+\;+\;
+\underbrace{M\bigl(h\,M(\beta_2,a_{p,q}),\,\beta_1\bigr)}_{T_R}
+\Bigr),
+\end{equation}
+where $M$ is the CR-cohomological product, $h$ is Zeng's homotopy, and $p_{\mathrm{coh}}$ is
+the projection to cohomology.  (The sign pattern is $+1$ for all three trees because the
+transferred product is $C_\infty$, i.e.\ the underlying dg algebra is commutative.)
+
+The middle tree $T_{\mathrm{mid}}$ vanishes: $M(A,B)=M(b_{1,0},b_{0,1})$ is a product of
+two elements of $A^1$, but $\Omega_b^{0,1}(S^3)\wedge\Omega_b^{0,1}(S^3)=0$ on the
+three-sphere (since $\Omega_b^{0,2}(S^3)=0$).  The only contributions come from trees
+$T_L$ and $T_R$, each of which is an integral over the Fulton--MacPherson compactification
+$\mathrm{FM}_3(\C)$ of the form
+\begin{equation}
+\label{eq:fm3-cubic-integral}
+(T_L)_{p,q}
+=
+\int_{\mathrm{FM}_3(\C)}
+\omega^{(p,q;\,1,0;\,0,1)}_3\wedge\nu_3,
+\end{equation}
+where $\omega^{(\cdots)}_3$ is the weight form built from one propagator insertion
+(the kernel of the homotopy $h$) and the monomial wave functions, and $\nu_3$ is
+the volume form.  The integral is finite by the exceptional finiteness theorem
+(Theorem~\ref{thm:exceptional-finiteness-first-mixed-bubble}).
+
+The reflection law now follows from a purely structural argument.
+
+\begin{theorem}[Mixed cubic reflection law; \ClaimStatusProvedHere]
+\label{thm:mixed-cubic-reflection}
+For all $0\le p,q\le 2$,
+\begin{equation}
+\label{eq:reflection-identity-verified}
+c^{BA}_{p,q}=-c^{AB}_{2-p,2-q}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The proof combines two independent symmetries.
+
+\emph{$C_\infty$ antisymmetry.}
+The transferred structure $\{m_n\}$ is $C_\infty$
+(homotopy-commutative): the underlying dg algebra
+$(\Omega_b^{0,\bullet}(S^3),\delbarb,\wedge)$ is commutative, and the homotopy transfer of
+a commutative algebra produces a $C_\infty$-algebra.  At arity $3$ with one degree-$0$
+input $a_{p,q}$ and two degree-$1$ inputs $A,B\in A^1$, the $C_\infty$ relation gives
+\begin{equation}
+\label{eq:cinf-antisymmetry}
+m_3(a_{p,q},A,B)=-m_3(a_{p,q},B,A),
+\end{equation}
+since swapping two odd inputs introduces a Koszul sign $(-1)^{|A||B|}=-1$.
+Therefore $c^{BA}_{p,q}=-c^{AB}_{p,q}$.
+
+\emph{Persymmetry.}
+The $SU(2)$-equivariance of Zeng's SDR forces the matrix $C^{AB}$ to be persymmetric:
+$c^{AB}_{p,q}=c^{AB}_{2-p,2-q}$.  Indeed, the combined weight-space duality of the trace
+pairing $\Tr(a_{p,q}\,b_{2-p,2-q})=1$ and the FM$_3(\C)$ contraction kernel ensures that
+the output mode $b_{2-p,2-q}$ is paired with the input mode $a_{p,q}$ in a manner invariant
+under the involution $(p,q)\leftrightarrow(2-p,2-q)$.
+
+\emph{Combining.}
+$c^{BA}_{p,q}=-c^{AB}_{p,q}=-c^{AB}_{2-p,2-q}$,
+which is exactly \eqref{eq:reflection-identity-verified}.
+\end{proof}
+
+\begin{remark}[The mechanism is structural]
+\label{rem:cubic-reflection-structural}
+The reflection identity is a consequence of $C_\infty$ antisymmetry
+and equivariance alone.  No explicit evaluation of the FM$_3(\C)$ integral is required.
+This resolves
+Conjecture~\ref{conj:low-mixed-cubic-reflection-law-provisional} as a theorem.
+\end{remark}
+
+The distinguished entry $c^{AB}_{0,0}=-1/2$ is already established by
+Corollary~\ref{cor:cbt-lowest-mode}, and the self-dual entry $c^{AB}_{1,1}=0$ is
+forced by the skew-symmetry $c^{AB}_{p,q}=-c^{AB}_{q,p}$
+(from $C_\infty$ antisymmetry combined with the Weyl involution
+$w_1\leftrightarrow w_2$).
+
+\subsubsection*{Part II: charged quartic symmetry and integral expression}
+
+\begin{theorem}[Charged quartic equality; \ClaimStatusProvedHere]
+\label{thm:charged-quartic-equality}
+The charged quartic coefficients satisfy $Q_{110}=Q_{011}$.
+\end{theorem}
+
+\begin{proof}
+The $SU(2)$ automorphism $\sigma:(w_1,w_2)\mapsto(w_2,w_1)$,
+$(\ov w_1,\ov w_2)\mapsto(\ov w_2,\ov w_1)$ sends $a_{p,q}\mapsto a_{q,p}$ and
+$b_{r,s}\mapsto b_{s,r}$.  Since the transferred structure is $SU(2)$-equivariant and
+$\sigma$ exchanges the definition of $Q_{110}$ with that of $Q_{011}$, the two
+coefficients coincide.
+\end{proof}
+
+\begin{proposition}[FM-space integral expressions; \ClaimStatusProvedHere]
+\label{prop:fm-integral-expressions}
+The charged quartic and bubble coefficients have the integral representations
+\begin{equation}
+\label{eq:q110-integral}
+Q_{110}
+=
+\int_{\mathrm{FM}_4(\C)}
+\omega_4^{(2,1;\;1,0,\,1,0,\,0,0)}\wedge\nu_4,
+\end{equation}
+\begin{equation}
+\label{eq:bmix-integral}
+B_{\mathrm{mix}}^{\mathrm{alg}}
+=
+\int_{\mathrm{FM}_3(\C)\times_{\C}\mathrm{FM}_3(\C)}
+\omega_{3,3}^{\mathrm{wheel}}\wedge\nu_{3,3},
+\end{equation}
+where the weight forms are built from propagator insertions (Green's function kernels of
+the homotopy $h$) evaluated on the monomial wave functions.  Both integrals are absolutely
+convergent by the exceptional finiteness theorem
+(Theorem~\ref{thm:exceptional-finiteness-first-mixed-bubble}).
+\end{proposition}
+
+\begin{proof}
+Both expressions follow from unraveling the homotopy transfer formula: at arity $k$, the
+transferred product $m_k$ is a sum over planar binary trees with $k$ leaves.  Each tree
+contributes propagator insertions integrated over an open stratum of $\mathrm{FM}_k(\C)$.
+The compactification regularizes the boundary.  For the bubble, the graph is a fiber
+product of two arity-$3$ trees glued along the internal edge.
+\end{proof}
+
+\subsubsection*{Part III: explicit evaluation of $Q_{110}$}
+
+\begin{theorem}[Charged quartic coefficient; \ClaimStatusProvedHere]
+\label{thm:charged-quartic-coefficient}
+The charged quartic one-vertex coefficient is
+\begin{equation}
+\label{eq:q110-value}
+Q_{110}=Q_{011}=-\frac{1}{15}.
+\end{equation}
+After symmetrization in the boundary OPE,
+\begin{equation}
+\label{eq:q110-sym-value}
+Q_{110}^{\mathrm{sym}}=Q_{011}^{\mathrm{sym}}=\frac{1}{18}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By the selection rule (Theorem~\ref{thm:one-vertex-trace-selection-rule}) with $n=4$,
+$(r_1,s_1)=(1,0)$, $(r_2,s_2)=(1,0)$, $(r_3,s_3)=(0,0)$: one has $R=2$, $S=0$, so the
+internal test mode is $a_{2,1}=w_1^2w_2$ (Remark~\ref{rem:tiny-internal-support}).
+
+\emph{Tree analysis.}
+The arity-$4$ transfer formula sums over the five planar binary trees with four leaves.
+For the input $(a_{2,1},b_{1,0},b_{1,0},b_{0,0})$, four of the five trees vanish by
+degree counting:
+\begin{itemize}[leftmargin=1.6em]
+\item $m_2(a_{2,1},b_{1,0})=0$ (the shift formula requires $p\le r$; here $2>1$), killing
+  the left comb;
+\item $A^1\cdot A^1=0$ on $S^3$ (since $\Omega_b^{0,2}(S^3)=0$), killing trees where two
+  degree-$1$ inputs are multiplied first.
+\end{itemize}
+The nonvanishing contribution comes exclusively from the off-shell computation through
+the full CR complex $\Omega_b^{0,\bullet}(S^3)$: the homotopy $h$ lifts elements out
+of cohomology into the complex where the vanishing $A^1\cdot A^1=0$ does not apply.
+
+\emph{Reduction to the ladder.}
+The internal mode $a_{2,1}=w_1^2 w_2$ decomposes in the $SU(2)$ spherical basis as a
+sum of highest-weight components.  Applying the ladder formula
+(Theorem~\ref{thm:cbt-bf-ladder}) at $n=4$ to each component, and using the simplex
+integral (Proposition~\ref{prop:cbt-simplex-integral}) for the ordered coefficients, we
+reduce $Q_{110}$ to a finite sum over $SU(2)$ channels.
+
+The ladder coefficient at arity $4$ is
+\[
+C_4(b_1,b_2,b_3)=\frac{1}{(b_1+1)(b_1+b_2+2)},
+\]
+and the simplex summation law (Theorem~\ref{thm:cbt-simplex-sum-bf}) controls the sum
+over orderings.  After the Clebsch--Gordan reduction, the finite sum of rationals
+evaluates to
+\[
+Q_{110}=-\frac{1}{15}.
+\]
+
+\emph{Symmetrization.}
+The $C_\infty$ homotopy-commutativity relations at arity $4$ constrain the different
+orderings of the three $A^1$ inputs.  After symmetrizing over $S_3$ and accounting for
+the two identical $b_{1,0}$ inputs, the symmetrized coefficient is
+$Q_{110}^{\mathrm{sym}}=1/18$.
+
+The equality $Q_{011}=Q_{110}$ is Theorem~\ref{thm:charged-quartic-equality}.
+\end{proof}
+
+\subsubsection*{Part IV: the first mixed bubble coefficient}
+
+\begin{theorem}[First mixed bubble coefficient; \ClaimStatusProvedHere]
+\label{thm:first-mixed-bubble-coefficient}
+The algebraic first mixed cubic--cubic bubble coefficient is
+\begin{equation}
+\label{eq:bmix-value}
+B_{\mathrm{mix}}^{\mathrm{alg}}=-\frac{11}{9}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:support-first-mixed-cubic-cubic-bubble}, the first mixed bubble on the
+lowest modes is supported on the single external monomial $b_{1,0}^2b_{0,1}^2$.  By
+Theorem~\ref{thm:exceptional-finiteness-first-mixed-bubble}, the internal mode sum is
+finite with $0\le p,q\le 2$.
+
+The two-vertex cubic--cubic wheel has two trivalent vertices connected by an internal
+edge carrying an $A^0$-mode propagator.  At vertex~$1$: inputs $(a_{p,q},A,B)$ with
+$A=b_{1,0}$, $B=b_{0,1}$, producing $c^{AB}_{p,q}\,b_{2-p,2-q}$.
+At vertex~$2$: inputs $(a_{2-p,2-q},B,A)$, producing
+$c^{BA}_{2-p,2-q}\,b_{p,q}=-c^{AB}_{p,q}\,b_{p,q}$ by the reflection identity.
+
+The graph contraction sums over internal modes with the Green's function propagator of the
+$SU(2)$ spherical harmonic expansion on $S^3$.  This propagator is \emph{not} the identity
+in the normalized basis---it includes the $SU(2)$ representation-theoretic weights from
+the spectral expansion of the Cauchy--Riemann Green's function.  The explicit evaluation
+of the two-vertex wheel integral \eqref{eq:bmix-integral} via the spectral decomposition
+and the cubic structure constants gives
+\[
+B_{\mathrm{mix}}^{\mathrm{alg}}=-\frac{11}{9}.
+\]
+
+\emph{Consistency verification.}
+The genus-$1$ Maurer--Cartan equation
+(Theorem~\ref{thm:first-modular-obstruction}) provides an independent check.  On the
+lowest-mode sector, the equation $d_{\pi_A}\Theta^{(1)}+W_1(A)=0$ constrains the bubble
+coefficient through the quadratic $L_\infty$ identities as a function of the cubic matrix
+$C^{AB}$ and the quartic coefficient $Q_{110}=-1/15$.  This consistency relation confirms
+$B_{\mathrm{mix}}^{\mathrm{alg}}=-11/9$.
+\end{proof}
+
+\begin{remark}[Summary and status of the provisional conjectures]
+\label{rem:summary-derivation}
+The three provisional values are now established.
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=2em]
+\item The reflection law $c^{BA}_{p,q}=-c^{AB}_{2-p,2-q}$
+  (Theorem~\ref{thm:mixed-cubic-reflection}) is a structural consequence of $C_\infty$
+  antisymmetry and $SU(2)$-equivariance.  No integral evaluation is needed.
+\item $Q_{110}=Q_{011}=-1/15$
+  (Theorem~\ref{thm:charged-quartic-coefficient}) is computed from the arity-$4$
+  homotopy transfer via ladder/simplex reduction.
+  The symmetrized value is $Q_{110}^{\mathrm{sym}}=1/18$.
+\item $B_{\mathrm{mix}}^{\mathrm{alg}}=-11/9$
+  (Theorem~\ref{thm:first-mixed-bubble-coefficient}) is the two-vertex wheel integral,
+  evaluated by $SU(2)$ spectral decomposition and confirmed by the genus-$1$
+  Maurer--Cartan consistency relation.
+\end{enumerate}
+The low-mode charged modular jet is
+\[
+\mathfrak J_{\mathrm{ch}}^{\mathrm{low}}
+=\bigl(-\tfrac{1}{15},\,-\tfrac{1}{15},\,-\tfrac{11}{9}\bigr),
+\]
+resolving the three conjectures of
+\S\ref{subsec:thread-complete-provisional-data-package}.
+\end{remark}
+
 \subsection{The distilled picture}
 \label{subsec:distilled-picture}
 

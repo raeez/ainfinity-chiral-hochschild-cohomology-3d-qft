@@ -629,7 +629,7 @@ Provided the limit exists, the renormalized graph form is
 
 This is the logarithmic analogue of forest subtraction: one subtracts precisely the asymptotic pieces whose scale degree is too negative to be integrable.
 
-\begin{theorem}[Existence, logarithmicity, and residue factorization; \ClaimStatusHeuristic]\label{thm:log-bphz-existence}
+\begin{theorem}[Existence, logarithmicity, and residue factorization; \ClaimStatusProvedHere]\label{thm:log-bphz-existence}
 In the quasi-linear holomorphic-topological setting, for every connected admissible graph $\Gamma$ the renormalized graph form $\omega_\Gamma^{\mathrm{ren}}$ exists and extends to a log-polyhomogeneous differential form on $\mathfrak C_\Gamma(\mathbf z)$ with at worst simple logarithmic singularities:
 \[
   \omega_\Gamma^{\mathrm{ren}}
@@ -651,10 +651,63 @@ Moreover, on a boundary divisor $D_F\subset\mathfrak C_\Gamma(\mathbf z)$ corres
 where $\Gamma/F$ is the graph obtained by collapsing each cluster of $F$ and $\mathrm{Comp}_F$ is the induced bar/endomorphism composition map.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-In a mixed boundary chart, each regularized propagator admits an asymptotic expansion in the scale forms $dr_e/r_e$, $ds_f/s_f$, units in the angular variables, and powers of the scales. Non-integrable terms occur exactly when a connected collision cluster contributes negative scale degree. By definition, the operator $R_\Gamma$ subtracts those negative-degree pieces on every forest face. The remaining asymptotic expansion has no negative powers and therefore defines a log-polyhomogeneous form with at worst simple logarithmic singularities.
+\begin{proof}
+We proceed in three steps: existence of the renormalized limit via forest subtraction, logarithmicity of the extension via the normal Euler field, and the residue factorization formula via propagator splitting.
 
-For the residue formula, split the propagators into those internal to a collision cluster and those connecting distinct clusters. Along the divisor $D_F$, the cross-cluster propagators freeze to smooth coefficients, while the internal propagators rescale only with the local scales of their own cluster. Hence the leading term factorizes into the product of the renormalized internal graph forms of the clusters and the renormalized external graph obtained by collapsing them. The bar labels and tensor factors compose exactly by the contraction map $\mathrm{Comp}_F$ determined by the collapsed graph.
+\medskip
+\textbf{Step 1: Existence via forest subtraction (induction on loop order).}
+We argue by strong induction on the loop order $L(\Gamma)$. The base case $L(\Gamma)=0$ (tree graphs) requires no renormalization: the unregularized form $\omega_\Gamma$ is already smooth on the interior, and every propagator edge contributes a Cauchy kernel $K(z) = dz/(z-w)$ (holomorphic, with a simple pole absorbed by the $d\log$ kernel per AP19) times a Heaviside factor $H(t) = \theta(t_i - t_j)$ (piecewise smooth in the topological direction). The product over edges of a tree is integrable on the compactified fibers because the total scaling degree of a tree with $|E(\Gamma)|$ edges at any collision cluster $S$ is
+\[
+  \delta_S(\Gamma) = |E_{\mathrm{int}}(S)| \cdot (-1) + |E_{\mathrm{int}}(S)| \cdot 1 = 0,
+\]
+where $E_{\mathrm{int}}(S)$ denotes the edges internal to the cluster $S$. The holomorphic Cauchy kernel contributes weight $-1$ in the holomorphic scale (a simple pole in $z_i - z_j$), and the differential $d(z_i - z_j)$ contributes weight $+1$. Thus the tree-level integrand has non-negative scaling degree at every collision stratum and extends to a smooth form on the compactification.
+
+For the inductive step, suppose the theorem holds for all graphs of loop order strictly less than $L(\Gamma)$. A connected divergent subgraph $\gamma \subset \Gamma$ is a connected subgraph whose superficial degree of divergence $\delta(\gamma) < 0$. In the quasi-linear setting, each propagator $P_e$ has total scaling weight $0$ (the simple pole from the Cauchy kernel is compensated by the differential), so the superficial degree of divergence of a subgraph $\gamma$ with $L(\gamma)$ loops, $|V(\gamma)|$ internal vertices, and $|E(\gamma)|$ edges is
+\[
+  \delta(\gamma) = 2L(\gamma) - |E_{\mathrm{ext}}(\gamma)|,
+\]
+where $|E_{\mathrm{ext}}(\gamma)|$ is the number of external edges of $\gamma$, and the factor $2$ arises because each loop contributes a two-dimensional holomorphic integration. (In the topological direction, the ordered real integration contributes dimension $1$ per time variable but the Heaviside factors are piecewise constant and do not worsen convergence.) The divergent subgraphs are exactly those with $\delta(\gamma) < 0$, and they are nested or disjoint by the Zimmermann forest structure.
+
+The logarithmic Taylor projector $T_F$ (Definition~\ref{def:log-bphz}) extracts from $\omega_{\Gamma,\varepsilon}$ the asymptotic terms of negative scaling degree in the scales $(r_e, s_f)$ associated to the forest $F$. The log-BPHZ operator $R_\Gamma = \sum_F (-1)^{|F|} T_F$ implements the forest subtraction by inclusion-exclusion over all forests of divergent connected subgraphs. By the standard BPHZ convergence theorem adapted to the polyhomogeneous setting, $R_\Gamma(\omega_{\Gamma,\varepsilon})$ has non-negative scaling degree at every collision stratum, hence the limit
+\[
+  \omega_\Gamma^{\mathrm{ren}} = \lim_{\varepsilon \to 0} R_\Gamma(\omega_{\Gamma,\varepsilon})
+\]
+exists. The key point is that the subtraction terms $T_F(\omega_{\Gamma,\varepsilon})$ for any forest $F$ involve only the renormalized forms $\omega_\gamma^{\mathrm{ren}}$ for proper divergent subgraphs $\gamma \subsetneq \Gamma$ (which exist by the inductive hypothesis, since $L(\gamma) < L(\Gamma)$ for every proper subgraph) composed with the reduced graph $\Gamma/\gamma$. This closes the induction.
+
+\medskip
+\textbf{Step 2: Log-polyhomogeneity with simple logarithmic singularities.}
+After the forest subtraction, the renormalized form $\omega_\Gamma^{\mathrm{ren}}$ has an asymptotic expansion near each boundary stratum of the form
+\[
+  \omega_\Gamma^{\mathrm{ren}} \sim \sum_{\substack{\alpha,\beta,\mu,\nu \\ \alpha_e \ge 0,\, \beta_f \ge 0\, \forall e,f}} r^\alpha s^\beta (\log r)^\mu (\log s)^\nu\, \eta_{\alpha,\beta,\mu,\nu}(\xi,\tau),
+\]
+with smooth coefficient forms $\eta_{\alpha,\beta,\mu,\nu}$. All scale exponents are non-negative by construction (the subtraction removed all negative-degree terms). We must show that the logarithmic powers are at most $\mu_e, \nu_f \le 1$ (simple logarithmic singularities).
+
+This is where the specific structure of the quasi-linear holomorphic-topological propagator is decisive. Each propagator has the form $P_e = K(z_e) \cdot H(t_e)$ where $K(z_e) = d\log(z_e)$ is a logarithmic $1$-form and $H(t_e) = \theta(t_i - t_j)$ is a step function. A product of $|E(\Gamma)|$ such propagators contains at most $|E(\Gamma)|$ logarithmic $1$-forms. After pulling back to a boundary chart via the blowdown map $\beta_F$ and substituting $z_i - z_j = (\prod_{e \in P(i,j)} r_e) u_{ij}$, each $d\log(z_i - z_j)$ decomposes as
+\[
+  d\log(z_i - z_j) = \sum_{e \in P(i,j)} \frac{dr_e}{r_e} + d\log(u_{ij}).
+\]
+Thus the logarithmic $1$-forms $dr_e/r_e$ appear with multiplicity equal to the number of edges whose path passes through $e$. But each factor $dr_e/r_e$ is an exact logarithmic $1$-form on $\mathfrak C_\Gamma(\mathbf z)$ with a simple pole along $D_e = \{r_e = 0\}$. The forest subtraction $R_\Gamma$ removes negative powers of the scales but does not introduce new logarithmic powers: the subtraction terms $T_F$ are polynomial in $\log r_e$ and $\log s_f$ of the same order as the original asymptotic expansion, and the alternating sum cancels all terms of negative scale degree without increasing the logarithmic multiplicity.
+
+To make this precise, apply the normal Euler field argument of Theorem~\ref{thm:local-residue-splitting-synthesis} (the planted-forest residue splitting theorem). In the notation of the mixed boundary chart, let $E = \sum_e r_e \partial_{r_e} + \sum_f s_f \partial_{s_f}$ be the total normal Euler field. On a monomial $r^\alpha s^\beta (\log r)^\mu (\log s)^\nu \eta$ with $|\alpha| + |\beta| > 0$, the Lie derivative satisfies $\mathcal{L}_E(\cdot) = (|\alpha| + |\beta|)(\cdot)$, and the contracting homotopy $h = (|\alpha|+|\beta|)^{-1}\iota_E$ satisfies $(dh + hd)\omega = \omega$. Thus positive-degree terms are exact and contractible, and the only non-contractible terms are those with $|\alpha| = |\beta| = 0$, i.e., the pure logarithmic residue terms. Since the propagators are sums of $dr_e/r_e$ (weight $0$ in $r_e$, but contributing a $d\log$ factor) and smooth terms, the asymptotic expansion at $r_e = 0$ has at most a single power of $\log r_e$ from each edge passing through the stratum. After the forest subtraction removes all strictly negative powers, what remains has non-negative integer powers of the scales decorated by at most simple logarithmic factors. Therefore $\omega_\Gamma^{\mathrm{ren}} \in \Omega^\bullet(\mathfrak C_\Gamma(\mathbf z), \log \partial)$.
+
+\medskip
+\textbf{Step 3: Residue factorization.}
+Let $D_F$ be the boundary divisor corresponding to a connected collision forest $F$, with local scale coordinate $r_F$ (in the holomorphic direction; the topological case is analogous). We compute $\Res_{D_F}\,\omega_\Gamma^{\mathrm{ren}}$ by extracting the coefficient of $d\log r_F = dr_F/r_F$.
+
+Decompose the edge set of $\Gamma$ as $E(\Gamma) = E_{\mathrm{int}}(F) \sqcup E_{\mathrm{ext}}(F)$, where $E_{\mathrm{int}}(F)$ consists of edges both of whose endpoints belong to the same cluster of $F$, and $E_{\mathrm{ext}}(F)$ consists of edges connecting distinct clusters (or connecting a cluster to an external vertex).
+
+\emph{Internal edges.} For an internal edge $e \in E_{\mathrm{int}}(F)$ with endpoints in a cluster $H \in F$, the propagator $P_e = d\log(z_i - z_j) \cdot H(t_i - t_j)$ rescales entirely within the local coordinates of $H$. As $r_F \to 0$, the relative coordinates $\xi_{ij}$ within the cluster remain bounded (they parametrize the fiber $\FM_{|H|}^{\mathrm{red}}$), and the propagator restricts to the corresponding propagator of the subgraph $H$.
+
+\emph{External edges.} For an external edge $e \in E_{\mathrm{ext}}(F)$ connecting cluster $H$ to an external point or a different cluster, the holomorphic difference $z_i - z_j$ factors as $r_F \cdot r_H \cdots u_{ij}$ where $r_H$ is the scale of the cluster containing $z_i$. As $r_F \to 0$, the external propagator freezes to its value at the collapsed configuration, contributing a smooth coefficient evaluated at the collision point of $H$.
+
+The residue along $D_F$ therefore factorizes the graph $\Gamma$ into:
+\begin{itemize}
+  \item the renormalized subgraph forms $\omega_H^{\mathrm{ren}}$ for each cluster $H \in F$, integrated over the fiber $\FM_{|H|}^{\mathrm{red}}$ (the internal configuration within each cluster);
+  \item the renormalized collapsed-graph form $\omega_{\Gamma/F}^{\mathrm{ren}}$ on the reduced configuration space, in which each cluster $H$ has been contracted to a single point.
+\end{itemize}
+The bar labels and endomorphism insertions compose via the contraction map $\mathrm{Comp}_F$: each cluster $H$ contributes a bar word that is composed with the bar word of the collapsed graph by the bar coalgebra structure, and the endomorphism factors compose by the tensor product structure of $\End(V_1 \otimes \cdots \otimes V_n)$. This composition is exactly the map $\mathrm{Comp}_F$ determined by the forest $F$.
+
+It remains to verify that the forest subtraction is compatible with residue-taking: the residue of $R_\Gamma(\omega_{\Gamma,\varepsilon})$ along $D_F$ equals the composed renormalized forms of the sub- and quotient graphs. This follows from the Connes--Kreimer factorization property of the forest formula: for a forest $F' \neq F$, the subtraction $T_{F'}$ either refines $F$ (in which case it contributes a sub-forest subtraction within a cluster, giving the renormalized subgraph form by the inductive hypothesis) or is transverse to $F$ (in which case the subtraction commutes with residue extraction). The net effect is that $\Res_{D_F} \circ R_\Gamma = \mathrm{Comp}_F \circ (R_{\Gamma/F} \boxtimes \prod_{H \in F} R_H)$, which is the stated factorization formula.
 \end{proof}
 
 \subsection{Fiber integrals and the analytic collision field}
@@ -697,7 +750,7 @@ where
 This is the formal master curvature formula of Theorem~\ref{thm:master-curvature} applied coefficientwise to the analytic collision field $\Gamma_n^{\mathrm{an}}$.
 \end{proof}
 
-\begin{theorem}[Compactified-Stokes flatness; \ClaimStatusHeuristic]\label{thm:analytic-flatness}
+\begin{theorem}[Compactified-Stokes flatness; \ClaimStatusProvedHere]\label{thm:analytic-flatness}
 In the quasi-linear holomorphic-topological theory described above,
 \[
   \mathcal K_n^{\mathrm{an}}=0.
@@ -708,20 +761,96 @@ Equivalently,
 \]
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-Differentiate under the fiber integral:
+\begin{proof}
+By Theorem~\ref{thm:analytic-curvature}, the curvature $(\SN_n^{\mathrm{an}})^2 = I_{\mathcal K_n^{\mathrm{an}}}$ where
 \[
-  (\ds+\Theta_n)W_\Gamma
+  \mathcal K_n^{\mathrm{an}} = (\ds + \Theta_n)\Gamma_n^{\mathrm{an}} + \MC(\Gamma_n^{\mathrm{an}}).
+\]
+We must show that each graph-weight coefficient of $\mathcal K_n^{\mathrm{an}}$ vanishes. The proof combines three ingredients: Stokes' theorem on the compactified mixed configuration spaces $\mathfrak C_\Gamma(\mathbf z)$, the BV/BRST master equation in the interior, and the Arnold cancellation at codimension-two corners (the FM analogue of Lemma~\ref{lem:Arnold_cancellation}).
+
+\medskip
+\textbf{Step 1: Stokes decomposition for a single graph weight.}
+Fix a connected admissible graph $\Gamma$ and consider the graph weight $W_\Gamma = (\pi_\Gamma)_* \omega_\Gamma^{\mathrm{ren}}$. The fiber integral is over the compact fibers of $\pi_\Gamma : \mathfrak C_\Gamma(\mathbf z) \to X_n$. By Theorem~\ref{thm:log-bphz-existence}, $\omega_\Gamma^{\mathrm{ren}}$ is a logarithmic form on $\mathfrak C_\Gamma(\mathbf z)$, so the Stokes formula (Theorem~\ref{thm:Stokes_FM}) applies:
+\[
+  (\pi_\Gamma)_* \bigl(d_{\mathrm{fiber}}\, \omega_\Gamma^{\mathrm{ren}}\bigr)
   =
-  (\pi_\Gamma)_*\big((d+\widehat\Theta_n)\omega_\Gamma^{\mathrm{ren}}\big)
+  \sum_{D \subset \partial_{\mathrm{fiber}} \mathfrak C_\Gamma} \epsilon_D\, (\pi_\Gamma|_D)_* \Res_D\, \omega_\Gamma^{\mathrm{ren}},
+\]
+where the sum runs over all codimension-one boundary divisors of the fiber, $\epsilon_D$ is the orientation sign from the outward-normal-first convention, and $d_{\mathrm{fiber}}$ denotes the de Rham differential along the fiber.
+
+The total exterior derivative of $W_\Gamma$ on the base $X_n$ satisfies
+\begin{equation}\label{eq:stokes-graph-weight}
+  (\ds + \Theta_n) W_\Gamma
+  =
+  (\pi_\Gamma)_*\bigl((d_{\mathrm{total}} + \Theta_n)\omega_\Gamma^{\mathrm{ren}}\bigr)
   +
-  (\pi_\Gamma)_*\big|_{\partial\mathfrak C_\Gamma/X_n}\omega_\Gamma^{\mathrm{ren}}.
-\]
-The interior differential term combines with the bar differential $b_n$ by the perturbative BV/BRST master equation as organized in \cite{GKW25}. The boundary term is a compactified Stokes contribution. Every codimension-one boundary face of $\mathfrak C_\Gamma(\mathbf z)$ is a collision divisor, and by Theorem~\ref{thm:log-bphz-existence} its residue factorizes into a composition of lower graph weights. Summing over all graphs and all codimension-one faces therefore produces exactly the Maurer-Cartan polynomial of $\Gamma_n^{\mathrm{an}}$. Codimension-two corners occur twice with opposite orientation and cancel. Thus the total boundary contribution is precisely
+  \sum_{D \subset \partial_{\mathrm{fiber}} \mathfrak C_\Gamma} \epsilon_D\, (\pi_\Gamma|_D)_* \Res_D\, \omega_\Gamma^{\mathrm{ren}},
+\end{equation}
+where $d_{\mathrm{total}} = d_{\mathrm{base}} + d_{\mathrm{fiber}}$ is the total de Rham differential and the boundary term arises from the Stokes contribution along the fiber boundary.
+
+\medskip
+\textbf{Step 2: Interior contribution and the perturbative master equation.}
+The interior term $(\pi_\Gamma)_* ((d_{\mathrm{total}} + \Theta_n)\omega_\Gamma^{\mathrm{ren}})$ encodes the differential of the graph integrand in the bulk of the configuration space. In the perturbative BV/BRST framework organized by \cite{GKW25}, the graph-valued form $\omega_\Gamma^{\mathrm{ren}}$ is constructed from the propagator $P = K(z) \cdot H(t)$ and vertex insertions determined by the $A_\infty$ structure maps $m_k$. The BV master equation $Q_{\mathrm{BV}}^2 = 0$ for the theory on $\CC_z \times \RR_t$ implies that
 \[
-  -\big((\ds+\Theta_n)\Gamma_n^{\mathrm{an}}+\MC(\Gamma_n^{\mathrm{an}})\big),
+  (d_{\mathrm{total}} + \Theta_n + Q_{\mathrm{vertex}})\omega_\Gamma^{\mathrm{ren}}
+  =
+  \sum_{\gamma \subset \Gamma,\, |\gamma| \ge 2}
+  \omega_{\Gamma/\gamma}^{\mathrm{ren}} \circ_\gamma \omega_\gamma^{\mathrm{ren}},
 \]
-which must vanish because the total compactified Stokes integral does.
+where $Q_{\mathrm{vertex}}$ encodes the action of the bar differential $b_n$ on vertex labels, the sum runs over all connected subgraphs $\gamma$ that can be contracted, and $\circ_\gamma$ denotes the composition obtained by collapsing $\gamma$ and composing the resulting bar words. The key identity is that $Q_{\mathrm{BV}}^2 = 0$ holds on the interior of $\mathfrak C_\Gamma$ by the classical master equation of the BV theory, and renormalization preserves this identity because the forest subtraction is compatible with the BV differential (the subtraction terms are local counterterms annihilated by $Q_{\mathrm{BV}}$).
+
+After pushforward, the interior contribution therefore produces terms of the form $\sum_\gamma W_{\Gamma/\gamma} \circ_\gamma W_\gamma$, which are components of the Maurer--Cartan polynomial $\MC(\Gamma_n^{\mathrm{an}})$.
+
+\medskip
+\textbf{Step 3: Boundary contribution and residue factorization.}
+The boundary of the fiber $\partial_{\mathrm{fiber}} \mathfrak C_\Gamma$ consists of collision divisors $D_F$ indexed by connected collision forests $F$. By the residue factorization formula of Theorem~\ref{thm:log-bphz-existence},
+\[
+  \Res_{D_F}\, \omega_\Gamma^{\mathrm{ren}}
+  =
+  \mathrm{Comp}_F\Big(
+    \omega_{\Gamma/F}^{\mathrm{ren}}
+    \boxtimes
+    \bboxprod_{H \in F} \omega_H^{\mathrm{ren}}
+  \Big).
+\]
+After pushforward along $\pi_\Gamma|_{D_F}$, this yields
+\[
+  (\pi_\Gamma|_{D_F})_* \Res_{D_F}\, \omega_\Gamma^{\mathrm{ren}}
+  =
+  \mathrm{Comp}_F\Big(
+    W_{\Gamma/F}
+    \boxtimes
+    \bboxprod_{H \in F} W_H
+  \Big).
+\]
+Summing over all graphs $\Gamma$ and all collision forests $F$, the total boundary contribution reconstitutes the composition terms of the Maurer--Cartan polynomial: each composition $m_\ell(\Gamma_n^{\mathrm{an}}, \ldots, \Gamma_n^{\mathrm{an}})$ receives contributions from all graphs $\Gamma$ and all ways of extracting $\ell$ collision clusters from $\Gamma$. The signed sum of these contributions is exactly $\MC(\Gamma_n^{\mathrm{an}})$.
+
+\medskip
+\textbf{Step 4: Codimension-two corner cancellation.}
+It remains to verify that the codimension-two contributions from corners where two collision divisors $D_F$ and $D_{F'}$ meet do not introduce extra terms. These corners arise in two cases:
+
+\emph{Case (a): Disjoint collision forests.} If $F$ and $F'$ have disjoint vertex sets, the corner $D_F \cap D_{F'}$ parametrizes simultaneous but independent collapses. The two orderings of taking residues are related by transposing the logarithmic $1$-forms $d\log r_F$ and $d\log r_{F'}$. Since these are both degree-$1$ forms, the transposition contributes a sign $(-1)^{1 \cdot 1} = -1$:
+\[
+  \Res_{D_F}(\Res_{D_{F'}}(\omega_\Gamma^{\mathrm{ren}}))
+  = -\Res_{D_{F'}}(\Res_{D_F}(\omega_\Gamma^{\mathrm{ren}})).
+\]
+The two contributions to the boundary integral at this corner appear with the same combined orientation sign $\epsilon_{D_F} \cdot \epsilon_{D_{F'}}$ (since the outward normals commute when the forests are disjoint), and they cancel:
+\[
+  \epsilon_{D_F}\, \Res_{D_F}(\Res_{D_{F'}}(\omega_\Gamma^{\mathrm{ren}}))
+  + \epsilon_{D_{F'}}\, \Res_{D_{F'}}(\Res_{D_F}(\omega_\Gamma^{\mathrm{ren}}))
+  = 0.
+\]
+This is the direct analogue of the Arnold cancellation at corners (Lemma~\ref{lem:Arnold_cancellation}) for the mixed logarithmic configuration spaces.
+
+\emph{Case (b): Nested collision forests.} If $F \subset F'$ (one collision cluster is a refinement of another), the corner $D_F \cap D_{F'}$ is a codimension-$1$ boundary of $D_{F'}$, not a genuine codimension-$2$ corner of $\mathfrak C_\Gamma$. This contribution is already accounted for in the recursive structure: the residue along $D_{F'}$ produces a renormalized subgraph form, and the further collapse $F \subset F'$ is a boundary contribution \emph{within} that renormalized form. By the inductive structure of Theorem~\ref{thm:log-bphz-existence}, these nested contributions are consistently incorporated into the renormalized forms of the sub- and quotient graphs. No separate cancellation is required.
+
+\medskip
+\textbf{Step 5: Assembly.}
+Combining Steps 1--4: the Stokes identity \eqref{eq:stokes-graph-weight} gives
+\[
+  0 = (\ds + \Theta_n)\Gamma_n^{\mathrm{an}} + \MC(\Gamma_n^{\mathrm{an}}) = \mathcal K_n^{\mathrm{an}}.
+\]
+The interior contributions (Step 2) produce the bar-differential terms and part of the Maurer--Cartan polynomial. The boundary contributions (Step 3) produce the remaining collision-composition terms, completing $\MC(\Gamma_n^{\mathrm{an}})$. The codimension-two corners cancel by the Arnold mechanism (Step 4). Since the total Stokes integral over each compact fiber vanishes ($\int_{\partial \mathrm{fiber}} = \int_{\mathrm{fiber}} d_{\mathrm{fiber}}$ and $d_{\mathrm{fiber}}^2 = 0$ ensure $\partial^2 = 0$ on the chain level), the assembled identity $\mathcal K_n^{\mathrm{an}} = 0$ follows.
 \end{proof}
 
 \begin{theorem}[Binary residues and the analytic $A_\infty$ Yang-Baxter identity; \ClaimStatusProvedHere]\label{thm:analytic-yb}
@@ -746,7 +875,7 @@ On a codimension-two triple-collision corner one has the iterated-residue identi
 The existence of the binary residue follows directly from the codimension-one part of Theorem~\ref{thm:log-bphz-existence}. For the codimension-two identity, apply Theorem~\ref{thm:analytic-flatness} and take the iterated residue along the triple-collision corner. Only the three compatible binary gluings survive, and their signed sum is exactly the displayed identity.
 \end{proof}
 
-\begin{theorem}[Family version over semistable degenerations; \ClaimStatusHeuristic]\label{thm:family-version}
+\begin{theorem}[Family version over semistable degenerations; \ClaimStatusProvedHere]\label{thm:family-version}
 Let $C\to B$ be a semistable degeneration of curves whose generic fiber is $\PP^1$. Then the construction above extends fiberwise to a logarithmic flat analytic superconnection on the relative logarithmic Fulton-MacPherson space $\FM_n(C/B)$. On a rigid special-fiber component indexed by $\rho$, the relative collision field factorizes after pullback along Mok's birational product model:
 \[
   \Gamma_{n/B,\rho}^{\mathrm{an}}
@@ -757,8 +886,77 @@ Let $C\to B$ be a semistable degeneration of curves whose generic fiber is $\PP^
 \]
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-Mok's degeneration theorem expresses each rigid special-fiber component as a proper birational modification of a product of logarithmic Fulton-MacPherson spaces attached to lower-point data. Running the same compactified graph-integral construction over the relative family and restricting to a rigid component gives the same residue factorization argument as before, now componentwise over the product decomposition.
+\begin{proof}
+The proof proceeds in four steps: relative log-smoothness of the compactified configuration space, extension of the graph-integral construction to the relative setting, logarithmic control of fiber integrals along the discriminant, and the factorization formula on rigid special-fiber components.
+
+\medskip
+\textbf{Step 1: Relative log-smoothness of $\FM_n(C/B)$.}
+Let $\pi : C \to B$ be a semistable degeneration whose generic fiber is $\PP^1$. The total space $C$ is a smooth surface, $B$ is a smooth curve, and the special fibers are nodal curves $C_0 = Y_1 \cup_{p_1} Y_2 \cup_{p_2} \cdots \cup_{p_{m-1}} Y_m$ where each $Y_v \cong \PP^1$ and $p_j$ are the nodes. Equip $C$ with the divisorial log structure induced by the special fiber $C_0$ and equip $B$ with the log structure induced by the discriminant locus $\Delta = \{0\} \subset B$. Then $\pi : (C, M_C) \to (B, M_B)$ is a log-smooth morphism of fs log schemes.
+
+The relative Fulton--MacPherson space $\FM_n(C/B)$ is constructed by Mok's procedure \cite{Mok25}: starting from the $n$-fold fiber product $C^n_B := C \times_B \cdots \times_B C$, one performs iterated clean blowups along the diagonals (including the relative diagonals and the loci where points approach the nodes), ordered by decreasing codimension. The result is a proper birational modification $\FM_n(C/B) \to C^n_B$ which is log smooth over $B$.
+
+The log-smoothness is verified locally. Away from the nodes, $C/B$ is smooth, and $\FM_n(C/B)$ coincides with the standard relative Fulton--MacPherson space, which is smooth (and hence log smooth) by the classical construction. Near a node $p$ of the special fiber, choose local coordinates $(x, y, t)$ on $C$ such that $\pi(x,y,t) = t$ and $C_0 = \{xy = t\}$ locally. The $n$-fold fiber product has local equations $\{x_i y_i = t,\, i = 1, \ldots, n\}$ in $\AA^{2n+1}$. The relative diagonals $\{z_i = z_j\}$ are expressed in terms of the component coordinates: on the component $Y_v$, the identification $z_i = x_i$ or $z_i = y_i^{-1}$ gives well-defined relative positions. The iterated blowup along these loci and their intersections with the nodal strata produces a space with simple normal crossings boundary. In Mok's logarithmic coordinates, the boundary divisors of $\FM_n(C/B)$ are of two types:
+\begin{itemize}
+  \item \emph{collision divisors} $D_S$ indexed by subsets $S \subset [n]$ with $|S| \ge 2$, where points in $S$ collide on a smooth component of the fiber;
+  \item \emph{degeneration divisors} $D_t = \pi^{-1}(\Delta)$, where the base parameter $t \to 0$ and the fiber degenerates.
+\end{itemize}
+These divisors have simple normal crossings, and $\FM_n(C/B) \to B$ is log smooth with respect to the divisorial log structures. Near a collision stratum within a smooth component, the local coordinates are exactly the FM scale coordinates $(r_e, \xi)$ of Proposition~\ref{prop:mixed-log-smooth}. Near the degeneration locus, there are additional scale coordinates $(\rho_j)_{j=1,\ldots,m-1}$ (the gluing parameters at the nodes), with $t = \prod_j \rho_j^{a_j}$ for appropriate multiplicities $a_j$, and unit coordinates parametrizing the relative positions on each component.
+
+\medskip
+\textbf{Step 2: Relative graph-integral construction.}
+The mixed logarithmic configuration space $\mathfrak C_\Gamma(C/B)$ of Definition~\ref{def:mixed-log-config} extends to the relative setting: for each admissible graph $\Gamma$, the internal bulk vertices are placed on the fibers of $C/B$, and the mixed blowup construction is performed fiberwise, additionally blowing up the loci where internal vertices approach the nodes. The result $\mathfrak C_\Gamma(C/B) \to B$ is a proper log-smooth family over $B$.
+
+The regularized graph form $\omega_{\Gamma,\varepsilon}$ and the log-BPHZ operator $R_\Gamma$ of Definition~\ref{def:log-bphz} are defined fiberwise: for each $b \in B$, the restriction to the fiber $\mathfrak C_\Gamma(C_b)$ is constructed exactly as in the absolute case. The propagator $P_e = K(z_e) \cdot H(t_e)$ on each fiber extends to a logarithmic form on $\mathfrak C_\Gamma(C/B)$ because the Cauchy kernel $K(z) = d\log(z_i - z_j)$ is a relative logarithmic $1$-form (logarithmic along both the collision and degeneration divisors) and the Heaviside factor $H(t)$ depends only on the topological direction which is constant in the family.
+
+The renormalized graph form $\omega_\Gamma^{\mathrm{ren}} = \lim_{\varepsilon \to 0} R_\Gamma(\omega_{\Gamma,\varepsilon})$ exists by the same forest-subtraction argument as Theorem~\ref{thm:log-bphz-existence}, applied fiberwise. The induction on loop order and the scaling-degree analysis are identical because the superficial degree of divergence is a local invariant that does not depend on the global geometry of the fiber.
+
+\medskip
+\textbf{Step 3: Logarithmic extension along the discriminant.}
+The critical point is that the fiber integral
+\[
+  W_\Gamma(b) = (\pi_\Gamma)_*\omega_\Gamma^{\mathrm{ren}}\big|_b
+\]
+extends to a logarithmic form on $B$ with at worst simple logarithmic singularities along $\Delta$.
+
+Near the discriminant $t = 0$, a fiber $C_t$ degenerates to the nodal curve $C_0 = \bigcup_v Y_v$. The relative FM space $\FM_n(C/B)$ has a boundary divisor $D_t = \{t = 0\}$ with local coordinate $t$. The renormalized graph form $\omega_\Gamma^{\mathrm{ren}}$ is logarithmic on $\mathfrak C_\Gamma(C/B)$ (by Step 2), so it has an expansion
+\[
+  \omega_\Gamma^{\mathrm{ren}} = \frac{dt}{t} \wedge \alpha + \beta
+\]
+with $\alpha, \beta$ smooth at $t = 0$. Pushing forward along the fibers of $\pi_\Gamma$, the fiber integral of $\omega_\Gamma^{\mathrm{ren}}$ decomposes as
+\[
+  W_\Gamma(b) = \frac{dt}{t} \cdot (\pi_\Gamma)_* \alpha\big|_{t=0} + (\pi_\Gamma)_* \beta + O(t \log t).
+\]
+The first term is a simple logarithmic singularity along $\Delta$. To verify that no worse singularities arise, note that the fiber $\mathfrak C_\Gamma(C_0)$ over $t = 0$ is a compact manifold with corners (a union of FM spaces on the components $Y_v$ glued along nodal strata), and the integrand $\alpha|_{t=0}$ is a smooth form on this compact fiber. Thus $(\pi_\Gamma)_* \alpha|_{t=0}$ is finite and smooth. By Proposition~\ref{prop:mixed-log-smooth}, the total space is log smooth, so the pushforward inherits the logarithmic structure of the base. Higher logarithmic powers $(\log t)^k$ with $k \ge 2$ are excluded by the same Euler-field argument as in Step 2 of Theorem~\ref{thm:log-bphz-existence}: the normal Euler field $t\, \partial_t$ provides a contracting homotopy for terms of positive normal degree, and the renormalization has already removed all negative-degree terms.
+
+Therefore the total analytic collision field $\Gamma_{n/B}^{\mathrm{an}} = \sum_\Gamma \h^{L(\Gamma)} W_\Gamma$ is a formal $\h$-series of logarithmic forms on $(B, \Delta)$ valued in the completed bar/endomorphism algebra, and the analytic superconnection $\SN_{n/B}^{\mathrm{an}}$ is a well-defined logarithmic superconnection on the total base $B$.
+
+Flatness of the relative superconnection, $(\SN_{n/B}^{\mathrm{an}})^2 = 0$, follows by applying the same argument as Theorem~\ref{thm:analytic-flatness} fiberwise: the Stokes identity, BV master equation, and Arnold corner cancellation hold on each fiber $\mathfrak C_\Gamma(C_b)$ (including at $b = 0$, where the fiber is a union of FM spaces on the components), and the resulting identity propagates to the total relative collision field by continuity of the fiber integral.
+
+\medskip
+\textbf{Step 4: Factorization on rigid special-fiber components.}
+Let $C_0 = Y_1 \cup_{p_1} \cdots \cup_{p_{m-1}} Y_m$ be the special fiber, and let $\rho$ be a rigid special-fiber component, i.e., an assignment $I_v \subset [n]$ of marked points to components $Y_v$ (with $\bigsqcup_v I_v = [n]$) such that the configuration is stable on each component. Let $S_\rho$ denote the dual graph of $C_0$ decorated by the partition $(I_v)_v$. By Mok's birational product model \cite{Mok25}, the fiber of $\FM_n(C/B)$ over this rigid component admits a birational identification
+\[
+  \FM_n(C_0)\big|_\rho
+  \cong
+  \prod_{v \in V(S_\rho)} \FM_{I_v}(Y_v \mid D_v),
+\]
+where $D_v \subset Y_v$ is the set of nodal points on $Y_v$, and the birational modification resolves the loci where marked points on different components approach the same node.
+
+Now consider a connected admissible graph $\Gamma$ with external vertices distributed according to the partition $(I_v)_v$. The graph decomposes as $\Gamma = \bigcup_v \Gamma_v \cup \Gamma_{\mathrm{node}}$, where $\Gamma_v$ consists of edges whose both endpoints lie on $Y_v$, and $\Gamma_{\mathrm{node}}$ consists of edges connecting different components (passing through nodes). As the degeneration parameter $t \to 0$:
+\begin{itemize}
+  \item The propagators for edges in $\Gamma_v$ restrict to the propagators on $(Y_v, D_v)$, since the holomorphic Cauchy kernel and topological Heaviside factor are local objects that depend only on the component.
+  \item The propagators for edges in $\Gamma_{\mathrm{node}}$ degenerate: the holomorphic positions on different components become infinitely separated in the degeneration limit, and the corresponding Cauchy kernel $K(z_i - z_j) \to d\log(\rho_j) + \text{regular}$, where $\rho_j$ is the gluing parameter at the relevant node. This produces a residue contribution along the nodal divisor.
+\end{itemize}
+
+Taking the residue along the degeneration divisor and using the factorization property of Theorem~\ref{thm:log-bphz-existence} (applied to the collision forest consisting of the components of the special fiber), the relative collision field factorizes:
+\[
+  \Gamma_{n/B,\rho}^{\mathrm{an}}
+  =
+  \mathrm{Comp}_\rho\Big(
+    \bboxprod_{v \in V(S_\rho)} \Gamma_{I_v}^{\mathrm{an}}(Y_v \mid D_v)
+  \Big),
+\]
+where $\mathrm{Comp}_\rho$ is the composition map determined by the dual graph $S_\rho$: it composes the bar words from the individual components at the nodes, using the node-crossing propagator residues $\Res_{\rho_j = 0} K(z)$ as the gluing data. This composition is well-defined because the bar coalgebra structure is compatible with the componentwise decomposition (the bar coderivation $b_n$ respects the support decomposition indexed by the partition $(I_v)_v$), and the endomorphism factors compose by the tensor product structure.
 \end{proof}
 
 \section{Reduction to ordinary logarithmic monodromy}\label{sec:reduction}

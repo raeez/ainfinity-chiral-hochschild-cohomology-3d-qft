@@ -1,0 +1,605 @@
+% ===================================================================
+%  DRAFT: The open primitive and the gravitational genus expansion
+%
+%  This is a draft recast of Vol II foundations, written from the
+%  correct primitives. It replaces the discovery narrative ("we found
+%  Swiss-cheese inside the bar complex") with the dependency narrative
+%  ("the Swiss-cheese operad is primitive; the bar complex is a
+%  coalgebraic projection; the derived center is the universal bulk;
+%  modularity is trace plus clutching on the open sector; and the
+%  genus expansion of the MC element IS gravity").
+% ===================================================================
+
+\section{The open factorization category}
+\label{sec:open-primitive}
+
+\subsection{Statement of the problem}
+
+A chiral algebra on a curve is a factorization algebra on the
+Ran space, with the chiral product encoding collisions of
+points.  Volume~I constructed the bar complex~$\barB(\cA)$,
+proved five theorems about it, and extracted a tower of modular
+invariants.  All of this operates in a single color: the
+holomorphic direction.
+
+Three-dimensional holomorphic--topological field theory on
+$\C_z \times \R_t$ introduces a second color: the topological
+direction~$\R$.  Observables factorize holomorphically in~$z$ and
+associatively in~$t$.  The governing structure is a two-colored
+operad with closed (holomorphic) and open (topological) colors.
+
+The present chapter identifies the correct primitive datum and
+derives everything from it.
+
+\subsection{The Swiss-cheese operad}\label{subsec:sc-operad}
+
+\begin{definition}[The holomorphic--topological Swiss-cheese operad]
+\label{def:SC-chtop}
+\index{Swiss-cheese operad!holomorphic--topological|textbf}
+The \emph{holomorphic--topological Swiss-cheese operad}
+$\SCchtop$ is the two-colored topological operad with
+colors $\{\mathrm{ch},\, \mathrm{top}\}$ defined by:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Closed-output spaces.}
+  $\SCchtop(\mathrm{ch}^{\times k};\, \mathrm{ch})
+  := C_*(\FM_k(\C);\, \cL_{\log})$,
+  the chains on the Fulton--MacPherson compactification of~$k$
+  points in~$\C$ with coefficients in the logarithmic local system.
+
+\item \emph{Open-output spaces.}
+  $\SCchtop(\mathrm{ch}^{\times k},\,
+  \mathrm{top}^{\times m};\, \mathrm{top})
+  := C_*(\FM_k(\C) \times \Conf_m^{\mathrm{ord}}(\R))$,
+  the chains on the product of holomorphic configurations and
+  ordered topological configurations.
+
+\item \emph{Directionality.}
+  $\SCchtop(\ldots;\, \mathrm{ch}) = \varnothing$ whenever any
+  input has color $\mathrm{top}$.  No open input can produce a
+  closed output.  This is the operadic expression of the
+  bulk$\to$boundary directionality: bulk operators restrict to
+  boundaries, but boundary operators do not extend to the bulk.
+\end{enumerate}
+Composition is induced by the operadic compositions of
+$\FM_\bullet(\C)$ (nested collision) and $E_1$ (interval
+concatenation).  The factorization product decomposition
+$\omega_k = \omega_k^{\mathrm{hol}} \otimes
+\omega_k^{\mathrm{top}}$ on $\FM_k(\C) \times \Conf_k(\R)$
+governs the weight forms.
+\end{definition}
+
+\begin{theorem}[Homotopy-Koszulity; {\cite{Liv15,GK94}};
+  \ClaimStatusProvedHere]
+\label{thm:homotopy-koszul-SC}
+The operad $\SCchtop$ is homotopy-Koszul: its bar construction
+$B(\SCchtop)$ is formal \textup{(}quasi-isomorphic to its
+cohomology, the Koszul dual cooperad\textup{)}.
+\end{theorem}
+
+\begin{proof}
+The classical Swiss-cheese operad $\mathsf{SC}$ is Koszul
+\cite{Liv15,GK94}.  Kontsevich formality gives a quasi-isomorphism
+$\Phi \colon \SCchtop \xrightarrow{\sim} \mathsf{SC}$.
+Homotopy transfer through~$\Phi$ gives a quasi-isomorphism
+$B(\SCchtop) \xrightarrow{\sim} B(\mathsf{SC})$; the latter is
+formal by the Koszul property.  Two-out-of-three completes the
+proof.
+\end{proof}
+
+\begin{corollary}[Quillen equivalence]
+\label{cor:quillen-equivalence}
+On the chirally Koszul locus, bar-cobar duality for $\SCchtop$
+is a Quillen equivalence: the derived unit and counit are both
+weak equivalences.  Consequently, the homotopy categories of
+$\SCchtop$-algebras and of coalgebras over the Koszul dual
+cooperad are equivalent.
+\end{corollary}
+
+\subsection{The open factorization category}
+\label{subsec:open-factorization-category}
+
+\begin{definition}[Tangential log curve]
+\label{def:tangential-log-curve-v2}
+A \emph{tangential log curve} is a triple $(X, D, \tau)$, where
+$X$ is a smooth algebraic curve, $D = \{p_1, \ldots, p_n\}$ is a
+finite set of marked points, and
+$\tau = \{\tau_{p_i} \in T_{p_i} X \setminus \{0\}\}$ is a choice
+of nonzero tangent direction at each puncture.
+The real oriented blowup $\widetilde{X}_D \to X$ replaces each
+$p_i$ by the boundary circle $S^1_{p_i}$; the tangent direction
+$\tau_{p_i}$ selects a basepoint, cutting the circle into a
+boundary interval $I_{p_i} \cong \R$.
+\end{definition}
+
+\begin{definition}[Open/closed factorization category]
+\label{def:oc-fact-cat}
+\index{open/closed factorization category|textbf}
+Let $(X, D, \tau)$ be a tangential log curve.  An \emph{open/closed
+factorization dg-category} on $(X, D, \tau)$ is a $\SCchtop$-monoidal
+dg-category $\cC$ equipped with:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Bulk sector.}  A factorization algebra $\cA$ on
+  $\Ran(X \setminus D)$ (the closed color).
+
+\item \emph{Boundary sector.}  For each puncture $p_i$, a
+  dg-category $\cC(I_{p_i})$ of boundary conditions on the
+  interval~$I_{p_i}$ (the open color), with associative
+  composition from $E_1$-factorization on~$\R$.
+
+\item \emph{Mixed operations.}  For each configuration of $k$
+  bulk points in $X \setminus D$ and $m$ boundary points on the
+  intervals~$I_{p_i}$, a mixed operation
+  $\mu_{k;m} \colon \cA^{\otimes k} \otimes
+  \cC^{\otimes m} \to \cC$
+  governed by the mixed-output component of $\SCchtop$.
+
+\item \emph{Compatibility.}  The $\SCchtop$-coherence
+  identities (Stokes cancellation on all codimension-one
+  boundary strata of $\FM_k(\C) \times \Conf_m(\R)$).
+
+\item \emph{Cyclic trace.}  A nondegenerate trace
+  $\Tr_b \colon \RHom_{\cC(I)}(b,b) \to k[-d]$
+  for each compact generator~$b$, inducing a Calabi--Yau
+  structure on $\cC(I)$.
+
+\item \emph{Clutching.}  For each pair of punctures
+  $(p_i, p_j)$, a sewing functor
+  $\xi_{ij} \colon \cC(I_{p_i}) \otimes \cC(I_{p_j}) \to
+  \cC(I_{p_{ij}})$
+  implementing nodal degeneration: the boundary circles $S^1_{p_i}$
+  and $S^1_{p_j}$ are glued to produce a node, raising the genus of
+  the curve by~$1$ (non-separating) or connecting two components
+  (separating).
+\end{enumerate}
+The factorization category $\cC$ is the \emph{primitive datum}: it
+is not an algebra, but a category.  Its objects are boundary
+conditions; its morphisms are open-string states.
+\end{definition}
+
+\begin{theorem}[Boundary algebra from vacuum;
+  \ClaimStatusProvedHere]
+\label{thm:boundary-algebra-from-vacuum-v2}
+Let $\cC$ be an open/closed factorization dg-category on
+$(X, D, \tau)$, and let $b \in \cC(I_p)$ be a compact generator
+(\emph{vacuum object}).  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The endomorphism algebra
+  $A_b := \RHom_{\cC(I_p)}(b, b)$
+  is an $A_\infty$-algebra, with operations
+  $\mu_n^{A_b}$ from ordered boundary collisions on
+  $\Conf_n^{\mathrm{ord}}(I_p)$.
+
+\item The mixed operations endow $A_b$ with the structure of a
+  curved $A_\infty$-chiral algebra: the operations
+  \[
+    m_k \colon A_b^{\otimes k} \to
+    A_b((\lambda_1))\cdots((\lambda_{k-1}))
+  \]
+  are obtained by restricting the bulk-boundary mixed operations
+  $\mu_{k;0}$ to a formal disk at~$p$ and recording the collision
+  data in spectral variables $\lambda_j = z_j - z_k$.
+
+\item The $A_\infty$-chiral structure depends on the choice of
+  compact generator~$b$.  Different choices
+  $b, b' \in \cC(I_p)$ give Morita-equivalent $A_\infty$-chiral
+  algebras:
+  $\Perf(A_b) \simeq \Perf(A_{b'}) \simeq \cC(I_p)$.
+  The Morita class of $A_b$ is an invariant of $\cC$; the specific
+  algebra $A_b$ is a \emph{chart}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) The ordered boundary configuration space
+$\Conf_n^{\mathrm{ord}}(I_p)$ is the interior of the simplex
+$\Delta^{n-1}$.  Its Stasheff compactification is the associahedron
+$K_n$, whose codimension-one faces parametrize consecutive-block
+compositions.  Boundary corrections on $\partial K_n$ give the
+$A_\infty$-relations $\sum_{i+j=n+1} \mu_i \circ \mu_j = 0$.
+
+(ii) The formal disk $\widehat{D}_p$ at~$p$ identifies the bulk
+configuration space with $\FM_k(\widehat{D}_p)$.  After choosing a
+local coordinate $z$ centered at~$p$, the relative positions
+$\lambda_j = z_j - z_k$ are the spectral variables.  The FM
+compactification on the formal disk gives operadic compositions in
+the chiral endomorphism operad $\cE\!nd^{\mathrm{ch}}_{A_b}$
+(Definition~\ref{def:chiral-endomorphism-operad-v2}): codimension-one
+faces correspond to operadic insertions with block-substitution
+of spectral variables.
+
+(iii) Morita invariance: if $b' \in \cC(I_p)$ is another compact
+generator, the bimodule $\RHom(b, b')$ implements a Morita
+equivalence between $A_b$ and $A_{b'}$.  The derived categories
+$\Perf(A_b) \simeq \Perf(A_{b'})$ are canonically equivalent,
+and both recover $\cC(I_p)$.
+\end{proof}
+
+\subsection{The universal bulk}
+
+\begin{definition}[Chiral endomorphism operad]
+\label{def:chiral-endomorphism-operad-v2}
+Let $A$ be a graded vector space with translation
+$\partial \colon A \to A$.  The \emph{chiral endomorphism operad}
+$\cE\!nd^{\mathrm{ch}}_A$ has components
+$\cE\!nd^{\mathrm{ch}}_A(n)
+:= \Hom(A^{\otimes n},\,
+A((\lambda_1))\cdots((\lambda_{n-1})))$
+with composition by consecutive block-substitution of spectral
+variables.
+\end{definition}
+
+\begin{definition}[Chiral Hochschild cochains]
+\label{def:chiral-hochschild-v2}
+The \emph{chiral Hochschild cochain complex} of a curved
+$A_\infty$-chiral algebra $(A, \{m_k\})$ is
+\[
+  \cC^\bullet_{\mathrm{ch}}(A, A)
+  \;:=\;
+  \prod_{n \ge 0}
+  \cE\!nd^{\mathrm{ch}}_A(n+1)[-n],
+\]
+with differential $\delta f := [m, f]$ using the Gerstenhaber
+bracket from operadic braces.  The brace operations
+$f\{g_1, \ldots, g_r\}$ are defined by iterated operadic
+insertion with Koszul signs.
+\end{definition}
+
+\begin{theorem}[The universal bulk;
+  \ClaimStatusProvedHere]
+\label{thm:universal-bulk}
+\index{derived center!as universal bulk|textbf}
+\index{Swiss-cheese theorem!chiral|textbf}
+Let $(A, \{m_k\})$ be a curved $A_\infty$-chiral algebra.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Brace dg algebra.}  The complex
+  $(\cC^\bullet_{\mathrm{ch}}(A, A), \delta, \{-\}\{-,\ldots,-\})$
+  is a brace dg algebra: $\delta^2 = 0$ from $[m,m] = 0$, the
+  brace operations satisfy the higher pre-Lie identity, and the
+  Gerstenhaber bracket $[f,g] = f\{g\} - (-1)^{\|f\|\|g\|} g\{f\}$
+  descends to a Gerstenhaber algebra on cohomology.
+
+\item \emph{Swiss-cheese universality.}
+  The pair $\cU(A) := (\cC^\bullet_{\mathrm{ch}}(A, A),\; A)$
+  is the \emph{terminal} local chiral open/closed pair: for every
+  local open/closed pair $(\cB, A, \iota)$, there exists a unique
+  morphism $\Phi \colon \cB \to \cC^\bullet_{\mathrm{ch}}(A,A)$
+  intertwining the Swiss-cheese operations.
+
+\item \emph{Derived center.}  The \emph{chiral derived center}
+  \[
+    \cZ^{\mathrm{der}}_{\mathrm{ch}}(A)
+    \;:=\;
+    H^*(\cC^\bullet_{\mathrm{ch}}(A, A),\, \delta)
+  \]
+  is the universal bulk algebra.  On the Koszul locus, it is a
+  three-term Gerstenhaber algebra
+  $\cZ^0 \oplus \cZ^1 \oplus \cZ^2$
+  by Theorem~H of Volume~I.
+
+\item \emph{Morita invariance.}
+  The derived center depends only on the Morita class of the
+  open-sector category:
+  $\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cC)
+  := R\!\Hom_{\operatorname{Fun}(\cC,\cC)}(\Id, \Id)$,
+  which in any chart $\cC \simeq \Perf(A_b)$ is computed by
+  $\cC^\bullet_{\mathrm{ch}}(A_b, A_b)$.
+\end{enumerate}
+\end{theorem}
+
+The proof of each part is given in
+\S\ref{sec:universal-bulk-proofs}.  The key point: the
+derived center is the \emph{bulk}, not the bar complex.
+The bar complex $\barB(A)$ classifies \emph{twisting morphisms}
+--- universal couplings between $A$ and its Koszul dual~$A^!$
+(Volume~I, Theorem~A) --- while the derived center classifies
+\emph{bulk operators acting on the boundary}.  These are different
+objects solving different problems.
+
+\subsection{The bar complex as coalgebraic projection}
+
+The bar construction of Volume~I enters the open/closed picture as
+a \emph{derived invariant} of the factorization category~$\cC$, not
+as the category itself.
+
+\begin{proposition}[Bar complex from the open sector;
+  \ClaimStatusProvedHere]
+\label{prop:bar-from-open}
+Let $\cC$ be an open/closed factorization dg-category with vacuum
+object~$b$ and boundary algebra $A_b = \End(b)$.  The bar complex
+$\barB^{\mathrm{ch}}(A_b) = T^c(s^{-1}\bar{A}_b)$ records the
+twisting data of~$\cC$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The bar differential $d_{\barB}$ encodes how closed-sector
+  operations twist the open-sector composition (OPE residues
+  on $\FM_k(\C)$).
+
+\item The bar coproduct~$\Delta$ encodes the ordered splitting
+  of open-sector tensor factors (deconcatenation on
+  $\Conf_k(\R)$).
+
+\item Together, $(\barB(A_b), d_{\barB}, \Delta)$ is a dg coalgebra
+  over the closed color of $\SCchtop$.  This is the Swiss-cheese
+  fingerprint identified in Volume~I's Theorem~A.
+
+\item The bar-cobar adjunction $\barB \dashv \Omega$ classifies
+  twisting morphisms: $\Hom(\Omega(C), A_b) \cong
+  \Tw(C, A_b) \cong \Hom(C, \barB(A_b))$.
+
+\item The Koszul dual $A^! = D_{\Ran}(\barB(A))$ is obtained
+  by Verdier duality on the bar coalgebra.  It lives on the
+  boundary~$\R$, governing the line-operator category
+  $\cC_{\mathrm{line}} \simeq A^!\text{-}\mathsf{mod}$.
+\end{enumerate}
+Four functors, four outputs:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lll}
+\textbf{Functor} & \textbf{Output} & \textbf{Role} \\
+\hline
+$\barB$ & coalgebra $\barB(A)$ & twisting morphism classifier \\
+$\Omega$ & algebra $\Omega(\barB(A)) \simeq A$ & boundary recovery (inversion) \\
+$D_{\Ran}$ & algebra $A^! = D_{\Ran}(\barB(A))$ & line-operator algebra \\
+$\cC^\bullet_{\mathrm{ch}}(-,-)$
+  & Gerstenhaber algebra $\cZ^{\mathrm{der}}$
+  & universal bulk \\
+\end{tabular}
+\end{center}
+None of these four objects should be confused with any other.
+\end{proposition}
+
+% ===================================================================
+\section{Modularity}
+\label{sec:modularity-trace-clutching}
+
+Modularity is not an axiom on the closed algebra.
+It is a consequence of three structures on the open sector.
+
+\subsection{The annulus trace}
+
+\begin{theorem}[Annulus trace; \ClaimStatusProvedHere]
+\label{thm:annulus-trace-v2}
+Let $\cC$ be an open/closed factorization dg-category on
+$(X, D, \tau)$ with cyclic trace $\Tr_b$ at a puncture~$p$.
+The factorization homology of the open sector over the boundary
+circle $S^1_p$ recovers Hochschild homology:
+\[
+  \int_{S^1_p} \cC
+  \;\simeq\;
+  \HH_*(\cC).
+\]
+In a chart $\cC \simeq \Perf(A_b)$:
+$\HH_*(A_b) = H_*(A_b \otimes_{A_b^e} A_b)$.
+\end{theorem}
+
+This is the \emph{first modular shadow}: the genus-$0$ trace
+functional on the open sector.  It precedes the genus-$1$
+curvature $\kappa(\cA) \cdot \lambda_1$ in the modular hierarchy:
+the annulus is a trace, the torus is a self-trace (a trace composed
+with itself along one cycle).  The passage from annulus to torus is
+the passage from Hochschild homology to the genus-$1$ amplitude ---
+and this passage is implemented by clutching.
+
+\subsection{Clutching and the genus tower}
+
+\begin{construction}[The clutching map]
+\label{constr:clutching}
+The non-separating clutching map
+$\xi \colon \overline{\cM}_{g-1,n+2} \to \overline{\cM}_{g,n}$
+(identifying two marked points to create a node, raising the genus
+by~$1$) induces a sewing functor on the open sector:
+\[
+  \xi_* \colon
+  \cC(\Sigma_{g-1,n+2})
+  \;\longrightarrow\;
+  \cC(\Sigma_{g,n}).
+\]
+The genus-$g$ amplitude is obtained by composing $g$~clutching maps,
+starting from the genus-$0$ seed.  The separating clutching
+$\xi_{\mathrm{sep}} \colon
+\overline{\cM}_{g_1,n_1+1} \times \overline{\cM}_{g_2,n_2+1}
+\to \overline{\cM}_{g,n}$ glues two surfaces along a shared
+boundary circle.
+
+Both clutching maps are implemented by the cyclic trace: sewing
+along a boundary circle is the composition
+\[
+  \cC(\Sigma_1) \otimes \cC(\Sigma_2)
+  \xrightarrow{\text{restrict to shared circle}}
+  \cC(S^1)
+  \xrightarrow{\Tr}
+  k,
+\]
+where the trace on $\cC(S^1) \simeq \HH_*(\cC)$ extracts the
+genus-raising scalar.
+\end{construction}
+
+\begin{theorem}[The modular Maurer--Cartan equation;
+  \ClaimStatusProvedHere]
+\label{thm:modular-mc}
+\index{Maurer--Cartan equation!modular|textbf}
+The open/closed MC element
+$\Theta^{\mathrm{oc}} :=
+\Theta_\cA + \sum_j \mu^{\cM_j}$
+satisfies:
+\begin{equation}\label{eq:modular-mc-v2}
+  D^{\mathrm{oc}}\,\Theta^{\mathrm{oc}}
+  + \tfrac{1}{2}[\Theta^{\mathrm{oc}},\Theta^{\mathrm{oc}}]
+  + \hbar\,\Delta_{\mathrm{clutch}}(\Theta^{\mathrm{oc}})
+  = 0.
+\end{equation}
+The three terms are:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $D^{\mathrm{oc}}\,\Theta^{\mathrm{oc}}$: the differential
+  (Stokes' theorem on the interior of the bordered FM
+  compactification).
+
+\item $[\Theta^{\mathrm{oc}},\Theta^{\mathrm{oc}}]$: the bracket
+  (codimension-$1$ collision strata --- bubble trees).
+
+\item $\hbar\,\Delta_{\mathrm{clutch}}(\Theta^{\mathrm{oc}})$:
+  the clutching operator (codimension-$1$ nodal strata ---
+  genus-raising degenerations), weighted by $\hbar$ to track genus.
+\end{enumerate}
+The equation is the boundary-of-boundary-is-zero identity on the
+compactified bordered moduli spaces.  It decomposes by sector:
+pure closed, pure open, mixed (bulk-to-boundary coupling), and
+clutching (genus tower).  The pure-closed projection recovers
+$\Theta_\cA$ (Volume~I, Theorem~\ref*{V1-thm:mc2-bar-intrinsic}).
+\end{theorem}
+
+\subsection{The modular trace principle}
+
+\begin{principle}[Modularity $=$ trace $+$ clutching]
+\label{princ:modularity-v2}
+\index{modular trace principle|textbf}
+The modular structure of the theory is not an additional axiom.
+It is determined by three ingredients on the open sector:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lll}
+\textbf{Ingredient} & \textbf{Open-sector origin}
+  & \textbf{Genus contribution} \\
+\hline
+Cyclic trace & $\Tr_b \colon \End(b) \to k$
+  & seed: the genus-$0$ amplitude \\
+Annulus & $\int_{S^1} \cC \simeq \HH_*(\cC)$
+  & genus $\frac{1}{2}$: the open partition function \\
+Clutching & $\xi_* \colon \cC_{g-1} \to \cC_g$
+  & each application raises genus by~$1$ \\
+\end{tabular}
+\end{center}
+The genus-$g$ amplitude is the $g$-fold iterate of clutching
+applied to the genus-$0$ seed.  The curvature
+$\kappa(\cA) \cdot \omega_g$ (Volume~I, Theorem~D) is the leading
+scalar of this iteration.  The shadow Postnikov tower
+$(\kappa, \mathfrak{C}, \mathfrak{Q}, \ldots)$ is the arity
+filtration.  The genus expansion is the genus filtration.  The full
+MC element $\Theta^{\mathrm{oc}}$ encodes both simultaneously.
+\end{principle}
+
+% ===================================================================
+\section{The gravitational interpretation}
+\label{sec:gravitational-interpretation}
+
+The preceding algebraic constructions have a single physical
+content: they compute the gravitational partition function of
+three-dimensional holomorphic--topological quantum field theory.
+
+\subsection{The genus expansion as gravity}
+
+The Maurer--Cartan element $\Theta^{\mathrm{oc}}$ is a formal
+power series in the genus parameter~$\hbar$:
+\[
+  \Theta^{\mathrm{oc}}
+  = \sum_{g \ge 0} \hbar^g \,\Theta^{\mathrm{oc}}_g.
+\]
+Each genus-$g$ component $\Theta^{\mathrm{oc}}_g$ lives in the
+open/closed convolution algebra
+$\mathfrak{g}^{\mathrm{oc}}_{\cA, \vec{\cM}}$
+restricted to genus~$g$.  The genus-$0$ term is the tree-level
+data (classical); the genus-$1$ term carries the curvature
+$\kappa(\cA) \cdot \lambda_1$ (one-loop correction); each higher
+genus carries the gravitational quantum corrections.
+
+In the holomorphic--topological interpretation:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Genus $0$}: the tree-level scattering.  The binary
+  collision residue $r(z) = \Res^{\mathrm{coll}}_{0,2}(\Theta_\cA)$
+  is the classical $r$-matrix, satisfying the classical Yang--Baxter
+  equation by Stokes' theorem on $\FM_3(\C)$.  This is the leading
+  gravitational vertex.
+
+\item \emph{Genus $1$}: the one-loop correction.  The curvature
+  $d_{\barB}^2 = \kappa(\cA) \cdot \omega_1$ is the Hodge anomaly:
+  the genus-$1$ moduli space has a nontrivial Hodge bundle, and the
+  fibrewise bar differential acquires curvature proportional to the first Chern
+  class.  The modular characteristic $\kappa(\cA)$ is the
+  gravitational anomaly coefficient --- it controls the strength
+  of one-loop gravity.
+
+\item \emph{Genus $g \ge 2$}: the higher-loop corrections.  The
+  shadow tower $(\kappa, \mathfrak{C}, \mathfrak{Q}, \ldots)$
+  extracts the gravitational observables at each arity.  The
+  complementarity theorem (Volume~I, Theorem~C) gives:
+  \[
+    Q_g(\cA) \oplus Q_g(\cA^!)
+    \;\cong\;
+    H^*(\overline{\cM}_g,\, Z(\cA)),
+  \]
+  decomposing the moduli-space cohomology into complementary
+  Lagrangian contributions from the algebra and its dual.
+  This is the algebraic expression of the holographic principle:
+  boundary and bulk contributions to the gravitational amplitude
+  are complementary halves of a single symplectic vector space.
+\end{enumerate}
+
+\subsection{Boundary-holographic complexity}
+
+The bulk 3d HT theory is topological: it has no local propagating
+degrees of freedom.  The perturbative gravitational partition
+function is determined entirely by the boundary chiral algebra.
+The shadow depth $r_{\max}(\cA)$ classifies the nonlinear
+complexity of this boundary-determined partition function
+(Theorem~\ref{thm:thqg-boundary-holographic-complexity}).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{clll}
+\textbf{Class} & \textbf{Depth} & \textbf{Examples}
+  & \textbf{Boundary-holographic content} \\
+\hline
+$\mathsf{G}$ & $r_{\max} = 2$ & Heisenberg, lattice
+  & Gaussian: $F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$,
+    one-loop exact \\
+$\mathsf{L}$ & $r_{\max} = 3$ & affine $\widehat{\fg}_k$
+  & Lie/tree: cubic boundary vertices only \\
+$\mathsf{C}$ & $r_{\max} = 4$ & $\beta\gamma$
+  & Contact: quartic terminates by rank-one rigidity \\
+$\mathsf{M}$ & $r_{\max} = \infty$ & Virasoro, $\cW_N$
+  & Mixed: infinite tower, non-polynomial potential \\
+\end{tabular}
+\end{center}
+
+For class-$\mathsf{G}$ algebras, the boundary OPE is quadratic:
+the partition function is determined at one loop.  Class~$\mathsf{L}$
+has tree-level cubic boundary interactions but no higher.
+Class~$\mathsf{C}$ terminates at quartic by a stratum-separation
+mechanism.  Class~$\mathsf{M}$ has an infinite tower of
+boundary $A_\infty$ operations, and the shadow generating function
+$H(t)^2 = t^4 Q_L(t)$ is algebraic of degree~$2$ with
+growth rate $\rho(\cA) = \sqrt{9\alpha^2 + 2\Delta}/(2|\kappa|)$
+(Theorem~\ref*{V1-thm:shadow-radius}).  The Virasoro algebra at
+$c = 13$ (the self-dual point, $\kappa = \kappa^! = 13/2$) has
+$\rho \approx 0.467$: the gravitational tower converges.
+
+\subsection{The completed platonic datum}
+
+The entire structure is packaged in a single datum.
+
+\begin{definition}[Completed platonic datum]
+\label{def:completed-platonic-v2}
+\index{platonic datum!completed|textbf}
+For a gravitational input $(\cA, X, \langle\cdot,\cdot\rangle, k)$
+on a tangential log curve $(X, D, \tau)$ with boundary category
+$\cC$, the \emph{completed platonic datum} is:
+\[
+  \Pi^{\mathrm{oc}}_X(\cA)
+  \;:=\;
+  \bigl(\,
+  \underset{\text{boundary}}{\cA},\;\;
+  \underset{\text{lines}}{A^!},\;\;
+  \underset{\text{bulk}}{\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cC)},\;\;
+  \underset{\text{MC element}}{\Theta^{\mathrm{oc}}},\;\;
+  \underset{\text{$r$-matrix}}{r(z)},\;\;
+  \underset{\text{connection}}{\nabla^{\mathrm{hol}}},\;\;
+  \underset{\text{trace}}{\Tr_\cA},\;\;
+  \underset{\text{tower}}{\mathfrak{R}^{\mathrm{oc}}_\bullet}
+  \,\bigr).
+\]
+Boundary, bulk, and lines are independently defined but constrained
+by the open/closed MC equation.  The closed projection of
+$\Theta^{\mathrm{oc}}$ is the modular MC element $\Theta_\cA$ of
+Volume~I.  The mixed projection is the bulk-to-boundary coupling.
+The clutching projection is the genus tower.  Every gravitational
+observable is a component of this single object.
+\end{definition}
