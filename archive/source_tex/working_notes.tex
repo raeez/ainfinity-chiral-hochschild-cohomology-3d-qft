@@ -1,6 +1,7 @@
 % ============================================================
 %
-%   WORKING NOTES ON A-INFINITY CHIRAL ALGEBRAS AND 3D HT QFT
+%   WORKING NOTES ON A-INFINITY CHIRAL ALGEBRAS
+%   AND 3D HOLOMORPHIC-TOPOLOGICAL QFT
 %
 %   Raeez Lorgat, 2024--2026
 %
@@ -60,27 +61,37 @@
 \declaretheorem[style=notesthm, name=Corollary, sibling=theorem]{corollary}
 \declaretheorem[style=notesdef, name=Definition, sibling=theorem]{definition}
 \declaretheorem[style=notesdef, name=Remark, sibling=theorem]{remark}
+\declaretheorem[style=notesdef, name=Observation, sibling=theorem]{observation}
+\declaretheorem[style=notesdef, name=Warning, sibling=theorem]{warning}
 \declaretheorem[style=notesdef, name=Example, sibling=theorem]{example}
 \declaretheorem[style=notesdef, name=Conjecture, sibling=theorem]{conjecture}
+\declaretheorem[style=notesdef, name=Question, sibling=theorem]{question}
 
 % --- Macros ---
 \newcommand{\cA}{\mathcal{A}}
 \newcommand{\cB}{\mathcal{B}}
 \newcommand{\cC}{\mathcal{C}}
 \newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
 \newcommand{\cO}{\mathcal{O}}
 \newcommand{\cW}{\mathcal{W}}
 \newcommand{\cH}{\mathcal{H}}
 \newcommand{\cZ}{\mathcal{Z}}
 \newcommand{\cD}{\mathcal{D}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cL}{\mathcal{L}}
 \newcommand{\fg}{\mathfrak{g}}
 \newcommand{\fh}{\mathfrak{h}}
+\newcommand{\fn}{\mathfrak{n}}
 \newcommand{\fsl}{\mathfrak{sl}}
 \newcommand{\barB}{\overline{B}}
+\newcommand{\B}{\bar{B}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bD}{\mathbb{D}}
 
 \newcommand{\Ass}{\mathsf{Ass}}
 \newcommand{\Com}{\mathsf{Com}}
@@ -98,20 +109,28 @@
 \newcommand{\ad}{\operatorname{ad}}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\RHom}{\operatorname{RHom}}
+\newcommand{\End}{\operatorname{End}}
 \newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\HH}{\operatorname{HH}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Perf}{\operatorname{Perf}}
 \newcommand{\ChirHoch}{\mathrm{ChirHoch}}
 \newcommand{\gAmod}{\mathfrak{g}^{\mathrm{mod}}_\cA}
 \newcommand{\dzero}{d_0}
 \newcommand{\dfib}{d_{\mathrm{fib}}}
-\newcommand{\CompCl}{\operatorname{CompCl}}
+\newcommand{\Dtot}{D_{\mathrm{tot}}}
+\newcommand{\normord}[1]{:\!#1\!:}
+\newcommand{\Zder}{\cZ^{\mathrm{der}}_{\mathrm{ch}}}
 
 \DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Conf}{Conf}
 
 % Separator
 \newcommand{\sep}{\bigskip\begin{center}$*$\end{center}\medskip}
 
-\title{\textit{Working Notes on $A_\infty$ Chiral Algebras\\
+\title{\textit{Working Notes on $\Ainf$ Chiral Algebras\\
 and 3D Holomorphic-Topological QFT}}
 \author{Raeez Lorgat}
 \date{2024--2026}
@@ -121,155 +140,3796 @@ and 3D Holomorphic-Topological QFT}}
 
 \begin{quote}
 \itshape
-These notes record the passage from the bar complex of a chiral
-algebra to the Swiss-cheese operad on $\C \times \R$, and from
-there to 3D holomorphic-topological quantum field theory.
+Volume I took a $1$-form and followed where it led: into the
+bar complex, the five theorems, the shadow tower.
+These notes are about what happens when the $1$-form acquires
+a second direction, what the bar complex becomes when read in
+three dimensions, and why the coproduct contains more physics
+than the differential.
 \end{quote}
 
 \tableofcontents
 
 
 % =================================================================
-\section{The Swiss-cheese direction}
-\label{sec:sc-direction}
+\section{Two directions}
+\label{sec:two-directions}
 % =================================================================
 
-The bar complex of a chiral algebra~$\cA$ on a curve~$X$ is a
-cosheaf on $\Ran(X)$.  Its differential encodes collisions in the
-$\C$-direction (the holomorphic plane).  Its coproduct encodes
-separation in the $\R$-direction (the topological line).  Together:
-a Swiss-cheese algebra on
-$\FM_k(\C) \times \mathrm{Conf}_k(\R)$.
+The bar complex of a chiral algebra $\cA$ on a curve $X$ carries
+two structures.
 
-At genus~$0$, the Swiss-cheese structure is uncurved: the
-$m_k^{\mathrm{SC}}$ operations satisfy the $\SCchtop$ axioms
-without obstruction.  At genus~$g \geq 1$, curvature appears:
-$\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$, where $\kappa$ is
-the modular characteristic from Volume~I and $\omega_g$ is the
-K\"ahler form on~$\cM_g$.
+\medskip
 
-The recognition theorem (Weiss cosheaf descent) identifies
-$\SCchtop$-algebras with factorization algebras on
-$\C \times \R$ satisfying a local constancy condition along~$\R$.
-The proof uses the product Weiss topology: a cover of
+The first is the \textbf{differential} $d_{\barB}$.  It extracts
+OPE residues at collision divisors in $\FM_k(X)$.  Points
+approach each other along the curve.  The propagator
+$\eta_{ij} = d\log(z_i - z_j)$ detects each collision and records
+its residue.  Arnold's relation kills triple residues, so
+$d_{\barB}^2 = 0$ at genus $0$.  This is the holomorphic
+direction.  It is everything Volume~I studied.
+
+\medskip
+
+The second is the \textbf{coproduct} $\Delta$.  On the tensor
+coalgebra $T^c(s^{-1}\bar\cA)$, deconcatenation is
+\[
+\Delta[a_1 \,|\, \cdots \,|\, a_n]
+\;=\;
+\sum_{i=0}^{n}
+[a_1 \,|\, \cdots \,|\, a_i]
+\;\otimes\;
+[a_{i+1} \,|\, \cdots \,|\, a_n].
+\]
+This is the ordered splitting of a word into two subwords.
+It does not depend on the curve, the OPE, or the central
+charge.  It depends on the ordering.  Points are separated
+along a line, and the line is cut at one of the $n+1$
+positions between them.  This is the topological direction.
+
+\medskip
+
+The differential lives on $\FM_k(\C)$.  The coproduct lives on
+$\Conf_k(\R)$.  Together: a bar element of degree $k$ is
+parametrised by
+\[
+\FM_k(\C) \;\times\; \Conf_k(\R),
+\]
+the product of holomorphic and topological configuration spaces.
+
+\sep
+
+This product is the operadic fingerprint of a $3$d
+holomorphic-topological QFT on $\C_z \times \R_t$.  Observables
+factorise holomorphically in $z$ and associatively in $t$.  The
+two-coloured Swiss-cheese operad $\SCchtop$ has operation spaces
+$\FM_k(\C) \times \Eone(m)$: the closed colour is the
+Fulton--MacPherson compactification (holomorphic collisions); the
+open colour is the little intervals operad (topological
+splittings).  The bar differential is the closed colour.  The bar
+coproduct is the open colour.
+
+The same $1$-form $\eta_{ij}$ generates both structures.
+Its collision residues produce the differential.  Its ordering
+(which point comes first along the time axis) produces the
+coproduct.  One form, two directions, one product.
+
+\sep
+
+At genus $0$, $d_{\barB}^2 = 0$ and $\Delta$ is coassociative
+and compatible with $d_{\barB}$: these are the Swiss-cheese
+relations without obstruction.  At genus $g \geq 1$, the
+curvature $\dfib^{\,2} = \kappa(\cA) \cdot \omega_g$ from
+Volume~I infects the product:
+\[
+m_1^2(a) \;=\; [m_0, a], \qquad m_0 = \kappa(\cA) \cdot \omega_g.
+\]
+The Swiss-cheese algebra becomes \textit{curved}.  The failure of
+formality at genus $g \geq 1$ is the bar construction's single
+most important feature.  It is not a defect.  It is $\kappa$.
+
+
+% =================================================================
+\section{The recognition theorem}
+\label{sec:recognition}
+% =================================================================
+
+A factorisation algebra on $\C \times \R$ satisfying local
+constancy along~$\R$ is the same thing as an $\SCchtop$-algebra.
+
+The proof uses the product Weiss topology.  A cover of
 $U \times I \subset \C \times \R$ is a collection of products
 $\{U_\alpha \times I_\beta\}$ refining the product open cover.
+The cosheaf of observables on $\C \times \R$ restricts to a
+constructible dg-cosheaf on $\FM_k(\C) \times \Conf_k(\R)$.
+Weiss descent identifies the structure maps with the operations
+of $\SCchtop$.
 
-
-% =================================================================
-\section{PVA descent}
-\label{sec:pva-descent}
-% =================================================================
-
-The descent from chiral algebras to Poisson vertex algebras (PVAs)
-is controlled by six axioms D1--D6.  At genus~$0$:
-
-\begin{enumerate}[label=D\arabic*.]
-\item \emph{Leibniz rule}: $\{a_\lambda bc\} = \{a_\lambda b\}c + b\{a_\lambda c\}$.
-\item \emph{Sesquilinearity}: $\{\partial a_\lambda b\} = -\lambda\{a_\lambda b\}$.
-\item \emph{Skew-symmetry}: $\{b_\lambda a\} = -\{a_{-\lambda-\partial} b\}$.
-\item \emph{Jacobi}: $\{a_\lambda\{b_\mu c\}\} - \{b_\mu\{a_\lambda c\}\} = \{\{a_\lambda b\}_{\lambda+\mu} c\}$.
-\item \emph{Commutativity}: $ab = ba$.
-\item \emph{Unit}: $\{a_\lambda 1\} = 0$.
+\begin{theorem}[Recognition; proved]
+\label{thm:recognition-wn}
+There is an equivalence of $\infty$-categories between:
+\begin{enumerate}[label=\textup{(\roman*)},nosep]
+\item logarithmic $\SCchtop$-algebras, and
+\item factorisation algebras on $\C \times \R$ that are
+  holomorphic in $\C$ and locally constant in~$\R$.
 \end{enumerate}
+\end{theorem}
 
-D2--D5 are proved via geometric arguments: the exchange cylinder
-and three-face Stokes identity on $\FM_3(\C)$.  D6 uses the
-factorization of $H_3(a)$ and topological contractibility.
+\noindent
+The product topology is not decorative.  It is the entire content
+of the theorem: the two colours of the Swiss-cheese operad arise
+because the two factors of $\C \times \R$ carry different
+topologies (holomorphic versus locally constant).
 
-The bridge from the $\SCchtop$ operad to PVA axioms operates
-in two directions:
-\begin{itemize}
-\item Operad $\Rightarrow$ axioms (F4): the $\SCchtop$
-  structure maps project to PVA operations.  Proved.
-\item Axioms $\Rightarrow$ operad (F5, rectification): a PVA
-  satisfying D1--D6 lifts to an $\SCchtop$-algebra.  Proved
-  via homotopy-Koszulity of $\SCchtop$.
-\end{itemize}
+\medskip
+
+The recognition theorem converts geometric data (a factorisation
+algebra on a $3$-manifold) into algebraic data (an operad
+algebra).  Without it, the Swiss-cheese structure would be a
+presentation, not a property.  With it, the two-coloured operad
+is the geometry.
 
 
 % =================================================================
-\section{Homotopy-Koszulity of $\SCchtop$}
-\label{sec:homotopy-koszul}
+\section{One algebra, three objects}
+\label{sec:three-objects}
 % =================================================================
 
-\begin{theorem}
+From a single chiral algebra $\cA$, the bar construction
+produces three objects.  They are not the same.
+
+\medskip
+
+\noindent
+\textbf{(i)} The \textbf{boundary algebra} $\cA$ itself.  This
+lives on the boundary $\{0\} \times \R$ of the half-space
+$\C_{\geq 0} \times \R$.  It is a chiral algebra: a vertex
+algebra, an $\Einf$-chiral structure.  Its data are the OPE
+coefficients $c_n^{ab}$ and the conformal weights.
+
+\medskip
+
+\noindent
+\textbf{(ii)} The \textbf{bar coalgebra} $\barB(\cA)$.  This is a
+factorisation coalgebra on $\Ran(X)$, carrying both the
+differential and the coproduct.  It classifies \textit{twisting
+morphisms}: universal couplings between $\cA$ and its Koszul
+dual~$\cA^!$.  On the Koszul locus,
+$\MC(\Hom(\barB(\cA), \cA^!)) \simeq \Perf(\cA^!)$.  This is
+the bar complex's native role: a representability theorem for
+deformations.
+
+\medskip
+
+\noindent
+\textbf{(iii)} The \textbf{chiral derived center}
+\[
+\Zder(\cA)
+\;:=\;
+H^*\bigl(C^\bullet_{\mathrm{ch}}(\cA, \cA),\, \delta\bigr).
+\]
+This is the universal bulk algebra: it classifies observables
+of the $3$d theory that act on the boundary.  At the level of
+Hochschild cohomology:
+$\Zder(\cA) \simeq \HH^\bullet_{\mathrm{ch}}(\cA)$, the chiral
+Hochschild cochains.
+
+\sep
+
+The identification ``bar = bulk'' is the most dangerous false
+equation in three-dimensional holomorphic-topological field theory.
+
+The bar coalgebra classifies \textit{couplings} between a boundary
+and its dual.  The derived center classifies \textit{operators} that
+the boundary does not know it has.  These are different functors
+applied to different inputs with different outputs.  In a
+sentence: bar-cobar is about twisting morphisms; the derived
+center is about the acting-on relation.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\textbf{Object} & \textbf{Classifies} & \textbf{Functor} \\
+\hline
+$\barB(\cA)$ & twisting morphisms $\cA \leadsto \cA^!$
+  & bar (coalgebra) \\[3pt]
+$\Zder(\cA)$ & bulk operators acting on $\cA$
+  & chiral Hochschild (algebra) \\[3pt]
+$\Omega(\barB(\cA))$ & nothing new: $\cA$ itself
+  & cobar (recovers input)
+\end{tabular}
+\end{center}
+
+\medskip
+
+The cobar of the bar is $\cA$ (Theorem~B of Volume~I).  The
+Verdier dual of the bar is $\barB(\cA^!)$ (Theorem~A).  These
+are three different operations, producing three different
+objects.
+
+
+% =================================================================
+\section{The Swiss-cheese pentagon}
+\label{sec:pentagon}
+% =================================================================
+
+The $\SCchtop$ operad has two colours: \textit{closed}
+(holomorphic, on $\FM_k(\C)$) and \textit{open} (topological,
+on $\Eone(m)$).  The structure maps are:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llll@{}}
+\textbf{Map} & \textbf{Inputs} & \textbf{Output}
+  & \textbf{Interpretation} \\
+\hline
+$\mu_{k,0}$ & $k$ closed & closed
+  & Gerstenhaber bracket \\[3pt]
+$\mu_{0,m}$ & $m$ open & open
+  & $\Ainf$ products \\[3pt]
+$\mu_{k,m}$ & $k$ closed, $m$ open & open
+  & brace operations \\[3pt]
+$\mu_{k,0}^{\mathrm{oc}}$ & $k$ open & closed
+  & \textbf{EMPTY} \\[3pt]
+$\mu_{k,m}^{\mathrm{mix}}$ & mixed & mixed
+  & SC composition
+\end{tabular}
+\end{center}
+
+\medskip
+
+The fourth row is the content.  No open inputs produce closed
+outputs.  This is not a convention but a structural constraint:
+the open colour lives on the boundary $\R$, the closed colour in
+the bulk $\C \times \R$, and bulk interactions restrict to
+boundaries but not conversely.  Bulk-to-boundary is a restriction
+functor; boundary-to-bulk would require extension, which the
+holomorphic direction forbids.
+
+The bar complex makes this visible.  The bar \textit{differential}
+(closed colour) is the OPE residue extraction: a collision in the
+$\C$-plane.  The bar \textit{coproduct} (open colour) is the
+deconcatenation: a separation along~$\R$.  Applying the coproduct
+and then the differential is a brace operation: splitting a bar
+element, then colliding within each piece.  Applying the
+differential and then the coproduct is an SC composition:
+colliding first, then splitting.  The Stasheff pentagon for the
+$\Ainf$ structure and the Gerstenhaber bracket for the closed
+colour are the same identity, read on the two factors of
+$\FM_k(\C) \times \Eone(m)$.
+
+The Swiss-cheese operad is Koszul.
+
+\begin{theorem}[Homotopy-Koszulity; proved]
+\label{thm:homotopy-koszul-wn}
 The chiral-topological Swiss-cheese operad $\SCchtop$ is
 homotopy-Koszul.
 \end{theorem}
 
-The proof has three steps:
-\begin{enumerate}
-\item The classical Swiss-cheese operad is Koszul
-  (Livernet, Voronov, Ginzburg--Kapranov).
-\item Kontsevich formality gives a quasi-isomorphism
-  $\Phi\colon \SCchtop \to \mathrm{SC}$.
-\item Transfer: bar-cobar preserves quasi-isomorphisms;
-  two-out-of-three gives the result.
+\noindent
+The proof:
+(1)~the classical Swiss-cheese operad is Koszul
+(Livernet, Voronov, Ginzburg--Kapranov);
+(2)~Kontsevich formality gives a quasi-isomorphism
+$\Phi\colon \SCchtop \to \mathrm{SC}$;
+(3)~bar-cobar preserves quasi-isomorphisms; two-out-of-three.
+
+The consequences are unconditional.  Bar-cobar on
+$\SCchtop$-algebras is a Quillen equivalence, not merely an
+adjunction.  Lines are $\cA^!$-modules.  The dg-shifted Yangian
+is defined without hypothesis.
+
+
+% =================================================================
+\section{Descent to the classical shadow}
+\label{sec:pva-descent}
+% =================================================================
+
+The holomorphic Swiss-cheese algebra, projected to cohomology,
+produces a Poisson vertex algebra (PVA).  The descent is
+controlled by six axioms D1--D6, each proved by a geometric
+argument on $\FM_k(\C)$.
+
+\begin{enumerate}[label=D\arabic*.,nosep]
+\item \textit{Leibniz rule}:
+  $\{a_\lambda bc\} = \{a_\lambda b\}c + b\{a_\lambda c\}$.
+\item \textit{Sesquilinearity}:
+  $\{\partial a_\lambda b\} = -\lambda\{a_\lambda b\}$.
+\item \textit{Skew-symmetry}:
+  $\{b_\lambda a\} = -\{a_{-\lambda-\partial} b\}$.
+\item \textit{Jacobi identity}:
+  $\{a_\lambda\{b_\mu c\}\} - \{b_\mu\{a_\lambda c\}\}
+  = \{\{a_\lambda b\}_{\lambda+\mu} c\}$.
+\item \textit{Commutativity}:
+  $ab = ba$ on cohomology.
+\item \textit{Unit}:
+  $\{a_\lambda 1\} = 0$.
 \end{enumerate}
 
-The consequence: bar-cobar on $\SCchtop$-algebras is a
-Quillen \emph{equivalence}, not merely an adjunction.
-Lines (boundary conditions) are unconditionally $\cA^!$-modules.
-The dg-shifted Yangian is unconditional.
+D2--D5 are proved by the exchange cylinder and the three-face
+Stokes identity on $\FM_3(\C)$.  The exchange cylinder is the
+bordism
+$\FM_2(\C) \times [0,1] \to \FM_3(\C)$
+that swaps two points while a third observes; the three-face
+identity
+\[
+d\omega_3 \;=\; \omega_{12,3} - \omega_{13,2} + \omega_{1,23}
+\]
+on $\partial\FM_3(\C)$ gives skew-symmetry and Jacobi
+simultaneously.  D6 uses the factorisation of $H_3(a)$ and the
+contractibility of the disc.
+
+The bridge operates in both directions.  F4 (operad $\Rightarrow$
+axioms): the $\SCchtop$ structure maps project to PVA operations.
+F5 (axioms $\Rightarrow$ operad): a PVA satisfying D1--D6 lifts
+to an $\SCchtop$-algebra.  The lift exists because $\SCchtop$ is
+homotopy-Koszul: the cobar of the Koszul dual cooperad provides
+a cofibrant resolution, and the PVA data define a map from this
+resolution.
+
+\sep
+
+The PVA on cohomology $H^\bullet(\cA, Q)$ is $(-1)$-shifted:
+the $\lambda$-bracket has shifted parity relative to classical
+PVA conventions.  This is not an anomaly.  It is the degree shift
+in the desuspension $s^{-1}$ of the bar construction.
 
 
 % =================================================================
-\section{The modular Swiss-cheese operad}
-\label{sec:modular-sc}
+\section{The coproduct}
+\label{sec:coproduct}
 % =================================================================
 
-The modular extension replaces trees by stable graphs with
-mixed ($\C$-direction and $\R$-direction) edges.  The
-relative Feynman transform $F_{\mathrm{rel}}\cO$ sums
-over stable graphs with two edge colours:
+In gauge theory (Chern--Simons with boundary algebra
+$\widehat\fg_k$), the gluon $J^a$ has a primitive coproduct:
+\[
+\Delta_z(J^a) \;=\; J^a(w{+}z) \otimes 1
+\;+\; 1 \otimes J^a(w).
+\]
+But the Sugawara composite
+$T_{\mathrm{aff}} = \frac{1}{2(k+h^\vee)}\sum_a
+\normord{J^a J^a}$ has a nontrivial coproduct.  The cross term
+\[
+\Delta_z(T_{\mathrm{aff}})
+\;=\;
+\tau_z(T_{\mathrm{aff}}) \otimes 1
+\;+\; 1 \otimes T_{\mathrm{aff}}
+\;+\;
+\frac{1}{k+h^\vee}\,\Omega(w{+}z,\, w),
+\]
+where $\Omega = \sum_a J^a \otimes J^a$ is the split Casimir,
+is a production vertex: a gluon bound state can dissociate into
+its constituents.  The gluon IS the connection.  It splits
+because the connection is a primitive field.
 
-\begin{itemize}
-\item \emph{Closed edges} (genus direction): carry the
-  $\hbar$-weight, record non-separating degenerations.
-\item \emph{Open edges} (boundary direction): carry the
-  boundary insertion data, record separation of marked
-  points along~$\R$.
+\sep
+
+In gravity (Virasoro boundary), the stress tensor $T$ is the
+graviton.  The coproduct is primitive at every arity:
+\begin{equation}\label{eq:gravity-primitive-wn}
+\Delta_z^W(x) \;=\; \tau_z(x) \otimes 1 \;+\; 1 \otimes x
+\end{equation}
+for every element $x$ of the $\cW$-algebra, with no corrections
+whatsoever.
+
+The mechanism is a ghost-number obstruction intrinsic to
+Drinfeld--Sokolov reduction.  The transferred coproduct, computed
+by homological perturbation, sums over decorated trees.  Every
+tree in the HPL expansion produces an output at ghost number
+$\pm 1$.  The projection $p \otimes p$ onto
+$\cW$-algebra cohomology kills both.  The obstruction is not
+perturbative: it holds at every order, every arity, every
+principal DS reduction in every simple Lie algebra.
+
+In gauge theory, the gluon IS the connection.  In gravity, the
+graviton IS the curvature.  A connection splits (it is the
+primitive field of the theory).  A curvature does not (it is a
+composite, and the ghost-number filtration forbids the splitting).
+This is the algebraic content of the statement that gravity does
+not produce particles; it only braids them.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llll@{}}
+ & \textbf{Chern--Simons} & \textbf{Gravity} \\
+\hline
+Boundary algebra & $\widehat\fg_k$ & $\mathrm{Vir}_c$ \\[3pt]
+Primitive field & $J^a$ (connection) & $T$ (curvature) \\[3pt]
+$\Ainf$ tower & finite ($m_3 = 0$, class L)
+  & infinite ($m_k \neq 0\ \forall k$, class M) \\[3pt]
+Coproduct $\Delta_z$ & nontrivial (Casimir cross-term)
+  & primitive (ghost obstruction) \\[3pt]
+$r$-matrix & $\Omega_\fg/z$ & $(c/2)/z^3 + 2T/z$ \\[3pt]
+Shadow depth & $3$ & $\infty$
+\end{tabular}
+\end{center}
+
+\medskip
+
+All nonlinearity of gravity resides in the $\Ainf$ products
+$\{m_n^W\}_{n \geq 3}$ and in the collision residue
+$r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$.  The coproduct carries
+no information.  This is the central algebraic fact about
+three-dimensional quantum gravity.
+
+
+% =================================================================
+\section{Five worked examples}
+\label{sec:five-examples}
+% =================================================================
+
+\subsection*{Chern--Simons}
+
+Gauge group $G$, level $k$.  Boundary algebra:
+$\widehat\fg_k$.  Class L, shadow depth $3$.
+$r$-matrix: $r(z) = \Omega_\fg/z$ (Casimir, single pole).
+Coproduct: nontrivial (Casimir cross-term on composites).
+$\kappa = \dim(\fg)(k+h^\vee)/(2h^\vee)$.
+Complementarity: $\kappa + \kappa^! = 0$ by Feigin--Frenkel.
+
+The entire $\Ainf$ structure is formal: $m_k = 0$ for $k \geq 3$
+on cohomology.  The bar complex is quadratic.  The Koszul dual
+$\widehat\fg_{-k-2h^\vee}$ is another affine algebra at the
+reflected level.  Lines: highest-weight modules for the dual.
+On the integrable locus ($k \in \Z_{\geq 0}$), the line category
+is $\mathrm{Rep}_q(\fg)$ with $q = e^{\pi i/(k+h^\vee)}$,
+recoverable by the Kazhdan--Lusztig equivalence.
+
+\subsection*{Gravity}
+
+Boundary algebra: $\mathrm{Vir}_c$.  Class M, shadow depth
+$\infty$.  $r$-matrix: $r(z) = (c/2)/z^3 + 2T/z$ (two poles,
+quasi-trigonometric).  Coproduct: primitive.
+$\kappa = c/2$; $\kappa^! = (26-c)/2$;
+$\kappa + \kappa^! = 13 \neq 0$.
+
+The quartic OPE pole forces an infinite $\Ainf$ tower.  Every
+$m_k$ is nonzero for generic $c$, computed by a wheel diagram on
+$K_k$ with $k-1$ cubic vertices.  The quartic contact invariant
+$Q^{\mathrm{ct}}_{\mathrm{Vir}} = 10/[c(5c+22)]$
+has poles at $c = 0$ and $c = -22/5$: the Kac determinant zeros
+at weight~$4$.  Self-duality at $c = 13$, not $c = 26$.
+
+\subsection*{Twisted holography}
+
+Costello--Gaiotto.  Boundary algebra: $V_k(\fg)$ (affine
+Kac--Moody).  Class L, shadow depth $3$.  Coproduct: nontrivial.
+The holographic dictionary is the Koszul triangle read through
+Volume~I's five theorems: bar complex exists (Theorem~A), boundary
+reconstructs bulk (Theorem~B), Neumann/Dirichlet decomposition
+(Theorem~C), genus tower by $\kappa$ (Theorem~D), BV origin of
+Hochschild complex (Theorem~H).
+
+\subsection*{M2-brane}
+
+From the $\cN = 6$ ABJM theory.  Boundary algebra: supersymmetric
+current algebra.  Coproduct: nontrivial (fundamental fields split).
+The M2 example has no DS reduction: the $\cW$-algebra structure is
+absent, and the coproduct obstruction does not apply.  This is a
+gauge theory, not a gravity theory, and the coproduct confirms it.
+
+\subsection*{M5-brane / 6d $(2,0)$}
+
+From the $\cN = (2,0)$ theory on $\C \times \R \times S^3$.
+Boundary algebra: $\cW_N$ at large $N$.  Class M, shadow depth
+$\infty$.  Coproduct: primitive (by the same ghost-number
+argument as Virasoro, since $\cW_N$ arises by DS reduction).
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccccc@{}}
+ & CS & Gravity & Twisted hol. & M2 & M5 \\
+\hline
+Class & L & M & L & L & M \\
+$r_{\max}$ & $3$ & $\infty$ & $3$ & $3$ & $\infty$ \\
+$\Delta_z$ & nontrivial & primitive & nontrivial
+  & nontrivial & primitive \\
+DS origin & no & yes & no & no & yes \\
+$\kappa + \kappa^!$ & $0$ & $13$ & $0$ & $0$ & $\varrho K_N$
+\end{tabular}
+\end{center}
+
+\medskip
+
+The dichotomy is clean: DS reduction produces primitive
+coproducts and infinite shadow depth.  Its absence permits
+nontrivial coproducts and finite termination.
+
+
+% =================================================================
+\section{The annulus}
+\label{sec:annulus}
+% =================================================================
+
+Cut the circle $S^1$ by two arcs.  Each arc is an interval
+$I \cong \R$.  The factorisation homology of the open-sector
+category $\cC_{\mathrm{op}}$ on $S^1$ is computed by excision:
+\[
+\int_{S^1} \cC_{\mathrm{op}}
+\;\simeq\;
+\cC_{\mathrm{op}}(I_1)
+\;\otimes_{\cC_{\mathrm{op}}(I_1 \cap I_2)}^{\mathbb{L}}\;
+\cC_{\mathrm{op}}(I_2).
+\]
+The two-arc cover produces the two-sided bar complex, which is
+the cyclic bar complex.  In the homotopy category:
+\begin{equation}\label{eq:annulus-trace-wn}
+\int_{S^1} \cC_{\mathrm{op}}
+\;\simeq\;
+\HH_*(\cC_{\mathrm{op}}).
+\end{equation}
+
+This is the annulus trace.  The annulus $S^1 \times [0,1]$ is the
+simplest bordered surface with one boundary component.  Its
+factorisation homology is the Hochschild homology of the
+open-sector category.  The trace is the clutching operation: it
+restores the tangential basepoint $\tau_p$ to close the interval
+$I_p$ back to a circle.
+
+\sep
+
+For affine Kac--Moody at integrable level $k$:
+$\HH_0(\cC_{\mathrm{op}})$ is spanned by the characters
+$\chi_j(\tau) = \mathrm{tr}_{L_j}(q^{L_0 - c/24})$
+for $j = 0, 1, \ldots, k$.  The modular $S$-matrix acts on
+this space.  Modular invariance of the partition function
+$Z(\tau) = \sum_j |\chi_j|^2$ is the statement that the trace
+is $SL(2,\Z)$-equivariant.
+
+\medskip
+
+The annulus trace is the \textbf{first modular shadow of the
+open sector}.  It is the genus-$1$ datum, the simplest case of
+the trace-and-clutching construction that produces genus-$g$
+amplitudes from the open category.  Modularity is not an axiom
+on the closed algebra.  It is a property of the trace on the
+open sector.
+
+
+% =================================================================
+\section{The line category}
+\label{sec:line-category}
+% =================================================================
+
+On the chirally Koszul locus:
+\begin{equation}\label{eq:lines-koszul-wn}
+\cC_{\mathrm{line}} \;\simeq\; \cA^!\text{-}\mathbf{mod}.
+\end{equation}
+Line operators are modules for the Koszul dual.
+
+The proof is Koszul duality on the open colour.  The bar complex
+$\barB(\cA)$ is a dg coalgebra; its linear dual
+$\barB(\cA)^\vee = \barB(\cA^!)$ (Verdier duality, Theorem~A
+of Volume~I) is a dg algebra.  Maurer--Cartan deformations of
+the universal twisting morphism
+$\alpha\colon \barB(\cA) \to \cA^!$ are in bijection with
+$\cA^!$-module structures:
+\[
+\MC\bigl(\Hom(\barB(\cA),\, \cA^!)\bigr)
+\;\simeq\;
+\Perf(\cA^!).
+\]
+A line is not a module that happens to be placed along $\R$.
+A module is a line: the representation category of $\cA^!$ IS the
+category of boundary conditions for the theory restricted
+to~$\R$.
+
+\sep
+
+The meromorphic tensor structure on $\cC_{\mathrm{line}}$ comes
+from the $r$-matrix.  Two line operators at spectral
+parameters $z_1$ and $z_2$ tensor along the open direction with
+braiding
+\[
+R(z_1 - z_2)\colon M_1 \otimes M_2
+\;\xrightarrow{\sim}\;
+M_2 \otimes M_1,
+\]
+where $R(z)$ is the quantum $R$-matrix built from the bulk-boundary
+composition (not from a quantum group, though they agree on the
+evaluation locus).  For Chern--Simons:
+$R(z) = 1 + \hbar\,\Omega_\fg/z + O(\hbar^2)$.  For gravity:
+$R(z) = 1 + \hbar\,((c/2)/z^3 + 2T/z) + O(\hbar^2)$.
+
+The $r$-matrix is the genus-$0$, arity-$2$, ordered shadow of
+$\Theta_\cA$:
+\[
+r(z) \;=\; \Res^{\mathrm{coll}}_{0,2}(\Theta_\cA).
+\]
+Volume~I computes the collision residue.  Volume~II reads the
+result as a spectral braiding on lines.
+
+
+% =================================================================
+\section{The benchmark}
+\label{sec:benchmark}
+% =================================================================
+
+$V_k(\fsl_2)$ on $(\bP^1, \{0, \infty\})$.  This is the
+simplest non-trivial example: one curve with two punctures, one
+simple Lie algebra of rank $1$, one level parameter $k$.  Every
+object in the platonic datum can be computed.
+
+\medskip
+
+\noindent
+\textbf{Tangential log curve.}
+$(X, D, \tau) = (\bP^1, \{0,\infty\}, \{\tau_0, \tau_\infty\})$
+with tangential basepoints in the positive-real direction.  The
+boundary intervals $I_0, I_\infty \cong \R$ are the time axes at
+each puncture.
+
+\medskip
+
+\noindent
+\textbf{Open sector.}
+$\cC_{\mathrm{op}} = V_k(\fsl_2)\text{-mod}$ at each puncture.
+At integrable level $k$, this is $\mathrm{Rep}_q(\fsl_2)$ with
+$q = e^{i\pi/(k+2)}$, a semisimple category with $k+1$ simple
+objects $L_0, L_1, \ldots, L_k$.
+
+\medskip
+
+\noindent
+\textbf{Boundary algebra.}
+$A_b = V_k(\fsl_2)$.  The $\lambda$-bracket:
+$\{J^a{}_\lambda J^b\} = f^{ab}{}_c J^c + k\kappa^{ab}\lambda$.
+
+\medskip
+
+\noindent
+\textbf{Koszul dual.}
+$V_k(\fsl_2)^! = V_{-k-4}(\fsl_2)$.  The Feigin--Frenkel
+involution $k \mapsto -k - 2h^\vee = -k - 4$.
+
+\medskip
+
+\noindent
+\textbf{$r$-matrix.}
+$r(z) = \Omega_{\fsl_2}/z = (J^a \otimes J_a)/z$, a single-pole
+solution of the classical Yang--Baxter equation.
+
+\medskip
+
+\noindent
+\textbf{Modular characteristic.}
+$\kappa = 3(k+2)/4$.  Complementarity: $\kappa + \kappa^! = 0$.
+
+\medskip
+
+\noindent
+\textbf{Derived center.}
+$\Zder(V_k(\fsl_2)) \simeq \HH^\bullet_{\mathrm{ch}}(V_k(\fsl_2))$.
+At the critical level $k = -2$: functions on $\fsl_2$-opers.
+
+\medskip
+
+\noindent
+\textbf{Line category.}
+$\cC_{\mathrm{line}} \simeq V_{-k-4}(\fsl_2)\text{-mod}$.
+At integrable levels: $\mathrm{Rep}_{q^{-1}}(\fsl_2)$.
+
+\medskip
+
+\noindent
+\textbf{Annulus trace.}
+$\HH_0(\cC_{\mathrm{op}}) = \bigoplus_{j=0}^k \C \cdot \chi_j$.
+The modular $S$-matrix:
+\[
+S_{jj'} \;=\; \sqrt{\frac{2}{k+2}}\,
+\sin\!\left(\frac{\pi(j+1)(j'+1)}{k+2}\right).
+\]
+At $k = 1$: $S = \frac{1}{\sqrt{2}}
+\begin{psmallmatrix} 1 & 1 \\ 1 & -1 \end{psmallmatrix}$,
+the Hadamard matrix.
+
+\medskip
+
+\noindent
+\textbf{Factorisation homology.}
+$\int_{\C^\times}\!\cC_{\mathrm{op}}
+\simeq \mathrm{CB}_{0,2}(V_k(\fsl_2))$:
+genus-$0$ conformal blocks with two insertions.  For simple
+modules $L_j$ and $L_{j'}$:
+$\dim \mathrm{CB}_{0,2}(L_j, L_{j'}) = \delta_{j,j'}$.
+
+\medskip
+
+Every entry is proved.  The benchmark is the frame atom of
+Volume~II: simple enough to compute completely, rich enough to
+exhibit every feature of the theory.
+
+
+% =================================================================
+\section{Modularity last}
+\label{sec:modularity-last}
+% =================================================================
+
+The standard approach to modular invariance begins with the
+closed-string partition function and imposes modular invariance
+as an axiom.  The Swiss-cheese framework reverses this.
+
+Modularity is not an axiom on the closed algebra.  It is a
+\textit{derived property} of the trace on the open sector.
+
+\sep
+
+The modular Swiss-cheese operad extends $\SCchtop$ by replacing
+trees with stable graphs carrying two edge colours: closed
+edges (genus direction, carrying $\hbar$-weight, recording
+non-separating degenerations) and open edges (boundary direction,
+carrying insertion data, recording separations along $\R$).
+
+The relative Feynman transform $F_{\mathrm{rel}}\cO$ sums over
+stable graphs with both edge colours.  The differential contracts
+one edge; $d^2 = 0$ is the codimension-$2$ boundary cancellation
+on the moduli space of bordered Riemann surfaces.
+
+At genus $g \geq 1$, the curvature
+$\dfib^{\,2} = \kappa \cdot \omega_g$ forces a passage from
+ordinary to curved Swiss-cheese algebras.  The modular MC element
+\begin{equation}\label{eq:oc-mc-wn}
+\Theta^{\mathrm{oc}}_\cA
+\;:=\;
+\Theta_\cA + \sum_{j} \mu^{\cM_j}
+\end{equation}
+packages both the bar-intrinsic MC element $\Theta_\cA$ (from
+Volume~I) and the $\Ainf$-module structures $\mu^{\cM_j}$ at
+punctures.  Its MC equation decomposes into four components:
+\begin{alignat*}{2}
+&\text{pure closed:} &&\quad d_0\,\Theta
+  + \tfrac{1}{2}[\Theta, \Theta] = 0 \\[3pt]
+&\text{pure open:} &&\quad \partial\mu
+  + \mu \circ \mu = 0 \\[3pt]
+&\text{mixed:} &&\quad d_0\,\mu
+  + [\Theta, \mu] + \cdots = 0 \\[3pt]
+&\text{clutching:} &&\quad \text{(genus recursion)}
+\end{alignat*}
+The clutching component is the genus recursion from Volume~I.
+Each genus is determined by all lower genera.  No parameter
+is free.
+
+\sep
+
+The annulus trace (the $S^1$ factorisation homology of
+$\cC_{\mathrm{op}}$) produces the genus-$1$ modular datum.
+The clutching of $g$ annuli produces the genus-$g$ datum.
+Modularity emerges from the composition law of traces, not
+from an a priori constraint on the closed algebra.
+
+The programme status:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}ll@{}}
+\textbf{Result} & \textbf{Status} \\
+\hline
+Annulus trace $\simeq \HH_*(\cC_{\mathrm{op}})$ & proved \\[3pt]
+Full modular cooperad & programme (in progress) \\[3pt]
+Modular Swiss-cheese $d^2 = 0$ & proved (by $\partial^2 = 0$ on
+  $\overline\cM_{g,n}$) \\[3pt]
+Curvature $= \kappa \cdot \omega_g$ & proved (Volume~I)
+\end{tabular}
+\end{center}
+
+
+% =================================================================
+\section{The gravitational coproduct is primitive}
+\label{sec:primitive-coproduct}
+% =================================================================
+
+\begin{theorem}[Gravitational primitivity; proved]
+\label{thm:gravitational-primitivity-wn}
+For every principal Drinfeld--Sokolov reduction of every simple
+Lie algebra, the transferred dg-shifted Yangian coproduct on the
+$\cW$-algebra is strictly primitive:
+\[
+\Delta_z^W(x)
+\;=\;
+\tau_z(x) \otimes 1
+\;+\; 1 \otimes x
+\]
+for every $x$, at every arity, with no corrections.
+\end{theorem}
+
+\begin{proof}
+Three lines.
+
+The homological perturbation lemma expresses the transferred
+coproduct as a sum over decorated trees.  Each tree takes
+$\cW$-algebra inputs (ghost number $0$), applies the BRST
+homotopy $h$ (which raises or lowers ghost number by $1$), and
+outputs a tensor product.  Every tree with at least one internal
+vertex produces an output at ghost number $\pm 1$.  The projection
+$p \otimes p$ onto ghost-number-$0$ cohomology annihilates both
+signs.  The only surviving contribution is the trivial tree
+(no internal vertices), which gives the primitive term
+$\tau_z(x) \otimes 1 + 1 \otimes x$.
+\end{proof}
+
+\sep
+
+The proof works for every principal DS reduction because the
+ghost-number obstruction is intrinsic to the BRST structure, not
+to the specific Lie algebra.  The ghost field $c \in \fn_+^*$
+has ghost number $+1$; the antighost $b \in \fn_+$ has ghost
+number $-1$; the BRST homotopy $h$ carries ghost number $\pm 1$;
+and the projection $p$ annihilates everything outside ghost
+number $0$.
+
+The physical content: gravity does not produce particles.  The
+gravitational coproduct is primitive because the graviton is
+a composite (the stress tensor, built from the Sugawara
+construction) and not a fundamental field.  The ghost-number
+filtration, which is the algebraic encoding of the BV grading,
+enforces this at every order.
+
+For Chern--Simons, the fundamental field $J^a$ has ghost number
+$0$, so the BRST homotopy produces ghost-number-$0$ outputs.
+The Casimir cross-term survives projection.  The gluon splits.
+
+The asymmetry between gauge theory and gravity is an asymmetry
+between fundamental and composite fields, detected by the ghost
+number.
+
+
+% =================================================================
+\section{The four-stage architecture}
+\label{sec:four-stages}
+% =================================================================
+
+The open/closed programme has four stages.  Each depends on its
+predecessor.
+
+\medskip
+
+\noindent
+\textbf{Stage 1: local one-colour.}
+The input is a single chiral algebra $\cA$.  Outputs:
+
+\begin{enumerate}[label=\textup{(\alph*)},nosep]
+\item The bar coalgebra $\barB(\cA)$ exists as a factorisation
+  coalgebra (Volume~I, Theorem~A).
+\item On the Koszul locus, MC couplings
+  $\simeq \Perf(\cA^!)$ (Koszul duality on the open colour).
+\item The bulk is the chiral derived center:
+  $\Zder(\cA) \simeq \HH^\bullet_{\mathrm{ch}}(\cA)$
+  (boundary-linear exact theorem).
+\item Braces: $C^\bullet_{\mathrm{ch}}(\cA, \cA)$ carries a brace
+  dg-algebra structure from the $\SCchtop$ action.
+\end{enumerate}
+
+No global factorisation or modularity is used.  Everything here
+is the universal property of the bar construction and the
+homotopy-Koszulity of $\SCchtop$.  Proved.
+
+\medskip
+
+\noindent
+\textbf{Stage 2: the open primitive.}
+The primitive datum is the open/closed factorisation dg-category
+$\cC$ on a pointed curve with tangential basepoints
+$(X, D, \tau)$.
+
+\begin{enumerate}[label=\textup{(\alph*)},nosep]
+\item For any compact generator $b \in \cC(J)$, the boundary
+  algebra $A_b = \RHom_{\cC(J)}(b,b)$ is an $\Ainf$ chiral
+  algebra.
+\item Different compact generators produce Morita-equivalent
+  boundary algebras: the category $\cC$ is the invariant,
+  $A_b$ is a chart.
+\item The bar complex $\barB(A_b)$ encodes the twisting data
+  of $\cC$, and bar-cobar is the representability theorem for
+  deformations of $b$ inside $\cC$.
+\end{enumerate}
+
+Proved.
+
+\medskip
+
+\noindent
+\textbf{Stage 3: globalise.}
+Replace $(X, D, \tau) = (\C, \{0\}, \tau_0)$ by a general
+tangential log curve.  The real oriented blowup
+$\pi\colon \widetilde{X}_D \to X$ replaces each puncture $p_i$
+by a circle $S^1_{p_i}$; the tangential basepoint $\tau_{p_i}$
+cuts this circle into an interval $I_{p_i} \cong \R$.
+
+The mixed configuration spaces
+$\Conf^{\mathrm{oc}}_{I,\mathbf{m}}(X, D, \tau)
+= \Conf_I(X \setminus D) \times \prod_p \Conf^<_{m_p}(\R)$
+parametrise bulk insertions and boundary insertions together.
+The mixed Ran space is their colimit.
+
+Local-global bridge: the local one-colour theorems of Stage 1
+extend to global statements via descent along the mixed Ran space.
+Proved locally, the global extension requires compact generation
+and derived-center hypotheses.
+
+\medskip
+
+\noindent
+\textbf{Stage 4: modularise.}
+The trace operation on $\cC_{\mathrm{op}}$ (closing an interval
+to a circle) produces genus-$g$ data from genus-$0$ data.
+
+\begin{enumerate}[label=\textup{(\alph*)},nosep]
+\item The annulus trace
+  $\mathrm{Tr}_\cA \simeq \HH_*(\cC_{\mathrm{op}})$ is the
+  first modular shadow.  Proved.
+\item The full modular cooperad structure on the trace (the
+  composition law for genus-$g$ amplitudes via clutching of $g$
+  handles) is a programme.
+\end{enumerate}
+
+\sep
+
+The architecture is sequential.  Stage $k$ depends on Stage $k-1$.
+One should never discuss Stage 4 before establishing Stage 1.
+The order is: objects first, then categories, then globalisation,
+then modularity.
+
+
+% =================================================================
+\section{The Koszul triangle}
+\label{sec:koszul-triangle}
+% =================================================================
+
+On the chirally Koszul locus, the corrected bulk-boundary-line
+triangle is:
+\begin{equation}\label{eq:triangle-wn}
+A_{\mathrm{bulk}}
+\;\simeq\;
+\Zder(B_\partial)
+\;\simeq\;
+\Zder(\cC_{\mathrm{line}})
+\;\simeq\;
+\HH^\bullet_{\mathrm{ch}}(\cA^!),
+\qquad
+\cC_{\mathrm{line}} \simeq \cA^!\text{-}\mathbf{mod}.
+\end{equation}
+
+Three vertices:
+\begin{itemize}[nosep]
+\item The \textbf{bulk} is
+  $A_{\mathrm{bulk}} \simeq \cO(T^*[-1]\cL)$: polyvector fields
+  on the Lagrangian.  Note: the restriction
+  $\cO(\cM)|_\cL = \cO(\cL)$ is the boundary, not the bulk.
+  The bulk retains the full $(-1)$-shifted cotangent fibre.
+\item The \textbf{boundary} is $B_\partial = \cO(\cL)$: functions
+  on the Lagrangian.
+\item The \textbf{line category} is
+  $\cC_{\mathrm{line}} = \mathfrak{S}_b\text{-mod}$: modules for
+  the self-intersection algebra
+  $\mathfrak{S}_b = \cL \times_\cM \cL$.
 \end{itemize}
 
-The differential contracts one edge; $d^2 = 0$ is the
-codimension-$2$ boundary cancellation on the moduli space
-of bordered Riemann surfaces.
+The equivalence $\Zder(B_\partial) \simeq A_{\mathrm{bulk}}$ is
+the Hochschild--Kostant--Rosenberg theorem: Hochschild cochains of
+$\cO(\cL)$ are polyvector fields on $T^*[-1]\cL \simeq \cM|_\cL$,
+by the Lagrangian condition
+$T_\cL\cM / T\cL \simeq T^*\cL[-1]$.
 
-At genus~$g \geq 1$, the curvature
-$\dfib^{\,2} = \kappa \cdot \omega_g$ forces a passage
-from ordinary to \emph{curved} Swiss-cheese algebras.
-The curvature is the genus-$1$ shadow $\kappa$ from
-Volume~I; it measures the failure of the genus-$0$
-Swiss-cheese structure to extend uncurved to higher genus.
+The equivalence $\cC_{\mathrm{line}} \simeq \cA^!\text{-mod}$ is
+the convolution-module model: the self-intersection algebra on
+$\mathfrak{S}_b$ is the Koszul dual, and its modules are lines.
+
+Both equivalences require the Lagrangian condition.  This is the
+geometric origin of the algebraic fact that the boundary is NOT
+the bulk and lines are NOT bulk modules.
+
+\sep
+
+The bar complex presents the Swiss-cheese algebra, as the
+Steinberg variety presents the Hecke algebra.
+
+This is not analogy.  Both are algebro-geometric presentations of
+operadic structures via configuration-space resolutions.  The
+Steinberg variety $\mathfrak{S}_b = \cL \times_\cM \cL$ is the
+self-intersection of the Lagrangian $\cL$ in the moduli stack
+$\cM$; its convolution algebra is the Hecke algebra.  The bar
+complex $\barB(\cA) = T^c(s^{-1}\bar\cA)$ with differential from
+collision residues and coproduct from deconcatenation is the
+Swiss-cheese algebra on $\FM_k(\C) \times \Conf_k(\R)$; its
+convolution with the Koszul dual is the line category.  The
+two become the same construction at the level of factorisation
+homology.
 
 
 % =================================================================
-\section{3D holomorphic-topological QFT}
-\label{sec:3d-ht}
+\section{What we do not know}
+\label{sec:what-we-do-not-know}
 % =================================================================
 
-A 3D HT theory on $\C \times \R$ has:
-\begin{itemize}
-\item Boundary condition on $\{0\} \times \R$: a chiral
-  algebra~$\cA$ (the ``boundary VOA'').
-\item Bulk: a factorization algebra on $\C \times \R$
-  (the $\SCchtop$-algebra from the recognition theorem).
-\item Lines: $\cA^!$-modules (boundary conditions for the
-  bulk theory restricted to $\R$).
+\subsection*{Three falsification tests}
+
+\textbf{Test 1.}
+The global bulk-boundary-line triangle
+(equation~\eqref{eq:triangle-wn}) holds unconditionally in the
+boundary-linear exact sector.  Whether it extends to all HT
+theories depends on two unverified hypotheses: compact generation
+of the open-sector category, and the derived center being a
+quasi-isomorphism to the bulk.  These hypotheses are verified for
+Chern--Simons and for inputs from the Costello--Davison--Gaiotto
+framework.  They are not verified for gravity.  A counterexample
+would mean that the bulk of a gravitational theory is not the
+derived center of its boundary: the simplest open/closed
+identification would fail.
+
+\medskip
+
+\textbf{Test 2.}
+The gravitational primitivity theorem
+(\S\ref{sec:primitive-coproduct}) is proved for principal DS
+reductions.  For non-principal DS reductions (hook-type in type A,
+arbitrary nilpotent $f$ in general), the ghost-number argument
+applies verbatim, but the coproduct on the BRST cohomology has
+not been computed.  Hook-type in type A is the proved corridor.
+Full non-principal primitivity is conjectural.
+
+\medskip
+
+\textbf{Test 3.}
+The modular cooperad structure on the annulus trace (Stage 4 of
+the architecture) is a programme, not a theorem.  The annulus
+trace itself is proved: $\mathrm{Tr}_\cA \simeq
+\HH_*(\cC_{\mathrm{op}})$.  The full cooperad structure (clutching
+laws for genus $g \geq 2$, compatibility with the modular operad
+on $\overline\cM_{g,n}$) requires the bordered FM compactification
+and its log-FM extension, which is the frontier of Mok's
+programme.
+
+\subsection*{Programme status ledger}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llc@{}}
+\textbf{Component} & \textbf{What it requires} & \textbf{Status} \\
+\hline
+$\SCchtop$ homotopy-Koszulity & Kontsevich + Livernet &
+  \textsc{green} \\[3pt]
+Recognition theorem & Product Weiss descent &
+  \textsc{green} \\[3pt]
+PVA descent D1--D6 & FM Stokes calculus &
+  \textsc{green} \\[3pt]
+Gravitational primitivity & Ghost-number obstruction &
+  \textsc{green} \\[3pt]
+Bulk $=$ derived center (boundary-linear) &
+  Stage 1 local theorem & \textsc{green} \\[3pt]
+Bulk $=$ derived center (global) &
+  Compact generation & \textsc{amber} \\[3pt]
+Lines $= \cA^!$-mod & Koszul locus &
+  \textsc{green} \\[3pt]
+Annulus trace & $S^1$ excision &
+  \textsc{green} \\[3pt]
+Full modular cooperad & Bordered FM + log extension &
+  \textsc{amber} \\[3pt]
+BV/BRST $=$ bar at $g \geq 1$ & Genus-$g$ QME
+  & \textsc{red}
+\end{tabular}
+\end{center}
+
+\subsection*{Five false ideas to dismiss}
+
+\begin{enumerate}[nosep]
+\item ``The bar complex is the bulk algebra.''  The bar complex
+  classifies twisting morphisms.  The bulk is the derived center.
+  These are different objects produced by different functors.
+\item ``The boundary algebra determines the theory.''  The boundary
+  algebra is a chart of the open-sector category, not its essence.
+  Different compact generators produce Morita-equivalent charts.
+  The category is the invariant.
+\item ``Modularity is a property of the closed algebra.''  It is a
+  property of the trace on the open sector.  The closed algebra
+  inherits modularity from the clutching operation, not the reverse.
+\item ``Gravity and gauge theory differ only in the central
+  charge.''  They differ in the coproduct.  Gauge theory has
+  nontrivial $\Delta_z$; gravity has primitive $\Delta_z$.  The
+  ghost-number obstruction is structural, not parametric.
+\item ``The Koszul dual lives in the bulk.''  It lives on the
+  boundary: $\cA^!$ is the boundary algebra for line operators,
+  not a bulk observable.
+\end{enumerate}
+
+
+% =================================================================
+\section{The completed platonic datum}
+\label{sec:platonic}
+% =================================================================
+
+From a single chiral algebra $\cA$, the completed platonic datum
+assembles eight components:
+\[
+\Pi^{\mathrm{oc}}_X(\cA)
+\;=\;
+\bigl(\barB_X,\;\; \Omega_X,\;\; \Theta_\cA,\;\;
+\Zder,\;\; \mathrm{Tr}_\cA,\;\;
+\HH_*,\;\; \mathfrak{R}^{\mathrm{oc}}_\bullet,\;\;
+\nabla^{\mathrm{hol}}\bigr).
+\]
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\textbf{Component} & \textbf{Object} & \textbf{Role} \\
+\hline
+$\barB_X$ & bar coalgebra & classifies twisting morphisms \\[3pt]
+$\Omega_X$ & cobar algebra & recovers $\cA$ (Theorem B) \\[3pt]
+$\Theta_\cA$ & universal MC class & organises nonlinear tower \\[3pt]
+$\Zder$ & chiral derived center & universal bulk \\[3pt]
+$\mathrm{Tr}_\cA$ & annulus trace
+  & first modular shadow \\[3pt]
+$\HH_*$ & Hochschild homology & factorisation on $S^1$ \\[3pt]
+$\mathfrak{R}^{\mathrm{oc}}_\bullet$ & nonlinear resonance tower
+  & quartic and higher obstructions \\[3pt]
+$\nabla^{\mathrm{hol}}$ & holographic connection
+  & genus-$g$ transport
+\end{tabular}
+\end{center}
+
+\medskip
+
+The first six components are proved.  The nonlinear resonance
+tower is proved at finite arity (Volume~I, shadow Postnikov tower).
+The holographic connection is defined but its full modular
+extension is the frontier.
+
+\sep
+
+The completed platonic datum is the constructive endpoint of the
+theory.  Given any chiral algebra, compute $\Pi^{\mathrm{oc}}_X$.
+Theorems A--H of Volume~I are structural properties of
+$\Pi^{\mathrm{oc}}_X$.  The five worked examples of
+\S\ref{sec:five-examples} are instances of this computation.
+
+The relationship between the six-fold platonic package $\Pi_X(L)$
+of Volume~I (built from a Lie conformal algebra $L$) and the
+eight-fold $\Pi^{\mathrm{oc}}_X(\cA)$ (built from a chiral
+algebra $\cA$) is the factorisation envelope: the functor
+$L \mapsto U_X(L)$ that produces the enveloping vertex algebra
+from $L$.  The six-fold package lives at the input; the
+eight-fold package lives at the output.  The two additional
+components (derived center and annulus trace) are intrinsically
+$3$-dimensional: they require the second direction.
+
+
+% =================================================================
+\section{From one quartic pole}
+\label{sec:one-quartic-pole}
+% =================================================================
+
+The Virasoro $\lambda$-bracket
+\[
+\{T{}_\lambda T\}
+\;=\;
+\partial T + 2T\lambda + \frac{c}{12}\,\lambda^3
+\]
+has three terms: the simple pole ($\partial T$, the derivative),
+the double pole ($2T\lambda$, the stress tensor), and the
+quartic pole ($\frac{c}{12}\lambda^3$, the central charge).
+
+The quartic pole is the engine.  It forces non-associativity of
+$m_2$.  Non-associativity of $m_2$ forces $m_3$ by the Stasheff
+identity $\partial m_3 + m_2 \circ m_2 = 0$.  Each $m_k$ forces
+$m_{k+1}$.  The $\Ainf$ structure is genuinely infinite (class~M,
+shadow depth $\infty$).
+
+The collision residue of the $\lambda$-bracket is the gravitational
+$r$-matrix:
+\[
+r(z) \;=\; (c/2)/z^3 + 2T/z.
+\]
+Two poles: a triple pole from the central charge, a simple pole from
+the stress tensor.  The pole orders are one less than the OPE (the
+$d\log$ kernel absorbs one power).  The $r$-matrix has no
+even-order poles for a bosonic algebra.
+
+\sep
+
+From this single input:
+\begin{enumerate}[label=\textup{(\Roman*)},nosep]
+\item The $\Ainf$ tower: $m_3, m_4, \ldots$, all nonzero for
+  generic $c$.  The quartic contact invariant
+  $Q^{\mathrm{ct}} = 10/[c(5c+22)]$.
+\item The Koszul dual: $\mathrm{Vir}_{26-c}$.  Self-duality at
+  $c = 13$.  The depth-zero resonance shadow.
+\item The genus tower:
+  $\sum_{g \geq 1} F_g\,\hbar^{2g}
+  = (c/2)(\hat{A}(i\hbar) - 1)$,
+  with $\kappa_{\mathrm{eff}} = (c-26)/2$.
+\item The Koszul triangle: boundary $\mathrm{Vir}_c$, bulk
+  $\C[\![c]\!]$, lines modelled by $\mathrm{Vir}_{26-c}$-modules.
+\item The gravitational coproduct: primitive (ghost-number
+  obstruction from DS reduction of $\widehat\fg_k$).
+\end{enumerate}
+
+\medskip
+
+The transgression algebra of Volume~I's working notes completes
+the picture.  The Koszul dual $B = \mathrm{Vir}_{26-c}$ has
+curvature $\lambda = \kappa(B) \cdot \omega_1
+= \frac{26-c}{2}\,\omega_1$.  The transgression algebra
+\[
+B_\lambda \;=\; B\langle\eta\rangle\,\big/\,(\eta^2 - \lambda),
+\qquad |\eta| = 1,
+\]
+adjoins a Clifford generator.  The secondary anomaly
+$u = \eta^2 = \lambda$ is linear in $\kappa$ (a class, not a
+scalar).  The gravity dichotomy:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcc@{}}
+& $c \neq 26$ & $c = 26$ \\
+\hline
+$u$ & $\neq 0$ & $= 0$ \\[3pt]
+Clifford algebra & matrix ($2^g$-dim) & exterior ($2^{2g}$-dim)\\[3pt]
+Regime & perturbative & topological \\[3pt]
+Genus tower & resummable ($\hat{A}$-genus) & collapsed \\[3pt]
+Surface topology & Morita-trivial & genuine
+\end{tabular}
+\end{center}
+
+\medskip
+
+The MC recursion determines the genus-$g$ partition function from
+the genus-$0$ $\lambda$-bracket.  No sum over topologies.  No free
+parameters.  The Maloney--Witten problem of enumeration (which
+topologies to include) is replaced by a problem of algebra (which
+Maurer--Cartan equation to solve).
+
+\begin{question}
+Does the graded character
+$\hat{Z}_1^{\mathrm{grav}}(c;\,\tau)
+:= \chi_{\mathrm{gr}}(\mathfrak{G}_1^{\mathrm{grav}}(c);\,q)$
+have non-negative Fourier coefficients for all $c > 1$?
+\end{question}
+
+
+% =================================================================
+\section{The Steinberg principle}
+\label{sec:steinberg}
+% =================================================================
+
+The bar complex presents the Swiss-cheese algebra, as the
+Steinberg variety presents the Hecke algebra.
+
+\sep
+
+The Steinberg variety $\mathfrak{S} = \widetilde\cN
+\times_\cN \widetilde\cN$ is the self-intersection of the
+Springer resolution.  Its Borel--Moore homology carries the Hecke
+algebra by convolution.  The Kazhdan--Lusztig basis arises from
+intersection cohomology of orbit closures.  The representation
+theory of $\mathfrak{S}$ is the representation theory of the Hecke
+algebra: simple modules correspond to irreducible representations,
+standard modules to Verma modules, the duality functor to the
+Kazhdan--Lusztig involution.
+
+\medskip
+
+The bar complex of a chiral algebra $\cA$ lives on the product
+$\FM_k(\C) \times \Conf_k(\R)$.  The differential extracts
+collision residues on $\FM_k(\C)$; the coproduct deconcatenates
+on $\Conf_k(\R)$.  The Koszul dual $\cA^!$ is the linear dual
+of $\barB(\cA)$ (Verdier duality).  Line operators are
+$\cA^!$-modules.  The representation theory of $\barB(\cA)$ is
+the representation theory of the boundary: MC couplings are
+line defects.
+
+\medskip
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\textbf{Steinberg} & \textbf{Swiss-cheese} \\
+\hline
+$\widetilde\cN \to \cN$ (resolution)
+  & $\FM_k(X) \to \Conf_k(X)$ (compactification) \\[3pt]
+$\mathfrak{S} = \widetilde\cN
+  \times_\cN \widetilde\cN$ (self-intersection)
+  & $\barB(\cA) \otimes_{\barB(\cA\text{-bimod})} \barB(\cA)$
+  (Hochschild) \\[3pt]
+$H_*^{\mathrm{BM}}(\mathfrak{S})$ (Hecke algebra)
+  & $\Zder(\cA)$ (derived center) \\[3pt]
+KL basis (from IC)
+  & PBW basis (from spectral sequence) \\[3pt]
+Hecke modules
+  & $\cA^!\text{-mod}$ (line operators) \\[3pt]
+KL involution
+  & Verdier/Koszul duality \\[3pt]
+Cell structure
+  & Shadow depth classification (G/L/C/M)
+\end{tabular}
+\end{center}
+
+\medskip
+
+The analogy becomes an identification at the level of
+factorisation homology.  The factorisation homology of the bar
+complex on a closed surface is the convolution product on the
+self-intersection, which is the Hecke algebra.  The two
+constructions produce the same algebra because both are computing
+the endomorphism algebra of a compact generator in a factorisation
+category on a configuration space.  The Fulton--MacPherson
+compactification is the chiral analogue of the Springer resolution.
+
+The cell structure of the Hecke algebra (Kazhdan--Lusztig cells,
+Lusztig's $a$-function, the asymptotic Hecke algebra) should have
+a shadow-tower analogue: the G/L/C/M classification of shadow
+depth is the analogue of the cell decomposition, with shadow
+depth playing the role of Lusztig's $a$-function.  Whether this
+analogy extends to a theorem is open.
+
+
+% =================================================================
+\section{What remains}
+\label{sec:what-remains}
+% =================================================================
+
+Everything in \S\ref{sec:two-directions}--\S\ref{sec:steinberg}
+can be said in two sentences.
+
+The bar complex of a chiral algebra on a curve carries a
+differential (holomorphic direction) and a coproduct (topological
+direction); together these form a Swiss-cheese algebra on
+$\FM_k(\C) \times \Conf_k(\R)$, presenting the boundary theory
+of a $3$d holomorphic-topological QFT whose bulk is the chiral
+derived center, whose lines are modules for the Koszul dual, and
+whose modularity arises from trace and clutching on the open
+sector.  For gravity, the coproduct is primitive (ghost-number
+obstruction from DS reduction), so all nonlinearity resides in the
+$\Ainf$ products and the collision residue $r(z)$; for gauge
+theory, the coproduct is nontrivial, and the full two-channel
+structure is active.
+
+That is what the $1$-form told us when we gave it a second
+direction.  What follows is what it does when you push it further:
+into the bordered moduli space, along the modular cooperad, past
+the death of the derived category at genus $1$, through the
+spectral Drinfeld strictification, into the gravitational
+dichotomy at $c = 26$.  Each direction is a computation that
+is either finished or honestly open.
+
+\sep
+
+The following structures are proved:
+\begin{enumerate}[nosep]
+\item The Swiss-cheese operad $\SCchtop$ and its
+  homotopy-Koszulity.
+\item The recognition theorem (Weiss cosheaf descent).
+\item PVA descent D1--D6 (exchange cylinder, Stokes).
+\item The four-stage open/closed architecture (Stages 1--3
+  proved; Stage 4 programme).
+\item The bulk-boundary-line triangle (boundary-linear sector
+  proved; global conjectural).
+\item Gravitational primitivity (principal DS; non-principal
+  conjectural).
+\item The benchmark: $V_k(\fsl_2)$ on $(\bP^1, \{0,\infty\})$,
+  every component computed.
+\item The annulus trace $\simeq \HH_*(\cC_{\mathrm{op}})$.
+\item The completed platonic datum $\Pi^{\mathrm{oc}}_X(\cA)$.
+\end{enumerate}
+
+The following structures are open:
+\begin{enumerate}[nosep]
+\item The full modular cooperad on the trace.
+\item The global bulk-boundary-line triangle outside the
+  boundary-linear sector.
+\item BV/BRST $=$ bar at genus $g \geq 1$.
+\item Non-principal gravitational primitivity beyond hook-type.
+\item The spectral Drinfeld strictification for Kac--Moody
+  algebras with root multiplicities $> 1$.
+\end{enumerate}
+
+\sep
+
+\begin{quote}\itshape
+A $1$-form with a simple pole.
+
+A relation among three.
+
+A second direction: the coproduct.
+
+The rest follows.
+\end{quote}
+
+
+% =================================================================
+\section{The composite graviton}
+\label{sec:composite-graviton}
+% =================================================================
+
+The Virasoro stress tensor
+\[
+T \;=\; \frac{1}{2(k+h^\vee)}\sum_a \normord{J^a J_a}
+\]
+is built from affine currents.  It is not fundamental.  The
+graviton is composite.
+
+The ghost sector of the BRST complex remembers this.  The
+Sugawara construction passes through the normal ordering, which
+carries ghost number~$0$ on each input but produces an output
+whose BRST homotopy $h$ necessarily shifts ghost number by
+$\pm 1$.  Every tree in the HPL expansion of the transferred
+coproduct has at least one internal vertex; every internal vertex
+passes through~$h$.  The projection $p \otimes p$ onto
+ghost-number-$0$ cohomology annihilates the result.  The
+coproduct vanishes:
+\[
+\Delta^{\mathrm{grav}}(x) \;=\;
+\tau_z(x) \otimes 1 \;+\; 1 \otimes x.
+\]
+
+In gauge theory, the gluon IS the connection.  $J^a$ is
+fundamental: ghost number~$0$, no passage through~$h$, no
+obstruction.  The cross-term survives:
+\[
+\Delta_z(T_{\mathrm{aff}}) \;=\;
+\tau_z(T_{\mathrm{aff}}) \otimes 1
+\;+\; 1 \otimes T_{\mathrm{aff}}
+\;+\; \frac{1}{k+h^\vee}\,\Omega(w{+}z,\, w).
+\]
+The Casimir $\Omega = \sum_a J^a \otimes J_a$ is a production
+vertex.  A gluon bound state dissociates into its constituents.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\textbf{Regime} & \textbf{Gauge} & \textbf{Gravity} \\
+\hline
+Primitive field & $J^a$ (connection) & $T$ (curvature) \\[3pt]
+Origin & fundamental & Sugawara composite \\[3pt]
+Coproduct & nontrivial & primitive \\[3pt]
+Physical reading & particles split & only braids
+\end{tabular}
+\end{center}
+
+\medskip
+
+The $r$-matrix $r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$ carries
+all gravitational scattering.  The cubic pole: the bar kernel
+$d\log(z-w)$ absorbs one power from the quartic OPE.  The
+logarithmic derivative is always one degree milder than the
+function itself.  This absorption is the structural content of
+calling the bar construction a categorical logarithm.
+
+
+% =================================================================
+\section{The holographic triangle}
+\label{sec:holographic-triangle}
+% =================================================================
+
+Three vertices.
+
+\medskip
+
+\noindent
+\textbf{Boundary}: $\cA$ (the chiral algebra).
+
+\noindent
+\textbf{Bulk}: $\Zder(\cA) = H^*(C^\bullet_{\mathrm{ch}}(\cA,\cA),\,\delta)$
+(the chiral derived center).
+
+\noindent
+\textbf{Lines}: $\cA^!$-modules (on the chirally Koszul locus).
+
+\sep
+
+The bar complex $\barB(\cA)$ classifies couplings between boundary
+and lines.  It is the universal twisting coalgebra: every map
+$\alpha\colon \barB(\cA) \to \cA^!$ satisfying the twisting
+morphism equation is a line operator.  On the Koszul locus:
+\[
+\MC\bigl(\Hom(\barB(\cA),\, \cA^!)\bigr)
+\;\simeq\;
+\Perf(\cA^!).
+\]
+This is the bar complex's role: a representability theorem.  It
+classifies morphisms, not operators.
+
+The derived center $\Zder(\cA)$ classifies bulk observables.
+It acts on the boundary via the brace dg-algebra structure
+on $C^\bullet_{\mathrm{ch}}(\cA,\cA)$, encoding how bulk fields
+modify boundary correlators.  The
+restriction $\Zder(\cA) \to \cA$ is well-defined.  The extension
+$\cA \to \Zder(\cA)$ is not: bulk restricts to boundary, boundary
+does not determine bulk.
+
+\begin{warning}
+$\barB(\cA) \neq \Zder(\cA)$.  The bar complex is a Fourier
+kernel (Volume~I).  The derived center is a space of
+endomorphisms.  One classifies morphisms; the other classifies
+operators.  Their conflation is the most frequent source of false
+statements in three-dimensional holomorphic-topological field
+theory.
+\end{warning}
+
+
+% =================================================================
+\section{Where modularity lives}
+\label{sec:where-modularity-lives}
+% =================================================================
+
+Modularity is not an axiom on the closed algebra.  It is trace
+plus clutching on the open sector.
+
+\sep
+
+Cut $S^1$ into two arcs.  Each arc is an interval $I \cong \R$.
+Excision on the factorisation homology of $\cC_{\mathrm{op}}$:
+\[
+\int_{S^1}\!\cC_{\mathrm{op}}
+\;\simeq\;
+\cC_{\mathrm{op}}(I_1)
+\;\otimes_{\cC_{\mathrm{op}}(I_1 \cap I_2)}^{\mathbb{L}}\;
+\cC_{\mathrm{op}}(I_2).
+\]
+The two-arc cover produces the two-sided bar complex, which is the
+cyclic bar complex.  Hochschild homology
+$\HH_*(\cC_{\mathrm{op}})$ IS the annulus partition function.
+
+The first modular shadow: $\kappa(\cA)$ appears as the leading
+coefficient of the annulus trace.  The genus-$1$ curvature
+$\dfib^{\,2} = \kappa \cdot \omega_1$ is the obstruction to
+extending the genus-$0$ Swiss-cheese structure to the torus.  The
+obstruction lives in the Hochschild homology of the open sector.
+It does not live in any axiom on the closed algebra.
+
+Clutching: the genus-$g$ surface $\Sigma_g$ is built from $3g-3$
+pairs of pants, sewn along $3g-3$ circles.  Each sewing circle
+contributes an $\HH_*$ factor.  The modular partition function is
+the trace over all sewings:
+\[
+Z_g
+\;=\;
+\Tr_{\HH_*^{\otimes(3g-3)}}
+\bigl(\text{clutching maps}\bigr).
+\]
+This is modularity from geometry, not from axioms.
+
+
+% =================================================================
+\section{The Koszul dual lives on the boundary}
+\label{sec:koszul-dual-boundary}
+% =================================================================
+
+$D_{\Ran}(\barB(\cA)) \simeq \barB(\cA^!)$: the Verdier dual of the bar
+coalgebra is the bar of the Koszul dual algebra~$\cA^!$
+(Theorem~A intertwining).  The Koszul dual~$\cA^!$ lives on
+the $\R$-direction (the boundary of the half-space
+$\C_{\geq 0} \times \R$), not in the $\C \times \R$ bulk.
+
+\sep
+
+For Chern--Simons with gauge group $G$ at level~$k$:
+$\cA = V_k(\fg)$, $\cA^! = V_{-k-2h^\vee}(\fg)$.  The
+Feigin--Frenkel involution $k \mapsto -k - 2h^\vee$ is Verdier
+duality on $\Ran(X)$.  At the critical level $k = -h^\vee$:
+$V_{-h^\vee}(\fg)$ is commutative, bar cohomology is functions on
+opers, and $\cA^!$ at the dual critical level is the
+Feigin--Frenkel center.
+
+For gravity: $\cA = \mathrm{Vir}_c$,
+$\cA^! = \mathrm{Vir}_{26-c}$.
+
+At $c = 26$: $\cA^! = \mathrm{Vir}_0$, uncurved
+($\kappa = 0$).
+
+At $c = 0$: $\cA = \mathrm{Vir}_0$, uncurved.
+
+At $c = 13$: $\cA = \cA^!$.  Self-duality.
+
+\medskip
+
+The complementarity sum:
+\[
+\kappa(\mathrm{Vir}_c) + \kappa(\mathrm{Vir}_{26-c})
+\;=\; \frac{c}{2} + \frac{26-c}{2} \;=\; 13 \;\neq\; 0.
+\]
+For Kac--Moody algebras: $\kappa + \kappa^! = 0$ by
+Feigin--Frenkel (the involution $k \mapsto -k-2h^\vee$ is
+anti-symmetric around $0$).  For Virasoro: the involution
+$c \mapsto 26-c$ is anti-symmetric around $13$, not around $0$.
+The midpoint matters.  It is 13, not 0.
+
+
+% =================================================================
+\section{The BTZ black hole from the $r$-matrix}
+\label{sec:btz}
+% =================================================================
+
+The effective curvature of the matter-ghost system:
+\[
+\kappa_{\mathrm{eff}}
+\;=\;
+\kappa(\mathrm{Vir}_c) + \kappa_{\mathrm{ghost}}
+\;=\;
+\frac{c}{2} - 13
+\;=\;
+\frac{c-26}{2}.
+\]
+At $c = 26$: $\kappa_{\mathrm{eff}} = 0$.  No curvature.
+The theory is topological.
+
+At $c \neq 26$: the genus tower
+$F_g = \kappa_{\mathrm{eff}} \cdot \lambda_g^{\mathrm{FP}}$.
+The $\hat{A}$-genus generates all $F_g$ from $\kappa_{\mathrm{eff}}$:
+\[
+\sum_{g \geq 1} F_g\,\hbar^{2g}
+\;=\;
+\kappa_{\mathrm{eff}}
+\bigl(\hat{A}(i\hbar) - 1\bigr).
+\]
+The Bernoulli numbers encode the higher-genus corrections.  Each
+$F_g$ is positive (because $\hat{A}(ix) = (x/2)/\sin(x/2)$ has
+all positive Taylor coefficients).
+
+\sep
+
+The collision residue
+$r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$ controls BTZ
+thermodynamics.  The leading coefficient $c/2 = \kappa$ is the
+scalar that generates the Bekenstein--Hawking entropy at leading
+order in $1/G$.  The subleading $2T/z$ is state-dependent braiding:
+it distinguishes different BTZ states within the same theory.
+
+The primitive coproduct is the algebraic statement that black holes
+do not split.  The only channel is braiding.  The production
+vertex $\Omega(w{+}z,w)$ of gauge theory (the Casimir cross-term)
+is absent.  There is no splitting channel.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcc@{}}
+& $c \neq 26$ & $c = 26$ \\
+\hline
+$\kappa_{\mathrm{eff}}$ & $(c-26)/2 \neq 0$ & $0$ \\[3pt]
+$F_1$ & $(c-26)/48$ & $0$ \\[3pt]
+Genus tower & $\kappa_{\mathrm{eff}}\cdot(\hat{A}-1)$ & collapsed \\[3pt]
+Regime & perturbative & topological
+\end{tabular}
+\end{center}
+
+
+% =================================================================
+\section{Five theories, one machine}
+\label{sec:five-theories}
+% =================================================================
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccccc@{}}
+& CS & Gravity & Twisted hol.\ & M2 & M5 \\
+\hline
+$\cA$ & $V_k(\fg)$ & $\mathrm{Vir}_c$
+  & $V_k(\fg)$ & DDCA$_K$ & $\cW_\infty(K)$ \\[3pt]
+$\cA^!$ & $V_{-k-2h^\vee}(\fg)$ & $\mathrm{Vir}_{26-c}$
+  & $V_{-k-2h^\vee}(\fg)$ & CE & ? \\[3pt]
+$\kappa$ & $\dim(\fg)\frac{k+h^\vee}{2h^\vee}$
+  & $c/2$ & $\dim(\fg)\frac{k+h^\vee}{2h^\vee}$
+  & $K(K{+}1)/2$ & $\varrho_\infty c$ \\[3pt]
+Class & L & M & L & L & M \\[3pt]
+$\Delta_z$ & nontrivial & primitive & nontrivial
+  & nontrivial & primitive \\[3pt]
+$\kappa + \kappa^!$ & $0$ & $13$ & $0$ & $0$
+  & $\varrho K_N$
+\end{tabular}
+\end{center}
+
+\medskip
+
+The machine does not know which theory it is computing.  It
+receives: a chiral algebra, its OPE, and the bar construction.
+The five theories are five inputs to the same functor.
+
+Chern--Simons and twisted holography are class~L: the $r$-matrix
+carries all structure, the coproduct is nontrivial, the shadow
+tower terminates at arity~$3$.  Gravity and M5 are class~M:
+infinite shadow depth, primitive coproduct,
+$Q^{\mathrm{ct}} \neq 0$.
+
+\sep
+
+The M2--M5 duality: the M2~algebra (DDCA, class~L) and the
+M5~algebra ($\cW_\infty$, class~M) are related by the Miura
+transformation.  DS~reduction converts class~L to class~M.
+The reduction IS the depth increase.  The ghost-number filtration
+that kills the coproduct of M5 is the same filtration that was
+absent for M2.
+
+
+% =================================================================
+\section{The four-stage architecture, revisited}
+\label{sec:four-stages-revisited}
+% =================================================================
+
+Stage~1 (local one-colour): define the Swiss-cheese algebra.
+Prove the universal acting-bulk theorem
+$U(\cA) = (C^*_{\mathrm{ch}}(\cA,\cA),\, \cA)$.
+Everything succeeds or fails here.
+
+\medskip
+
+Stage~2 (open primitive): the primitive object is
+$\cC_{\mathrm{op}}$, not $A_b$.  The boundary algebra
+$A_b = \End(b)$ is a chart of a compact generator $b$ in
+$\cC_{\mathrm{op}}$.  Different generators produce
+Morita-equivalent charts.  The category is the invariant.
+
+\medskip
+
+Stage~3 (globalise): move from $\C \times \R$ to tangential log
+curves $(X, D, \tau)$.  The real oriented blowup
+$\pi\colon \widetilde{X}_D \to X$ replaces each puncture $p_i$ by
+a circle $S^1_{p_i}$; the tangential basepoint $\tau_{p_i}$ cuts
+this circle into an interval $I_{p_i} \cong \R$.  Open insertions
+live on the interval.  Bulk insertions live in the interior.  The
+global theory is a factorisation algebra on a bordered Riemann
+surface.
+
+\medskip
+
+Stage~4 (modularise): introduce $\Theta^{\mathrm{oc}}$, traces,
+annulus/Hochschild chains, clutching, quartic resonance classes.
+Only after stages~1--3 are solid.
+
+\sep
+
+Each stage depends on its predecessor.  Discussion of stage~$k$
+before establishment of stage~$k-1$ is not premature; it is wrong.
+
+
+% =================================================================
+\section{What the bar complex knows about quantum gravity}
+\label{sec:bar-knows-gravity}
+% =================================================================
+
+The bar complex $\barB(\mathrm{Vir}_c)$ is a factorisation
+coalgebra on $\Ran(X)$.  Its differential $d_{\barB}$ extracts
+collision residues of the Virasoro OPE.  Its coproduct~$\Delta$
+deconcatenates ordered tuples along $\R$.
+
+At genus~$0$: $d_{\barB}^2 = 0$ by Arnold.  The bar complex is
+an honest chain complex.  Its cohomology has dimensions
+\[
+1,\; 2,\; 5,\; 12,\; 30,\; 76,\; 196,\; 512,\; 1353,\; \ldots
+\]
+The generating function satisfies
+$x^3 P^2 - (1-2x)(1-x^2)P + (1-x)(1-x^2) = 0$.
+Discriminant: $(1-x)^2(1-3x)(1+x)$.  Growth rate~$3$.
+
+\sep
+
+At genus~$1$:
+$\dfib^{\,2} = (c/2) \cdot \omega_1 \neq 0$.
+The bar complex is curved.  The curvature $c/2$ is the modular
+characteristic.
+
+At genus~$g$:
+\[
+F_g
+\;=\;
+\frac{c}{2} \cdot \lambda_g^{\mathrm{FP}}
+\;=\;
+\frac{c}{2} \cdot
+\frac{(2^{2g-1} - 1)\,|B_{2g}|}{(2g)!\cdot 2^{2g-1}}.
+\]
+The Bernoulli numbers.  The $\hat{A}$-genus.  From index theory.
+Nothing in the Virasoro OPE predicts this.  It lives in the
+geometry of $\overline\cM_g$.
+
+\sep
+
+The shadow tower
+\begin{align*}
+S_2 &= c/2, \\
+S_3 &= 2, \\
+S_4 &= 10\big/\bigl[c(5c+22)\bigr], \\
+S_5 &= -48\big/\bigl[c^2(5c+22)\bigr],
+\end{align*}
+and all higher $S_r$, are the Taylor coefficients of $\sqrt{Q}$
+where
+\[
+Q_{\mathrm{Vir}}(t)
+\;=\;
+c^2 + 12ct
++ \frac{180c + 872}{5c + 22}\,t^2.
+\]
+One quadratic.  One square root.  An algebraic function of
+degree~$2$.
+
+\medskip
+
+Three numbers determine the entire infinite tower of higher-genus
+corrections to quantum gravity: $\kappa = c/2$, $\alpha = 2$ (the
+cubic shadow), and $S_4 = 10/[c(5c+22)]$ (the quartic contact
+invariant).  The shadow metric $Q$ is constructed from these three.
+Its discriminant $\Delta = 8\kappa S_4$ controls the convergence
+radius of the shadow tower.  When $\Delta \neq 0$ (all
+$c \neq 0$): the tower is infinite, class~M.  The bar complex
+knows the exact answer at every genus, as the coefficients of an
+algebraic function.
+
+
+% =================================================================
+\section{The arithmetic structure of quantum gravity}
+\label{sec:arithmetic-gravity}
+% =================================================================
+
+The gravitational shadow tower is the arithmetic of the quadratic
+extension $K = \Q(c)(t)(\sqrt{Q_{\mathrm{Vir}}})$ over the
+function field $F = \Q(c)(t)$.  The shadow metric
+\[
+  Q_{\mathrm{Vir}}(t)
+  \;=\;
+  c^2 + 12ct + \frac{180c + 872}{5c + 22}\,t^2
+\]
+is a quadratic polynomial whose square root generates the
+infinite tower of higher-genus corrections to three-dimensional
+quantum gravity.
+
+\sep
+
+\noindent\textbf{The discriminant.}\enspace
+$\mathrm{disc}(Q_{\mathrm{Vir}}) = -320\,c^2/(5c{+}22)$.
+Negative for all $c > 0$: the roots of $Q_{\mathrm{Vir}}$
+are complex conjugate, the extension $K/F$ is genuine, and
+the shadow tower is infinite (class~M).
+
+The discriminant controls three quantities at once:
+\begin{enumerate}[label=(\roman*),nosep]
+\item The depth of the gravitational perturbation series
+  (infinite for all $c \neq 0$, because $\Delta = 40/(5c{+}22)
+  \neq 0$).
+\item The convergence radius of the shadow tower: the growth
+  rate $\rho = \sqrt{36 + 80/(5c{+}22)}\,/\,c$ is the reciprocal
+  of the distance from the origin to the nearest branch point
+  of $\sqrt{Q_{\mathrm{Vir}}}$.
+\item The complementarity with the dual theory at $c' = 26 - c$:
+  $\Delta(c) + \Delta(26{-}c) = 6960/[(5c{+}22)(152{-}5c)]$,
+  with universal numerator.
+\end{enumerate}
+
+\sep
+
+\noindent\textbf{The gravitational number field.}\enspace
+The Bekenstein--Hawking entropy $S_{\mathrm{BH}} = 2\pi\sqrt{ch/6}$
+derives from $\kappa = c/2$, the leading coefficient of
+$Q_{\mathrm{Vir}}$.  This coefficient is the constant term
+(up to a square): $Q_{\mathrm{Vir}}(0) = c^2 = 4\kappa^2$.
+The leading OPE datum seeds the quadratic extension.
+
+The growth rate $\rho$ measures how fast the higher-genus
+corrections to the gravitational partition function grow.
+When $\rho < 1$, the shadow tower converges: the shadow
+partition function $Z^{\mathrm{sh}} = \sum Z_g^{\mathrm{sh}}
+\hbar^{2g}$ exists as a convergent series.  This convergence
+is the ``splitting'' of the gravitational prime at central
+charge~$c$: the quadratic extension has a rational point in
+a neighbourhood of the origin.
+
+Setting $\rho = 1$ yields the critical cubic
+$5c^3 + 22c^2 - 180c - 872 = 0$ with positive root
+$c^* \approx 6.125$.  For $c > c^*$: the shadow tower
+converges ($\rho < 1$, the gravitational perturbation
+series sums).  For $0 < c < c^*$: the shadow tower diverges
+($\rho > 1$, the perturbation series requires resummation).
+The critical cubic is the Minkowski bound of the gravitational
+number field: it separates the convergent regime from the
+divergent regime.
+
+\sep
+
+\noindent\textbf{The three critical values.}\enspace
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}ccl@{}}
+$c$ & \textbf{What happens} & \textbf{Arithmetic meaning} \\
+\hline
+$0$ & $\kappa = 0$, $Q$ degenerates & ramified prime
+  (shadow tower is undefined) \\[3pt]
+$13$ & $\cA = \cA^!$, self-dual
+  & Galois involution is trivial on coefficients;
+  $K = K'$ \\[3pt]
+$26$ & $\kappa_{\mathrm{eff}} = 0$, topological & dual
+  extension $K'$ degenerates ($\kappa' = 0$)
+\end{tabular}
+\end{center}
+
+\medskip
+
+At $c = 0$: the constant term of $Q_{\mathrm{Vir}}$ vanishes.
+The quadratic polynomial has a double root at $t = 0$.  The
+shadow connection $\nabla^{\mathrm{sh}}$ has an irregular
+singularity.  The extension ramifies.
+
+At $c = 13$: the theory is self-dual ($\mathrm{Vir}_{13}^!
+= \mathrm{Vir}_{13}$).  The Koszul involution $c \mapsto 26-c$
+fixes $c = 13$.  The two quadratic extensions $K$ and $K'$
+coincide.  The complementarity sum $\kappa + \kappa' = 13$
+does not vanish: self-duality is a symmetry enhancement, not
+anomaly cancellation.  The growth rate $\rho(13) \approx 0.467$:
+the shadow tower converges at the self-dual point.
+
+At $c = 26$: the effective curvature $\kappa_{\mathrm{eff}}
+= (c{-}26)/2 = 0$ vanishes.  The dual algebra
+$\mathrm{Vir}_0$ has $\kappa' = 0$: its shadow extension
+ramifies.  The gravitational theory becomes topological.  The
+Clifford algebra degenerates from a matrix algebra
+($2^g$-dimensional) to an exterior algebra
+($2^{2g}$-dimensional).  The BTZ partition function collapses:
+$Z_{\mathrm{grav}} = 1$.
+
+These three values are not phases of one theory.  They are three
+qualitatively distinct points in the arithmetic landscape of the
+quadratic extension: a ramified prime ($c = 0$), a self-dual
+fixed point ($c = 13$), and a degeneration of the dual
+($c = 26$).  They are separated by $13$ units of central charge.
+
+\sep
+
+\noindent\textbf{The ramified primes.}\enspace
+The denominator theorem (Volume~I) gives
+$\mathrm{denom}(S_r)
+= (\mathrm{const})\cdot c^{r-3}(5c{+}22)^{\lfloor(r-2)/2\rfloor}$.
+Two primes ramify:
+\begin{enumerate}[label=(\roman*),nosep]
+\item $c = 0$: the leading OPE coefficient vanishes.  No
+  Bekenstein--Hawking entropy.  No bar curvature.  The shadow
+  metric $Q(0,t) = 872\,t^2/(5 \cdot 22) = 872\,t^2/110$
+  degenerates.
+\item $c = -22/5$: the weight-$4$ Gram determinant
+  $\det G_4 = c^2(5c{+}22)/2$ vanishes.  A null vector at
+  weight~$4$ collapses the quasi-primary $\Lambda$ onto
+  $\partial^2 T$.  The quartic contact invariant
+  $Q^{\mathrm{ct}} = 10/[c(5c{+}22)]$ has a pole.
+\end{enumerate}
+Every other value of~$c$ is unramified: the shadow
+coefficients are finite, the quadratic extension is
+well-defined, and the tower runs.
+
+No higher Kac determinant appears.  The gravitational number
+field has exactly two ramified primes, both visible from the
+weight-$4$ representation theory.  The infinite tower of
+higher-genus gravitational corrections is controlled by a
+single $2 \times 2$ Gram matrix.
+
+\sep
+
+\noindent\textbf{The unit group and the BTZ partition function.}\enspace
+The growth rate
+$\rho = \sqrt{36 + 80/(5c{+}22)}\,/\,c$ is the fundamental
+unit of the gravitational number field.  It controls the BTZ
+partition function through the radius of convergence of the
+shadow tower:
+\begin{itemize}[nosep]
+\item $\rho < 1$ ($c > c^*$): the shadow tower converges.  The
+  gravitational path integral exists non-perturbatively as a
+  convergent shadow series.  The shadow partition function
+  $Z^{\mathrm{sh}}$ is the value of a convergent double series
+  (genus and arity).
+\item $\rho > 1$ ($0 < c < c^*$): the shadow tower diverges.
+  The shadow coefficients grow exponentially.  Resummation
+  (Borel transform of $\sqrt{Q_{\mathrm{Vir}}}$) is required.
+  The Stokes constants of the shadow tower are the
+  non-perturbative content.
+\item $\rho = 1$ ($c = c^*$): the critical cubic.  The branch
+  point of $\sqrt{Q_{\mathrm{Vir}}}$ lies exactly on the unit
+  circle.  The shadow tower is marginally divergent.
 \end{itemize}
 
-The bar-cobar adjunction $B \dashv \Omega$ encodes
-boundary data into the bar coalgebra $\barB(\cA)$ and
-recovers it via the cobar construction.  On the Koszul
-locus, the recovery is exact (Theorem~B from Volume~I).
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}rrl@{}}
+$c$ & $\rho$ & \textbf{Regime} \\
+\hline
+$1$ & $2.99$ & divergent (shadow) \\
+$c^* \approx 6.125$ & $1.00$ & critical \\
+$13$ & $0.467$ & convergent \\
+$26$ & $0.234$ & convergent (dual topological) \\
+$100$ & $0.061$ & strongly convergent
+\end{tabular}
+\end{center}
 
-The holographic modular Koszul datum
-$\cH(\cA) = (\cA, \cA^!, \cC, r(z), \Theta_\cA,
-\nabla^{\mathrm{hol}})$
-packages the complete HT system into a single modular
-Maurer--Cartan problem.  The five theorem targets from
-Volume~I (A--D, H) are projections of this datum.
+\medskip
+
+The string partition function $Z_{\mathrm{string}}$ (genus
+factorial growth $(2g)!$) always diverges.  The shadow partition
+function $Z^{\mathrm{sh}}$ (Bernoulli decay $1/(2\pi)^{2g}$
+times shadow growth $\rho^r r^{-5/2}$) converges for $c > c^*$.
+The shadow tower is better-behaved than the string because it
+sums over arities within a fixed genus, while the string sums
+over genera with unrestricted growth.
+
+\sep
+
+\noindent\textbf{The Galois involution.}\enspace
+The monodromy $-1$ of the shadow connection
+$\nabla^{\mathrm{sh}} = d - Q'/2Q\,dt$ around each branch
+point of $\sqrt{Q_{\mathrm{Vir}}}$ is the nontrivial element
+of $\mathrm{Gal}(K/F)$.  In the gravitational context: the
+Koszul sign is the Galois involution of the number field.  The
+sign alternation in the shadow tower $S_r$ (positive for even
+$r$, approximately negative for odd $r$, with beat period
+$\pi/(\pi - \theta)$ where $\theta = \arg(t_+)$) is the
+manifestation of the Galois action on the Taylor coefficients
+of $\sqrt{Q_{\mathrm{Vir}}}$.
+
+This is the deepest structural content of the bar
+construction's desuspension: the sign $(-1)^n$ at bar degree
+$n$ is the Galois automorphism of a quadratic extension,
+evaluated at the $n$-th coefficient.
+
+\sep
+
+The gravitational shadow tower is not like a quadratic
+extension.  It is one, over the function field $\Q(c)(t)$
+instead of $\Q$.  The Bekenstein--Hawking entropy is the leading
+coefficient.  The convergence of the perturbation series is the
+splitting behaviour.  The Koszul sign is the Galois involution.
+The critical cubic is the Minkowski bound.  The two ramified
+primes are the Kac determinant zeros.  The complementarity
+identity is the duality constraint on discriminants.  The
+gravitational partition function is the norm form of the
+extension, evaluated at a specific point.
+
+\begin{quote}\itshape
+A $1$-form with a simple pole.
+
+A relation among three.
+
+A second direction: the coproduct.
+
+A quadratic extension: the shadow.
+
+The rest follows.
+\end{quote}
+
+
+% =================================================================
+\section{Gravity at rational central charge}
+\label{sec:gravity-rational-c}
+% =================================================================
+
+The generic gravitational number field
+$K = \Q(c)(t)(\sqrt{Q_{\mathrm{Vir}}})$ of the preceding
+section lives over the function field $\Q(c)$.  When the
+central charge specialises to a rational number $c_0$, the
+field specialises to a concrete quadratic extension of~$\Q$.
+
+For a minimal model $c_{p,q} = 1 - 6(p-q)^2/(pq)$,
+the critical discriminant
+$\Delta(c_{p,q}) = 40/(5c_{p,q} + 22)$ is a specific
+rational number, and
+$K(c_{p,q}) := \Q(\sqrt{\Delta(c_{p,q})})$
+is a specific real quadratic number field.  Gravity at
+each minimal model selects a number field.
+
+\sep
+
+\noindent\textbf{The physical picture.}\enspace
+The Bekenstein--Hawking entropy $\kappa = c/2$ at a rational
+central charge $c_{p,q}$ is a rational number.  The
+higher-genus corrections $F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$
+are rational multiples of~$\kappa$, hence rational.  The
+ENTIRE perturbative gravitational partition function
+$\sum F_g \hbar^{2g}$ has rational coefficients.
+
+But the shadow tower is different.  The Taylor coefficients
+$S_r$ of $\sqrt{Q_L}$ are rational (they satisfy a rational
+recursion), yet the generating function $H(t) = t^2\sqrt{Q_L(t)}$
+is genuinely irrational: it involves $\sqrt{\Delta}$, which
+lies outside $\Q$ for all $c > 0$.  The irrationality is the
+arithmetic content of the shadow tower.  The bar complex of
+the Virasoro algebra, specialised to a minimal model, produces
+an algebraic number that no finite truncation of the
+perturbative expansion can detect.
+
+This is not a deficiency of perturbation theory.  The function
+$H(t)$ is algebraic of degree~$2$; its Taylor coefficients are
+all individually rational.  The irrationality is non-perturbative
+in the arity variable $t$, not in the genus variable $\hbar$.
+It is visible in the branch structure of $\sqrt{Q_L}$, not in
+any single coefficient.
+
+\sep
+
+\noindent\textbf{Computation.}\enspace
+Write $5c_0 + 22 = a/b$ in lowest terms.  Then
+$\Delta(c_0) = 40b/a$, and the specialised field is
+$K(c_0) = \Q(\sqrt{\mathrm{sqfree}(40ab)})$.
+
+\medskip
+
+\noindent\textit{$c = 1/2$ (Ising model).}\enspace
+$5c + 22 = 49/2$.  $\Delta = 80/49$.
+$\sqrt{80/49} = 4\sqrt{5}/7$.
+The Ising gravity lives over $\Q(\sqrt{5})$.
+
+The golden ratio $(1+\sqrt{5})/2$ is the fundamental unit
+of this field, with norm $-1$.  The class number is $h = 1$:
+the ring of integers $\Z[(1+\sqrt{5})/2]$ is a principal ideal
+domain.  The Ising model produces the simplest possible
+arithmetic.  One is tempted to say that the Ising model is
+``arithmetically trivial,'' as it is physically the simplest
+unitary minimal model.
+
+The shadow growth rate is $\rho(1/2) \approx 12.53$: the
+shadow tower diverges violently ($c = 1/2$ is far below
+the critical cubic $c^* \approx 6.125$).  The Ising gravity
+requires resummation.
+
+\medskip
+
+\noindent\textit{$c = 7/10$ (tricritical Ising).}\enspace
+$5c + 22 = 51/2$.  $\Delta = 80/51$.
+$K(7/10) = \Q(\sqrt{255})$ where $255 = 3 \cdot 5 \cdot 17$.
+Discriminant $1020$.  Class number $h = 4$: a genuine failure
+of unique factorisation.
+
+\medskip
+
+\noindent\textit{$c = 4/5$ (three-state Potts).}\enspace
+$K(4/5) = \Q(\sqrt{65})$.  Discriminant~$65$.  $h = 2$.
+The Potts-model gravity has a non-trivial ideal class group
+$\mathrm{Cl}(K) \cong \Z/2$.
+
+\medskip
+
+\noindent\textit{$c = 13$ (self-dual).}\enspace
+$K(13) = \Q(\sqrt{870})$ where $870 = 2 \cdot 3 \cdot 5 \cdot 29$.
+Discriminant $3480$.  $h = 8$.
+
+The self-dual gravity has the largest class number of any
+integer central charge in $[0, 26]$.  It sees the prime~$29$,
+inherited from the complementarity constant
+$6960 = 2^4 \cdot 3 \cdot 5 \cdot 29$.  No other central
+charge in the standard range detects this prime.
+
+\medskip
+
+\noindent\textit{$c = 26$ (critical string).}\enspace
+$K(26) = \Q(\sqrt{95})$.  Discriminant $380$.  $h = 2$.
+$\rho(26) \approx 0.232$: convergent.  This is the
+gravitational number field of the bosonic string at the
+critical dimension.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccrrcr@{}}
+$c$
+  & $\Delta(c)$
+  & $d(c)$
+  & $\mathrm{disc}$
+  & $h$
+  & $\varepsilon$
+  & $\rho(c)$ \\
+\hline
+$1/2$ & $80/49$ & $5$ & $5$ & $1$
+  & $(1{+}\sqrt{5})/2$ & $12.53$ \\[2pt]
+$7/10$ & $80/51$ & $255$ & $1020$ & $4$
+  & $16{+}\sqrt{255}$ & $8.94$ \\[2pt]
+$4/5$ & $20/13$ & $65$ & $65$ & $2$
+  & $8{+}\sqrt{65}$ & $7.81$ \\[2pt]
+$1$ & $40/27$ & $30$ & $120$ & $2$
+  & $11{+}2\sqrt{30}$ & $6.24$ \\[2pt]
+$13$ & $40/87$ & $870$ & $3480$ & $8$
+  & $59{+}2\sqrt{870}$ & $0.47$ \\[2pt]
+$25$ & $40/147$ & $30$ & $120$ & $2$
+  & $11{+}2\sqrt{30}$ & $0.24$ \\[2pt]
+$26$ & $5/19$ & $95$ & $380$ & $2$
+  & $39{+}4\sqrt{95}$ & $0.23$
+\end{tabular}
+\end{center}
+
+\sep
+
+\noindent\textbf{Koszul duality and the field pair.}\enspace
+The Koszul pair $(c, 26-c)$ produces two fields $K(c)$
+and $K(26-c)$.  These coincide iff
+$(5c+22)/(152-5c) \in \Q^{\times 2}$.
+
+At $c = 1$ and $c = 25$: the ratio is $27/147 = (3/7)^2$.
+Both give $\Q(\sqrt{30})$.
+
+At $c = 13$: the ratio is $87/87 = 1$.  Self-duality forces
+field-preservation.
+
+For the Ising model: the ratio is $49/299 = 49/(13 \cdot 23)$,
+which is not a perfect square.  The Ising gravity at $c = 1/2$
+lives over $\Q(\sqrt{5})$; its Koszul dual at $c = 51/2$
+lives over $\Q(\sqrt{1495})$ where $1495 = 5 \cdot 13 \cdot 23$.
+Different fields, different class numbers, different arithmetic.
+Koszul duality does not preserve the gravitational number field
+at the Ising point.
+
+This failure is generic.  Among all minimal models $M(p,q)$
+with $p < 10$, none has the Koszul pair giving the same field.
+The criterion $(5c+22)/(152-5c) \in \Q^{\times 2}$ requires
+an arithmetic coincidence that the minimal model spectrum
+does not provide.
+
+\sep
+
+\noindent\textbf{What the class number measures.}\enspace
+The class number $h$ of $K(c)$ is a measure of the
+arithmetic complexity of gravity at central charge~$c$.
+In algebraic number theory, $h$ counts the failure of
+unique factorisation in the ring of integers $\cO_K$.
+
+In the gravitational context: $h = 1$ means the shadow tower's
+arithmetic is ``principal,'' governed by a single generator.
+$h > 1$ means the shadow arithmetic requires multiple ideal
+classes.  Whether this has a direct physical interpretation
+(a counting of distinct gravitational saddle classes, perhaps)
+is not known.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcl@{}}
+$c$ & $h$ & \textbf{Interpretation} \\
+\hline
+$1/2$ (Ising) & $1$ & principal: simplest arithmetic \\[2pt]
+$4/5$ (Potts) & $2$ & one non-trivial ideal class \\[2pt]
+$7/10$ (tricrit.) & $4$ & four ideal classes \\[2pt]
+$13$ (self-dual) & $8$ & most complex in standard range
+\end{tabular}
+\end{center}
+
+\sep
+
+\noindent\textbf{What fails.}\enspace
+The growth rate $\rho(c)$ is a smooth algebraic function
+of~$c$.  The fundamental unit $\varepsilon(d(c))$ of $K(c)$
+depends on $c$ through the squarefree part $d(c)$, which is a
+wildly discontinuous function of the central charge.  No
+algebraic relation connects $\rho$ and $\varepsilon$.
+
+A conjecture that the fundamental unit of the gravitational
+number field controls the shadow growth rate was tested by
+computing both quantities at $c = 1/2, 7/10, 4/5, 1, 13, 25, 26$
+and found to be false.  At $c = 1/2$: $\rho \approx 12.53$
+while $\varepsilon = (1+\sqrt{5})/2 \approx 1.618$.  At
+$c = 13$: $\rho \approx 0.467$ while
+$\varepsilon = 59 + 2\sqrt{870} \approx 117.99$.  The two
+quantities vary in opposite directions.
+
+The failure is structural: $\rho(c)$ is a smooth function
+of~$c$, while $\varepsilon(d(c))$ is a step function.
+A smooth function cannot equal a step function.
+
+\sep
+
+\noindent\textbf{What remains.}\enspace
+The specialisation $c \mapsto K(c)$ is a new functor from
+(a subset of) the rational points of the Virasoro central
+charge line to the set of real quadratic number fields.  It
+sends the OPE data at genus~$0$ (the stress tensor and its
+weight-$4$ descendant) to a number field whose arithmetic
+is entirely determined by the bar complex.
+
+The family $\{K(c_{p,q})\}_{(p,q)}$ attached to the minimal
+model tower constitutes a new arithmetic invariant of 2d~CFT.
+Whether this family has structure beyond what is visible in
+the table above is an open question.
+
+The first instance of the specialisation functor applied to
+gravity is the Ising model.  The shadow tower of the
+Ising model lives over $\Q(\sqrt{5})$, the field of the
+golden ratio.  This is the number field with class number~$1$
+and the smallest possible discriminant among real quadratic
+fields with fundamental unit of norm $-1$.  The simplest
+unitary minimal model produces the simplest real quadratic
+field.
+
+Whether this simplicity persists along the minimal model tower,
+or whether more complex arithmetic emerges, is a question at
+the intersection of vertex algebra theory and algebraic number
+theory that the bar construction makes precise.
+
+\begin{quote}\itshape
+The bar complex is a 1-form.
+
+Its square root is a number field.
+
+Gravity at rational central charge is arithmetic.
+\end{quote}
+
+
+% =================================================================
+\section{Fourier duality from operads to $L$-functions}
+\label{sec:fourier-operads-L}
+% =================================================================
+
+The bar construction is a Fourier transform
+(\S\ref{sec:fourier}, Volume~I).  The shadow tower is a
+quadratic extension (\S\ref{sec:arithmetic-gravity}).  The
+Dirichlet-sewing lift $S_\cA(u)$ is a product of zeta functions
+(\S\ref{sec:prime-factorisation}, Volume~I).  These three objects
+arise from the same chiral algebra.  This section asks: do they
+form a ``descent chain'' in which a single Fourier duality
+descends from operadic algebra to analytic number theory?
+
+The answer is: partially.  The chain has five levels and three
+distinct involutions.  The first two links are theorems.  The
+third is broken.  The fourth is lattice-specific.  The claim
+``they are the same involution'' is false.
+
+\subsection{The three involutions}
+
+The physical content of the bar construction is that it extracts
+the OPE residues of a chiral algebra into a nilpotent differential,
+converting the multiplicative structure (operator product) into an
+additive structure (differential).  This extraction carries three
+symmetries:
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Verdier duality} $\bD_{\Ran}$ on $\Ran(X)$.
+  Exchanges $\barB(\cA)$ and $\barB(\cA^!)$ (Theorem~A,
+  Volume~I).  This is the Fourier involution: it intertwines
+  convolution with pointwise operations on factorisation
+  (co)algebras.  Its kernel is $\eta_{ij} = d\log(z_i - z_j)$.
+
+  Fixed locus: self-dual factorisation coalgebras.
+
+\item \textbf{Galois involution} $\sigma$ of the shadow
+  extension $K_L = \Q(c)(t)(\sqrt{Q_L})$.  Sends
+  $\sqrt{Q_L} \mapsto -\sqrt{Q_L}$.  This is the monodromy
+  of the shadow connection $\nabla^{\mathrm{sh}}$: transport
+  around a branch point of $\sqrt{Q_L}$ returns $-\sqrt{Q_L}$.
+  It is the Koszul sign $(-1)^n$ at bar degree~$n$.
+
+  Fixed locus: the base field $F = \Q(c)(t)$.
+
+\item \textbf{Koszul involution} $\cA \mapsto \cA^!$ on
+  families of chiral algebras.  For Virasoro: $c \mapsto 26 - c$.
+  For Kac--Moody: $k \mapsto -k - 2h^\vee$.  This acts on the
+  \emph{coefficients} of the shadow metric $Q_L$, not on
+  $\sqrt{Q_L}$ itself.
+
+  Fixed locus: self-dual algebras ($c = 13$ for Virasoro).
+\end{enumerate}
+
+These three involutions are related but distinct.  Verdier
+duality produces the Koszul involution as its shadow on moduli:
+$\bD_{\Ran}(\barB(\cA)) \simeq \barB(\cA^!)$ implies that
+$\cA \mapsto \cA^!$ is the trace of Verdier duality on isomorphism
+classes.  The Galois involution is intrinsic to a \emph{single}
+algebra's shadow tower and has no direct relation to Verdier
+duality.  It arises because the MC equation
+$D\Theta + \tfrac{1}{2}[\Theta, \Theta] = 0$, projected to the
+scalar arity line, reduces to a Riccati equation whose solution
+$H(t) = t^2\sqrt{Q_L}$ is algebraic of degree~$2$---not higher,
+because the Riccati is quadratic.
+
+The claim ``they are the same involution (Fourier) acting at
+different levels'' conflates (i)--(iii).  The correct statement:
+they are three $\Z/2$-actions on three different categories, all
+originating from the bar construction but not related by any
+``descent.''  At the self-dual point $c = 13$, all three have
+compatible fixed-point behaviour (the Koszul pair coincides, the
+shadow extensions $K_L$ and $K_{L!}$ agree, and the Verdier dual
+coalgebra is isomorphic to the original).  At generic $c$, they
+diverge: the Galois involution of $K_L$ has nothing to do with
+the Koszul involution on the $c$-line.
+
+\subsection{Where the chain breaks}
+
+The descent chain has five levels:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}cll@{}}
+\textbf{Level} & \textbf{Object} & \textbf{Status} \\
+\hline
+0 & Koszul duality $\cA \mapsto \cA^!$
+  & Proved (Theorem~A) \\
+1 & Bar as Fourier: $\barB_X$, inversion, Plancherel
+  & Proved (Theorems A,B,C) \\
+2 & Shadow tower as quadratic extension
+  & Proved \\
+3 & Dirichlet-sewing lift $S_\cA(u)$
+  & Defined, but independent of Level 2 \\
+4 & Zeros of $\varepsilon^c_s$ on critical lines
+  & Lattice only; structural obstruction
+\end{tabular}
+\end{center}
+
+The break occurs between Levels 2 and 3.  The shadow tower
+is determined by $(\kappa, \alpha, S_4)$---the arity-$2$, $3$,
+$4$ OPE data---and lives over $\Q(c)(t)$.  The Dirichlet-sewing
+lift is determined by the weight multiset $W(\cA) = \{w_i\}$
+and lives over the complex $u$-plane.  These are independent
+invariants: two algebras with the same weight multiset but
+different OPE structure constants have the same $S_\cA(u)$ but
+different shadow towers.  Conversely, two algebras with the same
+$(\kappa, \alpha, S_4)$ but different weight multiplicities have
+the same shadow tower but different $S_\cA(u)$.
+
+\subsection{The structural obstruction}
+
+For lattice VOAs, the constrained Epstein zeta $\varepsilon^c_s$
+factors into $L$-functions because the theta function $\Theta_\Lambda$
+decomposes under the Hecke algebra into Eisenstein series and
+eigenforms.  This decomposition uses three properties special to
+the lattice setting: the theta function is a classical modular form,
+the Hecke decomposition is a finite sum, and the Fourier coefficients
+are lattice representation numbers with multiplicative structure.
+
+None of these holds for the Virasoro algebra.  The Virasoro
+character $q^{-c/24}\prod(1-q^n)^{-1}$ is not a modular form of
+finite weight.  The shadow tower still runs (class~M, infinite
+depth), but the arithmetic sieve does not apply.  The MC equation
+constrains the spectral coefficients on the \emph{real} spectral
+axis; the zeta zeros live at \emph{complex} spectral parameters.
+This separation is structural
+(Remark~\ref{rem:structural-obstruction}, Volume~I): algebraic
+constraints on the spectral line cannot reach the scattering poles
+without analytic continuation of the spectral data off the real
+axis.
+
+Concretely: the modified Li coefficients
+$\tilde\lambda_n(\cH)$ for the Heisenberg sewing lift
+$S_\cH(u) = \zeta(u)\zeta(u{+}1)$ are positive for
+$n = 1, \ldots, 6$ and \textbf{negative at $n = 7$}
+(\texttt{compute/tests/test\_euler\_koszul\_engine.py}, line~394).
+Positivity of all Li coefficients would be equivalent to GRH for
+$\zeta(u)\zeta(u{+}1)$.  The sign change at $n = 7$ shows that the
+sewing-lift Li coefficients do not satisfy a ``shadow RH.''  (This
+does not contradict RH for $\zeta$ alone; the sign change is an
+artefact of the product and the regularisation.)
+
+\subsection{What the bar construction does provide}
+
+The descent chain, as a linear sequence, is broken.  But the
+bar construction does provide something more interesting: a
+\emph{fan} of three independent projections from a single
+MC element.
+
+\medskip
+
+\begin{center}
+\small
+\begin{tabular}{@{}lll@{}}
+\textbf{Projection} & \textbf{Output} & \textbf{Content} \\
+\hline
+Genus tower
+  & $F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$
+  & Topological (Mumford classes) \\[3pt]
+Shadow tower
+  & $\{S_r\}_{r \geq 2} = [t^{r-2}]\sqrt{Q_L}$
+  & Arithmetic (quadratic extension, discriminant) \\[3pt]
+Koszul dual
+  & $\cA^! = (\barB(\cA))^\vee$
+  & Algebraic (Verdier dual)
+\end{tabular}
+\end{center}
+
+\medskip
+
+These three projections are facets of $\Theta_\cA
+\in \mathrm{MC}(\gAmod)$, the universal MC element in the
+modular cyclic deformation complex.  The genus tower is the
+scalar projection of $\Theta_\cA$ to each genus.  The shadow
+tower is the arity projection of $\Theta_\cA$ on the primary
+line.  The Koszul dual is the genus-$0$, arity-$2$ projection
+(the binary pairing that determines $\cA^!$).
+
+In the gravitational context ($\cA = \mathrm{Vir}_c$):
+\begin{itemize}[nosep]
+\item The genus tower gives $F_g = (c/2)\lambda_g^{\mathrm{FP}}$:
+  the Bernoulli numbers.  Higher-genus gravitational partition
+  functions.
+\item The shadow tower gives $\sqrt{Q_{\mathrm{Vir}}}$: the
+  quadratic extension $K = \Q(c)(t)(\sqrt{Q})$ with discriminant
+  $-320c^2/(5c{+}22)$.  The arithmetic of quantum gravity.
+\item The Koszul dual gives $\mathrm{Vir}_{26-c}$: the dual
+  gravitational theory.  $c + c' = 26$ is Freudenthal--de~Vries.
+\end{itemize}
+
+All three are proved.  All three are outputs of the single
+object $\Theta_{\mathrm{Vir}}$.  But they are three outputs, not
+five levels of one chain.
+
+\subsection{The correct picture}
+
+The bar construction is a Fourier transform.  This is a theorem,
+not a metaphor (Volume~I, Theorems~A, B, C).  The shadow tower
+is a quadratic extension.  This is a theorem, not an analogy
+(\S\ref{sec:arithmetic-gravity}).  But the claim that these two
+facts are levels of a ``descent chain'' that continues to
+$L$-functions and the Riemann hypothesis is false.
+
+The reason it is false is not a failure of imagination; it is a
+theorem.  The structural obstruction
+(Remark~\ref{rem:structural-obstruction}) shows that algebraic
+constraints from the MC equation act on the real spectral line,
+while the zeta zeros live at complex spectral parameters.  No
+amount of clever identification can bridge this gap: it is the
+difference between a finite-dimensional algebraic structure
+(the shadow tower, determined by three numbers $\kappa$, $\alpha$,
+$S_4$) and an infinite-dimensional analytic object (the zeta
+function, with infinitely many independent zeros).
+
+The shadow tower \emph{detects} arithmetic---Hecke eigenforms
+for lattice VOAs, quadratic fields for all VOAs at rational $c$---but
+it does not \emph{control} the arithmetic.  The detection is a
+theorem (Theorem~\ref{thm:shadow-spectral-correspondence}).  The
+control would require a mechanism for the MC equation to force
+zeros onto critical lines, and no such mechanism exists.
+
+What remains is beautiful and proved.  The bar construction of a
+chiral algebra is a Fourier transform that simultaneously produces
+topological invariants (Mumford classes), arithmetic invariants
+(quadratic fields), and algebraic invariants (Koszul duals) from
+a single MC element.  The gravitational shadow tower, specialised
+to rational central charge, assigns a number field to each minimal
+model.  The Ising model lives over $\Q(\sqrt{5})$.  The self-dual
+gravity at $c = 13$ lives over $\Q(\sqrt{870})$.  Whether these
+number fields have structure beyond what is visible in the
+specialisation table is an open question at the intersection of
+vertex algebra theory and algebraic number theory.
+
+The bar construction makes the question precise.  It does not
+answer it.
+
+
+% =================================================================
+\section{Session notes: 1 April 2026}
+\label{sec:session-2026-04-01}
+% =================================================================
+
+Six findings from the session.  The first is a theorem; the
+remaining five are its consequences.
+
+
+% -----------------------------------------------------------------
+\subsection{The DS-HPL transfer theorem}
+\label{sec:ds-hpl-transfer}
+% -----------------------------------------------------------------
+
+The single strongest new result.
+
+\begin{theorem}[DS-HPL transfer; proved]
+\label{thm:ds-hpl-transfer-wn}
+Let $\fg$ be a simple Lie algebra, $k$ a non-critical level, and
+$\cW_k(\fg)$ the principal Drinfeld--Sokolov reduction of
+$V_k(\fg)$.  The homological perturbation lemma transfers the
+dg-shifted Yangian datum $(m, r, \Delta)$ from the affine side to
+the $\cW$-algebra side via the BRST strong deformation retract
+$(\iota, p, h)$ with $\mathrm{gh}(h) = -1$.  The transferred
+coproduct $\Delta^W$ is strictly primitive at every arity:
+\[
+\Delta^W_z(x)
+\;=\;
+\tau_z(x) \otimes 1 \;+\; 1 \otimes x
+\]
+for every $x \in \cW_k(\fg)$, with no corrections.
+\end{theorem}
+
+\begin{proof}
+The HPL expansion of the transferred coproduct sums over
+decorated planar trees.  Every tree with at least one internal
+vertex carries at least one homotopy insertion $h$, shifting
+ghost number away from $0$.  The projection
+$p \otimes p$ onto ghost-number-$0$ cohomology annihilates
+all such trees.
+
+To see that no tree escapes: source trees (the affine coproduct
+insertions) carry ghost number $+1$, and target trees (the
+output legs) carry one tensor factor at ghost number $-1$.
+Both are killed by $p \otimes p$.  The only surviving term is
+the trivial tree (no internal vertices), which contributes the
+primitive term.
+
+The argument is independent of the specific Lie algebra, the
+level, and the arity.  It depends only on the ghost number of
+the BRST homotopy.
+\end{proof}
+
+The theorem says that Drinfeld--Sokolov reduction kills the
+coproduct channel completely.  Only the $r$-matrix channel
+survives.  The $\cW$-algebra inherits the $\Ainf$ products
+$m_k^W$ (infinitely many, for class~M) and the collision
+residue $r^W(z)$, but its coproduct is as trivial as a
+one-dimensional algebra's.  It produces nothing.  It only
+braids.
+
+\sep
+
+A remark on what is transferred and what is not.  The SDR
+$(\iota, p, h)$ transfers three structures simultaneously:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\textbf{Structure} & \textbf{Transferred result} & \textbf{Status} \\
+\hline
+$\Ainf$ products $m_k$ & nontrivial for all $k \geq 2$
+  & class~M \\[3pt]
+$r$-matrix $r(z)$ & nontrivial, all poles survive
+  & quasi-trigonometric \\[3pt]
+Coproduct $\Delta_z$ & primitive (all corrections vanish)
+  & proved
+\end{tabular}
+\end{center}
+
+\medskip
+
+The $\Ainf$ products are nontrivial because the perturbation
+$\delta_{\mathrm{BRST}}$ has ghost-number-preserving components
+that survive the projection $p$.  The $r$-matrix is nontrivial
+because it arises from the collision residue, which is a
+genus-$0$ operation with no homotopy insertions at the output.
+The coproduct is primitive because it is a genus-$0$,
+arity-$2$, \textit{splitting} operation: the output has two
+tensor factors, and every homotopy insertion shifts ghost number
+into the range that $p \otimes p$ annihilates.
+
+The asymmetry is that collision (computing $r(z)$) applies $p$
+once, while splitting (computing $\Delta_z$) applies
+$p \otimes p$: the tensor product doubles the projection's
+power to kill ghost-shifted outputs.
+
+
+% -----------------------------------------------------------------
+\subsection{Gravitational primitivity as physical principle}
+\label{sec:gravitational-primitivity-physical}
+% -----------------------------------------------------------------
+
+Gravity does not produce particles.  It only braids them.
+
+In three dimensions, there are no local gravitational degrees of
+freedom and no propagating gravitons.  The bar-cobar machine
+makes this algebraic: the coproduct channel is trivial, and
+only the $r$-matrix channel survives.  The gravitational
+$r$-matrix
+\[
+r^{\mathrm{Vir}}(z) \;=\; (c/2)/z^3 + 2T/z
+\]
+encodes all gravitational scattering.  BTZ black holes are
+topological: they are monodromies of the $r$-matrix braiding,
+not vertices of the coproduct.
+
+\sep
+
+The $(m, \Delta)$-complexity plane organises the five standard
+HT theories:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcc@{}}
+\textbf{Theory} & $m$-depth & $\Delta$-depth \\
+\hline
+Chern--Simons & $2$ (quadratic) & $\geq 1$ (nontrivial) \\[3pt]
+Twisted holography & $2$ & $\geq 1$ \\[3pt]
+M2 & $2$ & $\geq 1$ \\[3pt]
+Gravity & $\infty$ (class M) & $0$ (primitive) \\[3pt]
+M5 & $\infty$ & $0$
+\end{tabular}
+\end{center}
+
+\medskip
+
+\noindent
+Gravity sits at $(\infty, 0)$: maximal $\Ainf$ complexity,
+vanishing coproduct complexity.  Gauge theory sits at
+$(2, \geq 1)$: minimal $\Ainf$ complexity, nontrivial
+coproduct.  DS reduction moves a theory from the gauge corner
+to the gravity corner by killing the coproduct and inflating
+the $\Ainf$ tower.
+
+
+% -----------------------------------------------------------------
+\subsection{Five worked examples as $\Theta^{\mathrm{oc}}$
+  instantiations}
+\label{sec:five-oc-instantiations}
+% -----------------------------------------------------------------
+
+The completed eight-fold platonic datum
+$\Pi^{\mathrm{oc}}_X(\cA)$ for the five canonical HT systems:
+
+\medskip
+
+\noindent
+\textbf{1.\ Chern--Simons.}\enspace
+$\cA = V_k(\fg)$.  Class~L, shadow depth $3$.
+$\kappa + \kappa^! = 0$ (Feigin--Frenkel).  Coproduct:
+nontrivial (Casimir cross-term).  Sewing: determinant.  The
+entire $\Ainf$ structure is formal: $m_k = 0$ for $k \geq 3$.
+The platonic package is finite-dimensional at each arity.
+
+\medskip
+
+\noindent
+\textbf{2.\ Three-dimensional gravity.}\enspace
+$\cA = \mathrm{Vir}_c$.  Class~M, shadow depth $\infty$.
+$\kappa + \kappa^! = 13 \neq 0$.  Coproduct: \textbf{primitive}
+(ghost-number obstruction from DS).  Sewing:
+Pfaffian-squared.  The quartic contact invariant
+$Q^{\mathrm{ct}} = 10/[c(5c+22)]$ controls the entire infinite
+tower.  The $r$-matrix
+$r(z) = (c/2)/z^3 + 2T/z$ carries all scattering.
+
+\medskip
+
+\noindent
+\textbf{3.\ Twisted holography.}\enspace
+$\cA = V_k(\fg)$ (affine Kac--Moody, Costello--Gaiotto).
+Class~L, shadow depth $3$.  Multi-channel: for $\cW_3$, the
+genus-$2$ cross-channel contribution is
+\[
+F_2^{\mathrm{cross}} \;=\; \frac{c + 120}{16c}.
+\]
+The holographic dictionary is the Koszul triangle read through
+Theorems~A--H.
+
+\medskip
+
+\noindent
+\textbf{4.\ M2-brane.}\enspace
+$\cA = \mathrm{DDCA}_k(\mathfrak{gl}_K)$.  Class~L.  Coproduct:
+nontrivial.  Two-variable $r$-matrix $r(z_1, z_2)$.  No DS
+reduction: the $\cW$-algebra structure is absent.  This is
+gauge theory, not gravity, and the nontrivial coproduct
+confirms it.
+
+\medskip
+
+\noindent
+\textbf{5.\ M5-brane / $6$d $(2,0)$.}\enspace
+$\cA = \cW_\infty(K)$ at large~$N$.  Class~M, shadow depth
+$\infty$.  Coproduct: \textbf{primitive} (same ghost-number
+argument as Virasoro, since $\cW_N$ arises by DS reduction).
+Per-spin $r$-matrix.  Shadow depth increases under DS.
+
+\sep
+
+The shadow dichotomy across the five theories:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcl@{}}
+\textbf{Lineage} & \textbf{Class} & \textbf{Mechanism} \\
+\hline
+Current-algebra (CS, M2) & L & finite towers, no DS \\[3pt]
+$\cW$-algebra (gravity, $\cW_3$, M5) & M & infinite towers,
+  DS origin
+\end{tabular}
+\end{center}
+
+\medskip
+
+DS is the shadow-depth escalator.  It converts class~L (finite,
+formal) to class~M (infinite, genuinely $\Ainf$).  The
+ghost-number filtration that kills the coproduct is the same
+filtration that inflates the $\Ainf$ tower.  The two effects
+are a single mechanism.
+
+
+% -----------------------------------------------------------------
+\subsection{The open-sector primitive}
+\label{sec:open-sector-primitive-session}
+% -----------------------------------------------------------------
+
+The primitive object is $\cC_{\mathrm{op}}$, not $\cA$ or
+$\barB(\cA)$.
+
+For Chern--Simons: $\cC_{\mathrm{op}} = V_k(\fg)\text{-mod}$,
+the category of $V_k(\fg)$-modules as a factorisation
+dg-category with meromorphic tensor product.  The boundary
+algebra $A_b = \End(\mathrm{trivial})$ recovers $V_k(\fg)$.
+The chiral derived center $\Zder = C^\bullet_{\mathrm{ch}}(\cA_b,
+\cA_b)$ classifies bulk operators.
+
+Modularity is trace plus clutching on $\cC_{\mathrm{op}}$, not
+an axiom on the closed algebra.  The annulus trace
+\[
+\mathrm{Tr}\colon K_0(\cC_{\mathrm{op}})
+\;\longrightarrow\;
+Z_1(\cA)
+\]
+gives the genus-$1$ shadow.  The full genus-$g$ amplitude is the
+composition of $g$ clutching maps on $\cC_{\mathrm{op}}$.  The
+modular $S$-matrix is a derived property of the trace, not an
+input to the theory.
+
+The boundary algebra $A_b$ is a chart: a Morita-dependent
+presentation of $\cC_{\mathrm{op}}$.  Different compact
+generators produce Morita-equivalent charts.  The category is
+the invariant; the algebra is a coordinate system.
+
+
+% -----------------------------------------------------------------
+\subsection{BV/BRST $=$ bar: honest status}
+\label{sec:bv-brst-bar-honest}
+% -----------------------------------------------------------------
+
+Three levels of identification.  The first is proved; the
+second is conditionally proved; the third is conjectural.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}llc@{}}
+\textbf{Genus} & \textbf{Claim} & \textbf{Status} \\
+\hline
+$g = 0$ & algebraic BRST $=$ bar differential & proved \\[3pt]
+$g = 0$, higher arity
+  & Feynman-diagrammatic $m_k$ $=$ bar $m_k$
+  & proved \\[3pt]
+$g \geq 1$ & BV quantum master equation $=$ curved bar
+  & conjectural
+\end{tabular}
+\end{center}
+
+\medskip
+
+The bar complex IS well-defined at all genera: the inductive
+genus determination from Volume~I combined with the HS-sewing
+theorem produces bar amplitudes at every genus.  What is open
+is whether these bar amplitudes coincide with the BV-BRST
+partition function at genus $g \geq 1$.  This is
+\texttt{conj:master-bv-brst}.
+
+The identification at genus~$0$ is an algebraic comparison:
+the BRST differential $Q = \partial + \partial^{\mathrm{BRST}}$,
+restricted to the physical subspace, reproduces the bar
+differential $d_{\barB}$.  The identification at genus~$1$
+would require matching the BV quantum master equation
+$\hbar\Delta_{\mathrm{BV}}S + \tfrac{1}{2}\{S, S\} = 0$ with
+the curved bar relation $\dfib^{\,2} = \kappa \cdot \omega_1$.
+No obstruction to this matching is known; no proof exists.
+
+This session corrected four locations in the manuscript that
+overclaimed genus-$1$ BV/BRST $=$ bar as proved.  The bar
+complex is the proved object.  The BV-BRST comparison is the
+conjectural bridge.
+
+
+% -----------------------------------------------------------------
+\subsection{The standalone paper}
+\label{sec:standalone-paper}
+% -----------------------------------------------------------------
+
+\textit{Shadow Towers and Algebraicity}, $25$ pages, eight
+sections.
+
+\begin{enumerate}[label=\S\arabic*.,nosep]
+\item Introduction and motivation.  The bar construction as
+  categorical logarithm; the shadow tower as its Taylor
+  expansion.
+\item The MC algebra.  The modular cyclic deformation complex
+  $\mathrm{Def}^{\mathrm{mod}}_{\mathrm{cyc}}(\cA)$ and the
+  universal element $\Theta_\cA$.
+\item The shadow tower.  Projection to the primary line;
+  recursive computation of $S_r$ from the MC equation.
+\item The Riccati algebraicity theorem.  The MC equation on a
+  single primary line reduces to a Riccati ODE whose solution
+  is $H(t) = t^2\sqrt{Q_L(t)}$, algebraic of degree~$2$.
+  Full proof.
+\item Four-class classification.  The critical discriminant
+  $\Delta = 8\kappa S_4$ partitions modular Koszul algebras
+  into four classes:
+  \begin{enumerate}[label=(\alph*),nosep]
+  \item \textbf{G} (Gaussian): $r_{\max} = 2$.  Heisenberg.
+  \item \textbf{L} (Lie/tree): $r_{\max} = 3$.  Affine
+    Kac--Moody.
+  \item \textbf{C} (contact/quartic): $r_{\max} = 4$.
+    $\beta\gamma$.
+  \item \textbf{M} (mixed): $r_{\max} = \infty$.  Virasoro,
+    $\cW_N$.
+  \end{enumerate}
+\item Explicit shadow towers.  Complete computation for the
+  standard landscape: Heisenberg, affine $\fsl_2$,
+  $\beta\gamma$, Virasoro, $\cW_3$.  Tables of $S_r$ through
+  arity~$8$.
+\item $\cW_3$ cross-channel genus-$2$ computation.
+  Multi-generator shadow tower with two primary lines
+  ($T$ and $W$), propagator variance $\delta_{\mathrm{mix}}$,
+  genus-$2$ cross-channel formula.
+\item Outlook.  Pixton conjecture (class~M algebras generate
+  the Pixton ideal via infinite MC tower), analytic completion
+  programme, non-standard families.
+\end{enumerate}
+
+The paper extracts from Volume~I the self-contained story of
+the shadow tower, from its definition through the algebraicity
+theorem to the four-class classification and the explicit
+standard-landscape computations.  It is the first accessible
+entry point to the monograph's nonlinear characteristic layer.
+
+
+% =================================================================
+\section{The graviton is composite}
+\label{sec:graviton-composite}
+% =================================================================
+
+The Sugawara stress tensor
+\[
+T \;=\; \frac{1}{2(k+h^\vee)}\sum_a \normord{J^a J_a}
+\]
+is quadratic in affine currents.  It is not a fundamental field.
+The graviton is composite.
+
+The BRST complex of the Drinfeld--Sokolov reduction remembers
+this.  The BRST homotopy $h$ maps states at ghost number~$0$
+to states at ghost number~$\pm 1$.  Every tree in the
+homological perturbation lemma expansion of the transferred
+coproduct passes through~$h$.  The projection $p \otimes p$
+onto ghost-number-$0$ cohomology annihilates both signs.  The
+transferred coproduct is
+\[
+\Delta^W(x) \;=\; \tau_z(x) \otimes 1 \;+\; 1 \otimes x.
+\]
+Primitive.  No cross-term.  No splitting.  At every arity, at
+every order, for every principal DS reduction of every simple
+Lie algebra.
+
+\sep
+
+In gauge theory: the gluon $J^a$ IS the connection.
+Fundamental.  Ghost number~$0$.  No passage through~$h$.  The
+BRST homotopy does not obstruct the transferred coproduct.
+The Casimir cross-term survives projection:
+\[
+\Delta_z(T_{\mathrm{aff}})
+\;=\;
+\tau_z(T_{\mathrm{aff}}) \otimes 1
+\;+\; 1 \otimes T_{\mathrm{aff}}
+\;+\; \frac{1}{k+h^\vee}\,\Omega(w{+}z,\, w),
+\]
+where $\Omega = \sum_a J^a \otimes J_a$ is the split Casimir.
+A production vertex.  A gluon bound state dissociates.
+
+In gravity: the graviton $T$ IS the curvature.  Composite.
+Ghost-burdened.  Every HPL tree at ghost number~$0$ dies under
+projection.  Gravitons do not split.  They braid.
+
+\sep
+
+The $r$-matrix $r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$
+carries all gravitational scattering.  The cubic pole: the bar
+kernel $d\log(z-w)$ absorbs one power from the quartic OPE.
+The Virasoro OPE has poles at $z^{-4}$, $z^{-2}$, $z^{-1}$.
+The $r$-matrix has poles at $z^{-3}$, $z^{-1}$.  The
+logarithmic derivative is always one degree milder than the
+function itself.  This absorption is not an approximation.  It
+is the structural content of calling the bar construction a
+categorical logarithm.
+
+\sep
+
+Five theories.  One machine.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lccccc@{}}
+& CS & Gravity & TH & M2 & M5 \\
+\hline
+Class & L & M & L & L & M \\[3pt]
+$\Delta_L$ & $0$ & $\neq 0$ & $0$ & $0$ & $\neq 0$ \\[3pt]
+Coproduct & nontrivial & primitive & nontrivial
+  & nontrivial & primitive \\[3pt]
+Why & fundamental & ghost kills & fundamental
+  & DDCA, no DS & ghost kills \\[3pt]
+$r_{\max}$ & $3$ & $\infty$ & $3$ & $3$ & $\infty$
+\end{tabular}
+\end{center}
+
+\medskip
+
+\noindent
+The pattern: DS reduction creates depth (L $\to$ M) and kills
+the coproduct.  The Sugawara construction is the algebraic
+mechanism.  The ghost sector is the memory of composition.
+Gauge theories have fundamental fields and nontrivial
+coproducts.  Gravitational theories have composite fields and
+primitive coproducts.  The distinction is not parametric (it
+is not the value of the central charge).  It is structural
+(it is the ghost-number filtration of the BRST complex).
+
+\sep
+
+The bar complex of a chiral algebra knows more about quantum
+gravity than any perturbative expansion.
+
+It knows the exact genus-$g$ free energy at every genus, in
+closed form:
+$F_g = (c/2) \cdot \lambda_g^{\mathrm{FP}}$, the
+$\hat{A}$-genus coefficients times the modular characteristic.
+
+It knows the entire infinite tower of higher-arity corrections,
+as the Taylor expansion of an algebraic function of degree~$2$:
+$H(t) = t^2\sqrt{Q_{\mathrm{Vir}}(t)}$, three numbers
+$(\kappa, \alpha, S_4)$, one quadratic form, one square root.
+
+It knows that the gravitational coproduct is primitive: black
+holes do not split.  The production vertex that would allow a
+graviton to dissociate into constituents is killed by the
+ghost-number projection at every arity, for every principal
+Drinfeld--Sokolov reduction.
+
+It knows the arithmetic.  At rational central charge $c_0$,
+the shadow metric $Q_{\mathrm{Vir}}$ specialises to a specific
+quadratic polynomial over~$\Q$, and
+$K(c_0) = \Q(\sqrt{d(c_0)})$ is a specific imaginary quadratic
+number field.  The Bekenstein--Hawking entropy $S = 2\pi\sqrt{ch/6}$
+is the leading coefficient.  The discriminant
+$-320c^2/(5c+22)$ classifies the depth.  The class number of
+$K(c_0)$ measures the arithmetic complexity of gravity at that
+central charge.  The Ising model lives over $\Q(\sqrt{-10})$.
+The self-dual gravity at $c = 13$ lives over $\Q(\sqrt{-870})$,
+and the complementarity constant $6960 = 2^4 \cdot 3 \cdot 5
+\cdot 29$ appears as $-80 \cdot 87 = -6960$.
+
+\sep
+
+The bar complex of a chiral algebra is a $1$-form, a square
+root, and a ghost.
+
+The $1$-form $\eta = d\log(z_i - z_j)$ extracts the OPE.
+Arnold's relation makes it nilpotent.  The genus-completed
+differential $D_\cA$ satisfies $D_\cA^2 = 0$, and
+$\Theta_\cA = D_\cA - d_0$ is the universal MC element.
+
+The square root $\sqrt{Q_L}$ generates the tower.  One
+quadratic form, one algebraic function, infinitely many
+rational invariants.  The depth classification, the growth
+rate, the convergence behaviour, the Galois theory, the Epstein
+zeta function, the discriminant complementarity: all
+are properties of this single square root.
+
+The ghost kills the splitting.  The BRST homotopy carries
+ghost number $\pm 1$, the projection annihilates it, and the
+coproduct vanishes.  This is the algebraic reason that gravity
+does not produce particles.
+
+Everything else is a projection of these three.
+
+
+% ============================================================
+\section{Koszul--Epstein and quantum gravity}
+\label{sec:koszul-epstein-gravity}
+% ============================================================
+
+\subsection{The arithmetic content of the gravitational bar complex}
+
+The bar complex of the Virasoro algebra at central charge~$c$
+carries three layers of arithmetic data.
+
+\textbf{Layer 1: the Heisenberg core.}
+The Miura map $\hat\Upsilon\colon W_\kappa(\mathfrak{sl}_2) \to
+V^{\mathfrak{h}_\kappa}(\mathfrak{h})$ embeds the Virasoro
+algebra into a rank-$1$ Heisenberg.  At the level of the
+sewing determinant, this produces an exact Euler product:
+\[
+\sum_{N \ge 1} \sigma_{-1}(N)\,q^N
+\;=\; -\log\bigl(\eta(q)^2\bigr) - \tfrac{\tau}{12},
+\qquad
+\sum_{N \ge 1} \sigma_{-1}(N)\,N^{-s}
+\;=\; \zeta(s)\,\zeta(s+1).
+\]
+The Heisenberg core is arithmetically transparent: all
+nontrivial genus-one arithmetic is a consequence of the
+divisor function~$\sigma_{-1}$ being multiplicative.
+
+\textbf{Layer 2: the Miura defect.}
+The vacuum character of~$W_N$ splits as
+$\chi^{\mathrm{vac}}_{W_N}(q)
+= \chi_H(q)^{N-1} \cdot
+\prod_{m=1}^{N-1}(1-q^m)^{N-m}$.
+All nontrivial genus-one arithmetic beyond the Heisenberg core
+sits in the finite Miura defect factor
+$D_N(q) = \prod_{m=1}^{N-1}(1-q^m)^{N-m}$.
+For~$N = 2$ (Virasoro): $D_2(q) = 1 - q$, removing the weight-$1$
+mode.
+
+\textbf{Layer 3: the shadow tower.}
+The infinite shadow tower $\{S_r(c)\}_{r \ge 2}$, determined by
+$(\kappa, \alpha, S_4)$ via the MC recursion, encodes the full
+$A_\infty$ deformation data.  Its spectral measure~$\rho$ is
+uniquely determined by the Carleman condition.  The MC recursion
+propagates Hecke equivariance from the character level to all
+arities (Route~C, proved for the standard landscape).
+
+\subsection{The gravitational dichotomy and the Koszul--Epstein frontier}
+
+The gravity dichotomy at $c = 26$ concerns the vanishing of
+$\kappa_{\mathrm{eff}} = \kappa(\mathrm{matter})
++ \kappa(\mathrm{ghost})$.  The Koszul--Epstein question
+concerns the critical-line properties of the arithmetic
+shadow.  These are unrelated:
+
+\begin{itemize}
+\item $\kappa_{\mathrm{eff}} = 0$ at $c = 26$ determines whether
+  the genus tower terminates (the Clifford-to-exterior
+  degeneration of the transgression algebra).
+
+\item The critical-line question concerns the zeros of
+  $\zeta(s)$ appearing in the Heisenberg sewing determinant.
+  These zeros are independent of the central charge: the sewing
+  lift $S_{\mathrm{Vir}}(u) = \zeta(u+1)(\zeta(u) - 1)$ is the
+  same function for all~$c$.
+\end{itemize}
+
+The Koszul self-duality point $c = 13$, where
+$\kappa + \kappa' = 13$ and $\delta_\kappa = 0$, is the point
+where Verdier--Hecke commutation forces the constrained Epstein
+zeta to factor into standard $L$-functions.  This is a genuine
+arithmetic structure of the self-dual gravitational theory.
+It does not, however, produce a critical-line theorem.
+
+\subsection{Honest assessment}
+
+The MC element~$\Theta_\cA$ of the gravitational bar complex
+produces genuine arithmetic structure: the Carleman-determined
+spectral measure, Route~C prime-locality, the shadow--spectral
+correspondence for lattice VOAs, the Verdier--Hecke factorisation
+at self-dual points.  These are proved theorems.
+
+The programme does not produce a critical-line theorem.  The
+structural obstruction is that the shadow spectral measure
+and the automorphic spectral measure are different objects, and
+the map between them (the Rankin--Selberg integral) is not
+sign-preserving.  No mechanism for positivity has been
+identified.  The bar--cobar homotopy equivalence provides
+deformation-theoretic transport, not arithmetic positivity.
+
+The surviving content: the quartic resonance class
+$R_4^{\mathrm{mod}}(\cA)$ is the first nonlinear place where
+Koszul duality constrains the automorphic spectral decomposition
+beyond the character level.  Whether this constraint carries
+critical-line information is open.  The correct next computation
+is the quartic Gram-side matching with the crossing-weighted
+bilinear residue kernel (using actual DOZZ/Toda structure
+constants), not the bare spectral measure (which fails by four
+to five orders of magnitude).
+
+The bar complex of a chiral algebra knows the exact genus tower,
+the arithmetic of the shadow, and the depth classification.
+It does not know the zeros of~$\zeta(s)$.
+
+
+% ============================================================
+\section{Spectrum and gravity}
+\label{sec:spectrum-gravity}
+% ============================================================
+
+The gravitational bar complex carries three kinds of data:
+the algebraic engine (Theorems A--H, the MC
+element~$\Theta_\cA$), the arithmetic shadow (the shadow tower,
+the depth classification, the Epstein zeta), and the spectral
+content (the primary spectrum, the partition function, the
+constrained Epstein series~$\varepsilon^c_s$).  These three
+overlap but do not coincide.  This section records the definitive
+assessment of their relationship in the gravitational context.
+
+\subsection{The spectrum as a categorical invariant}
+
+The scalar primary spectrum
+$\mathrm{Spec}_{\mathrm{sc}}(\cA) = \{(\Delta_i, m_i)\}$ of a
+2d~CFT at central charge~$c$ is an invariant of the
+\emph{modular tensor category}
+$\cA\text{-}\mathrm{mod}^{\mathrm{ss}}$ together with the
+modular-invariant partition function $Z(\tau,\bar\tau)
+= \sum_{i,j} M_{ij}\,\chi_i(\tau)\,\overline{\chi_j(\tau)}$.
+The multiplicity matrix~$M_{ij}$ encodes the physical spectrum;
+the characters $\chi_i$ encode the algebraic spectrum.
+
+The bar complex $B(\cA)$ is built from the algebra~$\cA$
+(specifically, from the vacuum module and its OPE), not from
+the category of modules.  The bar-cobar machine determines the
+Koszul dual~$\cA^!$, the MC element~$\Theta_\cA$, and the shadow
+tower~$\{S_r\}$.  It does \emph{not} determine the modular
+$S$-matrix or the multiplicity matrix.  The primary spectrum is
+therefore external to the bar construction.
+
+For the gravitational theory (Virasoro at central charge~$c$),
+the vacuum module is the unique irreducible highest-weight module
+$L(c,0)$, and the partition function $Z_{\mathrm{grav}}
+= |\chi_0(\tau)|^2 + \sum_{h > 0} m_h\,|\chi_h(\tau)|^2$ depends
+on the dynamical data $\{m_h\}_{h > 0}$: the spectrum of
+primary states.  The bar complex of~$\mathrm{Vir}_c$ sees the
+algebra, not the specific gravity theory built from it.
+
+\subsection{Which constructions partially capture the spectrum}
+
+Five constructions each capture a shadow of the gravitational
+primary spectrum.  None captures it fully from within the bar
+machine.
+
+\begin{enumerate}
+\item \emph{Zhu's algebra $A(\mathrm{Vir}_c)$.}
+  For the universal Virasoro: $A(V_c) \cong \C[x]$.  The simple
+  modules of $\C[x]$ correspond to points $x = h \in \C$: the
+  conformal dimensions.  Zhu's algebra determines the
+  \emph{set} of allowed lowest weights $\{h_{r,s}\}$ for the
+  minimal model at $c = c_{p,q}$ (via the quotient $A(L(c,0))
+  = \C[x]/(f_c(x))$).  But it does not determine the partition
+  function multiplicities.  At generic~$c$ (irrational, or
+  rational non-minimal), $A(V_c) = \C[x]$ admits a continuum
+  of simple modules, and no finite selection rule from $A(V_c)$
+  picks out the physical spectrum.
+
+\item \emph{Associated variety $X_{\mathrm{Vir}_c}$.}
+  For Virasoro: $X_{V_c} = \C$ (one-dimensional, since Virasoro
+  has a single strong generator).  The dimension of $X_V$
+  controls the asymptotic growth of the character and hence the
+  leading pole of the constrained Epstein series at $s = c/2$.
+  This is the Cardy regime: $\log \rho(E) \sim
+  2\pi\sqrt{c\,E/3}$ for large conformal dimension~$E$.
+
+\item \emph{Bar cohomology $H^*(B(\mathrm{Vir}_c))$.}
+  Concentrated in bar degree~$1$ (Koszulness).  The graded
+  dimensions $\dim H^1(B(\mathrm{Vir}))_h$ count generators of
+  the Koszul dual $\mathrm{Vir}^!_{26-c}$ at weight~$h$.  These
+  are the \emph{Motzkin differences} $M(h+1) - M(h)$, supported
+  only at even weights, independent of~$c$, and growing
+  as~$3^h$.  The quasi-primary count (partitions minus
+  descendants) is a different sequence, nonzero at odd weights
+  and growing as $e^{\pi\sqrt{2h/3}}$.  Bar cohomology sees the
+  dual algebra, not the spectrum.
+
+\item \emph{Shadow tower $\{S_r\}$.}
+  The shadow tower extracts three numbers $(\kappa, \alpha, S_4)$
+  from the OPE and packages them into the shadow metric~$Q_L$.
+  The shadow-metric Epstein zeta $\varepsilon_{Q_L}(s)$ is a
+  binary quadratic form sum, unrelated to the primary spectrum
+  except through a chain of projections.  For lattice VOAs, the
+  shadow--spectral correspondence recovers the full $L$-function
+  package; for Virasoro, the correspondence is incomplete (the
+  shadow has $3$~parameters; the spectrum has infinitely many).
+
+\item \emph{The chiral derived centre
+  $\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA)$.}
+  The universal bulk algebra, built as chiral Hochschild cochains
+  $C^\bullet_{\mathrm{ch}}(\cA_b, \cA_b)$, classifies bulk
+  operators.  Its cohomology controls the BRST-closed observables
+  of the 3d HT theory.  But it is a genus-$0$ invariant of the
+  open/closed Swiss-cheese structure, and does not directly encode
+  the genus-$1$ partition function.  The trace on the derived
+  centre (the annulus trace~$\mathrm{Tr}_\cA$) recovers the
+  Hochschild homology $\mathrm{HH}_*(\cA)$, which is the first
+  modular shadow of the open sector.  This is related to, but
+  not identical with, the partition function.
+\end{enumerate}
+
+\subsection{The gravitational spectral gap}
+
+In the gravitational context, the primary spectrum has additional
+structure: the conformal bootstrap imposes crossing-symmetry
+constraints on the four-point function, which restrict the
+allowed $\{(\Delta_i, m_i)\}$ beyond what the chiral algebra
+alone determines.  The Benjamin--Chang constrained Epstein
+series $\varepsilon^c_s$ is the Eisenstein spectral coefficient
+of $\hat Z^c$, and its functional equation involves
+$\zeta(2s)/\zeta(2s-1)$, introducing poles at
+$s = (1+\rho_n)/2$ where $\rho_n$ are nontrivial zeros
+of~$\zeta$.
+
+The pole \emph{locations} are universal: they come from
+$\zeta(2s-1) = 0$ in the $\Gamma$-factor ratio $F_c(s)$, and
+do not depend on the specific CFT.  The pole \emph{residues}
+are CFT-specific: they are integrals of the primary-counting
+function against residues of Eisenstein series on the modular
+fundamental domain.  The bar complex constrains neither the
+locations (which are number-theoretic: the zeros of~$\zeta$)
+nor the residues (which are spectral: the primary multiplicities
+$m_h$).
+
+For the gravitational theory at $c = 26$ (critical string):
+$\kappa_{\mathrm{eff}} = \kappa(\mathrm{matter})
++ \kappa(\mathrm{ghost}) = 0$, and the genus tower terminates.
+But the primary spectrum is still infinite (the Virasoro module
+at $c = 26$ has infinitely many primaries at all weights
+$h \geq 2$), and $\varepsilon^{26}_s$ is a nontrivial Dirichlet
+series.  The genus tower's termination is a statement about the
+$\hat A$-genus factor~$\kappa$; it says nothing about the
+spectral content.
+
+For the gravitational theory at $c = 13$ (self-dual point):
+Verdier--Hecke commutation forces the constrained Epstein to
+factor into standard $L$-functions.  This is the strongest
+structural result: self-duality of the chiral algebra produces
+a factorisation of the spectral invariant.  But even at
+$c = 13$, the factorisation does not determine the zeros of the
+constituent $L$-functions.
+
+\subsection{Is $\varepsilon^c_s$ a bar-complex invariant?}
+
+\begin{proposition}[The constrained Epstein is not a bar-complex invariant]
+\label{prop:constrained-epstein-not-bar}
+The constrained Epstein series $\varepsilon^c_s(\cA)$ cannot be
+reconstructed from the bar complex $B(\cA)$ and its cohomology.
+\end{proposition}
+
+\begin{proof}
+Three independent arguments.
+
+\textbf{(a) Categorical argument.}
+Two non-isomorphic modular-invariant partition functions for the
+same chiral algebra produce different constrained Epstein series.
+Example: the Ising model ($c = 1/2$) has the diagonal partition
+function $Z_{\mathrm{diag}} = |\chi_0|^2 + |\chi_{1/2}|^2
++ |\chi_{1/16}|^2$ and the charge-conjugation partition function
+(which is the same, since Ising is self-conjugate).  But for
+$\widehat{\mathfrak{su}(2)}_k$ at $k \geq 10$, there exist
+exceptional modular invariants (the $D$-type and $E$-type
+classifications of Cappelli--Itzykson--Zuber) that produce
+different primary spectra from the same chiral algebra.  The
+bar complex $B(\hat\fg_k)$ is the same for all choices of
+modular invariant; the constrained Epstein series differs.
+
+\textbf{(b) Dimensional argument.}
+The bar complex is determined by the OPE data of the vacuum
+module (a countable set of structure constants).  The primary
+spectrum is determined by the modular invariant \emph{and} the
+full representation theory (the braided tensor structure, the
+modular $S$-matrix).  The latter is strictly richer: two algebras
+with the same OPE but different categories of modules (e.g.,
+$V_k(\fg)$ at the same $k$ but with different conformal
+extensions) have the same bar complex but different spectra.
+
+\textbf{(c) Weight argument.}
+$\dim H^1(B(\mathrm{Vir}))_h$ at odd $h$ vanishes (the Koszul
+dual has generators only at even weights), while the quasi-primary
+count at odd $h$ is generically nonzero.  No Dirichlet series
+built from bar cohomology dimensions can reproduce
+$\varepsilon^c_s$, which sums over all primary weights including
+odd ones.
+\end{proof}
+
+\subsection{The honest three-layer picture}
+
+The gravitational bar complex produces three layers of arithmetic
+data, each genuine and proved.
+
+\textbf{Layer 1: the genus expansion.}
+$F_g(\cA) = \kappa(\cA) \cdot \lambda_g^{\mathrm{FP}}$
+for uniform-weight algebras.  This is the leading scalar projection
+of the MC element $\Theta_\cA$, generated by $\hat A(i\hbar) - 1$.
+It captures \emph{one number} ($\kappa$) from the full partition
+function.
+
+\textbf{Layer 2: the shadow tower.}
+$\{S_r\}_{r \geq 2}$, determined by $(\kappa, \alpha, S_4)$.
+This captures \emph{three numbers} from the OPE, packaged into
+the shadow metric~$Q_L$ and the quadratic extension~$K_L$.  The
+shadow--spectral correspondence for lattice VOAs, Route~C
+prime-locality, and the Verdier--Hecke factorisation are genuine
+arithmetic results at this layer.
+
+\textbf{Layer 3: the spectral content.}
+$\varepsilon^c_s(\cA) = \sum (2\Delta)^{-s}$, encoding the full
+scalar primary spectrum.  This layer is external to the bar
+complex: it requires the partition function, which is a
+genus-$1$ categorical invariant, not a genus-$0$ algebraic one.
+
+The gap between Layers 2 and 3 is the gap between the
+shadow tower (genus-$0$, $3$~parameters) and the primary spectrum
+(genus-$1$, $\infty$~parameters).  No mechanism in the MC equation
+or the bar-cobar machine bridges this gap: the shadow tower is
+determined by finitely many OPE coefficients, while the spectrum
+encodes infinitely many independent quantities.
+
+The honest statement for the gravitational theory:
+\emph{the bar complex of the Virasoro algebra at central
+charge~$c$ determines the exact genus expansion
+$F_g = (c/2)\,\lambda_g^{\mathrm{FP}}$, the infinite shadow
+tower with growth rate~$\rho(c)$ and discriminant
+$\Delta = 80/(5c{+}22)$, and the four-class depth assignment
+(class~M for all $c \neq 0$).  It does not determine the
+primary spectrum, the partition function, or the constrained
+Epstein series.  The spectrum is a representation-theoretic
+invariant; the bar complex is an algebra-theoretic invariant.
+They live in different categories.}
+
+
+% ============================================================
+\section{Derived global sections in quantum gravity}
+\label{sec:derived-global-sections-qg}
+% ============================================================
+
+The gravitational bar complex defines a sheaf on moduli space
+whose derived global sections are algebraic invariants.  This
+section records the definitive assessment of what these
+algebraic invariants capture in the gravitational context,
+correcting the false claim that ``the bar complex cannot see the
+spectrum because integration over moduli space is analytic.''
+
+\subsection{The sheaf-theoretic framework}
+
+For Virasoro at central charge~$c$, the bar complex at
+genus~$g$ defines a sheaf of dg modules on
+$\overline{\cM}_g$.  The key objects:
+
+\begin{enumerate}
+\item The \emph{virtual bar $K$-class}
+  $V_{\mathrm{Vir}_c} := [R\pi_{g*}\,\barB^{(g)}(\mathrm{Vir}_c)]
+  \in K^0(\overline{\cM}_g)$, computed by derived pushforward
+  along the universal curve.  This is well-defined: the
+  perfectness criterion (Koszul acyclicity + finite-dimensional
+  fiber cohomology) is satisfied for all modular Koszul algebras.
+
+\item The \emph{center sheaf}
+  $\cZ_{\mathrm{Vir}_c} := R^*\pi_{g*}(\barB^{(g)},\, d_{\mathrm{fib}})$,
+  a local system on $\overline{\cM}_g$ with fiber
+  $H^{\mathrm{ch}}_*(\Sigma_g, \mathrm{Vir}_c)$.
+
+\item The \emph{ambient complex}
+  $C_g(\mathrm{Vir}_c) = R\Gamma(\overline{\cM}_g,\,
+  \cZ_{\mathrm{Vir}_c})$, the derived global sections.
+  This is a purely algebraic operation on a constructible sheaf
+  over a proper DM stack.
+
+\item The \emph{GRR hierarchy}:
+  \begin{align*}
+  c_1(\det V_{\mathrm{Vir}_c}) &= \tfrac{c}{2} \cdot \lambda, \\
+  \mathrm{ch}(V_{\mathrm{Vir}_c}) &\leftrightarrow \Delta_{\mathrm{Vir}}(x)
+    \quad\text{(Motzkin differences)}, \\
+  \mathrm{Hol}(V_{\mathrm{Vir}_c}) &= \Pi_{\mathrm{Vir}_c}
+    \quad\text{(MCG monodromy)}.
+  \end{align*}
+  All three levels are algebraic.
+\end{enumerate}
+
+So the bar complex \emph{does} produce algebraic invariants
+from integration over moduli space.  The claim that this
+integration is ``analytic, not algebraic'' was a false idea.
+Derived global sections, Chern character, GRR pushforward,
+and monodromy representation are all algebraic operations.
+
+\subsection{The gravitational spectral gap: precise diagnosis}
+
+The GRR hierarchy captures the \emph{algebra's} modular
+structure.  It does not capture the \emph{gravitational
+spectrum}.  The precise diagnosis:
+
+\textbf{(i) The GRR scalar level} recovers $\kappa(\mathrm{Vir}_c)
+= c/2$.  This is one number.  The gravitational partition function
+$Z(\tau,\bar\tau) = |\chi_0(\tau)|^2 + \sum_{h > 0} m_h\,
+|\chi_h(\tau)|^2$ encodes infinitely many numbers $\{m_h\}$.
+
+\textbf{(ii) The GRR spectral level} recovers the bar cohomology
+dimensions $\dim H^1(B(\mathrm{Vir}))_h$, which are the Motzkin
+differences $M(h+1) - M(h)$.  These count generators of the
+Koszul dual $\mathrm{Vir}^!_{26-c}$, not primaries of
+$\mathrm{Vir}_c$.  The two sequences differ: bar cohomology is
+supported only at even weights and is $c$-independent; the
+quasi-primary count is nonzero at odd weights and depends on the
+specific gravity theory.
+
+\textbf{(iii) The GRR holonomy level} recovers the monodromy of
+$\cZ_{\mathrm{Vir}_c}$: the action of the mapping class group on
+chiral homology.  For the Virasoro algebra, this is the
+monodromy of the KZ connection, which encodes the
+projective representation of $\mathrm{MCG}(\Sigma_g)$ on the
+space of conformal blocks.  This is an invariant of the
+\emph{algebra} (it is functorial in morphisms of chiral algebras,
+not in changes of the module category or modular invariant).
+
+\textbf{The obstruction is not analysis vs.\ algebra.}
+It is \emph{algebra vs.\ category}: the bar complex sees
+the chiral algebra $\mathrm{Vir}_c$; the gravitational
+spectrum sees the choice of gravity theory built from
+$\mathrm{Vir}_c$ (the specific multiplicities $\{m_h\}$
+in the partition function, which are dynamical data external
+to the algebra).
+
+\subsection{Three routes toward the spectrum}
+
+\paragraph{(a) Module bar construction.}
+The module bar complex $\barB_{\mathrm{Vir}_c}(L(c,h))$ applied
+to each irreducible module $L(c,h)$ produces a comodule over
+$\barB(\mathrm{Vir}_c)$.  Its $K$-class carries the conformal
+dimension~$h$.  Summing with the gravitational multiplicities
+$\{m_h\}$:
+\[
+\sum_{h} m_h\,\mathrm{ch}\bigl(
+R\pi_{1*}\,\barB_{\mathrm{Vir}_c}(L(c,h))\bigr)
+\]
+would recover the gravitational partition function at genus~$1$.
+But this takes $\{m_h\}$ as \emph{input}: it computes the
+partition function from the spectrum, rather than extracting
+the spectrum from the bar complex.
+
+\paragraph{(b) Conformal blocks as $D$-module.}
+The conformal blocks local system on $\cM_{g,n}$ carries a flat
+connection (the KZ/Hitchin connection) whose monodromy encodes
+the modular $S$-matrix for rational theories.  At integrable
+level for affine Kac--Moody algebras, the monodromy recovers the
+primary dimensions via the Verlinde formula.
+
+For the Virasoro algebra at generic~$c$, the conformal blocks
+local system has irregular singularities and the representation
+theory is non-semisimple (at irrational~$c$, all Verma modules
+are irreducible and the spectrum is continuous).  Whether the
+$D$-module structure of the conformal blocks sheaf on
+$\overline{\cM}_{1,1}$ determines the gravitational spectrum
+(after choosing a modular invariant) is a frontier question:
+it amounts to recovering the spectral decomposition of a
+function on $\mathrm{SL}(2,\Z)\backslash\mathfrak{H}$ from
+the algebraic structure of its associated $D$-module.
+
+\paragraph{(c) The Roelcke--Selberg step.}
+The passage from the partition function
+$Z(\tau,\bar\tau)$ to the constrained Epstein series
+$\varepsilon^c_s$ uses the spectral decomposition of
+$L^2(\mathrm{SL}(2,\Z)\backslash\mathfrak{H})$ into Eisenstein
+series and Maass cusp forms.  This involves the hyperbolic
+Laplacian, which is a real-analytic operator.
+The scattering matrix involves $\zeta(2s)/\zeta(2s-1)$,
+whose poles are the nontrivial zeros of the Riemann
+zeta function.  No categorical or motivic construction is
+known to produce this spectral decomposition.
+
+The ``analytic'' step that is genuinely unavoidable is this
+last one: from characters (which are algebraic for rational VOAs)
+to spectral coefficients (which require harmonic analysis on
+$\mathrm{SL}(2,\Z)\backslash\mathfrak{H}$).
+
+\subsection{Honest status}
+
+\begin{enumerate}[label=(\alph*)]
+\item The bar complex defines a sheaf on $\overline{\cM}_g$
+  with algebraic invariants ($R\Gamma$, $\mathrm{ch}$,
+  $\mathrm{Hol}$, GRR).  The claim ``integration is analytic''
+  was a false idea.
+
+\item These algebraic invariants capture the algebra's modular
+  structure: $\kappa$, bar cohomology dimensions, KZ/Hitchin
+  monodromy.  They do \emph{not} capture the gravitational
+  spectrum $\{m_h\}$ or the constrained Epstein
+  $\varepsilon^c_s$.
+
+\item The obstruction is \emph{algebra vs.\ category},
+  not analysis vs.\ algebra.  Two gravity theories with the
+  same Virasoro algebra but different spectra have the same
+  bar complex.  This is a theorem, not a technical limitation.
+
+\item The construction that does capture the spectrum---the
+  conformal blocks $D$-module on $\cM_{g,n}$---is algebraic
+  (Beilinson--Drinfeld) but requires the module category
+  as input.  For rational theories, its monodromy ($S$-matrix)
+  determines the primary dimensions.  For non-rational theories,
+  the $D$-module has irregular singularities and the spectral
+  question is at the frontier of geometric Langlands and
+  irregular Hodge theory.
+
+\item The single genuinely analytic step is the
+  Roelcke--Selberg decomposition: from characters to spectral
+  zeta.  This step is universal (it involves the Riemann
+  zeta function, not the specific VOA) and has no known
+  categorical substitute.
+
+\item Status: the ``spectral question'' is \textbf{OPEN} in the
+  sense that the algebraic $D$-module framework exists but
+  has not been carried through for Virasoro at generic~$c$.
+  The gap is not a missing construction but a missing
+  computation: does the irregular $D$-module structure of the
+  Virasoro conformal blocks local system on
+  $\overline{\cM}_{1,1}$ determine the primary spectrum after
+  choosing a modular invariant?
+\end{enumerate}
+
+
+% ============================================================
+\section{Complex parameters in quantum gravity}
+\label{sec:complex-parameters-qg}
+% ============================================================
+
+The gravitational bar complex of the Virasoro algebra produces
+real spectral data: the modular characteristic $\kappa = c/2$,
+the shadow tower $\{S_r(c)\}$, and the genus expansion
+$F_g = \kappa\,\lambda_g^{\mathrm{FP}}$ are all rational
+functions of the central charge~$c$.  The zeros of the
+Riemann zeta function, which appear in the scattering matrix
+of the Eisenstein spectral decomposition on $\cM_{1,1}$, live
+at complex spectral parameters.  This section records the
+definitive assessment of whether any extension of the bar
+complex can access complex spectral data.
+
+\subsection{The structural obstruction}
+
+The obstruction is a theorem with three components.
+
+\begin{enumerate}
+\item The shadow tower on a single primary line is determined
+by three genus-$0$ OPE invariants $(\kappa, \alpha, S_4)$
+via Theorem~\ref{thm:riccati-algebraicity}: the generating
+function $H(t) = t^2\sqrt{Q_L(t)}$ is algebraic of degree~$2$.
+Three numbers constitute a finite-dimensional algebraic datum.
+
+\item The zeta zeros $\{\rho_n = \tfrac{1}{2} + i\gamma_n\}$
+constitute a countably infinite collection of complex numbers,
+believed to be algebraically independent.  No finite-dimensional
+algebraic structure determines such a set.
+
+\item The Rankin--Selberg unfolding that connects the partition
+function to the constrained Epstein $\varepsilon^c_s$ erases
+the convolution-algebraic structure of the MC equation.  The
+unfolded integral depends on Fourier coefficients alone, not on
+the MC brackets.  The $L$-functions $L(s, f_j)$ in the
+spectral decomposition are properties of the eigenforms~$f_j$,
+independent of the algebra~$\cA$.
+\end{enumerate}
+
+\subsection{Eight candidate bridges: the census}
+
+A complete investigation examined eight approaches to bridging
+the gap from real bar-complex data to complex $L$-function
+zeros.
+
+\paragraph{Dead ends (five).}
+Deligne categories, Wick rotation in~$c$, resonance/MC4
+completion, Borel resummation, and spectral curves.
+Each fails for a precise reason: Deligne categories
+interpolate in a categorical variable, not a spectral one;
+Wick rotation changes the shadow coefficients but not the
+sewing lift $S_\cA(u)$, which is $c$-independent; MC4
+completion solves a homological algebra problem, not a
+number-theoretic one; Borel resummation requires factorial
+divergence that the shadow series does not exhibit; and
+spectral curves encode genus-$0$ OPE data, not the automorphic
+spectrum.
+
+\paragraph{Genuine mathematics, no bridge (two).}
+The analytic continuation of the shadow tower and the analytic
+Langlands programme produce real mathematical content but do
+not bridge the real-to-complex gap.  The shadow tower
+continuation produces quadratic number fields (the Galois
+structure of the shadow extension $K_L/F$, with discriminant
+$\mathrm{disc}(Q_L) = -320\,c^2/(5c{+}22)$ for Virasoro).
+The analytic Langlands provides the correct framework for the
+critical-level oper/shadow interpolation.  Both operate on the
+function-field (geometric) side; the number-field (arithmetic)
+descent remains the deepest unsolved problem.
+
+\paragraph{The most compatible approach (one).}
+The Connes--Marcolli non-commutative geometry programme has the
+closest structural compatibility with the bar construction: the
+Bost--Connes system has a Hecke algebra of symmetries
+compatible with Verdier--Hecke commutation, and the Weil
+positivity criterion is a trace-class condition on a specific
+operator.  At the self-dual point $c = 13$, Verdier
+self-duality provides an involution on the factorisation
+coalgebra that could in principle feed into the non-commutative
+trace formula.  In practice, the arithmetic descent (the bar
+complex is defined over~$\mathbf{C}$, the Bost--Connes system
+over~$\mathbf{Q}$) blocks the construction.
+
+\subsection{What the gravitational bar complex provides}
+
+The bar complex of the Virasoro algebra at central charge~$c$
+provides five kinds of arithmetic data, all proved.
+
+\begin{enumerate}
+\item The exact genus expansion
+$F_g = (c/2)\,\lambda_g^{\mathrm{FP}}$ at all genera.
+\item The infinite shadow tower with growth rate
+$\rho(c) = \sqrt{(36 + 2\Delta)/(c^2)}$ and discriminant
+$\Delta = 80/(5c{+}22)$.
+\item The four-class depth assignment (class~M for all
+$c \neq 0$).
+\item The quadratic number field
+$K_L = \mathbf{Q}(\sqrt{\mathrm{disc}(Q_L)})$ at each
+rational~$c$, with class numbers ranging from $h = 1$
+(models $(9,10)$ and $(24,25)$) to $h = 3008$ (model $(28,29)$).
+\item Route~C prime-locality: the MC recursion propagates
+Hecke equivariance from low-arity character data to all
+arities.
+\end{enumerate}
+
+None of these constrains the zeros of the Riemann zeta function
+or any standard $L$-function.  The constraints are algebraic
+(on OPE coefficients and their MC recursions); the zero
+locations are analytic (determined by the Euler product and the
+functional equation, not by the OPE).
+
+\subsection{The gravitational dichotomy and the spectral divide}
+
+The gravity dichotomy (critical string $c = 26$ versus
+non-critical $c \neq 26$) is a statement about the
+\emph{vanishing} of a specific class:
+$\kappa_{\mathrm{eff}} = \kappa(\mathrm{matter})
++ \kappa(\mathrm{ghost}) = 0$ if and only if $c = 26$.
+The self-dual point $c = 13$ is where the Koszul asymmetry
+$\delta_\kappa = \kappa - \kappa' = 0$ vanishes.  These are
+different conditions at different central charges (AP29).
+
+The gravity dichotomy operates on the \emph{algebraic} axis:
+whether the Clifford algebra $\mathrm{Cliff}(V, \lambda)$
+with $\lambda = \kappa(\cB)\,\omega_g$ degenerates to an
+exterior algebra ($\lambda = 0$ at $c = 26$) or remains a
+matrix algebra ($\lambda \neq 0$ at $c \neq 26$).  This is a
+statement about the transgression algebra, not about the
+scattering matrix.  The spectral divide (real versus complex
+spectral parameters) operates on the \emph{analytic} axis.
+The two axes are orthogonal, and neither the gravitational
+dichotomy nor the Koszul self-duality provides a bridge between
+them.
+
+\subsection{The Beilinson verdict for quantum gravity}
+
+The following claims about the gravitational theory are
+dismissed.
+
+\begin{enumerate}
+\item ``3d quantum gravity from Koszul duality constrains zeta
+zeros.''  \emph{False.}  The Koszul duality of the Virasoro
+algebra determines the complementary algebra $\mathrm{Vir}_{26-c}$
+and the complementarity identity $\kappa + \kappa' = 13$.
+These are algebraic constraints on OPE invariants, not analytic
+constraints on $L$-function zeros.
+
+\item ``The gravitational genus expansion encodes arithmetic
+data beyond the character.''  \emph{Partially true, partially
+false.}  The genus expansion $F_g = \kappa\,
+\lambda_g^{\mathrm{FP}}$ is tautological (it lives in the
+tautological ring of~$\overline{\cM}_g$).  The shadow tower
+provides additional algebraic data (the quartic resonance
+class, the discriminant, the depth classification).  But none
+of this data accesses the primary spectrum or the partition
+function, which are the objects that carry arithmetic content
+through the Rankin--Selberg integral.
+
+\item ``The gravitational partition function at $c = 26$ has
+a distinguished relationship to the Riemann zeta function.''
+\emph{False.}  The partition function of the
+$c = 26$ Virasoro is $\eta(\tau)^{-24} = \Delta(\tau)^{-1}$,
+the inverse of the Ramanujan discriminant form.  The
+Rankin--Selberg $L$-function of $\Delta$ is
+$L(s, \Delta \times \Delta) = \zeta(s{-}11)\,
+L(s, \mathrm{Sym}^2\, \Delta)$, which has critical line
+$\mathrm{Re}(s) = 23/2$, not $\mathrm{Re}(s) = 1/2$.
+The zeta function $\zeta(s{-}11)$ appearing here is shifted
+by~$11$ (the weight of~$\Delta$ minus~$1$).  The relationship
+to the Riemann zeta is classical (Hecke theory), not a
+consequence of the bar construction.
+\end{enumerate}
+
+\subsection{What survives for the gravitational theory}
+
+The bar complex of the Virasoro algebra at central charge~$c$
+is the algebraic engine of $3$d quantum gravity on
+$\mathbf{C}_z \times \mathbf{R}_t$.  It determines:
+the Swiss-cheese algebra structure (bar differential = chiral
+product in~$\mathbf{C}$, bar coproduct = topological cutting
+in~$\mathbf{R}$), the curved genus tower ($d^2 = \kappa\,
+\omega_g$ at genus $g \ge 1$), the infinite shadow Postnikov
+tower (all arities, all genera, proved by
+Theorem~\ref{thm:mc2-bar-intrinsic}), the complementarity
+decomposition (Theorem~C), and the completed platonic datum
+$\Pi^{\mathrm{oc}}_X(\cA)$ packaging open/closed/modular data.
+
+These are genuine results about the algebraic structure of the
+gravitational theory.  They do not imply, and should not be
+claimed to imply, any result about the analytic number theory
+of $L$-functions.  The bar complex is the algebraic engine.
+The primary spectrum is the analytic output.  The gap between
+them is the gap between algebra and analysis, which no known
+construction bridges.
 
 
 \end{document}
