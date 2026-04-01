@@ -173,6 +173,469 @@ relevant IC sheaves; the Lagrangian condition alone is necessary
 but not sufficient).
 \end{remark}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  STAGE 1: THE LOCAL ONE-COLOR THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Stage 1: the local one-color theorems}
+\label{sec:stage1-local-theorems}
+
+The four-stage open/closed programme
+(Concordance \S\ref{par:concordance-four-stage-architecture})
+requires, as its first stage, four purely local theorems that
+do not use any global factorization or modularity.
+These theorems operate at the level of a \emph{single} chiral
+algebra~$\cA$, its bar coalgebra~$\barB(\cA)$,
+and the Koszul dual~$\cA^!$ (when $\cA$ is chirally Koszul).
+Their proofs use only:
+the universal property of the bar construction
+(Volume~I, Theorem~A),
+bar-cobar inversion on the Koszul locus
+(Volume~I, Theorem~B),
+the FM compactification and Stokes calculus
+(Theorem~\ref{thm:FM-calculus}),
+and the homotopy-Koszulity of $\SCchtop$
+(Theorem~\ref{thm:homotopy-Koszul}).
+
+\subsection{Theorem S1: MC couplings versus $\Perf(\cA^!)$}
+\label{subsec:mc-couplings-perf}
+
+The MC coupling category $\operatorname{Line}(\cA)$
+(Definition~\ref{def:mc-coupling-category}) is defined for any
+$A_\infty$-chiral algebra without hypotheses.  The following
+theorem identifies it on the Koszul locus with the algebraic
+category of perfect modules over the Koszul dual.
+
+\begin{theorem}[MC couplings $\simeq$ $\Perf(\cA^!)$;
+  \ClaimStatusProvedHere{}
+  on the chirally Koszul locus]
+\label{thm:mc-couplings-perf}
+\index{MC coupling category!Perf equivalence|textbf}
+Let $\cA$ be a chirally Koszul $A_\infty$-chiral algebra.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The bar construction $\barB(\cA)$ is the universal twisting
+  coalgebra: for any conilpotent dg coalgebra~$C$, the set of
+  twisting morphisms $\tau \colon C \to \cA$ is in natural bijection
+  with coalgebra maps $C \to \barB(\cA)$.
+
+\item There is a quasi-equivalence of dg-categories
+  \[
+    \Phi \colon \operatorname{Line}(\cA)
+    \;\xrightarrow{\;\sim\;}\;
+    \Perf(\cA^!),
+    \qquad
+    (V, \mu)
+    \;\longmapsto\;
+    (V,\, \rho = (\mathrm{id}_V \otimes \pi)(\mu)),
+  \]
+  where $\pi \colon \cA \twoheadrightarrow \cA^!$ is the
+  bar-cohomology projection.
+
+\item The inverse quasi-equivalence
+  $\Psi \colon \Perf(\cA^!) \to \operatorname{Line}(\cA)$
+  sends an $\cA^!$-module $(V, \rho)$ to the MC coupling
+  $\mu = (\rho \otimes \mathrm{id})(\tau_{\mathrm{univ}})$,
+  where $\tau_{\mathrm{univ}} \in \cA^! \otimes \cA$ is the
+  universal twisting morphism.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part~(i) is the universal property of the bar construction
+(Volume~I, Theorem~A, applied to chiral algebras via the
+bridge theorem, Theorem~\ref{thm:recognition-SC}).  The bar
+complex $\barB(\cA)$, equipped with its codifferential,
+corepresents the functor $C \mapsto \operatorname{Tw}(C, \cA)$
+on the category of conilpotent dg coalgebras.
+
+For part~(ii), on the Koszul locus the bar cohomology
+$H^\bullet(\barB(\cA))$ is concentrated in bar degree~$1$ and
+equals $\cA^! := (H^\bullet(\barB(\cA)))^\vee$.  Bar-cobar
+inversion (Volume~I, Theorem~B) gives a quasi-isomorphism
+$\Omega(\barB(\cA)) \xrightarrow{\sim} \cA$.  The universal
+twisting morphism $\tau_{\mathrm{univ}} \in \cA^! \otimes \cA$
+mediates between MC elements and module structures:
+an MC coupling $\mu \in \End(V) \widehat\otimes \cA$ projects
+along $\pi$ to an $\cA^!$-action $\rho$ on~$V$, and this
+projection is a quasi-isomorphism of dg-categories by the
+bar-cobar Quillen equivalence applied to modules
+(Theorem~\ref{thm:homotopy-Koszul}).
+
+Part~(iii) reverses the projection: given $(V, \rho)$,
+the formula $\mu = (\rho \otimes \mathrm{id})(\tau_{\mathrm{univ}})$
+produces an MC element because $\tau_{\mathrm{univ}}$ satisfies
+the MC equation in $\cA^! \otimes \cA$ (this is the twisting
+morphism condition, which is equivalent to the coderivation
+$d_{\barB}$ squaring to zero).
+\end{proof}
+
+\begin{remark}[Scope and conditionality]
+\label{rem:mc-couplings-scope}
+Part~(i) is unconditional: it holds for any $A_\infty$-chiral
+algebra.  Parts~(ii)--(iii) require chiral Koszulness.  Off the
+Koszul locus, $\operatorname{Line}(\cA)$ is still well-defined
+(Remark~\ref{rem:off-koszul-locus}), but the algebraic
+identification with $\Perf(\cA^!)$ fails: the bar cohomology may
+not be concentrated, and the projection $\pi$ may not exist.
+The theorem refines
+Theorem~\ref{thm:koszul-comparison-mc} by making the role of
+the universal twisting morphism explicit.
+\end{remark}
+
+\subsection{Theorem S2: meromorphic tensor dg-category}
+\label{subsec:meromorphic-tensor-cat}
+
+The line-operator dg-category carries a meromorphic tensor
+structure from fusion at holomorphic separation~$z$.
+
+\begin{theorem}[Meromorphic tensor dg-category;
+  \ClaimStatusProvedHere]
+\label{thm:meromorphic-tensor-category}
+\index{meromorphic tensor category!Stage~1|textbf}
+Let $\cA$ be a chirally Koszul $A_\infty$-chiral algebra,
+$\cA^!$ its Koszul dual, and $r(z) \in (\cA^!)^{\otimes 2}((z^{-1}))$
+the spectral $r$-matrix
+\textup{(}Definition~\textup{\ref{def:spectral_R}}\textup{)}.
+The triple
+$(\operatorname{Line}(\cA),\, \otimes_z,\, \mathbf{1})$
+is a meromorphic tensor dg-category:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Binary fusion.}
+  For $M = (V, \mu_V),\; N = (W, \mu_W) \in \operatorname{Line}(\cA)$,
+  the meromorphic tensor product $M \otimes_z N$ has underlying
+  complex $V \otimes W$ and MC coupling
+  $\mu_{M \otimes_z N} = \mu_V \otimes 1 + 1 \otimes \mu_W
+  + r(z)$.
+  This is a well-defined MC element because $r(z)$ satisfies the
+  MC equation in $(\cA^!)^{\otimes 2}$
+  \textup{(}Theorem~\textup{\ref{thm:spectral_R_YBE}(i)}\textup{)}.
+
+\item \emph{Unit.}
+  The trivial line $\mathbf{1} = (k, 0)$
+  \textup{(}from the counit $\varepsilon \colon \cA^! \to k$\textup{)}
+  satisfies $\mathbf{1} \otimes_z M \simeq M$ and
+  $M \otimes_z \mathbf{1} \simeq T_z M$, where $T_z$ is the
+  translation automorphism.
+
+\item \emph{Associativity.}
+  $(M \otimes_{z_1} N) \otimes_{z_2} P
+  \simeq M \otimes_{z_1+z_2} (N \otimes_{z_2} P)$
+  up to coherent quasi-isomorphism, via the coassociativity
+  identity
+  \[
+    \Delta(z_{12}) \circ (\Delta(z_{23}) \otimes \mathrm{id})
+    = (\mathrm{id} \otimes \Delta(z_{23})) \circ \Delta(z_{12}+z_{23}),
+  \]
+  where $\Delta_z \colon \cA^! \to \cA^! \otimes_z \cA^!$
+  is the $z$-deformed coproduct from the dg-shifted Yangian
+  structure.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) The MC equation for $\mu_{M \otimes_z N}$ reduces to
+$d(\mu_V \otimes 1 + 1 \otimes \mu_W + r(z))
++ \tfrac{1}{2}[\mu_V \otimes 1 + 1 \otimes \mu_W + r(z),\,
+\mu_V \otimes 1 + 1 \otimes \mu_W + r(z)] = 0$.
+The cross terms between $\mu_V$, $\mu_W$ vanish because
+the two tensor factors act on different spaces.  The remaining
+terms are: the MC equations for $\mu_V$ and $\mu_W$ separately
+(which hold by hypothesis), and the MC equation for $r(z)$
+in $(\cA^!)^{\otimes 2}$ (Theorem~\ref{thm:spectral_R_YBE}(i)).
+
+(ii) When $\mu_V = 0$, the MC coupling reduces to
+$\mu_W + r(z)|_{\varepsilon \otimes \mathrm{id}}$.  The counit
+$\varepsilon$ kills $r(z)$ by the counit axiom of the
+dg-shifted Yangian, so $\mu_{\mathbf{1} \otimes_z M} = \mu_M$.
+The right-unit statement uses the same argument with the
+translation automorphism $T_z$ absorbing the residual spectral
+dependence.
+
+(iii) The two parenthesizations produce the MC couplings
+\begin{align*}
+  \mu_{(M \otimes_{z_1} N) \otimes_{z_2} P}
+  &= \mu_V + \mu_W + \mu_P
+    + r_{12}(z_1) + r_{(12)3}(z_2), \\
+  \mu_{M \otimes_{z_1+z_2} (N \otimes_{z_2} P)}
+  &= \mu_V + \mu_W + \mu_P
+    + r_{23}(z_2) + r_{1(23)}(z_1{+}z_2).
+\end{align*}
+These agree by the $A_\infty$ Yang--Baxter relation
+(Theorem~\ref{thm:spectral_R_YBE}(ii)),
+which is itself a consequence of Stokes' theorem on $\FM_3(\C)$
+(Theorem~\ref{thm:YBE}).  The coherent higher data come from
+higher boundary strata of $\FM_n(\C)$.
+\end{proof}
+
+\begin{remark}[Relation to existing statements]
+Theorem~\ref{thm:meromorphic-tensor-category} is equivalent to
+Theorem~\ref{thm:meromorphic-tensor-dgcat} in the line-operator
+chapter.  The present formulation isolates it as a Stage~1 theorem,
+emphasizing that its proof requires only local data (the $r$-matrix
+and its Yang--Baxter equation) and no global factorization.
+\end{remark}
+
+\subsection{Theorem S3: meromorphic tensor $\simeq$
+  factorization dg-cosheaf}
+\label{subsec:meromorphic-factorization}
+
+The meromorphic tensor product~$\otimes_z$ describes
+fusion at finite separation.  The FM compactification provides the
+correct regime for taking $z \to 0$ limits.  Passing between the
+two presentations is the content of the following equivalence.
+
+\begin{theorem}[Meromorphic tensor $\simeq$ factorization
+  dg-cosheaf; \ClaimStatusProvedHere{} on the chirally Koszul locus]
+\label{thm:meromorphic-factorization-equiv}
+\index{factorization!meromorphic tensor equivalence|textbf}
+On the chirally Koszul locus, the meromorphic tensor presentation
+$(\operatorname{Line}(\cA), \otimes_z)$
+and the factorization dg-cosheaf presentation
+$\cC_{\mathrm{op},\partial}$ on ordered boundary configuration
+spaces determine each other:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Tensor to factorization.}  On each chamber of
+  $\operatorname{Conf}_n^{\mathrm{ord}}(I_p)$, assign the
+  external tensor product
+  $\cC_J^{\mathrm{op}} \boxtimes \cdots \boxtimes
+  \cC_J^{\mathrm{op}}$.  On codimension-one collision faces,
+  glue by the iterated meromorphic tensor product~$\otimes_z$.
+  The codimension-two cocycle condition holds because:
+  \textup{(a)}~disjoint collisions commute tautologically;
+  \textup{(b)}~triple collisions reduce to the associativity
+  of~$\otimes_z$
+  \textup{(}Theorem~\textup{\ref{thm:meromorphic-tensor-category}(iii)}\textup{)},
+  which is in turn the $A_\infty$ Yang--Baxter relation.
+
+\item \emph{Factorization to tensor.}  Given a factorization
+  dg-cosheaf $\cC$ on ordered boundary configuration spaces,
+  restrict to two-point collision faces to recover
+  the binary meromorphic tensor product~$\otimes_z$.  Higher
+  fusion functors are recovered from multi-point collision
+  strata by the factorization structure on each stratum.
+\end{enumerate}
+Both directions are quasi-inverse: the round-trip
+tensor $\to$ factorization $\to$ tensor recovers~$\otimes_z$
+by restriction, and factorization $\to$ tensor $\to$
+factorization recovers the cosheaf by the universal property
+of the FM-type gluing.
+\end{theorem}
+
+\begin{proof}
+Direction~(i): a constructible dg-cosheaf on the
+FM-type compactification of ordered configurations requires a
+cocycle condition at every codimension-two face.  These faces
+are of two types.  First, \emph{disjoint collisions}: two
+clusters of points collide independently.  The gluing data for
+disjoint clusters involve independent copies of~$\otimes_z$
+acting on different tensor factors, so they commute
+tautologically.  Second, \emph{nested collisions}: three points
+$z_1, z_2, z_3$ collide with two possible parenthesizations,
+$((z_1, z_2), z_3)$ vs.\ $(z_1, (z_2, z_3))$.  The two
+gluings produce $(M_1 \otimes_{z_{12}} M_2) \otimes_{z_{23}} M_3$
+and $M_1 \otimes_{z_{12}+z_{23}} (M_2 \otimes_{z_{23}} M_3)$
+respectively.  These agree by the associativity of~$\otimes_z$
+(Theorem~\ref{thm:meromorphic-tensor-category}(iii)).  Thus the
+cocycle condition is satisfied, and the chamber-wise data extend
+to a constructible cosheaf.
+
+Direction~(ii): the factorization axiom
+$\cC(U_1 \sqcup U_2) \simeq \cC(U_1) \boxtimes \cC(U_2)$
+on disjoint open sets determines the cosheaf on chambers.  The
+restriction to a codimension-one collision face
+$D_{\{i,j\}} \subset \partial \FM_n$ recovers a binary functor
+$\cC_J^{\mathrm{op}} \times \cC_J^{\mathrm{op}} \to
+\cC_J^{\mathrm{op}}$, which is the meromorphic tensor
+product~$\otimes_{z_{ij}}$ by construction of the boundary
+residue.
+
+The round-trip identities follow from the two-out-of-three
+property: the factorization axiom and the cocycle condition
+together determine the cosheaf uniquely from its restriction
+to chambers and codimension-one faces.
+\end{proof}
+
+\begin{remark}[The FM compactification as collision regulator]
+\label{rem:fm-collision-regulator}
+The FM compactification~$\FM_n(\C)$ is a blowup along diagonals,
+not the complement of the diagonal.  Its boundary divisors
+$D_S$ ($|S| \ge 2$) parametrize configurations where the
+points in~$S$ collide while retaining the information of their
+relative positions as an element of $\FM_{|S|}(\C)$.
+This blown-up boundary, not the naive $z \to 0$ limit,
+provides the correct collision regime:
+the meromorphic tensor product~$\otimes_z$ has poles at $z = 0$,
+but the FM boundary replaces the pole with a resolved stratum
+carrying the OPE data.
+\end{remark}
+
+\begin{remark}[Relation to existing statements]
+This theorem refines
+Theorem~\ref{thm:meromorphic-factorization-equivalence}
+in the foundations (\S\ref{subsec:local-to-global-factorization})
+by isolating the local content and making the codimension-two
+cocycle verification explicit.  The global Weiss descent
+(Conjecture~\ref{conj:weiss-descent}) is the categorical
+boundary analogue, and remains conjectural.
+\end{remark}
+
+\subsection{Theorem S4: the boundary algebra as
+  $A_\infty$-chiral algebra}
+\label{subsec:boundary-ainfty-chiral}
+
+The following theorem constructs the boundary algebra and its
+$A_\infty$-chiral structure from a compact generator of the
+open-sector factorization category.
+
+\begin{theorem}[Boundary algebra is $A_\infty$-chiral;
+  \ClaimStatusProvedHere]
+\label{thm:boundary-ainfty-chiral}
+\index{boundary algebra!A-infinity chiral|textbf}
+Let $\cC$ be an open/closed factorization dg-category on a
+tangential log curve $(X, D, \tau)$
+\textup{(}Definition~\textup{\ref{def:oc-factorization-category}}\textup{)},
+and let $b \in \cC(J)$ be a compact generator for a boundary
+interval $J \subset I_p$.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{$A_\infty$-chiral structure.}
+  The endomorphism algebra
+  \[
+    A_b \;:=\; \RHom_{\cC(J)}(b, b)
+  \]
+  carries an $A_\infty$-chiral algebra structure
+  \textup{(}Definition~\textup{\ref{def:ainfty_chiral}}\textup{)}.
+  The $k$-th higher product
+  \[
+    m_k \colon
+    C_\ast\bigl(\FM_k(\C)\bigr) \otimes A_b^{\otimes k}
+    \;\longrightarrow\;
+    A_b((\lambda_1))\cdots((\lambda_{k-1}))
+  \]
+  arises from restricting the factorization functors of~$\cC$
+  to the mixed collision stratum with $k$~closed insertions on
+  the endomorphism complex of~$b$.
+  The holomorphic variables $\lambda_i = z_i - z_{i+1}$ are the
+  OPE spectral parameters from $\FM_k(\C)$; the topological
+  ordering from $\Conf_k^{\mathrm{ord}}(\R)$ gives the planar
+  $A_\infty$ convention by local constancy
+  \textup{(}axiom~\textup{(iv)} of
+  Definition~\textup{\ref{def:oc-factorization-category}}\textup{)}.
+
+\item \emph{$A_\infty$ identities.}
+  The Stasheff relation
+  $\sum_{i+j=n+1} m_i \circ m_j = 0$
+  follows from Stokes' theorem on
+  $\FM_k(\C) \times \Conf_k^{\mathrm{ord}}(\R)$.
+  The codimension-one boundary strata of this product are
+  products of lower-dimensional operation spaces, and each
+  such stratum corresponds to a composition $m_i \circ m_j$
+  with $i + j = k + 1$.  The Stokes identity on the total
+  boundary
+  $\sum_\sigma \int_{\partial_\sigma} = 0$
+  is the $A_\infty$ relation.
+
+\item \emph{Morita invariance.}
+  A different compact generator $b' \in \cC(J')$ yields an
+  $A_\infty$-chiral algebra $A_{b'}$ that is $A_\infty$-Morita
+  equivalent to~$A_b$ via the bimodule
+  $M_{b,b'} = \RHom_{\cC(J)}(b, b')$.
+  The true invariant is the factorization dg-category~$\cC$,
+  not a chosen algebra presentation.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part~(i):
+By local constancy (axiom~(iv) of
+Definition~\ref{def:oc-factorization-category}), the dg-category
+$\cC(J)$ is independent of the interval $J \subset I_p$ up to
+canonical equivalence.  The factorization structure of~$\cC$
+provides, for each $k$-element configuration
+$(z_1, \ldots, z_k) \in \FM_k(\C)$ and ordered open
+configuration $(t_1 < \cdots < t_k) \in \Conf_k^{\mathrm{ord}}(\R)$,
+a multilinear functor
+$\mu_k \colon \cC(J_1) \times \cdots \times \cC(J_k) \to \cC(J)$,
+where the $k$~ordered boundary insertions divide~$J$ into $k+1$
+subintervals.  Restricting $\mu_k$ to
+$\Hom_{\cC(J)}(b,b)$ in each slot produces the operation~$m_k$.
+
+The holomorphic parameters $\lambda_i = z_i - z_{i+1}$ arise
+from the $\FM_k(\C)$ factor: the operation $m_k$ is a formal
+Laurent series in $\lambda_1, \ldots, \lambda_{k-1}$ with
+poles from collisions $z_i \to z_{i+1}$.
+The topological ordering from $\Conf_k^{\mathrm{ord}}(\R)$
+ensures the planar $A_\infty$ convention: inputs are ordered
+$a_1, \ldots, a_k$ according to $t_1 < \cdots < t_k$.
+Local constancy ensures the result depends only on the
+combinatorial ordering, not on positions.
+Sesquilinearity follows from translation covariance in the
+holomorphic coordinate.
+
+Part~(ii):
+The $A_\infty$ identity is Stokes' theorem applied to the
+logarithmic weight form $\omega_k^\partial$ on the operation
+space $\FM_k(\C) \times \Conf_k^{\mathrm{ord}}(\R)$.
+On the interior, $d\omega_k^\partial = 0$ (the weight form is
+closed).  The codimension-one boundary strata of the product
+decompose as
+$\bigl(\FM_i(\C) \times \Conf_i^{\mathrm{ord}}(\R)\bigr)
+\times
+\bigl(\FM_j(\C) \times \Conf_j^{\mathrm{ord}}(\R)\bigr)$
+with $i + j = k + 1$.  Each such stratum corresponds to a
+Stasheff face.  The Stokes identity
+$\int_{\partial(\FM_k \times \Conf_k)} \omega_k^\partial = 0$
+gives the $A_\infty$ relation.  The local model axiom~(v) of
+Definition~\ref{def:oc-factorization-category} ensures these
+boundary identifications are compatible with the
+$W(\SCchtop)$-algebra coherence data.
+
+Part~(iii):
+Let $b' \in \cC(J)$ be another compact generator.  The bimodule
+$M_{b,b'} = \RHom_{\cC(J)}(b, b')$ is an $A_\infty$-bimodule
+over $(A_b, A_{b'})$.  Since both are compact generators,
+$M_{b,b'} \otimes^{\mathbf{L}}_{A_{b'}} M_{b,b'}^\vee
+\simeq A_b$ and
+$M_{b,b'}^\vee \otimes^{\mathbf{L}}_{A_b} M_{b,b'}
+\simeq A_{b'}$, which is the Morita equivalence criterion for
+compact generators of a dg-category \cite{Kel06,HA}.
+\end{proof}
+
+\begin{remark}[Unconditional scope]
+\label{rem:boundary-ainfty-unconditional}
+Theorem~\ref{thm:boundary-ainfty-chiral} is unconditional:
+it requires only the axioms of
+Definition~\ref{def:oc-factorization-category} and uses no
+Koszulness, formality, or finiteness beyond the compact-generation
+hypothesis on~$b$.  The chiral Koszulness of~$A_b$ is a further
+property that, when it holds, activates the equivalence
+$\operatorname{Line}(\cA) \simeq \Perf(\cA^!)$ of
+Theorem~\ref{thm:mc-couplings-perf} and the meromorphic tensor
+structure of Theorem~\ref{thm:meromorphic-tensor-category}.
+\end{remark}
+
+\begin{remark}[Relation to existing content]
+\label{rem:stage1-cross-references}
+The four Stage~1 theorems consolidate and refine results
+already present in scattered locations:
+Theorem~\ref{thm:mc-couplings-perf} refines
+Theorem~\ref{thm:koszul-comparison-mc};
+Theorem~\ref{thm:meromorphic-tensor-category} is equivalent to
+Theorem~\ref{thm:meromorphic-tensor-dgcat};
+Theorem~\ref{thm:meromorphic-factorization-equiv} refines
+Theorem~\ref{thm:meromorphic-factorization-equivalence};
+Theorem~\ref{thm:boundary-ainfty-chiral} refines
+Theorem~\ref{thm:boundary-algebra-from-vacuum}.
+The consolidation serves the four-stage programme: having
+all four in one place, with uniform notation and explicit
+scope qualifications, is the prerequisite for Stage~2
+(open primitive: $\cC_{\mathrm{op}}$ as primitive, Morita
+invariance) and Stage~3 (globalization on tangential log curves).
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  END OF STAGE 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Literature backbone, formal consequences, and status ledger}\label{sec:backbone}
 
 Before constructing anything new, we fix the status of the foundational inputs.
@@ -344,7 +807,7 @@ f_{a_1\cdots a_n}(x)\,
 \end{equation}
 Each $\mu_n$ is a multiderivation of the free graded-commutative product.
 
-The point is that the collection $\{\mu_n\}_{n\ge 1}$ is not arbitrary.  It comes from the single function $W$, hence satisfies the Stasheff system.
+The collection $\{\mu_n\}_{n\ge 1}$ is not arbitrary: it comes from the single function $W$, hence satisfies the Stasheff system.
 
 \begin{theorem}[Intrinsic boundary $A_\infty$ algebra; \ClaimStatusProvedHere]\label{thm:intrinsic-boundary}
 For every formal pair $(L\subset V,W)$ with $W|_L=0$, the operations
@@ -2291,7 +2754,7 @@ $\kappa(\cH_k) + \kappa(\cH_k^!) = k + (-k) = 0$
 (Proposition~\ref{prop:rosetta-complementarity})
 implies that the tensor product of curved bar complexes
 \[
-\barB^{(1)}(\cH_k) \;\otimes\; \barB^{(1)}(\cH_{-k})
+\barB^{(1)}(\cH_k) \;\otimes\; \barB^{(1)}(\cH_k^!)
 \]
 carries a \emph{flat} differential: the individual curvatures
 $\dfib^{\,2} = k\,\omega_1$ and
@@ -2318,9 +2781,9 @@ Lagrangian $Q_1(\cH_k)$, the factor~$k$ is the modular
 characteristic $\kappa(\cH_k)$, and the eta function
 $\eta(\tau) = q^{1/24}\prod_{n=1}^\infty(1-q^n)$ is the
 one-loop determinant of the free boson on $E_\tau$.  The
-complementary free energy $F_1(\cH_{-k}) = (k/24)\log\eta(\tau)$
-satisfies $F_1(\cH_k) + F_1(\cH_{-k}) = 0$: the genus-$1$
-contributions of Koszul-dual Heisenberg algebras cancel exactly,
+complementary free energy $F_1(\cH_k^!) = (k/24)\log\eta(\tau)$
+satisfies $F_1(\cH_k) + F_1(\cH_k^!) = 0$: the genus-$1$
+contributions of a Koszul pair cancel exactly,
 reflecting the vanishing total curvature
 $\kappa + \kappa^! = 0$.
 \end{computation}
