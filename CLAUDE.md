@@ -95,7 +95,7 @@ The Vol I `CLAUDE.md` supplies the source protocol. For Vol II, the Codex-native
 
 ## Anti-Patterns (inherited from Vol I + Vol II-specific)
 
-All Vol I anti-patterns AP1-AP32 apply here. The following encode deep mathematical errors found propagated across both volumes:
+All Vol I anti-patterns AP1-AP34 apply here. In particular, AP34 (bar-cobar inversion ≠ open-to-closed passage) is especially load-bearing in Vol II: the three functors on B(A) are (1) Ω(B(A)) ≅ A (reconstruction), (2) Ω(D_Ran(B(A))) ≅ A! (Koszul duality), (3) RHom(Ω(B(A)), A) = C^•_ch(A,A) (derived centre = universal bulk). NEVER write "bar-cobar inversion produces the bulk." The following encode deep mathematical errors found propagated across both volumes:
 
 **AP-OC — Bar = bulk conflation.** The bar complex B(A) classifies TWISTING MORPHISMS (universal couplings between A and A!). The BULK OBSERVABLES are a DIFFERENT object: the chiral derived center Z^der_ch(A) = C^•_ch(A_b, A_b). The PRIMITIVE OBJECT is the open-sector factorization dg-category C_op; the boundary algebra A_b = End(b) is a CHART (Morita-invariant). Modularity belongs to TRACE + CLUTCHING on the open sector, not to the closed algebra alone. Found at: ht_physical_origins.tex lines 359-361 (corrected), celestial_holography_frontier.tex line 846 (corrected), thqg_bv_ht_extensions.tex lines 218/302/704 (corrected), plus 4 superseded files.
 
