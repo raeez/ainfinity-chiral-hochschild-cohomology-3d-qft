@@ -1,5 +1,48 @@
 # Linear Read Notes
 
+## 2026-04-02 — Genus-1 Derived Intersection for V_k(sl₂)
+
+- Target: `compute/lib/genus1_intersection.py`, function `genus1_intersection_affine_sl2`
+- Status: COMPLETE
+
+### Summary
+
+Computed the complete genus-1 derived intersection number for the affine algebra V_k(sl₂). The existing function was incomplete: it only captured the ζ-function sector and missed the ℘-function sector entirely.
+
+### Key Results
+
+1. **Two-sector decomposition.** The genus-1 r-matrix for V_k(sl₂) decomposes as:
+   ```
+   r^{E_τ}(z) = Ω · ζ(z|τ) + kκ · ℘(z|τ)
+   ```
+   The intersection number R^{(1)} = r^{E_τ} - r^{(0)} has:
+   - **Sector I** (Casimir-zeta, from c₀ = Lie bracket): odd z-powers, quasi-modular leading term -Ω·G₂(τ)·z
+   - **Sector II** (Level-Weierstrass, from c₁ = kκ): even z-powers, modular leading term 3kκ·G₄(τ)·z²
+
+2. **NOT Casimir × Heisenberg.** The genus-1 r-matrix is NOT simply Ω times the Heisenberg answer. The two sectors have different tensor structures (Ω vs kκ), different z-parities (odd vs even), and different modular properties (quasi-modular vs modular).
+
+3. **Curvature-braiding entanglement.** For sl₂, c₀ = f^{ab}_c J^c ≠ 0, so the theory is in the ENTANGLED regime (Theorem thm:elliptic-spectral-dichotomy). The B-cycle monodromy 2η_τ·Ω is non-trivial and sourced by the same Casimir that generates the S-transform anomaly of G₂.
+
+4. **Elliptic KZB connection.** The space component is:
+   ```
+   ∇_i = ∂_{z_i} - 1/(k+2) Σ_{j≠i} [Ω_{ij}·ζ(z_{ij}|τ) + kκ·℘(z_{ij}|τ)]
+   ```
+   with modular component ∇_τ = ∂_τ - 1/(2(k+2)) Σ Ω_{ij}·℘.
+
+5. **Monodromy to quantum groups.** A-cycle holonomy gives U_q(sl₂) with q = exp(πi/(k+2)). B-cycle holonomy gives the dual. Together: elliptic quantum group E_{q,p}(sl₂) of Felder with p = exp(2πiτ).
+
+6. **Quasi-modularity.** The G₂ anomaly under S: τ → -1/τ produces an anomalous term -6Ω·τ/(πi)·z proportional to the Casimir — the same tensor that generates the B-cycle monodromy. This confirms the curvature-braiding entanglement at the arithmetic level.
+
+### Convention Note
+
+The manuscript's elliptic r-matrix formula (spectral-braiding-core.tex eq. elliptic-r-matrix) uses the λ-bracket convention: r(z) = Σ c_n/z^{n+1}. The existing Heisenberg function in the same file uses the bar-complex convention (post d-log absorption): r(z) = k/z. These differ by one power of z. The new affine sl₂ function uses the manuscript convention for consistency with the spectral dichotomy theorem.
+
+### Verification
+
+- All 153 genus-1 tests pass.
+- All 545 non-sl₃ tests pass (the sl₃ d² test failure is pre-existing and unrelated).
+- Consistency checks: κ(V₁(sl₂)) = 9/4, κ(V₋₂(sl₂)) = 0 (critical level), κ(V₀(sl₂)) = 3/2.
+
 ## 2026-03-31 — Codex Bootstrap Audit
 
 - Target: live Vol II surface (`main.tex`, active `\input` graph, dirty diff, build/test layer)

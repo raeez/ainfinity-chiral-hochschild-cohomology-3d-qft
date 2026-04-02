@@ -66,8 +66,8 @@ class TestHeisenbergGenus1:
     def test_structure(self):
         h = genus1_intersection_heisenberg(k_val=1)
         assert h['kappa'] == 1
-        assert h['coisson_bracket'] == 1
-        assert h['elliptic_regime'] == 'entanglement'
+        assert h['coisson_bracket'] == 0  # c₀ = 0: Heisenberg is abelian
+        assert h['elliptic_regime'] == 'decoupled'  # always decoupled since c₀ = 0
 
     def test_level_scaling(self):
         """R¹ scales linearly with k."""
