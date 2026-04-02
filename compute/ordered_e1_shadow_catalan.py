@@ -241,7 +241,19 @@ def evaluate_at_special_charges(r_max: int = 50) -> Dict[str, Dict[int, float]]:
 # ---------------------------------------------------------------------------
 
 def convergence_analysis_c13(r_max: int = 50) -> Dict:
-    """Analyze |S_r| at c=13 to confirm geometric decay with rho ~ 0.467."""
+    """Analyze |S_r| at c=13 to confirm geometric decay with rho ~ 0.467.
+
+    The raw ratio |S_{r+1}/S_r| oscillates due to the cosine factor in
+    the Darboux asymptotics. We use the THEORETICAL rho from the branch
+    point positions and also log-linear regression over a stable window.
+    """
+    # Import the shadow data class for the theoretical prediction
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lib'))
+    from shadow_borel_resurgence import VirasoroShadowData
+
+    d = VirasoroShadowData(13.0)
+    rho_theory = d.rho
+
     coeffs = shadow_catalan_float(13.0, r_max)
     abs_vals = {r: abs(v) for r, v in coeffs.items()}
 
@@ -257,10 +269,29 @@ def convergence_analysis_c13(r_max: int = 50) -> Dict:
         if abs_vals[r] > 0:
             root_estimates[r] = abs_vals[r] ** (1.0 / r)
 
+    # Log-linear regression: log|S_r| ~ r*log(rho) + const for r in stable window
+    # Use r=10..22 as the stable window (before oscillatory crossings become large)
+    log_data = []
+    for r in range(10, min(23, r_max + 1)):
+        if abs_vals[r] > 0:
+            log_data.append((r, math.log(abs_vals[r])))
+    if len(log_data) >= 3:
+        n_pts = len(log_data)
+        sum_r = sum(p[0] for p in log_data)
+        sum_logS = sum(p[1] for p in log_data)
+        sum_r2 = sum(p[0] ** 2 for p in log_data)
+        sum_rlogS = sum(p[0] * p[1] for p in log_data)
+        slope = (n_pts * sum_rlogS - sum_r * sum_logS) / (n_pts * sum_r2 - sum_r ** 2)
+        rho_regression = math.exp(slope)
+    else:
+        rho_regression = None
+
     return {
         'abs_vals': abs_vals,
         'ratios': ratios,
         'root_estimates': root_estimates,
+        'rho_theory': rho_theory,
+        'rho_regression': rho_regression,
         'rho_estimate_ratio': sum(ratios.values()) / len(ratios) if ratios else None,
     }
 
@@ -387,8 +418,13 @@ def main():
     print("-" * 78)
 
     conv = convergence_analysis_c13(R_MAX)
-    print(f"  Estimated rho (from ratio averages): {conv['rho_estimate_ratio']:.6f}")
-    print(f"  Expected rho ~ 0.467")
+    print(f"  Theoretical rho (from branch points): {conv['rho_theory']:.6f}")
+    print(f"  Log-linear regression rho (r=10..22): {conv['rho_regression']:.6f}")
+    print(f"  Naive ratio average rho:              {conv['rho_estimate_ratio']:.6f}")
+    print()
+    print("  NOTE: The raw |S_{r+1}/S_r| ratios oscillate because S_r has a")
+    print("  cosine factor from the Darboux asymptotics. The theoretical rho")
+    print("  from the branch point |t_+|^{-1} is the correct growth rate.")
     print()
     print(f"  {'r':>3s}  {'|S_r|':>14s}  {'|S_{r+1}/S_r|':>14s}  {'|S_r|^{1/r}':>14s}")
     print(f"  {'---':>3s}  {'-'*14:>14s}  {'-'*14:>14s}  {'-'*14:>14s}")
@@ -440,8 +476,9 @@ def main():
 
     # Convergence data at c=13
     table_data['convergence_c13'] = {
-        'rho_estimate': conv['rho_estimate_ratio'],
-        'rho_expected': 0.467,
+        'rho_theory': conv['rho_theory'],
+        'rho_regression': conv['rho_regression'],
+        'rho_ratio_avg': conv['rho_estimate_ratio'],
     }
 
     with open(json_path, 'w') as f:
