@@ -17,9 +17,10 @@ MAIN RESULTS:
     This is degree 2 in t (linear in u = t^2), analogous to Virasoro.
 
 (3) W-LINE CATALAN FORMULA.
-    S_{2r}^W(c) = (-1)^r * C_{r-1} * 122880^{r-1}
-                  / (3*r*(2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
-    for r >= 2, where C_k = binom(2k,k)/(k+1) is the Catalan number.
+    S_{2r}^W(c) = (-1)^r * C_{r-1} * 30720^{r-1}
+                  / (3 * (2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
+    for r >= 2, where C_k = binom(2k,k)/(k+1) is the Catalan number,
+    and 30720 = 2^{11} * 3 * 5.
     This is the W3 analogue of the Virasoro Catalan formula.
 
 (4) QUARTIC SHADOW as function of c.
@@ -219,13 +220,16 @@ def w_line_catalan():
 
   Using binom(1/2, n) = (-1)^{n-1} * (2n)! / (4^n * (n!)^2 * (2n-1)):
 
-    S_{2r}^W(c) = (-1)^{r} * (2r-2)! * 122880^{r-1}
-                  / (4^{r-1} * ((r-1)!)^2 * (2r-3) * 3r * c^{2r-3} * (5c+22)^{3(r-1)})
+    S_{2r}^W(c) = (-1)^{r} * C_{r-1} * 30720^{r-1}
+                  / (3 * (2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
 
-  Equivalently, with Catalan numbers C_k = binom(2k,k)/(k+1):
+  where 30720 = 122880/4 = 2^{11} * 3 * 5, and
+  C_k = binom(2k,k)/(k+1) is the k-th Catalan number.
 
-    S_{2r}^W(c) = (-1)^{r} * C_{r-1} * (r-1) * 122880^{r-1}
-                  / (4^{r-1} * (2r-3) * 3r * c^{2r-3} * (5c+22)^{3(r-1)})
+  Equivalently:
+
+    S_{2r}^W(c) = (-1)^r * C_{r-1} * 122880^{r-1}
+                  / (3 * 4^{r-1} * (2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
 
   for r >= 2, and S_2^W = c/3.
 """)
