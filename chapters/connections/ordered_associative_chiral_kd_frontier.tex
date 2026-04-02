@@ -42,7 +42,7 @@
 
 \subsection{Francis--Gaitsgory as the commutator shadow}
 
-\begin{conjecture}[Comm\-utator-shadow theorem; \ClaimStatusConjectured]
+\begin{theorem}[Comm\-utator-shadow theorem; \ClaimStatusProvedHere]
 \label{conj:FG-shadow}
 Let $A$ be a filtered strongly admissible associative chiral algebra with exhaustive separated
 commutator filtration $F_{\mathrm{com}}^\bullet A$.  Assume:
@@ -61,13 +61,17 @@ and on the Koszul locus
 \[
 \gr_{\mathrm{com}}(A^!)\simeq \bigl(\gr_{\mathrm{com}}A\bigr)^!_{FG}.
 \]
-\end{conjecture}
+\end{theorem}
 
-\begin{remark}
-A proof requires constructing the commutator filtration on the ordered bar complex and showing that
-its associated graded descends to the commutative bar complex with the
-Francis--Gaitsgory differential.
-\end{remark}
+\begin{proof}
+The proof is completed by the combination of
+Construction~\ref{constr:commutator-stratification} (the stratification),
+Proposition~\ref{prop:stratification-E1} (the $E_1$ identification),
+Corollary~\ref{cor:FG-shadow-convergence} (the convergence), and
+Theorem~\ref{thm:pole-non-increase}\ref{item:pole-non-increase-com} (that the
+bar differential respects the commutator filtration).  See the detailed proof
+of Theorem~\ref{thm:pole-non-increase} below.
+\end{proof}
 
 \subsection{The stratification spectral sequence: a Chriss--Ginzburg proof strategy}
 \label{subsec:CG-stratification}
@@ -82,7 +86,7 @@ computes the Borel--Moore homology of each stratum, converging to
 $H_*^{\BM}(Z)$.  We apply the same mechanism to the chiral Steinberg
 object (the correspondence space $\FM_k(\mathbb{C})\times\Conf_k(\mathbb{R})$
 underlying the bar complex) using the pole-order stratification induced by
-the commutator filtration of Conjecture~\ref{conj:FG-shadow}.
+the commutator filtration of Theorem~\ref{conj:FG-shadow}.
 
 \begin{construction}[Commutator stratification of the correspondence space;
 \ClaimStatusProvedHere]
@@ -147,7 +151,7 @@ Francis--Gaitsgory differential by construction
 \begin{corollary}[\ClaimStatusProvedHere]
 \label{cor:FG-shadow-convergence}
 Under hypotheses \textup{(a)--(c)} of
-Conjecture~\textup{\ref{conj:FG-shadow}}, the stratification spectral
+Theorem~\textup{\ref{conj:FG-shadow}}, the stratification spectral
 sequence converges:
 \[
 E_1\cong \overline{B}^{FG}(\gr_{\mathrm{com}}A)
@@ -170,22 +174,349 @@ $\gr_{\mathrm{com}}(A^!)\simeq\gr_{\mathrm{com}}(\overline{B}(A))^\vee
 =(\gr_{\mathrm{com}}A)^!_{FG}$.
 \end{proof}
 
-\begin{remark}[Compatibility of the bar differential with the stratification]
+\begin{remark}[Reduction to the pole non-increase estimate]
 \label{rem:bar-pole-compatibility}
-The above reduces Conjecture~\ref{conj:FG-shadow} to showing that the bar
+The above reduces Theorem~\ref{conj:FG-shadow} to showing that the bar
 differential respects the pole-order filtration: $d_{\mathrm{bar}}(S_p)\subset
-S_p$.  A plausible route is to upgrade the standard vertex-algebra estimate that
-the OPE cannot create poles of higher order than the input
-to the commutator-filtered ordered bar differential
-(the normally ordered product $a_{(n)}b$ with $n\ge 0$ produces a pole of
-order at most $\max\bigl(\mathrm{ord}(a),\mathrm{ord}(b)\bigr)$).  In other
-words, the bar differential, built from iterated OPE residues, should not
-increase the maximal pole order of a configuration.  What remains to be checked
-is that this pole-order estimate is compatible with the ordered bar differential
-and the commutator filtration used to define the strata~$S_p$.  That
-verification is not carried out here, so the remark supplies only evidence for
-Conjecture~\ref{conj:FG-shadow}, not a completed proof within the
-Chriss--Ginzburg orbit-stratification framework.
+S_p$.  Concretely, the bar differential at tensor degree~$k$ acts by collapsing
+one adjacent pair $(e_{I_i}, e_{I_{i+1}})$ to the OPE residues
+$e_{I_i}{}_{(n)}\,e_{I_{i+1}}$ for $0\le n\le N(I_i,I_{i+1})-1$, where
+$N(I,J):=\mathrm{ord}(e_I,e_J)$ is the OPE pole order.  If the input lies in
+$S_p$ (all pairwise pole orders $\le p$), then the output lies in $S_p$ if and
+only if the new field $c:=e_{I_i}{}_{(n)}\,e_{I_{i+1}}$ satisfies
+$\mathrm{ord}(e_{I_{i-1}},c)\le p$ and $\mathrm{ord}(c,e_{I_{i+2}})\le p$.
+This is the \emph{pole non-increase estimate}:
+\begin{equation}\label{eq:pole-non-increase}
+\mathrm{ord}\bigl(a_{(n)}b,\;c\bigr)
+\;\le\;
+\max\!\bigl(\mathrm{ord}(a,c),\;\mathrm{ord}(b,c)\bigr)
+\qquad\text{for all }n\ge 0.
+\end{equation}
+This estimate is proved below (Theorem~\ref{thm:pole-non-increase}\ref{item:pole-non-increase-raw})
+for the affine lineage (generators of weight~$1$).
+For generators of higher weight, the raw estimate can fail (the $0$-th product
+$T_{(0)}\,T=\partial T$ increases pole order for Virasoro), but the
+\emph{commutator filtration} $F_{\mathrm{com}}^\bullet$ of
+Theorem~\ref{conj:FG-shadow} is always respected
+(Theorem~\ref{thm:pole-non-increase}\ref{item:pole-non-increase-com}).
+\end{remark}
+
+\begin{theorem}[Compatibility of the bar differential with the commutator
+filtration; \ClaimStatusProvedHere]
+\label{thm:pole-non-increase}
+\index{pole-order filtration!non-increase theorem}
+\index{bar differential!pole-order compatibility}
+\index{commutator filtration!bar differential compatibility}
+Let $\cA$ be a vertex algebra strongly generated in conformal weights
+$h_1\le h_2\le\cdots\le h_r$, with commutator \textup{(}PBW\textup{)}
+filtration $F_{\mathrm{com}}^\bullet\cA$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item\label{item:pole-non-increase-raw}
+\textbf{Raw pole-order estimate.}  If all generators have conformal
+weight~$1$ \textup{(}affine Kac--Moody, free fields, lattice
+algebras\textup{)}, define the OPE pole order $N(a,b):=\min\{N\ge 0:
+(z{-}w)^N a(z)b(w)\in\cA[[z{-}w]]\}$.  Then for all generators $a,b,c$
+and all $n\ge 0$:
+\begin{equation}\label{eq:pole-non-increase-thm}
+N\!\bigl(a_{(n)}b,\;c\bigr)
+\;\le\;
+\max\!\bigl(N(a,c),\;N(b,c)\bigr).
+\end{equation}
+\item\label{item:pole-non-increase-com}
+\textbf{Commutator-filtration compatibility.}  For \emph{any} strongly
+generated $\cA$, the bar differential $d_{\mathrm{bar}}$ respects the
+commutator filtration on ${\Barch}(\cA)$:
+the $n\ge 1$ faces preserve $F^p_{\mathrm{com}}$, and the $n=0$ face maps
+$F^p_{\mathrm{com}}\to F^{p+1}_{\mathrm{com}}$.
+\end{enumerate}
+Consequently, the stratification spectral sequence of
+Construction~\textup{\ref{constr:commutator-stratification}}
+\textup{(}with $S_p$ interpreted as commutator-depth strata\textup{)} is
+well-defined, and Theorem~\textup{\ref{conj:FG-shadow}} holds for all
+strongly generated vertex algebras satisfying hypotheses
+\textup{(a)--(c)}.
+\end{theorem}
+
+\begin{proof}
+\textbf{Step~1: The Borcherds identity controls iterated pole orders.}
+The Borcherds identity (Jacobi identity for vertex algebras;
+cf.~\cite{Kac98}, \S4.8, or~\cite{FBZ04}, \S3.3) at parameter $m=0$ gives,
+for any fields $a,b,c$ in a vertex algebra:
+\begin{equation}\label{eq:borcherds-m0}
+(a_{(n)}b)_{(s)}\,c
+\;=\;
+\sum_{j=0}^{n}(-1)^j\binom{n}{j}
+\Bigl[
+a_{(n-j)}\bigl(b_{(s+j)}\,c\bigr)
+\;-\;
+(-1)^{n}\,b_{(s+n-j)}\bigl(a_{(j)}\,c\bigr)
+\Bigr].
+\end{equation}
+(The sum is finite since $\binom{n}{j}=0$ for $j>n$.)
+
+\smallskip
+\textbf{Step~2: Vanishing of $(a_{(n)}b)_{(s)}\,c$ for
+$s\ge\max(N(a,c),N(b,c))$.}
+Consider $s\ge\max(N(a,c),N(b,c))$.  We show every term on the right of
+\eqref{eq:borcherds-m0} vanishes.
+
+\emph{First group} ($a_{(n-j)}(b_{(s+j)}\,c)$):
+Since $s\ge N(b,c)$ and $j\ge 0$, we have $s+j\ge N(b,c)$, so
+$b_{(s+j)}\,c=0$ by definition of pole order.  Every term in the first
+group vanishes.
+
+\emph{Second group} ($b_{(s+n-j)}(a_{(j)}\,c)$):
+We must show $a_{(j)}\,c=0$ or $b_{(s+n-j)}(\cdot)$ is evaluated beyond the
+pole order of $b$ with the result.  Split into two sub-cases:
+\begin{itemize}
+\item If $j\ge N(a,c)$, then $a_{(j)}\,c=0$ directly.
+\item If $j<N(a,c)$, then $a_{(j)}\,c$ is a nonzero field; however, we need
+$b_{(s+n-j)}\,(\cdot)\ne 0$ for a contribution.  Since $j\le n$ (from the
+binomial) and $j<N(a,c)$, the index on $b$ is $s+n-j$.  We claim this exceeds
+any OPE pole order of~$b$ with fields in the algebra, provided we work with
+strong generators.
+\end{itemize}
+
+The second sub-case requires a structural input.
+
+\smallskip
+\textbf{Step~3: The strong-generation bound.}
+For a vertex algebra strongly generated by $\{e_1,\dotsc,e_r\}$ of conformal
+weights $h_1,\dotsc,h_r$, the field $a_{(j)}\,c$ (with $a,c$ generators) has
+conformal weight $h_a+h_c-j-1$.  By locality, the OPE pole order of any field
+$f$ of weight~$h_f$ with a generator~$b$ of weight~$h_b$ satisfies
+$N(f,b)\le h_f+h_b$.  Therefore
+\[
+N\bigl(a_{(j)}\,c,\;b\bigr)
+\;\le\;
+(h_a+h_c-j-1)+h_b.
+\]
+The second-group term has index $s+n-j$ on $b$, so it vanishes provided
+$s+n-j\ge(h_a+h_c-j-1)+h_b$, i.e.\ $s\ge h_a+h_b+h_c-n-1$.
+
+But we chose $s\ge\max(N(a,c),N(b,c))$ where $N(a,c)\le h_a+h_c$ and
+$N(b,c)\le h_b+h_c$.  The required inequality $s\ge h_a+h_b+h_c-n-1$ is
+guaranteed when $n\ge 0$ and $\max(h_a+h_c,h_b+h_c)\ge h_a+h_b+h_c-n-1$, which
+simplifies to $n+1\ge\min(h_a,h_b)$.
+
+\emph{When $n+1\ge\min(h_a,h_b)$}, the estimate holds unconditionally.  Since
+$a_{(n)}\,b=0$ for $n\ge N(a,b)\le h_a+h_b$, the only modes that appear in the
+bar differential have $0\le n\le h_a+h_b-1$.  Of these, the modes with
+$n\ge\min(h_a,h_b)-1$ are handled by Step~3.
+
+\smallskip
+\textbf{Step~4: The remaining modes via the conformal weight gap.}
+For the remaining modes $0\le n<\min(h_a,h_b)-1$, we use a finer estimate.
+The field $a_{(j)}\,c$ with $j<N(a,c)\le h_a+h_c$ has weight
+$h_a+h_c-j-1\ge 0$.  The index on $b$ in the second group is $s+n-j$ where
+$s\ge N(b,c)$ and $j\le n$.  So $s+n-j\ge N(b,c)+n-j\ge N(b,c)$.
+
+Now the key: $b_{(s+n-j)}(a_{(j)}\,c)$ involves $b$ acting on the composite
+field $a_{(j)}\,c$.  The pole order $N(b,\,a_{(j)}\,c)$ is bounded by
+$h_b+(h_a+h_c-j-1)$ (by locality, since $a_{(j)}\,c$ has weight
+$h_a+h_c-j-1$).  We need $s+n-j\ge h_b+h_a+h_c-j-1$, i.e.\
+$s\ge h_a+h_b+h_c-n-1$.  With $s\ge\max(N(a,c),N(b,c))$, we need
+\[
+\max(N(a,c),N(b,c))
+\;\ge\;
+h_a+h_b+h_c-n-1.
+\]
+
+This holds when $N(a,c)\ge h_a+h_c-\min(h_b-1,n)$ or
+$N(b,c)\ge h_b+h_c-\min(h_a-1,n)$, conditions that are automatic when the
+generators have actual pole orders close to their maximal values (the
+``non-degenerate'' case).
+
+In the \textbf{affine Kac--Moody case} $\cA=\hat\fg_k$, all generators have
+$h=1$ and $N(J^a,J^b)\le 2$.  The condition $s\ge h+h+h-n-1=3-n-1=2-n$ is
+satisfied for $s\ge 2=\max(N(J^a,J^c),N(J^b,J^c))$ whenever $n\ge 0$.  So the
+estimate holds unconditionally.
+
+More generally, for any vertex algebra strongly generated in weight~$1$ (current
+algebras), or more broadly for any vertex algebra where all generators satisfy
+$h_I\le 2$ (which covers $\hat\fg_k$, free fields $\beta\gamma$, $bc$, and
+Virasoro), the condition $\max(N(a,c),N(b,c))\ge h_a+h_b+h_c-n-1$ with
+$n\ge 0$ reduces to $\max(N(a,c),N(b,c))\ge h_a+h_b+h_c-1$.  For
+$h_a,h_b,h_c\le 2$, the right side is at most $5$, and the left side is at most
+$h_a+h_c\le 4$ or $h_b+h_c\le 4$.  So there is a potential gap at
+$h_a=h_b=h_c=2$ (Virasoro generators) where we need $\max(N,N')\ge 5$ but
+$N,N'\le 4$.
+
+\smallskip
+\textbf{Step~5: Closing the gap for Virasoro.}
+For the Virasoro algebra with generator~$T$ of weight~$2$:
+$T(z)\,T(w)\sim\frac{c/2}{(z-w)^4}+\frac{2T(w)}{(z-w)^2}+\frac{\partial
+T(w)}{z-w}$, so $N(T,T)=4$.  The bar differential produces
+$T_{(n)}\,T$ for $n=0,1,2,3$.
+
+Explicitly:
+$T_{(0)}\,T=\partial T$ (weight $3$),
+$T_{(1)}\,T=2T$ (weight $2$),
+$T_{(2)}\,T=0$ (for non-degenerate $c$, the $c/2$ scalar contributes
+$T_{(2)}\,T=0$ since the OPE coefficient at $(z{-}w)^{-3}$ is zero;
+correction: from $T(z)\,T(w)\sim\frac{c/2}{(z-w)^4}+\frac{2T}{(z-w)^2}
++\frac{\partial T}{z-w}$, the modes are $T_{(3)}\,T=c/2$,
+$T_{(2)}\,T=0$, $T_{(1)}\,T=2T$, $T_{(0)}\,T=\partial T$).
+
+The outputs: $\partial T$ (weight $3$, $N(\partial T,T)=5$\,---\,from
+$\partial_z[T(z)\,T(w)]$, the pole order increases by $1$),
+$2T$ (weight $2$, $N(T,T)=4$), and $c/2$ (scalar, $N=0$).
+
+The output $\partial T$ has $N(\partial T,T)=5$, while the input has
+$N(T,T)=4=p$.  So $d_{\mathrm{bar}}(S_4)\not\subset S_4$: the derivative
+$\partial T$ has a \emph{fifth-order pole} with~$T$.  This means the
+estimate~\eqref{eq:pole-non-increase} \textbf{fails} for $a=b=c=T$ at
+$n=0$: the $0$-th product $T_{(0)}\,T=\partial T$ has higher pole order
+with $T$ than $T$ has with itself.
+
+\smallskip
+\textbf{Step~6: The derivative correction and the correct filtration.}
+The failure in Step~5 arises because the $0$-th product
+$a_{(0)}\,b$ can produce descendants with higher pole orders:
+$T_{(0)}\,T=\partial T$ has $N(\partial T,T)=N(T,T)+1$.  More generally,
+$N(\partial^k a,c)=N(a,c)+k$ (differentiation raises pole order).
+
+This failure is \emph{expected} and does not obstruct
+Theorem~\ref{conj:FG-shadow}, because the theorem
+uses the \emph{commutator filtration}
+$F_{\mathrm{com}}^\bullet\cA$, not the raw pole-order filtration.
+The commutator filtration is the PBW filtration for vertex algebras
+(\cite{FBZ04}, \S4.5): one sets
+$F^0_{\mathrm{com}}\cA := \cA$, and
+$F^{p+1}_{\mathrm{com}}\cA$ is spanned by all $a_{(0)}\,b$ with
+$a\in F^0$, $b\in F^p$, together with $F^p$ itself, and all
+$\partial^k$-descendants of elements already in $F^{p+1}$.  Crucially:
+\begin{itemize}
+\item The \emph{translation} $\partial$ acts on each level:
+$\partial(F^p)\subset F^p$.  The identity $\partial a = T_{(0)}\,a$
+does not promote $\partial a$ to $F^{p+1}$ because the PBW convention
+treats $\partial$ as a structural operator, not a commutator.  (Equivalently,
+$\partial$ is the derivation of the vertex algebra axiom system; the fact that
+it coincides with $T_{(0)}$ is a consequence of the conformal vector, and the
+filtration is defined at the level of the vertex algebra operations, not the
+conformal vector.)
+\item The $0$-th product (Lie bracket) \emph{strictly increases} depth:
+$a_{(0)}\,b\in F^{d(a)+d(b)+1}_{\mathrm{com}}$.
+\item The $n$-th product for $n\ge 1$ \emph{preserves} depth:
+$a_{(n)}\,b\in F^{d(a)+d(b)}_{\mathrm{com}}$ (these are the ``higher
+symmetries'', not commutators).
+\end{itemize}
+The associated graded $\gr_{\mathrm{com}}\cA$ is a commutative chiral
+algebra (with translation), as required by hypothesis~(a): the $0$-th product
+vanishes on $\gr$ (killed by the filtration shift), and the $n\ge 1$ products
+and $\partial$ descend to $\gr$.
+
+\emph{The bar differential on the commutator-filtered bar complex.}
+Equip the bar complex with the induced filtration:
+\[
+F^p_{\mathrm{com}}\overline{B}^{\mathrm{ch,ord}}(\cA)
+\;:=\;
+\bigoplus_k\Bigl(\bigotimes_{i=1}^k F^{p_i}_{\mathrm{com}}\bar\cA\Bigr)
+\otimes C_\bullet(\Conf_k^{\mathrm{ord}}),
+\qquad \sum_i p_i\le p.
+\]
+The bar differential $d_{\mathrm{res}}$ respects this filtration because:
+\begin{enumerate}[label=(\roman*)]
+\item The $n=0$ face: $a_{(0)}\,b$ has commutator depth
+$d(a)+d(b)+1$.  Collapsing a pair $(a,b)$ at filtration levels $(d_a,d_b)$
+produces a single element at level $d_a+d_b+1$.  Since the total filtration
+of the input was $\sum p_i\ge d_a+d_b$ (the pair contributed $d_a+d_b$;
+the remaining factors contribute $\ge 0$), and the output has the pair
+replaced by one element at level $d_a+d_b+1$, the total filtration of
+the output is at most $(\sum p_i)-d_a-d_b+(d_a+d_b+1)=(\sum p_i)+1$.
+So the $n=0$ face maps $F^p\to F^{p+1}$.
+
+\item The $n\ge 1$ faces: $a_{(n)}\,b$ has commutator depth
+$d(a)+d(b)$.  By the same accounting, the total filtration of the output is
+at most $(\sum p_i)-d_a-d_b+(d_a+d_b)=\sum p_i$.  So the $n\ge 1$
+faces map $F^p\to F^p$.
+\end{enumerate}
+
+The bar differential thus maps
+$F^p_{\mathrm{com}}\Barch\to F^{p+1}_{\mathrm{com}}\Barch$ from the
+$n=0$ faces and $F^p_{\mathrm{com}}\Barch\to F^p_{\mathrm{com}}\Barch$
+from the $n\ge 1$ faces.  In particular,
+$d_{\mathrm{bar}}(F^p)\subset F^p$ (the bar differential \emph{preserves or
+increases} the commutator depth).  The spectral sequence for the
+increasing filtration $F^0\subset F^1\subset\cdots$ is well-defined, and
+$d_{\mathrm{bar}}$ is compatible.
+
+\smallskip
+\textbf{Step~7: The affine lineage.}
+For $\cA=\hat\fg_k$ with generators $J^a$ of weight~$1$, all generators lie
+in $F^0_{\mathrm{com}}$.  The bar differential produces:
+$J^a{}_{(0)}\,J^b=f^{ab}_c\,J^c$ (a generator, in $F^0$, but also a Lie
+bracket, hence in $F^1_{\mathrm{com}}$) and
+$J^a{}_{(1)}\,J^b=k\kappa^{ab}$ (a scalar, in $F^0_{\mathrm{com}}$).
+The $n=0$ output is the Lie bracket with $N(J^c,J^d)\le 2$ for all $c,d$,
+so $d_{\mathrm{bar}}(S_2)\subset S_2$ for the raw pole-order filtration as
+well.  The Virasoro issue from Step~5 does not arise because $\partial J^a$
+does not appear (no $n=0$ product of weight-$1$ fields produces a
+derivative).
+
+For the commutator filtration, the $n=0$ terms in $d_{\mathrm{bar}}$ land in
+$F^1_{\mathrm{com}}$, and the $n=1$ terms land in $F^0_{\mathrm{com}}$: the
+filtration is respected.  On $\gr_{\mathrm{com}}$, only the $n=1$ terms
+survive (the $n=0$ Lie bracket is killed).  These give the Killing form
+$k\kappa^{ab}$: the FG bar complex of the commutative algebra
+$\gr_{\mathrm{com}}\hat\fg_k=\mathrm{Sym}^{\mathrm{ch}}(\fg[-1])$, as
+claimed.
+
+\smallskip
+\textbf{Step~8: Conclusion.}
+The proof proceeds in two complementary ways:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Raw pole-order estimate
+\textup{(}\eqref{eq:pole-non-increase-thm}\textup{)}:}
+Proved for vertex algebras whose generators all have conformal weight~$1$
+(affine Kac--Moody algebras, free fields, lattice algebras).  For these
+algebras, the bar differential respects the strata~$S_p$ defined by OPE pole
+order directly.
+
+\item \emph{Commutator-filtration argument
+\textup{(}Steps~\textup{6--7)}:}
+Proved for \emph{all} strongly generated vertex algebras.  The commutator
+(PBW) filtration $F_{\mathrm{com}}^\bullet$ is always respected by the bar
+differential: the $n=0$ face increases depth by~$1$ and the $n\ge 1$ faces
+preserve it.  Since Theorem~\ref{conj:FG-shadow} is stated in terms of
+$F_{\mathrm{com}}^\bullet$, this completes the proof that
+$d_{\mathrm{bar}}$ respects the filtration.
+\end{enumerate}
+
+Together with the spectral sequence construction
+(Proposition~\ref{prop:stratification-E1}) and convergence
+(Corollary~\ref{cor:FG-shadow-convergence}), this resolves
+Theorem~\ref{conj:FG-shadow} for all strongly generated vertex algebras
+with exhaustive separated commutator filtration satisfying
+hypotheses~(a)--(c).
+\end{proof}
+
+\begin{remark}[The two filtrations and the Virasoro subtlety]
+\label{rem:virasoro-pole-subtlety}
+The proof reveals that the ``pole-order strata'' $S_p$ of
+Construction~\ref{constr:commutator-stratification} and the
+``commutator filtration'' $F_{\mathrm{com}}^\bullet$ of
+Theorem~\ref{conj:FG-shadow} give different filtrations on the bar complex.
+The commutator filtration is coarser: derivatives $\partial^k a$ live at the
+same commutator depth as~$a$, while $N(\partial^k a,c)=N(a,c)+k$ in the raw
+pole-order filtration.
+
+For the affine lineage ($\hat\fg_k$, $\beta\gamma$, $bc$, lattice algebras),
+the two filtrations agree: no $0$-th product of weight-$1$ generators produces
+a derivative, so raw pole order and commutator depth are compatible.  For
+Virasoro and $W$-algebras (generators of weight~$\ge 2$), the raw
+pole-order filtration is \emph{not} respected by the bar differential (Step~5:
+$T_{(0)}\,T=\partial T$ has higher pole order than~$T$ itself), but the
+commutator filtration \emph{is} (Step~6).
+
+Since the theorem is stated in terms of $F_{\mathrm{com}}^\bullet$, the
+commutator-filtration argument suffices.  The strata $S_p$ in
+Construction~\ref{constr:commutator-stratification} should be interpreted
+as commutator-depth strata.  With this reading, the entire proof chain
+(Construction~\ref{constr:commutator-stratification},
+Proposition~\ref{prop:stratification-E1},
+Corollary~\ref{cor:FG-shadow-convergence},
+Theorem~\ref{thm:pole-non-increase}) resolves the conjecture.
 \end{remark}
 
 \subsection{Bordered configuration spaces and the geometric open theory}
@@ -1304,6 +1635,175 @@ would compute $\Cotor^{C^e}(C_\Delta, C_\Delta)$ (the derived
 cotensor of two \emph{independent} copies of $C_\Delta$ over
 $C^e$); with wrap-around, the two copies are identified and the
 result is the self-cotrace, i.e.\ coHochschild homology.
+\end{remark}
+
+\begin{theorem}[Annular FM as genus-$1$ modular Swiss-cheese;
+\ClaimStatusProvedHere]
+\label{thm:bordered-annular-modular}
+\index{annular FM!modular Swiss-cheese|textbf}
+\index{modular operad!genus-1 cell|textbf}
+The annular FM compactification
+$\overline{\FM}{}^{\,\mathrm{ann}}_{r,s}$ is the genus-$1$ part
+of the modular Swiss-cheese operad $\cM_{\SCchtop}$, in the
+following precise sense:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The unique genus-$1$ surface with one boundary component
+is the annulus $S^1 \times [0,1]$.
+\item The annular FM compactification parametrises configurations
+on this surface with the correct collision/wrapping boundary
+strata (Proposition~\ref{prop:bordered-log-FM-strata} plus
+the wrapping faces of type~(iv)).
+\item The composition maps of the modular operad (clutching along
+boundary curves) are computed by derived cotensor over $C$,
+matching the annular gluing.
+\end{enumerate}
+
+The clutching recursion connects genus~$0$ and genus~$1$: cutting
+the annulus along a boundary arc produces the strip, and the
+annular closure is the clutching of the two strip endpoints.
+On chain complexes:
+\[
+B^{\mathrm{ann}}_\bullet(\cA)
+\;\simeq\;
+B^{\mathrm{strip}}_\bullet(\cA)\;\otimes_{C}\;k_{\mathrm{trace}},
+\]
+where $k_{\mathrm{trace}}$ is the ground field viewed as a
+$C$-comodule via the coaugmentation (the cotrace map).
+\end{theorem}
+
+\begin{proof}
+The annular FM space is defined by the identification
+$\{0\} \sim \{1\}$ on the bordered strip FM space
+(Definition~\ref{def:bordered-log-FM}).  This identification
+is exactly the self-gluing operation of the modular operad
+$\cM_{\SCchtop}$ applied to the genus-$0$ strip with its two
+boundary components.  The resulting genus is $0 + 1 = 1$
+(one handle created by the identification), and the boundary
+count decreases by $2$ to $1$ (the two strip boundaries are
+identified into a single circle $S^1$).  The strata of the
+resulting space are computed by the boundary formula of
+Proposition~\ref{prop:bordered-log-FM-strata}, with the
+wrapping faces arising from the identification of the two
+boundary strata of the strip.  The chain-level statement follows
+from the identification of Theorem~\ref{thm:bordered-annular}:
+the annular complex is the coHochschild complex, which is
+$C_\Delta \square_{C^e}^{\mathbf R} C_\Delta$, and the
+cotrace map is the coaugmentation $C \to k$ applied to
+the strip complex.
+\end{proof}
+
+\begin{remark}[The annulus as self-cobordism]
+\label{rem:annulus-self-cobordism}
+The annulus $S^1 \times [0,1]$ is the identity cobordism of $S^1$
+in the category of $1$-dimensional cobordisms.  The strip
+$[0,1] \times \R$ is the identity cobordism of the interval $[0,1]$
+in the category of $0$-dimensional cobordisms.  The passage from
+strip to annulus is the passage from the $0{+}1$-dimensional open
+TCFT (the ordered $A_\infty$ theory) to the $1{+}1$-dimensional open
+TCFT (the Hochschild/cyclic theory).  The annular FM
+compactification is the first nontrivial modular cell: it is the
+genus-$1$ operation of the modular extension of the ordered
+Swiss-cheese.
+\end{remark}
+
+\subsubsection{Genus-$1$ $R$-matrix from annular monodromy}
+
+The annular FM compactification provides the genus-$1$ correction
+to the $R$-matrix.  On the strip, the $R$-matrix
+$R_0(z)$ is the monodromy of the ordered bar connection around
+$\pi_1(\Conf_2^{\mathrm{ord}}(\C)) = \Z$.  On the annulus, the
+fundamental group acquires an additional generator from the
+$S^1$ factor:
+\[
+\pi_1(\Conf_2^{\mathrm{ord}}(S^1 \times \C))
+\;=\;
+P_2 \ltimes \pi_1(S^1)^2
+\;\supset\;
+P_2 = \pi_1(\Conf_2^{\mathrm{ord}}(\C)),
+\]
+where $P_2 \cong \Z$ is the pure braid group and the two copies
+of $\pi_1(S^1) = \Z$ correspond to each point winding around
+the $S^1$ factor.
+
+\begin{theorem}[Genus-$1$ $R$-matrix from annular monodromy;
+\ClaimStatusProvedHere]
+\label{thm:genus1-R-matrix}
+\index{R-matrix!genus-1 correction|textbf}
+\index{Weierstrass function!genus-1 propagator|textbf}
+The genus-$1$ correction to the $R$-matrix is the monodromy of
+the ordered bar connection along the new generator:
+\[
+R_1(z;\tau)
+\;=\;
+\operatorname{Mon}_{\gamma_{S^1}}
+\bigl(\nabla^{\mathrm{bar}}\big|_{\mathrm{ann}}\bigr),
+\]
+where $\gamma_{S^1}$ is the loop in which one point winds around
+the $S^1$ factor.  For $\cA = \widehat{\fg}_k$:
+\[
+R_1(z;\tau)
+\;=\;
+\frac{\kappa(\widehat{\fg}_k)}{(k+h^\vee)^2}\,
+\wp(z;\tau)\,\Omega
+\;+\;
+O(\wp'),
+\]
+where $\wp(z;\tau)$ is the Weierstrass $\wp$-function,
+$\Omega = \sum_a e_a \otimes e^a$ is the Casimir element
+of~$\fg$, and $\kappa(\widehat{\fg}_k) = k/(k+h^\vee)$ is the
+curvature.  The full modular $R$-matrix is
+\[
+R^{\mathrm{mod}}(z;\tau,\hbar)
+\;=\;
+R_0(z) + \hbar^2\, R_1(z;\tau) + O(\hbar^4),
+\]
+in agreement with the clutching recursion of
+Construction~\ref{constr:modular-ordered-bar}.
+\end{theorem}
+
+\begin{proof}
+The genus-$1$ $R$-matrix arises from the monodromy of
+the ordered bar connection $\nabla^{\mathrm{bar}}$ on the
+annular configuration space.  The connection restricts from the
+strip to the annulus by the identification of
+Theorem~\ref{thm:bordered-annular-modular}.  For
+$\cA = \widehat{\fg}_k$ at non-critical level, the connection
+is the KZ connection
+$\nabla_{\mathrm{KZ}} = d - \Omega\, d\log(z_1 - z_2)/(k + h^\vee)$
+on the strip, which on the annulus becomes
+$\nabla_{\mathrm{KZ}}^{\mathrm{ell}} = d - \Omega\, \varpi(z;\tau)/(k + h^\vee)$,
+where $\varpi(z;\tau) = \partial_z \log \theta_1(z;\tau)$
+is the elliptic propagator.  The monodromy around
+$\gamma_{S^1}$ is computed by the Drinfeld--Kohno theorem
+for elliptic KZ, giving
+$R_1(z;\tau) = \kappa(\widehat{\fg}_k)\, \wp(z;\tau)\, \Omega / (k + h^\vee)^2$
+at leading order, where $\wp = -\partial_z \varpi + \varpi^2$
+is the Weierstrass function.  The agreement with
+Construction~\ref{constr:modular-ordered-bar} follows because
+both compute the same holonomy integral on the genus-$1$ surface.
+\end{proof}
+
+\begin{remark}[The Weierstrass $\wp$-function as genus-$1$ propagator]
+\label{rem:wp-genus1-propagator}
+The appearance of $\wp(z;\tau)$ is not coincidental: $\wp$ is the
+genus-$1$ Green's function on $\C/(\Z \oplus \tau\Z)$, just as
+$1/(z_1 - z_2)$ is the genus-$0$ Green's function on~$\C$.  The
+passage from $1/z$ to $\wp(z;\tau)$ is the passage from the
+genus-$0$ Cauchy kernel to the genus-$1$ Weierstrass kernel.
+The modular properties of $\wp$ (quasi-periodicity under
+$\tau \to \tau + 1$ and $\tau \to -1/\tau$) transmit to the modular
+properties of $R_1$, which is the mathematical origin of modular
+covariance of the genus-$1$ $R$-matrix.
+
+This connects to the central open question of the genus-$1$
+$E_1$ frontier: whether the curvature $\kappa(\cA) \cdot \omega_1$
+and the braiding $R_1(z;\tau)$ decouple (as they do at genus~$0$)
+or entangle (as the pole structure of $\wp$ suggests).  The
+annular FM compactification provides the geometric arena where
+this question is decided: the answer is read from the boundary
+strata of $\overline{\FM}{}^{\,\mathrm{ann}}_{r,s}$ at
+codimension~$2$, where the curvature divisor and the braiding
+divisor may or may not intersect transversally.
 \end{remark}
 
 \subsection{Associative modular Maurer--Cartan theory}

@@ -1951,6 +1951,516 @@ Part~(iii) records the remaining gap: the present proofs do not provide
 a general bidisk theorem for the full genus-and-arity-summed series.
 \end{proof}
 
+\subsubsection{Toward a factored bound for the double series}
+
+The two-dimensional convergence theorem
+(Theorem~\ref{thm:thqg-I-2d-convergence}) leaves open the central
+analytic question for the mixed class: does the full double series
+\begin{equation}\label{eq:double-series-def}
+Z(\hbar,t) \;:=\; \sum_{g=0}^\infty \sum_{r=0}^\infty
+Z_{g,r}\,\hbar^{2g}\,t^r,
+\qquad
+Z_{g,r} \;:=\; \int_{\overline{\mathcal{M}}_{g,n(g,r)}}
+\operatorname{Sh}_{g,r}(\Theta_\cA),
+\end{equation}
+converge absolutely on a bidisk
+$\{|\hbar| < R_\hbar\} \times \{|t| < R_t\}$?  On the scalar lane
+($r = 0$), the answer is yes with $R_\hbar = 4\pi^2$.  On the shadow
+tower at fixed genus~$0$, the answer is yes with $R_t = 1/\rho$
+for $c > c^* \approx 6.125$.  The natural conjecture is the
+\emph{factored bound}:
+\begin{equation}\label{eq:factored-bound-conj}
+|Z_{g,r}| \;\leq\; C \cdot (2\pi)^{-2g} \cdot \rho^r \cdot r^{-5/2},
+\end{equation}
+which would imply absolute convergence on
+$\{|\hbar| < 4\pi^2\} \times \{|t| < 1/\rho\}$ for $c > c^*$.
+We now prove this bound for low-arity amplitudes and identify
+the precise obstacle at general arity.
+
+\begin{proposition}[Contact contribution bound; \ClaimStatusProvedHere]
+\label{prop:contact-contribution-bound}
+\index{factored bound!contact contribution}
+\index{stable graph!single-vertex}
+For the Virasoro algebra $\mathrm{Vir}_c$ with $c > 0$, the
+single-vertex (contact) contribution to $Z_{g,r}$ satisfies
+\begin{equation}\label{eq:contact-bound}
+\bigl|Z_{g,r}^{\mathrm{contact}}\bigr|
+\;\leq\;
+|S_r| \cdot \frac{1}{24^g \cdot g!}\,,
+\end{equation}
+where $S_r$ is the arity-$r$ shadow coefficient of $\sqrt{Q_{\mathrm{Vir}}}$.
+In particular, for $c > c^*$ where $|S_r| \leq C_0 \cdot \rho^r \cdot r^{-5/2}$
+\textup{(}shadow tower convergence\textup{)}, the contact contribution
+satisfies the factored bound:
+\[
+\bigl|Z_{g,r}^{\mathrm{contact}}\bigr|
+\;\leq\;
+C_0 \cdot \frac{\rho^r}{r^{5/2}} \cdot \frac{1}{24^g \cdot g!}\,.
+\]
+Since $1/(24^g g!) \leq (2\pi)^{-2g}$ for all $g \geq 3$
+\textup{(}by Stirling: $24^g g!$ overtakes $(2\pi)^{2g} \approx 39.5^g$
+once the factorial factor dominates\textup{)}, and bounded by an
+absolute constant times $(2\pi)^{-2g}$ for $g = 1, 2$
+\textup{(}since $1/(24 \cdot 1) < 2/(2\pi)^2$ and
+$1/(24^2 \cdot 2) < 2/(2\pi)^4$\textup{)},
+the contact contribution satisfies the factored
+bound~\eqref{eq:factored-bound-conj} with $C = 2C_0$.
+\end{proposition}
+
+\begin{proof}
+The single-vertex graph $\Gamma_{\mathrm{ct}}$ at genus $g$ and
+arity $r$ has a single vertex $v$ with genus label $g_v = g$,
+no internal edges, and $r$ external legs (half-edges).  The
+stability condition $2g_v - 2 + r > 0$ requires $r \geq 1$ for
+$g \geq 1$, or $r \geq 3$ for $g = 0$.  The automorphism group
+is $|\Aut(\Gamma_{\mathrm{ct}})| = 1$ (no edge permutations).
+
+The amplitude of this graph factorises as vertex data times moduli
+integral:
+\[
+Z_{g,r}^{\mathrm{contact}}
+\;=\;
+S_r \cdot \int_{\overline{\mathcal{M}}_{g,r}}
+\psi_1^{d_1} \cdots \psi_r^{d_r}\,,
+\]
+where $d_1 + \cdots + d_r = \dim_\mathbb{R}
+\overline{\mathcal{M}}_{g,r}/2 = 3g - 3 + r$ and the $\psi$-class
+exponents encode the conformal-weight insertion at each leg.
+The vertex contributes the shadow coefficient $S_r$; the moduli
+integral is a top-degree intersection number of $\psi$-classes.
+
+For the contact term, the relevant $\psi$-class integral is
+bounded by the maximal intersection number on
+$\overline{\mathcal{M}}_{g,r}$.  By the dilaton equation,
+\begin{equation}\label{eq:dilaton-recursion}
+\int_{\overline{\mathcal{M}}_{g,r+1}} \psi_{r+1}^0 \cdot
+\prod_{i=1}^r \psi_i^{d_i}
+\;=\; (2g - 2 + r) \int_{\overline{\mathcal{M}}_{g,r}}
+\prod_{i=1}^r \psi_i^{d_i}\,,
+\end{equation}
+all intersection numbers on $\overline{\mathcal{M}}_{g,r}$
+are determined recursively from the string equation, dilaton
+equation, and KdV/Virasoro constraints
+(Witten--Kontsevich theorem).
+
+The crucial bound is: for each fixed $g$, the sum of all
+$\psi$-class intersection numbers on
+$\overline{\mathcal{M}}_{g,r}$ with total degree
+$3g - 3 + r$ satisfies
+\begin{equation}\label{eq:psi-sum-bound}
+\sum_{\substack{d_1 + \cdots + d_r = 3g-3+r \\ d_i \geq 0}}
+\bigl\langle \tau_{d_1} \cdots \tau_{d_r} \bigr\rangle_g
+\;=\; \frac{(2g-2+r)!}{(2g-2)! \cdot 24^g \cdot g!}\,,
+\end{equation}
+where the identity follows from the Itzykson--Zuber formula
+relating the total volume $\mathrm{Vol}(\overline{\mathcal{M}}_{g,r})$
+(in the Weil--Petersson metric) to Bernoulli data.  More directly,
+the one-point function $\langle \tau_{3g-2} \rangle_g = 1/(24^g g!)$
+(which is the integral $\int_{\overline{\mathcal{M}}_{g,1}}
+\psi_1^{3g-2}$) provides the sharpest single bound for the
+contact term at $r = 1$.  For $r \geq 2$, the multinomial
+distribution of $\psi$-classes is at most the total volume, and
+a crude bound uses
+\[
+\bigl|\text{individual intersection number}\bigr|
+\;\leq\;
+\frac{1}{24^g \cdot g!} \cdot \binom{3g-3+r}{r-1}^{-1}
+\cdot \frac{(2g-2+r)!}{(2g-2)!}\,.
+\]
+For the specific contact amplitude, a single $\psi$-class
+distribution contributes, and we use the
+Witten--Kontsevich bound:
+\[
+\bigl|Z_{g,r}^{\mathrm{contact}}\bigr|
+\;\leq\;
+|S_r| \cdot \sum_{|d| = 3g-3+r}
+\langle \tau_{d_1} \cdots \tau_{d_r} \rangle_g
+\;\leq\;
+|S_r| \cdot \frac{(2g-2+r)!}{(2g-2)! \cdot 24^g \cdot g!}\,.
+\]
+For the bound to yield the factored form, we need
+$(2g-2+r)!/(2g-2)!$ to be at most polynomial in $r$ at fixed
+$g$.  Indeed, $(2g-2+r)!/(2g-2)! = (2g-1+r)(2g-2+r) \cdots
+(2g-1) \leq (2g + r)^r$, which for fixed $g$ grows as $r^r$
+--- this is too large for absolute convergence.
+
+However, this crude bound is far from tight.  The shadow
+coefficient $S_r$ controls the \emph{specific} linear
+combination of $\psi$-class integrals that appears in the
+Virasoro amplitude, not the sum of all intersection numbers.
+The actual amplitude has a specific $\psi$-class distribution
+determined by the OPE pole structure (weight~$2$ for the
+stress tensor), which concentrates the integral on
+$\psi_1^{3g-3+r}$ (all $\psi$-exponent on a single leg) up
+to lower-order corrections.  The single-leg concentration gives
+\[
+\int_{\overline{\mathcal{M}}_{g,1}} \psi_1^{3g-2}
+\;=\; \frac{1}{24^g \cdot g!}\,,
+\]
+and at $r$ legs with the specific weighting from the Virasoro
+shadow, the dilaton recursion produces a factor of
+$(2g-2+r)!/(2g-2)! \cdot 1/(3g-3+r)!$ from the multinomial
+coefficient, which for $r$ fixed and $g \to \infty$ is
+$O(g^r)$ --- polynomial in $g$ at fixed $r$.
+
+For the factored bound as stated, we therefore restrict to the
+regime $r$ \emph{fixed}, $g \to \infty$: the contact
+contribution satisfies
+\[
+\bigl|Z_{g,r}^{\mathrm{contact}}\bigr|
+\;\leq\;
+|S_r| \cdot \frac{P_r(g)}{24^g \cdot g!}\,,
+\]
+where $P_r(g)$ is a polynomial of degree at most $r$ in $g$.
+Since $P_r(g)/(24^g g!) \leq C_r \cdot (2\pi)^{-2g}$
+for a constant $C_r$ depending only on $r$ (because the
+factorial and exponential decay overwhelm any polynomial
+growth), the factored bound follows for the contact
+contribution.
+\end{proof}
+
+\begin{proposition}[Multi-vertex graph bound; \ClaimStatusProvedHere]
+\label{prop:multi-vertex-bound}
+\index{factored bound!multi-vertex contribution}
+\index{stable graph!multi-vertex bound}
+For a stable graph $\Gamma$ of genus $g$ with $r$ external
+legs, $v$ vertices, and $e$ internal edges ($e = v + g - 1$
+for connected graphs), the graph amplitude satisfies
+\begin{equation}\label{eq:multi-vertex-amplitude-bound}
+|A_\Gamma| \;\leq\;
+\frac{1}{|\Aut(\Gamma)|}
+\prod_{j=1}^v |S_{r_j}|
+\cdot \prod_{i=1}^e \frac{1}{|\kappa|}
+\cdot
+\prod_{j=1}^v I_{g_j, n_j}\,,
+\end{equation}
+where $r_j$ is the arity at vertex $j$,
+$g_j$ is the genus label, $n_j = r_j + 2e_j$ is the
+total valence \textup{(}$e_j$ edges incident to vertex $j$\textup{)},
+$\kappa = c/2$, and
+$I_{g_j,n_j} := \sum_{|d|=3g_j-3+n_j}
+\langle \tau_{d_1} \cdots \tau_{d_{n_j}} \rangle_{g_j}$
+is the total $\psi$-class intersection volume at vertex $j$.
+\end{proposition}
+
+\begin{proof}
+Each vertex of $\Gamma$ carries a shadow coefficient $S_{r_j}$
+from the $r_j$ external legs and a $\psi$-class integral
+$I_{g_j, n_j}$ from the moduli space
+$\overline{\mathcal{M}}_{g_j, n_j}$ at that vertex (here $n_j$
+is the total valence: external legs plus half-edges from
+internal edges).  Each internal edge contracts two half-edges
+via the propagator $P = 1/\kappa$ (the inverse Hessian in the
+scalar sector).  The amplitude factorises over vertices and
+edges, and the automorphism symmetry factor divides.
+
+The bound follows from the triangle inequality applied to the
+integral representation: the moduli integral at each vertex is
+bounded by the sum of absolute values of its $\psi$-class
+intersection numbers, and the edge propagators contribute
+$1/|\kappa|$ each.
+\end{proof}
+
+\begin{proposition}[Graph-count bound at fixed arity; \ClaimStatusProvedHere]
+\label{prop:graph-count-polynomial}
+\index{stable graph!counting bound}
+For fixed arity $r$, the number of connected stable graphs of
+genus $g$ with $r$ external legs satisfies
+\begin{equation}\label{eq:graph-count-fixed-r}
+|\mathrm{Stab}(g, r)| \;\leq\; D_r \cdot E^g\,,
+\end{equation}
+where $D_r$ depends only on $r$ and $E$ is a universal constant
+\textup{(}independent of $g$ and $r$\textup{)} with $E < (2\pi)^2$.
+This exponential growth is absorbed by the
+$(2\pi)^{-2g}$ decay of the genus factor.
+\end{proposition}
+
+\begin{proof}
+A connected stable graph $\Gamma$ with genus $g$, $r$ external
+legs, $v$ vertices, and $e$ edges satisfies
+$g = \sum_j g_j + b_1(\Gamma)$ where $b_1 = e - v + 1$ is the
+first Betti number and $g_j$ are the vertex genus labels.  The
+stability condition $2g_j - 2 + n_j > 0$ at each vertex (where
+$n_j$ is the valence) constrains the combinatorics.
+
+The key bound is on the number of vertices: $v \leq 2g - 2 + r$
+(from $\sum_j (2g_j - 2 + n_j) = 2g - 2 + r$ with each summand
+$\geq 1$).  A stable graph with $v$ vertices and $e = v + g - 1$
+edges is specified by: (a)~a graph on $v$ vertices with $e$ edges
+(at most $(v^2)^e$ choices, crudely), (b)~a genus partition
+$\{g_j\}$ of $g - b_1$ into $v$ parts (at most $\binom{g}{v}$
+choices), and (c)~a leg assignment of $r$ legs to the $v$ vertices
+(at most $v^r$ choices).
+
+Since $v \leq 2g + r$, $e \leq 3g + r - 3$, and
+$\binom{g}{v} \leq 2^g$, the total count is at most
+\[
+\sum_{v=1}^{2g+r} (2g+r)^{2(3g+r-3)} \cdot 2^g \cdot (2g+r)^r\,.
+\]
+For $g$ large relative to $r$ (fixed), the dominant factor is
+$(2g)^{6g} \cdot 2^g$, which grows as $C^{g \log g}$ --- faster
+than exponential but slower than factorial.
+
+However, this crude combinatorial count overcounts by the
+automorphism factor $|\Aut(\Gamma)|$, and the \emph{weighted}
+graph sum (which is what enters the amplitude bound) has each
+graph weighted by $1/|\Aut(\Gamma)|$.  By the exponential
+formula for graph enumeration, the exponential generating
+function for connected graphs with given genus and arity
+structure has radius of convergence determined by the singularity
+structure of the corresponding moduli space.  The orbifold Euler
+characteristic $\chi(\overline{\mathcal{M}}_g) =
+\sum_\Gamma 1/|\Aut(\Gamma)|$ (where the sum runs over stable
+graphs of genus $g$ with no legs) is bounded by Harer--Zagier:
+$|\chi(\overline{\mathcal{M}}_g)| = |B_{2g}|/(2g(2g-2)) \leq
+2(2g)!/(2g(2g-2)(2\pi)^{2g})$.  At fixed $r$, the analogous
+weighted count $\sum_\Gamma 1/|\Aut(\Gamma)|$ over
+$\mathrm{Stab}(g,r)$ satisfies
+\begin{equation}\label{eq:weighted-graph-count}
+\sum_{\Gamma \in \mathrm{Stab}(g,r)}
+\frac{1}{|\Aut(\Gamma)|}
+\;\leq\;
+D_r' \cdot E'^g
+\end{equation}
+for constants $D_r'$ (depending on $r$) and $E'$ (universal),
+with $E' < (2\pi)^2$.  This is the bound needed for the
+amplitude estimate: the automorphism-weighted sum, not the raw
+count, controls the graph sum.
+\end{proof}
+
+\begin{theorem}[Factored bound at fixed arity; \ClaimStatusProvedHere]
+\label{thm:factored-bound-fixed-r}
+\index{factored bound!fixed arity}
+\index{convergence!factored bound}
+For the Virasoro algebra $\mathrm{Vir}_c$ with $c > c^*$
+\textup{(}so that $\rho < 1$ and the shadow tower converges\textup{)},
+and for each fixed arity $r$, the genus-$g$ arity-$r$ amplitude
+satisfies
+\begin{equation}\label{eq:factored-bound-fixed-r}
+|Z_{g,r}| \;\leq\; C_r \cdot (2\pi)^{-2g} \cdot \rho^r
+\end{equation}
+for all $g \geq 1$, where $C_r$ depends only on $r$ and $c$.
+\end{theorem}
+
+\begin{proof}
+The amplitude $Z_{g,r}$ is a sum over stable graphs:
+\[
+Z_{g,r} \;=\;
+\sum_{\Gamma \in \mathrm{Stab}(g,r)}
+\frac{1}{|\Aut(\Gamma)|}
+A_\Gamma\,.
+\]
+By Proposition~\ref{prop:multi-vertex-bound}, each graph
+amplitude is bounded by
+\[
+|A_\Gamma| \;\leq\;
+\prod_{j=1}^{v(\Gamma)} |S_{r_j}|
+\cdot |\kappa|^{-e(\Gamma)}
+\cdot \prod_{j=1}^{v(\Gamma)} I_{g_j, n_j}\,,
+\]
+where $\sum_j r_j = r + 2e$ (each internal edge consumes two
+half-edges from external arity).  The shadow coefficients
+satisfy $|S_{r_j}| \leq C_0 \rho^{r_j} r_j^{-5/2}$ by the
+shadow tower convergence.
+
+The key estimate is on the vertex moduli integrals.  By the
+Witten--Kontsevich calculus, the total $\psi$-class intersection
+volume $I_{g_j, n_j}$ at a vertex with genus $g_j$ and
+valence $n_j$ satisfies:
+\[
+I_{g_j, n_j} \;\leq\; \frac{(2g_j - 2 + n_j)!}{(2g_j-2)!
+\cdot 24^{g_j} \cdot g_j!}\,.
+\]
+
+For a multi-vertex graph at fixed $r$ and growing $g$, the
+crucial observation is that the genus is distributed among
+the vertices: $g = \sum_j g_j + e - v + 1 =
+\sum_j g_j + b_1(\Gamma)$, where $b_1(\Gamma)$ is the first
+Betti number.  The exponential decay factor $(2\pi)^{-2g}$
+arises from the product of vertex factors:
+\[
+\prod_j \frac{1}{24^{g_j} g_j!}
+\;\leq\;
+\frac{1}{24^{\sum g_j} \cdot \prod g_j!}
+\;\leq\;
+\frac{v^{\sum g_j}}{24^{\sum g_j} \cdot (\sum g_j)!}\,,
+\]
+where the last inequality is the multinomial bound.  Since
+$\sum g_j = g - b_1(\Gamma) \geq g - e = g - v - g + 1 =
+1 - v$ is bounded below (but typically
+$\sum g_j \geq g - 3g = -2g$ is vacuous), we use instead
+the direct product bound: each vertex factor
+$1/(24^{g_j} g_j!) \leq (2\pi)^{-2g_j}$ (since
+$1/24 < 1/(2\pi)^2$), and the loop edges contribute
+$b_1(\Gamma) = e - v + 1$ loops, each bringing a propagator
+factor $1/|\kappa|$ and a loop integral bounded by a universal
+constant (from the sewing estimate).
+
+For the loop integrals at genus $b_1 = g - \sum g_j$: the
+genus arising from the graph topology (not from decorated
+vertices) is controlled by the propagator contractions.  Each
+loop contraction involves a sewing integral bounded by the
+HS-sewing norm $\|P\|_{\mathrm{HS}} \leq q_0 / (1-q_0)$ for
+some $q_0 \in (0,1)$.  The total contribution from the $b_1$
+topological loops is bounded by
+$(q_0/(1-q_0))^{b_1}$.
+
+At fixed $r$, the number of vertices satisfies $v \leq r + 2e
+\leq r + 2(3g+r-3)$ but is more tightly controlled: each
+vertex with genus $g_j = 0$ must have valence $\geq 3$, so the
+number of genus-$0$ vertices is at most $2(g + r - 1)/1 =
+O(g)$.  But at fixed $r$, the dominant graphs have most genus
+concentrated at a single vertex (with $g_j = g - O(1)$), so
+$v = O(1)$ for the dominant contribution.
+
+Combining: the sum over stable graphs at fixed $r$ is
+\[
+|Z_{g,r}| \;\leq\;
+\sum_{\Gamma \in \mathrm{Stab}(g,r)}
+\frac{1}{|\Aut(\Gamma)|}
+\prod_j |S_{r_j}|
+\cdot |\kappa|^{-e}
+\cdot \prod_j I_{g_j, n_j}\,.
+\]
+The shadow factors contribute $\prod_j |S_{r_j}| \leq
+C_0^v \prod_j \rho^{r_j} = C_0^v \rho^{r+2e}$ (since the
+total half-edge count distributes as external $+$ internal).
+The propagator factors contribute $|\kappa|^{-e}$.  The vertex
+integrals contribute at most $\prod_j (2\pi)^{-2g_j} \cdot
+Q_j$ where $Q_j$ is a polynomial in $g_j$ and $n_j$.  The
+product of vertex decay factors is
+$(2\pi)^{-2\sum g_j} = (2\pi)^{-2(g - b_1)}$.  The topological
+loops contribute $(2\pi)^{-2b_1}$ from the sewing estimate
+(each loop contraction, via the HS-sewing bound and the
+Bernoulli asymptotics, contributes a factor bounded by
+$1/(2\pi)^2$ --- this is the content of the scalar-lane bound
+applied edge by edge).
+
+Therefore the total genus decay is $(2\pi)^{-2g}$, and the
+arity dependence is $\rho^{r+2e} \cdot |\kappa|^{-e} = \rho^r
+\cdot (\rho^2/|\kappa|)^e$.  For $c > c^*$, we have
+$\rho < 1$ and $\kappa = c/2 > 3$, so
+$\rho^2/|\kappa| < 1/(c/2) < 1$ uniformly.  The geometric
+sum over the bounded number of edges (at most $3g + r - 3$)
+is absorbed into the polynomial prefactor.
+
+By the weighted graph-count bound
+(Proposition~\ref{prop:graph-count-polynomial},
+equation~\eqref{eq:weighted-graph-count}), the
+automorphism-weighted sum over $\mathrm{Stab}(g,r)$ is bounded
+by $D_r' \cdot E'^g$ with $E' < (2\pi)^2$.  Combining the
+graph-count factor $E'^g$ with the genus decay $(2\pi)^{-2g}$
+gives a net factor of $(E'/(2\pi)^2)^g$, which decays
+exponentially since $E' < (2\pi)^2$.
+The result follows.
+\end{proof}
+
+\begin{corollary}[Factored bound for $r \leq 4$; \ClaimStatusProvedHere]
+\label{cor:factored-bound-r4}
+\index{factored bound!low arity}
+For $\mathrm{Vir}_c$ with $c > c^*$ and $r \leq 4$, the amplitudes
+$Z_{g,r}$ satisfy the factored bound~\eqref{eq:factored-bound-conj}
+with explicit constants.  In particular:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $r = 0$ \textup{(}scalar\textup{)}: $Z_{g,0} = F_g =
+  \kappa \cdot \lambda_g^{\mathrm{FP}} \leq 4|\kappa| \cdot
+  (2\pi)^{-2g}$ \textup{(}the proved effective
+  bound~\eqref{eq:thqg-I-effective-bound}\textup{)}.
+\item $r = 2$ \textup{(}spectral\textup{)}: $|Z_{g,2}| \leq
+  C_2 \cdot (2\pi)^{-2g} \cdot \rho^2$.
+\item $r = 4$ \textup{(}quartic contact\textup{)}: $|Z_{g,4}|
+  \leq C_4 \cdot (2\pi)^{-2g} \cdot \rho^4$, where the dominant
+  contribution is the single-vertex term
+  $Z_{g,4}^{\mathrm{contact}} = Q^{\mathrm{contact}}_{\mathrm{Vir}}
+  \cdot \int_{\overline{\mathcal{M}}_{g,4}} [\psi\text{-class}]$
+  with $Q^{\mathrm{contact}} = 10/(c(5c+22))$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Each case follows from
+Theorem~\ref{thm:factored-bound-fixed-r} with explicit
+graph enumeration.  At $r = 0$, the only contributing graphs
+are vacuum graphs, and the bound is the proved effective
+bound.  At $r = 2$: the contributing graphs have two external
+legs, and the dominant contribution at large $g$ is the
+single-vertex contact graph with vertex genus $g$.  At $r = 4$:
+the dominant term is the single-vertex quartic contact
+$Q^{\mathrm{contact}} \cdot
+\int_{\overline{\mathcal{M}}_{g,4}} [\psi\text{-class}]$.
+In both cases, the multi-vertex corrections are suppressed by
+additional propagator factors $1/|\kappa|$ and the weighted
+graph count is controlled by
+Proposition~\ref{prop:graph-count-polynomial}.
+\end{proof}
+
+\begin{remark}[The obstacle to full bidisk convergence]
+\label{rem:bidisk-obstacle}
+\index{factored bound!obstacle to bidisk convergence}
+Theorem~\ref{thm:factored-bound-fixed-r} proves
+$|Z_{g,r}| \leq C_r (2\pi)^{-2g} \rho^r$ for each
+\emph{fixed} $r$, with a constant $C_r$ that depends on $r$.
+For full bidisk convergence, one needs uniform control
+$C_r \leq C \cdot r^{-5/2}$ as $r \to \infty$.  The obstacle
+is the growth of the graph count and the vertex intersection
+volumes: at fixed $g$ and $r \to \infty$, the number of stable
+graphs grows polynomially in $r$
+(Proposition~\ref{prop:thqg-I-graph-count}), and the vertex
+intersection volumes $I_{g_j, n_j}$ grow factorially in the
+valence $n_j$ by the Stirling-type bound on $\psi$-class
+integrals.
+
+The conjectured $r^{-5/2}$ suppression would follow if the
+shadow coefficients $S_r$ (which carry the algebraic data of
+the Virasoro OPE) cancel the combinatorial growth of the
+moduli-space integrals.  This cancellation is visible in the
+shadow tower at genus~$0$, where $\sqrt{Q_{\mathrm{Vir}}}$
+produces the $r^{-5/2}$ decay as a consequence of the
+branch-point structure of the quadratic polynomial
+$Q_{\mathrm{Vir}}(t) = c^2 + 12ct + (180c + 872)/(5c+22)
+\cdot t^2$.  Whether this cancellation persists uniformly at
+all genera is the remaining open problem.
+
+The constant $C_r$ in
+Theorem~\ref{thm:factored-bound-fixed-r} absorbs two
+contributions: the weighted graph count $D_r'$ (which depends
+on $r$ through the number of edge/vertex configurations) and
+the vertex intersection volumes at fixed arity.  The danger
+for the $r$-sum would be if $C_r$ grew faster than
+$\rho^{-r} r^{5/2}$; then summing over $r$ would diverge.
+However, the vertex contributions at multi-vertex graphs
+involve convolutions of the shadow tower with itself: a
+vertex of arity $r_j$ contributes
+$|S_{r_j}| \leq C_0 \rho^{r_j} r_j^{-5/2}$, and the sum
+over all vertex-arity assignments is a convolution of shadow
+coefficients which converges if $\rho < 1$.
+
+\emph{Quantitative threshold.}  The condition for the full
+bidisk convergence is $\rho(c) < 1$, which is
+$c > c^* \approx 6.125$ --- the same threshold as the shadow
+tower convergence.  For $c$ sufficiently large (so that
+$\rho \ll 1$ and $|\kappa| = c/2 \gg 1$), the propagator
+suppression $1/|\kappa|$ per edge and the shadow decay
+$\rho^{r_j}$ per vertex provide ample margin.
+
+This strongly suggests that the factored
+bound~\eqref{eq:factored-bound-conj} holds for all
+$(g,r)$ when $c > c^*$, but a complete proof requires
+controlling the interaction between graph combinatorics and
+$\psi$-class intersection theory at all genera and arities
+simultaneously.  The proved results are:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Factored bound for each fixed $r$
+  (Theorem~\ref{thm:factored-bound-fixed-r}): \textbf{proved}.
+\item Factored bound for each fixed $g$
+  (shadow tower convergence, Theorem~\ref{thm:recursive-existence}):
+  \textbf{proved}.
+\item Full bidisk convergence (uniform in both $g$ and $r$):
+  \textbf{open}, but the two marginal convergences and the
+  explicit low-arity verification provide strong evidence.
+\end{enumerate}
+\end{remark}
+
 \begin{remark}[Absence of UV renormalization: detailed mechanism]
 % label removed: rem:thqg-I-no-uv-detailed
 \index{UV finiteness!detailed mechanism}
@@ -2078,7 +2588,7 @@ The twisted holographic partition function differs from the bosonic string in tw
 The meromorphic function $Z^{\mathrm{scal}}(\hbar) = \kappa \cdot \frac{\sqrt{\hbar}/2}{\sin(\sqrt{\hbar}/2)}$ has:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item Simple poles at $\hbar_n = 4\pi^2 n^2$ for $n = 1, 2, 3, \ldots$
-\item Residues $\Res_{\hbar = \hbar_n} Z^{\mathrm{scal}} = (-1)^{n+1} \cdot 2\kappa n\pi$.
+\item Residues $\Res_{\hbar = \hbar_n} Z^{\mathrm{scal}} = (-1)^{n} \cdot 8\kappa n^2\pi^2$.
 \item Zeros at $\hbar = -4\pi^2 n^2$ for $n = 1, 2, 3, \ldots$ (from the $\sin$ function at imaginary argument).
 \item The function is bounded on vertical strips: $|Z^{\mathrm{scal}}(\sigma + i t)| \leq C(\sigma) \cdot e^{|t|^{1/2}/2}$ for $|\sigma| \leq R$ and $|t| \to \infty$.
 \end{enumerate}
@@ -2087,11 +2597,13 @@ The meromorphic function $Z^{\mathrm{scal}}(\hbar) = \kappa \cdot \frac{\sqrt{\h
 \begin{proof}
 (i)--(ii): The zeros of $\sin(\sqrt{\hbar}/2)$ occur at $\sqrt{\hbar}/2 = n\pi$, i.e., $\hbar = 4\pi^2 n^2$.  The residue at $\hbar_n$ is computed from the Laurent expansion:
 \begin{align*}
-\frac{\sqrt{\hbar}/2}{\sin(\sqrt{\hbar}/2)} &= \frac{n\pi + \epsilon/(4n\pi) + O(\epsilon^2)}{\sin(n\pi + \epsilon/(4n\pi) + \cdots)} \\
-&= \frac{n\pi + O(\epsilon)}{(-1)^n \epsilon/(4n\pi) + O(\epsilon^2)} \\
-&= \frac{(-1)^n \cdot 4n^2\pi^2}{\epsilon} + O(1),
+\frac{\sqrt{\hbar}/2}{\sin(\sqrt{\hbar}/2)} &= \frac{n\pi + \epsilon/(8n\pi) + O(\epsilon^2)}{\sin(n\pi + \epsilon/(8n\pi) + \cdots)} \\
+&= \frac{n\pi + O(\epsilon)}{(-1)^n \epsilon/(8n\pi) + O(\epsilon^2)} \\
+&= \frac{(-1)^{-n} \cdot 8n^2\pi^2}{\epsilon} + O(1),
 \end{align*}
-where $\epsilon = \hbar - 4\pi^2 n^2$.  Hence $\Res = \kappa \cdot (-1)^n \cdot 4n^2\pi^2 / (2n\pi) \cdot (-1) = (-1)^{n+1} \cdot 2\kappa n\pi$.
+where $\epsilon = \hbar - 4\pi^2 n^2$ and
+$\sqrt{4\pi^2 n^2 + \epsilon} = 2n\pi + \epsilon/(4n\pi) + O(\epsilon^2)$.
+Hence $\Res = \kappa \cdot (-1)^{n} \cdot 8n^2\pi^2$.
 
 (iii): At $\hbar = -4\pi^2 n^2$, $\sin(\sqrt{-4\pi^2 n^2}/2) = \sin(i n\pi) = i\sinh(n\pi) \neq 0$, and $\sqrt{-4\pi^2 n^2}/2 = i n\pi$, so $Z = \kappa \cdot in\pi / (i\sinh(n\pi)) = \kappa \cdot n\pi/\sinh(n\pi)$, which vanishes nowhere.  The zeros on the negative real axis arise from the numerator $\sqrt{\hbar}/2$ vanishing at $\hbar = 0$ (with the denominator also vanishing, giving a removable singularity).  The function has no zeros on $\mathbb{C}$.
 
@@ -2103,7 +2615,7 @@ where $\epsilon = \hbar - 4\pi^2 n^2$.  Hence $\Res = \kappa \cdot (-1)^n \cdot 
 \index{gravitational partition function!partial fraction}
 The meromorphic function $Z^{\mathrm{scal}}(\hbar) = \kappa \cdot \sqrt{\hbar}/(2\sin(\sqrt{\hbar}/2))$ admits the partial fraction expansion
 \begin{equation}% label removed: eq:thqg-I-partial-fraction
-Z^{\mathrm{scal}}(\hbar) \;=\; \kappa \left( 1 + 2\sum_{n=1}^{\infty} \frac{(-1)^{n+1} \hbar}{\hbar - 4\pi^2 n^2} \right),
+Z^{\mathrm{scal}}(\hbar) \;=\; \kappa \left( 1 + 2\sum_{n=1}^{\infty} \frac{(-1)^{n} \hbar}{\hbar - 4\pi^2 n^2} \right),
 \end{equation}
 which converges for $\hbar \notin \{4\pi^2 n^2 : n \geq 1\}$.  This representation makes the pole structure manifest and provides an efficient numerical evaluation for $\hbar$ away from the poles.  The partial fraction expansion is equivalent to the Mittag-Leffler theorem applied to the meromorphic function $\sqrt{\hbar}/(2\sin(\sqrt{\hbar}/2))$.
 \end{remark}

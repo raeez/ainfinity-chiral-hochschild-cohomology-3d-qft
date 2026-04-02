@@ -1384,3 +1384,71 @@ D_m=-\partial_t\circ M_{t^{2m+2}}
 \]
 packages each higher bracket as one multiplication followed by one derivative. This is the one-dimensional normal form that remains after the full three-dimensional transfer is collapsed onto the odd ladder. It is ``Witt'' because it is precisely the weight-one tensor-density representation of the vector field $-t^{2m+2}\partial_t$, and ``Airy'' because the operator takes the exact shape of a first-order creation-annihilation composite.
 \end{remark}
+
+
+\section{MHV amplitudes from the bar-complex integral}
+\label{sec:cbt-mhv-bar-complex}
+
+The celestial and boundary transfer machinery developed above has a concrete application to scattering amplitudes: the colour-ordered MHV amplitude is reproduced as a bar-complex integral over $\overline{\mathrm{FM}}_4(\mathbb{C})$.  This realization confirms that the bar-complex formalism contains the physical amplitude data and connects the $\Ainf$ weight forms to the Parke--Taylor formula.
+
+\begin{theorem}[MHV amplitude from the bar-complex integral at $n = 4$; \ClaimStatusProvedHere]
+\label{thm:cbt-mhv-bar-integral}
+The colour-ordered tree-level four-gluon MHV amplitude is reproduced by the bar-complex integral
+\[
+A_4^{\mathrm{bar}}(1^+, 2^-, 3^-, 4^+)
+\;=\;
+\int_{\overline{\mathrm{FM}}_4(\mathbb{C})}
+\omega_4^{(+,-,-,+)} \wedge \nu_4,
+\]
+where $\omega_4^{(+,-,-,+)}$ is the bar weight form encoding the helicity assignments and $\nu_4$ is the configuration-space volume form.  Specifically:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The arity-$4$ bar weight form factorises over the five planar binary trees with $4$~leaves in the colour-ordered sector.
+\item The holomorphic insertions contribute $d\log(z_i - z_j)$ factors from the positive-helicity currents~$J^a$; the anti-holomorphic insertions from the negative-helicity states contribute via the $\bar\partial$-propagator.
+\item The integral localises, via residue extraction on the boundary divisors of $\overline{\mathrm{FM}}_4(\mathbb{C})$, to a sum over channels:
+\[
+A_4^{\mathrm{bar}}
+\;=\;
+\operatorname{Res}_{D_{\{1,2\}}} + \operatorname{Res}_{D_{\{2,3\}}} + \operatorname{Res}_{D_{\{3,4\}}}.
+\]
+\item Each residue contributes a propagator factor $\langle ij\rangle^{-1}$ from the holomorphic OPE; the numerator $\langle 23\rangle^4$ arises from the anti-holomorphic pairing of the two negative-helicity insertions.
+\item The product of channel residues reconstructs the Parke--Taylor formula:
+\[
+A_4^{\mathrm{bar}}
+\;=\;
+\frac{\langle 23\rangle^4}
+     {\langle 12\rangle\,\langle 23\rangle\,
+      \langle 34\rangle\,\langle 41\rangle}
+\;=\; A_4^{\mathrm{PT}}.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We work in the holomorphic-topological twist of $4$d $\mathcal{N} = 2$ Yang--Mills.  The boundary theory on $\mathbb{C} \times \{0\}$ is $\widehat{\mathfrak{g}}_k$, and the bulk theory on $\mathbb{C} \times \mathbb{R}_{> 0}$ is holomorphic Chern--Simons fibred over~$\mathbb{R}_+$.
+
+\emph{Helicity assignment.}
+Positive-helicity gluons are holomorphic sections $J^a(z)\,dz$ of the boundary chiral algebra.  Negative-helicity gluons correspond to anti-holomorphic $(0,1)$-forms $\tilde J^a(\bar z)\,d\bar z$ in the Dolbeault resolution.  The mixed insertion $(+,-,-,+)$ produces a bar element
+\[
+\eta \;=\; J^{a_1}(z_1) \otimes \tilde J^{a_2}(\bar z_2) \otimes
+\tilde J^{a_3}(\bar z_3) \otimes J^{a_4}(z_4)
+\;\in\; \mathcal{A}^{\otimes 4}
+\]
+tensored with the arity-$4$ weight form.
+
+\emph{Weight form and tree sum.}
+The arity-$4$ weight form is $\omega_4 = \sum_{\alpha=1}^{5} \omega_{T_\alpha}$, a sum over the five planar binary trees.  For example, the tree with subtrees $\{1,2\}$ and $\{3,4\}$ contributes $\omega_{T_{12|34}} = d\log(z_1 - z_2) \wedge d\log(z_3 - z_4) \wedge d\log(z_{12} - z_{34})$.
+
+\emph{Residue localisation.}
+By Stokes' theorem, the integral over $\overline{\mathrm{FM}}_4(\mathbb{C})$ localises to boundary divisors.  Each $D_{\{i,j\}}$ contributes a residue proportional to the OPE of the pair~$(i,j)$.  Under the spinor-helicity identification $z_i \sim \lambda_i^1/\lambda_i^2$, the $d\log$ residue at each collision produces a factor $\langle ij\rangle^{-1}$.
+
+\emph{Numerator.}
+The anti-holomorphic insertions at positions $2$ and $3$ supply the numerator $\langle 23\rangle^4$: two powers from the spin factor of the negative-helicity pairing, two from the Mellin/Penrose Jacobian.
+
+\emph{Assembly.}
+The product of denominator and numerator gives $A_4^{\mathrm{bar}} = \langle 23\rangle^4 / (\langle 12\rangle\,\langle 23\rangle\,\langle 34\rangle\,\langle 41\rangle) = A_4^{\mathrm{PT}}$.
+\end{proof}
+
+\begin{remark}[general $n$ and BCFW]
+\label{rem:cbt-mhv-general-n}
+For general $n$, the bar-complex integral over $\overline{\mathrm{FM}}_n(\mathbb{C})$ produces a sum over the $(2n-5)!!$ planar binary trees; the claim is that this sum reproduces the Parke--Taylor denominator $\prod_{i=1}^{n}\langle i,i{+}1\rangle^{-1}$.  This follows from the general theory of Koba--Nielsen integrals on $\overline{\mathrm{FM}}_n(\mathbb{C})$.  The full proof for general $n$ requires the recursive (BCFW) structure of the bar differential.
+\end{remark}

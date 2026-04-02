@@ -1599,10 +1599,10 @@ the coefficient to be exactly $1/n$, extending the pattern $\frac12$
 
 \begin{remark}[The Dynkin projection as open-color counit]
 \label{rem:dynkin-counit}
-The universal coefficient $1/n$ at filtration $n$ is the eigenvalue of
-the Dynkin projection
-$D_n\colon T^n(V)\to\Lie^n(V)$, $D_n=\frac{1}{n}\ell_n$, evaluated on
-the ordered concatenation $X_1\otimes\cdots\otimes X_n$.  The $1/n$
+The universal coefficient $1/n$ at filtration $n$ is the Dynkin
+projection $D_n\colon T^n(V)\to\Lie^n(V)$, $D_n=\frac{1}{n}\ell_n$,
+applied to the ordered concatenation $X_1\otimes\cdots\otimes X_n$:
+$D_n(X_1\cdots X_n) = \frac{1}{n}[X_1,[X_2,\ldots,X_n]\cdots]$.  The $1/n$
 arises from the beta integral $\int_0^1(1-t)^{n-1}\,dt$, which
 encodes the combinatorics of all compositions contributing to the BCH
 logarithm.
@@ -1859,8 +1859,64 @@ step arise inevitably from the Lie theory of $\fg$.
 
 For Kac--Moody algebras with root multiplicities $>1$, the argument
 genuinely fails, and spectral Drinfeld obstructions could survive in
-the higher-dimensional root spaces.  This is the correct frontier.
+the higher-dimensional root spaces.  The frontier admits a
+precise stratification.
 \end{remark}
+
+\begin{conjecture}[Affine strictification; \ClaimStatusConjectured]%
+\label{conj:affine-strictification}%
+\index{strictification!affine conjecture}%
+Complete strictification extends to all untwisted affine Lie
+algebras~$\widehat\fg$.  Specifically:
+\begin{enumerate}
+\item \emph{Real roots} $\alpha + n\delta$ have multiplicity~$1$.
+  Theorem~\textup{\ref{thm:complete-strictification}} applies
+  verbatim.
+\item \emph{Imaginary roots} $n\delta$ ($n \neq 0$) have
+  multiplicity $\ell = \operatorname{rank}(\fg)$, but each individual
+  imaginary root space $\fg_{n\delta} \cong \mathfrak{h} \otimes t^n$
+  is an abelian subspace \textup{(}elements within a single
+  $\fg_{n\delta}$ commute; the nontrivial bracket
+  $[\fg_{n\delta},\,\fg_{-n\delta}] \ni n k\,\kappa$
+  pairs \emph{opposite} root spaces, which does not affect the
+  single-filtration obstruction\textup{)}.  The Cartan gauge-twist
+  theorem
+  \textup{(}Theorem~\textup{\ref{thm:cartan-gauge-twist}}\textup{)}
+  produces exact defects for abelian sectors independently of the
+  dimension of~$\mathfrak{h}$, so no obstruction survives.
+\item \emph{Mixed sectors} (real $+$ imaginary constituents):
+  a sum of roots $\beta_1 + \cdots + \beta_p$ involving both
+  real and imaginary constituents lands in a root
+  $\gamma$ of $\widehat\fg$, which is either real
+  (multiplicity~$1$, covered by~(1)) or imaginary
+  (covered by~(2)).  The precise mechanism for the
+  reduction to these two cases --- showing that the
+  multilinear Lie monomial computation in mixed sectors
+  is controlled by the real and imaginary sub-computations
+  separately --- requires a detailed analysis of how
+  iterated brackets of real and imaginary root vectors
+  interact in $\widehat\fg$; this analysis is not carried
+  out here.
+\end{enumerate}
+\emph{Caveat.}  The Cartan gauge-twist theorem requires that
+the Cartan operators commute with the unshifted connection
+$A_n^0$.  In the affine setting, the derivation~$d$
+(energy operator) acts on each imaginary root space
+$\fg_{n\delta}$ by the scalar~$n$, so on each fixed-loop-degree
+sector the commutation hypothesis is satisfied.  The
+hypothesis should be verified explicitly for the full
+spectral connection before the conjecture is promoted
+to a theorem.
+
+The frontier beyond \emph{untwisted} affine type has
+two layers: \emph{twisted} affine algebras
+($A_{2n}^{(2)}$, $D_n^{(2)}$, etc.), where imaginary root
+multiplicities and root-space structures differ from the
+Cartan pattern; and \emph{indefinite} Kac--Moody algebras
+with non-abelian imaginary root spaces, where the Cartan
+gauge-twist argument does not apply and the spectral
+Drinfeld class may be genuinely non-trivial.
+\end{conjecture}
 
 \section{Synthesis}
 
@@ -1912,4 +1968,92 @@ category.  The corresponding positivity theorem of Volume~I gives
 \]
 which is the
 positive-definiteness certificate of the $\bC$-face.
+\end{remark}
+
+\begin{remark}[The gravitational Yangian: explicit bracket computations]%
+\label{rem:gravitational-yangian-explicit-brackets}%
+\ClaimStatusProvedHere
+Specialising the strictification programme to the Virasoro boundary
+$\cA = \mathrm{Vir}_c$ produces the \emph{gravitational Yangian}
+$Y^{\mathrm{dg}}(\mathrm{Vir}_c)$, whose generators and relations
+can be computed explicitly.  On the Koszul dual
+$\mathrm{Vir}_{c'} = \mathrm{Vir}_{26-c}$, define the level-$r$
+generators
+\[
+\mathsf{T}_n^{(r)} := \tbinom{n+r-1}{r}\,L_{-n-r},
+\qquad
+\Omega_r = \sum_{n \in \bZ}
+\mathsf{T}_n^{(r)} \otimes L_n,
+\]
+so that $r(z) = \sum_{r \ge 0}\Omega_r\,z^{-r-1}$ is the collision
+residue $r$-matrix (bar-theoretic, cf.~AP19).  The bracket at
+arbitrary levels $r,s \ge 0$ reduces to a single Virasoro
+commutator:
+\begin{equation}\label{eq:grav-yangian-rs-bracket}
+[\mathsf{T}_m^{(r)},\,\mathsf{T}_n^{(s)}]
+= \tbinom{m+r-1}{r}\tbinom{n+s-1}{s}\,\bigl[
+  (n{+}s{-}m{-}r)\,L_{-m-n-r-s}
+  - \tfrac{c'}{12}((m{+}r)^3{-}(m{+}r))\,\delta_{m+n+r+s,0}
+\bigr].
+\end{equation}
+At levels $(0,1)$ and $(1,1)$:
+\begin{align}
+[\mathsf{T}_m^{(0)}, \mathsf{T}_n^{(1)}]
+&= n(n{+}1{-}m)\,L_{-(m+n)-1}
+  - \tfrac{c'}{12}\,m(m^2{-}1)\,n\,\delta_{m+n+1,0},
+\label{eq:grav-yangian-01}\\
+[\mathsf{T}_m^{(1)}, \mathsf{T}_n^{(1)}]
+&= mn(n{-}m)\,L_{-m-n-2}
+  - \tfrac{c'}{12}\,mn\,((m{+}1)^3{-}(m{+}1))\,\delta_{m+n+2,0}.
+\label{eq:grav-yangian-11}
+\end{align}
+Crucially, $\mathsf{T}_n^{(r)} = \binom{n+r-1}{r}\,L_{-n-r}$ is a
+\emph{scalar multiple} of a single Virasoro mode: all levels are
+linearly dependent on level~$0$.  There is no independent Yangian
+partner generator.  As a Lie algebra,
+$Y^{\mathrm{dg}}(\mathrm{Vir}_c) \cong \mathrm{Vir}_{c'}$.
+
+The genuine dg-shifted Yangian content lies in the infinite
+$A_\infty$ product tower $\{m_k^{\mathrm{Vir}}\}_{k \ge 3}$
+(encoding non-formality of the boundary OPE), the strictly primitive
+coproduct $\Delta_z(x) = \tau_z(x) \otimes 1 + 1 \otimes x$, and
+the higher-pole $r$-matrix $r(z) = (c'/2)/z^3 + 2T/z + \cdots$.
+The gravitational Yangian is thus a \emph{curved}
+$A_\infty$-deformation of $U(\mathrm{Vir}_{c'})$, not a filtered
+deformation of $U(\mathrm{Witt}[t])$.  This is the open-colour
+shadow of the non-formality computed in the $3d$ gravity movements
+(Chapter~\ref{chap:3d-gravity}).
+
+The contrast with the Kac--Moody case is immediate.  For
+$\widehat{\fg}_k$ the strictification of this chapter produces a
+\emph{strict} spectral factorization quantum group
+(Theorem~\ref{thm:complete-strictification}) with independent
+level-$1$ generators.  For $\mathrm{Vir}_c$ the level-$1$
+generators $\mathsf{T}_n^{(1)} = n\,L_{-n-1}$ collapse onto the
+Virasoro modes; the strictification programme becomes trivial at
+the Lie-algebraic level but the $A_\infty$ tower remains infinite.
+The gravitational Yangian is the Virasoro algebra with the
+$A_\infty$ shadow tower exposed: the entire scattering content of
+$3d$ quantum gravity is determined by the single $\lambda$-bracket
+$\{T{}_\lambda T\} = \partial T + 2T\lambda + (c/12)\lambda^3$.
+\end{remark}
+
+\begin{remark}[Gravitational Yangian collapse]
+\label{rem:gravitational-yangian-collapse}
+\index{gravitational Yangian!collapse phenomenon}
+Unlike the affine Yangian $Y(\mathfrak{sl}_2)$ where the level-$1$
+generators $e_1, f_1, h_1$ are independent of $e_0, f_0, h_0$,
+the gravitational dg-shifted Yangian $Y^{\mathrm{dg}}(\mathrm{Vir}_c)$ has
+\emph{all} level-$r$ generators linearly dependent on level-$0$:
+\[
+\mathsf{T}_n^{(r)} \;=\; \binom{n+r-1}{r}\,L_{-n-r}
+\]
+\textup{(}a scalar multiple of a single Virasoro mode\textup{)}.
+As a Lie algebra, $Y^{\mathrm{dg}}(\mathrm{Vir}_c)$ is isomorphic to
+$\mathrm{Vir}_{c'}$ where $c' = 26 - c$.  The genuine content of
+the dg-shifted Yangian lies entirely in the $A_\infty$ tower
+$\{m_k\}_{k \ge 3}$, not in higher-level Yangian generators.
+The structure is finitely \emph{determined} by the pair $(m_2, h)$
+via the resolvent tree formula, but is \emph{not} finitely
+generated: $m_k \ne 0$ for all $k \ge 3$ and generic~$c$.
 \end{remark}

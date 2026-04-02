@@ -86,7 +86,7 @@ $\barB^{\mathrm{mod}}(\cA)$, and write $D_\cA = d_0 + \Theta_\cA$ where
 $d_0$ is the genus-$0$ differential.  The identity $D_\cA^2 = 0$,
 expanded in genus grading, yields the recursion
 \begin{equation}
-% label removed: eq:mc-genus-recursion
+\label{eq:mc-genus-recursion}
 d_0 \Theta_\cA^{(G)}
 \;=\;
 -\omega_G^{\mathrm{ns}} - \omega_G^{\mathrm{sep}} - \omega_G^{\mathrm{int}},
@@ -149,7 +149,7 @@ theory of Theorem~\ref{thm:all-genus-obstruction-tower}.
 \end{proof}
 
 \begin{corollary}[Contracting homotopy from Koszulness; \ClaimStatusProvedHere]
-% label removed: cor:contracting-homotopy-koszul
+\label{cor:contracting-homotopy-koszul}
 If $\cA$ is chirally Koszul, then $H^2(\mathfrak{g}^{(G)}, d_0) = 0$ for all
 $G \geq 1$ (Vol~I, Theorem~\ref*{V1-thm:koszul-equivalences-meta}, condition~(vii):
 FH concentration).  In particular, the contracting homotopy
@@ -238,7 +238,7 @@ normalization.
 \end{remark}
 
 \begin{computation}[Genus $2$: three-shell decomposition; \ClaimStatusProvedHere]
-% label removed: comp:genus-2-three-shell
+\label{comp:genus-2-three-shell}
 At genus $2$, the recursion has all three types of contributions:
 \begin{align}
 % label removed: eq:genus-2-ns
@@ -372,7 +372,7 @@ g & F_g(\mathcal{H}_k) & F_g(\mathrm{Vir}_c) \\
 \]
 The general formula is
 \begin{equation}
-% label removed: eq:fg-general
+\label{eq:fg-general}
 F_g(\cA)
 = \kappa(\cA) \cdot \frac{2^{2g-1} - 1}{2^{2g-1}} \cdot \frac{|B_{2g}|}{(2g)!},
 \end{equation}
@@ -407,14 +407,30 @@ Heisenberg column (at matching central charge $c$), reflecting $\kappa(\mathrm{V
 versus $\kappa(\mathcal{H}_c) = c$.
 \end{proof}
 
-\begin{remark}[Asymptotics]
+\begin{remark}[Asymptotics and convergence]
 % label removed: rem:free-energy-asymptotics
-The free energies grow factorially:
-$F_g(\cA) \sim \kappa(\cA) \cdot \frac{2}{(2\pi)^{2g}} \cdot (2g-2)!$
-as $g \to \infty$.  This is the standard Gevrey-$1$ growth of perturbative
-string amplitudes, reflecting the asymptotic nature of the genus expansion.
-The Borel summability of the series $\sum F_g \h^{2g-2}$ is equivalent to
-the analytic sewing theorem (Vol~I, Theorem~\ref*{thm:general-hs-sewing}).
+The scalar free energies decay exponentially:
+$F_g(\cA) \sim 2\kappa(\cA)/(2\pi)^{2g}$
+as $g \to \infty$, by the Faber--Pandharipande formula
+and the Bernoulli asymptotic $|B_{2g}| \sim 2\,(2g)!/(2\pi)^{2g}$
+--- the factorial in~$|B_{2g}|$ is \emph{exactly cancelled}
+by the $(2g)!$ in the denominator of~$\lambda_g^{\mathrm{FP}}$.
+The scalar genus series $\sum F_g\,\h^{2g}$ therefore
+\emph{converges absolutely} for $|\h| < 2\pi$
+(equivalently, $|\h^2| < 4\pi^2$), and the Borel
+transform is entire.  This is \emph{not} the factorially
+divergent Gevrey-$1$ behaviour of matrix-model genus
+expansions.  The convergence reflects the compactness
+of~$\overline{\cM}_g$ and the exponential decay of
+$\lambda_g^{\mathrm{FP}} \sim 2/(2\pi)^{2g}$: the Hodge integrals
+that define the scalar lane are tame.
+Factorial growth and resurgent trans-series enter
+only through the \emph{shadow tower}
+(the non-scalar higher-arity corrections $S_r$,
+$r \ge 3$), which for class~$\mathbf{M}$ algebras
+at $|c| < 6$ diverges geometrically
+with growth rate~$\rho > 1$
+(\S\ref*{subsec:gravity-shadow-tower}).
 \end{remark}
 
 \subsection{The genus spectral sequence}
@@ -451,13 +467,15 @@ The associated spectral sequence $\{E_r^{p,q}, d_r\}$ has:
 \end{enumerate}
 \end{construction}
 
-\begin{theorem}[Spectral sequence convergence; \ClaimStatusProvedHere]
+\begin{theorem}[Spectral-sequence support on the chirally Koszul surface; \ClaimStatusProvedHere]
 % label removed: thm:spectral-sequence-convergence
 If $\cA$ is chirally Koszul, then $E_1^{p,q} = 0$ for $q \neq 0$, and the spectral
-sequence degenerates at $E_1$ in the following sense: the genus-$g$ free energy
-$F_g(\cA)$ is determined by $E_1^{g,0}$, and no higher differentials contribute.
-In particular, the genus expansion $\{F_g\}_{g \geq 1}$ is completely determined by
-the curvature $\kappa(\cA)$ and the Bernoulli generating function.
+sequence is supported on the degree-$0$ line.  Consequently all higher
+differentials $d_r$ for $r \geq 2$ vanish, and the genus-by-genus scalar package is
+controlled by the $q=0$ line together with the non-separating BV differential
+$d_1$ on that line.  This does not by itself imply curvature-only reconstruction:
+additional finite or infinite shadow corrections may still survive on the
+degree-$0$ line.
 \end{theorem}
 
 \begin{proof}
@@ -466,41 +484,44 @@ Koszulness implies $H^q(\mathfrak{g}^{(p)}, d_\pi) = 0$ for $q \neq 0$
 $d_r: E_r^{p,0} \to E_r^{p+r,-r+1}$ lands in $E_r^{p+r, -r+1}$, which is zero
 for $r \geq 2$ because $-r + 1 < 0$.  Hence all differentials $d_r$ for $r \geq 2$
 vanish, and $E_\infty = E_2$.  The $d_1$ differential is the BV operator $\Delta$
-acting on the degree-$0$ line; its effect is captured by the universal formula
-\eqref{eq:fg-general}.
+acting on the degree-$0$ line.  On the Gaussian/class~G surface this reduces to
+the universal curvature/Bernoulli formula \eqref{eq:fg-general}, while for the
+finite-depth and infinite-depth shadow regimes the same $q=0$ line may still carry
+additional shadow corrections.
 \end{proof}
 
-\begin{remark}[Non-formal Swiss-cheese deformation]
+\begin{remark}[Swiss-cheese non-formality versus bar concentration]
 % label removed: rem:non-koszul-spectral
-For algebras with non-formal Swiss-cheese structure, the spectral sequence does \emph{not} degenerate at $E_1$.
-The higher differentials $d_r$ carry genuinely new information beyond $\kappa$.
-The shadow tower (Vol~I, \S\ref*{sec:shadow-postnikov-tower}) tracks exactly which
-$d_r$ are nonzero: the shadow depth $r_{\max}(\cA)$ is the largest $r$ for which
-$d_r \neq 0$ on the spectral sequence.  For class~M algebras (Virasoro, $\mathcal{W}_N$),
-all $d_r$ are potentially nonzero, and the genus expansion is not determined by
-finitely many invariants.
+Non-formal Swiss-cheese structure does \emph{not} by itself force failure of
+the $E_1$-degeneration statement above.  Bar concentration and Swiss-cheese
+formality are different properties.  On the standard chirally Koszul families,
+including class~M examples such as Virasoro and $\mathcal{W}_N$, the spectral
+sequence can still be supported on the degree-$0$ line.  What the shadow depth
+measures is the amount of shadow data needed on that line: classes~G/L/C are
+controlled by finite jets, while class~M carries an infinite shadow tower on the
+same $q=0$ reconstruction surface.
 \end{remark}
 
-\begin{proposition}[Spectral sequence and shadow depth; \ClaimStatusProvedHere]
+\begin{proposition}[Finite shadow depth controls the $q=0$ reconstruction; \ClaimStatusProvedHere]
 % label removed: prop:spectral-shadow-depth
-The following are equivalent:
+Assume $\cA$ is chirally Koszul and the shadow tower stabilizes at arity
+$r_{\max}$.  Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item The shadow tower $\Theta_\cA^{\leq r}$ stabilizes at arity $r_{\max}$, i.e.
-  $\Theta_\cA^{\leq r_{\max}} = \Theta_\cA$.
-\item The genus spectral sequence has $d_s = 0$ for all $s > r_{\max}$.
-\item The genus-$g$ free energy is determined by data at arity $\leq r_{\max}$ for all $g$.
+\item the genus spectral sequence is supported on the $q=0$ line and has
+  $d_s = 0$ for all $s \geq 2$;
+\item no shadow datum of arity $> r_{\max}$ enters the $q=0$ reconstruction;
+\item equivalently, the genus-$g$ scalar package is determined for all $g$ by the
+  finite jet $J^{r_{\max}}(\cA)$ together with the BV differential $d_1$ on the
+  degree-$0$ line.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-The identification between the shadow tower and the spectral sequence differentials
-is the content of the shadow-formality theorem (Vol~I,
-Proposition~\ref*{prop:shadow-formality-low-arity}): the arity-$r$ truncation of
-$\Theta_\cA$ governs the differential $d_r$.  Stabilization of the tower at
-$r_{\max}$ means $o_{r_{\max}+1} = 0$, which is equivalent to $d_{r_{\max}+1} = 0$
-and hence all subsequent differentials vanish.  The genus-$g$ amplitude then depends
-only on $\Theta^{\leq r_{\max}}$ because no spectral sequence differential beyond
-page $r_{\max}$ contributes.
+Part \textup{(i)} is exactly the previous theorem.  If the shadow tower
+stabilizes at arity $r_{\max}$, then $\Theta_\cA^{\leq r_{\max}} = \Theta_\cA$ and
+all shadow terms of arity $> r_{\max}$ vanish.  Hence only the finite jet
+$J^{r_{\max}}(\cA)$ contributes to the $d_1$-controlled reconstruction on the
+degree-$0$ line, giving \textup{(ii)} and \textup{(iii)}.
 \end{proof}
 
 
@@ -551,9 +572,6 @@ The following are equivalent:
 \item $\Theta_\cA^{\leq r_{\max}} = \Theta_\cA$;
 \item $J^{r_{\max}}(\cA) = J^\infty(\cA)$;
 \item the obstruction classes $o_{r+1}(\cA) = 0$ for all $r \geq r_{\max}$;
-\item the inverse system
-  $\{\cA^{\mathrm{sh}}_{r,0}\}_{r \geq r_{\max} + 1}$ satisfies the
-  Mittag-Leffler condition trivially (all transition maps are zero).
 \end{enumerate}
 \end{theorem}
 
@@ -564,12 +582,6 @@ $\Theta^{\leq r_{\max}} = \Theta$, then $\cA^{\mathrm{sh}}_{r,0} = 0$ for
 $r > r_{\max}$, so $J^{r_{\max}} = J^\infty$.  Conversely, if $J^R = J^\infty$ for
 some finite $R$, then all arity-$r$ shadows vanish for $r > R$, so
 $\Theta^{\leq R} = \Theta$.
-
-For (iv)$\Leftrightarrow$(v): the transition maps in the inverse system are the
-restriction maps $\cA^{\mathrm{sh}}_{r+1,0} \to \cA^{\mathrm{sh}}_{r,0}$, which
-are the cokernel quotients.  If $o_{r+1} = 0$ for $r \geq r_{\max}$, then
-$\cA^{\mathrm{sh}}_{r,0} = 0$ for $r > r_{\max}$, and the Mittag-Leffler condition
-is trivially satisfied (images stabilize at zero).  The converse is identical.
 \end{proof}
 
 \begin{remark}[Three uses of ``shadow'']
@@ -649,7 +661,7 @@ $S_r = 0$ for $r \geq 3$.
 % label removed: subsec:class-l-reconstruction
 
 \begin{theorem}[Class L reconstruction; \ClaimStatusProvedHere]
-% label removed: thm:class-l-reconstruction
+\label{thm:class-l-reconstruction}
 Let $\cA = \widehat{\mathfrak{g}}_k$ be the universal affine Kac--Moody algebra at
 non-critical level $k \neq -h^\vee$.  Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -718,7 +730,7 @@ is a complete invariant for the modular problem.
 % label removed: subsec:class-c-reconstruction
 
 \begin{theorem}[Class C reconstruction; \ClaimStatusProvedHere]
-% label removed: thm:class-c-reconstruction
+\label{thm:class-c-reconstruction}
 Let $\cA = V_{\beta\gamma}(\lambda)$ be the $\beta\gamma$ system at conformal weight
 $\lambda$.  Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
@@ -992,7 +1004,7 @@ S_r(z_1, \ldots, z_n)
 % label removed: thm:flatness-from-mc
 The shadow connection is flat:
 \begin{equation}
-% label removed: eq:flatness-equation
+\label{eq:flatness-equation}
 \bigl(\nabla^{\mathrm{hol}}_{0,n}\bigr)^2 = 0.
 \end{equation}
 \end{theorem}
@@ -1153,7 +1165,7 @@ gravitational comparison surface.
 % label removed: thm:sub-subleading-soft-theorem
 The arity-$4$ soft factor satisfies the flatness identity
 \begin{equation}
-% label removed: eq:s4-flatness
+\label{eq:s4-flatness}
 dS_4 + [S_2, S_3] + [S_3, S_2] + \frac{1}{6}[S_2, [S_2, S_2]] = 0.
 \end{equation}
 For the Virasoro algebra at central charge $c$, after gauge-trivializing $S_3$:
@@ -1383,11 +1395,12 @@ holographic datum (Construction~\ref{constr:celestial-hmkd}):
 \item For class~M theories, the full soft algebra is infinite-dimensional and is
   controlled by the inverse limit $J^\infty(\cA)$.
 \end{itemize}
-The shadow depth classification ($\mathbf{F}_r$/$\mathbf{M}$; G/L/C/M for the standard landscape) is therefore equivalent to the complexity
-of the soft algebra: class~G has a finite abelian soft algebra, class~L has a
-finite-dimensional Lie soft algebra, class~C has a finite-dimensional nonlinear
-soft algebra (with a quartic correction), and class~M has an infinite-dimensional
-soft algebra.
+On the theorematic and benchmark comparison surfaces where the corresponding soft
+operators are actually constructed, the shadow-depth language provides a
+bookkeeping dictionary for the complexity of the soft algebra: class~G aligns
+with finite abelian soft data, class~L with finite-dimensional Lie benchmark
+soft data, class~C with finite-dimensional nonlinear soft data (with a quartic
+correction), and class~M with an expected infinite-dimensional soft algebra.
 \end{remark}
 
 
@@ -1401,8 +1414,10 @@ soft algebra.
 We return to the holomorphic BF model on $S^3$ of
 \S\ref{subsec:holomorphic-bf-model-on-s3} and extend the vertex
 calculus to arities $3$, $4$, $5$ and beyond.  The goal is to
-compute the full modular class $W_1(A_{\mathrm{BF}})$ and
-determine whether the BF model lifts to all genera.
+analyze the sectorwise and low-mode structure of the completed one-wheel
+representative $W_1(A_{\mathrm{BF}})$, the associated boundary modular class
+on chosen regularization surfaces, and the resulting evidence for whether the
+BF model lifts to all genera.
 
 \subsection{Review of the boundary algebra}
 % label removed: subsec:bf-boundary-review
@@ -1445,7 +1460,7 @@ signs.
 \end{proof}
 
 \begin{proposition}[Mixed cubic coefficients; \ClaimStatusProvedHere]
-% label removed: prop:mixed-cubic-coefficients
+\label{prop:mixed-cubic-coefficients}
 For the mixed cubic sector with one $A^0$ input and two $A^1$ inputs, define
 \begin{equation}
 % label removed: eq:cubic-coefficients
@@ -1472,7 +1487,7 @@ for all $0 \leq p,q \leq 2$ before taking the final trace against $a_{p,q}$.
 % label removed: prop:cubic-antisymmetry
 The cubic coefficients satisfy the reflection identity
 \begin{equation}
-% label removed: eq:cubic-antisymmetry-verified
+\label{eq:cubic-antisymmetry-verified}
 c^{BA}_{p,q} = -c^{AB}_{2-p, 2-q},
 \end{equation}
 where $c^{BA}_{p,q} := \Tr(a_{p,q}\, m_3(a_{p,q}, b_{0,1}, b_{1,0}))$ is the
@@ -1661,12 +1676,14 @@ $\lceil \frac{1}{2}(\lfloor (n-1)^2/4 \rfloor + 1) \rceil$, which grows quadrati
 in $n$: the low-mode sector remains finite-dimensional at every arity.
 \end{remark}
 
-\subsection{The full modular class $W_1(A_{\mathrm{BF}})$}
+\subsection{Completed one-wheel formal sum and regularized modular-class package for BF}
 % label removed: subsec:full-modular-class-bf
 
 \begin{definition}[Completed one-wheel sum for BF]
 % label removed: def:completed-one-wheel-bf
-The full boundary modular class of the holomorphic BF boundary algebra is
+Fix a regularization scheme assigning regularized wheel weights $w_\Gamma$ for the
+holomorphic BF boundary algebra whenever the completed one-wheel sum is defined on
+the chosen surface.  We then denote by
 \begin{equation}
 % label removed: eq:w1-bf-full
 W_1(A_{\mathrm{BF}})
@@ -1676,7 +1693,10 @@ B_\Gamma(m_\bullet)
 \;\in\; \mathfrak{g}^{(1),2}_{A_{\mathrm{BF}}},
 \end{equation}
 where the sum runs over all connected stable graphs of first Betti number~$1$
-(Definition~\ref{def:one-wheel-sum-and-class}).  We decompose by vertex number:
+(Definition~\ref{def:one-wheel-sum-and-class}).  On that same chosen regularization
+surface, its cohomology class
+$\mathfrak W(A_{\mathrm{BF}}) = [W_1(A_{\mathrm{BF}})]$ is the corresponding
+boundary modular class.  We decompose the representative by vertex number:
 \begin{equation}
 % label removed: eq:w1-vertex-decomposition
 W_1(A_{\mathrm{BF}})
@@ -1685,41 +1705,38 @@ W_1(A_{\mathrm{BF}})
 where $W_1^{(k)}$ sums over wheel graphs with exactly $k$ vertices on the loop.
 \end{definition}
 
-\begin{theorem}[One-vertex contribution; \ClaimStatusProvedHere]
+\begin{theorem}[One-vertex tadpole representative for BF; \ClaimStatusProvedHere]
 % label removed: thm:one-vertex-w1-bf
-The one-vertex contribution to the modular class is the tadpole:
+The one-vertex contribution to the completed one-wheel representative is the
+tadpole:
 \begin{equation}
 % label removed: eq:w1-one-vertex
 W_1^{(1)} = \sum_{r,s \geq 0} \theta_{r,s}\, b_{r,s}
 = \sum_{m,n \geq 0} b_{2m,2n},
 \end{equation}
 by Theorem~\ref{thm:tadpole-projector}.  This is an infinite formal sum in the
-KK-completed deformation complex.  The tadpole series requires regularization:
-\begin{equation}
-% label removed: eq:tadpole-regularized
-W_1^{(1),\mathrm{reg}} = \zeta(-1)^2 = \frac{1}{144},
-\end{equation}
-using zeta-function regularization $\sum_{m \geq 0} 1 \to \zeta(0) = -1/2$ on each
-of the two KK towers.
+KK-completed deformation complex and requires regularization before any numerical
+evaluation.  No canonical regularized value is proved here.
 \end{theorem}
 
 \begin{proof}
 The tadpole sum $\sum_{m,n} b_{2m,2n}$ is formally divergent.  Each factor
 $\sum_{m \geq 0} b_{2m, *}$ is a sum over all even KK modes.  Zeta-function
 regularization assigns $\sum_{m=0}^{\infty} 1 \mapsto \zeta(0) = -1/2$.  The
-product of two such sums gives $(-1/2)^2 = 1/4$.  However, the correct
-regularization for the modular partition function includes the weight factor
-$w_\Gamma = |\Aut(\Gamma)|^{-1} = 1$, giving $W_1^{(1),\mathrm{reg}} = 1/4$.
+product of two such sums gives the finite part $(-1/2)^2 = 1/4$ in that simple
+factorized scheme.
 
 A more refined analysis using the actual KK spectrum of $S^3$ (with degeneracies
 $(r+s+1)$ at level $(r,s)$) gives a different regularized value.  The precise
 regularization depends on the scheme, but the key structural point is that $W_1^{(1)}$
-is an infinite sum that requires regularization, unlike the higher-vertex sectors.
+is a canonical infinite formal sum that requires regularization before any
+numerical evaluation, unlike the higher-vertex sectors.
 \end{proof}
 
-\begin{theorem}[Two-vertex contribution; \ClaimStatusProvedHere]
+\begin{theorem}[Two-vertex sector of the BF one-wheel representative; \ClaimStatusProvedHere]
 % label removed: thm:two-vertex-w1-bf
-The two-vertex contribution to the modular class decomposes by vertex types:
+The two-vertex contribution to the completed one-wheel representative decomposes
+by vertex types:
 \begin{equation}
 % label removed: eq:w1-two-vertex
 W_1^{(2)}
@@ -1756,7 +1773,7 @@ where the trace enforces $(2-p_1, 2-q_1) = (p_2, q_2)$.  This reduces the double
 to a single sum of $9$ terms.
 \end{proof}
 
-\begin{computation}[Three-vertex contribution; \ClaimStatusProvedHere]
+\begin{computation}[Three-vertex sector of the BF one-wheel representative; \ClaimStatusProvedHere]
 % label removed: comp:three-vertex-w1-bf
 The three-vertex wheel has three vertices on the loop connected by three internal edges.
 The simplest type has all vertices of arity~$2$ (binary), but since $m_2$ has no
@@ -1769,7 +1786,8 @@ external input.  The binary vertex $m_2$ connects two internal legs.  The total
 external content of a $(3,3,2)$ wheel is $b_{1,0}^2 b_{0,1}^2$, the same monomial
 as the two-vertex cubic-cubic wheel.
 
-The three-vertex contribution is
+The three-vertex contribution to the lowest-mode completed one-wheel
+representative is
 \begin{equation}
 % label removed: eq:w1-three-vertex
 W_1^{(3)}\big|_{\mathrm{low}} = B_{\mathrm{mix}}^{(3)} \cdot b_{1,0}^2 b_{0,1}^2,
@@ -1783,12 +1801,14 @@ range.
 \subsection{Obstruction tower: does BF lift to all genera?}
 % label removed: subsec:bf-obstruction-tower
 
-\begin{theorem}[BF obstruction analysis; \ClaimStatusProvedHere]
+\begin{theorem}[BF genus-$1$ obstruction on the loop-generated regularization surface; \ClaimStatusProvedHere]
 % label removed: thm:bf-obstruction-analysis
-The boundary modular class $\mathfrak{W}(A_{\mathrm{BF}}) = [W_1(A_{\mathrm{BF}})]$
-of the holomorphic BF boundary algebra satisfies:
+Assume the modular deformation package of the holomorphic BF boundary algebra is
+loop-generated, and fix a regularization scheme for which the completed one-wheel
+representative $W_1(A_{\mathrm{BF}})$ is defined.  Then the resulting cohomology
+class $\mathfrak{W}(A_{\mathrm{BF}}) = [W_1(A_{\mathrm{BF}})]$ satisfies:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item The regularized modular class is well-defined as an element of
+\item $\mathfrak{W}(A_{\mathrm{BF}})$ is a well-defined element of
   $H^2(\mathfrak{g}^{(1)}_{A_{\mathrm{BF}}}, d_\pi)$.
 \item The first obstruction to genus-$1$ lifting is
   $\Obs_1(A_{\mathrm{BF}}) = \mathfrak{W}(A_{\mathrm{BF}})$.
@@ -1797,19 +1817,24 @@ of the holomorphic BF boundary algebra satisfies:
 \end{theorem}
 
 \begin{proof}
-Parts (ii) and (iii) follow from Theorem~\ref{thm:one-wheel-reduction}.  Part~(i)
-requires showing that the regularized one-wheel sum defines a cohomology class
-independent of the regularization scheme.  This follows from the general
-regularization-independence theorem for one-wheel sums: different regularization
-schemes change $W_1$ by a $d_\pi$-exact term, so the cohomology class
-$\mathfrak{W}$ is well-defined.
+Under the stated hypotheses, Theorem~\ref{thm:one-wheel-reduction} gives that the
+chosen completed one-wheel representative $W_1(A_{\mathrm{BF}})$ is $d_\pi$-closed
+and that its cohomology class agrees with the first obstruction class.  This gives
+\textup{(i)} and \textup{(ii)}.  Part \textup{(iii)} is then the genus-$1$
+vanishing criterion from Corollary~\ref{cor:vanishing-criterion-and-additivity}.
+
+No regularization-independence theorem for BF is proved in this chapter: the point
+here is only that once a loop-generated regularization surface has been fixed and
+$W_1(A_{\mathrm{BF}})$ is defined there, its cohomology class governs the genus-$1$
+obstruction.
 \end{proof}
 
 \begin{conjecture}[BF modular lifting; \ClaimStatusConjectured]
-% label removed: conj:bf-modular-lifting
-The holomorphic BF boundary algebra lifts to all genera:
-$\mathfrak{W}(A_{\mathrm{BF}}) = 0$.  Equivalently, the boundary modular
-Maurer--Cartan problem admits a full solution $\Pi(\h)$.
+\label{conj:bf-modular-lifting}
+The holomorphic BF boundary algebra lifts to all genera: the full obstruction
+tower vanishes, equivalently the boundary modular Maurer--Cartan problem admits
+a full solution $\Pi(\h)$.  In particular, the genus-$1$ obstruction
+$\mathfrak{W}(A_{\mathrm{BF}})$ vanishes.
 \end{conjecture}
 
 \begin{remark}[Evidence for the conjecture]
@@ -1819,43 +1844,47 @@ The conjecture is supported by the following evidence:
 \item The bulk BF theory is topological and has a well-defined partition function at
   all genera.  By the holographic correspondence
   (Theorem~\ref{thm:relative-bulk-boundary-reconstruction}), if the cone cohomology
-  $H^2(\Cone(F_\pi)) = 0$, then the boundary lift is equivalent to the bulk lift.
-\item The boundary algebra $A_{\mathrm{BF}}$ is a commutative algebra on cohomology,
-  which means it is Koszul (as a commutative algebra, the bar complex is the
-  Chevalley--Eilenberg complex of the dual Lie algebra).  By the Koszul vanishing
-  theorem (Corollary~\ref{cor:contracting-homotopy-koszul}), the obstruction
-  cohomology $H^2(\mathfrak{g}^{(G)}, d_\pi)$ vanishes for all $G \geq 1$.
+  satisfies $H^1(\Cone(F_\pi)) = H^2(\Cone(F_\pi)) = 0$, then the genus-by-genus
+  boundary and bulk lift problems are equivalent up to gauge.
+\item The boundary algebra $A_{\mathrm{BF}}$ is commutative on cohomology, so it lies
+  near the free-commutative benchmark where a Koszul vanishing route would be
+  available.  However, the chirally Koszul hypothesis needed for
+  Corollary~\ref{cor:contracting-homotopy-koszul} is not proved here for
+  $A_{\mathrm{BF}}$.  Thus the Koszul argument is only a conditional route to
+  vanishing of the obstruction cohomology, not a theorematic consequence of
+  commutativity alone.
 \item The finite-jet analysis shows that the charged modular data is concentrated
   in a rigid, finite-dimensional locus.  The constraints on this locus from the
-  Wess--Zumino identities and stable-graph factorization are overdetermined, which
-  typically forces vanishing.
+  Wess--Zumino identities and stable-graph factorization are highly restrictive,
+  which suggests a plausible low-mode vanishing mechanism but does not by itself
+  prove vanishing.
 \end{enumerate}
 \end{remark}
 
-\subsection{BF triviality from the topological Steinberg}
+\subsection{Topological Steinberg heuristic for BF}
 % label removed: subsec:bf-triviality-steinberg
 
 \providecommand{\Mvac}{\mathcal{M}_{\mathrm{vac}}}
 \providecommand{\Steinberg}{\mathfrak{S}}
 
-We now prove Conjecture~\ref{conj:bf-modular-lifting} outright, by
-exploiting the exactness of the shifted symplectic structure on the
-BF vacuum moduli.  The argument reduces the modular lifting problem
-to a computation in shifted symplectic geometry: an exact symplectic
-target forces the Steinberg object to be contractible, so the
-obstruction complex is acyclic.
+We do not prove Conjecture~\ref{conj:bf-modular-lifting} outright here.
+Instead, we record a geometric heuristic route: if the shifted symplectic
+structure on the BF vacuum moduli is globally exact in the needed sense,
+and if that exact primitive trivializes the associated Steinberg
+self-intersection compatibly with the obstruction complex, then one
+would expect the modular lifting problem to become acyclic.
 
-\begin{proposition}[Exactness of the BF symplectic structure; \ClaimStatusProvedHere]
-% label removed: prop:bf-exact-symplectic
-The $(-2)$-shifted symplectic structure on $\Mvac(\mathrm{BF})$ is exact:
-there exists a $(-3)$-shifted $1$-form $\alpha$ such that
-$\omega = d\alpha$.  Consequently, the Steinberg object
+\begin{proposition}[Exactness heuristic for the BF symplectic structure; \ClaimStatusHeuristic]
+\label{prop:bf-exact-symplectic}
+In the AKSZ description of BF theory, the shifted symplectic structure on
+$\Mvac(\mathrm{BF})$ is expected to admit a primitive $\alpha$ with
+$\omega = d\alpha$.  On that heuristic surface, the Steinberg object
 $\Steinberg_b^{\mathrm{BF}}$ is the derived self-intersection of a
 Lagrangian in an exact symplectic space.
 \end{proposition}
 
 \begin{proof}
-The vacuum moduli $\Mvac(\mathrm{BF})$ is the derived moduli of flat
+Heuristically, the vacuum moduli $\Mvac(\mathrm{BF})$ is the derived moduli of flat
 $\mathfrak{g}$-bundles, which carries a canonical $(-2)$-shifted
 symplectic form $\omega$ given by the Atiyah class pairing.  For BF
 theory, the action functional is linear in the auxiliary field $B$, so
@@ -1873,12 +1902,15 @@ the derived self-intersection of $\mathcal{L}_b$ inside the exact
 symplectic space $(\Mvac(\mathrm{BF}), d\alpha)$.
 \end{proof}
 
-\begin{proposition}[Contractibility of the exact Steinberg; \ClaimStatusProvedHere]
-% label removed: prop:exact-steinberg-contractible
+\begin{proposition}[Heuristic contractibility of the exact Steinberg; \ClaimStatusHeuristic]
+\label{prop:exact-steinberg-contractible}
 Let $(X, \omega = d\alpha)$ be an exact $(-2)$-shifted symplectic
 derived stack and let $\mathcal{L} \hookrightarrow X$ be a Lagrangian.
-Then the derived self-intersection
-$\Steinberg = \mathcal{L} \times_X \mathcal{L}$ is formally equivalent
+Assume in addition that the exact primitive and the shifted Darboux model can be
+matched compatibly so that the induced Maurer--Cartan element of the
+self-intersection becomes exact in the governing deformation complex.
+Then one expects the derived self-intersection
+$\Steinberg = \mathcal{L} \times_X \mathcal{L}$ to be formally equivalent
 to the zero-section $\mathcal{L} \hookrightarrow T^*[-1]\mathcal{L}$:
 \[
   \Steinberg \;\simeq\; \mathcal{L}.
@@ -1886,7 +1918,7 @@ to the zero-section $\mathcal{L} \hookrightarrow T^*[-1]\mathcal{L}$:
 \end{proposition}
 
 \begin{proof}
-By the Lagrangian neighborhood theorem in the shifted setting
+Formally, by the Lagrangian neighborhood theorem in the shifted setting
 (Calaque, Pantev--To\"en--Vaqui\'e--Vezzosi), there exists a
 formal symplectomorphism $\varphi$ from a formal neighborhood of
 $\mathcal{L}$ in $X$ to a formal neighborhood of the zero-section
@@ -1915,59 +1947,64 @@ the self-intersection provides a null-homotopy
 $h \colon C^*(\Steinberg) \to C^{*-1}(\Steinberg)$ satisfying
 $[d, h] = \mathrm{id} - \iota_* \pi^*$, where $\iota$ and $\pi$
 are the inclusion and projection for the diagonal.  Thus $\Steinberg$
-is formally contractible onto $\mathcal{L}$.
+is expected to be formally contractible onto $\mathcal{L}$ on this
+heuristic exact-Steinberg surface.
 \end{proof}
 
-\begin{corollary}[Resolution of the BF modular lifting conjecture; \ClaimStatusProvedHere]
-% label removed: cor:bf-modular-lifting-resolved
-The modular obstruction vanishes: $\mathfrak{W}(A_{\mathrm{BF}}) = 0$.
-The modular Maurer--Cartan problem admits a full solution
-$\Pi(\h)$.  For each genus $g \geq 1$, the genus-$g$ Steinberg
-$\Steinberg_b^{\mathrm{BF},g}$ is contractible.
+\begin{corollary}[Heuristic BF modular lifting package; \ClaimStatusHeuristic]
+\label{cor:bf-modular-lifting-resolved}
+Under the exact-Steinberg heuristic above, one would obtain
+vanishing of the full obstruction tower $\{\mathfrak{W}_g\}_{g\ge 1}$,
+hence in particular $\mathfrak{W}(A_{\mathrm{BF}})=0$, together with a
+full solution $\Pi(\h)$ of the modular Maurer--Cartan problem and
+contractibility of each genus-$g$ Steinberg
+$\Steinberg_b^{\mathrm{BF},g}$ for $g \geq 1$.
 \end{corollary}
 
 \begin{proof}
-By Proposition~\ref{prop:bf-exact-symplectic}, the $(-2)$-shifted
+Assuming the exactness and contractibility heuristics above, the $(-2)$-shifted
 symplectic form on $\Mvac^g(\mathrm{BF})$ is exact for every genus $g$:
 the Hodge twist $\omega_g$ is the pullback of the BF symplectic form
 along the projection to the fiber over $\overline{\mathcal{M}}_g$,
 and the primitive $\alpha$ pulls back to a primitive $\alpha_g$.  The
-contracting homotopy of Proposition~\ref{prop:exact-steinberg-contractible}
+contractibility mechanism of Proposition~\ref{prop:exact-steinberg-contractible}
 therefore applies at each genus, yielding
 $\Steinberg_b^{\mathrm{BF},g} \simeq \mathcal{L}_b$ for all $g$.
 
-A contractible Steinberg has vanishing obstruction cohomology:
-$H^2(\Steinberg_b^{\mathrm{BF},g}) = 0$.  By the recursive
-obstruction--deformation sequence of
-Proposition~\ref{prop:recursive-wheel-determination}, the genus-$g$
-obstruction class $\mathfrak{W}_g$ vanishes for all $g \geq 1$.
-Hence $\mathfrak{W}(A_{\mathrm{BF}}) = \sum_{g \geq 1} \h^{2g}
-\mathfrak{W}_g = 0$, and the full solution $\Pi(\h)$ exists by
-inductive lifting.
+A contractible Steinberg would suggest that the corresponding genus-$g$
+obstruction complex is acyclic, hence that the relevant obstruction class
+should vanish.  On that heuristic reading, the genus-by-genus
+obstruction--deformation sequence would force the genus-$g$
+obstruction class $\mathfrak{W}_g$ to vanish for all $g \geq 1$.
+Hence the full obstruction tower vanishes; in particular
+$\mathfrak{W}(A_{\mathrm{BF}})=0$, and the full solution $\Pi(\h)$ exists by
+inductive lifting.  This is therefore only a heuristic route to
+Conjecture~\ref{conj:bf-modular-lifting}, not a proved resolution here.
 \end{proof}
 
-\begin{remark}[Why BF is ``too easy'']
+\begin{remark}[Why BF is expected to be easier]
 % label removed: rem:bf-too-easy
-The argument above reveals the structural reason that BF theory
-presents no modular obstructions: the topological direction
-trivializes the Steinberg.  In the general HT framework, the
+The heuristic argument above suggests a structural reason that BF theory
+may present fewer modular obstructions: the topological direction may
+trivialize the Steinberg.  In the general HT framework, the
 $(-2)$-shifted symplectic form on $\Mvac$ receives contributions from
 both the holomorphic and topological sectors.  When the holomorphic
 sector is non-trivial (e.g., for Chern--Simons or W-algebra
 boundaries), $\omega$ is not exact: the holomorphic curvature
 $\kappa(A) \neq 0$ generates non-trivial Floer data, and the
-Steinberg acquires non-contractible components that source the higher
-$\mathfrak{W}_g$.  For BF theory, the topological character of the
-bulk forces $\kappa(A_{\mathrm{BF}}) = 0$, so $\omega$ is exact and
-the Steinberg collapses.  There is simply no room for non-trivial
-modular obstructions.
+Steinberg is expected to acquire non-contractible components that source the higher
+$\mathfrak{W}_g$.  For the abelian BF benchmark, one may hope that the topological
+character of the bulk together with the compatible vanishing scalar
+genus-$1$ package place it near an exact-Steinberg benchmark
+surface.  That expectation is suggestive, but it is not turned into a
+theorem in this chapter.
 \end{remark}
 
 \subsection{Comparison with known BF partition functions}
 % label removed: subsec:bf-partition-comparison
 
 \begin{proposition}[Chern--Simons/BF partition function; \ClaimStatusProvedElsewhere]
-% label removed: prop:cs-bf-partition
+\label{prop:cs-bf-partition}
 The partition function of holomorphic BF theory on a closed $3$-manifold $M$ is
 \begin{equation}
 % label removed: eq:bf-partition-function
@@ -1983,32 +2020,35 @@ This is the standard result for abelian BF theory.  The Reidemeister torsion of 
 is $1$, and $H_1(S^3; \Z) = 0$.
 \end{proof}
 
-\begin{theorem}[Boundary-bulk compatibility condition for abelian BF; \ClaimStatusProvedHere]
-% label removed: thm:bf-boundary-bulk-consistency
+\begin{theorem}[Higher-genus scalar compatibility for abelian BF; \ClaimStatusProvedHere]
+\label{thm:bf-boundary-bulk-consistency}
 Any lifted boundary modular package for $A_{\mathrm{BF}}$ that is compatible with
-the external abelian BF bulk partition formula on $S^3$ must satisfy
+the external abelian BF bulk partition formula on $S^3$ must satisfy the
+higher-genus scalar vanishing constraint
 \begin{equation}
-% label removed: eq:bf-consistency
-\sum_{g=0}^{\infty} \h^{2g-2} F_g^{\mathrm{bdry}}(A_{\mathrm{BF}})
-= \log Z_{\mathrm{BF}}(S^3) = 0.
+\label{eq:bf-consistency}
+\sum_{g=1}^{\infty} \h^{2g-2} F_g^{\mathrm{bdry}}(A_{\mathrm{BF}}) = 0.
 \end{equation}
 In particular, every such compatible lifted boundary package has
 $F_g^{\mathrm{bdry}} = 0$ for $g \geq 1$.  This is consistent with the later
 boundary-side analysis of Theorem~\ref{thm:bf-shadow-depth}, where the abelian BF
-boundary algebra is class~G with $\kappa = 0$.
+boundary algebra is shown to have commutative binary product together with the
+same compatible scalar vanishing on the abelian benchmark surface.
 \end{theorem}
 
 \begin{proof}
 By Proposition~\ref{prop:cs-bf-partition}, the external abelian BF bulk formula on
-$S^3$ gives $Z_{\mathrm{BF}}(S^3)=1$, hence $\log Z_{\mathrm{BF}}(S^3)=0$.
-Therefore any lifted boundary modular package compatible with that external bulk
-formula must satisfy \eqref{eq:bf-consistency}, and coefficientwise all
+$S^3$ gives $Z_{\mathrm{BF}}(S^3)=1$, hence there is no nontrivial higher-genus scalar
+contribution to match on the bulk side.  Therefore any lifted boundary modular
+package compatible with that external bulk formula must satisfy
+\eqref{eq:bf-consistency}, and coefficientwise all
 $F_g^{\mathrm{bdry}}$ vanish for $g\geq 1$.
 
 The internal boundary analysis is compatible with this: later in
-Theorem~\ref{thm:bf-shadow-depth} the abelian BF boundary algebra is shown to lie
-on the class~G surface with $\kappa=0$, so the scalar genus terms vanish and no
-higher-arity shadow data survive.
+Theorem~\ref{thm:bf-shadow-depth} the abelian BF boundary algebra is shown to have
+commutative binary product, and the compatible genus-$1$ scalar term again
+vanishes on the abelian benchmark surface.  No theorematic full higher-arity
+shadow collapse is used here.
 \end{proof}
 
 \begin{remark}[Non-abelian BF and the interacting sector]
@@ -2024,7 +2064,7 @@ for that expected non-abelian modular information.
 
 The interacting sector of the non-abelian boundary algebra has $m_n \neq 0$ for
 $n \geq 3$ (from the non-abelian cubic vertex), so the non-abelian boundary theory
-is no longer on the abelian class~G surface.  What this section actually shows is
+is no longer on the abelian commutative benchmark surface.  What this section actually shows is
 more limited: the lowest-mode charged jet carries nontrivial modular data, and the
 standard class~L reconstruction gives the benchmark comparison model for how one
 would organize that data if an affine-type comparison theorem were established for
@@ -2082,7 +2122,7 @@ is part of the analytic sewing programme
 \end{remark}
 
 \begin{proposition}[Recursive determination of wheel amplitudes; \ClaimStatusProvedHere]
-% label removed: prop:recursive-wheel-determination
+\label{prop:recursive-wheel-determination}
 The $k$-vertex wheel amplitude $W_1^{(k)}$ is determined recursively from the
 $(k-1)$-vertex amplitudes and the structure constants $m_n$ by the formula
 \begin{equation}
@@ -2120,12 +2160,14 @@ The modular bootstrap problem (Problem~\ref{prob:modular-bootstrap}) asks whethe
 resummation can be performed by algebraic methods (using the Wess--Zumino identities
 and the stable-graph factorization law) rather than by direct summation.  The analysis
 of this section shows that the bootstrap problem reduces, on the lowest modes, to a
-finite-dimensional algebraic system: the unknowns are the finitely many wheel amplitudes
-$W_1^{(k)}\big|_L$ for $k = 1, 2, 3, \ldots$, and the constraints are the quadratic
-identities from the $D^2 = 0$ relation restricted to the low-mode sector.  The
+countable algebraic system with finitely many coefficients at each fixed wheel order:
+the unknowns are the stagewise amplitudes $W_1^{(k)}\big|_L$ for $k = 1, 2, 3, \ldots$,
+and the constraints are the quadratic identities from the $D^2 = 0$ relation
+restricted to the low-mode sector.  The
 compatibility condition of Theorem~\ref{thm:bf-boundary-bulk-consistency}, that any
 boundary package compatible with the external abelian BF bulk formula has vanishing
-free energies, is the expected abelian solution of this bootstrap system.
+higher-genus scalar free energies, supplies only the expected abelian scalar constraint on this
+bootstrap system; it does not by itself solve the full low-mode resummation problem.
 \end{remark}
 
 \subsection{The six-vertex sector and beyond}
@@ -2184,62 +2226,71 @@ $C \cdot P$.  Then
 W_1^{(k)}\big|_{\mathrm{low}} \sim
 \frac{1}{k}\bigl(\lambda_1^{k/2} + \lambda_2^{k/2} + \lambda_3^{k/2}\bigr)
 \]
-for large even $k$.  The one-wheel sum converges if and only if all eigenvalues
-satisfy $|\lambda_i| < 1$.  This is a spectral criterion for the convergence of the
-modular class on the lowest modes.
+for large even $k$.  The one-wheel sum is absolutely convergent if all eigenvalues
+satisfy $|\lambda_i| < 1$.  Boundary cases on the unit circle require separate
+conditional-convergence or regularization analysis.  This is the spectral criterion
+available here for the lowest-mode one-wheel representative.
 \end{remark}
 
-\begin{theorem}[Spectral criterion for one-wheel convergence; \ClaimStatusProvedHere]
-% label removed: thm:spectral-one-wheel-convergence
-Let $A$ be a cyclic minimal $A_\infty$ algebra with finitely many nonzero transferred
-operations.  Let $T: L \to L$ be the loop transfer operator on the lowest-mode space
-$L$, defined by
+\begin{theorem}[Spectral criterion for absolute one-wheel convergence; \ClaimStatusProvedHere]
+\label{thm:spectral-one-wheel-convergence}
+Let $A$ be a cyclic minimal $A_\infty$ algebra, and let $L$ be a finite-dimensional
+lowest-mode space on which the traced operator series
 \begin{equation}
 % label removed: eq:loop-transfer-operator
 T := \sum_{n \geq 2} m_n^{\mathrm{traced}} : L \longrightarrow L,
 \end{equation}
-where $m_n^{\mathrm{traced}}$ is the partially traced operation obtained by
+converges in $\End(L)$ to a well-defined linear operator.  Here
+$m_n^{\mathrm{traced}}$ is the partially traced operation obtained by
 contracting one input and one output of $m_n$ using the cyclic pairing.  Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item The one-wheel sum converges on $L$ (in the formal topology) if and only if
+\item The one-wheel sum converges absolutely on $L$ if and only if
   the spectral radius of $T$ satisfies $\rho(T) < 1$.
 \item If $\rho(T) = 0$ (nilpotent transfer), the one-wheel sum is a finite sum.
-\item If $\rho(T) \geq 1$, the one-wheel sum diverges, and regularization
-  (zeta-function or analytic continuation) is needed.
+\item If $\rho(T) > 1$, absolute convergence fails; if $1$ is an eigenvalue, the
+  series diverges.  Boundary cases with $|\lambda| = 1$ but $\lambda \neq 1$
+  require separate conditional-convergence analysis or regularization.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-The $k$-vertex wheel amplitude on $L$ is $\frac{1}{k} \Tr(T^k)$.  The total
+Under the convergence hypothesis, the loop transfer operator $T$ is a well-defined
+endomorphism of the finite-dimensional space $L$.  The $k$-vertex wheel amplitude on
+$L$ is $\frac{1}{k} \Tr(T^k)$.  The total
 one-wheel contribution on $L$ is
 \[
 W_1\big|_L = \sum_{k=1}^{\infty} \frac{1}{k} \Tr(T^k)
 = -\Tr\!\bigl(\log(\id - T)\bigr)
 = -\log\det(\id - T).
 \]
-This converges if and only if $\rho(T) < 1$, i.e.\ all eigenvalues of $T$ lie
-strictly inside the unit disk.  If $T$ is nilpotent ($T^N = 0$ for some $N$),
-then the sum terminates at $k = N$, and the result is a finite polynomial in the
-eigenvalues.  If $\rho(T) \geq 1$, the series diverges, and the formula
-$-\log\det(\id - T)$ must be interpreted via analytic continuation.
+Absolute convergence of $\sum_k \Tr(T^k)/k$ is equivalent in finite dimension to
+$\rho(T)<1$, i.e.\ all eigenvalues of $T$ lying strictly inside the unit disk.
+If $T$ is nilpotent ($T^N = 0$ for some $N$), then the sum terminates at $k = N$,
+and the result is a finite polynomial in the eigenvalues.  If $\rho(T)>1$, absolute
+convergence fails.  If $1$ is an eigenvalue, the harmonic contribution along that
+eigenspace forces divergence.  Boundary cases with $|\lambda|=1$ but $\lambda\neq 1$
+may converge only conditionally and are therefore outside the theorematic absolute-
+convergence surface recorded here.
 \end{proof}
 
-\begin{corollary}[Determinant formula for the modular class; \ClaimStatusProvedHere]
+\begin{corollary}[Determinant formula for the one-wheel representative; \ClaimStatusProvedHere]
 % label removed: cor:determinant-modular-class
 If the spectral criterion of Theorem~\ref{thm:spectral-one-wheel-convergence} is
-satisfied, the boundary modular class on the lowest modes has the closed form
+satisfied, the completed one-wheel representative on the lowest modes has the closed form
 \begin{equation}
-% label removed: eq:determinant-formula
+\label{eq:determinant-formula}
 W_1(A)\big|_L = -\log\det(\id_L - T).
 \end{equation}
 For the holomorphic BF boundary algebra, $T$ acts on $L = \Span\{b_{0,0}, b_{1,0}, b_{0,1}\}$,
-and the determinant is a polynomial of degree~$3$ in the structure constants.
+and $\det(\id_L - T)$ is a polynomial of degree~$3$ in the matrix entries of the
+restricted transfer operator $T|_L$.
 \end{corollary}
 
 \begin{proof}
 Direct application of Theorem~\ref{thm:spectral-one-wheel-convergence}(i) with the
 identification $W_1\big|_L = -\Tr\log(\id - T)$.  The degree-$3$ claim follows from
-$\dim L = 3$.
+$\dim L = 3$, so $\det(\id_L - T)$ is cubic in the entries of the $3\times 3$
+matrix of $T|_L$.
 \end{proof}
 
 \begin{remark}[Connection to Fredholm determinants]
@@ -2250,44 +2301,39 @@ of the Fredholm determinant that appears in the Heisenberg sewing theorem
 transfer operator $T$ acts on the full (infinite-dimensional) Fock space, and
 $\det(\id - T)$ is a genuine Fredholm determinant.  For the BF boundary algebra
 restricted to lowest modes, $T$ is a $3 \times 3$ matrix, and the determinant is
-an ordinary polynomial.  The passage from finite to infinite modes is controlled by
-the HS-sewing condition (Vol~I, Theorem~\ref*{thm:general-hs-sewing}).
+an ordinary polynomial.  For the BF boundary algebra, the passage from this
+finite-mode determinant to a genuine infinite-mode Fredholm determinant would
+require establishing the HS-sewing condition for the relevant KK spectrum
+(Vol~I, Theorem~\ref*{thm:general-hs-sewing}), which is not proved here.
 \end{remark}
 
-\subsection{Modular shadow depth of the BF model}
-% label removed: subsec:bf-shadow-depth
+\subsection{Abelian BF boundary benchmark}
 
-\begin{theorem}[Shadow depth of the BF boundary algebra; \ClaimStatusProvedHere]
-% label removed: thm:bf-shadow-depth
-The holomorphic BF boundary algebra $A_{\mathrm{BF}}$ on $S^3$ is of class~G
-(Gaussian shadow depth $r_{\max} = 2$) with $\kappa = 0$.  In particular:
+\begin{theorem}[Commutative abelian BF benchmark and compatible scalar vanishing; \ClaimStatusProvedHere]
+\label{thm:bf-shadow-depth}
+The holomorphic BF boundary algebra $A_{\mathrm{BF}}$ on $S^3$ satisfies:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item All higher-arity shadows vanish: $\cA^{\mathrm{sh}}_{r,0}(A_{\mathrm{BF}}) = 0$
-  for $r \geq 3$.
-\item The shadow connection is trivially flat: $\nabla = d$.
-\item The soft theorem tower is empty: $S_r = 0$ for all $r \geq 2$.
-\item The full shadow jet space is trivial: $J^\infty(A_{\mathrm{BF}}) = \{0\}$.
+\item the binary product $m_2$ on CR cohomology is commutative;
+\item on any lifted boundary modular package for $A_{\mathrm{BF}}$ compatible with the
+  external abelian BF bulk formula on $S^3$, the universal genus-$1$ scalar term
+  vanishes.
 \end{enumerate}
+This theorem records the commutative abelian benchmark together with the
+strongest scalar vanishing currently justified on the boundary side.  It does
+not by itself prove a full class~G collapse of the higher-arity shadow tower.
 \end{theorem}
 
 \begin{proof}
 The boundary algebra $A_{\mathrm{BF}}$ is the CR-cohomological algebra of $S^3$,
 which is a \emph{commutative} dg algebra (the product $\mu$ on
-$\Omega_b^{0,\bullet}(S^3)$ is commutative).  The transferred $A_\infty$ structure
-is $C_\infty$ (commutative up to homotopy), and in particular the binary product
-$m_2$ is the cup product on CR cohomology, which is commutative.
+$\Omega_b^{0,\bullet}(S^3)$ is commutative).  In particular the binary product
+$m_2$ on CR cohomology is commutative.
 
-The curvature $\kappa(A_{\mathrm{BF}})$ is the supertrace of the identity on the
-cyclic complex.  For the abelian BF model (gauge group $U(1)$), the cyclic complex
-has no anomaly: the bulk theory is topological with vanishing one-loop beta function.
-Therefore $\kappa = 0$.
-
-Since $\kappa = 0$, the universal genus-$1$ scalar term vanishes, and
-on the proved scalar lane the scalar genus terms vanish by the
-universal formula \eqref{eq:fg-general}.  The vanishing of the
-higher-arity shadows is instead the class~G statement for the abelian
-boundary algebra described above; it is not a formal consequence of
-$\kappa = 0$ alone.
+By Theorem~\ref{thm:bf-boundary-bulk-consistency}, any lifted boundary modular
+package compatible with the external abelian BF bulk formula on $S^3$ has
+$F_g^{\mathrm{bdry}}=0$ for all $g \geq 1$.  In particular the universal genus-$1$
+scalar term vanishes on that compatible benchmark surface.  No stronger statement
+about the full higher-arity shadow tower follows from these inputs alone.
 \end{proof}
 
 \begin{remark}[Non-abelian promotion]
@@ -2362,7 +2408,8 @@ models:
 \text{G (free)} \subset \text{L (current algebra)} \subset \text{C (contact)}
 \subset \text{M (mixed/infinite)}.
 \]
-Free holographic models (such as abelian BF) have trivial modular content.
+Free holographic models (such as abelian BF) provide the commutative
+vanishing-curvature benchmark on this celestial surface.
 Contact models (such as $\beta\gamma$ holography) have finite modular content with an
 additional quartic invariant.  Kodaira--Spencer currently contributes a Gauss--Manin
 and open-closed benchmark packet rather than a proved current-algebra shadow-depth
@@ -2381,23 +2428,22 @@ actually been proved.
 \subsection{The modular $R$-matrix for BF}
 % label removed: subsec:modular-r-matrix-bf
 
-\begin{definition}[Genus-zero $R$-matrix for BF]
+\begin{definition}[Genus-zero BF benchmark kernel]
 % label removed: def:genus-zero-r-matrix-bf
-The genus-zero $R$-matrix of the holomorphic BF boundary algebra is the
-Maurer--Cartan kernel
+We denote by
 \begin{equation}
 % label removed: eq:r-matrix-bf
 r_{\mathrm{BF}}(z) = \frac{\Omega}{z},
 \end{equation}
-where $\Omega = \sum_{p,q \geq 0} a_{p,q} \otimes b_{p,q}$ is the Casimir element
-of the cyclic pairing.  For the abelian BF model, $\Omega$ is the identity operator
-on the polynomial ring $\C[w_1, w_2]$.
+where $\Omega = \sum_{p,q \geq 0} a_{p,q} \otimes b_{p,q}$ is the coevaluation
+element of the cyclic pairing.  On the abelian BF benchmark surface, $\Omega$
+acts as the identity operator on the polynomial ring $\C[w_1, w_2]$.
 \end{definition}
 
-\begin{proposition}[Classical Yang--Baxter for BF; \ClaimStatusProvedHere]
+\begin{proposition}[Abelian BF benchmark: trivial CYBE surface; \ClaimStatusProvedHere]
 % label removed: prop:cybe-bf
-The genus-zero $R$-matrix $r_{\mathrm{BF}}(z)$ satisfies the classical Yang--Baxter
-equation
+On the abelian BF benchmark surface, the genus-zero kernel
+$r_{\mathrm{BF}}(z)=\Omega/z$ satisfies the classical Yang--Baxter equation
 \begin{equation}
 % label removed: eq:cybe-bf
 [r_{12}(z_{12}), r_{13}(z_{13})] + [r_{12}(z_{12}), r_{23}(z_{23})]
@@ -2408,31 +2454,34 @@ factors.
 \end{proposition}
 
 \begin{proof}
-The $R$-matrix $r(z) = \Omega/z$ has the standard rational form.  The CYBE is
-equivalent to the Jacobi identity for the Lie bracket dual to the cyclic pairing:
-$[\Omega_{12}, \Omega_{13}] + [\Omega_{12}, \Omega_{23}] + [\Omega_{13}, \Omega_{23}] = 0$
-holds in $\End(A^{\otimes 3})$ whenever $\Omega$ is the Casimir of an invariant
-pairing.  For the abelian BF model, the Lie bracket is trivial, so the CYBE is
-satisfied trivially.  For non-abelian BF, it follows from the Jacobi identity of the
-gauge Lie algebra.
+For abelian BF, the underlying Lie bracket is trivial, so the pairwise commutators
+$[r_{12},r_{13}]$, $[r_{12},r_{23}]$, and $[r_{13},r_{23}]$ all vanish.  Hence the
+CYBE holds identically on this benchmark surface.
 \end{proof}
 
-\begin{theorem}[Modular $R$-matrix for abelian BF; \ClaimStatusProvedHere]
+\begin{theorem}[Compatible modular $R$-matrix benchmark for abelian BF; \ClaimStatusProvedHere]
 % label removed: thm:modular-r-matrix-bf
-For the abelian holomorphic BF model on $S^3$, the modular $R$-matrix is trivial:
+For the abelian holomorphic BF model on $S^3$, on any lifted boundary modular
+package compatible with the external abelian BF bulk formula, the modular
+$R$-matrix benchmark has no higher-genus corrections:
 \begin{equation}
 % label removed: eq:modular-r-matrix-bf
 R_{\mathrm{BF}}^{\mathrm{mod}}(z; \h) = r_{\mathrm{BF}}(z) = \frac{\Omega}{z}.
 \end{equation}
 All genus corrections vanish: $r_g(z) = 0$ for $g \geq 1$.  This is consistent with
-$\kappa = 0$ and the class~G shadow depth.
+the commutative abelian benchmark and compatible scalar vanishing recorded above.
 \end{theorem}
 
 \begin{proof}
 The genus-$g$ correction $r_g(z)$ to the $R$-matrix is the arity-$2$ component of
 $\Theta_\cA^{(g)}$, which is $\kappa \cdot \eta \otimes \Lambda_g$ by the universal
-formula.  Since $\kappa = 0$, all genus corrections vanish, and the modular $R$-matrix
-equals the classical one.
+formula.  On any compatible lifted boundary package,
+Theorem~\ref{thm:bf-shadow-depth} gives vanishing genus-$1$ scalar term; by the
+universal relation $F_1(\cA)=\kappa(\cA)/24$, the corresponding scalar curvature
+parameter on that comparison surface is therefore $\kappa=0$.  Substituting this
+into the universal arity-$2$ genus-correction formula shows that all genus
+corrections vanish there, so the modular $R$-matrix benchmark reduces to the
+classical kernel.
 \end{proof}
 
 \begin{remark}[Non-abelian modular $R$-matrix]
@@ -2463,10 +2512,12 @@ comparison model, not as a proved formula for non-abelian BF itself.
 % label removed: rem:bf-summary
 The higher-vertex calculus for BF on $S^3$ yields the following picture:
 \begin{enumerate}[label=\textup{(\arabic*)}]
-\item The abelian BF model is class~G with $\kappa = 0$, hence all modular invariants
-  vanish.  The model lifts trivially to all genera.
+\item The abelian BF model has commutative boundary product, and any
+  lifted boundary package compatible with the external abelian bulk formula has
+  vanishing higher-genus scalar free energies.  A full class~G / trivial-shadow-tower identification
+  is not proved here.
 \item The non-abelian BF model has a genuine interacting sector beyond the abelian
-  class~G surface.  What this chapter isolates is its low-mode charged modular
+  commutative benchmark surface.  What this chapter isolates is its low-mode charged modular
   data and the corresponding affine class~L benchmark comparison package; it does
   not prove that the full non-abelian BF boundary algebra itself satisfies the
   affine class~L reconstruction theorem.
@@ -2474,16 +2525,23 @@ The higher-vertex calculus for BF on $S^3$ yields the following picture:
   the lowest modes, with unique internal test modes and finite algebraic contractions.
 \item The multi-vertex wheels exhibit a matrix-trace structure: the $k$-vertex amplitude
   is a cyclic trace of a product of the cubic coefficient matrix and the propagator matrix.
-\item The convergence of the one-wheel sum is controlled by the spectral radius of the
-  loop transfer operator, leading to a determinant formula for the modular class.
-\item The shadow depth classification of the three holographic atoms
-  ($\beta\gamma$ = C, KS = L, $\mathcal{W}_3$ = M) captures the physical complexity
-  hierarchy: free, gauge, gravitational.
+\item The absolute convergence of the lowest-mode one-wheel representative is controlled
+  by the spectral radius of the loop transfer operator on its theorematic surface,
+  leading there to a determinant formula for the representative rather than the
+  cohomology class.
+\item The current holographic-atom packet consists of a proved class~C
+  $\beta\gamma$ row, a Kodaira--Spencer Gauss--Manin/open-closed benchmark row,
+  and an expected mixed/infinite $\mathcal{W}_3$ row.  It therefore suggests the
+  free/gauge-benchmark/gravitational-benchmark complexity hierarchy on this
+  celestial surface, rather than proving a blanket shadow-depth classification of
+  all three atoms here.
 \end{enumerate}
 This is the sharpest available account of the BF model within the modular Koszul
 framework.  The charged modular jet $\mathfrak{J}^{\mathrm{low}}_{\mathrm{ch}} =
 (Q_{110}, Q_{011}, B_{\mathrm{mix}})$ of Definition~\ref{def:low-mode-charged-modular-jet}
-is the first nonlinear invariant of the boundary algebra, and its vanishing for
-abelian BF ($Q_{110} = Q_{011} = B_{\mathrm{mix}} = 0$ when $\kappa = 0$) is the
-modular shadow of the trivial bulk partition function $Z_{\mathrm{BF}}(S^3) = 1$.
+is the first nonlinear invariant of the boundary algebra, and its vanishing on the
+abelian BF benchmark surface is the
+boundary-side vanishing low-mode benchmark compatible with the external bulk
+partition formula $Z_{\mathrm{BF}}(S^3) = 1$, not an internally proved
+class~G identification or bulk-boundary shadow identity.
 \end{remark}

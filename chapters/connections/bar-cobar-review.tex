@@ -190,6 +190,94 @@ verification of Vol~I's algebraic $d_B^2 = 0$; the two results
 are equivalent, not merely analogous.
 \end{remark}
 
+\subsubsection{Structural properties of the $\Ainf$ tower}
+
+The $\Ainf$ operations $\{m_k\}_{k \ge 2}$ extracted from the
+bar differential carry two structural properties that hold for
+any logarithmic $\SCchtop$-algebra.  Both are consequences of
+the mechanism by which the central charge enters the $\lambda$-bracket:
+as a scalar contact term annihilated by the bracket in both slots.
+
+\begin{proposition}[$c$-linearity of the $\Ainf$ tower; \ClaimStatusProvedHere]
+\label{prop:c-linearity-general}
+\index{c-linearity@$c$-linearity!general $\Ainf$ tower|textbf}
+Let\/ $\cA$ be a logarithmic $\SCchtop$-algebra whose
+$\lambda$-bracket has central charge~$c$
+\textup{(}i.e.\ a scalar summand proportional to~$c$
+in the singular OPE\textup{)}.  Then for all $k \ge 2$, the
+chain-level $\Ainf$ operation $m_k$ decomposes as
+\[
+m_k(a_1, \ldots, a_k;\, \lambda_1, \ldots, \lambda_{k-1})
+\;=\;
+m_k^{\mathrm{state}}(a_1, \ldots, a_k;\, \lambda)
+\;+\;
+c \cdot Q_k(\lambda_1, \ldots, \lambda_{k-1})\cdot\mathbf{1},
+\]
+where $m_k^{\mathrm{state}}$ is $c$-independent and
+$Q_k$ is a polynomial in the spectral parameters.  In particular,
+the scalar part of $m_k$ is \textbf{linear} in~$c$.
+\end{proposition}
+
+\begin{proof}
+Induction on~$k$.  At $k = 2$ the claim is the definition:
+the central charge enters the $\lambda$-bracket as a scalar
+summand $c \cdot q(\lambda) \cdot \mathbf{1}$.  For the inductive
+step, the Stasheff relation expresses $d\,m_k$ as a sum of
+compositions $m_i \circ m_j$ ($i+j = k+1$).  Scalars are
+annihilated by the $\lambda$-bracket in both slots
+($m_2(\mathbf{1}, a; \lambda) = 0 = m_2(a, \mathbf{1}; \lambda)$),
+so the only scalar contributions come from composing the
+$c$-independent state part of one factor with the scalar part
+of another.  Both channels produce terms linear in~$c$ by the
+inductive hypothesis.  The BRST homotopy~$h$, being a
+$c$-independent operator on the ambient module, preserves
+$c$-linearity.
+\end{proof}
+
+\begin{proposition}[Finite presentation of the $\Ainf$ tower; \ClaimStatusProvedHere]
+\label{prop:finite-presentation-general}
+\index{finite presentation!general $\Ainf$ tower|textbf}
+\index{resolvent tree formula!general}
+For any logarithmic $\SCchtop$-algebra~$\cA$ realised by
+homological perturbation from a dg resolution
+$(V, d_0, m_2^0)$ with contracting homotopy~$h$
+and perturbation~$\delta = m_2 - m_2^0$,
+the entire $\Ainf$ tower $\{m_k\}_{k \ge 3}$ is finitely
+presented by the pair $(m_2, h)$: each $m_k$ is the sum
+over Catalan-many planar binary trees with $k$ leaves,
+internal edges decorated by~$h$, and internal vertices
+by~$\delta$ \textup{(}the resolvent tree formula of Volume~I,
+Construction~\ref*{V1-constr:htt-alg}\textup{)}.
+\end{proposition}
+
+\begin{proof}
+This is the standard homological perturbation lemma
+applied to the $\SCchtop$ setting.
+The transferred operations $m_k^H = p \circ
+\sum_{\text{trees}} (\delta \circ h)^{k-2} \circ \delta
+\circ i^{\otimes k}$ are determined by the resolvent
+$(1 - \delta\,h)^{-1}$, whose expansion over planar
+binary trees gives the formula.  The sum converges in the
+filtration-complete topology ensured by tameness
+(Definition~\ref{def:tameness}).
+\end{proof}
+
+\begin{remark}[Content]
+\label{rem:c-linearity-content}
+The $c$-linearity theorem states that the
+field-dependent part of $m_k$ (the ``backreaction'') is
+universal, independent of the central charge, while the
+scalar contact term is controlled by a single coupling
+constant.  Finite presentation states that one binary
+operation and one homotopy produce the entire infinite
+tower.  The tower may not truncate ($m_k \ne 0$ for all
+$k \ge 3$ generically), but the generating data are finite.
+Both results specialise to concrete formulas in examples:
+for the Virasoro algebra, see
+Theorem~\ref{thm:gravity-c-linearity} and
+Theorem~\ref{thm:gravity-finite-presentation}.
+\end{remark}
+
 \subsection{The Chiral Cobar Construction}
 Dually, we define:
 
@@ -905,6 +993,51 @@ filtration and the central charge), the genus-$1$ data is unchanged,
 so $\delta\kappa = 0$.  For a filtered quasi-isomorphism that shifts
 the central charge by $\delta c$, one has
 $\delta\kappa(f)$ is determined by the change in the genus-$1$ bar obstruction class (Volume~I, Theorem~D).  For the Virasoro algebra, $\kappa = c/2$ and the anomaly is $\delta\kappa = \delta c/2$; for affine algebras, the relation between $\kappa$ and $c$ is more involved (see the formula $\kappa = \dim\fg \cdot (k+h^\vee)/(2h^\vee)$ above).
+\end{proof}
+
+Part~(ii) of the preceding proposition states the genus-$0$
+intertwining: DS reduction commutes with the bar differential $D_0$.
+The modular bar complex $\barB_{\mathrm{mod}}(\cA)$ carries a second operator
+$D_1 = D_{\mathrm{nsep}}$, the genus-raising non-separating clutching
+differential.  The next theorem extends the intertwining to the full
+modular complex $(D_0 + D_1)$.
+
+\begin{theorem}[DS--modular bar intertwining; \ClaimStatusProvedHere]
+\label{thm:ds-modular-intertwining}
+\index{Drinfeld--Sokolov reduction!modular bar intertwining|textbf}
+For $\fg$ simple and $k$ non-critical, the DS reduction functor
+extends to the modular bar complex at all genera:
+\[
+\barB_{\mathrm{mod}}^{\mathcal{W}}(M^{\mathcal{W}})
+\;\simeq\;
+H^0_{\mathrm{DS}}\bigl(\barB_{\mathrm{mod}}(M)\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+The three inputs are:
+
+\textup{(i)}~$[Q_{\mathrm{DS}}, D_0] = 0$
+\textup{(}Vol~I, Theorem~\textup{\ref{thm:ds-koszul-intertwine}):}
+the BRST charge commutes with the genus-preserving bar differential.
+
+\textup{(ii)}~$[Q_{\mathrm{DS}}, D_1] = 0$: The clutching operator
+$D_1^{(i,j)}$ contracts flags $i,j$ using the invariant form:
+$D_1^{(i,j)}(\phi) = \langle x_i, x_j \rangle_k \cdot
+(\text{genus-raised element})$.  For $Q_{\mathrm{DS}}$ acting on
+$D_1(\phi)$ versus $D_1$ acting on $Q_{\mathrm{DS}}(\phi)$: the
+terms from $Q_{\mathrm{DS}}$ acting on vertices other than $i,j$
+commute trivially with the contraction.  The terms from
+$Q_{\mathrm{DS}}$ acting on $x_i$ or $x_j$ produce
+$\langle Q_{\mathrm{DS}}(x_i), x_j \rangle +
+(-1)^{|x_i|} \langle x_i, Q_{\mathrm{DS}}(x_j) \rangle$, which
+vanishes by the self-adjointness of $Q_{\mathrm{DS}}$ with respect
+to the level-$k$ Shapovalov--ghost pairing (the standard fact that
+$Q_{\mathrm{BRST}}$ of a VOA is BPZ-self-adjoint).
+
+\textup{(iii)}~Arakawa vanishing: the spectral sequence of the
+triple complex $(\barB_{\mathrm{mod}} \otimes F_\chi,\, D_0,\, D_1,\,
+Q_{\mathrm{DS}})$ degenerates at $E_1$ by $H^{q \ne 0}_{\mathrm{DS}} = 0$.
 \end{proof}
 
 \begin{theorem}[Formal moduli interpretation; \ClaimStatusProvedHere]

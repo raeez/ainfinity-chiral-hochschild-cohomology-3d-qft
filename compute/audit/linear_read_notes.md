@@ -10282,3 +10282,3547 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Issue: after the local sector-scope repairs, the gravity-chapter reading still targeted only a generic `asymptotic-symmetry package at null infinity`, which lagged behind the more specific `supertranslation sector of the BMS package` register used across the active THQG soft theorem surface.
    Fix: rewrote the clause so the binary Virasoro sector is now read as the leading-soft / supertranslation sector of the BMS package at null infinity.
    Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 411
+
+- Target: movement-summary mirror of the gravity-chapter celestial-transfer paragraph, where the transfer sentence still used the broader `Virasoro sector` wording after the live gravity chapter had already been narrowed to the binary Virasoro sector
+- Iteration: `411`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the gravity-paragraph BMS cleanup and compared the active movement-summary mirror directly against the repaired gravity chapter.
+- The next real survivor was a scope mismatch in the mirror sentence: the movement-summary chapter still said the celestial transfer reads `the Virasoro sector of the resulting soft algebra` through the celestial stress tensor, even though the repaired gravity chapter now explicitly narrows that construction to the binary Virasoro sector.
+- Rewrote the mirror sentence so it now says `the binary Virasoro sector of the resulting soft algebra`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader sector wording is gone from the checked active gravity / movement-summary surface and the patched mirror now matches the repaired gravity chapter.
+
+### Findings
+
+471. `2026-04-02-471`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1529-1531`
+   Issue: the movement-summary mirror still used the broader `Virasoro sector of the resulting soft algebra` wording in its celestial-transfer sentence, even though the repaired gravity chapter now explicitly narrows the stress-tensor construction to the binary Virasoro sector.
+   Fix: rewrote the mirror sentence so it now says `the binary Virasoro sector of the resulting soft algebra`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 412
+
+- Target: following sentence in the same movement-summary celestial-transfer band, where the OPE clause still floated as if it described the whole transfer package rather than the already named binary/ternary sector
+- Iteration: `412`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the binary-Virasoro mirror repair and re-read the immediately following sentence for local scope anchoring.
+- The next real survivor was a compact exposition-level looseness: once the sentence had already narrowed the relevant object to the binary/ternary sector, the continuation still said `the celestial OPE is correspondingly read as reproducing the associated supertranslation/superrotation Ward identities`, which sounded less tightly attached to that already named sector than the surrounding repaired prose.
+- Rewrote that clause so it now says `its celestial OPE is correspondingly read as reproducing the associated supertranslation/superrotation Ward identities`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired looser clause is gone from the checked active movement-summary surface and the patched anaphora is present.
+
+### Findings
+
+472. `2026-04-02-472`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1533-1536`
+   Issue: after the preceding sentence had already isolated the relevant binary/ternary sector, the OPE clause still floated as `the celestial OPE`, which weakened the local attachment between the extended-BMS reading and the specific sector whose OPE was being interpreted.
+   Fix: rewrote the clause so it now says `its celestial OPE is correspondingly read as reproducing the associated supertranslation/superrotation Ward identities`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 413
+
+- Target: closing integrated-factor clause in the same movement-summary celestial-transfer paragraph, where the integrated factors were still being flattened into the integrated soft statements they determine
+- Iteration: `413`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the local OPE-anaphora cleanup and re-read the final clause of the same paragraph against the encode-language already used elsewhere in the movement-summary hierarchy.
+- The next real survivor was a compact recap-level flattening: the integrated factors $\widetilde{S}_2$ and $\widetilde{S}_4$ were still said to `are read as` the integrated leading Weinberg and quartic-contact soft statements, even though the surrounding recap surface had already shifted to the weaker encode-language for theorem-level coefficients and factors.
+- Rewrote that clause so it now says the integrated factors $\widetilde{S}_2$ and $\widetilde{S}_4$ `encode` the integrated leading Weinberg and quartic-contact soft statements.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flattening is gone from the checked active movement-summary surface and the patched encode-language is present.
+
+### Findings
+
+473. `2026-04-02-473`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1540-1542`
+   Issue: the closing integrated-factor clause still flattened the theorem-level integrated factors into the integrated soft statements they determine, instead of using the encode-language already adopted elsewhere in the live movement-summary hierarchy.
+   Fix: rewrote the clause so the integrated factors $\widetilde{S}_2$ and $\widetilde{S}_4$ now `encode` the integrated leading Weinberg and quartic-contact soft statements.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 414
+
+- Target: all-arity extension sentence in the same movement-summary celestial-transfer paragraph, where the full celestial soft hierarchy was still being identified too directly with the extension of the repaired BMS package
+- Iteration: `414`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the integrated-factor encode cleanup and re-read the immediately preceding all-arity extension sentence against the theorem-vs-reading split already enforced elsewhere in the THQG soft hierarchy.
+- The next real survivor was a compact hierarchy-level flattening: the paragraph still said the full celestial soft hierarchy `is read as extending that package` through the projections of $\Theta_{\mathrm{Vir}_c}$, which was flatter than the encode-language already adopted for theorem-level factors and hierarchy data on the surrounding live surface.
+- Rewrote that clause so it now says the full celestial soft hierarchy is read as `encoding the extension of that package` through those projections.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flatter clause is gone from the checked active movement-summary surface and the patched encode-language is present.
+
+### Findings
+
+474. `2026-04-02-474`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1536-1539`
+   Issue: the all-arity extension sentence still identified the full celestial soft hierarchy too directly with the extension of the repaired BMS package, instead of keeping the hierarchy itself at theorem level and the extension claim in the reading layer.
+   Fix: rewrote the clause so the full celestial soft hierarchy is now read as `encoding the extension of that package` through the projections of $\Theta_{\mathrm{Vir}_c}$.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 415
+
+- Target: proposition title and item-(i) wording in the movement-summary celestial-transfer theorem band, where the visible theorem surface was still broader than the repaired binary-sector content actually proved
+- Iteration: `415`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the all-arity encode cleanup and re-read the proposition/proof layer immediately above the repaired aftermath paragraph.
+- The next real survivor was a theorem-surface scope overhang: the proposition was still titled simply `Celestial soft algebra`, even though its three items only prove the integrated stress-tensor OPE, the integrated shadow connection, and the integrated arity-$2$/arity-$4$ factors; item (i) likewise still phrased the result as `the celestial OPE reproduces ...`, which was broader than the integrated-stress-tensor OPE actually displayed there.
+- Rewrote that band so the proposition title now reads `Binary Virasoro sector and integrated celestial transfer`, and item (i) now says `the integrated-stress-tensor OPE reproduces~\eqref{eq:gravity-input} with the same~c`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader title and the old `the celestial OPE reproduces` clause are gone from the checked active movement-summary theorem band and the patched narrower wording is present.
+
+### Findings
+
+475. `2026-04-02-475`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1487-1498`
+   Issue: the proposition title and its first item still advertised a broader celestial-soft-algebra theorem surface than the statement now actually proved, after the surrounding transfer paragraph had already been narrowed to the binary Virasoro sector and integrated factor data.
+   Fix: rewrote the proposition title to `Binary Virasoro sector and integrated celestial transfer` and narrowed item (i) to the integrated-stress-tensor OPE.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 416
+
+- Target: index layer of the same narrowed movement-summary celestial-transfer proposition, where the tags still filed that theorem band under the broader celestial-soft-algebra heading
+- Iteration: `416`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the proposition-title narrowing and re-read the visible theorem surface for remaining over-broad advertisements.
+- The next real survivor was the proposition’s index layer: even after the title and item-(i) had been narrowed to the binary Virasoro sector and integrated celestial transfer, the two nearby index tags still filed the same band under the broader `celestial soft algebra` / `celestial holography!celestial soft algebra` headings.
+- Rewrote those index entries so they now file under `celestial soft algebra!binary Virasoro sector` and `celestial holography!integrated celestial transfer`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader index tags are gone from the checked theorem band and the patched index language is present.
+
+### Findings
+
+476. `2026-04-02-476`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1489-1490`
+   Issue: after the proposition’s visible theorem surface had been narrowed, its index layer still advertised that same band under the broader celestial-soft-algebra headings, leaving the indexing scope looser than the theorem title and items themselves.
+   Fix: rewrote the two index entries to `celestial soft algebra!binary Virasoro sector` and `celestial holography!integrated celestial transfer`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 417
+
+- Target: opening sentence of the narrowed movement-summary celestial-transfer proposition, where the body still grammatically attributed all three items to the celestial stress tensor alone
+- Iteration: `417`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the index-layer cleanup and re-read the proposition body itself for any remaining mismatch between the narrowed theorem title and the sentence introducing the enumerated items.
+- The next real survivor was the proposition opener: even after the theorem surface had been narrowed to the binary Virasoro sector and integrated celestial transfer, the body still began `The celestial stress tensor ... satisfies:`, even though items (ii) and (iii) concern the integrated shadow connection and the integrated arity-$2$/arity-$4$ factors attached to that stress tensor rather than the stress tensor alone.
+- Rewrote the opener so it now says `The integrated celestial transfer attached to the celestial stress tensor ... has the following properties`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader opener is gone from the checked theorem band and the patched theorem-body wording is present.
+
+### Findings
+
+477. `2026-04-02-477`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/thqg_3d_gravity_movements_vi_x.tex:1491-1493`
+   Issue: after the proposition title had been narrowed, the opening sentence still grammatically attached the whole three-part statement to the celestial stress tensor alone, even though the latter items concern the broader integrated celestial transfer data built from it.
+   Fix: rewrote the opener so it now introduces the theorem as the integrated celestial transfer attached to the celestial stress tensor.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 418
+
+- Target: main gravity paragraph introducing the displayed integrated-stress-tensor OPE, where the visible OPE label still lagged behind the newly narrowed movement-summary theorem band
+- Iteration: `418`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the theorem-body opener cleanup and compared the main gravity paragraph directly against the freshly narrowed movement-summary proposition.
+- The next real survivor was a compact cross-surface mismatch: the main gravity chapter still introduced the displayed formula merely as `with celestial OPE:`, while the movement-summary theorem band now correctly names the same displayed relation as the integrated-stress-tensor OPE.
+- Rewrote the gravity sentence so it now reads `with integrated-stress-tensor OPE:`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader OPE label is gone from the checked gravity / movement-summary surface and the patched narrower wording is present.
+
+### Findings
+
+478. `2026-04-02-478`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1747-1749`
+   Issue: the main gravity chapter still introduced the displayed relation under the broader label `celestial OPE`, even though the freshly narrowed movement-summary theorem band had already stabilized on the more precise `integrated-stress-tensor OPE` wording for that same displayed formula.
+   Fix: rewrote the gravity sentence so the displayed relation is now introduced as the `integrated-stress-tensor OPE`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 419
+
+- Target: high-visibility gravity-chapter summary box, where the output list still advertised the broader `celestial OPE` and flattened the genus-$1$ datum into a direct gravitational-vertex slogan
+- Iteration: `419`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the gravity-paragraph OPE-label cleanup and widened the hostile reread to the nearby summary box at the end of the chapter.
+- The next real survivor was a compact summary-layer cluster: the output list still advertised `the celestial OPE` and `the explicit genus-$1$ gravitational vertex`, even though the repaired chapter surface above it had already narrowed the displayed relation to the integrated-stress-tensor OPE and described $\Theta^{(1)}$ as the genus-$1$ MC datum whose higher-arity components carry the gravitational reading.
+- Rewrote that summary line so it now says `the integrated-stress-tensor OPE, and the explicit genus-$1$ MC datum \Theta^{(1)}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader summary slogans are gone from the checked gravity chapter summary band and the patched wording is present.
+
+### Findings
+
+479. `2026-04-02-479`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2801-2803`
+   Issue: the chapter-closing summary box still lagged behind the repaired theorem/prose surface by listing the broader `celestial OPE` and an `explicit genus-$1$ gravitational vertex`, rather than the narrower integrated-stress-tensor OPE and genus-$1$ MC datum language now used in the chapter body.
+   Fix: rewrote the summary line so it now lists `the integrated-stress-tensor OPE, and the explicit genus-$1$ MC datum \Theta^{(1)}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 420
+
+- Target: subsection heading/index band for the genus-$1$ computation in the main gravity chapter, where the visible chapter surface still advertised the older `gravitational vertex` slogan after the summary box had already been narrowed to the genus-$1$ MC datum
+- Iteration: `420`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the gravity-summary cleanup and widened the hostile reread to the heading/index band of the genus-$1$ computation section.
+- The next real survivor was a high-visibility nomenclature lag: the subsection title still read `The genus-$1$ gravitational vertex`, and the neighboring index still filed under `genus-1 vertex!gravitational`, even though the repaired summary box and the section body already described $\Theta^{(1)}$ as the explicit genus-$1$ Maurer--Cartan datum whose components carry the later gravitational reading.
+- Rewrote that band so the subsection title now reads `The explicit genus-$1$ Maurer--Cartan datum`, and the neighboring index now files under `Maurer--Cartan datum!genus-1`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired title/index slogans are gone from the checked active gravity chapter band and the patched narrower wording is present.
+
+### Findings
+
+480. `2026-04-02-480`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2112-2117`
+   Issue: the subsection heading/index band for the genus-$1$ computation still advertised the older `gravitational vertex` slogan even after the repaired summary box and local prose had already shifted to the narrower genus-$1$ Maurer--Cartan datum language.
+   Fix: rewrote the visible heading/index band to `The explicit genus-$1$ Maurer--Cartan datum` and `Maurer--Cartan datum!genus-1|textbf`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 421
+
+- Target: genus-$1$ body/recap prose in the main gravity chapter, where the Maurer--Cartan datum was still being flattened into direct graviton-vertex and path-integral language
+- Iteration: `421`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the heading/index cleanup and widened the hostile reread to the nearby genus-$1$ computation body and recap prose.
+- The next real survivor was a compact two-line reading-layer cluster: one sentence still said the $q$-dependent corrections `are the higher-arity graviton vertices at genus~1`, and the later recap still said the trace of $\Theta^{(1)}$ `is the one-loop gravitational path integral` while its higher-arity components encode genus-$1$ graviton vertices, even though the repaired surrounding surface now treats $\Theta^{(1)}$ as the algebraic genus-$1$ Maurer--Cartan datum with gravitational meaning kept explicitly in the reading.
+- Rewrote that pair so the $q$-dependent corrections now encode higher-arity genus-$1$ terms, read in the gravitational interpretation as graviton-vertex corrections, and the later recap now says the trace is read as the one-loop gravitational path integral while the higher-arity components encode, in the gravitational reading, the genus-$1$ graviton-vertex corrections dressing the BTZ spectrum.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flatter body/recap slogans are gone from the checked active gravity chapter band and the patched reading-language is present.
+
+### Findings
+
+481. `2026-04-02-481`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2287-2290` and `chapters/connections/3d_gravity.tex:2785-2789`
+   Issue: the genus-$1$ body and recap prose still flattened the Maurer--Cartan datum into direct graviton-vertex and path-integral language, even after the repaired heading and summary box had already shifted to the narrower genus-$1$ Maurer--Cartan-datum register.
+   Fix: rewrote both sentences so the algebraic genus-$1$ terms stay theorem-level while the graviton-vertex/path-integral content is explicitly kept in the gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 422
+
+- Target: theorem/index band for the explicit genus-$1$ amplitudes in the main gravity chapter, where the visible theorem surface still advertised the older graviton-amplitude slogan after the surrounding section had been narrowed to the Maurer--Cartan-datum register
+- Iteration: `422`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the genus-$1$ body/recap cleanup and widened the hostile reread to the neighboring explicit-amplitudes theorem band.
+- The next real survivor was a theorem-surface nomenclature lag: the theorem was still titled `Genus-$1$ graviton amplitudes`, and the adjacent index entries still filed under the older graviton/vertex vocabulary, even though the statement itself is explicitly about $A_n^{(1)}(T,\ldots,T)$ for stress-tensor insertions and the surrounding section now uses the genus-$1$ Maurer--Cartan-datum register.
+- Rewrote that theorem band so the title now reads `Genus-$1$ stress-tensor amplitudes`, the theorem index now files under `genus-1 amplitudes!stress tensor`, and the Eisenstein-series index now points to the `genus-1 Maurer--Cartan datum`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired graviton-amplitude/index slogans are gone from the checked theorem band and the patched narrower wording is present.
+
+### Findings
+
+482. `2026-04-02-482`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2503-2507`
+   Issue: the explicit genus-$1$ amplitudes theorem still advertised the older graviton-amplitude / genus-$1$-vertex vocabulary even though the theorem statement is explicitly about stress-tensor insertions and the surrounding genus-$1$ section had already shifted to the Maurer--Cartan-datum register.
+   Fix: rewrote the theorem title to `Genus-$1$ stress-tensor amplitudes`, updated the theorem index to `genus-1 amplitudes!stress tensor|textbf`, and rewired the Eisenstein-series index to `Eisenstein series!$E_2$ from genus-1 Maurer--Cartan datum`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 423
+
+- Target: local subsection/theorem-body cluster in the explicit genus-$1$ amplitudes band, where the surrounding prose still used generic `amplitudes` / `$n$-point amplitudes` language after the theorem surface had already been narrowed to stress-tensor insertions
+- Iteration: `423`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the theorem-title cleanup and re-read the same explicit genus-$1$ amplitudes band for remaining local nomenclature drift.
+- The next real survivor was a compact theorem-body cluster: the subsubsection title still read `Genus-$1$ $n$-point amplitudes`, the lead sentence still said `The genus-$1$ $n$-point amplitude`, and the theorem body still opened with `The genus-$1$ amplitudes`, even though the theorem title and formulas are specifically about stress-tensor insertions.
+- Rewrote that local cluster so it now consistently says `Genus-$1$ stress-tensor $n$-point amplitudes`, `The genus-$1$ stress-tensor $n$-point amplitude`, and `The genus-$1$ stress-tensor amplitudes`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic amplitude phrasing is gone from the checked theorem band and the patched stress-tensor wording is present throughout.
+
+### Findings
+
+483. `2026-04-02-483`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2497-2510`
+   Issue: after the explicit genus-$1$ amplitudes theorem had already been narrowed to stress-tensor language, the immediately surrounding subsection title, lead sentence, and theorem body still used generic `amplitudes` / `$n$-point amplitudes` wording, leaving the local band internally inconsistent.
+   Fix: rewrote the whole local cluster so it now consistently uses `stress-tensor $n$-point amplitudes` / `stress-tensor amplitudes`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 424
+
+- Target: internal label/index metadata in the repaired genus-$1$ Maurer--Cartan-datum section, where the hidden scaffold still carried the older `vertex` naming
+- Iteration: `424`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the explicit stress-tensor-amplitudes cleanup and widened the hostile sweep to the hidden label/index scaffold of the same genus-$1$ section.
+- The next real survivor was a compact structural-metadata seam: even after the visible heading and theorem surfaces had been narrowed to the Maurer--Cartan-datum register, the subsection still used the stale label `subsec:gravity-genus1-vertex`, and the nearby explicit-MC theorem still indexed under `genus-1 vertex!MC element|textbf`.
+- Rewrote that metadata so the subsection label now reads `subsec:gravity-genus1-mc-datum`, and the nearby theorem index now files under `Maurer--Cartan datum!explicit genus-1 MC element|textbf`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `vertex` metadata no longer survives in the checked active gravity chapter band and the patched structural metadata is present.
+
+### Findings
+
+484. `2026-04-02-484`
+   Severity: `MINOR`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:2116` and `chapters/connections/3d_gravity.tex:2218`
+   Issue: after the repaired visible heading and theorem surfaces had already shifted to the genus-$1$ Maurer--Cartan-datum register, the subsection label and nearby explicit-MC theorem index still carried the older `vertex` metadata, leaving the internal scaffold behind the live chapter surface.
+   Fix: rewrote the subsection label to `subsec:gravity-genus1-mc-datum` and the theorem index to `Maurer--Cartan datum!explicit genus-1 MC element|textbf`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 425
+
+- Target: arity-$2$ theorem band in the genus-$1$ Maurer--Cartan-datum section, where the post-formula prose still flattened the explicit coefficient into theorem-level propagator / graviton-exchange language
+- Iteration: `425`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the structural-metadata cleanup and re-read the explicit arity-$2$ theorem band inside the genus-$1$ Maurer--Cartan-datum section.
+- The next real survivor was a local theorem-vs-reading leak: after the explicit formula for $\Theta^{(1)}_{n=2}(T,T;z_{12})$, the prose still said that $\wp(z;\tau)$ `appears as the genus-$1$ propagator` and that `the first term is the graviton exchange through the genus-$1$ self-loop`, which treated the physical reading as part of the theorem-level statement.
+- Rewrote that post-formula prose so the theorem-level content now stays on the Weierstrass $\wp$-function and the torus Green's function, while the graviton-exchange and matter-contribution language is explicitly marked as the gravitational reading.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flatter propagator / graviton-exchange clauses are gone from the checked active theorem band and the patched reading-language is present.
+
+### Findings
+
+485. `2026-04-02-485`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2325-2330`
+   Issue: the arity-$2$ theorem band still flattened the explicit genus-$1$ coefficient into theorem-level propagator and graviton-exchange language, even though the repaired surrounding section already treated those as the gravitational reading of the algebraic data.
+   Fix: rewrote the post-formula prose so the theorem-level content stays on the $\wp$-function and torus Green's function, while the graviton-exchange and matter-contribution language is explicitly moved into the gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 426
+
+- Target: arity-$3$ theorem/proof band in the explicit genus-$1$ stress-tensor amplitudes section, where the non-universal remainder was still hidden behind a raw placeholder instead of being named at theorem level
+- Iteration: `426`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the arity-$2$ reading cleanup and re-read the neighboring arity-$3$ theorem/proof band in the same explicit genus-$1$ stress-tensor-amplitudes section.
+- The next real survivor was a compact theorem-level precision seam: the three-point formula still ended with the raw placeholder `(\text{matter terms})`, even though the two-point line already named its non-universal correction explicitly and the proof just below was already discussing the connected three-point remainder.
+- Rewrote that local band so the theorem now names the remainder as $G_3^T(z_1,z_2,z_3;\tau)$, explicitly described as the non-universal connected genus-$1$ stress-tensor three-point correction on the torus, and the proof close now says that the non-universal remainder is packaged by $G_3^T$.
+- Ran hostile local reread plus fixed-string checks to confirm the retired raw placeholder is gone from the checked active theorem/proof band and the patched remainder-language is present.
+
+### Findings
+
+486. `2026-04-02-486`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2542-2555` and `chapters/connections/3d_gravity.tex:2597-2605`
+   Issue: the arity-$3$ theorem/proof band still hid the non-universal genus-$1$ stress-tensor three-point correction behind the raw placeholder `(\text{matter terms})`, even though the repaired surrounding section had already stabilized on naming theorem-level remainders explicitly.
+   Fix: rewrote the theorem so the remainder is named as $G_3^T(z_1,z_2,z_3;\tau)$ and described as the non-universal connected genus-$1$ stress-tensor three-point correction on the torus, and aligned the proof close to package the remainder by the same notation.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 427
+
+- Target: genus-$1$ spectral $R$-matrix theorem/proof band, where the explicit formula was still followed by flat propagator / self-energy identifications inside the theorem surface
+- Iteration: `427`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the arity-$3$ remainder cleanup and re-read the neighboring genus-$1$ spectral $R$-matrix theorem/proof band.
+- The next real survivor was a theorem-vs-reading leak: the theorem still said the Weierstrass $\wp$-function `is the genus-$1$ exchange propagator` and that the $E_2$-dependent terms `are the one-loop graviton self-energy corrections`, while the proof immediately below still said the correction to the connection involves the `genus-$1$ propagator` $\wp(z;\tau)$.
+- Rewrote that band so the theorem-level content now stays on the exchange kernel and the explicit formula for $r_1(z;\tau)$, with the propagator / self-energy language moved explicitly into the gravitational reading; the proof now says only that the correction to the connection involves the Weierstrass $\wp$-function.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat propagator / self-energy clauses are gone from the checked theorem/proof band and the patched reading-language is present.
+
+### Findings
+
+487. `2026-04-02-487`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2692-2696` and `chapters/connections/3d_gravity.tex:2717-2723`
+   Issue: the genus-$1$ spectral $R$-matrix theorem/proof band still flattened the explicit Weierstrass / $E_2$ data into theorem-level exchange-propagator and graviton self-energy identifications, even though the repaired surrounding gravity chapter already treated those as the gravitational reading of the algebraic $R$-matrix correction.
+   Fix: rewrote the theorem so the $\wp$-function gives the genus-$1$ exchange kernel and is only in the gravitational reading read as the genus-$1$ exchange propagator, with the $E_2$-dependent terms correspondingly read as one-loop graviton self-energy corrections; aligned the proof to refer only to the Weierstrass $\wp$-function.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 428
+
+- Target: closing summary box of the genus-$1$ gravity section, where the recap surface was lagging behind the repaired theorem bands
+- Iteration: `428`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the genus-$1$ spectral $R$-matrix cleanup and re-read the closing recap/summary layer against the repaired one-point and $R$-matrix theorem surfaces.
+- The next real survivor was a summary-layer mismatch: the box still advertised the genus-$1$ MC datum with `one-point \sim (c/24)\,E_2(\tau)`, which had the wrong sign relative to the explicit one-point theorem, and it still compressed the repaired genus-$1$ $R$-matrix correction down to `\sim \wp(z;\tau)`, suppressing the $E_2$-dependent terms highlighted in the theorem immediately above.
+- Rewrote that recap cluster so the summary now says `one-point = -(c/24)\,E_2(\tau)` and describes the genus-$1$ $R$-matrix correction as having kernel $\wp(z;\tau)$ together with $E_2$-dependent anomaly terms.
+- Ran hostile local reread plus fixed-string checks to confirm the retired summary slogans are gone from the checked recap box and the patched theorem-aligned wording is present.
+
+### Findings
+
+488. `2026-04-02-488`
+   Severity: `MODERATE`
+   Class: `B`
+   Location: `chapters/connections/3d_gravity.tex:2807-2810`
+   Issue: the closing summary box lagged behind the repaired genus-$1$ theorem surface by advertising the one-point term with the wrong sign and by collapsing the genus-$1$ $R$-matrix correction to bare `\wp(z;\tau)`, omitting the $E_2$-dependent terms that are part of the explicit proved formula for $r_1(z;\tau)$.
+   Fix: rewrote the recap so it now gives the one-point term as `-(c/24)\,E_2(\tau)` and summarizes the genus-$1$ $R$-matrix correction as having kernel $\wp(z;\tau)$ together with $E_2$-dependent anomaly terms.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 429
+
+- Target: modular-forms bridge prose immediately after the repaired genus-$1$ theorem band, where the Eisenstein-series summary still collapsed the coefficient into the one-point function itself
+- Iteration: `429`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the recap-box cleanup and re-read the `Connections to modular forms and three-dimensional geometry` bridge paragraph against the explicit one-point theorem.
+- The next real survivor was a formula-level summary bug: the paragraph still said `The weight-$2$ Eisenstein series $E_2$ is the genus-$1$ one-point function of the stress tensor`, even though the proved formula in Theorem~`thm:genus1-amplitudes` is $A^{(1)}_1(T;\tau)=-(c/24)\,E_2(\tau)$.
+- Rewrote that sentence so it now says that $E_2$ controls the genus-$1$ one-point function through the explicit formula $A^{(1)}_1(T;\tau)=-(c/24)\,E_2(\tau)$.
+- Ran hostile local reread plus fixed-string checks to confirm the retired false identification is gone from the checked bridge band and the patched formula-aware wording is present.
+
+### Findings
+
+489. `2026-04-02-489`
+   Severity: `MODERATE`
+   Class: `B`
+   Location: `chapters/connections/3d_gravity.tex:2748-2751`
+   Issue: the modular-forms bridge prose still identified the Eisenstein series $E_2$ with the genus-$1$ one-point function itself, even though the repaired one-point theorem shows that the one-point function is the scaled coefficient $-(c/24)\,E_2(\tau)$.
+   Fix: rewrote the sentence so it now says that $E_2$ controls the genus-$1$ one-point function through the explicit formula $A^{(1)}_1(T;\tau)=-(c/24)\,E_2(\tau)$.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 430
+
+- Target: BTZ bridge paragraph in the genus-$1$ connections band, where the gravitational interpretation was still phrased as flat theorem-level identity
+- Iteration: `430`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the modular-forms bridge fix and re-read the neighboring BTZ bridge paragraph against the repaired theorem-vs-reading register used elsewhere in the same genus-$1$ section.
+- The next real survivor was a theorem-vs-reading leak: the paragraph still said the genus-$1$ partition function on the solid torus `is the BTZ partition function`, that the prefactor `is the one-loop determinant`, and that the sum `runs over BTZ black hole states`, even though the very next sentence already returned to explicit reading-language for the trace of $\Theta^{(1)}$.
+- Rewrote that local paragraph so the solid-torus partition function is now read as the BTZ partition function, the prefactor is read as the one-loop determinant, and the sum is read as running over BTZ black hole states.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat BTZ-identification phrases are gone from the checked bridge band and the patched reading-language is present.
+
+### Findings
+
+490. `2026-04-02-490`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2773-2786`
+   Issue: the BTZ bridge paragraph still flattened the gravitational interpretation into theorem-level identity language (`is the BTZ partition function`, `is the one-loop determinant`, `runs over BTZ black hole states`) instead of using the explicit reading-language already adopted elsewhere in the repaired genus-$1$ section.
+   Fix: rewrote the paragraph so those three clauses now uniformly use `is read as` language.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 431
+
+- Target: Dedekind $\eta$ / genus-$1$ free-energy bridge cluster, where the bridge prose and modular-anomaly proposition were contradicting the explicit trace computation
+- Iteration: `431`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ bridge cleanup and re-read the Dedekind $\eta$ bridge paragraph together with the explicit free-energy computation and the modular-anomaly proposition.
+- The next real survivor was a formula-level contradiction: the active surface still said that $Z_1(\tau)=\eta(\tau)^{-\kappa}$ is `the exponentiated trace of the genus-$1$ MC element`, that $\log\eta(\tau)$ `is the genus-$1$ free energy`, and that the partition-function identity `is the trace of the genus-$1$ MC element`, even though Computation~`comp:genus1-free-energy` gives the constant trace $F_1=\kappa\lambda_1^{\mathrm{FP}}=\kappa/24$.
+- Rewrote that whole local cluster so the proposition now says $\log\eta(\tau)$ packages the oscillator expansion whose $(-\kappa)$-multiple exponentiates to $Z_1(\tau)$, while the constant genus-$1$ trace remains $F_1=\kappa\lambda_1^{\mathrm{FP}}$; the bridge prose now says $Z_1(\tau)$ is the exponentiated oscillator contribution of the genus-$1$ sector and that $\log\eta(\tau)$ packages the oscillator sum rather than the constant free energy $F_1$; the proof close now cites Computation~`comp:genus1-free-energy` together with the product formula for~$\eta(\tau)$.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `exponentiated trace` / `is the genus-$1$ free energy` / `is the trace of the genus-$1$ MC element` slogans are gone from the checked local surface and the patched oscillator-vs-trace split is present.
+
+### Findings
+
+491. `2026-04-02-491`
+   Severity: `MODERATE`
+   Class: `B`
+   Location: `chapters/connections/3d_gravity.tex:2633-2640`, `chapters/connections/3d_gravity.tex:2668-2669`, and `chapters/connections/3d_gravity.tex:2760-2777`
+   Issue: the Dedekind $\eta$ bridge and modular-anomaly proposition were collapsing the $q$-dependent $\eta$-expansion into the constant genus-$1$ trace itself, contradicting the explicit computation $F_1=\kappa\lambda_1^{\mathrm{FP}}=\kappa/24$ and blurring the oscillator contribution with the scalar free energy.
+   Fix: rewrote the local cluster so $\log\eta(\tau)$ now packages the oscillator expansion entering $Z_1(\tau)=\eta(\tau)^{-\kappa}$, while the constant genus-$1$ trace remains $F_1=\kappa\lambda_1^{\mathrm{FP}}$; aligned the proof close to cite both the free-energy computation and the product formula for $\eta(\tau)$.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 432
+
+- Target: upstream BTZ/all-genus summary in the main gravity chapter, where the earlier summary band was still lagging behind the repaired BTZ bridge language
+- Iteration: `432`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Dedekind/free-energy repair and widened the hostile sweep to earlier gravity-summary prose in the same live chapter.
+- The next real survivor was an upstream theorem-vs-reading leak: the all-genus BTZ summary still said `The BTZ partition function is the exponential of the all-genus generating function` and that `the BTZ entropy is its high-temperature shadow`, even though the later repaired BTZ bridge paragraph already kept those statements explicitly inside the gravitational reading.
+- Rewrote that local summary band so it now says `In the gravitational reading, the BTZ partition function is read as the exponential of the all-genus generating function`, and the closing clause now says the BTZ entropy is read as its high-temperature shadow.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat BTZ-identification phrases are gone from the checked summary band and the patched reading-language is present.
+
+### Findings
+
+492. `2026-04-02-492`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1281-1290`
+   Issue: the earlier BTZ/all-genus summary paragraph still flattened the gravitational interpretation into direct identity language for the BTZ partition function and BTZ entropy, lagging behind the repaired reading-language already used in the later BTZ bridge paragraph.
+   Fix: rewrote the local summary band so the BTZ partition function and BTZ entropy now stay explicitly in the gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 433
+
+- Target: conjectural Cardy/BTZ argument sketch, where the proof band still used a flat geometric identification stronger than the chapter’s stabilized expected-model register
+- Iteration: `433`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the upstream BTZ-summary repair and re-read the conjectural Cardy/BTZ band against the surrounding expected-Virasoro-model language used elsewhere in the live gravity chapter.
+- The next real survivor was a scope mismatch inside the `\ClaimStatusConjectured` proposition: the argument sketch still said `The MC moduli space at weight~h is the space of flat \mathrm{Vir}_c-connections on the solid torus`, which was stronger than the weaker expected-model language already used nearby for the line side and Virasoro realization.
+- Rewrote that sentence so it now says that, in the expected Virasoro realization, the MC moduli space at weight~$h$ is expected to be modeled by the space of flat $\mathrm{Vir}_c$-connections on the solid torus with holonomy $e^{2\pi ih}$.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat identification is gone from the checked conjectural proof band and the patched expected-model wording is present.
+
+### Findings
+
+493. `2026-04-02-493`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1704-1711`
+   Issue: the argument sketch for the conjectural Cardy/BTZ proposition still upgraded the weight-$h$ MC moduli space to an outright space of flat $\mathrm{Vir}_c$-connections, overshooting the chapter’s stabilized expected-model register in a band that is explicitly not proved.
+   Fix: rewrote the sentence so the identification now stays explicitly in the expected Virasoro realization, using `expected to be modeled by` rather than flat identity language.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 434
+
+- Target: high-visibility shadow-tower summary table in the main gravity chapter, where the local summary surface still presented the gravity column as flat outputs
+- Iteration: `434`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the conjectural Cardy/BTZ cleanup and re-read the earlier shadow-tower summary band against the repaired reading-language used elsewhere in the live gravity chapter.
+- The next real survivor was a summary-layer mismatch: the table still labeled its third column simply `Gravity`, the row entries still listed flat outputs like `one-loop gravitational anomaly`, `three-graviton vertex`, and `five-graviton vertex`, and the sentence below still said `each $r$-th shadow is the $r$-graviton vertex`.
+- Rewrote that local summary band so the third column now reads `Gravitational reading`, every row begins `Read as ...`, and the sentence below now says each $r$-th shadow is read as the corresponding $r$-graviton vertex.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat summary phrases are gone from the checked shadow-tower band and the patched reading-language is present.
+
+### Findings
+
+494. `2026-04-02-494`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1505-1529`
+   Issue: the shadow-tower summary table and its follow-up sentence still presented the gravity side as flat outputs rather than as the gravitational reading of the algebraic shadow data, lagging behind the reading-language already enforced elsewhere across the repaired gravity chapter.
+   Fix: rewrote the third-column header to `Gravitational reading`, changed every row to `Read as ...`, and rewrote the follow-up sentence so each shadow is read as the corresponding graviton vertex.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 435
+
+- Target: quartic shadow interpretation paragraph immediately below the repaired shadow-tower summary band, where the local computation aftermath still used flat gravitational-identification language
+- Iteration: `435`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the shadow-table cleanup and re-read the adjacent quartic-correction computation band against the repaired reading-language used in the summary table directly above it.
+- The next real survivor was a local interpretation mismatch: the `Gravitational interpretation` paragraph still said `The quartic shadow \mathfrak{Q} is the four-graviton contact coupling`, that its nonvanishing `is the algebraic incarnation` of nonlinear dynamics, and that infinite shadow depth `reflects the fact that the full graviton S-matrix has no finite truncation`.
+- Rewrote that local interpretation band so it now says the quartic shadow is read as the four-graviton contact coupling, its nonvanishing is read as the algebraic witness of genuine nonlinear dynamics beyond one loop, and infinite shadow depth is read as meaning that the full graviton S-matrix has no finite truncation.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat identification phrases are gone from the checked quartic-interpretation band and the patched reading-language is present.
+
+### Findings
+
+495. `2026-04-02-495`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1580-1589`
+   Issue: the quartic shadow interpretation paragraph still upgraded the gravitational reading to flat theorem-level identity language, lagging behind the repaired `Read as ...` register already used in the shadow-tower summary band immediately above it.
+   Fix: rewrote the paragraph so the quartic coupling, nonlinear-dynamics consequence, and infinite-shadow-depth consequence now all stay explicitly in the gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 436
+
+- Target: Movement V opener, where a high-visibility transition sentence still collapsed the algebraic package into flat Einstein-gravity identity language
+- Iteration: `436`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the quartic-interpretation cleanup and re-read the Movement V opener against the surrounding bridge-language and theorem-level physics-bridge verification immediately below it.
+- The next real survivor was a high-visibility theorem-vs-reading seam: the opener still said `We now show that this algebraic package IS three-dimensional Einstein gravity with \Lambda = -1/\ell^2`, which was flatter than the bridge-mediated register already used elsewhere in the repaired gravity chapter.
+- Rewrote that transition sentence so it now says that, via the physics-bridge theorem and the Chern--Simons realization, the algebraic package recovers the three-dimensional Einstein-gravity package with $\Lambda = -1/\ell^2$.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat identity slogan is gone from the checked opener and the patched bridge-language is present.
+
+### Findings
+
+496. `2026-04-02-496`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1611-1615`
+   Issue: the Movement V opener still upgraded the chapter’s algebraic package to a flat identity with three-dimensional Einstein gravity, overshooting the bridge-mediated register that the repaired theorem surface actually supports.
+   Fix: rewrote the sentence so the transition now runs through the physics-bridge theorem and the Chern--Simons realization, saying the algebraic package recovers the three-dimensional Einstein-gravity package rather than simply being it.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 437
+
+- Target: quartic-correction computation surface, where the theorem title and lead-in were still advertising a direct gravitational partition-function result
+- Iteration: `437`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Movement V opener repair and re-read the quartic-correction computation band against the repaired shadow-tower summary and quartic-interpretation language immediately around it.
+- The next real survivor was a theorem-surface flattening: the computation was still titled `Quartic correction to the gravitational partition function`, indexed under `quartic contact shadow!gravitational correction`, and opened by saying the quartic contact shadow `gives the leading nonlinear correction to the gravitational partition function beyond the one-loop sector`, even though the displayed theorem-level output is the algebraic quartic shadow together with the genus-$2$ contact term $F_2^{\mathrm{contact}}$.
+- Rewrote that band so the computation now reads `Quartic contact shadow and genus-$2$ contact correction`, the index now files under `quartic contact shadow!genus-2 contact correction`, and the opener now says the quartic shadow determines the genus-$2$ contact correction, with the gravitational partition-function language kept explicitly in the reading clause.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat title/index/opener slogans are gone from the checked computation band and the patched theorem-level wording is present.
+
+### Findings
+
+497. `2026-04-02-497`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1532-1541`
+   Issue: the quartic-correction computation still advertised the algebraic quartic shadow and genus-$2$ contact term as if they were directly the gravitational partition-function correction itself, lagging behind the reading-language already enforced in the neighboring shadow-tower and quartic-interpretation bands.
+   Fix: rewrote the title, index, and opening sentence so the theorem-level surface now stays on the quartic contact shadow and the genus-$2$ contact correction $F_2^{\mathrm{contact}}$, with the nonlinear gravitational-partition-function statement kept explicitly in the reading layer.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 438
+
+- Target: CS--gravity contrast table, where the coproduct-comparison row still mixed theorem-level data with flat physical parentheticals
+- Iteration: `438`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the quartic-computation repair and re-read the high-visibility CS--gravity contrast table.
+- The next real survivor was a compact contrast-row mismatch: the $\Delta_z$ row still said `nontrivial (gluons split)` and `primitive (gravitons braid)`, which mixed the theorem-level coproduct data with flat physical parentheticals rather than keeping those physical statements explicitly in the reading layer.
+- Rewrote that comparison row so it now says `nontrivial (read as gluon splitting)` and `primitive (read as graviton braiding)`.
+- Ran hostile local reread plus fixed-string checks to confirm the patched reading-language is present in the checked table row and the old raw parentheticals are gone from that row.
+
+### Findings
+
+498. `2026-04-02-498`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2081-2083`
+   Issue: the $\Delta_z$ row of the CS--gravity contrast table still blended theorem-level coproduct structure with flat physical parentheticals, lagging behind the explicit reading-language register used elsewhere on the repaired gravity surface.
+   Fix: rewrote the row so the physical side now appears as `read as` parentheticals rather than flat assertions.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 439
+
+- Target: gauge-gravity comparison table, where the Chern--Simons mechanism entry still used a raw physical slogan
+- Iteration: `439`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the CS--gravity contrast cleanup and re-read the earlier gauge-gravity comparison table.
+- The next real survivor was a compact mechanism-column mismatch: the Chern--Simons row still said `fundamental gluons split`, which was a raw physical slogan of the same kind already normalized to `read as ...` language in the later contrast table.
+- Rewrote that table entry so it now says `read as fundamental gluon splitting`.
+- Ran hostile local reread plus fixed-string checks to confirm the old raw slogan is gone from the checked comparison band and the patched reading-language is present.
+
+### Findings
+
+499. `2026-04-02-499`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1123-1126`
+   Issue: the Chern--Simons mechanism entry in the gauge-gravity comparison table still used the raw physical slogan `fundamental gluons split`, lagging behind the `read as ...` register already enforced on nearby comparison surfaces.
+   Fix: rewrote that single table cell so it now reads `read as fundamental gluon splitting`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 440
+
+- Target: gauge-vs-gravity comparison opener, where the section slogan still stated the physical conclusion as a flat identity
+- Iteration: `440`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the gauge-comparison table-cell cleanup and re-read the high-visibility opener of the same comparison band.
+- The next real survivor was a theorem-vs-reading seam: the opener still said `the graviton is a composite` as a flat chapter-level slogan, even though the surrounding discussion derives this only through the gravitational reading of the Drinfeld--Sokolov comparison.
+- Rewrote that opener so it now says the algebraic distinction reduces, in the gravitational reading, to the sentence that the graviton is composite.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat slogan is gone from the checked opener and the patched reading-language is present.
+
+### Findings
+
+500. `2026-04-02-500`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1071-1073`
+   Issue: the gauge-vs-gravity comparison opener still promoted the physical slogan `the graviton is a composite` to a flat chapter-level statement, overshooting the reading-layer register now used elsewhere on the repaired gravity surface.
+   Fix: rewrote the opener so the statement is explicitly framed as the gravitational reading of the algebraic distinction between gauge theory and gravity.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 441
+
+- Target: primitive-package curvature summary, where the chapter still referred to the full gravitational partition function instead of the effective-scalar specialization
+- Iteration: `441`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the gauge-vs-gravity opener cleanup and re-read the primitive-package curvature summary against the repaired genus discussion.
+- The next real survivor was a scope leak: the text still said `The gravitational partition function uses the effective curvature \kappa_{\mathrm{eff}} = (c-26)/2`, even though this chapter now consistently routes that statement through the effective-scalar specialization rather than the full coupled package.
+- Rewrote that sentence so it now says `The effective-scalar gravitational partition function uses the effective curvature \kappa_{\mathrm{eff}} = (c-26)/2`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flatter phrase is gone from the checked primitive-package band and the patched effective-scalar wording is present.
+
+### Findings
+
+501. `2026-04-02-501`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1818-1822`
+   Issue: the primitive-package curvature summary still referred to the full gravitational partition function using $\kappa_{\mathrm{eff}}$, overshooting the chapter’s repaired scope, which routes that dependence through the effective-scalar gravitational partition function.
+   Fix: rewrote the sentence so the dependence on $\kappa_{\mathrm{eff}}$ is now attached explicitly to the effective-scalar gravitational partition function.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 442
+
+- Target: strict-primitivity contrast paragraph, where the local prose still mixed theorem-level coproduct structure with raw gravitational/gauge slogans
+- Iteration: `442`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the primitive-package scope cleanup and re-read the strict-primitivity contrast paragraph.
+- The next real survivor was a compact reading-layer mismatch: the paragraph still said `gravity does not produce particles, only braids` and contrasted the CS case by saying `gluons split` as raw slogans rather than explicit readings of the underlying coproduct structure.
+- Rewrote that paragraph so the no-particles/only-braids claim and the Chern--Simons contrast now both stay explicitly in the reading layer.
+- Ran hostile local reread plus fixed-string checks to confirm the retired raw contrast phrasing is gone from the checked band and the patched reading-language is present.
+
+### Findings
+
+502. `2026-04-02-502`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1954-1965`
+   Issue: the strict-primitivity contrast paragraph still blended theorem-level coproduct structure with raw gravitational/gauge slogans, lagging behind the explicit reading-language register already enforced elsewhere on the repaired gravity surface.
+   Fix: rewrote the paragraph so the no-particles/only-braids claim and the Chern--Simons contrast are both explicitly framed in the reading layer.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 443
+
+- Target: BTZ/conical-defect braiding prose, where the chapter still flattened the repaired reading layer back into bare partition-function and module identifications
+- Iteration: `443`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the strict-primitivity cleanup and re-read the nearby BTZ/conical-defect braiding band together with the later line-operator recap.
+- The next real survivor was a compact reading-layer mismatch: the chapter still said the BTZ partition function `is a trace over a single Virasoro module` and that conical defects `are highest-weight modules`, even though the surrounding repaired gravity surface already keeps those physical identifications explicitly in the reading layer.
+- Rewrote that local cluster so the BTZ partition function is now read as a trace over a single Virasoro module, and both occurrences of the conical-defect statement now say they are read as highest-weight modules of the Koszul dual Virasoro algebra.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat module/partition-function phrasing is gone from the checked bands and the patched reading-language is present.
+
+### Findings
+
+503. `2026-04-02-503`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1298-1305; 1869-1871`
+   Issue: the BTZ/conical-defect braiding prose still collapsed the repaired reading layer into bare partition-function and module identifications, lagging behind the explicit `read as ...` register already enforced elsewhere on the active gravity chapter.
+   Fix: rewrote the BTZ sentence so its partition function is now read as a trace over a single Virasoro module, and rewrote both conical-defect clauses so they are now read as highest-weight modules of the Koszul dual Virasoro algebra.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 444
+
+- Target: BTZ/braiding topological-gravity gloss, where the chapter still upgraded the repaired physical reading into flat S-matrix and topological-content assertions
+- Iteration: `444`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ/conical-defect cleanup and re-read the same braiding neighborhood through the end of its topological-gravity gloss.
+- The next real survivor was a compact theorem-vs-reading leak: the paragraph still said the gravitational `$S$`-matrix `is a pure braiding matrix`, that `\Delta_z` would create propagating gravitons, that the only gravitational degrees of freedom `are topological`, and that the `$r$`-matrix `is the complete repository` of that content, even though the surrounding repaired chapter surface already keeps these physics claims explicitly in the reading layer.
+- Rewrote that clause cluster so the `$S$`-matrix, the propagating-graviton counterfactual, the topological-degree-of-freedom summary, and the repository claim all now stay explicitly in the gravitational reading.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat S-matrix/topological-content slogans are gone from the checked band and the patched reading-language is present.
+
+### Findings
+
+504. `2026-04-02-504`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1311-1328`
+   Issue: the BTZ/braiding topological-gravity gloss still upgraded the repaired physical reading into flat S-matrix and topological-content assertions, overshooting the explicit reading-language register already enforced elsewhere on the active gravity chapter.
+   Fix: rewrote that paragraph so the S-matrix, propagating-graviton counterfactual, topological-degree-of-freedom summary, and `$r$`-matrix repository claim are all now framed explicitly in the gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 445
+
+- Target: `\mathcal{W}_N` extension and scope remarks, where the coproduct theorem surface was clean but the follow-up prose still drifted into flat higher-spin/gravity slogans
+- Iteration: `445`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ/braiding cleanup and re-read the downstream `\mathcal{W}_N` extension and scope remarks.
+- The next real survivor was a compact reading-layer mismatch: the chapter still said `Higher-spin gravitons do not split either` and `All gravitational physics lives in the $r$-matrix` as flat consequences, even though the surrounding repaired gravity surface already keeps those physics claims explicitly in the reading layer while leaving the coproduct theorem itself unchanged.
+- Rewrote that local cluster so the higher-spin no-splitting statement now sits explicitly in the corresponding higher-spin gravitational reading, and the closing scope sentence now says that, in the corresponding gravitational reading, the nontrivial physics lives in the `$r$`-matrix.
+- Ran hostile local reread plus line-stable fixed-string checks to confirm the new reading markers are present at the touched lines and the retired flatter slogans are gone from the checked band.
+
+### Findings
+
+505. `2026-04-02-505`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1361-1369; 1408-1414`
+   Issue: the `\mathcal{W}_N` extension and scope remarks still promoted higher-spin/gravity interpretation sentences to flat statements, overshooting the explicit reading-language register already enforced elsewhere on the active gravity chapter.
+   Fix: rewrote the higher-spin no-splitting sentence and the closing scope sentence so both now keep their physical content explicitly in the corresponding gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 446
+
+- Target: genus-$1$ curvature and scalar-lane free-energy prose, where the active chapter still conflated the constant trace-level $F_1$ with the $\eta$-packaged oscillator bookkeeping
+- Iteration: `446`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the `\mathcal{W}_N` cleanup and re-read the downstream genus-tower opener against the later repaired oscillator-vs-trace bands.
+- The next real survivor was a propagated contradiction: the Movement IV summary still wrote `F_1(\tau) = -\frac{c-26}{24}\log\eta(\tau)`, and the later scalar-lane computation still named `-\log Z_1^{\mathrm{scal}}(\tau)` as `F_1(\tau)`, even though the repaired genus-$1$ discussion elsewhere now treats $\log\eta(\tau)$ as oscillator bookkeeping and $F_1$ as the constant trace-level genus-$1$ free energy.
+- Rewrote that local cluster so the genus-tower summary now says the $\eta$-function packages the oscillator contribution without identifying it with $F_1$, and the later scalar-lane computation now calls $-\log Z_1^{\mathrm{scal}}(\tau)$ the bookkeeping exponent while keeping $F_1 = \kappa\,\lambda_1^{\mathrm{FP}} = c/48$ as the integrated genus-$1$ free energy.
+- Ran hostile local reread plus fixed-string checks to confirm the old `F_1(\tau)` notation is gone from the active chapter and the patched bookkeeping-language is present.
+
+### Findings
+
+506. `2026-04-02-506`
+   Severity: `MODERATE`
+   Class: `B`
+   Location: `chapters/connections/3d_gravity.tex:1438-1449; 2478-2485`
+   Issue: the active genus-$1$ surface still conflated the constant trace-level free energy $F_1$ with the $\eta$-packaged oscillator bookkeeping, creating a real internal contradiction against the later repaired genus-$1$ discussion.
+   Fix: rewrote both occurrences so the $\eta$-dependent quantity is now explicitly treated as oscillator bookkeeping, while $F_1$ remains the constant integrated genus-$1$ free energy.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 447
+
+- Target: quartic-shadow interpretation and complementarity close, where the local computation band still slipped out of the repaired reading layer
+- Iteration: `447`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the genus-$1$ bookkeeping repair and re-read the downstream shadow-tower/genus-$2$ computation band.
+- The next real survivor was a compact reading-layer mismatch: the quartic-shadow paragraph still said, without explicit qualification, that $3$d gravity has genuine nonlinear dynamics beyond one loop, and the complementarity close still said the quartic shadow is the first nonlinear witness of the duality between boundary and line sectors.
+- Rewrote that local cluster so both the nonlinear-dynamics clause and the complementarity-witness clause now stay explicitly in the corresponding gravitational reading.
+- Ran hostile local reread plus line-stable fixed-string checks to confirm the new reading markers are present in the touched band and the retired flatter clauses are gone from the checked surface.
+
+### Findings
+
+507. `2026-04-02-507`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1828-1851`
+   Issue: the quartic-shadow interpretation and complementarity close still promoted their physical consequences to flat statements, overshooting the explicit reading-language register already enforced elsewhere on the repaired gravity chapter.
+   Fix: rewrote the nonlinear-dynamics clause and the complementarity-witness clause so both now remain explicitly in the corresponding gravitational reading.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 448
+
+- Target: Cardy/BTZ status summaries across the active gravity and preface surfaces
+- Iteration: `448`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the quartic-shadow cleanup and re-read the downstream BTZ/Cardy bridge bands against the later `\ClaimStatusConjectured` MC-moduli proposition.
+- The next real survivor was a propagated status seam: the upstream gravity summary still said the Cardy asymptotics follows from the modular $S$-transform, the late gravity recap still said the asymptotic density was derived in Proposition~\ref{prop:cardy-mc}, and the preface still advertised the Cardy formula from the MC dictionary/partition function as if it were proved.
+- Rewrote that live cluster so the gravity summary now says the Cardy asymptotics is expected to follow, the late recap now calls it the conjectural asymptotic density described in Proposition~\ref{prop:cardy-mc}, and the preface now marks the BTZ-state density and MC-partition-function Cardy step as conjectural while keeping the BTZ-as-MC-element statement proved.
+- Ran hostile local reread plus fixed-string checks to confirm the new conjectural wording is present on the touched surfaces and the retired stronger status language is gone.
+
+### Findings
+
+508. `2026-04-02-508`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1521-1529; 3166-3172`; `chapters/frame/preface.tex:1519-1522; 1893-1896`
+   Issue: the active gravity and preface summaries still advertised the Cardy/BTZ conclusion as if it were proved, contradicting the live theorem surface where Proposition~\ref{prop:cardy-mc} remains explicitly conjectural.
+   Fix: rewrote the affected summary and recap bands so the Cardy asymptotics / Cardy formula are now explicitly marked as expected or conjectural, while preserving the proved BTZ-as-MC-element statement.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 449
+
+- Target: Cardy/BTZ theorem band and its downstream advertisements, where the live theorem surface itself overstated the proof status
+- Iteration: `449`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the previous BTZ/Cardy summary cleanup and re-read the live Cardy/BTZ theorem band itself.
+- The next real survivor was a load-bearing status bug: the chapter now labels `\ref{prop:cardy-mc}` as `Cardy formula from the bar complex; \ClaimStatusProvedHere`, and the BTZ entropy theorem is also tagged `\ClaimStatusProvedHere`, but the proof only gives an argument sketch resting on modular invariance, vacuum dominance, and saddle-point extraction rather than a traced-to-ground theorem chain on the active surface.
+- Rewrote that theorem cluster so the Cardy formula and BTZ entropy theorems are now both `\ClaimStatusConjectured`, the proof headings now honestly read `Argument sketch` / `Conditional derivation`, and the chapter-opening and preface summary advertisements now match that conjectural status while preserving the proved BTZ-as-MC-element statement.
+- Ran hostile local reread plus fixed-string checks to confirm the touched theorem bands now carry conjectural status, the revised proof headings are present, and the retired proved/derived status slogans are gone from the checked active gravity/preface surface.
+
+### Findings
+
+509. `2026-04-02-509`
+   Severity: `SERIOUS`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:60-66; 2017-2111; 3370-3374`; `chapters/frame/preface.tex:735-738; 1519-1522; 1893-1896`
+   Issue: the live Cardy/BTZ theorem band and its downstream advertisements overstated the proof status, presenting the Cardy formula and BTZ entropy as proved even though the active proof only supplies an argument sketch relying on modular invariance, vacuum dominance, and saddle-point input that are not independently grounded on the checked live surface.
+   Fix: downgraded the Cardy formula and BTZ entropy theorems to `\ClaimStatusConjectured`, renamed the proof headings to reflect their actual role, and propagated the conjectural status through the chapter-opening and preface summaries.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 450
+
+- Target: Cardy/BTZ metadata layer, where local headings and index entries still lagged behind the downgraded theorem status
+- Iteration: `450`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy/BTZ theorem-status downgrade and re-read the same band’s local heading and index layer.
+- The next real survivor was a compact metadata mismatch: the theorem band still indexed under `Cardy formula!from bar complex`, and the neighboring subsubsection/title layer still advertised `BTZ entropy from the bar complex`, which silently over-advertised the now-conjectural live surface.
+- Rewrote that metadata layer so the Cardy and Bekenstein--Hawking index entries now file under `conjectural bar-complex derivation`, and the local subsubsection now reads `Conjectural BTZ entropy from the bar complex`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat metadata wording is gone and the patched conjectural metadata is present on the touched theorem band.
+
+### Findings
+
+510. `2026-04-02-510`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2021; 2061-2066`
+   Issue: after the Cardy/BTZ theorem-status downgrade, the local heading and index metadata still advertised the band as a flat bar-complex derivation, lagging behind the newly conjectural theorem surface.
+   Fix: rewrote the Cardy/Bekenstein--Hawking index entries and the BTZ-entropy subsubsection title so the metadata now explicitly reflects the conjectural status.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 451
+
+- Target: downstream Cardy/BTZ recap prose after the theorem-status downgrade
+- Iteration: `451`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy/BTZ metadata cleanup and re-read the downgraded theorem neighborhood together with its nearby recap surfaces.
+- The next real survivor was a propagated status mismatch: the Verdier-duality aftermath still said the commutativity `produces a paired Cardy formula`, and the late BTZ partition-function recap still said the Cardy asymptotics `was derived in` Theorem~\ref{thm:gravity-cardy}, even though that theorem band is now explicitly conjectural.
+- Rewrote that pair so the Koszul-pair relation is now stated conditionally on the conjectural Cardy formula, and the late recap now calls the large-$h$ density the conjectural asymptotic density described in Theorem~\ref{thm:gravity-cardy}.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger status phrasing is gone from the checked bands and the patched conjectural wording is present.
+
+### Findings
+
+511. `2026-04-02-511`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2154-2166; 3351-3356`
+   Issue: after the theorem-status downgrade, downstream recap prose still advertised a paired Cardy formula and a derived Cardy asymptotic density as if the underlying theorem band remained proved.
+   Fix: rewrote the Verdier-duality aftermath to make the paired relation conditional on the conjectural Cardy formula, and rewrote the late BTZ recap so the asymptotic density is now explicitly described as conjectural.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 452
+
+- Target: downgraded Cardy/BTZ theorem-body surface, where headings and theorem statements still read in the old assertive register
+- Iteration: `452`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the downstream Cardy/BTZ recap cleanup and re-read the downgraded theorem neighborhood itself.
+- The next real survivor was a theorem-body status mismatch: the local subsubsection headings still said `The Cardy formula` / `Saddle-point extraction and the Cardy formula`, and the theorem statements still said the asymptotic entropy / BTZ entropy `is`, even though the status tags had already been downgraded to `\ClaimStatusConjectured`.
+- Rewrote that theorem-body surface so the headings now say `Toward the conjectural Cardy formula` and `Saddle-point extraction for the conjectural Cardy formula`, the Cardy theorem statement now says the entropy is conjecturally given, the explanatory sentence now says it would be the logarithmic growth rate, and the BTZ-entropy theorem statement now says the entropy is conjecturally given.
+- Ran hostile local reread plus fixed-string checks to confirm the new conjectural heading/statement wording is present across the touched band.
+
+### Findings
+
+512. `2026-04-02-512`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1963-2035; 2061-2067`
+   Issue: after the Cardy/BTZ theorem-status downgrade, the local headings and theorem statements still presented that band in the old assertive register, creating a visible mismatch between the conjectural status tags and the theorem-body prose.
+   Fix: rewrote the two local headings and the Cardy/BTZ theorem statements so the visible theorem-body surface now matches the downgraded conjectural status.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 453
+
+- Target: heuristic setup of the downgraded Cardy band, where the local modular-invariance / vacuum-dominance / saddle-point prose still spoke too strongly for the new conjectural status
+- Iteration: `453`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy/BTZ theorem-body cleanup and re-read the local heuristic setup feeding the downgraded theorem band.
+- The next real survivor was a theorem-support status mismatch: even after the theorem and heading surfaces had been downgraded, the setup prose still said modular invariance and vacuum dominance `give` the high-temperature estimate, still treated vacuum dominance as the theorem-level statement of the arity-$0$ control, and still said the saddle-point computation `giving` the Cardy exponent, which overstated the status of those steps.
+- Rewrote that heuristic cluster so the high-temperature estimate is now introduced conditionally, the bar-complex gloss now says vacuum dominance would amount to the arity-$0$ control statement, and the saddle-point line now says it would give the Cardy exponent under those assumptions.
+- Ran hostile local reread plus line-stable fixed-string checks to confirm the new conditional phrasing is present throughout the touched heuristic band.
+
+### Findings
+
+513. `2026-04-02-513`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1984-2017`
+   Issue: after the Cardy/BTZ theorem-status downgrade, the heuristic setup still presented modular invariance, vacuum dominance, and saddle-point extraction in an overly assertive register, creating a local mismatch with the conjectural status of the theorem band they support.
+   Fix: rewrote the setup so the modular-invariance estimate, the vacuum-dominance gloss, and the saddle-point consequence are all stated conditionally.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 454
+
+- Target: proof-sketch support bullets in the conjectural Cardy theorem band
+- Iteration: `454`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the conjectural-register cleanup and re-read the proof sketch of the downgraded Cardy theorem.
+- The next real survivor was a theorem-support status mismatch: even after the theorem had been downgraded to `\ClaimStatusConjectured`, the proof bullets still said modular invariance and the saddle-point `follow` from the cited structures as if those inputs were already established on the live surface.
+- Rewrote those bullets so the modular invariance is now explicitly expected, the MC-element invariance is correspondingly expected, and the saddle-point is now stated as a consequence that would follow under those assumptions.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger proof-support phrasing is gone and the new conditional proof language is present in the touched band.
+
+### Findings
+
+514. `2026-04-02-514`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2047-2056`
+   Issue: after the Cardy theorem was downgraded to conjectural, the proof sketch still presented modular invariance and the saddle-point as established consequences, creating a local mismatch between the theorem status and the proof-support prose.
+   Fix: rewrote the support bullets so the modular invariance, MC-element invariance, and saddle-point are all explicitly presented as expected or conditional inputs.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 455
+
+- Target: theorem-title layer of the conjectural Cardy/BTZ band
+- Iteration: `455`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the proof-sketch cleanup and re-read the same conjectural Cardy/BTZ theorem band with a focus on the visible theorem titles.
+- The next real survivor was a local title-layer mismatch: the status tags had already been downgraded to `\ClaimStatusConjectured`, but the theorem titles themselves still read `Cardy formula from the bar complex` and `BTZ entropy`, which lagged behind the now-conjectural theorem surface.
+- Rewrote those titles so they now read `Conjectural Cardy formula from the bar complex` and `Conjectural BTZ entropy`.
+- Ran hostile local reread plus fixed-string checks to confirm the new conjectural theorem titles are present across the touched band.
+
+### Findings
+
+515. `2026-04-02-515`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2051-2052; 2096-2098`
+   Issue: after the Cardy/BTZ status downgrade, the theorem titles themselves still used the old assertive wording, creating a visible mismatch between the title layer and the conjectural status tags.
+   Fix: rewrote the two theorem titles so the visible theorem band now explicitly advertises the conjectural status.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 456
+
+- Target: citation-layer propagation from the downgraded Cardy/BTZ theorem band into the active preface advertisements
+- Iteration: `456`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the theorem-title cleanup and re-read the active preface advertisements of the downgraded Cardy/BTZ theorem band.
+- The next real survivor was a citation-layer status mismatch: the preface still cited `\ref{prop:cardy-mc}` as a proposition in three live places even though that label now sits on the conjectural Cardy theorem band.
+- Rewrote those three preface references so they now point to `Theorem~\ref{prop:cardy-mc}`, matching the live theorem environment without changing the already-stable conjectural wording.
+- Ran hostile fixed-string checks plus local reread to confirm the stale `Proposition~\ref{prop:cardy-mc}` wording no longer survives on the active surface and that the patched theorem references are present in all three touched locations.
+
+### Findings
+
+516. `2026-04-02-516`
+   Severity: `MINOR`
+   Class: `C`
+   Location: `chapters/frame/preface.tex:738; 1522; 1896`
+   Issue: after the Cardy/BTZ band was downgraded and rewritten as a conjectural theorem, the active preface still advertised `\ref{prop:cardy-mc}` as a proposition, leaving the citation layer out of sync with the live theorem surface.
+   Fix: rewrote the three active preface references so they now cite `Theorem~\ref{prop:cardy-mc}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 457
+
+- Target: theorem-band index metadata for the downgraded Cardy/BTZ surface
+- Iteration: `457`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the preface-citation cleanup and re-read the local theorem-band metadata around the downgraded Cardy formula theorem.
+- The next real survivor was an index-layer status mismatch: the theorem metadata still filed that band under the bare tag `BTZ black hole!Cardy formula` even though the visible theorem title, status tag, and surrounding prose had already been normalized to the conjectural register.
+- Rewrote that index entry so it now files under `BTZ black hole!conjectural Cardy formula`, aligning the index layer with the live theorem surface.
+- Ran hostile fixed-string checks plus local reread to confirm the retired bare index tag no longer survives on the active surface and the patched conjectural index tag is present on the theorem band.
+
+### Findings
+
+517. `2026-04-02-517`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2055-2056`
+   Issue: after the Cardy/BTZ theorem band was downgraded to conjectural, its neighboring BTZ index entry still used the older bare `Cardy formula` wording, leaving the theorem metadata slightly out of sync with the visible conjectural status.
+   Fix: rewrote the index entry so it now files under `BTZ black hole!conjectural Cardy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 458
+
+- Target: theorem-band BTZ-entropy index metadata on the downgraded Cardy/BTZ surface
+- Iteration: `458`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy-theorem index cleanup and re-read the neighboring conjectural BTZ-entropy theorem band.
+- The next real survivor was another index-layer status mismatch: the BTZ-entropy theorem already carried a conjectural title, claim tag, and body, but its adjacent BTZ index entry still filed the theorem under the bare tag `BTZ black hole!entropy`.
+- Rewrote that index entry so it now files under `BTZ black hole!conjectural BTZ entropy`, aligning the index layer with the visible theorem surface.
+- Ran hostile fixed-string checks plus local reread to confirm the retired bare entropy tag no longer survives on the active surface and the patched conjectural index tag is present on the live theorem band.
+
+### Findings
+
+518. `2026-04-02-518`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2098-2100`
+   Issue: after the BTZ-entropy theorem band was downgraded to conjectural, its neighboring BTZ index entry still used the older bare `entropy` wording, leaving the theorem metadata slightly out of sync with the visible conjectural status.
+   Fix: rewrote the index entry so it now files under `BTZ black hole!conjectural BTZ entropy`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 459
+
+- Target: immediate proof-support language in the conjectural BTZ-entropy theorem band
+- Iteration: `459`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ-entropy index cleanup and re-read the conjectural BTZ theorem together with its immediate proof opener.
+- The next real survivor was a proof-band status mismatch: the theorem already carried a conjectural title, claim tag, proof heading, and neighboring recap language, but the proof still opened with the flatter clause `Assuming the Cardy formula~\eqref{eq:gravity-cardy}`.
+- Rewrote that opener so it now says `Assuming the conjectural Cardy formula~\eqref{eq:gravity-cardy}`, bringing the local support prose into the same register as the rest of the downgraded theorem surface.
+- Ran hostile fixed-string checks plus local reread to confirm the retired flatter opener is gone and that both surviving local assumption lines now explicitly carry the conjectural Cardy register.
+
+### Findings
+
+519. `2026-04-02-519`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2281-2284`
+   Issue: after the BTZ-entropy theorem band was downgraded to conjectural, its proof still opened by assuming the bare `Cardy formula`, leaving a small local mismatch between the theorem status and the proof-support language.
+   Fix: rewrote the proof opener so it now assumes the conjectural Cardy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 460
+
+- Target: local Cardy-formula wording cluster in the conjectural Cardy/BTZ theorem-support band
+- Iteration: `460`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ-proof opener cleanup and re-read the immediate Cardy-proof close together with the neighboring BTZ conditional derivation.
+- The next real survivor was a compact theorem-support wording seam: two local lines still dropped back to the flatter bare `Cardy formula` wording, even though the surrounding proof-support surface had already been normalized to the conjectural register.
+- Rewrote that pair so the Cardy-theorem proof close now says it gives the bar-complex derivation of the conjectural Cardy formula, and the BTZ conditional derivation now says the substitution is made into the conjectural Cardy formula.
+- Ran hostile fixed-string checks plus local reread to confirm the retired flatter wording is gone from the touched proof-support cluster and the patched conjectural-language pair is present.
+
+### Findings
+
+520. `2026-04-02-520`
+   Severity: `MINOR`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2251-2252; 2282-2285`
+   Issue: the local proof-support cluster around the downgraded Cardy/BTZ theorem band still used two bare `Cardy formula` clauses, leaving a small internal wording mismatch after the surrounding proof surface had already shifted to the conjectural register.
+   Fix: rewrote the two local clauses so they now refer explicitly to the conjectural Cardy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 461
+
+- Target: non-rotating specialization inside the conditional BTZ-entropy derivation
+- Iteration: `461`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy-formula wording cleanup and re-read the remaining lines of the conditional BTZ derivation for any flat downstream consequence language.
+- The next real survivor was a local status mismatch in the non-rotating specialization: the proof was already explicitly conditional, but the sentence still said the formula `reduces to the standard Bekenstein--Hawking formula`, which slipped back into a flatter register than the surrounding `would`-language.
+- Rewrote that sentence so it now says the non-rotating specialization `would reduce to` the standard Bekenstein--Hawking formula.
+- Ran hostile local reread plus fixed-string checks to confirm the conditional proof band now keeps the same `would`-register through the Bekenstein--Hawking specialization.
+
+### Findings
+
+521. `2026-04-02-521`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2301-2304`
+   Issue: inside the already conditional BTZ-entropy derivation, the non-rotating specialization still said the formula `reduces to` the standard Bekenstein--Hawking formula, creating a small local mismatch with the surrounding conjectural/conditional support language.
+   Fix: rewrote the specialization so it now says the formula `would reduce to` the standard Bekenstein--Hawking formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 462
+
+- Target: self-dual maximization clause in the conjectural Verdier/Cardy aftermath
+- Iteration: `462`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the non-rotating BTZ cleanup and re-read the immediate aftermath paragraph under the explicit `Assuming the conjectural Cardy formula` clause.
+- The next real survivor was a local status mismatch in that aftermath: the paragraph had already been framed conditionally, but the self-dual conclusion still said the total counting capacity `is maximized`, which slipped back into a flatter register than the surrounding conditional support language.
+- Rewrote that clause so it now says the total counting capacity `would be maximized`, keeping the full paragraph in the same conjectural/conditional register.
+- Ran hostile local reread plus fixed-string checks to confirm the touched paragraph now stays in the `would`-language through the self-dual maximization claim.
+
+### Findings
+
+522. `2026-04-02-522`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2354-2356`
+   Issue: inside the paragraph already conditioned on the conjectural Cardy formula for the Koszul pair, the self-dual maximization sentence still said the total counting capacity `is maximized`, creating a small local mismatch with the surrounding conjectural/conditional support language.
+   Fix: rewrote the clause so it now says the total counting capacity `would be maximized`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 463
+
+- Target: `c=26` endpoint clause in the conjectural Verdier/Cardy aftermath
+- Iteration: `463`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the self-dual maximization cleanup and re-read the same local aftermath paragraph for any remaining flat endpoint consequence language.
+- The next real survivor was the adjacent `c=26` endpoint clause: even after the paragraph had been framed conditionally and the maximization sentence had been softened, the line still said the dual contribution `vanishes`, which lagged behind the surrounding `would`-register.
+- Rewrote that endpoint clause so it now says the dual contribution `would vanish`, keeping the whole aftermath paragraph in a single conditional/conjectural register.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat endpoint wording is gone and the touched paragraph now stays conditional through the `c=26` specialization.
+
+### Findings
+
+523. `2026-04-02-523`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2357-2359`
+   Issue: inside the paragraph already conditioned on the conjectural Cardy formula for the Koszul pair, the `c=26` endpoint still said the dual contribution `vanishes`, creating a small local mismatch with the surrounding conditional support language.
+   Fix: rewrote the endpoint clause so it now says the dual contribution `would vanish`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 464
+
+- Target: proof-close register in the conjectural Cardy theorem band
+- Iteration: `464`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Verdier/Cardy aftermath cleanup and re-read the local proof close of the conjectural Cardy theorem against the expected/conditional proof bullets immediately above it.
+- The next real survivor was a proof-close status mismatch: the proof inputs were already explicitly expected or conditional, but the final sentence still said `This gives the bar-complex derivation of the conjectural Cardy formula`, which remained slightly stronger than the support language on which it rested.
+- Rewrote that proof close so it now says `This would give the bar-complex derivation of the conjectural Cardy formula`, aligning the final sentence with the register already used throughout the proof body.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger proof-close wording is gone and the touched proof band is now internally consistent.
+
+### Findings
+
+524. `2026-04-02-524`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2249-2252`
+   Issue: in the conjectural Cardy theorem band, the proof-close sentence still used the stronger `This gives ...` wording even though the proof bullets above had already shifted to explicitly expected or conditional language.
+   Fix: rewrote the proof close so it now says `This would give ...`, matching the register of the proof-support inputs.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 465
+
+- Target: remaining connective-language cluster in the conjectural Verdier/Cardy aftermath
+- Iteration: `465`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy-proof-close cleanup and re-read the same local Verdier/Cardy aftermath paragraph for any remaining connective verbs that still read harder than the conjectural assumption already in force.
+- The next real survivor was a two-clause connective-language mismatch: the paragraph still said the commutativity `organizes the paired asymptotic relation` and closed with `This is the conjectural entropic shadow`, even though the surrounding lines had already been normalized to the `would`-register.
+- Rewrote that pair so the paragraph now says the commutativity `would organize` the paired asymptotic relation and the closing gloss `would be` the conjectural entropic shadow of the complementarity constant.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger connective wording is gone and the touched paragraph is now uniformly conditional/conjectural throughout.
+
+### Findings
+
+525. `2026-04-02-525`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2348-2360`
+   Issue: within the Verdier/Cardy aftermath already conditioned on the conjectural Cardy formula, the connective verbs `organizes` and `This is` still read slightly harder than the surrounding `would`-register.
+   Fix: rewrote the pair so the paragraph now says the commutativity `would organize` the paired asymptotic relation and the closing gloss `would be` the conjectural entropic shadow.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 466
+
+- Target: remaining modality mismatch in the conjectural Verdier/Cardy aftermath
+- Iteration: `466`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the connective-language cleanup and re-read the same local aftermath paragraph for any remaining mismatch between explicit conjectural assumptions and downstream modality.
+- The next real survivor was a single-clause modality mismatch: once the paragraph had already been normalized to the `would`-register, the self-dual sentence still said the two terms were `conjecturally equal`, which was the only remaining local clause not phrased as a direct conditional consequence.
+- Rewrote that clause so it now says the two terms `would be equal`, bringing the full paragraph into one consistent modality.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `conjecturally equal` wording is gone and the touched paragraph is now uniform line by line.
+
+### Findings
+
+526. `2026-04-02-526`
+   Severity: `MINOR`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2354-2355`
+   Issue: within the Verdier/Cardy aftermath already conditioned on the conjectural Cardy formula, the self-dual equality clause still said the two terms were `conjecturally equal`, leaving a small modality mismatch after the surrounding lines had all been shifted to the `would`-register.
+   Fix: rewrote the clause so it now says the two terms `would be equal`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 467
+
+- Target: type-level mismatch in the active preface advertisement of the conjectural Cardy theorem
+- Iteration: `467`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the local Verdier/Cardy cleanup and widened the audit to the active preface advertisements of the same conjectural Cardy/BTZ surface.
+- The next real survivor was a type mismatch in the preface: the sentence still said the Cardy formula `is conjecturally the asymptotic density of BTZ states`, which confused the entropy formula with the density it controls.
+- Rewrote that sentence so it now says the Cardy formula is conjecturally the asymptotic entropy formula for BTZ states, matching the live theorem band where the same expression is treated as the logarithmic growth rate.
+- Ran hostile fixed-string checks plus local reread to confirm the retired density-language is gone from the active preface surface and the patched entropy-formula wording now aligns with the theorem band.
+
+### Findings
+
+527. `2026-04-02-527`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1519-1522`
+   Issue: the active preface still said the Cardy entropy formula `is conjecturally the asymptotic density of BTZ states`, which conflated the entropy/logarithmic-growth formula with the density it determines.
+   Fix: rewrote the sentence so it now says the Cardy formula is conjecturally the asymptotic entropy formula for BTZ states.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 468
+
+- Target: type-level compression in the active top-layer and chapter-summary BTZ recaps
+- Iteration: `468`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the preface type-level cleanup and re-read the active top-layer and chapter-closing summary surfaces for the same BTZ/Cardy package.
+- The next real survivor was a parallel type-level compression: two active recap lines still presented the displayed expression `S = \cdots` as the BTZ entropy itself rather than the BTZ entropy formula.
+- Rewrote those two summary lines so the opening chapter map now says `BTZ Bekenstein--Hawking entropy formula $S_{\mathrm{BTZ}} = \cdots$`, and the closing boxed summary now says `the conjectural BTZ entropy formula $S = \cdots$`.
+- Ran hostile fixed-string checks plus local reread to confirm the retired compressed wording is gone from both active summary surfaces.
+
+### Findings
+
+528. `2026-04-02-528`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:62-65; 3568-3570`
+   Issue: the active top-layer and chapter-closing summaries still compressed the displayed BTZ expression `S = \cdots` into the entropy itself, rather than naming it as the BTZ entropy formula.
+   Fix: rewrote both recap lines so they now explicitly say `Bekenstein--Hawking entropy formula` / `conjectural BTZ entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 469
+
+- Target: type-level compression in the upstream Cardy/BTZ summary band
+- Iteration: `469`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the top-layer BTZ formula cleanup and re-read the upstream chapter-summary band of the same live Cardy/BTZ package.
+- The next real survivor was a type-level compression: the summary still said the BTZ entropy itself is read as the high-temperature shadow of the genus-0 arity-2 datum, even though the live theorem and recap surfaces now consistently treat the displayed expression as the corresponding BTZ entropy formula.
+- Rewrote that clause so it now says the corresponding BTZ entropy formula is read as its high-temperature shadow.
+- Ran hostile local reread plus fixed-string checks to confirm the retired compressed wording is gone from the checked band and the patched formula-language is present.
+
+### Findings
+
+529. `2026-04-02-529`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1724-1726`
+   Issue: the upstream Cardy/BTZ summary still compressed the displayed entropy expression into the BTZ entropy itself when describing the high-temperature shadow of the genus-0 arity-2 datum.
+   Fix: rewrote the clause so it now says the corresponding BTZ entropy formula is read as that high-temperature shadow.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 470
+
+- Target: density-versus-logarithmic-growth mismatch in the late BTZ partition-function recap
+- Iteration: `470`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the upstream BTZ-formula cleanup and re-read the late BTZ partition-function recap against the live conjectural Cardy theorem surface.
+- The next real survivor was a type mismatch: the recap still said the exponential Cardy asymptotics is the conjectural asymptotic density described in Theorem~`\\ref{thm:gravity-cardy}`, even though that theorem is explicitly phrased as the logarithmic growth rate.
+- Rewrote that sentence so it now says the displayed Cardy asymptotics is the corresponding conjectural asymptotic density, whose logarithmic growth rate is described in Theorem~`\\ref{thm:gravity-cardy}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired density-language is gone from the checked recap band and the patched theorem-aligned wording is present.
+
+### Findings
+
+530. `2026-04-02-530`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:3547-3551`
+   Issue: the late BTZ partition-function recap still collapsed the conjectural asymptotic density into the theorem that actually states only its logarithmic growth rate.
+   Fix: rewrote the sentence so the density is now described as the exponential Cardy asymptotics whose logarithmic growth rate is given by Theorem~`\\ref{thm:gravity-cardy}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 471
+
+- Target: theorem-level entropy-versus-entropy-formula mismatch in the conjectural BTZ band
+- Iteration: `471`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the late BTZ recap cleanup and re-read the live BTZ theorem surface itself rather than only its downstream advertisements.
+- The next real survivor was a theorem-level type compression: the subsubsection title, theorem title, index tags, and theorem sentence still named the BTZ entropy directly, even though the repaired live summary surface now consistently treats the displayed equation as the conjectural BTZ entropy formula.
+- Rewrote that local theorem band so it now uniformly says `Conjectural BTZ entropy formula`, files the nearby index entries under `...entropy formula`, and states that the Bekenstein--Hawking entropy formula for the BTZ black hole is conjecturally given by the displayed expression.
+- Ran hostile local reread plus fixed-string checks to confirm the retired entropy-level title/index wording is gone from the checked theorem band and the patched formula-language is present.
+
+### Findings
+
+531. `2026-04-02-531`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2255-2261`
+   Issue: the visible conjectural BTZ theorem surface still compressed the displayed equation into the BTZ entropy itself rather than naming it as the conjectural BTZ entropy formula.
+   Fix: rewrote the local theorem band so the subsubsection title, theorem title, index tags, and theorem sentence now uniformly use the entropy-formula register.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 472
+
+- Target: proof-level nomenclature mismatch in the conjectural BTZ entropy-formula derivation
+- Iteration: `472`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ theorem-surface cleanup and re-read the conditional derivation supporting that same conjectural entropy-formula band.
+- The next real survivor was a local nomenclature mismatch: the proof close still said the non-rotating specialization would reduce to the `standard Bekenstein--Hawking formula`, even though the repaired theorem surface now consistently names the displayed expression as the Bekenstein--Hawking entropy formula.
+- Rewrote that proof line so it now says the specialization would reduce to the standard Bekenstein--Hawking entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter wording is gone from the checked proof band and the patched formula-language is present.
+
+### Findings
+
+532. `2026-04-02-532`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2359-2361`
+   Issue: the conditional proof close still used the shorter `standard Bekenstein--Hawking formula` wording after the surrounding conjectural BTZ theorem surface had already been normalized to the entropy-formula register.
+   Fix: rewrote the local proof line so it now says `standard Bekenstein--Hawking entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 473
+
+- Target: top-layer preface advertisement mismatch in the live Cardy/BTZ package
+- Iteration: `473`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the BTZ proof-band cleanup and re-read the active preface advertisements for the same conjectural Cardy/BTZ surface.
+- The next real survivor was a type-level advertisement mismatch: the preface still said the `Cardy growth law` is conjecturally recovered from the MC dictionary, even though the repaired theorem band and the neighboring preface line now treat the same object as the conjectural asymptotic entropy formula.
+- Rewrote that preface clause so it now says the conjectural Cardy asymptotic entropy formula is recovered from the MC dictionary.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `Cardy growth law` slogan is gone from the checked active surface and the patched entropy-formula language is present.
+
+### Findings
+
+533. `2026-04-02-533`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:735-738`
+   Issue: the top-layer preface advertisement still used the looser `Cardy growth law` slogan for the conjectural MC-dictionary output, lagging behind the repaired theorem and neighboring preface entropy-formula register.
+   Fix: rewrote the clause so it now says the conjectural Cardy asymptotic entropy formula is recovered from the MC dictionary.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 474
+
+- Target: late-preface bullet mismatch in the live Cardy/BTZ advertisement surface
+- Iteration: `474`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the top-layer preface cleanup and re-read the remaining late preface bullets for the same conjectural Cardy/BTZ package.
+- The next real survivor was a local advertisement mismatch: the late bullet still said `Cardy formula from the MC partition function`, while the repaired earlier preface advertisement already used the sharper entropy-formula register for the same theorem.
+- Rewrote that late bullet so it now says `Cardy asymptotic entropy formula from the MC partition function`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter bullet wording is gone from the checked active preface surface and the patched entropy-formula language is present.
+
+### Findings
+
+534. `2026-04-02-534`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1893-1896`
+   Issue: the late preface bullet still advertised the conjectural BTZ/Cardy result as `Cardy formula from the MC partition function`, lagging behind the repaired entropy-formula wording already used elsewhere on the active preface surface.
+   Fix: rewrote the bullet so it now says `Cardy asymptotic entropy formula from the MC partition function`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 475
+
+- Target: chapter-opening advertisement mismatch in the live Cardy/BTZ surface
+- Iteration: `475`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the late preface bullet cleanup and re-read the remaining top-layer chapter-map advertisements for the same conjectural Cardy/BTZ package.
+- The next real survivor was a local advertisement mismatch: the opening gravity summary still said `The Cardy formula and the BTZ Bekenstein--Hawking entropy formula`, while the repaired preface advertisements had already shifted the Cardy side to the sharper entropy-formula register.
+- Rewrote that chapter-opening clause so it now says `The Cardy asymptotic entropy formula and the BTZ Bekenstein--Hawking entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter top-layer slogan is gone from the checked active surface and the patched entropy-formula wording is present.
+
+### Findings
+
+535. `2026-04-02-535`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:63-66`
+   Issue: the chapter-opening gravity summary still advertised the conjectural Cardy side of the BTZ/Cardy package with the shorter `Cardy formula` slogan, lagging behind the repaired entropy-formula register already used across the active preface surface.
+   Fix: rewrote the chapter-opening clause so it now says `Cardy asymptotic entropy formula` alongside the BTZ Bekenstein--Hawking entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 476
+
+- Target: theorem-support nomenclature cluster in the live Cardy/BTZ band
+- Iteration: `476`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the chapter-opening cleanup and re-read the live Cardy theorem-support surface itself rather than only its top-layer advertisements.
+- The next real survivor was a local nomenclature cluster: the subsection titles, theorem title, index tags, proof close, and nearby assumption references still used the shorter `conjectural Cardy formula` wording even though the repaired theorem body and chapter advertisements had already stabilized on the asymptotic-entropy-formula register.
+- Rewrote that local cluster so it now uniformly says `conjectural Cardy asymptotic entropy formula` across the theorem-support surface.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter theorem-support wording is gone from the checked Cardy band and the patched entropy-formula language is present.
+
+### Findings
+
+536. `2026-04-02-536`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2227-2426`
+   Issue: the live Cardy theorem-support band still used the shorter `conjectural Cardy formula` naming in titles, index entries, proof close, and assumption references, lagging behind the repaired asymptotic-entropy-formula register already used in the theorem body and active advertisements.
+   Fix: rewrote that local theorem-support cluster so it now uniformly uses `conjectural Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 477
+
+- Target: remaining bare Cardy-formula survivor on the live preface surface
+- Iteration: `477`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the Cardy theorem-support cleanup and re-read the remaining live preface advertisements for any surviving bare `Cardy formula` wording.
+- The next real survivor was a local preface-sentence mismatch: one active sentence still began `The Cardy formula $S = \cdots$`, even though the repaired theorem band, chapter summaries, and other preface advertisements had already stabilized on the sharper asymptotic-entropy-formula register.
+- Rewrote that sentence so it now begins `The Cardy asymptotic entropy formula $S = \cdots$`.
+- Ran hostile local reread plus fixed-string checks to confirm the last active bare `Cardy formula` slogan is gone from the checked live surface and the patched entropy-formula wording is present.
+
+### Findings
+
+537. `2026-04-02-537`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1519-1522`
+   Issue: one active preface sentence still advertised the displayed Cardy expression with the bare `Cardy formula` label after the rest of the live Cardy/BTZ surface had already been normalized to the asymptotic-entropy-formula register.
+   Fix: rewrote the sentence so it now says `The Cardy asymptotic entropy formula $S = \cdots$`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 478
+
+- Target: one-sector scope mismatch in the upstream Cardy/BTZ recap band
+- Iteration: `478`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the last preface cleanup and re-read the upstream all-genus Cardy/BTZ recap band against the repaired theorem-level notation.
+- The next real survivor was a scope mismatch: that local recap displayed the one-sided formula `2\\pi\\sqrt{ch/6}` but still labeled it with the BTZ notation `S_{\\mathrm{BTZ}}` and immediately called it the corresponding BTZ entropy formula, even though the object actually on the page was the one-sector Cardy quantity.
+- Rewrote that local band so it now says `Cardy asymptotic entropy formula`, uses `S_{\\mathrm{Cardy}} = 2\\pi\\sqrt{ch/6}`, and says the corresponding Cardy asymptotic entropy formula is read as the high-temperature shadow of the genus-zero datum.
+- Ran hostile local reread plus fixed-string checks to confirm the retired one-sector BTZ wording is gone from the checked recap band and the patched Cardy notation is present.
+
+### Findings
+
+538. `2026-04-02-538`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1776-1784`
+   Issue: the upstream all-genus recap displayed a one-sided Cardy formula but still labeled it with BTZ notation and treated it as the BTZ entropy formula, overstating the scope of the object actually written there.
+   Fix: rewrote the local band so it now explicitly names the object as the Cardy asymptotic entropy formula, uses `S_{\\mathrm{Cardy}}`, and keeps the high-temperature-shadow reading at the same one-sector scope.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 479
+
+- Target: one-variable versus two-variable scope mismatch in the Cardy saddle-point derivation
+- Iteration: `479`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the upstream one-sector recap cleanup and re-read the live saddle-point derivation against the surrounding two-variable partition-function and theorem surface.
+- The next real survivor was a local scope mismatch: the setup switched to a one-variable degeneracy `d(h)` and a one-variable saddle function, while the theorem immediately below states the two-variable Cardy asymptotic entropy formula in `(h,\\bar h)` without explicitly marking the first computation as only the chiral half.
+- Rewrote that derivation band so it now says `chiral degeneracy contribution`, marks `f(\\tau_*)` as the one-sided contribution, explicitly says the same argument is then applied to the `\\bar\\tau`-sector, and adjusts the theorem lead-in to `large left/right conformal weights`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired one-variable/full-theorem compression is gone from the checked saddle-point band and the patched scope-language is present.
+
+### Findings
+
+539. `2026-04-02-539`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2268-2292`
+   Issue: the live Cardy saddle-point derivation still presented a one-variable computation as if it directly yielded the full two-variable theorem, without explicitly separating the chiral contribution from the later two-sided formula.
+   Fix: rewrote the local derivation/theorem lead-in so the one-sided saddle computation is named as the chiral contribution and the two-sided formula is obtained by applying the same argument to the `\\bar\\tau`-sector.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 480
+
+- Target: full-versus-chiral partition-function scope bug in the vacuum-dominance setup
+- Iteration: `480`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the one-variable saddle cleanup and re-read the vacuum-dominance setup against the surrounding full partition function and the now-explicitly chiral saddle extraction.
+- The next real survivor was a scope bug: equation~`\\eqref{eq:gravity-vacuum-dominance}` still wrote the one-sided high-temperature exponent as if it were the full two-variable partition function `Z(\\tau,\\bar\\tau)`, even though the later derivation already treated that estimate as the chiral input.
+- Rewrote that setup so it now says one is led, in each chiral sector, to the estimate `Z_{\\mathrm{chiral}}(\\tau) \\sim \\exp(\\cdots)`, and added a brief sentence saying this denotes the holomorphic contribution implicit in the full partition function~`\\eqref{eq:gravity-Z-full}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired full-function/one-sided compression is gone from the checked setup band and the patched chiral/full split is present.
+
+### Findings
+
+540. `2026-04-02-540`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2248-2261`
+   Issue: the live vacuum-dominance setup still wrote a one-sided high-temperature estimate as if it were the full partition function `Z(\\tau,\\bar\\tau)`, conflicting with the later chiral saddle-point derivation.
+   Fix: rewrote the equation and surrounding sentence so the estimate is now explicitly chiral, with `Z_{\\mathrm{chiral}}(\\tau)` named as the holomorphic contribution implicit in the full partition function.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 481
+
+- Target: full-versus-holomorphic partition-function scope mismatch in the upstream all-genus recap
+- Iteration: `481`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the chiral/full vacuum-dominance cleanup and re-read the upstream all-genus Cardy/BTZ recap against the repaired partition-function split later in the chapter.
+- The next real survivor was a scope mismatch: that upstream sentence still said the BTZ partition function itself is read as the exponential of a single all-genus generating function, even though the later live surface now explicitly distinguishes the holomorphic contribution from the full two-sided partition function.
+- Rewrote that sentence so it now says the holomorphic contribution to the BTZ partition function is read as the exponential of the all-genus generating function.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger full-partition-function wording is gone from the checked recap band and the patched holomorphic-sector language is present.
+
+### Findings
+
+541. `2026-04-02-541`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1772-1775`
+   Issue: the upstream all-genus recap still identified a single all-genus generating function with the full BTZ partition function, overstating the scope of the chiral quantity actually on the page.
+   Fix: rewrote the sentence so it now says the holomorphic contribution to the BTZ partition function is read as the exponential of that all-genus generating function.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 482
+
+- Target: two-variable growth-regime mismatch in the late BTZ density recap
+- Iteration: `482`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the upstream holomorphic/full partition-function cleanup and re-read the late BTZ density recap against the repaired two-variable Cardy theorem.
+- The next real survivor was a local scope mismatch: the recap already used the two-variable density `d(h,\\bar h)` and the two-variable exponential asymptotics, but it still said this held `at large h`, which no longer matched the repaired two-sided theorem surface.
+- Rewrote that clause so it now says the density is considered at `large left/right conformal weights`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired one-sided growth shorthand is gone from the checked recap band and the patched two-variable scope language is present.
+
+### Findings
+
+542. `2026-04-02-542`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:3631-3634`
+   Issue: the late BTZ density recap still described a two-variable asymptotic density in the one-sided growth regime `at large h`, understating the two-sided scope of the formula actually displayed.
+   Fix: rewrote the clause so it now says the density is taken at `large left/right conformal weights`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 483
+
+- Target: theorem-level single-copy versus two-sided scope mismatch in the Cardy band
+- Iteration: `483`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the late BTZ density cleanup and re-read the Cardy theorem surface itself against the now-explicitly two-sided saddle-point derivation below it.
+- The next real survivor was a theorem-level scope mismatch: the visible theorem surface still described the formula as the asymptotic entropy of `the Virasoro bar complex` while simultaneously advertising the two-sided `(h,\\bar h)` expression, which read like a single-copy claim for a genuinely two-sided formula.
+- Rewrote that theorem band so the title now says `Conjectural two-sided Cardy asymptotic entropy formula from the bar complex`, the nearby index entry records a `two-sided` bar-complex derivation, and the theorem sentence now says it is the two-sided asymptotic entropy formula obtained from the Virasoro bar complex.
+- Ran hostile local reread plus fixed-string checks to confirm the retired single-copy theorem phrasing is gone from the checked Cardy band and the patched two-sided scope is explicit in both title and statement.
+
+### Findings
+
+543. `2026-04-02-543`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2288-2295`
+   Issue: the live Cardy theorem surface still phrased a genuinely two-sided `(h,\\bar h)` formula as if it were simply the asymptotic entropy of a single Virasoro bar complex, creating a local single-copy versus two-sided scope mismatch.
+   Fix: rewrote the local theorem band so it now explicitly presents the result as the `two-sided Cardy asymptotic entropy formula` obtained from the Virasoro bar complex.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 484
+
+- Target: internal proof-support mismatch after the two-sided Cardy theorem repair
+- Iteration: `484`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the two-sided Cardy theorem-surface cleanup and re-read the immediately supporting proof-close and BTZ conditional-derivation lines for any shorter carry-over references.
+- The next real survivor was a local support mismatch: even after the theorem title and statement had been upgraded to the `two-sided` register, the proof close and the BTZ conditional derivation still referred back only to the shorter `conjectural Cardy asymptotic entropy formula`.
+- Rewrote that support cluster so it now says `conjectural two-sided Cardy asymptotic entropy formula` in the Cardy proof close and in both references inside the BTZ conditional derivation.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter references are gone from the touched Cardy/BTZ proof band and the patched two-sided scope is now carried through locally.
+
+### Findings
+
+544. `2026-04-02-544`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2329-2364`
+   Issue: after the theorem surface was upgraded to the two-sided register, the immediately supporting proof close and BTZ conditional derivation still used the shorter `conjectural Cardy asymptotic entropy formula` wording, leaving the local proof band internally inconsistent.
+   Fix: rewrote the touched support lines so they now uniformly refer to the `conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 485
+
+- Target: one-sided versus two-sided scope mismatch in the downstream Koszul-pair aftermath
+- Iteration: `485`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the two-sided Cardy proof-band cleanup and re-read the downstream Koszul-pair aftermath for the same live theorem surface.
+- The next real survivor was a scope mismatch: that aftermath formula is genuinely one-sided in `h`, but after the theorem was upgraded to the two-sided `(h,\\bar h)` register it still read as though it were invoking that same two-sided Cardy formula wholesale.
+- Rewrote that local aftermath so it now says `the corresponding conjectural one-sided Cardy asymptotic entropy formula for the Koszul pair` and `the paired one-sided asymptotic relation`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader wording is gone from the touched aftermath band and the patched one-sided scope is explicit.
+
+### Findings
+
+545. `2026-04-02-545`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2431-2434`
+   Issue: the downstream Koszul-pair aftermath uses a one-sided Cardy relation in `h`, but after the surrounding theorem band was upgraded to the two-sided register it still sounded as though it were invoking the same two-sided Cardy formula.
+   Fix: rewrote the local aftermath so it now explicitly refers to the corresponding conjectural one-sided Cardy asymptotic entropy formula and the paired one-sided asymptotic relation.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 486
+
+- Target: index-layer lag in the repaired two-sided Cardy theorem band
+- Iteration: `486`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass after the one-sided Koszul-pair cleanup and re-read the freshly repaired two-sided Cardy theorem band for any remaining local metadata lag.
+- The next real survivor was an index-layer mismatch: the theorem title and the main Cardy index entry already said `two-sided`, but the neighboring BTZ index tag was still filed under the older `conjectural Cardy asymptotic entropy formula` wording.
+- Rewrote that BTZ index entry so it now files under `BTZ black hole!conjectural two-sided Cardy asymptotic entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter BTZ index tag is gone from the checked theorem band and the patched two-sided metadata is present.
+
+### Findings
+
+546. `2026-04-02-546`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2292-2293`
+   Issue: after the Cardy theorem title and main index entry were upgraded to the two-sided register, the neighboring BTZ index tag still lagged behind with the older shorter wording.
+   Fix: rewrote the BTZ index entry so it now files under `conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 487
+
+- Target: recap-level nomenclature mismatch in the late BTZ density band
+- Iteration: `487`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the late BTZ partition-function recap and re-read the density sentence after the repaired Cardy/BTZ theorem-support band.
+- The next real survivor was a recap-level nomenclature mismatch: the sentence still opened with the looser slogan `The Cardy asymptotics` even though the rest of the live surface had already stabilized on explicit asymptotic-density / entropy-formula naming.
+- Rewrote that opener so it now says `The corresponding Cardy asymptotic density`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired opener is gone from the checked recap band and the patched density-language is present.
+
+### Findings
+
+547. `2026-04-02-547`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:3632-3636`
+   Issue: the late BTZ density recap still opened with the looser slogan `The Cardy asymptotics` even after the surrounding live surface had stabilized on the asymptotic-density / entropy-formula register.
+   Fix: rewrote that opener so it now says `The corresponding Cardy asymptotic density`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 488
+
+- Target: summary-box scope mismatch in the chapter-closing genus-1 recap
+- Iteration: `488`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the live Cardy/BTZ aftermath and re-read the chapter-closing output box after the repaired holomorphic/full partition-function split.
+- The next real survivor was a summary-box scope mismatch: the closing genus-1 recap was still advertising the one-sided `\eta(\tau)^{-c/2}` factor as bare `partition function`, even though the repaired genus-1 surface now treats it as the holomorphic contribution rather than the full two-sided partition function.
+- Rewrote that summary line so it now says `holomorphic partition-function contribution \sim \eta(\tau)^{-c/2}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired broader summary wording is gone from the checked closing box and the patched holomorphic-scope language is present.
+
+### Findings
+
+548. `2026-04-02-548`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:3654`
+   Issue: the chapter-closing genus-1 summary box still compressed the one-sided `\eta(\tau)^{-c/2}` factor down to bare `partition function`, which no longer matched the repaired holomorphic/full split on the live surface.
+   Fix: rewrote the summary line so it now says `holomorphic partition-function contribution \sim \eta(\tau)^{-c/2}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 489
+
+- Target: BTZ notation mismatch in the proof-close and chapter-closing summary surfaces
+- Iteration: `489`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the live Cardy/BTZ surface and re-read the non-rotating BTZ specialization together with the chapter-closing output box after the theorem-level notation had stabilized.
+- The next real survivor was a small propagated notation mismatch: the opening summary and BTZ theorem already used `S_{\mathrm{BTZ}}`, but the non-rotating specialization and the closing box still fell back to bare `S`.
+- Rewrote that local pair so both touched bands now use `S_{\mathrm{BTZ}}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired bare BTZ formulas are gone from the checked live gravity surface and the patched notation is present.
+
+### Findings
+
+549. `2026-04-02-549`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2383-2385`, `chapters/connections/3d_gravity.tex:3650-3651`
+   Issue: after the opening summary and the live BTZ theorem had stabilized on `S_{\mathrm{BTZ}}`, the non-rotating specialization and the chapter-closing summary box still displayed the BTZ formula with bare `S`, leaving a visible notation mismatch on the active gravity surface.
+   Fix: rewrote that local pair so both touched bands now use `S_{\mathrm{BTZ}}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 490
+
+- Target: preface-level Cardy notation mismatch
+- Iteration: `490`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the active Cardy/BTZ surface and re-read the remaining top-layer preface advertisement after the theorem and gravity-chapter notation had stabilized.
+- The next real survivor was a preface-level notation mismatch: the cited Cardy theorem surface already used `S_{\mathrm{Cardy}}`, but the preface sentence still advertised the same formula with bare `S`.
+- Rewrote that preface line so it now says `S_{\mathrm{Cardy}} = 2\pi\sqrt{cL_0/6} + 2\pi\sqrt{c\bar L_0/6}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired bare `$S =` wording is gone from the checked active gravity/preface surface and the patched `S_{\mathrm{Cardy}}` notation is present.
+
+### Findings
+
+550. `2026-04-02-550`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/frame/preface.tex:1519-1520`
+   Issue: after the live Cardy theorem band had stabilized on `S_{\mathrm{Cardy}}`, the preface advertisement still displayed the same Cardy asymptotic entropy formula with bare `S`, leaving a top-layer notation mismatch on the active surface.
+   Fix: rewrote the preface line so it now uses `S_{\mathrm{Cardy}}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 491
+
+- Target: preface-level variable mismatch in the Cardy advertisement
+- Iteration: `491`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the active Cardy/BTZ surface and re-read the remaining top-layer preface advertisement after the notation cleanup.
+- The next real survivor was a preface-level variable mismatch: the same sentence had already specialized the BTZ data to highest weights `(h,\bar h)` and the live theorem band was already written in those variables, but the advertised Cardy formula still used `L_0,\bar L_0`.
+- Rewrote that preface line so the displayed Cardy asymptotic entropy formula now uses `h,\bar h`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `L_0,\bar L_0` Cardy expression is gone from the checked active surface and the patched highest-weight notation is present.
+
+### Findings
+
+551. `2026-04-02-551`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/frame/preface.tex:1519-1520`
+   Issue: after the surrounding preface paragraph and the live Cardy theorem had already specialized to highest weights `(h,\bar h)`, the advertised Cardy asymptotic entropy formula still used `L_0,\bar L_0`, leaving a top-layer variable mismatch on the active surface.
+   Fix: rewrote the preface line so the displayed Cardy formula now uses `h,\bar h`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 492
+
+- Target: late-preface scope mismatch in the Cardy/BTZ summary bullet
+- Iteration: `492`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining top-layer Cardy/BTZ advertisements and re-read the late preface summary bullet after the theorem and chapter-level scope repairs.
+- The next real survivor was a late-preface scope mismatch: the live theorem band was already explicitly `two-sided`, but that summary bullet was still advertising only a generic `Cardy asymptotic entropy formula from the MC partition function`.
+- Rewrote that bullet so it now says `two-sided Cardy asymptotic entropy formula from the MC partition function`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter late-preface wording is gone from the checked active surface and the patched `two-sided` scope is present.
+
+### Findings
+
+552. `2026-04-02-552`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1895-1896`
+   Issue: after the live Cardy theorem band had been upgraded to the explicit `two-sided` register, the late preface summary bullet still advertised only a generic Cardy asymptotic entropy formula from the MC partition function.
+   Fix: rewrote the late preface bullet so it now explicitly says `two-sided Cardy asymptotic entropy formula from the MC partition function`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 493
+
+- Target: top-layer one-sided versus two-sided scope lag in the Cardy advertisements
+- Iteration: `493`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining top-layer Cardy/BTZ advertisements and re-read the chapter opening together with the main preface Cardy sentence after the theorem-level scope repairs.
+- The next real survivor was a top-layer scope lag: the live theorem band was already explicit about the `two-sided` Cardy formula, but those two visible advertisements were still calling the same object only `the Cardy asymptotic entropy formula`.
+- Rewrote that pair so both touched top-layer advertisements now explicitly say `the two-sided Cardy asymptotic entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic top-layer opener is gone from the checked active surface and the patched `two-sided` wording is present.
+
+### Findings
+
+553. `2026-04-02-553`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:64-66`, `chapters/frame/preface.tex:1519-1520`
+   Issue: after the live Cardy theorem band had stabilized on the explicit `two-sided` register, the chapter-opening and main preface advertisements were still presenting that same object only as the generic Cardy asymptotic entropy formula.
+   Fix: rewrote both top-layer advertisements so they now explicitly say `the two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 494
+
+- Target: one-sided scope lag in the holomorphic BTZ/Cardy recap
+- Iteration: `494`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining generic Cardy labels and re-read the holomorphic BTZ recap against the now-explicit one-sided versus two-sided theorem split.
+- The next real survivor was a one-sided scope lag: that recap displayed the one-variable formula `S_{\mathrm{Cardy}} = 2\pi\sqrt{ch/6}` and read it as the high-temperature shadow of the genus-zero arity-2 datum, but it still called the object only `the Cardy asymptotic entropy formula`.
+- Rewrote that local pair so it now explicitly says `one-sided Cardy asymptotic entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the patched one-sided wording is present in the holomorphic recap and the remaining generic Cardy labels are confined to the theorem-support band.
+
+### Findings
+
+554. `2026-04-02-554`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1776-1784`
+   Issue: after the live Cardy surface had been split explicitly into one-sided and two-sided regimes, the holomorphic BTZ recap still presented the one-variable formula `S_{\mathrm{Cardy}} = 2\pi\sqrt{ch/6}` under the generic label `Cardy asymptotic entropy formula`.
+   Fix: rewrote that local pair so it now explicitly says `one-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 495
+
+- Target: theorem-support heading scope lag in the Cardy band
+- Iteration: `495`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining generic Cardy labels and re-read the support subsubsection titles immediately above the explicitly two-sided Cardy theorem.
+- The next real survivor was a theorem-support heading scope lag: the visible setup band was still titled with the generic `conjectural Cardy asymptotic entropy formula` wording even though it now feeds the explicitly two-sided theorem below.
+- Rewrote that heading pair so both titles now explicitly say `conjectural two-sided Cardy asymptotic entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic heading forms are gone from the checked support band and the patched two-sided wording is present.
+
+### Findings
+
+555. `2026-04-02-555`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2225`, `chapters/connections/3d_gravity.tex:2267`
+   Issue: after the live theorem band had stabilized on the explicit `two-sided` register, the two support subsubsection titles immediately above it still used the generic `conjectural Cardy asymptotic entropy formula` wording.
+   Fix: rewrote both support headings so they now explicitly say `conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 496
+
+- Target: theorem-band index-layer scope lag in the Cardy metadata
+- Iteration: `496`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining generic Cardy labels and re-read the theorem metadata immediately above the explicitly two-sided Cardy theorem.
+- The next real survivor was an index-layer scope lag: the theorem title, support headings, and surrounding prose were already explicit about the `two-sided` scope, but the main Cardy index parent tag was still filed under the generic `Cardy asymptotic entropy formula`.
+- Rewrote that index entry so it now files under `two-sided Cardy asymptotic entropy formula!conjectural bar-complex derivation`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic Cardy parent tag is gone from the checked active surface and the patched two-sided index filing is present.
+
+### Findings
+
+556. `2026-04-02-556`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2290`
+   Issue: after the live theorem band had stabilized on the explicit `two-sided` register, the main Cardy index parent tag was still filed under the generic `Cardy asymptotic entropy formula`.
+   Fix: rewrote the theorem-band index entry so it now files under `two-sided Cardy asymptotic entropy formula!conjectural bar-complex derivation`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 497
+
+- Target: theorem-body provenance compression in the two-sided Cardy band
+- Iteration: `497`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining two-sided Cardy theorem band and re-read the theorem statement/proof after the metadata cleanup.
+- The next real survivor was a theorem-body provenance compression: the support prose had already said the same argument is applied to the `\\bar\\tau` sector, but the theorem statement and proof close still compressed the resulting two-sided formula back to a singular `Virasoro bar complex` source.
+- Rewrote that local pair so the theorem now says the two-sided formula is obtained by applying the Virasoro bar-complex argument to the left/right sectors, and the proof close now says the same curvature datum is applied to the left/right sectors.
+- Ran hostile local reread plus fixed-string checks to confirm the retired singular-source phrasing is gone from the checked theorem band and the patched left/right-sector wording is present.
+
+### Findings
+
+557. `2026-04-02-557`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2292-2294`, `chapters/connections/3d_gravity.tex:2338-2340`
+   Issue: after the support prose had already separated the chiral and `\\bar\\tau` sectors, the two-sided Cardy theorem statement and proof close still compressed the source of the formula back to the singular `Virasoro bar complex`.
+   Fix: rewrote that local pair so the theorem and proof now explicitly describe the two-sided formula as coming from the Virasoro bar-complex argument/curvature datum applied to the left/right sectors.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 498
+
+- Target: BTZ handoff metadata mismatch after the two-sided Cardy theorem
+- Iteration: `498`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired two-sided Cardy theorem band and re-read the BTZ theorem handoff immediately below it.
+- The next real survivor was a metadata-scope mismatch: the visible BTZ handoff was still advertised as `from the bar complex` / `conjectural bar-complex derivation`, even though the proof right below is explicitly a conditional derivation via the conjectural two-sided Cardy formula.
+- Rewrote that local title/index pair so the handoff now says `via the conjectural two-sided Cardy formula`, and the Bekenstein--Hawking index entry now files under `conditional derivation via conjectural two-sided Cardy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired direct-derivation wording is gone from the checked BTZ handoff band and the patched conditional-route metadata is present.
+
+### Findings
+
+558. `2026-04-02-558`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2346`, `chapters/connections/3d_gravity.tex:2351`
+   Issue: after the BTZ proof had already been rewritten as a conditional derivation from the conjectural two-sided Cardy formula, the visible handoff metadata still advertised that band as a direct bar-complex derivation.
+   Fix: rewrote the BTZ handoff title/index pair so they now explicitly route through the conjectural two-sided Cardy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 499
+
+- Target: BTZ theorem-header metadata lag after the handoff repair
+- Iteration: `499`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ handoff band and re-read the theorem header, theorem index, and proof route together.
+- The next real survivor was a theorem-header metadata lag: the subsubsection title and the proof already routed the result through the conjectural two-sided Cardy formula, but the theorem title and the neighboring BTZ-black-hole index tag were still flattening back to the generic `conjectural BTZ entropy formula`.
+- Rewrote that theorem-header pair so the theorem title and BTZ index entry now explicitly say `via the conjectural two-sided Cardy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic theorem/index metadata is gone from the checked BTZ theorem band and the patched conditional-route metadata is present.
+
+### Findings
+
+559. `2026-04-02-559`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2348-2350`
+   Issue: after the BTZ handoff title and proof had already been routed through the conjectural two-sided Cardy formula, the theorem title and BTZ-black-hole index tag still flattened the visible theorem metadata back to the generic `conjectural BTZ entropy formula`.
+   Fix: rewrote that theorem-header pair so the theorem title and BTZ index entry now explicitly say `via the conjectural two-sided Cardy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 500
+
+- Target: closing-summary route mismatch in the BTZ recap
+- Iteration: `500`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the chapter-closing summary box that echoes its main outputs.
+- The next real survivor was a closing-summary route mismatch: the BTZ theorem title and proof had already been rewritten to route the result via the conjectural two-sided Cardy formula, but the closing summary box still compressed that same result back to the generic `conjectural BTZ entropy formula`.
+- Rewrote that summary line so it now says `the conjectural BTZ entropy formula via the conjectural two-sided Cardy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic closing-summary wording is gone from the checked active surface and the patched route language is present.
+
+### Findings
+
+560. `2026-04-02-560`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:3664-3665`
+   Issue: after the BTZ theorem band had already been routed explicitly through the conjectural two-sided Cardy formula, the chapter-closing summary box still advertised that same result only as the generic `conjectural BTZ entropy formula`.
+   Fix: rewrote the closing-summary line so it now explicitly says `the conjectural BTZ entropy formula via the conjectural two-sided Cardy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 501
+
+- Target: chapter-opening route compression in the Cardy/BTZ slogan
+- Iteration: `501`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the BTZ theorem band and its top-layer advertisement after the summary-box route repair.
+- The next real survivor was a chapter-opening route compression: the slogan still made it sound as though both the two-sided Cardy formula and the BTZ Bekenstein--Hawking formula were recovered directly from the genus tower via modular $S$-transform and saddle-point extraction, even though the live theorem band now routes BTZ through the conjectural two-sided Cardy formula.
+- Rewrote that opening sentence so it now says the two-sided Cardy asymptotic entropy formula is conjecturally recovered from the genus tower via modular $S$-transform and saddle-point extraction, and the BTZ Bekenstein--Hawking entropy formula then follows via the conjectural two-sided Cardy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired direct-recovery compression is gone from the checked active top layer and the patched route language is present.
+
+### Findings
+
+561. `2026-04-02-561`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:64-68`
+   Issue: after the live theorem band had made the Cardy-to-BTZ route explicit, the chapter-opening slogan still compressed the chain by saying both formulas were recovered directly from the genus tower via modular $S$-transform and saddle-point extraction.
+   Fix: rewrote the opening sentence so Cardy is recovered by the modular/saddle-point step and the BTZ formula then follows via the conjectural two-sided Cardy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 502
+
+- Target: preface-level Cardy-to-BTZ route compression
+- Iteration: `502`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining top-layer BTZ advertisements and re-read the preface BTZ paragraph against the repaired BTZ theorem band.
+- The next real survivor was a preface-level route compression: that sentence still folded the BTZ step directly into the two-sided Cardy sentence, instead of advertising the now-repaired chain in which the conjectural BTZ Bekenstein--Hawking entropy formula follows via the conjectural two-sided Cardy formula.
+- Rewrote that preface sentence so it now says the two-sided Cardy asymptotic entropy formula is conjectural for the BTZ states identified via the MC dictionary, and that the BTZ Bekenstein--Hawking entropy formula then follows via the conjectural two-sided Cardy formula.
+- Added the matching paired references to Theorems `\ref{prop:cardy-mc}` and `\ref{thm:gravity-btz-entropy}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flattened sentence is gone from the checked active preface surface and the patched two-step route language is present.
+
+### Findings
+
+562. `2026-04-02-562`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1519-1524`
+   Issue: after the live BTZ theorem band had already made the Cardy-to-BTZ route explicit, the preface BTZ paragraph still flattened the BTZ step directly into the two-sided Cardy sentence.
+   Fix: rewrote the preface sentence so it now presents the two-step route explicitly and cites both the conjectural Cardy theorem and the conjectural BTZ theorem.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 503
+
+- Target: earlier-preface Cardy-to-BTZ route compression
+- Iteration: `503`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining top-layer BTZ advertisements and re-read the earlier preface overview against the repaired BTZ theorem band.
+- The next real survivor was an earlier-preface route compression: that overview still said the conjectural Cardy asymptotic entropy formula is recovered from the MC dictionary, without advertising the second step in which the conjectural BTZ Bekenstein--Hawking entropy formula follows via the conjectural two-sided Cardy formula.
+- Rewrote that preface overview so it now says the conjectural two-sided Cardy asymptotic entropy formula is recovered from the MC dictionary, and that the conjectural BTZ Bekenstein--Hawking entropy formula then follows via the conjectural two-sided Cardy formula.
+- Added the matching paired references to Theorems `\ref{prop:cardy-mc}` and `\ref{thm:gravity-btz-entropy}`.
+- Ran hostile local reread plus multiline fixed-string checks to confirm the retired one-step overview is gone from the checked active preface surface and the patched two-step route language is present.
+
+### Findings
+
+563. `2026-04-02-563`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:735-741`
+   Issue: after the live BTZ theorem band had already made the Cardy-to-BTZ route explicit, the earlier preface overview still advertised only the recovery of the Cardy formula from the MC dictionary and omitted the second BTZ-via-Cardy step.
+   Fix: rewrote the earlier preface overview so it now presents the two-step Cardy-to-BTZ route explicitly and cites both the conjectural Cardy theorem and the conjectural BTZ theorem.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 504
+
+- Target: late-preface Cardy-to-BTZ route compression
+- Iteration: `504`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining top-layer BTZ advertisements and re-read the late preface recap against the repaired BTZ theorem band.
+- The next real survivor was a late-preface route compression: that bullet still advertised only the conjectural two-sided Cardy asymptotic entropy formula from the MC partition function, without the second step in which the conjectural BTZ Bekenstein--Hawking entropy formula follows via the conjectural two-sided Cardy formula.
+- Rewrote that late-preface bullet so it now presents the full two-step route and cites both the conjectural Cardy theorem and the conjectural BTZ theorem.
+- Ran hostile local reread plus multiline fixed-string checks to confirm the retired one-step bullet is gone from the checked active preface surface and the patched two-step route language is present.
+
+### Findings
+
+564. `2026-04-02-564`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1901-1904`
+   Issue: after the live BTZ theorem band had already made the Cardy-to-BTZ route explicit, the late preface recap still advertised only the conjectural two-sided Cardy asymptotic entropy formula from the MC partition function and omitted the second BTZ-via-Cardy step.
+   Fix: rewrote the late-preface bullet so it now presents the full two-step Cardy-to-BTZ route and cites both the conjectural Cardy theorem and the conjectural BTZ theorem.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 505
+
+- Target: closing-summary BTZ label mismatch
+- Iteration: `505`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining BTZ summary echoes and re-read the chapter-closing recap against the repaired BTZ theorem band.
+- The next real survivor was a closing-summary label mismatch: the live BTZ theorem and the repaired preface advertisements now explicitly say `BTZ Bekenstein--Hawking entropy formula`, but the chapter-closing box still shortened that back to the generic `BTZ entropy formula` even after the route repair.
+- Rewrote that closing-summary line so it now says `the conjectural BTZ Bekenstein--Hawking entropy formula via the conjectural two-sided Cardy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shortened BTZ label is gone from the checked active recap and the patched Bekenstein--Hawking wording is present.
+
+### Findings
+
+565. `2026-04-02-565`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:3712-3713`
+   Issue: after the live BTZ theorem and preface advertisements had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the chapter-closing summary box still shortened that same result back to the generic `BTZ entropy formula`.
+   Fix: rewrote the closing-summary line so it now explicitly says `the conjectural BTZ Bekenstein--Hawking entropy formula via the conjectural two-sided Cardy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 506
+
+- Target: top-layer BTZ status qualifier mismatch
+- Iteration: `506`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining Cardy/BTZ advertisements and re-read the chapter opening together with the main preface BTZ paragraph against the repaired BTZ theorem band.
+- The next real survivor was a top-layer status-qualifier mismatch: the live BTZ theorem and the repaired closing summary already marked the BTZ Bekenstein--Hawking formula as conjectural, but the chapter opening and the main preface BTZ paragraph were still letting that qualifier drop out.
+- Rewrote that pair so both touched top-layer advertisements now explicitly say `the conjectural BTZ Bekenstein--Hawking entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the repaired top-layer surfaces now all keep the conjectural qualifier and no unqualified survivor remains on the checked active surface.
+
+### Findings
+
+566. `2026-04-02-566`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:64-68`, `chapters/frame/preface.tex:1523-1528`
+   Issue: after the live BTZ theorem band and the closing summary had already marked the BTZ Bekenstein--Hawking formula as conjectural, the chapter opening and the main preface BTZ paragraph still allowed that qualifier to drop out.
+   Fix: rewrote both top-layer advertisements so they now explicitly say `the conjectural BTZ Bekenstein--Hawking entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 507
+
+- Target: BTZ theorem-header label mismatch
+- Iteration: `507`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the live BTZ theorem band and re-read its header metadata against the repaired summary and preface advertisements.
+- The next real survivor was a theorem-header label mismatch: the theorem body already stated the Bekenstein--Hawking entropy formula for the BTZ black hole, but the subsubsection title, theorem title, and neighboring BTZ index tag were still shortening that same object back to the generic `BTZ entropy formula`.
+- Rewrote that header trio so it now uniformly says `Conjectural BTZ Bekenstein--Hawking entropy formula via the conjectural two-sided Cardy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter theorem-header wording is gone from the checked BTZ band and the patched Bekenstein--Hawking metadata is present.
+
+### Findings
+
+567. `2026-04-02-567`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2394-2399`
+   Issue: after the theorem body and the repaired summary/preface advertisements had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the live BTZ theorem header surface still shortened that same result back to the generic `BTZ entropy formula`.
+   Fix: rewrote the subsubsection title, theorem title, and neighboring BTZ index tag so they now uniformly say `Conjectural BTZ Bekenstein--Hawking entropy formula via the conjectural two-sided Cardy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 508
+
+- Target: Cardy-to-BTZ route-label mismatch
+- Iteration: `508`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining Cardy-to-BTZ route clauses and re-read the repaired BTZ theorem band together with the chapter opening, closing summary, and active preface advertisements.
+- The next real survivor was a route-label mismatch: several live places were still shortening the intermediary result to `the conjectural two-sided Cardy formula` even though the theorem-support surface had already stabilized on `the conjectural two-sided Cardy asymptotic entropy formula`.
+- Rewrote that whole checked cluster so the route is now named uniformly as `via the conjectural two-sided Cardy asymptotic entropy formula` across the theorem header, top-layer summaries, and preface advertisements.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter route label is gone from the checked active surface and the patched full route language is present everywhere touched.
+
+### Findings
+
+568. `2026-04-02-568`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:64-68`, `chapters/connections/3d_gravity.tex:2394-2399`, `chapters/connections/3d_gravity.tex:3712`, `chapters/frame/preface.tex:737-740`, `chapters/frame/preface.tex:1526-1527`, `chapters/frame/preface.tex:1901-1903`
+   Issue: after the live Cardy theorem-support surface had already stabilized on `the conjectural two-sided Cardy asymptotic entropy formula`, several top-layer, theorem-header, and preface route clauses were still shortening that same intermediary result to `the conjectural two-sided Cardy formula`.
+   Fix: rewrote the whole checked route cluster so it now uniformly says `via the conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 509
+
+- Target: conditional BTZ proof-modality mismatch
+- Iteration: `509`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the conditional derivation line by line.
+- The next real survivor was a proof-local modality mismatch: the theorem and proof heading already kept the BTZ result explicitly conditional/conjectural, but the non-rotating specialization still said `this is the Bekenstein--Hawking entropy formula`.
+- Rewrote that final specialization line so it now says `this would be the Bekenstein--Hawking entropy formula`, keeping the whole derivation in the same conditional register.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flat clause is gone from the checked proof band and the patched conditional wording is present.
+
+### Findings
+
+569. `2026-04-02-569`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2449-2451`
+   Issue: inside a `Conditional derivation` of the conjectural BTZ Bekenstein--Hawking entropy formula, the non-rotating specialization still slipped back to the flat clause `this is the Bekenstein--Hawking entropy formula`.
+   Fix: rewrote that final specialization line so it now says `this would be the Bekenstein--Hawking entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 510
+
+- Target: top-layer Cardy-to-BTZ route-modality mismatch
+- Iteration: `510`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining summary and preface route clauses and re-read them against the conjectural Cardy and BTZ theorem bands.
+- The next real survivor was a top-layer route-modality mismatch: the live theorem surface was already conjectural/conditional, but several active advertisements still said the BTZ Bekenstein--Hawking formula `then follows` outright, and one preface line still said the Cardy formula `is recovered` without the matching qualifier.
+- Rewrote that checked cluster so the preface overview now says the Cardy formula is `conjecturally recovered` from the MC dictionary, and the chapter-opening plus active preface route clauses now say the BTZ formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger route verbs are gone from the checked active surface and the patched conditional wording is present.
+
+### Findings
+
+570. `2026-04-02-570`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:64-68`, `chapters/frame/preface.tex:735-741`, `chapters/frame/preface.tex:1523-1528`
+   Issue: after the live Cardy and BTZ theorem bands had already stabilized on a conjectural/conditional route, several active summary clauses still said the BTZ formula `then follows` outright, and one preface overview line still said the conjectural Cardy formula `is recovered` without the matching qualifier.
+   Fix: rewrote the checked top-layer cluster so the Cardy formula is now `conjecturally recovered`, and the BTZ formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 511
+
+- Target: conjectural Cardy proof-handoff modality mismatch
+- Iteration: `511`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the conjectural Cardy theorem-support band and re-read the saddle-point handoff line by line.
+- The next real survivor was a proof-handoff modality mismatch: the preceding sentence already said the saddle analysis `would give` the one-sided contribution, but the very next line still said applying the same argument to the `\\bar\\tau`-sector `yields` the two-sided formula.
+- Rewrote that handoff line so it now says the same argument to the `\\bar\\tau`-sector `would yield` the two-sided formula, keeping the whole support band in one conditional register.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger verb is gone from the checked Cardy theorem-support band and the patched conditional wording is present.
+
+### Findings
+
+571. `2026-04-02-571`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2347-2349`
+   Issue: inside the conjectural Cardy theorem-support band, the saddle-point setup had already shifted to `would give` language for the one-sided contribution, but the immediate two-sided handoff still said applying the same argument to the `\\bar\\tau`-sector `yields` the two-sided formula.
+   Fix: rewrote that handoff line so it now says the `\\bar\\tau`-sector argument `would yield` the two-sided formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 512
+
+- Target: one-sided Cardy bridge scope/citation mismatch
+- Iteration: `512`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the remaining one-sided Cardy bridge prose in the genus-tower band and re-read it against the live two-sided Cardy theorem.
+- The next real survivor was a scope/citation mismatch: the paragraph was advertising a one-sided Cardy asymptotic entropy formula, but it still cited Theorem~`\\ref{thm:gravity-cardy}` as though that live theorem directly stated the same one-sided claim.
+- Rewrote that bridge sentence so it now says the one-sided formula is conjectural, compares Theorem~`\\ref{thm:gravity-cardy}` only for the two-sided formula, and says the one-sided statement would be expected to arise from the modular `$S$`-transform of the generating function.
+- Ran hostile local reread plus fixed-string checks to confirm the retired direct-support wording is gone from the checked genus-tower bridge and the patched scope-honest citation language is present.
+
+### Findings
+
+572. `2026-04-02-572`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1842-1848`
+   Issue: the genus-tower bridge advertised a one-sided Cardy asymptotic entropy formula but still cited Theorem~`\\ref{thm:gravity-cardy}` as though the live two-sided theorem directly stated that same one-sided claim.
+   Fix: rewrote the sentence so it now treats the one-sided formula as conjectural, compares Theorem~`\\ref{thm:gravity-cardy}` only for the two-sided formula, and says the one-sided statement would be expected to arise from the modular `$S$`-transform.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 513
+
+- Target: upstream all-genus BTZ reading-language regression
+- Iteration: `513`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the upstream genus-tower bridge and re-read it against the later repaired BTZ partition-function paragraph.
+- The next real survivor was a reading-language regression: the upstream all-genus bridge had slipped back to the flatter clause `The holomorphic contribution to the BTZ partition function is the exponential of the all-genus generating function`, even though the later repaired BTZ bridge and the earlier audit doctrine already keep that identification explicitly in the reading layer.
+- Rewrote that sentence so it now says the holomorphic contribution to the BTZ partition function `is read as` the exponential of the all-genus generating function.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flatter clause is gone from the checked upstream bridge and the patched reading-language is present.
+
+### Findings
+
+573. `2026-04-02-573`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:1837-1840`
+   Issue: the upstream all-genus BTZ bridge had regressed from the repaired reading-language register back to the flatter clause `The holomorphic contribution to the BTZ partition function is the exponential of the all-genus generating function`.
+   Fix: rewrote the sentence so it now says the holomorphic contribution to the BTZ partition function `is read as` the exponential of the all-genus generating function.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 514
+
+- Target: upstream BTZ thermodynamics scope leak
+- Iteration: `514`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the upstream genus-tower bridge and re-read its opening physical gloss against the repaired conjectural Cardy/BTZ route below.
+- The next real survivor was a scope leak in the reading layer: the bridge still said the collision residue `thereby controls BTZ black hole thermodynamics`, which was harder than the now-conjectural Cardy/BTZ route carried by the rest of the live surface.
+- Rewrote that opener so it now says the collision residue channels the gravitational reading data discussed there, and that in the corresponding gravitational reading the $r$-matrix underlies the conjectural BTZ thermodynamic statements.
+- Ran hostile local reread plus fixed-string checks to confirm the retired direct-control slogan is gone from the checked upstream bridge and the patched reading/scope language is present.
+
+### Findings
+
+574. `2026-04-02-574`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1811-1814`
+   Issue: the upstream genus-tower bridge still said the collision residue `thereby controls BTZ black hole thermodynamics`, overstating a physical consequence that the repaired live surface now treats only through the corresponding gravitational reading and the conjectural Cardy/BTZ route.
+   Fix: rewrote the opener so it now says the collision residue channels the gravitational reading data discussed there, and that in the corresponding gravitational reading the $r$-matrix underlies the conjectural BTZ thermodynamic statements.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 515
+
+- Target: one-sided Cardy bridge status mismatch
+- Iteration: `515`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the one-sided Cardy bridge and re-read the repaired genus-tower paragraph line by line.
+- The next real survivor was a local status mismatch: the paragraph had already been rewritten so the one-sided Cardy asymptotic entropy formula is conjectural and only expected from the modular `$S$`-transform, but the final reading clause still said that formula `is read as` the high-temperature shadow.
+- Rewrote that closing clause so it now says the corresponding one-sided Cardy asymptotic entropy formula `would be read as` the high-temperature shadow.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger clause is gone from the checked bridge and the patched status-aligned reading language is present.
+
+### Findings
+
+575. `2026-04-02-575`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:1848-1850`
+   Issue: after the one-sided Cardy bridge had already shifted to the conjectural/expected register, its final reading clause still said the corresponding one-sided Cardy asymptotic entropy formula `is read as` the high-temperature shadow.
+   Fix: rewrote that closing clause so it now says the corresponding one-sided Cardy asymptotic entropy formula `would be read as` the high-temperature shadow.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 516
+
+- Target: preface Cardy-route compression mismatch
+- Iteration: `516`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the active preface advertisements and re-read them against the repaired detailed BTZ paragraph and the live Cardy theorem-support band.
+- The next real survivor was a preface-level route compression: one overview line still said the conjectural two-sided Cardy asymptotic entropy formula is `recovered from this MC dictionary`, and the late recap bullet still advertised the same step `from the MC partition function`, even though the repaired live surface now treats the MC data as identifying the BTZ states while the actual Cardy route runs through the bar-complex/genus-tower argument.
+- Rewrote that pair so the overview now says the two-sided Cardy asymptotic entropy formula is conjectural for the BTZ states identified via the MC dictionary, and the late recap bullet now says the same for the BTZ states identified via the MC dictionary and MC partition function.
+- Ran hostile local reread plus fixed-string checks to confirm the retired compressed route wording is gone from the checked active preface surface and the patched state-identification language is present.
+
+### Findings
+
+576. `2026-04-02-576`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:735-740`, `chapters/frame/preface.tex:1901-1903`
+   Issue: the active preface still compressed the conjectural Cardy step into `recovered from this MC dictionary` and `from the MC partition function`, even though the repaired detailed paragraph and theorem-support band treat the MC data as identifying the BTZ states while the actual Cardy route runs through the bar-complex/genus-tower argument.
+   Fix: rewrote the overview and late recap bullet so they now say the conjectural two-sided Cardy asymptotic entropy formula is for the BTZ states identified via the MC dictionary, respectively via the MC dictionary and MC partition function.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 517
+
+- Target: late-preface MC identification type mismatch
+- Iteration: `517`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the late preface recap bullet and re-read it against the repaired detailed BTZ paragraph immediately above.
+- The next real survivor was a type-level mismatch in that late recap: the bullet still folded `the MC dictionary and MC partition function` into a single state-identification phrase for the BTZ states, even though the repaired detailed paragraph already distinguishes the MC dictionary’s role in identifying the states from the separate partition-function input.
+- Rewrote that bullet so it now says the BTZ states are identified `via the MC dictionary`, removing the partition-function phrase from the state-identification slot while preserving the conjectural BTZ consequence line.
+- Ran hostile local reread plus fixed-string checks to confirm the retired mixed identification phrase is gone from the checked late-preface bullet and the patched wording is present.
+
+### Findings
+
+577. `2026-04-02-577`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1901-1903`
+   Issue: the late preface recap still treated `the MC dictionary and MC partition function` as a single identification phrase for the BTZ states, blurring the state-identification role of the dictionary with the separate partition-function input.
+   Fix: rewrote that bullet so it now says the BTZ states are identified `via the MC dictionary`, removing the partition-function phrase from the state-identification slot.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 518
+
+- Target: late-preface route-modality asymmetry
+- Iteration: `518`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the active preface recap surface and re-read the late bullet against the two earlier preface Cardy/BTZ summaries.
+- The next real survivor was a late-preface route-modality asymmetry: the detailed preface lines already said the conjectural BTZ Bekenstein--Hawking entropy formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula, but the late recap bullet still compressed that step to a bare `formula via ...` label.
+- Rewrote that late bullet so it now says the conjectural BTZ Bekenstein--Hawking entropy formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired bare route label is gone from the checked late-preface bullet and the patched conditional route language is present.
+
+### Findings
+
+578. `2026-04-02-578`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/frame/preface.tex:1901-1903`
+   Issue: the late preface recap still compressed the BTZ step to a bare `formula via the conjectural two-sided Cardy asymptotic entropy formula` label, even though the repaired detailed preface summaries already expressed that route in the conditional `would then follow` register.
+   Fix: rewrote the late bullet so it now says the conjectural BTZ Bekenstein--Hawking entropy formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 519
+
+- Target: late BTZ recap density-scope mismatch
+- Iteration: `519`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the late BTZ partition-function recap and re-read the density line against the live two-sided Cardy theorem band.
+- The next real survivor was a late-recap scope lag: the recap already used the two-variable density `d(h,\bar h)`, but it was still naming that output only as a generic `Cardy asymptotic density` rather than the sharper two-sided object now used on the theorem-support surface.
+- Rewrote that recap label so it now says `two-sided Cardy asymptotic density`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic density label is gone from the checked late BTZ recap and the patched two-sided terminology is present.
+
+### Findings
+
+579. `2026-04-02-579`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:3693-3696`
+   Issue: the late BTZ partition-function recap already used the two-variable density `d(h,\bar h)` but still named that output only as a generic `Cardy asymptotic density`, lagging behind the now-explicit two-sided scope of the live Cardy theorem band.
+   Fix: rewrote the recap label so it now says `two-sided Cardy asymptotic density`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 520
+
+- Target: chapter-closing BTZ route-modality asymmetry
+- Iteration: `520`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the chapter-closing summary box and re-read it against the repaired chapter-opening and preface Cardy/BTZ summaries.
+- The next real survivor was a chapter-closing route-modality asymmetry: the opening and preface summaries already said the conjectural BTZ Bekenstein--Hawking entropy formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula, but the closing summary box still compressed that step to a bare `formula via ...` label.
+- Rewrote that closing-summary line so it now says the conjectural BTZ Bekenstein--Hawking entropy formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired bare route label is gone from the checked chapter-closing summary line and the patched conditional route language is present.
+
+### Findings
+
+580. `2026-04-02-580`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:3717-3719`
+   Issue: the chapter-closing summary box still compressed the BTZ step to a bare `formula via the conjectural two-sided Cardy asymptotic entropy formula` label, even though the repaired chapter-opening and preface summaries already expressed that route in the conditional `would then follow` register.
+   Fix: rewrote the closing-summary line so it now says the conjectural BTZ Bekenstein--Hawking entropy formula `would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 521
+
+- Target: chapter-opening Cardy route-strength mismatch
+- Iteration: `521`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the chapter-opening slogan and re-read it against the live conjectural Cardy theorem-support band.
+- The next real survivor was a route-strength mismatch in that top-layer summary: it still said the two-sided Cardy asymptotic entropy formula was `conjecturally recovered from the genus tower`, even though the repaired theorem-support band only supports the weaker `would be expected from` register.
+- Rewrote that opening slogan so it now says the conjectural two-sided Cardy asymptotic entropy formula `would be expected from` the genus tower via modular `$S$`-transform and saddle-point extraction.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger top-layer slogan is gone from the checked active surface and the patched weaker wording is present.
+
+### Findings
+
+581. `2026-04-02-581`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:64-68`
+   Issue: the chapter-opening summary still said the two-sided Cardy asymptotic entropy formula was `conjecturally recovered from the genus tower`, overstating the support actually carried by the repaired conjectural Cardy theorem band below.
+   Fix: rewrote the opening slogan so it now says the conjectural two-sided Cardy asymptotic entropy formula `would be expected from` the genus tower via modular `$S$`-transform and saddle-point extraction.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 522
+
+- Target: Cardy theorem-header provenance mismatch
+- Iteration: `522`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the live Cardy theorem band and re-read its header metadata against the repaired proof-support language immediately below.
+- The next real survivor was a theorem-header provenance mismatch: the proof-support band now only says the bar-complex argument `would give` the derivation, but the theorem title and neighboring index tag were still advertising the formula more directly as `from the bar complex` and `conjectural bar-complex derivation`.
+- Rewrote that header pair so the theorem now reads `Conjectural two-sided Cardy asymptotic entropy formula via the bar-complex argument`, and the neighboring index now files under `conjectural bar-complex argument`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger theorem-header wording is gone from the checked Cardy band and the patched weaker provenance language is present.
+
+### Findings
+
+582. `2026-04-02-582`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2353-2357`
+   Issue: the live Cardy theorem header still advertised the formula more directly as `from the bar complex` and `conjectural bar-complex derivation`, even though the repaired proof-support band below only says the bar-complex argument `would give` that derivation.
+   Fix: rewrote the theorem title and neighboring index tag so they now say `via the bar-complex argument` and `conjectural bar-complex argument`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 523
+
+- Target: BTZ theorem-header dependency mismatch
+- Iteration: `523`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the live BTZ theorem band and re-read its header metadata against the explicitly conjectural theorem body and the `Conditional derivation` proof immediately below.
+- The next real survivor was a theorem-header dependency mismatch: the theorem body already marked the BTZ formula conjectural and the proof already made the route explicitly conditional on the conjectural two-sided Cardy asymptotic entropy formula, but the subsubsection title, theorem title, and neighboring BTZ index tag still packaged the result more cleanly as `via ...`.
+- Rewrote that header trio so it now uniformly says `Conjectural BTZ Bekenstein--Hawking entropy formula conditional on the conjectural two-sided Cardy asymptotic entropy formula`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger theorem-header wording is gone from the checked BTZ band and the patched dependency-honest metadata is present.
+
+### Findings
+
+583. `2026-04-02-583`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2400-2405`
+   Issue: the live BTZ theorem header still packaged the result as `via the conjectural two-sided Cardy asymptotic entropy formula`, even though the theorem body is conjectural and the proof immediately below is explicitly a `Conditional derivation`.
+   Fix: rewrote the subsubsection title, theorem title, and neighboring BTZ index tag so they now say `conditional on the conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 524
+
+- Target: BTZ theorem-band index asymmetry
+- Iteration: `524`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the remaining local index metadata against the newly normalized theorem header.
+- The next real survivor was a BTZ theorem-band index asymmetry: after the subsubsection title, theorem title, and BTZ-black-hole index tag had all been rewritten into the `conditional on ...` register, the neighboring `Bekenstein--Hawking entropy formula` index entry still kept the older mixed label `conditional derivation via conjectural two-sided Cardy asymptotic entropy formula`.
+- Rewrote that remaining index entry so it now files under `conditional on conjectural two-sided Cardy asymptotic entropy formula`, matching the repaired theorem header.
+- Ran hostile local reread plus fixed-string checks to confirm the retired mixed index label is gone from the checked BTZ theorem band and the patched aligned metadata is present.
+
+### Findings
+
+584. `2026-04-02-584`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2404-2405`
+   Issue: after the BTZ theorem header had already been normalized to the `conditional on ...` register, the neighboring `Bekenstein--Hawking entropy formula` index entry still used the older mixed label `conditional derivation via conjectural two-sided Cardy asymptotic entropy formula`.
+   Fix: rewrote that index entry so it now files under `conditional on conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 525
+
+- Target: Cardy theorem-band proof-close provenance mismatch
+- Iteration: `525`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy theorem band and re-read the proof close against the newly normalized theorem header and index metadata.
+- The next real survivor was a provenance mismatch inside the same theorem band: the header had already been softened to `via the bar-complex argument`, but the proof close still said `This would give the bar-complex derivation of the conjectural two-sided Cardy asymptotic entropy formula`.
+- Rewrote that proof-close sentence so it now says `This would give the corresponding bar-complex argument for the conjectural two-sided Cardy asymptotic entropy formula`, matching the repaired theorem surface.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger `bar-complex derivation` wording is gone from the checked Cardy theorem band and the aligned argument-language remains present.
+
+### Findings
+
+585. `2026-04-02-585`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2395-2397`
+   Issue: after the Cardy theorem title and index metadata had already been rewritten into the weaker `via the bar-complex argument` register, the proof close still used the stronger provenance phrase `bar-complex derivation`.
+   Fix: rewrote the proof-close sentence so it now says `the corresponding bar-complex argument` for the conjectural two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 526
+
+- Target: Cardy theorem-band BTZ index provenance asymmetry
+- Iteration: `526`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy theorem band and re-read the neighboring index metadata against the theorem header, main Cardy index, and theorem statement.
+- The next real survivor was a local provenance asymmetry: after the theorem title and main Cardy index had already been normalized to the `via the bar-complex argument` register, the neighboring `BTZ black hole` index tag still used the shorter label `conjectural two-sided Cardy asymptotic entropy formula`.
+- Rewrote that BTZ index entry so it now files under `conjectural two-sided Cardy asymptotic entropy formula via bar-complex argument`, matching the repaired theorem surface.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter BTZ index label is gone from the checked Cardy theorem band and the aligned provenance metadata is present.
+
+### Findings
+
+586. `2026-04-02-586`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2357-2358`
+   Issue: after the Cardy theorem title and main Cardy index had already shifted to the `via the bar-complex argument` register, the neighboring `BTZ black hole` index tag still used the shorter provenance label `conjectural two-sided Cardy asymptotic entropy formula`.
+   Fix: rewrote that BTZ index entry so it now files under `conjectural two-sided Cardy asymptotic entropy formula via bar-complex argument`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 527
+
+- Target: Cardy proof-opener provenance mismatch
+- Iteration: `527`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy theorem band and re-read the proof opener against the theorem header and proof close.
+- The next real survivor was a proof-opener provenance mismatch: the theorem title and proof close had already been normalized to the weaker `bar-complex argument` register, but the first sentence of the `Argument sketch` still said `The derivation rests on three bar-complex inputs`.
+- Rewrote that opener so it now says `The corresponding bar-complex argument rests on three inputs`, keeping the whole theorem band in the same argument-level register.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger opener is gone from the checked Cardy theorem band and the patched wording is present.
+
+### Findings
+
+587. `2026-04-02-587`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2375-2376`
+   Issue: after the Cardy theorem title and proof close had already been softened to the `bar-complex argument` register, the first sentence of the `Argument sketch` still said `The derivation rests on three bar-complex inputs`.
+   Fix: rewrote the proof opener so it now says `The corresponding bar-complex argument rests on three inputs`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 528
+
+- Target: BTZ theorem-body conditionality mismatch
+- Iteration: `528`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the theorem statement against the already-conditional theorem header and proof immediately below.
+- The next real survivor was a theorem-body conditionality mismatch: the subsubsection title, theorem title, and proof had already been normalized to the `conditional on ...` register, but the theorem statement itself still opened with the flatter phrase `The Bekenstein--Hawking entropy formula for the BTZ black hole is conjecturally`.
+- Rewrote that theorem sentence so it now says `Conditional on the conjectural two-sided Cardy asymptotic entropy formula, the Bekenstein--Hawking entropy formula for the BTZ black hole would be`, keeping the visible theorem surface internally consistent.
+- Ran hostile local reread plus fixed-string checks to confirm the retired flatter theorem-body wording is gone from the checked BTZ theorem band and the patched conditional sentence is present.
+
+### Findings
+
+588. `2026-04-02-588`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2403-2408`
+   Issue: after the BTZ theorem header and proof had already been normalized to the `conditional on ...` register, the theorem statement itself still opened with the flatter phrase `The Bekenstein--Hawking entropy formula for the BTZ black hole is conjecturally`.
+   Fix: rewrote the theorem sentence so it now says `Conditional on the conjectural two-sided Cardy asymptotic entropy formula, the Bekenstein--Hawking entropy formula for the BTZ black hole would be`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 529
+
+- Target: BTZ theorem-band index article mismatch
+- Iteration: `529`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the neighboring index metadata against the visible theorem header and statement.
+- The next real survivor was an isolated metadata mismatch: the subsubsection title, theorem title, and theorem sentence already said `conditional on the conjectural two-sided Cardy asymptotic entropy formula`, but the two neighboring index entries were still shortening that same condition to `conditional on conjectural two-sided Cardy asymptotic entropy formula`.
+- Rewrote both index entries so they now carry the full `conditional on the conjectural two-sided Cardy asymptotic entropy formula` wording, matching the repaired visible theorem surface.
+- Ran hostile local reread plus fixed-string checks to confirm the shorter index form is gone from the checked BTZ theorem band and the aligned metadata is present.
+
+### Findings
+
+589. `2026-04-02-589`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2405-2406`
+   Issue: after the BTZ theorem header and theorem sentence had already stabilized on `conditional on the conjectural two-sided Cardy asymptotic entropy formula`, the two neighboring index entries still used the shorter metadata form without `the`.
+   Fix: rewrote both BTZ theorem-band index entries so they now carry the full `conditional on the conjectural two-sided Cardy asymptotic entropy formula` wording.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 530
+
+- Target: BTZ proof-close label mismatch
+- Iteration: `530`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the non-rotating specialization against the theorem header and theorem statement.
+- The next real survivor was a local label mismatch in the proof close: after the visible theorem surface had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the non-rotating specialization still shortened that same object to the generic `Bekenstein--Hawking entropy formula`.
+- Rewrote that proof-close line so it now says `BTZ Bekenstein--Hawking entropy formula`, matching the repaired theorem label.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter proof-close label is gone from the checked BTZ theorem band and the patched wording is present.
+
+### Findings
+
+590. `2026-04-02-590`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2453-2454`
+   Issue: after the BTZ theorem header and statement had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the non-rotating specialization in the proof close still used the shorter label `Bekenstein--Hawking entropy formula`.
+   Fix: rewrote the proof-close line so it now says `BTZ Bekenstein--Hawking entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 531
+
+- Target: BTZ theorem-body label mismatch
+- Iteration: `531`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the theorem sentence against the theorem header, proof close, and chapter-closing summary.
+- The next real survivor was a local label mismatch in the theorem body: the visible theorem header, the non-rotating specialization, and the closing summary had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, but the theorem sentence still phrased the same object as `the Bekenstein--Hawking entropy formula for the BTZ black hole`.
+- Rewrote that theorem sentence so it now says `the BTZ Bekenstein--Hawking entropy formula would be`, aligning the visible theorem surface line by line.
+- Ran hostile local reread plus fixed-string checks to confirm the retired longer theorem-body phrase is gone from the checked BTZ theorem band and the patched label is present.
+
+### Findings
+
+591. `2026-04-02-591`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2407-2408`
+   Issue: after the BTZ theorem header, proof close, and chapter-closing summary had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the theorem sentence still used the longer label `the Bekenstein--Hawking entropy formula for the BTZ black hole`.
+   Fix: rewrote the theorem sentence so it now says `the BTZ Bekenstein--Hawking entropy formula would be`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 532
+
+- Target: preface-overview Cardy status redundancy
+- Iteration: `532`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the top-layer BTZ/Cardy mirrors and re-read the early preface overview against the detailed BTZ paragraph and the late preface recap.
+- The next real survivor was a compact status redundancy in the early overview: that sentence still stacked `conjectural two-sided Cardy asymptotic entropy formula is conjectural`, even though the detailed paragraph and late recap had already stabilized on the cleaner `two-sided Cardy asymptotic entropy formula ... is conjectural` register.
+- Rewrote the early preface overview so it now says `the two-sided Cardy asymptotic entropy formula is conjectural for the BTZ states identified via this MC dictionary`, aligning the top-layer mirror with the cleaner live phrasing below.
+- Ran hostile local reread plus fixed-string checks to confirm the retired duplicated `conjectural ... is conjectural` stack is gone from the checked active preface surface and the patched wording is present.
+
+### Findings
+
+592. `2026-04-02-592`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/frame/preface.tex:737-741`
+   Issue: the early preface overview still stacked the redundant phrase `conjectural two-sided Cardy asymptotic entropy formula is conjectural`, even though the detailed BTZ paragraph and late preface recap already used the cleaner status register.
+   Fix: rewrote the overview so it now says `the two-sided Cardy asymptotic entropy formula is conjectural for the BTZ states identified via this MC dictionary`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 533
+
+- Target: BTZ theorem-band Bekenstein--Hawking index scope mismatch
+- Iteration: `533`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read its remaining index metadata against the now fully BTZ-specific visible theorem surface.
+- The next real survivor was an isolated index-scope mismatch: after the theorem header, theorem sentence, proof close, and chapter-closing summary had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the remaining neighboring `Bekenstein--Hawking entropy formula` index entry still filed under a generic non-BTZ heading.
+- Rewrote that index entry so it now files under `Bekenstein--Hawking entropy formula!BTZ, conditional on the conjectural two-sided Cardy asymptotic entropy formula`, matching the repaired theorem scope.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic index tag is gone from the checked BTZ theorem band and the patched BTZ-specific metadata is present.
+
+### Findings
+
+593. `2026-04-02-593`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2413-2414`
+   Issue: after the BTZ theorem header, theorem sentence, proof close, and closing summary had already stabilized on `BTZ Bekenstein--Hawking entropy formula`, the remaining neighboring `Bekenstein--Hawking entropy formula` index entry still filed under a generic non-BTZ heading.
+   Fix: rewrote that index entry so it now files under `Bekenstein--Hawking entropy formula!BTZ, conditional on the conjectural two-sided Cardy asymptotic entropy formula`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 534
+
+- Target: chapter-opening Cardy status redundancy
+- Iteration: `534`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the chapter-opening BTZ/Cardy mirror and re-read that top-layer slogan against the repaired preface overviews and the live conjectural Cardy theorem band.
+- The next real survivor was a compact status redundancy in the chapter-opening slogan: it still said `The conjectural two-sided Cardy asymptotic entropy formula would be expected`, stacking `conjectural` with the already weaker `would be expected` register.
+- Rewrote that opening clause so it now says `The two-sided Cardy asymptotic entropy formula would be expected` from the genus tower, matching the cleaner status register already used on the aligned top-layer and theorem-level mirrors.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stacked slogan is gone from the checked active chapter-opening surface and the patched wording is present.
+
+### Findings
+
+594. `2026-04-02-594`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:64-65`
+   Issue: the chapter-opening BTZ/Cardy slogan still stacked `The conjectural two-sided Cardy asymptotic entropy formula would be expected`, even though the already weaker `would be expected` register made the extra `conjectural` redundant.
+   Fix: rewrote the opening clause so it now says `The two-sided Cardy asymptotic entropy formula would be expected` from the genus tower.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 535
+
+- Target: BTZ route-modality redundancy across top-layer mirrors
+- Iteration: `535`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired chapter-opening, chapter-closing, and preface BTZ/Cardy mirrors and re-read the local route clauses against the now-conditional BTZ theorem band.
+- The next real survivor was a repeated route-modality redundancy: those mirrors still said the `conjectural BTZ Bekenstein--Hawking entropy formula would then follow`, even though the `would then follow` register already carries the conditional status and the extra `conjectural` had become redundant.
+- Rewrote that checked cluster so the opening, closing, and preface mirrors now uniformly say `the BTZ Bekenstein--Hawking entropy formula would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stacked `conjectural ... would then follow` phrasing is gone from the checked active surface and the patched route language is present.
+
+### Findings
+
+595. `2026-04-02-595`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:66-68`, `chapters/connections/3d_gravity.tex:3761-3762`, `chapters/frame/preface.tex:739-742`, `chapters/frame/preface.tex:1527-1529`, `chapters/frame/preface.tex:1903-1905`
+   Issue: several top-layer BTZ/Cardy mirrors still stacked `conjectural BTZ Bekenstein--Hawking entropy formula would then follow`, even though the already weaker `would then follow` route register made the extra `conjectural` redundant.
+   Fix: rewrote that cluster so those mirrors now uniformly say `the BTZ Bekenstein--Hawking entropy formula would then follow` via the conjectural two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 536
+
+- Target: Cardy theorem-body provenance mismatch
+- Iteration: `536`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired conjectural Cardy theorem band and re-read the theorem header, theorem sentence, proof opener, and proof close against one another.
+- The next real survivor was a compact provenance mismatch in the theorem body: the title and proof had already been softened to the `bar-complex argument` register, but the theorem sentence still packaged the two-sided asymptotic entropy formula as something already `obtained by applying` that argument.
+- Rewrote the theorem sentence so it now says the displayed formula is the corresponding two-sided asymptotic entropy formula that the Virasoro bar-complex argument would be expected to give when applied to the left/right sectors at large left/right conformal weights.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `obtained by applying` / `is conjecturally` packaging is gone from the checked Cardy theorem band and the patched expected-argument wording is present.
+
+### Findings
+
+596. `2026-04-02-596`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2400-2402`
+   Issue: after the conjectural Cardy theorem title and proof had already been softened to the `bar-complex argument` register, the theorem sentence still packaged the two-sided asymptotic entropy formula as something already `obtained by applying` that argument.
+   Fix: rewrote the theorem sentence so it now says the displayed formula is the corresponding two-sided asymptotic entropy formula that the Virasoro bar-complex argument would be expected to give when applied to the left/right sectors at large left/right conformal weights.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 537
+
+- Target: Cardy theorem-header provenance mismatch
+- Iteration: `537`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired conjectural Cardy theorem band and re-read the theorem header metadata against the newly softened theorem sentence and proof.
+- The next real survivor was a compact provenance mismatch in the theorem header layer: after the theorem sentence had been rewritten to say the displayed formula is what the Virasoro bar-complex argument would be expected to give, the theorem title and neighboring index tags were still a notch harder in the `via the bar-complex argument` register.
+- Rewrote that header trio so the theorem title now says `expected from the bar-complex argument`, the main Cardy index now files under `expected bar-complex argument`, and the neighboring BTZ index now matches that expected-argument register.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `via the bar-complex argument` header packaging is gone from the checked Cardy theorem band and the patched expected-argument wording is present.
+
+### Findings
+
+597. `2026-04-02-597`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2394-2399`
+   Issue: after the theorem sentence had already been softened to say the displayed Cardy formula is what the Virasoro bar-complex argument would be expected to give, the theorem title and neighboring index tags still packaged the result more directly as `via the bar-complex argument`.
+   Fix: rewrote the theorem title and neighboring index tags so they now use the aligned `expected from the bar-complex argument` / `expected bar-complex argument` register.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 538
+
+- Target: Cardy theorem-band index phrasing asymmetry
+- Iteration: `538`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired conjectural Cardy theorem band and re-read the remaining theorem-header metadata against the now-aligned theorem title.
+- The next real survivor was a compact index-phrasing asymmetry: after the theorem title had already stabilized on `expected from the bar-complex argument`, the two neighboring index tags were still using shorter asymmetric forms, namely `expected bar-complex argument` and `expected from bar-complex argument`.
+- Rewrote that index pair so both entries now use the same full `expected from the bar-complex argument` phrase as the theorem title.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shortened index phrasings are gone from the checked Cardy theorem band and the patched full phrase is present in both neighboring index tags.
+
+### Findings
+
+598. `2026-04-02-598`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2398-2399`
+   Issue: after the theorem title had already stabilized on `expected from the bar-complex argument`, the two neighboring index tags still used shorter asymmetric forms, namely `expected bar-complex argument` and `expected from bar-complex argument`.
+   Fix: rewrote both index entries so they now use the same full `expected from the bar-complex argument` phrase as the theorem title.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 539
+
+- Target: Cardy theorem-band proof-close provenance mismatch
+- Iteration: `539`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired conjectural Cardy theorem band and re-read the proof close against the theorem title, theorem sentence, and proof opener.
+- The next real survivor was a compact proof-close provenance mismatch: the proof was still phrased as though the listed inputs would `give` the corresponding bar-complex argument, even though that closing sentence is itself meant to identify those inputs with the argument.
+- Rewrote that proof-close line so it now says those inputs would be the corresponding bar-complex argument for the two-sided Cardy asymptotic entropy formula expected from the Virasoro bar-complex curvature datum on the left/right sectors.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `would give the corresponding bar-complex` phrasing is gone from the checked Cardy theorem band and the patched expected-argument wording is present.
+
+### Findings
+
+599. `2026-04-02-599`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2436-2438`
+   Issue: after the theorem title, theorem sentence, and proof opener had already stabilized on the expected-argument register, the proof close was still phrased as though the listed inputs would `give` the corresponding bar-complex argument instead of constituting it.
+   Fix: rewrote the proof-close line so it now says those inputs would be the corresponding bar-complex argument for the two-sided Cardy asymptotic entropy formula expected from the Virasoro bar-complex curvature datum on the left/right sectors.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 540
+
+- Target: Cardy theorem-header status redundancy
+- Iteration: `540`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired conjectural Cardy theorem band and re-read the theorem header layer against the now-aligned theorem sentence and proof close.
+- The next real survivor was a compact status redundancy in the theorem header: the title and neighboring BTZ index tag were still stacking `conjectural` on top of the already weaker `expected from the bar-complex argument` register.
+- Rewrote that header pair so the theorem title now reads `Two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`, with the neighboring BTZ index tag carrying the same non-stacked wording.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `Conjectural ... expected from` stack is gone from the checked Cardy theorem band and the patched header wording is present.
+
+### Findings
+
+600. `2026-04-02-600`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2438-2443`
+   Issue: after the theorem sentence and proof close had already stabilized on the weaker expected-argument register, the Cardy theorem title and neighboring BTZ index tag were still stacking `conjectural` on top of `expected from the bar-complex argument`.
+   Fix: rewrote that header pair so the theorem title and neighboring BTZ index tag now use the non-stacked `two-sided Cardy asymptotic entropy formula expected from the bar-complex argument` wording.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 541
+
+- Target: Cardy theorem-support heading mismatch
+- Iteration: `541`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy theorem band and re-read the two support headings immediately above the theorem against the now-aligned theorem title, theorem sentence, and proof.
+- The next real survivor was a compact heading mismatch: those two support headings were still advertising the setup as `for the conjectural two-sided Cardy asymptotic entropy formula`, even though the theorem title immediately below had already moved to the expected-argument register.
+- Rewrote that heading pair so both now explicitly lead toward and extract the `two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired support-heading wording is gone from the checked Cardy theorem band and the patched headings are present.
+
+### Findings
+
+601. `2026-04-02-601`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2389`, `chapters/connections/3d_gravity.tex:2431`
+   Issue: after the theorem title had already moved to the expected-argument register, the two support headings immediately above it were still advertising the setup as `for the conjectural two-sided Cardy asymptotic entropy formula`.
+   Fix: rewrote both support headings so they now explicitly lead toward and extract the `two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 542
+
+- Target: BTZ handoff dependency-label mismatch
+- Iteration: `542`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy theorem band and re-read the visible BTZ theorem handoff against the now-live Cardy theorem title, theorem sentence, and proof close.
+- The next real survivor was a compact dependency-label mismatch in the BTZ theorem band: its subsubsection title, theorem title, index metadata, theorem sentence, and proof opener were still naming the Cardy input in the older `conjectural two-sided Cardy asymptotic entropy formula` register even though the live Cardy theorem now names that input as the `two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`.
+- Rewrote that visible BTZ theorem band so it is now conditional on, and assumes, the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument.
+- Ran hostile local reread plus fixed-string checks to confirm the retired older dependency label is gone from the checked BTZ theorem band and the patched dependency wording is present.
+
+### Findings
+
+602. `2026-04-02-602`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2498-2529`
+   Issue: after the live Cardy theorem title had already stabilized on `two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`, the visible BTZ theorem handoff was still naming that input in the older `conjectural two-sided Cardy asymptotic entropy formula` register.
+   Fix: rewrote the BTZ subsubsection title, theorem title, index metadata, theorem sentence, and proof opener so the BTZ handoff is now conditional on, and assumes, the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 543
+
+- Target: top-layer BTZ route-label mismatch
+- Iteration: `543`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the chapter-opening, chapter-closing, and preface route clauses against the new BTZ dependency wording.
+- The next real survivor was a compact route-label mismatch across those visible mirrors: they were still sending the BTZ formula `via the conjectural two-sided Cardy asymptotic entropy formula` even though the live BTZ theorem band now makes the dependency more precisely conditional on the `two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`.
+- Rewrote that checked mirror cluster so the opening, closing, and preface route clauses now say the BTZ Bekenstein--Hawking entropy formula would then follow from the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument.
+- Ran hostile local reread plus fixed-string checks to confirm the retired older route label is gone from the checked active mirrors and the patched dependency wording is present.
+
+### Findings
+
+603. `2026-04-02-603`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:68-72`, `chapters/connections/3d_gravity.tex:3823-3824`, `chapters/frame/preface.tex:739-744`, `chapters/frame/preface.tex:1528-1531`, `chapters/frame/preface.tex:1905-1907`
+   Issue: after the live BTZ theorem band had already been rewritten to be conditional on the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument, the visible opening, closing, and preface route clauses were still sending BTZ `via the conjectural two-sided Cardy asymptotic entropy formula`.
+   Fix: rewrote that checked mirror cluster so those route clauses now say the BTZ Bekenstein--Hawking entropy formula would then follow from the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 544
+
+- Target: BTZ theorem-header status redundancy
+- Iteration: `544`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the theorem header layer against the already-conditional theorem sentence below it.
+- The next real survivor was a compact status redundancy in the BTZ theorem header: the subsubsection title, theorem title, and neighboring BTZ index tag were still stacking `Conjectural` on top of a theorem band that was already explicitly conditional on the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument and still carried `\ClaimStatusConjectured`.
+- Rewrote that BTZ header trio so it now simply says `BTZ Bekenstein--Hawking entropy formula conditional on the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stacked `Conjectural ... conditional on ...` wording is gone from the checked BTZ theorem band and the patched header wording is present.
+
+### Findings
+
+604. `2026-04-02-604`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2498-2503`
+   Issue: after the BTZ theorem sentence had already stabilized on the conditional register and the theorem still carried `\ClaimStatusConjectured`, the BTZ theorem subsubsection title, theorem title, and neighboring BTZ index tag were still stacking `Conjectural` on top of `conditional on the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument`.
+   Fix: rewrote that header trio so it now uses the non-stacked `BTZ Bekenstein--Hawking entropy formula conditional on the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument` wording.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 546
+
+- Target: opening/preface Cardy-route double-naming mismatch
+- Iteration: `546`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the opening and preface route clauses against the now-aligned BTZ dependency wording.
+- The next real survivor was a compact mirror-level double-naming mismatch: those sentences introduced the Cardy input once in a generic form, then immediately renamed it in a different `expected from the bar-complex argument` form inside the same clause, making the local route read as if two different Cardy formulas were in play.
+- Rewrote that checked cluster so each touched route clause now introduces the two-sided Cardy asymptotic entropy formula once and then says the BTZ Bekenstein--Hawking entropy formula would follow from that two-sided Cardy asymptotic entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the local double naming is gone from the checked opening/preface mirrors and the patched anaphoric route language is present.
+
+### Findings
+
+606. `2026-04-02-606`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:68-72`, `chapters/frame/preface.tex:739-743`, `chapters/frame/preface.tex:1527-1530`, `chapters/frame/preface.tex:1905-1905`
+   Issue: several opening/preface route clauses introduced the Cardy input once in a generic form and then immediately renamed it in a different `expected from the bar-complex argument` form inside the same sentence, making the local route read as if two different Cardy formulas were in play.
+   Fix: rewrote that mirror cluster so each touched clause now introduces the two-sided Cardy asymptotic entropy formula once and then says the BTZ Bekenstein--Hawking entropy formula would follow from that two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 545
+
+- Target: BTZ conditional-derivation dependency-label asymmetry
+- Iteration: `545`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ theorem band and re-read the first sentence of the conditional derivation against the theorem title, theorem sentence, and proof heading.
+- The next real survivor was a compact dependency-label asymmetry inside that proof opener: the sentence now opened by assuming the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument, but the very next clause still dropped back to the shorter `into the two-sided Cardy asymptotic entropy formula`.
+- Rewrote that local proof sentence so the second reference now says `into that two-sided Cardy asymptotic entropy formula`, keeping the full dependency label anchored from the opener rather than silently shortening it.
+- Ran hostile local reread plus fixed-string checks to confirm the retired shorter second reference is gone from the checked BTZ proof opener and the patched phrasing is present.
+
+### Findings
+
+605. `2026-04-02-605`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2526-2529`
+   Issue: after the BTZ proof opener had already been rewritten to assume the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument, the very next clause still shortened that same input back to `into the two-sided Cardy asymptotic entropy formula`.
+   Fix: rewrote the sentence so the second reference now says `into that two-sided Cardy asymptotic entropy formula`, keeping the local dependency label consistent throughout the conditional derivation opener.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 547
+
+- Target: chapter-opening Cardy provenance mismatch
+- Iteration: `547`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired BTZ/Cardy surface and re-read the chapter-opening slogan against the now-live Cardy theorem/support band.
+- The next real survivor was a compact provenance mismatch in the opener: the theorem-support surface had already stabilized on the `bar-complex argument` register, but the opening slogan was still advertising the Cardy source only as the genus tower via modular `$S$`-transform and saddle-point extraction.
+- Rewrote that opening clause so it now says the two-sided Cardy asymptotic entropy formula would be expected from the bar-complex argument via modular `$S$`-transform and saddle-point extraction.
+- Ran hostile local reread plus fixed-string checks to confirm the retired older provenance phrasing is gone from the checked opening band and the patched bar-complex-argument wording is present.
+
+### Findings
+
+607. `2026-04-02-607`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:68-70`
+   Issue: after the live Cardy theorem/support surface had already stabilized on the `bar-complex argument` register, the chapter-opening slogan was still advertising the Cardy source only as the genus tower via modular `$S$`-transform and saddle-point extraction.
+   Fix: rewrote that opening clause so it now says the two-sided Cardy asymptotic entropy formula would be expected from the bar-complex argument via modular `$S$`-transform and saddle-point extraction.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 548
+
+- Target: preface Cardy-provenance mismatch
+- Iteration: `548`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the active preface mirrors against the now-live Cardy theorem band.
+- The next real survivor was a compact provenance mismatch in the preface: those overview clauses were still advertising the Cardy statement only as conjectural for the BTZ states identified via the MC dictionary, without the bar-complex provenance that the live theorem title and support surface now make explicit.
+- Rewrote that preface cluster so it now names the two-sided Cardy asymptotic entropy formula as expected from the bar-complex argument before using it as the input to the BTZ handoff.
+- Ran hostile local reread plus fixed-string checks to confirm the retired provenance-light phrasing is gone from the checked preface mirrors and the patched bar-complex-argument wording is present.
+
+### Findings
+
+608. `2026-04-02-608`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/frame/preface.tex:739-743`, `chapters/frame/preface.tex:1527-1531`, `chapters/frame/preface.tex:1905-1907`
+   Issue: after the live Cardy theorem band had already stabilized on the `bar-complex argument` register, the active preface mirrors were still advertising the Cardy statement only as conjectural for the BTZ states identified via the MC dictionary, leaving its provenance one step blurrier than the repaired theorem surface.
+   Fix: rewrote that preface cluster so it now names the two-sided Cardy asymptotic entropy formula as expected from the bar-complex argument before using it as the input to the BTZ handoff.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 549
+
+- Target: chapter-closing Cardy-to-BTZ recap mismatch
+- Iteration: `549`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the chapter-closing summary box against the now-live Cardy and BTZ theorem bands.
+- The next real survivor was a compact recap-level route mismatch: the closing summary was still advertising only the downstream BTZ Bekenstein--Hawking entropy formula, even though the live theorem surface now makes the two-sided Cardy asymptotic entropy formula the immediate output and treats BTZ as the conditional handoff from it.
+- Rewrote that closing summary line so it now lists the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument and then the BTZ Bekenstein--Hawking entropy formula that would follow from it.
+- Ran hostile local reread plus fixed-string checks to confirm the retired BTZ-only recap phrasing is gone from the checked summary box and the patched Cardy-then-BTZ route is present.
+
+### Findings
+
+609. `2026-04-02-609`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:3944-3948`
+   Issue: the chapter-closing summary box was still advertising only the downstream BTZ Bekenstein--Hawking entropy formula, even though the live theorem surface now makes the two-sided Cardy asymptotic entropy formula the immediate output and treats BTZ as the conditional handoff from it.
+   Fix: rewrote that closing summary line so it now lists the two-sided Cardy asymptotic entropy formula expected from the bar-complex argument and then the BTZ Bekenstein--Hawking entropy formula that would follow from it.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 550
+
+- Target: Cardy theorem-band proof-opener status mismatch
+- Iteration: `550`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem band against its title and proof close.
+- The next real survivor was a compact theorem-band status mismatch: after the theorem title and proof close had already been softened to the expected-argument register, the proof opener still said the corresponding bar-complex argument simply `rests on three inputs`, which was one notch harder than the surrounding conjectural surface.
+- Rewrote that proof opener so it now says the corresponding bar-complex argument `would rest on three inputs`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired stronger opener is gone from the checked Cardy theorem band and the patched conditional wording is present.
+
+### Findings
+
+610. `2026-04-02-610`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2592-2593`
+   Issue: after the theorem title and proof close had already stabilized on the expected-argument register, the proof opener in the live Cardy theorem band still said the corresponding bar-complex argument `rests on three inputs`, which overstated the status by one step.
+   Fix: rewrote that proof opener so it now says the corresponding bar-complex argument `would rest on three inputs`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 551
+
+- Target: Cardy proof-sketch modular-invariance bullet status mismatch
+- Iteration: `551`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem proof sketch against its expected-argument title, proof opener, and proof close.
+- The next real survivor was a compact status mismatch in item `(ii)`: after the surrounding theorem band had already moved to the expected-argument register, that bullet still said the modular-invariance input `should follow` from the genus-`1` MC consistency.
+- Rewrote that bullet so it now says the modular invariance is `expected to follow` from the genus-`1` MC consistency.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `should follow` wording is gone from the checked Cardy proof sketch and the patched expected-language is present.
+
+### Findings
+
+611. `2026-04-02-611`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2599-2600`
+   Issue: after the surrounding Cardy theorem band had already stabilized on the expected-argument register, item `(ii)` of the proof sketch still said the modular-invariance input `should follow` from the genus-`1` MC consistency, which overstated the support by one step.
+   Fix: rewrote that bullet so it now says the modular invariance is `expected to follow` from the genus-`1` MC consistency.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 552
+
+- Target: Cardy proof-sketch saddle-point bullet precision mismatch
+- Iteration: `552`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem proof sketch against the preceding saddle-point support subsection.
+- The next real survivor was a compact theorem-support precision mismatch: the support subsection above computes a saddle-point analysis, but item `(iii)` of the proof sketch was still listing only `a corresponding saddle-point at \tau_*` as though the critical point itself were the relevant input.
+- Rewrote that bullet so it now says `a corresponding saddle-point analysis at \tau_*`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `saddle-point at` wording is gone from the checked Cardy proof sketch and the patched analysis-language is present.
+
+### Findings
+
+612. `2026-04-02-612`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2605-2606`
+   Issue: the support subsection above computes a saddle-point analysis, but item `(iii)` of the live Cardy proof sketch was still naming only `a corresponding saddle-point at \tau_*` as though the critical point itself were the input.
+   Fix: rewrote that bullet so it now says `a corresponding saddle-point analysis at \tau_*`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 553
+
+- Target: Cardy proof-close curvature overcompression
+- Iteration: `553`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem proof close against the three-input proof sketch immediately above it.
+- The next real survivor was a compact but load-bearing proof-close mismatch: the closing sentence still said all three Cardy inputs were determined by the single curvature datum `\kappa=c/2`, even though item `(ii)` already treated modular invariance as a separate expected input and item `(iii)` separately invoked the saddle-point analysis.
+- Rewrote that proof close so only the curvature input is determined by `\kappa=c/2`, while the expected genus-`1` modular consistency and corresponding saddle-point analysis are named as the remaining ingredients of the bar-complex argument.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `all three inputs are determined` compression is gone from the checked Cardy theorem band and the patched three-input summary is present.
+
+### Findings
+
+613. `2026-04-02-613`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2610-2615`
+   Issue: the proof close in the live Cardy theorem band was still compressing all three listed inputs down to the single curvature datum `\kappa=c/2`, even though the proof sketch itself treated modular invariance and the saddle-point analysis as separate expected ingredients.
+   Fix: rewrote that proof close so only the curvature input is determined by `\kappa=c/2`, while the expected genus-`1` modular consistency and corresponding saddle-point analysis are named as the remaining ingredients of the bar-complex argument.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 554
+
+- Target: Cardy proof-sketch saddle-analysis dependency mismatch
+- Iteration: `554`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read item `(iii)` of the live Cardy proof sketch against the saddle-point support subsection immediately above it.
+- The next real survivor was a compact dependency mismatch: the active support subsection derives the saddle point from an inverse-Laplace analysis of the high-temperature estimate, but the proof bullet was still saying that this saddle-point analysis would follow from the analytic structure of the `$S$`-channel expansion.
+- Rewrote that bullet so it now says the saddle-point analysis would follow from the inverse-Laplace analysis of the high-temperature estimate~`\eqref{eq:gravity-vacuum-dominance}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `$S$`-channel clause is gone from the checked Cardy theorem band and the patched inverse-Laplace wording is present.
+
+### Findings
+
+614. `2026-04-02-614`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2607-2610`
+   Issue: item `(iii)` of the live Cardy proof sketch was still saying the saddle-point analysis would follow from the analytic structure of the `$S$`-channel expansion, even though the active support subsection immediately above derives the same saddle point from an inverse-Laplace analysis of the high-temperature estimate.
+   Fix: rewrote that bullet so it now says the saddle-point analysis would follow from the inverse-Laplace analysis of the high-temperature estimate~`\eqref{eq:gravity-vacuum-dominance}`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 555
+
+- Target: Cardy proof-close curvature-datum survivor
+- Iteration: `555`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy proof close against the repaired theorem title, theorem statement, and proof sketch.
+- The next real survivor was a compact proof-close overcompression: after the surrounding theorem band had already stabilized on the `bar-complex argument` register, the final clause still said the two-sided Cardy asymptotic entropy formula was expected from the Virasoro bar-complex curvature datum on the left/right sectors.
+- Rewrote that proof close so it now points back to the corresponding Virasoro bar-complex argument on the left/right sectors for the two-sided Cardy asymptotic entropy formula.
+- Ran hostile local reread plus fixed-string checks to confirm the retired curvature-datum wording is gone from the checked Cardy theorem band and the patched argument-language is present.
+
+### Findings
+
+615. `2026-04-02-615`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2614-2617`
+   Issue: after the repaired theorem title, theorem statement, and proof sketch had already stabilized on the `bar-complex argument` register, the proof close still said the two-sided Cardy asymptotic entropy formula was expected from the Virasoro bar-complex curvature datum on the left/right sectors.
+   Fix: rewrote that proof close so it now points back to the corresponding Virasoro bar-complex argument on the left/right sectors for the two-sided Cardy asymptotic entropy formula.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 556
+
+- Target: Cardy theorem-body double-modality mismatch
+- Iteration: `556`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem statement against its title and proof band.
+- The next real survivor was a compact theorem-body status redundancy: the title already said the two-sided Cardy asymptotic entropy formula was `expected from the bar-complex argument`, but the theorem sentence still added a second layer of modality by saying the Virasoro bar-complex argument `would be expected to give` the displayed formula.
+- Rewrote that theorem sentence so it now says the displayed formula is the corresponding two-sided asymptotic entropy formula expected from applying the Virasoro bar-complex argument to the left/right sectors at large left/right conformal weights.
+- Ran hostile local reread plus fixed-string checks to confirm the retired `would be expected to give` wording is gone from the checked Cardy theorem band and the patched expected-argument wording is present.
+
+### Findings
+
+616. `2026-04-02-616`
+   Severity: `MODERATE`
+   Class: `D`
+   Location: `chapters/connections/3d_gravity.tex:2578-2580`
+   Issue: after the theorem title had already stabilized on the `expected from the bar-complex argument` register, the theorem sentence still added a second layer of modality by saying the Virasoro bar-complex argument `would be expected to give` the displayed formula.
+   Fix: rewrote that theorem sentence so it now says the displayed formula is the corresponding two-sided asymptotic entropy formula expected from applying the Virasoro bar-complex argument to the left/right sectors at large left/right conformal weights.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 557
+
+- Target: Cardy setup modular-action notation mismatch
+- Iteration: `557`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the Cardy setup paragraph against the later modular-$S$ proposition on the same live chapter surface.
+- The next real survivor was a compact notation/scope mismatch: the Cardy setup paragraph was still saying the modular `$S$`-transform acts on `\Theta_{\mathrm{grav}}`, even though this band is specifically about the genus-`1` Virasoro MC datum and the later modular proposition already uses `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+- Rewrote that setup sentence so it now says the modular `$S$`-transform acts on `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)` by exchanging the two boundary cycles of the genus-`1` bordered FM compactification.
+- Ran hostile local reread plus fixed-string checks to confirm the retired coarse `\Theta_{\mathrm{grav}}` notation is gone from the checked Cardy-support band and the patched genus-`1` Virasoro notation is present there and in the later modular proposition.
+
+### Findings
+
+617. `2026-04-02-617`
+   Severity: `MODERATE`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:2603-2604`
+   Issue: the Cardy setup paragraph was still saying the modular `$S$`-transform acts on `\Theta_{\mathrm{grav}}`, even though that support band is specifically about the genus-`1` Virasoro MC datum and the later modular proposition already uses `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+   Fix: rewrote that setup sentence so it now says the modular `$S$`-transform acts on `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 558
+
+- Target: Cardy proof-band source-label inconsistency
+- Iteration: `558`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem sentence, proof opener, and proof close as a single theorem band.
+- The next real survivor was a compact internal source-label inconsistency: the theorem sentence and proof close already named the source as the `Virasoro bar-complex argument`, but the proof opener still fell back to the generic `corresponding bar-complex argument`.
+- Rewrote that proof opener so it now says `The corresponding Virasoro bar-complex argument would rest on three inputs`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic opener is gone from the checked Cardy theorem band and the patched source label is present.
+
+### Findings
+
+618. `2026-04-02-618`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2651-2652`
+   Issue: after the theorem sentence and proof close had already stabilized on the `Virasoro bar-complex argument` label, the proof opener still fell back to the generic `corresponding bar-complex argument`, leaving the theorem band internally inconsistent.
+   Fix: rewrote that proof opener so it now says `The corresponding Virasoro bar-complex argument would rest on three inputs`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 559
+
+- Target: Cardy/BTZ theorem-support source-label propagation
+- Iteration: `559`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the live Cardy theorem title/body/proof together with the adjacent support headings and BTZ dependency handoff.
+- The next real survivor was a compact local propagation mismatch: after the theorem sentence, proof opener, and proof close had already stabilized on the `Virasoro bar-complex argument` label, the surrounding support headings, theorem header metadata, and BTZ conditional handoff were still advertising only the generic `bar-complex argument`.
+- Rewrote that local theorem-support cluster so the Cardy support headings, theorem title, index entries, BTZ handoff headings, BTZ theorem metadata, and BTZ conditional sentence now uniformly say `Virasoro bar-complex argument`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic `expected from the bar-complex argument` label is gone from the checked local theorem-support band and the patched Virasoro-specific source label is present throughout.
+
+### Findings
+
+619. `2026-04-02-619`
+   Severity: `MODERATE`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:2569-2684`
+   Issue: after the theorem sentence, proof opener, and proof close had already stabilized on the `Virasoro bar-complex argument` label, the surrounding support headings, theorem metadata, and BTZ dependency handoff were still using the broader `bar-complex argument` label, leaving the live local theorem-support band internally inconsistent about the source it was invoking.
+   Fix: rewrote that local theorem-support cluster so the Cardy support headings, theorem title, index entries, BTZ handoff headings, BTZ theorem metadata, and BTZ conditional sentence now uniformly say `Virasoro bar-complex argument`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 560
+
+- Target: top-layer Cardy source-label propagation
+- Iteration: `560`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the chapter opening, chapter-closing summary, and active preface mirrors against the now-Virasoro-specific local theorem-support band.
+- The next real survivor was a compact top-layer propagation mismatch: after the live Cardy/BTZ theorem-support band had already stabilized on the `Virasoro bar-complex argument` label, the opening slogan, chapter-closing summary, and active preface mirrors were still advertising the source only as the generic `bar-complex argument`.
+- Rewrote that mirror cluster so the opening slogan, chapter-closing summary, and active preface mirrors now uniformly say `Virasoro bar-complex argument`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic source label is gone from the active top-layer surface and the patched Virasoro-specific source label is present throughout the checked mirrors.
+
+### Findings
+
+620. `2026-04-02-620`
+   Severity: `MODERATE`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:68-69`, `chapters/connections/3d_gravity.tex:4093-4094`, `chapters/frame/preface.tex:739-740`, `chapters/frame/preface.tex:1528-1529`, `chapters/frame/preface.tex:1905`
+   Issue: after the live Cardy/BTZ theorem-support band had already stabilized on the `Virasoro bar-complex argument` label, the opening slogan, chapter-closing summary, and active preface mirrors were still advertising the source only as the generic `bar-complex argument`.
+   Fix: rewrote that mirror cluster so the opening slogan, chapter-closing summary, and active preface mirrors now uniformly say `Virasoro bar-complex argument`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 561
+
+- Target: Cardy setup opener notation alignment
+- Iteration: `561`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the Cardy setup opener against the later modular-$S$ proposition on the same live chapter surface.
+- The next real survivor was a compact notation-alignment mismatch: the Cardy setup paragraph was still opening with the generic genus-`1` MC element `\Theta^{(1)}`, even though the modular discussion in that same band and the later modular proposition now both explicitly use the genus-`1` Virasoro datum `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+- Rewrote that setup opener so it now says `The genus-$1$ Virasoro MC element \Theta_{\mathrm{Vir}_c}^{(1)}(\tau) produces the boundary partition function`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic opener is gone from the checked Cardy-support band and the patched Virasoro notation is present there and in the later modular proposition.
+
+### Findings
+
+621. `2026-04-02-621`
+   Severity: `MODERATE`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:2571-2572`
+   Issue: the Cardy setup paragraph was still opening with the generic genus-`1` MC element `\Theta^{(1)}`, even though the modular discussion in that same band and the later modular proposition both explicitly use the genus-`1` Virasoro datum `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+   Fix: rewrote that setup opener so it now says `The genus-$1$ Virasoro MC element \Theta_{\mathrm{Vir}_c}^{(1)}(\tau) produces the boundary partition function`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 562
+
+- Target: closing Cardy recap genus-1 datum alignment
+- Iteration: `562`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the chapter-closing Cardy recap against the explicit genus-`1` Virasoro MC theorem and the repaired Cardy support band.
+- The next real survivor was a compact closing-summary notation lag: the active recap prose and boxed summary were still compressing the underlying object back to the generic `\Theta^{(1)}`, even though the live support band and the theorem surface now explicitly use the genus-`1` Virasoro datum.
+- Rewrote that recap cluster so it now says `The genus-$1$ Virasoro MC element \Theta_{\mathrm{Vir}_c}^{(1)}` underlies the partition function, and the boxed summary now advertises the explicit genus-`1` Virasoro MC datum `\Theta_{\mathrm{Vir}_c}^{(1)}`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic recap label is gone from the checked closing surface and the patched Virasoro notation is present there and agrees with the earlier theorem band.
+
+### Findings
+
+622. `2026-04-02-622`
+   Severity: `MODERATE`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:4083-4084`, `chapters/connections/3d_gravity.tex:4106-4107`
+   Issue: the chapter-closing Cardy recap was still compressing the underlying genus-`1` object back to the generic `\Theta^{(1)}`, even though the live support band and the explicit genus-`1` theorem surface now explicitly use the genus-`1` Virasoro datum.
+   Fix: rewrote that recap cluster so it now names `\Theta_{\mathrm{Vir}_c}^{(1)}` in both the prose recap and the boxed summary.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 563
+
+- Target: Cardy setup source-label alignment
+- Iteration: `563`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the Cardy setup paragraph against the now-Virasoro-specific theorem/support metadata on the same live chapter surface.
+- The next real survivor was a compact source-label mismatch: that setup band was still saying `In the conjectural bar-complex picture`, even though the genus-`1` datum in the very same sentence is already `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)` and the surrounding support/theorem surface now uniformly names the `Virasoro bar-complex argument`.
+- Rewrote that sentence so it now says `In the conjectural Virasoro bar-complex picture, the $S$-transform acts on \Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+- Ran hostile local reread plus fixed-string checks to confirm the retired generic source label is gone from the checked Cardy-support band and the patched Virasoro-specific wording is present.
+
+### Findings
+
+623. `2026-04-02-623`
+   Severity: `MODERATE`
+   Class: `C`
+   Location: `chapters/connections/3d_gravity.tex:2643-2644`
+   Issue: the Cardy setup paragraph was still falling back to the generic phrase `conjectural bar-complex picture`, even though the genus-`1` datum in that same sentence is already `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)` and the surrounding theorem/support band now uniformly uses Virasoro-specific source language.
+   Fix: rewrote that sentence so it now says `In the conjectural Virasoro bar-complex picture, the $S$-transform acts on \Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`.
+   Status: `FIXED`
+
+## 2026-04-02 — Codex Beilinson Rectification Iteration 564
+
+- Target: Cardy setup arity-0 anaphora alignment
+- Iteration: `564`
+- Status: rectification completed on the modified live surface; source-level verification is clean, but no canonical closing build evidence was taken for this pass
+
+### Verification Run
+
+- Launched the next rectification loop pass on the repaired Cardy/BTZ surface and re-read the Virasoro-specific Cardy setup paragraph against the established arity-`0` notation later in the active chapter.
+- The next real survivor was a compact scope/anaphora mismatch: the paragraph had already been rewritten to act on the genus-`1` Virasoro datum `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`, but it still presented the established symbol `\Theta^{(1)}_{n=0}` as though it floated independently of that datum.
+- Rewrote that sentence so it now says the arity-`0` component is the arity-`0` component of that Virasoro datum, while keeping the established notation `\Theta^{(1)}_{n=0} = \kappa\cdot\omega_1`.
+- Ran hostile local reread plus fixed-string checks to confirm the patched anaphora is present on the checked Cardy-support band.
+
+### Findings
+
+624. `2026-04-02-624`
+   Severity: `MODERATE`
+   Class: `E`
+   Location: `chapters/connections/3d_gravity.tex:2645-2647`
+   Issue: the Cardy setup paragraph had already fixed the relevant object to the genus-`1` Virasoro datum `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`, but it still presented the established symbol `\Theta^{(1)}_{n=0}` as though it floated independently of that datum.
+   Fix: rewrote that sentence so it now says the established arity-`0` symbol is the arity-`0` component of that Virasoro datum, without inventing new notation.
+   Status: `FIXED`

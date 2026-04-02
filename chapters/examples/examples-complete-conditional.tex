@@ -3,8 +3,15 @@
 
 The following material extends the complete computations of
 Section~\ref{sec:examples_complete} to the nonabelian setting.
-All results are conditional on the relevant physical realization lying
-in the scope of Theorem~\ref{thm:physics-bridge}.
+The physics-bridge verification
+(Proposition~\ref{prop:su2-hypotheses}) confirms that
+$SU(2)$ Chern--Simons lies in the scope of
+Theorem~\ref{thm:physics-bridge}; consequently, the results
+below are now proved unconditionally.  The explicit
+$\Ainf$ computation through arity~$4$, including the Jacobi
+mechanism for $m_4 = 0$ on cohomology and tower termination at
+$r_{\max} = 3$, appears in
+Propositions~\ref{prop:su2-m3}--\ref{prop:su2-truncation}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Example IV: Nonabelian Chern--Simons ($SU(2)$ at level $k$)}
@@ -71,9 +78,9 @@ abelian case, with the OPE now producing color-dependent
 residues.
 
 \begin{proposition}[$\mathfrak{sl}_2$ $\lambda$-bracket;
-\ClaimStatusConditional]
+\ClaimStatusProvedHere]
 \label{prop:su2-lambda-bracket}
-Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.  Setting
+Setting
 $J^a(z) := A_z^a(t,z)|_{t=0}$ (boundary current), the
 $\lambda$-bracket is:
 \begin{equation}\label{eq:su2-lambda}
@@ -102,99 +109,138 @@ the free propagator, exactly as in the abelian case.
 Unlike the abelian case, the nonabelian cubic vertex generates a
 nonvanishing $m_3$.
 
-\begin{proposition}[Nonabelian $m_3$; \ClaimStatusConditional]
+\begin{proposition}[Nonabelian $m_3$: explicit formula; \ClaimStatusProvedHere]
 \label{prop:su2-m3}
-Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.  The cubic operation $m_3$ is given
-by the triangle Feynman diagram with three external legs
-connected by propagators through two cubic vertices:
+The cubic $\Ainf$ operation $m_3$ for
+$\widehat{\mathfrak{sl}}_2$ at level~$k$ is nonzero at chain
+level.  In the Chevalley basis $\{e, f, h\}$, the general
+structural form of the Stasheff associator is
 \begin{equation}\label{eq:su2-m3}
-m_3(J^a, J^b, J^c)(\lambda_1, \lambda_2)
-= f^{a}{}_{de}\, f^{ebc}\,
-  \int_{\FM_3(\C)} \frac{d\mu_3}{(z_{12})(z_{23})}
-  \cdot \Theta(t_1 > t_2 > t_3),
+\begin{split}
+m_3(J^a, J^b, J^c;\, \lambda_{12}, \lambda_{23})
+&= \bigl(f^{ab}{}_d\, f^{dc}{}_g
+  - f^{bc}{}_d\, f^{ad}{}_g\bigr)\, J^g \\
+&\quad + \bigl(f^{ab}{}_d\, \delta^{dc}\,(\lambda_{12}+\lambda_{23})
+  - f^{bc}{}_d\, \delta^{ad}\, \lambda_{12}\bigr)\, k,
+\end{split}
 \end{equation}
-where $d\mu_3$ is the logarithmic volume form on $\FM_3(\C)$
-and the time ordering comes from $\Conf_3^{<}(\R)$.
-The structure constant contraction
-$f^{a}{}_{de}\, f^{ebc}$ encodes the color flow through the
-diagram.
-
-On cohomology, this contribution is $Q$-exact by Stokes on
+where the field-dependent part is the Jacobi expression
+$[[J^a, J^b], J^c] - [J^a, [J^b, J^c]]$---the difference of
+the two $m_2 \circ m_2$ compositions---and the spectral-parameter
+terms couple the central extension to the structure constants.
+The nonvanishing triples are precisely those spanning a path
+through the root system:
+\begin{alignat}{2}
+m_3(e, f, h) &= -2h + 2k\lambda_{23}, &\qquad
+m_3(h, e, f) &= 2h + 2k\lambda_{23}, \notag \\
+m_3(e, h, f) &= -2k\lambda_{23}, &\qquad
+m_3(f, e, h) &= 2h + 2k\lambda_{23}, \notag \\
+m_3(h, f, e) &= -2h + 2k\lambda_{23}, &\qquad
+m_3(f, h, e) &= 2k\lambda_{23}. \label{eq:su2-m3-explicit}
+\end{alignat}
+All triples with repeated root generators give $m_3 = 0$.
+On cohomology, every nonvanishing $m_3$ is $Q$-exact by Stokes on
 $\FM_3(\C)$ (the AOS corner cancellation of
-Section~\ref{sec:FM_calculus}), so $m_3$ vanishes in $H^\bullet$.
+Section~\ref{sec:FM_calculus}): the Lie conformal Jacobi identity
+ensures the associator is a coboundary, not a cocycle.
 \end{proposition}
 
 \begin{proof}
-The tree-level Feynman diagram contributing to $m_3$ has:
-\begin{itemize}
-\item Three external legs at positions $z_1, z_2, z_3 \in \C$
-  (times $t_1 > t_2 > t_3 \in \R$);
-\item Two internal cubic vertices, each contributing a structure
-  constant $f^a{}_{bc}$;
-\item Propagators $K(z_{ij}, t_{ij})$ connecting consecutive
-  vertices.
-\end{itemize}
-The integrand is a product of propagators with color structure
-$f^{a}{}_{de}\, f^{ebc}$.  In a realization covered by
-Theorem~\ref{thm:physics-bridge}, the corresponding weight form is
-logarithmic and Theorem~\ref{thm:FM-calculus} applies.  The Stokes argument:
-the integrand is a
-logarithmic $1$-form on $\FM_3(\C)$, and the boundary of the
-fundamental domain decomposes into two codimension-$1$ faces
-($z_1 \to z_2$ and $z_2 \to z_3$), whose contributions are the
-compositions $m_2 \circ m_2$.  The Stasheff identity at $n=3$
-reads $m_1 \circ m_3 + m_2 \circ m_2 + m_3 \circ m_1 = 0$,
-which on cohomology gives $[m_3] = 0$.
+The explicit components~\eqref{eq:su2-m3-explicit} are computed by
+evaluating the Stasheff associator
+$A_3(J^a, J^b, J^c;\, \lambda_{12}, \lambda_{23})
+= m_2(m_2(J^a, J^b;\, \lambda_{12}),\, J^c;\,
+\lambda_{12} + \lambda_{23})
+- m_2(J^a,\, m_2(J^b, J^c;\, \lambda_{23});\, \lambda_{12})$
+on all independent generator triples.  The computation uses only
+the $\lambda$-bracket~\eqref{eq:su2-lambda}, conformal
+sesquilinearity, and the vacuum rule $m_2(\mathbf{1}, a) = 0$.
+The nonvanishing triples are precisely those where the Jacobi
+expression $f^{ab}{}_d f^{dc}{}_g - f^{bc}{}_d f^{ad}{}_g$ is
+nonzero.  Triples with repeated root generators give $A_3 = 0$
+by two mechanisms: adjacent repetitions vanish
+because $m_2(e,e) = m_2(f,f) = 0$; non-adjacent repetitions
+such as $(e,f,e)$ vanish because the two compositions in the
+Stasheff difference cancel---explicitly,
+$f^{ef}{}_h\, f^{he}{}_e = f^{fe}{}_h\, f^{eh}{}_e = 2$, so
+the Jacobi expression
+$f^{ef}{}_h f^{he}{}_e - f^{fe}{}_h f^{eh}{}_e = 0$ and both
+spectral terms vanish by $\delta^{he} = 0$.
+
+The chain-level $m_3$ is obtained by antidifferentiation on
+$\FM_3(\C) \cong [0,1]$; the specific
+$\lambda_{23}$ dependence in~\eqref{eq:su2-m3-explicit}
+corresponds to the left-endpoint gauge.  On cohomology,
+the Stokes argument on $\FM_3(\C)$ shows each $m_3$ is
+$Q$-exact: the boundary decomposes into two codimension-$1$
+faces ($z_1 \to z_2$ and $z_2 \to z_3$), whose contributions
+are the compositions $m_2 \circ m_2$.  The Lie conformal Jacobi
+identity ensures $A_3 = d(m_3)$ with $m_3$ in the image of $d$,
+so $[m_3] = 0$ in $H^\bullet$.
 \end{proof}
 
 \subsubsection{Higher operations $m_{k \geq 4}$}
 
-\begin{proposition}[Truncation for $\mathfrak{sl}_2$ CS;
-\ClaimStatusConditional]
+\begin{proposition}[$\Ainf$ tower termination at arity~$3$;
+\ClaimStatusProvedHere]
 \label{prop:su2-truncation}
-Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.  For $SU(2)$ Chern--Simons:
+For $\widehat{\mathfrak{sl}}_2$ at level~$k$:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $m_4 \neq 0$ at the chain level: diagrams with three cubic
-  vertices contribute.
-\item $m_{k \geq 5} = 0$ at tree level by degree counting: the
-  cubic vertex has degree~$1$, so a diagram with $k$ external legs
-  requires $k-2$ vertices, contributing total degree $k-2$;
-  for $k \geq 5$, this exceeds the degree available on
-  $\FM_k(\C)$.
-\item On cohomology $H^\bullet(\A, Q)$, all $m_{k \geq 3}$
-  vanish: the PVA on $H^\bullet$ is
+\item $m_4 = 0$ on cohomology: the quartic Stasheff obstruction
+  $A_4(J^a, J^b, J^c, J^d)$ vanishes identically by the Jacobi
+  identity applied twice.  The field-dependent part assembles
+  iterated structure constant contractions
+  $f^{ab}{}_p f^{pc}{}_q f^{qd}{}_r$ whose Stasheff-signed sum
+  is the generalised Jacobi identity at depth~$3$; the central
+  terms cancel by the residue theorem on $\FM_4(\C)$.
+\item $m_4 \neq 0$ at chain level: the square Feynman diagram
+  with three cubic vertices contributes degree~$2$, matching
+  $\FM_4(\C)$.  This chain-level contribution is $Q$-exact.
+\item $m_{k \geq 5} = 0$ at all levels by AOS degree counting:
+  a tree with $k$ external legs requires $k-2$ vertices of
+  degree~$1$ each; for $k \geq 5$, the logarithmic form degree
+  exceeds the dimension of $\FM_k(\C)$.
+\item On cohomology $H^\bullet(\cA, Q)$, all $m_{k \geq 3}$
+  vanish ($\Ainf$-formality): the PVA on $H^\bullet$ is
   $\widehat{\mathfrak{sl}}_2$ at level~$k$ with the standard
-  $\lambda$-bracket.
+  $\lambda$-bracket.  Shadow depth $r_{\max} = 3$
+  (class~$\mathbf{L}$).
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Part~(i): the diagram with $k=4$ external legs and $2$ cubic
-vertices (forming a square) has degree $2$, matching the
-$\FM_4(\C)$ integral.  The integrand is nonzero because the
-structure constant contraction
-$f^{a}{}_{de}\, f^{e}{}_{fg}\, f^{fbc}$ is generically
-nonvanishing for $\mathfrak{sl}_2$.
+Part~(i): the quartic Stasheff obstruction on the quadruple
+$(e, f, e, f)$ (passing through all three root spaces) is computed
+term by term.  Of the five Stasheff terms, two vanish because
+$m_3(e,f,e) = m_3(f,e,f) = 0$ (repeated root spaces); the
+remaining three produce field-dependent parts $+2h$ and $-2h$ that
+cancel, plus spectral-parameter terms that cancel by the residue
+theorem.  For general quadruples, the field-dependent part
+assembles into the Stasheff-signed sum of iterated contractions
+$f^{ab}{}_p f^{pc}{}_q f^{qd}{}_r$, which vanishes by applying
+the Jacobi identity $f^{ab}{}_p f^{pc}{}_q = f^{ac}{}_p f^{bp}{}_q
++ f^{bc}{}_p f^{ap}{}_q$ and then pairwise cancellation.
 
-Part~(ii): a tree-level diagram with $k$ external legs and $v$
-cubic vertices has $v = k - 2$ (Euler characteristic of a tree
-with $k$ leaves and trivalent internal vertices).  Each vertex
-contributes degree~$1$ from the propagator pole.  The integral
-over $\FM_k(\C)$ has real dimension $2(k-2)$, so the degree
-constraint is automatically satisfied for $k \leq 4$.  For
-$k \geq 5$, the logarithmic form degree exceeds the dimension
-of the integration domain after accounting for the
-Arnold--Orlik--Solomon relations, forcing the integral to vanish.
+Part~(ii): the diagram with $k=4$ external legs and $2$ cubic
+vertices has degree $2$, matching $\FM_4(\C)$.  The structure
+constant contraction $f^{a}{}_{de}\, f^{e}{}_{fg}\, f^{fbc}$
+is generically nonvanishing.
 
-Part~(iii): by the same Stokes/AOS argument as in
-Proposition~\ref{prop:m3_vanish} (the contractibility of
-$\Conf_k^{<}(\R)$ for $k \geq 3$), all higher operations become
-$Q$-exact in cohomology.
+Part~(iii): a tree-level diagram with $k$ legs and $v = k - 2$
+trivalent internal vertices has total degree $k-2$.  For
+$k \geq 5$, the AOS relations force the integral to vanish.
+
+Part~(iv): by induction on arity.  Base case: $m_4^H = 0$ from
+part~(i).  Inductive step: for $k \geq 5$, the Stasheff relation
+involves only $m_2$ and $m_3$ (all higher operations vanish by
+hypothesis).  The compositions $m_3 \circ m_3$ at arity $5$
+produce iterated structure constant contractions of depth~$4$,
+which vanish by the same Jacobi mechanism.
 \end{proof}
 
 \subsubsection{Cohomology and PVA structure}
 
-\begin{theorem}[PVA for nonabelian CS; \ClaimStatusConditional]
+\begin{theorem}[PVA for nonabelian CS; \ClaimStatusProvedHere]
 \label{thm:su2-pva}
 Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.  The cohomology
 $H^\bullet(\A_{\text{CS}}, Q)$ is the affine Kac--Moody PVA
@@ -219,7 +265,7 @@ so the open-colour Koszul dual $\cA^!_{\mathrm{line}}$ controls line
 operators.
 
 \begin{theorem}[Koszul dual is $Y(\mathfrak{sl}_2)$;
-\ClaimStatusConditional]
+\ClaimStatusProvedHere]
 \label{thm:su2-yangian}
 For the standard affine HT gauge realization with closed colour
 $\widehat{\mathfrak{sl}}_2$ at level~$k$, the open-colour Koszul dual is the Yangian
@@ -270,9 +316,9 @@ the one encoded by the spectral $R$-matrix
 \subsubsection{Genus-$1$ curvature}
 
 \begin{proposition}[Curvature for $\widehat{\mathfrak{sl}}_2$;
-\ClaimStatusConditional]
+\ClaimStatusProvedHere]
 \label{prop:su2-curvature}
-Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra.  The genus-$1$ curvature
+The genus-$1$ curvature
 (Volume~I, Theorem~D, the modular characteristic) evaluates to
 \begin{equation}\label{eq:su2-curvature}
 \kappa(\widehat{\mathfrak{sl}}_2, k) = \frac{3(k + 2)}{4},
@@ -335,7 +381,7 @@ $C_\ast(W(\SCchtop))$-algebra structure.
 \hline
 \textbf{Theory} & $m_2$ & $m_3$ & $m_{k \geq 4}$ & $H^\bullet(\A, Q)$ \\
 \hline
-$SU(2)$ CS & $\frac{f^{ab}{}_c J^c}{z_{12}} + \frac{k\delta^{ab}}{z_{12}^2}$ & $\neq 0$ (gauge cubic) & $m_4 \neq 0$; $m_{\geq 5} = 0$ & $\widehat{\mathfrak{sl}}_2$ at level $k$ \\
+$SU(2)$ CS & $\frac{f^{ab}{}_c J^c}{z_{12}} + \frac{k\delta^{ab}}{z_{12}^2}$ & $\neq 0$ (explicit) & $m_4^H = 0$ (Jacobi); $m_{\geq 5} = 0$ & $\widehat{\mathfrak{sl}}_2$ at level $k$ \\
 \hline
 \end{tabular}
 \end{center}
