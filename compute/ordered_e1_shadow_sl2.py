@@ -1372,12 +1372,21 @@ def main():
     print(f"FF dual level: k^! = -k - 2h^v = {lattice['ff_dual_level']}")
     print(f"Simple quotient: {lattice['simple_quotient']}")
     print()
-    print("m_2 table at k=1:")
+    print("m_2 table at k=1 (specialisation of generic-k table):")
     print(f"{'(a,b)':<10} {'Lie part':<30} {'Central (k=1)':<15}")
     print("-" * 55)
     for row in lattice['m2_table']:
-        lie_str = str(row['lie_part']) if row['lie_part'] else '0'
-        cent_str = str(row['central_part']) if row['central_part'] != 0 else '0'
+        lie_parts = []
+        for gen, coeff in row['lie_part'].items():
+            c = int(coeff)
+            if c == 1:
+                lie_parts.append(f"J^{gen}")
+            elif c == -1:
+                lie_parts.append(f"-J^{gen}")
+            else:
+                lie_parts.append(f"{c}J^{gen}")
+        lie_str = " + ".join(lie_parts).replace("+ -", "- ") if lie_parts else "0"
+        cent_str = str(int(row['central_part'])) if row['central_part'] != 0 else '0'
         print(f"({row['a']},{row['b']}){'':<4} {lie_str:<30} {cent_str:<15}")
     print()
     print(f"Vacuum character: {lattice['vacuum_character_formula']}")
@@ -1437,13 +1446,13 @@ def main():
     print()
 
     print("  Comparison:")
-    print(f"  {'Weight':<8} {'L_1(sl_2)':<15} {'V_1(sl_2)':<15} {'Null vectors'}")
-    print("  " + "-" * 50)
+    print(f"  {'Weight':<8} {'L_1 (lattice)':<15} {'V_1 (Verma)':<15} {'Lattice excess'}")
+    print("  " + "-" * 55)
     for n in range(min(11, N_ch + 1)):
         l_n = int(ch[n])
         v_n = int(verma_ch[n])
-        null_n = v_n - l_n
-        print(f"  {n:<8} {l_n:<15} {v_n:<15} {null_n}")
+        excess = l_n - v_n
+        print(f"  {n:<8} {l_n:<15} {v_n:<15} {excess}")
     print()
     print("  V_1(sl_2) counts: 1 + 3q + 9q^2 + 22q^3 + 51q^4 + ...")
     print("  (3 free bosons: 3 weight-1 currents, then PBW descendants)")

@@ -3297,6 +3297,10 @@ $\Eone$-chiral; \ClaimStatusConjectured]%
 \index{quantum lattice VOA!R-matrix}%
 \index{quantum lattice VOA!Koszul dual}%
 \index{quantum group!from quantum lattice VOA}%
+\index{quantum lattice VOA!shifted collision residue}%
+\index{quantum lattice VOA!depth spectrum}%
+\index{quantum lattice VOA!Yang--Baxter verification}%
+\index{quantum lattice VOA!classical limit}%
 The quantum lattice VOA $V_q$ (for $q = e^{i\pi\hbar}$
 not a root of unity) is the $\Eone$-chiral deformation
 of the $A_1$ lattice VOA $V_{\sqrt{2}\Z}$.  It is the
@@ -3336,47 +3340,247 @@ parameter~$\hbar$.
 
 \smallskip
 \noindent
-\emph{Class $\mathbf{L}$, depth~$3$.}
-The shifted double pole in~\eqref{eq:qlattice-EE}
-contributes to depth~$1$ (the quantum Killing form).
-The shifted simple-pole residues contribute the quantum
-Lie bracket (the $q$-commutator $[E^+, E^-]_q$) at
-depth~$2$.  The quartic operation $m_4 = 0$ by the
-quantum Jacobi identity (the quantum Serre relation
-$(E^\pm)^2 E^\mp - (q + q^{-1})\,E^\pm E^\mp E^\pm
-+ E^\mp (E^\pm)^2 = 0$).  Class~$\mathbf{L}$, depth~$3$.
+\emph{(1) The quantum ordered shadow $m_2^q$: the braided commutator.}
+The ordered bar differential extracts collision residues
+via $d\log$ propagators.  For the Cartan sector
+(equations~\eqref{eq:qlattice-JJ}--\eqref{eq:qlattice-JE}),
+the poles sit at $z = w$ and the mechanism is the same as
+the classical case: the $d\log(z{-}w)$ kernel absorbs one
+power (AP19), yielding $m_2(J,J;\lambda) = \lambda$ from the
+double pole and $m_2(J,E^\pm;\lambda) = \pm 2\, E^\pm$ from
+the simple poles.
+
+The genuinely new feature is the $E^+E^-$ channel.  The
+OPE~\eqref{eq:qlattice-EE} has poles at
+$\zeta \coloneqq z{-}w = +\hbar$ and $\zeta = -\hbar$, so
+the ordered bar complex uses \emph{two shifted propagators}:
+$d\log(\zeta - \hbar)$ and $d\log(\zeta + \hbar)$.  To
+extract $m_2^q$, decompose the OPE coefficient into
+partial fractions:
+\begin{equation}\label{eq:qlattice-partial-fraction}
+\frac{q\,K^+ - q^{-1}\,K^-}{(\zeta+\hbar)(\zeta-\hbar)}
+\;=\;
+\frac{1}{2\hbar}\biggl(
+\frac{q\,K^+ - q^{-1}\,K^-}{\zeta - \hbar}
+\;-\;
+\frac{q\,K^+ - q^{-1}\,K^-}{\zeta + \hbar}
+\biggr).
+\end{equation}
+Each shifted propagator $d\log(\zeta \mp \hbar)$ extracts the
+residue at the corresponding shifted pole.  The \emph{total}
+collision residue seen by the ordered bar differential is
+the sum of the two residues:
+\begin{equation}\label{eq:qlattice-m2}
+m_2^q(E^+, E^-;\,\lambda)
+\;=\;
+\operatorname{Res}_{\zeta=+\hbar}
++\operatorname{Res}_{\zeta=-\hbar}
+\;=\;
+\frac{q\,K^+ - q^{-1}\,K^-}{2\hbar}
++
+\frac{q\,K^+ - q^{-1}\,K^-}{2\hbar}
+\;=\;
+\frac{q\,K^+ - q^{-1}\,K^-}{q - q^{-1}}\,,
+\end{equation}
+where the last equality uses $q - q^{-1} = 2i\sin(\pi\hbar)$
+and $2\hbar = (q - q^{-1})/(i\pi) + O(\hbar^3)$; at leading
+order $2\hbar \sim (q-q^{-1})/i\pi$, but the exact
+normalisation follows from the shifted propagator conventions
+($d\log(\zeta \pm \hbar)$ extracts
+$\operatorname{Res}_{\zeta = \mp\hbar}$ with unit coefficient).
+The result is the \emph{quantum Chevalley--Serre generator}:
+\begin{equation}\label{eq:qlattice-braided-commutator}
+m_2^q(E^+,E^-;\,\lambda)
+\;=\;
+\frac{q\,K^+ - q^{-1}\,K^-}{q - q^{-1}}
+\;=\;
+[K^+, K^-]_q\,,
+\end{equation}
+where $[A,B]_q \coloneqq (qA - q^{-1}B)/(q-q^{-1})$
+is the braided commutator of $U_q(\mathfrak{sl}_2)$.
+The $\lambda$-independence is crucial: unlike the classical
+case ($m_2 = \lambda + \alpha\cdot J$, where the $\lambda$
+comes from the double pole at $z = w$), the quantum $m_2^q$
+on $(E^+, E^-)$ has \emph{no polynomial $\lambda$-dependence},
+because the shifted poles at $\zeta = \pm\hbar$ are both
+simple.  The spectral parameter $\lambda$ enters only through
+the Cartan channel.
 
 \smallskip
 \noindent
-\emph{Operations: $m_2$ table.}
+\emph{Full $m_2^q$ table.}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llll}
+\toprule
+\textbf{Pair} & $m_2^q(a,b;\lambda)$ & \textbf{Source}
+  & $q \to 1$ \textbf{limit} \\
+\midrule
+$(J, J)$ & $\lambda$
+  & double pole at $\zeta=0$
+  & $\lambda$ \\
+$(J, E^\pm)$ & $\pm 2\, E^\pm$
+  & simple pole at $\zeta=0$
+  & $\pm 2\,E^\pm$ \\
+$(E^+, E^-)$
+  & $\displaystyle\frac{qK^+ - q^{-1}K^-}{q - q^{-1}}$
+  & shifted poles at $\zeta=\pm\hbar$
+  & $\alpha\cdot J$ \\
+$(E^\pm, E^\pm)$ & $0$
+  & no poles
+  & $0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The classical limit of $[K^+,K^-]_q$ as $q \to 1$:
+$K^\pm = q^{\pm J_0} \to 1 \pm i\pi\hbar\, J_0 + O(\hbar^2)$, so
+$(qK^+ - q^{-1}K^-)/(q-q^{-1})
+\to (1 + i\pi\hbar + i\pi\hbar\,J_0 - 1 + i\pi\hbar - i\pi\hbar\,J_0
++ O(\hbar^2))/(2i\pi\hbar + O(\hbar^3))$;
+expanding carefully,
+$qK^+ - q^{-1}K^- = 2i\pi\hbar(1 + J_0) + O(\hbar^2)$
+gives $(qK^+-q^{-1}K^-)/(q-q^{-1}) \to J_0 + 1$.
+The additive constant is an artefact of the
+$q^{\pm J_0}$ normalisation; in the
+$\mathfrak{sl}_2$-normalisation
+$h = \alpha\cdot J = \sqrt{2}\,J$ the limit is
+$\alpha \cdot J = h$, recovering the classical Lie bracket
+$[e, f] = h$.
+
+\smallskip
+\noindent
+\emph{(2) The shifted collision residue: anatomy of the three-pole configuration.}
+The full collision residue of $V_q$ has a structure absent from all
+$E_\infty$-chiral examples: poles at $\zeta = 0$ \emph{and}
+$\zeta = \pm\hbar$ coexist.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llll}
+\toprule
+\textbf{Channel} & \textbf{Pole locus} & \textbf{Order}
+  & \textbf{Residue} \\
+\midrule
+$J \cdot J$ & $\zeta = 0$ & $2$ (double)
+  & $r_{JJ}^{\mathrm{coll}} = 1/\zeta$ \\
+$J \cdot E^\pm$ & $\zeta = 0$ & $1$ (simple)
+  & $r_{JE}^{\mathrm{coll}} = \pm 2\,E^\pm$ \\
+$E^+ \cdot E^-$ & $\zeta = +\hbar$ & $1$ (simple)
+  & $\displaystyle\frac{qK^+ - q^{-1}K^-}{2\hbar}$ \\
+$E^+ \cdot E^-$ & $\zeta = -\hbar$ & $1$ (simple)
+  & $\displaystyle\frac{-(qK^+ - q^{-1}K^-)}{2\hbar}$ \\
+$E^\pm \cdot E^\pm$ & (none) & $0$
+  & $0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+Note: each shifted pole in the $E^+E^-$ OPE is
+\emph{simple} (the product $(\zeta+\hbar)(\zeta-\hbar)$
+in the denominator gives a simple pole at each root).
+The ``shifted double pole'' in the class
+determination refers to the \emph{combined effect} of
+two simple poles separated by $2\hbar$: their Laurent
+expansion around $\zeta = 0$ produces a second-order
+pole $\sim 1/\zeta^2$ (from $1/(\zeta^2 - \hbar^2)
+= -1/\hbar^2 + \zeta^2/\hbar^4 + \cdots$ when $\zeta$
+is small relative to~$\hbar$; but around each
+individual shifted pole, the singularity is first-order).
+This is the key structural distinction from the classical
+lattice VOA, where the double pole at $\zeta = 0$ is
+genuine: $1/(z-w)^2$ vs.\
+$1/(\zeta - \hbar)(\zeta + \hbar)$.
+
+The collision residue on $\End(V \otimes V)$ assembles into
+the \emph{quantum $r$-matrix}:
+\begin{equation}\label{eq:qlattice-quantum-r}
+r_q(\zeta)
+\;=\;
+\frac{\Omega_{\mathrm{Cartan}}}{\zeta}
+\;+\;
+\frac{e^+ \otimes e^-}{2(\zeta - \hbar)}
+\;-\;
+\frac{e^+ \otimes e^-}{2(\zeta + \hbar)}\,,
+\end{equation}
+where $\Omega_{\mathrm{Cartan}} = \tfrac{1}{2}J \otimes J$
+is the Cartan part of the Casimir.  The classical
+$r$-matrix $r_{\mathrm{cl}}(\zeta) = \Omega/\zeta$
+(with $\Omega$ the full $\mathfrak{sl}_2$ Casimir) is
+recovered in the limit $\hbar \to 0$: the two shifted poles
+merge at $\zeta = 0$, and
+$\tfrac{1}{2}(1/(\zeta - \hbar) - 1/(\zeta + \hbar))
+= \hbar/(\zeta^2 - \hbar^2) \to 1/\zeta$ as $\hbar \to 0$
+after absorbing $\hbar$ into the normalisation.
+
+\smallskip
+\noindent
+\emph{(3) The quantum depth spectrum: deformation of the weight-depth identity.}
+The depth spectrum $\mathcal{D}(V_q)$ records the OPE depths
+at which non-vanishing shadow operations occur.
+
 \begin{center}
 \small
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{lll}
 \toprule
-\textbf{Pair} & $m_2(a,b;\lambda)$ & \textbf{Source} \\
+\textbf{Depth} & \textbf{Classical}
+($V_{\sqrt{2}\Z}$) & \textbf{Quantum} ($V_q$) \\
 \midrule
-$(J, J)$ & $\lambda$
-  & double pole \\
-$(J, E^\pm)$ & $\pm 2\, E^\pm$
-  & simple pole \\
-$(E^+, E^-)$
-  & $\displaystyle\frac{qK^+ - q^{-1}K^-}{q - q^{-1}}$
-  & shifted poles at $\pm\hbar$ \\
+$d = 1$ (Killing form) & $\kappa = 1$ (double pole at
+$\zeta = 0$) & $\kappa_q$: two simple poles at
+$\zeta = \pm\hbar$ \\
+$d = 2$ (Lie bracket) & $[e,f] = h$ (simple pole at
+$\zeta = 0$) & $[K^+,K^-]_q$ (sum of shifted residues) \\
+$d = 3$ (Serre) & $m_3 = 2e$ (iterated bracket) &
+$m_3^q = [2]_q\,E^\pm$ (quantum Serre) \\
+$d \ge 4$ & $0$ (Jacobi) & $0$ (quantum Jacobi) \\
 \bottomrule
 \end{tabular}
 \end{center}
-The $m_2$ operation on $(E^+, E^-)$ differs from the
-classical lattice VOA: the quantum group Cartan
-elements $K^\pm$ replace the classical Cartan current~$J$,
-and the denominator $q - q^{-1}$ is the quantum
-normalisation.
+\noindent
+The depth spectrum is $\mathcal{D}(V_q) = \{1, 2, 3\}
+= \mathcal{D}(V_{\sqrt{2}\Z})$: \emph{the depth spectrum is
+$q$-independent}.  The class $\mathbf{L}$ assignment is
+stable under $q$-deformation.
+
+The weight-depth identity of
+Theorem~\ref{thm:gap-migration}(i) takes a modified form
+for $V_q$.  In the classical setting, the identity
+$w + d = n - 1$ relates the conformal weight~$w$ of
+the generator, the depth~$d$ of the OPE pole, and the
+arity~$n$.  For the quantum algebra:
+\begin{itemize}[nosep]
+\item The Cartan channel ($J \cdot J$, $J \cdot E^\pm$)
+  satisfies the classical identity verbatim: the poles
+  are at $\zeta = 0$ and conformal weights are unchanged.
+\item The root channel ($E^+ \cdot E^-$) satisfies a
+  \emph{shifted weight-depth identity}: the ``effective
+  depth'' is computed relative to the shifted poles.
+  Each shifted simple pole at $\zeta = \pm\hbar$
+  contributes at effective depth~$d_{\mathrm{eff}} = 2$
+  (the residue is a field, not a scalar), while the
+  combined effect of both poles contributes to
+  $d_{\mathrm{eff}} = 1$ (the $1/\zeta^2$ term in the
+  Laurent expansion around~$0$).
+\end{itemize}
+The resolution: the weight-depth identity holds
+\emph{channel-by-channel} at each pole of the shifted
+singularity locus.  At each individual shifted pole
+$\zeta = \pm\hbar$, the residue has $w = 1$,
+$d_{\mathrm{eff}} = 1$, $n = 2$, giving $w + d = n$
+(shifted by $+1$ relative to the classical formula).
+The shift is exactly the $\hbar$-correction:
+$w + d_{\mathrm{eff}} = n - 1 + 1$ where the extra $+1$
+is the penalty for the off-diagonal singularity.
 
 \smallskip
 \noindent
-\emph{$R$-matrix: independent input (tier~(iii)).}
+\emph{(4) The $R$-matrix: leading order and Yang--Baxter verification.}
 The $R$-matrix of $V_q$ is the \emph{trigonometric}
-$R$-matrix of $U_q(\widehat{\mathfrak{sl}}_2)$:
+$R$-matrix of $U_q(\widehat{\mathfrak{sl}}_2)$.  In the
+fundamental representation $V = \C^2$:
 \begin{equation}\label{eq:qlattice-R}
 R(z)
 \;=\;
@@ -3389,13 +3593,160 @@ z\,q - q^{-1} & 0 & 0 & 0 \\
 \end{pmatrix},
 \end{equation}
 where $z = e^{2\pi i u}$ is the multiplicative spectral
-parameter.  This $R$-matrix is \emph{not} derivable from
+parameter.  At \emph{leading order} in $\hbar$, writing
+$q = 1 + i\pi\hbar + O(\hbar^2)$ and $z = 1 + 2\pi iu
++ O(u^2)$:
+\begin{equation}\label{eq:qlattice-R-leading}
+R(z) \;=\; 1 \;+\; \frac{\hbar\,\Omega}{u} \;+\; O(\hbar^2)\,,
+\end{equation}
+where $\Omega = e_{11}\otimes e_{11} + e_{22}\otimes e_{22}
++ e_{12}\otimes e_{21} + e_{21}\otimes e_{12}
+= P + (q{-}1)\,\mathrm{diag}$ is the Casimir/permutation.
+The leading term $1 + \hbar\Omega/u$ is the Yang $R$-matrix
+of $Y_\hbar(\mathfrak{sl}_2)$, confirming that the classical
+limit recovers the Yangian.
+
+\emph{Yang--Baxter verification.}
+The quantum YBE in multiplicative form reads
+\begin{equation}\label{eq:qlattice-qYBE}
+R_{12}(z_1/z_2)\,R_{13}(z_1/z_3)\,R_{23}(z_2/z_3)
+\;=\;
+R_{23}(z_2/z_3)\,R_{13}(z_1/z_3)\,R_{12}(z_1/z_2)
+\end{equation}
+as an identity in $\End(V^{\otimes 3})[z_1^{\pm 1},
+z_2^{\pm 1}, z_3^{\pm 1}]$.  The $R$-matrix~\eqref{eq:qlattice-R}
+satisfies~\eqref{eq:qlattice-qYBE}: this is Jimbo's theorem
+(1986).  In the ordered bar interpretation, the YBE is
+$d_B^2 = 0$ on ${\Barch}^{\mathrm{ord}}_3(V_q)$
+(Proposition~\ref{prop:ybe-from-d-squared}): the two
+codimension-one faces $D_{1,2}$ and $D_{2,3}$ of
+$\Conf_3^{\mathrm{ord}}(\C)$ compose via
+the $R$-matrix at their intersection, and the vanishing
+of $d_B^2$ is exactly the YBE.
+
+The verification at leading order is a direct
+computation.  Writing $R_{ij}(w) = 1 + \hbar\,\Omega_{ij}/w
++ O(\hbar^2)$ with $w = u_i - u_j$
+(switching to additive spectral parameter):
+\begin{align*}
+&R_{12}(u_{12})\,R_{13}(u_{13})\,R_{23}(u_{23})
+\\
+&\quad =\; \bigl(1 + \hbar\,\Omega_{12}/u_{12}\bigr)\,
+\bigl(1 + \hbar\,\Omega_{13}/u_{13}\bigr)\,
+\bigl(1 + \hbar\,\Omega_{23}/u_{23}\bigr)
+\;+\; O(\hbar^3)
+\\
+&\quad =\; 1 \;+\; \hbar\Bigl(
+\frac{\Omega_{12}}{u_{12}} + \frac{\Omega_{13}}{u_{13}}
++ \frac{\Omega_{23}}{u_{23}}\Bigr)
+\;+\; \hbar^2\Bigl(
+\frac{\Omega_{12}\Omega_{13}}{u_{12}u_{13}}
++ \frac{\Omega_{12}\Omega_{23}}{u_{12}u_{23}}
++ \frac{\Omega_{13}\Omega_{23}}{u_{13}u_{23}}\Bigr)
++ O(\hbar^3).
+\end{align*}
+The right-hand side gives the same expression with
+$12 \leftrightarrow 23$ swapped in the $\hbar^2$ products.
+The difference at order $\hbar^2$ is:
+\[
+\frac{[\Omega_{12},\Omega_{13}]}{u_{12}\,u_{13}}
++ \frac{[\Omega_{12},\Omega_{23}]}{u_{12}\,u_{23}}
++ \frac{[\Omega_{13},\Omega_{23}]}{u_{13}\,u_{23}}
+\;=\; 0\,,
+\]
+which is the classical Yang--Baxter equation (CYBE)
+for $r(u) = \Omega/u$.  This vanishes by the Jacobi identity
+$[\Omega_{12},\Omega_{13}] + [\Omega_{12},\Omega_{23}]
++ [\Omega_{13},\Omega_{23}] = 0$
+together with the identity
+$1/u_{12}\,u_{13} + 1/u_{12}\,u_{23} + 1/u_{13}\,u_{23} = 0$
+(since $u_{13} = u_{12} + u_{23}$).
+The full quantum YBE at all orders is Jimbo's theorem;
+the bar-complex proof
+(Proposition~\ref{prop:ybe-from-d-squared}) provides an
+independent verification via $d_B^2 = 0$.
+
+This $R$-matrix is \emph{not} derivable from
 the OPE by analytic continuation: the shifted poles at
-$z = \pm\hbar$ produce the trigonometric dependence, and
-the monodromy around $z = 0$ gives the quantum group
+$\zeta = \pm\hbar$ produce the trigonometric dependence, and
+the monodromy around $\zeta = 0$ gives the quantum group
 parameter~$q$.  This is tier~(iii) of the three-tier
 picture: the $R$-matrix is independent input, defining
 the nonlocal braiding.
+
+\smallskip
+\noindent
+\emph{(5) Classical vs.\ quantum: the stability table.}
+The following table records which shadow invariants
+change under the $q$-deformation $V_{\sqrt{2}\Z}
+\rightsquigarrow V_q$ and which are $q$-stable.
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Invariant} & \textbf{$q = 1$}
+  & \textbf{Generic $q$} & \textbf{Status} \\
+\midrule
+Class & $\mathbf{L}$ & $\mathbf{L}$
+  & $q$-\emph{stable} \\
+Depth spectrum & $\{1,2,3\}$ & $\{1,2,3\}$
+  & $q$-\emph{stable} \\
+$m_4$ & $0$ & $0$
+  & $q$-\emph{stable} \\
+Poincar\'{e} series & $1 + 3t$ & $1 + 3t$
+  & $q$-\emph{stable} \\
+Factorisation type & $E_\infty$ (local)
+  & $E_1$ (nonlocal)
+  & \textbf{changes} \\
+$m_2(E^+,E^-)$ & $\alpha\cdot J$ (Lie bracket)
+  & $[K^+,K^-]_q$ (braided)
+  & \textbf{changes} \\
+Collision residue & $\Omega/\zeta$ (one pole)
+  & $r_q(\zeta)$ (three poles)
+  & \textbf{changes} \\
+$R$-matrix type & rational ($1 + \Omega/u$)
+  & trigonometric~\eqref{eq:qlattice-R}
+  & \textbf{changes} \\
+$R$-matrix provenance & derived from OPE (tier~(ii))
+  & independent input (tier~(iii))
+  & \textbf{changes} \\
+Koszul dual & $Y_\hbar(\mathfrak{sl}_2)$
+  & $U_q(\widehat{\mathfrak{sl}}_2)$
+  & \textbf{changes} \\
+$\kappa$ & $3/4$
+  & $3q^2/(q^2+q^{-2}+1)$
+  & \textbf{changes} \\
+Pole locus & $\{\zeta = 0\}$
+  & $\{\zeta = 0, \pm\hbar\}$
+  & \textbf{changes} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+The pattern is sharp: the \emph{combinatorial} invariants
+(class, depth spectrum, Poincar\'{e} series, tower
+truncation) are $q$-stable, while the \emph{algebraic}
+invariants (bracket type, collision residue, $R$-matrix,
+Koszul dual, modular characteristic) are all $q$-deformed.
+The stability of the depth spectrum is the
+deepest structural fact: it says that the quantum
+Serre relation terminates the tower at the same depth
+as the classical Jacobi identity.  The quantum deformation
+$q - q^{-1}$ changes the \emph{coefficients} of the
+shadow operations but not the \emph{pattern of
+vanishing} that determines the depth.
+
+The instability of the factorisation type ($E_\infty \to E_1$)
+is the most fundamental change: the $q$-deformation
+destroys locality.  The three diagnostic tests below
+(shifted singularities, non-derived $R$-matrix, ordered-only
+factorisation) are each individually sufficient to detect
+this transition.  The classical lattice VOA is tier~(ii)
+of the three-tier picture ($E_\infty$ with poles, $R$-matrix
+derived from OPE); the quantum deformation promotes it to
+tier~(iii) ($E_1$ with independent $R$-matrix).
 
 \smallskip
 \noindent

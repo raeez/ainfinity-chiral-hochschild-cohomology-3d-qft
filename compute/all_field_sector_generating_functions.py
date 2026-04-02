@@ -98,7 +98,7 @@ def main():
     # ===================================================================
     # Part 0: Compute raw data at c=0 (no scalar sector, pure field)
     # ===================================================================
-    max_r = 12
+    max_r = 8  # r=8 => k=17; higher arities get very slow
     print(f"\nComputing field sectors for r=1..{max_r} (odd arities k=3..{2*max_r+1}), c=0...")
     data = compute_all_field_sectors(max_r=max_r, c_val=0.0)
 
