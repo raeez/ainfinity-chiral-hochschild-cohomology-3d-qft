@@ -697,11 +697,12 @@ def synthesis():
     Exception: k=2 has Spec|_T = {0, 1} (trivially full, base of recursion).
 
   Depth-0 coefficients (the d^{k-1}T term):
-    For odd k: CONSTANT (lambda-independent, c-independent).
-    Sequence: k=3: +1, k=5: -1, k=7: +2, k=9: -5.
-    Absolute values: 1, 1, 2, 5 = tangent numbers T_1, T_2, T_3, T_4.
-    Signed: (-1)^{n+1} * T_n where n = (k-1)/2.
+    For odd k = 2r+1: CONSTANT (lambda-independent, c-independent).
+    Sequence: k=3: +1, k=5: -1, k=7: +2, k=9: -5, k=11: +14, k=13: -42.
+    These are SIGNED CATALAN NUMBERS: (-1)^{r-1} * C_{r-1}.
+    (Coincides with Euler zigzag E_r for r <= 4, diverges at r = 5: C_4=14, E_5=16.)
     For even k >= 4: IDENTICALLY ZERO.
+    For k = 2: 1 (base case, = C_0).
 
   Even-arity symmetric-point vanishing:
     At the symmetric point lambda_1 = ... = lambda_{k-1} = t, the ENTIRE

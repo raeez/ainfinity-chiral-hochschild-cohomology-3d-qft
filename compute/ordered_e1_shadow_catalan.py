@@ -486,6 +486,44 @@ def main():
     print(f"\n  Table saved to: {json_path}")
 
     # -----------------------------------------------------------------------
+    # (7b) Sign anomaly analysis at c=13
+    # -----------------------------------------------------------------------
+    print("\n" + "-" * 78)
+    print("SECTION 7: Sign anomalies from Darboux cosine zeros (c=13)")
+    print("-" * 78)
+
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lib'))
+    from shadow_borel_resurgence import VirasoroShadowData
+    import cmath
+
+    d13 = VirasoroShadowData(13.0)
+    omega_13 = abs(cmath.phase(d13.t_plus))
+    sigma_13 = cmath.sqrt(-d13.q2 * d13.t_plus * (d13.t_plus - d13.t_minus))
+    ST2_13 = sigma_13 * d13.t_plus ** 2
+    phi_13 = cmath.phase(ST2_13)
+
+    print(f"  omega/pi = {omega_13/math.pi:.6f} (deviation from 1: {1 - omega_13/math.pi:.6f})")
+    print(f"  phi = {phi_13:.6f}")
+    print(f"  rho = {d13.rho:.6f}")
+    print(f"  Sign anomaly period ~ pi/(pi - omega) = {math.pi/(math.pi - omega_13):.1f}")
+    print()
+
+    # Find sign anomalies
+    c13_coeffs = shadow_catalan_exact(Fraction(13), R_MAX)
+    prev_sign = None
+    anomalies = []
+    for r in range(2, R_MAX + 1):
+        v = c13_coeffs[r]
+        s = 1 if v > 0 else (-1 if v < 0 else 0)
+        if prev_sign is not None and s == prev_sign:
+            anomalies.append(r)
+        prev_sign = s
+    print(f"  Sign anomaly positions (two consecutive same signs): r = {anomalies}")
+    print(f"  Spacing: {[anomalies[i] - anomalies[i-1] for i in range(1, len(anomalies))]}")
+    print(f"  At these r, the Darboux cosine cos(r*omega+phi) crosses zero,")
+    print(f"  the leading asymptotic vanishes, and |S_r| temporarily increases.")
+
+    # -----------------------------------------------------------------------
     # (8) Detailed exact rational table for small r (c generic = symbol)
     # -----------------------------------------------------------------------
     print("\n" + "-" * 78)
