@@ -485,14 +485,15 @@ def modular_bar_curvature(family, g, **params):
             'formula': 'd_0^2 = 0 (Arnold relation exact on P^1)',
         }
 
-    # Faber-Pandharipande numbers: lambda_g^FP = int_{M_g} psi^{2g-2}*lambda_g
+    # Faber-Pandharipande Hodge integrals: lambda_g^FP = int_{M_g} lambda_g
+    # = ((2^{2g-1}-1)/2^{2g-1}) * |B_{2g}|/(2g)!
     # lambda_1^FP = 1/24
-    # lambda_2^FP = 1/1152
-    # lambda_3^FP = 1/82944
+    # lambda_2^FP = 7/5760
+    # lambda_3^FP = 31/967680
     fp_numbers = {
         1: Rational(1, 24),
-        2: Rational(1, 1152),
-        3: Rational(1, 82944),
+        2: Rational(7, 5760),
+        3: Rational(31, 967680),
     }
 
     lambda_g = fp_numbers.get(g)
@@ -634,12 +635,12 @@ def genus_expansion_coefficients(family, max_g=3, **params):
     data = genus0_classical_data(family, **params)
     kappa = data['kappa']
 
-    # Faber-Pandharipande numbers
+    # Faber-Pandharipande Hodge integrals lambda_g^FP
     fp = {
         0: S.One,        # genus-0: normalized to 1 (classical data)
         1: Rational(1, 24),
-        2: Rational(1, 1152),
-        3: Rational(1, 82944),
+        2: Rational(7, 5760),
+        3: Rational(31, 967680),
     }
 
     coefficients = {}
@@ -912,10 +913,10 @@ def quantum_correction_formula(family, g, **params):
     The genus-g correction to the MC element is:
       Theta_g = kappa(A) * lambda_g^FP  (scalar part)
 
-    where lambda_g^FP is the Faber-Pandharipande number:
+    where lambda_g^FP is the Faber-Pandharipande Hodge integral:
       lambda_1^FP = 1/24
-      lambda_2^FP = 1/1152
-      lambda_3^FP = 1/82944
+      lambda_2^FP = 7/5760
+      lambda_3^FP = 31/967680
 
     The full correction also includes contributions from the modular
     tangent complex, but the scalar part is the leading term.
@@ -932,8 +933,8 @@ def quantum_correction_formula(family, g, **params):
 
     fp_numbers = {
         1: Rational(1, 24),
-        2: Rational(1, 1152),
-        3: Rational(1, 82944),
+        2: Rational(7, 5760),
+        3: Rational(31, 967680),
     }
 
     lambda_g = fp_numbers.get(g)
@@ -1047,7 +1048,7 @@ def genus_spectral_sequence_data(family, **params):
         },
         'E1_p2': {
             'content': 'genus-2 shell',
-            'theta_2': kappa * Rational(1, 1152),
+            'theta_2': kappa * Rational(7, 5760),
             'status': 'CONJECTURAL (scalar part)',
         },
         'differentials': {

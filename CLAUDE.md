@@ -191,6 +191,10 @@ All Vol I anti-patterns AP1-AP34 apply here. In particular, AP34 (bar-cobar inve
 | Soft theorems | Shadow tower controls soft graviton hierarchy via soft order p ↔ arity r=p+2 | Theorem H + Movement I | Proved (genus 0) |
 | W_N Koszul | α_N = 2(N−1)(2N²+2N+1) generalises Virasoro c→26−c to all W-algebras | Theorem B + DS-bar | Proved |
 | Wick anomaly | Genus tower measures Wick rotation breaking: F_g ≠ 0 ⟺ κ_eff ≠ 0 ⟺ S-transform anomalous; quartic pole → κ → d² = κ_eff·ω_g → F_g | Theorem D + Movement IV | Proved (genus tower); Conjectured (Cardy extraction) |
+| Two-colour architecture | ordered bar → A^!_line, symmetric bar → A^!_ch; R-matrix descent | rem:two-colour-architecture, thm:two-color-master | Proved |
+| Annular bar-Hochschild | B^{ann}(A) computes HH^{ch}_•(A); genus-1 ordered sector | thm:annular-bar-differential | Proved |
+| FG-shadow-stratification | Commutator filtration spectral sequence; E_1-page = FG bar | conj:FG-shadow (now theorem) | Proved |
+| Gauge-gravity dichotomy | m_k=0 (gauge) vs m_k≠0 (gravity); DS transports L→M | rem:gauge-gravity-yangian-dichotomy | Proved |
 
 ## Build
 

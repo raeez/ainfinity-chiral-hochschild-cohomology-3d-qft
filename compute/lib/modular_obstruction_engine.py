@@ -728,12 +728,12 @@ def genus2_obstruction(family, **params):
         But D_1(scalar) involves the vacuum trace = partition function
         D_2(Theta_0) involves the genus-0 element sewn with itself
 
-    The genus-2 Faber-Pandharipande number:
-        lambda_2^FP = int_{M_2} psi^2 * lambda_2 = 1/1152
+    The genus-2 Faber-Pandharipande Hodge integral:
+        lambda_2^FP = int_{M_2} lambda_2 = 7/5760
 
     For the standard landscape:
         Ob_2 = kappa^2 * (contribution from lambda_2^FP + corrections)
-             = kappa^2 / 1152 (leading term from D_1(Theta_1))
+             = 7 * kappa^2 / 5760 (leading term from D_1(Theta_1))
              + cross-terms from D_2(Theta_0)
 
     The full computation requires the two-point function on the genus-1
@@ -768,7 +768,7 @@ def genus2_obstruction(family, **params):
     #   D_1(Theta_1) = kappa * Theta_1 * (period integral on M_2)
     #                = kappa * (kappa/24) * lambda_2^FP
 
-    lambda_2_fp = Rational(1, 1152)  # Faber-Pandharipande genus-2
+    lambda_2_fp = Rational(7, 5760)  # Faber-Pandharipande Hodge integral genus-2
 
     # D_1(Theta_1) contribution
     d1_theta1 = kappa * theta_1  # = kappa^2 / 24 (times period)

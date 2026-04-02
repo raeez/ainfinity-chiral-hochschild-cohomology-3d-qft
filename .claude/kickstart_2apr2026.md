@@ -174,7 +174,7 @@ There are 43 agent worktrees in `.claude/worktrees/`. The most recent (2 April) 
 
 | File | Status | Notes |
 |------|--------|-------|
-| ordered_associative_chiral_kd_core.tex | MODIFIED | Small vs homotopy distinction + two-colour architecture Remark RE-INSERTED with correct E₁/E_∞ language. |
+| ordered_associative_chiral_kd_core.tex | COMMITTED (3e0587c) | All 5 pieces re-inserted: (a) two-colour architecture Remark, (b) gravitational Yangian / gauge-gravity dichotomy, (c) sl_3 adjacent-root computation, (d) small vs homotopy Koszul distinction, (e) annular bar differential. Plus double-bar proposition (B^{ord,ch}(Y) recovers current algebra without central extension). Correct E₁/E_∞ language throughout. |
 | ordered_associative_chiral_kd_frontier.tex | +546 lines | conj:FG-shadow promoted to theorem. KEEP. |
 | spectral-braiding-core.tex | +1164 lines | SC operations on Y(sl_2), CYBE, Arnold/IHX. KEEP. |
 | 3d_gravity.tex | +1989 lines | Brown-Henneaux fix. KEEP. |

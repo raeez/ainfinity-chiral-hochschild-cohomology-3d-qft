@@ -13826,3 +13826,46 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Issue: the Cardy setup paragraph had already fixed the relevant object to the genus-`1` Virasoro datum `\Theta_{\mathrm{Vir}_c}^{(1)}(\tau)`, but it still presented the established symbol `\Theta^{(1)}_{n=0}` as though it floated independently of that datum.
    Fix: rewrote that sentence so it now says the established arity-`0` symbol is the arity-`0` component of that Virasoro datum, without inventing new notation.
    Status: `FIXED`
+
+## 2026-04-02 — Kontsevich Integral Worktree Extraction
+
+- Target: worktree `.claude/worktrees/agent-a025979b`, trefoil Kontsevich computation (~578 lines)
+- Iteration: `565`
+- Status: rectified and extracted
+
+### Verification Run
+
+- Read the full worktree diff (594 lines) containing a degree-by-degree verification of the Kontsevich integral of the trefoil from the bar complex of $\widehat{\mathfrak{sl}}_2{}_k$.
+- Cross-checked against the existing manuscript: Example `ex:trefoil-verification` in `spectral-braiding-frontier.tex` (lines 312-370) already contains all key results ($z_2(3_1) = 1/24$, IHX from Arnold, $m_3 = 0$ for affine lineage).
+- Cross-checked against Corollary `cor:jones-polynomial` in `log_ht_monodromy_core.tex` (proved Jones polynomial from bar complex).
+
+### Findings
+
+625. `2026-04-02-625`
+   Severity: `LOW`
+   Class: `N` (novelty)
+   Location: worktree `agent-a025979b`, `working_notes.tex` diff
+   Issue: The 578-line worktree computation is an expanded version of Example `ex:trefoil-verification` (spectral-braiding-frontier.tex:312-370). The key results ($z_2 = 1/24$, IHX from Arnold, $m_3 = 0$, $B_2/G_2$ connection) are already in the manuscript. No new theorems. The detailed R-matrix eigenvalue decomposition and Markov trace add pedagogical value only.
+   Fix: extracted a taut 100-line summary to `working_notes.tex` (Section `sec:trefoil-bar-verification`), discarding the redundant scaffolding.
+   Status: `FIXED`
+
+626. `2026-04-02-626`
+   Severity: `MODERATE`
+   Class: `M` (mathematical)
+   Location: worktree `agent-a025979b`, degree-3 normalization
+   Issue: The worktree claims $z_3(3_1) = v_3/(3! \cdot 4) = 1/24$ without justification of the factor $3! \cdot 4 = 24$. The CDM normalization relation between $z_3$ and $v_3$ involves group-theoretic factors, not a universal $1/24$. This formula was not propagated to the extract.
+   Status: `NOTED` (not propagated)
+
+627. `2026-04-02-627`
+   Severity: `MODERATE`
+   Class: `M` (mathematical)
+   Location: worktree `agent-a025979b`, Step C of degree-2 proof
+   Issue: The worktree's "Step C" jumps from $3 \cdot k/2 \cdot 1/(2\pi i)^2 \cdot (\text{FM integral})$ to $1/24$ without computing the FM integral explicitly. The extract records the result $z_2 = 1/24$ with the source ($B_2/4$) but does not reproduce this gap.
+   Status: `NOTED` (not propagated)
+
+628. `2026-04-02-628`
+   Severity: `LOW`
+   Class: `E` (editorial)
+   Location: worktree `agent-a025979b`, dangling cross-reference
+   Issue: The worktree uses `\eqref{eq:kontsevich-trefoil}` to reference an equation defined only within the worktree content. The extract replaces this with a textual reference.
+   Status: `FIXED`

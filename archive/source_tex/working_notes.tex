@@ -16258,4 +16258,885 @@ survive the $3$d HT lift.
 \end{enumerate}
 
 
+% =================================================================
+\section{Trefoil verification: Kontsevich integral from the bar complex}
+\label{sec:trefoil-bar-verification}
+% =================================================================
+
+The spectral $R$-matrix $R(z) = \exp(\hbar k\,\Omega/z)$ of
+$\widehat{\fsl}_2{}_k$
+(Proposition~\ref{prop:affine-r-mode} of spectral-braiding-core)
+recovers the Kontsevich integral of the trefoil $3_1 =
+\widehat{\sigma_1^3}$ at degrees $\le 3$.  This verifies
+Example~\ref{ex:trefoil-verification} of spectral-braiding-frontier
+with explicit formulas.
+
+\subsection*{R-matrix eigenvalues on $V = \C^2$}
+
+The $\fsl_2$ Casimir on $V \otimes V$ decomposes as
+$\Omega|_{\Sym^2(V)} = 1/4$ and
+$\Omega|_{\Lambda^2(V)} = -3/4$, so the braid closure
+$\operatorname{tr}_q(R^3)$ with $R^3 = \exp(3\hbar k\,\Omega/z)$
+gives
+\[
+  Z_V(3_1)
+  \;=\;
+  3\,e^{3\hbar k/(4z)} + e^{-9\hbar k/(4z)},
+\]
+where the multiplicities $3 = \dim\Sym^2(V)$,
+$1 = \dim\Lambda^2(V)$ arise from the quantum trace at leading
+order.
+
+\subsection*{Degree-by-degree matching}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccl}
+\textbf{Degree} & \textbf{Coefficient} & \textbf{Source} \\
+\hline
+$1$ & $z_1 = \tfrac{3}{2}\,\theta$ &
+  Writhe $w = 3$, each crossing contributes $\pm 1/2$ \\
+$2$ & $z_2 = \tfrac{1}{24}\,\theta$ &
+  $B_2/4 = 1/24$; constant term of $G_2(\tau)$ \\
+$3$ & $v_3 = 1$ &
+  IHX from Arnold; $w_3 = \sum f^{abc}f^{abc} = 8$ for $\fsl_2$
+\end{tabular}
+\end{center}
+
+\noindent
+The degree-$1$ term is pure framing ($z_1 = w/2$, removed by
+framing correction).  The first nontrivial Vassiliev invariant
+is $z_2(3_1) = 1/24$.
+
+\subsection*{The coefficient $1/24$}
+
+The coincidence of $1/24$ in three contexts --- the degree-$2$
+trefoil invariant, the genus-$1$ free energy
+$F_1 = -\kappa\,\log\,\eta(\tau)/24$, and the constant term
+$G_2(\tau) = -1/24 + \cdots$ --- traces to a common source:
+the curved bar structure $d_{\barB}^2 = \kappa(\cA)\,\omega_1$
+at genus~$1$, whose perturbative coefficient in the Eisenstein
+basis is $B_2/4 = 1/24$.  The trefoil, as the closure of
+$\sigma_1^3$, probes the minimal nontrivial configuration on
+$\FM_2(\C) \times \Conf_2(\R)$.
+
+On the $\fsl_2$ fundamental weight system:
+$w_{\fsl_2}(z_2 \cdot \theta) = \frac{1}{24} \cdot
+C_2(\mathrm{fund}) = \frac{1}{24} \cdot \frac{3}{4} =
+\frac{1}{32}$, matching the $\hbar^2$-coefficient of
+$J_{3_1}(e^\hbar)$.
+
+\subsection*{Degree~$3$: IHX from Arnold}
+
+For the affine lineage, one-loop exactness
+(Theorem~\ref{thm:one-loop-koszul}) forces $m_3 = 0$.
+The degree-$3$ bar differential involves only pairwise
+collisions, landing in the chord diagram sector.  The Arnold
+relation
+$\alpha_{12} \wedge \alpha_{23} + \alpha_{23} \wedge
+\alpha_{31} + \alpha_{31} \wedge \alpha_{12} = 0$
+on $H^\bullet(\Conf_3(\C))$, with $\fg$-valued Casimir
+decorations, becomes $D_I + D_H - D_X = 0$: the IHX
+relation is \emph{derived} from FM geometry, not imposed.
+
+\subsection*{Status}
+
+The matching at degrees $\le 3$ is unconditional for the
+$\fsl_2$ weight system: it uses the proved spectral $R$-matrix
+(Corollary~\ref{cor:jones-polynomial}), proved one-loop
+exactness, and proved Arnold cancellation
+(Theorem~\ref{thm:Arnold_full_proof}).  The full identification
+$Z_{A_\infty}(K) = Z(K)$ at all orders remains conjectural
+(Theorem~\ref{thm:bar-kontsevich}).  At degree~$4$, the chord
+diagram algebra $\cA_4(\fsl_2)$ has dimension~$3$; the symmetry
+factor matching between FM boundary strata and chord diagram
+multiplicities becomes the first genuinely nontrivial
+combinatorial test.
+
+\begin{question}[Beyond the affine lineage]
+\label{q:trefoil-beyond-affine}
+For non-formal Swiss-cheese structures ($m_3 \ne 0$, e.g.\
+Virasoro), the degree-$3$ bar differential includes trivalent
+vertices.  The Kontsevich integral, built from pairwise $d\log$
+forms, sees only the chord diagram quotient.  Capturing the
+higher $m_k$ requires the full $A_\infty$ partition function
+$Z_{A_\infty}(K)$.  The degree-$3$ divergence between the
+chord diagram framework and the $A_\infty$ framework is
+the first point where class~L and class~M separate in the
+knot invariant.
+\end{question}
+
+
+% =================================================================
+\section{$\fsl_3$ monodromy identification: first rank-2 test}
+\label{sec:sl3-monodromy-extraction}
+% =================================================================
+
+% Extracted from the expanded computation in
+% .claude/worktrees/agent-acb59fb3/archive/source_tex/working_notes.tex
+% (~740 lines). What follows is the rectified distillation.
+
+\subsection*{Setup}
+Let $\fg = \fsl_3$, $h^\vee = 3$, $\rho = \omega_1 + \omega_2$.
+Inner product: $(\omega_i, \omega_j) = (A^{-1})_{ij}$ with
+$A^{-1} = \frac{1}{3}\bigl(\begin{smallmatrix} 2 & 1 \\ 1 & 2
+\end{smallmatrix}\bigr)$.
+Quadratic Casimir: $c_2(\lambda) = (\lambda, \lambda + 2\rho)$.
+Cubic Casimir: $c_3(p,q) = \tfrac{1}{18}(p-q)(2p+q+3)(p+2q+3)$;
+note $c_3(p,q) = -c_3(q,p)$ (distinguishes a rep from its contragredient).
+
+\subsection*{Test 1: braiding on $V \otimes V$}
+$V = V_{(1,0)} = \C^3$.  Clebsch--Gordan:
+$V \otimes V \cong V_{(2,0)} \oplus V_{(0,1)}$.
+Split Casimir eigenvalues (via
+$\Omega|_{V_\nu} = \tfrac{1}{2}(c_2(\nu) - 2c_2(\lambda))$):
+$\Omega|_{V_{(2,0)}} = 2/3$, $\Omega|_{V_{(0,1)}} = -4/3$.
+Steinberg connection: $\nabla_{\mathfrak{S}} = d + \Omega\,dz/((k+3)z)$.
+Monodromy ($q = e^{i\pi/(k+3)}$):
+\[
+  \mathrm{Mon}\big|_{V_{(2,0)}} = q^{4/3},
+  \qquad
+  \mathrm{Mon}\big|_{V_{(0,1)}} = q^{-8/3}.
+\]
+These match $U_q(\fsl_3)$ exactly ($\check{R}$-matrix eigenvalues
+up to permutation sign on $\Lambda^2 V$).
+The cubic Casimir does \emph{not} appear: $C_2$ alone distinguishes
+the two summands.  Same mechanism as $\fsl_2$.
+
+\subsection*{Test 2: associator on $V^{\otimes 3}$ --- the cubic Casimir enters}
+$V^{\otimes 3} \cong V_{(3,0)} \oplus 2 \cdot V_{(1,1)}
+\oplus V_{(0,0)}$ ($\mathbf{10} \oplus 2\cdot\mathbf{8} \oplus \mathbf{1}$).
+The two copies of $V_{(1,1)}$ arise from intermediate channels:
+$\mathbf{8}_{\mathrm{sym}}$ (via $V_{(2,0)}$) and
+$\mathbf{8}_{\mathrm{anti}}$ (via $V_{(0,1)}$) in the $(12)$-grouping.
+
+The Drinfeld--KZ associator at order $\hbar^3 = 1/(k+3)^3$
+involves the antisymmetric double commutator
+$\mathscr{A} = [\Omega_{12}, [\Omega_{12}, \Omega_{23}]]
+- [\Omega_{23}, [\Omega_{23}, \Omega_{12}]]$.
+By the Fierz identity for $\fsl_3$,
+\[
+  f_{ace}\,f_{bde}
+  = \tfrac{2}{3}(\delta_{ab}\delta_{cd} - \delta_{ad}\delta_{bc})
+  + d_{ace}\,d_{bde} - d_{ade}\,d_{bce},
+\]
+the double commutator decomposes into a Casimir piece
+(present for all $\fg$) and a $d$-tensor piece
+$\cD_{123}^{(-)}$ (vanishes for $\fsl_2$, nonzero for $\fsl_3$).
+The $d$-tensor piece produces \textbf{off-diagonal mixing}
+between the two copies of $V_{(1,1)}$, proportional to
+\[
+  \Delta c_3 = c_3(2,0) - c_3(0,1)
+  = \tfrac{35}{9} + \tfrac{10}{9} = 5.
+\]
+This is the first genuinely higher-rank phenomenon:
+the cubic Casimir enters the monodromy through the
+\emph{associator}, not through the $R$-matrix eigenvalues.
+
+\subsection*{Verification and conclusion}
+By one-loop exactness of $V^k(\fsl_3)$ at generic $k$
+(Theorem~\ref{thm:one-loop-koszul}), the bar-complex reduced
+connection \emph{is} the KZ connection ($m_k = 0$ for $k \geq 3$).
+Therefore the bar-complex associator reproduces the Drinfeld--KZ
+associator identically, including the cubic Casimir contribution.
+By Drinfeld--Kohno, the monodromy identifies with $U_q(\fsl_3)$.
+
+\textbf{Summary:}  The $\fsl_3$ test confirms
+Theorem~\ref{thm:affine-monodromy-identification} at rank 2.
+$C_2$ controls the diagonal part of the monodromic structure
+(braiding eigenvalues).  $C_3$ controls the off-diagonal part
+(multiplicity-space mixing in the associator).  For $\fsl_2$,
+$C_3 = 0$ and the off-diagonal channel is absent.
+
+
+% =================================================================
+\section{Genus-$1$ curved bar complex: rectified summary}
+\label{sec:genus1-bar-rectified}
+% =================================================================
+%
+% Extracted and rectified from the genus-1 worktree computation.
+% Source: worktree agent-a696cf24, ~810 lines.
+% Three issues corrected: (i) floor-function precedence in the
+% general weight formula, (ii) garbled intermediate in the
+% normalisation verification, (iii) loose ``Tr(L_0)'' language
+% for the modular characteristic.
+
+\subsection*{The genus-$1$ propagator}
+
+On $E_\tau = \C/(\Z + \Z\tau)$, the Arakelov-normalised
+propagator is $\eta^{(1)}(u;\tau) = h(u;\tau) + R(u;\tau)$, where
+$h(u;\tau) = \partial_u\log\vartheta_1(u|\tau)$ is meromorphic
+and $R(u;\tau) = 2\pi i\,\mathrm{Im}(u)/\mathrm{Im}\tau$ is the
+smooth Arakelov correction.  The Laurent expansion of $h$ near
+$u = 0$ has only odd powers:
+\[
+h(u;\tau)
+\;=\;
+\frac{1}{u}
++ \sum_{k=1}^{\infty} c_k(\tau)\,u^{2k-1},
+\qquad
+c_k(\tau) = (-1)^k\frac{(2\pi)^{2k}}{(2k)!}\,B_{2k}\,E_{2k}(\tau),
+\]
+with $c_1 = -(\pi^2/3)E_2$, $c_2 = -(\pi^4/45)E_4$,
+$c_3 = -(2\pi^6/945)E_6$.
+
+\subsection*{Arnold relation failure at genus $1$}
+
+At genus~$0$, the Arnold relation
+$\sum_{\mathrm{cyc}}\eta^{(0)}_{12}\wedge\eta^{(0)}_{23} = 0$
+ensures $\dfib^2 = 0$.  At genus~$1$, decompose $\eta^{(1)} = h + R$:
+\begin{enumerate}[label=(\alph*)]
+\item $\sum_{\mathrm{cyc}} h_{12}\wedge h_{23} = 0$ by the Fay
+  trisecant identity (the holomorphic Arnold relation holds on the
+  universal cover).
+\item $\sum_{\mathrm{cyc}} R_{12}\wedge R_{23}$: smooth, no
+  residue contribution.
+\item The cross-terms $h\wedge R + R\wedge h$ produce the Arnold
+  defect:
+\end{enumerate}
+\[
+\sum_{\mathrm{cyc}}
+\eta^{(1)}_{12}\wedge\eta^{(1)}_{23}
+\;=\;
+\omega_1,
+\qquad
+\omega_1
+= \frac{i}{2\,\mathrm{Im}\tau}\,dz\wedge d\bar{z},
+\qquad
+\textstyle\int_{E_\tau}\omega_1 = 1.
+\]
+The Arnold defect is the Arakelov $(1,1)$-form
+$\omega_1$.  This is the genus-$1$ source of curvature.
+
+\subsection*{The fibre differential on $[s^{-1}T|s^{-1}T]$}
+
+The residue of $\eta^{(1)}\cdot T(z_1)T(z_2)$ at $u = 0$ gives:
+\[
+\dfib^{(1)}[s^{-1}T|s^{-1}T]
+\;=\;
+s^{-1}\!\Bigl(
+  {:}TT{:}
+  \;-\; \tfrac{2\pi^2}{3}\,E_2(\tau)\cdot T
+  \;-\; \tfrac{c\pi^4}{90}\,E_4(\tau)\cdot\mathbf{1}
+\Bigr).
+\]
+The three terms: genus-$0$ normal-ordered product (from $1/u$ times
+${:}TT{:}$); the $E_2$-correction (from $c_1 u$ times $2T/u^2$);
+the $E_4$-contact term (from $c_2 u^3$ times $(c/2)/u^4$).
+
+For general weights $h_a, h_b$:
+\[
+\dfib^{(1)}[s^{-1}a|s^{-1}b]
+\;=\;
+s^{-1}\!\Bigl(
+  a_{(-1)}b
+  + \sum_{k=1}^{\lfloor(h_a+h_b)/2\rfloor}
+    c_k(\tau)\cdot a_{(2k-1)}b
+\Bigr),
+\]
+where the sum terminates because $a_{(n)}b = 0$ for
+$n \ge h_a + h_b$.  The odd OPE products $a_{(2k-1)}b$
+pair with the odd propagator coefficients $c_k(\tau)u^{2k-1}$.
+Each even-order OPE pole has a genus-$1$ Eisenstein shadow.
+
+\subsection*{Curvature: $\dfib^{(1),2} = \kappa\cdot\omega_1$}
+
+Decompose $\eta^{(1)} = h + R$.  In the double residue computing
+$\dfib^2$: (a) $h\cdot h$ vanishes by Fay trisecant; (b) $R\cdot R$
+vanishes by smoothness; (c) the cross-terms $h\cdot R + R\cdot h$
+produce the curvature.  The cross-term extracts:
+\begin{itemize}
+\item from $h$: the leading OPE coefficient via residue,
+\item from $R$: the Arakelov class $\bar\partial R
+  = -\omega_{\mathrm{Ar}}$,
+\end{itemize}
+with the coefficient given by the modular characteristic
+$\kappa(\mathrm{Vir}_c) = c/2$
+(defined via zeta-regularised partition function, not by the
+literally divergent trace $\mathrm{Tr}(L_0)$).  Result:
+\[
+\dfib^{(1),2}[s^{-1}a]
+= \frac{c}{2}\cdot\omega_1\cdot [s^{-1}a].
+\]
+The higher OPE poles contribute to the genus-$1$ \emph{differential}
+(the $E_2$, $E_4$ corrections) but not to the \emph{curvature}
+$d^2$.  The curvature sees only the modular characteristic.
+
+\subsection*{Genus-$1$ free energy and the critical dichotomy}
+
+$F_1^{\mathrm{intr}} = (c/2)\cdot(1/24) = c/48$;
+$F_1^{\mathrm{eff}} = ((c{-}26)/2)\cdot(1/24) = (c{-}26)/48$.
+On a fixed torus: $Z_1(\tau) = \eta(\tau)^{-\kappa}$.  The
+$\hat{A}$-genus check:
+$\hat{A}(ix) - 1 = (1/24)x^2 + \cdots$ gives
+$F_1 = \kappa/24$.  Confirmed.
+
+\medskip
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcc@{}}
+& $c \neq 26$ & $c = 26$ \\
+\hline
+$\kappa_{\mathrm{eff}}$ & $(c{-}26)/2 \neq 0$ & $0$ \\
+$F_1^{\mathrm{eff}}$ & $(c{-}26)/48 \neq 0$ & $0$ \\
+$\dfib^{(1),2}$ & $((c{-}26)/2)\,\omega_1$ & $0$ \\
+Genus tower & nonzero at all $g$ & vanishes identically \\
+Regime & curved bar & flat bar
+\end{tabular}
+\end{center}
+
+\subsection*{What is genuinely new}
+
+\begin{enumerate}
+\item \textbf{The Arnold defect mechanism.}  The genus-$1$ Arnold
+  relation does not fail wholesale: the holomorphic summand
+  $h\wedge h$ still cancels (Fay trisecant).  The defect comes
+  entirely from the non-holomorphic Arakelov correction $R$,
+  whose $\bar\partial$-inexactness produces the $(1,1)$-form
+  $\omega_1$.  This is a controlled failure: the defect is a
+  \emph{scalar} times $\omega_1$, not a matrix-valued form.
+\item \textbf{Eisenstein shadows of OPE poles.}  The genus-$1$
+  propagator pairs odd powers $c_k u^{2k-1}$ with even-order OPE
+  poles $a_{(2k-1)}b/u^{2k}$, producing Eisenstein-weighted
+  corrections.  Each pole order $2k$ in the OPE casts a genus-$1$
+  shadow $E_{2k}(\tau)$.  The double pole $\to E_2$ (quasi-modular,
+  one-loop self-energy); the quartic pole $\to E_4$ (modular,
+  contact term).
+\item \textbf{Curvature vs.\ differential separation.}  Higher
+  OPE poles affect the differential but not the curvature.  The
+  curvature $d^2 = \kappa\cdot\omega_1$ depends only on $\kappa$
+  (the modular characteristic), not on the detailed pole structure.
+  This is the genus-$1$ manifestation of the universal
+  formula $d^2 = \kappa\cdot\omega_g$.
+\end{enumerate}
+
+
+%% ===================================================================
+%%  CELESTIAL AMPLITUDES FROM THE BAR COMPLEX — RECTIFIED SUMMARY
+%% ===================================================================
+
+\section{Celestial amplitudes from the bar complex: rectified summary}
+\label{sec:celestial-bar-rectified}
+
+Extraction and audit of the celestial amplitude computation from the
+worktree draft (agent-a6f30e7e, ${\sim}715$ lines).  All results verified
+against the core chapters: Theorem~\ref{thm:ch-core-celestial-gluon-ope}
+(gluon OPE), Theorem~\ref{thm:ch-core-celestial-graviton-ope} (graviton
+OPE), Theorem~\ref{thm:cbt-mhv-bar-integral} (MHV integral),
+Theorem~\ref{thm:ch-core-helicity-splitting} (helicity splitting), and
+Remark~\ref{rem:ch-core-colour-ordered-two-colour} (colour-ordered =
+ordered-bar).
+
+\subsection*{Audit of the collision residue computation}
+
+\begin{enumerate}[label=(\roman*),nosep]
+\item \textbf{Gluon.}  The $\lambda$-bracket $\{J^a{}_\lambda J^b\} =
+  f^{ab}{}_c J^c + k\kappa^{ab}\lambda$ Laplace-transforms to
+  $r^{\mathrm{Lap}}(z) = fJ^c/z + k\kappa/z^2$.  After $d\log$
+  absorption (AP19: $z^{-n}\mapsto z^{-(n-1)}$), the structure-constant
+  term drops to $z^0$ and the level term survives at $z^{-1}$:
+  $r^{\mathrm{KM}}(z) = k\Omega/z$.  Colour-ordered projection of the
+  Casimir yields $f^{ab}{}_c$.  \emph{Matches Fan--Fotopoulos--Taylor.}
+
+\item \textbf{Graviton.}  The Virasoro $\lambda$-bracket
+  $\{T{}_\lambda T\} = (\partial + 2\lambda)T + \frac{c}{12}\lambda^3$
+  Laplace-transforms to $\partial T/z + 2T/z^2 + (c/2)/z^4$ (using
+  $\int_0^\infty \lambda^3 e^{-\lambda z}d\lambda = 6/z^4$, so
+  $(c/12)(6/z^4) = (c/2)/z^4$).  After $d\log$ absorption:
+  $r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$.  The $\partial T$ term
+  drops.  \emph{Matches Pasterski--Shao--Strominger.}  The two poles
+  are the Weinberg soft factor ($r_1 = 2T$) and the gravitational
+  anomaly ($r_3 = c/2$).
+
+\item \textbf{MHV at $n=4$.}  The bar-complex integral
+  $\int_{\overline{\mathrm{FM}}_4(\C)} \omega_4^{(+,-,-,+)} \wedge \nu_4$
+  localises to three channels $D_{\{1,2\}}, D_{\{2,3\}}, D_{\{3,4\}}$.
+  Each $d\log(z_i - z_j)$ residue produces $\langle ij\rangle^{-1}$ via
+  the spinor-helicity identification $z_i - z_j \sim \langle ij\rangle /
+  (\lambda_i^2\lambda_j^2)$.  The anti-holomorphic pairing of the two
+  negative-helicity insertions supplies the numerator
+  $\langle 23\rangle^4$.  Result: Parke--Taylor.
+\end{enumerate}
+
+\subsection*{Colour-ordered structure and the ordered bar}
+
+Colour-ordered celestial amplitudes are ordered-bar objects
+(Remark~\ref{rem:ch-core-colour-ordered-two-colour}): they live on
+$\Conf_n^{<}(\C)$, not the symmetric quotient.  The Parke--Taylor
+denominator $\prod_{i=1}^n \langle i,\, i{+}1\rangle^{-1}$ is the
+$d\log$ residue on ordered configurations --- the holomorphic colour
+of the ordered bar differential.  Full amplitudes are recovered by
+$R$-matrix descent: $\cM_n = \sum_{\sigma \in \Sigma_n/\mathrm{cyc}}
+R_\sigma \cdot \cM_n^{\mathrm{ord}}(\sigma)$.  This is the celestial
+manifestation of the two-colour architecture of Part~\ref{part:ordered},
+consistent with the $E_\infty$ locality of $\widehat{\fg}_k$: the
+ordered bar carries strictly more data than the symmetric bar when OPE
+poles are present (AP38), and the $R$-matrix descent is genuinely
+twisted, not naive (AP36).
+
+\subsection*{Frontier questions (from worktree)}
+
+\begin{enumerate}[label=(\alph*),nosep]
+\item \textbf{NMHV and double twisting morphisms.}
+  NMHV amplitudes (three negative helicities) require a double
+  pairing between $\barBch(\cA)$ and $\barBch(\cA^!)$: two bulk
+  propagators connecting three anti-holomorphic insertions to the
+  holomorphic skeleton.  \emph{Is the BCFW recursion a statement
+  about the $\Ainf$ structure of the twisting-morphism space?}
+
+\item \textbf{Graviton MHV from $\barBch(\mathrm{Vir}_c)$.}
+  At $n = 4$, the graviton MHV amplitude
+  $M_4 = \langle 23\rangle^8 /
+  (\langle 12\rangle^2 \langle 23\rangle^2
+  \langle 34\rangle^2 \langle 41\rangle^2)$
+  has doubled power relative to gluons, reflecting spin $2$.  In the
+  bar complex, this doubling should arise from the quartic OPE pole
+  of Virasoro (versus the quadratic pole of Kac--Moody), producing
+  extra $\langle ij\rangle$ powers per collision.  \emph{Precise integral
+  formula is a target for future computation.}
+\end{enumerate}
+
+
+% =================================================================
+\section{Virasoro spectral $R$-matrix: rectified extract}
+\label{sec:virasoro-spectral-R-rectified}
+% =================================================================
+%
+% Source: worktree agent-acffc868 (~865 lines).  Rectified extract:
+% verified Laplace transform, CYBE, AP19 compliance, Ponsot--Teschner
+% comparison, quantum corrections.  Errata noted inline.
+
+\subsection*{Classical $r$-matrix (verified)}
+
+The Laplace transform of the Virasoro $\lambda$-bracket
+$\{T{}_\lambda T\} = \partial T + 2T\lambda + \frac{c}{12}\lambda^3$
+is (using $\int_0^\infty \lambda^n e^{-\lambda z}\,d\lambda = n!/z^{n+1}$):
+\begin{equation}\label{eq:vir-rL-rectified}
+r^L(z)
+\;=\;
+\frac{\partial T}{z}
++ \frac{2T}{z^2}
++ \frac{c/2}{z^4}.
+\end{equation}
+This is the \emph{Laplace kernel}: same pole orders as the OPE.
+The \emph{collision residue} (bar-theoretic $r$-matrix, AP19: $d\log$
+absorbs one power) is
+\begin{equation}\label{eq:vir-rcoll-rectified}
+r^{\mathrm{coll}}(z)
+\;=\;
+\frac{c/2}{z^3} + \frac{2T}{z}.
+\end{equation}
+The $\partial T/z$ term becomes regular after absorption and drops.
+Both formulae match the established manuscript (3d\_gravity.tex
+lines 1000, 3123; examples-worked.tex line 112).
+
+\subsection*{Classical Yang--Baxter equation (verified)}
+
+The CYBE for $r^L(z)$ follows from the PVA Jacobi identity.
+Writing $I = \{T{}_\lambda\{T{}_\mu T\}\}$,
+$II = \{T{}_\mu\{T{}_\lambda T\}\}$,
+$III = \{\{T{}_\lambda T\}{}_{\lambda+\mu} T\}$:
+\[
+I - II
+\;=\;
+(\lambda-\mu)\,\partial T
++ 2(\lambda^2-\mu^2)\,T
++ \tfrac{c}{12}(\lambda-\mu)(\lambda+\mu)^3
+\;=\; III.
+\]
+The central-term cancellation
+$\frac{c}{12}(\lambda^4 - \mu^4 + 2\lambda\mu(\lambda^2 - \mu^2))
+= \frac{c}{12}(\lambda-\mu)(\lambda+\mu)^3$
+is verified by factoring.  Under Laplace transform this becomes the
+CYBE with spectral parameters $(u, u+v, v)$.  The Arnold
+interpretation: the three commutator terms are the three
+codimension-$1$ boundary strata of $\FM_3(\C)$; Stokes forces their
+sum to vanish (same mechanism as $d_{\barB}^2 = 0$).
+
+\subsection*{Quantum corrections: two-source structure}
+
+The quantum $R$-matrix $R(z) = \id + \hbar\,r^{(1)}(z)
++ \hbar^2\,r^{(2)}(z) + \cdots$ (with $\hbar = 12/c$) receives
+corrections from two sources at each order:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Iterated monodromy}: path-ordered exponential of the
+  classical $r$-matrix (Chen iterated integrals of $r^L$);
+\item \emph{$\Ainf$ corrections}: the ternary operation
+  $m_3^{\mathrm{Vir}}$ (and higher) correct the shifted KZ
+  connection.
+\end{enumerate}
+The two sources partially cancel via the Stasheff identity
+$\partial m_3 + m_2 \circ m_2 = 0$.  On the diagonal
+(level-$0$ to level-$0$ component
+$|h_1,h_2\rangle \to |h_1,h_2\rangle$):
+\begin{equation}\label{eq:R-level0-rectified}
+R(z)\big|_{\mathrm{diag}}
+\;=\;
+\exp\!\left(
+  \frac{c/2}{z^4}\,\hbar
+  + \frac{2h_1 h_2}{z^4}\,\hbar^2
+  + O(\hbar^3)
+\right).
+\end{equation}
+The leading term is the abelian phase; the $2h_1 h_2\,\hbar^2/z^4$
+is the first genuine quantum correction.
+
+\subsection*{Degenerate truncation (verified)}
+
+On the $(2,1)$-degenerate representation $V_{h_{2,1}}$, all $\Ainf$
+corrections vanish (null vectors kill $m_3, m_4, \ldots$), and $R(z)$
+is computed exactly by the BPZ equation.  Monodromy eigenvalues:
+$e^{\pm i\pi b\alpha_2}$, matching the Ponsot--Teschner kernel.
+
+\subsection*{Ponsot--Teschner comparison: status}
+
+\begin{enumerate}[label=(\arabic*)]
+\item \emph{Classical limit}: $r^L(z)$ matches the $b \to 0$ saddle
+  of the fusion kernel.  Verified.
+\item \emph{Degenerate eigenvalues}: exact match via BPZ.  Verified.
+\item \emph{First quantum correction at level~$0$}: the $2h_1 h_2/z^4$
+  coefficient matches the leading term of the Zamolodchikov one-loop
+  determinant $W_1$ in the heavy limit $h_i = c\epsilon_i/6$.
+  Verified at leading order.
+\item \emph{Full identification $R = \mathbb{F}^{\mathrm{PT}}$}:
+  conjectural.  Gap: analytic continuation from integer~$k$ (affine
+  DS transport) to continuous~$c$ via the Faddeev modular double.
+\end{enumerate}
+
+\subsection*{Errata in the worktree source}
+
+\begin{enumerate}[label=(E\arabic*)]
+\item The mode expansion eq.~(3.5) of $r^L_{12}(z)$ has powers
+  $z^{-n-1}$ and $z^{-n}$ in the denominator that can become
+  positive powers of~$z$---this is a notational error (confuses
+  position-space field $T(z)$ with the tensor $r_{12}(z)$).  The
+  subsequent eq.~(3.6) and level-$1$ computation bypass this and
+  are correct.
+\item The skew-symmetry discussion (lines 145--151 of the diff)
+  claims $r(-z) + r_{21}(z) = (c/2)/z^4 + (c/2)/z^4 = 0$; the
+  two central terms ADD rather than cancel, so the equation should
+  read $r_{12}(-z) + r_{21}(z) = (c/z^4)\,\id \otimes \id$ (a
+  scalar, hence compatible with CYBE up to coboundary).
+\item The classical-limit comparison (Observation 5.1) writes
+  $W_0 \supset P_1 P_2/z^2$ but then matches against $2h_1 h_2/z^4
+  \cdot 1/c$; these are different $z$-powers.  The heavy-limit
+  statement in Theorem~4.1(v) is more carefully formulated and
+  should be preferred.
+\end{enumerate}
+
+
+% =================================================================
+\section{Rectified summary: Virasoro $m_4$ and $m_5$}
+\label{sec:virasoro-m4-m5-rectified}
+% =================================================================
+
+Two parallel computations of the Virasoro $\Ainf$ operations
+$m_4$ and $m_5$ were cross-checked.  The explicit formulas agree
+with Propositions~\ref*{prop:gravity-m4}--\ref*{prop:gravity-m5}
+of~\S\ref*{sec:bar-knows-gravity}.  This section records the
+rectified formulas with corrected structural claims, the
+Shapovalov inner product derivation of the quartic contact
+invariant, and the OPE of $\normord{TT}$ with $T$.
+
+\subsection{$m_4$: forced by the Stasheff relation}
+
+With $m_1 = \partial \ne 0$ (translation), the arity-$4$ Stasheff
+relation reads $\partial(m_4) + \mathrm{Obs}_4 = 0$, where
+$\mathrm{Obs}_4$ involves only $m_2$ and $m_3$.
+The operation $m_4 = -\mathrm{Obs}_4$ is \emph{forced}, not a free
+cocycle (the Borcherds identity ensures the full OPE is associative,
+but the $\lambda$-bracket alone is non-associative---that is the
+engine of the $\Ainf$ tower).
+
+\begin{equation}\label{eq:m4-rectified}
+\begin{aligned}
+m_4(T^4;\,&\lambda_{12},\lambda_{23},\lambda_{34})
+\\[2pt]
+&=\;
+(\lambda_{23} + 2\lambda_{34})\,\partial^2 T
+\\[2pt]
+&\quad +\;
+(5\lambda_{12}^2 - 4\lambda_{12}\lambda_{23}
+  + 3\lambda_{12}\lambda_{34}
+  - 5\lambda_{23}^2 + 10\lambda_{23}\lambda_{34}
+  + 4\lambda_{34}^2)\,\partial T
+\\[2pt]
+&\quad +\;
+2(\lambda_{12}^3 + 2\lambda_{12}^2\lambda_{23}
+  + 3\lambda_{12}^2\lambda_{34}
+  - 2\lambda_{12}\lambda_{23}^2
+  - 4\lambda_{12}\lambda_{23}\lambda_{34}
+  + 4\lambda_{12}\lambda_{34}^2
+\\
+&\qquad\qquad
+  - \lambda_{23}^3 - 2\lambda_{23}^2\lambda_{34}
+  + 6\lambda_{23}\lambda_{34}^2)\,T
+\\[2pt]
+&\quad +\;
+\tfrac{c}{12}
+(\lambda_{12}^5 + 2\lambda_{12}^4\lambda_{23}
+  + 3\lambda_{12}^4\lambda_{34}
+  + 4\lambda_{12}^3\lambda_{23}\lambda_{34}
+  + 2\lambda_{12}^3\lambda_{34}^2
+\\
+&\qquad\qquad
+  - 2\lambda_{12}\lambda_{23}^4
+  - 4\lambda_{12}\lambda_{23}^3\lambda_{34}
+  - 4\lambda_{12}\lambda_{23}\lambda_{34}^3
+  + 2\lambda_{12}\lambda_{34}^4
+\\
+&\qquad\qquad
+  - \lambda_{23}^5 - 2\lambda_{23}^4\lambda_{34}
+  + 6\lambda_{23}\lambda_{34}^4).
+\end{aligned}
+\end{equation}
+Symmetric point:
+$m_4(T^4;\,\lambda,\lambda,\lambda)
+= 3\lambda\,\partial^2 T
++ 13\lambda^2\,\partial T
++ 14\lambda^3\, T
++ \tfrac{7c}{12}\,\lambda^5$.
+No $\partial^3 T$ term (associahedron $K_4$ cell structure).
+All $T$-dependent coefficients are $c$-independent.
+
+\subsection{Quartic contact invariant from the Shapovalov form}
+
+At conformal weight~$4$, the Shapovalov matrix in the basis
+$(\partial^2 T,\, \normord{TT}) = (2L_{-4}|0\rangle,\,
+L_{-2}^2|0\rangle)$ is
+\[
+S^{(4)}
+=
+\begin{pmatrix}
+5c & 3c \\
+3c & c(c+8)/2
+\end{pmatrix},
+\qquad
+\det S^{(4)} = \frac{c^2(5c+22)}{2},
+\qquad
+(S^{(4)})^{-1}
+=
+\frac{1}{c(5c+22)}
+\begin{pmatrix}
+c+8 & -6 \\
+-6 & 10
+\end{pmatrix}.
+\]
+The quartic contact invariant
+$\mathfrak{Q}^{\mathrm{contact}}_{\mathrm{Vir}}
+= 10/[c(5c+22)]$
+is the $(2,2)$-entry of $(S^{(4)})^{-1}$, with poles at
+$c = 0$ and $c = -22/5$ (Lee--Yang).
+
+\subsection{The normally ordered OPE $\{\normord{TT}{}_\lambda T\}$}
+
+By the Dong lemma:
+\begin{equation}\label{eq:TT-T-rectified}
+\{\normord{TT}{}_\lambda T\}
+\;=\;
+-\partial^2 T\cdot\lambda
+\;-\; \tfrac{5}{2}\,\partial T\cdot\lambda^2
+\;-\; \tfrac{4}{3}\, T\cdot\lambda^3
+\;-\; \tfrac{c}{40}\,\lambda^5.
+\end{equation}
+This is the homotopy data used in the HPL computation of $m_4$:
+the normally ordered product provides the chain homotopy between
+the full (associative) OPE and the (non-associative)
+$\lambda$-bracket.
+
+\subsection{$m_5$: explicit polynomials $P_1$ and $P_0$}
+
+\begin{equation}\label{eq:m5-rectified}
+\begin{aligned}
+m_5(T^5;\,
+  &\lambda_{12},\lambda_{23},\lambda_{34},\lambda_{45})
+\\[2pt]
+&=\;
+-\partial^4 T
+\;-\;
+(2\lambda_{12} + 4\lambda_{23}
+  + \lambda_{34} + 3\lambda_{45})\,\partial^3 T
+\\[2pt]
+&\quad +\;
+(3\lambda_{12}^2 - 16\lambda_{12}\lambda_{23}
+  - 6\lambda_{12}\lambda_{45}
+  - 13\lambda_{23}^2 + 7\lambda_{23}\lambda_{34}
+\\
+&\qquad\qquad
+  - 9\lambda_{23}\lambda_{45}
+  - 7\lambda_{34}^2
+  + 3\lambda_{34}\lambda_{45}
+  - 3\lambda_{45}^2)\,\partial^2 T
+\\[2pt]
+&\quad +\; P_1(\lambda)\,\partial T
+\;+\; P_0(\lambda)\, T
+\;+\; \tfrac{c}{12}\, Q_5(\lambda),
+\end{aligned}
+\end{equation}
+where the degree-$3$ and degree-$4$ polynomials are:
+\begin{align*}
+P_1
+&=
+10\lambda_{12}^2\lambda_{23}
+- 9\lambda_{12}^2\lambda_{34}
++ 14\lambda_{12}^2\lambda_{45}
+- 5\lambda_{12}\lambda_{23}^2
+- 20\lambda_{12}\lambda_{23}\lambda_{34}
+- 49\lambda_{12}\lambda_{23}\lambda_{45}
+\\
+&\quad
+- 8\lambda_{12}\lambda_{34}^2
++ 13\lambda_{12}\lambda_{34}\lambda_{45}
+- 5\lambda_{12}\lambda_{45}^2
++ 2\lambda_{23}^3
+- 9\lambda_{23}^2\lambda_{34}
+- 45\lambda_{23}^2\lambda_{45}
+\\
+&\quad
+- 3\lambda_{23}\lambda_{34}^2
++ 41\lambda_{23}\lambda_{34}\lambda_{45}
++ \lambda_{23}\lambda_{45}^2
+- 9\lambda_{34}^3
+- 5\lambda_{34}^2\lambda_{45}
++ 5\lambda_{34}\lambda_{45}^2
+- 3\lambda_{45}^3,
+\\[6pt]
+P_0
+&=
+4\lambda_{12}^3\lambda_{23}
+- 2\lambda_{12}^3\lambda_{34}
++ 2\lambda_{12}^3\lambda_{45}
++ 10\lambda_{12}^2\lambda_{23}^2
+- 4\lambda_{12}^2\lambda_{23}\lambda_{34}
++ 14\lambda_{12}^2\lambda_{23}\lambda_{45}
+\\
+&\quad
+- 8\lambda_{12}^2\lambda_{34}^2
+- 6\lambda_{12}^2\lambda_{34}\lambda_{45}
++ 8\lambda_{12}^2\lambda_{45}^2
+- 4\lambda_{12}\lambda_{23}^3
+- 4\lambda_{12}\lambda_{23}^2\lambda_{34}
+\\
+&\quad
+- 16\lambda_{12}\lambda_{23}^2\lambda_{45}
+- 16\lambda_{12}\lambda_{23}\lambda_{34}^2
+- 16\lambda_{12}\lambda_{23}\lambda_{34}\lambda_{45}
+- 32\lambda_{12}\lambda_{23}\lambda_{45}^2
+\\
+&\quad
++ 4\lambda_{12}\lambda_{34}^3
+- 4\lambda_{12}\lambda_{34}^2\lambda_{45}
++ 8\lambda_{12}\lambda_{34}\lambda_{45}^2
++ 4\lambda_{12}\lambda_{45}^3
+\\
+&\quad
++ 2\lambda_{23}^3\lambda_{34}
++ 2\lambda_{23}^3\lambda_{45}
+- 8\lambda_{23}^2\lambda_{34}^2
+- 16\lambda_{23}^2\lambda_{34}\lambda_{45}
+- 32\lambda_{23}^2\lambda_{45}^2
+\\
+&\quad
++ 6\lambda_{23}\lambda_{34}^3
++ 46\lambda_{23}\lambda_{34}\lambda_{45}^2
++ 2\lambda_{23}\lambda_{45}^3
+\\
+&\quad
+- 2\lambda_{34}^4
+- 16\lambda_{34}^3\lambda_{45}
++ 10\lambda_{34}^2\lambda_{45}^2
+- 2\lambda_{34}\lambda_{45}^3
+- 2\lambda_{45}^4.
+\end{align*}
+Symmetric point:
+$m_5(T^5;\,\lambda,\lambda,\lambda,\lambda)
+= -\partial^4 T
+- 10\lambda\,\partial^3 T
+- 41\lambda^2\,\partial^2 T
+- 84\lambda^3\,\partial T
+- 68\lambda^4\, T
+- \tfrac{17c}{6}\,\lambda^6$.
+All symmetric-point coefficients are negative (the
+five-graviton vertex is uniformly attractive).
+$Q_5(\lambda,\ldots,\lambda) = -34\lambda^6$.
+The scalar $-17c/6 = (c/12)(-34)$ maintains the
+$c/12$ prefactor.
+
+\subsection{Corrected structural rules}
+
+The parallel computations each stated structural rules
+with minor errors.  The rectified versions:
+
+\begin{enumerate}[label=\textup{(\alph*)},nosep]
+\item \textit{Weight rule (corrected).}
+  The coefficient of $\partial^j T$ in $m_k$ has
+  $\lambda$-degree $k - 1 - j$.  Equivalently,
+  $\mathrm{wt}(\text{output}) + \deg_\lambda = k + 1$.
+  This is conformal weight conservation:
+  $k$ inputs of weight~$2$ produce output of total
+  weight $k + 1$ (after accounting for the degree-$(k-1)$
+  operation and the desuspension).
+
+\item \textit{Scalar degree (corrected).}
+  The scalar polynomial $Q_k$ has degree $k + 1$
+  (not $2k - 3$), consistent with~(a) at $j = 0$
+  and output weight $0$ for a $c$-number.
+
+\item \textit{Central charge isolation.}
+  In every $m_k$, the central charge enters exclusively through
+  the scalar term $\tfrac{c}{12}\,Q_k(\lambda)$.  All
+  $T$-dependent coefficients are $c$-independent.
+
+\item \textit{Leading term at $\lambda = 0$ (corrected).}
+  The claim ``$m_k$ vanishes at $\lambda = 0$'' is false.
+  At zero spectral parameters:
+  $m_2(T,T;\,0) = \partial T$,
+  $m_3(T^3;\,0,0) = \partial^2 T$,
+  $m_4(T^4;\,0,0,0) = 0$,
+  $m_5(T^5;\,0,\ldots,0) = -\partial^4 T$.
+  The vanishing of $m_4$ at $\lambda = 0$ reflects the absence of
+  a degree-$0$ leading coefficient (the associahedron $K_4$
+  cell-structure effect).
+\end{enumerate}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}ccccc@{}}
+\textbf{$k$}
+  & \textbf{Leading term}
+  & \textbf{$j + \deg_\lambda$}
+  & \textbf{$\deg(Q_k)$}
+  & \textbf{$m_k|_{\lambda=0}$} \\
+\hline
+$2$ & $\partial T$ & $1 = k{-}1$ & $3 = k{+}1$ & $\partial T$ \\
+$3$ & $\partial^2 T$ & $2 = k{-}1$ & $4 = k{+}1$ & $\partial^2 T$ \\
+$4$ & $(\lambda_{23}{+}2\lambda_{34})\partial^2 T$
+    & $3 = k{-}1$ & $5 = k{+}1$ & $0$ \\
+$5$ & $-\partial^4 T$ & $4 = k{-}1$ & $6 = k{+}1$ & $-\partial^4 T$
+\end{tabular}
+\end{center}
+
+\begin{observation}[Symmetric-point coefficient sequences]
+The symmetric-point evaluations produce the array:
+\[
+\renewcommand{\arraystretch}{1.2}
+\begin{array}{c|cccccc}
+k & \partial^{k-2}T & \cdots & \partial^2 T
+  & \partial T & T & \text{scalar}/\lambda^{k+1} \\
+\hline
+2 & 1 & & & 2 & & c/12 \\
+3 & 1 & & & 5 & 6 & c/4 \\
+4 & & & 3 & 13 & 14 & 7c/12 \\
+5 & -1 & -10 & -41 & -84 & -68 & -17c/6
+\end{array}
+\]
+The sign alternation between $m_4$ (positive) and $m_5$ (negative)
+is the Koszul sign from the bar desuspension~$s^{-1}$.
+The scalar coefficients $c/12$, $c/4$, $7c/12$, $-17c/6$ (i.e.\
+$1, 3, 7, -34$ times $c/12$) grow rapidly:
+the $\Ainf$ tower does not truncate for generic~$c$.
+\end{observation}
+
+
 \end{document}

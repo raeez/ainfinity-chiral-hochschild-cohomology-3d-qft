@@ -894,7 +894,7 @@ def ds_genus_transport(k_val, genus=1):
     fp_numbers = {
         1: Rational(1, 24),
         2: Rational(7, 5760),
-        3: Rational(1, 82944),
+        3: Rational(31, 967680),
     }
 
     if genus not in fp_numbers:

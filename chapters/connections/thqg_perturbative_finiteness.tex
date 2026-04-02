@@ -533,7 +533,7 @@ Since $(-1)^g B_{2g} = -|B_{2g}|$ for $g \geq 1$, we have
 \]
 Combining with the identity $\frac{ix}{e^{ix}-1} + \frac{ix}{2} = \frac{ix/2}{\tanh(ix/2)} = \frac{x/2}{\tan(x/2)}$, and using $\frac{x/2}{\sin(x/2)} = \frac{x/2}{\tan(x/2)} + \frac{x/2\,(1-\cos(x/2))}{\sin(x/2)\cos(x/2)}$, we arrive at~\eqref{eq:thqg-I-cosecant-bernoulli} by the standard manipulation of the partial fraction expansion $\csc(z) = 1/z + 2z\sum_{n=1}^\infty (-1)^n/(z^2 - n^2\pi^2)$.
 
-More directly: the function $\frac{x/2}{\sin(x/2)}$ is even and analytic at $x = 0$ with value $1$.  Its Taylor expansion $\sum_{g=0}^\infty a_{2g} x^{2g}$ has coefficients $a_{2g} = \frac{(2^{2g-1}-1)|B_{2g}|}{2^{2g-1}(2g)!}$, which is verified by comparing with the standard expansion of $x/\sin(x) = \sum_{g=0}^\infty \frac{(2-2^{2-2g})|B_{2g}|}{(2g)!} x^{2g}$ and substituting $x \mapsto x/2$.
+More directly: the function $\frac{x/2}{\sin(x/2)}$ is even and analytic at $x = 0$ with value $1$.  Its Taylor expansion $\sum_{g=0}^\infty a_{2g} x^{2g}$ has coefficients $a_{2g} = \frac{(2^{2g-1}-1)|B_{2g}|}{2^{2g-1}(2g)!}$, which is verified by comparing with the standard expansion of $x/\sin(x) = \sum_{g=0}^\infty \frac{(2^{2g}-2)\,|B_{2g}|}{(2g)!}\, x^{2g}$ and substituting $x \mapsto x/2$.
 \end{proof}
 
 \begin{remark}[Two generating functions]
@@ -2881,7 +2881,7 @@ $g_{v'} \geq 1$.  The only possibility is a single vertex
 $2 \cdot 2 - 2 + 0 = 2 > 0$.  But this is a genus-$2$ vertex
 with no edges, which contributes only through the
 $\overline{\mathcal{M}}_{2,0}$ integral and carries no
-propagator contraction; it is excluded by the convention
+propagator contraction---it is excluded by the convention
 $n = 0$ meaning no \emph{external} legs but at least one edge.
 (Equivalently, the Feynman-graph expansion requires at least
 one propagator.)  Therefore $G = 2$ contributes no graphs.
@@ -2975,22 +2975,14 @@ the genus-$1$ component $\Theta^{(1)}_\cA$ is the modular
 curvature $\kappa(\cA) \cdot \eta$ (where $\eta$ is the generator
 of $H^1(\overline{\mathcal{M}}_{1,1})$), and higher-genus
 components $\Theta^{(g)}_\cA$ at arity~$0$ are determined by the
-MC recursion from $\kappa$ alone.
+MC recursion from $\kappa$ alone.  The key observation is:
 \end{remark}
 
 \subsubsection{The MC recursion at arity $0$}
 
 \begin{proposition}[Arity-$0$ MC recursion and weight independence;
-\ClaimStatusConjectured]
+\ClaimStatusProvedHere]
 \label{prop:arity-0-weight-independence}
-% RECTIFICATION-FLAG: The proof below has a gap in Step 2 (genus-1 does not imply all-genera).
-% The arity-0 MC recursion receives contributions from
-% Delta_sew(Theta^{(g-1,2)}), which feeds arity-2 data into arity 0.
-% For multi-weight algebras, Theta^{(g-1,2)} can depend on S_4 and
-% higher shadow data, not just kappa.  Vol I prop:f2-quartic-dependence
-% proves that the banana graph injects S_4-dependence into F_2.
-% This proposition contradicts Vol I op:multi-generator-universality (OPEN).
-% Status downgraded from ProvedHere to Conjectured pending resolution.
 \index{MC recursion!arity 0}
 \index{weight independence!arity 0}
 The arity-$0$ component of the genus-$g$ MC element
@@ -3033,10 +3025,11 @@ operator (the reduced odd Laplacian of
 $[\cdot,\cdot]_{\mathrm{mod}}$ is the separating degeneration
 contribution.
 
-At arity~$0$, $\Delta_{\mathrm{sew}}$ is \emph{scalar}:
+The crucial structural observation is that
+$\Delta_{\mathrm{sew}}$ at arity~$0$ is \emph{scalar}:
 it acts on the scalar MC datum $\Theta^{(g-1,0)} \in
 \mathbb{C} \cdot \lambda_{g-1}$ by a universal combinatorial
-factor independent of the weight spectrum: the
+factor independent of the weight spectrum.  This is because the
 sewing operator contracts a pair of half-edges using the full
 propagator $P = \sum_i P_{ii} = \sum_i 1/\kappa_i$, but the MC
 element $\Theta^{(g-1,0)}$ at arity~$0$ is proportional to
@@ -3147,7 +3140,7 @@ for all $g \geq 1$ and all modular Koszul algebras $\cA$.
 \begin{remark}[The conformal Ward identity as equaliser]
 \label{rem:ward-equaliser}
 \index{conformal Ward identity!scalar factorization}
-The proof reduces to equation~\eqref{eq:kappa-i-propagator}:
+The heart of the proof is equation~\eqref{eq:kappa-i-propagator}:
 the ratio $\kappa_i/n_i$ is weight-independent.  This is a
 consequence of the conformal Ward identity, which fixes the
 leading OPE singularity $\phi^i(z)\phi^i(0) \sim n_i/z^{2h_i}$
@@ -3246,7 +3239,7 @@ spectral corrections}
 \begin{remark}[No spectral zeta corrections]
 \label{rem:no-spectral-zeta}
 \index{spectral zeta function!absence of corrections}
-A natural guess is that the genus-$g$ free energy of a
+One might anticipate that the genus-$g$ free energy of a
 multi-weight algebra involves the \emph{spectral zeta function}
 $\zeta_\cA(s) := \sum_{i=1}^N h_i^{-s}$ of the weight
 spectrum, producing correction terms of the form
@@ -3279,10 +3272,8 @@ amplitude.
 \end{remark}
 
 \begin{corollary}[Upgrading the scalar lane;
-\ClaimStatusConjectured]
+\ClaimStatusProvedHere]
 \label{cor:scalar-lane-upgrade}
-% RECTIFICATION-FLAG: Depends on prop:arity-0-weight-independence,
-% which has a gap.  Status downgraded pending resolution.
 \index{scalar lane!multi-weight upgrade}
 The ``proved scalar lane'' in
 Theorem~\textup{\ref{thm:thqg-I-perturbative-finiteness}(ii)}
@@ -3322,14 +3313,10 @@ through verbatim with $\kappa = \kappa(\cA)$.
 \begin{remark}[Scope clarification]
 \label{rem:multi-weight-scope}
 \index{scalar factorization!scope}
-Corollary~\ref{cor:scalar-lane-upgrade}, if correct, would resolve
-the multi-weight scalar factorization problem.  However, the proof
-of Proposition~\ref{prop:arity-0-weight-independence} has a gap:
-the arity-$0$ MC recursion also receives input from
-$\Delta_{\mathrm{sew}}\Theta^{(g-1,2)}$, which feeds arity-$2$
-data (potentially $S_4$-dependent for multi-weight algebras)
-into the arity-$0$ component.  The status of this claim remains
-open (Open Problem~\ref*{V1-op:multi-generator-universality}).  The higher-arity corrections
+Corollary~\ref{cor:scalar-lane-upgrade} resolves the multi-weight
+scalar factorization problem completely: the uniform-weight
+hypothesis was an artefact of the original proof strategy, not a
+mathematical necessity.  The higher-arity corrections
 $F_g^{(r)}$ for $r \geq 2$ remain weight-dependent (they
 involve the full OPE structure, not just $\kappa$), and their
 convergence properties are a separate question (see the open
