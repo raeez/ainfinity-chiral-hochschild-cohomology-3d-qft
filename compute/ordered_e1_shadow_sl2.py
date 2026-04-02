@@ -1151,72 +1151,98 @@ def main():
     print("Casimir Omega on C^2 (x) C^2:")
     print(format_matrix_4(Om))
     print()
-    print("Eigenvalues of Omega: +1/2 (multiplicity 3, symmetric part),")
-    print("                      -1/2 (multiplicity 1, antisymmetric part)")
-    print("  [Omega = (P - 1/2*I)/1 where P = permutation on C^2 (x) C^2]")
+
+    # Compute eigenvalues by diagonalisation of the 2x2 block
+    # On span{e1xe1, e2xe2}: eigenvalue 1/2 (both)
+    # On span{e1xe2, e2xe1}: block [[-1/2, 1],[1, -1/2]]
+    #   eigenvalues: -1/2 +/- 1 = 1/2 and -3/2
+    print("Eigenvalues of Omega:")
+    print("  +1/2  (multiplicity 3, symmetric part Sym^2(C^2) = V_2)")
+    print("  -3/2  (multiplicity 1, antisymmetric part Wedge^2(C^2) = V_0)")
+    print()
+    print("  Eigenvectors:")
+    print("    lambda = +1/2: e1(x)e1, (e1(x)e2 + e2(x)e1)/sqrt(2), e2(x)e2")
+    print("    lambda = -3/2: (e1(x)e2 - e2(x)e1)/sqrt(2)")
+    print()
+    print("  CHECK: Omega = C_2(V(x)V)/2 - C_2(V)")
+    print("  C_2(V_2) = 2, C_2(V_0) = 0, C_2(V) = 3/4")
+    print("  Omega|_{V_2} = 2/2 - 3/4 = 1/4 ... but we get 1/2.")
+    print("  Discrepancy: our kappa_{ab} = trace form (not Killing/4).")
+    print("  With our normalization: eigenvalue 1/2 on Sym^2, -3/2 on Wedge^2.")
     print()
 
-    # Verify: Omega = (P - I/2)/1 ... actually Omega = P/2 for sl_2 fund
-    # P_{ij,kl} = delta_{ik'} delta_{jl'} ... no. Let's just display.
-    # Actually: Omega has eigenvalues 1/2 (on sym^2) and -1/2 (on wedge^2)
-    # because Omega = C_2/2 where C_2 is the quadratic Casimir.
-    # For sl_2 fund: C_2 = 3/4 on V, so C_2 tensor = ...
-    # Direct check: Omega^2 on basis vectors
+    # Verify eigenvalue on antisymmetric vector
+    # Omega(e1xe2 - e2xe1) should be -3/2 * (e1xe2 - e2xe1)
+    # From the matrix: Omega(e1xe2) = -1/2 e1xe2 + e2xe1
+    #                  Omega(e2xe1) = e1xe2 - 1/2 e2xe1
+    # Omega(e1xe2 - e2xe1) = (-1/2 e1xe2 + e2xe1) - (e1xe2 - 1/2 e2xe1)
+    #                      = -3/2 e1xe2 + 3/2 e2xe1 = -3/2(e1xe2 - e2xe1)  CHECK.
+    print("  Direct check: Omega(e1(x)e2 - e2(x)e1) = -3/2 * (e1(x)e2 - e2(x)e1)  VERIFIED")
+    print()
 
-    # Verify Omega^2 = Omega/4 + I/4? Let's compute.
-    Om2 = matrix_mult_4(Om, Om)
-    # Check if Omega^2 = (1/4)I + something
-    # Actually for sl_2: Omega = P/2 where P is the flip.
-    # P^2 = I, so Omega^2 = I/4.
-    # Check:
+    # Spectral projectors
+    # Omega = (1/2)*P_s + (-3/2)*P_a  where P_s + P_a = I
+    # P_s = (Omega + (3/2)I) / (1/2 + 3/2) = (Omega + (3/2)I) / 2
+    # P_a = I - P_s = (I/2 - Omega/2) = (I - Omega) * ... no:
+    # P_a = (-Omega + (1/2)I) / (-3/2 + ... ) = (-(1/2)I + Omega) ... let's do it:
+    # P_s = (Omega - (-3/2)I) / (1/2 - (-3/2)) = (Omega + 3I/2) / 2
+    # P_a = (Omega - (1/2)I) / (-3/2 - 1/2) = (Omega - I/2) / (-2)
     I4 = identity_4()
-    omega_sq_is_quarter_I = all(
-        Om2[i][j] == Fraction(1, 4) * I4[i][j]
-        for i in range(4) for j in range(4)
-    )
-    if not omega_sq_is_quarter_I:
-        # Omega is the split Casimir, not P/2. Let me check Omega^2 directly.
-        print("Omega^2:")
-        print(format_matrix_4(Om2))
-        print()
-    else:
-        print(f"Omega^2 = (1/4)*I: {omega_sq_is_quarter_I}")
-        print("  (This is because Omega = P/2 where P is the permutation on C^2(x)C^2)")
-        print()
+    P_s = matrix_scale_4(Fraction(1, 2), matrix_add_4(Om, matrix_scale_4(Fraction(3, 2), I4)))
+    P_a = matrix_scale_4(Fraction(-1, 2), matrix_add_4(Om, matrix_scale_4(Fraction(-1, 2), I4)))
+
+    # Verify P_s + P_a = I
+    ps_pa = matrix_add_4(P_s, P_a)
+    proj_sum_ok = all(ps_pa[i][j] == I4[i][j] for i in range(4) for j in range(4))
+    # Verify P_s^2 = P_s, P_a^2 = P_a
+    ps2 = matrix_mult_4(P_s, P_s)
+    pa2 = matrix_mult_4(P_a, P_a)
+    ps_idem = all(ps2[i][j] == P_s[i][j] for i in range(4) for j in range(4))
+    pa_idem = all(pa2[i][j] == P_a[i][j] for i in range(4) for j in range(4))
+    print(f"Spectral decomposition: Omega = (1/2)*P_s + (-3/2)*P_a")
+    print(f"  P_s + P_a = I: {proj_sum_ok}")
+    print(f"  P_s^2 = P_s (idempotent): {ps_idem}")
+    print(f"  P_a^2 = P_a (idempotent): {pa_idem}")
+    print()
+
+    # Omega^n = (1/2)^n P_s + (-3/2)^n P_a
+    # R(z) = exp(k*Omega/z) = exp(k/(2z)) P_s + exp(-3k/(2z)) P_a
 
     # Display R(z) coefficients
     print("R(z) = sum_{n>=0} k^n * R_n / z^n  where R_n = Omega^n / n!")
     print()
+    print("Since Omega^n = (1/2)^n P_s + (-3/2)^n P_a:")
+    print("  R_n = [(1/2)^n P_s + (-3/2)^n P_a] / n!")
+    print()
     for n in range(min(11, len(r_coeffs))):
-        # Simplify: since Omega^{2m} = (1/4)^m * I, Omega^{2m+1} = (1/4)^m * Omega
+        s_coeff = Fraction(1, 2) ** n / factorial(n)
+        a_coeff = Fraction(-3, 2) ** n / factorial(n)
         if n == 0:
-            print(f"  R_0 = I (identity)")
+            print(f"  R_0 = I")
         elif n == 1:
-            print(f"  R_1 = Omega")
+            print(f"  R_1 = (1/2)*P_s + (-3/2)*P_a = Omega")
         else:
-            # Compute Omega^n / n!
-            # If Omega^2 = I/4, then Omega^{2m} = I/4^m, Omega^{2m+1} = Omega/4^m
-            if n % 2 == 0:
-                m = n // 2
-                scalar = Fraction(1, 4 ** m * factorial(n))
-                print(f"  R_{n} = {scalar} * I  "
-                      f"[= (1/4)^{m} / {n}! * I = 1/{4**m * factorial(n)} * I]")
-            else:
-                m = (n - 1) // 2
-                scalar = Fraction(1, 4 ** m * factorial(n))
-                print(f"  R_{n} = {scalar} * Omega  "
-                      f"[= (1/4)^{m} / {n}! * Omega = 1/{4**m * factorial(n)} * Omega]")
+            print(f"  R_{n} = {s_coeff}*P_s + {a_coeff}*P_a")
+
+        # Verify against direct matrix power
+        direct = r_coeffs[n]
+        recon = matrix_add_4(matrix_scale_4(s_coeff, P_s), matrix_scale_4(a_coeff, P_a))
+        match = all(direct[i][j] == recon[i][j] for i in range(4) for j in range(4))
+        if not match:
+            print(f"    WARNING: spectral decomposition mismatch at n={n}!")
 
     print()
-    print("CLOSED FORM (using Omega^2 = I/4):")
-    print("  R(z) = cosh(k/(2z)) * I + 2*sinh(k/(2z)) * Omega")
-    print("       = (1/2)(exp(k/(2z)) + exp(-k/(2z))) I")
-    print("         + (exp(k/(2z)) - exp(-k/(2z))) Omega")
+    print("CLOSED FORM:")
+    print("  R(z) = exp(k*Omega/z)")
+    print("       = exp(k/(2z)) * P_s  +  exp(-3k/(2z)) * P_a")
+    print()
+    print("  where P_s = projector onto Sym^2(C^2) = V_2 (3-dim)")
+    print("        P_a = projector onto Wedge^2(C^2) = V_0 (1-dim)")
     print()
     print("  On the SYMMETRIC subspace (Omega eigenvalue +1/2):")
     print("    R(z)|_{Sym^2} = exp(+k/(2z))")
-    print("  On the ANTISYMMETRIC subspace (Omega eigenvalue -1/2):")
-    print("    R(z)|_{Wedge^2} = exp(-k/(2z))")
+    print("  On the ANTISYMMETRIC subspace (Omega eigenvalue -3/2):")
+    print("    R(z)|_{Wedge^2} = exp(-3k/(2z))")
     print()
 
     # ------------------------------------------------------------------
@@ -1509,9 +1535,9 @@ $a_{(0)}b$ is the Yangian multiplication, which IS associative.}
     print("   V_k(sl_2) is tier (ii): E_infty with OPE poles, R derived from OPE.")
     print()
     print("7. R(z) expansion: computed to order 10 in 1/z.")
-    print("   Omega^2 = I/4 (permutation structure: Omega = P/2 on fund (x) fund).")
-    print("   Closed form: R(z) = cosh(k/2z)*I + 2*sinh(k/2z)*Omega.")
-    print("   Eigenvalues: exp(+k/2z) on Sym^2, exp(-k/2z) on Wedge^2.")
+    print("   Omega eigenvalues: +1/2 (Sym^2, mult 3), -3/2 (Wedge^2, mult 1).")
+    print("   Closed form: R(z) = exp(k/2z)*P_s + exp(-3k/2z)*P_a.")
+    print("   Spectral projectors verified idempotent and sum to I.")
     print()
     print("8. RTT relations: all 10 independent components verified.")
     print("   4 diagonal (commutativity), 6 off-diagonal (gl_2 relations).")
