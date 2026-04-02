@@ -1,0 +1,226 @@
+% Non-simply-laced collision residue r-matrices: B_2 and C_2
+% LaTeX-ready output from compute/lib/non_simply_laced_rmatrix.py
+% All results verified: 48/48 tests pass.
+
+\subsection*{Non-Simply-Laced Collision Residue: $B_2$ and $C_2$}
+
+\subsubsection*{Setup}
+
+We compute the collision residue $r$-matrix for the non-simply-laced
+affine Kac--Moody algebras $V_k(\mathfrak{so}_5) \cong V_k(B_2)$ and
+$V_k(\mathfrak{sp}_4) \cong V_k(C_2)$.
+
+\medskip
+\noindent\textbf{Root system data.}
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+Type & Cartan $A$ & Symmetriser $D$ & $\dim$ & rank & $h^\vee$ & Root lengths${}^2$ \\
+\midrule
+$B_2$ & $\begin{psmallmatrix} 2 & -1 \\ -2 & \phantom{-}2 \end{psmallmatrix}$
+  & $\operatorname{diag}(2,1)$ & 10 & 2 & 3 & long $= 2$, short $= 1$ \\[4pt]
+$C_2$ & $\begin{psmallmatrix} 2 & -2 \\ -1 & \phantom{-}2 \end{psmallmatrix}$
+  & $\operatorname{diag}(1,2)$ & 10 & 2 & 3 & short $= 1$, long $= 2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent Since $\mathfrak{so}_5 \cong \mathfrak{sp}_4$ as abstract Lie algebras,
+both types share the same structure constants and normalised Killing form
+$\kappa = \operatorname{Killing}/(2h^\vee)$.
+The distinction is purely root-systemic: Langlands duality $B_2^\vee = C_2$
+exchanges long and short roots, transposes the Cartan matrix ($A_{C_2} = A_{B_2}^T$),
+and swaps the symmetrising matrix ($D_{B_2} \leftrightarrow D_{C_2}$).
+
+\subsubsection*{Casimir Tensor}
+
+The split Casimir $\Omega = \sum_{a,b} \kappa^{ab}\, t_a \otimes t_b \in \mathfrak{g} \otimes \mathfrak{g}$
+decomposes as $\Omega = \Omega_{\mathrm{Cartan}} + \Omega_{\mathrm{root}}$.
+
+\medskip
+\noindent\textbf{Root contribution.}
+For each positive root $\alpha$:
+\[
+  \Omega_\alpha
+  = \frac{e_\alpha \otimes f_\alpha + f_\alpha \otimes e_\alpha}{\kappa(e_\alpha, f_\alpha)}.
+\]
+The key non-simply-laced feature: $\kappa(e_\alpha, f_\alpha)$ depends on the root length.
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+Root & $C_2$ type & $\kappa(e_\alpha, f_\alpha)$ & Casimir coeff $= 1/\kappa$ \\
+\midrule
+$\alpha_1$ (short, $e_1{-}e_2$) & short & $2$ & $\tfrac{1}{2}$ \\
+$\alpha_2$ (long, $2e_2$) & long & $1$ & $1$ \\
+$\alpha_1{+}\alpha_2$ (short, $e_1{+}e_2$) & short & $2$ & $\tfrac{1}{2}$ \\
+$2\alpha_1{+}\alpha_2$ (long, $2e_1$) & long & $1$ & $1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Cartan contribution.} The Cartan part is
+$\Omega_h = \sum_{i,j} (B^{-1})_{ij}\, h_i \otimes h_j$
+where $B = \kappa|_{\mathfrak{h}}$ is the restriction of the Killing form to
+the Cartan subalgebra.
+\[
+  B^{-1}_{\mathrm{Cartan}}
+  = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1 \end{pmatrix}.
+\]
+
+\noindent\textbf{Full Casimir (nonzero entries).}
+\begin{align*}
+  \Omega &= \tfrac{1}{2}\bigl(e_{\alpha_1} \otimes f_{\alpha_1}
+              + f_{\alpha_1} \otimes e_{\alpha_1}\bigr)
+          + \bigl(e_{\alpha_2} \otimes f_{\alpha_2}
+              + f_{\alpha_2} \otimes e_{\alpha_2}\bigr) \\
+  &\quad + \tfrac{1}{2}\bigl(e_{\alpha_1{+}\alpha_2} \otimes f_{\alpha_1{+}\alpha_2}
+              + f_{\alpha_1{+}\alpha_2} \otimes e_{\alpha_1{+}\alpha_2}\bigr)
+          + \bigl(e_{2\alpha_1{+}\alpha_2} \otimes f_{2\alpha_1{+}\alpha_2}
+              + f_{2\alpha_1{+}\alpha_2} \otimes e_{2\alpha_1{+}\alpha_2}\bigr) \\
+  &\quad + \tfrac{1}{2}\, h_1 \otimes h_1
+          + \tfrac{1}{2}\bigl(h_1 \otimes h_2 + h_2 \otimes h_1\bigr)
+          + h_2 \otimes h_2.
+\end{align*}
+Note the root-length-dependent coefficients: short roots contribute $1/2$,
+long roots contribute $1$.
+This is the essential non-simply-laced feature absent in type $A$.
+
+\subsubsection*{Collision Residue and $r$-Matrix}
+
+By the d-log pole absorption (AP19), the collision residue of the affine
+OPE at level $k$ is
+\[
+  r(z) = \frac{k \cdot \Omega}{z}\,.
+\]
+\begin{itemize}
+\item The OPE double pole $k\kappa_{ab}/(z{-}w)^2$ becomes
+  $k\kappa_{ab}/z$ after the d-log kernel absorbs one power.
+\item The OPE simple pole $f^{ab}{}_c\, J^c/(z{-}w)$ becomes the
+  regular part (no pole in $r(z)$).
+\item Max OPE pole order $= 2$; max $r$-matrix pole order $= 1$.
+  Shift by $1$ verified (AP19).
+\end{itemize}
+
+\subsubsection*{CYBE Verification}
+
+The classical Yang--Baxter equation for $r_{12}(z) = \Omega/z$ reduces to
+the infinitesimal braid relation:
+\[
+  [\Omega_{12} + \Omega_{13},\; \Omega_{23}] = 0.
+\]
+\textbf{Result:} IBR verified for both $B_2$ and $C_2$ with violation
+$< 10^{-15}$ (machine epsilon). Casimir centrality $[\Omega, \Delta(x)] = 0$
+also verified. Since $\Omega$ is the split Casimir of a semisimple Lie algebra,
+this is guaranteed---but the explicit numerical verification confirms the
+correctness of the structure constants and bilinear form.
+
+\subsubsection*{Representation-Theoretic $R$-Matrix}
+
+In the $4$-dimensional fundamental representation of $\mathfrak{sp}_4$
+(equivalently, the spin representation of $\mathfrak{so}_5$):
+\[
+  R_{12}(z) = \frac{k}{z} \sum_{a,b} \kappa^{ab}\,
+    \rho(t_a) \otimes \rho(t_b)
+  \;\in\; \operatorname{End}(\mathbb{C}^4 \otimes \mathbb{C}^4).
+\]
+This is a $16 \times 16$ matrix with:
+\begin{itemize}
+\item Rank $16$ (full rank),
+\item Frobenius norm $\|R_{12}\|_F = \sqrt{10}$ at $k = 1$,
+\item $\operatorname{Tr}(R_{12}) = 0$ (tracelessness from $\mathfrak{sp}_4 \subset \mathfrak{sl}_4$),
+\item Symmetry: $P \cdot R_{12} \cdot P = R_{12}$ where $P$ is the swap operator.
+\end{itemize}
+
+\subsubsection*{Langlands Duality $B_2^\vee = C_2$}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Property & $B_2$ & $C_2$ \\
+\midrule
+Cartan matrix & $A_{B_2} = \begin{psmallmatrix} 2 & -1 \\ -2 & 2 \end{psmallmatrix}$
+  & $A_{C_2} = A_{B_2}^T = \begin{psmallmatrix} 2 & -2 \\ -1 & 2 \end{psmallmatrix}$ \\[4pt]
+Symmetriser & $D_{B_2} = \operatorname{diag}(2,1)$
+  & $D_{C_2} = \operatorname{diag}(1,2)$ \\[2pt]
+Symmetrised Cartan & $B_{B_2} = \begin{psmallmatrix} 4 & -2 \\ -2 & 2 \end{psmallmatrix}$
+  & $B_{C_2} = \begin{psmallmatrix} 2 & -2 \\ -2 & 4 \end{psmallmatrix}$ \\[4pt]
+$h^\vee$ & $3$ & $3$ \\
+$\kappa(V_k, k{=}1)$ & $20/3$ & $20/3$ \\
+Dual level & $k$ & $k^\vee = 2k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{Key findings:}
+\begin{enumerate}
+\item The abstract Casimir tensor is \textbf{identical} for $B_2$ and $C_2$
+  (same Lie algebra $\mathfrak{sp}_4 \cong \mathfrak{so}_5$).
+\item The representation-theoretic $R$-matrix in the $4$-dim fundamental
+  of $\mathfrak{sp}_4$ is \textbf{identical}.
+\item The symmetrised Cartan matrices are related by
+  $B_{C_2} = P \cdot B_{B_2} \cdot P$ where $P = \bigl(\begin{smallmatrix} 0 & 1 \\ 1 & 0 \end{smallmatrix}\bigr)$:
+  Langlands duality swaps the diagonal entries (root lengths).
+\item The Langlands dual level is $k^\vee = r^2 \cdot k$ where
+  $r^2 = |\alpha_{\mathrm{long}}|^2 / |\alpha_{\mathrm{short}}|^2 = 2$.
+
+\item Feigin--Frenkel duality $k \leftrightarrow -k - 2h^\vee$ gives
+  $\kappa(k) + \kappa(-k-6) = 0$, verified.
+\end{enumerate}
+
+\subsubsection*{FM-Integral Coefficients at Degree 3}
+
+For the ordered bar complex, the degree-$3$ FM integral involves
+a beta function $B(a,b)$ with exponents depending on the root lengths
+in the triangle configuration:
+
+\begin{center}
+\begin{tabular}{ccccl}
+\toprule
+$|\alpha|^2$ & $|\beta|^2$ & $a$ & $b$ & $B(a,b)$ \\
+\midrule
+$1$ (short) & $1$ (short) & $1$ & $1$ & $B(1,1) = 1$ \\
+$1$ (short) & $2$ (long) & $1$ & $2$ & $B(1,2) = 1/2$ \\
+$2$ (long) & $1$ (short) & $2$ & $1$ & $B(2,1) = 1/2$ \\
+$2$ (long) & $2$ (long) & $2$ & $2$ & $B(2,2) = 1/6$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent For simply-laced types all entries equal $B(1,1) = 1$; the non-trivial
+values $1/2$ and $1/6$ are the non-simply-laced correction factors.
+These are symmetric in the two arguments ($B(a,b) = B(b,a)$).
+Since for affine Kac--Moody algebras $m_3 = 0$ (quadratic OPE, class L),
+these corrections enter at the representation-theoretic level (KZ monodromy
+at third order) rather than in the abstract bar differential.
+
+\subsubsection*{Summary of Numerical Results}
+
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Check & Status \\
+\midrule
+$B_2$ Jacobi identity & \checkmark \\
+$B_2$ antisymmetry & \checkmark \\
+$B_2$ Killing invariance & \checkmark \\
+$C_2$ Jacobi identity & \checkmark \\
+$C_2$ antisymmetry & \checkmark \\
+$C_2$ Killing invariance & \checkmark \\
+$\Omega_{B_2} = \Omega_{C_2}$ & \checkmark \\
+$\Omega = \kappa^{-1}$ & \checkmark \\
+$r(z) = k\Omega/z$ (AP19) & \checkmark \\
+CYBE/$\mathrm{IBR}$ ($B_2$) & \checkmark\; ($< 10^{-15}$) \\
+CYBE/$\mathrm{IBR}$ ($C_2$) & \checkmark\; ($< 10^{-15}$) \\
+Casimir adjoint eigenvalue $= 2h^\vee = 6$ & \checkmark \\
+$\kappa(k{=}1) = 20/3$ & \checkmark \\
+$\kappa(k{=}{-}3) = 0$ (critical level) & \checkmark \\
+FF duality $\kappa(k) + \kappa(-k{-}6) = 0$ & \checkmark \\
+$A_{C_2} = A_{B_2}^T$ & \checkmark \\
+$D_{C_2}$ swaps $D_{B_2}$ & \checkmark \\
+Rep $R$-matrix full rank, traceless, symmetric & \checkmark \\
+\midrule
+\textbf{Total tests passed} & \textbf{48/48} \\
+\bottomrule
+\end{tabular}
+\end{center}
