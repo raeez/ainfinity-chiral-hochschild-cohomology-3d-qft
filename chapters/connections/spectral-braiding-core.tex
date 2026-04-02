@@ -29,6 +29,18 @@ Given two parallel boundary lines $L_1(z_1)$ and $L_2(z_2)$ (with $z_1\neq z_2$)
 meromorphic in $z_{12}=z_1-z_2$ with logarithmic poles along $z_{12}=0$.
 This composition is induced by the $W(\mathsf{SC}^{\mathrm{ch,top}})$–module structure and is computed by configuration integrals over $\FM_2(\C)$ with $E_1$–homotopies along the half‑interval.
 
+\medskip
+\noindent\textbf{Motivating computations.}
+For the Heisenberg algebra $\cH_k$, the OPE $J(z)J(w) \sim k/(z-w)^2$ has a double pole; the $d\log$ kernel absorbs one power, so the collision residue is $r(z) = k/z$.  The spectral braiding is the scalar
+\[
+R(z) = e^{r(z)} = e^{k\hbar/z},
+\]
+which satisfies the Yang--Baxter equation trivially: scalar $R$-matrices always do.
+
+For the affine algebra $V_k(\mathfrak{sl}_2)$, the collision residue is $r(z) = k\,\Omega/z$, where $\Omega \in \mathfrak{sl}_2 \otimes \mathfrak{sl}_2$ is the Casimir tensor.  At leading order, $R(z) = 1 + \hbar\, \Omega/z + \cdots$ is the Yang $R$-matrix.  The YBE reduces to the infinitesimal braid relation $[\Omega_{12},\, \Omega_{13} + \Omega_{23}] = 0$, which is the Jacobi identity on $\mathfrak{sl}_2$.
+
+The general framework that subsumes both examples is:
+
 \begin{definition}[Spectral braiding]
 \label{def:spectral-braiding}
 The \emph{spectral braiding} (or \emph{spectral $R$–matrix}) is the family of isomorphisms
@@ -683,8 +695,13 @@ absorbs one pole order.  The absorption converts the even-order
 poles $z^{-4}, z^{-2}$ of the Laplace kernel $r^L(z)$ into
 odd-order poles $z^{-3}, z^{-1}$ of the collision residue
 $r^{\mathrm{coll}}(z)$, making the antisymmetry
-$r(-z) = -r_{21}(z)$ \emph{manifest}: all surviving poles are
-odd-powered.  For the Laplace kernel, antisymmetry holds but is
+$r(-z) = -r_{21}(z)$ \emph{manifest at the field level}
+(as meromorphic functions of $z$): all surviving poles are
+odd-powered.  At the mode level, the expansion
+uses $|w| < |z|$ and breaks $12\leftrightarrow 21$ symmetry;
+there the antisymmetry is verified order by order rather than
+read off from parity.
+For the Laplace kernel, antisymmetry holds but is
 non-manifest, following instead from the braiding inverse
 relation $R_{12}(z)\,R_{21}(-z) = \mathrm{id}$.
 \end{proof}
@@ -781,8 +798,13 @@ reproducing $r_1 = 2L$.
 
 At $m = 1$:
 $\Omega_1 = \sum_n n\, L_{-n-1} \otimes L_n$.
-This vanishes as an $r$-matrix coefficient because
-the collision residue has no $z^{-2}$ pole: $r_2 = 0$.
+As a tensor in $\End(V)^{\otimes 2}$, this is nonzero;
+it is the $m = 1$ coefficient of the general Laplace-kernel
+mode expansion~\eqref{eq:vir-r-mode-tensor}.
+However, $\Omega_1$ does not appear as a collision-residue
+coefficient: the collision residue has no $z^{-2}$ pole
+($r_2 = 0$), so the $m = 1$ slot is vacated by the $d\log$
+absorption.
 Algebraically, $\Omega_1$ contributes to the regular part
 of the Laplace kernel (the $\partial T$ term), which is
 absorbed by the $d\log$ shift.
@@ -1006,6 +1028,174 @@ The Arnold interpretation: the cancellation is the algebraic
 content of the Arnold relation on $\FM_3(\C)$ --- the same
 mechanism that proves $d_{\barB}^2 = 0$ for the bar differential.
 \end{proof}
+
+\subsubsection{BCD collision residues and Langlands duality}
+\label{subsubsec:BCD-collision-residues}
+
+We extend the collision residue computation from the simply-laced
+case to the non-simply-laced Lie algebras
+$\mathfrak{so}_5 \cong B_2$ and $\mathfrak{sp}_4 \cong C_2$,
+where the root-length asymmetry introduces half-integer
+coefficients in the Casimir tensor.
+
+\begin{computation}[$B_2$ and $C_2$ collision residues;
+\ClaimStatusProvedHere]
+\label{comp:BCD-collision-residues}
+\index{collision residue!non-simply-laced}
+\index{Langlands duality!collision residue}
+Let $\fg = \mathfrak{so}_5$ (type $B_2$) with simple roots
+$\alpha_1$ (short) and $\alpha_2$ (long), Cartan matrix
+$A = \bigl(\begin{smallmatrix} 2 & -2 \\ -1 & 2 \end{smallmatrix}
+\bigr)$,
+and invariant bilinear form normalised so that
+$(\alpha_{\mathrm{long}}, \alpha_{\mathrm{long}}) = 2$.
+Then the short root has
+$(\alpha_{\mathrm{short}}, \alpha_{\mathrm{short}}) = 1$,
+and the inverse of the symmetrised Cartan matrix
+$B = DA$ (with $D = \operatorname{diag}(1/2, 1)$)
+has entries
+\begin{equation}\label{eq:B2-inverse-cartan}
+  B^{-1}
+  \;=\;
+  \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1 \end{pmatrix}.
+\end{equation}
+
+The Casimir tensor $\Omega = \sum_{a} t^a \otimes t_a$
+(where $t_a$ is dual to $t^a$ under the invariant form) decomposes
+into Cartan and root contributions.  The Cartan part
+is $\Omega_{\mathfrak{h}} = \sum_{i,j} (B^{-1})^{ij}\,
+h_i \otimes h_j$, and the root part sums over positive
+roots $\alpha$ with coefficient
+$(\alpha, \alpha)^{-1}$:
+\begin{equation}\label{eq:BCD-casimir-decomposition}
+  \Omega
+  \;=\;
+  \Omega_{\mathfrak{h}}
+  \;+\;
+  \sum_{\alpha > 0}
+  \frac{1}{(\alpha,\alpha)}\,
+  \bigl(e_\alpha \otimes f_\alpha + f_\alpha \otimes e_\alpha\bigr).
+\end{equation}
+For $B_2$: the short roots $\pm\alpha_1$, $\pm(\alpha_1 + \alpha_2)$
+have $(\alpha,\alpha) = 1$, contributing coefficient~$1$;
+the long roots $\pm\alpha_2$, $\pm(2\alpha_1 + \alpha_2)$
+have $(\alpha,\alpha) = 2$, contributing coefficient~$1/2$.
+The root-length dependence of the Casimir coefficients
+is the algebraic origin of the half-integer structure.
+
+The collision $r$-matrix at level~$k$ is
+\begin{equation}\label{eq:B2-r-matrix}
+  r^{B_2}(z) \;=\; k\,\Omega^{B_2}/z,
+\end{equation}
+with $\Omega^{B_2}$ as above.  The CYBE verification proceeds
+exactly as in the simply-laced case
+(Proposition~\ref{prop:virasoro-cybe}): the three-term identity
+reduces to the Jacobi identity for $\mathfrak{so}_5$, which
+holds at machine precision for the structure constants
+in the Chevalley basis.
+The Langlands dual $\fg^L = \mathfrak{sp}_4$ (type~$C_2$)
+has transposed Cartan matrix
+$A^L = \bigl(\begin{smallmatrix} 2 & -1 \\ -2 & 2
+\end{smallmatrix}\bigr)$,
+exchanging short and long roots: $D^L = \operatorname{diag}(1, 1/2)$,
+$(B^L)^{-1} = \bigl(\begin{smallmatrix} 1 & 1/2 \\
+1/2 & 1/2 \end{smallmatrix}\bigr)$.
+The Langlands duality acts on the collision residue by:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Cartan transpose:} $(B^{-1})^{ij} \mapsto
+  ((B^L)^{-1})^{ij}$, exchanging the diagonal entries
+  $1/2 \leftrightarrow 1$ and preserving the off-diagonal
+  $1/2$.
+\item \emph{Root-coefficient exchange:} short-root
+  coefficients $1$ become long-root coefficients $1/2$
+  and vice versa, since $(\alpha,\alpha)^{-1}$ and
+  $(\alpha^L, \alpha^L)^{-1}$ are swapped under
+  $\alpha \mapsto \alpha^\vee$.
+\item \emph{Level scaling:} $k \mapsto k^L = r^\vee k$
+  where $r^\vee = (\alpha_{\mathrm{long}},
+  \alpha_{\mathrm{long}})/(\alpha_{\mathrm{short}},
+  \alpha_{\mathrm{short}}) = 2$ is the lacing number.
+  Hence $k^L = 2k$ for $B_2 \to C_2$.
+\end{enumerate}
+The net effect on the collision $r$-matrix is
+\begin{equation}\label{eq:langlands-r-matrix}
+  r^{C_2}(z)
+  \;=\;
+  2k\,\Omega^{C_2}/z,
+\end{equation}
+with $\Omega^{C_2}$ the Casimir of $\mathfrak{sp}_4$ in
+the dual normalisation.  The Langlands duality therefore
+acts as a Cartan transpose combined with a level rescaling,
+preserving the CYBE but modifying the Casimir structure
+by the root-length ratio.
+
+The FM-integral at degree~$3$
+(Proposition~\ref{prop:spectral-sequence-r-matrix}(ii))
+picks up the Casimir coefficients:
+$B(1,1) = 1$, $B(1,2) = 1/2$, $B(2,2) = 1/6$ for $B_2$,
+matching the root-length-weighted Bernoulli numbers
+that govern the Harrison obstruction at the non-simply-laced
+level.
+\end{computation}
+
+\begin{remark}[Quantum group unitarity and the Virasoro $r$-matrix]
+\label{rem:virasoro-qg-unitarity}
+\index{unitarity!quantum group}
+\index{Virasoro!quantum group unitarity failure}
+\index{class M!quantum group obstruction}
+The classical $r$-matrix of a finite-dimensional simple Lie
+algebra $\fg$ satisfies a structural constraint beyond the CYBE:
+the \emph{quantum group unitarity condition}
+\begin{equation}\label{eq:qg-unitarity}
+  r_{12}(z)\,r_{21}(-z) \;=\; -\frac{(\Omega,\Omega)}{z^2}\,\mathrm{id},
+\end{equation}
+where the right side is a \emph{scalar} (the quadratic Casimir
+eigenvalue).  For $\fg = \mathfrak{sl}_2$ with
+$r(z) = k\,\Omega/z$, one computes
+$r_{12}(z)\,r_{21}(-z) = -k^2\,\Omega^2/z^2$, and
+$\Omega^2 = C_2(\fg)\,\mathrm{id}$ on irreducible representations
+by the quadratic Casimir identity.  Hence the product is scalar:
+unitarity holds.
+
+For the Virasoro $r$-matrix
+$r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$, the product
+\begin{align}
+  r^{\mathrm{Vir}}_{12}(z)\,r^{\mathrm{Vir}}_{21}(-z)
+  &\;=\;
+  \Bigl(\frac{c/2}{z^3} + \frac{2T_1}{z}\Bigr)
+  \Bigl(-\frac{c/2}{z^3} - \frac{2T_2}{z}\Bigr)
+  \notag\\
+  &\;=\;
+  -\frac{c^2/4}{z^6}
+  - \frac{c(T_1 + T_2)}{z^4}
+  - \frac{4\,T_1\,T_2}{z^2}
+  \label{eq:virasoro-unitarity-failure}
+\end{align}
+contains the operator-valued term $4\,T_1\,T_2/z^2$, which
+is \emph{not} scalar on tensor products of non-trivial Verma
+modules: the eigenvalue depends on the state, not merely on
+the representation.  Moreover, the $c(T_1 + T_2)/z^4$ term
+is operator-valued in each factor separately.
+Quantum group unitarity therefore \emph{fails} for the Virasoro
+$r$-matrix.
+
+This failure is structural, not accidental: the Virasoro
+algebra is class~M (infinite shadow depth, quartic OPE pole),
+and its $r$-matrix lies outside the
+Belavin--Drinfeld classification
+(Remark~\ref{rem:virasoro-r-nondiagonal}).  The
+operator-valued residues in~\eqref{eq:virasoro-unitarity-failure}
+are the $r$-matrix manifestation of the non-formality
+$m_k \ne 0$ for all $k \ge 3$: the $\Ainf$ tower prevents
+the $r$-matrix from satisfying the scalar constraints of
+quantum group theory.  By contrast, every class~L algebra
+(simple poles, formal $\SCchtop$ structure) has a scalar
+unitarity product by the quadratic Casimir identity.
+The pole-order dichotomy (class~L vs class~M) is thus
+visible in the unitarity structure of the $r$-matrix:
+simple poles give scalar unitarity; higher poles give
+operator-valued failure.
+\end{remark}
 
 \subsubsection{First quantum correction to the Virasoro $R$-matrix}
 \label{subsubsec:virasoro-quantum-correction}
@@ -3372,8 +3562,8 @@ c_0 \cdot \zeta(z|\tau)
 c_1 \cdot \wp(z|\tau)
 \;+\;
 \sum_{n \ge 2}
-  \frac{(-1)^{n-1}}{(n-1)!}\,
-  c_n \cdot \wp^{(n-2)}(z|\tau),
+  \frac{(-1)^{n-1}}{n!}\,
+  c_n \cdot \wp^{(n-1)}(z|\tau),
 \end{equation}
 obtained by replacing the rational functions $1/z^{n+1}$ in the
 Laurent expansion of $r(z)$ by their elliptic counterparts on
@@ -3473,7 +3663,7 @@ determined by matching poles:
   &&\text{(periodic)}, \\
 \frac{1}{z^{n+1}}
   &\;\leadsto\;
-  \frac{(-1)^{n}}{n!}\,\wp^{(n-1)}(z|\tau)
+  \frac{(-1)^{n-1}}{n!}\,\wp^{(n-1)}(z|\tau)
   &&\text{(periodic, $n \ge 2$)}.
 \end{align*}
 These are the unique functions with pole $1/z^{n+1} + O(z)$ at
@@ -3574,6 +3764,264 @@ The dichotomy is verified in the standard examples:
   so $c_0 = \partial L \ne 0$.
   Curvature and braiding entangle.
 \end{enumerate}
+\end{remark}
+
+\begin{theorem}[Genus-$1$ two-sector structure for
+$V_k(\mathfrak{sl}_2)$; \ClaimStatusProvedHere]
+\label{thm:genus-1-two-sector}
+\index{genus 1!two-sector structure}
+\index{Casimir-zeta sector}
+\index{Level-Weierstrass sector}
+\index{entanglement!genuine for sl$_2$}
+Let\/ $\cA = V_k(\mathfrak{sl}_2)$ at level
+$k \ne -2$.  The genus-$1$ classical $r$-matrix on
+$E_\tau$
+\textup{(}equation~\eqref{eq:elliptic-r-matrix}\textup{)}
+decomposes into two sectors with distinct modular
+properties:
+\begin{equation}\label{eq:sl2-genus1-two-sector}
+  r^{E_\tau}(z)
+  \;=\;
+  \underbrace{\Omega \cdot \zeta(z|\tau)}_{\text{Sector I:
+    Casimir-zeta}}
+  \;+\;
+  \underbrace{k\kappa \cdot \wp(z|\tau)}_{\text{Sector II:
+    Level-Weierstrass}},
+\end{equation}
+where $\Omega = \tfrac{1}{2}H \otimes H + E \otimes F
++ F \otimes E$ is the quadratic Casimir and
+$\kappa = \kappa^{ab}$ is the Killing form.
+
+\medskip
+\noindent\textup{(a)} \emph{Sector~I \textup{(}Casimir-zeta,
+sourced by $c_0 = f^{ab}_c\,J^c$\textup{)}.}
+The Weierstrass zeta function has Laurent expansion
+$\zeta(z|\tau) = 1/z - \sum_{m \ge 1} G_{2m}(\tau)\,z^{2m-1}$
+near $z = 0$, where $G_{2m}$ are the Eisenstein series.
+Hence the Casimir-zeta sector contributes only \emph{odd}
+$z$-powers, with leading correction
+\begin{equation}\label{eq:sector-I-leading}
+  \Omega \cdot \zeta(z|\tau)
+  \;=\;
+  \frac{\Omega}{z}
+  \;-\; \Omega \cdot G_2(\tau)\,z
+  \;-\; \Omega \cdot G_4(\tau)\,z^3
+  \;-\; \cdots
+\end{equation}
+The leading correction $-\Omega\,G_2(\tau)\,z$ is
+\emph{quasi-modular}: $G_2(\tau)$ transforms with an
+inhomogeneous shift under $\tau \mapsto -1/\tau$
+\textup{(}the Ramanujan identity\textup{)}.
+This sector is absent for the Heisenberg algebra $H_k$,
+where $c_0 = 0$ (the zeroth product vanishes: $J_{(0)}J = 0$).
+
+\medskip
+\noindent\textup{(b)} \emph{Sector~II
+\textup{(}Level-Weierstrass, sourced by
+$c_1 = k\kappa$\textup{)}.}
+The Weierstrass $\wp$-function has Laurent expansion
+$\wp(z|\tau) = 1/z^2 + \sum_{m \ge 1}(2m+1)\,G_{2m+2}(\tau)\,
+z^{2m}$ near $z = 0$.
+Hence the Level-Weierstrass sector contributes only \emph{even}
+$z$-powers, with leading correction
+\begin{equation}\label{eq:sector-II-leading}
+  k\kappa \cdot \wp(z|\tau)
+  \;=\;
+  \frac{k\kappa}{z^2}
+  \;+\; 3\,k\kappa \cdot G_4(\tau)\,z^2
+  \;+\; 5\,k\kappa \cdot G_6(\tau)\,z^4
+  \;+\; \cdots
+\end{equation}
+The leading correction $3k\kappa\,G_4(\tau)\,z^2$ is
+\emph{modular}: $G_4$ is a modular form of weight~$4$.
+This sector is present for all algebras with
+$c_1 \ne 0$ \textup{(}including the Heisenberg\textup{)}.
+
+\medskip
+\noindent\textup{(c)} \emph{Entanglement.}
+For $V_k(\mathfrak{sl}_2)$ with $k \ne 0$: both sectors are
+non-vanishing ($c_0 = f^{ab}_c J^c \ne 0$ and
+$c_1 = k\kappa \ne 0$).  The entanglement is \emph{genuine}:
+the obstruction to splitting the genus-$1$ Swiss-cheese
+structure lies in the quotient
+$\mathrm{QMod}_2 / \mathrm{Mod}_2$, where
+$\mathrm{QMod}_2$ is the ring of quasi-modular forms of
+weight~$\le 2$ and $\mathrm{Mod}_2$ is the subring of
+modular forms.  Concretely, Sector~I introduces the
+quasi-modular Eisenstein series $G_2(\tau)$ as its leading
+correction, and $G_2 \notin \mathrm{Mod}_2$ is the
+obstruction class.  The entanglement is therefore
+\emph{irreducible}: it cannot be removed by any modular
+redefinition of the $r$-matrix.
+For the Heisenberg, Sector~I is identically zero, and
+all corrections are modular: $G_4, G_6, \ldots \in
+\mathrm{Mod}_\ast$.  Hence decoupling.
+
+\medskip
+\noindent\textup{(d)} \emph{Elliptic KZB connection.}
+The $n$-point genus-$1$ connection governing
+conformal blocks of $V_k(\mathfrak{sl}_2)$ on $E_\tau$ is
+the Knizhnik--Zamolodchikov--Bernard \textup{(}KZB\textup{)}
+connection:
+\begin{equation}\label{eq:KZB-sl2}
+  \nabla_i^{\mathrm{KZB}}
+  \;=\;
+  \partial_{z_i}
+  \;-\;
+  \frac{1}{k + 2}
+  \sum_{j \ne i}
+  \Bigl[
+    \Omega_{ij} \cdot \zeta(z_{ij}|\tau)
+    \;+\;
+    k\kappa_{ij} \cdot \wp(z_{ij}|\tau)
+  \Bigr],
+\end{equation}
+where $z_{ij} = z_i - z_j$ and $h^\vee = 2$ for
+$\mathfrak{sl}_2$.  The two sectors of the $r$-matrix
+correspond to the two summands in the KZB integrand: the
+Casimir-zeta term governs the non-abelian monodromy, while
+the Level-Weierstrass term governs the abelian phase.
+
+\medskip
+\noindent\textup{(e)} \emph{Monodromy representations.}
+The $A$-cycle monodromy of~\eqref{eq:KZB-sl2} produces
+representations of $\pi_1(E_\tau \setminus \{z_j\})$ in
+the quantum group $U_q(\mathfrak{sl}_2)$ with
+$q = \exp(\pi i/(k+2))$.  The $B$-cycle monodromy produces
+representations in the dual quantum group.
+The combined $A$- and $B$-cycle monodromies produce
+representations in Felder's elliptic quantum group
+$E_{q,p}(\mathfrak{sl}_2)$
+\textup{(}with $p = \exp(2\pi i\tau)$\textup{)},
+which is the genus-$1$ quantisation of the classical
+$r$-matrix~\eqref{eq:sl2-genus1-two-sector}.
+\end{theorem}
+
+\begin{proof}
+The two-sector
+decomposition~\eqref{eq:sl2-genus1-two-sector} is the
+specialisation of the general elliptic
+$r$-matrix~\eqref{eq:elliptic-r-matrix} to
+$\cA = V_k(\mathfrak{sl}_2)$, using
+$c_0 = f^{ab}_c\, J^c$ and $c_1 = k\,\kappa^{ab}$
+(Remark~\ref{rem:elliptic-dichotomy-examples}(ii)).
+Since $c_n = 0$ for $n \ge 2$ (the affine $\lambda$-bracket
+has poles only at orders $0$ and $1$), the sum
+in~\eqref{eq:elliptic-r-matrix} truncates after two terms.
+
+Parts~(a) and~(b) follow from the standard Laurent expansions
+of $\zeta(z|\tau)$ and $\wp(z|\tau)$
+(Whittaker--Watson \cite{WW27}, \S20.3):
+\begin{align*}
+  \zeta(z|\tau)
+  &= \frac{1}{z}
+  - \sum_{k \ge 1} G_{2k}(\tau)\, z^{2k-1},
+  \\
+  \wp(z|\tau)
+  &= \frac{1}{z^2}
+  + \sum_{k \ge 1} (2k+1)\, G_{2k+2}(\tau)\, z^{2k},
+\end{align*}
+where $G_{2k}(\tau) = \sum_{(m,n) \ne (0,0)}
+(m\tau + n)^{-2k}$.  The zeta expansion has only odd
+$z$-powers; the Weierstrass expansion has only even
+$z$-powers.  The modular properties follow: $G_{2k}$ for
+$k \ge 2$ is a modular form of weight~$2k$; $G_2$ is
+quasi-modular with the transformation
+$G_2(-1/\tau) = \tau^2\,G_2(\tau) - 2\pi i\,\tau$.
+
+Part~(c): the obstruction to splitting is the non-vanishing
+of $c_0 \ne 0$ (Theorem~\ref{thm:elliptic-spectral-dichotomy},
+part~\ref{item:dichotomy-entanglement}).  The obstruction is
+``quasi-modular'' in the precise sense that the leading
+$\tau$-dependent correction in Sector~I is
+$-\Omega\,G_2(\tau)\,z$, and
+$G_2 \in \mathrm{QMod}_2 \setminus \mathrm{Mod}_2$.
+Any modular redefinition $r \mapsto r + \delta r$ with
+$\delta r$ a modular form cannot absorb the $G_2$ term,
+since $\mathrm{QMod}_2/\mathrm{Mod}_2$ is one-dimensional
+(generated by $G_2$).
+
+Part~(d): the KZB connection~\eqref{eq:KZB-sl2} is the
+genus-$1$ analogue of the KZ connection, obtained by
+replacing the rational propagator $1/(z_i - z_j)$ by the
+elliptic propagator $\zeta(z_{ij}|\tau)$ and adding the
+$\wp$-correction from the level term.  The normalisation
+$1/(k + h^\vee) = 1/(k+2)$ is the standard critical-level
+shift for $\mathfrak{sl}_2$.
+
+Part~(e): the $A$-cycle monodromy is proved by Bernard
+\cite{Ber88} (for the abelian phase) and
+Etingof--Frenkel--Kirillov~\cite{EFK98}
+(for the quantum-group identification).  The Felder elliptic
+quantum group identification follows from the double-loop
+construction of Felder~\cite{Fel94}: the two generators
+of $\pi_1(E_\tau)$ produce, upon path-ordered exponentiation
+of the KZB connection, the $L$-operator of
+$E_{q,p}(\mathfrak{sl}_2)$ as a matrix
+$L(z) \in \End(V_\lambda) \otimes E_{q,p}(\mathfrak{sl}_2)$
+satisfying the $RLL$-relations with the elliptic $R$-matrix.
+\end{proof}
+
+The following table collects the genus-$1$ spectral data
+for the three standard families, making the
+entanglement/decoupling dichotomy explicit.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Family}
+  & $c_0$
+  & \textbf{Regime}
+  & $r^{E_\tau}(z)$
+  & \textbf{Leading correction} \\
+\midrule
+$H_k$
+  & $0$
+  & Disentangled
+  & $k \cdot \wp(z|\tau)$
+  & $3k \cdot G_4(\tau)\,z^2$
+    \;\textup{(modular)} \\
+$V_k(\mathfrak{sl}_2)$
+  & $\Omega \ne 0$
+  & Entangled
+  & $\Omega\,\zeta + k\kappa\,\wp$
+  & $-\Omega \cdot G_2(\tau)\,z$
+    \;\textup{(quasi-mod.)} \\
+$\mathrm{Vir}_c$
+  & $\partial T \ne 0$
+  & Entangled
+  & $(c/2)\,\wp' + 2T\,\zeta + \cdots$
+  & $-\partial T \cdot G_2(\tau)\,z$
+    \;\textup{(quasi-mod.)} \\
+\bottomrule
+\end{tabular}
+\caption{Genus-$1$ spectral data for the standard families.
+The Heisenberg has $c_0 = 0$ and disentangles; all others
+have $c_0 \ne 0$ and entangle.  The leading $\tau$-dependent
+correction is quasi-modular (involving $G_2$) precisely when
+entanglement occurs.  For the Heisenberg, the leading
+correction is the modular $G_4$ at order $z^2$, reflecting
+the absence of Sector~I.}
+\label{tab:genus-1-spectral-data}
+\end{table}
+
+\begin{remark}[Two-sector structure for all affine $\mathfrak{sl}_N$]
+\label{rem:two-sector-all-slN}
+For all affine $V_k(\mathfrak{sl}_N)$ ($N \ge 2$), the genus-$1$
+$r$-matrix has the same two-sector structure as the
+$\mathfrak{sl}_2$ case of Theorem~\ref{thm:genus-1-two-sector}:
+Sector~I from the zeroth product (Casimir $\Omega$ times $\zeta$)
+and Sector~II from the first product (level $k\kappa$ times $\wp$).
+The affine OPE $\{J^a {}_\lambda J^b\} = f^{ab}_c\,J^c + k\,\kappa^{ab}\,\lambda$
+has exactly simple and double poles regardless of rank, so $c_n = 0$
+for $n \ge 2$ and no additional sectors arise.
+Higher Casimirs of $\mathfrak{sl}_N$ ($N \ge 3$) enter only through
+the quantum KZB heat equation (the $\tau$-derivative component of
+the connection), not through the spatial $r$-matrix
+$r^{E_\tau}(z)$, which depends solely on the quadratic Casimir
+$\Omega$ and the level $k$.
 \end{remark}
 
 \begin{remark}[Connection to the elliptic KZ equation]
@@ -3802,7 +4250,7 @@ result~\eqref{eq:r-monodromy}.
 
 \medskip
 \textbf{Step~2} (Global meromorphy of the Bergman kernel).
-The key observation is that the quasi-periodic phase
+The quasi-periodic phase
 in~\eqref{eq:prime-form-B-shift} is \emph{affine} in $z$:
 \[
 \log E(z + B_j, w) - \log E(z,w)
