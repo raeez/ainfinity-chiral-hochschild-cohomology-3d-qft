@@ -13912,3 +13912,33 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Location: worktree `agent-a025979b`, dangling cross-reference
    Issue: The worktree uses `\eqref{eq:kontsevich-trefoil}` to reference an equation defined only within the worktree content. The extract replaces this with a textual reference.
    Status: `FIXED`
+
+## 2026-04-02 — Genus-2 Ordered Bar Complex Computation
+
+629. `2026-04-02-629`
+   Severity: `FRONTIER`
+   Class: `M` (mathematical, new computation)
+   Location: `compute/lib/genus2_ordered_bar.py` (new file, 16 functions)
+   Issue: Computed the genus-2 ordered bar complex, extending the genus-1 intersection framework. Principal results:
+   
+   **r-matrix on Sigma_2:** For a chiral algebra A with lambda-bracket coefficients c_n, the genus-2 r-matrix is r^{Sigma_2}(z,w) = c_0*f(z,w) + c_1*B(z,w) + higher, where f = d_z log E(z,w) (prime form derivative) and B = d_z d_w log E(z,w) (Bergman kernel). This follows from Cor. cor:genus-g-curvature-braiding in spectral-braiding-core.tex.
+   
+   **Three degeneration limits (V_k(sl_2)):**
+   - Both B-cycles pinched: Sigma_2 -> P^1, quantum symmetry Y_hbar(sl_2) (Yangian)
+   - One B-cycle pinched: Sigma_2 -> E_tau + node, quantum symmetry U_q(sl_2) tensor Y_hbar(sl_2)
+   - Separating: Sigma_2 -> E_{tau_1} cup E_{tau_2}, quantum symmetry U_{q_1}(sl_2) tensor U_{q_2}(sl_2)
+   
+   **AGS identification:** The genus-2 ordered bar for V_k(sl_2) produces the Alekseev-Grosse-Schomerus moduli algebra L_2(sl_2). Quantum parameters form a 2x2 matrix q_{ab} = exp(2*pi*i*hbar*Omega_{ab}) indexed by the Siegel period matrix.
+   
+   **Formal group at genus 2:** The Jacobian J(Sigma_2) is a 2-dim abelian variety. At supersingular primes: ht(J[p^infty]) = 2*dim(J) = 4. AP-RED verified: each handle raises p-div height by 2 (not 1). Newton polygon: ordinary (ht=2), almost ordinary (ht=3), supersingular (ht=4).
+   
+   **Entanglement at genus 2:** Two independent B-cycle monodromies delta_{B_j} r = -2*pi*i*c_0*omega_j(z), j=1,2. The Arnold defect becomes a 2x2 MATRIX (not a scalar as at genus 1). The Heisenberg (c_0=0) remains decoupled; V_k(sl_2) (c_0 = Omega != 0) has 2-dimensional entanglement.
+   
+   **Siegel modular forms:** The genus-2 derived intersection number for H_k is k*sum (2n+1)*G_{2n+2}^{(2)}(Omega)*(z-w)^{2n}, with Siegel Eisenstein series replacing elliptic ones. Leading term: 3k*G_4^{(2)}(Omega)*(z-w)^2 (weight 4, Sp_4(Z)-modular).
+   
+   **Fay trisecant:** The CYBE at genus 2 is proved via the Fay trisecant identity, generalizing partial fractions (genus 0) and the Weierstrass addition theorem (genus 1).
+   
+   **Genus-2 bar differential:** d_B^{(2)} lives on FM_k^{ord}(Sigma_2) x Conf_k(R). Curvature: (d_B^{(2)})^2 = kappa*omega_2 where omega_2 is the genus-2 Hodge class. Period: F_2 = kappa*7/5760.
+   
+   All 16 functions verified. Cross-checked against genus2_obstruction_engine.py (F_2 values match), genus1_intersection.py (degeneration limits recover genus-1 answers), and AP-RED anti-pattern (height increments = 2).
+   Status: `COMPUTED`
