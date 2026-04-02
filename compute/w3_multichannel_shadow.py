@@ -54,7 +54,7 @@ from sympy import (
 )
 
 
-c = Symbol('c')
+c = Symbol('c', positive=True)
 t = Symbol('t')
 u = Symbol('u')  # u = t² for the WW channel
 
