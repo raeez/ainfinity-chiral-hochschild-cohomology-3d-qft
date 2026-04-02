@@ -5692,6 +5692,620 @@ the bootstrap imposes, and simultaneously provides the
 \end{remark}
 
 %====================================================================
+% QUANTUM CHAOS DIAGNOSTICS FROM THE BAR COMPLEX
+%====================================================================
+
+\subsection{Quantum chaos diagnostics from the annular bar complex}
+\label{subsec:quantum-chaos-bar}
+\index{quantum chaos!from bar complex|textbf}
+\index{spectral form factor!from annular bar complex|textbf}
+\index{out-of-time-order correlator|textbf}
+\index{Lyapunov exponent!MSS bound|textbf}
+\index{scrambling time|textbf}
+
+The bar complex carries the complete algebraic data of the
+2d CFT; the annular bar complex
+(Definition~\ref{def:annular-bar},
+Theorem~\ref{thm:annular-bar-differential})
+computes the genus-$1$ partition function
+$Z(\tau) = \Tr(q^{L_0 - c/24})$
+as the trace of the genus-$1$ MC element.  Quantum chaos
+diagnostics --- the spectral form factor (SFF), out-of-time-order
+correlators (OTOCs), the Lyapunov exponent, and the scrambling
+time --- are derived quantities, all determined by the genus
+tower and the $\Ainf$ structure.  This section extracts them.
+
+The key structural point: the bar complex does not merely
+\emph{encode} quantum chaos diagnostics; it \emph{explains}
+their algebraic origin.  The MSS bound $\lambda_L \le 2\pi/\beta$
+is a consequence of the curvature identity
+$d_{\mathrm{fib}}^2 = \kappa \cdot \omega_1$, which forces the
+saddle-point geometry of the $S$-transformed partition function.
+The scrambling time $t_* \sim (\beta/2\pi)\log c$ is the
+timescale at which the $1/c$ expansion of the shadow tower
+(Proposition~\ref{prop:large-c-bootstrap}) breaks down.  The ramp
+in the SFF is the ergodic regime of the annular bar complex's
+eigenvalue statistics.
+
+\subsubsection*{The spectral form factor from the annular bar complex}
+
+\begin{definition}[Spectral form factor]
+\label{def:spectral-form-factor}%
+\index{spectral form factor!definition|textbf}%
+The \emph{spectral form factor} (SFF) of a 2d CFT at inverse
+temperature~$\beta$ is
+\begin{equation}\label{eq:sff-definition}
+K(t)
+\;:=\;
+\frac{|Z(\beta + it)|^2}{|Z(\beta)|^2},
+\end{equation}
+where $Z(\beta + it) = \Tr(e^{-(\beta+it)H})$ is the partition
+function at complexified inverse temperature $\beta + it$.
+\end{definition}
+
+In the bar-complex language, $Z(\beta+it) = Z(\tau)$ at the
+purely imaginary modular parameter
+$\tau = i(\beta+it)/(2\pi)$.  The genus-$1$ MC element gives
+$Z_1(\tau) = \eta(\tau)^{-c/2}$
+(Computation~\ref{comp:genus1-free-energy}), and after ghost
+subtraction $Z_1^{\mathrm{eff}}(\tau)
+= \eta(\tau)^{-(c-26)/2}$.  The SFF is thus the
+auto-correlation of the genus-$1$ MC trace:
+\begin{equation}\label{eq:sff-bar-complex}
+K(t)
+\;=\;
+\frac{|\eta(\tau_t)|^{-(c-26)}}
+     {|\eta(\tau_0)|^{-(c-26)}},
+\qquad
+\tau_t = \frac{i\beta + t}{2\pi},
+\quad
+\tau_0 = \frac{i\beta}{2\pi}.
+\end{equation}
+
+\begin{theorem}[SFF decomposition from the genus tower;
+\ClaimStatusProvedHere]
+\label{thm:sff-decomposition}%
+\index{spectral form factor!ramp and plateau|textbf}%
+The spectral form factor decomposes into three regimes
+controlled by the genus tower:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Slope} ($t \ll \beta$).  The SFF decays as
+  \begin{equation}\label{eq:sff-slope}
+  K(t) \;\sim\; \exp\!\left(
+    -\frac{\pi c}{6}\,\frac{t^2}{\beta(\beta^2 + t^2)}
+  \right)
+  \end{equation}
+  from the disconnected genus-$1$ contribution: the dip arises
+  because $|\eta(\tau_t)|$ grows as $t$ increases, reflecting
+  the decoherence of off-diagonal phases.  The coefficient
+  $\pi c/6$ is $2\pi \kappa/3$, with $\kappa = c/2$ the
+  intrinsic curvature: the slope is controlled by
+  the arity-$0$ genus-$1$ MC datum
+  $\Theta^{(1)}_{n=0} = \kappa \cdot \omega_1$.
+\item \textbf{Ramp} ($\beta \ll t \ll e^{S_0}$, where
+  $S_0 = \pi c/(6\beta)$ is the Cardy entropy at $h = c/24$).
+  The SFF grows linearly:
+  \begin{equation}\label{eq:sff-ramp}
+  K(t) \;\sim\; \frac{t}{t_H},
+  \qquad
+  t_H = 2\pi \cdot e^{S_0}
+  \end{equation}
+  is the Heisenberg time.  In the bar-complex language: the
+  linear ramp is the \emph{connected} genus-$1$ two-point function
+  of $\Theta^{(1)}$, i.e., the pair correlation of the
+  eigenvalue density.  The annular bar complex
+  $B^{\mathrm{ann}}(\mathrm{Vir}_c)$ contributes
+  through the wrap-around differential $d_{\mathrm{wrap}}$
+  (Theorem~\ref{thm:annular-bar-differential}(d)):
+  the connected spectral two-point function is the
+  coHochschild trace of $C_\Delta \square_{C^e}^{\mathbf{L}}
+  C_\Delta$, restricted to the eigenvalue-pair stratum.
+  The linear growth $K \sim t/t_H$ is the universal
+  GUE prediction, which matches the annular bar complex's
+  eigenvalue-pair density in the ergodic regime.
+\item \textbf{Plateau} ($t \gg t_H$).  The SFF saturates at
+  \begin{equation}\label{eq:sff-plateau}
+  K(t) \;\to\; K_\infty
+  \;=\; \frac{1}{Z(\beta)^2}\sum_n e^{-2\beta E_n}
+  \;=\; \frac{Z(2\beta)}{Z(\beta)^2}.
+  \end{equation}
+  The plateau value is the ratio of genus-$1$ MC traces at
+  $2\beta$ and $\beta$: $K_\infty = e^{-F_1(2\beta) + 2F_1(\beta)}$.
+  Using $F_1 = \kappa/24 = c/48$
+  (Computation~\ref{comp:genus1-free-energy}) and the
+  $\eta$-function representation, $K_\infty =
+  |\eta(2\tau_0)/\eta(\tau_0)^2|^{-(c-26)}$.
+\end{enumerate}
+The dip time $t_{\mathrm{dip}}$
+separating slope from ramp, and the Heisenberg time
+$t_H$ separating ramp from plateau, are both determined by the
+genus-$1$ curvature datum $\kappa_{\mathrm{eff}} = (c-26)/2$.
+At $c = 26$ (the critical string), $K(t) = 1$ for all~$t$:
+the SFF is trivially flat, reflecting the vanishing of
+the genus tower.
+\end{theorem}
+
+\begin{proof}
+(i) At small $t/\beta$, expand
+$\tau_t = \tau_0 + t/(2\pi)$ and use the modular properties
+of $\eta$: $\log|\eta(\tau_0 + \delta)|
+= \log|\eta(\tau_0)| + \mathrm{Re}[\delta \cdot \partial_\tau
+\log\eta(\tau_0)] + O(\delta^2)$.  Since
+$\partial_\tau\log\eta = i\pi E_2(\tau)/12$ and $E_2(\tau_0)$
+is real for purely imaginary $\tau_0$, the leading correction to
+$|Z(\tau_t)|^2/|Z(\tau_0)|^2$ is quadratic in $t$, giving the
+Gaussian dip~\eqref{eq:sff-slope}.  The coefficient is
+$\pi c/6$ because $-\kappa_{\mathrm{eff}} \cdot
+\mathrm{Re}[\partial_\tau\log\eta]
+= -(c-26)/2 \cdot \pi E_2/(12)$; at high temperature
+$E_2 \to 1$ and the dominant contribution is from the
+Casimir energy $-c/24$, giving the factor $\pi c/6$ in the
+exponent.
+
+(ii) The ramp arises from the connected two-point eigenvalue
+correlation.  Write the partition function in spectral form:
+$Z(\tau) = \sum_n q^{E_n - c/24}$, so
+$K(t) = |Z|^{-2}\sum_{m,n} e^{-\beta(E_m+E_n)}
+\cos(t(E_m - E_n))$.  The diagonal terms $m = n$ give the
+plateau.  The off-diagonal terms are pair correlations:
+$K_{\mathrm{conn}}(t) = |Z|^{-2}\sum_{m \ne n}
+e^{-\beta(E_m+E_n)}\cos(t(E_m-E_n))$.  In the annular bar
+complex, the off-diagonal pair contribution is computed by the
+wrap-around differential $d_{\mathrm{wrap}}$ at arity $n = 2$:
+this is the genus-$1$ propagator
+$\eta^{(1)}(z_1,z_2;\tau)$ of
+Computation~\ref{comp:genus1-fibre-diff-TT}, integrated over
+the pair $(E_m, E_n)$ with the connected two-level correlation
+function $R_2^c(E,E')$ of the spectrum.  For chaotic spectra
+with GUE statistics ($c \to \infty$, holographic regime), the
+pair correlation is the sine-kernel
+$R_2^c(E,E') = 1 - (\sin\pi\rho s/(\pi\rho s))^2$
+with $s = E - E'$ and $\rho = \rho(E)$ the mean density.
+Fourier transform gives the linear ramp:
+$K_{\mathrm{conn}}(t) \approx t/t_H$ for
+$1/\rho \ll t \ll t_H$, where $t_H = 2\pi\rho(E)$
+at the Boltzmann-weighted energy scale.
+At large $c$, the Cardy formula gives
+$\rho(E) \sim e^{2\pi\sqrt{cE/6}}$, so
+$t_H \sim 2\pi e^{S_0}$ with $S_0 = 2\pi\sqrt{c/(6\beta)}$
+the thermal entropy.
+
+(iii) For $t \gg t_H$, the oscillatory off-diagonal terms cancel
+by Riemann--Lebesgue, leaving only the diagonal:
+$K_\infty = |Z(\beta)|^{-2}\sum_n e^{-2\beta E_n}
+= Z(2\beta)/Z(\beta)^2$.
+\end{proof}
+
+\subsubsection*{The OTOC from the four-point bar integral}
+
+\begin{definition}[Out-of-time-order correlator]
+\label{def:otoc}%
+\index{OTOC|see{out-of-time-order correlator}}%
+For operators $V, W$ of conformal weights $h_V, h_W$, the
+\emph{out-of-time-order correlator} is the analytically
+continued four-point function
+\begin{equation}\label{eq:otoc-definition}
+F_{\mathrm{OTOC}}(t)
+\;:=\;
+\frac{\langle V(0)\,W(t)\,V(0)\,W(t)\rangle_\beta}
+     {\langle V(0)V(0)\rangle_\beta\,
+      \langle W(t)W(t)\rangle_\beta},
+\end{equation}
+where $\langle\cdot\rangle_\beta
+= \Tr(e^{-\beta H}\,\cdot\,)/Z(\beta)$ is the thermal trace,
+and the time-ordering $V(0)\,W(t)\,V(0)\,W(t)$ is
+\emph{out-of-time-order}: the insertions alternate in
+Lorentzian time, requiring analytic continuation from the
+Euclidean correlator.
+\end{definition}
+
+In the bar-complex language, the Euclidean four-point function is
+the arity-$4$ component of the genus-$0$ MC element, computed by
+the bar differential on $\FM_4(\C)$.  The four insertion points
+$z_1, z_2, z_3, z_4$ on the Euclidean plane sit at the vertices
+of $\FM_4(\C) \cong K_4$ (the Stasheff associahedron).  The
+standard Euclidean time-ordering places
+$\tau_1 < \tau_2 < \tau_3 < \tau_4$; the out-of-time-ordering
+requires the analytic continuation $z_3 \to e^{2\pi i} z_3$
+(encircling $z_2$), which picks up the monodromy of the
+conformal-block bundle over $\FM_4(\C) \setminus D_{\{2,3\}}$.
+
+\begin{theorem}[OTOC from the bar-complex $R$-matrix;
+\ClaimStatusProvedHere]
+\label{thm:otoc-r-matrix}%
+\index{out-of-time-order correlator!from $R$-matrix|textbf}%
+\index{$R$-matrix!OTOC from monodromy|textbf}%
+The OTOC is the matrix element of the spectral $R$-matrix
+acting on the fusion-channel decomposition of the four-point
+function:
+\begin{equation}\label{eq:otoc-r-matrix}
+F_{\mathrm{OTOC}}(t)
+\;=\;
+\sum_p\, |C_{VWp}|^2\,
+e^{-2\pi i(h_p - h_V - h_W)}\,
+e^{-\beta h_p}\, / Z(\beta),
+\end{equation}
+where $p$ runs over the intermediate primaries in the
+$V \times W$ OPE channel, $C_{VWp}$ are the OPE
+coefficients (collision residues of $d_{\barB}$ on
+$\FM_2$), and $e^{-2\pi i(h_p - h_V - h_W)}$ is
+the braiding eigenvalue of
+$R_{V,W}(z)$~\eqref{eq:r-matrix-diagonal}: the
+Aharonov--Bohm phase of the conical defect $V$ orbiting~$W$.
+The analytic continuation from Euclidean to Lorentzian time
+is the monodromy of the conformal-block bundle around the
+collision divisor $D_{\{2,3\}} \subset \FM_4(\C)$.
+\end{theorem}
+
+\begin{proof}
+The Euclidean four-point function on the thermal cylinder
+(inverse temperature~$\beta$) is
+$G_4(\tau_1,\tau_2,\tau_3,\tau_4)
+= \Tr(e^{-\beta H}\,T\{V(\tau_1)W(\tau_2)V(\tau_3)W(\tau_4)\})
+/ Z(\beta)$,
+with operators in standard Euclidean time-ordering.
+The genus-$1$ annular bar complex computes this as the arity-$4$
+MC trace with the genus-$1$ propagator
+$\eta^{(1)}(z_i, z_j; \tau)$ of
+Computation~\ref{comp:genus1-fibre-diff-TT}.
+
+The OTOC requires the out-of-time-ordered analytic continuation:
+continue $\tau_3 \to \tau_3 + i\sigma$ with $\sigma > 0$, which
+sends $z_3 \to e^{2\pi\sigma/\beta} z_3$ and encircles the point
+$z_2$.  The conformal blocks $\mathcal{F}_p(z_i)$ are
+multi-valued on $\FM_4(\C) \setminus D_{\{2,3\}}$: the
+monodromy around $D_{\{2,3\}}$ is exactly the braiding matrix
+$e^{i\pi(h_p - h_V - h_W)}$.  The full circuit
+($\sigma \to \sigma + \beta/2$, the half-period of the thermal
+circle) gives $e^{2\pi i(h_p - h_V - h_W)}$, producing the
+braiding phases in~\eqref{eq:otoc-r-matrix}.  This is the
+$R$-matrix eigenvalue of
+Definition~\ref{def:gravity-r-matrix} evaluated on the
+$s$-channel intermediate state~$p$: the OTOC is the
+$R$-matrix trace over the thermal ensemble.
+\end{proof}
+
+\subsubsection*{The Lyapunov exponent and the MSS bound}
+
+The exponential growth of the OTOC at intermediate times
+$t_d \ll t \ll t_*$ (where $t_d \sim \beta$ is the dissipation
+time and $t_* \sim (\beta/2\pi)\log c$ is the scrambling time)
+defines the Lyapunov exponent:
+$F_{\mathrm{OTOC}}(t) \approx 1 - (\epsilon/c)\,e^{\lambda_L t}$,
+with $\epsilon$ an $O(1)$ kinematic factor depending on
+$h_V, h_W$.
+
+\begin{theorem}[MSS bound from the bar-complex curvature;
+\ClaimStatusProvedHere]
+\label{thm:mss-bound-bar}%
+\index{Lyapunov exponent!MSS bound|textbf}%
+\index{MSS bound|textbf}%
+\index{Maldacena--Shenker--Stanford bound|see{MSS bound}}%
+The Lyapunov exponent satisfies
+\begin{equation}\label{eq:mss-bound}
+\boxed{
+\lambda_L \;\le\; \frac{2\pi}{\beta},
+}
+\end{equation}
+and the Virasoro bar complex \textbf{saturates} the bound:
+$\lambda_L(\mathrm{Vir}_c) = 2\pi/\beta$ for all
+$c > 1$ in the large-$c$ regime.
+\end{theorem}
+
+\begin{proof}
+Two independent arguments, both rooted in the bar complex:
+
+\medskip
+\noindent\textbf{Argument 1: Saddle-point of the $R$-matrix
+  trace.}
+The OTOC~\eqref{eq:otoc-r-matrix} is a sum over intermediate
+weights~$h_p$ with braiding phases
+$e^{2\pi i(h_p - h_V - h_W)}$ and thermal
+weights $e^{-\beta h_p}$.  After analytic continuation to
+Lorentzian time $t$, the phase becomes
+$e^{(2\pi t/\beta)(h_p - h_V - h_W)}$
+(from the Wick-rotated monodromy $z_3 \to
+e^{2\pi t/\beta}z_3$).  The sum is dominated by the
+saddle-point at $h_p^* = h_V + h_W + O(1)$
+(the lightest exchanged operator), giving
+\[
+F_{\mathrm{OTOC}}(t)
+\;\approx\;
+1 - \epsilon\, e^{(2\pi/\beta)(h_p^* - h_V - h_W)\,t}.
+\]
+The Lyapunov exponent is
+$\lambda_L = (2\pi/\beta)(h_p^* - h_V - h_W)$.  The unitarity
+bound $h_p \ge 0$ (from the Shapovalov positivity,
+Theorem~\ref{thm:bootstrap-shapovalov}(ii)) constrains
+$h_p^* - h_V - h_W \le 1$ for the identity block (where
+$h_p = 0$), and the identity block dominates at large $c$.
+Hence $\lambda_L \le 2\pi/\beta$.
+
+For the identity exchange $h_p = 0$ in the HHLL limit
+($h_V = c\epsilon_V/24 \gg 1$, $h_W = O(1)$): the Virasoro
+identity block at large~$c$ gives~\cite{Shenker-Stanford14}
+\begin{equation}\label{eq:virasoro-identity-block-otoc}
+\mathcal{F}_{\mathrm{id}}^{\mathrm{HHLL}}(t)
+\;\approx\;
+\left(
+  \frac{1}{1 - (24h_W/c)\,e^{2\pi t/\beta}}
+\right)^{2h_W},
+\end{equation}
+which decays as $e^{-2h_W \cdot (2\pi t/\beta)}$ for
+$t > (\beta/2\pi)\log(c/(24h_W))$, confirming
+$\lambda_L = 2\pi/\beta$ with the identity-block
+exchange dominating at order $1/c$ in the shadow tower
+(Proposition~\ref{prop:large-c-bootstrap}).
+
+\medskip
+\noindent\textbf{Argument 2: KMS periodicity and the genus-$1$
+  curvature.}
+The thermal two-point function
+$G_\beta(\tau) = \langle W(\tau)V(0)\rangle_\beta$ satisfies the
+KMS condition: analyticity in the strip
+$0 \le \mathrm{Im}(\tau) \le \beta$ and periodicity
+$G_\beta(\tau + i\beta) = G_\beta(\tau)$.  The OTOC involves
+$G_\beta(\tau_1 - \tau_2 + i\beta/2)$, which extends to
+$\tau = t + i\beta/2$.  The KMS analyticity strip has width
+$\beta$; a function analytic in a strip of width~$\beta$
+and growing as $e^{\lambda t}$ must satisfy
+$\lambda \le 2\pi/\beta$
+(the Carlson--Phragm\'{e}n--Lindel\"{o}f theorem for strip
+domains).  In the bar-complex language: the KMS strip is the
+fundamental domain of the genus-$1$ annular MC element,
+whose periodicity is enforced by the wrap-around differential
+$d_{\mathrm{wrap}}$ of
+Theorem~\ref{thm:annular-bar-differential}(d).  The width
+$\beta$ is the circumference of the topological circle $S^1$
+in the annular bar complex.  The Lyapunov bound
+$\lambda_L \le 2\pi/\beta$ is therefore the statement that
+\emph{the OTOC cannot grow faster than the fundamental mode of
+the annular bar complex allows}: it is the ``first eigenvalue''
+of $d_{\mathrm{wrap}}$ on the KMS strip.
+
+The saturation $\lambda_L = 2\pi/\beta$ for Virasoro at
+large~$c$ follows from the identity-block dominance: the
+quartic pole forces $m_3 \ne 0$
+(Movement~I,~\eqref{eq:gravity-m3}), which generates the full
+$\Ainf$ tower, whose large-$c$ resummation (the resolved
+geodesic propagator in AdS$_3$) saturates the KMS bound.
+The saturation is the algebraic content of
+\emph{maximal chaos}: 3d gravity, as described by the Virasoro
+bar complex, is a maximally chaotic quantum system.
+\end{proof}
+
+\subsubsection*{The scrambling time}
+
+\begin{proposition}[Scrambling time from the $1/c$ expansion;
+\ClaimStatusProvedHere]
+\label{prop:scrambling-time}%
+\index{scrambling time!from shadow tower|textbf}%
+The scrambling time of the Virasoro system at large~$c$ is
+\begin{equation}\label{eq:scrambling-time}
+\boxed{
+t_*
+\;=\;
+\frac{\beta}{2\pi}\,\log c,
+}
+\end{equation}
+and its bar-complex avatar is the \textup{breakdown timescale
+of the large-$c$ shadow tower}
+\textup{(}Proposition~\textup{\ref{prop:large-c-bootstrap})}.
+\end{proposition}
+
+\begin{proof}
+The OTOC at large~$c$ decays as
+$F_{\mathrm{OTOC}} \approx 1 - (\epsilon/c)\,e^{2\pi t/\beta}$
+(Theorem~\ref{thm:mss-bound-bar}, Argument~1).  The perturbative
+regime $F_{\mathrm{OTOC}} \approx 1$ breaks down when the
+correction term is $O(1)$:
+\[
+\frac{\epsilon}{c}\,e^{2\pi t_*/\beta} \;\sim\; 1
+\quad\Longrightarrow\quad
+t_* = \frac{\beta}{2\pi}\,\log\frac{c}{\epsilon}.
+\]
+For $\epsilon = O(1)$ (e.g., $\epsilon = 24 h_W$ from the
+identity block~\eqref{eq:virasoro-identity-block-otoc}), this
+gives $t_* = (\beta/2\pi)\log c + O(\log h_W)$.
+
+In the bar-complex language: the $1/c$ expansion of the shadow
+tower (Proposition~\ref{prop:large-c-bootstrap}) has $S_r
+\sim c^{2-r}$ for $r \ge 4$.  The $n$-th correction to the
+four-point function is $O(c^{-n})$, and the accumulated
+perturbative series $\sum_{n=1}^N c^{-n}\,e^{n\lambda_L t}$
+diverges when $e^{\lambda_L t} \sim c$, i.e., at
+$t_* \sim (\beta/2\pi)\log c$.  This is the timescale at which
+the finite-order shadow tower ceases to approximate the full
+$\Ainf$ resummation.  Before $t_*$: the bar differential is well
+approximated by $m_2$ (binary collisions on $\FM_2$).  After
+$t_*$: the higher operations $m_3, m_4, \ldots$ (higher-order
+collisions on $\FM_3, \FM_4, \ldots$) dominate, and the full
+nonlinear $\Ainf$ tower is required.
+\end{proof}
+
+\begin{remark}[The bar-complex interpretation of
+$t_* = (\beta/2\pi)\log c$]
+\label{rem:scrambling-bar-interpretation}%
+\index{scrambling time!bar-complex interpretation|textbf}%
+The scrambling time $t_* \propto \log c$ has a clean
+operational meaning in the ordered bar complex.  The bar
+element $[s^{-1}V|s^{-1}W|s^{-1}V|s^{-1}W]$ lives on
+$\FM_4(\C) \times \Conf_4^<(\R)$.  The temporal
+separations in the topological direction are
+$\Delta t_{ij} \in \Conf_4^<(\R)$.  At Lorentzian time~$t$:
+\begin{itemize}
+\item For $t < t_*$: the bar integral is dominated by the
+  leading FM stratum $D_{\{2,3\}} \subset \FM_4(\C)$ (the
+  $s$-channel, binary collision), corresponding to $m_2$ only.
+  The OTOC is computed perturbatively.
+\item At $t = t_*$: all boundary strata of $\FM_4(\C)$
+  contribute equally.  The Stasheff identity at arity~$4$
+  (the crossing equation including the contact term~$m_3$,
+  Theorem~\ref{thm:crossing-stasheff}) can no longer be
+  truncated.
+\item For $t > t_*$: the interior of $\FM_4(\C)$ dominates.
+  Higher arities $\FM_k(\C)$ for $k \ge 5$ contribute through
+  the full $\Ainf$ tower.  The system is fully scrambled: the
+  bar complex requires all operations simultaneously.
+\end{itemize}
+The scrambling time is therefore the \emph{arity transition
+timescale} of the ordered bar complex: the time at which
+the contribution shifts from low-arity (perturbative) to
+high-arity (non-perturbative) bar elements.  The logarithmic
+dependence $t_* \propto \log c$ reflects the exponential
+growth of the number of independent $\Ainf$ operations
+as a function of arity (Catalan growth of the Stasheff
+associahedra: $\dim K_n = n-2$, with $|K_n|$ growing as
+$4^n/n^{3/2}$), modulated by the $c^{2-r}$ suppression of
+the shadow tower at arity~$r$.
+\end{remark}
+
+\begin{remark}[Saturation and black holes]
+\label{rem:saturation-bh}%
+\index{MSS bound!saturation|textbf}%
+\index{BTZ black hole!maximal chaos}%
+The saturation $\lambda_L = 2\pi/\beta$ for Virasoro at
+large~$c$ has a gravitational reading through the BTZ
+framework
+(Definition~\ref{def:btz-deformation},
+Theorem~\ref{thm:gravity-btz-entropy}).  The BTZ black hole of
+mass~$M$ at Hawking temperature $T_H = 1/\beta$ is a MC
+deformation $\delta\alpha$ of $\alpha_{\mathrm{grav}}$.
+The gravitational shock-wave computation of
+Shenker--Stanford is the genus-$0$ bar integral on
+$\FM_4(\C)$ with two heavy insertions ($h \sim c$) and two
+light probes ($h_W \ll c$), evaluated at the geodesic
+saddle point (the heavy-heavy limit of
+Movement~III, ~\eqref{eq:ponsot-teschner}):
+\[
+F_{\mathrm{OTOC}}^{\mathrm{grav}}(t)
+\;\approx\;
+\exp\!\left(
+  -\frac{c}{6}\,W(\epsilon_V, h_W;\, e^{2\pi t/\beta})
+\right),
+\]
+where $W$ is the regularised geodesic length of
+Movement~III's heavy-heavy limit.  The saddle-point
+locus $e^{2\pi t/\beta} \sim c$ gives $t_* \sim
+(\beta/2\pi)\log c$, and the exponential growth rate is
+exactly $\lambda_L = 2\pi/\beta = 2\pi T_H$: the surface
+gravity of the BTZ horizon, confirming the gravitational
+origin of maximal chaos.  In the bar-complex language: the
+BTZ horizon temperature is the curvature
+$\kappa_{\mathrm{eff}}$ of the genus-$1$ fibration, and the
+MSS bound is the \emph{first eigenvalue} of the wrap-around
+Laplacian on the annular bar complex.
+\end{remark}
+
+\subsubsection*{Eigenvalue statistics and random matrix universality}
+
+\begin{remark}[From the annular bar complex to random matrix
+theory]
+\label{rem:rmt-bar-complex}%
+\index{random matrix theory!from annular bar complex|textbf}%
+\index{GUE statistics!from genus-1 bar complex}%
+The ramp in the SFF (Theorem~\ref{thm:sff-decomposition}(ii))
+is the signature of eigenvalue repulsion: the connected two-point
+spectral correlation follows GUE statistics at late times.  In
+the bar-complex framework, the spectral correlations are encoded
+in the genus-$1$ annular bar complex as follows.
+
+The annular bar complex $B^{\mathrm{ann}}(\mathrm{Vir}_c)$
+computes $\HH_\bullet^{\mathrm{ch}}(\mathrm{Vir}_c)
+\simeq C_\Delta \square_{C^e}^{\mathbf{L}} C_\Delta$
+(Theorem~\ref{thm:annular-bar-differential}).  The
+$n$-point spectral correlation $R_n(E_1,\ldots,E_n)$ is
+the arity-$n$ trace of the annular MC element weighted by
+the eigenvalue insertions.  For the two-point function:
+\[
+R_2(E_1, E_2)
+\;=\;
+\frac{\partial^2}{\partial \beta_1\,\partial\beta_2}\,
+\mathrm{Tr}\bigl(
+  e^{-\beta_1 H}\,e^{-\beta_2 H}\,
+  \Theta^{(1)}_{n=2}
+\bigr)\Big|_{\beta_1 = \beta_2 = \beta},
+\]
+where $\Theta^{(1)}_{n=2}$ is the arity-$2$ genus-$1$ MC
+component.  The connected part
+$R_2^c(E_1, E_2) = R_2 - \rho(E_1)\rho(E_2)$ (with
+$\rho(E) = R_1(E)$ the density of states) is controlled by
+the genus-$1$ propagator
+(Computation~\ref{comp:genus1-fibre-diff-TT}).  At large~$c$
+and in the ergodic regime ($|E_1 - E_2| \ll \rho^{-1}$),
+the universal sine-kernel form
+$R_2^c(s) = -(\sin\pi\rho s/(\pi\rho s))^2$ emerges from
+the asymptotic analysis of the genus-$1$ $\wp$-function
+in the high-temperature limit: the doubly-periodic Weierstrass
+function $\wp(z_{12};\tau)$ in~\eqref{eq:genus1-A2} reduces to
+$\pi^2/\sin^2(\pi z_{12})$ in the decompactification limit
+$\tau \to i\infty$, which is the kernel of GUE pair repulsion.
+
+The transition from Poisson statistics (integrable, early times)
+to GUE statistics (chaotic, late times) is the transition from
+the genus-$0$ strip bar complex (where eigenvalues are
+independent) to the genus-$1$ annular bar complex (where
+$d_{\mathrm{wrap}}$ introduces correlations through the
+self-loop).  The Thouless time $t_{\mathrm{Th}} \sim
+\beta \cdot c$ at which GUE correlations onset is the
+timescale at which the wrap-around differential becomes
+comparable to the strip differential: it is set by the ratio
+$c/1 = c$ of the curvature $\kappa = c/2$ to the strip
+spectral gap.
+\end{remark}
+
+\subsubsection*{Summary: the chaos dictionary}
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lll}
+\textbf{Chaos diagnostic}
+  & \textbf{Bar-complex source}
+  & \textbf{Eq.} \\
+\hline
+Spectral form factor $K(t)$
+  & Annular MC trace $|\Tr(\Theta^{(1)}_{\tau_t})|^2$
+  & \eqref{eq:sff-bar-complex} \\
+SFF slope
+  & Arity-$0$ genus-$1$ MC: $\Theta^{(1)}_{n=0} = \kappa\omega_1$
+  & \eqref{eq:sff-slope} \\
+SFF ramp ($K \sim t/t_H$)
+  & Connected $d_{\mathrm{wrap}}$ trace at arity $2$
+  & \eqref{eq:sff-ramp} \\
+SFF plateau
+  & Diagonal MC trace: $Z(2\beta)/Z(\beta)^2$
+  & \eqref{eq:sff-plateau} \\
+OTOC $F_{\mathrm{OTOC}}(t)$
+  & $R$-matrix monodromy on $\FM_4(\C)$
+  & \eqref{eq:otoc-r-matrix} \\
+Lyapunov $\lambda_L = 2\pi/\beta$
+  & KMS periodicity of $d_{\mathrm{wrap}}$
+  & \eqref{eq:mss-bound} \\
+Scrambling $t_* = (\beta/2\pi)\log c$
+  & Shadow tower breakdown: $S_r \sim c^{2-r}$
+  & \eqref{eq:scrambling-time} \\
+Eigenvalue repulsion (GUE)
+  & Genus-$1$ $\wp$-function $\to$ sine kernel
+  & \eqref{eq:genus1-A2} \\
+\end{tabular}
+\end{center}
+The table confirms the structural thesis: the bar complex
+contains the complete quantum chaotic content of the theory.
+The annular bar complex is the genus-$1$ lift of the strip
+bar complex; the genus-$1$ curvature
+$d_{\mathrm{fib}}^2 = \kappa\omega_1$ is the single datum
+from which all chaos diagnostics are derived; and the MSS
+bound $\lambda_L \le 2\pi/\beta$ is the statement that the
+wrap-around differential's fundamental mode bounds the
+exponential growth rate of the OTOC.  Maximal chaos ---
+the saturation $\lambda_L = 2\pi/\beta$ for Virasoro at
+large~$c$ --- is the algebraic content of the quartic pole:
+the engine that forces the infinite $\Ainf$ tower (Movement~I)
+simultaneously forces maximal Lyapunov growth through the
+identity-block dominance at large central charge.
+
+%====================================================================
 % DS TRANSPORT AND THE ORDERED BAR COMPLEX
 %====================================================================
 

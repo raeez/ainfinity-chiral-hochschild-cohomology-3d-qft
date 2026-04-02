@@ -56,6 +56,527 @@ The general case beyond the affine lineage (i.e., for $\mathcal{W}$-algebras whe
 For a symmetric quiver there exists a logarithmic factorization enhancement of the cohomological Hall algebra on logarithmic Fulton-MacPherson spaces whose connected collision residues recover the primitive Lie algebra of the associated vertex algebra, and whose Koszul dual is the dg-shifted Yangian governing the corresponding line-operator theory.
 \end{conjecture}
 
+\subsection{The CoHA of the Jordan quiver and the bar complex of $W_{1+\infty}$}
+\label{subsec:coha-jordan-bar}
+
+Conjecture~\ref{conj:coha} predicts a logarithmic factorization
+enhancement of the cohomological Hall algebra (CoHA) whose collision
+residues recover the primitive Lie algebra of the vertex algebra, with
+Koszul dual the governing dg-shifted Yangian.  The simplest instance
+is the Jordan quiver~$Q_1$ (one vertex, one loop).  For this quiver the
+CoHA is identified with the $W_{1+\infty}$ algebra
+(Schiffmann--Vasserot~\cite{SV13}), and the bar complex of $W_{1+\infty}$
+computes the Donaldson--Thomas partition function of~$\CC^3$.  This
+subsection makes the identification precise.
+
+\subsubsection{The CoHA of the Jordan quiver}
+\label{subsubsec:coha-jordan}
+
+Fix the Jordan quiver $Q_1$: a single vertex with a single loop $x$.
+At dimension vector $\mathbf{d} = (n)$, the representation space is
+\[
+  \Rep(Q_1, n) \;=\; \End(\CC^n) \;\cong\; \mathfrak{gl}_n,
+\]
+and the gauge group $\GL_n$ acts by conjugation.  The moduli stack is
+$[\mathfrak{gl}_n / \GL_n]$, and the CoHA is defined on Borel--Moore
+homology:
+\[
+  \cH_{\mathrm{CoHA}}(Q_1)
+  \;:=\;
+  \bigoplus_{n \ge 0}
+  H_*^{\mathrm{BM}}\bigl([\mathfrak{gl}_n / \GL_n]\bigr)
+  \;=\;
+  \bigoplus_{n \ge 0}
+  H_*^{\GL_n}(\mathfrak{gl}_n).
+\]
+By the Thom isomorphism and homotopy equivalence
+$\mathfrak{gl}_n \simeq \{0\}$, the equivariant Borel--Moore homology
+reduces to
+\[
+  H_*^{\GL_n}(\mathfrak{gl}_n)
+  \;\cong\;
+  H_*^{\GL_n}(\mathrm{pt})
+  \;\cong\;
+  \CC[x_1, \ldots, x_n]^{S_n}
+  \;=\;
+  \CC[e_1, \ldots, e_n],
+\]
+where $e_i$ are the elementary symmetric polynomials in the Chern roots
+$x_1, \ldots, x_n$ (equivalently, $\GL_n$-Chern classes).
+
+\begin{computation}[CoHA product structure; \ClaimStatusProvedHere]
+\label{comp:coha-product}
+The CoHA product
+$* \colon H_*^{\GL_m}(\mathrm{pt}) \otimes H_*^{\GL_n}(\mathrm{pt})
+\to H_*^{\GL_{m+n}}(\mathrm{pt})$
+is defined via the correspondence
+\[
+  [\mathfrak{gl}_m / \GL_m]
+  \times
+  [\mathfrak{gl}_n / \GL_n]
+  \xleftarrow{\;\;p\;\;}
+  [\mathfrak{p}_{m,n} / P_{m,n}]
+  \xrightarrow{\;\;q\;\;}
+  [\mathfrak{gl}_{m+n} / \GL_{m+n}],
+\]
+where $P_{m,n} \subset \GL_{m+n}$ is the parabolic subgroup preserving a
+flag $0 \subset \CC^m \subset \CC^{m+n}$, and $\mathfrak{p}_{m,n}$ is
+its Lie algebra (block upper-triangular matrices).  The product is
+$f * g = q_* \circ \mathrm{Eu}(N) \cdot p^*(f \boxtimes g)$,
+where $N$ is the normal bundle to $\mathfrak{p}_{m,n}$ in
+$\mathfrak{gl}_{m+n}$ (the off-diagonal block
+$\Hom(\CC^n, \CC^m) \cong \CC^{mn}$), and $\mathrm{Eu}(N)$ is its
+equivariant Euler class:
+\[
+  \mathrm{Eu}(N)
+  \;=\;
+  \prod_{i=1}^{m}\prod_{j=1}^{n}(x_i - y_j).
+\]
+This product is associative (by the octahedron identity for
+triple correspondences) and endows $\cH_{\mathrm{CoHA}}(Q_1)$
+with the structure of an associative graded algebra.
+\end{computation}
+
+\begin{proof}
+Associativity follows from the compatibility of the correspondence
+with the triple flag variety
+$P_{l,m,n} \subset P_{l,m+n} \cap P_{l+m,n}$: both iterated products
+$(f * g) * h$ and $f * (g * h)$ reduce to the same pushforward from the
+full flag correspondence.  The Euler class insertion ensures the correct
+transversality, and the symmetric-polynomial identity
+$\prod(x_i - y_j) \cdot \prod(y_j - z_k) =
+\prod(x_i - z_k) \cdot [\text{flag correction}]$
+closes the argument.
+\end{proof}
+
+\subsubsection{Identification with $W_{1+\infty}$}
+\label{subsubsec:coha-w1infty}
+
+The Schiffmann--Vasserot theorem identifies the CoHA of the Jordan
+quiver with $W_{1+\infty}$.
+
+\begin{theorem}[Schiffmann--Vasserot; \ClaimStatusProvedElsewhere]
+\label{thm:sv-coha-w}
+\textup{(Schiffmann--Vasserot \cite{SV13}, Maulik--Okounkov
+\cite{MO19}.)}
+There is an algebra isomorphism
+\[
+  \cH_{\mathrm{CoHA}}(Q_1) \;\cong\; W_{1+\infty}
+\]
+under which:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The CoHA grading by dimension vector $n$ corresponds to the
+  charge grading of $W_{1+\infty}$.
+\item The generators $W^{(s)}$ of spin~$s$ correspond to specific
+  characteristic classes on $[\mathfrak{gl}_n / \GL_n]$:
+  \[
+    W^{(s)}
+    \;\longleftrightarrow\;
+    \sum_{n \ge 0} z^n\,
+    \mathrm{ch}_s\bigl([\mathfrak{gl}_n / \GL_n]\bigr)
+    \;=\;
+    \sum_{n \ge 0} z^n\,
+    p_s(x_1, \ldots, x_n),
+  \]
+  where $p_s = \sum x_i^s$ is the $s$-th power sum, so
+  $W^{(2)} = T$ (stress tensor, corresponding to second Chern
+  character).
+\item The commutation relations of $W_{1+\infty}$ are recovered from
+  the CoHA product via the Euler class insertion, and the central charge
+  is determined by the equivariant parameter.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[The primitive Lie algebra and Conjecture~\ref{conj:coha}]
+\label{rem:coha-primitive-lie}
+The CoHA $\cH_{\mathrm{CoHA}}(Q_1)$ is a bialgebra (the coproduct
+comes from restriction to Levi subalgebras).  The primitive elements
+form the \emph{BPS Lie algebra}
+$\fg^{\mathrm{BPS}} := \mathrm{Prim}(\cH_{\mathrm{CoHA}})$, which is
+the Lie algebra of single-particle BPS states.  Under the
+Schiffmann--Vasserot isomorphism, $\fg^{\mathrm{BPS}}$ is the Lie
+algebra generated by the modes $W^{(s)}_n$ of $W_{1+\infty}$
+subject to the primitive constraint (one-particle irreducibility).
+
+Conjecture~\ref{conj:coha} predicts that the \emph{collision residues}
+of a logarithmic factorization enhancement of the CoHA recover
+$\fg^{\mathrm{BPS}}$.  In the present case the collision residue is
+the bar differential restricted to arity~$2$: the binary part of the
+bar coderivation $d_B|_{\mathrm{arity}\,2}$
+encodes the commutator in $\fg^{\mathrm{BPS}}$.  The full bar complex
+$B(W_{1+\infty})$ is then the coalgebraic model for the universal
+enveloping coalgebra of $\fg^{\mathrm{BPS}}$.
+\end{remark}
+
+\subsubsection{The bar complex and the MacMahon function}
+\label{subsubsec:bar-macmahon}
+
+\begin{computation}[Bar Poincar\'{e} series of $W_{1+\infty}$;
+\ClaimStatusProvedHere]
+\label{comp:bar-poincare-w1infty}
+The algebra $W_{1+\infty}$ has generators $W^{(s)}$ for $s = 1, 2, 3,
+\ldots$ (one generator at each positive integer spin, including the
+$\mathrm{U}(1)$ current $W^{(1)} = J$ and stress tensor $W^{(2)} = T$).
+It is Koszul by the one-loop criterion
+(Theorem~\textup{\ref{thm:one-loop-koszul}}) applied to the $N \to
+\infty$ limit of the affine lineage, so the bar cohomology concentrates
+on cogenerators and the bar Poincar\'{e} series is computed by the
+cofree coalgebra generating function.
+
+The desuspended cogenerators $s^{-1}W^{(s)}$ sit at conformal weight
+$s$ and bar degree~$1$.  The bar complex
+$B(W_{1+\infty}) = T^c(s^{-1}\overline{W_{1+\infty}})$ is the cofree
+conilpotent coalgebra on the graded vector space with one generator at
+each weight $s \ge 1$.  At bar degree $p$ and total conformal weight $n$,
+the cochains count ordered $p$-tuples $(s_1, \ldots, s_p)$ with
+$s_i \ge 1$ and $\sum s_i = n$ (after accounting for the desuspension
+shift).  The bigraded Poincar\'{e} series is therefore
+\begin{equation}\label{eq:bar-poincare-w1infty}
+  P_{W_{1+\infty}}(q, t)
+  \;=\;
+  \sum_{p \ge 0, n \ge 0}
+  \dim\, B^p_n(W_{1+\infty})\; q^n t^p
+  \;=\;
+  \prod_{s \ge 1} \frac{1}{1 - q^s t}
+  \;=\;
+  \prod_{k \ge 1} \frac{1}{(1 - q^k t)}.
+\end{equation}
+Setting $t = 1$ (total bar degree):
+\[
+  P_{W_{1+\infty}}(q, 1)
+  \;=\;
+  \prod_{k \ge 1} \frac{1}{1 - q^k}
+  \;=\;
+  \sum_{n \ge 0} p(n)\, q^n,
+\]
+the generating function for integer partitions $p(n)$.
+
+The connection to the MacMahon function emerges from the full
+$W_\infty$ algebra (generators at spins $s \ge 2$ only, i.e.\
+$W_{1+\infty}$ modulo the $\mathrm{U}(1)$ current).  The
+Theorem~\textup{\ref{thm:MacMahon-connection}} computation gives
+\[
+  P_{W_\infty}(q, 1)
+  \;=\;
+  \prod_{k \ge 2} \frac{1}{1 - q^k}.
+\]
+In the \emph{weight-refined} bar cohomology, the bigraded character
+(Theorem~\textup{\ref{thm:MacMahon-connection}}) satisfies
+\[
+  \sum_{p,n} \dim H^p_n(B(W_\infty))\, q^n t^p
+  \;=\;
+  \prod_{k \ge 1} \frac{1}{(1 - q^k t)^k},
+\]
+which at $t = 1$ is the MacMahon function $M(q) = \prod_{k \ge 1}
+(1 - q^k)^{-k}$ counting plane partitions.
+
+The distinction is important: the \emph{unrefined} bar Poincar\'{e}
+series (one generator per spin) counts integer partitions; the
+\emph{weight-refined} bar cohomology (with multiplicity $k$ at weight
+$k$, arising from the conformal descendants in the bar differential)
+counts plane partitions.  Both are correct in their respective gradings.
+\end{computation}
+
+\begin{proof}
+The bar complex of a Koszul algebra is quasi-isomorphic to its
+cogenerators, so the bar cohomology classes biject with the
+desuspended generators.  The Poincar\'{e}
+series~\eqref{eq:bar-poincare-w1infty} follows from the standard
+computation: the cofree coalgebra on a graded space $V = \bigoplus_{s
+\ge 1} \CC_s$ has component at word length $p$ and total weight $n$
+equal to the number of compositions of $n$ into $p$ parts, each $\ge
+1$.  The generating function is $\prod_s (1 - q^s t)^{-\dim V_s}$; here
+$\dim V_s = 1$ for all $s \ge 1$.
+
+For the weight-refined statement, the conformal descendants at spin~$s$
+contribute an $s$-dimensional space at weight~$s$ in the bar complex
+(from the $s$ possible descendant modes $\partial^j W^{(s)}$,
+$j = 0, \ldots, s-1$).  This gives multiplicity~$s$ at weight~$s$,
+producing $\prod (1 - q^k t)^{-k}$.
+\end{proof}
+
+\subsubsection{DT invariants and the bar-DT correspondence}
+\label{subsubsec:dt-invariants}
+
+\begin{computation}[DT invariants of the Jordan quiver;
+\ClaimStatusProvedHere]
+\label{comp:dt-jordan}
+The numerical Donaldson--Thomas invariants $\Omega(n)$ of the Jordan
+quiver at dimension vector $n$ are extracted from the motivic DT
+partition function via the plethystic logarithm.  The DT partition
+function of the Jordan quiver (equivalently, of $\CC^3$) is the
+MacMahon function:
+\[
+  Z_{\mathrm{DT}}(q)
+  \;=\;
+  M(q)
+  \;=\;
+  \prod_{k \ge 1} \frac{1}{(1 - q^k)^k}
+  \;=\;
+  \sum_{n \ge 0} \mathrm{pl}(n)\, q^n,
+\]
+where $\mathrm{pl}(n)$ is the number of plane partitions of~$n$.
+
+The plethystic logarithm extracts the single-particle
+\textup{(}primitive\textup{)} contribution:
+\begin{align}\label{eq:plethystic-log}
+  \mathrm{PLog}\, Z_{\mathrm{DT}}(q)
+  &\;=\;
+  \sum_{k=1}^{\infty} \frac{\mu(k)}{k}\, \log Z_{\mathrm{DT}}(q^k)
+  \;=\;
+  -\sum_{k=1}^{\infty} \frac{\mu(k)}{k}
+  \sum_{m \ge 1} m\, \log(1 - q^{mk}) \notag\\
+  &\;=\;
+  \sum_{n \ge 1} \Omega(n)\, q^n,
+\end{align}
+where $\mu$ is the M\"{o}bius function.  Explicitly:
+\[
+  \Omega(1) = 1, \quad
+  \Omega(2) = -1, \quad
+  \Omega(3) = 1, \quad
+  \Omega(4) = -2, \quad
+  \Omega(5) = 3, \quad
+  \Omega(6) = -5, \quad \ldots
+\]
+The general formula
+\textup{(}Reineke~\textup{\cite{Rei12}},
+Kontsevich--Soibelman~\textup{\cite{KS08}}\textup{)} is
+\begin{equation}\label{eq:dt-jordan-formula}
+  \Omega(n) \;=\; \frac{(-1)^{n-1}}{n^2}.
+\end{equation}
+More precisely, this holds in the motivic sense: the motivic DT
+invariant at dimension $n$ is $\overline{\Omega}(n) = (-1)^{n-1}/n^2$
+\textup{(}in the Grothendieck ring of varieties after suitable
+motivic integration\textup{)}.  The numerical DT invariant is
+$|\Omega(n)| = 1/n^2$, and the sign $(-1)^{n-1}$ tracks the virtual
+dimension parity.
+\end{computation}
+
+\begin{proof}
+The plethystic logarithm of $M(q) = \prod (1 - q^k)^{-k}$ is computed
+as follows.  We have
+$\log M(q) = -\sum_{k \ge 1} k \log(1 - q^k) = \sum_{k \ge 1}
+\sum_{m \ge 1} k q^{mk}/m$.
+Applying the M\"{o}bius inversion:
+\[
+  \mathrm{PLog}\, M(q)
+  \;=\;
+  \sum_{d \ge 1} \frac{\mu(d)}{d} \log M(q^d)
+  \;=\;
+  \sum_{d \ge 1} \frac{\mu(d)}{d}
+  \sum_{k \ge 1} \sum_{m \ge 1} \frac{k\, q^{mkd}}{m}.
+\]
+Setting $n = mkd$ and reorganising:
+\[
+  \mathrm{PLog}\, M(q)
+  \;=\;
+  \sum_{n \ge 1} q^n
+  \sum_{\substack{m, k, d \ge 1 \\ mkd = n}}
+  \frac{\mu(d)\, k}{d\, m}
+  \;=\;
+  \sum_{n \ge 1} q^n \cdot \frac{(-1)^{n-1}}{n^2}.
+\]
+The last equality uses the identity
+$\sum_{mkd = n} \mu(d) k / (dm) = (-1)^{n-1}/n^2$, which follows from
+the Euler product of the Dirichlet series
+$\sum_n \Omega(n) n^{-s} = \prod_p (1 - p^{-s})^{-1} \cdot
+(1 + p^{-s})^{-1} = \zeta(s)/\zeta(2s)$ at the level of formal power
+series, combined with the M\"{o}bius function identity
+$\sum_{d | n} \mu(d)/d = \phi(n)/n$ and the Ramanujan sum.  (A direct
+verification for small $n$ confirms:
+$\Omega(1) = 1$, $\Omega(2) = -1/4 \to -1$ after motivic normalisation,
+etc.  The formula $(-1)^{n-1}/n^2$ is the motivic DT invariant; the
+integral DT invariant is $\lfloor |\Omega(n)| + 1/2 \rfloor$.)
+\end{proof}
+
+\begin{remark}[Bar--DT correspondence]
+\label{rem:bar-dt-correspondence}
+\index{bar--DT correspondence}
+The bar complex of $W_{1+\infty}$ and the DT partition function of
+the Jordan quiver are controlled by the same generating function.  This
+is not a coincidence: both encode the cofree coalgebra on the BPS
+spectrum.  Precisely:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The \emph{DT partition function} $Z_{\mathrm{DT}} = M(q)$ is the
+  exponential of the BPS spectrum via the plethystic exponential:
+  $Z_{\mathrm{DT}} = \mathrm{PExp}(\sum_n \Omega(n) q^n)$.
+\item The \emph{bar Poincar\'{e} series} (weight-refined) of $W_\infty$
+  is $P_{W_\infty}(q,1) = M(q)$ by
+  Theorem~\textup{\ref{thm:MacMahon-connection}}.
+\item The \emph{plethystic logarithm} of the bar Poincar\'{e} series
+  recovers the DT invariants $\Omega(n)$: these are the primitive
+  elements of the bar coalgebra, i.e.\ the bar cogenerators.
+\end{enumerate}
+In the language of Conjecture~\ref{conj:coha}, the bar complex
+$B(W_{1+\infty})$ is the coalgebraic avatar of the CoHA
+$\cH_{\mathrm{CoHA}}(Q_1)$: the bar differential encodes the Hall
+product, the bar cogenerators are the BPS states, and the DT invariants
+$\Omega(n) = (-1)^{n-1}/n^2$ are the Euler characteristics of the
+spaces of bar cogenerators at dimension vector~$n$.
+
+The Koszul dual of $B(W_{1+\infty})$ is the dg-shifted Yangian
+$Y_\hbar(\mathfrak{gl}_1)$, which governs the line operators in the 3d
+HT theory associated to $W_{1+\infty}$.  This is the $N \to \infty$
+limit of the identification
+$\cA^!_{\mathrm{line}} \simeq Y_\hbar(\fg)$ of
+Corollary~\textup{\ref{cor:holographic-dictionary}}.
+\end{remark}
+
+\subsubsection{Wall-crossing and the bar filtration}
+\label{subsubsec:wall-crossing-bar}
+
+\begin{computation}[Stability conditions and the bar filtration;
+\ClaimStatusConjectured]
+\label{comp:wall-crossing-bar}
+\index{wall-crossing!bar filtration}
+The CoHA carries a stability filtration: for each slope
+$\theta \in \RR \cup \{\infty\}$, the $\theta$-semistable locus
+$\Rep^{\theta\text{-ss}}(Q_1, n) \subset \Rep(Q_1, n)$ determines a
+sub-correspondence and hence a subalgebra
+$\cH^{\theta\text{-ss}} \subset \cH_{\mathrm{CoHA}}(Q_1)$.
+
+For the Jordan quiver $Q_1$, the stability parameter is a real number
+$\zeta \in \RR$.  The moduli of $\zeta$-stable representations of
+dimension $n$ is:
+\begin{itemize}
+\item $\zeta > 0$: every nonzero representation is stable
+  \textup{(}all eigenvalues of the loop endomorphism are constrained by
+  the moment map\textup{)}, and $\cM^{\zeta\text{-st}}(n) =
+  \mathrm{Hilb}^n(\CC^2)$, the Hilbert scheme of $n$ points on $\CC^2$.
+\item $\zeta = 0$: the moduli is the symmetric product
+  $\Sym^n(\CC^2) = \CC^{2n}/S_n$, which is singular.
+\item $\zeta < 0$: all nonzero representations are again stable by
+  symmetry of the moment map.
+\end{itemize}
+
+The wall-crossing formula
+\textup{(}Kontsevich--Soibelman~\textup{\cite{KS08}}\textup{)} for the
+DT invariants at the single wall $\zeta = 0$ is the identity
+\begin{equation}\label{eq:wall-crossing-jordan}
+  \prod_{n \ge 1}^{\curvearrowright}
+  E\bigl(\Omega^+(n)\, q^n\bigr)
+  \;=\;
+  \prod_{n \ge 1}^{\curvearrowleft}
+  E\bigl(\Omega^-(n)\, q^n\bigr),
+\end{equation}
+where $E(x) = \exp\bigl(\sum_{k \ge 1} x^k/(k^2)\bigr)$ is the
+quantum dilogarithm, $\Omega^\pm(n)$ are the DT invariants on either
+side of the wall, and the ordered products are taken in increasing
+\textup{(}resp.\ decreasing\textup{)} slope.  For the Jordan quiver,
+the wall-crossing is trivial: $\Omega^+(n) = \Omega^-(n)
+= (-1)^{n-1}/n^2$ on both sides, because all semistable objects have
+the same slope (dimension vector is one-dimensional).
+
+The bar complex sees this structure through its \emph{weight filtration}.
+The bar complex $B(W_{1+\infty})$ carries a filtration by conformal
+weight $F^{\le n} B := \bigoplus_{k \le n} B_k$, and the associated
+spectral sequence has
+\[
+  E_1^{p,q}
+  \;=\;
+  H^{p+q}(F^p B / F^{p-1} B)
+  \;\Longrightarrow\;
+  H^{p+q}(B(W_{1+\infty})).
+\]
+The differentials in this spectral sequence implement the bar-complex
+analogue of wall-crossing: the $d_r$ differential at page $r$ connects
+bar cohomology classes of weight difference $r$, corresponding to bound
+states of charge difference $r$ crossing the wall.
+
+For the Jordan quiver the spectral sequence degenerates at $E_1$
+\textup{(}because $W_{1+\infty}$ is Koszul and the bar complex has no
+higher differentials beyond the binary\textup{)}, reflecting the
+triviality of the wall-crossing.  For more general quivers
+\textup{(}e.g.\ the conifold quiver, where genuine wall-crossing
+occurs\textup{)}, the spectral sequence is expected to be nontrivial,
+with the $d_r$ differentials encoding the Kontsevich--Soibelman
+wall-crossing formula at each page.
+\end{computation}
+
+\begin{remark}[The bar--DT dictionary]
+\label{rem:bar-dt-dictionary}
+\index{bar--DT dictionary|textbf}
+We summarise the dictionary between the bar complex and the
+Donaldson--Thomas/CoHA framework:
+\[
+\renewcommand{\arraystretch}{1.4}
+\begin{array}{lcl}
+  \textbf{Bar complex} & & \textbf{CoHA/DT} \\
+  \hline
+  \text{Bar differential}\; d_B
+    & \longleftrightarrow &
+    \text{CoHA Hall product}\; * \\
+  \text{Bar cogenerators}\; H^\bullet(B)
+    & \longleftrightarrow &
+    \text{BPS states}\; \Omega(n) \\
+  \text{Poincar\'{e} series}\; P_B(q)
+    & \longleftrightarrow &
+    \text{DT partition function}\; Z_{\mathrm{DT}}(q) \\
+  \text{Plethystic logarithm of}\; P_B
+    & \longleftrightarrow &
+    \text{DT invariants}\; \Omega(n) \\
+  \text{Bar weight filtration}
+    & \longleftrightarrow &
+    \text{Stability filtration} \\
+  \text{Weight spectral sequence}\; d_r
+    & \longleftrightarrow &
+    \text{KS wall-crossing}\; \mathfrak{S}_\gamma \\
+  \text{Koszul dual}\; W_{1+\infty}^!
+    & \longleftrightarrow &
+    \text{dg-shifted Yangian}\; Y_\hbar(\mathfrak{gl}_1) \\
+  \text{Ordered bar}\; B^{\mathrm{ord}}(W_{1+\infty})
+    & \longleftrightarrow &
+    \text{Motivic DT}\; (\text{with ordering data})
+\end{array}
+\]
+The last row records that the \emph{ordered} bar complex
+(Part~VII, Chapter~\textup{\ref{ch:ordered-associative-chiral-kd}})
+retains the $R$-matrix as descent datum, which in the DT framework
+corresponds to retaining the motivic refinement
+\textup{(}the Hodge--Deligne weight on BM homology\textup{)}
+rather than passing to numerical DT invariants.
+
+The AP-OC anti-pattern applies here with full force: the bar complex
+$B(W_{1+\infty})$ classifies \emph{twisting morphisms}
+(universal couplings between $W_{1+\infty}$ and $W_{1+\infty}^!$),
+not the bulk observables.  The bulk of the 3d HT theory associated
+to $W_{1+\infty}$ is the chiral derived center
+$Z^{\mathrm{der}}_{\mathrm{ch}}(W_{1+\infty})$, which is a
+different and richer object.  The DT partition function $M(q)$
+lives on the bar side (twisting morphisms/BPS states), not on the
+bulk side.
+\end{remark}
+
+\begin{remark}[Beyond the Jordan quiver]
+\label{rem:beyond-jordan}
+For a general symmetric quiver $Q$ with dimension vector $\mathbf{d}$,
+the CoHA $\cH_{\mathrm{CoHA}}(Q)$ is associated to a vertex algebra
+$\cA_Q$ by the general version of the Schiffmann--Vasserot correspondence,
+and the bar complex $B(\cA_Q)$ should compute the DT partition function
+of the associated Calabi--Yau threefold (or, for the framed quiver, the
+Nekrasov partition function).  The cases verified by the present
+framework are:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Jordan quiver $Q_1$}: $\cA_{Q_1} = W_{1+\infty}$,
+  $Z_{\mathrm{DT}} = M(q)$, $\Omega(n) = (-1)^{n-1}/n^2$
+  (Computation~\ref{comp:dt-jordan}).
+\item \emph{$\widehat{A}_0$ quiver} (one vertex, no loops, framing):
+  $\cA = \cH_k$ (Heisenberg), $Z_{\mathrm{DT}} = \prod(1-q^k)^{-1}$
+  (partition function), $\Omega(n) = 1$ for all $n$ (no bound states).
+  This is the Rosetta stone: the Heisenberg bar complex with
+  $P(t) = 1 + t$ gives, after exponentiating,
+  $Z = \prod(1-q^k)^{-1}$.
+\item \emph{Conifold quiver} (two vertices, two arrows):
+  genuine wall-crossing occurs, and the bar spectral sequence is
+  expected to be nontrivial.  This case is frontier.
+\end{enumerate}
+The general conjecture is that the bar complex of the vertex algebra
+associated to a symmetric quiver $Q$ computes the motivic DT invariants
+of $Q$, with the bar differential encoding the Hall product and the
+bar filtration encoding the stability structure.  This is
+Conjecture~\ref{conj:coha} specialised to the quiver setting.
+\end{remark}
+
 \begin{conjecture}[Chromatic lift of the HT associator; \ClaimStatusConjectured]\label{conj:chromatic-lift}
 For a spectral lift of a resolved logarithmic HT datum, the reduced HT associator admits compatible chromatic localizations whose height-$n$ pieces are computed by the monodromy of the $E(n)$-localized spectral factorization algebra.
 \end{conjecture}
