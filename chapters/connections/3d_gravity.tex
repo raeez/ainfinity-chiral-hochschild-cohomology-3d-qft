@@ -74,10 +74,12 @@ previous:
 \end{enumerate}
 At $c = 0$ (no quartic pole), the scalar curvature disappears:
 the dual point is the Witt algebra on the uncurved scalar locus,
-and the scalar genus package vanishes.  This does not prove that the
-full $\Ainf$ structure is trivial or that the full higher-arity tower
-vanishes.  The quartic pole is the engine of the nonlinear corrections.
-This is an instance of the pole-order principle
+and the scalar genus package vanishes.  But the full $\Ainf$
+structure does not truncate: the field-dependent terms in every
+$m_k$ are $c$-independent (Theorem~\ref{thm:gravity-c-linearity}),
+so they survive unchanged at $c = 0$.
+The quartic pole is the engine of the nonlinear corrections.
+The complexity classification is an instance of the pole-order principle
 (\S\ref{sec:pole-order-principle}): the maximal OPE pole order
 controls the $\Ainf$ complexity class.  Affine Kac--Moody, with
 poles of order at most~$2$, lives in class~$\mathbf{L}$: the
@@ -639,14 +641,16 @@ input.
 
 \subsubsection*{The weight-depth identity and gap migration}
 
+The degree pattern has a deeper structure.
 Each monomial in $m_n(T,\ldots,T;\,\lambda)$ carries two
 natural gradings: the \emph{derivative weight}
 $w = j$ (from $\partial^j T$) and the \emph{spectral depth}
 $d = \deg_\lambda(\text{coefficient})$.
-The degree pattern~(b) above asserts $w + d = n - 1$ for the
+Feature~(b) records the identity $w + d = n - 1$ for the
 $T$-dependent sector and $\deg_\lambda = n + 1$ for the scalar
-contact term.  The following theorem sharpens this to a structural
-gap statement.
+contact term.  But the identity conceals a gap: certain depths
+are structurally forbidden, and the forbidden depth migrates as
+the algebra changes.
 
 \begin{theorem}[Gap migration; \ClaimStatusProvedHere]
 \label{thm:gap-migration}%
@@ -1028,9 +1032,22 @@ factorial $k!$ at $x = 0$ is the product $2 \cdot 3 \cdots k$
 of the integer roots.
 \end{proof}
 
+The Catalan number $C_n$ and the Pochhammer factor $\prod(x+m)$
+have independent origins, each forced by a
+different colour of the Swiss-cheese operad.  The Catalan number
+counts planar binary trees: it is the topological colour, the
+$E_1$ combinatorics of $\Conf_k^<(\R)$.  The Pochhammer factor
+weighs each tree by the product of sesquilinearity eigenvalues:
+it is the holomorphic colour, the spectral content of
+$\FM_k(\C)$.  The multiplicative separation reflects the
+product structure $\FM_k(\C) \times \Conf_k^<(\R)$ of the
+operation spaces.  Four mechanisms --- developed in
+Remarks~\ref{rem:sesquilinearity-two-colour}--\ref{rem:free-poisson-shadow}
+--- make this precise.
+
 \begin{remark}[Even/odd dichotomy and the depth spectrum table]
 \label{rem:period-2-verification}%
-The depth spectrum table above verifies the period-$2$ pattern
+The depth spectrum table verifies the period-$2$ pattern
 at arities $2$--$6$: at even arities $4$ and $6$, the depth
 spectrum starts at $d = 2$ (confirming the vanishing of
 $d = 0, 1$), while at odd arities $3$ and $5$, the spectrum is
@@ -1039,16 +1056,180 @@ The arity-$2$ case ($\operatorname{Spec} = \{0, 1\}$, both
 depths populated) is odd and conforms to~(ii).
 \end{remark}
 
+\begin{remark}[Sesquilinearity and the two-colour factorisation]
+\label{rem:sesquilinearity-two-colour}%
+\index{sesquilinearity!two-colour factorisation|textbf}%
+\index{Catalan number!topological colour}%
+\index{Pochhammer symbol!holomorphic colour}%
+The Catalan
+factorisation of
+Theorem~\ref{thm:period-2-parity}(iv) admits a
+two-colour reading.  The symmetric-point scalar shadow
+\[
+|S_r|
+\;=\;
+C_{r-1} \;\times\; \frac{(2r+1)!}{2}
+\]
+separates into a \emph{topological} factor $C_{r-1}$
+(the Catalan number counting planar binary trees with $r$
+internal vertices, i.e.\ the combinatorics of the $E_1$
+colour on $\Conf_r^<(\R)$) and a \emph{holomorphic} factor
+$(2r+1)!/2$ (the Pochhammer product from the falling
+factorial $\prod_{m=2}^{k}(x+m)$ at $x = 1$, i.e.\ the
+spectral content of the holomorphic colour on $\FM_r(\C)$).
+The topological colour counts the trees; the holomorphic
+colour weighs each tree by the product of sesquilinearity
+eigenvalues at every internal edge.  This
+multiplicative separation reflects the product structure
+$\FM_k(\C) \times \Conf_k^<(\R)$ of the Swiss-cheese
+operation spaces: the Catalan number is the Euler
+characteristic of the associahedron $K_r$
+($\chi(K_r) = C_{r-1}$), while the Pochhammer factor is
+the spectral integral over the holomorphic fibre.
+\end{remark}
+
+\begin{remark}[Ward identity collapse: all trees are equal]
+\label{rem:h-collapse-ward}%
+\index{Ward identity!tree collapse|textbf}%
+\index{homotopy!Ward identity collapse}%
+The tree-counting interpretation in the proof of
+Theorem~\ref{thm:period-2-parity} conceals the following.
+The contracting homotopy $h$ of the deformation retract
+$(H, \cA, \iota, p, h)$ satisfies
+\begin{equation}\label{eq:h-collapse-ward}
+h\bigl(m_2(T, T;\, \lambda)\bigr)
+\;=\;
+T,
+\end{equation}
+up to $\lambda$-dependent normalisation: every internal edge
+of a planar binary tree, upon composition with the binary
+product $m_2$ and projection to the $T$-sector, returns
+the stress tensor.  This is the Ward identity for conformal
+transformations: the OPE $T(z)T(w)$ closes on $T$ at the
+level of conformal primaries, and $h$ projects to the
+primary subspace.  Consequently, at the symmetric point,
+\emph{every} planar binary tree with the same number of
+leaves contributes the \emph{same} amount to the field
+polynomial $\varphi_k$: each of $C_n$
+trees contributes equally, so the Catalan number is a
+multiplicity, not a weighted sum.  The trees are topologically
+distinct but spectrally identical at the symmetric point.
+\end{remark}
+
+\begin{remark}[Partition independence and Catalan convolution extraction]
+\label{rem:partition-independence}%
+\index{partition independence|textbf}%
+\index{Catalan number!convolution extraction}%
+Each tree contributes the same
+amount (Remark~\ref{rem:h-collapse-ward}); the algebraic mechanism
+that makes the Catalan convolution \emph{extractable} from the
+Stasheff recursion is partition independence.
+The scalar amplitude function $g(a,b)$ (the contribution
+from a Stasheff composition with subtrees of sizes $a$ and
+$b$, $a+b = r$) satisfies
+\begin{equation}\label{eq:partition-independence}
+g(a,b)
+\;=\;
+g(a+b)
+\;=\;
+(-1)^r\,(2r+1)(2r)!.
+\end{equation}
+That is, the scalar amplitude depends only on the
+\emph{total} arity $r = a + b$, not on the partition
+$(a,b)$.  Individual HPL tree contributions with the same
+total arity but different left-right splits are \emph{not}
+equal --- they differ by spectral-parameter-dependent
+factors from the sesquilinearity.  Nevertheless, when the
+scalar projection is taken and the symmetric-point
+evaluation is applied, the asymmetry cancels: the spectral
+content factors through the total arity.  This factoring
+is what allows the Catalan convolution
+$C_r = \sum_{a+b=r} C_a C_b$ to be \emph{extracted} from the
+Stasheff recursion: without partition independence, the
+convolution would be a weighted sum $\sum w(a,b) C_a C_b$
+with no closed form.  The mechanism is the telescoping of the
+falling factorial $\prod_{m=2}^{k}(x+m)$ in
+Step~3 of the proof above: the inner and outer Pochhammer
+ranges concatenate perfectly regardless of the split point.
+\end{remark}
+
+\begin{remark}[Profile polynomial and $\mathfrak{sl}_2$-Verma roots]
+\label{rem:profile-polynomial-sl2}%
+\index{profile polynomial|textbf}%
+\index{Verma module!truncated!eigenvalues as roots}%
+\index{Barnes G-function@Barnes $G$-function!discriminant}%
+The roots of the other factor --- the falling
+factorial $\prod(x+m)$ --- carry
+representation-theoretic content.
+The roots of the field polynomial $\varphi_k(x)$ are
+$\{-2, -3, \ldots, -k\}$
+(Theorem~\ref{thm:period-2-parity}(ii)).  These are
+precisely the $L_0$-eigenvalues of the truncated Virasoro
+Verma module $M_0^{\le k-1}$ at conformal weight $h = 0$,
+shifted by the conformal weight offset:
+$L_0|_{M_0^{\le k-1}}$ has eigenvalues $\{0, 1, \ldots, k-1\}$,
+and $\varphi_k(-x)$ vanishes at $x = 2, 3, \ldots, k$, i.e.\
+at $L_0 = 2, 3, \ldots, k$ (the non-vacuum levels).
+The polynomial $\varphi_k$ is therefore the \emph{profile
+polynomial} of the $\Ainf$ tower: its root locus records the
+internal propagation spectrum of the contracting homotopy~$h$,
+and its discriminant
+$\Delta(\varphi_k) = \prod_{2 \le i < j \le k}(j - i)^2 = \prod_{m=1}^{k-2} m!^2$
+is a Barnes $G$-function:
+$\Delta(\varphi_k) = G(k)^2/G(2)^2$.  For $\mathfrak{sl}_2$
+at level $k$, the truncated Verma has
+$L_0$-eigenvalues $\{0, 1, \ldots, k\}$ and the discriminant
+$\Delta = G(k+2)^2$ encodes the Kac determinant at
+levels $\le k$.
+\end{remark}
+
+\begin{remark}[Free Poisson shadow: Marchenko--Pastur moments]
+\label{rem:free-poisson-shadow}%
+\index{Marchenko--Pastur distribution|textbf}%
+\index{free probability!shadow tower}%
+\index{Catalan number!Marchenko--Pastur moments}%
+The Catalan numbers $C_n$ appearing in the symmetric-point
+field polynomial (Theorem~\ref{thm:period-2-parity}(ii))
+are the moments of the Marchenko--Pastur (free Poisson)
+distribution $\mu_{\mathrm{MP}}$ with parameter $\gamma = 1$:
+\[
+C_n
+\;=\;
+\int_0^4 x^n\, d\mu_{\mathrm{MP}}(x),
+\qquad
+d\mu_{\mathrm{MP}}(x)
+\;=\;
+\frac{\sqrt{4x - x^2}}{2\pi x}\,dx.
+\]
+The shadow tower of Virasoro at the symmetric point is
+therefore a sequence of Marchenko--Pastur moments, weighted
+by the Pochhammer factor.  The
+Catalan numbers arise from the ballot-problem recursion
+$C_n = \sum C_a C_{n-1-a}$, which is the moment recursion
+of the free Poisson distribution in Voiculescu's free
+probability.  The Stasheff recursion at the symmetric point
+\emph{is} this free-probability recursion, with the
+Pochhammer weighting coming from the holomorphic colour.
+In the random-matrix interpretation of
+Remark~\ref{rem:rmt-bar-complex}, this connects the
+shadow tower to the semicircular law: the Marchenko--Pastur
+distribution is the free multiplicative convolution of the
+semicircular law with itself, and the shadow coefficients
+$S_r$ are the corresponding free cumulants of the
+gravitational spectral measure.
+\end{remark}
+
 \subsubsection*{The $c$-linearity theorem}
 
-The explicit computations $m_2$--$m_5$ reveal that the central
-charge enters each $m_k$ through a single scalar term
-$\frac{c}{12}Q_k(\lambda)$, with all $T$-dependent coefficients
-$c$-independent.  This is not an accident of low arity, nor
-special to the Virasoro algebra: it is a structural theorem
-governing the $\Ainf$ tower of any logarithmic $\SCchtop$-algebra
-with a central charge (Proposition~\ref{prop:c-linearity-general}).
-The Virasoro specialisation pins down the polynomial degree.
+A pattern persists across all computed arities $m_2$--$m_5$:
+the central charge enters each $m_k$ through a single scalar
+term $\frac{c}{12}Q_k(\lambda)$, while all $T$-dependent
+coefficients are $c$-independent.  The stress-tensor backreaction
+is universal; only the pure-graviton amplitude knows about $c$.
+This separation holds for any
+logarithmic $\SCchtop$-algebra with a central charge
+(Proposition~\ref{prop:c-linearity-general}).  The Virasoro
+specialisation fixes the polynomial degree.
 
 \begin{theorem}[$c$-linearity of the Virasoro $\Ainf$ tower; \ClaimStatusProvedHere]
 \label{thm:gravity-c-linearity}
@@ -1532,7 +1713,7 @@ Euler integral.  Here the loop momenta are spectral parameters,
 the Feynman propagators are Shapovalov propagators, and the
 cumulative sums are the cumulative linear forms
 $\sigma_v = \lambda_1 + \cdots + \lambda_j$.  The factorial
-is permanent, not accidental.
+is structural.
 \end{remark}
 
 \begin{remark}[Gravitational interpretation of the dichotomy]
@@ -1579,6 +1760,12 @@ algebraic encoding of this dynamical triviality.
 
 \subsection{Movement II: the Koszul triangle}
 \label{subsec:gravity-koszul}
+
+Movement~I constructed the $\Ainf$ tower $\{m_k\}_{k \ge 2}$
+from the quartic pole.  The bar complex $\barB(\mathrm{Vir}_c)$
+encoding this tower is a dg coalgebra from which three functors
+extract boundary, lines, and bulk --- the three vertices of the
+Koszul triangle.
 
 \begin{theorem}[Gravitational Koszul triangle; \ClaimStatusProvedHere]
 \label{thm:gravity-koszul-triangle}
@@ -1762,6 +1949,12 @@ $\xrightarrow{\barB}$ lines $\xrightarrow{\Zder}$ bulk.
 \subsection{Movement III: the $R$-matrix}
 \label{subsec:gravity-r-matrix}
 
+The Koszul triangle of Movement~II organises the algebraic output
+into boundary, lines, and bulk.  The $R$-matrix connects these
+three vertices: it is the braiding datum that governs how line
+operators wind around each other, and its Yang--Baxter equation is
+the integrability condition that makes the triangle consistent.
+
 \subsubsection*{The classical $r$-matrix from the Laplace transform}
 
 The classical $r$-matrix is the Laplace transform of the
@@ -1898,8 +2091,8 @@ is the arity-$(n,0)$ genus-$0$ projection of the MC element
 $\alpha_T$.  On the Virasoro comparison surface, this is the
 genus-$0$ conformal Ward connection.  On the degenerate-representation
 comparison surface, its higher collision residues yield the BPZ
-differential equations.  The corresponding monodromy representation on
-the corresponding conformal-block package supplies the comparison-surface
+differential equations.  The monodromy representation on
+the resulting conformal-block package supplies the comparison-surface
 braiding data for line operators.
 
 \subsubsection*{Tensor decomposition and fusion rules}
@@ -2670,7 +2863,7 @@ The first six rows confirm the original dichotomy: every
 boundary algebra obtained by \emph{principal} Drinfeld--Sokolov
 reduction has a fully primitive coproduct, and every boundary
 algebra consisting of fundamental fields has a nontrivial one.
-The seventh row --- the Bershadsky--Polyakov algebra --- reveals
+The seventh row --- the Bershadsky--Polyakov algebra --- instantiates
 the third column of the trichotomy
 (Corollary~\ref{cor:gauge-gravity-dichotomy}).  Free generators
 are primitive (the ghost-number obstruction applies), but the
@@ -2780,10 +2973,13 @@ opposite corners of the $(m, \Delta)$-complexity plane.
 \subsubsection*{The $r$-matrix seeds the genus tower}
 \label{par:btz-r-matrix}
 
-All gravitational reading data discussed here is channeled through the collision
-residue~\eqref{eq:gravity-r-matrix-determines-all}.  In the corresponding
-gravitational reading, this $r$-matrix seeds the genus tower and thereby
-underlies the conjectural BTZ thermodynamic statements.
+The collision residue~\eqref{eq:gravity-r-matrix-determines-all}
+is the genus-$0$, arity-$2$ datum.  It seeds the entire genus
+tower through self-sewing: the $r$-matrix couples to itself on
+each handle of $\overline{\mathcal{M}}_{g,n}$, producing the
+genus-$g$ free energy $F_g$ as a Hodge integral weighted by
+$\kappa_{\mathrm{eff}}$.  The Cardy entropy is the
+high-temperature shadow of this tower.
 
 The self-sewing construction couples $r^{\mathrm{Vir}}(z)$
 to the Hodge class on $\overline{\mathcal{M}}_{g,n}$.  At
@@ -2957,8 +3153,8 @@ behave as follows:
   $p \otimes p$, giving a nonzero cross-term
   $\Delta_{z,1}(T) \ni (1/z)\, J \otimes J$.
 \end{enumerate}
-This reveals a clean dichotomy between principal and
-non-principal DS reductions:
+The dichotomy between principal and
+non-principal DS reductions is sharp:
 \begin{itemize}
 \item \textbf{Principal} ($\mathrm{Vir}$, $\mathcal{W}_N$):
   \emph{all} fields are primitive, including composites,
@@ -3011,6 +3207,17 @@ physics lives entirely in the $r$-matrix.
 
 \subsection{Movement IV: the genus tower}
 \label{subsec:gravity-genus-tower}
+
+Movements I--III operated at genus~$0$: the $\Ainf$ tower,
+the Koszul triangle, the $R$-matrix, the coproduct --- all
+live on $\FM_k(\C) \times \Conf_k^<(\R)$, the product of
+holomorphic and topological configuration spaces on
+$\C \times \R$.  Movement~IV raises the genus.  The
+curvature $d_{\mathrm{fib}}^2 = \kappa_{\mathrm{eff}}
+\cdot \omega_g$ measures the failure of the genus-$0$
+differential to square to zero on genus-$g$ surfaces,
+and the genus tower $\{F_g\}_{g \ge 1}$ records this
+failure as a sequence of Hodge integrals.
 
 \subsubsection*{Genus-$1$ curvature}
 
@@ -3209,6 +3416,10 @@ partition function.  At $c = 13$ (Koszul self-duality):
 $Z_{\mathrm{grav}}^{\mathrm{scal}} = |\eta(\tau)|^{-13/6}$.
 
 \subsubsection*{The shadow tower}
+
+The genus tower is controlled by a sequence of invariants,
+each extracted from the $\Ainf$ tower at increasing arity.
+The first four named shadows and their gravitational readings:
 
 \begin{center}
 \small
@@ -4862,7 +5073,7 @@ for the $\tau$-dependent family of $R$-matrices.
 \subsubsection*{Connections to modular forms and
 three-dimensional geometry}
 
-The genus-$1$ computation reveals three connections.
+The genus-$1$ computation has three consequences.
 
 \emph{1.\ Eisenstein series $E_2(\tau)$.}
 The weight-$2$ Eisenstein series $E_2$ controls the genus-$1$
@@ -5168,6 +5379,36 @@ quasi-primary Shapovalov inverse has poles at $c = 1/2$ and
 $c = -68/7$, but $S_5 = -48/[c^2(5c+22)]$ (no new poles).
 \end{proof}
 
+\begin{remark}[Stasheff cancellation as topological recursion planarity]
+\label{rem:stasheff-planarity}%
+\index{Stasheff cancellation!topological recursion|textbf}%
+\index{topological recursion!planarity}%
+\index{Eynard--Orantin recursion!Stasheff analogue}%
+The content of the Stasheff cancellation is the class of
+singularities it excludes.  Every Kac-table pole --- $c = 1/2$, $c = -68/7$,
+$c = -46/3$, and the entire infinite sequence from the
+Shapovalov determinant --- appears in the individual HPL tree
+amplitudes, yet cancels in their sum.  The mechanism is
+planarity, in the precise sense of Eynard--Orantin.
+
+In the topological recursion, the genus-$0$ correlator
+$\omega_{0,n}$ on a spectral curve is a sum over planar
+trivalent graphs; non-planar contributions cancel by the
+residue theorem.  The Stasheff recursion is the same
+phenomenon in the $\Ainf$ setting: the shadow tower
+$\{S_r\}$ is the genus-$0$ sector of the gravitational
+$\Ainf$ tower, the HPL formula sums over planar binary
+trees, and the Stasheff identity $\sum m_i \circ m_j = 0$
+is the recursion kernel that enforces planarity.  The shadow
+metric $Q_{\mathrm{Vir}}(t)$ \emph{is} the spectral curve:
+its branch points $t_\pm$ are the only singularities of
+$H(t) = t^2\sqrt{Q(t)}$, and every tree amplitude whose
+denominator contains a Kac-table factor is a non-planar
+contribution that the recursion annihilates.  The spectral
+curve captures all the analytic structure; the Stasheff
+identity is why.
+\end{remark}
+
 \subsubsection*{The quintic shadow: three verifications}
 
 The value $S_5 = -48/[c^2(5c+22)]$ quoted in
@@ -5424,6 +5665,84 @@ At the Lee--Yang point $c = -22/5$, $D$ diverges and the
 shape factor controls the pole structure.
 \end{remark}
 
+The closed-form formula shows that the shape factor
+$F_r$ inherits a $\Z_2$ parity from the
+Catalan coefficients that define it.  We now show that this
+parity is not an artefact of the Virasoro algebra: it
+holds for every one-generator class-$\mathbf{M}$ algebra
+whose generator closes on itself under $m_2$.
+
+\begin{theorem}[Catalan--Dynkin parity; \ClaimStatusProvedHere]
+\label{thm:catalan-dynkin-parity}%
+\index{Catalan number!Dynkin parity|textbf}%
+\index{parity theorem!Catalan--Dynkin}%
+\index{Z2 symmetry@$\Z_2$ symmetry!shadow tower}%
+The period-$2$ parity of
+Theorem~\textup{\ref{thm:period-2-parity}} is a $\Z_2$
+phenomenon in the following precise sense.
+Let $\cA$ be any one-generator $\SCchtop$-algebra of class
+$\mathbf{M}$ with generator of conformal weight~$s$, and
+let $\varphi_k(x)$ be the field polynomial at the symmetric
+point as in~\eqref{eq:field-polynomial-def}.  Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textup{(Even-arity vanishing.)}
+  For all even $k \ge 4$, $\varphi_k(x) = 0$,
+  provided the rightmost-reduction mechanism of
+  Theorem~\textup{\ref{thm:period-2-parity}} applies
+  \textup{(}i.e.\ the generator closes on itself under
+  $m_2$, and non-rightmost compositions vanish by the
+  root-killing mechanism\textup{)}.
+\item \textup{(Odd-arity Catalan factorisation.)}
+  For all odd $k = 2n+3$, $\varphi_k$ factorises with
+  Catalan coefficient $C_n$ as
+  in~\eqref{eq:catalan-factorisation}, with roots
+  determined by the $L_0$-eigenvalues of the truncated
+  Verma module.
+\end{enumerate}
+The parity is an involution on the Stasheff operad
+$K_\bullet$, acting as the tree-reflection
+$(\lambda_1, \ldots, \lambda_{k-1}) \mapsto
+(\lambda_{k-1}, \ldots, \lambda_1)$: at even arities this
+involution acts by $(-1)$, killing the field polynomial;
+at odd arities it acts trivially, preserving it.
+
+\textbf{Warning.}  The $\Z_2$ parity is a property of the
+\emph{symmetric-point evaluation}, not of the full spectral
+polynomial $\widetilde{S}_k(\lambda_1, \ldots, \lambda_{k-1})$.
+The full ordered shadow polynomial at even arities is
+\emph{nonzero} --- it merely evaluates to zero at the
+symmetric point.  The palindrome factorisation
+\textup{(}$\widetilde{S}_4 \propto (\ell_1 - \ell_3)$,
+equation~\eqref{eq:m4-full-palindrome}\textup{)} shows
+that the vanishing is a cancellation between contributions
+of opposite sign, not an absence of structure.  The
+ordered bar complex at even arities carries nontrivial
+$E_1$ content that is invisible to the symmetric trace.
+\end{theorem}
+
+\begin{proof}
+The even-arity vanishing (i) follows from the rightmost
+reduction of Step~2 in the proof of
+Theorem~\ref{thm:period-2-parity}: the two surviving terms
+$\varphi_2(k-2+x)\varphi_{k-1}(x)$ and
+$\varphi_2(x)\varphi_{k-1}(x+1)$ cancel identically when
+$\varphi_{k-1}$ has the Catalan factorised form.  The odd-arity
+factorisation (ii) follows from Step~3 by the same Catalan
+convolution, which depends only on the closure property of the
+single generator under $m_2$ (i.e.\ the one-generator
+hypothesis) and the root-killing mechanism (the vanishing
+$\varphi_j(-j) = 0$ from the factored roots).
+The involution statement follows from the palindrome
+factorisation: the tree-reflection $\sigma$ acts on
+$\widetilde{S}_k$ by $\sigma^* \widetilde{S}_k(\lambda_1,
+\ldots, \lambda_{k-1}) = \widetilde{S}_k(\lambda_{k-1},
+\ldots, \lambda_1)$, and the symmetric-point evaluation
+$\lambda_i = 1$ projects to the $\sigma$-invariant part;
+at even arities, $\widetilde{S}_k$ lies in the
+$\sigma$-anti-invariant eigenspace (as exhibited by
+$(\ell_1 - \ell_3)$ at $k = 4$).
+\end{proof}
+
 \begin{remark}[The ordered shadow refinement; \ClaimStatusProvedHere]
 \label{rem:ordered-shadow-refinement}%
 \index{shadow tower!ordered refinement|textbf}%
@@ -5594,6 +5913,12 @@ soft hierarchy persists: soft theorems are kinematic
 \index{conformal bootstrap!from bar complex|textbf}
 \index{crossing symmetry!from Stasheff identity|textbf}
 \index{bootstrap bounds!from Shapovalov form}
+
+The soft graviton hierarchy extracted the $\Ainf$ tower's
+kinematic content.  The conformal bootstrap is the dynamical
+counterpart: it constrains and determines the OPE coefficients
+and correlation functions of the boundary theory.  The bar
+complex produces both.
 
 The conformal bootstrap programme constrains CFT data
 $(\Delta_i, C_{ijk})$ by imposing crossing symmetry and unitarity
@@ -6356,8 +6681,8 @@ nonlinear $\Ainf$ tower is required.
 $t_* = (\beta/2\pi)\log c$]
 \label{rem:scrambling-bar-interpretation}%
 \index{scrambling time!bar-complex interpretation|textbf}%
-The scrambling time $t_* \propto \log c$ has a clean
-operational meaning in the ordered bar complex.  The bar
+The scrambling time $t_* \propto \log c$ has a direct
+interpretation in the ordered bar complex.  The bar
 element $[s^{-1}V|s^{-1}W|s^{-1}V|s^{-1}W]$ lives on
 $\FM_4(\C) \times \Conf_4^<(\R)$.  The temporal
 separations in the topological direction are
@@ -6519,7 +6844,7 @@ Eigenvalue repulsion (GUE)
   & \eqref{eq:genus1-A2} \\
 \end{tabular}
 \end{center}
-The table confirms the structural thesis: the bar complex
+The bar complex
 contains the complete quantum chaotic content of the theory.
 The annular bar complex is the genus-$1$ lift of the strip
 bar complex; the genus-$1$ curvature
@@ -6542,6 +6867,13 @@ identity-block dominance at large central charge.
 \label{subsec:ds-ordered-bar}
 \index{Drinfeld--Sokolov reduction!ordered bar intertwining|textbf}
 \index{bar complex!ordered!DS intertwining|textbf}
+
+The preceding sections worked primarily with the symmetric bar
+complex $B^\Sigma(\mathrm{Vir}_c)$.  The two-colour Koszul
+duality architecture of Part~VII provides a finer invariant:
+the ordered bar complex $B^{\mathrm{ord}}$, which retains
+the linear ordering on configurations.  We now verify that
+Drinfeld--Sokolov reduction respects this finer structure.
 
 The DS--bar intertwining theorem
 (Vol~I, Theorem~\ref*{V1-thm:ds-koszul-intertwine};
