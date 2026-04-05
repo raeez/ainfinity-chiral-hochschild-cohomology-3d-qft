@@ -69,6 +69,26 @@ The former axioms are now derived:
 
 All results in Parts I–VII hold unconditionally for any logarithmic SC^{ch,top}-algebra. Physical theories (gauge theories satisfying Theorem thm:physics-bridge) provide the standard class of examples.
 
+## The Multi-Path Verification Mandate
+
+**Every computational result in the manuscript must be supported by multiple independent computations that all point to the same result.** This is not optional. A number that appears in the manuscript with only one derivation path is UNVERIFIED. Confidence requires convergence from independent directions.
+
+**Minimum verification standard**: Every numerical formula, invariant value, or computational claim requires AT LEAST THREE independent verification paths before it can be considered reliable. These paths must be genuinely independent — not trivial rearrangements of the same computation.
+
+**Verification path taxonomy** (use at least 3 per claim):
+1. **Direct computation** — compute from the defining formula
+2. **Alternative formula** — compute from an equivalent but structurally different expression
+3. **Limiting case** — verify against known special cases
+4. **Symmetry/duality** — verify via complementarity, level-rank duality, DS reduction, etc.
+5. **Cross-family consistency** — verify additivity, multiplicativity, or functoriality across families
+6. **Literature comparison** — verify against published values with explicit source and convention check (AP38, AP49)
+7. **Dimensional/degree analysis** — verify correct weight, degree, and units
+8. **Numerical evaluation** — evaluate at specific parameter values and compare across methods
+
+**Cross-volume propagation**: When a formula appears in Vol I and Vol II, ALL instances must be independently verified and cross-checked. Convention differences between volumes (AP49: OPE modes in Vol I vs λ-brackets in Vol II) make blind copying dangerous. The Vol II λ-bracket coefficient at order n is a_{(n)}b/n!, NOT a_{(n)}b (AP44).
+
+**The compute/ layer is the verification engine.** Every formula in the .tex source should have a corresponding test in compute/tests/ that verifies it by at least 2 methods.
+
 ## Beilinson Rectification Loop
 
 The Vol I `CLAUDE.md` supplies the source protocol. For Vol II, the Codex-native enactment now lives locally in `AGENTS.md`: use `update_plan` for loop state, local RED/BLUE/GREEN passes by default, `multi_tool_use.parallel` for shell fan-out, `exec_command` for build/test/worktree steps, `apply_patch` for fixes, and `compute/audit/linear_read_notes.md` as the findings register. Run the Beilinson loop on the live Vol II surface or on a named target chapter, and treat convergence as "no actionable findings at severity MODERATE or above after re-audit plus the relevant verification passes."
