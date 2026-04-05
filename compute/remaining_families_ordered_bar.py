@@ -10,7 +10,7 @@ Computes the COMPLETE ordered bar complex package for:
 
 For each family: collision residues with d-log absorption (AP19),
 m₂/m₃/m₄ as polynomials in spectral parameters, R-matrix R(z),
-shadow tower S₂/S₃/S₄ (scalar and full E₁), GLCM classification,
+shadow obstruction tower S₂/S₃/S₄ (scalar and full E₁), GLCM classification,
 Euler-eta verification.
 
 CONVENTIONS (from CLAUDE.md):
@@ -458,7 +458,7 @@ class N2Superconformal:
         }
 
     def shadow_tower(self) -> Dict[str, Any]:
-        """Shadow tower S₂, S₃, S₄ for all channels.
+        """Shadow obstruction tower S₂, S₃, S₄ for all channels.
 
         The shadow coefficients are the Taylor coefficients of the
         generating function H(t) = t² √Q(t), where Q(t) is the
@@ -786,7 +786,7 @@ class N4Superconformal:
         }
 
     def shadow_tower(self) -> Dict[str, Any]:
-        """Shadow tower for the N=4 SCA.
+        """Shadow obstruction tower for the N=4 SCA.
 
         Multi-channel: 7 distinct channel types.
         """
@@ -986,7 +986,7 @@ class AffineExceptional:
         }
 
     def shadow_tower(self) -> Dict[str, Any]:
-        """Shadow tower: terminates at depth 2 (class L).
+        """Shadow obstruction tower: terminates at depth 2 (class L).
 
         S₂ = κ = dim(g)·k/(2(k+h∨))   [the curvature]
         S₃ = 0                           [m₃ = 0]
@@ -1192,7 +1192,7 @@ class BershadskyPolyakov:
         }
 
     def shadow_tower(self) -> Dict[str, Any]:
-        """Shadow tower for BP algebra."""
+        """Shadow obstruction tower for BP algebra."""
         c = self.c
         k = self.k
 
@@ -1292,7 +1292,7 @@ class VirasoroMinimalModel:
       d[s⁻¹T | ... | s⁻¹T] = 0  (when the chain passes through |χ⟩)
 
     For M(p,q): the null vector at level pq - p - q + 1 kills certain
-    bar chains. The effect on the shadow tower:
+    bar chains. The effect on the shadow obstruction tower:
 
       S_r(L_c) = S_r(Vir_c) for r < r_trunc
       S_r(L_c) ≠ S_r(Vir_c) for r ≥ r_trunc
@@ -1410,7 +1410,7 @@ class VirasoroMinimalModel:
         2. The bar complex B^{ord}(L_c) is a QUOTIENT of B^{ord}(Vir_c).
         3. The differential still satisfies d² = 0 (it descends to the quotient).
 
-        The shadow tower is MODIFIED:
+        The shadow obstruction tower is MODIFIED:
           S_r(L_c) = S_r(Vir_c) for small r (below the null level)
           S_r(L_c) < S_r(Vir_c) for large r (above the null level)
 
@@ -1503,7 +1503,7 @@ class VirasoroMinimalModel:
         }
 
     def shadow_tower_comparison(self) -> Dict[str, Any]:
-        """Shadow tower comparison: L_c vs Vir_c.
+        """Shadow obstruction tower comparison: L_c vs Vir_c.
 
         For Vir_c (universal):
           S₂ = c/2 (curvature)
@@ -1515,10 +1515,10 @@ class VirasoroMinimalModel:
           S₃ = 2 at generic c, but at c_{p,q} this MAY differ
           S₄ = potentially modified by null vector truncation
 
-        The KEY QUESTION: at which c values does the shadow tower
+        The KEY QUESTION: at which c values does the shadow obstruction tower
         of L_c differ from Vir_c?
 
-        ANSWER: The shadow tower S_r(Vir_c) is a rational function of c.
+        ANSWER: The shadow obstruction tower S_r(Vir_c) is a rational function of c.
         At c = c_{p,q}, these rational functions specialize.
         The denominator 5c+22 in S₄ vanishes at c = -22/5, which is
         the Lee-Yang edge singularity M(5,2)! This is where the shadow
@@ -1526,7 +1526,7 @@ class VirasoroMinimalModel:
 
         For unitary minimal models (q = p-1):
           M(4,3): c = 1/2, S₄ = (180·1/2+872)/(4·(5/2+22)) = 962/(4·49/2) = 962/98 ≈ 9.8
-          The shadow tower is well-defined and finite for all unitary models.
+          The shadow obstruction tower is well-defined and finite for all unitary models.
 
         For non-unitary models:
           M(5,2): c = -22/5, S₄ has a POLE (5c+22 = 0). The bar complex
@@ -1535,7 +1535,7 @@ class VirasoroMinimalModel:
         c = self.c
         p, q = self.p, self.q
 
-        # Compute the Virasoro shadow tower at this c
+        # Compute the Virasoro shadow obstruction tower at this c
         if isinstance(c, Fraction):
             denom = 5 * c + 22
             if denom == 0:
@@ -1562,7 +1562,7 @@ class VirasoroMinimalModel:
             'has_pole': has_pole,
             'pole_model': 'M(5,2) at c=-22/5 (Lee-Yang)' if has_pole else None,
             'unitary': (q == p - 1),
-            'note': ('For unitary models, the shadow tower of L_c agrees with '
+            'note': ('For unitary models, the shadow obstruction tower of L_c agrees with '
                      'Vir_c to high order. The difference appears at arity '
                      'roughly proportional to the null level.'),
         }
@@ -1664,7 +1664,7 @@ def test_n2_sca():
     assert glcm['max_ope_pole'] == 4, "Max OPE pole should be 4 (TT)"
     assert glcm['max_r_pole'] == 3, "Max r-matrix pole should be 3"
 
-    # Check shadow tower
+    # Check shadow obstruction tower
     st = result['shadow_tower']
     assert st['TT']['S2'] == Fraction(1, 2), f"TT S₂ = c/2 = 1/2, got {st['TT']['S2']}"
     assert st['JJ']['S3'] == 0, "JJ S₃ should be 0 (class L)"
@@ -1677,7 +1677,7 @@ def test_n2_sca():
     print("  [PASS] N=2 SCA: GLCM class M (quartic TT pole)")
     print(f"  [PASS] N=2 SCA: curvatures κ_TT={st['TT']['kappa']}, "
           f"κ_JJ={st['JJ']['kappa']}, κ_GG={st['GpGm']['kappa']}")
-    print("  [PASS] N=2 SCA: shadow tower multi-channel structure verified")
+    print("  [PASS] N=2 SCA: shadow obstruction tower multi-channel structure verified")
     print(f"  [INFO] c(k=1) = {n2.c}, c(k=2) = {n2_k2.c}")
 
     # AP19 verification
@@ -1721,7 +1721,7 @@ def test_n4_sca():
     assert cr['GG_diagonal']['r_max_pole'] == 2, "GG diagonal max r-pole should be 2"
     assert cr['JJ']['r_max_pole'] == 1, "JJ max r-pole should be 1"
 
-    # Shadow tower
+    # Shadow obstruction tower
     st = result['shadow_tower']
     assert st['TT']['S2'] == Fraction(3), f"TT S₂ = c/2 = 3, got {st['TT']['S2']}"
     assert st['JJ']['S3'] == 0, "JJ S₃ = 0 (affine sub-sector)"
@@ -1774,7 +1774,7 @@ def test_exceptional_affine():
             f"{name} DS depth gap should be {expected_gap}"
         )
 
-        # Shadow tower: S₂ = κ, S₃ = S₄ = 0
+        # Shadow obstruction tower: S₂ = κ, S₃ = S₄ = 0
         st = result['shadow_tower']
         assert st['S3'] == 0, f"{name} S₃ should be 0"
         assert st['S4'] == 0, f"{name} S₄ should be 0"
@@ -1994,7 +1994,7 @@ def verify_ap19_all_families():
     AP19: OPE pole z^{-n} → r-matrix pole z^{-(n-1)}.
 
     This is the MOST IMPORTANT CONVENTION in the entire computation.
-    A single violation invalidates the shadow tower.
+    A single violation invalidates the shadow obstruction tower.
     """
     print("\n" + "=" * 90)
     print("AP19 VERIFICATION: d-log POLE ABSORPTION")

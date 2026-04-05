@@ -29,7 +29,7 @@ The key objects:
 References:
   Vol II: celestial_boundary_transfer_core.tex (Part III)
   Vol I: concordance.tex (Theorem A, homotopy transfer)
-  Vol I: higher_genus_modular_koszul.tex (shadow tower)
+  Vol I: higher_genus_modular_koszul.tex (shadow obstruction tower)
 """
 from __future__ import annotations
 

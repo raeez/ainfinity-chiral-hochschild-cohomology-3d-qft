@@ -166,7 +166,7 @@ def compute_heisenberg():
     print(f"      (pre-d-log), r = k/z^2 -> k*wp(z), giving EVEN powers with G_4.")
 
     print(f"\n  (5) Genus-1 shadow coefficients: alpha_n^(1) = 0 for all n")
-    print(f"      (Class L: m_k = 0 for k >= 3, no shadow tower)")
+    print(f"      (Class L: m_k = 0 for k >= 3, no shadow obstruction tower)")
 
     # Numerical check
     r_num = genus1_intersection_numerical(k_val=1, z_val=0.01, tau_val=1j)
@@ -239,7 +239,7 @@ def compute_affine_sl2():
     print(f"      KZB connection: nabla_i = d_{z_i} - (1/(k+2))*Omega*zeta(z_ij|tau)")
     print(f"      Quantum group: U_q(sl_2) with q = exp(pi*i/(k+2))")
     print(f"      Elliptic quantum group: E_{{q,p}}(sl_2) of Felder (1994)")
-    print(f"\n  (5) alpha_n^(1) = 0 (class L, no shadow tower)")
+    print(f"\n  (5) alpha_n^(1) = 0 (class L, no shadow obstruction tower)")
 
     return None
 
@@ -279,7 +279,7 @@ def compute_virasoro():
     print(f"      Quasi-modular sector: -dT*G_2(tau)*z [weight 2]")
 
     print(f"\n  (5) Genus-1 shadow coefficient corrections:")
-    print(f"      For Virasoro (class M), the shadow tower {{S_r}}_(r>=2) is INFINITE.")
+    print(f"      For Virasoro (class M), the shadow obstruction tower {{S_r}}_(r>=2) is INFINITE.")
     print(f"      At genus 1, the Stasheff recursion with elliptic collision")
     print(f"      residue produces corrections to each S_r:")
     print(f"        S_r^(1)(tau) = S_r^(0) * [1 + a_(r,1)*G_2(tau) + a_(r,2)*G_4(tau) + ...]")
@@ -527,12 +527,12 @@ def genus1_shadow_corrections():
   CLASS G (free fields, trivial bar complex):
     m_k = 0 for all k >= 2.
     alpha_n^(1) = 0 for all n.
-    No shadow tower to correct.
+    No shadow obstruction tower to correct.
 
   CLASS L (affine Kac-Moody, double pole max):
     m_2 != 0 but m_k = 0 for k >= 3.
     alpha_n^(1) = 0 for all n >= 1.
-    The genus-1 r-matrix modifies m_2 but there is no higher shadow tower.
+    The genus-1 r-matrix modifies m_2 but there is no higher shadow obstruction tower.
     The Yangian Y_hbar(g) structure is undeformed at genus 1.
 
   CLASS C (betagamma, contact/quartic depth):

@@ -604,7 +604,7 @@ def shadow_depth_comparison() -> Dict[str, Dict[str, Any]]:
       M: Virasoro (r_max=inf), W_3 (r_max=inf)
 
     Vol II shadow depth = Vol I shadow depth (the A_infinity depth
-    in the SC setting equals the shadow tower depth).
+    in the SC setting equals the shadow obstruction tower depth).
     """
     depth_map = {
         'Heisenberg H_k': ('G', 2),

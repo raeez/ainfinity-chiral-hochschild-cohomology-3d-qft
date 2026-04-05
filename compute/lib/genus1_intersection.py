@@ -961,7 +961,7 @@ def modular_completion_koszul(family='abelian_cs', max_genus=3, **params):
     6. Extension gives F_g = κ · λ_g^FP at each genus
     7. Generating function: Σ F_g ℏ^{2g-2} = κ·[Â(iℏ) - 1]
 
-    The extension is UNOBSTRUCTED: no shadow tower corrections needed.
+    The extension is UNOBSTRUCTED: no shadow obstruction tower corrections needed.
     """
     from .genus_one_bridge import genus1_curvature
     from .genus2_obstruction_engine import lambda_fp
@@ -992,11 +992,11 @@ def modular_completion_koszul(family='abelian_cs', max_genus=3, **params):
             'Modular completion is AUTOMATIC for Koszul algebras. '
             'Clean intersection + scalar curvature + nef Hodge bundle '
             '= unique extension at every genus. '
-            'No shadow tower corrections.'
+            'No shadow obstruction tower corrections.'
         ),
         'non_koszul_contrast': (
             'For Vir_c (class M): excess intersection, infinite A∞ tower, '
-            'shadow tower corrections at every genus. '
+            'shadow obstruction tower corrections at every genus. '
             'Modular completion requires solving the full obstruction tower — '
             'the central open problem.'
         ),

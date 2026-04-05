@@ -1159,7 +1159,7 @@ def instanton_data(c_val: float) -> Dict[str, Any]:
     # The instanton action from exact WKB and the Borel singularity
     # are related: Borel singularity at zeta = A (the period integral
     # divided by an appropriate normalization).
-    # For the shadow tower (generating function of S_r), the Borel
+    # For the shadow obstruction tower (generating function of S_r), the Borel
     # singularities are at 1/t_+/-, while the WKB instanton action
     # is the period integral. These are related by:
     # A_{WKB} = oint sqrt(Q_L) dt

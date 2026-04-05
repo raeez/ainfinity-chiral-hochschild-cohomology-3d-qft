@@ -4,7 +4,7 @@ SUMMARY OF RESULTS
 ===================
 
 This module proves and verifies the closed-form generating function for the
-FIELD SECTOR of the Virasoro A_infinity shadow tower, complementing the scalar
+FIELD SECTOR of the Virasoro A_infinity shadow obstruction tower, complementing the scalar
 shadow coefficient formula S_r = (-6)^{r-4}*D/(2r*c^{r-3})*F_r(D/144).
 
 THEOREM 1 (T-coefficient generating function at the symmetric point):

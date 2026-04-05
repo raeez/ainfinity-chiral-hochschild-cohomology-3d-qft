@@ -544,7 +544,7 @@ def q_stability_analysis(q: Symbol) -> Dict[str, Dict[str, str]]:
 
     This is the deepest structural fact: the q-deformation changes
     the COEFFICIENTS but not the PATTERN. The combinatorial skeleton
-    (shadow tower, depth spectrum, class) is a topological invariant
+    (shadow obstruction tower, depth spectrum, class) is a topological invariant
     of the OPE structure.
     """
     return {

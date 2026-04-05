@@ -21,7 +21,7 @@ where $Q_L(m,n) = 4\kappa^2 m^2 + 12\kappa\alpha\,mn + (9\alpha^2 + 2\Delta)n^2$
 is the binary quadratic form associated with the shadow metric on a primary line $L$.
 This is defined only for class **M** algebras ($\Delta \neq 0$) and has a functional
 equation $\Lambda_{Q_L}(s) = \Lambda_{Q_L}(1-s)$ proved by Poisson summation.
-**This is an invariant of the bar complex's nonlinear shadow tower, not of the module category.**
+**This is an invariant of the bar complex's nonlinear shadow obstruction tower, not of the module category.**
 
 **(b) The constrained Epstein zeta / primary-counting zeta** (Vol I,
 `genus_complete.tex`, line 2472, following Benjamin-Chang):
@@ -30,14 +30,14 @@ $$
 $$
 where $S = \{h_i\}$ is the set of conformal dimensions of primary fields in
 the VOA. This is the object in Benjamin-Chang's paper. It is determined by
-the *module category* (the primary spectrum), not by the shadow tower.
+the *module category* (the primary spectrum), not by the shadow obstruction tower.
 
 **(c) The shadow-Epstein zeta** (Vol I, `higher_genus_modular_koszul.tex`,
 line 17134):
 $$
 \varepsilon^c_s(\mathcal{A}) = \sum_{r \geq 2} S_r\, r^{-s},
 $$
-the Dirichlet series whose coefficients are the shadow tower moments $S_r$.
+the Dirichlet series whose coefficients are the shadow obstruction tower moments $S_r$.
 Its convergence is governed by the shadow growth rate $\rho(\mathcal{A})$.
 
 These are **three distinct Dirichlet series**. The question "does MTC determine
@@ -55,10 +55,10 @@ determined entirely by the weight multiset $W(\mathcal{A}) = \{w_1, \ldots, w_r\
 is also distinct from $\varepsilon^c_s$ (which sums over *primaries*, not generators).
 
 **Key structural point** (Vol I, `working_notes.tex`, line 2554--2563):
-The shadow tower depends on $(\kappa, \alpha, S_4)$ (arity 2, 3, 4 OPE data).
+The shadow obstruction tower depends on $(\kappa, \alpha, S_4)$ (arity 2, 3, 4 OPE data).
 The Dirichlet-sewing lift depends on the weight multiset $W(\mathcal{A})$.
 These are *independent invariants*: two algebras with the same $W$ but different
-OPE structure constants have the same $S_{\mathcal{A}}(u)$ but different shadow towers.
+OPE structure constants have the same $S_{\mathcal{A}}(u)$ but different shadow obstruction towers.
 
 ---
 
@@ -141,7 +141,7 @@ determined (up to the integer ambiguity above).
 ## 3. The P^1 Benchmark
 
 The benchmark (Vol II, `examples-worked.tex`, line 1785--2933) computes the
-complete platonic datum for $V_k(\mathfrak{sl}_2)$ on
+complete modular Koszul datum for $V_k(\mathfrak{sl}_2)$ on
 $(\mathbb{P}^1, \{0, \infty\})$.
 
 At integrable level $k$, the S-matrix is (eq:benchmark-s-matrix, line 2579):
@@ -165,7 +165,7 @@ The S-matrix determines:
   invariant, eq:benchmark-wzw-partition, line 2248).
 
 But the S-matrix does **not** determine:
-- The shadow tower invariants $(\kappa, \alpha, S_4, \ldots)$, which come from
+- The shadow obstruction tower invariants $(\kappa, \alpha, S_4, \ldots)$, which come from
   the OPE structure constants of the *vacuum module*, not from the module category.
 - The Dirichlet-sewing lift $S_{\mathcal{A}}(u)$, which depends on the weight
   multiset of *generators*.
@@ -244,11 +244,11 @@ The descent chain has five levels:
 |-------|--------|--------|
 | 0 | Koszul duality $\mathcal{A} \mapsto \mathcal{A}^!$ | Proved |
 | 1 | Bar as Fourier: $\bar{B}_X$, inversion, Plancherel | Proved |
-| 2 | Shadow tower as quadratic extension | Proved |
+| 2 | Shadow obstruction tower as quadratic extension | Proved |
 | 3 | Dirichlet-sewing lift $S_{\mathcal{A}}(u)$ | Defined, but independent of Level 2 |
 | 4 | Zeros of $\varepsilon^c_s$ on critical lines | Lattice only; structural obstruction |
 
-The break between Levels 2 and 3 is the key: the shadow tower depends on OPE data
+The break between Levels 2 and 3 is the key: the shadow obstruction tower depends on OPE data
 $(\kappa, \alpha, S_4)$, while the Dirichlet-sewing lift depends on the weight
 multiset $W(\mathcal{A})$. These are independent invariants.
 
@@ -312,7 +312,7 @@ The Verlinde formula provides additional integrality constraints on the S-matrix
 which constrain the possible MTCs (and hence possible $\varepsilon^c_s$), but
 does not add information beyond what the MTC already determines.
 
-**The MTC does NOT determine** the shadow tower invariants $(\kappa, \alpha, S_4)$,
+**The MTC does NOT determine** the shadow obstruction tower invariants $(\kappa, \alpha, S_4)$,
 the Dirichlet-sewing lift $S_{\mathcal{A}}(u)$, or the shadow-metric Epstein zeta
 $\varepsilon_{Q_L}(s)$. These are bar-complex invariants, not module-category
 invariants. The benchmark at line 2596--2608 makes this precise: "the bar complex
@@ -343,7 +343,7 @@ Primary-counting zeta  eps^c_s = sum (2h_i)^{-s}
     |
     |  INDEPENDENT (genus_complete.tex, line 2554-2563)
     |
-Bar complex / shadow tower
+Bar complex / shadow obstruction tower
     |
     v  (encodes kappa, alpha, S_4, ...)
     |

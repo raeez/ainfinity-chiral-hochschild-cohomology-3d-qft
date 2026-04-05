@@ -949,7 +949,7 @@ def quillen_equivalence_check(algebra_data: Dict) -> Dict[str, Any]:
 # =========================================================================
 
 def cross_volume_shadow_bridge(algebra_data: Dict) -> Dict[str, Any]:
-    """Verify that Vol II SC data matches Vol I shadow tower data.
+    """Verify that Vol II SC data matches Vol I shadow obstruction tower data.
 
     The SC bar complex B^{SC}(A, M) in Vol II should be compatible with
     the bar complex B(A) from Vol I. Specifically:

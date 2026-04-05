@@ -69,7 +69,7 @@ Yes, in a precise sense established in Vol I (arithmetic_shadows.tex).  The genu
 
 ## 4. The Key Structural Observation: Arity vs. Genus
 
-The shadow tower lives on the **arity axis**: it consists of the projections $\mathrm{Sh}_r(\Theta_\mathcal{A}) = \pi_r(\Theta_\mathcal{A}) \in \mathcal{A}^{\mathrm{sh}}_{r,\bullet}$ at genus 0 and varying arity $r = 2, 3, 4, \ldots$.  These are the OPE-derived invariants: $\kappa$ (arity 2), the cubic shadow $C$ (arity 3), the quartic contact invariant $Q^{\mathrm{contact}}$ (arity 4), etc.
+The shadow obstruction tower lives on the **arity axis**: it consists of the projections $\mathrm{Sh}_r(\Theta_\mathcal{A}) = \pi_r(\Theta_\mathcal{A}) \in \mathcal{A}^{\mathrm{sh}}_{r,\bullet}$ at genus 0 and varying arity $r = 2, 3, 4, \ldots$.  These are the OPE-derived invariants: $\kappa$ (arity 2), the cubic shadow $C$ (arity 3), the quartic contact invariant $Q^{\mathrm{contact}}$ (arity 4), etc.
 
 The constrained Epstein zeta lives on the **genus axis**: it is extracted from the genus-1 partition function $Z_1(\tau)$ by Rankin--Selberg transform over $\mathcal{M}_{1,1}$, with no marked points.
 
@@ -77,11 +77,11 @@ These are genuinely different axes of the bigraded shadow algebra $\mathcal{A}^{
 
 | Axis | Data | Lives at | Invariant |
 |------|------|----------|-----------|
-| **Arity** (shadow tower) | $\mathcal{A}^{\mathrm{sh}}_{r,0}$ | genus 0, arity $r$ | $\kappa, C, Q, \mathrm{Sh}_r$ |
+| **Arity** (shadow obstruction tower) | $\mathcal{A}^{\mathrm{sh}}_{r,0}$ | genus 0, arity $r$ | $\kappa, C, Q, \mathrm{Sh}_r$ |
 | **Genus** (partition functions) | $\mathcal{A}^{\mathrm{sh}}_{0,g}$ | genus $g$, arity 0 | $F_g = \kappa \lambda_g^{\mathrm{FP}}$ |
 | **Mixed** | $\mathcal{A}^{\mathrm{sh}}_{r,g}$ | genus $g$, arity $r$ | Higher sewing-shadow data |
 
-The **tridegree** (def:vol1-rigid-planted-forest-depth-filtration) assigns each component of $\Theta_\mathcal{A}$ a triple $(g, n, d)$ = (loop genus, arity, log boundary depth).  The shadow tower is the $(0, r, \bullet)$ slice.  The genus tower is the $(g, 0, \bullet)$ slice.  The constrained Epstein zeta is extracted from the $(1, 0, \bullet)$ component.
+The **tridegree** (def:vol1-rigid-planted-forest-depth-filtration) assigns each component of $\Theta_\mathcal{A}$ a triple $(g, n, d)$ = (loop genus, arity, log boundary depth).  The shadow obstruction tower is the $(0, r, \bullet)$ slice.  The genus tower is the $(g, 0, \bullet)$ slice.  The constrained Epstein zeta is extracted from the $(1, 0, \bullet)$ component.
 
 **Can they be unified via factorization homology on bordered surfaces?**
 
@@ -89,7 +89,7 @@ In principle, yes.  The open/closed MC element $\Theta^{\mathrm{oc}} = \Theta_\m
 
 However, this unification is FORMAL, not analytic.  The bordered FM compactification provides the combinatorial framework (planted-forest corrections on bordered surfaces), but the analytic step -- relating the bordered factorization homology to the Rankin--Selberg spectral decomposition -- has not been established.  The reason:
 
-- The shadow tower at genus 0 is ALGEBRAIC (determined by finitely many OPE coefficients $\kappa, \alpha, S_4$).
+- The shadow obstruction tower at genus 0 is ALGEBRAIC (determined by finitely many OPE coefficients $\kappa, \alpha, S_4$).
 - The constrained Epstein zeta at genus 1 is ANALYTIC (its $L$-function content comes from the Hecke decomposition of the theta function, which involves infinite-dimensional spectral theory on $\mathcal{M}_{1,1}$).
 
 The structural obstruction (Vol I, rem:structural-obstruction) is precisely this: algebraic constraints from the MC equation act on the real spectral line, while the zeta zeros live at complex spectral parameters.  No bordered surface interpolation changes this.
@@ -102,7 +102,7 @@ The structural obstruction (Vol I, rem:structural-obstruction) is precisely this
 
 For the Heisenberg algebra $\mathcal{H}_\kappa$ on a bordered surface $\Sigma_{g,k}$ (genus $g$, $k$ boundary components):
 
-- **$k$ large, $g = 0$**: A genus-0 surface with $k$ punctures is $\mathbb{P}^1$ minus $k$ points.  The factorization homology $\int_{\mathbb{P}^1 \setminus \{p_1, \ldots, p_k\}} \mathcal{H}$ encodes $k$-point correlation functions of the Heisenberg on $\mathbb{P}^1$.  These are the genus-0, arity-$k$ shadow components: the Wick contractions with propagator $1/(z_i - z_j)$.  For $\mathcal{H}$, the shadow tower terminates at arity 2 (class G, shadow depth 2), so the $k$-point functions at $k \geq 3$ are determined by Wick's theorem from the 2-point function.  The shadow tower at genus 0 IS the collection of $k$-point functions.
+- **$k$ large, $g = 0$**: A genus-0 surface with $k$ punctures is $\mathbb{P}^1$ minus $k$ points.  The factorization homology $\int_{\mathbb{P}^1 \setminus \{p_1, \ldots, p_k\}} \mathcal{H}$ encodes $k$-point correlation functions of the Heisenberg on $\mathbb{P}^1$.  These are the genus-0, arity-$k$ shadow components: the Wick contractions with propagator $1/(z_i - z_j)$.  For $\mathcal{H}$, the shadow obstruction tower terminates at arity 2 (class G, shadow depth 2), so the $k$-point functions at $k \geq 3$ are determined by Wick's theorem from the 2-point function.  The shadow obstruction tower at genus 0 IS the collection of $k$-point functions.
 
 - **$k = 0$, $g = 1$**: The torus partition function $Z_1(\tau) = \eta(\tau)^{-1}$ (up to normalization).  The constrained Epstein zeta $\varepsilon^1_s = 2\zeta(2s)$ (rank-1 lattice, one critical line).
 
@@ -112,21 +112,21 @@ For the Heisenberg algebra $\mathcal{H}_\kappa$ on a bordered surface $\Sigma_{g
 
 - **$k = 2$, $g = 0$**: The annulus.  $\int_{\mathrm{Ann}} \mathcal{H} = HH_*(\mathcal{H})$ by the annulus trace theorem.  The annulus partition function is $\mathrm{tr}_{\mathcal{F}} q^{L_0 - \kappa/24} = \eta(q)^{-1}$.
 
-**Does this interpolate between the shadow tower and the constrained Epstein?**
+**Does this interpolate between the shadow obstruction tower and the constrained Epstein?**
 
 Not in a useful sense.  The interpolation is:
 - At $(g, k) = (0, r)$: the $r$-point correlation function, which is the arity-$r$ shadow at genus 0.
 - At $(g, k) = (1, 0)$: the torus partition function, from which $\varepsilon^c_s$ is extracted.
 
 But these live at different stages of the Chriss--Ginzburg architecture:
-1. The shadow tower is extracted from $\Theta_\mathcal{A}$ by projecting to arity $r$ at genus 0.  This is a purely algebraic operation.
+1. The shadow obstruction tower is extracted from $\Theta_\mathcal{A}$ by projecting to arity $r$ at genus 0.  This is a purely algebraic operation.
 2. The constrained Epstein zeta is extracted from $Z_1(\tau)$ by a Rankin--Selberg integral over $\mathcal{M}_{1,1}$.  This is a spectral-theoretic operation.
 
 The bordered surface $\Sigma_{g,k}$ provides a geometric interpolation in the sense that the compactified moduli space $\overline{\mathcal{M}}_{g,k}^{\mathrm{bor}}$ degenerates, as $k \to 0$, to the closed moduli space $\overline{\mathcal{M}}_g$, and as $g \to 0$, to the configuration space $\mathrm{FM}_k(\mathbb{C})$.  The MC equation on the full bordered modular operad connects these degenerations.
 
 For the Heisenberg specifically: the bordered partition function $Z_{g,k}(\Omega; z_1, \ldots, z_k)$ is a section of a determinant line bundle on $\overline{\mathcal{M}}_{g,k}^{\mathrm{bor}}$.  At $k = 0$, it specializes to $Z_g(\Omega)$.  At $g = 0$, it specializes to the $k$-point function on $\mathbb{P}^1$.  But the arithmetic content (the $L$-function factorization) appears only after integrating over moduli, which is not part of the factorization homology at a single surface.
 
-**Verdict**: The bordered surface picture provides a geometric interpolation between the genus-0 arity-$k$ data (shadow tower) and the genus-$g$ arity-0 data (partition functions), but this interpolation does NOT directly capture $\varepsilon^c_s$.  The constrained Epstein zeta requires the additional step of spectral decomposition on $\mathcal{M}_{1,1}$, which is extrinsic to the factorization homology on any single surface.
+**Verdict**: The bordered surface picture provides a geometric interpolation between the genus-0 arity-$k$ data (shadow obstruction tower) and the genus-$g$ arity-0 data (partition functions), but this interpolation does NOT directly capture $\varepsilon^c_s$.  The constrained Epstein zeta requires the additional step of spectral decomposition on $\mathcal{M}_{1,1}$, which is extrinsic to the factorization homology on any single surface.
 
 ---
 
@@ -148,13 +148,13 @@ $$
 \int_\Sigma V \;\;\text{(factorization homology at one surface)} \quad\neq\quad \int_{\mathcal{M}_{1,1}} \left(\int_{E_\tau} V\right) E_s(\tau)\, d\mu(\tau) \;\;\text{(Rankin--Selberg transform)}
 $$
 
-The shadow tower lives in the fiber of the universal family (it is the local deformation-theoretic data at a single point of the curve).  The constrained Epstein zeta lives on the base (it is the global spectral-theoretic data on the moduli space).  The MC element $\Theta_\mathcal{A}$ unifies the fiber direction (arity) with the base direction (genus) through its bigraded structure, but extracting $\varepsilon^c_s$ requires the additional passage from fiber to spectral decomposition on the base.
+The shadow obstruction tower lives in the fiber of the universal family (it is the local deformation-theoretic data at a single point of the curve).  The constrained Epstein zeta lives on the base (it is the global spectral-theoretic data on the moduli space).  The MC element $\Theta_\mathcal{A}$ unifies the fiber direction (arity) with the base direction (genus) through its bigraded structure, but extracting $\varepsilon^c_s$ requires the additional passage from fiber to spectral decomposition on the base.
 
 ### Honest Open Questions
 
 1. **The Siegel constrained Epstein zeta**: at genus $g \geq 2$, one can define a "genus-$g$ constrained Epstein zeta" via the Rankin--Selberg spectral decomposition on $\mathcal{M}_g$.  The relationship between this object and the genus-$g$ components $\mathcal{A}^{\mathrm{sh}}_{0,g}$ of the shadow algebra is unexplored.  For the Leech lattice at genus 2, the Bocherer bridge (Vol I) provides a first computation.
 
-2. **Bordered Rankin--Selberg**: Is there a Rankin--Selberg formula on the bordered moduli space $\overline{\mathcal{M}}_{g,k}^{\mathrm{bor}}$ that interpolates between the shadow tower (large $k$, $g = 0$) and the constrained Epstein (k = 0, $g = 1$)?  This would require a theory of Eisenstein series on $\overline{\mathcal{M}}_{g,k}^{\mathrm{bor}}$, which does not currently exist.
+2. **Bordered Rankin--Selberg**: Is there a Rankin--Selberg formula on the bordered moduli space $\overline{\mathcal{M}}_{g,k}^{\mathrm{bor}}$ that interpolates between the shadow obstruction tower (large $k$, $g = 0$) and the constrained Epstein (k = 0, $g = 1$)?  This would require a theory of Eisenstein series on $\overline{\mathcal{M}}_{g,k}^{\mathrm{bor}}$, which does not currently exist.
 
 3. **Arity-genus duality**: The MC equation links the genus axis to the arity axis through the planted-forest corrections: $\delta_{\mathrm{pf}}^{(g,0)} = S_3(10S_3 - \kappa)/48$ at genus 2 involves the arity-3 shadow $S_3$.  This suggests that the genus-$g$ partition function knows about the arity-$r$ shadows for $r \leq 2g$ (the shadow visibility genus: $g_{\min}(S_r) = \lfloor r/2 \rfloor + 1$, Vol I cor:shadow-visibility-genus).  Whether this coupling can be inverted -- extracting shadows from partition functions, or partition functions from shadows -- is open.
 

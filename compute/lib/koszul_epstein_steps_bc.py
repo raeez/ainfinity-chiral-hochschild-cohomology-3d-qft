@@ -4,7 +4,7 @@ koszul_epstein_steps_bc.py — Steps B and C of rn105's three-step programme.
 
 PROGRAMME OVERVIEW (rn105):
   (A) Compute the MC constraint on epsilon^c_s for non-Narain theories.
-      STATUS: DONE — the shadow tower gives infinitely many constraints at each c.
+      STATUS: DONE — the shadow obstruction tower gives infinitely many constraints at each c.
 
   (B) Show that the residue function R_off(c, sigma) for sigma != 1/2
       violates the MC constraints for some c value.
@@ -376,7 +376,7 @@ def mc_spectral_moment_constraint(c, n=4):
     r"""
     The MC constraint at arity n on the spectral moments of epsilon^c.
 
-    The shadow tower gives:
+    The shadow obstruction tower gives:
       kappa = c/2 constrains the 2nd spectral moment
       S_4 = 10/(c(5c+22)) constrains the 4th spectral moment
 
@@ -932,7 +932,7 @@ def minimal_model_density_closure():
     2. The spectrum is infinite (not a finite sum).
     3. The zero structure of epsilon^c is unknown.
 
-    For c > 1, Step C requires the MC constraints (shadow tower)
+    For c > 1, Step C requires the MC constraints (shadow obstruction tower)
     to do additional work. This is the GAP in the programme.
 
     HONEST ASSESSMENT:
@@ -972,7 +972,7 @@ def mc_constraint_at_c(c, sigma_off, gamma):
     r"""
     The MC constraint test at a specific (c, sigma, gamma).
 
-    The shadow tower at central charge c gives:
+    The shadow obstruction tower at central charge c gives:
       kappa = c/2
       S_4 = 10/(c(5c+22))
       S_5 = -48/(c^2(5c+22))  [quintic shadow]
@@ -1138,7 +1138,7 @@ def overall_assessment():
        epsilon^c is not controlled by finite-polynomial arguments.
 
     2. MC CONSTRAINTS ARE INSUFFICIENT:
-       The shadow tower gives spectral MOMENTS, not individual weights.
+       The shadow obstruction tower gives spectral MOMENTS, not individual weights.
        Moments do not uniquely determine the spectrum or its zeros.
        The S_4 constraint restricts the 4th cumulant but does not fix
        the zero locations of epsilon^c.
@@ -1190,7 +1190,7 @@ def overall_assessment():
             'The rn105 programme Step B succeeds for individual c values '
             '(especially minimal models at c < 1). Step C fails as a '
             'complete bootstrap closure because spectral moment constraints '
-            'from the shadow tower do not uniquely determine the zero '
+            'from the shadow obstruction tower do not uniquely determine the zero '
             'distribution of the constrained Epstein zeta at c > 1. '
             'The obstacle is fundamental: the MC constraints give finitely '
             'many moment conditions, while the zero distribution has '

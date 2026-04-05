@@ -8,7 +8,7 @@
 ## 0. Executive Summary
 
 The question: can the bar-cobar machine, which constrains REAL spectral
-data (the shadow tower, the genus expansion, the Koszul dual), reach
+data (the shadow obstruction tower, the genus expansion, the Koszul dual), reach
 the COMPLEX spectral data (the zeta zeros as resonances of the modular
 surface)?
 
@@ -108,7 +108,7 @@ resonances into a single spectral sum.
 
 | # | Scattering theory on M_{1,1} | VOA / bar-cobar framework |
 |---|------------------------------|---------------------------|
-| 1 | Bound states: Maass cusp forms phi_j | Discrete algebraic data: OPE structure constants, shadow tower {S_r} |
+| 1 | Bound states: Maass cusp forms phi_j | Discrete algebraic data: OPE structure constants, shadow obstruction tower {S_r} |
 | 2 | Resonances: poles of E(tau,s) at s=rho/2 | Poles of constrained Epstein epsilon^c_s at s=(c-1+rho)/2 |
 | 3 | Scattering matrix phi(s) | Scattering factor F(s,c) = pi^{2s-c/2} Gamma(c/2-s)/Gamma(s) zeta(2s)/zeta(c-2s+1) |
 | 4 | Unitarity: |phi(1/2+it)|=1 on the real t-axis | Bar-cobar quasi-iso: Omega(B(A)) -> A on the Koszul locus |
@@ -119,15 +119,15 @@ resonances into a single spectral sum.
 **Analogy 1 (bound states / algebraic data): PRECISE in form, DIFFERENT in content.**
 - The Maass cusp forms are eigenfunctions of a second-order differential
   operator (the Laplacian) on a NON-COMPACT surface.
-- The shadow tower coefficients S_r are Taylor coefficients of an
+- The shadow obstruction tower coefficients S_r are Taylor coefficients of an
   ALGEBRAIC function sqrt(Q_L) of degree 2.
 - Both are "real spectral data" in the sense that they parameterize the
   L^2 part of the spectral decomposition.
 - But the Maass spectrum is INFINITE (countably many eigenvalues
-  accumulating at infinity), while the shadow tower is determined by
+  accumulating at infinity), while the shadow obstruction tower is determined by
   THREE numbers (kappa, alpha, S_4).  The Maass spectrum has infinitely
-  many independent parameters; the shadow tower has finitely many.
-- The shadow tower is a genus-0 algebraic invariant of the vacuum module.
+  many independent parameters; the shadow obstruction tower has finitely many.
+- The shadow obstruction tower is a genus-0 algebraic invariant of the vacuum module.
   The Maass spectrum is a genus-1 analytic invariant of the modular
   category.  These are different mathematical objects in different
   categories (this is the content of prop:constrained-epstein-not-bar).
@@ -190,7 +190,7 @@ to complex spectral parameters.  The bar complex B(A) is a formal
 power series object (a factorization coalgebra on Ran(X)); it does
 not extend to a meromorphic function on a spectral plane.  The
 quasi-isomorphism Omega(B(A)) -> A constrains the ALGEBRAIC structure
-(the OPE, the A-infinity operations, the shadow tower), not the
+(the OPE, the A-infinity operations, the shadow obstruction tower), not the
 ANALYTIC continuation of the partition function into the complex
 spectral plane.
 
@@ -209,7 +209,7 @@ spectrum via a sum over conjugacy classes:
   l(gamma)/(2 sinh(l(gamma)/2)) * g(l(gamma))
 
 The MC equation D*Theta + [Theta,Theta]/2 = 0 projects to
-constraints on the shadow tower at each arity:
+constraints on the shadow obstruction tower at each arity:
 
   S_2 = kappa, S_3 = alpha, S_4 from the MC recursion, etc.
 
@@ -230,7 +230,7 @@ the resonances) is EXTERNAL to the MC equation.
 **The setup:** The constrained Epstein epsilon^c_s = integral of Z-hat^c
 against E(tau,s).  As s varies from the real axis to the complex plane,
 this integral picks up poles from the resonances of E(tau,s) at s=rho/2.
-The MC constraints constrain the REAL spectral data (the shadow tower
+The MC constraints constrain the REAL spectral data (the shadow obstruction tower
 projections at each arity).
 
 **The question:** Can the MC constraints on the real spectral data
@@ -240,7 +240,7 @@ constrain the resonances (which live at complex spectral parameters)?
 
 The MC equation at arity r gives one real constraint on S_r.  These
 constraints are determined by three real numbers (kappa, alpha, S_4)
-via the MC recursion.  The shadow tower is an algebraic function of
+via the MC recursion.  The shadow obstruction tower is an algebraic function of
 degree 2 over Q(c)(t).
 
 The resonances of SL(2,Z)\H form a COUNTABLY INFINITE set in the
@@ -337,12 +337,12 @@ satisfies (a) but is only partially constrained by (b) (through the
 vacuum character, which is one component of the full partition function).
 No known construction satisfies both (a) and (b) simultaneously.
 
-### Question 4: Shadow tower resurgence and the Liouville Stokes phenomenon
+### Question 4: Shadow obstruction tower resurgence and the Liouville Stokes phenomenon
 
-**The setup:** The shadow tower H(t) = t^2 sqrt(Q_L(t)) is algebraic
+**The setup:** The shadow obstruction tower H(t) = t^2 sqrt(Q_L(t)) is algebraic
 of degree 2.  Its Taylor coefficients S_r grow as A rho^r r^{-5/2}
 cos(r theta + phi) for class-M algebras.  For c < c* approx 6.125,
-the shadow tower diverges (rho > 1).  Could the resurgent structure
+the shadow obstruction tower diverges (rho > 1).  Could the resurgent structure
 of this divergent series be related to the Stokes phenomenon of the
 Liouville path integral?
 
@@ -372,10 +372,10 @@ conjugate (not on the positive real axis).
 - The resurgent structure is controlled by the ALIEN DERIVATIVES,
   which connect different saddle sectors.
 
-**These two resurgent structures (shadow tower and Liouville) are
+**These two resurgent structures (shadow obstruction tower and Liouville) are
 INDEPENDENT objects:**
 
-- The shadow tower is a GENUS-0, ARITY-GRADED power series in the
+- The shadow obstruction tower is a GENUS-0, ARITY-GRADED power series in the
   variable t (the arity parameter on the primary line).  Its
   singularities are at the branch points of sqrt(Q_L), which are
   ALGEBRAIC invariants of the OPE.
@@ -383,7 +383,7 @@ INDEPENDENT objects:**
   hbar.  Its singularities are at the saddle-point actions, which are
   ANALYTIC invariants of the path integral.
 - The arity variable t and the genus variable hbar are DIFFERENT
-  variables.  The shadow tower is the restriction of the MC element
+  variables.  The shadow obstruction tower is the restriction of the MC element
   Theta_A to the primary line at fixed genus (genus 0); the Liouville
   partition function is the full genus sum at fixed arity (the scalar
   projection).
@@ -398,13 +398,13 @@ connection is WITHIN the scalar sector and is well understood: it is
 the identification of the Borel singularities of the genus expansion
 with the non-perturbative saddle points.
 
-The shadow tower's resurgent structure (the branch points of sqrt(Q_L))
+The shadow obstruction tower's resurgent structure (the branch points of sqrt(Q_L))
 is a DIFFERENT phenomenon: it controls the divergence of the ARITY
 expansion, not the genus expansion.  The branch points of sqrt(Q_L)
 are at |t| = 1/rho, which is an algebraic invariant of (kappa, alpha,
 S_4).  These have no known relation to the Liouville saddle actions.
 
-**Conclusion on Question 4:** The shadow tower's Borel singularities
+**Conclusion on Question 4:** The shadow obstruction tower's Borel singularities
 (branch points of sqrt(Q_L)) and the Liouville Stokes phenomenon
 (saddle-point actions 4pi^2 n^2) are structurally parallel but
 mathematically independent.  Both are resurgent structures, but they
@@ -428,9 +428,9 @@ of lengths of closed geodesics).  In terms of the algebra, the Maass
 eigenvalues are constrained by the Hecke algebra action: each Maass
 cusp form is a simultaneous eigenfunction of all Hecke operators T_n.
 
-The MC equation constrains the shadow tower, which is an OPE invariant.
-For lattice VOAs, the shadow tower is related to the Maass eigenvalues
-through the theta decomposition.  For Virasoro, the shadow tower is
+The MC equation constrains the shadow obstruction tower, which is an OPE invariant.
+For lattice VOAs, the shadow obstruction tower is related to the Maass eigenvalues
+through the theta decomposition.  For Virasoro, the shadow obstruction tower is
 a THREE-parameter invariant and cannot constrain the INFINITE set of
 Maass eigenvalues.
 
@@ -446,7 +446,7 @@ F(s,c), which is a UNIVERSAL factor (independent of the specific VOA).
 The scattering factor has poles at positions depending on the zeta
 zeros, but these poles are a NUMBER-THEORETIC input, not a VOA output.
 
-**The shadow tower constrains the Maass cusp form projections of the
+**The shadow obstruction tower constrains the Maass cusp form projections of the
 partition function.  The zeta zeros constrain the Eisenstein
 projections.  These are ORTHOGONAL in the spectral decomposition of
 L^2(SL(2,Z)\H): the cusp forms and the Eisenstein series span
@@ -472,10 +472,10 @@ significant arithmetic structure.  Here is the precise accounting.
 | Projection | Output | Mathematical content |
 |------------|--------|---------------------|
 | Genus tower | F_g = kappa * lambda_g^FP | Mumford classes on M-bar_{g} |
-| Shadow tower | {S_r} = [t^{r-2}] sqrt(Q_L) | Quadratic extension K/F |
+| Shadow obstruction tower | {S_r} = [t^{r-2}] sqrt(Q_L) | Quadratic extension K/F |
 | Koszul dual | A^! = D_Ran(B(A)) | Verdier duality on Ran(X) |
 
-### 4.2. Arithmetic content of the shadow tower (proved)
+### 4.2. Arithmetic content of the shadow obstruction tower (proved)
 
 - **Number field:** K = Q(c)(t)(sqrt(Q_Vir)) / F = Q(c)(t) is a
   quadratic extension with discriminant Disc = -320c^2/(5c+22).
@@ -496,7 +496,7 @@ For lattice VOAs V_Lambda:
 - The theta function decomposes into Eisenstein series + cusp forms
   under the Hecke algebra.
 - The shadow-spectral correspondence recovers the L-function package
-  from the shadow tower.
+  from the shadow obstruction tower.
 - Route C prime-locality: the MC recursion propagates Hecke
   equivariance from the character level to all arities.
 
@@ -507,7 +507,7 @@ For lattice VOAs V_Lambda:
 - The constrained Epstein series epsilon^c_s (it is not a bar-complex
   invariant: prop:constrained-epstein-not-bar).
 - The Maass cusp form eigenvalues t_j (infinitely many independent
-  parameters vs three from the shadow tower).
+  parameters vs three from the shadow obstruction tower).
 - The zeta zeros (live in the continuous spectrum, orthogonal to the
   algebraic data).
 
@@ -531,7 +531,7 @@ The MC element Theta_A = D_A - d_0 in MC(Def_cyc(A) tensor G_mod) is
 an algebraic object: it lives in a pro-nilpotent completion of a
 graded Lie algebra with rational coefficients.
 
-The shadow tower {S_r} = Taylor coefficients of sqrt(Q_L(t)) is an
+The shadow obstruction tower {S_r} = Taylor coefficients of sqrt(Q_L(t)) is an
 algebraic function of degree 2 over Q(c)(t).
 
 ### 5.2. The spectral decomposition is an analytic invariant
@@ -550,7 +550,7 @@ parameter s).
 
 ### 5.3. The gap
 
-The algebraic data (OPE, bar complex, shadow tower) determines the
+The algebraic data (OPE, bar complex, shadow obstruction tower) determines the
 VACUUM CHARACTER chi_0(q) = Tr_{V_0}(q^{L_0 - c/24}).  This is ONE
 HOLOMORPHIC function that appears in the partition function
 Z = |chi_0|^2 + sum m_h |chi_h|^2.
@@ -674,7 +674,7 @@ alone provides.**
   (Hejhal, The Selberg Trace Formula for PSL(2,R), Vol I).
 - prop:constrained-epstein-not-bar: verified against working_notes.tex
   lines 3460-3500; three independent arguments are logically sound.
-- The break between Levels 2 and 3 (shadow tower vs Dirichlet-sewing
+- The break between Levels 2 and 3 (shadow obstruction tower vs Dirichlet-sewing
   lift): verified against working_notes.tex lines 2554-2563.
 - Li coefficients sign change at n=7: verified as claimed in
   working_notes.tex line 2590-2596.
@@ -700,7 +700,7 @@ alone provides.**
   the analytic sense.  It is algebraic unitarity (Quillen equivalence),
   not analytic unitarity (|S(E)|=1).  The two do not constrain the
   same data.
-- "The shadow tower's resurgent structure is the Liouville Stokes
+- "The shadow obstruction tower's resurgent structure is the Liouville Stokes
   phenomenon" — FALSE.  They are resurgent structures in DIFFERENT
   variables (arity vs genus) from DIFFERENT sources (OPE algebraic
   invariants vs path integral saddle actions).
@@ -753,7 +753,7 @@ The precise analogy:
 This gap is not a deficiency of the bar-cobar machine; it is a
 FEATURE.  The bar complex captures EXACTLY the algebraic structure
 of a chiral algebra: the OPE, the Koszul dual, the genus expansion,
-the shadow tower, the depth classification.  These are all algebraic
+the shadow obstruction tower, the depth classification.  These are all algebraic
 invariants, computable from finite data, and they constitute a complete
 invariant system for the algebra (up to A-infinity quasi-isomorphism).
 

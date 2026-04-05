@@ -3054,8 +3054,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the active gravity summaries in `chapters/theory/introduction.tex`, `chapters/frame/preface.tex`, and `chapters/connections/3d_gravity.tex`, focusing on the remaining physical-identification slogans after the expected Virasoro/BTZ repairs.
-- Verified a real live status seam: the introduction still said the Laplace kernel “is the graviton propagator,” the shadow tower “is the perturbative quantum-gravity loop expansion,” and the curved bar complex “reproduces” the loop expansion of the gravitational path integral; the preface likewise still said the 3d MC element encodes the full perturbative quantum gravity and that its genus expansion “is” the loop expansion of quantum gravity; the chapter body still called the leading Laplace-kernel term the graviton propagator without any interpretive qualifier. Those flat physical identifications outran the more careful live status surface established by the recent gravity repairs.
-- Rewrote the introduction so these statements are now phrased as the gravitational reading: the Laplace kernel is *read as* the graviton propagator, the shadow tower is *read as* the loop expansion, each `m_k` *corresponds to* a `(k-2)`-loop amplitude, and the curved bar complex *tracks* the loop expansion of the gravitational path integral.
+- Verified a real live status seam: the introduction still said the Laplace kernel “is the graviton propagator,” the shadow obstruction tower “is the perturbative quantum-gravity loop expansion,” and the curved bar complex “reproduces” the loop expansion of the gravitational path integral; the preface likewise still said the 3d MC element encodes the full perturbative quantum gravity and that its genus expansion “is” the loop expansion of quantum gravity; the chapter body still called the leading Laplace-kernel term the graviton propagator without any interpretive qualifier. Those flat physical identifications outran the more careful live status surface established by the recent gravity repairs.
+- Rewrote the introduction so these statements are now phrased as the gravitational reading: the Laplace kernel is *read as* the graviton propagator, the shadow obstruction tower is *read as* the loop expansion, each `m_k` *corresponds to* a `(k-2)`-loop amplitude, and the curved bar complex *tracks* the loop expansion of the gravitational path integral.
 - Rewrote the preface so the 3d MC element now encodes the *live* perturbative quantum-gravity package, its genus expansion is *read as* the loop expansion, and the MC equation is *read as* the BV master equation.
 - Rewrote the local gravity-chapter sentence so the leading term of `r^L(z)` is explicitly identified as the graviton propagator only *in the gravitational reading*.
 - Ran hostile grep and local re-read to confirm that the retired flat phrases are gone from the live intro/preface/gravity surface.
@@ -3068,7 +3068,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `MODERATE`
    Class: `D`
    Location: `chapters/theory/introduction.tex:1518-1530`; `chapters/frame/preface.tex:1442-1452`; `chapters/connections/3d_gravity.tex:289-296`
-   Issue: the live gravity summary layer still used flat physical-identification language for the Laplace kernel, shadow tower, genus expansion, and MC equation even after the surrounding chapter-level rhetoric had been narrowed to a mixed proved-plus-expected surface. That left a real cross-file inconsistency in the public-facing exposition.
+   Issue: the live gravity summary layer still used flat physical-identification language for the Laplace kernel, shadow obstruction tower, genus expansion, and MC equation even after the surrounding chapter-level rhetoric had been narrowed to a mixed proved-plus-expected surface. That left a real cross-file inconsistency in the public-facing exposition.
    Fix: rewrote those summaries so the physical content is presented explicitly as the gravitational reading or live perturbative package, rather than as an unqualified settled identity.
    Status: `FIXED`
 
@@ -3107,8 +3107,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the active shadow-tower summaries in `chapters/frame/preface.tex` and `chapters/connections/3d_gravity.tex`, continuing the hostile audit of the high-visibility gravity surface after the physical-reading repairs.
-- Verified a real live status seam: the preface shadow-tower block still said the Virasoro shadows *are* the perturbative expansion of 3d gravity, that `\kappa` *is* the one-loop anomaly, that the cubic shadow *encodes* graviton-vertex corrections, that the quartic contact invariant *is* the four-graviton contact interaction, and that the shadow tower *never terminates* because the quintic graviton vertex is genuinely nonzero. The gravity chapter’s shadow table and interpretation paragraph had the same issue, including the flat slogan “every `r`-th shadow is the `r`-graviton vertex” and the unqualified appeal to the full graviton `S`-matrix.
-- Rewrote the preface so the entire shadow-tower package is now explicitly presented as the gravitational reading of the Virasoro shadow tower.
+- Verified a real live status seam: the preface shadow-tower block still said the Virasoro shadows *are* the perturbative expansion of 3d gravity, that `\kappa` *is* the one-loop anomaly, that the cubic shadow *encodes* graviton-vertex corrections, that the quartic contact invariant *is* the four-graviton contact interaction, and that the shadow obstruction tower *never terminates* because the quintic graviton vertex is genuinely nonzero. The gravity chapter’s shadow table and interpretation paragraph had the same issue, including the flat slogan “every `r`-th shadow is the `r`-graviton vertex” and the unqualified appeal to the full graviton `S`-matrix.
+- Rewrote the preface so the entire shadow-tower package is now explicitly presented as the gravitational reading of the Virasoro shadow obstruction tower.
 - Rewrote the gravity chapter’s shadow table and the local interpretation paragraph so the one-loop anomaly, graviton vertices, contact interaction, and `S`-matrix statements are all phrased as the gravitational reading rather than as a stronger theorem-level identification.
 - Ran hostile grep and local re-read to confirm that the retired flat graviton-vertex/contact-interaction phrases are gone from the live preface/gravity surface.
 - Ran `make fast FAST_PASSES=2`; both passes stabilized at `920pp, 0 undef cit, 60 undef ref, 0 rerun, 69 overfull`.
@@ -3120,7 +3120,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `MODERATE`
    Class: `D`
    Location: `chapters/frame/preface.tex:1413-1439`; `chapters/connections/3d_gravity.tex:523-546`; `chapters/connections/3d_gravity.tex:597-605`
-   Issue: the live preface and gravity chapter still used flat graviton-vertex, contact-interaction, and `S`-matrix rhetoric for the Virasoro shadow tower even after the surrounding gravity package had been narrowed to a mixed proved-plus-expected surface. That left a real summary-layer contradiction in some of the most visible physical reading blocks.
+   Issue: the live preface and gravity chapter still used flat graviton-vertex, contact-interaction, and `S`-matrix rhetoric for the Virasoro shadow obstruction tower even after the surrounding gravity package had been narrowed to a mixed proved-plus-expected surface. That left a real summary-layer contradiction in some of the most visible physical reading blocks.
    Fix: rewrote those shadow-tower summaries so the graviton-anomaly, graviton-vertex, contact-interaction, and `S`-matrix statements are explicitly presented as the gravitational reading of the algebraic package.
    Status: `FIXED`
 
@@ -3233,7 +3233,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the gravity summary paragraph in `chapters/theory/introduction.tex`, continuing the hostile audit of the remaining gravity/Virasoro overview seams after the derived-centre and Ward-identity repairs.
-- Verified a real live status seam: the paragraph already said the shadow tower is *read as* the perturbative quantum-gravity loop expansion, but then it reverted to flatter language by saying each `m_k` *corresponds to* a graviton scattering amplitude and that the genus expansion *tracks* the loop expansion of the gravitational path integral.
+- Verified a real live status seam: the paragraph already said the shadow obstruction tower is *read as* the perturbative quantum-gravity loop expansion, but then it reverted to flatter language by saying each `m_k` *corresponds to* a graviton scattering amplitude and that the genus expansion *tracks* the loop expansion of the gravitational path integral.
 - Rewrote that block so it now stays in one scoped register throughout: each `m_k` is *read as contributing* the corresponding graviton-scattering amplitude, and the genus expansion is *read as tracking* the loop expansion of the gravitational path integral.
 - Ran hostile grep and local re-read to confirm that the retired flatter loop-expansion wording is gone from the live introduction surface.
 - Ran `pkill -9 -f pdflatex 2>/dev/null || true; sleep 2; rm -f main.aux main.log; make fast FAST_PASSES=3`; pass 1 showed the usual transient ref noise, and passes 2 and 3 stabilized at `920pp, 0 undef cit, 60 undef ref, 0 rerun, 69 overfull`.
@@ -3283,7 +3283,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the gravity/Virasoro shadow paragraph in `chapters/frame/preface.tex`, continuing the hostile audit of the remaining “gravitational reading” slogans after the chapter-level shadow-tower repair.
-- Verified a real live status seam: the paragraph already said the quartic contact invariant and its poles are *read as* physical data, but then the explanatory clause after the colon hardened back into flatter identifications (`c=0` *is* the zero-Newton-constant limit, `c=-22/5` *is* the Lee--Yang critical point), and the next sentence said the infinite shadow tower *means* infinitely many quantum corrections.
+- Verified a real live status seam: the paragraph already said the quartic contact invariant and its poles are *read as* physical data, but then the explanatory clause after the colon hardened back into flatter identifications (`c=0` *is* the zero-Newton-constant limit, `c=-22/5` *is* the Lee--Yang critical point), and the next sentence said the infinite shadow obstruction tower *means* infinitely many quantum corrections.
 - Rewrote that block so it now stays in one scoped register throughout: `c=0` and `c=-22/5` are *read as* the corresponding phase-transition limits, the quintic graviton vertex is *read as* remaining nonzero, and the infinite depth is *read as meaning* that gravity should have infinitely many independent quantum corrections beyond one loop.
 - Ran hostile grep and local re-read to confirm that the retired flatter phase-transition and quantum-correction wording is gone from the live preface surface.
 - Ran `pkill -9 -f pdflatex 2>/dev/null || true; sleep 3; rm -f main.aux main.log; make fast FAST_PASSES=3`; pass 1 showed the usual transient ref noise, and passes 2 and 3 stabilized at `920pp, 0 undef cit, 60 undef ref, 0 rerun, 69 overfull`.
@@ -3491,8 +3491,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the compact gravity synopsis and the later theorem ledger in `chapters/frame/preface.tex`, continuing the hostile audit after the gravity-MC-summary repair.
-- Verified a real live summary-layer doctrine seam: both preface summaries still stated the genus tower flatly as “the gravitational perturbation series,” even though the repaired gravity chapter now consistently treats the perturbative series as the gravitational reading of the algebraic shadow tower.
-- Rewrote both summaries so they now say the honest thing: the genus tower is the shadow tower, read in the gravitational interpretation as the perturbation series, and the later ledger now says the shadow tower is read as the gravitational perturbation series.
+- Verified a real live summary-layer doctrine seam: both preface summaries still stated the genus tower flatly as “the gravitational perturbation series,” even though the repaired gravity chapter now consistently treats the perturbative series as the gravitational reading of the algebraic shadow obstruction tower.
+- Rewrote both summaries so they now say the honest thing: the genus tower is the shadow obstruction tower, read in the gravitational interpretation as the perturbation series, and the later ledger now says the shadow obstruction tower is read as the gravitational perturbation series.
 - Ran hostile local re-read and grep to confirm that the retired flat summary slogans are gone from the live preface surface.
 - Ran `pkill -9 -f pdflatex 2>/dev/null || true; sleep 3; rm -f main.aux main.log main.out; make fast FAST_PASSES=3`. Pass 1 showed the usual bootstrap noise; passes 2 and 3 stabilized at `920pp, 0 undef cit, 61 undef ref, 0 rerun, 69 overfull`.
 - Classified `main.log` directly with a read-only parser rather than trusting the wrapper footer. The live state is clean on references and citations: `38` unique undefined-reference labels, all `V1-*`; `0` non-`V1-*` undefined references; `0` undefined citations; `0` label-change warnings; `69` overfull lines.
@@ -3503,8 +3503,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `MODERATE`
    Class: `D`
    Location: `chapters/frame/preface.tex:710-714,1842-1846`
-   Issue: the live preface still summarized the gravity genus tower as if it were directly the perturbative gravitational series, instead of the repaired doctrine that the shadow tower is *read as* that series in the gravitational interpretation.
-   Fix: rewrote both compact preface summaries so the genus tower is explicitly presented as the shadow tower in its gravitational reading.
+   Issue: the live preface still summarized the gravity genus tower as if it were directly the perturbative gravitational series, instead of the repaired doctrine that the shadow obstruction tower is *read as* that series in the gravitational interpretation.
+   Fix: rewrote both compact preface summaries so the genus tower is explicitly presented as the shadow obstruction tower in its gravitational reading.
    Status: `FIXED`
 
 ## 2026-04-01 — Codex Beilinson Rectification Iteration 117
@@ -3941,9 +3941,9 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the compact gravity synopsis and later theorem ledger in `chapters/frame/preface.tex`, comparing them against the repaired gravity chapter after the effective-scalar partition-function/genus-tower fixes.
-- Verified a real live doctrine mismatch: both compact summaries were still advertising the gravity genus package with the intrinsic Virasoro curvature `\kappa = 3k` and with the broader “shadow tower is the gravitational perturbation series” slogan, even though the live gravity chapter now isolates the effective scalar genus tower controlled by `\kappa_{\mathrm{eff}} = 3k - 13`.
+- Verified a real live doctrine mismatch: both compact summaries were still advertising the gravity genus package with the intrinsic Virasoro curvature `\kappa = 3k` and with the broader “shadow obstruction tower is the gravitational perturbation series” slogan, even though the live gravity chapter now isolates the effective scalar genus tower controlled by `\kappa_{\mathrm{eff}} = 3k - 13`.
 - Rewrote both summaries so they now state the honest compact package: the effective scalar genus tower is read as the gravitational perturbation series, with `\kappa_{\mathrm{eff}} = 3k-13` and quartic contact `\mathfrak{Q} = 10/[6k(30k+22)]`.
-- Ran hostile local re-read and grep to confirm that the retired gravity-genus slogan `\kappa = 3k` and the old “shadow tower is read as the gravitational perturbation series” phrasing are gone from the live summary surface, while `effective scalar genus tower` now appears consistently in the chapter and preface summaries.
+- Ran hostile local re-read and grep to confirm that the retired gravity-genus slogan `\kappa = 3k` and the old “shadow obstruction tower is read as the gravitational perturbation series” phrasing are gone from the live summary surface, while `effective scalar genus tower` now appears consistently in the chapter and preface summaries.
 - Ran `pkill -9 -f pdflatex 2>/dev/null || true; sleep 3; rm -f main.aux main.log main.out; make fast FAST_PASSES=3`. The wrapper footer remained noisy, so I classified `main.log` directly rather than trusting the printed convergence line.
 - Direct `main.log` classification is clean on the meaningful checks: `38` unique undefined-reference labels, all `V1-*`; `0` non-`V1-*` undefined references; `0` undefined citations; `0` label-change warnings; `68` overfull lines.
 
@@ -4016,8 +4016,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Re-read the detailed shadow-tower paragraph in `chapters/frame/preface.tex`, comparing it against the repaired gravity chapter after the effective-scalar genus-tower fixes.
-- Verified a real live overclaim: the paragraph still presented the whole Virasoro shadow tower as the perturbative expansion of 3d gravity, even though the repaired live surface now routes that genus package through the effective scalar specialization.
-- Rewrote the sentence so the paragraph now says the shadow tower is read, via its effective scalar specialization, as that perturbative expansion.
+- Verified a real live overclaim: the paragraph still presented the whole Virasoro shadow obstruction tower as the perturbative expansion of 3d gravity, even though the repaired live surface now routes that genus package through the effective scalar specialization.
+- Rewrote the sentence so the paragraph now says the shadow obstruction tower is read, via its effective scalar specialization, as that perturbative expansion.
 - Ran hostile local re-read and grep to confirm that the retired phrase `The Virasoro shadow Postnikov tower of Vol~I is read as the perturbative` is gone from the live preface surface.
 - Ran `pkill -9 -f pdflatex 2>/dev/null || true; sleep 3; rm -f main.aux main.log main.out; make fast FAST_PASSES=3`. The wrapper footer remained noisy, so I classified `main.log` directly rather than trusting the printed convergence line.
 - Direct `main.log` classification is clean on the meaningful checks: `38` unique undefined-reference labels, all `V1-*`; `0` non-`V1-*` undefined references; `0` undefined citations; `0` label-change warnings; `69` overfull lines.
@@ -4028,7 +4028,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `SERIOUS`
    Class: `D`
    Location: `chapters/frame/preface.tex:1429-1430`
-   Issue: the detailed preface shadow-tower paragraph still treated the whole Virasoro shadow tower as the perturbative expansion of 3d gravity, overrunning the repaired live surface that now routes the genus package through the effective scalar specialization.
+   Issue: the detailed preface shadow-tower paragraph still treated the whole Virasoro shadow obstruction tower as the perturbative expansion of 3d gravity, overrunning the repaired live surface that now routes the genus package through the effective scalar specialization.
    Fix: rewrote the sentence so the perturbative-gravity reading now passes explicitly through the effective scalar specialization.
    Status: `FIXED`
 
@@ -4609,7 +4609,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 
 - Re-scanned the active manuscript surface (`main.tex` plus live chapter inputs) for stale theorem dependencies and summary-layer doctrine drift after the recent rewrites.
 - Verified a real live dependency/doctrine bug: the active preface, Part V roadmap, and gravity chapter were still citing the inactive theorem label `thm:thqg-boundary-holographic-complexity`, whose only surviving definition is in a superseded file; the same band was also still flattening the repaired effective-scalar gravitational reading into claims about the whole gravitational partition function.
-- Rewrote the active summary layer so it now removes that dead theorem dependency and narrows the claim honestly: the shadow archetypes classify the boundary-holographic complexity of the boundary shadow tower / effective scalar perturbation series in its gravitational reading, while the celestial core opener now says the genus tower governs modular completion data and only in gravitational examples does its effective scalar specialization read as the effective scalar partition function.
+- Rewrote the active summary layer so it now removes that dead theorem dependency and narrows the claim honestly: the shadow archetypes classify the boundary-holographic complexity of the boundary shadow obstruction tower / effective scalar perturbation series in its gravitational reading, while the celestial core opener now says the genus tower governs modular completion data and only in gravitational examples does its effective scalar specialization read as the effective scalar partition function.
 - Ran hostile local re-read and grep to confirm that the inactive theorem reference is gone from the active surface, that the retired `entire perturbative gravitational partition function` slogan no longer appears on the live files touched in this pass, and that the patched passages now agree on the effective-scalar/modular-completion distinction.
 
 ### Findings
@@ -4619,7 +4619,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Class: `C`
    Location: `chapters/frame/preface.tex:71`; `main.tex:709-714`; `chapters/connections/3d_gravity.tex:618-623`; `chapters/connections/celestial_holography_core.tex:48`
    Issue: after the recent rewrites, the live summary layer still depended on the inactive theorem label `thm:thqg-boundary-holographic-complexity` and was still overstating the repaired gravity package as control of the whole gravitational partition function, rather than the narrower boundary-shadow / modular-completion / effective-scalar reading actually supported on the live surface.
-   Fix: removed the dead theorem dependency from the active summary layer and rewrote the affected passages so they now land on the boundary shadow tower, all-genus modular completion data, and the effective scalar specialization in the gravitational reading.
+   Fix: removed the dead theorem dependency from the active summary layer and rewrote the affected passages so they now land on the boundary shadow obstruction tower, all-genus modular completion data, and the effective scalar specialization in the gravitational reading.
    Status: `FIXED`
 
 ## 2026-04-01 — Codex Beilinson Rectification Iteration 163
@@ -5552,8 +5552,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 
 - Continued the hostile sweep across the remaining high-visibility projection slogans and found one isolated but real overcompression in the introduction’s Vol~I bridge paragraph.
 - Verified a doctrine mismatch there: the line still treated the whole boundary algebra/bar-cobar package as an “evaluation projection” of the universal Maurer--Cartan element and bundled the higher-genus story into the same compressed formula, which was stronger than the repaired active surface elsewhere.
-- Rewrote the sentence so it now says the boundary algebra is recovered from the genus-`0` closed data of `\Theta_\cA`, while the higher-genus shadow data descend through the shadow tower.
-- Ran hostile local re-read and fixed-string grep to confirm that the retired “evaluation projection of the universal MC element” and “higher-genus contributions descend through the shadow tower” wording no longer survives on the active surface.
+- Rewrote the sentence so it now says the boundary algebra is recovered from the genus-`0` closed data of `\Theta_\cA`, while the higher-genus shadow data descend through the shadow obstruction tower.
+- Ran hostile local re-read and fixed-string grep to confirm that the retired “evaluation projection of the universal MC element” and “higher-genus contributions descend through the shadow obstruction tower” wording no longer survives on the active surface.
 
 ### Findings
 
@@ -5562,7 +5562,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Class: `D`
    Location: `chapters/theory/introduction.tex:84`
    Issue: the introduction’s Vol~I bridge paragraph still compressed the boundary algebra and higher-genus shadow package into a single evaluation-projection slogan for `\Theta_\cA`, overstating the repaired live doctrine.
-   Fix: rewrote the line so the boundary algebra is recovered from the genus-`0` closed data of `\Theta_\cA`, while the higher-genus shadow data descend through the shadow tower.
+   Fix: rewrote the line so the boundary algebra is recovered from the genus-`0` closed data of `\Theta_\cA`, while the higher-genus shadow data descend through the shadow obstruction tower.
    Status: `FIXED`
 
 ## 2026-04-01 — Codex Beilinson Rectification Iteration 204
@@ -5597,8 +5597,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Continued the hostile sweep from the celestial summary band and found a stronger active-surface mismatch: the live gravity and celestial core chapters do not isolate a soft-theorem theorem package, but the top-level roadmap and preface still advertised one as settled output.
-- Verified three companion survivors on the active surface: `main.tex` still said “soft graviton theorems from the shadow tower,” and the preface still stated that soft theorems are the leading spectral terms of `r(z)` and that the leading Maurer--Cartan equation is the soft Ward identity.
-- Rewrote that cluster so it now stays at the honest level of the repaired surface: `main.tex` speaks of soft-graviton readings of the shadow tower, while the preface treats the soft-factor and Ward-identity statements as expected features of the celestial scattering reading.
+- Verified three companion survivors on the active surface: `main.tex` still said “soft graviton theorems from the shadow obstruction tower,” and the preface still stated that soft theorems are the leading spectral terms of `r(z)` and that the leading Maurer--Cartan equation is the soft Ward identity.
+- Rewrote that cluster so it now stays at the honest level of the repaired surface: `main.tex` speaks of soft-graviton readings of the shadow obstruction tower, while the preface treats the soft-factor and Ward-identity statements as expected features of the celestial scattering reading.
 - Ran hostile local re-read and fixed-string grep to confirm that the retired hard soft-theorem slogans no longer survive on the active surface.
 
 ### Findings
@@ -5608,7 +5608,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Class: `D`
    Location: `main.tex:730`; `chapters/frame/preface.tex:1555-1560`; `chapters/frame/preface.tex:1939-1940`
    Issue: the active roadmap and preface still advertised soft-theorem identifications as settled live output, even though the active gravity and celestial core chapters do not isolate a corresponding theorem package.
-   Fix: rewrote the roadmap line to “soft-graviton readings of the shadow tower,” and rewrote the preface celestial lines so the soft-factor and Ward-identity statements are now explicitly cast as expected features of the celestial scattering reading.
+   Fix: rewrote the roadmap line to “soft-graviton readings of the shadow obstruction tower,” and rewrote the preface celestial lines so the soft-factor and Ward-identity statements are now explicitly cast as expected features of the celestial scattering reading.
    Status: `FIXED`
 
 ## 2026-04-01 — Codex Beilinson Rectification Iteration 206
@@ -7552,7 +7552,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass on the active THQG core quartet and stayed within the standard-family summary band of the gravitational-Yangian chapter.
-- The next real survivor was the closing Virasoro summary sentence of the proved computation block: it still said the infinite shadow tower “mirrors the expected infinite graviton-vertex tower,” which was too flat for the repaired theorem-versus-reading doctrine and subtly promoted the gravitational interpretation into the computation summary itself.
+- The next real survivor was the closing Virasoro summary sentence of the proved computation block: it still said the infinite shadow obstruction tower “mirrors the expected infinite graviton-vertex tower,” which was too flat for the repaired theorem-versus-reading doctrine and subtly promoted the gravitational interpretation into the computation summary itself.
 - Rewrote that sentence so the proved content stays on the explicit genus-zero binary shadow data, while the graviton-vertex language is now explicitly presented as an expected feature of the gravitational reading.
 - Ran hostile local reread plus a fixed-string check to confirm the retired summary slogan no longer survives in the active computation band.
 
@@ -7562,7 +7562,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `MODERATE`
    Class: `D`
    Location: `chapters/connections/thqg_gravitational_yangian.tex:2489-2493`
-   Issue: the closing Virasoro summary sentence in the active gravitational-Yangian chapter still compressed the infinite shadow tower into a too-flat graviton-vertex slogan, promoting the physical reading inside a proved computation block.
+   Issue: the closing Virasoro summary sentence in the active gravitational-Yangian chapter still compressed the infinite shadow obstruction tower into a too-flat graviton-vertex slogan, promoting the physical reading inside a proved computation block.
    Fix: rewrote the sentence so the computation summary now stays on explicit genus-zero binary shadow data, with the infinite graviton-vertex tower phrased explicitly as the expected gravitational reading.
    Status: `FIXED`
 
@@ -7897,8 +7897,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass on the remaining introduction-level gravity summaries and checked the main introduction’s AdS$_3$/Virasoro overview against the repaired gravity chapter.
-- The next real survivor was a doctrine/computation mismatch: the introduction was still flattening the Laplace kernel into the graviton propagator at theorem level and, more seriously, was misreading the shadow tower `m_3,m_4,\ldots` as a `(k-2)`-loop graviton-scattering hierarchy, even though the repaired live gravity surface keeps arity on the interaction/shadow side while genus tracks loop order.
-- Rewrote that paragraph so the Laplace kernel is now explicitly in the gravitational reading, the `\Ainf` shadow tower is read as the perturbative graviton-interaction hierarchy, and genus alone tracks loop order.
+- The next real survivor was a doctrine/computation mismatch: the introduction was still flattening the Laplace kernel into the graviton propagator at theorem level and, more seriously, was misreading the shadow obstruction tower `m_3,m_4,\ldots` as a `(k-2)`-loop graviton-scattering hierarchy, even though the repaired live gravity surface keeps arity on the interaction/shadow side while genus tracks loop order.
+- Rewrote that paragraph so the Laplace kernel is now explicitly in the gravitational reading, the `\Ainf` shadow obstruction tower is read as the perturbative graviton-interaction hierarchy, and genus alone tracks loop order.
 - Ran hostile local reread plus fixed-string greps to confirm the retired flat propagator wording and the old `(k-2)`-loop formula no longer survive across the active introduction/gravity/preface band checked in this pass.
 
 ### Findings
@@ -9116,8 +9116,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass on the same late stratification proposition and reread the local band after the package-language opener repair.
-- The next real survivor was a compact companion mismatch: the local index entry still said `BMS group!generalization from shadow tower`, and the proposition close still fell back to the vaguer phrase “asymptotic-symmetry content,” even though the repaired opener and table now advertise package-level readings.
-- Rewrote that local pair so the index now says `BMS package!generalization from shadow tower`, and the proposition close now says the shadow depth controls the corresponding asymptotic-symmetry package.
+- The next real survivor was a compact companion mismatch: the local index entry still said `BMS group!generalization from shadow obstruction tower`, and the proposition close still fell back to the vaguer phrase “asymptotic-symmetry content,” even though the repaired opener and table now advertise package-level readings.
+- Rewrote that local pair so the index now says `BMS package!generalization from shadow obstruction tower`, and the proposition close now says the shadow depth controls the corresponding asymptotic-symmetry package.
 - Ran hostile local reread plus fixed-string greps to confirm the retired local `BMS group` / `asymptotic-symmetry content` pair is gone from the checked active THQG soft / movement-summary / gravity / preface / introduction surface and the patched package-language is present.
 
 ### Findings
@@ -9415,8 +9415,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass on the widened active top-layer surface after the deeper THQG theorem and index bands had nearly converged.
-- The next real survivor was a compact but real roadmap-level wording seam: the active `main.tex` summary still advertised `soft-graviton readings of the shadow tower`, which lagged behind the repaired chapter-wide `celestial soft hierarchy and its gravitational reading` register.
-- Rewrote that top-layer sentence so it now says `the celestial soft hierarchy and its gravitational reading from the shadow tower`.
+- The next real survivor was a compact but real roadmap-level wording seam: the active `main.tex` summary still advertised `soft-graviton readings of the shadow obstruction tower`, which lagged behind the repaired chapter-wide `celestial soft hierarchy and its gravitational reading` register.
+- Rewrote that top-layer sentence so it now says `the celestial soft hierarchy and its gravitational reading from the shadow obstruction tower`.
 - Ran hostile local reread plus fixed-string checks to confirm the retired `soft-graviton readings` slogan is gone from the checked active main / preface / introduction / THQG surface and the patched top-layer wording is present in `main.tex`.
 
 ### Findings
@@ -9425,8 +9425,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `MINOR`
    Class: `E`
    Location: `main.tex:748-750`
-   Issue: the active roadmap still summarized the THQG output in the older `soft-graviton readings of the shadow tower` register, even though the repaired live chapter surface now consistently presents that material as the celestial soft hierarchy together with its gravitational reading.
-   Fix: rewrote the roadmap clause so it now names `the celestial soft hierarchy and its gravitational reading from the shadow tower`.
+   Issue: the active roadmap still summarized the THQG output in the older `soft-graviton readings of the shadow obstruction tower` register, even though the repaired live chapter surface now consistently presents that material as the celestial soft hierarchy together with its gravitational reading.
+   Fix: rewrote the roadmap clause so it now names `the celestial soft hierarchy and its gravitational reading from the shadow obstruction tower`.
    Status: `FIXED`
 
 ## 2026-04-02 — Codex Beilinson Rectification Iteration 372
@@ -10174,8 +10174,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass after the class-`\mathbf{L}` proof cleanup and re-swept the heading/opener layer just above the celestial-soft-algebra definition.
-- The next real survivor was a high-visibility nomenclature seam at the section opener: the heading still read `Celestial holography and the soft algebra`, and the matching index tag still filed the band under `soft algebra!from shadow tower`, even though the definition, proposition, and movement-summary mirror directly below it had all stabilized on `celestial soft algebra`.
-- Rewrote that opener so the subsection title now reads `Celestial holography and the celestial soft algebra`, and the matching index tag now files under `celestial soft algebra!from shadow tower`.
+- The next real survivor was a high-visibility nomenclature seam at the section opener: the heading still read `Celestial holography and the soft algebra`, and the matching index tag still filed the band under `soft algebra!from shadow obstruction tower`, even though the definition, proposition, and movement-summary mirror directly below it had all stabilized on `celestial soft algebra`.
+- Rewrote that opener so the subsection title now reads `Celestial holography and the celestial soft algebra`, and the matching index tag now files under `celestial soft algebra!from shadow obstruction tower`.
 - Ran hostile local reread plus fixed-string checks to confirm the retired bare `soft algebra` opener is gone from the checked active THQG soft surface and the patched heading/index language is present.
 
 ### Findings
@@ -10185,7 +10185,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Class: `E`
    Location: `chapters/connections/thqg_soft_graviton_theorems.tex:1973-1976`
    Issue: the section opener for the celestial-soft-algebra band still used the older bare `soft algebra` shorthand in both the heading and index layer, even though the live definition, proposition, and movement-summary mirror had already stabilized on the more precise `celestial soft algebra` register.
-   Fix: rewrote the subsection title to `Celestial holography and the celestial soft algebra` and updated the matching index tag to `celestial soft algebra!from shadow tower`.
+   Fix: rewrote the subsection title to `Celestial holography and the celestial soft algebra` and updated the matching index tag to `celestial soft algebra!from shadow obstruction tower`.
    Status: `FIXED`
 
 ## 2026-04-02 — Codex Beilinson Rectification Iteration 405
@@ -10220,8 +10220,8 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass after the definition-level index cleanup and re-swept the same local opener/definition/proposition band for any remaining theorem-layer nomenclature drift.
-- The next real survivor was a compact but high-visibility local mismatch: the active section heading, definition, proposition, and movement-summary mirror had already stabilized on `celestial soft algebra`, but the immediately subordinate subsubsection title still read `The celestial OPE algebra from the shadow tower`, and the neighboring BMS index entry still filed under `BMS package!celestial OPE algebra`.
-- Rewrote that pair so the subsubsection title now reads `The celestial soft algebra from the shadow tower`, and the neighboring BMS index entry now files under `BMS package!celestial soft algebra`.
+- The next real survivor was a compact but high-visibility local mismatch: the active section heading, definition, proposition, and movement-summary mirror had already stabilized on `celestial soft algebra`, but the immediately subordinate subsubsection title still read `The celestial OPE algebra from the shadow obstruction tower`, and the neighboring BMS index entry still filed under `BMS package!celestial OPE algebra`.
+- Rewrote that pair so the subsubsection title now reads `The celestial soft algebra from the shadow obstruction tower`, and the neighboring BMS index entry now files under `BMS package!celestial soft algebra`.
 - Ran hostile local reread plus fixed-string checks to confirm the retired title/index pair is gone from the checked active THQG soft surface, while the remaining `celestial OPE algebra` occurrences are isolated to the intentional literature-facing narrative line and the separate gravity-chapter OPE readout.
 
 ### Findings
@@ -10231,7 +10231,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Class: `E`
    Location: `chapters/connections/thqg_soft_graviton_theorems.tex:1977-1991`
    Issue: after the previous heading and definition cleanups, the immediately subordinate title/index layer still filed the same theorem-level band under `celestial OPE algebra`, leaving the local celestial-soft-algebra surface split between two competing names.
-   Fix: rewrote the subsubsection title to `The celestial soft algebra from the shadow tower` and updated the neighboring BMS index entry to `BMS package!celestial soft algebra`.
+   Fix: rewrote the subsubsection title to `The celestial soft algebra from the shadow obstruction tower` and updated the neighboring BMS index entry to `BMS package!celestial soft algebra`.
    Status: `FIXED`
 
 ## 2026-04-02 — Codex Beilinson Rectification Iteration 407
@@ -10243,7 +10243,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
 ### Verification Run
 
 - Launched the next rectification loop pass after the local title/index cleanup and re-swept the remaining celestial-OPE / celestial-soft-algebra statements on the active gravity and THQG soft surface.
-- The next real survivor was a scope bug in the main gravity chapter: the celestial-transfer paragraph still said the celestial stress tensor `generates the celestial OPE algebra`, even though the repaired theorem surface only supports the binary Virasoro sector controlled by the integrated stress tensor, with the full celestial soft algebra coming from the larger shadow tower.
+- The next real survivor was a scope bug in the main gravity chapter: the celestial-transfer paragraph still said the celestial stress tensor `generates the celestial OPE algebra`, even though the repaired theorem surface only supports the binary Virasoro sector controlled by the integrated stress tensor, with the full celestial soft algebra coming from the larger shadow obstruction tower.
 - Rewrote that sentence so it now says the celestial stress tensor generates the binary Virasoro sector of the resulting celestial soft algebra, with the same Virasoro OPE at the same central charge.
 - Ran hostile local reread plus fixed-string checks to confirm the retired full-algebra slogan is gone from the checked active gravity / THQG soft / movement-summary surface and the patched sector-level wording is present.
 
@@ -10253,7 +10253,7 @@ Five parallel agents audited the entire live `\input` surface (56 files) for eac
    Severity: `MODERATE`
    Class: `D`
    Location: `chapters/connections/3d_gravity.tex:1756-1759`
-   Issue: the gravity-chapter celestial-transfer paragraph still let the integrated stress tensor stand in for the full celestial OPE algebra, even though the active theorem surface only supports the binary Virasoro sector generated by that stress tensor, with the full celestial soft algebra supplied by the larger shadow tower.
+   Issue: the gravity-chapter celestial-transfer paragraph still let the integrated stress tensor stand in for the full celestial OPE algebra, even though the active theorem surface only supports the binary Virasoro sector generated by that stress tensor, with the full celestial soft algebra supplied by the larger shadow obstruction tower.
    Fix: rewrote the sentence so the celestial stress tensor now generates only the binary Virasoro sector of the resulting celestial soft algebra.
    Status: `FIXED`
 

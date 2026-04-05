@@ -14,7 +14,7 @@ For each system we compute:
   - Collision residues with d-log absorption (AP19)
   - R-matrix R(z)
   - Ordered Koszul dual A^{!,E₁}
-  - Shadow tower coefficients S₂, S₃, S₄
+  - Shadow obstruction tower coefficients S₂, S₃, S₄
   - Euler-eta identity
   - GLCM classification
   - Key difference from the symmetric bar B^{Σ}
@@ -821,13 +821,13 @@ def compute_koszul_dual(system: FreeFermionSystem) -> KoszulDualData:
 def shadow_coefficients_simple_pole(
     system: FreeFermionSystem,
 ) -> Dict[int, Fraction]:
-    """Compute shadow tower coefficients for simple-pole systems.
+    """Compute shadow obstruction tower coefficients for simple-pole systems.
 
     For simple-pole systems (class G on generators):
     - S₂ = κ (curvature = collision residue coefficient)
     - S_r = 0 for all r ≥ 3 on generators (the tower terminates)
 
-    The shadow tower TERMINATES at depth 2 because there are no
+    The shadow obstruction tower TERMINATES at depth 2 because there are no
     higher poles to produce iterated singularities.
     """
     # Find the curvature κ from the OPE
@@ -853,7 +853,7 @@ def shadow_coefficients_simple_pole(
 def shadow_coefficients_double_pole(
     system: FreeFermionSystem,
 ) -> Dict[int, Fraction]:
-    """Compute shadow tower coefficients for double-pole systems.
+    """Compute shadow obstruction tower coefficients for double-pole systems.
 
     For symplectic fermions (double pole, class C on generators):
     - S₂ = κ = 1 (double-pole coefficient)
@@ -863,7 +863,7 @@ def shadow_coefficients_double_pole(
     On generators alone:
     - S₂ = κ = 1, S₃ = S₄ = ... = 0.
 
-    The nontrivial shadow tower arises from COMPOSITES, not generators.
+    The nontrivial shadow obstruction tower arises from COMPOSITES, not generators.
     But the depth-1 collision residue r^{coll}(z) = 1/z still gives
     a nontrivial R-matrix, unlike simple-pole systems.
     """
@@ -882,7 +882,7 @@ def shadow_coefficients_double_pole(
 
 
 def compute_shadow_tower(system: FreeFermionSystem) -> Dict[int, Fraction]:
-    """Compute shadow tower coefficients for any free-field system.
+    """Compute shadow obstruction tower coefficients for any free-field system.
 
     Dispatches to simple-pole or double-pole handler.
     """
@@ -1106,7 +1106,7 @@ def compute_complete(
     # 4. Koszul dual
     kd = compute_koszul_dual(system)
 
-    # 5. Shadow tower
+    # 5. Shadow obstruction tower
     shadow = compute_shadow_tower(system)
 
     # 6. Modular data
@@ -1190,7 +1190,7 @@ def format_result(result: FreeFermionBarResult) -> str:
     lines.append(f"    Poincaré series: P(t) = {kd.poincare_series}")
     lines.append("")
 
-    # Shadow tower
+    # Shadow obstruction tower
     lines.append("  SHADOW TOWER (on generators):")
     for r, sr in sorted(result.shadow_tower.items()):
         if r <= 6:
@@ -1623,9 +1623,9 @@ def run_tests():
     check("sf^! = symplectic bosons", "bosonic" in kd_sf.dual_statistics)
 
     # =============================================
-    # TEST SUITE 7: Shadow tower
+    # TEST SUITE 7: Shadow obstruction tower
     # =============================================
-    details.append("\n--- Shadow tower ---")
+    details.append("\n--- Shadow obstruction tower ---")
 
     # Simple-pole systems: S₂ = κ, S_r = 0 for r≥3
     sh_ff = compute_shadow_tower(ff)

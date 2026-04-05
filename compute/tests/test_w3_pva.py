@@ -1,7 +1,7 @@
 """Tests for W_3 Zamolodchikov PVA.
 
 Verifies the lambda-bracket structure, skew-symmetry, Jacobi identity,
-and shadow tower data for the simplest non-linear W-algebra.
+and shadow obstruction tower data for the simplest non-linear W-algebra.
 
 The W_3 algebra has generators T (weight 2) and W (weight 3) with
 central charge c. The key non-linearity: {W_lam W} involves the
@@ -411,7 +411,7 @@ class TestW3Jacobi:
 # ===================================================================
 
 class TestW3ShadowData:
-    """Verify shadow tower data matches Vol I."""
+    """Verify shadow obstruction tower data matches Vol I."""
 
     def test_w3_kappa(self):
         """kappa(W_3) = 5c/6.
@@ -445,7 +445,7 @@ class TestW3ShadowData:
     def test_w3_archetype_mixed(self):
         """W_3 has Mixed shadow archetype (class M).
 
-        The shadow tower is infinite (like Virasoro) because the
+        The shadow obstruction tower is infinite (like Virasoro) because the
         non-linear OPE {W_lam W} involves :TT:, which generates
         higher composites at each order.
 

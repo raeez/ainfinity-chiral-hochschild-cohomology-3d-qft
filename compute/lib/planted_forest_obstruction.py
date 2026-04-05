@@ -21,7 +21,7 @@ elements (sl_2 and deformed products).  The computation is:
 
 References:
   higher_genus_modular_koszul.tex (Vol I): G_pf, d_pf, planted-forest algebra
-  nonlinear_modular_shadows.tex (Vol I): shadow tower, cubic gauge triviality
+  nonlinear_modular_shadows.tex (Vol I): shadow obstruction tower, cubic gauge triviality
   Mok25: log FM tropicalization, thm:ambient-d-squared-zero
 """
 from __future__ import annotations
@@ -971,7 +971,7 @@ def verify_fm3_d_squared_geometric() -> Dict[str, Any]:
 
 
 # =========================================================================
-# Shadow tower archetype classification
+# Shadow obstruction tower archetype classification
 # =========================================================================
 
 SHADOW_ARCHETYPES = {
@@ -1003,7 +1003,7 @@ SHADOW_ARCHETYPES = {
 
 
 def shadow_archetype(family: str) -> Dict[str, Any]:
-    """Shadow tower archetype for a standard family."""
+    """Shadow obstruction tower archetype for a standard family."""
     key = family.lower().replace(" ", "").replace("-", "").replace("_", "")
     # Normalize
     aliases = {
@@ -1084,7 +1084,7 @@ def pre_lie_convolution_arity3(K2: Fraction, K3: Fraction) -> Fraction:
     The K_2 * K_2 term has 3 summands (one per nested stratum of FM_3),
     each contributing K_2^2.
 
-    At the scalar level (shadow tower projection):
+    At the scalar level (shadow obstruction tower projection):
       K_2 * K_2 = 3 * K2^2
 
     where the factor 3 comes from the 3 nested strata.

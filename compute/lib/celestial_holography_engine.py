@@ -28,7 +28,7 @@ Key mathematical objects:
 
 References:
   Vol II: celestial_holography_core.tex (Chapter, Part VII)
-  Vol I: higher_genus_modular_koszul.tex (shadow tower, MC2)
+  Vol I: higher_genus_modular_koszul.tex (shadow obstruction tower, MC2)
   Vol I: concordance.tex (Theorem D, MC5)
 """
 from __future__ import annotations

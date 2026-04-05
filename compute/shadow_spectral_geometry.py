@@ -245,7 +245,7 @@ def spectral_zeta_derivative(c: float, s: complex, r_max: int = 200,
 
     For the Ruelle zeta ζ(s) = Σ|S_r|^s:
     ζ'(s) = Σ log|S_r| · |S_r|^s
-    ζ'(0) = Σ log|S_r|  (the log-determinant of the shadow tower)
+    ζ'(0) = Σ log|S_r|  (the log-determinant of the shadow obstruction tower)
     """
     z_plus = spectral_zeta_shadow(c, s + ds, r_max, r_min)
     z_minus = spectral_zeta_shadow(c, s - ds, r_max, r_min)
@@ -520,7 +520,7 @@ def heat_kernel_shadow(c: float, t1: float, t2: float, s_param: float,
                           'contribution': weight})
 
     # Off-diagonal: K(t1, t2; s) ~ Σ S_r(t1) S_r(t2) e^{-rs}
-    # For the shadow tower, S_r depends on c but we can evaluate the
+    # For the shadow obstruction tower, S_r depends on c but we can evaluate the
     # generating function at two points t1, t2 and correlate.
     # The "shadow kernel" at finite t1, t2:
     off_diag = 0.0
@@ -1122,7 +1122,7 @@ def run_full_spectral_analysis():
    shadow metric on a 1d space. The connection: the shadow metric Q(t) is
    the EFFECTIVE POTENTIAL of the 3d gravitational field after reducing to
    the spectral-parameter direction. The shadow determinant computes the
-   one-loop correction to the shadow tower — this is the radiative stability
+   one-loop correction to the shadow obstruction tower — this is the radiative stability
    of the shadow hierarchy.
 """)
 

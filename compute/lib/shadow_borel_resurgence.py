@@ -1,6 +1,6 @@
 r"""Shadow Borel resurgence: the real-to-complex bridge.
 
-The shadow tower S_r has asymptotic behavior (Darboux transfer theorem,
+The shadow obstruction tower S_r has asymptotic behavior (Darboux transfer theorem,
 Flajolet-Sedgewick VI.3):
 
     S_r ~ A * rho^r * r^{-5/2} * cos(r*omega + phi)
@@ -62,7 +62,7 @@ For the (generically divergent) shadow series, the median resummation
 
 (average of lateral Borel sums above and below the Stokes line) is real-valued
 for real t and provides a well-defined non-perturbative completion. For the
-shadow tower, this gives the "physical" value of the shadow generating function
+shadow obstruction tower, this gives the "physical" value of the shadow generating function
 beyond the convergence radius R = 1/rho.
 
 Since G(t) = int_0^t s*sqrt(Q_L(s)) ds is known exactly (in terms of
@@ -168,7 +168,7 @@ class VirasoroShadowData:
 
     @property
     def is_convergent(self) -> bool:
-        """Whether the shadow tower converges (rho < 1)."""
+        """Whether the shadow obstruction tower converges (rho < 1)."""
         return self.rho < 1.0
 
     @property
@@ -302,7 +302,7 @@ def borel_transform(shadow_coeffs: Dict[int, float], zeta: complex) -> complex:
 
 @dataclass
 class DarbouxData:
-    """Darboux transfer data for the shadow tower asymptotics.
+    """Darboux transfer data for the shadow obstruction tower asymptotics.
 
     Encodes the exact asymptotic formula:
         S_r ~ amplitude * rho^r * r^{-5/2} * cos(r*omega + phase)
@@ -776,7 +776,7 @@ def zeta_connection_assessment(c_val: float) -> Dict[str, Any]:
     """Assess the (lack of) connection between shadow Borel singularities
     and Riemann zeta zeros.
 
-    CRITICAL ASSESSMENT: The shadow tower's Borel singularities are at
+    CRITICAL ASSESSMENT: The shadow obstruction tower's Borel singularities are at
     positions determined entirely by the shadow metric Q_L(t), which depends
     on the OPE data (kappa, alpha, S_4) of the chiral algebra. These positions
     are ALGEBRAIC NUMBERS (roots of a quadratic polynomial with rational
@@ -788,7 +788,7 @@ def zeta_connection_assessment(c_val: float) -> Dict[str, Any]:
     There is NO KNOWN mathematical mechanism connecting:
     1. The OPE-determined branch points of sqrt(Q_L) to zeta zeros
     2. The shadow growth rate rho to the distribution of zeta zeros
-    3. The Stokes constants of the shadow tower to the Hardy Z-function
+    3. The Stokes constants of the shadow obstruction tower to the Hardy Z-function
 
     The question "are the Borel singularities related to zeta zeros?" is
     answered: NO, for any specific central charge c, the positions are
@@ -875,13 +875,13 @@ def resurgence_atlas(c_values: Optional[List[float]] = None
 # =====================================================================
 
 def constrained_epstein_comparison(c_val: float) -> Dict[str, Any]:
-    """Compare the shadow tower's resurgent structure with the constrained
+    """Compare the shadow obstruction tower's resurgent structure with the constrained
     Epstein zeta function.
 
     The constrained Epstein zeta function Z(s; kappa, c) arises as the
     spectral zeta function of the shadow connection. Its singularity
     structure is controlled by the SAME shadow metric Q_L, so the
-    Borel singularities of the shadow tower and the poles of the
+    Borel singularities of the shadow obstruction tower and the poles of the
     Epstein function are at the SAME positions.
 
     This is not a coincidence: both encode the spectral data of the
@@ -917,7 +917,7 @@ def constrained_epstein_comparison(c_val: float) -> Dict[str, Any]:
         'epstein_pole': 1.0,  # at s=1
         'functional_equation_symmetric': d.is_self_dual,
         'connection': (
-            'The Borel singularities of the shadow tower and the spectral data '
+            'The Borel singularities of the shadow obstruction tower and the spectral data '
             'of the constrained Epstein function are controlled by the same '
             'algebraic curve: the zeros of Q_L(t). The discontinuity across the '
             'Borel cut encodes sqrt(Q_L) monodromy = the Koszul sign.'

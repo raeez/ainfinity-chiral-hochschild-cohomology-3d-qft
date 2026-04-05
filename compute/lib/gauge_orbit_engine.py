@@ -33,7 +33,7 @@ For the Heisenberg algebra H_k (the simplest test case):
   - kappa(H_k) = k (modular characteristic).
   - Bar complex at arity 2 has basis {[s^{-1}J | s^{-1}J]}.
   - MC element delta at genus 1 is k * omega_1 (pure curvature, Gaussian class).
-  - Shadow tower terminates at arity 2 (all higher shadows vanish).
+  - Shadow obstruction tower terminates at arity 2 (all higher shadows vanish).
 
 References:
   Vol II: relative_feynman_transform.tex (subsec:gauge-orbit-canonical)
@@ -171,7 +171,7 @@ def heisenberg_bar_arity2(k=None):
     kappa(H_k) = k (modular characteristic from Theorem D).
 
     At genus g >= 1, the MC element is pure curvature: delta = k * omega_g.
-    This is the Gaussian class — the shadow tower terminates at arity 2.
+    This is the Gaussian class — the shadow obstruction tower terminates at arity 2.
 
     Parameters
     ----------

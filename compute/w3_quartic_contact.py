@@ -17,7 +17,7 @@ Cross-references:
   - compute/lib/symbolic_stasheff.py (Virasoro Stasheff recursion)
   - compute/lib/examples/w3_algebra.py (W_3 PVA implementation)
   - chapters/connections/3d_gravity.tex (Computation comp:gravity-quartic-correction)
-  - chapters/examples/w-algebras-stable.tex (W_3 shadow tower)
+  - chapters/examples/w-algebras-stable.tex (W_3 shadow obstruction tower)
 
 Tier 1: all results verified by exact rational arithmetic at multiple c values.
 """

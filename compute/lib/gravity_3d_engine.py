@@ -438,7 +438,7 @@ def virasoro_shadow_class():
     """Shadow depth class for Virasoro: M (mixed, r_max = infinity).
 
     The Virasoro algebra has infinite shadow depth because the quintic
-    obstruction o^(5)_Vir != 0 (the shadow tower never terminates).
+    obstruction o^(5)_Vir != 0 (the shadow obstruction tower never terminates).
 
     Contrast with:
       Heisenberg: G (Gaussian, r_max = 2)
@@ -462,7 +462,7 @@ def genus1_hessian_correction_virasoro(c=None):
 
     delta_H^(1)_Vir = 120 / [c^2 (5c + 22)] * x^2
 
-    This is the genus-1 correction to the shadow tower from the
+    This is the genus-1 correction to the shadow obstruction tower from the
     quartic contact invariant. It lives in the weight-4 sector.
 
     Returns the coefficient (without the x^2 factor).

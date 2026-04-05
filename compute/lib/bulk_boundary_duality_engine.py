@@ -19,7 +19,7 @@ Key mathematical objects:
    from the genus-0 shadow data. For affine g_k:
    r(z) = Omega/z (Casimir / spectral parameter).
 
-3. **Cross-volume bridge**: Vol I shadow tower data must match
+3. **Cross-volume bridge**: Vol I shadow obstruction tower data must match
    Vol II boundary theory. The modular curvature kappa from Vol I
    equals the curvature of the bulk-boundary system from Vol II.
 
@@ -736,7 +736,7 @@ def yangian_shadow_from_r_matrix(pair: KoszulDualPair) -> Dict[str, Any]:
     At the classical level (hbar -> 0):
     R_T^{cl}(z) = 1 + hbar * r(z) + O(hbar^2)
 
-    The quantum correction comes from the shadow tower:
+    The quantum correction comes from the shadow obstruction tower:
     R_T^{mod}(z; hbar) = exp_*(hbar * r(z) + hbar^2 * r_2(z) + ...)
 
     For type A, the dg-shifted Yangian is accessible via DK-5 (MC3).

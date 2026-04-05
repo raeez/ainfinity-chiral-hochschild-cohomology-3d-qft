@@ -444,7 +444,7 @@ class TestGenus1IntersectionAdversarial:
 # =========================================================================
 
 class TestW3MultichannelAdversarial:
-    """W3 TT channel must match the Virasoro shadow tower."""
+    """W3 TT channel must match the Virasoro shadow obstruction tower."""
 
     def test_tt_shadow_metric_structure(self):
         """Q^{TT}(t) = c^2 + 12ct + [(180c+872)/(5c+22)]t^2."""

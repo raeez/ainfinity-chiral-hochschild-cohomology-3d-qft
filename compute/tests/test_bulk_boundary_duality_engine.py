@@ -435,7 +435,7 @@ class TestYangianShadow:
         assert result['yangian_type'] == 'dg-shifted'
 
     def test_virasoro_quantum_corrections(self):
-        """Virasoro: has quantum corrections (infinite shadow tower)."""
+        """Virasoro: has quantum corrections (infinite shadow obstruction tower)."""
         pair = virasoro_koszul_pair()
         result = yangian_shadow_from_r_matrix(pair)
         assert result['quantum_corrections']

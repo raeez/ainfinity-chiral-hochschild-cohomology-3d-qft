@@ -1,4 +1,4 @@
-r"""All-field-sector generating functions for the Virasoro A_infinity shadow tower.
+r"""All-field-sector generating functions for the Virasoro A_infinity shadow obstruction tower.
 
 GOAL: Extend the ALGEBRAIC generating function
   g(x) = 1/2 - (1+8x)/(2*sqrt(1+4x))

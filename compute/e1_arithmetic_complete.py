@@ -1,4 +1,4 @@
-r"""COMPLETE arithmetic structure of the E_1 ordered shadow tower.
+r"""COMPLETE arithmetic structure of the E_1 ordered shadow obstruction tower.
 
 Maps ALL number-theoretic sequences appearing in the Virasoro A_infinity structure:
 
@@ -440,7 +440,7 @@ def find_null_vector(M_int, n):
 # =========================================================================
 
 def dedekind_eta_analysis():
-    """Analyze Dedekind eta coefficients and their relation to the shadow tower.
+    """Analyze Dedekind eta coefficients and their relation to the shadow obstruction tower.
 
     The Euler function (q-Pochhammer): prod_{n=1}^infty (1 - q^n) = sum_k (-1)^k q^{k(3k-1)/2}
     This is Euler's pentagonal number theorem.
@@ -517,7 +517,7 @@ def dedekind_eta_analysis():
     for n in range(min(30, max_n + 1)):
         print(f"  {n:>3}: {partitions[n]:>10}")
 
-    # Connection to shadow tower: the Virasoro character is
+    # Connection to shadow obstruction tower: the Virasoro character is
     # chi_h(q) = q^{h - c/24} / prod(1-q^n)
     # The shadow coefficients S_r involve the Virasoro OPE at central charge c.
     # The partition function appears in the DENOMINATOR of the character,

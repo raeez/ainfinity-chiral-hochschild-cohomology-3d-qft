@@ -1,7 +1,7 @@
 r"""
 Stasheff A∞ identities = Loop equations of the associated matrix model.
 
-THEOREM: The Stasheff identity at arity n for the Virasoro shadow tower
+THEOREM: The Stasheff identity at arity n for the Virasoro shadow obstruction tower
 IS the genus-0 n-point loop equation (Schwinger-Dyson equation) of a
 one-matrix model whose potential V(x) is determined by the shadow metric
 Q_Vir(t) = c² + 12ct + [(180c+872)/(5c+22)]t².
@@ -514,7 +514,7 @@ def structural_identification():
     print("At c → ∞ (semiclassical limit):")
     print("  80/(5c+22) → 16/c → 0")
     print("  Q_Vir(t) → (c+6t)² (pure Gaussian: Koszul/formal)")
-    print("  Shadow tower terminates: S_r → 0 for r ≥ 4")
+    print("  Shadow obstruction tower terminates: S_r → 0 for r ≥ 4")
     print()
 
     return True
@@ -547,7 +547,7 @@ def numerical_verification():
            W₃ = -120/[c²(5c+22)]
     """
     print("=" * 70)
-    print("NUMERICAL VERIFICATION: Loop equation ↔ Shadow tower")
+    print("NUMERICAL VERIFICATION: Loop equation ↔ Shadow obstruction tower")
     print("=" * 70)
     print()
 
@@ -775,7 +775,7 @@ def general_principle():
 
     The spectral curve u² = Q_Vir(t) governs both:
     - On the A∞ side: it's the shadow metric, encoding the
-      asymptotic growth of the shadow tower
+      asymptotic growth of the shadow obstruction tower
     - On the matrix model side: it's the spectral curve,
       encoding the eigenvalue distribution
 
@@ -787,7 +787,7 @@ def general_principle():
     The CLASSICAL LIMIT c → ∞:
       Q → (c+6t)² (perfect square, no quantum correction)
       W₀ → c + 6t (resolvent = potential derivative: trivial model)
-      All S_r → 0 for r ≥ 4 (shadow tower terminates = Koszul)
+      All S_r → 0 for r ≥ 4 (shadow obstruction tower terminates = Koszul)
       Loop equations become trivial (free field = Gaussian model)
 
     The QUANTUM CORRECTION 80t²/(5c+22):
@@ -800,7 +800,7 @@ def general_principle():
     print("GENERAL PRINCIPLE: Stasheff = Loop Equations")
     print("=" * 70)
     print()
-    print("THEOREM: For the Virasoro shadow tower, the Stasheff")
+    print("THEOREM: For the Virasoro shadow obstruction tower, the Stasheff")
     print("identity at arity n IS the genus-0 n-point loop equation")
     print("of a one-matrix model with spectral curve u² = Q_Vir(t).")
     print()
@@ -838,7 +838,7 @@ def general_principle():
     print("The Virasoro 'matrix model' is NOT an ordinary N×N matrix")
     print("integral. It is the matrix model of 2d topological gravity")
     print("(Witten-Kontsevich), Wick-rotated from Euclidean to")
-    print("Lorentzian: sin ↔ sinh. The shadow tower is the genus")
+    print("Lorentzian: sin ↔ sinh. The shadow obstruction tower is the genus")
     print("expansion; the loop equations are the SD equations of the")
     print("gravitational path integral.")
     print()

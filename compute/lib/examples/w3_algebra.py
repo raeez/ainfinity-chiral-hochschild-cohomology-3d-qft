@@ -664,11 +664,11 @@ def verify_jacobi_WWW_numerical(c_val):
 
 
 # ---------------------------------------------------------------------------
-# Shadow tower data
+# Shadow obstruction tower data
 # ---------------------------------------------------------------------------
 
 def w3_shadow_data():
-    """Shadow tower data for W_3, matching Vol I classification.
+    """Shadow obstruction tower data for W_3, matching Vol I classification.
 
     Returns dict with:
       kappa: c/2 + c/3 = 5c/6 (sum of curvature contributions)
@@ -683,7 +683,7 @@ def w3_shadow_data():
     Cross-reference: Vol I genus_bridge.py, curvature_genus_bridge.py.
     kappa(W_3) = 5c/6 (Vol I comp:w3-curvature-dual-detail).
 
-    Shadow archetype M (Mixed): the shadow tower is infinite because
+    Shadow archetype M (Mixed): the shadow obstruction tower is infinite because
     {W_lam W} involves the composite Lambda = :TT:, which produces
     T-dependent terms at all orders. Like Virasoro, the W_3 tower
     does not terminate at any finite arity.

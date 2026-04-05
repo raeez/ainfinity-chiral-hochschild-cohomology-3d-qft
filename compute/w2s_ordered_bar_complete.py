@@ -323,7 +323,7 @@ def w24_shadow():
     print(f"    When delta_2 = 0: reduces to the standard Catalan formula.")
     print(f"    When delta_2 != 0: TWO branch points at the roots of 1+delta_1*z+delta_2*z^2.")
 
-    # Partial shadow tower (Lambda_4 channel only)
+    # Partial shadow obstruction tower (Lambda_4 channel only)
     print(f"\n  PARTIAL SHADOW TOWER (Lambda_4 channel only, delta_2 = 0 approximation):")
     print(f"  {'r':>3s}  {'S_{{2r}}^W|_{{Lambda_4}}':>55s}  {'Sign':>5s}")
     print(f"  {'-'*3}  {'-'*55}  {'-'*5}")
@@ -394,7 +394,7 @@ def w26_shadow():
     print(f"    when the quartic has distinct roots.")
     print(f"    This is the RICHEST shadow structure among rank-1 W-algebras.")
 
-    # Partial shadow tower
+    # Partial shadow obstruction tower
     print(f"\n  PARTIAL SHADOW TOWER (Lambda_4 channel only):")
     print(f"  {'r':>3s}  {'S_{{2r}}^W|_{{Lambda_4}}':>55s}  {'Sign':>5s}")
     print(f"  {'-'*3}  {'-'*55}  {'-'*5}")
@@ -407,7 +407,7 @@ def w26_shadow():
         sign = "+" if r % 2 == 1 else "-"
         print(f"  {r:3d}  {str(S2r_f):>55s}  {sign:>5s}")
 
-    print(f"\n  NOTE: The full shadow tower requires delta_2, delta_3, delta_4")
+    print(f"\n  NOTE: The full shadow obstruction tower requires delta_2, delta_3, delta_4")
     print(f"  from the Lambda_6, Lambda_8, Lambda_10 couplings.")
     print(f"  These require the explicit W(G_2) OPE from DS reduction of hat(G_2)_k.")
 
@@ -531,7 +531,7 @@ def structural_theorem():
           S_4^W|_{Lambda_4} = 2560*(s-1)^2 / (c*(5c+22)^3)
         with conjectured coupling beta_s^2 = 8(s-1)/(5c+22).
 
-  (viii) Under the Koszul involution c -> alpha(2,s) - c, the shadow tower
+  (viii) Under the Koszul involution c -> alpha(2,s) - c, the shadow obstruction tower
         exhibits complementarity:
           S_{2r}^W(c) + S_{2r}^W(alpha - c) = [algebraic function of r]
         with alpha(2,s) = 12*s^2 - 12*s + 28.

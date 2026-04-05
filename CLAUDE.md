@@ -189,7 +189,7 @@ All Vol I anti-patterns AP1-AP34 apply here. In particular, AP34 (bar-cobar inve
 
 **AP41 — Prose mechanism ≠ mathematical mechanism.** "The residue extracts the simple-pole coefficient" — wrong, the bar kernel extracts ALL modes via d log(z-w). Formulas correct; English description wrong. **Rule: verify prose descriptions match formulas. One-sentence summaries that skip steps are lies of omission.**
 
-**AP42 — Correct at sophisticated level, false at naive level.** Slogans like "CY-A works for all d" or "scattering = shadow tower" capture deep truths but fail when instantiated naively. **Rule: state the level of validity explicitly from the first occurrence.**
+**AP42 — Correct at sophisticated level, false at naive level.** Slogans like "CY-A works for all d" or "scattering = shadow obstruction tower" capture deep truths but fail when instantiated naively. **Rule: state the level of validity explicitly from the first occurrence.**
 
 **AP43 — Central object defined by aspiration, not by axioms.** Objects used in theorem statements without formal \\begin{definition}. A property list is a conjecture about an object, not a definition. **Rule: the central object MUST be formally defined before use.**
 
@@ -218,7 +218,7 @@ All Vol I anti-patterns AP1-AP34 apply here. In particular, AP34 (bar-cobar inve
 | PVA-Coisson | PVA descent at X = pt recovers Coisson structure | Deformation theory | Proved |
 | W-algebras | Feynman-diagrammatic m_k matches bar differential at genus 0 | MC5 (BRST = bar) | Proved (genus 0); conjectural at g≥1 (conj:master-bv-brst) |
 | Affine monodromy | Reduced HT monodromy = quantum group R-matrix; C_line^red ≃ Rep_q(𝔤) on eval modules; Jones polynomial from bar complex | Thm A + affine half-space BV + Drinfeld-Kohno | **Proved** (affine lineage) |
-| Soft theorems | Shadow tower controls soft graviton hierarchy via soft order p ↔ arity r=p+2 | Theorem H + Movement I | Proved (genus 0) |
+| Soft theorems | Shadow obstruction tower controls soft graviton hierarchy via soft order p ↔ arity r=p+2 | Theorem H + Movement I | Proved (genus 0) |
 | W_N Koszul | α_N = 2(N−1)(2N²+2N+1) generalises Virasoro c→26−c to all W-algebras | Theorem B + DS-bar | Proved |
 | Wick anomaly | Genus tower measures Wick rotation breaking: F_g ≠ 0 ⟺ κ_eff ≠ 0 ⟺ S-transform anomalous; quartic pole → κ → d² = κ_eff·ω_g → F_g | Theorem D + Movement IV | Proved (genus tower); Conjectured (Cardy extraction) |
 | Two-colour architecture | ordered bar → A^!_line, symmetric bar → A^!_ch; R-matrix descent | rem:two-colour-architecture, thm:two-color-master | Proved |

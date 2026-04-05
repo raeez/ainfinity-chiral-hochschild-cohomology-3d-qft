@@ -1,6 +1,6 @@
-r"""Shadow tower integrability investigation.
+r"""Shadow obstruction tower integrability investigation.
 
-QUESTION: Is the Virasoro shadow tower integrable in the sense of
+QUESTION: Is the Virasoro shadow obstruction tower integrable in the sense of
 classical/quantum integrable systems?
 
 The shadow generating function H(t) = t^2 * sqrt(Q(t)) satisfies the
@@ -13,13 +13,13 @@ is algebraic.  The resolvent G(t) = int_0^t s*sqrt(Q(s)) ds is transcendental
 3. KP/Toda: is G a tau-function?
 4. String equation: does Q satisfy a spectral curve + string equation?
 5. Painleve: does S_r(c) satisfy a Painleve equation in c?
-6. Isomonodromic deformation: is the shadow tower a tau-function of the
+6. Isomonodromic deformation: is the shadow obstruction tower a tau-function of the
    KZ/KZB isomonodromic system?
 
 RESULT SUMMARY (computed below):
 - The spectral curve u^2 = Q(t) is genus 0 (rational).
 - G(t) satisfies a NONLINEAR ODE equivalent to the matrix model loop equation.
-- The shadow tower IS the dispersionless limit of a matrix-model-like system.
+- The shadow obstruction tower IS the dispersionless limit of a matrix-model-like system.
 - The partition function satisfies Virasoro constraints L_n Z = 0 for n >= -1.
 - The resolvent is NOT a KP tau-function (it is an integral of one).
 - Q satisfies the string equation W'(t) = polynomial, precisely as in matrix models.
@@ -113,7 +113,7 @@ def section_1_loop_equation():
         omega(x)^2 + f(x) = V'(x) omega(x)
     where V(x) is the potential and f(x) encodes quantum corrections.
 
-    For the shadow tower: G'(t) = t*sqrt(Q(t)), so
+    For the shadow obstruction tower: G'(t) = t*sqrt(Q(t)), so
         [G'(t)]^2 = t^2 * Q(t) = t^2 * (c^2 + 12ct + q2*t^2)
                    = c^2*t^2 + 12c*t^3 + q2*t^4
 
@@ -189,13 +189,13 @@ def section_1_loop_equation():
 # =========================================================================
 
 def section_2_virasoro_constraints():
-    """Test whether the shadow tower satisfies Virasoro constraints.
+    """Test whether the shadow obstruction tower satisfies Virasoro constraints.
 
     In matrix models, the partition function Z satisfies:
         L_n Z = 0 for n >= -1
     where L_n are Virasoro generators acting on the coupling constants.
 
-    For the shadow tower, we have:
+    For the shadow obstruction tower, we have:
         G(t) = sum_{r>=2} S_r t^r
     and S_r = a_{r-2}/r where a_n are Taylor coefficients of sqrt(Q).
 
@@ -251,7 +251,7 @@ def section_2_virasoro_constraints():
 
     print(f"\n*** FINDING: The Stasheff identity sum m_i o m_j = 0")
     print(f"*** projected to the scalar lane IS the Virasoro constraint")
-    print(f"*** of the shadow tower. The shadow tower satisfies")
+    print(f"*** of the shadow obstruction tower. The shadow obstruction tower satisfies")
     print(f"*** L_n = 0 for all n >= 0, where L_n is the n-th")
     print(f"*** Virasoro constraint acting on the coupling constants.")
     print(f"***")
@@ -315,7 +315,7 @@ def section_3_kp_tau():
     print(f"  tau = exp(F) = exp(sum_g hbar^{{2g-2}} F_g)")
     print(f"where F_0 ~ G(t) (the scalar shadow generating function)")
     print(f"and F_g for g >= 1 are the genus corrections from the")
-    print(f"shadow tower at higher genus.")
+    print(f"shadow obstruction tower at higher genus.")
 
     # The critical check: Hirota bilinear identity
     # For the dispersionless KP, the bilinear identity reduces to:
@@ -326,11 +326,11 @@ def section_3_kp_tau():
     print(f"\nHirota bilinear check (dispersionless limit):")
     print(f"  In one variable, the dispersionless Hirota identity")
     print(f"  {{F_0, F_0}}_PB = 0 is TRIVIALLY SATISFIED.")
-    print(f"  The shadow tower IS a (trivial) solution of the")
+    print(f"  The shadow obstruction tower IS a (trivial) solution of the")
     print(f"  dispersionless KP hierarchy in one variable.")
 
     # The NONTRIVIAL content is in the multi-variable extension.
-    # The shadow tower extends to higher genus: F_g(Vir_c) is
+    # The shadow obstruction tower extends to higher genus: F_g(Vir_c) is
     # the genus-g contribution. The full generating function
     # Z = exp(sum_g hbar^{2g-2} F_g) where F_0 involves G(t)
     # and F_g = kappa_eff * lambda_g involves Bernoulli numbers.
@@ -424,13 +424,13 @@ def section_4_string_equation():
     # More precisely: the string equation is that G satisfies
     # the EULER-LAGRANGE equation of the matrix model action.
 
-    # The shadow tower's string equation comes from the Stasheff identity
+    # The shadow obstruction tower's string equation comes from the Stasheff identity
     # at arity 3 (the TERNARY operation):
     # m_2 o m_2 + m_1 o m_3 + m_3 o m_1 = 0
     # In the scalar sector, this gives:
     # S_3 = -S_2 o S_2 = -(c/12)^2 * ... = -c
 
-    print(f"\nThe 'string equation' for the shadow tower:")
+    print(f"\nThe 'string equation' for the shadow obstruction tower:")
     print(f"  The Stasheff identity at arity 3 (the lowest nontrivial constraint)")
     print(f"  determines S_3 = -c from S_2 = c/12.")
     print(f"  This is the ANALOG of the L_{{-1}} Virasoro constraint (string eq).")
@@ -552,9 +552,9 @@ def section_6_isomonodromy():
 
     This IS the KZ connection for the Virasoro algebra at central charge c.
     The isomonodromic deformation of this connection as c varies gives
-    a system whose tau-function encodes the shadow tower.
+    a system whose tau-function encodes the shadow obstruction tower.
 
-    The connection to the shadow tower:
+    The connection to the shadow obstruction tower:
     - The KZ connection at genus 0 is INTEGRABLE (zero curvature)
     - The monodromy representation is the braiding of conformal blocks
     - The tau-function of the isomonodromic system = conformal block norm
@@ -574,7 +574,7 @@ def section_6_isomonodromy():
     print(f"  2. The monodromy is the CONFORMAL BLOCK MONODROMY")
     print(f"  3. The flatness is the INTEGRABILITY condition")
 
-    # The shadow tower enters via the MC element:
+    # The shadow obstruction tower enters via the MC element:
     # Theta = sum_{r>=2} S_r * (arity-r shadow connection component)
     # The MC equation d*Theta + (1/2)[Theta, Theta] = 0 is the
     # zero-curvature condition, hence the INTEGRABILITY condition.
@@ -583,7 +583,7 @@ def section_6_isomonodromy():
     print(f"satisfies the MC equation d*Theta + (1/2)[Theta, Theta] = 0.")
     print(f"This MC equation IS the zero-curvature / integrability condition.")
 
-    print(f"\nThe shadow tower coefficients S_r enter the MC element as:")
+    print(f"\nThe shadow obstruction tower coefficients S_r enter the MC element as:")
     print(f"  r=2: S_2 = c/12  (the BPZ/KZ connection, Sugawara)")
     print(f"  r=3: S_3 = -c    (the ternary shadow, first correction)")
     print(f"  r=4: S_4 = 10/(c(5c+22))  (quartic contact invariant)")
@@ -596,7 +596,7 @@ def section_6_isomonodromy():
     # where omega_i are the connection forms and a_i are the
     # deformation parameters.
 
-    # For the shadow tower with ONE deformation parameter c:
+    # For the shadow obstruction tower with ONE deformation parameter c:
     #   d log tau / dc = sum_r (dS_r/dc) * (arity-r contribution)
 
     # The genus-0 tau-function IS the scalar partition function:
@@ -624,10 +624,10 @@ def section_6_isomonodromy():
 
     print(f"\nAt genus 1: the KZB connection IS a genuine isomonodromic")
     print(f"system. For n=4 points, the monodromy gives Painleve VI.")
-    print(f"The genus-1 shadow tower (the curved bar complex) is the")
+    print(f"The genus-1 shadow obstruction tower (the curved bar complex) is the")
     print(f"tau-function of this Painleve VI system.")
 
-    print(f"\n*** FINDING: The shadow tower IS an isomonodromic system.")
+    print(f"\n*** FINDING: The shadow obstruction tower IS an isomonodromic system.")
     print(f"*** - Genus 0: the shadow connection is the KZ connection;")
     print(f"***   its tau-function is exp(G(t; c)); the isomonodromic")
     print(f"***   equations reduce to algebraic relations (genus-0 curve).")
@@ -826,7 +826,7 @@ def section_9_synthesis():
 
     print(r"""
 THEOREM (Shadow Tower Integrability).
-The Virasoro shadow tower is integrable in the following precise senses:
+The Virasoro shadow obstruction tower is integrable in the following precise senses:
 
 (I) ALGEBRAIC INTEGRABILITY (genus 0).
     The spectral curve Sigma: u^2 = Q_Vir(t) has genus 0.
@@ -855,7 +855,7 @@ The Virasoro shadow tower is integrable in the following precise senses:
 
 (V) ISOMONODROMIC DEFORMATION.
     The shadow connection nabla_{0,n} is the genus-0 KZ connection.
-    Its flatness IS the integrability condition.  The shadow tower
+    Its flatness IS the integrability condition.  The shadow obstruction tower
     coefficients S_r parametrize the MC element of this flat connection.
     At genus 1, this becomes the KZB connection, with the Painleve VI
     equation controlling the 4-point case.
@@ -868,14 +868,14 @@ The Virasoro shadow tower is integrable in the following precise senses:
     is of RESURGENT type (the Borel sum reconstructs the answer uniquely,
     but the series itself diverges).
 
-CLASSIFICATION: The shadow tower sits at the intersection of:
+CLASSIFICATION: The shadow obstruction tower sits at the intersection of:
   - Classical integrability (flat connection, spectral curve)
   - Matrix model integrability (loop equation, Virasoro constraints)
   - Resurgent integrability (Borel-Stokes, non-perturbative completion)
 
 The genus-0 spectral curve is the simplest case: all the sophisticated
 machinery (Painleve, isomonodromy, KP) degenerates to its simplest form.
-The genuine integrability content is that the FULL shadow tower
+The genuine integrability content is that the FULL shadow obstruction tower
 (all S_r for r >= 4) is determined by THREE parameters (kappa, alpha, S_4)
 via the algebraic recursion.  This is the shadow of the fact that the
 Virasoro algebra has a single generator T with a quartic pole OPE.
@@ -887,7 +887,7 @@ The nontrivial integrability emerges at genus >= 1, where:
   - The curved bar complex d^2 = kappa_eff * omega_1 enters
   - Modularity (S-transform invariance) becomes an additional constraint
 
-This is the HIERARCHY of integrable structures in the shadow tower:
+This is the HIERARCHY of integrable structures in the shadow obstruction tower:
   genus 0: rational / algebraic / dispersionless
   genus 1: elliptic / Painleve VI / isomonodromic
   genus g: g-dimensional abelian variety / Hitchin system / KZB
@@ -899,7 +899,7 @@ This is the HIERARCHY of integrable structures in the shadow tower:
 # =========================================================================
 
 def section_10_comparison_table():
-    """Print a comparison table between the shadow tower and matrix models."""
+    """Print a comparison table between the shadow obstruction tower and matrix models."""
     print("\n" + "=" * 72)
     print("SECTION 10: COMPARISON TABLE")
     print("=" * 72)
@@ -933,7 +933,7 @@ def section_10_comparison_table():
 +---------------------------+-----------------------------------+-----------------------------------+
 
 KEY DISTINCTION:
-The shadow tower is a CONSTRAINED matrix model with only 3 parameters
+The shadow obstruction tower is a CONSTRAINED matrix model with only 3 parameters
 (kappa, alpha, S_4), not the full infinity of couplings t_k.  The constraint
 is the Virasoro algebra: a single generator with a quartic OPE pole
 determines the entire tower.  This is why the spectral curve has genus 0
@@ -965,7 +965,7 @@ def section_11_bernoulli_bridge():
 
     The Bernoulli numbers B_{2n} appear as:
       - In matrix models: intersection numbers on M_g
-      - In the shadow tower: Faber-Pandharipande lambda-class integrals
+      - In the shadow obstruction tower: Faber-Pandharipande lambda-class integrals
       - In number theory: values of the Riemann zeta function zeta(2n)
     """
     print("\n" + "=" * 72)
@@ -993,7 +993,7 @@ def section_11_bernoulli_bridge():
 
     # The bridge:
     print(f"\nThe bridge between the three domains:")
-    print(f"  Shadow tower:    F_g = kappa_eff * lambda_g^FP (from A-hat genus)")
+    print(f"  Shadow obstruction tower:    F_g = kappa_eff * lambda_g^FP (from A-hat genus)")
     print(f"  Matrix model:    F_g = chi(M_g)/(2g-2)! (from Euler characteristic)")
     print(f"  Number theory:   B_{{2g}} = (-1)^{{g+1}} * 2*(2g)!/(2pi)^{{2g}} * zeta(2g)")
     print(f"\nAll three are unified by the Bernoulli generating function.")
@@ -1008,7 +1008,7 @@ def main():
     print("*" * 72)
     print("SHADOW TOWER INTEGRABILITY INVESTIGATION")
     print("*" * 72)
-    print(f"\nInvestigating whether the Virasoro shadow tower is integrable")
+    print(f"\nInvestigating whether the Virasoro shadow obstruction tower is integrable")
     print(f"in the sense of classical/quantum integrable systems.\n")
 
     section_0_spectral_curve()
@@ -1027,7 +1027,7 @@ def main():
     print("\n" + "=" * 72)
     print("INVESTIGATION COMPLETE")
     print("=" * 72)
-    print(f"\nVerdict: The Virasoro shadow tower is INTEGRABLE, in the")
+    print(f"\nVerdict: The Virasoro shadow obstruction tower is INTEGRABLE, in the")
     print(f"precise sense of a genus-0 spectral curve / one-cut matrix model.")
     print(f"The integrability is of the simplest kind (algebraic/dispersionless)")
     print(f"because the Virasoro algebra has a single generator.")

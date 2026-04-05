@@ -216,7 +216,7 @@ def shadow_class(name: str) -> Dict[str, Any]:
     r"""Determine the shadow class and depth of V_k(g).
 
     All affine Kac-Moody algebras V_k(g) for g simple are:
-    - Class L (Lie/tree): the shadow tower terminates by the Jacobi identity
+    - Class L (Lie/tree): the shadow obstruction tower terminates by the Jacobi identity
     - Shadow depth r_max = 3: the OPE has poles at z^{-2} (Killing form)
       and z^{-1} (Lie bracket), giving bar operations m₂ (binary, from
       the double pole via d-log absorption) and the cubic shadow from

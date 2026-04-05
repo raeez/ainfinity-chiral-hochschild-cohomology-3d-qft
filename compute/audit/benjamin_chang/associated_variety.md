@@ -26,9 +26,9 @@ The arc space J_infty(X_V) is the space of formal arcs gamma: Spec C[[t]] -> X_V
 
 **Verdict: NO, not directly.** The Hilbert series of R_V counts the graded dimensions of the C_2-quotient, which is a genus-0 algebraic invariant. The constrained Epstein zeta epsilon^c_s is a genus-1 analytic invariant: it encodes the primary spectrum of the partition function Z(tau) on the moduli space SL(2,Z)\H.
 
-The structural mismatch is precisely the Level 2-to-3 break identified in working_notes.tex (lines 2554-2563): the shadow tower (Level 2, governed by kappa, alpha, S_4 -- the genus-0 OPE data) and the Dirichlet-sewing lift S_A(u) (Level 3, governed by the weight multiset W(A) = {w_i}) are *independent invariants*. Two algebras with the same OPE data can have different weight multisets, and vice versa.
+The structural mismatch is precisely the Level 2-to-3 break identified in working_notes.tex (lines 2554-2563): the shadow obstruction tower (Level 2, governed by kappa, alpha, S_4 -- the genus-0 OPE data) and the Dirichlet-sewing lift S_A(u) (Level 3, governed by the weight multiset W(A) = {w_i}) are *independent invariants*. Two algebras with the same OPE data can have different weight multisets, and vice versa.
 
-The Hilbert series of R_V is even coarser than the shadow tower: it records only the "associated graded" of V, losing all OPE data. It cannot even determine kappa, let alone the full primary spectrum.
+The Hilbert series of R_V is even coarser than the shadow obstruction tower: it records only the "associated graded" of V, losing all OPE data. It cannot even determine kappa, let alone the full primary spectrum.
 
 **What R_V does constrain:** The dimension of X_V controls the *growth rate* of the primary spectrum. If dim X_V = d, then the number of primaries up to conformal dimension Delta grows as Delta^{d/2} (by a Weyl-law argument on the associated Poisson manifold). This constrains the *abscissa of convergence* of epsilon^c_s: the Dirichlet series converges for Re(s) > d/2. For Virasoro (dim X_V = 1): convergence for Re(s) > 1/2. For lattice VOAs of rank r (dim X_V = r): convergence for Re(s) > r/2. This is a real but crude constraint -- it determines the half-plane of convergence but says nothing about zeros.
 
@@ -85,16 +85,16 @@ The converse is open (Zhu's conjecture): C_2-cofiniteness should imply rationali
 - X_V = nilpotent orbit closure: epsilon^c_s is an infinite series, d_arith > 0 possible
 - X_V = full affine space: epsilon^c_s is an infinite series with polynomial growth exponent dim(X_V)/2
 
-### 4. Non-rational V: combining associated variety data with shadow tower data
+### 4. Non-rational V: combining associated variety data with shadow obstruction tower data
 
-**Claim to test:** For non-rational V (X_V != {0}), the associated variety constrains but does not determine the spectrum. Can X_V data and shadow tower data be combined to constrain epsilon^c_s more tightly?
+**Claim to test:** For non-rational V (X_V != {0}), the associated variety constrains but does not determine the spectrum. Can X_V data and shadow obstruction tower data be combined to constrain epsilon^c_s more tightly?
 
 **Verdict: THIS IS WHERE THE REAL QUESTION LIVES, and the answer is nuanced.**
 
 The monograph identifies three independent projections of the MC element Theta_A (working_notes.tex, lines 2600-2648):
 
 1. **Genus tower**: F_g = kappa * lambda_g^FP (topological, Mumford classes)
-2. **Shadow tower**: {S_r}_{r >= 2} = [t^{r-2}] sqrt(Q_L) (arithmetic, quadratic extension)
+2. **Shadow obstruction tower**: {S_r}_{r >= 2} = [t^{r-2}] sqrt(Q_L) (arithmetic, quadratic extension)
 3. **Koszul dual**: A! = (B(A))^vee (algebraic, Verdier dual)
 
 The associated variety X_V adds a fourth invariant:
@@ -105,13 +105,13 @@ These four invariants are logically independent: different VOAs can share any pr
 
 **(a) X_V constrains the abscissa of convergence of epsilon^c_s** (via dim X_V, as in Point 1 above).
 
-**(b) The shadow tower constrains the spectral moments of epsilon^c_s** (arithmetic_shadows.tex, lines 1197-1205): alpha_2 = c/2, alpha_3 = 0, alpha_4 = Q^contact, etc. These are moment conditions on the primary spectrum, not pointwise conditions.
+**(b) The shadow obstruction tower constrains the spectral moments of epsilon^c_s** (arithmetic_shadows.tex, lines 1197-1205): alpha_2 = c/2, alpha_3 = 0, alpha_4 = Q^contact, etc. These are moment conditions on the primary spectrum, not pointwise conditions.
 
-**(c) X_V and the shadow tower are partially redundant and partially complementary.** The shadow tower is determined by (kappa, alpha, S_4, ...) -- the finite-arity OPE data. The associated variety is determined by the C_2-quotient, which is the "leading order" of the OPE (the coefficient of the most singular pole). So X_V sees the *structure constants* of the Poisson bracket on R_V, which is the s^{-2}-coefficient of the lambda-bracket, while the shadow tower sees *all* singular coefficients through the bar extraction.
+**(c) X_V and the shadow obstruction tower are partially redundant and partially complementary.** The shadow obstruction tower is determined by (kappa, alpha, S_4, ...) -- the finite-arity OPE data. The associated variety is determined by the C_2-quotient, which is the "leading order" of the OPE (the coefficient of the most singular pole). So X_V sees the *structure constants* of the Poisson bracket on R_V, which is the s^{-2}-coefficient of the lambda-bracket, while the shadow obstruction tower sees *all* singular coefficients through the bar extraction.
 
-Concretely: for the Virasoro algebra, X_V = C with coordinate T, Poisson bracket {T, T} = 0 (the Poisson bracket vanishes because there is only one generator and Virasoro is not a current algebra). The shadow tower sees kappa = c/2, alpha = 0, S_4 = 10/(c(5c+22)), ... -- infinitely more data. The shadow tower strictly refines X_V.
+Concretely: for the Virasoro algebra, X_V = C with coordinate T, Poisson bracket {T, T} = 0 (the Poisson bracket vanishes because there is only one generator and Virasoro is not a current algebra). The shadow obstruction tower sees kappa = c/2, alpha = 0, S_4 = 10/(c(5c+22)), ... -- infinitely more data. The shadow obstruction tower strictly refines X_V.
 
-**(d) The combination X_V + shadow tower still does NOT determine epsilon^c_s.** This is the Level 2-to-3 break: the shadow tower is determined by genus-0 OPE data, while epsilon^c_s depends on the *full weight multiset* W(A), which is genus-1 data (it appears in the character). Two algebras with the same OPE structure constants but different weight multiplicities have the same shadow tower but different epsilon^c_s.
+**(d) The combination X_V + shadow obstruction tower still does NOT determine epsilon^c_s.** This is the Level 2-to-3 break: the shadow obstruction tower is determined by genus-0 OPE data, while epsilon^c_s depends on the *full weight multiset* W(A), which is genus-1 data (it appears in the character). Two algebras with the same OPE structure constants but different weight multiplicities have the same shadow obstruction tower but different epsilon^c_s.
 
 **(e) The quasi-lisse condition provides a partial bridge.** Arakawa-Kawasetsu (arXiv:1610.05865) proved: if X_V is a *symplectic* variety (quasi-lisse VOA), then the character of V satisfies a modular linear differential equation (MLDE). An MLDE constrains the character -- and hence the primary spectrum -- to a finite-dimensional space of solutions. This means:
 
@@ -141,7 +141,7 @@ The deformation-quantization direction goes upward: given (X_V, {,}), one asks w
 - The deformation parameter is the level k (for affine KM) or the central charge c (for Virasoro). At fixed (X_V, {,}), there may be a family of VOAs parametrized by this deformation parameter, each with a different epsilon^c_s.
 - The *quantization ambiguity* (choices of ordering, normal ordering constants) creates a finite-dimensional moduli of quantum deformations. This moduli maps to a moduli of Dirichlet series, but the map is not injective.
 
-**The monograph's perspective:** The bar complex B(A) is the *correct* quantization of the classical r-matrix on X_V. The MC element Theta_A packages the full quantum data. The shadow tower is the finite-order projection. The deformation-quantization bridge (DK-0: r(z) = int_0^infty e^{-lambda z} {._lambda_.} dlambda, proved in Vol II) provides the Laplace-transform identification between the classical PVA lambda-bracket and the quantum r-matrix.
+**The monograph's perspective:** The bar complex B(A) is the *correct* quantization of the classical r-matrix on X_V. The MC element Theta_A packages the full quantum data. The shadow obstruction tower is the finite-order projection. The deformation-quantization bridge (DK-0: r(z) = int_0^infty e^{-lambda z} {._lambda_.} dlambda, proved in Vol II) provides the Laplace-transform identification between the classical PVA lambda-bracket and the quantum r-matrix.
 
 But epsilon^c_s lives *outside* this bridge: it depends on the *representation theory* of V (the primary spectrum), not on the *algebra structure* of V (the OPE). The bar complex encodes the algebra structure; the primary spectrum is additional data.
 
@@ -160,13 +160,13 @@ But epsilon^c_s lives *outside* this bridge: it depends on the *representation t
 3. The zero locations (critical-line structure)
 4. The shadow depth d_arith (which counts critical lines for lattice VOAs)
 
-**The gap between X_V data and epsilon^c_s is exactly the gap between classical and quantum.** The bar complex lives at the quantum level and sees both the shadow tower (classical-algebraic projection) and the genus tower (quantum-topological projection). The associated variety is the *shadow of a shadow*: it is the classical limit of the shadow tower's genus-0 data.
+**The gap between X_V data and epsilon^c_s is exactly the gap between classical and quantum.** The bar complex lives at the quantum level and sees both the shadow obstruction tower (classical-algebraic projection) and the genus tower (quantum-topological projection). The associated variety is the *shadow of a shadow*: it is the classical limit of the shadow obstruction tower's genus-0 data.
 
 **Can they be combined?** The most promising combination is:
 
     X_V (Poisson geometry)  +  Theta_A (MC element)  +  MLDE (if quasi-lisse)
 
-The MC element Theta_A, through its spectral measure rho (uniquely determined by Carleman -- Layer 3 in working_notes.tex, line 3250), provides *moment constraints* on epsilon^c_s. The MLDE provides a *finite-dimensional space* of allowed characters. Together, they overdetermine the character -- but only if the MLDE has small enough order relative to the number of moment constraints from the shadow tower.
+The MC element Theta_A, through its spectral measure rho (uniquely determined by Carleman -- Layer 3 in working_notes.tex, line 3250), provides *moment constraints* on epsilon^c_s. The MLDE provides a *finite-dimensional space* of allowed characters. Together, they overdetermine the character -- but only if the MLDE has small enough order relative to the number of moment constraints from the shadow obstruction tower.
 
 For lattice VOAs: the MLDE is not needed (Hecke decomposition suffices). For non-lattice VOAs: the MLDE + shadow moments is the correct combination, but proving that the resulting system has a unique solution is OPEN.
 
@@ -174,7 +174,7 @@ For lattice VOAs: the MLDE is not needed (Hecke decomposition suffices). For non
 
 The associated variety X_V provides a *qualitative classification* of epsilon^c_s (finite/infinite, growth rate, convergence domain) but not its *quantitative structure* (exponents, coefficients, zeros). The gap is structural: X_V is a classical-geometric invariant, epsilon^c_s is a quantum-arithmetic invariant, and the quantum corrections that bridge them (null vectors, singular vectors, OPE structure constants at all orders) are not recoverable from geometry alone.
 
-The most interesting interaction is through the quasi-lisse condition (Arakawa-Kawasetsu): when X_V is symplectic, the character satisfies an MLDE, which constrains the primary spectrum. Whether this MLDE constraint, combined with the shadow tower's moment constraints from Theta_A, suffices to determine epsilon^c_s is a genuine open question at the intersection of vertex algebra geometry and the arithmetic programme of the monograph.
+The most interesting interaction is through the quasi-lisse condition (Arakawa-Kawasetsu): when X_V is symplectic, the character satisfies an MLDE, which constrains the primary spectrum. Whether this MLDE constraint, combined with the shadow obstruction tower's moment constraints from Theta_A, suffices to determine epsilon^c_s is a genuine open question at the intersection of vertex algebra geometry and the arithmetic programme of the monograph.
 
 The Koszul--C_2 duality conjecture (conj:koszul-c2-duality in koszul_pair_structure.tex, line 2592) and the Barbasch-Vogan implementation (eq:koszul-bv-duality, line 2616) suggest that the *duality structure* on X_V (not just its geometry) may carry information about the complementarity of epsilon^c_s under the Koszul involution. This is the most concrete route from associated variety geometry to arithmetic structure, but it is currently conjectural and restricted to type A.
 

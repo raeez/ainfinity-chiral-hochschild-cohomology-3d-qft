@@ -1,14 +1,14 @@
 # Non-Commutative Geometry and the Real/Complex Gap
 
 **Investigation**: Can Connes' non-commutative geometry framework bridge the
-gap between the bar complex B(A) (which produces the shadow tower and its
+gap between the bar complex B(A) (which produces the shadow obstruction tower and its
 arithmetic content) and the zeros of the Riemann zeta function?
 
 **Status**: NEGATIVE. Each of the five proposed bridges has a specific,
 identifiable structural obstruction. The investigation reveals that the
 manuscript's own structural obstruction remark (rem:structural-obstruction
 in arithmetic_shadows.tex, lines 300--326) already identifies the deepest
-reason: the shadow tower constrains spectral data on the real axis, while
+reason: the shadow obstruction tower constrains spectral data on the real axis, while
 zeta zeros live at complex spectral parameters. Non-commutative geometry
 does not resolve this separation; it repackages it.
 
@@ -74,7 +74,7 @@ the Fock space eigenvalues are the positive integers.
 **What IS true**: For lattice VOAs V_Lambda of rank r, the constrained
 Epstein zeta epsilon^r_s factors through the Hecke decomposition of the
 theta function Theta_Lambda (thm:shadow-spectral-correspondence, line 100).
-This factorization is the arithmetic content of the shadow tower, and it
+This factorization is the arithmetic content of the shadow obstruction tower, and it
 is genuinely nontrivial: it connects the shadow depth d(V_Lambda) to the
 number of critical lines of epsilon^r_s. But this factorization uses
 CLASSICAL number theory (Hecke theory, Rankin-Selberg method), not
@@ -92,7 +92,7 @@ phase transition as r -> infinity?
 
 **Analysis**:
 
-The shadow tower {S_r} for r = 2, 3, 4, ... has the following structure
+The shadow obstruction tower {S_r} for r = 2, 3, 4, ... has the following structure
 (from the shadow archetype classification, thm:shadow-archetype-classification):
 
 - Class G (Gaussian): S_r = 0 for r >= 3. "Zero temperature" -- tower
@@ -110,7 +110,7 @@ confirmed by compute/lib/shadow_radius.py):
 
 where rho = sqrt(9*alpha^2 + 2*Delta) / (2|kappa|) is the shadow radius.
 
-There IS a genuine dichotomy in the shadow tower, but it is the WRONG
+There IS a genuine dichotomy in the shadow obstruction tower, but it is the WRONG
 KIND of phase transition for a Bost-Connes analogy:
 
 1. The Bost-Connes phase transition is a transition in the SYMMETRY GROUP
@@ -118,14 +118,14 @@ KIND of phase transition for a Bost-Connes analogy:
    of states (beta > 1). The transition point beta = 1 is a single real
    number.
 
-2. The shadow tower dichotomy is between FINITE and INFINITE shadow depth:
+2. The shadow obstruction tower dichotomy is between FINITE and INFINITE shadow depth:
    d(A) < infinity (classes G/L/C) vs d(A) = infinity (class M). This is
    a property of the ALGEBRA A, not a transition at a particular arity.
 
 3. The Bost-Connes system has the property that for beta > 1, the KMS
    state phi_beta evaluates on the Hecke operators as
    phi_beta(mu_n) = n^{-beta}, giving zeta(beta) as a partition function.
-   The shadow tower evaluates the MC element Theta_A at arity r, giving
+   The shadow obstruction tower evaluates the MC element Theta_A at arity r, giving
    S_r as a "partition function." But S_r is a FIXED number (determined
    by the OPE data), not a function of a continuous parameter.
 
@@ -140,7 +140,7 @@ KIND of phase transition for a Bost-Connes analogy:
 
 **The deeper mismatch**: The Bost-Connes system is a QUANTUM STATISTICAL
 MECHANICAL system: it has an algebra of observables, a time evolution, and
-KMS states. The shadow tower is a COHOMOLOGICAL object: it is the
+KMS states. The shadow obstruction tower is a COHOMOLOGICAL object: it is the
 Postnikov tower of the MC element Theta_A in the modular cyclic deformation
 complex. These are categorically different: the first lives in C*-algebra
 theory and operator algebras; the second lives in dg Lie algebras and
@@ -167,7 +167,7 @@ not a phase transition at a critical value of r.
 consists of an algebra A acting on a Hilbert space H with a Dirac
 operator D. For a VOA V: could A = V, H = Fock space, D = d_bar
 (the bar differential)? Would the spectral action Tr(f(D/Lambda))
-give the shadow tower?
+give the shadow obstruction tower?
 
 **Analysis**:
 
@@ -208,7 +208,7 @@ finite multiplicities). This satisfies axiom 2. However:
   This violates axiom 3.
 - The "Dirac operator" L_0 gives Tr(e^{-beta*L_0}) = Z_V(e^{-beta}),
   which is the partition function at q = e^{-beta}. This recovers the
-  PARTITION FUNCTION, not the shadow tower.
+  PARTITION FUNCTION, not the shadow obstruction tower.
 
 **Attempt D = d_bar + d_bar^***: The operator d_bar + d_bar^* (where
 d_bar^* is the adjoint with respect to a chosen inner product on B(A))
@@ -218,7 +218,7 @@ is formally self-adjoint. But:
   is a different Hilbert space from the Fock space.
 - (d_bar + d_bar^*)^2 = d_bar*d_bar^* + d_bar^*d_bar is the bar Laplacian.
   Its spectrum would give "bar harmonic forms" -- the bar cohomology
-  H*(B(A)). This is related to Koszul duality, not to the shadow tower
+  H*(B(A)). This is related to Koszul duality, not to the shadow obstruction tower
   directly.
 - The spectral action Tr(f((d_bar + d_bar^*)/Lambda)) would count bar
   harmonic forms weighted by their "bar eigenvalue." For chirally Koszul
@@ -228,7 +228,7 @@ is formally self-adjoint. But:
 **The fundamental obstruction**: Connes' spectral action principle states
 that the physics is encoded in Tr(f(D/Lambda)) for a cutoff function f.
 This produces a power series in Lambda^{-1} whose coefficients are the
-Seeley-DeWitt coefficients of D^2. For this to reproduce the shadow tower,
+Seeley-DeWitt coefficients of D^2. For this to reproduce the shadow obstruction tower,
 one would need:
 
   Tr(f(D/Lambda)) = sum_r S_r * Lambda^{-r}
@@ -237,11 +237,11 @@ But the Seeley-DeWitt coefficients are LOCAL invariants of the operator D
 (integrals of curvature polynomials over the manifold). The shadow
 coefficients S_r are GLOBAL invariants of the OPE (they involve
 configuration space integrals over C_r(X), which are inherently nonlocal).
-The spectral action principle produces local invariants; the shadow tower
+The spectral action principle produces local invariants; the shadow obstruction tower
 produces nonlocal invariants. These are structurally incompatible.
 
 **What IS true**: The bar complex B(A) is a non-commutative object (a dg
-coalgebra), and the shadow tower is built from it. But "non-commutative"
+coalgebra), and the shadow obstruction tower is built from it. But "non-commutative"
 in the sense of dg coalgebras is DIFFERENT from "non-commutative" in the
 sense of Connes' non-commutative geometry:
 
@@ -258,7 +258,7 @@ curves). Connes' non-commutativity is ALGEBRAIC (governed by the failure
 of commutativity of an associative algebra). The two frameworks do not
 naturally communicate.
 
-**Verdict**: No spectral triple (V, Fock, D) reproduces the shadow tower
+**Verdict**: No spectral triple (V, Fock, D) reproduces the shadow obstruction tower
 via the spectral action. The bar differential is not self-adjoint, does
 not have compact resolvent, and produces nonlocal invariants incompatible
 with the Seeley-DeWitt expansion. The "non-commutativity" of B(A) is
@@ -342,7 +342,7 @@ analogous to the rooted trees in CK. However:
 
 **The Feynman connection chapter** (chapters/connections/feynman_connection.tex
 and feynman_diagrams.tex) discusses the relationship between bar complex
-graph sums and Feynman diagrams. The graph sums in the shadow tower use
+graph sums and Feynman diagrams. The graph sums in the shadow obstruction tower use
 the complementarity propagator P = H_A^{-1} and the transferred A-infinity
 operations m_k on H*(B(A)). These graph sums are FINITE (no divergences
 requiring renormalization) because:
@@ -429,7 +429,7 @@ They appear in the RANKIN-SELBERG integral of Z_V against E_s, through
 the scattering matrix phi(s) = Lambda(1-s)/Lambda(s) (eq:scattering-matrix,
 line 92). But as rem:structural-obstruction (line 300) already explains:
 
-> "The shadow tower and the MC equation constrain the spectral coefficients
+> "The shadow obstruction tower and the MC equation constrain the spectral coefficients
 > c(t) on the real t-axis; the zeta zeros live at complex t. This
 > separation is structural: algebraic constraints on the spectral line
 > cannot reach the scattering poles without analytic continuation of the
@@ -440,7 +440,7 @@ NCG bridge:
 
 1. The MC equation Theta_A lives in the deformation complex Def_cyc^mod(A),
    which is an algebraic object (dg Lie algebra over the OPE data).
-2. The shadow tower {S_r} is computed from Theta_A by algebraic operations
+2. The shadow obstruction tower {S_r} is computed from Theta_A by algebraic operations
    (graph sums, residues, configuration space integrals).
 3. The constrained Epstein zeta epsilon^c_s is the Mellin transform of
    the shadow data, which introduces the spectral parameter s.
@@ -464,7 +464,7 @@ LANGUAGE, not the DIFFICULTY.
 1. For lattice VOAs, the constrained Epstein zeta factors into products
    of Riemann zeta and Hecke L-functions (thm:shadow-spectral-correspondence).
    The zeros of these L-functions lie on the critical line(s) ASSUMING
-   GRH. The shadow tower COUNTS the critical lines (the shadow-spectral
+   GRH. The shadow obstruction tower COUNTS the critical lines (the shadow-spectral
    correspondence) but does not PROVE that zeros lie on them.
 
 2. The sewing-Selberg formula (thm:sewing-selberg-formula, line 277)
@@ -499,7 +499,7 @@ manuscript already identifies (rem:structural-obstruction):
 **The real/complex separation is structural, not technical.**
 
 The MC element Theta_A lives in an ALGEBRAIC deformation complex. Its
-projections (the shadow tower) are computed by ALGEBRAIC operations
+projections (the shadow obstruction tower) are computed by ALGEBRAIC operations
 (graph sums, residues, configuration space integrals). The Mellin
 transform connects these algebraic invariants to L-functions on the
 REAL spectral axis. The zeros of these L-functions live at COMPLEX
@@ -516,10 +516,10 @@ leverage. The specific proposed bridges fail because:
 
 1. **Adele class space**: VOA partition functions are two-parameter
    modular objects, not one-parameter traces on operator algebras.
-2. **Bost-Connes phase transitions**: The shadow tower's arity is
+2. **Bost-Connes phase transitions**: The shadow obstruction tower's arity is
    discrete and algebra-dependent, not a continuous temperature parameter.
 3. **Spectral triples**: The bar differential is not self-adjoint, and
-   the shadow tower produces nonlocal invariants incompatible with the
+   the shadow obstruction tower produces nonlocal invariants incompatible with the
    spectral action principle.
 4. **Connes-Kreimer Hopf algebra**: The bar complex's coproduct (set
    partitions) is structurally different from CK's coproduct (tree cuts),
@@ -534,7 +534,7 @@ Ramanujan proof are genuine contributions. But they operate within
 classical analytic number theory (Hecke theory, Rankin-Selberg, converse
 theorems), not within non-commutative geometry. The NCG framework does
 not provide additional leverage for the specific problems addressed by
-the shadow tower.
+the shadow obstruction tower.
 
 **The one genuine bridge worth investigating further** (but outside NCG):
 The arithmetic packet connection (def:arithmetic-packet-connection,

@@ -1,4 +1,4 @@
-r"""Ordered E_1 shadow tower for ALL unitary Virasoro minimal models.
+r"""Ordered E_1 shadow obstruction tower for ALL unitary Virasoro minimal models.
 
 The unitary minimal models are the ONLY rational Virasoro theories.
 Central charges:
@@ -143,7 +143,7 @@ def main():
     print()
     print("  PREDICTION: Since all c_m < 1, we expect LARGE rho (divergent tower).")
     print("  The convergence threshold is NOT at a specific m; rather, for ALL")
-    print("  unitary minimal models c_m in (0,1), the shadow tower is DIVERGENT.")
+    print("  unitary minimal models c_m in (0,1), the shadow obstruction tower is DIVERGENT.")
     print()
     print(f"  {'m':>3s}  {'c_m':>12s}  {'rho_m':>10s}  {'regime':>12s}")
     print(f"  {'---':>3s}  {'------------':>12s}  {'----------':>10s}  {'------------':>12s}")
@@ -163,7 +163,7 @@ def main():
 
     print(f"\n  Summary: {n_convergent} convergent, {n_divergent} divergent out of {M_MAX - M_MIN + 1}.")
     if n_convergent == 0:
-        print("  ALL minimal models have DIVERGENT shadow towers (rho > 1).")
+        print("  ALL minimal models have DIVERGENT shadow obstruction towers (rho > 1).")
         print("  This is EXPECTED: small c means small kappa = c/2, and rho ~ 6/c -> infinity as c -> 0.")
     print()
 
@@ -300,7 +300,7 @@ def main():
     print()
     print("  The shadow coefficients S_r for Virasoro are generically NONZERO")
     print("  for ALL r >= 2. The Virasoro OPE has a quartic pole (class M),")
-    print("  so the shadow tower has infinite depth — NO even-arity vanishing.")
+    print("  so the shadow obstruction tower has infinite depth — NO even-arity vanishing.")
     print()
     print("  For comparison, class L algebras (like V_k(sl_2)) have m_k = 0 for k >= 3,")
     print("  which gives S_r = 0 for even r >= 4. This does NOT apply to Virasoro.")
@@ -537,7 +537,7 @@ def main():
     print("SUMMARY OF FINDINGS")
     print("=" * 90)
     print()
-    print("  (1) ALL 18 unitary minimal models (m=3,...,20) have DIVERGENT shadow towers")
+    print("  (1) ALL 18 unitary minimal models (m=3,...,20) have DIVERGENT shadow obstruction towers")
     print(f"      (rho > 1 for all). The critical c for convergence is c ≈ {c_crit:.4f} >> 1.")
     print(f"      Minimal models have c in ({float(models[3]):.4f}, {float(models[20]):.8f}), all < 1.")
     print()
@@ -557,7 +557,7 @@ def main():
     print()
     print("  (6) The growth rate rho_m DECREASES monotonically with m (as c_m increases")
     print("      toward 1), approaching rho(c=1) from above. This means higher minimal")
-    print("      models have 'less divergent' shadow towers.")
+    print("      models have 'less divergent' shadow obstruction towers.")
     print()
     print("  (7) The RATIONAL arithmetic of S_r at minimal model central charges is")
     print("      controlled by the primes in the factorization of m(m+1) and (m-2)(m+3).")

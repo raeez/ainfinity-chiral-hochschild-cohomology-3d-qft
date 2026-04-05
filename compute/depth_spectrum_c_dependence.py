@@ -18,7 +18,7 @@ COMPUTATIONS:
 (1) c=0 (Witt algebra): scalar sector vanishes entirely.
 (2) c=-22/5 (Lee-Yang): S_4 has a pole. Scalar diverges at specific arities.
 (3) c=1/2 (Ising): minimal model. Full bar complex on the vacuum module.
-(4) c=25 (near-critical): shadow tower convergence.
+(4) c=25 (near-critical): shadow obstruction tower convergence.
 (5) Gap c-dependence: the gap at d=k is in the T-sector, hence c-independent.
 """
 
@@ -347,10 +347,10 @@ def compute_ising(max_arity=10):
 def compute_near_critical(max_arity=10):
     """At c=25, one unit below the critical string value c=26.
 
-    The shadow tower convergence is controlled by kappa(Vir_c) = c-26 = -1.
-    At c=25: kappa = -1 (small), so the shadow tower converges rapidly.
-    At c=26: kappa = 0 (critical), the shadow tower truncates (formality).
-    At c=1: kappa = -25 (large), the shadow tower diverges rapidly.
+    The shadow obstruction tower convergence is controlled by kappa(Vir_c) = c-26 = -1.
+    At c=25: kappa = -1 (small), so the shadow obstruction tower converges rapidly.
+    At c=26: kappa = 0 (critical), the shadow obstruction tower truncates (formality).
+    At c=1: kappa = -25 (large), the shadow obstruction tower diverges rapidly.
 
     The depth spectrum is c-INDEPENDENT (T-sector), but the scalar
     MAGNITUDES are proportional to c.
@@ -359,7 +359,7 @@ def compute_near_critical(max_arity=10):
     print("5. c = 25: NEAR-CRITICAL (kappa = c - 26 = -1)")
     print("=" * 90)
 
-    print("\n  Shadow tower convergence: |S_r| for different c values.")
+    print("\n  Shadow obstruction tower convergence: |S_r| for different c values.")
     print("  kappa(Vir_c) = c - 26. At c=26: kappa=0 (SC-formal, shadow truncates).")
     print("  The scalar part of m_k is (c/12)*P_k(lambda).")
     print("  Since P_k is c-independent, the scalar RATIO between c values is just c_1/c_2.")
@@ -388,7 +388,7 @@ def compute_near_critical(max_arity=10):
         print()
 
     print("\n  All columns AGREE (up to numerical precision), confirming c-linearity.")
-    print("  The 'convergence' of the shadow tower at c=25 vs c=1 is simply:")
+    print("  The 'convergence' of the shadow obstruction tower at c=25 vs c=1 is simply:")
     print("  |scalar at c=25| / |scalar at c=1| = 25 / 1 = 25.")
     print("  There is NO special convergence at c=25; the ratio is just c.")
     print()

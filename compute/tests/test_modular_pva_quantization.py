@@ -509,7 +509,7 @@ class TestVirasoroQuantizationData:
         assert simplify(data['quartic_contact'] - expected) == 0
 
     def test_virasoro_quintic_forced(self):
-        """Virasoro: shadow tower is infinite (quintic forced)."""
+        """Virasoro: shadow obstruction tower is infinite (quintic forced)."""
         from lib.modular_pva_quantization import virasoro_quantization_data
         data = virasoro_quantization_data(1)
         assert data['quintic_forced'] is True

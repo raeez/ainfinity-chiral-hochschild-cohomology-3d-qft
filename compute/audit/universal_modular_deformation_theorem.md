@@ -52,9 +52,9 @@ The geometric arena is not extracted from Theta_A; it is the base ring of the co
 
 And beyond the five:
 
-(F) Shadow tower: pi_{r,bullet}(Theta_A) for r = 2, 3, 4, ... is the shadow Postnikov tower, each level a natural transformation (constr:shadow-extraction-explicit).
+(F) Shadow obstruction tower: pi_{r,bullet}(Theta_A) for r = 2, 3, 4, ... is the shadow Postnikov tower, each level a natural transformation (constr:shadow-extraction-explicit).
 
-(G) Platonic package: the six-fold datum Pi_X(L) is canonically recovered from Theta_A (thm:platonic-recovery).
+(G) Modular Koszul datum: the six-fold datum Pi_X(L) is canonically recovered from Theta_A (thm:platonic-recovery).
 
 *(IV) Structural properties.* The functor Theta satisfies:
 
@@ -72,7 +72,7 @@ Every claim in (I)-(IV) is proved in the manuscript. The references are:
 
 - (I): prop:mc2-functoriality (functoriality of A |-> Theta_A), thm:mc2-bar-intrinsic (construction of Theta_A), def:modular-convolution-dg-lie (construction of g_A^mod).
 - (II): eq:modular-convolution (convolution Hom), eq:D-five-components (five-component differential), thm:convolution-d-squared-zero (D^2 = 0 from face cancellation), const:explicit-convolution-bracket (bracket from clutching).
-- (III): thm:five-from-theta (five theorems as projections), thm:convolution-master-identification + cor:theta-twisting-morphism (MC = Tw representability), thm:platonic-recovery (platonic package recovery).
+- (III): thm:five-from-theta (five theorems as projections), thm:convolution-master-identification + cor:theta-twisting-morphism (MC = Tw representability), thm:platonic-recovery (modular Koszul datum recovery).
 - (IV)(a): prop:independent-sum-factorization. (b): thm:mc2-bar-intrinsic(iv). (c): thm:shadow-homotopy-invariance. (d): prop:mc2-functoriality(ii)-(iii).
 
 The categorical packaging into a single functor statement is new; all constituent results are proved.

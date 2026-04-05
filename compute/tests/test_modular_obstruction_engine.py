@@ -18,7 +18,7 @@ Tests cover:
 References:
   modular_pva_quantization.tex (Vol II)
   higher_genus_modular_koszul.tex (Vol I)
-  nonlinear_modular_shadows.tex (Vol I): shadow tower obstruction theory
+  nonlinear_modular_shadows.tex (Vol I): shadow obstruction tower obstruction theory
 """
 import sys
 import os

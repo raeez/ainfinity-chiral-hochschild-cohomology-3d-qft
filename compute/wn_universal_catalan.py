@@ -1,4 +1,4 @@
-r"""Universal Catalan structure of the shadow tower for ALL principal W_N algebras.
+r"""Universal Catalan structure of the shadow obstruction tower for ALL principal W_N algebras.
 
 MAIN THEOREM (Proved here computationally for N=2,...,8; structurally for all N):
 ============
@@ -119,7 +119,7 @@ def binom_half(n):
 # ===================================================================
 
 def universal_shadow_from_delta(kappa_val, delta_val, N, r_max=12):
-    """Given kappa_N and delta_N, compute the W^{(N)}-line shadow tower.
+    """Given kappa_N and delta_N, compute the W^{(N)}-line shadow obstruction tower.
 
     The shadow metric on the W^{(N)}-line is:
       Q_N(u) = (2*kappa_N)^2 * (1 + delta_N * u)
@@ -251,10 +251,10 @@ def w3_data():
     print("  delta_3 = 122880 / (c^2(5c+22)^3)")
     print()
 
-    # Generate shadow tower via universal mechanism
+    # Generate shadow obstruction tower via universal mechanism
     results = universal_shadow_from_delta(kappa_W, delta_3, N=3, r_max=8)
 
-    print("  W-line shadow tower (Catalan formula):")
+    print("  W-line shadow obstruction tower (Catalan formula):")
     for arity in sorted(results.keys()):
         S = results[arity]
         r_prime = (arity - 2) // 2 + 1  # reduced arity
@@ -491,10 +491,10 @@ def shape_factor_comparison():
 # ===================================================================
 
 def three_parameter_universality():
-    """The shadow tower is determined by three parameters.
+    """The shadow obstruction tower is determined by three parameters.
 
     THEOREM (Three-parameter determination):
-    For any single-generator-line shadow tower, the full infinite
+    For any single-generator-line shadow obstruction tower, the full infinite
     tower {S_r}_{r >= 2} is determined by exactly three data:
       (kappa, alpha, S_4)
     where:
@@ -760,7 +760,7 @@ def main():
     print("CONCLUSION")
     print("=" * 72)
     print("""
-  The Catalan numbers UNIVERSALLY govern the shadow tower of ALL principal
+  The Catalan numbers UNIVERSALLY govern the shadow obstruction tower of ALL principal
   W-algebras on the highest-spin generator line, by the following chain:
 
   (1) Z_{N-1} symmetry -> only arities 2 + k(N-1) survive on W^{(N)}-line.

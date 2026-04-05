@@ -36,7 +36,7 @@ A-hat generating function sum_g F_g x^{2g} = kappa * ((x/2)/sin(x/2) - 1).
 
 References:
   higher_genus_modular_koszul.tex (Vol I): modular bar, genus spectral sequence
-  nonlinear_modular_shadows.tex (Vol I): shadow tower, obstruction theory
+  nonlinear_modular_shadows.tex (Vol I): shadow obstruction tower, obstruction theory
   modular_obstruction_engine.py (Vol II): genus-1 pipeline (round 2)
   genus2_shadow_strata.py (Vol I): stable graphs at genus 2
   Faber-Pandharipande: lambda_g^FP intersection numbers
@@ -950,7 +950,7 @@ def graph_decomposition_F2_virasoro(c_val=None):
     - The cubic shadow C = 2, quartic Q = 10/[c(5c+22)]
     - The total must sum to kappa * 7/5760 = 7c/11520
 
-    NOTE: The individual graph amplitudes involve the shadow tower
+    NOTE: The individual graph amplitudes involve the shadow obstruction tower
     operations at genus 0 and genus 1. The universal formula
     F_2 = kappa * 7/5760 does NOT require computing the individual
     graph amplitudes -- it follows from the A-hat generating function.

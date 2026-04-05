@@ -491,10 +491,10 @@ def denominator_analysis(w_results):
     print("=" * 72)
 
     print("""
-For the Virasoro shadow tower:
+For the Virasoro shadow obstruction tower:
   denom(S_r) = c^{r-3} (5c+22)^{floor((r-2)/2)}
 
-For the W3 W-line shadow tower:
+For the W3 W-line shadow obstruction tower:
   S_{2r}^W has denominator c^{2r-3} (5c+22)^{3r-3}
   (from gamma^{r-1} = [61440/(c^2(5c+22)^3)]^{r-1})
 

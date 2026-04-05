@@ -11,7 +11,7 @@ Verifies:
   - Collision residues with AP19 d-log absorption
   - m₂ spectral structure
   - GLCM classification
-  - Shadow tower coefficients
+  - Shadow obstruction tower coefficients
   - R-matrix type
   - Euler-eta
   - Koszul sign conventions for fermions
@@ -255,7 +255,7 @@ class TestAffineExceptional:
 
     @pytest.mark.parametrize("name", ["E6", "E7", "E8"])
     def test_shadow_terminates(self, name):
-        """Shadow tower terminates: S₃ = S₄ = 0."""
+        """Shadow obstruction tower terminates: S₃ = S₄ = 0."""
         ae = AffineExceptional(name, k=1)
         st = ae.shadow_tower()
         assert st['S3'] == 0

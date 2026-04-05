@@ -184,7 +184,7 @@ def genus0_classical_data(family, **params):
             'shadow_archetype': 'M',
             'r_matrix_pole': 4,
             'bar_differential_squared': S.Zero,
-            'description': 'Mixed: infinite shadow tower, self-referential OPE',
+            'description': 'Mixed: infinite shadow obstruction tower, self-referential OPE',
         }
     elif family == 'w3':
         c = params.get('c', Symbol('c'))
@@ -790,7 +790,7 @@ def virasoro_quantization_data(c):
         'genus1_hessian': delta_h,
         'quintic_forced': True,
         'description': (
-            'Virasoro: shadow tower is INFINITE (quintic forced). '
+            'Virasoro: shadow obstruction tower is INFINITE (quintic forced). '
             'The depth-zero resonance shadow Vir_{26-c} is the image of '
             'the finite-dimensional resonance truncation, not the final dual.'
         ),

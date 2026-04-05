@@ -1,7 +1,7 @@
 r"""W₃ E₁ ordered multi-channel shadow coefficients to order 20.
 
 The W₃ algebra has generators T (weight 2) and W (weight 3).
-The ordered E₁ shadow tower decomposes into THREE channels:
+The ordered E₁ shadow obstruction tower decomposes into THREE channels:
 
   S_r^{TT}  — T-T channel (Virasoro sector, decouples)
   S_r^{TW}  — T-W cross channel on the mixed ray
@@ -35,7 +35,7 @@ Cross-references:
   w3_quartic_contact.py: quartic contact Q_{TTTT}, Q_{TTWW}, Q_{WWWW}
   w3_shadow_coefficients.py: preliminary analysis
   ordered_e1_shadow_catalan.py: Virasoro closed-form Catalan formula
-  3d_gravity.tex §shadow-table: Virasoro shadow tower
+  3d_gravity.tex §shadow-table: Virasoro shadow obstruction tower
   w-algebras-w3.tex: W₃ algebra structure and A∞ operations
 """
 

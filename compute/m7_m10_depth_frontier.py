@@ -554,7 +554,7 @@ def compute_shadow_coefficient(engine: StasheffEngine, k: int,
     """Estimate the shadow coefficient S_k from the scalar part of m_k.
 
     The scalar part is (c/12) * P_k(λ) where P_k is homogeneous of degree k+1.
-    S_k is related to the coefficient of the leading shadow tower term.
+    S_k is related to the coefficient of the leading shadow obstruction tower term.
 
     Returns (mean_scalar, ratio_to_c12) where ratio = mean_scalar / (c/12).
     """

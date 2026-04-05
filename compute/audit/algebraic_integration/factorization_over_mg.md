@@ -48,7 +48,7 @@ For affine sl_2 at integrable level k: V_{sl_2,k}|_tau is a rank-(k+1) vector bu
 
 For a rational VOA, the vector bundle V_A carries a FLAT connection: the KZ/Hitchin connection nabla^KZ (for affine KM at integrable level) or its generalization (for other rational VOAs). This connection is the genus-1 restriction of the modular functor.
 
-At the level of the manuscript's shadow tower, this connection is identified with the genus-1, arity-2 shadow projection:
+At the level of the manuscript's shadow obstruction tower, this connection is identified with the genus-1, arity-2 shadow projection:
 
     nabla^shadow_{1,0} = d - Sh_{1,0}(Theta_A)
 
@@ -70,7 +70,7 @@ For Virasoro: Delta_Vir(x) = (1 - 3x)(1 + x) (same as for sl_2-hat and beta-gamm
 
 **The spectral discriminant does NOT determine the primary spectrum.** Three distinct algebras (sl_2-hat, Vir, beta-gamma) share the same Delta(x) = (1-3x)(1+x) but have entirely different primary spectra: sl_2-hat at integrable level k has k+1 primaries; Virasoro at generic c has infinitely many; beta-gamma has a continuous spectrum starting at h=0.
 
-### 1.4 Higher Chern classes and the shadow tower
+### 1.4 Higher Chern classes and the shadow obstruction tower
 
 The higher Chern classes c_k(V_A) for k >= 2 involve higher shadow data. Specifically (conformal_blocks.md line 259):
 
@@ -202,7 +202,7 @@ This is the GRR pushforward. It lives in the tautological ring R*(M-bar_g). For 
 
 **Relationship to epsilon^c_s**: F_1 = kappa/24 is the DEGREE of the Hodge line bundle, which controls the modular WEIGHT of the partition function. It does NOT determine the Fourier coefficients (= primary multiplicities) of Z(tau).
 
-### Layer 2: The shadow tower (algebraic, OPE-derived, proved)
+### Layer 2: The shadow obstruction tower (algebraic, OPE-derived, proved)
 
     {S_r(A)}_{r >= 2} = coefficients of sqrt(Q_L(t))
 
@@ -216,7 +216,7 @@ This is determined by three OPE parameters (kappa, alpha, S_4) and encodes the f
 
 This requires the FULL partition function Z(tau), which is a genus-1 categorical invariant (it depends on the module category V-mod and the modular invariant), not a genus-0 algebraic one.
 
-**The gap between Layers 2 and 3 is the gap between the shadow tower (genus-0, 3 parameters) and the primary spectrum (genus-1, infinitely many parameters).** No mechanism in the MC equation or the bar-cobar machine bridges this gap.
+**The gap between Layers 2 and 3 is the gap between the shadow obstruction tower (genus-0, 3 parameters) and the primary spectrum (genus-1, infinitely many parameters).** No mechanism in the MC equation or the bar-cobar machine bridges this gap.
 
 ---
 
@@ -258,7 +258,7 @@ For V_A = E^{kappa} (a line bundle on the modular curve): deg = kappa/12, chi(M_
 
 **Relationship to epsilon^c_s**: chi(V_A) gives the DIMENSION of the character space, not the characters themselves. Knowing that there are k+1 characters does not determine the conformal weights or multiplicities. epsilon^c_s requires the full character data, not just the number of characters.
 
-### Q4: GRR and the shadow tower
+### Q4: GRR and the shadow obstruction tower
 
 The GRR theorem for the universal family pi: C -> M_{1,1} computes:
 
@@ -272,11 +272,11 @@ The manuscript proves (prop:grr-bridge) that the genus generating function IS a 
 
 with F_g = kappa * int psi^{2g-2} c_g(E) being a Hodge integral.
 
-**Does GRR give the shadow tower?**
+**Does GRR give the shadow obstruction tower?**
 
-The GRR computation gives the GENUS TOWER {F_g}, which is the (g, 0) slice of the bigraded shadow algebra A^sh_{r,g}. The shadow tower in the usual sense is the (0, r) slice: the genus-0 arity-r data. These are genuinely different slices of the same bigraded object.
+The GRR computation gives the GENUS TOWER {F_g}, which is the (g, 0) slice of the bigraded shadow algebra A^sh_{r,g}. The shadow obstruction tower in the usual sense is the (0, r) slice: the genus-0 arity-r data. These are genuinely different slices of the same bigraded object.
 
-GRR is a COHOMOLOGICAL formula: it computes integrated (pushforward) data, not pointwise data. The shadow tower at genus 0 is essentially LOCAL data (OPE coefficients), while the GRR pushforward is GLOBAL data (integrated Chern classes). They are related through Theta_A (both are projections of the same MC element) but they are not the same object.
+GRR is a COHOMOLOGICAL formula: it computes integrated (pushforward) data, not pointwise data. The shadow obstruction tower at genus 0 is essentially LOCAL data (OPE coefficients), while the GRR pushforward is GLOBAL data (integrated Chern classes). They are related through Theta_A (both are projections of the same MC element) but they are not the same object.
 
 The planted-forest corrections (delta_pf^{(g,0)}) provide explicit cross-terms linking the genus axis to the arity axis. At genus 2: delta_pf^{(2,0)} = S_3(10*S_3 - kappa)/48, showing that the genus-2 free energy receives corrections from the arity-3 shadow S_3. The shadow visibility genus g_min(S_r) = floor(r/2) + 1 quantifies when arity-r shadows become visible at genus g.
 
@@ -338,9 +338,9 @@ The manuscript already contains a precise version of this negative result:
 
 1. **prop:constrained-epstein-not-bar** (working_notes.tex line 3460): epsilon^c_s is NOT a bar-complex invariant, by three independent arguments.
 
-2. **The honest three-layer picture** (working_notes.tex line 3502): the bar complex produces three layers (genus tower, shadow tower, Koszul dual), each a projection of Theta_A. The spectrum (Layer 3) is external to the bar complex.
+2. **The honest three-layer picture** (working_notes.tex line 3502): the bar complex produces three layers (genus tower, shadow obstruction tower, Koszul dual), each a projection of Theta_A. The spectrum (Layer 3) is external to the bar complex.
 
-3. **The structural obstruction** (working_notes.tex line 3530): "The gap between Layers 2 and 3 is the gap between the shadow tower (genus-0, 3 parameters) and the primary spectrum (genus-1, infinity parameters). No mechanism in the MC equation or the bar-cobar machine bridges this gap."
+3. **The structural obstruction** (working_notes.tex line 3530): "The gap between Layers 2 and 3 is the gap between the shadow obstruction tower (genus-0, 3 parameters) and the primary spectrum (genus-1, infinity parameters). No mechanism in the MC equation or the bar-cobar machine bridges this gap."
 
 4. **The four-level hierarchy** (conformal_blocks.md): Level 0 (kappa), Level 1 (bar cohomology dimensions), Level 2 (flat connection/monodromy on V_A), Level 3 (full sewing). Each requires strictly more data from Theta_A. epsilon^c_s lives at Level 3.
 
@@ -397,11 +397,11 @@ For rational V, this is a finite sum; the functional equation comes from the S-m
 
 ### 9.3 The bordered Rankin-Selberg integral
 
-Is there a Rankin-Selberg formula on the bordered moduli space M-bar_{g,k}^bor that interpolates between the shadow tower (large k, g=0) and the constrained Epstein (k=0, g=1)? This would require a theory of Eisenstein series on bordered moduli spaces, which does not currently exist.
+Is there a Rankin-Selberg formula on the bordered moduli space M-bar_{g,k}^bor that interpolates between the shadow obstruction tower (large k, g=0) and the constrained Epstein (k=0, g=1)? This would require a theory of Eisenstein series on bordered moduli spaces, which does not currently exist.
 
 ### 9.4 Logarithmic VOAs and mock modular forms
 
-For non-rational VOAs with non-semisimple module categories (triplet algebras, admissible-level quotients), the characters are MOCK MODULAR FORMS. The derived category D^b(V-mod) is genuinely richer (Ext != 0). Whether the Ext data connects to a different spectral zeta (involving Zwegers' "shadow" of the mock modular form -- a terminological coincidence with the shadow tower worth investigating) is unexplored.
+For non-rational VOAs with non-semisimple module categories (triplet algebras, admissible-level quotients), the characters are MOCK MODULAR FORMS. The derived category D^b(V-mod) is genuinely richer (Ext != 0). Whether the Ext data connects to a different spectral zeta (involving Zwegers' "shadow" of the mock modular form -- a terminological coincidence with the shadow obstruction tower worth investigating) is unexplored.
 
 ---
 
@@ -414,7 +414,7 @@ For non-rational VOAs with non-semisimple module categories (triplet algebras, a
 | Does ch(V_A) determine epsilon^c_s? | No (ch = Delta_A, a polynomial; epsilon^c_s needs infinitely many parameters) | conformal_blocks.md sec. 4 |
 | Does chi(V_A) determine epsilon^c_s? | No (chi = one number) | Riemann-Roch |
 | Does H^0(V_A) determine epsilon^c_s? | For rational: determines characters (input to epsilon^c_s), not epsilon^c_s itself. For irrational: no. | Zhu correspondence, Rankin-Selberg |
-| Does GRR give the shadow tower? | GRR gives the GENUS tower {F_g}, not the arity tower {S_r}. Both are projections of Theta_A but on different axes. | prop:grr-bridge |
+| Does GRR give the shadow obstruction tower? | GRR gives the GENUS tower {F_g}, not the arity tower {S_r}. Both are projections of Theta_A but on different axes. | prop:grr-bridge |
 | Is epsilon^c_s a bar-complex invariant? | No, by three independent arguments | prop:constrained-epstein-not-bar |
 | Is there a sheaf F_A whose H^0 = primary fields? | For rational: Zhu algebra sheaf captures module data. For irrational: no. | Zhu theory |
 | What is the root obstruction? | Algebraic (sheaf cohomology) vs analytic (spectral theory on L^2(M_{1,1})). These are categorically different. | structural obstruction |

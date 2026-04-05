@@ -857,7 +857,7 @@ def section5_bar_complex_dimensions(irr_dims, energy_dims, spin_dims):
   Case 1: UNIVERSAL Virasoro vertex algebra at c=1/2 (= Verma/L_{{-1}}).
     - The m_k operations are computed by the Stasheff engine.
     - The bar complex B^ord(Vir_{{1/2}}) has the dimensions above (Verma column).
-    - The shadow tower S_r(1/2) is computed from THESE m_k.
+    - The shadow obstruction tower S_r(1/2) is computed from THESE m_k.
     - This is what we compute throughout this analysis.
 
   Case 2: ISING minimal model vertex algebra L(1/2, 0).

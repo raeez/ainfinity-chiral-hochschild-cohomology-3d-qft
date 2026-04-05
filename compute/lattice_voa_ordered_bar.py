@@ -722,7 +722,7 @@ class LatticeBarComplex:
         Convention clarification: "depth" in the atlas counts from the OPE,
         not from the collision residue. Depth r means the OPE has a pole of
         order r+1 (after d log: collision residue pole of order r).
-        The shadow tower atlas uses:
+        The shadow obstruction tower atlas uses:
           S₂ (depth 2) = from double pole = Killing form
           S₃ (depth 3) = from simple pole iterated = Lie bracket
         """
@@ -743,7 +743,7 @@ class LatticeBarComplex:
                         has_simple_pole = True
                         depths.add(0)
 
-        # Shadow tower depth
+        # Shadow obstruction tower depth
         if has_simple_pole:
             # Lie bracket present: depth 3 tower, class L
             shadow_depth = 3

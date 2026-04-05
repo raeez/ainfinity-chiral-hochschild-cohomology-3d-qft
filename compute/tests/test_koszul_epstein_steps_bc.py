@@ -244,7 +244,7 @@ class TestMinimalModelExclusion:
 # ================================================================
 
 class TestShadowData:
-    """Tests for shadow tower data: kappa, S_4, Delta."""
+    """Tests for shadow obstruction tower data: kappa, S_4, Delta."""
 
     def test_kappa_formula(self):
         """kappa = c/2."""

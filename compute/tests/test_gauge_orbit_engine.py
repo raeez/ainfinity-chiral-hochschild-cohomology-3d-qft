@@ -346,7 +346,7 @@ class TestVirasoroGaugeData:
             assert abs(data['kappa'] - c / 2.0) < 1e-15
 
     def test_class_M(self):
-        """Virasoro is always class M (infinite shadow tower)."""
+        """Virasoro is always class M (infinite shadow obstruction tower)."""
         for c in [1, 13, 26, 100]:
             data = virasoro_gauge_data(c)
             assert data['shadow_class'] == 'M'

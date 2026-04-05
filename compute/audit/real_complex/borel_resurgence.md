@@ -2,7 +2,7 @@
 
 ## Summary
 
-The shadow tower S_r has asymptotic behavior (Darboux transfer theorem):
+The shadow obstruction tower S_r has asymptotic behavior (Darboux transfer theorem):
 
     S_r ~ -A * rho^r * r^{-5/2} * cos(r*omega + phi)
 
@@ -10,7 +10,7 @@ where rho is the shadow growth rate, omega the oscillation frequency, A the
 Darboux amplitude, and phi a computable phase. The minus sign comes from
 Gamma(-1/2) = -2*sqrt(pi) in the Flajolet-Sedgewick transfer theorem.
 
-This investigation examined the Borel resurgence structure of the shadow tower
+This investigation examined the Borel resurgence structure of the shadow obstruction tower
 across the Virasoro family, computing Borel singularity positions, Darboux
 coefficients, Stokes graph geometry, and the (non-)connection to zeta zeros.
 
@@ -34,7 +34,7 @@ Delta > 0, the singularities are complex conjugates in the LEFT HALF-PLANE:
 | 26    | -3/13 - 0.028i          | 0.232       | -0.9617     | YES         |
 
 The critical central charge c* ~ 6.1243 separates divergent (rho > 1) from
-convergent (rho < 1) shadow towers.
+convergent (rho < 1) shadow obstruction towers.
 
 ### 2. Darboux coefficient structure
 
@@ -75,7 +75,7 @@ residue 1/2 at each zero of Q_L, giving monodromy exp(2*pi*i * 1/2) = -1
 
 ### 5. Median resummation
 
-For divergent shadow towers (c < c*), the median resummation
+For divergent shadow obstruction towers (c < c*), the median resummation
 
     G^med(t) = (1/2)(S_+[G](t) + S_-[G](t))
 
@@ -84,13 +84,13 @@ shadow generating function G(t) = int_0^t s*sqrt(Q_L(s)) ds is known exactly
 (algebraic functions + logarithms), the median resummation can be verified
 against the exact answer wherever both are defined.
 
-For convergent shadow towers (c > c*), the series already converges and no
+For convergent shadow obstruction towers (c > c*), the series already converges and no
 resummation is needed. The Borel structure is still mathematically present but
 physically irrelevant.
 
 ### 6. Connection to zeta zeros: NONE
 
-**The shadow tower's Borel singularities have NO connection to Riemann zeta zeros.**
+**The shadow obstruction tower's Borel singularities have NO connection to Riemann zeta zeros.**
 
 The reasons are structural:
 1. The Borel singularities are at positions determined by the shadow metric Q_L,
@@ -115,13 +115,13 @@ DIFFERENT singularity structures.
 
 ### 7. Constrained Epstein connection
 
-The Borel singularities of the shadow tower and the spectral data of the
+The Borel singularities of the shadow obstruction tower and the spectral data of the
 constrained Epstein zeta function Z(s; Q_L) are controlled by the SAME
 algebraic curve: the zeros of Q_L(t). The discontinuity across the Borel cut
 at A_+ encodes the monodromy of sqrt(Q_L), which is the same monodromy that
 controls the functional equation of Z(s; Q_L).
 
-This is the genuine "real-to-complex bridge": the shadow tower (real, perturbative)
+This is the genuine "real-to-complex bridge": the shadow obstruction tower (real, perturbative)
 and the Epstein spectral data (complex, non-perturbative) are two facets of the
 same underlying algebraic curve.
 
@@ -164,12 +164,12 @@ symmetry everywhere except at the fixed point c = 13.
 
 ## Mathematical conclusions
 
-1. The shadow tower's Borel resurgence is FULLY DETERMINED by the shadow metric
+1. The shadow obstruction tower's Borel resurgence is FULLY DETERMINED by the shadow metric
    Q_L(t). The singularity structure is algebraic (branch points of sqrt(Q_L)),
    and the Stokes constants are controlled by the monodromy (-1, the Koszul sign).
 
 2. The "real-to-complex bridge" is NOT a connection to zeta zeros. It is the
-   connection between the perturbative shadow tower (real coefficients S_r) and
+   connection between the perturbative shadow obstruction tower (real coefficients S_r) and
    the spectral data of the constrained Epstein function (complex analytic
    continuation), both controlled by the same quadratic form Q_L.
 

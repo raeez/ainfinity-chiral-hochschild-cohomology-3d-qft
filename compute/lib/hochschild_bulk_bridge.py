@@ -547,10 +547,10 @@ def verify_kappa_complementarity(family: str,
 # M (Mixed): r_max = infinity (Virasoro, W_N)
 
 SHADOW_CLASSES = {
-    "G": {"depth": 2, "description": "Gaussian, shadow tower terminates at arity 2"},
-    "L": {"depth": 3, "description": "Lie/tree, shadow tower terminates at arity 3"},
-    "C": {"depth": 4, "description": "Contact/quartic, shadow tower terminates at arity 4"},
-    "M": {"depth": float('inf'), "description": "Mixed, shadow tower is infinite"},
+    "G": {"depth": 2, "description": "Gaussian, shadow obstruction tower terminates at arity 2"},
+    "L": {"depth": 3, "description": "Lie/tree, shadow obstruction tower terminates at arity 3"},
+    "C": {"depth": 4, "description": "Contact/quartic, shadow obstruction tower terminates at arity 4"},
+    "M": {"depth": float('inf'), "description": "Mixed, shadow obstruction tower is infinite"},
 }
 
 

@@ -76,7 +76,7 @@ The stable-graph modular bar coalgebra in log-FM coordinates carries the five-co
 
 The monograph has **zero conjectural algebraic inputs** beyond the standing physical axioms, which have themselves been made explicit as derived consequences.
 
-> **Proved core.** &ensp; All six theorems F/G/J/K/L/M. Homotopy-Koszulity of SC<sup>ch,top</sup> (Kontsevich formality + transfer from classical Swiss-cheese). PVA descent D2&ndash;D6 (exchange cylinder + three-face Stokes on FM<sub>3</sub>(&Copf;)). Recognition theorem (Weiss cosheaf descent). Spectral Drinfeld strictification (root-space one-dimensionality + Jacobi collapse). Affine monodromy = quantum group R-matrix. W<sub>N</sub> Koszul duality for all N. Soft graviton theorems from shadow tower. R-matrix descent via algebraic strong unitarity. Curvature-braiding entanglement at genus 1 (elliptic spectral dichotomy).
+> **Proved core.** &ensp; All six theorems F/G/J/K/L/M. Homotopy-Koszulity of SC<sup>ch,top</sup> (Kontsevich formality + transfer from classical Swiss-cheese). PVA descent D2&ndash;D6 (exchange cylinder + three-face Stokes on FM<sub>3</sub>(&Copf;)). Recognition theorem (Weiss cosheaf descent). Spectral Drinfeld strictification (root-space one-dimensionality + Jacobi collapse). Affine monodromy = quantum group R-matrix. W<sub>N</sub> Koszul duality for all N. Soft graviton theorems from shadow obstruction tower. R-matrix descent via algebraic strong unitarity. Curvature-braiding entanglement at genus 1 (elliptic spectral dichotomy).
 > &ensp; 2,023 claims proved here + 163 proved elsewhere. Every claim has a machine-readable status tag.
 
 > **Frontier.** &ensp; Conditional and conjectural material is isolated in Part IX. No earlier part depends on Part IX. 188 precisely scoped conjectures remain, concentrated in the holographic, celestial, and gravitational extension sectors.
@@ -252,7 +252,7 @@ This ordered/E<sub>1</sub> sector is exactly the input to Volume III:
 
 ### Gravity and Soft Theorems
 
-- **Soft graviton theorems from shadow tower**: Soft order p corresponds to arity r = p+2; the shadow Postnikov tower of Vol I directly controls the soft graviton hierarchy at genus 0.
+- **Soft graviton theorems from shadow obstruction tower**: Soft order p corresponds to arity r = p+2; the shadow Postnikov tower of Vol I directly controls the soft graviton hierarchy at genus 0.
 - **Critical string dichotomy**: c &ne; 26 gives matrix-algebra factors (Clifford), perturbative gravity; c = 26 gives exterior-algebra factors, topological gravity. The dichotomy is whether &kappa;<sub>eff</sub> &middot; &omega;<sub>g</sub> vanishes.
 - **Four Pillars of Catalan universality**: The Catalan numbers C<sub>n</sub> = (2n)!/n!(n+1)! govern gravitational bar cohomology &mdash; proved at N = 2,3 via planted-tree enumeration and h-collapse; conjectured for N &geq; 4 with the Z<sub>N&minus;1</sub> mechanism as the open frontier.
 - **W<sub>3</sub> quartic quasi-primary**: &Lambda; = :TT: &minus; (3/10)&part;<sup>2</sup>T with coefficient 16/(22+5c).
@@ -280,7 +280,7 @@ This ordered/E<sub>1</sub> sector is exactly the input to Volume III:
 | r(z) = &int;<sub>0</sub><sup>&infin;</sup> e<sup>&minus;&lambda;z</sup>{&middot;<sub>&lambda;</sub>&middot;}d&lambda; provides DK-0 shadow | **Proved** |
 | PVA descent at X = pt recovers Coisson structure | **Proved** |
 | Affine monodromy = quantum group R-matrix (affine lineage) | **Proved** |
-| Shadow tower controls soft graviton hierarchy (genus 0) | **Proved** |
+| Shadow obstruction tower controls soft graviton hierarchy (genus 0) | **Proved** |
 | &alpha;<sub>N</sub> generalises Virasoro c &rarr; 26&minus;c to all W<sub>N</sub> | **Proved** |
 | Ordered bar &rarr; A<sup>!</sup><sub>line</sub>, symmetric bar &rarr; A<sup>!</sup><sub>ch</sub>; R-matrix descent | **Proved** |
 | Annular bar B<sup>ann</sup>(A) computes HH<sup>ch</sup><sub>&bullet;</sub>(A) (genus-1 ordered sector) | **Proved** |
