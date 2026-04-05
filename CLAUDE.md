@@ -175,7 +175,25 @@ All Vol I anti-patterns AP1-AP34 apply here. In particular, AP34 (bar-cobar inve
 
 **AP58 — The full hierarchy of chiral operadic structures.** From most to least symmetric: commutative associative (no poles, no bracket) → PVA (commutative product + Poisson bracket, classical shadow) → E_∞-chiral = vertex algebra (local, Σ_n-equivariant, OPE with poles) → P_∞-chiral (partial symmetry, homotopy-coherent intermediate) → E₁-chiral = nonlocal/quantum vertex algebra (ordered only, no Σ_n). The bar complex and Koszul duality operate at the E_∞ and E₁ levels. The PVA is the associated graded / classical limit / cohomological shadow. NEVER place PVA at the same level as E_∞-chiral or P_∞-chiral — it lives one categorical level down (on cohomology, not on chain complexes).
 
-**Meta-principle:** Every error traces to confusing two objects that share a name, formula, or special-case coincidence. The meta-rule: never trust a coincidence. Verify at the most general case, highest weight, most general level, most general family.
+**AP35 — Accidentally correct theorem (false proof, true conclusion).** A correct answer is NOT evidence of a correct proof. When two errors cancel (orientation double-error, factorial/derivative double-error), fix BOTH — the cancellation is accidental and will break under generalization. In Vol II: orientation convention +∂_{ε_S} vs correct -∂_{ε_S} in fm-proofs appendix — double error cancelled giving correct final signs. Elliptic r-matrix: factorial AND derivative order both off by one — errors partially cancelled (correct pole structure, wrong regular part). **Rule: verify proof steps independently of the conclusion.**
+
+**AP36 — Biconditional overclaim (⟹ proved, ⟺ claimed).** "Convolution formality = one-channel" retracted to one-directional. DS-KD intertwining claimed for "all Koszul at generic level" but only proved on abelian-n+ lane. "Filtration formality" conflated with "dg formality." **Rule: before writing "iff," verify BOTH directions independently.**
+
+**AP37 — Spectral sequence page from pole order alone.** W_N collapse claimed at E₄; correct is E_{2N} for N ≥ 3 (pole order 2N drives d_{2N-1} differentials). Ordered bar E₁ page identified as Lie homology; correct is Hochschild homology (tensor ≠ exterior construction). **Rule: compute spectral sequence pages from full differential structure, not pole-order heuristics.**
+
+**AP38 — Literature normalization convention in hardcoded values.** Faber-Pandharipande test expectations: λ₂ = 1/1152 was wrong; correct is 7/5760. Engine correct but test hardcoded wrong expected value. F₁ coefficient: -(k/24)log η(τ) → -k log η(τ). **Rule: record source paper and normalization convention in comments. Derive expected values independently (AP10).**
+
+**AP39 — κ ≠ S₂ for non-Virasoro families.** S₂ = c/2 ≠ κ = dim(g)·(k+h∨)/(2h∨) for affine KM. They coincide only for Virasoro and Heisenberg. 8+ table values corrected. **Rule: table headers must distinguish S₂ (arity-2 shadow) from κ (modular characteristic). NEVER copy between families.**
+
+**AP40 — LaTeX environment contradicts claim status tag.** Three frontier conjectures in \\begin{theorem} despite \\ClaimStatusConjectured. thm:Koszul_dual_Yangian tagged ProvedHere but cited "(Dimofte-Niu-Py, Thm 5.5)" in the statement. **Rule: environment MUST match claim status. Systematic check: grep for mismatches.**
+
+**AP41 — Prose mechanism ≠ mathematical mechanism.** "The residue extracts the simple-pole coefficient" — wrong, the bar kernel extracts ALL modes via d log(z-w). Formulas correct; English description wrong. **Rule: verify prose descriptions match formulas. One-sentence summaries that skip steps are lies of omission.**
+
+**AP42 — Correct at sophisticated level, false at naive level.** Slogans like "CY-A works for all d" or "scattering = shadow tower" capture deep truths but fail when instantiated naively. **Rule: state the level of validity explicitly from the first occurrence.**
+
+**AP43 — Central object defined by aspiration, not by axioms.** Objects used in theorem statements without formal \\begin{definition}. A property list is a conjecture about an object, not a definition. **Rule: the central object MUST be formally defined before use.**
+
+**Meta-principle:** Every error traces to confusing two objects that share a name, formula, or special-case coincidence. The meta-rule: never trust a coincidence. Verify at the most general case, highest weight, most general level, most general family. **The meta-meta-meta-rule (from AP35-AP43): the same error can recur at different EPISTEMIC levels.** AP35-AP39 catch errors in the VERIFICATION LAYER (false proofs, biconditional overclaims, convention mismatches). AP40-AP43 catch errors in the COMMUNICATION LAYER (environment/tag mismatches, prose lies, slogans without scope, undefined objects).
 
 ## Cross-Volume Bridges
 

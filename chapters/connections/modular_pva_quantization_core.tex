@@ -3,77 +3,23 @@
 \label{def:complete-modular-bar}%
 
 \begin{abstract}
-This chapter reorganizes the entire discussion of the present thread into a single fortified
-package, written from first principles and separated carefully into three layers:
-
-\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=2.6em]
-\item \emph{external input} from the literature;
-\item \emph{formal algebraic results} proved internally in this chapter once a modular bar datum is given;
-\item \emph{conditional comparison statements} that connect the algebraic package to the
-three-dimensional holomorphic-topological Poisson sigma model of Khan--Zeng.
-\end{enumerate}
-
-The central principle is that \emph{trees govern chirality and loops govern modularity}.
-Disk-level quadratic duality controls only genus zero. A genuinely modular deformation
-theory must already contain a primitive genus-raising one-edge operator. We make this
-precise by constructing a stable-graph modular bar coalgebra, defining the complete
-filtered strict modular deformation dg Lie algebra
+Three layers: (i)~external input from the literature, (ii)~formal algebraic results proved here given a modular bar datum, (iii)~conditional comparisons with the Khan--Zeng holomorphic-topological Poisson sigma model.  Trees govern chirality; loops govern modularity.  We construct the stable-graph modular bar coalgebra, define
 \[
 \Defmod(A_{\cl}(V)) := \Coder(\Bmod(\A))[-1],
 \]
-and proving the universal obstruction recursion for lifting a genus-zero Maurer--Cartan
-class to all genera. We then pass to a local variational coordinate model for filtered
-quadratic Poisson vertex algebras, identify the first genus-raising operator with a reduced
-odd Laplacian
-\[
-D_1=\Delta_{\mathrm{cyc}},
-\]
-construct the associated variational modular class, prove a vanishing theorem for a broad
-triangular $W$-normal form, and compute explicitly that the first modular obstruction
-vanishes for classical $W_3$.
-
-Finally, in the local, translation-invariant, filtration-preserving, reduced conformal-weight
-zero sector, we compute the relevant shifted $H^1$ for $W_3$ and prove that the only
-nontrivial genus-one lift direction is the central-parameter direction $\partial_c P_c$.
-Thus, in the relevant one-loop sector, every genus-one lift is gauge equivalent to a
-renormalization of the central parameter.
-
-The resulting picture gives a precise candidate for the missing modular homotopy theory
-behind deformation quantization of Poisson vertex algebras to vertex algebras, while
-remaining honest about which inputs are presently formal, conditional, or conjectural.
+and prove the universal obstruction recursion for lifting a genus-zero Maurer--Cartan class to all genera.  In variational coordinates, the genus-raising operator is the reduced odd Laplacian $D_1=\Delta_{\mathrm{cyc}}$.  For classical $W_3$: the first modular obstruction vanishes, the relevant shifted $H^1$ is one-dimensional (the central-parameter direction $\partial_c P_c$), and every genus-one lift is gauge-equivalent to a renormalization of the central parameter.
 \end{abstract}
 
 \section{Status conventions and scope}
 
-The note is intentionally stratified.
-
 \begin{convention}[Three levels of assertion]
-Throughout the note we distinguish three kinds of statements.
+\label{conv:three-levels}
 \begin{enumerate}[leftmargin=2.4em]
-\item \textbf{External input.} These are statements imported from the literature:
-Khan--Zeng on the three-dimensional holomorphic-topological Poisson sigma model,
-Gui--Li--Zeng on quadratic duality for chiral algebras, Francis--Gaitsgory on chiral
-Koszul duality, Costello--Dimofte--Gaiotto on boundary chiral algebras in 3d
-holomorphic twists, Gaiotto--Kulp--Wu on higher operations, and related works
-\cite{KZ25,GLZ22,FG12,CDG20,GKW25}.
-\item \textbf{Formal algebraic results.} These are theorems proved in this note once one
-has fixed a modular bar datum. They include the stable-graph bar construction, the
-filtered strict modular deformation dg Lie algebra, the universal obstruction recursion, the coordinate
-formula for the genus-raising operator, the variational modular class, the triangular
-$W$-normal-form vanishing theorem, and the $W_3$ relevant cohomology computation.
-\item \textbf{Conditional comparison results.} These are statements linking the formal
-algebra to the Poisson sigma model. They depend on analytic and geometric inputs
-not proved here, such as the existence of the appropriate resolved chiral/factorization
-datum attached to a given PVA and the existence of half-space perturbative quantization.
+\item \textbf{External input:} Khan--Zeng \cite{KZ25}, Gui--Li--Zeng \cite{GLZ22}, Francis--Gaitsgory \cite{FG12}, Costello--Dimofte--Gaiotto \cite{CDG20}, Gaiotto--Kulp--Wu \cite{GKW25}.
+\item \textbf{Formal algebraic results:} proved here given a modular bar datum.
+\item \textbf{Conditional comparisons:} link the formal algebra to the Poisson sigma model; depend on the existence of a resolved chiral/factorization datum and half-space perturbative quantization.
 \end{enumerate}
 \end{convention}
-
-\begin{remark}[Why this stratification matters]
-The algebraic stable-graph
-package below is self-contained once a modular bar datum is fixed, but the extraction of
-that datum from a general PVA via compactified configuration spaces and the identification
-with the three-dimensional Poisson sigma model remain conditional at present.
-\end{remark}
 
 \begin{convention}[Strict models versus invariant modular deformation objects]
 \label{conv:modular-pva-strict-versus-homotopy}
@@ -89,74 +35,40 @@ deformation object $\Definfmod(\cA)$ constructed in Volume~I.
 
 \section{External input from the literature}
 
-We record the precise ingredients from the literature that motivate and support the
-new constructions.
+We record the external ingredients used below.
 
 \subsection{Poisson vertex algebras and the 3d holomorphic-topological Poisson sigma model}
 
-Khan and Zeng introduce a mixed holomorphic-topological gauge theory in three dimensions
-attached to a freely generated Poisson vertex algebra (PVA), show that gauge invariance
-holds if and only if the $\lambda$-bracket Jacobi identity holds, prove that the presence
-of a Virasoro element upgrades the symmetry from holomorphic-topological to fully
-topological, and propose the resulting three-dimensional Poisson sigma model as a route
-toward deformation quantization of PVAs to vertex algebras \cite{KZ25}. Their
-boundary picture on the half-space $\mathbb R_+\times \mathbb C$ is the physical source of
-the genus-zero quantization problem considered here.
+Khan--Zeng~\cite{KZ25} attach a 3d holomorphic-topological gauge theory to a freely generated PVA: gauge invariance holds iff the $\lambda$-bracket Jacobi identity holds, a Virasoro element upgrades the symmetry to fully topological, and the boundary picture on $\mathbb R_+\times \mathbb C$ is the physical source of the genus-zero quantization problem considered here.
 
 \subsection{Quadratic duality for chiral algebras}
 
-Gui, Li, and Zeng define quadratic duality for chiral algebras, prove an injective map
+Gui--Li--Zeng~\cite{GLZ22} define quadratic duality for chiral algebras, prove an injective map
 \[
 \Hom(A,B)\hookrightarrow \MC(A^!\otimes B),
 \]
 show bijectivity under effectiveness hypotheses in degree zero, and in the inhomogeneous
-quadratic setting introduce twisted pairs $(B,B^\circ,S)$ together with the curved
+quadratic setting introduce twisted pairs $(B,B^\circ,S)$ with curved
 Maurer--Cartan equation
 \[
 \mu\big((S+\alpha)\boxtimes (S+\alpha)\big)=0.
 \]
-They also state explicitly that a full homotopy/Koszul treatment, parallel to the
-associative story, is still missing \cite{GLZ22}. This gap is one of the main
-algebraic motivations for the present note.
+They note that a full homotopy/Koszul treatment parallel to the
+associative story is missing; this gap motivates the present chapter.
 
 \subsection{Chiral/factorization homotopy theory}
 
-Francis and Gaitsgory place chiral and factorization structures in a common homotopy-theoretic
-framework and recast their relation as a form of chiral Koszul duality
-\cite{FG12}. This supplies the correct derived ambient category in which
-one should expect a modular refinement of disk-level chiral duality to live.
+Francis--Gaitsgory~\cite{FG12} recast the chiral/factorization relation as chiral Koszul duality, supplying the derived ambient category for a modular refinement of disk-level duality.
 
 \subsection{Boundary algebras, higher operations, and line operators}
 
-Costello, Dimofte, and Gaiotto show that in 3d holomorphic twists bulk local operators form
-a commutative chiral algebra with shifted Poisson bracket, while boundary operator algebras
-naturally carry higher $A_\infty$ structure \cite{CDG20}. Gaiotto,
-Kulp, and Wu construct higher operations in holomorphic-topological perturbation theory,
-prove the relevant quadratic consistency identities, and interpret them as a Wess--Zumino
-type consistency for BRST symmetry \cite{GKW25}. Dimofte, Niu, and Py show
-that line operators in perturbative 3d holomorphic QFT are represented by modules for a
-Koszul-dual $A_\infty$-algebra $A^!$ and are organized by Maurer--Cartan data with an
-$A_\infty$ Yang--Baxter flavor \cite{DNP25}. All of this reinforces the thesis
-that \emph{a single Maurer--Cartan object should package higher operations, anomalies,
-and OPE compatibilities}. 
+Costello--Dimofte--Gaiotto~\cite{CDG20}: bulk local operators form a commutative chiral algebra with shifted Poisson bracket; boundary algebras carry $A_\infty$ structure. Gaiotto--Kulp--Wu~\cite{GKW25}: higher operations in HT perturbation theory satisfy quadratic consistency (Wess--Zumino type for BRST). Dimofte--Niu--Py~\cite{DNP25}: line operators are $A^!$-modules organized by $A_\infty$ Yang--Baxter Maurer--Cartan data.
 
 \subsection{Analogies with deformation quantization}
 
-Cattaneo and Felder interpret Kontsevich's deformation quantization via a topological
-sigma model on the disk \cite{CF00}. Tamarkin proves that the deformation
-complex of an $E_d$-algebra carries an $E_{d+1}$-structure \cite{Tam02}. These
-results suggest that the correct receptacle for quantization of PVAs should not be merely
-a disk-level dg Lie algebra, but a higher and genuinely modular deformation object.
+Cattaneo--Felder~\cite{CF00} interpret Kontsevich deformation quantization via a topological sigma model on the disk. Tamarkin~\cite{Tam02} proves that the deformation complex of an $E_d$-algebra carries an $E_{d+1}$-structure. The upshot: PVA quantization requires a modular deformation object, not a disk-level dg Lie algebra.
 
 \section{From first principles: genus zero, loops, and the one-edge principle}
-
-The main structural observation can be stated in one sentence:
-
-\begin{center}
-\emph{A deformation theory that only remembers trees cannot see modular obstructions.}
-\end{center}
-
-We make that precise.
 
 \subsection{Filtered quadratic PVAs}
 
@@ -187,9 +99,7 @@ and complete in the sense made precise below.
 \end{assumption}
 
 \begin{remark}
-This assumption isolates the step that is currently external to the purely algebraic theory.
-The remainder of the formal constructions depend only on the existence of an input
-modular bar datum built from $\A$.
+This assumption isolates the sole external input; the remaining constructions depend only on the modular bar datum built from $\A$.
 \end{remark}
 
 \subsection{The one-edge principle}
@@ -211,15 +121,10 @@ solves the full equation.
 \end{proof}
 
 \begin{remark}[Trees versus loops]
-Therefore any nontrivial modular obstruction theory must contain, at the chain level,
-a primitive operator that \emph{raises genus}. In the stable-graph bar construction below,
-that primitive is the nonseparating one-edge expansion operator. This is the algebraic
-counterpart of the first loop correction in perturbation theory.
+Any nontrivial modular obstruction theory requires a genus-raising primitive at the chain level: the nonseparating one-edge expansion operator.
 \end{remark}
 
 \section{Stable-graph modular bar data and the modular bar coalgebra}
-
-This section is the formal heart of the new algebraic package.
 
 \subsection{Stable graphs}
 
@@ -317,18 +222,11 @@ $\partial^2 = 0$ on $\overline{\cM}_{1,n}$.
 
 \begin{remark}[Derivation of the codimension-two cancellation]
 \label{rem:codim-two-derivation}
-This axiom is a consequence of $\partial^2 = 0$ on the moduli space
-of stable curves: the boundary of the boundary of
-$\overline{\cM}_{g,n}$ is empty, so the composition of two boundary
-operations vanishes.  The axiom records this topological fact at the
-algebraic level.
+This axiom records $\partial^2 = 0$ on $\overline{\cM}_{g,n}$.
 \end{remark}
 
-\begin{remark}[Why this is the right primitive datum]
-The usual bar construction is governed by codimension-one collisions on configuration
-spaces. In the modular setting, codimension-one boundary strata correspond to one-edge
-degenerations of stable graphs. Thus the primitive input is not a generic higher operator
-but precisely the family of one-edge expansion maps.
+\begin{remark}
+Codimension-one boundary strata of $\overline{\cM}_{g,n}$ are one-edge degenerations of stable graphs; these are the primitive input.
 \end{remark}
 
 \begin{proposition}[Codimension-one boundary strata of the bordered log-FM compactification; \ClaimStatusProvedHere]
@@ -422,16 +320,15 @@ $Z(\tau,\bar{\tau}) = |Z_1|^2$ requires the left--right matching condition
 $\kappa_L + \kappa_R = 0$, which is external to the chiral Maurer--Cartan equation
 and belongs to the data of a non-chiral (i.e.\ full) conformal field theory.
 
-The $E_2$ quasi-modularity (Arnold defect) obstructs the holomorphic bar differential
-at genus~$1$: the propagator coefficient $E_2(\tau)$ is quasi-modular with anomaly
-$12\tau/(2\pi i)$.  Resolution requires the non-holomorphic completion
+The Eisenstein quasi-modularity (Arnold defect) obstructs the holomorphic bar differential
+at genus~$1$: the propagator coefficient $E_2(\tau)$ (the weight-$2$ Eisenstein series ---
+not to be confused with the $E_2$-page of the genus spectral sequence) is quasi-modular
+with anomaly $E_2(-1/\tau) = \tau^2 E_2(\tau) + 12\tau/(2\pi i)$.  Resolution requires
+the non-holomorphic completion
 $\widehat{E}_2 = E_2 - 3/(\pi\,\mathrm{Im}\,\tau)$, which restores true modular
 covariance at the cost of holomorphicity.
 
-The upshot is a clean dichotomy: \emph{trees govern chirality; loops govern
-modularity}.  The genus-$0$ Maurer--Cartan element governs the chiral algebra
-structure; the genus-$1$ lift governs the modular structure; and the lift is unique
-(up to equivariant gauge) once the obstruction class
+The genus-$1$ lift is unique (up to equivariant gauge) once
 $[\Delta_{\mathrm{cyc}}(\Theta^{(0)})] \in H^1(\overline{\cM}_1,\,\cL_\kappa^{-1})$
 vanishes.
 \end{remark}
@@ -579,8 +476,6 @@ of Gui--Li--Zeng.
 \end{remark}
 
 \section{The strict modular deformation dg Lie algebra}
-
-We now pass from the coalgebra to the deformation complex.
 
 \begin{definition}[Modular deformation algebra]
 Let $C$ be a modular bar datum. Define

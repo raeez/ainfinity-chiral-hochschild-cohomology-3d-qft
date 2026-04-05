@@ -3685,7 +3685,7 @@ i\sqrt{\frac{c}{24h}}
 \end{equation}
 giving $f(\tau_*) \approx 2\pi\sqrt{ch/6}$.
 
-\begin{theorem}[Cardy formula from the bar complex;
+\begin{conjecture}[Cardy formula from the bar complex;
 \ClaimStatusConjectured]
 \label{thm:gravity-cardy}
 \label{prop:cardy-mc}
@@ -3728,10 +3728,11 @@ $\kappa = c/2$, itself determined by the quartic OPE pole in
 $\{T_\lambda T\}$.  The Cardy formula is thus a consequence of
 the curvature of the Virasoro bar complex.
 \end{proof}
+\end{conjecture}
 
 \subsubsection*{BTZ entropy from the bar complex}
 
-\begin{theorem}[BTZ entropy; \ClaimStatusConjectured]
+\begin{conjecture}[BTZ entropy; \ClaimStatusConjectured]
 \label{thm:gravity-btz-entropy}
 \index{BTZ black hole!entropy|textbf}
 \index{Bekenstein--Hawking entropy!from bar complex}
@@ -3780,6 +3781,7 @@ the standard Bekenstein--Hawking formula
 $S = 2\pi r_+/(4G) = \mathrm{Area}/(4G)$ for the
 one-dimensional horizon.
 \end{proof}
+\end{conjecture}
 
 \subsubsection*{Verdier duality and the modular $S$-transform}
 
@@ -7060,3 +7062,247 @@ preserves both).  The fourth column records the coproduct
 status on the ordered bar.  The gauge sector is the unique
 case where the coproduct is non-primitive.
 \end{remark}
+
+% ======================================================================
+%
+%  BTZ QUANTUM CORRECTIONS FROM THE SHADOW TOWER
+%
+% ======================================================================
+
+\subsection{BTZ quantum corrections from the shadow tower}
+\label{subsec:gravity-btz-quantum}
+\index{BTZ black hole!quantum corrections|textbf}
+
+The leading BTZ entropy (Theorem~\ref{thm:gravity-btz-entropy})
+is the genus-$0$ projection of the gravitational MC element.
+The shadow tower provides a systematic genus expansion of
+quantum corrections.
+
+\begin{proposition}[BTZ genus expansion; \ClaimStatusHeuristic]
+\label{thm:gravity-btz-genus-expansion}
+\index{BTZ black hole!genus expansion|textbf}
+The entropy of the BTZ black hole admits a saddle-point
+expansion:
+\begin{equation}\label{eq:gravity-btz-full-expansion}
+S(M)
+\;=\;
+S_{\mathrm{BH}}
+- \frac{3}{2}\log S_{\mathrm{BH}}
++ \sum_{g=2}^{\infty}
+\frac{C_g(\kappa)}{S_{\mathrm{BH}}^{2g-2}},
+\end{equation}
+where $S_{\mathrm{BH}} = 2\pi\sqrt{ch/6}$
+\textup{(}equation~\eqref{eq:gravity-btz-entropy}\textup{)},
+the logarithmic coefficient $-3/2$ is universal, and
+$C_g(\kappa)$ depends on the shadow free energies
+$F_1, \ldots, F_g$ through the saddle-point expansion of
+$Z(\beta) = \exp(\sum_{g \ge 0} F_g\,\beta^{2g})$.
+The explicit values:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $F_1 = \kappa/24 = c/48$.
+\item $F_2 = 7\kappa/5760$, with planted-forest correction
+  $\delta_{\mathrm{pf}}^{(2,0)} = S_3(10S_3 - \kappa)/48$
+  for the Virasoro at genus~$2$.
+\item For Virasoro at $c$:
+  $\delta_{\mathrm{pf}}^{(2,0)}
+  = 2(20 - c/2)/48 = (40 - c)/48$.
+\item The shadow partition function
+  $Z^{\mathrm{sh}}
+  = \exp(\sum_{g \ge 1} F_g\,\hbar^{2g})$
+  converges absolutely
+  \textup{(}Bernoulli decay
+  $\lambda_g^{\mathrm{FP}}
+  \sim (2\pi)^{-2g}$\textup{)},
+  in contrast to the string free energy which
+  diverges as $(2g)!$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Sketch]
+The genus-$1$ value $F_1 = \kappa/24$ follows from
+the shadow tower at the scalar level
+($\kappa(\mathrm{Vir}_c) = c/2$,
+$\lambda_1^{\mathrm{FP}} = 1/24$).
+The genus-$2$ planted-forest correction uses
+$S_3 = \alpha = 2$ (the cubic shadow coefficient of Virasoro)
+and the explicit formula
+$\delta_{\mathrm{pf}}^{(2,0)} = S_3(10S_3 - \kappa)/48$
+(Remark~\ref*{V1-rem:planted-forest-correction-explicit}).
+The Bernoulli decay of $\lambda_g^{\mathrm{FP}}
+= (2^{2g-1}-1)|B_{2g}|/(2^{2g-1}(2g)!)$ is standard.
+Computational verification:
+\texttt{compute/lib/btz\_entropy\_allgenus.py}.
+\end{proof}
+
+\begin{remark}[BTZ complementarity and the Hawking--Page transition]
+\label{rem:gravity-btz-complementarity}
+\index{BTZ black hole!complementarity}
+\index{Hawking--Page transition!complementarity}
+The Koszul pair $(\mathrm{Vir}_c, \mathrm{Vir}_{26-c})$
+induces a paired entropy:
+\[
+S_{\mathrm{BH}}(\mathrm{Vir}_c;\, h)
++ S_{\mathrm{BH}}(\mathrm{Vir}_{26-c};\, h)
+\;=\;
+2\pi\sqrt{h/6}\bigl(\sqrt{c} + \sqrt{26-c}\,\bigr),
+\]
+maximized at the self-dual point $c = 13$ where
+$\sqrt{c} + \sqrt{26-c} = 2\sqrt{13}$.
+The Hawking--Page transition at
+$\beta_{\mathrm{HP}} = 2\pi\ell$ exchanges the BTZ and
+thermal AdS saddles.  The shadow tower encodes this
+transition: the free energies
+$F_{\mathrm{BTZ}}(\beta)
+= -(c/6\pi)(\pi^2/\beta)
++ \sum_{g \ge 1} F_g\,\beta^{2g-2}$
+and $F_{\mathrm{AdS}}(\beta) = -(c/6\pi)\beta$
+cross when quantum corrections are negligible.
+\end{remark}
+
+% ======================================================================
+%
+%  PAGE CURVE FROM GRAVITATIONAL KOSZUL DUALITY
+%
+% ======================================================================
+
+\subsection{Page curve from gravitational Koszul duality}
+\label{subsec:gravity-page-curve}
+\index{Page curve!from gravitational Koszul duality|textbf}
+
+\begin{proposition}[Gravitational Page curve; \ClaimStatusHeuristic]
+\label{thm:gravity-page-curve}
+\index{Page curve|textbf}
+\index{island formula!gravitational}
+The complementarity theorem decomposes the gravitational
+phase space into two Lagrangian halves controlled by
+$\kappa(\mathrm{Vir}_c) = c/2$ and
+$\kappa(\mathrm{Vir}_{26-c}) = (26-c)/2$.
+The radiation entropy follows the Page curve:
+\begin{equation}\label{eq:gravity-page-curve}
+S_{\mathrm{rad}}(t)
+\;=\;
+\min\!\bigl(
+  \tfrac{c}{6}\,t,\;
+  S_{\mathrm{BH}} - \tfrac{26-c}{6}\,t
+\bigr),
+\end{equation}
+with Page time $t_P = 3S_{\mathrm{BH}}/13$ and
+Page entropy $S_{\mathrm{Page}} = cS_{\mathrm{BH}}/26$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Hawking phase} ($t < t_P$):
+  entanglement grows at rate $c/6$, controlled by~$\kappa$.
+\item \emph{Island phase} ($t > t_P$):
+  the Koszul dual saddle $B(\cA^!)$ dominates,
+  and entanglement decreases at rate $(26-c)/6$.
+\item \emph{Self-dual point} $c = 13$:
+  the Page curve is symmetric about $t_P$, with
+  $S_{\mathrm{Page}} = S_{\mathrm{BH}}/2$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Sketch]
+The Hawking growth rate $c/6$ is the Calabrese--Cardy
+entanglement production rate
+(Theorem~\ref*{V1-thm:ent-scalar-entropy}).
+The island phase uses the Koszul dual rate $(26-c)/6$.
+The crossing condition gives:
+$t_P(c/6 + (26-c)/6) = S_{\mathrm{BH}}$, so
+$t_P = 6S_{\mathrm{BH}}/26 = 3S_{\mathrm{BH}}/13$.
+The Page entropy:
+$S_{\mathrm{Page}} = (c/6)\cdot 3S_{\mathrm{BH}}/13
+= cS_{\mathrm{BH}}/26$.
+At $c = 13$: $S_{\mathrm{Page}} = S_{\mathrm{BH}}/2$.
+Computational verification:
+\texttt{compute/lib/page\_curve\_shadow.py}.
+\end{proof}
+
+\begin{remark}[Island as Koszul dual dominance]
+\label{rem:gravity-island-koszul}
+\index{island formula!Koszul dual dominance}
+The island of
+Penington~\cite{Penington19} and
+Almheiri--Engelhardt--Marolf--Maxfield~\cite{AEMM19}
+is the region where the Koszul dual bar complex $B(\cA^!)$
+provides the dominant contribution to the complementarity
+sum
+$\mathbf{C}_g(\cA) = \mathbf{Q}_g(\cA) \oplus
+\mathbf{Q}_g(\cA^!)$.
+The Page time $t_P = 3S_{\mathrm{BH}}/13$ is determined
+by the complementarity constant
+$\kappa + \kappa' = 13$ (AP24: not zero for Virasoro).
+The physical content is a saddle-point exchange at the
+scrambling time.
+\end{remark}
+
+% ======================================================================
+%
+%  DE SITTER FROM ANALYTIC CONTINUATION
+%
+% ======================================================================
+
+\subsection{de~Sitter entropy from analytic continuation}
+\label{subsec:gravity-desitter}
+\index{de Sitter entropy!from shadow tower|textbf}
+
+\begin{proposition}[de~Sitter shadow tower; \ClaimStatusHeuristic]
+\label{prop:gravity-desitter}
+\index{de Sitter entropy|textbf}
+Under the Wick rotation $\ell \mapsto i\ell$ mapping
+$\mathrm{AdS}_3 \to \mathrm{dS}_3$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The Gibbons--Hawking entropy is
+  $S_{\mathrm{dS}} = \pi c_{\mathrm{dS}}/3
+  = \pi\ell_{\mathrm{dS}}/(2G)$.
+\item The shadow tower continues with
+  $\kappa_{\mathrm{dS}} = c_{\mathrm{dS}}/2$,
+  giving real quantum corrections via
+  $F_g = \kappa_{\mathrm{dS}}\cdot\lambda_g^{\mathrm{FP}}$.
+\item The Nariai limit $c_{\mathrm{dS}} = 13$ is the
+  analytic continuation of the self-dual point.
+\item The Banks conjecture
+  $\dim(\mathcal{H}_{\mathrm{dS}})
+  = \exp(\pi c_{\mathrm{dS}}/3)$ is consistent with
+  the convergent shadow tower.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Sketch]
+The Brown--Henneaux formula continues to
+$c_{\mathrm{dS}} = 3\ell_{\mathrm{dS}}/(2G)$.
+In Convention~B (real section), the shadow free energies
+are real: $F_g = (c_{\mathrm{dS}}/2)\lambda_g^{\mathrm{FP}}$.
+The entropy~$S_{\mathrm{dS}} = \pi c_{\mathrm{dS}}/3$ is
+the area of the cosmological horizon.
+Computational verification:
+\texttt{compute/lib/desitter\_shadow\_entropy.py}.
+\end{proof}
+
+% ======================================================================
+%
+%  JT GRAVITY AS SCHWARZIAN LIMIT
+%
+% ======================================================================
+
+\subsection{JT gravity as Schwarzian limit}
+\label{subsec:gravity-jt}
+\index{JT gravity!from shadow tower|textbf}
+
+\begin{proposition}[JT shadow correspondence; \ClaimStatusHeuristic]
+\label{prop:gravity-jt}
+\index{JT gravity|textbf}
+In the Schwarzian limit $c \to \infty$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The shadow metric degenerates to the JT spectral curve
+  $y = \sin(2\pi\sqrt{x})/(4\pi)$.
+\item The Weil--Petersson volumes $V_{g,1}(b)$ are reproduced
+  by the topological recursion on this curve, matching the
+  shadow CohFT
+  \textup{(}Theorem~\textup{\ref*{V1-thm:shadow-cohft}}\textup{)}.
+\item The shadow partition function converges
+  \textup{(}Bernoulli decay\textup{)}, providing an
+  analytic completion of the asymptotically divergent
+  $(2g)!$ JT perturbative series.
+\end{enumerate}
+Computational verification:
+\texttt{compute/lib/jt\_gravity\_shadow.py}.
+\end{proposition}

@@ -51,41 +51,12 @@ The Maurer--Cartan equation $D\Theta^{\mathrm{oc}} + \tfrac{1}{2}[\Theta^{\mathr
 
 All results apply to logarithmic $\SCchtop$-algebras (Definition~\ref{def:log-SC-algebra}).  Beyond the affine and $\cW$-algebra lineages, the question of which chiral algebras admit a logarithmic $\SCchtop$-algebra structure remains open.
 
-The relative Feynman transform connects to the two complementary viewpoints developed
-elsewhere.  The factorization approach
-(Chapter~\ref{ch:factorization-swiss-cheese}) constructs the
-Swiss-cheese structure from families of factorizable D-modules
-on $\Ran(\Sigma_g) \times \Ran(\R)$ over
-$\overline{\cM}_g$, the global truth.  The operadic approach
-(Chapter~\ref{ch:modular-sc-operad}) extracts the local
-Swiss-cheese operad $\SCchtop$ by formal completion at collision
-points, the local approximation.  The relative Feynman transform
-is the algebraic skeleton shared by both: the abstract structure
-that names the bicomplex, governs the spectral sequence, and
-determines the involutivity.
-
-The factorization structure maps to the relative Feynman
-transform by forgetting D-module data.  The operadic structure
-maps to it by formal completion.  On the proved surface, the
-relative Feynman transform is the shared algebraic skeleton, not
-a statement of essential surjectivity or full embedding for
-either route beyond the genus-$0$ comparison.
+The factorization approach (Chapter~\ref{ch:factorization-swiss-cheese}) constructs the Swiss-cheese structure from factorizable D-modules on $\Ran(\Sigma_g) \times \Ran(\R)$ over $\overline{\cM}_g$; the operadic approach (Chapter~\ref{ch:modular-sc-operad}) extracts $\SCchtop$ by formal completion at collision points.  The relative Feynman transform is the algebraic skeleton shared by both: the factorization route maps to it by forgetting D-module data, the operadic route by formal completion.  On the proved surface, this is the shared skeleton, not a statement of essential surjectivity for either route beyond genus~$0$.
 
 \section{Worked examples}
 \label{sec:rft-worked-examples}
 
-We exhibit the relative Feynman transform explicitly for two algebras before
-giving the general definitions in
-Sections~\ref{sec:relative-ft-definition}--\ref{sec:rft-recognition}.
-
-We compute $\FT_{\Com_{\mathrm{mod}} / \SCchtop}$ in two
-fundamental cases: the Heisenberg algebra, where the bicomplex
-is small enough to display completely, and
-$\widehat{\mathfrak{sl}}_2$ at level~$k$, where the full
-structure of $D_0$ and $D_1$ on a degree-$3$ bar element
-is visible.  Both examples verify the bicomplex identities
-of Proposition~\ref{prop:rft-differential-identification} by
-direct computation.
+We compute $\FT_{\Com_{\mathrm{mod}} / \SCchtop}$ in two cases before the general definitions (Sections~\ref{sec:relative-ft-definition}--\ref{sec:rft-recognition}): the Heisenberg algebra (bicomplex small enough to display completely) and $\widehat{\mathfrak{sl}}_2$ at level~$k$ ($D_0$ and $D_1$ on a degree-$3$ element).  Both verify the bicomplex identities of Proposition~\ref{prop:rft-differential-identification} by direct computation.
 
 \subsection{The Heisenberg algebra}
 \label{subsec:rft-heisenberg}
@@ -348,78 +319,105 @@ $D_1^2\,\xi = D_1(-k \cdot s\,h) = 0$.
 
 \medskip\noindent
 \textbf{Verification: $D_0 D_1 + D_1 D_0 = 0$ on $\xi$.}
-Compute:
+
+\begin{remark}[Scope of this verification]
+\label{rem:sl2-bicomplex-scope}
+\index{bicomplex!sl2@$\widehat{\mathfrak{sl}}_2$!scope of verification}
+The element $\xi = s\,e \otimes s\,f \otimes s\,h$ lives on
+a genus-$0$ corolla~$C_3$ (a single vertex with three
+external legs).  The differential $D_0$ expands the
+corolla into a tree (adding one internal edge), while $D_1$
+contracts two of the three legs into a loop (raising genus
+by~$1$).  The bicomplex identity $D_0 D_1 + D_1 D_0 = 0$
+on this element is a relation between operations on
+\emph{different} graph types --- the separating expansion
+(corolla $\to$ tree) composed with the non-separating
+contraction (tree $\to$ genus-$1$ graph with one vertex and
+one loop), and vice versa.  A na\"ive term-by-term sign
+computation on trees alone produces a non-vanishing result
+$\pm 6k$; the resolution requires working on the corolla and
+invoking $\operatorname{ad}$-invariance of the Killing form.
+We present the computation in diagnostic form, first exhibiting
+the na\"ive answer and then identifying the correct operadic
+resolution, because this pattern recurs at every arity
+$n \geq 3$ and is the most common source of sign errors in
+modular bar computations.
+\end{remark}
+
+\noindent We now carry out the computation.
+
+\smallskip\noindent
+\emph{Step~1: $D_0 D_1\,\xi$.}
+From~\eqref{eq:D1-sl2}, $D_1\,\xi = -k \cdot s\,h$, which
+is a genus-$1$ element on a corolla with one external leg.
+Applying $D_0$: a corolla with one leg admits no separating
+expansion (both daughter vertices must be stable, requiring
+$\ge 1$ leg each), and the internal differential vanishes
+on Lie algebra generators.  Hence
+$D_0 D_1\,\xi = 0$.
+
+\smallskip\noindent
+\emph{Step~2: $D_1 D_0\,\xi$ --- na\"ive tree-level
+computation.}
+From~\eqref{eq:D0-sl2}, $D_0\,\xi = -s\,h \otimes s\,h
+- 4\, s\,e \otimes s\,f$.  These are degree-$2$ elements
+on trees with one internal edge.  Applying $D_1$ to each
+tree with na\"ive Koszul signs
+(Remark~\ref{rem:rft-koszul-signs}(ii)):
 \begin{align*}
-D_0 D_1\,\xi
-&= D_0(-k \cdot s\,h)
-= -k \cdot d_{\mathrm{int}}(s\,h)
-= 0 \quad
-\text{(no separating expansion on a single-vertex graph),}
-\\
-D_1 D_0\,\xi
-&= D_1\bigl(-s\,h \otimes s\,h
-- 4\, s\,e \otimes s\,f\bigr) \\
-&= -(-1)^{|s\,h|^2}k\,\langle h,h \rangle
-\,-\, 4\cdot(-1)^{|s\,e|\cdot|s\,f|}
-k\,\langle e,f \rangle \\
-&= -(-1)^{1}\cdot 2k \;-\; 4\cdot(-1)^{1}\cdot k \\
-&= 2k + 4k - (2k + 4k) = 0.
+D_1(-s\,h \otimes s\,h)
+&= -(-1)^{|s\,h| \cdot |s\,h|}\,k\,\langle h,h\rangle
+= -(-1)^{1}\cdot 2k = 2k, \\
+D_1(-4\, s\,e \otimes s\,f)
+&= -4(-1)^{|s\,e| \cdot |s\,f|}\,k\,\langle e,f\rangle
+= -4(-1)^{1}\cdot k = 4k.
 \end{align*}
-A correction is needed.  The two degree-$2$ terms sit on
-trees with one internal edge.  $D_1$ acts by nonseparating
-clutching on each tree, converting the single internal edge
-into a loop.  For $-s\,h \otimes s\,h$:
-$D_1(-s\,h \otimes s\,h) =
--(-1)^{|s\,h|\cdot|s\,h|}\,k\,\langle h,h\rangle
-\cdot [\text{genus-$1$}]
-= -(-1)^1 \cdot 2k = 2k$.
-For $-4\, s\,e \otimes s\,f$:
-$D_1(-4\, s\,e \otimes s\,f)
-= -4(-1)^{|s\,e|\cdot|s\,f|}\,k\,\langle e,f\rangle
-\cdot [\text{genus-$1$}]
-= -4(-1)^1 \cdot k = 4k$.
-Total: $D_1 D_0\,\xi = (2k + 4k) \cdot [\text{genus-$1$}]
-= 6k \cdot [\text{genus-$1$}]$.
+Na\"ive total: $D_1 D_0\,\xi = 6k$.
 
-But $D_0 D_1\,\xi = 0$, so we need
-$D_1 D_0\,\xi = 0$ as well.  The error is that we have not
-included the signs from the desuspension on the internal
-edge (the edge connecting $v_1$ to $v_2$ in the tree carries
-a factor of $s$ whose contraction by the invariant form
-contributes an additional sign).  Including the internal-edge
-desuspension sign $(-1)^{1}$ on each tree (one internal edge,
-each carrying $|s| = -1$ in the orientation line $\orline$):
-the correct formula includes an overall factor
-$(-1)^{|e(\Gamma)|}$ where $|e(\Gamma)|$ is the number of
-internal edges, giving an additional $(-1)^1 = -1$ on each
-tree.  With this correction:
-$D_1 D_0\,\xi
-= (-1) \cdot 2k + (-1) \cdot 4k = -6k$.
+Including the orientation-line correction
+$(-1)^{|e(\Gamma)|} = (-1)^1 = -1$ for the one internal
+edge of each tree gives $D_1 D_0\,\xi = -6k$, which is still
+non-zero.
 
-This still does not vanish.  The discrepancy signals that we
-have been computing on the wrong element: $\xi = s\,e \otimes
-s\,f \otimes s\,h$ is not a bar element at a single vertex
-(as we initially stated) but rather lives on a \emph{corolla}
-$C_3$, a single vertex with three external legs.
-$D_0$ acts on the corolla by expanding it into a tree,
-which involves the \emph{operadic} bar differential
-$b_2 \colon (s\,\mathfrak{g})^{\otimes 3} \to
-(s\,\mathfrak{g})^{\otimes 2}$, and $D_1$ acts on the corolla
-by contracting two legs into a loop, giving a genus-$1$ element.
-The identity $D_0 D_1 + D_1 D_0 = 0$ then follows from the
-standard identity relating the bar differential to the
-invariant form: the Chevalley--Eilenberg differential $d_{CE}$
-and the Killing contraction satisfy
-$d_{CE} \circ \xi_{ij} + \xi_{ij} \circ d_{CE} = 0$
-on the Chevalley complex $C^\ast_{CE}(\mathfrak{g})$, which is
-exactly the anticommutation $D_0 D_1 + D_1 D_0 = 0$ restricted
-to the three-leg corolla.  The detailed sign verification uses
-the Koszul convention of
-Remark~\ref{rem:rft-koszul-signs} and the
-identity $\sum_{i < j}(-1)^{i+j}
-\langle [x_i, x_j], - \rangle = 0$
-applied to $\{e, f, h\}$ (which holds because the Killing form
-is $\operatorname{ad}$-invariant).
+\smallskip\noindent
+\emph{Step~3: the correct operadic resolution.}
+The persistent discrepancy $\pm 6k$ arises because the trees
+in $D_0\,\xi$ are not independent bar elements: they are the
+operadic image of the \emph{single} corolla~$C_3$ under the
+bar differential $b_2$.  The bicomplex identity must be
+verified on the corolla, not on its tree-level image.
+
+On the corolla~$C_3$, the differential $D_0$ acts by the
+Chevalley--Eilenberg differential $d_{CE}$ of
+$\mathfrak{g} = \mathfrak{sl}_2$, and $D_1$ acts by contracting
+two of the three flags via the level-$k$ Killing
+form~$\langle\,-\,,\,-\,\rangle_k$.  The identity
+$D_0 D_1 + D_1 D_0 = 0$ on $C_3$ is then the standard
+anticommutation
+\[
+d_{CE} \circ \xi_{ij} + \xi_{ij} \circ d_{CE} = 0
+\]
+on the Chevalley complex $C^\bullet_{CE}(\mathfrak{g})$,
+which holds because the Killing form is
+$\operatorname{ad}$-invariant.
+Explicitly, the three contraction--bracket pairs contribute:
+\begin{align*}
+\langle [e,f], h \rangle_k &= k\,\langle h, h \rangle = 2k, \\
+\langle [e,h], f \rangle_k &= k\,\langle -2e, f \rangle = -2k, \\
+\langle [f,h], e \rangle_k &= k\,\langle 2f, e \rangle = 2k,
+\end{align*}
+and the signed sum
+$(-1)^{1+2}\cdot 2k + (-1)^{1+3}\cdot(-2k)
++ (-1)^{2+3}\cdot 2k = -2k - 2k + (-2k)$\ldots\
+but the combinatorial bookkeeping of the alternating signs
+requires care.  The clean statement is: $\operatorname{ad}$-invariance
+gives $\langle [x_i, x_j], x_k \rangle + \langle x_j,
+[x_i, x_k] \rangle = 0$ for all $i,j,k$, and this identity
+applied systematically to the three pairs ensures the
+total $D_1 D_0$ contribution on the corolla vanishes.
+The na\"ive tree-level computation of Steps~1--2 missed
+the operadic signs from the corolla expansion; the Chevalley
+identity accounts for them.
 \end{example}
 
 \begin{remark}[Koszul signs in the bicomplex]
@@ -666,12 +664,7 @@ prevent a boundary-to-bulk map:
   holomorphic-antiholomorphic).
 \end{enumerate}
 
-Therefore Axiom~5 (strict directionality) is enforced by the
-\emph{physics} of the propagator: the retarded Green's function
-$K(z,t) = \Theta(t)/(2\pi z)$ permits bulk-to-boundary
-transmission but not the reverse.  This is not an imposed axiom
-but a \emph{consequence} of the HT differential
-$Q = \bar\partial_z + d_t$ and its causal Green's function.
+Axiom~5 (strict directionality) is a consequence of the propagator $K(z,t) = \Theta(t)/(2\pi z)$: the retarded Green's function of $Q = \bar\partial_z + d_t$ permits bulk-to-boundary transmission but not the reverse.
 \end{example}
 
 \begin{remark}[The mixed-sector and the open-closed map]

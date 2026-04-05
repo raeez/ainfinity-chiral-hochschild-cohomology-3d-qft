@@ -22,8 +22,15 @@
 \label{sec:factorization-substrate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A chiral algebra is not an algebra over an operad.  It is a
-factorizable $D$-module on the Ran space.  The operad
+A chiral algebra is not an algebra over an operad --- it is a
+factorizable $D$-module on the Ran space, a global object
+whose structure maps are defined by diagonal restrictions on
+products of the curve, not by operations between fibres at points.
+The distinction is load-bearing: an operad composes operations
+between \emph{fibres} at specified points, while factorization
+composes \emph{restriction maps} between $D$-modules on different
+strata of configuration space.
+The operad
 $\SCchtop$ is what remains after formal completion at collision
 points: it is the local shadow, not the governing structure.
 At genus~$0$ on~$\mathbb{P}^1$ the local shadow determines the
@@ -155,7 +162,13 @@ factorization-algebraic input of this chapter.
 Before developing the general theory, we compute the factorization
 Swiss-cheese structure for the three canonical examples: the free boson
 (Heisenberg), the affine Kac--Moody algebra, and the Virasoro
-algebra.  Each computation is carried out in explicit coordinates,
+algebra.  These three examples illustrate the full range of the
+theory's complexity: Heisenberg has trivial bar differential
+($d_{\barB} = 0$, class~$\mathbf{G}$), affine Kac--Moody has
+nontrivial $m_2$ but trivial $m_{k \geq 3}$ (class~$\mathbf{L}$),
+and Virasoro has genuinely infinite $A_\infty$ structure driven by
+the quartic OPE pole (class~$\mathbf{M}$).
+Each computation is carried out in explicit coordinates,
 with all signs and structure maps written out.  The general
 definitions and constructions follow in
 Sections~\ref{sec:BD-factorization-SC}--\ref{sec:factorization-koszul-duality}.
@@ -183,7 +196,11 @@ $a = f(z)\,dz$ and $b = g(z)\,dz$ sections of $\omega_X$, the OPE is
   \frac{f(z)\,g(w)}{z - w}\, dz \otimes dw
   \;+\; \text{regular},
 \end{equation}
-with propagator $K(z,w) = dz/(z-w)$ on $\C$.
+with propagator $K(z,w) = dz/(z-w)$ on $\C$ (here $dz$ is the
+holomorphic $1$-form on the source, and $1/(z-w)$ is the Cauchy
+kernel; the full two-point object is a section of
+$\omega_X \boxtimes \omega_X$ on $X \times X$ with a simple
+pole along the diagonal, as required by the BD $!$-extension).
 
 \smallskip\noindent
 \textbf{Factorizable $D$-module on $\Ran(X)$.}
@@ -565,11 +582,20 @@ $(z_1-z_2)^{-4}$ in the OPE:
   \frac{d^2z_1\, d^2z_2\, d^2z_3}{(z_1-z_2)^4}
   \;\neq\; 0.
 \end{equation}
-The integral is non-zero because the pole order exceeds~$1$: the
-Arnold relation kills the contribution from simple poles (as in
-the Heisenberg case, Example~\ref{ex:heisenberg-bar-3}), but the
-fourth-order pole produces a non-trivial residue after blowup on
-$\FM_3(\C)$.
+The integral is non-zero because the pole order exceeds~$1$.
+For simple poles (as in the Heisenberg case,
+Example~\ref{ex:heisenberg-bar-3}), the Arnold relation
+$\eta_{12}\wedge\eta_{23} + \eta_{23}\wedge\eta_{31} +
+\eta_{31}\wedge\eta_{12} = 0$ forces the weight-form integrand
+to vanish identically, since each propagator contributes at most
+a single $d\log$ factor.  For the Virasoro quartic pole, the
+situation is different: the coefficient $(c/2)(z_1-z_2)^{-4}$
+after absorbing one power via the $d\log$ kernel (AP19) leaves
+a residual $(z_1-z_2)^{-3}$ factor.  On the blowup
+$\FM_3(\C)$, this higher-order singularity survives the
+angular integration because the polar coordinates contribute
+extra powers of $\varepsilon$ from the Jacobian that balance
+the singularity differently than in the simple-pole case.
 
 \smallskip\noindent
 \textbf{Non-formality and shadow depth.}
@@ -646,9 +672,16 @@ infinite shadow tower of Volume~I.
 \label{sec:BD-factorization-SC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Beilinson--Drinfeld framework places chiral algebras and their
-modules into the language of factorizable $D$-modules.  We extend
-this to the two-colored Swiss-cheese setting on the product
+The worked examples of the preceding section were computed in the
+local model on~$\C$: the formal-disc neighbourhood where the operad
+$\SCchtop$ governs.  We now lift to the global setting of
+Beilinson--Drinfeld, where chiral algebras are factorizable
+$D$-modules on the Ran space of a curve~$\Sigma_g$.  The
+BD~framework brings two essential features unavailable in the local
+model: the $D$-module connection (which produces global monodromy)
+and the moduli-space dependence (which produces the curvature
+$\kappa(\cA) \cdot \omega_g$ at genus~$g \geq 1$).  We extend this
+framework to the two-colored Swiss-cheese setting on the product
 $\Sigma_g \times \R$.
 
 \begin{definition}[BD factorization Swiss-cheese algebra]
@@ -866,10 +899,23 @@ $\Ran(X)$ Koszul-dual to $F_{\mathsf{cl}}$, constructed as follows:
   + \eta_{31} \wedge \eta_{12} = 0$
   (where $\eta_{ij} = d\log(z_i - z_j)$) ensures
   $\dfib^{\,2} = 0$.  At genus~$g$, replacing the rational
-  propagator by $K^{(g)}_{\mathrm{Ar}}$: the logarithmic
-  one-forms
-  $\eta^{(g)}_{ij} := d\log E(z_i, z_j) +
-  (\text{Arakelov correction})$ are single-valued but
+  propagator by $K^{(g)}_{\mathrm{Ar}}$: define the
+  \emph{Arakelov-regularised logarithmic one-forms}
+  \[
+    \eta^{(g)}_{ij}
+    \;:=\;
+    \partial_{z_i}\log E(z_i, z_j)\,dz_i
+    \;-\;
+    2\pi i \sum_{\alpha=1}^{g}
+    (\operatorname{Im}\tau)^{-1}_{\alpha\beta}\,
+    \operatorname{Im}\!\Bigl(\int_{z_j}^{z_i}\nu_\beta\Bigr)
+    \,\nu_\alpha(z_j),
+  \]
+  where $E(z_i,z_j)$ is the prime form, $\nu_\alpha$ are
+  normalised Abelian differentials, and
+  $\tau_{\alpha\beta}$ is the period matrix.  These forms are
+  single-valued on $\Sigma_g$ (the Arakelov correction cancels
+  the $B$-cycle monodromy of the prime form) but
   satisfy a \emph{defective} Arnold relation.  The defect
   arises because the Arakelov correction is not holomorphic:
   at three points,
