@@ -193,6 +193,18 @@ All Vol I anti-patterns AP1-AP34 apply here. In particular, AP34 (bar-cobar inve
 
 **AP43 — Central object defined by aspiration, not by axioms.** Objects used in theorem statements without formal \\begin{definition}. A property list is a conjecture about an object, not a definition. **Rule: the central object MUST be formally defined before use.**
 
+**AP44 — OPE mode coefficient ≠ λ-bracket coefficient (divided-power convention).** T_{(3)}T = c/2 becomes {T_λ T} = (c/12)λ³ because λ^(n) = λⁿ/n!. The Vol II preface had (c/2)λ³ in four locations — all wrong by a factor of 6. **Rule: λ-bracket coefficient at order n is a_{(n)}b/n!, NOT a_{(n)}b.**
+
+**AP45 — Desuspension LOWERS degree.** |s⁻¹v| = |v| - 1 (not |v| + 1). The bar complex element s⁻¹a₁ ⊗ ··· ⊗ s⁻¹aₙ has degree Σ|aᵢ| - n. Consult signs_and_shifts.tex when in doubt.
+
+**AP46 — Dedekind eta includes q^{1/24}.** η(q) = q^{1/24}∏(1-qⁿ). The product alone is NOT η. Omitting q^{1/24} corrupts partition-function bounds.
+
+**AP47 — Evaluation-generated core ≠ full category.** MC3 is PROVED on the evaluation-generated core for all simple types. DK-4/5 (extension to full category) is downstream of MC3, not part of it. Never write "MC3 partially resolved."
+
+**AP48 — κ depends on the full algebra, not the Virasoro subalgebra.** κ = c/2 holds ONLY for Virasoro. Lattice VOAs: κ = rank. KM: κ = dim(g)(k+h∨)/(2h∨). General VOAs: compute from the bar complex.
+
+**AP49 — Cross-volume formula propagation without convention check.** Vol I uses OPE modes; Vol II uses λ-brackets/divided powers; Vol III uses motivic/categorical conventions. NEVER paste between volumes without explicit conversion.
+
 **Meta-principle:** Every error traces to confusing two objects that share a name, formula, or special-case coincidence. The meta-rule: never trust a coincidence. Verify at the most general case, highest weight, most general level, most general family. **The meta-meta-meta-rule (from AP35-AP43): the same error can recur at different EPISTEMIC levels.** AP35-AP39 catch errors in the VERIFICATION LAYER (false proofs, biconditional overclaims, convention mismatches). AP40-AP43 catch errors in the COMMUNICATION LAYER (environment/tag mismatches, prose lies, slogans without scope, undefined objects).
 
 ## Cross-Volume Bridges
