@@ -430,6 +430,11 @@
 \providecommand{\eff}{\mathrm{eff}}
 
 % --- Conditional-locus tags (CLAUDE.md sec 5; carry inline at theorem statement) --
+% alpha-type chart / scope hypotheses
+\providecommand{\hypKappaRows}{(\mathrm{HA1}_{\kappa\text{-}\mathrm{rows}})}
+\providecommand{\hypBorcherdsChart}{(\mathrm{HA2}_{\mathrm{Borch\text{-}chart}})}
+\providecommand{\hypBCOVChart}{(\mathrm{HA3}_{\mathrm{BCOV\text{-}chart}})}
+\providecommand{\hypFaberScalar}{(\mathrm{HA4}_{\mathrm{FP\text{-}scalar}})}
 % delta-type endpoint hypotheses (W_infty -> E_infty)
 \providecommand{\hypProchazka}{(\mathrm{HP1}_{\mathrm{Prochazka}})}
 \providecommand{\hypCKL}{(\mathrm{HP2}_{\mathrm{CKL}})}
@@ -440,10 +445,18 @@
 \providecommand{\hypStokes}{(\mathrm{HQ2}_{\mathrm{Stokes}})}
 \providecommand{\hypReflWts}{(\mathrm{HQ3}_{\mathrm{reflWts}})}
 \providecommand{\hypTLift}{(\mathrm{HQ4}_{T=[Q,G]})}
+\providecommand{\hypVirTorusBlock}{(\mathrm{HQ5}_{\mathrm{Vir\text{-}torus\text{-}block}})}
+\providecommand{\hypEisComp}{(\mathrm{HQ6}_{E_{2}\text{-}\mathrm{comp}})}
+\providecommand{\hypKZBHeat}{(\mathrm{HQ7}_{\mathrm{KZB\text{-}heat}})}
+\providecommand{\hypCelSoft}{(\mathrm{HQ8}_{\mathrm{cel\text{-}soft}})}
 % gamma-type ambient declarations
 \providecommand{\hypAmbientWtCpl}{(\mathrm{HM1}_{\mathrm{wt\text{-}cpl}})}
 \providecommand{\hypAmbientPro}{(\mathrm{HM2}_{\mathrm{pro}})}
 \providecommand{\hypAmbientJadic}{(\mathrm{HM3}_{J\text{-}\mathrm{adic}})}
+\providecommand{\hypKMHTBV}{(\mathrm{HM4}_{\mathrm{KM\text{-}HT/BV}})}
+\providecommand{\hypDSBRST}{(\mathrm{HM5}_{\mathrm{DS\text{-}BRST}})}
+\providecommand{\hypOperadicAmbient}{(\mathrm{HM6}_{\mathrm{Op}_{\infty}})}
+\providecommand{\hypAbelianHTBV}{(\mathrm{HM7}_{\mathrm{ab\text{-}HT/BV}})}
 % epsilon-type effectiveness (HT global; gravity readings)
 \providecommand{\hypHTGlobalDR}{(\mathrm{HG1}_{H^{1}(X,\C_X)=0})}
 \providecommand{\hypBHdict}{(\mathrm{HG2}_{\mathrm{Brown\text{-}Henneaux}})}
@@ -459,6 +472,7 @@
 \providecommand{\effPBWnoExtra}{(\mathrm{EK4}_{\mathrm{PBW\text{-}noExtra}})}
 \providecommand{\effMOcocycle}{(\mathrm{EK5}_{\mathrm{MO\text{-}cocycle}})}
 \providecommand{\effOrbBV}{(\mathrm{EK6}_{\mathrm{orb\text{-}BV}})}
+\providecommand{\effScalarShadowProj}{(\mathrm{EK7}_{\mathrm{scalar\text{-}shadow\text{-}proj}})}
 
 % --- Generic parametric hypothesis macro for indefinite expansion -------
 \providecommand{\hypothesis}[2]{(\mathrm{H}_{#1}\text{:}\,#2)}
@@ -471,7 +485,7 @@
 
 \author{Raeez Lorgat}
 
-\date{Draft, \today}
+\date{}
 
 \ifdefined\mainpreambleonly
 % Allow standalone companions to reuse the manuscript preamble without
@@ -506,6 +520,7 @@
 \phantomsection\label{V1-conv:bar-coalgebra-identity}%
 \phantomsection\label{V1-conv:hms-levels}%
 \phantomsection\label{V1-cor:anomaly-duality-w}%
+\phantomsection\label{V1-cor:def-obs-exchange-genus0}%
 \phantomsection\label{V1-cor:g9-u-coproduct}%
 \phantomsection\label{V1-cor:kappa-additivity}%
 \phantomsection\label{V1-cor:lambda-qp}%
@@ -627,6 +642,7 @@
 \phantomsection\label{V1-prop:gue-universality}%
 \phantomsection\label{V1-prop:hodge-clifford}%
 \phantomsection\label{V1-prop:kappa-affine}%
+\phantomsection\label{V1-prop:koszul-dual-tensor-product}%
 \phantomsection\label{V1-prop:nms-legendre-cubic}%
 \phantomsection\label{V1-prop:nms-legendre-duality}%
 \phantomsection\label{V1-prop:pbw-universality}%
@@ -650,6 +666,8 @@
 \phantomsection\label{V1-rem:bv-bar-bridge}%
 \phantomsection\label{V1-rem:bv-bar-class-c-proof}%
 \phantomsection\label{V1-rem:conj-modular-resolved}%
+\phantomsection\label{V1-rem:conv-strict-vs-homotopy}%
+\phantomsection\label{V1-rem:critical-level-lie-vs-chirhoch}%
 \phantomsection\label{V1-rem:g9-mc-relation}%
 \phantomsection\label{V1-rem:g9-wall-crossing}%
 \phantomsection\label{V1-rem:lattice:monster-shadow}%
@@ -1486,8 +1504,6 @@ Three-Dimensional Quantum Gravity}
 
 \vspace{2cm}
 
-{\normalsize Draft, \today}
-
 \end{center}
 \end{titlingpage}
 
@@ -1495,19 +1511,27 @@ Three-Dimensional Quantum Gravity}
 \itshape
 
 \noindent
-A chiral algebra~$\cA$ on a smooth algebraic curve~$C$ and its
-derived centre
-$\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA) = \mathrm{RHom}_{\cA\otimes\cA^{\mathrm{op}}}(\cA,\cA)$
-(the chiral Hochschild cochains) form a pair that carries two
+Let $\cA$ be a chirally Koszul chiral algebra on a smooth
+algebraic curve~$C$.  Its chiral derived centre is the derived
+endomorphism object of $\cA$ in the chiral $\cA$--$\cA$-bimodule
+category on the Ran space,
+\[
+\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+:=\mathrm{REnd}^{\mathrm{ch}}_{\cA\text{-}\cA}(\cA)
+\simeq C^\bullet_{\mathrm{ch}}(\cA,\cA),
+\]
+where the last identification uses the chiral bar resolution on the
+Koszul locus.  The pair
+$(\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$ carries two
 factorisation structures at once: holomorphic factorisation at
-coincident points on~$C$ (the bulk colour), and topological
-factorisation along a transverse real direction~$\R$ (the
-boundary colour). The bicoloured
-Swiss-cheese-chiral-topological operad $\SCchtop$ is the
-operadic record of this pairing, and its action on
-$(\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$ is the
-bulk--boundary datum of a 3d holomorphic--topological
-quantum field theory on $C \times \R$.
+coincident points on~$C$ (the closed colour), and topological
+factorisation along a transverse real direction~$\R$ (the open
+colour). The directed two-coloured
+Swiss-cheese-chiral-topological dioperad $\SCchtop$ is the
+algebraic record of this pairing.  A physical 3d
+holomorphic--topological quantum field theory on $C\times\R$
+requires, in addition, BV/HT realisation data comparing this algebraic
+pair with observables.
 
 \smallskip
 
@@ -1517,31 +1541,37 @@ quantum field theory on $C \times \R$.
 The assignment
 \[
  \Phi_{\mathrm{hol}}\colon
- \mathrm{ChirAlg}^{\omega,\mathrm{BL}}_{X}
+ \mathrm{HTReal}^{\mathrm{Kosz},\omega,\mathrm{BL},\Xi}_{X}
  \longrightarrow
  \mathrm{HT\text{-}QFT}_{X \times \R},
  \qquad
- \cA \longmapsto T_\cA,
+ (\cA,\omega,\mathrm{BL},\Xi) \longmapsto T_{\cA,\Xi},
 \]
-(domain: chiral algebras on a curve $X$ with conformal vector
-$\omega$ and a chosen boundary linearisation BL; target: 3d
+(domain: chirally Koszul chiral algebras on a curve $X$ with
+non-critical conformal vector $\omega$, boundary linearisation BL,
+and HT/BV realisation datum $\Xi$; target: 3d
 holomorphic--topological QFTs on $X \times \R$)
-is a canonical functor sending a chirally Koszul algebra~$\cA$
-at non-critical level to a 3d holomorphic--topological gauge theory
-$T_\cA$ with $\mathrm{Obs}^\partial(T_\cA) \simeq \cA$ and
-$\mathrm{Obs}^{\mathrm{bulk}}(T_\cA) \simeq
-\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ as $E_3$-topological
-factorisation algebras, with the equivalence holding on the original
+is a realisation functor sending
+$(\cA,\omega,\mathrm{BL},\Xi)$ to a 3d holomorphic--topological
+gauge theory $T_{\cA,\Xi}$ with
+$\mathrm{Obs}^\partial(T_{\cA,\Xi}) \simeq \cA$ and
+$\mathrm{Obs}^{\mathrm{bulk}}(T_{\cA,\Xi}) \simeq
+\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ in the declared comparison
+ambient.  The pair is an $\SCchtop$-algebra; the closed colour
+promotes to an $E_3^{\mathrm{top}}$ factorisation algebra only after
+the holomorphic translations are made $Q$-exact by the specified
+antighost/topologisation datum.  The equivalence holds on the original
 chain complex for finite-propagation strata and in the
 weight-completed Banach ambient (Kontsevich--Soibelman $\rho$-completion)
 for class~M unless raw finite propagation is separately verified.
 $\Phi_{\mathrm{hol}}$ is functorial in maps of chiral algebras,
 compatible with Drinfeld--Sokolov reduction, and applies on the
-non-logarithmic $C_2$-cofinite standard landscape with its stated
-analytic hypotheses: Virasoro and $\cW_3$ at generic central charge,
-principal $W_N$ on the finite-envelope loci, Schellekens $c=24$
-holomorphic, Monster $V^\natural$, and irrational cosets
-$\mathrm{Com}(B,C)$. Logarithmic $W(p)$ triplet tempering is open
+standard landscape with its stated analytic hypotheses: rational or
+lisse $C_2$-cofinite loci, Virasoro and $\cW_3$ at generic
+non-critical tempered central charge, principal $W_N$ on the
+finite-envelope loci, Schellekens $c=24$ holomorphic, Monster
+$V^\natural$, and irrational cosets $\mathrm{Com}(B,C)$.
+Logarithmic $W(p)$ triplet tempering is open
 (Conjecture~\ref{conj:tempered-stratum-contains-wp}:
 Gurarie 1993 and Flohr 1996 exhibit logarithmic amplitudes
 with unbounded Massey products despite finite-dimensional Zhu,
@@ -1554,7 +1584,7 @@ iterated Sugawara on $W_\infty[\lambda]$
 (Corollary~\ref{cor:rung-w-infty},
 Theorem~\ref{thm:climax-w-infty-endpoint}).
 
-The atom of the volume is the bicoloured operad $\SCchtop$
+The atom of the volume is the directed two-coloured dioperad $\SCchtop$
 (closed colour the Fulton--MacPherson compactification $\FM_k(\C)$
 of ordered configurations of $k$ points in the curve direction;
 open colour the little-$1$-disks $\Eone(m)$ of $m$ ordered
@@ -1581,9 +1611,14 @@ $2$-automorphisms. The cobar functor $\Omegach$ is left adjoint
 to $\barBch$: on an $E_1$ dg coassociative coalgebra $\mathcal C$
 it produces $\Omegach(\mathcal C) = T(s\bar{\mathcal C})$ with
 differential summing the deconcatenation-dual Arnold
-contractions. The bar complex
-$\barBch(\cA) = T^c(s^{-1}\bar\cA)$ is the
-$E_1$ dg coassociative coalgebra over $(\mathsf{Ass}^{\mathrm{ch}})^!$
+contractions. The reduced bar complex
+\[
+\barBch(\cA)=\bigoplus_{n\ge1}(s^{-1}\bar\cA)^{\otimes n}
+\subset
+\mathrm B^{\mathrm{ch}}(\cA)
+=k\oplus\barBch(\cA)
+\]
+is the $E_1$ dg coassociative coalgebra over $(\mathsf{Ass}^{\mathrm{ch}})^!$
 (differential $d_\cA$ from OPE residues on $\FM_k(\C)$,
 deconcatenation coproduct $\Delta$ from $\Conf_k^<(\R)$;
 the bar itself is not an $\SCchtop$-coalgebra). The bar
@@ -1677,6 +1712,10 @@ together with finite-orbifold BV descent.  For the Leech
 $\mathbb Z/2$ orbifold the finite-group obstruction is the
 Dijkgraaf--Witten class
 $[\alpha_{\mathrm{orb}}]\in H^3(B\mathbb Z/2;\mathrm U(1))$;
+finite-orbifold descent is the homotopy fixed point totalisation
+$V^{hG}=\Tot[V\rightrightarrows\Map(G,V)\to\Map(G^2,V)\to\cdots]$,
+with associator corrected by a local $2$-cochain $\beta$ when
+$\alpha_{\mathrm{orb}}=d\beta$;
 Monster descent uses the separate input
 $[\alpha_{\mathrm{orb}}]=0$
 (Proposition~\ref{prop:monster-alpha-explicit-zero}) and the FLM
@@ -1694,14 +1733,16 @@ $\Abulk \simeq \cZ^{\mathrm{der}}_{\mathrm{ch}}(\Bbound) \simeq
 $W$-algebra, $\cC_{\mathrm{line}}$ the category of line operators,
 $\cA^!_{\mathrm{line}}$ the Koszul dual of the line-module algebra,
 $\HH^\bullet_{\mathrm{ch}}$ the chiral Hochschild cohomology)
-has an unconditional cohomological core via the chiral Hochschild--DS
+has a conditional cohomological core via the chiral Hochschild--DS
 identification
 $\mathrm{ChirHoch}^\bullet(W_k(\fg)) \simeq
 H^\bullet_{\mathrm{DS}}(\mathrm{ChirHoch}^\bullet(V_k(\fg)))$
 (Theorem~\ref{thm:chd-ds-hochschild},
-Corollary~\ref{cor:universal-holography-class-M}): Drinfeld--Sokolov
-reduction commutes with chiral Hochschild cohomology on the principal
-$W$-algebra family. Its chain-level mixed chiral-topological form is
+Corollary~\ref{cor:universal-holography-class-M}) once the completed
+bar-coalgebra SDR, coderivation transfer, and weight-completed HPL
+convergence hypotheses are supplied: Drinfeld--Sokolov reduction then
+commutes with chiral Hochschild cohomology on the stated principal and
+hook-type \(W\)-algebra locus. Its chain-level mixed chiral-topological form is
 the conditional statement in the weight-completed class~$\mathbf M$
 ambient; the strict $E_3^{\mathrm{top}}$ lift is a structure on the
 derived centre, not on the boundary algebra alone.
@@ -1737,14 +1778,20 @@ $c = -22/5$, the $\Ainf$ chiral ladder $(m_k)_{k\ge 2}$ as
 graviton perturbation series, the soft-graviton identification
 $m_r = \mathrm{sub}^{r-2}$-leading
 (Theorem~\ref{thm:gravity-infinite-soft-tower}), perturbative
-finiteness, Page time
+finiteness, and the Virasoro scalar bar trace
+\(\Tr_{\mathrm{Bord}}(\Vir_c)\exp(\Theta)\).  This trace is the
+perturbative thermal-AdS$_3$/BTZ seed after the Brown--Henneaux
+dictionary and saddle labelling are supplied; it is not the
+Maloney--Witten modular orbit sum.  The scalar genus series has
+radius \(4\pi^2\) in \(\hbar^2\), and no Page or BTZ Stokes jump
+follows from the scalar tower alone.  The Page time
 $t_P = 3 S_{\mathrm{BH}}/13$
-(Proposition~\ref{prop:gravity-page-curve}) as the
-complementarity sum $\kappa_{\mathrm{ch}}(\mathrm{Vir}_c) +
-\kappa_{\mathrm{ch}}(\mathrm{Vir}_{26-c}) = 13$, de~Sitter entropy
-$S_{\mathrm{dS}} = \pi\ell/(2G)$ reached heuristically by
-Borel resummation in the $\kappa_{\mathrm{ch}} < 0$ sector
-with Stokes jump at the Gibbons--Hawking saddle.
+(Proposition~\ref{prop:gravity-page-curve}) belongs to the separate
+raw-transseries model under sectorial Borel summability, Stokes,
+modular-invariance, vacuum-dominance, and saddle-extraction
+hypotheses; the conjectural de~Sitter
+$S_{\mathrm{dS}} = \pi\ell/(2G)$ lane requires the analogous
+Gibbons--Hawking saddle data.
 3d quantum gravity is the $N = 2$ rung of the Sugawara ladder;
 $W_\infty[\lambda]$ at generic Prochazka parameter is the
 $E_\infty$-topological endpoint.
@@ -1788,10 +1835,11 @@ to a constant coproduct; topologisation is proved only in the
 ambient named by the theorem. Affine Kac--Moody at non-critical
 level is controlled by Theorem~\ref{thm:E3-topological-km};
 principal and non-principal Drinfeld--Sokolov $W$-algebras use the
-weight-completed/pro ambient of
+total DS BRST ambient of
 Theorems~\ref{thm:E3-topological-DS}
 and~\ref{thm:E3-topological-DS-general}
-through $T_{\mathrm{DS}} = [Q_{\mathrm{CS}}, G'_f]$. Finite-type
+through the \(\hypDSBRST\)-type cohomological identity
+\(T_{\mathrm{DS}} = [Q_{\mathrm{DS}}, G'_{\mathrm{DS}}]\). Finite-type
 freely generated finite-jet PVAs have a constructed classical
 Khan--Zeng BV action, but their all-loop boundary vertex algebra and
 $E_3$ lift remain conditional on the KZ analytic SDR package,
@@ -1829,11 +1877,51 @@ elliptic genus,
 \]
 it is not the full genus-$2$ function~\eqref{eq:abstract-climax}.
 The chain-level residual is the gravity-line Hall--Borcherds
-comparison: the oriented $K3\times E$ Hall comparison extending
-through the Drinfeld double/current envelope and commuting with
-the $\SCchtop$ bulk--boundary trace. Conditional on that
-comparison, $\mathbf H_{\Delta_5}$ is the Hall--Borcherds boundary
-object whose scalar Fock character realises the
+comparison: not an equivalence
+\[
+\operatorname{Schur}\!\left(T[A_1,\Sigma_{0,24}]\right)
+\cong \mathbf H_{\Delta_5},
+\]
+but a finite-height Hall/chiral gate.  The oriented $K3\times E$
+Hall comparison must pass through the reduced compact Hall source,
+finite radical-quotient Hall--Drinfeld doubles, height-compatible
+Hall--Borcherds recognition, and the $\SCchtop$ bulk--boundary trace.
+Equivalently,
+\[
+\operatorname{rad}_{\mathrm{Hall},N}/\operatorname{rad}_{N}=0,\quad
+D^{\mathrm{fin}}_{\mathrm{Hall}}\ \text{exists},\quad
+\operatorname{Borch}\circ\operatorname{Hall}\ \text{is height-compatible},
+\quad
+\operatorname{Schur}\to\Zderch\ \text{is }\SCchtop\text{-trace compatible}
+\]
+for every finite height~$N$. Its required operator form, still
+conditional on these finite Hall and chiral-comparison gates, is the
+Dirac--Igusa protected-Pfaffian datum
+\[
+ \mathfrak D_{K3\times E}\in
+ \operatorname{End}_{\mathrm{ChirHoch}}\!\left(H_{K3\times E}\right)
+ \quad\text{with}\quad
+ \iota_{\mathrm{aut}}\!\left(\protectedPfaff{\mathfrak D_{K3\times E}}\right)
+ =\Delta_5
+\]
+and the Hall/chiral square
+\(I_{\mathrm{Hall}}\colon
+\CoHA(K3)\to D_{\mathrm{Hall}}(K3)\to\mathfrak g_{\Delta_5}\)
+against
+\[
+D^{b}\mathrm{Coh}(K3)
+\xrightarrow{\ (-)\boxtimes\mathcal O_E\ }
+D^{b}\mathrm{Coh}(K3\times E)
+\xrightarrow{\ \PhiFA_{3}\ }
+E_3\text{-}\mathrm{FactAlg}(K3\times E)
+\xrightarrow{\ \SpCh_{E,C}\ }
+\mathrm{ChirAlg}_C
+\xrightarrow{\ \Zderch\ }
+\Zderch(A_X)\subset\SCchtop\text{-}\mathrm{Alg},
+\]
+where \(A_X=\SpCh_{E,C}\PhiFA_3(D^b\mathrm{Coh}(K3\times E))\).
+Conditional on that comparison, $\mathbf H_{\Delta_5}$ is the
+Hall--Borcherds boundary object whose scalar Fock character realises the
 shadow~\eqref{eq:abstract-climax}; the full $3$d gravitational
 path integral lies beyond this scalar identity.
 
@@ -1977,7 +2065,7 @@ datum.
 \item $\FM(X)$ denotes the Fulton--MacPherson compactification of $\Conf(X)$.
 \item $m_k$ are the $\Ainf$ chiral operations; $\lambda_i$ are spectral parameters.
 \item Volume~I notation: $\cA$ for chiral algebras, $\barB(\cA)$ for bar, $\Omegach(C)$ for cobar, $\cA^!$ for Koszul dual; on the two-color Vol~II surface we write $\cA^!_{\mathrm{ch}}$ and $\cA^!_{\mathrm{line}}$ for the closed- and open-color duals.
-\item \emph{Platonic-form macros} (Phase A scaffold): the bicoloured primitive package $\primPkgBicolour$
+\item \emph{Bicoloured primitive package}: $\primPkgBicolour$
 on $(C, \R)$ with components $\openFactCat$ (open factorisation dg-cat on $\logCurve$),
 $\cD^{\mathrm{cl}}|_X$ (closed factorisation $\infty$-cat), $\bdyVac$ (boundary vacuum),
 $\bdyAlg = A_b = \mathrm{End}_{\openFactCat}(b)$ (chart algebra), $F^{\mathrm{cl}}$ (closed-colour vacuum FA),
@@ -2025,8 +2113,9 @@ curves. This volume depends on all five.
  non-scalar invariant.
 \item \textbf{Hochschild duality.}
  The chiral Hochschild cochain complex
- $\mathrm{ChirHoch}^*(\cA)$ is polynomial on the Koszul locus at
- generic level and dual to $\mathrm{ChirHoch}^*(\cA^!)$. The critical
+ $\mathrm{ChirHoch}^*(\cA)$ has amplitude $[0,2]$ with a Hilbert
+ polynomial in $t$ on the Koszul locus at generic level and is dual
+ to $\mathrm{ChirHoch}^*(\cA^!)$. The critical
  level $k = -h^\vee$ is excluded because $\dim \mathrm{ChirHoch}^0$ can
  be infinite there (see Vol~I Remark~\ref*{rem:critical-level-lie-vs-chirhoch}).
  It is the natural candidate for the bulk algebra in the $3$d
@@ -2035,10 +2124,10 @@ curves. This volume depends on all five.
 Volume~II computes the three-dimensional content of these five
 theorems through the Swiss-cheese lens.
 
-\subsection*{Conditional and unconditional results}
-\label{subsec:conditional-roadmap}
+\subsection*{Results by scope}
+\label{subsec:scope-stratification}
 
-The live theorem surface now separates by scope. The operadic
+The theorem surface separates by scope. The operadic
 foundations split: homotopy-Koszulity and the Koszul-dual operad
 calculus are algebraic, while product-cover descent and recognition
 identify only the product-formal local shadow of HT factorization
@@ -2062,7 +2151,7 @@ logarithmic parametrix.
 
 \begin{remark}[Scope of results]
 \label{rem:conditional-list}
-The live algebraic framework separates as follows:
+The algebraic framework separates as follows:
 \begin{itemize}
 \item \emph{Unconditional for any logarithmic $\SCchtop$-algebra}
  \emph{(}Definition~\ref{def:log-SC-algebra}\emph{):}
@@ -2071,7 +2160,7 @@ The live algebraic framework separates as follows:
  Theorem~\ref{thm:scchtop-bar-cobar-adjunction} (bar--cobar Quillen
  equivalence),
  Theorem~\ref{thm:filtered-koszul} (filtered Quillen equivalence),
- Proposition~\ref{thm:SC-self-duality} (Koszul dual
+ Proposition~\ref{prop:sc-koszul-duality-nonselfdual} (Koszul dual
  of~$\SCchtop$).
 \item \emph{On the chirally Koszul locus:}
  Theorem~\ref{thm:lines_as_modules}
@@ -2080,8 +2169,9 @@ The live algebraic framework separates as follows:
  Theorem~\ref{thm:yangian-recognition}
  (the open-colour Koszul dual carries the dg-shifted Yangian
  package),
- Theorem~\ref{thm:duality-involution}
- (the full two-colour Koszul duality involution returns~$\cA$).
+	 Theorem~\ref{thm:duality-involution}
+	 (homotopy Koszul duality is involutive, and the small involution
+	 is strict SC-formal).
 \item \emph{For the standard affine HT gauge realization among the
  physical examples supplied by
  Theorem~\ref{thm:physics-bridge}:}
@@ -2092,8 +2182,7 @@ The live algebraic framework separates as follows:
  Theorem~\ref{thm:Koszul_dual_Yangian}
  (the field-theoretic open-colour Koszul dual is a
  dg-shifted Yangian).
-\item \emph{Core constructions available on the live algebraic
- surface:}
+\item \emph{Core constructions on the algebraic surface:}
  The chain-level $\Ainf$ structure, PVA descent, spectral
  $R$-matrix, and the Swiss-cheese descent package are built for
  logarithmic $\SCchtop$-algebras; the standing
@@ -2188,7 +2277,7 @@ constructed from the Swiss-cheese structure via
 
 \noindent
 Part~\ref{part:open-primitive} constructed the bicoloured primitive
-package $\primPkgBicolour$ on $(C, \R)$ and the $\SCchtop$ operad
+package $\primPkgBicolour$ on $(C, \R)$ and the $\SCchtop$ dioperad
 with its heptagon of presentations
 \textup(\cref{def:bicoloured-primitive-package},
 \cref{thm:bicoloured-primitive-universality}\textup). Choosing a
@@ -2335,7 +2424,7 @@ critical companion\textup) is the κ-supported partition; the
 derived-centre complementarity ceiling
 $\rho_K = \kappaChHodge(A) + \kappaChHodge(A^!) \in
 \{0, 8, 13, 250/3, 98/3\}$ is Theorem~C
-\textup(Vol~II Vol~II Theorem~\texttt{theorems\_C\_D\_native\_vol2\_platonic.tex:thm:theoremC-total-shifted-symplectic}\textup);
+\textup(\cref{thm:theoremC-total-shifted-symplectic}\textup);
 the obstruction-tower scalar formula is Theorem~D. The Heisenberg
 Rosetta Stone computes every slot by hand. Closing this part:
 the K3$\times E$ counterexample
@@ -2364,7 +2453,7 @@ genuinely primitive: no scalar collapse holds.
 \input{chapters/examples/w-algebras-virasoro} % Virasoro fingerprint witness
 \input{chapters/examples/w-algebras-w3} % W_3 fingerprint witness
 % Bulk and brace (chart functor extensions; relocated to Part IV closing the chart-to-centre arc):
-\input{chapters/connections/hochschild} % chiral Hochschild = bulk; cyclic-Hochschild four-object discipline
+\input{chapters/connections/hochschild} % chiral Hochschild closed sector; physical bulk scoped
 \input{chapters/connections/brace} % brace dg-algebra on chiral Hochschild
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2385,10 +2474,15 @@ its primitivity. Part~V populates the standard HT landscape
 family-by-family. The transgression
 algebra $B_\Theta(\cA) := \operatorname{Tot}^\Pi
 \bigoplus_{g \ge 1} F_g(\cA) \cdot \hbar^{2g-2}$ packages the
-genus tower $F_g(\cA) = \int_{\overline{\cM}_g}
-\exp(\kappaChHodge(\cA) \cdot c_1(\Lambda_g))$ into a single
-dg algebra with genus-Clifford completion at $u = \eta^2$
-(secondary anomaly class). Physical origins
+genus tower
+$F_g(\cA) =
+\kappaChHodge(\cA)\lambda_g^{\mathrm{FP}}
+{}+\delta F_g^{\mathrm{cross}}(\cA)$, where
+$\lambda_g^{\mathrm{FP}}
+=\int_{\overline{\cM}_{g,1}}\psi_1^{2g-2}\lambda_g$
+and $\delta F_g^{\mathrm{cross}}$ vanishes on the uniform-weight
+lane, into a single dg algebra with genus-Clifford completion at
+$u = \eta^2$ (secondary anomaly class). Physical origins
 (Chapter~\ref{chap:ht-physical-origins}) derive the $3$d HT twist
 from either the $4$d $\cN = 2$ topological-holomorphic twist of
 Costello--Gwilliam or the $(2,0)$ six-dimensional reduction. The
@@ -2407,10 +2501,13 @@ anomaly-completed package closes the triangle
 $(\bdyAlg, \Zderch(\bdyAlg) = \bulkChirHoch{\bdyAlg}, \mathrm{Line}(\bdyAlg))$
 into a single modular MC element $\Theta^{\mathrm{oc}}$, the
 input to the Part~\ref{part:gravity} Virasoro specialisation.
-6d holomorphic Chern--Simons closes the landscape with the
-quartic obstruction $\int_X \mathrm{Tr}_{\mathrm{ad}} A (F_A)^3$
-verified on K3$\times E$, supplying the cross-volume bridge to
-Vol~III's Hall--Borcherds programme.
+6d holomorphic Chern--Simons supplies the gauge-theoretic quartic
+anomaly class $\int_X \mathrm{Tr}_{\mathrm{ad}} A (F_A)^3$ and its
+trace-factorisation/Green--Schwarz cancellation criterion; on
+K3$\times E$, the Euler factor
+$\int_{K3}c_2(TK3)=24$ supplies the cross-volume bridge to the
+Hall--Borcherds construction of Vol~III. The shadow tower detects the
+residual quartic class but does not itself construct the cancellation.
 
 \input{chapters/connections/ht_physical_origins} % physical origins of the HT landscape; opens Part V by establishing the 3d HT twist from 4d N=2 / 6d (2,0) and naming the standard-landscape boundary algebras
 % HT bulk-boundary structure (relocated from former Part III -- HT physics is landscape, not r(z) torsor):
@@ -2477,7 +2574,7 @@ since the $\lambda$-bracket
 $\{T_\lambda T\} = \partial T + 2 T \lambda + (c/12) \lambda^3$
 has quartic pole; $r_{\max} = \infty$ so the shadow tower does
 not truncate. Drinfeld--Sokolov reduction from
-$\widehat{\fsl}_2$ at $k$ with $c = 1 + 6(k+1)^2/(k+2)$
+$\widehat{\fsl}_2$ at $k$ with $c = 1 - 6(k+1)^2/(k+2)$
 \textup(\cref{thm:E3-topological-DS-general}\textup) reaches
 the $E_3^{\mathrm{top}}$ rung; chain-level closure is
 $\ChirHoch^\bullet(\mathrm{Vir}_c) \simeq
@@ -2486,17 +2583,19 @@ H^\bullet_{\mathrm{DS}}(\ChirHoch^\bullet(V_k(\fsl_2)))$
 concentrates the derived centre in degrees $\{0, 1, 2\}$ with
 $E_3$-chiral brace action
 \textup(\cref{thm:chiral-higher-deligne}\textup); for $\mathrm{Vir}_c$
-at generic $c$ the explicit dimensions are
-$\dim \ChirHoch^0 = 1$, $\dim \ChirHoch^1 = 1$, $\ChirHoch^{\geq 2} = 0$
+at generic $c$ the universal central-extension sector has
+$\dim \ChirHoch^0_{\mathrm{cent}} = 1$,
+$\dim \ChirHoch^1_{\mathrm{cent}} = 0$,
+$\dim \ChirHoch^2_{\mathrm{cent}} = 1$
 \textup(\cref{thm:chirhoch-virasoro-concentration}\textup), with
-the $\delta_c$ derivation classifying the central-charge
-deformation. Virasoro occupies the $N = 2$ rung of the
+the Gel'fand--Fuchs class $\Theta_c$ representing the fixed-fibre
+central-charge deformation. Virasoro occupies the $N = 2$ rung of the
 $E_\infty$-topological ladder constructed in
 Part~\ref{part:topologisation-ladder}; higher rungs
 $\cW_N \to E_{N+1}^{\mathrm{top}}$ realise the Platonic climax's
 extension into the Frontier. The four open Construction Problems
 CP1--CP4 \textup(\cref{rem:four-construction-problems}\textup)
-are the operator-level deliverables closing this part.
+are the operator-level boundary objects of this part.
 
 \input{chapters/connections/part_vi_platonic_introduction.tex}
 \input{chapters/connections/thqg_gravitational_complexity.tex}
@@ -2529,10 +2628,9 @@ are the operator-level deliverables closing this part.
 \noindent
 Part~\ref{part:gravity} closed the $E_3^{\mathrm{top}}$-rung of
 Virasoro and stated the $E_\infty^{\mathrm{top}}$-ladder
-Platonic target. Part~VII opens the closing arc: the four
-irreducible fronts on which the programme meets the boundary of
-its established scope, plus the four operator-level Construction
-Problems CP1--CP4
+Platonic target. Part~VII contains the four irreducible boundary
+faces of the present theorem, plus the four operator-level
+Construction Problems CP1--CP4
 \textup{(}\cref{rem:four-construction-problems},
 \cref{thm:construction-problem-stage-stratification}\textup{)}.
 The fronts are: \textup{(F1)} curved-Dunn $H^2 = 0$ at $g \ge 2$
@@ -2546,8 +2644,10 @@ periodic-CDG at admissible level
 associator fix \textup{(}\cref{thm:chd-deligne-tamarkin}\textup{)}.
 The Construction Problems are operator-level lifts of currently
 scalar / shadow / classical / injection statements:
-$\operatorPrim{X}$ on $K3 \times E$ with
-$\protectedPfaff{\operatorPrim{X}} = \Deltafive$ \textup{(CP1)};
+$\mathfrak D_X\in\operatorname{End}_{\mathrm{ChirHoch}}(H_X)$ on
+$K3 \times E$ with
+$\iota_{\mathrm{aut}}(\protectedPfaff{\mathfrak D_X})=\Deltafive$
+\textup{(CP1)};
 gravity-line operator algebra with Pentagon-face scalar trace
 $\Phitenun = \Deltafive^2$ \textup{(CP2)}; unified PVA-quantum HT
 theory \textup{(CP3)}; chiral Positselski extending Vol~I
@@ -2608,8 +2708,9 @@ KZB regularity is a separate boundary-composition theorem under
 the boundary formal-type hypotheses
 (\cref{thm:irregular-singular-kzb-regularity}). The
 class-$\mathbf{M}$ chain-level DS--Hochschild compatibility closes
-via HPL transfer through Drinfeld--Sokolov strong deformation
-retract plus Arakawa $C_2$-cofiniteness
+only after the completed Drinfeld--Sokolov bar-coalgebra SDR,
+the induced coderivation transfer, and the bounded-shift HPL
+convergence package are supplied
 (\cref{thm:chd-ds-hochschild} +
 \cref{cor:universal-holography-class-M}); the periodic-CDG
 admissible-level closure closes via Arkhipov--Gaitsgory twisted
@@ -2628,14 +2729,14 @@ irreducible fronts close on their proved loci: class-$\mathbf{M}$
 in the weight-completed / pro / $J$-adic ambient unless finite
 propagation supplies the raw direct-sum complex; periodic-CDG on
 the verified admissible exact locus. The residual three directions
-F1$'$, F4$'$, F6 are scope-boundary items: the
+F1$'$, F4$'$, F6 are boundary faces: the
 logarithmic-to-non-logarithmic transition (F1$'$), the
 bosonic-to-super-Yangian canonicalisation of the complementarity
 pairing (F4$'$), and the Faber socle-evaluation residue at $g \ge 3$
-(F6); each cross-referenced to Vol~I \texttt{FRONTIER.md} \S 3
-(OF5, OF19, AP225-residue). Beyond these scope-boundary items, the
-operator-level deliverables of the post-cut programme are the four
-open Construction Problems CP1--CP4 inscribed at
+	(F6); these are the logarithmic, super-Yangian, and Faber-residue
+	boundary faces of the Vol~I obstruction tower. The operator-level
+	open objects are the
+four Construction Problems CP1--CP4 inscribed at
 \cref{rem:four-construction-problems} (closing remark of
 Part~\ref{part:gravity}); their stage-stratification across the
 universal stage chain is
@@ -2715,7 +2816,7 @@ universal stage chain is
 
 \bibitem{CDM12} S.~Chmutov, S.~Duzhin, and J.~Mostovoy, \emph{Introduction to Vassiliev Knot Invariants}, Cambridge Univ.\ Press, 2012.
 
-\bibitem{CEZ23} L.~Collier, J.~Eberhardt, and H.~Zhang, \emph{Virasoro TQFT and Teichm\"uller theory}, arXiv:2311.15063, 2023.
+\bibitem{CEZ23} S.~Collier, L.~Eberhardt, and M.~Zhang, \emph{Solving $3$d gravity with Virasoro TQFT}, arXiv:2304.13650, 2023.
 
 \bibitem{CDG20} K.~Costello, T.~Dimofte, and D.~Gaiotto, \emph{Boundary chiral algebras and holomorphic twists}, arXiv:2005.00083, 2020.
 
@@ -3515,8 +3616,8 @@ A.~DeHority and A.~Latyntsev, \emph{Orthosymplectic CoHA modules}, arXiv:2501.06
 \bibitem{Eberhardt23}
 L.~Eberhardt, \emph{Notes on crossing transformations of the Virasoro conformal blocks}, arXiv:2309.11540, 2023.
 
-\bibitem{ECZ23}
-L.~Eberhardt, S.~Collier, and L.~Zhang, \emph{Solving $3$d gravity with Virasoro TQFT}, arXiv:2304.13650, 2023.
+\bibitem{CEZ24}
+S.~Collier, L.~Eberhardt, and M.~Zhang, \emph{$3$d gravity from Virasoro TQFT: Holography, wormholes and knots}, arXiv:2401.13900, 2024.
 
 \bibitem{EberhardtEtAl25}
 L.~Eberhardt, S.~Collier, L.~Zhang, and B.~M\"uhlmann, \emph{Virasoro crossing kernels at rational central charge}, arXiv:2512.03172, 2025.
@@ -3642,11 +3743,9 @@ D.~Gaitsgory and N.~Rozenblyum, \emph{A Study in Derived Algebraic Geometry}, Vo
 
 \bibitem{HamadaShiuSubsubSoft}
 Y.~Hamada and G.~Shiu, \emph{Infinite set of soft theorems in gauge-gravity theories as Ward--Takahashi identities}, Phys.\ Rev.\ Lett.\ \textbf{120} (2018), 201601, arXiv:1801.05528.
-% TODO: librarian verification; exact Hamada--Shiu subsub-soft paper identifier.
 
-\bibitem{LiStromingerHigherSoft}
-Y.~Li and A.~Strominger, \emph{Higher-spin soft theorems from asymptotic symmetries}, arXiv:XXXX.XXXXX, 20XX.
-% TODO: librarian verification; Li--Strominger higher soft theorem paper.
+\bibitem{GuevaraHimwichPateStrominger21}
+A.~Guevara, E.~Himwich, M.~Pate, and A.~Strominger, \emph{Holographic symmetry algebras for gauge theory and gravity}, J.\ High Energy Phys.\ \textbf{2021}, no.~11, 152, arXiv:2103.03961.
 
 \bibitem{Linshaw-Winfty}
 A.\,R.~Linshaw, \emph{Universal two-parameter $\mathcal{W}_\infty$-algebra and vertex algebras of type $\mathcal{W}(2,3,\ldots,N)$}, Compos.\ Math.\ \textbf{157} (2021), no.~1, 12--82, arXiv:1710.02148.
@@ -4731,16 +4830,16 @@ R.~Lorgat, \emph{Modular Homotopy Theory for Algebraic Factorization Algebras on
 R.~Lorgat, \emph{Class~L antighost-commutativity and the Sugawara topologisation lift}, Volume~I theorem reference, manuscript, 2026.
 
 \bibitem{Vol2-3d-gravity-thm-DS}
-R.~Lorgat, \emph{Drinfeld--Sokolov $3d$ gravity theorem}, Volume~II chapter \texttt{3d\_gravity.tex}, manuscript, 2026.
+R.~Lorgat, \emph{Drinfeld--Sokolov $3d$ gravity theorem}, Volume~II, manuscript, 2026.
 
 \bibitem{Vol2-fractional-ghost-platonic}
-R.~Lorgat, \emph{Fractional-ghost chain-level platonic theorem (non-principal Drinfeld--Sokolov via branched-cover descent)}, Volume~II chapter \texttt{fractional\_ghost\_chain\_level\_platonic.tex}, manuscript, 2026.
+R.~Lorgat, \emph{Fractional-ghost chain-level theorem for non-principal Drinfeld--Sokolov descent}, Volume~II, manuscript, 2026.
 
 \bibitem{Vol2FRONTIER}
-R.~Lorgat, \emph{Volume~II Frontier: live register of open problems with hypothesis packages, reconstruction theorems, and heal paths}, manuscript, \texttt{FRONTIER.md}, 2026.
+R.~Lorgat, \emph{Volume~II obstruction ledger for hypothesis packages and reconstruction theorems}, manuscript, 2026.
 
 \bibitem{Critique20260509v2}
-R.~Lorgat, \emph{Architectural critique of $2026{-}05{-}09$: universal stage chain, five licensing types, four Construction Problems, the bicoloured primitive package, and the typed-separation discipline}, manuscript, \texttt{notes/legacy/critique\_2026\_05\_09\_chiral\_duality\_master\_consequence\_map\_v2.md}, 2026.
+R.~Lorgat, \emph{Universal stage chain, five licensing types, four Construction Problems, and the bicoloured primitive package}, manuscript, 2026.
 
 \end{thebibliography}
 
