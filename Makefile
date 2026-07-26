@@ -80,9 +80,32 @@ AUX_EXTS  := aux log out toc synctex.gz fdb_latexmk fls bbl blg \
 #  Targets
 # ============================================================================
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := platonic
 
-.PHONY: all fast clean veryclean clean-builds count check test dist release help working-notes standalone icloud verify-independence verify-independence-verbose verify-licensing verify-licensing-report mathematics-publish root-publish architecture unified-architecture
+.PHONY: platonic all fast clean veryclean clean-builds count check test dist release help working-notes standalone icloud verify-independence verify-independence-verbose verify-licensing verify-licensing-report mathematics-publish root-publish architecture unified-architecture
+
+## platonic: Build the integrated monograph -> out/platonic.pdf
+platonic:
+	@echo "  -- Building the integrated monograph --"
+	@mkdir -p out .build_logs
+	@cd platonic && \
+	  TEXINPUTS=".:..:$$TEXINPUTS" BIBINPUTS=".:..:$$BIBINPUTS" \
+	  pdflatex -interaction=nonstopmode -file-line-error main.tex >../.build_logs/platonic.log 2>&1 || true; \
+	  TEXINPUTS=".:..:$$TEXINPUTS" BIBINPUTS=".:..:$$BIBINPUTS" \
+	  bibtex main >>../.build_logs/platonic.log 2>&1 || true; \
+	  for i in 1 2 3; do \
+	    TEXINPUTS=".:..:$$TEXINPUTS" BIBINPUTS=".:..:$$BIBINPUTS" \
+	    pdflatex -interaction=nonstopmode -file-line-error main.tex >../.build_logs/platonic.log 2>&1 || true; \
+	  done
+	@if [ -f platonic/main.pdf ]; then cp platonic/main.pdf out/platonic.pdf; \
+		echo "    OK out/platonic.pdf ($$(pdfinfo platonic/main.pdf 2>/dev/null | awk '/^Pages/{print $$2}') pages)"; \
+	else echo "    FAIL - see .build_logs/platonic.log"; exit 1; fi
+	@if grep -aqE '^! ' .build_logs/platonic.log; then \
+		echo "    LaTeX errors:"; grep -aE '^! ' .build_logs/platonic.log | head -5; exit 1; fi
+	@if grep -aqE 'Reference .* undefined|Citation .* undefined' .build_logs/platonic.log; then \
+		echo "    undefined refs/citations:"; grep -aE 'Reference .* undefined|Citation .* undefined' .build_logs/platonic.log | head -5; exit 1; fi
+	@echo "    0 errors, 0 undefined references, 0 undefined citations."
+
 
 ## icloud: Copy latest PDFs to iCloud Drive (subject-organised)
 icloud: $(ICLOUD_MAIN_PREREQ) standalone
