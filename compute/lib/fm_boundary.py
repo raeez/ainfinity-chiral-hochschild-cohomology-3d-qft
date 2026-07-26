@@ -217,3 +217,77 @@ def codim2_corners(k):
             elif S1.isdisjoint(S2):
                 corners.append((S1, S2))
     return corners
+
+
+def local_residue_convention():
+    """Return the local FM residue and orientation convention.
+
+    This is a structural oracle for the manuscript convention:
+    Res_{D_S}(dlog eps_S wedge beta + alpha) = beta|_{eps_S=0},
+    with outward-normal-first orientation
+    or(FM_k(C)) = (-d eps_S) wedge or(D_S).
+    """
+    return {
+        'residue_formula': (
+            'Res_D_S(dlog(epsilon_S) wedge beta + alpha) '
+            '= beta|epsilon_S=0'
+        ),
+        'orientation_formula': 'or(FM_k(C)) = (-d epsilon_S) wedge or(D_S)',
+        'inward_coordinate': 'epsilon_S >= 0, epsilon_S=0 on D_S',
+        'outward_normal': '-partial_epsilon_S',
+    }
+
+
+def ordered_chiral_bar_residue_skeleton(arity):
+    """Structural profile for the ordered chiral bar residue skeleton.
+
+    Args:
+        arity: Taylor arity k for the cogenerator projection.
+
+    Returns:
+        A dictionary of formulas guarding the manuscript statement.
+    """
+    if arity < 1:
+        raise ValueError("arity must be positive")
+
+    return {
+        'coalgebra': 'B^ch(A) = T^c(s^-1 bar A)',
+        'coderivation': 'D_A = sum_{k>=1} D_{m_k}',
+        'projection_formula': (
+            f'pi_1 D_A | (s^-1 bar A)^otimes {arity} '
+            f'= s^-1 m_{arity} s^otimes {arity}'
+        ),
+        'collision_residue': (
+            'm_S = Res_D_S prod_{e in E(S)} '
+            'dlog(z_{s(e)}-z_{t(e)}) tensor OPE_S'
+        ),
+        'd_squared_sources': (
+            'partial^2[FM_k(C)] = 0',
+            'omega_ij wedge omega_jk + omega_jk wedge omega_ki '
+            '+ omega_ki wedge omega_ij = 0',
+        ),
+        'derived_centre': 'Z_der_ch(A) = Coder(B^ch(A))',
+        'centre_differential': 'd = [D_A,-]',
+        'brace_formula': (
+            'f{g_1,...,g_r} = sum_ordered_insertions '
+            '+/- f(1,...,g_1,...,g_r,...,1)'
+        ),
+        'mixed_operations': 'nu_k^(m): Z_der_ch(A)^otimes k tensor A^otimes m -> A',
+        'strictification_requires': (
+            'Drinfeld associator',
+            'two-coloured contracting homotopy',
+        ),
+        'contracting_homotopy': (
+            'h_oc: Omega((SC^ch,top)^!) -> Omega((SC^ch,top)^!)[-1]; '
+            'd h_oc + h_oc d = id - i circ p; '
+            'p h_oc = h_oc i = h_oc^2 = 0'
+        ),
+        'topologisation_condition': (
+            'if T=[Q,G] and translations are Q-exact, '
+            'Z_der_ch(A) in E_3^top-Alg'
+        ),
+        'class_m_completion': (
+            'identities in Ahat_rho with ||m_k||_rho <= C_k(rho) '
+            'and sum_k C_k(rho) < infinity'
+        ),
+    }

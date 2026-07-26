@@ -233,6 +233,89 @@ def w3_lambda_bracket(a, b, lam):
 
 
 # ---------------------------------------------------------------------------
+# Lambda-channel transfer data
+# ---------------------------------------------------------------------------
+
+def w3_lambda_channel_coefficient(c_value=None):
+    """Undifferentiated Lambda-channel coefficient in {W_lam W}.
+
+    The generic W_3 algebra is singular at c = -22/5.  This helper returns the
+    symbolic coefficient unless a numerical central charge is supplied.
+    """
+    c_val = c if c_value is None else S(c_value)
+    return Rational(32, 1) / (22 + 5 * c_val)
+
+
+def w3_partial_lambda_channel_coefficient(c_value=None):
+    """Derivative Lambda-channel coefficient in {W_lam W}."""
+    c_val = c if c_value is None else S(c_value)
+    return Rational(16, 1) / (22 + 5 * c_val)
+
+
+def w3_literal_lambda_projection_of_WW(lam=None, c_value=None):
+    """Literal BPZ/Shapovalov projection of {W_lam W} to the Lambda line.
+
+    With P_Lambda the projection to C*Lambda, the projected linear term is
+    beta_Lambda * lam * Lambda.  The coefficient is already included here.
+    """
+    if lam is None:
+        lam = Symbol('lambda')
+    return w3_lambda_channel_coefficient(c_value) * lam * Lambda
+
+
+def w3_unit_lambda_channel_of_WW(lam=None):
+    """Coefficient-one Lambda channel after extracting beta_Lambda."""
+    if lam is None:
+        lam = Symbol('lambda')
+    return lam * Lambda
+
+
+def w3_primary_lambda_eigenvalue(h=None):
+    """Primary-line normalization for Lambda_0 on a highest-weight vector."""
+    if h is None:
+        h = Symbol('h')
+    return expand(h**2 - Rational(3, 5) * h)
+
+
+def w3_lambda_channel_vanishing_weights():
+    """Weights where the primary-line Lambda_0 eigenvalue vanishes."""
+    return (S.Zero, Rational(3, 5))
+
+
+def w3_m4_lambda_channel_profile(c_value=None):
+    """Data for the tree-level m4 Lambda-channel summand.
+
+    The displayed monograph formula uses the coefficient-one channel
+    P_Lambda^circ({W_lam W}) = lam*Lambda and places beta_Lambda outside the
+    sum.  If the literal projector P_Lambda is used instead, the beta factor is
+    contained in each projected binary bracket.
+    """
+    return {
+        'coefficient': w3_lambda_channel_coefficient(c_value),
+        'literal_projection': w3_literal_lambda_projection_of_WW(
+            Symbol('lambda'), c_value),
+        'unit_channel': w3_unit_lambda_channel_of_WW(Symbol('lambda')),
+        'literal_projection_contains_coefficient': True,
+        'planar_pair_channels_linear': ('12|34',),
+        'kernel': 'K_ab|cd = Res_{D_ab|cd}(omega_ab wedge omega_cd)',
+        'operation': (
+            'beta sum_pl +/- p mu(h P_Lambda^circ mu(Wa,Wb), '
+            'h P_Lambda^circ mu(Wc,Wd)) K_ab|cd'
+        ),
+        'singular_central_charge': Rational(-22, 5),
+    }
+
+
+def w3_gaudin_commutativity_scope():
+    """Scope of the W_3 Gaudin Hamiltonian commutativity claim."""
+    return {
+        'matrix_components': ('TT', 'TW', 'WT', 'WW'),
+        'requires': 'W_3 Gaudin/RLL algebra',
+        'pva_jacobi_sufficient': False,
+    }
+
+
+# ---------------------------------------------------------------------------
 # OPE coefficients
 # ---------------------------------------------------------------------------
 

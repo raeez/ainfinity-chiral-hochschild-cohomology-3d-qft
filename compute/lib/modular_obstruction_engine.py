@@ -1082,7 +1082,8 @@ def obstruction_complementarity(family, **params):
 
     The complementarity of obstructions is a consequence of Theorem C.
 
-    For Virasoro: Vir_c^! = Vir_{26-c}
+    For Virasoro: the same-family line-side comparison representative
+        has central charge 26-c
         kappa(c) + kappa(26-c) = c/2 + (26-c)/2 = 13
 
     For W_3 with DS from sl_3: c(k) + c(-k-6) = 100
@@ -1107,7 +1108,7 @@ def obstruction_complementarity(family, **params):
             'complementarity_sum': comp_sum,
             'expected': S(13),
             'check': comp_sum == 13,
-            'duality': 'Vir_c^! = Vir_{26-c}',
+            'duality': 'same-family line-side comparison Vir_{26-c}',
             'self_dual_point': S(13),
         }
 
@@ -1140,7 +1141,7 @@ def obstruction_complementarity(family, **params):
             'complementarity_sum': comp_sum,
             'expected': S.Zero,
             'check': comp_sum == 0,
-            'duality': 'V_k(sl_2)^! = V_{-k-4}(sl_2)',
+            'duality': 'CE_ch(V_{-k-4}(sl_2)) is the Koszul target',
         }
 
     elif family == 'heisenberg':
@@ -1155,7 +1156,7 @@ def obstruction_complementarity(family, **params):
             'complementarity_sum': comp_sum,
             'expected': S.Zero,
             'check': comp_sum == 0,
-            'duality': 'H_k^! = Sym^ch(V*) != H_{-k}',
+            'duality': 'H_k^! is curved Sym^ch(V*[1]); H_{-k} is scalar shadow',
             'note': 'Heisenberg is NOT self-dual (Critical Pitfall)',
         }
 

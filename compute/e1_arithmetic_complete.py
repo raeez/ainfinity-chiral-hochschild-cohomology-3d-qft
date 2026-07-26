@@ -447,7 +447,8 @@ def dedekind_eta_analysis():
 
     The Dedekind eta: eta(tau) = q^{1/24} * prod_{n=1}^infty (1 - q^n)
 
-    For Heisenberg at level k: chi = q^{-k/24} * prod(1-q^n)^{-1} = q^{-k/24} / eta(tau) * q^{1/24}
+    For rank-one Heisenberg: chi = q^{-1/24} * prod(1-q^n)^{-1} = 1 / eta(tau).
+    The determinant-line shadow with exponent k is eta(tau)^{-k}.
 
     The partition function p(n) satisfies: sum p(n) q^n = 1/prod(1-q^n)
     And the Euler function prod(1-q^n) = sum (-1)^k q^{k(3k-1)/2} (pentagonal numbers).

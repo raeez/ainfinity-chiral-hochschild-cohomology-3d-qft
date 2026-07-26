@@ -16,6 +16,7 @@ from __future__ import annotations
 from fractions import Fraction
 import os
 import sys
+from pathlib import Path
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -24,11 +25,15 @@ from lib.p1_protected_pfaffian_chain_level import (
     HOCH_DELTA5_GATING_HYPOTHESES,
     REQUIRED_S_TO_Z_BLOCKS_K3xE,
     VOL_II_SCOPE_RESIDUALS,
+    borcherds_root_product_profile,
     borcherds_leading_coefficient,
     borcherds_product_expansion,
     chain_level_status,
     gritsenko_leading_coefficient,
     hoch_degree_two_pairing_target,
+    k3_borcherds_hall_chiral_square,
+    k3_class_s_closure_gate_profile,
+    k3_borcherds_operator_profile,
     k3_elliptic_genus_coeff,
     missing_chain_level_blocks,
     protected_pfaffian_finite_stage,
@@ -43,18 +48,18 @@ from lib.p1_protected_pfaffian_chain_level import (
 
 
 def test_phi01_index_one_coefficients_witnessed():
-    """phi_{0,1} weight-0 index-1 elliptic genus of K3.
+    """phi_{0,1}^{K3} is the half K3 weak Jacobi form.
 
-    Reference values cross-checked: c(0, 0) = 10, c(0, +-1) = 1, c(1, 0) = -64,
-    c(1, +-1) = 108 (Eichler-Zagier 1985 + Dabholkar-Murthy-Zagier 2012).
+    Reference values cross-checked: c(0, 0) = 10, c(0, +-1) = 1, c(1, 0) = 108,
+    c(1, +-1) = -64 (Eichler-Zagier 1985 + Dabholkar-Murthy-Zagier 2012).
     """
 
     assert k3_elliptic_genus_coeff(0, 0) == 10
     assert k3_elliptic_genus_coeff(0, 1) == 1
     assert k3_elliptic_genus_coeff(0, -1) == 1
-    assert k3_elliptic_genus_coeff(1, 0) == -64
-    assert k3_elliptic_genus_coeff(1, 1) == 108
-    assert k3_elliptic_genus_coeff(1, -1) == 108
+    assert k3_elliptic_genus_coeff(1, 0) == 108
+    assert k3_elliptic_genus_coeff(1, 1) == -64
+    assert k3_elliptic_genus_coeff(1, -1) == -64
 
 
 def test_borcherds_product_has_64_leading_coefficient():
@@ -201,6 +206,223 @@ def test_chain_level_blocks_contain_all_four_licensing_tags():
 
 
 # ---------------------------------------------------------------------------
+# Item 20: operator, Borcherds root product, and Hall/chiral square
+# ---------------------------------------------------------------------------
+
+
+def test_borcherds_root_product_profile_is_not_scalar_reciprocal():
+    profile = borcherds_root_product_profile()
+    assert profile["form"] == "Delta_5"
+    assert profile["lattice"] == "Lambda^{2,1}_{II}"
+    assert "prod_{alpha in L_+}" in profile["formula"]
+    assert "c(-alpha^2/2)" in profile["formula"]
+    assert profile["weight"] == Fraction(5)
+    assert "Delta_5^{-2}" not in profile["formula"]
+
+
+def test_k3_borcherds_operator_profile_places_operator_in_cyclic_hochschild():
+    profile = k3_borcherds_operator_profile()
+    assert profile["claim_status"] == "Conditional"
+    assert profile["operator"] == "mathfrak D_{K3 x E}"
+    assert profile["operator_membership"] == "mathfrak D_X in End_ChirHoch(H_X)"
+    assert "P1 datum p_1" in profile["conditional_on"]
+    assert "weight-completed cyclic chiral Hochschild ambient" in profile["conditional_on"]
+    assert "protected Pfaffian orientation" in profile["conditional_on"]
+    assert "finite Hall gates" in profile["conditional_on"]
+    assert "PBW/no-extra-root effectiveness" in profile["conditional_on"]
+    assert "CC^{ch,cyc}_bullet" in profile["complex"]
+    assert "ChirHoch^bullet" in profile["complex"]
+    assert "H^0(Lambda^{2,1}_{II}" in profile["pfaffian_section"]
+    assert profile["automorphic_identity"] == (
+        "iota_aut(Pf_prot(mathfrak D_X)) = Delta_5"
+    )
+    assert profile["chain_identity"] == "Pf_prot(mathfrak D_X) = Delta_5"
+    assert profile["identity_stage"] == "chain-level operator identity"
+    assert profile["operator_class_enters_as_hypothesis"] is True
+    assert profile["cyclic_trace_not_scalar_character"] is True
+    assert profile["unconditional_operator_constructed_in_vol2"] is False
+    assert profile["finite_window_product_exponents"] == (
+        "sdim P^{Pi,+}_{R,alpha} = c(-alpha^2/2)"
+    )
+    assert any("pro-conilpotent" in r for r in profile["scope_residual"])
+    assert profile["scalar_shadow"].endswith("Delta_5^{-2}")
+    assert set(profile["licensing_tags"]) == {"alpha", "beta", "gamma", "epsilon"}
+
+
+def test_k3_borcherds_operator_profile_rejects_scalar_promotion():
+    profile = k3_borcherds_operator_profile()
+    assert "scalar shadow forgets" in profile["not_sufficient"]
+    assert "Hall product" in profile["not_sufficient"]
+    assert profile["chain_identity"] != profile["scalar_shadow"]
+
+
+def test_k3_borcherds_hall_chiral_square_has_both_paths():
+    square = k3_borcherds_hall_chiral_square()
+    assert square["top_left"] == "D^b Coh(K3) with (-) boxtimes O_E -> D^b Coh(K3 x E)"
+    assert square["top_right"] == "g_{Delta_5}-Mod"
+    assert square["bottom_left"] == "Z_der^ch(A_X)"
+    assert square["bottom_right"] == "SC^{ch,top}-Alg"
+    assert square["hall_chain"] == "CoHA(K3) -> D_Hall(K3) -> g_{Delta_5}"
+    assert square["intertwiner"] == "I_Hall: CoHA(K3) -> g_{Delta_5}"
+    assert "(-) boxtimes O_E" in square["chiral_chain"]
+    assert "D^b Coh(K3 x E)" in square["chiral_chain"]
+    assert "PhiFA_3" in square["chiral_chain"]
+    assert "E_3-FactAlg(K3 x E)" in square["chiral_chain"]
+    assert "SpCh_{E,C}" in square["chiral_chain"]
+    assert "PhiFA" in square["chiral_chain"]
+    assert "SpCh" in square["chiral_chain"]
+    assert "Z_der^ch" in square["chiral_chain"]
+    assert square["status"] == "conditional_operator_square"
+
+
+def test_k3_borcherds_pfaffian_square_matches_pdf_shape():
+    square = k3_borcherds_hall_chiral_square()
+    assert square["operator_square_top_left"] == "ChirHoch^bullet(A_X)"
+    assert square["operator_square_top_right"] == "H^0(L^5)"
+    assert square["operator_square_bottom_left"] == "g_{Delta_5}"
+    assert square["operator_square_bottom_right"] == "C Delta_5"
+    assert square["pfaffian_square_commutativity"] == (
+        "Borcherds o Pf_prot = den o I_Hall"
+    )
+
+
+def test_k3_borcherds_square_requires_four_comparison_blocks():
+    square = k3_borcherds_hall_chiral_square()
+    assert square["finite_gate_system"] == (
+        "rad_Hall_N / rad_N = 0 for every finite N",
+        "D_Hall^fin exists",
+        "Borch o Hall is height-compatible",
+        "Schur(T[A1,Sigma_{0,24}]) -> Z_der^ch is SC^{ch,top}-trace compatible",
+    )
+    assert square["requires"] == (
+        "reduced compact Hall source",
+        "finite radical-quotient Hall-Drinfeld doubles",
+        "height-compatible Hall-Borcherds recognition",
+        "SC^{ch,top} trace compatibility",
+    )
+    assert square["without_finite_gates"] == "shadow_comparison_not_object_equivalence"
+
+
+def test_k3_class_s_closure_is_gated_not_automatic():
+    profile = k3_class_s_closure_gate_profile()
+    assert profile["source"] == (
+        "Schur(T[A1, Sigma_{0,24}]) with SC^{ch,top} realisation"
+    )
+    assert profile["target"] == "H_{Delta_5}"
+    assert profile["false_equivalence"] == (
+        "class-S A1 on Sigma_{0,24} = H_{Delta_5}"
+    )
+    assert profile["without_gates"] == "shadow_comparison_not_object_equivalence"
+    assert profile["theorem_gates"] == (
+        "rad_Hall_N / rad_N = 0 for every finite N",
+        "D_Hall^fin exists",
+        "Borch o Hall is height-compatible",
+        "Schur -> Z_der^ch is compatible with the SC^{ch,top} trace",
+    )
+    assert profile["comparison_blocks"] == (
+        "reduced compact Hall source",
+        "finite radical-quotient Hall-Drinfeld doubles",
+        "finite Hall-Borcherds recognition compatible in height",
+        "SC^{ch,top} trace compatibility",
+    )
+
+
+def test_k3_base_intro_scopes_class_s_landing():
+    root = Path(__file__).resolve().parents[2]
+    source = (root / "chapters/theory/introduction.tex").read_text()
+    flat = " ".join(source.split())
+
+    assert "The K3 base point uses the class-$\\mathcal S$ \\(A_1\\) Schur-sector candidate" in flat
+    assert "The \\(\\SCchtop\\) landing statement is conditional" in flat
+    assert "after Hall--Borcherds source recognition and the Schur comparison theorem" in flat
+    assert "The $\\SCchtop$ construction lands on class-$\\mathcal S$" not in source
+
+
+def test_k3_base_intro_uses_chiral_hochschild_window_not_single_degree():
+    root = Path(__file__).resolve().parents[2]
+    source = (root / "chapters/theory/introduction.tex").read_text()
+    flat = " ".join(source.split())
+
+    assert "chiral Hochschild support in degrees \\(\\{0,1,2\\}\\)" in flat
+    assert "top allowed chiral degree \\(2=\\dim_\\C(K3)\\)" in flat
+    assert "Hochschild concentration in degree $2 = \\dim_\\C(K3)$" not in source
+
+
+def test_item20_manuscript_theorem_source_guard():
+    root = Path(__file__).resolve().parents[2]
+    source = (root / "chapters/connections/3d_gravity.tex").read_text()
+    start = source.index("\\begin{theorem}[K3$\\times E$ protected-Pfaffian operator square;")
+    end = source.index("\\end{theorem}", start)
+    block = source[start:end]
+    flat = " ".join(block.split())
+
+    assert "\\label{thm:k3-borcherds-operator-square}" in source
+    assert "\\ClaimStatusConditional" in block
+    assert "\\hypAmbientWtCpl" in block
+    assert "\\effPfaffOrient+\\effPBWnoExtra" in block
+    assert "Assume a P1 datum" in block
+    assert "\\mathfrak p_1" in block
+    assert "cyclic-trace condition" in flat
+    assert "not a scalar-character statement" in flat
+    assert "\\label{eq:k3-borcherds-operator-pfaffian}" in source
+    assert "CC^{\\mathrm{ch,cyc}}_{\\bullet}" in source
+    assert "\\mathfrak D_X" in source
+    assert "\\operatorname{End}_{\\mathrm{ChirHoch}}(H_X)" in source
+    assert "\\mathrm{sdim}\\,P^{\\Pi,+}_{R,\\alpha}=c(-\\alpha^2/2)" in block
+    assert "(-)\\boxtimes\\mathcal O_E" in block
+    assert "D^{b}\\mathrm{Coh}(X)" in block
+    assert "\\PhiFA_{3}" in block
+    assert "E_{3}\\text{-}\\mathrm{FactAlg}(X)" in block
+    assert "\\SpCh_{E,C}" in block
+    assert "\\Zderch(A_X)" in block
+    assert "\\ChirHoch^\\bullet(A_X)" in block
+    assert "I_{\\mathrm{Hall}}" in source
+    assert "\\CoHA(K3)" in source
+    assert "\\Zderch\\!\\left({\\SpCh}\\PhiFA(K3)\\right)" not in block
+    assert "\\ChirHoch^\\bullet\\!\\left({\\SpCh}\\PhiFA(K3)\\right)" not in block
+    assert "\\operatorname{Schur}" in source
+    assert "D^{\\mathrm{fin}}_{\\mathrm{Hall}}" in source
+    assert "height-compatible" in source
+    assert "shadow comparison, not an object equivalence" in source
+    assert "The P1 operator package is a closed class" not in block
+    assert "equivalently the cyclic trace of a Dirac--Igusa operator" not in block
+
+
+def test_main_k3_bridge_uses_total_space_chiral_chain():
+    """The high-visibility K3 bridge must not bypass K3 x E."""
+    root = Path(__file__).resolve().parents[2]
+    source = (root / "main.tex").read_text()
+    start = source.index(r"The K3$\times E$ bridge has one proved scalar shadow")
+    end = source.index(r"Conditional on that comparison", start)
+    block = source[start:end]
+    flat = " ".join(block.split())
+
+    required = (
+        "still conditional on these finite Hall and chiral-comparison gates",
+        "Dirac--Igusa protected-Pfaffian datum",
+        r"\operatorname{End}_{\mathrm{ChirHoch}}\!\left(H_{K3\times E}\right)",
+        r"(-)\boxtimes\mathcal O_E",
+        r"D^{b}\mathrm{Coh}(K3\times E)",
+        r"\PhiFA_{3}",
+        r"E_3\text{-}\mathrm{FactAlg}(K3\times E)",
+        r"\SpCh_{E,C}",
+        r"\Zderch(A_X)",
+        r"A_X=\SpCh_{E,C}\PhiFA_3(D^b\mathrm{Coh}(K3\times E))",
+    )
+    for needle in required:
+        assert " ".join(needle.split()) in flat
+
+    retired = (
+        "Its operator form is the Dirac--Igusa protected-Pfaffian element",
+        r"D^{b}\mathrm{Coh}(K3)\xrightarrow{\PhiFA}",
+        r"E_d\text{-}\mathrm{FactAlg}\xrightarrow{\SpCh}",
+        r"\mathrm{ChirAlg}_C\xrightarrow{\Zderch}\SCchtop\text{-}\mathrm{Alg}",
+    )
+    for needle in retired:
+        assert needle not in flat
+
+
+# ---------------------------------------------------------------------------
 # Cross-volume AP5: super-trace vs Berezinian (Vol III convention check)
 # ---------------------------------------------------------------------------
 
@@ -268,11 +490,10 @@ def test_attack_heal_minus_sign_OP_branch_is_not_orientation_character():
     # prop:ch5-half-hilbert-orbit-size, not from the OP minus).
     half_hilbert_orbit_size = 2 ** 12
     assert half_hilbert_orbit_size == 4096
-    # These are two distinct 4096s with different origins; conflation is
-    # the attack vector.
+    # These are two distinct 4096s with different origins.
 
 
-def test_attack_heal_class_M_completion_is_load_bearing():
+def test_class_M_completion_is_load_bearing():
     """The chain-level identity REQUIRES weight-completed (class M) ambient.
 
     In Ch(Vect) the inverse limit lim_R Bar(C_{X,R}) does NOT exist

@@ -22,13 +22,13 @@ the Maurer--Cartan equation through degree~$r$, and the
 extension from~$E_\cA(r)$ to~$E_\cA(r{+}1)$ is
 controlled by the obstruction class
 $o_{r+1}(\cA) \in H^2(\cA^{\mathrm{sh}}_{r+1,0})$.
-The fundamental dichotomy is:
-$r_{\max}(\cA) < \infty$ if and only if the shadow obstruction tower
-stabilizes at some finite degree; equivalently, if and only
-if the inverse system $\{H^2(\cA^{\mathrm{sh}}_{r,0})\}$
-eventually vanishes. The mechanism is the
-Mittag--Leffler condition on the inverse system
-of obstruction groups.
+There are two depths.  The obstruction depth is finite exactly when
+the \(H^2\)-obstruction classes vanish from some degree onward.  The
+support depth is finite exactly when the bar-intrinsic MC packet has no
+\(H^1\)-lift coordinate above some degree.  Finite reconstruction of
+\(\Theta_\cA\) uses the support depth.  Obstruction depth alone only
+says that later extensions are unobstructed; it does not choose a point
+of the torsor of lifts.
 
 The dichotomy theorem is then instantiated for each shadow
 archetype. For each of the four classes (Gaussian~(G),
@@ -230,158 +230,136 @@ be absorbed by a new degree-$(r{+}1)$ correction.
 \index{dichotomy theorem|textbf}
 \index{Mittag--Leffler condition!dichotomy theorem}
 
-\begin{theorem}[Shadow depth dichotomy]
+\begin{theorem}[Obstruction depth and support depth of the shadow tower;
+\(\ClaimStatusConditional\); licensing tags \(\gamma+\epsilon\)]
 % label removed: thm:shadow-depth-dichotomy
 \index{shadow depth!dichotomy}
 Let $\cA$ be a modular Koszul chiral algebra. Let
 \begin{equation}% label removed: eq:shadow-depth-definition-recall
-r_{\max}(\cA) :=
+d_{\mathrm{obs}}(\cA) :=
 \inf\{r \geq 2 : o_{r'+1}(\cA) = 0
 \;\text{for all}\; r' \geq r\}
 \;\in\; \{2, 3, 4, \ldots\} \cup \{\infty\},
 \end{equation}
-where the infimum of the empty set is $\infty$.
-Then:
-\begin{equation}% label removed: eq:dichotomy-equivalence
-\boxed{
-r_{\max}(\cA) < \infty
-\quad\Longleftrightarrow\quad
-\Theta_\cA^{\leq r_{\max}} = \Theta_\cA.
-}
-\end{equation}
-More precisely:
+where the infimum of the empty set is \(\infty\).  In the
+bar-intrinsic gauge component define the support depth
+\[
+r^\Theta_{\max}(\cA):=
+\inf\{r\ge2:\Theta_{\cA,n}=0\ \text{for all}\ n>r\},
+\]
+where \(\Theta_{\cA,n}\) is the degree-\(n\) component of the MC
+element, equivalently the corresponding component of the shadow
+reconstruction packet.  Then
+\[
+d_{\mathrm{obs}}(\cA)\le r^\Theta_{\max}(\cA),
+\]
+and finite reconstruction is governed by \(r^\Theta_{\max}\), not by
+\(d_{\mathrm{obs}}\) alone:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item \emph{Finite depth.}
-If $r_{\max} < \infty$, then
-$\Theta_\cA^{\leq r} = \Theta_\cA^{\leq r_{\max}}$
-for all $r \geq r_{\max}$. The extension tower
-stabilizes: $E_\cA(r) \cong E_\cA(r_{\max})$ for all
-$r \geq r_{\max}$.
+\item \emph{Finite support depth.}
+If \(r^\Theta_{\max}<\infty\), then
+\[
+\Theta_\cA^{\leq r}=\Theta_\cA^{\leq r^\Theta_{\max}}=\Theta_\cA
+\qquad (r\ge r^\Theta_{\max}).
+\]
+The bar-intrinsic branch \(E^\Theta_\cA(r)\) stabilizes for
+\(r\ge r^\Theta_{\max}\).
 
-\item \emph{Infinite depth.}
-If $r_{\max} = \infty$, then
+\item \emph{Obstruction depth.}
+If \(d_{\mathrm{obs}}<\infty\), then no new \(H^2\)-obstruction occurs
+above degree \(d_{\mathrm{obs}}\).  The lifts above that degree may
+still vary by the \(H^1(J^n(\cA),d_2)\)-torsors.  Thus
+\(d_{\mathrm{obs}}<\infty\) implies finite reconstruction only under
+the extra condition \(\Theta_{\cA,n}=0\) for \(n>d_{\mathrm{obs}}\), or
+equivalently all higher lift coordinates vanish in the chosen gauge
+slice.
+
+\item \emph{Infinite support depth.}
+If \(r^\Theta_{\max} = \infty\), then
 $\Theta_\cA^{\leq r} \neq \Theta_\cA^{\leq r-1}$
 for infinitely many values of~$r$. The extension
-tower does not stabilize: the inverse limit
+branch does not stabilize: the inverse limit
 $\Theta_\cA = \varprojlim_r \Theta_\cA^{\leq r}$
 is the limit of a genuinely infinite tower.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-\emph{Part~(i): finite depth implies stabilization.}
-Suppose $o_{r'+1}(\cA) = 0$ for all $r' \geq r_{\max}$.
-Proof: by induction that $\Theta_\cA^{\leq r} =
-\Theta_\cA^{\leq r_{\max}}$ for all $r \geq r_{\max}$.
+The obstruction class \(o_{r+1}\) is the image of a truncation in
+\(H^2(J^{r+1}(\cA),d_2)\) under the connecting morphism of the
+obstruction-extension sequence.  If \(\Theta_{\cA,n}=0\) for every
+\(n>r\), then the MC equation has no nonzero residual component above
+degree \(r\), so all later obstruction classes vanish.  This gives
+\(d_{\mathrm{obs}}\le r^\Theta_{\max}\).
 
-The base case $r = r_{\max}$ is tautological. For
-the inductive step, assume
-$\Theta_\cA^{\leq r} = \Theta_\cA^{\leq r_{\max}}$.
-The obstruction to extending to degree~$r{+}1$ is
-\begin{align*}
-o_{r+1}(\cA)
-&= \bigl[
-\bigl(D_\cA \Theta_\cA^{\leq r}
-+ \tfrac{1}{2}
-[\Theta_\cA^{\leq r}, \Theta_\cA^{\leq r}]
-\bigr)_{r+1}
-\bigr] \\
-&\in H^2(J^{r+1}(\cA), d_2).
-\end{align*}
-Since $\Theta_\cA^{\leq r} = \Theta_\cA^{\leq r_{\max}}$
-and the full $\Theta_\cA$ satisfies the MC equation
-$D_\cA \Theta_\cA +
-\frac{1}{2}[\Theta_\cA, \Theta_\cA] = 0$,
-the projection onto degree~$r{+}1$ yields
-\[
-\bigl(D_\cA \Theta_\cA^{\leq r}
-+ \tfrac{1}{2}
-[\Theta_\cA^{\leq r}, \Theta_\cA^{\leq r}]
-\bigr)_{r+1}
-= -\bigl(D_\cA \Theta_\cA^{> r}
-+ \text{cross terms}\bigr)_{r+1},
-\]
-where $\Theta_\cA^{> r} = \Theta_\cA -
-\Theta_\cA^{\leq r}$. By the hypothesis
-$o_{r'+1} = 0$ for all $r' \geq r_{\max}$, the
-component $\Theta_{r+1} = 0$ at every level above
-$r_{\max}$: the class
-$o_{r+1} \in H^2(J^{r+1}(\cA), d_2)$
-vanishes, the unique lift with trivial degree-$(r{+}1)$
-component is the one that realizes $\Theta_\cA$, and
-no correction is needed. Hence
-$\Theta_\cA^{\leq r+1} = \Theta_\cA^{\leq r} =
-\Theta_\cA^{\leq r_{\max}}$, completing the induction.
+The finite-support statement is the definition of
+\(r^\Theta_{\max}\) together with completeness and separatedness of the
+weight filtration: a filtered MC element equals the inverse limit of
+its finite projections, and the projections are constant exactly after
+the last nonzero homogeneous component.  This proves
+\(\Theta_\cA^{\le r}=\Theta_\cA\) for
+\(r\ge r^\Theta_{\max}\) and stabilization of the selected
+bar-intrinsic branch.
 
-\medskip
-\emph{Part~(ii): infinite depth implies non-stabilization.}
-Suppose $r_{\max} = \infty$. Then there exist
-infinitely many values of~$r$ for which
-$o_{r+1}(\cA) \neq 0$. At each such~$r$, the MC
-equation at degree~$r{+}1$ requires a nontrivial
-correction $\Theta_{r+1} \neq 0$, so
-$\Theta_\cA^{\leq r+1} \neq \Theta_\cA^{\leq r}$.
-The extension tower does not stabilize.
+If \(d_{\mathrm{obs}}<\infty\), the obstruction-extension sequence says
+only that every later extension is unobstructed.  The fiber of
+\(E_\cA(n)\to E_\cA(n-1)\) over a liftable point is a torsor under
+\(H^1(J^n(\cA),d_2)\).  A nonzero torsor coordinate is a nonzero
+degree-\(n\) component of the compatible MC packet.  Hence obstruction
+vanishing does not imply truncation unless the higher lift coordinates
+vanish.
 
-The inverse limit exists by
-Theorem~\ref{V1-thm:recursive-existence}: the bar-intrinsic
-construction $\Theta_\cA := D_\cA - d_0$ automatically
-satisfies the MC equation at all degrees, and its
-degree-$r$ projection equals $\Theta_\cA^{\leq r}$.
-The Mittag--Leffler condition is satisfied because each
-transition map $\pi_{r+1,r}$ is surjective (every
-$r$-truncation extends to an $(r{+}1)$-truncation,
-since $\Theta_\cA$ provides a canonical lift). Hence
-$\varprojlim_r \Theta_\cA^{\leq r} = \Theta_\cA$
-and $\varprojlim^1 = 0$.
+Finally, \(r^\Theta_{\max}=\infty\) means that infinitely many
+homogeneous components of the bar-intrinsic MC element are nonzero, so
+the finite projections are not eventually constant.  The inverse limit
+is the completed MC element by the bar-intrinsic construction
+(Theorem~\ref{V1-thm:recursive-existence}) and the branch-level
+Mittag--Leffler statement above.
 \end{proof}
 
-\begin{corollary}[Mittag--Leffler for the shadow obstruction tower]
+\begin{corollary}[Mittag--Leffler for the bar-intrinsic shadow branch;
+\(\ClaimStatusConditional\); licensing tags \(\gamma+\epsilon\)]
 % label removed: cor:mittag-leffler-shadow-tower
 \index{Mittag--Leffler condition!shadow tower}
-The inverse system
-$\{\Theta_\cA^{\leq r}\}_{r \geq 2}$
-satisfies the Mittag--Leffler condition. In particular:
+Let \(E^\Theta_\cA(r)\subset E_\cA(r)\) be the formal branch containing
+the projection \([\Theta_\cA^{\le r}]\) of the bar-intrinsic MC element,
+with transition maps induced from \(E_\cA(r+1)\to E_\cA(r)\).  The
+inverse system \(\{E^\Theta_\cA(r)\}_{r\ge2}\) satisfies the
+Mittag--Leffler condition. In particular:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $\varprojlim^1_r E_\cA(r) = 0$;
+\item $\varprojlim^1_r E^\Theta_\cA(r) = 0$;
 \item the natural map
- $\MC(\gAmod) \to \varprojlim_r \MC(\gAmod / F^{r+1})$
- is surjective;
-\item the full MC element $\Theta_\cA$ is uniquely determined
- by its finite-order projections, up to gauge equivalence
- within each $E_\cA(r)$.
+ \[
+ \MC(\widehat{\gAmod})_{\Theta}\big/\textup{gauge}
+ \longrightarrow
+ \varprojlim_r E^\Theta_\cA(r)
+ \]
+ is a bijection onto the compatible bar-intrinsic branch;
+\item the gauge class of \(\Theta_\cA\) is uniquely determined by its
+ compatible finite-order projections in this branch.
 \end{enumerate}
+No surjectivity statement is made for arbitrary components of
+\(E_\cA(r)\); a different component may carry a non-vanishing
+obstruction class at the next stage.
 \end{corollary}
 
 \begin{proof}
-For each $r$, the transition map
-$\pi_{r+1,r} \colon E_\cA(r{+}1) \to E_\cA(r)$
-is surjective. The bar-intrinsic element $\Theta_\cA$
-provides a \emph{canonical} lift at every level: the
-element $\Theta_\cA^{\leq r+1}$ is a lift of
-$\Theta_\cA^{\leq r}$, not of an arbitrary
-$\theta \in E_\cA(r)$. Surjectivity for general
-$\theta$ follows because the obstruction
-$o_{r+1}(\theta) \in H^2(J^{r+1}(\cA), d_2)$ vanishes
-for $\theta = \Theta_\cA^{\leq r}$ (by the bar-intrinsic
-construction), and the obstruction map is a torsor for
-$H^1(J^{r+1}(\cA), d_2)$
-(Proposition~\ref{V1-prop:obstruction-extension-sequence}).
-So surjectivity holds because the $H^1$-torsor structure
-allows gauge-relating any $\theta$ to
-$\Theta_\cA^{\leq r}$ within the fiber, and the
-canonical lift $\Theta_\cA^{\leq r+1}$ then provides
-the required preimage.
+For each \(r\), the bar-intrinsic projection
+\([\Theta_\cA^{\le r+1}]\) maps to
+\([\Theta_\cA^{\le r}]\).  Hence the transition maps on the selected
+branch \(E^\Theta_\cA(r+1)\to E^\Theta_\cA(r)\) are surjective onto
+that branch.  This is the Mittag--Leffler condition for the countable
+inverse system \(E^\Theta_\cA(\bullet)\), giving
+\(\varprojlim^1 E^\Theta_\cA(r)=0\).
 
-Surjectivity of transition maps is the Mittag--Leffler
-condition for countable inverse systems.
-Part~(i) follows from the Mittag--Leffler lemma
-for inverse systems of sets.
-Part~(ii) follows from (i) and the short exact
-sequence relating $\varprojlim$ and $\varprojlim^1$.
-Part~(iii) follows from the fact that the gauge group
-acts transitively on fibers of $\pi_{r+1,r}$
-(Proposition~\ref{V1-prop:obstruction-extension-sequence}).
+Completeness and separatedness of \(F^\bullet\gAmod\) identify an MC
+element in the completed dg Lie algebra with a compatible system of
+finite projections.  Gauge compatibility is taken inside the same
+bar-intrinsic branch.  Therefore the displayed map is bijective onto
+\(\varprojlim_r E^\Theta_\cA(r)\), and \([\Theta_\cA]\) is determined
+by its compatible finite projections.  The obstruction-extension
+sequence still controls other components, but it does not force those
+components to lift.
 \end{proof}
 
 % ================================================================
@@ -392,33 +370,37 @@ acts transitively on fibers of $\pi_{r+1,r}$
 % label removed: subsec:shadow-depth-invariant
 \index{shadow depth!reconstruction invariant}
 
-The shadow depth $r_{\max}(\cA)$ measures the complexity
-of the holographic reconstruction problem: how many orders
-of the OPE data are needed to determine the full
-MC element $\Theta_\cA$. It is an invariant of the
-modular Koszul chiral algebra, not of a chosen presentation.
+The support shadow depth \(r^\Theta_{\max}(\cA)\) measures the
+complexity of the holographic reconstruction problem: how many
+homogeneous orders of the bar-intrinsic packet are needed to determine
+the MC gauge class \([\Theta_\cA]\).  The obstruction depth
+\(d_{\mathrm{obs}}(\cA)\) measures only eventual \(H^2\)-vanishing.
+The two agree on the canonical standard-family rows below, but they
+are distinct invariants in a general filtered MC moduli problem.
 
-\begin{definition}[Shadow depth]
+\begin{definition}[Support shadow depth]
 % label removed: def:shadow-depth-holographic
 \index{shadow depth|textbf}
 The \emph{shadow depth} of a modular Koszul chiral
-algebra~$\cA$ is $r_{\max}(\cA)$ as defined
-in~\eqref{V1-eq:shadow-depth-definition-recall}.
+algebra~$\cA$ is the support depth \(r^\Theta_{\max}(\cA)\) of the
+bar-intrinsic MC packet.  Equivalently, it is the least \(r\) for
+which all homogeneous components \(\Theta_{\cA,n}\) vanish for
+\(n>r\); if no such \(r\) exists, the depth is \(\infty\).
 The four \emph{shadow classes} are:
 \begin{center}
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{clcl}
 \toprule
-Class & Name & $r_{\max}$ & Defining property \\
+Class & Name & $r^\Theta_{\max}$ & Defining property \\
 \midrule
 \textbf{G} & Gaussian & $2$
- & OPE purely quadratic; $m_n = 0$ for $n \geq 3$ \\
+ & bar-intrinsic packet has support only in degree \(2\) \\
 \textbf{L} & Lie/tree & $3$
- & cubic shadow from Lie bracket; $o_4 = 0$ by Jacobi \\
+ & support ends at the Lie cubic; Jacobi kills the next obstruction \\
 \textbf{C} & Contact/quartic & $4$
- & quartic contact nontrivial; $o_5 = 0$ by rigidity \\
+ & support ends at the contact quartic in the canonical gauge slice \\
 \textbf{M} & Mixed/infinite & $\infty$
- & all obstruction levels contribute \\
+ & infinitely many packet components occur \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -428,13 +410,13 @@ Class & Name & $r_{\max}$ & Defining property \\
 % label removed: rem:depth-vs-koszulness
 \index{shadow depth!versus Koszulness}
 Shadow depth does \emph{not} characterize Koszulness.
-Classes~$\mathbf{G}$ (Heisenberg, $r_{\max} = 2$),
-$\mathbf{L}$ (affine Kac--Moody, $r_{\max} = 3$), and
-$\mathbf{C}$ ($\beta\gamma$ system, $r_{\max} = 4$) are
+Classes~$\mathbf{G}$ (Heisenberg, \(r^\Theta_{\max} = 2\)),
+$\mathbf{L}$ (affine Kac--Moody, \(r^\Theta_{\max} = 3\)), and
+$\mathbf{C}$ ($\beta\gamma$ system, \(r^\Theta_{\max} = 4\)) are
 chirally Koszul: bar cohomology is concentrated and
 $m_k = 0$ for $k \ge 3$ on cohomology
 (Proposition~\ref{V1-prop:standard-examples-modular-koszul}).
-Class~$\mathbf{M}$ (Virasoro, $r_{\max} = \infty$) is
+Class~$\mathbf{M}$ (Virasoro, \(r^\Theta_{\max} = \infty\)) is
 chirally Koszul (PBW spectral sequence concentrates) but has
 non-formal Swiss-cheese structure: the fourth-order pole forces
 nonvanishing transferred operations $m_k^{\mathrm{SC}} \neq 0$
@@ -454,19 +436,22 @@ within the standard families.
 \index{shadow archetype!Gaussian|textbf}
 \index{Heisenberg algebra!shadow depth}
 
-\begin{theorem}[$r_{\max}(\mathcal{H}_k) = 2$]
+\begin{theorem}[$r^\Theta_{\max}(\mathcal{H}_k) = 2$]
 % label removed: thm:gaussian-rmax-two
 \index{shadow depth!Heisenberg}
 For the Heisenberg algebra $\mathcal{H}_k$ at any nonzero
-level $k \neq 0$, the shadow depth is $r_{\max} = 2$.
+level $k \neq 0$, the support shadow depth is
+\(r^\Theta_{\max}=2\).
 Every obstruction class vanishes:
 \begin{equation}% label removed: eq:gaussian-all-obstructions-vanish
 o_{r+1}(\mathcal{H}_k) = 0
 \qquad \text{for all } r \geq 2.
 \end{equation}
-The shadow obstruction tower stabilizes immediately:
+The bar-intrinsic packet stabilizes immediately:
 $\Theta_{\mathcal{H}_k}^{\leq 2} = \Theta_{\mathcal{H}_k}
-= \kappa\,\eta \otimes \Lambda$ with $\kappaChHodge(\mathcal{H}_k) = k$.
+= \kappaChHodge(\mathcal{H}_k)\,\eta \otimes \Lambda$ with
+\(\kappaChHodge(\mathcal{H}_k) = k\).  All higher
+\(H^1\)-lift coordinates vanish in the canonical Gaussian gauge slice.
 \end{theorem}
 
 \begin{proof}
@@ -597,19 +582,23 @@ m_n^{\mathrm{tr}} = 0 \;\text{for } n \geq 3.
 \index{shadow archetype!Lie/tree|textbf}
 \index{affine Kac--Moody!shadow depth}
 
-\begin{theorem}[$r_{\max}(\widehat{\mathfrak{g}}_k) = 3$]
+\begin{theorem}[$r^\Theta_{\max}(\widehat{\mathfrak{g}}_k) = 3$]
 % label removed: thm:lie-rmax-three
 \index{shadow depth!affine Kac--Moody}
 For the affine Kac--Moody algebra
 $\widehat{\mathfrak{g}}_k$ at generic level $k$, the
-shadow depth is $r_{\max} = 3$. The obstruction classes
-satisfy:
+support shadow depth is \(r^\Theta_{\max}=3\). The obstruction
+classes satisfy:
 \begin{equation}% label removed: eq:lie-obstruction-pattern
 o_3(\widehat{\mathfrak{g}}_k) \neq 0,
 \qquad
 o_{r+1}(\widehat{\mathfrak{g}}_k) = 0
 \;\;\text{for all } r \geq 3.
 \end{equation}
+In the canonical Lie/tree gauge slice, the higher
+\(H^1(J^n(\widehat{\mathfrak g}_k),d_2)\)-lift coordinates vanish for
+\(n>3\).  Thus the support packet, not merely the \(H^2\)-obstruction
+profile, terminates at degree~\(3\).
 \end{theorem}
 
 \begin{proof}
@@ -778,7 +767,8 @@ condition for the Lie algebra (the Koszul resolution of
 $\fg$ is formal).
 
 Therefore $o_{r+1} = 0$ for all $r \geq 3$, and
-$r_{\max}(\widehat{\fg}_k) = 3$.
+the canonical Lie/tree support packet has
+\(r^\Theta_{\max}(\widehat{\fg}_k) = 3\).
 \end{proof}
 
 \begin{remark}[The Jacobi identity as a termination criterion]
@@ -804,11 +794,11 @@ no higher obstructions to formality.
 \index{shadow archetype!contact/quartic|textbf}
 \index{beta-gamma system@$\beta\gamma$ system!shadow depth}
 
-\begin{theorem}[$r_{\max}(\beta\gamma) = 4$]
+\begin{theorem}[$r^\Theta_{\max}(\beta\gamma) = 4$]
 % label removed: thm:contact-rmax-four
 \index{shadow depth!beta-gamma@$\beta\gamma$}
-For the $\beta\gamma$ system, the shadow depth is
-$r_{\max} = 4$. The obstruction classes satisfy:
+For the $\beta\gamma$ system, the support shadow depth is
+\(r^\Theta_{\max}=4\). The obstruction classes satisfy:
 \begin{equation}% label removed: eq:contact-obstruction-pattern
 o_3(\beta\gamma) \neq 0,
 \qquad
@@ -817,6 +807,8 @@ o_4(\beta\gamma) \neq 0,
 o_{r+1}(\beta\gamma) = 0
 \;\;\text{for all } r \geq 4.
 \end{equation}
+In the canonical contact gauge slice, all higher lift coordinates
+\(\lambda_n\in H^1(J^n(\beta\gamma),d_2)\) vanish for \(n>4\).
 \end{theorem}
 
 \begin{proof}
@@ -934,7 +926,7 @@ for all $r \geq 4$: the only source of higher obstructions
 would be graph-sum compositions, but with $\Theta_3' = 0$
 (in the chosen gauge) and $m_n^{\mathrm{tr}} = 0$ for
 $n \geq 4$, no nontrivial graphs exist. Hence
-$r_{\max}(\beta\gamma) = 4$.
+\(r^\Theta_{\max}(\beta\gamma) = 4\).
 \end{proof}
 
 \begin{remark}[The $\beta\gamma$ system as the contact atom]
@@ -967,12 +959,12 @@ Virasoro OPE with the Gram matrix computation
 (Proposition~\ref{V1-prop:gram-wt4}) and the graph-sum
 formula for the obstruction.
 
-\begin{theorem}[$r_{\max}(\mathrm{Vir}_c) = \infty$]
+\begin{theorem}[$r^\Theta_{\max}(\mathrm{Vir}_c) = \infty$]
 % label removed: thm:virasoro-rmax-infinity
 \index{shadow depth!Virasoro}
 For the Virasoro algebra $\mathrm{Vir}_c$ at generic
-central charge $c \neq 0, -22/5$, the shadow depth is
-$r_{\max} = \infty$. The quintic obstruction is
+central charge $c \neq 0, -22/5$, the support shadow depth is
+\(r^\Theta_{\max} = \infty\). The quintic obstruction is
 \begin{equation}% label removed: eq:virasoro-quintic-nonzero
 o_5(\mathrm{Vir}_c) =
 \frac{480}{c^2(5c+22)}\,x^5 \neq 0,
@@ -1190,7 +1182,7 @@ $r \geq 5$, the cubic-source contribution is nonzero at all higher
 degrees. The passage from this persistent source to exact nonvanishing
 of every obstruction class uses the all-degree non-cancellation theorem
 of Volume~I, Theorem~\ref{V1-thm:virasoro-rmax-infinity}. Therefore
-$r_{\max}(\mathrm{Vir}_c)=\infty$.
+\(r^\Theta_{\max}(\mathrm{Vir}_c)=\infty\).
 \end{proof}
 
 \begin{remark}[The cubic vertex as permanent source]
@@ -1384,7 +1376,8 @@ has an information-theoretic interpretation. To specify the
 holographic reconstruction of $\cA$ through degree~$r$,
 one needs $\dim J^r$ real parameters on the primary line.
 For Gaussian algebras, $\dim J^r = 1$ for all $r$ (the
-single parameter $\kappa$ determines everything). For
+single parameter $\kappa$ determines the rank-one Gaussian shadow,
+not the full tensor-channel package). For
 Virasoro, each degree adds one primary-line parameter,
 so $N(r) = r - 1$ through degree~$r$.
 
@@ -1618,7 +1611,7 @@ sewing norm. This is the \emph{depth-zero resonance shadow}
 & \textbf{G} & \textbf{L} & \textbf{C} & \textbf{M} \\
 & (Gaussian) & (Lie/tree) & (Contact) & (Mixed) \\
 \midrule
-$r_{\max}$ & $2$ & $3$ & $4$ & $\infty$ \\
+$r^\Theta_{\max}$ & $2$ & $3$ & $4$ & $\infty$ \\
 Atom & $\mathcal{H}_k$ & $\widehat{\fg}_k$
  & $\beta\gamma$ & $\mathrm{Vir}_c$ \\
 $\Theta$ & $\kappa\,x^2$ & $+\,\mathfrak{C}\,x^3$
@@ -1647,12 +1640,15 @@ Growth & $O(1)$ & $O(1)$ & $O(1)$
 The operadic complexity theorem
 (Vol~I, Theorem~\ref*{V1-thm:operadic-complexity-detailed})
 states that
-$r_{\max}(\cA)$ equals the $A_\infty$-depth of~$\cA$:
+\(r^\Theta_{\max}(\cA)\) equals the support depth of the transferred
+\(A_\infty\)-structure of~\(\cA\):
 the minimal $n$ such that the transferred
 $A_\infty$-structure on $H^*(\barB(\cA))$ has
 $m_k^{\mathrm{tr}} = 0$ for all $k > n$. Equivalently,
-$r_{\max}$ equals the $L_\infty$-formality level of
-the modular deformation complex. The proof identifies the
+\(r^\Theta_{\max}\) is the last nonzero homogeneous component of the
+bar-intrinsic \(L_\infty\) deformation packet.  The obstruction depth
+\(d_{\mathrm{obs}}\) records only eventual \(H^2\)-vanishing and may
+be smaller. The proof identifies the
 genus-$0$ shadow graph sum with the homotopy transfer
 tree formula at all degrees. In the
 holographic language: the gravitational complexity of the
@@ -1674,7 +1670,7 @@ $N \geq 2$]
 \index{shadow depth!$\Walg_N$}
 For the principal $\Walg_N$-algebra at generic level, read in the
 generic completed ambient,
-$r_{\max}(\Walg_N) = \infty$ for all $N \geq 2$.
+\(r^\Theta_{\max}(\Walg_N) = \infty\) for all $N \geq 2$.
 The obstruction at degree~$5$ contains a nonzero local source from
 the coexistence of the gravitational cubic
 (from $T_{(1)}T = 2T$) and the quartic contact
@@ -1729,16 +1725,18 @@ k_r(\cA) := o_{r+1}(\cA) \in H^2(J^{r+1}(\cA), d_2).
 \end{equation}
 The shadow obstruction tower is
 \emph{$n$-truncated} if $k_r(\cA) = 0$ for all
-$r \geq n$, i.e., if $r_{\max}(\cA) \leq n$.
+$r \geq n$, i.e., if \(d_{\mathrm{obs}}(\cA)\le n\).
 \end{definition}
 
 \begin{proposition}[Structure of the Postnikov filtration]
 % label removed: prop:postnikov-filtration-structure
 \index{Postnikov filtration!structural properties}
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item \emph{Uniqueness.}
-The $k$-invariants $\{k_r(\cA)\}_{r \geq 2}$ determine
-$\Theta_\cA$ up to gauge equivalence.
+\item \emph{Obstruction profile.}
+The $k$-invariants $\{k_r(\cA)\}_{r \geq 2}$ determine the
+obstruction-depth profile \(d_{\mathrm{obs}}(\cA)\).  The MC gauge
+class \([\Theta_\cA]\) is determined only after adjoining the
+\(H^1\)-lift coordinates of the shadow reconstruction packet.
 
 \item \emph{Functoriality.}
 A quasi-isomorphism $\cA \xrightarrow{\sim} \cA'$ induces
@@ -1757,9 +1755,13 @@ finitely many strong generators.
 \end{proposition}
 
 \begin{proof}
-Part~(i): the extension tower
-$\{E_\cA(r)\}$ is a complete system of invariants
-(Corollary~\ref{V1-cor:mittag-leffler-shadow-tower}).
+Part~(i): by definition \(k_r=o_{r+1}\), so the sequence
+\(\{k_r\}\) is exactly the \(H^2\)-obstruction profile.  The
+obstruction-extension sequence shows that a vanishing \(k_r\) leaves an
+\(H^1(J^{r+1}(\cA),d_2)\)-torsor of lifts; therefore the full MC gauge
+class requires the lift coordinates.  The bar-intrinsic branch with
+those coordinates is the complete system of invariants by the
+branch-level Mittag--Leffler corollary above.
 Part~(ii):
 Theorem~\ref{V1-thm:shadow-homotopy-invariance}.
 Part~(iii):
@@ -1802,14 +1804,15 @@ The weight filtration on $\gAmod$ provides the
 Artinian stratification.
 \end{proof}
 
-The shadow depth $r_{\max}(\cA)$ is the
-\emph{formal dimension} of the MC moduli along the
-weight direction: the number of stages in the
-Postnikov filtration before stabilization. For
-$r_{\max} < \infty$, the MC moduli is a smooth
-formal scheme of finite type in the weight direction;
-for $r_{\max} = \infty$, it is a genuine formal scheme
-requiring the full completed structure.
+The support depth \(r^\Theta_{\max}(\cA)\) is the length of the
+bar-intrinsic MC packet along the weight direction.  The obstruction
+depth \(d_{\mathrm{obs}}(\cA)\) is the length of the \(H^2\)-obstruction
+profile.  When \(r^\Theta_{\max}<\infty\), the bar-intrinsic branch is
+finite type in the weight direction; when
+\(r^\Theta_{\max}=\infty\), the branch is a completed formal object.
+Other branches of the formal moduli problem are controlled by the same
+obstruction-extension sequence and are not classified by the
+bar-intrinsic packet alone.
 
 % ================================================================
 % 9.8.16: HOLOGRAPHIC SYNTHESIS
@@ -1820,7 +1823,8 @@ obstruction data}
 % label removed: subsec:holographic-synthesis
 \index{holographic reconstruction!synthesis}
 
-\begin{theorem}[Universal Holography, admissible shadow projection]\label{thm:holographic-recon-shadow}
+\begin{theorem}[Universal Holography, admissible shadow projection with realization datum;
+\(\ClaimStatusConditional\); licensing tags \(\beta+\gamma+\delta\)]\label{thm:holographic-recon-shadow}
 Let $\cA$ be a chiral algebra on a smooth projective curve $X$
 equipped with a conformal vector $\omega$ at non-critical level.
 Assume that the following data are fixed.
@@ -1832,9 +1836,22 @@ $k\neq -h^\vee$ and the holomorphic Chern--Simons boundary model of
 Theorem~\ref{thm:E3-topological-km}, or
 $\cA=\mathcal{W}_k(\mathfrak g,f)$ is obtained by Drinfeld--Sokolov
 reduction of $V_k(\mathfrak g)$ with $k\neq -h^\vee$ and carries the
-Costello--Gaiotto DS boundary model.
+Costello--Gaiotto DS boundary model.  This datum includes a chosen
+holomorphic-topological BV/factorization model
+\(\mathcal F_{\cA,\Xi}\) and a boundary comparison
+\[
+\eta^\partial_\cA\colon
+\Obs^\partial(\mathcal F_{\cA,\Xi})\xrightarrow{\simeq}\cA .
+\]
 \item \emph{Bulk--centre comparison.} The chosen model lies in the
-scope of the bulk--Hochschild comparison
+scope of the bulk--Hochschild comparison, and a map
+\[
+\chi_{\mathrm{HT},\cA}\colon
+\Zderch(\cA)\to
+\Obs^{\mathrm{bulk}}(\mathcal F_{\cA,\Xi})
+\]
+is part of the datum in the declared ambient.  In the
+physical prefactorisation sector this is the comparison supplied by
 Theorem~\ref{thm:bulk_hochschild}. In the boundary-linear sector the
 compact-generation and derived-centre quasi-isomorphism hypotheses are
 those of Theorem~\ref{thm:boundary-linear-bulk-boundary}. In the DS
@@ -1851,27 +1868,48 @@ Theorems~\ref{thm:E3-topological-km},
 \ref{thm:E3-topological-DS}, and
 \ref{thm:E3-topological-DS-general}.
 \end{enumerate}
-Then the admissible datum determines a canonical relative
-$3$d holomorphic-topological gauge theory $\mathcal{T}_{\cA}$ on
+Write
+\[
+\Xi_\cA=(\mathcal F_{\cA,\Xi},\eta^\partial_\cA,
+\chi_{\mathrm{HT},\cA},\mathcal A(\cA)).
+\]
+Then the \(\Xi\)-realized admissible datum has the supplied relative
+$3$d holomorphic-topological gauge theory
+\(\mathcal{T}_{\cA,\Xi}:=\mathcal F_{\cA,\Xi}\) on
 $X\times\mathbb{R}$ such that:
 \begin{enumerate}
-\item[(i)] \emph{Boundary restriction.} $\mathrm{Obs}^\partial(\mathcal{T}_{\cA})\simeq \cA$ as $E_1$-chiral algebras.
-\item[(ii)] \emph{Bulk identification.}
-$\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA})\simeq
-Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ as the universal algebraic
-open/closed bulk. Under hypothesis \textup{(H3)} this equivalence is an
+\item[(i)] \emph{Boundary restriction.}
+\(\eta^\partial_\cA\colon
+\mathrm{Obs}^\partial(\mathcal{T}_{\cA,\Xi})\simeq \cA\)
+as $E_1$-chiral algebras.
+\item[(ii)] \emph{Bulk--centre comparison.}
+\[
+\chi_{\mathrm{HT},\cA}\colon
+Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)\xrightarrow{\simeq}
+\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA,\Xi})
+\]
+is an equivalence in the algebraic, cohomological, or completed/pro
+ambient specified by the datum. Under hypothesis \textup{(H3)} this is an
 equivalence of $E_3$-topological factorisation algebras on
 $X\times\mathbb{R}$.
 \item[(iii)] \emph{Functoriality.} On morphisms preserving the chosen
-boundary-linear, affine, or DS realisation, $\cA\mapsto \mathcal{T}_{\cA}$
+boundary-linear, affine, or DS realisation and the comparison package,
+\((\cA,\Xi_\cA)\mapsto \mathcal{T}_{\cA,\Xi}\)
 extends to a functor
 \[
- \Phi_{\mathrm{hol}}\colon \mathsf{ChirAlg}^{\omega,\mathrm{adm}}_X \longrightarrow \mathsf{HT\text{-}QFT}_{X\times\mathbb{R}}
+ \Phi_{\mathrm{hol}}\colon
+ \mathsf{ChirAlg}^{\omega,\mathrm{adm},\Xi}_X
+ \longrightarrow
+ \mathsf{HT\text{-}QFT}^{\Xi}_{X\times\mathbb{R}}
 \]
 on the admissible subcategory, compatible with Drinfeld--Sokolov
-reduction:
-$\Phi_{\mathrm{hol}}(\mathcal{W}_k(\mathfrak{g},f))\simeq
-\Phi_{\mathrm{hol}}(V_k(\mathfrak{g}))/\!/_{\mathrm{BV}}\mathrm{DS}_f$.
+reduction on the \(\Xi\)-compatible DS locus:
+\[
+\Phi_{\mathrm{hol}}(\mathcal{W}_k(\mathfrak{g},f),\Xi_{\mathrm{DS}})
+\simeq
+\Phi_{\mathrm{hol}}(V_k(\mathfrak{g}),\Xi_{V_k})
+/\!/_{\mathrm{BV}}\mathrm{DS}_f .
+\]
 \item[(iv)] \emph{Class coverage.} Class $\mathrm{G}$ and the free-field
 part of class $\mathrm{C}$ are realised by Costello--Li abelian
 holomorphic Chern--Simons on the boundary-linear exact locus; class
@@ -1887,7 +1925,8 @@ in the cohomological or completed/pro sense specified in \textup{(H2)}.
 \end{theorem}
 
 \begin{proof}
-Hypothesis \textup{(H1)} constructs the BV theory. In the
+Hypothesis \textup{(H1)} supplies the BV theory and the boundary
+comparison. In the
 boundary-linear exact sector, boundary recovery is the
 Costello--Gwilliam restriction theorem applied to the Costello--Li
 model. For affine Kac--Moody it is the holomorphic Chern--Simons
@@ -1896,111 +1935,165 @@ Costello--Gaiotto identify the DS boundary condition for holomorphic
 Chern--Simons, and Arakawa's theorem
 $H^\bullet_{\mathrm{DS}}(V_k(\mathfrak{g}))\simeq
 \mathcal{W}_k(\mathfrak{g})$ identifies the boundary chiral algebra.
+The comparison with the boundary observables is \(\eta^\partial_\cA\).
 
 Hypothesis \textup{(H2)} gives the bulk comparison. For
 boundary-linear models, Theorem~\ref{thm:boundary-linear-bulk-boundary}
-identifies the bulk algebra with the derived centre of the boundary
+supplies the Morita comparison with the derived centre of the boundary
 algebra. For a chosen physical prefactorisation model,
-Theorem~\ref{thm:bulk_hochschild} identifies bulk local operators with
-chiral Hochschild cochains. In the DS sector,
+Theorem~\ref{thm:bulk_hochschild} supplies
+\(\Psi_{\mathrm{Ran}}\), equivalently the inverse comparison
+\(\chi_{\mathrm{HT},\cA}\). In the DS sector,
 Theorem~\ref{thm:ds-hochschild-bridge} supplies exactly the stated
 cohomological or completed/pro comparison, with original-complex
 chain-level comparison only under the bounded-shift HPL criterion.
-Thus $\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA})\simeq
-Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ in the asserted ambient.
+Thus \(\chi_{\mathrm{HT},\cA}\) identifies the algebraic closed sector
+with \(\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA,\Xi})\) in the
+asserted ambient.
 Hypothesis \textup{(H3)} upgrades this algebraic open/closed bulk to
 the strict $E_3$-topological factorisation algebra, by
 Theorem~\ref{thm:chiral-higher-deligne} together with the named
 topologisation theorems.
 
 Functoriality is relative to the admissible data: a morphism preserving
-the boundary-linear, affine, or DS presentation is a morphism of boundary
-conditions in the Costello BV complex, hence induces the boundary map
-on observables and the corresponding map on Hochschild cochains and
-derived centres. The DS formula is the functoriality of the
+the boundary-linear, affine, or DS presentation and the \(\Xi\)-package
+is a morphism of boundary conditions in the Costello BV complex, hence
+induces the boundary map on observables and the corresponding map on
+Hochschild cochains and derived centres, compatible with
+\(\chi_{\mathrm{HT}}\). The DS formula is the functoriality of the
 Costello--Gaiotto DS boundary condition composed with
-Theorem~\ref{thm:ds-hochschild-bridge}. The class coverage is precisely
-the disjoint union of the three constructions in \textup{(H1)}.
+Theorem~\ref{thm:ds-hochschild-bridge} on the \(\Xi\)-compatible locus.
+The class coverage is precisely the disjoint union of the three
+constructions in \textup{(H1)}.
 \end{proof}
 
 \begin{remark}[Shadow-tower reconstruction]
-The following theorem reconstructs $\Theta_\cA$ from the initial shadow
-terms together with the obstruction tower. Finite-order data suffice
-exactly on the finite-depth strata; class~$\mathsf M$ is a completed
-inverse-limit statement.
+The following theorem reconstructs the bar-intrinsic gauge class of
+\(\Theta_\cA\) from a compatible shadow reconstruction packet.
+Obstruction classes alone decide extendability; they do not select a
+point of the \(H^1\)-torsor of lifts in the exact sequence
+\[
+H^1(J^{r+1}(\cA),d_2)\to E_\cA(r+1)\to E_\cA(r)\to
+H^2(J^{r+1}(\cA),d_2).
+\]
+Thus the packet contains both the obstruction class and the lift
+coordinate in a chosen bar-intrinsic gauge slice. Finite-order data
+suffice exactly on the finite-depth strata; class~$\mathsf M$ is a
+completed inverse-limit statement.
 \end{remark}
 
-\begin{theorem}[Shadow-tower reconstruction theorem]
+\begin{theorem}[Filtered shadow-tower reconstruction of the bar-intrinsic MC gauge class;
+\(\ClaimStatusConditional\); licensing tags \(\alpha+\gamma+\epsilon\)]
 % label removed: thm:holographic-reconstruction
+\label{thm:filtered-shadow-tower-reconstruction}
 \index{holographic reconstruction!main theorem}
 Let $\cA$ be a modular Koszul chiral algebra with
 holographic modular Koszul datum
 $\mathcal{H}(T) = (\cA, \cA^!, \mathcal{C}, r(z),
 \Theta_\cA, \nabla^{\mathrm{hol}})$
 \textup{(}Definition~\textup{\ref{V1-def:holographic-modular-koszul-datum})}.
-The full datum $\Theta_\cA$ is determined by the
-shadow-tower data:
+Assume the modular convolution dg Lie algebra \(\gAmod\) is complete
+and separated for the weight filtration \(F^\bullet\), and fix the
+bar-intrinsic gauge component containing
+\(\Theta_\cA\in F^2\gAmod^1\).  A \emph{shadow reconstruction packet}
+is the compatible system
+\[
+\mathfrak S(\cA)=
+\Bigl(
+S_2,\;S_3,\;S_4,\;
+\{(o_n(\cA),\lambda_n)\}_{n\geq 5}
+\Bigr),
+\]
+where:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item the Hessian $H_\cA = \kappaChHodge(\cA)$
+\item \(S_2=H_\cA=\kappaChHodge(\cA)\), the Hessian
  \textup{(}degree~$2$\textup{)};
-\item the cubic shadow $\mathfrak{C}_\cA$
+\item \(S_3=\mathfrak C_\cA\), the cubic shadow
  \textup{(}degree~$3$\textup{)};
-\item the quartic contact $\mathfrak{Q}^{\mathrm{ct}}_\cA$
+\item \(S_4=\mathfrak Q^{\mathrm{ct}}_\cA\), the quartic contact
  \textup{(}degree~$4$\textup{)};
-\item the obstruction tower
- $\{o_{r+1}(\cA)\}_{r \geq 4}$
- \textup{(}higher degrees\textup{)}.
+\item \(o_n(\cA)\in H^2(J^n(\cA),d_2)\) is the degree-\(n\)
+ obstruction class, and
+ \(\lambda_n\in H^1(J^n(\cA),d_2)\) is the lift coordinate in the
+ \(H^1\)-torsor of lifts, measured in the chosen bar-intrinsic gauge
+ slice.
 \end{enumerate}
-The reconstruction is:
+The compatible packet \(\mathfrak S(\cA)\) determines the gauge class
+\([\Theta_\cA]\in \varprojlim_r E_\cA(r)\), and hence the
+bar-intrinsic MC element \(\Theta_\cA\) in the chosen gauge component.
+The reconstruction has the following scope.
 \begin{itemize}
-\item \emph{Exact at degree~$r_{\max}$} if
- $r_{\max} < \infty$.
-\item \emph{Completed} if $r_{\max} = \infty$: the compatible system
- $\{\Theta_\cA^{\leq r}\}$ defines $\Theta_\cA$ in the completed
- convolution algebra topology. Analytic convergence of scalar
- partition functions is a separate sewing/norm hypothesis.
+\item \emph{Finite support depth.} If \(r^\Theta_{\max}<\infty\), then the finite
+ packet
+ \[
+ (S_2,S_3,S_4,\{(o_n,\lambda_n)\}_{5\leq n\leq r^\Theta_{\max}})
+ \]
+ determines \([\Theta_\cA]\), after the gauge-slice convention
+ \(\lambda_n=0\) for \(n>r^\Theta_{\max}\).
+\item \emph{Completed} if \(r^\Theta_{\max} = \infty\): the compatible system
+ \(\{(o_n,\lambda_n)\}_{n\geq 5}\) determines
+ \[
+ [\Theta_\cA]=\varprojlim_r[\Theta_\cA^{\leq r}]
+ \]
+ in the \(F^\bullet\)-completed convolution algebra topology.
+ Analytic convergence of scalar partition functions is a separate
+ sewing/norm hypothesis.
 \end{itemize}
 The four shadow classes provide the classification:
 \[
 \begin{array}{lcl}
 \textbf{G}\;\text{(Gaussian)}: & &
- \text{1 datum } (\kappa) \text{ suffices.}\\
+ \text{canonical gauge slice; } S_2 \text{ suffices.}\\
 \textbf{L}\;\text{(Lie/tree)}: & &
- \text{2 data } (\kappa, \mathfrak{C}) \text{ suffice.}\\
+ \text{canonical gauge slice; } (S_2,S_3) \text{ suffice.}\\
 \textbf{C}\;\text{(Contact)}: & &
- \text{3 data }
- (\kappa, \mathfrak{C}, \mathfrak{Q}^{\mathrm{ct}})
- \text{ suffice.}\\
+ \text{canonical gauge slice; } (S_2,S_3,S_4) \text{ suffice.}\\
 \textbf{M}\;\text{(Mixed)}: & &
- \text{Infinite data }
- \{S_r\}_{r \geq 2} \text{ required.}
+ \text{the full compatible sequence }
+ \{(o_n,\lambda_n)\}_{n\ge5} \text{ is required.}
 \end{array}
 \]
 \end{theorem}
 
 \begin{proof}
-Combine
-Theorem~\ref{V1-thm:shadow-depth-dichotomy} (the
-dichotomy),
+The obstruction-extension exact sequence identifies the fiber of
+\(E_\cA(r+1)\to E_\cA(r)\) over a liftable point with the
+\(H^1(J^{r+1}(\cA),d_2)\)-torsor of lifts, and sends a point of
+\(E_\cA(r)\) to the obstruction class in
+\(H^2(J^{r+1}(\cA),d_2)\).  Inductively, \(S_2,S_3,S_4\) initialize
+the truncation and the pair \((o_n,\lambda_n)\) decides whether the
+next lift exists and which lift in the torsor is chosen.  Hence a
+compatible packet determines a unique element of every \(E_\cA(r)\)
+in the fixed bar-intrinsic gauge component.
+
+The finite-depth assertion is
+Theorem~\ref{V1-thm:shadow-depth-dichotomy} together with
 Theorem~\ref{V1-thm:gaussian-rmax-two} (class~\textbf{G}),
 Theorem~\ref{V1-thm:lie-rmax-three} (class~\textbf{L}),
 Theorem~\ref{V1-thm:contact-rmax-four} (class~\textbf{C}),
 and
 Theorem~\ref{V1-thm:virasoro-rmax-infinity} (class~\textbf{M}).
-The completed inverse-limit statement in the infinite case is by
-Corollary~\ref{V1-cor:mittag-leffler-shadow-tower}; it is not an
+For \(r^\Theta_{\max}<\infty\) the canonical gauge slice has
+\(\lambda_n=0\) above \(r^\Theta_{\max}\), so no higher torsor coordinate
+enters.  For class~\(\mathsf M\), no finite truncation determines the
+tail, and the completed inverse-limit statement is exactly
+Corollary~\ref{V1-cor:mittag-leffler-shadow-tower}.  It is a formal
+statement in the \(F^\bullet\)-completed convolution algebra, not an
 analytic partition-function convergence theorem.
 \end{proof}
 
-\begin{corollary}[Universal Holography, strict $E_3$ projection]\label{thm:holographic-recon-e3}
-Let $\mathcal A$ satisfy the admissibility hypotheses of
-Theorem~\ref{thm:holographic-recon-shadow}. If the topologisation
-datum of hypothesis \textup{(H3)} is fixed, then
+\begin{corollary}[$\Xi$-realized Universal Holography, strict $E_3$ projection;
+\(\ClaimStatusConditional\); licensing tags \(\beta+\gamma+\delta\)]\label{thm:holographic-recon-e3}
+Let \((\mathcal A,\Xi_{\mathcal A})\) satisfy the admissibility
+hypotheses of Theorem~\ref{thm:holographic-recon-shadow}. If the
+topologisation datum of hypothesis \textup{(H3)} is fixed, then
 \[
-\mathrm{Obs}^{\mathrm{bulk}}(\mathcal T_{\mathcal A}) \simeq
 Z^{\mathrm{der}}_{\mathrm{ch}}(\mathcal A)
+\xrightarrow{\;\chi_{\mathrm{HT},\mathcal A}\;\simeq\;}
+\mathrm{Obs}^{\mathrm{bulk}}(\mathcal T_{\mathcal A,\Xi})
 \]
-is an equivalence of $E_3$-topological factorisation algebras on
+is the comparison equivalence of $E_3$-topological factorisation
+algebras on
 $X\times\mathbb R$. For affine Kac--Moody and principal or
 non-principal DS $\mathcal W$-algebras, the required topologisation
 datum is supplied by Theorems~\ref{thm:E3-topological-km},
@@ -2009,8 +2102,9 @@ datum is supplied by Theorems~\ref{thm:E3-topological-km},
 \end{corollary}
 \begin{proof}
 This is Theorem~\ref{thm:holographic-recon-shadow}\textup{(ii)}
-after imposing hypothesis \textup{(H3)}. The named affine and DS
-topologisation theorems verify \textup{(H3)} in the listed cases.
+after imposing hypothesis \textup{(H3)} on the \(\Xi\)-realized
+comparison map \(\chi_{\mathrm{HT},\mathcal A}\). The named affine and
+DS topologisation theorems verify \textup{(H3)} in the listed cases.
 \end{proof}
 
 % ================================================================
@@ -2293,9 +2387,10 @@ r - 1 & \text{for class } \textbf{M}\;\;(r \geq 2).
 \end{theorem}
 
 \begin{proof}
-For classes \textbf{G}, \textbf{L}, \textbf{C}: the
-shadow obstruction tower stabilizes at $r_{\max}$, giving
-$r_{\max} - 1$ parameters.
+For classes \textbf{G}, \textbf{L}, \textbf{C}: the bar-intrinsic
+packet has support through \(r^\Theta_{\max}\), giving
+\(r^\Theta_{\max}-1\) primary-line parameters in the canonical gauge
+slice.
 For class~\textbf{M}: each degree level adds one
 primary-line parameter $S_r$, giving $r - 1$ through
 degree~$r$.
@@ -2309,13 +2404,12 @@ degree~$r$.
 % label removed: subsec:reconstruction-conclusion
 
 The holographic reconstruction problem (determining the
-boundary algebra from its shadow-tower data, with finite-order data
-only on finite-depth strata) is
-controlled by the extension tower $\{E_\cA(r)\}$ and its
-obstruction classes $\{o_{r+1}(\cA)\}$. The dichotomy
-theorem (Theorem~\ref{V1-thm:shadow-depth-dichotomy})
-provides a clean criterion: the reconstruction terminates
-if and only if the shadow depth is finite. The four
+bar-intrinsic MC gauge class from its shadow-tower data, with
+finite-order data only on finite support-depth strata) is controlled by
+the extension tower \(\{E_\cA(r)\}\), its obstruction classes
+\(\{o_{r+1}(\cA)\}\), and its \(H^1\)-lift coordinates. The dichotomy
+theorem gives the clean criterion: reconstruction terminates if and
+only if the support shadow depth is finite. The four
 shadow classes (Gaussian, Lie/tree, contact/quartic,
 mixed/infinite) exhaust the structural possibilities
 for the standard landscape.
@@ -2361,7 +2455,7 @@ $\mathcal{H}(\mathcal{T})
 = (\cA, \cA^!, \mathcal{C}, r(z), \Theta_\cA,
 \nabla^{\mathrm{hol}})$
 is computed for the standard brane systems of the
-Costello--Li programme \cite{Costello-Li19,CostelloGaiotto18}.
+Costello--Li programme \cite{CL16,CostelloGaiotto18}.
 
 \begin{proposition}[Twisted $\mathcal{N} = 4$ SYM datum]
 \label{prop:twisted-n4-datum}
@@ -2372,9 +2466,11 @@ at rank~$N$\textup{)}:
 \item The boundary VOA is affine $\mathfrak{gl}_N$ at level $k = 1$
  with $\kappaChHodge(\mathfrak{gl}_N, 1)
  = (N^2{-}1)(N{+}1)/(2N) + 1$.
-\item The holographic R-matrix is $r(z) = k\,\Omega/z$
+\item The holographic R-matrix is $r(z) = k\,\Omega_{\mathrm{tr}}/z$
  with $k = 1$.
-\item The genus expansion $F_g = \kappa\cdot\lambda_g^{\mathrm{FP}}$
+\item The genus expansion
+ \(F_g(\mathfrak{gl}_{N,1})
+ = \kappaChHodge(\mathfrak{gl}_{N,1})\lambda_g^{\mathrm{FP}}\)
  \textup{(}uniform-weight\textup{)} computes twisted amplitudes.
 \item The anomaly matching
  $\kappa_{\mathrm{eff}} = \kappaChHodge(\mathrm{matter})
@@ -2441,13 +2537,11 @@ connection.
 \index{Kodaira--Spencer theory!K3 x E@$K3 \times E$}
 
 The product $X = K3 \times E$ of a K3 surface with an elliptic curve
-is a compact Calabi--Yau threefold whose Costello--Li holographic datum
-is completely computable: the boundary chiral algebra is free-field
-(class~$\mathsf{G}$), the shadow obstruction tower terminates at degree~$2$,
-and every component of the holographic sextuple admits an explicit
-closed-form expression. This makes $K3 \times E$ the simplest
-nontrivial testing ground for the full holographic modular Koszul
-framework applied to a geometric CY$_3$ target.
+is a compact Calabi--Yau threefold. On the abelian harmonic branch of
+the Costello--Li reduction, the boundary algebra is the rank-$24$
+Heisenberg algebra, and the corresponding shadow tower has class
+$\mathsf{G}$. This branch is a computable geometric test object for
+the holographic modular Koszul formalism.
 
 \subsubsection{The HT twist and Kodaira--Spencer reduction}
 \label{subsubsec:k3e-ht-twist}
@@ -2499,14 +2593,13 @@ The total polyvector field dimension is
 $\dim \PV^*(X) = \dim \PV^*(K3) \cdot \dim \PV^*(E)
 = 24 \cdot 4 = 96$.
 
-\begin{remark}[Self-mirror with $\kappa_{\mathrm{KS}} = 0$]
+\begin{remark}[Self-mirror with $\kappa_{\mathrm{KS}}^{(1)} = 0$]
 \label{rem:k3e-self-mirror}
 Since $h^{1,1} = h^{2,1} = 21$, the threefold $K3 \times E$
 is self-mirror: the KS modular characteristic
-$\kappa_{\mathrm{KS}} = h^{1,1} - h^{2,1} = 0$.
-The KS boundary algebra has vanishing modular characteristic,
-and the KS genus-$g$ free energies all vanish:
-$F_g^{\mathrm{KS}} = 0$ for all $g \geq 1$. This is the entry
+$\kappa_{\mathrm{KS}}^{(1)} = h^{1,1} - h^{2,1} = 0$.
+The KS weight-one Hodge row vanishes, and the BCOV constant-map
+scalar also vanishes because $\chi(K3\times E)=0$. This is the entry
 $K3 \times T^2$ in the KS landscape table of
 \S\ref*{subsec:thqg-ks-landscape}.
 
@@ -2515,7 +2608,7 @@ The boundary chiral algebra $\cA_E$ discussed below is a
 from reducing the B-model \emph{along} K3 to obtain a chiral
 algebra \emph{on} $E$, rather than from the abstract KS
 deformation theory. The two algebras have different $\kappa$
-values: $\kappa_{\mathrm{KS}} = 0$ vs.\
+values: $\kappa_{\mathrm{KS}}^{(1)} = 0$ vs.\
 $\kappaChHodge(\cA_E) = 24$. The discrepancy records that
 $\kappa$ depends on the full algebra, not on a single
 invariant of the geometry.
@@ -2578,39 +2671,40 @@ where the $24$ generators are indexed by a basis of $H^*(K3, \Z)$, each
 at unit level. The Mukai pairing of signature $(4, 20)$ determines the
 lattice vertex operators and the topological sector, but the Heisenberg
 OPE levels are positive definite.
-The algebra is free-field on this branch because Bogomolov--Tian--
-Todorov makes the relevant Schouten brackets exact on K3 cohomology
-\textup{(}unobstructed deformations\textup{)}, and the harmonic
-projection kills those exact brackets.
+The free-field assertion is the branch condition: after harmonic
+projection, the Schouten bracket on the retained K3 sector is zero and
+only the Heisenberg pairing remains in the OPE.
 
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item $\kappaChHodge(\cA_E) = 24$ on this rank-$24$ Heisenberg branch
  \textup{(}$= \operatorname{rank}$ for unit-level free bosons\textup{)}.
-\item Shadow depth: class $\mathsf{G}$ \textup{(}Gaussian,
- $r_{\max} = 2$\textup{)}. All higher shadows vanish: $C = Q = 0$.
-\item The critical discriminant $\Delta = 8\kappa S_4 = 0$
+\item Support shadow depth: class $\mathsf{G}$ \textup{(}Gaussian,
+ \(r^\Theta_{\max} = 2\)\textup{)}. All higher shadows vanish: $C = Q = 0$.
+\item The critical discriminant
+\(\Delta = 8\kappaChHodge(\cA_E) S_4 = 0\)
  \textup{(}$S_4 = 0$ for free fields\textup{)}.
-\item The shadow metric $Q_L(t) = (2\kappa)^2 = 2304$ is constant.
+\item The shadow metric
+\(Q_L(t) = (2\kappaChHodge(\cA_E))^2 = 2304\) is constant.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-The BTT theorem for the CY surface K3 gives $l_2 = 0$
-on Dolbeault cohomology: the Schouten bracket of two harmonic
-polyvector fields is exact after passing to the unobstructed Kuranishi
-model. Under the abelian harmonic-branch hypothesis, the reduction along
-K3 therefore produces a cohomological free-field chiral algebra on $E$
-with one Heisenberg boson per cohomology class of K3, each at unit
-level.
+The hypotheses impose a multiplicative harmonic projection and kill the
+projected Schouten bracket on the retained K3 cohomology sector. The
+projected interaction Lie algebra is therefore abelian. The reduction
+along K3 produces a cohomological free-field chiral algebra on $E$ with
+one Heisenberg boson per cohomology class of K3, each at unit level.
 The Mukai lattice of signature $(4, 20)$ underlies the
 topological sector: $(3, 19)$ from $H^2(K3)$ plus $(1, 1)$ from the
 $H^0 \oplus H^4$ pairing.
 
 For the modular characteristic: $\cA_E$ consists of 24 free
-bosons at level~$1$, so $\kappa = 24 \cdot \kappaChHodge(\cH_1) = 24$
+bosons at level~$1$, so
+\(\kappaChHodge(\cA_E)=24 \cdot \kappaChHodge(\cH_1) = 24\)
 by additivity (Volume~I, Corollary~\ref{V1-cor:kappa-additivity}).
-The shadow depth is $r_{\max} = 2$ because the OPE is purely
-quadratic (no cubic or higher terms).
+The support shadow depth is \(r^\Theta_{\max}=2\) because the OPE is
+purely quadratic and the canonical Gaussian gauge slice has no higher
+lift coordinates.
 \end{proof}
 
 
@@ -2633,14 +2727,15 @@ $\cH(K3 \times E) = (\cA, \cA^!, \mathcal{C}, r(z),
 \hline
 (a) $\cA$ & Free-field: $24$ bosons at unit level ($\delta^{ab}$),
  $c = 24$, $\kappa = 24$ \\
-(b) $\cA^!$ & Koszul dual: $24$ bosons at level $-\delta^{ab}$,
- $\kappaChHodge(\cA^!) = -24$; complementarity sum
+(b) $\cA^!$ & Verdier--Koszul partner: the chiral symmetric algebra on
+ the dual current space, not the negative-level Heisenberg algebra;
+ $\kappaChHodge(\cA^!) = -24$ and
  $\kappa + \kappa' = 0$ \\
 (c) $\mathcal{C}$ & $\cA^!\text{-}\mathsf{mod}$;
  the derived center $\Zder^{\mathrm{ch}}(\cA_E)$
- has Hilbert polynomial
- $P_{\cA}(t) = 24 + 576\,t + 24\,t^2$ \\
-(d) $r(z)$ & $r(z) = k\,\Omega/z$ at unit level $k = 1$,
+ has primitive Heisenberg Hochschild row
+ $P_{\cA}^{\mathrm{prim}}(t) = 1 + 24\,t + t^2$ \\
+(d) $r(z)$ & $r(z) = k\,\Omega_{\mathrm{tr}}/z$ at unit level $k = 1$,
  $\Omega = \sum \delta^{ab}\,J_a \otimes J_b$ CYBE trivially satisfied \textup{(}abelian\textup{)} \\
 (e) $\Theta_\cA$ & $\Theta_\cA^{\leq 2} = \kappa = 24$;
  $\Theta_\cA^{(g,r)} = 0$ for $r \geq 3$
@@ -2653,7 +2748,7 @@ $\cH(K3 \times E) = (\cA, \cA^!, \mathcal{C}, r(z),
 \end{center}
 
 The genus-$g$ free energies are
-$F_g(\cA_E) = \kappa \cdot \lambda_g^{\mathrm{FP}}$
+$F_g(\cA_E) = \kappaChHodge(\cA_E) \cdot \lambda_g^{\mathrm{FP}}$
 \textup{(}uniform-weight\textup{)}:
 \begin{equation}\label{eq:k3e-genus-amplitudes}
 F_1 = 1, \qquad
@@ -2663,11 +2758,12 @@ F_3 = \tfrac{31}{40320}.
 
 \emph{Three consistency checks.}
 \begin{enumerate}
-\item \emph{KS reduction}: reduce KS theory along K3 to obtain
- $24$ free bosons, compute $\kappa = \operatorname{rank} = 24$.
-\item \emph{HKR comparison}: $\dim \PV^*(K3) = 24$ generators;
- $\dim \HH^*(K3 \times E) = 96$ total; Hilbert polynomial
- from Theorem~H.
+\item \emph{KS reduction}: The reduction of KS theory along K3 gives
+ $24$ free bosons and $\kappa = \operatorname{rank} = 24$.
+\item \emph{HKR comparison}: The equality $\dim \PV^*(K3) = 24$
+ supplies the current row. The group $\HH^2(K3 \times E)$ has dimension
+ $23$ in the geometric category; the chiral boundary center is the
+ primitive Heisenberg row above.
 \item \emph{Koszul complementarity}: $\kappaChHodge(\cA^!) = -24$;
  $F_1(\cA) + F_1(\cA^!) = 1 + ({-}1) = 0$ \textup{(}Theorem~C
  for free fields\textup{)}.
@@ -2692,15 +2788,16 @@ $\HH^2(K3 \times E) = 23$, decomposed by HKR as:
 \;\oplus\;
 \underbrace{H^2(\cO_X)}_{h^{0,2} = 1}.
 \end{equation}
-The $21$-dimensional summand parametrizes complex structure deformations
-(Kodaira--Spencer); the two remaining directions are genuinely
-noncommutative:
+The $21$-dimensional summand parametrizes complex-structure
+deformations. The two remaining summands are the Poisson and gerby
+rows of the HKR decomposition:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item The $B$-field direction $H^0(\bigwedge^2 T_X) \cong \C$
- deforms the derived category to the twisted category
- $D^b(K3 \times E, \alpha)$ for $\alpha \in \operatorname{Br}(K3 \times E)$.
-\item The volume direction $H^2(\cO_X) \cong \C$ scales the
- holomorphic volume form $\Omega_{3,0}$.
+\item The bivector direction $H^0(\bigwedge^2 T_X) \cong \C$
+ is the first-order Poisson deformation; for $K3\times E$ it is
+ generated by the inverse holomorphic symplectic form on K3.
+\item The gerby $B$-field direction $H^2(\cO_X) \cong \C$ is the
+ infinitesimal Brauer-twisting row. It is not a rescaling of the
+ holomorphic volume form.
 \end{enumerate}
 
 Deformation quantization of $K3 \times E$ is one-parameter:
@@ -2719,29 +2816,25 @@ f \star_\hbar g
 (\partial_{j_1} \cdots \partial_{j_n} g).
 \end{equation}
 
-The analytic Brauer group satisfies (for generic K3 with Picard
-rank $\rho = 0$):
+The analytic Brauer torsion is read from the exponential sequence. Since
+$H^1(K3,\cO_{K3})=0$ and $\operatorname{Br}(E)=0$, there is no elliptic
+or mixed Brauer summand. If the K3 factor has Picard rank $\rho$, then
 \begin{equation}\label{eq:k3e-brauer}
-\operatorname{Br}(K3 \times E)
-\;\supset\;
-\operatorname{Br}(K3) \oplus \operatorname{Br}(E)
+\operatorname{Br}(K3 \times E)_{\mathrm{tors}}
 \;\cong\;
-(\Q/\Z)^{22} \oplus (\Q/\Z).
+(\Q/\Z)^{22-\rho}.
 \end{equation}
-The mixed term $H^1(K3, \operatorname{Pic}^0(E)) = 0$ vanishes
-because $h^{0,1}(K3) = 0$. For algebraic K3 with Picard rank
-$\rho \geq 1$, the transcendental Brauer rank drops to $22 - \rho$.
+For algebraic K3 surfaces one has $\rho\geq 1$; the Picard-rank-zero
+case is the analytic non-projective limit.
 
-\begin{remark}[Chiral Hochschild comparison]
+\begin{remark}[Geometric Hochschild comparison]
 \label{rem:k3e-chiral-hochschild}
-\index{chiral Hochschild cohomology!K3 x E@$K3 \times E$}
-By the Costello--Gwilliam theorem for holomorphic field theories,
-$\operatorname{ChirHoch}^n(\cA_X) \cong \HH^n(X)$ for the
-chiral de Rham complex $\cA_X = \Omega^{\mathrm{ch}}(X)$
-of a CY manifold $X$. In particular,
-$\dim \operatorname{ChirHoch}^2(\Omega^{\mathrm{ch}}(K3 \times E)) = 23$:
-the chiral algebra \emph{sees} the full CY$_3$ deformation space,
-including the noncommutative directions. The full Hochschild
+\index{Hochschild cohomology!K3 x E@$K3 \times E$}
+The following diamond is the HKR diamond of the geometric category
+$D^b(K3\times E)$. It is a comparison target for the CDR and
+factorization models, not an identification of
+$\operatorname{ChirHoch}^\bullet(\Omega^{\mathrm{ch}}_{K3\times E})$
+with geometric Hochschild cohomology. The full geometric Hochschild
 diamond is
 \begin{equation}\label{eq:k3e-hh-full}
 (\HH^0, \HH^1, \HH^2, \HH^3, \HH^4, \HH^5, \HH^6)
@@ -2749,6 +2842,9 @@ diamond is
 \end{equation}
 with CY Serre duality $\HH^n \cong \HH^{6-n}$ verified computationally
 via the Volume~III K3$\times$E noncommutative-deformation engine.
+The boundary algebra $\cA_E$ used above is the rank-$24$ harmonic
+reduction; its primitive chiral Hochschild row is
+$1+24t+t^2$, not this geometric HKR diamond.
 \end{remark}
 
 
@@ -2760,40 +2856,38 @@ via the Volume~III K3$\times$E noncommutative-deformation engine.
 The chiral de Rham complex $\Omega^{\mathrm{ch}}(K3 \times E)$
 is a sheaf of vertex superalgebras on $K3 \times E$ whose
 global sections carry an $\cN = 2$ superconformal structure
-(Malikov--Schechtman--Vaintrob). On K3 alone:
+(Malikov--Schechtman--Vaintrob). Put
 \begin{equation}\label{eq:k3-cdr-sigma-model}
 H^*\!\bigl(K3, \Omega^{\mathrm{ch}}_{K3}\bigr)
-\;\cong\; V_{K3}
+\;=:\; V_{K3}
 \qquad (c = 6,\; \cN = (4,4)\;\text{SCVA}).
 \end{equation}
-By K\"unneth for factorization homology,
+The exterior-product K\"unneth map for CDR sheaves gives
 \begin{equation}\label{eq:k3e-cdr-kunneth}
 H^*\!\bigl(K3 \times E, \Omega^{\mathrm{ch}}\bigr)
 \;\cong\;
 V_{K3} \otimes V_E,
 \end{equation}
-where $V_E$ is the $c = 1$ Heisenberg algebra on~$E$. The total
-central charge is $c = 6 + 1 = 7$.
+where $V_E=H^*(E,\Omega_E^{\mathrm{ch}})$ is the elliptic chiral de
+Rham factor. The MSV central charges are $6$ on K3 and $3$ on~$E$, so
+the untwisted product has $c=9$. The rank-$24$ Heisenberg boundary
+algebra is not this full CDR factor; it is the harmonic K3 reduction
+of Proposition~\ref{prop:k3e-boundary-datum}.
 
-The HT twist projects to $c = 0$: the topological twist
-kills the central charge. The Swiss-cheese algebra
-$\mathsf{SC}^{\mathrm{ch,top}}$ on $\C_z \times \R_t$
-encodes the factorization structure of the CDR along the
-holomorphic direction~$E$ and the topological directions~K3.
-Since the boundary algebra $\cA_E$ is free-field (class $\mathsf{G}$),
-the Swiss-cheese operations $m_k^{\mathrm{SC}}$ vanish for $k \geq 3$:
-the Swiss-cheese structure is \emph{formal} in the sense of
-Definition~\ref*{V1-def:swiss-cheese-formal}. This is
-consistent with the shadow depth classification: class~$\mathsf{G}$
-algebras have trivial higher $A_\infty$ structure on the
-bar cohomology.
+The HT twist changes the stress tensor by the $U(1)$ current and then
+passes to BRST cohomology. It does not identify the untwisted CDR
+central charge with zero. On the abelian harmonic branch, the boundary
+shadow operations of arity $k\geq 3$ vanish on bar cohomology, because
+$\cA_E$ is class~$\mathsf{G}$. No formality assertion is made for the
+full CDR Swiss-cheese factorization algebra.
 
 \begin{example}[K3 bulk-boundary pair as an \texorpdfstring{$\SCchtop$}{SCchtop} realisation]
 \label{ex:k3e-scchtop-bulk-boundary}
 The K3 specialisation of $\SCchtop$ is not concentrated at a single
-smooth fibre. Its open colour is the boundary algebra
-$\cA_E = \Omega^{\mathrm{ch}}(K3 \times E)|_{E}$, while its closed
-colour is the bulk-boundary pair
+smooth fibre. Its open colour is the harmonic boundary algebra
+$\cA_E$ of Proposition~\ref{prop:k3e-boundary-datum}, obtained after
+projecting the K3 factor before restriction to~$E$. Its closed colour
+is the bulk-boundary pair
 \[
  \bigl(C^\bullet_{\mathrm{ch}}(\cA_E,\cA_E),\, \cA_E\bigr)
 \]
@@ -2824,9 +2918,9 @@ The CDR Euler characteristic gives
 $\chi(\Omega^{\mathrm{ch}}(K3 \times E)) = \chi(K3) \cdot \chi(E)
 = 24 \cdot 0 = 0$: the Witten genus vanishes. This
 vanishing of the elliptic genus does \emph{not} imply
-$F_g = 0$: the elliptic genus is a
+$F_g(\cA_E) = 0$: the elliptic genus is a
 \emph{refined} trace with $(-1)^F$ insertion, while
-$F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$
+$F_g(\cA_E) = \kappaChHodge(\cA_E) \cdot \lambda_g^{\mathrm{FP}}$
 \textup{(}uniform-weight\textup{)} is the bar complex
 curvature at genus~$g$ (no grading insertion). The BPS partition
 function is related to $(\Phi_{10}^{\mathrm{un}})^{-1}$, the reciprocal
@@ -2860,18 +2954,21 @@ Theorem~A (adjunction) & $D_{\mathrm{Ran}}(B(\cA_E))
 Theorem~B (completed Positselski) & $\Omega(B(\cA_E)) \simeq \cA_E$
  in the coderived/completed ambient; the raw counit is Theorem~A's
  inversion face & immediate (class $\mathsf{G}$) \\
-Theorem~C (complementarity) & $\kappa + \kappa' = 0$;
+Theorem~C (complementarity) &
+ $\kappaChHodge(\cA_E)+\kappaChHodge(\cA_E^!) = 0$;
  $F_g + F_g' = 0$ for all $g$ & $24 + ({-}24) = 0$ \\
-Theorem~D (leading coeff.) & $F_g = \kappa\cdot
- \lambda_g^{\mathrm{FP}}$ \textup{(}u.w.\textup{)} & $\kappa = 24$ \\
-Theorem~H (Hochschild) & $P_{\cA}(t) = 24 + 576\,t + 24\,t^2$ &
- $\HH^0 = 24,\; \HH^2 = 24$ \\
+Theorem~D (leading coeff.) & $F_g(\cA_E) =
+ \kappaChHodge(\cA_E)\lambda_g^{\mathrm{FP}}$
+ \textup{(}u.w.\textup{)} & $\kappaChHodge(\cA_E)=24$ \\
+Theorem~H (Hochschild) & $P_{\cA}^{\mathrm{prim}}(t) =
+ 1 + 24\,t + t^2$ & $\HH^0 = 1,\; \HH^1 = 24,\; \HH^2 = 1$ \\
 \hline
-Shadow class & $\mathsf{G}$ (Gaussian) & $r_{\max} = 2$ \\
-Shadow metric & $Q_L = (2\kappa)^2 = 2304$ & constant \\
-MC element & $\Theta_\cA = \Theta_\cA^{\leq 2} = \kappa$
+Shadow class & $\mathsf{G}$ (Gaussian) & \(r^\Theta_{\max} = 2\) \\
+Shadow metric & \(Q_L = (2\kappaChHodge(\cA_E))^2 = 2304\) & constant \\
+MC element & \(\Theta_\cA = \Theta_\cA^{\leq 2}
+= \kappaChHodge(\cA_E)\)
  & terminates at degree $2$ \\
-$r$-matrix & $r(z) = k\,\Omega/z$ \textup{(}abelian Casimir, $k=1$\textup{)} &
+$r$-matrix & $r(z) = k\,\Omega_{\mathrm{tr}}/z$ \textup{(}abelian Casimir, $k=1$\textup{)} &
  single pole, $\dim = 24$
 \end{tabular}
 \end{center}
@@ -2897,25 +2994,30 @@ targets as follows:
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 \small
-\begin{tabular}{lcccc}
-\textbf{CY$_3$} & $\kappaChHodge(\cA)$ & \textbf{Class}
- & \textbf{Complementarity} & $\HH^2$ \\
+\begin{tabular}{lp{0.27\linewidth}p{0.20\linewidth}p{0.19\linewidth}}
+\textbf{CY$_3$ datum} & \textbf{Scalar row}
+ & \textbf{Depth assertion} & \textbf{Infinitesimal row} \\
 \hline
-$K3 \times E$ & $24$ & $\mathsf{G}$ & $\kappa + \kappa' = 0$ & $23$ \\
-Quintic & $-100$ & $\mathsf{G}$ & $\kappa + \kappa' = 0$ & $204$ \\
-D3 ($\cN\!=\!4$ SYM) & $\frac{N^2(N+1)}{2N}$ & $\mathsf{L}$ &
- $\kappa + \kappa' = 0$ & -- \\
-ABJM & $-(N^2{+}1)$ & $\mathsf{M}$ & nonzero & --
+$K3 \times E$, abelian harmonic branch
+& $\kappaChHodge=24$ & $\mathsf{G}$ & geometric HKR: $\dim \HH^2=23$ \\
+Quintic, KS/BCOV lane
+& $\kappa_{\mathrm{KS}}^{(1)}=-100,\;
+   \kappa_{\mathrm{BCOV}}=-25/3$
+& scalar projection only & $h^{2,1}=101$ \\
+D3 ($\cN\!=\!4$ SYM)
+& $\frac{N(N+1)}{2}$ & $\mathsf{L}$ & current row \\
+ABJM & $-(N^2{+}1)$ & $\mathsf{M}$ & monopole row
 \end{tabular}
 \end{center}
-The $K3 \times E$ boundary algebra is the unique standard CY$_3$
-example in this table that is simultaneously free-field
-(class~$\mathsf{G}$) and has positive Heisenberg-branch modular
-characteristic ($\kappa = 24 > 0$): the quintic has $\kappa < 0$ and the
-D3 brane has $\kappa > 0$ but is class~$\mathsf{L}$. In the
-uniform-weight scalar FP model, positive $\kappa$ gives nonzero scalar
-genus coefficients. This is not an elliptic-genus, BPS-state-counting,
-or modular partition-function statement.
+The $K3 \times E$ row is the free-field Calabi--Yau row in the
+table. The quintic row is a Kodaira--Spencer/BCOV row: its
+$-100$ is the Hodge supertrace $h^{1,1}-h^{2,1}$, and its one-loop
+BCOV scalar is $\chi/24=-25/3$. The full quintic boundary algebra still
+contains Schouten and BCOV collision operations, so class~$\mathsf{G}$
+is not assigned to it. In the uniform-weight scalar FP model, a
+positive scalar characteristic gives nonzero scalar genus coefficients
+only after the scalar projection. This is neither an elliptic genus nor
+a BPS-state count.
 \end{remark}
 
 \begin{remark}[Bulk OPE structure constants via the Gerstenhaber bracket]
@@ -2937,9 +3039,9 @@ The Gerstenhaber bracket is determined at degree~$2$:
  \{J, J\} \;=\; k,
 \]
 where $\kappa^{\mathrm{Heis}} = k$ is the Heisenberg level.
-All higher brackets vanish; the bulk dg Lie structure is strictly
-abelian.
-At $k=0$ the bracket degenerates completely.
+All higher brackets vanish; the only nonzero binary bracket is central.
+The bulk dg Lie structure is therefore two-step nilpotent, and it
+becomes abelian only at $k=0$.
 
 \emph{Affine $V_k(\mathfrak{sl}_2)$ (class~$\mathsf{L}$, shadow depth $r=3$).}
 The bar cohomology satisfies $\dim H^2(B(\mathfrak{sl}_2)) = 5$,
@@ -2949,7 +3051,7 @@ $Z^{\mathrm{der}}_{\mathrm{ch}}(V_k(\mathfrak{sl}_2))$ is
 non-abelian:
 \[
  \{J^a, J^b\}
- \;=\; k \, f^{ab}{}_{c} \, J^c
+ \;=\; f^{ab}{}_{c} \, J^c
  \;+\; k \, \delta^{ab},
 \]
 combining the simple-pole (structure constant) and double-pole
@@ -2973,7 +3075,7 @@ infinite-dimensional).
 The leading structure constant is $\kappa^{\mathrm{Vir}} = c/2$,
 arising from the $T(z)T(w)$ OPE via $\mathrm{d}\log$-absorption
 (OPE quartic pole $\to$ $r$-matrix cubic pole:
-$r^{\mathrm{Vir}}(z) = (c/2)/z^3 + 2T/z$).
+\(r_{\mathrm{Vir}}^{\mathrm{coll}}(z) = (c/2)/z^3 + 2T/z\)).
 The bracket has non-vanishing components at every degree $m_k$,
 $k \geq 2$: despite bounded cohomological amplitude, the algebraic
 depth is infinite (class~$\mathsf{M}$).
@@ -3003,64 +3105,90 @@ Fix an admissible boundary datum in the sense of
 Theorem~\ref{thm:holographic-recon-shadow}: a chiral algebra $\cA$ on a
 smooth projective curve $X$ with conformal vector $\omega$ at
 non-critical level, together with a boundary-linear, affine, or DS
-realisation and the ambient needed for the bulk--centre comparison. On
-the $3$d slab $X\times\R$, the associated theory is the BV factorisation algebra
-whose boundary cochains recover $\cA$:
+realisation and the ambient needed for the bulk--centre comparison.
+The physical $3$d theory is not determined by this algebraic datum
+alone.  A holographic object includes a realization package
+\[
+\Xi_{\cA}=(\mathcal F_{\cA,\Xi},\eta^\partial_{\cA},
+\chi_{\mathrm{HT},\cA},\mathcal A(\cA)),
+\]
+where $\mathcal F_{\cA,\Xi}$ is a Costello--Gwilliam
+holomorphic-topological BV/factorization model on the slab,
+\(\eta^\partial_{\cA}\colon
+\Obs^\partial(\mathcal F_{\cA,\Xi})\xrightarrow{\simeq}\cA\)
+is the boundary comparison, and
+\(\chi_{\mathrm{HT},\cA}\colon
+\Zderch(\cA)\to\Obs^{\mathrm{bulk}}(\mathcal F_{\cA,\Xi})\)
+is the bulk--Hochschild comparison in the declared ambient
+\(\mathcal A(\cA)\).  On the $3$d slab $X\times\R$, the associated
+theory is the supplied BV factorisation algebra
 \begin{equation}\label{eq:universal-holography-construction}
-\mathcal{T}_\cA
+\mathcal{T}_{\cA,\Xi}
 \;:=\;
-\bigl(\,X\times\R_{\ge0},\;
-\mathrm{BV}\text{-quantise}(\omega,\,Q_{\mathrm{tot}}),\;
-\partial(X\times\R_{\ge0})=X\times\{0\}\,\bigr),
+\mathcal F_{\cA,\Xi}
+\quad\text{on}\quad X\times\R_{\ge0},
 \qquad
-\mathrm{Obs}^{\partial}(\mathcal{T}_\cA)=\cA .
+\eta^\partial_\cA\colon
+\mathrm{Obs}^{\partial}(\mathcal{T}_{\cA,\Xi})
+\xrightarrow{\simeq}\cA .
 \end{equation}
 On the boundary component $X\times\{0\}$ impose the chosen holomorphic
 boundary condition whose mode algebra is $\cA$; in the bulk
 $X\times(0,\infty)$ run the corresponding Costello--Li or
-Costello--Gaiotto holomorphic Chern--Simons BV quantisation. When the
+Costello--Gaiotto holomorphic Chern--Simons BV quantisation contained
+in \(\Xi_\cA\). When the
 topologisation datum is present, the improvement
 $T^{\mathrm{imp}}=[Q_{\mathrm{tot}},G']$ makes holomorphic translations
 $Q$-exact
 (Theorems~\ref{thm:E3-topological-km},
 \ref{thm:E3-topological-DS},
 \ref{thm:E3-topological-DS-general}).
-This is $\mathcal{T}_\cA$ relative to the chosen admissible input.
+This is $\mathcal{T}_{\cA,\Xi}$ relative to the chosen admissible input.
 
 Four facts hold on this locus: the boundary recovers $\cA$; the bulk
-is the chiral derived centre
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ in the algebraic, cohomological,
-or completed/pro ambient specified by the input; the assignment is
-functorial for morphisms preserving the chosen realisation; and the
-standard shadow classes are covered by the boundary-linear, affine, and DS
-constructions.
+is compared with the chiral derived centre
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ by
+\(\chi_{\mathrm{HT},\cA}\) in the algebraic, cohomological, or
+completed/pro ambient specified by the input; the assignment is
+functorial for morphisms preserving the chosen realisation and
+comparison maps; and the standard shadow classes are covered by the
+boundary-linear, affine, and DS constructions on the corresponding
+\(\Xi\)-loci.
 
-\begin{theorem}[Universal holography on the admissible boundary-linear/DS locus]%
+\begin{theorem}[$\Xi$-realized universal holography on the admissible boundary-linear/DS locus;
+\(\ClaimStatusConditional\); licensing tags \(\beta+\gamma+\delta\)]%
 \label{thm:holographic-recon-class-m}%
 \index{universal holography!Theorem|textbf}%
 \index{holomorphic-topological theory!universal functor}%
 \index{Drinfeld--Sokolov reduction!holographic functor}%
 Let $X$ be a smooth projective curve and let
-$\mathrm{ChirAlg}^{\omega,\mathrm{adm}}_X$ denote the category whose
+$\mathrm{ChirAlg}^{\omega,\mathrm{adm},\Xi}_X$ denote the category whose
 objects are conformal chiral algebras on $X$ at non-critical level
 together with the admissible boundary-linear, affine, or DS datum of
-Theorem~\ref{thm:holographic-recon-shadow}, and whose morphisms preserve
-that datum. Let $\mathrm{HT\text{-}QFT}_{X\times\R}$ denote the category
-of $3$d holomorphic-topological BV theories on $X\times\R$. For every
-$\cA\in\mathrm{ChirAlg}^{\omega,\mathrm{adm}}_X$ in the
-generic/Koszul exact locus, with class~$\mathsf M$ read in the
-cohomological or weight-completed/pro ambient unless the bounded-shift
-HPL criterion is supplied, there is a canonical relative $3$d
-holomorphic-topological gauge theory $\mathcal{T}_\cA$ on
-$X\times\R$ for which:
+Theorem~\ref{thm:holographic-recon-shadow} and a realization package
+\(\Xi_\cA=(\mathcal F_{\cA,\Xi},\eta^\partial_{\cA},
+\chi_{\mathrm{HT},\cA},\mathcal A(\cA))\); morphisms preserve the
+boundary comparison, the bulk--Hochschild comparison, and the ambient.
+Let $\mathrm{HT\text{-}QFT}^{\Xi}_{X\times\R}$ denote the category of
+$3$d holomorphic-topological BV theories on $X\times\R$ equipped with
+these comparison data. For every
+$(\cA,\omega,\mathrm{adm},\Xi_\cA)\in
+\mathrm{ChirAlg}^{\omega,\mathrm{adm},\Xi}_X$ in the generic/Koszul
+exact locus, with class~$\mathsf M$ read in the cohomological or
+weight-completed/pro ambient unless the bounded-shift HPL criterion is
+supplied, the supplied model
+$\mathcal{T}_{\cA,\Xi}:=\mathcal F_{\cA,\Xi}$ satisfies:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item\label{item:uh-boundary}
- $\mathrm{Obs}^{\partial}(\mathcal{T}_\cA)\simeq\cA$ as
+ $\eta^\partial_\cA\colon
+ \mathrm{Obs}^{\partial}(\mathcal{T}_{\cA,\Xi})\xrightarrow{\simeq}\cA$
+ as
  $E_1$-chiral algebras on $X$;
 \item\label{item:uh-bulk}
-	 $\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_\cA)\simeq
-	 Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ as the universal algebraic
-	 open/closed bulk in the stated ambient; its strict
+	 $\chi_{\mathrm{HT},\cA}\colon
+	 Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)\xrightarrow{\simeq}
+	 \mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA,\Xi})$
+	 is the bulk--centre comparison in the stated ambient; its strict
 	 $E_3$-topological realisation is asserted only when the
 	 topologisation hypothesis of
 	 Convention~\textup{\ref{conv:chd-e3-chiral-meaning}} is part of
@@ -3068,13 +3196,16 @@ $X\times\R$ for which:
 \item\label{item:uh-functor}
  the assignment
  $\Phi_{\mathrm{hol}}\colon
- \cA\mapsto\mathcal{T}_\cA$
+ (\cA,\omega,\mathrm{adm},\Xi_\cA)\mapsto\mathcal{T}_{\cA,\Xi}$
  is a functor
-	 $\mathrm{ChirAlg}^{\omega,\mathrm{adm}}_X\to
-	 \mathrm{HT\text{-}QFT}_{X\times\R}$
-	 intertwining Drinfeld--Sokolov reduction:
- $\Phi_{\mathrm{hol}}(\mathrm{DS}\,V^k(\fg))=
- \mathrm{DS\text{-}boundary}\,\Phi_{\mathrm{hol}}(V^k(\fg))$;
+	 $\mathrm{ChirAlg}^{\omega,\mathrm{adm},\Xi}_X\to
+	 \mathrm{HT\text{-}QFT}^{\Xi}_{X\times\R}$
+	 intertwining Drinfeld--Sokolov reduction only for
+	 \(\Xi\)-compatible DS data:
+ $\Phi_{\mathrm{hol}}(\mathrm{DS}\,V^k(\fg),\Xi_{\mathrm{DS}})
+ =
+ \mathrm{DS\text{-}boundary}\,
+ \Phi_{\mathrm{hol}}(V^k(\fg),\Xi_{V^k})$;
 \item\label{item:uh-coverage}
 	 class coverage is complete on the admissible locus: class
 	 $\mathsf{G}$ and the free-field part of class $\mathsf{C}$ are
@@ -3092,53 +3223,67 @@ $X\times\R$ for which:
 \emph{Step} (i) \emph{-- boundary recovery.}
 By construction~\eqref{eq:universal-holography-construction} the
 boundary observables on $X\times\{0\}$ are the holomorphic boundary
-cochains of the chosen BV theory. For the DS route this is
+cochains of the chosen BV theory, and the comparison with \(\cA\) is
+the supplied map \(\eta^\partial_\cA\). For the DS route this is
 Costello--Gaiotto~\cite[\S 4]{CostelloGaiotto18}; for boundary-linear
-algebras it is Costello--Li~\cite{CostelloLi}; for Kac--Moody it is the
+algebras it is Costello--Li~\cite{CL16}; for Kac--Moody it is the
 holomorphic Chern--Simons boundary
 (Theorem~\ref{thm:E3-topological-km}).
 Combining these across shadow classes yields
-$\mathrm{Obs}^{\partial}(\mathcal{T}_\cA)\simeq\cA$ as $E_1$-chiral
-algebras on $X$.
+$\eta^\partial_\cA\colon
+\mathrm{Obs}^{\partial}(\mathcal{T}_{\cA,\Xi})\simeq\cA$ as
+$E_1$-chiral algebras on $X$.
 
-\emph{Step} (ii) \emph{-- bulk as derived chiral centre.}
-The bulk factorisation algebra on $X\times\R$ is the derived
-endomorphism algebra of the boundary $\cA$-module of the vacuum in the
-chosen Costello BV model. In the boundary-linear exact sector,
-Theorem~\ref{thm:boundary-linear-bulk-boundary} identifies it with the
-derived centre. In the physical prefactorisation scope,
-Theorem~\ref{thm:bulk_hochschild} identifies bulk local operators with
-the chiral Hochschild complex of $\cA$ with coefficients in itself. In
+\emph{Step} (ii) \emph{-- bulk--centre comparison.}
+The algebraic closed-sector object determined by the boundary algebra
+is
+\[
+Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+=C^\bullet_{\mathrm{ch}}(\cA,\cA)
+\]
+in the ambient stated in the theorem.  The physical bulk factorisation
+algebra on $X\times\R$ is the chosen
+\(\Obs^{\mathrm{bulk}}(\mathcal{T}_{\cA,\Xi})\).  The bridge between
+them is the comparison map \(\chi_{\mathrm{HT},\cA}\), not a
+construction of a physical bulk from \(\cA\) alone.  In the
+boundary-linear exact sector,
+Theorem~\ref{thm:boundary-linear-bulk-boundary} supplies the
+Morita/derived-centre comparison.  In the physical prefactorisation
+scope, Theorem~\ref{thm:bulk_hochschild} supplies
+\(\Psi_{\mathrm{Ran}}\), equivalently \(\chi_{\mathrm{HT},\cA}\).  In
 the DS sector, Theorem~\ref{thm:ds-hochschild-bridge} gives the
 cohomological or completed/pro comparison, with original-complex
 chain-level comparison only under the bounded-shift HPL criterion.
-These are exactly
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)=C^\bullet_{\mathrm{ch}}(\cA,\cA)$
-in the ambient stated in the theorem. If the topologisation datum of
+If the topologisation datum of
 Convention~\ref{conv:chd-e3-chiral-meaning} is present, then
 Theorem~\ref{thm:chiral-higher-deligne} upgrades the algebraic
-open/closed bulk to the strict $E_3$-topological factorisation algebra.
+closed-sector comparison to the strict $E_3$-topological
+factorisation-algebra comparison.
 
 \emph{Step} (iii) \emph{-- functoriality and DS intertwining.}
 A morphism $\varphi\colon\cA\to\cB$ in
-$\mathrm{ChirAlg}^{\omega,\mathrm{adm}}_X$ determines a boundary
-morphism between the chosen Costello BV complexes; the induced map of
-bulk factorisation algebras is the chiral Hochschild functoriality
-$C^\bullet_{\mathrm{ch}}(\varphi,\varphi)$ in the same ambient.
+$\mathrm{ChirAlg}^{\omega,\mathrm{adm},\Xi}_X$ determines a boundary
+morphism between the chosen Costello BV complexes compatible with
+\(\eta^\partial\), \(\chi_{\mathrm{HT}}\), and the ambient; the
+induced map of algebraic closed-sector objects is the chiral
+Hochschild/coderivation comparison supplied as part of the
+\(\Xi\)-compatible morphism data; it is not automatic functoriality of
+cochains along the algebra map \(\varphi\).
 Intertwining with DS is the content of the cross-volume bridge
 ``DS-bar'' (Volume~I, \texttt{ds-koszul-intertwine}) composed with
 the DS--Hochschild bridge~\ref{thm:ds-hochschild-bridge}:
 $\Phi_{\mathrm{hol}}\circ\mathrm{DS}=\mathrm{DS}\circ\Phi_{\mathrm{hol}}$
-at the level of boundary conditions, because DS is defined as a
-boundary condition on holomorphic Chern--Simons and commutes with
-bulk BV quantisation
+on the \(\Xi\)-compatible locus, because DS is defined as a boundary
+condition on holomorphic Chern--Simons and commutes with the supplied
+bulk BV quantisation and comparison maps
 (Costello--Gaiotto~\cite[\S 5]{CostelloGaiotto18}).
 
 \emph{Step} (iv) \emph{-- class coverage.}
 For class~$\mathsf{G}$ (Heisenberg): abelian holomorphic Chern--Simons
-on $X\times\R$ with Lie-algebra the Cartan of the lattice; bulk
-observables are the symmetric algebra on $H^{0,1}(X)$ shifted,
-matching $Z^{\mathrm{der}}_{\mathrm{ch}}(\mathcal{H}_k)$.
+on $X\times\R$ with Lie-algebra the Cartan of the lattice; the chosen
+bulk observables are the symmetric algebra on $H^{0,1}(X)$ shifted,
+and \(\chi_{\mathrm{HT},\mathcal H_k}\) compares them with
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\mathcal{H}_k)$.
 For class~$\mathsf{L}$ (affine Kac--Moody):
 Theorem~\ref{thm:E3-topological-km}.
 For class~$\mathsf{C}$ ($\beta\gamma$, symplectic fermion): contact
@@ -3146,71 +3291,92 @@ $W$-algebras realised as Costello--Li holomorphic boundary conditions
 on abelian $3$d HT.
 For class~$\mathsf{M}$ (Virasoro, $\cW_N$): Costello--Gaiotto construct
 the $3$d HT theory whose boundary is $\cW^k(\fg)$ for principal DS;
-the bulk is $Z^{\mathrm{der}}_{\mathrm{ch}}(\cW^k(\fg))$
-cohomologically, and at chain level only in the weight-completed/pro
-ambient unless the bounded conformal-weight-shift HPL criterion is
-verified, by the DS--Hochschild bridge~\ref{thm:ds-hochschild-bridge}.
+the comparison
+\(\chi_{\mathrm{HT},\cW^k(\fg)}\) identifies its physical bulk with
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cW^k(\fg))$ cohomologically, and at
+chain level only in the weight-completed/pro ambient unless the bounded
+conformal-weight-shift HPL criterion is verified, by the
+DS--Hochschild bridge~\ref{thm:ds-hochschild-bridge}.
 The union of the four sub-constructions defines $\Phi_{\mathrm{hol}}$
-on $\mathrm{ChirAlg}^{\omega,\mathrm{adm}}_X$.
+on $\mathrm{ChirAlg}^{\omega,\mathrm{adm},\Xi}_X$.
 \end{proof}
 
-\begin{corollary}[Class~$\mathsf{M}$ cohomological and completed bulk reconstruction]%
+\begin{corollary}[Class~$\mathsf{M}$ cohomological and completed bulk--centre comparison;
+\(\ClaimStatusConditional\); licensing tags \(\beta+\gamma+\delta\)]%
 \label{thm:class-M-chain-bulk}%
-\index{class M@class~$\mathsf{M}$!chain-level bulk reconstruction|textbf}%
-\index{W-algebras@$\cW$-algebras!chain-level bulk}%
-\index{Virasoro algebra!chain-level bulk}%
+\index{class M@class~$\mathsf{M}$!chain-level bulk--centre comparison|textbf}%
+\index{W-algebras@$\cW$-algebras!bulk--centre comparison}%
+\index{Virasoro algebra!bulk--centre comparison}%
 Let $\cA=\cW^k(\fg)$ be a $\cW$-algebra obtained by principal
-Drinfeld--Sokolov reduction of $V^k(\fg)$ at non-critical level.
-The universal bulk identification
+Drinfeld--Sokolov reduction of $V^k(\fg)$ at non-critical level, and
+equip it with a class-\(\mathsf M\) realization datum
+\(\Xi_{\cA}^{\mathrm{DS}}\) consisting of the Costello--Gaiotto
+DS-boundary model, the boundary comparison \(\eta^\partial_\cA\), the
+bulk--Hochschild comparison \(\chi_{\mathrm{HT},\cA}\), and the
+weight-completed/pro ambient.  Then
 \[
-\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_\cA)
-\;\simeq\;
 Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
 \;\simeq\;
 \mathcal{O}\bigl(M_{\mathrm{vac}}^{\mathrm{der}}\bigr)
 \]
-holds cohomologically. It holds at chain level in the
-weight-completed/pro ambient, and on the original complex only after
-the bounded conformal-weight-shift HPL criterion is supplied.
-In particular the global triangle
-$\mathrm{Bulk}(\cA)\simeq Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
-\simeq\mathrm{ChirHoch}^\bullet(\cA)$
-holds for class~$\mathsf{M}$ in that cohomological or completed sense.
+is the DS algebraic closed-sector comparison cohomologically.  The
+physical bulk comparison is the supplied map
+\[
+\chi_{\mathrm{HT},\cA}\colon
+Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+\xrightarrow{\simeq}
+\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA,\Xi}).
+\]
+It is chain-level in the weight-completed/pro ambient, and on the
+original complex only after the bounded conformal-weight-shift HPL
+criterion is supplied.  Thus the class-\(\mathsf M\) global triangle is
+a triangle of comparison maps in the declared ambient, not a
+reconstruction of a physical bulk from \(\cA\) alone.
 \end{corollary}
 
 \begin{proof}
 Apply Theorem~\ref{thm:holographic-recon-class-m}\ref{item:uh-bulk} to
-$\cA=\cW^k(\fg)$; the bulk is
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cW^k(\fg))$.
-Compose with the DS--Hochschild bridge
+$\cA=\cW^k(\fg)$ equipped with \(\Xi_{\cA}^{\mathrm{DS}}\).  The
+physical comparison is
+\(\chi_{\mathrm{HT},\cA}\colon
+Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)\to
+\mathrm{Obs}^{\mathrm{bulk}}(\mathcal{T}_{\cA,\Xi})\).
+Compose its source with the DS--Hochschild bridge
 Theorem~\ref{thm:ds-hochschild-bridge}:
 \[
 Z^{\mathrm{der}}_{\mathrm{ch}}(\cW^k(\fg))
 \;\xrightarrow{\;\mathrm{HKR}^{\mathrm{DS}}\;\simeq\;}\;
 \mathcal{O}\bigl(M_{\mathrm{vac}}^{\mathrm{der}}\bigr),
 \]
-cohomologically by Arakawa $C_2$-cofiniteness (degeneration of the HKR
-spectral sequence at $E_2$)~\cite{Arakawa15}. The same comparison is
-chain-level in the weight-completed/pro ambient, and on the original
-complex only after the bounded conformal-weight-shift HPL criterion of
-Remark~\ref{rem:class-M-hpl-convergence}; this is precisely the scope
-of Theorem~\ref{thm:ds-hochschild-bridge}.
+  cohomologically under the smooth chiral-HKR/derived-vacuum package
+  and the completed DS coderivation transfer of
+  Theorems~\ref{thm:chd-ds-hochschild} and
+  \ref{thm:ds-hochschild-bridge}.  The finite input is the
+  Kazhdan/PBW finite-weight profile of the BRST complex; generic
+  non-critical level is not being used as a \(C_2\)-cofinite
+  hypothesis. The same comparison is chain-level in the
+  weight-completed/pro ambient, and on the original complex only after
+  the bounded conformal-weight-shift HPL criterion of
+  Remark~\ref{rem:class-M-hpl-convergence}; this is precisely the scope
+  of Theorem~\ref{thm:ds-hochschild-bridge}.
 The class~$\mathsf{M}$ global triangle, left open by the
 boundary-linear argument
 (Theorem~\ref{thm:boundary-linear-bulk-boundary}, which requires
 linearity in normal directions that DS violates), is therefore closed
-cohomologically and in the completed/pro chain-level ambient.
+as a cohomological and completed/pro comparison triangle.
 \end{proof}
 
 \begin{remark}[Admissible construction]%
 \label{rem:universal-holography-admissible-construction}%
-The functor $\Phi_{\mathrm{hol}}$ is a construction on the admissible
-domain: each object includes a conformal vector together with a
-boundary-linear, affine, or DS origin. The four-part statement
-(boundary recovery, bulk as derived chiral centre, functoriality with
-DS, class coverage) is asserted only in that domain. The bulk
-observables are identified by the named comparison theorems for
-$\SCchtop$ acting on the pair $(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$.
+The functor $\Phi_{\mathrm{hol}}$ is a construction on the
+\(\Xi\)-realized admissible domain: each object includes a conformal
+vector, a boundary-linear, affine, or DS origin, a physical BV model, a
+boundary comparison, a bulk--Hochschild comparison, and an ambient. The
+four-part statement (boundary comparison, bulk--centre comparison,
+functoriality with DS, class coverage) is asserted only in that domain.
+The bulk observables are identified by the named comparison theorems
+for $\SCchtop$ acting on the pair
+$(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$.
 The DS--Hochschild bridge~\ref{thm:ds-hochschild-bridge} closes the
 class~$\mathsf{M}$ bulk comparison cohomologically and in the
 completed/pro chain-level ambient; the original-complex chain-level
@@ -3219,52 +3385,61 @@ statement remains governed by the bounded-shift HPL criterion.
 
 
 %% ========================================================================
-%% Holographic Verdier-pairing distance + Chiral Hochschild Trinity
-%% (V16 + V19 platonic theorems, merged per the cross-volume rectification).
+%% Verdier distance and chiral Hochschild comparison.
 %% ========================================================================
 
 \section{Holographic distance via the Verdier pairing}
 \label{sec:holographic-verdier-distance}
 
-The QECC distance of a HaPPY-style holographic encoding admits a
-chain-level algebraic invariant whose existence depends only on the
-Koszul-reflection involutivity $K^2 \simeq \mathrm{id}$.
+The Verdier pairing gives a distance only after the physical error
+filtration has been compared with the bar filtration.
 
-\begin{theorem}[Holographic code distance via Verdier pairing]
+\begin{theorem}[Verdier-realised holographic code distance;
+\ClaimStatusProvedHere]
 \label{thm:hc-verdier-distance}
-Let $\cA$ be a chirally Koszul algebra on a smooth projective curve $X$,
-and $(\cA, \cA^!)$ the associated Koszul pair with
-$\cA^! = K(\cA)$ via the Vol~I Koszul reflection. Suppose $\cA$ admits
-a HaPPY-style holographic encoding
-$V \colon \cH_{\mathrm{bdy}} \to \cH_{\mathrm{bulk}}$ constructed from
-the bar complex via the chain-level bulk-to-boundary map. Then the
-QECC distance of the holographic code coincides with the Verdier-pairing
-distance:
+Let $\cA$ be a chirally Koszul algebra on a smooth projective curve
+$X$, and let $(\cA,\cA^!)$ be its Verdier--Koszul pair. Let
+$V\colon \cH_{\mathrm{bdy}}\to\cH_{\mathrm{bulk}}$ be a holographic
+encoding with physical error dg algebra $\mathcal E$. Suppose
+$\mathcal E$ carries an exhaustive weight filtration and that there is a
+filtered morphism
+\[
+ \operatorname{gr}\mathcal E
+ \longrightarrow
+ \operatorname{gr}\bigl(\mathrm{Bar}(\cA)\otimes\mathrm{Bar}(\cA^!)\bigr)
+\]
+which identifies the associated graded of the undetectable error ideal
+with the radical of the Verdier evaluation
+\[
+ \mathrm{ev}_\cA\colon
+ \mathrm{Bar}(\cA)\otimes\mathrm{Bar}(\cA^!)\longrightarrow \mathbf 1
+\]
+and preserves weight. Then
 \[
  d_{\mathrm{QECC}}(\cA) \;=\; d_{\mathrm{Verdier}}(\cA),
 \]
-where $d_{\mathrm{Verdier}}(\cA)$ is the smallest integer $d \geq 1$ such
-that the Verdier evaluation
-$\mathrm{ev}_\cA \colon \mathrm{Bar}(\cA) \otimes \mathrm{Bar}(\cA^!) \to \mathbf{1}$
-is non-degenerate at bar weight $\geq d$.
+where
+\[
+ d_{\mathrm{Verdier}}(\cA)
+ =
+ \inf\{w\geq 1\mid
+ \operatorname{Rad}(\mathrm{ev}_\cA)\cap
+ \operatorname{gr}_w(\mathrm{Bar}(\cA)\otimes\mathrm{Bar}(\cA^!))\neq 0\}.
+\]
+The convention is $\inf\varnothing=+\infty$.
 \end{theorem}
 
 \begin{proof}
-The Verdier pairing arises from the Vol~I Koszul reflection
-$K \colon \cA \mapsto \cA^!$ as the unique natural transformation
-$\mathrm{Bar} \otimes (\mathrm{Bar} \circ K) \to \mathrm{id}$ compatible
-with the involutivity $K^2 \simeq \mathrm{id}$. The pairing is
-$K$-self-adjoint by construction. The bulk-to-boundary map $V$ is
-constructed from the Maurer--Cartan element of the bar complex; the
-QECC distance equals the smallest weight at which $V$ admits a left
-inverse, which is the smallest weight at which $\mathrm{ev}_\cA$ is
-non-degenerate \textup{(}standard QECC code-distance characterisation
-restricted to the chain-level pairing\textup{).}
+The code distance is the least weight of a nonzero undetectable error.
+By the filtered comparison hypothesis, the associated graded of that
+ideal is the Verdier radical, and the comparison preserves weight.
+Thus the least physical weight of an undetectable error is the least bar
+weight of a nonzero Verdier-radical class.
 \end{proof}
 
-\begin{corollary}[Verified examples]
+\begin{remark}[Genus-zero calibrations]
 \label{cor:hc-verdier-distance-examples}
-The Verdier-pairing distance computes:
+The genus-zero computations give three calibration values:
 \begin{itemize}
  \item Heisenberg $H_k$: $d_{\mathrm{Verdier}}(H_k) = +\infty$
  \textup{(}free-field, no obstruction\textup{).}
@@ -3272,55 +3447,82 @@ The Verdier-pairing distance computes:
  $d_{\mathrm{Verdier}} = 3$.
  \item HaPPY pentagon code: $d_{\mathrm{Verdier}} = 3$, matching the
  published QECC distance $d_{\mathrm{QECC}} = 3$ of the
- $[[5, 1, 3]]$ pentagon code without any free parameter.
+ $[[5, 1, 3]]$ pentagon code on the pentagon model.
 \end{itemize}
-\end{corollary}
+Each equality is an instance of Theorem~\ref{thm:hc-verdier-distance}
+after the weight filtration of the physical error algebra is identified
+with the displayed bar filtration.
+\end{remark}
 
-\begin{remark}[BRST lower bound on the Verdier distance]
+\begin{proposition}[BRST lower bound on the Verdier distance;
+\ClaimStatusProvedHere]
 \label{rem:brst-verdier-lower-bound}
-The Vol~I BRST ghost identity $K(\cA) = -c_{\mathrm{ghost}}(\mathrm{BRST}(\cA))$
-supplies the lower bound
+Assume $\cA$ admits a quasi-free BRST resolution whose ghost-spin
+filtration maps to the Verdier bar filtration and sends every nonzero
+radical class to bar weight at least twice its ghost spin. If the
+Verdier radical is zero, then $d_{\mathrm{Verdier}}(\cA)=+\infty$.
+Otherwise, if
+$\lambda_{\min}^{\mathrm{ghost}}$ is the smallest ghost spin of a
+nonzero radical class, then
 \[
  d_{\mathrm{Verdier}}(\cA) \;\geq\; 2 \lambda_{\min}^{\mathrm{ghost}},
 \]
-where $\lambda_{\min}^{\mathrm{ghost}}$ is the minimal ghost-spin in any
-quasi-free BRST resolution. This connects the holographic code
-distance to the conductor: large conductor forces large ghost-spin
-range, forcing large distance.
-\end{remark}
+and equality holds precisely when a Verdier-radical class occurs at the
+minimal ghost spin and has bar weight
+$2\lambda_{\min}^{\mathrm{ghost}}$.
+\end{proposition}
+
+\begin{proof}
+The Verdier distance is the least bar weight of a nonzero radical
+class. The stated filtration inequality gives bar weight
+$\geq 2\lambda_{\min}^{\mathrm{ghost}}$ for every such class. The last
+assertion is the equality case.
+\end{proof}
 
 \begin{conjecture}[Genus-1 Verdier distance]
 \label{conj:verdier-distance-g1}
-At genus $1$, the Verdier-pairing distance acquires an elliptic
-correction $d_{\mathrm{Verdier}}^{(1)}(\cA) = d_{\mathrm{Verdier}}^{(0)}(\cA)
-+ \dim H^1(E, \cA \otimes \cA^!)$ where the elliptic correction is the
-genus-$1$ Hochschild dimension of the Koszul pair.
+At genus $1$, the Verdier-pairing distance is governed by the elliptic
+bar pairing and the Felder form factor. No additive formula follows
+from the genus-zero pairing without this elliptic comparison.
 \end{conjecture}
 
 \begin{conjecture}[Higher-genus Verdier distance]
 \label{conj:verdier-distance-higher-genus}
 At genus $g \geq 2$, the Verdier-pairing distance is computed by a
 spectral sequence whose $E_2$ page is the genus-$g$ Hochschild cohomology
-of the Koszul pair, with the QECC-distance interpretation surviving as a
-$g$-stable invariant.
+of the Koszul pair together with the multi-weight Verdier correction.
+The QECC interpretation requires a fibrewise error filtration over
+$\overline{\mathcal M}_g$.
 \end{conjecture}
 
 
-\section{The chiral Hochschild trinity}
+\section{The chiral Hochschild comparison theorem}
 \label{sec:chiral-hochschild-trinity}
 
-Three Hochschild constructions on a chiral algebra $\cA$ in a
-precisely-named class \textup{(}logarithmic chiral $+$ finite type\textup{)}
-coincide. This unification is the chiral analogue of the classical
-Hochschild--Cartier--Eilenberg trinity for associative algebras over a
-commutative ring; in the chiral setting it factors through the
-factorisation homology of $\cA$ on the circle.
+The Fulton--MacPherson, enveloping, and factorization-homology models
+are compared by two quasi-isomorphisms.
 
-\begin{theorem}[Chiral Hochschild trinity]
+\begin{theorem}[Chiral Hochschild comparison theorem;
+\ClaimStatusProvedHere]
 \label{thm:chiral-hochschild-trinity}
-For any chiral algebra $\cA$ in the logarithmic-finite-type class, the
-three model-specific Hochschild complexes coincide, factoring through
-factorisation homology of $\cA$ on $S^1$:
+\phantomsection\label{prop:chiral-hochschild-comparison-locus}
+Let $\cA$ be a logarithmic finite-type chiral algebra in a filtered
+chiral ambient in which the geometric, algebraic, and
+factorization-homology Hochschild models are defined. Suppose the
+comparison maps
+\[
+ \Phi_{\mathrm{GA}}\colon
+ C^\bullet_{\mathrm{chiral}}(\cA)
+ \longrightarrow
+ \mathrm{Ext}^*_{\cA^e}(\cA,\cA),
+ \qquad
+ \Phi_{\mathrm{AB}}\colon
+ \mathrm{Ext}^*_{\cA^e}(\cA,\cA)
+ \longrightarrow
+ \mathrm{RHH}_{\mathrm{ch}}(\cA)
+\]
+are filtered quasi-isomorphisms compatible with the circle
+factorization product. Then
 \[
  \boxed{\;C^\bullet_{\mathrm{chiral}}(\cA)
  \;\xrightarrow[\Phi_{\mathrm{GA}}]{\sim}\;
@@ -3329,57 +3531,51 @@ factorisation homology of $\cA$ on $S^1$:
  \mathrm{RHH}_{\mathrm{ch}}(\cA)
  \;=\; \int_{S^1} \cA.\;}
 \]
-The three models -- geometric $C^\bullet_{\mathrm{chiral}}$ on
-Fulton--MacPherson, algebraic $\mathrm{Ext}^*_{\cA^e}$ on
-$\mathrm{End}^{\mathrm{ch}}$, bigraded $\mathrm{RHH}_{\mathrm{ch}}$
-via derived tensor product -- are pairwise quasi-isomorphic.
+The geometric Fulton--MacPherson complex, the algebraic enveloping
+Ext-complex, and the derived chiral Hochschild complex therefore carry
+one chiral Hochschild object.
 \end{theorem}
 
 \begin{proof}
-The trinity is a corollary of two Platonic theorems:
-\begin{enumerate}
- \item The Vol~I Koszul Reflection Theorem $K = \bar{B}_X$ involutive
- \textup{(}Theorem~A in Platonic form\textup{).} This gives the
- canonical comparison $\Phi_{\mathrm{GA}}$ via the bar coalgebra
- presentation of $\cA$.
- \item The single-colour projection of the Vol~II Swiss-cheese
- $\SCchtop$ pentagon: restrict the
- five-presentation pentagon to the closed colour, recovering the
- three-presentation trinity. Edges:
- $\Phi_{12}\big|_{\mathrm{c}} = \Phi_{\mathrm{GA}}$,
- $\Phi_{23}\big|_{\mathrm{c}} = \Phi_{\mathrm{AB}}$.
-\end{enumerate}
-The factorisation-homology identification
-$\mathrm{RHH}_{\mathrm{ch}}(\cA) = \int_{S^1} \cA$ is the
-Costello--Gwilliam realisation of derived Hochschild as factorisation
-homology on the circle, which projects onto each of the three model
-identifications via the $\SCchtop$ Swiss-cheese
-structure.
+The assertion is the two-out-of-three statement for the displayed
+zigzag of filtered quasi-isomorphisms. Compatibility with circle
+factorization identifies the last complex with
+$\int_{S^1}\cA$ and transports the product and bracket operations
+through the zigzag.
 \end{proof}
 
-\begin{corollary}[$\kappa$-conductor as supertrace of the trinity centre]
+\begin{theorem}[$\kappa$-conductor as trace on chiral Hochschild;
+\ClaimStatusProvedHere]
 \label{cor:kappa-conductor-trinity-centre}
-The Vol~I $\kappa$-conductor $K(\cA) = -c_{\mathrm{ghost}}(\mathrm{BRST}(\cA))$
-\textup{(}universal-conductor theorem of Vol~I\textup{)} equals the
-supertrace of the trinity centre:
+In the hypotheses of Theorem~\ref{thm:chiral-hochschild-trinity},
+suppose the conductor operator $K_\cA$ is trace-class on the common
+Hochschild object and that the Vol~I conductor identity
+$K(\cA)=-c_{\mathrm{ghost}}(\mathrm{BRST}(\cA))$ holds in the same
+ambient. Then
 \[
  K(\cA) \;=\; \mathrm{tr}_{Z(\cA)}(K_\cA)
- \;=\; \mathrm{str}\bigl(\mathrm{centre}(\mathrm{Trinity}(\cA))\bigr)
  \;=\; -c_{\mathrm{ghost}}(\mathrm{BRST}(\cA)).
 \]
-This ties the Vol~I conductor to the Vol~II Hochschild trinity: the
-conductor IS the supertrace of the chiral Hochschild homology
-$\int_{S^1} \cA$ at the universal Maurer--Cartan element.
-\end{corollary}
+Here $Z(\cA)$ denotes any of the three quasi-isomorphic Hochschild
+models of Theorem~\ref{thm:chiral-hochschild-trinity}.
+\end{theorem}
 
-\begin{example}[K3 realisation of the trinity centre supertrace]
+\begin{proof}
+The trace-class hypothesis defines $\mathrm{tr}_{Z(\cA)}(K_\cA)$ on
+the common Hochschild object. The Vol~I conductor identity identifies
+this trace with $-c_{\mathrm{ghost}}(\mathrm{BRST}(\cA))$. The
+quasi-isomorphisms of Theorem~\ref{thm:chiral-hochschild-trinity}
+transport the trace between the three Hochschild models.
+\end{proof}
+
+\begin{example}[K3 realisation of the Hochschild centre supertrace]
 \label{ex:trinity-k3-centre-trace}
-The K3 example is the point where the centre trace stops looking like a
-formal Hochschild slogan and becomes a concrete bridge between chiral
-and automorphic data. At $d=2$, the Mukai-Heisenberg output of the K3
-category is still an $E_2$-chiral Heisenberg object, so the trinity
-centre trace remains on the chiral side and recovers the K3
-$\kappaChHodge$-value. At $d=3$, at the K3 Borcherds row with
+On the K3 Hall--Borcherds comparison locus, the centre trace is a
+bridge between chiral and automorphic data. At $d=2$, the
+Mukai-Heisenberg output of the K3 category is an $E_2$-chiral
+Heisenberg object, so the Hochschild trace remains on the chiral side
+and recovers the K3
+$\kappaChHodge$-value. At $d=3$, on the K3 Borcherds row with
 Borcherds-side algebra $\mathfrak g_{\Delta_5}$, the same Vol~II
 centre trace specialises through the Universal $\Phi$-Trace Identity to
 \[
@@ -3405,32 +3601,28 @@ supertrace and as a Vol~III Borcherds weight, once the K3
 Hall--Borcherds comparison data are supplied.
 \end{example}
 
-\begin{remark}[HZ3-14 amplitude/occupation discipline]
+\begin{remark}[Amplitude and occupation]
 \label{rem:hz3-14-amplitude-occupation}
-The amplitude bound $H^*_{\mathrm{ch}}(\cA, \cA) \subseteq [0, 2]$ and
-the Virasoro-specific occupation $\{0, 2\}$ are model-independent under
-Theorem~\ref{thm:chiral-hochschild-trinity}: each model produces the
-same amplitude, and the Virasoro occupation $h^1 = 0$ is recovered
-identically in each of the three trinity presentations. The amplitude
-bound is universal for the logarithmic-finite-type class; the occupation
-is Virasoro-specific.
+If one of the three Hochschild models of
+Theorem~\ref{thm:chiral-hochschild-trinity} has cohomological amplitude
+$[0,2]$, the other two have the same amplitude. For the Virasoro
+central-extension sector, the occupied degrees are $\{0,2\}$.
 \end{remark}
 
-\begin{conjecture}[Trinity extensions: non-Koszul / trace-conductor /
+\begin{conjecture}[Comparison extensions: non-Koszul / trace-conductor /
  higher-genus / CY3 / pentagon-coherence]
 \label{conj:trinity-extensions}
-Five named extensions of the Trinity Theorem record the natural axes
+Five extensions of the comparison-locus statement record the axes
 along which the equivalence may break: \textup{(i)} non-Koszul chiral
-algebras may admit Trinity only after passing to a Koszul double cover;
+algebras may admit the comparison only after passing to a Koszul double cover;
 \textup{(ii)} the supertrace identification
-$K(\cA) = \mathrm{str}(\mathrm{centre}(\mathrm{Trinity}(\cA)))$ extends
-to non-Koszul under conjecture; \textup{(iii)} at higher genus the
+$K(\cA) = \mathrm{str}(K_\cA)$ extends
+to non-Koszul trace-class objects; \textup{(iii)} at higher genus the
 three models split into a stratification rather than a coincidence;
-\textup{(iv)} the CY$_3$ chiral algebra Trinity follows from the Vol~III
+\textup{(iv)} the CY$_3$ chiral comparison follows from the Vol~III
 $\Phi_3$ functor under CY-A$_3$; \textup{(v)} the Vol~II
-$\SCchtop$ pentagon Trinity coherence at five
-presentations \textup{(}of which trinity is the single-colour
-projection\textup{)} is the next unification step.
+$\SCchtop$ pentagon coherence at five presentations controls the
+single-colour Hochschild comparison.
 \end{conjecture}
 
 \section{Synthesis}

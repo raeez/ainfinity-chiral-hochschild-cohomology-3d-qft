@@ -55,7 +55,7 @@ if [[ "$FILE_PATH" == *.tex ]]; then
   if grep -Eq 'H[_^].*!\s*(=|\\simeq|\\cong)\s*H_\{?-k|H_k\^!\s*=\s*H_\{-k\}' "$FILE_PATH" 2>/dev/null; then
     MATCHES=$(grep -En 'H[_^].*!\s*(=|\\simeq|\\cong)\s*H_\{?-k|H_k\^!\s*=\s*H_\{-k\}' "$FILE_PATH" | head -3)
     if [ -n "$MATCHES" ]; then
-      ISSUES="${ISSUES}AP33: H_k^! = H_{-k} is FALSE. H_k^! = Sym^ch(V*), a different algebra. Lines: ${MATCHES}\n"
+      ISSUES="${ISSUES}AP33: H_k^! = H_{-k} is FALSE. For k!=0, H_k^! is the curved second-kind Sym^ch(V*[1]) branch; uncurved Sym^ch(V*) is only the k=0/associated-graded shadow. Lines: ${MATCHES}\n"
     fi
   fi
 

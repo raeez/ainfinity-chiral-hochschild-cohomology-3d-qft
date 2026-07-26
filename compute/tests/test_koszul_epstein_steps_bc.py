@@ -263,8 +263,8 @@ class TestShadowData:
         expected = 10.0 / (0.5 * (2.5 + 22))
         assert abs(virasoro_S4(c) - expected) < 1e-10
 
-    def test_S4_self_dual(self):
-        """S_4 at the self-dual point c=13."""
+    def test_S4_comparison_fixed(self):
+        """S_4 at the comparison fixed point c=13."""
         c = 13.0
         expected = 10.0 / (13.0 * (65 + 22))
         assert abs(virasoro_S4(c) - expected) < 1e-12

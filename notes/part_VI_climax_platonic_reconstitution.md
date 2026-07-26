@@ -81,9 +81,9 @@ At k = -h^∨, Sugawara T(z) = :JJ:/(2(k+h^∨)) degenerates; topologization thr
 
 ## Section 4. Consequence Ledger
 
-UCT closes the following error-catalogue entries unconditionally:
+UCT records the following error-catalogue statuses:
 
-- **FM125** (gravity-koszul-triangle projection vs equivalence) — CLOSED: bulk ≃ Z^{der}_{ch}(Vir_c) proved as full derived equivalence, not saddle-point projection.
+- **FM125** (gravity-koszul-triangle projection vs equivalence) — CLOSED in the corrected form: \(Z^{der}_{ch}(\mathrm{Vir}_c)\) is the bulk vertex, while \(\C[\![c]\!]\) is only the connective central-extension shadow selected by the Brown--Henneaux/pure-gravity reading.
 - **FM126** (stale bridge label; LG/chiral conflation) — CLOSED: `thm:global-triangle-boundary-linear` proves chiral G/L/C global triangle; DS-Hoch bridge extends to class M; cotangent identification is a specialization, not the proof.
 - **FM127** (perturbative finiteness) — CLOSED: algebraic finiteness (shadow MC termwise) = physical UV finiteness via chain-level E_3 at class M (closed by DS-Hoch).
 - **FM128** (V^♮ orbifold as research expectation) — CLOSED: α_orb = 0 proved via Leech even-unimodular ⟹ J(τ) SL_2(ℤ)-invariance.

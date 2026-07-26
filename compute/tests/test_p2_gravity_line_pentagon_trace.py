@@ -168,9 +168,10 @@ def test_effHCSQuartic_does_NOT_vanish_on_quintic_class_B():
 
 
 def test_effHCSQuartic_chi_top_K3_is_24():
-    # Hirzebruch--Riemann--Roch: chi_top(K3) = 24.
     q = HCSQuarticObstructionWitness()
     assert q.chi_top_K3 == 24
+    assert q.chi_top_K3_source == "Euler class / Chern-Gauss-Bonnet"
+    assert "not the source of chi_top(K3)=24" in q.hrr_role_for_K3
 
 
 def test_effHCSQuartic_chi_top_E_is_0():

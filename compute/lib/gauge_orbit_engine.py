@@ -1140,7 +1140,7 @@ def virasoro_gauge_data(c: float) -> dict:
       - kappa(Vir_c) = c/2
       - Shadow depth = infinity (class M, infinite tower)
       - MC element at genus 1: Theta_1 = (c/2) * omega_1 (leading scalar)
-      - Koszul dual: Vir_{26-c}
+      - Same-family line-side representative: Vir_{26-c}
 
     Parameters
     ----------

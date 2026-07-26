@@ -239,11 +239,13 @@ class TestAffineExceptional:
         assert glcm['overall_class'] == 'L'
 
     @pytest.mark.parametrize("name", ["E6", "E7", "E8"])
-    def test_m3_vanishes(self, name):
-        """m₃ = 0 for all affine KM (Jacobi identity)."""
+    def test_m3_is_lie_cubic_transfer(self, name):
+        """Affine KM has finite Lie cubic transfer and no wheel tower."""
         ae = AffineExceptional(name, k=1)
-        result = ae.m3_vanishing()
-        assert result['m3_zero']
+        result = ae.m3_profile()
+        assert not result['m3_zero']
+        assert result['lie_cubic_present']
+        assert result['contact_zero']
         assert result['m4_zero']
 
     @pytest.mark.parametrize("name", ["E6", "E7", "E8"])
@@ -459,13 +461,13 @@ class TestCrossFamily:
         assert 3 in cr_bp['TT']['r_poles']
 
     def test_class_l_iff_double_pole(self):
-        """Class L ↔ max OPE pole ≤ 2 (and m₃=0)."""
+        """Class L is double-pole finite Lie transfer."""
         # E-types are class L
         for name in ['E6', 'E7', 'E8']:
             ae = AffineExceptional(name)
             assert ae.glcm_class()['overall_class'] == 'L'
             assert ae.collision_residues()['ope_max_pole'] == 2
-            assert ae.m3_vanishing()['m3_zero']
+            assert ae.m3_profile()['lie_cubic_present']
 
         # N=2, BP are NOT class L
         n2 = N2Superconformal(k_val=1)

@@ -212,9 +212,12 @@ def log_berezinian_eigenvalue(
 def kappa_str(level_sym, m: int, n: int) -> sp.Expr:
     """κ^str(Y_ħ(sl(m|n))) = (k + h^∨_s) · sdim(g) / (2 h^∨_s).
 
-    For g = sl(m|n) with m ≠ n,
-        sdim(sl(m|n))  =  m^2 - n^2 ,    h^∨_s = m - n ,
-        κ^str         =  (k + m - n)(m + n) / 2 .
+    For g = sl(m|n) with m ≠ n, the contraction uses the defining
+    supertrace Casimir index I_str = (m - n)(m + n), not the raw
+    superdimension (m - n)^2 - 1:
+        h^∨_s = m - n ,
+        κ^str = (k + h^∨_s) I_str / (2 h^∨_s)
+               = (k + m - n)(m + n) / 2 .
 
     This is Vol II Theorem thm:super-complementarity-supertrace-zero
     Step 1 (ProvedHere via super-PBW + Sugawara contraction).
@@ -472,7 +475,69 @@ def rtt_centre_dimension(m: int, n: int) -> Dict[str, object]:
 
 
 # =====================================================================
-# 9. PUBLIC SUMMARY
+# 9. CANONICAL BEREZINIAN BRIDGE SIGN ORACLE
+# =====================================================================
+
+def _parity(value: int) -> int:
+    return int(value) % 2
+
+
+def super_permutation_sign(parity_v: int, parity_w: int) -> int:
+    """Koszul sign in P_s(v tensor w)=(-1)^{|v||w|}w tensor v."""
+    return -1 if (_parity(parity_v) * _parity(parity_w)) % 2 else 1
+
+
+def graded_matrix_product_sign(parity_a: int, parity_i: int, parity_j: int,
+                               parity_k: int, parity_l: int) -> int:
+    """Sign in (E_ij tensor a)(E_kl tensor b) for super-RTT products."""
+    exponent = (
+        (_parity(parity_a) + _parity(parity_i) + _parity(parity_j))
+        * (_parity(parity_k) + _parity(parity_l))
+    ) % 2
+    return -1 if exponent else 1
+
+
+def mk_delta_compatibility_sign(input_parities, b_parity: int) -> Dict[str, object]:
+    """Sign for <m_k(a_1,...,a_k),b> vs <a_1 tensor ... tensor a_k,Delta_k b>."""
+    bars = tuple(_parity(p) for p in input_parities)
+    b = _parity(b_parity)
+    pair_sum = sum(bars[i] * bars[j] for i in range(len(bars)) for j in range(i + 1, len(bars)))
+    epsilon = (b * sum(bars) + pair_sum) % 2
+    return {
+        "input_parities": bars,
+        "b_parity": b,
+        "epsilon": epsilon,
+        "sign": -1 if epsilon else 1,
+        "formula": "epsilon=|b|sum_i |a_i| + sum_{i<j}|a_i||a_j| mod 2",
+    }
+
+
+def canonical_berezinian_bridge_profile() -> Dict[str, object]:
+    """Return the chain-level bridge datum required for canonical complementarity."""
+    return {
+        "super_permutation": "P_s(v tensor w)=(-1)^{|v||w|}w tensor v",
+        "r_matrix": "R(u)=1-hbar P_s/u",
+        "graded_matrix_product": (
+            "(E_ij tensor a)(E_kl tensor b)="
+            "(-1)^{(|a|+|i|+|j|)(|k|+|l|)} delta_jk E_il tensor ab"
+        ),
+        "supertrace": "str(X)=tr(X|V_0)-tr(X|V_1)",
+        "berezinian_infinitesimal": "d log Ber(1+epsilon X)=str(X)",
+        "pairing": "<-,->_can: A tensor A^! -> C",
+        "trace_shadow": "Tr_{A/A_nil} <a,a^!>_can = str(aa^!)",
+        "berezinian_shadow": "Ber(<e_i,e_j^!>_can)=Ber(A)",
+        "mk_delta_compatibility": (
+            "<m_k(a_1,...,a_k),b>_can=(-1)^epsilon "
+            "<a_1 tensor ... tensor a_k,Delta_k b>_can"
+        ),
+        "without_bridge": (
+            "supertrace and Berezinian complementarity remain parallel scalar identities"
+        ),
+    }
+
+
+# =====================================================================
+# 10. PUBLIC SUMMARY
 # =====================================================================
 
 def f13_summary() -> Dict[str, object]:

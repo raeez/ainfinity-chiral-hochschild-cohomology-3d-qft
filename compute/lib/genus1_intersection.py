@@ -21,8 +21,8 @@ degeneration τ → i∞ (the genus-0 limit) and encodes the topology
 of the torus.
 
 For the Heisenberg H_k:
-  r^{(0)}(z) = k/z
-  r^{(1)}(z;τ) = k·ζ(z|τ)
+  r_coeff^{(0)}(z) = k/z for the tensor kernel k*Omega_H/z
+  r_coeff^{(1)}(z;τ) = k·ζ(z|τ)
   R^{(1)}(z;τ) = k·[ζ(z|τ) - 1/z]
                = -k·[G₂(τ)·z + G₄(τ)·z³ + G₆(τ)·z⁵ + ...]
 
@@ -180,7 +180,8 @@ def weierstrass_zeta_minus_rational(max_order: int = 5, num_q_terms: int = 10):
 def genus1_intersection_heisenberg(k_val=1, max_order=5, num_q_terms=10):
     r"""Genus-1 derived intersection number for the Heisenberg H_k.
 
-    The genus-0 r-matrix: r^{(0)}(z) = k/z.
+    The genus-0 rank-one coefficient: r_coeff^{(0)}(z) = k/z
+    for the post-d-log tensor kernel k*Omega_H/z.
     The genus-1 r-matrix: r^{(1)}(z;τ) = k·ζ(z|τ).
     The derived intersection number:
 
@@ -223,8 +224,8 @@ def genus1_intersection_heisenberg(k_val=1, max_order=5, num_q_terms=10):
         'kappa': k,
         'coisson_bracket': S(0),  # c₀ = 0 for Heisenberg: {J_{(0)}J} = 0 (abelian)
         'elliptic_regime': 'decoupled',  # always decoupled since c₀ = 0
-        'genus_0_r_matrix': f'{k}/z',
-        'genus_1_r_matrix': f'{k}·ζ(z|τ)',
+        'genus_0_r_matrix': f'{k}*Omega_H/z (rank-one coeff {k}/z)',
+        'genus_1_r_matrix': f'rank-one coeff {k}·ζ(z|τ)',
         'intersection_number': terms,
         'leading_term': {
             'z_power': 1,
@@ -320,7 +321,7 @@ def genus1_intersection_affine_sl2(k_val=1, max_order=3):
     The Heisenberg H_k has ONLY Sector II (since c₀ = 0, Sector I vanishes),
     but with ζ instead of ℘ because the Heisenberg has only c₁ = k·1
     contributing to the 1/z pole (after d-log absorption the Heisenberg
-    genus-0 r-matrix is k/z, not k/z²).
+    genus-0 tensor kernel has rank-one coefficient k/z, not k/z²).
 
     COMPARISON TABLE:
     ┌──────────────┬──────────────────────────┬───────────────────────────┐
@@ -328,7 +329,7 @@ def genus1_intersection_affine_sl2(k_val=1, max_order=3):
     ├──────────────┼──────────────────────────┼───────────────────────────┤
     │ c₀           │  0 (abelian)             │  f^{ab}_c J^c ≠ 0        │
     │ c₁           │  k (scalar)              │  k·κ^{ab} (matrix)       │
-    │ r⁰(z)        │  k/z                     │  Ω/z + kκ/z²             │
+    │ r⁰_coeff(z)  │  k/z                     │  Ω/z + kκ/z²             │
     │ r^{E_τ}(z)   │  k·ζ(z|τ)               │  Ω·ζ(z|τ) + kκ·℘(z|τ)   │
     │ R¹ leading    │  -k·G₂·z                │  -Ω·G₂·z + 3kκ·G₄·z²    │
     │ B-monodromy   │  0 (decoupled)           │  2η_τ·Ω ≠ 0 (entangled) │
@@ -338,8 +339,9 @@ def genus1_intersection_affine_sl2(k_val=1, max_order=3):
 
     Wait: the Heisenberg comparison needs clarification.  For the Heisenberg,
     {J_λ J} = k·λ, so c₀ = 0 and c₁ = k.  The genus-0 r-matrix is
-    r(z) = c₀/z + c₁/z² = k/z² (NOT k/z).  But after d-log absorption
-    (AP19), the bar-extracted r-matrix is k/z.  The manuscript's convention
+    r(z) = c₀/z + c₁/z² = k/z² (NOT the post-d-log coefficient k/z).
+    But after d-log absorption (AP19), the bar-extracted tensor kernel is
+    k*Omega_H/z and has coefficient k/z.  The manuscript's convention
     in eq. (elliptic-r-matrix) uses the λ-bracket r-matrix BEFORE d-log
     absorption: r(z) = Σ c_n/z^{n+1}.  So for the Heisenberg:
       r(z) = c₁/z² = k/z² (only the double-pole term)
@@ -366,16 +368,18 @@ def genus1_intersection_affine_sl2(k_val=1, max_order=3):
     └──────────────┴──────────────────────────┴───────────────────────────┘
 
     HOWEVER: the existing genus1_intersection_heisenberg() function above
-    uses r(z) = k/z (the d-log absorbed version) and gets R¹ = k·[ζ-1/z].
+    uses the rank-one coefficient r_coeff(z) = k/z of the d-log
+    absorbed tensor kernel and gets R¹ = k·[ζ-1/z].
     This represents a DIFFERENT convention from the manuscript's elliptic
     r-matrix formula.  The two are related by:
       - Manuscript convention (pre-d-log): r(z) = Σ c_n/z^{n+1}
       - Bar complex convention (post-d-log): r(z) = Σ c_n/z^n
 
-    In the bar complex convention, the Heisenberg has r(z) = k/z and
+    In the bar complex convention, the Heisenberg tensor kernel has
+    coefficient r_coeff(z) = k/z and
     the elliptic version is k·ζ(z|τ), giving odd-power quasi-modular
-    expansion.  In the manuscript convention, the Heisenberg has r(z) = k/z²
-    and the elliptic version is k·℘(z|τ), giving even-power modular
+    expansion.  In the manuscript convention, the Heisenberg coefficient is
+    k/z² and the elliptic version is k·℘(z|τ), giving even-power modular
     expansion.
 
     For consistency with the elliptic spectral dichotomy theorem
@@ -491,7 +495,8 @@ def genus1_intersection_affine_sl2(k_val=1, max_order=3):
     # The two components are COMPATIBLE: [∇_i, ∇_τ] = 0.
     # This compatibility is the FLATNESS of the KZB connection,
     # and it requires BOTH the CYBE for r(z) AND the heat equation
-    # for ℘(z|τ).
+    # for the theta/Kronecker kernel whose normalized derivatives
+    # produce the ℘-terms.
     #
     # For sl₂ at level k, the KZB system on 2 points reduces to:
     #   ∇ = ∂_z - 1/(k+2) · [Ω·ζ(z|τ) + k·κ·℘(z|τ)]
@@ -622,7 +627,9 @@ def genus1_intersection_affine_sl2(k_val=1, max_order=3):
             'space_component': '∇_i = ∂_{z_i} - 1/(k+2) Σ_{j≠i} [Ω_{ij}·ζ(z_{ij}|τ) + k·κ·℘(z_{ij}|τ)]',
             'modular_component': '∇_τ = ∂_τ - 1/(2(k+2)) Σ_{i<j} Ω_{ij}·℘(z_{ij}|τ)',
             'flatness': '[∇_i, ∇_j] = [∇_i, ∇_τ] = 0',
-            'compatibility_source': 'CYBE + heat equation for ℘',
+            'compatibility_source': (
+                'CYBE + theta/Kronecker heat equation producing wp terms'
+            ),
         },
 
         # Monodromy

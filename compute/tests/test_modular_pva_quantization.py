@@ -486,11 +486,11 @@ class TestQuantizationObstructionTower:
 class TestVirasoroQuantizationData:
     """Full quantization data for Virasoro."""
 
-    def test_virasoro_self_dual_at_13(self):
-        """Virasoro self-dual at c = 13 (NOT c = 26)."""
+    def test_virasoro_line_comparison_fixed_at_13(self):
+        """Virasoro line-side comparison is fixed at c = 13, not c = 26."""
         from lib.modular_pva_quantization import virasoro_quantization_data
         data = virasoro_quantization_data(13)
-        assert data['self_dual_point'] == 13
+        assert data['line_comparison_fixed_point'] == 13
         assert simplify(data['kappa'] - data['kappa_dual']) == 0
 
     def test_virasoro_complementarity(self):

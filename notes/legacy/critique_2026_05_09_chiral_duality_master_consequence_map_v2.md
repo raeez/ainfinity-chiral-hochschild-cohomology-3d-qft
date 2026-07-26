@@ -247,9 +247,9 @@ The bulk is $\mathrm{ChirHoch}^\bullet(A, A)$ (cohomology, *not* homology). The 
 
 - $\mathrm{ChirHoch}_\bullet(A, A) \simeq \mathrm{ChirHoch}^\bullet(A, A)$: Calabi-Yau / dualising-line compatibility. License = orientation datum.
 - $\mathrm{HC}^{\mathrm{cyc}}(A) \to \mathrm{ChirHoch}^\bullet(A, A)$: $S^1$-equivariant Hochschild spectral sequence. License = $S^1$-action on bar complex (not free in chain-level ordinary; weight-completed required).
-- $\mathrm{HC}^{-}(A)$: negative cyclic computes $K$-theory in CY ambient. License = compact CY datum + Bridgeland orientation.
+- $\mathrm{HC}^{-}(A)$: negative cyclic is the target of the Chern character from the $K$-theory of the CY module category; it is not equal to $K$-theory. License = compact CY trace datum + Bridgeland orientation/chamber.
 
-The current Vol II `chapters/connections/hochschild.tex:626-767` is correct on $\mathrm{ChirHoch}^\bullet(A, A) = $ bulk. But it does not articulate the four-object discipline. Reconstitution work: **add a §5-style remark to `hochschild.tex` listing the four objects and their forward arrows**.
+The current Vol II `chapters/connections/hochschild.tex` is correct on $\mathrm{ChirHoch}^\bullet(A, A) = $ bulk and now articulates the four-object discipline. Reconstitution work: **keep the four objects and their forward arrows separated, especially the Chern-character direction $K \to \mathrm{HC}^{-}$**.
 
 This is a **β-type sharpening** within Cut B that v1 missed.
 

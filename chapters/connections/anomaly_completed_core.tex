@@ -29,7 +29,7 @@ The principal external inputs are:
 chiral algebras as quantum coisson structures~\cite{BD04};
 chiral/factorization Koszul duality~\cite{FG12};
 derived centers in topological field theory~\cite{costello-gaiotto,CP2020,DNP25};
-higher operations in HT perturbation theory~\cite{GKW24};
+higher operations in HT perturbation theory~\cite{GKW25};
 boundary chiral algebras~\cite{CDG20};
 Koszul-dual twisted holography~\cite{Zeng23};
 and line operators from dg-shifted Yangians~\cite{DNP25}.
@@ -123,7 +123,39 @@ Both passes are universal, exact, functorial, and compatible with the monoidal s
 \subsection{The transgression algebra}
 \label{subsec:tholog-transgression-algebra}
 
-Let \(B\) be a dg algebra, and let
+Let \(B\) be a dg algebra. In a genuinely non-commutative bar model the
+anomaly may act not only by central multiplication but also by a
+degree-\(1\) contraction/sigma-derivation
+\[
+\iota_{\Theta}\colon B\longrightarrow B[1].
+\]
+
+\begin{definition}[Ore transgression with anomaly contraction]
+\label{def:tholog-ore-transgression-contraction}
+Assume that the anomaly datum consists of a degree-\(2\) cocycle
+\(\Theta\in Z^{2}(B)\) and a degree-\(1\) anomaly contraction
+\(\iota_{\Theta}\) compatible with the differential, so that the
+relation below is stable under \(d\). The \emph{non-commutative Ore
+transgression algebra} is
+\begin{equation}
+\label{eq:tholog-ore-transgression-contraction}
+B_{\Theta}^{\mathrm{Ore}}
+:=
+\frac{B\langle \eta\rangle}
+{\left\langle
+\eta b-(-1)^{|b|}b\eta-\iota_{\Theta}(b)
+\;\middle|\; b\in B \text{ homogeneous}
+\right\rangle},
+\qquad |\eta|=1,\qquad d\eta=\Theta.
+\end{equation}
+Equivalently, \(B_{\Theta}^{\mathrm{Ore}}\) is the Ore extension of
+\(B\) by the sign automorphism \(\sigma(b)=(-1)^{|b|}b\) and the
+\(\sigma\)-derivation \(\iota_{\Theta}\).
+\end{definition}
+
+If \(\iota_{\Theta}=0\) and \(\Theta\) is central, the Ore
+transgression reduces to the central-shadow transgression used in the
+computations below. Thus let
 \[
 \Theta\in Z^{2}(B)\cap Z(B)
 \]
@@ -142,7 +174,108 @@ B_{\Theta}
 where \(B * k\langle\eta\rangle\) denotes the free product of graded algebras and the differential extends that of \(B\).
 \end{definition}
 
-Thus \(B_{\Theta}\) is the skew polynomial/Ore extension of \(B\) by the sign automorphism \(\sigma(b)=(-1)^{|b|}b\), equipped with a differential transgressing \(\Theta\).
+Thus \(B_{\Theta}\) is the specialization of
+\eqref{eq:tholog-ore-transgression-contraction} with
+\(\iota_{\Theta}=0\): the skew polynomial/Ore extension of \(B\) by the
+sign automorphism \(\sigma(b)=(-1)^{|b|}b\), equipped with a
+differential transgressing \(\Theta\).
+
+\begin{proposition}[Curved Maurer--Cartan convention]
+\label{prop:tholog-curved-mc-convention}
+Let \(B\) be a curved dg algebra with derivation \(d\) and curvature
+\(\Theta\in B^{2}\):
+\[
+d^{2}=[\Theta,-],
+\qquad d\Theta=0.
+\]
+For a degree-\(1\) element \(\eta\) in an associative enlargement of
+\(B\), set \(d_{\eta}=d+[\eta,-]\). Then
+\[
+d_{\eta}^{2}
+=
+\left[\Theta+d\eta+\frac12[\eta,\eta],-\right]
+=
+\left[\Theta+d\eta+\eta^{2},-\right].
+\]
+Thus \(d_{\eta}\) is square-zero exactly when the curved Maurer--Cartan
+equation
+\[
+d\eta+\frac12[\eta,\eta]+\Theta=0
+\]
+holds, equivalently \(d\eta+\eta^{2}+\Theta=0\) in the associative
+commutator convention. The strict transgression algebra
+\(B_{\Theta}\) of Definition~\ref{def:tholog-transgression-algebra}
+uses a different, central-shadow convention: \(\Theta\) is a closed
+central cocycle in an honest dg algebra and \(d\eta=\Theta\). In that
+convention no twist \(d+[\eta,-]\) is being made; the square
+\(u=\eta^{2}\) is therefore not absorbed into the differential but
+survives as the secondary central class.
+\end{proposition}
+
+\begin{proof}
+The graded Jacobi identity gives
+\[
+(d+[\eta,-])^{2}
+=d^{2}+[d\eta,-]+\frac12[[\eta,\eta],-].
+\]
+Since \(d^{2}=[\Theta,-]\) and \(|\eta|=1\), the associative
+commutator satisfies \([\eta,\eta]=2\eta^{2}\) in characteristic
+\(0\). The displayed identity follows. The last assertion is the
+definition of the strict Ore transgression convention: the differential
+is extended by \(d\eta=\Theta\), while the algebra remains free in the
+\(\eta\)-direction, so \(\eta^{2}\) is an element of the algebra rather
+than a term in the twisting equation.
+\end{proof}
+
+\begin{definition}[Curved Maurer--Cartan anomaly completion]
+\label{def:tholog-curved-mc-anomaly-completion}
+\index{anomaly completion!curved Maurer--Cartan convention|textbf}
+Let \((B,d,\Theta)\) be a curved dg algebra with
+\[
+d^{2}=[\Theta,-].
+\]
+The curved-Maurer--Cartan anomaly completion is the associative
+enlargement
+\[
+B_{\Theta}^{\mathrm{curv}}
+:=
+B\langle\eta,u\rangle/(u-\eta^{2}),
+\qquad |\eta|=1,\quad |u|=2,
+\]
+equipped with the twisted differential
+\[
+d_{\eta}:=d+[\eta,-]
+\]
+and the defining flatness equation
+\begin{equation}\label{eq:curved-mc-anomaly-completion}
+d\eta+\frac12[\eta,\eta]+\Theta=0,
+\qquad\text{equivalently}\qquad
+d\eta+\eta^{2}+\Theta=0.
+\end{equation}
+Then \(d_{\eta}^{2}=0\). This is the curved-twist convention; it is
+not the strict central-shadow transgression algebra of
+Definition~\ref{def:tholog-transgression-algebra}, where \(d\eta=\Theta\)
+is used only after \(\Theta\) has been made a closed central cocycle in
+an honest dg algebra and no twist \(d+[\eta,-]\) is being formed.
+\end{definition}
+
+\begin{example}[Virasoro class-\(\mathbf M\) anomaly completion]
+\label{ex:virasoro-curved-mc-anomaly-completion}
+For the Banach-completed Virasoro bar complex, the curved completion is
+\[
+B_{\Theta}^{\mathrm{Vir}}
+=
+\Bch(\mathrm{Vir}_{c})^{\wedge}_{\rho}
+\otimes k\langle\eta,u\rangle/(u-\eta^{2}),
+\]
+with
+\[
+d\eta+\eta^{2}+\Theta_{\mathrm{Vir}}=0.
+\]
+The secondary anomaly \(u=\eta^{2}\) is meaningful only after this
+associative transgression algebra has been fixed; it is not an
+independent replacement for the curved Maurer--Cartan equation.
+\end{example}
 
 \begin{remark}[Normal form]
 \label{rem:tholog-normal-form}
@@ -1318,7 +1451,7 @@ specialises to:
 \begin{tabular}{llll}
 & $B$ & $r^{\mathrm{coll}}(z)$ & $A_\partial$ \\
 \hline
-Heisenberg & $\Sym^{\mathrm{ch}}(V^*)$ & $k/z$ & $\cH_k$ \\
+Heisenberg & $\Sym^{\mathrm{ch}}(V^*)$ & $k\Omega_{\cH}/z$ & $\cH_k$ \\
 $\widehat{\mathfrak{sl}}_2{}_k$
  & $\widehat{\mathfrak{sl}}_2{}_{-k-4}$
  & $\Omega + k\delta/z$

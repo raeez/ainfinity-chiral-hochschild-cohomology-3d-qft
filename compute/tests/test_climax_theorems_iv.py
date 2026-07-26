@@ -35,6 +35,12 @@ import pytest
 # adversarial_swarm_20260417/wave10_hz_iv_w8b_primitive_tautology_scan.md.
 
 from compute.lib.independent_verification import independent_verification
+from compute.lib.irregular_kzb_stokes import (
+    covered_level_locus,
+    formal_type_profile,
+    kzb_vs_curved_dunn_profile,
+    stokes_sector_profile,
+)
 from compute.lib.z2_group_cohomology import h3_bz2_u1_class_from_triple_sign
 
 
@@ -204,6 +210,47 @@ def test_kzb_composition_at_generic_level():
     # Poincare-rank-1 gives 2 Stokes matrices per divisor.
     total_stokes_matrices = 2 * num_nodal_divisors
     assert total_stokes_matrices == 12
+
+
+@independent_verification(
+    claim="prop:irregular-kzb-q-formal-type-stokes-cocycle",
+    derived_from=[
+        "Boundary q-coordinate normal form inscribed in "
+        "modular_swiss_cheese_operad.tex",
+        "Mixed Stokes clutching hypotheses of "
+        "thm:irregular-kzb-composition",
+    ],
+    verified_against=[
+        "Levelt-Turrittin finite-pole formal type shape",
+        "JMU/Malgrange-Sibuya sectorial solution and Stokes transition form",
+        "Curved-Dunn H^2 tests, which use a separate homological mechanism",
+    ],
+    disjoint_rationale=(
+        "The manuscript proof uses KZB boundary formal type plus wild "
+        "groupoid clutching. This test checks the independent formal "
+        "connection normal-form pattern and separately asserts that the "
+        "curved-Dunn H^2 mechanism consumes different homological inputs."
+    ),
+)
+def test_irregular_kzb_q_formal_type_and_stokes_cocycle_profile():
+    formal_type = formal_type_profile(3)
+    stokes = stokes_sector_profile()
+    level = covered_level_locus("generic_nonrational")
+    separation = kzb_vs_curved_dunn_profile()
+
+    assert formal_type["terms"] == (
+        "A_2/(1 q^1)",
+        "A_3/(2 q^2)",
+        "A_1 log q",
+    )
+    assert stokes["sectorial_solution"] == (
+        "Y_ell(q)=H_ell(q) exp(Theta_partial(q)) q^Lambda"
+    )
+    assert stokes["cocycle"] == "S_{ell1,ell2} S_{ell2,ell3} S_{ell3,ell1}=1"
+    assert level["level"] == "k in C\\Q"
+    assert level["mechanism"] == "irregular KZB formal type + wild groupoid"
+    assert "mixed Stokes matrices" in separation["kzb_stokes_supplies"]
+    assert "modular-bootstrap H^2 acyclicity" in separation["curved_dunn_h2_requires"]
 
 
 # ---------------------------------------------------------------------------

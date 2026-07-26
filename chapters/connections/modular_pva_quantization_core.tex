@@ -20,8 +20,10 @@ continuation across the resonance loci), and $\hypTLift$
 $T = [Q_{\mathrm{tot}}, G]$ to the all-loop quantum object;
 Costello \cite{Costello2011Renorm}; Costello--Gwilliam \cite{CG17};
 Lurie HA chap.~5 \cite{LurieHA}). The classical-to-quantum bridge is
-Construction Problem~3 (CLAUDE.md~\S9). Every theorem statement that
-depends on the all-loop quantum lift carries the four $\hyp$ tags;
+the all-loop PVA--quantum HT lifting problem: the classical
+$\lambda$-Jacobi limit must lift to an $E_3$-structure on
+$Q$-cohomology. Every theorem statement that depends on the all-loop
+quantum lift carries the four $\hyp$ tags;
 classical statements (the genus-zero $\lambda$-bracket and the modular
 MC obstruction recursion) remain unconditional.
 
@@ -390,7 +392,10 @@ Z_g(\cC) \;:=\; \Tr_\cC^{\circ g}(\Theta_\cC^{(g)}) \;\in\; \Gamma(\overline{\cM
 where $\Tr_\cC^{\circ g}$ denotes $g$-fold application of the clutching-trace operation (composing the clutching maps $\mathrm{cl}_p$ from Definition~\textup{\ref{def:oc-factorization-category}(vi)} with the cyclic trace), and $\Theta_\cC^{(g)}$ is the genus-$g$ component of the modular twisting morphism.
 
 At genus~$0$: $Z_0(\cC) = 1$ (the vacuum amplitude).
-At genus~$1$: $Z_1(\cC) = \Tr_\cC(\Theta_\cC^{(1)})$, which equals $\eta(\tau)^{-\kappa}$ for the Heisenberg (Computation~\textup{\ref{comp:heisenberg-genus1-obstruction}}).
+At genus~$1$: the scalar trace is
+$\Tr_\cC(\Theta_\cC^{(1)})=\kappaChHodge(\cC)/24$ on the scalar
+Hodge lane. For the Heisenberg, the associated determinant-line
+shadow is $\eta(\tau)^{-k}$.
 \end{theorem}
 
 \begin{proof}
@@ -405,9 +410,12 @@ line bundle on a stack tautologically implies equivariance under the mapping cla
 group action: modular covariance is automatic from the stack structure, not an
 additional axiom.
 
-At genus~$1$, this means $Z_1$ is a modular form of weight $-\kappaChHodge(\cA)/2$, not
-weight~$0$. This is modular \emph{covariance}, not invariance. For example,
-$Z_1(H_k) = \eta(\tau)^{-k}$ has modular weight $-k/2$.
+At genus~$1$, this means the determinant-line shadow, after its branch
+and multiplier datum have been fixed, is a modular form of weight
+$-\kappaChHodge(\cA)/2$, not weight~$0$. This is modular
+\emph{covariance}, not invariance. For example, the Heisenberg
+determinant-line shadow $Z_1(H_k)=\eta(\tau)^{-k}$ has modular weight
+$-k/2$ only on that chosen determinant-character lane.
 
 Modular \emph{invariance} of the full partition function
 $Z(\tau,\bar{\tau}) = |Z_1|^2$ requires the left--right matching condition
@@ -539,6 +547,146 @@ With the notation above:
 Separating one-edge expansions preserve the first Betti number and total genus, while
 nonseparating one-edge expansions increase the first Betti number by one. The identities
 follow by taking the genus-homogeneous pieces of the equality $(D_0+D_1)^2=0$.
+\end{proof}
+
+\begin{theorem}[Explicit relative modular graph complex; \ClaimStatusProvedHere]
+\label{thm:explicit-relative-modular-graph-complex}
+Let $C$ be a modular bar datum. For a connected stable graph $\Gamma$ there are two
+equivalent orientation conventions in use:
+\[
+\mathfrak{o}_{\mathrm{GK}}(\Gamma)
+:=
+\det(kE(\Gamma))\otimes \det(H_1(\Gamma;k))^{-1},
+\]
+the Getzler--Kapranov graph-orientation line used in $\Bmod(C)$, and, when each vertex
+is represented by a genus-$g(v)$ stable curve $\Sigma_{g(v)}$ carrying its Hodge
+orientation,
+\[
+\mathfrak{o}_{\mathrm{Hdg}}(\Gamma)
+:=
+\det(kE(\Gamma))\otimes
+\bigotimes_{v\in V(\Gamma)}
+\det\!\bigl(H^1(\Sigma_{g(v)};k)\bigr)^{-1}.
+\]
+Replacing $\mathfrak{o}_{\mathrm{GK}}$ by $\mathfrak{o}_{\mathrm{Hdg}}$ only tensors
+the vertex labels by their fixed Hodge determinant lines; the stable-graph
+differential and the genus recursion below are unchanged. In genus-labelled notation,
+the relative Feynman transform is the completed product
+\[
+\FT_{\mathrm{rel}}(C)
+=
+\prod_{[\Gamma]\in \StGraph^{\mathrm{conn}}}
+\left(
+\mathfrak{o}(\Gamma)\otimes
+\bigotimes_{v\in V(\Gamma)}s\,C(g(v),\mathrm{Fl}(v))
+\right)_{\Aut(\Gamma)},
+\]
+where $\mathfrak{o}$ is either of the two orientation conventions above, with the
+corresponding convention fixed once and for all.
+
+Its differential is
+\[
+D=D_{\mathrm{int}}+D_{\mathrm{sep}}+D_{\mathrm{nsep}},
+\]
+where, in the dual Feynman-transform convention,
+\[
+D_{\mathrm{sep}}
+=
+\sum_{\substack{e\ \mathrm{separating}}}
+\pm\,\operatorname{contract}_e,
+\qquad
+D_{\mathrm{nsep}}
+=
+\sum_{\substack{e\ \mathrm{nonseparating}}}
+\pm\,\xi_e.
+\]
+Here $\operatorname{contract}_e$ is dual to the separating one-edge expansion of the
+bar-coalgebra convention, while $\xi_e$ is the nonseparating clutching map that
+raises total genus by one. Thus
+\[
+D_0:=D_{\mathrm{int}}+D_{\mathrm{sep}},
+\qquad
+D_1:=D_{\mathrm{nsep}},
+\]
+and
+\[
+D_0^2=0,\qquad
+D_1^2=0,\qquad
+D_0D_1+D_1D_0=0.
+\]
+
+Let $L=\Coder(\FT_{\mathrm{rel}}(C))[-1]$ be the strict modular deformation
+dg Lie algebra and write a genus-expanded Maurer--Cartan element as
+\[
+\Theta=\sum_{g\ge0}\hbar^g\Theta^{(g)}.
+\]
+The genus-homogeneous Maurer--Cartan equations are
+\[
+D_0\Theta^{(0)}
++\frac12[\Theta^{(0)},\Theta^{(0)}]=0,
+\]
+\[
+D_0\Theta^{(1)}
++D_1\Theta^{(0)}
++[\Theta^{(0)},\Theta^{(1)}]=0,
+\]
+and, for $g\ge2$,
+\[
+D_0\Theta^{(g)}
++D_1\Theta^{(g-1)}
++\frac12\sum_{a+b=g}[\Theta^{(a)},\Theta^{(b)}]=0.
+\]
+Equivalently, after twisting by $\Theta^{(0)}$, the genus-$g$ forcing term is
+\[
+R_g(\Theta_{<g})
+:=
+D_1\Theta^{(g-1)}
++\frac12
+\sum_{\substack{a+b=g\\ a,b<g}}
+[\Theta^{(a)},\Theta^{(b)}],
+\]
+and its obstruction class is
+\[
+[o_g]
+:=
+\bigl[R_g(\Theta_{<g})\bigr]
+\in
+H^2\!\left(\gr_F^g L,\ D_0+[\Theta^{(0)},-]\right).
+\]
+It vanishes if and only if a genus-$g$ correction $\Theta^{(g)}$ exists modulo
+$F^{g+1}L$.
+\end{theorem}
+
+\begin{proof}
+The product formula is the completed stable-graph product of
+\cref{sec:modular-bar-coalgebra}, now retaining the vertex genus in the notation.
+The orientation line determines the Koszul sign of a one-edge operation. Passing from
+the bar-coalgebra convention to the dual Feynman-transform convention replaces the
+one-edge expansion by the corresponding edge contraction; the signs are transported by
+the same determinant line, so the total operator is still
+$D=D_{\mathrm{int}}+D_{\mathrm{sep}}+D_{\mathrm{nsep}}$.
+
+The identities for $D_0$ and $D_1$ are exactly
+\cref{prop:D0D1}. They are the three genus-homogeneous pieces of $D^2=0$: genus shift
+$0$, genus shift $1$, and genus shift $2$.
+
+The Maurer--Cartan equation in $L$ is
+\[
+D\Theta+\frac12[\Theta,\Theta]=0.
+\]
+Substitute $D=D_0+D_1$ and
+$\Theta=\sum_{g\ge0}\hbar^g\Theta^{(g)}$, then compare the coefficient of
+$\hbar^g$. Since $D_0$ preserves genus and $D_1$ raises genus by one, the displayed
+three equations are precisely the genus-$0$, genus-$1$, and genus-$g$ components.
+For $g\ge1$, the two bracket summands involving $\Theta^{(g)}$ combine with
+$D_0\Theta^{(g)}$ to give the twisted differential
+$(D_0+[\Theta^{(0)},-])\Theta^{(g)}$. The remaining lower-genus part is
+$R_g(\Theta_{<g})$. The standard dg Lie calculation using
+$D_0^2=0$, $D_0D_1+D_1D_0=0$, $D_1^2=0$, the Jacobi identity, and the lower-genus
+Maurer--Cartan equations shows that $R_g(\Theta_{<g})$ is closed for the twisted
+differential. Hence it defines the displayed cohomology class, and solving the
+genus-$g$ equation is equivalent to choosing $\Theta^{(g)}$ whose twisted differential
+is $-R_g(\Theta_{<g})$.
 \end{proof}
 
 \subsection{Curved extension via $S$-tails}
@@ -925,9 +1073,10 @@ $\sum_g N^{2-2g} \delta_{\mathrm{planar}}^{(g)}$
  $[\alpha,\beta] = f^{ab}{}_c\, \alpha \circ_a \beta$.
  The genus-$1$ obstruction is
  $\Ob_1 = (k + h^\vee) \cdot [\omega_1]$.
- The full modular MC class in the scalar sector is the
- $\hat{A}$-genus:
- $\delta_\cA = \sum_{g \ge 1} \hbar^g \kappa^g \lambda_g$,
+The full modular MC class in the scalar sector is the
+$\hat{A}$-genus:
+ $\delta_\cA^{\mathrm{conn}}
+ = \kappa\sum_{g \ge 1} \hbar^{2g} \lambda_g^{\mathrm{FP}}$,
  where $\kappa = \kappa^{\mathrm{KM}} = \dim(\mathfrak{g})(k+h^\vee)/(2h^\vee)$
  is the modular characteristic of Vol~I, Theorem~D.
 
@@ -1497,9 +1646,11 @@ to the full genus tower; in Volume~I's shadow metric
 formulation, the genus-$g$ free energy $F_g$ arises from
 the degree-$0$ projection $\Theta_A^{(g,0)}$ of the genus-$g$
 MC component. For uniform-weight algebras,
-$F_g = \kappa \cdot \lambda_g^{\mathrm{FP}}$ at all genera;
+$F_g^{\mathrm{sc}}(\cA)=\kappaChHodge(\cA)\lambda_g^{\mathrm{FP}}$ at all genera;
 for multi-weight algebras (e.g.\ $W_3$), the genus-$g$
-free energy acquires a cross-channel correction
+free energy is
+$F_g(\cA)=F_g^{\mathrm{sc}}(\cA)+\delta F_g^{\mathrm{cross}}(\cA)$ and the
+second summand is the cross-channel correction
 $\delta F_g^{\mathrm{cross}}$ from mixed-propagator graphs
 (Volume~I, Theorem~\ref*{V1-thm:multi-weight-genus-expansion}).
 \end{remark}
@@ -2540,7 +2691,8 @@ Adding: $\kappa = \pi N^2/\lambda + (2\pi/\lambda - 1)N
 follows after collecting terms.
 
 Part~(iii): the generating function identity is the
-universal formula $F_g = \kappa \cdot c_g$ summed over $g$, using the
+universal formula
+$F_g(\cA_N)=\kappaChHodge(\cA_N)c_g$ summed over $g$, using the
 identity $\sum c_g\, x^{2g} = x/(2\sin(x/2)) - 1$ with $x = \hbar$
 (in the $\hbar^{2g}$ convention).
 \end{proof}
@@ -2591,14 +2743,17 @@ characteristic, but not the full matrix-model answer. The precise
 relationship is:
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item At genus~$1$, the scalar-lane result $F_1^{\mathrm{scalar}}
- = \kappa/24$ with $\kappa = \kappaChHodge(\cA_N)$
+ = \kappaChHodge(\cA_N)/24$
  computes the leading perturbative
- approximation to $F_1^{\mathrm{GV}}$. At large~$k$ (weak coupling),
- $\kappa \sim N^2 k/2 \to \infty$ and $F_1 \sim N^2 k/48$, which
- matches the one-loop determinant of the CS path integral around the
- trivial flat connection.
+approximation to $F_1^{\mathrm{GV}}$. At large~$k$ (weak coupling),
+$\kappaChHodge(\cA_N) \sim N^2 k/2 \to \infty$ and
+$F_1 \sim N^2 k/48$, which
+ matches the gauge-fixed semiclassical one-loop determinant of the
+ Chern--Simons BV complex at the trivial flat connection, after the
+ same boundary-mode normalization.  It is not the full matrix-model
+ functional integral.
 \item At genus~$g \geq 2$, the scalar lane captures the
- $\hat{A}$-genus contribution $\kappa \cdot c_g$ but misses
+ $\hat{A}$-genus contribution $\kappaChHodge(\cA_N)c_g$ but misses
  the instanton corrections (non-trivial flat connections on
  $\Sigma_g \times S^1$) that contribute to $F_g^{\mathrm{GV}}$ at
  higher orders in~$e^{i\lambda}$.
@@ -2757,7 +2912,7 @@ $T=[Q_{\mathrm{tot}},G]$. The ladder therefore splits as follows:
  Theorem~\ref{thm:iterated-sugawara-construction}); convergence
  controlled by $\beta_N = 12(H_N - 1)$
  (Chapter~\ref{ch:beta-N-closed-form-all},
- Conjecture~\ref{thm:beta-N-closed-form-proved-all-N}).
+ Conjecture~\ref{conj:beta-N-harmonic-closed-form}).
 \item \textsf{cor:rung-w-infty}: classical PVA = $\cW_\infty[\mu]$
  inverse limit; quantum upgrade = $E_\infty$-topological in the
  tower-limit sense.

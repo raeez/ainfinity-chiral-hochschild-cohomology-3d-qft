@@ -39,7 +39,7 @@ from compute.lib.independent_verification import independent_verification
 @independent_verification(
     claim="thm:homotopy-Koszul",
     derived_from=[
-        "Programme recognition theorem for log SC^{ch,top}-algebras",
+        "Programme product-formal local-shadow recognition theorem for log SC^{ch,top}-algebras",
         "Kontsevich formality with Drinfeld associator fix",
         "Tamarkin zigzag transfer through the product-collapse",
     ],
@@ -141,7 +141,7 @@ def test_rectification_axioms_to_operad():
 # ---------------------------------------------------------------------------
 # 4. thm:physics-bridge  (raviolo.tex:408)
 #    3d HT QFT BV observables form a logarithmic SC^{ch,top}-algebra
-#    after a factorized logarithmic HT parametrix is chosen.
+#    after a BV datum and factorized logarithmic HT parametrix are chosen.
 # ---------------------------------------------------------------------------
 
 @independent_verification(
@@ -149,7 +149,8 @@ def test_rectification_axioms_to_operad():
     derived_from=[
         "Programme logarithmic SC^{ch,top}-algebra definition",
         "Configuration-space A_infinity operations on Obs_bulk",
-        "Factorized logarithmic HT parametrix",
+        "BV datum (E,Q,omega_BV,I,B)",
+        "Factorized logarithmic HT parametrix with kernel homotopy",
     ],
     verified_against=[
         "Gwilliam-Rabinovich-Williams arXiv:2001.05379 (GRW21 HT one-loop finiteness)",
@@ -159,8 +160,9 @@ def test_rectification_axioms_to_operad():
     disjoint_rationale=(
         "Gwilliam-Rabinovich-Williams establish one-loop finiteness of HT "
         "theories via Feynman-integrand UV estimates independent of the "
-        "programme's log-SC axioms. The factorized-parametrix condition is "
-        "the extra gauge-fixing input needed before the log-SC conclusion. "
+        "programme's log-SC axioms. The BV datum and "
+        "factorized-parametrix condition are the extra gauge-fixing inputs "
+        "needed before the log-SC conclusion. "
         "Costello-Li construct BV quantized "
         "holomorphic CS by renormalization theory. Costello-Gwilliam supply "
         "the general BV-to-prefactorization dictionary from BV data alone. "

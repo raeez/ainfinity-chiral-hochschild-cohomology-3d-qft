@@ -17,12 +17,17 @@ AP10 compliance: structural identities (additivity, DS functoriality)
 used as cross-checks, not just hardcoded expected values.
 """
 import pytest
+from pathlib import Path
 from sympy import Rational, S, simplify
 
 from compute.lib.affine_half_space_bv_engine import (
     dual_coxeter_number,
     effective_level_shift,
+    image_charge_propagator_profile,
     one_loop_graph_count,
+    reflected_arnold_relation_profile,
+    reflected_obstruction_profile,
+    reflected_weight_composition,
     two_loop_vanishing_reason,
     verify_level_shift_ds_compatible,
     kappa_kac_moody,
@@ -194,6 +199,92 @@ class TestTwoLoopVanishing:
 
 
 # =========================================================================
+# 4b. REFLECTED HALF-SPACE PROPAGATOR
+# =========================================================================
+
+class TestReflectedHalfSpacePropagator:
+    """Verify the image-charge and reflected Arnold package."""
+
+    def test_image_charge_profile(self):
+        profile = image_charge_propagator_profile()
+
+        assert profile["half_space"] == "H={t>=0}"
+        assert "P_H(x,y)" in profile["propagator"]
+        assert "-sigma P" in profile["propagator"]
+        assert profile["reflection"] == "sigma(phi)=(-1)^{w_phi} phi"
+        assert "OPE_boundary" in profile["boundary_ope"]
+        assert "-(-1)^{w_j}" in profile["boundary_ope"]
+
+    def test_reflected_weight_composition_mod_two(self):
+        assert reflected_weight_composition(1, 0, 1) == 0
+        assert reflected_weight_composition(1, 1, 1) == 1
+        assert reflected_weight_composition(0, 0, 2) == 0
+
+    def test_half_space_reduction_theorem_is_conditional_reduction(self):
+        """The reflected identity verifies supplied BV data; it does not construct them."""
+        root = Path(__file__).resolve().parents[2]
+        source = (root / "chapters" / "connections" / "affine_half_space_bv.tex").read_text()
+        start = source.index(r"\begin{theorem}[Reduction from the reflected weight identity;")
+        end = source.index(r"\end{theorem}", start)
+        block = source[start:end]
+        flat = " ".join(block.split())
+
+        required = (
+            r"\ClaimStatusConditional",
+            r"licensing \(\gamma+\delta+\varepsilon\)",
+            r"Assumption~\ref{assum:kz-analytic-sdr-package}",
+            "renormalized logarithmic half-space BV theory",
+            "reflected weight identity",
+            "This theorem is a reduction theorem, not a construction",
+            "Costello effective action, counterterms, or all-loop QME",
+            "After the renormalized BV data have been constructed",
+        )
+        for needle in required:
+            assert " ".join(needle.split()) in flat
+
+        retired = (
+            r"\begin{theorem}[Reduction from the reflected weight identity]%",
+            "the reflected weight identity constructs the Costello effective action",
+            "the reflected weight identity proves the all-loop QME",
+        )
+        for needle in retired:
+            assert needle not in block
+
+    def test_reflected_obstruction_profile(self):
+        profile = reflected_obstruction_profile()
+
+        assert "Res_{D12}" in profile["quadratic"]
+        assert "P(x1,x2)-sigma P(x1,bar x2)" in profile["quadratic"]
+        assert "sum_cyc" in profile["cubic"]
+        assert "[pi_2,pi_2]" in profile["cubic"]
+        assert profile["vanishing"] == "O_3=0 by reflected Arnold relation"
+
+    def test_reflected_arnold_relation_profile(self):
+        profile = reflected_arnold_relation_profile()
+
+        assert "omega_12^H wedge omega_23^H" in profile["relation"]
+        assert profile["cancels_cubic_obstruction"] is True
+        assert "doubled FM compactification" in profile["mechanism"]
+
+    def test_affine_half_space_source_contains_image_charge_theorem(self):
+        import os
+
+        repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+        source = os.path.join(repo_root, 'chapters', 'connections', 'affine_half_space_bv.tex')
+        with open(source, encoding='utf-8') as handle:
+            text = handle.read()
+
+        assert 'thm:image-charge-reflected-arnold-cancellation' in text
+        assert 'eq:half-space-image-charge-propagator' in text
+        assert 'eq:half-space-reflected-field-weight' in text
+        assert 'eq:half-space-boundary-ope-coefficient' in text
+        assert 'eq:half-space-reflected-weight-composition' in text
+        assert 'eq:half-space-quadratic-reflected-obstruction' in text
+        assert 'eq:half-space-cubic-reflected-obstruction' in text
+        assert 'eq:half-space-reflected-arnold-relation' in text
+
+
+# =========================================================================
 # 5. DS COMPATIBILITY
 # =========================================================================
 
@@ -271,10 +362,10 @@ class TestKappaConsistency:
         kap_dual = kappa_kac_moody(-k - 4, 'A', 1)
         assert kap + kap_dual == 0
 
-    def test_kappa_critical_returns_none(self):
-        """At the critical level k = -h^vee, kappa is undefined."""
+    def test_kappa_critical_vanishes(self):
+        """At the critical level k = -h^vee, kappa_ch vanishes."""
         # sl_2: critical at k = -2
-        assert kappa_kac_moody(-2, 'A', 1) is None
+        assert kappa_kac_moody(-2, 'A', 1) == 0
 
     def test_kappa_E8_positive(self):
         """kappa(E_8, k=31) should be positive (unitary regime)."""

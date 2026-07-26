@@ -33,6 +33,7 @@ sys.path.insert(0, 'compute')
 import cmath
 import math
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
@@ -99,7 +100,7 @@ class TestVirasoroShadowData:
             expected = math.sqrt(rho_sq)
             assert abs(d.rho - expected) < 1e-12
 
-    def test_rho_self_dual_c13(self):
+    def test_rho_comparison_fixed_c13(self):
         """rho(13) ~ 0.4674 (convergent)."""
         from lib.shadow_borel_resurgence import VirasoroShadowData
         d = VirasoroShadowData(13.0)
@@ -113,10 +114,10 @@ class TestVirasoroShadowData:
         assert d.rho > 1.0
         assert not d.is_convergent
 
-    def test_is_self_dual(self):
+    def test_is_comparison_fixed(self):
         from lib.shadow_borel_resurgence import VirasoroShadowData
-        assert VirasoroShadowData(13.0).is_self_dual
-        assert not VirasoroShadowData(12.0).is_self_dual
+        assert VirasoroShadowData(13.0).is_comparison_fixed
+        assert not VirasoroShadowData(12.0).is_comparison_fixed
 
 
 # =====================================================================
@@ -491,22 +492,22 @@ class TestKoszulDuality:
             kd = koszul_dual_borel_comparison(c)
             assert abs(kd['kappa_sum'] - 13.0) < 1e-12
 
-    def test_self_dual_at_c13(self):
-        """rho(13) = rho(13): self-dual."""
+    def test_comparison_fixed_at_c13(self):
+        """rho(13) = rho(13): comparison fixed."""
         from lib.shadow_borel_resurgence import koszul_dual_borel_comparison
         kd = koszul_dual_borel_comparison(13.0)
-        assert kd['self_dual']
+        assert kd['comparison_fixed']
 
-    def test_not_self_dual_at_c1(self):
+    def test_not_comparison_fixed_at_c1(self):
         from lib.shadow_borel_resurgence import koszul_dual_borel_comparison
         kd = koszul_dual_borel_comparison(1.0)
-        assert not kd['self_dual']
+        assert not kd['comparison_fixed']
 
     def test_rho_not_symmetric_under_duality(self):
-        """rho(c) != rho(26-c) in general (not symmetric under Koszul duality).
+        """rho(c) != rho(26-c) in general on the line-side comparison.
 
         The shadow growth rate depends on c^2, so it is NOT invariant under
-        the Koszul involution c -> 26-c. Only at c=13 (the fixed point) do
+        the comparison involution c -> 26-c. Only at c=13 (the fixed point) do
         rho(c) and rho(26-c) agree.
         """
         from lib.shadow_borel_resurgence import VirasoroShadowData
@@ -587,6 +588,67 @@ class TestFractionArithmetic:
 
 
 # =====================================================================
+# Section 11b: Manuscript guards for the gravity resolvent
+# =====================================================================
+
+class TestGravityResolventManuscriptGuard:
+    """Guard the scalar-resolvent theorem against stale normalizations."""
+
+    @staticmethod
+    def _gravity_source() -> str:
+        root = Path(__file__).resolve().parents[2]
+        return (root / "chapters/connections/3d_gravity.tex").read_text()
+
+    def test_resolvent_theorem_names_branch_and_genus_zero(self):
+        source = self._gravity_source()
+        start = source.index(
+            r"\begin{theorem}[Scalar shadow resolvent on the Virasoro metric branch"
+        )
+        end = source.index(r"\end{theorem}", start)
+        block = source[start:end]
+        compact = "".join(block.split())
+
+        assert r"\ClaimStatusConditional" in block
+        assert r"\hypAmbientWtCpl+\hypStokes" in block
+        assert r"\sqrt{Q_{\mathrm{Vir}}(0)}=c" in block
+        assert r"r \ge 2" in block
+        assert "Abelian integral on the rational double cover" in block
+        assert "genus~$0$" in block
+        assert "candidate scalar-shadow Stokes directions" in block
+        assert "elliptic integral" not in block
+        assert "No real pole" not in block
+        assert "bound-state" not in block
+        branch_formula = "".join((
+            r"\frac{c(5c+22)}{180c+872}"
+            r"\left(-6 \pm 4i\sqrt{\frac{5}{5c+22}}\right)"
+        ).split())
+        assert branch_formula in compact
+        assert r"\tfrac{c(5c+22)}{2}" not in block
+
+    def test_shadow_table_uses_normalized_low_degree_rows(self):
+        source = self._gravity_source()
+        start = source.index(r"\subsubsection*{The shadow table through $S_9$}")
+        end = source.index(r"\end{center}", start)
+        table = source[start:end]
+
+        assert r"$2$ & $\dfrac{c}{2}$ & $+$ & $c/2$" in table
+        assert r"$3$ & $2$ & $+$ & $2$" in table
+        assert r"$2$ & $\dfrac{c}{12}$" not in table
+        assert r"$3$ & $-c$" not in table
+        assert "first Taylor" in table
+        assert "not its Taylor coefficients" not in table
+
+    def test_exact_low_degree_shadow_coefficients_at_c13(self):
+        from lib.shadow_borel_resurgence import shadow_coefficients_fraction
+
+        coeffs = shadow_coefficients_fraction(13, 1, 5)
+        assert coeffs[2] == Fraction(13, 2)
+        assert coeffs[3] == Fraction(2)
+        assert coeffs[4] == Fraction(10, 13 * (5 * 13 + 22))
+        assert coeffs[5] == Fraction(-48, 13**2 * (5 * 13 + 22))
+
+
+# =====================================================================
 # Section 12: Constrained Epstein connection
 # =====================================================================
 
@@ -609,7 +671,7 @@ class TestConstrainedEpstein:
         d = VirasoroShadowData(c)
         assert abs(ec['branch_points'][0] - d.t_plus) < 1e-12
 
-    def test_self_dual_c13(self):
+    def test_comparison_fixed_c13(self):
         from lib.shadow_borel_resurgence import constrained_epstein_comparison
         ec = constrained_epstein_comparison(13.0)
         assert ec['functional_equation_symmetric']
@@ -647,7 +709,7 @@ class TestResurgenceAtlas:
                 assert atlas[i + 1]['c'] >= 6.0
         assert found_transition
 
-    def test_atlas_self_dual_only_c13(self):
+    def test_atlas_comparison_fixed_only_c13(self):
         from lib.shadow_borel_resurgence import resurgence_atlas
         atlas = resurgence_atlas()
         z2_entries = [a for a in atlas if a['z2_symmetric']]

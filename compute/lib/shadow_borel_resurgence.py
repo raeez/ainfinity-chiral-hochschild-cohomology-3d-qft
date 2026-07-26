@@ -61,8 +61,8 @@ For the (generically divergent) shadow series, the median resummation
     G^med(t) = (1/2)(S_+[G](t) + S_-[G](t))
 
 (average of lateral Borel sums above and below the Stokes line) is real-valued
-for real t and provides a well-defined non-perturbative completion. For the
-shadow obstruction tower, this gives the "physical" value of the shadow generating function
+for real t and provides a well-defined resummed scalar shadow. For the
+shadow obstruction tower, it gives the median value of the scalar generating function
 beyond the convergence radius R = 1/rho.
 
 Since G(t) = int_0^t s*sqrt(Q_L(s)) ds is known exactly (in terms of
@@ -86,11 +86,12 @@ a branch-point singularity of exponent 1/2).
 SELF-DUAL POINT c = 13
 =======================
 
-At the Virasoro self-dual point c = 13 (Vir_c^! = Vir_{26-c} = Vir_13):
+At the fixed point c = 13 of the same-family Virasoro line-side
+comparison (Vir_{26-c} = Vir_13):
 - The branch points are complex conjugates: t_+/- = -2.1127 +/- 0.3377i
 - The Borel singularities: A_+/- = -0.4615 +/- 0.0738i
 - rho(13) = 0.4674 (convergent tower)
-- The Stokes graph has enhanced Z_2 symmetry from Koszul self-duality
+- The Stokes graph has enhanced Z_2 symmetry from the comparison fixed point
 - The Stokes lines are at arg = +/- 0.9496*pi (nearly anti-podal)
 
 Manuscript references:
@@ -172,8 +173,8 @@ class VirasoroShadowData:
         return self.rho < 1.0
 
     @property
-    def is_self_dual(self) -> bool:
-        """Whether c = 13 (self-dual point)."""
+    def is_comparison_fixed(self) -> bool:
+        """Whether c = 13 (comparison fixed point)."""
         return abs(self.c - 13.0) < 0.01
 
     @property
@@ -634,13 +635,17 @@ def truncation_error(c_val: float, r_max: int = 100) -> List[Dict[str, float]]:
 
 
 # =====================================================================
-# Section 8: Koszul duality and resurgence
+# Section 8: line-side comparison and resurgence
 # =====================================================================
 
 def koszul_dual_borel_comparison(c_val: float) -> Dict[str, Any]:
-    """Compare Borel singularity structure of A and A! = Vir_{26-c}.
+    """Compare Borel singularities under the Virasoro line-side comparison.
 
-    Under Koszul duality Vir_c <-> Vir_{26-c}:
+    On the strict same-family line-side surface Vir_c is paired with
+    the representative Vir_{26-c}.  This is not a primitive
+    identification with the Verdier dual A!.
+
+    Under c <-> 26-c on that comparison surface:
     - The shadow growth rates rho(c) and rho(26-c) are generically different
     - At c = 13: rho(13) = rho(13) (self-dual)
     - The Borel singularities are at DIFFERENT positions in the zeta-plane
@@ -655,7 +660,7 @@ def koszul_dual_borel_comparison(c_val: float) -> Dict[str, Any]:
         'c_dual': c_dual,
         'rho': d.rho,
         'rho_dual': d_dual.rho,
-        'self_dual': abs(d.rho - d_dual.rho) < 1e-10,
+        'comparison_fixed': abs(d.rho - d_dual.rho) < 1e-10,
         'A_plus': d.A_plus,
         'A_plus_dual': d_dual.A_plus,
         'stokes_dir': d.stokes_direction,
@@ -678,7 +683,7 @@ class StokesGraphData:
     - Stokes lines: Re(A/t) > 0, Im(A/t) = 0
     - Anti-Stokes lines: Re(A/t) = 0
 
-    At c = 13 (self-dual), the graph has enhanced Z_2 symmetry.
+    At c = 13 (comparison fixed point), the graph has enhanced Z_2 symmetry.
     """
     c: float
     A_plus: complex
@@ -795,9 +800,9 @@ def zeta_connection_assessment(c_val: float) -> Dict[str, Any]:
     determined by different mathematical structures.
 
     HOWEVER: there is an interesting STRUCTURAL PARALLEL in that both systems:
-    - Involve a functional equation (Koszul duality c <-> 26-c for shadows,
-      xi(s) = xi(1-s) for zeta)
-    - Have a self-dual point (c = 13, s = 1/2)
+    - Involve a functional equation (line-side c <-> 26-c for Virasoro
+      shadows, xi(s) = xi(1-s) for zeta)
+    - Have a fixed point (c = 13, s = 1/2)
     - Involve resurgent asymptotic expansions
     This parallel is STRUCTURAL, not a mathematical identity.
     """
@@ -817,7 +822,7 @@ def zeta_connection_assessment(c_val: float) -> Dict[str, Any]:
         'reason': (
             'Borel singularities are algebraic (roots of Q_L), '
             'zeta zeros are transcendental. No mathematical mechanism connects them. '
-            'The parallel is STRUCTURAL (both have functional equations and self-dual points) '
+            'The parallel is STRUCTURAL (both have functional equations and fixed points) '
             'but not numerical.'
         ),
     }
@@ -915,7 +920,7 @@ def constrained_epstein_comparison(c_val: float) -> Dict[str, Any]:
         'branch_points': (d.t_plus, d.t_minus),
         'borel_singularities': (d.A_plus, d.A_minus),
         'epstein_pole': 1.0,  # at s=1
-        'functional_equation_symmetric': d.is_self_dual,
+        'functional_equation_symmetric': d.is_comparison_fixed,
         'connection': (
             'The Borel singularities of the shadow obstruction tower and the spectral data '
             'of the constrained Epstein function are controlled by the same '
@@ -943,6 +948,6 @@ if __name__ == '__main__':
     print("\n\nKoszul duality comparison:")
     for c in [1, 5, 13, 25]:
         kd = koszul_dual_borel_comparison(float(c))
-        sd = "*" if kd['self_dual'] else " "
+        sd = "*" if kd['comparison_fixed'] else " "
         print(f"  c={c:2d}: rho={kd['rho']:.6f}, rho!={kd['rho_dual']:.6f}, "
               f"kappa+kappa'={kd['kappa_sum']:.1f} {sd}")

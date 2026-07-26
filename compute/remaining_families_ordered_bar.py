@@ -755,7 +755,7 @@ class N4Superconformal:
             'overall_class': 'M',
             'note': ('The N=4 SCA has the same qualitative A∞ structure as Virasoro '
                      'in the TT sector. The SU(2) R-symmetry sector (JJ) is class L '
-                     '(affine, all higher operations vanish). The fermionic sectors '
+                     '(affine finite Lie layer, no wheel tower). The fermionic sectors '
                      '(GG) are class C (cubic pole, intermediate depth).'),
         }
 
@@ -947,19 +947,21 @@ class AffineExceptional:
             'depth_spectrum': {0: 'Lie bracket', 1: 'Killing form'},
         }
 
-    def m3_vanishing(self) -> Dict[str, Any]:
-        """m₃ = 0 for all affine KM (class L).
+    def m3_profile(self) -> Dict[str, Any]:
+        """Affine KM has finite Lie cubic transfer and no wheel tower.
 
-        The OPE has max pole 2. After d-log absorption, r(z) has max pole 1.
-        The arity-3 shadow requires pole order ≥ 2 in r(z), which is absent.
-        Equivalently: the quartic contact invariant vanishes by the Jacobi
+        The OPE has max pole 2. The simple-pole residue is the Lie
+        bracket, so the arity-3 layer is the Lie-Jacobi transfer.
+        The quartic contact and wheel invariants vanish by the Jacobi
         identity for the underlying Lie algebra.
         """
         return {
-            'm3_zero': True,
-            'reason': 'Class L: max OPE pole = 2, Jacobi identity kills m₃',
+            'm3_zero': False,
+            'lie_cubic_present': True,
+            'contact_zero': True,
+            'reason': 'Class L: finite Lie-Jacobi cubic layer; no wheel/contact tower',
             'm4_zero': True,
-            'mk_zero_for_k_geq_3': True,
+            'mk_zero_for_k_geq_4': True,
         }
 
     def r_matrix(self) -> Dict[str, Any]:
@@ -1010,7 +1012,8 @@ class AffineExceptional:
             'max_ope_pole': 2,
             'max_r_pole': 1,
             'shadow_depth': 3,
-            'is_formal': True,
+            'is_formal': False,
+            'finite_transfer': True,
             'is_koszul': True,
             'ds_target': f'W({self.name})',
             'ds_depth_gap': 2 * self.data['exponents'][-1],
@@ -1050,7 +1053,7 @@ class AffineExceptional:
             'central_charge': self.c,
             'collision_residues': self.collision_residues(),
             'm2': self.m2_components(),
-            'm3_m4': self.m3_vanishing(),
+            'm3_m4': self.m3_profile(),
             'r_matrix': self.r_matrix(),
             'shadow_tower': self.shadow_tower(),
             'glcm': self.glcm_class(),
@@ -1754,8 +1757,9 @@ def test_exceptional_affine():
         # Verify class L
         assert result['glcm']['overall_class'] == 'L', f"{name} should be class L"
 
-        # Verify m₃ = 0
-        assert result['m3_m4']['m3_zero'], f"{name} should have m₃ = 0"
+        # Verify finite Lie cubic transfer and no wheel/contact tower
+        assert result['m3_m4']['lie_cubic_present'], f"{name} should have Lie cubic transfer"
+        assert result['m3_m4']['m4_zero'], f"{name} should have no quartic wheel/contact layer"
 
         # Verify collision residue max pole = 1
         assert result['collision_residues']['r_max_pole'] == 1, (

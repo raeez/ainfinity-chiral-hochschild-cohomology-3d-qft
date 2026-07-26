@@ -426,7 +426,7 @@ def summary_table():
 
     print("""
   Denominator structure: denom(S_{2r}^W) = c^{2r-3} * (5c+22)^{3r-3}
-  Numerator: (-1)^r * C_{r-1} * r * 122880^{r-1} / (4^{r-1} * (2r-3) * 3)
+  Pole-cleared numerator: (-1)^r * C_{r-1} * 122880^{r-1} / (4^{r-1} * (2r-3) * 3)
   """)
 
     # Numerical values at c = 50 (self-dual point)

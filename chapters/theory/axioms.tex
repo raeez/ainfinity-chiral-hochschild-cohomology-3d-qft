@@ -33,10 +33,21 @@ subsection fixes only the underlying data.
 \begin{definition}[$A_\infty$ chiral algebra]
 \label{def:ainfty_chiral}
 Fix a ground field $k$ of characteristic $0$. Let $(A,Q)$ be a cochain complex (cohomological grading), with $Q$ of degree $+1$.
-We equip $A$ with:
+Choose a closed vacuum unit $\mathbf 1\in A^0$ and put
+$\bar A:=A/k\cdot\mathbf 1$. The first object is the coaugmented
+chiral tensor coalgebra and its coaugmentation coideal
+\[
+\mathrm B^{\mathrm{ch}}(A):=T^c(s^{-1}\bar A)
+=\bigoplus_{n\ge0}(s^{-1}\bar A)^{\otimes n},
+\qquad
+\barBch(A):=\overline{\mathrm B}^{\mathrm{ch}}(A)
+=\bigoplus_{n\ge1}(s^{-1}\bar A)^{\otimes n}.
+\]
+The $n=0$ summand is $k$, and all coderivations below preserve
+$\barBch(A)$. We equip $A$ with:
 \begin{itemize}
  \item a degree $0$ endomorphism $\partial\colon A\to A$ (holomorphic translation) with $[Q,\partial]=0$,
- \item a distinguished unit $\mathbf 1\in A^0$ with $Q\mathbf 1=0$ and $\partial \mathbf 1=0$,
+ \item the chosen unit satisfying $Q\mathbf 1=0$ and $\partial \mathbf 1=0$,
  \item multilinear operations (for $k\ge 1$)
  \begin{equation}
  \label{eq:mk-type}
@@ -46,6 +57,33 @@ We equip $A$ with:
  where $A((\lambda))$ denotes the space of formal Laurent series in $\lambda$ with coefficients in $A$, and $A((\lambda_1))\cdots((\lambda_{k-1}))$ is the iterated Laurent series ring.\footnote{Work in the completed topology so that infinite sums are allowed.}
 \end{itemize}
 We regard $\lambda_1,\dots,\lambda_{k-1}$ as spectral parameters associated to the \emph{differences} of the holomorphic coordinates of inputs $1,\dots,k-1$ relative to the $k$-th input (the ``rightmost'' slot).
+The unary operation is $m_1=Q$. For a homogeneous input $a_i$, put
+$\bar a_i:=|a_i|-1=|s^{-1}a_i|$. The operations above are the
+cogenerator projections of a degree-$1$ coderivation $D_A$ of
+$\mathrm B^{\mathrm{ch}}(A)$:
+\[
+\pi D_A\bigl[s^{-1}a_1|\cdots|s^{-1}a_k\bigr]
+=s^{-1}m_k(a_1,\ldots,a_k),
+\qquad
+\pi\colon\barBch(A)\to s^{-1}\bar A .
+\]
+On a homogeneous bar word,
+\begin{multline}
+\label{eq:axioms-ainfty-coderivation}
+D_A\bigl[s^{-1}a_1|\cdots|s^{-1}a_n\bigr] \\
+=
+\sum_{\substack{k\ge1\\1\le i\le n-k+1}}
+(-1)^{\epsilon(i,k)}
+\bigl[s^{-1}a_1|\cdots|
+s^{-1}m_k(a_i,\ldots,a_{i+k-1})|\cdots|s^{-1}a_n\bigr],
+\qquad
+\epsilon(i,k)=\sum_{r<i}\bar a_r .
+\end{multline}
+The deconcatenation coproduct obeys
+$\Delta D_A=(D_A\otimes\id+\id\otimes D_A)\Delta$ on
+$\mathrm B^{\mathrm{ch}}(A)$. The single equation
+$D_A^2=0$, expanded below with the same suspension convention, is
+the $\Ainf$ chiral relation.
 The axioms imposed on this data are stated in Definition~\ref{def:sesquilinearity}--\ref{def:symmetry-grading} below.
 \end{definition}
 
@@ -57,15 +95,17 @@ The $A_\infty$ chiral algebra $A$ above is the endomorphism algebra $A_b = \RHom
 \begin{remark}[Five primitive objects]
 \label{rem:five-primitive-objects-axioms}
 The boundary chart $A=A_b$ is one member of the primitive package.
-The reduced chiral bar coalgebra
-$\barB^{\mathrm{ch}}(A)=T^c(s^{-1}\bar A)$ resolves twisting morphisms
-out of~$A$. The linear Koszul dual $A^!$ is the cobar algebra built
+The coaugmented chiral bar coalgebra
+$\mathrm B^{\mathrm{ch}}(A)=k\oplus\barBch(A)$ resolves twisting
+morphisms out of~$A$, with reduced coideal
+$\barBch(A)=\bigoplus_{n\ge1}(s^{-1}\bar A)^{\otimes n}$ carrying the
+bar codifferential. The linear Koszul dual $A^!$ is the cobar algebra built
 from the dual cooperadic data; it differs from $\barB^{\mathrm{ch}}(A)$
 and from the coaugmentation coideal $A^i$. The derived chiral centre
 $\cZ^{\mathrm{der}}_{\mathrm{ch}}(A)$ is the Hochschild object
 controlling bulk observables acting on the boundary. The operad
 $\SCchtop$ is none of these: it is the two-coloured governing
-dioperad whose open colour acts on~$A$ and whose closed colour acts
+operad whose open colour acts on~$A$ and whose closed colour acts
 on $\cZ^{\mathrm{der}}_{\mathrm{ch}}(A)$.
 \end{remark}
 
@@ -160,33 +200,38 @@ equivalent presentation via coderivations of the bar coalgebra:
 \begin{equation}\label{eq:bar-coder-iso}
  \mathrm{C}^{\bullet}_{\mathrm{ch}}(A, A)
  \;\simeq\;
- \mathrm{Coder}\bigl(\BarTwc{A}\bigr),
+ \mathrm{Coder}_0\bigl(\mathrm B^{\mathrm{ch}}(A)\bigr)
+ \;\simeq\;
+ \mathrm{Coder}\bigl(\barBch(A)\bigr),
  \qquad
- d_{\mathrm{Hoch}} \;=\; [d_{B},\, -\,],
+ d_{\mathrm{Hoch}} \;=\; [D_A,\, -\,],
 \end{equation}
-where $\BarTwc{A} = T_{c}(s^{-1}\bar A)$ is the conilpotent
+where $\mathrm B^{\mathrm{ch}}(A)=k\oplus\barBch(A)$,
+\(\barBch(A)=T_{c}(s^{-1}\bar A)\), and
+\(D_A=\sum_{r\ge1}D_{m_r}\) is the degree-\(1\) structure
+coderivation of the
 $E_{1}$-chiral bar coalgebra of
 \cref{thm:typed-boundary-holographic-realisation}\,(i), and
-$\mathrm{Coder}$ denotes the coderivation space.  The equivalence is
-the universal property of the cofree conilpotent tensor coalgebra:
+\(\mathrm{Coder}_0\) denotes coaugmentation-preserving coderivations.
+The equivalence is the universal property of the cofree conilpotent tensor coalgebra:
 a coderivation of $T_{c}(V)$ is uniquely determined by its corestriction
 to $V$, which is a degree-$+1$ map $V \to V^{\otimes \le k}$ for each
 $k$, i.e.\ an element of
 $\prod_{n \ge 0} \cE\!nd^{\mathrm{ch}}_{A}(n + 1)[-n]$.
 
 In the $\SCchtop$ operadic language, the chiral Deligne action of
-$\mathrm{Coder}(\BarTwc{A})$ on $A$ is the two-colour assignment
+\(\Coder_0(\mathrm B^{\mathrm{ch}}(A))\) on \(A\) is the two-colour assignment
 \begin{description}
-\item[\textup{closed colour}] $\mathrm{Coder}(\BarTwc{A}) \simeq
-\Zderch{A}$ acts by chiral braces, the closed colour of $\SCchtop$
+\item[\textup{closed colour}] \(\Coder_0(\mathrm B^{\mathrm{ch}}(A)) \simeq
+\Zderch{A}\) acts by chiral braces, the closed colour of $\SCchtop$
 (\cref{thm:chiral-higher-deligne}\,(1)--(2));
 \item[\textup{open colour}] $A$ acts by its native $E_{1}$-chiral
 product $m_{2}$, the open colour of $\SCchtop$
 (\cref{def:e1-chiral-algebra}).
 \end{description}
 The mixed (open/closed) operations of $\SCchtop$ are the chiral
-brace insertions $\nu^{(m)}_{k} \colon
-\mathrm{Coder}(\BarTwc{A})^{\otimes k} \otimes A^{\otimes m} \to A$
+brace insertions \(\nu^{(m)}_{k} \colon
+\Coder_0(\mathrm B^{\mathrm{ch}}(A))^{\otimes k} \otimes A^{\otimes m} \to A\)
 of the proof of \cref{thm:chiral-higher-deligne}\,(2).  The precise
 chiral $A_{\infty}$-Deligne theorem --- the assembly of these data
 into a coherent $\SCchtop$-algebra structure --- is
@@ -352,7 +397,16 @@ commutative algebras.
 \subsection{Sesquilinearity and unitality axioms}
 \label{subsec:sesqui}
 
-Definition~\ref{def:ainfty_chiral} equips $A$ with a translation operator $\partial$ (from the $\C$-action on configuration space) and operations $m_k$ valued in formal Laurent series in the spectral parameters $\lambda_i$. The two data are coupled: translation of an input point matches a shift of the associated spectral parameter, and the unit is transparent to both. Sesquilinearity and unitality record the compatibility as polynomial identities in $\partial$ and~$\lambda_i$.
+Definition~\ref{def:ainfty_chiral} equips $A$ with a translation
+operator $\partial$ and operations $m_k$ valued in formal Laurent
+series in the spectral parameters $\lambda_i$. The two data are
+coupled by translation equivariance of the chiral distribution
+kernels: applying $\partial$ to an input is the Fourier transform of
+the infinitesimal translation acting on the corresponding collision
+coordinate. In the divided-power $\lambda$-bracket normalisation this
+is multiplication by the relevant spectral variable. The unit is
+transparent to both structures. Sesquilinearity and unitality record
+these compatibilities as identities in $\partial$ and~$\lambda_i$.
 
 \begin{definition}[Sesquilinearity and unitality]
 \label{def:sesquilinearity}
@@ -442,24 +496,13 @@ Here:
  \epsilon(s,j) \;=\; |a_1|+\cdots+|a_s|,
  \]
  i.e., the parity of the total degree of the elements that the inner operation $m_j$ passes.%
- \footnote{Many references (Loday--Vallette, Keller) state the $A_\infty$
- identity on the \emph{desuspended} bar complex $s^{-1}\bar A$ with sign
- $(-1)^{rs+t}$ or equivalently
- $(-1)^{(j-1)(|\bar a_1|+\cdots+|\bar a_s|)}$ where
- $|\bar a_i|=|a_i|-1$. The present formula $\epsilon(s,j)=|a_1|+\cdots+|a_s|$
- (independent of~$j$) is the standard \emph{unsuspended} convention: it
- encodes the Koszul sign of passing a degree-$+1$ component of the bar
- differential past the first~$s$ elements. The two conventions produce
- the same identity $d_{\mathrm{bar}}^2=0$, differing only by signs absorbed
- into the definition of~$m_k$ via the desuspension isomorphism
- $m_k = \pm\, s\circ \mu_k\circ(s^{-1})^{\otimes k}$.
- Concretely, the two sign conventions yield the same
- $d_{\mathrm{bar}}^2 = 0$ because the desuspension isomorphism
- $s^{-1}$ converts the Koszul sign
- $(-1)^{(j-1)(|\bar a_1|+\cdots+|\bar a_s|)}$ (with $|\bar a_i| = |a_i|-1$)
- into $(-1)^{|a_1|+\cdots+|a_s|}$ after absorbing the factors of
- $(-1)^{j-1}$ from $s^{-1}$; the resulting quadratic identities are
- identical term by term.
+ \footnote{Equation~\eqref{eq:axioms-ainfty-coderivation} is the
+ suspended bar convention: the coderivation sign is
+ $\sum_{r<i}(|a_r|-1)$. The expanded identity
+ \eqref{eq:ainfty-relation-raw} is its desuspended coordinate form.
+ The desuspension isomorphism transfers the suspended coderivation
+ equation $D_A^2=0$ into the displayed Stasheff identity, with the
+ signs absorbed into the coordinate operations $m_k$.
  In particular, for $j=1$: $\epsilon(s,1)=|a_1|+\cdots+|a_s|$,
  so $Q=m_1$ is a graded derivation of every~$m_k$.}
  \item The notation $m_i(-\mid \Lambda_{[s+1,\dots,s+j]},-;\bm\lambda^{\mathrm{out}})$ means:
@@ -478,7 +521,7 @@ Equation \eqref{eq:ainfty-relation-raw} encodes that \emph{when a block of input
 \subsection{Symmetry, grading, and parity}
 \label{subsec:symmetry}
 
-The $A_\infty$ chiral algebra is a \emph{planar} (non-commutative) structure: inputs are ordered by the topological direction~$\R_t$; no symmetry under input permutation is imposed. The passage to commutative structures (PVA on cohomology, symmetric bar complex) goes through the exchange cylinder of~\S\ref{sec:PVA_descent}, using connectivity of the full three-dimensional configuration space $\Conf_2(\C \times \R)$ to relate the two orderings.
+The $A_\infty$ chiral algebra is a \emph{planar} (non-commutative) structure: inputs are ordered by the topological direction~$\R_t$; no symmetry under input permutation is imposed. The passage to commutative structures (PVA on cohomology, symmetric bar complex) goes through the exchange cylinder of~\S\ref{sec:PVA_descent}: in the configuration space of two points in the three-dimensional bulk $\C\times\R$, the two line orderings are joined by a path, while the holomorphic projection supplies the half-monodromy around the collision divisor.
 
 \begin{definition}[Symmetry and grading conventions]
 \label{def:symmetry-grading}
@@ -578,7 +621,7 @@ expanded in Feynman diagrams.
 binary descent gives ordinary PVAs (Theorem~\ref{thm:cohomology_PVA});
 the additional condition $m_{k \geq 3}=0$ gives formal comparison
 models (Example~\ref{rem:free_chiral});
-one-loop-finite holomorphic theories give Gwilliam--Grady--Williams structures \cite{GGW21};
+one-loop-finite holomorphic theories give Williams structures \cite{GGW21};
 cohomology $H^\bullet(\A,Q)$ yields PVAs matching \cite{CDG20} (Theorem~\ref{thm:cohomology_PVA}).
 
 \item The definition generalizes Tamarkin's chiral Hochschild complex \cite{Tam02}: it is the 3d analogue of 2d Hochschild theory from Poisson sigma models (Section~\ref{sec:chiral_hochschild_expanded}).
@@ -619,24 +662,81 @@ only the identity shuffle $\sigma=\mathrm{id}$ contributes, and the sum
 reduces to a single term.
 \end{theorem}
 
-\begin{proof}[Proof outline; complete details in Appendix~\ref{app:FM_Stokes}]
-The theorem follows from three ingredients:
+\begin{proof}
+The boundary factorisation has geometric, analytic, and spectral
+components.
 
-\textbf{Step 1 (Geometric):} The boundary stratum $D_\pi \subset \partial \FM_k(\C)$ corresponding to partition $\pi$ is canonically isomorphic to
+\textbf{Boundary stratum.} The boundary stratum $D_\pi \subset \partial \FM_k(\C)$ corresponding to partition $\pi$ is canonically isomorphic to
 \[
-D_\pi \cong \FM_r(\C) \times \prod_{j=1}^r \FM_{k_j}(\C),
+D_\pi \cong \FM_r(\C) \times \prod_{j=1}^r
+\FM_{k_j}^{\mathrm{red}}(\C),
 \]
 recording cluster centers $\{w_j\}$ and relative positions within each cluster.
 
-\textbf{Step 2 (Analytic):} The form representative $\omega_k$ extends continuously to $D_\pi$, and its restriction $\omega_k|_{D_\pi}$ factors as the wedge product
+\textbf{Logarithmic residue.} Let $S\subset\{1,\ldots,k\}$ be one
+collision block and choose the inward radial coordinate
+$\varepsilon_S\geq0$ on the corresponding boundary divisor
+$D_S$.  In the FM logarithmic chart the weight form has the local
+normal form
 \[
-\omega_k|_{D_\pi} = \omega_r(O'_1,\ldots,O'_r) \wedge \bigwedge_{j=1}^r \omega_{k_j}(\{O_i\}_{i \in S_j}),
+\omega_k=d\log\varepsilon_S\wedge\beta_S+\alpha_S,
+\qquad
+\alpha_S,\beta_S\ \text{smooth at }\varepsilon_S=0,
 \]
-up to shuffle signs.
+and the residue used in the cluster operation is
+\begin{equation}
+\label{eq:cluster-fm-residue}
+\Res_{D_S}(\omega_k)=\beta_S\big|_{\varepsilon_S=0}
+=
+\lim_{\varepsilon_S\to0}
+\bigl(\varepsilon_S\iota_{\partial_{\varepsilon_S}}\omega_k\bigr)
+\big|_{D_S}.
+\end{equation}
+The naive contraction
+$\iota_{\partial_{\varepsilon_S}}\omega_k|_{D_S}$ is not used: for
+logarithmic forms it has a pole of order $\varepsilon_S^{-1}$.
+The boundary orientation is
+\begin{equation}
+\label{eq:cluster-fm-orientation}
+\operatorname{or}\bigl(\FM_k(\C)\bigr)
+=(-d\varepsilon_S)\wedge\operatorname{or}(D_S).
+\end{equation}
+Thus the incidence sign $\epsilon_{D_S}$ in Stokes' theorem is fixed
+by moving the logarithmic normal factor to the outward-normal slot.
 
-\textbf{Step 3 (Spectral):} Holomorphic generating functions $e^{\sum_i \lambda_i z_i}$ degenerate to $e^{(\sum_{i \in S_j} \lambda_i) w_j}$ times relative terms, yielding (\ref{eq:spectral_composition}).
+For the full partition $\pi$ the ordered iterated residue along the
+normal-crossing stratum $D_\pi$ factors as
+\[
+\Res_{D_\pi}(\omega_k)
+=
+(-1)^{\epsilon_\pi}
+\omega_r(O'_1,\ldots,O'_r) \wedge
+\bigwedge_{j=1}^r \omega_{k_j}(\{O_i\}_{i \in S_j}),
+\]
+where $\epsilon_\pi$ is the incidence sign determined by
+\eqref{eq:cluster-fm-orientation} and the Koszul permutation of
+operator labels.  Equivalently, the collision part of the bar
+coderivation is
+\begin{equation}
+\label{eq:cluster-collision-differential}
+D_{\mathrm{coll}}
+=
+\sum_{\substack{S\subset\{1,\ldots,k\}\\ |S|\ge2}}
+\epsilon_{D_S}\,\Res_{D_S}\otimes m_S .
+\end{equation}
+The identity $D_{\mathrm{coll}}^2=0$ is the image of
+$\partial^2[\FM_k(\C)]=0$.  At a codimension-two corner
+$D_S\cap D_T$, the two ordered normal approaches contribute
+\[
+\int_{(D_S)|_{D_T}}\Res_{D_T}\Res_{D_S}(\omega_k)
++
+\int_{(D_T)|_{D_S}}\Res_{D_S}\Res_{D_T}(\omega_k)=0,
+\]
+because the normal covectors anticommute,
+$d\varepsilon_T\wedge d\varepsilon_S
+=-d\varepsilon_S\wedge d\varepsilon_T$.
 
-Complete details, including orientation/sign conventions, appear in Appendix \ref{app:FM_Stokes}.
+\textbf{Spectral composition.} Holomorphic generating functions $e^{\sum_i \lambda_i z_i}$ degenerate to $e^{(\sum_{i \in S_j} \lambda_i) w_j}$ times relative terms, yielding (\ref{eq:spectral_composition}).
 \end{proof}
 
 \begin{remark}[Nonabelian Hodge shadow problem]
@@ -701,9 +801,10 @@ Class M thus persists on the simple quotient at minimal-model loci.
 \smallskip
 \textbf{(c) $\mathcal W$-algebra analog.} For $\mathcal W_N = \mathcal W(\sln_N)$
 at principal nilpotent, the Shapovalov-type determinant on the $N-1$ highest-weight parameters is
-given in de~Boer--Tjin~1993 \cite{deBoerTjin93} (``The relation between
-quantum $W$-algebras and Lie algebras'', CMP~160)
-and Bouwknegt--McCarthy--Pilch~1993 \cite{BMP-Wsymmetry} \S7.
+given by the finite-$\mathcal W$ and quantum-$\mathcal W$ comparison
+papers of de~Boer--Tjin~\cite{deBoerTjin93,deBoerTjinRelation93};
+Bouwknegt--Schoutens~\cite{BMP-Wsymmetry} review the
+Drinfeld--Sokolov and coset constructions of the same family.
 The vanishing locus generalises $h_{p,q}(c)$ to a Weyl-group orbit on
 $\mathfrak h^\ast$; positive-codimension away from BRST-degenerate walls.
 This confirms the class-M assignment for $\mathcal W_N$ at generic central
@@ -714,7 +815,7 @@ $\mathcal W$-analog of the $(p,q)$-lattice.
 \textbf{Inputs.} Item~(a) is the classical determinant formula of
 Kac~1978 and Kac--Kazhdan~1979; item~(b) combines the Vol.~I class-M
 calculation with Kac--Kazhdan vanishing; item~(c) is the
-$\mathcal W_N$ analogue of de~Boer--Tjin and Bouwknegt--McCarthy--Pilch.
+$\mathcal W_N$ analogue of de~Boer--Tjin and Bouwknegt--Schoutens.
 The remark consolidates the Kac--Kazhdan/Shapovalov input used
 downstream in this volume, and fixes the positive-codimension
 convention invoked (implicitly) by the $r_{\max}=\infty$ definition
@@ -777,29 +878,27 @@ boundary identifications implement coherent sequential/simultaneous compositions
 \subsection{Sesquilinearity: Complete Proof}
 
 The sesquilinearity identities
-\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} were recorded
-above as axioms; the following lemma derives them from a single
-principle, the $\C$-translation equivariance of the operadic
-structure maps. The proof tracks how a shift of one insertion
-point propagates through the spectral parameters~$\lambda_i$ and
-concludes that $m_k(\ldots,\partial a_i,\ldots)$ must be the
-multiplication by the corresponding spectral parameter. A
-convention-reconciliation paragraph at the end bridges the
-independent-parameter form
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} were recorded above
+as axioms; the following lemma derives them from one principle:
+$\C$-translation equivariance of the chiral distribution kernels.
+The proof is performed on the Fourier/divided-power coefficients.
+There is no intermediate identity with
+\(\partial_{\lambda_i}m_k\); the translation operator acts on the
+distributional mode and Fourier transforms to multiplication by the
+spectral variable. A convention-reconciliation paragraph at the end
+bridges the independent-parameter form
 \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} and the
 consecutive-difference form
 \eqref{eq:sesqui_explicit_1}--\eqref{eq:sesqui_explicit_k}.
 
 \begin{lemma}[Sesquilinearity from translation equivariance]
 \label{lem:sesquilinearity_explicit}
-Here we use the \textbf{consecutive-difference convention}: the spectral
-parameter $\lambda_i$ is associated to the difference $z_i - z_{i+1}$
-between adjacent insertion points. The translation $z_i\mapsto z_i+\varepsilon$
-then shifts $\lambda_{i-1} = z_{i-1}-z_i$ by $-\varepsilon$ and
-$\lambda_i = z_i - z_{i+1}$ by $+\varepsilon$.
-This convention is related to the independent-parameter convention of
+Here we state the result in the \textbf{consecutive-difference
+convention}: the spectral parameter $\lambda_i$ is associated to
+$z_i-z_{i+1}$.  This convention is related to the
+independent-parameter convention of
 equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} by the
-change of variables~\eqref{eq:indep-to-consec}.
+linear change of variables~\eqref{eq:indep-to-consec}.
 
 Let $\partial : \A \to \A$ denote holomorphic translation in $z$. Then the operations $m_k$ satisfy:
 \begin{align}
@@ -821,160 +920,84 @@ via the change of variables~\eqref{eq:indep-to-consec}.
 \end{lemma}
 
 \begin{proof}
-The argument proceeds by analyzing the $\C$--translation
-equivariance of the operadic structure maps of
-$C_\ast(W(\SCchtop))$, which forces a precise relationship
-between $\partial$ and the spectral parameters.
-
-\medskip\noindent
-\textbf{Step 1 (Translation action on configuration spaces).}
-The group $(\C,+)$ acts on $\Conf_k(\C) = \{(z_1,\ldots,z_k) : z_i \neq z_j\}$ by
-simultaneous translation: $\tau_\varepsilon(z_1,\ldots,z_k)
-= (z_1+\varepsilon,\ldots,z_k+\varepsilon)$. This action
-descends to $\FM_k(\C)$ (which quotients by translations),
-and is therefore \emph{trivial} on $\FM_k(\C)$. Correspondingly,
-the logarithmic weight forms $\omega_k \in
-\Omega^\bullet_{\log}(\FM_k(\C))$ are translation-invariant.
-
-Since $\FM_k(\C)$ is defined modulo translations, the operations
-$m_k$ depend on the insertion points only through the
-\emph{differences} $\lambda_i = z_i - z_{i+1}$ (consecutive-difference
-convention). Translating a single insertion
-point $z_i \mapsto z_i + \varepsilon$ while keeping all others fixed is
-\emph{not} the simultaneous translation (which is trivial), but
-rather a non-trivial operation that changes the differences
-$\lambda_{i-1} \mapsto \lambda_{i-1} - \varepsilon$ and
-$\lambda_i \mapsto \lambda_i + \varepsilon$.
-
-\medskip\noindent
-\textbf{Step 2 (Sesquilinearity for the first input).}
-Consider the operation
+Use the independent variables
+\(\mu_i=z_i-z_k\), \(1\le i\le k-1\), first.  In the
+Fourier/divided-power convention for chiral operations,
 \[
- F(\varepsilon) := m_k(a_1(z_1 + \varepsilon), a_2(z_2),
- \ldots, a_k(z_k)).
+m_k(a_1,\ldots,a_k;\mu)
+=
+\sum_{\mathbf n\in\mathbb N^{k-1}}
+m_{k,\mathbf n}(a_1,\ldots,a_k)
+\prod_{r=1}^{k-1}\frac{\mu_r^{n_r}}{n_r!}.
 \]
-The left side is an element of $A((\lambda_1))\cdots((\lambda_{k-1}))$
-depending on $\varepsilon$. The computation gives $F(\varepsilon)$ in two
-independent ways.
-
-\emph{Via the input:}
-$a_1(z_1+\varepsilon) = a_1(z_1) + \varepsilon\,\partial a_1(z_1)
-+ O(\varepsilon^2)$, so
-\begin{equation}\label{eq:sesqui-F-input}
- F(\varepsilon)
- = m_k(a_1,a_2,\ldots) + \varepsilon\, m_k(\partial a_1, a_2, \ldots)
- + O(\varepsilon^2).
-\end{equation}
-
-\emph{Via the spectral parameters:}
-The shift $z_1 \mapsto z_1 + \varepsilon$ changes the first
-spectral parameter $\lambda_1 = z_1 - z_2$ to $\lambda_1 +
-\varepsilon$, while all other $\lambda_j$ ($j \geq 2$) are
-unchanged. Since $m_k$ is a formal Laurent series in
-$\lambda_1$, we may expand directly:
-\begin{equation}\label{eq:sesqui-F-spectral}
- F(\varepsilon)
- = m_k(a_1,\ldots)|_{\lambda_1 \mapsto \lambda_1 + \varepsilon}
- = m_k(a_1,\ldots)
- + \varepsilon\,\partial_{\lambda_1} m_k(a_1,\ldots)
- + O(\varepsilon^2).
-\end{equation}
-The substitution $\lambda_1 \mapsto \lambda_1 + \varepsilon$ is
-a well-defined operation on formal Laurent series because it
-preserves the order of the pole.
-Comparing the $O(\varepsilon)$ terms of \eqref{eq:sesqui-F-input}
-and \eqref{eq:sesqui-F-spectral}:
+The coefficient \(m_{k,\mathbf n}\) is the operation paired with the
+normalised collision mode of multi-index \(\mathbf n\). Translation
+equivariance of chiral distributions gives the multivariable
+divided-power mode identity
 \[
- m_k(\partial a_1, a_2, \ldots, a_k)
- = \partial_{\lambda_1} m_k(a_1, \ldots, a_k).
+m_{k,\mathbf n}(a_1,\ldots,\partial a_i,\ldots,a_k)
+=
+-\,n_i\,m_{k,\mathbf n-\mathbf e_i}(a_1,\ldots,a_k),
+\qquad 1\le i<k,
 \]
-This derives the \emph{position-space} identity
-$m_k(\partial a_1,\ldots) = \partial_{\lambda_1} m_k$
-(the formal derivative with respect to $\lambda_1$).
-The sesquilinearity identity \eqref{eq:sesqui_explicit_1} asserts
-a different operation: multiplication by~$-\lambda_1$. These two
-are \emph{not} the same as operators on formal Laurent series: on
-a monomial $\lambda_1^n$, the derivative gives $n\lambda_1^{n-1}$
-while multiplication gives $-\lambda_1^{n+1}$. The discrepancy is
-resolved by the mode expansion, which relates the two via the
-Borel correspondence: the generating function
-$m_k = \sum a_{(n)}b\, \lambda^n/n!$ (divided-power convention)
-converts $\partial_\lambda$ into the raising operator
-$a_{(n)} \mapsto a_{(n+1)}$ and $-\lambda$ into the lowering
-operator $a_{(n)} \mapsto -n\, a_{(n-1)}$, and the translation
-covariance identity $(Ta)_{(n)} = -n\,a_{(n-1)}$ is precisely
-the sesquilinearity relation in mode language.
-
-The $A_\infty$ operations, when expressed in the divided-power generating function
-$m_k = \sum a_{(n)}b\,\lambda_1^n/n!$ (the $\lambda$-bracket of vertex algebra
-theory), satisfy the identity by mode calculation:
-$(Ta)_{(n)} = -n\,a_{(n-1)}$ (translation covariance of modes) gives
-\begin{align*}
- m_k(\partial a_1,\ldots;\lambda_1,\ldots)
- &= \textstyle\sum_{n\ge 0} (\partial a_1)_{(n)}\cdots\, \frac{\lambda_1^n}{n!}
- = \textstyle\sum_{n\ge 0} (-n)\, a_{(n-1)}\cdots\, \frac{\lambda_1^n}{n!}\\
- &= -\lambda_1 \textstyle\sum_{m\ge 0} a_{(m)}\cdots\, \frac{\lambda_1^m}{m!}
- = -\lambda_1\, m_k(a_1,\ldots;\lambda_1,\ldots).
-\end{align*}
-This establishes $m_k(\partial a_1,\ldots) = -\lambda_1\, m_k$ in the
-consecutive convention for $k=2$ (where the two conventions coincide).
-For $k\ge 3$, the mode argument yields the same identity with
-$\lambda_1$ replaced by $\lambda_1^{\mathrm{indep}} = z_1 - z_k$, i.e.\
-$m_k(\partial a_1,\ldots) = -\lambda_1^{\mathrm{indep}}\, m_k$.
-Converting via \eqref{eq:indep-to-consec}:
-$\lambda_1^{\mathrm{indep}} = \sum_{j=1}^{k-1}\lambda_j^{\mathrm{consec}}$,
-giving \eqref{eq:sesqui_explicit_1}.
-
-\medskip\noindent
-\textbf{Step 3 (Sesquilinearity for the $i$-th input, $2\le i\le k$).}
-The cleanest route uses the independent-parameter convention
-$\lambda_j^{\mathrm{indep}} = z_j - z_k$ and then converts via
-\eqref{eq:indep-to-consec}.
-
-\emph{Case $2\le i\le k-1$.}\;
-In the independent convention, translating $z_i\mapsto z_i+\varepsilon$
-shifts only $\lambda_i^{\mathrm{indep}}$ (by $+\varepsilon$); the reference
-point $z_k$ is unchanged, so there is no output translation.
-Repeating the mode argument of Step~2 in the $i$-th variable gives
-$m_k(\ldots,\partial a_i,\ldots) = -\lambda_i^{\mathrm{indep}}\,m_k$.
-Converting:
-$\lambda_i^{\mathrm{indep}} = \sum_{j=i}^{k-1}\lambda_j^{\mathrm{consec}}$,
-which gives~\eqref{eq:sesqui_explicit_i}.
-
-\emph{Case $i=k$.}\;
-Translating $z_k\mapsto z_k+\varepsilon$ shifts every
-$\lambda_j^{\mathrm{indep}} = z_j - z_k$ by $-\varepsilon$ and
-also shifts the output position by $+\varepsilon$, contributing
-$+\varepsilon\partial$.
-The $O(\varepsilon)$ coefficient gives
-$m_k(\ldots,\partial a_k)
- = \bigl(\partial + \sum_{j=1}^{k-1}\lambda_j^{\mathrm{indep}}\bigr)\,m_k$,
-which is~\eqref{eq:sesqui-right} in the independent convention.
-Converting via~\eqref{eq:indep-to-consec}:
+where the right side is zero when \(n_i=0\).  This is the
+multi-input form of the vertex-algebra covariance
+\((T a)_{(n)}=-n\,a_{(n-1)}\), obtained by applying the
+infinitesimal translation generator to the input and integrating by
+parts on the collision coordinate. Multiplying by the divided powers
+and summing gives
 \[
- \sum_{j=1}^{k-1}\lambda_j^{\mathrm{indep}}
- = \sum_{j=1}^{k-1}\sum_{\ell=j}^{k-1}\lambda_\ell^{\mathrm{consec}}
- = \sum_{\ell=1}^{k-1}\ell\,\lambda_\ell^{\mathrm{consec}},
+m_k(a_1,\ldots,\partial a_i,\ldots,a_k;\mu)
+=-\mu_i\,m_k(a_1,\ldots,a_k;\mu),
+\qquad 1\le i<k.
 \]
-giving~\eqref{eq:sesqui_explicit_k}.
+For the last input, \(\partial_{z_k}\) differentiates the output
+section as well as the independent variables
+\(\mu_r=z_r-z_k\). The same translation-equivariance identity
+therefore has one additional output term:
+\[
+m_{k,\mathbf n}(a_1,\ldots,a_{k-1},\partial a_k)
+=
+\partial_A m_{k,\mathbf n}(a_1,\ldots,a_k)
+\;+\;
+\sum_{r=1}^{k-1} n_r\,
+m_{k,\mathbf n-\mathbf e_r}(a_1,\ldots,a_k).
+\]
+After summing the divided-power series this becomes
+\[
+m_k(a_1,\ldots,a_{k-1},\partial a_k;\mu)
+=
+\left(\partial_A+\sum_{r=1}^{k-1}\mu_r\right)
+m_k(a_1,\ldots,a_k;\mu),
+\]
+which is the independent-parameter form
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}.
 
-\medskip\noindent
-\textbf{Step 4 (Convention reconciliation).}
-Equations
-\eqref{eq:sesqui_explicit_1}--\eqref{eq:sesqui_explicit_k} in the
-consecutive convention and
-\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} in the
-independent convention are related by the linear change of variables
-\eqref{eq:indep-to-consec}:
-$\lambda_i^{\mathrm{indep}} = \sum_{j=i}^{k-1}\lambda_j^{\mathrm{consec}}$.
-In particular:
-for $1\le i\le k-1$, the independent-convention
-identity $-\lambda_i^{\mathrm{indep}}\, m_k$ becomes
-$-(\lambda_i+\cdots+\lambda_{k-1})^{\mathrm{consec}}\, m_k$;
-and for $i=k$, the sum
-$\sum_{j=1}^{k-1}\lambda_j^{\mathrm{indep}}$
-equals $\sum_{\ell=1}^{k-1}\ell\,\lambda_\ell^{\mathrm{consec}}$
-by interchanging the order of summation.
+It remains only to write the same formula in consecutive variables.
+Since
+\[
+\mu_i=\lambda_i+\lambda_{i+1}+\cdots+\lambda_{k-1},
+\]
+the identities for \(1\le i<k\) become
+\[
+m_k(\ldots,\partial a_i,\ldots)
+=-(\lambda_i+\cdots+\lambda_{k-1})m_k(\ldots,a_i,\ldots),
+\]
+which is \eqref{eq:sesqui_explicit_1} for \(i=1\) and
+\eqref{eq:sesqui_explicit_i} for \(2\le i\le k-1\).  For the last
+input,
+\[
+\sum_{i=1}^{k-1}\mu_i
+=
+\sum_{i=1}^{k-1}\sum_{j=i}^{k-1}\lambda_j
+=
+\sum_{j=1}^{k-1} j\,\lambda_j,
+\]
+and this gives \eqref{eq:sesqui_explicit_k}.  No formal derivative
+\(\partial_{\lambda_i}\) appears in the \(\lambda\)-bracket
+normalisation; the operator \(\partial_A\) acts on coefficients and
+the variables \(\lambda_i\) act by multiplication in the divided-power
+generating series.
 \end{proof}
 \subsection{From $W(\mathsf{SC}^{\mathrm{ch,top}})$ to axioms and back}
 \label{sec:operad-to-axioms}
@@ -991,7 +1014,13 @@ m_k(a_1,\dots,a_k)
 where $\rho$ is the operad action and the \(\lambda\)--dependence is the generating function of the log--forms (residue degrees) on $\FM_k(\C)$ prescribed by the operad.
 Then:
 \begin{enumerate}[label=(\alph*)]
- \item sesquilinearity \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} follows from equivariance under translations in $\C$ (the \(\C\)--action generates $\partial$ and gives \(\lambda\)-multiplications),
+ \item sesquilinearity \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}
+ follows from equivariance under translations in $\C$: on divided-power
+ modes it is
+ \(m_{k,\mathbf n}(\ldots,\partial a_i,\ldots)
+ =-n_i m_{k,\mathbf n-\mathbf e_i}(\ldots)\), and summing the
+ generating series gives multiplication by the corresponding
+ spectral variable,
  \item the spectral substitution law in \eqref{eq:ainfty-relation-raw} is the image of the boundary identification of faces in $\partial\FM_k(\C)$ where a consecutive block collapses (the effective parameter is the sum of inner ones).
 \end{enumerate}
 
@@ -1005,7 +1034,8 @@ Let $(A_{\mathsf{ch}}, A_{\mathsf{top}})$ be a $C_\ast(W(\mathsf{SC}^{\mathrm{ch
 \[
 m_k(a_1,\ldots,a_k) := \bigl\langle \rho\bigl([\FM_k(\C)] \times [E_1(\mathrm{ord})]\bigr),\, a_1 \otimes \cdots \otimes a_k \bigr\rangle.
 \]
-Verification: each axiom of Definition~\ref{def:ainfty_chiral}.
+The operad action gives each axiom of
+Definition~\ref{def:ainfty_chiral}.
 
 \medskip
 \textbf{(I) Unitality.}
@@ -1013,17 +1043,28 @@ The operadic unit in $\mathsf{SC}^{\mathrm{ch,top}}$ is the identity element $\m
 
 \medskip
 \textbf{(II) Sesquilinearity from translation equivariance.}
-The group $\C$ acts on $\FM_k(\C)$ by simultaneous translation $z_i \mapsto z_i + w$, and this action is compatible with the operad structure. The operator $\partial \colon A \to A$ is the infinitesimal generator of the $\C$-action on $A$ via $\rho$.
-
-For the $i$-th input ($1 \leq i \leq k-1$), consider translating only the $i$-th insertion point: $z_i \mapsto z_i + \varepsilon$. This changes the relative coordinate $\lambda_i = z_i - z_{i+1}$ by $+\varepsilon$, while the generating function for $m_k$ transforms as $m_k \mapsto e^{-\varepsilon \lambda_i} m_k$ (the spectral parameter $\lambda_i$ is conjugate to $z_i - z_{i+1}$). Taking the infinitesimal ($\varepsilon \to 0$) and using $\partial a_i = \lim_{\varepsilon \to 0}(a_i(z_i+\varepsilon) - a_i(z_i))/\varepsilon$:
+The group \(\C\) acts on the chiral distribution kernels by
+translation, and the infinitesimal action on \(A\) is \(\partial\).
+Writing the operation in independent variables \(\mu_i=z_i-z_k\), the
+Fourier/divided-power coefficients satisfy
 \[
-m_k(a_1,\ldots,\partial a_i,\ldots,a_k) = -\lambda_i \cdot m_k(a_1,\ldots,a_k), \qquad 1 \leq i \leq k-1,
+m_{k,\mathbf n}(\ldots,\partial a_i,\ldots)
+=-n_i\,m_{k,\mathbf n-\mathbf e_i}(\ldots),
+\quad i<k,
 \]
-establishing~\eqref{eq:sesqui-left}. For the last input ($i = k$): shifting $z_k \mapsto z_k + \varepsilon$ changes every $\lambda_j = z_j - z_{j+1}$ for $j < k$ (specifically, $\lambda_{k-1}$ shifts by $-\varepsilon$), and the output evaluation point shifts by $+\varepsilon$. The infinitesimal action on the output is $\partial$, while the total spectral shift is $e^{+\varepsilon(\lambda_1+\cdots+\lambda_{k-1})}$ (since each $z_j - z_k$ increases by $\varepsilon$). Combining:
+and
 \[
-m_k(a_1,\ldots,\partial a_k) = (\lambda_1 + \cdots + \lambda_{k-1} + \partial)\, m_k(a_1,\ldots,a_k),
+m_{k,\mathbf n}(\ldots,\partial a_k)
+=\partial_A m_{k,\mathbf n}(\ldots)
+\;+\;
+\sum_i n_i\,m_{k,\mathbf n-\mathbf e_i}(\ldots).
 \]
-establishing~\eqref{eq:sesqui-right}. This also follows from Lemma~\ref{lem:sesquilinearity_explicit} after reconciling the consecutive-difference and independent-parameter conventions.
+Summing the divided-power series gives
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}.  Passing to
+consecutive variables is the linear substitution
+\(\mu_i=\lambda_i+\cdots+\lambda_{k-1}\), hence
+\(\sum_i\mu_i=\sum_{j=1}^{k-1}j\lambda_j\), exactly as in
+Lemma~\ref{lem:sesquilinearity_explicit}.
 
 \medskip
 \textbf{(III) $A_\infty$ relations and spectral substitution from boundary faces.}
@@ -1039,7 +1080,9 @@ The identity $d^2 = 0$ on $\End(A)$ (equivalently $\partial^2 = 0$ on chains) th
 \[
 0 = d^2\bigl(\rho([\FM_k(\C)])\bigr) = \sum_{i+j=k+1}\sum_{s=0}^{k-j} (-1)^{\epsilon(s,j)}\, m_i(\ldots, m_j(\ldots), \ldots),
 \]
-which is the $A_\infty$ identity~\eqref{eq:ainfty-relation-raw}. (Only consecutive subsets $S$ contribute, by Theorem~\ref{thm:stokes_arnold}, Step~5.)
+which is the $A_\infty$ identity~\eqref{eq:ainfty-relation-raw}. Only
+consecutive subsets $S$ contribute, by
+Theorem~\ref{thm:stokes_arnold}.
 
 The \emph{spectral substitution} law follows from the geometry of the boundary identification. On $D_S$ for $S = \{s{+}1,\ldots,s{+}\ell\}$, the cluster center $u_S$ replaces the $\ell$ points of $S$ by a single effective point. The relative coordinate from $u_S$ to the next external point is $u_S - z_{s+\ell} = \sum_{p=s+1}^{s+\ell-1}(z_p - z_{p+1}) = \Lambda_S$, so the outer operation receives effective spectral parameter $\Lambda_S = \lambda_{s+1} + \cdots + \lambda_{s+\ell-1}$, while the remaining outer parameters are unchanged. This matches the spectral substitution in~\eqref{eq:ainfty-relation-raw} and Remark~\ref{rmk:spectral-substitution}.
 
@@ -1093,27 +1136,26 @@ automatic:
 
 \begin{theorem}[Axioms $\Rightarrow$ operad]
 \label{thm:rectification}
-Assume $A$ satisfies conditions~\textup{(a)--(b)} of Definition~\ref{def:tameness}. If condition~\textup{(c)} also holds (truncation), then there exists a (canonically defined up to contractible choice) $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$-algebra structure on~$A$ inducing the given $m_k$ by evaluation on fundamental chains as above. More generally, if condition~\textup{(c)} is replaced by convergence of the bar codifferential on the \emph{completed} cofree coalgebra $\widehat{T}^c(s^{-1}\bar{A})$ (as holds for the Virasoro and $W_N$ algebras), the same conclusion holds in the completed setting.
+Assume $A$ satisfies conditions~\textup{(a)--(b)} of Definition~\ref{def:tameness}. If condition~\textup{(c)} also holds (truncation), then there exists a (canonically defined up to contractible choice) $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$-algebra structure on~$A$ inducing the given $m_k$ by evaluation on fundamental chains as above. More generally, if condition~\textup{(c)} is replaced by convergence of the bar codifferential on the \emph{completed} reduced cofree coalgebra $\widehat{\barBch}(A)=\prod_{n\ge1}(s^{-1}\bar A)^{\otimes n}$ (as holds for the Virasoro and $W_N$ algebras), the same conclusion holds in the completed setting.
 \end{theorem}
 
 \begin{proof}
-The proof proceeds in four steps: construct an $E_1$ chiral
-coassociative coalgebra over $(\mathrm{ChirAss})^!$ from the tame
-$A_\infty$ data, apply the cobar functor for the two-coloured
-operad $\mathsf{SC}^{\mathrm{ch,top}}$ to obtain a strict operad
-algebra, verify agreement on fundamental chains, and invoke
-homotopy--Koszulity for essential uniqueness.
+The tame \(A_\infty\) data determine an \(E_1\) chiral coalgebra over
+\((\mathrm{ChirAss})^!\); the cobar functor for the two-coloured
+operad \(\mathsf{SC}^{\mathrm{ch,top}}\) turns it into a strict operad
+algebra whose fundamental-chain operations are the original \(m_k\).
 
 \medskip
-\textbf{Step 1 (Bar coalgebra from tame $A_\infty$ data).}
+\textbf{Bar coalgebra from tame \(A_\infty\) data.}
 The tame $A_\infty$ chiral data $(Q, \partial, \{m_k\}_{k \ge 1})$
 define a codifferential on the cofree conilpotent graded coalgebra
 \[
- \mathcal{C}_A \;:=\; T^c\!\bigl(s^{-1}\bar{A}\bigr)
+ \mathcal{C}_A \;:=\; \barBch(A)
  \;=\; \bigoplus_{n \ge 1} (s^{-1}\bar{A})^{\otimes n},
 \]
 where $s^{-1}$ is desuspension and $\bar{A} = A / k\cdot\mathbf{1}$
-is the augmentation ideal. The codifferential
+is the augmentation ideal; the coaugmented coalgebra is
+$\mathrm B^{\mathrm{ch}}(A)=k\oplus\mathcal C_A$. The codifferential
 $d_{\mathcal{C}} \colon \mathcal{C}_A \to \mathcal{C}_A$
 is the unique coderivation whose cogenerator projection
 $\pi \circ d_{\mathcal{C}} \colon \mathcal{C}_A \to s^{-1}\bar{A}$
@@ -1125,7 +1167,7 @@ encodes the operations $m_k$: explicitly,
  (-1)^{\epsilon(i,k)}\,
  s^{-1}\,m_k(a_{i+1}, \ldots, a_{i+k}).
 \]
-\emph{Why $d_{\mathcal{C}}^2 = 0$:} The $A_\infty$ identity
+\emph{Square-zero coderivation.} The $A_\infty$ identity
 \eqref{eq:ainfty-relation-raw} is equivalent to the vanishing of
 $\pi \circ d_{\mathcal{C}}^2$. Since $d_{\mathcal{C}}$ is a
 coderivation on a cofree coalgebra, $d_{\mathcal{C}}^2$ is again a
@@ -1133,8 +1175,7 @@ coderivation; a coderivation on a cofree coalgebra is zero if and
 only if its cogenerator projection is zero \cite{LV12}. Hence
 $d_{\mathcal{C}}^2 = 0$.
 
-\emph{Why $\mathcal{C}_A$ is an $E_1$ chiral coassociative coalgebra
-over $(\mathrm{ChirAss})^!$:}
+\emph{\((\mathrm{ChirAss})^!\)-coalgebra.}
 As a standalone coalgebraic object, $\mathcal{C}_A$ is an $E_1$
 chiral coassociative coalgebra: the deconcatenation coproduct
 encodes the $E_1$ (topological/open) colour, and the codifferential
@@ -1159,8 +1200,8 @@ purely topological $E_1$ bar. The full $\SCchtop$ structure lives
 on the derived chiral center pair $(C^\bullet_{\mathrm{ch}}(A,A), A)$, not
 on $\mathcal{C}_A$ alone: the lift from
 $(\mathrm{ChirAss})^!$-coalgebra to $\mathbf B(\SCchtop)$-coalgebra
-uses the promoted pair $(A,A)$ and is established in Step~2 below
-via the cobar functor on the two-coloured operad.
+uses the promoted pair $(A,A)$ through the cobar functor on the
+two-coloured operad.
 Tameness (Definition~\ref{def:tameness}) is essential here:
 \begin{itemize}
  \item condition (a) (polynomial$+$Laurent spectral dependence)
@@ -1177,7 +1218,7 @@ Tameness (Definition~\ref{def:tameness}) is essential here:
 \end{itemize}
 
 \medskip
-\textbf{Step 2 (Cobar functor produces a strict operad algebra).}
+\textbf{Cobar functor and strict operad algebra.}
 Apply the cobar functor $\Omega$ to $\mathcal{C}_A$:
 \[
  \widetilde{A} \;:=\; \Omega(\mathcal{C}_A).
@@ -1190,8 +1231,10 @@ $d_{\mathcal{C}}$ and the cooperad cocompositions. Concretely,
 $\widetilde{A}$ is an algebra over
 $\Omega\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})$.
 
-Now invoke homotopy--Koszulity
-(Theorem~\ref{thm:homotopy-Koszul}): the canonical counit
+Now invoke homotopy--Koszulity --- at the associated-graded
+level Theorem~\ref{thm:homotopy-Koszul}, for the coupled operad
+Conjecture~\ref{conj:coupled-sc-koszul}, assumed here --- the
+canonical counit
 \[
  \epsilon \colon
  \Omega\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})
@@ -1211,8 +1254,8 @@ Denote the resulting operad algebra structure also by
 $\widetilde{A}$.
 
 \medskip
-\textbf{Step 3 (Agreement on fundamental chains).}
-Verification: that the $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra
+\textbf{Fundamental chains.}
+The $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra
 $\widetilde{A}$ recovers the original operations $m_k$ on
 fundamental chains. The cobar--bar counit
 $\eta_A \colon A \to \Omega(\mathcal{C}_A) = \widetilde{A}$
@@ -1256,12 +1299,14 @@ $C_\ast(W(\mathsf{SC}^{\mathrm{ch,top}}))$--algebra
 (cf.\ the forward direction, Proposition~\ref{prop:operad-implies-axioms}).
 
 \medskip
-\textbf{Step 4 (Uniqueness via Quillen equivalence).}
+\textbf{Uniqueness via Quillen equivalence.}
 It remains to show that the
 $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra
 structure is unique up to contractible ambiguity. By
 Theorem~\ref{thm:homotopy-Koszul} and
-Theorem~\ref{thm:scchtop-bar-cobar-adjunction}, the bar--cobar adjunction
+Theorem~\ref{thm:scchtop-bar-cobar-adjunction} (for the coupled
+operad, conditionally on
+Conjecture~\ref{conj:coupled-sc-koszul}), the bar--cobar adjunction
 \[
  \Omega \colon
  \mathrm{Coalg}_{\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})}
@@ -1301,9 +1346,9 @@ equivalence \cite{Val07, BM03}.)
 The forgetful functor $U$ (extracting $m_k$ from
 $\rho([\FM_k(\C)] \times [\mathrm{ord}])$) is the construction of
 Proposition~\ref{prop:operad-implies-axioms}. The bar--cobar
-reconstruction of Steps~1--3 provides an inverse $R$ with
-$U \circ R \cong \mathrm{id}$ (by Step~3) and
-$R \circ U \simeq \mathrm{id}$ (by Step~4, uniqueness up to
+reconstruction above provides an inverse $R$ with
+$U \circ R \cong \mathrm{id}$ on fundamental chains and
+$R \circ U \simeq \mathrm{id}$ by Quillen uniqueness up to
 contractible ambiguity). Hence the homotopy categories are
 equivalent:
 \[
@@ -1366,8 +1411,11 @@ skeleton data.
 \end{proposition}
 
 \begin{proof}
-By Theorem~\ref{thm:homotopy-Koszul}, the operad
-$\mathsf{SC}^{\mathrm{ch,top}}$ is homotopy-Koszul. Combining this
+By Theorem~\ref{thm:homotopy-Koszul}, the depth-zero associated
+graded of the operad
+$\mathsf{SC}^{\mathrm{ch,top}}$ is homotopy-Koszul (the coupled
+statement is Conjecture~\ref{conj:coupled-sc-koszul}, assumed
+where the coupled mixed sector is used). Combining this
 with the bar-cobar adjunction (Vol~I, Theorem~A, the twisting morphism representability theorem) gives a Quillen
 equivalence
 \[
@@ -1687,7 +1735,7 @@ classical limit (residue) of the operadic composites, and
 associativity is the regular part of the $m_2$ identity.
 
 \begin{remark}[Good Z-grading scope for DS reduction]\label{rem:ds-good-grading-scope}
-Quantum Drinfeld--Sokolov reduction $\mathcal{W}_k(\mathfrak{g}, f)$ requires a \emph{good} $\mathbb{Z}$-grading on $\mathfrak{g}$ with $f \in \mathfrak{g}_{-2}$: $\operatorname{ad} f \colon \mathfrak{g}_0 \to \mathfrak{g}_{-2}$ surjective, Kazhdan pairing on $\mathfrak{g}_{1/2}$ non-degenerate, $f$ in a unique nilpotent orbit meeting $\mathfrak{g}_{-2}$. The principal nilpotent always admits a good grading. Classical types $A_n, B_n, C_n, D_n$: every nilpotent orbit admits a good grading (Kac--Roan--Wakimoto). Exceptional types $E_{6,7,8}, F_4, G_2$: most orbits do, with the exceptions classified by Ding. DS reduction statements for ``all nilpotents'' carry this scope: unconditional on classical types; on principal and good orbits in exceptional types.
+Quantum Drinfeld--Sokolov reduction $\mathcal{W}_k(\mathfrak{g}, f)$ requires a \emph{good} $\mathbb{Z}$-grading on $\mathfrak{g}$ with $f \in \mathfrak{g}_{-2}$: $\operatorname{ad} f \colon \mathfrak{g}_0 \to \mathfrak{g}_{-2}$ surjective, Kazhdan pairing on $\mathfrak{g}_{1/2}$ non-degenerate, $f$ in a unique nilpotent orbit meeting $\mathfrak{g}_{-2}$. The principal nilpotent always admits a good grading. Classical types $A_n, B_n, C_n, D_n$ admit good gradings on their nilpotent orbits (Kac--Roan--Wakimoto); in exceptional types $E_{6,7,8}, F_4, G_2$ the admissible orbits are the classified good-grading orbits. This is the scope for forming the DS-BRST complex. It is not a DS--Hochschild transport theorem, not a chain-level $\SCchtop$ lift, and not a Koszul-preservation statement. In this volume the DS--Hochschild comparison is proved for principal and hook-type data, with named cover-descent fibres such as Bershadsky--Polyakov checked separately; subregular, minimal beyond named fibres, exceptional good-graded, and exotic nilpotents require case-by-case BRST admissibility, invariant transferred braces, and Hochschild comparison.
 \end{remark}
 
 \begin{remark}[Five $E_1$-chiral notions and the present axioms]
@@ -1763,9 +1811,10 @@ symmetric-bar shadow used in the modular-characteristic
 computation; the ordered axioms themselves carry the full
 $R$-matrix data via the deconcatenation coproduct.
 
-The Volume~I Koszul-reflection identity
+The Volume~I Koszul-reflection identity, on the genus-$0$
+affine/tangent KZ window,
 $\bar\partial = \KZ^*(\nabla_{\mathrm{Arnold}})$ together with
-$\kappa = -c_{\mathrm{ghost}}(\mathrm{BRST})$ is, on the
+$\kappaChHodge(\cA) = -c_{\mathrm{ghost}}(\mathrm{BRST})$ is, on the
 present axiomatic side, the comparison between the bar
 differential $d_{\barB}$ on $T^c(s^{-1}\bar\cA)$ assembled from
 the $m_k$ above and the holomorphic Knizhnik--Zamolodchikov
@@ -1817,29 +1866,30 @@ Theorem~\textup{\ref{thm:humbert-order-K-kappa}}, is the
 cohomological shadow of non-vanishing $m_0$.
 
 \smallskip
-\noindent\emph{Hochschild concentration is $\{0,1,2,3\}$, not
-$\{0,1,2\}$.} Theorem~H of the shared five-theorem core states
-$\ChirHoch^\bullet(\cA) = 0$ for $\bullet \notin \{0,1,2\}$ on the
-standard chiral landscape \textup{(}Vol~I,
-Theorem~\textup{\ref{V1-thm:theorem-h-platonic-pointer}}\textup{)}.
-This concentration extends on the K3 input to one degree higher:
+\noindent\emph{The K3 categorical and chiral supports.}
+Volume~I Theorem~H begins with a family datum
+$H_H(\mathbf H_{\Delta_5};S_{\Delta_5})$ and gives
 \[
- \ChirHoch^n\bigl(\mathbf{H}_{\Delta_5}\bigr) \;=\; 0
- \quad \text{for } n \notin \{0,1,2,3\}.
+ \ChirHoch^n(\mathbf H_{\Delta_5})
+ \cong H^n(K_{\mathbf H_{\Delta_5},S_{\Delta_5}}),
+ \qquad
+ \operatorname{Supp}\ChirHoch^\bullet(\mathbf H_{\Delta_5})
+ \subseteq S_{\Delta_5}.
 \]
-The extra degree is forced by the CY-$3$ geometry of $K3\times E$
-under the CY-to-chiral functor $\Phi$: the Hochschild cohomology of
-$D^b(\mathrm{Coh}(K3\times E))$ has cohomological support in
-$\{0,1,2,3\}$ by Gerstenhaber--Serre duality on the CY-$3$
-category, and $\Phi$ transports this support verbatim to the
-chiral side. Theorem~H therefore \emph{scopes} on K3 input: the
-concentration $\{0,1,2\}$ is the standard-landscape statement, and
-the $\{0,1,2,3\}$ extension is a K3-specific boundary feature.
-The K3 comparison is tight only if
-$\ChirHoch^3\bigl(\mathbf{H}_{\Delta_5}\bigr) \neq 0$ survives the
-finite CoHA, radical, parity, completion, and inverse-limit gates; the
-candidate class is represented chain-level by the Schiffmann--Vasserot
-degree-$3$ CoHA generator in the Borcherds imaginary-root direction.
+The HKR theorem computes the categorical Hochschild object of
+$D^b(\mathrm{Coh}(K3\times E))$ in its CY$_3$ ambient.  Its passage
+to the chiral curve chart requires the comparison
+\[
+ q_{\Phi,C}\colon
+ \HH^\bullet(D^b\mathrm{Coh}(K3\times E))longrightarrow
+ \ChirHoch^\bullet(\mathbf H_{\Delta_5}).
+\]
+The K3 comparison problem is to construct $q_{\Phi,C}$ and the
+cochain homotopies that send every categorical degree outside
+$S_{\Delta_5}$ to an exact chart cochain.  The degree-three chart
+group is then determined by the resulting complex.  The
+Schiffmann--Vasserot degree-three CoHA generator supplies a candidate
+source class whose image remains to be computed.
 
 \smallskip
 \noindent\emph{Bar-cobar inversion in the curved lane.}
@@ -1879,7 +1929,7 @@ The holomorphic-twist axiom gives the chiral boundary algebra; the
 Borcherds--Gritsenko lift gives the automorphic scalar
 $\Delta_5$. These are linked by $\mathrm{av}$, not identified as
 the same object \cite{CostelloHolomorphic,Gaiotto2009}.
-Cross-ref Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+Compare Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
 \begin{remark}[K3 base-point refinement]
@@ -1912,5 +1962,5 @@ K^{\kappaChHodge}=2c_+(\mathrm{Mukai}(K3))=8,
 \]
 fixes the quantum-group specialisation
 $\hbar_{\mathrm{QG}}^2=-1/8$ \cite{PasolZagier2013,EtingofKazhdan2007PartV}.
-Cross-ref Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+Compare Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}

@@ -26,6 +26,7 @@ from lib.collision_residue_rmatrix import (
     verify_jacobi, verify_killing_invariance, verify_antisymmetry,
     casimir_tensor, casimir_tensor_explicit,
     AffineOPE, collision_residue_rmatrix,
+    affine_trace_form_scale, affine_kz_scale, affine_level_prefixed_kz_scale,
     verify_cybe, verify_pole_absorption,
     virasoro_ope_to_rmatrix,
     full_collision_residue_computation,
@@ -226,6 +227,38 @@ class TestCollisionResidue:
             assert np.max(np.abs(pole_coeff - expected)) < 1e-12, \
                 f"Pole coeff mismatch at k={k}"
 
+    def test_sl2_k0_trace_pole_vanishes_regular_lie_part_survives(self):
+        """At k=0 only the singular trace-form pole vanishes.
+
+        The affine simple-pole bracket f^{ab}_c J^c is still present in
+        the OPE and becomes the regular z^0 part after d-log extraction.
+        Thus k=0 is not a symmetric-category collapse for non-abelian g.
+        """
+        g = make_sl2()
+        result = collision_residue_rmatrix(AffineOPE(g=g, k=0.0))
+
+        pole_coeff = result['r_pole_coefficients'][1]
+        assert np.max(np.abs(pole_coeff)) < 1e-12
+
+        regular = result['r_regular_part']
+        assert regular is not None
+        assert np.max(np.abs(regular)) > 0
+        assert abs(regular[0, 2, 1] - 1.0) < 1e-12
+        assert abs(regular[1, 0, 0] - 2.0) < 1e-12
+
+    def test_trace_form_kz_normalizations_are_distinct_at_k0(self):
+        """Trace-form and KZ affine normalizations have different k=0 tests."""
+        h_dual = 2.0
+
+        assert affine_trace_form_scale(0.0) == 0.0
+        assert affine_level_prefixed_kz_scale(0.0, h_dual) == 0.0
+        assert affine_kz_scale(0.0, h_dual) == 1.0 / h_dual
+
+        with pytest.raises(ZeroDivisionError):
+            affine_kz_scale(-h_dual, h_dual)
+        with pytest.raises(ZeroDivisionError):
+            affine_level_prefixed_kz_scale(-h_dual, h_dual)
+
     def test_sl3_k1_rmatrix(self):
         """r-matrix for sl_3 at k=1: r(z) = Omega/z."""
         g = make_sl3()
@@ -246,9 +279,10 @@ class TestCollisionResidue:
         assert np.max(np.abs(pole_coeff - g.kappa)) < 1e-12
 
     def test_u1_k1_rmatrix(self):
-        """r-matrix for u(1) at k=1: r(z) = 1/z (Heisenberg).
+        """r-matrix coefficient for u(1) at k=1: 1/z (Heisenberg).
 
-        This is the abelian case: Omega = 1, r(z) = k/z.
+        This is the abelian case: Omega_H = 1 in the chosen basis, so
+        the tensor kernel k*Omega_H/z is stored as coefficient k/z.
         """
         g = make_u1()
         ope = AffineOPE(g=g, k=1.0)
@@ -396,7 +430,8 @@ class TestPoleAbsorption:
     def test_heisenberg_pole_absorption(self):
         """Heisenberg: OPE z^{-2} only -> r-matrix z^{-1} only.
 
-        J(z) J(w) ~ k/(z-w)^2. After d-log: r(z) = k/z.
+        J(z) J(w) ~ k/(z-w)^2. After d-log: tensor kernel
+        k*Omega_H/z, stored here as coefficient k/z.
         """
         ope_poles = {2: 'k (central term)'}
         r_poles = {1: 'k/z'}

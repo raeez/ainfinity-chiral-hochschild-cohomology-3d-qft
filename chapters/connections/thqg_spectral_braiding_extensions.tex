@@ -244,21 +244,24 @@ $uv(u+v)$:
 \subsection{Antisymmetry and unitarity}
 % label removed: subsec:antisymmetry-unitarity
 
-\begin{proposition}[Antisymmetry and unitarity of $r(z)$;
+\begin{proposition}[Normalized skew relation for $r(z)$;
 \ClaimStatusProvedHere]
 % label removed: prop:r-antisymmetry-unitarity
 \index{classical r-matrix!antisymmetry}
 \index{classical r-matrix!unitarity condition}
-The classical $r$-matrix satisfies:
+On a comparison surface carrying the unitary exchange normalization
+\(R_{12}(z)R_{21}(-z)=\id\), the classical $r$-matrix satisfies:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item \emph{Antisymmetry:}
+\item \emph{Normalized skew relation:}
 $r_{12}(z) + r_{21}(-z) = 0$, i.e., $r(-z) = -P \cdot r(z)
 \cdot P$ where $P$ is the permutation of tensor factors.
-\item \emph{Classical unitarity:}
-$r_{12}(z) + r_{12}(-z) = 0$ if $r(z)$ is skew-symmetric
-($r_{12} = -r_{21}$), i.e., $r(z)$ is an odd function of~$z$.
+\item \emph{Tensor-skew warning:}
+If one also imposes \(r_{21}(z)=-r_{12}(z)\), then the normalized
+skew relation forces \(r_{12}(z)=r_{12}(-z)\).  Thus tensor-skewness is
+a separate condition and is incompatible with a nonzero symmetric
+simple-pole Casimir term \(k\Omega_{\mathrm{tr}}/z\).
 \item \emph{Casimir condition:}
-If $r(z) = k\,\Omega/z + (\text{regular at } z = 0)$ with
+If $r(z) = k\,\Omega_{\mathrm{tr}}/z + (\text{regular at } z = 0)$ with
 $\Omega = \Omega_{21}$ symmetric (e.g., $\Omega$ is a Casimir)
 and $k$ the level then $r_{12}(z) + r_{21}(-z) = 0$ forces
 $r_{\mathrm{reg}}(z) = -r_{\mathrm{reg},21}(-z)$.
@@ -266,10 +269,13 @@ $r_{\mathrm{reg}}(z) = -r_{\mathrm{reg},21}(-z)$.
 \end{proposition}
 
 \begin{proof}
-(i) The quantum $R$-matrix satisfies the inverse relation
-$R_{12}(z)\, R_{21}(-z) = \id$ (Definition~\ref{def:spectral-braiding}:
-composing the braiding $L_1 \otimes L_2 \to L_2 \otimes L_1$
-with the reversed braiding gives the identity). At order $\hh$:
+(i) The unitary exchange normalization is an added comparison-surface
+datum, not a consequence of Definition~\ref{def:spectral-braiding}.
+Expanding
+\[
+R_{12}(z)\, R_{21}(-z) = \id
+\]
+to order $\hh$ gives:
 \[
 \id + \hh(r_{12}(z) + r_{21}(-z)) + O(\hh^2) = \id,
 \]
@@ -277,17 +283,16 @@ so $r_{12}(z) + r_{21}(-z) = 0$.
 
 (ii) If $r_{12} = -r_{21}$, then
 $r_{12}(z) + r_{21}(-z) = r_{12}(z) - r_{12}(-z) = 0$ gives
-$r_{12}(z) = r_{12}(-z)$. But antisymmetry says $r(-z) = -r_{21}(z)
-= r_{12}(z)$, so $r_{12}(-z) = r_{12}(z)$. Combined: $r(z)$ is
-even. However, for the standard convention where
-$r_{21}(z) = P \cdot r(z) \cdot P$, the condition
-$r_{12}(z) + r_{21}(-z) = 0$ combined with the simple pole
-$k\,\Omega/z$ (level $k$) forces oddness if $\Omega$ is symmetric and
-$r - k\,\Omega/z$ is regular.
+$r_{12}(z) = r_{12}(-z)$.  Hence tensor-skewness and spectral
+unitarity force even \(z\)-dependence.  The standard rational Casimir
+kernel \(k\Omega_{\mathrm{tr}}/z\), with \(\Omega_{\mathrm{tr}}\)
+symmetric, is not tensor-skew; it satisfies the normalized skew relation
+because the sign comes from \(z\mapsto -z\), not from tensor
+antisymmetry.
 
-(iii) Write $r_{12}(z) = k\,\Omega/z + r_{\mathrm{reg}}(z)$
+(iii) Write $r_{12}(z) = k\,\Omega_{\mathrm{tr}}/z + r_{\mathrm{reg}}(z)$
 at level $k$ Then $r_{21}(-z) = k\,\Omega_{21}/(-z) + r_{\mathrm{reg},21}(-z)
-= -k\,\Omega/z + r_{\mathrm{reg},21}(-z)$ (using
+= -k\,\Omega_{\mathrm{tr}}/z + r_{\mathrm{reg},21}(-z)$ (using
 $\Omega = \Omega_{21}$). The antisymmetry condition
 $r_{12}(z) + r_{21}(-z) = 0$ becomes
 $r_{\mathrm{reg}}(z) + r_{\mathrm{reg},21}(-z) = 0$.
@@ -380,8 +385,9 @@ the CYBE trivially: the Gaussian kernels are abelian solutions.
 
 \begin{remark}[Shadow depth interpretation]
 % label removed: rem:heisenberg-r-shadow-depth
-The Heisenberg kernels $r^L(z)=k/z^2$ and
-$r^{\mathrm{coll}}(z)=k/z$ carry the complete classical data: no higher
+The Heisenberg pre-\(d\log\) coefficient $r^L_{\mathrm{coeff}}(z)=k/z^2$
+and collision tensor $r^{\mathrm{coll}}_{\cH}(z)=k\Omega_{\cH}/z$
+carry the complete classical data: no higher
 corrections arise. This reflects the shadow depth
 $r_{\max}(\cH_k) = 2$ (Gaussian class in the $G/L/C/M$
 classification of Volume~I): the shadow obstruction tower terminates at degree~$2$,
@@ -477,7 +483,7 @@ becomes a regular contribution.
 
 \medskip
 \noindent\textbf{Step 4: CYBE verification.}
-Verification:~\eqref{eq:cybe-proved} for $r(z) = k\,\Omega/z$
+Verification:~\eqref{eq:cybe-proved} for $r(z) = k\,\Omega_{\mathrm{tr}}/z$
 at level $k$ suppressing the overall $(k+h^\vee)^{-1}$ and the double-pole term, which
 satisfies the CYBE independently by the abelian argument of
 Proposition~\ref{V1-prop:heisenberg-r-matrix}.
@@ -532,7 +538,7 @@ $e_p^{(1)} \otimes e_q^{(2)} \otimes e_r^{(3)}$ is
 $f_{pr}^q + f^{pq}_r + f^{qr}_p$, which vanishes by the
 Jacobi identity $f_{ab}^c + f_{ca}^b + f_{bc}^a = 0$.
 Hence~\eqref{eq:infinitesimal-braid} holds, and the CYBE
-for $r(z) = k\,\Omega/z$ at level $k$ follows: the three terms in the CYBE
+for $r(z) = k\,\Omega_{\mathrm{tr}}/z$ at level $k$ follows: the three terms in the CYBE
 share the common Lie-algebraic factor
 $[\Omega_{12}, \Omega_{13}] + [\Omega_{12}, \Omega_{23}]
 + [\Omega_{13}, \Omega_{23}] = 0$,
@@ -792,7 +798,7 @@ spin content of the chiral algebra:
 \textbf{Shadow class} \\
 \hline
 $\cH_k$ & $k/z^2$ [Laplace] & $\lambda$-bracket $k\lambda$ & $G$ \\
-$\widehat{\fg}_k$ & $k\,\Omega/z + k\kappa/z^2$ [Laplace] & structure constants $f^{ab}_c$ & $L$ \\
+$\widehat{\fg}_k$ & $k\,\Omega_{\mathrm{tr}}/z + k\kappa/z^2$ [Laplace] & structure constants $f^{ab}_c$ & $L$ \\
 $\beta\gamma_\lambda$ & $1/z$ [Laplace] & contact OPE & $C$ \\
 $\mathrm{Vir}_c$ & $c/(2z^4)$ [Laplace] & conformal anomaly $\lambda^3$ & $M$ \\
 $\mathcal{W}_N$ & $c_{W_N}/z^{2N}$ [Laplace] & spin-$N$ self-OPE & $M$ \\
@@ -1273,7 +1279,8 @@ $\kappaChHodge(\mathrm{Vir}_c) + \kappaChHodge(\mathrm{Vir}_{26-c}) = c/2 + (26-
 (Volume~I, Theorem~C): the Virasoro complementarity constant
 is $13$, not $0$. The complementarity potential
 $F_1(\mathrm{Vir}_c) + F_1(\mathrm{Vir}_{26-c})
-= \kappa/24 + \kappa'/24 = 13/24$
+= \kappaChHodge(\mathrm{Vir}_c)/24
++ \kappaChHodge(\mathrm{Vir}_{26-c})/24 = 13/24$
 does not vanish: the bulk gravitational theory carries a net
 genus-$1$ anomaly of $13/24$.
 \end{enumerate}
@@ -2330,11 +2337,11 @@ Z_g(\cH_k) = \det(1 - T_q)^{-k}
 % label removed: subsec:dedekind-eta
 \index{Dedekind eta function!from Fredholm determinant|textbf}
 
-\begin{corollary}[Dedekind eta from sewing;
+\begin{corollary}[Dedekind eta from determinant-line sewing;
 \ClaimStatusProvedHere]
 % label removed: cor:dedekind-eta-from-sewing
-At genus $1$ with $q = e^{2\pi i\tau}$, the Heisenberg partition
-function is
+At genus $1$ with $q = e^{2\pi i\tau}$, the Heisenberg
+determinant-line shadow is
 \begin{equation}
 % label removed: eq:heisenberg-eta
 Z_1(\cH_k, \tau)
@@ -2342,41 +2349,36 @@ Z_1(\cH_k, \tau)
 = \eta(\tau)^{-k},
 \end{equation}
 where $\eta(\tau) = q^{1/24} \prod_{n=1}^\infty (1 - q^n)$ is the
-Dedekind eta function. The prefactor $q^{-k/24}$ arises from the
-vacuum energy: the zero-point energy of $k$ free bosons on the
-torus is $E_0 = -k/24$ \textup{(}the Casimir
-energy\textup{)}, contributing $q^{E_0} = q^{-k/24}$ to the
-trace.
+Dedekind eta function. For $k=d\in\mathbb{Z}_{\geq 0}$ this is the
+character of $d$ free bosons; for general level it is the scalar
+determinant-line power with exponent $k$.
 \end{corollary}
 
 \begin{proof}
-The genus-$1$ partition function is the torus trace
-$Z_1 = \Tr_{\mathcal{F}_k}(q^{L_0 - k/24})$. The Virasoro
-generator $L_0$ on the Heisenberg Fock space has spectrum
+For one free boson the torus trace is
+$\Tr_{\mathcal{F}}(q^{L_0 - 1/24})$. The Virasoro generator
+$L_0$ on the Heisenberg Fock space has spectrum
 $\{n_1 + \cdots + n_r : 1 \le n_1 \le \cdots \le n_r,\,
 r \ge 0\}$ (partitions), so
 $\Tr(q^{L_0}) = \prod_{n=1}^\infty (1-q^n)^{-1}$ for each
-boson. The vacuum subtraction $-k/24$ gives the prefactor
-$q^{-k/24}$, and the $k$ independent bosons give the $k$-th
-power. The Dedekind eta $\eta(\tau) = q^{1/24}\prod(1-q^n)$
-satisfies $\eta^{-1} = q^{-1/24}\prod(1-q^n)^{-1}$, so
-$Z_1 = \eta(\tau)^{-k}$.
+boson. Taking the determinant-line power with exponent $k$ gives
+$q^{-k/24}\prod_{n\geq 1}(1-q^n)^{-k}=\eta(\tau)^{-k}$.
 \end{proof}
 
 \begin{remark}[The Fredholm determinant and the modular
 characteristic]
 % label removed: rem:fredholm-modular-char
 \index{modular characteristic!Fredholm determinant}
-The genus-$1$ free energy is
-$F_1(\cH_k) = -\log Z_1 = k\log\eta(\tau) = k(2\pi i\tau/24 +
-\sum_{n=1}^\infty \log(1-q^n))$. The leading term
-$k\cdot 2\pi i\tau/24$ gives the modular characteristic
+The scalar genus-$1$ free energy is $F_1(\cH_k)=k/24$. The
+determinant-line logarithm is
+$-\log Z_1=k\log\eta(\tau)$. Its leading term
+$k\cdot 2\pi i\tau/24$ records the modular characteristic
 $\kappaChHodge(\cH_k) = k$: the coefficient of the Arakelov form
 $\omega_1 = \mathrm{Im}(\tau)^{-1}\, dz \wedge d\bar{z}/(2i)$
 in the curvature $\dfib^{\,2} = \kappa \cdot \omega_1$ is
 exactly $k$, matching Volume~I. The infinite product
-$\prod(1-q^n)^{-k}$ is the non-perturbative completion of
-the modular characteristic: it encodes all instanton corrections
+$\prod(1-q^n)^{-k}$ is determinant-line data attached to
+the modular characteristic; it encodes the nonconstant oscillator terms
 to the genus-$1$ curvature.
 \end{remark}
 
@@ -2427,7 +2429,7 @@ B_g(z_4, z_1)\,
 \]
 This integral is the genus-$g$ avatar of the quartic contact
 invariant and is nonzero for $c \ne 0$ and $c \ne -22/5$.
-The shadow depth $r_{\max}(\mathrm{Vir}_c) = \infty$ (mixed
+The support shadow depth \(r^\Theta_{\max}(\mathrm{Vir}_c)=\infty\) (mixed
 class) means the Feynman expansion does NOT terminate: the
 quintic, sextic, \ldots corrections are all nonzero, producing
 an infinite perturbative series.
@@ -2471,7 +2473,7 @@ expression for the sewing of Gaussian chiral algebras.
 The sewing envelope $\cH_k^{\mathrm{sew}} \simeq \Sym(\cA^2(D))$
 of Theorem~\ref{thm:heisenberg-sewing-envelope} is a special case
 of Moriwaki's construction of IndHilb-valued factorization homology
-for conformally flat manifolds \cite{Mor26}. Moriwaki proves that
+for conformally flat manifolds \cite{Moriwaki26a}. Moriwaki proves that
 for the Heisenberg algebra (and more generally for free-field
 theories), the factorization homology on a Riemann surface $\Sigma_g$
 takes values in the category $\mathrm{IndHilb}$ of ind-Hilbert
@@ -2534,7 +2536,7 @@ realising the three faces of $8$ at the braiding level. The passage from
 the generic spectral braiding $B_{\mathrm{gen}}(z_1,z_2)$ of this chapter
 to the Siegel-elliptic dynamical braiding is effected by the
 CY-to-chiral functor $\Phi$ pulling back the trigonometric data to the
-Siegel-modular setting. Cross-ref Vol.~III,
+Siegel-modular setting. Compare Vol.~III,
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic},
 \S\ref{sec:siegel-elliptic-dynamical-R}.
 \end{remark}

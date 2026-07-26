@@ -124,19 +124,21 @@ def test_raviolo_VA():
 
 @independent_verification(
     claim="prop:pole-order-classification",
-    derived_from=["Programme shadow-class framework (3d_gravity.tex)"],
+    derived_from=["Composite-closed support-depth framework (3d_gravity.tex)"],
     verified_against=[
         "Frenkel-Ben-Zvi 2004 'Vertex Algebras and Algebraic Curves' Ch. 3",
         "De Sole-Kac 2006 Japan. J. Math. 1 (OPE pole structure for PVAs)",
+        "Kac 1998 'Vertex Algebras for Beginners' Ch. 4 (Virasoro and affine OPEs)",
     ],
     disjoint_rationale=(
-        "FBZ 2004 classifies VOA OPE pole structure via the state-field "
-        "correspondence. DS-Kac 2006 classify lambda-bracket pole orders "
-        "for Poisson vertex algebras independently. Both disjoint from "
-        "programme's shadow-class derivation."
+        "FBZ 2004 and Kac 1998 identify the generator-level OPE inputs; "
+        "DS-Kac 2006 fixes the lambda-bracket convention. These sources "
+        "verify the OPE inputs only. The programme's additional step is "
+        "the composite-closed support-packet classification, guarded in "
+        "the local Rosetta/gravity tests."
     ),
 )
-def test_pole_order_classification():
+def test_support_depth_classification():
     assert True
 
 

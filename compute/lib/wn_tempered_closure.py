@@ -20,7 +20,10 @@ the conditional arithmetic used by the manuscript:
   is the kappa-ratio candidate, not an independently encoded proof of the
   full W_N shadow recursion;
 * the W4 bridge from full Miura/OPE data to A_5(W4) is tracked separately
-  in compute/lib/w4_beta_direct.py and remains absent.
+  in compute/lib/w4_beta_direct.py and remains absent;
+* the equality rho_* = |c| / beta_N requires leading-root sharpness of the
+  ordinary shadow sequence. A finite upper envelope alone gives only the
+  lower bound rho_* >= |c| / beta_N.
 
 The finite-beta Stirling implication is:
 
@@ -78,7 +81,7 @@ from __future__ import annotations
 
 import math
 from fractions import Fraction
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
 from compute.lib.beta_N_closed_form import beta_N_from_kappa, harmonic_number
 
@@ -87,6 +90,7 @@ WN_TEMPERING_SCOPE = {
     "finite_beta_stirling_implication": "proved",
     "finite_riccati_envelope_all_N": "not_encoded",
     "harmonic_beta_closed_form": "conditional_kappa_ratio_scaling",
+    "leading_root_sharpness": "assumed_for_radius_equality",
     "w4_full_miura_A5_bridge": "absent",
 }
 
@@ -221,12 +225,95 @@ def rho_star_WN(N: int, c: Fraction) -> Fraction:
     At N=2: rho_*(c) = |c|/6 (Virasoro). At N=3:
     rho_*(c) = |c|/10 (W_3). At N=4: rho_*(c) = |c|/13.
 
-    For N>=4 this is conditional on the harmonic kappa-ratio law and the
-    full Riccati bridge.
+    For N>=4 this is conditional on the harmonic kappa-ratio law, the full
+    Riccati bridge, and leading-root sharpness. Without sharpness, a finite
+    envelope only certifies the lower bound rho_* >= |c| / beta_N.
     """
     if c == 0:
         raise ValueError("rho_* excludes c = 0")
     return abs(c) / beta_N(N)
+
+
+# ---------------------------------------------------------------------------
+# Banach completion and MC convergence guards
+# ---------------------------------------------------------------------------
+
+
+def class_m_banach_norm(weight_norms: Mapping[int, Fraction],
+                        rho: Fraction) -> Fraction:
+    r"""Weighted Banach norm for the class-M completion.
+
+        ||a||_rho = sum_{w>=0} ||a_w||_w * rho^w
+
+    The input is a finite dictionary of weight norms.  Infinite series are
+    handled in the manuscript by the Cauchy criterion; this helper is the
+    finite truncation used by the tests.
+    """
+    if rho <= 0:
+        raise ValueError("rho must be positive")
+    total = Fraction(0)
+    for weight, norm in weight_norms.items():
+        if weight < 0:
+            raise ValueError("weights must be non-negative")
+        if norm < 0:
+            raise ValueError("weight norms must be non-negative")
+        total += norm * (rho ** weight)
+    return total
+
+
+def operation_bound_holds(output_norm: Fraction,
+                          input_norms: Sequence[Fraction],
+                          constant: Fraction) -> bool:
+    r"""Check ||m_k(a_1,...,a_k)|| <= C_k prod_i ||a_i||."""
+    if constant < 0:
+        raise ValueError("operation constant must be non-negative")
+    product = Fraction(1)
+    for norm in input_norms:
+        if norm < 0:
+            raise ValueError("input norms must be non-negative")
+        product *= norm
+    return output_norm <= constant * product
+
+
+def mc_series_bound(operation_constants: Sequence[Fraction],
+                    radius: Fraction = Fraction(1)) -> Fraction:
+    r"""Finite truncation of sum_{k>=2} C_k(rho) R^k."""
+    if radius < 0:
+        raise ValueError("radius must be non-negative")
+    total = Fraction(0)
+    for index, constant in enumerate(operation_constants, start=2):
+        if constant < 0:
+            raise ValueError("operation constants must be non-negative")
+        total += constant * (radius ** index)
+    return total
+
+
+def geometric_mc_series_bound(first_constant: Fraction,
+                              ratio: Fraction,
+                              radius: Fraction = Fraction(1)) -> Fraction:
+    r"""Closed majorant for C_k <= first_constant * ratio^(k-2)."""
+    if first_constant < 0:
+        raise ValueError("first_constant must be non-negative")
+    if not (0 <= ratio * radius < 1):
+        raise ValueError("geometric MC majorant requires ratio * radius < 1")
+    return first_constant * (radius ** 2) / (1 - ratio * radius)
+
+
+def banach_radius_certificate(N: int, c: Fraction) -> Dict[str, object]:
+    r"""Radius status for the class-M Banach completion.
+
+    N=2 (Virasoro) and N=3 (W_3) are proved rows.  N>=4 records the
+    conditional harmonic beta law plus finite-envelope and leading-root
+    sharpness hypotheses.
+    """
+    status = "proved_low_rank" if N in (2, 3) else "conditional_harmonic_beta"
+    return {
+        "N": N,
+        "beta": beta_N(N),
+        "rho_star": rho_star_WN(N, c),
+        "status": status,
+        "requires_mc_sum": "sum_k C_k(rho) < infinity",
+    }
 
 
 # ---------------------------------------------------------------------------

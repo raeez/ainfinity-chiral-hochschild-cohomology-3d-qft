@@ -121,8 +121,8 @@ class TestVirasoroKappa:
         kappa = kappa_from_self_sewing(ope)
         assert kappa == Fraction(13), f"kappa(Vir_26) = {kappa}, expected 13"
 
-    def test_virasoro_self_dual_c13(self):
-        """kappa(Vir_13) = 13/2.  The self-dual point."""
+    def test_virasoro_comparison_fixed_c13(self):
+        """kappa(Vir_13) = 13/2 at the comparison fixed point."""
         ope = virasoro_ope(Fraction(13))
         kappa = kappa_from_self_sewing(ope)
         assert kappa == Fraction(13, 2), f"kappa(Vir_13) = {kappa}, expected 13/2"
@@ -510,7 +510,7 @@ class TestComplementarity:
     def test_virasoro_complementarity(self):
         """kappa(Vir_c) + kappa(Vir_{26-c}) = 13 for all c.
 
-        The Koszul dual of Vir_c is Vir_{26-c}.
+        The same-family line-side representative is Vir_{26-c}.
         kappa(Vir_c) = c/2, kappa(Vir_{26-c}) = (26-c)/2.
         Sum = c/2 + (26-c)/2 = 13.
         """
@@ -526,9 +526,8 @@ class TestComplementarity:
     def test_heisenberg_anti_symmetry(self):
         """kappa(H_k) + kappa(H_{-k}) = 0.
 
-        The Koszul dual of H_k is H_{-k}.
-        kappa(H_k) = k, kappa(H_{-k}) = -k.
-        Sum = 0.
+        This is the scalar sign-flip row for the open-colour model.
+        The chiral Koszul dual is Sym^ch(V*), not H_{-k}.
         """
         for k_val in [1, 2, Fraction(1, 2)]:
             k = Fraction(k_val)
@@ -554,8 +553,8 @@ class TestComplementarity:
                 f"{kappa_A + kappa_dual}"
             )
 
-    def test_virasoro_self_dual_point(self):
-        """At c = 13, Vir_c is self-dual: Vir_13^! = Vir_13.
+    def test_virasoro_line_comparison_fixed_point(self):
+        """At c = 13, the same-family Virasoro comparison is fixed.
 
         kappa(Vir_13) = 13/2.
         The complementarity sum is 13/2 + 13/2 = 13, consistent with AP24.

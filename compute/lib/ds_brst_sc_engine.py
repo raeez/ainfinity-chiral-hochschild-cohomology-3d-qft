@@ -10,7 +10,8 @@ The key mathematical content:
    affine generators, and its λ-bracket (computed from the affine λ-bracket)
    IS the Virasoro λ-bracket at c = c_DS(k).
 
-2. **A∞ transport**: The affine algebra V_k(sl₂) is class L (m_k = 0 for k ≥ 3).
+2. **A∞ transport**: The affine algebra V_k(sl₂) is class L
+   (finite Lie transfer; no operations beyond the cubic stage).
    DS reduction produces Vir_c which is class M (m_k ≠ 0 for all k ≥ 3).
    The higher A∞ operations arise from BRST homotopy transfer, and they
    match the intrinsic Virasoro operations because the λ-bracket determines
@@ -817,7 +818,8 @@ def ds_complexity_transport(k_val):
     r"""Verify the complexity class transformation under DS reduction.
 
     V_k(sl₂) is class L:
-      - Affine λ-bracket is strictly associative (m_3 = 0)
+      - Affine λ-bracket satisfies Lie conformal Jacobi
+      - the Swiss-cheese transfer is finite and has no operations beyond the cubic stage
       - r_max = 3 (cubic shadow only, from the structure constants)
       - Gravitational complexity: semistrict higher-spin
 

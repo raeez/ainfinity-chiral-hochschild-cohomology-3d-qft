@@ -13,11 +13,12 @@ CHANNEL 1 (TT):
 
 CHANNEL 2 (WW):
   Z₂ symmetry (W → -W) forces odd arities to vanish.
-  κ_WW = c/3 (Shapovalov norm from W_{(5)}W = c/3).
+  κ_WW = c/3 (Shapovalov norm from W_{(5)}W = c/3);
+  the W-line square-root branch has initial coefficient 2κ_WW = 2c/3.
   Q_{WWWW} = 10240/(c(5c+22)³) (quartic contact from w3_quartic_contact.py).
-  Shadow metric on the W-line: Q^{WW}(u) = (c/3)² + [20480/(3(5c+22)³)]u
-  where u = t². Generating function G_WW(u) = (c/3)√(1 + γu) with
-  γ = 61440/(c²(5c+22)³). Complementarity c → 100-c.
+  Shadow metric on the W-line: Q^{WW}(u) = (2c/3)^2 + [163840/(3(5c+22)³)]u
+  where u = t². Generating function G_WW(u) = (2c/3)√(1 + delta u) with
+  delta = 122880/(c²(5c+22)³). Raw complementarity is not asserted.
 
 CHANNEL 3 (mixed TᵖW² ray):
   The simplest mixed sector has p T-inputs and 2 W-inputs (n_W even by Z₂).
@@ -26,7 +27,7 @@ CHANNEL 3 (mixed TᵖW² ray):
   where δQ encodes the WW perturbation.
 
 The TT shadow metric Q^{TT} has degree 2 (3 parameters: κ, S_3, S_4).
-The WW shadow metric Q^{WW}(u) has degree 1 in u = t² (2 parameters: κ_WW, S_4^{WW}).
+The WW shadow metric Q^{WW}(u) has degree 1 in u = t² (2 parameters: 2κ_WW, S_4^{WW}).
 The higher degree would come from independent S_6^{WW} data; the assumption
 of degree-1 Q^{WW} (verified in w3_shadow_coefficients.py) means S_6^{WW}
 is determined. All Sh_{2r}^{WW} follow from the binomial expansion.
@@ -90,14 +91,15 @@ def ww_shadow_metric():
     r"""Q^{WW}(u) with u = t² (only even arities).
 
     κ_WW = c/3. S_4^{WW} = 10240/(c(5c+22)³).
-    G_WW(u) = √Q^{WW}(u) = (c/3)·√(1 + γ·u).
-    γ = 2·S_4^{WW} / κ_WW = 61440/(c²(5c+22)³).
-    Q^{WW}(u) = (c/3)²·(1 + γ·u) = c²/9 + [20480/(3(5c+22)³)]·u.
+    G_WW(u) = √Q^{WW}(u) = (2c/3)·√(1 + delta·u).
+    delta = 122880/(c²(5c+22)³).
+    Q^{WW}(u) = (2c/3)^2·(1 + delta·u)
+              = 4c²/9 + [163840/(3(5c+22)³)]·u.
     """
-    kappa_WW = c / 3
-    gamma = Rational(61440) / (c**2 * (5*c + 22)**3)
-    Q_WW = kappa_WW**2 * (1 + gamma * u)
-    return Q_WW, gamma
+    h2_WW = 2 * c / 3
+    delta = Rational(122880) / (c**2 * (5*c + 22)**3)
+    Q_WW = h2_WW**2 * (1 + delta * u)
+    return Q_WW, delta
 
 
 def ww_shadow_coefficients(r_max: int = 20) -> Dict[int, object]:
@@ -105,18 +107,18 @@ def ww_shadow_coefficients(r_max: int = 20) -> Dict[int, object]:
 
     H^{WW}(t) = t² √Q^{WW}(t²). For even arity 2r:
     S_{2r}^{WW} = [t^{2r}] H^{WW}(t) / (2r)
-                = [u^{r-1}] (c/3)·√(1+γu) / (2r)
-                = (c/3)·C(1/2, r-1)·γ^{r-1} / (2r)
+                = [u^{r-1}] (2c/3)·√(1+delta u) / (2r)
+                = (2c/3)·C(1/2, r-1)·delta^{r-1} / (2r)
 
     where C(1/2, n) = binom(1/2, n) = (1/2)(1/2-1)...(1/2-n+1)/n!
     """
-    kappa_WW = c / 3
-    gamma = Rational(61440) / (c**2 * (5*c + 22)**3)
+    h2_WW = 2 * c / 3
+    delta = Rational(122880) / (c**2 * (5*c + 22)**3)
 
     results = {}
     for r in range(1, r_max // 2 + 1):
         arity = 2 * r
-        n = r - 1  # power of γ
+        n = r - 1  # power of delta
 
         # Binomial coefficient binom(1/2, n)
         bcoeff = Rational(1)
@@ -125,8 +127,8 @@ def ww_shadow_coefficients(r_max: int = 20) -> Dict[int, object]:
         if n > 0:
             bcoeff /= Rational(math.factorial(n))
 
-        # [t^{2r}]H = [u^{r-1}] G_WW(u) = κ_WW · bcoeff · γ^n
-        Sh_2r = kappa_WW * bcoeff * gamma**n
+        # [t^{2r}]H = [u^{r-1}] G_WW(u) = (2κ_WW) · bcoeff · delta^n
+        Sh_2r = h2_WW * bcoeff * delta**n
 
         # S_{2r} = Sh_{2r} / (2r)
         S_2r = cancel(Sh_2r / (2 * r))
@@ -356,9 +358,9 @@ def compute_all_channels(r_max: int = 20):
     # ═════════════════════════════════════════════════════════════
     print("\n" + "═" * 78)
     print("  CHANNEL 2: S_r^{WW}  [W-W channel, even arities only]")
-    print("  Q^{WW}(u) = c²/9 + [20480/(3(5c+22)³)]u,  u = t²")
-    print("  G^{WW}(u) = (c/3)√(1+γu),  γ = 61440/(c²(5c+22)³)")
-    print("  S_{2r}^{WW} = (c/3)·C(1/2,r-1)·γ^{r-1} / (2r)")
+    print("  Q^{WW}(u) = 4c²/9 + [163840/(3(5c+22)³)]u,  u = t²")
+    print("  G^{WW}(u) = (2c/3)√(1+delta u),  delta = 122880/(c²(5c+22)³)")
+    print("  S_{2r}^{WW} = (2c/3)·C(1/2,r-1)·delta^{r-1} / (2r)")
     print("═" * 78)
 
     S_WW = ww_shadow_coefficients(r_max)
@@ -397,7 +399,10 @@ def compute_all_channels(r_max: int = 20):
         S_r_dual = S_r.subs(c, 26 - c)
         S_sum = cancel(S_r + S_r_dual)
         # Check if S_sum is c-independent
-        p = Poly(together(S_sum) * (5*c + 22)**(r-2) * c**(r-3), c)
+        cleared_num, _ = together(
+            S_sum * (5*c + 22)**(r-2) * c**(r-3)
+        ).as_numer_denom()
+        p = Poly(cleared_num, c)
         is_const = p.degree() == 0 if p.total_degree() >= 0 else False
         # For Virasoro, the complementarity is:
         # S_r^{norm}(c) + S_r^{norm}(26-c) = const
@@ -437,17 +442,17 @@ def compute_all_channels(r_max: int = 20):
     print("    where D = 80/(5c+22), F_r(x) = Σ_{j=0}^{⌊(r-4)/2⌋} (-1)^j Cat_j C(r-4,2j) x^j")
 
     print("\n  WW channel (generalized Catalan for the sextic pole):")
-    print("    S_2^{WW} = c/6")
-    print("    S_{2r}^{WW} = (c/3) · C(1/2, r-1) · γ^{r-1} / (2r)")
-    print("    where γ = 61440/(c²(5c+22)³)")
-    print("    = (-1)^{r-2} · (2r-4)!! · c · 61440^{r-1} / (3 · (2r)!! · (2r) · c^{2r-2} · (5c+22)^{3r-3})")
+    print("    S_2^{WW} = c/3")
+    print("    S_{2r}^{WW} = (2c/3) · C(1/2, r-1) · delta^{r-1} / (2r)")
+    print("    where delta = 122880/(c²(5c+22)³)")
+    print("    = (-1)^{r-2} · (2r-4)!! · 2c · 122880^{r-1} / (3 · (2r)!! · (2r) · c^{2r-2} · (5c+22)^{3r-3})")
 
     # Simplify the WW formula
     print("\n  WW closed-form via generalized Catalan:")
     print("    C(1/2, n) = (-1)^{n+1} · Cat_{n-1} / (2^{2n-1})")
     print("    where Cat_m = C(2m,m)/(m+1) is the m-th Catalan number.")
     print("    So for n ≥ 1:")
-    print("    S_{2r}^{WW} = (-1)^r · Cat_{r-2} · c · (61440)^{r-1} / (3 · 2^{2r-1} · (2r) · c^{2r-2} · (5c+22)^{3r-3})")
+    print("    S_{2r}^{WW} = (-1)^r · Cat_{r-1} · 30720^{r-1} / (3 · (2r-3) · c^{2r-3} · (5c+22)^{3r-3})")
 
     # Verify the Catalan connection for WW
     print("\n  Verification of Catalan connection for WW:")
@@ -566,8 +571,8 @@ def complementarity_analysis():
 
     # WW: c → 100-c (W₃ complementarity)
     print("\n  WW channel: c → 100-c")
-    print("  For Q^{WW}(u) = (c/3)²(1+γu), the complementarity structure is:")
-    print("  S_{2r}^{WW}(c) involves (c/3)·γ^{r-1} = c/(3)·(61440)^{r-1}/(c²(5c+22)³)^{r-1}")
+    print("  For Q^{WW}(u) = (2c/3)²(1+delta u), the raw coefficients are not invariant.")
+    print("  S_{2r}^{WW}(c) involves (2c/3)·delta^{r-1} = 2c/(3)·(122880)^{r-1}/(c²(5c+22)³)^{r-1}")
     for arity in [4, 6, 8, 10, 12, 14, 16, 18, 20]:
         if arity not in S_WW:
             continue
@@ -616,10 +621,10 @@ def save_results(r_max: int = 20):
                 'coefficients': {},
             },
             'WW': {
-                'description': 'Pure W sector, even arities only. Complementarity c → 100-c.',
-                'shadow_metric': 'Q^{WW}(u) = c²/9 + [20480/(3(5c+22)³)]u, u=t²',
-                'gamma': '61440/(c²(5c+22)³)',
-                'formula': 'S_{2r}^{WW} = (c/3)·C(1/2,r-1)·γ^{r-1}/(2r)',
+                'description': 'Pure W-line scalar sector, even arities only. Raw complementarity is not asserted.',
+                'shadow_metric': 'Q^{WW}(u) = 4c²/9 + [163840/(3(5c+22)³)]u, u=t²',
+                'delta': '122880/(c²(5c+22)³)',
+                'formula': 'S_{2r}^{WW} = (2c/3)·C(1/2,r-1)·delta^{r-1}/(2r)',
                 'coefficients': {},
             },
         },

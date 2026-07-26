@@ -8,15 +8,17 @@ proves:
     Every irrational coset in the standard landscape (parafermion
     K(sl_2, k), irrational affine-Heisenberg coset Com(H, V_k(sl_2)),
     Virasoro-in-affine coset Com(Vir_{c'}, V_k(sl_2))) at generic
-    (k, c') avoiding the severe Kac-zero locus is analytically
-    tempered: limsup_r (|S_r(coset)|/r!)^{1/r} = 0, and the
-    ordinary-generating radius is rho_*^{coset} = |c_coset| / 6.
+    (k, c') avoiding the severe Kac-zero locus and satisfying the
+    BGG ramification estimate is analytically tempered:
+    limsup_r (|S_r(coset)|/r!)^{1/r} = 0, and the ordinary-generating
+    radius is rho_*^{coset} = |c_coset| / 6.
 
   Corollary cor:tempered-criterion-refined (ProvedHere):
     C_2-cofiniteness is SUFFICIENT but NOT NECESSARY for tempering;
     the refined criterion is "Virasoro-sub-channel in Kac-regular
-    locus + bounded generator-to-generator OPE pole order,"
-    which holds for every irrational coset constructed here.
+    locus + BGG resolution/Kazhdan ramification,"
+    which is the conditional criterion used for the irrational cosets
+    constructed here.
 
   Proposition prop:zhu-unbounded-tempered-nontrivial (ProvedHere):
     Explicit construction of an infinite-Zhu but analytically
@@ -27,9 +29,10 @@ proves:
     POLYNOMIAL (not factorial) in the Heisenberg charge, so infinite
     Zhu dimension does NOT feed factorial shadow growth.
 
-  Retraction of conj:tempered-unbounded-zhu (inscribed in the prior
-  chapter as a candidate contrapositive). Conjecture FAILS; the
-  refined criterion replaces it.
+  Retraction of the Zhu-only obstruction principle. Infinite Zhu does
+  not obstruct tempering once the BGG ramification package is supplied;
+  the finite-Zhu amplitude criterion remains a separate finite-row
+  problem.
 
 Coverage (decorator-tagged tests):
 
@@ -58,8 +61,13 @@ Coverage (decorator-tagged tests):
       k; finite admissible values for rational k with small (p, q).
 
   - test_refined_tempered_criterion_sufficient_not_necessary
-      Demonstrates an infinite-Zhu tempered example, refuting the
-      prior conj:tempered-unbounded-zhu contrapositive statement.
+      Demonstrates a conditional infinite-Zhu tempered example,
+      refuting the prior Zhu-only obstruction once BGG ramification is
+      supplied.
+
+  - test_bgg_resolution_profile_and_ramification_estimate
+      Guards the actual BGG alternating sum and quadratic
+      ramification inequality required by the criterion.
 
 DERIVED FROM (for each claim):
   - Sugawara central charge 3k/(k+2) of V_k(sl_2) (Sugawara construction)
@@ -88,13 +96,24 @@ _VOL2_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__f
 if _VOL2_ROOT not in sys.path:
     sys.path.insert(0, _VOL2_ROOT)
 
+SOURCE = os.path.join(
+    _VOL2_ROOT,
+    "chapters",
+    "theory",
+    "irrational_cosets_tempered_platonic.tex",
+)
+
 from compute.lib.irrational_coset_tempered_engine import (  # noqa: E402
     SEVERE_KAC_ZERO_LOCUS,
     affine_heisenberg_coset_channel_data,
+    bgg_gaussian_dominates_polynomial,
+    bgg_gaussian_exponent,
+    bgg_resolution_profile,
     certify_irrational_coset,
     coset_c_avoids_kac_locus,
     parafermion_central_charge,
     parafermion_channel_data,
+    ramification_lower_bound,
     vir_affine_coset_channel_data,
     vir_in_affine_coset_central_charge,
     zhu_dimension_finite_admissible,
@@ -203,7 +222,48 @@ def test_parafermion_c_avoids_kac_locus():
 
 
 # ---------------------------------------------------------------------------
-# Test 3: Virasoro-affine coset rho_* closed form.
+# Test 3: BGG resolution and Kazhdan ramification estimate.
+# ---------------------------------------------------------------------------
+
+
+@independent_verification(
+    claim="def:vskr-bgg-criterion",
+    derived_from=[
+        "BGG resolution by Verma shadows indexed by affine Weyl length",
+        "Kazhdan ramification estimate Re(Delta(w.lambda)-Delta(lambda)) >= a ell(w)^2 - b",
+    ],
+    verified_against=[
+        "Direct lower-bound arithmetic at affine lengths 0..8",
+        "Gaussian exponent comparison against polynomial length growth",
+    ],
+    disjoint_rationale=(
+        "The criterion test uses only the BGG alternating-sum profile and "
+        "quadratic ramification arithmetic. It does not use Zhu dimension, "
+        "central-charge formulas, or bounded OPE pole order as a proxy."
+    ),
+)
+def test_bgg_resolution_profile_and_ramification_estimate():
+    """VSKR + BGG uses the BGG alternating sum, not just bounded OPE poles."""
+    profile = bgg_resolution_profile()
+
+    assert "direct_sum_{ell(w)=2}" in profile.resolution
+    assert "(-1)^ell(w)" in profile.alternating_shadow_sum
+    assert "q^(Delta(w.lambda)-Delta(lambda))" in profile.alternating_shadow_sum
+    assert "a ell(w)^2 - b" in profile.ramification_inequality
+    assert profile.local_pole_bound_required is True
+
+    assert ramification_lower_bound(0, a_num=2, b_num=3) == Fraction(-3)
+    assert ramification_lower_bound(3, a_num=2, b_num=3) == Fraction(15)
+    assert bgg_gaussian_exponent(3, q_decay_num=1, a_num=2, b_num=3) == (
+        Fraction(-15)
+    )
+    assert bgg_gaussian_dominates_polynomial(
+        degree=4, length=8, q_decay_num=1, a_num=1, b_num=0
+    )
+
+
+# ---------------------------------------------------------------------------
+# Test 4: Virasoro-affine coset rho_* closed form.
 # ---------------------------------------------------------------------------
 
 
@@ -321,6 +381,7 @@ def test_irrational_cosets_tempered_certificate():
 
     for cert in certs:
         assert cert.beta_T == 6
+        assert cert.bgg_ramification_assumed
         assert cert.tempered, f"cert {cert} NOT tempered"
         assert cert.avoids_kac, f"cert {cert} HITS Kac locus"
         assert cert.rho_star > 0, f"cert {cert} has non-positive rho_star"
@@ -392,7 +453,7 @@ def test_zhu_dimension_infinite_sentinel():
     ),
 )
 def test_refined_tempered_criterion_sufficient_not_necessary():
-    """Infinite-Zhu tempered examples exist; conj:tempered-unbounded-zhu fails."""
+    """Infinite-Zhu tempering is conditional on BGG, not on finite Zhu."""
     # Construct a parafermion at irrational-witness k; record that
     # (i) Zhu is sentinel -1 (infinite, if we pass k_den = 0),
     # (ii) tempering certificate is tempered = True.
@@ -401,13 +462,42 @@ def test_refined_tempered_criterion_sufficient_not_necessary():
     # k; the Zhu sentinel returns -1.
     cert = certify_irrational_coset("parafermion", 7, 1)
     assert cert.tempered
+    assert cert.bgg_ramification_assumed
     # Infinite-Zhu case (sentinel): construct via zhu function directly.
     zhu_sentinel = zhu_dimension_infinite_irrational(1, 0)
     assert zhu_sentinel == -1  # infinite
     # The certificate logic shows: tempering does NOT require finite
-    # Zhu. Conj:tempered-unbounded-zhu (bounded Zhu => tempered) might
-    # still hold as SUFFICIENT; the refined claim is that bounded Zhu
-    # is NOT NECESSARY.
+    # Zhu. Finite-Zhu amplitude criteria might still close finite-row
+    # cases; the refined claim is that bounded Zhu is NOT NECESSARY.
+
+
+def test_source_header_tracks_current_finite_zhu_framing():
+    """The source provenance no longer records the retired Zhu-only criterion."""
+    with open(SOURCE, encoding="utf-8") as handle:
+        source = handle.read()
+    flat = " ".join(source.split())
+    comment_flat = " ".join(
+        line.removeprefix("%%").strip() for line in source.splitlines()
+    )
+
+    retired = (
+        "bounded Zhu ==> tempered",
+        "non-tempered ==> unbounded Zhu",
+        "FAILS as contrapositive",
+        "Direct repair note:",
+        "C_2-cofiniteness as the sharp tempered criterion",
+        "qualifies as a candidate for the contrapositive",
+        "every irrational coset IS",
+        "VIRASORO SUB-CHANNEL",
+    )
+    for phrase in retired:
+        assert phrase not in source
+
+    assert "finite-Zhu amplitude criterion, not a" in flat
+    assert "Zhu-only equivalence" in flat
+    assert "tests the Zhu-only obstruction principle" in comment_flat
+    assert "analytically tempered under the BGG ramification hypothesis" in comment_flat
+    assert "Source-truth note:" in source
 
 
 # ---------------------------------------------------------------------------

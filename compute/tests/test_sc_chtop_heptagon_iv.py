@@ -22,10 +22,15 @@ All work attributed to Raeez Lorgat.
 from __future__ import annotations
 
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
 from compute.lib.independent_verification import independent_verification
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SPECTRAL_BRAIDING_CORE_TEX = REPO_ROOT / "chapters/connections/spectral-braiding-core.tex"
+CURVED_DUNN_STANDALONE_TEX = REPO_ROOT / "standalone/curved_dunn_two_complex_bridge.tex"
 
 
 # ---------------------------------------------------------------------------
@@ -125,6 +130,28 @@ def test_sc_heptagon_dag_stack_shift():
     with (n_open, n_closed) = (1, 2).
     """
     assert shifted_symplectic_degree(n_open=1, n_closed=2) == 1
+
+
+def test_dunn_split_lives_on_hom_center_not_independent_e1s():
+    """The Dunn split is a Hom/derived-center presentation, not two
+    independent E_1 structures on the boundary algebra.
+    """
+    core = " ".join(SPECTRAL_BRAIDING_CORE_TEX.read_text().split())
+    standalone = " ".join(CURVED_DUNN_STANDALONE_TEX.read_text().split())
+
+    assert r"\RHom^{\mathrm{ch}}_{\cA\text{-}\cA}(\cA,\cA)" in core
+    assert (
+        r"not a decomposition of~$\cA$ into two independent $E_1$-chiral "
+        r"algebra structures"
+    ) in core
+    assert "endomorphism/Koszul-dual Hom differential" in core
+
+    assert "Hom-side Koszul-dual factor in the comparison complex" in standalone
+    assert "not a second independent $E_1$-structure" in standalone
+    assert (
+        "not a product decomposition of the original within-surface $E_1$ algebra"
+        in standalone
+    )
 
 
 # ---------------------------------------------------------------------------

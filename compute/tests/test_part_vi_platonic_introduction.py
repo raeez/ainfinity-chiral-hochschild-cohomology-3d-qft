@@ -1,9 +1,9 @@
 """
-Independent-verification tests for Part VI Platonic Introduction theorems.
+Independent-verification tests for Part VI structural introduction theorems.
 
 Chapter file: chapters/connections/part_vi_platonic_introduction.tex
 
-Four Platonic theorems verified, each with disjoint derivation and
+Four carrier theorems verified, each with disjoint derivation and
 verification sources.  The test values are geometric/algebraic
 invariants of the iterated Sugawara ladder, the universal holography
 functor, and the Monster moonshine orbifold; each test reads a single
@@ -22,9 +22,23 @@ Attribution: all work by Raeez Lorgat.
 from __future__ import annotations
 
 from fractions import Fraction
+from pathlib import Path
 
 from compute.lib.independent_verification import independent_verification
 from compute.lib.z2_group_cohomology import h3_bz2_u1_class_from_triple_sign
+
+ROOT = Path(__file__).resolve().parents[2]
+PART_VI_TEX = ROOT / "chapters/connections/part_vi_platonic_introduction.tex"
+PROGRAMME_TEX = ROOT / "chapters/connections/programme_climax_platonic.tex"
+
+
+def _flat(path: Path) -> str:
+    return " ".join(path.read_text(encoding="utf-8").split())
+
+
+def _window(source: str, needle: str, radius: int = 2400) -> str:
+    pos = source.index(needle)
+    return source[max(0, pos - radius) : pos + radius]
 
 
 # ---------------------------------------------------------------------------
@@ -278,7 +292,7 @@ def test_monster_central_charge_twofold_verification() -> None:
 
 
 def test_all_four_platonic_theorems_registered() -> None:
-    """The four Part VI Platonic theorems must all appear in the registry."""
+    """The four Part VI carrier theorems must all appear in the registry."""
     from compute.lib.independent_verification import claims_covered
 
     covered = claims_covered()
@@ -290,3 +304,98 @@ def test_all_four_platonic_theorems_registered() -> None:
     }
     missing = required - covered
     assert not missing, f"Missing decorators for: {missing}"
+
+
+def test_part_vi_ladder_recall_displays_lift_ambient_and_endpoint_packages() -> None:
+    source = _flat(PART_VI_TEX)
+
+    recall = _window(source, r"\label{thm:part-vi-ladder-recall}")
+    assert r"\hypAmbientWtCpl+\hypTLift" in recall
+    assert r"\hypProchazka,\hypCKL,\hypPRSh,\hypYamada" in recall
+    assert "only under the endpoint package" in recall
+
+    ladder = _window(source, r"\label{thm:part-vi-ladder-exists}")
+    assert r"\hypDSBRST+\hypAmbientWtCpl+\hypTLift" in ladder
+    assert r"\hypProchazka,\hypCKL,\hypPRSh,\hypYamada" in ladder
+    assert "DS/BV package" in ladder
+
+
+def test_programme_climax_warning_blocks_display_their_hypothesis_packages() -> None:
+    source = _flat(PROGRAMME_TEX)
+
+    expected = {
+        r"\label{thm:kappa-tuple-primitivity-orthogonal-shimura}": [
+            r"\hypKappaRows+\hypBorcherdsChart",
+            "Borcherds orthogonal-Shimura chart",
+        ],
+        r"\label{thm:kappa-tuple-primitivity-class-B}": [
+            r"\hypKappaRows+\hypBCOVChart",
+            "BCOV compact-support chart",
+        ],
+        r"\label{cor:rung-heisenberg}": [
+            r"\hypAbelianHTBV+\hypTLift",
+            "abelian HT/BV ambient",
+        ],
+        r"\label{cor:rung-affine-km}": [
+            r"\hypKMHTBV+\hypTLift",
+            "KM HT/BV ambient",
+        ],
+        r"\label{cor:rung-w-N}": [
+            r"\hypDSBRST+\hypAmbientWtCpl+\hypTLift",
+            "weight-completed",
+        ],
+        r"\label{prop:f6-genus-three-lambda-residue}": [
+            r"\hypFaberScalar+\effScalarShadowProj",
+            r"\kappaChHodge(A)",
+        ],
+        r"\label{prop:f6-scalar-projection-no-multichannel-lift}": [
+            r"\hypFaberScalar+\effScalarShadowProj",
+            r"\mathbb Q\kappaChHodge",
+        ],
+        r"\label{cor:gravity-climax-shadow-convergence}": [
+            r"\hypAmbientWtCpl+\effScalarShadowProj",
+            "weight-completed Virasoro ambient",
+        ],
+    }
+    for label, needles in expected.items():
+        block = _window(source, label)
+        for needle in needles:
+            assert needle in block
+
+
+def test_kappa_primitivity_uses_serre_cancellation_and_bcov_quotient() -> None:
+    source = _flat(PROGRAMME_TEX)
+
+    forbidden = [
+        "Hodge numbers $h^{p, q}(X)$ vary continuously",
+        r"\kappaChHodge(X_t)$ varies",
+        "disjoint-moduli factorisation",
+        "the full orthogonal-Shimura class",
+    ]
+    for phrase in forbidden:
+        assert phrase not in source
+
+    class_a = _window(source, r"\label{thm:kappa-tuple-primitivity-orthogonal-shimura}", radius=4200)
+    assert "Serre-cancelled Hodge supertrace" in class_a
+    assert r"\sum_{q\ge0}(-1)^q h^{0,q}(X)" in class_a
+    assert r"\left\{5,\,2,\,1,\,1,\,\frac12\right\}" in class_a
+    assert "does not factor through" in class_a
+
+    class_b = _window(source, r"\label{thm:kappa-tuple-primitivity-class-B}", radius=4600)
+    assert r"\kappaCat^{\mathrm c}=24\,\kappa_{\mathrm{BCOV}}" in class_b
+    assert "not primitive against the compact-support categorical row" in class_b
+    assert r"\det\begin{pmatrix}1&1&0\\3&2&3\\2&1&0\end{pmatrix}=3\neq0" in class_b
+
+
+def test_class_b_bcov_quotient_witness_matrix_has_rank_three() -> None:
+    rows = (
+        (1, 1, 0),  # C^3: compact-support Euler, Heisenberg, fibre
+        (3, 2, 3),  # local CP^2
+        (2, 1, 0),  # resolved conifold
+    )
+    determinant = (
+        rows[0][0] * (rows[1][1] * rows[2][2] - rows[1][2] * rows[2][1])
+        - rows[0][1] * (rows[1][0] * rows[2][2] - rows[1][2] * rows[2][0])
+        + rows[0][2] * (rows[1][0] * rows[2][1] - rows[1][1] * rows[2][0])
+    )
+    assert determinant == 3

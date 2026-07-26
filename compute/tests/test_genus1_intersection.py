@@ -108,6 +108,16 @@ class TestHeisenbergGenus1:
         assert abs(r_near['R1_real'] - r_far['R1_real']) < 0.001
 
 
+class TestAffineSL2Genus1Scope:
+    """Guard the KZB heat-equation convention in the affine genus-1 helper."""
+
+    def test_kzb_flatness_uses_theta_kronecker_heat_equation(self):
+        data = genus1_intersection_affine_sl2(k_val=1)
+        source = data['KZB_connection']['compatibility_source']
+        assert source == 'CYBE + theta/Kronecker heat equation producing wp terms'
+        assert 'heat equation for ℘' not in source
+
+
 class TestVirasoroGenus1:
     """Test genus-1 intersection for Virasoro (three-sector structure)."""
 

@@ -654,20 +654,13 @@ Theorem~\ref{thm:super-yangian-koszul-dual}. Then
 This is the super analogue, \emph{in the super-trace normalisation},
 of the bosonic complementarity on the Koszul locus; the vanishing is
 family-specific to $\fsl(m|n)$ with $m\neq n$, driven by the
-super-Sugawara coefficient $(m-n)(m+n)\neq 0$ and the
+defining-supertrace Casimir index
+\[
+ I_{\str}(\fsl(m|n))=(m-n)(m+n)
+\]
+and the
 Feigin--Frenkel-type involution $k\mapsto -k-2h^{\vee}_{s}$ inverting
 the super-Sugawara shift sign against Step 1.
-% RECTIFICATION-FLAG: [Gate 1 TRUTH / Gate 2 DEFINE] The factor entering
-% the shadow-depth formula is the product $(m-n)(m+n)=h^\vee_s(m+n)$,
-% equal to the engine value (compute/lib/f13_..., kappa_str). It was
-% previously written ``$\sdim\fsl(m|n)=m^2-n^2$'', but the genuine
-% superdimension of $\fsl(m|n)$ is $(m-n)^2-1$, not $m^2-n^2$; the two
-% never coincide. The load-bearing supertrace-zero identity is robust to
-% this (the cancellation is driven by the $k\mapsto-k-2h^\vee_s$
-% involution, not by the coefficient). Resolution requires naming the
-% correct invariant entering the super-Sugawara shadow depth (likely the
-% quadratic-Casimir index, not the raw superdimension); flagged rather
-% than renamed because the same ``$\sdim$'' label is engine-locked.
 \end{theorem}
 
 \begin{proof}
@@ -676,12 +669,15 @@ sub-Sugawara line the super-Sugawara stress tensor
 $T_{\mathrm{Sug}}^{s}(z) = \frac{1}{2(k+h^{\vee}_{s})}
 \sum_{a,b}\langle\cdot,\cdot\rangle_{s}^{ab}\,
 {:}J^{a}(z) J^{b}(z){:}$ is well-defined and inner; the super-shadow
-depth $\kappa^{\mathrm{super}}_{\str}(A)$ is the super-trace of
-$T_{\mathrm{Sug}}^{s}$ on the augmentation ideal of $A$, computed via
-super-PBW (Definition~\ref{def:super-drinfeld-yangian} and Gow--Molev
-2010 Theorem~4.2). For $\fg = \fsl(m|n)$ with $m\neq n$ this gives
+depth $\kappa^{\mathrm{super}}_{\str}(A)$ is obtained by contracting
+$T_{\mathrm{Sug}}^{s}$ with the defining-supertrace Casimir index
+$I_{\str}(\fsl(m|n))$, computed via super-PBW
+(Definition~\ref{def:super-drinfeld-yangian} and Gow--Molev
+2010 Theorem~4.2). The number $I_{\str}(\fsl(m|n))=(m-n)(m+n)$ is not
+the superdimension $(m-n)^2-1$ of $\fsl(m|n)$. For $\fg = \fsl(m|n)$
+with $m\neq n$ this gives
 $\kappa^{\mathrm{super}}_{\str}(A)
-= (k+h^{\vee}_{s})\,(m-n)(m+n)/(2 h^{\vee}_{s})
+= (k+h^{\vee}_{s})\,I_{\str}(\fsl(m|n))/(2 h^{\vee}_{s})
 = (k+m-n)(m-n)(m+n)/(2(m-n)) = (k+m-n)(m+n)/2$.
 
 \textbf{Step 2 (Koszul-dual depth via Theorem~\ref{thm:super-yangian-koszul-dual}).}
@@ -745,7 +741,7 @@ $(m,n)\in\{(2,1),(3,2),(4,3)\}$, and at $\fpsl(2|2)$ matches the
 centre-rank $2$ of Beisert's central extension
 \cite[\S3]{Beisert07}; these pattern-matches are evidence, not a
 derivation. Closing the shift-magnitude question is a separate
-computational target, recorded as Open Frontier F4$'$
+computational target, left open here
 (super-complementarity canonical pairing).
 
 \medskip
@@ -786,7 +782,7 @@ load-bearing step that remains open.
 \label{rem:psl-2-2-shadow-depth}
 At $\fg=\fpsl(2|2)$ the super-dual Coxeter number $h^{\vee}_{s}$
 vanishes, the Step~1 formula
-$(k+h^{\vee}_{s})\sdim(\fg)/(2 h^{\vee}_{s})$ is singular, and
+$(k+h^{\vee}_{s})I_{\str}(\fg)/(2 h^{\vee}_{s})$ is singular, and
 super-Sugawara is critical-level at every~$k$. The shadow-depth
 computation in this case is structurally distinct from the
 $m\neq n$ family covered by
@@ -848,6 +844,102 @@ pairings is the genuine remaining frontier (frontier F4
 addendum, Volume~I open-frontiers section).
 \end{remark}
 
+\begin{definition}[Canonical Berezinian bridge datum]
+\label{def:canonical-berezinian-bridge-datum}
+Let \(V=V_{\bar0}\oplus V_{\bar1}\), with homogeneous basis vectors of
+parity \(\parity{i}\). The super-permutation and rational super
+\(R\)-matrix are
+\begin{equation}
+\label{eq:canonical-bridge-super-r}
+P_s(v\otimes w)=(-1)^{\parity{v}\parity{w}}w\otimes v,
+\qquad
+R(u)=1-\frac{\hbar P_s}{u}.
+\end{equation}
+The RTT relation is
+\begin{equation}
+\label{eq:canonical-bridge-super-rtt}
+R(u-v)T_1(u)T_2(v)=T_2(v)T_1(u)R(u-v),
+\end{equation}
+where matrix multiplication is graded:
+\begin{equation}
+\label{eq:canonical-bridge-graded-matrix-product}
+(E_{ij}\otimes a)(E_{kl}\otimes b)
+=
+(-1)^{(\parity{a}+\parity{i}+\parity{j})(\parity{k}+\parity{l})}
+\delta_{jk}E_{il}\otimes ab .
+\end{equation}
+The classical limit is governed by the super-CYBE
+\begin{equation}
+\label{eq:canonical-bridge-super-cybe}
+[r_{12}(z_{12}),r_{13}(z_{13})]_s
++[r_{12}(z_{12}),r_{23}(z_{23})]_s
++[r_{13}(z_{13}),r_{23}(z_{23})]_s=0.
+\end{equation}
+
+The \emph{canonical Berezinian bridge datum} for a super
+\(A_\infty\)-algebra \(A\) is a chain-level pairing
+\begin{equation}
+\label{eq:canonical-berezinian-pairing}
+\langle-,-\rangle_{\mathrm{can}}\colon A\otimes A^!\longrightarrow \mathbb C
+\end{equation}
+such that
+\begin{align}
+\label{eq:canonical-bridge-supertrace-shadow}
+\operatorname{Tr}_{A/A_{\mathrm{nil}}}
+\langle a,a^!\rangle_{\mathrm{can}}
+&=\str(aa^!),\\
+\label{eq:canonical-bridge-berezinian-determinant}
+\operatorname{Ber}\bigl(\langle e_i,e^!_j\rangle_{\mathrm{can}}\bigr)
+&=\operatorname{Ber}(A),
+\end{align}
+and, for \(\bar a_i:=\parity{a_i}\), it is compatible with the
+\(A_\infty\)-operation \(m_k\) and the dual \(k\)-fold coproduct
+\(\Delta_k\) by
+\begin{equation}
+\label{eq:canonical-bridge-mk-deltak-compatibility}
+\langle m_k(a_1,\dots,a_k),b\rangle_{\mathrm{can}}
+=
+(-1)^{\epsilon}
+\langle a_1\otimes\cdots\otimes a_k,\Delta_k b\rangle_{\mathrm{can}},
+\end{equation}
+where
+\begin{equation}
+\label{eq:canonical-bridge-epsilon-sign}
+\epsilon
+=
+\parity{b}(\bar a_1+\cdots+\bar a_k)
++
+\sum_{i<j}\bar a_i\bar a_j
+\quad \in \mathbb Z/2.
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Berezinian bridge criterion]
+\ClaimStatusProvedHere
+\label{prop:berezinian-bridge-criterion}
+If a canonical Berezinian bridge datum
+\eqref{eq:canonical-berezinian-pairing}--\eqref{eq:canonical-bridge-epsilon-sign}
+exists for \(A\), then the super-trace and Berezinian normalisations are
+two shadows of one chain-level duality pairing between \(A\) and \(A^!\).
+Without such a datum, Berezinian complementarity and super-trace
+complementarity remain two parallel scalar identities, not a canonical
+duality.
+\end{proposition}
+
+\begin{proof}
+Equations~\eqref{eq:canonical-bridge-supertrace-shadow} and
+\eqref{eq:canonical-bridge-berezinian-determinant} force the same
+chain-level pairing to recover the supertrace shadow and the Berezinian
+volume shadow. Equation~\eqref{eq:canonical-bridge-mk-deltak-compatibility}
+is exactly adjointness of \(m_k\) and \(\Delta_k\), with the Koszul sign
+from moving \(b\) across the \(k\) homogeneous inputs and then ordering
+the inputs among themselves. Hence the pairing identifies the
+\(A_\infty\)-structure on \(A\) with the coalgebra structure on \(A^!\)
+in the Berezinian normalisation. If no such pairing is supplied, the two
+scalar formulae have no chain map connecting them; they are compatible
+numerical shadows but not a canonical duality datum.
+\end{proof}
+
 \begin{remark}[Super-Koszul dual is a $(\SCchtop)^{!}$-algebra,
 \emph{not} an $\SCchtop$-algebra]
 \label{rem:super-koszul-SC-not-SC}
@@ -870,7 +962,7 @@ super-version of this assertion is therefore stronger than its bosonic
 counterpart.
 \end{remark}
 
-\begin{remark}[Cross-references to the climax for the super sector]
+\begin{remark}[Compareerences to the climax for the super sector]
 \label{rem:super-climax-anchors}
 The super-Yangian sector of the programme connects to two
 reconstitution anchors:
@@ -880,8 +972,11 @@ reconstitution anchors:
  Universal Holography Theorem
  (Theorem~\ref{thm:universal-holography-master}) as the boundary
  chiral algebra of a 3d super-HT gauge theory
- $T^{\mathrm{super}}_{m,n}$ whose bulk is the super derived chiral
- centre $\cZ^{\mathrm{der}}_{\mathrm{ch}}(\Ysuper_{\hbar}(\fsl(m|n)))$.
+ $T^{\mathrm{super}}_{m,n}$ whose algebraic closed sector is the
+ super derived chiral centre
+ $\cZ^{\mathrm{der}}_{\mathrm{ch}}(\Ysuper_{\hbar}(\fsl(m|n)))$;
+ the physical bulk reading is part of the same HT open/closed
+ comparison package.
  The rung corollaries of the bosonic universal-holography ladder
  (Corollaries~\ref{cor:rung-affine-km}, \ref{cor:rung-virasoro},
  \ref{cor:rung-w-N}) admit super refinements obtained by applying the
@@ -1253,11 +1348,10 @@ comparison family and excludes the identification of
 $Y(\fgl(4|20))$ with the K3 Yangian envelope.
 \end{proof}
 
-\begin{remark}[Independent-verification decorator]
+\begin{remark}[Three disjoint comparisons]
 \label{rem:iv-decorator}
-The companion Volume~II compute test module for the super chiral
-Yangian installs three independent-verification decorators for this
-chapter under the Independent Verification Protocol:
+The super chiral Yangian statements have three disjoint comparison
+routes:
 \begin{itemize}
 \item Theorem~\ref{thm:super-yangian-e1-chiral-structure}: verified
  against Nazarov 1991 (super-Yangian $Y(\fgl(m|n))$ RTT presentation),
@@ -1279,8 +1373,8 @@ chapter under the Independent Verification Protocol:
  computation, while the Koszul-duality derivation is a
  bar-complex-level invariant computation.
 \end{itemize}
-With these three decorators, the chapter contributes three ProvedHere
-claims to the Volume~II independent-verification coverage.
+Thus the three ProvedHere claims are checked against presentations
+whose input data are pairwise disjoint from the derivations used here.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

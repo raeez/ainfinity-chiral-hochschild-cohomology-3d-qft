@@ -5,7 +5,7 @@ Verifies the full genus-2 MC pipeline:
   2. Stable graph enumeration at genus 2
   3. Graph amplitudes
   4. Genus-2 obstruction Ob_2 = D_1(Theta_1) + (1/2)*D_2(Theta_0)
-  5. Genus-2 free energy F_2 for all families
+  5. Genus-2 scalar trace F_2^sc for all families
   6. F_2/F_1 and F_2/F_1^2 universal ratios
   7. Genus-2 MC element assembly
   8. Complementarity at genus 2
@@ -80,14 +80,40 @@ class TestFaberPandharipande:
 
 
 # ===================================================================
-# 2. FREE ENERGY F_g
+# 2. SCALAR TRACE F_g^sc
 # ===================================================================
 
 class TestFreeEnergy:
-    """Test genus-g free energy F_g = kappa * lambda_g."""
+    """Test genus-g scalar trace F_g^sc = kappa * lambda_g."""
+
+    def test_scalar_function_matches_compatibility_alias(self):
+        """The legacy free-energy function is a scalar-trace alias."""
+        from lib.genus2_obstruction_engine import (
+            F_g_free_energy,
+            F_g_scalar_free_energy,
+        )
+        kappa = Symbol('kappa')
+        assert F_g_free_energy(kappa, 2) == F_g_scalar_free_energy(kappa, 2)
+        assert "Backward-compatible alias" in F_g_free_energy.__doc__
+        assert "delta F_g^cross" in F_g_scalar_free_energy.__doc__
+
+    def test_full_decomposition_separates_cross_channel_term(self):
+        """Full energy equals scalar trace plus the cross-channel term."""
+        from lib.genus2_obstruction_engine import full_free_energy_decomposition
+        kappa = Symbol('kappa')
+        delta = Symbol('delta')
+
+        result = full_free_energy_decomposition(kappa, 2, delta)
+        assert result['F_g_sc'] == kappa * Rational(7, 5760)
+        assert result['delta_F_g_cross'] == delta
+        assert simplify(result['F_g'] - (kappa * Rational(7, 5760) + delta)) == 0
+        assert result['scalar_equals_full'] is False
+
+        scalar_only = full_free_energy_decomposition(kappa, 2)
+        assert scalar_only['scalar_equals_full'] is True
 
     def test_F1_virasoro(self):
-        """F_1(Vir_c) = c/48."""
+        """F_1^sc(Vir_c) = c/48."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         c = Symbol('c')
         kappa = c / 2
@@ -95,7 +121,7 @@ class TestFreeEnergy:
         assert simplify(F1 - c / 48) == 0
 
     def test_F2_virasoro(self):
-        """F_2(Vir_c) = 7c/11520."""
+        """F_2^sc(Vir_c) = 7c/11520."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         c = Symbol('c')
         kappa = c / 2
@@ -103,7 +129,7 @@ class TestFreeEnergy:
         assert simplify(F2 - 7 * c / 11520) == 0
 
     def test_F2_heisenberg(self):
-        """F_2(H_k) = 7k/5760 (κ=k)."""
+        """F_2^sc(H_k) = 7k/5760 (kappa=k)."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         k = Symbol('k')
         kappa = k
@@ -111,7 +137,7 @@ class TestFreeEnergy:
         assert simplify(F2 - 7 * k / 5760) == 0
 
     def test_F2_w3(self):
-        """F_2(W_3) = 7c/6912 (since kappa = 5c/6)."""
+        """F_2^sc(W_3) = 7c/6912 (since kappa = 5c/6)."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         c = Symbol('c')
         kappa = 5 * c / 6
@@ -120,7 +146,7 @@ class TestFreeEnergy:
         assert simplify(F2 - expected) == 0
 
     def test_F2_betagamma(self):
-        """F_2(betagamma) = 7/5760 (kappa = 1)."""
+        """F_2^sc(betagamma) = 7/5760 (kappa = 1)."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         F2 = F_g_free_energy(S.One, 2)
         assert F2 == Rational(7, 5760)
@@ -133,11 +159,11 @@ class TestFreeEnergy:
 class TestStableGraphs:
     """Test genus-2 stable graph enumeration."""
 
-    def test_six_graphs_at_genus_2(self):
-        """There are exactly 6 stable graph types at (g=2, n=0)."""
+    def test_seven_graphs_at_genus_2(self):
+        """There are exactly 7 stable graph types at (g=2, n=0)."""
         from lib.genus2_obstruction_engine import genus2_stable_graphs_n0
         graphs = genus2_stable_graphs_n0()
-        assert len(graphs) == 6
+        assert len(graphs) == 7
 
     def test_all_genus_2(self):
         """All graphs have total arithmetic genus 2."""
@@ -177,6 +203,16 @@ class TestStableGraphs:
         banana = graphs[5]  # Graph VI
         assert banana.aut_order == 12
         assert banana.n_edges == 3
+
+    def test_barbell_automorphisms(self):
+        """Graph VII (barbell) has |Aut| = 8."""
+        from lib.genus2_obstruction_engine import genus2_stable_graphs_n0
+        graphs = genus2_stable_graphs_n0()
+        barbell = graphs[6]  # Graph VII
+        assert barbell.vertex_genera == (0, 0)
+        assert barbell.n_edges == 3
+        assert barbell.n_self_edges == 2
+        assert barbell.aut_order == 8
 
     def test_nonseparating_self_edge(self):
         """Graph II has 1 self-edge on genus-1 vertex."""
@@ -313,20 +349,20 @@ class TestF2Verification:
         assert result['match']
 
     def test_F2_heisenberg_k1(self):
-        """F_2(H_1) = 7/5760 (κ=1 at k=1)."""
+        """F_2^sc(H_1) = 7/5760 (kappa=1 at k=1)."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         F2 = F_g_free_energy(S.One, 2)  # kappa = 1 for k=1
         assert F2 == Rational(7, 5760)
 
     def test_F2_virasoro_c26(self):
-        """F_2(Vir_26) = 7*13/5760 = 91/5760."""
+        """F_2^sc(Vir_26) = 7*13/5760 = 91/5760."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         F2 = F_g_free_energy(S(13), 2)  # kappa = 26/2 = 13
         expected = 13 * Rational(7, 5760)
         assert F2 == expected
 
     def test_F2_betagamma_numeric(self):
-        """F_2(betagamma) = 7/5760 as a float."""
+        """F_2^sc(betagamma) = 7/5760 as a float."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         F2 = F_g_free_energy(S.One, 2)
         assert abs(float(F2) - 7/5760) < 1e-15
@@ -340,7 +376,7 @@ class TestF2Ratios:
     """Test universal ratios involving F_2."""
 
     def test_F2_over_F1_is_7_over_240(self):
-        """F_2/F_1 = 7/240 (kappa-independent)."""
+        """F_2^sc/F_1^sc = 7/240 (kappa-independent)."""
         from lib.genus2_obstruction_engine import F2_over_F1_ratio
         kappa = Symbol('kappa')
         result = F2_over_F1_ratio(kappa)
@@ -348,20 +384,20 @@ class TestF2Ratios:
         assert result['kappa_independent']
 
     def test_F2_over_F1_squared_inversely_proportional(self):
-        """F_2/F_1^2 = 7/(10*kappa)."""
+        """F_2^sc/(F_1^sc)^2 = 7/(10*kappa)."""
         from lib.genus2_obstruction_engine import F2_over_F1_squared
         kappa = Symbol('kappa')
         result = F2_over_F1_squared(kappa)
         assert result['match']
 
     def test_F2_over_F1_squared_numeric(self):
-        """F_2/F_1^2 at kappa=1 is 7/10."""
+        """F_2^sc/(F_1^sc)^2 at kappa=1 is 7/10."""
         from lib.genus2_obstruction_engine import F2_over_F1_squared
         result = F2_over_F1_squared(S.One)
         assert simplify(result['ratio'] - Rational(7, 10)) == 0
 
     def test_F2_over_F1_ratio_concrete(self):
-        """F_2/F_1 = (kappa*7/5760)/(kappa/24) = 7*24/5760 = 7/240."""
+        """F_2^sc/F_1^sc = (kappa*7/5760)/(kappa/24) = 7/240."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         kappa = Symbol('kappa')
         F1 = F_g_free_energy(kappa, 1)
@@ -400,7 +436,7 @@ class TestGenus2MC:
         assert simplify(result['theta_1'] - c / 48) == 0
 
     def test_mc_element_theta2_is_F2(self):
-        """Theta_2 = F_2 = kappa * 7/5760."""
+        """Theta_2 is the scalar trace F_2^sc = kappa * 7/5760."""
         from lib.genus2_obstruction_engine import genus2_mc_element
         c = Symbol('c')
         result = genus2_mc_element('virasoro', c=c)
@@ -416,7 +452,7 @@ class TestComplementarity:
     """Test Theorem C complementarity at genus 2."""
 
     def test_F2_complementarity_virasoro(self):
-        """F_2(Vir_c) + F_2(Vir_{26-c}) is c-independent."""
+        """F_2^sc(Vir_c) + F_2^sc(Vir_{26-c}) is c-independent."""
         from lib.genus2_obstruction_engine import genus2_complementarity_check
         result = genus2_complementarity_check()
         assert result['F2_complementarity']
@@ -428,13 +464,13 @@ class TestComplementarity:
         assert result['F1_complementarity']
 
     def test_F2_sum_is_91_over_5760(self):
-        """F_2(Vir_c) + F_2(Vir_{26-c}) = 91/5760."""
+        """F_2^sc(Vir_c) + F_2^sc(Vir_{26-c}) = 91/5760."""
         from lib.genus2_obstruction_engine import genus2_complementarity_check
         result = genus2_complementarity_check()
         assert result['F2_sum_expected'] == Rational(91, 5760)
 
     def test_F2_at_self_dual_point(self):
-        """At c=13 (self-dual): F_2(Vir_13) = 91/11520."""
+        """At c=13 fixed point: F_2^sc(Vir_13) = 91/11520."""
         from lib.genus2_obstruction_engine import F_g_free_energy
         kappa_13 = Rational(13, 2)
         F2_13 = F_g_free_energy(kappa_13, 2)
@@ -519,10 +555,10 @@ class TestGraphDecomposition:
                 assert val == 0, f"Non-smooth graph {name} has nonzero contribution"
 
     def test_virasoro_has_all_graph_types(self):
-        """For Virasoro, all 6 graph types can contribute."""
+        """For Virasoro, all 7 graph types can contribute."""
         from lib.genus2_obstruction_engine import graph_decomposition_F2_virasoro
         result = graph_decomposition_F2_virasoro()
-        assert len(result['graph_contributions']) == 6
+        assert len(result['graph_contributions']) == 7
 
     def test_virasoro_universal_formula(self):
         """Virasoro F_2 follows universal formula."""

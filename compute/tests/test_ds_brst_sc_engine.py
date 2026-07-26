@@ -294,7 +294,7 @@ class TestCrossEngineConsistency:
             assert simplify(kappa_aff - kappa_ds) != 0
 
     def test_virasoro_koszul_pair_at_c_ds(self):
-        """The Koszul dual of Vir_{c_DS} is Vir_{26-c_DS}."""
+        """The same-family Virasoro representative has charge 26-c_DS."""
         for k_val in [1, 3, 5]:
             c_ds = ds_central_charge_sl2(k_val)
             c_float = float(c_ds)
@@ -380,10 +380,10 @@ class TestStructuralTheorems:
             assert kappa_ds < 0, f"DS κ should be negative at k={k_val}"
 
     def test_koszul_dual_central_charge_positive(self):
-        """The Koszul dual Vir_{26-c_DS} has large positive c for k > 0.
+        """The line-side representative Vir_{26-c_DS} has large positive c for k > 0.
 
         Since c_DS < 0 for k > 0, we have 26 - c_DS > 26.
-        The Koszul dual is in the 'large central charge' regime.
+        The comparison representative is in the 'large central charge' regime.
         """
         for k_val in [1, 3, 5, 10]:
             c_ds = float(ds_central_charge_sl2(k_val))
@@ -391,13 +391,13 @@ class TestStructuralTheorems:
             assert c_dual > 26, f"Dual c should be > 26 at k={k_val}"
 
     def test_self_dual_point(self):
-        """Virasoro self-dual at c = 13. Check c_DS(k) = 13 has a solution.
+        """Virasoro line comparison fixed at c = 13; solve c_DS(k) = 13.
 
         1 - 6(k+1)²/(k+2) = 13 → -6(k+1)² = 12(k+2) → (k+1)² = -2(k+2)
         → k² + 2k + 1 = -2k - 4 → k² + 4k + 5 = 0
         → k = (-4 ± √(16-20))/2 = (-4 ± 2i)/2 = -2 ± i.
 
-        So c_DS = 13 only at complex level k = -2 ± i. No real self-dual
+        So c_DS = 13 only at complex level k = -2 ± i. No real fixed
         point exists for the DS reduction.
         """
         # Verify: c_DS at k = -2+i should be 13

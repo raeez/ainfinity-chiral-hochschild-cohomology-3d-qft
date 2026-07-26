@@ -1,25 +1,26 @@
-"""Celestial OPE from Shadow Obstruction Tower.
+"""Celestial OPE from support-shadow data.
 
-Derives celestial holography OPE coefficients from the shadow obstruction
-tower arity decomposition (thm:thqg-VI-general-soft in
+Derives celestial holography OPE coefficients from the support-shadow
+arity decomposition (thm:thqg-VI-general-soft in
 thqg_soft_graviton_theorems.tex).
 
 Mathematical framework
 ----------------------
 The shadow connection nabla^hol = d - Sh_{g,n}(Theta_A) decomposes by
-arity.  The arity-r Ward identity produces the celestial soft factor
-at order p = r - 2 in the soft expansion (1/z_s)^p.
+arity.  The arity-r channel is the algebraic input available to a
+chosen celestial comparison at soft order p = r - 2 in the expansion
+(1/z_s)^p.  The support bound does not by itself count independent
+physical Ward identities or soft factors.
 
 Dictionary (tab:thqg-VI-soft-dictionary):
     p = 0  (arity 2):  kappa(A)             -> leading (Weinberg)
     p = 1  (arity 3):  C(A) = cubic shadow  -> subleading (Cachazo-Strominger)
     p = 2  (arity 4):  Q(A) = quartic       -> sub-subleading
-    p = r-2 (arity r): Sh_r(A)              -> order-(r-2) soft factor
+    p = r-2 (arity r): Sh_r(A)              -> order-(r-2) support channel
 
-The celestial OPE of two graviton primaries O_Delta(z) O_Delta'(w) is
-controlled by these soft factors in the collinear limit z -> w.  The
-OPE coefficient at pole order k = r - 1 receives contributions from
-the arity-r shadow Sh_r and from cross-terms [Sh_s, Sh_t] with s+t=r.
+After a celestial comparison datum is fixed, the OPE coefficient at
+pole order k = r - 1 may receive contributions from the arity-r
+shadow Sh_r and from lower cross-terms [Sh_s, Sh_t] with s+t=r.
 
 For the Virasoro algebra (the gravitational case):
     kappa = c/2
@@ -29,9 +30,9 @@ For the Virasoro algebra (the gravitational case):
 
 References:
     Vol II: thqg_soft_graviton_theorems.tex (Theorems, Propositions, Computations)
-    Vol I:  higher_genus_modular_koszul.tex (shadow obstruction tower, MC2)
-    Vol I:  concordance.tex (Theorem D: kappa, shadow depth classification)
-    Literature: Pate-Raclariu-Strominger-Tran (2019), arXiv:1903.10489
+    Vol I:  higher_genus_modular_koszul.tex (support-shadow packet, MC2)
+    Vol I:  concordance.tex (Theorem D: kappa, support-depth classification)
+    Literature: Pate-Raclariu-Strominger-Yuan (2019), arXiv:1910.07424
                 Cachazo-Strominger (2014), arXiv:1404.4091
                 Weinberg (1965), Phys. Rev. 140, B516
 """
@@ -48,22 +49,26 @@ from sympy import (
 
 
 # =========================================================================
-# 1. SHADOW DEPTH CLASSIFICATION (G/L/C/M)
+# 1. SUPPORT DEPTH CLASSIFICATION (G/L/C/M)
 # =========================================================================
 
 @dataclass(frozen=True)
 class ShadowDepthClass:
-    """Shadow depth class of a modular Koszul chiral algebra.
+    """Support-depth class of a modular Koszul chiral algebra.
 
     The four classes (def:thqg-shadow-archetype):
-        G (Gaussian):  r_max = 2, 1 celestial soft factor
-        L (Lie/tree):  r_max = 3, 2 celestial soft factors
-        C (Contact):   r_max = 4, 3 celestial soft factors
-        M (Mixed):     r_max = inf, infinitely many
+        G (Gaussian):  r_max = 2, quadratic support channel only
+        L (Lie/tree):  r_max = 3, quadratic plus cubic support channels
+        C (Contact):   r_max = 4, support may include a quartic channel
+        M (Mixed):     r_max = inf, no finite support cutoff
+
+    ``support_channel_bound`` is an algebraic arity bound.  It is not
+    the number of independent celestial soft factors, Ward identities,
+    BPS states, or OPE coefficients.
     """
     label: str           # 'G', 'L', 'C', or 'M'
-    r_max: int           # shadow depth; use -1 for infinity
-    n_soft_factors: int  # number of independent celestial soft factors
+    r_max: int           # support depth; use -1 for infinity
+    support_channel_bound: int  # arity-channel bound; -1 encodes infinity
 
     @property
     def is_infinite(self) -> bool:
@@ -74,14 +79,14 @@ class ShadowDepthClass:
         return 'inf' if self.is_infinite else str(self.r_max)
 
 
-CLASS_G = ShadowDepthClass('G', 2, 1)
-CLASS_L = ShadowDepthClass('L', 3, 2)
-CLASS_C = ShadowDepthClass('C', 4, 3)
+CLASS_G = ShadowDepthClass('G', 2, 2)
+CLASS_L = ShadowDepthClass('L', 3, 3)
+CLASS_C = ShadowDepthClass('C', 4, 4)
 CLASS_M = ShadowDepthClass('M', -1, -1)  # -1 encodes infinity
 
 
 def classify_shadow_depth(family: str) -> ShadowDepthClass:
-    """Classify a chiral algebra family by shadow depth.
+    """Classify a chiral algebra family by support depth.
 
     Parameters
     ----------
@@ -248,6 +253,135 @@ def arity_to_soft_order(r: int) -> int:
     if r < 2:
         raise ValueError(f"Arity must be >= 2, got {r}")
     return r - 2
+
+
+def celestial_mellin_transform_profile() -> Dict[str, Any]:
+    """Profile the celestial Mellin transform used by the residue theorem."""
+    return {
+        "formula": (
+            "M[A](Delta_i,z_i,zbar_i)="
+            "prod_i int_0^infty omega_i^{Delta_i - 1} d omega_i "
+            "A(omega_i,z_i,zbar_i)"
+        ),
+        "energy_weight": "omega_i^{Delta_i - 1}",
+        "integration_domain": "(0, infinity) for every external energy",
+        "source": "Pasterski-Shao-Strominger Mellin transform",
+    }
+
+
+def soft_residue_dimension(index: int, convention: str = "soft_level") -> Any:
+    """Return the conformal dimension of a soft residue.
+
+    Conventions
+    -----------
+    soft_level:
+        ``index`` is p, the conformally soft level.  The reduced
+        PSS primary has pole Delta = 1 - p.
+    arity:
+        ``index`` is the A_infinity arity r.  Since p = r - 2, the
+        reduced pole is Delta = 3 - r.
+    stress_tensor:
+        ``index`` is the A_infinity arity r, but the graviton
+        stress-tensor primary is shifted by one: Delta_st = 4 - r.
+    """
+    c = convention.lower().replace("-", "_")
+    if c in {"soft_level", "residue_index", "soft"}:
+        if index < 0:
+            raise ValueError(f"Soft level must be >= 0, got {index}")
+        return S(1) - S(index)
+    if c in {"arity", "ainfty_arity", "a_infinity_arity"}:
+        if index < 2:
+            raise ValueError(f"Arity must be >= 2, got {index}")
+        return S(3) - S(index)
+    if c in {"stress_tensor", "graviton_shifted", "stress"}:
+        if index < 2:
+            raise ValueError(f"Arity must be >= 2, got {index}")
+        return S(4) - S(index)
+    raise ValueError(f"Unknown residue convention: {convention}")
+
+
+def residue_operator_profile(arity: int, algebra: str = "A") -> Dict[str, Any]:
+    """Profile the hard-insertion operator in the Mellin residue theorem."""
+    if arity < 2:
+        raise ValueError(f"Arity must be >= 2, got {arity}")
+    return {
+        "arity": arity,
+        "soft_level": arity_to_soft_order(arity),
+        "operator_formula": (
+            "D_{r,i}=rho_i(pi_1 D_A | (s^-1 A)^otimes r)"
+        ),
+        "operator_with_arity": (
+            f"D_{{{arity},i}}^{algebra}="
+            f"rho_i(pi_1 D_{algebra} | (s^-1 {algebra})^otimes {arity})"
+        ),
+        "stage": "operator",
+        "scalar_projection_warning": (
+            "shadow coefficients appear only after projecting the operator "
+            "to a chosen scalar channel"
+        ),
+    }
+
+
+def mellin_residue_identity_profile(
+    arity: int,
+    n_hard: int,
+) -> Dict[str, Any]:
+    """Profile the residue theorem in soft-level and arity notation."""
+    if arity < 2:
+        raise ValueError(f"Arity must be >= 2, got {arity}")
+    if n_hard < 1:
+        raise ValueError(f"Need at least one hard insertion, got {n_hard}")
+    p = arity_to_soft_order(arity)
+    operator = residue_operator_profile(arity)
+    return {
+        "arity": arity,
+        "soft_level": p,
+        "n_hard": n_hard,
+        "soft_level_pole": soft_residue_dimension(p, "soft_level"),
+        "reduced_arity_pole": soft_residue_dimension(arity, "arity"),
+        "stress_tensor_pole": soft_residue_dimension(arity, "stress_tensor"),
+        "soft_index_identity": (
+            "Res_{Delta=1-p} M[A_{n+1}] = "
+            "sum_{i=1}^n D_{p+2,i} M[A_n]"
+        ),
+        "arity_identity": (
+            "Res_{Delta=3-r} M[A_{n+1}] = "
+            "sum_{i=1}^n D_{r,i} M[A_n]"
+        ),
+        "stress_tensor_identity": (
+            "Res_{Delta_st=4-r} M[A_{n+1}] = "
+            "sum_{i=1}^n D_{r,i}^{st} M[A_n]"
+        ),
+        "operator_formula": operator["operator_formula"],
+    }
+
+
+def virasoro_residue_coefficients(c: Any = Symbol("c")) -> Dict[int, Dict[str, Any]]:
+    """Virasoro coefficients as raw ordered-bar data and reduced soft classes."""
+    c_val = S(c)
+    return {
+        2: {
+            "raw_ordered_bar": c_val / 2,
+            "soft_class": c_val / 2,
+            "status": "nontrivial",
+        },
+        3: {
+            "raw_ordered_bar": S(2),
+            "soft_class": S(0),
+            "status": "gauge_trivial",
+            "reason": "Virasoro cubic shadow is a coboundary in the reduced soft complex",
+        },
+        4: {
+            "raw_ordered_bar": quartic_contact_virasoro(c_val),
+            "soft_class": quartic_contact_virasoro(c_val),
+            "status": "nontrivial",
+        },
+        5: {
+            "raw_ordered_bar": quintic_shadow_virasoro(c_val),
+            "soft_class": quintic_shadow_virasoro(c_val),
+            "status": "nontrivial",
+        },
+    }
 
 
 def cross_term_decomposition(r: int) -> List[Tuple[int, int]]:
@@ -471,7 +605,8 @@ def celestial_ope_coefficient_order_3(
 class CelestialOPEData:
     """Full celestial OPE data derived from the shadow tower.
 
-    The celestial OPE of graviton primaries:
+    Suppressing the conventional gravitational coupling, the celestial OPE
+    of graviton primaries:
         O_Delta(z) O_Delta'(w) ~ sum_k C_k(Delta,Delta') / (z-w)^k * O_Delta''
 
     The OPE coefficients C_k are controlled by the shadow tower:
@@ -480,8 +615,10 @@ class CelestialOPEData:
         C_3: from Q^contact (arity 4) — non-universal (dynamics)
         C_k: from Sh_{k+1} (arity k+1) — progressively less universal
 
-    The shadow depth r_max determines the number of independent OPE
-    coefficients: for r_max < infinity, C_k = 0 for k > r_max - 1.
+    Finite support depth bounds the algebraic arity channels available
+    to a fixed celestial comparison.  It does not count independent OPE
+    coefficients: cross-terms and the comparison functor decide which
+    physical coefficients survive.
     """
     family: str
     depth_class: ShadowDepthClass
@@ -778,15 +915,18 @@ def pate_raclariu_strominger_leading(
     J_1: Any,
     J_2: Any,
 ) -> Dict[str, Any]:
-    """Leading celestial OPE coefficient from Pate-Raclariu-Strominger (2019).
+    """Leading celestial OPE coefficient from Pate-Raclariu-Strominger-Yuan (2019).
 
     The celestial OPE of graviton primaries:
-        G^+_{Delta_1}(z) G^+_{Delta_2}(w) ~
-            B(Delta_1-1, Delta_2-1) / (z-w) * G^+_{Delta_1+Delta_2}(w) + ...
+        G^+_{Delta_1}(z, zbar) G^+_{Delta_2}(w, wbar) ~
+            (zbar-wbar)/(z-w)
+            * B(Delta_1-1, Delta_2-1)
+            * G^+_{Delta_1+Delta_2}(w, wbar) + ...
 
     where B is the Euler beta function and Delta_i are conformal dimensions.
+    Overall sign conventions depend on the incoming/outgoing choice.
 
-    The leading coefficient is the beta function:
+    The leading Mellin kernel is the beta function:
         C_leading = B(Delta_1-1, Delta_2-1) = Gamma(D1-1)*Gamma(D2-1)/Gamma(D1+D2-2)
 
     In the shadow tower language:
@@ -815,7 +955,10 @@ def pate_raclariu_strominger_leading(
         'delta_2': d2,
         'shadow_source': 'kappa (arity 2)',
         'is_universal': True,
-        'reference': 'Pate-Raclariu-Strominger 2019, arXiv:1903.10489',
+        'has_antiholomorphic_ratio': True,
+        'central_triple_pole_present': False,
+        'output_dimension': d1 + d2,
+        'reference': 'Pate-Raclariu-Strominger-Yuan 2019, arXiv:1910.07424',
     }
 
 
@@ -874,14 +1017,17 @@ def compare_shadow_vs_prs(
 
 
 # =========================================================================
-# 10. WARD IDENTITY COUNTING AND DEPTH ANALYSIS
+# 10. CELESTIAL SUPPORT PROFILE
 # =========================================================================
 
-def ward_identity_count(family: str) -> Dict[str, Any]:
-    """Count independent Ward identities from the shadow tower.
+def ward_identity_support_profile(family: str) -> Dict[str, Any]:
+    """Describe the support-channel bound for celestial Ward data.
 
-    From rem:thqg-VI-arity-truncation:
-        # independent celestial soft factors = r_max(A) - 1
+    The support bound is a finite arity envelope for the algebraic
+    packet.  It is not a count of independent Ward identities.  A
+    physical count requires a celestial comparison datum and can be
+    smaller because channels may be killed, identified, or sourced by
+    lower cross-terms.
 
     Parameters
     ----------
@@ -890,34 +1036,35 @@ def ward_identity_count(family: str) -> Dict[str, Any]:
 
     Returns
     -------
-    dict with Ward identity structure
+    dict with support-channel structure
     """
     depth = classify_shadow_depth(family)
 
     if depth.is_infinite:
-        n_ward = -1  # infinity
-        ward_description = 'Infinite tower of coupled differential equations'
-        system_type = 'infinite'
+        support_bound = 'unbounded'
+        profile_description = 'No finite algebraic support cutoff'
+        system_type = 'unbounded_support'
     else:
-        n_ward = depth.r_max - 1
-        ward_description = (
-            f'{n_ward} independent Ward identit'
-            f"{'ies' if n_ward > 1 else 'y'}"
+        support_bound = depth.support_channel_bound
+        profile_description = (
+            f'algebraic support channels have arity <= {support_bound}'
         )
-        system_type = 'finite'
+        system_type = 'finite_support'
 
     return {
         'family': family,
         'depth_class': depth.label,
         'r_max': depth.display_r_max,
-        'n_ward_identities': n_ward if n_ward >= 0 else 'infinity',
-        'ward_description': ward_description,
+        'support_channel_bound': support_bound,
+        'ward_identity_count': 'requires_celestial_comparison',
+        'comparison_required': True,
+        'profile_description': profile_description,
         'system_type': system_type,
     }
 
 
 def celestial_soft_factor_table() -> List[Dict[str, Any]]:
-    """Generate the complete celestial soft factor table.
+    """Generate the celestial support-channel table.
 
     Reproduces tab:thqg-VI-family-soft from the manuscript.
     """
@@ -936,10 +1083,11 @@ def celestial_soft_factor_table() -> List[Dict[str, Any]]:
             'family': name,
             'class': depth.label,
             'r_max': depth.display_r_max,
-            'n_celestial_factors': (
-                depth.n_soft_factors if not depth.is_infinite
-                else 'infinity'
+            'support_channel_bound': (
+                depth.support_channel_bound if not depth.is_infinite
+                else 'unbounded'
             ),
+            'comparison_required_for_physical_count': True,
         }
 
         # Explicit shadow coefficients

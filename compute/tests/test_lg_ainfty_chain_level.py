@@ -7,7 +7,7 @@ cubic superpotential W(phi) = g*phi^3/3:
   2. m_1 = 0 (linearized BRST at phi=0) and m_1^2 = 0
   3. m_2 = free commutative product, associativity
   4. m_3 = 2g (cubic vertex from FM_3(C))
-  5. m_{k>=4} = 0 (form-degree vanishing)
+  5. m_{k>=4} = 0 as primitive operations because W^(k)=0
   6. A-infinity identities at n=1,2,3,4
   7. Jacobian ring Jac(W) = C[phi]/(phi^2)
   8. Descent to PVA (trivial brackets)
@@ -249,28 +249,28 @@ class TestHigherOperations:
     """Test vanishing of m_{k>=4}."""
 
     def test_m4_vanishes(self):
-        """m_4 = 0 by form-degree counting."""
+        """m_4 = 0 because W^(4)=0 for cubic W."""
         from lib.lg_ainfty_chain_level import mk_vanishing_proof
         g = Symbol('g')
         result = mk_vanishing_proof(4, g)
         assert result['vanishes'] is True
-        assert result['deficit'] == 4
+        assert result['taylor_coefficient_zero'] is True
 
     def test_m5_vanishes(self):
-        """m_5 = 0 by form-degree counting."""
+        """m_5 = 0 because W^(5)=0 for cubic W."""
         from lib.lg_ainfty_chain_level import mk_vanishing_proof
         result = mk_vanishing_proof(5, Symbol('g'))
         assert result['vanishes'] is True
-        assert result['deficit'] == 4
+        assert result['taylor_coefficient_zero'] is True
 
     def test_m10_vanishes(self):
-        """m_10 = 0 by form-degree counting."""
+        """m_10 = 0 because W^(10)=0 for cubic W."""
         from lib.lg_ainfty_chain_level import mk_vanishing_proof
         result = mk_vanishing_proof(10, Symbol('g'))
         assert result['vanishes'] is True
 
     def test_m3_does_not_vanish(self):
-        """m_3 does NOT vanish (form degree check confirms)."""
+        """m_3 does not vanish because W'''=2g."""
         from lib.lg_ainfty_chain_level import mk_vanishing_proof
         g = Symbol('g')
         result = mk_vanishing_proof(3, g)
@@ -283,13 +283,14 @@ class TestHigherOperations:
         result = mk_vanishing_proof(2, Symbol('g'))
         assert result['vanishes'] is False
 
-    def test_deficit_always_4(self):
-        """Form degree deficit is always 4 for k >= 4."""
+    def test_taylor_coefficient_zero_for_k_ge_4(self):
+        """The primitive Taylor coefficient vanishes for k >= 4."""
         from lib.lg_ainfty_chain_level import mk_vanishing_proof
         g = Symbol('g')
         for k in range(4, 15):
             result = mk_vanishing_proof(k, g)
-            assert result['deficit'] == 4, f"Deficit {result['deficit']} at k={k}"
+            assert result['primitive_derivative_order'] == k
+            assert result['taylor_coefficient_zero'] is True
 
     def test_vertex_count(self):
         """V = k-2, E = k-3 for tree diagrams."""

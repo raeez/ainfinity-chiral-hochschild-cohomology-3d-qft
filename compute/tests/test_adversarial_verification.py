@@ -25,6 +25,7 @@ import sys
 import os
 import math
 import pytest
+import inspect
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -741,7 +742,19 @@ class TestCrossEngineConsistency:
         for g in range(1, 4):
             assert mc['genus_data'][g]['F_g'] == expected[g - 1]
 
-    def test_virasoro_self_dual_at_c13(self):
+    def test_modular_completion_genus_data_uses_independent_oracle(self):
+        """AP128 guard: expected F_g values are not copied from the engine table."""
+        body = inspect.getsource(self.test_modular_completion_genus_data)
+        stale_literal = (
+            "Rational(1, 24), "
+            "Rational(7, 5760), "
+            "Rational(31, 967680)"
+        )
+
+        assert "arakelov_zeta_regularised_fp_coefficients(3)" in body
+        assert stale_literal not in body
+
+    def test_virasoro_fixed_point_distinct_from_critical_c26(self):
         """AP: c*=13, c_crit=26 for Virasoro. NEVER conflate."""
         assert 13 != 26
 

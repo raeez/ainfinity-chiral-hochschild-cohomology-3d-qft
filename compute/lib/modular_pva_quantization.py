@@ -248,7 +248,7 @@ def genus1_obstruction(family, **params):
     For the standard landscape:
       - Heisenberg: Ob_1 = 0 (trivially, no interaction)
       - Affine V_k(g): Ob_1 = 0 for k != -h^v (PBW); Ob_1 != 0 at critical k
-      - Virasoro: Ob_1 = 0 for all c != 0 (self-dual, no obstruction)
+      - Virasoro: Ob_1 = 0 for all c != 0 (nonzero central charge lane)
       - W_3: Ob_1 = 0 for c != 0, c != -22/5 (away from resonance divisor)
       - betagamma: Ob_1 = 0 (quadratic OPE, PBW)
       - free_multiplet: Ob_1 = 0 (trivially)
@@ -412,7 +412,7 @@ def critical_level_obstruction(lie_type, N=None):
     """Genus-1 obstruction at the critical level k = -h^v for affine algebras.
 
     At the critical level:
-    - Sugawara tensor is UNDEFINED (not 'c diverges')
+    - the generic Sugawara tensor has a pole and is not defined
     - PBW filtration collapses
     - The modular bar differential acquires a genuine obstruction
     - Feigin-Frenkel center emerges instead
@@ -752,7 +752,8 @@ def virasoro_quantization_data(c):
 
     The Virasoro PVA: {T_lam T} = dT + 2T*lam + (c/12)*lam^3.
 
-    Koszul dual: Vir_c^! = Vir_{26-c} (self-dual at c = 13, NOT c = 26).
+    Same-family line-side comparison representative: Vir_{26-c}
+    (self-dual at c = 13, NOT c = 26).
 
     Quantization:
       - Ob_1 = 0 for c != 0
@@ -786,8 +787,12 @@ def virasoro_quantization_data(c):
         'central_charge': c_sym,
         'kappa': kappa,
         'kappa_dual': kappa_dual,
-        'self_dual_point': 13,
-        'koszul_dual': f'Vir_{{26-c}} = Vir_{{{26 - c_sym}}}',
+        'line_comparison_fixed_point': 13,
+        'line_side_representative': f'Vir_{{26-c}} = Vir_{{{26 - c_sym}}}',
+        'koszul_dual': (
+            'same-family line-side representative '
+            f'Vir_{{26-c}} = Vir_{{{26 - c_sym}}}'
+        ),
         'complementarity_sum': comp_sum,
         'theta_1': theta_1,
         'obstruction_vanishes': simplify(c_sym) != 0,
@@ -799,7 +804,8 @@ def virasoro_quantization_data(c):
         'description': (
             'Virasoro: shadow obstruction tower is INFINITE (quintic forced). '
             'The depth-zero resonance shadow Vir_{26-c} is the image of '
-            'the finite-dimensional resonance truncation, not the final dual.'
+            'the finite-dimensional resonance truncation, not a primitive '
+            'Verdier or Koszul dual.'
         ),
     }
 

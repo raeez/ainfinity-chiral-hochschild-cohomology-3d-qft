@@ -29,12 +29,12 @@ affine Baxter--Rees family over $\mathbb A^1_q$ whose generic fiber is the
 ordinary asymptotic module and whose special fiber is the negative
 prefundamental module.
 
-Combination of this Baxter--Rees family with the polynomial $R$-matrix
-theory of shifted Yangians and with Zhang's Theta-associators extends
-objects together with their braiding and associator data across the
-boundary, yielding a canonical formal braided boundary germ with a
-boundary Kodaira--Spencer class. The extension problem beyond the
-compact polynomial core reduces to a finite set of explicit
+After the polynomial $R$-matrix input for shifted Yangians and Zhang's
+Theta-associator input have been fixed, this Baxter--Rees family
+extends objects together with their braiding and associator data across
+the boundary, yielding a formal braided boundary germ relative to those
+inputs and a boundary Kodaira--Spencer class. The extension problem
+beyond the compact polynomial core reduces to a finite set of explicit
 verification tasks.
 \end{quote}
 
@@ -77,11 +77,11 @@ neighborhood of the MC element in the completed moduli space.
 \label{rem:typeA-status-scope}
 This appendix contains three kinds of statements.
 \begin{enumerate}
- \item Unconditional internal theorems whose proofs are given here,
- such as the seed propagation theorem, the weightwise MC4 theorem for
- the principal RTT tower, the telescope constructions, the
- Baxter--Rees family, and the continuation principles for polynomial
- tensor data.
+ \item Internal theorems whose proofs are given here in the displayed
+ completed ambient, such as the seed propagation theorem, the
+ weightwise MC4 theorem for the principal RTT tower, the telescope
+ constructions, the Baxter--Rees family, and the continuation
+ principles after the polynomial tensor data have been supplied.
  \item Conditional theorems whose hypotheses isolate the precise
  external input required from the literature, especially from the
  polynomial $R$-matrix theory of shifted Yangians and from Theta
@@ -391,13 +391,23 @@ forced by the mode filtration of the RTT presentation.
 
 Let
 \begin{equation}
-T(u)=\mathbf 1+\sum_{r\ge 1}T^{(r)}u^{-r},
-\qquad T^{(r)}=(t^{(r)}_{ij})_{1\le i,j\le N},
+T_{ij}(u)=\delta_{ij}+\sum_{r\ge 1}T^{(r)}_{ij}u^{-r},
+\qquad
+T(u)=\sum_{i,j=1}^{N}E_{ij}\otimes T_{ij}(u),
 \end{equation}
 with RTT relation
 \begin{equation}
+\label{eq:typeA-rtt-matrix-relation}
 R(u-v)T_1(u)T_2(v)=T_2(v)T_1(u)R(u-v),
 \qquad R(z)=1-\frac{\hbar P}{z}.
+\end{equation}
+Equivalently, after setting $t_{ij}^{(r)}:=T_{ij}^{(r)}$, the generating
+series satisfy the component relation
+\begin{equation}
+\label{eq:typeA-rtt-component-relation}
+(u-v)[T_{ij}(u),T_{kl}(v)]
+=
+\hbar\bigl(T_{kj}(u)T_{il}(v)-T_{kj}(v)T_{il}(u)\bigr).
 \end{equation}
 Define the principal RTT truncation by
 \begin{equation}
@@ -608,21 +618,24 @@ twisted coproduct of the dg-shifted Yangian.
 \begin{proof}
 Let
 \begin{equation}
-\tau:\widehat{\bar B}_{\mathrm{wt}}(Y_\hbar(\mathfrak{sl}_N))\to A^!
+\tau_Y:\widehat{\bar B}_{\mathrm{wt}}(Y_\hbar(\mathfrak{sl}_N))
+\longrightarrow Y_\hbar(\mathfrak{sl}_N)
 \end{equation}
 be the universal twisting cochain. By construction it satisfies the
 Maurer--Cartan equation in the convolution dg Lie algebra,
 \begin{equation}
-d\tau+\tau\star\tau=0.
+d\tau_Y+\tau_Y\star\tau_Y=0.
 \end{equation}
 The continuous spectral derivation on the completed Yangian induces a
 coderivation on the completed bar coalgebra and therefore an
-$A_\infty$-derivation on $A^!$. Exponentiating gives a translation family
-$\tau_z$. Its bar-degree-$2$ component is the desired kernel $r(z)$. The
-usual pushforward of deconcatenation along the twisting cochain produces a
-twisted coproduct. Coassociativity and the Maurer--Cartan identities are
-immediate from the coalgebra identities and from the twisting-cochain
-Maurer--Cartan equation.
+$A_\infty$-derivation on the Verdier bar dual~$A^!$. Exponentiating gives
+a translation family. The bar-degree-$2$ component of $\tau_Y$, paired
+with the Verdier evaluation on $A^!$, is the desired kernel
+$r(z)\in A^!\widehat\otimes A^!((z^{-1}))$. The pushforward of
+deconcatenation through this evaluation kernel produces the twisted
+coproduct. Coassociativity and the Maurer--Cartan identities are
+immediate from the coalgebra identities and from
+$d\tau_Y+\tau_Y\star\tau_Y=0$.
 \end{proof}
 
 \section{Derived KR telescopes and the noncompact packet}
@@ -1189,10 +1202,13 @@ identity is a finite polynomial relation among the weightwise matrix
 coefficients of the family, so the continuation lemma applies verbatim.
 \end{proof}
 
-\begin{corollary}[Formal braided boundary germ]
+\begin{corollary}[Formal braided boundary germ from polynomial continuation]
 \ClaimStatusProvedHere
 \label{cor:formal-braided-boundary-germ}
-For each simple node $i$, the boundary fiber $L^-_{i,0}$ together with the
+Assume the hypotheses of
+Theorems~\ref{thm:continuation-of-polynomial-R-matrices}
+and~\ref{thm:continuation-of-theta-associators}. For each simple node
+$i$, the boundary fiber $L^-_{i,0}$ together with the
 specialized intertwiners and associators
 \begin{equation}
 \mathscr R_{M,i}^{\partial}(u),
@@ -1292,16 +1308,136 @@ time by its derivative and then summing over all such choices. This gives
 The same argument applies to the intertwining equation.
 \end{proof}
 
-\begin{remark}[Boundary deformation complex]
-\label{rem:boundary-deformation-complex}
-The pair consisting of the Baxter--Kodaira--Spencer class $\kappa_i$ and
-the tangent monoidal tensors $\dot{\mathscr R}_{M,i}$,
-$\dot\Theta_{L,M,i}$ should be regarded as a single class in the tangent
-complex governing braided monoidal deformations of the boundary object
-$L^-_{i,0}$. The full deformation complex is left to subsequent
-development; the concrete cocycles from which it must be built are
-supplied here.
-\end{remark}
+\begin{theorem}[RTT Baxter--Rees obstruction tower]
+\ClaimStatusProvedHere
+\label{thm:typeA-rtt-baxter-rees-obstruction-tower}
+Work in the type-$A$ vector chart of
+\S\ref{sec:typeA-weightwise-mc4}, complete at the boundary point of the
+Baxter--Rees family, and write the completed boundary coordinate as
+$\beta$. The licensing tags, distinct from the Rees coordinate, are:
+the $\alpha$-tag for the type-$A$ vector chart and the conformal-weight
+window $w$; the $\beta$-tag for the RTT/factorization comparison used by
+the continued $R$-matrices and Theta-associators; the $\gamma$-tag for
+the weight-completed Rees ambient; and the $\delta$-tag for the
+boundary-continuation endpoint.
+
+Let $F_dY_\hbar(\mathfrak{gl}_N)$ be the span of RTT monomials of total
+weight at most $d$, $\operatorname{wt}(T^{(r)}_{ij})=r$, and set
+\begin{equation}
+\label{eq:typeA-rtt-rees-algebra}
+R_\beta Y_\hbar(\mathfrak{gl}_N)
+:=
+\bigoplus_{d\ge0}\beta^d F_dY_\hbar(\mathfrak{gl}_N).
+\end{equation}
+After $\beta$-adic completion this defines the formal Baxter--Rees RTT
+family
+\begin{equation}
+\label{eq:typeA-rtt-baxter-rees-family}
+Y_{\mathrm{Bax}}^{\mathrm{RTT}}
+:=
+\operatorname{Spf}\widehat{R_\beta Y_\hbar(\mathfrak{gl}_N)}
+\longrightarrow
+\operatorname{Spf}\mathbb C[[\beta]].
+\end{equation}
+Its generic fibre is the RTT Yangian and its special fibre is the
+associated graded RTT boundary algebra seen by the asymptotic and
+negative-prefundamental Baxter packet.
+
+Assume the polynomiality hypotheses of
+Theorems~\ref{thm:continuation-of-polynomial-R-matrices}
+and~\ref{thm:continuation-of-theta-associators}. Then:
+\begin{enumerate}
+\item For every weight window $w$ there are finite integers
+$D(w),D'(w)$ such that the continued tensor data have truncations
+\textup{(where $F_{>w}$ denotes the ideal generated by weights
+strictly larger than $w$)}
+\begin{align}
+\label{eq:typeA-weightwise-R-continuation}
+R_{V,W}^{(\le w)}(u,\beta)
+&=
+\sum_{d=0}^{D(w)}\beta^d R_d^{(\le w)}(u)
+\quad \bmod F_{>w},\\
+\label{eq:typeA-weightwise-theta-continuation}
+\Theta_{\Phi}^{(\le w)}(\beta)
+&=
+\sum_{d=0}^{D'(w)}\beta^d\Theta_d^{(\le w)}
+\quad \bmod F_{>w}.
+\end{align}
+The series \eqref{eq:typeA-weightwise-R-continuation} satisfies the RTT
+relation \eqref{eq:typeA-rtt-matrix-relation} modulo $F_{>w}$.
+\item Let
+$C^\bullet_{\mathrm{RTT}}(Y_{\mathrm{Bax}}^{\mathrm{RTT}}|_{\beta=0})$
+be the completed RTT deformation complex of the boundary tensor object,
+with differential $d_{\Theta_0}:=[\Theta_0,-]$. The boundary tangent
+class
+\begin{equation}
+\label{eq:typeA-boundary-dot-theta}
+\dot\Theta
+:=
+\left.\frac{d}{d\beta}\Theta_{\Phi}(\beta)\right|_{\beta=0}
+\end{equation}
+satisfies
+\begin{equation}
+\label{eq:typeA-boundary-tangent-cocycle}
+d_{\Theta_0}\dot\Theta=0
+\qquad
+\text{in } C^1_{\mathrm{RTT}}.
+\end{equation}
+\item If
+$\Theta_{\Phi}(\beta)=\Theta_0+\beta\dot\Theta+\beta^2\Theta_2+\cdots$,
+then the second obstruction term is the RTT cohomology class of
+\begin{equation}
+\label{eq:typeA-boundary-second-obstruction}
+\operatorname{Ob}_2(\dot\Theta;\Theta_2)
+:=
+\frac12[\dot\Theta,\dot\Theta]+d_{\Theta_0}\Theta_2
+\in Z^2(C^\bullet_{\mathrm{RTT}}).
+\end{equation}
+Thus boundary tensor geometry here means the explicit obstruction tower
+in $C^\bullet_{\mathrm{RTT}}$, not an additional primitive structure.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The Rees algebra \eqref{eq:typeA-rtt-rees-algebra} is filtered by the
+positive RTT weights. Inverting $\beta$ identifies each filtered
+generator with the corresponding RTT generator, so the generic fibre is
+$Y_\hbar(\mathfrak{gl}_N)$ in the RTT presentation. Specializing
+$\beta=0$ keeps only principal weight symbols; this is precisely the
+associated graded boundary algebra acting on the formal asymptotic and
+prefundamental chart constructed by the Baxter--Rees telescopes.
+
+Fix $w$. Since every generator has positive weight, only finitely many
+powers of $\beta$ can contribute modulo $F_{>w}$. Hence the continued
+$R$-matrices and Theta-associators restrict to the finite polynomials
+\eqref{eq:typeA-weightwise-R-continuation} and
+\eqref{eq:typeA-weightwise-theta-continuation}. The RTT, Yang--Baxter,
+pentagon, and mixed hexagon identities are finite polynomial identities
+on each weight window; by
+Lemma~\ref{lem:weightwise-polynomial-continuation}, validity on the
+punctured chart forces validity at $\beta=0$ and throughout the formal
+window.
+
+The completed tensor datum is a Maurer--Cartan element in the completed
+RTT convolution dg Lie algebra:
+\begin{equation}
+d\Theta_{\Phi}(\beta)+\frac12[\Theta_{\Phi}(\beta),\Theta_{\Phi}(\beta)]
+=0.
+\end{equation}
+The coefficient of $\beta^0$ is the boundary equation for $\Theta_0$.
+The coefficient of $\beta^1$ is
+$d_{\Theta_0}\dot\Theta=0$, giving
+\eqref{eq:typeA-boundary-tangent-cocycle}. The coefficient of
+$\beta^2$ is
+\begin{equation}
+d_{\Theta_0}\Theta_2+\frac12[\dot\Theta,\dot\Theta],
+\end{equation}
+which is closed because $d_{\Theta_0}^2=0$ and the dg Lie bracket
+satisfies Jacobi. Its cohomology class is the second obstruction; it
+vanishes exactly when the chosen second coefficient extends the tangent
+class to second order. The same coefficient extraction gives the higher
+obstruction tower.
+\end{proof}
 
 \section{Compact-to-completed extension and the type-$A$ DK reduction}
 \label{sec:typeA-DK-reduction}
@@ -1466,15 +1602,6 @@ polynomial core deforms to a KZB-type modular monodromy controlled by the
 same $\Theta_{\mathcal A}$ after passage to the completed boundary family.
 That theorem is not proved here; the algebraic and
 representation-theoretic infrastructure it requires is supplied above.
-\end{remark}
-
-\begin{remark}[Bibliographic note]
-\label{rem:bibliographic-note-typeA-baxter-rees}
-For integration into the repository, this appendix uses the existing keys
-\texttt{DNP25}, \texttt{Latyntsev23}, \texttt{Zhang24},
-\texttt{KTWWY14}, \texttt{BD04}, and \texttt{FG12}, together with the new
-keys \texttt{HZ24} and \texttt{ZhangTheta24} supplied in the accompanying
-bibliography patch.
 \end{remark}
 
 \section{Conventions: scope, Yangian type, level prefix}

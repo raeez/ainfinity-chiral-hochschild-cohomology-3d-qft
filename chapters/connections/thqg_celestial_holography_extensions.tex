@@ -220,7 +220,7 @@ The trace $\sum_i \langle e_i, m_2(e^i, -) \rangle$ computes the supertrace
 of the identity on the cyclic complex, which equals $\kappaChHodge(\cA)$ by definition
 of the chiral Koszul curvature (Vol~I, Definition~\ref*{def:chiral-koszul-curvature}).
 The Hodge class $\Lambda_1 = \frac{1}{24}[\ov{\M}_{1,1}]$ gives the
-normalization $F_1 = \kappa/24$.
+normalization \(F_1(\cA)=\kappaChHodge(\cA)/24\).
 \end{proof}
 
 \begin{remark}[Hodge class normalization at genus $1$]
@@ -234,9 +234,14 @@ These two numbers are related by $1/24 = -\frac{1}{2}\chi(\mathcal{M}_{1,1})
 $\lambda_1 = \frac{1}{12}(\delta_{\mathrm{irr}} + \kappa_1)$ on
 $\ov{\M}_{1,1}$ with $\int \kappa_1 = 1/24$. The universal generating
 function (Vol~I equation~\texttt{eq:modular-char-gf}) uses the Bernoulli
-number convention $B_2 = 1/6$, and $F_1 = \kappa \cdot
+number convention $B_2 = 1/6$, and
+\[
+F_1(\cA)=\kappaChHodge(\cA)\cdot
 (2^{2\cdot 1 - 1} - 1)/(2^{2\cdot 1 - 1}) \cdot |B_2|/(2!) =
-\kappa \cdot \frac{1}{2} \cdot \frac{1}{12} = \kappa/24$, confirming the
+\kappaChHodge(\cA) \cdot \frac{1}{2} \cdot \frac{1}{12}
+=\kappaChHodge(\cA)/24,
+\]
+confirming the
 normalization.
 \end{remark}
 
@@ -278,14 +283,18 @@ F_2(\cA) = \kappaChHodge(\cA) \cdot \frac{7}{5760}.
 \begin{proof}
 Using the universal generating function (Vol~I equation~\texttt{eq:modular-char-gf}),
 \[
-\sum_{g=1}^{\infty} F_g \, x^{2g} = \kappa \cdot \left(\frac{x/2}{\sin(x/2)} - 1\right),
+\sum_{g=1}^{\infty} F_g(\cA)\, x^{2g}
+= \kappaChHodge(\cA) \cdot
+\left(\frac{x/2}{\sin(x/2)} - 1\right),
 \]
 expand the right-hand side. The Taylor expansion of $x/(2\sin(x/2))$ is
 \[
 \frac{x/2}{\sin(x/2)}
 = 1 + \frac{1}{24}x^2 + \frac{7}{5760}x^4 + \frac{31}{967680}x^6 + \cdots.
 \]
-Therefore $F_1 = \kappa/24$ and $F_2 = 7\kappa/5760$.
+Therefore
+$F_1(\cA)=\kappaChHodge(\cA)/24$ and
+$F_2(\cA)=7\kappaChHodge(\cA)/5760$.
 
 The three-shell decomposition independently verifies the coefficient.
 On the scalar lane, $F_2$ is linear in~$\kappa$: the $\kappa^2$
@@ -344,8 +353,10 @@ universal Bernoulli coefficient.
 The coefficient of $x^8$ in the generating function is
 $\frac{2^7 - 1}{2^7} \cdot \frac{|B_8|}{8!} = \frac{127}{128} \cdot \frac{1}{30 \cdot 40320}
 = \frac{127}{154828800}$.
-This agrees with the Faber--Pandharipande evaluation of the $\hat{A}$-genus on
-$\ov{\M}_4$ via the tautological ring.
+This is the Faber--Pandharipande marked Hodge integral on
+$\ov{\M}_{4,1}$,
+\(\int_{\ov{\M}_{4,1}}\psi_1^6\lambda_4
+=127/154828800\).
 \end{proof}
 
 \subsection{Free energy table}
@@ -354,7 +365,8 @@ $\ov{\M}_4$ via the tautological ring.
 \begin{theorem}[Free energy through genus $10$; \ClaimStatusProvedHere]
 % label removed: thm:free-energy-table
 The genus-$g$ free energies for the Heisenberg algebra $\mathcal{H}_k$ (with
-$\kappa = k$) and the Virasoro algebra $\mathrm{Vir}_c$ (with $\kappa = c/2$)
+\(\kappaChHodge(\mathcal H_k)=k\)) and the Virasoro algebra
+\(\mathrm{Vir}_c\) (with \(\kappaChHodge(\mathrm{Vir}_c)=c/2\))
 through genus $10$ are:
 \[
 \renewcommand{\arraystretch}{1.4}
@@ -486,31 +498,36 @@ Non-formal Swiss-cheese structure does \emph{not} by itself force failure of
 the $E_1$-degeneration statement above. Bar concentration and Swiss-cheese
 formality are different properties. On the standard chirally Koszul families,
 including class~M examples such as Virasoro and $\mathcal{W}_N$, the spectral
-sequence can still be supported on the degree-$0$ line. What the shadow depth
+sequence can still be supported on the degree-$0$ line. What the support depth
 measures is the amount of shadow data needed on that line: classes~G/L/C are
-controlled by finite jets, while class~M carries an infinite shadow obstruction tower on the
-same $q=0$ reconstruction surface.
+controlled by finite jets, while class~M has no finite support cutoff on the
+same $q=0$ reconstruction surface.  Whether those support channels give
+distinct physical soft factors is a separate celestial comparison question.
 \end{remark}
 
-\begin{proposition}[Finite shadow depth controls the $q=0$ reconstruction; \ClaimStatusProvedHere]
+\begin{proposition}[Finite support shadow depth controls the $q=0$ reconstruction; \ClaimStatusProvedHere]
 % label removed: prop:spectral-shadow-depth
-Assume $\cA$ is chirally Koszul and the shadow obstruction tower stabilizes at degree
-$r_{\max}$. Then:
+Assume $\cA$ is chirally Koszul and the bar-intrinsic shadow packet has
+support depth \(r_\Theta:=r^\Theta_{\max}(\cA)\), i.e. all obstruction
+classes and all \(H^1\)-lift coordinates above degree \(r_\Theta\) vanish in the
+chosen gauge slice. Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item the genus spectral sequence is supported on the $q=0$ line and has
  $d_s = 0$ for all $s \geq 2$;
-\item no shadow datum of degree $> r_{\max}$ enters the $q=0$ reconstruction;
+\item no shadow datum of degree \(>r_\Theta\) enters the $q=0$ reconstruction;
 \item equivalently, the genus-$g$ scalar package is determined for all $g$ by the
- finite jet $J^{r_{\max}}(\cA)$ together with the BV differential $d_1$ on the
+ finite jet \(J^{r_\Theta}(\cA)\) together with the BV differential $d_1$ on the
  degree-$0$ line.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Part \textup{(i)} is exactly the previous theorem. If the shadow obstruction tower
-stabilizes at degree $r_{\max}$, then $\Theta_\cA^{\leq r_{\max}} = \Theta_\cA$ and
-all shadow terms of degree $> r_{\max}$ vanish. Hence only the finite jet
-$J^{r_{\max}}(\cA)$ contributes to the $d_1$-controlled reconstruction on the
+Part \textup{(i)} is exactly the previous theorem. If the support
+shadow depth is \(r_\Theta\), then
+\(\Theta_\cA^{\leq r_\Theta}=\Theta_\cA\) in the bar-intrinsic gauge
+slice and all shadow-packet components of degree \(>r_\Theta\) vanish.
+Hence only the finite jet
+\(J^{r_\Theta}(\cA)\) contributes to the $d_1$-controlled reconstruction on the
 degree-$0$ line, giving \textup{(ii)} and \textup{(iii)}.
 \end{proof}
 
@@ -525,9 +542,10 @@ degree-$0$ line, giving \textup{(ii)} and \textup{(iii)}.
 \subsection{The shadow jet space}
 % label removed: subsec:shadow-jet-space
 
-The shadow obstruction tower (Vol~I, \S\ref*{sec:shadow-postnikov-tower}) encodes the nonlinear
-OPE data of a chiral algebra as a sequence of finite-order invariants. The organization of
-these invariants into a graded vector space and study its reconstruction properties.
+The support-shadow packet (Vol~I, \S\ref*{sec:shadow-postnikov-tower}) encodes the nonlinear
+OPE data of a chiral algebra as a sequence of finite-order invariants.
+These invariants form a graded vector space; reconstruction asks when
+finite truncations determine the completed bar-intrinsic packet.
 
 \begin{definition}[Shadow jet space]
 % label removed: def:shadow-jet-space
@@ -554,24 +572,27 @@ The \emph{full shadow jet space} is the inverse limit
 $J^\infty(\cA) := \varprojlim_r J^r(\cA)$.
 \end{definition}
 
-\begin{theorem}[Finite-jet characterization of shadow depth; \ClaimStatusProvedHere]
+\begin{theorem}[Finite-jet characterization of support shadow depth; \ClaimStatusProvedHere]
 % label removed: thm:finite-jet-shadow-depth
+Let \(r_\Theta=r^\Theta_{\max}(\cA)\) be the support depth of the
+bar-intrinsic shadow packet.
 The following are equivalent:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $r_{\max}(\cA) < \infty$;
-\item $\Theta_\cA^{\leq r_{\max}} = \Theta_\cA$;
-\item $J^{r_{\max}}(\cA) = J^\infty(\cA)$;
-\item the obstruction classes $o_{r+1}(\cA) = 0$ for all $r \geq r_{\max}$;
+\item the support shadow depth \(r^\Theta_{\max}(\cA)\) is finite;
+\item \(\Theta_\cA^{\leq r_\Theta} = \Theta_\cA\);
+\item the augmented reconstruction packet has no nonzero component
+ above degree \(r_\Theta\);
+\item the obstruction classes \(o_n(\cA)\) and the lift coordinates
+ \(\lambda_n(\cA)\) vanish for all \(n>r_\Theta\).
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-The equivalences (i)$\Leftrightarrow$(ii)$\Leftrightarrow$(iv) are the definition of shadow
-depth (Vol~I, Definition~\ref*{def:shadow-depth}). For (ii)$\Leftrightarrow$(iii): if
-$\Theta^{\leq r_{\max}} = \Theta$, then $\cA^{\mathrm{sh}}_{r,0} = 0$ for
-$r > r_{\max}$, so $J^{r_{\max}} = J^\infty$. Conversely, if $J^R = J^\infty$ for
-some finite $R$, then all degree-$r$ shadows vanish for $r > R$, so
-$\Theta^{\leq R} = \Theta$.
+This is the support-depth definition applied to the compatible shadow
+reconstruction packet.  Obstruction classes alone give only
+liftability; the \(H^1\)-lift coordinates select the actual finite MC
+lift.  Hence the finite-jet characterization requires vanishing of
+both \(o_n\) and \(\lambda_n\) above the support bound.
 \end{proof}
 
 \begin{remark}[Three uses of ``shadow'']
@@ -601,21 +622,26 @@ limit $J^\infty(\cA)$ is the full shadow algebra at genus~$0$.
 \begin{theorem}[Class G reconstruction; \ClaimStatusProvedHere]
 % label removed: thm:class-g-reconstruction
 Let $\cA = \mathcal{H}_k$ be the Heisenberg algebra at level $k \neq 0$.
-(This is a Gaussian algebra with shadow depth~$2$ and, for the
+(This is a Gaussian algebra with support shadow depth~$2$ and, for the
 Heisenberg family, lies on the proved scalar lane in Vol~I.)
 Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $r_{\max}(\mathcal{H}_k) = 2$ (Gaussian shadow depth).
-\item $J^2(\mathcal{H}_k) = J^\infty(\mathcal{H}_k) = \C \cdot \kappa$, with
- $\kappaChHodge(\mathcal{H}_k) = k$.
-\item A single datum, the level $k$, determines the entire scalar modular partition function:
+\item \(r^\Theta_{\max}(\mathcal{H}_k) = 2\) (Gaussian support shadow depth).
+\item The completed support packet equals its quadratic truncation:
+ \(\Theta_{\mathcal H_k}=\Theta_{\mathcal H_k}^{\le2}\), and
+ \(J^2(\mathcal{H}_k)\) is the line
+ \(\C \cdot \kappaChHodge(\mathcal H_k)\) with
+ \(\kappaChHodge(\mathcal{H}_k) = k\).
+\item A single datum, the level $k$, determines the scalar modular shadow series:
  \begin{equation}
  % label removed: eq:heisenberg-full-reconstruction
- Z_{\mathcal{H}_k}(\h)
+ \mathcal Z^{\mathrm{sc}}_{\mathcal{H}_k}(\h)
  = k \cdot \sum_{g=1}^{\infty} \h^{2g-2} \cdot
  \frac{2^{2g-1}-1}{2^{2g-1}} \cdot \frac{|B_{2g}|}{(2g)!}.
  \end{equation}
-\item The shadow connection $\nabla^{\mathrm{hol}}_{0,n} = d - \kappa \cdot \omega^{(2)}$
+\item The shadow connection
+\(\nabla^{\mathrm{hol}}_{0,n}
+= d - \kappaChHodge(\mathcal H_k)\cdot \omega^{(2)}\)
  is flat, where $\omega^{(2)} = \sum_{i<j} d\log(z_i - z_j)$ is the Arnold class.
 \item All higher soft theorems vanish: $S_r = 0$ for $r \geq 3$.
 \end{enumerate}
@@ -627,19 +653,22 @@ for $r \geq 3$ vanish identically (there are no higher products to generate them
 obstruction $o_3(\mathcal{H}_k) = 0$ because $\ell_3^{(0)}(\pi, \pi, \pi) = 0$.
 
 (ii) By (i), $\cA^{\mathrm{sh}}_{r,0} = 0$ for all $r \geq 3$. The quadratic jet is
-one-dimensional, spanned by $\kappa = k$.
+one-dimensional, spanned by \(\kappaChHodge(\mathcal H_k)=k\).
 
-(iii) Since the shadow obstruction tower terminates at degree $2$, the full MC element is
-$\Theta_{\mathcal{H}_k} = k \cdot \eta \otimes \Lambda$, where
+(iii) Since the support packet terminates at degree $2$, the full MC element is
+\(\Theta_{\mathcal{H}_k} =
+\kappaChHodge(\mathcal H_k) \cdot \eta \otimes \Lambda\), where
 $\Lambda = \sum_{g \geq 1} \h^g \Lambda_g$ is the Hodge generating class. The
-scalar partition function is determined by the universal generating function evaluated at
-$\kappa = k$.
+scalar shadow series is determined by the universal generating function
+evaluated at \(\kappaChHodge(\mathcal H_k)=k\).
 
 (iv) The shadow connection at genus $0$ with $n$ marked points is
 $\nabla_{0,n} = d - \mathrm{Sh}_{0,n}(\Theta)$. Since $\Theta$ is purely quadratic,
-$\mathrm{Sh}_{0,n}$ reduces to the degree-$2$ shadow, which is $\kappa$ times the
+$\mathrm{Sh}_{0,n}$ reduces to the degree-$2$ shadow, which is
+\(\kappaChHodge(\mathcal H_k)\) times the
 sum of Arnold classes. Flatness $(\nabla_{0,n})^2 = 0$ follows from the MC equation
-for $\Theta$, which at degree $2$ is the identity $d(\kappa \omega^{(2)}) = 0$ (the
+for $\Theta$, which at degree $2$ is the identity
+\(d(\kappaChHodge(\mathcal H_k)\omega^{(2)}) = 0\) (the
 Arnold class is closed).
 
 (v) The degree-$r$ soft factor $S_r$ is the $r$-point shadow
@@ -655,8 +684,8 @@ $S_r = 0$ for $r \geq 3$.
 Let $\cA = \widehat{\mathfrak{g}}_k$ be the universal affine Kac--Moody algebra at
 non-critical level $k \neq -h^\vee$. Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $r_{\max}(\widehat{\mathfrak{g}}_k) = 3$ (Lie/tree shadow depth).
-\item $J^3(\widehat{\mathfrak{g}}_k) = J^\infty(\widehat{\mathfrak{g}}_k)$. The jet data
+\item \(r^\Theta_{\max}(\widehat{\mathfrak{g}}_k) = 3\) (Lie/tree support shadow depth).
+\item The completed support packet is exhausted by degree~$3$. The jet data
  consists of:
  \begin{itemize}
  \item $\kappaChHodge(\widehat{\mathfrak{g}}_k) = \dim(\mathfrak{g})(k + h^\vee)/(2h^\vee)$,
@@ -705,13 +734,14 @@ residual class is automatically zero because $m_4 = 0$ and all quartically-sourc
 terms are exact by the same Jacobi mechanism.
 \end{proof}
 
-\begin{corollary}[Three data determine the affine scalar modular partition function; \ClaimStatusProvedHere]
+\begin{corollary}[Three data determine the affine scalar modular shadow series; \ClaimStatusProvedHere]
 % label removed: cor:affine-three-data
-The full scalar modular partition function of $\widehat{\mathfrak{g}}_k$ is determined by three
-data: the level $k$, the rank $\dim(\mathfrak{g})$, and the structure constants
+The scalar modular shadow series of $\widehat{\mathfrak{g}}_k$ is determined by three
+data: the level $k$, the dimension \(\dim(\mathfrak{g})\), and the structure constants
 $f^c_{ab}$. The degree-$3$ jet
 \[
-J^3(\widehat{\mathfrak{g}}_k) = \bigl(\kappa, \mathfrak{C}\bigr)
+J^3(\widehat{\mathfrak{g}}_k)
+= \bigl(\kappaChHodge(\widehat{\mathfrak{g}}_k), \mathfrak{C}\bigr)
 \]
 is a complete invariant for the scalar modular problem on this reconstruction surface.
 \end{corollary}
@@ -724,11 +754,12 @@ is a complete invariant for the scalar modular problem on this reconstruction su
 Let $\cA = V_{\beta\gamma}(\lambda)$ be the $\beta\gamma$ system at conformal weight
 $\lambda$. Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $r_{\max}(V_{\beta\gamma}) = 4$ (contact/quartic shadow depth).
-\item $J^4(V_{\beta\gamma}) = J^\infty(V_{\beta\gamma})$. The jet data consists of:
+\item \(r^\Theta_{\max}(V_{\beta\gamma}) = 4\) (contact/quartic support shadow depth).
+\item The completed support packet is exhausted by degree~$4$. The jet data consists of:
  \begin{itemize}
  \item $\kappaChHodge(V_{\beta\gamma}) = 6\lambda^2 - 6\lambda + 1$ (on the weight-changing
- line: $\kappa = 0$ at $\lambda = (3 \pm \sqrt{3})/6$);
+ line: \(\kappaChHodge(V_{\beta\gamma}) = 0\) at
+ \(\lambda = (3 \pm \sqrt{3})/6\));
  \item $\mathfrak{C}(V_{\beta\gamma}) = 0$ (the cubic shadow is gauge-trivial by
  Vol~I, Corollary~\ref*{V1-cor:nms-betagamma-mu-vanishing});
  \item $\mathfrak{Q}^{\mathrm{contact}}(V_{\beta\gamma})$: the quartic contact shadow.
@@ -750,7 +781,8 @@ nonlinear datum.
 $m_5 = 0$, the only source for $o_5$ is the interaction of lower-degree operations.
 The abelian symmetry of $\beta\gamma$ forces all degree-$5$ cyclic contractions to
 vanish by a weight argument: the ghost-number grading prevents nonzero contributions
-at degree~$5$. Therefore $o_5 = 0$ and the tower terminates.
+at degree~$5$. Therefore \(o_5=0\), and the canonical contact support
+packet has no primitive degree-\(\ge5\) component on this branch.
 \end{proof}
 
 \begin{remark}[Cubic gauge triviality for $\beta\gamma$]
@@ -773,8 +805,8 @@ $\beta\gamma$ by explicit computation.
 Let $\cA = \mathrm{Vir}_c$ be the universal Virasoro algebra at central charge $c$.
 Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $r_{\max}(\mathrm{Vir}_c) = \infty$ (mixed/infinite shadow depth).
-\item The shadow jet space has infinite-dimensional fibers:
+\item \(r^\Theta_{\max}(\mathrm{Vir}_c) = \infty\) (mixed/infinite support shadow depth).
+\item The shadow jet space has infinitely many nonzero degree pieces:
  $\dim \cA^{\mathrm{sh}}_{r,0} \geq 1$ for all $r \geq 2$.
 \item The jet data through degree $8$ is:
 \end{enumerate}
@@ -787,7 +819,9 @@ The computation gives $J^r(\mathrm{Vir}_c)$ for $r = 2, \ldots, 8$.
 The curvature is $\kappaChHodge(\mathrm{Vir}_c) = c/2$. The quadratic jet is
 one-dimensional:
 \[
-J^2(\mathrm{Vir}_c) = \C \cdot \kappa, \qquad \kappa = c/2.
+J^2(\mathrm{Vir}_c) =
+\C \cdot \kappaChHodge(\mathrm{Vir}_c), \qquad
+\kappaChHodge(\mathrm{Vir}_c) = c/2.
 \]
 
 \medskip\noindent\textbf{Degree $3$ ($J^3$).}
@@ -811,7 +845,9 @@ This is the canonical quartic class, independent of the gauge choice for the cub
 term (Vol~I, Theorem~\ref*{thm:cubic-gauge-triviality}). The quartic jet is
 two-dimensional:
 \[
-J^4(\mathrm{Vir}_c) = \C \cdot \kappa \oplus \C \cdot \mathfrak{Q}^{\mathrm{contact}},
+J^4(\mathrm{Vir}_c) =
+\C \cdot \kappaChHodge(\mathrm{Vir}_c)
+\oplus \C \cdot \mathfrak{Q}^{\mathrm{contact}},
 \qquad \dim J^4 = 2.
 \]
 
@@ -859,89 +895,109 @@ r & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
 \end{proof}
 
 \begin{proof}[Proof of {\textup{(i)}} and {\textup{(ii)}}]
-The nonvanishing of $o_5$ (proved above) implies $r_{\max} \geq 5$. The mechanism
+The nonvanishing of $o_5$ (proved above) implies
+\(r^\Theta_{\max} \geq 5\). The mechanism
 that forces $o_5 \neq 0$ persists at all higher degrees: the nonlinear OPE
 $L(z) L(w) \sim (c/2)(z-w)^{-4} + 2L(w)(z-w)^{-2} + \partial L(w)(z-w)^{-1}$
 generates nontrivial cyclic traces at every degree through the composite
 $:L^n:$ which has nonvanishing self-contraction for all $n$. Therefore
-$o_{r+1} \neq 0$ for all $r \geq 4$, and $r_{\max} = \infty$.
+$o_{r+1} \neq 0$ for all $r \geq 4$, and
+\(r^\Theta_{\max} = \infty\).
 \end{proof}
 
-\subsection{The four-step reconstruction algorithm}
+\subsection{Finite-jet scalar reconstruction}
 % label removed: subsec:four-step-reconstruction
 
-\begin{construction}[Four-step reconstruction; \ClaimStatusProvedHere]
+\begin{construction}[Finite-jet scalar reconstruction; \ClaimStatusProvedHere]
 % label removed: constr:four-step-reconstruction
-Given a chirally Koszul algebra $\cA$ with known shadow depth class (G, L, C, or M), the
-scalar modular partition function is reconstructed by the following algorithm.
+Given a chirally Koszul algebra $\cA$ with known support shadow depth
+class (G, L, C, or M), the scalar modular shadow series is
+reconstructed from the following
+finite-jet datum.
 (Algebras in class~W are not chirally Koszul and fall outside this
 reconstruction; see Volume~I, Remark~\ref*{V1-rem:wild-quiver-boundary}.)
 
-\medskip\noindent\textbf{Step 1: Compute the curvature.}
+\medskip\noindent\textbf{Curvature.}
 Extract $\kappaChHodge(\cA)$ from the cyclic trace of $m_2$ (the genus-$1$ BV operator).
 This is the quadratic jet $J^2(\cA)$.
 
-\medskip\noindent\textbf{Step 2: Determine the shadow depth class.}
+\medskip\noindent\textbf{Shadow depth.}
 \begin{itemize}
-\item If $m_n = 0$ for $n \geq 3$: class G ($r_{\max} = 2$). Go to Step~4.
+\item If $m_n = 0$ for $n \geq 3$: class G (\(r^\Theta_{\max} = 2\)).
 \item If $m_3 \neq 0$ but $m_n = 0$ for $n \geq 4$ and Jacobi holds: class L
- ($r_{\max} = 3$). Go to Step~3.
+ (\(r^\Theta_{\max} = 3\)).
 \item If $m_4 \neq 0$ but $\mathfrak{C} = 0$ (gauge-trivial cubic) and $o_5 = 0$:
- class C ($r_{\max} = 4$). Go to Step~3.
-\item Otherwise: class M ($r_{\max} = \infty$). The reconstruction requires the
- full shadow obstruction tower.
+ class C (\(r^\Theta_{\max} = 4\)).
+\item Otherwise: class M (\(r^\Theta_{\max} = \infty\)). The reconstruction requires the
+ completed shadow reconstruction packet, including the lift coordinates.
 \end{itemize}
 
-\medskip\noindent\textbf{Step 3: Compute finite jet data.}
+\medskip\noindent\textbf{Finite nonlinear jet.}
 For class L: compute $\mathfrak{C}$ from the cyclic trace of $m_3$. For class C:
 compute $\mathfrak{Q}^{\mathrm{contact}}$ from the quartic cyclic contraction.
 
-\medskip\noindent\textbf{Step 4: Apply the universal formula.}
-For classes G, L, C: the scalar partition function is determined by the finite jet
-$J^{r_{\max}}(\cA)$ via the generating function \eqref{eq:fg-general} (for the
+\medskip\noindent\textbf{Universal scalar formula.}
+For classes G, L, C: the scalar shadow series is determined by the finite jet
+\(J^{r^\Theta_{\max}}(\cA)\) via the generating function \eqref{eq:fg-general} (for the
 quadratic component) and explicit corrections from the nonlinear shadows.
 
-For class M: the scalar partition function requires the full inverse limit
+For class M: the scalar shadow series requires the full inverse limit
 $J^\infty(\cA) = \varprojlim J^r(\cA)$, which is an infinite-dimensional datum.
-The shadow obstruction tower provides a systematic approximation scheme: each truncation
-$\Theta^{\leq r}$ gives an approximation to $Z_\cA$ that is exact through a
-computable genus range.
+The completed shadow reconstruction packet provides a systematic approximation scheme: each truncation
+\(\Theta^{\leq r}\) gives an approximation to
+\(\mathcal Z^{\mathrm{sc}}_\cA\) that is exact through a computable
+genus range.
 \end{construction}
 
 \begin{proposition}[Class G applied to Heisenberg]
 % label removed: prop:class-g-heisenberg-applied
-For $\cA = \mathcal{H}_k$: Step~1 gives $\kappa = k$. Step~2 gives class~G.
-Step~4 gives $Z_{\mathcal{H}_k} = k \cdot (\frac{x/2}{\sin(x/2)} - 1)\big|_{x^{2g} \to \h^{2g-2}}$.
+For $\cA = \mathcal{H}_k$, the curvature is
+\(\kappaChHodge(\mathcal H_k)=k\) and the
+shadow class is G. The universal scalar formula gives
+\[
+\mathcal Z^{\mathrm{sc}}_{\mathcal{H}_k}(\h)
+=
+k\,\h^{-2}\left(\frac{\h/2}{\sin(\h/2)}-1\right).
+\]
 All higher shadow data are zero. The scalar reconstruction is exact from one number.
 \end{proposition}
 
 \begin{proposition}[Class L applied to $\widehat{\mathfrak{sl}}_2$]
 % label removed: prop:class-l-sl2-applied
-For $\cA = \widehat{\mathfrak{sl}}_{2,k}$: Step~1 gives $\kappa = 3(k+2)/4$.
-Step~2 identifies the cubic shadow from the structure constants $f^c_{ab}$ of
-$\mathfrak{sl}_2$ (with $f^{12}{}_3 = 1$, etc.). Step~3 verifies $o_4 = 0$
-by the Jacobi identity. Step~4 applies the universal formula with the cubic
-correction: the genus expansion receives finite corrections from the degree-$3$ shadow
+For $\cA = \widehat{\mathfrak{sl}}_{2,k}$, the curvature is
+\(\kappaChHodge(\widehat{\mathfrak{sl}}_{2,k})=3(k+2)/4\).
+The cubic shadow is the cyclic trace of the
+structure constants $f^c_{ab}$ of $\mathfrak{sl}_2$ (with
+$f^{12}{}_3 = 1$, etc.), and the Jacobi identity gives $o_4 = 0$.
+The universal formula applies with the cubic correction: the genus
+expansion receives finite corrections from the degree-$3$ shadow
 at each genus, but these corrections are determined by $J^3$ and do not require
 further input.
 \end{proposition}
 
 \begin{proposition}[Class C applied to $\beta\gamma$]
 % label removed: prop:class-c-betagamma-applied
-For $\cA = V_{\beta\gamma}(\lambda)$: Step~1 gives $\kappa = 6\lambda^2 - 6\lambda + 1$.
-Step~2 confirms $\mathfrak{C} = 0$ (gauge-trivial) and computes
-$\mathfrak{Q}^{\mathrm{contact}}$ from the quartic cyclic contraction. Step~3
-verifies $o_5 = 0$. Step~4 applies the universal formula with quartic correction.
-Four numbers ($\kappa$ and the three components of $\mathfrak{Q}^{\mathrm{contact}}$) determine
-the full scalar modular partition function.
+For $\cA = V_{\beta\gamma}(\lambda)$, the curvature is
+\(\kappaChHodge(V_{\beta\gamma}(\lambda))
+=6\lambda^2 - 6\lambda + 1\). The cubic shadow is
+gauge-trivial, $\mathfrak{C}=0$, and
+$\mathfrak{Q}^{\mathrm{contact}}$ is the quartic cyclic contraction;
+the obstruction $o_5$ vanishes. The universal formula applies with
+the quartic correction.
+The finite datum
+\((\kappaChHodge(V_{\beta\gamma}(\lambda)),
+\mathfrak{Q}^{\mathrm{contact}})\) determines the scalar modular
+shadow series on this reconstruction surface.
 \end{proposition}
 
 \begin{proposition}[Class M applied to Virasoro]
 % label removed: prop:class-m-virasoro-applied
-For $\cA = \mathrm{Vir}_c$: Step~1 gives $\kappa = c/2$. Step~2 identifies class~M
-because $o_5 \neq 0$. Step~4 requires the full tower: each finite truncation
+For $\cA = \mathrm{Vir}_c$, the curvature is
+\(\kappaChHodge(\mathrm{Vir}_c)=c/2\) and the
+nonvanishing obstruction $o_5$ places the algebra in class~M. The
+universal formula requires the completed support packet: each finite truncation
 $\Theta^{\leq r}$ determines the modular data to some finite genus range, but
-no finite set of invariants suffices for the full partition function. The
+no finite set of invariants suffices for the full scalar shadow series. The
 infinite-dimensionality of $J^\infty(\mathrm{Vir}_c)$ is the shadow-tower
 incarnation of the Virasoro algebra's infinite nonlinear complexity.
 \end{proposition}
@@ -959,7 +1015,8 @@ incarnation of the Virasoro algebra's infinite nonlinear complexity.
 
 The shadow connection (Vol~I, \S\ref*{sec:shadow-postnikov-tower}) is the flat connection
 on the genus-$0$ configuration space whose flatness is a projection of the MC equation.
-Decomposing it by degree and show that each degree produces a soft theorem.
+Its homogeneous decomposition produces the degree-by-degree soft
+identities below.
 
 \begin{definition}[Shadow connection on $\mathrm{Conf}_n(\C)$]
 % label removed: def:shadow-connection-conf-n
@@ -979,7 +1036,9 @@ where $\mathrm{Sh}_{0,n}$ is the degree-$n$ genus-$0$ shadow extraction map
 \;=\;
 \sum_{r=2}^{n} S_r(z_1, \ldots, z_n),
 \end{equation}
-where $S_r$ is the degree-$r$ soft factor:
+where \(S_r\) is the degree-\(r\) algebraic support channel.  After a
+celestial comparison datum is supplied, its image is the corresponding
+soft operator if the comparison does not kill or identify that channel:
 \begin{equation}
 % label removed: eq:soft-factor-def
 S_r(z_1, \ldots, z_n)
@@ -1035,15 +1094,17 @@ Substituting, $(\nabla^{\mathrm{hol}})^2 = 0$.
 Expanding the flatness equation \eqref{eq:flatness-equation} by degree gives a
 hierarchy of identities. At the lowest degrees:
 \begin{itemize}
-\item \textbf{Degree $2$}: $dS_2 = 0$. The leading soft factor is closed.
-\item \textbf{Degree $3$}: $dS_3 + [S_2, S_2] = 0$. The subleading soft factor is
- determined by the quadratic self-interaction of $S_2$.
+\item \textbf{Degree $2$}: $dS_2 = 0$. The leading support channel is closed.
+\item \textbf{Degree $3$}: $dS_3 + [S_2, S_2] = 0$. The cubic support channel is
+ constrained by the quadratic self-interaction of $S_2$.
 \item \textbf{Degree $4$}: $dS_4 + [S_2, S_3] + [S_3, S_2] + [S_2, S_2, S_2]_3 = 0$.
- The sub-subleading soft factor involves both the cubic shadow and the triple interaction
+ The quartic support channel involves both the cubic shadow and the triple interaction
  of $S_2$.
 \item \textbf{Degree $r$}: $dS_r + \sum_{j+k=r} [S_j, S_k] + \cdots = 0$. The degree-$r$
- soft factor is determined by the lower-degree data and the degree-$r$ obstruction class
- $o_r$.
+ extension problem is controlled by the lower-degree data, the obstruction
+ class \(o_r\), and, when the obstruction vanishes, an \(H^1\)-lift
+ coordinate.  The physical soft factor is the image of this algebraic
+ channel under the chosen celestial comparison.
 \end{itemize}
 \end{remark}
 
@@ -1220,14 +1281,17 @@ the quartic shadow.
 \subsection{Higher soft theorems}
 % label removed: subsec:higher-soft-theorems
 
-\begin{theorem}[Quintic obstruction for Virasoro; \ClaimStatusProvedHere]
+\begin{theorem}[Quintic support channel for Virasoro; \ClaimStatusProvedHere]
 % label removed: thm:quintic-obstruction-virasoro
 For the Virasoro algebra $\mathrm{Vir}_c$ with $c$ generic, the quintic obstruction
 class $o_5$ is nonzero:
 \[
 o_5(\mathrm{Vir}_c) \neq 0 \in H^2\!\bigl(\cA^{\mathrm{sh}}_{5,0}, d_\pi\bigr).
 \]
-Therefore the soft theorem tower is infinite: $S_r \neq 0$ for infinitely many $r$.
+Therefore the Virasoro support packet has no finite cutoff beginning at the
+quintic witness.  A celestial soft theorem sees the corresponding degree-$5$
+operator only after the chosen celestial comparison detects this support
+channel.
 \end{theorem}
 
 \begin{proof}
@@ -1240,32 +1304,41 @@ After gauge-trivializing $S_3$, the obstruction to solving for $S_5$ is the clas
 $[dS_4 \text{ component at degree } 5]$ in the relevant cohomology. For Virasoro,
 this class is nonzero because the quartic contact invariant
 $\mathfrak{Q}^{\mathrm{contact}} = 10/[c(5c+22)]$ interacts with the quadratic
-curvature $\kappa = c/2$ to produce a nontrivial degree-$5$ cocycle.
+curvature \(\kappaChHodge(\mathrm{Vir}_c)=c/2\) to produce a nontrivial
+degree-$5$ cocycle.
 
 Explicitly, the quintic source term includes the bracket
-$[\kappa \cdot \omega^{(2)}, \mathfrak{Q}^{\mathrm{contact}} \cdot \omega^{(4)}]$,
+\([\kappaChHodge(\mathrm{Vir}_c) \cdot \omega^{(2)},
+\mathfrak{Q}^{\mathrm{contact}} \cdot \omega^{(4)}]\),
 which is proportional to $\frac{10}{c(5c+22)} \cdot \frac{c}{2} = \frac{5}{5c+22}$.
 This is nonvanishing for generic $c$ and is not $d_\pi$-exact (checked by computing
 the relevant cohomology group, which is one-dimensional at degree~$5$).
 \end{proof}
 
-\begin{corollary}[Infinite tower for class M; \ClaimStatusProvedHere]
+\begin{corollary}[Class M has no finite celestial support cutoff; \ClaimStatusConditional; licensing tags \(\beta+\gamma\)]
 % label removed: cor:infinite-tower-class-m
-For every class~M algebra $\cA$ (i.e.\ $r_{\max}(\cA) = \infty$), the soft theorem
-tower $\{S_r\}_{r \geq 2}$ is infinite: for every $R$, there exists $r > R$ with
-$S_r \neq 0$.
+For every class~M algebra $\cA$ (i.e.\
+\(r^\Theta_{\max}(\cA)=\infty\)), there is no finite arity bound on
+the algebraic celestial support packet.  If a celestial comparison datum
+\(\Xi_{\mathrm{cel}}\) is fixed and its comparison map detects infinitely
+many of these support channels, then the resulting soft-operator package is
+infinite.  The infinitude is not a consequence of support depth alone.
 \end{corollary}
 
 \begin{proof}
-By definition of class~M, $o_{r+1} \neq 0$ for infinitely many $r$. Each nonvanishing
-obstruction class $o_{r+1}$ contributes a nonzero soft factor $S_{r+1}$ (after
-adjusting gauge choices at lower degrees).
+The equality \(r^\Theta_{\max}(\cA)=\infty\) says precisely that no finite
+truncation \(\Theta_\cA^{\le R}\) exhausts the bar-intrinsic support
+packet on the declared branch.  Projection to physical celestial soft
+operators is an additional comparison map.  If this map detects infinitely
+many support channels, their images form an infinite soft-operator package;
+if it kills or identifies channels, support depth alone does not count the
+physical operators.
 \end{proof}
 
-\subsection{Tower termination for finite-depth classes}
+\subsection{Support termination for finite-depth classes}
 % label removed: subsec:tower-termination-finite
 
-\begin{proposition}[Class G: tower terminates at $S_2$; \ClaimStatusProvedHere]
+\begin{proposition}[Class G: support packet terminates at \(S_2\); \ClaimStatusProvedHere]
 % label removed: prop:class-g-termination
 For the Heisenberg algebra $\mathcal{H}_k$:
 \[
@@ -1281,30 +1354,31 @@ The displayed multivalued functions are exactly the abelian KZ flat sections on
 the Heisenberg comparison surface.
 \end{proof}
 
-\begin{proposition}[Class L: tower terminates at $S_3$; \ClaimStatusProvedHere]
+\begin{proposition}[Class L: support packet terminates at \(S_3\); \ClaimStatusProvedHere]
 % label removed: prop:class-l-termination
 For the affine algebra $\widehat{\mathfrak{g}}_k$ at non-critical level:
 \[
 S_r(\widehat{\mathfrak{g}}_k) = 0 \qquad \text{for all } r \geq 4.
 \]
-Thus the affine soft tower has no nonzero terms beyond the
+Thus the affine support packet has no nonzero terms beyond the
 leading KZ-form term and the cubic shadow:
 $\nabla = d - \frac{1}{k+h^\vee}\sum_{i<j} \Omega_{ij} d\log(z_i - z_j)
 - S_3(\widehat{\mathfrak{g}}_k)$.
 On the affine Kac--Moody comparison surface, the leading degree-$2$
 term is the KZ connection form, and the resulting finite-depth affine
-shadow obstruction tower furnishes the bar-side comparison surface for the
+support packet furnishes the bar-side comparison surface for the
 corresponding Tsuchiya--Kanie conformal-block package.
 \end{proposition}
 
 \begin{proof}
 The vanishing of $o_4$ (Theorem~\ref{thm:class-l-reconstruction}(iii)) implies
-$S_4 = 0$. By induction, $S_r = 0$ for all $r \geq 4$: once the tower terminates,
+$S_4 = 0$. By induction, $S_r = 0$ for all $r \geq 4$: once the support packet has
+no primitive component above degree~$3$,
 the flatness identity at degree $r+1$ has source zero, so $S_{r+1}$ is both closed and
-the unique solution in the Koszul-vanishing cochain space.
+zero in the chirally Koszul quotient.
 \end{proof}
 
-\begin{proposition}[Class C: tower terminates at $S_4$; \ClaimStatusProvedHere]
+\begin{proposition}[Class C: support packet terminates at \(S_4\); \ClaimStatusProvedHere]
 % label removed: prop:class-c-termination
 For the $\beta\gamma$ system $V_{\beta\gamma}(\lambda)$:
 \[
@@ -1318,7 +1392,8 @@ $\nabla = d - \kappa \omega^{(2)} - \mathfrak{Q}^{\mathrm{contact}} \omega^{(4)}
 \begin{proof}
 The vanishing $o_5(V_{\beta\gamma}) = 0$ (Theorem~\ref{thm:class-c-reconstruction}(iii))
 implies $S_5 = 0$. By the same inductive argument as in the class~L case, all higher
-soft factors vanish.
+support channels vanish.  A physical soft-factor statement requires the
+celestial comparison datum as above.
 \end{proof}
 
 \subsection{Celestial transfer}
@@ -1328,10 +1403,10 @@ soft factors vanish.
 % label removed: constr:celestial-transfer
 The shadow connection on $\mathrm{Conf}_n(\C)$ transfers to the celestial sphere
 $\C\mathrm{P}^1_{\mathrm{cel}}$ as the corresponding celestial transport package.
-On benchmark celestial comparison surfaces, this transfer is written by the
-following procedure.
+On benchmark celestial comparison surfaces, this transfer is the
+composition of Mellin transform, soft residue, and Ward identity.
 
-\medskip\noindent\textbf{Step 1: Mellin transform.}
+\medskip\noindent\textbf{Mellin transform.}
 On benchmark comparison surfaces, replace conformal-weight eigenstates
 $\phi_\Delta(z)$ by their Mellin transforms:
 \[
@@ -1340,21 +1415,25 @@ $\phi_\Delta(z)$ by their Mellin transforms:
 The Mellin transform intertwines the shadow connection with the celestial shadow
 connection and passes to the corresponding celestial transform package.
 
-\medskip\noindent\textbf{Step 2: Soft limits.}
+\medskip\noindent\textbf{Soft residues.}
 On a benchmark celestial comparison surface where the transformed package is
-represented by benchmark correlators $\mathcal{M}_n$, the soft factor $S_r$ at
-degree $r$ governs the behavior of an $(n+1)$-point benchmark correlator package
-when one external state has conformal dimension $\Delta \to 1$:
+represented by benchmark correlators $\mathcal{M}_n$, the soft factor at
+level $p$ is the residue of an $(n+1)$-point benchmark correlator package
+when one external state has reduced conformal dimension $\Delta \to 1-p$:
 \begin{equation}
 % label removed: eq:celestial-soft-limit
-\lim_{\Delta \to 1}
-(\Delta - 1) \cdot \mathcal{M}_{n+1}(\Delta, z; \Delta_1, z_1; \ldots)
-= S_r \cdot \mathcal{M}_n(\Delta_1, z_1; \ldots),
+\operatorname*{Res}_{\Delta=1-p}
+\mathcal{M}_{n+1}(\Delta, z; \Delta_1, z_1; \ldots)
+=
+\sum_i
+\rho_i\!\left(\pi_1D_\cA\big|_{(s^{-1}\cA)^{\otimes(p+2)}}\right)
+\mathcal{M}_n(\Delta_1, z_1; \ldots),
 \end{equation}
-where the right-hand side is the soft factor acting on the remaining $n$-point
-benchmark correlator package.
+where $p+2$ is the arity of the corresponding transferred chiral operation.
+For the gravitational stress-tensor normalisation this reduced pole is shifted
+to $\Delta^{\mathrm{st}}=2-p$.
 
-\medskip\noindent\textbf{Step 3: Ward identity.}
+\medskip\noindent\textbf{Ward identity.}
 The flatness $(\nabla^{\mathrm{hol}})^2 = 0$ yields the celestial Ward identity on
 the transferred transport package; on those same benchmark comparison surfaces it
 is written as:
@@ -1944,7 +2023,7 @@ is formally contractible onto $\mathcal{L}$ under the gauge-trivialized
 exact-Steinberg hypotheses of Proposition~\ref{prop:exact-steinberg-contractible}.
 \end{remark}
 
-\begin{corollary}[Conditional BF modular lifting package; \ClaimStatusProvedHere]
+\begin{corollary}[Gauge-trivialized BF modular lifting package; \ClaimStatusProvedHere]
 \label{cor:bf-modular-lifting-resolved}
 Assume the gauge-trivialized exact-Steinberg hypotheses of
 Proposition~\ref{prop:exact-steinberg-contractible} hold for each
@@ -1956,6 +2035,17 @@ full solution $\Pi(\h)$ of the modular Maurer--Cartan problem and
 contractibility of each genus-$g$ Steinberg
 $\Steinberg_b^{\mathrm{BF},g}$ for $g \geq 1$.
 \end{corollary}
+
+\begin{proof}
+Proposition~\ref{prop:exact-steinberg-contractible} gives a contraction
+of each gauge-trivialized genus-$g$ BF Steinberg onto the boundary
+Lagrangian. The obstruction complex is therefore acyclic. Since the
+obstruction-deformation map identifies $\mathfrak W_g$ with the
+corresponding Steinberg obstruction class, every $\mathfrak W_g$
+vanishes. The $\hbar$-adic obstruction tower then lifts inductively to
+a solution $\Pi(\h)$ of the modular Maurer--Cartan equation, and the
+Steinberg contractibility is the contraction just constructed.
+\end{proof}
 
 \begin{remark}[Exact-Steinberg obstruction class]
 Under the gauge-trivialized exact-Steinberg hypotheses above, the $(-2)$-shifted
@@ -2114,7 +2204,7 @@ structure constants $m_n$ (which is $O(n!)$ for the combinatorial weight and
 $O(\mathrm{poly})$ for the KK coefficients) suggests that the one-wheel sum
 converges in a suitable completed topology. A rigorous proof would require
 establishing the HS-sewing condition for the specific KK spectrum of $S^3$, which
-is part of the analytic sewing programme
+is the analytic sewing condition of
 (Vol~I, \S\ref*{V1-sec:concordance-analytic-sewing}).
 \end{remark}
 
@@ -2360,7 +2450,8 @@ representations of $G$. The shadow obstruction tower furnishes the comparison
 map from the affine class~L scalar series to this partition formula; the exact
 recovery is again equivalent to $\Obs^{\mathrm{BF}}_{\mathrm{L}}(G)=0$.
 At genus~$1$: $Z_1(G) = |\mathrm{Irr}(G)|$ (the number of irreducible representations).
-The affine class~L formula $F_1=\kappa/24$ agrees with the genus-$1$
+The affine class~L formula
+$F_1(\cA)=\kappaChHodge(\cA)/24$ agrees with the genus-$1$
 non-abelian BF computation exactly on the vanishing locus of the same
 comparison class.
 \end{remark}
@@ -2379,7 +2470,7 @@ the following comparison strata:
 \hline
 \text{Free } \beta\gamma
 & V_{\beta\gamma}
-& r_{\max}=4,\ \kappa=6\lambda^2-6\lambda+1
+& \(r^\Theta_{\max}=4,\ \kappaChHodge=6\lambda^2-6\lambda+1\)
 & 0 \\
 \text{Kodaira--Spencer}
 & U_{\mathrm{KS}}
@@ -2393,12 +2484,13 @@ the following comparison strata:
 \]
 The comparison data determine the reconstruction surface:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $\beta\gamma$ (class~C): four data determine the full scalar modular partition function.
+\item $\beta\gamma$ (class~C): the finite contact packet determines
+ the scalar modular shadow series.
 \item Kodaira--Spencer: the Gauss--Manin/open-closed comparison becomes a class~L
  assignment for $U_{\mathrm{KS}}$ exactly on the vanishing locus of
  $\Obs^{\mathrm{cel}}_{\mathrm{KS}}$.
 \item $\mathcal{W}_3$: the mixed/infinite higher-spin comparison becomes an exact
- shadow-depth theorem with $\kappa=c_{\mathrm{eff}}/2$ exactly on the
+ support-depth theorem with the stated \(\kappaChHodge\)-line exactly on the
  vanishing locus of $\Obs^{\mathrm{cel}}_{\mathcal W_3}$.
 \end{enumerate}
 \end{theorem}
@@ -2423,7 +2515,7 @@ statement and for the central scalar $\kappa=c_{\mathrm{eff}}/2$.
 
 \begin{remark}[Holographic complexity hierarchy]
 % label removed: rem:holographic-complexity-hierarchy
-The shadow depth classification produces a natural complexity hierarchy for holographic
+The support-depth classification produces a natural complexity hierarchy for holographic
 models:
 \[
 \text{G (free)} \subset \text{L (current algebra)} \subset \text{C (contact)}
@@ -2443,9 +2535,10 @@ with exactness controlled by $\Obs^{\mathrm{cel}}_{\mathcal W_3}$.
 This hierarchy parallels the physical distinction between free, gauge, and
 gravitational holographic sectors: free sectors are Gaussian, gauge/open-closed
 benchmark sectors interpolate toward Lie-theoretic structure, and gravitational
-higher-spin sectors are expected to be infinite-tower. The shadow depth language
-quantifies this distinction only on the theorematic surfaces where that depth has
-been proved.
+higher-spin sectors are expected to have no finite algebraic support cutoff.
+The support-depth language quantifies this distinction only on the theorematic
+surfaces where that depth has been proved; it does not count physical soft
+operators without the celestial comparison datum.
 \end{remark}
 
 \subsection{The modular $R$-matrix for BF}

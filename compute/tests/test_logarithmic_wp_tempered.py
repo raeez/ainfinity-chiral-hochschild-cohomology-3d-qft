@@ -1,14 +1,14 @@
 """Checks for chapters/theory/logarithmic_wp_tempered_analysis_platonic.tex.
 
 The chapter now separates the proved Virasoro T-line from the open
-regular-sector triplet problem:
+regular/logarithmic-sector triplet problem:
 
   Conjecture conj:tempered-stratum-contains-wp (Conjectured):
     For every integer p >= 2,
         limsup_r (|S_r(W(p))| / r!)^{1/r} = 0,
     i.e. every logarithmic triplet algebra W(p) is analytically
     tempered. The exact ordinary-generating radius remains part of
-    the regular-sector amplitude problem.
+    the regular and logarithmic amplitude problem.
 
   Lemma lem:wp-virasoro-subchannel-tempered (ProvedHere):
     The Virasoro sub-channel at c = c(p) is tempered because c(p) is
@@ -36,9 +36,17 @@ regular-sector triplet problem:
     The exact missing lemma is an exponential, not factorial, bound on
     the regular TW/WW shadow coefficients.
 
-  Corollary cor:wp-dichotomy-healed:
-    Non-tempered stratum on the non-logarithmic C_2-cofinite landscape
-    is empty; the logarithmic extension is conjectural.
+  Definition def:wp-reg-nil-log-shadow-decomposition:
+    S_r(W(p)) = S_r^reg + S_r^nil + S_r^log, with
+    S_r^reg = S_r^TT + S_r^TW + S_r^WW.
+
+  Conjecture conj:wp-logarithmic-boundary-amplitude-bound (Conjectured):
+    The logarithmic phi_{0,1} boundary-changing sector must satisfy
+    |S_r^log| <= C^r (r!)^(1-epsilon); finite Zhu data do not imply it.
+
+  Conjecture conj:tempered-unbounded-zhu:
+    Finite-Zhu tempering is an amplitude-package criterion. Finite
+    Zhu data alone do not bound the cumulative Massey tower.
 
 Coverage (decorator-tagged tests):
 
@@ -71,10 +79,10 @@ Coverage (decorator-tagged tests):
       fields and dim A(W(2)) = 4. Full triplet shadow truncation is
       not asserted by this test.
 
-  - test_wp_c2_cofinite_status_separation
-      Corollary cor:wp-dichotomy-healed: non-logarithmic families are
-      verified tempered; triplet/singlet logarithmic entries are
-      recorded as conjectural.
+  - test_wp_finite_zhu_amplitude_status_separation
+      Finite-Zhu rows are separated from generic non-C2 rows, and the
+      triplet/singlet logarithmic entries are recorded as amplitude
+      problems rather than Zhu-only consequences.
 
   - test_wp_c2_cofinite_forbids_finite_free_strong_generation
       Proposition prop:wp-c2-forbids-finite-free-strong-generation:
@@ -84,6 +92,10 @@ Coverage (decorator-tagged tests):
   - test_wp_manuscript_overclaim_guards
       Negative guard: the old free-generation, W(2)-truncation, and
       full-radius assertions must not return.
+
+  - test_wp_logarithmic_boundary_amplitude_profile
+      The manuscript/compute surface records the reg/nil/log split and
+      the conjectural phi_{0,1} logarithmic amplitude bound.
 
 The @independent_verification decorators are mandatory per the Vol II
 HZ-IV protocol. Sources are DISJOINT: the chapter's proof uses the
@@ -143,6 +155,11 @@ from compute.lib.wp_triplet_regular_shadow import (  # noqa: E402
     finite_model_certificate,
     finite_regular_shadow_bound,
     regular_channel_envelopes,
+)
+from compute.lib.wp_logarithmic_boundary_amplitude import (  # noqa: E402
+    boundary_changing_correlator_profile,
+    reg_nil_log_decomposition_profile,
+    standard_log_shadow_bound,
 )
 
 
@@ -467,34 +484,67 @@ def test_wp_p2_symplectic_fermion_constants_only():
 
 
 # ---------------------------------------------------------------------------
-# Test 7: C_2-cofinite landscape status separation.
+# Test 7: finite-Zhu amplitude status separation.
 # ---------------------------------------------------------------------------
 
 
-def test_wp_c2_cofinite_status_separation():
-    """Enumerate C_2-cofinite families with proved/conjectural status."""
-    # The C_2-cofinite landscape (Arakawa 2012 Theorem 4.1):
-    c2_cofinite_families = {
-        "generic_virasoro": {"tempered": True, "source": "thm:tempered-stratum-contains-virasoro"},
-        "principal_W3": {"tempered": True, "source": "thm:tempered-stratum-contains-w3"},
-        "triplet_Wp": {"tempered": None, "source": "conj:tempered-stratum-contains-wp"},
-        "singlet_Mp": {"tempered": None, "source": "conjectural extension of W(p) regular-sector bound"},
-        "lattice_VOA": {"tempered": True, "source": "class G shadow truncation"},
-        "affine_Vk": {"tempered": True, "source": "class L shadow truncation at r_max=3"},
-        "minimal_models": {"tempered": True, "source": "restricted Vir quotient at rational c"},
+def test_wp_finite_zhu_amplitude_status_separation():
+    """Separate finite-Zhu amplitude rows from generic non-C2 rows."""
+    landscape_rows = {
+        "generic_virasoro": {
+            "c2_finite": False,
+            "tempered": True,
+            "source": "thm:tempered-stratum-contains-virasoro",
+        },
+        "generic_affine_Vk": {
+            "c2_finite": False,
+            "tempered": True,
+            "source": "class L shadow truncation at r_max=3",
+        },
+        "principal_W3": {
+            "c2_finite": "special-loci",
+            "tempered": True,
+            "source": "thm:tempered-stratum-contains-w3",
+        },
+        "principal_WN_N_ge_4": {
+            "c2_finite": "special-loci",
+            "tempered": "finite-envelope",
+            "source": "thm:wn-tempered-all-N",
+        },
+        "triplet_Wp": {
+            "c2_finite": True,
+            "tempered": None,
+            "source": "conj:tempered-stratum-contains-wp",
+        },
+        "singlet_Mp": {
+            "c2_finite": True,
+            "tempered": None,
+            "source": "conjectural extension of W(p) regular-sector bound",
+        },
+        "lattice_VOA": {
+            "c2_finite": True,
+            "tempered": True,
+            "source": "class G shadow truncation",
+        },
+        "minimal_models": {
+            "c2_finite": True,
+            "tempered": True,
+            "source": "restricted Vir quotient at rational c",
+        },
     }
-    for family, status in c2_cofinite_families.items():
+    for family, status in landscape_rows.items():
         if family in {"triplet_Wp", "singlet_Mp"}:
             assert status["tempered"] is None, (
-                f"{family} must remain conjectural, not verified tempered"
+                f"{family} must remain an amplitude problem, not a Zhu-only theorem"
             )
-        else:
+        elif status["tempered"] != "finite-envelope":
             assert status["tempered"] is True, (
-                f"{family} should be proved tempered on the non-logarithmic surface"
+                f"{family} should be proved tempered by its stated non-Zhu route"
             )
-    assert len(c2_cofinite_families) >= 6, (
-        "At least 6 C_2-cofinite families should be enumerated"
-    )
+    assert landscape_rows["generic_virasoro"]["c2_finite"] is False
+    assert landscape_rows["generic_affine_Vk"]["c2_finite"] is False
+    assert landscape_rows["triplet_Wp"]["c2_finite"] is True
+    assert len(landscape_rows) >= 8
 
 
 # ---------------------------------------------------------------------------
@@ -658,16 +708,85 @@ def test_wp_manuscript_overclaim_guards():
         "actual radius is $+\\infty$",
         "the $WW$-channel is the bottleneck",
         "$\\rho_*(\\cW(p)) = \\lvert c(p)\\rvert / (4p-3)$",
+        "Tempering criterion: bounded Zhu implies",
+        "Equivalently (contrapositive form): every non-tempered VOA",
+        "finite-dimensionality forces bounded Massey",
+        "generic Virasoro (tempered unconditionally",
     ]
     for phrase in forbidden:
         assert phrase not in text, f"retracted overclaim returned: {phrase}"
 
+    assert "Finite-Zhu amplitude criterion for tempering" in text
+    assert "Finite-dimensionality of $A(\\cA)$ is not itself the bound" in text
+    assert "not a Zhu-only criterion" in text
     assert "\\label{conj:wp-regular-sector-amplitude-bound}" in text
+    assert "\\label{def:wp-reg-nil-log-shadow-decomposition}" in text
+    assert "\\label{conj:wp-logarithmic-boundary-amplitude-bound}" in text
     assert "prop:wp-c2-forbids-finite-free-strong-generation" in text
+    assert "Finite-dimensionality of the Zhu algebra" in text
+    assert "do not" in text
 
 
 # ---------------------------------------------------------------------------
-# Test 13: Finite regular-sector pole-envelope model.
+# Test 13: Logarithmic boundary-amplitude proof obligation.
+# ---------------------------------------------------------------------------
+
+
+def test_wp_logarithmic_boundary_amplitude_profile():
+    """The reg/nil/log split keeps the logarithmic bound conjectural."""
+    decomposition = reg_nil_log_decomposition_profile()
+    correlator = boundary_changing_correlator_profile()
+
+    assert decomposition["formula"] == (
+        "S_r(W(p)) = S_r^reg + S_r^nil + S_r^log"
+    )
+    assert "S_r^reg = S_r^TT + S_r^TW + S_r^WW" in (
+        decomposition["regular_refinement"]
+    )
+    assert decomposition["finite_zhu_implies_log_bound"] is False
+    assert "frontier" in decomposition["full_tempering_status"]
+
+    components = {component.name: component for component in decomposition["components"]}
+    assert components["S_r^reg"].source == "conj:wp-regular-sector-amplitude-bound"
+    assert components["S_r^log"].source == (
+        "conj:wp-logarithmic-boundary-amplitude-bound"
+    )
+    assert components["S_r^log"].status == "conjectural"
+
+    assert correlator["field"] == "phi_{0,1}"
+    assert "C^r (r!)^(1-epsilon)" in correlator["estimate"]
+    assert correlator["zhu_dimension_sufficient"] is False
+
+
+@independent_verification(
+    claim="conj:wp-logarithmic-boundary-amplitude-bound",
+    derived_from=[
+        "Assume |S_r^log| <= C^r (r!)^(1-epsilon) with epsilon > 0",
+        "Normalize by r! and apply Stirling to C^r/(r!)^epsilon",
+    ],
+    verified_against=[
+        "Direct log-rate evaluation at r=1000 and r=4000",
+        "Gurarie-Flohr obstruction forces finite-Zhu non-implication",
+    ],
+    disjoint_rationale=(
+        "The check uses only Stirling arithmetic for the logarithmic "
+        "summand. It does not use the semisimple TT/TW/WW pole-envelope "
+        "computation or the Adamovic-Milas regular-channel constants."
+    ),
+)
+def test_wp_logarithmic_subfactorial_bound_implies_tempered_rate():
+    """C^r (r!)^(1-epsilon) is tempered after division by r!."""
+    bound = standard_log_shadow_bound()
+
+    assert bound.tends_to_zero_certificate(1000, 4000)
+    assert bound.normalized_root_rate(4000) < 1.0
+    assert bound.log_normalized_root_rate(4000) < bound.log_normalized_root_rate(
+        1000
+    )
+
+
+# ---------------------------------------------------------------------------
+# Test 14: Finite regular-sector pole-envelope model.
 # ---------------------------------------------------------------------------
 
 

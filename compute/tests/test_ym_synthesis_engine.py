@@ -53,7 +53,7 @@ class TestTangentToCenter:
         assert tangent_to_center_dimension('affine_sl2') == 1
 
     def test_virasoro_dim_1(self):
-        """Virasoro: Z(Vir_{26-c}^!) = span{c} => dim = 1."""
+        """Virasoro: the line-side central parameter span has dim = 1."""
         assert tangent_to_center_dimension('virasoro') == 1
 
     def test_unknown_algebra_raises(self):
@@ -322,7 +322,7 @@ class TestKappaDataConsistency:
         assert data_0['kappa'] == 0
 
     def test_virasoro_dual_kappa_at_c_13(self):
-        """At c=13 (self-dual): kappa = kappa' = 13/2."""
+        """At c=13 fixed point: kappa = kappa' = 13/2."""
         data = _kappa_data('virasoro', c=S(13))
         assert data['kappa'] == Rational(13, 2)
         assert data['kappa_dual'] == Rational(13, 2)

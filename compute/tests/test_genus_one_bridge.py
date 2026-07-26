@@ -35,6 +35,11 @@ from lib.genus_one_bridge import (
     eisenstein_non_modularity,
     weierstrass_zeta_quasiperiodicity,
     fredholm_determinant_genus1,
+    elliptic_arakelov_green_kernel_profile,
+    lambda_fp_scalar,
+    scalar_uniform_genus_free_energy,
+    w3_genus2_cross_channel,
+    multi_weight_genus_free_energy_profile,
     vol1_kappa_values,
     vol1_F1_values,
     vol1_E2_coefficients,
@@ -226,6 +231,52 @@ class TestGenus1Curvature:
         c = Symbol('c')
         curv = genus1_curvature('w3', c=c)
         assert simplify(curv['kappa'] - 5 * c / 6) == 0
+
+
+class TestArakelovKernelAndScalarTower:
+    """Item-17 guards: Arakelov Green kernel, scalar tower, cross channel."""
+
+    def test_elliptic_arakelov_green_kernel_profile(self):
+        """The actual genus-one Green kernel is printed with the ddbar identity."""
+        profile = elliptic_arakelov_green_kernel_profile()
+        assert profile['curve'] == 'E_tau = C/(Z + tau Z)'
+        assert profile['volume_integral'] == 1
+        assert profile['ddbar_identity'] == 'partial dbar G_tau = pi*i*(delta_0 - mu_tau)'
+        assert profile['residue_one_propagator'] == '-partial_z G_tau dz'
+        assert profile['residue_at_zero'] == 1
+
+    def test_lambda_fp_scalar_values(self):
+        """Faber-Pandharipande coefficients match the Bernoulli formula."""
+        assert lambda_fp_scalar(1) == Rational(1, 24)
+        assert lambda_fp_scalar(2) == Rational(7, 5760)
+        assert lambda_fp_scalar(3) == Rational(31, 967680)
+
+    def test_scalar_uniform_w3_genus_two(self):
+        """The scalar W3 genus-two term is (5c/6)*(7/5760)."""
+        c = Symbol('c')
+        scalar = scalar_uniform_genus_free_energy(5 * c / 6, 2)
+        assert simplify(scalar - 7 * c / 6912) == 0
+
+    def test_w3_cross_channel_is_not_scalar(self):
+        """The W3 genus-two full profile has the off-diagonal cross term."""
+        c = Symbol('c')
+        cross = w3_genus2_cross_channel(c)
+        profile = multi_weight_genus_free_energy_profile(5 * c / 6, 2, cross)
+        assert simplify(cross - (c + 204) / (16 * c)) == 0
+        assert profile['has_cross_channel'] is True
+        assert simplify(profile['total'] - (7 * c / 6912 + (c + 204) / (16 * c))) == 0
+
+    def test_item17_source_theorem_is_printed(self):
+        """Source guard for the Green kernel and scalar tower theorem."""
+        root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        source = os.path.join(root, 'chapters', 'theory', 'factorization_swiss_cheese.tex')
+        with open(source, encoding='utf-8') as fh:
+            text = fh.read()
+        assert 'def:elliptic-arakelov-green-kernel' in text
+        assert 'G_\\tau(z)' in text
+        assert '\\partial\\bar\\partial G_\\tau' in text
+        assert 'thm:scalar-arakelov-genus-tower' in text
+        assert '\\delta F_2^{\\mathrm{cross}}(\\cW_3)' in text
 
 
 # ═══════════════════════════════════════════════════════════════════════

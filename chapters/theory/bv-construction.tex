@@ -64,31 +64,218 @@ and the affine Kac--Moody class~L at non-critical level via the explicit
 homotopy transfer~\cite{CG17}*{Theorem~5.2.2.1} of
 \S\ref{subsec:analytic} Step~4. For the symplectic bosons /
 $\beta\gamma$ class~C and the Virasoro / $W_N$ class~M, the
-identification depends on the harmonic-decoupling
-property: the BV propagator splits into a holomorphic kernel and a
-topological kernel without cross-coupling at the harmonic component, established for class G/L by the explicit
-Wakimoto / free-field realisation and conjectural for class C/M at
-chain level. The cohomological identification
+identification depends on the harmonic component of the BV propagator.
+For class~C the required input is the vanishing, with compatible lifts,
+of the obstruction classes
+\(\mathfrak h_{g,r}^{\mathsf C}\) of
+Definition~\ref{def:class-c-harmonic-decoupling-obstruction}; this is
+established only at the printed genus-one quartic test case. For
+class~M the raw direct-sum chain-level statement is false, and the
+replacement is the weight-completed comparison below. The cohomological identification
 $H^\bullet(\Obs_{\mathrm{bulk}}) \simeq
 H^\bullet(\barB^{\mathrm{ch}}(A_\partial))$ holds for all four classes
 via the Drinfeld--Sokolov/Hochschild bridge
 (Theorem~\ref{thm:chd-ds-hochschild}); the chain-level upgrade for class
-C/M closes in the weight-completed category by
+C is conditional on the classes \(\mathfrak h_{g,r}^{\mathsf C}\),
+while class~M closes only in the weight-completed category by
 Proposition~\ref{prop:bv-bar-class-m-weight-completed}. The
 QME~\eqref{eq:QME-bv-construction} is the open form;
 $D_A\Theta_A + \tfrac12[\Theta_A, \Theta_A] = 0$ is the closed form. Both
 present the same Maurer--Cartan element under the bar/BV identification on
-class G/L and on class C/M in the
+class G/L, on class~C after vanishing of
+\(\mathfrak h_{g,r}^{\mathsf C}\), and on class~M in the
 weight-completed category.
 \end{remark}
 
 \subsection{Field content, action, and BV data}
 \label{subsec:BV-data}
-Fix a 3d HT theory on $\R_t\times \C_z$ with graded field space~$\Phi$ (fields, ghosts, antifields), classical action $S_{\mathrm{cl}}[\Phi]$, and BRST operator $Q$ of degree $+1$. The classical action satisfies the classical master equation $\{S_{\mathrm{cl}},S_{\mathrm{cl}}\}_{\mathrm{BV}}=0$; the perturbative quantisation produces an effective action $S_{\mathrm{eff}}$ satisfying the quantum master equation $\hbar\Delta_{\mathrm{BV}} S_{\mathrm{eff}} + \tfrac{1}{2}\{S_{\mathrm{eff}}, S_{\mathrm{eff}}\}_{\mathrm{BV}} = 0$, from which the $A_\infty$ operations are extracted. Work perturbatively about a translation-invariant background.
+
+Fix a cyclic dg Lie algebra \((\mathfrak a,d_{\mathfrak a},[-,-],
+\langle-,-\rangle_{\mathfrak a})\). The local 3d
+holomorphic--topological bridge starts from the BV datum
+\[
+(\mathcal E,Q,\omega_{\mathrm{BV}},I,B)
+\]
+on \(\R_t\times\C_z\), where
+\begin{equation}\label{eq:3dht-fields}
+ \mathcal E
+ =
+ \Omega^\bullet(\R_t)\widehat\otimes
+ \Omega^{0,\bullet}(\C_z)\otimes\mathfrak a[1],
+ \qquad
+ Q=d_t+\dbar_z+d_{\mathfrak a}.
+\end{equation}
+The BV pairing is
+\begin{equation}\label{eq:3dht-bv-pairing}
+ \omega_{\mathrm{BV}}(\alpha,\beta)
+ =
+ \int_{\R\times\C} dz\wedge
+ \langle\alpha,\beta\rangle_{\mathfrak a},
+\end{equation}
+where the \(dt\) and \(d\bar z\) components are supplied by the form
+degrees of \(\alpha,\beta\). The interaction and classical action are
+\begin{align}
+ I(A)
+ &=
+ \frac16\int_{\R\times\C}dz\wedge
+ \langle A,[A,A]\rangle_{\mathfrak a},\label{eq:3dht-interaction}\\
+ S_{\mathrm{cl}}[A]
+ &=
+ \int_{\R\times\C}dz\wedge
+ \left(\frac12\langle A,QA\rangle_{\mathfrak a}
+ +\frac16\langle A,[A,A]\rangle_{\mathfrak a}\right).
+ \label{eq:3dht-classical-action}
+\end{align}
+The boundary condition \(B\) is a \(Q\)-compatible Lagrangian
+subcomplex along \(t=0\), so the BV boundary term vanishes. Invariance
+of \(\langle-,-\rangle_{\mathfrak a}\), \(Q^2=0\), and the Jacobi
+identity give the classical master equation
+\begin{equation}\label{eq:3dht-cme}
+ \{S_{\mathrm{cl}},S_{\mathrm{cl}}\}_{\mathrm{BV}}=0.
+\end{equation}
+
+Choose a gauge-fixing adjoint \(Q^*\). Let \(H=[Q,Q^*]\) be the heat
+operator, \(K_s=e^{-sH}\) its kernel, and define the scale propagator
+\begin{equation}\label{eq:3dht-heat-propagator}
+ P_{\epsilon<L}
+ =
+ \int_{\epsilon}^{L} Q^*K_s\,ds,
+ \qquad
+ Q_{\boxtimes}P_{\epsilon<L}=K_L-K_\epsilon.
+\end{equation}
+Here \(P_{\epsilon<L}=P_{\epsilon<L}(x,y)\) and \(K_s=K_s(x,y)\) are
+distributional kernels on \((\R\times\C)^2\), and
+\[
+ Q_{\boxtimes}=Q_x\boxtimes 1+1\boxtimes Q_y
+\]
+is the differential induced by \(Q\) on kernels, with the Koszul sign on
+the second factor determined by the BV pairing. Equivalently, as an
+operator on compactly supported fields,
+\begin{equation}\label{eq:3dht-propagator-kernel-homotopy}
+ [Q,P_{\epsilon<L}]=K_L-K_\epsilon .
+\end{equation}
+After local counterterms have removed the \(\epsilon\to0\) singular
+part, write \(P_{0<L}\) for the renormalized limit. The effective
+interaction at scale \(L\) is the Costello graph sum
+\begin{equation}\label{eq:3dht-effective-interaction}
+ I[L]
+ =
+ \sum_{\Gamma}
+ \frac{\hbar^{b_1(\Gamma)}}{|\operatorname{Aut}\Gamma|}
+ W_\Gamma(P_{0<L},I),
+\end{equation}
+with graph weight
+\begin{equation}\label{eq:3dht-graph-weight}
+ W_\Gamma(P,I)
+ =
+ \int_{\Conf_{V(\Gamma)}(\R\times\C)}
+ \bigwedge_{e\in E(\Gamma)}P_e\cdot
+ \bigotimes_{v\in V(\Gamma)} I_v.
+\end{equation}
+The scale-\(L\) quantum master equation is
+\begin{equation}\label{eq:3dht-scale-qme}
+ QI[L]+\hbar\Delta_L I[L]+\frac12\{I[L],I[L]\}_L=0.
+\end{equation}
+Boundary \(A_\infty\)-chiral operations are extracted by placing the
+external legs on \(B\):
+\begin{equation}\label{eq:3dht-boundary-operations}
+ m_k^{\mathrm{BV}}
+ =
+ \sum_{\substack{\Gamma\ \mathrm{connected}\\
+ k\ \mathrm{external\ boundary\ legs}\\
+ 1\ \mathrm{output}}}
+ \frac{\hbar^{b_1(\Gamma)}}{|\operatorname{Aut}\Gamma|}
+ \operatorname{Res}_{\partial\FM_\Gamma} W_\Gamma(P_{0<L},I).
+\end{equation}
+The comparison with the bar construction is not an additional identity
+between two unrelated formulas.  It is the transfer datum identifying
+the boundary observables with the chiral bar model.  More precisely,
+let \(A_\partial\) be the boundary chiral algebra obtained from \(B\)
+by \(\eta_A^\partial\), and let \(D_A\) be the degree-\(1\)
+coderivation of
+\(\barB^{\mathrm{ch}}(A_\partial)=T^c(s^{-1}\bar A_\partial)\), with
+\[
+ m_k^{\mathrm{bar}}
+ =
+ \pi_1D_A\big|_{(s^{-1}A_\partial)^{\otimes k}} .
+\]
+The bridge includes a boundary strong deformation retract, compatible
+with the residue kernels, with maps
+\[
+ i_\partial\colon (A_\partial,m_1)\to
+ \bigl(\Obs^\partial(\mathcal E,B),Q_{\mathrm{BRST}}^L\bigr),
+ \qquad
+ p_\partial\colon
+ \bigl(\Obs^\partial(\mathcal E,B),Q_{\mathrm{BRST}}^L\bigr)
+ \to (A_\partial,m_1),
+\]
+and homotopy \(h_\partial\) satisfying
+\[
+ h_\partial Q_{\mathrm{BRST}}^L+Q_{\mathrm{BRST}}^Lh_\partial
+ =\mathrm{id}-i_\partial p_\partial .
+\]
+Homological perturbation transfers the graph operations
+\eqref{eq:3dht-boundary-operations} to a coderivation
+\(D_A^{\mathrm{BV}}\) on \(T^c(s^{-1}\bar A_\partial)\).  The rigorous
+comparison statement is the transferred equality
+\begin{equation}\label{eq:3dht-bv-bar-transfer-comparison}
+ \pi_1D_A^{\mathrm{BV}}\big|_{(s^{-1}A_\partial)^{\otimes k}}
+ =
+ \pi_1D_A\big|_{(s^{-1}A_\partial)^{\otimes k}} .
+\end{equation}
+Equivalently, the raw residue operations \(m_k^{\mathrm{BV}}\) are
+identified with \(m_k^{\mathrm{bar}}\) by the \(A_\infty\)
+quasi-isomorphism induced by \(p_\partial,i_\partial,h_\partial\);
+strict equality is asserted only in the transferred boundary model.
+
+\begin{proposition}[Standard-family BV realisation data;
+\ClaimStatusConditional; licensing $\alpha+\beta+\gamma+\delta$]
+\label{prop:standard-family-bv-realisation-data}
+For every standard family used in the volume, the physical input
+\(\Xi_A\) is not a name for a hoped-for theory.  It consists of a
+field complex \(\mathcal E_A\), BRST operator \(Q_A\), interaction
+\(I_A\), BV pairing \(\omega_{\mathrm{BV},A}\), gauge-fixing
+operator \(Q_A^*\), boundary Lagrangian \(B_A\), scale-\(L\) solution
+of the QME, and comparison maps
+\[
+ \eta_A^\partial\colon \Obs^\partial(\mathcal E_A,B_A)\longrightarrow A,
+ \qquad
+ \chi_A\colon \Zderch{A}\longrightarrow
+ H^\bullet\Obs^{\mathrm{bulk}}(\mathcal E_A).
+\]
+The following table records the rows actually licensed here.
+\begin{center}
+\small
+\begin{tabular}{p{0.16\textwidth}p{0.24\textwidth}p{0.25\textwidth}p{0.24\textwidth}}
+family & BV source & boundary Lagrangian and QME &
+comparison maps \\
+\hline
+Heisenberg/lattice &
+abelian cyclic complex of currents; \(I_A=0\) or quadratic CS term &
+Neumann/Fock Lagrangian; Gaussian QME and heat-kernel gauge fixing &
+\(\eta^\partial_A\) is the current OPE; \(\chi_A\) is the free chiral Hochschild comparison \\
+affine \(V_k(\fg)\) &
+mixed BF/Chern--Simons fields \((\alpha,\beta)\) of Proposition~\ref{prop:affine-mixed-bf-dictionary} &
+\(i^*\alpha=0\) chiral boundary Lagrangian; one-loop-exact QME by Theorem~\ref{thm:affine-half-space-bv} &
+\(\eta^\partial_A\) is Corollary~\ref{cor:boundary-affine-voa}; \(\chi_A\) is the affine bar/BV comparison \\
+\(\beta\gamma\)/symplectic boson &
+shifted-cotangent free-field complex with finite contact interaction &
+standard free boundary Lagrangian; QME after vanishing/lifting of \(\mathfrak h_{g,r}^{\mathsf C}\) and contact estimates &
+\(\eta^\partial_A,\chi_A\) require the vanishing/lifting of \(\mathfrak h_{g,r}^{\mathsf C}\) \\
+\(\mathrm{Vir}_c,\mathcal W_N\) &
+principal DS BRST reduction of the affine row, not an independent bare BV source &
+DS ghost-zero boundary gauge; QME transported under \(\hypKZSDR+\hypStokes+\hypTLift\) &
+\(\eta^\partial_A,\chi_A\) are the DS--Hochschild/HPL comparison maps in the weight-completed ambient
+\end{tabular}
+\end{center}
+Thus a statement about a standard-family HT realisation is licensed
+only after the row supplies these data; the algebra \(A\) alone never
+constructs its BV theory.
+\end{proposition}
 
 \begin{definition}[Local observables]
 \label{def:local-obs}
-For an open $U\subset \R\times\C$, define $\mathsf{Obs}(U)$ as the completed symmetric algebra $\widehat{\operatorname{Sym}}(\mathcal{E}^\vee)$ of distributional sections of the dual field bundle, equipped with the BV differential $Q_{\mathrm{BRST}}$ and the BV antibracket. The renormalized time-ordered product $\star_U$ is built from the propagator and interaction vertices via the standard perturbative expansion (see e.g.\ \cite{CG17}).
+For an open $U\subset \R\times\C$, define $\mathsf{Obs}(U)$ as the completed symmetric algebra $\widehat{\operatorname{Sym}}(\mathcal{E}(U)^\vee)$ of distributional sections of the dual field bundle, equipped with the scale-\(L\) BV differential \(Q_{\mathrm{BRST}}^L\) and the BV antibracket. The renormalized time-ordered product $\star_U$ is built from the scale propagator \(P_{0<L}\) and the interaction vertices \(I_v\) via the standard perturbative expansion (see e.g.\ \cite{CG17}).
 \end{definition}
 
 \subsection{Proof of Theorem~\ref{thm:physics-bridge}}
@@ -102,10 +289,52 @@ Under the conditions of Theorem~\ref{thm:physics-bridge}, $U\mapsto \mathsf{Obs}
 \begin{proof}
 
 \medskip\noindent\textbf{Step 1: Classical master equation.}
-The BV data provides $({\mathcal F}, S, \{-,-\}_{\mathrm{BV}}, \Delta_{\mathrm{BV}})$: a $(-1)$-symplectic graded space of fields ${\mathcal F}$ on $\R\times\C$, a local action functional $S\in{\mathcal O}({\mathcal F})$ satisfying the quantum master equation $\hbar\Delta_{\mathrm{BV}}S + \tfrac{1}{2}\{S,S\}_{\mathrm{BV}}=0$, and the BRST differential $Q_{\mathrm{BRST}} = \{S,-\}_{\mathrm{BV}} + \hbar\Delta_{\mathrm{BV}}$ with $Q_{\mathrm{BRST}}^2=0$. HT gauge fixing selects a Lagrangian complement to the gauge orbits compatible with the product structure $\R\times\C$, and one-loop finiteness~\cite{GRW21} ensures that the BV Laplacian $\Delta_{\mathrm{BV}}$ acting on local functionals produces well-defined operators without UV counterterms. For each open $U\subset \R\times\C$, the cochain complex $(\Obs(U), Q_{\mathrm{BRST}})$ is therefore well-defined.
+The datum \((\mathcal E,Q,\omega_{\mathrm{BV}},I,B)\) of
+\eqref{eq:3dht-fields}--\eqref{eq:3dht-cme} gives a
+\((-1)\)-symplectic graded space of fields on \(\R\times\C\) and a
+local action functional \(S_{\mathrm{cl}}\). The quadratic part has
+Hamiltonian vector field \(Q\), and \(Q^2=0\). The cubic term is
+Hamiltonian for the dg Lie bracket on \(\mathfrak a\); invariance of
+\(\langle-,-\rangle_{\mathfrak a}\) and Jacobi give
+\(\{S_{\mathrm{cl}},S_{\mathrm{cl}}\}_{\mathrm{BV}}=0\). The boundary
+condition \(B\) is Lagrangian and \(Q\)-compatible, so integration by
+parts produces no boundary anomaly at \(t=0\).
+
+Quantisation replaces \(S_{\mathrm{cl}}\) by the scale-\(L\)
+interaction \(I[L]\) of \eqref{eq:3dht-effective-interaction}. The
+regularised BV differential is
+\[
+ Q_{\mathrm{BRST}}^L
+ =
+ Q+\{I[L],-\}_L+\hbar\Delta_L .
+\]
+The scale quantum master equation \eqref{eq:3dht-scale-qme} is exactly
+\((Q_{\mathrm{BRST}}^L)^2=0\). One-loop finiteness~\cite{GRW21}
+ensures that the \(\epsilon\to0\) limit defining \(P_{0<L}\) and
+\(\Delta_L\) exists after local counterterms. For each open
+\(U\subset\R\times\C\), the cochain complex
+\((\Obs(U),Q_{\mathrm{BRST}}^L)\) is therefore well-defined.
 
 \medskip\noindent\textbf{Step 2: Propagator.}
-The kinetic operator $Q = \dbar + d_t$ determines the propagator $G(z_1-z_2;\, t_1-t_2)$ obtained from the gauge-fixed kinetic term. Meromorphicity in $z$ with a simple pole at $z_1=z_2$ ensures that correlators are rational functions of the holomorphic insertion points, with singularities governed by the OPE. (For tree-level diagrams, rationality follows from iterating the Cauchy integral; for loop diagrams, the one-loop finiteness condition ensures convergence, and the Hartogs extension principle gives rationality on the complement of the collision loci.) Exponential decay $|G|\le C\,e^{-\mu|t_1-t_2|}$ in the topological direction ensures absolute convergence of loop integrals over ordered intervals in $\R$. Translation invariance guarantees that the resulting operations depend only on relative positions.
+The gauge-fixing adjoint \(Q^*\) gives the heat kernel \(K_s=e^{-sH}\)
+and propagator \(P_{\epsilon<L}=\int_\epsilon^L Q^*K_s\,ds\) of
+\eqref{eq:3dht-heat-propagator}, satisfying the kernel homotopy identity
+\eqref{eq:3dht-propagator-kernel-homotopy}. Its singular product-HT
+part is the Cauchy/step kernel
+\[
+ P_{\mathrm{sing}}(z,t)=\frac{\Theta(t)}{2\pi z}
+ \otimes\langle-,-\rangle_{\mathfrak a}^{-1},
+\]
+up to a smooth \(Q\)-exact correction. Meromorphicity in \(z\) with a
+simple pole at \(z_1=z_2\) ensures that correlators are rational
+functions of the holomorphic insertion points, with singularities
+governed by the OPE. For tree-level diagrams, rationality follows from
+iterating the Cauchy integral; for loop diagrams, the one-loop
+finiteness condition controls the coincident-point limit, and Hartogs
+extension gives rationality away from collision loci. The heat-kernel
+decay in the topological direction gives absolute convergence of
+ordered-interval integrals in \(\R\). Translation invariance guarantees
+that the resulting operations depend only on relative positions.
 
 \medskip\noindent\textbf{Step 3: Factorization structure maps.}
 Let $U_1,\ldots,U_n \subset \R\times\C$ be pairwise disjoint opens contained in a larger open $V$. The factorization product
@@ -115,16 +344,16 @@ Let $U_1,\ldots,U_n \subset \R\times\C$ be pairwise disjoint opens contained in 
  \;\longrightarrow\;
  \Obs(V)
 \]
-is defined by the renormalized time-ordered product: given observables ${\mathcal O}_i\in\Obs(U_i)$ supported in $U_i$, the product $\mu({\mathcal O}_1\otimes\cdots\otimes{\mathcal O}_n)$ is computed by the sum over Feynman diagrams with vertices at the insertion points and internal edges weighted by the propagator $G$. Since the $U_i$ are disjoint, propagators connecting different opens have non-coincident holomorphic arguments $z_j\ne z_k$, so the meromorphic singularity in $G$ is never encountered, and the exponential decay in $t$ gives convergence of the integrals over the topological separations. The BRST compatibility $Q_{\mathrm{BRST}}\circ\mu = \mu\circ Q_{\mathrm{BRST}}^{\otimes n}$ follows from the quantum master equation.
+is defined by the renormalized time-ordered product: given observables ${\mathcal O}_i\in\Obs(U_i)$ supported in $U_i$, the product $\mu({\mathcal O}_1\otimes\cdots\otimes{\mathcal O}_n)$ is computed by the graph weights \eqref{eq:3dht-graph-weight}, with vertices at the insertion points and internal edges weighted by \(P_{0<L}\). Since the $U_i$ are disjoint, propagators connecting different opens have non-coincident holomorphic arguments $z_j\ne z_k$, so the meromorphic singularity in \(P_{\mathrm{sing}}\) is never encountered, and the heat-kernel decay in \(t\) gives convergence of the integrals over the topological separations. The BRST compatibility $Q_{\mathrm{BRST}}^L\circ\mu = \mu\circ (Q_{\mathrm{BRST}}^L)^{\otimes n}$ follows from the scale quantum master equation \eqref{eq:3dht-scale-qme}.
 
 \medskip\noindent\textbf{Step 4: Convergence via FM compactification.}
-When insertions approach coincidence, $\FM_k(\C)$ resolves the singularities. The weight forms extend to logarithmic forms $\omega_k^{\mathrm{hol}}\in\Omega^\bullet_{\log}(\FM_k(\C))$, which are integrable on the compact space $\FM_k(\C)$. The factored structure $\omega_k = \omega_k^{\mathrm{hol}}\wedge\omega_k^{\mathrm{top}}$ with $\omega_k^{\mathrm{top}}\in C_\bullet(\Conf_k(\R))$ means the integrals converge separately in each direction. By Theorem~\ref{thm:Arnold_full_proof} (Appendix~\ref{app:FM_Stokes}), codimension-2 corner contributions cancel via the Arnold--Orlik--Solomon relations, so Stokes' theorem on $\FM_k(\C)$ (a manifold with corners) yields well-defined renormalized products. Any ambiguity in the renormalization scheme is $Q_{\mathrm{BRST}}$-exact: two choices of propagator $G, G'$ with the same boundary conditions differ by a smooth kernel $H = G - G'$, and the resulting change in each $m_k$ is a $Q_{\mathrm{BRST}}$-coboundary by the homotopy transfer formula \cite[Theorem~5.2.2.1]{CG17}. The quasi-isomorphism class of $(\Obs(U), Q_{\mathrm{BRST}})$ is therefore independent of the renormalization scheme.
+When insertions approach coincidence, $\FM_k(\C)$ resolves the singularities. The weight forms extend to logarithmic forms $\omega_k^{\mathrm{hol}}\in\Omega^\bullet_{\log}(\FM_k(\C))$, which are integrable on the compact space $\FM_k(\C)$. The factored structure $\omega_k = \omega_k^{\mathrm{hol}}\wedge\omega_k^{\mathrm{top}}$ with $\omega_k^{\mathrm{top}}\in C_\bullet(\Conf_k(\R))$ means the integrals converge separately in each direction. By Theorem~\ref{thm:Arnold_full_proof} (Appendix~\ref{app:FM_Stokes}), codimension-2 corner contributions cancel via the Arnold--Orlik--Solomon relations, so Stokes' theorem on $\FM_k(\C)$ (a manifold with corners) yields well-defined renormalized products. Any ambiguity in the renormalization scheme is \(Q_{\mathrm{BRST}}^L\)-exact: two choices of propagator \(P,P'\) with the same singular part and boundary condition differ by a smooth kernel \(R=P-P'\), and the resulting change in each \(m_k^{\mathrm{BV}}\) is a \(Q_{\mathrm{BRST}}^L\)-coboundary by the homotopy transfer formula \cite[Theorem~5.2.2.1]{CG17}. The quasi-isomorphism class of \((\Obs(U), Q_{\mathrm{BRST}}^L)\) is therefore independent of the renormalization scheme.
 
 \medskip\noindent\textbf{Step 5: Swiss-cheese structure.}
-The factorization products assemble into the two-colored operad $\SCchtop$. The holomorphic insertions are governed by $\FM_k(\C)$: the boundary strata of the FM compactification encode the operadic composition maps $\gamma_{\mathrm{ch}}$ of the closed color, recording how clusters of holomorphic points collide. The topological insertions are governed by $E_1(m) \cong \Conf_m(\R)$: the ordered-interval structure of configurations on $\R$ provides the operadic composition $\gamma_{\mathrm{top}}$ of the open color. The factorization maps $\mu^V_{U_1,\ldots,U_n}$ on rectangles $D_i\times I_j$ (disks in $\C$, intervals in $\R$) are therefore controlled by the insertion maps of $\FM_k(\C)\times E_1(m)$, which are precisely the spaces of operations of $\SCchtop$. The no-open-to-closed constraint is automatic: by Definition~\ref{def:SC-operations}(i), $\SCchtop(\ldots,\mathrm{top},\ldots;\,\mathrm{ch})=\varnothing$ whenever any input carries the open color. Concretely, a closed-output operation requires all inputs to be holomorphic insertions parametrized by $\FM_k(\C)$; no topological (interval-ordered) input can appear. This encodes the physical directionality that bulk observables restrict to the boundary but boundary data does not extend to the bulk.
+The factorization products assemble into the two-colored operad $\SCchtop$. The holomorphic insertions are governed by $\FM_k(\C)$: the boundary strata of the FM compactification encode the operadic composition maps $\gamma_{\mathrm{ch}}$ of the closed color, recording how clusters of holomorphic points collide. The topological insertions are governed by $E_1(m) \cong \Conf_m(\R)$: the ordered-interval structure of configurations on $\R$ provides the operadic composition $\gamma_{\mathrm{top}}$ of the open color. The factorization maps $\mu^V_{U_1,\ldots,U_n}$ on rectangles $D_i\times I_j$ (disks in $\C$, intervals in $\R$) are therefore controlled by the insertion maps of $\FM_k(\C)\times E_1(m)$, the spaces of operations of the depth-zero associated graded $\gr\,\SCchtop$ (Proposition~\ref{prop:gr-chiral}); the rectangle-basis construction is a gr-level (decoupled) statement, and the coupled bulk-to-boundary strata of $\SCchtop$ enter only through boundary-incidence limits not taken here. The no-open-to-closed constraint is automatic: by Definition~\ref{def:SC-operations}(i), $\SCchtop(\ldots,\mathrm{top},\ldots;\,\mathrm{ch})=\varnothing$ whenever any input carries the open color. Concretely, a closed-output operation requires all inputs to be holomorphic insertions parametrized by $\FM_k(\C)$; no topological (interval-ordered) input can appear. This encodes the physical directionality that bulk observables restrict to the boundary but boundary data does not extend to the bulk.
 
 \medskip\noindent\textbf{Conclusion.}
-The assignment $U\mapsto (\Obs(U), Q_{\mathrm{BRST}})$ with the factorization products $\mu^V_{U_1,\ldots,U_n}$ satisfies the axioms of a holomorphic--topological prefactorization algebra: isotopy invariance along $\R$ follows from local constancy (the propagator depends on $t$ only through a step function or exponential kernel), and holomorphic dependence on $\C$-positions follows from the meromorphicity of $G$. On rectangles $D\times I$ the structure is locally constant, as claimed.
+The assignment $U\mapsto (\Obs(U), Q_{\mathrm{BRST}}^L)$ with the factorization products $\mu^V_{U_1,\ldots,U_n}$ satisfies the axioms of a holomorphic--topological prefactorization algebra: isotopy invariance along $\R$ follows from local constancy (the singular propagator depends on $t$ through the step kernel, with heat-kernel smoothing terms), and holomorphic dependence on $\C$-positions follows from the meromorphicity of \(P_{\mathrm{sing}}\). On rectangles $D\times I$ the structure is locally constant, as claimed.
 \end{proof}
 
 \begin{remark}[Lagrangian interpretation]
@@ -178,8 +407,15 @@ Write $A:=\mathsf{Obs}(D\times I)$ for a small rectangle. The higher multiplicat
 \[
 m_k : A^{\otimes k}\longrightarrow A((\lambda_1))\cdots((\lambda_{k-1}))
 \]
-of degree $2-k$ are given by integrating the product of renormalized propagators over $\FM_k(\C)\times E_1(m)$ with suitable log kernels in $\C$ and ordered‑interval data in $\R$; see Section~\ref{sec:FM_calculus}.
-The boundary faces yield Stokes' identities matching the $A_\infty$ relations.
+of degree $2-k$ are the operations
+\(m_k^{\mathrm{BV}}\) of \eqref{eq:3dht-boundary-operations}: integrate
+the graph weight \(W_\Gamma(P_{0<L},I)\) over
+\(\FM_k(\C)\times E_1(m)\), then take the residue on the boundary face
+indexed by \(\Gamma\). The boundary faces yield Stokes' identities
+matching the \(A_\infty\) relations.  The bar-side comparison is the
+transferred equality \eqref{eq:3dht-bv-bar-transfer-comparison}; the
+raw graph residues are not identified with the bar coderivation until
+the boundary SDR and comparison maps have been chosen.
 
 \subsection{Well-definedness and sesquilinearity on cohomology}
 \label{subsec:well-def-sesqui}

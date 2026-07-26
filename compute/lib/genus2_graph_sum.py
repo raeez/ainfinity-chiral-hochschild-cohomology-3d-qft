@@ -10,13 +10,14 @@ FIVE-LAYER VERIFICATION
 ========================
 
 LAYER 1 (Graph enumeration): Enumerate all stable graphs at (g=2, n=0).
-  There are exactly 6: smooth, figure-eight, separating, sunset, mixed,
-  theta. Each is verified to have arithmetic genus 2 and stability.
+  There are exactly 7: smooth, figure-eight, separating, sunset, mixed,
+  theta, and barbell. Each is verified to have arithmetic genus 2 and
+  stability.
 
 LAYER 2 (Graph sum): Compute chi^{orb}(M_bar_2) from the stratification
   formula chi^{orb}(M_bar_2) = sum_Gamma (1/|Aut|) prod_v chi^{orb}(M_{g_v,val(v)}).
   The vertex weights chi^{orb}(M_{g,n}) come from Harer-Zagier. The sum over
-  all 6 graphs yields chi^{orb}(M_bar_2) = -181/1440.
+  all 7 graphs yields chi^{orb}(M_bar_2) = -1/1440.
 
 LAYER 3 (Bernoulli formula): Compute lambda_2^FP = (2^3-1)/2^3 * |B_4|/4!
   = 7/8 * (1/30)/24 = 7/5760. B_4 = -1/30 is derived from the recursion.
@@ -356,6 +357,12 @@ def enumerate_genus2_stable_graphs() -> List[StableGraphG2]:
           val(v0) = 2 + 2 = 4, val(v1) = 2.
           Stability at v1: 2*0-2+2 = 0. ✗
 
+        - One edge + one self-loop on each vertex: ((0,0),(1,1),(0,1)).
+          val(v0) = val(v1) = 3.
+          Stability: 2*0-2+3 = 1 > 0 for both. ✓
+          Graph VII: BARBELL (two genus-0 vertices, each with one self-loop,
+          joined by a bridge).
+
         - One edge + two self-loops on one vertex: ((0,1),(0,0),(0,0)).
           val(v0) = 1 + 4 = 5, val(v1) = 1.
           Stability at v1: -1 < 0. ✗
@@ -382,7 +389,7 @@ def enumerate_genus2_stable_graphs() -> List[StableGraphG2]:
 
     |E| >= 4: h^1 = |E| - |V| + 1 >= 4, sum g_v <= -2 < 0. ✗
 
-    CONCLUSION: Exactly 6 stable graphs at (g=2, n=0).
+    CONCLUSION: Exactly 7 stable graphs at (g=2, n=0).
 
     AUTOMORPHISM GROUPS:
     ====================
@@ -407,6 +414,10 @@ def enumerate_genus2_stable_graphs() -> List[StableGraphG2]:
     VI (theta: g=0 === g=0, 3 parallel edges): |Aut| = 12.
         The two vertices can be swapped (factor 2), and the 3 parallel
         edges can be permuted (factor 3!). Total: 2 * 6 = 12.
+
+    VII (barbell: two g=0 vertices, each with a self-loop, joined by a bridge):
+         |Aut| = 8. The two vertices can be swapped (factor 2), and each
+         self-loop can be flipped (factor 2^2). Total: 2 * 4 = 8.
     """
     return [
         StableGraphG2(
@@ -451,6 +462,13 @@ def enumerate_genus2_stable_graphs() -> List[StableGraphG2]:
             aut_order=12,
             description="Theta graph: two genus-0 vertices, 3 parallel edges",
         ),
+        StableGraphG2(
+            name="VII",
+            vertex_genera=(0, 0),
+            edges=((0, 0), (1, 1), (0, 1)),
+            aut_order=8,
+            description="Barbell: two genus-0 vertices, each with a self-loop, joined by a bridge",
+        ),
     ]
 
 
@@ -458,9 +476,9 @@ def verify_genus2_graph_enumeration() -> dict:
     """Verify properties of the genus-2 stable graph enumeration.
 
     Checks:
-      (a) All 6 graphs have arithmetic genus 2
-      (b) All 6 graphs are stable
-      (c) Graph count = 6
+      (a) All 7 graphs have arithmetic genus 2
+      (b) All 7 graphs are stable
+      (c) Graph count = 7
       (d) The Euler characteristic of the graph sum is consistent
     """
     graphs = enumerate_genus2_stable_graphs()
@@ -478,7 +496,7 @@ def verify_genus2_graph_enumeration() -> dict:
         }
     return {
         'count': len(graphs),
-        'count_correct': len(graphs) == 6,
+        'count_correct': len(graphs) == 7,
         'graphs': results,
         'all_genus_2': all(r['genus_correct'] for r in results.values()),
         'all_stable': all(r['stable'] for r in results.values()),
@@ -585,7 +603,7 @@ def graph_sum_chi_orb() -> dict:
       chi^{orb}(M_bar_{g,n}) = sum_Gamma (1/|Aut(Gamma)|)
                                 * prod_v chi^{orb}(M_{g_v, val(v)})
 
-    For (g=2, n=0) with 6 stable graphs:
+    For (g=2, n=0) with 7 stable graphs:
 
     I  (smooth): chi^{orb}(M_2) = B_4 / (4*2*1) = (-1/30)/8 = -1/240
                  weight = 1/1 * (-1/240) = -1/240
@@ -613,7 +631,11 @@ def graph_sum_chi_orb() -> dict:
                 chi(M_{0,3})^2 = 1
                 weight = 1/12 * 1 = 1/12
 
-    Total: -1/240 - 1/24 + 1/288 - 1/8 - 1/24 + 1/12
+    VII (barbell): vertices g=0,g=0, both val=3.
+                   chi(M_{0,3})^2 = 1
+                   weight = 1/8 * 1 = 1/8
+
+    Total: -1/240 - 1/24 + 1/288 - 1/8 - 1/24 + 1/12 + 1/8
 
     Let me compute with common denominator 1440:
       -1/240 = -6/1440
@@ -622,9 +644,10 @@ def graph_sum_chi_orb() -> dict:
       -1/8 = -180/1440
       -1/24 = -60/1440
       1/12 = 120/1440
-      Total = (-6 - 60 + 5 - 180 - 60 + 120) / 1440 = -181/1440
+      1/8 = 180/1440
+      Total = (-6 - 60 + 5 - 180 - 60 + 120 + 180) / 1440 = -1/1440
 
-    Known: chi^{orb}(M_bar_2) = -181/1440  ✓
+    Known: chi^{orb}(M_bar_2) = -1/1440  ✓
     """
     graphs = enumerate_genus2_stable_graphs()
     contributions = {}
@@ -654,7 +677,7 @@ def graph_sum_chi_orb() -> dict:
             ),
         }
 
-    known = Fraction(-181, 1440)
+    known = Fraction(-1, 1440)
     return {
         'contributions': contributions,
         'total': total,
@@ -676,8 +699,8 @@ def graph_sum_chi_orb() -> dict:
 #
 # can be decomposed into two independent verifications:
 #
-# (A) The GRAPH SUM verifies chi^{orb}(M_bar_2) = -181/1440
-#     by summing vertex-product contributions over all 6 stable graphs.
+# (A) The GRAPH SUM verifies chi^{orb}(M_bar_2) = -1/1440
+#     by summing vertex-product contributions over all 7 stable graphs.
 #
 # (B) The BERNOULLI FORMULA gives lambda_2^FP = 7/5760 from B_4 = -1/30.
 #
@@ -728,7 +751,7 @@ def penner_graph_sum_genus2() -> dict:
 
     For genus-2 graphs: only graphs with ALL genus-0 vertices contribute
     (since the Penner model is a genus-0 vertex model). These are
-    graphs IV and VI.
+    graphs IV, VI, and VII.
 
     Graphs with higher-genus vertices (I, II, III, V) have genus-g
     vertex contributions that come from the LOWER-GENUS Penner sums
@@ -738,7 +761,7 @@ def penner_graph_sum_genus2() -> dict:
     F_g^{Penner} = chi^{orb}(M_g) = sum over genus-g graphs with genus-0
                    vertices only, plus contributions from lower-genus sums.
 
-    For the DIRECT SUM over all 6 genus-2 graphs (not the Penner model,
+    For the DIRECT SUM over all 7 genus-2 graphs (not the Penner model,
     but the orbifold Euler characteristic stratification formula):
 
     We use chi^{orb}(M_{g_v, n_v}) as vertex weights. This is the formula
@@ -816,8 +839,8 @@ def F_g(kappa: Fraction, g: int) -> Fraction:
 def compute_F2(kappa: Fraction) -> dict:
     """Compute F_2 from first principles.
 
-    Layer 1: Enumerate stable graphs at (g=2, n=0). Verify count = 6.
-    Layer 2: Graph sum for chi^{orb}(M_bar_2). Verify = -181/1440.
+    Layer 1: Enumerate stable graphs at (g=2, n=0). Verify count = 7.
+    Layer 2: Graph sum for chi^{orb}(M_bar_2). Verify = -1/1440.
     Layer 3: Bernoulli formula for lambda_2^FP. Verify = 7/5760.
     Layer 4: F_2 = kappa * lambda_2^FP.
 
@@ -1069,11 +1092,11 @@ def verify_F2_from_first_principles(kappa: Fraction = Fraction(1)) -> dict:
 
     The verification has 5 independent layers:
 
-    (1) GRAPH ENUMERATION: 6 stable graphs at (g=2, n=0), verified by
+    (1) GRAPH ENUMERATION: 7 stable graphs at (g=2, n=0), verified by
         arithmetic genus = 2 and stability conditions.
 
-    (2) CHI^{ORB} GRAPH SUM: sum over 6 stable graphs of
-        (1/|Aut|) * prod_v chi^{orb}(M_{g_v, val(v)}) = -181/1440.
+    (2) CHI^{ORB} GRAPH SUM: sum over 7 stable graphs of
+        (1/|Aut|) * prod_v chi^{orb}(M_{g_v, val(v)}) = -1/1440.
         Uses Harer-Zagier formula for chi^{orb}(M_{g,n}).
 
     (3) BERNOULLI FORMULA: lambda_2^FP = (2^3-1)/2^3 * |B_4|/4!
@@ -1108,7 +1131,7 @@ def verify_F2_from_first_principles(kappa: Fraction = Fraction(1)) -> dict:
     results['layer2'] = {
         'description': 'Orbifold Euler characteristic of M_bar_2 via graph sum',
         'computed': chi_result['total'],
-        'expected': Fraction(-181, 1440),
+        'expected': Fraction(-1, 1440),
         'passed': chi_result['match'],
         'graph_contributions': {
             name: {

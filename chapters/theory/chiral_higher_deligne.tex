@@ -7,8 +7,8 @@
 %% - chain-level E_2 only on the associator-fixed formality locus;
 %% - E_3 only after explicit topologization data, not bare L_0
 %% narration;
-%% - Theorem H remains the Vol I ordered-bar / Orlik-Solomon theorem,
-%% while the E_3-rigidity reinterpretation remains an open route.
+%% - Theorem H remains the Vol I family-support theorem,
+%% while the E_3-PBW reinterpretation remains an open route.
 %%
 %% The DS-Hochschild bridge closes the brace / E_2 compatibility gap
 %% and inherits any topologized E_3 layer only in the settings where the
@@ -50,6 +50,7 @@
 \providecommand{\Lie}{\mathsf{Lie}}
 \providecommand{\Ass}{\mathsf{Ass}}
 \providecommand{\Com}{\mathsf{Com}}
+\providecommand{\Free}{\mathrm{Free}}
 \providecommand{\RHom}{\mathbf{R}\mathrm{Hom}}
 \providecommand{\Barch}{\mathrm{B}^{\mathrm{ch}}}
 \providecommand{\Cobarch}{\Omega^{\mathrm{ch}}}
@@ -64,12 +65,12 @@
 
 The classical Deligne conjecture delivers an $E_2$-algebra structure
 on Hochschild cochains up to associator (Tamarkin, Kontsevich,
-McClure--Smith, Berger--Fresse, Hu--Kriz--Voronov), one dimension
+McClure--Smith~\cite{McClureSmith02}, Berger--Fresse, Hu--Kriz--Voronov), one dimension
 short of holomorphic factorisation on a curve. An $E_1$-chiral
 algebra $\cA$ on a smooth complex curve $X$ has a derived chiral
 centre
 $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA) := \ChirHoch^\bullet(\cA, \cA)$
-(Theorem~H, concentration in $\{0,1,2\}$). The bulk structure of
+(Theorem~H, with support computed from $H_H(\cA;S)$). The bulk structure of
 the universal holography part (cf.~\ref{part:holography})
 separates into three inputs: the $E_2$-chiral brace action; the
 two-coloured $\SCchtop$ bulk-boundary lift on
@@ -79,9 +80,8 @@ $E_3^{\mathrm{top}}$ refinement supplied by explicit topologisation
 data. The class-$M$ global-triangle gap is exactly the failure of
 these three inputs to collapse to a single theorem. The chapter
 constructs the $E_2$-chiral bridge, isolates the strict $E_3$
-chain-lift obligation, and treats concentration-in-$\{0,1,2\}$ as
-the output of a separate chiral-$E_3$-PBW theorem for the derived
-centre.
+chain-lift obligation, and treats family support as the output of a
+separate chiral-$E_3$-PBW theorem for the derived centre.
 
 The mixed chiral-topological action is constructed via pentagon
 edges $(3)\leftrightarrow(4)\leftrightarrow(5)$ of the
@@ -96,9 +96,9 @@ compatibility with the $\SCchtop$-pentagon edge
 $(3)\leftrightarrow(4)$. The main theorem: the pair
 $(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$ carries the mixed
 chiral-topological $\SCchtop$ datum through the heptagon under
-the two-coloured cobar-homotopy hypothesis. The $E_3$-PBW route:
-concentration follows from $E_3$-rigidity-at-a-point once the
-derived centre admits a chiral-$E_3$-PBW presentation.
+the two-coloured cobar-homotopy hypothesis.  The $E_3$-PBW route
+recovers a prescribed support set once the derived centre admits a
+chiral-$E_3$-PBW presentation whose first page has that support.
 Applications: the DS--Hochschild compatibility bridge at chain
 level and the ambient-qualified universal-holography statement
 for class~M.
@@ -124,13 +124,25 @@ Let $\cA$ be an $E_1$-chiral algebra on a smooth curve $X$ with
 structure morphisms $\mu_z : \cA \boxtimes \cA \to \Delta_! \cA$
 parametrised by the punctured formal neighbourhood of the diagonal
 $\Delta \subset X\times X$. The \emph{chiral endomorphism operad}
-$\End^{\mathrm{ch}}_{\cA}$ is the $\ChirAss$-algebra in chiral modules
-whose $k$-ary component consists of multi-linear operations
+$\End^{\mathrm{ch}}_{\cA}$ is the one-coloured symmetric operad in
+the ambient category $\mathrm{D}\text{-}\mathrm{mod}(X^\bullet)$ of
+right D-modules on the finite powers of $X$: its $k$-ary component
+is the ind-object
 \[
-\phi_k : \cA^{\boxtimes k} \longrightarrow \Delta^{(k)}_! \cA,
+\End^{\mathrm{ch}}_{\cA}[k] \;:=\;
+\varinjlim_{n}\,
+\Hom_{\mathrm{D}(X^k)}\bigl(\cA^{\boxtimes k},\,
+\Delta^{(k)}_! \cA\,(n\!\cdot\!\partial\Delta^{(k)})\bigr),
 \]
+the multi-linear operations
+\[
+\phi_k : \cA^{\boxtimes k} \longrightarrow \Delta^{(k)}_! \cA
+\]
+with poles of bounded order along the diagonal divisor, i.e.\
 polynomial in the formal-Laurent disc at the small diagonal
-$\Delta^{(k)} \subset X^k$. The spectral parameters
+$\Delta^{(k)} \subset X^k$; operadic composition is composition of
+such operations followed by the diagonal pushforward, and the
+$\Sigma_k$-action permutes the factors of $X^k$. The spectral parameters
 $z_1, \ldots, z_k \in X$ enter as formal variables in this
 Laurent completion: the spectral parameters are formal-algebraic
 variables in $\End^{\mathrm{ch}}_\cA$, not $\FM_k(\C)$ coordinates.
@@ -160,13 +172,35 @@ is the totalisation
 \end{equation}
 where $\FM_k(\C)$ is the Fulton-MacPherson compactification of the
 ordered configuration space $\Conf_k(\C)$ and $\omega_{\FM_k(\C)}$ the
-sheaf of top logarithmic forms.
+sheaf of top logarithmic forms. The typing of the coefficient sheaf
+requires a choice: $\FM_k(\C)$ parametrises configurations in a fixed
+affine coordinate, not points of $X^k$, so
+$\underline{\Hom}(\cA^{\boxtimes k}, \cA)$ denotes the pullback of the
+$k$-ary D-module component of Definition~\ref{def:chd-alg} along a
+fixed \'etale coordinate $t\colon U \to \C$ on a chart $U \subseteq X$,
+through the induced map $\Conf_k(U) \to \Conf_k(\C)$ and its extension
+to the compactification. The geometric complex is defined
+chart-locally; independence of the chart up to the transition action
+of formal coordinate changes ($\mathrm{Aut}\,\hat{\mathcal O} = W_+$-torsor
+descent) is part of the comparison hypothesis of
+Proposition~\ref{prop:chd-models-equivalent}, not of this definition.
 \end{definition}
 
-\begin{proposition}[Equivalence of algebraic and geometric models]%
+\begin{proposition}[Equivalence of algebraic and geometric models;
+\ClaimStatusConditional{} on the typing hypothesis
+\textup{(H$_{\mathrm{typ}}$)}]%
 \label{prop:chd-models-equivalent}%
 \index{chiral Hochschild cohomology!algebraic = geometric}%
-The two models are canonically quasi-isomorphic:
+Assume the typing hypothesis \textup{(H$_{\mathrm{typ}}$)}: a fixed
+\'etale coordinate $t\colon U \to \C$ on a chart $U \subseteq X$
+identifying the $\FM_k(\C)$ configuration coordinates with the
+diagonal Laurent variables $z_1,\ldots,z_k$ of
+Definition~\ref{def:chd-alg}, together with descent data for the
+$\mathrm{Aut}\,\hat{\mathcal O}$-action on the coefficient sheaf
+making the chart-local geometric complex
+\eqref{eq:chd-geom-def} glue over $X$. Under
+\textup{(H$_{\mathrm{typ}}$)} the two models are canonically
+quasi-isomorphic:
 \[
  \iota_{\mathrm{a,g}}:
  C^\bullet_{\mathrm{ch,alg}}(\cA, \cA) \;\simeq\;
@@ -238,9 +272,9 @@ The three agree on their intersection of validity only after the
 appropriate spectral / derived completion, and are generically
 inequivalent: $HH^\bullet_{\mathrm{mode}}$ knows the associative
 structure at the level of modes but is blind to OPE spectral data;
-$H^\bullet_{\mathrm{GF}}$ is unbounded above (Fuks 1986);
-$\ChirHoch^\bullet$ is bounded, concentrated in $\{0,1,2\}$
-(Theorem~H). The Weyl algebra identity $HH^\bullet(\mathrm{Weyl}_n)
+$H^\bullet_{\mathrm{GF}}$ is unbounded above (Fuks 1986).  A family
+datum $H_H(\cA;S)$ identifies $\ChirHoch^\bullet(\cA)$ with a model
+supported in~$S$ (Theorem~H). The Weyl algebra identity $HH^\bullet(\mathrm{Weyl}_n)
 = \Bbbk$ concentrated in degree $0$ (Fresse-Tsygan) is a statement
 about the MODE algebra; the corresponding chiral statement is
 $\ChirHoch^\bullet(\mathrm{Weyl}^{\mathrm{ch}}_n) = \Bbbk$ in degree
@@ -347,25 +381,33 @@ the integral over the three-cell. The cell integrand is bounded
 integral is a legitimate chain-level $d_{\mathrm{ch}}$-boundary.
 \end{proof}
 
-\begin{remark}[Stasheff coherences beyond degree $4$: uniform Stokes
-argument]%
+\begin{remark}[Stasheff coherences beyond degree $4$ are open:
+McClure--Smith combinatorics]%
 \label{rem:chd-stasheff-higher-degree}%
 \index{brace operations!Stasheff coherence!higher degree}%
-Proposition~\ref{prop:chd-stasheff-4} records the first two Stasheff
-coherences explicitly. The same Stokes-integral template extends to
-every higher degree: the degree-$n$ Stasheff coherence reduces, via
-Proposition~\ref{prop:chd-models-equivalent}, to an integral over an
-$n$-dimensional face of $\FM_{m}(\C)$ for appropriate $m$; the face
-boundary decomposes into the relevant summand terms by the
-combinatorial Fulton--MacPherson stratification; logarithmic
-singularities of $\omega_{\FM}$ cancel on each cell because the
-integrand is a sum of log-products dual to the tree strata. Hence
-each higher coherence is a legitimate chain-level
-$d_{\mathrm{ch}}$-boundary given by the corresponding cell integral.
-The explicit degree-$4$ case is given; degrees $\geq 5$ follow
-by the same template without modification. The phrase ``Stasheff
-coherences through all degrees'' below is warranted by this
-uniform Stokes argument.
+Only the two brace identities of
+Proposition~\ref{prop:chd-stasheff-4} are verified in this volume.
+The degree-$n$ Stasheff coherence for $n \ge 5$ would reduce, via
+Proposition~\ref{prop:chd-models-equivalent}, to a Stokes identity on
+an $n$-dimensional face of $\FM_{m}(\C)$ for appropriate $m$; but the
+required matching --- between the full tree of degree-$n$ Stasheff
+summands and the codimension pattern of the Fulton--MacPherson
+stratification, with compatible signs and cancelling logarithmic
+singularities on every cell --- is exactly the sequence-operad
+combinatorics that McClure--Smith carry out for the topological brace
+operad \cite{McClureSmith02}, and that combinatorics has \emph{not}
+been carried out here for the chiral braces; the corresponding
+open-closed coherence structure at all arities is the
+Kajiura--Stasheff open-closed homotopy algebra
+\cite{KajiuraStasheff06}, likewise not constructed here in the
+chiral setting. The extension to $n \ge 5$ is therefore an
+open obligation, not a corollary of the degree-$4$ template; no
+statement in this volume may cite this remark as licence for
+``Stasheff coherences through all degrees.'' What is available
+unconditionally is the degree-$\le 4$ package of
+Proposition~\ref{prop:chd-stasheff-4} together with the
+associator-fixed strictification of
+Remark~\ref{rem:chd-brace-strict-coordinates}.
 \end{remark}
 
 \begin{remark}[Brace identities are chain-level, not strict;
@@ -437,7 +479,7 @@ Lift the $E_2$-chiral action of the braces
 chiral-topological bulk-boundary datum governed by $\SCchtop$. The
 heptagon identifies the formal-disc brace model, the ordered
 bar-cobar model, and the two-coloured bulk-boundary model; it does not
-turn the bicoloured operad $\SCchtop$ itself into a single-colour
+turn the directed two-coloured operad $\SCchtop$ itself into a single-colour
 $E_3$ operad. A strict $E_3$-topological structure appears only after
 the chiral direction has been topologised by explicit inner-stress
 data.
@@ -459,11 +501,20 @@ made. Without such topologisation data, the output remains the
 generic-case $\SCchtop$ bulk-boundary structure.
 \end{convention}
 
-\begin{theorem}[Chiral Higher Deligne: braces, two-coloured lift,
-and topologised $E_3$]%
+\begin{theorem}[Chiral Higher Deligne: braces, conditional two-coloured lift,
+and topologised $E_3$; \ClaimStatusConditional on clauses
+\textup{(2)}--\textup{(3)}; licensing tags
+$\alpha+\beta+\gamma+\delta$]%
 \label{thm:chiral-higher-deligne}%
 \index{Chiral Higher Deligne}%
 \index{Theorem H!chiral Higher Deligne bridge}%
+\noindent\textbf{Status.}\enspace Clause \textup{(1)} is the
+associator-fixed chiral Deligne--Tamarkin brace theorem. Clause
+\textup{(2)} is conditional on the signed two-coloured cobar
+contraction of Proposition~\ref{prop:chd-two-coloured-cobar-obstruction}.
+Clause \textup{(3)} is conditional on the topologisation datum of
+Convention~\ref{conv:chd-e3-chiral-meaning}.
+
 Let $\cA$ be an $E_1$-chiral algebra on a smooth complex curve $X$ with
 $\cA$ in the Koszul locus (Vol.~I, Definition~\ref*{V1-def:koszul-locus}).
 After fixing a Drinfeld associator $\Phi \in \mathrm{GRT}_1(\Bbbk)$:
@@ -474,7 +525,8 @@ carries the canonical chiral brace, equivalently $E_2$-chiral,
 action.
 \item Assume the heptagon hypotheses and a chain-level contracting
 homotopy for the two-coloured $(\SCchtop)^!$-cobar complex
-(Remark~\ref{rem:chd-universality-hypotheses}). Then the pair
+(Remark~\ref{rem:chd-universality-hypotheses} and
+Proposition~\ref{prop:chd-two-coloured-cobar-obstruction}). Then the pair
 \((Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)\) carries the
 two-coloured $\SCchtop$ bulk-boundary datum, and for every
 $\SCchtop$-open/closed pair $(B,\cA)$ with bulk $B$ acting on
@@ -491,6 +543,7 @@ associator-independent.
 
 \begin{remark}[Two-coloured cobar homotopy]%
 \label{rem:chd-universality-hypotheses}%
+\label{rem:chd-universality-conditional}%
 \index{Chiral Higher Deligne!universality hypotheses}%
 Clause (2) invokes the contracting homotopy of the $(\SCchtop)^!$-cobar
 complex on the Koszul locus. Vol.~I
@@ -507,14 +560,175 @@ established at chain level in Vol.~I or here. The exact proof
 obligation is the construction of a contracting homotopy
 \[
  h_{\mathrm{oc}}\colon
- \Omega(\SCchtop)^! \longrightarrow \Omega(\SCchtop)^![-1]
+ \Omega((\SCchtop)^!) \longrightarrow \Omega((\SCchtop)^!)[-1]
 \]
 compatible with the open-to-closed void and the closed-to-open mixed
-shuffle operations. On cohomology the $E_2$ brace structure does not
-use this homotopy. The two-coloured universal $\SCchtop$ statement and
-the strict $E_3$ refinement use precisely the extra hypotheses stated
-in the theorem.
+shuffle operations. Definition~\ref{def:chd-two-coloured-cobar-tree-homotopy}
+spells out the signed tree formula; Proposition~\ref{prop:chd-two-coloured-cobar-obstruction}
+records the exact obstruction class. On cohomology the $E_2$ brace
+structure does not use this homotopy. The two-coloured universal
+$\SCchtop$ statement and the strict $E_3$ refinement use precisely the
+extra hypotheses stated in the theorem.
 \end{remark}
+
+\begin{definition}[Signed two-coloured cobar tree homotopy]%
+\label{def:chd-two-coloured-cobar-tree-homotopy}%
+\index{Boardman--Vogt!two-coloured cobar tree homotopy}%
+Let
+\[
+ \mathcal C_{\mathrm{oc}}:=\Omega((\SCchtop)^!)
+\]
+be the free coloured cobar dg operad generated by the suspended
+dual corollas of \((\SCchtop)^!\). For a homogeneous decorated
+two-coloured rooted tree
+\[
+ T=(T;\{x_v\}_{v\in V(T)})
+\]
+write \(E_{\mathrm{int}}(T)=\{e_1<\cdots<e_N\}\) for the internal
+edges ordered by the orientation line
+\(\mathfrak{o}(T)=\det(\Bbbk^{E_{\mathrm{int}}(T)})\). If \(e=e_j\),
+let \(T_e\) denote the tree obtained by inserting a
+Boardman--Vogt edge-length parameter on \(e\) and replacing that edge
+by the corresponding suspended cobar generator. The candidate
+degree \(-1\) two-coloured homotopy is
+\begin{equation}\label{eq:chd-hoc-tree-formula}
+ h_{\mathrm{oc}}^{\mathrm{tree}}(T)
+ =
+ \sum_{e\in E_{\mathrm{int}}(T)}
+ (-1)^{\sigma(e,T)}T_e,
+ \qquad
+ \sigma(e_j,T)
+ =
+ (j-1)+\sum_{v\prec e_j}|x_v|\pmod 2.
+\end{equation}
+Here \(v\prec e_j\) means that, in the chosen edge/vertex order,
+the vertex decoration \(x_v\) crosses the suspended generator created
+by expanding \(e_j\). The formula is set equal to zero on the
+open-to-closed void:
+\[
+ h_{\mathrm{oc}}^{\mathrm{tree}}\bigl(
+ \mathcal C_{\mathrm{oc}}(\mathsf{cl}^{p},\mathsf{op}^{q};\mathsf{cl})
+ \bigr)=0\qquad(q>0).
+\]
+Changing the total order changes both \(\mathfrak{o}(T)\) and
+\(\sigma(e,T)\) by the same Koszul sign, so the operator is an
+orientation-line expression rather than an ordering-dependent
+enumeration.
+\end{definition}
+
+\begin{proposition}[Obstruction measured by the tree homotopy]%
+\label{prop:chd-two-coloured-cobar-obstruction}%
+\index{Boardman--Vogt!two-coloured obstruction class}%
+Let \(p\colon\mathcal C_{\mathrm{oc}}\to\mathcal C_{\mathrm{min}}\)
+be the projection to the chosen minimal two-coloured cobar retract and
+let \(i\colon\mathcal C_{\mathrm{min}}\to\mathcal C_{\mathrm{oc}}\)
+be its inclusion, with \(p\circ i=\mathrm{id}_{\mathcal C_{\mathrm{min}}}\).
+The chain-level two-coloured cobar-homotopy
+hypothesis in Theorem~\ref{thm:chiral-higher-deligne}(2) is exactly
+the assertion that \(h_{\mathrm{oc}}^{\mathrm{tree}}\) descends through
+the Boardman--Vogt degeneracy relations and satisfies
+\begin{equation}\label{eq:chd-hoc-contraction}
+ d\,h_{\mathrm{oc}}^{\mathrm{tree}}
+ +h_{\mathrm{oc}}^{\mathrm{tree}}d
+ =
+ \mathrm{id}-i\circ p,
+\end{equation}
+together with the strong-deformation-retract side conditions
+\begin{equation}\label{eq:chd-hoc-side-conditions}
+ p\,h_{\mathrm{oc}}^{\mathrm{tree}}=0,\qquad
+ h_{\mathrm{oc}}^{\mathrm{tree}}\,i=0,\qquad
+ \bigl(h_{\mathrm{oc}}^{\mathrm{tree}}\bigr)^2=0,
+\end{equation}
+together with the mixed-cooperadic derivation identity
+\begin{equation}\label{eq:chd-hoc-delta-mix}
+ \Delta_{\mathrm{mix}}h_{\mathrm{oc}}^{\mathrm{tree}}(x)
+ =
+ \sum h_{\mathrm{oc}}^{\mathrm{tree}}(x')\otimes x''
+ +(-1)^{|x'|}x'\otimes h_{\mathrm{oc}}^{\mathrm{tree}}(x'')
+ \quad
+ \bigl(\Delta_{\mathrm{mix}}x=\sum x'\otimes x''\bigr).
+\end{equation}
+Its failure is the obstruction class
+\begin{equation}\label{eq:chd-oc-obstruction-class}
+ [o_{\mathrm{oc}}]\in
+ H^{1}\operatorname{Cone}\!\left(
+ \Omega((\SCchtop)^!)
+ \longrightarrow
+ \End(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)
+ \right).
+\end{equation}
+The strict chain-level \(\SCchtop\) lift exists precisely after this
+class is killed. Without that vanishing, the chapter has the
+chain-level \(E_2\)-chiral brace action and the cohomological
+two-coloured statement, not a strict chain-level Swiss-cheese
+universal theorem.
+\end{proposition}
+
+\begin{proof}
+The cubical differential on the Boardman--Vogt interval attached to
+an internal edge has endpoints \(t_e=0\) and \(t_e=1\). In the cobar
+model these are respectively the contracted-edge term and the
+composed-vertex term. The sign in
+\eqref{eq:chd-hoc-tree-formula} is the contraction sign for the
+orientation line \(\mathfrak{o}(T)\), corrected by the Koszul sign
+from moving the suspended cobar generator past the preceding vertex
+decorations. Hence the boundary of a once-expanded edge gives the
+summand of \(T-i\circ p(T)\) supported at that edge.
+
+The low-arity calculation fixes the sign convention.  If
+\(E_{\mathrm{int}}(T)=\{e_1\}\) and
+\(a=\sum_{v\prec e_1}|x_v|\), then
+\[
+ h_{\mathrm{oc}}^{\mathrm{tree}}(T)=(-1)^aT_{e_1},
+ \qquad
+ d_{\mathrm{cube}}T_{e_1}=(-1)^a\bigl(T-i p(T)\bigr),
+\]
+where \(d_{\mathrm{cube}}\) is the interval differential, after
+identifying the two endpoints of the Boardman--Vogt interval with the
+unexpanded and contracted-edge representatives.  Thus the
+one-edge part of
+\(d h_{\mathrm{oc}}^{\mathrm{tree}}
++h_{\mathrm{oc}}^{\mathrm{tree}}d\)
+is \(T-i p(T)\).  If
+\(E_{\mathrm{int}}(T)=\{e_1<e_2\}\), the two interval-insertion terms
+are
+\[
+ (-1)^{\sigma(e_1,T)+\sigma(e_2,T_{e_1})}T_{e_1,e_2}
+ +
+ (-1)^{\sigma(e_2,T)+\sigma(e_1,T_{e_2})}T_{e_2,e_1}.
+\]
+The canonical transposition
+\(\mathfrak{o}(T_{e_1,e_2})\simeq-\mathfrak{o}(T_{e_2,e_1})\) gives
+\[
+ \sigma(e_1,T)+\sigma(e_2,T_{e_1})
+ \equiv
+ \sigma(e_2,T)+\sigma(e_1,T_{e_2})+1
+ \pmod 2,
+\]
+so these two terms cancel.  The general cancellation is the same
+two-edge calculation applied to every unordered pair of internal
+edges; no new sign occurs in higher arity.
+
+Terms with two expanded edges cancel in pairs: expanding \(e_i\) and
+then \(e_j\) gives the opposite orientation-line sign from expanding
+\(e_j\) and then \(e_i\). If a sub-tree has closed output and an open
+input, the relevant arity of \(C_\bullet^{\log}\SCchtop\) is the zero
+complex, so both sides of
+\eqref{eq:chd-hoc-contraction} vanish there. Cutting a tree before or
+after expanding an internal mixed edge gives exactly the two summands
+in \eqref{eq:chd-hoc-delta-mix}; the displayed sign is the Koszul sign
+for moving a degree \(-1\) homotopy past \(x'\). The normalized
+Boardman--Vogt degeneracy quotient gives the side conditions
+\eqref{eq:chd-hoc-side-conditions}: \(p\) kills an inserted interval
+coordinate, \(i\) lands in the chosen minimal representatives, and a
+second interval insertion is degenerate. Thus
+\eqref{eq:chd-hoc-contraction}--\eqref{eq:chd-hoc-delta-mix} are
+precisely the two-coloured cobar contraction identities. Applying the
+convolution functor
+\(\Hom(-,\End(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA))\) identifies
+their defect with the degree-one Maurer--Cartan obstruction class
+\eqref{eq:chd-oc-obstruction-class}.
+\end{proof}
 
 \begin{proof}
 Part (1). The $E_2$ brace action.
@@ -531,9 +745,13 @@ $E_2$ brace action combines with the named $E_1^{\mathrm{top}}$
 direction by Dunn additivity and yields the strict
 $E_3^{\mathrm{top}}$ action.
 
-Part (2). Under the two-coloured cobar contracting homotopy, one
-contracts the space of homotopy
-bulk-boundary maps. Given $(B, \cA)$, the $\SCchtop$-action of $B$ on
+Part (2). Assume the obstruction class
+\eqref{eq:chd-oc-obstruction-class} vanishes and choose the normalized
+tree homotopy \(h_{\mathrm{oc}}^{\mathrm{tree}}\) satisfying
+\eqref{eq:chd-hoc-contraction}--\eqref{eq:chd-hoc-delta-mix}. The
+convolution complex controlling \(W(\SCchtop)\)-bulk-boundary maps
+then retracts to the minimal two-coloured cobar model. Given
+$(B, \cA)$, the $\SCchtop$-action of $B$ on
 $\cA$ is given by multi-input mixed-colour brace operations
 $\nu_k^{(m)}: B^{\otimes k}\otimes \cA^{\otimes m}\to \cA$. The adjoint
 \[
@@ -546,10 +764,11 @@ bar-Koszul duality for $\SCchtop$ (note that
 $(\SCchtop)^! \ne \SCchtop$; we use $(\SCchtop)^!$ for adjunction,
 and the dual is $(\Lie, \Ass)$ with shuffle-mixed closed colour). Two
 lifts of the same bulk-boundary action produce chain-homotopic maps
-provided the required contracting homotopy of the
-$(\SCchtop)^!$-cobar complex is available. Vol.~I supplies the
-single-colour comparison; the proof obligation here is the
-two-coloured homotopy.
+because the difference is a boundary in this convolution retract,
+with homotopy supplied by \(h_{\mathrm{oc}}^{\mathrm{tree}}\). Vol.~I
+supplies the single-colour comparison; in this conditional theorem the
+extra datum is exactly the two-coloured homotopy together with the
+vanishing of \([o_{\mathrm{oc}}]\).
 
 Part (3). The associator dependence is inherited from the
 strictification of the braces (Remark~\ref{rem:chd-brace-strict-coordinates}).
@@ -572,7 +791,7 @@ $\mathrm{GRT}_1$-torsor. Bar-side invariants ($\kappa$, shadow tower)
 are associator-free. Cobar-side coproduct invariants
 (Stasheff-$A_\infty$ coefficients of the brace coordinates) depend
 on $\Phi$. Theorems of the form "$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$
-equals the bulk of theory $T$" should state the cohomological and
+equals the bulk of theory $T$" must state the cohomological and
 chain-level variants separately.
 \end{remark}
 
@@ -737,8 +956,7 @@ chain-level limit; without \textup{(T1)}, the chiral direction is
 holomorphic, not topological, and the directional restriction
 $\SCchtop(\ldots, \mathsf{top}, \ldots; \mathsf{cl}) = \varnothing$
 prevents the Dunn identification (cf.\
-Convention~\ref{conv:chd-e3-chiral-meaning} and forbidden slogan~\#3
-of the voice table in CLAUDE.md~\S 8).
+Convention~\ref{conv:chd-e3-chiral-meaning}).
 \end{proof}
 
 \begin{remark}[Topologisation as residual~(R3) of the typed
@@ -767,9 +985,9 @@ level, with $T(z)$ the Sugawara stress tensor), hypothesis
 \textup{(T3a)} holds: chain-level finite propagation gives the
 topologisation in $\mathrm{Ch}(\mathrm{Vect})$ directly
 (\cref{thm:intro-e3-km}; the BRST identity
-$T_{\mathrm{DS}} = [Q_{\mathrm{CS}}, G'_{f}]$ of
-\cref{thm:intro-e3-ds} is the class-$\mathsf{L}$ analogue when
-the DS-reduced $T_{\mathrm{DS}}$ replaces the Sugawara $T$).  For
+$T_{\mathrm{DS}} = [Q_{\mathrm{DS}}, G'_{\mathrm{DS}}]$ of
+\cref{thm:intro-e3-ds} is the DS analogue after the total DS
+differential and the \(\hypDSBRST\) primitive have been installed). For
 class~$\mathsf{M}$ (Virasoro $\mathrm{Vir}_{c}$, principal $\cW_{N}$,
 hook-type $\cW_{k}(\fg, f)$), only \textup{(T3b)} holds: the
 topologisation is in the weight-completed / pro / Banach ambient,
@@ -784,13 +1002,12 @@ package $\hypKZSDR + \hypStokes + \hypReflWts + \hypTLift$ of
 \cref{thm:intro-e3-free-PVA}.
 \end{remark}
 
-\begin{remark}[Forbidden slogan~\#3 of the voice table is the negation
-of the obligation list]%
+\begin{remark}[The false Dunn collapse is the negation of the obligation list]%
 \label{rem:forbidden-slogan-3-as-T-violation}%
 \index{voice table!slogan~\#3 negation}%
 Writing ``$E_{1}$-bar explains $2d \to 3d$'' or ``$\SCchtop = E_{3}$
-by Dunn additivity'' is forbidden slogan~\#3 of the voice table
-(CLAUDE.md~\S 8).  The allowed form is the conditional
+by Dunn additivity'' collapses the holomorphic colour before
+topologisation.  The correct form is the conditional
 \cref{thm:topologisation-by-stress-tensor-null-homotopy}: Dunn
 additivity is invoked \emph{only after} the topologisation data
 $(T, Q, G)$ in the stated filtered ambient have been supplied
@@ -800,211 +1017,237 @@ colour, not an operadic identity of $\SCchtop$.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The $E_3$-PBW route to concentration}
+\section{Filtered $E_3$-PBW transport of first-page support}
 \label{sec:chd-rigidity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Theorem H asserts that
-$\ChirHoch^\bullet(\cA, \cA)$ is concentrated in degrees $\{0,1,2\}$.
-The traditional proof (Vol.~I,
-Theorem~\ref*{V1-thm:hochschild-concentration-E1}) runs
-through chiral PBW collapse and the Shelton--Yuzvinsky Orlik--Solomon
-Koszulity of the braid arrangement. The route studied here
-asks whether the same concentration can also be deduced from
-$E_3$-rigidity at a point after a chiral-$E_3$-PBW presentation of the
-derived centre. Thus concentration is not an input used to manufacture
-the mixed structure; in this route it would be a consequence of a
-stronger derived-centre PBW theorem.
+Volume~I Theorem~H starts from a family datum $H_H(\cA;S)$ and
+identifies $\ChirHoch^\bullet(\cA,\cA)$ with a complex supported in the
+finite set~$S$. The route studied here transports an independently
+computed first-page support bound through a chiral-$E_3$-PBW spectral
+sequence. The PBW presentation supplies the filtered derived centre;
+the first-page calculation supplies~$S$.
 
-\begin{lemma}[$E_3$-rigidity at a point]%
+\begin{conjecture}[Chiral-$E_3$-PBW and first-page support package for
+the derived centre;
+\ClaimStatusConjectured; licensing tags $\gamma+\delta$]%
+\label{conj:chd-e3-pbw-package}%
+\index{E_3!PBW package for the derived centre}%
+\index{derived chiral centre!PBW package}%
+Fix a finite set $S\subset\mathbb Z$.  Let $\cA$ be an $E_1$-chiral
+algebra on $X$ in the Vol.~I Koszul locus and let $D_x$ be a formal
+disc. The spectral-sequence route requires the following filtered
+package.
+There must exist:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item a complete, separated, exhaustive increasing filtration
+$F_{-1}=0\subset F_0\subset F_1\subset\cdots$ on
+\[
+ R_x := Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})
+      = \ChirHoch^\bullet(\cA|_{D_x},\cA|_{D_x})
+\]
+by arity / collision weight, compatible with the topologised
+$E_3$-operations in the sense that every $r$-ary operation sends
+$F_{p_1}\otimes\cdots\otimes F_{p_r}$ into
+$F_{p_1+\cdots+p_r}$, with finite-dimensional graded pieces in each
+fixed conformal weight;
+\item a local graded dg Lie object \(W_x\) with a specified tangent
+identification
+\[
+ W_x \simeq
+ \mathbb T^{E_3}_{R_x,x}[-2]
+\]
+in the completed filtered ambient, and a filtered $E_3$-algebra
+quasi-isomorphism
+\begin{equation}\label{eq:chd-e3-pbw-filtered}
+ R_x \;\simeq\; U_{E_3}(W_x);
+\end{equation}
+\item an associated-graded $E_3$-algebra isomorphism
+\begin{equation}\label{eq:chd-e3-pbw-gr}
+ \theta_x\colon
+ \Free_{E_3}\!\bigl(H^\bullet(W_x[-2])\bigr)
+ \xrightarrow{\;\sim\;}
+ \operatorname{gr}_{F} R_x,
+\end{equation}
+equivalently \(\ker\theta_x=\operatorname{coker}\theta_x=0\). Thus
+the operations encoded by~\(W_x\) generate the associated graded with
+precisely their divided-power, Orlik--Solomon, and collision-residue
+relations.
+Moreover \(W_x\) must be the primitive source of this associated
+graded: the induced map to \(E_3\)-indecomposables is an isomorphism
+\begin{equation}\label{eq:chd-e3-pbw-primitives}
+ H^\bullet(W_x[-2])
+ \xrightarrow{\;\sim\;}
+ Q_{E_3}\!\left(\operatorname{gr}_{F}R_x\right)
+ :=
+ \operatorname{gr}_{F}R_x\big/
+ \bigl(E_3\text{-decomposable operations}\bigr).
+\end{equation}
+Thus \(W_x\) is the primitive tangent datum whose free
+\(E_3\)-envelope gives the associated graded;
+\item a Rees-flat lift. With
+\[
+ \mathcal R_F R_x:=\bigoplus_{p\ge0}F_pR_x\,u^p
+\]
+one has
+\begin{equation}\label{eq:chd-e3-pbw-rees}
+ \mathcal R_F R_x/(u)\cong \operatorname{gr}_F R_x,\qquad
+ \mathcal R_F R_x[u^{-1}]_{u=1}\simeq R_x,
+ \qquad H^\bullet(\mathcal R_F R_x)\text{ is }u\text{-torsion-free};
+\end{equation}
+\item the strongly convergent PBW spectral sequence
+\begin{equation}\label{eq:chd-e3-pbw-ss}
+ E_1^{p,q}
+ =
+ H^{p+q}\!\left(\operatorname{gr}_F^pR_x\right)
+ \cong
+ H^{p+q}\!\left(\Free^p_{E_3}(W_x[-2])\right)
+ \;\Longrightarrow\;
+ H^{p+q}(R_x);
+\end{equation}
+\item polynomial growth and amplitude bounds: for the conformal-weight
+grading $n$ on $H^q(W_x)$ there are constants $C,d,N_0$ such that
+\begin{equation}\label{eq:chd-e3-pbw-growth}
+ \dim H^q(W_x)_n \le C(1+n)^d,\qquad
+ H^q(W_x)=0\quad(q>N_0),
+\end{equation}
+and the shifted $E_1$ page satisfies the support bound
+\begin{equation}\label{eq:chd-e3-pbw-page-bound}
+ E_1^{p,q}=0 \qquad (p+q\notin S).
+\end{equation}
+\end{enumerate}
+The established Theorem~H proof uses the deformation retract contained
+in $H_H(\cA;S)$. The package above transports an independent
+first-page support calculation through the $E_3$-PBW filtration.
+\end{conjecture}
+
+\begin{lemma}[Spectral-sequence transport of first-page support]%
 \label{lem:chd-e3-rigidity-point}%
-\index{E_3!rigidity at a point}%
-Let $R$ be an $E_3$-algebra in $\Bbbk$-chain complexes with
-$H^0(R) = \Bbbk$ and $H^{<0}(R) = 0$. Assume $R$ is the $E_3$-envelope
-of a graded commutative algebra of finite growth (i.e., $R = U_{E_3}(V)$
-for $V$ a graded vector space with $\dim V_n \le p(n)$ for some
-polynomial $p$). Then $H^\bullet(R)$ is concentrated in degrees
-$\{0, 1, 2\}$.
+\index{E_3!PBW support transport}%
+If Conjecture~\ref{conj:chd-e3-pbw-package} holds at $x$, then
+\[
+ \operatorname{Supp}H^\bullet
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})\subseteq S.
+\]
 \end{lemma}
 
 \begin{proof}
-By $E_3$-Koszul duality (Fresse, \emph{Homotopy of Operads and
-Grothendieck--Teichm\"uller Groups}, volume~II, \S13), the envelope
-$U_{E_3}(V)=\Sym^{\bullet}_{E_3}(V)$ has cohomology computed by the
-$E_3$-Koszul complex; under the bar-weight = cohomological-degree
-normalisation appropriate to Theorem~H (Vol.~I, the
-cohomological-degree/bar-weight coincidence of
-Theorem~\ref*{V1-thm:hochschild-concentration-E1}), Koszul cohomology
-sits in bar-weights $\{0,1,2\}$. The combinatorial core of this
-bound is the Shelton--Yuzvinsky Koszulity of the Orlik--Solomon
-algebra of the braid arrangement $A_{n-1}$ (Shelton--Yuzvinsky,
-\emph{Koszulness of Orlik--Solomon algebras of braid
-arrangements}, J.~LMS 1997); the two routes (operadic
-$E_3$-Koszul and combinatorial OS-Koszul) agree. For $V$ of
-polynomial Hilbert growth the Koszul cohomology inherits polynomial
-growth; exhaustiveness of the bar-weight filtration then kills any
-putative contribution in bar-weight $\ge 3$, giving concentration
-in $\{0,1,2\}$.
+Apply the spectral sequence~\eqref{eq:chd-e3-pbw-ss}. The filtration is
+complete, separated, exhaustive, and bounded below in arity, while
+\eqref{eq:chd-e3-pbw-rees} supplies the $u$-torsion-free Rees lift;
+strong convergence is part of the PBW package. The support bound
+\eqref{eq:chd-e3-pbw-page-bound} gives \(E_1^{p,q}=0\) whenever
+\(p+q\notin S\).  Each subsequent term \(E_{r+1}^{p,q}\) is a
+subquotient of \(E_r^{p,q}\), so the same support condition holds on
+every page and on the abutment. The polynomial-growth estimate
+\eqref{eq:chd-e3-pbw-growth} supplies the finiteness needed for the
+filtered $E_3$ envelope and the local-to-global passage; the
+first-page calculation supplies the support bound.
 \end{proof}
 
-\begin{conjecture}[Concentration from $E_3$-rigidity and chiral-$E_3$-PBW]%
+\begin{remark}[The page-support clause is independent]
+\label{rem:chd-e3-pbw-page-support-independent}
+The support bound \eqref{eq:chd-e3-pbw-page-bound} is a separate
+vanishing assertion.  Polynomial growth controls dimensions and leaves
+the support set undetermined.  For example, take
+$S_0=\{0,1\}$ and consider a first-quadrant page with
+\[
+ E_1^{0,0}=\Bbbk,\qquad
+ E_1^{1,0}=\Bbbk,\qquad
+ E_1^{3,0}=\Bbbk,
+ \qquad
+ E_1^{p,q}=0\ \text{otherwise}.
+\]
+All dimensions are polynomially bounded and the amplitude is finite.
+The cohomological differential on the PBW page has bidegree
+\((r,1-r)\), so it raises total degree by \(1\). The neighboring groups
+in total degrees~\(2\) and~\(4\) vanish, hence the class in
+\(E_1^{3,0}\) survives to the abutment of every strongly convergent
+spectral sequence with this page. Thus a
+polynomial-growth \(E_3\)-envelope can still carry degree-\(3\)
+cohomology. The independent input in
+Conjecture~\ref{conj:chd-e3-pbw-package} is the support statement
+\(E_1^{p,q}=0\) for \(p+q\notin S\). Finite generation, polynomial
+growth, and bounded conformal weight are separate conditions.
+\end{remark}
+
+\begin{conjecture}[Family support transported through filtered
+chiral-$E_3$-PBW]%
 \label{conj:H-concentration-via-E3-rigidity}%
-\phantomsection\label{thm:H-concentration-via-E3-rigidity}%
 \index{Theorem H!consequence of E_3 rigidity}%
-Let $\cA$ be an $E_1$-chiral algebra on $X$ in the Koszul locus with
-Vol.~I PBW collapse. Suppose the derived centres on formal discs admit
-chiral-$E_3$-PBW presentations
+Fix a finite set $S\subset\mathbb Z$.  Let $\cA$ be an $E_1$-chiral
+algebra on $X$ in the Koszul locus with Vol.~I PBW collapse. Suppose
+the derived centres on formal discs admit
+the chiral-$E_3$-PBW package of
+Conjecture~\ref{conj:chd-e3-pbw-package}, compatibly with
+Gelfand--Fuchs--Beilinson--Drinfeld local-to-global. Then the
+first-page support clause, strong convergence, and support-preserving
+descent (Lemma~\ref{lem:chd-e3-rigidity-point}, applied pointwise to
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$) give
 \[
- Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x}) = U_{E_3}(W_x)
+ \operatorname{Supp}\ChirHoch^\bullet(\cA,\cA)\subseteq S.
 \]
-for polynomial-growth generating spaces $W_x$, compatibly with
-Gelfand--Fuchs--Beilinson--Drinfeld local-to-global. Then
-$E_3$-rigidity at the formal disc
-(Lemma~\ref{lem:chd-e3-rigidity-point}, applied pointwise to
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$) implies
-\[
- \ChirHoch^\bullet(\cA, \cA) \;\text{concentrated in degrees}\; \{0, 1, 2\}.
-\]
-The missing input is a chiral-$E_3$-PBW theorem of this derived-centre
-form (see
+The required input is the Rees-flat associated-graded and growth package
+\eqref{eq:chd-e3-pbw-filtered}--\eqref{eq:chd-e3-pbw-page-bound} (see
 Remark~\ref{rem:H-concentration-via-E3-rigidity-type-error-retraction}).
-Theorem~H itself is proved unconditionally via the parallel route
-(Vol.~I, Theorem~\ref*{V1-thm:hochschild-concentration-E1}); the
-$E_3$-rigidity route is not used in that proof.
+Volume~I Theorem~H proves this conclusion from the independent family
+datum $H_H(\cA;S)$. The filtered route transports the same support
+from the independently computed PBW page.
 \end{conjecture}
 
-\begin{remark}[Obstruction to the $E_3$-rigidity proof:
-native-vs-derived type error]%
+\begin{remark}[Typed comparison required by the filtered $E_3$ route]%
 \label{rem:H-concentration-via-E3-rigidity-type-error-retraction}%
 \index{Theorem H!E_3-rigidity route obstruction}%
 \index{native vs derived E_3!type error}%
-Two independent type obstructions prevent a proof of concentration
-from $E_3$-rigidity alone.
-
-First, the implication
+Theorem~\ref{thm:chiral-higher-deligne} places the topologised
+$E_3$-structure on
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$.  Volume~I PBW collapse
+places an $E_1$-chiral envelope structure on $\cA|_{D_x}$. The
+filtered argument therefore requires a third comparison: the
+$E_3$-presentation
 \[
- \cA|_{D_x}\ \text{is an }E_3\text{-algebra}
- \quad\Longleftarrow\quad
- \text{Thm~\ref{thm:chiral-higher-deligne}(1)}
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})
+ \simeq U_{E_3}(W_x)
 \]
-is false. This is the native-vs-derived type error recorded in
-Remark~\ref{rem:chd-native-vs-derived}: the theorem places the mixed
-chiral-topological structure on the derived-centre pair
-$(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$, not on $\cA$ alone. A
-rigidity argument can therefore apply only to
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$, and only after the
-topologised $E_3$ input has been supplied.
-
-Second, chiral PBW collapse (Vol.~I,
-Theorem~\ref*{V1-thm:pbw-koszulness-criterion}) identifies the
-native $E_1$-chiral envelope of the generating space; it does not
-identify $\cA|_{D_x}$ with an $E_3$-envelope. After replacing
-$\cA|_{D_x}$ by its derived centre, no theorem presents
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$ as an $E_3$-envelope of a
-polynomial-growth generating space, and a chiral-$E_3$-PBW theorem of
-this shape is not available in any volume.
-
-Theorem~H is not affected. It is proved unconditionally (subject to
-its stated hypotheses) in Vol.~I,
-Theorem~\ref*{V1-thm:hochschild-concentration-E1}, via chiral PBW
-collapse on the ordered bar plus Shelton--Yuzvinsky Koszulity of the
-pure-braid Orlik--Solomon arrangement. The unsupported claim is only
-that $E_3$-rigidity plus PBW furnishes a second independent
-chain-level proof in the form above. If a chiral-$E_3$-PBW theorem
-closes the route, the two arguments share
-Vol.~I~Theorem~\ref*{V1-thm:pbw-koszulness-criterion} and therefore
-are not fully disjoint; the Orlik--Solomon route
-remains the canonical proof. The obstruction is the native-vs-derived
-type mismatch.
+with associated graded, Rees-flat lift, strongly convergent spectral
+sequence, and first-page support in~$S$.  This is precisely
+Conjecture~\ref{conj:chd-e3-pbw-package}.  Volume~I Theorem~H follows
+by the independent deformation retract in $H_H(\cA;S)$.
 \end{remark}
 
-\begin{remark}[Proof route under
+\begin{remark}[Proof route under the filtered transport
 Conjecture~\ref{conj:H-concentration-via-E3-rigidity}]%
 \label{rem:H-concentration-via-E3-rigidity-proof-route}%
 \index{Theorem H!E_3-rigidity proof route}%
-Assume the chiral-$E_3$-PBW hypothesis. The proof has three steps; each
-removes the type issue isolated in
-Remark~\ref{rem:H-concentration-via-E3-rigidity-type-error-retraction}
-before invoking rigidity.
-
-Step 1: the derived centre is the only possible rigidity input. Fix a
-point $x \in X$ and restrict $\cA$ to the formal disc
-$D_x \subset X$. Thm~\ref{thm:chiral-higher-deligne}(1) gives the
-$E_2$-chiral brace structure on
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$; clause~(2), under the
-two-coloured heptagon hypothesis, gives the mixed $\SCchtop$ datum on
-the pair
-$(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x}),\cA|_{D_x})$; clause~(3),
-under explicit topologisation data, gives the genuine single-colour
-$E_3^{\mathrm{top}}$ input needed by
-Lemma~\ref{lem:chd-e3-rigidity-point}. None of these clauses places
-an $E_3$-structure on $\cA|_{D_x}$ alone
-(Remark~\ref{rem:chd-native-vs-derived}). The relevant rigidity input is
-that $H^0(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x}))$ is a finite
-extension of the unit $\Bbbk$: concretely, by Vol.~I
-Theorem~\ref*{V1-thm:hochschild-concentration-E1}, $H^0$ coincides with
-the (naive) chiral centre of $\cA|_{D_x}$, which is finite-dimensional
-for every standard-landscape family (Heisenberg, affine Kac--Moody at
-non-critical level, Virasoro, principal $\cW_N$, lattice, $\beta\gamma$),
-and reduces to $\Bbbk$ precisely when $\cA$ has trivial naive centre.
-Lemma~\ref{lem:chd-e3-rigidity-point} extends verbatim to the
-finite-dimensional $H^0$ case: the $E_3$-Koszul cohomology is
-still concentrated in bar-weights $\{0,1,2\}$, with $H^0$ replaced
-by the corresponding finite-dimensional commutant. This extended
-form is used in Step 3 below; the narrow Francis~2013 input
-($E_n$-centre of a unital field is the field) only cross-checks
-the unit component, not the rigidity bound itself.
-
-Step 2 (PBW input). PBW gives
-polynomial growth at the derived-centre level. Chiral PBW collapse
-for $\cA$ in the Koszul locus (Vol.~I,
-Theorem~\ref*{V1-thm:pbw-koszulness-criterion}) yields the $E_1$-chiral
-envelope $\cA|_{D_x} = U_{E_1}^{\mathrm{ch}}(V_x)$, not an
-$E_3$-envelope; it does not directly present
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x}) = U_{E_3}(W_x)$ for any
-polynomial-growth $W_x$. The false implication is the conflation of
-the $E_1$-chiral envelope with an $E_3$-envelope (see the Step~2
-clause of
-Remark~\ref{rem:H-concentration-via-E3-rigidity-type-error-retraction}).
-The correct input -- a chiral-$E_3$-PBW theorem on the derived centre
-presenting it as a polynomial-growth $E_3$-envelope -- is not
-established in any volume and is the open closure condition of the
-conjecture.
-
-Step 3. Assuming the chiral-$E_3$-PBW presentation of the derived centre,
-Lemma~\ref{lem:chd-e3-rigidity-point} applies to
-$R := Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$: the hypotheses
-topologised $E_3$-structure (Step~1), finite-dimensional $H^0$, and
-polynomial growth (hypothetical Step~2) hold, and the lemma forces
-concentration in $\{0,1,2\}$ at the formal disc. Globalising over $X$
-by the local-to-global principle of
-Gelfand--Fuchs--Beilinson--Drinfeld (which preserves degree bounds
-because the sheaf $\ChirHoch^\bullet$ is constructible with bounded
-stalks) would yield global concentration.
-
-Range of the argument. Steps~1 and~3 are sound only under the
-topologisation and local-to-global hypotheses stated above; Step~2 is
-the load-bearing open gap. Because Theorem~H
-is independently proved in Vol.~I via
-Theorem~\ref*{V1-thm:hochschild-concentration-E1} (chiral PBW +
-Orlik--Solomon Koszulity), the missing PBW input does not
-affect Theorem~H's unconditional statement; it affects only whether
-$E_3$-rigidity supplies a second independent proof at chain level.
+Fix the finite set~$S$ in
+Conjecture~\ref{conj:chd-e3-pbw-package}.  On a formal disc~$D_x$,
+Theorem~\ref{thm:chiral-higher-deligne} gives the topologised
+$E_3$-structure on
+$R_x=Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x})$.  The conjectural
+filtered presentation gives the spectral sequence
+\eqref{eq:chd-e3-pbw-ss}, whose first page is supported in~$S$.
+Lemma~\ref{lem:chd-e3-rigidity-point} carries this support to
+$H^\bullet(R_x)$.  A support-preserving
+Gelfand--Fuchs--Beilinson--Drinfeld descent then gives
+\[
+ \operatorname{Supp}\ChirHoch^\bullet(\cA,\cA)\subseteq S.
+\]
+Thus the route consists of the topologised $E_3$ structure, the
+filtered PBW presentation, and support-preserving descent.  Volume~I
+Theorem~H reaches the same conclusion through the deformation retract
+in $H_H(\cA;S)$.
 \end{remark}
 
-\begin{remark}[Concentration as a consequence of chiral-$E_3$-PBW]%
+\begin{remark}[Family support as a consequence of chiral-$E_3$-PBW]%
 \label{rem:chd-consequence-not-hypothesis}%
 \index{Theorem H!consequence vs hypothesis}%
 The derived-centre route depends on the chiral-$E_3$-PBW theorem
-of Step~2: any $E_3$-algebra of polynomial growth with finite-dimensional
-$H^0$ has cohomology in $\{0,1,2\}$
-(Lemma~\ref{lem:chd-e3-rigidity-point}); if the derived chiral centre
-of an $E_1$-chiral Koszul algebra could be presented as such an object,
-Theorem~H would follow as a Koszul-dual consequence rather than an
-empirical combinatorial bound. Closing this re-parse requires that
-theorem; the canonical unconditional proof of Theorem~H is
-the parallel chiral-PBW plus Orlik--Solomon Koszulity route in
-Vol.~I.
+of Step~2: the filtered associated-graded identification, Rees-flat
+lift, convergent spectral sequence, polynomial-growth/amplitude bounds,
+and support bound of Conjecture~\ref{conj:chd-e3-pbw-package}.  Such a
+presentation computes the family support~$S$ from the first page.
+The canonical Volume~I route computes the same support from the
+explicit maps and homotopy in $H_H(\cA;S)$.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1018,12 +1261,81 @@ $\cW$-algebras through BRST reduction at a nilpotent orbit. The
 principal/hook-type DS deformation retract gives a chain-level
 comparison between chiral Hochschild complexes.
 
-\begin{theorem}[DS-Hochschild chain-level compatibility with mixed lift]%
+Fix a good grading
+\[
+\fg=\bigoplus_{j\in \frac1q\mathbb Z}\fg_j
+\]
+for \(f\), and choose a homogeneous basis
+\(\{u_\alpha\}\) of \(\fg_{>0}\), with ghosts
+\(\psi_\alpha,\psi_\alpha^*\).  The quantum DS algebra is the degree
+zero cohomology
+\begin{equation}
+\label{eq:ds-brst-w-algebra}
+\cW_k(\fg,f)
+=
+H^0\!\left(V_k(\fg)\widehat\otimes\cF_{\mathrm{gh}},Q_{\mathrm{DS}}\right),
+\end{equation}
+where the BRST charge has KRW form
+\begin{equation}
+\label{eq:ds-brst-charge}
+Q_{\mathrm{DS}}
+=
+\operatorname*{Res}_{z=0}
+\left[
+\sum_{\alpha}
+\bigl(J^{u_\alpha}(z)-\chi(u_\alpha)\bigr)\psi_\alpha^*(z)
+-\frac12
+\sum_{\alpha,\beta,\gamma}
+f_{\alpha\beta}^{\gamma}
+:\psi_\alpha^*(z)\psi_\beta^*(z)\psi_\gamma(z):
++Q_{\mathrm{neut}}(z)
+\right]\,dz .
+\end{equation}
+Here \(Q_{\mathrm{neut}}\) is the standard neutral-fermion term attached
+to the half-integer part of the good grading; it vanishes in the
+integral principal case.  The Hochschild comparison is required at the
+chain level to be a special deformation retract
+\begin{equation}
+\label{eq:ds-hochschild-sdr}
+\left(
+\ChirHoch^\bullet(V_k(\fg),V_k(\fg))\widehat\otimes
+\cF_{\mathrm{gh}},Q_{\mathrm{DS}}
+\right)
+\;\substack{\xrightarrow{\;p\;}\\[-2pt]\xleftarrow[\;i\;]{} }\;
+\ChirHoch^\bullet(\cW_k(\fg,f),\cW_k(\fg,f)),
+\qquad
+Q_{\mathrm{DS}}h+hQ_{\mathrm{DS}}=\mathrm{id}-i\circ p .
+\end{equation}
+
+\begin{theorem}[DS-Hochschild chain-level compatibility with mixed lift;
+\ClaimStatusConditional; licensing tags $\alpha+\beta+\gamma+\delta$ via
+good grading, DS SDR, $\hypAmbientWtCpl$, and mixed lift hypotheses]%
 \label{thm:chd-ds-hochschild}%
 \index{Drinfeld-Sokolov!Hochschild compatibility}%
 Let $\fg$ be a simple Lie algebra, $f \in \fg$ a nilpotent of principal
 or hook type, and $k \ne -h^{\vee}$. Write $\cW_k(\fg, f)$ for the
-corresponding $\cW$-algebra at level $k$. Then at chain level there is
+corresponding $\cW$-algebra at level $k$. Assume:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item a good grading has been fixed; in fractional degree the cover
+ \(z=s^q\) and the \(\mu_q\)-descent datum of
+ Remark~\ref{rem:ds-fractional-good-grading-cover} are supplied;
+\item the DS-Hochschild complex is taken in the completed ambient
+ \(\hypAmbientWtCpl\) and admits the special deformation retract
+ \eqref{eq:ds-hochschild-sdr}, induced from a completed
+ DS bar-coalgebra SDR on the reduced chiral bar coalgebras, with
+ \(p i=\mathrm{id}\), \(ph=hi=h^2=0\), and
+ \(Q_{\mathrm{DS}}h+hQ_{\mathrm{DS}}=\mathrm{id}-i\circ p\);
+\item the chiral Hochschild complex is represented by the completed
+ coderivation model
+ \(\Coder_0(B^{\mathrm{ch}}(-))\), the bar-coalgebra SDR in
+ \textup{(b)} induces the displayed coderivation SDR by transfer, and
+ the HPL tree sums satisfy the bounded-shift/weightwise-convergence
+ estimates in \(\hypAmbientWtCpl\);
+\item for the mixed chiral-topological refinement, the heptagon
+ hypotheses and two-coloured cobar homotopy of
+ Remark~\ref{rem:chd-universality-hypotheses} are supplied.
+\end{enumerate}
+Then at chain level there is
 an $\infty$-quasi-isomorphism of $E_2$-chiral brace algebras (equivalently,
 a quasi-iso on cohomology of the strict Gerstenhaber structures)
 \begin{equation}\label{eq:chd-ds-hh}
@@ -1033,26 +1345,49 @@ a quasi-iso on cohomology of the strict Gerstenhaber structures)
 \end{equation}
 where $H^\bullet_{\mathrm{DS}}$ denotes the DS cohomology of the
 BRST complex with nilpotent reduction along $f$. The quasi-isomorphism
+is the HPL transfer along~\eqref{eq:ds-hochschild-sdr}: for every
+planar rooted tree \(T\) with \(n\) leaves the \(n\)-ary brace is
+\begin{equation}
+\label{eq:ds-hochschild-hpl-brace}
+\mu_{\cW}^{n}
+=
+\sum_{T\in\mathrm{PRT}_n}
+\pm\;
+p\,\mu^V_T(i,\ldots,i;h,\ldots,h).
+\end{equation}
+Equivalently,
+\[
+\ChirHoch^\bullet(\cW_k(\fg,f),\cW_k(\fg,f))
+\simeq
+H^\bullet_{\mathrm{DS}}\!
+\left(\ChirHoch^\bullet(V_k(\fg),V_k(\fg))\right)
+\]
+as \(E_2^{\mathrm{ch}}\)-brace algebras.  The quasi-isomorphism
 is compatible with the mixed chiral-topological extensions of
 Thm~\ref{thm:chiral-higher-deligne}
 (Convention~\ref{conv:chd-e3-chiral-meaning}) after the heptagon
-hypotheses and the two-coloured cobar homotopy of
-Remark~\ref{rem:chd-universality-hypotheses}.
+hypotheses, the two-coloured cobar homotopy of
+Remark~\ref{rem:chd-universality-hypotheses}, and the completed mixed
+analytic estimates.
 \end{theorem}
 
 \begin{proof}
-Four steps: Arakawa, HKR, HPL, intertwining.
+Four steps: DS complex, chiral HKR model, HPL, intertwining.
 
-Step 1: $C_2$-cofiniteness. By Arakawa (Ann.\ Math.\ 2015,
-arXiv:1004.1554), for principal and hook-type $f$ and generic
-$k \ne -h^\vee$, $\cW_k(\fg, f)$ is $C_2$-cofinite. This guarantees
-the HKR identification in Step 2 and convergence in Step 3.
+Step 1: DS complex and retract. Kac--Roan--Wakimoto construct the
+quantum Hamiltonian-reduction BRST complex
+\((V_k(\fg)\widehat\otimes\cF_{\mathrm{gh}},Q_{\mathrm{DS}})\).
+Arakawa's representation-theoretic results identify the relevant
+DS cohomology on the stated principal/hook-type locus after the
+standard finiteness hypotheses are imposed.  The theorem does not use
+the false assertion that every non-critical generic level is
+\(C_2\)-cofinite; the required input is exactly the special
+deformation retract in hypothesis \textup{(b)}.
 
-Step 2: HKR-type identification for each side. The chiral analogue
-of the Hochschild--Kostant--Rosenberg theorem (Calaque--Van den Bergh,
-\emph{Hochschild cohomology and Atiyah classes}, Adv.~Math.\ 2010;
-adapted to the chiral setting by the polyvector presentation of
-$\ChirHoch^\bullet$ on the $C_2$-cofinite locus) gives
+Step 2: chiral HKR/brace model for each side. The chosen chiral
+Hochschild model of hypothesis \textup{(c)}, equivalently the
+polyvector presentation on the locus where the chiral HKR comparison is
+available, gives
 \[
  \ChirHoch^\bullet(\cW_k(\fg, f)) \;\simeq\;
  \Gamma\bigl(\operatorname{Spec}(\cW_k^\flat), \bigwedge^\bullet \cT\bigr)^{\cW}_{\mathrm{chiral}},
@@ -1061,29 +1396,50 @@ where $\cT$ is the tangent complex and the right-hand side uses the
 chiral polyvector sheaf. Analogously for $V_k(\fg)$ on the other side
 of \eqref{eq:chd-ds-hh}.
 
-Step 3: HPL transfer through the DS deformation retract. The DS BRST
-complex $(C^\bullet_{\mathrm{BRST}}(V_k, f), Q_{\mathrm{DS}})$ has an
-explicit strong deformation retract onto $\cW_k(\fg, f)$
-(Feigin-Frenkel, de Boer-Tjin). Let $(i, p, h)$ be the retract data:
-$i : \cW_k \hookrightarrow V_k$, $p: V_k \twoheadrightarrow \cW_k$
-(a splitting of $i$ modulo $Q_{\mathrm{DS}}$-exact), and
-$h: V_k \to V_k[-1]$ the contracting homotopy satisfying
-$ph = 0$, $hi = 0$, $Q_{\mathrm{DS}}h + hQ_{\mathrm{DS}} = \id - ip$.
+Step 3: HPL transfer through the DS coderivation retract. Hochschild
+cochains are not functorial in an algebra map, so
+\eqref{eq:ds-hochschild-sdr} is not obtained by applying
+\(\ChirHoch^\bullet(-,-)\) to the DS algebra retract.  The data in
+hypotheses \textup{(b)}--\textup{(c)} are stronger: a completed
+DS homotopy equivalence of reduced chiral bar coalgebras
+\[
+\barBch(\cW_k(\fg,f))
+\;\rightleftarrows\;
+\barBch(V_k(\fg))\widehat\otimes\cF_{\mathrm{gh}}
+\]
+with homotopy \(h_B\), and the induced transfer on completed
+coderivation complexes
+\[
+\Coder_0(\barBch(\cW_k(\fg,f)))
+\;\rightleftarrows\;
+\Coder_0(\barBch(V_k(\fg))\widehat\otimes\cF_{\mathrm{gh}}).
+\]
+Conjugation by the transferred bar-coalgebra maps and the standard
+coderivation HPL give the displayed Hochschild SDR.  The side
+conditions \(p\circ i=\mathrm{id}\), \(ph=hi=h^2=0\), and
+\(Q_{\mathrm{DS}}h+hQ_{\mathrm{DS}}=\mathrm{id}-i\circ p\) make the
+homological-perturbation theorem applicable in the completed chiral
+brace category.
 
-The homological perturbation lemma (HPL; Crainic, Lambe-Stasheff)
-transfers the $A_\infty$-structure on $V_k(\fg)$ through the retract to
-an $A_\infty$-structure on $\cW_k(\fg, f)$, and the induced map on
-Hochschild cohomology is the qi of \eqref{eq:chd-ds-hh}. The HPL
-transfer applies chain-level because Arakawa's $C_2$-cofiniteness
-ensures the retract data are defined on each conformal-weight stratum
-(no infinite-dimensional pathology in the contracting homotopy).
+The HPL transfer formula is precisely
+\eqref{eq:ds-hochschild-hpl-brace}: internal vertices are decorated by
+the affine Hochschild braces \(\mu^V\), leaves by \(i\), the root by
+\(p\), and internal edges by \(h\).  Finiteness of the HPL sum does
+not come from generic \(C_2\)-cofiniteness.  It comes from the Kazhdan
+and conformal-weight filtrations on the BRST complex, the finite
+dimensionality of the relevant graded pieces, and the bounded-shift
+estimate in hypothesis \textup{(c)}.  On the original direct-sum
+complex one still needs the corresponding Banach or bounded-shift
+estimate; without it the theorem asserts no chain-level direct-sum
+comparison.
 
 Step 4: DS-bar intertwining. The intertwining with bar complexes
 (Vol.~I, Theorem~\ref*{V1-thm:ds-koszul-intertwine}):
 $\Barch(\cW_k(\fg, f)) \simeq H^\bullet_{\mathrm{DS}}(\Barch(V_k(\fg)))$,
-applied levelwise to the Hochschild complex and its bar presentation,
-promotes the Step-3 $\infty$-quasi-isomorphism of brace algebras to
-a quasi-isomorphism of $E_2$-chiral brace algebras (and of strict
+is the source of the bar-coalgebra homotopy equivalence used in
+Step~3.  The coderivation transfer along this equivalence promotes
+the Step-3 $\infty$-quasi-isomorphism of brace algebras to a
+quasi-isomorphism of $E_2$-chiral brace algebras (and of strict
 Gerstenhaber algebras on cohomology). The mixed chiral-topological lift
 to a quasi-isomorphism of $\SCchtop$ bulk-boundary data is obtained via
 Part~(2) of Thm~\ref{thm:chiral-higher-deligne}: the heptagon
@@ -1114,76 +1470,102 @@ appear in the $\cW$-landscape treatment of Vol.~I. Exotic nilpotents
 remain open.
 \end{remark}
 
+\begin{remark}[Fractional good gradings and cover descent]
+\label{rem:ds-fractional-good-grading-cover}
+For a non-principal nilpotent with good grading in
+\(\frac1q\mathbb Z\), the DS HPL transfer is performed first on the
+branched cover \(z=s^q\).  A field of Kazhdan degree \(j/q\) becomes
+integral degree \(j\) on the \(s\)-cover.  The antighost primitive
+\(G'_f\) and stress tensor satisfy
+\[
+T_{\mathrm{DS}}=[Q_{\mathrm{DS}},G'_f]
+\]
+upstairs.  If the transferred braces and \(G'_f\) are \(\mu_q\)-invariant,
+then they descend to the original \(z\)-disc.  This is the mechanism for
+Bershadsky--Polyakov and hook-type cases; without the cover descent
+datum the non-principal chain-level \(\SCchtop\) lift is not asserted.
+\end{remark}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Universal holography at chain level for class M}
 \label{sec:chd-holography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{corollary}[Universal holography for class M in the
-weight-completed ambient]%
+\begin{corollary}[Class-M bulk-centre comparison in the
+weight-completed ambient; \ClaimStatusConditional; licensing tags
+$\beta+\gamma+\delta$]%
 \label{cor:universal-holography-class-M}%
 \index{universal holography!class M weight-completed ambient}%
-For $\cA$ in class M (Virasoro, principal $\cW_N$, hook-type
-$\cW_k(\fg, f)$) at generic level, the derived chiral centre
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ identifies with the bulk algebra
-of the associated 3d HT gauge theory,
+Let $\cA$ be a class-M chiral algebra
+\textup{(}Virasoro, principal $\cW_N$, or verified hook-type
+$\cW_k(\fg,f)$\textup{)} at generic non-critical level.  Assume:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the class-M bar/BRST complexes are taken in the strict
+Mittag--Leffler weight-completed, pro-, or $J$-adic ambient
+\(\hypAmbientWtCpl\);
+\item the DS--Hochschild transport theorem
+\textup{(}Theorem~\ref{thm:chd-ds-hochschild}\textup{)} applies to the
+chosen principal or hook-type reduction, including the required cover
+descent in fractional good gradings;
+\item a 3d HT BV/factorization model has been constructed for
+\(\cA\), and its local bulk observables are identified with the
+derived chiral centre by a bulk--Hochschild comparison map
+\[
+\chi_{\mathrm{HT}}\colon
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+ \longrightarrow
+ \mathcal A_{\mathrm{bulk}}^{\mathrm{3d\,HT}}(\cA);
+\]
+\item for the chain-level mixed chiral-topological refinement, the
+heptagon hypotheses and the two-coloured cobar homotopy of
+Remark~\ref{rem:chd-universality-hypotheses} are supplied.
+\end{enumerate}
+Then \(\chi_{\mathrm{HT}}\) is an equivalence on cohomology as an
+\(E_2\)-chiral/Gerstenhaber algebra,
 \[
  Z^{\mathrm{der}}_{\mathrm{ch}}(\cA) \;\simeq\;
  \mathcal{A}_{\mathrm{bulk}}^{\mathrm{3d\,HT}}(\cA),
 \]
-on cohomology as an $E_2$-chiral/Gerstenhaber algebra. Assuming the
-heptagon hypotheses and the two-coloured cobar homotopy of
-Remark~\ref{rem:chd-universality-hypotheses}, the identification
-refines to a mixed chiral-topological chain-level equivalence in the
-sense of Convention~\ref{conv:chd-e3-chiral-meaning} on the
-\emph{weight-completed} ambient (equivalently, on the pro-object /
-$J$-adic topological ambient of
-Vol.~I~\texttt{thm:mc5-class-m-chain-level-pro-ambient}); on the
-bounded direct-sum ambient $\mathrm{Ch}(\mathrm{Vect})$ the
-chain-level identification is genuinely false, as is already the
-bar-cobar chain-level in that ambient for class M (the shadow
-coefficient $S_4(\mathrm{Vir}_c)=10/[c(5c+22)]\ne 0$ populates
-bar-weight $4$). Combined with chain-level identifications for
-classes G, L, C on the original complex (Vol.~I topologization
-for affine Kac--Moody at non-critical level; Heisenberg and
-$\beta\gamma$ by the Sugawara substitute), this yields 3d HT
-holography uniformly across the Koszul landscape, with class M
-ambient-qualified as stated.
+and, under \textup{(d)}, refines to a mixed chiral-topological
+chain-level equivalence in the sense of
+Convention~\ref{conv:chd-e3-chiral-meaning}. On the bounded
+direct-sum ambient $\mathrm{Ch}(\mathrm{Vect})$ the class-M
+chain-level identification is false: already
+$S_4(\mathrm{Vir}_c)=10/[c(5c+22)]\ne0$ populates bar-weight~$4$.
+The G/L/C classes are governed by their own original-complex
+identifications and are not consequences of the class-M comparison.
 \end{corollary}
 
 \begin{proof}
-The class M chain-level identification is the ambient-qualified
-problem: the direct-sum complex fails, while the weight-completed
-ambient is stable under DS reduction. Using
-Theorem~\ref{thm:chd-ds-hochschild}, we reduce the class M derived
-centre to the DS cohomology of the class L derived centre.
-The class L derived centre is chain-level identified with the 3d HT
-bulk of Chern--Simons by Costello--Francis--Gwilliam,
-\emph{Chern--Simons factorisation algebras and knot polynomials}
-(arXiv:2602.12412, \S4). DS applied to the Chern--Simons bulk
-produces the 3d HT bulk of the $\cW$-theory (Gaiotto--Witten
-Sugawara-like reduction of the Chern--Simons bulk). Chain-level
-equalities at each step compose to chain-level equality on the
-weight-completed ambient, the ambient in which the class-M
-bar-cobar and DS BRST both converge. The mixed chiral-topological
-identification at chain level uses
-Thm~\ref{thm:chiral-higher-deligne}(2) and the chain-level mixed lift
-clause of Thm~\ref{thm:chd-ds-hochschild}; both require the
-two-coloured cobar homotopy of
-Remark~\ref{rem:chd-universality-hypotheses}. The underlying
-$E_2$-chiral/Gerstenhaber identification is the cohomological
-comparison above.
+The direct-sum complex fails in class M, so the comparison is made in
+the ambient of hypothesis \textup{(a)}.  Theorem~\ref{thm:chd-ds-hochschild}
+and hypothesis \textup{(b)} identify the class-M chiral Hochschild
+complex with the DS cohomology of the corresponding affine chiral
+Hochschild complex.  Hypothesis \textup{(c)} is exactly the
+field-theoretic input identifying the resulting derived chiral centre
+with the local bulk observables of the chosen 3d HT model.  Therefore
+\(\chi_{\mathrm{HT}}\) is a cohomological equivalence of
+\(E_2\)-chiral/Gerstenhaber algebras.
+
+For the chain-level statement one also needs hypothesis
+\textup{(d)}.  Clause~(2) of Theorem~\ref{thm:chiral-higher-deligne}
+then supplies the two-coloured \(\SCchtop\) lift, and the mixed-lift
+clause of Theorem~\ref{thm:chd-ds-hochschild} transports it through
+the DS retract.  These operations converge only in the completed
+ambient from \textup{(a)}.  The displayed nonzero Virasoro
+\(S_4\)-coefficient gives the obstruction on the bounded direct-sum
+ambient.
 \end{proof}
 
 \begin{remark}[Consequences for the universal holography part]%
 \label{rem:chd-vol2-part-vi}%
-With Corollary~\ref{cor:universal-holography-class-M} established, the
+When the hypotheses of Corollary~\ref{cor:universal-holography-class-M}
+are supplied, the
 Universal Holography functor
-(Chapter~\ref{ch:thqg-holographic-reconstruction}) is chain-level
-across all four classes in the ambient appropriate to each class:
-classes G, L, C on the original complex; class M on the
-weight-completed / pro-ambient, consistent with MC5. The
-direct-sum complex carries the nonzero class
+(Chapter~\ref{ch:thqg-holographic-reconstruction}) has a class-M
+weight-completed branch compatible with the G/L/C original-complex
+branches.  The
+direct-sum class-M complex carries the nonzero class
 $S_4(\mathrm{Vir}_c)=10/[c(5c+22)]$ in bar-weight~$4$; this is the
 mathematical obstruction forcing the class-M ambient.
 \end{remark}
@@ -1210,7 +1592,9 @@ Stokes/logarithmic-form brace model; Francis 2012
 (\emph{The tangent complex and Hochschild cohomology of $E_n$-rings})
 supplies the chiral Deligne identification at $E_2$ on a curve,
 independent of $\SCchtop$. The missing chain-level datum is
-$h_{\mathrm{oc}}$ in Remark~\ref{rem:chd-universality-hypotheses}.
+the signed tree homotopy \(h_{\mathrm{oc}}^{\mathrm{tree}}\) and the
+vanishing of its obstruction class
+\eqref{eq:chd-oc-obstruction-class}.
 
 \item \textbf{conj:H-concentration-via-E3-rigidity}
 (\S\ref{sec:chd-rigidity}; route through the derived-centre
@@ -1221,28 +1605,31 @@ $E_3$-Koszul duality (Fresse, vol.~II, \S13); (b) chiral PBW
 collapse in the Koszul locus
 (Vol.~I~\ref*{V1-thm:pbw-koszulness-criterion}); (c) Gel'fand--Fuchs
 local-to-global for constructible sheaves of bounded amplitude.
-The proof obligation is a chiral-$E_3$-PBW theorem presenting
-$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA|_{D_x}) = U_{E_3}(W_x)$ for a
-polynomial-growth $W_x$; not established in any volume.
-Shelton--Yuzvinsky 1997 (\emph{Koszulness of Orlik--Solomon algebras
-of braid arrangements}) supplies the canonical proof of concentration
-via $OS(A_{n-1})$-Koszulity in Vol.~I,
-Theorem~\ref*{V1-thm:hochschild-concentration-E1}; Fuks 1986
-(\emph{Cohomology of Infinite Dimensional Lie Algebras}) supplies the
-formal-disc Gel'fand--Fuchs bound.
+The proof obligation is the chiral-$E_3$-PBW package
+of Conjecture~\ref{conj:chd-e3-pbw-package}: filtered presentation,
+associated graded, Rees-flat lift, convergent PBW spectral sequence, polynomial
+growth, amplitude bound, and \(E_1\)-page support in total degrees
+belonging to the chosen set~$S$.  Volume~I reaches the support
+conclusion through the explicit retract in $H_H(\cA;S)$.
 
 \item \textbf{thm:chd-ds-hochschild} (\S\ref{sec:chd-ds}).
 The $E_2$-chiral brace quasi-isomorphism uses:
-(a) Arakawa 2015 $C_2$-cofiniteness
-(Ann.\ Math., arXiv:1004.1554); (b) chiral HKR via polyvector
-presentation on the $C_2$-cofinite locus (Calaque--Van~den~Bergh,
-Adv.~Math.\ 2010, adapted chirally); (c) HPL + de~Boer--Tjin DS retract.
-Kac--Wakimoto 1988 (\emph{Modular invariance representations of affine
-algebras}) supplies an independent DS cohomology characterization of
-$\cW$-characters; Feigin--Frenkel coset duality for
-$\cW_k(\fg) \cong \mathrm{coset}$ supplies a coset-commutant derivation
-of the same Hochschild comparison. The mixed lift uses the same
-two-coloured cobar homotopy $h_{\mathrm{oc}}$.
+(a) the KRW/Arakawa DS BRST complex and its degree-zero cohomology
+statement at non-critical level; (b) the completed bar-coalgebra
+DS SDR and the induced coderivation transfer
+\(\Coder_0(B^{\mathrm{ch}}(-))\); (c) completed HPL with the
+bounded-shift/weightwise-convergence estimate. Chiral HKR or
+polyvector coordinates may identify the resulting coderivation complex
+on smooth loci, but they are not the source of functoriality.
+Kac--Wakimoto 1988 (\emph{Modular invariance representations of
+affine algebras}) supplies an independent DS cohomology
+characterization of $\cW$-characters; Feigin--Frenkel coset duality
+for $\cW_k(\fg) \cong \mathrm{coset}$ supplies a coset-commutant
+check of the same low-degree character shadow, not a replacement for
+the chain-level coderivation SDR. The mixed lift uses the same
+two-coloured cobar homotopy
+\(h_{\mathrm{oc}}^{\mathrm{tree}}\) of
+Definition~\ref{def:chd-two-coloured-cobar-tree-homotopy}.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1263,19 +1650,18 @@ principal and hook-type cases are covered; subregular and minimal
 reduce via cosets (Remark~\ref{rem:chd-nonprincipal-nilpotents}); exotic
 remains open.
 
-\item Polynomial-growth hypothesis in
-Lemma~\ref{lem:chd-e3-rigidity-point}. All standard families (Heisenberg,
-affine KM, Virasoro, $\cW_N$, lattice, $\beta\gamma$) are chirally
-Koszul and satisfy the Hilbert-series growth bound
-(Vol.~I~C19--C21), so \emph{if} the chiral-$E_3$-PBW
-theorem required by
-Conjecture~\ref{conj:H-concentration-via-E3-rigidity} becomes
-available, the route applies across the full standard landscape.
-For hypothetical $\cA$ of super-polynomial growth (outside the
-standard landscape) $E_3$-rigidity need not hold; such $\cA$ are
-outside the range of Theorem~H regardless. Theorem~H itself is
-unconditional on the standard landscape via the parallel
-Orlik--Solomon proof in Vol.~I.
+\item Chiral-$E_3$-PBW package in
+Conjecture~\ref{conj:chd-e3-pbw-package}. Bakalov--De Sole--Kac
+\cite{BDSK21} \textup{(}Theorems~7.4 and~7.2\textup{)} give the bounded
+benchmarks $(2,1,0,\ldots)$ for the rank-one even superboson and
+support $\{0,2,3\}$ for Virasoro; their affine statement retains the
+status of Conjecture~7.5. Each chart calculation uses the
+corresponding bounded-to-chart quasi-isomorphism.  The $E_3$-PBW route
+additionally asks for the filtered derived-centre presentation,
+associated graded~\eqref{eq:chd-e3-pbw-gr}, Rees-flat
+lift~\eqref{eq:chd-e3-pbw-rees}, convergent spectral
+sequence~\eqref{eq:chd-e3-pbw-ss}, and page support
+\eqref{eq:chd-e3-pbw-page-bound}.
 
 \item Associator-free chain-level structure. Chain-level associator
 dependence is not eliminable; the chain-level mixed

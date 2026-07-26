@@ -45,6 +45,11 @@ from celestial_ope_from_shadow import (
     # Celestial soft factors
     soft_order_to_arity,
     arity_to_soft_order,
+    celestial_mellin_transform_profile,
+    soft_residue_dimension,
+    residue_operator_profile,
+    mellin_residue_identity_profile,
+    virasoro_residue_coefficients,
     cross_term_decomposition,
     build_soft_factor,
     CelestialSoftFactor,
@@ -63,8 +68,8 @@ from celestial_ope_from_shadow import (
     # Literature comparison
     pate_raclariu_strominger_leading,
     compare_shadow_vs_prs,
-    # Ward identity counting
-    ward_identity_count,
+    # Ward identity support profile
+    ward_identity_support_profile,
     celestial_soft_factor_table,
 )
 
@@ -106,6 +111,76 @@ class TestSoftOrderArityDictionary:
             soft_order_to_arity(-1)
 
 
+class TestMellinResidueTheorem:
+    """Verify the explicit Mellin residue theorem and conventions."""
+
+    def test_mellin_transform_profile_has_energy_weight(self):
+        profile = celestial_mellin_transform_profile()
+        assert "omega_i^{Delta_i - 1}" in profile["formula"]
+        assert profile["integration_domain"] == (
+            "(0, infinity) for every external energy"
+        )
+
+    def test_soft_residue_dimension_conventions(self):
+        """Reduced PSS, arity, and stress-tensor conventions are distinct."""
+        assert soft_residue_dimension(0, "soft_level") == 1
+        assert soft_residue_dimension(1, "soft_level") == 0
+        assert soft_residue_dimension(2, "soft_level") == -1
+
+        # Arity r has soft level p=r-2, hence reduced pole Delta=3-r.
+        assert soft_residue_dimension(4, "arity") == -1
+
+        # The gravitational stress-tensor convention shifts by +1.
+        assert soft_residue_dimension(4, "stress_tensor") == 0
+
+    def test_residue_operator_profile_is_coderivation_formula(self):
+        profile = residue_operator_profile(5, "A")
+        assert profile["arity"] == 5
+        assert profile["soft_level"] == 3
+        assert "rho_i(pi_1 D_A" in profile["operator_formula"]
+        assert "(s^-1 A)^otimes r" in profile["operator_formula"]
+        assert profile["stage"] == "operator"
+
+    def test_mellin_residue_identity_profile(self):
+        profile = mellin_residue_identity_profile(4, 3)
+        assert profile["soft_level"] == 2
+        assert profile["soft_level_pole"] == -1
+        assert profile["reduced_arity_pole"] == -1
+        assert profile["stress_tensor_pole"] == 0
+        assert "Res_{Delta=1-p}" in profile["soft_index_identity"]
+        assert "Res_{Delta=3-r}" in profile["arity_identity"]
+        assert "sum_{i=1}^n D_{r,i}" in profile["arity_identity"]
+
+    def test_virasoro_residue_coefficients_split_raw_and_soft(self):
+        c = Symbol("c")
+        coeffs = virasoro_residue_coefficients(c)
+        assert coeffs[2]["soft_class"] == c / 2
+        assert coeffs[3]["raw_ordered_bar"] == 2
+        assert coeffs[3]["soft_class"] == 0
+        assert coeffs[3]["status"] == "gauge_trivial"
+        assert simplify(
+            coeffs[4]["soft_class"] - Rational(10, 1) / (c * (5 * c + 22))
+        ) == 0
+        assert simplify(
+            coeffs[5]["soft_class"] + Rational(48, 1) / (c**2 * (5 * c + 22))
+        ) == 0
+
+    def test_manuscript_source_has_residue_theorem(self):
+        root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+        path = os.path.join(
+            root,
+            "chapters",
+            "connections",
+            "soft_graviton_mellin_shadow_bridge_platonic.tex",
+        )
+        with open(path, encoding="utf-8") as handle:
+            text = handle.read()
+        assert "thm:smsb-mellin-residue-coderivation" in text
+        assert r"\Res_{\Delta = 1-p}" in text
+        assert r"\pi_1D_A\big|_{(s^{-1}A)^{\otimes a}}" in text
+        assert "[S_3]_{\\mathrm{soft}}=0" in text
+
+
 class TestVirasiroShadowCoefficients:
     """Verify Virasoro shadow coefficients from the manuscript."""
 
@@ -115,7 +190,7 @@ class TestVirasiroShadowCoefficients:
         assert kappa_virasoro(c) == c / 2
 
     def test_kappa_virasoro_numerical(self):
-        """kappa(Vir_26) = 13 (self-dual point, AP8)."""
+        """kappa(Vir_26) = 13 at the critical-string central charge."""
         assert kappa_virasoro(26) == 13
 
     def test_quartic_contact_formula(self):
@@ -213,26 +288,45 @@ class TestShadowDepthClassification:
         depth = classify_shadow_depth('W_N')
         assert depth.label == 'M'
 
-    def test_ward_count_heisenberg(self):
-        """Heisenberg: 1 Ward identity (leading only)."""
-        data = ward_identity_count('heisenberg')
-        assert data['n_ward_identities'] == 1
+    def test_support_channel_bound_is_not_old_soft_factor_count(self):
+        """The support-channel bound is r_max, not r_max - 1."""
+        finite = {
+            'heisenberg': 2,
+            'affine': 3,
+            'betagamma': 4,
+        }
+        for family, expected_bound in finite.items():
+            depth = classify_shadow_depth(family)
+            assert depth.support_channel_bound == expected_bound
+            assert depth.support_channel_bound == depth.r_max
+            assert depth.support_channel_bound != depth.r_max - 1
 
-    def test_ward_count_affine(self):
-        """Affine: 2 Ward identities (leading + subleading)."""
-        data = ward_identity_count('affine')
-        assert data['n_ward_identities'] == 2
+    def test_ward_support_profile_heisenberg(self):
+        """Heisenberg: quadratic algebraic support channel only."""
+        data = ward_identity_support_profile('heisenberg')
+        assert data['support_channel_bound'] == 2
+        assert data['ward_identity_count'] == 'requires_celestial_comparison'
+        assert data['comparison_required'] is True
 
-    def test_ward_count_betagamma(self):
-        """Beta-gamma: 3 Ward identities."""
-        data = ward_identity_count('betagamma')
-        assert data['n_ward_identities'] == 3
+    def test_ward_support_profile_affine(self):
+        """Affine: finite algebraic support through the cubic channel."""
+        data = ward_identity_support_profile('affine')
+        assert data['support_channel_bound'] == 3
+        assert data['ward_identity_count'] == 'requires_celestial_comparison'
+        assert data['system_type'] == 'finite_support'
 
-    def test_ward_count_virasoro(self):
-        """Virasoro: infinite tower of Ward identities."""
-        data = ward_identity_count('virasoro')
-        assert data['n_ward_identities'] == 'infinity'
-        assert data['system_type'] == 'infinite'
+    def test_ward_support_profile_betagamma(self):
+        """Beta-gamma: finite algebraic support through the quartic channel."""
+        data = ward_identity_support_profile('betagamma')
+        assert data['support_channel_bound'] == 4
+        assert data['ward_identity_count'] == 'requires_celestial_comparison'
+
+    def test_ward_support_profile_virasoro(self):
+        """Virasoro: no finite algebraic support cutoff."""
+        data = ward_identity_support_profile('virasoro')
+        assert data['support_channel_bound'] == 'unbounded'
+        assert data['ward_identity_count'] == 'requires_celestial_comparison'
+        assert data['system_type'] == 'unbounded_support'
 
 
 # =========================================================================
@@ -328,7 +422,7 @@ class TestLimitingCases:
 # =========================================================================
 
 class TestKoszulDuality:
-    """Test Koszul duality c -> 26-c for Virasoro (AP24, AP8)."""
+    """Test the Virasoro line-side comparison c -> 26-c (AP24, AP8)."""
 
     def test_kappa_complementarity(self):
         """kappa(Vir_c) + kappa(Vir_{26-c}) = 13 (NOT 0).
@@ -341,9 +435,9 @@ class TestKoszulDuality:
         assert ksum == 13
 
     def test_quartic_at_self_dual(self):
-        """Q^contact at the self-dual point c = 13.
+        """Q^contact at the comparison fixed point c = 13.
 
-        kappa(Vir_13) = 13/2, Vir_13^! = Vir_13.
+        kappa(Vir_13) = 13/2 and the same-family representative is Vir_13.
         Q^ct(13) = 10/(13*87) = 10/1131.
         """
         Q = quartic_contact_virasoro(13)
@@ -365,11 +459,11 @@ class TestKoszulDuality:
 
 
 # =========================================================================
-# PATH 5: LITERATURE COMPARISON (PRS)
+# PATH 5: LITERATURE COMPARISON (PRSY)
 # =========================================================================
 
 class TestPateRaclariuStrominger:
-    """Compare shadow tower predictions with PRS (2019)."""
+    """Compare shadow tower predictions with PRSY (2019)."""
 
     def test_leading_is_universal(self):
         """The leading OPE coefficient is universal (kappa only).
@@ -400,6 +494,10 @@ class TestPateRaclariuStrominger:
         B_val = data['C_leading_PRS']
         # B(1, 1) = Gamma(1)*Gamma(1)/Gamma(2) = 1*1/1 = 1
         assert simplify(B_val - 1) == 0
+        assert data['has_antiholomorphic_ratio'] is True
+        assert data['central_triple_pole_present'] is False
+        assert data['output_dimension'] == 4
+        assert data['reference'] == 'Pate-Raclariu-Strominger-Yuan 2019, arXiv:1910.07424'
 
 
 # =========================================================================
@@ -535,7 +633,7 @@ class TestShadowMetricRecursion:
         assert S5_recursion < 0 or S5_formula < 0
 
     def test_class_G_terminates(self):
-        """For Heisenberg (class G), shadow tower terminates at r=2.
+        """For Heisenberg (class G), support packet terminates at r=2.
 
         All S_r = 0 for r >= 3.  Heisenberg has alpha = 0 and S_4 = 0,
         so the metric is Q = 4*kappa^2 (a perfect square) and
@@ -883,22 +981,70 @@ class TestCrossCheckSoftOrderArity:
             assert factor.arity == p + 2
             assert factor.arity == r
 
-    def test_dictionary_from_ward_count(self):
-        """Cross-check: n_ward = r_max - 1 from two sources.
+    def test_dictionary_does_not_count_ward_identities_from_depth(self):
+        """Support depth is an arity bound, not a Ward-identity count.
 
         Path 1: From ShadowDepthClass.
-        Path 2: From ward_identity_count function.
+        Path 2: From ward_identity_support_profile function.
         """
         families = {
-            'heisenberg': (2, 1),
-            'affine': (3, 2),
-            'betagamma': (4, 3),
+            'heisenberg': 2,
+            'affine': 3,
+            'betagamma': 4,
         }
-        for family, (r_max, n_ward) in families.items():
+        for family, r_max in families.items():
             depth = classify_shadow_depth(family)
-            ward_data = ward_identity_count(family)
-            # Cross-check: both give the same r_max
+            ward_data = ward_identity_support_profile(family)
+            # Cross-check: both expose the same support bound.
             assert depth.r_max == r_max
-            assert ward_data['n_ward_identities'] == n_ward
-            # Cross-check: n_ward = r_max - 1
-            assert depth.r_max - 1 == n_ward
+            assert ward_data['support_channel_bound'] == r_max
+            # The physical Ward count is deliberately not inferred here.
+            assert ward_data['ward_identity_count'] == 'requires_celestial_comparison'
+
+    def test_sources_do_not_reintroduce_depth_as_soft_factor_count(self):
+        """Guard the manuscript and engine against the retired count rule."""
+        root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+        paths = [
+            os.path.join(root, "compute", "lib", "celestial_ope_from_shadow.py"),
+            os.path.join(
+                root,
+                "chapters",
+                "connections",
+                "thqg_celestial_holography_extensions.tex",
+            ),
+            os.path.join(
+                root,
+                "chapters",
+                "connections",
+                "thqg_soft_graviton_theorems.tex",
+            ),
+        ]
+        text = "\n".join(open(path, encoding="utf-8").read() for path in paths)
+        squashed = " ".join(text.split())
+
+        required = (
+            "The support bound is a finite arity envelope",
+            "ward_identity_count': 'requires_celestial_comparison'",
+            "Class M has no finite celestial support cutoff",
+            "The infinitude is not a consequence of support depth alone",
+            "support depth alone does not count the physical operators",
+            "It is not a count of independent celestial soft factors",
+            "The comparison map, not the support depth alone, decides",
+            "Support channels",
+        )
+        for phrase in required:
+            assert phrase in squashed
+
+        retired = (
+            "# independent celestial soft factors = r_max(A) - 1",
+            "n_ward_identities",
+            "n_celestial_factors",
+            "n_soft_factors",
+            "soft theorem tower is infinite",
+            "contributes a nonzero soft factor",
+            "number of independent OPE coefficients",
+            "The number of independent celestial soft factors is therefore",
+            "\\textbf{\\# cel. factors}",
+        )
+        for phrase in retired:
+            assert phrase not in text

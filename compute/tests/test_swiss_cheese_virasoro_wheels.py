@@ -479,12 +479,12 @@ class TestMkNonvanishing:
         assert cert['nonvanishing'] is True
 
     def test_m3_nonzero_c13(self):
-        """m_3 != 0 at c = 13 (Virasoro self-dual point)."""
+        """m_3 != 0 at c = 13 (line-comparison fixed point)."""
         cert = m3_nonvanishing_certificate(13.0)
         assert cert['nonvanishing'] is True
 
     def test_m4_nonzero_c1(self):
-        """m_4 != 0 at c = 1 (recursive from Stasheff)."""
+        """The arity-4 source for chain-level m_4 is nonzero at c = 1."""
         result = mk_stasheff_recursive_numerical(4, [1.0, 0.5, 0.3], 1.0)
         assert result['nonvanishing'] is True, f"m_4 appears to vanish: {result}"
 
@@ -557,11 +557,12 @@ class TestComparisons:
         p = Poly(lb_k['1'], lam)
         assert p.degree() == 1
 
-    def test_affine_formal(self):
-        """Affine sl_2: A-infinity is formal (m_k = 0 for k >= 3)."""
+    def test_affine_finite_lie_transfer(self):
+        """Affine sl_2 has finite Lie transfer, not Heisenberg formality."""
         result = affine_lambda_bracket_sl2(Symbol('lambda'))
-        assert result['formal'] is True
-        assert result['m3_vanishes'] is True
+        assert result['formal'] is False
+        assert result['m3_vanishes'] is False
+        assert result['m4_and_higher_vanish'] is True
 
     def test_affine_max_pole_2(self):
         """Affine sl_2: max pole order is 2 (Lie bracket has only simple+double pole)."""
@@ -596,23 +597,27 @@ class TestComparisons:
         assert dc['sc_formal'] is False
         assert dc['all_mk_nonzero'] is True
 
-    def test_quartic_pole_determines_nonformality(self):
-        """Algebras with quartic pole are non-formal; without are formal.
+    def test_quartic_pole_determines_infinite_wheel_tower(self):
+        """The quartic pole detects the infinite Virasoro wheel tower.
 
         This is the key structural observation: the fourth-order pole
         creates excess intersection (rem:virasoro-excess-intersection)
         that seeds all higher A-infinity operations.
         """
-        # Formal algebras have max pole <= 2
-        for alg in ['heisenberg', 'affine']:
-            dc = depth_classification(alg)
-            assert dc['max_pole_order'] <= 2
-            assert dc.get('sc_formal', dc.get('sc_formal_on_generators', True)) is True
+        dc_h = depth_classification('heisenberg')
+        assert dc_h['max_pole_order'] <= 2
+        assert dc_h['sc_formal'] is True
 
-        # Non-formal algebra has pole >= 4
+        dc_aff = depth_classification('affine')
+        assert dc_aff['max_pole_order'] <= 2
+        assert dc_aff['sc_formal'] is False
+        assert dc_aff['sc_mk_zero_for_k_geq_4'] is True
+
+        # Infinite wheel tower starts at the quartic pole.
         dc_vir = depth_classification('virasoro')
         assert dc_vir['max_pole_order'] >= 4
         assert dc_vir['sc_formal'] is False
+        assert dc_vir['all_mk_nonzero'] is True
 
 
 # ===================================================================
@@ -808,7 +813,7 @@ class TestSpecificCValues:
         assert abs(sc_c - 8.0 / 3.0) < 1e-14
 
     def test_m3_numerical_c13(self):
-        """m_3 at c = 13 (self-dual): T-coefficient is c-independent."""
+        """m_3 at c = 13 fixed point: T-coefficient is c-independent."""
         cert = m3_nonvanishing_certificate(13.0)
         assert abs(cert['T_coeff'] - 6.0) < 1e-14
 

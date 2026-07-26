@@ -29,7 +29,8 @@ CRITICAL CONVENTIONS (from CLAUDE.md):
 - Curved A_infinity: m_1^2(a) = [m_0, a] (commutator, MINUS sign)
 - Com^! = Lie (NOT coLie)
 - Heisenberg NOT self-dual
-- Virasoro: Vir_c^! = Vir_{26-c}, self-dual at c=13 NOT c=26
+- Virasoro: same-family line-side comparison representative
+  Vir_{26-c}, fixed at c=13 NOT c=26
 - Sugawara: UNDEFINED at critical level k = -h^v
 
 References:
@@ -276,7 +277,7 @@ ALL_FAMILIES = [
 # =========================================================================
 
 def verify_laplace_heisenberg() -> Dict[str, Any]:
-    """Verify: {J_lambda J} = k*lambda -> r(z) = k/z^2.
+    """Verify: {J_lambda J} = k*lambda -> pre-dlog coefficient k/z^2.
 
     The Laplace transform of lambda^1 is 1!/z^2 = 1/z^2.
     So r(z) = k * 1/z^2 = k/z^2.
@@ -440,16 +441,25 @@ def ainfty_sign_m1_squared() -> Dict[str, Any]:
 
 
 def ainfty_sign_m1_m2() -> Dict[str, Any]:
-    """A_infinity relation at arity 2: m_1 m_2 = m_2(m_1 x 1 + 1 x m_1).
+    """A_infinity relation at arity 2 in the desuspended convention.
 
     The Stasheff relation at arity 2 (associahedron K_3):
-      m_1(m_2(a, b)) = m_2(m_1(a), b) + (-1)^{|a|} m_2(a, m_1(b))
+      m_1(m_2(a, b)) + m_2(m_1(a), b)
+        + (-1)^{|a|} m_2(a, m_1(b)) = 0
 
-    This says m_2 is a chain map (a graded derivation of m_1).
+    Equivalently, moving the input-differential terms to the other side,
+    m_1(m_2(a,b)) = -m_2(m_1(a), b) - (-1)^{|a|}m_2(a,m_1(b)).
     """
     return {
-        'relation': 'm_1(m_2(a,b)) = m_2(m_1(a), b) + (-1)^{|a|} m_2(a, m_1(b))',
-        'sign': '(-1)^{|a|} on the second term (Koszul sign rule)',
+        'relation': (
+            'm_1(m_2(a,b)) + m_2(m_1(a), b) '
+            '+ (-1)^{|a|} m_2(a, m_1(b)) = 0'
+        ),
+        'equivalent_moved_form': (
+            'm_1(m_2(a,b)) = -m_2(m_1(a), b) '
+            '- (-1)^{|a|} m_2(a, m_1(b))'
+        ),
+        'sign': '(-1)^{|a|} on the third sum-zero term (Koszul sign rule)',
         'geometric_source': 'K_3 = interval, two boundary faces',
     }
 
@@ -749,7 +759,7 @@ def koszul_dual_comparison_table() -> Dict[str, Dict[str, Any]]:
     # Heisenberg
     results['Heisenberg'] = {
         'A': 'H_k',
-        'A_dual': 'Sym^ch(V*) (NOT H_{-k})',
+        'A_dual': 'curved Sym^ch(V*[1]) (NOT H_{-k})',
         'c_sum': 1 + 1,  # c=1 for both
         'kappa_sum': 0,
         'self_dual': False,
@@ -763,8 +773,8 @@ def koszul_dual_comparison_table() -> Dict[str, Dict[str, Any]]:
         'A_dual': 'Vir_{26-c}',
         'c_sum': 26,  # c + (26-c) = 26
         'kappa_sum': 13,  # c/2 + (26-c)/2 = 13
-        'self_dual_at': 13,  # c = 26-c => c=13
-        'NOT_self_dual_at_26': True,  # AP8 compliance
+        'comparison_fixed_at': 13,  # c = 26-c => c=13
+        'NOT_fixed_at_26': True,  # AP8 compliance
     }
 
     # Affine sl_2

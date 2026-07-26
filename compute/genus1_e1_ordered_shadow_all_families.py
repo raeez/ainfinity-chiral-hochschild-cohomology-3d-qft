@@ -166,7 +166,7 @@ def compute_heisenberg():
     print(f"      (pre-d-log), r = k/z^2 -> k*wp(z), giving EVEN powers with G_4.")
 
     print(f"\n  (5) Genus-1 shadow coefficients: alpha_n^(1) = 0 for all n")
-    print(f"      (Class L: m_k = 0 for k >= 3, no shadow obstruction tower)")
+    print(f"      (Class G: the bracket is central and no Lie transfer occurs.)")
 
     # Numerical check
     r_num = genus1_intersection_numerical(k_val=1, z_val=0.01, tau_val=1j)
@@ -216,7 +216,7 @@ def compute_affine_sl2():
             print(f"      B-cycle monodromy: {data['sector_I']['B_cycle_monodromy']}")
 
             print(f"\n  (5) Genus-1 shadow coefficients: alpha_n^(1) = 0")
-            print(f"      (Class L: all higher operations vanish)")
+            print(f"      (Class L: no Virasoro wheel tower beyond the finite Lie layer)")
 
             return data
         except Exception as e:
@@ -239,7 +239,8 @@ def compute_affine_sl2():
     print(f"      KZB connection: nabla_i = d_{z_i} - (1/(k+2))*Omega*zeta(z_ij|tau)")
     print(f"      Quantum group: U_q(sl_2) with q = exp(pi*i/(k+2))")
     print(f"      Elliptic quantum group: E_{{q,p}}(sl_2) of Felder (1994)")
-    print(f"\n  (5) alpha_n^(1) = 0 (class L, no shadow obstruction tower)")
+    print(f"\n  (5) alpha_n^(1) = 0 beyond the finite Lie cubic layer")
+    print(f"      (Class L has no Virasoro wheel obstruction tower.)")
 
     return None
 
@@ -477,13 +478,13 @@ def print_comparison_table():
     print(f"\n\n  ENTANGLEMENT vs SHADOW CLASS (orthogonal axes):")
     print(f"    {'Family':<15} {'Class':<6} {'Entangled':<12} {'c_0':<20}")
     print(f"    {'-'*55}")
-    print(f"    {'H_k':<15} {'L':<6} {'NO':<12} {'0 (abelian)':<20}")
+    print(f"    {'H_k':<15} {'G':<6} {'NO':<12} {'0 (abelian)':<20}")
     print(f"    {'V_k(sl_2)':<15} {'L':<6} {'YES':<12} {'Lie bracket':<20}")
     print(f"    {'Vir_c':<15} {'M':<6} {'YES':<12} {'dT':<20}")
     print(f"    {'W_3(c)':<15} {'M':<6} {'YES':<12} {'composite':<20}")
     print(f"    {'bg':<15} {'C':<6} {'YES':<12} {'1 (identity)':<20}")
     print(f"\n    Entanglement is ORTHOGONAL to shadow class:")
-    print(f"    Both H_k and V_k(sl_2) are class L, but only V_k is entangled.")
+    print(f"    H_k is class G, while V_k(sl_2) is class L and entangled.")
     print(f"    Both Vir and W_3 are class M, but entanglement character differs")
     print(f"    (single-channel vs multi-channel).")
 
@@ -530,10 +531,10 @@ def genus1_shadow_corrections():
     No shadow obstruction tower to correct.
 
   CLASS L (affine Kac-Moody, double pole max):
-    m_2 != 0 but m_k = 0 for k >= 3.
-    alpha_n^(1) = 0 for all n >= 1.
-    The genus-1 r-matrix modifies m_2 but there is no higher shadow obstruction tower.
-    The Yangian Y_hbar(g) structure is undeformed at genus 1.
+    The Lie bracket gives a finite cubic transfer, but no Virasoro wheel tower.
+    The genuinely new operations vanish for k >= 4.
+    The genus-1 r-matrix changes the elliptic propagator, not the Lie Jacobi law.
+    The Yangian Y_hbar(g) keeps its RTT relations at genus 1.
 
   CLASS C (betagamma, contact/quartic depth):
     Shadow terminates at finite depth.

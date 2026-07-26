@@ -389,7 +389,8 @@ confirms~\eqref{eq:vir-m3} in the transferred BV complex
  its derivatives $\partial T$, $\partial^2 T$, and the
  $\lambda$-polynomial degrees sum to~$4$ in every term,
  consistent with $|m_3| = 1$ in the bar complex
- (the desuspension shifts the degree by~$+1$ per input beyond the first).
+ (the induced bar-coderivation component has degree~$+1$; the
+ desuspension itself lowers cohomological degree by~$1$).
 \item \emph{Ordered vs symmetric symmetry.} The operation $m_3$
  on the ordered bar complex $B^{\mathrm{ord}}$ is \emph{not}
  symmetric under reversal of inputs. Under the exchange
@@ -429,67 +430,128 @@ Define the generating series
 \mathcal{M}_{\text{Vir}}(T; \lambda_1, \ldots, \lambda_{k-1}) = \sum_{k=1}^\infty \frac{1}{k!} m_k(T^{\otimes k})(\lambda_1, \ldots, \lambda_{k-1}).
 \end{equation}
 
-\begin{theorem}[Recursive structure of Virasoro $A_\infty$ operations]
+\begin{theorem}[Virasoro minimal transfer and BV recursion]
 \label{thm:vir-recursive}
 Assume that the Khan--Zeng Virasoro realization satisfies the KZ
 analytic SDR package of
 Assumption~\textup{\ref{assum:kz-analytic-sdr-package}}.
-The generating function $\mathcal{M}_{\text{Vir}}$ satisfies a functional equation:
+Let $C_{\mathrm{Vir}}$ be the finite-jet BV--BRST complex and put
+$H=H^\bullet(C_{\mathrm{Vir}},Q)$. Choose an SDR
+\[
+(H,0)\xrightarrow{\ i\ } (C_{\mathrm{Vir}},Q)
+\xrightarrow{\ p\ }(H,0),
+\qquad
+Qh+hQ=1-ip,
+\]
+with $pi=1_H$, $ph=0$, $hi=0$, and $h^2=0$. Let
+$\mu=m_2$ be the binary Virasoro OPE operation. Then, for $n\ge2$,
 \begin{equation}
-\mathcal{M}_{\text{Vir}} = Q_{\text{class}} \mathcal{M}_{\text{Vir}} + \frac{1}{2} \{\mathcal{M}_{\text{Vir}}, \mathcal{M}_{\text{Vir}}\}_\lambda + \mathcal{O}(\hbar),
+\label{eq:vir-hpl-transfer}
+m_n^{\min}(x_1,\ldots,x_n)
+\;=\;
+\sum_{\tau\in \mathrm{PRT}_n}
+(-1)^{\epsilon(\tau;x)}
+p\,\mu_\tau(i x_1,\ldots,i x_n;h,\ldots,h),
 \end{equation}
-where $Q_{\text{class}}$ is the classical BRST operator and the curly bracket is the Poisson $\lambda$-bracket. This is the \emph{master equation} for deformations of the Virasoro PVA.
+where $\mathrm{PRT}_n$ is the set of planar rooted binary trees with
+$n$ leaves, $\mu_\tau$ decorates every internal vertex by $\mu$, and
+each internal edge by $h$. If $A_w$ is the positive conformal-weight
+complement and $G_0$ is an antighost with $[Q,G_0]=L_0$, the contracting
+homotopy may be chosen weightwise as
+\begin{equation}
+\label{eq:vir-hpl-g0-over-weight}
+h|_{A_w}=w^{-1}G_0,\qquad w>0.
+\end{equation}
+The term $n=2$ is $p\mu(i-,i-)$, the term $n=3$ is the binary-tree
+formula preceding~\eqref{eq:vir-m3}, and it gives
+\eqref{eq:vir-m3} with the sign convention used there. The generating
+function $\mathcal{M}_{\text{Vir}}$ satisfies the BV/Maurer--Cartan
+equation
+\begin{equation}
+Q_{\text{class}} \mathcal{M}_{\text{Vir}} + \frac{1}{2} \{\mathcal{M}_{\text{Vir}}, \mathcal{M}_{\text{Vir}}\}_\lambda + \mathcal{O}(\hbar)=0,
+\end{equation}
+where $Q_{\text{class}}$ is the classical BRST operator and the curly
+bracket is the Poisson $\lambda$-bracket. The formula is finite on each
+finite weight quotient. For the class~$\mathbf{M}$ inverse system, the
+chain-level statement is taken in the weight-completed/pro ambient
+$\hypAmbientWtCpl$.
 \end{theorem}
 
 \begin{proof}
-Under Assumption~\ref{assum:kz-analytic-sdr-package}, the finite-jet
-BV quotients satisfy the quantum master equation
-$\tfrac{1}{2}\{S_{\mathrm{BV}}, S_{\mathrm{BV}}\}_{\mathrm{BV}}
-+ \hbar\Delta S_{\mathrm{BV}} = 0$ and are compatible under
-truncation. The effective action
-$S_{\mathrm{eff}} = \sum_k \frac{1}{k!} S_k$ encodes the operations
-$m_k$. Identifying
-$\mathcal{M}_{\mathrm{Vir}} = S_{\mathrm{eff}}|_{T\text{-sector}}$,
-the master equation at degree $n$ reads:
-\[
-Q_{\mathrm{class}}\, m_n + \sum_{\substack{i+j=n+1\\i,j\ge 2}} \sum_{s} (-1)^{\epsilon(s,j)} m_i(\ldots, m_j(\ldots), \ldots) + \hbar\,(\text{1-loop contribution to } m_n) = 0.
-\]
-At classical level ($\hbar = 0$), this is the Maurer--Cartan equation for the $\lambda$-bracket: $Q_{\mathrm{class}} m_n^{(0)} + \frac{1}{2}\{m_{n-1}^{(0)}, m_{n-1}^{(0)}\}_\lambda = 0$, encoding the iterative construction of tree-level operations from lower-degree ones. The $\frac{1}{2}\{\cdot, \cdot\}_\lambda$ term comes from the two ways to split $n$ inputs into two groups and compose via $m_2$.
+The KZ analytic SDR package supplies compatible finite-jet BV quotients,
+an inclusion of cohomology representatives, a projection to cohomology,
+and a contracting homotopy satisfying the displayed side conditions. The
+homological perturbation lemma for a dg algebra transfers the binary
+product $\mu$ along this SDR. Since the source operation is binary, the
+$n$-ary transferred operation is the signed sum over planar rooted
+binary trees, with $i$ on leaves, $p$ at the root, $\mu$ on vertices, and
+$h$ on internal edges. This is exactly~\eqref{eq:vir-hpl-transfer}.
 
-At 1-loop ($\hbar^1$), the BV Laplacian $\Delta$ contributes by contracting a pair of fields within a single vertex, producing the $\mathcal{O}(\hbar)$ correction. For Virasoro, this is the ghost loop $\langle\mu\mu\rangle$ producing the central charge shift (Theorem~\ref{thm:central-charge-shift}).
+On a positive conformal-weight summand $A_w$, the relation
+$[Q,G_0]=L_0$ gives
+$Q(w^{-1}G_0)+w^{-1}G_0Q=1$ on the acyclic complement of
+$iH$. Thus $h=w^{-1}G_0$ gives $Qh+hQ=1-ip$ after adding the
+cohomology projection. The side conditions are obtained by the standard
+normalization of the contraction.
 
-The functional equation is thus the component-by-component restatement of the BV master equation, with the Poisson $\lambda$-bracket $\{\cdot, \cdot\}_\lambda$ encoding the classical part and $\mathcal{O}(\hbar)$ the quantum corrections.
+For $n=3$, the two elements of $\mathrm{PRT}_3$ give
+$-p[\mu(h\mu(i-,i-),i-)+\mu(i-,h\mu(i-,i-))]$, the formula displayed
+above~\eqref{eq:vir-m3}; evaluating it on three Virasoro generators
+under the wheel-residue hypothesis gives~\eqref{eq:vir-m3}. The
+transferred operations satisfy the Stasheff identities. After packaging
+the operations in $\mathcal M_{\mathrm{Vir}}$, these identities are the
+classical Maurer--Cartan equation; the one-loop BV Laplacian contributes
+the $\mathcal O(\hbar)$ term and, in the Virasoro sector, the central
+charge shift of Theorem~\ref{thm:central-charge-shift}. Finiteness on
+finite weight quotients is immediate from the finite tree set
+$\mathrm{PRT}_n$; the class~$\mathbf M$ limit keeps all arities and
+therefore belongs to the completed/pro ambient.
 \end{proof}
 
-\subsubsection{Spectral $r$-Matrix}
+\subsubsection{Spectral Kernels}
 
-The spectral $r$-matrix for Virasoro is a two-tensor encoding the Poisson structure in spectral parameters.
+The Virasoro bracket determines a divided-power coefficient kernel, a
+Laplace kernel, and a collision-residue kernel.
 
-\begin{definition}[Virasoro Spectral $r$-Matrix]
+\begin{definition}[Virasoro PVA kernels]
 \label{def:vir-r-matrix}
-The classical $r$-matrix is
+The divided-power coefficient kernel is
 \begin{equation}
-r^{\text{Vir}}(\lambda, \mu) = \sum_{n=1}^3 \frac{r_n}{\lambda^n} \otimes \frac{1}{\mu},
+K^{\mathrm{coeff},\text{Vir}}(u)
+=
+\frac{(\partial T)\otimes \mathbf{1}}{u}
++ \frac{2T\otimes \mathbf{1}}{u^2}
++ \frac{(c/12)\,\mathbf{1}\otimes\mathbf{1}}{u^4}.
 \end{equation}
-where
-\begin{align}
-r_3 &= \frac{c}{12} \, \mathbf{1} \otimes \mathbf{1},\\
-r_2 &= T \otimes \mathbf{1} + \mathbf{1} \otimes T,\\
-r_1 &= \partial(T \otimes \mathbf{1}) = (\partial T) \otimes \mathbf{1}.
-\end{align}
+The Laplace kernel is
+\begin{equation}
+K^{L,\text{Vir}}(z)
+=
+\frac{(\partial T)\otimes \mathbf{1}}{z}
++ \frac{2T\otimes \mathbf{1}}{z^2}
++ \frac{(c/2)\,\mathbf{1}\otimes\mathbf{1}}{z^4}.
+\end{equation}
+The collision residue is
+\begin{equation}
+K^{\mathrm{coll},\text{Vir}}(z)
+=
+\frac{2T\otimes\mathbf{1}}{z}
++ \frac{(c/2)\,\mathbf{1}\otimes\mathbf{1}}{z^3}.
+\end{equation}
 \end{definition}
 
-The $r$-matrix satisfies the \emph{classical Yang--Baxter equation} (CYBE):
+The kernel satisfies the Virasoro PVA Jacobi identity:
 \begin{equation}
 \label{eq:vir-CYBE}
-[r^{12}(\lambda_1-\lambda_2), r^{13}(\lambda_1-\lambda_3)] + [r^{12}(\lambda_1-\lambda_2), r^{23}(\lambda_2-\lambda_3)] + [r^{13}(\lambda_1-\lambda_3), r^{23}(\lambda_2-\lambda_3)] = 0,
+\{T_\lambda\{T_\mu T\}\}
+-\{T_\mu\{T_\lambda T\}\}
+-\{\{T_\lambda T\}_{\lambda+\mu}T\}
+\;=\;0.
 \end{equation}
-which follows from the Jacobi identity for the Virasoro $\lambda$-bracket.
 
-\begin{computation}[Virasoro CYBE verification]
+\begin{computation}[Virasoro PVA Jacobi verification]
 \label{comp:vir-CYBE}
-The classical Yang--Baxter equation~\eqref{eq:vir-CYBE}
-for the Virasoro Laplace kernel takes, in the spectral-parameter form
+The Virasoro Laplace kernel takes, in the spectral-parameter form
 (Proposition~\ref{prop:field-theory-r}), the input
 \[
 r^L(z)
@@ -502,49 +564,38 @@ The collision residue $r^{\mathrm{coll}}(z) = (c/2)/z^3\,
 \mathbf{1}\otimes\mathbf{1} + 2T/z\otimes\mathbf{1}$ has pole
 orders one lower, as in the Volume~I discussion of the three related
 kernels (OPE, Laplace kernel, and collision residue).
-Since the Virasoro PVA has a single generator~$T$, the $r$-matrix
-acts on $V \otimes V$ with $V = \C\langle T \rangle$.
-For the CYBE with three copies $V_1 \otimes V_2 \otimes V_3$ and
-spectral parameters $u, v$,
-\[
-[r^{12}(u),\, r^{13}(u+v)]
-+ [r^{12}(u),\, r^{23}(v)]
-+ [r^{13}(u+v),\, r^{23}(v)]
-= 0.
-\]
 The central term $\frac{c}{2z^4}\,\mathbf{1}\otimes\mathbf{1}$
-commutes with everything, so it drops out of all brackets.
+commutes with every field insertion.
 Explicitly, the Jacobi identity
 $\{T_\lambda\{T_\mu T\}\} - \{T_\mu\{T_\lambda T\}\}
 = \{\{T_\lambda T\}_{\lambda+\mu} T\}$
 becomes, after Laplace transform in both $\lambda$ and $\mu$,
-exactly the CYBE for $r(z)$. This is the standard
-correspondence between the PVA Jacobi identity and the CYBE
-established in Proposition~\ref{prop:field-theory-r}. Thus the
-Virasoro kernel is a specialization of the general Jacobi-to-CYBE
-mechanism; no additional commutator-vanishing argument is needed.
+the spectral form of the same PVA Jacobiator. An ordinary
+non-dynamical CYBE is obtained only after passing to a constant
+collision tensor on a specified quantization surface.
 \end{computation}
 
 \medskip
 \noindent\emph{Quantization.}
-The quantized $R$-matrix admits a
-perturbative expansion in $\hbar$ (the inverse level):
+A chosen quantization surface has a perturbative expansion in
+$\hbar$ whose first-order term is the selected spectral kernel:
 \begin{equation}
 \label{eq:vir-R-expansion}
 R^{\text{Vir}}(\lambda, \mu; \hbar)
 = \mathbf{1} \otimes \mathbf{1}
- + \hbar\, r^{\text{Vir}}(\lambda,\mu)
- + \hbar^2 \Bigl[\tfrac{1}{2}\, r^{\text{Vir}} \cdot r^{\text{Vir}}
+ + \hbar\, K^{L,\text{Vir}}(\lambda,\mu)
+ + \hbar^2 \Bigl[\tfrac{1}{2}\, K^{L,\text{Vir}} \cdot K^{L,\text{Vir}}
  + \delta r_{\text{loop}}\Bigr]
  + \mathcal{O}(\hbar^3),
 \end{equation}
 where the $\hbar^2$ coefficient has two contributions:
 \begin{itemize}
 \item The \emph{tree-level iteration}
-$\tfrac{1}{2}\,r^{\text{Vir}} \cdot r^{\text{Vir}}$, which is
+$\tfrac{1}{2}\,K^{L,\text{Vir}} \cdot K^{L,\text{Vir}}$, which is
 the composition of two classical exchanges (the ``$r^2/2$''
 term required by the quantum Yang--Baxter equation at order
-$\hbar^2$ if $r$ alone satisfies the CYBE);
+$\hbar^2$ when the chosen first-order tensor satisfies the relevant
+classical equation);
 \item The \emph{one-loop correction} $\delta r_{\text{loop}}$,
 arising from the self-energy of the Virasoro propagator
 $\langle T\mu \rangle$ through the ghost loop.
@@ -575,8 +626,8 @@ $c$ to the quantum value $c - 26$, or equivalently shifts by
 $\Delta c = -26$. In the BV-BRST framework, the shift arises
 because the ghost determinant contributes $c_{\text{gh}} = -26$,
 so the total quantum central charge is $c_{\text{total}} = c + c_{\text{gh}} = c - 26$.
-The self-dual point $c = 13$ (where
-$\mathrm{Vir}_c^! = \mathrm{Vir}_{26-c}$ equals $\mathrm{Vir}_c$)
+The same-family fixed point $c = 13$ (where the strict comparison
+model $\mathrm{Vir}_{26-c}$ equals $\mathrm{Vir}_c$)
 is precisely where the tree-level and one-loop contributions balance:
 $c_{\text{total}} = c - 26 = -13 = -(26 - c)$.
 
@@ -618,26 +669,15 @@ where $\circ_i$ denotes operadic composition at the $i$-th input.
 \label{prop:vir-hochschild}
 Assume the Khan--Zeng Virasoro realization satisfies
 Theorem~\ref{thm:physics-bridge}.
-The chiral Hochschild cohomology $HH^\bullet_{\text{ch}}(\text{Vir}_c)$ is isomorphic
-to the space of infinitesimal deformations of the Virasoro $A_\infty$ structure on a
-smooth curve. By Vol~I Theorem~H (polynomial growth, concentration on a smooth curve,
-at generic level/charge; the critical locus $c_{\mathrm{crit}}$ analogous to $k = -h^\vee$
-is excluded because $\dim \ChirHoch^0$ can be infinite there, see Vol~I
-Remark~\ref*{rem:critical-level-lie-vs-chirhoch}),
-it is concentrated in cohomological degrees $\{0,1,2\}$. At generic central charge $c \neq 0$:
-\begin{itemize}
-\item $HH^0_{\text{ch}}(\text{Vir}_c) \cong \C$ (the vacuum / center);
-\item $HH^1_{\text{ch}}(\text{Vir}_c) = 0$ (all derivations are inner);
-\item $HH^2_{\text{ch}}(\text{Vir}_c) \cong \C$, with generator $\Theta_c$ corresponding
- to the central-charge deformation $c \mapsto c + \epsilon$;
-\item $HH^n_{\text{ch}}(\text{Vir}_c) = 0$ for $n \geq 3$.
-\end{itemize}
-\textbf{Caution.} This is NOT the Gel'fand--Fuchs cohomology of $\mathrm{Diff}(S^1)$,
-which is infinite-dimensional. The chiral Hochschild cohomology lives on a one-dimensional
-algebraic curve and is bounded by Vol~I Theorem~H; the Hilbert series
-$P_{\text{Vir}_c}(t) = 1 + t^2$ is a polynomial of degree~$2$. ``Polynomial growth''
-refers to the Hilbert series being a polynomial, not to $HH^\bullet$ being a polynomial
-ring on $\Theta$: the cup product $\Theta_c \smile \Theta_c$ vanishes in $HH^4 = 0$.
+The chiral Hochschild complex $C^\bullet_{\mathrm{ch}}(\mathrm{Vir}_c,
+\mathrm{Vir}_c)$ is the derived centre controlling Virasoro
+deformations on the curve chart.  Bakalov--De Sole--Kac \cite{BDSK21} compute the
+bounded vertex cohomology as one-dimensional in degrees
+$\{0,2,3\}$ and zero in the remaining nonnegative degrees
+\cite[Theorem~7.2]{BDSK21}.  A bounded-to-chart quasi-isomorphism
+$\chi^{\mathrm{bd}}_{\mathrm{Vir}_c}$ transports this dimension vector
+to the curve chart.  The Gelfand--Fuchs cohomology of
+$\mathrm{Diff}(S^1)$ is a separate continuous Lie-algebra functor.
 \end{proposition}
 
 \begin{remark}[$E_N$ level reached by Virasoro]
@@ -674,11 +714,12 @@ following levels:
 
 \item $\Ethree$-topological
  (Definition~\ref{def:E3-topological-algebra}):
- \textbf{proved}. The 3d HT theory exists
+ \textbf{conditional on \(\hypDSBRST\)}. The 3d HT theory exists
  (Costello--Gaiotto) and the conformal vector exists
- (tautologically); the BRST identity
- $T_{\mathrm{DS}} = [Q_{\mathrm{CS}}, G']$ on
- $Q_{\mathrm{CS}}$-cohomology is established by
+ (tautologically); the remaining input is the normalised
+ cohomological identity
+ $T_{\mathrm{DS}} = [Q_{\mathrm{DS}}, G'_{\mathrm{DS}}]$ on
+ $Q_{\mathrm{DS}}$-cohomology in
  Theorem~\ref{thm:E3-topological-DS}.
 \end{enumerate}
 Shadow class: $\mathbf{M}$ (quartic pole in the $T$-$T$

@@ -1,8 +1,8 @@
-r"""Holographic computation engine: the holographic modular Koszul datum H(T).
+r"""Holographic computation engine: the holographic modular comparison datum H(T).
 
 Implements the six-fold holographic datum
 
-    H(T) = (A, A!, C, r(z), Theta_A, nabla^hol)
+    H(T) = (A, A^{!_{\mathrm{line}}}, C, r(z), Theta_A, nabla^hol)
 
 that packages the complete HT (holomorphic-topological) holographic system
 into a single modular MC problem.
@@ -11,15 +11,16 @@ PRINCIPAL OBJECTS:
 
 1. **Holographic datum H(T)**: The six components
    - A: boundary chiral algebra
-   - A!: Koszul dual (Feigin-Frenkel dual for affine type, c -> 26-c for
-     Virasoro, c -> 100-c for W_3)
-   - C: coupling / line category (= A!-mod)
+   - A^{!_line}: comparison representative for the line-side package
+     (Feigin-Frenkel dual for affine type, strict same-family c -> 26-c
+     for Virasoro, c -> 100-c for W_3)
+   - C: coupling / line category (modules over the line-side representative)
    - r(z) = Res^coll_{0,2}(Theta_A): the binary genus-0 shadow
    - Theta_A: the full MC element (bar-intrinsic, thm:mc2-bar-intrinsic)
    - nabla^hol_{g,n} = d - Sh_{g,n}(Theta_A): the holographic connection
 
 2. **Standard holographic data**: Construct H(T) for:
-   - Free scalar:  H(free) = (H_k, Sym^ch(V*), ...)
+   - Free scalar:  H(free) = (H_k, curved Sym^ch(V*[1]), ...)
    - Chern-Simons: H(CS)   = (V_k(g), V_{-k-2h^v}(g), ...)
    - 3d N=4:       H(N=4)  = (betagamma, (betagamma)!, ...)
    - Virasoro:     H(Vir)  = (Vir_c, Vir_{26-c}, ...)
@@ -43,8 +44,11 @@ PRINCIPAL OBJECTS:
 CRITICAL CONVENTIONS (from CLAUDE.md):
 - Grading: COHOMOLOGICAL (|d| = +1)
 - Bar: DESUSPENSION (s^{-1})
-- Heisenberg NOT self-dual. H_k^! = Sym^ch(V*) != H_{-k}
-- Virasoro: Vir_c^! = Vir_{26-c}, self-dual at c=13 NOT c=26
+- Heisenberg NOT self-dual. For k != 0, H_k^! is the curved
+  second-kind Sym^ch(V*[1]) branch, not H_{-k}; uncurved Sym^ch(V*) is
+  only the k=0/associated-graded shadow.
+- Virasoro: the strict same-family line-side representative has central
+  charge \(26-c\), fixed at c=13 NOT c=26
 - Feigin-Frenkel: k <-> -k - 2h^v (NOT -k - h^v)
 - kappa(KM) = dim(g)(k+h^v)/(2h^v). kappa(Vir) = c/2. kappa(W_3) = 5c/6.
   These are THREE DISTINCT formulas (AP1).
@@ -116,7 +120,8 @@ class KoszulDualData:
     - Feigin-Frenkel duality for affine: k -> -k - 2h^v
     - Central charge duality for Virasoro: c -> 26 - c
     - Central charge duality for W_3: c -> 100 - c
-    - Chiral symmetric algebra for Heisenberg: H_k^! = Sym^ch(V*)
+    - Curved second-kind symmetric branch for Heisenberg:
+      H_k^! = curved Sym^ch(V*[1]) at k != 0
     - bc ghost duality for betagamma
     """
     name: str
@@ -142,9 +147,10 @@ class LineCategoryData:
 class CollisionResidueData:
     """r(z) = Res^coll_{0,2}(Theta_A): the binary genus-0 shadow.
 
-    For affine g_k: r(z) = Omega/z (Casimir / spectral parameter).
-    For Heisenberg: r(z) = k/z.
-    For Virasoro: r(z) = (c/2)/z^4 + 2T/z^2 + dT/z.
+    For affine g_k: r_k(z) = k*Omega/z (trace-form Casimir / spectral parameter).
+    For Heisenberg: tensor kernel k*Omega_H/z; expression stores the
+    rank-one coefficient k/z.
+    For Virasoro: r(z) = (c/2)/z^3 + 2T/z after dlog extraction.
     """
     expression: Any  # sympy expression in z
     pole_order: int  # max pole order
@@ -258,15 +264,18 @@ class HolographicDatum:
 # =========================================================================
 
 def heisenberg_holographic_datum(k_val=None) -> HolographicDatum:
-    """H(free) = (H_k, Sym^ch(V*), ...) for the free scalar / Heisenberg.
+    """H(free) = (H_k, curved Sym^ch(V*[1]), ...) for the free scalar / Heisenberg.
 
     kappa(H_k) = k (modular characteristic = level).
-    H_k^! = Sym^ch(V*) (chiral symmetric algebra, NOT H_{-k}).
+    H_k^! is the curved second-kind Sym^ch(V*[1]) branch
+    (NOT H_{-k}); the uncurved chiral symmetric algebra is only the
+    k=0/associated-graded shadow.
     kappa(H_k^!) = -k.
     kappa_sum = 0 (free field complementarity).
     Shadow class: G (Gaussian), depth 2.
 
-    r(z) = k/z (simple pole, abelian CYBE trivially satisfied).
+    Tensor kernel k*Omega_H/z; the scalar expression stores the
+    rank-one coefficient k/z (simple pole, abelian CYBE).
     """
     k = k_sym if k_val is None else S(k_val)
 
@@ -283,7 +292,7 @@ def heisenberg_holographic_datum(k_val=None) -> HolographicDatum:
     )
 
     A_dual = KoszulDualData(
-        name='Sym^ch(V*)',
+        name='curved Sym^ch(V*[1])',
         central_charge=S.One,
         kappa=-k,
         kappa_sum=S.Zero,
@@ -291,7 +300,7 @@ def heisenberg_holographic_datum(k_val=None) -> HolographicDatum:
     )
 
     C = LineCategoryData(
-        description='Sym^ch(V*)-modules: vertex operators V_p labeled by momentum',
+        description='curved Sym^ch(V*[1])-modules: vertex operators V_p labeled by momentum',
         module_types=['1-dimensional (momentum eigenstates)'],
         is_semisimple=True,
         rank=None,  # continuous family
@@ -348,7 +357,8 @@ def affine_sl2_holographic_datum(k_val=None) -> HolographicDatum:
     kappa_sum = 0 (KM complementarity).
     Shadow class: L (Lie/tree), depth 3.
 
-    r(z) = Omega/z (Casimir/z, satisfies CYBE via infinitesimal braid relation).
+    r_k(z) = k*Omega/z (trace-form Casimir/z; unit Casimir satisfies CYBE
+    via the infinitesimal braid relation).
     """
     k = k_sym if k_val is None else S(k_val)
     h_v = 2
@@ -524,22 +534,22 @@ def betagamma_holographic_datum() -> HolographicDatum:
 
 
 def virasoro_holographic_datum(c_val=None) -> HolographicDatum:
-    r"""H(Vir) = (Vir_c, Vir_{26-c}, ...) for Virasoro.
+    r"""H(Vir) uses the same-family line representative Vir_{26-c}.
 
-    CRITICAL: Self-dual at c=13, NOT c=26 (AP8).
+    CRITICAL: comparison-fixed at c=13, not fixed at c=26.
     kappa(Vir_c) = c/2.
     kappa(Vir_{26-c}) = (26-c)/2.
     kappa_sum = 13.
     Shadow class: M (mixed), depth infinity.
 
-    r(z) = (c/2)/z^4 + 2T/z^2 + dT/z (from T-T OPE).
+    r^coll(z) = (c/2)/z^3 + 2T/z after dlog extraction from
+    the T-T OPE kernel.
     Q^contact_Vir = 10/[c(5c+22)].
     """
     c = c_sym if c_val is None else S(c_val)
     c_dual = 26 - c
 
     T = Symbol('T')
-    dT = Symbol('dT')
 
     A = BoundaryAlgebra(
         name='Vir_c',
@@ -571,13 +581,13 @@ def virasoro_holographic_datum(c_val=None) -> HolographicDatum:
         rank=None,
     )
 
-    r_z_expr = c / (2 * z**4) + 2 * T / z**2 + dT / z
+    r_z_expr = c / (2 * z**3) + 2 * T / z
 
     r_z = CollisionResidueData(
         expression=r_z_expr,
-        pole_order=3,  # highest pole is z^{-4} = OPE pole order 3
+        pole_order=3,
         satisfies_cybe=True,
-        cybe_type='Virasoro CYBE (quadratic, non-constant)',
+        cybe_type='collision-residue CYBE (Arnold/MC, non-Casimir)',
     )
 
     # Q^contact_Vir = 10/[c(5c+22)]
@@ -974,13 +984,13 @@ def genus1_one_loop_data(datum: HolographicDatum) -> Dict[str, Any]:
     connection is deformed by kappa * omega_1 at genus 1.
 
     The Faltings-Mumford-Poincare weight is:
-    F_1(A) = kappa(A) * (-1/24) = -kappa/24.
-    (From B_2 = 1/6, lambda_1^FP = -1/24.)
+    F_1(A) = kappa(A) / 24.
+    (From B_2 = 1/6, lambda_1^FP = 1/24.)
     """
     kappa = datum.theta.kappa
     conn = holographic_connection_data(datum, 1, 1)
 
-    f1 = -S(kappa) / 24  # F_1 = kappa * lambda_1^FP = -kappa/24
+    f1 = S(kappa) / 24  # F_1 = kappa * lambda_1^FP
 
     return {
         'genus': 1,
@@ -988,7 +998,7 @@ def genus1_one_loop_data(datum: HolographicDatum) -> Dict[str, Any]:
         'kappa': kappa,
         'curvature_coefficient': conn.curvature_coefficient,
         'f1': simplify(f1),
-        'lambda_1_fp': Rational(-1, 24),
+        'lambda_1_fp': Rational(1, 24),
         'interpretation': 'd_fib^2 = kappa * omega_1 at genus 1',
         'is_flat': conn.is_flat,
     }
@@ -1307,7 +1317,7 @@ def verify_collision_residue_pole_orders() -> Dict[str, Dict[str, Any]]:
     Heisenberg: pole order 1 (z^{-1})
     affine sl_2: pole order 1 (z^{-1})
     betagamma: pole order 1 (z^{-1})
-    Virasoro: pole order 3 (z^{-4} from c/2 term)
+    Virasoro: pole order 3 (z^{-3} after dlog extraction)
     W_3: pole order 5 (z^{-6} from c/3 term)
     """
     expected_poles = {
@@ -1342,7 +1352,7 @@ def genus_expansion_from_holographic_datum(
     is the Faltings-Mumford-Poincare weight.
 
     F_0 = 0 (trivial at genus 0 by convention).
-    F_1 = -kappa/24 (from B_2 = 1/6, lambda_1^FP = -1/24).
+    F_1 = kappa/24 (from B_2 = 1/6, lambda_1^FP = 1/24).
     F_2 = kappa * 7/5760 (from B_4 = -1/30, ...).
     """
     kappa = datum.theta.kappa
@@ -1353,8 +1363,8 @@ def genus_expansion_from_holographic_datum(
             results[0] = {'F_g': S.Zero, 'lambda_fp': S.Zero}
             continue
         if g == 1:
-            # F_1 = kappa * (-1/24)
-            lambda_fp = Rational(-1, 24)
+            # F_1 = kappa * (1/24)
+            lambda_fp = Rational(1, 24)
             results[1] = {
                 'F_g': simplify(S(kappa) * lambda_fp),
                 'lambda_fp': lambda_fp,

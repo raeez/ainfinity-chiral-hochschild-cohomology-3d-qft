@@ -589,7 +589,8 @@ def heat_trace_profile(c: float, s_values: Optional[np.ndarray] = None,
 def self_duality_spectral(c: float, r_max: int = 100) -> Dict:
     r"""Investigate the self-duality c ↦ 26-c at the spectral level.
 
-    The Koszul duality Vir_c^! = Vir_{26-c} implies:
+    The same-family Virasoro line-side comparison \(c \mapsto 26-c\)
+    implies:
     - Q_c(t) and Q_{26-c}(t) are related by a transformation t ↦ t'
     - The shadow coefficients S_r(c) and S_r(26-c) are related
     - At c = 13: perfect self-duality

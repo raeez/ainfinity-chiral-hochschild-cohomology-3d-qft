@@ -218,12 +218,12 @@ class TestCollisionResidue:
     """Test r(z) = Res^coll_{0,2}(Theta_A)."""
 
     def test_heisenberg_pole_order_1(self):
-        """r(z) = k/z for Heisenberg: pole order 1."""
+        """Heisenberg tensor kernel has coefficient k/z: pole order 1."""
         H = heisenberg_holographic_datum()
         assert H.r_z.pole_order == 1
 
     def test_affine_pole_order_1(self):
-        """r(z) = Omega/z for affine: pole order 1."""
+        """r_k(z) = k*Omega/z for affine: pole order 1."""
         H = affine_sl2_holographic_datum()
         assert H.r_z.pole_order == 1
 
@@ -233,9 +233,14 @@ class TestCollisionResidue:
         assert H.r_z.pole_order == 1
 
     def test_virasoro_pole_order_3(self):
-        """r(z) for Virasoro has pole order 3 (from z^{-4} term)."""
+        """r(z) for Virasoro has pole order 3 after dlog extraction."""
         H = virasoro_holographic_datum()
         assert H.r_z.pole_order == 3
+        z = Symbol('z')
+        c = Symbol('c')
+        T = Symbol('T')
+        assert simplify(H.r_z.expression - (c / (2 * z**3) + 2 * T / z)) == 0
+        assert H.r_z.cybe_type == 'collision-residue CYBE (Arnold/MC, non-Casimir)'
 
     def test_w3_pole_order_5(self):
         """r(z) for W_3 has pole order 5 (from z^{-6} term)."""
@@ -364,8 +369,8 @@ class TestHolographicConnection:
         H = heisenberg_holographic_datum(k_val=1)
         result = genus1_one_loop_data(H)
         assert result['kappa'] == S.One
-        assert result['lambda_1_fp'] == Rational(-1, 24)
-        assert simplify(result['f1'] + Rational(1, 24)) == 0  # -kappa/24 = -1/24
+        assert result['lambda_1_fp'] == Rational(1, 24)
+        assert simplify(result['f1'] - Rational(1, 24)) == 0
 
     def test_genus1_virasoro_curvature(self):
         """Genus-1 curvature for Virasoro is c/2."""
@@ -474,16 +479,16 @@ class TestGenusExpansion:
         assert result[0]['F_g'] == 0
 
     def test_genus1_heisenberg(self):
-        """F_1(H_1) = -kappa/24 = -1/24."""
+        """F_1(H_1) = kappa/24 = 1/24."""
         H = heisenberg_holographic_datum(k_val=1)
         result = genus_expansion_from_holographic_datum(H, max_genus=2)
-        assert simplify(result[1]['F_g'] + Rational(1, 24)) == 0
+        assert simplify(result[1]['F_g'] - Rational(1, 24)) == 0
 
     def test_genus1_betagamma(self):
-        """F_1(betagamma) = -1/24 (kappa = 1)."""
+        """F_1(betagamma) = 1/24 (kappa = 1)."""
         H = betagamma_holographic_datum()
         result = genus_expansion_from_holographic_datum(H, max_genus=2)
-        assert simplify(result[1]['F_g'] + Rational(1, 24)) == 0
+        assert simplify(result[1]['F_g'] - Rational(1, 24)) == 0
 
     def test_genus2_positive(self):
         """F_2 > 0 for positive kappa (Bernoulli signs: F_g POSITIVE)."""
@@ -518,14 +523,14 @@ class TestCrossFamilyConsistency:
         # kappa(H_1) = 1, kappa(H_2) = 2
         assert H1.A.kappa + H2.A.kappa == S(3)
 
-    def test_virasoro_self_dual_at_13(self):
-        """Virasoro self-dual at c = 13, NOT c = 26 (AP8)."""
+    def test_virasoro_line_comparison_fixed_at_13(self):
+        """Virasoro same-family comparison is fixed at c = 13, not c = 26."""
         H = virasoro_holographic_datum(c_val=13)
         assert H.A.central_charge == 13
         assert H.A_dual.central_charge == 13  # 26 - 13 = 13
 
     def test_virasoro_not_self_dual_at_26(self):
-        """Virasoro NOT self-dual at c = 26."""
+        """At c = 26 the same-family representative has charge 0."""
         H = virasoro_holographic_datum(c_val=26)
         assert H.A_dual.central_charge == 0  # 26 - 26 = 0
         assert H.A.central_charge != H.A_dual.central_charge
@@ -540,7 +545,7 @@ class TestCrossFamilyConsistency:
         """Heisenberg is NOT self-dual (CRITICAL PITFALL)."""
         H = heisenberg_holographic_datum()
         assert H.A_dual.duality_type == 'chiral-symmetric'
-        # H_k^! = Sym^ch(V*) != H_{-k}
+        # H_k^! is the curved Sym^ch(V*[1]) branch, not H_{-k}
 
     def test_datum_summary_has_all_components(self):
         """Summary should have all six components of H(T)."""

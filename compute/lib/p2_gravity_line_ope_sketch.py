@@ -23,9 +23,10 @@ reading of 3D pure gravity):
 
   T(z): stress tensor, weight 2, central charge c = 3 ell / (2 G_N)
         (Brown-Henneaux). Quartic OPE pole: gravity is class M.
-  T'(z): chiral-dual stress tensor, weight 2, central charge 26 - c
-        (Virasoro Koszul dual; gravity-line line-operator category
-        modules; see Vol II prop:gravity-koszul-dual).
+  T'(z): same-family Virasoro representative of the line-side dual,
+        weight 2, central charge 26 - c, present only after the
+        ordered-bar/Verdier comparison datum of Vol II
+        prop:gravity-koszul-dual.
   J^a(z): currents of g_{Delta_5}^{re} (real-root subsystem; copies of
         sl_2), weight 1, level k_a fixed by the Borcherds singular
         theta lift normalisation. The g_{Delta_5} is a BKM
@@ -46,10 +47,11 @@ The OPE structure:
               for all k >= 3).
 
   T'(z) T'(w) ~ ((26-c)/2)/(z-w)^4 + 2 T'(w)/(z-w)^2 + dT'(w)/(z-w),
-              Koszul-dual Virasoro on the line side.
+              same-family Virasoro representative on the line side.
 
-  T(z) T'(w) ~ 0 (Vir_c and Vir_{26-c} commute on the Koszul locus;
-              chiral linear Verdier duality intertwines them).
+  T(z) T'(w) ~ 0 on the strict comparison surface; this is a
+              line-side comparison statement, not a primitive
+              identification of Vir_{26-c} with the Verdier dual.
 
   J^a(z) J^b(w) ~ k delta^{ab}/(z-w)^2 + f^{abc} J^c(w)/(z-w),
               affine Kac-Moody at real-root level k.
@@ -109,8 +111,10 @@ class GravityLineGenerators:
     r"""Canonical generator set of $A_g$ on $K3 \times E$.
 
     The boundary stress tensor $T$ generates the open-colour side;
-    the Koszul-dual $T'$ generates the closed-colour line-operator
-    side. The Kac-Moody currents $J^a$ of $\fg_{\Delta_5}^{\mathrm{re}}$
+    the same-family comparison representative $T'$ generates the
+    closed-colour line-operator side after the ordered-bar/Verdier
+    comparison datum is installed. The Kac-Moody currents $J^a$ of
+    $\fg_{\Delta_5}^{\mathrm{re}}$
     realise the real-root subsystem (Vol III
     `prop:hcs-pushforward-k3e-delta5`(i)). The imaginary-root vertex
     operators $\Theta^{\mathrm{im}}_\alpha$ realise the imaginary
@@ -179,7 +183,7 @@ def virasoro_self_ope(central_charge_label: str = "c") -> OPE:
 
 
 def koszul_dual_virasoro_self_ope() -> OPE:
-    r"""$T'(z) T'(w)$ with central charge $26-c$ (Vol II prop:gravity-koszul-dual)."""
+    r"""$T'(z)T'(w)$ for the same-family line representative at $26-c$."""
 
     return OPE(
         lhs="T_prime_26_minus_c",
@@ -193,7 +197,7 @@ def koszul_dual_virasoro_self_ope() -> OPE:
 
 
 def cross_colour_ope() -> OPE:
-    r"""$T(z) T'(w) \sim 0$: $\mathrm{Vir}_c$ and $\mathrm{Vir}_{26-c}$ commute."""
+    r"""$T(z)T'(w)\sim0$ on the strict line-side comparison surface."""
 
     return OPE(lhs="T", rhs="T_prime_26_minus_c", singular_part=())
 
@@ -253,8 +257,8 @@ class GravityLineOPEStructure:
     r"""Full OPE structure of the gravity-line operator algebra $A_g$.
 
     Each OPE records the symbolic singular part. The quartic-pole
-    structure of the boundary Virasoro and its Koszul dual is the
-    class $\mathsf M$ signature: the $A_\infty$ tower
+    structure of the boundary Virasoro and its same-family line-side
+    representative is the class $\mathsf M$ signature: the $A_\infty$ tower
     $\{m_k\}_{k \ge 3}$ is genuinely infinite.
 
     The Pentagon-face trace specialises this OPE structure: on
@@ -290,22 +294,23 @@ class GravityLineOPEStructure:
         return self.line_dual.max_pole_order() == 4
 
     def cross_colour_commutes(self) -> bool:
-        """$\\mathrm{Vir}_c$ and $\\mathrm{Vir}_{26-c}$ commute (Koszul locus)."""
+        """The boundary stress and line representative commute on the comparison surface."""
 
         return self.cross.max_pole_order() == 0
 
     def derived_centre_bulk_HHcat(self) -> str:
-        r"""$\Zderch(A_g) \simeq \C[\![c]\!]$ at the open + dual stress level.
+        r"""The bulk is $\Zderch(A_g)$; $\C[\![c]\!]$ is only a central shadow.
 
-        Vol II `\Zder(\mathrm{Vir}_c) \simeq \C[\![c]\!]$ from the
-        gravity primitive package: $\HH^0 = \C$, $\HH^2 = \C \cdot \Theta_c$,
-        all other $\HH^n = 0$ at generic $c$. The bicoloured
-        bulk-shadow is the Hochschild cochains of $A_g$, twisted by the
-        Hall-Borcherds intertwiner against the K3xE BPS index
-        $\Delta_5^{-2}$.
+        The central projection of the Virasoro chart has connective
+        shadow $\C[\![c]\!]$.  The line-side comparison representative
+        contributes the formal parameter \(c'=26-c\) only after the
+        ordered-bar/Verdier comparison datum.  The bicoloured bulk
+        remains the Hochschild cochains of \(A_g\), twisted by the
+        Hall--Borcherds intertwiner against the K3xE BPS index
+        \(\Delta_5^{-2}\).
         """
 
-        return "C[[c]] tensor C[[c']] with c' = 26 - c (Koszul-dual)"
+        return "Zder_ch(A_g); central shadow C[[c]], line comparison C[[c']] with c' = 26 - c"
 
     def pentagon_face_trace_formula(self) -> str:
         r"""Pentagon-face scalar trace formula on $A_g$ at $N = 1$."""
@@ -378,7 +383,10 @@ class BicolouredPrimitivePackageOnK3xE:
     half_braiding: str = "HalfBraid_E_x_R"
     tr_cl_K3xE: str = "Phi_10_un = Delta_5^2 paramodular form"
     tr_C_open: str = "cyclic_open_trace_on_gravity_line_modules"
-    Z_der_ch_A_b: str = "ChirHoch_bullet(A_g) = C[[c]] tensor C[[26-c]]"
+    Z_der_ch_A_b: str = (
+        "ChirHoch_bullet(A_g); central projection C[[c]], "
+        "line comparison C[[26-c]]"
+    )
 
     def nine_tuple_completeness(self) -> bool:
         """All nine package slots are named."""

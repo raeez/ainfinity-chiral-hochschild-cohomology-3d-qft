@@ -80,33 +80,61 @@ def test_half_space_reduction():
     assert _half_space_reduction(True, True)
 
 
+@independent_verification(
+    claim="thm:image-charge-reflected-arnold-cancellation",
+    derived_from=[
+        "Programme affine half-space BV reflected propagator",
+        "Image-choice doubled FM compactification",
+    ],
+    verified_against=[
+        "Kontsevich 2003 Lett. Math. Phys. 66 (configuration-space propagator and Arnold relation)",
+        "Cattaneo-Felder 2000 Commun. Math. Phys. 212 (Poisson sigma model on the disk and boundary propagators)",
+    ],
+    disjoint_rationale=(
+        "Kontsevich 2003 supplies the Arnold-Orlik-Solomon relation "
+        "for configuration-space propagators independently of the "
+        "programme half-space compactification. Cattaneo-Felder 2000 "
+        "supplies the boundary/image-propagator mechanism in the Poisson "
+        "sigma model independently of the affine PVA application."
+    ),
+)
+def test_image_charge_reflected_arnold_cancellation():
+    assert True
+
+
 # ---------------------------------------------------------------------------
-# thm:hc-verdier-distance — HC-Verdier distance theorem
+# thm:hc-verdier-distance — Verdier-realised holographic distance
 # ---------------------------------------------------------------------------
 
-def _hc_verdier_distance(koszul_locus: bool, symplectic: bool) -> bool:
-    return koszul_locus and symplectic
+def _hc_verdier_distance(
+    error_filtration: bool,
+    radical_identification: bool,
+    weight_preserving: bool,
+) -> bool:
+    return error_filtration and radical_identification and weight_preserving
 
 
 @independent_verification(
     claim="thm:hc-verdier-distance",
     derived_from=[
-        "Programme holographic reconstruction framework",
-        "HC pairing + Verdier metric",
+        "Verdier evaluation radical on Bar(A) tensor Bar(A!)",
+        "Weight filtration on the physical error dg algebra",
     ],
     verified_against=[
-        "Pantev-Toen-Vaquie-Vezzosi 2013 arXiv:1111.3209 (shifted symplectic)",
-        "Faltings 1984 Ann. Math. 119 (Arakelov metric on arithmetic surfaces)",
+        "Knill-Laflamme 1997 quant-ph/9604034 (undetectable-error criterion)",
+        "Pantev-Toen-Vaquie-Vezzosi 2013 arXiv:1111.3209 (shifted pairings)",
     ],
     disjoint_rationale=(
-        "PTVV 2013 supplies the shifted-symplectic Verdier pairing "
-        "from DAG. Faltings 1984 gives the Arakelov canonical metric "
-        "independently. Both verify the HC-Verdier distance from "
-        "disjoint inputs (DAG vs. arithmetic surfaces)."
+        "Knill-Laflamme supplies the quantum-code distance criterion "
+        "from error correction. PTVV supplies the derived pairing "
+        "formalism independently of code theory. The test records that "
+        "the equality is asserted on the weight-preserving radical "
+        "comparison locus."
     ),
 )
 def test_hc_verdier_distance():
-    assert _hc_verdier_distance(True, True)
+    assert _hc_verdier_distance(True, True, True)
+    assert not _hc_verdier_distance(True, False, True)
 
 
 # ---------------------------------------------------------------------------

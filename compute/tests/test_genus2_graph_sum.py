@@ -2,8 +2,8 @@ r"""Tests for genus-2 free energy from the stable graph sum.
 
 Verifies F_2(A) = kappa(A) * 7/5760 from FIRST PRINCIPLES:
 
-  Layer 1: Stable graph enumeration at (g=2, n=0) — 6 graphs
-  Layer 2: Graph sum for chi^{orb}(M_bar_2) = -181/1440
+  Layer 1: Stable graph enumeration at (g=2, n=0) — 7 graphs
+  Layer 2: Graph sum for chi^{orb}(M_bar_2) = -1/1440
   Layer 3: Bernoulli formula B_4 = -1/30 => lambda_2^FP = 7/5760
   Layer 4: Log(A-hat) Taylor expansion => lambda_2^FP = 7/5760
   Layer 5: Cross-check linking layers 2 and 3
@@ -11,8 +11,8 @@ Verifies F_2(A) = kappa(A) * 7/5760 from FIRST PRINCIPLES:
 
 This is the FIRST module to derive F_2 from graph sums rather than
 hardcoding it from the Bernoulli formula. The graph sum computes
-chi^{orb}(M_bar_2) = -181/1440 by summing vertex-product contributions
-over all 6 stable graphs, then connects to lambda_2^FP via the
+chi^{orb}(M_bar_2) = -1/1440 by summing vertex-product contributions
+over all 7 stable graphs, then connects to lambda_2^FP via the
 Harer-Zagier / Bernoulli correspondence.
 
 References:
@@ -144,9 +144,9 @@ class TestGenus2GraphEnumeration(unittest.TestCase):
     """Verify the stable graph enumeration at (g=2, n=0)."""
 
     def test_graph_count(self):
-        """There are exactly 6 stable graphs at (g=2, n=0)."""
+        """There are exactly 7 stable graphs at (g=2, n=0)."""
         graphs = enumerate_genus2_stable_graphs()
-        self.assertEqual(len(graphs), 6)
+        self.assertEqual(len(graphs), 7)
 
     def test_all_genus_2(self):
         """Every graph has arithmetic genus 2."""
@@ -212,6 +212,15 @@ class TestGenus2GraphEnumeration(unittest.TestCase):
         self.assertEqual(g.aut_order, 12)
         self.assertEqual(g.h1, 2)
 
+    def test_barbell(self):
+        """Graph VII: two genus-0 vertices, each with a self-loop, joined by a bridge."""
+        g = enumerate_genus2_stable_graphs()[6]
+        self.assertEqual(g.name, "VII")
+        self.assertEqual(g.vertex_genera, (0, 0))
+        self.assertEqual(g.num_edges, 3)
+        self.assertEqual(g.aut_order, 8)
+        self.assertEqual(g.h1, 2)
+
     def test_valences(self):
         """Verify valences of all graphs."""
         graphs = enumerate_genus2_stable_graphs()
@@ -222,6 +231,7 @@ class TestGenus2GraphEnumeration(unittest.TestCase):
             "IV": (4,),     # two self-loops: 4 half-edges
             "V": (3, 1),    # v0: self-loop (2) + edge (1) = 3; v1: edge (1) = 1
             "VI": (3, 3),   # three edges: 3 half-edges each
+            "VII": (3, 3),  # each vertex has one self-loop plus the bridge
         }
         for g in graphs:
             computed = tuple(g.valence(v) for v in range(g.num_vertices))
@@ -231,7 +241,7 @@ class TestGenus2GraphEnumeration(unittest.TestCase):
     def test_h1_values(self):
         """Verify first Betti numbers."""
         graphs = enumerate_genus2_stable_graphs()
-        expected_h1 = {"I": 0, "II": 1, "III": 0, "IV": 2, "V": 1, "VI": 2}
+        expected_h1 = {"I": 0, "II": 1, "III": 0, "IV": 2, "V": 1, "VI": 2, "VII": 2}
         for g in graphs:
             self.assertEqual(g.h1, expected_h1[g.name])
 
@@ -287,12 +297,12 @@ class TestChiOrbOpen(unittest.TestCase):
 # ===========================================================================
 
 class TestChiOrbGraphSum(unittest.TestCase):
-    """Verify chi^{orb}(M_bar_2) = -181/1440 from the graph sum."""
+    """Verify chi^{orb}(M_bar_2) = -1/1440 from the graph sum."""
 
     def test_graph_sum_total(self):
-        """The graph sum gives chi^{orb}(M_bar_2) = -181/1440."""
+        """The graph sum gives chi^{orb}(M_bar_2) = -1/1440."""
         result = graph_sum_chi_orb()
-        self.assertEqual(result['total'], Fraction(-181, 1440))
+        self.assertEqual(result['total'], Fraction(-1, 1440))
 
     def test_graph_sum_match(self):
         """The computed value matches the known value."""
@@ -329,15 +339,21 @@ class TestChiOrbGraphSum(unittest.TestCase):
         result = graph_sum_chi_orb()
         self.assertEqual(result['contributions']['VI']['weighted'], Fraction(1, 12))
 
+    def test_barbell_contribution(self):
+        """Graph VII (barbell): chi(M_{0,3})^2/8 = 1/8."""
+        result = graph_sum_chi_orb()
+        self.assertEqual(result['contributions']['VII']['weighted'], Fraction(1, 8))
+
     def test_sum_of_contributions(self):
-        """Verify the sum: -1/240 - 1/24 + 1/288 - 1/8 - 1/24 + 1/12 = -181/1440."""
+        """Verify the sum: -1/240 - 1/24 + 1/288 - 1/8 - 1/24 + 1/12 + 1/8 = -1/1440."""
         total = (Fraction(-1, 240)
                  + Fraction(-1, 24)
                  + Fraction(1, 288)
                  + Fraction(-1, 8)
                  + Fraction(-1, 24)
-                 + Fraction(1, 12))
-        self.assertEqual(total, Fraction(-181, 1440))
+                 + Fraction(1, 12)
+                 + Fraction(1, 8))
+        self.assertEqual(total, Fraction(-1, 1440))
 
 
 # ===========================================================================
@@ -399,16 +415,16 @@ class TestF2FirstPrinciples(unittest.TestCase):
                         f"Layers failed: {[f'layer{i}' for i in range(1,6) if not result[f'layer{i}']['passed']]}")
 
     def test_layer1_enumeration(self):
-        """Layer 1: 6 stable graphs, all genus 2, all stable."""
+        """Layer 1: 7 stable graphs, all genus 2, all stable."""
         result = verify_F2_from_first_principles()
         self.assertTrue(result['layer1']['passed'])
-        self.assertEqual(result['layer1']['graph_count'], 6)
+        self.assertEqual(result['layer1']['graph_count'], 7)
 
     def test_layer2_graph_sum(self):
-        """Layer 2: chi^{orb}(M_bar_2) = -181/1440 from graph sum."""
+        """Layer 2: chi^{orb}(M_bar_2) = -1/1440 from graph sum."""
         result = verify_F2_from_first_principles()
         self.assertTrue(result['layer2']['passed'])
-        self.assertEqual(result['layer2']['computed'], Fraction(-181, 1440))
+        self.assertEqual(result['layer2']['computed'], Fraction(-1, 1440))
 
     def test_layer3_bernoulli(self):
         """Layer 3: lambda_2^FP = 7/5760 from B_4 = -1/30."""
@@ -545,8 +561,8 @@ class TestComplementarity(unittest.TestCase):
             self.assertEqual(total, Fraction(91, 5760),
                              f"F_2(Vir_{c}) + F_2(Vir_{26-c}) = {total} != 91/5760")
 
-    def test_virasoro_self_dual(self):
-        """At c=13 (self-dual): F_2(Vir_13) = 91/11520 = (13/2)*7/5760."""
+    def test_virasoro_comparison_fixed(self):
+        """At c=13 fixed point: F_2(Vir_13) = 91/11520 = (13/2)*7/5760."""
         F2_13 = F2_virasoro(Fraction(13))
         expected = Fraction(13, 2) * Fraction(7, 5760)
         self.assertEqual(F2_13, expected)
@@ -591,28 +607,28 @@ class TestVolICrossCheck(unittest.TestCase):
     """Cross-check graph enumeration against the Vol I stable_graph_enumeration module."""
 
     def test_graph_count_matches_vol1(self):
-        """6 graphs at (g=2,n=0) — same count as Vol I."""
-        # Vol I has genus2_stable_graphs_n0() returning 6 graphs
+        """7 graphs at (g=2,n=0) — same count as Vol I."""
+        # Vol I has genus2_stable_graphs_n0() returning 7 graphs
         graphs = enumerate_genus2_stable_graphs()
-        self.assertEqual(len(graphs), 6)
+        self.assertEqual(len(graphs), 7)
 
     def test_automorphism_orders_match_vol1(self):
-        """Automorphism orders match Vol I: 1, 2, 2, 8, 2, 12."""
+        """Automorphism orders match Vol I: 1, 2, 2, 8, 2, 12, 8."""
         graphs = enumerate_genus2_stable_graphs()
         aut_orders = [g.aut_order for g in graphs]
-        self.assertEqual(aut_orders, [1, 2, 2, 8, 2, 12])
+        self.assertEqual(aut_orders, [1, 2, 2, 8, 2, 12, 8])
 
     def test_automorphism_product(self):
         """Product of 1/|Aut| over all graphs is a sanity check.
 
-        sum 1/|Aut| = 1/1 + 1/2 + 1/2 + 1/8 + 1/2 + 1/12
-                    = 1 + 1/2 + 1/2 + 1/8 + 1/2 + 1/12
-                    = 24/24 + 12/24 + 12/24 + 3/24 + 12/24 + 2/24
-                    = 65/24
+        sum 1/|Aut| = 1/1 + 1/2 + 1/2 + 1/8 + 1/2 + 1/12 + 1/8
+                    = 1 + 1/2 + 1/2 + 1/8 + 1/2 + 1/12 + 1/8
+                    = 24/24 + 12/24 + 12/24 + 3/24 + 12/24 + 2/24 + 3/24
+                    = 68/24 = 17/6
         """
         graphs = enumerate_genus2_stable_graphs()
         total = sum(Fraction(1, g.aut_order) for g in graphs)
-        self.assertEqual(total, Fraction(65, 24))
+        self.assertEqual(total, Fraction(17, 6))
 
 
 # ===========================================================================

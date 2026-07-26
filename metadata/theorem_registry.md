@@ -1,46 +1,46 @@
 # Theorem Registry (chiral-bar-cobar-vol2)
 
-Auto-generated 2026-04-24.
+Auto-generated 2026-07-05.
 
 ## Snapshot
 
 | Metric | Value |
 |---|---:|
-| ProvedHere claims | 2345 |
-| Total tagged claims | 3142 |
-| Active files in `main.tex` | 106 |
-| Total `.tex` files scanned | 158 |
+| ProvedHere claims | 1427 |
+| Total tagged claims | 1988 |
+| Active files in `main.tex` | 108 |
+| Total `.tex` files scanned | 157 |
 
 ## Status Totals
 
 | Status | Count |
 |---|---:|
-| `ProvedHere` | 2345 |
-| `ProvedElsewhere` | 264 |
-| `Conjectured` | 256 |
-| `Conditional` | 258 |
-| `Heuristic` | 19 |
+| `ProvedHere` | 1427 |
+| `ProvedElsewhere` | 149 |
+| `Conjectured` | 117 |
+| `Conditional` | 285 |
+| `Heuristic` | 10 |
 | `Open` | 0 |
 
 ## ProvedHere By Environment
 
 | Environment | Count |
 |---|---:|
-| `theorem` | 951 |
-| `proposition` | 698 |
-| `corollary` | 316 |
-| `computation` | 236 |
-| `lemma` | 104 |
-| `remark` | 32 |
-| `maintheorem` | 8 |
+| `theorem` | 588 |
+| `proposition` | 454 |
+| `corollary` | 173 |
+| `computation` | 135 |
+| `lemma` | 61 |
+| `remark` | 13 |
+| `maintheorem` | 3 |
 
 ## ProvedHere By Part
 
 | Part | Count |
 |---|---:|
 | Frame | 0 |
-| Theory | 246 |
-| Examples | 161 |
-| Connections | 1907 |
-| Standalones | 14 |
-| Appendices | 17 |
+| Theory | 122 |
+| Examples | 30 |
+| Connections | 1275 |
+| Standalones | 0 |
+| Appendices | 0 |

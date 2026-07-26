@@ -438,31 +438,31 @@ class TestKoszulDualPairing:
 # VIRASORO SELF-DUALITY (critical pitfall check)
 # ===================================================================
 
-class TestViraseroSelfDuality:
-    """Verify Virasoro self-dual at c=13, NOT c=26.
+class TestVirasoroLineComparisonFixedPoint:
+    """Verify the same-family Virasoro comparison is fixed at c=13.
 
-    Vir_c^! = Vir_{26-c}. Self-dual iff c = 13.
-    This is a critical pitfall from CLAUDE.md.
+    The strict line-side comparison representative has central charge
+    26-c.  Its fixed point is c = 13, not c = 26.
     """
 
-    def test_self_dual_at_13(self):
-        """Virasoro self-dual at c = 13."""
-        from lib.hochschild_bulk_bridge import virasoro_self_dual_point
-        data = virasoro_self_dual_point()
-        assert data['self_dual_c'] == 13
+    def test_fixed_at_13(self):
+        """The same-family representative is fixed at c = 13."""
+        from lib.hochschild_bulk_bridge import virasoro_line_comparison_fixed_point
+        data = virasoro_line_comparison_fixed_point()
+        assert data['fixed_c'] == 13
 
-    def test_not_self_dual_at_26(self):
-        """Virasoro is NOT self-dual at c = 26."""
-        from lib.hochschild_bulk_bridge import virasoro_self_dual_point
-        data = virasoro_self_dual_point()
-        assert data['self_dual_c'] != 26
+    def test_not_fixed_at_26(self):
+        """The same-family comparison is not fixed at c = 26."""
+        from lib.hochschild_bulk_bridge import virasoro_line_comparison_fixed_point
+        data = virasoro_line_comparison_fixed_point()
+        assert data['fixed_c'] != 26
         assert data['NOT_26'] is True
 
-    def test_kappa_at_self_dual_point(self):
+    def test_kappa_at_fixed_point(self):
         """kappa(Vir_13) = 13/2."""
-        from lib.hochschild_bulk_bridge import virasoro_self_dual_point
-        data = virasoro_self_dual_point()
-        assert data['kappa_at_self_dual'] == Rational(13, 2)
+        from lib.hochschild_bulk_bridge import virasoro_line_comparison_fixed_point
+        data = virasoro_line_comparison_fixed_point()
+        assert data['kappa_at_fixed_point'] == Rational(13, 2)
 
 
 # ===================================================================

@@ -3,8 +3,8 @@ r"""Master cross-check of key numerical results from the compute session.
 Verifies the principal findings across multiple compute modules:
 
 1. Catalan formula: T_{2n+3}(1,...,1) = (-1)^n C_n (2n+3)!
-2. W_3 WW shadow c-independence: the normalized numerator N_r is a
-   rational integer independent of c, verified at 3+ c-values.
+2. W_3 WW shadow pole-cleared coefficient N_{2r}^W is independent of c,
+   verified at 3+ c-values.
 3. Euler-eta identity at weight 5 for all 6 standard families.
 4. Period-2 vanishing: T_k(1,...,1) = 0 for even k = 4, 6, 8.
 
@@ -77,15 +77,15 @@ class TestCatalanFormula:
 # =========================================================================
 
 class TestW3WWShadowCIndependence:
-    """Verify that the W_3 WW shadow numerator N_r is c-independent.
+    """Verify that the W_3 WW shadow pole-cleared coefficient is c-independent.
 
     The WW shadow coefficient is:
-      S_{2r}^{WW} = (c/3) C(1/2, r-1) gamma^{r-1} / (2r)
-    where gamma = 61440 / (c^2 (5c+22)^3).
+      S_{2r}^{WW} = (2c/3) C(1/2, r-1) delta^{r-1} / (2r)
+    where delta = 122880 / (c^2 (5c+22)^3).
 
-    Defining N_r = S_{2r} * c^{2(r-1)-1} * (5c+22)^{3(r-1)} * 3 * 2r,
-    one gets N_r = C(1/2, r-1) * 61440^{r-1}, which is a rational
-    integer independent of c. We verify this at 3+ c-values.
+    Defining
+      N_{2r}^W = S_{2r}^{WW} c^{2r-3}(5c+22)^{3(r-1)}
+    gives the pole-cleared integer coefficient in the theorem.
     """
 
     def _half_binom(self, n):
@@ -102,16 +102,18 @@ class TestW3WWShadowCIndependence:
         """Compute S_{2r}^{WW} at a given c value (float)."""
         n = r - 1
         bcoeff = float(self._half_binom(n))
-        gamma = 61440.0 / (c_val ** 2 * (5 * c_val + 22) ** 3)
-        kappa_WW = c_val / 3.0
-        return kappa_WW * bcoeff * gamma ** n / (2 * r)
+        delta = 122880.0 / (c_val ** 2 * (5 * c_val + 22) ** 3)
+        h2_WW = 2.0 * c_val / 3.0
+        return h2_WW * bcoeff * delta ** n / (2 * r)
 
     def _N_r_exact(self, r):
-        """Compute N_r = C(1/2, r-1) * 61440^{r-1} exactly."""
+        """Compute N_{2r}^W exactly."""
         from fractions import Fraction
         n = r - 1
         bcoeff = self._half_binom(n)
-        return int(bcoeff * Fraction(61440) ** n)
+        value = bcoeff * Fraction(122880) ** n / Fraction(3 * r)
+        assert value.denominator == 1
+        return value.numerator
 
     @pytest.mark.parametrize("r", [2, 3, 4, 5, 6])
     def test_c_independence(self, r):
@@ -122,17 +124,20 @@ class TestW3WWShadowCIndependence:
         c_vals = [1.0, 10.0, 50.0, 99.0]
         for c_val in c_vals:
             S_val = self._S_WW(r, c_val)
-            n = r - 1
-            # N_r = S_{2r} * c^{2n-1} * (5c+22)^{3n} * 3 * 2r
-            N_numerical = S_val * c_val ** (2 * n - 1) * (5 * c_val + 22) ** (3 * n) * 3 * 2 * r
+            # N_{2r}^W = S_{2r} * c^{2r-3} * (5c+22)^{3(r-1)}
+            N_numerical = (
+                S_val
+                * c_val ** (2 * r - 3)
+                * (5 * c_val + 22) ** (3 * (r - 1))
+            )
             assert abs(N_numerical - N_exact) < abs(N_exact) * 1e-6, \
                 f"r={r}, c={c_val}: N_numerical={N_numerical}, N_exact={N_exact}"
 
     @pytest.mark.parametrize("r,expected_N", [
-        (2, 30720),
-        (3, -471859200),
-        (4, 14495514624000),
-        (5, -556627761561600000),
+        (2, 10240),
+        (3, -209715200),
+        (4, 9663676416000),
+        (5, -593736278999040000),
     ])
     def test_N_values(self, r, expected_N):
         """Check specific N_r values."""

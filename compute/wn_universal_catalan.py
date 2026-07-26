@@ -1,12 +1,18 @@
-r"""Universal Catalan structure of the shadow obstruction tower for ALL principal W_N algebras.
+r"""Catalan patterns in principal W_N shadow obstruction towers.
 
-MAIN THEOREM (Proved here computationally for N=2,...,8; structurally for all N):
-============
+SCOPE:
+======
 
-For every principal W-algebra W_N = W(sl_N, f_prin) with N >= 2, the shadow
-tower on the W^{(N)}-line (the line in deformation space aligned with the
-highest-spin generator) is governed by Catalan numbers via the SAME mechanism
-as Virasoro and W_3:
+The N=2 Virasoro T-line and the N=3 W-line formulas are proved by the
+closed-form engines cited below.  For N >= 4 this file records the
+conditional Catalan pattern predicted by the Z_{N-1} selection rule and
+the generator-line metric ansatz; it is not a proof of universal
+principal-W_N closed forms.
+
+For a principal W-algebra W_N = W(sl_N, f_prin), the expected shadow tower
+on the W^{(N)}-line (the line in deformation space aligned with the
+highest-spin generator) is governed by Catalan numbers by the same
+square-root mechanism as Virasoro and W_3:
 
 (1) QUADRATIC SHADOW METRIC.
     The shadow metric on the W^{(N)}-line is
@@ -35,7 +41,7 @@ as Virasoro and W_3:
     The half-integer binomial expansion
       sqrt(1 + delta u) = sum_{n>=0} binom(1/2,n) (delta u)^n
     produces Catalan numbers via the identity
-      binom(1/2,n) = (-1)^{n-1} C_{n-1} / (4^n * n * (2n-3)!!/n!)
+      binom(1/2,n) = (-1)^{n-1} C_{n-1} / (2 * 4^{n-1})
     (for n >= 1), where C_k = binom(2k,k)/(k+1) is the k-th Catalan number.
 
 (3) UNIVERSAL CLOSED FORM.
@@ -331,9 +337,10 @@ def wn_structural():
         Q_N is polynomial of degree 1.
 
         The degree-1 constraint follows from the OPE structure:
-        the W^{(N)} W^{(N)} OPE has pole order 2N-1 (the leading term is
-        c/N * lambda^{2N-1} in the lambda-bracket). After d-log absorption
-        (AP19), the collision residue has 2N-2 terms. On the W^{(N)}-line,
+        the W^{(N)} W^{(N)} vertex-OPE has pole order 2N; equivalently,
+        the leading Lie-conformal term is c/N * lambda^{2N-1}. After
+        d-log absorption (AP19), the collision residue has 2N-1 as its
+        maximal shifted order. On the W^{(N)}-line,
         the Z_{N-1} symmetry reduces the effective number of independent
         shadow data to 2: (kappa_N, S_{2N}^{(N)}). These two data
         determine Q_N(u) = A + B*u, degree 1.
@@ -582,8 +589,8 @@ def three_parameter_universality():
     Sh2_w = 2 * kappa_W  # = 2c/3
     Sh3_w = Rational(0)   # Z_2 forces S_3 = 0
     Sh4_w = 4 * S4_WW     # Sh_4 = r*S_r = 4*S_4 = 40960/(c(5c+22)^3)
-    # Wait, this is wrong. On the W-line, the "arity 4" shadow Sh_4 means
-    # [t^4]H_W, but H_W has [t^2]H = Sh_2 = 2c/3, [t^3]H = 0 (Z_2),
+    # On the W-line, the arity-4 shadow Sh_4 means [t^4]H_W.  The
+    # Z_2 selection gives [t^2]H = Sh_2 = 2c/3 and [t^3]H = 0, while
     # [t^4]H = Sh_4 = 4*S_4.
     # The shadow metric in u = t^2:
     # sqrt(Q_W(u)) = Sh_2 + Sh_4*u + Sh_6*u^2 + ...
@@ -621,18 +628,12 @@ def constant_analysis():
     The Catalan formula has S_{2r}^W involving 30720^{r-1}.
 
     The structure of 30720:
-      30720 = delta_3 * c^2 * (5c+22)^3 / 4
-    Wait, that's not constant in c. Let me re-check.
-    Actually: 30720 = 122880/4, and in the Catalan formula:
-      S_{2r}^W = (-1)^r C_{r-1} * delta_3^{r-1} * (c/3) / (2r * binom_factor)
-    The binom(1/2,n) = (-1)^{n-1} C_{n-1} / [4^n * n * (2n-1)], so
-      S_{2r}^W = (-1)^r * [(-1)^{r-2} C_{r-2}] / [...] * delta_3^{r-1} * ...
-    This gets complicated. The key point:
-
-    The constant 30720 = 2^{11} * 3 * 5 appearing in the W_3 formula is
-      30720 = delta_3/4 * c^2 * (5c+22)^3 = 122880/4 * (c^2(5c+22)^3) / (c^2(5c+22)^3)
-    Wait, delta_3 = 122880/(c^2(5c+22)^3), so
+      30720 = 122880/4.  Since
+      delta_3 = 122880/(c^2(5c+22)^3),
       delta_3/4 = 30720/(c^2(5c+22)^3).
+    The identity binom(1/2,n)=(-1)^{n-1} C_{n-1}/(2*4^{n-1})
+    is the source of this quarter-factor at each positive effective
+    power of delta_3.
 
     The constant 30720 arises as:
       30720 = wt(W) * (lower pole numerator) * (composite coupling)^2
@@ -704,7 +705,7 @@ def verification_table():
 
     S_{2+k(N-1)}^{(N)} = (2c/N) / (2(2+k(N-1))) * binom(1/2, k) * delta_N^k
 
-  and binom(1/2, k) = (-1)^{k-1} C_{k-1} / [4^k * k * (2k-1)] for k >= 1,
+  and binom(1/2, k) = (-1)^{k-1} C_{k-1} / (2 * 4^{k-1}) for k >= 1,
 
   so the Catalan number C_{k-1} universally governs the k-th shadow coefficient
   on the W^{(N)}-line, for ALL principal W-algebras.

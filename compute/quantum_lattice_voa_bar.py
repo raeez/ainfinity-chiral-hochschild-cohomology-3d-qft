@@ -31,7 +31,7 @@ WHAT WE COMPUTE
 2. The R-matrix (trigonometric for V_q, rational/Yang for classical)
 3. d^2 = 0 verification (equivalent to quantum Yang-Baxter equation)
 4. The q-stability dichotomy: combinatorial vs algebraic invariants
-5. The double bar B^ord(B^ord(V_q)): invisibility of hbar
+5. The double bar B^ord(B^ord(V_q)): deformation-parameter visibility
 
 CONVENTIONS (from CLAUDE.md)
 ============================
@@ -328,8 +328,9 @@ def classical_r_matrix(z: Symbol) -> Matrix:
 def yang_r_matrix(z: Symbol, hbar: Symbol) -> Matrix:
     """Yang R-matrix: R(z) = 1 + hbar * Omega / z.
 
-    This is the rational R-matrix of Y_hbar(sl_2), the leading-order
-    approximation to the full trigonometric R-matrix.
+    This is the rational R-matrix of Y_hbar(sl_2). It is obtained from
+    the trigonometric quantum-affine R-matrix only after the additive
+    rational degeneration, not by the bare specialization q -> 1.
     """
     Id4 = eye(4)
     Omega = Matrix([
@@ -349,8 +350,11 @@ def trigonometric_r_matrix(z: Symbol, q: Symbol) -> Matrix:
                               [0, q-q^{-1}, z-1, 0],
                               [0, 0, 0, zq-q^{-1}]]
 
-    where z is the multiplicative spectral parameter.
-    At q -> 1: R(z) -> P (the permutation), recovering the rational limit.
+    where z is the multiplicative spectral parameter. The bare limit
+    q -> 1 at fixed z gives the undeformed multiplicative/affine
+    limit. The Yangian rational R-matrix appears only after the
+    additive scaling z = exp(eps*u), q = exp(eps*hbar/2), eps -> 0,
+    with the usual normalization.
     """
     a = z * q - q**(-1)
     b = z - 1
@@ -491,10 +495,10 @@ def depth_spectrum_classical() -> Dict[str, object]:
 def depth_spectrum_quantum(q: Symbol) -> Dict[str, object]:
     """Depth spectrum for the quantum A_1 lattice VOA V_q.
 
-    The key theorem (q-stability of combinatorial invariants):
-    - Depth spectrum is UNCHANGED: {1, 2, 3}
-    - Class is UNCHANGED: L
-    - Poincare series is UNCHANGED: 1 + 3t
+    Finite-window A_1 check:
+    - Depth spectrum in the displayed window is {1, 2, 3}
+    - Class label in this oracle is L
+    - Poincare series of the three cogenerators is 1 + 3t
 
     WHY: The depth spectrum counts the PATTERN OF VANISHING of
     shadow operations, not their coefficients. The quantum Serre
@@ -515,6 +519,7 @@ def depth_spectrum_quantum(q: Symbol) -> Dict[str, object]:
         'm3_nonzero': True,
         'm4_zero': True,
         'poincare_series': '1 + 3t',
+        'scope': 'A1 finite-window oracle',
         'quantum_serre_coefficient': 'q + q^{-1}',
         'classical_serre_coefficient': '2',
     }
@@ -525,13 +530,13 @@ def depth_spectrum_quantum(q: Symbol) -> Dict[str, object]:
 # =============================================================================
 
 def q_stability_analysis(q: Symbol) -> Dict[str, Dict[str, str]]:
-    """The q-stability dichotomy: what changes and what does not.
+    """Finite-window q-stability check: what changes and what does not.
 
-    COMBINATORIAL (q-STABLE):
+    COMBINATORIAL IN THIS A_1 ORACLE:
     - Class: L -> L
     - Depth spectrum: {1,2,3} -> {1,2,3}
     - Poincare series: 1 + 3t -> 1 + 3t
-    - m_4 = 0 -> m_4 = 0 (tower truncation)
+    - m_4 = 0 -> m_4 = 0 in the tested arity-4 window
 
     ALGEBRAIC (q-DEFORMED):
     - m_2(E+,E-): alpha.J -> [K+,K-]_q (braided commutator)
@@ -542,17 +547,19 @@ def q_stability_analysis(q: Symbol) -> Dict[str, Dict[str, str]]:
     - Pole locus: {zeta=0} -> {zeta=0, +/-hbar}
     - Factorisation type: E_infty -> E_1
 
-    This is the deepest structural fact: the q-deformation changes
-    the COEFFICIENTS but not the PATTERN. The combinatorial skeleton
-    (shadow obstruction tower, depth spectrum, class) is a topological invariant
-    of the OPE structure.
+    This is a finite A_1 benchmark: the q-deformation changes the
+    coefficients in the displayed formulas while preserving the tested
+    generator count, Serre arity, and arity-4 vanishing window. It is
+    not a theorem that every higher operation or every quantum lattice
+    VOA has the same pattern.
     """
     return {
         'q_stable': {
+            'scope': 'A1 finite-window oracle',
             'class': 'L',
             'depth_spectrum': '{1, 2, 3}',
             'poincare_series': '1 + 3t',
-            'm4': '0',
+            'm4_window': '0 in tested arity-4 window',
             'r_max': '3',
         },
         'q_deformed': {
@@ -568,15 +575,15 @@ def q_stability_analysis(q: Symbol) -> Dict[str, Dict[str, str]]:
 
 
 # =============================================================================
-# 8. DOUBLE BAR: IS hbar INVISIBLE?
+# 8. DOUBLE BAR: WHERE IS hbar VISIBLE?
 # =============================================================================
 
 def double_bar_analysis() -> Dict[str, object]:
     """Analysis of the double bar B^ord(B^ord(V_q)).
 
-    Previous session established: B^ord(Y_hbar(sl_2)) = U(sl_2[t]),
-    i.e., the Yangian bar complex gives the enveloping algebra of
-    the current algebra, and hbar is invisible.
+    For the rational Yangian, the PBW associated-graded primitive
+    collision shadow is U(sl_2[t]); this is not an isomorphism
+    B^ord(Y_hbar(sl_2)) = U(sl_2[t]) of full ordered bar objects.
 
     For the quantum lattice VOA V_q:
     - B^ord(V_q) should be related to U_q(sl_2-hat)^! (the Koszul dual
@@ -584,16 +591,17 @@ def double_bar_analysis() -> Dict[str, object]:
     - The double bar B^ord(B^ord(V_q)) = B^ord(U_q(sl_2-hat)^!)
     - By the bar-cobar adjunction (Theorem A): Omega(B^ord(A)) ~ A
 
-    The key question: is B^ord(V_q) also "hbar-invisible"?
+    The key question: which projection loses the deformation parameter?
 
-    ANSWER: NO. Unlike the Yangian case, the quantum lattice VOA's
-    bar complex SEES the deformation parameter. The reason:
+    ANSWER: only the Yangian primitive associated-graded residue shadow
+    loses it. The full Yangian and the quantum lattice VOA retain their
+    deformation parameters. The reason:
 
     1. For Y_hbar(sl_2): the R-matrix R(z) = 1 + hbar*Omega/z is
-       RATIONAL in z, and the bar differential d_B uses only the
-       residue at z=0. The residue is Omega (independent of hbar
-       after extracting the leading pole). So B^ord sees only Omega,
-       not hbar.
+       RATIONAL in z. After passing to the PBW associated graded and
+       projecting to the primitive collision residue at z=0, the
+       normalized residue is Omega. This shadow has lost hbar.
+       The full ordered Yangian bar and the RTT product retain hbar.
 
     2. For V_q: the collision residue has SHIFTED poles at zeta = +/-hbar.
        The bar differential MUST detect these shifts (it integrates
@@ -604,19 +612,25 @@ def double_bar_analysis() -> Dict[str, object]:
     adjunction), and since V_q depends on q, the double bar must
     also depend on q.
 
-    Summary: hbar-invisibility is a RATIONAL phenomenon. The Yangian
-    is rational (poles at z=0 only), so hbar factors out. The quantum
-    lattice VOA is trigonometric (shifted poles), so q is visible.
+    Summary: deformation-parameter loss is an associated-graded
+    rational shadow phenomenon. The full Yangian retains hbar in its RTT
+    product; the quantum lattice VOA is trigonometric (shifted poles),
+    so q is already visible to the collision-residue shadow.
     """
     return {
-        'yangian_hbar_invisible': True,
-        'quantum_lattice_hbar_invisible': False,
-        'reason': 'shifted poles at zeta = +/- hbar make q visible to the bar differential',
+        'full_yangian_hbar_visible': True,
+        'yangian_primitive_shadow_loses_hbar': True,
+        'quantum_lattice_collision_shadow_hbar_visible': True,
+        'reason': (
+            'shifted poles at zeta = +/- hbar make q visible to the '
+            'quantum-lattice collision shadow'
+        ),
         'mechanism': 'rational vs trigonometric: d log(zeta) vs d log(zeta +/- hbar)',
         'double_bar_recovers': 'V_q (with q-dependence)',
         'key_distinction': (
-            'Yangian: residue at z=0 is Omega (q-independent). '
-            'V_q: total residue is [K+,K-]_q (q-dependent).'
+            'Yangian full RTT product retains hbar; only the PBW primitive '
+            'shadow has normalized residue Omega. V_q: total residue is '
+            '[K+,K-]_q (q-dependent).'
         ),
     }
 
@@ -832,7 +846,7 @@ def test_quantum_m2_lambda_absence():
 
 
 def test_depth_spectrum_q_stability():
-    """Test: depth spectrum is q-stable."""
+    """Test: the displayed A_1 depth window is q-stable."""
     q = Symbol('q')
 
     ds_cl = depth_spectrum_classical()
@@ -846,11 +860,12 @@ def test_depth_spectrum_q_stability():
         f"Poincare series differ"
     assert ds_cl['m4_zero'] == ds_qu['m4_zero'], \
         f"m4 vanishing differs"
+    assert ds_qu['scope'] == 'A1 finite-window oracle'
 
-    print("  [PASS] Depth spectrum q-stable: {1,2,3} for both classical and quantum")
+    print("  [PASS] A1 depth window q-stable: {1,2,3} for classical and quantum")
     print(f"         Class: {ds_cl['class']} (stable)")
     print(f"         Poincare: {ds_cl['poincare_series']} (stable)")
-    print(f"         m4 = 0: {ds_cl['m4_zero']} (stable)")
+    print(f"         m4 = 0 in tested arity-4 window: {ds_cl['m4_zero']}")
 
 
 def test_classical_ybe():
@@ -865,7 +880,7 @@ def test_classical_ybe():
 
 
 def test_trigonometric_r_at_q1():
-    """Test: trigonometric R-matrix at q=1 reduces to permutation."""
+    """Test: trigonometric R-matrix at bare q=1 is the undeformed limit."""
     z = Symbol('z')
     R_trig = trigonometric_r_matrix(z, S(1))
 
@@ -888,11 +903,11 @@ def test_trigonometric_r_at_q1():
             assert simplify(val - expected) == 0, \
                 f"R(z, q=1)[{i},{j}] = {val}, expected {expected}"
 
-    print("  [PASS] Trigonometric R at q=1 = Identity (classical limit)")
+    print("  [PASS] Trigonometric R at bare q=1 = Identity (undeformed multiplicative limit)")
 
 
 def test_yang_r_leading_order():
-    """Test: Yang R-matrix leading order matches trigonometric expansion."""
+    """Test: Yang R-matrix has the rational additive-degeneration form."""
     z, hbar, q = symbols('z hbar q')
 
     # Yang R-matrix: R_yang = 1 + hbar * Omega / z
@@ -932,15 +947,18 @@ def test_double_bar_hbar_visibility():
     """Test: hbar visibility analysis."""
     analysis = double_bar_analysis()
 
-    assert analysis['yangian_hbar_invisible'] is True
-    assert analysis['quantum_lattice_hbar_invisible'] is False
+    assert analysis['full_yangian_hbar_visible'] is True
+    assert analysis['yangian_primitive_shadow_loses_hbar'] is True
+    assert analysis['quantum_lattice_collision_shadow_hbar_visible'] is True
+    assert 'full RTT product retains hbar' in analysis['key_distinction']
 
-    print("  [PASS] Double bar: hbar invisible for Yangian, VISIBLE for V_q")
+    print("  [PASS] Double bar: full Yangian and V_q retain deformation parameters")
+    print("         Only the Yangian primitive associated-graded shadow loses hbar")
     print(f"         Reason: {analysis['reason']}")
 
 
 def test_q_stability_dichotomy():
-    """Test: the complete q-stability dichotomy."""
+    """Test: the finite-window q-stability dichotomy."""
     q = Symbol('q')
     analysis = q_stability_analysis(q)
 
@@ -948,10 +966,11 @@ def test_q_stability_dichotomy():
     deformed = analysis['q_deformed']
 
     # Stable invariants
+    assert stable['scope'] == 'A1 finite-window oracle'
     assert stable['class'] == 'L'
     assert stable['depth_spectrum'] == '{1, 2, 3}'
     assert stable['poincare_series'] == '1 + 3t'
-    assert stable['m4'] == '0'
+    assert stable['m4_window'] == '0 in tested arity-4 window'
 
     # Deformed invariants
     assert 'q' in deformed['m2_E+E-'].lower() or 'K' in deformed['m2_E+E-']
@@ -962,8 +981,8 @@ def test_q_stability_dichotomy():
     n_stable = len(stable)
     n_deformed = len(deformed)
 
-    print(f"  [PASS] q-stability dichotomy: {n_stable} stable, {n_deformed} deformed invariants")
-    print(f"         Stable: class, depth spectrum, Poincare series, m4, r_max")
+    print(f"  [PASS] finite-window q-stability: {n_stable} stable, {n_deformed} deformed invariants")
+    print(f"         Stable in A1 window: class, depth spectrum, Poincare series, m4 window, r_max")
     print(f"         Deformed: m2, r-matrix, R-matrix, kappa, Koszul dual, pole locus, factorisation")
 
 
@@ -1020,7 +1039,8 @@ def test_ordered_koszul_dual():
     The identification is supported by:
     1. The R-matrix: Yang for Yangian, trigonometric for quantum affine
     2. The RTT presentation: R(z/w) T1(z) T2(w) = T2(w) T1(z) R(z/w)
-    3. The classical limit: U_q(sl_2-hat) -> Y_hbar(sl_2) as q -> 1
+    3. The degeneration: bare q -> 1 gives the undeformed affine/loop
+       object; the Yangian is the additive rational scaling limit.
     """
     result = {
         'classical_koszul_dual': 'Y_hbar(sl_2)',
@@ -1032,16 +1052,22 @@ def test_ordered_koszul_dual():
         'quantum_presentation': 'RTT with trigonometric R-matrix',
 
         'consistency': {
-            'classical_limit': 'U_q(sl_2-hat) -> Y_hbar(sl_2) as q -> 1',
+            'bare_q_to_1_limit': 'U_q(sl_2-hat) -> U(sl_2-hat) / loop current form',
+            'rational_scaling_limit': (
+                'z=exp(eps*u), q=exp(eps*hbar/2), eps->0 gives the Yangian R-matrix'
+            ),
             'genus_1_lift': 'U_{q,p}(sl_2-hat) (elliptic quantum group)',
         },
     }
 
     assert result['classical_koszul_dual'] == 'Y_hbar(sl_2)'
     assert result['quantum_koszul_dual'] == 'U_q(sl_2-hat)'
+    assert 'bare_q_to_1_limit' in result['consistency']
+    assert 'rational_scaling_limit' in result['consistency']
 
     print("  [PASS] Ordered Koszul dual: classical = Yangian, quantum = quantum affine")
-    print("         Classical limit: U_q -> Y_hbar as q -> 1")
+    print("         Bare q->1: undeformed affine/loop object")
+    print("         Yangian: additive rational scaling degeneration")
     print("         Genus-1 lift: elliptic quantum group U_{q,p}")
 
 
@@ -1167,7 +1193,7 @@ def test_hilbert_series():
 # =============================================================================
 
 def run_all_tests():
-    """Run the complete test suite for quantum lattice VOA bar complex."""
+    """Run the focused quantum-lattice VOA bar oracle."""
     print("=" * 72)
     print("QUANTUM LATTICE VOA ORDERED BAR COMPLEX")
     print("V_q = E_1-chiral deformation of A_1 lattice VOA")
@@ -1213,7 +1239,7 @@ def run_all_tests():
         ("10. Ordered Koszul dual", [
             test_ordered_koszul_dual,
         ]),
-        ("11. Double bar hbar visibility", [
+        ("11. Double bar deformation-parameter visibility", [
             test_double_bar_hbar_visibility,
         ]),
     ]
@@ -1243,8 +1269,8 @@ def run_all_tests():
 
     print("\n--- MATHEMATICAL SUMMARY ---")
     print()
-    print("The quantum lattice VOA V_q (Etingof-Kazhdan type) is the FIRST")
-    print("genuinely E_1-chiral algebra in the ordered bar landscape.")
+    print("The quantum lattice VOA V_q (Etingof-Kazhdan type) is the explicit")
+    print("A_1 benchmark here for genuinely E_1-chiral ordered-bar behaviour.")
     print()
     print("KEY FINDINGS:")
     print()
@@ -1257,22 +1283,24 @@ def run_all_tests():
     print("   two simple poles at zeta=+/-hbar, and simple poles produce only")
     print("   residues (not lambda-polynomials).")
     print()
-    print("3. q-STABILITY: Combinatorial invariants (depth spectrum, class,")
-    print("   Poincare series, tower truncation) are q-STABLE. Algebraic")
-    print("   invariants (m_2 coefficients, R-matrix, Koszul dual, kappa)")
-    print("   are q-DEFORMED.")
+    print("3. FINITE-WINDOW q-STABILITY: in this A_1 oracle, generator count,")
+    print("   displayed depth spectrum, Serre arity, and the tested m4 window")
+    print("   are unchanged. Coefficients, R-matrix, Koszul-dual recognition")
+    print("   data, and kappa are q-deformed.")
     print()
     print("4. R-MATRIX: Classical = Yang (rational), Quantum = trigonometric.")
-    print("   The trigonometric R-matrix is NOT derivable from a local OPE:")
-    print("   it is independent input (tier (iii) of the three-tier picture).")
+    print("   The trigonometric R-matrix is extra quasi-triangular input beyond")
+    print("   the local collision residue in this E_1 model.")
     print()
-    print("5. DOUBLE BAR: hbar is INVISIBLE for the Yangian (rational case)")
-    print("   but VISIBLE for V_q (trigonometric case). The shifted poles at")
-    print("   zeta=+/-hbar make q a genuine parameter of the bar differential.")
+    print("5. DOUBLE BAR: the full Yangian retains hbar in the RTT product;")
+    print("   only its PBW primitive collision shadow loses hbar. For V_q,")
+    print("   shifted poles at zeta=+/-hbar make q visible already to the")
+    print("   collision-residue shadow.")
     print()
-    print("6. KOSZUL DUAL: Y_hbar(sl_2) -> U_q(sl_2-hat). The rational-to-")
-    print("   trigonometric transition of the R-matrix lifts to a Yangian-to-")
-    print("   quantum-affine transition of the Koszul dual.")
+    print("6. KOSZUL DUAL: Y_hbar(sl_2) and U_q(sl_2-hat) are related by")
+    print("   the rational/additive degeneration of the trigonometric")
+    print("   quantum-affine R-matrix. Bare q->1 gives the undeformed")
+    print("   affine/loop object, not the Yangian.")
     print()
 
     return True

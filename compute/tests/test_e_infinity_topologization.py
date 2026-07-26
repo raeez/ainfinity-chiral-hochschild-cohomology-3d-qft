@@ -34,7 +34,7 @@ Disjoint source families used across decorators:
         projections W_infty[mu] ->> W_N[mu], and universal Sugawara-like
         Casimir generators T^(n) for all n >= 2.
 
-    (c) Bouwknegt-McCarthy-Pilch spin-content tables
+    (c) Bouwknegt-Schoutens spin-content tables
         -- Phys.Rept. 223 (1993) 183: explicit W_N spin content,
         classical W_infty brackets via hw(1), and the higher-spin
         Casimir construction proper (Schoutens-Sevrin-van Nieuwenhuizen
@@ -65,12 +65,25 @@ from __future__ import annotations
 
 from fractions import Fraction
 import os
+from pathlib import Path
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from compute.lib.independent_verification import independent_verification
 from compute.lib.winfty_finite_window import spin4_window_diagnostic
+
+ROOT = Path(__file__).resolve().parents[2]
+EINFINITY_TEX = ROOT / "chapters/connections/e_infinity_topologization.tex"
+
+
+def _flat(path: Path) -> str:
+    return " ".join(path.read_text(encoding="utf-8").split())
+
+
+def _window(source: str, needle: str, radius: int = 2600) -> str:
+    index = source.index(needle)
+    return source[max(0, index - radius): index + radius]
 
 
 # ---------------------------------------------------------------------------
@@ -91,7 +104,7 @@ from compute.lib.winfty_finite_window import spin4_window_diagnostic
     verified_against=[
         "Schoutens-Sevrin-vanNieuwenhuizen higher-spin Casimir construction (arXiv:hep-th/9109022)",
         "Fateev-Lukyanov explicit W_N OPE tables Int.J.Mod.Phys. A3 (1988) 507-520",
-        "Bouwknegt-McCarthy-Pilch W-symmetry review Phys.Rept. 223 (1993) 183 Section 4",
+        "Bouwknegt-Schoutens W-symmetry review Phys.Rept. 223 (1993) 183",
     ],
     disjoint_rationale=(
         "Derivation uses the Costello-Gaiotto BV complex as the 3d bulk, "
@@ -102,8 +115,8 @@ from compute.lib.winfty_finite_window import spin4_window_diagnostic
         "who define the higher-spin Casimirs abstractly as symmetric "
         "invariants d^{a_1...a_n} Sym^n(g^*)^g, independent of any BV data "
         "or boundary condition; Fateev-Lukyanov's OPE tables give explicit "
-        "spin-n field products with no reference to 3d BV bulk; BMP review "
-        "Section 4 treats the classical W-symmetry algebra at the Poisson "
+        "spin-n field products with no reference to 3d BV bulk; the "
+        "Bouwknegt-Schoutens review treats the classical W-symmetry algebra at the Poisson "
         "level via Drinfeld-Sokolov reduction without invoking Costello-"
         "Gaiotto's 3d CS bulk. The two derivations agree on the existence "
         "and structure of T^(n) but use genuinely disjoint machinery."
@@ -144,7 +157,7 @@ def test_iterated_sugawara_construction():
     ],
     verified_against=[
         "Kirillov-Kostant invariant-polynomial Poisson centrality on sl_N star",
-        "Linshaw universal W_infty OPE closure and BMP lower-Casimir contact-term description",
+        "Linshaw universal W_infty OPE closure and Bouwknegt-Schoutens lower-Casimir contact-term description",
         "Homological perturbation lemma acyclicity for a finite filtered Koszul complex",
     ],
     disjoint_rationale=(
@@ -153,7 +166,7 @@ def test_iterated_sugawara_construction():
         "contraction and transfers the Euler homotopy through DS "
         "screenings. Verification uses three outside checks: invariant "
         "polynomials Poisson-commute for the Kirillov-Kostant bracket; "
-        "Linshaw/BMP identify the W-algebra contact terms as lower "
+        "Linshaw and Bouwknegt-Schoutens identify the W-algebra contact terms as lower "
         "Casimir expressions independently of the BV antighost complex; "
         "and finite filtered Koszul acyclicity is a general homological "
         "algebra theorem. No verification source uses the Costello-"
@@ -167,7 +180,7 @@ def test_casimir_antighost_commutativity():
     G^(n)=h_scr(W^(n)) and kill the positive-antighost bracket.
 
     Verification: invariant Casimirs Poisson-commute, lower contact
-    terms close in the Linshaw/BMP W-algebra, and finite filtered
+    terms close in the Linshaw/Bouwknegt-Schoutens W-algebra, and finite filtered
     Koszul complexes have no positive-antighost cohomology.
     """
     for spin_n in range(2, 8):
@@ -332,7 +345,7 @@ def test_e_infinity_specialisation_Vir():
     verified_against=[
         "Linshaw arXiv:1710.02275 universal W_infty[mu] truncation W_infty[mu] ->> W_N[mu] with explicit spin structure",
         "de Boer-Tjin Commun. Math. Phys. 160 (1993) 317-332 free strong generation of Bershadsky-Polyakov (minimal W of sl_3)",
-        "Bouwknegt-McCarthy-Pilch Phys.Rept. 223 (1993) explicit W_3, W_4 classical algebras via Miura transformation",
+        "Bouwknegt-Schoutens Phys.Rept. 223 (1993) explicit W_3, W_4 classical algebras via Miura transformation",
     ],
     disjoint_rationale=(
         "Derivation constructs the stress tower in the principal DS "
@@ -348,7 +361,7 @@ def test_e_infinity_specialisation_Vir():
         "(ii) de Boer-Tjin construct the Bershadsky-Polyakov algebra "
         "(= minimal W of sl_3 = W^{(2)}_3) via screened free fields "
         "without appeal to Kazhdan grading, Sugawara, or DS. "
-        "(iii) BMP review constructs W_N at the classical Poisson "
+        "(iii) Bouwknegt-Schoutens review constructs W_N at the classical Poisson "
         "level via the Miura transformation, a chiral-free-field "
         "realisation disjoint from the 3d CS bulk used in derivation. "
         "Agreement on the existence of the spin tower up to spin N "
@@ -363,7 +376,7 @@ def test_e_infinity_specialisation_WN():
     {T^(n)}_{n=2}^{N} from the DS principal realisation.
 
     Verification: Linshaw's universal family truncation; de Boer-Tjin's
-    free-field BP construction; BMP's Miura transformation. Each produces
+    free-field BP construction; Bouwknegt-Schoutens' Miura transformation. Each produces
     the spin tower up to spin N by different machinery.
     """
     assert True  # agreement check across four disjoint construction paths
@@ -446,6 +459,59 @@ def test_winfty_spin4_window_is_not_weight_window_convergence():
     assert diagnostic.proves_einfty_endpoint is False
 
 
+def test_topologization_theorem_heads_display_their_hypothesis_packages():
+    """The central topologisation claims name the data they consume."""
+    source = _flat(EINFINITY_TEX)
+
+    stress = _window(source, r"\label{prop:stress-tower-dimension-count}")
+    assert r"\hypAmbientWtCpl+\hypTLift" in stress
+    assert "independent topological translation operators" in stress
+
+    sugawara = _window(source, r"\label{thm:iterated-sugawara-construction}")
+    assert r"\hypDSBRST+\hypTLift+\hypAmbientWtCpl" in sugawara
+    assert "completed BV--BRST ambient" in sugawara
+    assert "chain-level higher-spin translation lift" in sugawara
+
+    casimir = _window(source, r"\label{thm:casimir-antighost-commutativity}")
+    assert r"\hypDSBRST+\hypAmbientWtCpl+\hypTLift" in casimir
+    assert "completed current--antighost ambient" in casimir
+
+    closed = _window(source, r"\label{prop:closed-normal-ordered-antighost-homotopies}")
+    assert r"\hypDSBRST+\hypAmbientWtCpl" in closed
+    assert "finite DS/BV package" in closed
+
+    ladder = _window(source, r"\label{thm:e-infinity-topologization-ladder}")
+    assert r"\hypAmbientWtCpl+\hypTLift" in ladder
+    assert "infinite-depth limit is not a formal consequence" in ladder
+
+    vir = _window(source, r"\label{thm:e-infinity-specialisation-Vir}")
+    assert r"\hypDSBRST+\hypTLift" in vir
+    assert r"\mathfrak{sl}_2" in vir
+
+    wn = _window(source, r"\label{thm:e-infinity-specialisation-WN}")
+    assert r"\hypDSBRST+\hypAmbientWtCpl+\hypTLift" in wn
+    assert "higher-spin \\(T^{(n)}=[Q,G^{(n)}]\\) lift" in wn
+
+    spiral = _window(source, r"\label{thm:operadic-spiral}")
+    assert r"\hypOperadicAmbient" in spiral
+    assert r"\infty\)-operadic ambient" in spiral
+
+    scope = _window(source, r"\label{prop:scope-E2-to-E3}")
+    assert r"\hypDSBRST+\hypTLift" in scope
+
+    fractional = _window(source, r"\label{prop:fractional-ghost-branched-cover}")
+    assert r"\ClaimStatusConditional" in fractional
+    assert r"\hypDSBRST+\hypAmbientWtCpl" in fractional
+    assert "deck-equivariant ghost system" in fractional
+
+    class_m = _window(source, r"\label{prop:class-M-free-PVA}")
+    assert r"\hypAmbientWtCpl+\hypKZSDR+\hypTLift" in class_m
+    assert "licensed locus" in class_m
+
+    kz = _window(source, r"\label{prop:stage-9-class-M-kz-admissibility}")
+    assert r"\hypAmbientWtCpl+\hypKZSDR+\hypTLift" in kz
+
+
 # ---------------------------------------------------------------------------
 # 7. thm:operadic-spiral
 # ---------------------------------------------------------------------------
@@ -458,7 +524,7 @@ def test_winfty_spin4_window_is_not_weight_window_convergence():
     ],
     verified_against=[
         "Lurie HA Theorem 5.3.1.30 (classical higher Deligne: Z^{der}(E_n) = E_{n+1})",
-        "Ayala-Francis arXiv:1206.5522 factorization homology of topological manifolds (bar = factorization homology of (-infty, +infty))",
+        "Ayala-Francis arXiv:1206.5522 factorization homology of topological manifolds (reduced bar = interval with augmentation boundary conditions)",
         "Kontsevich-Soibelman operadic Gerstenhaber-Hochschild cohomology identification",
     ],
     disjoint_rationale=(

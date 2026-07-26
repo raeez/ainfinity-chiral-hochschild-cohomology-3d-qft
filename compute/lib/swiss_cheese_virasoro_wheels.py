@@ -505,7 +505,7 @@ def _scale_field_dict(d, factor):
 
 
 def m4_virasoro_from_stasheff(lam1, lam2, lam3, c_sym=None):
-    """Compute m_4(T,T,T,T; lam1, lam2, lam3) from the Stasheff relation.
+    """Compute the arity-4 source for a chain-level m_4(T,T,T,T).
 
     The arity-4 Stasheff A-infinity identity (tree part):
     d*m_4 = m_2(m_3(T,T,T;l1,l2), T; l1+l2+l3)
@@ -514,6 +514,13 @@ def m4_virasoro_from_stasheff(lam1, lam2, lam3, c_sym=None):
           - m_3(T, m_2(T,T;l2), T; l1, l2+l3)
           + m_3(T, T, m_2(T,T;l3); l1, l2)
 
+    Thus arity 4 computes the boundary source d*m_4, not a
+    cohomological value of m_4. On a minimal model with d=m_1=0 the
+    arity-4 identity is only m_2 circ m_3 + m_3 circ m_2 = 0; the first
+    minimal-model relation involving m_4 is arity 5:
+    m_2 circ m_4 + m_3 circ m_3 + m_4 circ m_2 = 0. Any actual m_4
+    below therefore depends on the chosen contracting homotopy/gauge.
+
     The contracting homotopy h projects onto non-exact part (T, dT, scalar),
     killing d2T and higher derivatives. For the leading terms:
 
@@ -521,7 +528,7 @@ def m4_virasoro_from_stasheff(lam1, lam2, lam3, c_sym=None):
     in the Virasoro module. We compute the T and scalar (c-dependent) parts.
 
     Returns:
-        dict {field: coefficient} of m_4
+        dict {field: coefficient} for the arity-4 source terms
     """
     c = c_sym if c_sym is not None else Symbol('c')
     l1, l2, l3 = lam1, lam2, lam3
@@ -535,9 +542,10 @@ def m4_virasoro_from_stasheff(lam1, lam2, lam3, c_sym=None):
     # determine the coefficients by computing the Stasheff relation
     # modulo exact terms.
 
-    # The T-coefficient of m_4 is determined by the Stasheff relation
-    # at the T-level. The scalar coefficient (proportional to c) is
-    # determined at the scalar level.
+    # The T-coefficient of d*m_4 is computed by the Stasheff relation
+    # at the T-level. Extracting m_4 itself requires a contracting
+    # homotopy; this function records the source, not a canonical
+    # cohomology class.
 
     # From the Virasoro BV master equation structure and dimensional analysis:
     # m_4(T^4; l1,l2,l3) has total weight 8 (four T's of weight 2 each),
@@ -624,9 +632,8 @@ def m4_virasoro_from_stasheff(lam1, lam2, lam3, c_sym=None):
     # careful tracking of the BRST homotopy.
 
     # Compute the Stasheff RHS at T level (the part proportional to T):
-    # This determines the T-coefficient of d*m_4.
-    # Since d(T) = 0 on bar cohomology, the T-coefficient of the RHS
-    # gives the T-coefficient of m_4 directly (up to exact terms).
+    # this determines the T-coefficient of d*m_4. A later homotopy
+    # choice may choose a primitive for this source.
 
     # Simplified approach: compute only the T-part of A1 + A2.
     # The B terms require sesquilinearity in middle slots, which is
@@ -984,20 +991,21 @@ def affine_lambda_bracket_sl2(lam, k_val=None):
     For sl_2 with basis e, h, f:
       {e_lam h} = -2e, {e_lam f} = h + k*lam, {h_lam h} = 2k*lam, etc.
 
-    The Jacobi identity holds, so the A-infinity structure is formal:
-    m_k = 0 for k >= 3 on generators.
+    The Jacobi identity holds, so the A-infinity structure is finite:
+    m_3 records the Lie tree and m_k = 0 for k >= 4 on generators.
     Shadow class: L (Lie/tree), r_max = 3 (the shadow has cubic term from
-    the Lie bracket, but the Swiss-cheese A-infinity operations vanish for k >= 3).
+    the Lie bracket).
 
     Returns:
-        'formal': True (m_k = 0 for k >= 3)
+        'm4_and_higher_vanish': True
     """
     return {
         'has_quartic_pole': False,
         'max_pole_order': 2,
-        'associator_vanishes': True,
-        'formal': True,
-        'm3_vanishes': True,
+        'associator_vanishes': False,
+        'formal': False,
+        'm3_vanishes': False,
+        'm4_and_higher_vanish': True,
         'shadow_class': 'L',
     }
 
@@ -1043,7 +1051,7 @@ def depth_classification(algebra: str) -> Dict[str, object]:
 
     For the Swiss-cheese A-infinity structure:
       Heisenberg: m_k = 0 for k >= 3 (formal)
-      Affine:     m_k = 0 for k >= 3 (formal)
+      Affine:     finite Lie transfer; m_k = 0 for k >= 4
       betagamma:  m_k = 0 for k >= 3 on generators (formal on generators)
       Virasoro:   m_k != 0 for ALL k >= 3 (genuinely non-formal)
       W_3:        m_k != 0 for ALL k >= 3 (genuinely non-formal)
@@ -1060,9 +1068,9 @@ def depth_classification(algebra: str) -> Dict[str, object]:
         'affine': {
             'shadow_class': 'L',
             'shadow_depth': 3,
-            'sc_formal': True,
-            'sc_m3_zero': True,
-            'sc_mk_zero_for_k_geq_3': True,
+            'sc_formal': False,
+            'sc_m3_zero': False,
+            'sc_mk_zero_for_k_geq_4': True,
             'max_pole_order': 2,
         },
         'betagamma': {

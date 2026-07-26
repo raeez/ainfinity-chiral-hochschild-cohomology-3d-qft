@@ -34,7 +34,8 @@ D5 (Commutativity / Skew-symmetry):
 
 Vacuum (Unit):
   {1_lam a} = 0
-  Proved via: vacuum factorization with the unit insertion
+  {a_lam 1} = 0, 1*a = a = a*1, d1 = 0
+  Proved via: strict unit/vacuum factorization with the unit insertion
 
 References:
   Vol II: pva-descent.tex, D2-D5 plus vacuum proofs
@@ -128,6 +129,10 @@ class PVAData:
 
     def multiply(self, a: str, b: str) -> Any:
         """Commutative product a*b."""
+        if a == self.unit:
+            return b
+        if b == self.unit:
+            return a
         return self.product.get((a, b), S.Zero)
 
 
@@ -824,26 +829,52 @@ def verify_d5_skew_symmetry(pva: PVAData, a: str, b: str,
 def verify_d6_unit(pva: PVAData, a: str, lam=None) -> Dict[str, Any]:
     """Verify the vacuum unit axiom for a generator.
 
-    {1_lam a} = 0 for all a.
+    {1_lam a} = 0, {a_lam 1} = 0, 1*a = a = a*1,
+    and d1 = 0.
 
     This follows from vacuum factorization with the unit insertion:
-    all positive-order n-products with 1 vanish:
-      1_{(n)} a = 0 for n >= 0.
+    all nonnegative n-products with 1 vanish:
+      1_{(n)} a = a_{(n)} 1 = 0 for n >= 0,
+    while the regular constant term is the strict unit.
     """
     if lam is None:
         lam = Symbol('lam')
 
     unit = pva.unit
 
-    # Check that {1_lam a} = 0
     bracket_1a = pva.bracket(unit, a, lam)
+    bracket_a1 = pva.bracket(a, unit, lam)
+    left_product = pva.multiply(unit, a)
+    right_product = pva.multiply(a, unit)
+    unit_derivative = pva.partial.get(unit, S.Zero)
+
+    left_bracket_vanishes = simplify(bracket_1a) == 0
+    right_bracket_vanishes = simplify(bracket_a1) == 0
+    left_unit_holds = left_product == a
+    right_unit_holds = right_product == a
+    translation_unit_holds = simplify(unit_derivative) == 0
 
     return {
         'generator': a,
         'bracket_unit_a': str(bracket_1a),
-        'vanishes': simplify(bracket_1a) == 0,
+        'bracket_a_unit': str(bracket_a1),
+        'left_product': str(left_product),
+        'right_product': str(right_product),
+        'unit_derivative': str(unit_derivative),
+        'left_bracket_vanishes': left_bracket_vanishes,
+        'right_bracket_vanishes': right_bracket_vanishes,
+        'left_unit_holds': left_unit_holds,
+        'right_unit_holds': right_unit_holds,
+        'translation_unit_holds': translation_unit_holds,
+        'vanishes': (
+            left_bracket_vanishes
+            and right_bracket_vanishes
+            and left_unit_holds
+            and right_unit_holds
+            and translation_unit_holds
+        ),
         'identity_type': 'vacuum unit',
-        'geometric_source': 'vacuum factorization with unit insertion',
+        'geometric_source': 'strict unit/vacuum factorization with unit insertion',
     }
 
 

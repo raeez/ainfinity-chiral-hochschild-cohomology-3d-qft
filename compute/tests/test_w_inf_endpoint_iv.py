@@ -6,7 +6,7 @@ reaches E_infty^top via W_{1+infty}; specifically the topologisation
 ladder
     affine KM (non-critical) -> E_3
     W_N                       -> E_{N+1}
-    W_infty[lambda]           -> E_infty^top  (Platonic endpoint)
+    W_infty[lambda]           -> E_infty^top  (E_infty-topological endpoint)
 holds CONDITIONAL on four hypotheses:
   hypProchazka  -- Prochazka's W_infty[lambda] universal triangle
   hypCKL        -- Costello-Kapranov-Li 6d hCS quartic obstruction

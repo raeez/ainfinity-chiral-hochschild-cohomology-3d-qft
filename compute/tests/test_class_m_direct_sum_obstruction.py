@@ -294,7 +294,7 @@ def test_raw_direct_sum_nonzero_witness():
     # Sanity on BPZ formula values:
     # c=1: S_4 = 10 / (1 * 27) = 10/27
     assert _s4_virasoro(Fraction(1)) == Fraction(10, 27)
-    # c=13 (Virasoro self-dual): S_4 = 10 / (13 * 87) = 10/1131
+    # c=13 (line-comparison fixed point): S_4 = 10 / (13 * 87) = 10/1131
     assert _s4_virasoro(Fraction(13)) == Fraction(10, 1131)
     # c=7: S_4 = 10 / (7 * 57) = 10/399
     assert _s4_virasoro(Fraction(7)) == Fraction(10, 399)

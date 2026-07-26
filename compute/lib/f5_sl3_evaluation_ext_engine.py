@@ -91,7 +91,7 @@ REFERENCES
 
 Conventions
 -----------
-* Cohomological grading (|d| = +1), bar uses desuspension (AP45).
+* Cohomological grading (|d| = +1); desuspension lowers degree by one.
 * hbar = 1/(k + h^vee); for sl_3 at level k, hbar = 1/(k+3).
 * h^vee(sl_3) = 3, dim(sl_3) = 8, dim fund = 3.
 * P is permutation operator on V_{omega_1} tensor V_{omega_2}.

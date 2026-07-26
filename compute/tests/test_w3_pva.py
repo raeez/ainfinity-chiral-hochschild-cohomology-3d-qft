@@ -187,6 +187,62 @@ class TestW3Brackets:
 
 
 # ===================================================================
+# LAMBDA-CHANNEL TRANSFER
+# ===================================================================
+
+class TestW3LambdaChannelTransfer:
+    """Verify the Lambda-channel data used in the m4 transfer formula."""
+
+    def test_literal_lambda_projection_contains_beta(self):
+        """P_Lambda {W_lam W} contains beta_Lambda * lambda * Lambda."""
+        from lib.examples.w3_algebra import (
+            Lambda, beta_sq, w3_literal_lambda_projection_of_WW
+        )
+        lam = Symbol('lambda')
+        expected = beta_sq * lam * Lambda
+        assert simplify(w3_literal_lambda_projection_of_WW(lam) - expected) == 0
+
+    def test_unit_lambda_channel_strips_beta(self):
+        """P_Lambda^circ is the coefficient-one channel lambda * Lambda."""
+        from lib.examples.w3_algebra import (
+            Lambda, w3_unit_lambda_channel_of_WW
+        )
+        lam = Symbol('lambda')
+        assert simplify(w3_unit_lambda_channel_of_WW(lam) - lam * Lambda) == 0
+
+    def test_m4_lambda_channel_profile(self):
+        """The m4 Lambda-channel profile records the FM boundary kernel."""
+        from lib.examples.w3_algebra import (
+            beta_sq, w3_m4_lambda_channel_profile
+        )
+        profile = w3_m4_lambda_channel_profile()
+        assert simplify(profile['coefficient'] - beta_sq) == 0
+        assert profile['planar_pair_channels_linear'] == ('12|34',)
+        assert 'Res_{D_ab|cd}' in profile['kernel']
+        assert 'P_Lambda^circ' in profile['operation']
+
+    def test_primary_lambda_eigenvalue(self):
+        """Lambda_0 has eigenvalue h^2 - 3h/5 in the primary-line convention."""
+        from lib.examples.w3_algebra import (
+            w3_lambda_channel_vanishing_weights,
+            w3_primary_lambda_eigenvalue,
+        )
+        h = Symbol('h')
+        eigenvalue = w3_primary_lambda_eigenvalue(h)
+        assert simplify(eigenvalue - (h**2 - Rational(3, 5) * h)) == 0
+        assert w3_lambda_channel_vanishing_weights() == (S.Zero, Rational(3, 5))
+        assert simplify(w3_primary_lambda_eigenvalue(S.One) - Rational(2, 5)) == 0
+
+    def test_gaudin_commutativity_scope(self):
+        """W_3 Hamiltonian commutativity needs a supplied Gaudin/RLL algebra."""
+        from lib.examples.w3_algebra import w3_gaudin_commutativity_scope
+        scope = w3_gaudin_commutativity_scope()
+        assert scope['matrix_components'] == ('TT', 'TW', 'WT', 'WW')
+        assert scope['requires'] == 'W_3 Gaudin/RLL algebra'
+        assert scope['pva_jacobi_sufficient'] is False
+
+
+# ===================================================================
 # W_3 OPE COEFFICIENTS
 # ===================================================================
 

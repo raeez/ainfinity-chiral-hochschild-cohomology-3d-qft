@@ -12,6 +12,7 @@ Plus one ProvedHere proposition:
 
     prop:super-yangian-grt-orbit
     prop:vol3-upgrade
+    prop:berezinian-bridge-criterion
 
 Each decorator names derived_from + verified_against sources that are
 genuinely disjoint (Nazarov 1991 super-RTT; Etingof-Kazhdan super-
@@ -76,6 +77,44 @@ def graded_jacobi_sum(
     s += (-1) ** (p_y * p_x) * b
     s += (-1) ** (p_z * p_y) * c
     return s
+
+
+# ---------------------------------------------------------------------------
+# prop:berezinian-bridge-criterion
+# ---------------------------------------------------------------------------
+
+
+@independent_verification(
+    claim="prop:berezinian-bridge-criterion",
+    derived_from=[
+        "Programme canonical Berezinian bridge datum",
+        "Koszul adjointness between m_k and Delta_k",
+    ],
+    verified_against=[
+        "Berezin 1987 'Introduction to Superanalysis' (Berezinian and supertrace identity)",
+        "Kontsevich-Soibelman 2009 arXiv:math/0606241 (cyclic A_infty pairings and duality)",
+    ],
+    disjoint_rationale=(
+        "Berezin 1987 supplies the infinitesimal Berezinian/supertrace "
+        "identity independently of the programme's super-Yangian setting. "
+        "Kontsevich-Soibelman 2009 supplies cyclic A_infty pairing "
+        "adjointness independently of super-RTT. The sign computation "
+        "below uses only Koszul parity bookkeeping."
+    ),
+)
+def test_berezinian_bridge_mk_delta_sign_rule():
+    """Independent Koszul sign check for the bridge criterion."""
+    input_parities = (1, 0, 1)
+    b_parity = 1
+    pair_sum = sum(
+        input_parities[i] * input_parities[j]
+        for i in range(len(input_parities))
+        for j in range(i + 1, len(input_parities))
+    )
+    epsilon = (b_parity * sum(input_parities) + pair_sum) % 2
+    assert epsilon == 1
+    assert parity_sign((b_parity,), (sum(input_parities) % 2,)) == 1
+    assert (-1) ** epsilon == -1
 
 
 # ---------------------------------------------------------------------------

@@ -19,16 +19,20 @@ from compute.lib.f13_super_yangian_berezinian_complementarity import (
     berezinian_complementarity,
     berezinian_shift,
     berezinian_shift_derivation,
+    canonical_berezinian_bridge_profile,
     f13_summary,
+    graded_matrix_product_sign,
     k,
     kappa_sBer,
     kappa_sBer_koszul_dual,
     kappa_str,
     kappa_str_koszul_dual,
+    mk_delta_compatibility_sign,
     psl_2_2_centre_rank,
     quantum_berezinian_gauss,
     rtt_centre_dimension,
     small_rank_table,
+    super_permutation_sign,
     super_dual_coxeter,
     supertrace_complementarity,
 )
@@ -216,7 +220,65 @@ def test_f13_summary_shape():
 
 
 # =====================================================================
-# 9. Super-dual Coxeter check
+# 9. Canonical Berezinian bridge datum
+# =====================================================================
+
+def test_super_permutation_sign_is_only_negative_on_odd_odd():
+    assert super_permutation_sign(0, 0) == 1
+    assert super_permutation_sign(0, 1) == 1
+    assert super_permutation_sign(1, 0) == 1
+    assert super_permutation_sign(1, 1) == -1
+
+
+def test_graded_matrix_product_sign():
+    # exponent = (|a|+|i|+|j|)(|k|+|l|) = (1+1+0)(0+1)=0 mod 2
+    assert graded_matrix_product_sign(1, 1, 0, 0, 1) == 1
+    # exponent = (1+0+0)(1+0)=1 mod 2
+    assert graded_matrix_product_sign(1, 0, 0, 1, 0) == -1
+
+
+def test_mk_delta_compatibility_sign():
+    sign = mk_delta_compatibility_sign((1, 0, 1), b_parity=1)
+    # epsilon = |b|(1+0+1) + (1*0 + 1*1 + 0*1) = 0 + 1 = 1 mod 2
+    assert sign["epsilon"] == 1
+    assert sign["sign"] == -1
+    assert "sum_{i<j}" in sign["formula"]
+
+
+def test_canonical_berezinian_bridge_profile():
+    profile = canonical_berezinian_bridge_profile()
+
+    assert profile["r_matrix"] == "R(u)=1-hbar P_s/u"
+    assert "delta_jk E_il" in profile["graded_matrix_product"]
+    assert profile["berezinian_infinitesimal"] == "d log Ber(1+epsilon X)=str(X)"
+    assert profile["pairing"] == "<-,->_can: A tensor A^! -> C"
+    assert "Tr_{A/A_nil}" in profile["trace_shadow"]
+    assert "Ber(<e_i,e_j^!>_can)" in profile["berezinian_shadow"]
+    assert "parallel scalar identities" in profile["without_bridge"]
+
+
+def test_super_chiral_yangian_source_contains_canonical_bridge():
+    import os
+
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    source = os.path.join(repo_root, 'chapters', 'theory', 'super_chiral_yangian.tex')
+    with open(source, encoding='utf-8') as handle:
+        text = handle.read()
+
+    assert 'def:canonical-berezinian-bridge-datum' in text
+    assert 'prop:berezinian-bridge-criterion' in text
+    assert 'eq:canonical-bridge-graded-matrix-product' in text
+    assert 'eq:canonical-berezinian-pairing' in text
+    assert 'eq:canonical-bridge-supertrace-shadow' in text
+    assert 'eq:canonical-bridge-berezinian-determinant' in text
+    assert 'eq:canonical-bridge-mk-deltak-compatibility' in text
+    assert 'eq:canonical-bridge-epsilon-sign' in text
+    assert r'\langle-,-\rangle_{\mathrm{can}}' in text
+    assert r'\operatorname{Ber}\bigl(\langle e_i,e^!_j\rangle_{\mathrm{can}}\bigr)' in text
+
+
+# =====================================================================
+# 10. Super-dual Coxeter check
 # =====================================================================
 
 def test_super_dual_coxeter():

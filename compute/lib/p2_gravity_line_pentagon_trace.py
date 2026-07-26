@@ -96,7 +96,7 @@ class PhiTenBorcherdsProduct:
     13.3) coefficients on the paramodular Grassmannian
     $\mathrm{O}(2, 26)/\mathrm{O}(2) \times \mathrm{O}(26)$.
 
-    The Borcherds singular theta lift of the K3 elliptic genus
+    The Borcherds singular theta lift of the half K3 weak Jacobi form
     $\phi_{0,1}^{K3} \in J_{0, 1}^{\mathrm{wk}}(\mathrm{SL}_2(\Z))$
     with leading Fourier datum $c(-1) = 1$, $c(0) = 10$ produces
     a Siegel paramodular form of weight $c(0)/2 = 5$, the
@@ -136,8 +136,8 @@ class HallBorcherdsResidual:
     The Vol III six routes to $G(K3 \times E) = \Drinfdouble{\Yplus{X}}$
     converge on the K3-fibered Class A locus at $N = 1$. The bridge
     residual is the BKM weight $c_1(0)/2 = 5$. Doubling (the open
-    colour, $\mathrm{Vir}_c$ stress tensor, paired with the chiral-
-    dual closed colour, $\mathrm{Vir}_{26-c}$ via Koszul duality) gives
+    colour, $\mathrm{Vir}_c$ stress tensor, paired with the strict
+    same-family line-side colour, $\mathrm{Vir}_{26-c}$) gives
     weight 10.
 
     The six routes in Vol III
@@ -283,6 +283,11 @@ class HCSQuarticObstructionWitness:
     chi_top_K3: int = 24
     chi_top_E: int = 0
     chi_top_quintic: int = -200
+    chi_top_K3_source: str = "Euler class / Chern-Gauss-Bonnet"
+    hrr_role_for_K3: str = (
+        "checks holomorphic indices such as chi(O_K3)=2; "
+        "not the source of chi_top(K3)=24"
+    )
 
     @property
     def chi_top_k3xe(self) -> int:

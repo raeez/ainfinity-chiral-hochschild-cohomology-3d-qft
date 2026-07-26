@@ -1020,8 +1020,10 @@ def fm_integral_degree3_nonsimplylaced(root_length_sq_ratios: List[float]) -> Di
 
     Returns analysis of the FM_3 integral for given root length ratios.
     """
-    from scipy.special import beta as beta_fn
-    from scipy import integrate
+    from math import gamma as _gamma
+
+    def beta_fn(a: float, b: float) -> float:
+        return _gamma(a) * _gamma(b) / _gamma(a + b)
 
     # For the abstract bar complex of a KM algebra, m_3 = 0 (quadratic OPE).
     # The degree-3 FM integral is relevant for the REPRESENTATION-THEORETIC

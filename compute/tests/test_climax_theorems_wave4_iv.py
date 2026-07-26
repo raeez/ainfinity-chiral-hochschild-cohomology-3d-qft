@@ -216,9 +216,13 @@ def test_mc_deformations():
 # thm:DS — Drinfeld-Sokolov reduction preserves Koszul duality
 # ---------------------------------------------------------------------------
 
-def _ds_preserves_koszul(good_grading: bool, non_critical: bool) -> bool:
-    """DS reduction preserves Koszul duality for good-graded nilpotents at non-critical level."""
-    return good_grading and non_critical
+def _ds_preserves_koszul(
+    good_grading: bool,
+    non_critical: bool,
+    transport_case_verified: bool,
+) -> bool:
+    """DS preserves Koszul duality only in named verified transport cases."""
+    return good_grading and non_critical and transport_case_verified
 
 
 @independent_verification(
@@ -226,7 +230,7 @@ def _ds_preserves_koszul(good_grading: bool, non_critical: bool) -> bool:
     derived_from=[
         "Programme BRST cohomology chain-level (Kazhdan-graded)",
         "DS-Koszul intertwining theorem (cross-volume bridge)",
-        "Arakawa C_2-cofiniteness + KRW BRST axioms",
+        "Arakawa associated-variety/lisse input on the stated finite surfaces + KRW BRST axioms",
     ],
     verified_against=[
         "Feigin-Frenkel 1990 'Quantization of Drinfeld-Sokolov reduction' Phys Lett B 246",
@@ -239,16 +243,17 @@ def _ds_preserves_koszul(good_grading: bool, non_critical: bool) -> bool:
         "programme's Koszul-duality framework. KRW 2003 axiomatises "
         "quantum Hamiltonian reduction for good Z-gradings from BRST "
         "first principles, again without the chiral-Koszul construction. "
-        "Both sources verify the DS reduction side; the programme's "
-        "claim is that this reduction intertwines with Koszul duality, "
-        "which holds because both sides respect the Z-grading and BRST "
-        "cohomology preserves it."
+        "Both sources verify the DS reduction side. The programme's "
+        "Koszul-intertwining claim is restricted to the named transport "
+        "cases where the DS-Hochschild special deformation retract is "
+        "constructed."
     ),
 )
 def test_ds_reduction():
-    assert _ds_preserves_koszul(True, True)
-    assert not _ds_preserves_koszul(False, True)
-    assert not _ds_preserves_koszul(True, False)
+    assert _ds_preserves_koszul(True, True, True)
+    assert not _ds_preserves_koszul(False, True, True)
+    assert not _ds_preserves_koszul(True, False, True)
+    assert not _ds_preserves_koszul(True, True, False)
 
 
 # ---------------------------------------------------------------------------

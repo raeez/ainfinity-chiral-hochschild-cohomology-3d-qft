@@ -336,6 +336,50 @@ class TestBicomplex:
         bc = bicomplex_structure()
         assert bc['D_Mod_genus_shift'] == 1
 
+    def test_explicit_graph_complex_orientation_profile(self):
+        """The theorem records both GK and stable-curve Hodge orientation lines."""
+        from lib.factorization_modular_engine import relative_modular_graph_complex_profile
+        profile = relative_modular_graph_complex_profile(
+            edge_count=3,
+            graph_h1_rank=1,
+            vertex_h1_ranks=(2, 4),
+        )
+        gk = profile['orientation_conventions']['getzler_kapranov']
+        hdg = profile['orientation_conventions']['stable_curve_hodge']
+        assert gk['edge_det_rank'] == 3
+        assert gk['graph_h1_dual_rank'] == 1
+        assert hdg['edge_det_rank'] == 3
+        assert hdg['vertex_h1_dual_rank'] == 6
+
+    def test_explicit_graph_complex_differential_profile(self):
+        """D_sep is the separating contraction and D_nsep is xi_e."""
+        from lib.factorization_modular_engine import relative_modular_graph_complex_profile
+        profile = relative_modular_graph_complex_profile(edge_count=1)
+        assert profile['D0_components'] == ['D_int', 'D_sep']
+        assert profile['D1_components'] == ['D_nsep']
+        assert profile['D_sep_dual_operation'] == 'contract_e for separating e'
+        assert profile['D_nsep_operation'] == 'xi_e for nonseparating e'
+        assert profile['D0_genus_shift'] == 0
+        assert profile['D1_genus_shift'] == 1
+
+    def test_explicit_d0_d1_identities(self):
+        """The three identities are the genus-homogeneous pieces of D^2=0."""
+        from lib.factorization_modular_engine import modular_d0_d1_identities
+        identities = modular_d0_d1_identities()
+        assert identities['D0_squared'] == 0
+        assert identities['D1_squared'] == 0
+        assert identities['D0D1_plus_D1D0'] == 0
+        assert identities['genus_shifts']['D1_squared'] == 2
+
+    def test_graph_complex_profile_rejects_negative_ranks(self):
+        """Orientation rank data must be non-negative."""
+        import pytest
+        from lib.factorization_modular_engine import relative_modular_graph_complex_profile
+        with pytest.raises(ValueError):
+            relative_modular_graph_complex_profile(edge_count=-1)
+        with pytest.raises(ValueError):
+            relative_modular_graph_complex_profile(edge_count=1, vertex_h1_ranks=(2, -1))
+
 
 # ===================================================================
 # 8. HOMOTOPY-INVOLUTIVITY
@@ -398,6 +442,50 @@ class TestGenusSpectralSequence:
         result = d1_obstruction_class(2, 1)
         assert result['obstruction_coefficient'] == 1
         assert result['vanishes'] is False
+
+    def test_genus_zero_mc_recursion_has_no_d1(self):
+        """The genus-zero MC equation is D0 Theta0 + 1/2[Theta0,Theta0]=0."""
+        from lib.factorization_modular_engine import modular_mc_recursion_terms
+        terms = modular_mc_recursion_terms(0)
+        assert terms['contains_D1'] is False
+        assert terms['bracket_pairs'] == [(0, 0)]
+        assert terms['forcing_terms'] == []
+
+    def test_genus_one_mc_recursion_has_d1_theta_zero(self):
+        """The genus-one equation contains D1 Theta0 and [Theta0,Theta1]."""
+        from lib.factorization_modular_engine import modular_mc_recursion_terms
+        terms = modular_mc_recursion_terms(1)
+        assert terms['contains_D1'] is True
+        assert terms['equation_terms'][1] == 'D1 Theta^0'
+        assert terms['bracket_pairs'] == [(0, 1), (1, 0)]
+        assert terms['obstruction_bracket_pairs'] == []
+
+    def test_higher_genus_obstruction_pairs_are_lower_genus_only(self):
+        """The obstruction omits the (0,g) and (g,0) twisted-differential pairs."""
+        from lib.factorization_modular_engine import modular_mc_recursion_terms
+        from lib.factorization_modular_engine import modular_obstruction_terms
+        terms = modular_mc_recursion_terms(4)
+        obstruction = modular_obstruction_terms(4)
+        assert terms['bracket_pairs'] == [(0, 4), (1, 3), (2, 2), (3, 1), (4, 0)]
+        assert terms['obstruction_bracket_pairs'] == [(1, 3), (2, 2), (3, 1)]
+        assert obstruction['D1_source_genus'] == 3
+        assert obstruction['bracket_pairs'] == [(1, 3), (2, 2), (3, 1)]
+
+    def test_explicit_graph_complex_theorem_is_printed(self):
+        """Source guard for the theorem-level graph-complex and MC formulas."""
+        root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        source = os.path.join(
+            root,
+            'chapters',
+            'connections',
+            'modular_pva_quantization_core.tex',
+        )
+        with open(source, encoding='utf-8') as fh:
+            text = fh.read()
+        assert 'thm:explicit-relative-modular-graph-complex' in text
+        assert '\\mathfrak{o}_{\\mathrm{Hdg}}(\\Gamma)' in text
+        assert '\\operatorname{contract}_e' in text
+        assert '[o_g]' in text
 
 
 # ===================================================================

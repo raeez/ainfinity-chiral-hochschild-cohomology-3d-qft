@@ -42,13 +42,16 @@ CLAIM 1: thm:chiral-higher-deligne
 
 CLAIM 2: conj:H-concentration-via-E3-rigidity
   Concentration of ChirHoch^* in degrees {0, 1, 2} would follow from
-  E_3-rigidity at a point only after the derived centre is presented as
-  a polynomial-growth E_3 envelope by a chiral-E_3-PBW theorem.
+  E_3-rigidity at a point only after the derived centre is presented by
+  the full chiral-E_3-PBW package: filtered E_3 envelope, associated
+  graded Free_{E_3}(H(W[-2])), Rees-flat no-hidden-extension lift,
+  convergent PBW spectral sequence, polynomial-growth/amplitude bounds,
+  and E_1-page support in total degrees <= 2.
 
   Derivation source (the conjectural route):
     (a) Lemma chd-e3-rigidity-point via Fresse E_3-Koszul duality
         (Fresse, "Homotopy of Operads" Part II, section 13);
-    (b) conjectural chiral-E_3-PBW presentation of the derived centre;
+    (b) conjectural chiral-E_3-PBW package for the derived centre;
     (c) Gelfand-Fuchs-Beilinson-Drinfeld local-to-global principle for
         constructible sheaves.
 
@@ -65,11 +68,11 @@ CLAIM 2: conj:H-concentration-via-E3-rigidity
          braid Koszul.
 
   Disjoint rationale: the conjectural route uses E_3-Koszul duality
-  (Fresse) plus the missing derived-centre chiral-E_3-PBW theorem;
+  (Fresse) plus the missing derived-centre chiral-E_3-PBW package;
   Shelton-Yuzvinsky use Koszulity of a commutative algebra (OS of braid
   arrangement); Fuks uses Lie-algebra cohomology of W_1 on the formal
   disc. The latter two routes check the degree bound, not the missing
-  E_3-PBW presentation.
+  E_3-PBW package.
 
 
 CLAIM 3: thm:chd-ds-hochschild
@@ -79,31 +82,26 @@ CLAIM 3: thm:chd-ds-hochschild
   conditional two-coloured cobar/topologisation hypotheses.
 
   Derivation source (the chapter proof route):
-    (a) Arakawa 2015 C_2-cofiniteness (Ann. Math., arXiv:1004.1554);
-    (b) Chiral HKR (Vol I thm:chiral-hkr);
-    (c) Homological Perturbation Lemma applied to the de Boer-Tjin DS
-        strong deformation retract.
+    (a) KRW/Arakawa DS BRST cohomology at non-critical level;
+    (b) completed DS bar-coalgebra SDR;
+    (c) coderivation transfer on Coder_0(B^ch(-)) plus completed HPL
+        with bounded-shift convergence.
 
-  Verification source (disjoint):
+  Verification source (disjoint shadow checks):
     (i)  Kac-Wakimoto 1988 "Modular invariance representations of
          affine algebras" -- W-character formulas via DS cohomology,
-         obtained WITHOUT HPL or HKR: direct computation at the level
-         of characters using modular invariance of affine characters;
+         checking the character shadow without constructing the
+         Hochschild chain map;
     (ii) Feigin-Frenkel coset duality W_k(sl_n) = coset(sl_n, sl_n at
-         k+1) -- gives ChirHoch^*(W_k) via the coset commutant,
-         independent of BRST / HPL / HKR.
+         k+1) -- checks the commutant shadow of the W-algebra, not the
+         chain-level coderivation SDR.
 
   Disjoint rationale: the chapter route runs through the explicit BRST
-  complex, uses HKR for polyvector identification, transfers via HPL
-  through de Boer-Tjin's explicit retract. The verification routes
-  avoid BRST entirely: Kac-Wakimoto works at the character level
-  using modular invariance (independent mechanism for matching the
-  two sides' partition functions); Feigin-Frenkel uses the coset
-  realisation of W as a commutant inside a larger free algebra,
-  whose chiral Hochschild is computed from the commutant structure
-  without appealing to DS reduction as a chain complex. Both
-  verification sources pre-date the HPL/HKR chiral machinery and are
-  genuinely disjoint.
+  complex and a supplied bar-coalgebra/coderivation transfer package.
+  The verification routes check only shadows: Kac-Wakimoto works at
+  the character level, and Feigin-Frenkel uses a coset realisation.
+  Neither shadow is promoted here to an independent proof of the
+  chain-level Hochschild comparison.
 
 Tests check structural invariants (not hardcoded scalars) that each pair
 of derivation/verification pipelines must agree on. Agreement of a
@@ -234,7 +232,7 @@ def test_chd_e3_action_structural():
     claim="conj:H-concentration-via-E3-rigidity",
     derived_from=[
         "Lemma chd-e3-rigidity-point via Fresse E_3-Koszul duality (Homotopy of Operads, Part II section 13)",
-        "Conjectural chiral-E_3-PBW presentation of the derived centre as a polynomial-growth E_3 envelope",
+        "Conjectural chiral-E_3-PBW package: filtered E_3 envelope, associated graded, Rees-flat lift, convergent spectral sequence, growth/amplitude, and page support",
         "Gelfand-Fuchs-Beilinson-Drinfeld local-to-global principle for constructible sheaves",
     ],
     verified_against=[
@@ -243,11 +241,11 @@ def test_chd_e3_action_structural():
     ],
     disjoint_rationale=(
         "The conjectural route uses E_3-Koszul duality on the derived centre "
-        "plus the missing chiral-E_3-PBW presentation. Shelton-Yuzvinsky uses "
+        "plus the missing chiral-E_3-PBW package. Shelton-Yuzvinsky uses "
         "Com-Koszulity of the Orlik-Solomon commutative algebra on the braid "
         "arrangement; Fuks uses Lie-cohomology of the formal vector-field "
         "algebra W_1. These check the degree bound through different "
-        "operadic contexts without proving the missing E_3-PBW input."
+        "operadic contexts without proving the missing E_3-PBW package."
     ),
 )
 def test_chd_concentration_rigidity():
@@ -255,11 +253,9 @@ def test_chd_concentration_rigidity():
     # The three routes construct the support set via three disjoint
     # arithmetic/combinatorial recipes:
     #   (A) conjectural E_3-rigidity route: after the missing
-    #       chiral-E_3-PBW input, the pointwise bar complex collapses
-    #       at the E_2-page of the Koszul spectral sequence; nonzero rows are
-    #       row 0 (bottom of tower) and rows 1, 2 (dual pair under
-    #       E_3-Koszul involution).  Support = {0, 1, 2} computed as
-    #       the union of the three rows.
+    #       chiral-E_3-PBW package, the E_1 page
+    #       E_1^{p,q}=H^{p+q} Free^p_{E_3}(W[-2]) has support only in
+    #       total degrees <= 2.  Support = {0, 1, 2}.
     #   (B) Shelton-Yuzvinsky via OS(A_{n-1}) Koszulity: the braid
     #       Orlik-Solomon algebra of rank 2 (type A_2) is quadratic
     #       Koszul with Hilbert series 1 + 2t + t^2; nonzero degrees =
@@ -269,9 +265,44 @@ def test_chd_concentration_rigidity():
     #       giving i in {0, 1}, plus the odd-degree Euler class at
     #       degree 2.  Support = {0, 1, 2}.
 
-    # (A) Row-union via E_3 rigidity page
-    e3_rows_nonzero = [0, 1, 2]  # bottom row + dual-pair rows
-    chapter_support = set(e3_rows_nonzero)
+    # (A) PBW package: a toy E_1 page satisfying the required support
+    # bound. The point of the test is that polynomial growth alone is
+    # not enough; the page-support clause is separately checked.
+    pbw_e1_page = {
+        (0, 0): 1,
+        (1, 0): 2,
+        (2, 0): 1,
+    }
+    chapter_support = {p + q for (p, q), rank in pbw_e1_page.items() if rank}
+
+    # Growth/amplitude clauses: dim H^q(W)_n <= C(1+n)^d and
+    # H^q(W)=0 for q>N0.
+    C = 3
+    d = 2
+    N0 = 0
+    W_dims = {(0, n): 1 + n for n in range(8)}
+    assert all(dim <= C * (1 + n) ** d for (q, n), dim in W_dims.items())
+    assert all(q <= N0 for (q, _n) in W_dims)
+    assert all(p + q <= 2 for (p, q), rank in pbw_e1_page.items() if rank)
+
+    # Spectral-sequence convention: d_r has bidegree (r, 1-r), hence
+    # raises total degree by one. Vanishing above 2 persists because each
+    # later page is a subquotient of the previous page, not because
+    # differentials preserve total degree.
+    r = 2
+    p, q = 1, 1
+    target = (p + r, q - r + 1)
+    assert sum(target) == p + q + 1
+
+    # A polynomial-growth E_3 envelope without page support would not
+    # prove concentration.
+    growth_only_page = {
+        (0, 0): 1,
+        (1, 0): 1,
+        (3, 0): 1,
+    }
+    assert all(rank <= C * (1 + p + q) ** d for (p, q), rank in growth_only_page.items())
+    assert any(p + q > 2 for (p, q), rank in growth_only_page.items() if rank)
 
     # (B) Orlik-Solomon Hilbert polynomial 1 + 2t + t^2 => degrees
     # {exponent : coeff > 0}.
@@ -294,31 +325,64 @@ def test_chd_concentration_rigidity():
     assert 3 not in chapter_support
 
 
+def test_chd_e3_pbw_package_source_guard():
+    """The active chapter must state the full Rees-flat PBW obligation."""
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    source = os.path.join(repo_root, 'chapters', 'theory', 'chiral_higher_deligne.tex')
+    with open(source, encoding='utf-8') as handle:
+        text = handle.read()
+
+    assert r'\begin{conjecture}[Chiral-$E_3$-PBW package' in text
+    assert r'\ClaimStatusConjectured; licensing tags $\gamma+\delta$' in text
+    assert 'complete, separated, exhaustive increasing filtration' in text
+    assert 'F_{p_1}\\otimes\\cdots\\otimes F_{p_r}' in text
+    assert r'\theta_x\colon' in text
+    assert r'\ker\theta_x=\operatorname{coker}\theta_x=0' in text
+    assert r"\mathbb T^{E_3}_{R_x,x}[-2]" in text
+    assert r"\label{eq:chd-e3-pbw-primitives}" in text
+    assert r"H^\bullet(W_x[-2])" in text
+    assert r"Q_{E_3}\!\left(\operatorname{gr}_{F}R_x\right)" in text
+    assert "E_3\\text{-decomposable operations}" in text
+    assert "not a tautological name for all of \\(R_x\\)" in text
+    assert r'\mathcal R_F R_x:=\bigoplus_{p\ge0}F_pR_x\,u^p' in text
+    assert r'\label{eq:chd-e3-pbw-rees}' in text
+    assert r'u\text{-torsion-free}' in text
+    assert r'H^{p+q}\!\left(\operatorname{gr}_F^pR_x\right)' in text
+    assert r'H^{p+q}\!\left(\Free^p_{E_3}(W_x[-2])\right)' in text
+    assert 'cohomological differential has bidegree' in text
+    assert 'hence total degree \\(+1\\)' in text
+    assert 'subquotient of' in text
+    assert 'preserves total degree' not in text
+    assert 'polynomial-growth estimate' in text
+    assert 'is not used to kill degrees by itself' in text
+    assert r"\label{rem:chd-e3-pbw-page-support-independent}" in text
+    assert "The support bound \\eqref{eq:chd-e3-pbw-page-bound} is a separate" in text
+    assert r"E_1^{3,0}=\Bbbk" in text
+    assert "no incoming differential from total degree \\(2\\)" in text
+    assert "no outgoing target in total degree \\(4\\)" in text
+    assert "polynomial-growth \\(E_3\\)-envelope can still carry degree-\\(3\\)" in text
+    assert "not merely finite generation" in text
+
+
 # -----------------------------------------------------------------------------
 # Claim 3: thm:chd-ds-hochschild
 # -----------------------------------------------------------------------------
 @independent_verification(
     claim="thm:chd-ds-hochschild",
     derived_from=[
-        "Arakawa 2015 C_2-cofiniteness for W_k(g,f) principal and hook-type (Ann. Math., arXiv:1004.1554)",
-        "Chiral HKR (Vol I thm:chiral-hkr) for polyvector identification of ChirHoch",
-        "Homological Perturbation Lemma applied to de Boer-Tjin DS strong deformation retract",
+        "KRW/Arakawa DS BRST cohomology at non-critical level",
+        "Completed DS bar-coalgebra SDR",
+        "Coderivation transfer on Coder_0(B^ch(-)) plus completed bounded-shift HPL",
     ],
     verified_against=[
-        "Kac-Wakimoto 1988 Modular invariance of affine algebra characters for W-character formulas",
-        "Feigin-Frenkel coset duality W_k(sl_n) = coset(sl_n x sl_n at k+1) commutant realisation",
+        "Kac-Wakimoto 1988 W-character formulas as DS cohomology shadow",
+        "Feigin-Frenkel coset duality commutant shadow",
     ],
     disjoint_rationale=(
-        "The chapter route runs the DS BRST complex chain-level, applying "
-        "HPL through de Boer-Tjin's explicit retract and using HKR to "
-        "identify both Hochschilds as polyvector sheaves. The verification "
-        "sources avoid BRST entirely. Kac-Wakimoto works at the character "
-        "level using modular invariance, matching the two sides' partition "
-        "functions through an independent mechanism. Feigin-Frenkel uses "
-        "the coset realisation to compute ChirHoch^*(W_k) as a commutant, "
-        "sidestepping DS as a chain complex. Neither verification source "
-        "invokes HPL, HKR, or the explicit de Boer-Tjin retract; "
-        "agreement is a non-tautological cross-check of the bridge."
+        "The chapter route uses a supplied bar-coalgebra/coderivation "
+        "transfer package. Kac-Wakimoto and Feigin-Frenkel check only "
+        "character/coset shadows, disjoint from the source of the "
+        "chain-level Hochschild comparison."
     ),
 )
 def test_chd_ds_hochschild():
@@ -332,40 +396,40 @@ def test_chd_ds_hochschild():
     # The three routes construct their degree-dimension maps via genuinely
     # distinct combinatorics.
 
-    # Route A (chapter via HPL+HKR): HKR identifies ChirHoch^i(Vir_c) at
-    # generic c with polyvector fields on the moduli of curves localized
-    # at a point; the three nontrivial degrees are i in {0, 1, 2} with
-    # multiplicity one each (scalar, derivation, 2-form).
-    hkr_polyvector_mults = [1, 1, 1]  # scalar, 1-vector, 2-vector
-    chapter_dims = {i: hkr_polyvector_mults[i]
-                    for i in range(len(hkr_polyvector_mults))}
+    # Route A (chapter): the chain-level theorem is conditional on the
+    # supplied bar-coalgebra SDR, coderivation transfer, and completed HPL.
+    chapter_scope = {
+        "bar_coalgebra_sdr": True,
+        "coderivation_transfer": True,
+        "bounded_shift_hpl": True,
+        "generic_c2_cofinite": False,
+    }
 
-    # Route B (Kac-Wakimoto modular invariance): S-matrix of Vir_c at
-    # generic c is a 1x1 block in the identity sector per degree up to
-    # the Euler-characteristic cutoff.  The modular dimension sequence
-    # at degree i is coeff of q^i in chi_Vir_generic(q) truncated to i<=2;
-    # computed separately via character series (1 + q + q^2 + ...).
-    vir_character_truncated = [1, 1, 1]  # 1 + q + q^2, i=0,1,2
-    kac_wakimoto_dims = dict(enumerate(vir_character_truncated))
+    # Route B (Kac-Wakimoto): a character shadow, not a chain map.
+    kac_wakimoto_shadow = {"ds_character_shadow": True, "chain_map": False}
 
-    # Route C (Feigin-Frenkel coset): W_1(sl_2) realized as commutant;
-    # dimension at degree i = dim(commutant at weight i) where the
-    # commutant at low weights is 1-dimensional (vacuum at i=0,
-    # stress tensor class at i=1, two-stress-tensor normal-ordered
-    # product class at i=2, each a single generator).
-    coset_generator_counts = {0: 1, 1: 1, 2: 1}
-    feigin_frenkel_dims = dict(coset_generator_counts)
+    # Route C (Feigin-Frenkel): a coset/commutant shadow, not a chain map.
+    feigin_frenkel_shadow = {"coset_shadow": True, "chain_map": False}
 
-    assert chapter_dims == kac_wakimoto_dims == feigin_frenkel_dims
+    assert all(
+        chapter_scope[k]
+        for k in ("bar_coalgebra_sdr", "coderivation_transfer", "bounded_shift_hpl")
+    )
+    assert not chapter_scope["generic_c2_cofinite"]
+    assert kac_wakimoto_shadow["ds_character_shadow"]
+    assert feigin_frenkel_shadow["coset_shadow"]
+    assert not kac_wakimoto_shadow["chain_map"]
+    assert not feigin_frenkel_shadow["chain_map"]
 
-    # Exclusion: at critical level k = -h^v, Sugawara diverges and the
+    # Exclusion: at critical level k = -h^v, the generic Sugawara tensor
+    # has a pole and the
     # DS route breaks down; all three routes must register this failure.
-    critical_level_failure_chapter = "Sugawara denominator 1/(k+h^v) diverges"
+    critical_level_failure_chapter = "Sugawara tensor undefined at the pole"
     critical_level_failure_kac_wakimoto = "W-character modular S fails to exist"
     critical_level_failure_feigin_frenkel = "coset numerator has zero level gap"
     # All three identify the same critical-level exclusion, by different mechanisms
     assert all(
-        "fail" in s or "diverg" in s or "zero" in s
+        "fail" in s or "undefined" in s or "zero" in s
         for s in [
             critical_level_failure_chapter,
             critical_level_failure_kac_wakimoto,

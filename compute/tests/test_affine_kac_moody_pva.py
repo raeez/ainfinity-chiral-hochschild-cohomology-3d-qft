@@ -324,11 +324,11 @@ class TestCentralCharge:
         assert c == 2
 
     def test_critical_level_undefined(self):
-        """At k = -h^v, Sugawara is UNDEFINED (not 'c diverges').
+        """At k = -h^v, Sugawara is undefined.
 
-        CRITICAL PITFALL from CLAUDE.md: Sugawara is UNDEFINED at the
-        critical level, not 'c goes to infinity'. The Sugawara tensor
-        simply does not exist (Feigin-Frenkel).
+        At the critical level the generic Sugawara formula has a pole.
+        The Sugawara tensor itself is not defined; the Feigin-Frenkel
+        centre is the replacement object.
         """
         g = sl2_data()
         with pytest.raises(ValueError, match="UNDEFINED"):
@@ -441,13 +441,19 @@ class TestFeiginFrenkel:
 # ===================================================================
 
 class TestRMatrix:
-    """Classical r-matrix r(z) = Omega/z and CYBE."""
+    """Classical trace-form r-matrix r_k(z) = k*Omega/z and CYBE."""
 
     def test_r_matrix_pole_order(self):
         """r(z) has a simple pole at z=0 (pole order 1)."""
         g = sl2_data()
         _, pole_order = classical_r_matrix(g)
         assert pole_order == 1
+
+    def test_r_matrix_level_zero_vanishes(self):
+        """Trace-form affine residue r_k(z)=k*Omega/z vanishes at k=0."""
+        g = sl2_data()
+        pairs, _ = classical_r_matrix(g, level=0)
+        assert all(coeff == 0 for _, _, coeff in pairs)
 
     def test_r_matrix_casimir_sl2(self):
         """Casimir for sl_2: Omega = e(x)f + f(x)e + (1/2)*h(x)h.
@@ -604,7 +610,7 @@ class TestCrossVolume:
         # Vol I: k' = -k - 2*h^v = -k - 4 for sl_2
         assert simplify(k_prime - (-k - 4)) == 0
 
-    def test_virasoro_self_dual_point(self):
+    def test_sl2_feigin_frenkel_fixed_point(self):
         """The self-dual point for sl_2 is k = -2 (critical level).
 
         k = k' means k = -k - 4, so 2k = -4, k = -2 = -h^v.

@@ -401,8 +401,8 @@ def affine_central_charge(g, k):
 
     CRITICAL: UNDEFINED at k = -h^v (critical level).
     At the critical level, the Sugawara construction fails because
-    the denominator vanishes. This is NOT 'c diverges' but rather
-    the Sugawara tensor is not defined.
+    the generic coefficient has a pole. The Sugawara tensor itself is
+    not defined.
 
     Parameters:
         g: LieAlgebraData
@@ -457,8 +457,9 @@ def affine_kappa(g, k):
 def ff_dual_level(g, k):
     """Feigin-Frenkel dual level: k' = -k - 2*h^v.
 
-    This is the involution of the affine Weyl group that exchanges
-    V_k(g) and V_{k'}(g) at the level of Koszul duality.
+    This is the current-level involution seen by the scalar shadow of
+    chiral Koszul duality. The Koszul target is the chiral CE/bar
+    cochain object attached to the reflected current algebra.
 
     For sl_2: k' = -k - 4.
     For sl_3: k' = -k - 6.
@@ -528,22 +529,23 @@ def _inverse_killing_form(g):
     return result
 
 
-def classical_r_matrix(g):
-    """Classical r-matrix: r(z) = Omega / z where Omega is the Casimir.
+def classical_r_matrix(g, level=1):
+    """Classical trace-form r-matrix: r_k(z) = k*Omega / z.
 
     Omega = sum_{a,b} kappa^{ab} J_a tensor J_b
 
     where kappa^{ab} is the INVERSE Killing form (not kappa_{ab}).
 
     For the current algebra, the Laplace transform of the lambda-bracket
-    gives r(z) = Omega/z. This satisfies the classical Yang-Baxter equation.
+    gives r_k(z) = k*Omega/z.  The unit Casimir CYBE normalization is
+    recovered at k=1.  This satisfies the classical Yang-Baxter equation.
 
     Returns:
         (casimir_pairs, pole_order) where casimir_pairs is a list of
-        (a, b, kappa^{ab}) entries and pole_order = 1.
+        (a, b, k*kappa^{ab}) entries and pole_order = 1.
     """
     kappa_inv = _inverse_killing_form(g)
-    casimir_pairs = [(a, b, c) for (a, b), c in kappa_inv.items()]
+    casimir_pairs = [(a, b, level * c) for (a, b), c in kappa_inv.items()]
     return casimir_pairs, 1  # Simple pole at z=0
 
 

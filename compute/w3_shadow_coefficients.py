@@ -18,11 +18,12 @@ RESULTS:
       analogous to Q_Vir being degree 2 in t.
   (2) On the W-line, H_W(s) = s^2 sqrt(Q_W(s^2)) with
       Q_W(u) = 4c^2/9 + q1_W u, giving shadow coefficients via
-      the binomial expansion of sqrt(1 + gamma u).
+      the binomial expansion of sqrt(1 + delta_3 u).
   (3) The resulting S_{2r}^W involves binom(1/2, r-1) -- the SAME
       Catalan-binomial coefficients as Virasoro!
-  (4) Complementarity: S_{2r}^W(c) + S_{2r}^W(100-c) is constant in c
-      for each r (up to the structure of the denominator).
+  (4) Complementarity: the raw rational coefficient S_{2r}^W(c) is not
+      invariant under c -> 100-c.  The pole-cleared coefficient
+      S_{2r}^W c^{2r-3}(5c+22)^{3(r-1)} is c-independent.
 """
 from __future__ import annotations
 
@@ -138,7 +139,7 @@ def w_line_shadow():
       Q_W(u) = q0 + q1 u
       q0 = (h_2^W)^2 = 4c^2/9
       q1 = 2 h_2^W h_4^W
-      sqrt(Q_W) = h_2^W sqrt(1 + gamma u) with gamma = q1/q0 = 2 h_4^W / h_2^W
+      sqrt(Q_W) = h_2^W sqrt(1 + delta_3 u) with delta_3 = q1/q0 = 2 h_4^W / h_2^W
       All h_{2r}^W for r >= 3 are determined.
 
     For Q_W QUADRATIC in u (degree 2):
@@ -189,32 +190,32 @@ def w_line_shadow():
     print("  q1 = 2*(2c/3)*h4W = %s" % q1_simp)
     print("  q1 = %s" % factor(q1_simp))
 
-    # gamma = q1/q0
-    gamma = cancel(q1 / q0)
-    print("\n  gamma = q1/q0 = %s" % gamma)
+    # delta_3 = q1/q0
+    delta_3 = cancel(q1 / q0)
+    print("\n  delta_3 = q1/q0 = %s" % delta_3)
     # = 2*(2c/3)*40960/(c(5c+22)^3) / (4c^2/9)
     # = 2*40960/(3(5c+22)^3) * 9/(4c^2)
     # = 2*40960*9 / (3*4*c^2*(5c+22)^3)
-    # = 737280 / (12 c^2 (5c+22)^3)
-    # = 61440 / (c^2(5c+22)^3)
-    gamma_check = Rational(61440, 1) / (c**2 * (5*c+22)**3)
-    print("  gamma check = 61440/(c^2(5c+22)^3): %s" % (simplify(gamma - gamma_check) == 0))
+    # = 1474560 / (12 c^2 (5c+22)^3)
+    # = 122880 / (c^2(5c+22)^3)
+    delta_check = Rational(122880, 1) / (c**2 * (5*c+22)**3)
+    print("  delta_3 check = 122880/(c^2(5c+22)^3): %s" % (simplify(delta_3 - delta_check) == 0))
 
-    # Branch point: u0 = -1/gamma
-    u0 = cancel(-1/gamma)
-    print("\n  Branch point: u0 = -1/gamma = %s" % u0)
-    print("  = -c^2(5c+22)^3/61440")
+    # Branch point: u0 = -1/delta_3
+    u0 = cancel(-1/delta_3)
+    print("\n  Branch point: u0 = -1/delta_3 = %s" % u0)
+    print("  = -c^2(5c+22)^3/122880")
 
     # Shadow coefficients from binomial expansion:
-    # sqrt(Q_W(u)) = (2c/3) * sqrt(1 + gamma*u)
-    #              = (2c/3) * sum_{n>=0} binom(1/2, n) * gamma^n * u^n
+    # sqrt(Q_W(u)) = (2c/3) * sqrt(1 + delta_3*u)
+    #              = (2c/3) * sum_{n>=0} binom(1/2, n) * delta_3^n * u^n
     # H_W(s) = s^2 * sqrt(Q_W(s^2))
-    #         = (2c/3) * s^2 * sum_{n>=0} binom(1/2, n) * gamma^n * s^(2n)
-    # h_{2r}^W = (2c/3) * binom(1/2, r-1) * gamma^(r-1)
+    #         = (2c/3) * s^2 * sum_{n>=0} binom(1/2, n) * delta_3^n * s^(2n)
+    # h_{2r}^W = (2c/3) * binom(1/2, r-1) * delta_3^(r-1)
     # S_{2r}^W = h_{2r}^W / (2r)
 
-    print("\n  sqrt(Q_W(u)) = (2c/3) * sqrt(1 + gamma*u)")
-    print("  h_{2r}^W = (2c/3) * binom(1/2, r-1) * gamma^(r-1)")
+    print("\n  sqrt(Q_W(u)) = (2c/3) * sqrt(1 + delta_3*u)")
+    print("  h_{2r}^W = (2c/3) * binom(1/2, r-1) * delta_3^(r-1)")
     print("  S_{2r}^W = h_{2r}^W / (2r)")
 
     print("\n  W-LINE SHADOW COEFFICIENTS:")
@@ -232,7 +233,7 @@ def w_line_shadow():
                 bn *= (Rational(1, 2) - j)
             bn /= mfac(n)
 
-        h_2r = (2*c/3) * bn * gamma_check**n
+        h_2r = (2*c/3) * bn * delta_check**n
         S_2r = cancel(h_2r / (2*r))
         S_2r_factored = factor(S_2r)
         w_results[2*r] = S_2r
@@ -243,7 +244,7 @@ def w_line_shadow():
         print("    S_%d^W = %s" % (arity, S_2r_factored))
         print()
 
-    return w_results, gamma_check
+    return w_results, delta_check
 
 
 # ===================================================================
@@ -286,14 +287,14 @@ def complementarity(w_results):
 # Section 4: Closed-form formula
 # ===================================================================
 
-def closed_form_analysis(w_results, gamma):
+def closed_form_analysis(w_results, delta_3):
     """Analyze the closed-form structure of W-line shadow coefficients.
 
     The W-line shadow coefficient is:
-      S_{2r}^W = (2c/3) * binom(1/2, r-1) * gamma^(r-1) / (2r)
-              = (c/3r) * binom(1/2, r-1) * gamma^(r-1)
+      S_{2r}^W = (2c/3) * binom(1/2, r-1) * delta_3^(r-1) / (2r)
+              = (c/3r) * binom(1/2, r-1) * delta_3^(r-1)
 
-    where gamma = 61440/(c^2(5c+22)^3).
+    where delta_3 = 122880/(c^2(5c+22)^3).
 
     The binomial coefficient binom(1/2, n) satisfies:
       binom(1/2, n) = (-1)^(n-1) * C_{n-1} / (4^n * (2n-1))  for n >= 1
@@ -338,15 +339,15 @@ def closed_form_analysis(w_results, gamma):
     So binom(1/2,n) = (-1)^{n-1} (n+1) C_n / ((2n-1) 4^n).
 
     Therefore:
-      S_{2r}^W = (c/(3r)) * (-1)^{r-2} * r * C_{r-1} / ((2r-3) * 4^{r-1}) * gamma^{r-1}
+      S_{2r}^W = (c/(3r)) * (-1)^{r-2} * r * C_{r-1} / ((2r-3) * 4^{r-1}) * delta_3^{r-1}
     for r >= 2.
 
     Wait, let me redo with n = r-1:
       binom(1/2, r-1) = (-1)^{r-2} (2(r-1))! / (2^{2(r-1)} ((r-1)!)^2 (2(r-1)-1))
                        = (-1)^{r-2} * r * C_{r-1} / ((2r-3) * 4^{r-1})
 
-    So S_{2r}^W = (c/(3r)) * (-1)^{r-2} * r * C_{r-1} / ((2r-3) * 4^{r-1}) * gamma^{r-1}
-                = c * (-1)^{r-2} * C_{r-1} / (3(2r-3) * 4^{r-1}) * gamma^{r-1}
+    So S_{2r}^W = (c/(3r)) * (-1)^{r-2} * r * C_{r-1} / ((2r-3) * 4^{r-1}) * delta_3^{r-1}
+                = c * (-1)^{r-2} * C_{r-1} / (3(2r-3) * 4^{r-1}) * delta_3^{r-1}
     for r >= 2.
     """
     print("\n" + "=" * 72)
@@ -387,31 +388,30 @@ def closed_form_analysis(w_results, gamma):
     print("""
 For r >= 2, the W-line shadow coefficient of W3 is:
 
-  S_{2r}^W(c) = (-1)^r * C_{r-1} * c * gamma^{r-1}
+  S_{2r}^W(c) = (-1)^r * C_{r-1} * c * delta_3^{r-1}
                 / (3 * (2r-3) * 4^{r-1})
 
 where:
-  gamma = 61440 / (c^2 (5c+22)^3)
+  delta_3 = 122880 / (c^2 (5c+22)^3)
   C_{r-1} = Catalan number = binom(2r-2, r-1) / r
 
-Expanding gamma:
+Expanding delta_3:
 
-  S_{2r}^W(c) = (-1)^r * C_{r-1} * c * [61440]^{r-1}
+  S_{2r}^W(c) = (-1)^r * C_{r-1} * c * [122880]^{r-1}
                 / (3 * (2r-3) * 4^{r-1} * c^{2(r-1)} * (5c+22)^{3(r-1)})
 
-              = (-1)^r * C_{r-1} * 61440^{r-1}
+              = (-1)^r * C_{r-1} * 122880^{r-1}
                 / (3 * (2r-3) * 4^{r-1} * c^{2r-3} * (5c+22)^{3r-3})
 
-Since 61440 = 4 * 15360 = 4 * 3 * 5120 = 12 * 5120, or
-      61440 / 4 = 15360, and 15360 = 2^10 * 15 = 1024 * 15:
+Since 122880 / 4 = 30720:
 
-  S_{2r}^W(c) = (-1)^r * C_{r-1} * 15360^{r-1}
+  S_{2r}^W(c) = (-1)^r * C_{r-1} * 30720^{r-1}
                 / (3 * (2r-3) * c^{2r-3} * (5c+22)^{3r-3})
 """)
 
     # Verify against computed values
     print("Verification against computed S_{2r}^W:")
-    gamma_val = Rational(61440, 1) / (c**2 * (5*c+22)**3)
+    delta_val = Rational(122880, 1) / (c**2 * (5*c+22)**3)
 
     for r in range(1, 8):
         n = r - 1
@@ -424,7 +424,7 @@ Since 61440 = 4 * 15360 = 4 * 3 * 5120 = 12 * 5120, or
             bn /= mfac(n)
 
         # Direct computation
-        h_2r_direct = (2*c/3) * bn * gamma_val**n
+        h_2r_direct = (2*c/3) * bn * delta_val**n
         S_2r_direct = cancel(h_2r_direct / (2*r))
 
         # Catalan formula (for r >= 2)
@@ -432,7 +432,7 @@ Since 61440 = 4 * 15360 = 4 * 3 * 5120 = 12 * 5120, or
             C_rm1 = Rational(1, r) * Rational(mfac(2*(r-1)), mfac(r-1)**2)
             sign = (-1)**r
             S_2r_catalan = cancel(
-                sign * C_rm1 * c * gamma_val**(r-1) /
+                sign * C_rm1 * c * delta_val**(r-1) /
                 (3 * (2*r - 3) * Rational(4, 1)**(r-1))
             )
             match = simplify(S_2r_direct - S_2r_catalan) == 0
@@ -455,15 +455,15 @@ def numerical_verification():
 
     from sympy import N as numerical
 
-    gamma_sym = Rational(61440, 1) / (c**2 * (5*c+22)**3)
+    delta_sym = Rational(122880, 1) / (c**2 * (5*c+22)**3)
 
     for c_val in [Rational(1), Rational(10), Rational(50), Rational(100)]:
-        gamma_num = gamma_sym.subs(c, c_val)
+        delta_num = delta_sym.subs(c, c_val)
         print("\nc = %s:" % c_val)
-        print("  gamma = %s = %s" % (gamma_num, numerical(gamma_num, 10)))
-        print("  |gamma| = %s" % numerical(abs(gamma_num), 10))
-        print("  Convergence radius |u0| = 1/|gamma| = %s" %
-              numerical(abs(1/gamma_num), 10))
+        print("  delta_3 = %s = %s" % (delta_num, numerical(delta_num, 10)))
+        print("  |delta_3| = %s" % numerical(abs(delta_num), 10))
+        print("  Convergence radius |u0| = 1/|delta_3| = %s" %
+              numerical(abs(1/delta_num), 10))
 
         h2W = 2*c_val/3
         for r in range(1, 8):
@@ -476,7 +476,7 @@ def numerical_verification():
                     bn *= (Rational(1, 2) - j)
                 bn /= mfac(n)
 
-            S_2r = cancel((h2W * bn * gamma_num**n) / (2*r))
+            S_2r = cancel((h2W * bn * delta_num**n) / (2*r))
             print("  S_%d^W = %s" % (2*r, numerical(S_2r, 10)))
 
 
@@ -496,7 +496,7 @@ For the Virasoro shadow obstruction tower:
 
 For the W3 W-line shadow obstruction tower:
   S_{2r}^W has denominator c^{2r-3} (5c+22)^{3r-3}
-  (from gamma^{r-1} = [61440/(c^2(5c+22)^3)]^{r-1})
+  (from delta_3^{r-1} = [122880/(c^2(5c+22)^3)]^{r-1})
 
 Key observations:
   - The c power grows as 2r-3 (vs r-3 for Virasoro)
@@ -639,17 +639,10 @@ def full_2d_metric():
     delta_check = Rational(122880, 1) / (c**2 * (5*c+22)**3)
     print("  Expected: 122880/(c^2(5c+22)^3): %s" % (simplify(delta_W - delta_check) == 0))
 
-    # Note: this is 2*gamma where gamma = 61440/(c^2(5c+22)^3)
-    # delta = 2*gamma. Let me verify:
-    gamma_check = Rational(61440, 1) / (c**2 * (5*c+22)**3)
-    print("  delta = 2*gamma: %s" % (simplify(delta_W - 2*gamma_check) == 0))
-
     # IMPORTANT: Q_W_line(t) is degree 2 in t, but with u = t^2 variable:
     # Q_W_line = 4c^2/9 + (16cQ_WWWW/3)*t^2 = 4c^2/9 + q2_W*u
     # This is LINEAR in u, matching our Section 2 analysis.
-    # But earlier we had gamma = 61440/(c^2(5c+22)^3) and here delta = 2*gamma.
-    # The discrepancy: in Section 2, I used the convention with S_r,
-    # but here I'm using h_r = r*S_r. Let me reconcile.
+    # The single W-line expansion parameter is delta_3.
 
     # H_W_line(t) = sum h_{2r} t^{2r} = (2c/3)t^2 + 4*Q_WWWW*t^4 + ...
     # H_W_line = t^2 sqrt(Q_W(t))  [NOT t^2 sqrt(Q_W(t^2))]
@@ -682,45 +675,20 @@ def full_2d_metric():
     # On the W-line, H_W(t) = (2c/3)t^2 + 4*Q_WWWW*t^4 + ...
     # H_W = t^2 sqrt(Q_W(t))
     # Q_W(t) = 4c^2/9 + (16c*Q_WWWW/3)*t^2  (degree 2 in t)
-    # = 4c^2/9 * (1 + 2*gamma*t^2)
-    # where gamma = 61440/(c^2(5c+22)^3).
+    # = 4c^2/9 * (1 + delta_3*t^2)
+    # where delta_3 = 122880/(c^2(5c+22)^3).
 
     # The binomial expansion of sqrt(Q_W(t)):
-    # sqrt(Q_W) = (2c/3)*sqrt(1 + 2*gamma*t^2)
-    # = (2c/3)*sum binom(1/2,n) (2*gamma)^n t^{2n}
+    # sqrt(Q_W) = (2c/3)*sqrt(1 + delta_3*t^2)
+    # = (2c/3)*sum binom(1/2,n) delta_3^n t^{2n}
 
-    # H_W(t) = t^2*sqrt(Q_W) = (2c/3)*sum binom(1/2,n)(2*gamma)^n t^{2n+2}
-    # h_{2r} = (2c/3)*binom(1/2, r-1)*(2*gamma)^{r-1}
-    # S_{2r}^W = h_{2r}/(2r) = (c/(3r))*binom(1/2,r-1)*(2*gamma)^{r-1}
-
-    # Verify against earlier Section 2 computation:
-    # Section 2 had gamma_sec2 = 61440/(c^2(5c+22)^3), and
-    # S_{2r}^W = (c/(3r))*binom(1/2,r-1)*gamma_sec2^{r-1}.
-    # But HERE gamma_here = gamma (same), and we use (2*gamma)^{r-1}.
-    # So there's a factor of 2^{r-1} difference!
-    # The issue: in Section 2, I used H_W(s) = s^2 sqrt(Q_W(s^2))
-    # where Q_W was a function of u = s^2. HERE, I'm using
-    # H_W(t) = t^2 sqrt(Q_W(t)) where Q_W is a function of t directly.
-    # On the W-line with s = t (same variable):
-    # Section 2: sqrt(Q_W(u)) = (2c/3) sqrt(1 + gamma*u) with u = s^2
-    # Here: sqrt(Q_W(t)) = (2c/3) sqrt(1 + 2*gamma*t^2)
-    # Setting u = s^2 = t^2: the two expressions are consistent iff
-    # the Section 2 gamma equals the 2*gamma here.
-    # Section 2: gamma_sec2 = q1/q0 with q1 = 2*(2c/3)*h_4^W,
-    #            q0 = (2c/3)^2 = 4c^2/9.
-    # gamma_sec2 = 2*(2c/3)*4*Q_WWWW / (4c^2/9)
-    #            = (16c*Q_WWWW/3) / (4c^2/9)
-    #            = (16c*Q_WWWW/3)*(9/(4c^2))
-    #            = 12*Q_WWWW/c
-    #            = 122880/(c^2(5c+22)^3) = 2*gamma.
-    # So gamma_sec2 = 2*gamma = delta. The Section 2 and Section 7
-    # are consistent: just different variable conventions.
+    # H_W(t) = t^2*sqrt(Q_W) = (2c/3)*sum binom(1/2,n)delta_3^n t^{2n+2}
+    # h_{2r} = (2c/3)*binom(1/2, r-1)*delta_3^{r-1}
+    # S_{2r}^W = h_{2r}/(2r) = (c/(3r))*binom(1/2,r-1)*delta_3^{r-1}
 
     print("\n  RECONCILIATION:")
-    print("  Section 2 used gamma_eff = 2*gamma = 122880/(c^2(5c+22)^3)")
-    print("  Section 7 uses gamma = 61440/(c^2(5c+22)^3)")
-    print("  The formulas are equivalent: binom(1/2,n)*(2*gamma)^n in one")
-    print("  vs binom(1/2,n)*gamma_eff^n in the other.")
+    print("  Section 2 and Section 7 use the same W-line parameter")
+    print("  delta_3 = 122880/(c^2(5c+22)^3).")
 
     # Let me restate the FINAL CORRECT formula:
     print("\n" + "=" * 72)
@@ -739,15 +707,15 @@ S_{2r}^W = (c/(3r)) * binom(1/2, r-1) * delta^{r-1}
 
 Explicitly with Catalan numbers (for r >= 2):
 
-  S_{2r}^W(c) = (-1)^r * C_{r-1} * delta^{r-1} * c
-                / (3 * r * (2r-3))
+  S_{2r}^W(c) = (-1)^r * C_{r-1} * (delta/4)^{r-1} * c
+                / (3 * (2r-3))
 
 where C_k = binom(2k,k)/(k+1) is the Catalan number.
 
 Expanding delta:
 
-  S_{2r}^W(c) = (-1)^r * C_{r-1} * 122880^{r-1}
-                / (3 * r * (2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
+  S_{2r}^W(c) = (-1)^r * C_{r-1} * 30720^{r-1}
+                / (3 * (2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
 """)
 
     # Compute and display
@@ -821,8 +789,8 @@ def main():
    The W-line shadow is algebraic of degree 2, like Virasoro.
 
 3. CLOSED-FORM CATALAN FORMULA:
-   S_{2r}^W(c) = (-1)^r * C_{r-1} * 122880^{r-1}
-                 / (3*r*(2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
+   S_{2r}^W(c) = (-1)^r * C_{r-1} * 30720^{r-1}
+                 / (3*(2r-3) * c^{2r-3} * (5c+22)^{3(r-1)})
    for r >= 2, where C_k is the k-th Catalan number.
 
 4. DENOMINATOR STRUCTURE:

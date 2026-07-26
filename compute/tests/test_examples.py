@@ -96,13 +96,21 @@ class TestAbelianCS:
         assert check_jacobi_current(lam, mu, k) == 0
 
     def test_r_matrix_form(self):
-        """R-matrix for abelian CS: r(z) = hbar * q1*q2 / z."""
+        """R-matrix for abelian CS: r(z) = hbar * k*q1*q2 / z."""
         from lib.examples.abelian_cs import abelian_r_matrix
         z = Symbol('z')
         hbar = Symbol('hbar')
+        k = Symbol('k')
         q1, q2 = symbols('q1 q2')
-        r = abelian_r_matrix(z, hbar)
-        assert simplify(r - hbar * q1 * q2 / z) == 0
+        r = abelian_r_matrix(z, hbar, k)
+        assert simplify(r - hbar * k * q1 * q2 / z) == 0
+
+    def test_r_matrix_level_zero_collapse(self):
+        """At level zero the Heisenberg collision residue vanishes."""
+        from lib.examples.abelian_cs import abelian_r_matrix
+        z = Symbol('z')
+        hbar = Symbol('hbar')
+        assert abelian_r_matrix(z, hbar, 0) == 0
 
     def test_yang_baxter_abelian(self):
         """YBE trivially satisfied for abelian case."""
@@ -407,20 +415,22 @@ class TestLGCubic:
         assert info['vanishes'] is False
 
     def test_truncation_degree_counting_k4(self):
-        """k=4: V=2, E=1, form degree insufficient → m_4 = 0. Tier 1."""
+        """k=4: V=2, E=1, and W^(4)=0. Tier 1."""
         from lib.examples.lg_cubic import check_truncation_degree_counting
         info = check_truncation_degree_counting(4)
         assert info['vertices'] == 2
         assert info['internal_edges'] == 1
         assert info['vanishes'] is True
+        assert info['taylor_coefficient_zero'] is True
 
     def test_truncation_degree_counting_k5(self):
-        """k=5: V=3, E=2, form degree insufficient → m_5 = 0. Tier 1."""
+        """k=5: V=3, E=2, and W^(5)=0. Tier 1."""
         from lib.examples.lg_cubic import check_truncation_degree_counting
         info = check_truncation_degree_counting(5)
         assert info['vertices'] == 3
         assert info['internal_edges'] == 2
         assert info['vanishes'] is True
+        assert info['taylor_coefficient_zero'] is True
 
     def test_truncation_degree_counting_k10(self):
         """k=10: should also vanish. Tier 1."""
@@ -490,25 +500,18 @@ class TestLaurentSeries:
 
 
 # ===================================================================
-# LG TRUNCATION (degree counting)
+# LG TRUNCATION (Taylor coefficient)
 # ===================================================================
 
 class TestLGTruncation:
     """Tests related to the LG cubic truncation claim."""
 
     def test_degree_counting_m4(self):
-        """Check the tree topology for m_4.
-
-        For cubic W = g*phi^3/3:
-        k=4 → V=2 vertices, E=1 internal edge.
-        Form degree available: 2E = 2, needed: 2(k-1) = 6.
-        Deficit: 4. Therefore m_4 = 0.
-        """
+        """Check the primitive Taylor obstruction for m_4."""
         from lib.examples.lg_cubic import check_truncation_degree_counting
         info = check_truncation_degree_counting(4)
         assert info['vertices'] == 2
         assert info['internal_edges'] == 1
-        assert info['form_degree_available'] == 2
-        assert info['fm_dimension'] == 6
-        assert info['form_deficit'] == 4
+        assert info['primitive_derivative_order'] == 4
+        assert info['taylor_coefficient_zero'] is True
         assert info['vanishes'] is True

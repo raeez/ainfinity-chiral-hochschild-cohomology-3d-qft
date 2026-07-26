@@ -206,6 +206,49 @@ def two_loop_vanishing_reason() -> str:
 
 
 # =========================================================================
+# 4b. REFLECTED HALF-SPACE PROPAGATOR AND ARNOLD CANCELLATION
+# =========================================================================
+
+def image_charge_propagator_profile() -> Dict[str, str]:
+    """Return the reflected half-space image-charge propagator package."""
+    return {
+        "half_space": "H={t>=0}",
+        "propagator": "P_H(x,y)=P_{R x C}(x,y)-sigma P_{R x C}(x,bar y)",
+        "reflection": "sigma(phi)=(-1)^{w_phi} phi",
+        "boundary_ope": (
+            "OPE_boundary(phi_i,phi_j)=OPE_bulk(phi_i,phi_j)"
+            "-(-1)^{w_j}OPE_bulk(phi_i,sigma phi_j)"
+        ),
+    }
+
+
+def reflected_weight_composition(w_mu: int, w_nu: int, codim: int) -> int:
+    """Compute w_{mu o nu}=w_mu+w_nu+codim D_{mu,nu} mod 2."""
+    return (int(w_mu) + int(w_nu) + int(codim)) % 2
+
+
+def reflected_obstruction_profile() -> Dict[str, str]:
+    """Return the first quadratic and cubic reflected obstruction formulas."""
+    return {
+        "quadratic": "O_2=Res_{D12}[P(x1,x2)-sigma P(x1,bar x2)] tensor pi_2",
+        "cubic": (
+            "O_3=sum_cyc Res_{Dij Djk} "
+            "P_H(x_i,x_j)P_H(x_j,x_k) tensor [pi_2,pi_2]"
+        ),
+        "vanishing": "O_3=0 by reflected Arnold relation",
+    }
+
+
+def reflected_arnold_relation_profile() -> Dict[str, object]:
+    """Return the reflected Arnold relation cancelling the cubic obstruction."""
+    return {
+        "relation": "omega_12^H wedge omega_23^H + omega_23^H wedge omega_31^H + omega_31^H wedge omega_12^H = 0",
+        "cancels_cubic_obstruction": True,
+        "mechanism": "pullback of ordinary Arnold-Orlik-Solomon relation on the doubled FM compactification",
+    }
+
+
+# =========================================================================
 # 5. DS-COMPATIBILITY OF LEVEL SHIFT
 # =========================================================================
 
@@ -435,13 +478,11 @@ def kappa_kac_moody(k, lie_type: str, rank: int):
     The correct formula uses t = k + h^vee in the numerator and
     h^vee in the denominator.
 
-    AP1 warning: do NOT copy between families without recomputing.
+    Do not copy this expression between families without recomputing it.
     """
     k = Rational(k)
     dim_g = Rational(_lie_algebra_dim(lie_type, rank))
     h_vee = Rational(dual_coxeter_number(lie_type, rank))
-    if k + h_vee == 0:
-        return None  # Critical level
     return (k + h_vee) * dim_g / (2 * h_vee)
 
 

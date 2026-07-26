@@ -47,8 +47,7 @@ $\rho_*(c) = |c|/6$.
 
 A direct d'Alembert ratio test on the shadow sequence
 $\{S_r(\mathrm{Vir}_c)\}_{r \ge 2}$ together with
-\textsf{thm:shadow-tower-asymptotic-closed-form} (Vol~I
-\texttt{shadow\_tower\_higher\_coefficients.tex}), which supplies the
+\textsf{thm:shadow-tower-asymptotic-closed-form} of Vol~I, which supplies the
 closed form of the leading Laurent coefficient
 $A_r = \lim_{c \to \infty} c^{r-2} S_r(\mathrm{Vir}_c) =
 8 (-6)^{r-4} / r$, settles the limsup.
@@ -140,8 +139,7 @@ with explicit closed forms for $A_r, B_r, \Gamma_r, \Delta_r$ from
 Theorems \ref{V1-thm:shadow-tower-asymptotic-closed-form},
 \ref{V1-thm:shadow-tower-subleading-closed-form},
 \ref{V1-thm:shadow-tower-sub-subleading-closed-form},
-\ref{V1-thm:shadow-tower-tier-4-closed-form} (Vol~I
-\texttt{shadow\_tower\_higher\_coefficients.tex}). Each subleading tier
+\ref{V1-thm:shadow-tower-tier-4-closed-form}. Each subleading tier
 $X_r \in \{B_r, \Gamma_r, \Delta_r\}$ has the pattern
 \[
  X_r \;=\; A_r \cdot P_X(r),
@@ -259,7 +257,7 @@ $\sqrt{\lvert c \rvert}$.
 
 \begin{proof}
 By Theorem~\ref{V1-thm:all-tier-closed-form-proved} (Vol~I
-\texttt{all\_tier\_generating\_function\_platonic.tex}), the
+all-tier closed form), the
 generating function $F(r, u) = \Phi_r(1/u) / A_r$ is a rational
 function of $u$ with Tier-$K$ coefficient denominator
 $D_K = 9^{K-1} (K-1)! K!$ and polynomial numerator of degree
@@ -339,7 +337,7 @@ $c \notin \cD^{\mathrm{sev}}_{\mathrm{Kac}}$ and every $r \ge 4$,
 for a $c$-dependent constant $C(c)$ that can be taken as
 $C(c) = 8 + O(1/c)$ with the $O$-term dominated by the
 Tier-2/Tier-3/Tier-4 polynomial envelopes from Vol~I
-\texttt{shadow\_tower\_higher\_coefficients.tex}.
+Laurent closed forms.
 \end{proposition}
 
 \begin{proof}
@@ -627,7 +625,7 @@ The channel contributions:
 \item spin $4$: $12/4=3$, giving $\beta_4=6+4+3=13$;
 \item spin $5$: $12/5$, giving $\beta_5=6+4+3+12/5=77/5$.
 \end{itemize}
-Conjecture~\ref{thm:beta-N-closed-form-proved-all-N} delivers the
+Conjecture~\ref{conj:beta-N-harmonic-closed-form} delivers the
 same value from the kappa-ratio scaling law
 $A_r(\cW_N)=(\kappaChHodge(\cW_N)/\kappaChHodge(\Vir))^{r-3}A_r(\Vir)$ and
 $\kappaChHodge(\cW_N)=c(H_N-1)$. Triangular and quadratic
@@ -696,7 +694,7 @@ Riccati envelope.
 
 \begin{remark}[Conditional harmonic radius]
 \label{rem:wn-conditional-harmonic-radius}
-Assume Conjecture~\ref{thm:beta-N-closed-form-proved-all-N}. Then
+Assume Conjecture~\ref{conj:beta-N-harmonic-closed-form}. Then
 Proposition~\ref{prop:rho-star-WN-closed-form} gives the
 ordinary-generating convergence radius
 \[
@@ -751,9 +749,11 @@ convergence radius is conditional on the beta-law surface.
 \emph{Logarithmic $\cW(p)$.} The Riccati-recursion analogue of
 Proposition~\ref{prop:w3-shadow-leading-asymptotic} is not in hand for
 $\cW(p)$: the Adamovic--Milas strong-generator presentation is not
-quadratic-Koszul. The shadow tower acquires factorially growing
-log-modular coefficients on the logarithmic loci (Flohr 1996;
-Adamovic--Milas 2009), placing $\cW(p)$ outside the tempered stratum.
+quadratic-Koszul. The logarithmic loci carry unbounded Massey
+amplitudes (Gurarie 1993; Flohr 1996), so finite Zhu data do not place
+$\cW(p)$ in the tempered stratum. Its status is the separate
+Conjecture~\ref{conj:tempered-stratum-contains-wp}, whose inputs are
+the regular $TW/WW$ bound and the logarithmic boundary estimate.
 
 \emph{Remaining open loci.} The candidates for non-tempering on the
 non-degenerate class~M locus are: (i) $\cW(p)$ logarithmic and its
@@ -767,18 +767,16 @@ Virasoro, $\cW_3$, and principal $\cW_N$ statements combine
 Theorem~\ref{thm:tempered-stratum-contains-virasoro},
 Theorem~\ref{thm:tempered-stratum-contains-w3}, and
 Theorem~\ref{conj:wn-tempered-general} on the finite-envelope locus.
-The logarithmic $\cW(p)$ and Monster-type statements require the
-Adamovic--Milas generator count and the
-Frenkel--Lepowsky--Meurman twisted-sector analysis respectively.
+The logarithmic $\cW(p)$ statement requires the Adamovic--Milas
+generator count, the regular $TW/WW$ amplitude bound, and the
+logarithmic boundary estimate; Monster-type statements require the
+Frenkel--Lepowsky--Meurman twisted-sector analysis.
 \end{proof}
 
-\section{Independent verification summary}
+\section{Independent derivations}
 \label{sec:tempered-stratum-iv-summary}
 
-The theorems admit the following independent-verification structure,
-implemented in
-\texttt{compute/tests/test\_tempered\_stratum.py} along disjoint
-derivation and verification paths.
+The theorems admit the following independent derivations.
 
 \textbf{1. Leading-coefficient ratio identity
 (Lemma~\ref{lem:leading-coefficient-ratio-identity}).}
@@ -789,7 +787,7 @@ derivation and verification paths.
  recurrence and telescoping).
 \item \emph{Verified against}: direct algebraic ratio computation
  $A_{r+1} / A_r = -6 r / (r+1)$ at symbolic level in sympy
- (\texttt{test\_leading\_ratio\_is\_minus\_6r\_over\_rp1}), using the
+ using the
  standalone closed-form evaluation not routed through the Vol~I
  recurrence.
 \item \emph{Disjoint rationale}: Vol~I theorem is proved by
@@ -803,15 +801,12 @@ derivation and verification paths.
 (Proposition~\ref{prop:virasoro-ratio-test}).}
 \begin{itemize}[nosep]
 \item \emph{Derived from}: Tier-1 through Tier-4 Laurent closed forms
- from Vol~I \texttt{shadow\_tower\_higher\_coefficients.tex} (four
+ from Vol~I (four
  separate theorems, combined via polynomial ratio).
 \item \emph{Verified against}: direct numerical evaluation of
  $\lvert S_{r+1}(\mathrm{Vir}_c) \rvert / ((r+1) \lvert S_r \rvert)$
- from the engine
- \texttt{compute/lib/shadow\_tower\_higher\_vir.py::virasoro\_shadow\_sequence}
- at $r = 10$ and five test values $c \in \{1/2, 1, 7, 13, 100\}$
- (\texttt{test\_ratio\_test\_tends\_to\_zero}); the engine
- independently iterates the chain-A master-equation recursion from
+ at $r = 10$ and five values $c \in \{1/2, 1, 7, 13, 100\}$; the
+ recurrence independently iterates the chain-A master equation from
  initial data $(S_2, S_3, S_4) = (c/2, 2, 10/(c(5c+22)))$.
 \item \emph{Disjoint rationale}: Laurent tiers derive the analytic
  bound; engine runs the chain-A recursion from initial data.
@@ -829,8 +824,7 @@ derivation and verification paths.
  from the raw $|S_r(\mathrm{Vir}_c)|/r!$ sequence through $r = 11$
  from the engine, at five test values $c \in \{1/2, 1, 7, 13, 100\}$;
  the decreasing trend of $(|S_r|/r!)^{1/r}$ towards $0$ is confirmed
- at each $c$
- (\texttt{test\_normalised\_shadow\_tends\_to\_zero}).
+ at each $c$.
 \item \emph{Disjoint rationale}: analytic upper bound uses Laurent
  tier decomposition; numerical check uses the raw recurrence engine.
 \end{itemize}
@@ -843,8 +837,7 @@ derivation and verification paths.
  $\to 6$.
 \item \emph{Verified against}: numerical evaluation of
  $|S_r(\mathrm{Vir}_c)|^{1/r}$ at $r = 11$, $c \in \{1, 7, 13\}$,
- compared to $6/c$
- (\texttt{test\_rho\_star\_is\_c\_over\_6}).
+ compared to $6/c$.
 \item \emph{Disjoint rationale}: analytic path uses asymptotic
  Stirling; numerical path uses direct root extraction.
 \end{itemize}
@@ -855,12 +848,9 @@ derivation and verification paths.
 \item \emph{Derived from}: $\cW_3$ Fateev-Lukyanov cubic coupling
  $\alpha_{\mathrm{FL}} = 2/\sqrt{5}$ giving Riccati ratio $\beta_3 =
  10$.
-\item \emph{Verified against}: direct numerical extraction from the
- $\cW_3$ shadow tower engine
- \texttt{compute/lib/w3\_shadow\_tower.py} (if present) at
- $r = 6$, $c \in \{1, 7\}$
- (\texttt{test\_w3\_rho\_star\_is\_c\_over\_10}, scaffold; marked
- skipped if engine absent).
+\item \emph{Verified against}: the first Laurent coefficients satisfy
+ $A_4^{\cW_3}=10/3$ and $A_5^{\cW_3}=-80/3$, hence
+ $A_5^{\cW_3}/A_4^{\cW_3}=-8=-10\cdot 4/5$.
 \item \emph{Disjoint rationale}: analytic path derives $\beta_3$ from
  the OPE coupling; numerical path reads off the recurrence ratio from
  the engine.
@@ -886,16 +876,10 @@ non-trivial central charge:
  harmonic beta-law hypothesis.
 \item \textbf{Open non-principal loci}: tempering of logarithmic
  $\cW(p)$ and tempering of Monster-type twisted sectors.
-\item \textbf{Cross-links}: Vol~I
- \texttt{shadow\_tower\_higher\_coefficients.tex}
- (Theorem~\ref{V1-thm:shadow-tower-asymptotic-closed-form},
- \texttt{V1-thm:shadow-tower-tier-4-closed-form}) supplies the
- Laurent closed forms; Vol~II
- \texttt{topologization\_class\_m\_original\_complex\_platonic.tex}
- supplies the KS-$\rho$ Banach framework, the curved-Dunn complex,
- and the chain-level $E_3$ theorem under $(\mathrm{H}_S)$; Vol~II
- \texttt{e\_infinity\_topologization.tex} supplies the iterated
- Sugawara ladder $\mathrm{E}_{k+2}$-top theorem.
+\item \textbf{Cross-links}: Vol~I supplies the Laurent closed forms;
+Vol~II supplies the KS-$\rho$ Banach framework, the curved-Dunn
+complex, the chain-level $E_3$ theorem under $(\mathrm{H}_S)$, and
+the iterated Sugawara ladder $\mathrm{E}_{k+2}$-top theorem.
 \end{itemize}
 
 Within class~M at non-degenerate central charge, every algebra
@@ -935,10 +919,10 @@ strata where finite propagation is not supplied. The scope boundary:
  locus. Conditional closed-form ratio
  $\beta_N = 12(H_N - 1)$ (Vol~II
  Chapter~\ref{ch:beta-N-closed-form-all},
- Conjecture~\ref{thm:beta-N-closed-form-proved-all-N}). Realises
+ Conjecture~\ref{conj:beta-N-harmonic-closed-form}). Realises
  \textsf{cor:rung-w-N} for all $N \ge 2$ where the finite envelope is
  supplied. The infinite rung \textsf{cor:rung-w-infty}
- (the Platonic endpoint $\cW_\infty[\mu]\to\Einfty^{\mathrm{top}}$)
+ (the $\Einfty$-topological endpoint $\cW_\infty[\mu]\to\Einfty^{\mathrm{top}}$)
  is conditional on the four primary-source hypotheses
  $\hypProchazka, \hypCKL, \hypPRSh, \hypYamada$
  (\cite{ProchazkaRapcak18,CKL-parafermion,PopeRomansShen-winfty-wedge,
@@ -949,9 +933,10 @@ strata where finite propagation is not supplied. The scope boundary:
 \item \textbf{(Logarithmic $\cW(p)$ triplet.)} The remaining theorem is
  Conjecture~\ref{conj:tempered-stratum-contains-wp} of Vol~II
  Chapter~\ref{ch:logarithmic-wp-tempered-analysis},
- and its proof obligation is the Adamovi\'c-Milas character expansion
- together with the corresponding log-modular coefficient bound. This does not
- obstruct the rest of the climax.
+ and its proof obligation is the regular Adamovi\'c--Milas $TW/WW$
+ character-amplitude bound together with the separate logarithmic
+ $\phi_{0,1}$ boundary estimate. This does not obstruct the rest of the
+ climax.
 \item \textbf{(Irrational cosets.)} Closed by Vol~II
  Chapter~\ref{ch:irrational-cosets-tempered}
  (Theorem~\ref{thm:irrational-coset-tempered}), through the refined

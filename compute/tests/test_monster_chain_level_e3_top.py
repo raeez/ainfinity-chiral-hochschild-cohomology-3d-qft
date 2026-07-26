@@ -9,8 +9,16 @@ finite-orbifold BV trivialization
 
 from __future__ import annotations
 
+from fractions import Fraction
+
 import pytest
 
+from compute.lib.finite_orbifold_descent import (
+    corrected_associator_formula,
+    corrected_associator_value,
+    dw_obstruction_profile,
+    homotopy_fixed_point_profile,
+)
 from compute.lib.z2_group_cohomology import (
     IDENTITY,
     SIGMA,
@@ -21,6 +29,45 @@ from compute.lib.z2_group_cohomology import (
     normalized_h3_bz2_u1_classes,
     normalized_z2_3_cocycle,
 )
+
+
+def test_monster_orbifold_descent_is_homotopy_fixed_point_totalization() -> None:
+    """Finite-orbifold descent uses ``V^{hG}``, not bare fixed points."""
+    profile = homotopy_fixed_point_profile(
+        group="Z/2",
+        algebra="V_Lambda",
+        twisted_sector_required=True,
+    )
+    obstruction = dw_obstruction_profile("Z/2")
+
+    assert "Tot[V_Lambda => Map(Z/2,V_Lambda)" in profile.totalization
+    assert profile.cosimplicial_levels[2] == "Map(Z/2^2,V_Lambda)"
+    assert profile.twisted_sector_required
+    assert profile.requires_trivial_dw_class
+    assert obstruction.cohomology_group == "H^3(BZ/2; U(1))"
+    assert obstruction.descent_requires_zero
+    assert "Phi^beta_{g,h,k}" in corrected_associator_formula()
+
+
+def test_beta_corrected_associator_trivializes_a_coboundary() -> None:
+    """If ``alpha_orb=d beta``, the associator is corrected by beta."""
+    corrected = corrected_associator_value(
+        beta_g_h=Fraction(-1),
+        beta_gh_k=Fraction(-1),
+        beta_h_k=Fraction(1),
+        beta_g_hk=Fraction(1),
+        phi_g_h_k=Fraction(1),
+    )
+    obstruction_remaining = corrected_associator_value(
+        beta_g_h=Fraction(1),
+        beta_gh_k=Fraction(1),
+        beta_h_k=Fraction(-1),
+        beta_g_hk=Fraction(1),
+        phi_g_h_k=Fraction(1),
+    )
+
+    assert corrected == 1
+    assert obstruction_remaining == -1
 
 
 def test_h3_bz2_u1_normalized_sign_representatives() -> None:

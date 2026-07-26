@@ -73,7 +73,7 @@ def lv_sign_on_desuspended(degrees_before, arity_inner, degrees_after):
 
     Actually, the precise relationship is:
 
-    The LV identity on T^c(s^{-1}A):
+    The LV identity on T^c(s^{-1}\\bar A):
       Σ_{r+s+t=n} (−1)^{rs+t} m_{r+1+t}(id^r ⊗ m_s ⊗ id^t) = 0
 
     When EVALUATED on elements a₁⊗...⊗a_n (in A, before desuspension):
@@ -109,7 +109,8 @@ def compare_signs_on_term(n, degrees, inner_start, inner_arity):
 
     The precise relationship between the two conventions:
 
-    The LV sign (-1)^{rs+t} acts on the bar construction T^c(s^{-1}A).
+    The LV sign (-1)^{rs+t} acts on the reduced bar construction
+    T^c(s^{-1}\\bar A).
     When evaluated on elements a₁,...,a_n ∈ A, the desuspension introduces
     additional Koszul signs. The total LV-on-elements sign is:
 

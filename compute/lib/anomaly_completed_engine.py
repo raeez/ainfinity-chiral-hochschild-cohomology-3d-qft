@@ -5,10 +5,18 @@ Implements the anomaly-completed holographic constructions from Vol II Part VII.
 The anomaly-completed holographic programme extends the Koszul duality
 framework to theories with gravitational anomalies. The key objects:
 
-1. **Transgression algebra** B_Theta: Given a dga B and a Maurer-Cartan
-   element Theta in B, the transgression algebra is B_Theta = B * k<eta>
-   with eta*b = (-1)^{|b|} b*eta and d(eta) = Theta. This extends B by
-   a new generator eta whose differential is the anomaly.
+1. **Transgression algebra** B_Theta: In a genuinely noncommutative bar
+   model the Ore relation is eta*b = (-1)^{|b|} b*eta + iota_Theta(b),
+   with d(eta) = Theta. When the anomaly contraction iota_Theta vanishes
+   and Theta is central, this specializes to the strict central-shadow
+   transgression algebra B_Theta = B * k<eta> with
+   eta*b = (-1)^{|b|} b*eta and d(eta) = Theta. This central-shadow
+   convention does not twist the differential by d + [eta,-].
+
+   For a genuinely curved complex with d^2 = [Theta,-], the flat
+   anomaly completion instead uses the curved Maurer-Cartan equation
+   d eta + 1/2[eta,eta] + Theta = 0, equivalently
+   d eta + eta^2 + Theta = 0 in the associative convention.
 
 2. **Secondary anomaly** u = eta^2 in B_Theta: The square of the
    transgression generator, which is nonzero because eta is odd-degree
@@ -47,13 +55,31 @@ from sympy import (
 # 1. TRANSGRESSION ALGEBRA
 # =========================================================================
 
+def ore_transgression_relation(has_contraction: bool = True) -> Dict[str, Any]:
+    """Return the noncommutative Ore transgression relation."""
+    relation = "eta b - (-1)^|b| b eta"
+    if has_contraction:
+        relation += " - iota_Theta(b)"
+
+    return {
+        'algebra': 'B_Theta = B<eta>/(relation)',
+        'relation': relation,
+        'eta_degree': 1,
+        'd_eta': 'Theta',
+        'ore_automorphism': 'sigma(b)=(-1)^|b| b',
+        'ore_sigma_derivation': 'iota_Theta' if has_contraction else '0',
+        'central_shadow_specialization': not has_contraction,
+    }
+
+
 def transgression_algebra(
     B_dim: int,
     theta_degree: int,
+    eta_power_cutoff: Optional[int] = None,
 ) -> Dict[str, Any]:
-    """Construct the transgression algebra B_Theta = B * k<eta> / relations.
+    """Construct the strict central-shadow transgression algebra.
 
-    Given a dga B of dimension B_dim and a Maurer-Cartan element Theta
+    Given a dga B of dimension B_dim and a closed central element Theta
     of degree theta_degree, the transgression algebra B_Theta is the
     extension of B by a generator eta with:
 
@@ -61,42 +87,126 @@ def transgression_algebra(
     - eta * b = (-1)^{|b|} * b * eta  (graded commutation)
     - d(eta) = Theta
 
-    As a graded vector space, B_Theta = B tensor k<eta> = B + B*eta,
-    so dim(B_Theta) = 2 * dim(B).
+    This is the strict central-shadow convention. For a curved twist
+    with d^2 = [Theta,-], use curved_mc_twist_data(): flatness requires
+    d eta + 1/2[eta,eta] + Theta = 0.
+
+    As a graded left B-module, B_Theta has basis {eta^n | n >= 0}.
+    It is therefore infinite-rank over B unless a finite eta-power
+    cutoff is imposed.  The old exterior value 2 * dim(B) is only the
+    eta <= 1 truncation.
 
     Parameters
     ----------
     B_dim : int
         Dimension of the base dga B. Must be >= 1.
     theta_degree : int
-        Degree of the Maurer-Cartan element Theta.
+        Degree of the closed central element Theta.
+    eta_power_cutoff : int | None
+        Optional maximum eta power retained.  If None, no finite
+        dimension is reported.
 
     Returns
     -------
     dict
         Dictionary with keys:
-        - 'dim_B_Theta': 2 * B_dim (dimension of transgression algebra)
+        - 'dim_B_Theta': None unless eta_power_cutoff is supplied
         - 'eta_degree': theta_degree - 1
         - 'theta_degree': theta_degree
         - 'B_dim': B_dim
         - 'commutation_sign': -1 if eta has odd degree, +1 if even
         - 'is_clifford_type': True if eta^2 != 0 in general
+        - 'is_infinite_rank': True iff eta_power_cutoff is None
+        - 'eta_power_basis': 'eta^n, n >= 0'
+        - 'dim_eta_le_1': 2 * B_dim, the first eta-truncation only
     """
     if B_dim < 1:
         raise ValueError(f"B_dim must be >= 1, got {B_dim}")
+    if eta_power_cutoff is not None and eta_power_cutoff < 0:
+        raise ValueError(
+            f"eta_power_cutoff must be >= 0 when supplied, got {eta_power_cutoff}"
+        )
 
     eta_degree = theta_degree - 1
     # Sign in eta*b = (-1)^{|b|} b*eta depends on eta's degree parity
     # but the relation is graded: eta*b = (-1)^{|b|} b*eta
     commutation_sign = (-1) ** eta_degree
+    finite_dim = (
+        None if eta_power_cutoff is None else B_dim * (eta_power_cutoff + 1)
+    )
 
     return {
-        'dim_B_Theta': 2 * B_dim,
+        'dim_B_Theta': finite_dim,
         'eta_degree': eta_degree,
         'theta_degree': theta_degree,
         'B_dim': B_dim,
         'commutation_sign': commutation_sign,
         'is_clifford_type': eta_degree % 2 == 1,  # odd degree => eta^2 can be nonzero
+        'is_infinite_rank': eta_power_cutoff is None,
+        'eta_power_basis': 'eta^n, n >= 0',
+        'eta_power_cutoff': eta_power_cutoff,
+        'dim_eta_le_1': 2 * B_dim,
+        'convention': 'strict central-shadow Ore extension',
+        'forms_twisted_differential': False,
+    }
+
+
+def su2_anomalous_steinberg_profile(k: Any = Symbol('k')) -> Dict[str, Any]:
+    """Return the SU(2) anomaly-completed Steinberg package."""
+    kappa = simplify(Rational(3, 4) * (k + 2))
+    return {
+        'boundary_algebra': 'V_k(sl_2)',
+        'koszul_dual_level': '-k-4',
+        'modular_characteristic': kappa,
+        'anomaly_class': 'Theta = kappa omega_1',
+        'geometric_source': 'H^3(SU(2);Z)=Z generated by c_3',
+        'level_selects': 'k c_3',
+        'ore_relation': ore_transgression_relation(True)['relation'],
+        'secondary_anomaly': 'u=eta^2',
+        'genus_clifford': (
+            'G_g(B_Theta)=B_Theta<alpha_i,beta_i>/'
+            '(alpha_i alpha_j+alpha_j alpha_i, '
+            'beta_i beta_j+beta_j beta_i, '
+            'alpha_i beta_j+beta_j alpha_i-delta_ij u)'
+        ),
+        'invert_u': 'G_g(B_Theta)[u^-1] ~= Mat_{2^g}(B_Theta[u^-1])',
+        'u_zero': 'G_g(B_Theta)/(u) ~= (B_Theta/(u)) tensor exterior(alpha_i,beta_i)',
+        'string_witness': 'd eta = Theta',
+    }
+
+
+def curved_mc_twist_data() -> Dict[str, Any]:
+    """Record the curved Maurer-Cartan flatness convention.
+
+    For a curved dg algebra with d^2 = [Theta, -] and a degree-one
+    element eta, the twisted differential d_eta = d + [eta, -] satisfies
+
+        d_eta^2 = [Theta + d eta + 1/2[eta, eta], -].
+
+    In the associative commutator convention, 1/2[eta, eta] = eta^2.
+    """
+    return {
+        'curvature_before_twist': 'Theta',
+        'twisted_differential': 'd_eta = d + [eta,-]',
+        'twisted_square': 'd_eta^2 = [Theta + d eta + 1/2[eta,eta], -]',
+        'curved_mc_equation': 'd eta + 1/2[eta,eta] + Theta = 0',
+        'twisted_curvature': 'Theta + d_eta_generator + eta^2',
+        'flatness_equation': 'd_eta_generator + eta^2 + Theta = 0',
+        'half_bracket_equals_eta_square_for_odd_eta': True,
+        'strict_ore_convention': 'central-shadow: d(eta)=Theta, no twist d+[eta,-]',
+    }
+
+
+def virasoro_curved_class_m_completion() -> Dict[str, Any]:
+    r"""Return the Virasoro curved-MC anomaly-completed class-M profile."""
+    return {
+        'base': 'B_ch(Vir_c)^hat_rho',
+        'extension': 'k<eta,u>/(u-eta^2)',
+        'completed_complex': 'B_ch(Vir_c)^hat_rho tensor k<eta,u>/(u-eta^2)',
+        'curved_mc_equation': 'd eta + eta^2 + Theta_Vir = 0',
+        'twisted_differential': 'd_eta = d + [eta,-]',
+        'secondary_anomaly': 'u = eta^2',
+        'secondary_requires_algebra': True,
     }
 
 

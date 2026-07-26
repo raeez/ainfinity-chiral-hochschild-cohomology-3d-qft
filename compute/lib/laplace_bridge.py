@@ -115,7 +115,7 @@ def verify_br3_su2(k, z):
     {J^a_λ J^b} = ε^{abc}J^c + kδ^{ab}λ
 
     For a=b (diagonal): {J^a_λ J^a} = kλ
-      r^{aa}(z) = k/z²
+      pre-dlog coefficient r^{aa}(z) = k/z²
 
     For a≠b (off-diagonal): {J^a_λ J^b} = ε^{abc}J^c
       r^{ab}(z) = ε^{abc}J^c/z
@@ -124,10 +124,11 @@ def verify_br3_su2(k, z):
       r^L(z) = Σ_{a,b} r^{ab}(z) · e_a ⊗ e_b
     where e_a are the basis elements.
 
-    Collision r-kernel for ĝ_k after the bar-residue extraction:
-      r(z) = Ω/z  where Ω = Σ J^a ⊗ J^a (Casimir)
+    Trace-form collision r-kernel for ĝ_k after the bar-residue extraction:
+      r_k(z) = kΩ/z  where Ω = Σ J^a ⊗ J^a (Casimir)
 
-    Wait — this gives r^{ab} = δ^{ab}/z, but we got k/z² for diagonal
+    In unit normalization this gives r^{ab} = δ^{ab}/z, but the pre-dlog diagonal
+    coefficient above is k/z²
     and ε^{abc}J^c/z for off-diagonal. The discrepancy is because the
     full r-matrix involves BOTH the structure constant and level terms.
 

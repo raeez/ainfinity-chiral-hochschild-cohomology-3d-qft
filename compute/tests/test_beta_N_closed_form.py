@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import sys
 from fractions import Fraction
+from math import gcd, lcm
 from pathlib import Path
 
 # Ensure compute/lib is importable
@@ -48,6 +49,35 @@ from compute.lib.w4_beta_direct import (  # noqa: E402
     direct_w4_attack_report,
     w4_riccati_bridge_requirement,
 )
+
+
+def _lcm_to(N: int) -> int:
+    total = 1
+    for j in range(1, N + 1):
+        total = lcm(total, j)
+    return total
+
+
+def _is_prime(n: int) -> bool:
+    if n < 2:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    d = 3
+    while d * d <= n:
+        if n % d == 0:
+            return False
+        d += 2
+    return True
+
+
+def _bertrand_prime(N: int) -> int:
+    for p in range(N, N // 2, -1):
+        if _is_prime(p):
+            return p
+    raise AssertionError(f"No Bertrand prime found for N={N}")
 
 
 # -----------------------------------------------------------------------------
@@ -85,7 +115,7 @@ def test_kappa_WN_ratio_small():
 
 
 @independent_verification(
-    claim="thm:beta-N-closed-form-proved-all-N",
+    claim="conj:beta-N-harmonic-closed-form",
     derived_from=[
         "Vol II tempered_stratum_characterization_platonic.tex line 625-627 A_4^{W_3} = 10/3",
         "kappa(W_N) = c(H_N-1) from Vol I landscape_census.tex",
@@ -146,7 +176,7 @@ def test_beta_4_harmonic_prediction():
 
 
 @independent_verification(
-    claim="thm:beta-N-closed-form-proved-all-N",
+    claim="conj:beta-N-harmonic-closed-form",
     derived_from=[
         "Vol II master equation S_r(W_N) = -1/(2r kappa_N) sum f j k S_j S_k",
         "Vol I universal-asymptotic-factor: A_r(Vir) = 8(-6)^{r-4}/r on T-line",
@@ -249,7 +279,7 @@ def test_direct_w4_attack_supports_but_does_not_prove_beta4():
 
 
 @independent_verification(
-    claim="thm:beta-N-closed-form-proved-all-N",
+    claim="conj:beta-N-harmonic-closed-form",
     derived_from=[
         "beta_N_from_kappa formula 12*(H_N-1) from kappa-ratio scaling",
         "A_r_WN formula (kappa_ratio)^{r-3} * A_r_Vir",
@@ -341,6 +371,99 @@ def test_beta_N_rational_not_integer_at_N5():
     assert b5 != Fraction(21)
     assert b5 != Fraction(24)
     assert b5.denominator == 5, "beta_5 not rational (p/5)"
+
+
+def test_beta_N_reduced_denominator_is_not_exact_lcm_formula():
+    """The reduced denominator is obtained after cancellation, not by lcm/12."""
+    for N in range(4, 41):
+        h_den = (harmonic_number(N) - 1).denominator
+        beta = beta_N_from_kappa(N)
+        L_N = _lcm_to(N)
+        assert beta.denominator == h_den // gcd(h_den, 12)
+        assert (L_N // gcd(L_N, 12)) % beta.denominator == 0
+
+    # Regression witness: the N=6 harmonic denominator has extra cancellation.
+    assert (harmonic_number(6) - 1) == Fraction(29, 20)
+    assert (harmonic_number(6) - 1).denominator == 20
+    assert _lcm_to(6) == 60
+    assert (harmonic_number(6) - 1).denominator != _lcm_to(6)
+
+    # Regression witness: reduced den(beta_N) is smaller than lcm/12.
+    beta_18 = beta_N_from_kappa(18)
+    assert beta_18 == Fraction(10190221, 340340)
+    assert _lcm_to(18) == 12252240
+    assert _lcm_to(18) // 12 == 1021020
+    assert beta_18.denominator == 340340
+    assert beta_18.denominator != _lcm_to(18) // 12
+
+
+def test_beta_N_nonintegral_for_all_N_ge_5_by_bertrand_prime():
+    """A prime p with N/2 < p <= N and p >= 5 survives in den(beta_N)."""
+    for N in range(5, 100):
+        p = _bertrand_prime(N)
+        beta = beta_N_from_kappa(N)
+        assert p >= 5
+        assert 2 * p > N
+        assert p <= N
+        assert beta.denominator % p == 0
+        assert beta.denominator > 1
+
+
+def test_beta_N_manuscript_rejects_exact_denominator_overclaim():
+    tex = Path("chapters/theory/beta_N_closed_form_all_platonic.tex").read_text()
+    flat = " ".join(tex.split())
+    assert "Bertrand's postulate" in flat
+    assert "d_N = \\frac{h_N}{\\gcd(h_N,12)}" in flat
+    assert "already fails at $N=18$" in flat
+    assert "has denominator equal to $\\mathrm{lcm}(2, 3, \\ldots, N)$" not in flat
+    assert (
+        "has denominator $\\mathrm{lcm}(1, 2, \\ldots, N) / 12$ at every"
+        not in flat
+    )
+
+
+def test_beta_N_status_labels_remain_conjectural():
+    beta_tex = Path("chapters/theory/beta_N_closed_form_all_platonic.tex").read_text()
+    wn_tex = Path("chapters/theory/wn_tempered_closure_platonic.tex").read_text()
+    frontier = Path("FRONTIER.md").read_text()
+
+    assert r"\label{conj:beta-N-harmonic-closed-form}" in beta_tex
+    assert r"\label{conj:kappa-ratio-scaling-law}" in beta_tex
+    assert "thm:beta-N-closed-form-proved-all-N" not in beta_tex
+    assert r"\label{prop:kappa-ratio-scaling-law}" not in beta_tex
+    assert "By Proposition~\\ref{conj:kappa-ratio-scaling-law}" not in beta_tex
+    assert "By Conjecture~\\ref{conj:kappa-ratio-scaling-law}" in beta_tex
+
+    assert "kappa-ratio scaling law conjectured in" not in wn_tex
+    assert r"Conjecture~\ref{conj:kappa-ratio-scaling-law}" in wn_tex
+    assert r"Conjecture~\ref{conj:beta-N-harmonic-closed-form}" in wn_tex
+
+    assert "thm:beta-N-closed-form-proved-all-N" not in frontier
+    assert "`conj:beta-N-harmonic-closed-form`" in frontier
+    assert "is not a closure" in frontier
+
+    vol1 = Path.home() / "chiral-bar-cobar"
+    if vol1.exists():
+        vol1_shadow = (
+            vol1 / "chapters/theory/shadow_tower_higher_coefficients.tex"
+        ).read_text()
+        vol1_w3_test = (vol1 / "compute/tests/test_w3_three_invariants.py").read_text()
+        vol1_gravity = (
+            vol1 / "standalone/three_dimensional_quantum_gravity.tex"
+        ).read_text()
+        vol1_antipatterns = (vol1 / "notes/antipatterns_catalogue.md").read_text()
+
+        assert "thm:beta-N-closed-form-proved-all-N" not in vol1_shadow
+        assert "The Vol~II $\\beta_N$ formula is the proved closed form" not in vol1_shadow
+        assert "conj:beta-N-harmonic-closed-form" in vol1_shadow
+
+        assert "thm:beta-N-closed-form-proved-all-N" not in vol1_w3_test
+        assert "ProvedHere, Vol II chapters/theory/beta_N_closed_form_all_platonic.tex" not in vol1_w3_test
+        assert "conj:beta-N-harmonic-closed-form" in vol1_w3_test
+
+        assert "the conditional harmonic $\\beta_N$ law" in vol1_gravity
+        assert "thm:beta-N-closed-form-proved-all-N" not in vol1_antipatterns
+        assert "`conj:beta-N-harmonic-closed-form`" in vol1_antipatterns
 
 
 # -----------------------------------------------------------------------------

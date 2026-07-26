@@ -290,7 +290,8 @@ def routes_agree_critical_level_failure() -> bool:
     Route B: Resonance locus k + h^v = p/q with p/q = 0 is on the wall;
         analytic continuation fails to extend without a Felder reflection
         datum that is itself a critical-level construction problem.
-    Route C: Sugawara primitive G^{(n)} diverges at k + h^v = 0.
+    Route C: the generic Sugawara primitive G^{(n)} has a pole at
+        k + h^v = 0.
 
     The three diagnoses are independent failure modes; agreement on
     failure-at-criticality is the non-tautological cross-check.
@@ -334,7 +335,7 @@ P3_CLAUSE_LEDGER: Tuple[ClauseStatus, ...] = (
         clause='E_3-lift on Q_{tot}-cohomology for affine KM at non-critical level',
         status='ProvedHere',
         hypotheses_required=(),
-        proof_anchor='chapters/connections/e_infinity_topologization.tex:thm:E3-topological-km',
+        proof_anchor='chapters/connections/3d_gravity.tex:thm:E3-topological-km',
     ),
     ClauseStatus(
         clause='Iterated Sugawara T^{(n)} = [Q_{tot}, G^{(n)}] on cohomology',

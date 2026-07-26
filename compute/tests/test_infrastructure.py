@@ -302,7 +302,7 @@ class TestLaplaceBridge:
         assert simplify(r - 6*c/z**4) == 0
 
     def test_br3_abelian(self):
-        """BR3 for abelian CS: {J_λ J}=kλ → r(z)=k/z²."""
+        """BR3 for abelian CS: {J_λ J}=kλ gives pre-dlog coefficient k/z²."""
         from lib.laplace_bridge import verify_br3_abelian
         k = Symbol('k')
         z = Symbol('z')

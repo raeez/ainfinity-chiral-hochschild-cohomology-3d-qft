@@ -103,8 +103,8 @@ class TestKoszulDualPairs:
         pair = heisenberg_koszul_pair()
         assert pair.self_dual_point is None
 
-    def test_virasoro_self_dual_at_13(self):
-        """Virasoro self-dual at c=13 (NOT c=26)."""
+    def test_virasoro_line_comparison_fixed_at_13(self):
+        """Virasoro comparison is fixed at c=13 (NOT c=26)."""
         pair = virasoro_koszul_pair()
         assert pair.self_dual_point == S(13)
 
@@ -262,12 +262,15 @@ class TestRMatrix:
         pair = virasoro_koszul_pair()
         result = classical_r_matrix(pair)
         assert result['pole_order'] == 3
+        assert result['r_matrix'] == '2*T/z + c/(2*z**3)'
+        assert result['cybe_type'] == 'collision-residue CYBE (Arnold/MC, non-Casimir)'
 
     def test_sl2_r_matrix_casimir(self):
-        """sl_2: r(z) = Omega/z (Casimir r-matrix)."""
+        """sl_2: trace-form r_k(z) = k*Omega/z (Casimir r-matrix)."""
         pair = affine_sl2_koszul_pair()
         result = classical_r_matrix(pair)
         assert result['pole_order'] == 1
+        assert 'k' in result['r_matrix']
         assert 'Omega' in result['r_matrix']
 
     def test_w3_r_matrix_pole(self):
@@ -306,19 +309,22 @@ class TestRMatrix:
 # ===================================================================
 
 class TestTheoremJ:
-    """Verify Theorem J: lines = A!-modules."""
+    """Verify Theorem J with chiral-dual and line-dual rows separated."""
 
     def test_theorem_j_heisenberg(self):
-        """Theorem J for Heisenberg: lines = H_k^! modules."""
+        """Theorem J for Heisenberg: lines use the H_{-k} open-colour row."""
         result = verify_theorem_j_heisenberg()
         assert result['theorem_j_holds']
-        assert result['koszul_dual'] == 'Sym^ch(V*)'
+        assert result['chiral_dual'] == 'curved Sym^ch(V*[1])'
+        assert result['line_dual'] == 'Y(u(1)) ~= H_{-k}'
 
     def test_theorem_j_virasoro(self):
-        """Theorem J for Virasoro: lines = Vir_{26-c} modules."""
+        """Virasoro lines have a conjectural Vir_{26-c} comparison model."""
         result = verify_theorem_j_virasoro()
-        assert result['theorem_j_holds']
-        assert result['koszul_dual'] == 'Vir_{26-c}'
+        assert not result['theorem_j_holds']
+        assert result['conjectural_virasoro_realization']
+        assert result['line_side_representative'] == 'Vir_{26-c}'
+        assert result['koszul_dual'] == 'same-family line-side representative Vir_{26-c}'
 
     def test_theorem_j_affine(self):
         """Theorem J for affine sl_2: lines = V_{-k-4}(sl_2) modules."""
@@ -326,13 +332,13 @@ class TestTheoremJ:
         assert result['theorem_j_holds']
         assert 'Feigin-Frenkel' in result['reason']
 
-    def test_theorem_j_virasoro_self_dual(self):
-        """At c=13: lines are self-conjugate."""
+    def test_theorem_j_virasoro_comparison_fixed(self):
+        """At c=13: the comparison representative has the same charge."""
         result = verify_theorem_j_virasoro(c_val=13)
-        assert result['is_self_dual']
+        assert result['comparison_fixed']
 
     def test_theorem_j_virasoro_c26(self):
-        """At c=26: dual has c'=0."""
+        """At c=26: the comparison representative has c'=0."""
         result = verify_theorem_j_virasoro(c_val=26)
         assert simplify(S(result['dual_central_charge'])) == 0
 
@@ -388,8 +394,8 @@ class TestCrossVolumeBridge:
 class TestSelfDuality:
     """Self-duality analysis (AP8 compliance)."""
 
-    def test_virasoro_self_dual_at_13(self):
-        """Virasoro: self-dual at c=13."""
+    def test_virasoro_line_comparison_fixed_at_13(self):
+        """Virasoro: comparison fixed at c=13."""
         pair = virasoro_koszul_pair()
         result = self_duality_analysis(pair)
         assert result['self_dual_point'] == '13'
@@ -548,10 +554,10 @@ class TestAnomalyCompletion:
 # ===================================================================
 
 class TestDualCentralCharges:
-    """Verify Koszul dual central charges are correct."""
+    """Verify comparison central charges are correct."""
 
     def test_virasoro_dual_c(self):
-        """Virasoro: c(A!) = 26-c."""
+        """Virasoro: the same-family representative has charge 26-c."""
         c = Symbol('c')
         pair = virasoro_koszul_pair()
         assert simplify(pair.dual_central_charge - (26 - c)) == 0
@@ -571,16 +577,16 @@ class TestDualCentralCharges:
         assert simplify(pair.dual_central_charge - (100 - c)) == 0
 
     def test_virasoro_at_c13_dual_c13(self):
-        """At c=13: Vir_13^! = Vir_13 (self-dual)."""
+        """At c=13: the same-family representative has charge 13."""
         pair = virasoro_koszul_pair(c_val=13)
         assert pair.dual_central_charge == 13
 
     def test_virasoro_at_c0_dual_c26(self):
-        """At c=0: Vir_0^! = Vir_26."""
+        """At c=0: the same-family representative has charge 26."""
         pair = virasoro_koszul_pair(c_val=0)
         assert pair.dual_central_charge == 26
 
     def test_virasoro_at_c26_dual_c0(self):
-        """At c=26: Vir_26^! = Vir_0."""
+        """At c=26: the same-family representative has charge 0."""
         pair = virasoro_koszul_pair(c_val=26)
         assert pair.dual_central_charge == 0

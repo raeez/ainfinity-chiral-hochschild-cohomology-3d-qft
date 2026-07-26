@@ -282,7 +282,11 @@ for m in pat.finditer(txt):
             print(f'{fn}:{line_no}: theorem missing \\hyp / \\eff tag ({label})')
 if miss > 5:
     print(f'    ... and {miss - 5} more in {fn}')
+# exit code carries the miss count back to the shell (capped below 255)
+sys.exit(min(miss, 200))
 PY
+  miss_count=$?
+  WARNINGS=$((WARNINGS + miss_count))
 done
 
 # ----------------------------------------------------------------------------

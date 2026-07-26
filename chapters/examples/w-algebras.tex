@@ -379,7 +379,8 @@ m_3(T,T,T;\lambda_1,\lambda_2)
 \item \emph{Conformal weight.} Each monomial in~\eqref{eq:vir-m3}
  has total weight $2$ (spin of~$T$) plus degree from
  $\lambda_i$, consistent with $|m_3| = 1$ in the bar complex
- (the desuspension shifts the degree by~$+1$ per input beyond the first).
+ (the induced bar-coderivation component has degree~$+1$; the
+ desuspension itself lowers cohomological degree by~$1$).
 \item \emph{Skew-symmetry.} Under $(T_1,T_2,T_3) \mapsto
  (T_3,T_2,T_1)$ with $(\lambda_1,\lambda_2) \mapsto
  (-\lambda_2,-\lambda_1)$, the expression transforms by an
@@ -437,35 +438,35 @@ At 1-loop ($\hbar^1$), the BV Laplacian $\Delta$ contributes by contracting a pa
 The functional equation is thus the component-by-component restatement of the BV master equation, with the Poisson $\lambda$-bracket $\{\cdot, \cdot\}_\lambda$ encoding the classical part and $\mathcal{O}(\hbar)$ the quantum corrections.
 \end{proof}
 
-\subsubsection{Spectral $r$-Matrix}
+\subsubsection{Spectral Kernels}
 
-The spectral $r$-matrix for Virasoro is a two-tensor encoding the Poisson structure in spectral parameters.
+The Virasoro bracket determines a coefficient kernel, a Laplace
+kernel, and a collision residue.
 
-\begin{definition}[Virasoro Spectral $r$-Matrix]
+\begin{definition}[Virasoro PVA kernels]
 % label removed: def:vir-r-matrix
-The classical $r$-matrix is
+The Laplace kernel is
 \begin{equation}
-r^{\text{Vir}}(\lambda, \mu) = \sum_{n=1}^3 \frac{r_n}{\lambda^n} \otimes \frac{1}{\mu},
+K^{L,\text{Vir}}(z)
+=
+\frac{(\partial T)\otimes\mathbf{1}}{z}
++\frac{2T\otimes\mathbf{1}}{z^2}
++\frac{(c/2)\,\mathbf{1}\otimes\mathbf{1}}{z^4}.
 \end{equation}
-where
-\begin{align}
-r_3 &= \frac{c}{12} \, \mathbf{1} \otimes \mathbf{1},\\
-r_2 &= T \otimes \mathbf{1} + \mathbf{1} \otimes T,\\
-r_1 &= \partial(T \otimes \mathbf{1}) = (\partial T) \otimes \mathbf{1}.
-\end{align}
 \end{definition}
 
-The $r$-matrix satisfies the \emph{classical Yang--Baxter equation} (CYBE):
+The kernel satisfies the Virasoro PVA Jacobi identity:
 \begin{equation}
 % label removed: eq:vir-CYBE
-[r^{12}(\lambda_1-\lambda_2), r^{13}(\lambda_1-\lambda_3)] + [r^{12}(\lambda_1-\lambda_2), r^{23}(\lambda_2-\lambda_3)] + [r^{13}(\lambda_1-\lambda_3), r^{23}(\lambda_2-\lambda_3)] = 0,
+\{T_\lambda\{T_\mu T\}\}
+-\{T_\mu\{T_\lambda T\}\}
+-\{\{T_\lambda T\}_{\lambda+\mu}T\}
+\;=\;0.
 \end{equation}
-which follows from the Jacobi identity for the Virasoro $\lambda$-bracket.
 
-\begin{computation}[Virasoro CYBE verification]
+\begin{computation}[Virasoro PVA Jacobi verification]
 % label removed: comp:vir-CYBE
-Verification: the classical Yang--Baxter equation~\eqref{eq:vir-CYBE}
-for the Virasoro Laplace kernel in the spectral-parameter form
+Verification of the Virasoro PVA Jacobi identity uses the Laplace kernel in the spectral-parameter form
 (Proposition~\ref{prop:field-theory-r}):
 \[
 r^L(z)
@@ -477,56 +478,37 @@ r^L(z)
 The collision residue $r^{\mathrm{coll}}(z) = (c/2)/z^3\,
 \mathbf{1}\otimes\mathbf{1} + 2T/z\otimes\mathbf{1}$ has pole
 orders one lower.
-Since the Virasoro PVA has a single generator~$T$, the $r$-matrix
-acts on $V \otimes V$ with $V = \C\langle T \rangle$.
-For the CYBE with three copies $V_1 \otimes V_2 \otimes V_3$ and
-spectral parameters $u, v$, one verifies
-\[
-[r^{12}(u),\, r^{13}(u+v)]
-+ [r^{12}(u),\, r^{23}(v)]
-+ [r^{13}(u+v),\, r^{23}(v)]
-= 0.
-\]
 The central term $\frac{c}{2z^4}\,\mathbf{1}\otimes\mathbf{1}$
-commutes with everything, so it drops out of all brackets.
-The terms involving $T$ and $\partial T$ contribute through the
-Lie bracket $[T \otimes \mathbf{1}, \mathbf{1} \otimes T] = 0$
-(in different tensor factors) and
-$[T \otimes \mathbf{1},\, T \otimes \mathbf{1}] = 0$ (abelian in
-each factor). The cross-factor commutators
-$[r^{12}(u), r^{23}(v)]$ produce terms proportional to
-$T_1 \otimes [T_2, T_2] \otimes T_3$, which vanish because
-the Virasoro generators in the same slot commute as classical
-fields. The only potentially nonzero contributions come from the
-$\partial T$ and $T$ terms acting on different copies, and these
-cancel by the Jacobi identity for $\{T_\lambda T\}$.
+commutes with every field insertion.
 Explicitly, the Jacobi identity
 $\{T_\lambda\{T_\mu T\}\} - \{T_\mu\{T_\lambda T\}\}
 = \{\{T_\lambda T\}_{\lambda+\mu} T\}$
 becomes, after Laplace transform in both $\lambda$ and $\mu$,
-exactly the CYBE for $r(z)$. This is the standard
-correspondence between the PVA Jacobi identity and the CYBE
-established in Proposition~\ref{prop:field-theory-r}.
+the spectral form of the same PVA Jacobiator. An ordinary
+non-dynamical CYBE is obtained only after passing to a constant
+collision tensor on a specified quantization surface.
 \end{computation}
 
-\textbf{Quantization:} The quantized $R$-matrix admits a
-perturbative expansion in $\hbar$ (the inverse level):
+\textbf{Quantization:} A chosen quantization surface has a
+perturbative expansion in $\hbar$ whose first-order term is the
+selected spectral kernel:
 \begin{equation}
 % label removed: eq:vir-R-expansion
 R^{\text{Vir}}(\lambda, \mu; \hbar)
 = \mathbf{1} \otimes \mathbf{1}
- + \hbar\, r^{\text{Vir}}(\lambda,\mu)
- + \hbar^2 \Bigl[\tfrac{1}{2}\, r^{\text{Vir}} \cdot r^{\text{Vir}}
+ + \hbar\, K^{L,\text{Vir}}(\lambda,\mu)
+ + \hbar^2 \Bigl[\tfrac{1}{2}\, K^{L,\text{Vir}} \cdot K^{L,\text{Vir}}
  + \delta r_{\text{loop}}\Bigr]
  + \mathcal{O}(\hbar^3),
 \end{equation}
 where the $\hbar^2$ coefficient has two contributions:
 \begin{itemize}
 \item The \emph{tree-level iteration}
-$\tfrac{1}{2}\,r^{\text{Vir}} \cdot r^{\text{Vir}}$, which is
+$\tfrac{1}{2}\,K^{L,\text{Vir}} \cdot K^{L,\text{Vir}}$, which is
 the composition of two classical exchanges (the ``$r^2/2$''
 term required by the quantum Yang--Baxter equation at order
-$\hbar^2$ if $r$ alone satisfies the CYBE);
+$\hbar^2$ when the chosen first-order tensor satisfies the relevant
+classical equation);
 \item The \emph{one-loop correction} $\delta r_{\text{loop}}$,
 arising from the self-energy of the Virasoro propagator
 $\langle T\mu \rangle$ through the ghost loop.
@@ -602,26 +584,15 @@ where $\circ_i$ denotes operadic composition at the $i$-th input.
 % label removed: prop:vir-hochschild
 Assume the Khan--Zeng Virasoro realization satisfies
 Theorem~\ref{thm:physics-bridge}.
-The chiral Hochschild cohomology $HH^\bullet_{\text{ch}}(\text{Vir}_c)$ is isomorphic
-to the space of infinitesimal deformations of the Virasoro $A_\infty$ structure on a
-smooth curve. By Vol~I Theorem~H (polynomial growth, concentration on a smooth curve,
-at generic level/charge; the critical locus $c_{\mathrm{crit}}$ analogous to $k = -h^\vee$
-is excluded because $\dim \ChirHoch^0$ can be infinite there, see Vol~I
-Remark~\ref*{rem:critical-level-lie-vs-chirhoch}),
-it is concentrated in cohomological degrees $\{0,1,2\}$. At generic central charge $c \neq 0$:
-\begin{itemize}
-\item $HH^0_{\text{ch}}(\text{Vir}_c) \cong \C$ (the vacuum / center);
-\item $HH^1_{\text{ch}}(\text{Vir}_c) = 0$ (all derivations are inner);
-\item $HH^2_{\text{ch}}(\text{Vir}_c) \cong \C$, with generator $\Theta_c$ corresponding
- to the central-charge deformation $c \mapsto c + \epsilon$;
-\item $HH^n_{\text{ch}}(\text{Vir}_c) = 0$ for $n \geq 3$.
-\end{itemize}
-\textbf{Caution.} This is NOT the Gel'fand--Fuchs cohomology of $\mathrm{Diff}(S^1)$,
-which is infinite-dimensional. The chiral Hochschild cohomology lives on a one-dimensional
-algebraic curve and is bounded by Vol~I Theorem~H; the Hilbert series
-$P_{\text{Vir}_c}(t) = 1 + t^2$ is a polynomial of degree~$2$. ``Polynomial growth''
-refers to the Hilbert series being a polynomial, not to $HH^\bullet$ being a polynomial
-ring on $\Theta$: the cup product $\Theta_c \smile \Theta_c$ vanishes in $HH^4 = 0$.
+The chiral Hochschild complex $C^\bullet_{\mathrm{ch}}(\mathrm{Vir}_c,
+\mathrm{Vir}_c)$ is the derived centre controlling Virasoro
+deformations on the curve chart.  Bakalov--De Sole--Kac compute the
+bounded vertex cohomology as one-dimensional in degrees
+$\{0,2,3\}$ and zero in the remaining nonnegative degrees
+\cite[Theorem~7.2]{BDSK21}.  A bounded-to-chart quasi-isomorphism
+$\chi^{\mathrm{bd}}_{\mathrm{Vir}_c}$ transports this dimension vector
+to the curve chart.  The Gelfand--Fuchs cohomology of
+$\mathrm{Diff}(S^1)$ is a separate continuous Lie-algebra functor.
 \end{proposition}
 
 \subsection{Example 2: $W_3$ Algebra (Spin-$(2,3)$ W-algebra)}
@@ -848,41 +819,43 @@ For explicit formulas, see the computational appendix (to be prepared using comp
 
 \subsubsection{Spectral $r$-Matrix for $W_3$}
 
-The $W_3$ spectral $r$-matrix is a $2 \times 2$ matrix in the $\{T, W\}$ basis:
+The $W_3$ divided-power coefficient kernel is a $2 \times 2$ matrix in the $\{T, W\}$ basis:
 \begin{equation}
-r^{W_3}(\lambda, \mu) = \begin{pmatrix}
-r^{TT}(\lambda,\mu) & r^{TW}(\lambda,\mu) \\
-r^{WT}(\lambda,\mu) & r^{WW}(\lambda,\mu)
+K^{W_3}(u, v) = \begin{pmatrix}
+K^{TT}(u,v) & K^{TW}(u,v) \\
+K^{WT}(u,v) & K^{WW}(u,v)
 \end{pmatrix}.
 \end{equation}
 
 \textbf{Explicit Components:}
 
 \begin{align}
-r^{TT}(\lambda,\mu) &= \frac{c/12}{\lambda^3 \mu} + \frac{T \otimes \mathbf{1} + \mathbf{1} \otimes T}{\lambda^2 \mu} + \frac{(\partial T) \otimes \mathbf{1}}{\lambda \mu},\\
-r^{TW}(\lambda,\mu) &= \frac{3W \otimes \mathbf{1}}{\lambda^2 \mu} + \frac{(\partial W) \otimes \mathbf{1}}{\lambda \mu},\\
-r^{WW}(\lambda,\mu) &= \frac{c/360}{\lambda^5 \mu} + \frac{T \otimes \mathbf{1} + \mathbf{1} \otimes T}{3\lambda^3 \mu} + \frac{(\partial T) \otimes \mathbf{1}}{2\lambda^2 \mu} \\
-&\quad + \frac{(32/(5c+22))\,\Lambda \otimes \mathbf{1}}{\lambda \mu} + \frac{(16/(5c+22))\,(\partial\Lambda) \otimes \mathbf{1}}{\mu}.
+K^{TT}(u,v) &= \frac{c/12}{u^4 v} + \frac{2T \otimes \mathbf{1}}{u^2 v} + \frac{(\partial T) \otimes \mathbf{1}}{u v},\\
+K^{TW}(u,v) &= \frac{3W \otimes \mathbf{1}}{u^2 v} + \frac{(\partial W) \otimes \mathbf{1}}{u v},\\
+K^{WW}(u,v) &= \frac{c/360}{u^6 v} + \frac{T \otimes \mathbf{1}}{3u^4 v} + \frac{(\partial T) \otimes \mathbf{1}}{2u^3 v} \\
+&\quad + \frac{(32/(5c+22))\,\Lambda \otimes \mathbf{1}}{u^2 v} + \frac{(16/(5c+22))\,(\partial\Lambda) \otimes \mathbf{1}}{u v}.
 \end{align}
+The entry $K^{WT}$ is determined from $K^{TW}$ by PVA skew-symmetry.
 
-\begin{theorem}[$W_3$ Classical Yang--Baxter Equation]
+\begin{theorem}[$W_3$ PVA Jacobi kernel; \ClaimStatusProvedElsewhere]
 % label removed: thm:w3-CYBE
 Assume the Khan--Zeng $W_3$ realization satisfies
 Theorem~\ref{thm:physics-bridge}.
-The $r$-matrix $r^{W_3}$ satisfies the graded CYBE:
+The coefficient kernel encodes the vanishing PVA Jacobiator:
 \begin{equation}
-[r^{12}, r^{13}] + [r^{12}, r^{23}] + [r^{13}, r^{23}] = 0,
+\{X_\lambda \{Y_\mu Z\}\}
+- \{Y_\mu \{X_\lambda Z\}\}
+- \{\{X_\lambda Y\}_{\lambda+\mu} Z\}
+\;=\;0
 \end{equation}
-in the completed tensor product $W_3 \hat{\otimes} W_3 \hat{\otimes} W_3$.
+for $X,Y,Z\in\{T,W\}$. No non-dynamical CYBE for this
+field-dependent kernel is asserted here.
 \end{theorem}
 
 \begin{proof}
-The CYBE is equivalent to the Jacobi identity for the $\lambda$-bracket on $W_3$, via the standard correspondence $r^{12}(z) = \sum_\alpha X_\alpha \otimes X^\alpha / z$ (where the sum is over a basis of $W_3$ and its dual). Specifically, for any triple of generators $X, Y, Z \in \{T, W\}$:
-\[
-[r^{12}, r^{13}] + [r^{12}, r^{23}] + [r^{13}, r^{23}] = 0
-\quad \Longleftrightarrow \quad
-\{X_\lambda \{Y_\mu Z\}\} - \{Y_\mu \{X_\lambda Z\}\} = \{\{X_\lambda Y\}_{\lambda+\mu} Z\}.
-\]
+The statement is the Jacobi identity for the Zamolodchikov
+$W_3$ Poisson vertex algebra in the standard finite-pole
+normalisation~\cite{BouFeiMal90}.
 There are four independent Jacobi identities to verify (up to symmetry), corresponding to the triples $(T,T,T)$, $(T,T,W)$, $(T,W,W)$, and $(W,W,W)$.
 
 \emph{Triple $(T,T,T)$:} This is the Virasoro Jacobi identity, verified in~\S\ref{subsec:virasoro}.
@@ -932,15 +905,18 @@ This structure controls:
 \subsection{Comparison and Quantization Data}
 % label removed: subsec:quantization
 
-\subsubsection{Central Charge Shifts}
+\subsubsection{Complementarity half-shifts and ghost totals}
 
-Upon quantization, the classical central charge $c$ receives quantum corrections:
+The complementarity half-shift and the BRST ghost total are distinct:
 \begin{align}
-c_{\text{eff}}^{\text{Vir}} &= c + 13, & \text{(Virasoro)}\\
-c_{\text{eff}}^{W_3} &= c + 50. & (W_3)
+c_{\mathrm{half}}^{\mathrm{Vir}} &= c + 13, &
+c_{\mathrm{tot}}^{\mathrm{Vir}} &= c - 26,\\
+c_{\mathrm{half}}^{W_3} &= c + 50, &
+c_{\mathrm{tot}}^{W_3} &= c - 100.
 \end{align}
 
-These shifts come from 1-loop diagrams and are related to the conformal anomaly.
+The first column is the complementarity/self-dual half-shift; the
+second is the BRST ghost-renormalized total central charge.
 
 \begin{theorem}[Central Charge Shift Formula]
 % label removed: thm:central-charge-shift
@@ -952,7 +928,7 @@ constant contributed by the ghost systems is:
 % label removed: eq:central-charge-shift
 \alpha = \sum_{i=1}^n 2(6s_i^2 - 6s_i + 1),
 \end{equation}
-equivalently the one-loop central-charge shift is
+equivalently the complementarity half-shift is
 \[
 \Delta c = \frac{\alpha}{2}
 = \sum_{i=1}^n (6s_i^2 - 6s_i + 1).
@@ -964,7 +940,7 @@ For Virasoro ($s=2$): $\alpha = 26$ and $\Delta c = 13$.
 For $W_3$ ($s=2,3$): $\alpha = 100$ and $\Delta c = 50$.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 Each spin-$s$ generator contributes a $(b,c)$ ghost system of conformal weights $(s, 1-s)$ upon BRST quantization. The ghost central charge for such a system is $c_{\text{ghost}}(s) = -2(6s^2 - 6s + 1)$ (see, e.g., \cite{FMS86,Pol98}). In the BV-BRST framework of the 3D holomorphic-topological theory, the 1-loop vacuum bubble diagram produces a shift $\Delta c = |c_{\text{ghost}}(s)|/2 = 6s^2 - 6s + 1$ per generator. This factor of $\tfrac{1}{2}$ arises because the 3D theory computes the \emph{chiral half} of the full ghost determinant (the $\bar\partial$-direction ghost determinant contributes the conjugate half; the factorization is a consequence of the holomorphic-topological splitting). The total shift is obtained by summing over all generators.
 \end{proof}
 
@@ -983,30 +959,48 @@ r_2^{\text{Vir}}(\lambda,\mu) = \text{(computed from 1-loop } m_4(T,T,T,T) \text
 
 For $W_3$, the $T$--$W$ sector mixing generates additional contributions at each order.
 
-\subsection{Computational Remarks and Further Directions}
+\subsection{Finite Graph Sums in Higher Arity}
 
-\subsubsection{Computer Algebra Implementation}
+\subsubsection{Symbolic evaluation of graph weights}
 
-The explicit computation of $m_k$ for $k \geq 5$ requires computer algebra systems (e.g., Mathematica, SageMath). Key algorithms:
+For $k\geq5$, the operation $m_k$ is a finite sum over connected
+graphs with $k$ external legs and bounded loop number. Each summand is
+defined by four algebraic operations:
 \begin{enumerate}
-\item \textbf{Feynman Graph Generation:} Enumerate all connected graphs with $k$ external legs and bounded loop number.
-\item \textbf{Wick Contraction:} Automate the pairing of fields with propagators.
-\item \textbf{Integral Evaluation:} Use Feynman parameter techniques or FM compactification to evaluate configuration space integrals.
-\item \textbf{Laurent Series Expansion:} Extract poles in the spectral parameters $\lambda_i$.
+\item \textbf{Graph enumeration:} connected graphs with fixed external
+arity and the permitted loop number.
+\item \textbf{Wick contraction:} pairings of fields with the HT
+propagator.
+\item \textbf{Configuration integral:} the corresponding
+Fulton--MacPherson integral or Feynman-parameter integral.
+\item \textbf{Laurent extraction:} the pole part in the spectral
+parameters $\lambda_i$.
 \end{enumerate}
 
-\subsubsection{Open Questions}
+\subsubsection{Obstruction classes}
 
 \begin{enumerate}
-\item \textbf{Formality:} Under what conditions (if any) do higher $m_k$ vanish on cohomology for $W_3$?
+\item \textbf{Class M non-formality:} For $W_3$, the higher operations
+survive precisely under the DS survival hypotheses governing the
+Virasoro sub-sector and the $T$--$W$ mixing channel.
 
-\item \textbf{Quantum Groups:} What is the precise relation between the quantized $r$-matrix of $W_3$ and the Yangian $Y(\mathfrak{sl}_3)$?
+\item \textbf{Quantum group comparison:} The quantized $r$-matrix of
+$W_3$ can be compared with $Y(\mathfrak{sl}_3)$ only after the DS
+screening quotient and the evaluation-core comparison surface have
+both been fixed.
 
-\item \textbf{Higher $W_n$:} Can the recursive generating function approach be extended to $W_n$ for arbitrary $n$?
+\item \textbf{Higher $W_n$:} For fixed $n$, a recursive generating
+function exists only after the finite DS envelope and its survival
+map are supplied.
 
-\item \textbf{Non-perturbative Effects:} Are there instanton corrections beyond perturbative Feynman diagrams?
+\item \textbf{Non-perturbative sectors:} The local BV graph calculus
+does not include instanton sectors; such corrections require a global
+HT moduli problem with a compactness and orientation package.
 
-\item \textbf{Boundary Algebras:} How do boundary conditions (Neumann vs. Dirichlet) affect the $A_\infty$ structure?
+\item \textbf{Boundary conditions:} A Neumann--Dirichlet comparison
+changes the boundary factorization algebra and hence the transferred
+$A_\infty$ operations; the comparison is a statement about the
+corresponding boundary BRST complexes.
 \end{enumerate}
 
 \subsection{Summary Tables}
@@ -1016,7 +1010,7 @@ The explicit computation of $m_k$ for $k \geq 5$ requires computer algebra syste
 \caption{W-Algebra Data}
 \begin{tabular}{|c|c|c|c|}
 \hline
-Algebra & Generators (spins) & Classical $c$ & Quantum $c_{\text{eff}}$ \\
+Algebra & Generators (spins) & Classical $c$ & Half-shift $c+\alpha/2$ \\
 \hline
 Virasoro & $T$ (2) & $c$ & $c + 13$ \\
 $W_3$ & $T$ (2), $W$ (3) & $c$ & $c + 50$ \\
@@ -1785,16 +1779,17 @@ depends on the Bala--Carter pair $(\mathfrak{g}, f)$. For the
 Bershadsky--Polyakov algebra
 $\mathrm{BP} = \mathcal{W}(\mathfrak{sl}_3, f_{\mathrm{min}})$ with
 $f_{\mathrm{min}}$ the minimal nilpotent (distinct from
-$f_{\mathrm{prin}}$), $\kappa_W(\mathrm{BP}) = 196 \ne 100 =
-\kappa_W(\mathcal{W}(\mathfrak{sl}_3, f_{\mathrm{prin}}))$. See
-\texttt{chapters/examples/bershadsky\_polyakov.tex} for the
-non-principal case.
+$f_{\mathrm{prin}}$), $\kappa_W(\mathrm{BP}) = 50 \ne 100 =
+\kappa_W(\mathcal{W}(\mathfrak{sl}_3, f_{\mathrm{prin}}))$ (Vol~I,
+Feigin--Frenkel self-contraction of
+$c_{\mathrm{BP}}(k) = 25 - 6(k+3) - 24/(k+3)$). The
+non-principal case is the Bershadsky--Polyakov lane.
 \end{remark}
 
 \begin{remark}[Miura map as $E_1$-chiral morphism]\label{rem:miura-chiral-compatibility}
 The Miura map (quantum, non-critical level) realises $\mathcal{W}_k(\mathfrak{g}, f_{\mathrm{prin}})$ as a subalgebra of the Heisenberg vertex algebra $V_k(\mathfrak{h})$ on the Cartan:
 $\mathcal{W}_k(\mathfrak{g}, f_{\mathrm{prin}}) \hookrightarrow V_k(\mathfrak{h})$,
-realised as the intersection of kernels of screening operators $S_i = \oint e^{\alpha_i \cdot \varphi/\sqrt{k+h^\vee}}$ \cite{FF90,FL88}. The inclusion is an $E_1$-chiral morphism preserving OPE modulo the screening ideal; at the ordered bar level, $\overline{B}^{\mathrm{ord}}(\mathcal{W}_k(\mathfrak{g}, f_{\mathrm{prin}})) \subset \overline{B}^{\mathrm{ord}}(V_k(\mathfrak{h}))$ with Koszul complement the screening-operator tower (Felder complex). At critical level $k = -h^\vee$, the Miura map degenerates to the classical Feigin--Frenkel embedding $\mathfrak{z}(\widehat{\mathfrak{g}}) \hookrightarrow \mathbb{C}[\mathfrak{h}^\vee]$ of the affine centre into polynomials on opers \cite{Ara07}. This supplies a concrete chain-level model for class-M Virasoro and $\mathcal{W}_N$ bar complexes by reducing them to the simpler class-G Heisenberg bar plus the Felder complex.
+realised as the intersection of kernels of screening operators $S_i = \oint e^{\alpha_i \cdot \varphi/\sqrt{k+h^\vee}}$ \cite{FF92,FL88}. The inclusion is an $E_1$-chiral morphism preserving OPE modulo the screening ideal; at the ordered bar level, $\overline{B}^{\mathrm{ord}}(\mathcal{W}_k(\mathfrak{g}, f_{\mathrm{prin}})) \subset \overline{B}^{\mathrm{ord}}(V_k(\mathfrak{h}))$ with Koszul complement the screening-operator tower (Felder complex). At critical level $k = -h^\vee$, the Miura map degenerates to the classical Feigin--Frenkel embedding $\mathfrak{z}(\widehat{\mathfrak{g}}) \hookrightarrow \mathbb{C}[\mathfrak{h}^\vee]$ of the affine centre into polynomials on opers \cite{Ara07}. This supplies a concrete chain-level model for class-M Virasoro and $\mathcal{W}_N$ bar complexes by reducing them to the simpler class-G Heisenberg bar plus the Felder complex.
 \end{remark}
 
 \section{K3 base-point $W$-algebra}
@@ -1818,7 +1813,7 @@ imaginary simple roots. Under that package the Miura transformation
 identifies the proposed $W$-algebra generators with the
 $24$ Miki toroidal generators $\{e^{(i)}_r, f^{(i)}_r, \psi^{(i)\pm}_s\}$
 indexed by the $24$ Kodaira $I_1$ nodes of $E^{\mathrm{nod,sm}}_{24}$
-\cite{Gaiotto2009,Miki2007}. Cross-ref Vol.~III
+\cite{Gaiotto2009,Miki07}. Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -1837,7 +1832,7 @@ divisor input; it does not by itself identify the protected-VOA
 deformation cohomology or classify the chiral algebra. The equality
 with the $\Delta_5$ line is therefore conditional on the recognition
 and parity/root fixtures
-\cite{Bruinier2002,EtingofKazhdan2007PartV}. Cross-ref
+\cite{Bruinier2002,EtingofKazhdan2007PartV}. Compare
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -1916,7 +1911,7 @@ $c_{4d}(A_1, \Sigma_{0,n}, \text{all max}) = (5n - 13)/6$, at
 $n = 24$ evaluating to $107/6$ (hence $c_{2d} = -214$, matching
 Remark~\ref{rem:wa-1}). The six-fold pentagon-umbral anomaly is
 independent of this central-charge computation.
-Cross-ref
+Compare
 Vol.~I
 Remark~\ref{rem:thqg-occ-retraction} and Vol.~III
 Proposition~\ref{V3-prop:k3-chacaltana-distler-24}.
@@ -1964,7 +1959,7 @@ odd/even parity convention agrees with the chosen denominator product
 \cite{EguchiOoguriTachikawa2011}. Until that fixture is supplied, the
 K3 elliptic-genus coefficients are candidate root multiplicities, not a
 proved coefficient identification for the protected vertex algebra.
-Cross-ref Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}
+Compare Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}
 Theorem~\ref{thm:w15-chevalley-bkm-generators}.
 \end{remark}
 
@@ -1974,7 +1969,7 @@ The Miura-image W-algebra identification of
 Remark~\ref{rem:wa-1}, when the finite Hall--Borcherds recognition is
 available, is a vertex-algebra statement; the
 Kontsevich--Soibelman CoHA input is an associative ($E_1$) shuffle
-algebra, \emph{not} a vertex algebra \cite{KontsevichSoibelman2011}.
+algebra, \emph{not} a vertex algebra \cite{kontsevich-soibelman}.
 The conditional $\Phi$-arrow is explicit: the chiral/vertex
 structure on $\mathbf H_{\Delta_5}$ is the image of the
 Hall--Drinfeld lane
@@ -1984,7 +1979,7 @@ structure. The Hall--Drinfeld double preserves the $E_1$ Hall
 category; vertex operators enter only after the chiral avatar is
 taken. This is also why the BKM-side K3 object is not a Drinfeld
 Yangian.
-Cross-ref Vol.~III
+Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}
 Theorem~\ref{thm:w15-phi-arrow-discipline}.
 \end{remark}
@@ -2028,7 +2023,7 @@ Under that fixture the candidate constant coefficient is recorded as
  \;=\; 2(N + 3).
 \]
 Thus the values $f^{(3)}=12$, $f^{(4)}=14$, and $f^{(5)}=16$ are
-conditional recognition targets, not proved Fourier coefficients in
+conditional comparison objects, not proved Fourier coefficients in
 this chapter.
 \end{proposition}
 
@@ -2091,7 +2086,7 @@ The Eguchi--Ooguri--Tachikawa 2011 Mathieu-moonshine observation
 the Cheng--Duncan--Harvey 2014 umbral moonshine framework
 (\texttt{arXiv:1307.5793} \S 5, proved by Duncan--Griffin--Ono 2015
 \texttt{arXiv:1503.01472}). For $N\ge 3$ the connection with
-$\mathcal T[A_{N-1}, \Sigma_{0,24}]$ is a finite-recognition target,
+$\mathcal T[A_{N-1}, \Sigma_{0,24}]$ is a finite-comparison object,
 not a consequence of the constant coefficient. In the naive-valid
 slots the proposed Niemeier anchor has root system
 $(24/(N-1))\,A_{N-1}$:
@@ -2182,13 +2177,20 @@ multiplicative-lift weight agree through the Shimura--Waldspurger pair
 relation in the classical
 $(\phi_{0,1}^{K3}, \eta^9 \vartheta_1) \mapsto \Delta_5$
 (Gritsenko--Nikulin 1998). For $N \ge 3$, the Vol.~I conductor and
-Vol.~III universal-trace comparison is a finite-recognition target:
+Vol.~III universal-trace comparison is a finite-comparison object:
 after a genuine Jacobi input, Borcherds denominator data, parity/root
 fixture, and square-root multiplier have been supplied, the formula
-$\kappa_{\mathrm{BKM}}(X)=c_N(0)/2$ would predict the honest Borcherds
-weight $N+3$ and only then a cover notation $k_N=(N+3)/2$. The
+$\kappa_{\mathrm{BKM}}(X)=f^{(N)}(0,0)/2$ would predict the honest Borcherds
+weight $N+3$ and only then a cover notation $k_N=(N+3)/2$. The index
+$N$ here labels the $A_{N-1}(-1)$ factor of $L_N$, not the CHL
+orbifold level: on the CHL ladder the constant coefficients are
+$c_N(0) = (10, 6, 4, 3, 2)$ with weights
+$c_N(0)/2 = (5, 3, 2, 3/2, 1)$ at $N = (1, 2, 3, 4, 6)$, decreasing
+in the level, whereas $f^{(N)}(0,0)/2 = N+3$ increases in the rank
+label; the two ladders meet only at the classical point
+$\Delta_5$ (rank label $N = 2$, CHL level $N = 1$, weight $5$). The
 constant-Fourier coefficient does not promote the Schur-index trace to a
-Siegel/Borcherds modular form. Cross-ref Vol.~I and the Vol.~III
+Siegel/Borcherds modular form. Compare Vol.~I and the Vol.~III
 Siegel/Borcherds engines.
 \end{remark}
 
@@ -2518,7 +2520,7 @@ $a_1$-value from GHV 2012 Table~1 (this $a_1$ is the number
 of fixed points of the cycle shape, distinct from the
 leading McKay--Thompson coefficient $A_1^{(g)}$ of
 Theorem~\ref{thm:wa-m24-equivariant-schur-five-classes}).
-Thus the cross-volume arrow is a finite-recognition target: after the
+Thus the cross-volume arrow is a finite-comparison object: after the
 Vol.~III K3-chiral bialgebra $\Phi_2$-functor image of the
 class-$\mathcal S$ $A_1$ theory at $\Sigma_{0, 24}$ has been constructed
 with the stated source/target transport, it should be the

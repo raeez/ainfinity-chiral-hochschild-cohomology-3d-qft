@@ -100,19 +100,28 @@ The product $\cdot$ is associative on $H$.
 \end{proposition}
 
 \begin{proof}
-Consider the chain–level associator
+Let \(\mu(a,b)=\mu_2^{\mathrm{reg}}(a,b;0)\) be the ordinary
+unsuspended regular product, whose suspended bar component is
+\(m_2^{\mathrm{reg}}\).  Consider the chain-level associator
 \[
-\alpha(a,b,c) := m_2^{\mathrm{reg}}(m_2^{\mathrm{reg}}(a,b),c) - m_2^{\mathrm{reg}}(a, m_2^{\mathrm{reg}}(b,c))\, .
+\alpha(a,b,c):=\mu(\mu(a,b),c)-\mu(a,\mu(b,c)).
 \]
-The $A_\infty$ identity at degree $3$ implies $Qm_3(a,b,c)$ equals a signed sum of such associators up to $Q$–exact terms. Projecting to the regular part and passing to cohomology, we obtain $[\alpha(a,b,c)]=0$ in $H$. Carefully tracking the graded symmetrizations in the outer and inner arguments yields associativity for $\cdot$.
+The $A_\infty$ identity at degree $3$ is first written in the
+suspended \(m_2\)-coordinates, where the second binary composition
+carries the Stasheff sign.  Transporting both binary vertices through
+the bar desuspension to the \(\mu_2^{\mathrm{reg}}\)-coordinates turns
+that signed binary part into the ordinary associator above.  The
+regular--regular constant-term projection of the \(m_3\)-term is a
+\(Q\)-boundary, so \(\alpha(a,b,c)\in\operatorname{im}Q\).  Hence
+\([\alpha(a,b,c)]=0\) in \(H\), and the product is associative.
 \end{proof}
 \subsection{Definition of the $\lambda$–bracket on cohomology}
 \begin{definition}[Vertex Poisson bracket]% label removed: def:lambda-bracket
 For $[a],[b]\in H$, define
 \begin{equation}% label removed: eq:lambda-bracket
-\{\, [a] {}_\lambda [b] \,\} \;:=\; \Big[\, \tfrac{1}{2}\big( m_2^{\mathrm{sing}}(a,b;\lambda) \;-\; (-1)^{(\degree{a}+1)(\degree{b}+1)}\, e^{-(\lambda+\partial)\partial_\lambda}\, m_2^{\mathrm{sing}}(b,a;\lambda)\big)\,\Big] \;\in H[\![\lambda]\!].
+\{\, [a] {}_\lambda [b] \,\} \;:=\; \Big[\, \tfrac{1}{2}\big( m_2^{\mathrm{sing}}(a,b;\lambda) \;-\; (-1)^{\degree{a}\degree{b}}\, e^{-(\lambda+\partial)\partial_\lambda}\, m_2^{\mathrm{sing}}(b,a;\lambda)\big)\,\Big] \;\in H[\![\lambda]\!].
 \end{equation}
-Here the operator $e^{-(\lambda+\partial)\partial_\lambda}$ implements the vertex algebra skew-symmetry transformation $\lambda\mapsto -\lambda-\partial$, which is \emph{not} the same as naive antisymmetrization for $\lambda$-dependent series (cf.\ \eqref{eq:bracket-def} in axioms).
+Here the operator $e^{-(\lambda+\partial)\partial_\lambda}$ implements the vertex algebra skew-symmetry transformation $\lambda\mapsto -\lambda-\partial$, which is \emph{not} the same as naive antisymmetrization for $\lambda$-dependent series.  The visible PVA2 sign is the ordinary Koszul sign; shifted signs belong to the nested residue orientation in the Jacobi calculation.
 \end{definition}
 \begin{lemma}[Well-definedness of the $\lambda$-bracket]% label removed: lem:bracket-welldefined
 The operation \eqref{eq:lambda-bracket} is independent of the choice of representatives of $[a],[b]$.
@@ -126,7 +135,7 @@ As in Lemma~\ref{lem:product-welldefined}, $a\mapsto a+Qx$ shifts $m_2(a,b)$ by 
 \begin{proposition}[Sesquilinearity and skewsymmetry]% label removed: prop:sesqui-skew
 The bracket $\{\cdot {}_\lambda \cdot\}$ on $H$ satisfies:
 \begin{enumerate}[label=(\alph*),leftmargin=2em]
- \item skewsymmetry: $\{\, [a] {}_\lambda [b] \,\} = - (-1)^{(\degree{a}+1)(\degree{b}+1)} \{\, [b] {}_{-\lambda-\partial} [a] \,\}$;
+ \item skewsymmetry: $\{\, [a] {}_\lambda [b] \,\} = - (-1)^{\degree{a}\degree{b}} \{\, [b] {}_{-\lambda-\partial} [a] \,\}$;
  \item sesquilinearity: $\{\,\partial [a] {}_\lambda [b] \,\} = -\lambda \{\, [a] {}_\lambda [b] \,\}$ and $\{\, [a] {}_\lambda \partial [b] \,\} = (\lambda+\partial)\{\, [a] {}_\lambda [b] \,\}$.
 \end{enumerate}
 Here $\partial$ denotes the operator implementing translation along the holomorphic coordinate (defined earlier in the paper in the BV/factorization formalism) and acts on $H$ by the induced derivation.
@@ -134,7 +143,7 @@ Here $\partial$ denotes the operator implementing translation along the holomorp
 \begin{proof}
 Sesquilinearity on cohomology follows from the chain-level sesquilinearity axioms (\eqref{eq:sesqui-left} and \eqref{eq:sesqui-right}): since both $\partial$ and the spectral parameters $\lambda_i$ commute with $Q$, the sesquilinearity relations descend to cohomology.
 
-Skew-symmetry follows from the definition of the bracket via antisymmetrization with the exponential shift operator $e^{-(\lambda+\partial)\partial_\lambda}$, which by construction imposes $\{\, [a] {}_\lambda [b] \,\} = -(-1)^{(\degree{a}+1)(\degree{b}+1)}\{\, [b] {}_{-\lambda-\partial} [a] \,\}$.
+Skew-symmetry follows from the definition of the bracket via antisymmetrization with the exponential shift operator $e^{-(\lambda+\partial)\partial_\lambda}$, which by construction imposes $\{\, [a] {}_\lambda [b] \,\} = -(-1)^{\degree{a}\degree{b}}\{\, [b] {}_{-\lambda-\partial} [a] \,\}$.
 \end{proof}
 \subsection{Jacobi identity and derivation (Leibniz) property}
 \begin{theorem}[Jacobi identity]% label removed: thm:Jacobi
@@ -144,7 +153,16 @@ For all $[a],[b],[c]\in H$ we have in $H[\![\lambda,\mu]\!]$:
 \]
 \end{theorem}
 \begin{proof}
-At the chain level, the Jacobi identity is encoded by the $A_\infty$ identity at degree $3$, projected to the \emph{singular} part of three–point functions. The four boundary strata of $\FM_3(\C)$ are $D_{12}$, $D_{13}$, $D_{23}$, and $D_{123}$. The stratum $D_{123}$ corresponds to the total collision of all three points. Its contribution is $Q$-exact (it corresponds to $m_1(m_3(a,b,c))$ in the $A_\infty$ identity) and vanishes on cohomology classes. The three pairwise collision strata $D_{12}$, $D_{13}$, $D_{23}$ contribute the three terms of the Jacobi identity. Their cancellation follows from the classical Arnold relation among logarithmic 1-forms:
+At the chain level, the Jacobi identity is encoded by the $A_\infty$ identity at degree $3$, projected to the \emph{singular} part of three-point functions. The four boundary strata of $\FM_3(\C)$ are $D_{12}$, $D_{13}$, $D_{23}$, and $D_{123}$. The stratum $D_{123}$ corresponds to the total collision of all three points. Its contribution is $Q$-exact (it corresponds to $m_1(m_3(a,b,c))$ in the $A_\infty$ identity) and vanishes on cohomology classes. The three pairwise collision strata contribute the signed Jacobiator
+\[
+\{a_\lambda\{b_\mu c\}\}
+-
+(-1)^{(\degree{a}+1)(\degree{b}+1)}
+\{b_\mu\{a_\lambda c\}\}
+-
+\{\{a_\lambda b\}_{\lambda+\mu}c\},
+\]
+with the \(D_{13}\) sign coming from the incidence orientation and shifted transposition. Its cancellation follows from the classical Arnold relation among logarithmic 1-forms:
 \[
  d\log(z_1-z_2) \wedge d\log(z_2-z_3) \;+\; d\log(z_2-z_3) \wedge d\log(z_3-z_1) \;+\; d\log(z_3-z_1) \wedge d\log(z_1-z_2) \;=\; 0.
 \]
@@ -157,7 +175,28 @@ For all $[a],[b],[c]\in H$ we have:
 \]
 \end{theorem}
 \begin{proof}
-At the chain level this is the statement that the \emph{singular} part of $m_2$ acts as a bi–derivation with respect to the \emph{regular} part. Project the $n=3$ $A_\infty$ identity to the case where the outer operation contributes the regular part (product) and the inner operation contributes the singular part (bracket). Tracking the spectral parameter substitution rule from \eqref{eq:ainfty-relation-raw}, the inner bracket at position $s$ carries spectral parameter $\Lambda_{[s+1,\ldots,s+j]}$. For $j=2$ (inner bracket) and $k=2$ (outer product), the identity gives precisely the Leibniz compatibility between the singular and regular parts of $m_2$, with the precise degree signs being the standard Koszul signs induced by the degrees of $a,b,c$. Passing to cohomology yields the stated Leibniz rule.
+At the chain level this is the statement that the signed mixed
+regular--singular Leibniz defect
+\[
+\mathcal L_\lambda(a;b,c)
+:=
+\{a{}_\lambda(b\cdot c)\}
+-
+\{a{}_\lambda b\}\cdot c
+-
+(-1)^{(\degree{a}+1)\degree{b}}\,
+b\cdot\{a{}_\lambda c\}
+\]
+is a \(Q\)-boundary.  Project the arity-\(3\) Stokes identity on
+\(\FM_3(\C)\) to the sector where exactly one binary channel is
+singular and the other is the regular constant term.  The oriented
+faces \(D_{\{2,3\}},D_{\{1,2\}},D_{\{1,3\}}\) give the three displayed
+summands of \(\mathcal L_\lambda\), with the \(D_{\{1,3\}}\) sign
+coming from moving the degree-\((-1)\) bracket past \(b\).  The total
+collision face contributes only the \(Q\)-exact \(m_3\)-homotopy, so
+\(\mathcal L_\lambda(a;b,c)=0\) in cohomology.  Since this mixed
+sector contains one singular channel and one regular channel, no
+singular--singular Wick integral correction appears.
 \end{proof}
 
 \begin{corollary}[PVA structure]% label removed: cor:PVA-structure
@@ -187,4 +226,3 @@ Pushing forward along the forgetful maps to the $\lambda$–variables reproduces
 \begin{remark}
 The degree shifts (the $-1$ in the bracket) originate from the fact that $m_2$ has cohomological degree $-1$ at the chain level: geometrically this is the degree of the current defined by the logarithmic kernel (one complex logarithmic pole contributes cohomological degree $-1$ after BV parity conventions).
 \end{remark}
-

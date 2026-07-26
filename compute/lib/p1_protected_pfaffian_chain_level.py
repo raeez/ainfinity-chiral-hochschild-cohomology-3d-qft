@@ -10,11 +10,12 @@ chain level of the ChirHoch-valued cyclic complex on Lambda^{2,1}_II:
            Delta_5(Z) = 64 q^{1/2} r^{1/2} s^{1/2}
                          prod_{(n,l,m) in Gamma_eff} (1 - q^n r^l s^m)^{f(nm, l)}
 
-       with f(nm, l) the Fourier coefficients of the weak Jacobi form
-       phi_{0,1}(tau, z) of weight 0 index 1 (the K3 elliptic genus).
+      with f(nm, l) the Fourier coefficients of the half K3 weak Jacobi
+      form phi_{0,1}^{K3}(tau, z) of weight 0 and index 1.
 
-  (R2) Gritsenko Jacobi-form lift: the additive lift Delta_5 = G(phi_{0,1})
-       of weight 5 reading off the Hecke eigenvalues of phi_{0,1}
+  (R2) Gritsenko Jacobi-form lift: the additive lift
+       Delta_5 = G(phi_{0,1}^{K3}) of weight 5 reading off the Hecke
+       eigenvalues of phi_{0,1}^{K3}
        through the Maass + Saito-Kurokawa correspondence.
 
   (R3) Protected-Pfaffian definition via cyclic-Hochschild four-object
@@ -62,27 +63,27 @@ from fractions import Fraction
 from typing import Callable, Dict, FrozenSet, Iterable, Tuple
 
 # ---------------------------------------------------------------------------
-# Weak Jacobi form phi_{0,1}(tau, z) of weight 0 index 1.
+# Half K3 weak Jacobi form phi_{0,1}^{K3}(tau, z) of weight 0 index 1.
 #
 # Eichler-Zagier 1985 Theorem 9.4 gives the standard generators of
 # weak Jacobi forms of index 1:
 #
-#     phi_{0,1}(tau, z) = 4 [ theta_2(tau, z)^2 / theta_2(tau, 0)^2
+#     phi_{0,1}^{K3}(tau, z) = 4 [ theta_2(tau, z)^2 / theta_2(tau, 0)^2
 #                            + theta_3(tau, z)^2 / theta_3(tau, 0)^2
 #                            + theta_4(tau, z)^2 / theta_4(tau, 0)^2 ]
 #                       = 12 phi_{-2,1}(tau, z) E_4(tau) - 8 ...
 #
 # We need only the Fourier coefficients c(n, l) of
 #
-#     phi_{0,1}(tau, z) = sum_{n >= 0} sum_{l in Z} c(n, l) q^n y^l
+#     phi_{0,1}^{K3}(tau, z) = sum_{n >= 0} sum_{l in Z} c(n, l) q^n y^l
 #
 # with the index-1 constraint 4n - l^2 >= -1, and the Vol II canonical
-# c(0, 0) = 10, c(0, 1) = c(0, -1) = 1, c(1, 0) = 10, c(1, 1) = c(1, -1) = -64,
-# c(1, 2) = c(1, -2) = 10, c(2, 0) = -64, etc. -- the K3 elliptic genus
-# coefficients.
+# c(0, 0) = 10, c(0, 1) = c(0, -1) = 1, c(1, 0) = 108, c(1, 1) = c(1, -1) = -64,
+# c(1, 2) = c(1, -2) = 10, c(2, 0) = -808, etc. -- the half K3 elliptic
+# genus coefficients whose Borcherds lift is Delta_5.
 # ---------------------------------------------------------------------------
 
-# Coefficients c(n, l) of phi_{0,1} truncated to n <= 5 from
+# Coefficients c(n, l) of phi_{0,1}^{K3} truncated to n <= 5 from
 # Eichler-Zagier 1985 + Gritsenko 1999 + Dijkgraaf-Moore-Verlinde-Verlinde
 # 1997 elliptic genus of K3. Index by (n, l) with 4n - l^2 >= -1.
 # Reference: Eichler-Zagier 1985 p. 109 Table 1; cross-checked against
@@ -91,18 +92,15 @@ PHI_01_COEFFS: Dict[Tuple[int, int], int] = {
     # n = 0
     (0, 0): 10, (0, 1): 1, (0, -1): 1,
     # n = 1
-    (1, 0): -64, (1, 1): 108, (1, -1): 108, (1, 2): -64, (1, -2): -64, (1, 3): 1, (1, -3): 1,
+    (1, 0): 108, (1, 1): -64, (1, -1): -64, (1, 2): 10, (1, -2): 10,
     # n = 2
-    (2, 0): 108, (2, 1): -513, (2, -1): -513, (2, 2): 808, (2, -2): 808,
-    (2, 3): -64, (2, -3): -64, (2, 4): -513 + 0,  # 4n - l^2 = 8 - 16 < 0 truncate
-    # n = 3
-    (3, 0): -513, (3, 1): 808, (3, -1): 808, (3, 2): -513, (3, -2): -513,
-    (3, 3): 808, (3, -3): 808,  # entries beyond 4n-l^2 >= -1 cutoff are dropped
+    (2, 0): -808, (2, 1): 513, (2, -1): 513, (2, 2): -64, (2, -2): -64,
+    (2, 3): 1, (2, -3): 1,
 }
 
 
 def k3_elliptic_genus_coeff(n: int, l: int) -> int:
-    """Return c(n, l) for phi_{0,1}, with extension by index-1 constraint.
+    """Return c(n, l) for the half K3 weak Jacobi form.
 
     The genuine Eichler-Zagier table is canonical; values outside the
     explicit table return 0 (we work within the truncation window).
@@ -117,7 +115,7 @@ def k3_elliptic_genus_coeff(n: int, l: int) -> int:
 # Delta_5(Z) = 64 q^{1/2} r^{1/2} s^{1/2}
 #               prod_{(n, l, m) > 0} (1 - q^n r^l s^m)^{f(nm, l)}
 #
-# where f(nm, l) = c(nm, l) of phi_{0,1} and (n, l, m) > 0 in the Borcherds
+# where f(nm, l) = c(nm, l) of phi_{0,1}^{K3} and (n, l, m) > 0 in the Borcherds
 # positive cone: m > 0 or (m = 0 and n > 0) or (m = n = 0 and l < 0).
 # ---------------------------------------------------------------------------
 
@@ -237,7 +235,7 @@ def expand_one_minus_monomial_power(exp_triple: Tuple[int, int, int],
 # ---------------------------------------------------------------------------
 # Route R2: Gritsenko additive lift
 #
-# Gritsenko 1999 Theorem 1.2: the lift of phi_{0,1} via the Maass +
+# Gritsenko 1999 Theorem 1.2: the lift of phi_{0,1}^{K3} via the Maass +
 # Saito-Kurokawa correspondence is a weight-5 holomorphic Siegel cusp form
 # in M_5(Sp_4(Z), nu_{Delta_5}).
 #
@@ -281,7 +279,7 @@ def borcherds_leading_coefficient(series: Dict[Tuple[int, int, int], Fraction]) 
 #                                  prod_{(n,l,m) in Gamma_R^{Pi,+}}
 #                                       (1 - q^n r^l s^m)^{sdim P^{Pi,+}_{R,(n,l,m)}}
 #
-# where sdim P^{Pi,+}_{R,(n,l,m)} = f(nm, l) = c(nm, l) of phi_{0,1} by
+# where sdim P^{Pi,+}_{R,(n,l,m)} = f(nm, l) = c(nm, l) of phi_{0,1}^{K3} by
 # the BBDJS (D0)-residual vanishing on K3 x E (theorem G-D0 of Igusa
 # monograph appendix G).
 #
@@ -448,6 +446,177 @@ def chain_level_status(installed: Iterable[str]) -> str:
     if missing:
         return "shadow_only_or_partial"
     return "conditional_chain_level_pf_prot_delta5"
+
+
+# ---------------------------------------------------------------------------
+# Item-20 operator profile: the scalar Delta_5 identity is not the
+# K3/Borcherds operator theorem.  The operator theorem names the cyclic
+# chiral Hochschild complex, the protected Pfaffian, the Borcherds root
+# product, and the Hall/chiral commutative square.
+# ---------------------------------------------------------------------------
+
+
+def borcherds_root_product_profile() -> Dict[str, object]:
+    """Return the abstract Borcherds denominator product for Delta_5.
+
+    This is the root-lattice form of the same product computed at the
+    q,r,s cusp by ``borcherds_product_expansion``.  The exponents are
+    the Fourier coefficients c(-alpha^2/2) of the half K3 weak Jacobi
+    form in the Borcherds positive cone.
+    """
+
+    return {
+        "form": "Delta_5",
+        "lattice": "Lambda^{2,1}_{II}",
+        "positive_cone": "L_+",
+        "weyl_vector": "rho",
+        "formula": (
+            "Delta_5(Z) = exp(2*pi*i*(rho,Z)) "
+            "prod_{alpha in L_+} "
+            "(1-exp(2*pi*i*(alpha,Z)))^{c(-alpha^2/2)}"
+        ),
+        "exponent_source": "half K3 weak Jacobi form phi_{0,1}^{K3}",
+        "weight": Fraction(5),
+    }
+
+
+def k3_borcherds_operator_profile() -> Dict[str, object]:
+    """Return the P1 operator-level package for K3 x E.
+
+    The profile deliberately separates the chain-level protected
+    Pfaffian identity from the scalar BPS reciprocal.  Tests use this to
+    prevent the scalar identity 1/Phi_10 = Delta_5^{-2} from being
+    treated as the operator theorem.
+    """
+
+    return {
+        "claim_status": "Conditional",
+        "space": "X = K3 x E",
+        "operator": "mathfrak D_{K3 x E}",
+        "operator_membership": "mathfrak D_X in End_ChirHoch(H_X)",
+        "boundary_algebra": "A_X = SpCh_{E,C} PhiFA_3(D^b Coh(K3 x E))",
+        "conditional_on": (
+            "P1 datum p_1",
+            "oriented critical Hall chart",
+            "Hall-Borcherds comparison on the positive half",
+            "weight-completed cyclic chiral Hochschild ambient",
+            "protected Pfaffian orientation",
+            "finite Hall gates",
+            "PBW/no-extra-root effectiveness",
+        ),
+        "complex": (
+            "Z^0 CC^{ch,cyc}_bullet(A_X)^hat_{Lambda^{2,1}_{II}} "
+            "-> ChirHoch^bullet(A_X,A_X)^hat_{Lambda^{2,1}_{II}}"
+        ),
+        "ambient": "weight-completed cyclic chiral Hochschild complex",
+        "pfaffian_section": (
+            "Pf_prot(mathfrak D_X) in H^0(Lambda^{2,1}_{II}, "
+            "L^5 tensor nu_{Delta_5})"
+        ),
+        "automorphic_identity": "iota_aut(Pf_prot(mathfrak D_X)) = Delta_5",
+        "chain_identity": "Pf_prot(mathfrak D_X) = Delta_5",
+        "identity_stage": "chain-level operator identity",
+        "operator_class_enters_as_hypothesis": True,
+        "cyclic_trace_not_scalar_character": True,
+        "unconditional_operator_constructed_in_vol2": False,
+        "finite_window_product_exponents": "sdim P^{Pi,+}_{R,alpha} = c(-alpha^2/2)",
+        "scope_residual": VOL_II_SCOPE_RESIDUALS,
+        "scalar_shadow": "Z_BPS^{K3 x E} = (Phi_10^{un})^{-1} = Delta_5^{-2}",
+        "not_sufficient": (
+            "the scalar shadow forgets the Hochschild differential, "
+            "Hall product, Drinfeld pairing, and SC^{ch,top} action"
+        ),
+        "licensing_tags": ("alpha", "beta", "gamma", "epsilon"),
+        "borcherds_product": borcherds_root_product_profile(),
+    }
+
+
+def k3_borcherds_hall_chiral_square() -> Dict[str, object]:
+    """Return the item-20 Hall/chiral square.
+
+    The square has two independent paths from the K3 fibre source: the
+    Hall path through CoHA, the Hall double, and g_{Delta_5}; and the
+    chiral path through the external-product lift to K3 x E, PhiFA_3,
+    SpCh_{E,C}, and the derived chiral centre of A_X.
+    """
+
+    return {
+        "top_left": "D^b Coh(K3) with (-) boxtimes O_E -> D^b Coh(K3 x E)",
+        "top_right": "g_{Delta_5}-Mod",
+        "bottom_left": "Z_der^ch(A_X)",
+        "bottom_right": "SC^{ch,top}-Alg",
+        "hall_chain": (
+            "CoHA(K3) -> D_Hall(K3) -> g_{Delta_5}"
+        ),
+        "intertwiner": "I_Hall: CoHA(K3) -> g_{Delta_5}",
+        "chiral_chain": (
+            "D^b Coh(K3) -> (-) boxtimes O_E -> D^b Coh(K3 x E) "
+            "-> PhiFA_3 -> E_3-FactAlg(K3 x E) -> SpCh_{E,C} "
+            "-> ChirAlg_C -> Z_der^ch -> SC^{ch,top}-Alg"
+        ),
+        "operator_square_top_left": "ChirHoch^bullet(A_X)",
+        "operator_square_top_right": "H^0(L^5)",
+        "operator_square_bottom_left": "g_{Delta_5}",
+        "operator_square_bottom_right": "C Delta_5",
+        "commutativity": (
+            "Cur_E o Hall_{Delta_5} = "
+            "SC_{Delta_5} o Z_der^ch(SpCh_{E,C} PhiFA_3((-) boxtimes O_E))"
+        ),
+        "pfaffian_square_commutativity": (
+            "Borcherds o Pf_prot = den o I_Hall"
+        ),
+        "finite_gate_system": (
+            "rad_Hall_N / rad_N = 0 for every finite N",
+            "D_Hall^fin exists",
+            "Borch o Hall is height-compatible",
+            "Schur(T[A1,Sigma_{0,24}]) -> Z_der^ch is SC^{ch,top}-trace compatible",
+        ),
+        "requires": (
+            "reduced compact Hall source",
+            "finite radical-quotient Hall-Drinfeld doubles",
+            "height-compatible Hall-Borcherds recognition",
+            "SC^{ch,top} trace compatibility",
+        ),
+        "without_finite_gates": "shadow_comparison_not_object_equivalence",
+        "status": "conditional_operator_square",
+    }
+
+
+def k3_class_s_closure_gate_profile() -> Dict[str, object]:
+    """Return the A217 finite gate for the K3/Class-S comparison.
+
+    The class-S A1 Schur sector on Sigma_{0,24} and the K3
+    Hall-Borcherds object have the same scalar lane only after finite
+    Hall recognition data are installed.  Without these gates the
+    comparison is a shadow comparison, not an object equivalence.
+    """
+
+    theorem_gates = (
+        "rad_Hall_N / rad_N = 0 for every finite N",
+        "D_Hall^fin exists",
+        "Borch o Hall is height-compatible",
+        "Schur -> Z_der^ch is compatible with the SC^{ch,top} trace",
+    )
+    return {
+        "source": "Schur(T[A1, Sigma_{0,24}]) with SC^{ch,top} realisation",
+        "target": "H_{Delta_5}",
+        "false_equivalence": "class-S A1 on Sigma_{0,24} = H_{Delta_5}",
+        "correct_status": "conditional_after_finite_Hall_Borcherds_gates",
+        "without_gates": "shadow_comparison_not_object_equivalence",
+        "diagram_nodes": (
+            "Hall source",
+            "Hall_red",
+            "Z_der^ch(A_Sigma)",
+            "H_{Delta_5}",
+        ),
+        "theorem_gates": theorem_gates,
+        "comparison_blocks": (
+            "reduced compact Hall source",
+            "finite radical-quotient Hall-Drinfeld doubles",
+            "finite Hall-Borcherds recognition compatible in height",
+            "SC^{ch,top} trace compatibility",
+        ),
+    }
 
 
 # ---------------------------------------------------------------------------

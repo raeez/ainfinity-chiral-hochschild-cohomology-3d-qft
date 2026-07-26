@@ -20,19 +20,24 @@ Key mathematical objects:
 3. **Genus-2 correction Theta_2**: If Ob_2 = d(xi_2), then Theta_2 = xi_2.
    Full MC: Theta_0 + hbar*Theta_1 + hbar^2*Theta_2 satisfies MC to O(hbar^3).
 
-4. **Free energy F_2**: F_2(A) = kappa(A) * lambda_2^FP
+4. **Scalar trace F_2^sc**: F_2^sc(A) = kappa(A) * lambda_2^FP
    where lambda_2^FP = 7/5760 (Faber-Pandharipande genus-2 integral).
 
-5. **Stable graph decomposition at genus 2**: The 6 stable graph types
+5. **Stable graph decomposition at genus 2**: The 7 stable graph types
    for (g=2, n=0), expressed in the obstruction language.
 
-The universal formula:
-  F_g(A) = kappa(A) * lambda_g^FP
-  F_1 = kappa / 24
-  F_2 = kappa * 7/5760 = 7*kappa/5760
+The scalar-lane formula:
+  F_g^sc(A) = kappa(A) * lambda_g^FP
+  F_1^sc = kappa / 24
+  F_2^sc = kappa * 7/5760 = 7*kappa/5760
 
-This is proved by Theorem D (modular characteristic) combined with the
-A-hat generating function sum_g F_g x^{2g} = kappa * ((x/2)/sin(x/2) - 1).
+The all-weight numerical free energy is
+  F_g(A) = F_g^sc(A) + delta F_g^cross(A)
+with delta F_g^cross(A) = 0 on the uniform-weight/one-channel lane.
+
+The scalar trace is proved by Theorem D (modular characteristic)
+combined with the A-hat generating function
+sum_g F_g^sc x^{2g} = kappa * ((x/2)/sin(x/2) - 1).
 
 References:
   higher_genus_modular_koszul.tex (Vol I): modular bar, genus spectral sequence
@@ -77,14 +82,39 @@ def lambda_fp(g: int) -> Rational:
     return Rational(numerator, denominator)
 
 
-def F_g_free_energy(kappa, g: int):
-    """Genus-g free energy: F_g(A) = kappa(A) * lambda_g^FP.
+def F_g_scalar_free_energy(kappa, g: int):
+    """Genus-g scalar trace: F_g^sc(A) = kappa(A) * lambda_g^FP.
 
-    This is the universal formula from Theorem D (modular characteristic).
-    The generating function is:
-      sum_{g>=1} F_g * x^{2g} = kappa * ((x/2)/sin(x/2) - 1)
+    This is the protected scalar lane of Theorem D (modular
+    characteristic).  It is the full numerical free energy only after
+    the cross-channel term delta F_g^cross(A) has been proved to vanish.
+    The scalar generating function is:
+      sum_{g>=1} F_g^sc * x^{2g} = kappa * ((x/2)/sin(x/2) - 1)
     """
     return kappa * lambda_fp(g)
+
+
+def F_g_free_energy(kappa, g: int):
+    """Backward-compatible alias for F_g_scalar_free_energy.
+
+    Older callers use this name for the scalar trace.  New code should
+    call F_g_scalar_free_energy when no cross-channel correction has
+    been supplied, or full_free_energy_decomposition when the all-weight
+    numerical free energy is meant.
+    """
+    return F_g_scalar_free_energy(kappa, g)
+
+
+def full_free_energy_decomposition(kappa, g: int, delta_cross=S.Zero):
+    """Return the scalar/cross-channel decomposition of genus-g energy."""
+    scalar = F_g_scalar_free_energy(kappa, g)
+    full = simplify(scalar + delta_cross)
+    return {
+        'F_g_sc': scalar,
+        'delta_F_g_cross': delta_cross,
+        'F_g': full,
+        'scalar_equals_full': simplify(delta_cross) == 0,
+    }
 
 
 def ahat_generating_function_coefficients(max_genus: int = 5):
@@ -165,7 +195,7 @@ class StableGraph:
 
 
 def genus2_stable_graphs_n0() -> List[StableGraph]:
-    """Enumerate the 6 stable graph types at genus 2 with n=0 marked points.
+    """Enumerate the 7 stable graph types at genus 2 with n=0 marked points.
 
     These correspond to the boundary strata of M-bar_2:
 
@@ -192,6 +222,11 @@ def genus2_stable_graphs_n0() -> List[StableGraph]:
     Graph VI: Three-banana (genus-0 + genus-0, 3 edges)
       - 2 vertices of genus 0, 3 edges between them
       - h^1 = 2, |Aut| = 12 (S_3 on edges, Z_2 swapping vertices)
+
+    Graph VII: Barbell (genus-0 + genus-0, one self-edge on each vertex,
+    joined by a bridge)
+      - 2 vertices of genus 0, 3 edges total, 2 self-edges
+      - h^1 = 2, |Aut| = 8
     """
     return [
         StableGraph(
@@ -242,6 +277,14 @@ def genus2_stable_graphs_n0() -> List[StableGraph]:
             h1=2, aut_order=12,
             degeneration_type='nonseparating',
         ),
+        StableGraph(
+            name="VII: barbell (g=0+g=0)",
+            genus=2, n_marked=0,
+            vertex_genera=(0, 0),
+            n_edges=3, n_self_edges=2,
+            h1=2, aut_order=8,
+            degeneration_type='nonseparating',
+        ),
     ]
 
 
@@ -251,7 +294,7 @@ def verify_genus2_graph_count():
     Arithmetic genus formula for a stable graph:
       g = sum(g_v) + h^1(Gamma) = sum(g_v) + |E| - |V| + 1
 
-    All 6 graphs should have total genus = 2.
+    All 7 graphs should have total genus = 2.
     """
     graphs = genus2_stable_graphs_n0()
     results = {}
@@ -281,17 +324,17 @@ def graph_amplitude_genus2(graph: StableGraph, kappa, propagator=None):
       ell_Gamma = prod_{v} Sh_{val(v)}^{(g_v)} * prod_{e} P
 
     where:
-      Sh_0^{(g)} = F_g = kappa * lambda_g^FP (genus-g free energy, 0 legs)
+      Sh_0^{(g)} = F_g^sc = kappa * lambda_g^FP (scalar trace, 0 legs)
       Sh_2^{(0)} = kappa (genus-0 Hessian, 2 legs)
       P = 1/kappa (propagator on the 1D primary line)
 
     The weighted amplitude is:
       (1/|Aut(Gamma)|) * ell_Gamma
 
-    For the 6 genus-2 graphs:
+    For the 7 genus-2 graphs:
 
     I (smooth g=2, no edges):
-      ell_I = Sh_0^{(2)} = F_2 = kappa * 7/5760
+      ell_I = Sh_0^{(2)} = F_2^sc = kappa * 7/5760
       Weight: 1/1 * kappa * 7/5760 = 7*kappa/5760
 
     II (nonsep self-edge on g=1):
@@ -311,13 +354,13 @@ def graph_amplitude_genus2(graph: StableGraph, kappa, propagator=None):
       Wait: the separation has EACH genus-1 vertex with 1 edge-half.
       The vertex with 1 half-edge at genus 1 has Sh_1^{(1)} which is not standard.
 
-      CORRECTION: For the (g=2, n=0) free energy computation, the standard
+      CORRECTION: For the (g=2, n=0) scalar-trace computation, the standard
       decomposition uses only F_g at each vertex, contracted through propagators.
       The correct amplitude uses the recursion:
-        F_2 = contribution from all 6 graphs in the genus expansion.
+        F_2^sc = contribution from all 7 graphs in the scalar genus expansion.
 
-      But the UNIVERSAL FORMULA F_2 = kappa * 7/5760 already accounts for
-      all graph contributions. The individual graph amplitudes reconstruct
+      But the universal scalar formula F_2^sc = kappa * 7/5760 already accounts
+      for all one-channel graph contributions. The individual graph amplitudes reconstruct
       this total.
 
     Parameters:
@@ -331,7 +374,7 @@ def graph_amplitude_genus2(graph: StableGraph, kappa, propagator=None):
     name = graph.name
 
     if "smooth genus-2" in name or graph.n_edges == 0:
-        # Graph I: just the genus-2 free energy
+        # Graph I: just the genus-2 scalar trace
         amplitude = F_g_free_energy(kappa, 2)
         weighted = amplitude / graph.aut_order
         return {
@@ -339,7 +382,7 @@ def graph_amplitude_genus2(graph: StableGraph, kappa, propagator=None):
             'amplitude': amplitude,
             'aut_order': graph.aut_order,
             'weighted_amplitude': weighted,
-            'formula': f"F_2 = kappa * 7/5760 = {simplify(amplitude)}",
+            'formula': f"F_2^sc = kappa * 7/5760 = {simplify(amplitude)}",
         }
 
     elif "nonsep node on g=1" in name:
@@ -356,7 +399,7 @@ def graph_amplitude_genus2(graph: StableGraph, kappa, propagator=None):
         # So: amplitude = kappa * (1/kappa) = 1
         # Weighted: 1/(2) * 1 = 1/2
         # HOWEVER this doesn't directly give kappa * lambda_2. The individual graph amplitudes
-        # are contributions to the recursive determination of F_2, which sums to kappa * 7/5760.
+        # are contributions to the recursive determination of F_2^sc, which sums to kappa * 7/5760.
 
         amplitude = kappa * propagator  # Leading scalar contribution
         weighted = amplitude / graph.aut_order
@@ -536,7 +579,7 @@ def genus2_obstruction_full(family: str, **params):
     The primitive xi_2 satisfies Ob_2 = d(xi_2).
 
     The genus-2 correction Theta_2 = xi_2 then satisfies:
-      F_2 = kappa * 7/5760 = the genus-2 free energy
+      F_2^sc = kappa * 7/5760 = the genus-2 scalar trace
 
     The relationship between Ob_2 and F_2:
       Ob_2 is the cocycle. F_2 = <xi_2, [M_2]> is the period integral.
@@ -577,13 +620,13 @@ def genus2_obstruction_full(family: str, **params):
     # Full obstruction
     ob2 = d1_data['D1_theta1'] + Rational(1, 2) * d2_data['D2_theta0']
 
-    # The genus-2 free energy (the final answer after solving)
+    # The genus-2 scalar trace (the final scalar answer after solving)
     F_2 = F_g_free_energy(kappa, 2)
     theta_1 = kappa * Rational(1, 24)
 
     # The genus-2 MC correction
     # Theta_2 is the primitive of Ob_2 under the modular operad differential
-    # The period integral gives F_2
+    # The period integral gives F_2^sc
     theta_2 = F_2  # At the scalar level, Theta_2 = F_2
 
     # Verify the MC equation at order hbar^2:
@@ -605,26 +648,26 @@ def genus2_obstruction_full(family: str, **params):
         'theta_2': theta_2,
         'F_1': F_g_free_energy(kappa, 1),
         'F_2': F_2,
-        'F_2_formula': f'F_2 = kappa * 7/5760 = {simplify(F_2)}',
+        'F_2_formula': f'F_2^sc = kappa * 7/5760 = {simplify(F_2)}',
         'lambda_2_fp': Rational(7, 5760),
         'ob2_is_exact': True,
         'mc_order2_satisfied': True,
         'description': (
             f'Genus-2 obstruction for {family}: '
             f'Ob_2 = {simplify(ob2)}. '
-            f'F_2 = kappa * 7/5760 = {simplify(F_2)}.'
+            f'F_2^sc = kappa * 7/5760 = {simplify(F_2)}.'
         ),
     }
 
 
 # =========================================================================
-# 5. GENUS-2 FREE ENERGY VERIFICATION
+# 5. GENUS-2 SCALAR TRACE VERIFICATION
 # =========================================================================
 
 def verify_F2_heisenberg(k_val=None):
     """Verify F_2 for Heisenberg at level k.
 
-    F_2(H_k) = kappa * 7/5760 = k * 7/5760 = 7k/5760
+    F_2^sc(H_k) = kappa * 7/5760 = k * 7/5760 = 7k/5760
 
     Cross-check: at k=1 (standard Heisenberg), F_2 = 7/5760.
     """
@@ -649,7 +692,7 @@ def verify_F2_heisenberg(k_val=None):
 def verify_F2_virasoro(c_val=None):
     """Verify F_2 for Virasoro at central charge c.
 
-    F_2(Vir_c) = kappa * 7/5760 = (c/2) * 7/5760 = 7c/11520
+    F_2^sc(Vir_c) = kappa * 7/5760 = (c/2) * 7/5760 = 7c/11520
 
     Cross-check with known values:
       c=1: F_2 = 7/11520
@@ -674,7 +717,7 @@ def verify_F2_virasoro(c_val=None):
 def verify_F2_w3(c_val=None):
     """Verify F_2 for W_3 at central charge c.
 
-    F_2(W_3) = kappa * 7/5760 = (5c/6) * 7/5760 = 7c/6912
+    F_2^sc(W_3) = kappa * 7/5760 = (5c/6) * 7/5760 = 7c/6912
 
     IMPORTANT: kappa(W_3) = 5c/6, NOT c/2.
     """
@@ -697,7 +740,7 @@ def verify_F2_w3(c_val=None):
 def verify_F2_affine_sl2(k_val=None):
     """Verify F_2 for affine sl_2 at level k.
 
-    F_2(V_k(sl_2)) = kappa * 7/5760 = 3(k+2)/4 * 7/5760 = 7(k+2)/7680
+    F_2^sc(V_k(sl_2)) = kappa * 7/5760 = 3(k+2)/4 * 7/5760 = 7(k+2)/7680
     """
     k = Symbol('k') if k_val is None else S(k_val)
     kappa = Rational(3) * (k + 2) / 4
@@ -723,9 +766,9 @@ def F2_over_F1_squared(kappa):
     r"""Compute the universal ratio F_2 / F_1^2.
 
     F_1 = kappa/24
-    F_2 = 7*kappa/5760
+    F_2^sc = 7*kappa/5760
 
-    F_2 / F_1^2 = (7*kappa/5760) / (kappa^2/576) = (7*kappa/5760) * (576/kappa^2)
+    F_2^sc / (F_1^sc)^2 = (7*kappa/5760) / (kappa^2/576) = (7*kappa/5760) * (576/kappa^2)
                 = 7 * 576 / (5760 * kappa) = 7 / (10 * kappa)
 
     This ratio is INVERSELY PROPORTIONAL to kappa: larger kappa means
@@ -748,15 +791,15 @@ def F2_over_F1_squared(kappa):
 
 
 def F2_over_F1_ratio(kappa):
-    r"""Compute F_2 / F_1 = 7/240 (kappa-independent!).
+    r"""Compute F_2^sc / F_1^sc = 7/240 (kappa-independent!).
 
-    F_1 = kappa / 24
-    F_2 = 7 * kappa / 5760
+    F_1^sc = kappa / 24
+    F_2^sc = 7 * kappa / 5760
 
-    F_2 / F_1 = (7 * kappa / 5760) / (kappa / 24) = 7 * 24 / 5760 = 7 / 240
+    F_2^sc / F_1^sc = (7 * kappa / 5760) / (kappa / 24) = 7 * 24 / 5760 = 7 / 240
 
     This ratio is INDEPENDENT of kappa: it is a universal constant
-    of the genus expansion (coming from lambda_2 / lambda_1 = (7/5760)/(1/24) = 7/240).
+    of the scalar genus expansion (coming from lambda_2 / lambda_1 = (7/5760)/(1/24) = 7/240).
     """
     F_1 = F_g_free_energy(kappa, 1)
     F_2 = F_g_free_energy(kappa, 2)
@@ -943,16 +986,16 @@ def graph_decomposition_F2_heisenberg(k_val=None):
 
 
 def graph_decomposition_F2_virasoro(c_val=None):
-    """Decompose F_2 for Virasoro into stable graph contributions.
+    """Decompose F_2^sc for Virasoro into stable graph contributions.
 
     For Virasoro (mixed shadow depth, infinite tower):
-    - All 6 graphs can contribute
+    - All 7 graphs can contribute
     - The cubic shadow C = 2, quartic Q = 10/[c(5c+22)]
-    - The total must sum to kappa * 7/5760 = 7c/11520
+    - The scalar trace must sum to kappa * 7/5760 = 7c/11520
 
     NOTE: The individual graph amplitudes involve the shadow obstruction tower
     operations at genus 0 and genus 1. The universal formula
-    F_2 = kappa * 7/5760 does NOT require computing the individual
+    F_2^sc = kappa * 7/5760 does NOT require computing the individual
     graph amplitudes -- it follows from the A-hat generating function.
     The graph decomposition is a CONSISTENCY CHECK.
     """
@@ -976,6 +1019,7 @@ def graph_decomposition_F2_virasoro(c_val=None):
         'IV (2 nonsep, g=0)': 'involves Q_4 * P^2',
         'V (mixed, g=0+g=1)': 'involves C_3 * P^2 * F_1',
         'VI (3-banana, g=0+g=0)': 'involves C_3^2 * P^3',
+        'VII (barbell, g=0+g=0)': 'involves loop-bridge genus-0 recursion * P^3',
     }
 
     return {
@@ -988,7 +1032,7 @@ def graph_decomposition_F2_virasoro(c_val=None):
         'F_2_total': simplify(F_2_total),
         'lambda_2_FP': Rational(7, 5760),
         'graph_contributions': contributions,
-        'universal_formula': 'F_2 = kappa * 7/5760 (Theorem D, no graph decomposition needed)',
+        'universal_formula': 'F_2^sc = kappa * 7/5760 (Theorem D scalar trace)',
     }
 
 
@@ -1001,10 +1045,10 @@ def genus2_complementarity_check(c_val=None):
 
     Theorem C states: Q_g(A) + Q_g(A!) = H*(M_g, Z(A))
 
-    At the scalar level (free energy):
-      F_g(A) + F_g(A!) = F_g(A) + F_g(A!)
+    At the scalar level:
+      F_g^sc(A) + F_g^sc(A!) is the complementarity trace.
 
-    For Virasoro: A = Vir_c, A! = Vir_{26-c}
+    For Virasoro: A = Vir_c and the same-family line representative is Vir_{26-c}
       kappa(Vir_c) = c/2, kappa(Vir_{26-c}) = (26-c)/2
       F_2(Vir_c) + F_2(Vir_{26-c}) = 7c/11520 + 7(26-c)/11520
                                     = 7*26/11520 = 182/11520 = 91/5760

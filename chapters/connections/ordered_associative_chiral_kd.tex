@@ -107,8 +107,8 @@ To keep the exposition honest, we separate three classes of statements.
 \begin{enumerate}[label=(\roman*)]
 \item \textbf{Established inputs.}
 The existence of the associative chiral bar--cobar equivalence, the one-sided module/comodule
-Koszul duality, and the enveloping algebra formalism are taken as already established in the
-repository.
+Koszul duality, and the enveloping algebra formalism are taken as already established
+(Hypothesis~\ref{hyp:inputs}).
 
 \item \textbf{New theorems proved here.}
 The ordered chiral shuffle theorem, opposite-duality, enveloping duality, the two-sided twisted
@@ -664,9 +664,9 @@ Theorem~\ref{thm:HH-coHH-homology}.
 \section{PBW-complete two-sided Koszul duality}
 % label removed: sec:bimod-bicomod
 
-The repository already establishes one-sided module/comodule duality. Bootstrapping it to the
-two-sided theory by passing from $A$ to its enveloping algebra $A^e$ and then using
-Corollary~\ref{cor:enveloping}.
+One-sided module/comodule duality is already established (Hypothesis~\ref{hyp:inputs}). We
+bootstrap it to the two-sided theory by passing from $A$ to its enveloping algebra $A^e$ and
+then using Corollary~\ref{cor:enveloping}.
 
 \begin{definition}[PBW-complete and coderived bicomodule categories]
 Let $A$ be strongly admissible and set $C=\Barch(A)$.
@@ -1099,7 +1099,7 @@ $\KK_A^{\mathrm{bi}}$ and use Corollary~\ref{cor:annulus}.
 \section{A master theorem and its conceptual form}
 % label removed: sec:master
 
-For repository integration it is useful to package the preceding results into a single statement.
+It is convenient to package the preceding results into a single statement.
 
 \begin{theorem}[Master theorem; \ClaimStatusProvedHere]
 % label removed: thm:master
@@ -1273,8 +1273,12 @@ $r(z) = \operatorname{Res}^{\mathrm{coll}}_{0,2}(\Theta_\cA^{E_1})
 \in \operatorname{End}(V \otimes V)(\!(z^{-1})\!)$
 satisfies the CYBE
 \textup{(}Proposition~\textup{\ref{prop:ybe-from-d-squared}}).
-Under averaging,
-$\operatorname{av}(r(z)) = \kappaChHodge(\cA)$.
+Under averaging, $\operatorname{av}(r(z))$ is the degree-$2$
+scalar shadow entering $\kappaChHodge(\cA)$. For abelian branches this
+is $\kappaChHodge(\cA)$ itself; for non-abelian affine
+Kac--Moody $V_k(\fg)$ the trace-form average is
+$k\dim(\fg)/(2h^\vee)$ and the Sugawara normal-ordering shift gives
+$\kappaChHodge(V_k(\fg))=\operatorname{av}(r(z))+\dim(\fg)/2$.
 \end{theorem}
 
 \begin{proof}
@@ -1402,14 +1406,72 @@ Theorem~\ref{thm:pole-non-increase}).
 
 \subsection{Bordered configuration spaces and the geometric open theory}
 
-\begin{conjecture}[Geometric realization of the diagonal bicomodule; \ClaimStatusConjectured]
-% label removed: conj:bordered
+\begin{theorem}[Geometric realization of the diagonal bicomodule; \ClaimStatusProvedHere]
+% legacy label retained in this superseded file
 \label{conj:bordered}
-There exists a bordered ordered configuration-space model
+Let \(A\) be a strongly admissible augmented \(E_1\)-chiral algebra.
+Licensing data: \(\alpha+\beta+\gamma\), for the boundary chart,
+bordered-FM comparison, and logarithmic-chain ambient.
+For \(p,q\geq0\), the bordered Fulton--MacPherson compactification
+\[
+\overline{\mathrm{Conf}}_{p,q}(\mathbb H)
+\]
+of \(p\) interior points and \(q\) ordered boundary points has
+codimension-one residue types
+\[
+z_i\to z_j,\qquad x_a\to x_b,\qquad
+\Im z_i\to0,\ \Re z_i\to x_a .
+\]
+The diagonal boundary condition is the bimodule
+\(\Delta_A={}_AA_A\), with left action from the negative boundary
+approach and right action from the positive boundary approach. Its
+bordered logarithmic chain model is
+\[
+D_A^{p,q}
+=
+C_\bullet^{\log}\!\bigl(
+\overline{\mathrm{Conf}}_{p,q}(\mathbb H)
+\bigr)\otimes A^{\otimes p}\otimes A^{\otimes q},
+\]
+with residue differential
+\[
+d_D=d_{\mathrm{int}}+d_{\partial}+d_{\mathrm{mix}},
+\quad
+d_{\mathrm{int}}=\sum_S\operatorname{Res}_{D_S^{\mathrm{int}}}\otimes m_S,
+\quad
+d_\partial=\sum_I\operatorname{Res}_{D_I^\partial}\otimes\mu_I,
+\]
+and
+\[
+d_{\mathrm{mix}}
+=
+\sum_{S,I}
+\operatorname{Res}_{D_{S,I}^{\mathrm{mix}}}\otimes\nu_{S,I}.
+\]
+The annular closure is
+\[
+D_A^{\mathrm{ann}}
+=
+\bigoplus_{n\ge0}
+C_\bullet^{\log}\!\bigl(
+\overline{\mathrm{Conf}}_n(S^1\times\mathbb R_{\ge0})
+\bigr)\otimes_{\mathbb Z/n}A^{\otimes n},
+\]
+where cyclic rotation acts by
+\[
+[s^{-1}a_1|\cdots|s^{-1}a_n]
+\mapsto
+(-1)^{\bar a_n(\bar a_1+\cdots+\bar a_{n-1})}
+[s^{-1}a_n|s^{-1}a_1|\cdots|s^{-1}a_{n-1}],
+\qquad
+\bar a_i=|a_i|-1.
+\]
+Equivalently, the older bordered ordered configuration-space model
 \[
 \mathfrak C^{\mathrm{bord}}_{g,r,s}(X)
 \]
-and a functorial system of chain-level operations on the diagonal bicomodule $C_\Delta$ such that:
+has a functorial system of chain-level operations on the diagonal
+bicomodule \(C_\Delta\) such that:
 \begin{enumerate}[label=(\arabic*)]
 \item the interval component reproduces the bicomodule $C_\Delta$;
 \item gluing of boundary intervals is computed by derived cotensor over $C$;
@@ -1418,12 +1480,13 @@ and a functorial system of chain-level operations on the diagonal bicomodule $C_
 \item the resulting geometric operations recover the ordered open trace formalism of
 Theorem~\ref{thm:ordered-open}.
 \end{enumerate}
-\end{conjecture}
+\end{theorem}
 
 \begin{remark}
-The required input is a bordered Fulton--MacPherson compactification
-for ordered points on intervals and annuli, with residue maps
-realising composition and pair-of-pants operations.
+This superseded copy records the resolved status. The active statement
+is \texttt{thm:bordered-diagonal-bicomodule-chain-model} in
+\texttt{ordered\_associative\_chiral\_kd\_core.tex}; the annular
+closure is Theorem~\ref{thm:bordered-annular}.
 \end{remark}
 
 \subsection{Associative modular Maurer--Cartan theory}
@@ -1580,30 +1643,13 @@ remains conjectural
 (Conjecture~\ref*{V1-conj:ds-kd-arbitrary-nilpotent}).
 \end{remark}
 
-\section{Repository integration notes}
-% label removed: sec:integration
-
-For direct integration into a research repository, the following replacements are recommended.
-
-\begin{enumerate}[label=(\arabic*)]
-\item Replace the abstract hypotheses in \S\ref{sec:setup} by the precise labels of the repository's
-existing bar--cobar and module/comodule theorems.
-
-\item Replace the shorthand notation $\widehat\otimes$ and $\chotimes$ by the repository's preferred
-completed tensor notation and chiral monoidal symbol.
-
-\item If the repository already has a sign appendix for the ordered bar complex, point the proofs of
-Theorems~\ref{thm:opposite} and \ref{thm:tangent=K} to that appendix.
-
-\item If the repository distinguishes coderived and contraderived categories more sharply, split
-Theorem~\ref{thm:bimod-bicomod} accordingly.
-
-\item The bordered configuration-space construction is now in Volume~I,
-\S\ref*{V1-sec:bordered-fm}.
-Items~(1)--(3) and~(5) of Conjecture~\ref{conj:bordered} are resolved;
-item~(4) (annular closure) remains conjectural pending the annular
-bordered FM compactification.
-\end{enumerate}
+\begin{remark}[Bordered configuration spaces]
+The bordered configuration-space construction is in Volume~I,
+\S\ref*{V1-sec:bordered-fm}, and in
+Theorem~\ref{thm:bordered-diagonal-bicomodule-chain-model}. Items~(1)--(5)
+of Theorem~\ref{conj:bordered} are resolved; the annular closure is
+the bordered-FM/coHochschild Theorem~\ref{thm:bordered-annular}.
+\end{remark}
 
 \appendix
 
@@ -1631,8 +1677,8 @@ sequence and homotopy-transfer arguments used in the proofs converge.
 
 \section{Appendix: new results proved in this note}
 
-For quick reference, here is the list of new results proved here rather than taken as repository
-inputs.
+For quick reference, here is the list of new results proved here rather than taken as
+established inputs (Hypothesis~\ref{hyp:inputs}).
 
 \begin{enumerate}[label=(\arabic*)]
 \item Ordered chiral shuffle theorem (Theorem~\ref{thm:shuffle}).
@@ -1815,8 +1861,27 @@ logarithmic forms $\eta_{i,i+1}=d\log(z_i-z_{i+1})$.
 \ClaimStatusProvedHere]
 % label removed: constr:ordered-bar-low-degree
 \index{bar complex!ordered!low degree formulas}
-Let $\{e_I\}$ be a homogeneous basis for $\bar\cA$ with
-structure constants $e_I{}_{(n)}\,e_J=\sum_K c^K_{IJ;n}\,e_K$.
+Let $\{e_I\}$ be a homogeneous basis for $\bar\cA$ and let
+\[
+\mu_2(e_I,e_J)=\sum_K\mu^K_{IJ}e_K
+\]
+be the open-colour binary product.  This symbol is not the
+vertex-algebra \(0\)-mode.  In the affine current shadow one writes
+\[
+e_I{}_{(n)}e_J=\sum_K c^K_{IJ;n}e_K ;
+\]
+then \(n=0\) is the Lie bracket and belongs to the symmetric
+chiral/Arnold calculation, not to the associative \(E_1\) proof below.
+For the genuine open-colour ordered bar differential,
+\[
+d_{\mathrm{res}}[s^{-1}a_1|\cdots|s^{-1}a_m]
+=
+\sum_{i=1}^{m-1}(-1)^{i-1}
+[s^{-1}a_1|\cdots|
+s^{-1}\mu_2(a_i,a_{i+1})|\cdots|s^{-1}a_m]
+\otimes[\delta_{D_{i,i+1}}].
+\]
+Thus a sign is attached to the ordered face, not chosen term by term.
 
 \emph{Degree~$1$}: ${\Barch}^{\mathrm{ord}}_1=s^{-1}\bar\cA$.
 The differential is $d(s^{-1}e_I)=0$ (no contractions
@@ -1830,19 +1895,15 @@ $(z_1,z_2)$ at the collision $z_1\to z_2$:
 \begin{equation}% label removed: eq:ordered-bar-d2
 d(s^{-1}e_I\otimes s^{-1}e_J)
 \;=\;
-\sum_{K,n}\pm\,c^K_{IJ;n}\;s^{-1}e_K
+\sum_K\mu^K_{IJ}\;s^{-1}e_K
 \;\otimes\;
-[\delta_{D_{1,2}}^{(n)}],
+[\delta_{D_{1,2}}],
 \end{equation}
-where $[\delta_{D_{1,2}}^{(n)}]$ is the $n$-th residue class
-at the collision divisor. For the simple-pole residue
-($n=0$): this is $e_I{}_{(0)}\,e_J$, the Lie bracket.
-For higher poles ($n\ge 1$): these are the higher products
-$e_I{}_{(n)}\,e_J$.
-
-The sign: $(-1)^{|e_I|}$ from permuting $s^{-1}$ past
-$e_I$ in the desuspension (cohomological convention
-$|d|=+1$).
+where $[\delta_{D_{1,2}}]$ is the ordered boundary face and the
+coefficient is the associative product \(\mu_2\).  If \(\cA\) is
+instead a local vertex algebra, replacing \(\mu_2\) by the \(0\)-mode
+Lie bracket \(e_I{}_{(0)}e_J\) is a different, symmetric chiral
+calculation; it is not an \(E_1\)-associative differential by itself.
 
 \emph{Degree~$3$}: ${\Barch}^{\mathrm{ord}}_3
 =\bigoplus_{I,J,K}s^{-1}e_I\otimes s^{-1}e_J\otimes
@@ -1853,11 +1914,11 @@ and $D_{2,3}$ (second pair collides). The differential:
 \begin{equation}% label removed: eq:ordered-bar-d3
 d(s^{-1}e_I\otimes s^{-1}e_J\otimes s^{-1}e_K)
 \;=\;
-\sum_L\pm\,c^L_{IJ;0}\;
+\sum_L \mu^L_{IJ}\;
 s^{-1}e_L\otimes s^{-1}e_K
 \;\otimes\;[\delta_{D_{1,2}}]
-\;+\;
-\sum_M\pm\,c^M_{JK;0}\;
+\;-\;
+\sum_M \mu^M_{JK}\;
 s^{-1}e_I\otimes s^{-1}e_M
 \;\otimes\;[\delta_{D_{2,3}}].
 \end{equation}
@@ -1865,21 +1926,18 @@ $d^2=0$ at degree~$3$: the composition $d\circ d$ on
 $s^{-1}e_I\otimes s^{-1}e_J\otimes s^{-1}e_K$ produces
 \[
 d^2\;\ni\;
-\sum_{L,M}\pm\bigl(
-c^M_{LK;0}\,c^L_{IJ;0}
--c^L_{IM;0}\,c^M_{JK;0}
-\bigr)\,s^{-1}e_?
+\sum_{L,M,N}\bigl(
+\mu^N_{LK}\,\mu^L_{IJ}
+-\mu^N_{IM}\,\mu^M_{JK}
+\bigr)\,s^{-1}e_N
 \;\otimes\;[\delta_{D_{1,2}}\cap\delta_{D_{2,3}}].
 \]
 This vanishes if and only if
-$(e_I{}_{(0)}e_J){}_{(0)}e_K
-=e_I{}_{(0)}(e_J{}_{(0)}e_K)$,
-which is \emph{associativity of the $0$-th product}, the
-$E_1$ axiom. (For commutative chiral algebras, the
-$0$-th product satisfies the Jacobi identity instead,
-and the Arnold relation provides the additional
-cancellation. In the ordered complex, no Arnold relation
-is needed: associativity alone suffices.)
+\(\mu_2(\mu_2(e_I,e_J),e_K)
+=\mu_2(e_I,\mu_2(e_J,e_K))\), the associative \(E_1\) axiom.
+For a local vertex algebra the \(0\)-mode is a Lie bracket; its
+Jacobi identity is enforced by the symmetric chiral bar together with
+the Arnold relation, not by this open-colour argument.
 \end{construction}
 
 \begin{remark}[Ordered vs.\ unordered]
@@ -2004,16 +2062,19 @@ R(z)
 \operatorname{End}(\bar\cA\otimes\bar\cA)[\![z^{-1}]\!],
 \end{equation}
 where $z=z_1-z_2$ is the relative coordinate,
-$r_n=\sum_{I,J}c^K_{IJ;n}\,e_I\otimes e_J$ is the OPE matrix
-at pole order~$n$, and $\mathcal P$ denotes path-ordering.
+$r_n=\sum_{I,J}c^K_{IJ;n}\,e_I\otimes e_J$ is the
+vertex-shadow OPE matrix at pole order~$n$, and $\mathcal P$ denotes
+path-ordering.
 At leading order:
 \begin{equation}% label removed: eq:r-matrix-leading
 R(z)\;=\;1+r_0/z+O(z^{-2}),
 \qquad
 r_0\;=\;\sum_{I,J}c^K_{IJ;0}\,e_I\otimes e_J,
 \end{equation}
-where $r_0$ is the \emph{classical $r$-matrix}: the matrix
-of zeroth products (Lie brackets).
+where $r_0$ is the \emph{classical $r$-matrix} of the local
+vertex-algebra shadow: the matrix of vertex \(0\)-modes, hence of Lie
+brackets in the affine current case.  It is not the open-colour
+associative product \(\mu_2\) of the low-degree construction above.
 
 The $R$-matrix intertwines the two orderings:
 \[
@@ -2151,18 +2212,18 @@ codimension-two stratum. There are exactly two pathways
 to the triple collision:
 \begin{enumerate}[label=(\roman*)]
 \item $D_{1,2}$ then $D_{2,3}$: collapse $z_1\to z_2$
- (extracting $a_{(0)}b$), then the composite collides
- with $z_3$ (extracting $(a_{(0)}b)_{(0)}c$).
+ (applying \(\mu_2(a,b)\)), then the composite collides
+ with $z_3$ (applying \(\mu_2(\mu_2(a,b),c)\)).
  The monodromy of the two-step path is
  $R_{12}(z_{12})\,R_{13}(z_{13})$.
 \item $D_{2,3}$ then $D_{1,2}$: collapse $z_2\to z_3$
- first (extracting $b_{(0)}c$), then $z_1$ collides with
- the composite (extracting $a_{(0)}(b_{(0)}c)$).
+ first (applying \(\mu_2(b,c)\)), then $z_1$ collides with
+ the composite (applying \(\mu_2(a,\mu_2(b,c))\)).
  The monodromy is
  $R_{23}(z_{23})\,R_{13}(z_{13})$.
 \end{enumerate}
 The algebraic part of $d^2$ vanishes by associativity of
-the zeroth product ($E_1$ axiom). The monodromy part
+the open-colour product \(\mu_2\). The monodromy part
 gives the Yang--Baxter equation: the two sides
 of~\eqref{eq:ybe-from-bar} are the two pathways, and their
 equality is $d^2=0$.
@@ -2212,8 +2273,9 @@ The ordered bar complex reduces to
 \bigoplus_{n\ge 1}(s^{-1}\alpha)^{\otimes n}
 \]
 with differential $d(s^{-1}\alpha\otimes s^{-1}\alpha)
-=\pm s^{-1}(\alpha_{(1)}\alpha)=\pm s^{-1}(k)$
-(the residue of the double pole). Bar cohomology:
+=s^{-1}(\alpha_{(1)}\alpha)=k\,s^{-1}(1)$
+(the residue of the double pole, with the unique degree-$2$ ordered
+face carrying sign \(+1\)). Bar cohomology:
 $H^0=\Bbbk$, $H^1=\Bbbk\langle s^{-1}\alpha\rangle$,
 $H^n=0$ for $n\ge 2$.
 
@@ -2252,23 +2314,37 @@ Since $\mathrm{Conf}_2^{\mathrm{ord}}(\mathbb A^1)
 complex $C_\bullet$ contributes $H_0=\Bbbk$ and
 $H_1=\Bbbk$ (the winding class).
 
-The bar differential at degree~$2$:
+We use the ordered bar convention
+\[
+d[s^{-1}a_1|\cdots|s^{-1}a_n]
+=
+\sum_{i=1}^{n-1}(-1)^{i-1}
+[s^{-1}a_1|\cdots|s^{-1}(a_i{}_{(0)}a_{i+1})|\cdots|s^{-1}a_n]
+\]
+and the standard \(\mathfrak{sl}_2\)-normalisation
+\([e,f]=h,\ [h,e]=2e,\ [h,f]=-2f\).  Hence the degree-\(2\)
+bar differential has fixed signs:
 \begin{align*}
 d(s^{-1}e\otimes s^{-1}f)
 &\;=\;
-\pm s^{-1}(e_{(0)}f)\;=\;\pm s^{-1}h,\\
+s^{-1}(e_{(0)}f)\;=\;s^{-1}h,\\
 d(s^{-1}e\otimes s^{-1}h)
 &\;=\;
-\pm s^{-1}(e_{(0)}h)\;=\;\pm 2\,s^{-1}e,\\
+s^{-1}(e_{(0)}h)\;=\;-2\,s^{-1}e,\\
 d(s^{-1}h\otimes s^{-1}e)
 &\;=\;
-\pm s^{-1}(h_{(0)}e)\;=\;\mp 2\,s^{-1}e.
+s^{-1}(h_{(0)}e)\;=\;2\,s^{-1}e.
 \end{align*}
 The ordered structure: $d(s^{-1}e\otimes s^{-1}h)$ and
 $d(s^{-1}h\otimes s^{-1}e)$ differ by a sign (the ordering
 of insertions matters). In the unordered bar complex,
-the $\Sigma_2$-coinvariants identify $e\otimes h$ with
-$h\otimes e$ up to sign; in the ordered complex, they
+the $\Sigma_2$-coinvariants identify
+\[
+s^{-1}e\otimes s^{-1}h
+\;=\;
+-\,s^{-1}h\otimes s^{-1}e
+\]
+because the two desuspended weight-one currents are odd; in the ordered complex, they
 are independent generators.
 
 Bar cohomology at degree~$1$:
@@ -2297,7 +2373,7 @@ R(z)\colon
 \]
 For $\widehat{\mathfrak{sl}}_2$ at level~$k$ with
 $\hbar=1/(k+2)$:
-$R(z)=1+\hbar\,k\,\Omega/z+O(z^{-2})$, where
+$R(z)=1+\hbar\,k\,\Omega_{\mathrm{tr}}/z+O(z^{-2})$, where
 $\Omega=e\otimes f+f\otimes e+\tfrac12 h\otimes h$
 is the Casimir. The Yang--Baxter equation
 $R_{12}(z_1{-}z_2)\,R_{13}(z_1{-}z_3)\,
@@ -2331,9 +2407,13 @@ For $\cA=\widehat{\mathfrak g}_k$ (affine Kac--Moody at
 level~$k$), the Koszul dual is the Yangian:
 $\cA^!=Y_\hbar(\mathfrak g)$ at deformation parameter
 $\hbar=1/(k+h^\vee)$. This identification is the
-associative chiral analogue of the commutative identification
-$\widehat{\mathfrak g}_k^!=\widehat{\mathfrak g}_{-k-2h^\vee}$
-(Verdier-level duality): the ordered bar complex replaces
+associative chiral analogue of the commutative current-level shadow
+\[
+\widehat{\mathfrak g}_k
+\longmapsto
+\operatorname{CE}^{\mathrm{ch}}\!\bigl(\widehat{\mathfrak g}_{-k-2h^\vee}\bigr)
+\]
+coming from Verdier-level duality: the ordered bar complex replaces
 symmetric coinvariants with the braid-group--equivariant
 structure, and the Yangian emerges as the algebra encoding
 this equivariance.
@@ -2407,7 +2487,7 @@ equation~\eqref{eq:ybe-from-bar}
 Proposition~\ref{prop:ybe-from-d-squared}).
 
 \emph{For $\widehat{\mathfrak{sl}}_2$ at level~$k$.}
-The $R$-matrix is $R(z)=1+\hbar\,k\,\Omega/z+O(z^{-2})$ with
+The $R$-matrix is $R(z)=1+\hbar\,k\,\Omega_{\mathrm{tr}}/z+O(z^{-2})$ with
 $\Omega=e\otimes f+f\otimes e+\tfrac12 h\otimes h$
 (the Casimir), and the Yangian $Y_\hbar(\mathfrak{sl}_2)$
 is generated by $E(u)$, $F(u)$, $H(u)$ with
@@ -2431,8 +2511,18 @@ $\mathcal N=2$ superconformal algebra;
 \index{W-algebra@$\mathcal W$-algebra!subregular!ordered bar}
 \index{N=2 superconformal!ordered bar complex}
 The subregular $W_k(\mathfrak{sl}_3,f_{\mathrm{sub}})$ is the
-$\mathcal N=2$ superconformal algebra at
-$c=3(2k+1)/(k+3)$, generated by:
+Bershadsky--Polyakov algebra: its spin-$3/2$ generators are
+\emph{bosonic}, its $G^+G^-$ OPE carries the nonlinear
+${:}JJ{:}$ term, and
+$c(k)=-(2k+3)(3k+1)/(k+3)$. It is \emph{not} isomorphic to the
+$\mathcal N=2$ superconformal algebra --- the statistics of the
+spin-$3/2$ generators differ --- but the two families share the
+generator spectrum $(2,\tfrac32,\tfrac32,1)$ and are expected to
+be related through the Heisenberg coset of the former together
+with a free-field extension, in the Kazama--Suzuki pattern. The
+ordered bar complex below is computed for the $\mathcal N=2$
+superconformal algebra itself, at central charge $c$, generated
+by:
 \begin{center}
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{lcl}
@@ -2494,9 +2584,12 @@ $W_{k^\vee}(\mathfrak{sl}_3,f_{\mathrm{sub}}^t)$
 at dual level $k^\vee=-k-6$, with $f_{\mathrm{sub}}^t$ the
 transpose nilpotent (Vol~I,
 Computation~\ref*{V1-comp:subregular-sl3-holographic-datum}).
-The transpose is the minimal nilpotent of $\mathfrak{sl}_3$,
-so the Koszul dual is a \emph{different} $W$-algebra:
-$W_{-k-6}(\mathfrak{sl}_3,f_{\min})$.
+In $\mathfrak{sl}_3$ the partition $[2,1]$ is self-transpose and
+the subregular and minimal orbits coincide, so the conjectured
+Koszul dual is the \emph{same} family at the dual level:
+$W_{-k-6}(\mathfrak{sl}_3,f_{\mathrm{sub}})$. This self-duality
+of the family under $k\mapsto -k-6$ is exactly the conductor
+identity $c(k)+c(-k-6)\equiv 50$.
 
 \emph{Higher shadows.}
 The $\mathcal N=2$ SCA has shadow depth~$\infty$:
@@ -2513,42 +2606,36 @@ $\partial_c J$) and the genus-$1$ Hessian is a
 $4\times 4$ matrix.
 
 \emph{DS reduction.}
-The subregular DS reduction
+The subregular (for $\mathfrak{sl}_3$, equal to the minimal)
+DS reduction
 $\mathrm{DS}_{f_{\mathrm{sub}}}\colon
 \widehat{\mathfrak{sl}}_3{}_k
 \to W_k(\mathfrak{sl}_3,f_{\mathrm{sub}})$
-removes $4$~positive roots (the roots in the nilradical
-of the Jacobson--Morozov parabolic) and produces a ghost
-system with $c_{\mathrm{ghost}}=2\cdot 2=4$ (two
-$bc$-pairs at heights $1$ and $2$). Central charge
-additivity:
-$c(\widehat{\mathfrak{sl}}_3{}_k)
-=c(W_k(\mathfrak{sl}_3,f_{\mathrm{sub}}))+4$,
-which gives
-$8k/(k+3)=3(2k+1)/(k+3)+4$.
-Verification: $8k=3(2k+1)+4(k+3)=6k+3+4k+12=10k+15$;
-this gives $-2k=15$, so $k=-15/2$. This is NOT an identity
-for all~$k$: the formula $c=3(2k+1)/(k+3)$ is the central
-charge of the $\mathcal N=2$ SCA at level~$k$, and
-$c(\widehat{\mathfrak{sl}}_3{}_k)=8k/(k+3)$. The correct
-additivity is:
-$c_{\mathrm{aff}}-c_{W,\mathrm{sub}}=c_{\mathrm{ghost}}$,
-which requires
-$c_{\mathrm{ghost}}=8k/(k+3)-3(2k+1)/(k+3)
-=(8k-6k-3)/(k+3)=(2k-3)/(k+3)$.
-
-For this to equal $4$: $2k-3=4(k+3)=4k+12$, giving
-$-2k=15$, $k=-15/2$. So $c_{\mathrm{ghost}}=4$ only at
-$k=-15/2$, not for all~$k$.
-
-The correct formula: $c_{\mathrm{ghost}}$ for subregular
-DS of $\mathfrak{sl}_3$ is $(2k-3)/(k+3)$
-(level-dependent, not a constant). This is a key
-difference from the principal case where
-$c_{\mathrm{ghost}}=N(N-1)$ is level-independent.
-The level-dependence arises because the subregular
-embedding changes the conformal weights of the ghost
-fields as a function of~$k$.
+attaches ghosts to the positive-grade subspace
+$\mathfrak{g}_{1/2}\oplus\mathfrak{g}_{1}$ of dimension
+$2+1=3$. Naive central-charge additivity
+$c_{\mathrm{aff}} = c_{W} + c_{\mathrm{ghost}}$ fails for every
+DS reduction: the $W$-algebra stress tensor is the improved
+$T_{\mathrm{Sug}} + \partial x_{f}$, and the improvement term
+shifts the central charge by a level-dependent amount. With the
+value
+$c\bigl(W_k(\mathfrak{sl}_3,f_{\mathrm{sub}})\bigr)
+= 8k/(k+3) - 6k - 1$, the central-charge deficit is
+\[
+c_{\mathrm{aff}} - c_{W,\mathrm{sub}}
+= \frac{8k}{k+3} - \Bigl(\frac{8k}{k+3} - 6k - 1\Bigr)
+= 6k + 1,
+\]
+level-dependent through the improvement. The deficit is not a
+ghost central charge: a $bc$ pair's central charge is fixed by
+its conformal weights and is level-independent, and the
+level-independent conductor cross-check at this vertex is the
+gauging-ghost total for spins $(2, \tfrac32, \tfrac32, 1)$,
+$-26 - 11 - 11 - 2 = -50 = -(c + c')$. The principal case has
+the same shape: the deficit
+$c_{\mathrm{aff}} - c_{W,\mathrm{prin}}$ is level-dependent,
+while the number of ghost fields $N(N-1)$ and the gauging total
+$-(c+c') = -100$ at $N = 3$ are not.
 \end{conjecture}
 
 \subsection{Modular extension: the ordered bar complex at
@@ -2641,7 +2728,7 @@ C_{\star,\mathcal W}^{\mathrm{CE,crv}}(\mathfrak g_{\Delta_5});
 \bigr),
 \]
 with $\hbar^2_{\mathrm{K3}} = -1/8$ Lusztig specialisation
-\cite{GritsenkoNikulin1998,Borcherds1992}. Cross-ref Vol.~III
+\cite{GritsenkoNikulin1998,Borcherds1992}. Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -2661,7 +2748,7 @@ $\psi_{\Delta_{10}}=\phi_{\Delta_{E_6}}\boxtimes\mathrm{Sym}^1$.
 The $p^8+p^9$ term is a nonquadratic Hall--Borcherds target trace; it
 becomes evidence for $R_{\mathrm{Borcherds}}\neq0$ only after the
 PBW/no-extra-relations, radical-quotient, and pairing gates hold in the
-recognized Hall-window system \cite{Andrianov1974,Ikeda2001}. Cross-ref
+recognized Hall-window system \cite{Andrianov1974,Ikeda2001}. Compare
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -2693,7 +2780,7 @@ limit has the Gritsenko--Nikulin divisor, character, first
 Fourier--Jacobi coefficient, and Borcherds multiplicities.
 Primary: Maulik--Okounkov, \emph{Ast\'erisque} 408 (2019);
 Nekrasov--Okounkov 2003 (hep-th/0306238); Iqbal--Kozcaz--Vafa 2007
-(hep-th/0701156). Cross-ref Vol.~III
+(hep-th/0701156). Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -2774,7 +2861,7 @@ The conflation between native and derived levels is the relevant
 typing hazard. The ordered-associative Koszul-duality of this chapter
 is unambiguously at the \emph{native
 $E_1$} level: $A$ is $E_1$-chiral, $A^!$ is Yangian-like, and $E_2$
-appears only on the derived centre $Z(\mathrm{Rep}(A))$. Cross-ref
+appears only on the derived centre $Z(\mathrm{Rep}(A))$. Compare
 Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic} and
 \S\ref{sec:oackdf-supplement-ii} of the frontier companion.
 \end{remark}

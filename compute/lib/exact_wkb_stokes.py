@@ -30,7 +30,7 @@ The Stokes graph of the ODE in the t-plane consists of:
 - Anti-Stokes lines: curves where Re(int_{t_*}^t sqrt(Q_L(s)) ds) = 0
   (the WKB solution changes dominance along these)
 
-At c = 13 (self-dual point, Vir_13^! = Vir_13):
+At c = 13 (fixed point of the same-family line-side comparison):
 - Branch points are complex conjugates: t_+/- = t_0 +/- i*delta
 - The Stokes graph has enhanced Z_2 symmetry (complex conjugation)
 - Three Stokes lines emanate from each branch point (standard for
@@ -429,7 +429,7 @@ class StokesGraphExact:
     exactly THREE Stokes lines and THREE anti-Stokes lines emanate from
     each branch point, equally spaced at 120 degrees (2*pi/3).
 
-    Topology at c = 13 (self-dual):
+    Topology at c = 13 (comparison fixed point):
     - t_+ and t_- are complex conjugates
     - The Stokes graph has Z_2 symmetry (t -> conj(t))
     - One Stokes line from t_+ connects to t_- (the "finite web")
@@ -542,10 +542,10 @@ def compute_stokes_graph(c_val: float, n_trace: int = 500,
     # Check for finite web: does a Stokes line from t_+ end at t_-?
     has_finite = _check_finite_web(stokes_lines, t_plus, t_minus)
 
-    # Z_2 symmetry: at c = 13 (self-dual), the Stokes graph has ENHANCED
-    # Z_2 symmetry from Koszul self-duality (Vir_13^! = Vir_13).
+    # Z_2 symmetry: at c = 13, the Stokes graph has ENHANCED symmetry
+    # from the fixed point of the same-family line-side comparison.
     # All real c have generic conjugation symmetry (t_+ = conj(t_-)).
-    # The flag here marks the c=13 Koszul self-dual enhancement.
+    # The flag here marks the c=13 comparison-fixed enhancement.
     has_z2 = abs(c_val - 13.0) < 0.01
 
     # Count Stokes lines going to infinity
@@ -1143,7 +1143,7 @@ def instanton_data(c_val: float) -> Dict[str, Any]:
     exponentially small corrections exp(-A/hbar) to the perturbative
     genus expansion.
 
-    At c = 13 (self-dual): A has enhanced symmetry.
+    At c = 13 (comparison fixed point): A has enhanced symmetry.
     At c = 26 (critical string): kappa_eff = 0, special behavior.
     """
     qsc = QuantumSpectralCurve(c_val)
@@ -1176,7 +1176,7 @@ def instanton_data(c_val: float) -> Dict[str, Any]:
         'Im(A)': A.imag if isinstance(A, complex) else 0,
         'borel_singularity': borel_A,
         '|borel_singularity|': abs(borel_A),
-        'is_self_dual': abs(c_val - 13.0) < 0.01,
+        'is_comparison_fixed': abs(c_val - 13.0) < 0.01,
         'is_critical': abs(c_val - 26.0) < 0.01,
         'kappa_eff': (c_val - 26.0) / 2.0,
     }
@@ -1186,17 +1186,17 @@ def instanton_data(c_val: float) -> Dict[str, Any]:
 # Section 8: Self-dual point c = 13 detailed analysis
 # =====================================================================
 
-def self_dual_analysis() -> Dict[str, Any]:
-    """Comprehensive exact WKB analysis at the self-dual point c = 13.
+def comparison_fixed_analysis() -> Dict[str, Any]:
+    """Comprehensive exact WKB analysis at the comparison fixed point c = 13.
 
-    At c = 13 (Vir_13^! = Vir_13):
+    At c = 13 (the same-family representative is Vir_13):
     - Branch points are complex conjugates: t_+/- = t_0 +/- i*delta
     - Stokes graph has Z_2 symmetry (t -> conj(t))
     - Period integral is purely imaginary (by Z_2 symmetry)
     - The Voros symbol has |a| = 1 (lies on the unit circle)
     - Enhanced symmetry: the Stokes automorphism is self-inverse
 
-    This is the gravitational analogue of the self-dual point in
+    This is the gravitational analogue of the fixed point in
     Liouville theory.
     """
     c = 13.0
@@ -1387,7 +1387,7 @@ if __name__ == '__main__':
     print("=" * 75)
 
     print("\n--- Self-dual point c = 13 ---\n")
-    sd = self_dual_analysis()
+    sd = comparison_fixed_analysis()
 
     print(f"Branch points: t_+ = {sd['branch_points']['t_plus']:.6f}")
     print(f"               t_- = {sd['branch_points']['t_minus']:.6f}")

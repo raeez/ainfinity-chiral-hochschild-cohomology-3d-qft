@@ -18,7 +18,12 @@ from __future__ import annotations
 # @independent_verification decorator is bibliographic scaffolding, not
 # numerical cross-verification.
 
+from pathlib import Path
+
 from compute.lib.independent_verification import independent_verification
+
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 # ---------------------------------------------------------------------------
@@ -111,12 +116,13 @@ def test_uhf_fm126_global_triangle():
 def _reconstruction_level(shadow: bool, class_family: str) -> str:
     """Map (reconstruction type, family) -> chain-level scope.
 
-    Shadow is formal / combinatorial and unconditional for all G/L/C/M.
+    Shadow is formal / combinatorial for all G/L/C/M, but only in the
+    modular Koszul, complete filtered, bar-intrinsic gauge-slice ambient.
     Holographic is chain-level and requires Koszul locus at generic level;
     class M requires DS-Hoch bridge.
     """
     if shadow:
-        return "unconditional-all-classes"
+        return "formal-shadow-packet-all-classes"
     # Holographic reconstruction
     if class_family in ("G", "L", "C"):
         return "chain-level-direct"
@@ -149,13 +155,37 @@ def _reconstruction_level(shadow: bool, class_family: str) -> str:
     ),
 )
 def test_uhf_fm185_shadow_vs_holographic():
-    # Shadow is unconditional for all classes.
+    # Shadow is formal for all classes under the shadow-packet hypotheses.
     for fam in ("G", "L", "C", "M"):
-        assert _reconstruction_level(shadow=True, class_family=fam) == "unconditional-all-classes"
+        assert _reconstruction_level(shadow=True, class_family=fam) == "formal-shadow-packet-all-classes"
     # Holographic is direct for G/L/C, via DS-Hoch for M.
     for fam in ("G", "L", "C"):
         assert _reconstruction_level(shadow=False, class_family=fam) == "chain-level-direct"
     assert _reconstruction_level(shadow=False, class_family="M") == "chain-level-via-ds-hoch"
+
+
+def test_uhf_fm185_source_uses_real_shadow_reconstruction_inputs():
+    """The split proof must not cite itself or erase shadow-packet hypotheses."""
+    source = (
+        ROOT / "chapters/connections/universal_holography_functor.tex"
+    ).read_text()
+    recon = (
+        ROOT / "chapters/connections/thqg_holographic_reconstruction.tex"
+    ).read_text()
+    start = source.index(r"\label{prop:uhf-shadow-vs-holographic}")
+    end = source.index(r"\end{proof}", start)
+    block = source[start:end]
+
+    assert r"\label{thm:filtered-shadow-tower-reconstruction}" in recon
+    assert "modular Koszul, complete filtered, bar-intrinsic" in block
+    assert r"thm:filtered-shadow-tower-reconstruction" in block
+    assert r"V1-thm:shadow-depth-dichotomy" in block
+    assert r"V1-cor:mittag-leffler-shadow-tower" in block
+    assert "Unconditional for all G/L/C/M" not in block
+    assert (
+        r"(Proposition~\ref*{prop:uhf-shadow-vs-holographic})"
+        not in block
+    )
 
 
 # ---------------------------------------------------------------------------

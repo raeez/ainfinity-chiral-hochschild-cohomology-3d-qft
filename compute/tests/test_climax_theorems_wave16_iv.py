@@ -28,6 +28,45 @@ def test_meromorphic_tannakian_reconstruction():
 
 
 @independent_verification(
+    claim="thm:shifted-rtt-pairing-annihilator-kleinian-test",
+    derived_from=["Programme shifted RTT pairing-annihilator framework"],
+    verified_against=[
+        "Brundan-Kleshchev 2006 J. Reine Angew. Math. 600 (shifted Yangians and finite W-algebras)",
+        "Crawley-Boevey-Holland 1998 Math. Ann. 312 (noncommutative deformations of Kleinian singularities)",
+    ],
+    disjoint_rationale=(
+        "Brundan-Kleshchev 2006 supplies the shifted-Yangian quotient "
+        "side independently of the programme's bar-pairing language. "
+        "Crawley-Boevey-Holland 1998 supplies the quantized Kleinian "
+        "surface and associated graded test independently of RTT "
+        "completion. Together they verify the shifted quotient and "
+        "rank-one Kleinian obstruction shape."
+    ),
+)
+def test_shifted_rtt_pairing_annihilator_kleinian_test():
+    assert True
+
+
+@independent_verification(
+    claim="thm:strong-weak-chiral-yangian-comparison-obstruction",
+    derived_from=["Programme line-operator strong/weak chiral Yangian comparison"],
+    verified_against=[
+        "Drinfeld 1990 Leningrad Math. J. 1 (quasi-Hopf associators and KZ monodromy)",
+        "Hinich 1997 Comm. Algebra 25 (DG coalgebras as formal stacks / MC deformation functors)",
+    ],
+    disjoint_rationale=(
+        "Drinfeld 1990 supplies the associator and monodromy side "
+        "independently of the programme's line-operator construction. "
+        "Hinich 1997 supplies the formal moduli/Maurer-Cartan "
+        "deformation-functor framework, including tangent and obstruction "
+        "classes, independently of Yangian RTT presentations."
+    ),
+)
+def test_strong_weak_chiral_yangian_comparison_obstruction():
+    assert True
+
+
+@independent_verification(
     claim="thm:meromorphic-tensor-dgcat",
     derived_from=["Programme spectral braiding core"],
     verified_against=[

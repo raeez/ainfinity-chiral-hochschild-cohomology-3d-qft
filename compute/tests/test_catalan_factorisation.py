@@ -4,15 +4,17 @@ Verifies:
   (a) phi_k(x) = 0 for even k >= 4
   (b) phi_k(x) = (-1)^n C_n prod_{m=2}^k (x+m) for odd k = 2n+3
   (c) T_k = (-1)^n C_n k! for odd k >= 3
-  (d) S_k = (-1)^n C_n (k+1)!/2 for odd k >= 3
+  (d) Sigma_k^fld = phi_k(1) = (-1)^n C_n (k+1)!/2 for odd k >= 3
   (e) The root property: phi_j(-m) = 0 for m = 2,...,j
   (f) The polynomial recursion via rightmost compositions
   (g) Even-arity vanishing via the functional equation
+  (h) P_{2r+1}(1,...,1) = (-1)^{r-1} C_{r-1} (2r+1)!/2
 """
 
 import sys
 import os
 import math
+from pathlib import Path
 
 import pytest
 
@@ -71,7 +73,7 @@ def engine():
 class TestEvenArityVanishing:
     """Test that phi_k(x) = 0 for even k >= 4."""
 
-    @pytest.mark.parametrize("k", [4, 6, 8, 10])
+    @pytest.mark.parametrize("k", [4, 6, 8, 10, 12])
     def test_even_vanishing(self, engine, k):
         coeffs = get_field_polynomial(engine, k)
         max_abs = max(abs(c) for c in coeffs)
@@ -81,7 +83,7 @@ class TestEvenArityVanishing:
 class TestOddArityCatalanFactorisation:
     """Test the full polynomial identity phi_k(x) = (-1)^n C_n prod(x+m)."""
 
-    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11])
+    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11, 13])
     def test_polynomial_match(self, engine, k):
         computed = get_field_polynomial(engine, k)
         predicted = predicted_phi(k)
@@ -97,7 +99,7 @@ class TestOddArityCatalanFactorisation:
 class TestTCoefficient:
     """Test T_k = (-1)^n C_n k!."""
 
-    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11])
+    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11, 13])
     def test_T_coefficient(self, engine, k):
         coeffs = get_field_polynomial(engine, k)
         T_val = coeffs[0]
@@ -107,10 +109,10 @@ class TestTCoefficient:
             f"T_{k} = {T_val}, predicted {predicted}"
 
 
-class TestSignedSum:
-    """Test S_k = phi_k(1) = (-1)^n C_n (k+1)!/2."""
+class TestFieldSignedSum:
+    """Test Sigma_k^fld = phi_k(1) = (-1)^n C_n (k+1)!/2."""
 
-    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11])
+    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11, 13])
     def test_signed_sum(self, engine, k):
         coeffs = get_field_polynomial(engine, k)
         S_val = eval_polynomial(coeffs, 1.0)
@@ -123,12 +125,13 @@ class TestSignedSum:
 class TestRootProperty:
     """Test that phi_j(-m) = 0 for m = 2, ..., j."""
 
-    @pytest.mark.parametrize("j", [2, 3, 5, 7, 9])
+    @pytest.mark.parametrize("j", [2, 3, 5, 7, 9, 11, 13])
     def test_roots(self, engine, j):
         coeffs = get_field_polynomial(engine, j)
+        tol = 1e-10 * max(abs(coeffs[0]), 1.0)
         for m in range(2, j + 1):
             val = eval_polynomial(coeffs, float(-m))
-            assert abs(val) < 1e-4, \
+            assert abs(val) < tol, \
                 f"phi_{j}({-m}) = {val}, should be 0"
 
 
@@ -154,3 +157,89 @@ class TestFunctionalEquation:
             rhs = (x + k) * eval_polynomial(pred, x)
             assert abs(lhs - rhs) < 1e-4 * max(abs(rhs), 1), \
                 f"k={k}, x={x}: LHS={lhs}, RHS={rhs}"
+
+
+class TestScalarCatalanFormula:
+    """Test the scalar Catalan formula independently of the field signed sum."""
+
+    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11, 13])
+    def test_scalar_polynomial_at_unit(self, k):
+        engine = StasheffEngine(1.0)
+        engine._cache.clear()
+        result = engine.mk(tuple(1.0 for _ in range(k - 1)))
+        r = (k - 1) // 2
+        P_val = 12.0 * result.get(-1, 0.0)
+        predicted = (-1) ** (r - 1) * catalan(r - 1) * math.factorial(k) / 2.0
+        assert abs(P_val - predicted) < 1e-8 * max(abs(predicted), 1.0), \
+            f"P_{k}(1,...,1) = {P_val}, predicted {predicted}"
+
+    @pytest.mark.parametrize("k", [3, 5, 7, 9, 11, 13])
+    def test_scalar_t_proportionality_at_unit(self, k):
+        c_val = 7.0
+        engine = StasheffEngine(c_val)
+        engine._cache.clear()
+        result = engine.mk(tuple(1.0 for _ in range(k - 1)))
+        scalar = result.get(-1, 0.0)
+        T_coeff = result.get(0, 0.0)
+        assert abs(scalar / T_coeff - c_val / 24.0) < 1e-8
+
+
+class TestPeriod2ParityManuscriptGuard:
+    """Guard against the previous scalar/field conflation in the theorem text."""
+
+    @staticmethod
+    def _gravity_source():
+        root = Path(__file__).resolve().parents[2]
+        return (root / "chapters" / "connections" / "3d_gravity.tex").read_text()
+
+    def test_theorem_status_licensing_and_depth_range(self):
+        source = self._gravity_source()
+        theorem_start = source.index(r"\begin{theorem}[Symmetric-point period-$2$")
+        theorem_end = source.index(r"\end{theorem}", theorem_start)
+        theorem = source[theorem_start:theorem_end]
+
+        assert r"\ClaimStatusConditional" in theorem
+        assert r"\hypAmbientWtCpl+\effKoszul" in theorem
+        assert r"d \in \{0, 1, \ldots, k-1\}" in theorem
+        assert r"\Sigma_k^{\mathrm{fld}}" in theorem
+        assert r"\label{eq:symmetric-scalar-t-proportionality}" in theorem
+
+    def test_no_field_signed_sum_used_as_scalar_shadow(self):
+        source = self._gravity_source()
+        assert r"S_k = \varphi_k(1)" not in source
+        assert r"P_k = 12 S_k / c" not in source
+
+    def test_graviton_tracelessness_uses_period2_field_polynomial(self):
+        source = self._gravity_source()
+        prop_start = source.index(
+            r"\begin{proposition}[Symmetric-point graviton tracelessness;"
+        )
+        prop_end = source.index(
+            r"\begin{theorem}[Scalar shadow resolvent on the Virasoro metric branch",
+            prop_start,
+        )
+        prop = source[prop_start:prop_end]
+
+        required = (
+            r"\ClaimStatusConditional",
+            r"\hypAmbientWtCpl+\effKoszul",
+            r"\sum_{j=0}^{k-1} a_j^{(k)}x^j",
+            r"\bigl[\partial^jT\bigr]",
+            r"Theorem~\ref{thm:period-2-parity}",
+            r"G_k(-h_T)=0",
+            r"h_T=2",
+            r"\prod_{m=2}^{k}(x+m)",
+            r"\(x+2\)",
+            r"the corresponding field polynomial has the Ward",
+        )
+        for needle in required:
+            assert needle in prop
+
+        retired = (
+            r"\sum_{j=0}^{k-2}",
+            "By induction on the Stasheff identity",
+            r"For a general chiral algebra with generator~$a$",
+            r"G_k^{(a)}(-h_a) = 0",
+        )
+        for needle in retired:
+            assert needle not in prop

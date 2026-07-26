@@ -636,7 +636,7 @@ def position_exclusion_argument(c, sigma_off):
       Off-line (sigma=0.7): forced zero at Re(s) = (0.7-0.5)/2 = 0.1 INCOMPATIBLE
         because epsilon^{1/2}_s = 8^s + 1 has NO zeros at Re(s) = 0.1.
 
-    For c = 13 (Virasoro self-dual):
+    For c = 13 (fixed point of the Virasoro line comparison):
       Critical line: Re(s) = 25/4 = 6.25
       On-line: forced zero at Re(s) = 6.25 COMPATIBLE
       Off-line (sigma=0.7): forced zero at Re(s) = (13-1+0.7)/2 = 6.35 INCOMPATIBLE

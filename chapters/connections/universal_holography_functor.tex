@@ -2,9 +2,10 @@
 %%
 %% Universal Holography Theorem.
 %%
-%% Canonical functor Phi_hol : ChirAlg^{omega,BL}_X -> HT-QFT_{X x R}
-%% out of boundary-linear chiral algebras with conformal vector, with
-%% Obs^{\partial}(T_A) ~ A and Obs^{bulk}(T_A) ~ Z^{der}_{ch}(A).
+%% Xi-decorated functor Phi_hol out of boundary-linear chiral
+%% algebras with conformal vector and a chosen HT realization datum,
+%% with boundary and bulk identifications carried by eta^partial and
+%% chi_HT.
 %%
 %% Class G/L/C live on the original chain complex. Class M is
 %% weight-completed / pro-ambient, with strict chain-level E_3 lift
@@ -73,36 +74,46 @@ on $(C, \R)$
 algebra $\bdyAlg = A_b = \mathrm{End}_{\openFactCat}(b)$ at chosen
 boundary vacuum $b$ produces the level-$\mathsf{C}$ projection.
 Adding a conformal vector $\omega \in A_b$ at non-critical level
-forces one holographic extension: the holomorphic-topological
-factorisation algebra on $X \times \R$ whose boundary observable
-algebra is $\bdyAlg$ and whose bulk observable algebra is the
-level-$\mathsf{Z}$ derived chiral centre
+and an HT realization datum
+\(\Xi(A_b,\omega,\mathrm{BL})\) gives the holographic extension:
+the datum supplies a holomorphic-topological factorisation algebra
+on $X \times \R$, a boundary comparison with $\bdyAlg$, and a
+bulk--Hochschild comparison from the level-$\mathsf{Z}$ derived
+chiral centre
 $\bulkOf{A_b} = \Zder(\bdyAlg) = \bulkChirHoch{A_b}$. The
-construction is the functor
+construction is the $\Xi$-decorated functor
 \[
  \Phihol
  \;\colon\;
- \ChirAlg^{\omega,\mathrm{BL,adm}}_X
+ \ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X
  \longrightarrow
- \HTQFT_{X \times \R},
+ \HTQFT^{\Xi}_{X \times \R},
 \]
 from the admissible boundary-linear category of chiral algebras with
-conformal vector on a smooth projective curve $X$ to the category of
-holomorphic-topological gauge theories on $X \times \R$. By
+conformal vector and realization datum on a smooth projective curve
+$X$ to the category of holomorphic-topological gauge theories on
+$X \times \R$ with specified comparison maps. By
 \cref{cor:universal-holography-via-bicoloured-universality}, $\Phihol$
 factors as
 $\Phi^{\mathrm{HT}}_{\mathrm{bic}} \circ \mathsf{Prim}^{\mathrm{bic}}$:
-Universal Holography is the universal stage chain made physical. The boundary
-observables of $\Phi_{\mathrm{hol}}(\cA)$ are~$\cA$; the bulk
-observables are~$\Zder(\cA)$, interpreted in the ambient in which the
-corresponding chain complex converges. Classes G, L, and C live on the
-ordinary chain complex. Class~M lives on the weight-completed
-pro-ambient; its underlying $E_2$-chiral / $\SCchtop$ comparison is
-chain-level, while the strict $E_3$ chain lift is taken under the
-explicit hypotheses stated in the chiral Higher Deligne chapter.
-The exact-sector Virasoro HT model underlying the proposed 3d quantum
-gravity discussion is the value of this functor at Virasoro. Monster
-moonshine is the value at the Leech orbifold.
+Universal Holography is the universal stage chain made physical only
+after the physical realization datum has been supplied. The boundary
+observables of $\Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)$
+are identified with~$\cA$ by
+\(\eta^\partial_\cA\); the bulk observables are identified with
+\(\Zder(\cA)\) by
+\(\chi_{\mathrm{HT},\cA}\) in the ambient in which the corresponding
+chain complex converges. Classes G, L, and C live on the ordinary
+chain complex. Class~M lives on the weight-completed pro-ambient; its
+underlying $E_2$-chiral / $\SCchtop$ comparison is chain-level under
+the declared hypotheses, while the strict $E_3$ chain lift is taken
+under the explicit hypotheses stated in the chiral Higher Deligne
+chapter. The exact-sector Virasoro HT model underlying the proposed
+3d quantum gravity discussion is the value of this functor at the
+Brown--Henneaux Virasoro datum
+\(\Xi_{\Vir_c}^{\mathrm{BH}}\). Monster moonshine is the value at the
+Leech orbifold only after the finite-orbifold BV realization datum is
+supplied.
 
 The class-M input is the DS-Hochschild compatibility bridge of
 Theorem~\ref*{thm:chd-ds-hochschild}
@@ -137,10 +148,11 @@ finite-orbifold BV descent have been supplied.
 \end{itemize}
 
 The chapter therefore has a fixed form: define the source and target
-categories, construct $\Phi_{\mathrm{hol}}$, prove the class-M
-compatibility in the correct ambient, and then specialise the functor
-to Virasoro, the Monster, the perturbative-finiteness split, and the
-boundary-linear reconstruction statements.
+categories, construct $\Phi_{\mathrm{hol}}$ on the $\Xi$-decorated
+source, prove the class-M compatibility in the correct ambient, and
+then specialise the functor to Virasoro, the Monster, the
+perturbative-finiteness split, and the boundary-linear reconstruction
+statements.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The two categories}
@@ -192,6 +204,45 @@ which the relevant generic or admissible Kazhdan--Lusztig / periodic-CDG
 exactness hypotheses used below are verified.
 \end{definition}
 
+\begin{definition}[Admissible holographic input]
+\label{def:uhf-xi-input}
+An \emph{admissible holographic input} is a tuple
+\[
+(\cA,\omega,T_\omega,\Xi_\cA)
+\]
+where $(\cA,\omega,T_\omega)$ lies in
+$\ChirAlg^{\omega,\mathrm{BL,adm}}_X$ and
+\(\Xi_\cA\) consists of:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item a Costello--Gwilliam HT BV/factorization model
+ $\cF_{\cA,\Xi}$ on $X\times\R$ with the chosen boundary condition;
+\item a boundary comparison quasi-isomorphism
+ \[
+ \eta^\partial_\cA\colon
+ \Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA
+ \]
+ of $E_1$-chiral factorisation algebras on $X$;
+\item a bulk--Hochschild comparison map in the declared ambient
+ \[
+ \chi_{\mathrm{HT},\cA}\colon
+ \Zder(\cA)\longrightarrow
+ \Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi});
+ \]
+\item the ambient category in which the displayed maps are asserted:
+ the ordinary chain complex for classes G/L/C and the
+ weight-completed/pro ambient for class~M, including
+ \(\hypAmbientWtCpl\), DS--Hochschild transport, cover descent for
+ fractional good gradings when present, and the two-coloured cobar
+ homotopy whenever a strict mixed chain-level refinement is claimed.
+\end{enumerate}
+Morphisms of admissible holographic inputs are conformal-vector
+preserving chiral algebra morphisms together with compatible maps of
+the HT models and the two comparison maps. The resulting category is
+\(\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X\). Thus
+\(\Phi_{\mathrm{hol}}\) below is not a bare functor from boundary
+algebras alone.
+\end{definition}
+
 \begin{remark}[Three worlds of chiral Hochschild]
 \label{rem:uhf-three-hochschilds}
 In the sequel $\ChirHoch^\bullet$ is always the \emph{chiral}
@@ -232,14 +283,22 @@ $X \times \R$ preserving the holomorphic-topological split and the
 boundary data. The category $\HTQFT_{X \times \R}$ is the
 $\infty$-category of such objects.
 
+The $\Xi$-decorated target
+\(\HTQFT^\Xi_{X \times \R}\) is the category whose objects are
+HT-QFTs together with the boundary comparison
+\(\eta^\partial\), the bulk--Hochschild comparison
+\(\chi_{\mathrm{HT}}\), and the ambient declaration carried by
+\(\Xi\); morphisms preserve these data.
+
 For $\cF \in \HTQFT_{X \times \R}$ we write $\Obs^\partial(\cF)$ for
 the boundary factorization algebra (chiral on $X$) and
 $\Obs^{\mathrm{bulk}}(\cF)$ for the bulk factorization algebra
-(HT on $X \times \R$); after restricting to local operators and
-taking $\R$-global sections the latter is an $E_3$-topological
-algebra (Costello-Gwilliam Vol.~I, ch.~5, factorization-to-$E_n$
-equivalence via Dunn additivity applied to the holomorphic and
-topological directions).
+(HT on $X \times \R$). Before topologisation the local operator
+object is $\SCchtop$-valued: the $X$-direction is holomorphic and
+the $\R$-direction is topological. After a BRST topologisation of
+the holomorphic translations has been chosen, Dunn additivity applies
+to the resulting topological factors and gives an
+$E_3^{\mathrm{top}}$ algebra.
 \end{definition}
 
 \begin{remark}[$E_3$-topological, not $E_3$-chiral on the bulk]
@@ -277,42 +336,53 @@ present functor.
 \label{sec:uhf-functor}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{theorem}[Universal holography functor;
-\ClaimStatusProvedHere; ambient-qualified on the chosen HT
-prefactorization and Koszul exact loci at generic level]
+\begin{theorem}[Universal holography functor on the
+\(\Xi\)-decorated source; \ClaimStatusProvedHere on supplied
+realization data; \ClaimStatusConditional on existence of
+\(\Xi\); licensing tags \(\alpha+\beta+\gamma+\delta\)]
 \label{thm:universal-holography-functor}
-On the chosen HT prefactorization realizations satisfying the
-physics-bridge hypotheses, factorized parametrix, one-loop finiteness,
-and boundary-linear exactness assumptions, there exists a functor
+On admissible holographic inputs satisfying the physics-bridge
+hypotheses, factorized parametrix, one-loop finiteness,
+bulk--Hochschild comparison, and boundary-linear exactness
+assumptions, there exists a functor
 \[
  \Phi_{\mathrm{hol}}
  \;\colon\;
- \ChirAlg^{\omega,\mathrm{BL,adm}}_X
+ \ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X
  \longrightarrow
- \HTQFT_{X \times \R}
+ \HTQFT^{\Xi}_{X \times \R}
 \]
-characterised by the following four properties. For classes G, L, and
-C the chain-level statements are taken on the ordinary chain complex.
-For class~M they are taken in the weight-completed / pro ambient; the
-underlying $E_2$-chiral and $\SCchtop$ identifications are
- \ClaimStatusProvedHere, while the strict class-M $E_3$-topological
- chain lift is the proved hypothesis-bound lift of
- Theorem~\ref*{thm:chiral-higher-deligne}(2).
+characterised by the following four properties. The functor is not
+defined from \(\cA\) alone: an object is
+\((\cA,\omega,T_\omega,\Xi_\cA)\), and the physical HT model,
+boundary comparison, bulk--Hochschild comparison, and ambient are
+part of \(\Xi_\cA\). For classes G, L, and C the chain-level
+statements are taken on the ordinary chain complex. For class~M they
+are taken in the weight-completed / pro ambient; the underlying
+$E_2$-chiral and $\SCchtop$ identifications are
+\ClaimStatusProvedHere on the supplied comparison surface, while the
+strict class-M $E_3$-topological chain lift is the
+hypothesis-bound lift of
+Theorem~\ref*{thm:chiral-higher-deligne}(2).
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item \textbf{Boundary restriction.} For every
- $(\cA, \omega, T_\omega) \in \ChirAlg^{\omega,\mathrm{BL,adm}}_X$ the
- factorization algebra $\cF_\cA := \Phi_{\mathrm{hol}}(\cA)$
+ \((\cA,\omega,T_\omega,\Xi_\cA) \in
+ \ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X\) the factorization algebra
+ \(\cF_{\cA,\Xi}:=\Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)\)
  satisfies
  \[
- \Obs^\partial(\cF_\cA) \;\simeq\; \cA
+ \eta^\partial_\cA\colon
+ \Obs^\partial(\cF_{\cA,\Xi}) \;\xrightarrow{\simeq}\; \cA
  \]
  as $E_1$-chiral algebras on $X$.
 \item \textbf{Bulk identification under the exact comparison.}
  \[
- \Obs^{\mathrm{bulk}}(\cF_\cA) \;\simeq\; \Zder(\cA)
+ \chi_{\mathrm{HT},\cA}\colon
+ \Zder(\cA) \;\xrightarrow{\simeq}\;
+ \Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi})
  \]
- as HT factorization algebras on $X \times \R$ on the scoped
- exact-sector comparison surface. After the Sugawara
+ is the bulk--Hochschild equivalence in the declared ambient on the
+ scoped exact-sector comparison surface. After the Sugawara
  topologization of Vol~I~\ref*{V1-thm:topologization-tower}, this is
 	 an $E_3$-topological identification on the ordinary complex for
 	 classes G/L/C, and on the class-M weight-completed ambient; the
@@ -320,43 +390,47 @@ underlying $E_2$-chiral and $\SCchtop$ identifications are
 	 hypotheses stated above.
 \item \textbf{DS-functoriality.} For every good $\Z$-grading
  $\Gamma$ on a simple Lie algebra $\fg$ with nilpotent $f$ of
- principal or hook-type, the square
+ principal or hook-type, and for \(\Xi\)-data commuting with
+ Drinfeld--Sokolov reduction, the square
  \[
  \begin{array}{c}
- \ChirAlg^{\omega,\mathrm{BL,adm}}_X(V_k(\fg))
+ \ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X(V_k(\fg))
  \;\xrightarrow{\;\DS_f\;}\;
- \ChirAlg^{\omega,\mathrm{BL,adm}}_X(\cW_k(\fg, f))
+ \ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X(\cW_k(\fg, f))
  \\
  {\scriptstyle \Phi_{\mathrm{hol}}} \downarrow \qquad\qquad\qquad\qquad
  \downarrow {\scriptstyle \Phi_{\mathrm{hol}}}
  \\
- \HTQFT_{X \times \R}(T_{V_k(\fg)})
+ \HTQFT^\Xi_{X \times \R}(T_{V_k(\fg),\Xi})
  \;\xrightarrow{\;\DS_f^{\mathrm{bulk}}\;}\;
- \HTQFT_{X \times \R}(T_{\cW_k(\fg,f)})
+ \HTQFT^\Xi_{X \times \R}(T_{\cW_k(\fg,f),\Xi})
  \end{array}
  \]
  commutes up to a natural isomorphism of functors, compatible with
  the DS-Hochschild bridge of Theorem~\ref*{thm:chd-ds-hochschild}.
 \item \textbf{Class coverage (Koszul locus, generic level).}
- $\Phi_{\mathrm{hol}}$ is defined chain-level over all four
- shadow classes:
+ $\Phi_{\mathrm{hol}}$ is defined chain-level over all four shadow
+ classes when the corresponding \(\Xi\)-data are supplied:
  \begin{itemize}[leftmargin=1.2em]
  \item Class~G (Heisenberg / lattice): Costello-Li abelian
- holomorphic Chern-Simons with abelian boundary, Sugawara tower
- immediate;
+ holomorphic Chern-Simons with abelian boundary and its
+ bulk--Hochschild comparison, Sugawara tower immediate;
  \item Class~L (affine $\hat\fg$, $k \neq -h^\vee$):
  Costello-Gaiotto holomorphic Chern-Simons on $X \times \R$ with
- gauge group~$G$; Sugawara at non-critical level;
+ gauge group~$G$, boundary comparison, and affine
+ bulk--Hochschild comparison; Sugawara at non-critical level;
  \item Class~C ($\beta\gamma$, $bc$): Friedan-Martinec-Shenker
- bosonisation reduces to class~G; Sugawara inherited;
+ bosonisation reduces the comparison datum to class~G; Sugawara
+ inherited;
  \item Class~M (Virasoro, $\cW_N$, hook-type $\cW_k(\fg, f)$):
  Costello-Gaiotto holomorphic Chern-Simons with
  Drinfeld-Sokolov boundary condition; class~M bulk identification
- in the weight-completed ambient via the DS-Hochschild bridge
- (Theorem~\ref*{thm:chd-ds-hochschild}) lifting the
- class~L identification through DS reduction. On the bounded
- direct-sum complex the class-M chain-level $E_3$ identification is
- false by the MC5 obstruction; it is not part of this theorem.
+ in the weight-completed ambient via
+ \(\hypAmbientWtCpl\), the DS-Hochschild bridge
+ (Theorem~\ref*{thm:chd-ds-hochschild}), and the HT
+ bulk--Hochschild comparison map. On the bounded direct-sum complex
+ the class-M chain-level $E_3$ identification is false by the MC5
+ obstruction; it is not part of this theorem.
  \end{itemize}
 \end{enumerate}
 \end{theorem}
@@ -365,71 +439,75 @@ underlying $E_2$-chiral and $\SCchtop$ identifications are
 Four structural moves: construction, boundary face, bulk face,
 class-M ambient.
 
-\emph{Move 1: Construction of $\Phi_{\mathrm{hol}}$.}
-Start with $(\cA, \omega, T_\omega) \in
-\ChirAlg^{\omega,\mathrm{BL,adm}}_X$. The Costello-Gwilliam
-factorisation envelope of~$\cA$ along the holomorphic direction
-$X$ produces a factorisation algebra
-$\cF_\cA^{\mathrm{hol}}$ on~$X$ (Costello-Gwilliam Vol.~II,
-Theorem~3.6.1: vertex algebras give rise to holomorphic
-factorisation algebras). Extend~$\cF_\cA^{\mathrm{hol}}$ along
-the topological $\R$-direction by taking the Hochschild cochain
-factorisation algebra
-$\cH(\cA) := \cF_{\Obs^{\mathrm{Hoch}}_\cA}$ whose $E_1^{\mathrm{top}}$
-product in the $\R$-direction is convolution of chiral
-endomorphisms. Dunn additivity along $\R$ then gives a factorisation
-algebra on~$X \times \R$. Define
+\emph{Move 1: Construction of $\Phi_{\mathrm{hol}}$ on the
+\(\Xi\)-source.}
+Start with
+\((\cA,\omega,T_\omega,\Xi_\cA)\in
+\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X\). By
+Definition~\ref{def:uhf-xi-input}, \(\Xi_\cA\) contains a
+Costello--Gwilliam HT BV/factorization model
+\(\cF_{\cA,\Xi}\) on \(X\times\R\), a boundary comparison
+\(\eta^\partial_\cA\), a bulk--Hochschild comparison
+\(\chi_{\mathrm{HT},\cA}\), and the ambient declaration. Define
 \[
- \cF_\cA := \cF_\cA^{\mathrm{hol}}
- \otimes_{\mathrm{Dunn}}
- \cH(\cA) \;\in\; \HTQFT_{X \times \R}.
+ \Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)
+ := \cF_{\cA,\Xi}.
 \]
-The $X$-direction is holomorphic because $\cA$ is; the
-$\R$-direction is topological because $\cH(\cA)$ is constant along
-it; the boundary data are the two endpoints of~$\R$, each carrying
-$\cA$ itself as the chiral boundary observable.
-Functoriality in morphisms $f \colon \cA \to \cB$ follows from
-functoriality of both the Costello-Gwilliam envelope and the
-Hochschild-cochain construction.
+A morphism in
+\(\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X\) is, by definition, a
+chiral-algebra morphism together with a compatible map of the HT
+models and of the two comparison maps; applying the HT-model map
+defines \(\Phi_{\mathrm{hol}}\) on morphisms. Composition and units are
+inherited from the \(\infty\)-category of HT factorization algebras.
+
+The Costello-Gwilliam factorisation envelope of~\(\cA\) along the
+holomorphic direction \(X\) remains load-bearing: it supplies the
+holomorphic boundary face (Costello-Gwilliam Vol.~II, Theorem~3.6.1:
+vertex algebras give rise to holomorphic factorisation algebras).
+The Hochschild cochain factorisation algebra supplies the algebraic
+candidate
+\(\ChirHoch^\bullet(\cA,\cA)=\Zder(\cA)\). These two algebraic
+constructions do not, by themselves, construct the physical
+three-dimensional HT bulk from \(\cA\) alone; the physical
+identification is exactly the datum
+\(\chi_{\mathrm{HT},\cA}\).
 
 \emph{Move 2: Boundary face.}
-Restriction to one of the two $\R$-endpoints collapses the
-$E_1^{\mathrm{top}}$-factor and leaves the holomorphic
-factorisation algebra of $\cA$ in its native form on~$X$. By the
-vertex-algebra / factorisation-algebra equivalence
-(Costello-Gwilliam~Vol.~II, Thm.~3.6.1) this is~$\cA$ itself:
-$\Obs^\partial(\cF_\cA) \simeq \cA$ as $E_1$-chiral algebras.
+The boundary restriction of \(\cF_{\cA,\Xi}\) is identified with
+\(\cA\) by the supplied quasi-isomorphism
+\[
+ \eta^\partial_\cA\colon
+ \Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA .
+\]
+This is a statement in \(E_1\)-chiral factorisation algebras on \(X\).
+The Costello-Gwilliam vertex-algebra / factorisation-algebra
+equivalence verifies the algebraic boundary model; \(\eta^\partial\)
+records its embedding as the chosen boundary face of the HT theory.
 
 \emph{Move 3: Bulk face.}
-The bulk factorisation algebra of $\cF_\cA$ is modeled by the
-local-operators algebra on $X \times \R$, which on the scoped
-prefactorization comparison surface is
+The chiral Hochschild complex computes the derived chiral centre
 \[
- \Obs^{\mathrm{bulk}}(\cF_\cA)
- \;\simeq\;
- \cH(\cA)
- \;\simeq\;
  \ChirHoch^\bullet(\cA, \cA)
  \;=\;
- \Zder(\cA)
+ \Zder(\cA).
 \]
-as factorisation algebras. At cohomology, Dunn additivity plus
-topologization (Vol~I~\ref*{V1-thm:topologization-tower}) promote
-this to an $E_3$-topological algebra: the two holomorphic
-directions of~$\cH(\cA)$ collapse under Sugawara to
-$E_2^{\mathrm{top}}$, and the $\R$-direction supplies the third
-$E_1^{\mathrm{top}}$-factor, assembling to $E_3$-topological by
-Dunn additivity. For classes G, L, C this is on the direct-sum
-complex; for class~M the promotion is on the weight-completed
-complex, and the chain-level identification is supplied by
-Move~4.
+The statement that this algebraic centre is the local bulk observables
+of the chosen HT theory is the comparison map
+\[
+ \chi_{\mathrm{HT},\cA}\colon
+ \Zder(\cA)\xrightarrow{\simeq}
+ \Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi})
+\]
+in the ambient carried by \(\Xi_\cA\). After Sugawara
+topologization (Vol~I~\ref*{V1-thm:topologization-tower}), Dunn
+additivity applies to the topologized factors and gives the
+$E_3^{\mathrm{top}}$ structure. For classes G, L, C this is on the
+direct-sum complex; for class~M it is a weight-completed statement,
+and the algebraic class-M input is Move~4.
 
 \emph{Move 4: Class-M ambient via DS-Hochschild.}
-For class~M the chain-level identification
-$\Obs^{\mathrm{bulk}}(\cF_{\cW_k(\fg,f)}) \simeq \Zder(\cW_k(\fg,f))$
-is a weight-completed statement. The DS-Hochschild bridge
-Theorem~\ref*{thm:chd-ds-hochschild} provides a chain-level
-quasi-isomorphism
+For class~M, Theorem~\ref*{thm:chd-ds-hochschild} provides the
+algebraic Hochschild comparison in the weight-completed ambient:
 \[
  \ChirHoch^\bullet(\cW_k(\fg, f))
  \;\xrightarrow{\;\sim\;}\;
@@ -437,42 +515,40 @@ quasi-isomorphism
 \]
 as $E_2$-chiral Gerstenhaber algebras (lifted to $E_3$ via
 Theorem~\ref*{thm:chiral-higher-deligne}, under that theorem's
-explicit chain-level hypotheses for the strict $E_3$ lift). The
-right-hand side is the DS-image of the class-L chain-level bulk,
-which in turn is the Costello-Gaiotto bulk of holomorphic Chern-Simons
-(Costello-Gaiotto 2018~\cite{CostelloGaiotto2018},
-2021~\cite{CostelloGaiotto2021}) via the boundary-linear class-L bulk
-identification of Theorem~\ref*{thm:global-triangle-boundary-linear}.
-DS applied to the
-Costello-Gaiotto bulk is, by the Koszul duality of reduction and
-factorization homology (Gaiotto-Witten, Sugawara-type reduction of
-the bulk), the Costello-Gaiotto bulk of the $\cW$-theory. The
-chain-level equalities at each step compose to chain-level equality
-of class~M centres and class~M bulk in the weight-completed ambient.
-This closes Move~3 for the underlying HT / $E_2$-chiral structure and
-for cohomological $E_3$; the strict chain-level $E_3$ class-M lift is
-exactly the hypothesis-bound clause recorded in the theorem statement.
+explicit chain-level hypotheses for the strict $E_3$ lift). This
+controls the derived-centre side. The HT-bulk side is compared to it
+only through \(\chi_{\mathrm{HT},\cW}\) in the class-M realization
+datum. If the class-L datum \(\Xi_{V_k(\fg)}\) and the class-M datum
+\(\Xi_{\cW_k(\fg,f)}\) commute with Drinfeld--Sokolov reduction, then
+the DS-Hochschild bridge identifies the algebraic sides and the
+compatibility of the two \(\chi_{\mathrm{HT}}\)-maps identifies the HT
+bulk sides. This proves DS-functoriality on the supplied
+\(\Xi\)-surface. It does not assert a direct-sum class-M equality; the
+bounded direct-sum obstruction remains outside the theorem.
 
-Functoriality in DS is Theorem~\ref*{thm:chd-ds-hochschild}
-itself, lifted from observables to HT-gauge theories by the same
-Dunn-topologization chain. Class coverage in (iv) then follows
-from the four class-by-class inputs cited, all assembled through
-the same functorial machine.
+Class coverage in (iv) is the list of available realization data:
+Costello-Li for class~G, Costello-Gaiotto for class~L, FMS
+bosonisation reducing class~C to class~G, and the
+\(\hypAmbientWtCpl\) DS-Hochschild plus HT comparison package for
+class~M.
 \end{proof}
 
 \begin{remark}[Scope discipline]
 \label{rem:uhf-scope}
-The functor is defined on $\ChirAlg^{\omega,\mathrm{BL,adm}}_X$: the
-\emph{conformal vector} and \emph{boundary-linear} hypotheses are
-essential, and the admissible/generic exactness hypotheses supply the
-Koszul comparison surface. Without conformal vector the bulk stays
+The functor is defined on
+$\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X$: the \emph{conformal
+vector}, \emph{boundary-linear} hypothesis, and \emph{HT realization
+datum} are essential, and the admissible/generic exactness hypotheses
+supply the Koszul comparison surface. Without conformal vector the bulk stays
 $\SCchtop$-topological (not $E_3^{\mathrm{top}}$; the topologization
 condition fails outside the Koszul locus). Without boundary-linearity
 the global triangle bulk $\to$ boundary $\to$ lines $\to$ bulk is not
-closed at chain level in this non-boundary-linear regime. At the critical
-level $k = -h^\vee$ the Sugawara denominator diverges and the
-functor is undefined on~$V_{-h^\vee}(\fg)$; this is a genuine
-restriction of the theorem, not a gap.
+closed at chain level in this non-boundary-linear regime. Without
+\(\Xi\) this chapter has only the algebraic centre candidate
+\(\Zder(\cA)\), not a constructed physical HT bulk. At the critical
+level $k = -h^\vee$ the coefficient in the generic Sugawara tensor has
+a pole, and no Sugawara conformal vector is defined on
+$V_{-h^\vee}(\fg)$; this is a genuine restriction of the theorem.
 \end{remark}
 
 \begin{remark}[Associator disclosure]
@@ -494,34 +570,38 @@ $\mathrm{GRT}_1(\Q)$ is tangent to the $c$-direction.
 \label{sec:uhf-ds-bridge}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{proposition}[DS-Hochschild chain-level compatibility;
-$E_2$ \ClaimStatusProvedElsewhere, strict $E_3$ lift
-\ClaimStatusProvedHere under the hypotheses of \textup{(}%
-Chapter~\ref*{ch:chiral-higher-deligne},
-Theorem~\ref*{thm:chd-ds-hochschild}\textup{)}]
+\begin{proposition}[DS-Hochschild compatibility under completed
+bar-coderivation transfer; \ClaimStatusProvedHere{} under the completed SDR/HPL hypotheses]
 \label{prop:uhf-ds-hochschild-bridge}
 Let $\fg$ be simple, $f$ a principal or hook-type nilpotent, and
-$k \neq -h^\vee$. Then at chain level there is a quasi-isomorphism
+$k \neq -h^\vee$.  Suppose the completed DS bar-coalgebra SDR on
+reduced chiral bar coalgebras, the induced transfer on
+\(\Coder_0(B^{\mathrm{ch}}(-))\), the smooth
+chiral-HKR/derived-vacuum comparison, and the bounded-shift HPL
+convergence estimates of
+Theorem~\ref*{thm:chd-ds-hochschild} hold. Then at chain level there is
+a quasi-isomorphism
 \[
  \DS^\bullet \;\colon\;
  \ChirHoch^\bullet(\cW_k(\fg, f))
  \;\xrightarrow{\;\sim\;}\;
  H^\bullet_{\DS}\bigl(\ChirHoch^\bullet(V_k(\fg))\bigr)
 \]
-of $E_2$-chiral Gerstenhaber algebras. The strict $E_3$-chiral lift
-is the hypothesis-bound chain-level lift of
+of $E_2$-chiral Gerstenhaber algebras. The strict $E_3$-chiral lift is
+the hypothesis-bound chain-level lift of
 Theorem~\ref*{thm:chiral-higher-deligne}(2); cohomologically the lift
-is proved without the strict-chain enhancement hypotheses.
+is proved only on the same stated comparison surface.
 \end{proposition}
 
 \begin{remark}[DS bridge as chain-level engine]
 \label{rem:uhf-ds-role}
 Proposition~\ref{prop:uhf-ds-hochschild-bridge} is the chain-level
 engine powering Move~4 of
-Theorem~\ref{thm:universal-holography-functor}. It is proved by
-HPL transfer through the de Boer-Tjin DS strong deformation
-retract, leveraging Arakawa $C_2$-cofiniteness and chiral HKR.
-The three ingredients are independent of the Costello-Gwilliam
+Theorem~\ref{thm:universal-holography-functor}. It is proved by the
+completed DS bar-coalgebra SDR, the induced coderivation transfer on
+\(\Coder_0(B^{\mathrm{ch}}(-))\), the smooth
+chiral-HKR/derived-vacuum package, and bounded-shift HPL convergence.
+These ingredients are independent of the Costello-Gwilliam
 factorisation machine used to construct $\Phi_{\mathrm{hol}}$, so the
 cross-cite is not circular.
 \end{remark}
@@ -558,9 +638,14 @@ $\alpha_{\mathrm{orb}}(\sigma,\sigma,\sigma)=+1$ for a normalized
 multiplicative representative, and suppose finite-orbifold BV descent
 applies to the Leech HT model. Then the orbifold chiral algebra
 $V^\natural = (V_\Lambda / \langle \sigma \rangle)^+$ lies in the
-conditional image of $\Phi_{\mathrm{hol}}$; under these hypotheses
-$\Phi_{\mathrm{hol}}(V^\natural)$ is a well-defined HT-QFT on
-$X \times \R$ for every curve $X$.
+conditional image of $\Phi_{\mathrm{hol}}$ after finite-orbifold
+descent supplies a realization datum \(\Xi_{V^\natural}^{\mathrm{orb}}\);
+under these hypotheses
+\[
+\Phi_{\mathrm{hol}}(V^\natural,\omega_{V^\natural},
+T_{V^\natural},\Xi_{V^\natural}^{\mathrm{orb}})
+\]
+is a well-defined HT-QFT on $X \times \R$ for every curve $X$.
 \end{theorem}
 
 \begin{proof}
@@ -606,8 +691,9 @@ the Monster inside the functor only under the special Leech $\Z/2$
 finite-orbifold descent hypotheses. It is reached from the class-G
 Leech lattice model, not from a generic class-$M$ original-complex
 upgrade. The Monster CFT is in the conditional image of
-$\Phi_{\mathrm{hol}}$ after the local BV anomaly datum and
-finite-orbifold BV descent are supplied.
+$\Phi_{\mathrm{hol}}$ after the local BV anomaly datum,
+finite-orbifold BV descent, and the resulting
+\(\Xi_{V^\natural}^{\mathrm{orb}}\) comparison datum are supplied.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -623,12 +709,15 @@ $\Phi_{\mathrm{hol}}$.
 \begin{theorem}[Algebraic / physical UV finiteness split;
 \ClaimStatusProvedHere]
 \label{thm:uhf-perturbative-finiteness-split}
-Let $\cA \in \ChirAlg^{\omega,\mathrm{BL,adm}}_X$ be modular Koszul
+Let
+\((\cA,\omega,T_\omega,\Xi_\cA)\in
+\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X\), and suppose that
+\(\cA\) is modular Koszul
 (equivalently: $\Theta_\cA \in \MC(\mathfrak{g}^{\mathrm{mod}}_\cA)$
 exists and the shadow obstruction tower is Mittag-Leffler; cf.\
 Vol~I~\ref*{V1-thm:mc2-bar-intrinsic}). Then
-$\Phi_{\mathrm{hol}}(\cA)$ satisfies two distinct finiteness
-properties:
+\(\Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)\) satisfies two
+distinct finiteness properties:
 \begin{enumerate}[label=\textup{(\Roman*)}]
 \item \textbf{Algebraic shadow-tower finiteness.} For every
  genus~$g$ and every $n$, the shadow amplitude
@@ -640,7 +729,7 @@ properties:
 \item \textbf{Physical Costello RG UV finiteness.} For chosen HT
  prefactorization realizations with factorized parametrix and
  one-loop finiteness, the factorisation
- algebra $\Obs^{\mathrm{bulk}}(\cF_\cA)$ admits a Costello-RG
+ algebra $\Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi})$ admits a Costello-RG
 	 renormalisation group flow with a finite UV limit at chain
 	 level on classes G/L/C and in the weight-completed HT ambient for
 	 class~M. \textup{(}The strict class-M $E_3$-topological chain model
@@ -671,12 +760,14 @@ regularisation. (a) for class~M on the direct-sum complex is
 \emph{false} (genuine MC5 failure at class~M, Vol~I~\ref*{V1-thm:completed-bar-cobar-strong}).
 On the weight-completed complex, (a) is supplied by
 Theorem~\ref*{thm:chd-ds-hochschild}: the DS-Hochschild bridge
-produces a chain-level $E_2$-chiral / HT identification of
+produces a chain-level $E_2$-chiral identification of
 $\Zder(\cW_k(\fg, f))$ with the DS cohomology of
-$\Zder(V_k(\fg))$, which by Costello-Li / Costello-Gaiotto is
-	Costello-Renormalisable. The strict class-M $E_3$ chain enhancement
-	is the hypothesis-bound lift recorded in
-	Theorem~\ref{thm:universal-holography-functor}; the cohomological
+$\Zder(V_k(\fg))$. The chosen \(\Xi\)-datum supplies the comparison
+from this algebraic centre to the HT bulk factorisation algebra,
+which is Costello-Renormalisable by the Costello-Li /
+Costello-Gaiotto model. The strict class-M $E_3$ chain enhancement is
+the hypothesis-bound lift recorded in
+Theorem~\ref{thm:universal-holography-functor}; the cohomological
 $E_3$ statement is unconditional. (b) is the standard Costello
 machinery: RG flow descends from class~L to class~M via the DS retract,
 with heat-kernel regularisation compatible with the weight-completed
@@ -709,40 +800,40 @@ invocations of the DS-Hochschild bridge
 (Proposition~\ref{prop:uhf-ds-hochschild-bridge}). Each
 consequence is recorded with its ambient.
 
-\begin{proposition}[Koszul-triangle bulk is a projection;
-\ClaimStatusProvedHere]
+\begin{proposition}[Virasoro bounded support and the central-parameter
+projection; \ClaimStatusConditional]
 \label{prop:uhf-koszul-triangle-projection}
-The identification $\Zder(\mathrm{Vir}_c) \simeq \C[\![c]\!]$ of
-Theorem~\ref*{thm:gravity-koszul-triangle}(iii) is the
-projection onto the $\HH^0$-augmentation of the derived chiral centre
-produced by
-Theorem~\ref{thm:universal-holography-functor} at
-$\cA = \mathrm{Vir}_c$. Precisely,
-$\C[\![c]\!] = \HH^0_{\mathrm{conn}}(\mathrm{Vir}_c, \mathrm{Vir}_c)$
-is the connective classical shadow of the two-term derived centre
-$\HH^0 \oplus \HH^2[-2]$ with deformation class
-$\Theta_c \in \HH^2$; the derived equivalence is with the
-\emph{pair} $(\HH^0, \HH^2)$ and its $E_3$-bracket, not with the
-naive sum.
+Let
+\[
+ \chi_{\operatorname{Vir}_c}^{\mathrm{bd}}\colon
+ C^\bullet_{\mathrm{ch},b}(\operatorname{Vir}_c)
+ \longrightarrow C^\bullet_{\mathrm{ch}}(\operatorname{Vir}_c)
+\]
+be a bounded-to-chart quasi-isomorphism.  Then the chart cohomology
+is one-dimensional in degrees~$0,2,3$ and vanishes in every other
+degree.  The formal algebra $\C[\![c]\!]$ records variation of the
+central charge in the Virasoro family.  Its use as a classical
+observable of the derived centre is specified by an additional map
+\[
+ \pi_c\colon
+ \Zder^{\mathrm{ch}}(\operatorname{Vir}_c)
+ \longrightarrow \C[\![c]\!]
+\]
+inside the Brown--Henneaux realization datum
+\(\Xi_{\operatorname{Vir}_c}^{\mathrm{BH}}\).  Thus the derived
+centre, the family parameter algebra, and their comparison are three
+separately typed objects.
 \end{proposition}
 
 \begin{proof}
-ChirHoch of Virasoro is concentrated in $\{0,1,2\}$
-(Vol~I~Theorem~H), with $\HH^0(\mathrm{Vir}_c) = \C$,
-$\HH^1(\mathrm{Vir}_c) = 0$, $\HH^2(\mathrm{Vir}_c) =
-\C \cdot \Theta_c$. At derived-centre level the structure is the full
-two-term chain complex with its $L_\infty$-shifted bracket, not the
-	direct sum; its strict class-M $E_3$ chain enhancement has the
-	hypotheses stated in
-	Theorem~\ref{thm:universal-holography-functor}. The scalar quotient
-$\Zder(\mathrm{Vir}_c)_{\mathrm{conn}} = \C[\![c]\!]$ is the
-coordinate ring of the formal deformation space of $\mathrm{Vir}_c$
-controlled by $\Theta_c$; this is the correct saddle-point
-reading, but it is not a derived equivalence. The functor
-$\Phi_{\mathrm{hol}}$ records the derived datum and its saddle;
-the projection to $\C[\![c]\!]$ corresponds to the observable
-cosmological-constant parameter of 3d pure gravity and is only the
-tip of the bulk.
+Bakalov--De Sole--Kac \cite{BDSK21} compute
+\(H^n_{\mathrm{ch},b}(\operatorname{Vir}_c)\) as a one-dimensional
+space for \(n\in\{0,2,3\}\), with all remaining groups equal to the
+zero space \cite[Theorems~7.4 and~7.2]{BDSK21}.  The map
+\(\chi_{\operatorname{Vir}_c}^{\mathrm{bd}}\) transports this
+calculation to the curve chart.  The parameter algebra and
+\(\pi_c\) belong to the separately declared realization datum, so
+the final assertion follows from their type signatures.
 \end{proof}
 
 \begin{proposition}[Global triangle boundary-linear label;
@@ -754,27 +845,36 @@ quasi-isomorphism,
 (Theorem~\ref{thm:global-triangle-boundary-linear}) is the
 $E_1$-chiral $\Leftrightarrow$
 $E_3$-topological correspondence on the boundary-linear sector,
-supplied chain-level by
+supplied by the boundary comparison \(\eta^\partial_\cA\) and
+bulk--Hochschild comparison \(\chi_{\mathrm{HT},\cA}\) in
 Theorem~\ref{thm:universal-holography-functor}(i)+(ii). The
 chain-level datum is present on the ordinary complex for G/L/C and in
 the weight-completed ambient for class~M; the $\HH^\bullet$ qualifier
 is chiral, and the class~M bridge is explicit via
-Proposition~\ref{prop:uhf-ds-hochschild-bridge}.
+Proposition~\ref{prop:uhf-ds-hochschild-bridge} plus the
+\(\Xi\)-realized HT comparison.
 \end{proposition}
 
 \begin{proof}
-Theorem~\ref{thm:universal-holography-functor}(i)+(ii) at chain
-level provides the boundary-to-bulk half-arrow via the
-Costello-Gwilliam factorisation algebra structure; the reverse
-half-arrow (bulk-to-boundary) is the
-$\Obs^{\mathrm{bulk}}(\cF_\cA) \to \Obs^\partial(\cF_\cA)$
-restriction which on observables is the canonical augmentation
-$\Zder(\cA) \to \cA$ landing on the connective part. The two
-half-arrows compose to identity (on boundary) and to the
-$E_3$-centre projection (on bulk); chain-level identity follows
-from the Dunn-additivity construction in Move~1 of
-Theorem~\ref{thm:universal-holography-functor}, with class~M read in
-the weight-completed ambient.
+Theorem~\ref{thm:universal-holography-functor}(i)+(ii) provides the
+two maps
+\[
+ \eta^\partial_\cA\colon
+ \Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA,
+ \qquad
+ \chi_{\mathrm{HT},\cA}\colon
+ \Zder(\cA)\xrightarrow{\simeq}
+ \Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi}).
+\]
+The bulk-to-boundary half-arrow is therefore the HT restriction map
+on \(\cF_{\cA,\Xi}\), transported through
+\(\eta^\partial_\cA\) and \(\chi_{\mathrm{HT},\cA}\); algebraically it
+is the canonical centre-to-module augmentation
+\(\Zder(\cA)\to\cA\) on the connective part. The two half-arrows
+compose to identity on the boundary datum and to the \(E_3\)-centre
+projection on the bulk datum in the declared ambient. For class~M this
+is read in the weight-completed ambient and uses
+Corollary~\ref*{cor:universal-holography-class-M}.
 \end{proof}
 
 \begin{proposition}[Shadow vs.\ holographic reconstruction split;
@@ -787,31 +887,46 @@ two:
 \item \textbf{Shadow reconstruction} \textup{(}formal, all
  classes\textup{)}: $\cA$ is determined by its shadow-MC tower
  $\Theta_\cA^{\leq r}$ via the extension-tower dichotomy
- theorem. Unconditional for all G/L/C/M.
+ theorem, in the modular Koszul, complete filtered, bar-intrinsic
+ gauge-slice ambient. For classes G/L/C the required packet is finite;
+ for class~M it is the completed inverse-limit packet.
 \item \textbf{Holographic reconstruction} \textup{(}chain-level,
- derived centre $=$ bulk\textup{)}: under exact-sector full-faithfulness
- and the center comparison, $\cA$ is recovered from the
- bulk-boundary pair
+ derived centre realized as bulk by \(\chi_{\mathrm{HT}}\)\textup{)}:
+ under exact-sector full-faithfulness and the center comparison,
+ $\cA$ is recovered from the $\Xi$-realized bulk-boundary pair
  \[
- \bigl(\Zder(\cA),\rho\colon\Zder(\cA)\to\cA,\epsilon,\Pi\bigr),
+ \bigl(
+ \Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi}),
+ \chi_{\mathrm{HT},\cA},
+ \eta^\partial_\cA,\rho,\epsilon,\Pi
+ \bigr),
  \]
  not from the centre alone. On the Koszul locus at generic level this is
  chain-level on the ordinary complex for G/L/C and in the
  weight-completed ambient for class~M \textup{(}via
- Theorem~\ref*{thm:chd-ds-hochschild}\textup{)}.
+ Theorem~\ref*{thm:chd-ds-hochschild} and
+ \(\chi_{\mathrm{HT},\cA}\)\textup{)}.
 \end{itemize}
 \end{proposition}
 
 \begin{proof}
-The shadow statement is the combinatorial dichotomy
-(Proposition~\ref*{prop:uhf-shadow-vs-holographic}) and is
-independent of chain-level / $E_3$ questions. The holographic
+The shadow statement is the formal reconstruction theorem
+Theorem~\ref*{thm:filtered-shadow-tower-reconstruction}, together
+with the support-depth dichotomy
+Theorem~\ref*{V1-thm:shadow-depth-dichotomy} and the
+Mittag--Leffler branch statement
+Corollary~\ref*{V1-cor:mittag-leffler-shadow-tower}. It is
+independent of chain-level / $E_3$ questions, but it is not ambient
+free: it uses the modular Koszul hypothesis, completeness and
+separatedness of the weight filtration, and the chosen bar-intrinsic
+gauge component. The holographic
 statement is the functoriality of $\Phi_{\mathrm{hol}}$
 in~\ref{thm:universal-holography-functor}: recovery of $\cA$ uses the
-restriction and polarization data of the bulk-boundary pair. The centre
-alone is not conservative; on the Koszul locus the boundary face is
-recoverable because the exact-sector restriction is part of the datum.
-Class~M chain-level is
+restriction and polarization data of the \(\Xi\)-realized
+bulk-boundary pair. The centre alone is not conservative; on the
+Koszul locus the boundary face is recoverable because the
+exact-sector restriction and boundary comparison are part of the
+datum. Class~M chain-level is
 Corollary~\ref*{cor:universal-holography-class-M}.
 \end{proof}
 
@@ -835,7 +950,10 @@ The Verdier pairing for class~M relied on chain-level
 identification of
 $\Zder(\cA_{\mathrm{class\,M}})$ with the class-L derived centre
 under DS reduction; this identification is
-Theorem~\ref*{thm:chd-ds-hochschild}. Weight-completed
+Theorem~\ref*{thm:chd-ds-hochschild}. Its interpretation as a
+bulk-polarization statement additionally uses the class-M
+\(\Xi\)-datum and \(\chi_{\mathrm{HT},\cA}\) of
+Corollary~\ref*{cor:universal-holography-class-M}. Weight-completed
 nondegeneracy descends through the DS retract because the de
 Boer-Tjin homotopy preserves the pairing filtration weight-by-weight.
 \end{proof}
@@ -928,22 +1046,32 @@ disclosure.
 The prose ``the derived chiral centre of a boundary algebra IS
 the bulk algebra of a 3d HT gauge theory'' (Vol~II
 preface.tex:26-39,1606,1765,1811; intro.tex:24-28) carries the
-scope qualifier \emph{``for chosen HT prefactorization realizations on
-the boundary-linear exact sector \textup{(}classes G, L, C, M on the
-Koszul locus at generic level\textup{)},
-$\Zder(B_\partial) \simeq \cA_{\mathrm{bulk}}$ as $E_3$-chiral algebras;
-weight-completed for class~M via
-Theorem~\ref*{thm:chd-ds-hochschild}.''} In the scoped form, the
-IS-claim is Theorem~\ref{thm:universal-holography-functor}(ii).
+scope qualifier \emph{``for a chosen \(\Xi\)-datum on the
+boundary-linear exact sector \textup{(}classes G, L, C, M on the
+Koszul locus at generic level\textup{)}, the bulk--Hochschild
+comparison
+\(\chi_{\mathrm{HT},B_\partial}\colon
+\Zder(B_\partial)\xrightarrow{\simeq}
+\cA_{\mathrm{bulk}}\)
+is an equivalence in the declared ambient; weight-completed for
+class~M via Theorem~\ref*{thm:chd-ds-hochschild} and
+Corollary~\ref*{cor:universal-holography-class-M}.''} In the scoped
+form, the IS-claim is Theorem~\ref{thm:universal-holography-functor}(ii).
 \end{proposition}
 
 \begin{proof}
 Direct: the scoped IS-claim is the statement
-$\Obs^{\mathrm{bulk}}(\cF_\cA) \simeq \Zder(\cA)$ of
+\[
+\chi_{\mathrm{HT},\cA}\colon
+\Zder(\cA)\xrightarrow{\simeq}
+\Obs^{\mathrm{bulk}}(\cF_{\cA,\Xi})
+\]
+of
 Theorem~\ref{thm:universal-holography-functor}(ii), applied at
-$\cA = B_\partial$. The boundary-linear hypothesis is exactly
-what the scope qualifier names; the weight-completion for
-class~M is the chain-level content of the DS-Hochschild bridge.
+\(\cA = B_\partial\). The boundary-linear hypothesis is exactly what
+the scope qualifier names; the weight-completion for class~M is the
+chain-level content of the DS-Hochschild bridge together with the
+field-theoretic \(\chi_{\mathrm{HT}}\)-comparison.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -953,7 +1081,8 @@ class~M is the chain-level content of the DS-Hochschild bridge.
 
 The exact-sector Virasoro HT model used in
 Part~\ref*{part:gravity} is the Virasoro value of
-$\Phi_{\mathrm{hol}}$.
+$\Phi_{\mathrm{hol}}$ after the Brown--Henneaux realization datum has
+been supplied.
 
 \begin{corollary}[Virasoro exact sector as functor value;
 \ClaimStatusConditional]
@@ -962,16 +1091,26 @@ The exact-sector Virasoro HT model of Part~\ref*{part:gravity}
 \textup{(}\S\ref*{ch:thqg-gravitational-complexity},
 \S\ref*{chap:3d-gravity},
 \S\ref*{ch:thqg-3d-gravity-vi-x}\textup{)} is
-$\Phi_{\mathrm{hol}}(\mathrm{Vir}_c)$ for the Virasoro chiral
-algebra at central charge $c = 3\ell / (2G)$
+\[
+\Phi_{\mathrm{hol}}(
+\mathrm{Vir}_c,\omega_{\Vir},T_{\Vir},
+\Xi_{\Vir_c}^{\mathrm{BH}})
+\]
+for the Virasoro chiral algebra at central charge
+$c = 3\ell / (2G)$
 \textup{(}Brown-Henneaux\textup{)} with Costello-Gaiotto
-holomorphic Chern-Simons boundary condition. All of the following
-are specialisations of Theorem~\ref{thm:universal-holography-functor}:
+holomorphic Chern-Simons boundary condition and the
+Brown--Henneaux HT comparison datum. All of the following are
+specialisations of Theorem~\ref{thm:universal-holography-functor}:
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item Boundary algebra $\mathrm{Vir}_c$ as Virasoro CFT;
-\item Bulk algebra $\Zder(\mathrm{Vir}_c)$ as the derived chiral
- centre in the class-M weight-completed ambient, whose connective
- classical shadow is
+\item Bulk algebra
+ \(\Obs^{\mathrm{bulk}}(
+ \Phi_{\mathrm{hol}}(\mathrm{Vir}_c,\omega_{\Vir},T_{\Vir},
+ \Xi_{\Vir_c}^{\mathrm{BH}}))\), identified by
+ \(\chi_{\mathrm{HT},\Vir_c}\) with
+ $\Zder(\mathrm{Vir}_c)$ in the class-M weight-completed ambient,
+ whose connective classical shadow is
  $\C[\![c]\!]$ \textup{(}the cosmological-constant parameter;
  Proposition~\ref{prop:uhf-koszul-triangle-projection}\textup{)};
 \item Line operators from the $\cW$-module category on the Koszul
@@ -982,39 +1121,72 @@ are specialisations of Theorem~\ref{thm:universal-holography-functor}:
  Theorem~\ref{thm:uhf-perturbative-finiteness-split}.
 \end{enumerate}
 Thus the Part~\ref*{part:gravity} Virasoro exact sector is the object
-$\Phi_{\mathrm{hol}}(\mathrm{Vir}_c)$. Its interpretation as pure
-3d gravity on AdS$_3$ uses the Brown--Henneaux dictionary and the
-physical HT path-integral bridge.
+\(\Phi_{\mathrm{hol}}(
+\mathrm{Vir}_c,\omega_{\Vir},T_{\Vir},
+\Xi_{\Vir_c}^{\mathrm{BH}})\). Its interpretation as pure
+3d gravity on AdS$_3$ uses the Brown--Henneaux dictionary, the
+\(\Xi_{\Vir_c}^{\mathrm{BH}}\) comparison datum, and the
+separate modular-invariance, vacuum-dominance, saddle-dominance, and
+Borel/Stokes hypotheses; it is not supplied by the functor alone.
+The full non-chiral physical gravity partition function requires, in
+addition, an anti-holomorphic Virasoro copy
+\(\overline{\mathrm{Vir}}_{\bar c}\), a real form relating
+\((c,\bar c)\) to the \(\mathrm{SL}_2(\R)\times\mathrm{SL}_2(\R)\)
+Chern--Simons levels, a modular invariant pairing of the two chiral
+blocks, an integration cycle in the space of real metrics or flat
+connections, and a saddle prescription.  The functorial statement
+above is only the chiral Brown--Henneaux exact sector.
 \end{corollary}
 
 \begin{proof}
-Specialise Theorem~\ref{thm:universal-holography-functor} at
-$\cA = \mathrm{Vir}_c$ on the Koszul locus (generic $c$), with
-conformal vector $\omega = T(z)$ the Virasoro stress tensor.
-Boundary-linearity holds: Virasoro is in class~M with the
-weight-completed chain-level boundary-linear datum supplied by
-Theorem~\ref*{thm:chd-ds-hochschild} (Virasoro $=\cW_1(\mathrm{sl}_2, f_{\mathrm{prin}})$;
-principal). The resulting HT-QFT has
-$\Obs^\partial = \mathrm{Vir}_c$
-and
-$\Obs^{\mathrm{bulk}} = \Zder(\mathrm{Vir}_c)$
-in the class-M weight-completed ambient. Boundary is the 2d Virasoro CFT at central charge
-$c$; bulk's connective classical shadow is $\C[\![c]\!]$, the
-cosmological-constant parameter; line operators come from the
-Koszul dual $\mathrm{Vir}_{26-c}$-module category (abstractly, via
-the line-functor of Theorem~\ref*{thm:lines_as_modules}). Under
-the Brown-Henneaux dictionary $c = 3\ell / (2G)$ and the physical
-path-integral bridge this is the exact-sector Virasoro model proposed
-for pure 3d gravity on AdS$_3$.
+Apply Theorem~\ref{thm:universal-holography-functor} to the
+quadruple
+\((\mathrm{Vir}_c,\omega_{\Vir},T_{\Vir},
+\Xi_{\Vir_c}^{\mathrm{BH}})\) on the Koszul locus (generic \(c\)).
+Boundary-linearity holds because Virasoro is class~M with the
+weight-completed boundary-linear datum supplied by
+Theorem~\ref*{thm:chd-ds-hochschild}
+(Virasoro \(=\cW_1(\mathrm{sl}_2,f_{\mathrm{prin}})\), principal).
+The resulting HT-QFT has boundary comparison
+\[
+\eta^\partial_{\Vir_c}\colon
+\Obs^\partial(\cF_{\Vir_c,\Xi_{\mathrm{BH}}})
+\xrightarrow{\simeq}\mathrm{Vir}_c
+\]
+and bulk comparison
+\[
+\chi_{\mathrm{HT},\Vir_c}\colon
+\Zder(\mathrm{Vir}_c)\xrightarrow{\simeq}
+\Obs^{\mathrm{bulk}}(\cF_{\Vir_c,\Xi_{\mathrm{BH}}})
+\]
+in the class-M weight-completed ambient. The boundary is the 2d
+Virasoro CFT at central charge \(c\); the connective classical shadow
+of the derived centre is \(\C[\![c]\!]\), the cosmological-constant
+parameter. Line operators come from the Koszul dual
+\(\mathrm{Vir}_{26-c}\)-module category (abstractly, via the
+line-functor of Theorem~\ref*{thm:lines_as_modules}). Under the
+Brown--Henneaux dictionary \(c = 3\ell/(2G_N)\), the supplied
+\(\Xi_{\Vir_c}^{\mathrm{BH}}\), and the physical modular/saddle
+hypotheses, this is the exact-sector Virasoro model proposed for the
+boundary-CFT reading of pure 3d gravity on AdS$_3$.  Passing from this
+chiral sector to the full non-chiral path integral is a separate
+physical operation: one must supply the anti-holomorphic Virasoro
+sector, the real-form condition, a modular invariant, an integration
+cycle, and a saddle prescription.
 \end{proof}
 
 \begin{remark}[Functorial form of the gravity theorem]
 \label{rem:uhf-gravity-functorial-form}
 Theorem~\ref{thm:universal-holography-functor} and
 Corollary~\ref{cor:uhf-universal-holography-is-a-theorem} give
-universal functoriality: every boundary-linear 3d HT gauge theory
-with a 2d boundary CFT in the standard landscape is an image under
-$\Phi_{\mathrm{hol}}$, and Virasoro gives the exact-sector model
+universal functoriality on the source category: every admissible
+boundary algebra equipped with a realization datum in
+$\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X$ has the HT value
+\(\Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)\) constructed
+above. This is a forward construction on the \(\Xi\)-decorated
+source, not essential surjectivity onto all boundary-linear HT
+targets and not a bare construction from \(\cA\) alone. Virasoro with
+\(\Xi_{\Vir_c}^{\mathrm{BH}}\) gives the exact-sector model
 underlying the proposed 3d-gravity interpretation.
 The same machinery identifies
 Monster moonshine (Leech orbifold), higher-spin gravity
@@ -1022,17 +1194,16 @@ Monster moonshine (Leech orbifold), higher-spin gravity
 lattice conformal theories.
 \end{remark}
 
-\begin{remark}[Open directions]
+\begin{remark}[Boundary faces of the functor]
 \label{rem:uhf-open}
-Two directions remain open.
+Two boundary faces lie outside the theorem.
 \begin{itemize}[leftmargin=1.3em]
 \item \textbf{Non-boundary-linear sector.} The functor
  $\Phi_{\mathrm{hol}}$ is defined on
- $\ChirAlg^{\omega,\mathrm{BL,adm}}_X$.
+ $\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X$.
  Extending to chiral algebras without the boundary-linear
  hypothesis requires the non-perfectness gap of Vol~I
- Theorem~C to be addressed; the functor's image in that sector
- is not currently pinned down at chain level.
+ Theorem~C; the target is then a separate classification problem.
 \item \textbf{Off-locus chain-level.} Off the Koszul locus the
  bar-cobar $E_3$-identification is weight-completed not
  chain-level; the functor still makes sense but its bulk
@@ -1043,22 +1214,25 @@ Neither contradicts the central statement.
 \end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Independent verification scaffolds}
+\section{Independent comparison loci}
 \label{sec:uhf-independent-verification}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Each \ClaimStatusProvedHere\ in this chapter is paired with disjoint
-verification sources and a compute check. The three main claims and
-their disjoint sources:
+mathematical comparison sources. The three main claims and their
+comparison loci are:
 
 \begin{enumerate}
 \item \textbf{thm:universal-holography-functor}
  \textup{(}\S\ref{sec:uhf-functor}\textup{)}.
- Derived-from: \textup{(a)} Costello-Gwilliam factorization
- envelope of a vertex algebra along the holomorphic direction
+ Derived-from: \textup{(a)} the supplied
+ \(\Xi\)-realization datum, including a Costello--Gwilliam HT
+ BV/factorization model and the maps \(\eta^\partial\) and
+ \(\chi_{\mathrm{HT}}\); \textup{(b)} Costello-Gwilliam
+ factorization envelope of a vertex algebra along the holomorphic
+ direction, verifying the boundary algebraic face
  \textup{(}Vol~II \S\ref*{sec:CG-factorization-SC}%
- \textup{)}; \textup{(b)} Dunn additivity for Hochschild cochains
- along $\R$; \textup{(c)} DS-Hochschild chain-level compatibility in
+ \textup{)}; \textup{(c)} DS-Hochschild chain-level compatibility in
  the $E_2$-chiral / weight-completed class-M ambient
  \textup{(}Proposition~\ref{prop:uhf-ds-hochschild-bridge} =
  Theorem~\ref*{thm:chd-ds-hochschild}\textup{)}.
@@ -1081,7 +1255,6 @@ their disjoint sources:
  its modular invariance via number-theoretic denominator
  identity, disjoint from both factorisation-algebra machinery
  and holomorphic-Chern-Simons actions.
- Test: \texttt{test\_universal\_holography\_functor.py::test\_uhf\_functor\_structural}.
 
 \item \textbf{thm:uhf-monster-orbifold-bv-anomaly-vanishes}
  \textup{(}\S\ref{sec:uhf-monster}\textup{)}.
@@ -1094,9 +1267,6 @@ their disjoint sources:
  finite-orbifold BV descent and FLM boundary identification.
  Compatibility check: $\det(1-\sigma|_\Lambda)=2^{24}>0$ contributes
  a positive determinant sign but does not compute the BV class.
- Test: \texttt{test\_monster\_chain\_level\_e3\_top.py} verifies the
- normalized $\Z/2$ cohomology convention and the determinant-sign
- insufficiency.
 
 \item \textbf{thm:uhf-perturbative-finiteness-split}
  \textup{(}\S\ref{sec:uhf-perturbative-finiteness}\textup{)}.
@@ -1116,25 +1286,22 @@ their disjoint sources:
  RG analysis on 3d Chern-Simons, physical UV finiteness
  independently for the abelian and non-abelian cases, disjoint
  from bar-complex and FM regulator.
- Test: \texttt{test\_universal\_holography\_functor.py::test\_uhf\_perturbative\_finiteness\_split}.
 \end{enumerate}
 
-Test file
-\texttt{compute/tests/test\_universal\_holography\_functor.py};
-the \texttt{@independent\_verification} decorators bind each
-claim to disjoint sources and fail at import time if disjointness
-is violated.
+The functor is defined on the \(\Xi\)-decorated source. The three
+comparison loci are external realizations of its boundary, moonshine,
+and perturbative field-theoretic faces.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{What this chapter does not prove}
+\section{Boundary of the theorem}
 \label{sec:uhf-not-proved}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Scope restrictions:
+The theorem has the following boundary.
 \begin{enumerate}
 \item \emph{Non-boundary-linear sector.}
  $\Phi_{\mathrm{hol}}$ is defined on
- $\ChirAlg^{\omega,\mathrm{BL,adm}}_X$. The non-boundary-linear
+ $\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X$. The non-boundary-linear
 	 extension remains open.
 \item \emph{No abstract bulk/Hochschild theorem for arbitrary
  logarithmic $\SCchtop$.}
@@ -1178,10 +1345,17 @@ Each restriction is structural; none falsifies the theorem.
 \section*{Epilogue}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The functor $\Phi_{\mathrm{hol}}$ is the structural object: the
-exact-sector Virasoro HT model is its value at Virasoro, Monster
-moonshine is its value at the Leech orbifold, non-abelian gauge gravity is its value at
-$V_k(\fg)$, higher-spin gravity is its value at $\cW_N$, and abelian
-lattice holography is its class-G value. Drinfeld-Sokolov
-functoriality links the four strata through the DS-Hochschild
-chain-level bridge of Chapter~\ref*{ch:chiral-higher-deligne}.
+The functor $\Phi_{\mathrm{hol}}$ is the structural object on
+\(\Xi\)-decorated inputs: the exact-sector Virasoro HT model is its
+value at
+\((\mathrm{Vir}_c,\omega_{\Vir},T_{\Vir},
+\Xi_{\Vir_c}^{\mathrm{BH}})\), Monster moonshine is its value at the
+Leech orbifold after the finite-orbifold BV realization datum is
+supplied, non-abelian gauge gravity is its value at
+\((V_k(\fg),\omega_{\mathrm{Sug}},T_{\mathrm{Sug}},\Xi_{V_k(\fg)})\),
+higher-spin gravity is its value at \((\cW_N,\omega_{W_N},T_{W_N},
+\Xi_{W_N})\), and abelian lattice holography is its class-G value with
+the abelian Costello--Li datum. Drinfeld-Sokolov functoriality links
+the four strata only for \(\Xi\)-data compatible with the
+DS-Hochschild chain-level bridge of
+Chapter~\ref*{ch:chiral-higher-deligne}.

@@ -1,6 +1,6 @@
 r"""Compute m₆(T,T,T,T,T,T; λ₁,...,λ₅) via the Stasheff recursion.
 
-Extends the symbolic_stasheff engine to arity 6, adding d4T field tracking.
+Extends the symbolic_stasheff engine to arity 6, adding d5T/d4T field tracking.
 
 The arity-6 Stasheff identity (with m₁ = 0):
   m₆ = -[m₂∘m₅ + m₅∘m₂ + m₃∘m₄ + m₄∘m₃]
@@ -19,12 +19,34 @@ dT_sym = Symbol('dT')
 d2T_sym = Symbol('d2T')
 d3T_sym = Symbol('d3T')
 d4T_sym = Symbol('d4T')
+d5T_sym = Symbol('d5T')
 c_sym = Symbol('c')
 
-FIELD_ORDER = ['d4T', 'd3T', 'd2T', 'dT', 'T', '1']
-DERIV_SHIFT = {'T': 'dT', 'dT': 'd2T', 'd2T': 'd3T', 'd3T': 'd4T'}
+FIELD_ORDER = ['d5T', 'd4T', 'd3T', 'd2T', 'dT', 'T', '1']
 # Derivative order of each field symbol
-DERIV_ORDER = {'T': 0, 'dT': 1, 'd2T': 2, 'd3T': 3, 'd4T': 4, '1': -1}
+DERIV_ORDER = {'T': 0, 'dT': 1, 'd2T': 2, 'd3T': 3, 'd4T': 4, 'd5T': 5, '1': -1}
+
+
+def _derivative_order(field):
+    """Return n for the field ∂ⁿT; return -1 for scalars."""
+    if field == 'T':
+        return 0
+    if field == 'dT':
+        return 1
+    if field.startswith('d') and field.endswith('T'):
+        body = field[1:-1]
+        if body.isdigit():
+            return int(body)
+    return -1
+
+
+def _field_of_derivative_order(order):
+    """Return the field label for ∂ⁿT."""
+    if order == 0:
+        return 'T'
+    if order == 1:
+        return 'dT'
+    return f'd{order}T'
 
 
 def _add(*dicts, signs=None):
@@ -48,12 +70,12 @@ def _apply_partial(d):
     """Apply ∂ to a field-coeff dict."""
     result = {}
     for f, c in d.items():
-        if f == '1':
+        order = _derivative_order(f)
+        if order < 0:
             continue
-        new_f = DERIV_SHIFT.get(f)
-        if new_f:
-            val = result.get(new_f, S.Zero)
-            result[new_f] = expand(val + c)
+        new_f = _field_of_derivative_order(order + 1)
+        val = result.get(new_f, S.Zero)
+        result[new_f] = expand(val + c)
     return {k: v for k, v in result.items() if v != 0}
 
 
@@ -124,7 +146,7 @@ def compose_into_m2_left(inner, lam_outer, c=None):
     for field, coeff in inner.items():
         if coeff == 0 or field == '1':
             continue
-        n = DERIV_ORDER.get(field, -1)
+        n = _derivative_order(field)
         if n < 0:
             continue
         factor = (-lo)**n
@@ -147,7 +169,7 @@ def compose_into_m2_right(inner, lam_outer, c=None):
     for field, coeff in inner.items():
         if coeff == 0 or field == '1':
             continue
-        n = DERIV_ORDER.get(field, -1)
+        n = _derivative_order(field)
         if n < 0:
             continue
         # Apply (lo + ∂)^n to base
@@ -179,7 +201,7 @@ def compose_into_mk_slot(mk_base_func, inner, slot, outer_lams, n_slots, c=None)
     for field, coeff in inner.items():
         if coeff == 0 or field == '1':
             continue
-        n = DERIV_ORDER.get(field, -1)
+        n = _derivative_order(field)
         if n < 0:
             continue
 
@@ -682,9 +704,9 @@ if __name__ == '__main__':
     print(f"  Scalar at d=7: {'YES ✓' if scalar_at_7 else 'NO ✗'}")
     print(f"  Max field depth: {max_field_depth} (should be ≤ 5)")
 
-    min_depth = min(spec6) if spec6 else None
+    min_depth = min(d for d in spec6 if d != 7) if spec6 else None
     print(f"  Min depth: {min_depth}")
-    print(f"  n=4 anomaly pattern (min depth > 0): {'YES' if min_depth and min_depth > 0 else 'NO'}")
+    print(f"  even-arity secondary cancellation d=0,1: {'YES' if min_depth and min_depth >= 2 else 'NO'}")
 
     print()
     print("=" * 70)

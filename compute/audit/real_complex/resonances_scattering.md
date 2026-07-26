@@ -584,7 +584,7 @@ continuous spectrum, which is invisible to the algebraic data.**
 
 ## 6. One Genuine Connection: The Self-Dual Point c = 13
 
-At the self-dual point c = 13 (where Vir_c = Vir_c^!), the working
+At the fixed point c = 13 of the strict Virasoro line-side comparison, the working
 notes record that "Verdier-Hecke commutation forces the constrained
 Epstein to factor into standard L-functions."
 
@@ -595,7 +595,8 @@ partition function (L-function factorization).  The mechanism:
 At c = 13:
 - Kappa + kappa' = 13 (the complementarity sum for Virasoro).
 - delta_kappa = kappa - kappa' = c/2 - (26-c)/2 = c - 13 = 0.
-- The Koszul pair (A, A!) coincides: Vir_13 is self-dual.
+- The same-family Virasoro line-side comparison is fixed:
+  Vir_{26-13}=Vir_{13}.
 - The shadow extensions K and K' agree: K_L = K_{L'}.
 - The Verdier duality D_Ran(B(Vir_13)) = B(Vir_13) is an
   INVOLUTION on the bar complex (not just an equivalence between

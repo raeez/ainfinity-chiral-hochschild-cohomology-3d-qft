@@ -29,7 +29,7 @@ Two findings of MODERATE-to-HIGH severity survived the pass: a Virasoro "uncurve
 
 ### Topologist (operadic structure, geometric claims, fiber-base levels)
 
-- **CRITICAL -- "The chiral dual Vir_{26-c} is uncurved at c = 13" (line 613--614).** This is a mathematical mis-characterization. Uncurvedness means kappa = 0. For Virasoro kappa(Vir_c) = c/2, so Vir_{26-c} is uncurved only at c = 26 (the matter-ghost critical dimension), NOT at c = 13. At c = 13, what happens is that Vir_c^! = Vir_{26-c} BECOMES Vir_{13}^! = Vir_{13}, i.e., the algebra becomes SELF-DUAL under Koszul duality. Both Vir_{13} and its dual have kappa = 13/2, both are curved. The preface conflates "uncurved" with "self-dual."
+- **CRITICAL -- "The chiral dual Vir_{26-c} is uncurved at c = 13" (line 613--614).** This is a mathematical mis-characterization. Uncurvedness means kappa = 0. For Virasoro kappa(Vir_c) = c/2, so Vir_{26-c} is uncurved only at c = 26 (the matter-ghost critical dimension), NOT at c = 13. At c = 13, the strict same-family line-side comparison representative is fixed: Vir_{26-13} = Vir_{13}. Both Vir_{13} and its comparison representative have kappa = 13/2, both are curved. The preface conflates "uncurved" with "fixed point of the line-side comparison."
     - The very next clause ("...the structural antipode to the matter-ghost critical dimension c = 26") is the correct phrasing but for the WRONG structural fact: c = 13 is the self-dual point (half of 26), not the uncurved point.
     - AP8 explicitly says: NEVER "self-dual" unqualified; specify which duality. Here the author knows the duality (Koszul) and knows c = 13 is special, but wrote "uncurved" instead of "self-dual." This is CRITICAL because the body chapter (3d_gravity.tex) depends on the self-dual interpretation for the Page-time derivation.
     - The Page time argument t_P = 3 S_BH / 13 depending on kappa(Vir_c) + kappa(Vir_{26-c}) = 13 is CORRECT (verified algebraically: c/2 + (26-c)/2 = 13), and the body chapter (3d_gravity.tex lines 7488--7529) derives it self-consistently. The CRITICAL is strictly local to the word "uncurved."
@@ -97,7 +97,7 @@ Two findings of MODERATE-to-HIGH severity survived the pass: a Virasoro "uncurve
 
 - **POSITIVE -- all five Dimofte cross-references have targets.** Grepped for rem:slab-fiber-functor, rem:dimofte-interface-generalization, rem:dimofte-k-matrix, rem:dimofte-double-bosonization, rem:dimofte-meromorphic-braided across vol2. All five appear in ht_bulk_boundary_line_core.tex (plus the frontier + spectral-braiding-core partners). PASS.
 
-- **POSITIVE -- key theorem labels resolve.** Spot-checked thm:rosetta-swiss-cheese, thm:homotopy-Koszul, thm:cohomology_PVA, thm:YBE, thm:boundary-linear-bulk-boundary, thm:lines_as_modules, thm:3d-universal-mc, thm:affine-monodromy-identification, thm:bar-is-self-intersection, thm:holographic-reconstruction, thm:complete-strictification, thm:general-half-space-bv, thm:doubling-rwi, thm:bulk-boundary-line-factorization, thm:modular-bar, thm:formal-genus-expansion, thm:synthesis, thm:resolvent-principle, thm:SC-self-duality. All resolve via grep across chapters/. PASS.
+- **POSITIVE -- key theorem labels resolve.** Spot-checked thm:rosetta-swiss-cheese, thm:homotopy-Koszul, thm:cohomology_PVA, thm:YBE, thm:boundary-linear-bulk-boundary, thm:lines_as_modules, thm:3d-universal-mc, thm:affine-monodromy-identification, thm:bar-is-self-intersection, thm:holographic-reconstruction, thm:complete-strictification, thm:general-half-space-bv, thm:doubling-rwi, thm:bulk-boundary-line-factorization, thm:modular-bar, thm:formal-genus-expansion, thm:synthesis, thm:resolvent-principle, prop:sc-koszul-duality-nonselfdual. All resolve via grep across chapters/. PASS.
 
 - **HIGH -- V1-thm:shadow-formality-identification (line 285).** Prefixed "V1-" suggests a cross-volume reference to Vol I. Does Vol II's build phantomsection-stub this label, or does it pull from Vol I's label space? Per AP127, cross-refs to migrated chapters must have \phantomsection\label{} stubs. Out-of-scope to verify build-side here, but flagging for the next rectification pass: does \ref{V1-thm:shadow-formality-identification} resolve in the Vol II build?
 
@@ -183,7 +183,7 @@ PASS.
 
 ## Recommendations for next rectification pass
 
-1. **CRITICAL fix**: line 613--614, replace "is uncurved at c = 13" with "is self-dual at c = 13" (or equivalent: "the Koszul dual becomes Vir_c itself at c = 13"). Do NOT touch the Page time argument which is correct.
+1. **CRITICAL fix**: line 613--614, replace "is uncurved at c = 13" with "the same-family line-side comparison is fixed at c = 13". Do NOT touch the Page time argument which is correct.
 2. **HIGH fix**: line 610--613, replace "Theorems" with "Conjectures" to match `conj:` labels (AP125).
 3. **HIGH fix**: line 600, either introduce the Vir_c convention at first use or write "Vir_c at c = 6k" instead of "Vir_{6k}".
 4. **HIGH check**: verify \ref{V1-thm:shadow-formality-identification} resolves in Vol II build (AP127 phantom stub).

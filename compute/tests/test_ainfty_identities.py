@@ -278,20 +278,14 @@ class TestAinftyLG:
         assert simplify(result - 2 * g * phi**3) == 0
 
     def test_m4_vanishing(self):
-        """m_4 = 0 by form-degree deficit argument.
-
-        For cubic W with k=4 external legs: V=2 vertices, E=1 edge.
-        Form degree available = 2E = 2, needed = 2(k-1) = 6.
-        Deficit = 4. Therefore m_4 = 0.
-        Vol II Prop 11.31.
-        """
+        """m_4 = 0 because W^(4)=0 for cubic W."""
         from lib.examples.lg_cubic import m_k_lg
         a, b, c, d = symbols('a b c d')
         g = Symbol('g')
         assert m_k_lg(4, (a, b, c, d), g) == 0
 
     def test_m5_vanishing(self):
-        """m_5 = 0 by the same form-degree argument."""
+        """m_5 = 0 because W^(5)=0 for cubic W."""
         from lib.examples.lg_cubic import m_k_lg
         a, b, c, d, e = symbols('a b c d e')
         g = Symbol('g')
@@ -316,11 +310,11 @@ class TestAinftyLG:
         for perm_val in [val_bac, val_acb, val_bca, val_cab, val_cba]:
             assert simplify(val_abc - perm_val) == 0
 
-    def test_truncation_degree_counting(self):
-        """Verify the form-degree counting for truncation.
+    def test_truncation_taylor_coefficient(self):
+        """Verify the Taylor-coefficient truncation for cubic W.
 
-        For cubic W: k=3 does NOT vanish (V=1, E=0, form deficit OK).
-        k=4,5,...,10 all vanish by insufficient form degree.
+        The primitive k-ary operation is W^(k), so k=3 survives and
+        k=4,5,...,10 vanish.
         """
         from lib.examples.lg_cubic import check_truncation_degree_counting
         # k=3: nonzero
@@ -334,6 +328,7 @@ class TestAinftyLG:
             assert info['vanishes'] is True, f"m_{k} should vanish but doesn't"
             assert info['vertices'] == k - 2
             assert info['internal_edges'] == k - 3
+            assert info['taylor_coefficient_zero'] is True
 
 
 # ===================================================================

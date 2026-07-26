@@ -1,8 +1,10 @@
-r"""Virasoro E_1 ordered shadow invariants via the closed-form Catalan formula.
+r"""Virasoro scalar T-line shadow coefficients via the Catalan formula.
 
-The shadow coefficients S_r (r >= 2) are the E_1 ordered bar complex
-invariants of the Virasoro chiral algebra at central charge c. They encode
-the ordered associative Koszul dual structure.
+The coefficients S_r (r >= 2) are the normalized scalar T-line shadow
+coefficients of the Virasoro chiral algebra at central charge c, after
+scalar shadow projection. They do not assert a formula for the raw
+transferred operation m_r or for the full ordered-bar invariant before
+projection.
 
 CLOSED-FORM CATALAN FORMULA
 ============================
@@ -16,7 +18,8 @@ where:
 
 This formula is equivalent to the convolution recursion in
 lib/shadow_borel_resurgence.py but makes the algebraic structure manifest:
-- The denominator is exactly c^{r-3} * (5c+22)^{floor((r-2)/2)}
+- The nonconstant pole divisor is c^{r-3} * (5c+22)^{floor((r-2)/2)}
+- Rational scalar denominators such as 2r are kept separate from this divisor
 - The numerator is a polynomial in c of bounded degree
 - The sign pattern encodes the Koszul oscillation
 
@@ -178,7 +181,9 @@ def cross_check_recursion(c: Fraction, r_max: int = 50) -> Dict[int, Fraction]:
 def analyze_denominator(S_r: Fraction, r: int, c: Fraction) -> Dict:
     """Analyze the denominator of S_r to check the predicted structure.
 
-    Predicted: denom(S_r) divides c^{r-3} * (5c+22)^{floor((r-2)/2)} * (2r).
+    Predicted: after removing rational scalar factors, the nonconstant
+    central-charge pole divisor divides
+    c^{r-3} * (5c+22)^{floor((r-2)/2)}.
     """
     num = S_r.numerator
     den = S_r.denominator
@@ -194,15 +199,15 @@ def analyze_denominator(S_r: Fraction, r: int, c: Fraction) -> Dict:
 
 
 def verify_denominator_formula(c: Fraction, r_max: int = 50) -> List[Dict]:
-    """Verify denom(S_r) | c^{r-3} * (5c+22)^{floor((r-2)/2)} for all r."""
+    """Verify the numeric specialization of the pole-divisor formula."""
     coeffs = shadow_catalan_exact(c, r_max)
     results = []
     five_c_22 = 5 * c + 22
     for r in range(2, r_max + 1):
         S_r = coeffs[r]
-        # Predicted denominator (up to a factor of 2r from the formula)
+        # Predicted pole-divisor factor, with the rational scalar 2r separate.
         predicted_denom_factor = c ** max(r - 3, 0) * five_c_22 ** ((r - 2) // 2)
-        # S_r * predicted_denom_factor * (2*r) should be an integer (Fraction with den=1)
+        # S_r * predicted_denom_factor * (2*r) should be integral.
         test_val = S_r * predicted_denom_factor * (2 * r)
         is_integer = (test_val.denominator == 1)
         results.append({
@@ -443,9 +448,10 @@ def main():
     json_path = os.path.join(output_dir, "ordered_e1_shadow_catalan_table.json")
 
     table_data = {
-        'description': 'Virasoro E_1 ordered shadow coefficients S_r via Catalan formula',
+        'description': 'Virasoro scalar T-line shadow coefficients S_r via Catalan formula',
         'r_max': R_MAX,
         'formula': 'S_r = (-6)^{r-4} * D / (2r * c^{r-3}) * F_r(D/144), D=80/(5c+22)',
+        'scope': 'normalized scalar shadow projection, not raw m_r',
         'cross_check': 'All values verified against convolution recursion',
     }
 

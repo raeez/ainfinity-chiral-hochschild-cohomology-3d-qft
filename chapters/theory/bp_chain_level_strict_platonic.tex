@@ -34,7 +34,7 @@
 % k = -3/2, symbolic verification of all 12 closure identities;
 % (D3) explicit SymPy sl_3 structure-constant verification at
 % level k = -3/2 of Sugawara prefactor 1/(2(k+3)) and
-% BP central charge c^BP(k) = -(2(3k+1)(2k+3))/(k+3) at
+% BP central charge c^BP(k) = -((2k+3)(3k+1))/(k+3) at
 % representative levels.
 % The three decorators are pairwise disjoint in derivation:
 % - D1 is algebraic-cohomological (BRST complex on cochains);
@@ -73,7 +73,13 @@ via the branched-cover
  \pi \colon \widetilde X \to X, \qquad \pi(\tilde z) = \tilde z^{2}, \qquad
  \mathrm{Deck}(\pi) = \Z/2.
 \]
-Pulling the Kazhdan grading to~$\widetilde X$ integralises it; descending via $\Z/2$-invariants returns statements to~$X$. That route closes the cohomological $\Ethree^{\mathrm{top}}$ statement for BP on the original complex on~$X$ via the general good-graded theorem \cite[Theorem~\ref*{thm:E3-topological-DS-general-all-good-graded}]{Vol2-fractional-ghost-platonic}. The cohomological statement uses $T_{\mathrm{DS}}(f) = [Q_{\mathrm{CS}}, G'_{f,X}]$ on $Q_{\mathrm{CS}}$-cohomology on~$X$; the strict chain-level statement asks for the same identity on cochains in $\cO_{\mathrm{bulk}}$.
+Pulling the Kazhdan grading to~$\widetilde X$ integralises it; descending via $\Z/2$-invariants returns statements to~$X$. That route closes the cohomological $\Ethree^{\mathrm{top}}$ statement for BP on the original complex on~$X$ via the general good-graded theorem \cite[Theorem~\ref*{thm:E3-topological-DS-general-all-good-graded}]{Vol2-fractional-ghost-platonic}. The cohomological statement uses
+\[
+T_{\mathrm{DS}}(f)=[Q_{\mathrm{DS},f},G'_{\mathrm{DS},f,X}]
+\]
+on \(Q_{\mathrm{DS},f}\)-cohomology on~$X$; the strict chain-level
+statement asks for the same identity on cochains in the DS
+bulk--boundary reduction complex.
 
 The strict chain-level lift descends from the double cover. On $\widetilde X$, the pulled-back Kazhdan grading is integer, the ghost system is integer-weight, and the chiral algebra at pulled-back level $\pi^{\ast} k$ belongs to class~$L$. For class~$L$ the strict chain-level antighost identity
 \[
@@ -96,10 +102,9 @@ Compared with the cohomological $\Ethree^{\mathrm{top}}$ statement for BP of \ci
 \end{enumerate}
 \end{remark}
 
-\begin{remark}[anchor: BP self-duality bridge and convention
-caveat]%
+\begin{remark}[anchor: BP self-duality bridge]%
 \label{rem:anchor-bp-self-duality}%
-\index{Bershadsky--Polyakov!Arakawa vs Fateev-Lukyanov conventions}%
+\index{Bershadsky--Polyakov!central-charge conductor}%
 The chain-level BP topologization above is the open-side input to the
 universal-holography master theorem
 (\textsf{thm:universal-holography-master} in
@@ -107,48 +112,38 @@ universal-holography master theorem
 the BP fibre of the rung-$\cW_N$ corollary
 (\textsf{cor:rung-w-N}, $N=3$, non-principal nilpotent
 $f_{\min}$). The Koszul-conductor identity
-$K_{\mathrm{BP}} \equiv 196$ in the Arakawa convention
-$c(\mathrm{BP}_k) = 2 - 24(k+1)^2/(k+3)$ proved at Vol~I
+$K^{c}_{\mathrm{BP}} \equiv 50$ for the BP central charge
+$c_{\mathrm{BP}}(k) = 25 - 6(k+3) - 24/(k+3)
+= -(2k+3)(3k+1)/(k+3)$
+(the Fateev--Lukyanov screening normalization
+\eqref{eq:bp-central-charge-FL}, with $c_{\mathrm{BP}}(0) = -1$),
+proved at Vol~I
 \texttt{standalone/bp\_self\_duality.tex},
-\textsf{thm:bp-koszul-conductor-polynomial} (lines 253--297, two
-disjoint HZ-IV decorators, 73+7 tests passing) supplies the
-Koszul-pair packaging on the boundary side. The convention caveat:
-the present chapter and its companion fractional-ghost chain-level platonic chapter
-use the Fateev--Lukyanov screening convention
-$c^{\mathrm{FL}}(k) = -(2k+3)(3k+1)/(k+3)$ (consistent with
-\eqref{eq:bp-central-charge-FL} above) with the Feigin--Frenkel dual
-$k \mapsto -k-6$. A direct rational computation gives
+\textsf{thm:bp-koszul-conductor-polynomial}, supplies the
+Koszul-pair packaging on the boundary side. Writing $t = k+3$, the
+level-dependent part $-6t - 24/t$ is odd under the Feigin--Frenkel
+involution $t \mapsto -t$ (i.e.\ $k \mapsto -k-6$), so
 \[
- c^{\mathrm{FL}}(-k-6)
- \;=\; -\frac{(-2k-9)(-3k-17)}{-(k+3)}
- \;=\; \frac{(2k+9)(3k+17)}{k+3},
-\]
-so that
-\[
- K^{\mathrm{FL}}_{\mathrm{BP}}(k)
- \;=\; c^{\mathrm{FL}}(k) + c^{\mathrm{FL}}(-k-6)
- \;=\; \frac{(2k+9)(3k+17)-(2k+3)(3k+1)}{k+3}
+ K^{c}_{\mathrm{BP}}(k)
+ \;=\; c_{\mathrm{BP}}(k) + c_{\mathrm{BP}}(-k-6)
  \;=\; \frac{50(k+3)}{k+3}
  \;\equiv\; 50
 \]
 in $\mathbb{Q}(k)$: the pole at $k=-3$ is removable, and the
-Fateev--Lukyanov conductor is the polynomial constant $50$, not a
-meromorphic function. Both conventions therefore produce a
-level-independent Koszul conductor; they differ only by the
-choice of central-charge normalisation (Arakawa gives
-$K_{\mathrm{BP}} \equiv 196$, Fateev--Lukyanov gives
-$K^{\mathrm{FL}}_{\mathrm{BP}} \equiv 50$). Both conventions parametrise
-the SAME BP algebra via level reparametrisation; the constancy of
-$K_{\mathrm{BP}}$ as a rational function of the level is
-convention-independent, while the specific numerical value ($196$
-versus $50$) is convention-specific. The
-chain-level antighost identity above is convention-independent (both
-sides of \eqref{eq:bp-central-charge-FL} pull back to $\widetilde X$ via
-the same Kazhdan-grading integralisation), so the universal-holography
-reading on the BP fibre is conducted in whichever convention the
-ambient chapter is written; cross-volume readers should consult Vol~I
-\texttt{standalone/bp\_self\_duality.tex} for the polynomial conductor
-and the fractional-ghost companion chapter here for the FL conductor $\equiv 50$.
+conductor is the polynomial constant $50$, not a meromorphic
+function. The ghost anomaly independently confirms criticality at
+$50$: the BRST $bc$-systems for the four strong generators of
+conformal weights $(2, 3/2, 3/2, 1)$ contribute
+$c_{\mathrm{gh}}(h) = -2(6h^2-6h+1)$ each, hence
+$-26 - 11 - 11 - 2 = -50$ in total, cancelling
+$K^{c}_{\mathrm{BP}}$ exactly. The chain-level antighost identity
+above is insensitive to the central-charge packaging (both sides of
+\eqref{eq:bp-central-charge-FL} pull back to $\widetilde X$ via the
+same Kazhdan-grading integralisation), so the universal-holography
+reading on the BP fibre is conducted directly in the
+Fateev--Lukyanov normalization; cross-volume readers should consult
+Vol~I \texttt{standalone/bp\_self\_duality.tex} for the polynomial
+conductor.
 \end{remark}
 
 \section{Setup: BP, Kazhdan Grading, and the Degree-2 Cover}
@@ -180,9 +175,9 @@ supercurrents $G^{+}, G^{-}$ (conformal weight $3/2$), and a
 $\fu(1)$-current $J$ (conformal weight~$1$)
 \cite{Bershadsky91, Polyakov90, deBoerTjin93, KacRoanWakimoto03,
  Arakawa05BP}.
-The central charge is
+In the Fateev--Lukyanov screening normalization the central charge is
 \begin{equation}\label{eq:bp-central-charge-FL}
- c^{\mathrm{BP}}(k)
+ c^{\mathrm{FL}}_{\mathrm{BP}}(k)
  \;=\; -\,\frac{(2k+3)(3k+1)}{k+3}
  \;=\; -\,\frac{6k^2 + 11k + 3}{k+3}.
 \end{equation}
@@ -440,7 +435,8 @@ on cochains upstairs, with $T_{\mathrm{DS}}^{\widetilde X}(f_{\min})
 \end{theorem}
 
 \begin{proof}
-Step~1 (class-L Wick absorption upstairs). By
+\emph{Class-L Wick absorption upstairs.}
+By
 Definition~\ref{def:bp-pulled-back-algebra}, $\widetilde V_k(\fsl_3)$
 is an integer-Kazhdan-graded affine chiral algebra of class~$L$ at
 level $k \ne -3$ on~$\widetilde X$. The hypotheses of
@@ -474,7 +470,8 @@ Proposition~\ref{prop:bp-QG1-remainder-upstairs} yields
 \]
 the claimed \eqref{eq:bp-strict-chain-upstairs}.
 
-Step~2 (Cartan improvement on cochains). The BP improvement
+\emph{Cartan improvement on cochains.}
+The BP improvement
 $T_{\mathrm{imp}}^{\widetilde X, \min}$ involves only the Cartan
 current~$\pi^{\ast}J_{h_1}$, whose Kazhdan weight is~$0$ already
 (independent of~$d_f$), so no branched-cover desingularisation is
@@ -498,7 +495,8 @@ $\widetilde G^{\prime, \widetilde X}_{\mathrm{BP}, 1}$ preserves
 the chain-level identity because each subtracted term has an
 exact $Q_{\mathrm{tot}}^{\widetilde X}$-variation on cochains.
 
-Step~3 (neutral-element simplification for BP). The neutral
+\emph{Neutral-element simplification for BP.}
+The neutral
 element $x_0 = \tfrac{1}{2} H_{\theta} = \tfrac{1}{2}(h_1 + h_2)$ of
 the BP $\fsl_2$-triple lies in the two-dimensional Cartan; in the
 standard basis the contraction
@@ -509,7 +507,8 @@ $\kappa_{h_i h_j} = 2\delta_{ij}$ in the Chevalley basis normalised to long-root
 $(x_0)_i (\kappa^{-1})^{h_i h_j}$ has a single nonzero component
 proportional to $h_1$ after normal-subalgebra splitting). That is
 the origin of the single-$h_1$ form in
-\eqref{eq:bp-improvement-upstairs}. Combined with Step~2, this
+\eqref{eq:bp-improvement-upstairs}. Combined with the Cartan
+improvement, this
 gives \eqref{eq:bp-strict-chain-DS-upstairs}.
 \end{proof}
 
@@ -782,64 +781,77 @@ strict chain-level conclusion on the original complex.
 \section{The BP Kappa-Conductor Identity as a Polynomial in~$k$}
 \label{sec:bp-kappa-conductor}
 
-\begin{proposition}[BP Koszul conductor and its $\kappa$-complementarity image]
+\begin{proposition}[BP central-charge conductor; the $\kappa$-complementarity slot is open]
 \label{prop:bp-kappa-conductor}
 \index{Bershadsky--Polyakov algebra!Koszul conductor identity|textbf}
 \ClaimStatusProvedElsewhere
-The BP Koszul conductor $K_{\mathrm{BP}}(k) \coloneqq c^{\mathrm{BP}}(k)
-+ c^{\mathrm{BP}}(-k-6)$, the self-contraction of central charge across
-the Feigin--Frenkel involution $k \mapsto -k-6$, is a level-independent
-constant. In the Arakawa convention $c(\mathrm{BP}_k) = 2 - 24(k+1)^2/(k+3)$,
+The BP central charge in the Fateev--Lukyanov screening
+normalization~\eqref{eq:bp-central-charge-FL},
+\[
+c_{\mathrm{BP}}(k)
+\;=\; 25 - 6(k+3) - \frac{24}{k+3}
+\;=\; -\,\frac{(2k+3)(3k+1)}{k+3},
+\qquad c_{\mathrm{BP}}(0) = -1,
+\]
+has level-independent Feigin--Frenkel self-contraction
 \begin{equation}\label{eq:bp-kappa-conductor}
- K_{\mathrm{BP}}(k) \;\equiv\; 196 \qquad \text{as a polynomial identity in $k$,}
+ K^{c}_{\mathrm{BP}}(k)
+ \;\coloneqq\; c_{\mathrm{BP}}(k) + c_{\mathrm{BP}}(-k-6)
+ \;\equiv\; 50
+ \qquad \text{in } \mathbb{Q}(k),
 \end{equation}
 where $\mathrm{BP}_{-k-6} = \cW^{-k-6}(\fsl_3, f_{\min})$ is the
-operadic Koszul-dual BP-algebra at shifted level. The conductor
-$K_{\mathrm{BP}} = -c_{\mathrm{ghost}}(\mathrm{BRST})$ is the Trinity
-invariant of the boundary Koszul pair, matching Vol~I
-Theorem~\ref{V1-thm:bp-koszul-conductor-polynomial}; the Fateev--Lukyanov
-convention~\eqref{eq:bp-central-charge-FL} gives $K^{\mathrm{FL}}_{\mathrm{BP}}
-\equiv 50$ (Remark~\ref{rem:anchor-bp-self-duality}). The derived-centre
-$\kappa$-complementarity invariant is the distinct value
-\begin{equation}\label{eq:bp-kappa-complementarity}
- \kappaChHodge(\mathrm{BP}_k) \;+\; \kappaChHodge(\mathrm{BP}_{-k-6})
- \;=\; \varrho_{\mathrm{BP}}\, K_{\mathrm{BP}}
- \;=\; \tfrac{1}{6}\cdot 196 \;=\; \tfrac{98}{3},
-\end{equation}
-the BP entry of the complementarity spectrum
-$\{0, 8, 13, 250/3, 98/3\}$, with generator-profile coefficient
-$\varrho_{\mathrm{BP}} = 1/6$.
+operadic Koszul-dual BP-algebra at the Feigin--Frenkel-shifted
+level (Vol~I
+Theorem~\ref{V1-thm:bp-koszul-conductor-polynomial}). The ghost
+anomaly gives the same constant with opposite sign: the BRST
+$bc$-systems for the strong generators of conformal weights
+$(2, 3/2, 3/2, 1)$ contribute $-26 - 11 - 11 - 2 = -50$, so
+$K^{c}_{\mathrm{BP}} = -c_{\mathrm{ghost}}(\mathrm{BRST})$.
+
+The derived-centre $\kappa$-complementarity sum
+$\kappaChHodge(\mathrm{BP}_k) + \kappaChHodge(\mathrm{BP}_{-k-6})$
+is a distinct invariant of the same Koszul pair — a chiral-Hodge
+supertrace, not a central-charge self-contraction — and its value
+is \emph{open}: no derivation of the BP $\kappa$-sum exists, and the
+Vol~I landscape census records the BP slot of the complementarity
+spectrum as open. The computed spectrum is
+$\{0, 13, 250/3\}$ ($\mathsf{G}/\mathsf{L}/\mathsf{C}$ and the
+$\mathsf{B}$-row Hodge sum give $0$; $\mathrm{Vir}_c$ gives $13$;
+$\cW_3$ gives $250/3$), together with the open BP slot.
 \end{proposition}
 
 \begin{proof}
-In the Arakawa convention $c(\mathrm{BP}_k) = 2 - 24(k+1)^2/(k+3)$,
-the involution $k \mapsto -k-6$ sends $(k+1) \mapsto -(k+5)$ and
-$(k+3) \mapsto -(k+3)$, so $c(\mathrm{BP}_{-k-6}) = 2 +
-24(k+5)^2/(k+3)$; summing,
+Write $t = k+3$, so $c_{\mathrm{BP}}(k) = 25 - 6t - 24/t$ and the
+Feigin--Frenkel involution $k \mapsto -k-6$ is $t \mapsto -t$. The
+level-dependent part $-6t - 24/t$ is odd in $t$, so
 \[
- K_{\mathrm{BP}}(k) = 4 + \frac{24\bigl[(k+5)^2 - (k+1)^2\bigr]}{k+3}
- = 4 + \frac{24 \cdot 8(k+3)}{k+3} = 4 + 192 = 196,
+ K^{c}_{\mathrm{BP}}(k)
+ = \Bigl(25 - 6t - \frac{24}{t}\Bigr)
+ + \Bigl(25 + 6t + \frac{24}{t}\Bigr)
+ = 50,
 \]
-the level-independent constant of \eqref{eq:bp-kappa-conductor};
-the pole at $k=-3$ is removable because the two summands carry
-equal-and-opposite residues. The full symbolic verification across
-both conventions is recorded in Vol~I
-\Cref{V1-thm:bp-koszul-conductor-polynomial}. The
-$\kappa$-complementarity image \eqref{eq:bp-kappa-complementarity}
-follows from the bridge identity
-$\kappaChHodge + \kappaChHodge^! = \varrho_A K$ with the BP
-generator-profile coefficient $\varrho_{\mathrm{BP}} = 1/6$ read off
-the strong-generator weights $(J_{h=1}, G^{\pm}_{h=3/2}, T_{h=2})$;
-the Koszul conductor $K = c + c^!$ and the $\kappa$-complementarity
-sum $\kappa + \kappa^!$ are distinct invariants of the same Koszul
-pair (the former a central-charge self-contraction, the latter a
-chiral-Hodge supertrace), related by $\varrho_{\mathrm{BP}}$ and never
-to be conflated.
+an identity of rational functions; the pole at $k=-3$ is removable
+because the two summands carry equal-and-opposite singular parts.
+The ghost cross-check uses $c_{\mathrm{gh}}(h) = -2(6h^2-6h+1)$ per
+weight-$h$ $bc$-pair: $h = 2$ gives $-26$, $h = 3/2$ gives $-11$
+(twice), $h = 1$ gives $-2$, total $-50$. The full symbolic
+verification is recorded in Vol~I
+\Cref{V1-thm:bp-koszul-conductor-polynomial}.
+
+For the $\kappa$-complementarity slot: no bridge identity relating
+$\kappaChHodge + \kappaChHodge^!$ to $K^{c}_{\mathrm{BP}}$ has been
+derived for BP. The volume's generator-profile convention
+$\sum_h 1/h$ over the strong-generator weights $(1, 3/2, 3/2, 2)$
+evaluates to $17/6$, but no theorem identifies this (or any other
+coefficient) as the ratio of the two invariants; the slot remains
+open pending a first-principles computation of
+$\kappaChHodge(\mathrm{BP}_k)$.
 \end{proof}
 
-\begin{remark}[Role of $K_{\mathrm{BP}} = 196$ in the present chapter]
-\label{rem:bp-role-of-K-196}
-The Koszul conductor $K_{\mathrm{BP}} = 196$ does not enter the
+\begin{remark}[Role of $K^{c}_{\mathrm{BP}} = 50$ in the present chapter]
+\label{rem:bp-role-of-K-50}
+The central-charge conductor $K^{c}_{\mathrm{BP}} = 50$ does not enter the
 proof of the strict chain-level identity of
 Theorem~\ref{thm:bp-chain-level-e3-topological}; the chain-level
 construction depends only on the level~$k$ being non-critical
@@ -919,7 +931,7 @@ $\to$ (Galois descent to~$X$), which preserves class-L strict
 chain-level identities by Maschke exactness.
 \end{remark}
 
-\section{Independent verification by three disjoint routes}
+\section{Three disjoint derivations}
 \label{sec:bp-independent-verification-decorators}
 
 The strict chain-level identity admits three pairwise-disjoint
@@ -938,10 +950,10 @@ the concentration degree and the induced stress tensor
 $T_{\mathrm{DS}}(f)$. For BP, the KRW computation gives
 $T_{\mathrm{BP}}$ as an element of $H^{0}(Q_{\mathrm{tot}})$ together
 with its self-OPE (Virasoro algebra with central charge
-$c^{\mathrm{BP}}$). The route is algebraic-cohomological:
+$c^{\mathrm{FL}}_{\mathrm{BP}}$ in the present normalization). The route is algebraic-cohomological:
 $Q_{\mathrm{tot}}$-cohomology via BRST techniques, without 3d HT bulk
 or branched covers. Target: existence of $T_{\mathrm{BP}}$ with
-central charge $c^{\mathrm{BP}}(k) = -(2k+3)(3k+1)/(k+3)$.
+central charge $c^{\mathrm{FL}}_{\mathrm{BP}}(k) = -(2k+3)(3k+1)/(k+3)$.
 \end{remark}
 
 \begin{remark}[de Boer--Tjin 1993 screened free-field]
@@ -987,8 +999,8 @@ set of non-trivial Jacobi closures, each checked by direct
 structure-constant substitution); (iii) the value of the Sugawara
 prefactor $1/(2(k+h^{\vee})) = 1/(2(-3/2 + 3)) = 1/3$; (iv) the value
 of the BP central charge
-$c^{\mathrm{BP}}(-3/2) = -(0)(-7/2)/(3/2) = 0$ at the boundary level,
-and $c^{\mathrm{BP}}(0) = -(3)(1)/3 = -1$ at generic level $k = 0$.
+$c^{\mathrm{FL}}_{\mathrm{BP}}(-3/2) = -(0)(-7/2)/(3/2) = 0$ at the boundary level,
+and $c^{\mathrm{FL}}_{\mathrm{BP}}(0) = -(3)(1)/3 = -1$ at generic level $k = 0$.
 The route is purely symbolic-algebraic: structure constants and
 trace-form normalisation, without 3d HT bulk, BRST cohomology, or
 free-field realisation. Target: numerical values of structural
@@ -1005,18 +1017,16 @@ structure constants of $\fsl_3$. The pairwise intersection of
 derivation input is empty.
 \end{remark}
 
-\begin{remark}[Companion computation]
+\begin{remark}[Symbolic finite-level check]
 \label{rem:bp-compute-module}
-The symbolic verification lives in
-\verb|compute/tests/test_bp_chain_level_strict.py|, with derivation
-input declared as the class-L antighost closure of Vol~I and the
-branched-cover Galois descent of Vol~II, and verification input as
-the Kac--Roan--Wakimoto BRST cohomology, the de Boer--Tjin screened
-free-field realisation, and the symbolic $\fsl_3$ Wick at $k = -3/2$.
-The three verification routes operate on disjoint derivation paths.
+The finite-level symbolic check uses the class-L antighost closure,
+the branched-cover Galois descent, Kac--Roan--Wakimoto BRST
+cohomology, the de Boer--Tjin screened free-field realisation, and
+the $\fsl_3$ Wick calculation at $k = -3/2$. The three verification
+routes operate on disjoint derivation paths.
 \end{remark}
 
-\section{Position in the topologisation programme}
+\section{Bershadsky--Polyakov chain-level topologisation}
 \label{sec:bp-summary-forward}
 
 Theorem~\ref{thm:bp-chain-level-e3-topological} establishes strict
@@ -1039,11 +1049,11 @@ The proof composes three components:
 \end{enumerate}
 
 The Koszul conductor identity
-$K_{\mathrm{BP}}(k) = c^{\mathrm{BP}}(k) + c^{\mathrm{BP}}(-k-6) \equiv 196$
-(Arakawa convention), with derived-centre $\kappa$-complementarity
-image $\kappaChHodge(\mathrm{BP}_k) + \kappaChHodge(\mathrm{BP}_{-k-6})
-= \varrho_{\mathrm{BP}} K_{\mathrm{BP}} = 98/3$
-(Proposition~\ref{prop:bp-kappa-conductor}), complements this
+$K^{c}_{\mathrm{BP}}(k)
+=c_{\mathrm{BP}}(k)+c_{\mathrm{BP}}(-k-6)\equiv 50$, with the
+derived-centre $\kappa$-complementarity slot
+$\kappaChHodge(\mathrm{BP}_k) + \kappaChHodge(\mathrm{BP}_{-k-6})$
+open (Proposition~\ref{prop:bp-kappa-conductor}), complements this
 structural result with the Koszul-dual pair datum; together they
 assemble the full BP holographic package. The corollary
 (Corollary~\ref{cor:bp-E3-original-complex-not-just-weight-completed})
@@ -1053,24 +1063,19 @@ resolving the gap between cohomological and chain-level
 topologisation for non-principal minimal-nilpotent $\cW$-algebras
 of Kazhdan denominator~$2$.
 
-Three prior structures supply the inputs: the Vol~I file
-\texttt{chapters/theory/topologization\_chain\_level\_platonic.tex}
-supplies the class-L antighost closure for affine $V_k(\fg)$ at
-non-critical level upstairs; the Vol~II fractional-ghost chain-level
-companion supplies the branched-cover integralisation and Galois
-descent for good $(1/d_f)$-graded nilpotents; the Vol~II file
-\texttt{chapters/connections/e\_infinity\_topologization.tex} carries
-the general $E_\infty$-topologisation programme, of which the
-class-M-adjacent BP strengthening is a piece.
+Three prior structures supply the inputs: class-L antighost closure
+for affine $V_k(\fg)$ at non-critical level upstairs, branched-cover
+integralisation with Galois descent for good $(1/d_f)$-graded
+nilpotents, and the general $E_\infty$-topologisation theorem. The
+class-M-adjacent BP strengthening is its non-principal
+minimal-nilpotent instance.
 
 The independent verifications
 (\S\ref{sec:bp-independent-verification-decorators}) draw on three
 disjoint routes: the Kac--Roan--Wakimoto 2003 BRST cohomology, the
 de Boer--Tjin 1993 screened free-field realisation, and the symbolic
 $\fsl_3$ Wick at $k = -3/2$, pairwise disjoint per
-Remark~\ref{rem:bp-disjointness}. The companion computation is
-\verb|compute/tests/test_bp_chain_level_strict.py| per
-Remark~\ref{rem:bp-compute-module}.
+Remark~\ref{rem:bp-disjointness}.
 
 % ============================================================================
 % End of bp_chain_level_strict_platonic.tex

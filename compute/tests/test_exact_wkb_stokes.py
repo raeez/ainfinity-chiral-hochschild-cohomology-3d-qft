@@ -366,36 +366,36 @@ class TestPainleveAnalysis:
 
 
 # =====================================================================
-# Section 8: Self-Dual c = 13
+# Section 8: Comparison-Fixed c = 13
 # =====================================================================
 
-class TestSelfDual:
-    """Test the self-dual point c = 13."""
+class TestComparisonFixed:
+    """Test the comparison fixed point c = 13."""
 
-    def test_self_dual_analysis_runs(self):
-        """Self-dual analysis completes without error."""
-        from lib.exact_wkb_stokes import self_dual_analysis
-        sd = self_dual_analysis()
+    def test_comparison_fixed_analysis_runs(self):
+        """Comparison-fixed analysis completes without error."""
+        from lib.exact_wkb_stokes import comparison_fixed_analysis
+        sd = comparison_fixed_analysis()
         assert sd['c'] == 13.0
 
     def test_branch_points_conjugate_at_c13(self):
-        from lib.exact_wkb_stokes import self_dual_analysis
-        sd = self_dual_analysis()
+        from lib.exact_wkb_stokes import comparison_fixed_analysis
+        sd = comparison_fixed_analysis()
         assert sd['branch_points']['are_conjugate']
 
     def test_z2_symmetry(self):
-        from lib.exact_wkb_stokes import self_dual_analysis
-        sd = self_dual_analysis()
+        from lib.exact_wkb_stokes import comparison_fixed_analysis
+        sd = comparison_fixed_analysis()
         assert sd['stokes_graph']['has_z2_symmetry']
 
     def test_no_bound_states_at_c13(self):
-        from lib.exact_wkb_stokes import self_dual_analysis
-        sd = self_dual_analysis()
+        from lib.exact_wkb_stokes import comparison_fixed_analysis
+        sd = comparison_fixed_analysis()
         assert not sd['voros']['has_bound_states']
 
     def test_stokes_constant_at_c13(self):
-        from lib.exact_wkb_stokes import self_dual_analysis
-        sd = self_dual_analysis()
+        from lib.exact_wkb_stokes import comparison_fixed_analysis
+        sd = comparison_fixed_analysis()
         assert abs(sd['connection']['stokes_constant'] - 2.0j * math.pi) < 1e-10
 
 

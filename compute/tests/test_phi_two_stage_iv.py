@@ -18,9 +18,10 @@ We test the structure on the d = 2 case (K3 base) where:
   - Stage 1: Phi^FA_2(D^b(K3)) is an E_2-holomorphic FA on K3, with
     factorization homology rank governed by the K3 Euler characteristic
     chi(K3) = 24 and the stage-1 holomorphic-FA dimension formulas.
-  - Stage 2: Sp^ch_{S^1, C}: the S^1-specialisation collapses the
-    E_2-FA to an E_1 = chiral algebra on C; this is the standard
-    "compactify on a circle" route familiar from 6d/2d integration.
+  - Stage 2: Sp^ch_{S^1, C}: the S^1-specialisation takes the typed
+    factorisation-homology/Hochschild trace of the E_2-FA and returns
+    an E_1 = chiral algebra on C; this is the standard "compactify on
+    a circle" route familiar from 6d/2d integration.
 
 DISJOINT ROUTES
 ---------------
@@ -29,9 +30,9 @@ Two independent computations of the chiral-algebra output:
     integration to chiral algebra on C; read off rank/conformal
     weight from the FA rank formula).
   Route B: factorization homology of the FA directly --
-    the integral over Sigma_{d-1} = S^1 computes chi-graded factorisation
+    the integral over Sigma_{d-1} = S^1 computes Hochschild/factorisation
     homology, which by topological factorisation = E_1-bar gives the
-    same chiral algebra rank.
+    same primitive-row rank witness.
 
 These two routes produce the SAME numerical witness via DIFFERENT
 mathematical constructions: Route A goes through the holomorphic FA
@@ -61,8 +62,8 @@ REMAINING OBLIGATIONS
 ---------------------
 - compute/lib does not yet expose a stage-1 Phi^FA_d engine returning
   the holomorphic FA rank formula. The witness here is encoded directly
-  from the K3 Euler characteristic and the stage-2 S^1-specialisation
-  formula.
+  from the K3 Mukai/HKR rank and the typed stage-2 S^1-specialisation
+  scope.
 - Cross-volume bridge to Vol III k3e_cy3_programme would extend the
   test to d = 3.
 """
@@ -85,11 +86,13 @@ def stage1_E2_FA_rank_on_K3() -> int:
     """Route A, stage 1: Phi^FA_2(D^b(K3)).
 
     For a CY-2 surface, the E_2-holomorphic FA on K3 has factorisation
-    rank governed by the K3 Euler characteristic chi(K3) = 24.
+    rank governed by the total Mukai/HKR Euler rank of K3, equal to
+    chi(K3) = 24.
 
-    This is the "Costello-Gwilliam Vol II Theorem 3.X.X" rank formula:
-    the local factorisation algebra at a point of K3 carries rank equal
-    to the Hochschild zeroth cohomology dim HH^0(D^b(Coh(K3))) = chi(K3) = 24.
+    This is not Hochschild degree zero: HKR gives
+    HH^0(D^b(Coh(K3))) = H^0(K3, O_K3) = C. The rank-24 witness is the
+    total even Mukai/HKR rank
+    dim HH^0 + dim HH^2 + dim HH^4 = 1 + 22 + 1 = 24.
     Reference: Costello-Gwilliam Vol II (factorisation rank from
     Hochschild cohomology of the input CY category).
     """
@@ -97,25 +100,60 @@ def stage1_E2_FA_rank_on_K3() -> int:
     return chi_K3
 
 
+def categorical_hkr_k3_profile() -> dict[str, object]:
+    """HKR profile for K3 used by the rank-24 witness."""
+
+    return {
+        "hh0_dim": 1,
+        "hkr_even_dimensions": (1, 22, 1),
+        "hkr_even_degrees": (0, 2, 4),
+        "mukai_rank": 24,
+        "euler_characteristic": 24,
+        "rank_24_source": "total even Mukai/HKR rank, not HH^0",
+    }
+
+
+def stage2_specialisation_scope_profile() -> dict[str, object]:
+    """Scope of the S^1 specialisation used by the rank witness."""
+
+    return {
+        "operation": "factorisation-homology/Hochschild specialisation",
+        "source_type": "E_2 holomorphic factorisation algebra",
+        "target_type": "E_1 chiral algebra on C",
+        "ordinary_euler_multiplication": False,
+        "chi_s1_factor_used": False,
+        "rank_witness_preserved": (
+            "primitive Mukai/Heisenberg-Fock current row under the "
+            "abelian harmonic branch"
+        ),
+        "not_claimed": (
+            "dimension equals stage-1 rank multiplied by chi(S^1)",
+            "all Hochschild homology groups preserve dimension",
+            "stage-2 specialisation is invertible",
+        ),
+    }
+
+
 def stage2_Sp_ch_S1_specialisation(stage1_rank: int) -> int:
     """Route A, stage 2: Sp^ch_{S^1, C}.
 
     The S^1-specialisation of an E_2-FA produces an E_1 = chiral algebra
-    on C. The factorisation rank is preserved by S^1-integration up to
-    the universal Euler characteristic factor chi(S^1) = 0; the chiral
-    rank is the GROTHENDIECK-RIEMANN-ROCH rank, which for the reference
-    curve C of genus 0 reads off the leading-conformal-weight piece.
+    on C by the typed factorisation-homology/Hochschild trace. This is
+    not ordinary integration against the Euler characteristic of S^1:
+    multiplying by chi(S^1)=0 would annihilate the witness and is not
+    the operation used here.
 
     Concretely: the E_2-FA on K3 has stage-1 rank 24 = chi(K3); the
-    S^1-specialisation produces a chiral algebra on C whose rank-1
-    (single-point) factorisation rank equals 24 (the Mukai/Heisenberg-Fock
-    24-trace inherited from the K3 fibre).
+    S^1-specialisation produces a chiral algebra on C whose primitive
+    current row has rank 24 (the Mukai/Heisenberg-Fock 24-trace
+    inherited from the K3 fibre on the abelian harmonic branch).
 
     Reference: Beilinson-Drinfeld 2004 chiral algebras, factorisation
-    rank under stage-2 specialisation.
+    homology under stage-2 specialisation; Lurie HA.5.5 for the
+    E_2-to-E_1 Hochschild trace.
     """
-    # Stage-2 specialisation preserves the leading factorisation rank
-    # from the K3 fibre. For C = P^1 (genus 0), this is direct.
+    # Stage-2 specialisation preserves the primitive K3 current row in
+    # this witness; it is not Euler-characteristic multiplication by S^1.
     return stage1_rank
 
 
@@ -137,9 +175,11 @@ def chiral_algebra_rank_via_route_B_factorisation_homology() -> int:
     on K3 reduces to the topological factorisation = E_1-bar by Dunn
     additivity (E_2 = E_1 \\otimes E_1; integrate one factor over S^1).
 
-    The numerical witness: int_{S^1} of an E_2-FA with leading rank
-    chi(K3) = 24 produces a chiral algebra on C with rank 24 (the
-    same Mukai/Heisenberg-Fock 24-trace).
+    The numerical witness: int_{S^1} of the E_2-FA takes the Hochschild
+    trace and, on the abelian harmonic branch, carries the primitive
+    K3 current row to a chiral algebra on C with rank 24 (the same
+    Mukai/Heisenberg-Fock 24-trace). This is not an ordinary
+    Euler-characteristic product.
 
     Reference: Lurie HA.5.5 factorisation homology axioms; the integral
     is computed independently of stage-1 / stage-2 sequencing via the
@@ -175,7 +215,7 @@ def chiral_algebra_rank_via_route_B_factorisation_homology() -> int:
     disjoint_rationale=(
         "Route A computes the chiral rank by building the holomorphic "
         "stage-1 E_2-FA on K3 first (using Costello-Gwilliam BV rank "
-        "formula tied to Hochschild zeroth cohomology of D^b(Coh(K3))) "
+        "formula tied to the total Mukai/HKR rank of D^b(Coh(K3))) "
         "and then specialising along S^1 (Beilinson-Drinfeld curve "
         "factorisation rank). Route B sidesteps the stage-1 FA "
         "altogether and computes int_{S^1} of the K3-FA via Lurie's "
@@ -226,6 +266,32 @@ def test_d2_K3_witness_agrees_with_kappaFiber():
         "The stage-1 + stage-2 chiral rank from K3 should match the "
         "kappaFiber row 24 from the K3 x E kappa-tuple."
     )
+
+
+def test_k3_rank24_is_total_mukai_rank_not_hh0():
+    profile = categorical_hkr_k3_profile()
+
+    assert profile["hh0_dim"] == 1
+    assert profile["hkr_even_dimensions"] == (1, 22, 1)
+    assert sum(profile["hkr_even_dimensions"]) == profile["mukai_rank"] == 24
+    assert profile["euler_characteristic"] == 24
+    assert profile["rank_24_source"] == "total even Mukai/HKR rank, not HH^0"
+
+
+def test_s1_specialisation_is_not_euler_characteristic_multiplication():
+    profile = stage2_specialisation_scope_profile()
+
+    assert profile["operation"] == "factorisation-homology/Hochschild specialisation"
+    assert profile["source_type"] == "E_2 holomorphic factorisation algebra"
+    assert profile["target_type"] == "E_1 chiral algebra on C"
+    assert profile["ordinary_euler_multiplication"] is False
+    assert profile["chi_s1_factor_used"] is False
+    assert "primitive Mukai/Heisenberg-Fock current row" in profile[
+        "rank_witness_preserved"
+    ]
+    assert "dimension equals stage-1 rank multiplied by chi(S^1)" in profile[
+        "not_claimed"
+    ]
 
 
 def test_stage_ordering_is_load_bearing():

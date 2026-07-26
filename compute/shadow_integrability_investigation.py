@@ -518,8 +518,9 @@ def section_5_painleve():
     # Does it satisfy a Painleve equation in c?
 
     # G(t; c) = int_0^t s*sqrt(c^2 + 12cs + q2(c)*s^2) ds
-    # The integrand involves sqrt(polynomial in c), so G is an elliptic integral
-    # in c. Differentiating:
+    # The integrand involves a quadratic radical.  The primitive is an
+    # elementary algebraic-logarithmic Abelian integral on a genus-0 double
+    # cover, not an elliptic one. Differentiating:
     # dG/dc = int_0^t s * (2c + 12s + q2'(c)*s^2) / (2*sqrt(Q)) ds
     # d^2G/dc^2 = ... (complicated)
 
@@ -807,7 +808,8 @@ def section_8_resolvent_ode():
     print(f"  This is the TRANSCENDENTAL part: the log term.")
 
     print(f"\n*** FINDING: The resolvent satisfies an algebraic ODE of genus 0.")
-    print(f"*** The solution is an elliptic integral (int sqrt(quadratic)).")
+    print(f"*** The solution is an algebraic-logarithmic Abelian integral")
+    print(f"*** on a genus-0 double cover (int sqrt(quadratic)).")
     print(f"*** The transcendence comes ONLY from the logarithm in the")
     print(f"*** antiderivative. This is the simplest class of integrability:")
     print(f"*** the curve is rational, the ODE is autonomous up to the")

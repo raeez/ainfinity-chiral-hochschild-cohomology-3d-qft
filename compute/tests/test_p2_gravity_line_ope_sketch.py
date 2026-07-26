@@ -43,8 +43,8 @@ def test_boundary_stress_T_is_weight_2():
 
 def test_dual_stress_T_prime_is_weight_2_line_sector():
     g = GravityLineGenerators()
-    # T' has central charge 26 - c (Koszul dual; Vol II
-    # prop:gravity-koszul-dual).
+    # T' has central charge 26 - c only as the strict same-family
+    # line-side representative of Vol II prop:gravity-koszul-dual.
     assert g.T_dual_line.weight == 2
     assert "T_prime" in g.T_dual_line.name
     assert g.T_dual_line.sector == "line_closed_dual"
@@ -79,7 +79,8 @@ def test_koszul_dual_self_ope_has_quartic_pole():
 
 
 def test_cross_colour_ope_has_no_singular_part():
-    # Vir_c and Vir_{26-c} commute on the Koszul locus.
+    # The boundary stress and same-family line representative commute
+    # on the strict comparison surface.
     ope = cross_colour_ope()
     assert ope.max_pole_order() == 0
     assert ope.singular_part == ()
@@ -132,12 +133,14 @@ def test_pentagon_face_trace_formula_carries_phi10_un():
     assert "B^{E_3}" in formula or "PhiFA_3" in formula
 
 
-def test_derived_centre_label_includes_koszul_dual():
+def test_derived_centre_label_separates_central_shadow_from_line_comparison():
     s = GravityLineOPEStructure()
     label = s.derived_centre_bulk_HHcat()
-    # The bicoloured derived centre is C[[c]] tensor C[[c']] with
-    # c' = 26 - c.
-    assert "26" in label or "c'" in label
+    assert "Zder_ch(A_g)" in label
+    assert "central shadow C[[c]]" in label
+    assert "line comparison C[[c']]" in label
+    assert "26 - c" in label
+    assert "tensor" not in label
 
 
 # ---------------------------------------------------------------------
@@ -191,8 +194,11 @@ def test_open_factorisation_lives_on_log_E_not_K3():
 
 def test_z_der_ch_A_b_includes_dual_central_charge():
     p = BicolouredPrimitivePackageOnK3xE()
-    # Derived chiral centre / chiral Hochschild bulk: C[[c]] tensor C[[26-c]].
+    # Derived chiral centre / chiral Hochschild bulk keeps its central
+    # projection separate from the line-side comparison parameter.
     assert "C[[c]]" in p.Z_der_ch_A_b
+    assert "central projection" in p.Z_der_ch_A_b
+    assert "line comparison" in p.Z_der_ch_A_b
     assert "26" in p.Z_der_ch_A_b
 
 

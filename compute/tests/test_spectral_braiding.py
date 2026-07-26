@@ -21,10 +21,347 @@ Test tiers:
 """
 import sys
 import os
+from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from sympy import (Symbol, Rational, simplify, expand, S, symbols,
                    Matrix, eye, zeros, trace)
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SPECTRAL_BRAIDING_TEX = REPO_ROOT / "chapters/connections/spectral-braiding.tex"
+SPECTRAL_BRAIDING_CORE_TEX = (
+    REPO_ROOT / "chapters/connections/spectral-braiding-core.tex"
+)
+SPECTRAL_BRAIDING_FRONTIER_TEX = (
+    REPO_ROOT / "chapters/connections/spectral-braiding-frontier.tex"
+)
+AFFINE_HALF_SPACE_BV_TEX = REPO_ROOT / "chapters/connections/affine_half_space_bv.tex"
+LINE_OPERATORS_TEX = REPO_ROOT / "chapters/connections/line-operators.tex"
+HT_BULK_BOUNDARY_LINE_CORE_TEX = (
+    REPO_ROOT / "chapters/connections/ht_bulk_boundary_line_core.tex"
+)
+FACTOR_SWISS_CHEESE_TEX = REPO_ROOT / "chapters/theory/factorization_swiss_cheese.tex"
+THQG_LINE_OPERATORS_EXTENSIONS_TEX = (
+    REPO_ROOT / "chapters/connections/thqg_line_operators_extensions.tex"
+)
+INTRODUCTION_TEX = REPO_ROOT / "chapters/theory/introduction.tex"
+ORDERED_KD_CORE_TEX = (
+    REPO_ROOT / "chapters/connections/ordered_associative_chiral_kd_core.tex"
+)
+ORDERED_KD_FRONTIER_TEX = (
+    REPO_ROOT / "chapters/connections/ordered_associative_chiral_kd_frontier.tex"
+)
+THQG_SPECTRAL_BRAIDING_EXTENSIONS_TEX = (
+    REPO_ROOT / "chapters/connections/thqg_spectral_braiding_extensions.tex"
+)
+
+
+def _flat(path: Path) -> str:
+    return " ".join(path.read_text(encoding="utf-8").split())
+
+
+def test_spectral_rmatrix_family_not_single_categorical_braiding():
+    """R(z) is a meromorphic exchange family before categorical descent."""
+    tex = SPECTRAL_BRAIDING_TEX.read_text()
+    core_tex = SPECTRAL_BRAIDING_CORE_TEX.read_text()
+    line_tex = LINE_OPERATORS_TEX.read_text()
+    ht_line_tex = HT_BULK_BOUNDARY_LINE_CORE_TEX.read_text()
+    swiss_tex = FACTOR_SWISS_CHEESE_TEX.read_text()
+    thqg_line_tex = THQG_LINE_OPERATORS_EXTENSIONS_TEX.read_text()
+    intro_tex = INTRODUCTION_TEX.read_text()
+    ordered_core_tex = ORDERED_KD_CORE_TEX.read_text()
+    ordered_frontier_tex = ORDERED_KD_FRONTIER_TEX.read_text()
+    spectral_frontier_tex = SPECTRAL_BRAIDING_FRONTIER_TEX.read_text()
+    thqg_spectral_tex = THQG_SPECTRAL_BRAIDING_EXTENSIONS_TEX.read_text()
+    compact = " ".join(tex.split())
+    core = " ".join(core_tex.split())
+    line_ops = " ".join(line_tex.split())
+    ht_line = " ".join(ht_line_tex.split())
+    swiss = " ".join(swiss_tex.split())
+    thqg_line = " ".join(thqg_line_tex.split())
+    intro = " ".join(intro_tex.split())
+    ordered_core = " ".join(ordered_core_tex.split())
+    ordered_frontier = " ".join(ordered_frontier_tex.split())
+    spectral_frontier = " ".join(spectral_frontier_tex.split())
+    thqg_spectral = " ".join(thqg_spectral_tex.split())
+
+    bad_fixed_tensor = "braided monoidal category with " + "meromorphic dependence on z"
+    bad_raw_braiding = "R(z) defines a " + "meromorphic braiding on"
+    bad_spectral_category = (
+        "the braid relation for a braided monoidal category with spectral parameter"
+    )
+    bad_strict_definition = (
+        "An $R$-matrix $R(z) : V \\otimes_z W \\to W \\otimes_{-z} V$ "
+        "satisfying the quantum Yang--Baxter equation."
+    )
+    bad_fqg_slogan = (
+        "A \\emph{factorisation quantum group} is a categorical structure encoding"
+    )
+    bad_line_category = (
+        "The line category \\(\\cC_{\\mathrm{line}}\\) equipped with the "
+        "\\(R\\)-matrix braiding"
+    )
+    bad_line_category_tex = (
+        "The line category $\\cC_{\\mathrm{line}}$ equipped with the "
+        "$R$-matrix braiding"
+    )
+    bad_hexagon_source = "Yang--Baxter equation (Theorem~\\ref{thm:YBE}) supplies the hexagon coherences"
+    bad_r_supplies_braiding = "The $R$-matrix supplies the braiding on"
+    bad_flat_coproduct = "line surface carries a flat spectral coproduct"
+    bad_pre_descent_category = (
+        "braided monoidal category $\\mathcal{C}_\\partial$ from Part"
+    )
+    bad_h_modules_with_braiding = (
+        "category of $\\mathcal{H}$-modules equipped with the braiding induced by $R(z)$"
+    )
+    bad_unqualified_all_orders = (
+        "with the Yang--Baxter equation holding to all orders by Theorem"
+    )
+    bad_latyntsev_instance = (
+        "The spectral $R$-matrix and the meromorphic tensor product are an instance"
+    )
+    bad_full_fqg_statement = (
+        "forms a factorisation quantum group in the sense of Latyntsev"
+    )
+    bad_parameter_upgrade = "upgrading the braided monoidal category"
+    bad_meromorphic_braided_definition = (
+        "A \\emph{meromorphic braided tensor category} is a category"
+    )
+    bad_meromorphic_braided_title = (
+        "\\begin{remark}[Meromorphic braided category, after Dimofte]"
+    )
+    bad_fqg_of_theory = "the \\emph{factorisation quantum group} of the theory"
+    bad_hopf_like_object = "filtered Hopf-like object $\\mathcal H$"
+    bad_hopf_object_label = "Koszul-dual Hopf object $\\mathcal H$"
+    bad_fqg_parenthetical = "(the \"factorisation quantum group\" in this setting)"
+    bad_strict_fqg_all_simple = "strict factorisation quantum group for all simple"
+    bad_strict_ybe_derivation = (
+        "Substituting $R(z) = \\id + \\hh\\, r(z) + O(\\hh^2)$ "
+        "into the quantum YBE"
+    )
+    bad_inverse_from_braiding = "inverse relation from the definition of braiding"
+    bad_automatic_antisymmetry = (
+        "For antisymmetry, swapping $L_1 \\leftrightarrow L_2$ sends"
+    )
+    bad_fixed_tensor_exchange = (
+        "R_{L_1,L_2}(z)\\colon L_1\\otimes L_2 \\xrightarrow{\\ \\sim\\ } "
+        "L_2\\otimes L_1"
+    )
+    bad_laplace_is_duality = "The Laplace transform \\emph{is} the spectral duality"
+    bad_factorization_lift = "factorization-level lift of the evaluation-level DK"
+    bad_auto_skew_proof = (
+        "Skew-symmetry}: This follows from the symmetry of the tensor product"
+    )
+    bad_weak_cocomm_skew = (
+        "Weak co-commutativity: $(\\tau_w \\otimes \\tau_w) r(z) = r(z)$, "
+        "$r(-z) = -r_{21}(z)$"
+    )
+    bad_bare_quasitriangular = (
+        "It follows from the definition of $R(z)$ as the braiding isomorphism"
+    )
+    bad_full_rmatrix_qybe = (
+        "full $R$-matrix $R(z)$ satisfies the quantum Yang--Baxter"
+    )
+    bad_exact_quantum_ybe = "sum to zero at all orders, which is exactly the quantum YBE"
+    bad_strict_sigma_descent = "spectral $R$-matrix $R(z)$ satisfying YBE and braid coherence"
+    bad_ybe_lifts_to_sigma = "lift to $\\Sigma_n$-relations by YBE"
+    bad_standard_inversion_axiom = "standard inversion axiom"
+    bad_ht_full_qybe = "satisfies the full quantum Yang--Baxter equation"
+    bad_ht_jacobi_determines_all = "is determined entirely by $r(z)$ and the Jacobi identity"
+    bad_thqg_braided_structure = "carries a braided monoidal structure with braiding"
+    bad_thqg_braided_category = "This braided monoidal category is equivalent"
+    bad_thqg_yangian_shortcut = "The braided monoidal structure follows from the Yangian"
+    bad_thqg_equiv_ybe = "is equivalent to the Yang--Baxter equation"
+    bad_thqg_full_qybe = "and the full quantum Yang--Baxter"
+    bad_thqg_all_orders = "(at all orders)"
+    bad_intro_auto_skew = "co-commutativity $r(-z) = -r_{21}(z)$"
+    bad_ordered_auto_unitarity = (
+        "This holds for $E_\\infty$-chiral algebras (including those with OPE poles)"
+    )
+    bad_ordered_path_reversal = (
+        "path reversal inverts the holonomy: $R_{21}(-z)=R_{12}(z)^{-1}$"
+    )
+    bad_thqg_inverse_definition = (
+        "composing the braiding $L_1 \\otimes L_2 \\to L_2 \\otimes L_1$"
+    )
+    bad_thqg_tensor_skew_odd = (
+        "$r_{12}(z) + r_{12}(-z) = 0$ if $r(z)$ is skew-symmetric"
+    )
+    bad_frontier_strict_ybe = (
+        "The spectral $R$-matrix satisfies the Yang--Baxter equation by"
+    )
+    bad_ordered_frontier_strict_ybe = (
+        "The $R$-matrix satisfies the Yang--Baxter equation "
+        "$R_{12}(z_1{-}z_2)"
+    )
+
+    assert bad_fixed_tensor_exchange not in compact
+    assert bad_fixed_tensor_exchange not in core
+    assert bad_fixed_tensor not in compact
+    assert bad_fixed_tensor not in core
+    assert bad_raw_braiding not in compact
+    assert bad_raw_braiding not in core
+    assert bad_spectral_category not in core
+    assert bad_strict_definition not in compact
+    assert bad_strict_definition not in core
+    assert bad_fqg_slogan not in compact
+    assert bad_fqg_slogan not in core
+    assert bad_pre_descent_category not in compact
+    assert bad_pre_descent_category not in core
+    assert bad_h_modules_with_braiding not in compact
+    assert bad_h_modules_with_braiding not in core
+    assert bad_unqualified_all_orders not in compact
+    assert bad_latyntsev_instance not in compact
+    assert bad_latyntsev_instance not in core
+    assert bad_full_fqg_statement not in compact
+    assert bad_parameter_upgrade not in compact
+    assert bad_parameter_upgrade not in core
+    assert bad_meromorphic_braided_definition not in core
+    assert bad_meromorphic_braided_title not in core
+    assert bad_fqg_of_theory not in core
+    assert bad_hopf_like_object not in compact
+    assert bad_hopf_object_label not in compact
+    assert bad_fqg_parenthetical not in compact
+    assert bad_strict_fqg_all_simple not in core
+    assert bad_strict_ybe_derivation not in compact
+    assert bad_strict_ybe_derivation not in core
+    assert bad_inverse_from_braiding not in compact
+    assert bad_inverse_from_braiding not in core
+    assert bad_automatic_antisymmetry not in compact
+    assert bad_automatic_antisymmetry not in core
+    assert bad_laplace_is_duality not in compact
+    assert bad_laplace_is_duality not in core
+    assert bad_factorization_lift not in compact
+    assert bad_factorization_lift not in core
+    assert bad_auto_skew_proof not in compact
+    assert bad_auto_skew_proof not in core
+    assert bad_weak_cocomm_skew not in compact
+    assert bad_weak_cocomm_skew not in core
+    assert bad_bare_quasitriangular not in compact
+    assert bad_bare_quasitriangular not in core
+    assert bad_full_rmatrix_qybe not in compact
+    assert bad_full_rmatrix_qybe not in core
+    assert bad_exact_quantum_ybe not in compact
+    assert bad_exact_quantum_ybe not in core
+    assert bad_strict_sigma_descent not in swiss
+    assert bad_ybe_lifts_to_sigma not in swiss
+    assert bad_standard_inversion_axiom not in swiss
+    assert bad_ht_full_qybe not in ht_line
+    assert bad_ht_jacobi_determines_all not in ht_line
+    assert bad_thqg_braided_structure not in thqg_line
+    assert bad_thqg_braided_category not in thqg_line
+    assert bad_thqg_yangian_shortcut not in thqg_line
+    assert bad_thqg_equiv_ybe not in thqg_line
+    assert bad_thqg_full_qybe not in thqg_line
+    assert bad_thqg_all_orders not in thqg_line
+    assert bad_intro_auto_skew not in intro
+    assert bad_ordered_auto_unitarity not in ordered_core
+    assert bad_ordered_path_reversal not in ordered_core
+    assert bad_thqg_inverse_definition not in thqg_spectral
+    assert bad_thqg_tensor_skew_odd not in thqg_spectral
+    assert bad_frontier_strict_ybe not in spectral_frontier
+    assert bad_ordered_frontier_strict_ybe not in ordered_frontier
+    assert bad_line_category not in line_ops
+    assert bad_line_category_tex not in line_ops
+    assert bad_hexagon_source not in line_ops
+    assert bad_r_supplies_braiding not in line_ops
+    assert bad_flat_coproduct not in line_ops
+    assert "local spectral tensor datum" in compact
+    assert "local spectral tensor datum" in core
+    assert "local spectral tensor datum" in line_ops
+    assert "a three-point associator \\(\\Phi_A\\)" in compact
+    assert "a three-point associator \\(\\Phi_A\\)" in core
+    assert "three-point associator $\\Phi_\\cA$" in line_ops
+    assert "meromorphic family of exchange isomorphisms" in compact
+    assert "meromorphic family of exchange isomorphisms" in core
+    assert "not a single categorical braiding on the fixed tensor product" in compact
+    assert "not a single categorical braiding on the fixed tensor product" in core
+    assert "only after evaluation/descent along an exchange path" in compact
+    assert "after evaluation/descent along an exchange path" in core
+    assert "Yang--Baxter relation for this meromorphic exchange family" in core
+    assert "ordinary braided-monoidal hexagon belongs only to the descended centre-side" in core
+    assert "local factorisation line category from Part" in compact
+    assert "local factorisation line category of Part" in core
+    assert "The all-orders Yang--Baxter statement belongs to that chosen quantized surface" in compact
+    assert "The all-orders Yang--Baxter statement belongs to that chosen quantized surface" in core
+    assert "local shadow of Latyntsev's factorisation quantum groups" in compact
+    assert "local shadow of Latyntsev's factorisation quantum groups" in core
+    assert "local meromorphic factorisation tensor datum" in core
+    assert "The local distinguishing datum is not a braided monoidal category upgraded by a parameter" in compact
+    assert "The local distinguishing datum is not a braided monoidal category upgraded by a parameter" in core
+    assert "filtered local bialgebra shadow" in compact
+    assert "filtered local bialgebra shadow" in core
+    assert "factorisation-quantum-group interpretation requires the additional spectral coproduct" in compact
+    assert "factorisation-quantum-group interpretation requires the additional spectral coproduct" in core
+    assert "strict local spectral tensor datum on the resolved affine comparison surface" in core
+    assert "associator-controlled Yang--Baxter relation" in compact
+    assert "associator-controlled Yang--Baxter relation" in core
+    assert "The skew condition is a separate normalization" in compact
+    assert "The skew condition is a separate normalization" in core
+    assert "unitary exchange normalization" in compact
+    assert "unitary exchange normalization" in core
+    assert "records the local topological exchange shadow" in compact
+    assert "records the local topological exchange shadow" in core
+    assert "local factorisation shadow whose descended evaluation surface gives the DK braiding" in compact
+    assert "local factorisation shadow whose descended evaluation surface gives the DK braiding" in core
+    assert "Normalized skew relation" in compact
+    assert "Normalized skew relation" in core
+    assert "not a formal consequence of the local exchange family" in compact
+    assert "not a formal consequence of the local exchange family" in core
+    assert "associator-controlled quantum Yang--Baxter relation on triple tensor products" in compact
+    assert "associator-controlled quantum Yang--Baxter relation on triple tensor products" in core
+    assert "braid-descent datum on \\(X^n_{\\mathrm{ord}}\\)" in swiss
+    assert "unitary exchange normalization assumed in the statement" in swiss
+    assert "chosen associator datum" in ht_line
+    assert "descended evaluation subcategory" in thqg_line
+    assert "strictified comparison surface" in thqg_line
+    assert "unitary exchange normalization is part of the comparison surface" in intro
+    assert "braid-descent datum consisting of a chosen associator" in ordered_core
+    assert "not a formal consequence of the local exchange family" in ordered_core
+    assert "not a consequence of Definition~\\ref{def:spectral-braiding}" in thqg_spectral
+    assert "tensor-skewness is a separate condition" in thqg_spectral
+    assert "satisfies the associator-controlled Yang--Baxter relation" in spectral_frontier
+    assert "On a strictified comparison surface this relation becomes the displayed strict equation" in ordered_frontier
+    assert "ordinary braided monoidal category before descent" in line_ops
+    assert "ordinary categorical braiding" in line_ops
+    assert "descended centre-side module category" in line_ops
+
+
+def test_active_spectral_braiding_uses_typed_fm_reductions():
+    """The active line-category proof uses FM^tr/FM^red, not the old quotient."""
+    core = _flat(SPECTRAL_BRAIDING_CORE_TEX)
+    frontier = _flat(SPECTRAL_BRAIDING_FRONTIER_TEX)
+    affine = _flat(AFFINE_HALF_SPACE_BV_TEX)
+
+    assert r"\FM^{\mathrm{tr}}_3(\C)" in core
+    assert r"\FM^{\mathrm{red}}_3(\C)" in core
+    assert r"D_S \cong \FM^{\mathrm{tr}}_{3-|S|+1}(\C)\times \FM^{\mathrm{red}}_{|S|}(\C)" in core
+    assert "No non-consecutive divisor is removed from the closed chiral FM boundary" in core
+    assert "The full-collision stratum" not in core
+    assert "subleading contribution that vanishes" not in core
+
+    assert r"\FM^{\mathrm{tr}}_3(\C)" in frontier
+    assert "total-collision divisor gives the parenthesisation/associator term" in frontier
+    assert r"\FM^{\mathrm{tr}}_2(\C)\times\FM^{\mathrm{red}}_2(\C)" in frontier
+
+    assert r"\right\}/(\C\rtimes\R_{>0})." in affine
+    assert "translation-reduced coordinates" in affine
+    assert "The full complex-affine quotient is not used" in affine
+    assert "translations and dilations" not in affine
+
+
+def test_active_spectral_braiding_records_kz_dk_kl_line_path():
+    """The quantum-group line-category bridge must name all comparison steps."""
+    core = _flat(SPECTRAL_BRAIDING_CORE_TEX)
+
+    assert r"\label{prop:kz-dk-kl-line-braiding-proof-path}" in core
+    assert r"\hbar_{\mathrm{KZ}}=(k+h^\vee)^{-1}" in core
+    assert r"\Omega_\kappa/((k+h^\vee)z)" in core
+    assert "invariant-form conversion" in core
+    assert "Drinfeld--Kohno monodromy" in core
+    assert "Kazhdan--Lusztig tensor transport" in core
+    assert r"q_{DK}=q_{KL}^{2}" in core
+    assert "The critical level is excluded because the KZ denominator vanishes" in core
 
 
 # ===================================================================
@@ -38,7 +375,8 @@ class TestAbelianCSRMatrix:
     r^L(z) = k * 1! / z^2 = k/z^2.
 
     The Yangian-style collision kernel used by the example library is the
-    bar-residue kernel r^{coll}(z)=k/z, with charge factors included.
+    tensor bar-residue kernel k*Omega_H/z; the stored scalar is its
+    rank-one coefficient k/z, with charge factors included.
     Vol II Section 18.
     """
 
@@ -99,17 +437,18 @@ class TestAbelianCSRMatrix:
         """Collision r-kernel: r^{coll}(z) = k * Omega / z.
 
         For abelian case: Omega = J tensor J (one generator),
-        so the bar-residue kernel is k/z times the charge pairing.
+        so the stored coefficient is k/z times the charge pairing.
 
         Tier 2 (published).
         """
         from lib.examples.abelian_cs import abelian_r_matrix
         z = Symbol('z')
         hbar = Symbol('hbar')
-        r = abelian_r_matrix(z, hbar)
+        k = Symbol('k')
+        r = abelian_r_matrix(z, hbar, k)
         q1, q2 = symbols('q1 q2')
-        # r = hbar * q1 * q2 / z (the library uses charge notation)
-        assert simplify(r - hbar * q1 * q2 / z) == 0
+        # Collision residue after bar dlog absorption, evaluated on charges.
+        assert simplify(r - hbar * k * q1 * q2 / z) == 0
 
     def test_antisymmetry(self):
         """Laplace central kernel is symmetric; collision kernels carry skewness.
@@ -445,7 +784,7 @@ class TestSU2RMatrix:
             assert diff == 0, f"BR3 for su(2) ({a},{b}) FAILED: diff = {diff}"
 
     def test_su2_r_diagonal(self):
-        """Diagonal components: r^{aa}(z) = k/z^2.
+        """Diagonal pre-dlog components: r^{aa}(z) = k/z^2.
 
         From {J^a_lam J^a} = k*lam: only lambda^1 term.
         r^{aa}(z) = k * 1! / z^2 = k/z^2.

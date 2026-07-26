@@ -20,18 +20,17 @@ The key results computed in this module:
 2. m_2: the binary product. At zeroth order in g, m_2 = free product (commutative).
    At order g, there is a correction from one cubic vertex + one propagator.
 
-3. m_3 (FRONTIER): the ternary operation from FM_3(C) integration.
-   m_3(phi, phi, phi) = 2g * (FM_3 form factor)
-   The coefficient 2g comes from W'''(phi) = 2g (third derivative of g*phi^3/3).
-   The FM_3(C) integral is a single point (the collision limit of three points
-   on C, modulo translations). So the form factor is 1 (after normalization).
+3. m_3: the polarized cubic Taylor coefficient on the Jacobian minimal
+   model. With basis {1, phi}, strict unitality leaves
+   m_3(phi, phi, phi) = 2g and all triples containing 1 vanish.
 
-4. m_{k>=4} = 0: vanishing by form-degree counting on FM_k(C).
-   For k external legs and E = k-3 propagators, the form degree available
-   is 2E = 2(k-3), but the integration domain FM_k(C) has dimension 2(k-1).
-   The deficit of 4 form degrees cannot be supplied for k >= 4.
+4. m_{k>=4} = 0 on the Jacobian minimal model because the primitive
+   k-ary operation is the k-th Taylor coefficient W^(k), and W^(k)=0
+   for the cubic superpotential when k >= 4. Trees with several cubic
+   vertices are Stasheff composites of m_2 and m_3, not new primitive
+   operations.
 
-5. Descent to PVA: The homotopy-transferred structure on H*(A, m_1) recovers
+5. Descent to PVA: The homotopy-transferred structure on H*(A, d_W) recovers
    the PVA lambda-bracket on the Jacobian ring Jac(W) = C[phi]/(W'(phi)) = C[phi]/(phi^2).
 
 References:
@@ -359,136 +358,28 @@ def verify_m2_associativity_defect(g):
 
 
 # =========================================================================
-# 5. TERNARY OPERATION m_3 (THE FRONTIER)
+# 5. TERNARY OPERATION m_3
 # =========================================================================
 
 def m3_cubic(a_power, b_power, c_power, g):
-    r"""Ternary A-infinity operation from the cubic vertex.
+    r"""Ternary operation on the Jacobian minimal model.
 
-    m_3(phi^a, phi^b, phi^c) arises from the tree-level Feynman diagram
-    with 3 external legs and 1 cubic vertex W''' = 2g.
+    The basis is encoded by powers 0=1 and 1=phi. The operation is the
+    polarized cubic Taylor coefficient. It consumes one linear phi from
+    each input and is strictly unital:
 
-    The diagram:
-        input_1(z_1) \
-                       > -- vertex(z_0) -- output
-        input_2(z_2) /
-        input_3(z_3) /
-
-    But a cubic vertex has exactly 3 legs. With 3 inputs and 1 output,
-    we need the vertex to connect all 3 inputs directly.
-
-    Actually, the A-infinity operation m_3 comes from integration over FM_3(C):
-        m_3(a, b, c) = integral_{FM_3(C)} omega_3 * (a tensor b tensor c)
-
-    where omega_3 is the 3-point amplitude form from the cubic vertex.
-
-    For the cubic LG model:
-        omega_3 = W'''(phi) * (holomorphic propagator form on FM_3)
-                = 2g * omega_{FM_3}
-
-    The integral over FM_3(C) gives a finite value (FM_3(C) is compact
-    after compactification, and the form is smooth).
-
-    For DEGREE-0 inputs (all phi's of power 1):
-        m_3(phi, phi, phi) = 2g * (FM_3 normalization)
-
-    The FM_3(C) normalization: after fixing one point by translation,
-    FM_3(C) ~ C^2 / diagonals ~ a compact 4-manifold with boundary.
-    The relevant integral gives 1 in standard normalization.
-
-    So: m_3(phi, phi, phi) = 2g (the coupling constant).
-
-    For general polynomial inputs:
-        m_3(phi^a, phi^b, phi^c) = 2g * phi^{a+b+c-3}
-    (if a+b+c >= 3; zero otherwise by degree counting).
-    The exponent a+b+c-3 comes from: each leg consumes one phi from
-    the vertex (W''' removes 3 phi's), so net power = a+b+c-3.
-
-    BUT WAIT: W'''(phi) = 2g is INDEPENDENT of phi (it's a constant).
-    So the vertex does NOT consume phi powers. The correct formula:
-        m_3(phi^a, phi^b, phi^c) = 2g * (tensor contraction)
-
-    The tensor contraction for the cubic vertex W = g*phi^3/3:
-    The vertex is the third-order tensor W_{ijk} = g * delta_{ijk}
-    (fully symmetric). Contracting with inputs phi^a, phi^b, phi^c
-    at positions z_1, z_2, z_3 and integrating over FM_3:
-
-    m_3(phi^a, phi^b, phi^c) = 2g * phi^{a+b+c} * (integral factor)
-
-    ACTUALLY: For the 1-dimensional target (phi is a single scalar),
-    W_{ijk} = g for all i=j=k=1 (only one direction).
-    m_3 maps three inputs to a single output:
-        m_3(phi^a, phi^b, phi^c) = 2g * I_{FM_3} * phi^{a+b+c}
-
-    where I_{FM_3} is the integral over FM_3. For the scalar LG model
-    on C with standard holomorphic propagator, I_{FM_3} = 1.
-
-    SIMPLIFICATION: For the chain-level computation in the target-space
-    polynomial ring C[phi], we work with the Jacobian ring perspective:
-        m_3 restricted to degree-1 inputs gives m_3(phi, phi, phi) = 2g.
+        m_3(phi, phi, phi) = 2g,
+        m_3(..., 1, ...) = 0.
 
     Parameters:
         a_power, b_power, c_power: polynomial degrees of inputs
         g: coupling constant
 
     Returns:
-        The m_3 output as a power of phi (or S.Zero)
+        A SymPy representative of the output in the basis {1, phi}
     """
-    # m_3 is nonzero only for the genuine cubic interaction
-    # For the scalar target C, m_3 is the trilinear form:
-    # m_3(phi^a, phi^b, phi^c) = 2g * delta_{a=1, b=1, c=1}
-    # (only the linear terms interact through the cubic vertex)
-    #
-    # More precisely: m_3 on the MODE level maps three phi modes to one psi mode
-    # (raising the BV degree by 1 - 3 = -2... that's wrong).
-    #
-    # The A-infinity sign convention: |m_k| = 2 - k.
-    # For m_3: |m_3| = 2 - 3 = -1. So m_3 lowers degree by 1.
-    # For degree-0 inputs (three phi's): output has degree -1... impossible.
-    #
-    # CORRECTION: In the COHOMOLOGICAL convention with |m_k| = 2 - k:
-    # m_3: A^{otimes 3} -> A[2-3] = A[-1], i.e., m_3 has degree -1.
-    # But if all inputs are degree 0 (phi), the output is degree -1,
-    # which doesn't exist in our complex {phi (degree 0), psi (degree 1)}.
-    #
-    # Wait -- this is the A-infinity convention where the degree SHIFT is
-    # already built into the desuspended bar complex. Let me reconsider.
-    #
-    # In the bar complex convention: operations m_k on sA (suspended A)
-    # have |m_k| = 1 on sA, which means |m_k| = 2-k on A.
-    #
-    # For PHYSICAL fields:
-    # m_1: degree +1 (BV differential)
-    # m_2: degree 0 (product)
-    # m_3: degree -1 (from the cubic vertex, it contracts 3 fields into 1)
-    #
-    # With phi = degree 0 and psi = degree 1:
-    # m_3(phi, phi, phi) should have degree 0 + 0 + 0 + (-1) = -1
-    # This requires a field of degree -1, which we don't have.
-    #
-    # RESOLUTION: In the LG model, the BV complex on C x R has EXTRA
-    # structure from the R-direction. The time-ordered propagator introduces
-    # a degree shift. In the Costello-Gwilliam framework:
-    # - The propagator P has (form degree, ghost number) = (1, -1) on R
-    # - m_3 from a tree with 1 vertex and 0 propagators has ghost number +1
-    #   (from the vertex = antifield coupling)
-    #
-    # So m_3 on PHYSICAL fields gives:
-    # m_3(phi, phi, phi) = 2g * (result has ghost number 1) = 2g * psi
-    #
-    # This makes sense: the cubic interaction W''' = 2g produces an
-    # antifield (psi) from three fields (phi).
-    #
-    # For polynomial modes:
-    # m_3(phi^a, phi^b, phi^c) = 2g * psi^{a+b+c} (symbolically)
-    #
-    # But at the scalar level (a=b=c=1):
-    # m_3(phi, phi, phi) = 2g * psi (with psi in degree 1)
-
     if a_power == 1 and b_power == 1 and c_power == 1:
-        return 2 * g  # coefficient of the psi output
-    # For other powers: the interaction vertex is trilinear,
-    # so only (1,1,1) contributes at the vertex level
+        return 2 * g
     return S.Zero
 
 
@@ -498,15 +389,9 @@ def m3_on_basis_elements(g):
     The Jacobian ring Jac(W) = C[phi]/(phi^2) has basis {1, phi}.
     (Since W'(phi) = g*phi^2, the ideal is (phi^2).)
 
-    m_3 on the Jacobian ring:
-        m_3(1, -, -) = 0 (unit doesn't participate in cubic vertex)
-        m_3(phi, phi, phi) = 2g (the cubic coupling)
-        m_3(phi, phi, 1) = 0 (need all three slots filled by phi)
-        m_3(phi, 1, phi) = 0
-        m_3(1, phi, phi) = 0
-        m_3(1, 1, phi) = 0
-        m_3(1, 1, 1) = 0
-        m_3(1, phi, 1) = 0
+    m_3 on the Jacobian ring is the normalized cubic cochain:
+        m_3(phi, phi, phi) = 2g
+        every triple containing the unit is zero.
 
     Parameters:
         g: coupling constant
@@ -519,10 +404,7 @@ def m3_on_basis_elements(g):
     for a in basis:
         for b in basis:
             for c in basis:
-                if a == 1 and b == 1 and c == 1:
-                    results[(a, b, c)] = 2 * g
-                else:
-                    results[(a, b, c)] = S.Zero
+                results[(a, b, c)] = m3_cubic(a, b, c, g)
     return results
 
 
@@ -574,32 +456,12 @@ def m3_fm3_integral():
 # =========================================================================
 
 def mk_vanishing_proof(k, g):
-    r"""Prove m_{k>=4} = 0 by form-degree counting.
+    r"""Prove m_{k>=4} = 0 for the cubic Jacobian minimal model.
 
-    For k external legs, tree diagrams with cubic vertices have:
-        V = k - 2 vertices
-        E = k - 3 internal propagators (edges)
-
-    The amplitude is a differential form on FM_k(C) of degree 2E = 2(k-3).
-    The dimension of FM_k(C) is 2(k-1) (real dimension, after fixing
-    one point by translation).
-
-    For the integral to be nonzero: form degree must equal dimension.
-        2(k-3) = 2(k-1) => -6 = -2 => never! (deficit = 4)
-
-    So the form degree is ALWAYS 4 less than needed for k >= 4.
-    The integral vanishes by degree counting.
-
-    For k=3: V=1, E=0, form degree = 0, dim(FM_3) = 4.
-    The vertex provides a 0-form (constant W''' = 2g).
-    The integral is nonzero because it's a volume integral
-    against the holomorphic top form, not a form-degree integral.
-    (The holomorphic volume form on FM_3(C) supplies the needed 4 form degrees.)
-
-    For k=4: V=2, E=1, form degree = 2, dim(FM_4) = 6. Deficit = 4.
-    For k=5: V=3, E=2, form degree = 4, dim(FM_5) = 8. Deficit = 4.
-
-    The deficit is always 4 for k >= 4.
+    The primitive k-ary operation is the k-th Taylor coefficient W^(k)
+    projected to J(W). For W=g*phi^3/3, W'''=2g and W^(k)=0 for
+    k>=4. Tree diagrams with several cubic vertices are compositions
+    of lower operations in the Stasheff identities.
 
     Parameters:
         k: arity (number of external legs)
@@ -621,30 +483,24 @@ def mk_vanishing_proof(k, g):
         return {
             'k': 3, 'vanishes': False,
             'V': 1, 'E': 0,
-            'form_degree': 0,
-            'fm_dimension': 4,
-            'reason': 'V=1, E=0: constant vertex, volume integral nonzero',
+            'primitive_derivative_order': 3,
+            'taylor_coefficient_zero': False,
+            'reason': "W''' = 2g gives the primitive ternary operation",
             'm3_value': 2 * g,
         }
 
     V = k - 2
     E = k - 3
-    form_degree = 2 * E
-    fm_dimension = 2 * (k - 1)
-    deficit = fm_dimension - form_degree  # always 4
-
     return {
         'k': k,
         'V': V,
         'E': E,
-        'form_degree': form_degree,
-        'fm_dimension': fm_dimension,
-        'deficit': deficit,
+        'primitive_derivative_order': k,
+        'taylor_coefficient_zero': True,
         'vanishes': True,
         'reason': (
-            f'Form degree {form_degree} < FM dimension {fm_dimension}. '
-            f'Deficit = {deficit} (always 4 for k >= 4). '
-            f'Integral vanishes by degree counting.'
+            f'W^({k})=0 for the cubic superpotential. '
+            f'Trees with {V} cubic vertices and {E} internal edges are Stasheff composites.'
         ),
     }
 
@@ -738,91 +594,12 @@ def verify_ainfty_n3(g):
 
 
 def verify_ainfty_n4(g):
-    r"""Verify the A-infinity relation at n=4: the FIRST NONTRIVIAL identity.
+    r"""Verify the n=4 relation for the cubic minimal operation.
 
-    The n=4 identity involves m_3 and m_2:
-        m_1(m_4(a,b,c,d))
-        + m_2(m_3(a,b,c), d) + m_3(m_2(a,b), c, d)
-        - m_2(a, m_3(b,c,d)) - m_3(a, m_2(b,c), d) + m_3(a, b, m_2(c,d))
-        + m_4(m_1, ...) terms
-        = 0
-
-    Since m_1 = 0 and m_4 = 0 (form-degree vanishing), this reduces to:
-        m_2(m_3(a,b,c), d) + m_3(m_2(a,b), c, d)
-        - m_2(a, m_3(b,c,d)) - m_3(a, m_2(b,c), d) + m_3(a, b, m_2(c,d))
-        = 0
-
-    For degree-0 inputs a = b = c = d = phi:
-
-    Term 1: m_2(m_3(phi,phi,phi), phi)
-        = m_2(2g, phi) = 2g * phi  (m_2 with a scalar times phi)
-
-    Wait -- m_3(phi, phi, phi) = 2g produces a PSI output (degree 1).
-    And m_2(psi, phi) mixes degree-0 and degree-1 fields.
-
-    Let me be more careful about degrees.
-    m_3: degree -1 (maps degree 0+0+0 to degree -1... no, m_3 has |m_3| = -1)
-    The output degree is: |a| + |b| + |c| + |m_3| = 0 + 0 + 0 + (-1) = -1
-
-    In the BV complex {phi(deg 0), psi(deg 1)}, there is no degree -1 field.
-    So m_3(phi, phi, phi) must be zero... BUT we said it's 2g!
-
-    RESOLUTION: The degrees work differently in the PHYSICAL BV complex.
-    In the Costello-Gwilliam framework:
-    - phi has ghost number 0
-    - psi (antifield) has ghost number 1
-    - The cubic vertex W(phi) = g*phi^3/3 has ghost number 0
-    - m_3 is built from the vertex and has ghost number +1
-      (because one external leg is the antifield direction)
-
-    Actually, the correct A-infinity structure for BV is:
-    m_k maps (shifted) fields. In the desuspended complex:
-    m_k: (sA)^{otimes k} -> sA has degree 1 on sA.
-    On A: |m_k| = 2 - k.
-
-    For the LG model, the A-infinity operations are between
-    MODES of the field, not the field itself. Let me work at the
-    mode level instead.
-
-    At the mode level for the 1d target C[phi]:
-    The polynomial ring C[phi] with degree = 0 for all phi^k.
-    The m_3 output must have the same degree (since the A-infinity
-    relation is a relation in the same complex).
-
-    For the Jacobian ring reduction: on Jac(W) = C[phi]/(phi^2),
-    the A-infinity structure is homotopy-transferred from C[phi].
-    The transferred m_3 on Jac(W) maps 1 -> {0, phi} and has the
-    correct degree structure.
-
-    For our purposes: m_3(phi, phi, phi) = 2g as a SCALAR (i.e.,
-    a multiple of the unit 1 in the Jacobian ring, since
-    phi^3 = 0 in Jac(W) = C[phi]/(phi^2), so the image is projected
-    to C * 1 inside Jac(W)).
-
-    Wait -- in Jac(W), phi^2 = 0 but phi^3 = phi * phi^2 = 0.
-    So phi * phi * phi = phi^3 = 0 in Jac(W).
-    The m_3 operation on the CHAIN LEVEL (before passing to Jac) gives 2g,
-    but on Jac the projection is 0.
-
-    This is getting confused. Let me simplify and compute the n=4
-    identity on the CHAIN LEVEL where m_3(phi, phi, phi) = 2g * (output)
-    with the output in the polynomial ring C[phi].
-
-    On C[phi] (chain level, before taking cohomology):
-    m_3(phi, phi, phi) = 2g (a constant = 2g * phi^0 = 2g * 1)
-
-    Then the n=4 identity on (phi, phi, phi, phi):
-
-    Term 1: m_2(m_3(phi,phi,phi), phi) = m_2(2g, phi) = 2g * phi
-    Term 2: m_3(m_2(phi,phi), phi, phi) = m_3(phi^2, phi, phi) = 0
-        (m_3 is only nonzero on (phi,phi,phi), not on higher powers)
-    Term 3: -m_2(phi, m_3(phi,phi,phi)) = -m_2(phi, 2g) = -2g * phi
-    Term 4: -m_3(phi, m_2(phi,phi), phi) = -m_3(phi, phi^2, phi) = 0
-    Term 5: m_3(phi, phi, m_2(phi,phi)) = m_3(phi, phi, phi^2) = 0
-
-    Total: 2g*phi + 0 - 2g*phi + 0 + 0 = 0. CHECK!
-
-    The n=4 identity is satisfied.
+    With m_1=0 and primitive m_4=0, the relation is the Hochschild
+    cocycle condition for the normalized cochain m_3. On the reduced
+    input (phi, phi, phi, phi), the two boundary multiplications by
+    the unit output 2g cancel, and each middle term contains phi^2.
     """
     g_sym = Symbol('g')
     g_val = g_sym if g is None else S(g)

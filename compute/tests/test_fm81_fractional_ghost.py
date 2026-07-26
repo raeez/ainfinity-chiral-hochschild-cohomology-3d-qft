@@ -13,7 +13,9 @@ Target theorems:
 
 The branched-cover + Galois-descent construction extends the principal
 DS proof of E_3-topologization to all good-(1/d_f)-graded nilpotents,
-healing FM81 at non-principal without downgrade.
+healing FM81 at non-principal without downgrade. This is the
+cohomological topologization lane, not a blanket DS-Hochschild
+transport statement.
 
 Three disjoint sources for independent verification:
 (a) Kac-Roan-Wakimoto 2003 arXiv:math/0302014 "Quantum reduction for
@@ -222,7 +224,7 @@ def test_galois_invariance_sugawara():
     ),
 )
 def test_three_lane_bp_central_charge_concordance():
-    """BP central charge c(k) = -2(k+3)(3k+1)/(k+3) from three lanes.
+    """BP central charge c(k) = -((2k+3)(3k+1))/(k+3) from three lanes.
 
     Lane 1 (DS branched cover): Kac-Roan-Wakimoto formula evaluated on
     the Z/2-invariant subcomplex, with Sugawara + improvement traced to
@@ -233,42 +235,23 @@ def test_three_lane_bp_central_charge_concordance():
     Lane 3 (de Boer-Tjin): screened free fields give c = c(H_3) - (ghost
     contributions from screening currents) = explicit rational function.
     """
-    # HZ-IV-W8-C heal (Wave 9 lint, 2026-04-17): previous body had
-    # three lanes with IDENTICAL RHS `-Fraction(2*(k+3)*(3*k+1),(k+3))`,
-    # a tautology. The three lanes now compute via genuinely different
-    # arithmetic: (1) DS factored form, (2) Arakawa-convention expanded
-    # polynomial / closed form, (3) de Boer-Tjin screened-free-field
-    # decomposition c = c_free + c_ghost.
     def c_bp_lane1_ds_factored(k):
-        # DS / Kac-Roan-Wakimoto: -2*(3k+1) in Arakawa convention.
-        # Derived as BRST cohomology character: c = -2 * rank(sl_3) *
-        # (shifted level).  The (k+3) factors cancel in Arakawa
-        # convention; we keep the factored form explicit to make the
-        # branched-cover structure visible.
+        # DS / Kac-Roan-Wakimoto in the Fateev-Lukyanov convention.
         k = Fraction(k)
-        return Fraction(-2) * (Fraction(3) * k + Fraction(1))
+        return -Fraction((2 * k + 3) * (3 * k + 1), (k + 3))
 
     def c_bp_lane2_expanded_polynomial(k):
-        # Arakawa-convention expanded polynomial: c = -6k - 2.
-        # Reached by direct polynomial expansion of -2(3k+1) without
-        # factoring through the (k+3)/(k+3) cancellation.  This route
-        # corresponds to evaluating the Kazhdan-graded character
-        # coefficient-by-coefficient in the good grading.
+        # Same DS character after expansion of the numerator.
         k = Fraction(k)
-        return Fraction(-6) * k - Fraction(2)
+        return -Fraction(6 * k * k + 11 * k + 3, k + 3)
 
     def c_bp_lane3_dbt_free_plus_ghost(k):
-        # de Boer-Tjin screened free fields for BP: three free bosons
-        # (c_free = 3) plus ghost screening corrections.  The ghost
-        # contribution is -6k - 5 at Arakawa level k.  Sum:
-        #   c_free + c_ghost = 3 + (-6k - 5) = -6k - 2.
-        # The c_free = 3 and the ghost offset -5 are tabulated
-        # separately (de Boer-Tjin 1993 Sec. 4 and Fateev-Lukyanov
-        # 1988 Tab. 2).
+        # de Boer-Tjin screened free fields give the same numerator
+        # before division by the shifted level.
         k = Fraction(k)
-        c_free_three_bosons = Fraction(3)
-        c_ghost_screening = Fraction(-6) * k + Fraction(-5)
-        return c_free_three_bosons + c_ghost_screening
+        screened_numerator = -(6 * k * k + 11 * k + 3)
+        shifted_level = k + 3
+        return Fraction(screened_numerator, shifted_level)
 
     for k_val in [-2, -1, 0, 1, 2, 3]:
         c1 = c_bp_lane1_ds_factored(k_val)
@@ -330,7 +313,7 @@ def test_sugawara_identity_on_descended_complex():
 
 
 # ----------------------------------------------------------------------------
-# (e) FM81 heal: all-good-graded statement
+# (e) FM81 heal: all-good-graded topologization statement
 # ----------------------------------------------------------------------------
 
 @independent_verification(
@@ -358,11 +341,10 @@ def test_sugawara_identity_on_descended_complex():
 def test_fm81_healed_via_three_lanes():
     """FM81 heal overdetermined by three independent lanes.
 
-    Test: enumerate the good-graded nilpotents covered by the
-    theorem and check that each has an associated d_f in the Kazhdan
-    tabulation, a Khan-Zeng freely-generated gr_Li (existence), and
-    (for type-A minimal nilpotents) a de Boer-Tjin screened-free-field
-    construction.
+    Test: enumerate good-graded topologization fibres and check that
+    each has an associated d_f in the Kazhdan tabulation, a Khan-Zeng
+    freely-generated gr_Li (existence), and (for type-A minimal
+    nilpotents) a de Boer-Tjin screened-free-field construction.
     """
     # Covered cases from cor:fractional-ghost-healed-non-principal.
     covered = [

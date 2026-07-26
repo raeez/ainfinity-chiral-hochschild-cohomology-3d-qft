@@ -293,7 +293,8 @@ def genus2_r_matrix_heisenberg(k_val=1) -> Dict[str, Any]:
     The Heisenberg lambda-bracket: {J_lambda J} = k*lambda
     so c_0 = 0, c_1 = k, c_n = 0 for n >= 2.
 
-    Genus-0: r^{(0)}(z) = k/z^2 (pre-d-log), or k/z (post-d-log)
+    Genus-0: coefficient k/z^2 (pre-d-log), or rank-one coefficient
+    k/z for the post-d-log tensor kernel k*Omega_H/z
     Genus-1: r^{E_tau}(z) = k * wp(z|tau) (pre-d-log convention)
     Genus-2: r^{Sigma_2}(z,w) = k * B(z,w)
 

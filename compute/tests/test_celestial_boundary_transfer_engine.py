@@ -13,6 +13,7 @@ References:
 """
 import sys
 import os
+from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 import pytest
@@ -27,6 +28,15 @@ from lib.celestial_boundary_transfer_engine import (
     airy_witt_operator,
     witt_commutation_check,
 )
+
+
+ROOT = Path(__file__).resolve().parents[2]
+CBT_CORE = ROOT / "chapters" / "connections" / "celestial_boundary_transfer_core.tex"
+CBT_SPLIT = ROOT / "chapters" / "connections" / "celestial_boundary_transfer.tex"
+
+
+def _read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
 
 
 # ===================================================================
@@ -75,6 +85,61 @@ class TestTreeCount:
         """Arity < 1 raises ValueError."""
         with pytest.raises(ValueError):
             homotopy_transfer_tree_count(0)
+
+    def test_source_prints_signed_suspended_transfer_formula(self):
+        """The manuscript must not use an unspecified ± tree transfer."""
+        for path, label in [
+            (CBT_CORE, "eq:cbt-suspended-transfer"),
+            (CBT_SPLIT, "eq:cbt-suspended-transfer-split"),
+        ]:
+            source = _read(path)
+            assert label in source
+            assert r"\widetilde i=s\,i\,s^{-1}" in source
+            assert r"\widetilde\mu_r=s\,\mu_r\,(s^{-1})^{\otimes r}" in source
+            assert r"E_{\mathrm{int}}(T)=\{e_1<\cdots<e_N\}" in source
+            assert "left-to-right depth-first planar order" in source
+            assert r"\mathfrak o(T)=\det(\Bbbk^{E_{\mathrm{int}}(T)})" in source
+            assert r"p i=\id_H" in source
+            assert r"p h=0" in source
+            assert r"h i=0" in source
+            assert r"h^2=0" in source
+            assert r"\pm\,p\,\mu_T\,i^{\otimes n}" not in source
+
+    def test_mhv_surface_is_conditional_residue_identity(self):
+        """The celestial MHV bridge is a residue theorem, not a scattering analogy."""
+        source = _read(CBT_CORE)
+        start = source.index(r"\begin{definition}[four-point Parke--Taylor residue datum]")
+        end = source.index(r"\end{remark}", source.index(r"\label{rem:cbt-mhv-general-n}"))
+        block = source[start:end]
+        flat = " ".join(block.split())
+
+        required = (
+            r"\label{def:cbt-pt-residue-datum}",
+            r"P_{\mathrm{cyc}}",
+            "kills the non-cyclic pair channels",
+            r"D_{\{1,3\}}",
+            r"D_{\{2,4\}}",
+            r"\rho_{i,i+1}",
+            "where the index \\(i+1\\) is read cyclically",
+            r"\rho_{--}(\tilde J_2,\tilde J_3)=\langle 23\rangle^4",
+            "This datum is a comparison datum",
+            r"\(\ClaimStatusConditional\)",
+            r"licensing \(\alpha+\beta+\gamma\)",
+            "The theorem is a residue identity on the cyclic FM boundary",
+            "It does not construct the Lorentzian scattering theory",
+            "the LSZ map, or the Mellin/celestial transform",
+            "This is a construction problem unless that recursive datum is supplied",
+        )
+        for needle in required:
+            assert " ".join(needle.split()) in flat
+
+        retired = (
+            "This realization confirms that the bar-complex formalism contains the physical amplitude data",
+            "The colour-ordered tree-level four-gluon MHV amplitude is reproduced by the bar-complex integral",
+            "This follows from the general theory of Koba--Nielsen integrals",
+        )
+        for needle in retired:
+            assert needle not in block
 
 
 # ===================================================================

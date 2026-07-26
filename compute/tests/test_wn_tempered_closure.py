@@ -31,20 +31,26 @@ import math
 import os
 import sys
 from fractions import Fraction
+from pathlib import Path
 
 # Ensure package is importable.
-_VOL2_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-if _VOL2_ROOT not in sys.path:
-    sys.path.insert(0, _VOL2_ROOT)
+_VOL2_ROOT = Path(__file__).resolve().parents[2]
+if str(_VOL2_ROOT) not in sys.path:
+    sys.path.insert(0, str(_VOL2_ROOT))
 
 from compute.lib.wn_tempered_closure import (  # noqa: E402
     BETA_2,
     BETA_3,
     WN_TEMPERING_SCOPE,
+    banach_radius_certificate,
     beta_N,
     beta_N_candidate_A,
     beta_N_candidate_B,
     beta_N_is_finite,
+    class_m_banach_norm,
+    geometric_mc_series_bound,
+    mc_series_bound,
+    operation_bound_holds,
     rho_star_WN,
     stirling_vs_beta_dominance,
     tempering_certificate,
@@ -61,6 +67,22 @@ except ImportError:
         def wrap(f):
             return f
         return wrap
+
+
+def _wn_tempered_tex() -> str:
+    return (
+        _VOL2_ROOT / "chapters/theory/wn_tempered_closure_platonic.tex"
+    ).read_text()
+
+
+def _window_around_label(tex: str, label: str, before: int = 500, after: int = 1500) -> str:
+    marker = rf"\label{{{label}}}"
+    index = tex.index(marker)
+    return tex[max(0, index - before): index + after]
+
+
+def _flat(text: str) -> str:
+    return " ".join(text.split())
 
 
 # ---------------------------------------------------------------------------
@@ -90,6 +112,53 @@ def test_beta_3_is_ten():
     assert beta_N(3) == Fraction(10)
 
 
+def test_wn_closure_manuscript_carries_licensing_and_scope_guards():
+    """The four W_N closure claims carry status, licensing, and scope data."""
+    tex = _wn_tempered_tex()
+
+    stirling = _window_around_label(tex, "prop:beta-stirling-dominance")
+    assert r"\ClaimStatusProvedHere" in stirling
+    assert r"licensing $\gamma$" in stirling
+    assert r"\hypAmbientWtCpl" in stirling
+    assert "finite" in stirling and r"\beta" in stirling
+    assert r"\limsup" in stirling
+
+    tempering = _window_around_label(tex, "thm:wn-tempered-all-N")
+    tempering_flat = _flat(tempering)
+    assert r"\ClaimStatusConditional" in tempering
+    assert r"licensing $\alpha+\gamma+\varepsilon$" in tempering
+    assert r"\hypAmbientWtCpl" in tempering
+    assert "finite Riccati envelope" in tempering
+    assert "finite envelope as an explicit assumption" in tempering_flat
+    assert "does not derive it from Fateev--Lukyanov" in tempering_flat
+
+    radius = _window_around_label(tex, "prop:rho-star-WN-closed-form")
+    radius_flat = _flat(radius)
+    assert r"\ClaimStatusConditional" in radius
+    assert r"licensing $\alpha+\gamma$" in radius
+    assert r"\hypAmbientWtCpl" in radius
+    assert "leading-root sharpness" in radius_flat
+    assert r"Conjecture~\ref{prop:beta-N-closed-form}" in radius
+    assert "Cauchy--Hadamard root test" in radius_flat
+    assert "only the lower bound" in radius_flat
+
+    corollary = _window_around_label(tex, "cor:wn-original-complex-dichotomy-healed")
+    corollary_flat = _flat(corollary)
+    assert r"\ClaimStatusConditional" in corollary
+    assert r"licensing $\alpha+\gamma+\varepsilon$" in corollary
+    assert r"\hypAmbientWtCpl" in corollary
+    assert "finite-envelope locus" in corollary_flat
+    assert "Remaining open candidates" in corollary
+
+
+def test_wn_radius_equality_is_not_stated_without_sharpness():
+    """Finite upper envelopes give tempering; radius equality needs sharpness."""
+    tex_flat = _flat(_wn_tempered_tex())
+    assert "On the leading-root sharp finite-envelope locus" in tex_flat
+    assert "finite envelope gives only the lower bound" in tex_flat
+    assert "ordinary-generating convergence radius of" in tex_flat
+
+
 # ---------------------------------------------------------------------------
 # Harmonic-candidate check: matches proved data and separates candidates conditionally
 # ---------------------------------------------------------------------------
@@ -114,7 +183,7 @@ def test_beta_3_is_ten():
 def test_beta_N_candidates_match_N2_N3_only():
     """Both Candidate A and Candidate B match at N=2, 3 by coincidence.
 
-    The harmonic conjecture (thm:beta-N-closed-form-proved-all-N in
+    The harmonic conjecture (conj:beta-N-harmonic-closed-form in
     beta_N_closed_form_all_platonic.tex) predicts beta_N = 12(H_N - 1),
     which also matches N=2, 3. At N=4 all three formulas diverge:
     Candidate A = 15, Candidate B = 16, harmonic candidate = 13.
@@ -126,7 +195,7 @@ def test_beta_N_candidates_match_N2_N3_only():
     # VERIFIED: [DC] formula evaluation N=2: both candidates give 6.
     # VERIFIED: [DC] formula evaluation N=3: both candidates give 10.
     # VERIFIED: [LT] beta_N_closed_form_all_platonic.tex
-    #              thm:beta-N-closed-form-proved-all-N conditionally retracts both.
+    #              conj:beta-N-harmonic-closed-form conditionally retracts both.
     """
     # Both candidates (and the harmonic candidate) match at N=2 and N=3
     assert beta_N_candidate_A(2) == BETA_2
@@ -244,7 +313,7 @@ def test_stirling_dominates_beta_at_large_r():
 @independent_verification(
     claim="prop:rho-star-WN-closed-form",
     derived_from=[
-        "Conditional closed form beta_N = 12(H_N - 1) from prop:beta-N-closed-form",
+        "Conditional harmonic beta_N = 12(H_N - 1) from conj:beta-N-harmonic-closed-form",
         "Root test: rho_*(c) = (limsup |S_r|^{1/r})^{-1}",
     ],
     verified_against=[
@@ -280,6 +349,63 @@ def test_rho_star_closed_form():
         c = Fraction(1000)
         rho = rho_star_WN(N, c)
         assert rho * beta_N(N) == c
+
+
+# ---------------------------------------------------------------------------
+# Banach body and MC operation constants
+# ---------------------------------------------------------------------------
+
+
+def test_class_m_banach_norm_is_weighted_l1_body():
+    """||a||_rho is sum_w ||a_w|| rho^w."""
+    weight_norms = {0: Fraction(2), 2: Fraction(3), 4: Fraction(5)}
+    rho = Fraction(1, 3)
+    expected = Fraction(2) + Fraction(3, 9) + Fraction(5, 81)
+    assert class_m_banach_norm(weight_norms, rho) == expected
+
+
+def test_operation_bound_holds_is_multilinear_norm_inequality():
+    """Check ||m_k(a_i)|| <= C_k prod ||a_i||."""
+    assert operation_bound_holds(
+        output_norm=Fraction(5),
+        input_norms=[Fraction(2), Fraction(3)],
+        constant=Fraction(1),
+    )
+    assert not operation_bound_holds(
+        output_norm=Fraction(7),
+        input_norms=[Fraction(2), Fraction(3)],
+        constant=Fraction(1),
+    )
+
+
+def test_mc_series_bound_and_geometric_majorant():
+    """The Banach MC criterion is sum_k C_k(rho) R^k < infinity."""
+    constants = [Fraction(1, 4), Fraction(1, 8), Fraction(1, 16)]
+    assert mc_series_bound(constants, radius=Fraction(1)) == Fraction(7, 16)
+    assert mc_series_bound(constants, radius=Fraction(1, 2)) == (
+        Fraction(1, 4) * Fraction(1, 4)
+        + Fraction(1, 8) * Fraction(1, 8)
+        + Fraction(1, 16) * Fraction(1, 16)
+    )
+    assert geometric_mc_series_bound(Fraction(1, 4), Fraction(1, 2)) == Fraction(1, 2)
+
+
+def test_banach_radius_certificate_statuses():
+    """Virasoro/W3 radii are proved; W_N for N>=4 is conditional."""
+    vir = banach_radius_certificate(2, Fraction(60))
+    w3 = banach_radius_certificate(3, Fraction(100))
+    w4 = banach_radius_certificate(4, Fraction(130))
+
+    assert vir["beta"] == Fraction(6)
+    assert vir["rho_star"] == Fraction(10)
+    assert vir["status"] == "proved_low_rank"
+    assert w3["beta"] == Fraction(10)
+    assert w3["rho_star"] == Fraction(10)
+    assert w3["status"] == "proved_low_rank"
+    assert w4["beta"] == Fraction(13)
+    assert w4["rho_star"] == Fraction(10)
+    assert w4["status"] == "conditional_harmonic_beta"
+    assert w4["requires_mc_sum"] == "sum_k C_k(rho) < infinity"
 
 
 # ---------------------------------------------------------------------------
@@ -460,6 +586,9 @@ def test_global_WN_closure_is_not_encoded_as_compute_proof():
     assert WN_TEMPERING_SCOPE["harmonic_beta_closed_form"] == (
         "conditional_kappa_ratio_scaling"
     )
+    assert WN_TEMPERING_SCOPE["leading_root_sharpness"] == (
+        "assumed_for_radius_equality"
+    )
     assert WN_TEMPERING_SCOPE["w4_full_miura_A5_bridge"] == "absent"
     report = direct_w4_attack_report()
     assert report.observed_full_miura_A5 is None
@@ -485,6 +614,8 @@ def test_proved_constants():
 if __name__ == "__main__":
     test_beta_2_is_six()
     test_beta_3_is_ten()
+    test_wn_closure_manuscript_carries_licensing_and_scope_guards()
+    test_wn_radius_equality_is_not_stated_without_sharpness()
     test_beta_N_candidates_match_N2_N3_only()
     test_beta_N_is_finite_for_all_N()
     test_tempering_rate_tends_to_zero_every_N()

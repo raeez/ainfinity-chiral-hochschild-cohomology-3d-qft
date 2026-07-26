@@ -175,46 +175,48 @@ The presence of logarithms indicates that $W_3$ is \textbf{not formal}: quantum 
 \item \textbf{$m_7$:} Contains up to 3-loop diagrams. The combinatorics of Feynman graphs explode: there are $\sim 50$ distinct topologies contributing to $m_7$.
 \end{itemize}
 
-Explicit formulas beyond the displayed arities require a separate
-finite-pole compute engine.
+Explicit formulas beyond the displayed arities require a finite-pole
+recursion for the corresponding graph residues.
 
 \subsubsection{Spectral $r$-Matrix for $W_3$}
 
 The $W_3$ spectral $r$-matrix is a $2 \times 2$ matrix in the $\{T, W\}$ basis:
 \begin{equation}
-r^{W_3}(\lambda, \mu) = \begin{pmatrix}
-r^{TT}(\lambda,\mu) & r^{TW}(\lambda,\mu) \\
-r^{WT}(\lambda,\mu) & r^{WW}(\lambda,\mu)
+K^{W_3}(u, v) = \begin{pmatrix}
+K^{TT}(u,v) & K^{TW}(u,v) \\
+K^{WT}(u,v) & K^{WW}(u,v)
 \end{pmatrix}.
 \end{equation}
 
 \textbf{Explicit Components:}
 
 \begin{align}
-r^{TT}(\lambda,\mu) &= \frac{c/12}{\lambda^3 \mu} + \frac{T \otimes \mathbf{1} + \mathbf{1} \otimes T}{\lambda^2 \mu} + \frac{(\partial T) \otimes \mathbf{1}}{\lambda \mu},\\
-r^{TW}(\lambda,\mu) &= \frac{3W \otimes \mathbf{1}}{\lambda^2 \mu} + \frac{(\partial W) \otimes \mathbf{1}}{\lambda \mu},\\
-r^{WW}(\lambda,\mu) &= \frac{c/360}{\lambda^5 \mu} + \frac{T \otimes \mathbf{1} + \mathbf{1} \otimes T}{3\lambda^3 \mu} + \frac{(\partial T) \otimes \mathbf{1}}{2\lambda^2 \mu} \\
-&\quad + \frac{(32/(5c+22))\,\Lambda \otimes \mathbf{1}}{\lambda \mu} + \frac{(16/(5c+22))\,(\partial\Lambda) \otimes \mathbf{1}}{\mu}.
+K^{TT}(u,v) &= \frac{c/12}{u^4 v} + \frac{2T \otimes \mathbf{1}}{u^2 v} + \frac{(\partial T) \otimes \mathbf{1}}{u v},\\
+K^{TW}(u,v) &= \frac{3W \otimes \mathbf{1}}{u^2 v} + \frac{(\partial W) \otimes \mathbf{1}}{u v},\\
+K^{WW}(u,v) &= \frac{c/360}{u^6 v} + \frac{T \otimes \mathbf{1}}{3u^4 v} + \frac{(\partial T) \otimes \mathbf{1}}{2u^3 v} \\
+&\quad + \frac{(32/(5c+22))\,\Lambda \otimes \mathbf{1}}{u^2 v} + \frac{(16/(5c+22))\,(\partial\Lambda) \otimes \mathbf{1}}{u v}.
 \end{align}
+The entry $K^{WT}$ is determined from $K^{TW}$ by PVA skew-symmetry.
 
-\begin{theorem}[$W_3$ Classical Yang--Baxter Equation]
+\begin{theorem}[$W_3$ PVA Jacobi kernel; \ClaimStatusProvedElsewhere]
 % label removed: thm:w3-CYBE
 Let\/ $\cA=\mathcal W_{3,c}$ be the principal DS $W_3$ algebra with
 the standard finite-pole $\lambda$-brackets.
-The $r$-matrix $r^{W_3}$ satisfies the graded CYBE:
+The coefficient kernel encodes the vanishing PVA Jacobiator:
 \begin{equation}
-[r^{12}, r^{13}] + [r^{12}, r^{23}] + [r^{13}, r^{23}] = 0,
+\{X_\lambda \{Y_\mu Z\}\}
+- \{Y_\mu \{X_\lambda Z\}\}
+- \{\{X_\lambda Y\}_{\lambda+\mu} Z\}
+\;=\;0
 \end{equation}
-in the completed tensor product $W_3 \hat{\otimes} W_3 \hat{\otimes} W_3$.
+for $X,Y,Z\in\{T,W\}$. No non-dynamical CYBE for this
+field-dependent kernel is asserted here.
 \end{theorem}
 
 \begin{proof}
-The CYBE is equivalent to the Jacobi identity for the $\lambda$-bracket on $W_3$, via the standard correspondence $r^{12}(z) = \sum_\alpha X_\alpha \otimes X^\alpha / z$ (where the sum is over a basis of $W_3$ and its dual). Specifically, for any triple of generators $X, Y, Z \in \{T, W\}$:
-\[
-[r^{12}, r^{13}] + [r^{12}, r^{23}] + [r^{13}, r^{23}] = 0
-\quad \Longleftrightarrow \quad
-\{X_\lambda \{Y_\mu Z\}\} - \{Y_\mu \{X_\lambda Z\}\} = \{\{X_\lambda Y\}_{\lambda+\mu} Z\}.
-\]
+The statement is the Jacobi identity for the Zamolodchikov
+$W_3$ Poisson vertex algebra in the standard finite-pole
+normalisation~\cite{BouFeiMal90}.
 There are four independent Jacobi identities to verify (up to symmetry), corresponding to the triples $(T,T,T)$, $(T,T,W)$, $(T,W,W)$, and $(W,W,W)$.
 
 \emph{Triple $(T,T,T)$:} This is the Virasoro Jacobi identity, verified in~\S\ref{subsec:virasoro}.
@@ -309,7 +311,7 @@ the complementarity constant is $\alpha = -c_{\mathrm{gh}}^{\mathrm{total}}$.
 For Virasoro ($s=2$): $\alpha = 2(24 - 12 + 1) = 26$, self-dual at $c = 13$. For $W_3$ ($s=2,3$): $\alpha = 26 + 2(54 - 18 + 1) = 26 + 74 = 100$, self-dual at $c = 50$. For $W_4$ ($s=2,3,4$): $\alpha = 100 + 2(96 - 24 + 1) = 100 + 146 = 246$, self-dual at $c = 123$.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 Each spin-$s$ generator contributes a $(b,c)$ ghost system of conformal weights $(s, 1-s)$ upon BRST quantization. The ghost central charge for such a system is $c_{\text{ghost}}(s) = -2(6s^2 - 6s + 1)$ (see, e.g., \cite{FMS86,Pol98}). In the BV-BRST framework of the 3D holomorphic-topological theory, the 1-loop vacuum bubble diagram produces a shift $\Delta c = |c_{\text{ghost}}(s)|/2 = 6s^2 - 6s + 1$ per generator. This factor of $\tfrac{1}{2}$ arises because the 3D theory computes the \emph{chiral half} of the full ghost determinant (the $\bar\partial$-direction ghost determinant contributes the conjugate half; the factorization is a consequence of the holomorphic-topological splitting). The total shift is obtained by summing over all generators.
 \end{proof}
 
@@ -330,14 +332,20 @@ For $W_3$, the $T$--$W$ sector mixing introduces new cross-channel contributions
 
 \subsection{Finite Symbolic Engines}
 
-\subsubsection{Computer Algebra Implementation}
+\subsubsection{Symbolic evaluation of graph weights}
 
-The explicit computation of $m_k$ for $k \geq 5$ requires computer algebra systems (e.g., Mathematica, SageMath). Key algorithms:
+For $k\geq5$, the operation $m_k$ is a finite sum over connected
+graphs with $k$ external legs and bounded loop number. Each summand is
+defined by four algebraic operations:
 \begin{enumerate}
-\item \textbf{Feynman Graph Generation:} Enumerate all connected graphs with $k$ external legs and bounded loop number.
-\item \textbf{Wick Contraction:} Automate the pairing of fields with propagators.
-\item \textbf{Integral Evaluation:} Use Feynman parameter techniques or FM compactification to evaluate configuration space integrals.
-\item \textbf{Laurent Series Expansion:} Extract poles in the spectral parameters $\lambda_i$.
+\item \textbf{Graph enumeration:} connected graphs with fixed external
+arity and the permitted loop number.
+\item \textbf{Wick contraction:} pairings of fields with the HT
+propagator.
+\item \textbf{Configuration integral:} the corresponding
+Fulton--MacPherson integral or Feynman-parameter integral.
+\item \textbf{Laurent extraction:} the pole part in the spectral
+parameters $\lambda_i$.
 \end{enumerate}
 
 \subsubsection{Obstruction Questions}
@@ -349,15 +357,23 @@ survival loci. For non-principal $\mathcal{W}^k(\mathfrak{g}, f)$,
 finite shadow depth is controlled by the corresponding DS survival
 map and is not inferred from the principal case.
 
-\item \textbf{Quantum Groups:} What is the precise relation between the quantized $r$-matrix of $W_3$ and the Yangian $Y(\mathfrak{sl}_3)$?
+\item \textbf{Quantum group comparison:} The quantized $r$-matrix of
+$W_3$ can be compared with $Y(\mathfrak{sl}_3)$ only after the DS
+screening quotient and the evaluation-core comparison surface have
+both been fixed.
 
 \item \textbf{Higher $W_n$:} For fixed $n$, can the recursive
 generating function be extended after supplying the finite DS envelope?
 No all-rank uniform envelope is asserted.
 
-\item \textbf{Non-perturbative Effects:} Are there instanton corrections beyond perturbative Feynman diagrams?
+\item \textbf{Non-perturbative sectors:} The local BV graph calculus
+does not include instanton sectors; such corrections require a global
+HT moduli problem with a compactness and orientation package.
 
-\item \textbf{Boundary Algebras:} How do boundary conditions (Neumann vs. Dirichlet) affect the $A_\infty$ structure?
+\item \textbf{Boundary conditions:} A Neumann--Dirichlet comparison
+changes the boundary factorization algebra and hence the transferred
+$A_\infty$ operations; the comparison is a statement about the
+corresponding boundary BRST complexes.
 \end{enumerate}
 
 \subsection{Summary Tables}
@@ -923,10 +939,12 @@ The Stasheff identities for a two-generator algebra with generators $T$
 (spin~2) and $W$ (spin~3) decompose into a \emph{system} of coupled
 recursions, one for each ordered input type. The
 the binary $\lambda$-brackets $\{T_\lambda T\}$, $\{T_\lambda W\}$,
-$\{W_\lambda W\}$ serve as the ``initial data'' (the $m_2$), and each
-subsequent $m_k$ is \emph{uniquely determined} by the Stasheff relation
-at degree~$k$, provided the inputs are $Q$-closed
-(i.e., represent cohomology classes).
+$\{W_\lambda W\}$ serve as the initial data \(m_2\). The Stasheff
+relation at degree~$k$ determines the boundary source for \(d m_k\);
+the operation \(m_k\) itself is selected only after fixing the chain
+contraction \(h\). On a minimal cohomology model the arity-four identity
+contains no \(m_4\); the first minimal relation involving \(m_4\) is the
+arity-five identity.
 
 Throughout this subsection, we work with cohomological grading
 ($|d| = +1$), bar uses desuspension, and the bar kernel absorbs one
@@ -951,17 +969,18 @@ desuspended bar complex (Convention: $\varepsilon(i,q) =
 desuspended degree; since $|T| = |W| = 0$ in cohomological grading,
 $|T|' = |W|' = -1$, so $\varepsilon(i,q) = (q-1)(i-1)$).
 
-For $Q$-closed inputs the $m_1$-terms vanish, so the sum runs over
-$p, q \ge 2$ only.
+For $Q$-closed inputs the $m_1$-terms vanish on cohomology, so the
+displayed sum runs over $p, q \ge 2$ only. On the chain model the same
+sum is the source cancelled by the \(m_1m_k\) and \(m_km_1\) terms.
 
 \subsubsection{Input Types and Notation}
 
 For degree~$k$ with inputs from $\{T, W\}$, there are $2^k$ ordered
 input types. We write $m_k(X_1, \ldots, X_k)$ for each. At each
 degree, the Stasheff relation~\eqref{eq:w3-stasheff-k} applied to a
-specific input sequence $(X_1, \ldots, X_k)$ determines $m_k(X_1,
-\ldots, X_k)$ in terms of compositions $m_p(\ldots, m_q(\ldots),
-\ldots)$ with $p, q < k$.
+specific input sequence $(X_1, \ldots, X_k)$ determines the source for
+\(d m_k(X_1,\ldots,X_k)\) in terms of compositions
+$m_p(\ldots, m_q(\ldots), \ldots)$ with $p, q < k$.
 
 Define the \emph{associator} for inputs $(X_1, \ldots, X_k)$:
 \begin{equation}
@@ -973,8 +992,9 @@ Define the \emph{associator} for inputs $(X_1, \ldots, X_k)$:
 (-1)^{\varepsilon(i,q)}\,
 m_p\bigl(\ldots,\, m_q(\ldots),\, \ldots\bigr).
 \end{equation}
-Then $m_k = \Assoc_k$ (i.e., the homotopy solving the Stasheff
-equation is the associator itself, with the sign absorbed).
+Then \(d m_k=\Assoc_k\). After a contraction \(h\) is fixed, the
+chosen primitive is \(m_k=-h\,\Assoc_k\) up to the displayed sign
+convention.
 
 \subsubsection{Degree 3: Review of Known $m_3$}
 
@@ -1063,7 +1083,7 @@ $\partial X$ term and the overall prefactor of the $X$ term.
 This pattern persists at higher degree.
 \end{remark}
 
-\subsubsection{Degree 4: The $m_4$ Operations from Stasheff}
+\subsubsection{Degree 4: The arity-four source for $m_4$}
 
 At degree~4, the Stasheff relation~\eqref{eq:w3-stasheff-k} for
 $Q$-closed inputs becomes:
@@ -1075,12 +1095,14 @@ $Q$-closed inputs becomes:
 &\quad + m_3\bigl(X_1, m_2(X_2, X_3), X_4\bigr)
 - m_3\bigl(X_1, X_2, m_2(X_3, X_4)\bigr)\\
 &\quad + m_2\bigl(X_1, m_3(X_2, X_3, X_4)\bigr)
-+ m_4(X_1, X_2, X_3, X_4) = 0.
+= \mathrm{Obs}_4(X_1,X_2,X_3,X_4).
 \end{split}
 \end{equation}
 (Signs: with $|X_i|' = -1$, we have $\varepsilon(i,q) = (q-1)(i-1)$;
 for $q=2$: $(i-1)$; for $q=3$: $2(i-1)$. The terms with even sign
-exponent appear with $+$, odd with $-$.)
+exponent appear with $+$, odd with $-$. The full chain relation is
+\(d m_4+\mathrm{Obs}_4=0\); after passing to cohomology it says
+\(\mathrm{Obs}_4=0\), not a value for \(m_4\).)
 
 \begin{theorem}[Explicit $m_4$ for the $T$-sector of $W_3$]
 \label{thm:w3-m4-TTTT}
@@ -1101,11 +1123,12 @@ m_4(T,T,T,T;\,\ell,\mu,\nu)
 where $R_4$ and $S_4$ are explicit polynomials of degrees~$3$ and~$6$
 in $(\ell,\mu,\nu)$ respectively, and $P_2$ collects the cross terms.
 
-More precisely, $m_4(T,T,T,T)$ equals the negative of the degree-4
-associator $\Assoc_4(T,T,T,T)$, which is a sum of five compositions
-involving $m_2$ and $m_3$ as in~\eqref{eq:w3-stasheff-4}. Each term is
-polynomial in $(\ell,\mu,\nu)$ (no negative powers), as befits an
-operation arising from integration on $\FM_4(\C)$.
+More precisely, in the fixed contraction gauge used in this split,
+$m_4(T,T,T,T)$ is the chosen primitive \(-h\,\Assoc_4(T,T,T,T)\) of
+the degree-four source, which is a sum of five compositions involving
+$m_2$ and $m_3$ as in~\eqref{eq:w3-stasheff-4}. Each source term is
+polynomial in $(\ell,\mu,\nu)$ (no negative powers), as befits a
+boundary contribution on $\FM_4(\C)$.
 
 The leading terms are:
 \begin{equation}
@@ -1577,7 +1600,7 @@ $\mathrm{Sp}_4(\mathbb Z)$-modular locus on $\bar{\mathcal A}_2$
 \cite{ChengDuncanHarvey2014,Gaiotto2009}. Without this Vol.~III/source
 recognition, the paragraph supplies only the finite-pole KZ/DS
 deformation slice with $\mathbf H_{\Delta_5}$ as candidate scalar
-target. Cross-ref Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+target. Compare Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
 \begin{remark}[$W$-algebra closure at the Lusztig point]
@@ -1587,7 +1610,7 @@ $\hbar^2 = -1/8$, with $K^{\kappaChHodge} = 8$ root-of-unity
 order. Beyond this point, the deformation family becomes non-associative
 (pentagon coboundary $\phi^{(3)}$ non-trivial at $\hbar^3$), forcing the
 KZ/DS fibre to stratify by $\mathbb Z/8$-cohomology class
-\cite{Lusztig1990,EtingofKazhdan2007PartV}. Cross-ref
+\cite{Lusztig1990,EtingofKazhdan2007PartV}. Compare
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -1626,7 +1649,7 @@ K3, abelian $T^4$, Enriques, bielliptic), only K3 satisfies
 \item Enriques surface: $\chi_{\mathrm{top}} = 12$, $h^{2,0} = 0$,
  fails (T1) and (T3). The scalar analogue is the level-$2$ Enriques
  paramodular row. A genuine \(\mathbb Z/2\)-gauging of
- \(\mathbf{H}_{\Delta_5}\) is a source/orbifold-recognition target, not a
+ \(\mathbf{H}_{\Delta_5}\) is a source/orbifold-comparison object, not a
  consequence of the scalar elliptic-genus row alone; the Igusa-form
  replacement is a Siegel paramodular form at level $N = 2$
  on $K(2)\subset\mathrm{Sp}_4(\Q)$
@@ -1649,7 +1672,7 @@ K3-specific crown~$\mathbf{H}_{\Delta_5}$ is the candidate scalar fibre
 at the K3~base point, and becomes a chiral-bialgebra fibre only under
 the Vol.~III/source recognition. The sisters
 (Enriques/Kummer/bielliptic) are different scalar lanes at different
-base points, not specialisations of a universal family. Cross-ref Vol.~III preface
+base points, not specialisations of a universal family. Compare Vol.~III preface
 Remark~\ref{rem:v3-preface-W15-3-specific-vs-general} and
 Vol.~III introduction
 Remark~\ref{rem:v3-intro-W15-3-scope}.
@@ -1675,7 +1698,7 @@ $W$-algebra'' is therefore 1-loop-trivial, not a Lusztig-closed
 specialisation.
 \end{remark}
 
-\begin{remark}[Heterotic decoupling limit as a recognition target]
+\begin{remark}[Heterotic decoupling limit as a comparison object]
 \label{rem:wac-W15-3-decoupling}
 From the Vol II perspective, the decoupling limit is a target criterion:
 after the Vol.~III/source recognition package has constructed
@@ -1699,7 +1722,7 @@ Vol.~III preface Remark~\ref{rem:v3-preface-4-etingof-super-EK}) rather
 than an anomaly contribution inside a 10d~heterotic or 11d~M-theory action.
 The criterion is not a Vol II construction of \(\mathbf H_{\Delta_5}\); it
 states the decoupling property that the recognised Vol.~III object must
-satisfy. Cross-ref
+satisfy. Compare
 Vol.~III preface~Remark~\ref{rem:v3-preface-W15-1-decoupling}
 and Vol.~III introduction~Remark~\ref{rem:v3-intro-W15-2-decoupling}.
 \end{remark}
@@ -1755,7 +1778,7 @@ halving proves only the weight-$5/2$ automorphic input, not the
 existence of a BKM or chiral-bialgebra orbifold.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 The $\iota$-equivariant Borcherds lift on the integral lattice
 $\mathrm{II}_{2,10}(2) = E_8(-2)\oplus\mathrm{II}_{2,2}(2)$
 (Gritsenko--Nikulin 1998, \S 3) produces an automorphic product of
@@ -1769,8 +1792,8 @@ automorphic statement. The interpretation of
 $\Phi_{10}^{\mathrm{Enr}} = (\Delta_5^{\mathrm{Enr}})^2$ as a BKM
 denominator and as the B-side Kirillov--Ostrik orbifold gauging is
 the additional source-recognition hypothesis
-(Vol.~III \texttt{derived\_categories\_cy.tex},
-Theorem~\ref{thm:dcy-W17-enriques-analogue}).
+by the Vol.~III derived-categorical Enriques analogue
+(Theorem~\ref{thm:dcy-W17-enriques-analogue}).
 \end{proof}
 
 \begin{remark}[Kummer Siegel weight $= 5$ with Kummer sublattice
@@ -1858,8 +1881,7 @@ specific level), \emph{not} the fourth taxon.
 \label{rem:wac-W17-weight-column}
 Reading the CY-$2$ dichotomy along the Siegel-weight axis gives
 the following column (paralleling the four-taxon B-side table
-of Vol.~III \texttt{derived\_categories\_cy.tex},
-Remark~\ref{rem:dcy-W17-landscape-partition}):
+of Vol.~III Remark~\ref{rem:dcy-W17-landscape-partition}):
 \begin{center}
 \begin{tabular}{lccl}
 \toprule
@@ -1930,11 +1952,10 @@ the source/orbifold recognition stated there: after that recognition,
 the Enriques BKM superalgebra
 $\mathfrak{g}_{\Delta_5}^{\mathrm{Enr}}$ sits as a distinguished
 deformation face of the fourth-taxon column, with explicit Cartan,
-orbifold root-sector bookkeeping, and conjectural
-$2.M_{12}$-moonshine module structure. Full construction in Vol.~III
-\texttt{k3e\_bkm\_chapter.tex},
-\S\ref{sec:bkm-enriques-W18}; the present section records the
-$W$-algebra deformation-landscape view.
+orbifold root-sector grading, and conjectural
+$2.M_{12}$-moonshine module structure. The Vol.~III construction in
+\S\ref{sec:bkm-enriques-W18} supplies the BKM side; the present section records the
+$W$-algebra deformation-landscape projection.
 
 \begin{theorem}[Enriques elliptic-genus halving and conditional BKM
 multiplicities]
@@ -2071,8 +2092,7 @@ $A_\infty$-chiral algebras).
 \index{$E_3^{\mathrm{top}}$!Enriques}
 The K3 chiral bialgebra $\mathbf{H}_{\Delta_5}$ topologises to
 $E_3^{\mathrm{top}}$ via the Mukai-Heisenberg conformal vector
-(Vol.~III \texttt{k3e\_bkm\_chapter.tex},
-Theorem~\ref{V3-thm:k3-abelian-at-lie}). Conditional on the Enriques
+(Vol.~III Theorem~\ref{V3-thm:k3-abelian-at-lie}). Conditional on the Enriques
 source/orbifold recognition above, the $\mathbb{Z}/2$-gauged sibling
 $\mathbf{H}_{\Delta_5}^{\mathrm{Enr}}$ would inherit an
 $\iota$-invariant conformal vector
@@ -2096,8 +2116,7 @@ this is open for the Enriques row.
 \index{$\Psi$-landscape!Vol~II reading}
 \index{four-row landscape}
 Reading the $\Psi$-landscape of Vol.~III
-\texttt{k3e\_bkm\_chapter.tex} along the Vol.~II
-Siegel-weight and $\mathsf{SC}^{\mathrm{ch,top}}$-structure axes
+along the Vol.~II Siegel-weight and $\mathsf{SC}^{\mathrm{ch,top}}$-structure axes
 gives:
 \begin{center}
 \begin{tabular}{lccl}
@@ -2125,7 +2144,7 @@ Three of the four rows topologise to $E_3^{\mathrm{top}}$
 (K3, Enriques, Fake-Monster); the Monster row degenerates to
 $E_\infty^{\mathrm{top}}$ at the critical central charge
 $c = 24$. The two CY-$2$-input rows (K3, Enriques) are related by a
-$\mathbb{Z}/2$-gauging only after the source/orbifold-recognition target
+$\mathbb{Z}/2$-gauging only after the source/orbifold-comparison object
 is supplied; the scalar Enriques elliptic-genus row alone supplies the
 weight-$5/2$ automorphic input. The two pure-automorphic rows (Monster,
 Fake-Monster) are the FLM and Borcherds endpoints of the four-taxon
@@ -2151,7 +2170,7 @@ moduli spaces. No KZ/DS $W$-algebra of this chapter
 supports either; the deformation tower has its domain of
 validity inside the K3 row, and the Enriques/CY-$3$
 orbifold extensions are separate
-$W_{1+\infty}$-Miki-tower lifts. Cross-ref
+$W_{1+\infty}$-Miki-tower lifts. Compare
 Vol.~III \texttt{derived\_categories\_cy.tex},
 Remark~\ref{rem:dcy-W18-enriques-cy2-vs-cy3}.
 \end{remark}

@@ -79,7 +79,7 @@ z = Symbol('z')
 # =========================================================================
 
 class TestLaplaceHeisenberg:
-    """Heisenberg: {J_lam J} = k*lam -> r(z) = k/z^2."""
+    """Heisenberg: {J_lam J} = k*lam -> pre-dlog coefficient k/z^2."""
 
     def test_laplace_match(self):
         result = verify_laplace_heisenberg()
@@ -95,7 +95,7 @@ class TestLaplaceHeisenberg:
         """OPE: J(z)J(w) ~ k/(z-w)^2 has pole order 2 coeff k."""
         bracket = {1: k}
         r = laplace_transform_bracket(bracket)
-        # r(z) = k/z^2 => OPE is k/(z-w)^2
+        # pre-dlog coefficient k/z^2 => OPE is k/(z-w)^2
         assert simplify(r * z**2 - k) == 0
 
 
@@ -425,11 +425,11 @@ class TestKoszulDualTable:
         table = koszul_dual_comparison_table()
         assert table['Heisenberg']['self_dual'] is False
 
-    def test_virasoro_self_dual_at_13(self):
-        """Virasoro self-dual at c=13, NOT c=26."""
+    def test_virasoro_line_comparison_fixed_at_13(self):
+        """Virasoro same-family comparison is fixed at c=13, not c=26."""
         table = koszul_dual_comparison_table()
-        assert table['Virasoro']['self_dual_at'] == 13
-        assert table['Virasoro']['NOT_self_dual_at_26'] is True
+        assert table['Virasoro']['comparison_fixed_at'] == 13
+        assert table['Virasoro']['NOT_fixed_at_26'] is True
 
     def test_sl2_critical_warning(self):
         """sl_2 self-dual at critical level k=-2 (Sugawara undefined)."""
@@ -502,7 +502,7 @@ class TestFamilyDataConsistency:
         assert fam.central_charge == S.One
 
     def test_virasoro_dual_cc(self):
-        """Vir_c^! has central charge 26-c."""
+        """The same-family line-side Virasoro representative has charge 26-c."""
         fam = virasoro_data()
         assert simplify(fam.dual_central_charge - (26 - c)) == 0
 

@@ -5,14 +5,17 @@ ROLE OF THIS ENGINE
 The chapter logarithmic_wp_tempered_analysis_platonic.tex proves only the
 Virasoro TT subchannel of the W(p) shadow tower, leaves the TW and WW
 subchannels conjectural, and names a regular-sector amplitude bound that
-is forced by the Adamovic-Milas character expansion (Adamovic-Milas 2008
+is conjecturally forced by the Adamovic-Milas character expansion
+(Adamovic-Milas 2008
 Sel. Math. NS 14:51-67, esp. Thm 1.1 and the screening-operator
-description of Section 3) as the missing input.
+description of Section 3) as one missing input.  The logarithmic
+boundary-changing estimate for the phi_{0,1} sector is a separate
+missing input.
 
-This engine inscribes the Adamovic-Milas amplitude bound in explicit
-closed form, computes its constants for general p, and verifies the
-implied bound on |S_r(W(p))| through r = 8 at p = 3. It is the F14
-compute deliverable per FRONTIER.md.
+This engine inscribes the Adamovic-Milas regular-channel bound in
+explicit closed form, computes its constants for general p, and records
+the resulting semisimple triangle bound through r = 8 at p = 3. It is
+the F14 compute deliverable per FRONTIER.md.
 
 ADAMOVIC-MILAS AMPLITUDE BOUND (statement)
 ------------------------------------------
@@ -55,9 +58,11 @@ gives the tempering corollary
 
     limsup_{r->infty} ( |S_r^TW| + |S_r^WW| / r! )^{1/r} = 0,
 
-which combined with Lemma lem:wp-virasoro-subchannel-tempered closes
-Conjecture conj:wp-regular-sector-amplitude-bound and consequently
-Conjecture conj:tempered-stratum-contains-wp.
+if the Felder-cohomology identification behind the bound is proved.  It
+would close Conjecture conj:wp-regular-sector-amplitude-bound.  It does
+not close Conjecture conj:tempered-stratum-contains-wp without the
+independent logarithmic boundary estimate
+conj:wp-logarithmic-boundary-amplitude-bound.
 
 The polynomial degree N_p = p - 1 is forced by the FGST theta-character:
 chi_{W(p)} is a finite sum of (p-1)-st derivatives of theta-series whose
@@ -79,13 +84,13 @@ For p = 3 the amplitude bound reads
                                      <=  6 * r^2 * (36/7)^r.
 
 Combined with the exact TT-subchannel via the Vol I Virasoro recurrence
-at c = -7, the full shadow coefficient |S_r(W(3))| is bounded by the
-triangle sum. This module computes both:
+at c = -7, the semisimple regular coefficient is bounded by the triangle
+sum. This module computes both:
 
     - exact S_r^TT(W(3)) for r = 1, ..., 8 (using the Vol I closed forms
       and recurrence; S_1 := 0 by convention),
     - the Adamovic-Milas amplitude bound on |S_r^TW + S_r^WW| for r=1..8,
-    - the resulting triangle bound on |S_r(W(3))|,
+    - the resulting triangle bound on |S_r^reg(W(3))|,
     - the (|S_r|/r!)^{1/r} Stirling rate, verified well below 1/e,
     - the tempering certificate value at the asymptotic limit.
 
@@ -119,16 +124,15 @@ gamma (ambient): chain-level dGLA shadow tower; weight-completed Heisenberg.
     The amplitude bound holds in the ambient of Vol I bar/cobar with
     weight-completed extension to logarithmic Fock modules.
 delta (endpoint): polynomial-times-exponential growth (not factorial); this
-    is the endpoint hypothesis that closes the regular-sector channel.
+    is the endpoint hypothesis that would close the regular-sector channel.
 epsilon (effectiveness): non-vanishing of the Catalan-Cauchy bound at
     finite r witnesses sharpness; verified r = 1, ..., 8 at p = 3.
 
 The bound subsumes Vol II Conjecture conj:wp-regular-sector-amplitude-bound
 when promoted to a theorem; this module records its statement and finite-r
-verification, not a proof of the underlying Felder-cohomology
-identification (the proof requires the explicit
-Feigin-Gainutdinov-Semikhatov-Tipunin theta resolution and is in flight as
-the cross-volume Vol III Hall-CoHA bridge).
+checks, not a proof of the underlying Felder-cohomology identification.
+It also does not prove the logarithmic boundary-changing estimate for
+S_r^log.
 """
 
 from __future__ import annotations
@@ -536,11 +540,12 @@ def five_class_partition() -> dict[str, ChiralClassDescriptor]:
             massey_bounded=False,
             zhu_finite=True,
             example="triplet W(p) p>=2, singlet M(p) p>=2",
-            rho_star_kind="|c|/(4p-3) WW-pole",
+            rho_star_kind="conditional regular/logarithmic amplitude bounds",
             notes=(
                 "C_2-cofinite with finite Zhu but unbounded Massey "
-                "(Gurarie-Flohr); tempering forced by Adamovic-Milas "
-                "amplitude bound rather than Zhu-bounded Massey."
+                "(Gurarie-Flohr); tempering requires the regular "
+                "Adamovic-Milas amplitude bound and the separate "
+                "logarithmic boundary estimate."
             ),
         ),
     }

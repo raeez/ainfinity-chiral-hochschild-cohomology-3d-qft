@@ -580,7 +580,7 @@ def virasoro_sc_data(c_val=None):
     At lam=0: mu(T,T) = dT (not zero!). This is the key non-triviality.
 
     kappa(Vir_c) = c/2.
-    Koszul dual: Vir_{26-c}. Self-dual at c=13.
+    Same-family line-side representative: Vir_{26-c}. Fixed at c=13.
 
     Shadow archetype: Mixed (M), depth infinity.
     """

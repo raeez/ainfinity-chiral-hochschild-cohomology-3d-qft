@@ -1,16 +1,17 @@
 r"""Exact symbolic Stasheff recursion for the Virasoro A∞ structure.
 
-Computes m_4(T,T,T,T; λ₁,λ₂,λ₃) EXACTLY as a polynomial in the
-spectral parameters with field-valued coefficients and c-dependent
-scalar part.
+Computes the Stasheff-gauge representatives
+m_4(T,T,T,T; λ₁,λ₂,λ₃) and
+m_5(T,T,T,T,T; λ₁,λ₂,λ₃,λ₄) as polynomials in the spectral parameters
+with field-valued coefficients and c-dependent scalar parts.
 
 The key technical ingredient is the middle-slot sesquilinearity:
   m_3(T, ∂T, T; λ₁, λ₂) = -λ₂ · m_3(T, T, T; λ₁, λ₂)
 
 from the chiral A∞ axioms (Vol II, axioms.tex, Definition 108).
 
-The arity-4 chiral Stasheff identity:
-  ∂ · m_4 = -[A₁ + A₂ + B₁ + B₂ + B₃]
+The arity-4 chiral Stasheff source:
+  Obs_4 = A₁ + A₂ + B₁ + B₂ + B₃
 
 where:
   A₁ = m₂(m₃(T,T,T; l₁,l₂), T; l₁+l₂+l₃)
@@ -24,14 +25,11 @@ Each term is computed using the sesquilinearity rules:
   Slot i (1<i<k): m_k(..., ∂a_i, ...) = -λ_i · m_k(..., a_i, ...)
   Slot k: m_k(..., ∂a) = (λ₁+...+λ_{k-1}+∂) · m_k(..., a)
 
-The homotopy h inverts ∂:
-  h(∂ⁿT) = ∂ⁿ⁻¹T   for n ≥ 1
-  h(T) = 0
-  h(scalar) = 0
+The arity-four source does not define a canonical cohomology operation.
+After a Virasoro SDR/BRST contraction is chosen, the manuscript uses the
+Stasheff gauge representative m_4 = -Obs_4 in the displayed field basis.
 
-So m_4 = -h(A₁+A₂+B₁+B₂+B₃).
-
-This module produces the FIRST complete symbolic formula for m₄.
+This module is the symbolic witness for that gauge-fixed formula.
 """
 from __future__ import annotations
 
@@ -45,17 +43,47 @@ T_sym = Symbol('T')
 dT_sym = Symbol('dT')
 d2T_sym = Symbol('d2T')
 d3T_sym = Symbol('d3T')
+d4T_sym = Symbol('d4T')
 c_sym = Symbol('c')
+
+
+def _derivative_order(field: str) -> int | None:
+    """Return n for the field ∂ⁿT; return None for scalars."""
+    if field == 'T':
+        return 0
+    if field == 'dT':
+        return 1
+    if field.startswith('d') and field.endswith('T'):
+        body = field[1:-1]
+        if body.isdigit():
+            return int(body)
+    return None
+
+
+def _field_of_derivative_order(order: int) -> str:
+    """Return the field label for ∂ⁿT."""
+    if order == 0:
+        return 'T'
+    if order == 1:
+        return 'dT'
+    return f'd{order}T'
 
 
 def _field_dict_to_poly(d: Dict[str, object]) -> object:
     """Convert {field: coeff} dict to a sympy polynomial."""
     result = S.Zero
-    field_map = {'T': T_sym, 'dT': dT_sym, 'd2T': d2T_sym, 'd3T': d3T_sym, '1': S.One}
+    field_map = {
+        'T': T_sym,
+        'dT': dT_sym,
+        'd2T': d2T_sym,
+        'd3T': d3T_sym,
+        'd4T': d4T_sym,
+        '1': S.One,
+    }
     for f, coeff in d.items():
         if coeff == 0:
             continue
-        result += expand(coeff) * field_map.get(f, S.Zero)
+        result += expand(coeff) * field_map.get(f, Symbol(f))
     return expand(result)
 
 
@@ -72,21 +100,34 @@ def _add_dicts(*dicts, signs=None):
 
 
 def _apply_partial(d: Dict[str, object]) -> Dict[str, object]:
-    """Apply ∂ to a field-coeff dict: ∂(T) = dT, ∂(dT) = d2T, etc.
+    """Apply ∂ to a field-coeff dict: ∂(∂ⁿT) = ∂ⁿ⁺¹T.
 
-    ∂(Σ f_i · field_i) = Σ f_i · ∂(field_i)
-    where ∂(T) = dT, ∂(dT) = d2T, ∂(d2T) = d3T, ∂(1) = 0.
+    ∂(Σ f_i · field_i) = Σ f_i · ∂(field_i), and ∂(1) = 0.
     """
-    shift = {'T': 'dT', 'dT': 'd2T', 'd2T': 'd3T'}
     result = {}
     for f, c in d.items():
-        if f == '1':
+        order = _derivative_order(f)
+        if order is None:
             continue  # ∂(scalar) = 0
-        new_f = shift.get(f)
-        if new_f:
-            val = result.get(new_f, S.Zero)
-            result[new_f] = expand(val + c)
+        new_f = _field_of_derivative_order(order + 1)
+        val = result.get(new_f, S.Zero)
+        result[new_f] = expand(val + c)
     return {k: v for k, v in result.items() if v != 0}
+
+
+def _apply_shift_partial(d: Dict[str, object], shift) -> Dict[str, object]:
+    """Apply (shift + ∂) to a field-coeff dict."""
+    shifted = {f: expand(shift * v) for f, v in d.items()}
+    partial = _apply_partial(d)
+    return _add_dicts(shifted, partial)
+
+
+def _apply_shift_partial_n(d: Dict[str, object], shift, order: int) -> Dict[str, object]:
+    """Apply (shift + ∂)^order to a field-coeff dict."""
+    result = dict(d)
+    for _ in range(order):
+        result = _apply_shift_partial(result, shift)
+    return result
 
 
 def _m3_at(l1, l2, c=None):
@@ -122,16 +163,10 @@ def _compose_m2_left(inner: Dict, lam_outer, c=None):
         if coeff == 0 or field == '1':
             continue
         # Left sesquilinearity factor
-        if field == 'T':
-            factor = S.One
-        elif field == 'dT':
-            factor = -lo
-        elif field == 'd2T':
-            factor = lo ** 2
-        elif field == 'd3T':
-            factor = -lo ** 3
-        else:
+        order = _derivative_order(field)
+        if order is None:
             continue
+        factor = (-lo) ** order
 
         for bf, bc in base.items():
             val = result.get(bf, S.Zero)
@@ -161,33 +196,15 @@ def _compose_m2_right(inner: Dict, lam_outer, c=None):
     cc = c if c is not None else c_sym
     lo = lam_outer
     base_TT = {'dT': S.One, 'T': 2 * lo, '1': cc * lo ** 3 / 12}
-    base_TdT = {
-        'd2T': S.One,
-        'dT': expand(3 * lo),
-        'T': expand(2 * lo ** 2),
-        '1': expand(cc * lo ** 4 / 12),
-    }
-    # (λ+∂)² applied to base_TT for d²T input:
-    # (λ+∂)²(dT + 2Tλ + c/12·λ³) = (λ+∂)(d2T + 3λ·dT + 2λ²T + c/12·λ⁴)
-    # = λ·d2T + 3λ²·dT + 2λ³·T + c/12·λ⁵ + d3T + 3λ·d2T + 2λ²·dT
-    # = d3T + 4λ·d2T + 5λ²·dT + 2λ³·T + c/12·λ⁵
-    base_Td2T = {
-        'd3T': S.One,
-        'd2T': expand(4 * lo),
-        'dT': expand(5 * lo ** 2),
-        'T': expand(2 * lo ** 3),
-        '1': expand(cc * lo ** 5 / 12),
-    }
-
-    bases = {'T': base_TT, 'dT': base_TdT, 'd2T': base_Td2T}
 
     result = {}
     for field, coeff in inner.items():
         if coeff == 0 or field == '1':
             continue
-        base = bases.get(field)
-        if base is None:
+        order = _derivative_order(field)
+        if order is None:
             continue
+        base = _apply_shift_partial_n(base_TT, lo, order)
         for bf, bc in base.items():
             val = result.get(bf, S.Zero)
             result[bf] = expand(val + coeff * bc)
@@ -266,28 +283,18 @@ def stasheff_rhs_arity4(l1, l2, l3, c=None):
 
 
 def m4_virasoro_symbolic(l1, l2, l3, c=None):
-    r"""Compute the EXACT symbolic m₄(T,T,T,T; l₁,l₂,l₃) for Virasoro.
+    r"""Compute the Stasheff-gauge m₄(T,T,T,T; l₁,l₂,l₃) for Virasoro.
 
-    From the chiral Stasheff identity:
-      ∂·m₄ = -(A₁+A₂+B₁+B₂+B₃)
+    From the chiral arity-four source:
+      Obs_4 = A₁+A₂+B₁+B₂+B₃
 
-    The homotopy h inverts ∂:
-      m₄ = -h(RHS)
+    The source alone does not canonically determine m₄ on cohomology.
+    The manuscript fixes the Virasoro SDR/BRST contraction and uses the
+    Stasheff gauge representative:
+      m₄ = -Obs_4
 
-    where h maps ∂ⁿT → ∂ⁿ⁻¹T (n≥1), h(T) = 0, h(scalar) = 0.
-
-    The RHS decomposes into field components:
-      RHS = f_{d3T}·∂³T + f_{d2T}·∂²T + f_{dT}·∂T + f_T·T + f_1
-
-    The Stasheff consistency requires: f_T = 0 and f_1 = 0
-    (because ∂ cannot produce T or scalar terms).
-
-    Then: m₄ = -h(RHS) has:
-      d2T coefficient: -f_{d3T}
-      dT coefficient: -f_{d2T}
-      T coefficient: -f_{dT}
-      scalar: 0 (from the leading-order homotopy; full scalar part
-                  requires higher-order analysis)
+    The returned value is therefore a chain-level gauge representative,
+    not a canonical minimal-model operation.
 
     Returns:
         dict with exact symbolic m₄ data
@@ -296,20 +303,10 @@ def m4_virasoro_symbolic(l1, l2, l3, c=None):
 
     rhs = stasheff_rhs_arity4(l1, l2, l3, cc)
 
-    # Extract field components
-    f_d3T = expand(rhs.get('d3T', S.Zero))
-    f_d2T = expand(rhs.get('d2T', S.Zero))
-    f_dT = expand(rhs.get('dT', S.Zero))
-    f_T = expand(rhs.get('T', S.Zero))
-    f_1 = expand(rhs.get('1', S.Zero))
-
-    # The chiral A∞ identity at arity 4 (with m₁ = 0) is:
-    #   A₁ + A₂ + B₁ + B₂ + B₃ + m₄ = 0
-    #
-    # So: m₄ = -(A₁ + A₂ + B₁ + B₂ + B₃) = -RHS
-    #
-    # This is DIRECT — no ∂ inversion needed. The chiral A∞ identity
-    # for the λ-bracket formalism does NOT involve ∂·m₄.
+    # In the selected Stasheff gauge representative:
+    #   m₄ = -(A₁ + A₂ + B₁ + B₂ + B₃) = -RHS.
+    # This is a representative after the Virasoro contraction/gauge has been
+    # chosen; it is not a canonical arity-four cohomology operation.
     m4 = {f: expand(-v) for f, v in rhs.items()}
 
     # Consistency: m₄ should be a polynomial in the fields T, ∂T, ∂²T, ...
@@ -321,8 +318,8 @@ def m4_virasoro_symbolic(l1, l2, l3, c=None):
         'rhs': rhs,
         'm4': m4,
         'consistency': {
-            'direct_formula': True,
-            'note': 'm₄ = -(m₂∘m₃ + m₃∘m₂) directly, no homotopy needed',
+            'stasheff_gauge_representative': True,
+            'note': 'm₄ is the selected chain-level representative of the arity-four source',
         },
         'l1': l1, 'l2': l2, 'l3': l3, 'c': cc,
     }
@@ -332,8 +329,8 @@ def mk_exact_numerical(k_arity, lam_vals, c_val):
     """Compute m_k EXACTLY via symbolic Stasheff, then evaluate numerically.
 
     This is the CORRECT numerical engine for arities 2-5. It uses the
-    symbolic Stasheff recursion (which properly tracks d2T, d3T, and all
-    sesquilinearity) and substitutes numerical values at the end.
+    symbolic Stasheff recursion (which tracks every derivative order
+    produced by sesquilinearity) and substitutes numerical values at the end.
 
     This replaces mk_stasheff_recursive_numerical for arities >= 4, where
     the old engine has known d2T-dropping and middle-slot sesquilinearity
@@ -389,15 +386,23 @@ def mk_exact_numerical(k_arity, lam_vals, c_val):
         l1, l2, l3, l4 = [S(x) for x in lam_vals]
         result = m5_virasoro_symbolic(l1, l2, l3, l4, S(c_val))
         m5 = result['m5']
+        d4T = float(expand(m5.get('d4T', S.Zero)))
+        d3T = float(expand(m5.get('d3T', S.Zero)))
+        d2T = float(expand(m5.get('d2T', S.Zero)))
         dT = float(expand(m5.get('dT', S.Zero)))
         T = float(expand(m5.get('T', S.Zero)))
         sc = float(expand(m5.get('1', S.Zero)))
         return {
             'k': 5,
+            'd4T_coeff': d4T,
+            'd3T_coeff': d3T,
+            'd2T_coeff': d2T,
             'dT_coeff': dT,
             'T_coeff': T,
             'scalar_coeff': sc,
-            'nonvanishing': abs(T) > 1e-14 or abs(dT) > 1e-14 or abs(sc) > 1e-14,
+            'nonvanishing': any(
+                abs(v) > 1e-14 for v in (d4T, d3T, d2T, dT, T, sc)
+            ),
         }
 
     raise ValueError(f"mk_exact_numerical: arity {k_arity} not implemented (max 5)")
@@ -423,35 +428,20 @@ def _compose_m3_slot(inner_dict, slot, ol1, ol2, c=None):
     for field, coeff in inner_dict.items():
         if coeff == 0 or field == '1':
             continue
+        order = _derivative_order(field)
+        if order is None:
+            continue
 
         if slot == 0:
             # Left: factor = (-ol1)^n for d^nT
-            if field == 'T':
-                factor = S.One
-            elif field == 'dT':
-                factor = -ol1
-            elif field == 'd2T':
-                factor = ol1 ** 2
-            elif field == 'd3T':
-                factor = -ol1 ** 3
-            else:
-                continue
+            factor = (-ol1) ** order
             for f, v in m3_base.items():
                 val = result.get(f, S.Zero)
                 result[f] = expand(val + coeff * factor * v)
 
         elif slot == 1:
             # Middle: factor = (-ol2)^n for d^nT
-            if field == 'T':
-                factor = S.One
-            elif field == 'dT':
-                factor = -ol2
-            elif field == 'd2T':
-                factor = ol2 ** 2
-            elif field == 'd3T':
-                factor = -ol2 ** 3
-            else:
-                continue
+            factor = (-ol2) ** order
             for f, v in m3_base.items():
                 val = result.get(f, S.Zero)
                 result[f] = expand(val + coeff * factor * v)
@@ -459,32 +449,10 @@ def _compose_m3_slot(inner_dict, slot, ol1, ol2, c=None):
         elif slot == 2:
             # Right: (ol1+ol2+∂)^n applied to m₃
             shift = ol1 + ol2
-            if field == 'T':
-                for f, v in m3_base.items():
-                    val = result.get(f, S.Zero)
-                    result[f] = expand(val + coeff * v)
-            elif field == 'dT':
-                # (shift + ∂) applied to m₃
-                shifted = {f: expand(shift * v) for f, v in m3_base.items()}
-                partial = _apply_partial(m3_base)
-                combined = _add_dicts(shifted, partial)
-                for f, v in combined.items():
-                    val = result.get(f, S.Zero)
-                    result[f] = expand(val + coeff * v)
-            elif field == 'd2T':
-                # (shift + ∂)² applied to m₃
-                # = shift²·m₃ + 2·shift·∂(m₃) + ∂²(m₃)
-                sq = {f: expand(shift ** 2 * v) for f, v in m3_base.items()}
-                p1 = _apply_partial(m3_base)
-                p1s = {f: expand(2 * shift * v) for f, v in p1.items()}
-                p2 = _apply_partial(p1)
-                combined = _add_dicts(sq, p1s, p2)
-                for f, v in combined.items():
-                    val = result.get(f, S.Zero)
-                    result[f] = expand(val + coeff * v)
-            # d3T in right slot: (shift+∂)³·m₃ — very high order, skip for now
-            else:
-                continue
+            combined = _apply_shift_partial_n(m3_base, shift, order)
+            for f, v in combined.items():
+                val = result.get(f, S.Zero)
+                result[f] = expand(val + coeff * v)
 
     return {k: v for k, v in result.items() if v != 0}
 
@@ -616,18 +584,34 @@ def stasheff_rhs_arity5(l1, l2, l3, l4, c=None):
 
 
 def m5_virasoro_symbolic(l1, l2, l3, l4, c=None):
-    r"""Compute the EXACT symbolic m₅(T,T,T,T,T; l₁,l₂,l₃,l₄) for Virasoro.
+    r"""Compute the Stasheff-gauge m₅(T,T,T,T,T; l₁,l₂,l₃,l₄) for Virasoro.
 
-    From the arity-5 Stasheff identity:
-      m₅ = -(sum of all m₂∘m₄ + m₄∘m₂ + m₃∘m₃ compositions)
+    From the arity-five source:
+      Obs_5 = sum of all m₂∘m₄, m₄∘m₂, and m₃∘m₃ compositions.
+
+    The source alone does not canonically determine a cohomology operation.
+    The manuscript fixes the Virasoro SDR/BRST contraction and uses the
+    Stasheff gauge representative:
+      m₅ = -Obs_5
+
+    The returned value is therefore a chain-level gauge representative,
+    not a canonical minimal-model operation.
 
     Returns:
-        dict with m5 field-coeff dict
+        dict with exact symbolic m₅ data
     """
     cc = c if c is not None else c_sym
     rhs = stasheff_rhs_arity5(l1, l2, l3, l4, cc)
     m5 = {f: expand(-v) for f, v in rhs.items()}
-    return {'m5': m5, 'rhs': rhs}
+    return {
+        'm5': m5,
+        'rhs': rhs,
+        'consistency': {
+            'stasheff_gauge_representative': True,
+            'note': 'm₅ is the selected chain-level representative of the arity-five source',
+        },
+        'l1': l1, 'l2': l2, 'l3': l3, 'l4': l4, 'c': cc,
+    }
 
 
 def m4_T_coefficient_c_independence():

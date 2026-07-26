@@ -661,8 +661,15 @@ $V_{\partial}(\Gamma)$ one considers the configuration space
 \in X^{V_{\mathrm{bulk}}}\times (\partial X)^{V_{\partial}}
 \,\middle|\,
 \text{all collision constraints}
-\right\}/(\text{translations and dilations}).
+\right\}/(\C\rtimes\R_{>0}).
 \]
+The quotient is the half-space affine reduction
+\((z,t)\mapsto (\lambda z+a,\lambda t)\) with \(a\in\C\) and
+\(\lambda>0\).  Residues are computed first in
+translation-reduced coordinates; the scale reduction belongs to the
+inner collision factor and retains the boundary normal/angular datum.
+The full complex-affine quotient is not used in the half-space
+residue calculation.
 Its logarithmic compactification has codimension-one strata of four kinds:
 \begin{enumerate}
  \item bulk clusters collapsing away from the boundary,
@@ -821,7 +828,109 @@ image-choice compactification problem; the image term is the source of
 the plus-diagonal and self-image residues.
 \end{construction}
 
-\begin{theorem}[Reduction from the reflected weight identity]%
+\begin{theorem}[Image-charge propagator and reflected Arnold cancellation]
+\ClaimStatusProvedHere
+\label{thm:image-charge-reflected-arnold-cancellation}
+On the half-space \(H=\{t\ge0\}\) with holomorphic coordinate \(z\), the
+reflected BV propagator is the signed image-charge kernel
+\begin{equation}
+\label{eq:half-space-image-charge-propagator}
+P_H(x,y)
+=
+P_{\mathbb R\times\mathbb C}(x,y)
+-
+\sigma P_{\mathbb R\times\mathbb C}(x,\bar y),
+\end{equation}
+where the boundary reflection acts on a homogeneous field \(\phi\) by
+\begin{equation}
+\label{eq:half-space-reflected-field-weight}
+\sigma(\phi)=(-1)^{w_\phi}\phi .
+\end{equation}
+Consequently the boundary OPE coefficient is
+\begin{equation}
+\label{eq:half-space-boundary-ope-coefficient}
+\operatorname{OPE}_{\partial}(\phi_i,\phi_j)
+=
+\operatorname{OPE}_{\mathrm{bulk}}(\phi_i,\phi_j)
+-
+(-1)^{w_j}
+\operatorname{OPE}_{\mathrm{bulk}}(\phi_i,\sigma\phi_j).
+\end{equation}
+The reflected weights compose by
+\begin{equation}
+\label{eq:half-space-reflected-weight-composition}
+w_{\mu\circ\nu}
+\equiv
+w_\mu+w_\nu+\operatorname{codim}D_{\mu,\nu}
+\pmod 2.
+\end{equation}
+The first non-affine obstruction term is the quadratic reflected residue
+\begin{equation}
+\label{eq:half-space-quadratic-reflected-obstruction}
+\mathcal O_2
+=
+\operatorname{Res}_{D_{12}}
+\left[
+P(x_1,x_2)-\sigma P(x_1,\bar x_2)
+\right]\otimes\pi_2,
+\end{equation}
+and the cubic reflected obstruction is
+\begin{equation}
+\label{eq:half-space-cubic-reflected-obstruction}
+\mathcal O_3
+=
+\sum_{\mathrm{cyc}}
+\operatorname{Res}_{D_{ij}D_{jk}}
+P_H(x_i,x_j)P_H(x_j,x_k)\otimes[\pi_2,\pi_2].
+\end{equation}
+Under the doubling package of Theorem~\ref{thm:doubling-rwi}, the cubic
+obstruction vanishes:
+\begin{equation}
+\label{eq:half-space-cubic-obstruction-vanishing}
+\mathcal O_3=0,
+\end{equation}
+because the reflected propagator forms satisfy the reflected Arnold
+relation
+\begin{equation}
+\label{eq:half-space-reflected-arnold-relation}
+\omega^H_{12}\wedge\omega^H_{23}
++
+\omega^H_{23}\wedge\omega^H_{31}
++
+\omega^H_{31}\wedge\omega^H_{12}
+=0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Formula~\eqref{eq:half-space-image-charge-propagator} is the
+method-of-images expansion of the reflected kernel in
+Construction~\ref{cons:equivariant-kontsevich-integral}; the sign is
+the action of the boundary reflection on the reflected field. Applying
+the same image expansion to the binary OPE gives
+\eqref{eq:half-space-boundary-ope-coefficient}. When two strata
+\(\mu,\nu\) compose, the orientations of the reflected normal directions
+contribute exactly the codimension term, giving
+\eqref{eq:half-space-reflected-weight-composition}.
+
+The quadratic obstruction is the residue of the first reflected
+correction on the divisor \(D_{12}\), hence
+\eqref{eq:half-space-quadratic-reflected-obstruction}. The cubic
+obstruction is the sum over the three codimension-two corners carrying
+two reflected propagators and the quadratic bracket \([\pi_2,\pi_2]\),
+which is \eqref{eq:half-space-cubic-reflected-obstruction}. Under the
+doubling hypotheses, each image-choice summand is the pullback of an
+ordinary logarithmic FM propagator form on the doubled configuration
+space. The ordinary Arnold--Orlik--Solomon relation pulls back to
+\eqref{eq:half-space-reflected-arnold-relation}; multiplying by
+\([\pi_2,\pi_2]\) and taking the corner residue gives
+\(\mathcal O_3=0\).
+\end{proof}
+
+\begin{theorem}[Reduction from the reflected weight identity;
+\(\ClaimStatusConditional\); licensing \(\gamma+\delta+\varepsilon\)
+via renormalized half-space BV data, reflected Stokes weights, and
+Assumption~\ref{assum:kz-analytic-sdr-package}]%
 \label{thm:half-space-reduction}
 Assume that the graph weights come from a renormalized logarithmic
 half-space BV theory. If the reflected weight identity
@@ -837,7 +946,9 @@ the renormalized boundary operations of the Poisson--vertex
 sigma model on $\mathbb C\times\mathbb R_{\ge 0}$ with Neumann
 boundary condition satisfy the boundary factorization identities and
 assemble to a vertex algebra.
-After the renormalized BV data have been constructed, the reflected weight
+This theorem is a reduction theorem, not a construction of the
+Costello effective action, counterterms, or all-loop QME. After the
+renormalized BV data have been constructed, the reflected weight
 identity is the Stokes identity which verifies the boundary operations.
 The Costello effective action,
 counterterm scheme, and all-loop QME are isolated below by
@@ -1938,8 +2049,9 @@ Poisson vertex algebra $V_{\mathrm{aff}}(\fg, k)$, on
 $X = \C_z \times \R_t$, satisfies the four inputs of
 Theorem~\textup{\ref{thm:physics-bridge}}:
 \begin{enumerate}[label=\textup{(\alph*)}]
-\item BV data with HT gauge fixing and $Q_{\mathrm{BRST}}^2 = 0$;
-\item a factorized logarithmic HT parametrix;
+\item a BV datum $(\mathcal E,Q,\omega_{\mathrm{BV}},I,B)$ with HT gauge fixing and $Q_{\mathrm{BRST}}^2 = 0$;
+\item a factorized logarithmic HT parametrix with kernel homotopy
+$Q_{\boxtimes}P_{\epsilon<L}=K_L-K_\epsilon$;
 \item one-loop finiteness;
 \item product-polynomial interactions.
 \end{enumerate}

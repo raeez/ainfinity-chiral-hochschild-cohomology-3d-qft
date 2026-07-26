@@ -179,6 +179,116 @@ class CosetChannelData:
     rho_star: Fraction
 
 
+@dataclass(frozen=True)
+class BGGResolutionProfile:
+    """BGG-resolution data used by the VSKR + BGG criterion."""
+
+    sector: str
+    resolution: str
+    alternating_shadow_sum: str
+    ramification_inequality: str
+    local_pole_bound_required: bool
+
+
+def bgg_resolution_profile(sector: str = "L(lambda)") -> BGGResolutionProfile:
+    """Return the BGG shadow profile for an irrational coset sector."""
+
+    return BGGResolutionProfile(
+        sector=sector,
+        resolution=(
+            "... -> direct_sum_{ell(w)=2} M(w.lambda) -> "
+            "direct_sum_{ell(w)=1} M(w.lambda) -> M(lambda) -> "
+            "L(lambda) -> 0"
+        ),
+        alternating_shadow_sum=(
+            "S_r^coset(lambda) = sum_{w in W_aff} (-1)^ell(w) "
+            "S_r(M(w.lambda)) q^(Delta(w.lambda)-Delta(lambda))"
+        ),
+        ramification_inequality=(
+            "Re(Delta(w.lambda)-Delta(lambda)) >= a ell(w)^2 - b"
+        ),
+        local_pole_bound_required=True,
+    )
+
+
+def ramification_lower_bound(
+    length: int,
+    *,
+    a_num: int = 1,
+    a_den: int = 1,
+    b_num: int = 0,
+    b_den: int = 1,
+) -> Fraction:
+    """Return a*length^2 - b for the Kazhdan ramification estimate."""
+
+    if length < 0:
+        raise ValueError(f"affine Weyl length must be non-negative, got {length}")
+    a = Fraction(a_num, a_den)
+    b = Fraction(b_num, b_den)
+    if a <= 0:
+        raise ValueError("ramification coefficient a must be positive")
+    return a * length * length - b
+
+
+def bgg_gaussian_exponent(
+    length: int,
+    *,
+    q_decay_num: int = 1,
+    q_decay_den: int = 1,
+    a_num: int = 1,
+    a_den: int = 1,
+    b_num: int = 0,
+    b_den: int = 1,
+) -> Fraction:
+    """Return -t(a length^2 - b) where |q| = exp(-t)."""
+
+    t = Fraction(q_decay_num, q_decay_den)
+    if t <= 0:
+        raise ValueError("q-decay t must be positive")
+    return -t * ramification_lower_bound(
+        length,
+        a_num=a_num,
+        a_den=a_den,
+        b_num=b_num,
+        b_den=b_den,
+    )
+
+
+def bgg_gaussian_dominates_polynomial(
+    *,
+    degree: int,
+    length: int,
+    q_decay_num: int = 1,
+    q_decay_den: int = 1,
+    a_num: int = 1,
+    a_den: int = 1,
+    b_num: int = 0,
+    b_den: int = 1,
+) -> bool:
+    """Return True once Gaussian length decay beats a polynomial proxy.
+
+    We compare exponents: t(a m^2 - b) >= degree * log(m) is modeled
+    by the elementary sufficient inequality
+        t(a m^2 - b) >= degree * m
+    for m >= 1, since log(m) <= m.
+    """
+
+    if degree < 0:
+        raise ValueError("polynomial degree must be non-negative")
+    if length < 1:
+        raise ValueError("length must be >= 1 for polynomial comparison")
+    t = Fraction(q_decay_num, q_decay_den)
+    lhs = t * ramification_lower_bound(
+        length,
+        a_num=a_num,
+        a_den=a_den,
+        b_num=b_num,
+        b_den=b_den,
+    )
+    rhs = Fraction(degree * length, 1)
+    return lhs >= rhs
+
+
 def parafermion_channel_data(k_num: int, k_den: int) -> CosetChannelData:
     """Channel decomposition for K(sl_2, k) = Com(H_k, V_k(sl_2)).
 
@@ -284,6 +394,7 @@ class TemperingCertificate:
     rho_star: Fraction
     tempered: bool
     avoids_kac: bool
+    bgg_ramification_assumed: bool
 
 
 def certify_irrational_coset(
@@ -308,10 +419,11 @@ def certify_irrational_coset(
 
     zhu = zhu_dimension_infinite_irrational(k_num, k_den)
     avoids = coset_c_avoids_kac_locus(data.c_coset)
-    # Tempered iff the Virasoro sub-channel avoids severe Kac-zeros
-    # AND beta_T is finite (always 6 here). The Zhu-dimension sign
-    # does NOT enter: the coset is tempered either way.
-    tempered = avoids and data.beta_T < 1_000_000
+    # Tempered iff the Virasoro sub-channel avoids severe Kac-zeros,
+    # beta_T is finite (always 6 here), and the BGG ramification
+    # estimate is supplied. The Zhu-dimension sign does NOT enter.
+    bgg_ramification_assumed = True
+    tempered = avoids and data.beta_T < 1_000_000 and bgg_ramification_assumed
 
     k_repr = f"{k_num}/{k_den}" if k_den != 1 else str(k_num)
     return TemperingCertificate(
@@ -323,4 +435,5 @@ def certify_irrational_coset(
         rho_star=data.rho_star,
         tempered=tempered,
         avoids_kac=avoids,
+        bgg_ramification_assumed=bgg_ramification_assumed,
     )

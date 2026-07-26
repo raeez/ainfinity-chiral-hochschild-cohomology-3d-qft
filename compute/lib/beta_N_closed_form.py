@@ -48,8 +48,9 @@ Arithmetic checks
     N=6:  beta_6  =  12 * (29/20)   =  87/5   CONDITIONAL CANDIDATE
     N=7:  beta_7  =  12 * (223/140) =  669/35 CONDITIONAL CANDIDATE
 
-beta_N is RATIONAL, not necessarily integer (beta_5 = 77/5, beta_6 = 87/5).
-Under the harmonic ansatz this separates both Candidate A and Candidate B,
+beta_N is rational-valued.  Under the harmonic ansatz it is integral at
+N=2,3,4 and non-integral for every N >= 5 by the Bertrand-prime
+denominator obstruction.  This separates both Candidate A and Candidate B,
 which demand integer beta_N for all N.
 
 Relation to prior candidates
@@ -63,9 +64,9 @@ by coincidence, predicts beta_4 = 16. CONDITIONALLY EXCLUDED by the
 harmonic candidate value 13.
 
 Candidate C (this module, harmonic ansatz) gives beta_N = 12(H_N-1),
-a rational function of N through the harmonic number H_N. Matches N=2,3
-by the proved low-rank data and predicts beta_4 = 13 if the scaling
-ansatz holds.
+a rational-valued function of N through the harmonic number H_N. Matches
+N=2,3 by the proved low-rank data and predicts beta_4 = 13 if the
+scaling ansatz holds.
 
 Evidence and missing bridge
 ---------------------------

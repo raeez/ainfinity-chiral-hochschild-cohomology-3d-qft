@@ -719,12 +719,12 @@ class LatticeBarComplex:
         only). After d log absorption, this becomes depth 1 in the collision
         residue. So the depth spectrum is {1}. Class G, shadow depth 2.
 
-        Convention clarification: "depth" in the atlas counts from the OPE,
-        not from the collision residue. Depth r means the OPE has a pole of
-        order r+1 (after d log: collision residue pole of order r).
-        The shadow obstruction tower atlas uses:
-          S₂ (depth 2) = from double pole = Killing form
-          S₃ (depth 3) = from simple pole iterated = Lie bracket
+        Convention clarification: support depth in the atlas is computed
+        after the generator package is closed under normal-ordered products.
+        The scalar shadows are projections of that composite-closed support
+        packet, not raw generator pole orders:
+          S₂ (support degree 2) = Killing-form scalar lane
+          S₃ (support degree 3) = Lie-Jacobi transfer
         """
         depths = set()
         has_double_pole = False

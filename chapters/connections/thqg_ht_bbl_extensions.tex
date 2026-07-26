@@ -717,7 +717,7 @@ $d_{\Cobar}$ encodes the coalgebra structure on $\barB(A_{M2,\infty})$,
 and $d_{\barB}$ encodes the algebra structure on $A_{M2,\infty}$.
 Their sum annihilates the universal element by the universal
 property of the bar-cobar adjunction
-(Vol~I, Theorem~\ref*{V1-thm:bar-cobar-adjunction}).
+(Theorem~\ref{thm:bar_cobar_adjunction}).
 
 (iii)~The trace relation is a finite-dimensional quotient.
 At rank~$K$, the matrix part has $K^2$ generators, and the
@@ -757,7 +757,7 @@ $D_{A_{M2,\infty}}^2 = 0$
 (Theorem~\ref*{V1-thm:convolution-d-squared-zero}).
 \end{construction}
 
-\begin{theorem}[Components of $\Theta_{M2}$; \ClaimStatusProvedHere{} except genus-$1$ value, which is \ClaimStatusHeuristic]
+\begin{theorem}[Components of $\Theta_{M2}$; \ClaimStatusProvedHere]
 % label removed: thm:m2-theta-components
 The MC element $\Theta_{M2}$ decomposes by genus, degree, and
 planted-forest depth as
@@ -824,27 +824,16 @@ $[\partial,z]=\hbar$ generates cascading Jacobi anomalies.
 \Theta_{M2,1,0;0}
 = \kappa_{M2}\cdot\omega_1,
 \end{equation}
-where $\kappa_{M2} := \kappaChHodge(A_{M2,\infty})$ is the modular
-characteristic of the $M2$ boundary algebra. The cyclic pairing
-on the DDCA reduces to the Weyl trace on $\Diff(\C)$
-(Fedosov--Nest--Tsygan), which pairs $E^{(m,n)}_{\alpha\beta}$
-with $E^{(n,m)}_{\beta\alpha}$ via
-$\tr_{\mathrm{Weyl}}(z^m\partial^n \cdot z^n\partial^m)
-= (-1)^{m+n} m!\, n!$.
-After weight-by-weight orthogonalization the self-sewing
-trace telescopes:
-$\kappa_{M2} = K^2 \sum_{w=0}^{\infty}(w+1)
-= K^2\,\zeta(-1) = -K^2/12$,
-where the spectral $\zeta$-regularization
-$\sum_{n=1}^{\infty} n \mapsto \zeta(-1) = -B_2/2 = -1/12$.
-Spectral zeta regularization gives $\kappa_{M2} = -K^2/12$.
-This value passes three consistency checks (bosonic sign,
-$K=1$ Casimir energy, large-$K$ scaling) and excludes the
-three previously proposed candidates. The regularization
-scheme is the unique one compatible with the $\Omega$-background
-heat kernel, but its derivation from first principles for the
-DDCA remains open.
-\ClaimStatusHeuristic
+where $\kappa_{M2}:=\kappaChHodge(A_{M2,\infty})$ is the
+unregularized modular characteristic of the $M2$ boundary algebra.
+The theorem does not identify this characteristic with a number.
+The zeta-regularized benchmark
+\[
+\kappa_{M2}^{\zeta}:=K^2\zeta(-1)=-K^2/12
+\]
+is computed separately in Proposition~\ref{prop:m2-zeta-regularized-kappa};
+identifying $\kappa_{M2}$ with $\kappa_{M2}^{\zeta}$ is the
+comparison conjecture~\ref{conj:m2-zeta-comparison}.
 
 \item \emph{Higher-genus corrections ($g\ge 2$).}
 At genus $g$ with no insertions, the scalar level gives:
@@ -919,14 +908,12 @@ the shadow depth classification.
 
 (iv)~The genus-$1$ correction is the modular characteristic
 $\kappa_{M2} := \kappaChHodge(A_{M2,\infty})$, the self-sewing trace
-(Vol~I, Definition~\ref*{V1-def:modular-curvature-direct}).
-Spectral zeta regularization of the weight-by-weight trace
-gives $\kappa_{M2} = -K^2/12$ (see
-Remark~\ref{rem:kappa-m2-regularization} below).
-The numerical value is well-defined once the regularization
-scheme is chosen; what remains open is the proof that spectral
-zeta regularization is the correct prescription for the DDCA
-from first principles.
+(Vol~I, Definition~\ref*{V1-def:modular-curvature-direct}).  The
+display records the tautological genus-$1$ component of the
+bar-intrinsic MC element.  The numerical zeta-regularized benchmark is
+the separate computation of Proposition~\ref{prop:m2-zeta-regularized-kappa};
+the assertion that the DDCA self-sewing trace is computed by that
+regularization is Conjecture~\ref{conj:m2-zeta-comparison}.
 
 (v)~The higher-genus scalar formula uses the proved scalar lane:
 on that lane, once the relevant family is identified with a
@@ -940,99 +927,92 @@ the minimal class.
 determined by the log FM residues.
 \end{proof}
 
-\begin{remark}[Zeta regularization of $\kappa_{M2}$:
-value versus derivation]
-\label{rem:kappa-m2-regularization}
+\begin{definition}[$M2$ zeta-regularization datum]
+\label{def:m2-zeta-regularization-datum}
 \index{M2-brane!modular characteristic regularization}
-The modular characteristic
-$\kappaChHodge(\cA) = \sum_a \langle e_a, e^a\rangle_\cA$
-(Vol~I, Definition~\ref*{V1-def:modular-curvature-direct})
-is the self-contraction trace: the value of the
-unique genus-$1$ tadpole graph evaluated on the
-cyclic pairing. For standard chiral algebras with
-finitely many strong generators, this is a finite
-sum and produces an explicit rational function of the
-structural parameters. For the DDCA $A_{M2,\infty}$,
-three obstructions make the computation non-trivial.
+Let \(A_{M2,\infty}\) be the completed double-differential chiral
+algebra at matrix rank \(K\).  The \emph{\(M2\) zeta-regularization
+datum} consists of the following two pieces:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=1.8em]
+\item the Weyl cyclic trace on \(\Diff(\C)\otimes\Mat_K\), normalized
+so that the anti-diagonal pair
+\[
+E^{(m,n)}_{\alpha\beta}\otimes E^{(n,m)}_{\beta\alpha}
+\]
+has Weyl pairing
+\[
+\tr_{\mathrm{Weyl}}\bigl(z^m\partial^n\cdot z^n\partial^m\bigr)
+=(-1)^{m+n}m!\,n!;
+\]
+\item the spectral zeta functional on the conformal-weight counting
+series, sending \(\sum_{n\ge1} n\) to \(\zeta(-1)\).
+\end{enumerate}
+It defines the zeta-regularized scalar
+\[
+\kappa_{M2}^{\zeta}
+:=\sum_{w\ge0}^{\zeta} K^2(w+1).
+\]
+\end{definition}
 
-\emph{(i)~Infinite generator set.}
-The DDCA has generators $E^{(m,n)}_{\alpha\beta}$
-at conformal weight $m + n + 1$ for all $m, n \ge 0$
-and $1 \le \alpha, \beta \le K$, giving
-$K^2(w+1)$ generators at conformal weight $w+1$.
-The self-contraction trace is a sum over ALL generators;
-the raw sum diverges and requires regularization.
+\begin{proposition}[Zeta-regularized \(M2\) scalar;
+\ClaimStatusProvedHere]
+\label{prop:m2-zeta-regularized-kappa}
+For the datum of Definition~\ref{def:m2-zeta-regularization-datum},
+\[
+\kappa_{M2}^{\zeta}=K^2\zeta(-1)=-\frac{K^2}{12}.
+\]
+Consequently the zeta-regularized genus-one scalar is
+\[
+F_1^{\zeta}(A_{M2,\infty})
+=\frac{\kappa_{M2}^{\zeta}}{24}
+=-\frac{K^2}{288}.
+\]
+\end{proposition}
 
-\emph{(ii)~Bilinear form is not manifest from the bracket.}
-The cyclic pairing $\langle -, -\rangle$ on
-$A_{M2,\infty}$ arises from the BV structure of the
-ambient five-dimensional Chern--Simons theory, not from
-a Killing-type form on the Lie algebra
-$\mathfrak{gl}_K\otimes\Diff(\C)$ alone. The Lie algebra
-$\Diff(\C)$ has no finite-dimensional faithful
-representation, so no standard trace. The bilinear
-form at conformal weight $w$ pairs the generators at
-that weight with their OPE duals; the OPE coefficients
-at higher weights are determined by the quantum bracket
-(Theorem~\ref{thm:m2-quantum-bracket}), but the
-normalization of the pairing relative to the Lie bracket
-requires external input from the physical action.
+\begin{proof}
+At conformal weight \(w+1\) the monomials \(z^m\partial^n\) with
+\(m+n=w\) give \(w+1\) differential-operator generators, and the
+matrix factor contributes \(K^2\).  After orthogonalizing the
+anti-diagonal Weyl pairing in Definition~\ref{def:m2-zeta-regularization-datum},
+the weight-\(w+1\) contribution to the self-sewing scalar is therefore
+\(K^2(w+1)\).  Hence
+\[
+\kappa_{M2}^{\zeta}
+=K^2\sum_{w\ge0}^{\zeta}(w+1)
+=K^2\sum_{n\ge1}^{\zeta}n
+=K^2\zeta(-1)
+=-\frac{K^2}{12}.
+\]
+The displayed value of \(F_1^{\zeta}\) is the scalar Hodge-lane
+normalisation
+\(F_1^{\zeta}=\kappa_{M2}^{\zeta}/24\).
+\end{proof}
 
-\emph{(iii)~Naive approximations are wrong.}
-Three candidate values appeared in earlier versions
-of this manuscript:
-\begin{itemize}
-\item $K^2$: the identity supertrace on the
- $\mathfrak{gl}_K$ subspace
- (conformal weight~$1$, filtration weight~$0$).
- This conflates the identity supertrace with the
- cyclic self-sewing trace; for standard families
- (e.g.\ $\widehat{\fg}_k$ at level~$k$) these differ
- by $\kappa = (k+h^\vee)\dim(\fg)/(2h^\vee)
- \neq \dim(\fg)$.
- The naive approximation ignores both the level
- dependence and the simple-pole (adjoint Casimir)
- channel.
-\item $-K$: a sign error or convention mismatch,
- inconsistent with the bosonic nature of all generators.
-\item $-1/2$: a putative $K=1$ specialization,
- inconsistent with the $K=1$ identity supertrace
- ($K^2 = 1$) by a factor of $-2$.
-\end{itemize}
-None survived verification.
+\begin{conjecture}[DDCA zeta-comparison;
+\ClaimStatusConjectured]
+\label{conj:m2-zeta-comparison}
+The actual cyclic self-sewing trace defining
+\[
+\kappa_{M2}:=\kappaChHodge(A_{M2,\infty})
+\]
+is computed by the \(M2\) zeta-regularization datum:
+\[
+\kappa_{M2}=\kappa_{M2}^{\zeta}=-\frac{K^2}{12}.
+\]
+Equivalently, the BV cyclic pairing of the infinite-type DDCA is
+compatible with the Weyl trace and spectral zeta functional of
+Definition~\ref{def:m2-zeta-regularization-datum}.
+\end{conjecture}
 
-\emph{Resolution via spectral zeta regularization.}
-The cyclic pairing on $A_{M2,\infty}$ is the Weyl trace
-$\tr_{\mathrm{Weyl}}$ on $\Diff(\C) \otimes \Mat_K$
-(the unique continuous trace, by Fedosov--Nest--Tsygan).
-At conformal weight $w+1$ the $K^2(w+1)$ generators
-contribute $\kappa_w = K^2(w+1)$ after orthogonalization
-of the anti-diagonal Weyl pairing. Summing:
-$\kappa_{M2} = K^2 \sum_{n=1}^{\infty} n = K^2\,\zeta(-1)
-= -K^2/12$.
-The spectral $\zeta$-regularization is the unique prescription
-compatible with modular invariance, the $\Omega$-background
-heat kernel, and the 5d Casimir energy. In particular,
-$F_1(A_{M2,\infty}) = \kappa_{M2}/24 = -K^2/288$ and
-$\kappa_{M2}$ scales as $K^2$ in the planar limit,
-consistent with all other invariants of the DDCA.
-The three earlier candidates ($K^2$, $-K$, $-1/2$) are
-excluded: $K^2$ was the weight-$0$ contribution alone;
-$-K$ had incorrect matrix scaling; $-1/2$ failed the
-$K=1$ identity supertrace.
-
-\emph{What remains open.}
-The numerical value $\kappa_{M2} = -K^2/12$ is well-defined
-once spectral zeta regularization is adopted. What remains
-open is the \emph{proof} that this regularization scheme is
-the correct one for the DDCA: the standard derivation of
-$\sum n \to \zeta(-1)$ relies on the Dedekind eta
-regularization for modular forms, or on the heat kernel of
-a Laplacian in the $\Omega$-background, but neither has been
-established from first principles for the infinite-type
-algebra $A_{M2,\infty}$. The value is therefore a
-well-motivated heuristic, not a theorem.
-\ClaimStatusHeuristic
+\begin{remark}[What is proved]
+Proposition~\ref{prop:m2-zeta-regularized-kappa} proves the value of
+the regularized scalar once the regularization datum has been installed.
+Conjecture~\ref{conj:m2-zeta-comparison} is the remaining mathematical
+input: it asks that the regularized Weyl trace be the actual
+genus-one self-sewing trace of \(A_{M2,\infty}\).  The rejected values
+\(K^2\), \(-K\), and \(-1/2\) fail respectively by using only the
+weight-zero matrix trace, by having the wrong matrix scaling, and by
+failing the \(K=1\) identity-supertrace normalization.
 \end{remark}
 
 \subsection{The spectral line kernel \texorpdfstring{$r_{M2}(z)$}{r\_\{M2\}(z)}}
@@ -1103,7 +1083,7 @@ the affine Yangian of $\mathfrak{gl}_1$ at rank~$K$.
 \end{remark}
 
 \begin{computation}[$M2$ holographic modular Koszul datum;
-\ClaimStatusConditional modulo $\kappa_{M2}$ value (\ClaimStatusHeuristic)]
+\ClaimStatusConditional]
 % label removed: comp:m2-hmkd
 \index{holographic modular Koszul datum!M2-brane}
 Assembling all components, the $M2$ holographic modular Koszul
@@ -1133,7 +1113,8 @@ $\cC_{M2}\simeq A^!_{M2}\text{-mod}$
 $r_{M2}(z)=\Omega_{\mathfrak{gl}_K}/z+\cdots$
 & Double-loop spectral kernel \\
 $\Theta_{M2}$ & Bar-intrinsic MC element;
-$\kappa_{M2} = -K^2/12$ heuristic \\
+$\kappa_{M2}^{\zeta}=-K^2/12$ and
+$\kappa_{M2}=\kappa_{M2}^{\zeta}$ conjectural \\
 $\nabla^{\mathrm{hol}}_{M2}
 = d - \mathrm{Sh}_{g,n}(\Theta_{M2})$
 & Shadow connection: KZ-like binary leading term at genus $0$,
@@ -1142,9 +1123,11 @@ with higher-degree / curved corrections at genus $\ge 1$ \\
 \end{tabular}
 \end{center}
 The shadow depth is infinite (class M). The numerical value
-$\kappa_{M2} = -K^2/12$ is heuristic (zeta regularization;
-see Remark~\ref{rem:kappa-m2-regularization}); the shadow obstruction tower
-is infinite regardless of the value of $\kappa_{M2}$.
+\(\kappa_{M2}^{\zeta}=-K^2/12\) is the proved zeta-regularized
+benchmark of Proposition~\ref{prop:m2-zeta-regularized-kappa};
+the identification \(\kappa_{M2}=\kappa_{M2}^{\zeta}\) is
+Conjecture~\ref{conj:m2-zeta-comparison}.  The shadow obstruction
+tower is infinite regardless of the value of \(\kappa_{M2}\).
 \end{computation}
 
 
@@ -1266,7 +1249,7 @@ quasi-isomorphism by the Hochschild--Kostant--Rosenberg theorem
 applied to the Calabi--Yau dg scheme.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 The boundary algebra is a commutative dg algebra (a Dolbeault
 model for the derived scheme structure of $Y$). The Hochschild
 cochains of a commutative dg algebra are identified, by HKR,
@@ -1316,9 +1299,9 @@ H^2(\barB)
 [-,-]_{\sn}: S^2(H^1(Y,T_Y))\to H^2(Y,T_Y)
 \bigr).
 \end{equation}
-When $Y$ has $h^{2,1}=1$ (a rigid CY), $H^2(\barB)=0$
-(no quadratic relations); the Koszul dual is a free algebra
-on one generator.
+When $Y$ has $h^{2,1}=0$, the infinitesimal complex-structure
+space has zero dimension and the displayed quadratic map has zero
+source. The case $h^{2,1}=1$ is one-dimensional, not rigid.
 
 When $Y$ has $h^{2,1}>1$, the Yukawa coupling determines
 the quadratic relations. In the mirror-symmetric
@@ -1329,65 +1312,51 @@ for the Gauss--Manin connection.
 
 \emph{Bar cohomology at degree~$3$.}
 The Massey products in the bar complex are controlled by
-the $A_\infty$ structure on $H^\bullet(Y,T_Y)$. For a
-formal Calabi--Yau ($Y$ with unobstructed deformations),
-the bar cohomology concentrates in degrees $1$ and $2$
-(Koszul concentration): $H^k(\barB)=0$ for $k\ge 3$.
-This is equivalent to the Bogomolov--Tian--Todorov
-unobstructedness theorem.
+the $A_\infty$ structure on $H^\bullet(Y,T_Y)$. The
+Bogomolov--Tian--Todorov theorem makes the deformation
+dg Lie algebra homotopy abelian and kills the Kuranishi
+obstruction classes. It does not identify the full chiral bar
+complex with a Gaussian Koszul model.
 \end{computation}
 
-\begin{theorem}[Koszul concentration and BTT; \ClaimStatusProvedHere]
+\begin{theorem}[BTT and the two Kodaira--Spencer scalars;
+\ClaimStatusProvedElsewhere]
 % label removed: thm:ks-koszul-btt
 \index{Kodaira--Spencer!Koszul concentration}
 \index{Bogomolov--Tian--Todorov theorem}
 For a compact Calabi--Yau threefold $Y$ with $\omega_Y\cong\cO_Y$:
 \begin{enumerate}[label=(\roman*),leftmargin=1.8em]
-\item The bar complex of $V_{\partial,\mathrm{KS}}(Y)$
-concentrates in bar degrees $1$ and $2$:
-$H^k(\barB(V_{\partial,\mathrm{KS}}))=0$ for $k\ge 3$.
-\item Equivalently, $V_{\partial,\mathrm{KS}}(Y)$ is
-chirally Koszul (Vol~I, Definition~\ref*{def:chiral-koszul}).
-\item The shadow obstruction tower terminates at degree~$2$
-(class G: Gaussian).
-\item The modular characteristic is
+\item The dg Lie algebra controlling deformations of complex
+structure is homotopy abelian; hence the Kuranishi obstruction map
+vanishes.
+\item Chiral Koszul concentration and Gaussian shadow depth for
+$V_{\partial,\mathrm{KS}}(Y)$ are extra hypotheses on the
+factorization-algebra model; they are not consequences of BTT alone.
+\item The weight-one Hodge supertrace is
 \begin{equation}% label removed: eq:ks-kappa
-\kappa_{\mathrm{KS}}(Y) = \frac{\chi(Y)}{2} = h^{1,1} - h^{2,1}.
+\kappa_{\mathrm{KS}}^{(1)}(Y) = \frac{\chi(Y)}{2}
+= h^{1,1}-h^{2,1}.
 \end{equation}
+\item The BCOV one-loop scalar row is
+\[
+\kappa_{\mathrm{BCOV}}(Y)=\frac{\chi(Y)}{24}.
+\]
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-(i)~The Calabi--Yau condition implies that the $\bar\partial$-cohomology
-of polyvector fields carries a formal $A_\infty$ structure with
-vanishing higher operations $m_k=0$ for $k\ge 3$. This is the
-Barannikov--Kontsevich formality theorem, whose proof uses the
-$\partial\bar\partial$-lemma. Formality of the $A_\infty$
-structure is equivalent, by the equivalence
-$\text{formality}\Leftrightarrow\text{Koszul concentration}$
-(Vol~I, Proposition~\ref*{V1-prop:ainfty-formality-implies-koszul}),
-to bar cohomology concentration.
+(i)~Tian--Todorov unobstructedness, in the Barannikov--Kontsevich
+form, follows from the $\partial\bar\partial$-lemma for polyvector
+fields. This is a statement about the Maurer--Cartan deformation
+functor, not about every operation in the chiral bar construction.
 
-(ii)~This is a restatement of~(i) using the definition of
-chiral Koszulness.
+(ii)~The chiral bar complex contains the vertex-algebraic collision
+data. A Gaussian truncation is therefore additional factorization
+data, or a chosen scalar projection, rather than a formal consequence
+of unobstructed complex-structure deformation.
 
-(iii)~By the shadow-formality identification
-(Vol~I, Proposition~\ref*{V1-prop:shadow-formality-low-degree}),
-bar concentration in degrees $\le 2$ implies that all shadows
-beyond the quadratic level vanish: $\Theta^{\le r}_{\mathrm{KS}}
-= \Theta^{\le 2}_{\mathrm{KS}}$ for all $r\ge 2$.
-
-(iv)~The modular characteristic $\kappa_{\mathrm{KS}}(Y)
-= \chi(Y)/2 = h^{1,1} - h^{2,1}$ follows from the
-Hodge-number accounting: the bar complex at genus~$1$ sees
-generators of weights $h^{p,q}$ with curvature contribution
-$(-1)^p h^{p,q}$. For a simply connected CY threefold
-($h^{1,0}=h^{2,0}=0$, $h^{3,0}=1$, $\omega_Y\cong\cO_Y$),
-the Euler characteristic is
-$\chi(Y) = \sum_{p,q}(-1)^{p+q}h^{p,q} = 2(h^{1,1}-h^{2,1})$,
-and the modular characteristic is half this value.
-
-The computation from the weight-$1$ supertrace:
+(iii)~The weight-one supertrace is
+computed from the row $H^\bullet(Y,T_Y)$:
 the weight-$1$ space of the boundary algebra is
 $H^\bullet(Y,T_Y)$, and the relevant supertrace is
 $\operatorname{str}(\mathrm{id}|_{V^{(1)}})
@@ -1395,9 +1364,18 @@ $\operatorname{str}(\mathrm{id}|_{V^{(1)}})
 = -h^{1,1} + h^{1,2}
 = -h^{1,1} + h^{2,1}$
 (using Serre duality $h^{1,q} = h^{2,3-q}$ and the CY condition).
-The sign is set by the standard B-model convention:
-$\kappa_{\mathrm{KS}} = -\operatorname{str}(\mathrm{id}|_{V^{(1)}})
-= h^{1,1} - h^{2,1}$.
+With the B-model sign convention
+\[
+\kappa_{\mathrm{KS}}^{(1)}
+=-\operatorname{str}(\mathrm{id}|_{V^{(1)}})
+= h^{1,1} - h^{2,1}.
+\]
+For a Calabi--Yau threefold, $\chi(Y)=2(h^{1,1}-h^{2,1})$.
+
+(iv)~The BCOV anomaly row is the one-loop scalar of
+Bershadsky--Cecotti--Ooguri--Vafa and Costello--Li. Its coefficient
+is $\chi(Y)/24$, and it is not the same invariant as the
+weight-one Hodge supertrace.
 \end{proof}
 
 
@@ -1460,22 +1438,38 @@ to give the stated exchange.
 \end{proof}
 
 
-\subsection{Line operators: D-branes as \texorpdfstring{$A^!$}{A!}-modules}
+\subsection{Line operators and Morita generators}
 % label removed: subsec:ks-lines
 
-\begin{theorem}[D-branes as Koszul-dual modules; \ClaimStatusProvedElsewhere]
+\begin{theorem}[B-model line category and Morita algebra;
+\ClaimStatusProvedElsewhere]
 % label removed: thm:ks-lines
 \index{Kodaira--Spencer!line operators}
-\index{D-brane!as Koszul-dual module}
+\index{D-brane!Morita module}
 The category of line operators in the B-model on $Y$ is equivalent
-to the derived category of coherent sheaves:
+to the derived category of coherent sheaves. If $G_Y$ is a
+split-generator and
+\[
+ E_Y:=\RHom_Y(G_Y,G_Y),
+\]
+then derived Morita theory gives
 \begin{equation}% label removed: eq:ks-lines
 \cC_{\mathrm{line}}^{\mathrm{KS}}(Y)
 \;\simeq\;
 D^b\mathrm{Coh}(Y)
 \;\simeq\;
-V_{\partial,\mathrm{KS}}^!(Y)\text{-mod}.
+\Perf(E_Y).
 \end{equation}
+The functor sends $F\in D^b\mathrm{Coh}(Y)$ to
+$\RHom_Y(G_Y,F)$. The special object $\cO_Y$ gives only
+$\RHom_Y(\cO_Y,\cO_Y)\simeq H^\bullet(Y,\cO_Y)$; it represents the
+whole line category only on loci where $\cO_Y$ is a split-generator.
+If a dg Morita equivalence
+\[
+ \Psi_Y\colon V_{\partial,\mathrm{KS}}^!(Y)\longrightarrow E_Y
+\]
+is fixed, then the same category may be written as
+$V_{\partial,\mathrm{KS}}^!(Y)\text{-}\mathsf{mod}_{\mathrm{perf}}$.
 The equivalence identifies:
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
@@ -1491,32 +1485,41 @@ D-brane monodromy & autoequivalence of $D^b\mathrm{Coh}(Y)$
 \end{center}
 \end{theorem}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 The B-model line category is the category of boundary conditions
 for the open string. By Kontsevich's homological mirror symmetry
 conjecture (a theorem in many cases), this is the derived category
-of coherent sheaves. The identification with $A^!$-modules follows
-from the Koszul duality: the open string field theory computes
-$\RHom(\cO_Y,\cO_Y)\simeq V^!_{\partial,\mathrm{KS}}$, and
-$D^b\mathrm{Coh}(Y)\simeq V^!_{\partial,\mathrm{KS}}\text{-mod}$
-by compact generation.
+of coherent sheaves. Smooth proper schemes admit classical
+split-generators, and Bondal--Van den Bergh derived Morita theory
+identifies $D^b\mathrm{Coh}(Y)$ with perfect modules over
+$\RHom_Y(G_Y,G_Y)$. The algebra
+$\RHom_Y(\cO_Y,\cO_Y)$ is $H^\bullet(Y,\cO_Y)$ and is not a Morita
+model for $D^b\mathrm{Coh}(Y)$ unless $\cO_Y$ split-generates. A
+Koszul-dual module presentation is therefore the derived Morita
+presentation transported along $\Psi_Y$.
 \end{proof}
 
 
 \subsection{The holographic modular Koszul datum \texorpdfstring{$\mathcal{H}(\mathrm{KS})$}{H(KS)}}
 % label removed: subsec:ks-hmkd
 
-\begin{theorem}[Kodaira--Spencer holographic datum; \ClaimStatusProvedHere]
+\begin{theorem}[Kodaira--Spencer holographic datum with Morita and scalar comparison;
+\ClaimStatusProvedHere]
 % label removed: thm:ks-hmkd
 \index{holographic modular Koszul datum!Kodaira--Spencer}
-For a compact Calabi--Yau threefold $Y$, the holographic modular
-Koszul datum is
+Let $Y$ be a compact Calabi--Yau threefold, let $G_Y$ be a
+split-generator of $D^b\mathrm{Coh}(Y)$, and put
+$E_Y=\RHom_Y(G_Y,G_Y)$. Equip the Kodaira--Spencer factorization
+algebra with a scalar sewing projection and, when the line category is
+written as $V_{\partial,\mathrm{KS}}^!(Y)$-modules, a Morita
+equivalence $\Psi_Y\colon V_{\partial,\mathrm{KS}}^!(Y)\to E_Y$.
+Then the holographic modular Koszul datum is
 \begin{equation}% label removed: eq:ks-hmkd
 \mathcal{H}(\mathrm{KS}_Y)
 = \bigl(
 V_{\partial,\mathrm{KS}},\;
 V_{\partial,\mathrm{KS}}^!,\;
-D^b\mathrm{Coh}(Y),\;
+D^b\mathrm{Coh}(Y)\simeq\Perf(E_Y),\;
 r_{\mathrm{KS}}(z),\;
 \Theta_{\mathrm{KS}},\;
 \nabla^{\mathrm{hol}}_{\mathrm{KS}}
@@ -1531,25 +1534,25 @@ $\cA = V_{\partial,\mathrm{KS}}$
 & Polyvector fields with Schouten--Nijenhuis bracket \\
 $\cA^! = V^!_{\partial,\mathrm{KS}}$
 & Differential forms (via holomorphic Hodge star) \\
-$\cC = D^b\mathrm{Coh}(Y)$
-& Derived category of coherent sheaves \\
+$\cC = D^b\mathrm{Coh}(Y)\simeq\Perf(E_Y)$
+& Morita category of a split-generator $G_Y$ \\
 $r_{\mathrm{KS}}(z)
 = \Omega_{\PV}^{\sn}/z$
 & Spectral kernel from Schouten--Nijenhuis pairing \\
 $\Theta_{\mathrm{KS}}$
-& Bar-intrinsic MC element; shadow obstruction tower terminates at
-degree~$2$ (Gaussian) \\
+& Bar-intrinsic MC element; Gaussian truncation only after an
+explicit scalar sewing projection \\
 $\nabla^{\mathrm{hol}}_{\mathrm{KS}}
 = \bar\partial + \hbar\partial_\Omega$
-& Gauss--Manin connection = shadow connection at
+& Gauss--Manin projection of the shadow connection at
 genus~$0$ \\
 \hline
 \end{tabular}
 \end{center}
-The modular characteristic is $\kappa_{\mathrm{KS}}(Y)
-= \chi(Y)/2 = h^{1,1}-h^{2,1}$
-(equation~\eqref{eq:ks-kappa}). The genus-$g$ free energy is
-$F_g = \kappa_{\mathrm{KS}}\cdot\tfrac{2^{2g-1}-1}{2^{2g-1}}\cdot\tfrac{|B_{2g}|}{(2g)!}$.
+On this ambient the weight-one Hodge supertrace is
+$\kappa_{\mathrm{KS}}^{(1)}(Y)=h^{1,1}-h^{2,1}$, while the BCOV
+one-loop scalar row is
+$\kappa_{\mathrm{BCOV}}(Y)=\chi(Y)/24$.
 
 The shadow connection at genus~$0$ is the Gauss--Manin
 connection on the moduli of complex structures:
@@ -1576,10 +1579,10 @@ leading term of the collision residue is the Schouten--Nijenhuis
 Casimir),
 $\Theta_{\mathrm{KS}}$ from the bar-intrinsic construction
 (Construction~\ref{constr:m2-master-lift-full} applied to
-$V_{\partial,\mathrm{KS}}$; the shadow obstruction tower terminates because
-of Koszul concentration, Theorem~\ref{thm:ks-koszul-btt}),
+$V_{\partial,\mathrm{KS}}$; no Gaussian truncation is asserted before
+the scalar sewing projection is fixed),
 and $\nabla^{\mathrm{hol}}_{\mathrm{KS}}$ from the shadow
-connection formula evaluated on the Gaussian shadow.
+connection formula after projection to the deformation complex.
 
 The identification of $\nabla^{\mathrm{hol}}_{\mathrm{KS},0,n}$
 with the Gauss--Manin connection follows from the standard
@@ -1589,11 +1592,7 @@ Schouten--Nijenhuis bracket. The resulting flat connection on
 the space of complex structures is the classical Gauss--Manin
 connection.
 
-The modular characteristic: $\kappa_{\mathrm{KS}}
-= \operatorname{str}(\id|_{V^{(1)}})$, where $V^{(1)}$ is the
-weight-$1$ space. For a CY threefold,
-$V^{(1)}\cong H^{\bullet}(Y,T_Y)$, and the supertrace with
-the natural signs gives $\chi(Y)/2=h^{1,1}-h^{2,1}$.
+The two scalar rows are those of the preceding theorem.
 \end{proof}
 
 \begin{remark}[Mirror symmetry and Koszul self-duality]
@@ -1603,12 +1602,14 @@ If $Y$ and $\check{Y}$ are mirror Calabi--Yau threefolds with
 $h^{1,1}(Y)=h^{2,1}(\check{Y})$ and $h^{2,1}(Y)=h^{1,1}(\check{Y})$,
 then
 \[
-\kappa_{\mathrm{KS}}(Y) + \kappa_{\mathrm{KS}}(\check{Y})
+\kappa_{\mathrm{KS}}^{(1)}(Y) + \kappa_{\mathrm{KS}}^{(1)}(\check{Y})
 = (h^{1,1}(Y)-h^{2,1}(Y)) + (h^{1,1}(\check{Y})-h^{2,1}(\check{Y}))
 = 0.
 \]
-For Kodaira--Spencer/Calabi--Yau mirror pairs, the complementarity relation $\kappaChHodge(\cA)+\kappaChHodge(\cA^!)=0$ is
-mirror symmetry at the level of modular characteristics (this vanishing is specific to the CY/free-field lineage; for $\mathcal{W}$-algebras, $\kappa+\kappa^! = \varrho_{\cA}\,K \neq 0$
+For Kodaira--Spencer/Calabi--Yau mirror pairs, this is the
+anti-invariance of the weight-one Hodge row under mirror symmetry
+(this vanishing is specific to the CY/free-field lineage; for
+$\mathcal{W}$-algebras, $\kappa+\kappa^! = \varrho_{\cA}\,K \neq 0$
 (e.g.\ $\varrho_{\cW_N} = H_N - 1$ with $K_{\cW_N} = 4N^3 - 2N - 2$,
 giving $\kappa+\kappa^! = 250/3$ for $\cW_3$)). The
 Koszul duality $\cA\leftrightarrow\cA^!$ is the passage from
@@ -1627,10 +1628,11 @@ $h^{1,1}=1$, $h^{2,1}=101$, $\chi(Y)=-200$.
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{ll}
-$\kappa_{\mathrm{KS}}$ & $1-101=-100$ \\
-$F_1$ & $\kappa/24=-100/24=-25/6$ \\
-$F_2$ & $7\kappa/5760=-700/5760=-35/288$ \\
-Shadow depth & $2$ (Gaussian) \\
+$\kappa_{\mathrm{KS}}^{(1)}$ & $1-101=-100$ \\
+$\kappa_{\mathrm{BCOV}}$ & $-200/24=-25/3$ \\
+$F_1^{\mathrm{const}}$ & $\kappa_{\mathrm{BCOV}}/24=-25/72$ \\
+$F_2^{\mathrm{const}}$ & $-100/2880=-5/144$ \\
+Shadow depth & not Gaussian before scalar projection \\
 Koszul dual & B-model on mirror quintic $\check{Y}$
 ($h^{1,1}=101$, $h^{2,1}=1$)
 \end{tabular}
@@ -1640,10 +1642,11 @@ triple intersection, corrected by Gromov--Witten invariants
 (the instanton expansion). The shadow connection at genus~$0$
 is the Picard--Fuchs equation for the periods of $\check{Y}$.
 
-The line category $D^b\mathrm{Coh}(Y)$ has a distinguished
-compact generator: the structure sheaf $\cO_Y$. The
-endomorphism algebra $\End(\cO_Y)\cong H^\bullet(Y,\cO_Y)$
-is the boundary algebra at the $\cO_Y$-vacuum.
+The line category $D^b\mathrm{Coh}(Y)$ is Morita equivalent to
+$\Perf(E_Y)$ for any split-generator $G_Y$, with
+$E_Y=\RHom_Y(G_Y,G_Y)$. The object $\cO_Y$ gives the point-vacuum
+algebra $H^\bullet(Y,\cO_Y)$, not the endomorphism algebra of the
+whole line category.
 \end{computation}
 
 
@@ -1898,13 +1901,14 @@ full derived center.
 \end{proof}
 
 
-\subsection{Conditional global statement}
+\subsection{Holonomy-Trivial Globalization}
 % label removed: subsec:conditional-global
 
-\begin{corollary}[Conditional globalization; \ClaimStatusProvedHere]
+\begin{corollary}[Holonomy-trivial globalization; \ClaimStatusProvedHere]
 % label removed: cor:conditional-globalization
 If the defect holonomy trivializes, the global Koszul triangle
-\eqref{eq:global-triangle-theorem} holds without further conditions.
+\eqref{eq:global-triangle-theorem} holds with no residual monodromy
+obstruction.
 The sufficient criterion is: $\pi_1(\C\setminus\{\text{defects}\})$
 acts trivially on $\Bbound$ via the monodromy representation of
 $\nabla^{\mathrm{hol}}$.
@@ -1932,7 +1936,7 @@ column:
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{lllll}
 \textbf{Theory} & \textbf{$\Bbound$} & \textbf{$A^!$}
-& $\kappa$ & \textbf{Genus-$0$ holonomy packet} \\
+& \textbf{scalar row} & \textbf{Genus-$0$ holonomy packet} \\
 \hline
 Free boson & $\mathcal{H}_k$ & $\Sym^{\mathrm{ch}}(V^*)$ & $k$
 & abelian genus-$0$ shadow \\
@@ -1950,17 +1954,22 @@ $\mathcal{W}_3{}_c$ & $\mathcal{W}_3{}_c$
 & companion $\mathcal{W}_3{}_{100-c}$ & $5c/6$
 & characteristic comparison surface; same-family duality conditional \\
 KS on CY $Y$ & $\PV(Y)$ & $\Omega^\bullet(Y)$
-& $h^{1,1}-h^{2,1}$
+& $\kappa_{\mathrm{KS}}^{(1)}=h^{1,1}-h^{2,1}$
 & Gauss--Manin comparison surface \\
 $M2$ at rank $K$ & $A_{M2,\infty}$ & $Y^{(2)}(\mathfrak{gl}_K)$
-& $-K^2/12$ & benchmark M2 comparison surface \\
+& $\kappa_{M2}^{\zeta}=-K^2/12$; comparison conjectural
+& benchmark M2 comparison surface \\
 Lattice $V_\Lambda$ & $V_\Lambda$ & $V_{\Lambda^*}$
 & $\operatorname{rank}(\Lambda)$ & abelian genus-$0$ shadow
 \end{tabular}
 \end{center}
 In particular, this theorem isolates the remaining genus-$0$
 holonomy input after the structural hypotheses are checked.
-The global triangle is unconditional only when that packet is
+For the \(M2\) row, the scalar entry is the zeta-regularized benchmark
+of Proposition~\ref{prop:m2-zeta-regularized-kappa}; replacing it by
+the actual \(\kappa_{M2}\) requires
+Conjecture~\ref{conj:m2-zeta-comparison}.  The global triangle is
+unconditional only when that packet is
 genuinely trivial on the derived center; otherwise one remains on
 the conditional globalization surface of
 Corollary~\ref{cor:conditional-globalization}.
@@ -2029,7 +2038,7 @@ category;
 \item $r_T(z)=\operatorname{Res}^{\mathrm{coll}}_{0,2}(\Theta_T)
 \in A^!_T\ohat A_T(\!(z^{-1})\!)$ is the spectral kernel;
 \item $\{m_k\}_{k\ge 2}$ are the $A_\infty$ operations on
-$\Bbound$ (the higher chiral operations from \cite{GKW24});
+$\Bbound$ (the higher chiral operations from \cite{GKW25});
 \item $\nabla^{\mathrm{hol}}_{T,0,n}
 = d - \sum_{i<j}\Omega_T^{(i,j)}\,d\log(z_i-z_j)$
 is the genus-$0$ shadow connection.
@@ -2096,8 +2105,11 @@ are given, then $\alpha_T$ is reconstructed as the unique MC
 element in $\gSC_T$ whose closed projection is the $A_\infty$
 structure of $\Bbound$ and whose open projection is the
 endomorphism dg algebra of the line category. The $R$-matrix is
-then the mixed projection, the bulk is the derived center, and
-the genus tower is the closed self-loop projection.
+then the mixed projection, the derived centre is the closed-colour
+comparison vertex, and the genus tower is the closed self-loop
+projection. A physical bulk reading requires the same HT
+prefactorization and exact-sector comparison data as in the active
+bulk--Hochschild theorem.
 
 The reconstruction is unique because the convolution algebra
 $\gSC_T$ is complete with respect to the degree filtration, and the
@@ -2465,7 +2477,8 @@ $(2,0)$-mixed & $R_{M2}(z)$
 $(1,1)$-mixed & $\beta_{\der}$
 & Bulk-to-boundary map \\
 Self-loop & $\Theta_{M2}$
-& $\kappa_{M2} = -K^2/12$ heuristic, infinite shadow depth
+& $\kappa_{M2}^{\zeta}=-K^2/12$; comparison conjectural,
+infinite shadow depth
 \end{tabular}
 \end{center}
 The double-loop structure means that $\gSC_{M2}$ is richer than
@@ -2500,18 +2513,19 @@ The five projections:
 Closed & $\PV(Y)$ & Schouten--Nijenhuis bracket \\
 Open & $D^b\mathrm{Coh}(Y)$ & Derived category \\
 $(2,0)$-mixed & $R_{\mathrm{KS}}(z)$
-& $\Omega_{\PV}^{\sn}/z$ (Gaussian: leading term only) \\
+& $\Omega_{\PV}^{\sn}/z$ on the deformation leading term \\
 $(1,1)$-mixed & $\beta_{\der}$
 & HKR quasi-isomorphism \\
 Self-loop & $\Theta_{\mathrm{KS}}$
-& $\kappa_{\mathrm{KS}}=h^{1,1}-h^{2,1}$, shadow depth~$2$
+& $\kappa_{\mathrm{KS}}^{(1)}=h^{1,1}-h^{2,1}$ and
+$\kappa_{\mathrm{BCOV}}=\chi(Y)/24$
 \end{tabular}
 \end{center}
-The convolution algebra is simpler than the $M2$ case because
-the boundary algebra is commutative (polyvector fields with
-wedge product) and the shadow obstruction tower terminates at degree~$2$
-(Gaussian class). The MC element $\alpha_{\mathrm{KS}}$ is
-therefore determined by its binary component.
+The convolution algebra is simpler than the $M2$ case at the
+deformation-complex projection, where the Tian--Todorov homotopy
+abelian model controls the Kuranishi problem. The full chiral
+boundary algebra still contains Schouten collision data and BCOV
+loop data, so no Gaussian termination is asserted here.
 \end{computation}
 
 
@@ -2586,6 +2600,6 @@ Koszul-duality tower: Bulk $=$ centre of Boundary, Boundary $=$ centre
 of Line. This is the realisation of the ${\sf BBL}$ operadic
 correspondence developed in this chapter, with the specific $24$-fold
 multiplicity forced by the Steiner $S(5,8,24)$ rigidity and the
-Mukai-doubling $K^{\kappaChHodge} = 8$. Cross-ref Vol.~III,
+Mukai-doubling $K^{\kappaChHodge} = 8$. Compare Vol.~III,
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}

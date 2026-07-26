@@ -74,15 +74,18 @@ def test_w4_missing_bridge_status_is_pinned_in_manuscript():
         VOL2_ROOT / "chapters/theory/wn_tempered_closure_platonic.tex"
     ).read_text()
 
-    beta_label = beta_tex.index(r"\label{thm:beta-N-closed-form-proved-all-N}")
+    beta_label = beta_tex.index(r"\label{conj:beta-N-harmonic-closed-form}")
     beta_status_window = beta_tex[beta_label: beta_label + 220]
+    beta_flat = " ".join(beta_tex.split())
     assert r"\ClaimStatusConjectured" in beta_status_window
-    assert "They do not prove it." in beta_tex
-    assert "Miura/OPE computation of" in beta_tex
+    assert "test the harmonic scaling hypothesis rather than prove it" in beta_flat
+    assert "This is a spin-lane witness, not a Riccati bridge" in beta_flat
+    assert "full Miura/OPE computation" in beta_tex
     assert "is absent" in beta_tex
 
     tempered_label = tempered_tex.index(r"\label{thm:wn-tempered-all-N}")
     tempered_status_window = tempered_tex[tempered_label: tempered_label + 220]
+    tempered_flat = " ".join(tempered_tex.split())
     assert r"\ClaimStatusConditional" in tempered_status_window
-    assert "finite envelope as an explicit assumption" in tempered_tex
-    assert "does not derive it from Fateev--Lukyanov" in tempered_tex
+    assert "finite envelope as an explicit assumption" in tempered_flat
+    assert "does not derive it from Fateev--Lukyanov" in tempered_flat

@@ -627,6 +627,147 @@ def verify_bicomplex(D_P_sq, D_Mod_sq, anticomm):
     }
 
 
+def relative_modular_graph_complex_profile(edge_count, graph_h1_rank=0, vertex_h1_ranks=()):
+    r"""Return the explicit relative modular graph-complex profile.
+
+    This records the theorem-level data of
+    thm:explicit-relative-modular-graph-complex:
+
+      FT_rel(C) = prod_[Gamma] (o(Gamma) tensor prod_v s C(g(v),Fl(v)))_Aut
+      D = D_int + D_sep + D_nsep
+      D_0 = D_int + D_sep
+      D_1 = D_nsep
+
+    Two orientation conventions are tracked:
+
+      o_GK(Gamma) = det(kE(Gamma)) tensor det(H_1(Gamma;k))^{-1}
+      o_Hdg(Gamma) = det(kE(Gamma)) tensor prod_v det(H^1(Sigma_g(v);k))^{-1}
+
+    Parameters
+    ----------
+    edge_count : int
+        Number of internal edges in Gamma.
+    graph_h1_rank : int
+        Rank of H_1(|Gamma|; k).
+    vertex_h1_ranks : iterable[int]
+        Ranks of H^1(Sigma_g(v); k) for the vertex surfaces.
+
+    Returns
+    -------
+    dict
+        Orientation ranks, product shape, differential components, and
+        genus shifts.
+    """
+    if edge_count < 0:
+        raise ValueError(f"edge_count must be non-negative, got {edge_count}")
+    if graph_h1_rank < 0:
+        raise ValueError(f"graph_h1_rank must be non-negative, got {graph_h1_rank}")
+
+    vertex_ranks = tuple(vertex_h1_ranks)
+    if any(rank < 0 for rank in vertex_ranks):
+        raise ValueError(f"vertex_h1_ranks must be non-negative, got {vertex_ranks}")
+
+    return {
+        'relative_ft_shape': 'prod_[Gamma] (o(Gamma) tensor prod_v s C(g(v),Fl(v)))_Aut(Gamma)',
+        'orientation_conventions': {
+            'getzler_kapranov': {
+                'edge_det_rank': edge_count,
+                'graph_h1_dual_rank': graph_h1_rank,
+                'formula': 'det(kE(Gamma)) tensor det(H_1(|Gamma|;k))^{-1}',
+            },
+            'stable_curve_hodge': {
+                'edge_det_rank': edge_count,
+                'vertex_h1_dual_rank': sum(vertex_ranks),
+                'vertex_h1_ranks': vertex_ranks,
+                'formula': 'det(kE(Gamma)) tensor prod_v det(H^1(Sigma_g(v);k))^{-1}',
+            },
+        },
+        'differential': ['D_int', 'D_sep', 'D_nsep'],
+        'D0_components': ['D_int', 'D_sep'],
+        'D1_components': ['D_nsep'],
+        'D_sep_dual_operation': 'contract_e for separating e',
+        'D_nsep_operation': 'xi_e for nonseparating e',
+        'D0_genus_shift': 0,
+        'D1_genus_shift': 1,
+    }
+
+
+def modular_d0_d1_identities():
+    r"""Return the explicit D_0/D_1 identities.
+
+    These are the genus-shift 0, 1, and 2 pieces of (D_0 + D_1)^2 = 0.
+    """
+    return {
+        'D0_squared': 0,
+        'D1_squared': 0,
+        'D0D1_plus_D1D0': 0,
+        'source': '(D_0 + D_1)^2 = 0 by codimension-two stable-graph cancellation',
+        'genus_shifts': {
+            'D0_squared': 0,
+            'D0D1_plus_D1D0': 1,
+            'D1_squared': 2,
+        },
+    }
+
+
+def modular_mc_recursion_terms(g):
+    r"""Return the genus-g Maurer-Cartan recursion terms.
+
+    The total MC equation is
+
+      (D_0 + D_1)Theta + 1/2[Theta,Theta] = 0,
+      Theta = sum_g hbar^g Theta^(g).
+
+    This function records the term profile after comparing hbar-degree g.
+    """
+    if g < 0:
+        raise ValueError(f"genus must be non-negative, got {g}")
+
+    if g == 0:
+        return {
+            'genus': 0,
+            'equation_terms': ['D0 Theta^0', '1/2 [Theta^0,Theta^0]'],
+            'bracket_pairs': [(0, 0)],
+            'contains_D1': False,
+            'twisted_differential': 'D0 + [Theta^0,-]',
+            'forcing_terms': [],
+        }
+
+    bracket_pairs = [(a, g - a) for a in range(g + 1)]
+    obstruction_pairs = [(a, g - a) for a in range(1, g)]
+
+    return {
+        'genus': g,
+        'equation_terms': [
+            f'D0 Theta^{g}',
+            f'D1 Theta^{g - 1}',
+            '1/2 sum_{a+b=g} [Theta^a,Theta^b]',
+        ],
+        'bracket_pairs': bracket_pairs,
+        'contains_D1': True,
+        'twisted_differential': 'D0 + [Theta^0,-]',
+        'forcing_terms': [
+            f'D1 Theta^{g - 1}',
+            '1/2 sum_{a+b=g, a,b<g} [Theta^a,Theta^b]',
+        ],
+        'obstruction_bracket_pairs': obstruction_pairs,
+    }
+
+
+def modular_obstruction_terms(g):
+    r"""Return the genus-g obstruction class profile."""
+    if g < 1:
+        raise ValueError(f"obstruction genus must be >= 1, got {g}")
+
+    return {
+        'genus': g,
+        'D1_source_genus': g - 1,
+        'bracket_pairs': [(a, g - a) for a in range(1, g)],
+        'cohomology': 'H^2(gr_F^g L, D_0 + [Theta^0,-])',
+        'vanishing_criterion': 'class [o_g] vanishes iff a genus-g correction Theta^g exists modulo F^{g+1}',
+    }
+
+
 def relative_ft_involutivity():
     r"""Return the hypotheses for relative FT homotopy-involutivity.
 

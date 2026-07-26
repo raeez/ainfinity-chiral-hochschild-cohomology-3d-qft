@@ -124,12 +124,47 @@ Choose a filtration-preserving strong deformation retract
 \qquad
 ip-\id_C=\mu_1 h+h\mu_1,
 \]
-with $i,p,h$ all filtration-preserving. Let $m_n$ be the transferred minimal $\Ainf$-structure on $H$, and define
+with $i,p,h$ all filtration-preserving, normalized by
+\[
+p i=\id_H,\qquad p h=0,\qquad h i=0,\qquad h^2=0.
+\]
+Let $m_n$ be the transferred minimal $\Ainf$-structure on $H$, and define
 \[
 F^rH:=p(F^rC),
 \qquad
 H_{\mathrm{sp}}:=H/F^1H.
 \]
+
+The transfer uses the following signed convention.  Put
+\(\widetilde C=sC\) and \(\widetilde H=sH\), and define
+\[
+\widetilde i=s\,i\,s^{-1},\qquad
+\widetilde p=s\,p\,s^{-1},\qquad
+\widetilde h=s\,h\,s^{-1},\qquad
+\widetilde\mu_r=s\,\mu_r\,(s^{-1})^{\otimes r}.
+\]
+For \(T\in\operatorname{PT}_n\), order the internal edges
+\[
+E_{\mathrm{int}}(T)=\{e_1<\cdots<e_N\}
+\]
+by the left-to-right depth-first planar order, and orient the tree by
+\(\mathfrak o(T)=\det(\Bbbk^{E_{\mathrm{int}}(T)})\).  Let
+\(\widetilde\mu_T\) be the composite in graded vector spaces obtained
+by putting \(\widetilde i\) at leaves, \(\widetilde\mu_{\operatorname{val}(v)}\)
+at each internal vertex \(v\), \(\widetilde h\) on every internal
+edge, and \(\widetilde p\) at the root, composed in the above edge
+order.  The transferred operation is
+\begin{equation}\label{eq:cbt-suspended-transfer}
+ m_n
+ =
+ s_H^{-1}
+ \left(\sum_{T\in\operatorname{PT}_n}\widetilde\mu_T\right)
+ s_H^{\otimes n}.
+\end{equation}
+Thus the signs are not an extra \(\pm\)-choice: they are exactly the
+Koszul signs forced by the suspension operators in
+\eqref{eq:cbt-suspended-transfer} and the orientation line
+\(\mathfrak o(T)\).
 
 \begin{theorem}[single-particle transfer theorem]
 \label{thm:cbt-single-particle-transfer}
@@ -145,11 +180,12 @@ Equivalently:
 \end{theorem}
 
 \begin{proof}
-By Kadeishvili's tree formula, each transferred operation $m_n$ is a sum over planar rooted trees $T$ with $n$ leaves:
-\[
-m_n=\sum_{T\in \mathrm{PT}_n}\pm\,p\,\mu_T\,i^{\otimes n},
-\]
-where each internal vertex of valence $r$ is labeled by $\mu_r$, every internal edge is labeled by $h$, and the root by $p$.
+By the suspended Kadeishvili formula
+\eqref{eq:cbt-suspended-transfer}, each transferred operation \(m_n\)
+is the signed sum over planar rooted trees with \(n\) leaves whose
+vertices, internal edges, leaves, and root are decorated respectively
+by \(\mu_r,h,i,p\).  The normalized side conditions make this the
+minimal homotopy transfer of the dg algebra \((C,\mu_1,\mu_2,\ldots)\).
 
 Because $i,p,h$ preserve filtration, a tree contributes nontrivially modulo $F^1H$ only if the composite map $\mu_T i^{\otimes n}$ lands in filtration degree $0$. But every vertex labeled by $\mu_r$ with $r\ge 3$ lands in $F^1C$ after reduction to $L$, and every use of the nonlinear part of $\mu_2$ also lands in $F^1C$. Hence every tree containing at least one such vertex has output in $F^1C$, and vanishes after applying $p$ and reducing modulo $F^1H$.
 
@@ -1377,34 +1413,106 @@ packages each higher bracket as one multiplication followed by one derivative. T
 \end{remark}
 
 
-\section{MHV amplitudes from the bar-complex integral}
+\section{MHV amplitudes from a four-point residue datum}
 \label{sec:cbt-mhv-bar-complex}
 
-The celestial and boundary transfer machinery developed above has a concrete application to scattering amplitudes: the colour-ordered MHV amplitude is reproduced as a bar-complex integral over $\overline{\mathrm{FM}}_4(\mathbb{C})$. This realization confirms that the bar-complex formalism contains the physical amplitude data and connects the $\Ainf$ weight forms to the Parke--Taylor formula.
+\begin{definition}[four-point Parke--Taylor residue datum]
+\label{def:cbt-pt-residue-datum}
+\index{Parke--Taylor residue datum|textbf}
+Fix the colour order \((1,2,3,4)\) and helicity word
+\((+,-,-,+)\).  A \emph{four-point Parke--Taylor residue datum} for
+the bar weight form \(\omega_4^{(+,-,-,+)}\) consists of:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the colour-order projection
+\[
+P_{\mathrm{cyc}}\colon C_\bullet(\overline{\FM}_4(\C))
+\longrightarrow C_\bullet(\overline{\FM}^{\mathrm{cyc}}_4(\C))
+\]
+which kills the non-cyclic pair channels
+\(D_{\{1,3\}}\) and \(D_{\{2,4\}}\);
+\item a spinor-helicity residue character on the cyclic boundary
+divisors
+\[
+\rho_{i,i+1}\colon
+\Res_{D_{\{i,i+1\}}}
+(\omega_4^{(+,-,-,+)}\wedge\nu_4)
+\longmapsto
+\langle i\,i{+}1\rangle^{-1},
+\qquad i\in\Z/4\Z,
+\]
+where the index \(i+1\) is read cyclically, so \(4+1=1\);
+\item a negative-helicity pairing normalization
+\[
+\rho_{--}(\tilde J_2,\tilde J_3)=\langle 23\rangle^4;
+\]
+\item the orientation convention on
+\(\overline{\FM}^{\mathrm{cyc}}_4(\C)\) for which the four cyclic
+boundary residues multiply in the order
+\((12),(23),(34),(41)\).
+\end{enumerate}
+The resulting residue functional is
+\[
+\mathcal R^{(+,-,-,+)}_{4,\mathrm{cyc}}
+\;=\;
+\rho_{--}\prod_{i\in\Z/4\Z}\rho_{i,i+1}
+\quad
+\text{on }P_{\mathrm{cyc}}
+(\omega_4^{(+,-,-,+)}\wedge\nu_4).
+\]
+This datum is a comparison datum between the bar weight form and the
+spinor-helicity normalization.  It is not supplied by the abstract
+\(\Ainf\) transfer alone.
+\end{definition}
 
-\begin{theorem}[MHV amplitude from the bar-complex integral at $n = 4$; \ClaimStatusProvedHere]
+The celestial and boundary transfer machinery developed above gives a
+precise residue problem for scattering amplitudes: after the datum of
+Definition~\ref{def:cbt-pt-residue-datum} is supplied, the
+colour-ordered four-point MHV scalar is the cyclic boundary residue of
+the bar weight form.  Without that datum the statement is only an
+analogy with scattering, not a theorem about physical amplitudes.
+
+\begin{theorem}[Four-point Parke--Taylor residue identity;
+\(\ClaimStatusConditional\); licensing \(\alpha+\beta+\gamma\)
+via colour order, spinor-helicity residue comparison, and cyclic FM
+orientation]
 \label{thm:cbt-mhv-bar-integral}
-The colour-ordered tree-level four-gluon MHV amplitude is reproduced by the bar-complex integral
+Assume a four-point Parke--Taylor residue datum in the sense of
+Definition~\ref{def:cbt-pt-residue-datum}.  Then the colour-ordered
+bar residue of the \((+,-,-,+)\) weight form is
 \[
-A_4^{\mathrm{bar}}(1^+, 2^-, 3^-, 4^+)
+\mathcal R^{(+,-,-,+)}_{4,\mathrm{cyc}}
+\bigl(\omega_4^{(+,-,-,+)}\wedge\nu_4\bigr)
 \;=\;
-\int_{\overline{\mathrm{FM}}_4(\mathbb{C})}
-\omega_4^{(+,-,-,+)} \wedge \nu_4,
+\frac{\langle 23\rangle^4}
+ {\langle 12\rangle\,\langle 23\rangle\,
+ \langle 34\rangle\,\langle 41\rangle}.
 \]
-where $\omega_4^{(+,-,-,+)}$ is the bar weight form encoding the helicity assignments and $\nu_4$ is the configuration-space volume form. Specifically:
+Equivalently, after the usual external-state and colour-order
+normalisations are identified, this scalar is the four-gluon
+Parke--Taylor expression \(A_4^{\mathrm{PT}}(1^+,2^-,3^-,4^+)\).
+The theorem is a residue identity on the cyclic FM boundary.  It does
+not construct the Lorentzian scattering theory, the LSZ map, or the
+Mellin/celestial transform.
+
+Specifically:
 \begin{enumerate}[label=\textup{(\alph*)}]
-\item The degree-$4$ bar weight form factorises over the five planar binary trees with $4$~leaves in the colour-ordered sector.
+\item The degree-$4$ bar weight form factorises over the five planar
+binary trees with \(4\) leaves before the colour-order projection.
 \item The holomorphic insertions contribute $d\log(z_i - z_j)$ factors from the positive-helicity currents~$J^a$; the anti-holomorphic insertions from the negative-helicity states contribute via the $\bar\partial$-propagator.
-\item The integral localises, via residue extraction on the boundary divisors of $\overline{\mathrm{FM}}_4(\mathbb{C})$, to a sum over channels:
+\item The cyclic residue functional extracts the adjacent boundary
+channels:
 \[
-A_4^{\mathrm{bar}}
+\mathcal R_{4,\mathrm{cyc}}
 \;=\;
-\operatorname{Res}_{D_{\{1,2\}}} + \operatorname{Res}_{D_{\{2,3\}}} + \operatorname{Res}_{D_{\{3,4\}}}.
+\rho_{12}\rho_{23}\rho_{34}\rho_{41}.
 \]
-\item Each residue contributes a propagator factor $\langle ij\rangle^{-1}$ from the holomorphic OPE; the numerator $\langle 23\rangle^4$ arises from the anti-holomorphic pairing of the two negative-helicity insertions.
-\item The product of channel residues reconstructs the Parke--Taylor formula:
+\item Each adjacent residue contributes the prescribed
+spinor-helicity factor \(\langle i\,i{+}1\rangle^{-1}\), and the
+negative-helicity pairing contributes \(\langle23\rangle^4\).
+\item Their product is the Parke--Taylor scalar:
 \[
-A_4^{\mathrm{bar}}
+\mathcal R^{(+,-,-,+)}_{4,\mathrm{cyc}}
+\bigl(\omega_4^{(+,-,-,+)}\wedge\nu_4\bigr)
 \;=\;
 \frac{\langle 23\rangle^4}
  {\langle 12\rangle\,\langle 23\rangle\,
@@ -1415,7 +1523,13 @@ A_4^{\mathrm{bar}}
 \end{theorem}
 
 \begin{proof}
-Work in the holomorphic-topological twist of $4$d $\mathcal{N} = 2$ Yang--Mills. The boundary theory on $\mathbb{C} \times \{0\}$ is $\widehat{\mathfrak{g}}_k$, and the bulk theory on $\mathbb{C} \times \mathbb{R}_{> 0}$ is holomorphic Chern--Simons fibred over~$\mathbb{R}_+$.
+Work in the holomorphic-topological twist of \(4\)d
+\(\mathcal{N}=2\) Yang--Mills.  The boundary theory on
+\(\mathbb{C}\times\{0\}\) is \(\widehat{\mathfrak{g}}_k\), and the
+bulk theory on \(\mathbb{C}\times\mathbb{R}_{>0}\) is holomorphic
+Chern--Simons fibred over~\(\mathbb{R}_+\).  The proof below is a
+calculation in the residue datum, not an independent construction of
+the physical scattering map.
 
 \emph{Helicity assignment.}
 Positive-helicity gluons are holomorphic sections $J^a(z)\,dz$ of the boundary chiral algebra. Negative-helicity gluons correspond to anti-holomorphic $(0,1)$-forms $\tilde J^a(\bar z)\,d\bar z$ in the Dolbeault resolution. The mixed insertion $(+,-,-,+)$ produces a bar element
@@ -1430,16 +1544,39 @@ tensored with the degree-$4$ weight form.
 The degree-$4$ weight form is $\omega_4 = \sum_{\alpha=1}^{5} \omega_{T_\alpha}$, a sum over the five planar binary trees. For example, the tree with subtrees $\{1,2\}$ and $\{3,4\}$ contributes $\omega_{T_{12|34}} = d\log(z_1 - z_2) \wedge d\log(z_3 - z_4) \wedge d\log(z_{12} - z_{34})$.
 
 \emph{Residue localisation.}
-By Stokes' theorem, the integral over $\overline{\mathrm{FM}}_4(\mathbb{C})$ localises to boundary divisors. Each $D_{\{i,j\}}$ contributes a residue proportional to the OPE of the pair~$(i,j)$. Under the spinor-helicity identification $z_i \sim \lambda_i^1/\lambda_i^2$, the $d\log$ residue at each collision produces a factor $\langle ij\rangle^{-1}$.
+By Stokes' theorem and the FM residue calculus, the boundary
+contribution of a collision divisor is the OPE residue of the
+colliding pair.  The colour-order projection \(P_{\mathrm{cyc}}\)
+keeps only the adjacent cyclic channels.  Under the residue character
+\(\rho_{i,i+1}\) of Definition~\ref{def:cbt-pt-residue-datum}, each
+adjacent cyclic collision contributes
+\(\langle i\,i{+}1\rangle^{-1}\).
 
 \emph{Numerator.}
 The anti-holomorphic insertions at positions $2$ and $3$ supply the numerator $\langle 23\rangle^4$: two powers from the spin factor of the negative-helicity pairing, two from the Mellin/Penrose Jacobian.
 
 \emph{Assembly.}
-The product of denominator and numerator gives $A_4^{\mathrm{bar}} = \langle 23\rangle^4 / (\langle 12\rangle\,\langle 23\rangle\,\langle 34\rangle\,\langle 41\rangle) = A_4^{\mathrm{PT}}$.
+Multiplying the four adjacent residue characters and the
+negative-helicity pairing gives
+\[
+\rho_{--}\rho_{12}\rho_{23}\rho_{34}\rho_{41}
+=
+\frac{\langle 23\rangle^4}
+{\langle 12\rangle\,\langle 23\rangle\,
+\langle 34\rangle\,\langle 41\rangle}.
+\]
+This is precisely the displayed identity.
 \end{proof}
 
-\begin{remark}[general $n$ and BCFW]
+\begin{remark}[general \(n\) and BCFW]
 \label{rem:cbt-mhv-general-n}
-For general $n$, the bar-complex integral over $\overline{\mathrm{FM}}_n(\mathbb{C})$ localises on the $(2n-5)!!$ top-dimensional boundary strata, indexed by trivalent (unrooted) trees with $n$ labelled leaves; the claim is that the associated residue sum reproduces the Parke--Taylor denominator $\prod_{i=1}^{n}\langle i,i{+}1\rangle^{-1}$. This follows from the general theory of Koba--Nielsen integrals on $\overline{\mathrm{FM}}_n(\mathbb{C})$. The full proof for general $n$ requires the recursive (BCFW) structure of the bar differential.
+For general \(n\), the bar-complex integral over
+\(\overline{\mathrm{FM}}_n(\mathbb{C})\) has boundary strata indexed
+by labelled stable trees.  A Parke--Taylor theorem at general \(n\)
+requires a cyclic residue datum on those strata, compatibility with
+the bar differential, and the BCFW recursion identifying the resulting
+residue sum with
+\(\prod_i\langle i\,i{+}1\rangle^{-1}\).  This is a construction
+problem unless that recursive datum is supplied; it is not a
+consequence of the four-point residue identity alone.
 \end{remark}

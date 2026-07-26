@@ -702,17 +702,17 @@ governs the genus tower.
 The $A_\infty$ tower does not terminate: $m_k \neq 0$ on
 cohomology for all $k \ge 3$. Although $m_3$ is the
 only \emph{independent} higher generator (all $m_k$ for
-$k \ge 4$ are determined by $m_2$ and $m_3$ via the
-Stasheff relations), the determined operations are generically
+$k \ge 4$ are chosen recursively from Stasheff boundary sources after
+fixing the contraction data), the resulting operations are generically
 nonzero. This is class~$\mathbf{M}$ in the Volume~I
 classification.
 \end{example}
 
-\begin{verification}[Generating depth: determination of $m_4$ from $m_2$ and $m_3$]
+\begin{verification}[Generating depth: the arity-four source for \(m_4\)]
 \label{ver:virasoro-m4}
 \index{Virasoro algebra!Stasheff relations at degree 4}
-$m_4$ is determined by $m_2$ and $m_3$ at
-degree~$4$. The Stasheff relation at degree~$4$ reads:
+The degree-four Stasheff relation determines the source \(d m_4\), not
+a cohomological value of \(m_4\). The relation reads:
 \begin{equation}\label{eq:stasheff-4}
  \sum_{i+j = 5} \sum_{\ell}
  (-1)^{\epsilon}\, m_i(a_1, \ldots, a_{\ell-1},
@@ -739,25 +739,32 @@ up to Koszul signs (suppressed: $T$ has even degree
 $\degree{T} = 2$, so all signs are $+1$).
 
 All terms in~\eqref{eq:stasheff-4-virasoro} involve only
-$m_2$ and $m_3$. The equation is \emph{not} a constraint on
-$m_2$ and $m_3$ (which are already determined by the OPE) but
-rather a \emph{definition} of $m_4$: the Stasheff relation
-determines $m_4$ as the unique operation such that the full
-$\Ainf$ relation at degree~$4$ is satisfied. Explicitly,
-$m_4(T,T,T,T)$ is the element forced by requiring that
-$D_0^2 = 0$ at degree~$4$ on $\FM_4(\C)$, and the boundary
-strata of $\FM_4(\C)$ contributing to $D_0^2$ decompose
-entirely into compositions of $m_2$ and $m_3$. No new
-information from the OPE is required.
+$m_2$ and $m_3$. They form the arity-four boundary source
+\(\mathrm{Obs}_4=m_2\circ m_3+m_3\circ m_2\). Since \(m_1=0\)
+on cohomology, the displayed relation says only that
+\(\mathrm{Obs}_4=0\) there. On the chain model the full relation is
+\[
+  m_1m_4 + m_2\circ m_3 + m_3\circ m_2
+  + m_4\circ m_1^{\otimes 4}=0,
+\]
+and a fixed contraction \(h\) chooses the primitive
+\[
+  m_4(T,T,T,T)=-h\,\mathrm{Obs}_4(T,T,T,T).
+\]
+Thus arity four supplies the source for \(d m_4\), not a canonical
+cohomology class of \(m_4\). The boundary strata of $\FM_4(\C)$
+contributing to \(D_0^2\) still decompose entirely into compositions
+of \(m_2\) and \(m_3\); the extra datum is the SDR gauge choosing
+the primitive.
 
-The same argument applies inductively at all degrees $k \ge 5$:
-the Stasheff relation at degree~$k$ determines $m_k$ in terms
-of $\{m_2, m_3, \ldots, m_{k-1}\}$, and since $m_3$ is the
-only independent operation beyond $m_2$, the generating depth is
-$d_{\mathrm{gen}}(\Vir_c) = 3$ (all higher operations determined
-by $m_3$), while the algebraic depth is
-$d_{\mathrm{alg}}(\Vir_c) = \infty$ (class~$\mathbf{M}$: the
-determined operations are generically nonzero).
+The same statement applies inductively at all degrees $k \ge 5$:
+the Stasheff relation at degree~$k$ determines the source for
+\(d m_k\) in terms of $\{m_2, m_3, \ldots, m_{k-1}\}$, and the
+chosen contraction selects \(m_k\). Since \(m_3\) is the only
+independent source generator beyond \(m_2\), the generating depth is
+$d_{\mathrm{gen}}(\Vir_c) = 3$; the algebraic depth is
+$d_{\mathrm{alg}}(\Vir_c) = \infty$ because the chosen higher chain
+operations are generically nonzero.
 
 The Virasoro OPE~\eqref{eq:virasoro-ope} has poles of order at
 most~$4$, and all higher $\Ainf$ operations are
@@ -1454,9 +1461,13 @@ is compatible with both.
 formality and mixed-face convergence]
 \label{thm:modular-hkoszul-SC}
 \index{Swiss-cheese operad!modular homotopy-Koszulity|textbf}
-The genus-$0$ formal-collision specialization of $\SCmod$ is
-homotopy-Koszul by Theorem~\ref{thm:homotopy-Koszul}. The
-all-genus modular statement for $\SCmod$ holds under three hypotheses:
+The depth-zero associated graded of the genus-$0$
+formal-collision specialization of $\SCmod$ is
+homotopy-Koszul by Theorem~\ref{thm:homotopy-Koszul}; the coupled
+genus-$0$ statement is Conjecture~\ref{conj:coupled-sc-koszul}. The
+all-genus modular statement for $\SCmod$ holds under three
+hypotheses (together with that conjecture wherever the coupled
+mixed sector enters):
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item global genus-$g$ operadic formality for the closed-colour
  operation spaces, compatible with stable-graph clutching;
@@ -1481,9 +1492,10 @@ the standard modular bar-cobar argument applies.
 \textbf{Step~1: Genus-$0$ homotopy-Koszulity (established).}
 At genus~$0$, the closed colour of $\SCmod$ is
 $C_\ast(\FM_k(\C))$ and the full genus-$0$ operad is $\SCchtop$.
-Theorem~\ref{thm:homotopy-Koszul} proves that $\SCchtop$ is
+Theorem~\ref{thm:homotopy-Koszul} proves that the depth-zero
+associated graded $\gr\,\SCchtop$ is
 homotopy-Koszul, assembling three inputs: Koszulity of the
-classical Swiss-cheese operad $\mathsf{SC}$~\cite{Hoe09,HL12},
+homology Swiss-cheese operads~\cite{Hoe09,HL12},
 Kontsevich formality of $C_\ast(\FM_\bullet(\C)) \simeq \Etwo$
 \cite{Kon03}, and transfer of homotopy-Koszulity through
 quasi-isomorphisms of dg operads~\cite{BM03,Val07}.
@@ -3290,6 +3302,110 @@ with the assumed Stokes cocycle supplying the sector-crossing
 coherence. Neither step requires $k$ integral.
 \end{proof}
 
+\begin{proposition}[Boundary \(q\)-formal type and Stokes cocycle]
+\label{prop:irregular-kzb-q-formal-type-stokes-cocycle}
+\ClaimStatusConditional
+Assume the boundary formal-type and mixed Stokes hypotheses
+\textup{(K2)}--\textup{(K3)} of
+Theorem~\ref{thm:irregular-kzb-composition}. In a ramified plumbing
+coordinate \(q\) transverse to a nodal divisor, and in local
+coordinates \(t_{\alpha}\) along the divisor, the KZB connection is
+written in the licensed boundary chart \(\alpha=(q,t_{\alpha})\) as
+\begin{equation}
+\label{eq:irregular-kzb-boundary-connection-form}
+\nabla
+= d
+-\left(
+ \frac{A_{m}}{q^{m}}+\frac{A_{m-1}}{q^{m-1}}
+ +\cdots+\frac{A_{1}}{q}+A_{0}
+ \right)dq
+-\sum_{\alpha}B_{\alpha}(q)\,dt_{\alpha}.
+\end{equation}
+The finite formal type in the \(q\)-direction is
+\begin{equation}
+\label{eq:irregular-kzb-boundary-formal-type}
+\Theta_{\partial}(q)
+=
+\sum_{r=1}^{m-1}\frac{A_{r+1}}{r\,q^{r}}+A_{1}\log q,
+\end{equation}
+and, after a formal transformation
+\[
+ G(q)\in \operatorname{Aut}(V)[[q^{1/N}]],
+\]
+the \(q\)-part has the JMU/Levelt--Turrittin form
+\begin{equation}
+\label{eq:irregular-kzb-formal-gauge-form}
+\nabla_{q}\simeq d_{q}-d_{q}\Theta_{\partial}
+-\Lambda\,\frac{dq}{q}.
+\end{equation}
+For a Stokes ray \(\ell\) and a sector \(S_{\ell}\), the canonical
+sectorial solution is
+\begin{equation}
+\label{eq:irregular-kzb-sectorial-solution}
+Y_{\ell}(q)=H_{\ell}(q)e^{\Theta_{\partial}(q)}q^{\Lambda},
+\end{equation}
+and adjacent sectors are related by
+\begin{equation}
+\label{eq:irregular-kzb-stokes-matrix}
+S_{\ell,\ell'}=Y_{\ell}^{-1}Y_{\ell'}.
+\end{equation}
+At a clutching corner \(\Gamma_{1}\#\Gamma_{2}\), compatibility of
+the formal types and Stokes factors is the pair of identities
+\begin{align}
+\label{eq:irregular-kzb-clutching-formal-type}
+\Theta_{\partial,\Gamma_{1}\#\Gamma_{2}}
+&=
+\Theta_{\partial,\Gamma_{1}}\oplus
+\Theta_{\partial,\Gamma_{2}}\oplus
+\Theta_{\mathrm{node}},\\
+\label{eq:irregular-kzb-clutching-stokes-product}
+S_{\ell,\ell'}^{\Gamma_{1}\#\Gamma_{2}}
+&=
+S_{\ell,\ell'}^{\Gamma_{1}}\,
+S_{\ell,\ell'}^{\Gamma_{2}}\,
+S_{\ell,\ell'}^{\mathrm{node}},
+\end{align}
+with the product order fixed by the tangential basepoint convention.
+Associativity at generic nonrational level is exactly the Stokes
+cocycle
+\begin{equation}
+\label{eq:irregular-kzb-stokes-cocycle}
+S_{\ell_{1},\ell_{2}}S_{\ell_{2},\ell_{3}}S_{\ell_{3},\ell_{1}}=1.
+\end{equation}
+The licensing data are \(\alpha\) the boundary chart,
+\(\gamma\) the formal/sectorial wild category, and \(\delta\) the
+Stokes cocycle. This proposition supplies boundary composition data
+only after the formal type and mixed Stokes matrices are supplied; it
+does not prove curved-Dunn \(H^{2}\)-vanishing.
+\end{proposition}
+
+\begin{proof}
+Hypothesis \textup{(K2)} gives a finite-pole meromorphic boundary
+model after finite ramification of the plumbing coordinate. Separating
+the normal coordinate \(q\) from the divisor coordinates
+\(t_{\alpha}\) gives
+\eqref{eq:irregular-kzb-boundary-connection-form}. The primitive
+\eqref{eq:irregular-kzb-boundary-formal-type} records the chosen sign
+convention for the polar part of this connection. The
+Levelt--Turrittin theorem in the JMU normalisation, together with
+Malgrange--Sibuya sectorial summation as used by
+Jimbo--Miwa--Ueno~\cite{JMU81} and Boalch~\cite{Boalch2001,Boalch2014},
+then supplies the formal gauge transformation \(G(q)\), the formal
+normal form \eqref{eq:irregular-kzb-formal-gauge-form}, and the
+sectorial fundamental solutions
+\eqref{eq:irregular-kzb-sectorial-solution}. Their transition
+matrices are precisely \eqref{eq:irregular-kzb-stokes-matrix}; the
+formal type fixes the Stokes rays and groups, while the matrices are
+additional analytic monodromy data. Hypothesis \textup{(K3)} is
+exactly the mixed clutching compatibility at two-edge corners, hence
+gives \eqref{eq:irregular-kzb-clutching-formal-type} and
+\eqref{eq:irregular-kzb-clutching-stokes-product}. The three-sector
+boundary of a small triangle in the wild groupoid gives
+\eqref{eq:irregular-kzb-stokes-cocycle}; conversely, this cocycle is
+the sector-crossing coherence needed for associativity of the
+Stokes-regularized clutching composition.
+\end{proof}
+
 \begin{remark}[Formal-type range]
 \label{rem:poincare-rank-range}
 Theorem~\ref{thm:irregular-kzb-composition} is stated for
@@ -3468,7 +3584,7 @@ $\mathrm{Tot}(\Gamma(\Mbar_g, \wedge^\bullet T_{\Mbar_g})
 \otimes \End^{\mathrm{ch}}_{\cA})$ with differential
 $d_{\mathrm{MB}} = [\Theta^{(0)}, -]$ built from the classical
 KZB connection via Calaque--Enriquez--Etingof / Bernard--Felder.
-The canonical inscription is \Cref{def:modular-bootstrap-complex}
+The canonical formulation is \Cref{def:modular-bootstrap-complex}
 in the curved-Dunn higher-genus chapter, consumed here as
 the source of the low-degree comparison map
 $\varphi \colon C^\bullet_{\mathrm{MB}}(g)
@@ -3671,7 +3787,7 @@ this vanishing as a Poisson-centralised subalgebra of an uncurved
 ambient. The Feigin--Frenkel isomorphism $\mathfrak{z} \simeq
 \mathrm{Fun}(\mathrm{Op}_{{}^L\fg}(D^\times))$ then follows from the
 Wakimoto-screening computation (\cite{FBZ04}, Theorem~18.5.1;
-original in \cite{FF90}): kernels of the screening charges
+original in \cite{FF92}): kernels of the screening charges
 $Q_{\alpha_i} = \oint e^{\alpha_i}(z)\,dz$ on the Wakimoto module
 are Segal--Sugawara vectors, and the dimension counts on both sides
 (polynomials in oper differentials vs.\ Sugawara vectors of each
@@ -3781,7 +3897,7 @@ Theorem~\ref{thm:ff-chirhoch-critical} holds in both load-bearing
 lanes, chain-level and $(\infty,1)$-categorical:
 \begin{itemize}
 \item \emph{Chain-level lane.} The Wakimoto screening complex
-(\cite{FBZ04}, Theorem~18.5.1; \cite{FF90}) is an explicit complex
+(\cite{FBZ04}, Theorem~18.5.1; \cite{FF92}) is an explicit complex
 of Heisenberg/$\beta\gamma$-modules whose $H^0$ at the screening
 charges $Q_{\alpha_i}$ is the Feigin--Frenkel centre
 $\mathfrak{z}(\widehat{\fg}_{-h^\vee})$; the modular-operad clutching
@@ -3832,13 +3948,15 @@ item~3 ``critical level does not break Koszulness'').
 \index{modular obstruction!critical-level triviality (Class L)}
 \textup{(}\textsf{HYPOTHESIS}: affine Kac--Moody $\cA = V_{-h^\vee}(\fg)$,
 Class~L; does \emph{not} apply to Vir$_c$, $\cW_N$, or other
-families with $\kappa + \kappa' \in \{13, 250/3, 98/3\}$.\textup{)}%
+families with nonvanishing complementarity sum
+($13$ for Vir$_c$, $250/3$ for $\cW_3$; the
+Bershadsky--Polyakov slot is open).\textup{)}%
 \par\smallskip\noindent
 At $k=-h^\vee$, the modular obstruction tower of $V_{-h^\vee}(\fg)$
 is trivial at every genus:
 \[
  \operatorname{obs}_g(V_{-h^\vee}(\fg))
- \;=\; \kappaChHodge(V_{-h^\vee}(\fg))\cdot\lambda_g
+ \;=\; \kappaChHodge(V_{-h^\vee}(\fg))\cdot\lambda_g^{\mathrm{FP}}
  \;=\; 0 \qquad\text{for all } g \ge 0.
 \]
 Within the affine Kac--Moody family only, the
@@ -3871,8 +3989,10 @@ The vanishing $\kappaChHodge(V_{-h^\vee}(\fg)) = \dim(\fg)\cdot 0/(2h^\vee)
 $\kappaChHodge(V_k(\fg)) = \dim(\fg)(k+h^\vee)/(2h^\vee)$. The vanishing
 $\operatorname{obs}_g = 0$ then follows from the
 Faber--Pandharipande formula
-$\operatorname{obs}_g = \kappa\cdot\lambda_g$
-(Vol.~I Theorem~D), applied at $\kappa = 0$. For the Koszul-dual
+$\operatorname{obs}_g(V_k(\fg))
+=\kappaChHodge(V_k(\fg))\lambda_g^{\mathrm{FP}}$
+(Vol.~I Theorem~D), applied at
+\(\kappaChHodge(V_{-h^\vee}(\fg))=0\). For the Koszul-dual
 sum on the affine KM sublocus, linearity of
 $\kappaChHodge(V_k(\fg))$ in the shifted level $t := k+h^\vee$, combined
 with the Feigin--Frenkel duality $t \mapsto -t$
@@ -3907,12 +4027,16 @@ mixed Stokes clutching data assumed there, with wild-monodromy datum
  \{S_\ell^\pm\}_\ell)
 \]
 in the sense of Jimbo--Miwa--Ueno~\cite{JMU81} Thm~4.3 and
-Boalch~\cite{Boalch2001,Boalch2014}. Composition of the modular
-operad $\mathcal{O}^{\Ainf\text{-ch}}$ descends to the cohomology
-of the wild fundamental groupoid $\Pi_1^{\mathrm{wild}}$ with
-values in $\End^{\mathrm{ch}}_{\cA}$-module families; operadic
-associativity at $(g,n)$ follows from the assumed Stokes cocycle
-compatibility at the boundary corners.
+Boalch~\cite{Boalch2001,Boalch2014}. Equivalently, in a ramified
+plumbing coordinate it has the \(q\)-formal type, sectorial solutions,
+and Stokes cocycle of
+Proposition~\ref{prop:irregular-kzb-q-formal-type-stokes-cocycle}.
+Composition of the modular operad $\mathcal{O}^{\Ainf\text{-ch}}$
+descends to the cohomology of the wild fundamental groupoid
+$\Pi_1^{\mathrm{wild}}$ with values in
+$\End^{\mathrm{ch}}_{\cA}$-module families; operadic associativity
+at $(g,n)$ follows from the assumed Stokes cocycle compatibility at
+the boundary corners.
 \end{theorem}
 
 \begin{proof}
@@ -4064,9 +4188,11 @@ Corollary~\ref{cor:fm68-all-levels-resolved}, iterated sewing
  (B^{\mathrm{ann}}_2 \circ B^{\mathrm{ann}}_3)$ at all genera
  $g \ge 0$.
 \item \emph{Equivariance:} compatibility with the $\Sigma_n$ action
- via quasi-triangularity of $R$.
-\item \emph{Unitality:} the vacuum $|0\rangle \in \cA$ is a strict
- identity for all clutching maps.
+ via the braided annular datum: quasi-triangularity of $R$, YBE
+ braid coherence, pure-braid descent, and inverse orientation.
+\item \emph{Unitality:} the vacuum/unit is a strict identity for every
+ unit-normalised annular sewing datum; the unit seam is the
+ counit-normalised diagonal bicomodule.
 \end{enumerate}
 \end{theorem}
 
@@ -4080,9 +4206,12 @@ Theorem~\ref{thm:irregular-kzb-composition}(iii).
 (ii) Proposition~\ref{prop:qt-equivariance}, extended by
 Theorem~\ref{thm:irregular-kzb-composition}(ii) to include Stokes
 multipliers under the same Stokes cocycle compatibility hypothesis;
-quasi-triangularity is not inferred from the formal type alone.
-(iii) Proposition~\ref{prop:modular-operad-unitality} via the vacuum
-axiom; unaffected by the passage to irregular-singular data.
+quasi-triangularity, pure-braid descent, and inverse orientation are
+not inferred from the formal type alone.
+(iii) Proposition~\ref{prop:modular-operad-unitality} via the
+unit/counit normalisation of the annular seam; unaffected by the
+passage to irregular-singular data once the same normalisation is
+included in the sewing datum.
 \end{proof}
 
 % =====================================
@@ -4200,7 +4329,7 @@ curved-Dunn \(H^2\).)}
  (Theorem~\ref{thm:iterated-sugawara-construction}), with universal
  ratio $\beta_N = 12(H_N - 1)$ stated as a conjecture in
  Chapter~\ref{ch:beta-N-closed-form-all},
- Conjecture~\ref{thm:beta-N-closed-form-proved-all-N}; the
+ Conjecture~\ref{conj:beta-N-harmonic-closed-form}; the
  finite-rank tempering statement uses the finite-envelope criterion of
  Theorem~\ref{thm:wn-tempered-all-N}. The
  modular-operadic composition above supplies the required
@@ -4307,7 +4436,7 @@ The order-$\hbar^3$ pentagon-heptagon obstruction is the class of
  \phi^{(3)}
  = \zeta(3)c_{\mathrm{symm}}
  + \tfrac{25}{3}c_{\mathrm{timelike}}
- + (\Phi_{10}^{\mathrm{un}}/\eta^{24})c_{\Phi_{10}^{\mathrm{un}}}
+ + \bigl(\Phi_{10}^{\mathrm{un}}/(\eta(\tau)^{24}\eta(\sigma)^{24})\bigr)c_{\Phi_{10}^{\mathrm{un}}}
 \]
 in the $\SCmod$ deformation complex. Vanishing of this class is the
 precise condition for passing from the two-coloured modular interface
@@ -4634,7 +4763,7 @@ The local MO finite-$n$ action, when its hypotheses are met, is a
 strict Yangian action. The compact K3 colimit is controlled by the
 Mukai Fock module and by the BKM imaginary-root extension; the dynamical
 Siegel-modular associator $\Phi^{\mathrm{Sieg,dyn}}$ is the obstruction
-to strict coassociativity in the comparison target. Cross-ref
+to strict coassociativity in the comparison target. Compare
 Vol~III Chapter~\ref{V3-ch:modular-trace}, at the
 super-quasi-Hopf comparison remark.
 \end{remark}

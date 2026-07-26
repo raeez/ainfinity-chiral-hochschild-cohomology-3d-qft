@@ -21,6 +21,14 @@ from fractions import Fraction
 from pathlib import Path
 
 from compute.lib.independent_verification import independent_verification
+from compute.lib.virasoro_ks_original_complex import (
+    finite_propagation_profile,
+    gram_matrix_profile,
+    kac_determinant_profile,
+    mk_norm_bound_profile,
+    original_tempered_locus_profile,
+    verma_basis_vector,
+)
 
 
 TEX = (
@@ -149,6 +157,47 @@ def test_kac_determinant_does_not_control_least_singular_value():
 
     assert _partition_number(10) == 42
     assert _partition_number(20) == 627
+
+
+@independent_verification(
+    claim="thm:virasoro-ks-original-complex-criterion",
+    derived_from=[
+        "Virasoro KS-original criterion in "
+        "topologization_class_m_original_complex_platonic.tex",
+    ],
+    verified_against=[
+        "Kac determinant formula for finite-level Verma Gram matrices",
+        "Finite-window HPL norm bookkeeping: numerators polynomial, "
+        "denominators inverse Shapovalov propagators",
+        "Independent finite-support preservation test from raw direct sums",
+    ],
+    disjoint_rationale=(
+        "The manuscript theorem fuses representation-theoretic Gram data "
+        "with the original-complex support condition. The test checks those "
+        "pieces separately: Kac determinant shape, HPL norm source, and the "
+        "finite-propagation condition."
+    ),
+)
+def test_virasoro_ks_original_complex_criterion_profiles():
+    basis = verma_basis_vector((3, 1))
+    gram = gram_matrix_profile()
+    determinant = kac_determinant_profile(5)
+    bound = mk_norm_bound_profile()
+    finite = finite_propagation_profile()
+    locus = original_tempered_locus_profile()
+
+    assert basis["level"] == 4
+    assert basis["basis_vector"] == "L_-3 L_-1 |h>"
+    assert "L_{mu_m}...L_{mu_1}" in gram["entry"]
+    assert determinant["finite_level_nonzero_off_walls"] is True
+    assert determinant["does_not_bound_inverse_norm"] is True
+    assert "max_{|lambda|<=n} ||G_{|lambda|}^{-1}||" in bound["bound"]
+    assert bound["numerator_source"] == "Virasoro commutator polynomial envelope"
+    assert finite["condition"].startswith("forall n exists K(n)")
+    assert "inverse Shapovalov propagators" in finite["failure_mode"]
+    assert locus["locus"] == "T_orig"
+    assert "finite propagation for every n" in locus["requires"]
+    assert locus["outside"] == "completed ambient: KS-rho Banach or weight-completed"
 
 
 @independent_verification(
@@ -302,10 +351,26 @@ def test_frontier_source_rejects_stale_obstruction_language():
 
     required = [
         "Kac--Shapovalov determinant non-control",
+        "Class-\\(\\mathsf M\\) Banach algebra body",
+        "Banach operation constants",
+        "Banach Maurer--Cartan convergence criterion",
         "Stirling-normalised Virasoro shadow tower",
         "Banach $E_3$ model and finite-propagation descent",
         "Virasoro factorial obstruction vanishes",
+        "Class-\\(\\mathsf M\\) Banach radii",
         "Tempering and finite-propagation partition",
     ]
     for phrase in required:
         assert phrase in source
+
+    labels = [
+        "def:virasoro-ks-original-tempered-locus",
+        "eq:virasoro-ks-gram-matrix",
+        "thm:virasoro-ks-original-complex-criterion",
+        "eq:virasoro-ks-kac-determinant",
+        "eq:virasoro-ks-mk-norm-bound",
+        "eq:virasoro-ks-finite-propagation",
+        "eq:virasoro-ks-original-criterion",
+    ]
+    for label in labels:
+        assert label in source

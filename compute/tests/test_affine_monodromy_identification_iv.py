@@ -6,8 +6,9 @@ generic k not equal to -h^vee, the monodromy of the reduced HT
 logarithmic connection on Conf_n(C) equals the KZ monodromy at level
 k; via Drinfeld-Kohno this is the braided tensor product
 representation of Rep_q(g) at q = exp(i*pi/(k + h^vee)), and the
-spectral R-matrix restricted to evaluation modules equals the
-quantum-group R-matrix.
+programme spectral half-monodromy on evaluation modules is compared
+with the quantum-group braiding only up to the Drinfeld associator
+and gauge normalization.
 
 DERIVED FROM (internal):
   - Programme HT logarithmic connection on Conf_n(C) (reduced form)
@@ -43,10 +44,11 @@ from compute.lib.independent_verification import independent_verification
 
 
 def _monodromy_matches_spectral_R(rank: int, level_shift_generic: bool) -> bool:
-    """Structural oracle: HT monodromy = KZ monodromy = q-R-matrix on evaluation modules.
+    """Structural oracle: HT monodromy compares with the q-braiding.
 
     For simple g of given rank and generic k (k + h^vee != 0), the
-    three identifications hold simultaneously as a consequence of
+    comparison is braided-monoidal, not pointwise equality of
+    meromorphic R-functions. It is a consequence of
     Drinfeld-Kohno + the KZB pentagon + Getzler-Kapranov modular
     pentagon, which jointly pin the braided tensor structure on
     Rep_q(g) at q = exp(i*pi/(k + h^vee)).
@@ -86,7 +88,7 @@ def test_affine_monodromy_identification():
     # Generic level: identification holds across ranks of simple g.
     for rank in (1, 2, 3, 4, 8):
         assert _monodromy_matches_spectral_R(rank, level_shift_generic=True), (
-            f"HT monodromy should equal spectral R on evaluation modules at rank {rank}"
+            f"HT monodromy should compare with q-braiding at rank {rank}"
         )
     # Critical level k = -h^vee: identification fails (Sugawara degenerates).
     assert not _monodromy_matches_spectral_R(2, level_shift_generic=False)

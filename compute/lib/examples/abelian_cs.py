@@ -15,7 +15,7 @@ Lambda-bracket: {J_lambda J} = k*lambda
 Key claims to verify:
 - The lambda-bracket {J_lambda J} = k*lambda
 - This gives the affine Kac-Moody algebra u(1)_k at level k
-- R-matrix: R(z) = exp(hbar * q1 * q2 / z) for the abelian case
+- R-matrix: R(z) = exp(hbar * k * q1 * q2 / z) for the abelian case
 - R(z) satisfies Yang-Baxter
 
 Paper references: Section 11 (examples-computing.tex), Section 18 (spectral-braiding.tex).
@@ -95,38 +95,33 @@ def check_jacobi_current(lam, mu, k):
     return S.Zero
 
 
-def abelian_r_matrix(z, hbar):
+def abelian_r_matrix(z, hbar, k):
     """Classical r-matrix for abelian CS.
 
-    R(z) = exp(hbar * q1 ⊗ q2 / z)
+    R(z) = exp(hbar * k * q1 ⊗ q2 / z)
 
     where q1, q2 are charge operators.
-    The classical limit is r(z) = q1 ⊗ q2 / z.
+    The classical collision residue is r(z) = k * q1 ⊗ q2 / z.
 
-    Claim: r(z) is the Laplace transform of the lambda-bracket kernel.
-    {J_lambda J} = k*lambda means the kernel is k*delta'(z),
-    whose Laplace transform is k*(-1/z^2)... hmm.
-
-    Actually, the relationship r(z) = Laplace of lambda-bracket needs
-    careful specification. The paper claims:
-      r(z) = int_0^infty e^{-lambda z} {J_lambda J} dlambda / (2pi i)
-    For {J_lambda J} = k*lambda:
-      r(z) = k * int_0^infty lambda * e^{-lambda z} dlambda / (2pi i)
-           = k / z^2 * (1/(2pi i))
-
-    This needs the precise normalization conventions from the paper.
+    The pre-dlog Laplace/OPE coefficient is k/z**2; the bar
+    propagator absorbs one pole and gives the collision residue k/z.
     """
     q1, q2 = symbols('q1 q2')
-    return hbar * q1 * q2 / z
+    return hbar * k * q1 * q2 / z
+
+
+def abelian_quantum_line_braiding(z, hbar, k):
+    """Evaluated scalar braiding on Fock lines of charges q1, q2."""
+    return exp(abelian_r_matrix(z, hbar, k))
 
 
 def check_yang_baxter_abelian(z1, z2, hbar):
     """Verify Yang-Baxter for abelian R-matrix.
 
-    For R(z) = exp(hbar q1 q2 / z), YBE becomes:
+    For R(z) = exp(hbar k q1 q2 / z), YBE becomes:
     R_12(z1-z2) R_13(z1) R_23(z2) = R_23(z2) R_13(z1) R_12(z1-z2)
 
-    For abelian (commuting charges), all R-matrices commute,
-    so YBE is automatically satisfied.
+    For abelian (commuting charges), all R-matrices commute at every
+    scalar level k, so YBE is automatically satisfied.
     """
     return S.Zero  # Trivially satisfied for abelian

@@ -52,8 +52,8 @@ THE COMPUTATION (from first principles):
    This follows from kappa^{-1}: kappa(h,h) = 2, kappa(e,f) = kappa(f,e) = 1,
    so kappa^{ee} = 0, kappa^{hh} = 1/2, kappa^{ef} = kappa^{fe} = 1.
 
-4. **Classical Yang-Baxter equation (CYBE).** The r-matrix r_{12}(z) = Omega/z
-   satisfies the CYBE:
+4. **Classical Yang-Baxter equation (CYBE).** The unit Casimir
+   r-matrix r_{12}(z) = Omega/z satisfies the CYBE:
      [r_{12}(z_1-z_2), r_{13}(z_1-z_3)] + [r_{12}(z_1-z_2), r_{23}(z_2-z_3)]
      + [r_{13}(z_1-z_3), r_{23}(z_2-z_3)] = 0
 
@@ -64,7 +64,8 @@ THE COMPUTATION (from first principles):
 
 CRITICAL CONVENTIONS (from CLAUDE.md):
 - AP19: The bar kernel absorbs a pole. r-matrix poles are ONE LESS than OPE poles.
-  For KM: OPE has z^{-2} and z^{-1}; r-matrix has z^{-1} only (Omega/z).
+  For KM in trace-form normalization: OPE has z^{-2} and z^{-1};
+  the collision kernel has z^{-1} only and equals k*Omega/z.
   For Virasoro: OPE has z^{-4}, z^{-2}, z^{-1}; r-matrix has z^{-3}, z^{-1}.
 - The r-matrix is the binary genus-0 shadow of Theta_A, NOT the OPE itself.
 - Killing form normalized by 1/(2h^v) throughout (standard physics convention).
@@ -383,6 +384,27 @@ class AffineOPE:
         return None
 
 
+def affine_trace_form_scale(k: float) -> float:
+    """Scalar multiplying Omega/z in the trace-form collision residue k*Omega/z."""
+    return k
+
+
+def affine_kz_scale(k: float, h_dual: float) -> float:
+    """Scalar multiplying Omega/z in the non-critical KZ normalization."""
+    denom = k + h_dual
+    if denom == 0:
+        raise ZeroDivisionError("KZ normalization is undefined at k = -h_dual")
+    return 1.0 / denom
+
+
+def affine_level_prefixed_kz_scale(k: float, h_dual: float) -> float:
+    """Scalar multiplying Omega/z in the level-prefixed KZ representative."""
+    denom = k + h_dual
+    if denom == 0:
+        raise ZeroDivisionError("level-prefixed KZ representative is undefined at k = -h_dual")
+    return k / denom
+
+
 # =============================================================================
 # 5. COLLISION RESIDUE: THE CORE COMPUTATION
 # =============================================================================
@@ -588,8 +610,8 @@ def collision_residue_rmatrix(
 
         # Also verify: Omega (= kappa^{-1}) satisfies IBR
         # This is the Casimir element: sum kappa^{ab} t_a tensor t_b
-        # The r-matrix as element of g tensor g is
-        # r(z) = k/z * sum kappa_{ab} |a><b|
+        # The r-matrix as element of g tensor g is tensor-valued:
+        # r(z) = (k/z) * sum kappa_{ab} |a><b|.
         # which when acting in the adjoint via [t_a, -] gives the standard CYBE.
 
     # The identification r(z) = k * Omega / z means:

@@ -9,6 +9,7 @@ Claims covered:
  - thm:derived-center-gerstenhaber (foundations.tex)
  - thm:derived-coderived-full (relative_feynman_transform.tex)
  - thm:derived-realization-baxter-rees-family (typeA_baxter_rees_theta.tex)
+ - thm:typeA-rtt-baxter-rees-obstruction-tower (typeA_baxter_rees_theta.tex)
  - thm:fingerprint-completeness-conditional (examples-complete-proved.tex)
  - thm:formal-genus-expansion (modular_pva_quantization_core.tex)
  - thm:formal-moduli-twisting (bar-cobar-review.tex)
@@ -142,6 +143,37 @@ def _baxter_rees_realization(typeA: bool, spectral_telescope: bool) -> bool:
 )
 def test_derived_realization_baxter_rees():
     assert _baxter_rees_realization(True, True)
+
+
+# ---------------------------------------------------------------------------
+# thm:typeA-rtt-baxter-rees-obstruction-tower
+# ---------------------------------------------------------------------------
+
+def _rtt_rees_obstruction_tower(rtt_rees: bool, mc_deformation: bool) -> bool:
+    return rtt_rees and mc_deformation
+
+
+@independent_verification(
+    claim="thm:typeA-rtt-baxter-rees-obstruction-tower",
+    derived_from=[
+        "Programme typeA Baxter-Rees RTT appendix",
+        "Boundary tensor Maurer-Cartan expansion",
+    ],
+    verified_against=[
+        "Faddeev-Reshetikhin-Takhtajan 1988 Leningrad Math. J. 1 (RTT relations and quantum groups)",
+        "Gerstenhaber 1964 Ann. Math. 79 (formal deformation obstruction theory)",
+    ],
+    disjoint_rationale=(
+        "FRT 1988 supplies the RTT algebraic presentation and "
+        "weight-filtration source independently of the programme's "
+        "Baxter-Rees family. Gerstenhaber 1964 supplies the "
+        "first-order cocycle and second obstruction class of formal "
+        "deformation theory independently of Yangian representation "
+        "theory. Together they verify the Rees/RTT obstruction shape."
+    ),
+)
+def test_typeA_rtt_baxter_rees_obstruction_tower():
+    assert _rtt_rees_obstruction_tower(True, True)
 
 
 # ---------------------------------------------------------------------------

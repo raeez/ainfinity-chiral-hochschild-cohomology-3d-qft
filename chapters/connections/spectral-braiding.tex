@@ -24,9 +24,11 @@ This composition is induced by the $W(\mathsf{SC}^{\mathrm{ch,top}})$–module s
 
 \begin{definition}[Spectral braiding]
 % label removed: def:spectral-braiding
-The \emph{spectral braiding} (or \emph{spectral $R$–matrix}) is the family of isomorphisms
+The \emph{spectral braiding} (or \emph{spectral $R$–matrix}) is the
+family of meromorphic exchange isomorphisms
 \[
-R_{L_1,L_2}(z)\colon L_1\otimes L_2 \xrightarrow{\ \sim\ } L_2\otimes L_1,
+R_{L_1,L_2}(z)\colon L_1\otimes_z L_2
+ \xrightarrow{\ \sim\ } L_2\otimes_{-z} L_1,
 \qquad \text{for generic } z\in \C^\times \text{ (away from a discrete set of poles)},
 \]
 obtained from $\mathsf{Comp}_{z_1,z_2}$ by analytic continuation in $z=z_{12}$.
@@ -35,28 +37,46 @@ obtained from $\mathsf{Comp}_{z_1,z_2}$ by analytic continuation in $z=z_{12}$.
 \subsection{Yang–Baxter equation from $W$–coherence}
 % label removed: subsec:YBE
 Consider three boundary lines $L_1,L_2,L_3$ at positions $z_1,z_2,z_3$.
-The two ways to compose the spectral braidings $R_{12}(z_{12})$, $R_{13}(z_{13})$, $R_{23}(z_{23})$ correspond to different degenerations of $\FM_3(\C)$.
+The two ways to compose the local exchanges
+$R_{12}(z_{12})$, $R_{13}(z_{13})$, $R_{23}(z_{23})$ are the two
+boundary trivialisations of the same flat three-point object on
+$\FM_3(\C)$, with associator \(\Phi_A\).
 
-\begin{theorem}[Yang--Baxter equation; \ClaimStatusProvedHere]
+\begin{theorem}[Associator-controlled Yang--Baxter relation;
+\ClaimStatusProvedHere]
 % label removed: thm:YBE
 Assume \textrm{(H1)--(H4)}.
-The spectral braiding $R(z)$ satisfies the Yang–Baxter equation
+The spectral exchange family and the three-point associator satisfy
 \[
-R_{12}(z_{12})\,R_{13}(z_{13})\,R_{23}(z_{23}) \;=\; R_{23}(z_{23})\,R_{13}(z_{13})\,R_{12}(z_{12})
+R_{12}(z_{12})\,R_{13}(z_{13})\,R_{23}(z_{23})
+\;=\;
+\Phi_A^{-1}R_{23}(z_{23})\,R_{13}(z_{13})\,R_{12}(z_{12})\Phi_A
 \]
-as morphisms $L_1\otimes L_2\otimes L_3 \to L_3\otimes L_2\otimes L_1$ for $z_i\neq z_j$.
+as morphisms $L_1\otimes_z L_2\otimes_w L_3 \to
+L_3\otimes_{-w}L_2\otimes_{-z}L_1$ for $z_i\neq z_j$. On a strictified
+comparison surface with \(\Phi_A=1\), this is the strict quantum
+Yang--Baxter equation.
 \end{theorem}
 
 \begin{proof}
 We apply Stokes' theorem on $\FM_3(\C)$ to the logarithmic form $\omega_3^{\partial}$ governing the three-point bulk-to-boundary correlation of line operators $L_1(z_1), L_2(z_2), L_3(z_3)$. Under (H3), $\omega_3^{\partial}$ extends to a logarithmic form on $\FM_3(\C)$ satisfying $d\omega_3^{\partial} = 0$ in the interior $\Conf_3(\C)$.
 
 \medskip
-\noindent\textbf{Step 1: Boundary strata of $\FM_3(\C)$.}
-By the FM boundary structure (Definition~\ref{def:boundary_divisors}), the codimension-1 faces of $\partial\FM_3(\C)$ are the collision divisors
+\noindent\textbf{Step 1: Boundary strata of \(\FM^{\mathrm{tr}}_3(\C)\).}
+By the FM boundary structure (Definition~\ref{def:boundary_divisors}), the codimension-1 faces of \(\partial\FM^{\mathrm{tr}}_3(\C)\) are the collision divisors
 \[
 D_{\{1,2\}},\quad D_{\{1,3\}},\quad D_{\{2,3\}},\quad D_{\{1,2,3\}}.
 \]
-The full-collision stratum $D_{\{1,2,3\}} \cong \FM_3(\C)$ contributes a term proportional to the identity (by (H4), the cluster limit where all three points collide simultaneously with no hierarchical ordering gives a subleading contribution that vanishes by degree counting: the weight form restricted to $D_{\{1,2,3\}}$ is exact on $\FM_3(\C)$). Thus only the three pairwise divisors contribute.
+For \(S\subset\{1,2,3\}\) with \(|S|\ge2\),
+\[
+D_S\cong
+\FM^{\mathrm{tr}}_{3-|S|+1}(\C)\times
+\FM^{\mathrm{red}}_{|S|}(\C).
+\]
+Thus \(D_{\{1,2,3\}}\cong\FM^{\mathrm{red}}_3(\C)\).  The total
+collision is not erased; it records the three-point
+parenthesisation/associator.  The pairwise divisors give the binary
+residue part of the Yang--Baxter identity.
 
 \medskip
 \noindent\textbf{Step 2: Spectral parameter assignments on each face.}
@@ -79,12 +99,24 @@ D_{\{1,3\}}: \quad R_{13}(z_{13})\, R_{12}(z_{12})\, R_{23}(z_{23}).
 \]
 \end{itemize}
 
-\noindent\textbf{Step 3: Stokes' theorem and corner cancellation.}
-By Stokes' theorem on the manifold with corners $\FM_3(\C)$,
+\noindent\textbf{Step 3: Stokes' theorem, associator, and corner cancellation.}
+By Stokes' theorem on the manifold with corners
+\(\FM^{\mathrm{tr}}_3(\C)\),
 \[
-0 = \int_{\FM_3(\C)} d\omega_3^{\partial} = \sum_{\{i,j\}} (-1)^{\sigma_{\{i,j\}}} \int_{D_{\{i,j\}}} \Res_{D_{\{i,j\}}}(\omega_3^{\partial}).
+0 = \int_{\FM^{\mathrm{tr}}_3(\C)} d\omega_3^{\partial}
+ = \sum_{\{i,j\}} (-1)^{\sigma_{\{i,j\}}}
+ \int_{D_{\{i,j\}}} \Res_{D_{\{i,j\}}}(\omega_3^{\partial}).
 \]
-Codimension-2 corners arise from nested collisions (e.g., $D_{\{1,2\}} \cap D_{\{2,3\}}$, where $z_1 \to z_2$ and $z_2 \to z_3$ simultaneously). By Arnold cancellation (Lemma~\ref{lem:Arnold_cancellation}), the corner contributions cancel pairwise: for each pair of faces sharing a codimension-2 stratum, the two orderings of taking residues produce opposite signs via the Koszul sign rule on the normal covectors $d\varepsilon_{\{i,j\}}$.
+The displayed sum is the pairwise-residue component after the
+associator contribution from \(D_{\{1,2,3\}}\) has been moved to the
+chosen parenthesisation.  Codimension-2 corners arise from nested
+collisions; they are codimension-2 in the ambient FM space and
+codimension-1 faces of the corresponding total-collision divisor.  By
+Arnold cancellation (Lemma~\ref{lem:Arnold_cancellation}), the
+pairwise corner contributions cancel: for each pair of faces sharing a
+codimension-2 stratum, the two orderings of taking residues produce
+opposite signs via the Koszul sign rule on the normal covectors
+\(d\varepsilon_{\{i,j\}}\).
 
 \medskip
 \noindent\textbf{Step 4: Assembling the identity.}
@@ -148,26 +180,35 @@ This is the Laplace transform of the $\lambda$-bracket kernel, convergent for $\
 
 For the free propagator $K(z,t) = \Theta(t)/(2\pi z)$, the $\lambda$-bracket is $\lambda$-independent and the Laplace integral evaluates to $r(z) \sim 1/z$ (consistent with the abelian CS result of Example~\ref{ex:Heisenberg_Yangian}).
 
-\begin{remark}[Laplace transform as spectral duality]
+\begin{remark}[Laplace transform as local spectral bridge]
 % label removed: rem:laplace-spectral-duality
-The formula $r(z) = \int_0^\infty e^{-\lambda z} \{\cdot{}_\lambda \cdot\}\, d\lambda$ is the bridge between the PVA world (spectral variable~$\lambda$) and the $R$-matrix world (position variable~$z$). Under DK-0, it recovers the classical $r$-matrix from the $\lambda$-bracket at the evaluation locus. At the operadic level, this is the passage between the two colors of the Swiss-cheese operad: the $\lambda$-bracket encodes holomorphic (closed-color) singularities; $R(z)$ encodes topological (open-color) braiding. The topological direction supplies the integration contour; the holomorphic direction supplies the meromorphic structure. The Laplace transform \emph{is} the spectral duality of the HT theory.
+The formula $r(z) = \int_0^\infty e^{-\lambda z} \{\cdot{}_\lambda \cdot\}\, d\lambda$ is the local bridge between the PVA world (spectral variable~$\lambda$) and the $R$-matrix world (position variable~$z$). Under DK-0, after the evaluation surface and normalization are fixed, it recovers the classical $r$-matrix from the $\lambda$-bracket at the evaluation locus. At the operadic level, this is the passage between the two colors of the Swiss-cheese operad: the $\lambda$-bracket encodes holomorphic (closed-color) singularities; $R(z)$ records the local topological exchange shadow on the open color. The topological direction supplies the integration contour; the holomorphic direction supplies the meromorphic structure.
 \end{remark}
 
 \begin{remark}[Specialization to the DK ladder]
 % label removed: rem:spectral-R-dk-specialization
-When restricted to evaluation modules (those arising from
-finite-dimensional representations of~$\fg$ via the evaluation map
-$\mathrm{ev}_z \colon Y(\fg) \to U(\fg)$), the spectral $R$-matrix
-$R(z)$ of this section specializes to the Drinfeld $R$-matrix
-governing the DK-0/1 equivalence of Volume~I
-(Theorem~\ref*{V1-thm:factorization-dk-eval}). The spectral braiding
-is thus the factorization-level lift of the evaluation-level DK
-braiding.
+After fixing the affine evaluation surface, the KZ/Drinfeld
+normalization, the associator, and the descent path, evaluation modules
+(those arising from finite-dimensional representations of~$\fg$ via
+$\mathrm{ev}_z \colon Y(\fg) \to U(\fg)$) identify the local spectral
+exchange family \(R(z)\) of this section with the Drinfeld \(R\)-matrix
+governing the DK-0/1 comparison of Volume~I
+(Theorem~\ref*{V1-thm:factorization-dk-eval}). Thus the present
+spectral datum is the local factorisation shadow whose descended
+evaluation surface gives the DK braiding.
 \end{remark}
 
 \medskip
-\noindent\textbf{Step 4: Classical Yang--Baxter equation and antisymmetry.}
-Substituting $R(z) = \id + \hh\, r(z) + O(\hh^2)$ into the quantum YBE (Theorem~\ref{thm:YBE}), expanding to order $\hh^2$, and using $R_{ij} R_{ik} R_{jk} = R_{jk} R_{ik} R_{ij}$:
+\noindent\textbf{Step 4: Classical Yang--Baxter equation and the normalized skew condition.}
+On a quantized comparison surface write
+$R(z)=\id+\hh\,r(z)+O(\hh^2)$ and
+$\Phi_A=1+O(\hh^2)$.  Substituting these expansions into the
+associator-controlled Yang--Baxter relation of
+Theorem~\ref{thm:YBE}, the conjugation by \(\Phi_A\) has no effect on
+the order-\(\hh^2\) skew-commutator term.  Equivalently, on a
+strictified surface one may use the strict relation
+$R_{ij}R_{ik}R_{jk}=R_{jk}R_{ik}R_{ij}$.  The order-\(\hh^2\)
+calculation is:
 \begin{align*}
 &(\id + \hh r_{12} + O(\hh^2))(\id + \hh r_{13} + O(\hh^2))(\id + \hh r_{23} + O(\hh^2)) \\
 &\quad = (\id + \hh r_{23} + O(\hh^2))(\id + \hh r_{13} + O(\hh^2))(\id + \hh r_{12} + O(\hh^2)).
@@ -178,7 +219,15 @@ At order $\hh^1$, both sides give $\id + \hh(r_{12} + r_{13} + r_{23})$, which i
 \]
 which is the classical Yang--Baxter equation with spectral parameter.
 
-For antisymmetry, swapping $L_1 \leftrightarrow L_2$ sends $z \mapsto -z$ and exchanges tensor factors ($r \mapsto r_{21}$). The spectral braiding satisfies $R_{12}(z) R_{21}(-z) = \id$ (inverse relation from the definition of braiding), so at order $\hh$:
+The skew condition is a separate normalization, not a consequence of
+the local exchange family alone.  If the chosen comparison surface
+carries the unitary exchange normalization
+\[
+R_{12}(z)\,R_{21}(-z)=\id ,
+\]
+then swapping $L_1 \leftrightarrow L_2$ sends \(z\mapsto -z\) and
+exchanges tensor factors.  Expanding the unitary relation to order
+\(\hh\) gives
 \[
 r_{12}(z) + r_{21}(-z) = 0, \qquad\text{i.e.,}\quad r(-z) = -r_{21}(z). \qedhere
 \]
@@ -186,39 +235,90 @@ r_{12}(z) + r_{21}(-z) = 0, \qquad\text{i.e.,}\quad r(-z) = -r_{21}(z). \qedhere
 
 \subsection{Koszul dual Hopf picture and factorisation quantum groups}
 % label removed: subsec:Hopf
-Let $\mathbf B$ be the bar cooperad of $\mathsf{SC}^{\mathrm{ch,top}}$ and let $A$ be a $W(\mathsf{SC}^{\mathrm{ch,top}})$–algebra.
-The bar construction $\mathsf{Bar}^{\mathrm{ch,top}}(A)$ is a colored coalgebra over $\mathbf B$. On the boundary/open colour, the associated Koszul-dual package determines a filtered Hopf-like object $\mathcal H$ encoding the line-operator OPE and higher products.
+Let $\mathbf B$ be the bar cooperad of
+$\mathsf{SC}^{\mathrm{ch,top}}$ and let $A$ be a
+$W(\mathsf{SC}^{\mathrm{ch,top}})$--algebra.
+The bar construction $\mathsf{Bar}^{\mathrm{ch,top}}(A)$ is a colored
+coalgebra over $\mathbf B$. On the boundary/open colour, the associated
+Koszul-dual package determines a filtered local bialgebra shadow
+$\mathcal H$ encoding the line-operator OPE and higher products. A Hopf
+or factorisation-quantum-group interpretation requires the additional
+spectral coproduct, associator, descent, and global comparison data
+isolated below.
 
-\begin{theorem}[Braiding on boundary categories; \ClaimStatusProvedHere]
+\begin{theorem}[Spectral exchange family and categorical braiding; \ClaimStatusProvedHere]
 % label removed: thm:braided-category
 Assume \textrm{(H1)--(H4)}.
-Let $\mathcal C_{\partial}$ be the (derived) category of boundary line operators with the tensor structure induced by the $W$–module structure of~$M$. Then $R(z)$ defines a meromorphic braiding on $\mathcal C_{\partial}$, and the classical limit $r(z)$ integrates to a filtered quasi‑triangular structure on the Koszul–dual Hopf object $\mathcal H$ (the "factorisation quantum group" in this setting).
+Let $\mathcal C_{\partial}$ be the (derived) category of boundary line
+operators with the tensor structure induced by the \(W\)-module
+structure of~$M$. Then \(R(z)\) defines a meromorphic family of
+exchange isomorphisms on the factorisation line category. After
+choosing evaluation data at insertion points and descending along an
+exchange path, this family yields the ordinary categorical braiding
+natural transformation on the corresponding centre-side category. The
+classical limit \(r(z)\) gives the filtered quasi-triangular local
+shadow on the Koszul-dual boundary object~\(\mathcal H\).
 \end{theorem}
 
 \begin{proof}
-We establish the meromorphic braiding and the quasi-triangular Hopf structure separately.
+We establish the meromorphic exchange family and the filtered
+quasi-triangular local bialgebra shadow separately.
 
 \medskip
-\noindent\textbf{Part A: Meromorphic braiding on $\mathcal{C}_\partial$.}
+\noindent\textbf{Part A: Meromorphic exchange family on $\mathcal{C}_\partial$.}
 The derived category $\mathcal{C}_\partial$ of boundary line operators inherits a monoidal structure from the $E_1$-composition along the boundary half-line $\R_{\geq 0}$: given right $W(\SCchtop)$-modules $M_1, M_2$ (boundary factorization modules in the sense of Section~\ref{subsec:boundary-module}), their tensor product $M_1 \otimes_{E_1} M_2$ is defined by the operadic composition in the open color. The spectral braiding $R(z)$ of Definition~\ref{def:spectral-braiding} provides a natural isomorphism
 \[
-\beta_z \colon M_1 \otimes_{E_1} M_2 \xrightarrow{\ \sim\ } M_2 \otimes_{E_1} M_1
+\beta_z \colon M_1 \otimes_z M_2 \xrightarrow{\ \sim\ } M_2 \otimes_{-z} M_1
 \]
-for generic $z \in \C^\times$, arising from the exchange of insertion points in $\FM_2(\C)$. By Theorem~\ref{thm:YBE}, $\beta_z$ satisfies the braid relation on triple tensor products, making $(\mathcal{C}_\partial, \otimes_{E_1}, \beta_z)$ a braided monoidal category with meromorphic dependence on $z$.
+for generic $z \in \C^\times$, arising from the exchange of insertion points in $\FM_2(\C)$. Thus $\{\beta_z\}_{z\in\C^\times}$ is a meromorphic exchange family between the factorisation products $\otimes_z$ and $\otimes_{-z}^{\mathrm{op}}$, not a single categorical braiding on the fixed tensor product. The ordinary braiding
+\[
+\beta_{M_1,M_2}\colon
+M_1\otimes_{E_1}M_2 \xrightarrow{\ \sim\ }
+M_2\otimes_{E_1}M_1
+\]
+is obtained only after evaluation/descent along an exchange path or,
+equivalently, after passing to the derived/Drinfeld centre where the
+half-braiding is a natural transformation. By Theorem~\ref{thm:YBE},
+$\beta_z$ and the three-point associator satisfy the braid relation for
+the meromorphic family; the categorical hexagon is the descended
+centre-side statement.
 
 \medskip
-\noindent\textbf{Part B: Filtered quasi-triangular structure on $\mathcal{H}$.}
-Let $\mathcal{H}$ denote this Hopf-like boundary object extracted from the open-colour Koszul-dual data. By Theorem~\ref{thm:filtered-koszul}, $\mathcal{H}$ carries the holomorphic weight filtration $F^\bullet$ with $\gr^F \mathcal{H} \cong U(\mathfrak{g}[z])$ (the enveloping algebra of the loop algebra, on the closed color) tensored with an associative algebra (on the open color).
+\noindent\textbf{Part B: Filtered quasi-triangular local shadow on $\mathcal{H}$.}
+Let $\mathcal{H}$ denote this filtered boundary object extracted from
+the open-colour Koszul-dual data. By
+Theorem~\ref{thm:filtered-koszul}, $\mathcal{H}$ carries the
+holomorphic weight filtration $F^\bullet$ with
+$\gr^F \mathcal{H}\cong U(\mathfrak{g}[z])$ (the enveloping algebra of
+the loop algebra, on the closed color) tensored with an associative
+algebra (on the open color).
 
 The classical $r$-matrix $r(z)$ defines an element $r(z) \in \mathcal{H} \widehat{\otimes}\, \mathcal{H}((z^{-1}))$ satisfying:
 \begin{enumerate}[label=(\alph*)]
 \item The CYBE (Proposition~\ref{prop:field-theory-r}, Step 4 of the proof), which is the infinitesimal form of the braid relation;
-\item Antisymmetry $r(-z) = -r_{21}(z)$ (Theorem~\ref{thm:spectral_R_YBE}(iii));
-\item The intertwining property $r(z)\,\Delta(x) - \Delta^{\mathrm{op}}(x)\,r(z) = 0$ at leading order in $\hh$, which follows directly from defining $\Delta$ by the two-line OPE and $R(z)$ by the braiding that exchanges the two line factors.
+\item the normalized skew relation \(r(-z)=-r_{21}(z)\) on comparison
+surfaces carrying the unitary exchange normalization
+\(R_{12}(z)R_{21}(-z)=\id\)
+\textup{(}Theorem~\ref{thm:spectral_R_YBE}\textup{(}iii\textup{)}\textup{)};
+\item The intertwining property $r(z)\,\Delta(x) - \Delta^{\mathrm{op}}(x)\,r(z) = 0$ at leading order in $\hh$, which follows directly from defining $\Delta$ by the two-line OPE and $R(z)$ by the exchange family between the two line factors.
 \end{enumerate}
-These three properties define a \emph{filtered quasi-triangular structure}: $r(z)$ lives in filtration degree $F^1(\mathcal{H} \otimes \mathcal{H})$, and the CYBE holds modulo $F^2$. The full quantum $R$-matrix $R(z) = \id + \hh\, r(z) + O(\hh^2)$ extends this to a quasi-triangular structure on the completed object $\widehat{\mathcal{H}}$, with the Yang--Baxter equation holding to all orders by Theorem~\ref{thm:YBE}.
+These three properties define a \emph{filtered quasi-triangular
+local shadow}: $r(z)$ lives in filtration degree
+$F^1(\mathcal{H} \otimes \mathcal{H})$, and the CYBE holds modulo
+$F^2$. If a compatible quantization/associator has been chosen, the
+quantum $R$-matrix $R(z) = \id + \hh\, r(z) + O(\hh^2)$ extends this
+classical shadow to the completed object $\widehat{\mathcal{H}}$.
+The all-orders Yang--Baxter statement belongs to that chosen quantized
+surface.
 
-Theorem~\ref{thm:lines_as_modules} identifies perturbative line operators with modules for the Koszul-dual boundary algebra, so the braided monoidal category $\mathcal{C}_\partial$ from Part A is identified with the category of $\mathcal{H}$-modules equipped with the braiding induced by $R(z)$.
+Theorem~\ref{thm:lines_as_modules} identifies perturbative line
+operators with modules for the Koszul-dual boundary algebra, so the
+local factorisation line category from Part~A is modelled by
+$\mathcal H$-modules equipped with the spectral coproduct
+$\Delta_z$, the exchange family $R_{V,W}(z)$, and the same
+three-point associator.  The braided monoidal category appears only
+after the evaluation/descent step or on a strictified comparison
+surface.
 \end{proof}
 
 \subsection{OPE of line operators and the spectral $R$-matrix}
@@ -266,7 +366,9 @@ Q(r(z)) + \frac{1}{2}[r(z), r(z)] + \sum_{k \geq 3} m_k(r(z)^{\otimes k}) = 0;
 \end{equation}
 in $\mathcal{A}^{\otimes 3}[[z^{-1}, w^{-1}, (z-w)^{-1}]]$;
 
-\item \textbf{Skew-symmetry}:
+\item \textbf{Normalized skew relation}: if the chosen comparison
+surface carries the unitary exchange normalization
+\(R_{12}(z)R_{21}(-z)=\id\), then
 \begin{equation}
 r(-z) = -r_{21}(z),
 \end{equation}
@@ -274,7 +376,7 @@ where $r_{21}$ means swapping the two tensor factors.
 \end{enumerate}
 \end{theorem}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 \textbf{(i) Maurer--Cartan}: This follows from the associativity of the OPE. The OPE of three lines $\ell_1(z_1) \ell_2(z_2) \ell_3(z_3)$ must be independent of the order of expansion. This forces $r(z)$ to satisfy the MC equation in $\mathcal{A}^! \otimes \mathcal{A}^!$.
 
 \textbf{(ii) $A_\infty$ Yang--Baxter}: The associativity of the OPE for three lines yields:
@@ -283,7 +385,11 @@ r_{23}(z) + (id \otimes \Delta_z)(r(z+w)) = r_{12}(w) + (\Delta_w \otimes id)(r(
 \end{equation}
 where $\Delta_z : \mathcal{A}^! \to \mathcal{A}^! \otimes_{r(z)} \mathcal{A}^!$ is the coproduct deformed by $r(z)$. Expanding this identity and using the $A_\infty$ structure yields the $A_\infty$ Yang--Baxter equation.
 
-\textbf{(iii) Skew-symmetry}: This follows from the symmetry of the tensor product: swapping $\ell_1 \leftrightarrow \ell_2$ corresponds to $z \to -z$ and exchanging tensor factors.
+\textbf{(iii) Normalized skew relation}: This is not a formal
+consequence of the local exchange family.  On a comparison surface with
+unitary exchange normalization \(R_{12}(z)R_{21}(-z)=\id\), expanding
+\(R(z)=\id+\hh r(z)+O(\hh^2)\) gives
+\(r_{12}(z)+r_{21}(-z)=0\).
 \end{proof}
 
 \subsection{dg-Shifted Yangians}
@@ -306,7 +412,9 @@ satisfying:
 \begin{itemize}
 \item Counit axioms: $\varepsilon(1) = 1$, $(\varepsilon \otimes id) \circ \Delta_z = id$, $(id \otimes \varepsilon) \circ \Delta_z \simeq \tau_z$;
 \item Translation invariance: $\varepsilon(T(a)) = 0$, $\varepsilon(\tau_z(a)) = \varepsilon(a)$ for all $a \in \mathcal{Y}$;
-\item Weak co-commutativity: $(\tau_w \otimes \tau_w) r(z) = r(z)$, $r(-z) = -r_{21}(z)$;
+\item Weak co-commutativity: $(\tau_w \otimes \tau_w) r(z) = r(z)$.
+If a unitary exchange normalization is part of the chosen comparison
+surface, then also $r(-z) = -r_{21}(z)$;
 \item Co-associativity (quantum $A_\infty$ Yang--Baxter):
 \begin{equation}
 r_{23}(z) + (id \otimes \Delta_z)(r(z+w)) = r_{12}(w) + (\Delta_w \otimes id)(r(z)).
@@ -329,7 +437,7 @@ The holomorphic translation $z \mapsto z + w$ acts on bulk local operators of th
 
 \medskip
 \noindent\textbf{Step 2: Spectral $R$-matrix.}
-The OPE of two parallel line operators $L_1(z_1)$, $L_2(z_2)$ is governed by configuration integrals over $\FM_2(\C) \times E_1(2)$. Setting $z = z_1 - z_2$, the quantum corrections to the free tensor product define $r(z) \in \A^! \widehat{\otimes}\, \A^!((z^{-1}))$ as in Theorem~\ref{thm:spectral_R_YBE}. The degree is $(1, \text{odd}, 0)$: degree 1 from the desuspension in the bar construction, odd under the $\Z/2$-grading from the fermion number, and weight 0 because the leading pole $1/z$ carries no holomorphic weight shift.
+The OPE of two parallel line operators $L_1(z_1)$, $L_2(z_2)$ is governed by configuration integrals over $\FM_2(\C) \times E_1(2)$. Setting $z = z_1 - z_2$, the quantum corrections to the free tensor product define $r(z) \in \A^! \widehat{\otimes}\, \A^!((z^{-1}))$ as in Theorem~\ref{thm:spectral_R_YBE}. The degree is $(1, \text{odd}, 0)$: the first component is the degree of the induced binary bar/configuration-integral term; the bar desuspension $s^{-1}$ itself lowers cohomological degree by~$1$. The second component is odd under the $\Z/2$-grading from the fermion number, and the third is weight~$0$ because the leading pole $1/z$ carries no holomorphic weight shift.
 
 \medskip
 \noindent\textbf{Step 3: Coproduct from the monoidal structure on $\mathcal{C}_{\mathrm{line}}$.}
@@ -343,7 +451,11 @@ The $R$-matrix intertwines the coproduct and its opposite:
 \[
 R(z)\,\Delta_z(x) = \Delta_z^{\mathrm{op}}(x)\, R(z) \qquad \text{for all } x \in \A^!.
 \]
-This is the defining property of a quasi-triangular structure. It follows from the definition of $R(z)$ as the braiding isomorphism (Definition~\ref{def:spectral-braiding}): applying $R(z)$ swaps the two tensor factors, converting $\Delta_z$ (first factor at $z_1$, second at $z_2$) to $\Delta_z^{\mathrm{op}}$ (factors swapped).
+This is the local quasi-triangular compatibility on the chosen
+quantization surface. It is not a consequence of a bare braiding
+definition: it is part of the exchange datum relating the binary
+coproduct \(\Delta_z\) to the opposite coproduct after the two line
+factors are exchanged.
 
 \medskip
 \noindent\textbf{Step 4: Counit.}
@@ -368,40 +480,93 @@ The identity
 \[
 r_{23}(z) + (\id \otimes \Delta_z)(r(z+w)) = r_{12}(w) + (\Delta_w \otimes \id)(r(z))
 \]
-expresses the consistency of the three-line OPE: resolving the pair $(L_2, L_3)$ first and then braiding $L_1$ past the pair (LHS) must agree with braiding $L_1$ past $L_2$ first and then resolving (RHS). This is a rewriting of the Yang--Baxter equation (Theorem~\ref{thm:YBE}) in coproduct language, obtained by substituting $R(z) = \exp(r(z))$ and expanding the three-fold braiding identity to leading nontrivial order.
+expresses the consistency of the three-line OPE: resolving the pair
+$(L_2,L_3)$ first and then exchanging $L_1$ with the pair (LHS) must
+agree with exchanging $L_1$ with $L_2$ first and then resolving (RHS),
+after inserting the chosen three-point associator. This is the
+associator-controlled Yang--Baxter relation (Theorem~\ref{thm:YBE}) in
+coproduct language, obtained by substituting the model-dependent
+shorthand \(R(z)=\exp(r(z))\) and expanding the associator-controlled
+three-line exchange identity to leading nontrivial order.
 
 \medskip
 \noindent\textbf{Step 7: Yangian structure.}
-The spectral parameter $z$ makes this a \emph{Yangian} rather than a mere quasi-triangular Hopf algebra: $\Delta_z$, $r(z)$, and $\tau_z$ assemble into a deformation of $U(\mathfrak{g}[z])$ (the universal enveloping algebra of the loop algebra). In the associated graded with respect to the holomorphic filtration, $r(z) \sim r_0/z$ (simple pole) and $\Delta_z$ reduces to the standard Yangian coproduct $\Delta_z(x) = x \otimes 1 + 1 \otimes x + O(z^{-1})$. This matches Definition~\ref{def:dg_Yangian}.
+The spectral parameter $z$ makes this a local Yangian-type bialgebra
+shadow rather than a mere fixed quasi-triangular algebra: $\Delta_z$,
+$r(z)$, and $\tau_z$ assemble into a deformation of
+$U(\mathfrak{g}[z])$ (the universal enveloping algebra of the loop
+algebra). In the associated graded with respect to the holomorphic
+filtration, $r(z) \sim r_0/z$ (simple pole) and $\Delta_z$ reduces to
+the standard Yangian coproduct $\Delta_z(x) = x \otimes 1 + 1 \otimes x
++ O(z^{-1})$. This matches Definition~\ref{def:dg_Yangian}.
 \end{proof}
 
 \subsection{Connection to Latyntsev's factorisation quantum groups}
 
-The spectral $R$-matrix and the meromorphic tensor product are an instance of Latyntsev's \emph{factorisation quantum groups} \cite{Lat23}.
+The spectral exchange family and the meromorphic tensor products give
+the local shadow of Latyntsev's factorisation quantum groups
+\cite{Lat23}; the global Ran-cosheaf statement requires separate
+comparison data.
 
-\begin{definition}[Factorisation Quantum Group (Informal)]
+\begin{definition}[Local factorisation quantum-group shadow]
 % label removed: def:factorisation_QG
-A \emph{factorisation quantum group} is a categorical structure encoding:
+A \emph{local factorisation quantum-group shadow} is the following
+local spectral tensor datum:
 \begin{itemize}
-\item A monoidal category $\mathcal{C}$ of representations;
-\item A meromorphic tensor product $\otimes_z : \mathcal{C} \times \mathcal{C} \to \mathcal{C}[[z^{-1}, z]]$, parametrized by a spectral parameter $z \in \C$;
-\item An $R$-matrix $R(z) : V \otimes_z W \to W \otimes_{-z} V$ satisfying the quantum Yang--Baxter equation.
+\item a local line category $\mathcal{C}$ with an \(E_1\)-tensor
+product;
+\item a meromorphic family of factorisation products
+\[
+\otimes_z\colon \mathcal C\times\mathcal C\to
+\mathcal C[[z^{-1},z]],\qquad z\in\C^\times;
+\]
+\item exchange isomorphisms
+\[
+R_{V,W}(z)\colon V\otimes_z W\xrightarrow{\sim}W\otimes_{-z}V;
+\]
+\item a three-point associator \(\Phi_A\) such that on triples the
+exchange maps satisfy the associator-controlled Yang--Baxter relation
+of Theorem~\ref{thm:YBE}.
 \end{itemize}
+When the chosen comparison surface strictifies \(\Phi_A=1\), this
+reduces to the strict quantum Yang--Baxter equation. Before
+evaluation/descent to the centre-side category it is not yet an
+ordinary braided monoidal category.
 \end{definition}
 
-\begin{theorem}[Line Operators Form a Factorisation Quantum Group;
+\begin{theorem}[Line operators form a local factorisation quantum-group
+shadow;
 \ClaimStatusProvedHere]
 % label removed: thm:lines_factorisationQG
-Assume \textrm{(H1)--(H4)}.
-The category $\mathcal{C}_{\text{line}}$ of line operators in a 3d HT theory, equipped with the meromorphic OPE and spectral kernel $r(z)$, forms a factorisation quantum group in the sense of Latyntsev \cite{Lat23}.
+Assume \textrm{(H1)--(H4)} and choose the spectral tensor datum
+\((\otimes_z,R_{V,W}(z),\Phi_A)\) of
+Definition~\ref{def:factorisation_QG}.  The category
+$\mathcal{C}_{\text{line}}$ of line operators in the chosen local
+3d HT realization forms a local factorisation quantum-group shadow.
+The full Latyntsev Ran-cosheaf and representation-category statement is
+a global comparison problem, not a consequence of the local spectral
+kernel alone.
 \end{theorem}
 
 \begin{proof}
-Verification: the three axioms of a factorisation quantum group (Definition~\ref{def:factorisation_QG}).
+Verification: the local spectral tensor datum of
+Definition~\ref{def:factorisation_QG}.
 
 \medskip
 \noindent\textbf{(i) Monoidal structure.}
-The category $\mathcal{C}_{\mathrm{line}}$ has objects given by boundary line operators and morphisms given by boundary-localized local operators (intertwiners). The monoidal product is concatenation in the $E_1$-direction along the boundary $t = 0$: given lines $L_1, L_2$ placed at distinct points in $\C$, the product $L_1 \otimes L_2$ is defined by the $W(\SCchtop)$-module structure (Section~\ref{subsec:boundary-module}). Associativity and unit constraints follow from the $E_1$-coherence encoded in the $W$-resolution. By Theorem~\ref{thm:lines_as_modules}, $\mathcal{C}_{\mathrm{line}}$ is equivalent (as a dg category) to the category of $\A^!$-modules.
+The category $\mathcal{C}_{\mathrm{line}}$ has objects given by
+boundary line operators and morphisms given by boundary-localized local
+operators (intertwiners). The monoidal product is concatenation in the
+$E_1$-direction along the boundary $t=0$: given lines $L_1,L_2$
+placed at distinct points in $\C$, the product $L_1\otimes L_2$ is
+defined by the $W(\SCchtop)$-module structure
+(Section~\ref{subsec:boundary-module}). Associativity and unit
+constraints follow from the \(E_1\)-coherence encoded in the
+\(W\)-resolution. On the chirally Koszul locus,
+Theorem~\ref{thm:lines_as_modules} further identifies
+\(\mathcal C_{\mathrm{line}}\) with modules for the open-colour
+Koszul dual, but that comparison is not the global Latyntsev
+cosheaf.
 
 \medskip
 \noindent\textbf{(ii) Meromorphic tensor product.}
@@ -413,24 +578,40 @@ Concretely, $L_1 \otimes_z L_2$ is the line operator obtained by placing $L_1$ a
 
 \medskip
 \noindent\textbf{(iii) Braiding by $R(z)$.}
-The spectral braiding $R(z) \colon L_1 \otimes_z L_2 \xrightarrow{\sim} L_2 \otimes_{-z} L_1$ (Definition~\ref{def:spectral-braiding}) is an isomorphism between $\otimes_z$ and the opposite product $\otimes_{-z}^{\mathrm{op}}$. By Theorem~\ref{thm:YBE}, $R(z)$ satisfies the quantum Yang--Baxter equation, the braid relation for a braided monoidal category with spectral parameter.
+The spectral exchange
+$R_{L_1,L_2}(z)\colon L_1\otimes_z L_2\xrightarrow{\sim}
+L_2\otimes_{-z}L_1$ (Definition~\ref{def:spectral-braiding}) is an
+isomorphism between \(\otimes_z\) and
+\(\otimes_{-z}^{\mathrm{op}}\). By Theorem~\ref{thm:YBE},
+\(R_{L_1,L_2}(z)\) satisfies the associator-controlled
+Yang--Baxter relation for this meromorphic exchange family, with the
+three-point associator \(\Phi_A\). It becomes an ordinary categorical
+braiding only after the evaluation/descent step described above.
 
 \medskip
-\noindent\textbf{(iv) Factorisation property.}
-The distinguishing feature of a \emph{factorisation} quantum group (as opposed to an ordinary quantum group) is that the braiding depends holomorphically on $z$, upgrading the braided monoidal category to a \emph{factorisation category} on $\C$. In Latyntsev's framework \cite{Lat23}, this means: the assignment $z \mapsto (\mathcal{C}_{\mathrm{line}}, \otimes_z, R(z))$ defines a constructible cosheaf on the Ran space $\Ran(\C)$. For our category, this factorisation structure is inherited from the prefactorization algebra $\Obs^{\partial}$ on $\C \times \R_{\geq 0}$: restricting $\Obs^{\partial}$ to disks at different points of $\C$ and taking the $E_1$-coinvariants in the $\R$-direction yields fibers of the cosheaf, and the factorisation isomorphisms come from the prefactorization algebra structure maps for disjoint disks.
-
-The holomorphic variation of the braiding in $z$ is therefore a direct consequence of the holomorphic-topological factorisation algebra structure of the 3d HT theory, restricted to the boundary.
+\noindent\textbf{(iv) Local factorisation shadow.}
+The local distinguishing datum is not a braided monoidal category
+upgraded by a parameter; it is the meromorphic family
+\((\otimes_z,R_{V,W}(z),\Phi_A)\) compatible with factorisation over
+the chosen disjoint disks. In Latyntsev's framework \cite{Lat23}, the
+full object is a constructible cosheaf on the Ran space \(\Ran(\C)\).
+The present theorem proves only the local shadow: on disks inside the
+chosen product-formal model, the prefactorization algebra
+\(\Obs^\partial\) supplies the local factorisation maps, and the chosen
+exchange family varies holomorphically away from the collision divisor.
+The global Ran-cosheaf and representation-category comparison are not
+proved here.
 \end{proof}
 
 \subsection{Example: abelian CS and Heisenberg Yangian}
 
 \begin{example}[Heisenberg Yangian from $U(1)$ CS]
 % label removed: ex:Heisenberg_Yangian
-For abelian $U(1)$ Chern--Simons at level~$k$ (Example~\ref{prop:abelian_CS_complete}), the bulk algebra is the affine Kac--Moody $\widehat{\mathfrak{u}(1)}_k$; the Koszul dual is the Heisenberg Yangian $Y(\mathfrak{u}(1))$. The spectral $R$-matrix is
+For abelian $U(1)$ Chern--Simons at level~$k$ (Example~\ref{prop:abelian_CS_complete}), the boundary current chart is the Heisenberg/affine Kac--Moody algebra $\widehat{\mathfrak{u}(1)}_k$. Under the scoped bulk--Hochschild comparison, the associated physical bulk object is the chiral derived centre $C^\bullet_{\mathrm{ch}}(\widehat{\mathfrak{u}(1)}_k,\widehat{\mathfrak{u}(1)}_k)$; the open-colour Koszul dual line algebra is the Heisenberg Yangian $Y(\mathfrak{u}(1))$. The spectral $R$-matrix is
 \begin{equation}
 r(z) = k \, \frac{J \otimes J}{z} + \text{(higher terms)},
 \end{equation}
-satisfying the classical Yang--Baxter equation. For non-abelian $G$, the Koszul dual becomes the Yangian $Y(\mathfrak{g})$ or quantum affine algebra $U_q(\widehat{\mathfrak{g}})$, depending on the CS level and boundary conditions.
+satisfying the classical Yang--Baxter equation; the kernel is read from the boundary current OPE, not from an identification of the boundary chart with bulk. For non-abelian $G$, the Koszul dual becomes the Yangian $Y(\mathfrak{g})$ or quantum affine algebra $U_q(\widehat{\mathfrak{g}})$, depending on the CS level and boundary conditions.
 \end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -770,7 +951,7 @@ Poles in $z - w$ &
 $\lambda$-bracket &
  Sklyanin bracket~\eqref{eq:sklyanin-bracket} &
  PVA $\leftrightarrow$ PVA \\[2pt]
-$r(z) = k\,\Omega/z$ &
+$r(z) = k\,\Omega_{\mathrm{tr}}/z$ &
  $r_{\mathrm{cl}}(u) = P/u$ &
  same Casimir \\[2pt]
 $\kappa = \dim(\fg)(k{+}h^\vee)/(2h^\vee)$ &
@@ -1006,7 +1187,7 @@ therefore has $E_0 = \barBch(\cA) \otimes
 The $d_1$ differential is the leading mixed-color correction:
 it acts on bar degree~$2$ elements $[a_1 | a_2]$ by extracting
 the simple pole $\Res_{z=0} \{a_{1\,\lambda}\, a_2\}/z$,
-which is exactly the classical $r$-matrix $r_0 = k\,\Omega/z$
+which is exactly the classical $r$-matrix $r_0 = k\,\Omega_{\mathrm{tr}}/z$
 (Proposition~\ref{prop:field-theory-r}). At bar degree~$k$,
 $d_r$ encodes the order-$r$ pole in the OPE:
 $\Res_{z=0} z^{r-1} R(z)$ restricted to $k$-fold bar elements.
@@ -1133,9 +1314,10 @@ The $\Ainf$ Yang--Baxter equation
 (Theorem~\ref{thm:spectral_R_YBE}) is the convergence condition
 of the spectral sequence $E_r$ at bar degree~$3$: the tower of
 differentials $d_1, d_2, \ldots$ acting on three-fold bar
-elements $[a_1 | a_2 | a_3]$ converges if and only if the
-full $R$-matrix $R(z)$ satisfies the quantum Yang--Baxter
-equation on triple tensor products.
+elements $[a_1 | a_2 | a_3]$ converges if and only if the quantized
+exchange family satisfies the associator-controlled quantum
+Yang--Baxter relation on triple tensor products. It becomes the strict
+quantum Yang--Baxter equation only on a strictified comparison surface.
 \end{corollary}
 
 \begin{proof}
@@ -1161,9 +1343,11 @@ elements reads, at each pole order:
  the failure of $d_1^2 + \cdots + d_{r-1}^2$ at the previous
  stage.
 \end{itemize}
-The tower converges if and only if these corrections
-sum to zero at all orders, which is exactly the quantum YBE
-for $R(z) = \id + \hh\,r_0/z + O(z^{-2})$.
+The tower converges if and only if these corrections sum to zero at all
+orders, which is exactly the associator-controlled quantum
+Yang--Baxter relation for the quantized exchange family
+\(R(z)=\id+\hh\,r_0/z+O(z^{-2})\). On a strictified comparison surface
+this reduces to the ordinary quantum YBE.
 \end{proof}
 
 \subsubsection*{The $(\SCchtop)^{!}$-algebra structure on $\cA^!$}
@@ -2001,7 +2185,7 @@ passing through chord diagrams.
 
 \begin{remark}[Hall--Borcherds recognition gate]
 In this synthesis $\mathbf H_{\Delta_5}^{\mathrm{tgt}}$ denotes the
-K3 target package produced by the super-Etingof--Kazhdan quantisation
+K3 target datum produced by the super-Etingof--Kazhdan quantisation
 of the BKM Manin pair
 \[
 \bigl(\mathfrak g_{\Delta_5},\,
@@ -2031,7 +2215,7 @@ $\mathbb H_2$, its rank-$24$ Mukai-Heisenberg/Miki evaluation block
 satisfies the dynamical Yang--Baxter equation on the paramodular
 $K(1)$ locus \cite{PasolZagier2013,Felder1995}. A global braid on
 modules for the compact Hall source is a recognition consequence, not
-part of the target datum. Cross-ref Vol.~III
+part of the target datum. Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -2046,7 +2230,7 @@ target monodromy lifts to a braid group action on
 $\mathbf H_{\Delta_5}$-modules factoring through
 $B_{24}/\{\sigma_i^8 = 1\}$. Before that lift, the Humbert divisor
 $H_1\cup H_4$ is the spectral singular target
-\cite{Lusztig1990,Bruinier2002}. Cross-ref
+\cite{Lusztig1990,Bruinier2002}. Compare
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
 \end{remark}
 
@@ -2064,7 +2248,7 @@ Yang's rational solution \cite{Yang1967} and
 $\theta^{\mathrm{K3}}(u,Z) = \exp\bigl(\hbar\cdot
 F^{\mathrm{Sieg}}(u,Z)\cdot\Omega_{\mathrm{K3}}\bigr)$ a K3-theta
 cocycle built from the Pasol--Zagier Siegel--Kronecker--Eisenstein
-series \cite{PasolZagier2013,EtingofSchiffmann1998}. On the
+series \cite{PasolZagier2013,ES98}. On the
 rank-$24$ block, the quantum Yang--Baxter equation for
 $R_{\mathrm{Sieg,dyn}}$ on the paramodular locus $K(1)$ follows from
 rational QYBE for
@@ -2072,7 +2256,7 @@ $R^{\mathrm{rat}}_{\mathrm{Yang}}$ together with the Pasol--Zagier
 cyclic Siegel--Kronecker identity (the shifted pentagon for
 $\theta^{\mathrm{K3}}$). Extension from this evaluation block to the
 completed BKM object is the super-Etingof--Kazhdan Manin-pair
-quantisation plus Hall--Borcherds recognition problem. Cross-ref Vol.~III
+quantisation plus Hall--Borcherds recognition problem. Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}
 Theorem~\ref{thm:w15-R-Sieg-factorisation}.
 \end{remark}
@@ -2086,7 +2270,7 @@ T_{\mathrm{Muk}}(u,Z)\in\mathrm{End}(V_{24})\otimes
 \]
 where $V_{24}$ is the Mukai-Heisenberg/Miki block. Molev's quantum
 determinant $\mathrm{qdet}\,T_{\mathrm{Muk}}(u,Z)$ is a central element
-of this block \cite{Molev2007}. If the finite Hall--Borcherds
+of this block \cite{Mol07}. If the finite Hall--Borcherds
 recognition gate lifts this target series to the completed compact
 Hall--Drinfeld source and preserves the centre, its image satisfies
 \[
@@ -2098,7 +2282,7 @@ with $C(u)$ independent of $Z$. Before that centre-preserving lift,
 $\Delta_5(Z)$ is the scalar Borcherds--Heegner target fixed by the
 Gritsenko vanishing on $2H_1+H_4$
 \cite{Gritsenko1999,GritsenkoNikulin1998}, not a proven generator of
-the full centre. Cross-ref Vol.~III
+the full centre. Compare Vol.~III
 Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}
 Theorem~\ref{thm:w15-quantum-determinant}.
 \end{remark}

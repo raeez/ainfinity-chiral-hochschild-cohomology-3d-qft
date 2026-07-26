@@ -54,7 +54,8 @@ Key observations:
 
 ### 3. Self-dual point c = 13
 
-At the Virasoro self-dual point (Vir_c^! = Vir_{26-c} = Vir_13):
+At the fixed point of the strict Virasoro line-side comparison
+(Vir_{26-c} = Vir_13):
 - rho(13) = 0.4674 (convergent tower, R = 2.14)
 - Branch points: t_{+/-} = -2.1127 +/- 0.3377i
 - Borel singularities: A_{+/-} = -6/13 +/- 0.0738i
@@ -125,12 +126,12 @@ This is the genuine "real-to-complex bridge": the shadow obstruction tower (real
 and the Epstein spectral data (complex, non-perturbative) are two facets of the
 same underlying algebraic curve.
 
-### 8. Koszul duality in the Borel plane
+### 8. Line-side comparison in the Borel plane
 
-Under Koszul duality c <-> 26-c:
+Under the strict Virasoro line-side comparison c <-> 26-c:
 - kappa(c) + kappa(26-c) = 13 (always)
 - rho(c) != rho(26-c) in general (the formula depends on c^2)
-- rho(c) = rho(26-c) only at c = 13 (self-dual fixed point)
+- rho(c) = rho(26-c) only at c = 13 (fixed point)
 - The Borel singularities A_+(c) and A_+(26-c) are at DIFFERENT positions
 - The Stokes graphs at c and 26-c have different geometries
 

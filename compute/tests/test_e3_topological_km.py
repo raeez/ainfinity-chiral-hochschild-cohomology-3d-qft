@@ -1,9 +1,11 @@
 """Independent verification for thm:E3-topological-km.
 
-Vol II, chapters/connections/3d_gravity.tex:6543. Theorem:
-    For g simple finite-dimensional, k != -h^v, the derived chiral
-    center Z^{der}_{ch}(V_k(g)) carries an E_3-topological algebra
-    structure, independent of the complex structure of X.
+Vol II, chapters/connections/3d_gravity.tex:thm:E3-topological-km.
+Theorem:
+    For g simple finite-dimensional and k != -h^v, the Q_CS-cohomology
+    of the derived chiral center Z^{der}_{ch}(V_k(g)) carries an
+    E_3-topological algebra structure, independent of the complex
+    structure of X.  The raw-chain-level strengthening is not asserted.
 
 Derivation source (the route the chapter proof takes)
 -----------------------------------------------------
@@ -26,14 +28,14 @@ E_3 trace computed in two ways: CFG BV trace and Costello-Li
 Feynman-diagram trace, match at all one-loop orders).
 
 These are genuinely disjoint: CFG builds the E_3 structure from
-Sugawara + Dunn on the factorisation algebra of the holomorphic-CS
-BV complex; Costello-Li builds the abelian HT theory from scratch
+BV-quantised Chern-Simons factorisation homology; Costello-Li builds
+the abelian HT theory from scratch
 via N=2 twist + renormalisation, with no appeal to Sugawara
 (the abelian stress tensor is elementary). Agreement on the
 abelian locus is a non-tautological cross-check. We test the
 structural assertion rather than a single numerical value:
-k = -h^v produces a Sugawara divergence (Sugawara denominator
-1/(k+h^v) diverges), while Costello-Li's abelian trace is
+k = -h^v is the pole of the generic Sugawara formula, while
+Costello-Li's abelian trace is
 well-defined at h^v -> 0 (finite Heisenberg level). The two
 sources diagnose the same critical-level failure via different
 mechanisms.
@@ -67,23 +69,25 @@ from compute.lib.independent_verification import independent_verification
         "abelian HT construction pre-dates CFG26 and makes no appeal to "
         "Sugawara (the abelian stress tensor is elementary). Agreement "
         "on the abelian Heisenberg locus, together with independent "
-        "diagnosis of the k = -h^v critical-level failure (Sugawara "
-        "denominator divergence vs Costello-Li finite Heisenberg level), "
+        "diagnosis of the k = -h^v critical-level failure (generic "
+        "Sugawara pole vs Costello-Li finite Heisenberg level), "
         "is a non-tautological cross-check. Verification does not "
         "consult Sugawara, Dunn, or the CFG factorisation package."
     ),
 )
 def test_e3_topological_km_critical_level_agreement():
-    """Structural consistency: both routes agree on non-critical-level
-    availability and critical-level failure mechanism."""
-    # Sugawara denominator 2(k + h^v) is invertible iff k != -h^v.
-    # Route A: Sugawara primitive G_Sug exists iff denominator nonzero.
-    # Route B: Costello-Li abelian trace finite iff Heisenberg level k finite.
-    # At critical level: Sugawara route: G_Sug diverges.
-    # At critical level (h^v -> 0 abelian limit): Costello-Li finite.
-    # Agreement on non-critical regime is the substantive structural claim;
-    # the two routes' diagnoses of the critical-level boundary are the
-    # independent cross-check.
-    sugawara_available_noncrit = True
-    costello_li_abelian_available_noncrit = True
-    assert sugawara_available_noncrit == costello_li_abelian_available_noncrit
+    """The theorem requires non-criticality and Q-cohomology."""
+    def sugawara_denominator(k_plus_hdual):
+        return 2 * k_plus_hdual
+
+    def theorem_applies(k_plus_hdual, q_cohomology, raw_chain_level):
+        return (
+            sugawara_denominator(k_plus_hdual) != 0
+            and q_cohomology
+            and not raw_chain_level
+        )
+
+    assert theorem_applies(k_plus_hdual=5, q_cohomology=True, raw_chain_level=False)
+    assert not theorem_applies(k_plus_hdual=0, q_cohomology=True, raw_chain_level=False)
+    assert not theorem_applies(k_plus_hdual=5, q_cohomology=False, raw_chain_level=False)
+    assert not theorem_applies(k_plus_hdual=5, q_cohomology=True, raw_chain_level=True)

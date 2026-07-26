@@ -25,11 +25,16 @@ All work attributed to Raeez Lorgat.
 from __future__ import annotations
 
 from fractions import Fraction
+from pathlib import Path
 from typing import Dict, Tuple
 
 import pytest
 
 from compute.lib.independent_verification import independent_verification
+
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCE = ROOT / "chapters" / "theory" / "unified_chiral_quantum_group.tex"
 
 
 # ---------------------------------------------------------------------------
@@ -166,6 +171,50 @@ def test_unified_chiral_QG_existence():
     # The r-matrix is non-zero at k = 0 for non-abelian g in KZ convention:
     r_at_zero = Fraction(1, shifted_level)
     assert r_at_zero == Fraction(1, 2)
+
+
+def test_gcft_scope_is_not_protocol_or_pic_overclaim():
+    """The GCFT remark states the degree-zero/Pic and oper scopes directly."""
+    source = SOURCE.read_text(encoding="utf-8")
+    flat = " ".join(source.split())
+
+    retired = (
+        "Protocol verification",
+        "What this gets RIGHT",
+        "would get WRONG",
+        "CORRECT statement",
+        r"\ChirHoch^*(H_k) \simeq \mathcal{O}(\Pic(X))",
+        "equating critical-level chiral centre with $\\Pic(X)$",
+    )
+    for phrase in retired:
+        assert phrase not in source
+
+    assert "GCFT is the abelian geometric Langlands statement for curves" in flat
+    assert r"\ChirHoch^0(H_k)\simeq \mathcal O(\Pic(X))" in source
+    assert "The higher chiral Hochschild degrees retain the level and translation data" in flat
+    assert "not \\(\\mathcal O(\\Pic(X))\\)" in source
+    assert "non-abelian oper generalisation" in flat
+
+
+def test_universal_holography_anchor_is_alg_extension_not_bare_gauge_theory():
+    """The climax anchor uses the UHT realization datum, not A alone."""
+    source = SOURCE.read_text(encoding="utf-8")
+    flat = " ".join(source.split())
+
+    assert "Comparisons to the climax" in source
+    assert "through the specified HT realisation datum of that theorem" in flat
+    assert r"T_A^{\mathrm{alg}}" in source
+    assert "physical gauge-theory interpretation uses the same BV/HT realisation" in flat
+    assert "it is not a consequence of \\(A\\) alone" in source
+
+    retired = (
+        "Compareerences to the climax",
+        "and hence a canonical 3d\n holomorphic-topological gauge theory",
+        "and hence a canonical 3d holomorphic-topological gauge theory",
+        "specialisations of $T_{A}$",
+    )
+    for phrase in retired:
+        assert phrase not in source
 
 
 # ---------------------------------------------------------------------------

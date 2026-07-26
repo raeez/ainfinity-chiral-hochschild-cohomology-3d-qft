@@ -24,6 +24,8 @@ inscription verification.
 from __future__ import annotations
 
 from fractions import Fraction
+from pathlib import Path
+import re
 
 from compute.lib.independent_verification import independent_verification
 
@@ -46,6 +48,35 @@ def _kappa_total_wn(N: int, c: Fraction) -> Fraction:
 def _kappa_w_distribution_wn(N: int, c: Fraction) -> dict[int, Fraction]:
     """W_N weight-distribution: kappa_j = c/j for j in {2, ..., N}; else 0."""
     return {j: c / j for j in range(2, N + 1)}
+
+
+def _tensor_arakelov_component_formula_profile() -> dict[str, object]:
+    """The item-18 component formula for K_{alpha beta}."""
+    return {
+        "target": "Sym^2(F^vee) tensor Omega^2(Mbar_g,n)",
+        "component": "K_{alpha beta}",
+        "stable_graph_set": "G_st_{g,2}(alpha,beta)",
+        "symmetry_factor": "1/|Aut Gamma|",
+        "edge_factor": "prod_e P_{alpha_e beta_e}",
+        "vertex_factor": "prod_v C_v",
+        "integral_domain": "[Mbar_Gamma]",
+        "trace": "sum_alpha K_{alpha alpha} = kappa_ch^Hodge(A) omega_g",
+    }
+
+
+def _w3_tensor_channel_matrix(c: Fraction) -> dict[str, object]:
+    """W_3 tensor curvature before scalar trace."""
+    trace = c / 2 + c / 3
+    return {
+        "basis": ("T", "W"),
+        "matrix": (("K_TT", "K_TW"), ("K_WT", "K_WW")),
+        "diagonal": ("K_TT", "K_WW"),
+        "mixed": ("K_TW", "K_WT"),
+        "trace": trace,
+        "expected_trace": Fraction(5) * c / 6,
+        "genus2_cross": (c + 204) / (16 * c),
+        "scalar_trace_forgets": ("K_TW", "K_WT"),
+    }
 
 
 @independent_verification(
@@ -147,3 +178,77 @@ def test_virasoro_single_generator_concentration():
     # Only weight 2 is in the distribution dictionary.
     assert list(dist.keys()) == [2]
     assert dist[2] == Fraction(1, 2)
+
+
+def test_tensor_arakelov_component_formula_profile():
+    """K_{alpha beta} is a stable-graph integral, not a scalar slogan."""
+    profile = _tensor_arakelov_component_formula_profile()
+    assert profile["target"] == "Sym^2(F^vee) tensor Omega^2(Mbar_g,n)"
+    assert profile["stable_graph_set"] == "G_st_{g,2}(alpha,beta)"
+    assert profile["symmetry_factor"] == "1/|Aut Gamma|"
+    assert profile["edge_factor"] == "prod_e P_{alpha_e beta_e}"
+    assert profile["vertex_factor"] == "prod_v C_v"
+    assert profile["trace"] == "sum_alpha K_{alpha alpha} = kappa_ch^Hodge(A) omega_g"
+
+
+def test_w3_tensor_channel_matrix_before_trace():
+    """W_3 has TT, TW, WT, WW tensor channels; the trace forgets mixed entries."""
+    matrix = _w3_tensor_channel_matrix(Fraction(1))
+    assert matrix["basis"] == ("T", "W")
+    assert matrix["matrix"] == (("K_TT", "K_TW"), ("K_WT", "K_WW"))
+    assert matrix["trace"] == matrix["expected_trace"] == Fraction(5, 6)
+    assert matrix["mixed"] == ("K_TW", "K_WT")
+    assert matrix["scalar_trace_forgets"] == ("K_TW", "K_WT")
+    assert matrix["genus2_cross"] == Fraction(205, 16)
+
+
+def test_tensor_arakelov_source_contains_component_formula():
+    """Source guard for item-18 tensor-Arakelov component formula."""
+    repo = Path(__file__).resolve().parents[2]
+    source = repo / "chapters/theory/theorems_C_D_native_vol2_platonic.tex"
+    text = source.read_text(encoding="utf-8")
+    assert "eq:tensor-arakelov-component-graph-integral" in text
+    assert "P_{\\alpha_e\\beta_e}" in text
+    assert "C_v" in text
+    assert "ex:theoremD-W3-four-channel-tensor" in text
+    assert "K_{TT} & K_{TW}" in text
+
+
+def test_tensor_arakelov_source_separates_scalar_trace_from_full_energy():
+    """The native Theorem D surface must not identify tensor data with its trace."""
+    repo = Path(__file__).resolve().parents[2]
+    source = repo / "chapters/theory/theorems_C_D_native_vol2_platonic.tex"
+    text = source.read_text(encoding="utf-8")
+    compact = re.sub(r"\s+", "", text)
+
+    required_compact = (
+        (
+            "F_g^{\\mathrm{sc}}(\\cA)="
+            "\\kappaChHodge(\\cA)\\lambda_g^{\\mathrm{FP}}"
+        ),
+        (
+            "F_g(\\cA)=F_g^{\\mathrm{sc}}(\\cA)"
+            "+\\deltaF_g^{\\mathrm{cross}}(\\cA)"
+        ),
+        "d^2=\\kappaChHodge(\\mathcalA)\\omega_g",
+    )
+    for required in required_compact:
+        assert required in compact
+
+    required_text = (
+        "Faber--Pandharipande numerical trace contributes",
+        "trace of the off-diagonal tensor curvature",
+    )
+    for required in required_text:
+        assert required in text
+
+    stale_compact = (
+        "F_g=\\kappaChHodge(\\cA)\\lambda_g^{\\mathrm{FP}}",
+        "F_g=\\kappaChHodge(\\cA)\\cdot\\lambda_g^{\\mathrm{FP}}",
+        "F_g(\\cA)=\\kappaChHodge(\\cA)\\lambda_g^{\\mathrm{FP}}",
+        "F_g(\\cA)=\\kappaChHodge(\\cA)\\cdot\\lambda_g^{\\mathrm{FP}}",
+        "d^2=\\kappa\\cdot\\omega_g",
+        "K_{w_1,w_2}=\\deltaF_g^{\\mathrm{cross}}|_{w_1,w_2}",
+    )
+    for stale in stale_compact:
+        assert stale not in compact

@@ -1,8 +1,8 @@
 """Tests for compute/lib/f14_w_p_triplet_amplitude.py.
 
-Verifies the Adamovic-Milas amplitude bound, the exact Vol I Virasoro
-subchannel at c = c(p), and the triangle upper bound on |S_r(W(3))| for
-r = 1, ..., 8.
+Checks the Adamovic-Milas regular-channel bound constants, the exact
+Vol I Virasoro subchannel at c = c(p), and the semisimple triangle upper
+bound on |S_r^reg(W(3))| for r = 1, ..., 8.
 
 Coverage
 --------
@@ -23,8 +23,9 @@ Coverage
       explicit values 6 r^2 (9/7)^r Cat_{r-1} for r = 1, ..., 8.
 
   - test_f14_w3_full_triangle_bound_finite
-      The triangle bound |S_r(W(3))| <= |S_r^TT| + AM bound is finite at
-      every r = 1, ..., 8 (no factorial blow-up).
+      The semisimple triangle bound
+      |S_r^reg(W(3))| <= |S_r^TT| + AM bound is finite at every
+      r = 1, ..., 8 (no factorial blow-up).
 
   - test_f14_stirling_certificate_at_asymptotic_r
       (|S_r|/r!)^{1/r} -> 0 by Stirling: at r >= 37 the AM bound rate
@@ -38,17 +39,19 @@ Coverage
   - test_f14_five_class_partition
       The G / L / C / M / log partition includes log as a distinct
       class whose Massey-boundedness is unbounded but whose shadow
-      growth is bounded by the Adamovic-Milas amplitude.
+      growth remains conditional on regular and logarithmic amplitude
+      bounds.
 
 DISJOINT RATIONALE
 ------------------
-The Adamovic-Milas amplitude bound is DERIVED FROM the FGST
+The Adamovic-Milas regular-channel bound is DERIVED FROM the FGST
 theta-character (Feigin-Gainutdinov-Semikhatov-Tipunin 2006) and the
 Adamovic-Milas screening-operator description (2008).  Tests VERIFY
 AGAINST the Vol I Virasoro recurrence engine (independent of the
 character expansion) and the existing Vol II finite pole-envelope
 reduction (independent of theta-characters).  The two paths share only
-c(p) = 1 - 6(p-1)^2/p, not the AM amplitude formula.
+c(p) = 1 - 6(p-1)^2/p, not the AM amplitude formula.  No test here
+proves the logarithmic phi_{0,1} boundary-changing estimate.
 """
 
 from __future__ import annotations

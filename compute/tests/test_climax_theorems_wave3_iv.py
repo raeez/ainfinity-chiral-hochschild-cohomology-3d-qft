@@ -35,16 +35,28 @@ from compute.lib.independent_verification import independent_verification
 # thm:E3-topological-DS — W-algebra E_3-topological via DS reduction
 # ---------------------------------------------------------------------------
 
-def _w_algebra_E3_topological(non_critical: bool, principal_nilpotent: bool) -> bool:
-    """E_3-topological on Zder(W) holds iff k != -h^vee and f = f_prin."""
-    return non_critical and principal_nilpotent
+def _w_algebra_E3_topological(
+    non_critical: bool,
+    principal_nilpotent: bool,
+    total_ds_differential: bool,
+    ds_brst_primitive: bool,
+    raw_chain_level: bool,
+) -> bool:
+    """Principal DS E3-topological claim is cohomological over Q_DS."""
+    return (
+        non_critical
+        and principal_nilpotent
+        and total_ds_differential
+        and ds_brst_primitive
+        and not raw_chain_level
+    )
 
 
 @independent_verification(
     claim="thm:E3-topological-DS",
     derived_from=[
         "Programme topologization construction (constr:topologization)",
-        "BRST identity T_DS = [Q_CS, G'] (programme proof)",
+        "Conditional DS BRST identity T_DS = [Q_DS, G'_DS] on Q_DS-cohomology",
         "Costello-Gaiotto 3d hCS with DS boundary (cite)",
     ],
     verified_against=[
@@ -65,9 +77,24 @@ def _w_algebra_E3_topological(non_critical: bool, principal_nilpotent: bool) -> 
     ),
 )
 def test_e3_topological_ds():
-    assert _w_algebra_E3_topological(True, True)
-    assert not _w_algebra_E3_topological(False, True)  # critical level breaks Sugawara
-    assert not _w_algebra_E3_topological(True, False)  # non-principal not in scope here
+    assert _w_algebra_E3_topological(
+        True, True, total_ds_differential=True, ds_brst_primitive=True, raw_chain_level=False
+    )
+    assert not _w_algebra_E3_topological(
+        False, True, total_ds_differential=True, ds_brst_primitive=True, raw_chain_level=False
+    )  # critical level breaks Sugawara
+    assert not _w_algebra_E3_topological(
+        True, False, total_ds_differential=True, ds_brst_primitive=True, raw_chain_level=False
+    )  # non-principal not in scope here
+    assert not _w_algebra_E3_topological(
+        True, True, total_ds_differential=False, ds_brst_primitive=True, raw_chain_level=False
+    )
+    assert not _w_algebra_E3_topological(
+        True, True, total_ds_differential=True, ds_brst_primitive=False, raw_chain_level=False
+    )
+    assert not _w_algebra_E3_topological(
+        True, True, total_ds_differential=True, ds_brst_primitive=True, raw_chain_level=True
+    )
 
 
 # ---------------------------------------------------------------------------

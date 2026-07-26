@@ -754,13 +754,14 @@ $r(z)=r_0/z$. It is not the pointwise meromorphic family $R(z)$ itself.
 
 \begin{proof}
 The $\beta\gamma$ OPE is $\beta(w)\gamma(z) \sim 1/(w-z)$, so $r(z) = r_0/z$ with $r_0 = \beta \ot \gamma - \gamma \ot \beta \in \End(V^{\ot 2})$ the standard Heisenberg $r$-matrix.
-The connection $\nabla_{\fS} = d + (r_0/z)\,dz/z$ on $D^*$ is regular singular with residue $r_0$.
+The connection $\nabla_{\fS} = d + r_0\,dz/z$ on $D^*$ is regular singular with residue $r_0$.
 Its monodromy is
 \[
 \mathrm{Mon}_{z=0}(\nabla_{\fS}) \;=\; \exp(2\pi i\, r_0).
 \]
-On the other hand, the spectral $R$-matrix of the rank-one Heisenberg algebra is $R(z) = \exp(r_0/z)$ evaluated at $z = 1$ after analytic continuation, and its monodromy representation on $\mathrm{Rep}(\mathrm{Heis})$ is precisely $\exp(2\pi i\, r_0)$.
-The two expressions coincide.
+On the other hand, the infinitesimal spectral kernel of the rank-one
+Heisenberg algebra is $r(z)=r_0/z$; the monodromy is the holonomy of
+the logarithmic connection with residue~$r_0$.
 \end{proof}
 
 \begin{strategy}[Reduction to analytic input; \ClaimStatusConjectured]
@@ -819,7 +820,7 @@ identification itself (Drinfeld--Kohno proves it on category-$\cO$
 modules) but four structural items:
 \begin{enumerate}[label=\textup{(\alph*)}]
 \item the \emph{factorization origin}: the connection arises from the Swiss-cheese bar complex, not from the Sugawara construction alone;
-\item the \emph{derived enhancement}: the full $A_\infty$ superconnection on the bar coalgebra $\mathrm{B}(V^k(\fg))$ specializes, after one-loop collapse and passage to the reduced evaluation comparison surface, to the KZ connection, but carries strictly more information before reduction;
+\item the \emph{derived enhancement}: the full $A_\infty$ superconnection on the bar coalgebra $\mathrm{B}(V^k(\fg))$ specializes, after one-loop wheel/contact cancellation and passage to the reduced evaluation comparison surface, to the KZ connection with its finite Lie-Jacobi associator, but carries strictly more information before reduction;
 \item the \emph{Steinberg geometric package}: the monodromy acts on the derived Steinberg object $\fS_b$, which carries a $(-1)$-shifted symplectic structure encoding both the convolution product and the line-category tensor structure;
 \item the \emph{convergence mechanism}: the exponential $\exp(2\pi i \cdot \Omega/(k+h^\vee))$ converges in the completed tensor product $\End(\cL_b^{\wot 2})$ by a spectral bound that uses the polynomial growth of the $\lambda$-bracket, not merely the finite-dimensionality of evaluation modules.
 \end{enumerate}
@@ -861,7 +862,7 @@ with the KZ connection. On that reduced surface the connection is
 \]
 where $\Omega = e \ot f + f \ot e + \tfrac{1}{2} h \ot h$ is the split Casimir of $\mathfrak{sl}_2$.
 
-The connection is regular singular at $z = 0$ with residue $\Omega/(k+2)$. The regularity follows from bar-kernel absorption: the $d\log$ kernel absorbs one pole from the $z^{-2}$ OPE singularity $J^a(w)J^b(z) \sim k\kappa^{ab}/(w-z)^2 + f^{ab}_c J^c(z)/(w-z)$, so the collision $r$-matrix has a simple pole $r(z) = k\,\Omega/z + O(1)$ at level~$k$ The overall normalization $(k+2)^{-1}$ from Theorem~\ref{thm:reduced-equals-kz} converts this to the residue $\Omega/(k+2)$, and the $d\log z$ kernel absorbs the pole from $dz/z$, producing the claimed form.
+The connection is regular singular at $z = 0$ with residue $\Omega/(k+2)$. The regularity follows from bar-kernel absorption: the $d\log$ kernel absorbs one pole from the $z^{-2}$ OPE singularity $J^a(w)J^b(z) \sim k\kappa^{ab}/(w-z)^2 + f^{ab}_c J^c(z)/(w-z)$, so the collision $r$-matrix has a simple pole $r(z) = k\,\Omega_{\mathrm{tr}}/z + O(1)$ at level~$k$ The overall normalization $(k+2)^{-1}$ from Theorem~\ref{thm:reduced-equals-kz} converts this to the residue $\Omega/(k+2)$, and the $d\log z$ kernel absorbs the pole from $dz/z$, producing the claimed form.
 \end{construction}
 
 \subsection{Casimir spectrum and eigenvalue computation for general representations}
@@ -926,7 +927,7 @@ Let $M(\lambda)$ and $M(\mu)$ be Verma modules of $\mathfrak{sl}_2$ with highest
 \[
  |\text{eigenvalues of } \Omega_{12}\big|_{\text{weight } \lambda+\mu-m}|
  \;\leq\;
- C(\lambda,\mu) \cdot m
+ C(\lambda,\mu) \cdot (1+m)^2
 \]
 for a constant $C(\lambda,\mu)$ depending polynomially on $\lambda, \mu$.
 
@@ -944,12 +945,14 @@ The weight space $(M(\lambda) \ot M(\mu))_m = \bigoplus_{a+b=m} \CC\,f^a v_\lamb
  = e f^a v_\lambda \ot f^{b+1} v_\mu + f^{a+1} v_\lambda \ot e f^b v_\mu
  + \tfrac{1}{2}(h f^a v_\lambda) \ot (h f^b v_\mu).
 \]
-Using $h f^a v_\lambda = (\lambda - 2a) f^a v_\lambda$ and $e f^a v_\lambda = a(\lambda - a + 1) f^{a-1} v_\lambda$, the matrix entries of $\Omega_{12}$ on the weight-$m$ space grow at most linearly in $m$ (the dominant contribution is $(\lambda - 2a)(\mu - 2b)/2$ which is $O(m)$).
+Using $h f^a v_\lambda = (\lambda - 2a) f^a v_\lambda$ and $e f^a v_\lambda = a(\lambda - a + 1) f^{a-1} v_\lambda$, the matrix entries of $\Omega_{12}$ on the weight-$m$ space grow at most quadratically in $m$; the Cartan term
+$(\lambda - 2a)(\mu - 2b)/2$ is already quadratic for generic
+$a+b=m$.
 
 On each finite-dimensional weight space, $\exp(2\pi i \cdot \Omega_{12}/(k+2))$ is a well-defined matrix. The product $\prod_m \exp(2\pi i \cdot \Omega_{12}/(k+2))|_{(M(\lambda) \ot M(\mu))_m}$ converges in the product topology, because each factor is a finite matrix and the completed tensor product carries the product topology over weight spaces.
 \end{proof}
 
-\begin{remark}[The completion is $k$-adic, not spectral]
+\begin{remark}[The completion is weight-space, not spectral]
 \label{rem:completion-type}
 For affine vertex algebras at generic level $k$, the relevant
 Drinfeld--Kohno/KZ completion is the \emph{weight-space completion}
@@ -989,15 +992,15 @@ construction on the vertex algebra; it is the \emph{geometric content}
 of the bar complex.
 
 \item \textbf{The $A_\infty$ superconnection before reduction.}
-Before applying the one-loop collapse and the projection to degree-zero
+Before removing the independent wheel/contact terms and projecting to degree-zero
 cohomology, the full object is not the KZ connection but the $A_\infty$
 superconnection $\SN_n = d_{\mathrm{dR}} + \widehat{\Theta}_n + b_n +
 I_{\Gamma_n}$ (Theorem~\ref{thm:master-curvature}). For the affine
-lineage, one-loop exactness ($m_k = 0$ for $k \geq 3$) and passage to
-the reduced evaluation comparison surface collapse this to the KZ
-connection. For theories with non-formal Swiss-cheese structure (e.g., $\mathcal{W}$-algebras
+lineage, one-loop exactness and passage to
+the reduced evaluation comparison surface leave the KZ
+connection and its finite Lie-Jacobi associator. For theories with non-formal Swiss-cheese structure (e.g., $\mathcal{W}$-algebras
 obtained by DS reduction, which are chirally Koszul but whose BRST cohomology does not inherit
-one-loop exactness), the superconnection does \emph{not} collapse, and
+one-loop exactness), the wheel/contact part of the superconnection does \emph{not} vanish, and
 the higher collision homotopies $h_S$ contribute. The HT framework
 thus produces a \emph{derived KZ connection}
 (Theorem~\ref{thm:derived-additive-kz}) that specializes to KZ on the
@@ -1115,7 +1118,7 @@ inputs:
 \]
 where $\rho$ is the Weyl vector and $(\cdot, \cdot)$ is the inner product on $\fh^*$ induced by $\kappa$.
 
-\item \textbf{One-loop collapse.} By Theorem~\ref{thm:one-loop-koszul}, $V^k(\fg)$ is chirally Koszul at generic $k$. The $A_\infty$ tower collapses: $m_k = 0$ for $k \geq 3$. On the reduced evaluation comparison surface, the reduced connection therefore identifies with the KZ connection with residue $\Omega/(k + h^\vee)$.
+\item \textbf{One-loop Lie transfer.} By Theorem~\ref{thm:one-loop-koszul}, $V^k(\fg)$ is chirally Koszul at generic $k$. Its affine Swiss-cheese transfer is the finite class-$\mathbf{L}$ Lie layer; the Virasoro wheel is absent. On the reduced evaluation comparison surface, the reduced connection identifies with the KZ connection with residue $\Omega/(k + h^\vee)$.
 
 \item \textbf{Drinfeld--Kohno.} On the reduced evaluation comparison
 surface, the monodromy with eigenvalues
@@ -1126,15 +1129,15 @@ $q = e^{i\pi/(k+h^\vee)}$.
 \end{enumerate}
 
 Items (1)--(3) are \emph{forced} by the Swiss-cheese structure. The
-one-loop collapse (2) is not an accident of the affine algebra; it
-follows from the BV theory being one-loop exact
+one-loop wheel/contact cancellation in (2) is not an accident of the
+affine algebra; it follows from the BV theory being one-loop exact
 (Theorem~\ref{thm:affine-half-space-bv}). The factorization quantum
 group structure adds the spectral parameter to (3); the Steinberg
 geometry adds the $(-1)$-shifted symplectic structure to (1).
 
 \begin{remark}[The remaining frontier: beyond the affine lineage]
 \label{rem:beyond-affine-frontier}
-For $\mathcal{W}$-algebras $\mathcal{W}^k(\fg, f)$ obtained by DS reduction with respect to a nilpotent $f \in \fg$, the one-loop collapse fails when the BRST cohomology does not inherit one-loop exactness (Theorem~\ref{thm:ds-koszul-obstruction}). In that case:
+For $\mathcal{W}$-algebras $\mathcal{W}^k(\fg, f)$ obtained by DS reduction with respect to a nilpotent $f \in \fg$, the one-loop wheel/contact cancellation fails when the BRST cohomology does not inherit one-loop exactness (Theorem~\ref{thm:ds-koszul-obstruction}). In that case:
 \begin{itemize}
  \item The higher $A_\infty$ operations $m_k$ ($k \geq 3$) do not vanish.
  \item The reduced connection is not KZ but receives corrections from higher collision homotopies.

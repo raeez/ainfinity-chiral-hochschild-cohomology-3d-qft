@@ -1,13 +1,15 @@
-"""Double bar B^{ord,ch}(Y_hbar(sl_3)): explicit verification.
+"""Associated-graded collision shadow of B^{ord,ch}(Y_hbar(sl_3)).
 
-Computes the open-colour double bar of the sl_3 Yangian at low degrees
-and verifies that it recovers the current algebra sl_3[t] WITHOUT
-central extension.
+Computes the primitive collision-residue projection of the ordered bar
+of the sl_3 Yangian at low degrees and verifies that its PBW
+associated graded is the current Lie algebra sl_3[t] WITHOUT central
+extension.  This is not an isomorphism
+B^{ord,ch}(Y_hbar(sl_3)) = U(sl_3[t]) of full ordered bar objects.
 
 The computation proceeds:
 1. Degree 1: generators of Y(sl_3) -> generators of sl_3[t]
-2. Degree 2: bar differential extracts zeroth product (Lie bracket)
-             from simple poles only -> no central term
+2. Degree 2: bar differential extracts the primitive collision-residue
+             bracket from simple poles only -> no central term
 3. Degree 3: d^2 = 0 from Jacobi (= classical YBE for r = P/u)
              Triangle sectors for adjacent roots, Serre relations
              from root-space vanishing.
@@ -53,9 +55,9 @@ from lib.ordered_chiral_kd_engine import (
 #   [e_1, e_2] = e_12, [f_1, f_2] = -f_12 (convention: f_12 = -[f_2, f_1])
 #   [e_12, f_1] = -e_2 * ... (more precisely from sl_3 structure)
 #
-# For the DOUBLE BAR computation, we need the Yangian spectral OPE,
-# which has ONLY SIMPLE POLES. The zeroth product (residue at simple
-# pole) is the Lie bracket of sl_3.
+# For the associated-graded primitive shadow computation, we need the
+# Yangian spectral OPE, which has ONLY SIMPLE POLES. The collision
+# residue at the simple pole is the Lie bracket of sl_3.
 
 # Full sl_3 Lie bracket table.
 # Generators: e1, e2, f1, f2, h1, h2, e12, f12
@@ -184,7 +186,7 @@ def sl3_lie_bracket(a: str, b: str) -> Dict[str, Fraction]:
 #   [H_i(u), E_j(v)] = A_{ij} * hbar/(u-v) * E_j(v) + (regular)
 #   [H_i(u), F_j(v)] = -A_{ij} * hbar/(u-v) * F_j(v) + (regular)
 #
-# The COLLISION RESIDUE (zeroth product) is the sl_3 Lie bracket.
+# The primitive collision residue is the sl_3 Lie bracket.
 # By AP19, the d log kernel absorbs one pole, so a simple pole in the
 # spectral OPE gives a residue, and the bar differential extracts
 # ONLY this residue.
@@ -198,7 +200,7 @@ def sl3_lie_bracket(a: str, b: str) -> Dict[str, Fraction]:
 # NOTHING ELSE. In particular, no central extension k*n*delta_{n+m,0}.
 
 def yangian_sl3_collision_residue(a: str, b: str) -> Dict[str, Fraction]:
-    """The zeroth product (collision residue) for Y_hbar(sl_3).
+    """The primitive collision-residue bracket for Y_hbar(sl_3).
 
     This is the content of the bar differential d_bar at degree 2:
     d[s^{-1}a | s^{-1}b] = s^{-1}([a, b])
@@ -420,13 +422,14 @@ class TestDegree2LieBracket:
 class TestDegree3Jacobi:
     """Degree 3: Jacobi identity on all triple bar elements.
 
-    The degree-3 consistency of the double bar is the Jacobi identity
-    for the collision residues. For the Yangian Y_hbar(g) viewed as an
-    ASSOCIATIVE algebra, d^2 = 0 in the associative bar complex follows
-    from associativity of the Yangian product.
+    The degree-3 consistency of the associated-graded primitive shadow is
+    the Jacobi identity for the collision residues. For the Yangian
+    Y_hbar(g) viewed as an ASSOCIATIVE algebra, d^2 = 0 in the
+    associative bar complex follows from associativity of the RTT product.
 
-    At the level of the collision residue (zeroth product = Lie bracket),
-    the degree-3 consistency reduces to the JACOBI IDENTITY for g = sl_3.
+    At the level of the collision-residue shadow, the bracket is not the
+    open E_1 product; its degree-3 consistency reduces to the JACOBI
+    IDENTITY for g = sl_3.
 
     IMPORTANT: The ordered_chiral_kd_engine implements the associative
     bar complex where d[a|b|c] = [m2(a,b)|c] - [a|m2(b,c)] and d^2=0
@@ -468,9 +471,9 @@ class TestDegree3Jacobi:
     def test_jacobi_all_512_triples(self):
         """Jacobi identity for ALL 8^3 = 512 triples of sl_3 generators.
 
-        This is the degree-3 consistency of the double bar: d^2_{CE} = 0
-        on the Chevalley-Eilenberg complex. Equivalent to the classical
-        YBE for r(u) = P/u.
+        This is the degree-3 consistency of the primitive shadow:
+        d^2_{CE} = 0 on the Chevalley-Eilenberg complex. Equivalent to
+        the classical YBE for r(u) = P/u.
         """
         failures = []
         for x in SL3_GENERATORS:
@@ -732,8 +735,8 @@ class TestCentralExtensionInvisibility:
 
         The deformation parameter hbar = 1/(k+3) scales the shifted
         pole positions but does not affect the collision residue at u = v.
-        Therefore the Lie bracket recovered by the double bar is
-        independent of the level k (equivalently, of hbar).
+        Therefore the Lie bracket seen by the primitive collision shadow
+        is independent of the level k (equivalently, of hbar).
 
         The level enters the full affine algebra ONLY through the
         central extension, which the ordered bar does not see.
@@ -782,7 +785,7 @@ class TestComparisonWithSl2:
 
         The Jacobi identity [X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] = 0
         holds for all triples of sl_2 generators {e_1, f_1, h_1},
-        verifying degree-3 consistency of the double bar restricted
+        verifying degree-3 consistency of the primitive shadow restricted
         to the sl_2 subalgebra.
         """
         sl2_gens = ['e1', 'f1', 'h1']
@@ -809,7 +812,7 @@ class TestComparisonWithSl2:
 # =====================================================================
 
 class TestUniformSlN:
-    """The double bar computation extends uniformly to sl_N for all N >= 2.
+    """The associated-graded primitive shadow extends uniformly to sl_N.
 
     The argument is:
     1. Y_hbar(sl_N) has spectral OPE with only simple poles at u = v.
@@ -833,7 +836,7 @@ class TestUniformSlN:
         Positive roots: alpha_1, alpha_2, alpha_1 + alpha_2.
         Each has a unique generator (e_1, e_2, e_12 respectively).
 
-        This is the key structural fact that makes the double bar
+        This is the key structural fact that makes the primitive shadow
         computation work uniformly: no multiplicity means no
         ambiguity in the Lie bracket, hence no correction terms
         beyond the simple-pole residue.
@@ -885,7 +888,9 @@ class TestUniformSlN:
         3. Jacobi identity: The sl_N Lie bracket satisfies Jacobi,
            which is equivalent to d^2 = 0 on the bar complex.
 
-        Together: B^{ord,ch}(Y_hbar(sl_N)) = U(sl_N[t]) for all N >= 2.
+        Together: gr_F Y_hbar(sl_N) = U(sl_N[t]) for all N >= 2, and
+        the primitive collision-residue projection of B^{ord,ch}
+        has the sl_N[t] bracket.
         The central extension k is invisible because it requires a
         double pole, which is absent from the Yangian spectral OPE.
 

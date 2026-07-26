@@ -50,13 +50,13 @@ From this viewpoint, the subjects in play (chiral and factorization algebra, $A_
  \item A binary collision kernel $r(z)$ satisfying a Yang-Baxter identity defines a logarithmic flat connection on configuration space.
  \item Replacing strict multiplication by an $A_\infty$ structure forces the connection to lift to a bar-valued superconnection; its curvature is the Maurer-Cartan defect.
  \item In interacting holomorphic-topological theories, the superconnection is realized analytically by renormalized compactified graph integrals on mixed holomorphic/topological configuration spaces.
- \item When the internal line complex is classically resolved in degree $0$, the superconnection reduces canonically to an ordinary logarithmic connection on reduced states.
+ \item When the internal line complex is classically resolved in degree $0$ and a compatible Hodge contraction is chosen, the superconnection reduces to an ordinary logarithmic connection on reduced states.
  \item Regularized transport between tangential collision zones then produces an associator, a braiding, and hence a monodromic braided tensor structure.
 \end{enumerate}
 
 The mechanism is packaged into a single synthesis theorem. External analytic or perturbative inputs are flagged at the point of use.
 
-\begin{theorem}[Synthesis theorem; \ClaimStatusProvedHere]\label{thm:synthesis}
+\begin{theorem}[Synthesis theorem; \ClaimStatusConditional]\label{thm:synthesis}
 Let $\kk$ be a field of characteristic zero.
 \begin{enumerate}[label=\textup{(\roman*)}]
  \item A strict rational dg-shifted Yangian $(Y,r(z),T)$ determines a logarithmic flat shifted KZ/FM connection on $\Conf_n(\AA^1)$ whose residues extend to $\FM_n(\PP^1\mid\infty)$ and satisfy infinitesimal braid relations.
@@ -70,7 +70,7 @@ Let $\kk$ be a field of characteristic zero.
  \]
  Hence flatness is equivalent to a supportwise Maurer-Cartan hierarchy and yields a recursive obstruction theory for higher collision homotopies.
  \item In a quasi-linear interacting three-dimensional holomorphic-topological theory with anomaly-free perturbation theory, renormalized compactified graph integrals on mixed logarithmic configuration spaces produce an analytic logarithmic superconnection of the same form, and its flatness is a compactified-Stokes identity.
- \item If the tree-level line complex is resolved in degree $0$, then the full quantum line complex remains concentrated in degree $0$, admits a canonical $\h$-adic strong deformation retract, and the reduced superconnection collapses to an ordinary logarithmic flat connection
+ \item If the tree-level line complex is resolved in degree $0$ and a compatible tree-level Hodge contraction is chosen, then the full quantum line complex remains concentrated in degree $0$, admits an $\h$-adic strong deformation retract relative to that choice, and the reduced superconnection collapses to an ordinary logarithmic flat connection
  \[
  \A_n = p_n A_n^{(1)} i_n.
  \]
@@ -80,7 +80,37 @@ Let $\kk$ be a field of characteristic zero.
 \end{enumerate}
 \end{theorem}
 
-Every clause of Theorem~\ref{thm:synthesis} is proved below, except those clauses marked as conjectural bridges beyond the present theorem package.
+\begin{proof}[Routing of proof obligations]
+This is a synthesis theorem conditional on the hypotheses displayed in
+the six clauses.  Clause~\textup{(i)} is proved by
+Theorem~\ref{thm:strict-flatness}, Lemma~\ref{lem:inf-braid}, and
+Proposition~\ref{prop:strict-log-ext}.  Clause~\textup{(ii)} is the
+bar-valued curvature package of Lemma~\ref{lem:bar-insertion},
+Theorem~\ref{thm:master-curvature}, and
+Theorem~\ref{thm:support-hierarchy}.  Clause~\textup{(iii)} is
+conditional on the anomaly-free perturbative and compactified
+renormalisation hypotheses used in
+Theorems~\ref{thm:log-bphz-existence},
+\ref{thm:analytic-curvature}, and~\ref{thm:analytic-flatness}.
+Clause~\textup{(iv)} is conditional on the resolved degree-zero line
+complex and compatible Hodge contraction and is proved under those
+hypotheses by Theorem~\ref{thm:quantum-concentration},
+Theorem~\ref{thm:hodge-hbar-retract}, and
+Theorem~\ref{thm:one-form-rigidity}.  Clause~\textup{(v)} follows from
+the reduced-residue and tangential-regularisation package
+Corollary~\ref{cor:reduced-residues},
+Lemma~\ref{lem:tangential-regularization},
+Theorems~\ref{thm:pentagon}--\ref{thm:hexagon}, and
+Theorem~\ref{thm:pure-braid}.  Clause~\textup{(vi)} is
+Theorem~\ref{thm:smashing-localization} and
+Corollary~\ref{cor:periodicity}.  Thus the theorem is not an
+unconditional theorem: its analytic and reduction clauses stand exactly
+on the stated anomaly-free, resolved-line, and contraction hypotheses.
+\end{proof}
+
+The clauses above are proved or reduced below as indicated; conjectural
+bridges beyond these hypotheses are stated separately in the frontier
+section rather than folded into Theorem~\ref{thm:synthesis}.
 
 \subsection*{Guiding references and scope}
 The formal development is self-contained, but builds on: Beilinson--Drinfeld's chiral/factorization viewpoint \cite{BD04}; Ayala--Francis on factorization homology \cite{AF15}; Costello--Dimofte--Gaiotto on holomorphic twists and boundary chiral algebras \cite{CDG20}; Gaiotto--Kulp--Wu on higher operations and compactified configuration-space regularization \cite{GKW25}; Khan--Zeng on three-dimensional Poisson-vertex gauge theory \cite{KZ25}; Mok on logarithmic Fulton-MacPherson spaces \cite{Mok25}; Dimofte--Niu--Py on line operators and dg-shifted Yangians \cite{DNP25}; and Latyntsev on factorisation quantum groups \cite{Lat23}.
@@ -191,7 +221,7 @@ where $\rho_{ij}$ acts in factors $i$ and $j$ and trivially elsewhere.
 The connection $\nabla_n^Y$ is called the \emph{shifted KZ/FM connection} attached to $Y$.
 \end{definition}
 
-When $r(z)=k\,\Omega/z$ (the affine collision residue at level~$k$), this is exactly the classical rational KZ connection.
+When $r(z)=k\,\Omega_{\mathrm{tr}}/z$ (the affine collision residue at level~$k$), this is exactly the classical rational KZ connection.
 
 \subsection{Flatness and residues}
 
@@ -234,7 +264,7 @@ which vanishes by the classical Yang-Baxter equation. Summing over all triples g
 \end{proof}
 
 \begin{lemma}[Residues and infinitesimal braid operators; \ClaimStatusProvedHere]\label{lem:inf-braid}
-If $r(z)=k\,\Omega/z+O(1)$ at level~$k$ near $z=0$ and $\Omega_{ij}$ denotes the action of $\Omega$ in factors $i,j$, then
+If $r(z)=k\,\Omega_{\mathrm{tr}}/z+O(1)$ at level~$k$ near $z=0$ and $\Omega_{ij}$ denotes the action of $\Omega$ in factors $i,j$, then
 \[
  [\Omega_{ij},\Omega_{kl}]=0 \qquad \text{if }\{i,j\}\cap\{k,l\}=\varnothing,
 \]
@@ -281,7 +311,7 @@ In a tree chart one has
 \[
  z_i-z_j = \Big(\prod_{e\in P(i,j)}t_e\Big)u_{ij},
 \]
-with $u_{ij}$ a unit. Since $r(z)=k\,\Omega/z+O(1)$ at level~$k$ one has
+with $u_{ij}$ a unit. Since $r(z)=k\,\Omega_{\mathrm{tr}}/z+O(1)$ at level~$k$ one has
 \[
  r(z_i-z_j)d(z_i-z_j)=k\,\Omega\,d\log(z_i-z_j)+\text{regular terms}.
 \]
@@ -996,10 +1026,16 @@ By the hypothesis, $E_1^{p,q}$ vanishes unless $p+q=0$. Degree reasons force all
 If $H^0(E_n,Q_{0,n})$ has constant rank, then $H^0(E_n[[\h]],Q_n)$ is a flat $\h$-adic deformation of $H^0(E_n,Q_{0,n})$.
 \end{corollary}
 
-\subsection{Canonical $\h$-adic retract}
+\subsection{Hodge $\h$-adic retract}
 
-\begin{theorem}[Canonical $\h$-adic strong deformation retract; \ClaimStatusProvedHere]\label{thm:canonical-retract}
-Assume $H^j(E_n,Q_{0,n})=0$ for $j\neq 0$ and $H^0(E_n,Q_{0,n})$ has constant rank. Then there is a canonical $\h$-adic strong deformation retract
+\begin{theorem}[Hodge $\h$-adic strong deformation retract; \ClaimStatusProvedHere]\label{thm:hodge-hbar-retract}
+Assume $H^j(E_n,Q_{0,n})=0$ for $j\neq 0$ and $H^0(E_n,Q_{0,n})$ has constant rank. After choosing a Hermitian metric, equivalently a tree-level Hodge contraction
+\[
+ (H_{0,n},0)\underset{p_{0,n}}{\stackrel{i_{0,n}}{\rightleftarrows}}(E_n,Q_{0,n}),
+ \qquad
+ Q_{0,n}h_{0,n}+h_{0,n}Q_{0,n}=\id-i_{0,n}p_{0,n},
+\]
+there is an induced $\h$-adic strong deformation retract
 \[
  (H_n,0) \underset{p_n}{\stackrel{i_n}{\rightleftarrows}} (E_n[[\h]],Q_n),
  \qquad
@@ -1021,7 +1057,7 @@ is a smooth subbundle. Let $p_{0,n}$ denote orthogonal projection onto $H_{0,n}$
 \[
  h_{0,n}:=Q_0^{\dagger}G_{0,n}.
 \]
-Then
+This gives the chosen tree-level contraction
 \[
  Q_0h_{0,n}+h_{0,n}Q_0 = \id - i_{0,n}p_{0,n}.
 \]
@@ -1042,7 +1078,7 @@ which define a strong deformation retract of $(E_n[[\h]],Q_n)$ onto $(H_{0,n}[[\
 \[
  q_n:=p_{0,n}\Sigma_n i_{0,n}.
 \]
-But $q_n$ has cohomological degree $+1$, while $H_{0,n}$ lies in degree $0$, so $q_n=0$. Thus the target complex is $(H_{0,n}[[\h]],0)$, which identifies canonically with $H_n$ by Theorem~\ref{thm:quantum-concentration}.
+But $q_n$ has cohomological degree $+1$, while $H_{0,n}$ lies in degree $0$, so $q_n=0$. Thus the target complex is $(H_{0,n}[[\h]],0)$, which identifies with $H_n$ by Theorem~\ref{thm:quantum-concentration}. The construction is canonical only relative to the chosen tree-level Hodge contraction; different contractions give homotopic retract data.
 \end{proof}
 
 \begin{proposition}[Analytic convergence under norm smallness; \ClaimStatusProvedHere]\label{prop:analytic-retract}
@@ -1050,7 +1086,7 @@ On any open set on which the exact-resummed perturbation satisfies
 \[
  \|h_{0,n}\Delta_n\|<1
 \]
-on every finite-rank truncation, the formulas of Theorem~\ref{thm:canonical-retract} converge as honest analytic maps and not only as formal $\h$-adic series.
+on every finite-rank truncation, the formulas of Theorem~\ref{thm:hodge-hbar-retract} converge as honest analytic maps and not only as formal $\h$-adic series.
 \end{proposition}
 
 \begin{proof}
@@ -1068,7 +1104,7 @@ with
 \[
  A_n^{(k)}\in \Omega^k(X_n,\log\partial X_n)\ot \End^{1-k}(E_n)[[\h]].
 \]
-Transfer this superconnection along the canonical retract.
+Transfer this superconnection along the chosen Hodge $\h$-adic retract.
 
 \begin{theorem}[One-form rigidity; \ClaimStatusProvedHere]\label{thm:one-form-rigidity}
 The transferred superconnection on $H_n$ is an ordinary logarithmic flat connection,
@@ -1292,17 +1328,17 @@ Suppose a tree-level line coupling imposes equations $f_1=\cdots=f_r=0$ on an af
 Consider a quasi-linear interacting holomorphic-topological theory in the sense of Section~\ref{sec:analytic}. Let $L_1,\dots,L_n$ be perturbative line operators whose tree-level BRST complexes are resolved in degree $0$. Then:
 \begin{enumerate}[label=\textup{(\roman*)}]
  \item the full quantum line complexes remain concentrated in degree $0$;
- \item the canonical $\h$-adic retract exists;
+ \item an $\h$-adic retract is induced by any chosen tree-level Hodge contraction;
  \item the reduced logarithmic flat connection is
  \[
  \A_n = p_nA_n^{(1)}i_n;
  \]
- \item the HT associator, braiding, pentagon, hexagon, and pure braid representations exist without any further concentration or retract hypothesis.
+ \item the HT associator, braiding, pentagon, hexagon, and pure braid representations exist without any further quantum concentration hypothesis.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-Item (i) is Theorem~\ref{thm:quantum-concentration}. Item (ii) is Theorem~\ref{thm:canonical-retract}. Item (iii) is Theorem~\ref{thm:one-form-rigidity}. Item (iv) then follows from the transport constructions and coherence theorems of Section~\ref{sec:reduction}.
+Item (i) is Theorem~\ref{thm:quantum-concentration}. Item (ii) is Theorem~\ref{thm:hodge-hbar-retract} after choosing a tree-level Hodge contraction. Item (iii) is Theorem~\ref{thm:one-form-rigidity}. Item (iv) then follows from the transport constructions and coherence theorems of Section~\ref{sec:reduction}; no additional quantum concentration hypothesis is imposed.
 \end{proof}
 
 \begin{theorem}[Boundary factorization after reduction; \ClaimStatusProvedHere]\label{thm:reduced-boundary-factorization}
@@ -1407,7 +1443,7 @@ Every object in the diagram computing $\int_M LA$ is $d$-periodic, and colimits 
 Theorem~\ref{thm:smashing-localization} says that chromatic height, once introduced by spectralization, is compatible with the local-to-global passage: chromaticity is not visible in the classical linear theory, but it appears after passing to spectral coefficients, where it behaves cleanly under factorization homology.
 \end{remark}
 
-\section{The Platonic ideal: resolved logarithmic HT data}\label{sec:platonic}
+\section{Resolved logarithmic HT data}\label{sec:platonic}
 
 The constructions of the previous sections axiomatize independently of their perturbative realization.
 
@@ -1420,7 +1456,7 @@ A \emph{resolved logarithmic holomorphic-topological datum} consists of the foll
  \SN_n = \ds-(Q_n+\alpha_n),
  \]
  satisfying supportwise or Stokeswise factorization along boundary strata.
- \item A tree-level degree-zero resolution condition on $(E_n,Q_{0,n})$, or equivalently a canonical reduction datum
+ \item A tree-level degree-zero resolution condition on $(E_n,Q_{0,n})$, together with a compatible tree-level Hodge contraction inducing the $\h$-adic reduction datum
  \[
  (H_n,0) \underset{p_n}{\stackrel{i_n}{\rightleftarrows}} (E_n[[\h]],Q_n)
  \]
@@ -1430,8 +1466,8 @@ A \emph{resolved logarithmic holomorphic-topological datum} consists of the foll
 \end{enumerate}
 \end{definition}
 
-\begin{theorem}[Platonic ideal theorem; \ClaimStatusProvedHere]\label{thm:platonic-ideal}
-Every resolved logarithmic HT datum determines canonically:
+\begin{theorem}[Resolved logarithmic HT monodromy theorem; \ClaimStatusProvedHere]\label{thm:platonic-ideal}
+Every resolved logarithmic HT datum determines, functorially in its chosen reduction data:
 \begin{enumerate}[label=\textup{(\roman*)}]
  \item reduced logarithmic flat connections $\ds-\A_n$ on $H_n$;
  \item regularized tangential transports and hence associators and braidings;
@@ -1441,7 +1477,7 @@ Every resolved logarithmic HT datum determines canonically:
  \item boundary factorization formulas on rigid components of semistable degenerations;
  \item after spectralization, periodic and chromatic local-to-global compatibilities.
 \end{enumerate}
-The concrete quasi-linear perturbative HT construction of Sections~\ref{sec:analytic}--\ref{sec:resolved} provides an example of such a datum whenever the tree-level line operators are resolved in degree $0$.
+The concrete quasi-linear perturbative HT construction of Sections~\ref{sec:analytic}--\ref{sec:resolved} provides an example of such a datum whenever the tree-level line operators are resolved in degree $0$ and a compatible tree-level Hodge contraction has been chosen.
 \end{theorem}
 
 \begin{proof}
@@ -1449,7 +1485,7 @@ Items (i)--(iv) are exactly the contents of Theorems~\ref{thm:one-form-rigidity}
 \end{proof}
 
 \begin{remark}[The sharpened frontier question]
-The unresolved frontier is now sharp: not whether a retract exists after quantization, but which physically natural line operators admit classically resolved degree-zero BRST models. Once that classical algebra exists, the quantum-logarithmic monodromy machine is forced.
+The unresolved frontier is now sharp: not whether a retract exists after quantization, but which physically natural line operators admit classically resolved degree-zero BRST models. Once that classical algebra exists, any compatible Hodge contraction produces the quantum-logarithmic monodromy machine, and different choices give homotopic reduction data.
 \end{remark}
 
 \section{Supplementary computations}
@@ -1580,7 +1616,7 @@ and corrections of order $O(z^{-3})$ arise from the non-abelian exponentiation
 \]
 The leading-order formula
 \begin{equation}\label{eq:R-level-explicit}
- R(z)=1+k\,\Omega/z+O(z^{-2})
+ R(z)=1+k\,\Omega_{\mathrm{tr}}/z+O(z^{-2})
 \end{equation}
 at level~$k$ identifies $k\,\Omega$ as the collision residue, consistent with
 Lemma~\ref{lem:inf-braid}.
@@ -1755,7 +1791,7 @@ Weierstrass function, exactly as predicted by the shadow obstruction tower:
 the genus-$1$ period correction to the Casimir is controlled by
 $G_2(\tau)$ and reproduces the curvature $\kappa\cdot\omega_1$
 of the modular shadow at genus~$1$
-(cf.\ Theorem~\ref{thm:synthesis}\textup{(i)}).
+(cf.\ Theorem~\ref{thm:affine-monodromy-identification}).
 \end{computation}
 
 \begin{remark}[Consistency with the modular shadow obstruction tower]
@@ -1774,7 +1810,7 @@ $\kappaChHodge(\cA)\cdot\omega_g$ established in Volume~I.
 
 The computations above identify the reduced HT monodromy for $\widehat{\fg}_k$ with the eigenvalues of the quantum group $R$-matrix. The proof of this identification as a theorem, valid for every simple Lie algebra $\fg$ at generic level, by combining three inputs: one-loop exactness of the affine half-space BV theory, the Drinfeld--Kohno theorem, and the spectral $R$-matrix of Section~\ref{sec:spectral_braiding}.
 
-The key mechanism is that one-loop exactness \emph{collapses the $A_\infty$ tower}: the higher collision homotopies $h_S$ ($|S| \geq 3$) of Section~\ref{sec:ainfty} vanish after reduction to degree-zero states, because the tree-level BRST complex is a regular-sequence Koszul model (Proposition~\ref{prop:regular-sequence}). The reduced logarithmic connection is therefore determined entirely by its binary residues, and these are the Casimir tensors of the KZ connection.
+The key mechanism is that one-loop exactness removes the wheel and contact corrections beyond the affine Lie-Jacobi layer. After reduction to degree-zero evaluation states, the higher collision homotopies $h_S$ ($|S| \geq 3$) of Section~\ref{sec:ainfty} are generated by binary residues and the Arnold--IHX relation, because the tree-level BRST complex is a regular-sequence Koszul model (Proposition~\ref{prop:regular-sequence}). The reduced logarithmic connection is therefore determined by the Casimir residues of the KZ connection, while its finite cubic shadow is the KZ associator.
 
 \subsection{One-loop collapse and the KZ identification}
 
@@ -1786,7 +1822,7 @@ Let $V_1, \dots, V_n$ be finite-dimensional $\fg$-modules, viewed as evaluation 
 \end{proposition}
 
 \begin{proof}
-The affine half-space BV quantization is one-loop exact (Theorem~\ref{thm:affine-half-space-bv}). By the one-loop Koszul criterion (Theorem~\ref{thm:one-loop-koszul}), the pre-reduction boundary algebra $V^k(\fg)$ is chirally Koszul: the bar cohomology is concentrated and the transferred $A_\infty$ operations satisfy $m_k^{\mathrm{aff}} = 0$ for $k \geq 3$. Consequently the tree-level line complex for evaluation modules is a Koszul complex of the type in Proposition~\ref{prop:regular-sequence}, with the regular sequence given by the spectral evaluation constraints. The concentration in degree $0$ follows.
+The affine half-space BV quantization is one-loop exact (Theorem~\ref{thm:affine-half-space-bv}). By the one-loop Koszul criterion (Theorem~\ref{thm:one-loop-koszul}), the pre-reduction boundary algebra $V^k(\fg)$ is chirally Koszul: the bar cohomology is concentrated. On evaluation modules the only higher operation surviving in the reduced comparison is the finite class-$\mathbf L$ Lie-Jacobi transfer generated by the binary current bracket; wheel and contact corrections vanish. Consequently the tree-level line complex for evaluation modules is a Koszul complex of the type in Proposition~\ref{prop:regular-sequence}, with the regular sequence given by the spectral evaluation constraints. The concentration in degree $0$ follows.
 \end{proof}
 
 \begin{theorem}[Reduced HT connection equals KZ connection; \ClaimStatusProvedHere]
@@ -1799,7 +1835,7 @@ where $\rho_{ij}$ acts in the $i$-th and $j$-th tensor factors of\/ $V_1 \otimes
 \end{theorem}
 
 \begin{proof}
-By Proposition~\ref{prop:affine-resolved}, the tree-level line complex is resolved in degree~$0$. The unconditionality theorem (Theorem~\ref{thm:unconditionality}) therefore applies: the canonical $\h$-adic retract exists, and the reduced superconnection is an ordinary logarithmic flat connection
+By Proposition~\ref{prop:affine-resolved}, the tree-level line complex is resolved in degree~$0$. After choosing a compatible tree-level Hodge contraction, the unconditionality theorem (Theorem~\ref{thm:unconditionality}) applies: an $\h$-adic retract exists, and the reduced superconnection is an ordinary logarithmic flat connection
 \[
  \A_n = p_n A_n^{(1)} i_n
 \]
@@ -1831,7 +1867,13 @@ On evaluation modules, where $J^a$ acts as the finite-dimensional representation
 \]
 The factor $(k + h^\vee)^{-1}$ arises from the passage to the \emph{reduced} connection via the projection~$p_n$. The bar-complex differential normalises binary operations by the affine bilinear form $(k + h^\vee)\kappa_\fg$ (the $h^\vee$-shift being the normal-ordering correction in the Segal--Sugawara vector $T = \tfrac{1}{2(k+h^\vee)} \sum{:}J^a J_a{:}$, which ensures $T(z)J^a(w) \sim J^a(w)/(z-w)^2$). The projection $p_n$ to degree-zero states absorbs this normalisation, giving the KZ residue $\Omega_{ij}/(k + h^\vee)$.
 
-Since the affine algebra is Koszul ($m_k = 0$ for $k \geq 3$), there are no higher collision corrections to the residue: the $A_\infty$ Yang--Baxter defect (Theorem~\ref{thm:first-obstruction}) vanishes identically, and the higher support homotopies $h_S$ ($|S| \geq 3$) can be taken to be zero. After projection to degree-zero states, the regular terms in $r(z)$ beyond the simple pole act on higher-degree components that are killed by $p_n$. Thus
+Since the affine algebra is chirally Koszul, the reduced connection
+has no Virasoro wheel correction. The class-$\mathbf L$ cubic layer is
+the Lie-Jacobi transfer and is absorbed by the KZ associator; the
+contact part of the \(A_\infty\) Yang--Baxter defect vanishes. After
+projection to degree-zero states, the regular terms in \(r(z)\)
+beyond the simple pole act on higher-degree components killed by
+\(p_n\). Thus
 \[
  \A_n = \frac{1}{k + h^\vee}\sum_{i < j} \rho_{ij}(\Omega)\, d\log(z_i - z_j),
 \]
@@ -1840,7 +1882,7 @@ which is precisely the KZ connection at level $k$.
 
 \subsection{The identification theorem}
 
-\begin{theorem}[Monodromy equals spectral $R$-matrix for the affine lineage; \ClaimStatusProvedHere]
+\begin{theorem}[Affine monodromy and quantum-group comparison; \ClaimStatusProvedHere]
 \label{thm:affine-monodromy-identification}
 \index{monodromy!affine identification|textbf}
 \index{R-matrix@$R$-matrix!monodromy identification|textbf}
@@ -1851,7 +1893,12 @@ Let $\fg$ be a simple Lie algebra and $k \in \CC \setminus \{-h^\vee\}$ generic.
  \rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}} \colon \pi_1(\Conf_n(\CC)) \longrightarrow \Aut(V_1 \otimes \cdots \otimes V_n).
  \]
  \item By the Drinfeld--Kohno theorem, this monodromy is compared with the corresponding quantum-group braid representation at $q = e^{i\pi/(k + h^\vee)}$: the representation $\rho_n^{\mathrm{HT}}$ is equivalent to the braided tensor product representation of\/ $\mathrm{Rep}_q(\fg)$ on $V_1 \otimes \cdots \otimes V_n$.
- \item The spectral $R$-matrix $R_{V_i, V_j}(z)$ of Section~\textup{\ref{sec:spectral_braiding}}, restricted to evaluation modules, equals the quantum group $R$-matrix: on the reduced evaluation comparison surface, the braided monoidal structure of the reduced HT line category agrees with the braided monoidal structure of $\mathrm{Rep}_q(\fg)$.
+ \item After choosing the KZ/Drinfeld associator and the corresponding
+ gauge twist, the spectral half-monodromy on evaluation modules is
+ braided-monoidally equivalent to the quantum-group braiding. The
+ pointwise meromorphic family $R_{V_i,V_j}(z)$ and the universal
+ $U_q(\fg)$ $R$-matrix are compared through this monodromy functor, not
+ by a bare equality of functions.
 \end{enumerate}
 \end{theorem}
 
@@ -1862,12 +1909,10 @@ Let $\fg$ be a simple Lie algebra and $k \in \CC \setminus \{-h^\vee\}$ generic.
 \noindent\textbf{(ii).} The Drinfeld--Kohno theorem (\cite{Dri89}, Theorem~3.2; \cite{KL93}) compares the monodromy representation of the KZ connection at level $k$, acting on tensor products of finite-dimensional $\fg$-modules, with the braided tensor product representation of $\mathrm{Rep}_q(\fg)$ at $q = e^{i\pi/(k + h^\vee)}$. The braiding $\sigma_{ij}^2 \mapsto \exp(-2\pi i \cdot \Omega_{ij}/(k + h^\vee))$ on elementary generators matches the universal $R$-matrix of $U_q(\fg)$ acting on $V_i \otimes V_j$. Since $\rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}}$, the same comparison holds for the HT monodromy.
 
 \medskip
-\noindent\textbf{(iii).} The spectral $R$-matrix
-$R_{V_i,V_j}(z)$ of Definition~\ref{def:spectral-braiding},
-restricted to evaluation modules, agrees with the quantum-group
-$R$-matrix. The argument has three steps: reduction of the
-$A_\infty$ tower, identification of the classical $r$-matrix, and
-exponentiation.
+\noindent\textbf{(iii).} The comparison of the spectral family with
+the quantum-group braiding has three steps: reduction of the
+$A_\infty$ tower, passage from the raw collision residue to the
+shifted KZ residue, and Drinfeld--Kohno monodromy.
 
 \smallskip\noindent
 \emph{Step (iii-a): One-loop collapse on evaluation modules.}
@@ -1882,13 +1927,13 @@ for the path-ordered exponential.
 
 For the affine algebra $V^k(\fg)$ at generic level $k$,
 Theorem~\ref{thm:affine-half-space-bv} proves one-loop
-exactness: the operations $m_k = 0$ for $k \geq 3$
-(only trees and one-loop graphs contribute, and for the
-affine algebra the one-loop graph determines $m_2$ exactly
-while $m_k = 0$ for $k \geq 3$ by the graph-counting argument
-in the proof of Theorem~\ref{thm:affine-half-space-bv}). Therefore the
+exactness. The affine graph calculus has no independent
+wheel/contact operations; its class-$\mathbf L$ higher part is the
+finite Lie-Jacobi transfer, generated by the same binary Casimir
+residues through the Arnold--IHX relation. Therefore the
 path-ordered exponential reduces to the standard ordered
-exponential of the flat connection defined by $m_2$ alone:
+exponential of the flat KZ connection, and the cubic shadow is the
+Drinfeld associator of that connection:
 \[
  R(z) = \mathrm{P}\!\exp\!\int_\gamma r(\zeta)\, d\zeta,
 \]
@@ -1897,7 +1942,7 @@ and $r(z)$ is the infinitesimal $r$-matrix extracted from $m_2$.
 No higher $m_k$ corrections appear.
 
 \smallskip\noindent
-\emph{Step (iii-b): Classical $r$-matrix equals Casimir kernel.}
+\emph{Step (iii-b): Raw and reduced residues.}
 By Proposition~\ref{prop:field-theory-r}, the infinitesimal
 spectral $r$-matrix is
 \[
@@ -1907,20 +1952,24 @@ spectral $r$-matrix is
 For $V^k(\fg)$, the $\lambda$-bracket is
 $\{J^a {}_\lambda J^b\} = f^{ab}_c J^c + k\,\kappa_\fg^{ab}\lambda$
 (where $\kappa_\fg$ is the Killing form and $f^{ab}_c$ are the
-structure constants). Evaluating the Laplace transform:
+structure constants). After $d\log$ extraction the singular
+bar-collision kernel is
 \[
- r(z) = \frac{\sum_{a,b} J^a \otimes J^b \cdot (\kappa_\fg)_{ab}}{z}
- + \frac{k\,\kappa_\fg}{z^2}
- = \frac{\Omega}{z} + \frac{k\,\kappa_\fg}{z^2},
+ r^{\mathrm{raw}}_{\mathrm{coll}}(z)
+ =
+ \frac{k\,\Omega}{z}.
 \]
-where $\Omega = \sum_a J^a \otimes J_a \in \fg \otimes \fg$
-is the quadratic Casimir tensor. On evaluation modules
-$V_i, V_j$, the representation $\rho_{ij}(\Omega)$ acts as
-a finite-rank operator, and the $z^{-2}$ term is a scalar
-(proportional to the identity on $V_i \otimes V_j$). The
-scalar term does not contribute to the braiding (it exponentiates
-to a scalar phase), so the braiding is governed by
-$r(z) = k\,\Omega/z$ at level~$k$ up to scalars.
+Here $\Omega = \sum_a J^a \otimes J_a$ is the split Casimir and the
+factor~$k$ is the affine level appearing in the central double pole.
+The reduced line connection is not obtained by exponentiating this raw
+kernel. Projection to degree-zero conformal blocks divides by the
+Segal--Sugawara normalisation $(k+h^\vee)$, as in
+Theorem~\ref{thm:reduced-equals-kz}, and its logarithmic residue is
+\[
+ r^{\mathrm{KZ}}_{ij}
+ =
+ \frac{\rho_{ij}(\Omega)}{k+h^\vee}.
+\]
 
 \smallskip\noindent
 \emph{Step (iii-c): Exponentiation to KZ monodromy.}
@@ -1934,39 +1983,38 @@ is
  R_{ij} = \exp\!\Bigl(\frac{-\pi i\, \rho_{ij}(\Omega)}
  {k + h^\vee}\Bigr).
 \]
-This follows from the standard computation: the
-path-ordered exponential of $r(\zeta)\,d\zeta$ along the
-half-circle $\zeta = z_{ij} e^{i\theta}$,
-$\theta \in [0,\pi]$, gives
-$\mathrm{P}\!\exp(\int_0^\pi (k\,\Omega/z_{ij} e^{i\theta})
-\cdot iz_{ij} e^{i\theta}\, d\theta)
-= \exp(i\pi\,k\, \Omega)$, with the normalization
-$1/(k+h^\vee)$ from Theorem~\ref{thm:reduced-equals-kz}.
+This is the path-ordered exponential of the reduced KZ connection
+along the half-circle. The raw level factor $k$ has already been
+absorbed in the projection from the bar collision kernel to the
+conformal-block connection.
 
 By the Drinfeld--Kohno theorem (part~(ii)), this half-monodromy
-is exactly the image of the universal $R$-matrix of $U_q(\fg)$
-on $V_i \otimes V_j$. Therefore
+is gauge-equivalent, after the chosen KZ associator and twist, to the
+image of the universal $R$-matrix of $U_q(\fg)$ on
+$V_i \otimes V_j$. Therefore
 \[
- R_{V_i,V_j}^{\mathrm{spectral}}
- = R_{V_i,V_j}^{\mathrm{KZ}}
- = R_{V_i,V_j}^{U_q(\fg)}.
+ R_{V_i,V_j}^{\mathrm{spectral,\,mon}}
+ \;\sim_F\;
+ R_{V_i,V_j}^{\mathrm{KZ}}
+ \;\sim_F\;
+ R_{V_i,V_j}^{U_q(\fg)}.
 \]
 
 \smallskip\noindent
-\textbf{Combining (i)--(iii):} On evaluation modules, the
-spectral $R$-matrix equals the KZ monodromy (by the chain
-(iii-a)$\to$(iii-b)$\to$(iii-c)), which equals the quantum group
-$R$-matrix (by (ii)). The full Yang--Baxter structure is preserved:
-the spectral $R$-matrix satisfies YBE by
-Theorem~\ref{thm:YBE}, and the quantum group $R$-matrix satisfies
-YBE by the quasi-triangular structure of $U_q(\fg)$; the
-identification of the two on evaluation modules is compatible
+\textbf{Combining (i)--(iii):} On evaluation modules, the reduced
+spectral half-monodromy is the KZ half-monodromy, and
+Drinfeld--Kohno compares it with the quantum-group braiding after the
+associator/twist choice. The associator-controlled Yang--Baxter
+structure of Theorem~\ref{thm:YBE} is carried to the
+quasi-triangular structure of $U_q(\fg)$; the comparison on evaluation
+modules is compatible
 because the braided monoidal functor
 $\mathrm{ev} \colon \mathrm{Rep}_q(\fg) \to \cC_\partial^{\mathrm{red}}$
 preserves the braiding (this is the content of the identification).
 The associator $\Phi_{\mathrm{HT}}$ of
 Definition~\ref{def:ht-assoc} likewise reduces to the Drinfeld
-associator $\Phi_{\mathrm{KZ}}$ by the same one-loop collapse:
+associator $\Phi_{\mathrm{KZ}}$ by the same one-loop wheel/contact
+cancellation:
 the three-point $\FM_3$-integral reduces to the KZ three-point
 connection, whose monodromy is $\Phi_{\mathrm{KZ}}$. The pentagon
 and hexagon identities
@@ -1976,9 +2024,9 @@ evaluation-module sector the two braided monoidal categories
 coincide.
 \end{proof}
 
-\begin{remark}[Unconditional status]
+\begin{remark}[Status of the inputs]
 \label{rem:affine-unconditional}
-Every input to Theorem~\ref{thm:affine-monodromy-identification} is unconditional. The one-loop exactness of the affine half-space BV theory is proved in Theorem~\ref{thm:affine-half-space-bv}. The Koszulness of $V^k(\fg)$ follows from Theorem~\ref{thm:one-loop-koszul}. The unconditionality theorem (Theorem~\ref{thm:unconditionality}) guarantees the reduced monodromy machine. The Drinfeld--Kohno theorem is a classical result. No standing hypothesis remains: the result holds for any simple $\fg$ and any generic level $k$.
+The inputs to Theorem~\ref{thm:affine-monodromy-identification} carry one named hypothesis. The one-loop exactness of the affine half-space BV theory is proved in Theorem~\ref{thm:affine-half-space-bv}. The Koszulness of $V^k(\fg)$ is Theorem~\ref{thm:one-loop-koszul}, conditional on the loop-order spectral sequence (Conjecture~\ref{conj:one-loop-koszul}). The unconditionality theorem (Theorem~\ref{thm:unconditionality}) guarantees the reduced monodromy machine, and the Drinfeld--Kohno theorem is classical. For any simple $\fg$ and any generic level $k$ the result therefore holds conditionally on Conjecture~\ref{conj:one-loop-koszul}, with no further standing hypothesis.
 \end{remark}
 
 \begin{remark}[Spectral-to-categorical identification]
@@ -2012,12 +2060,12 @@ Let $\fg = \fsl_3$ with dual Coxeter number $h^\vee = 3$, and let $V = V_{(1,0)}
  \]
  The $d$-tensor piece $\mathcal{D}_{123}^{(-)}$ produces off-diagonal mixing between the two copies of $V_{(1,1)}$, proportional to the cubic Casimir difference $\Delta c_3 = c_3(2,0) - c_3(0,1) = 5$. For $\fsl_2$, $d_{abc} = 0$ and no such mixing occurs.
 
- \item \emph{Bar-complex identification}: By one-loop exactness of $V^k(\fsl_3)$ at generic $k$ \textup{(}Theorem~\textup{\ref{thm:one-loop-koszul})}, the $A_\infty$ operations $m_k = 0$ for $k \geq 3$, so the reduced HT connection is exactly the KZ connection. Therefore the bar-complex associator reproduces the Drinfeld--KZ associator identically, including the cubic Casimir contribution. By the Drinfeld--Kohno theorem, the monodromy identifies with the $U_q(\fsl_3)$ braiding and associator on evaluation modules.
+ \item \emph{Bar-complex identification}: By one-loop exactness of $V^k(\fsl_3)$ at generic $k$ \textup{(}Theorem~\textup{\ref{thm:one-loop-koszul})}, the reduced HT connection has no Virasoro wheel correction. Its finite class-$\mathbf L$ cubic transfer is the Lie-Jacobi associator, hence the reduced connection is the KZ connection. Therefore the bar-complex associator reproduces the Drinfeld--KZ associator identically, including the cubic Casimir contribution. By the Drinfeld--Kohno theorem, the monodromy identifies with the $U_q(\fsl_3)$ braiding and associator on evaluation modules.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-The computation is a direct verification. The split Casimir $\Omega = \sum_{i \neq j} E_{ij} \ot E_{ji} + \sum_{a,b} (A^{-1})_{ab} H_a \ot H_b$ has the stated eigenvalues by the formula $\Omega|_{V_\nu} = \frac{1}{2}(c_2(\nu) - c_2(\lambda) - c_2(\mu))$. For part~(ii), the Fierz decomposition is standard; the key point is that $\mathcal{D}_{123}^{(-)} \neq 0$ because the totally symmetric tensor $d_{abc}$ of $\fsl_3$ is nonvanishing. The off-diagonal matrix element on the multiplicity space of $V_{(1,1)}$ is proportional to $c_3(2,0) - c_3(0,1) = 35/9 + 10/9 = 5$. For part~(iii), one-loop exactness gives $m_k = 0$ for $k \geq 3$, and the reduced connection $\nabla_{\fS} = d + \Omega\,dz/((k+3)z)$ is the KZ connection for $\fsl_3$ at level $k$. The identification with $U_q(\fsl_3)$ then follows from Theorem~\ref{thm:affine-monodromy-identification} applied to $\fg = \fsl_3$.
+The computation is a direct verification. The split Casimir $\Omega = \sum_{i \neq j} E_{ij} \ot E_{ji} + \sum_{a,b} (A^{-1})_{ab} H_a \ot H_b$ has the stated eigenvalues by the formula $\Omega|_{V_\nu} = \frac{1}{2}(c_2(\nu) - c_2(\lambda) - c_2(\mu))$. For part~(ii), the Fierz decomposition is standard; the key point is that $\mathcal{D}_{123}^{(-)} \neq 0$ because the totally symmetric tensor $d_{abc}$ of $\fsl_3$ is nonvanishing. The off-diagonal matrix element on the multiplicity space of $V_{(1,1)}$ is proportional to $c_3(2,0) - c_3(0,1) = 35/9 + 10/9 = 5$. For part~(iii), one-loop exactness kills the wheel/contact corrections, and the finite Lie-Jacobi cubic layer is exactly the Drinfeld--KZ associator. Hence the reduced connection $\nabla_{\fS} = d + \Omega\,dz/((k+3)z)$ is the KZ connection for $\fsl_3$ at level $k$. The identification with $U_q(\fsl_3)$ then follows from Theorem~\ref{thm:affine-monodromy-identification} applied to $\fg = \fsl_3$.
 \end{proof}
 
 \begin{remark}[The cubic Casimir enters through the associator, not the $R$-matrix]
@@ -2077,7 +2125,13 @@ Without the quotient $\pi$, the generic-$q$ bar-complex braid representation liv
 \label{cor:jones-polynomial}
 \index{Jones polynomial|textbf}
 \index{Kontsevich integral}
-For $\fg = \mathfrak{sl}_2$ at positive integer level $k$, the bar complex integrals over $\FM_n(\CC) \times \Conf_n(\RR)$, evaluated on the fundamental weight system of $\mathfrak{sl}_2$, followed by the negligible-ideal quotient $\pi$ of Proposition~\ref{prop:rt-functor-via-negligible-quotient} and quantum-trace closure, compute the colored Jones polynomial $J_K(q)$ of a framed knot $K$ at $q = e^{i\pi/(k+2)}$.
+For $\fg = \mathfrak{sl}_2$ at positive integer level $k$, the bar
+complex integrals over $\FM_n(\CC) \times \Conf_n(\RR)$, evaluated on
+tilting colours in the Andersen--Paradowski alcove and followed by the
+negligible-ideal quotient $\pi$ of
+Proposition~\ref{prop:rt-functor-via-negligible-quotient} and
+quantum-trace closure, compute the corresponding colored Jones value
+$J_K(q)$ of a framed knot $K$ at $q = e^{i\pi/(k+2)}$.
 \end{corollary}
 
 \begin{proof}
@@ -2089,7 +2143,14 @@ The bar complex of $V^k(\mathfrak{sl}_2)$, viewed as a logarithmic $\SCchtop$-al
 \[
  \rho_n^{\mathrm{HT}} = \rho_n^{\mathrm{KZ}} \colon B_n \longrightarrow \Aut(V^{\otimes n})
 \]
-on tensor powers of any finite-dimensional $\mathfrak{sl}_2$-module~$V$. The integration domain $\FM_n(\CC) \times \Conf_n(\RR)$ parametrises the $E_1$ bar coalgebra: the $\FM_n(\CC)$ factor carries the bar differential and the $\Conf_n(\RR)$ factor carries the $E_1$ coproduct implementing the group-like expansion.
+on tensor powers of finite-dimensional $\mathfrak{sl}_2$ modules before
+root-of-unity semisimplification. At the root of unity the MTC colour
+set is the alcove quotient of tilting modules; non-alcove colours are
+seen only through their image after negligible morphisms are killed.
+The integration domain $\FM_n(\CC) \times \Conf_n(\RR)$ parametrises
+the $E_1$ bar coalgebra: the $\FM_n(\CC)$ factor carries the bar
+differential and the $\Conf_n(\RR)$ factor carries the $E_1$ coproduct
+implementing the group-like expansion.
 
 \medskip
 \noindent\textbf{Step 2 (Negligible-ideal quotient).}
@@ -2137,7 +2198,7 @@ The bulk-to-boundary functor is the half-space quantization of Theorem~\textup{\
 Theorem~\ref{thm:affine-monodromy-identification} proves the monodromy identification for evaluation modules of the affine lineage. Three natural extensions remain:
 \begin{enumerate}[label=\textup{(\alph*)}]
  \item \emph{Beyond evaluation modules}: for infinite-dimensional modules in category $\cO_k(\widehat{\fg})$, the identification $\rho^{\mathrm{HT}} = \rho^{\mathrm{KZ}}$ requires additional convergence analysis of the $\h$-adic retract (Proposition~\ref{prop:analytic-retract}). The DK-2 equivalence $\cO_k^{\mathrm{int}}(\widehat{\fg}) \simeq \mathrm{Rep}_q(\fg)$ of Kazhdan--Lusztig~\cite{KL93} suggests this should hold.
- \item \emph{Beyond the affine lineage}: for $\mathcal{W}$-algebras obtained by Drinfeld--Sokolov reduction, the Swiss-cheese transferred operations $m_k^{\mathrm{SC}}$ ($k \geq 3$) do not vanish. The one-loop collapse mechanism breaks, and the full $A_\infty$ superconnection contributes. The reduced monodromy is then the $\mathcal{W}$-algebra $R$-matrix, which should equal the spectral $R$-matrix of the $\mathcal{W}$-Yangian; this is the content of Conjecture~\ref{conj:rmatrix} in the non-formal Swiss-cheese regime.
+ \item \emph{Beyond the affine lineage}: for $\mathcal{W}$-algebras obtained by Drinfeld--Sokolov reduction, the Swiss-cheese transferred operations $m_k^{\mathrm{SC}}$ ($k \geq 3$) do not vanish. The one-loop wheel/contact cancellation breaks, and the full $A_\infty$ superconnection contributes. The reduced monodromy is then the $\mathcal{W}$-algebra $R$-matrix, which should equal the spectral $R$-matrix of the $\mathcal{W}$-Yangian; this is the content of Conjecture~\ref{conj:rmatrix} in the non-formal Swiss-cheese regime.
  \item \emph{Higher genus}: at genus $g \geq 1$, the KZ connection is replaced by the KZB connection (Computation~\ref{comp:genus1-kzb}), and the monodromy acquires modular corrections controlled by the curvature $\kappaChHodge(\cA) \cdot \omega_g$. The identification should lift to elliptic and higher-genus $R$-matrices, connecting to the chromatic tower (Conjecture~\ref{conj:chromatic}).
 \end{enumerate}
 \end{remark}

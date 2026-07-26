@@ -8,8 +8,10 @@ with the campaign's requested external-source pair:
   verified_against:
     Costello-Francis-Gwilliam 2026 arXiv:2602.12412
 
-The test keeps the scope check minimal and structural: non-critical levels
-topologise, the critical level does not.
+The test keeps the scope check small but mathematical: non-criticality is the
+invertibility of the Sugawara denominator, topologisation is on
+Q_CS-cohomology, and the raw-chain-level strengthening is not part of this
+claim.
 """
 
 from __future__ import annotations
@@ -17,22 +19,30 @@ from __future__ import annotations
 from compute.lib.independent_verification import independent_verification
 
 
-def _e3_topological_holds_for_affine_km_noncritical() -> bool:
-    """Structural oracle.
+def _sugawara_denominator(k_plus_hdual: int) -> int:
+    return 2 * k_plus_hdual
+
+
+def _affine_e3_topological_scope(
+    *,
+    k_plus_hdual: int,
+    has_hcs_boundary: bool,
+    q_cohomology: bool,
+    strict_raw_chain_level: bool,
+) -> bool:
+    """Decision procedure for the affine E3-topological theorem.
 
     Costello-Li supplies the 3d HT theory via descent from the 6d twist on
     the affine/Kac-Moody side; CFG independently constructs the same 3d HT
-    theory by direct BV quantisation of Chern-Simons and identifies the
-    genus-0 factorisation-homology trace with Reshetikhin-Turaev. The test
-    records the shared structural scope: non-critical levels topologise,
-    the critical level does not.
+    theory by direct BV quantisation of Chern-Simons.  The present theorem
+    adds the Sugawara antighost primitive on Q_CS-cohomology.  It deliberately
+    does not include the strict raw-chain-level strengthening.
     """
-    topologised_at_levels = {"k_generic", "k_integer_positive", "k_admissible"}
-    fails_at_levels = {"k_critical"}
     return (
-        topologised_at_levels.isdisjoint(fails_at_levels)
-        and "k_generic" in topologised_at_levels
-        and "k_critical" in fails_at_levels
+        _sugawara_denominator(k_plus_hdual) != 0
+        and has_hcs_boundary
+        and q_cohomology
+        and not strict_raw_chain_level
     )
 
 
@@ -53,4 +63,27 @@ def _e3_topological_holds_for_affine_km_noncritical() -> bool:
     ),
 )
 def test_e3_topological_km_noncritical():
-    assert _e3_topological_holds_for_affine_km_noncritical()
+    assert _affine_e3_topological_scope(
+        k_plus_hdual=3,
+        has_hcs_boundary=True,
+        q_cohomology=True,
+        strict_raw_chain_level=False,
+    )
+    assert not _affine_e3_topological_scope(
+        k_plus_hdual=0,
+        has_hcs_boundary=True,
+        q_cohomology=True,
+        strict_raw_chain_level=False,
+    )
+    assert not _affine_e3_topological_scope(
+        k_plus_hdual=3,
+        has_hcs_boundary=True,
+        q_cohomology=False,
+        strict_raw_chain_level=False,
+    )
+    assert not _affine_e3_topological_scope(
+        k_plus_hdual=3,
+        has_hcs_boundary=True,
+        q_cohomology=True,
+        strict_raw_chain_level=True,
+    )

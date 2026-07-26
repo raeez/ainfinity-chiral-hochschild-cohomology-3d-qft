@@ -142,11 +142,11 @@ def virasoro_data():
 
     Central charge: c (the parameter).
     kappa(Vir_c) = c/2.
-    Koszul dual: Vir_{26-c}.
-    kappa(Vir_{26-c}) = (26-c)/2.
+    Same-family line-side comparison representative: Vir_{26-c}.
+    kappa(Vir_{26-c}) = (26-c)/2 on that comparison surface.
     kappa sum = c/2 + (26-c)/2 = 13.
 
-    CRITICAL: Virasoro self-dual at c=13, NOT c=26.
+    CRITICAL: the comparison representative is fixed at c=13, NOT c=26.
 
     Shadow archetype: Mixed (M), depth infinity.
     """
@@ -287,10 +287,11 @@ def chir_hoch_dimensions(family: str, max_degree: int = 6,
                          rank: Optional[int] = None) -> List[int]:
     """Return ChirHoch^n(A) dimensions for n = 0, ..., max_degree.
 
-    For Koszul chiral algebras (Theorem H), ChirHoch*(A) is a polynomial
-    ring in the Casimir generators (for Hochschild COHOMOLOGY as a ring).
-    But at the level of the bar complex / Poincare series, the chain-level
-    computation gives the EXTERIOR algebra on the generators:
+    For Koszul chiral algebras (Theorem H), ChirHoch*(A) has a bounded
+    amplitude/Hilbert profile. This is not a polynomial-ring assertion
+    about Hochschild cohomology as a cup algebra. At the level of the
+    bar complex / Poincare series, the chain-level computation gives
+    the EXTERIOR algebra on the generators:
 
       ChirHoch^n(A) = dim Lambda^n(generators) = binom(num_gen, n).
 
@@ -643,23 +644,25 @@ def total_dimension(family: str,
 
 
 # =========================================================================
-# Virasoro self-duality check (critical pitfall)
+# Virasoro line-comparison fixed-point check
 # =========================================================================
 
-def virasoro_self_dual_point():
-    """The Virasoro algebra is self-dual at c = 13, NOT c = 26.
+def virasoro_line_comparison_fixed_point():
+    """The same-family Virasoro line comparison is fixed at c = 13.
 
-    Vir_c^! = Vir_{26-c}. Self-dual when c = 26-c, i.e. c = 13.
-    kappa(Vir_13) = 13/2. kappa(Vir_13!) = 13/2. Sum = 13.
+    On the strict same-family line-side comparison surface the
+    representative has central charge 26-c.  The fixed-point equation
+    c = 26-c gives c = 13.  kappa(Vir_13) = 13/2 and the comparison
+    representative has kappa = 13/2. Sum = 13.
 
     Returns:
-        Dict with self-duality data
+        Dict with comparison fixed-point data
     """
     return {
-        'self_dual_c': S(13),
+        'fixed_c': S(13),
         'NOT_26': True,
-        'kappa_at_self_dual': Rational(13, 2),
-        'kappa_sum_at_self_dual': S(13),
+        'kappa_at_fixed_point': Rational(13, 2),
+        'kappa_sum_at_fixed_point': S(13),
     }
 
 

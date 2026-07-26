@@ -182,7 +182,7 @@ def test_mellin_heisenberg_2pt_matches_kac_moody_OPE():
 #
 # Three independent verification paths:
 #  (V2-DA) dimensional analysis on the Mellin pole ladder;
-#  (V2-LT) Hamada-Shiu 2017, Li-Strominger 2017 higher-soft formulae;
+#  (V2-LT) Hamada-Shiu kinematics + celestial soft-current algebra;
 #  (V2-LC) r=2 Weinberg, r=3 Cachazo-Strominger limiting cases.
 # ===========================================================================
 
@@ -194,39 +194,39 @@ def test_mellin_heisenberg_2pt_matches_kac_moody_OPE():
         "prop:uch-mellin-shadow",
     ],
     verified_against=[
-        "DA: Mellin pole at Delta_s = 4 - r corresponds to sub^{r-2}-soft",
-        "LT: Hamada-Shiu arXiv:1801.05528 eq (3.12); "
-        "Li-Strominger arXiv:1802.03148 sec 4",
+        "DA: reduced pole Delta_s = 3 - r and stress pole "
+        "Delta_s^st = 4 - r correspond to sub^{r-2}-soft",
+        "LT: Hamada-Shiu arXiv:1801.05528 kinematic operator; "
+        "GHPS/Strominger celestial soft-current algebra",
         "LC: Weinberg (r=2) recovers leading soft-graviton pole",
     ],
     disjoint_rationale=(
         "The theorem is derived in the chapter from the Mellin-shadow "
         "dictionary and Theorem H. Verification uses dimensional "
         "analysis on the pole ladder (pure counting), external literature "
-        "match with Hamada-Shiu and Li-Strominger (independent proof via "
-        "angular-momentum insertions), and limiting case reduction to "
+        "comparison with Hamada-Shiu/GHPS/Strominger kinematic operators, "
+        "and limiting case reduction to "
         "Weinberg at r=2 (independently derived from Ward identities)."
     ),
 )
 def test_soft_theorem_pole_ladder_alignment():
-    """Mellin pole at Delta_s = 4 - r encodes sub^{r-2}-leading soft.
+    """Reduced and stress-tensor Mellin poles encode sub^{r-2}-soft.
 
-    For each r in {2,3,4,5,6}, the Mellin pole Delta_s = 4 - r must
-    correspond to the sub^{r-2}-leading soft theorem. We verify the
-    ladder alignment:
-      r=2: Delta_s = 2 (Weinberg, leading)
-      r=3: Delta_s = 1 (Cachazo-Strominger, subleading)
-      r=4: Delta_s = 0 (Hamada-Shiu, sub-subleading)
-      r=5: Delta_s = -1 (Li-Strominger)
-      r=6: Delta_s = -2 (higher)
+    For each r in {2,3,4,5,6}, the reduced PSS pole is
+    Delta_s = 3 - r and the gravitational stress-tensor pole is
+    Delta_s^st = 4 - r.  Both encode the sub^{r-2}-leading theorem.
     """
-    expected_Delta_s = {2: 2, 3: 1, 4: 0, 5: -1, 6: -2}
-    for r, Delta_expected in expected_Delta_s.items():
-        computed = 4 - r
-        assert computed == Delta_expected, (
+    expected_reduced = {2: 1, 3: 0, 4: -1, 5: -2, 6: -3}
+    expected_stress = {2: 2, 3: 1, 4: 0, 5: -1, 6: -2}
+    for r in expected_reduced:
+        reduced = 3 - r
+        stress = 4 - r
+        assert reduced == expected_reduced[r], (
             f"At sub^{{{r-2}}}-leading soft, Mellin pole "
-            f"Delta_s should be {Delta_expected}, got {computed}"
+            f"Delta_s should be {expected_reduced[r]}, got {reduced}"
         )
+        assert stress == expected_stress[r]
+        assert stress == reduced + 1
 
 
 @independent_verification(
@@ -274,14 +274,14 @@ def test_soft_coefficient_weinberg_and_cachazo_strominger():
     ],
     verified_against=[
         "NE: S_4 = 10/[c(5c+22)] at c=100 agrees with ~ 2/c^2 asymptote",
-        "LT: Hamada-Shiu eq (3.12) at sub-sub leading order",
+        "LT: Hamada-Shiu kinematic operator at sub-sub leading order",
         "CF: cross-family limit c -> inf reproduces free-field soft factor",
     ],
     disjoint_rationale=(
         "Chapter derives S_4 from the bar complex of Virasoro; the "
         "verification uses numerical evaluation against the asymptote "
-        "2/c^2 at large c (AP178), external Hamada-Shiu coefficient "
-        "match, and a cross-family check against the c -> inf limit "
+        "2/c^2 at large c (AP178), external Hamada-Shiu operator-shape "
+        "comparison, and a cross-family check against the c -> inf limit "
         "where S_4 -> 0 and the free-field soft factor is known."
     ),
 )
@@ -366,7 +366,7 @@ def test_heisenberg_kappa_equals_level():
 #
 # Three independent verification paths:
 #  (V4-LT) Vol I census + AP8 self-duality at c=13;
-#  (V4-LC) c=13 boundary for Koszul self-duality;
+#  (V4-LC) c=13 boundary for the Virasoro line-comparison fixed point;
 #  (V4-NE) S_2 = c/2 at multiple c values, independent of S_4.
 # ===========================================================================
 
@@ -390,14 +390,14 @@ def test_heisenberg_kappa_equals_level():
         "of the stress-tensor OPE. None of these depend on the chapter."
     ),
 )
-def test_virasoro_self_duality_at_c_equals_13():
-    """Virasoro is Koszul self-dual at c=13.
+def test_virasoro_line_comparison_fixed_at_c_equals_13():
+    """The Virasoro line-side comparison is fixed at c=13.
 
     From AP8: kappa(Vir_c) + kappa(Vir_{c'}) = 13 (Virasoro normalization).
-    Since kappa(Vir_c) = c/2, we get c + c' = 26, and self-duality at
+    Since kappa(Vir_c) = c/2, we get c + c' = 26, and the fixed point
     c = c' = 13 gives 13 + 13 = 26.
     """
-    # Self-dual fixed point
+    # Fixed point of the line-side comparison.
     c = 13
     c_dual = 26 - c
     assert c == c_dual, f"c=13 is fixed point of c -> 26-c, got c'={c_dual}"

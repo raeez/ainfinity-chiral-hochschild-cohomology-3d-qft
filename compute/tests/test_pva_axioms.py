@@ -421,7 +421,7 @@ class TestVirasoPVA:
     def test_ope_to_lambda_conversion(self):
         """The OPE coefficient c/2 at (z-w)^{-4} becomes c/12 in lambda-bracket.
 
-        Factor: c/2 * lambda^3 / 3! = c/2 * lambda^3 / 6 = c/12 * lambda^3.
+        Factor: T_(3)T * lambda^3 / 3! = (c/2) * lambda^3 / 6 = (c/12) * lambda^3.
         CRITICAL: getting this 1/3! factor wrong is a common error.
         """
         from lib.examples.virasoro import ope_to_lambda_bracket_coefficient_check

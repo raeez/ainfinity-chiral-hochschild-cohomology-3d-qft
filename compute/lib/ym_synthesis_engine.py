@@ -150,7 +150,8 @@ def tangent_to_center_dimension(algebra_type: str, **params) -> int:
     For the standard families:
     - Heisenberg H_k: Z(H_k^!) = span{level} => dim = 1
     - Affine sl_2 at generic k: Z(g_k^!) = span{level} => dim = 1
-    - Virasoro Vir_c: Z(Vir_{26-c}^!) = span{central charge} => dim = 1
+    - Virasoro Vir_c: the line-side Vir_{26-c} centre has
+      span{central charge} => dim = 1
 
     The single deformation parameter is the level (for KM), the level
     (for Heisenberg), or the central charge (for Virasoro).
@@ -416,7 +417,7 @@ def boundary_brst_data(algebra_type: str, **params) -> BoundaryBRSTData:
     kdata = _kappa_data(algebra_type, **params)
 
     names = {
-        'heisenberg': ('B(H_k)', 'Omega(Sym^ch(V*))'),
+        'heisenberg': ('B(H_k)', 'Omega(curved Sym^ch(V*[1]))'),
         'affine_sl2': ('B(g_k)', 'Omega(g_{k\'}^!)'),
         'virasoro': ('B(Vir_c)', 'Omega(Vir_{26-c})'),
     }

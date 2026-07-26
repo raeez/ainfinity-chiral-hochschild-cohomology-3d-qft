@@ -256,7 +256,7 @@ def test_raw_direct_sum_d_squared_fails_class_M():
     assert not _raw_direct_sum_d_squared_nonzero(Fraction(-22, 5), 2)
     # Numerical sanity on BPZ value at c=1: S_4 = 10 / (1 * 27) = 10/27.
     assert _s4_virasoro(Fraction(1)) == Fraction(10, 27)
-    # Sanity at c=13 (Virasoro self-dual): S_4 = 10 / (13 * 87) = 10/1131.
+    # Sanity at c=13 (line-comparison fixed point): S_4 = 10 / (13 * 87) = 10/1131.
     assert _s4_virasoro(Fraction(13)) == Fraction(10, 1131)
 
 
@@ -384,4 +384,4 @@ if __name__ == "__main__":
     test_pro_ambient_H2_zero_class_M()
     test_j_adic_H2_zero_class_M()
     test_three_ambients_equivalent()
-    print("curved-Dunn raw direct-sum Platonic reconstitution: all 4 IV tests pass.")
+    print("curved-Dunn raw direct-sum structural reconstitution: all 4 IV tests pass.")

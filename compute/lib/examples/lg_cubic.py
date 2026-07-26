@@ -13,13 +13,13 @@ The A-infinity structure from BV-BRST around the TRIVIAL vacuum phi=0 has:
 The superpotential W enters through HIGHER operations, not m_1:
   m_2: free product + O(g) correction from one vertex + one propagator
   m_3: nonzero, proportional to g (from cubic vertex W''' = 2g)
-  m_{k>=4} = 0 by degree counting
+  m_{k>=4} = 0 as primitive operations because W^(k)=0 for k>=4
 
 Physical reasoning:
 - m_1 = Q is the linearized BRST differential around phi=0
 - W'(0) = 0, W''(0) = 0 for cubic W, so the linearization is free
 - The cubic vertex W'''=2g is the interaction vertex
-- m_k arises from tree-level Feynman diagrams with (k-2) cubic vertices
+- higher cubic trees are Stasheff composites of m_2 and m_3
 
 Cohomology: H*(A, Q) = C (same as free theory — each (phi_n, psi_n)
 is an acyclic doublet under Q).
@@ -127,7 +127,7 @@ def m_k_lg(k, args, g):
     k=1: Q_free (differential)
     k=2: commutative product (free part; g-correction not yet implemented)
     k=3: 2g * a * b * c (cubic vertex)
-    k>=4: 0 (by degree counting — see check_truncation_degree_counting)
+    k>=4: 0 as a primitive operation because W^(k)=0 for cubic W
 
     Parameters:
         k: arity
@@ -146,82 +146,14 @@ def m_k_lg(k, args, g):
 
 
 def check_truncation_degree_counting(k):
-    """Verify m_{k>=4} = 0 by degree counting for cubic W = g*phi^3/3.
+    """Legacy helper for the cubic truncation statement.
 
-    For tree-level Feynman diagrams with k external legs and cubic vertices:
-
-    Tree topology: V vertices, E internal edges (propagators).
-      - Each vertex is trivalent (3 legs from W''')
-      - Euler relation: V - E = 1 (tree)
-      - Leg counting: 3V = k + 2E (each vertex has 3 legs; external + 2×internal)
-      - Solving: E = (3V - k)/2, V = E + 1 = (3V - k)/2 + 1
-        => 2V = 3V - k + 2 => V = k - 2, E = (3(k-2) - k)/2 = (2k - 6)/2 = k - 3
-
-    Degree budget on C × R:
-      - Each vertex W''' contributes: ghost number +1 (from the antifield coupling)
-      - Each propagator K(t,z) contributes: ghost number -1
-        (K has form degree (0,0) on C × R in our conventions)
-      - Ghost contribution: V·(+1) + E·(-1) = (k-2) - (k-3) = 1
-
-    The m_k operation has total degree |m_k| = 1 - k.
-
-    The amplitude for a tree diagram is a differential form on
-    FM_k(C) × R^k of degree equal to:
-      (form degree on C) + (form degree on R) + (ghost number)
-
-    For the integral to be nonzero, the form degree must match the
-    dimension of the integration domain.
-
-    FM_k(C) has real dimension 2(k-1) (k-1 complex coordinates after
-    translation fixing). The time-ordered integral on R^k has dimension k-1
-    (after time-ordering fixes one time).
-
-    Total integration dimension: 2(k-1) + (k-1) = 3(k-1).
-
-    The amplitude form degree from E propagators and V vertices:
-      Each propagator K(t,z) = Θ(t)/(2πz) gives form degree 0 on C
-      but the full Feynman rules include d^2z integrations.
-
-    Actually, let me count more carefully for each operation:
-      - k=2: V=0, E=-1 — no tree diagram possible! m_2 comes from the
-        propagator directly (not a tree with vertices). This is correct:
-        the free m_2 has V=0 vertices.
-
-      - k=3: V=1, E=0. One cubic vertex, no propagators.
-        Ghost: 1. Form degree on FM_3: need to integrate over FM_3(C)
-        which has dim_R = 4 (two complex coordinates after fixing z_3).
-        The vertex gives a 0-form (it's just a coupling constant).
-        The measure provides the form degree. ✓ (m_3 ≠ 0)
-
-      - k=4: V=2, E=1. Two cubic vertices connected by one propagator.
-        Ghost: 2 - 1 = 1. Form degree budget:
-        FM_4(C) has dim_R = 6. One propagator provides form degree 0
-        (it's Θ(t)/z). The two vertices provide 0 each.
-        MISSING: 6 form degrees from the measure.
-        The integration over the internal vertex position provides 3
-        (one complex + one real coordinate). Still short.
-
-        MORE CAREFULLY: The amplitude is a form on FM_4(C) of top degree
-        (since we integrate over all of FM_4). It must be a 6-form.
-        The only forms come from the holomorphic propagator 1/(z_i - z_j)
-        and the differential forms dz_i ∧ d̄z_i. For k=4 with 1 propagator:
-        we get 1/(z_a - z_b) from the propagator, which is a 0-form,
-        times the vertex contributions which are constants.
-        The holomorphic form degree is 0 (no dz_i from the propagator alone).
-        We need 3 holomorphic + 3 antiholomorphic form degrees.
-        With only 1 propagator, the form degree is insufficient.
-
-        Therefore m_4 = 0 by form degree counting. ✓
-
-    GENERAL ARGUMENT: For k external legs, we need form degree 2(k-1) on FM_k(C).
-    Each propagator provides holomorphic form degree 0 (it's meromorphic, not a form).
-    The dz ∧ dz̄ measures for the E = k-3 internal vertices provide 2(k-3) form degrees.
-    Remaining: 2(k-1) - 2(k-3) = 4 form degrees must come from somewhere.
-    For k=3: 4 - 0 = 4, provided by the external measure. ✓
-    For k>=4: the E propagators and V vertices cannot supply enough form degree.
+    The primitive k-ary operation is the k-th Taylor coefficient W^(k).
+    For W=g*phi^3/3, W'''=2g and W^(k)=0 for k>=4. Trees with several
+    cubic vertices are Stasheff composites, not new primitive operations.
 
     Returns:
-        dict with tree topology data and degree analysis
+        dict with tree topology data and Taylor-coefficient analysis
     """
     if k < 2:
         return {'arity': k, 'error': 'arity must be >= 2'}
@@ -243,21 +175,6 @@ def check_truncation_degree_counting(k):
     ghost_degree = V - E  # = 1 for all k >= 3
 
     # Form degree analysis
-    fm_dim = 2 * (k - 1)  # real dimension of FM_k(C)
-    form_from_internal = 2 * E  # dz∧dz̄ for each internal integration
-    form_deficit = fm_dim - form_from_internal  # = 2(k-1) - 2(k-3) = 4
-
-    # For k=3: deficit = 4, supplied by external kinematics. OK.
-    # For k>=4: deficit = 4 but there are additional propagators that
-    # are 0-forms (meromorphic), so the form degree is insufficient.
-    # Actually for k>=4, the propagators contribute form degree 0 each,
-    # and the internal vertex integrations contribute 2 each.
-    # Total form degree available: 2E = 2(k-3).
-    # Need: 2(k-1). Deficit: 4.
-    # The external legs contribute form degree 0 (they're evaluated at fixed points).
-    # So for k >= 4, the amplitude is a form of degree 2(k-3) < 2(k-1),
-    # which cannot be integrated over FM_k(C). Therefore m_k = 0.
-
     vanishes = (k >= 4)
 
     return {
@@ -266,11 +183,10 @@ def check_truncation_degree_counting(k):
         'internal_edges': E,
         'ghost_degree': ghost_degree,
         'expected_mk_degree': 1 - k,
-        'fm_dimension': fm_dim,
-        'form_degree_available': 2 * E,
-        'form_deficit': form_deficit,
+        'primitive_derivative_order': k,
+        'taylor_coefficient_zero': vanishes,
         'vanishes': vanishes,
-        'reason': 'form degree insufficient' if vanishes else 'nonzero' if k == 3 else 'free propagator',
+        'reason': "W^(k)=0 for cubic W" if vanishes else "W''' gives the cubic operation" if k == 3 else 'free product',
     }
 
 

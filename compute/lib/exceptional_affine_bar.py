@@ -477,12 +477,12 @@ def euler_eta(name: str) -> Dict[str, Any]:
     - E₇: χ = -1 + η^{133}
     - E₈: χ = -1 + η^{248}
 
-    The significance: η^{dim g} counts the partition function of dim(g)
+    The significance: η^{-dim g} counts the oscillator character of dim(g)
     free bosons, reflecting the fact that the affine Lie algebra at generic
     level is "the same size as" dim(g) free fields (the Wakimoto
     free-field realization makes this precise).
 
-    Physical interpretation: the partition function
+    Scalar character:
         Z(V_k(g); q) = q^{-dim(g)/24} / η(q)^{dim(g)}
                       = q^{-c_eff/24} Σ d(n) q^n
     where c_eff = dim(g)·k/(k+h∨) is the effective central charge and

@@ -247,7 +247,106 @@ def opposite_involution(word: List[str]) -> List[str]:
 
 
 # =========================================================================
-# 6. STANDARD EXAMPLE: COMMUTATIVE m2 (POLYNOMIAL RING)
+# 6. BORDERED DIAGONAL BICOMODULE AND ANNULAR SIGN
+# =========================================================================
+
+def bordered_diagonal_bicomodule_profile(p: int, q: int) -> Dict[str, object]:
+    """Return the bordered FM chain model for the diagonal bicomodule.
+
+    The profile records the three codimension-one degeneration types of
+    Conf_{p,q}(H), the diagonal A-bimodule convention, and the residue
+    differential pieces used in the manuscript theorem.
+    """
+    if p < 0 or q < 0:
+        raise ValueError("numbers of interior and boundary points must be nonnegative")
+
+    stratum_types = []
+    if p >= 2:
+        stratum_types.append(
+            {
+                "type": "interior-interior",
+                "local_equation": "z_i -> z_j",
+                "operation": "m_S",
+                "residue": "Res_{D_S^int}",
+            }
+        )
+    if q >= 2:
+        stratum_types.append(
+            {
+                "type": "boundary-boundary",
+                "local_equation": "x_a -> x_b",
+                "operation": "mu_I",
+                "residue": "Res_{D_I^boundary}",
+            }
+        )
+    if p >= 1 and q >= 1:
+        stratum_types.append(
+            {
+                "type": "interior-boundary",
+                "local_equation": "Im z_i -> 0 and Re z_i -> x_a",
+                "operation": "nu_{S,I}",
+                "residue": "Res_{D_{S,I}^mix}",
+            }
+        )
+
+    return {
+        "compactification": "Confbar_{p,q}(H)",
+        "forest_roots": ("rho_bulk", "rho_boundary"),
+        "interior_points": p,
+        "boundary_points": q,
+        "stratum_types": tuple(stratum_types),
+        "diagonal_bimodule": "Delta_A = _A A_A",
+        "left_action": "negative boundary approach",
+        "right_action": "positive boundary approach",
+        "chain_model": (
+            "D_A^{p,q} = C_log(Confbar_{p,q}(H)) "
+            "tensor A^otimes p tensor A^otimes q"
+        ),
+        "differential": {
+            "d_int": "sum_S Res_{D_S^int} tensor m_S",
+            "d_boundary": "sum_I Res_{D_I^boundary} tensor mu_I",
+            "d_mix": "sum_{S,I} Res_{D_{S,I}^mix} tensor nu_{S,I}",
+        },
+    }
+
+
+def annular_cyclic_rotation_sign(degrees: List[int]) -> int:
+    """Compute the desuspended Koszul sign for one cyclic rotation.
+
+    The action is
+        [s^-1 a_1|...|s^-1 a_n] ->
+        (-1)^((|a_n|-1) * sum_{i<n}(|a_i|-1))
+        [s^-1 a_n|s^-1 a_1|...|s^-1 a_{n-1}].
+    """
+    if not degrees:
+        raise ValueError("cyclic rotation sign requires a nonempty word")
+
+    bar_degrees = [degree - 1 for degree in degrees]
+    exponent = bar_degrees[-1] * sum(bar_degrees[:-1])
+    return -1 if exponent % 2 else 1
+
+
+def annular_diagonal_closure_profile(n: int) -> Dict[str, object]:
+    """Return the annular closure profile of the diagonal bicomodule."""
+    if n < 0:
+        raise ValueError("annular arity must be nonnegative")
+
+    return {
+        "annular_closure": (
+            "D_A^ann = direct_sum_n C_log(Conf_n(S^1 x R_{>=0})) "
+            "tensor_{Z/n} A^otimes n"
+        ),
+        "arity": n,
+        "coinvariants": "Z/n cyclic coinvariants" if n else "unit sector",
+        "cyclic_sign_formula": (
+            "(-1)^((|a_n|-1) * sum_{i<n} (|a_i|-1))"
+        ),
+        "first_genus_one_data": ("R-matrix monodromy", "trace pairing"),
+    }
+
+
+# =========================================================================
+# 7. STANDARD EXAMPLE: COMMUTATIVE m2 (POLYNOMIAL RING)
 # =========================================================================
 
 def commutative_m2(a: str, b: str) -> Dict[str, Fraction]:

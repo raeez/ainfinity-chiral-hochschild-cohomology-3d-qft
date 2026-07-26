@@ -211,12 +211,13 @@ def test_inversion_not_koszul_duality():
       duality and DIFFERS from BarTwc(A) as a vector-space-graded
       object (different homological degrees).
 
-    Probe: Heisenberg has Koszul dual H_{-k} (Theorem D; kappa-sum 0)
-    of the SAME finite generator count, while BarTwc(H_k) is
-    infinite-dimensional in toto. Hence A^! != BarTwc(A) as objects.
+    Probe: the sign-flipped open-colour model H_{-k} has the same
+    finite generator count, while BarTwc(H_k) is infinite-dimensional
+    in toto. The chiral Koszul dual is Sym^ch(V*), not H_{-k}; in
+    either row A^! differs from BarTwc(A) as an object.
     """
     h = heisenberg_data()
-    # Koszul dual H_{-k}: same single-generator structure.
+    # Sign-flipped open-colour row: same single-generator structure.
     assert h.num_generators == 1
     # Bar complex: cofree on s^{-1} bar A; infinite-dimensional total.
     assert _bar_complex_total_dimension_at_depth(h.num_generators, depth=20) > 1

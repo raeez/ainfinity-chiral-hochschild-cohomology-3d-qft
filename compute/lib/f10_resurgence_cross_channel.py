@@ -179,8 +179,11 @@ def delta_F_g_W3(g: int, c: Union[int, float, Fraction]) -> Fraction:
 
 
 def F_g_scal(g: int, kappa: Union[int, float, Fraction]) -> Fraction:
-    r"""Scalar genus-$g$ free energy: $F_g^{\mathrm{scal}} = \kappa
-    \cdot \lambda_g^{\mathrm{FP}}$. Uniform-weight lane."""
+    r"""Scalar genus-$g$ free energy:
+    $F_g^{\mathrm{scal}} =
+    \kappaChHodge(\cA)\lambda_g^{\mathrm{FP}}$.
+    The ``kappa`` argument is the numeric value of
+    $\kappaChHodge(\cA)$ on the uniform-weight lane."""
     if g not in LAMBDA_FP:
         raise ValueError(f"lambda_{g}^FP not tabulated; available g <= 5")
     if not isinstance(kappa, Fraction):
@@ -208,7 +211,7 @@ class CrossInstantonData:
     Fields:
         A_scal: scalar instanton action $(2\pi)^2$.
         R_g:   large-$c$ ratio $\delta F_g^{\mathrm{cross}}
-               / (\kappa \cdot \lambda_g^{\mathrm{FP}})$ at
+               / (\kappaChHodge(\cA) \cdot \lambda_g^{\mathrm{FP}})$ at
                genera $g \in \{2, 3, 4\}$.
         A_cross_lower_bound: lower bound for $|A_{\mathrm{cross}}|$
                via the Gevrey-$1$ second-difference test.
@@ -441,7 +444,9 @@ def transseries_partition_function(
                      e^{-n A_{\mathrm{cross}}/\hbar} Z^{(n)}(\hbar) ,
 
     where
-      * $Z^{\mathrm{pert}} = \kappa \cdot (\sqrt{\hbar}/2)/\sin(\sqrt{\hbar}/2)$
+      * $Z^{\mathrm{pert}} =
+        \kappaChHodge(\cA)\cdot
+        (\sqrt{\hbar}/2)/\sin(\sqrt{\hbar}/2)$
         is the scalar perturbative completion (Vol II
         Theorem thm:thqg-I-perturbative-finiteness).
       * The cross-channel correction
@@ -705,7 +710,7 @@ def f10_resurgent_structure_report(c_values: Optional[List[float]] = None
         'borel_pole_pattern_remark': (
             'Poles at xi = n * A_cross(c) for n in Z\\{0}; '
             'log-branch type from Z_2 monodromy of sqrt(Q_cross). '
-            'Z_2 of cross sheet inherits Koszul self-duality c <-> 26 - c '
+            'Z_2 of cross sheet inherits the comparison symmetry c <-> 26 - c '
             'extended via Yuan-Latyntsev R-matrix.'
         ),
         'alien_derivative_remark': (

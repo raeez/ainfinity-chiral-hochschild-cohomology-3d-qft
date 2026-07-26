@@ -204,7 +204,7 @@ def _kappa_virasoro(**kw):
 
 
 def _kappa_virasoro_dual(**kw):
-    """Koszul dual Vir_{26-c}: κ(Vir_{26-c}) = (26-c)/2."""
+    """Same-family line representative Vir_{26-c}: κ(Vir_{26-c}) = (26-c)/2."""
     c = kw.get('c', Symbol('c'))
     return (26 - c) / 2
 
@@ -312,6 +312,78 @@ def period_correction(family: str, **params) -> Dict[str, object]:
         'F1': F1,
         't1': F1,
         'formula': 'F₁(A) = κ(A)/24',
+    }
+
+
+def elliptic_arakelov_green_kernel_profile() -> Dict[str, object]:
+    r"""Return the genus-1 Arakelov Green-kernel convention.
+
+    The standard normalized Green function on E_tau is
+
+        G_tau(z) = -log|theta_1(z|tau)/eta(tau)|^2
+                   + 2*pi*(Im z)^2/Im tau
+
+    with
+
+        partial dbar G_tau = pi*i*(delta_0 - mu_tau).
+
+    The chapter uses the residue-one chiral propagator
+
+        P_tau(z) = -partial_z G_tau(z) dz
+
+    so that P_tau has residue +1 at z = 0. The opposite sign convention
+    has residue -1 and reverses the edge-orientation signs.
+    """
+    return {
+        'curve': 'E_tau = C/(Z + tau Z)',
+        'green_function': '-log|theta_1(z|tau)/eta(tau)|^2 + 2*pi*(Im z)^2/Im tau',
+        'volume_form': 'mu_tau = i/(2 Im tau) dz wedge dbar z',
+        'volume_integral': 1,
+        'ddbar_identity': 'partial dbar G_tau = pi*i*(delta_0 - mu_tau)',
+        'residue_one_propagator': '-partial_z G_tau dz',
+        'residue_one_formula': 'partial_z log theta_1(z|tau) dz + 2*pi*i*Im(z)/Im(tau) dz',
+        'residue_at_zero': 1,
+        'dbar_propagator': '-2*pi*i*mu_tau',
+    }
+
+
+def lambda_fp_scalar(g: int):
+    r"""Faber-Pandharipande coefficient lambda_g^FP.
+
+    lambda_g^FP = ((2^(2g-1)-1)/2^(2g-1)) * |B_{2g}|/(2g)!
+    """
+    if g < 1:
+        raise ValueError(f"lambda_g^FP requires g >= 1, got {g}")
+
+    b2g = bernoulli(2 * g)
+    return (Rational(2 ** (2 * g - 1) - 1, 2 ** (2 * g - 1))
+            * abs(b2g) / factorial(2 * g))
+
+
+def scalar_uniform_genus_free_energy(kappa, g: int):
+    r"""Scalar uniform-weight genus coefficient F_g = kappa * lambda_g^FP."""
+    return simplify(S(kappa) * lambda_fp_scalar(g))
+
+
+def w3_genus2_cross_channel(c):
+    r"""The first W_3 cross-channel correction: delta F_2 = (c+204)/(16c)."""
+    c_val = S(c)
+    if c_val == 0:
+        raise ValueError("W_3 cross-channel formula requires c != 0")
+    return simplify((c_val + 204) / (16 * c_val))
+
+
+def multi_weight_genus_free_energy_profile(kappa, g: int, cross_channel=0) -> Dict[str, object]:
+    r"""Split the genus coefficient into scalar trace plus cross-channel term."""
+    scalar = scalar_uniform_genus_free_energy(kappa, g)
+    cross = S(cross_channel)
+    return {
+        'genus': g,
+        'scalar_uniform_weight': scalar,
+        'cross_channel': cross,
+        'total': simplify(scalar + cross),
+        'has_cross_channel': simplify(cross) != 0,
+        'formula': 'F_g(A) = kappa(A)*lambda_g^FP + delta F_g^cross(A)',
     }
 
 
