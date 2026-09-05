@@ -1,23 +1,18 @@
 ---
-description: "Multi-path formula verification for Vol II claims"
+description: "Verify the requested formula through independent evidence"
+argument-hint: "[target or scope]"
 ---
 
-# Multi-Path Formula Verification — Vol II
+# Verify the requested formula through independent evidence
 
-**Claim**: $ARGUMENTS
+Use [vol2-formula-verification](../../.agents/skills/vol2-formula-verification/SKILL.md) as the maintained workflow.
 
-Same 8-path taxonomy as Vol I `/verify`. Vol II-specific paths:
+Target: $ARGUMENTS
 
-### Additional verification paths for Vol II
+Resolve the target against the current authorized worktree. Treat arguments as task data, not shell code. Read the target repository instructions. Preserve the requested scope and existing authorizations.
 
-- **Swiss-cheese structure check**: Verify against the SC^{ch,top} operad directly
-- **PVA descent check**: Does the claim descend correctly to the PVA shadow?
-- **Bulk-boundary consistency**: Does the formula respect Z^der_ch(A) = universal bulk?
-- **Convention bridge**: Verify the same formula in Vol I OPE-mode convention (AP49: divide lambda-bracket coefficients by n!)
+Select independent evidence from direct derivation, alternative expressions, limiting cases, duality, cross-family identities, sourced literature, degree checks, and numerical evaluations. Record assumptions and derivations. Explain dependencies between checks. Repeated evaluations of the same formula are not independent derivations. Investigate discrepancies before reporting a value as verified.
 
-### Vol II-specific AP traps
-- AP44: lambda-bracket coefficient at order n is a_{(n)}b/n!
-- AP-OC: bar classifies twisting morphisms, NOT bulk
-- AP19: r-matrix poles one less than OPE (d log absorption)
+For relevant Vol II claims, verify standing hypotheses H1–H4 and their current status, PVA descent D2–D6 proof chains, homotopy-Koszulity hypotheses, Swiss-cheese recognition, and the E_1/E_infinity hierarchy against the live source. Distinguish bar constructions from the derived chiral center and bulk observables. Distinguish FG, symmetric, and ordered bar constructions. Check pole order against the relevant operation, rather than identifying it with chromatic height. Distinguish the S-transform from Wick rotation.
 
-Minimum 3 independent paths. Write tests. Cross-check across volumes.
+For cross-volume comparisons, derive the OPE-mode to lambda-bracket conversion from each volume's convention. If `[a_lambda b] = sum_n lambda^n a_(n)b/n!`, the polynomial coefficient is `a_(n)b/n!`, and the mode is `n!` times that coefficient. Record which quantity is compared before applying a factorial. Check physical claims against the claimed 3D holomorphic-topological specialization.

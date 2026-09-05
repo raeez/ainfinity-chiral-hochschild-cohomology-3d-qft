@@ -1,42 +1,20 @@
 ---
-description: "Beilinson rectification loop on a Vol II chapter"
-model: opus
+description: "Rectify the requested mathematical scope"
+argument-hint: "[target or scope]"
 ---
 
-RECTIFICATION_SESSION_ACTIVE
+# Rectify the requested mathematical scope
 
-# Beilinson Rectification Loop — Vol II
+Use [vol2-beilinson-rectification](../../.agents/skills/vol2-beilinson-rectification/SKILL.md) as the maintained workflow.
 
-**Target**: $ARGUMENTS
+Target: $ARGUMENTS
 
-Read CLAUDE.md (Vol II) before beginning. All Vol I anti-patterns AP1-AP50 apply. Vol II-specific: AP-OC (bar != bulk), AP35-AP58 (E_infinity/E_1 hierarchy), AP-CHR/AP-RED/AP-WICK.
+Resolve the target against the current authorized worktree. Treat arguments as task data, not shell code. Read the target repository instructions. Preserve the requested scope and existing authorizations.
 
-The standard: Kac, Gelfand, Etingof, Beilinson, Drinfeld, Kazhdan, Bezrukavnikov, Polyakov, Nekrasov, Kapranov, Ginzburg, Chriss-Ginzburg.
+Preserve valid mathematical content when reorganizing the target. Establish the organizing question, dependency order, and principal result. Introduce symbols before use and motivate constructions through the mathematical obstruction they resolve. Check chapter openings, transitions, references, scope, and closing statements. Remove drafting history and catalogue identifiers from reader-facing prose. Preserve hypotheses and uncertainty that the evidence requires. No mannered prose.
 
-## THE PROGRAMME
+Read the complete requested chapter for chapter-wide rectification. Review changed arguments and affected dependencies again after edits. Broaden the review when findings show wider effects. A blocked proof obligation remains explicit and does not establish convergence.
 
-Same 4-phase structure as Vol I `/rectify`. Key Vol II differences:
+For relevant Vol II claims, verify standing hypotheses H1–H4 and their current status, PVA descent D2–D6 proof chains, homotopy-Koszulity hypotheses, Swiss-cheese recognition, and the E_1/E_infinity hierarchy against the live source. Distinguish bar constructions from the derived chiral center and bulk observables. Distinguish FG, symmetric, and ordered bar constructions. Check pole order against the relevant operation, rather than identifying it with chromatic height. Distinguish the S-transform from Wick rotation.
 
-### Build command
-```bash
-pkill -9 -f pdflatex; sleep 2; cd ~/chiral-bar-cobar-vol2 && make fast
-```
-
-### Vol II-specific audit checks
-- **AP-OC**: Bar classifies twisting morphisms, NOT bulk observables. Bulk = Z^der_ch(A).
-- **AP35-AP58**: E_infinity = ALL vertex algebras (including those with OPE poles). E_1 = nonlocal (quantum vertex algebras). NEVER say "vertex algebra is not E_infinity."
-- **AP-CHR**: Pole order != chromatic height. Classical bar complex is height 0.
-- **AP-WICK**: S-transform != Wick rotation of topological direction.
-- **AP44**: lambda-bracket coefficient = a_{(n)}b/n!, NOT a_{(n)}b.
-- **Three bar complexes**: FG bar (zeroth product only) != symmetric bar (Vol I Thm A) != ordered bar (Part VII).
-
-### Cross-volume propagation
-After ANY formula change, grep ALL THREE volumes:
-```bash
-grep -rn "PATTERN" ~/chiral-bar-cobar/chapters/ ~/chiral-bar-cobar-vol2/chapters/ ~/calabi-yau-quantum-groups/chapters/ 2>/dev/null
-```
-
-Convention check (AP49): Vol I uses OPE modes. Vol II uses lambda-brackets. The coefficient at order n differs by 1/n!.
-
-### Phases 1-4
-Same as Vol I `/rectify`. CONVERGE before stopping.
+For cross-volume comparisons, derive the OPE-mode to lambda-bracket conversion from each volume's convention. If `[a_lambda b] = sum_n lambda^n a_(n)b/n!`, the polynomial coefficient is `a_(n)b/n!`, and the mode is `n!` times that coefficient. Record which quantity is compared before applying a factorial. Check physical claims against the claimed 3D holomorphic-topological specialization.

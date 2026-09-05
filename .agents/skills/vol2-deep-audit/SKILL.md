@@ -22,14 +22,14 @@ This is the findings-first counterpart to rectification.
 ## Mandatory loop
 
 1. Start with a short progress update naming the target and first verification step.
-2. Register substantial work in `update_plan`.
+2. Track substantial work with an available planning tool or a concise written plan.
 3. Read:
    - target file
    - neighboring context
-   - active `\input` graph from `main.tex`
+   - selected active `\input` graph from `platonic/main.tex` (verify `Makefile` and the integrated ledger)
    - current dirty diff
    - relevant compute/tests or build logs
-4. Run three hostile passes:
+4. Select relevant checks in one audit. Repeat only where new evidence warrants:
    - `RED`: proof logic, hypotheses, signs, formulas, scope, hidden conditionality
    - `BLUE`: theorem/proof/status drift, label collisions, duplicate formulations, build/test collisions, cross-volume contradictions
    - `GREEN`: missing definitions, dangling references, unsupported objects, missing lemmas, places where the text overstates what is actually built
@@ -46,6 +46,6 @@ This is the findings-first counterpart to rectification.
 
 ## Tool discipline
 
-- Use `multi_tool_use.parallel` for independent reads, greps, log checks, and tests.
+- Batch independent reads, searches, and checks with the available host tools.
 - Use `exec_command` for `git diff`, `pytest`, `make fast`, and focused shell inspection.
 - Do not start patching until the audit surface is understood.

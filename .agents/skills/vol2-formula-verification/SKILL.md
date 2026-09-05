@@ -37,10 +37,10 @@ Use at least three when feasible:
 3. Recompute independently; do not repair by pattern.
 4. Map the claim to compute code or tests if executable.
 5. Add or strengthen the narrowest test that would catch the specific failure mode.
-6. Propagate the correction across all advertised copies of the formula.
+6. Update verified affected copies within scope. Report exact dependencies outside scope.
 
 ## Output standard
 
 - If the claim is verified, say by which independent paths.
-- If only part of the claim is verified, split the statement and downgrade the rest.
+- If only part is verified, report that part and the exact unresolved obligation. Preserve the theorem target.
 - If the formula differs across volumes, explicitly perform the OPE-mode versus lambda-bracket conversion before comparing.

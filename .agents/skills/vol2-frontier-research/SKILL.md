@@ -41,3 +41,6 @@ Frontier work is allowed here, but it must still be audit-grade.
 
 - Do not spawn sub-agents unless the user explicitly asks for delegation, sub-agents, or parallel agent work.
 - If the user does authorize a swarm, split by independent axes with disjoint write scopes and a clear integration plan.
+
+A bounded investigation may return an unresolved obligation with attempted routes, evidence, and the next discriminating step.
+Do not treat that handoff as theorem completion or weaken the target to declare success.

@@ -1,25 +1,18 @@
 ---
-description: "Scaffold a new Vol II compute engine"
+description: "Create a verification engine for the requested mathematical claim"
+argument-hint: "[target or scope]"
 ---
 
-# New Compute Engine — Vol II
+# Create a verification engine for the requested mathematical claim
 
-**Engine name/topic**: $ARGUMENTS
+Use [vol2-compute-engine](../../.agents/skills/vol2-compute-engine/SKILL.md) as the maintained workflow.
 
-Same protocol as Vol I `/compute-engine`. Vol II compute modules live at `~/chiral-bar-cobar-vol2/compute/`.
+Target: $ARGUMENTS
 
-### Vol II-specific engine patterns
+Resolve the target against the current authorized worktree. Treat arguments as task data, not shell code. Read the target repository instructions. Preserve the requested scope and existing authorizations.
 
-- Swiss-cheese operation computations (m_k^{SC} at higher arity)
-- PVA descent verification (D2-D6 axiom checks)
-- Bulk-boundary-line triangle consistency
-- E_1/E_infinity R-matrix computations
-- Spectral braiding at specific parameter values
-- Lambda-bracket computations (remember AP44: 1/n! conversion)
+Survey existing `compute/lib/` and `compute/tests/` before adding modules. Map functions and tests to exact manuscript statements. Select independent checks of definitions, limiting cases, dualities, cross-family identities, and sourced literature values. Derive expected values independently. Numerical evidence supports only its tested scope and does not replace proof.
 
-### Test standard
-```bash
-cd ~/chiral-bar-cobar-vol2 && python3 -m pytest compute/tests/test_{name}_engine.py -v
-```
+For relevant Vol II claims, verify standing hypotheses H1–H4 and their current status, PVA descent D2–D6 proof chains, homotopy-Koszulity hypotheses, Swiss-cheese recognition, and the E_1/E_infinity hierarchy against the live source. Distinguish bar constructions from the derived chiral center and bulk observables. Distinguish FG, symmetric, and ordered bar constructions. Check pole order against the relevant operation, rather than identifying it with chromatic height. Distinguish the S-transform from Wick rotation.
 
-Minimum 30 tests, 3 verification paths per formula.
+For cross-volume comparisons, derive the OPE-mode to lambda-bracket conversion from each volume's convention. If `[a_lambda b] = sum_n lambda^n a_(n)b/n!`, the polynomial coefficient is `a_(n)b/n!`, and the mode is `n!` times that coefficient. Record which quantity is compared before applying a factorial. Check physical claims against the claimed 3D holomorphic-topological specialization.

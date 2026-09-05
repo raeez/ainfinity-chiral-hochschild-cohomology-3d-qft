@@ -1,66 +1,26 @@
 ---
-description: "Launch 30+ elite research agents across the Vol II frontier"
-model: opus
+description: "Run parallel research on the requested frontier"
+argument-hint: "[target or scope]"
 ---
 
-RECTIFICATION_SESSION_ACTIVE
+# Run parallel research on the requested frontier
 
-# Elite Research Swarm — Vol II (3D HT QFT)
+Use [vol2-frontier-research](../../.agents/skills/vol2-frontier-research/SKILL.md) as the maintained workflow.
 
-**Topic/Frontier**: $ARGUMENTS
+Target: $ARGUMENTS
 
-The standard: Kac, Gelfand, Etingof, Beilinson, Drinfeld, Kazhdan, Bezrukavnikov, Polyakov, Nekrasov, Kapranov, Ginzburg, Chriss-Ginzburg.
+Resolve the target against the current authorized worktree. Treat arguments as task data, not shell code. Read the target repository instructions. Preserve the requested scope and existing authorizations.
 
-You are launching a massive parallel research campaign focused on the Vol II frontier: 3D holomorphic-topological QFT, Swiss-cheese structures, PVA descent, bulk-boundary-line triangle, and the E_1/E_infinity chiral hierarchy.
+Use the requested repository and file scope. Discover the current target files and dependency graph, rather than relying on a historical file census. Assign one accountable writer per file, with isolated worktrees where required. Parallelize independent questions within available capacity. Preserve ownership, model policy, and release authority from the active session.
 
-## SWARM ARCHITECTURE
+Track each task, owner, source revision, evidence, and remaining obligation. Poll a live task before resuming or replacing it. Never relaunch a task merely because an observation timed out. Do not create or remove scheduled loops unless the user requests scheduling.
 
-Same design as Vol I `/research-swarm` with Vol II-specific clustering:
+Integrate reviewed findings in dependency order. Check cross-chapter formula consistency, theorem hypotheses at citation sites, references, conventions, introduction claims against body proofs, and concordance status. Use the build skill for affected surfaces. Continue when new evidence identifies work. Report completion or concrete unresolved obligations without requiring an invented new result. This command does not authorize commits or pushes.
 
-### Vol II Frontier Axes
+Choose independent questions from the requested topic. Useful Vol I axes include CY2/CY3 constructions, quantum group realization, arithmetic structures, physical interpretations, and cross-volume compatibility. A question must specify an object, claimed property, method, and evidence. Select tests by mathematical obligations rather than a numerical quota.
 
-**Axis 1 — Swiss-Cheese and Operadic Structure**
-- SC^{ch,top} higher operations (m_k computation at arity k >= 4)
-- Homotopy-Koszulity applications beyond standard landscape
-- Modular Swiss-cheese operad at genus >= 1
-- Recognition theorem extensions
+For relevant Vol II claims, verify standing hypotheses H1–H4 and their current status, PVA descent D2–D6 proof chains, homotopy-Koszulity hypotheses, Swiss-cheese recognition, and the E_1/E_infinity hierarchy against the live source. Distinguish bar constructions from the derived chiral center and bulk observables. Distinguish FG, symmetric, and ordered bar constructions. Check pole order against the relevant operation, rather than identifying it with chromatic height. Distinguish the S-transform from Wick rotation.
 
-**Axis 2 — PVA Descent and Quantization**
-- PVA descent for non-standard families
-- Coisson structure computations
-- Modular PVA quantization frontier
-- Raviolo vertex algebra extensions
+For cross-volume comparisons, derive the OPE-mode to lambda-bracket conversion from each volume's convention. If `[a_lambda b] = sum_n lambda^n a_(n)b/n!`, the polynomial coefficient is `a_(n)b/n!`, and the mode is `n!` times that coefficient. Record which quantity is compared before applying a factorial. Check physical claims against the claimed 3D holomorphic-topological specialization.
 
-**Axis 3 — Bulk-Boundary-Line Triangle**
-- Chiral derived center computations for new families
-- Line operator categories beyond evaluation modules
-- Spectral braiding at roots of unity
-- Celestial boundary transfer
-
-**Axis 4 — 3D Quantum Gravity**
-- BTZ black hole from shadow CohFT
-- Planted-forest graph sums at genus 3+
-- Soft graviton hierarchy at higher arity
-- Critical string dichotomy beyond Virasoro
-
-**Axis 5 — E_1/E_infinity Hierarchy**
-- Ordered bar complex for non-standard families
-- R-matrix descent computations
-- dg-shifted Yangian completions
-- Genuinely E_1 examples (quantum vertex algebras)
-
-### Agent Design
-
-Same rules as Vol I `/research-swarm`:
-- Every agent writes 20+ tests
-- Every agent runs Beilinson falsification
-- Multi-path verification (3+ paths per formula)
-- Cross-volume AP5 + AP49 convention checks
-
-### Build
-```bash
-cd ~/chiral-bar-cobar-vol2 && make
-```
-
-### Post-Swarm
-Apply `/rectify` to all modified chapters until convergence.
+Relevant frontier axes include higher Swiss-cheese operations, PVA descent and quantization, bulk-boundary-line consistency, spectral braiding, quantum gravity graph sums, and ordered chiral structures. Select only axes needed by the requested research question.

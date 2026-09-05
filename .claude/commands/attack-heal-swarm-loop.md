@@ -1,19 +1,26 @@
 ---
-description: "Self-pacing /loop swarm: relaunch stopped agents, maintain the user-requested attack-heal swarm size across all research volumes"
-model: opus
+description: "Rectify the requested mathematical scope"
+argument-hint: "[target or scope]"
 ---
 
-/loop 3m first relaunch any rate limited or stopped agents. Maintain the user-requested swarm size across ALL RESEARCH VOLUMES (default 5 only when no target is specified; larger targets such as 30+ are allowed when explicitly requested). If the active swarm is below that requested target, launch enough hardcore convergent ATTACK AND THEN HEAL loop agents to restore the requested size across Vol I /Users/raeez/chiral-bar-cobar, Vol II /Users/raeez/chiral-bar-cobar-vol2, Vol III /Users/raeez/calabi-yau-quantum-groups, /Users/raeez/igusa-cusp-form, and /Users/raeez/mixed-holomorphic-topological-strings. These agents ADVERSARIALLY TEAR APART THE RESEARCH PROGRAMME AT ITS FOUNDATIONS, FOUNDATIONALLY, SYSTEMATICALLY AND FROM FIRST-PRINCIPLES BREAK IT DOWN INTO A SURVIVING CORE OF MATHEMATICS, THEN FROM THAT BASIS HEAL the propositions, lemmas, theorems, broken parts, and if those "as stated" are incorrect, find the correct ones. When you successfully heal a proposition, ensure it is written into the manuscript in the correct manner (going back to previous instances where needed), following Chriss-Ginzburg style as north star, fully consonant with the voices of the elite Russian school (Etingof, Polyakov, Kazhdan, Gelfand, Nekrasov, Kapranov, Bezrukavnikov) and the mathematical physics school (Costello, Gaiotto, Witten).
+# Rectify the requested mathematical scope
 
-the convergent ATTACK AND THEN HEAL loop agent swarm means EACH agent attacks, then attempts through precise, rigorous, insightful, groundbreaking mathematics into a new form, which then gets attacked and then healed and then attacked and then healed. This process continues UNTIL we converge on MATERIALLY STRONGER more correct more precise mathematics than before we started the first attack. No execeptions. we only conclude when we have upgraded the mathematics. All attacks systematic, foundational, thoroughly exhaustive and rigorous and proceed in a first-principles manner.
+Use [vol2-frontier-research](../../.agents/skills/vol2-frontier-research/SKILL.md) as the maintained workflow.
 
-    Meanwhile, in the main thread inscribe into the metacognitive architecture all the antipatterns and cache entries that could have prevented these issues from occurring at all in this thread. Cache entries go into notes/first_principles_cache_comprehensive.md with regex triggers and 5-step protocols; reader-facing table entries go into appendices/first_principles_cache.md; conservative auto-detectable signatures get added to .claude/hooks/beilinson-gate.sh.
+Target: $ARGUMENTS
 
-    Golden rules:
-    1. AGENTS ARE NOT ALLOWED TO STOP UNTIL THE MATHEMATICS IS IN A MATERIALLY STRONGER PLACE than before the attack phase commenced. Inside each agent, LOOP attack-heal-attack-heal-attack-heal until the loop CONVERGES — i.e., a subsequent attack round lands NO new weaknesses that weren't already healed, AND at least one genuine new mathematical result (bridge lemma, counterexample, sharpened hypothesis with proof, or cite-repair that unlocks a previously-unverifiable claim) is inscribed. Mere ambient/status relabelling without new mathematics does NOT count as convergence.
-    2. After writing into the manuscript, always apply the skill /rectify (whole-file Chriss-Ginzburg linear sweep in ~50-line chunks — no hot-spot shortcuts) as well as hardcore first-principles critical analysis including /investigate and other tools.
-    3. Each agent must re-verify every flagged attack item against live source before healing (Pattern 237: stale attacks waste cycles).
+Resolve the target against the current authorized worktree. Treat arguments as task data, not shell code. Read the target repository instructions. Preserve the requested scope and existing authorizations.
 
-    After EVERY WAVE COMPLETES (all requested agents reported), commit + push upstream on ALL RESEARCH VOLUMES and merge upstream into the repo with a DEEP SEMANTIC MERGE (read each diff, preserve both sets of inscribed mathematics, renumber cache-entry collisions, re-run consistency checks after merge). Commit authorship: Raeez Lorgat ONLY — no AI attribution anywhere (no Claude, no Anthropic, no Co-Authored-By, no 🤖, in commits or prose). CLAUDE.md forbids git stash (use git diff > patch.diff && git apply to pause) and forbids amending commits without explicit instruction.
+Use the requested repository and file scope. Discover the current target files and dependency graph, rather than relying on a historical file census. Assign one accountable writer per file, with isolated worktrees where required. Parallelize independent questions within available capacity. Preserve ownership, model policy, and release authority from the active session.
 
-      Only retain one /loop cron — if a prior one exists, delete it before creating the new one.
+Track each task, owner, source revision, evidence, and remaining obligation. Poll a live task before resuming or replacing it. Never relaunch a task merely because an observation timed out. Do not create or remove scheduled loops unless the user requests scheduling.
+
+Integrate reviewed findings in dependency order. Check cross-chapter formula consistency, theorem hypotheses at citation sites, references, conventions, introduction claims against body proofs, and concordance status. Use the build skill for affected surfaces. Continue when new evidence identifies work. Report completion or concrete unresolved obligations without requiring an invented new result. This command does not authorize commits or pushes.
+
+Preserve valid mathematical content when reorganizing the target. Establish the organizing question, dependency order, and principal result. Introduce symbols before use and motivate constructions through the mathematical obstruction they resolve. Check chapter openings, transitions, references, scope, and closing statements. Remove drafting history and catalogue identifiers from reader-facing prose. Preserve hypotheses and uncertainty that the evidence requires. No mannered prose.
+
+Read the complete requested chapter for chapter-wide rectification. Review changed arguments and affected dependencies again after edits. Broaden the review when findings show wider effects. A blocked proof obligation remains explicit and does not establish convergence.
+
+For relevant Vol II claims, verify standing hypotheses H1–H4 and their current status, PVA descent D2–D6 proof chains, homotopy-Koszulity hypotheses, Swiss-cheese recognition, and the E_1/E_infinity hierarchy against the live source. Distinguish bar constructions from the derived chiral center and bulk observables. Distinguish FG, symmetric, and ordered bar constructions. Check pole order against the relevant operation, rather than identifying it with chromatic height. Distinguish the S-transform from Wick rotation.
+
+For cross-volume comparisons, derive the OPE-mode to lambda-bracket conversion from each volume's convention. If `[a_lambda b] = sum_n lambda^n a_(n)b/n!`, the polynomial coefficient is `a_(n)b/n!`, and the mode is `n!` times that coefficient. Record which quantity is compared before applying a factorial. Check physical claims against the claimed 3D holomorphic-topological specialization.

@@ -1,41 +1,21 @@
 ---
 name: vol2-six-layer-architecture
-description: Use when the task is a chapter-scale architectural rewrite or analysis touching the factorization-versus-operadic hierarchy, especially `factorization_swiss_cheese`, `modular_swiss_cheese_operad`, `relative_feynman_transform`, or the Route A/B/C local-global split encoded in `.claude/specs/`.
+description: Analyze the historical Route A/B/C and six-layer specifications when a requested comparison needs their factorization and operadic distinctions.
 ---
 
-# Vol II Six-Layer Architecture
+# Vol II architecture comparison
 
-This skill surfaces the Claude-side master/route specs for Codex.
+Start with `Makefile`, `platonic/PLATONIC_LEDGER.md`, and the selected current chapter.
+Current architectural work follows that input graph and its proof bodies.
 
-## Trigger surface
+For explicit historical-route analysis, read `.claude/specs/master.md` and only the relevant route specification:
 
-Use this skill when the task mentions any of:
+- `.claude/specs/route-a-modular-sc.md`
+- `.claude/specs/route-b-fact-sc.md`
+- `.claude/specs/route-c-relative-ft.md`
 
-- factorization Swiss-cheese
-- modular Swiss-cheese operad
-- relative Feynman transform
-- Route A / Route B / Route C
-- the local-versus-global tension
-- the six-layer framework
+Read cited Vol I dependencies only when the requested comparison requires them.
+These specifications are historical design evidence. They do not impose current design constraints or establish theorem status.
+If a specification and current proof disagree, identify the exact claim and evidence before any authorized repair.
 
-## Read order
-
-1. `.claude/specs/master.md`
-2. Then the relevant route spec:
-   - `.claude/specs/route-a-modular-sc.md`
-   - `.claude/specs/route-b-fact-sc.md`
-   - `.claude/specs/route-c-relative-ft.md`
-3. Then the target live chapter(s) in this repo.
-4. Then the cited Vol I dependencies named in the spec.
-
-## Operating rule
-
-- Treat the route specs as design constraints and dependency maps, not as proof.
-- The live `.tex` still wins over the spec if the repo has moved.
-- If the spec and live surface diverge, state the divergence explicitly before patching.
-
-## Output standard
-
-- Name the route being used.
-- Keep the local/global distinction explicit.
-- Distinguish factorization truth, operadic local shadow, and relative-Feynman algebraic skeleton.
+Name the route under analysis. Preserve the local/global distinction and distinguish factorization objects, operadic local data, and relative-Feynman constructions.

@@ -1,70 +1,31 @@
 ---
 name: vol2-beilinson-rectification
-description: Use when the user asks to audit, rectify, fortify, fix, tighten, or converge a Vol II chapter, theorem, proof, introduction, appendix, or the live manuscript surface. Do not use for purely local copyedits with no mathematical or structural truth conditions.
+description: Repair a mathematical proof or chapter structure when requested, with evidence-based verification and precise unresolved obligations.
 ---
 
-# Vol II Beilinson Rectification
+# Mathematical rectification
 
-Run the full local rectification loop on the live surface.
+Read the target, its direct proof dependencies, and the current diff. Consult the root's mathematical and writing references only as relevant.
+Inspect the active input graph for chapter restructuring. Load concordance or metadata when a changed claim affects those indexes.
 
-## Inputs
+Identify the mathematical question and the requested theorem target. Diagnose the relevant failure:
+proof logic, hypotheses, signs, conventions, missing definitions, claim drift, duplicate statements, or exposition order.
+Use one repair workflow for local proof repair and broader structural rewriting.
+Select relevant review lenses: mathematical catalogue, truth, define-before-use, motivation, physical realization, and structural prose.
+For structural work, put prerequisites and a useful computation before the theorem that depends on them.
+Use direct mathematical transitions. Preserve substantive mathematics during restructuring.
 
-- exact target file or theorem if given
-- otherwise the smallest live surface implied by the user prompt
+Repair in dependency order. Construct the missing maps, hypotheses, homotopies, computations, or cited comparisons.
+Recheck each repaired argument independently. Repeat only where a surviving defect or new evidence requires another pass.
+No fixed number of writing passes applies.
 
-## Mandatory loop
+Update affected live claims inside assigned paths after verifying the correction. Report other-volume dependencies to their owners.
+Do not rewrite historical evidence or silently change the requested theorem to fit a partial result.
+Use affected tests and the build skill when executable or rendering checks can falsify the change.
 
-1. Start with a short progress update naming the target and first verification step.
-2. Register a nontrivial task in `update_plan`.
-3. Read before editing:
-   - target file
-   - local context
-   - active `\input` graph from `main.tex`
-   - current dirty diff
-   - relevant compute/tests or build logs
-4. Run three hostile passes:
-   - `RED`: logic, hypotheses, signs, formulas, scope
-   - `BLUE`: consistency, labels, status tags, duplicate formulations, build/test collisions
-   - `GREEN`: missing definitions, dangling references, structural gaps, statements that should be weakened or split
-5. Record actionable findings in `compute/audit/linear_read_notes.md` with:
-   - date
-   - target
-   - severity
-   - class
-   - exact location
-   - issue
-   - fix
-   - status
-6. Fix in dependency order:
-   - `CRITICAL`
-   - `SERIOUS`
-   - `MODERATE`
-7. After each substantive mathematical correction:
-   - grep the active Vol II surface
-   - grep superseded split files if they still sell the same claim
-   - grep `~/chiral-bar-cobar`
-   - grep `~/calabi-yau-quantum-groups` if the claim is truly cross-volume
-8. Run the narrowest verification that can falsify the change:
-   - targeted `pytest`
-   - targeted grep
-   - log inspection
-   - `make fast` for load-bearing theorem/proof rewrites
-9. Re-audit the modified surface.
-10. Finish only with:
-   - `CONVERGED`
-   - `BLOCKED: <specific blocker>`
+A proof repair is complete when its requested argument closes and affected claims and checks agree.
+A bounded investigation may instead return an exact unresolved obligation, attempted routes, evidence, and next discriminating step.
+That handoff does not complete the theorem target or establish a proved obstruction.
+Keep claim status honest without treating a status change as a proof repair.
 
-## Non-negotiables
-
-- Never patch before reading.
-- Never accept a slogan when the proof scope is narrower.
-- Never propagate an unverified correction across multiple files.
-- Never upgrade a statement to proved-here in the same pass as its first unchecked proof draft.
-- Never let theorem environment, claim-status tag, and surrounding prose disagree.
-
-## Tool discipline
-
-- Use `multi_tool_use.parallel` for independent reads, greps, log checks, and targeted tests.
-- Use `apply_patch` for manual edits.
-- Use `exec_command` for `git diff`, `pytest`, `make fast`, and focused shell inspection.
-- Keep the work local unless the user explicitly asks for delegation or swarm behavior.
+Delegate only when authorized. Use available host planning and parallel tools, or concise written tracking when those tools are absent.
