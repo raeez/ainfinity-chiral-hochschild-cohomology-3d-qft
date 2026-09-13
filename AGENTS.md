@@ -4,7 +4,7 @@ This repository inherits `~/ecosystem/INVARIANTS.md` and `~/ecosystem/AGENTS-HAR
 For Claude host controls or loading, consult `~/ecosystem/CLAUDE-HARNESS.md` when relevant.
 Universal safety and truth rules apply. Load domain references only when the task requires them.
 `AGENTS.md` is canonical locally. `CLAUDE.md` carries the same contract for its host.
-Read `CLAUDE.md` before code edits. System and developer instructions, then explicit user chat, precede local guidance.
+Read one root contract before code edits. Do not load both copies. System and developer instructions, then explicit user chat, precede local guidance.
 
 Volume II studies Mixed Holomorphic–Topological Theory: Hamiltonian jets, shifted cotangent fields, universal branes, Duflo quantization, and the all-arity open–closed map.
 The objective is correct, rigorous, complete mathematics. Preserve the requested theorem target.
