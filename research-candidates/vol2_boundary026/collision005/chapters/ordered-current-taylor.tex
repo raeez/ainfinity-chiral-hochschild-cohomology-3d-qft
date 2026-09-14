@@ -1,0 +1,555 @@
+\chapter{Ordered Taylor maps for supported currents}
+\label{chap:ordered-current-taylor}
+
+The quantum differential permits multiplication of observables with
+disjoint supports.  A finite change of current representatives makes
+their Wick products strict.  Interval interpolation then gives ordered
+Taylor maps into the actual quantum complex.  Their linear term has
+an explicit compact homotopy to the common-annulus current inclusion.
+
+\section{The support of an ordered product}
+
+Fix a centered disk $U=D_R\subset\C$, distinct points $a_1,\ldots,a_m\in U$,
+and disjoint centered disks $D_i\Subset U$ about these points.
+Choose smooth radial cutoffs $\chi_i\in C_c^\infty(D_i)$ equal to
+one near $a_i$.  Choose an outer radial cutoff $\chi\in C_c^\infty(U)$
+equal to one on a disk containing every $\overline D_i$.
+For each $i$, fix a finite set $J_i\subset\Z_{\ge0}$ of jet orders.
+Let $E=\{(i,n):1\le i\le m,\ n\in J_i\}$.
+For $\nu=(i,n)\in E$, put
+\[
+ u_\nu=-\frac{\bar\partial\chi_i}{(z-a_i)^{n+1}},\qquad
+ e_\nu=-\frac{\bar\partial\chi}{(z-a_i)^{n+1}},\qquad
+ f_\nu=\frac{\chi-\chi_i}{(z-a_i)^{n+1}}.
+\]
+These are compact smooth representatives, and
+$\bar\partial f_\nu=u_\nu-e_\nu$.
+Their observable degrees are $|u_\nu|=|e_\nu|=0$ and $|f_\nu|=-1$.
+Use the increasing orientation on $[0,1]$ and the complex orientation
+on $U$, with residue integral $(2\pi i)^{-1}\int$.
+
+Fix the bulk parameter $\ell\in\C$ and work first over
+$R=\C[\hbar]$.  The boundary complex is
+\[
+ \mathcal B_\ell(V)
+ =\left(\operatorname{Sym}(\Omega_c^{0,\bullet}(V)[1])[\hbar],
+       D=\bar\partial+\hbar\Delta_{\mu_\ell}\right),\qquad
+ \mu_\ell(v,w)=-\ell\int_V^{\mathrm{res}}v\wedge\partial w.
+\]
+The shifted Dolbeault differential has the sign specified in
+Lemma~\ref{lem:bf-boundary-differential}.
+Each symmetric power uses compact smooth kernels on $V^r$ and graded
+coinvariants.  The sum over symmetric powers is algebraic.
+No field-number completion is used.
+Define symmetric constants, with a total order on $E$, by
+\[
+ p_{(i,n),(j,r)}=
+ \begin{cases}
+ \displaystyle\frac{\ell}{n!r!}
+   \partial_{a_i}^{n}\partial_{a_j}^{r}(a_i-a_j)^{-2},&i\ne j,\\[3pt]
+ 0,&i=j.
+ \end{cases}
+\]
+The extracted current level is $k=-\ell$.  Thus its divided-jet
+Wick contraction is $-\hbar p_{\nu\omega}$.
+
+Write $x_\nu,y_\nu,\theta_\nu$ for the generators represented by
+$u_\nu,e_\nu,f_\nu$, respectively.  Their finite compact complex is
+\[
+ Q=R[x_\nu,y_\nu\mid\nu\in E]\otimes\Lambda(\theta_\nu\mid\nu\in E),
+ \qquad |\theta_\nu|=-1,
+\]
+with left odd derivatives and differential
+\begin{equation}
+\label{eq:ordered-current-D}
+ D_Q=\sum_\nu(x_\nu-y_\nu)\partial_{\theta_\nu}
+ +\hbar\sum_{\nu<\omega}p_{\nu\omega}
+ (\partial_{x_\omega}\partial_{\theta_\nu}
+  +\partial_{x_\nu}\partial_{\theta_\omega}).
+\end{equation}
+The substitution $\rho:Q\hookrightarrow\mathcal B_\ell(U)$ is the
+embedding of Proposition~\ref{prop:bf-compact-current-complex}.
+For a graded $R$-module $M$, write
+$T^c(M)=\bigoplus_{n\ge1}M^{\otimes_R n}$, with coproduct given
+by splitting words between consecutive entries.
+
+\begin{proposition}[The overlapping product obstruction]
+\label{prop:ordered-current-overlap-obstruction}
+Suppose $\hbar p_{\nu\omega}\ne0$ in $R$.
+On $T^c(sQ)$ there is no uncurved square-zero coderivation whose
+unary and binary terms are
+\[
+ B_1(sa)=sD_Qa,\qquad B_2(sa,sb)=(-1)^{|a|}s(ab),
+ \qquad |sa|=|a|-1.
+\]
+The assertion holds regardless of the terms of arity at least three.
+\end{proposition}
+\begin{proof}
+The component from length two to length one of the square is
+\[
+ (B_1B_2+B_2B_1)(sa,sb)
+ =(-1)^{|a|}s\bigl(D_Q(ab)-(D_Qa)b-(-1)^{|a|}aD_Qb\bigr).
+\]
+Here the second unary insertion has sign $(-1)^{|sa|}$.
+For $a=\theta_\nu$, $b=x_\omega$, equation
+\eqref{eq:ordered-current-D} makes the right side
+$-\hbar p_{\nu\omega}s1$.
+It is nonzero.  An operation of arity at least three vanishes
+on a word of length two.  Hence no such operation changes this square.
+\end{proof}
+
+For $S\subseteq\{1,\ldots,m\}$, define
+$U_S=\coprod_{i\in S}D_i$ and $E_S=\{(i,n)\in E:i\in S\}$.
+The binary factorization product
+\[
+ \mu_{S,T}:\mathcal B_\ell(U_S)\otimes_R\mathcal B_\ell(U_T)
+       \longrightarrow\mathcal B_\ell(U_{S\cup T})
+\]
+exists for $S\cap T=\varnothing$.  It extends each input by zero
+and multiplies its observable kernels.
+Every cross contraction is zero: the local pairing evaluates two
+generators at a common point, and their supports are disjoint.
+Thus $D$ obeys the graded Leibniz rule for this product.
+The same conclusion holds on compact smooth kernels by restriction
+to the relevant diagonals.  These products are associative and
+commute with the indicated extensions by zero.
+
+\section{A compact lift of every Wick polynomial}
+
+Let $W_S=R[y_\nu\mid\nu\in E_S]$, concentrated in degree zero.
+The variables are normal symbols for divided holomorphic jets.
+This is the finite-current specialization of the rational Wick
+symbols of Chapter~\ref{chap:free-field-interval}, under
+\[
+ z_i\longmapsto a_i,\qquad \kappa\longmapsto-\ell,\qquad
+ x_{i,n}\longmapsto n!y_{(i,n)}.
+\]
+Here $\kappa$ is the algebraic current level of that chapter.
+The map evaluates rational coefficients before any radial Laurent
+expansion.  Distinct $a_i$ make all denominators defined.
+For disjoint $S,T$, set
+\[
+ K_{S,T}=\sum_{\nu\in E_S,\ \omega\in E_T}
+       p_{\nu\omega}\partial_{y_\nu}\partial_{y_\omega},\qquad
+ f\star g=e^{-\hbar K_{S,T}}(fg),
+ \qquad
+ K_S=\sum_{\substack{\nu<\omega\\\nu,\omega\in E_S}}
+       p_{\nu\omega}\partial_{y_\nu}\partial_{y_\omega}.
+\]
+All derivatives fix the coefficients.  Each exponential terminates
+on a polynomial.  The commuting operators satisfy
+$K_{S\cup T}=K_S+K_T+K_{S,T}$.
+It follows that $\star$ is associative on pairwise disjoint labels.
+
+Let $\rho_S^x:W_S\to\mathcal B_\ell(U_S)$ substitute $u_\nu$ for
+$y_\nu$ and multiply the resulting form generators.
+Define the degree-zero linear map
+\begin{equation}
+\label{eq:ordered-current-Gamma}
+ \Gamma_S(f)=\rho_S^x(e^{\hbar K_S}f).
+\end{equation}
+
+\begin{theorem}[Separated Wick lift]
+\label{thm:ordered-current-wick-lift}
+The maps $\Gamma_S$ are chain maps and satisfy
+\begin{equation}
+\label{eq:ordered-current-strict-product}
+ \mu_{S,T}(\Gamma_Sf,\Gamma_Tg)=\Gamma_{S\cup T}(f\star g)
+ \qquad(S\cap T=\varnothing).
+\end{equation}
+Their values lie in the actual polynomial current subcomplex
+$R[u_\nu\mid\nu\in E_S]$ of $\mathcal B_\ell(U_S)$.
+They are linear isomorphisms onto that subcomplex.
+For $S\subseteq T$, let $\jmath_{S,T}$ extend observables by zero
+from $U_S$ to $U_T$, and include $W_S$ into $W_T$ by the same
+normal variables.  Then $\jmath_{S,T}\Gamma_S=\Gamma_T|_{W_S}$.
+\end{theorem}
+\begin{proof}
+The differential kills every polynomial in form generators: their
+Dolbeault derivatives vanish, and $\mu_\ell$ pairs no two such generators.
+This proves the chain-map assertion.
+For the product, compute before substitution:
+\[
+ e^{\hbar K_{S\cup T}}e^{-\hbar K_{S,T}}(fg)
+ =e^{\hbar(K_S+K_T)}(fg)
+ =(e^{\hbar K_S}f)(e^{\hbar K_T}g).
+\]
+Substitution turns the last product into the disjoint factorization
+product.  This proves \eqref{eq:ordered-current-strict-product}.
+The $u_\nu$ are independent by their disjoint disks and angular
+Fourier powers.  Their polynomial algebra embeds in smooth kernels,
+as in Proposition~\ref{prop:bf-compact-current-complex}.
+The inverse exponential $e^{-\hbar K_S}$ proves the isomorphism assertion.
+On a polynomial using only $E_S$, every derivative in $K_T-K_S$
+kills that polynomial and every successive derivative of it.
+Thus $e^{\hbar K_T}|_{W_S}=e^{\hbar K_S}$, which proves the
+extension-by-zero identity.
+\end{proof}
+
+For currents at two and three distinct points, with $u_i=u_{(i,0)}$,
+\[
+ \begin{aligned}
+ \Gamma_{\{1,2\}}(y_1y_2)&=u_1u_2+\hbar p_{12},\\
+ \Gamma_{\{1,2\}}(y_1\star y_2)&=u_1u_2,\\
+ \Gamma_{\{1,2,3\}}(y_1\star y_2\star y_3)&=u_1u_2u_3.
+ \end{aligned}
+\]
+The nonzero contractions appear when these supported products are
+expressed in common-annulus coordinates.
+
+\section{The ordered bar and its interval maps}
+
+Let $A_I=\C[t,dt]$, with $|t|=0$, $|dt|=1$, $d_It=dt$,
+$d_I(dt)=0$, and $(dt)^2=0$.  Let
+$C_I=\C e_0\oplus\C e_1\oplus\C\eta$ have degrees $0,0,1$ and
+differential $de_0=-\eta$, $de_1=\eta$, $d\eta=0$.
+The contraction is
+\[
+ \begin{aligned}
+ i(e_0)&=1-t,&i(e_1)&=t,&i(\eta)&=dt,\\
+ p(f)&=f(0)e_0+f(1)e_1,&
+ p(gdt)&=\left(\int_0^1g\right)\eta,&
+ h(gdt)&=\int_0^t g(u)du-t\int_0^1g(u)du,
+ \end{aligned}
+\]
+with $h(f)=0$.  Direct differentiation gives
+$dh+hd=1-ip$ and $hi=ph=h^2=0$.
+There are no endpoint vanishing conditions.
+Set
+\[
+ C(S)=C_I\otimes W_S,\quad A(S)=A_I\otimes W_S,\quad
+ \mathcal T(S)=A_I\otimes\mathcal B_\ell(U_S).
+\]
+The source differential acts on the interval factor.
+On the actual target, use
+\[
+ d_{\mathcal T}(\alpha\otimes q)
+   =d_I\alpha\otimes q+(-1)^{|\alpha|}\alpha\otimes Dq,
+\]
+and, for disjoint $S,T$, the product
+\[
+ (\alpha\otimes q)(\beta\otimes r)
+ =(-1)^{|q||\beta|}(\alpha\wedge\beta)\otimes\mu_{S,T}(q,r).
+\]
+The total differential is a derivation for these disjoint products.
+Define $G_S:A(S)\to\mathcal T(S)$ by
+$G_S(\alpha\otimes f)=\alpha\otimes\Gamma_Sf$.
+Theorem~\ref{thm:ordered-current-wick-lift} makes $G$ a strict
+morphism of these systems of differential graded products.
+
+For any such collection $V(S)$, its supported tensor coalgebra is
+\[
+ T^c_{\mathrm{disj}}(sV)=
+ \bigoplus_{n\ge1}\ \bigoplus_{S_1,\ldots,S_n\ \mathrm{pairwise\ disjoint}}
+ sV(S_1)\otimes_R\cdots\otimes_R sV(S_n).
+\]
+The coproduct cuts a word between consecutive entries.  Empty label
+sets may occur and carry the unit.  Each word has finite length.
+A Taylor term replaces a consecutive block by its union label.
+It preserves disjointness from all remaining entries.
+
+For a system with differential $d$ and product $\mu$, define
+$B_1(sa)=sda$ and $B_2(sa,sb)=(-1)^{|a|}s\mu(a,b)$.
+Its ordered bar differential on $u_1|\cdots|u_n$ is
+\begin{equation}
+\label{eq:ordered-current-bar}
+ B(u_1|\cdots|u_n)=
+ \sum_{q=1}^{2}\sum_{r=0}^{n-q}
+ (-1)^{\sum_{j=1}^{r}|u_j|}
+ u_1|\cdots|u_r|B_q(u_{r+1},\ldots,u_{r+q})|
+ u_{r+q+1}|\cdots|u_n.
+\end{equation}
+The degree is one.  The differential, Leibniz, and associativity
+identities give $B^2=0$, in lengths one, two, and three, respectively.
+There are no other components of the square.
+This is the suspended convention for the tensor bar construction
+described by Keller~\cite{KellerAInfinity}, \S3.6, pp.~11--12.
+
+Write $I,P,H$ for the suspended interval maps on $sA$.
+Let $B^A$ and $B^{\mathcal T}$ be the bar differentials on $A$ and
+$\mathcal T$.  On $C$ put $b_1=s d_C s^{-1}$ and define recursively
+\[
+ \begin{split}
+ f_1&=I,\qquad
+ R_n=\sum_{a+b=n}B^A_2(f_a\otimes f_b),\\
+ f_n&=-HR_n,\qquad b_n=PR_n\quad(n\ge2),\qquad
+ \mathcal F_n=(sG s^{-1})f_n.
+ \end{split}
+\]
+Each $f_n$ and $\mathcal F_n$ has suspended degree zero.
+
+\begin{theorem}[Ordered current Taylor comparison]
+\label{thm:ordered-current-taylor}
+The maps $b_n$ define an uncurved $A_\infty$ structure on $C(S)$.
+The maps $\mathcal F_n$ define a morphism of differential graded
+supported tensor coalgebras
+\[
+ \mathcal F:\bigl(T^c_{\mathrm{disj}}(sC),b\bigr)
+       \longrightarrow
+       \bigl(T^c_{\mathrm{disj}}(s\mathcal T),B^{\mathcal T}\bigr),
+ \qquad B^{\mathcal T}\mathcal F=\mathcal F b.
+\]
+The linear term is interval interpolation followed by the compact
+current lift $\Gamma_S$.  It induces an injection on cohomology
+into the full target.  Its restriction to the polynomial current
+subcomplex of the target is an $A_\infty$ quasi-isomorphism.
+\end{theorem}
+\begin{proof}
+The interval recursion can be checked at each finite word length.
+Suppose its morphism equation and $b^2=0$ hold below length $n$.
+With the length-$n$ terms temporarily zero, write the morphism defect
+as $Q_n=R_n-L_n$, where
+\[
+ L_n=\sum_{\substack{r+q+t=n\\2\le q<n}}
+ f_{r+1+t}(1^{\otimes r}\otimes b_q\otimes1^{\otimes t}).
+\]
+Tensor substitution includes the sign of passing the degree-one
+map $b_q$ through the preceding suspended inputs.
+Let $O_n$ be the length-$n$ term of $b^2$.
+The identity
+\[
+ B^A(B^Af-fb)+(B^Af-fb)b=-fb^2
+\]
+gives $\delta Q_n=-IO_n$, with
+$\delta Q_n=B^A_1Q_n+Q_n b_1$.
+For $j\ge2$, the recursion implies $Pf_j=Hf_j=0$.
+Thus $PL_n=HL_n=0$.
+Applying $P$ gives $\delta(PR_n)=-O_n$.
+Set $b_n=PR_n$ to make $b^2$ vanish in length $n$.
+Since $B^A_1H+HB^A_1=1-IP$ and $HI=0$, setting $f_n=-HR_n$
+gives
+\[
+ B^A_1f_n-f_n b_1=-Q_n+IPQ_n+H\delta Q_n=Ib_n-Q_n.
+\]
+This completes the length-$n$ morphism equation.
+Induction proves $B^Af=fb$ and $b^2=0$.
+All operations preserve the support labels, so the induction uses
+only defined products.
+
+The strict map $G$ induces a coalgebra map commuting with bar
+differentials.  Composing it with $f$ proves the displayed identity
+for $\mathcal F$ at every length.
+The contraction makes $I$ a quasi-isomorphism.
+The lift $\Gamma$ is an isomorphism onto the polynomial current
+subcomplex, proving the restricted quasi-isomorphism.
+For the full target, let $j_S$ extend by zero from $U_S$ to $U$.
+Let $\tau_S$ set normal variables outside $E_S$ to zero.
+The moment projection $L_U$ of
+Proposition~\ref{prop:bf-compact-full-boundary-split} satisfies
+$L_U\rho=\pi e^{-\hbar K_Q}$, where
+$K_Q=\sum_{\nu<\omega}p_{\nu\omega}\partial_{x_\nu}\partial_{x_\omega}$
+and $\pi(x_\nu)=y_\nu$, $\pi(\theta_\nu)=0$, $\pi(y_\nu)=y_\nu$.
+This exponential cancels $e^{\hbar K_S}$ on an input using only $E_S$.
+Thus $\tau_SL_Uj_S\Gamma_S=1$ and
+$p\otimes(\tau_SL_Uj_S)$ is a chain left inverse to $i\otimes\Gamma_S$.
+This proves its cohomology injection.
+\end{proof}
+
+\section{The first two Taylor coefficients}
+
+Put $v=se_1$, $w=s\eta$, and $\mathbf e=s(e_0+e_1)$, of degrees
+$-1,0,-1$, respectively.  For $f_j\in W_{S_j}$ with disjoint labels,
+write
+\[
+ U(f_1,\ldots,f_n)=
+ \mu\bigl(\Gamma_{S_1}f_1,\ldots,\Gamma_{S_n}f_n\bigr)
+ =\Gamma_{\cup S_j}(f_1\star\cdots\star f_n).
+\]
+Define
+$c(t)=(t-t^2)/2$ and $g(t)=t^3/6-t^2/4+t/12$.
+All nonzero binary and ternary Taylor terms on $v,w$ are
+\begin{equation}
+\label{eq:ordered-current-low-taylor}
+ \begin{aligned}
+ \mathcal F_2(vf_1,wf_2)&=s\bigl(c(t)U(f_1,f_2)\bigr),\\
+ \mathcal F_2(wf_1,vf_2)&=-s\bigl(c(t)U(f_1,f_2)\bigr),\\
+ \mathcal F_3(vf_1,wf_2,wf_3)&=s\bigl(g(t)U(f_1,f_2,f_3)\bigr),\\
+ \mathcal F_3(wf_1,vf_2,wf_3)&=-2s\bigl(g(t)U(f_1,f_2,f_3)\bigr),\\
+ \mathcal F_3(wf_1,wf_2,vf_3)&=s\bigl(g(t)U(f_1,f_2,f_3)\bigr).
+ \end{aligned}
+\end{equation}
+Every other such value is zero.  Values with an interval unit
+$\mathbf e$ are zero in arities at least two.  Linearity and
+$se_0=\mathbf e-v$ determine every value on $C_I$.
+For example, $B^A_2(st,sdt)=s(tdt)$, while
+$B^A_2(sdt,st)=-s(tdt)$.  Hence $f_2(v,w)=sc$ and $f_2(w,v)=-sc$.
+The three nonzero cubic expressions $R_3$ are
+$s(cdt)$, $-2s(cdt)$, and $s(cdt)$.
+Since $-h(cdt)=g$, these give \eqref{eq:ordered-current-low-taylor}.
+All remaining expressions either vanish or are functions, which
+$h$ kills.  A unit input reduces a tree to $HI$, $H^2$, or $PH$,
+so its higher Taylor terms vanish.
+
+For homogeneous suspended inputs $u,v,w$, the full first morphism
+equations, including the unary input terms, are
+\begin{equation}
+\label{eq:ordered-current-F2-equation}
+ \begin{split}
+ B_1^{\mathcal T}\mathcal F_2(u,v)
+ +B_2^{\mathcal T}(\mathcal F_1u,\mathcal F_1v)
+ ={}&\mathcal F_1b_2(u,v)+\mathcal F_2(b_1u,v)\\
+ &+(-1)^{|u|}\mathcal F_2(u,b_1v),
+ \end{split}
+\end{equation}
+and
+\begin{equation}
+\label{eq:ordered-current-F3-equation}
+ \begin{split}
+ B_1^{\mathcal T}\mathcal F_3(u,v,w)
+ &+B_2^{\mathcal T}(\mathcal F_1u,\mathcal F_2(v,w))
+  +B_2^{\mathcal T}(\mathcal F_2(u,v),\mathcal F_1w)\\
+ ={}&\mathcal F_1b_3(u,v,w)+\mathcal F_2(b_2(u,v),w)
+       +(-1)^{|u|}\mathcal F_2(u,b_2(v,w))\\
+ &+\mathcal F_3(b_1u,v,w)+(-1)^{|u|}\mathcal F_3(u,b_1v,w)\\
+ &+(-1)^{|u|+|v|}\mathcal F_3(u,v,b_1w).
+ \end{split}
+\end{equation}
+On $(v,w,w)$ the first and third terms on the left are
+$s(g' dt\,U)$ and $s(cdt\,U)$.
+The right side is $s(dt\,U/12)$.
+Thus this equation is exactly $g'(t)+c(t)=1/12$.
+On $(v,v,w)$ it is the function identity
+$tc=c/2-3g$.  These equations also check the sign contributed by
+the first suspended input.
+
+The ordinary degree-$1-n$ Taylor map $\mathsf F_n$ is specified by
+\[
+ \mathcal F_n(sa_1,\ldots,sa_n)
+ =(-1)^{\sum_{j=1}^n(n-j)|a_j|}\,s\mathsf F_n(a_1,\ldots,a_n).
+\]
+In particular, on singleton currents,
+$\mathsf F_2(e_1y_1,\eta y_2)=c(t)u_1u_2$ and
+$\mathsf F_3(e_1y_1,\eta y_2,\eta y_3)=-g(t)u_1u_2u_3$.
+The negative ternary sign comes from the middle input of degree one.
+
+\section{Comparison with the annular interval inclusion}
+
+Let $\delta_\nu=x_\nu-y_\nu$ and
+$K_Q=\sum_{\nu<\omega}p_{\nu\omega}\partial_{x_\nu}\partial_{x_\omega}$.
+The compact contraction has
+\[
+ \Pi=\pi e^{-\hbar K_Q},\qquad
+ H_Q=e^{\hbar K_Q}h_0e^{-\hbar K_Q},\qquad
+ D_QH_Q+H_QD_Q=1-\iota\Pi,
+\]
+where $\pi$ sets $\delta_\nu,\theta_\nu$ to zero and
+$h_0=q^{-1}\sum_\nu\theta_\nu\partial_{\delta_\nu}$ in positive
+total $(\delta,\theta)$-degree $q$, and is zero in degree zero.
+These are the maps of Theorem~\ref{thm:bf-compact-quantum-contraction}.
+Let $j_S:\mathcal B_\ell(U_S)\to\mathcal B_\ell(U)$ extend by zero.
+Define a degree-minus-one map on $W_S$ by
+\[
+ T_Sf=\rho H_Q\left(\left.e^{\hbar K_S}f\right|_{y=x}\right).
+\]
+The notation $y=x$ replaces normal symbols by the local variables,
+while the annular variables inside $Q$ remain fixed.
+
+\begin{proposition}[The compact linear comparison]
+\label{prop:ordered-current-annular-comparison}
+For every $f\in W_S$,
+\begin{equation}
+\label{eq:ordered-current-linear-homotopy}
+ D T_Sf=j_S\Gamma_Sf-\iota_U f.
+\end{equation}
+On the interval tensor product, the map
+$\mathcal K_S(\alpha f)=(-1)^{|\alpha|}\alpha\otimes T_Sf$
+satisfies
+\[
+ d_{\mathcal T}\mathcal K_S+\mathcal K_Sd_A
+       =(1\otimes j_S)G_S-(1\otimes\iota_U).
+\]
+At endpoint $a=0,1$, the linear part of the ordered comparison
+therefore has a chain homotopy to
+$\Phi_a(\alpha f)=\epsilon_a(\alpha)\iota_U(f)$.
+\end{proposition}
+\begin{proof}
+The polynomial $e^{\hbar K_S}f(x)$ is a $D_Q$-cycle.
+Applying $\Pi$ cancels its exponential and gives $f(y)$.
+The compact contraction proves \eqref{eq:ordered-current-linear-homotopy}.
+For the interval identity, the terms containing $d_I\alpha$
+have opposite signs and cancel.
+The other terms equal $\alpha\otimes DT_Sf$.
+Compose with interval inclusion and endpoint evaluation to obtain
+the final statement.  Endpoint evaluation kills $dC_I$.
+\end{proof}
+
+For two and three distinct current indices, the primitives are
+\[
+ \begin{aligned}
+ T(y_1y_2)&=\rho\left[
+  \frac{\theta_1(x_2+y_2)+\theta_2(x_1+y_1)}2\right],\\
+ T(y_1y_2y_3)&=\rho\left[
+  \sum_{i=1}^3\theta_i\left(
+    y_jy_k+\frac{\delta_jy_k+y_j\delta_k}{2}
+      +\frac{\delta_j\delta_k}{3}+\frac{\hbar p_{jk}}3
+  \right)\right],
+ \end{aligned}
+\]
+where $\{j,k\}=\{1,2,3\}\setminus\{i\}$.
+Indeed $H_Qe^{\hbar K_Q}=e^{\hbar K_Q}h_0$ on these inputs.
+The second derivative of $\delta_j\delta_k/3$ produces the
+positive quantum correction $\hbar p_{jk}/3$.
+Their differentials are, respectively,
+\[
+ \begin{aligned}
+ u_1u_2+\hbar p_{12}-e_1e_2,\\
+ u_1u_2u_3+\hbar(p_{12}u_3+p_{13}u_2+p_{23}u_1)-e_1e_2e_3.
+ \end{aligned}
+\]
+For the actual product $u_1u_2u_3$, its common-annulus projection is
+\[
+ e_1e_2e_3-\hbar(p_{12}e_3+p_{13}e_2+p_{23}e_1).
+\]
+Thus projecting the coefficient of
+$\mathsf F_3(e_1y_1,\eta y_2,\eta y_3)$ gives $-g(t)$ times
+the complete three-current Wick expression.
+Here $e_i$ in the current products denotes the annular form,
+whereas $e_1$ in the input denotes the interval endpoint cochain.
+
+The constants $p_{\nu\omega}$ are rational functions of the
+distinct insertion points, with every jet derivative retained.
+An undivided jet of order $n$ is obtained by multiplying its divided
+generator by $n!$.  With $\ell=-k$, the elementary contraction becomes
+$\hbar k(a_i-a_j)^{-2}$, as in the free-field interval construction.
+At $\ell=0$, all exponential contractions vanish and every displayed
+map still exists.
+
+For each fixed finite jet list, all formulas extend coefficientwise
+to $\hbar$-adic completions with finite polynomial degree in each
+coefficient.  Complete each supported word separately and retain
+the direct sum over finite word lengths.
+A fixed coefficient receives finitely many terms.
+The equations hold modulo every $\hbar^M$, hence in the inverse limit.
+No commutation of full-boundary cohomology with completion is required.
+
+\begin{proposition}[The binary equation for annular representatives]
+\label{prop:ordered-current-annular-binary-obstruction}
+Suppose $\hbar p_{12}\ne0$.  The common-annulus linear map cannot
+satisfy the binary ordered morphism equation from the Wick source
+if the target binary operation is imposed as ordinary polynomial
+multiplication in $\mathcal B_\ell(U)$.
+\end{proposition}
+\begin{proof}
+Use the constant interval cochains $(e_0+e_1)y_1$ and
+$(e_0+e_1)y_2$.  Their differentials vanish and their Wick product
+is $(e_0+e_1)(y_1y_2-\hbar p_{12})$.
+The binary morphism equation would require a degree-minus-one
+observable $q$ with
+\[
+ Dq=\iota_U(y_1y_2-\hbar p_{12})-\iota_U(y_1)\iota_U(y_2)
+    =-\hbar p_{12}1.
+\]
+Applying the chain projection $L_U$ gives $0=-\hbar p_{12}1$
+in the polynomial normal algebra, a contradiction.
+\end{proof}
+
+The target of Theorem~\ref{thm:ordered-current-taylor} retains the
+unions $U_S$ of the original disjoint disks.  Its operations use
+their actual factorization products.  Extending all entries to a
+common disk and replacing them by annular representatives changes
+these support conditions.  Proposition~\ref{prop:ordered-current-annular-comparison}
+gives the resulting linear chain homotopy, but it does not turn
+overlapping multiplication into an ordered bar differential.
+An ordered comparison allowing arbitrary disk changes requires
+coherent maps for those changes.  Collision chains require their
+own domains and boundary-stratum equations.

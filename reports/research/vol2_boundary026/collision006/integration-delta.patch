@@ -1,0 +1,543 @@
+--- a/reader.tex
++++ b/reader.tex
+@@ -6,6 +6,36 @@
+ \date{September 2026}
+ \hypersetup{pdftitle={Boundary currents and residue traces},pdfauthor={Raeez Lorgat},pdfsubject={Compact quantum observables, collision chains, and interval comparisons}}
+ \begin{document}
++\noeqref{eq:cc-test-differential,
++eq:cc-residue-trace,
++eq:cc-contact-pairing,
++eq:cc-source,
++eq:cc-map,
++eq:cc-ternary-obstruction,
++eq:cd-poles,
++eq:cd-residue,
++eq:cd-double-contact,
++eq:cd-boundary-carrier,
++eq:cd-wavefront,
++eq:cd-triangle,
++eq:cd-renormalized-product,
++eq:cd-triangle-contact,
++eq:cd-three-current,
++eq:cd-three-Ward,
++eq:cd-regular-associator,
++eq:bf-compact-current-differential,
++eq:bf-compact-quantum-homotopy,
++eq:bf-compact-wick-chain,
++eq:current-cumulant-taylor,
++eq:current-binary-taylor-identity,
++eq:ordered-current-D,
++eq:ordered-current-Gamma,
++eq:ordered-current-strict-product,
++eq:ordered-current-bar,
++eq:ordered-current-low-taylor,
++eq:ordered-current-F2-equation,
++eq:ordered-current-F3-equation,
++eq:ordered-current-linear-homotopy}
+ \maketitle
+ \input{chapters/zero-level-bf.tex}
+ \input{chapters/Volume_II_Free_Field_Higher_Operations.tex}
+--- a/raeez-math-template.sty
++++ b/raeez-math-template.sty
+@@ -1,9 +1,7 @@
+ \NeedsTeXFormat{LaTeX2e}
+ \ProvidesPackage{raeez-math-template}[2026/04/24 shared mathematical monograph template]
+ 
+-% Canonical template for the chiral bar-cobar trilogy.
+-% The manuscript owns mathematical notation; this package owns typography,
+-% theorem structure, claim-status display, anchors, and shared diagram styles.
++% Shared typography, theorem environments, anchors, and diagram styles.
+ 
+ \setcounter{secnumdepth}{4}
+ \setcounter{tocdepth}{4}
+@@ -16,10 +14,9 @@
+ % "Garamond text": the math italic, operators, subscripts, figures, small
+ % caps, and page colour must belong to the same optical system.
+ %
+-% pdfLaTeX remains the compatibility baseline for the existing manuscripts.
+-% LuaLaTeX/XeLaTeX are the print-first path: they may use Adobe Garamond
+-% Premier Pro when the complete family is installed. We never synthesize
+-% italic, bold, or small caps for the book face.
++% pdfLaTeX uses EB Garamond with newtxmath. LuaLaTeX and XeLaTeX can use
++% Garamond Premier Pro when the complete family is installed. The package
++% does not synthesize italic, bold, or small caps.
+ 
+ \def\raeez@font@auto{auto}
+ \def\raeez@font@premier{premier}
+@@ -322,7 +319,7 @@
+     factor=1050,
+     stretch=18,
+     shrink=12,
+-    nopatch=footnote
++    nopatch={footnote,eqnum}
+   ]{microtype}
+ \else
+   \RequirePackage[
+@@ -336,7 +333,7 @@
+     factor=1050,
+     stretch=18,
+     shrink=12,
+-    nopatch=footnote
++    nopatch={footnote,eqnum}
+ 	  ]{microtype}
+ \fi
+ 
+@@ -411,7 +408,6 @@
+ 
+ \RequirePackage{mleftright}
+ \mleftright
+-% The template owns font mechanics; manuscripts own mathematical notation.
+ \let\Bbbk\undefined
+ \let\openbox\undefined
+ \RequirePackage{amsmath,amsthm}
+@@ -425,8 +421,7 @@
+ \makeatletter
+ \@ifundefined{@nilgobble}{\long\def\@nilgobble#1\@nil{}}{}
+ \makeatother
+-% amsrefs installs \dbar as a name symbol; these manuscripts reserve it
+-% for the Dolbeault operator.
++% Release the amsrefs name symbol \dbar for the Dolbeault operator.
+ \let\dbar\undefined
+ \RequirePackage{mathtools}
+ \ifPDFTeX\else
+@@ -441,9 +436,8 @@
+   \setmathfont{Latin Modern Math}[range={"266E},Scale=MatchLowercase]
+   \setmathfont{Latin Modern Math}[version=bold,range={"266E},Scale=MatchLowercase]
+ 	  \let\Bbbk\undefined
+-  % Legacy manuscript macros often write \mathcal A or \mathbb R without
+-  % braces.  unicode-math is stricter, so keep the pdfLaTeX calling idiom
+-  % alive for LuaLaTeX/XeLaTeX preview builds.
++  % Accept unbraced arguments such as \mathcal A and \mathbb R
++  % with unicode-math.
+   \makeatletter
+   \let\raeez@unicode@mathcal\mathcal
+   \renewcommand{\mathcal}[1]{{\raeez@unicode@mathcal{#1}}}
+@@ -502,6 +496,56 @@
+   \makeatother
+ 	\fi
+ \mathtoolsset{showonlyrefs,showmanualtags}
++\makeatletter
++\ExplSyntaxOn
++\cs_new:Npn \raeez_mathtools_label_key:n #1
++  {
++    \tl_if_head_eq_charcode:nNTF {#1} [
++      { \raeez_mathtools_label_key:w #1 \q_stop }
++      { \tl_head:n {#1} }
++  }
++\cs_new:Npn \raeez_mathtools_label_key:w [#1]#2 \q_stop {#2}
++\cs_new:Npn \raeez_mathtools_label_key:
++  { \exp_args:NV \raeez_mathtools_label_key:n \df@label }
++\cs_new_protected:Npn \raeez_patch_mathtools_label:N #1
++  {
++    \patchcmd #1
++      { MT_r_\df@label }
++      { MT_r_\raeez_mathtools_label_key: }
++      { }
++      { \PackageError{raeez-math-template}{Cannot~read~the~display~label~key}{} }
++  }
++\cs_new_protected:Npn \raeez_reset_mathtools_tag_state:
++  {
++    \global\MH_set_boolean_F:n {manual_tag}
++    \global\MH_set_boolean_T:n {raw_maketag}
++  }
++\AddToHook{begindocument/before}
++  {
++    \group_begin:
++    \ExplSyntaxOn
++    \patchcmd \MT_showonlyrefs_true:
++      { \MH_set_boolean_T:n {show_only_refs} }
++      { \MH_set_boolean_T:n {show_only_refs} \raeez_reset_mathtools_tag_state: }
++      { }
++      { \PackageError{raeez-math-template}{Cannot~initialize~equation~tag~state}{} }
++    \cs_gset_eq:NN \MT_showonlyrefs_true: \MT_showonlyrefs_true:
++    \group_end:
++    \MH_if_boolean:nT {show_only_refs} { \raeez_reset_mathtools_tag_state: }
++  }
++\AddToHook{package/cleveref/after}
++  {
++    \group_begin:
++    \ExplSyntaxOn
++    \raeez_patch_mathtools_label:N \MT_extended_tagform:n
++    \raeez_patch_mathtools_label:N \MT_extended_tagform:n
++    \raeez_patch_mathtools_label:N \MT_extended_maketag:n
++    \cs_gset_eq:NN \MT_extended_tagform:n \MT_extended_tagform:n
++    \cs_gset_eq:NN \MT_extended_maketag:n \MT_extended_maketag:n
++    \group_end:
++  }
++\ExplSyntaxOff
++\makeatother
+ \makeatletter
+ \AtBeginDocument{%
+   \providecommand{\cA}{\mathcal{A}}%
+@@ -654,11 +698,21 @@
+   \def\oplus{ plus }%
+   \def\to{ to }%
+   \def\colon{:}%
+-  \def\ClaimStatusProvedHere{}%
+-  \def\ClaimStatusProvedElsewhere{}%
+-  \def\ClaimStatusConjectured{}%
+-  \def\ClaimStatusHeuristic{}%
+-  \def\ClaimStatusConditional{}%
++  \def\ClaimStatusProvedHere{[proved]}%
++  \def\ClaimStatusProvedElsewhere{[proved]}%
++  \def\ClaimStatusProved{[proved]}%
++  \def\ClaimStatusOpen{[open]}%
++  \def\ClaimStatusConjectured{[conjectured]}%
++  \def\ClaimStatusHeuristic{[physical heuristic]}%
++  \def\ClaimStatusConditional{[conditional]}%
++  \def\ClaimStatusDefinitional{[definitional]}%
++  \def\ClaimStatusProvedHereConditional{[conditional]}%
++  \def\ClaimStatusTheorem{[theorem]}%
++  \def\ClaimStatusProposition{[proposition]}%
++  \def\ClaimStatusDefinition{[definition]}%
++  \def\ClaimStatusDerivation{[derivation]}%
++  \def\ClaimStatusConventionDependent{[convention-dependent]}%
++  \def\ClaimStatusRealized{[realized]}%
+ }
+ \providecommand{\email}[1]{\g@addto@macro\@author{\\{\normalfont\small\texttt{#1}}}}
+ \providecommand{\urladdr}[1]{\g@addto@macro\@author{\\{\normalfont\small\url{#1}}}}
+@@ -786,7 +840,7 @@
+ }
+ \makeatother
+ 
+-% Unicode fallbacks for pdfLaTeX compilation across imported fragments.
++% Unicode fallbacks for pdfLaTeX.
+ \newunicodechar{∞}{$\infty$}
+ \newunicodechar{β}{$\beta$}
+ \newunicodechar{γ}{$\gamma$}
+@@ -815,6 +869,155 @@
+ \newunicodechar{≥}{$\geq$}
+ \newunicodechar{≤}{$\leq$}
+ \newunicodechar{𝒜}{$\mathcal{A}$}
++
++\makeatletter
++\AddToHook{begindocument/end}{%
++  \let\raeez@entryraisedlink\Hy@raisedlink
++  \patchcmd\raeez@entryraisedlink
++    {\setlength\HyperRaiseLinkLength\HyperRaiseLinkDefault}
++    {\edef\raeez@entrybaseline{\the\dimexpr\baselineskip\relax}%
++     \setlength\HyperRaiseLinkLength\HyperRaiseLinkDefault}
++    {}{\PackageError{raeez-math-template}{Cannot capture counter target raise}{}}%
++  \patchcmd\raeez@entryraisedlink
++    {\HyperRaiseLinkHook}
++    {\HyperRaiseLinkHook
++     \xdef\raeez@counterraise{%
++       \the\dimexpr\HyperRaiseLinkLength-\raeez@entrybaseline\relax}}
++    {}{\PackageError{raeez-math-template}{Cannot capture counter target hook}{}}%
++  \let\raeez@releasedcounterlink\Hy@raisedlink
++  \patchcmd\raeez@releasedcounterlink{\HyperRaiseLinkHook}{}{}
++    {\PackageError{raeez-math-template}{Cannot preserve counter target hook}{}}%
++  \expandafter\def\expandafter\raeez@dtheverypar\expandafter{\the\dth@everypar}%
++  \raeez@patchheadingrelease\raeez@dtheverypar{\unhbox\@labels}%
++  \dth@everypar\expandafter{\raeez@dtheverypar}%
++  \raeez@patchheadingrelease\@item{\box\@labels}%
++  \raeez@patchheadingrelease\enit@postlabel@i{\unhbox\@labels}%
++  \raeez@patchheadingrelease\enit@endinlist{\unhbox\@labels}%
++
++  \renewcommand\Hy@theorem@makelinktarget[1]{%
++    \protected@eappto\raeez@theoremlinktarget{%
++      \noexpand\raeez@statementtarget{#1}{\the\@totalleftmargin}%
++    }%
++  }%
++  \patchcmd\thmt@generic@preheadhook
++    {\refstepcounter{thmt@dummyctr}}
++    {\let\raeez@theoremlinktarget\@empty
++     \raeez@deferredrefstepcounter{thmt@dummyctr}}
++    {}{\PackageError{raeez-math-template}{Cannot place theorem destinations}{}}
++  \let\raeez@deferred@thm@head\deferred@thm@head
++  \def\deferred@thm@head#1{%
++    \raeez@deferred@thm@head{#1}%
++    \expandafter\raeez@queueheadtargets\expandafter{\raeez@theoremlinktarget}%
++    \let\raeez@theoremlinktarget\@empty
++    \raeez@statementtrue
++    \ignorespaces
++  }%
++}
++% A relocated counter target must not change LuaTeX optical protrusion.
++\ifLuaTeX
++  \newattribute\raeez@targetattribute
++  \directlua{
++    local attribute = luatexbase.attributes["raeez@targetattribute"]
++    luatexbase.add_to_callback("pre_linebreak_filter", function(head)
++      for n in node.traverse_id(node.id("hlist"), head) do
++        if node.has_attribute(n, attribute) == 1 then
++          local boundary = node.new("boundary", 2)
++          boundary.value = 1
++          head = node.insert_before(head, n, boundary)
++          node.unset_attribute(n, attribute)
++        end
++      end
++      return head
++    end, "raeez.statementtargets")
++  }
++\fi
++\let\raeez@theoremlinktarget\@empty
++\def\raeez@queueheadtargets#1{%
++  \@tempdima\normalbaselineskip
++  \ifdim\dimexpr\ht\@labels+3pt\relax>\@tempdima
++    \@tempdima\dimexpr\ht\@labels+3pt\relax
++  \fi
++  \expandafter\raeez@queueheadtargets@raised\expandafter{\the\@tempdima}{#1}%
++}
++\def\raeez@queueheadtargets@raised#1#2{%
++  \gdef\raeez@pendingstatementtargets{%
++    \begingroup\normalbaselineskip#1\relax#2\endgroup}%
++}
++\def\raeez@patchheadingrelease#1#2{%
++  \patchcmd#1{#2}{\raeez@releasestatementtargets#2}{}%
++    {\PackageError{raeez-math-template}{Cannot place statement destinations}{}}%
++}
++\let\raeez@pendingstatementtargets\@empty
++\def\raeez@releasestatementtargets{%
++  \ifhmode\ifinner\else
++    \let\raeez@targetstoemit\raeez@pendingstatementtargets
++    \global\let\raeez@pendingstatementtargets\@empty
++    \raeez@targetstoemit
++  \fi\fi
++}
++\long\def\raeez@targetatmargin#1#2{%
++  \ifdim#1=\@totalleftmargin
++    #2%
++  \else
++    \hbox to\z@{\kern\dimexpr#1-\@totalleftmargin\relax#2\hss}%
++  \fi
++}
++\def\raeez@statementtarget#1#2{%
++  \let\raeez@savedhref\@currentHref
++  \raeez@targetatmargin{#2}{\MakeLinkTarget*{#1}}%
++  \global\let\@currentHref\raeez@savedhref
++}
++\def\raeez@countertarget#1#2#3{%
++  \begingroup
++    \normalbaselineskip\dimexpr\normalbaselineskip+#3\relax
++    \def\HyperRaiseLinkDefault{\normalbaselineskip}%
++    \ifLuaTeX
++      \raeez@targetattribute=1\relax
++      \hbox to\z@{%
++        \raeez@targetatmargin{#2}{%
++          \raeez@releasedcounterlink{\hyper@anchorstart{#1}\hyper@anchorend}}\hss}%
++    \else
++      \raeez@targetatmargin{#2}{%
++        \raeez@releasedcounterlink{\hyper@anchorstart{#1}\hyper@anchorend}}%
++    \fi
++  \endgroup
++}
++\def\raeez@deferredrefstepcounter#1{%
++  \let\raeez@hyper@refstepcounter\hyper@refstepcounter
++  \let\hyper@refstepcounter\raeez@deferredhypercounter
++  \refstepcounter{#1}%
++  \let\hyper@refstepcounter\raeez@hyper@refstepcounter
++}
++\def\raeez@deferredhypercounter#1{%
++  \HyCnt@ProvideTheHCounter{#1}%
++  \hyper@makecurrent{#1}%
++  \Hy@ifnotmeasuring{%
++    \gdef\raeez@counterraise{0pt}%
++    \raeez@entryraisedlink{%
++      \protected@xdef\raeez@counterhref{\@currentHref}%
++      \xdef\raeez@countermargin{\the\@totalleftmargin}%
++      \Hy@SaveLastskip\write\@auxout{}\Hy@RestoreLastskip}%
++    \protected@eappto\raeez@theoremlinktarget{%
++      \noexpand\raeez@countertarget{\raeez@counterhref}%
++        {\raeez@countermargin}{\raeez@counterraise}%
++    }%
++  }%
++}
++\newif\ifraeez@statement
++\AddToHook{label}{%
++  \ifraeez@statement
++    \if@inlabel
++      \let\raeez@labelwrite\protected@write
++      \let\protected@write\raeez@deferredlabelwrite
++    \fi
++  \fi
++}
++\long\def\raeez@deferredlabelwrite#1#2#3{%
++  \global\setbox\@labels\hbox{%
++    \color@setgroup\unhbox\@labels
++    \raeez@labelwrite{#1}{#2}{#3}\color@endgroup}%
++}
++\makeatother
+ 
+ % Theorem environments.
+ \makeatletter
+@@ -898,7 +1101,6 @@
+ \declaretheorem[style=garamonddef, name=Warning, sibling=theorem]{warning}
+ \declaretheorem[style=garamonddef, name=Heuristic, sibling=theorem]{heuristic}
+ \declaretheorem[style=garamonddef, name=Evidence, sibling=theorem]{evidence}
+-\declaretheorem[style=garamonddef, name={Claim (naive--falsified downstream)}, sibling=theorem]{claimnaive}
+ \declaretheorem[style=garamonddef, name=Answer, sibling=theorem]{answer}
+ \declaretheorem[style=garamonddef, name=Remark, sibling=theorem]{rmk}
+ \declaretheorem[style=garamonddef, name=Definition, sibling=theorem]{defn}
+@@ -911,31 +1113,14 @@
+ \declaretheorem[style=garamonddef, name=Question, sibling=theorem]{qn}
+ \declaretheorem[style=garamonddef, name=Answer, sibling=theorem]{ans}
+ \declaretheorem[style=garamonddef, name=Construction, sibling=theorem]{constr}
+-\declaretheorem[style=garamonddef, name=Attack, sibling=theorem]{attack}
+-\declaretheorem[style=garamonddef, name=Heal, sibling=theorem]{heal}
+-\declaretheorem[style=garamonddef, name=Ghost theorem, sibling=theorem]{ghost}
+ \declaretheorem[style=garamonddef, name=Scope, sibling=theorem]{scope}
+-\declaretheorem[style=garamonddef, name=Verdict, sibling=theorem]{verdict}
+-\declaretheorem[style=garamonddef, name=Survivor, sibling=theorem]{survivor}
+-\declaretheorem[style=garamonddef, name=Surviving statement, sibling=theorem]{surviving}
+ \declaretheorem[style=garamonddef, name=Scholium, sibling=theorem]{scholium}
+ \declaretheorem[style=garamonddef, name=Obstruction, sibling=theorem]{obstruction}
+-\declaretheorem[style=garamonddef, name=Finding, sibling=theorem]{finding}
+ \declaretheorem[style=garamonddef, name=Counterexample, sibling=theorem]{counterexample}
+-\declaretheorem[style=garamonddef, name=Proposal, sibling=theorem]{proposal}
+-\declaretheorem[style=garamonddef, name=Audit, sibling=theorem]{audit}
+ \declaretheorem[style=garamonddef, name=Correction, sibling=theorem]{correction}
+ \declaretheorem[style=garamonddef, name=Face, sibling=theorem]{face}
+-\declaretheorem[style=garamonddef, name=Falsification, sibling=theorem]{falsification}
+-\declaretheorem[style=garamonddef, name=Flag, sibling=theorem]{flag}
+-\declaretheorem[style=garamonddef, name=Flaw, sibling=theorem]{flaw}
+-\declaretheorem[style=garamonddef, name=Hidden point, sibling=theorem]{hidden}
+-\declaretheorem[style=garamonddef, name=Open frontier, sibling=theorem]{openfrontier}
+ \declaretheorem[style=garamondthm, numbered=no, name=Theorem]{theorem*}
+ \declaretheorem[style=garamondrem, numbered=no, name=Remark]{remark*}
+-\declaretheorem[style=garamonddef, numbered=no, name=Attack]{attack*}
+-\declaretheorem[style=garamonddef, numbered=no, name=Heal]{heal*}
+-\declaretheorem[style=garamonddef, numbered=no, name=Ghost theorem]{ghost*}
+ \declaretheorem[style=garamondthm, numbered=no, name=Claim]{claim*}
+ 
+ % Cross-volume recall wrappers: same counters and typography as their
+@@ -994,7 +1179,6 @@
+ \let\theHwarning\theHtheorem
+ \let\theHheuristic\theHtheorem
+ \let\theHevidence\theHtheorem
+-\let\theHclaimnaive\theHtheorem
+ \let\theHanswer\theHtheorem
+ \let\theHfact\theHtheorem
+ \let\theHrmk\theHtheorem
+@@ -1008,27 +1192,14 @@
+ \let\theHqn\theHtheorem
+ \let\theHans\theHtheorem
+ \let\theHconstr\theHtheorem
+-\let\theHattack\theHtheorem
+-\let\theHheal\theHtheorem
+-\let\theHghost\theHtheorem
+ \let\theHprinciple\theHtheorem
+ \let\theHscope\theHtheorem
+ \let\theHevidence\theHtheorem
+-\let\theHsurvivor\theHtheorem
+-\let\theHsurviving\theHtheorem
+ \let\theHscholium\theHtheorem
+ \let\theHobstruction\theHtheorem
+-\let\theHfinding\theHtheorem
+ \let\theHcounterexample\theHtheorem
+-\let\theHproposal\theHtheorem
+-\let\theHaudit\theHtheorem
+ \let\theHcorrection\theHtheorem
+ \let\theHface\theHtheorem
+-\let\theHfalsification\theHtheorem
+-\let\theHflag\theHtheorem
+-\let\theHflaw\theHtheorem
+-\let\theHhidden\theHtheorem
+-\let\theHopenfrontier\theHtheorem
+ \@ifundefined{theHchapter}
+   {\def\theHtable{\theHsection.\arabic{table}}%
+    \def\theHfigure{\theHsection.\arabic{figure}}}
+@@ -1086,7 +1257,6 @@
+ \raeez@toclevel{warning}
+ \raeez@toclevel{heuristic}
+ \raeez@toclevel{evidence}
+-\raeez@toclevel{claimnaive}
+ \raeez@toclevel{answer}
+ \raeez@toclevel{rmk}
+ \raeez@toclevel{defn}
+@@ -1099,79 +1269,32 @@
+ \raeez@toclevel{qn}
+ \raeez@toclevel{ans}
+ \raeez@toclevel{constr}
+-\raeez@toclevel{attack}
+-\raeez@toclevel{heal}
+-\raeez@toclevel{ghost}
+ \raeez@toclevel{scope}
+-\raeez@toclevel{verdict}
+-\raeez@toclevel{survivor}
+-\raeez@toclevel{surviving}
+ \raeez@toclevel{scholium}
+ \raeez@toclevel{obstruction}
+-\raeez@toclevel{finding}
+ \raeez@toclevel{counterexample}
+-\raeez@toclevel{proposal}
+-\raeez@toclevel{audit}
+ \raeez@toclevel{correction}
+ \raeez@toclevel{face}
+-\raeez@toclevel{falsification}
+-\raeez@toclevel{flag}
+-\raeez@toclevel{flaw}
+-\raeez@toclevel{hidden}
+-\raeez@toclevel{openfrontier}
+ \raeez@toclevel{algorithm}
+ \makeatother
+ \fi
+ 
+-% Annals/archive claim-status switch.
+-\newif\ifannalsedition
+-\annalseditiontrue
+-\ifdefined\archivebuild
+- \annalseditionfalse
+-\fi
+-
+-\ifannalsedition
+- \providecommand{\ClaimStatusProvedHere}{}
+- \providecommand{\ClaimStatusProvedElsewhere}{}
+- \providecommand{\ClaimStatusProved}{}
+- \providecommand{\ClaimStatusOpen}{}
+- \providecommand{\ClaimStatusConjectured}{}
+- \providecommand{\ClaimStatusHeuristic}{}
+- \providecommand{\ClaimStatusConditional}{}
+- \providecommand{\ClaimStatusNeedsVerification}{}
+- \providecommand{\ClaimStatusDefinitional}{}
+- \providecommand{\ClaimStatusProvedHereConditional}{}
+- \providecommand{\ClaimStatusTheorem}{}
+- \providecommand{\ClaimStatusProposition}{}
+- \providecommand{\ClaimStatusDefinition}{}
+- \providecommand{\ClaimStatusDerivation}{}
+- \providecommand{\ClaimStatusPrincipleLevel}{}
+- \providecommand{\ClaimStatusPartialPrimaryLit}{}
+- \providecommand{\ClaimStatusConventionDependent}{}
+- \providecommand{\ClaimStatusRealized}{}
+-\else
+- \providecommand{\ClaimStatusProvedHere}{\textnormal{[proved here]}}
+- \providecommand{\ClaimStatusProvedElsewhere}{\textnormal{[proved elsewhere]}}
+- \providecommand{\ClaimStatusProved}{\textnormal{[proved]}}
+- \providecommand{\ClaimStatusOpen}{\textnormal{[open]}}
+- \providecommand{\ClaimStatusConjectured}{\textnormal{[conjectured]}}
+- \providecommand{\ClaimStatusHeuristic}{\textnormal{[physical heuristic]}}
+- \providecommand{\ClaimStatusConditional}{\textnormal{[conditional]}}
+- \providecommand{\ClaimStatusNeedsVerification}{\textnormal{[needs verification]}}
+- \providecommand{\ClaimStatusDefinitional}{\textnormal{[definitional]}}
+- \providecommand{\ClaimStatusProvedHereConditional}{\textnormal{[proved here, conditional]}}
+- \providecommand{\ClaimStatusTheorem}{\textnormal{[theorem]}}
+- \providecommand{\ClaimStatusProposition}{\textnormal{[proposition]}}
+- \providecommand{\ClaimStatusDefinition}{\textnormal{[definition]}}
+- \providecommand{\ClaimStatusDerivation}{\textnormal{[derivation]}}
+- \providecommand{\ClaimStatusPrincipleLevel}{\textnormal{[principle-level]}}
+- \providecommand{\ClaimStatusPartialPrimaryLit}{\textnormal{[partial primary literature]}}
+- \providecommand{\ClaimStatusConventionDependent}{\textnormal{[convention-dependent]}}
+- \providecommand{\ClaimStatusRealized}{\textnormal{[realized]}}
+-\fi
+-\providecommand{\RealizedHere}[1]{\textnormal{[realized here: \texttt{#1}]}}
+-\providecommand{\ScopeRestricted}[2]{\textnormal{[scope restricted: \texttt{#1} to \texttt{#2}]}}
+-\providecommand{\DowngradedHere}[1]{\textnormal{[downgraded: \texttt{#1}]}}
++% Mathematical status labels.
++\providecommand{\ClaimStatusProvedHere}{\textnormal{[proved]}}
++\providecommand{\ClaimStatusProvedElsewhere}{\textnormal{[proved]}}
++\providecommand{\ClaimStatusProved}{\textnormal{[proved]}}
++\providecommand{\ClaimStatusOpen}{\textnormal{[open]}}
++\providecommand{\ClaimStatusConjectured}{\textnormal{[conjectured]}}
++\providecommand{\ClaimStatusHeuristic}{\textnormal{[physical heuristic]}}
++\providecommand{\ClaimStatusConditional}{\textnormal{[conditional]}}
++\providecommand{\ClaimStatusDefinitional}{\textnormal{[definitional]}}
++\providecommand{\ClaimStatusProvedHereConditional}{\textnormal{[conditional]}}
++\providecommand{\ClaimStatusTheorem}{\textnormal{[theorem]}}
++\providecommand{\ClaimStatusProposition}{\textnormal{[proposition]}}
++\providecommand{\ClaimStatusDefinition}{\textnormal{[definition]}}
++\providecommand{\ClaimStatusDerivation}{\textnormal{[derivation]}}
++\providecommand{\ClaimStatusConventionDependent}{\textnormal{[convention-dependent]}}
++\providecommand{\ClaimStatusRealized}{\textnormal{[realized]}}
+ 
+ % Memoir-native section formatting.
+ \makeatletter
