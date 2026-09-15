@@ -81,3 +81,25 @@ Request the strongest available model and maximum supported effort for nontrivia
 Do not claim to control settings or capacity that the host does not expose.
 Workers return proofs, counterexamples, exact sources, computations, changed paths, and unresolved obligations.
 The owner verifies and integrates each result. Agent agreement is evidence to inspect, not mathematical authority.
+
+## Required research exposition review
+
+Before mathematical or physical writing, read
+`~/ecosystem/policies/research-exposition-ledger.md` and apply its numbered
+requirements to the complete target. This includes the preface, body,
+proofs, examples, appendices, captions, and metadata.
+
+Begin with the governing problem, prerequisites, and content to preserve.
+Use explicit attack–heal cycles: test truth and scope, then the whole
+composition, transitions, definitions, calculations, sentences, and words.
+Repair every justified finding and reread the changed material in context.
+Each new object must be motivated, defined before use, and needed at its
+point of introduction. Preserve physical context and substantive mathematics.
+Remove mannered prose and operational scaffolding. Inspect the final render.
+Record findings, dispositions, source hashes, and unresolved obligations
+outside all manuscript sources and reader archives. A pass count or a clean
+build does not establish convergence or mathematical correctness.
+
+Read the canonical ledger once per unchanged hash; do not substitute this
+short routing block for it. If it is unavailable, report that source gap
+and follow the available requirements without claiming full conformance.
