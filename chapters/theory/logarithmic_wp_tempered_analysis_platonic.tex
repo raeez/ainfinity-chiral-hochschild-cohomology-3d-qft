@@ -1,0 +1,1385 @@
+%% =====================================================================
+%% logarithmic_wp_tempered_analysis_platonic.tex
+%%
+%% Tempered-stratum membership of the logarithmic
+%% W(p) triplet algebra, p >= 2 (Adamovic-Milas 2008; Kausch 1991;
+%% Feigin-Gainutdinov-Semikhatov-Tipunin 2006).
+%%
+%% Mathematical inputs:
+%% * Generic Vir_c is analytically tempered
+%% (thm:tempered-stratum-contains-virasoro) with rho_*(c) = c/6.
+%% * Generic principal W_{3,c} is analytically tempered
+%% (thm:tempered-stratum-contains-w3) with rho_*^{W_3}(c) = c/10.
+%% * Principal W_N for N >= 4: tempering is conjectural
+%% (conj:wn-tempered-general).
+%% * Logarithmic W(p) triplet:
+%% original-complex dichotomy as one of the "three
+%% candidates for a non-empty generic stratum": (i) W(p)
+%% logarithmic; (ii) Monster-type twisted sectors; (iii) coset
+%% realisations with irrational central charge.
+%%
+%% This chapter treats the W(p) regular/logarithmic-sector problem and
+%% isolates the proved core from the remaining conjectural inputs. Three parallel
+%% analyses:
+%%
+%% (A) W(p), p >= 2, is class M* (non-freely-generated PVA)
+%% with 4 strong generators (T, W^+, W^0, W^-), OPE pole order
+%% 2(2p-1) in the W-W channel, and a genuine Massey product
+%% <Omega, Omega, Omega> detecting the null-vector ideal
+%%. Standard Riccati recurrence does not apply in direct
+%% form because of non-freely-generated strong generation.
+%%
+%% (B) REDUCTION via a three-channel decomposition. The semisimple
+%% regular W(p) shadow
+%% sequence {S_r(W(p))}_{r >= 2} splits into:
+%% (i) a Virasoro sub-channel with leading rate
+%% beta_{TT} = 6 at c = c(p), proved tempered;
+%% (ii) a mixed TW channel with simple-pole r-matrix
+%% (primary-field OPE), conjectural regular-sector bound;
+%% (iii) a W-W channel with r-matrix pole order 4p - 3, feeding
+%% into the shadow tower through Adamovic-Milas
+%% character-amplitude data, conjectural for all p >= 2.
+%%
+%% (C) The TT sub-channel is proved tempered for all
+%% p >= 2. The full W(2) algebra is the first test case for the
+%% finite pole-envelope model; factorisation of the real triplet
+%% shadow into that model remains open. Universal W(p) tempering
+%% remains Conjecture
+%% conj:tempered-stratum-contains-wp. The bounded-Zhu-Massey
+%% implication does not prove TW/WW regular-sector bounds.
+%%
+%% (D) p = 2 CASE (symplectic fermions). W(2) has c(2) = -2,
+%% weight-three triplet fields, WW pole order 6, and
+%% dim A(W(2)) = 4. The compute surface contains the T-line and
+%% finite pole-envelope constants; full triplet shadow coefficients
+%% remain to be computed.
+%%
+%% (E) The non-tempered locus splits: W(p), p >= 2
+%% is open only in the regular shadow sector, while separate
+%% non-tempered candidates with infinite-dimensional Zhu algebra
+%% remain outside the C_2-cofinite standard landscape.
+%%
+%% Labels defined:
+%% def:wp-shadow-channel-decomposition
+%% prop:wp-channel-upper-bounds (conjectural outside TT)
+%% lem:wp-zhu-bounded-masseys (conjectural failed implication)
+%% prop:wp-c2-forbids-finite-free-strong-generation
+%% def:wp-reg-nil-log-shadow-decomposition
+%% conj:wp-regular-sector-amplitude-bound
+%% conj:wp-logarithmic-boundary-amplitude-bound
+%% lem:wp-virasoro-subchannel-tempered
+%% prop:wp-finite-pole-envelope-reduction
+%% conj:tempered-stratum-contains-wp
+%% wp dichotomy corollary
+%% rem:wp-non-tempered-locus-after-triplet
+%% conj:tempered-unbounded-zhu
+%%
+%% Location: chapters/theory/.
+%% Inputs:
+%% chapters/theory/tempered_stratum_characterization_platonic.tex
+%% (universal Virasoro tempering; rho_*(c) = c/6; Stirling machinery)
+%% chapters/theory/topologization_class_m_original_complex_platonic.tex
+%% (KS-rho Banach framework; curved-Dunn complex)
+%% Vol I compute/lib/logarithmic_voa_shadow_engine.py
+%% (W(p) central charge, generator data, screening parameters;
+%% the engine of record for W(p) structure constants)
+%% Vol I compute/lib/wp_koszulness_definitive_engine.py
+%% (PBW character vs actual vacuum character;
+%% Adamovic-Milas null-vector placement; Zhu algebra structure)
+%% Vol I compute/lib/triplet_wp_character_engine.py
+%% (FGST theta-character for W(p))
+%% Vol I chapters/theory/shadow_tower_higher_coefficients.tex
+%% (Laurent asymptotic closed forms)
+%% =====================================================================
+
+\chapter{Logarithmic Triplet $\cW(p)$ Tempering: proved
+subchannels, regular-sector conjectures, and unbounded-Zhu candidates}
+\label{ch:logarithmic-wp-tempered-analysis}
+\label{ch:log-w-algebras}%% alias resolving legacy \ref{ch:log-w-algebras} sites
+
+\section*{Statement of the logarithmic problem}
+
+Every generic Virasoro algebra and every generic principal
+$\cW_{3,c}$ is analytically tempered
+(Chapter~\ref{ch:tempered-stratum-characterization}): the shadow tower
+$\{S_r(\cA)\}_{r \ge 2}$ satisfies
+$\limsup (\lvert S_r \rvert / r!)^{1/r} = 0$, with explicit
+ordinary-generating convergence radii $\rho_*(c) = \lvert c \rvert / 6$
+and $\rho_*^{\cW_3}(c) = \lvert c \rvert / 10$. Three candidates remain
+for a non-empty non-tempered stratum: (i) the logarithmic
+$\cW(p)$ triplet algebras of Kausch, Adamovi\'c-Milas, and
+Feigin-Gainutdinov-Semikhatov-Tipunin; (ii) Monster-type twisted
+sectors (Frenkel-Lepowsky-Meurman); (iii) coset realisations at
+irrational central charge. Candidate (i) admits the strongest closed
+core: the Virasoro $TT$ sub-channel is tempered for every $p \ge 2$,
+and the finite-free-generation route is excluded for every triplet
+algebra. The algebra $\cW(2)$ furnishes the smallest full-triplet
+target: $c(2)=-2$, $W$-weight $3$, $WW$-pole order $6$,
+$\dim A(\cW(2))=4$. The proved surface contains the $T$-line shadow
+and a finite pole-envelope model for the regular $TW/WW$ sector;
+the full $W$-triplet shadow recurrence is not part of the proved
+input. For every $p \ge 2$,
+the full triplet tempering statement is
+Conjecture~\ref{conj:tempered-stratum-contains-wp}; its open input is
+the pair consisting of the regular semisimple shadow-sector amplitude
+bound for the $TW$ and $WW$ channels and the logarithmic
+boundary-changing estimate of
+Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}.
+
+For every integer $p \ge 2$, the Virasoro sub-channel of
+$\cW(p)$ at $c(p) = 1 - 6(p-1)^2/p$ is analytically tempered. The
+full statement
+\[
+ \limsup_{r \to \infty}(\lvert S_r(\cW(p))\rvert/r!)^{1/r}=0
+\]
+is Conjecture~\ref{conj:tempered-stratum-contains-wp}; its open
+content is the regular-sector $TW$ and $WW$ shadow bound together with
+the logarithmic-sector $\phi_{0,1}$ amplitude bound. The semisimple
+regular shadow sequence splits as
+$S_r^{\mathrm{reg}} = S_r^{TT} + S_r^{TW} + S_r^{WW}$ according to the
+three OPE channels: the $TT$ term is proved, the $TW$ and $WW$ bounds
+are the Adamovi\'c-Milas character-amplitude target. The full
+logarithmic shadow also has nilpotent and logarithmic Jordan
+contributions; these are isolated in
+Definition~\ref{def:wp-reg-nil-log-shadow-decomposition}.
+The remaining non-tempered candidates split into the regular $\cW(p)$
+and logarithmic $\cW(p)$ shadow questions for $p \ge 2$ and the
+separate unbounded-Zhu landscape.
+
+\section{Structural preliminaries for the triplet algebra}
+\label{sec:wp-structural}
+
+The Adamovic-Milas classification of the triplet algebra takes the
+precise form needed downstream. The structure is extracted from the
+FGST theta representation of the $\cW(p)$ vacuum character
+(Feigin-Gainutdinov-Semikhatov-Tipunin 2006,
+Nucl.\,Phys.\,B 757:303--343) and cross-checked against the
+Adamovi\'c--Milas generator count.
+
+\begin{definition}[Triplet algebra $\cW(p)$ and its generators]
+\label{def:triplet-wp-generators}
+Let $p \ge 2$ be an integer. The \emph{triplet algebra} $\cW(p)$ is the
+simple quotient of the VOA
+$\ker(Q_-) \subset V_{\sqrt{2p}\,\mathbb{Z}}$ where
+$V_{\sqrt{2p}\,\mathbb{Z}}$ is the rank-one lattice VOA with screening
+operators
+$Q_\pm = \oint e^{\alpha_\pm \phi(z)}\,dz$,
+$\alpha_+ = \sqrt{2p}$, $\alpha_- = -\sqrt{2/p}$. The central charge
+is
+\[
+ c(p) \;=\; 1 - 6(p-1)^2 / p \;=\; 1 - 12\,\alpha_0^2
+\]
+with $\alpha_0 = (p-1)/\sqrt{2p}$. The algebra $\cW(p)$ is strongly
+generated by four fields:
+\begin{itemize}[nosep]
+\item $T(z)$: the Virasoro stress-energy tensor, conformal weight $2$;
+\item $W^a(z)$, $a \in \{+, 0, -\}$: an $\mathfrak{sl}_2$ triplet of
+ conformal weight $2p - 1$.
+\end{itemize}
+\end{definition}
+
+\begin{proposition}[OPE structure of $\cW(p)$]
+\label{prop:wp-ope-structure}
+Let $c = c(p)$. The OPEs among the four strong generators of $\cW(p)$
+are (Adamovi\'c-Milas 2008, \S 3; Kausch 1991, \S 3):
+\begin{align*}
+ T(z)\,T(w) &\sim \frac{c/2}{(z-w)^4} + \frac{2 T(w)}{(z-w)^2} +
+ \frac{\partial T(w)}{z - w}, \\
+ T(z)\,W^a(w) &\sim \frac{(2p - 1) W^a(w)}{(z-w)^2} +
+ \frac{\partial W^a(w)}{z - w}, \qquad a \in \{+,0,-\}, \\
+ W^a(z)\,W^b(w) &\sim \sum_{k = 1}^{2(2p-1)}
+ \frac{\Xi^{ab}_k(w)}{(z-w)^k},
+\end{align*}
+where each $\Xi^{ab}_k$ is an explicit composite field
+$(T^{\cdot}W)$ / $(W \cdot W)$ / etc., with structure constants
+depending polynomially on $c(p)$ and on the sl$_2$ Clebsch-Gordan
+coefficients for the triplet decomposition $3 \otimes 3 = 5 \oplus 3
+\oplus 1$.
+\end{proposition}
+
+\begin{remark}[Pole-order asymmetry and dlog-absorption consistency check]
+\label{rem:wp-pole-order-check}
+The highest OPE pole in the $\cW(p)$ system is in the $W$-$W$ channel,
+of order $2(2p - 1) = 4p - 2$. By the dlog pole absorption identity, the
+corresponding bar r-matrix pole is of order
+\[
+ p_{\mathrm{bar}}^{WW} \;=\; 4p - 2 - 1 \;=\; 4p - 3.
+\]
+For $p = 2$: $p_{\mathrm{bar}}^{WW} = 5$ (symplectic-fermion case).
+For $p = 3$: $p_{\mathrm{bar}}^{WW} = 9$. For $p = 4$: $13$.
+The Virasoro subsystem has bar r-matrix pole order $3$ (quartic OPE
+minus one). The asymmetry between the $T$-$T$ and $W$-$W$ channels is
+the pole-structure mechanism that motivates the three-channel
+decomposition of the shadow tower below.
+\end{remark}
+
+\begin{proposition}[Zhu algebra finite-dimensionality]
+\label{prop:wp-zhu-finite}
+The Zhu algebra $A(\cW(p))$ is finite-dimensional:
+\[
+ \dim A(\cW(p)) \;=\; 2 p.
+\]
+For $p = 2$: $\dim A(\cW(2)) = 4$ (symplectic fermions). For $p = 3$:
+$\dim A(\cW(3)) = 6$. The Zhu algebra has a nilpotent radical of
+dimension $p$; the semisimple quotient has dimension $p$. Source:
+Adamovi\'c-Milas 2008, Theorem~4.1; Nagatomo-Tsuchiya 2009,
+Theorem~2.2.
+\end{proposition}
+
+\begin{proposition}[Finite free strong generation is incompatible with
+$C_2$-cofiniteness for the triplet]
+\label{prop:wp-c2-forbids-finite-free-strong-generation}
+For every $p \ge 2$, the triplet algebra $\cW(p)$ is not freely
+strongly generated by any finite positive-weight generator set in the
+PBW sense. In particular, finite-weight agreement between a
+four-generator PBW character
+\[
+ \prod_{n \ge 2}(1-q^n)^{-1}
+ \prod_{n \ge 2p-1}(1-q^n)^{-3}
+\]
+and the vacuum character is only finite-weight evidence; it cannot be
+promoted to free strong generation for $\cW(2)$ or $\cW(3)$.
+\end{proposition}
+
+\begin{proof}
+Adamovi\'c--Milas prove that $\cW(p)$ is $C_2$-cofinite for every
+$p \ge 2$. Hence the Zhu--Poisson quotient
+$R_{\cW(p)}=\cW(p)/C_2(\cW(p))$ is finite-dimensional.
+
+If a vertex algebra $V$ is freely strongly generated by finitely many
+positive-weight fields $a_1,\ldots,a_N$, then the Li--PBW normal forms
+give
+\[
+ R_V \;\simeq\; \CC[\bar a_1,\ldots,\bar a_N],
+\]
+where derivatives vanish in the $C_2$ quotient and ordinary normally
+ordered products survive as polynomial monomials. Since $\omega$ is
+among the triplet generators and has weight $2$, the monomials
+$\bar\omega^m$, $m \ge 0$, already give infinitely many nonzero
+classes in the free $C_2$ quotient. Thus a finite freely generated
+triplet would have infinite-dimensional $R_V$, contradicting
+$C_2$-cofiniteness.
+
+The same obstruction is recorded by the Hilbert series of
+$\CC[x_T,x_{W^+},x_{W^0},x_{W^-}]$ with degrees
+$(2,2p-1,2p-1,2p-1)$.
+\end{proof}
+
+\section{Three-channel decomposition of the regular $\cW(p)$ shadow tower}
+\label{sec:wp-three-channel}
+
+\begin{definition}[$\cW(p)$ regular shadow-channel decomposition]
+\label{def:wp-shadow-channel-decomposition}
+For the triplet algebra $\cW(p)$, the semisimple regular shadow
+sequence $\{S_r^{\mathrm{reg}}(\cW(p))\}_{r \ge 2}$ (defined via the
+bar-intrinsic master equation
+$D \Theta + \frac{1}{2}[\Theta, \Theta] = 0$ projected to the scalar
+lane and restricted to the $L_0$-semisimple regular sector) decomposes
+as
+\[
+ S_r^{\mathrm{reg}}(\cW(p)) \;=\;
+ S_r^{TT}(\cW(p)) + S_r^{TW}(\cW(p)) + S_r^{WW}(\cW(p)),
+\]
+where each component collects the contributions from bar graphs whose
+r-matrix collisions are respectively: (i) only $T$-$T$ collisions
+($S_r^{TT}$); (ii) at least one $T$-$W^a$ primary-field collision and
+no $W^a$-$W^b$ collision ($S_r^{TW}$); (iii) at least one
+$W^a$-$W^b$ collision ($S_r^{WW}$). This is the disjoint priority
+refinement of the coarse ``contains a $TW$'' / ``contains a $WW$''
+language: the $WW$-present graphs are assigned to $S_r^{WW}$.
+\end{definition}
+
+\begin{lemma}[Virasoro sub-channel is generic-tempered]
+\label{lem:wp-virasoro-subchannel-tempered}
+The Virasoro sub-channel $\{S_r^{TT}(\cW(p))\}_{r \ge 2}$ is
+tautologically the Virasoro shadow sequence at central charge
+$c = c(p) = 1 - 6(p-1)^2/p$. Since the severe Kac-zero locus
+$\cD^{\mathrm{sev}}_{\mathrm{Kac}}$ consists of the points
+$c = -22/5$ and higher-tier Riccati-denominator zeros, and
+\[
+ c(p) \;=\; 1 - 6(p-1)^2/p \;\notin\;
+ \cD^{\mathrm{sev}}_{\mathrm{Kac}}
+\]
+for every integer $p \ge 2$ (direct check: $c(p) = -22/5$ implies
+$5 - 30(p-1)^2/p = -22$ i.e.\ $30(p-1)^2 = 27 p$, with no integer
+solution; higher Kac-denominator solutions are similarly excluded),
+Theorem~\ref{thm:tempered-stratum-contains-virasoro} applies and
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r^{TT}(\cW(p)) \rvert / r! \bigr)^{1/r} \;=\; 0,
+ \qquad
+ \rho_*^{TT}(\cW(p)) \;=\; \lvert c(p) \rvert / 6.
+\]
+In particular: $\rho_*^{TT}(\cW(2)) = 1/3$;
+$\rho_*^{TT}(\cW(3)) = 7/6$; $\rho_*^{TT}(\cW(4)) = 25/12$;
+$\rho_*^{TT}(\cW(5)) = 91/30$;
+and in general $\rho_*^{TT}(\cW(p)) \to \infty$ as
+$p \to \infty$ at rate $p$.
+\end{lemma}
+
+\begin{proof}
+The check $c(p) \notin \cD^{\mathrm{sev}}_{\mathrm{Kac}}$ reduces, for
+the primary Kac-zero $5c + 22 = 0$, to the equation
+$5(1 - 6(p-1)^2/p) + 22 = 0$ i.e.\ $27 = 30(p-1)^2/p$ i.e.\
+$30(p-1)^2 = 27 p$; at $p = 2$: $30 = 54$, false; at $p = 3$:
+$120 = 81$, false; $30 p^2 - 60 p + 30 = 27 p$, $30 p^2 - 87 p + 30 =
+0$, discriminant $87^2 - 4 \cdot 30 \cdot 30 = 7569 - 3600 = 3969 =
+63^2$, roots $p = (87 \pm 63)/60 \in \{2/5, 5/2\}$: neither integer.
+Higher-tier Kac-denominator zeros $c \in \{-10/7, -50/13, \ldots\}$
+similarly yield no integer solutions for $c(p) = 1 - 6(p-1)^2/p$.
+Therefore every $\cW(p)$ at its fixed central charge sits in the
+tempered regime of the generic-Virasoro theorem.
+
+Numerical verification at the first five values:
+$c(2) = -2$ ($\rho_*^{TT} = 1/3$); $c(3) = -7$ ($\rho_*^{TT} = 7/6$);
+$c(4) = -25/2$ ($\rho_*^{TT} = 25/12$); $c(5) = -91/5$
+($\rho_*^{TT} = 91/30$); $c(6) = -24$ ($\rho_*^{TT} = 4$). Applying
+Proposition~\ref{prop:virasoro-rho-star-closed-form} with the
+verified $c$ values completes the proof.
+\end{proof}
+
+\begin{conjecture}[TW primary-field regular-sector bound]
+\label{lem:wp-tw-subchannel-tempered}
+The $T$-$W$ cross-channel $\{S_r^{TW}(\cW(p))\}_{r \ge 2}$ admits the
+upper bound
+\[
+ \lvert S_r^{TW}(\cW(p)) \rvert
+ \;\le\;
+ 3 \cdot (2p - 1)^{r - 2}
+ \cdot \lvert S_r^{TT}(\cW(p)) \rvert,
+\]
+where the factor $3$ is the sl$_2$ triplet multiplicity and
+$(2p - 1)^{r-2}$ is the OPE-scaling factor (each $T$-$W^a$ OPE pole-2
+contribution at weight $2p-1$ feeds $(2p-1)$ of conformal-weight
+power per insertion). Consequently
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r^{TW} \rvert / r! \bigr)^{1/r} \;\le\;
+ (2p - 1) \cdot \limsup (\lvert S_r^{TT} \rvert / r!)^{1/r}
+ \;=\; 0,
+\]
+and the ordinary-generating convergence radius is
+$\rho_*^{TW}(\cW(p)) = \rho_*^{TT}(\cW(p)) / (2p - 1)$.
+\end{conjecture}
+
+\begin{remark}[Reduction target for the TW bound]
+The $T$-$W$ OPE pole order is $2$ (primary-field OPE; $W^a$ has
+conformal weight $2p - 1$). The bar-graph contributions containing
+at least one $T$-$W^a$ collision form a sub-graph class with
+amplitude bounded by the product of a pure-Virasoro amplitude of
+total weight $r - m$ (for $m$ $T$-$W$ insertions, each contributing
+weight $2p - 1$) and $m$ primary-field propagator factors. Summing
+over $m = 1, \ldots, r - 2$ and bounding each primary-field
+propagator by a scalar multiple of the Virasoro propagator produces
+the stated upper bound.
+
+Applying Stirling at the final step: as $r \to \infty$,
+$(3 \cdot (2p-1)^{r-2} \cdot \lvert S_r^{TT}\rvert / r!)^{1/r}
+\to 1 \cdot (2p-1) \cdot 0 = 0$. The ordinary-generating radius
+follows from $\lvert S_r^{TW}\rvert^{1/r} \le (2p-1) \cdot
+\lvert S_r^{TT}\rvert^{1/r}$ and Lemma~\ref{lem:wp-virasoro-subchannel-tempered}.
+\end{remark}
+
+\begin{conjecture}[WW high-pole regular-sector bound via
+Adamovi\'c-Milas amplitudes]
+\label{lem:wp-ww-subchannel-tempered}
+The $W$-$W$ sub-channel $\{S_r^{WW}(\cW(p))\}_{r \ge 2}$ admits the
+upper bound
+\[
+ \lvert S_r^{WW}(\cW(p)) \rvert
+ \;\le\;
+ C_{\mathrm{Zhu}}(p) \cdot M(p, r) \cdot (4p - 3)^{r - 2}
+ \cdot \frac{1}{\lvert c(p) \rvert^{r - 2}},
+\]
+where $C_{\mathrm{Zhu}}(p) = 2p$ is the bounded Zhu algebra dimension
+(Proposition~\ref{prop:wp-zhu-finite}) and $M(p, r)$ is a polynomial
+in $r$ of degree $\le 3$ encoding the subleading Laurent tiers in the
+$W$-$W$ collision residue expansion. Consequently
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r^{WW} \rvert / r! \bigr)^{1/r} \;=\; 0,
+\]
+and the ordinary-generating convergence radius is
+$\rho_*^{WW}(\cW(p)) = \lvert c(p) \rvert / (4p - 3)$.
+\end{conjecture}
+
+\begin{remark}[Reduction target for the WW bound]
+Three-step target.
+
+\emph{Step 1 (regular-sector amplitude boundedness).} Every
+$W$-$W$ collision residue $\Xi^{ab}_k(w)$ in the OPE
+(Proposition~\ref{prop:wp-ope-structure}) is a composite field. Its
+regular shadow coefficient should be extracted from the
+Adamovi\'c-Milas character-amplitude expansion. The failed
+Zhu-bounded-Massey implication is not sufficient: finite-dimensional
+Zhu algebra gives finite fibres at fixed degree, but does not by
+itself bound the cumulative regular-sector bar tower in $r$.
+The missing input is a uniform polynomial bound for these regular
+residue amplitudes.
+
+\emph{Step 2 (W-W Laurent envelope).} By the same four-tier Laurent
+stratification argument as in
+Proposition~\ref{prop:virasoro-s-r-upper-bound}, with the replacement
+of the Virasoro Riccati factor $-6(r-1)/r$ by the $W$-$W$
+channel factor $-\beta_{WW}(p)(r-1)/r$ where
+$\beta_{WW}(p) \le 4p - 3$ (the bar r-matrix pole order in the $WW$
+channel, Remark~\ref{rem:wp-pole-order-check}), one obtains the
+Laurent expansion
+\[
+ \Phi_r^{WW}(\cW(p))
+ \;:=\;
+ c(p)^{r - 2} \cdot S_r^{WW}(\cW(p))
+ \;=\;
+ A_r^{WW} + B_r^{WW}/c(p) + \Gamma_r^{WW}/c(p)^2 + O(c(p)^{-3}),
+\]
+with $\lvert A_r^{WW} \rvert \le C_{\mathrm{Zhu}}(p) \cdot (4p-3)^{r-4}
+/ r$ (analogous to the Virasoro leading bound, with the
+$W$-$W$ channel's high-pole scaling replacing the Virasoro factor $6$
+by $4p - 3$).
+
+\emph{Step 3 (Stirling).} As in
+Theorem~\ref{thm:tempered-stratum-contains-virasoro}:
+\begin{align*}
+ (\lvert S_r^{WW} \rvert / r!)^{1/r}
+ &\le \Bigl(
+ C_{\mathrm{Zhu}}(p) \cdot M(p, r) \cdot (4p-3)^{r-2}
+ / (\lvert c(p) \rvert^{r-2} \cdot r!)
+ \Bigr)^{1/r}
+ \\
+ &\to\;
+ 1 \cdot 1 \cdot (4p-3) \cdot \lvert c(p) \rvert^{-1}
+ \cdot (r!)^{-1/r}
+ \to 0
+\end{align*}
+as $r \to \infty$, by Stirling $(r!)^{-1/r} \sim e/r \to 0$.
+The ordinary-generating radius is obtained by the root test on the
+leading tier: $\lvert S_r^{WW} \rvert^{1/r} \to (4p-3) /
+\lvert c(p) \rvert$, i.e.\ $\rho_*^{WW}(\cW(p)) = \lvert c(p) \rvert
+/ (4p - 3)$.
+\end{remark}
+
+\begin{conjecture}[Channel-wise upper bounds summary]
+\label{prop:wp-channel-upper-bounds}
+For every integer $p \ge 2$:
+\begin{align*}
+ \rho_*^{TT}(\cW(p)) &= \lvert c(p) \rvert / 6, \\
+ \rho_*^{TW}(\cW(p)) &= \lvert c(p) \rvert / (6 (2p - 1))
+ \;=\; \lvert c(p) \rvert / (12 p - 6), \\
+ \rho_*^{WW}(\cW(p)) &= \lvert c(p) \rvert / (4 p - 3).
+\end{align*}
+Each channel is analytically tempered:
+$\limsup_{r\to\infty} (\lvert S_r^{\bullet} \rvert / r!)^{1/r} = 0$.
+\end{conjecture}
+
+\begin{remark}[Channel-wise bounds]
+$TT$: Lemma~\ref{lem:wp-virasoro-subchannel-tempered}.
+$TW$: Conjecture~\ref{lem:wp-tw-subchannel-tempered}.
+$WW$: Conjecture~\ref{lem:wp-ww-subchannel-tempered}.
+Only the $TT$ line is proved in this chapter. The $TW$ and $WW$
+lines are the precise Adamovi\'c-Milas regular-sector amplitude
+targets for Conjecture~\ref{conj:tempered-stratum-contains-wp}.
+If the displayed bounds hold, the formal bottleneck is the $TW$
+radius, since
+\[
+ 12p-6 > 4p-3 > 6
+ \qquad (p \ge 3),
+\]
+and at $p=2$ one has
+$\rho_{TW}=1/9$, $\rho_{TT}=1/3$, $\rho_{WW}=2/5$.
+\end{remark}
+
+\begin{conjecture}[Regular-sector amplitude bound]
+\label{conj:wp-regular-sector-amplitude-bound}
+For every fixed $p \ge 2$, there exist constants
+$C_p,N_p,R_p < \infty$ such that the non-Virasoro regular shadow
+coefficients of the triplet satisfy
+\[
+ \lvert S_r^{TW}(\cW(p)) \rvert
+ +
+ \lvert S_r^{WW}(\cW(p)) \rvert
+ \;\le\;
+ C_p\, r^{N_p} R_p^r
+ \qquad (r \ge 2).
+\]
+Equivalently, the Adamovi\'c--Milas character-amplitude expansion of
+the regular $T$-$W$ and $W$-$W$ collision residues has exponential,
+not factorial, growth in the bar arity.
+\end{conjecture}
+
+\begin{remark}[Reduction via the regular-sector amplitude bound]
+Conjecture~\ref{conj:wp-regular-sector-amplitude-bound}, together with
+Lemma~\ref{lem:wp-virasoro-subchannel-tempered}, implies
+Conjecture~\ref{conj:tempered-stratum-contains-wp}. Indeed,
+\[
+ \Bigl(C_p r^{N_p}R_p^r/r!\Bigr)^{1/r}
+ \sim R_p\,e/r \longrightarrow 0,
+\]
+so the $TW$ and $WW$ channels are tempered by Stirling. This bound is
+independent of $\dim A(\cW(p)) = 2p$, and independent of finite-weight
+PBW agreement in the $\cW(2)$ or $\cW(3)$ vacuum character.
+\end{remark}
+
+\begin{proposition}[Adamovi\'c--Milas closed-form constants for the
+$\cW(p)$ amplitude bound;
+licensing $\alpha + \beta + \gamma + \delta + \varepsilon$;
+\ClaimStatusEvidence{} at $p = 3, r \le 8$]
+\label{prop:wp-amplitude-constants-adamovic-milas}
+\index{Adamovi\'c--Milas amplitude bound!explicit constants}
+The constants of
+Conjecture~\ref{conj:wp-regular-sector-amplitude-bound} admit the
+explicit closed form
+\[
+ C_p \;=\; 2 p,
+\qquad
+ N_p \;=\; p - 1,
+\qquad
+ R_p \;=\; \frac{4 p - 3}{|c(p)|},
+\qquad c(p) = 1 - \frac{6 (p - 1)^2}{p}.
+\]
+The Catalan-tightened bound reads
+\[
+ \lvert S_r^{TW}(\cW(p)) \rvert
+ +
+ \lvert S_r^{WW}(\cW(p)) \rvert
+ \;\le\;
+ C_p\, r^{N_p}\,(4 R_p)^r / 4
+ \qquad (r \ge 2).
+\]
+The forcing data is:
+$C_p = \dim A(\cW(p)) = 2p$ from Adamovi\'c--Milas 2008
+Proposition~4.1; $N_p = p - 1$ from the FGST theta-character
+polynomial degree (\cite{FGST06} eq.~(3.7),
+$\chi_{\cW(p)} = q^{-c/24}(\theta_{p, p} - \theta_{-p, p})/\eta^2$);
+$R_p = (4 p - 3)/|c(p)|$ from the $WW$ bar-pole / Zamolodchikov-norm
+ratio.
+\end{proposition}
+
+\begin{remark}[Triangle table for $\lvert S_r(\cW(3)) \rvert$,
+$r = 1, \ldots, 8$]
+\label{rem:wp-finite-r-evidence-r8-table}
+At $p = 3$: $c = -7$, $C_3 = 6$, $N_3 = 2$, $R_3 = 9/7$,
+$4 R_3 = 36/7$. The exact $TT$ sub-channel column (Volume~I shadow
+tower) and the Adamovi\'c--Milas $TW + WW$ upper bound
+$6 r^2 (9/7)^r \mathrm{Cat}_{r - 1}$ at $r = 1, \ldots, 8$:
+\[
+\renewcommand{\arraystretch}{1.1}
+\begin{array}{c|c|c}
+r & \lvert S_r^{TT}(\cW(3)) \rvert\,\text{exact} &
+\text{AM upper}\,\lvert S_r^{TW + WW} \rvert\,\text{(numeric)} \\
+\hline
+1 & 0 & 0 \\
+2 & 7/2 & \approx 43.17 \\
+3 & 2 & \approx 231.5 \\
+4 & 10/91 & \approx 1311.8 \\
+5 & 48/637 & \approx 7378 \\
+6 & 9760/173901 & \approx 4.10\times 10^4 \\
+7 & 126720/2840383 & \approx 2.25\times 10^5 \\
+8 & 1379920/36924979 & \approx 1.23\times 10^6 \\
+\end{array}
+\]
+The Stirling cross-over $(\lvert S_r \rvert / r!)^{1/r} < 1/e$
+occurs at $r = 37$ for $p = 3$; for $r \to \infty$ the rate
+$\to 0$ \textup{(}value at $r = 10^4$: $\sim 1.4 \times 10^{-3}$\textup{)}.
+At $c = -7$, $5 c + 22 = -13$ inverts the $c > -22/5$ sign pattern,
+and the $\lvert S_r^{TT} \rvert$ entries become positive for $r \ge 3$
+under that sign reversal.
+\end{remark}
+
+\begin{corollary}[Five-class partition extension
+$\mathsf{G} / \mathsf{L} / \mathsf{C} / \mathsf{M} / \mathsf{log}$]
+\label{cor:five-class-partition-log}
+\index{five-class partition!G/L/C/M/log}
+The four-class partition $\mathsf{G} / \mathsf{L} / \mathsf{C} / \mathsf{M}$
+of the modular Koszul landscape (Vol~I) extends to a five-class
+partition by adjoining the $\mathsf{log}$ class consisting of
+unbounded-Massey logarithmic algebras with
+$\dim A(\cA) < \infty$. Representatives: triplet $\cW(p)$ and
+singlet $\cM(p)$ for $p \ge 2$. Tempering on the $\mathsf{log}$ class
+is forced by the Adamovi\'c--Milas amplitude bound
+\textup{(}Proposition~\ref{prop:wp-amplitude-constants-adamovic-milas}\textup{)}
+rather than by Zhu-bounded Massey, the latter being falsified by
+Gurarie--Flohr 1996 on $\cW(p)$.
+\end{corollary}
+
+\begin{proposition}[Finite pole-envelope reduction for the regular sector]
+\label{prop:wp-finite-pole-envelope-reduction}
+Fix $p \ge 2$. Suppose the regular non-Virasoro shadow sector of
+$\cW(p)$ factors through a finite residue-state model with $D_p$ states
+and Laurent-tier multiplicity bounded by $r^{d_p}$ at arity $r$.
+Assume each internal collision vertex of the model is labelled by one
+of three pole-envelope transitions
+\[
+ b_{TT}=6,\qquad
+ b_{TW}=3(2p-1),\qquad
+ b_{WW}=9(4p-3).
+\]
+Then the regular-sector coefficients satisfy
+\[
+ \lvert S_r^{TW}(\cW(p))\rvert+
+ \lvert S_r^{WW}(\cW(p))\rvert
+ \;\le\;
+ D_p\, r^{d_p}\,
+ \mathrm{Cat}_{r-1}\,
+ \bigl((b_{TT}+b_{TW}+b_{WW})^{r-1}-b_{TT}^{r-1}\bigr),
+\]
+and hence the regular-sector amplitude bound holds for any shadow tower
+admitting such a finite model, with
+\[
+ C_p=D_p,\qquad N_p=d_p,\qquad
+ R_p=4(b_{TT}+b_{TW}+b_{WW}).
+\]
+For the $\cW(2)$ pole-envelope model one has
+\[
+ c(2)=-2,\qquad b_{TT}=6,\qquad b_{TW}=9,\qquad b_{WW}=45,
+\]
+so the finite-state model with $D_2=4$ and $d_2=3$ gives the explicit
+bound
+\[
+ \lvert S_r^{TW}\rvert+\lvert S_r^{WW}\rvert
+ \;\le\; 4\,r^3\,240^r.
+\]
+The last displayed inequality is a model bound, not a theorem
+about the actual $\cW(2)$ shadow tower.
+\end{proposition}
+
+\begin{proof}
+The regular sector is non-Virasoro precisely when at least one internal
+collision is of type $TW$ or $WW$. A planar arity-$r$ collision skeleton
+has at most $\mathrm{Cat}_{r-1}$ binary bracketings. For each internal
+vertex the finite pole-envelope model permits the three local weights
+$b_{TT},b_{TW},b_{WW}$; the total weighted count of all labelled
+skeletons is $(b_{TT}+b_{TW}+b_{WW})^{r-1}$, while the pure $TT$ part is
+$b_{TT}^{r-1}$. Removing the pure $TT$ part leaves the displayed
+non-Virasoro envelope, and the finite residue-state and Laurent-tier
+hypotheses multiply it by $D_p r^{d_p}$.
+
+The Catalan estimate $\mathrm{Cat}_{r-1}\le 4^{r-1}$ gives
+\[
+ D_p r^{d_p}\mathrm{Cat}_{r-1}
+ (b_{TT}+b_{TW}+b_{WW})^{r-1}
+ \le
+ D_p r^{d_p}\bigl(4(b_{TT}+b_{TW}+b_{WW})\bigr)^r,
+\]
+which is an exponential-polynomial bound. Stirling then gives
+\[
+ \left(D_p r^{d_p}R_p^r/r!\right)^{1/r}
+ \sim R_p e/r \longrightarrow 0.
+\]
+For $p=2$, $2p-1=3$ and $4p-3=5$, hence
+$b_{TW}=3\cdot3=9$, $b_{WW}=9\cdot5=45$, and
+$R_2=4(6+9+45)=240$. A factorial-growth probe violates the bound at
+finite arity, so a factorial regular sector cannot pass through this
+model.
+\end{proof}
+
+\begin{conjecture}[Zhu-bounded Massey hypothesis]
+\label{lem:wp-zhu-bounded-masseys}
+Every Massey product
+$\langle \Omega_{i_1}, \Omega_{i_2}, \ldots, \Omega_{i_k} \rangle$
+on the $\cW(p)$ bar cohomology is bounded in norm by
+$(2p)^{k+1}$, uniformly in the vertex count of the underlying bar
+graph.
+\end{conjecture}
+
+\begin{remark}[Failure of the Zhu-bounded-Massey implication]
+\label{rem:zhu-bounded-massey-retraction}
+Lemma~\ref{lem:wp-zhu-bounded-masseys} follows from Cauchy--Schwarz on
+the finite-dimensional Zhu inner product only when a Massey product of
+length $k$ has exactly $k+1$ Zhu-algebra matrix elements. The
+primary-source picture splits as follows.
+
+$C_2$-cofiniteness bounds the graded dimensions of $\cW(p)$ and its
+Zhu algebra $A(\cW(p))$; at every fixed bar degree, the space of
+classes is finite-dimensional.
+
+The implication bounded Zhu $\Rightarrow$ bounded Massey, however,
+does not hold. The Massey product is a secondary cohomology operation;
+its values lie in $H^{\bullet}(B(\cW(p)))$, the full bar cohomology
+graded simultaneously by Zhu-grading and bar-complex degree. Bounding
+individual Zhu components does not bound the cumulative Massey tower
+across bar degrees. Gurarie 1993 and Flohr 1996 construct explicit
+logarithmic-CFT Massey towers whose amplitudes accumulate
+super-polynomially despite the ambient finite-dimensional Zhu algebra.
+Cauchy-Schwarz on the Zhu inner product yields $(2p)^{k+1}$ only on
+the Zhu trace; the bar-graph amplitude pairing carries its own
+positivity and boundedness, separate from the Zhu trace.
+
+The actual dependency is
+\[
+ \text{polynomial shadow growth} \;\Longleftrightarrow\;
+ \text{bar-graph amplitude polynomial bound},
+\]
+and $C_2$-cofiniteness has not been established to imply the latter.
+The non-tempering obstruction
+$\langle \Omega, \Omega, \Omega \rangle \ne 0$ is logically
+independent of the Zhu bound.
+\end{remark}
+
+\begin{remark}[Counterexample candidates in the logarithmic landscape]
+\label{rem:gurarie-flohr-massey-obstruction}
+Gurarie 1993 (``Logarithmic operator product expansion'',
+arXiv:hep-th/9303160) and Flohr 1996 (``On modular invariant
+partition functions of conformal field theories with logarithmic
+operators'', arXiv:hep-th/9605151) construct logarithmic-CFT
+amplitudes whose $n$-point functions grow as $(\log z)^{n}$ in the
+collision limit. The corresponding Massey triple products
+$\langle \Omega, \Omega, \Omega \rangle$ on bar cohomology are
+non-vanishing and are not bounded by a power of $\dim A(\cW(p))$ in
+the Zhu-trace sense of
+Remark~\ref{rem:zhu-bounded-massey-retraction}. These constructions
+are the primary-source obstruction to the claimed
+Zhu-bounded-Massey lemma.
+
+Whether the logarithmic growth produced by Gurarie-Flohr amplitudes
+propagates to factorial growth of $S_r(\cW(p))$, or is tamed by
+cancellations in the bar differential, is the precise residual open
+problem.
+\end{remark}
+
+\begin{remark}[Correlation-function Massey and shadow-tower Massey:
+two boundedness notions]
+\label{rem:correlation-vs-shadow-massey}
+The Gurarie-Flohr obstruction
+(Remark~\ref{rem:gurarie-flohr-massey-obstruction}) and the failure of
+Lemma~\ref{lem:wp-zhu-bounded-masseys} address exactly one of two
+distinct properties of the $\cW(p)$ bar cohomology. The tempering
+implication routes through the other property.
+
+\emph{(A) Correlation-function Massey boundedness.} The amplitude norm
+\[
+ \bigl\| \langle \Omega_{i_1}, \ldots, \Omega_{i_k}\rangle_{\mathrm{corr}}
+ \bigr\|
+ \;:=\;
+ \sup_{z_j}\,
+ \bigl\lvert
+ \langle \Omega_{i_1}(z_1) \cdots \Omega_{i_k}(z_k)\rangle_{\cW(p)}
+ \bigr\rvert
+\]
+is the natural norm on correlation functions. Gurarie 1993 and
+Flohr 1996 construct explicit amplitudes with $(\log z)^k$ growth in
+the coincidence limit; this norm exceeds every power of
+$\dim A(\cW(p))$.
+
+\emph{(B) Shadow-tower Massey boundedness.} The shadow-tower
+coefficient $S_r(\cW(p))$ is the Orlik-Solomon residue of the bar
+propagator against the universal Arnold / $\dlog$ form on
+$\mathrm{FM}_r(\CC)$. Concretely,
+\[
+ S_r(\cW(p))
+ \;=\;
+ \bigl\langle [\Barch(\cW(p))]_r,\;
+ \dlog\, E(z_{ij})_{\mathrm{Arnold}}
+ \bigr\rangle_{\mathrm{FM}_r(\CC)},
+\]
+a structure constant of the $A_\infty$ coproduct extracted by the
+regularised residue of the bar propagator. The required estimate is
+the regular-residue bound of
+Conjecture~\ref{conj:wp-regular-sector-amplitude-bound}: exponential,
+not factorial, growth in $r$.
+
+The Gurarie-Flohr amplitudes live in the $(\log z_{ij})^n$-enriched
+correlation sector; the shadow tower lives on the regular
+Orlik-Solomon residue sector. The projection from logarithmic
+amplitudes to regular residues, together with the bound on the
+resulting coefficients, is the content of
+Conjecture~\ref{conj:wp-regular-sector-amplitude-bound}.
+
+The split is:
+\begin{itemize}[nosep]
+\item (a) \emph{Correlation-function Massey boundedness on $\cW(p)$}:
+ falsified by Gurarie-Flohr.
+\item (b) \emph{Shadow-tower Massey boundedness on $\cW(p)$}:
+ exponential bound on $|S_r|$ in $r$, equivalently
+ $\limsup (|S_r|/r!)^{1/r} = 0$. Open. The
+ Adamovi\'c-Milas character-expansion route of
+ Remark~\ref{rem:wp-tempering-scope} addresses (b) directly.
+\end{itemize}
+Conjecture~\ref{conj:tempered-stratum-contains-wp} is claim (b);
+Gurarie-Flohr falsifies (a).
+\end{remark}
+
+\begin{definition}[Regular--nilpotent--logarithmic shadow decomposition]
+\label{def:wp-reg-nil-log-shadow-decomposition}
+Fix $p \ge 2$ and choose configuration-space cutoffs and branch sectors
+for the logarithmic boundary fields. The full triplet shadow coefficient
+has the Jordan decomposition
+\[
+ S_r(\cW(p))
+ \;=\;
+ S_r^{\mathrm{reg}}(\cW(p))
+ + S_r^{\mathrm{nil}}(\cW(p))
+ + S_r^{\log}(\cW(p)).
+\]
+The first summand is ordinary semisimple propagation and is refined by
+Definition~\ref{def:wp-shadow-channel-decomposition} as
+\[
+ S_r^{\mathrm{reg}}
+ = S_r^{TT}+S_r^{TW}+S_r^{WW}.
+\]
+The second summand is produced by nilpotent $L_0$-Jordan insertions.
+The third summand records explicit powers of
+$\log(z_i-z_j)$ in logarithmic boundary-changing correlators. The
+$TT/TW/WW$ split is therefore a decomposition of
+$S_r^{\mathrm{reg}}$, not of the full logarithmic shadow.
+\end{definition}
+
+\begin{conjecture}[Logarithmic boundary-changing amplitude bound;
+licensing $\alpha+\gamma+\delta+\varepsilon$;
+\ClaimStatusConjectured{}]
+\label{conj:wp-logarithmic-boundary-amplitude-bound}
+Let $\phi_{0,1}$ denote the logarithmic boundary field in the
+triplet $\cW(p)$ screening realisation. For every fixed $p \ge 2$,
+after fixing configuration-space cutoffs and logarithmic branch sectors,
+there exist constants $C,M < \infty$, $\varepsilon>0$, and collision
+exponents $N_{ij}$ such that for all arities $r$ the regular
+logarithmic-sector correlators satisfy
+\[
+ \left|
+ \left\langle
+ \phi_{0,1}(z_1)\cdots \phi_{0,1}(z_r)
+ \right\rangle
+ \right|
+ \;\le\;
+ C^r (r!)^{1-\varepsilon}
+ \prod_{i<j}|z_i-z_j|^{-N_{ij}}
+ \left(1+\sum_{i<j}|\log |z_i-z_j||\right)^M .
+\]
+Equivalently, after the regularised Orlik--Solomon residue defining the
+shadow coefficient,
+\[
+ \limsup_{r\to\infty}
+ \left(\frac{|S_r(\cW(p))|}{r!}\right)^{1/r}=0
+\]
+is reduced to the regular bound
+Conjecture~\ref{conj:wp-regular-sector-amplitude-bound} together with
+the logarithmic estimate
+\[
+ |S_r^{\log}(\cW(p))|
+ \;\le\;
+ C^r(r!)^{1-\varepsilon}.
+\]
+Finite-dimensionality of the Zhu algebra and $C_2$-cofiniteness do not
+imply this estimate. They control finite graded fibres; the displayed
+bound controls arity growth through explicit logarithmic powers.
+\end{conjecture}
+
+\begin{remark}[Triplet frontier after the logarithmic split]
+The finite pole-envelope model of
+Proposition~\ref{prop:wp-finite-pole-envelope-reduction} and the
+regular bound of Conjecture~\ref{conj:wp-regular-sector-amplitude-bound}
+address $S_r^{\mathrm{reg}}$. They do not control
+$S_r^{\log}$. The missing theorem for the logarithmic sector is the
+subfactorial bound
+$|S_r^{\log}|\le C^r(r!)^{1-\varepsilon}$. Until that estimate and the
+regular $TW/WW$ estimate are proved, $\cW(p)$ remains a frontier family,
+not a theorem-level member of the tempered stratum.
+\end{remark}
+
+
+\section{Universal tempering of $\cW(p)$}
+\label{sec:universal-tempering-wp}
+
+\begin{conjecture}[Tempered stratum contains every logarithmic
+$\cW(p)$ triplet]
+\label{conj:tempered-stratum-contains-wp}
+For every integer $p \ge 2$, the logarithmic triplet algebra
+$\cW(p)$ at central charge $c(p) = 1 - 6(p-1)^2 / p$ satisfies the
+analytic tempering hypothesis
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r(\cW(p)) \rvert / r! \bigr)^{1/r}
+ \;=\; 0,
+\]
+with conjectural ordinary-generating convergence radius
+\[
+ \rho_*(\cW(p)) > 0.
+\]
+The exact radius is part of the conjectural amplitude problem: the
+formal channel bounds suggest the candidates
+$\rho_{TT}=\lvert c(p)\rvert/6$,
+$\rho_{TW}=\lvert c(p)\rvert/(12p-6)$, and
+$\rho_{WW}=\lvert c(p)\rvert/(4p-3)$, so the full radius is not
+determined by the $WW$ channel alone. The conjecture also requires the
+logarithmic boundary estimate of
+Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}; finite
+Zhu data do not supply it.
+If this holds, the KS-$\rho$ Banach model satisfies the tempering input
+of Theorem~\ref{thm:chain-level-e3-original-complex-conditional} at
+every $\cW(p)$, $p \ge 2$; the chain-level $E_3$-topological structure
+on the original curved-Dunn complex additionally requires vanishing of
+the Banach transfer class $\mathfrak{o}_{\mathrm{Ban}}$ and the
+finite-propagation class $\mathfrak{o}_{\oplus}$.
+\end{conjecture}
+
+\begin{remark}[$\cW(p)$ tempering conjecture]
+\label{rem:wp-tempering-scope}
+Conjecture~\ref{conj:tempered-stratum-contains-wp} stands as a
+conjecture, not a theorem under named hypotheses. The Zhu-bounded-Massey
+route to the tempered-stratum claim
+(Lemma~\ref{lem:wp-zhu-bounded-masseys},
+Remark~\ref{rem:zhu-bounded-massey-retraction}) does not survive
+primary-source inspection of the Gurarie-Flohr logarithmic amplitudes
+(Remark~\ref{rem:gurarie-flohr-massey-obstruction}):
+$C_2$-cofiniteness does not entail bounded Masseys in the relevant
+sense.
+
+The three-channel $TT + TW + WW$ decomposition
+(Section~\ref{sec:wp-three-channel}) supplies polynomial bounds on the
+Virasoro-only $TT$ subchannel
+(Lemma~\ref{lem:wp-virasoro-subchannel-tempered}) unconditionally. The
+$TW$ and $WW$ channels remain open; the Adamovi\'c-Milas
+$\phi_{0,1}$ character expansion and the logarithmic boundary estimate
+of Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}
+provide a direct computational route to $S_r(\cW(p))$ amplitudes
+bypassing the Zhu-Massey argument. The immediate numerical check is
+$\lvert S_r \rvert = O(r^{O(1)})$ versus $O(r!)$ at small $p$
+($p = 2, 3, 4, 5$). The precise content needed is
+Conjectures~\ref{conj:wp-regular-sector-amplitude-bound}
+and~\ref{conj:wp-logarithmic-boundary-amplitude-bound}.
+
+The logical structure is the following. From $C_2$-cofiniteness of
+$\cW(p)$ ($p \ge 2$) with finite-dimensional Zhu algebra, the
+implication chain $C_2$-cofiniteness $\Rightarrow$ bounded Masseys
+$\Rightarrow$ tempering breaks at the first arrow: Gurarie-Flohr
+amplitudes exhibit unbounded Masseys at finite-dimensional Zhu. The
+$\cW(p)$ Virasoro subchannel is tempered unconditionally; the $TW$
+and $WW$ channels admit a direct-amplitude bound via Adamovi\'c-Milas
+character data. The Gurarie-Flohr falsification targets
+correlation-function Massey boundedness in the logarithmic amplitude
+sector. The shadow tower requires a regular-residue amplitude bound,
+distinct from a Zhu-trace bound on logarithmic correlation amplitudes,
+together with the subfactorial logarithmic residue estimate of
+Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}. Thus
+Conjecture~\ref{conj:tempered-stratum-contains-wp} is scoped by
+Conjectures~\ref{conj:wp-regular-sector-amplitude-bound}
+and~\ref{conj:wp-logarithmic-boundary-amplitude-bound}.
+\end{remark}
+
+\begin{remark}[Logarithmic triplet scope in universal holography]%
+\label{rem:anchor-wp-regular-sector}%
+\index{logarithmic W(p)!regular-sector amplitude bound}%
+Conjecture~\ref{conj:tempered-stratum-contains-wp} supplies the
+regular-sector hypothesis for the universal-holography theorem on the
+logarithmic boundary. The
+3D-quantum-gravity Virasoro rung holds chain-level on the
+non-logarithmic tempered, non-critical standard landscape, where
+Virasoro tempering is established by
+Theorem~\ref{thm:tempered-stratum-contains-virasoro}. The logarithmic
+$\cW(p)$ subfamily enters only after the regular-sector amplitude bound
+of Conjecture~\ref{conj:wp-regular-sector-amplitude-bound} and the
+logarithmic boundary estimate of
+Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}; the
+first checks are $p=2,3,4,5$. No additional operadic obstruction is
+asserted.
+\end{remark}
+
+\begin{remark}[Implication from channel and logarithmic bounds to full tempering]
+Assume the conjectural $TW$ and $WW$ regular-sector bounds of
+Conjecture~\ref{prop:wp-channel-upper-bounds} and the logarithmic
+bound of
+Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}. By the
+triangle inequality applied to the regular channel decomposition and
+the Jordan decomposition
+(Definitions~\ref{def:wp-shadow-channel-decomposition}
+and~\ref{def:wp-reg-nil-log-shadow-decomposition}),
+\[
+ \lvert S_r(\cW(p)) \rvert \;\le\;
+ \lvert S_r^{TT}(\cW(p)) \rvert +
+ \lvert S_r^{TW}(\cW(p)) \rvert +
+ \lvert S_r^{WW}(\cW(p)) \rvert+
+ \lvert S_r^{\mathrm{nil}}(\cW(p)) \rvert+
+ \lvert S_r^{\log}(\cW(p)) \rvert.
+\]
+The three semisimple channels are tempered with
+$\limsup (\lvert S_r^\bullet \rvert / r!)^{1/r} = 0$ by
+Conjecture~\ref{prop:wp-channel-upper-bounds}. The logarithmic summand
+is tempered by the displayed $C^r(r!)^{1-\varepsilon}$ bound. Fixed
+nilpotent Jordan length contributes only polynomial logarithmic powers
+after the same cutoffs. Since the triangle inequality is preserved
+under the $r$-th root of sum operation at $r \to \infty$ limsup,
+the full shadow sequence satisfies
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r(\cW(p)) \rvert / r! \bigr)^{1/r} \;=\; 0.
+\]
+The ordinary-generating radius would be the minimum of the proved
+and conjectural channel radii, not automatically the $WW$ radius:
+for instance at $p=3$ the displayed channel formulae give
+$\rho_{TW}=7/30$ and $\rho_{WW}=7/9$. Determining the true full
+radius therefore belongs to the same regular-sector amplitude
+and logarithmic amplitude problem as
+Conjecture~\ref{conj:tempered-stratum-contains-wp}.
+If the conjecture is proved, Theorem~\ref{thm:chain-level-e3-original-complex-conditional}
+then supplies the Banach convergence input; raw original-complex
+$E_3$ descent still depends on
+$\mathfrak{o}_{\mathrm{Ban}}=\mathfrak{o}_{\oplus}=0$.
+\end{remark}
+
+\begin{remark}[$\cW(2)$ as the first full-triplet computation target]
+\label{rem:p2-symplectic-fermion-truncation}
+At $p = 2$, the triplet algebra $\cW(2)$ coincides with the
+symplectic fermion / $bc$-ghost-pair VOA at $c = -2$ (Kausch 1991;
+Gaberdiel-Kausch 1996). This is the smallest triplet test case:
+$c(2)=-2$, the additional fields $W^a$ have conformal weight~$3$,
+the $W$-$W$ OPE has pole order~$6$, and
+$\dim A(\cW(2))=4$. The proved comparison computes only the Virasoro
+$T$-line at $c=-2$ and the finite pole-envelope model
+of Proposition~\ref{prop:wp-finite-pole-envelope-reduction}; the full
+triplet shadow tower, including actual $T$-$W$ and $W$-$W$ regular
+residues, still requires a logarithmic $\cW(p)$ shadow engine. Thus no
+full-triplet truncation or infinite-radius statement is used here as
+proved input. Proposition~\ref{prop:wp-c2-forbids-finite-free-strong-generation}
+rules out the finite-free-generation proof route even at $p=2$. The
+number $\lvert c(p)\rvert/(4p-3)$ remains only the formal $WW$-channel
+radius until that recurrence is constructed.
+\end{remark}
+
+\begin{remark}[Sharpness and finite-$r$ numerical evidence]
+\label{rem:wp-finite-r-evidence}
+Numerical evaluation at $r = 8$ by the Vol~I Virasoro recurrence at
+$c = c(p)$, restricted to the $TT$ channel, gives
+indicative bounds on $S_r^{TT}(\cW(p))$:
+\begin{itemize}[nosep]
+\item $p = 3$, $c = -7$: $S_r^{TT}(\cW(3))$ for $r = 4, \ldots, 8$ is
+ $\{10/91, 48/637, 9760/173901, 126720/2840383, 1379920/36924979\}$,
+ strictly decreasing to zero in absolute value.
+\item $p = 4$, $c = -25/2$: $S_r^{TT}$ for $r = 4, \ldots, 8$ is
+ $\{8/405, 128/16875, 189184/61509375, 518144/398671875,
+ 589190144/1037970703125\}$, decreasing.
+\item $p = 5$, $c = -91/5$: $S_r^{TT}$ for $r = 4, \ldots, 8$
+ decreasing with ratios bounded above.
+\end{itemize}
+In each case, $(\lvert S_r \rvert / r!)^{1/r}$ at $r = 8$ is bounded
+above by $10^{-2}$, already well below the $1/e \approx 0.368$
+pseudo-obstruction level in the Stirling comparison
+(Remark~\ref{rem:stirling-error-first-principles}).
+\end{remark}
+
+\section{The non-tempered locus after the triplet reduction}
+\label{sec:non-tempered-locus-triplet-reduction}
+
+The logarithmic-triplet reduction, combined with the
+results of Chapter~\ref{ch:tempered-stratum-characterization},
+separates the non-logarithmic landscape from the logarithmic landscape
+governed by Conjecture~\ref{conj:tempered-stratum-contains-wp}:
+
+\begin{corollary}[Dichotomy: non-tempered stratum is empty on
+the non-logarithmic $C_2$-cofinite landscape; empty on the full
+$C_2$-cofinite landscape under
+Conjecture~\ref{conj:tempered-stratum-contains-wp}]
+\label{cor:wp-dichotomy-healed}
+\emph{Scope.} The following two-part statement separates the
+unconditional non-logarithmic conclusion from the conditional
+logarithmic extension; each part is recorded
+individually.
+
+\emph{Part (A). Non-logarithmic $C_2$-cofinite landscape
+(unconditional).}
+The non-tempered stratum of class $\mathsf{M} \cup \mathsf{M}^*$ on
+the \emph{non-logarithmic} $C_2$-cofinite landscape is empty:
+\begin{itemize}[nosep]
+\item Virasoro generic-$c$: tempered
+ (Theorem~\ref{thm:tempered-stratum-contains-virasoro}).
+\item Principal $\cW_3$ generic-$c$: tempered
+ (Theorem~\ref{thm:tempered-stratum-contains-w3}).
+\item Principal $\cW_N$, $N \ge 4$: tempered on the finite-envelope
+ locus
+ (Theorem~\ref{thm:wn-tempered-all-N} in
+ Chapter~\ref{ch:wn-tempered-closure}); Stirling dominance applies at
+ every finite $\beta_N$ after the Riccati envelope is supplied. The
+ harmonic closed form
+ $\beta_N = 12(H_N - 1) = \sum_{s=2}^{N} 12/s$ is
+ Conjecture~\ref{conj:beta-N-harmonic-closed-form}, not an
+ independent all-rank proof.
+\end{itemize}
+
+\emph{Part (B). Logarithmic extension under the triplet conjecture.}
+The extension of Part (A) to the full $C_2$-cofinite standard
+landscape (adding the logarithmic triplet and singlet) reads:
+\begin{itemize}[nosep]
+\item Logarithmic triplet $\cW(p)$, $p \ge 2$: tempered under
+ Conjecture~\ref{conj:tempered-stratum-contains-wp}; this requires
+ both the regular semisimple bound of
+ Conjecture~\ref{conj:wp-regular-sector-amplitude-bound} and the
+ logarithmic boundary estimate of
+ Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}. The
+ Gurarie-Flohr amplitudes show that finite Zhu data do not imply the
+ logarithmic estimate.
+\item Singlet $\cM(p)$, $p \ge 2$: tempered under the direct
+ analogue of Conjecture~\ref{conj:tempered-stratum-contains-wp}; the
+ singlet has its own logarithmic regular-sector amplitudes and is not
+ a Virasoro-only reduction.
+\end{itemize}
+
+\emph{Chain-level consequence.} Every VOA in Part (A) satisfies the
+tempering input for the Banach model; every VOA in Part (B) satisfies
+that input under Conjecture~\ref{conj:tempered-stratum-contains-wp}.
+Original-complex $E_3$ descent in both parts is the additional
+obstruction condition
+$\mathfrak{o}_{\mathrm{Ban}}=\mathfrak{o}_{\oplus}=0$ of
+Theorem~\ref{thm:chain-level-e3-original-complex-conditional}.
+\end{corollary}
+
+\begin{proof}
+Part (A) is a direct combination of
+Theorem~\ref{thm:tempered-stratum-contains-virasoro},
+Theorem~\ref{thm:tempered-stratum-contains-w3}, and
+Theorem~\ref{thm:wn-tempered-all-N}, each cited at its stated
+unconditional scope. Part (B) follows by combining Part (A) with
+Conjecture~\ref{conj:tempered-stratum-contains-wp}; the singlet case
+requires the parallel regular and logarithmic amplitude bounds for its
+logarithmic generator. No Virasoro-only reduction is used.
+\end{proof}
+
+\begin{remark}[The non-tempered locus after the triplet reduction]
+\label{rem:non-tempered-frontier-unbounded-zhu}
+After the triplet reduction, the finite-Zhu logarithmic triplet remains
+a two-part amplitude problem:
+Conjecture~\ref{conj:wp-regular-sector-amplitude-bound} for
+$S_r^{\mathrm{reg}}$ and
+Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound} for
+$S_r^{\log}$. Outside that finite-Zhu problem, the remaining
+non-tempered candidates on the class-$\mathsf{M}^*$ locus are VOAs
+with infinite-dimensional Zhu algebra.
+
+Three explicit candidates survive as open problems:
+\begin{enumerate}[nosep]
+\item \textbf{Monster-type twisted sectors (Frenkel-Lepowsky-Meurman)}:
+ the full orbifold $\cV^\natural$ of the Leech lattice VOA by the
+ $\mathbb{Z} / 2$ Leech involution, viewed as a sum of twisted sectors,
+ has a logarithmic pyramid of pseudo-trace modules whose total
+ dimension is infinite (Miyamoto 2004). The open question
+ is whether the shadow tower of the whole pyramid (as opposed to
+ the vacuum sector alone) is tempered.
+\item \textbf{Coset realisations at irrational central charge
+ (Creutzig-Kanade-Linshaw)}: commutants
+ $\mathrm{Com}(H_{\kappa}, \cA)$ for irrational $\kappa$ typically
+ have infinite-dim Zhu algebra generated by a non-rational lattice.
+ Tempering of such cosets is open.
+\item \textbf{Non-rational affine minimal cosets
+ (Adamovi\'c et al.)}: $\widehat{\mathfrak{sl}}_2$ at admissible
+ levels $k = -2 + p/q$ has a logarithmic module category with
+ infinite-dim Zhu algebra. Tempering is open.
+\end{enumerate}
+These are the infinite-Zhu problems. The triplet $\cW(p)$ is a
+separate finite-Zhu problem until
+Conjectures~\ref{conj:wp-regular-sector-amplitude-bound}
+and~\ref{conj:wp-logarithmic-boundary-amplitude-bound} are proved.
+\end{remark}
+
+\begin{conjecture}[Finite-Zhu amplitude criterion for tempering]
+\label{conj:tempered-unbounded-zhu}
+Let $\cA$ be a simple $C_2$-cofinite chiral algebra in the standard
+landscape, chirally Koszul in the Vol~I sense. Suppose that its
+bar-graph amplitudes admit a family-specific subfactorial bound: after
+splitting into regular, nilpotent, and logarithmic channels, each
+summand is bounded either by an exponential-polynomial sequence
+$C^r r^d$ or by $C^r(r!)^{1-\varepsilon}$ for some
+$\varepsilon>0$. Then $\cA$ is analytically tempered:
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r(\cA) \rvert / r! \bigr)^{1/r}
+ \;=\; 0.
+\]
+Finite-dimensionality of $A(\cA)$ is not itself the bound; it is only
+one algebraic input in the channel estimate.
+\end{conjecture}
+
+\begin{remark}[Evidence for Conjecture~\ref{conj:tempered-unbounded-zhu}]
+\label{rem:evidence-for-tempering-criterion}
+The evidence is family-specific. Generic Virasoro and generic affine
+$V_k(\mathfrak g)$ are not $C_2$-cofinite inputs; their tempering comes
+from the Virasoro recurrence and the class~$\mathsf L$ finite-depth
+bar calculation. Rational Virasoro minimal quotients, positive-definite
+lattice VOAs, Schellekens holomorphic rows, and Monster
+$V^\natural$ have finite algebraic shadows only together with the
+finite-depth, finite-envelope, or finite-orbifold BV data used in their
+own proofs. Principal $\cW_N$ is unconditional for $N=3$ and
+finite-envelope conditional for $N\ge4$. The logarithmic $\cW(p)$ and
+singlet $\cM(p)$ rows remain conjectural: the regular-sector shadow
+bound and the logarithmic $\phi_{0,1}$ boundary-amplitude bound are
+both pending, and Gurarie--Flohr rules out deriving the latter from
+finite Zhu data. Thus Conjecture~\ref{conj:tempered-unbounded-zhu}
+records an amplitude package to be proved, not a Zhu-only criterion.
+\end{remark}
+
+\section{Independent derivations}
+\label{sec:wp-iv-summary}
+
+The proved theorems and conjectural statements have the following
+verification and evidence structure, with disjoint source families for
+each statement.
+
+\textbf{1. Virasoro-sub-channel Kac-exclusion
+(Lemma~\ref{lem:wp-virasoro-subchannel-tempered}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: direct algebraic solution of
+ $c(p) = 1 - 6(p-1)^2/p = -22/5$: no integer $p \ge 2$ solution.
+\item \emph{Verified against}: the triplet central-charge formula
+ evaluated at $p = 2, 3, 4, 5, 10$ and compared numerically to
+ $-22/5 = -4.4$: all values distinct.
+\item \emph{Disjoint rationale}: derivation uses algebraic Kac-zero
+ solution; verification uses the independent triplet central-charge
+ formula.
+\end{itemize}
+
+\textbf{2. Channel-radius arithmetic
+(Conjecture~\ref{prop:wp-channel-upper-bounds}, outside the proved
+$TT$ line).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: Theorem~\ref{thm:tempered-stratum-contains-virasoro}
+ for the $TT$ line, plus the Adamovi\'c-Milas OPE pole orders for
+ the conjectural $TW$ and $WW$ regular-sector lines.
+\item \emph{Verified against}: the Virasoro shadow recurrence
+ at $c = c(p)$ for $p = 2, 3, 4, 5$ through $r = 8$; the $TW$ and
+ $WW$ entries are radius arithmetic targets, not full-channel
+ computations. The arithmetic check records that the formal bottleneck
+ is $TW$, not $WW$.
+\item \emph{Disjoint rationale}: the proved $TT$ line uses the
+ Virasoro recurrence. The $TW$ and $WW$ lines require the logarithmic
+ $\cW(p)$ shadow recurrence.
+\end{itemize}
+
+\textbf{3. Zhu algebra dimension, not Zhu-bounded Masseys
+(Proposition~\ref{prop:wp-zhu-finite}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: Adamovi\'c-Milas 2008
+ Proposition~4.3 ($\dim A(\cW(p)) = 2p$).
+\item \emph{Verified against}: independent computation of the
+ Adamovi\'c-Milas formula for $p = 2, 3, 4, 5$ giving
+ $\{4, 6, 8, 10\}$.
+\item \emph{Disjoint rationale}: derivation cites the Adamovi\'c-Milas
+ paper; verification re-derives the dimension formula arithmetically
+ via the triplet's 2 trivial + $p-1$ non-trivial + $p-1$ pseudo-trace
+ module count. It does not verify any Massey bound.
+\end{itemize}
+
+\textbf{4. Finite free strong generation obstruction
+(Proposition~\ref{prop:wp-c2-forbids-finite-free-strong-generation}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: Adamovi\'c--Milas $C_2$-cofiniteness plus
+ the Li--PBW description of the $C_2$ quotient of a freely strongly
+ generated vertex algebra.
+\item \emph{Verified against}: direct Hilbert-series calculation for the
+ polynomial $C_2$ quotient
+ $\CC[x_T,x_{W^+},x_{W^0},x_{W^-}]$ with degrees
+ $(2,2p-1,2p-1,2p-1)$.
+\item \emph{Disjoint rationale}: the proof uses the structural
+ implication ``free strong generation $\Rightarrow$ polynomial
+ $C_2$ quotient''; the Hilbert series detects infinite support
+ without using triplet characters.
+\end{itemize}
+
+\textbf{5. Regular-sector amplitude bound
+(Conjecture~\ref{conj:wp-regular-sector-amplitude-bound}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: not proved; this is the exact missing
+ lemma for $TW/WW$ triplet tempering.
+\item \emph{Finite reduction}: Proposition~\ref{prop:wp-finite-pole-envelope-reduction}
+ proves that any finite residue-state pole-envelope realisation of
+ the regular sector gives the required exponential-polynomial bound.
+ For the $\cW(2)$ model the exact constants are
+ $C_2=4$, $N_2=3$, $R_2=240$.
+\item \emph{Verified against}: finite-model
+ bounds enforce the scope by rejecting finite-free-generation, full
+ $\cW(2)$ truncation, and full-triplet radius formulas as proved
+ inputs; the factorial-growth probe rejects any sequence with $r!$
+ growth.
+\item \emph{Disjoint rationale}: the finite-model bound carries only
+ the combinatorial reduction; the actual $\cW(p)$ factorisation
+ through that model is the open mathematical input.
+\end{itemize}
+
+\textbf{6. Logarithmic boundary-changing amplitude bound
+(Conjecture~\ref{conj:wp-logarithmic-boundary-amplitude-bound}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: not proved; this is the exact missing
+ logarithmic-sector estimate for the $\phi_{0,1}$ boundary-changing
+ correlators after branch and configuration-space cutoffs are fixed.
+\item \emph{Finite reduction}: any bound
+ $|S_r^{\log}|\le C^r(r!)^{1-\varepsilon}$ gives
+ $\limsup(|S_r^{\log}|/r!)^{1/r}=0$ by Stirling, because
+ $(C^r/(r!)^\varepsilon)^{1/r}\to0$.
+\item \emph{Verified against}: the Gurarie-Flohr logarithmic amplitudes
+ force the statement to remain independent of finite Zhu algebra and
+ $C_2$-cofiniteness.
+\item \emph{Disjoint rationale}: this is a logarithmic boundary-field
+ estimate, not a semisimple $TT/TW/WW$ pole-envelope computation.
+\end{itemize}
+
+\textbf{7. Universal $\cW(p)$ tempering
+(Conjecture~\ref{conj:tempered-stratum-contains-wp}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: combination of
+ the proved $TT$ line and
+ Conjectures~\ref{conj:wp-regular-sector-amplitude-bound}
+ and~\ref{conj:wp-logarithmic-boundary-amplitude-bound}.
+\item \emph{Verified against}: numerical extraction of
+ $(\lvert S_r^{TT} \rvert / r!)^{1/r}$ at $r = 8$ from the Vol~I
+ Virasoro recurrence at $c = c(p)$ for $p = 3, 4, 5$; values all
+ well below $1/e \approx 0.368$.
+\item \emph{Disjoint rationale}: this is evidence for the $TT$ line
+ only. It does not compute the full triplet shadow tower.
+\end{itemize}
+
+\textbf{8. Dichotomy on $C_2$-cofinite
+(Corollary~\ref{cor:wp-dichotomy-healed}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: combination of
+ Theorem~\ref{thm:tempered-stratum-contains-virasoro},
+ Theorem~\ref{thm:tempered-stratum-contains-w3}, and
+ Conjecture~\ref{conj:tempered-stratum-contains-wp}.
+\item \emph{Verified against}: explicit enumeration of
+ $C_2$-cofinite families with the logarithmic triplet and singlet
+ entries marked conjectural, not verified.
+\item \emph{Disjoint rationale}: the corollary is a logical
+ combination; the verification enumerates the known
+ $C_2$-cofinite families.
+\end{itemize}
+
+\section{Logarithmic locus in the tempered stratum}
+\label{sec:wp-tempered-stratum-location}
+
+\begin{remark}[Triplet reduction]
+\label{rem:wp-triplet-reduction}
+The triplet algebra $\cW(p)$ realises class $\mathsf{M}^*$ structure:
+non-free strong generation is genuine but does not by itself entail
+factorial growth. The two assertions split.
+Proposition~\ref{prop:wp-c2-forbids-finite-free-strong-generation}
+excludes finite free strong generation for the $C_2$-cofinite triplet;
+finite PBW agreement is therefore not a proof route. The
+Zhu-bounded-Massey mechanism does not control regular shadow bounds or
+the logarithmic boundary-changing estimate. The strongest closed form
+is therefore the pair
+Conjectures~\ref{conj:wp-regular-sector-amplitude-bound}
+and~\ref{conj:wp-logarithmic-boundary-amplitude-bound}; finite-Zhu
+tempering takes the amplitude-package form of
+Conjecture~\ref{conj:tempered-unbounded-zhu}, not a Zhu-only
+Massey-bound implication.
+\end{remark}
+
+The logarithmic $\cW(p)$ problem from
+Chapter~\ref{ch:tempered-stratum-characterization} reads as follows.
+The algebra $\cW(p)$ was one of three candidates for the non-empty
+non-tempered stratum; its $TT$ sub-channel is tempered for every
+$p \ge 2$, and the full triplet statement reduces to the regular-sector
+$TW/WW$ bound and the logarithmic $\phi_{0,1}$ boundary estimate
+inside Conjecture~\ref{conj:tempered-stratum-contains-wp}.
+Original-complex
+$E_3$ descent imposes the additional vanishing
+$\mathfrak{o}_{\mathrm{Ban}}=\mathfrak{o}_{\oplus}=0$. Outside this
+problem the open candidates are Monster-type twisted sectors with
+infinite pyramid, coset realisations at irrational central charge, and
+non-rational affine minimal cosets. Companion sources:
+Chapter~\ref{ch:tempered-stratum-characterization} for Virasoro and
+$\cW_3$ tempering; the FGST theta representation for the $\cW(p)$
+structure; and the Adamovi\'c-Milas generator count and Zhu algebra
+dimension.
+
+The universal tempering conjecture
+(Conjecture~\ref{conj:tempered-unbounded-zhu}) becomes a natural
+endpoint once Conjecture~\ref{conj:tempered-stratum-contains-wp}
+closes. The current dichotomy stands at the weaker form: every
+non-logarithmic $C_2$-cofinite family is tempered, and the
+logarithmic triplet and singlet sit as regular/logarithmic amplitude
+problems.

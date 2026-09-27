@@ -1,0 +1,131 @@
+\chapter{Brace signs and degree conventions}
+\label{app:brace-signs}
+
+\subsection*{The question}
+Brace operations along trees inherit two competing Koszul signs --- one from the algebraic suspension $s^{-1}$, the other from the configuration-space orientation. Specifying both consistently is the prerequisite for the chiral Deligne--Tamarkin avatar to receive a well-defined operadic action. We fix the conventions, prove the pre-Lie identity, and audit the Arnold cancellation at the configuration-space level.
+
+\subsection{Grading conventions}
+
+Cohomological convention: $Q = m_1$ has degree $+1$ and $m_k$ has degree $1 - k$. For a cochain $f$ of cohomological degree $\deg(f) = p$, the desuspended degree is
+\[
+|f| := \deg(f) - 1 = p - 1,
+\qquad
+|s^{-1} f| = |f| - 1
+\]
+since desuspension lowers degree by one. Koszul sign rule: transposing graded elements $f$ and $g$ incurs $(-1)^{|f|\cdot|g|}$ on the desuspended complex $s^{-1} C^\bullet$.
+
+\subsection{Sign rule for brace operations}
+
+\begin{definition}[Brace operations]
+For cochains $a \in C^p$ and $b_i \in C^{q_i}$, $i = 1, \ldots, n$, the brace operation $a\{b_1, \ldots, b_n\}$ is the insertion of $b_1, \ldots, b_n$ into $a$ at positions $i_1 < \cdots < i_n$, defined by
+\[
+a\{b_1, \ldots, b_n\}(x_1, \ldots, x_{p+q-n}) = \sum_{i_1 < \cdots < i_n} \epsilon \cdot a(x_1, \ldots, b_1(x_{i_1}, \ldots), \ldots, b_n(x_{i_n}, \ldots), \ldots, x_{p+q-n}),
+\]
+where the Koszul sign is
+\begin{equation}
+\label{eq:brace-sign}
+\epsilon = (-1)^{\sum_{j=1}^{n} |b_j|\,(|a| + |b_1| + \cdots + |b_{j-1}| - j + i_j)}.
+\end{equation}
+The degrees $|f| = \deg(f) - 1$ are the desuspended (shifted) degrees; the formula then is the Getzler--Jones \cite{GJ94} pre-Lie convention on $s^{-1} C^\bullet$.
+\end{definition}
+
+\begin{remark}[Origin of the sign]
+The factor $|b_j|$ is the desuspended degree of $b_j$, and the exponent $(|a| + |b_1| + \cdots + |b_{j-1}| - j + i_j)$ counts the total desuspended degree of elements that $b_j$ must traverse to reach insertion slot $i_j$. The shift $-j + i_j$ corrects for the $j - 1$ insertion symbols already placed and for the $i_j - 1$ argument slots to the left of position $i_j$.
+\end{remark}
+
+
+\subsection{Worked examples at low arities}
+
+\begin{example}[Single brace: $a\{b\}$]
+For $a \in C^p$ and $b \in C^q$, the single brace specialises~\eqref{eq:brace-sign} to
+\[
+a\{b\} = \sum_{i=1}^{p} (-1)^{|b|(|a| - 1 + i)} a \circ_i b
+       = (-1)^{|b|(|a|-1)}\sum_{i=1}^{p} (-1)^{|b|(i-1)}\,(-1)^{|b|}\, a \circ_i b,
+\]
+i.e.\ the Gerstenhaber pre-Lie product on $s^{-1}C^\bullet$ up to the global $(-1)^{|b|(|a|-1)}$ from passing $b$ over $a$ in the desuspended complex. For $|b| = 0$ (i.e., $b \in C^1$) the multiplier vanishes and the signs are uniform; for odd $|b|$ they alternate.
+\end{example}
+
+\begin{example}[Double brace: $a\{b_1, b_2\}$ for $a \in C^3$, $b_1, b_2 \in C^2$]
+\label{ex:double-brace}
+Here $|a| = 2$, $|b_1| = |b_2| = 1$, and $1 \le i_1 < i_2 \le 3$. The Koszul sign~\eqref{eq:brace-sign} factorises into the $j = 1$ and $j = 2$ contributions, each with multiplier $|b_j| = 1$.
+
+\emph{Position $(i_1, i_2) = (1,2)$}: $\epsilon = (-1)^{1 \cdot (2 - 1 + 1)} \cdot (-1)^{1 \cdot (2 + 1 - 2 + 2)} = (-1)^2 (-1)^3 = -1$.
+
+\emph{Position $(i_1, i_2) = (1,3)$}: $\epsilon = (-1)^{1 \cdot (2 - 1 + 1)} \cdot (-1)^{1 \cdot (2 + 1 - 2 + 3)} = (-1)^2 (-1)^4 = +1$.
+
+\emph{Position $(i_1, i_2) = (2,3)$}: $\epsilon = (-1)^{1 \cdot (2 - 1 + 2)} \cdot (-1)^{1 \cdot (2 + 1 - 2 + 3)} = (-1)^3 (-1)^4 = -1$.
+
+Two of three insertions contribute with sign $-1$; the alternation is the Koszul price of the desuspension acting on the odd-degree $b_j$.
+\end{example}
+
+\begin{example}[Nontrivial signs: $a \in C^2$, $b \in C^3$]
+Here $|a| = 1$, $|b| = 2$. The single brace reads
+\[
+a\{b\} = \sum_{i=1}^{2} (-1)^{2 \cdot (|a| - 1 + i)} a \circ_i b
+       = (-1)^{2\cdot 1} a \circ_1 b + (-1)^{2\cdot 2} a \circ_2 b
+       = a \circ_1 b + a \circ_2 b.
+\]
+Both contributions carry sign $+1$ because the desuspended degree $|b| = 2$ is even; the Koszul rule is trivial against $b$. By contrast, when $|b|$ is odd, the relative sign $-1$ between $i = 1$ and $i = 2$ records the Koszul cost of passing $b$ past one slot of $a$.
+\end{example}
+
+\subsection{Cyclic-rotation sign}
+\label{sub:brace-cyclic-sign}
+
+On a cyclic operad, brace insertions on the linear bar $T^c(s^{-1}\bar A)$ admit a rotation $\rho$ that cycles inputs $(x_1, \ldots, x_n) \mapsto (x_n, x_1, \ldots, x_{n-1})$. The Koszul sign is the dagger sign
+\begin{equation}
+\label{eq:cyclic-dagger-sign}
+\rho\bigl(s^{-1} a_1 \otimes \cdots \otimes s^{-1} a_n\bigr)
+= (-1)^{\dagger}\,
+   s^{-1} a_n \otimes s^{-1} a_1 \otimes \cdots \otimes s^{-1} a_{n-1},
+\qquad
+\dagger = |s^{-1} a_n|\,\sum_{j < n} |s^{-1} a_j|
+       = (|a_n| - 1)\,\sum_{j < n}(|a_j| - 1).
+\end{equation}
+For $n = 2$ with both $a_i$ of equal desuspended degree $|a|$, $\dagger = (|a| - 1)^2$. With $|a|$ even this is $1$; with $|a|$ odd this is $0$. The dagger sign therefore distinguishes the symmetric cyclic trace from the antisymmetric cyclic trace by the parity of $|a|$, and is the cyclic shadow of the brace-sign exponent~\eqref{eq:brace-sign}. The convention is locked by compatibility with the chiral bar differential and with the cyclic-coinvariant trace $\TraceC$ of the open-colour primitive package.
+
+\subsection{Compatibility with the cooperad differential}
+
+\begin{proposition}[Pre-Lie relation]
+\label{prop:pre-Lie}
+The single-brace operation satisfies the pre-Lie identity
+\[
+a\{b\}\{c\} - a\{b\{c\}\} = (-1)^{|b|\,|c|}\bigl(a\{c\}\{b\} - a\{c\{b\}\}\bigr),
+\]
+where $|b|, |c|$ are the desuspended degrees.
+\end{proposition}
+
+\begin{proof}
+Both sides expand as sums over double insertions into $a$. On the LHS, $a\{b\}\{c\}$ inserts $b$ first, then $c$ into the result; $a\{b\{c\}\}$ inserts $c$ into $b$ first, then the composite into $a$. On the RHS, the roles of $b$ and $c$ are exchanged at the Koszul cost $(-1)^{|b|\,|c|}$ of transposing $b$ and $c$ in the desuspended complex.
+
+For each triple of insertion positions $(i, j, k)$ in $a$, the contribution to $a\{b\}\{c\} - a\{b\{c\}\}$ from positions where $b$ is inserted at $i$ and $c$ at $j > i$ (non-nested) matches the contribution to $a\{c\}\{b\} - a\{c\{b\}\}$ from positions where $c$ is at $j$ and $b$ at $i < j$, with sign $(-1)^{|b|\,|c|}$. The nested terms ($c$ inserted inside $b$, or $b$ inside $c$) cancel on each side independently. The complete sign verification is in~\cite{GJ94}.
+\end{proof}
+
+\begin{proposition}[Full brace identity]
+\label{prop:full-brace}
+The brace operations satisfy
+\[
+(a\{b_1, \ldots, b_n\})\{c_1, \ldots, c_m\} = \sum \pm\, a\{c_{j_1}, \ldots, b_1\{c_{k_1}, \ldots\}, \ldots, b_n\{\ldots\}, \ldots, c_{j_r}\},
+\]
+where the sum ranges over all ways to distribute the $c_i$ among the external positions and into the $b_j$, with signs determined by the Koszul rule \eqref{eq:brace-sign}. Precisely: partition $\{c_1, \ldots, c_m\}$ into groups $(C_0, C_1, \ldots, C_n)$ where $C_j$ for $j \ge 1$ is inserted into $b_j$ via a brace, and $C_0$ is inserted into the remaining slots of $a$, respecting the ordering.
+\end{proposition}
+
+\begin{proof}
+This follows from the associativity of composition in the endomorphism operad. The brace operation $a\{b_1, \ldots, b_n\}$ is defined by composition in $\mathrm{End}_V$, and the full brace identity is the statement that iterated composition is independent of bracketing (up to the Koszul signs from reordering the inputs). The signs are verified by tracking the Koszul rule through each permutation of desuspended elements. See~\cite{Vor99} for the complete proof.
+\end{proof}
+
+\subsection{Application to the $A_\infty$ chiral setting}
+
+In the chiral Hochschild complex $\mathrm{C}^\bullet_{\mathrm{ch,top}}(A)$, the brace operations are defined by integration over configuration spaces:
+\[
+f\{g_1, \ldots, g_n\} = \int_{\FM_k(\C) \times \Conf_m(\R)} \omega_f \wedge \bigwedge_{j=1}^n \omega_{g_j},
+\]
+where $\omega_f, \omega_{g_j}$ are the weight forms associated to the cochains $f, g_j$. The Koszul signs above are augmented by the orientation signs from the product $\FM_k(\C) \times \Conf_m(\R)$ (see Appendix~\ref{app:orientations}). The compatibility of these two sign sources (algebraic Koszul and geometric orientation) is guaranteed by the fact that the operadic composition maps in $\mathsf{SC}^{\mathrm{ch,top}}$ are orientation-preserving with respect to the conventions of Appendix~\ref{app:orientations}.
+
+\begin{example}[Arnold cancellation in braces]
+\label{ex:arnold-brace}
+For the brace $f\{g, h\}$ with $f \in C^3_{\mathrm{ch}}$, $g, h \in C^2_{\mathrm{ch}}$, the weight form on $\FM_3(\C)$ involves products of 1-forms $\omega_{ij} = d\log(z_i - z_j)$. The Arnold--Orlik--Solomon relation
+\[
+\omega_{12} \wedge \omega_{23} + \omega_{23} \wedge \omega_{31} + \omega_{31} \wedge \omega_{12} = 0
+\]
+ensures that the codimension-2 corner contributions in Stokes' theorem (where two disjoint pairs of points collide simultaneously) cancel. This is the algebraic avatar of the pre-Lie relation (Proposition~\ref{prop:pre-Lie}) at the configuration-space level.
+\end{example}

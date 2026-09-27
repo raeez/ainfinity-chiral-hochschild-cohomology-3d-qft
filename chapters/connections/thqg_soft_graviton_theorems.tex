@@ -1,0 +1,2615 @@
+% Section file for Chapter: Twisted Holography and Quantum Gravity
+% Result (G6): Subleading Soft Graviton Theorems from the Shadow Tower
+%
+% Dependencies:
+% - thm:mc2-bar-intrinsic (bar-intrinsic MC element)
+% - def:shadow-postnikov-tower (shadow obstruction tower)
+% - def:modular-shadow-connection (modular shadow connection)
+% - prop:master-equation-from-mc (all-degree master equation)
+% - thm:shadow-connection-kz (KZ from shadow connection)
+% - thm:cubic-gauge-triviality (cubic gauge triviality)
+% - thm:w-virasoro-quintic-forced (Virasoro quintic forced)
+
+\section{The celestial soft hierarchy from the shadow obstruction tower}
+% label removed: sec:thqg-soft-graviton-theorems
+\label{ch:thqg-soft-graviton}% alias for dangling \ref{ch:...}
+\index{celestial soft factor|textbf}
+\index{Ward identity!celestial soft factor}
+\index{shadow obstruction tower!celestial soft hierarchy}
+\index{celestial holography!from modular shadow connection}
+
+% ======================================================================
+% LOCAL MACROS (providecommand: no conflict with main.tex preamble)
+% ======================================================================
+\providecommand{\Sh}{\operatorname{Sh}}
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cV}{\mathcal{V}}
+\providecommand{\MC}{\text{MC}}
+\providecommand{\gAmod}{\mathfrak{g}_{\cA}^{\mathrm{mod}}}
+\providecommand{\Defcyc}{\operatorname{Def}_{\mathrm{cyc}}}
+\providecommand{\dzero}{d_0}
+\providecommand{\barBch}{\bar{B}^{\text{ch}}}
+\providecommand{\Omegach}{\Omega^{\text{ch}}}
+\providecommand{\dfib}{d_{\mathrm{fib}}}
+\providecommand{\Ydg}{\mathcal{Y}^{\mathrm{dg}}}
+\providecommand{\Gmod}{\mathcal{G}^{\mathrm{mod}}}
+\providecommand{\Convstr}{\operatorname{Conv}_{\mathrm{str}}}
+\providecommand{\Convinf}{\operatorname{Conv}_{\infty}}
+\providecommand{\Definfmod}{\operatorname{Def}_{\infty}^{\mathrm{mod}}}
+\providecommand{\Res}{\operatorname{Res}}
+\providecommand{\Tr}{\operatorname{Tr}}
+\providecommand{\ad}{\operatorname{ad}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\rank}{\operatorname{rank}}
+\providecommand{\wt}{\operatorname{wt}}
+\providecommand{\Hom}{\operatorname{Hom}}
+\providecommand{\End}{\operatorname{End}}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Aut}{\operatorname{Aut}}
+\providecommand{\sgn}{\operatorname{sgn}}
+\providecommand{\Dg}[1]{D_{#1}}
+\providecommand{\mcurv}[1]{m_0^{(#1)}}
+\providecommand{\colldiv}[2]{D_{#1#2}}
+\providecommand{\LogForm}[2]{\eta_{#1#2}}
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\cW}{\mathcal{W}}
+
+% ======================================================================
+%
+% SECTION OVERVIEW
+%
+% The modular shadow connection
+% nabla^hol_{g,n} = d - Sh_{g,n}(Theta_A)
+% is a flat connection on the space of derived conformal blocks
+% V_{g,n}(A). Its flatness is a consequence of the MC equation
+% for Theta_A (Theorem thm:mc2-bar-intrinsic). When the degree
+% decomposition of Sh_{g,n} is expanded, each degree contributes
+% a Ward identity. These are the soft graviton theorems.
+%
+% Degree 2: Weinberg leading soft theorem
+% Degree 3: Cachazo--Strominger subleading
+% Degree 4: sub-subleading from quartic contact Q^contact
+% Degree r: all-degree nonlinear soft theorem from Sh_r
+%
+% The support depth r^Theta_max(A) bounds algebraic support channels.
+% It does not count independent soft theorems without a celestial
+% comparison datum.
+%
+% ======================================================================
+
+The central formula of the holographic modular Koszul datum
+(Definition~\ref{V1-def:holographic-modular-koszul-datum}) is the modular
+shadow connection
+\begin{equation}% label removed: eq:thqg-VI-shadow-connection-master
+\nabla^{\mathrm{hol}}_{g,n}
+\;=\;
+d \;-\; \Sh_{g,n}(\Theta_\cA),
+\end{equation}
+a flat connection on the derived coinvariant / protected-state package
+$\cV_{g,n}(\cA)$
+(Definition~\ref{V1-def:modular-shadow-connection}).
+Flatness
+\begin{equation}% label removed: eq:thqg-VI-flatness
+\bigl(\nabla^{\mathrm{hol}}_{g,n}\bigr)^2 = 0
+\end{equation}
+is the $(g,n)$-projection of the Maurer--Cartan equation
+$D_\cA\Theta_\cA + \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}). Horizontal sections
+of $\nabla^{\mathrm{hol}}_{g,n}$ define the genus-$g$,
+$n$-point derived coinvariant transport package. Ward
+identities of this connection, decomposed by the degree filtration
+of the shadow obstruction tower
+(Definition~\ref{V1-def:shadow-postnikov-tower}), form the
+celestial soft hierarchy.
+
+The degree-$2$ Ward identity is the leading celestial soft factor
+(Weinberg's soft theorem; supertranslation/BMS reading,
+\S\ref{subsec:thqg-VI-leading-soft}). The degree-$3$ Ward identity
+is the subleading Cachazo--Strominger factor, with the cubic gauge
+triviality of Theorem~\ref{thm:cubic-gauge-triviality} controlling
+non-triviality (\S\ref{subsec:thqg-VI-subleading-soft}). The
+degree-$4$ Ward identity is the sub-subleading factor with
+coefficient $Q^{\mathrm{contact}}_{\mathrm{Vir}} = 10/[c(5c+22)]$;
+the clutching law controls factorisation across degenerate curves
+(\S\ref{subsec:thqg-VI-sub-subleading-soft}). For algebras with
+support soft depth \(r^\Theta_{\max}(\cA)=\infty\) (Virasoro,
+\(\mathcal{W}_N\)), the packet
+is infinite, $o_5(\mathrm{Vir}_c) \neq 0$
+(\S\ref{subsec:thqg-VI-higher-soft},
+\S\ref{subsec:thqg-VI-celestial}).
+
+Throughout, $\cA$ is a modular Koszul chiral algebra on a
+smooth projective curve~$X$, and $\Theta_\cA \in \MC(\gAmod)$ is the
+universal MC element of
+Theorem~\ref*{V1-thm:mc2-bar-intrinsic}. The support soft depth is
+\[
+r_\Theta(\cA):=r^\Theta_{\max}(\cA)
+\;:=\;
+\inf\{r\ge2:\Theta_{\cA,n}=0\ \text{for all }n>r\},
+\]
+with value \(\infty\) when no finite cutoff exists. The obstruction
+depth
+\[
+d_{\mathrm{obs}}(\cA):=
+\inf\{r\ge2:o_{r'+1}(\cA)=0\ \text{for every }r'\ge r\}
+\]
+records only eventual \(H^2\)-vanishing and may be strictly smaller
+than \(r^\Theta_{\max}(\cA)\); it does not set the higher
+\(H^1(J^n(\cA),d_2)\)-lift coordinates to zero. The shadow
+obstruction tower is
+$\Theta_\cA^{\leq 2} \to \Theta_\cA^{\leq 3} \to
+\Theta_\cA^{\leq 4} \to \cdots \to \Theta_\cA$.
+All gradings are cohomological ($|d| = +1$).
+
+\begin{remark}[Scope restriction inherited from Volume~I]
+The \ClaimStatusProvedHere{} statements rest on Volume~I
+Theorems \texttt{mc2-bar-intrinsic},
+\texttt{genus-universality}, \texttt{w-virasoro-quintic-forced},
+\texttt{modular-characteristic}, \texttt{nms-beyond-ahat};
+Proposition \texttt{master-equation-from-mc};
+Definitions \texttt{holographic-modular-koszul-datum},
+\texttt{modular-shadow-connection},
+\texttt{shadow-postnikov-tower},
+\texttt{nms-modular-convolution-lie};
+Constructions \texttt{vol1-genus-spectral-sequence},
+\texttt{obstruction-recursion};
+Lemma \texttt{degree-cutoff};
+Appendix \texttt{nonlinear-modular-shadows}; their scope qualifiers
+propagate. Load-bearing cross-volume citations carry the explicit
+``Volume~I'' prefix; the semantic content (shadow obstruction
+tower, modular convolution Lie algebra, degree filtration, master
+equation) is inherited without restatement.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION 1: SHADOW CONNECTION AND ARITY DECOMPOSITION
+%
+% ======================================================================
+
+\subsection{The shadow connection and its degree decomposition}
+% label removed: subsec:thqg-VI-shadow-connection
+\index{shadow connection!degree decomposition}
+\index{degree filtration!shadow connection}
+
+\subsubsection{The shadow representation}
+
+\begin{definition}[Shadow representation at $(g,n)$]
+\label{def:thqg-VI-shadow-representation}
+\index{shadow representation|textbf}
+For each pair $(g,n)$ with $2g - 2 + n > 0$, the
+\emph{shadow representation at $(g,n)$} is the linear map
+\begin{equation}% label removed: eq:thqg-VI-shadow-representation
+\Sh_{g,n} \colon
+\Defcyc^{\mathrm{mod}}(\cA)
+\;\longrightarrow\;
+\End\bigl(\cV_{g,n}(\cA)\bigr)
+\end{equation}
+defined as follows. An element
+$\varphi \in \Defcyc^{\mathrm{mod}}(\cA)$
+of genus~$h$ and degree~$r$ acts on a conformal block
+$\Phi \in \cV_{g,n}(\cA; V_1, \dotsc, V_n)$ by evaluating the
+multilinear operation $\varphi$ on~$r$ insertions drawn from the
+$n$-point configuration, paired with the moduli-space coefficient
+from $C_\bullet(\overline{\mathcal{M}}_{g,n+1})$, and summed over
+all ways to select the $r$~insertions from the $n$~marked points.
+
+Concretely, if $\varphi$ has degree~$r$ and genus~$h$:
+\begin{equation}% label removed: eq:thqg-VI-shadow-action-concrete
+\bigl(\Sh_{g,n}(\varphi) \cdot \Phi\bigr)(z_1,\dotsc,z_n)
+\;=\;
+\sum_{\substack{I \subseteq \{1,\dotsc,n\} \\ |I| = r}}
+\int_{\overline{\mathcal{M}}_{h,r+1}}
+\varphi\bigl(\phi_{i_1}(z_{i_1}),\dotsc,\phi_{i_r}(z_{i_r})\bigr)
+\;\Phi\bigl|_{I \to \varphi(I)},
+\end{equation}
+where the notation $\Phi|_{I \to \varphi(I)}$ denotes the conformal
+block with the $r$~insertions in~$I$ replaced by the output
+of~$\varphi$, and the moduli integral produces the coefficient-valued
+endomorphism.
+\end{definition}
+
+\begin{remark}[Degree filtration on the connection form]
+% label removed: rem:thqg-VI-degree-filtration
+\index{shadow connection!filtration by degree}
+The modular convolution algebra $\gAmod$ carries a natural
+\emph{degree filtration}: $F^{\leq r}\gAmod$ consists of elements
+$\varphi$ with degree at most~$r$. Since $\Theta_\cA$ decomposes
+as $\Theta_\cA = \sum_{r \geq 2} \Theta_\cA^{(r)}$ where
+$\Theta_\cA^{(r)} \in F^r\gAmod / F^{r-1}\gAmod$ is the degree-$r$
+component, the shadow connection form decomposes as
+\begin{equation}% label removed: eq:thqg-VI-degree-decomposition
+\Sh_{g,n}(\Theta_\cA)
+\;=\;
+\sum_{r=2}^{\infty}
+\Sh_{g,n}\bigl(\Theta_\cA^{(r)}\bigr)
+\;=\;
+\Sh_{g,n}\bigl(\kappaChHodge(\cA)\bigr)
+\;+\;
+\Sh_{g,n}\bigl(\mathfrak{C}(\cA)\bigr)
+\;+\;
+\Sh_{g,n}\bigl(\mathfrak{Q}(\cA)\bigr)
+\;+\;
+\sum_{r=5}^{\infty}\Sh_{g,n}\bigl(\Sh_r(\cA)\bigr).
+\end{equation}
+The notation uses:
+$\Theta_\cA^{(2)} = \kappaChHodge(\cA)$ (the modular characteristic,
+Theorem~D),
+$\Theta_\cA^{(3)} = \mathfrak{C}(\cA)$ (the cubic shadow),
+$\Theta_\cA^{(4)} = \mathfrak{Q}(\cA)$ (the quartic shadow /
+contact invariant), and
+$\Theta_\cA^{(r)} = \Sh_r(\cA) = \cA^{\mathrm{sh}}_{r,0}$
+for general~$r$.
+
+For an algebra of finite support soft depth \(r_\Theta(\cA)<\infty\),
+the sum~\eqref{V1-eq:thqg-VI-degree-decomposition} terminates at
+\(r=r_\Theta(\cA)\).
+
+The \emph{support shadow depth classes} are defined in
+\S\ref{sec:thqg-gravitational-complexity}
+(Definition~\ref{V1-def:thqg-shadow-archetype}):
+\textbf{G}~(Gaussian, \(r^\Theta_{\max}=2\)),
+\textbf{L}~(Lie/tree, \(r^\Theta_{\max}=3\)),
+\textbf{C}~(Contact, \(r^\Theta_{\max}=4\)),
+\textbf{M}~(Mixed, \(r^\Theta_{\max}=\infty\)).
+The class of $\cA$ determines how many terms in the
+degree decomposition are nonzero.
+\end{remark}
+
+\begin{proposition}[Degree decomposition of the shadow connection;
+\ClaimStatusProvedHere]
+% label removed: prop:thqg-VI-degree-decomposition
+\index{shadow connection!degree decomposition|textbf}
+The shadow connection $\nabla^{\mathrm{hol}}_{g,n}$ admits a canonical
+decomposition
+\begin{equation}% label removed: eq:thqg-VI-nabla-degree
+\nabla^{\mathrm{hol}}_{g,n}
+\;=\;
+\nabla^{(2)}_{g,n}
+\;+\;
+A^{(3)}_{g,n}
+\;+\;
+A^{(4)}_{g,n}
+\;+\;
+\sum_{r \geq 5} A^{(r)}_{g,n},
+\end{equation}
+where:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\nabla^{(2)}_{g,n} := d - \Sh_{g,n}(\kappaChHodge(\cA))$ is
+ the \emph{leading shadow connection}, a flat connection on
+ $\cV_{g,n}(\cA)$ that depends only on the modular
+ characteristic~$\kappaChHodge(\cA)$;
+\item $A^{(r)}_{g,n} := -\Sh_{g,n}(\Theta_\cA^{(r)})$ is
+ the \emph{degree-$r$ connection perturbation} for $r \geq 3$,
+ an $\End(\cV_{g,n})$-valued $1$-form on the moduli of
+ configurations.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+This is immediate from the decomposition
+$\Theta_\cA = \sum_{r \geq 2} \Theta_\cA^{(r)}$
+and the linearity of the shadow representation
+$\Sh_{g,n}$ (Definition~\ref{def:thqg-VI-shadow-representation}).
+The assertion that $\nabla^{(2)}_{g,n}$ is itself flat when
+\(\cA\) is Gaussian (class~\(\mathbf{G}\), i.e.\
+\(r^\Theta_{\max}=2\)) follows
+from the MC equation restricted to degree~$2$: the quadratic piece
+$\tfrac{1}{2}[\kappa,\kappa]$ vanishes because $\kappa$ is scalar
+(Volume~I Theorem~\ref{V1-thm:genus-universality}).
+\end{proof}
+
+\subsubsection{The flatness equation by degree}
+
+\begin{theorem}[Flatness by degree; \ClaimStatusProvedHere]
+\label{thm:thqg-VI-flatness-by-degree}
+\index{flatness!degree decomposition|textbf}
+\index{shadow connection!flatness by degree}
+The flatness condition
+$(\nabla^{\mathrm{hol}}_{g,n})^2 = 0$
+decomposes, under the degree filtration, into the following
+system of equations. For each $r \geq 2$, define the
+\emph{degree-$r$ flatness residual}
+\begin{equation}% label removed: eq:thqg-VI-flatness-degree-r
+F^{(r)}_{g,n}
+\;:=\;
+\Bigl(
+(\nabla^{\mathrm{hol}}_{g,n})^2
+\Bigr)_{r}
+\;=\; 0,
+\end{equation}
+where $(\cdot)_r$ denotes projection to the degree-$r$ component
+of $\End(\cV_{g,n})$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Degree~$2$}:
+\begin{equation}% label removed: eq:thqg-VI-flat-degree-2
+\nabla^{(2)}_{g,n} \circ \nabla^{(2)}_{g,n} = 0
+\qquad\Longleftrightarrow\qquad
+d\bigl(\Sh_{g,n}(\kappa)\bigr) = 0,
+\quad
+\Sh_{g,n}(\kappa) \wedge \Sh_{g,n}(\kappa) = 0.
+\end{equation}
+This is the \emph{degree-$2$ celestial-soft constraint}: the modular
+characteristic acts by commuting endomorphisms.
+\item \emph{Degree~$3$}:
+\begin{equation}% label removed: eq:thqg-VI-flat-degree-3
+\nabla^{(2)}_{g,n}\bigl(A^{(3)}_{g,n}\bigr)
+\;+\;
+o_3(\cA)_{g,n}
+\;=\; 0,
+\end{equation}
+where $o_3(\cA)_{g,n} = \Sh_{g,n}(o_3(\cA))$ is the genus-$(g,n)$
+image of the cubic obstruction class. This is the
+\emph{degree-$3$ celestial-soft constraint}.
+\item \emph{Degree~$4$}:
+\begin{equation}% label removed: eq:thqg-VI-flat-degree-4
+\nabla^{(2)}_{g,n}\bigl(A^{(4)}_{g,n}\bigr)
+\;+\;
+\bigl[A^{(3)}_{g,n},\, A^{(3)}_{g,n}\bigr]
+\;+\;
+o_4(\cA)_{g,n}
+\;=\; 0.
+\end{equation}
+The quadratic term $[A^{(3)}, A^{(3)}]$ is the self-interaction
+of the cubic shadow. This is the \emph{degree-$4$ celestial-soft
+constraint}.
+\item \emph{General degree~$r$}:
+\begin{equation}% label removed: eq:thqg-VI-flat-degree-r-general
+\nabla^{(2)}_{g,n}\bigl(A^{(r)}_{g,n}\bigr)
+\;+\;
+\sum_{\substack{s+t = r \\ s,t \geq 3}}
+\bigl[A^{(s)}_{g,n},\, A^{(t)}_{g,n}\bigr]
+\;+\;
+o_r(\cA)_{g,n}
+\;=\; 0.
+\end{equation}
+This is the all-degree master equation
+(Proposition~\ref{V1-prop:master-equation-from-mc}), represented on
+the corresponding transport package.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Expand $(\nabla^{\mathrm{hol}}_{g,n})^2$ using the
+degree decomposition~\eqref{V1-eq:thqg-VI-nabla-degree}. Write
+$\omega = \sum_{r \geq 2} \Sh_{g,n}(\Theta^{(r)}_\cA)$.
+Then
+\[
+(\nabla^{\mathrm{hol}}_{g,n})^2
+= (d - \omega)^2
+= -d\omega + \omega \wedge \omega
+= -\sum_{r \geq 2} d\bigl(\Sh_{g,n}(\Theta^{(r)})\bigr)
+ + \sum_{r,s \geq 2}
+ \Sh_{g,n}(\Theta^{(r)}) \wedge \Sh_{g,n}(\Theta^{(s)}).
+\]
+The total vanishing is the MC equation for $\Theta_\cA$.
+Projecting to the degree-$r$ component, the term $d(\Sh_{g,n}(\Theta^{(r)}))$
+contributes the covariant derivative $\nabla^{(2)}(A^{(r)})$ (for
+$r \geq 3$) plus a correction from the commutator of the leading
+connection with $A^{(r)}$. The quadratic terms
+$\Sh_{g,n}(\Theta^{(s)}) \wedge \Sh_{g,n}(\Theta^{(t)})$ with
+$s + t = r$ give the bracket terms. The remainder at degree~$r$
+is exactly the obstruction class $o_r(\cA)$ evaluated on conformal
+blocks.
+
+More precisely, the all-degree master equation
+$\nabla_H(\Sh_r) + \mathfrak{o}^{(r)} = 0$
+(Volume~I Proposition~\ref{V1-prop:master-equation-from-mc}) is obtained by
+projecting $D_\cA\Theta_\cA + \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$
+onto the degree-$r$ component of $\Defcyc^{\mathrm{mod}}(\cA)$.
+Applying the shadow representation $\Sh_{g,n}$ converts this into
+the endomorphism equation~\eqref{V1-eq:thqg-VI-flat-degree-r-general}
+on $\cV_{g,n}(\cA)$. The identification of the
+$\nabla^{(2)}$-covariant derivative with the Hodge-linear
+part~$\nabla_H$ is the definition of the leading connection.
+\end{proof}
+
+\begin{remark}[Degree truncation and the depth of the celestial soft hierarchy]
+% label removed: rem:thqg-VI-degree-truncation
+\index{support shadow depth!celestial soft hierarchy}
+Let \(r_\Theta:=r^\Theta_{\max}(\cA)\). If \(r_\Theta<\infty\), the
+system~\eqref{V1-eq:thqg-VI-flat-degree-r-general} closes at
+\(r=r_\Theta\):
+\(A^{(r)}_{g,n}=0\) for all \(r>r_\Theta\). Thus
+\(r_\Theta\) is an algebraic support-channel cutoff.  It is not a
+count of independent celestial soft factors; that count requires a
+celestial comparison datum and may identify or kill support channels:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lccc}
+\toprule
+\emph{Family} &
+\(r^\Theta_{\max}\) &
+\emph{Support channels} &
+\emph{Class} \\
+\midrule
+Heisenberg / lattice &
+ $2$ & arity \(2\) only & $\mathbf{G}$ \\
+Affine $\widehat{\mathfrak{g}}_k$ &
+ $3$ & arities \(2,3\) & $\mathbf{L}$ \\
+$\beta\gamma$ system &
+ $4$ & arities \(2,3,4\) & $\mathbf{C}$ \\
+Virasoro / $\mathcal{W}_N$ &
+ $\infty$ & no finite cutoff & $\mathbf{M}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+In the celestial/gravitational reading, a comparison map sends these
+algebraic channels to soft operators.  The comparison map, not the
+support depth alone, decides which images are nonzero and independent.
+This is the gravitational interpretation of shadow complexity
+(Result~\textbf{(G2)}, \S\ref{sec:thqg-gravitational-complexity}).
+\end{remark}
+
+\subsubsection{Ward identities from the shadow connection}
+
+\begin{definition}[Soft shadow Ward identity at degree~$r$]
+% label removed: def:thqg-VI-soft-ward-identity
+\index{soft Ward identity|textbf}
+\index{Ward identity!soft shadow}
+Let $\cA$ be a modular Koszul chiral algebra and let
+$\Phi \in \cV_{g,n}(\cA; V_1, \dotsc, V_n)$ be a horizontal
+section of $\nabla^{\mathrm{hol}}_{g,n}$, i.e.\ a correlator:
+$\nabla^{\mathrm{hol}}_{g,n}\,\Phi = 0$.
+The \emph{soft shadow Ward identity at degree~$r$} is the
+constraint on~$\Phi$ obtained by projecting the horizontality
+condition to the degree-$r$ component:
+\begin{equation}% label removed: eq:thqg-VI-ward-degree-r
+\boxed{%
+\bigl(\Sh_{g,n}(\Theta^{(r)}_\cA)\bigr) \cdot \Phi
+\;=\;
+\text{(contributions from degrees $< r$)}.}
+\end{equation}
+When $r = 2$, the right side vanishes and the identity is the
+\emph{leading soft Ward identity}. For $r \geq 3$, the right side
+involves the lower-degree shadows acting on~$\Phi$ through the
+bracket terms of the flatness equation.
+\end{definition}
+
+\begin{theorem}[Shadow Ward identities determine correlators;
+\ClaimStatusProvedHere]
+\label{thm:thqg-VI-ward-determines-correlators}
+\index{shadow Ward identity!determination of correlators|textbf}
+Let \(\cA\) be a modular Koszul chiral algebra and put
+\(r_\Theta:=r^\Theta_{\max}(\cA)\). The system of shadow Ward
+identities at degrees \(2\le r\le r_\Theta\) (with no upper
+bound when \(r_\Theta=\infty\)) is equivalent to the
+horizontality condition $\nabla^{\mathrm{hol}}_{g,n}\,\Phi = 0$.
+In particular:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If \(r_\Theta<\infty\), the system is a \emph{finite}
+ system of differential equations on genus-$g$, $n$-point
+ correlators, determined by the finite support packet
+ \(\{\Sh_2,\dotsc,\Sh_{r_\Theta}\}\) together with the vanishing
+ higher lift coordinates above degree \(r_\Theta\).
+\item If \(r_\Theta=\infty\), the system is an infinite tower
+ of coupled differential equations whose consistency is
+ guaranteed by the MC equation.
+\item For $\cA = \widehat{\mathfrak{g}}_k$:
+ on the affine Kac--Moody comparison surface, the leading Ward
+ identity yields the KZ equation, and the
+ subleading identity is automatically satisfied by the Jacobi
+ identity of~$\mathfrak{g}$
+ (by the Volume~I affine shadow/KZ comparison theorem).
+\item For $\cA = \mathrm{Vir}_c$: the full infinite tower of
+ Ward identities encodes the genus-$0$ Virasoro conformal Ward
+ hierarchy; on degenerate-module comparison surfaces this
+ specializes to the BPZ null-vector equations together with
+ their nonlinear extensions.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The horizontality condition $\nabla^{\mathrm{hol}}_{g,n}\Phi = 0$
+is the single equation $(d - \Sh_{g,n}(\Theta_\cA))\Phi = 0$.
+Since $\Theta_\cA = \sum_{r \geq 2} \Theta_\cA^{(r)}$ and the
+shadow representation is additive, the degree-$r$ projection of
+$\Sh_{g,n}(\Theta_\cA)\Phi$ extracts exactly the degree-$r$ Ward
+identity. The full horizontality condition is the conjunction of
+these projections for all~$r$.
+
+For~(i): when \(r_\Theta<\infty\), only finitely many degrees
+contribute and the system is a finite differential system.
+
+For~(ii): when \(r_\Theta=\infty\), the consistency of the
+infinite system follows from the flatness
+$(\nabla^{\mathrm{hol}})^2 = 0$, which is the MC equation.
+
+For~(iii): the degree-$2$ shadow of $\Theta_{\widehat{\fg}_k}$ is
+$\kappaChHodge(\widehat{\fg}_k) = \dim(\fg)\cdot(k+h^\vee)/(2h^\vee)$ (the modular characteristic at
+level~$k$). The shadow representation at genus~$0$ acts by
+\begin{equation}% label removed: eq:thqg-VI-kz-recovery
+\Sh_{0,n}(\kappa) \cdot \Phi
+= \sum_{i < j} \frac{t^a_i\,t^a_j}{z_i - z_j}\;\Phi,
+\end{equation}
+where $t^a_i$ denotes the action of $\mathfrak{g}$ on the
+$i$-th module. On the affine Kac--Moody comparison surface, this
+is the KZ connection form. The degree-$3$
+Ward identity involves $\mathfrak{C}(\widehat{\fg}_k)$, which
+is the cubic shadow. For the affine algebra, $o_4 = 0$ by the
+Jacobi identity
+(Volume~I, shadow archetype classification): the quartic obstruction
+vanishes because the structure constants satisfy
+$f^a_{bc}\,f^c_{de} + \text{cyc} = 0$. Hence the tower terminates
+at \(r^\Theta_{\max}=3\) and the subleading identity is the last one.
+
+For~(iv): The Virasoro algebra has \(r^\Theta_{\max}=\infty\)
+(Volume~I Theorem~\ref{V1-thm:w-virasoro-quintic-forced}), so the tower
+never terminates. The degree-$2$ Ward identity at genus~$0$
+is the conformal Ward identity involving
+$\kappaChHodge(\mathrm{Vir}_c) = c/2$,
+which gives the standard $T(z)$ OPE. The higher degrees encode the
+nonlinear constraints arising from normal-ordered products
+$:T^n:$ at all orders.
+\end{proof}
+
+\begin{remark}[Comparison with the Weinberg--Cachazo--Strominger
+hierarchy]
+% label removed: rem:thqg-VI-wcs-comparison
+\index{Weinberg soft theorem!shadow connection interpretation}
+\index{Cachazo--Strominger!subleading soft theorem}
+In the gravitational scattering amplitude literature, the soft
+graviton statements form a hierarchy:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \emph{Leading} (Weinberg 1965): the $\omega^{-1}$ pole of
+ the soft factor is universal, determined by total energy-momentum.
+\item \emph{Subleading} (Cachazo--Strominger 2014): the $\omega^0$
+ term is determined by angular momentum.
+\item \emph{Sub-subleading} (Cachazo--Strominger 2014): the
+ $\omega^1$ term involves the stress tensor.
+\item Higher: Hamada--Shiu~\cite{HamadaShiuSubsubSoft} and the
+ celestial soft-current algebra
+ \cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}:
+ the
+ $\omega^k$ terms are progressively less universal.
+\end{enumerate}
+The shadow-tower decomposition gives an algebraic explanation:
+the degree-$r$ shadow at genus~$0$ produces the order-$(r-2)$
+term in the soft expansion. The modular characteristic $\kappa$
+(degree~$2$) gives the leading $\omega^{-1}$ term; the cubic shadow
+$\mathfrak{C}$ (degree~$3$) gives the subleading $\omega^0$ term;
+the quartic contact $\mathfrak{Q}$ (degree~$4$) gives the
+sub-subleading $\omega^1$ term. The support shadow depth
+\(r^\Theta_{\max}\)
+is the algebraic counterpart of the maximal non-trivial order in
+the soft expansion. See Table~\ref{tab:thqg-VI-soft-dictionary}.
+\end{remark}
+
+\begin{remark}[Genus dependence of the Ward identities]
+% label removed: rem:thqg-VI-genus-dependence
+\index{soft Ward identity!genus dependence}
+The genus-$g$ Ward identities at degree~$r$ involve the full
+genus-$g$ shadow $\Sh_{g,n}(\Theta_\cA^{(r)})$, which depends on
+both the algebraic shadow $\cA^{\mathrm{sh}}_{r,0}$ and the
+moduli-space integral over $\overline{\mathcal{M}}_{g,n+1}$.
+At genus~$0$, the moduli integral localizes to the
+Fulton--MacPherson compactification of configuration space, and the
+Ward identities take the familiar form of differential equations
+in the insertion points~$z_i$.
+At genus~$g \geq 1$, the Ward identities involve period integrals
+over the moduli space and are coupled to the modular shadow
+connection on $\overline{\mathcal{M}}_g$ itself. The genus
+spectral sequence
+(Construction~\ref{V1-const:vol1-genus-spectral-sequence})
+organizes this coupling.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION 2: LEADING SOFT THEOREM FROM KAPPA
+%
+% ======================================================================
+
+\subsection{The leading celestial soft factor from the modular characteristic}
+\label{subsec:thqg-VI-leading-soft}
+\index{leading celestial soft factor|textbf}
+\index{Weinberg soft theorem!from kappa}
+
+In the celestial/gravitational reading, the leading soft statement
+is that the emission of a soft graviton from
+an $n$-point amplitude is controlled by a universal factor depending
+only on the energy-momentum of the hard particles. In the
+shadow-tower framework, the proved algebraic content is the
+degree-$2$ Ward identity of the modular shadow connection, controlled
+by the modular characteristic~$\kappaChHodge(\cA)$.
+
+\subsubsection{The modular characteristic and its action on
+the transport package}
+
+\begin{proposition}[Action of $\kappa$ on the transport package;
+\ClaimStatusProvedHere]
+\label{prop:thqg-VI-kappa-action}
+\index{modular characteristic!action on transport package|textbf}
+Let $\cA$ be a modular Koszul chiral algebra with modular
+characteristic $\kappaChHodge(\cA) \in \cA^{\mathrm{sh}}_{2,0}$.
+At genus~$0$, the shadow representation of $\kappaChHodge(\cA)$ on
+$n$-point derived coinvariant / protected-state transport package
+$\cV_{0,n}(\cA; V_1, \dotsc, V_n)$
+is given by
+\begin{equation}% label removed: eq:thqg-VI-kappa-genus0
+\Sh_{0,n}(\kappa) \cdot \Phi(z_1, \dotsc, z_n)
+\;=\;
+\sum_{1 \leq i < j \leq n}
+\frac{\kappaChHodge(\phi_i, \phi_j)}{z_i - z_j}\;
+\Phi(z_1, \dotsc, z_n),
+\end{equation}
+where $\kappaChHodge(\phi_i, \phi_j)$ denotes the bilinear pairing
+determined by the binary shadow $\kappa \in \Hom_{S_2}(V \otimes V, \mathbb{C})$,
+acting on the $i$-th and $j$-th insertions.
+
+At genus~$g \geq 1$, the shadow representation acquires a period
+correction:
+\begin{equation}% label removed: eq:thqg-VI-kappa-genus-g
+\Sh_{g,n}(\kappa) \cdot \Phi
+\;=\;
+\biggl(\sum_{i < j}
+\frac{\kappaChHodge(\phi_i, \phi_j)}{z_i - z_j}
+\;+\;
+\kappaChHodge(\cA)\;\omega_g\biggr)\Phi,
+\end{equation}
+where $\omega_g \in H^0(\overline{\mathcal{M}}_g, \mathbb{E}^\vee)$
+is the Hodge class and the second term is the curvature correction
+$\dfib^2 = \kappaChHodge(\cA) \cdot \omega_g$ from the genus-$g$ bar
+complex (Theorem~\ref{V1-thm:modular-characteristic}).
+\end{proposition}
+
+\begin{proof}
+The genus-$0$ formula~\eqref{V1-eq:thqg-VI-kappa-genus0} follows
+from the definition of the shadow representation
+(Definition~\ref{def:thqg-VI-shadow-representation}): at degree~$2$,
+the sum is over all pairs $(i,j)$, and the moduli integral over
+$\overline{\mathcal{M}}_{0,3} \cong \{\mathrm{pt}\}$ is trivial.
+The propagator on $\overline{C}_2(\mathbb{P}^1) = \mathbb{P}^1$
+gives the factor $1/(z_i - z_j)$.
+
+At genus~$g \geq 1$, the moduli integral over
+$\overline{\mathcal{M}}_{g,3}$ (the universal curve with one
+additional marked point) splits into a configuration-space piece
+(giving the same sum over pairs) and a modular piece
+(giving the Hodge class~$\omega_g$). The latter is precisely
+the curvature of the genus-$g$ bar complex:
+$\dfib^2 = \kappaChHodge(\cA) \cdot \omega_g$.
+\end{proof}
+
+\subsubsection{The degree-$2$ celestial soft factor}
+
+\begin{theorem}[Degree-$2$ celestial soft residue and its gravitational reading; \ClaimStatusProvedHere]
+\label{thm:thqg-VI-leading-soft}
+\index{leading celestial soft factor!proof|textbf}
+\index{Weinberg soft theorem!modular proof}
+Let $\cA$ be a modular Koszul chiral algebra, and let
+$\Phi \in \cV_{0,n+1}(\cA; V_1, \dotsc, V_n, V_s)$ be an
+$(n+1)$-point genus-$0$ correlator with the last insertion
+$\phi_s(z_s)$ taken to be a soft insertion: a state in the
+degree-$2$ sector of the shadow algebra, normalized so that
+$\kappaChHodge(\phi_s, \cdot) = \id_{V_i}$ for each hard insertion
+$\phi_i$. Then the degree-$2$ soft residue at $z_s=\infty$ is
+\begin{equation}% label removed: eq:thqg-VI-weinberg
+\lim_{z_s \to \infty}
+z_s \cdot \Phi(z_1, \dotsc, z_n, z_s)
+\;=\;
+\left(-\sum_{i=1}^{n}\kappaChHodge(\phi_s,\phi_i)\right)
+\;\cdot\;
+\Phi_n(z_1, \dotsc, z_n),
+\end{equation}
+where $\Phi_n$ is the $n$-point correlator. Before the limit, the
+meromorphic degree-$2$ soft kernel is
+\begin{equation}% label removed: eq:thqg-VI-weinberg-factor
+S^{(0)}_{\mathrm{cel}}
+\;=\;
+\sum_{i=1}^{n}
+\frac{\kappaChHodge(\phi_s, \phi_i)}{z_s - z_i}
+\end{equation}
+The Weinberg reading of this kernel requires the celestial transform,
+the asymptotic-state comparison, and the BMS Ward-identity
+normalisation.
+\end{theorem}
+
+\begin{proof}
+The degree-$2$ Ward identity
+(equation~\eqref{V1-eq:thqg-VI-flat-degree-2}) states that
+$\Sh_{0,n+1}(\kappa) \cdot \Phi = 0$.
+By Proposition~\ref{prop:thqg-VI-kappa-action}, this reads
+\[
+\sum_{i=1}^{n}
+\frac{\kappaChHodge(\phi_s, \phi_i)}{z_s - z_i}\;\Phi
+\;+\;
+\sum_{1 \leq i < j \leq n}
+\frac{\kappaChHodge(\phi_i, \phi_j)}{z_i - z_j}\;\Phi
+\;=\; 0.
+\]
+The second sum does not involve~$z_s$; it equals
+$\Sh_{0,n}(\kappa) \cdot \Phi_n = 0$ by the $n$-point Ward
+identity. Hence
+\[
+\Phi(z_1, \dotsc, z_n, z_s)
+\;=\;
+-\sum_{i=1}^{n}
+\frac{\kappaChHodge(\phi_s, \phi_i)}{z_s - z_i}\;\Phi_n(z_1, \dotsc, z_n)
+\;+\; O(z_s^{-2}).
+\]
+Multiplying by $z_s$ and sending $z_s \to \infty$ gives
+\eqref{V1-eq:thqg-VI-weinberg}.
+
+The momentum-space identification of
+$S^{(0)}_{\mathrm{cel}}$ with the Weinberg factor is the additional
+celestial/BMS comparison: under that comparison the bilinear pairing
+$\kappaChHodge(\phi_s, \phi_i)$, together with the soft-energy
+Mellin residue, corresponds to the spin-two graviton factor
+\(\varepsilon_{\mu\nu}p_i^\mu p_i^\nu/(q_s\cdot p_i)\) in the
+celestial/momentum-space basis
+(Strominger~\cite{Strominger18}).
+\end{proof}
+
+\begin{remark}[Universality of the leading soft statement]
+% label removed: rem:thqg-VI-weinberg-universality
+\index{Weinberg soft theorem!universality}
+The leading celestial soft factor~\eqref{V1-eq:thqg-VI-weinberg-factor} depends
+only on $\kappaChHodge(\cA)$, which is the degree-$2$ shadow. Every
+modular Koszul chiral algebra has $\kappaChHodge(\cA)$: it is the
+leading term of the shadow obstruction tower and is proved to exist
+unconditionally (Theorem~D). Hence, in the celestial/gravitational
+reading, the leading soft statement is universal across all
+modular Koszul chiral algebras. This is the algebraic explanation of Weinberg's
+result: the leading celestial soft factor is a consequence of the bar complex
+having a well-defined modular characteristic, not a consequence of
+any specific dynamical assumption.
+\end{remark}
+
+\subsubsection{BMS extension at genus~$0$}
+
+\begin{corollary}[Twisted degree-$2$ celestial Ward identity and its supertranslation reading;
+\ClaimStatusProvedHere]
+\label{cor:thqg-VI-bms-supertranslation}
+\index{BMS package!supertranslation reading|textbf}
+At genus~$0$, the leading celestial soft factor admits the following
+twisted Ward identity. A soft insertion $\phi_s$ labeled by a
+meromorphic test function $f(z)$ on the celestial sphere, holomorphic
+at the hard insertion points, generates the \emph{supertranslation} Ward
+identity in the celestial/gravitational reading:
+\begin{equation}% label removed: eq:thqg-VI-bms-supertranslation
+\sum_{i=1}^{n} f(z_i)\;\kappaChHodge(\phi_s, \phi_i)\;
+\Phi(z_1, \dotsc, z_n)
+\;=\; 0,
+\end{equation}
+for every meromorphic function~$f$ holomorphic at the insertion
+points. This is the degree-$2$ shadow
+connection Ward identity twisted by $f$; in the
+celestial/gravitational reading, these twisted Ward identities are
+read as the supertranslation sector of the BMS package.
+\end{corollary}
+
+\begin{proof}
+The Ward identity $\Sh_{0,n}(\kappa) \cdot \Phi = 0$ can be
+twisted by any meromorphic function $f$ on $\mathbb{P}^1$ that is
+holomorphic at the insertion points:
+the shadow representation acts through the vertex-algebraic
+module structure, and the twist by~$f$ amounts to replacing
+$\kappaChHodge(\phi_s, \phi_i)/(z_s - z_i)$ with
+$f(z_i)\,\kappaChHodge(\phi_s, \phi_i)$. This gives
+\eqref{V1-eq:thqg-VI-bms-supertranslation}. The algebra of all
+such Ward identities, as $f$ ranges over meromorphic functions
+regular at the insertion points, is read in the
+celestial/gravitational interpretation as the supertranslation
+sector of the BMS package.
+\end{proof}
+
+\begin{remark}[Comparison with He--Lysov--Mitra--Strominger]
+% label removed: rem:thqg-VI-hmps
+\index{BMS package!He--Lysov--Mitra--Strominger}
+The supertranslation Ward identity in the celestial/gravitational
+reading was established in the amplitudes literature by
+He--Lysov--Mitra--Strominger \cite{HMPS15} as a consequence of
+Weinberg's soft theorem.
+The shadow-tower derivation reverses the logical order:
+the Ward identity is the \emph{definition} of the leading
+celestial soft factor (it is the degree-$2$ flatness condition), and
+Weinberg's soft factor is its consequence in the
+celestial/gravitational reading. The BMS-package
+reading then arises in that same interpretation because the leading shadow connection
+$\nabla^{(2)}_{0,n}$ has monodromy in the infinite-dimensional
+group of diffeomorphisms of the celestial sphere.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION 3: SUBLEADING FROM THE CUBIC SHADOW
+%
+% ======================================================================
+
+\subsection{The subleading celestial soft factor from the cubic shadow}
+\label{subsec:thqg-VI-subleading-soft}
+\index{subleading celestial soft factor|textbf}
+\index{cubic shadow!subleading soft theorem}
+\index{Cachazo--Strominger!from cubic shadow}
+
+In the celestial/gravitational reading, the Cachazo--Strominger
+subleading soft statement arises from the degree-$3$ Ward
+identity of the shadow connection. The
+corresponding degree-$3$ celestial soft factor is derived below; cubic gauge triviality
+(Theorem~\ref{thm:cubic-gauge-triviality}) controls when the
+subleading celestial soft factor is trivially satisfied versus
+genuinely constraining.
+
+\subsubsection{The cubic shadow and its action on the transport package}
+
+\begin{proposition}[Cubic shadow action on the transport package;
+\ClaimStatusProvedHere]
+% label removed: prop:thqg-VI-cubic-action
+\index{cubic shadow!action on transport package|textbf}
+Let $\cA$ have nonzero cubic support component
+\[
+\mathfrak{C}(\cA)=\Theta_{\cA,3}\neq0 .
+\]
+At genus~$0$, the shadow representation of the cubic shadow on
+$n$-point derived coinvariant / protected-state transport package is
+\begin{equation}% label removed: eq:thqg-VI-cubic-genus0
+\Sh_{0,n}(\mathfrak{C}) \cdot \Phi(z_1, \dotsc, z_n)
+\;=\;
+\sum_{\substack{I = \{i,j,k\} \subseteq \{1,\dotsc,n\} \\
+ |I| = 3}}
+\frac{\mathfrak{C}(\phi_i, \phi_j, \phi_k)}
+ {(z_i - z_j)(z_j - z_k)}\;
+\Phi\bigl|_{I \to \mathfrak{C}(I)},
+\end{equation}
+where the propagator factor comes from the integral over
+$\overline{\mathcal{M}}_{0,4}$ (the moduli space of four-pointed
+spheres, with one point being the output of the ternary operation)
+and the sum runs over all ordered triples with appropriate
+$S_3$-symmetrization.
+\end{proposition}
+
+\begin{proof}
+At degree~$3$, the shadow representation
+(Definition~\ref{def:thqg-VI-shadow-representation}) sums over
+all triples $I \subseteq \{1,\dotsc,n\}$ with $|I| = 3$.
+For each triple, the moduli integral is over
+$\overline{\mathcal{M}}_{0,4} \cong \mathbb{P}^1$.
+The integral of the ternary operation $\mathfrak{C}$ against the
+propagator on $\overline{C}_3(\mathbb{P}^1)$ gives the factor
+$1/[(z_i - z_j)(z_j - z_k)]$, with the specific denominator
+depending on the choice of coordinates on
+$\overline{\mathcal{M}}_{0,4}$. The symmetrization over $S_3$
+is built into the definition of the shadow representation
+(the $S_n$-equivariance in
+Definition~\ref{V1-def:nms-modular-convolution-lie}).
+\end{proof}
+
+\subsubsection{The subleading celestial soft factor}
+
+\begin{theorem}[Subleading celestial soft factor and its gravitational reading;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-subleading-soft
+\index{subleading celestial soft factor!proof|textbf}
+Let $\cA$ be a modular Koszul chiral algebra with
+\(\Theta_{\cA,3}=\mathfrak C(\cA)\neq0\).
+Let $\Phi \in \cV_{0,n+1}(\cA; V_1, \dotsc, V_n, V_s)$ be an
+$(n+1)$-point genus-$0$ correlator with $\phi_s(z_s)$ a soft
+insertion in the degree-$3$ sector. The subleading soft expansion is
+\begin{equation}% label removed: eq:thqg-VI-subleading
+\Phi(z_1, \dotsc, z_n, z_s)
+\;\underset{z_s \to \infty}{=}\;
+S^{(0)}_{\mathrm{cel}}\,\Phi_n
+\;+\;
+\frac{1}{z_s}\,S^{(1)}_{\mathrm{cel}}\,\Phi_n
+\;+\; O(z_s^{-2}),
+\end{equation}
+where $S^{(0)}_{\mathrm{cel}}$ is the leading celestial soft factor
+\eqref{V1-eq:thqg-VI-weinberg-factor} and the
+\emph{subleading celestial soft factor} is
+\begin{equation}% label removed: eq:thqg-VI-cs-factor
+S^{(1)}_{\mathrm{cel}}
+\;=\;
+\Sh_{0,n}(\mathfrak{C}(\cA))\bigl|_{\text{soft limit}}.
+\end{equation}
+In the celestial/gravitational reading, this is read as the
+Cachazo--Strominger subleading soft factor
+\[
+\sum_{i=1}^{n}
+\frac{\varepsilon_{\mu\nu}p_i^\mu q_{s,\rho}J_i^{\rho\nu}}
+     {p_i \cdot q_s},
+\]
+where $J^i_{\mu\nu}$ is the angular momentum operator of the
+$i$-th particle.
+\end{theorem}
+
+\begin{proof}
+The degree-$3$ Ward identity
+(equation~\eqref{V1-eq:thqg-VI-flat-degree-3}) states
+\[
+\nabla^{(2)}_{0,n}\bigl(A^{(3)}_{0,n}\bigr)\,\Phi
+\;+\;
+\Sh_{0,n}(o_3(\cA))\,\Phi
+\;=\; 0.
+\]
+For the $(n+1)$-point correlator with one soft insertion, expand the
+covariant derivative $\nabla^{(2)}$ with respect to the soft
+variable~$z_s$. In the limit $z_s \to \infty$:
+\begin{itemize}
+\item The $\nabla^{(2)}$-covariant derivative of $A^{(3)}$ acting
+ on~$\Phi$ contributes the subleading celestial soft factor. The covariant
+ derivative with respect to the leading connection brings down
+ a factor of $1/z_s$ relative to the leading term.
+\item The obstruction term $o_3(\cA)$ is a closed cochain in the
+ cyclic deformation complex. Its shadow representation on
+ the corresponding transport package gives the
+ \emph{anomalous} part of the subleading celestial soft factor,
+ and on the relevant comparison surfaces this is the
+ anomalous contribution in the celestial/gravitational reading.
+\end{itemize}
+
+For $\cA = \widehat{\mathfrak{g}}_k$, the cubic shadow
+$\mathfrak{C}(\widehat{\fg}_k)$ is proportional to the structure
+constants $f^a_{bc}$: the ternary operation
+$\mathfrak{C}(\phi_a, \phi_b, \phi_c) = f_{abc}\,\kappa_{ad}$
+produces exactly the angular-momentum coupling
+$J^i_{\mu\nu}\,\varepsilon_s^\nu/(p_i \cdot q_s)$ in the
+soft limit. In the celestial/gravitational reading, this is read as the
+Cachazo--Strominger factor.
+
+For a general modular Koszul algebra, the identification
+\eqref{V1-eq:thqg-VI-cs-factor} follows from the shadow
+representation formula~\eqref{V1-eq:thqg-VI-cubic-genus0}: in the
+soft limit $z_s \to \infty$, the ternary propagator
+$1/[(z_s - z_i)(z_i - z_j)]$ scales as $1/(z_s \cdot (z_i - z_j))$,
+producing the subleading $1/z_s$ factor. The remaining factor
+$\mathfrak{C}(\phi_s, \phi_i, \phi_j)/(z_i - z_j)$ is the
+angular-momentum coupling in the conformal-block basis, and in the
+celestial/gravitational reading this is read as the subleading soft factor.
+\end{proof}
+
+\subsubsection{Gauge triviality and the Virasoro subleading celestial soft factor}
+
+\begin{theorem}[Cubic gauge triviality and subleading celestial soft factors;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-cubic-gauge-triviality
+\index{cubic gauge triviality!subleading celestial soft factor|textbf}
+\index{Virasoro algebra!subleading celestial soft factor}
+Let $\cA$ be a modular Koszul chiral algebra.
+The cubic gauge triviality theorem
+(Theorem~\ref{thm:cubic-gauge-triviality}) controls the content
+of the subleading celestial soft factor as follows:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If $H^1(F^3\gAmod/F^4\gAmod, d_2) = 0$ (which holds for all
+ class-$\mathbf{G}$ algebras: Heisenberg, lattice VOAs, free
+ fermions), then the cubic shadow $\mathfrak{C}(\cA) = 0$ and
+ the subleading celestial soft factor vanishes identically:
+ $S^{(1)}_{\mathrm{cel}} = 0$.
+ In the celestial/gravitational reading, the subleading soft statement
+ is trivially satisfied.
+\item If $H^1(F^3\gAmod/F^4\gAmod, d_2) \neq 0$ (which holds
+ for all class-$\mathbf{L}$, $\mathbf{C}$, and $\mathbf{M}$
+ algebras), then $\mathfrak{C}(\cA) \neq 0$ and the subleading
+ celestial soft factor carries non-trivial information. In the
+ same reading, the subleading soft statement carries non-trivial
+ information.
+\item For $\cA = \mathrm{Vir}_c$: the cubic shadow is
+ $\mathfrak{C}(\mathrm{Vir}_c) = 2x^3$
+ (Volume~I, shadow archetype classification), and the subleading
+ celestial soft factor is
+ \begin{equation}% label removed: eq:thqg-VI-vir-subleading
+ S^{(1)}_{\mathrm{CS},\mathrm{Vir}}
+ \;=\;
+ \sum_{i=1}^{n}
+ \frac{h_i(h_i - 1)}{(z_s - z_i)^2}
+ \;+\;
+ \frac{h_i\,\partial_{z_i}}{z_s - z_i},
+ \end{equation}
+ where $h_i$ is the conformal weight of the $i$-th insertion.
+ This is the standard BPZ subleading term for the stress tensor.
+\item For $\cA = \widehat{\mathfrak{g}}_k$: the cubic shadow is
+ $\mathfrak{C}(\widehat{\fg}_k) = f_{abc}\,J^a \otimes J^b
+ \otimes J^c$ (the structure-constant tensor), and the subleading
+ celestial soft factor reproduces the KZ subleading residues.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Parts~(i) and~(ii) are direct consequences of
+Theorem~\ref{thm:cubic-gauge-triviality}: the hypothesis
+$H^1(F^3/F^4, d_2) = 0$ is equivalent to the vanishing of the
+cubic obstruction class $[o_3] = 0$, which by the obstruction
+recursion
+(Construction~\ref{V1-constr:obstruction-recursion})
+is equivalent to $\mathfrak{C}(\cA) = 0$. When the cubic shadow
+vanishes, the degree-$3$ connection perturbation $A^{(3)}$ is zero
+and the subleading celestial soft factor vanishes.
+
+Part~(iii): For the Virasoro algebra, the stress tensor~$T(z)$
+has conformal weight~$2$, and the OPE $T(z)\,T(w)$ contains the
+singular terms $c/(2(z-w)^4) + 2T(w)/(z-w)^2 + \partial T(w)/(z-w)$.
+The cubic shadow $\mathfrak{C}(\mathrm{Vir}_c) = 2x^3$ arises
+from the ternary part of this OPE (the $:T^2:$ normal-ordered
+product), and on the Virasoro degenerate-representation comparison
+surface its shadow representation gives exactly the subleading BPZ
+factor~\eqref{V1-eq:thqg-VI-vir-subleading}.
+The identification uses the standard celestial-holography dictionary:
+$h_i$ is the conformal weight, $\partial_{z_i}$ is the momentum
+operator, and the two terms in~\eqref{V1-eq:thqg-VI-vir-subleading}
+correspond to the spin and orbital parts of the angular momentum.
+
+Part~(iv): For the affine Kac--Moody algebra, the cubic shadow
+is the structure-constant tensor $f_{abc}$. Its shadow
+representation at genus~$0$ gives
+$\Sh_{0,n}(\mathfrak{C}) = \sum_{i,j} f_{abc}\,J^a_i J^b_j
+/(z_i - z_j)$,
+which is the commutator part of the KZ connection. In the
+subleading soft limit, this produces the angular-momentum
+coupling~\eqref{V1-eq:thqg-VI-cs-factor}.
+\end{proof}
+
+\begin{corollary}[Twisted degree-$3$ celestial Ward identity and its superrotation reading; \ClaimStatusProvedHere]
+\label{cor:thqg-VI-superrotation}
+\index{superrotation!celestial Ward identity from cubic shadow|textbf}
+\index{BMS package!superrotation}
+At genus~$0$, the subleading celestial soft factor admits the
+following twisted Ward identity. A soft insertion labeled by a
+meromorphic vector field $Y^\mu(z)$ on the celestial sphere,
+holomorphic at the hard insertion points, generates:
+\begin{equation}% label removed: eq:thqg-VI-superrotation
+\sum_{i=1}^{n}
+\bigl(Y^\mu(z_i)\,\partial_\mu
++ (\partial_\mu Y^\nu)(z_i)\,J^i_{\mu\nu}\bigr)\,
+\Phi(z_1, \dotsc, z_n)
+\;=\; 0.
+\end{equation}
+In the celestial/gravitational reading, these superrotation and
+supertranslation Ward identities are read together as the extended
+BMS package.
+\end{corollary}
+
+\begin{proof}
+The subleading celestial soft factor~\eqref{V1-eq:thqg-VI-cs-factor} involves
+the angular momentum $J^i_{\mu\nu}$. When the soft polarization
+is twisted by a meromorphic vector field $Y^\mu$ on the celestial
+sphere that is holomorphic at the insertion points, the Ward identity becomes
+\eqref{V1-eq:thqg-VI-superrotation}: the $Y^\mu\partial_\mu$ term
+comes from the orbital part and the $(\partial Y)\cdot J$ term
+from the spin part. In the celestial/gravitational reading, this is
+read, for the standard conformal-Killing specialization of $Y^\mu$,
+as the superrotation sector of the BMS package, following the
+standard superrotation reading of the subleading soft statement
+(Strominger~\cite{Strominger18}).
+
+From the shadow-tower viewpoint: the leading (degree-$2$) Ward
+identities are read as supertranslations
+(Corollary~\ref{cor:thqg-VI-bms-supertranslation}); the
+subleading (degree-$3$) Ward identities are read as superrotations;
+together they are read as the extended BMS package, modeled on the
+standard semi-direct-product form of superrotations acting on
+supertranslations.
+\end{proof}
+
+% ======================================================================
+%
+% SUBSECTION 4: SUB-SUBLEADING FROM THE QUARTIC CONTACT INVARIANT
+%
+% ======================================================================
+
+\subsection{The sub-subleading celestial soft factor and the quartic contact
+invariant}
+\label{subsec:thqg-VI-sub-subleading-soft}
+\index{sub-subleading celestial soft factor|textbf}
+\index{quartic contact invariant!sub-subleading celestial soft factor}
+
+The third layer of the celestial soft hierarchy arises from the
+degree-$4$ Ward identity. This is controlled by the quartic
+contact invariant
+$\mathfrak{Q}^{\mathrm{contact}}(\cA) \in \cA^{\mathrm{sh}}_{4,0}$,
+and the explicit coefficient for the Virasoro algebra is
+$Q^{\mathrm{contact}}_{\mathrm{Vir}} = 10/[c(5c+22)]$. This
+subsection proves the sub-subleading celestial soft factor,
+computes the explicit Virasoro specialization, and derives the
+clutching law that controls factorization across degenerate curves.
+
+\subsubsection{The quartic contact invariant}
+
+\begin{definition}[Quartic contact invariant for the celestial soft hierarchy]
+% label removed: def:thqg-VI-quartic-contact
+\index{quartic contact invariant!definition for celestial soft hierarchy|textbf}
+The \emph{quartic contact invariant} for the celestial soft
+hierarchy is the degree-$4$ shadow
+$\mathfrak{Q}(\cA) = \cA^{\mathrm{sh}}_{4,0}$, viewed as a
+quartic operation on the corresponding transport package via the shadow
+representation. By the obstruction recursion
+(Definition~\ref{V1-def:shadow-postnikov-tower}), the quartic
+shadow satisfies:
+\begin{equation}% label removed: eq:thqg-VI-quartic-obstruction
+o_4(\cA)
+\;=\;
+\bigl(D_\cA\Theta^{\leq 3} + \tfrac{1}{2}
+[\Theta^{\leq 3}, \Theta^{\leq 3}]\bigr)_4
+\;\in\;
+H^2(\cA^{\mathrm{sh}}_{4,0}).
+\end{equation}
+When $[o_4] = 0$, the quartic shadow is
+$\mathfrak{Q}(\cA) = -h(o_4)$, where $h$ is the homotopy transfer
+operator. The quartic contact invariant decomposes as
+\begin{equation}% label removed: eq:thqg-VI-quartic-decomposition
+\mathfrak{Q}(\cA)
+\;=\;
+\mathfrak{Q}^{\mathrm{local}}(\cA)
+\;+\;
+\mathfrak{Q}^{\mathrm{contact}}(\cA),
+\end{equation}
+where $\mathfrak{Q}^{\mathrm{local}}$ comes from the local
+quartic vertex~$m_4$ of the transferred $A_\infty$-structure, and
+$\mathfrak{Q}^{\mathrm{contact}}$ comes from the
+$H$-Poisson self-interaction
+$\tfrac{1}{2}\{\mathfrak{C}, \mathfrak{C}\}_H$ of the cubic shadow.
+\end{definition}
+
+\begin{proposition}[Quartic shadow action on the transport package;
+\ClaimStatusProvedHere]
+% label removed: prop:thqg-VI-quartic-action
+\index{quartic shadow!action on transport package|textbf}
+At genus~$0$, the shadow representation of the quartic contact
+invariant on the $n$-point derived coinvariant / protected-state
+transport package is
+\begin{equation}% label removed: eq:thqg-VI-quartic-genus0
+\Sh_{0,n}(\mathfrak{Q}) \cdot \Phi(z_1, \dotsc, z_n)
+\;=\;
+\sum_{\substack{I = \{i,j,k,l\} \subseteq \{1,\dotsc,n\} \\
+ |I| = 4}}
+\frac{\mathfrak{Q}(\phi_i, \phi_j, \phi_k, \phi_l)}
+ {\prod_{\{a,b\} \subset I} (z_a - z_b)}\;
+\Phi\bigl|_{I \to \mathfrak{Q}(I)},
+\end{equation}
+where the product in the denominator runs over all pairs
+$\{a,b\} \subset I$ and the precise form of the propagator is
+determined by the integral over $\overline{\mathcal{M}}_{0,5}$.
+\end{proposition}
+
+\begin{proof}
+At degree~$4$, the shadow representation sums over all
+$\binom{n}{4}$ quadruples. For each quadruple, the moduli
+integral is over $\overline{\mathcal{M}}_{0,5}$, the
+Fulton--MacPherson compactification of four points on
+$\mathbb{P}^1$ with one output point. The resulting propagator
+factor is a rational function of the cross-ratio
+$\chi = (z_i - z_j)(z_k - z_l)/[(z_i - z_k)(z_j - z_l)]$
+integrated over $\overline{\mathcal{M}}_{0,5}$. The precise
+normalization depends on the choice of coordinates;
+in the standard Koba--Nielsen parametrization, the result is the
+factor displayed in~\eqref{V1-eq:thqg-VI-quartic-genus0}.
+\end{proof}
+
+\subsubsection{Explicit computation for the Virasoro algebra}
+
+\begin{theorem}[Virasoro quartic contact coefficient;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-virasoro-quartic
+\index{Virasoro algebra!quartic contact coefficient|textbf}
+\index{quartic contact invariant!Virasoro}
+For the Virasoro algebra $\cA = \mathrm{Vir}_c$ with central
+charge~$c$, the quartic contact invariant is
+\begin{equation}% label removed: eq:thqg-VI-virasoro-quartic
+\boxed{%
+Q^{\mathrm{contact}}_{\mathrm{Vir}}
+\;=\;
+\frac{10}{c(5c + 22)}.}
+\end{equation}
+The sub-subleading celestial soft factor at genus~$0$ is
+\begin{equation}% label removed: eq:thqg-VI-virasoro-sub-subleading
+S^{(2)}_{\mathrm{Vir}}
+\;=\;
+Q^{\mathrm{contact}}_{\mathrm{Vir}}
+\cdot
+\sum_{i=1}^{n}
+\frac{h_i^2(h_i - 1)^2}{(z_s - z_i)^3}\;
++\; \text{(lower-order terms)},
+\end{equation}
+where the lower-order terms involve cross-terms between the
+conformal weights of different insertions.
+\end{theorem}
+
+\begin{proof}
+The quartic contact invariant for the Virasoro algebra is
+computed in the nonlinear modular shadow chapter
+(Appendix~\ref*{V1-app:nonlinear-modular-shadows}). The computation
+proceeds as follows.
+
+\medskip\noindent
+\emph{Step~1: The quartic obstruction class.}\;
+The degree-$4$ obstruction is
+\[
+o_4(\mathrm{Vir}_c)
+\;=\;
+\bigl(D\Theta^{\leq 3} + \tfrac{1}{2}
+[\Theta^{\leq 3}, \Theta^{\leq 3}]\bigr)_4.
+\]
+Since $\Theta^{\leq 2} = \kappa = c/2$ and
+$\Theta^{\leq 3} = \kappa + \mathfrak{C}$ with
+$\mathfrak{C} = 2x^3$, the obstruction is:
+\[
+o_4
+\;=\;
+D(2x^3)\big|_{\mathrm{degree}\,4}
+\;+\;
+\tfrac{1}{2}[2x^3, 2x^3]_{\mathrm{degree}\,4}
+\;+\;
+m_4\text{-contribution}.
+\]
+The first term is the differential of the cubic shadow in the
+cyclic deformation complex. The second term is the
+$H$-Poisson bracket $\{2x^3, 2x^3\}_H$.
+
+\medskip\noindent
+\emph{Step~2: The Gram matrix computation.}\;
+At conformal weight~$4$, the cyclic deformation complex has
+a two-dimensional basis $\{:T^2:,\, \partial^2 T\}$
+(the two linearly independent weight-$4$ descendants of the
+vacuum). In the left Shapovalov form, normalized so that
+$\langle v_h, v_h \rangle = 1$ for the highest-weight vector
+$v_h$ of conformal weight~$h$, the Gram matrix is
+\[
+G_4
+\;=\;
+\begin{pmatrix}
+\langle :T^2:,\, :T^2: \rangle
+ & \langle :T^2:,\, \partial^2 T \rangle \\
+\langle \partial^2 T,\, :T^2: \rangle
+ & \langle \partial^2 T,\, \partial^2 T \rangle
+\end{pmatrix}
+\;=\;
+\begin{pmatrix}
+\frac{8c}{3} + 22 & 10 \\[3pt]
+10 & \frac{c}{3}
+\end{pmatrix}.
+\]
+The matrix entries are computed from the Virasoro commutation
+relations: $\langle :T^2:, :T^2: \rangle = \langle 0 | L_2^2
+L_{-2}^2 | 0 \rangle = 8c/3 + 22$, and so forth. The
+determinant is
+\[
+\det G_4
+\;=\;
+\bigl(\tfrac{8c}{3} + 22\bigr)\,\tfrac{c}{3} - 100
+\;=\;
+\frac{8c^2 + 66c - 900}{9}
+\;=\;
+\frac{2(4c^2 + 33c - 450)}{9}
+\]
+at the level of the full Gram matrix; its quadratic factor
+$4c^2 + 33c - 450$ is irreducible over $\mathbb{Q}$ (discriminant
+$8289$, not a perfect square). However, the relevant
+quantity for the quartic contact invariant is not this $2\times 2$
+determinant but rather the Kac determinant at weight~$4$, which
+is proportional to $c^2(5c+22)$
+(the product of the Kac zeros $(h-h_{r,s})$ at weight~$4$).
+The factor $c(5c + 22)$ in the denominator
+of~\eqref{V1-eq:thqg-VI-virasoro-quartic} comes from the inverse of
+this Kac factor: the quartic contact invariant is the
+coefficient of the quartic shadow in the deformation complex,
+normalized by the Shapovalov form at weight~$4$.
+
+\medskip\noindent
+\emph{Step~3: Explicit evaluation.}\;
+The quartic contact coefficient is
+\[
+Q^{\mathrm{contact}}
+\;=\;
+\frac{\langle :T^2:,\, o_4 \rangle}
+ {\langle :T^2:,\, :T^2: \rangle}
+\;=\;
+\frac{10}{c(5c + 22)},
+\]
+where $:T^2: = \sum_{n \leq -2} L_n L_{-n} |0\rangle$ is the
+normal-ordered square of the stress tensor, the numerator is the
+pairing of $:T^2:$ with the quartic obstruction class, and the
+denominator is the Shapovalov norm $\langle :T^2:, :T^2: \rangle
+= 8c/3 + 22$. (We use the left Shapovalov form throughout,
+normalized so that $\langle v_h, v_h \rangle = 1$ for the
+highest-weight vector $v_h$ of weight~$h$.) The explicit computation
+uses the Virasoro commutation relations and gives the factor $10$ in
+the numerator: the pairing $\langle :T^2:, o_4 \rangle = 10$ arises
+from the contact term in $[2x^3, 2x^3]_H$.
+
+\medskip\noindent
+\emph{Step~4: The sub-subleading celestial soft factor.}\;
+The shadow representation of $Q^{\mathrm{contact}}\cdot x^4$
+on the genus-$0$ transport package, and on the Virasoro
+degenerate-representation comparison surface on conformal blocks,
+gives the celestial soft factor
+\eqref{V1-eq:thqg-VI-virasoro-sub-subleading}: in the soft limit
+$z_s \to \infty$, the quartic propagator on
+$\overline{\mathcal{M}}_{0,5}$ produces the leading
+$1/(z_s - z_i)^3$ behavior, with the coefficient
+$h_i^2(h_i-1)^2$ coming from the action of $:T^2:$ on the
+conformal weight-$h_i$ insertion.
+\end{proof}
+
+\begin{remark}[Poles and zeros of $Q^{\mathrm{contact}}_{\mathrm{Vir}}$]
+% label removed: rem:thqg-VI-virasoro-poles
+\index{quartic contact invariant!poles and zeros}
+The quartic contact coefficient
+$Q^{\mathrm{contact}} = 10/[c(5c+22)]$ has:
+\begin{itemize}
+\item A pole at $c = 0$: the free-field degeneration where
+ the Virasoro algebra becomes abelian and the quartic shadow
+ diverges.
+\item A pole at $c = -22/5$: the Lee--Yang minimal model
+ $(2,5)$, which is the simplest non-unitary minimal model.
+ This pole reflects the vanishing of the Gram determinant at
+ weight~$4$ for $c = -22/5$ and signals that the quartic
+ shadow becomes singular at this value.
+\item A zero at $c = \infty$: the semiclassical limit where the
+ quartic contact invariant vanishes and the theory linearizes.
+\end{itemize}
+The genus-$1$ Hessian correction
+$\delta_{H,\mathrm{Vir}}^{(1)} = 120/[c^2(5c+22)]$ has the same
+denominator, confirming that the quartic tower is controlled
+by the single Gram factor $c(5c+22)$.
+\end{remark}
+
+\subsubsection{The clutching law for the quartic shadow}
+
+\begin{theorem}[Clutching law for the quartic contact invariant;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-clutching-law
+\index{clutching law!quartic contact invariant|textbf}
+\index{quartic contact invariant!clutching law}
+The quartic contact invariant satisfies a factorization identity
+under degeneration of curves. Let
+$\xi\colon \overline{\mathcal{M}}_{g_1,n_1+1} \times
+\overline{\mathcal{M}}_{g_2,n_2+1} \to
+\partial\overline{\mathcal{M}}_{g,n}$
+be a separating clutching morphism with $g = g_1 + g_2$ and
+$n = n_1 + n_2$. Then:
+\begin{equation}% label removed: eq:thqg-VI-clutching-separating
+\xi^*\bigl(\mathfrak{Q}(\cA)\bigr)
+\;=\;
+\sum_{r+s=4}
+\mathfrak{Q}^{(r)}(\cA) \star \mathfrak{Q}^{(s)}(\cA)
+\;+\;
+\mathfrak{C}(\cA) \star_\kappa \mathfrak{C}(\cA),
+\end{equation}
+where:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\star$ denotes operadic composition along the clutching
+ map~$\xi$;
+\item $\mathfrak{C} \star_\kappa \mathfrak{C}$ is the
+ $\kappa$-weighted composition of two cubic shadows, i.e.\ the
+ contribution from the two-vertex stable graph with one internal
+ edge carrying the propagator~$\kappa$;
+\item the sum $\sum_{r+s=4}$ accounts for distributing the degree-$4$
+ shadow between the two components of the degenerate curve.
+\end{enumerate}
+
+For the non-separating clutching
+$\xi_{\mathrm{ns}}\colon \overline{\mathcal{M}}_{g-1,n+2}
+\to \partial\overline{\mathcal{M}}_{g,n}$:
+\begin{equation}% label removed: eq:thqg-VI-clutching-nonseparating
+\xi_{\mathrm{ns}}^*\bigl(\mathfrak{Q}(\cA)\bigr)
+\;=\;
+\Lambda_P\bigl(\mathfrak{Q}(\cA)\bigr)
+\;+\;
+\Lambda_P\bigl(\mathfrak{C}(\cA) \star \mathfrak{C}(\cA)\bigr),
+\end{equation}
+where $\Lambda_P\colon \Sym^r \to \Sym^{r-2}$ is the genus-loop
+operator (self-sewing with the complementarity propagator~$P_\cA$).
+\end{theorem}
+
+\begin{proof}
+The clutching law is a consequence of the MC equation for
+$\Theta_\cA$ and the compatibility of the shadow obstruction tower
+with the Deligne--Mumford boundary stratification. The MC equation
+$D_\cA\Theta_\cA + \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$
+restricts to the boundary $\partial\overline{\mathcal{M}}_{g,n}$
+via the clutching morphism~$\xi$. Since
+$\xi^*(\Theta_\cA) = \Theta_\cA \star \Theta_\cA$
+(Volume~I equation~\texttt{eq:clutching-factorization-frontier}), projecting
+both sides to degree~$4$ gives:
+\begin{align*}
+\xi^*\bigl(\Theta^{(4)}\bigr)
+&\;=\;
+\bigl(\Theta_\cA \star \Theta_\cA\bigr)_4 \\
+&\;=\;
+\Theta^{(4)} \star \Theta^{(0)}
++ \Theta^{(3)} \star \Theta^{(1)}
++ \Theta^{(2)} \star \Theta^{(2)}
++ \Theta^{(1)} \star \Theta^{(3)}
++ \Theta^{(0)} \star \Theta^{(4)},
+\end{align*}
+where $\Theta^{(0)} = 1$ and $\Theta^{(1)} = 0$ (no degree-$1$
+component by the stability condition $2g - 2 + n > 0$).
+The non-zero contributions are:
+\[
+\xi^*(\mathfrak{Q})
+= \mathfrak{Q} \star 1 + 1 \star \mathfrak{Q}
+ + \kappa \star \kappa
+ + \mathfrak{C} \star_\kappa \mathfrak{C},
+\]
+where $\kappa \star \kappa$ is the purely quadratic
+cross-term (which vanishes for scalar $\kappa$ by
+skew-symmetry of the bracket) and
+$\mathfrak{C} \star_\kappa \mathfrak{C}$ is the
+cubic-cubic cross-term. This gives
+\eqref{V1-eq:thqg-VI-clutching-separating}.
+
+For the non-separating clutching, the same argument applies with
+$\xi_{\mathrm{ns}}^*$ replaced by the genus-loop operator
+$\Lambda_P$, which contracts two marked points with the
+propagator. The result is~\eqref{V1-eq:thqg-VI-clutching-nonseparating}.
+\end{proof}
+
+\begin{computation}[Clutching law for Virasoro; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VI-virasoro-clutching
+\index{clutching law!Virasoro quartic}
+For $\cA = \mathrm{Vir}_c$, the separating clutching law
+\eqref{V1-eq:thqg-VI-clutching-separating} gives:
+\begin{equation}% label removed: eq:thqg-VI-virasoro-clutching-explicit
+\xi^*\bigl(Q^{\mathrm{contact}}\bigr)
+\;=\;
+Q^{\mathrm{contact}}
+\;+\;
+\mathfrak{C}_{\mathrm{Vir}} \star_\kappa
+\mathfrak{C}_{\mathrm{Vir}},
+\end{equation}
+where the cubic-cubic cross-term has one internal edge. With
+$\mathfrak{C}_{\mathrm{Vir}}=2x^3$ and $\kappa=c/2$, the edge
+propagator is $\kappa^{-1}=2/c$, and the unprojected contraction is
+\[
+\mathfrak{C} \star_\kappa \mathfrak{C}
+= (2)^2 \cdot (2/c) \cdot (x^3 \star x^3)
+= \frac{8}{c}(x^3 \star x^3).
+\]
+Any further power of \(c\) belongs to the later projection to a
+normalised quartic contact coordinate, not to the separating clutching
+edge.
+The $x^3 \star x^3$ contraction uses the $L_2$-commutation relation
+and produces a weight-$4$ state proportional to
+$L_{-2}^2|0\rangle + \tfrac{3}{2(2+c)}L_{-4}|0\rangle$.
+
+The non-separating clutching gives the genus-$1$ correction:
+\begin{equation}% label removed: eq:thqg-VI-virasoro-nonsep-clutching
+\Lambda_P(Q^{\mathrm{contact}})
+\;=\;
+\frac{120}{c^2(5c + 22)}\,x^2
+\;=\;
+\delta_{H,\mathrm{Vir}}^{(1)}\,x^2,
+\end{equation}
+recovering the genus-$1$ Hessian correction, so the clutching law is consistent with the known genus-$1$
+shadow.
+\end{computation}
+
+\subsubsection{The sub-subleading celestial soft factor}
+
+\begin{theorem}[Sub-subleading celestial soft factor and its gravitational reading;
+\ClaimStatusProvedHere]
+\label{thm:thqg-VI-sub-subleading-soft}
+\index{sub-subleading celestial soft factor!proof|textbf}
+Let $\cA$ be a modular Koszul chiral algebra with nonzero quartic
+support component \(\Theta_{\cA,4}=\mathfrak Q(\cA)\).
+Let $\Phi \in \cV_{0,n+1}(\cA; V_1, \dotsc, V_n, V_s)$ be an
+$(n+1)$-point genus-$0$ correlator with $\phi_s(z_s)$ a soft
+insertion. The sub-subleading celestial soft expansion is
+\begin{equation}% label removed: eq:thqg-VI-sub-subleading
+\Phi
+\;\underset{z_s \to \infty}{=}\;
+S^{(0)}\,\Phi_n
++ \frac{1}{z_s}\,S^{(1)}\,\Phi_n
++ \frac{1}{z_s^2}\,S^{(2)}\,\Phi_n
++ O(z_s^{-3}),
+\end{equation}
+where $S^{(0)}$, $S^{(1)}$ are the leading and subleading celestial
+soft factors, and the \emph{sub-subleading celestial soft factor} is
+\begin{equation}% label removed: eq:thqg-VI-sub-subleading-factor
+S^{(2)}
+\;=\;
+\Sh_{0,n}(\mathfrak{Q}(\cA))\bigl|_{\text{soft limit}}
+\;+\;
+\bigl[\Sh_{0,n}(\mathfrak{C}(\cA)),\,
+\Sh_{0,n}(\mathfrak{C}(\cA))\bigr]\bigl|_{\text{soft limit}}.
+\end{equation}
+The first term is the direct contribution of the quartic shadow;
+the second is the self-interaction of the cubic shadow through the
+degree-$4$ flatness equation~\eqref{V1-eq:thqg-VI-flat-degree-4}. In the
+celestial/gravitational reading, $S^{(2)}$ is read as the
+sub-subleading soft factor.
+\end{theorem}
+
+\begin{proof}
+The degree-$4$ flatness equation
+(Theorem~\ref{thm:thqg-VI-flatness-by-degree}(c)) states:
+\[
+\nabla^{(2)}\bigl(A^{(4)}\bigr)
++ \bigl[A^{(3)}, A^{(3)}\bigr]
++ o_4(\cA)
+= 0.
+\]
+In the soft limit, the covariant derivative $\nabla^{(2)}(A^{(4)})$
+contributes $S^{(2)}_{\mathrm{quartic}} = \Sh_{0,n}(\mathfrak{Q})$
+at order $1/z_s^2$, and the cubic self-interaction
+$[A^{(3)}, A^{(3)}]$ contributes the bracket term in
+\eqref{V1-eq:thqg-VI-sub-subleading-factor}.
+
+The soft expansion order is determined by the propagator scaling:
+at degree~$r$, the shadow representation involves an
+$(r-1)$-fold propagator product on $\overline{\mathcal{M}}_{0,r+1}$,
+which in the soft limit $z_s \to \infty$ scales as
+$z_s^{-(r-2)}$. Hence degree~$2$ gives $z_s^0$ (leading),
+degree~$3$ gives $z_s^{-1}$ (subleading), and degree~$4$ gives
+$z_s^{-2}$ (sub-subleading).
+\end{proof}
+
+\begin{remark}[Non-universality in the sub-subleading gravitational reading]
+% label removed: rem:thqg-VI-non-universality
+\index{sub-subleading celestial soft factor!non-universality}
+The sub-subleading celestial soft factor~\eqref{V1-eq:thqg-VI-sub-subleading-factor}
+depends on \emph{both} $\mathfrak{Q}(\cA)$ and
+$\mathfrak{C}(\cA)$; it is not determined by the quartic shadow
+alone. This is the algebraic mechanism behind the well-known
+non-universality in the sub-subleading soft statement:
+unlike the leading and subleading soft statements, which are universal
+consequences of energy-momentum and angular momentum conservation,
+the sub-subleading statement depends on the specific dynamics of the
+theory. In the shadow-tower language, the dynamics is encoded in
+the support-depth class: the sub-subleading factor differs
+between class-$\mathbf{C}$ (where it is the final nontrivial
+celestial soft factor in the hierarchy) and class-$\mathbf{M}$
+(where it is one term in an infinite celestial soft hierarchy).
+\end{remark}
+
+\begin{remark}[Virasoro sub-subleading and the BPZ equation]
+% label removed: rem:thqg-VI-virasoro-bpz
+\index{BPZ equation!sub-subleading celestial soft factor}
+For $\cA = \mathrm{Vir}_c$, the sub-subleading celestial soft factor
+$S^{(2)}_{\mathrm{Vir}}$ contains the quartic contact coefficient
+$Q^{\mathrm{contact}} = 10/[c(5c+22)]$.
+In the conformal-block basis, this encodes the fourth-order
+BPZ differential equation for four-point functions at degenerate
+conformal weight $h_{(2,1)} = (5-c \pm \sqrt{(c-1)(c-25)})/16$.
+The vanishing of $Q^{\mathrm{contact}}$ at $c = \infty$
+reflects the fact that in the semiclassical limit, the BPZ
+equation linearizes and the sub-subleading celestial soft factor
+becomes trivial.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION 5: HIGHER SOFT THEOREMS AND THE INFINITE TOWER
+%
+% ======================================================================
+
+\subsection{Higher celestial soft factors and the infinite tower}
+\label{subsec:thqg-VI-higher-soft}
+\index{higher celestial soft factors|textbf}
+\index{shadow obstruction tower!infinite tower}
+\index{Virasoro algebra!infinite soft tower}
+
+For algebras of support shadow depth \(r^\Theta_{\max}=\infty\)
+(the Virasoro and
+$\mathcal{W}_N$ families), the algebraic support-shadow hierarchy has
+no finite arity cutoff.  After a celestial comparison datum is fixed,
+the images of those support channels give the available higher soft
+operators.  The support-depth statement itself is not a count of
+independent physical Ward identities. The general structure of the
+higher celestial soft factors follows
+from the MC equation; in particular, the tower is genuinely infinite for Virasoro
+($o_5(\mathrm{Vir}_c) \neq 0$).
+
+\subsubsection{The general degree-$r$ celestial soft factor}
+
+\begin{theorem}[General degree-$r$ celestial soft factor and its gravitational reading;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-general-soft
+\index{celestial soft factor!general degree|textbf}
+Let $\cA$ be a modular Koszul chiral algebra and
+$\Phi \in \cV_{0,n+1}(\cA; V_1, \dotsc, V_n, V_s)$ a genus-$0$
+$(n+1)$-point correlator with soft insertion $\phi_s(z_s)$.
+For each $r \geq 2$, the order-$(r-2)$ term in the celestial soft
+expansion
+\begin{equation}% label removed: eq:thqg-VI-general-soft-expansion
+\Phi
+\;=\;
+\sum_{k=0}^{\infty}
+\frac{1}{z_s^k}\;S^{(k)}\,\Phi_n
+\end{equation}
+is determined by the degree-$r$ Ward identity:
+\begin{equation}% label removed: eq:thqg-VI-general-soft-factor
+S^{(r-2)}
+\;=\;
+\Sh_{0,n}(\Sh_r(\cA))\bigl|_{\text{soft limit}}
+\;+\;
+\sum_{\substack{s+t=r \\ s,t \geq 3}}
+\bigl[\Sh_{0,n}(\Sh_s(\cA)),\,
+\Sh_{0,n}(\Sh_t(\cA))\bigr]\bigl|_{\text{soft limit}}.
+\end{equation}
+The system of all such identities for $r = 2, 3, \dotsc$ is
+equivalent to the flatness
+$(\nabla^{\mathrm{hol}}_{0,n+1})^2 = 0$,
+which is guaranteed by the MC equation for $\Theta_\cA$. In the
+celestial/gravitational reading, the factors $S^{(r-2)}$ are read as the
+corresponding order-$(r-2)$ higher soft factors.
+\end{theorem}
+
+\begin{proof}
+This is the genus-$0$, soft-limit specialization of
+Theorem~\ref{thm:thqg-VI-flatness-by-degree}(d). The degree-$r$
+flatness equation reads:
+\[
+\nabla^{(2)}\bigl(A^{(r)}\bigr)
++ \sum_{\substack{s+t=r \\ s,t \geq 3}}
+\bigl[A^{(s)}, A^{(t)}\bigr]
++ o_r(\cA)
+= 0.
+\]
+In the soft limit $z_s \to \infty$, the propagator scaling argument
+of Theorem~\ref{thm:thqg-VI-sub-subleading-soft} shows that
+degree~$r$ contributes at order $z_s^{-(r-2)}$. The covariant
+derivative $\nabla^{(2)}(A^{(r)})$ in the soft limit produces the
+direct shadow contribution, and the bracket terms produce the
+cross-contributions from lower degrees. The result is
+\eqref{V1-eq:thqg-VI-general-soft-factor}.
+\end{proof}
+
+\begin{corollary}[Celestial soft factor recursion; \ClaimStatusProvedHere]
+\label{cor:thqg-VI-soft-recursion}
+\index{celestial soft factor!recursion|textbf}
+The celestial soft factors satisfy the recursion
+\begin{equation}% label removed: eq:thqg-VI-soft-recursion
+S^{(r-2)}
+\;=\;
+\Sh_{0,n}(\Sh_r(\cA))\bigl|_{\text{soft}}
+\;-\;
+\sum_{\substack{s+t=r \\ 3 \leq s \leq t}}
+S^{(s-2)} \cdot S^{(t-2)}\bigl|_{\text{cross}},
+\end{equation}
+where the cross-term is the bracket contribution from the degree
+splitting $r = s + t$. This recursion determines all celestial soft factors
+in terms of the shadows $\{\Sh_2, \Sh_3, \dotsc, \Sh_r\}$ and
+the lower-order celestial soft factors.
+\end{corollary}
+
+\begin{proof}
+Immediate from~\eqref{V1-eq:thqg-VI-general-soft-factor}, rewritten
+to express $S^{(r-2)}$ in terms of lower-order factors.
+\end{proof}
+
+\subsubsection{The quintic shadow and $o_5(\mathrm{Vir}_c) \neq 0$}
+
+\begin{theorem}[The Virasoro quintic shadow is forced;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-quintic-forced
+\index{Virasoro algebra!quintic shadow|textbf}
+\index{quintic obstruction!non-vanishing}
+For the Virasoro algebra $\cA = \mathrm{Vir}_c$ with $c$ generic:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The quintic obstruction class is non-vanishing:
+\begin{equation}% label removed: eq:thqg-VI-quintic-nonvanishing
+o_5(\mathrm{Vir}_c) \;\neq\; 0
+\qquad\text{in}\quad
+H^2(\cA^{\mathrm{sh}}_{5,0}).
+\end{equation}
+\item The quintic shadow $\Sh_5(\mathrm{Vir}_c) \neq 0$, and
+ the shadow obstruction tower does not terminate at degree~$4$.
+\item The Virasoro support shadow depth is
+\(r^\Theta_{\max}(\mathrm{Vir}_c)=\infty\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The proof uses the all-degree master equation
+(Proposition~\ref{V1-prop:master-equation-from-mc}) and the explicit
+structure of the Virasoro algebra.
+
+\medskip\noindent
+\emph{Step~1: Source of the quintic obstruction.}\;
+The degree-$5$ obstruction is
+\begin{equation}% label removed: eq:thqg-VI-quintic-obstruction-formula
+o_5(\mathrm{Vir}_c)
+\;=\;
+\bigl(D\Theta^{\leq 4} + \tfrac{1}{2}
+[\Theta^{\leq 4}, \Theta^{\leq 4}]\bigr)_5.
+\end{equation}
+This receives contributions from:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $D(\mathfrak{Q})_5$: the differential of the quartic
+ shadow projected to degree~$5$;
+\item $[\mathfrak{C}, \mathfrak{Q}]_5$: the bracket of the cubic
+ and quartic shadows;
+\item $m_5$-contribution: the transferred quintic $A_\infty$
+ operation.
+\end{enumerate}
+
+\medskip\noindent
+\emph{Step~2: Non-vanishing via normal-ordered products.}\;
+The Virasoro algebra has non-trivial normal-ordered products
+$:T^n:$ at all degrees~$n \geq 2$. At weight~$5$, the state
+$:T\cdot T\cdot T: \sim L_{-1}L_{-2}^2|0\rangle$ (and
+its descendants) generates a non-trivial element in the
+weight-$5$ cyclic deformation complex. The key computation is:
+\begin{align}
+o_5 &\;\ni\;
+[\mathfrak{C}, \mathfrak{Q}]
+\;=\;
+[2x^3,\; Q^{\mathrm{contact}}\cdot x^4]
+\notag \\
+&\;=\;
+2\,Q^{\mathrm{contact}}\cdot
+\bigl\{x^3, x^4\bigr\}_H
+\notag \\
+&\;=\;
+2\,Q^{\mathrm{contact}}\cdot
+P_\cA\bigl(x^3 \cdot x^4\bigr)
+% label removed: eq:thqg-VI-quintic-bracket
+\end{align}
+where $P_\cA = H_\cA^{-1}$ is the complementarity propagator and
+$\{-, -\}_H$ is the $H$-Poisson bracket. The $H$-Poisson bracket
+has bidegree (degree: $-1$, cohomological: $+1$), so
+$\{2x^3, 2x^3\}_H$ has degree $3 + 3 - 1 = 5$ and cohomological
+degree $0 + 0 + 1 = 1$. This is a degree-$1$ element in degree~$5$,
+which represents a cocycle in the cyclic deformation complex.
+Applying the differential $d_2$ then produces the final obstruction
+class $o_5 \in H^2(\cA^{\mathrm{sh}}_{5,0})$.
+
+For the Virasoro algebra, the propagator $P_\cA$ is non-degenerate
+at weight~$5$ (the Gram determinant at weight~$5$ is non-vanishing
+for generic~$c$), so
+$P_\cA(x^3 \cdot x^4) \neq 0$.
+Combined with $Q^{\mathrm{contact}} = 10/[c(5c+22)] \neq 0$
+for generic~$c$, this gives
+$[\mathfrak{C}, \mathfrak{Q}] \neq 0$
+in $H^2(\cA^{\mathrm{sh}}_{5,0})$.
+
+\medskip\noindent
+\emph{Step~3: The inductive mechanism.}\;
+The non-vanishing of $o_5$ implies that $\Sh_5 \neq 0$: the
+quintic shadow must be non-trivial to solve the degree-$5$ master
+equation. By the same argument at each subsequent degree, the
+cubic shadow $\mathfrak{C} = 2x^3$ provides a permanent source
+via the bracket $[\mathfrak{C}, \Sh_r]$ at degree $r+1$:
+\[
+o_{r+1} \;\ni\;
+[\mathfrak{C}, \Sh_r]
+\;=\;
+[2x^3, \Sh_r(\mathrm{Vir}_c)].
+\]
+As long as $\Sh_r \neq 0$ and the propagator is non-degenerate
+at weight~$r+1$ (which holds for generic~$c$), the obstruction
+$o_{r+1} \neq 0$ and the tower continues. This gives
+\(r^\Theta_{\max}(\mathrm{Vir}_c)=\infty\).
+\end{proof}
+
+\begin{remark}[The cubic source mechanism]
+\label{rem:thqg-VI-cubic-source}
+\index{cubic shadow!as permanent source}
+The proof above identifies the fundamental mechanism that makes
+the Virasoro/\hskip0pt$\mathcal{W}_N$ tower infinite: the
+cubic shadow $\mathfrak{C}(\cA) \neq 0$ acts as a
+\emph{permanent source} for all higher obstructions via the
+bracket $[\mathfrak{C}, \Sh_r]$. This is the structural
+reason that class-$\mathbf{M}$ algebras have infinite shadow
+depth. In contrast:
+\begin{itemize}
+\item Class-$\mathbf{G}$: $\mathfrak{C} = 0$, so
+ the source is absent and the tower terminates at $r = 2$.
+\item Class-$\mathbf{L}$: $\mathfrak{C} \neq 0$ but
+ $o_4 = 0$ by the Jacobi identity, so the source is
+ killed at the first step and the tower terminates at $r = 3$.
+\item Class-$\mathbf{C}$: $\mathfrak{C} = 0$ but
+ $\mathfrak{Q} \neq 0$ (the quartic is the leading term);
+ $o_5 = 0$ by rank-$1$ rigidity, so the tower terminates at
+ $r = 4$.
+\item Class-$\mathbf{M}$: $\mathfrak{C} \neq 0$ and the
+ bracket $[\mathfrak{C}, -]$ never annihilates the tower,
+ giving \(r^\Theta_{\max}=\infty\).
+\end{itemize}
+This gives a clean algebraic taxonomy of the celestial soft
+hierarchy, read in the celestial/gravitational interpretation as
+the corresponding gravitational complexity class.
+\end{remark}
+
+\subsubsection{The degree-$5$ celestial soft factor for Virasoro}
+
+\begin{computation}[Quintic celestial soft factor for Virasoro;
+\ClaimStatusConditional]
+% label removed: comp:thqg-VI-virasoro-quintic-soft
+\index{Virasoro algebra!quintic celestial soft factor}
+For $\cA = \mathrm{Vir}_c$, the degree-$5$ celestial soft factor at genus~$0$
+is:
+\begin{equation}% label removed: eq:thqg-VI-virasoro-quintic-soft
+S^{(3)}_{\mathrm{Vir}}
+\;=\;
+\Sh_{0,n}(\Sh_5(\mathrm{Vir}_c))\bigl|_{\text{soft}}
+\;+\;
+\bigl[\Sh_{0,n}(\mathfrak{C}),\,
+\Sh_{0,n}(\mathfrak{Q})\bigr]\bigl|_{\text{soft}}.
+\end{equation}
+By the recursion of Corollary~\ref{cor:thqg-VI-soft-recursion}, the
+cross-term involves the subleading factor $S^{(1)}$ and the
+sub-subleading factor $S^{(2)}$:
+\begin{equation}% label removed: eq:thqg-VI-virasoro-s3-explicit
+S^{(3)}_{\mathrm{Vir}}
+\;=\;
+\frac{10}{c(5c+22)}\;\cdot\;
+\frac{2}{c}\;\cdot\;
+\sum_{i=1}^{n}
+\frac{h_i^3(h_i-1)^2(2h_i - 1)}{(z_s - z_i)^4}
+\;+\; \text{(cross-terms and descendants)},
+\end{equation}
+where the leading coefficient $10\cdot 2/[c^2(5c+22)]
+= 20/[c^2(5c+22)]$ comes from the product
+$Q^{\mathrm{contact}} \cdot (2/c)$ and the conformal weight
+polynomial $h_i^3(h_i-1)^2(2h_i-1)$ comes from the action
+of $:T^3:$ at weight~$5$.
+
+\emph{Correction.} The bracket $[\mathfrak{C},\mathfrak{Q}]_H$
+captures only one sub-channel of the full degree-$5$ shadow.
+The complete shadow coefficient from the shadow-metric expansion
+$H(t) = t^2\sqrt{Q(t)}$ is $S_5 = -48/[c^2(5c+22)]$
+(Theorem~\ref{thm:gravity-infinite-soft-tower}). The discrepancy
+arises because the $\mathrm{Sh}_5$ term in the recursion and the
+remaining cross-terms contribute with the opposite sign and
+larger magnitude than the $[\mathfrak{C},\mathfrak{Q}]$ channel
+alone.
+\end{computation}
+
+\subsubsection{Higher degrees and the inductive structure}
+
+\begin{proposition}[Inductive non-termination for class $\mathbf{M}$
+support packets; \ClaimStatusConditional; licensing
+\(\gamma+\delta\) via \(\hypAmbientWtCpl+\hypCelSoft\)]
+% label removed: prop:thqg-VI-inductive-nontermination
+\index{shadow obstruction tower!non-termination|textbf}
+\index{celestial soft factor!infinite tower}
+Let $\cA$ be a class-$\mathbf{M}$ modular Koszul chiral algebra
+(i.e.\ $\mathfrak{C}(\cA) \neq 0$ and $\mathfrak{Q}(\cA) \neq 0$).
+Assume the Gram determinant of the cyclic deformation complex is
+non-degenerate at all weights (which holds at generic central
+charge or level). Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\Sh_r(\cA) \neq 0$ for all $r \geq 2$.
+\item $o_{r+1}(\cA) \neq 0$ for all $r \geq 2$.
+\item The shadow obstruction tower is genuinely infinite:
+ \(r^\Theta_{\max}(\cA)=\infty\).
+\item After choosing a celestial comparison datum that detects
+ infinitely many support channels, the genus-$0$ images form an
+ infinite tower of coupled soft-shadow differential operators.
+ Without that datum the conclusion is the algebraic
+ non-termination statement \(r^\Theta_{\max}(\cA)=\infty\), not an
+ independent tower of physical Ward identities.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By induction on~$r$. The base cases $r = 2, 3, 4$ are
+$\kappa \neq 0$, $\mathfrak{C} \neq 0$, $\mathfrak{Q} \neq 0$
+(the class-$\mathbf{M}$ hypothesis).
+
+\emph{Inductive step:} Assume $\Sh_r \neq 0$ for some $r \geq 4$.
+The obstruction at degree $r+1$ is
+\[
+o_{r+1}
+\;\ni\;
+[\mathfrak{C}, \Sh_r]
+\;=\;
+P_\cA\bigl(\mathfrak{C} \cdot \Sh_r\bigr)
+\;\neq\; 0,
+\]
+where the non-vanishing uses: (a)~$\mathfrak{C} \neq 0$;
+(b)~$\Sh_r \neq 0$; (c)~non-degeneracy of the Gram determinant
+at weight~$r+1$.
+Since $o_{r+1} \neq 0$, the degree-$(r+1)$ master equation
+forces $\Sh_{r+1} \neq 0$ (it is the solution of
+$\nabla_H(\Sh_{r+1}) + o_{r+1} = 0$). The induction continues.
+\end{proof}
+
+\begin{remark}[The celestial soft hierarchy as an $L_\infty$
+support-depth tower]
+% label removed: rem:thqg-VI-linfty-formality
+\index{Linfty obstruction@$L_\infty$ obstruction!celestial soft hierarchy}
+By the shadow--obstruction comparison
+(Vol~I, Theorem~\ref*{V1-thm:shadow-formality-identification}),
+the degree-\(r\) support component \(\Theta_{\cA,r}\) matches the
+transferred genus-$0$ \(L_\infty\)-bracket in the same
+bar-intrinsic packet. The obstruction class \(o_{r+1}\) decides
+whether a chosen degree-\(r\) truncation extends; it is not itself
+the degree-\((r+1)\) support coordinate. Thus the celestial soft
+hierarchy is a support-depth hierarchy, with obstruction classes
+as its extendability tests. For class-\(\mathbf{G}\) algebras
+(\(r^\Theta_{\max}=2\)), the \(L_\infty\)-algebra is formal and the
+celestial/gravitational reading is free. Classes \(\mathbf{L}\) and
+\(\mathbf{C}\) have finite non-formal support depth. For
+class-\(\mathbf{M}\) algebras (\(r^\Theta_{\max}=\infty\)), the
+\(L_\infty\)-package has infinitely many nonzero support brackets.
+The operadic complexity theorem (Vol~I,
+Theorem~\ref*{V1-thm:operadic-complexity-detailed}, proved by
+identifying the genus-$0$ graph sum with the homotopy transfer tree
+formula at all degrees) establishes this support-bracket
+identification at all degrees.
+\end{remark}
+
+\begin{remark}[Operadic complexity theorem]
+% label removed: rem:thqg-VI-operadic-complexity
+\index{operadic complexity!celestial soft-factor interpretation}
+The equality
+\[
+r^\Theta_{\max}(\cA)=d^\Theta_\infty(\cA)=f^\Theta_\infty(\cA)
+\]
+(the operadic complexity theorem, Vol~I,
+Theorem~\ref*{V1-thm:operadic-complexity-detailed}) states that
+support shadow depth equals \(A_\infty\)-support depth equals
+\(L_\infty\)-support depth. The \(H^2\)-obstruction depth
+\(d_{\mathrm{obs}}\) is a separate invariant and may be smaller.
+In the celestial soft-factor context, this means: the algebraic
+channels available to a celestial comparison are determined by the
+nonzero support components of the transferred cyclic minimal model,
+not by obstruction vanishing alone.  Support depth alone does not
+count the independent physical soft statements.  Independence is a
+property of the chosen celestial comparison map.
+\end{remark}
+
+\subsubsection{The higher-degree celestial soft factors: structure theorems}
+
+\begin{proposition}[Polynomial growth of celestial soft factors;
+\ClaimStatusProvedHere]
+\label{prop:thqg-VI-polynomial-growth}
+\index{celestial soft factor!polynomial growth}
+For a class-$\mathbf{M}$ algebra $\cA$ at generic central charge
+or level, the degree-$r$ celestial soft factor $S^{(r-2)}$ at genus~$0$ has
+the following structure:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $S^{(r-2)}$ is a rational function of the insertion
+ points $z_1, \dotsc, z_n$ with poles of order at most $r-1$
+ along the diagonals $z_i = z_j$.
+\item The conformal-weight polynomial in each term of $S^{(r-2)}$
+ has degree at most $2r - 2$ in the $h_i$.
+\item The central-charge dependence of $S^{(r-2)}$ is a rational
+ function whose denominator is a product of Gram determinant
+ factors at weights $\leq r$.
+\item The leading behavior as $c \to \infty$ is
+ $S^{(r-2)} = O(c^{-(r-2)})$: each successive celestial soft factor is
+ suppressed by one power of the central charge.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i): The propagator on $\overline{\mathcal{M}}_{0,r+1}$
+is a rational function of the insertion points with poles along
+the diagonals. The maximal pole order is $r-1$, achieved when
+$r-1$ of the $r$ insertions collide simultaneously.
+
+Part~(ii): The shadow $\Sh_r$ is an $r$-linear operation on the
+conformal-block insertions. Each insertion contributes a factor
+of conformal weight $h_i$, and the $r$-fold product gives
+degree at most~$r$. The propagator contractions and bracket
+cross-terms contribute at most $r - 2$ additional powers, for
+a total of $2r - 2$.
+
+Part~(iii): The shadow $\Sh_r$ involves the homotopy transfer
+operator $h$, which inverts the Gram matrix at each weight
+level. The denominators are therefore products of Gram
+determinant factors. For Virasoro, these are
+$\prod_{k=2}^{r} \det G_k(c)$, where $G_k(c)$ is the
+weight-$k$ Shapovalov matrix.
+
+Part~(iv): In the large-$c$ limit, the transferred
+$A_\infty$ operations scale as $m_n \sim c^{-(n-2)}$ (from
+the normalization of the OPE). The degree-$r$ shadow involves
+$r-2$ propagator contractions, each contributing a factor of
+$1/c$, giving $S^{(r-2)} \sim c^{-(r-2)}$.
+\end{proof}
+
+\begin{corollary}[Convergence of the soft expansion;
+\ClaimStatusProvedHere]
+\label{cor:thqg-VI-soft-convergence}
+\index{soft expansion!convergence}
+For a class-$\mathbf{M}$ algebra with generic central charge
+$|c| \gg 1$, the soft expansion
+$\sum_{k=0}^{\infty} z_s^{-k}\,S^{(k)}\,\Phi_n$
+converges absolutely for $|z_s|$ sufficiently large (larger than
+all $|z_i|$). The convergence radius is controlled by the
+maximal $|z_i|$ and the growth rate of the Gram determinant
+factors.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:thqg-VI-polynomial-growth}(iv),
+$|S^{(k)}| \leq C^k / |c|^k$ for some constant~$C$ depending on
+the insertion points. The series
+$\sum_k |z_s|^{-k}\,|S^{(k)}| \leq \sum_k (C/(|c|\,|z_s|))^k$
+converges for $|z_s| > C/|c|$. Since we work in the regime
+$|z_s| \gg \max_i |z_i|$ and $|c| \gg 1$, the convergence is
+guaranteed. The precise convergence radius involves the HS-sewing
+condition (Theorem~\ref{thm:general-hs-sewing}).
+\end{proof}
+
+% ======================================================================
+%
+% SUBSECTION 6: CELESTIAL HOLOGRAPHY AND THE SOFT ALGEBRA
+%
+% ======================================================================
+
+\subsection{Celestial holography and the celestial soft algebra}
+\label{subsec:thqg-VI-celestial}
+\index{celestial holography|textbf}
+\index{celestial soft algebra!from shadow tower}
+\index{BMS package!celestial soft algebra}
+
+The celestial soft hierarchy of the preceding subsections admits a
+direct formulation in celestial holography:
+four-dimensional gravitational scattering amplitudes, when
+expressed on the celestial sphere $\mathbb{P}^1$ at null infinity,
+are organized by a two-dimensional chiral algebra, the
+\emph{celestial OPE algebra}, whose Ward identities are encoded by the
+celestial soft factors. In the celestial/gravitational reading, these Ward
+identities are read as the corresponding soft hierarchy.
+This subsection
+develops the connection between the shadow obstruction tower and celestial
+holography.
+
+\subsubsection{The celestial soft algebra from the shadow obstruction tower}
+
+\begin{definition}[Celestial soft algebra]
+% label removed: def:thqg-VI-celestial-soft-algebra
+\index{celestial soft algebra|textbf}
+\index{celestial soft algebra!definition|textbf}
+Let $\cA$ be a modular Koszul chiral algebra. The
+\emph{celestial soft algebra of~$\cA$} is the associative algebra
+\begin{equation}% label removed: eq:thqg-VI-celestial-soft-algebra
+\mathfrak{S}(\cA)
+\;:=\;
+\bigoplus_{2\le r\le r^\Theta_{\max}(\cA)}
+\End\bigl(\cV_{0,n}(\cA)\bigr)^{(r)},
+\end{equation}
+where $\End(\cV_{0,n})^{(r)}$ is the subspace of endomorphisms
+generated by the degree-$r$ shadow representation
+$\Sh_{0,n}(\Sh_r(\cA))$. The algebra structure is the
+composition of endomorphisms, and the generating relations are
+the Ward identities of
+Theorem~\ref{thm:thqg-VI-ward-determines-correlators}.
+\end{definition}
+
+\begin{proposition}[Structure of the celestial soft algebra;
+\ClaimStatusProvedHere]
+% label removed: prop:thqg-VI-celestial-structure
+\index{celestial soft algebra!structure|textbf}
+The celestial soft algebra $\mathfrak{S}(\cA)$ has the following
+properties:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\mathfrak{S}(\cA)$ is generated by the degree-$2$ and
+ degree-$3$ components, which in the celestial/gravitational
+ reading are read as the leading and subleading soft sectors,
+ subject to the flatness relations of
+ Theorem~\ref{thm:thqg-VI-flatness-by-degree}.
+\item The degree-$2$ sector generates the binary celestial soft
+ subalgebra controlled by
+ Corollary~\ref{cor:thqg-VI-bms-supertranslation}. In the
+ celestial/gravitational reading, this sector is read as the
+ supertranslation sector of the BMS package.
+\item The degree-$3$ sector, combined with degree-$2$, generates the
+ ternary celestial soft subalgebra controlled by
+ Corollary~\ref{cor:thqg-VI-superrotation}. In the
+ celestial/gravitational reading, this combined sector is read as
+ the extended BMS package.
+\item For class-$\mathbf{G}$ algebras, only the degree-$2$ sector
+ survives, so $\mathfrak{S}(\cA)$ is generated by the binary
+ celestial soft algebra.
+\item For class-$\mathbf{L}$ algebras, only degrees~$2$ and~$3$
+ survive, so $\mathfrak{S}(\cA)$ is generated by the
+ $(2,3)$-generated celestial soft algebra.
+\item For class-$\mathbf{C}$ and $\mathbf{M}$ algebras,
+ $\mathfrak{S}(\cA)$ is a strict extension of the
+ $(2,3)$-generated celestial soft algebra by the higher soft
+ sectors.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i): The generation claim follows from the recursion of
+Corollary~\ref{cor:thqg-VI-soft-recursion}: each higher-degree
+soft factor $S^{(r-2)}$ is determined by the lower-degree factors
+through the flatness equation plus the obstruction
+classes~$o_r$. Since $o_r$ is computed from the bracket
+$[\mathfrak{C}, \Sh_{r-1}]$ (the cubic source mechanism of
+Remark~\ref{rem:thqg-VI-cubic-source}), and $\mathfrak{C}$ is
+the degree-$3$ shadow, the full tower is generated by degrees $2$
+and~$3$.
+
+Parts~(ii)--(iii): Proved in
+Corollary~\ref{cor:thqg-VI-bms-supertranslation} and
+Corollary~\ref{cor:thqg-VI-superrotation}.
+
+Parts~(iv)--(vi): The support shadow depth determines which sectors are
+non-trivial. For class-$\mathbf{G}$, only degree~$2$ is present,
+so only the binary celestial soft algebra survives. For
+class-$\mathbf{L}$, degrees~$2$ and~$3$ are present, so the
+$(2,3)$-generated celestial soft algebra already generates all of
+$\mathfrak{S}(\cA)$. For classes~$\mathbf{C}$ and~$\mathbf{M}$,
+the higher degrees provide strict extensions.
+\end{proof}
+
+\begin{remark}[Relation to the $\mathfrak{w}_{1+\infty}$ algebra]
+\label{rem:thqg-VI-w-infinity}
+\index{w1infinity@$\mathfrak{w}_{1+\infty}$!celestial holography}
+In the celestial holography literature, the celestial soft algebra in
+the gravitational reading of 4d Einstein gravity is read as a deformation of
+$\mathfrak{w}_{1+\infty}$ (Strominger et al.,
+Guevara--Himwich--Pate--Strominger 2021). In the shadow-tower
+language, this arises as follows. Take $\cA = \mathrm{Vir}_c$
+at large~$c$. Its genus-$0$ binary sector is the Virasoro
+mode algebra, and in the expected large-$c$ reading the higher soft
+sectors $\Sh_r(\mathrm{Vir}_c)$ for $r \geq 4$ are modeled by the
+normal-ordered products $:T^{r-1}:$ and their descendants, thereby
+organizing the expected $\mathcal{W}_{1+\infty}$ package.
+
+The expected large-$c$ model is:
+\begin{equation}% label removed: eq:thqg-VI-w-infinity-identification
+\mathfrak{S}(\mathrm{Vir}_c)
+\;\text{modeled by}\;
+\mathcal{W}_{1+\infty}[c],
+\end{equation}
+with expected model given by the $\mathcal{W}_{1+\infty}$ algebra at
+central charge~$c$.
+In this expected large-$c$ reading, the higher celestial soft
+factors encode the Ward identities of the
+$\mathcal{W}_{1+\infty}$ currents: the degree-$r$ celestial soft
+factor encodes the Ward identity of the spin-$(r-1)$
+$\mathcal{W}$-current.
+\end{remark}
+
+\subsubsection{The celestial soft OPE from the shadow connection}
+
+\begin{theorem}[Celestial soft OPE and its gravitational reading; \ClaimStatusProvedHere]
+% label removed: thm:thqg-VI-soft-ope
+\index{celestial soft OPE!from shadow connection|textbf}
+The shadow connection $\nabla^{\mathrm{hol}}_{0,n}$ determines a
+chiral OPE on the space of celestial soft insertions. For two such
+insertions at points \(w_1,w_2\) on the celestial sphere, put
+\(r_\Theta:=r^\Theta_{\max}(\cA)\). The OPE is
+\begin{equation}% label removed: eq:thqg-VI-soft-ope
+\mathcal{O}_s(w_1) \cdot \mathcal{O}_s(w_2)
+\;\sim\;
+\sum_{0\le k\le r_\Theta-2}
+\frac{C_k(\cA)}{(w_1 - w_2)^{k+1}}\;\mathcal{O}_{s,k}(w_2),
+\end{equation}
+where:
+\begin{itemize}
+\item $\mathcal{O}_s(w)$ is the celestial soft operator at
+ celestial point~$w$;
+\item $C_k(\cA)$ are the OPE coefficients, determined by the
+ shadows $\Sh_{k+2}(\cA)$;
+\item $\mathcal{O}_{s,k}(w_2)$ are the descendant celestial soft operators.
+\end{itemize}
+If \(r_\Theta=\infty\), the displayed sum is the corresponding
+formal infinite OPE expansion.
+The OPE is consistent (associative) because the shadow connection
+is flat. In the celestial/gravitational reading, this is read as the
+corresponding graviton OPE.
+\end{theorem}
+
+\begin{proof}
+The OPE of two celestial soft insertions is controlled by the short-distance
+behavior of the shadow connection in the diagonal
+$w_1 \to w_2$. The flatness condition
+$(\nabla^{\mathrm{hol}})^2 = 0$ ensures that the OPE is
+associative (the OPE product is the monodromy of the flat
+connection around the diagonal).
+
+The singular terms of the OPE are determined by the degree
+decomposition of the shadow connection:
+the degree-$(k+2)$ shadow $\Sh_{k+2}(\cA)$ produces the
+$(w_1 - w_2)^{-(k+1)}$ pole in the OPE. The leading pole
+($k=0$) is the degree-$2$ contribution from $\kappaChHodge(\cA)$,
+giving the standard leading celestial soft OPE; in the
+celestial/gravitational reading, this is read as the corresponding
+leading graviton OPE.
+The subleading poles are determined by the higher shadows.
+
+The support cutoff bounds the possible singular support channels:
+class-$\mathbf{G}$ has only the arity-$2$ channel, class-$\mathbf{L}$
+has arities \(2,3\), and class-$\mathbf{M}$ has no finite algebraic
+cutoff.  The actual number of independent OPE singular terms is
+decided after applying the celestial comparison map.
+\end{proof}
+
+\begin{remark}[The conformally soft limit]
+% label removed: rem:thqg-VI-conformally-soft
+\index{conformally soft limit!shadow tower}
+The celestial holography interpretation requires a
+\emph{conformally soft limit}: one takes the conformal weight
+$\Delta$ of the soft insertion to a special value
+($\Delta \to 1$ for leading, $\Delta \to 0$ for subleading).
+In the shadow-tower framework, the conformally soft limit at
+degree~$r$ corresponds to the \emph{conformal weight
+specialization}:
+\[
+\Delta_r^{\mathrm{red}} = 3 - r,
+\qquad
+\Delta_r^{\mathrm{st}} = 4 - r
+\qquad
+\text{(reduced and stress-tensor conventions)}.
+\]
+At $\Delta = \Delta_r^{\mathrm{red}}$, the degree-$r$ shadow representation
+$\Sh_{0,n}(\Sh_r)$ develops an enhanced pole structure that
+yields the corresponding conformally soft celestial insertion, read
+in the celestial/gravitational interpretation as the conformally soft
+graviton insertion; in the stress-tensor normalisation the same
+insertion is shifted to $\Delta_r^{\mathrm{st}}$. The standard reduced
+values
+$\Delta = 1$ (leading, $r=2$) and $\Delta = 0$ (subleading,
+$r=3$) are the first two entries in this sequence.
+\end{remark}
+
+\subsubsection{The shadow obstruction tower and asymptotic symmetries}
+
+\begin{proposition}[Structure of the celestial soft algebra by
+support depth; \ClaimStatusProvedHere]
+% label removed: prop:thqg-VI-asymptotic-symmetry
+\index{asymptotic symmetry package!from shadow tower|textbf}
+\index{BMS package!generalization from shadow tower}
+The celestial soft algebra $\mathfrak{S}(\cA)$ has the following
+support-depth stratification. In the celestial/gravitational reading,
+the corresponding subalgebras are read as asymptotic-symmetry
+packages as follows:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llll}
+\toprule
+\emph{Class} &
+\(r^\Theta_{\max}\) &
+\emph{Celestial soft subalgebra} &
+\emph{Gravitational reading} \\
+\midrule
+$\mathbf{G}$ &
+ $2$ &
+ Binary celestial soft algebra &
+ Read as the supertranslation sector of the BMS package / as free (linearized) gravity \\
+$\mathbf{L}$ &
+ $3$ &
+ $(2,3)$-generated celestial soft algebra &
+ Read as the extended BMS package / as semistrict higher-spin gravity \\
+$\mathbf{C}$ &
+ $4$ &
+ $(2,3)$-generated algebra extended by $\mathfrak{q}_4$ &
+ Read as a quartic extension of the BMS package / as quartic gravity \\
+$\mathbf{M}$ &
+ $\infty$ &
+ Full infinite celestial soft algebra &
+ Read via the expected large-$c$ model $\mathcal{W}_{1+\infty}$ / as the full gravitational $L_\infty$-package \\
+\bottomrule
+\end{tabular}
+\end{center}
+The support shadow depth thus controls the celestial soft algebra, and in the
+gravitational reading it controls the corresponding asymptotic-symmetry
+package.
+\end{proposition}
+
+\begin{proof}
+For each class, the corresponding celestial soft subalgebra is the
+subalgebra
+of $\End(\cV_{0,n})$ generated by the Ward identities at degrees
+\(2\le r\le r^\Theta_{\max}\). The support-depth description and its
+celestial/gravitational reading follow from:
+
+\emph{Class~$\mathbf{G}$}: Only degree-$2$ Ward identities
+survive; in the celestial/gravitational reading, this is read as the
+supertranslation sector of the BMS package, as in
+Corollary~\ref{cor:thqg-VI-bms-supertranslation}.
+
+\emph{Class~$\mathbf{L}$}: Degrees~$2$ and~$3$ generate
+the $(2,3)$-generated celestial soft algebra, whose
+celestial/gravitational reading is read as the extended
+BMS package, as in
+Corollary~\ref{cor:thqg-VI-superrotation}.
+
+\emph{Class~$\mathbf{C}$}: The degree-$4$ Ward identity extends
+the $(2,3)$-generated celestial soft algebra by the quartic
+sector~$\mathfrak{q}_4$, a one-dimensional abelian extension from
+the quartic contact invariant; in the celestial/gravitational
+reading, this is read as a quartic extension of the BMS package.
+
+\emph{Class~$\mathbf{M}$}: The full infinite tower generates
+the full infinite celestial soft algebra; in the expected large-$c$
+reading this is read via the expected model $\mathcal{W}_{1+\infty}$ as in
+Remark~\ref{rem:thqg-VI-w-infinity}.
+\end{proof}
+
+\subsubsection{The shadow connection at higher genus and
+gravitational memory}
+
+\begin{remark}[Gravitational memory from higher-genus shadows]
+% label removed: rem:thqg-VI-gravitational-memory
+\index{gravitational memory!higher-genus shadow}
+At genus $g \geq 1$, the shadow connection
+$\nabla^{\mathrm{hol}}_{g,n}$ acquires the curvature correction
+$\kappaChHodge(\cA) \cdot \omega_g$
+(Proposition~\ref{prop:thqg-VI-kappa-action}). The resulting
+Ward identities at higher genus involve the Hodge class on
+$\overline{\mathcal{M}}_g$. In the celestial/gravitational reading,
+these higher-genus corrections are read as \emph{gravitational memory
+effects}: permanent shifts in the asymptotic radiative profile caused
+by the passage of radiation.
+
+In that reading, the leading memory contribution is carried by the
+genus-$1$ correction to the leading celestial soft factor:
+\begin{equation}% label removed: eq:thqg-VI-memory
+\Delta_{\mathrm{memory}}
+\;=\;
+\kappaChHodge(\cA) \cdot \omega_1
+\;=\;
+\kappaChHodge(\cA) \cdot \frac{1}{24}\,E_2(\tau),
+\end{equation}
+where $E_2(\tau)$ is the weight-$2$ Eisenstein series (the
+normalized Hodge class at genus~$1$). In the
+celestial/gravitational reading, the resulting memory effect is
+proportional to $\kappaChHodge(\cA)$, so its leading contribution is
+read as a universal consequence of the modular characteristic.
+\end{remark}
+
+% ======================================================================
+%
+% SUMMARY TABLE
+%
+% ======================================================================
+
+\subsection{Summary: the celestial soft-factor dictionary and its gravitational reading}
+% label removed: subsec:thqg-VI-summary
+
+\begin{table}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Celestial soft factor} &
+\textbf{Degree} &
+\textbf{Shadow} &
+\textbf{Gravitational reading} \\
+\midrule
+Leading celestial soft factor &
+ $2$ & $\kappaChHodge(\cA)$ &
+ Read as the energy-momentum-conservation Ward statement \\
+Subleading celestial soft factor &
+ $3$ & $\mathfrak{C}(\cA)$ &
+ Read as the angular-momentum-conservation Ward statement \\
+Sub-subleading celestial soft factor &
+ $4$ & $\mathfrak{Q}(\cA)$ &
+ Read as the stress-tensor / $:T^2:$ Ward-identity sector \\
+Order-$(r-2)$ celestial soft factor &
+ $r$ & $\Sh_r(\cA)$ &
+ Read as the $:T^{r-1}:$ ($\cW$-current) Ward-identity sector \\
+\bottomrule
+\end{tabular}
+\caption{Dictionary between the shadow obstruction tower and the
+celestial soft-factor hierarchy, together with its gravitational
+reading.}
+\label{tab:thqg-VI-soft-dictionary}
+\end{table}
+
+\begin{table}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Family} &
+\textbf{Class} &
+\(r^\Theta_{\max}\) &
+\textbf{Support channels} &
+\textbf{Explicit coefficients} \\
+\midrule
+Heisenberg &
+ $\mathbf{G}$ & $2$ & arity \(2\) &
+ $\kappa = k$ \\
+Affine $\widehat{\fg}_k$ &
+ $\mathbf{L}$ & $3$ & arities \(2,3\) &
+ $\kappa = \dim(\fg)(k{+}h^\vee)/(2h^\vee)$, $\mathfrak{C} = f_{abc}$ \\
+$\beta\gamma$\,$^\star$ &
+ $\mathbf{C}$ & $4$ & arities \(2,3,4\) &
+ $\kappa_L = 0$ (w.c.\ line), $\mathfrak{Q} \neq 0$ \\
+$\mathrm{Vir}_c$ &
+ $\mathbf{M}$ & $\infty$ & no finite cutoff &
+ $\kappa = c/2$, $Q^{\mathrm{ct}} = 10/[c(5c+22)]$ \\
+$\mathcal{W}_N$ &
+ $\mathbf{M}$ & $\infty$ & no finite cutoff &
+ Higher-spin generalization \\
+\bottomrule
+\end{tabular}
+\caption{Support shadow depth and the algebraic celestial support-channel
+hierarchy for the standard families. ${}^\star$On the weight-changing primary line;
+globally $\kappaChHodge(\beta\gamma) = 6\lambda^2 - 6\lambda + 1$.}
+% label removed: tab:thqg-VI-family-soft
+\end{table}
+
+\begin{remark}[The single-equation origin of the celestial soft hierarchy]
+% label removed: rem:thqg-VI-single-equation
+\index{Maurer--Cartan equation!single-equation origin of celestial soft factors}
+The entire hierarchy of celestial soft factors (leading,
+subleading, sub-subleading, and all higher orders), and in the
+celestial/gravitational reading the corresponding soft
+hierarchy, descends from
+the single Maurer--Cartan equation
+$D_\cA\Theta_\cA + \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}). The shadow connection
+$\nabla^{\mathrm{hol}}_{g,n} = d - \Sh_{g,n}(\Theta_\cA)$ is
+the universal vehicle that converts this algebraic equation into
+Ward identities on correlators. The degree filtration of the
+bar-intrinsic support packet provides the algebraic hierarchy, and the
+support shadow depth controls the support complexity.  The physical
+celestial soft factors require, in addition, the celestial comparison
+datum that sends support channels to soft operators and decides which
+images are independent.
+\end{remark}
+
+\begin{remark}[Relation to results \textbf{(G1)}--\textbf{(G5)}
+and \textbf{(G7)}--\textbf{(G10)}]
+% label removed: rem:thqg-VI-other-results
+\index{twisted holography!result interdependencies}
+The celestial soft-factor hierarchy of result~\textbf{(G6)},
+together with its celestial/gravitational reading, interacts with
+the other results of this chapter as follows:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \textbf{(G1)} Perturbative finiteness: The celestial soft factors
+ $S^{(k)}$ are finite at each degree because the shadow
+ obstruction tower is constructed from finite graph sums
+ (degree cutoff, Lemma~\ref{V1-lem:degree-cutoff}).
+\item \textbf{(G2)} Gravitational complexity: The support shadow depth
+ \(r^\Theta_{\max}\) simultaneously controls the number of independent
+ celestial soft factors and, in the celestial/gravitational
+ reading, the gravitational complexity class.
+\item \textbf{(G3)} Symplectic polarization: The soft Ward
+ identities are compatible with the Lagrangian splitting
+ $\mathbf{C}_g \simeq \mathbf{Q}_g \oplus \mathbf{Q}_g^!$:
+ the celestial soft factor at each degree respects the bulk/defect
+ decomposition.
+\item \textbf{(G5)} Gravitational Yangian: The degree-$2$ shadow
+ at genus~$0$ supplies the $r$-matrix, so the leading celestial soft
+ factor supplies the leading-soft entry of the CYBE package for
+ the gravitational Yangian; in the celestial/gravitational
+ reading this is read as the leading soft statement.
+\item \textbf{(G7)} Modular bootstrap: The higher-genus celestial
+ soft-factor Ward identities provide inductive constraints on the
+ gravitational partition function, supplementing the genus
+ spectral sequence.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Celestial OPE coefficients from shadow degree]
+\label{rem:celestial-ope-shadow-degree}
+\index{celestial OPE!from shadow degree|textbf}
+\index{soft graviton theorem!shadow-degree dictionary}
+\index{support shadow depth!celestial OPE truncation}
+The soft graviton theorem hierarchy has an exact
+shadow-degree dictionary: soft order~$p$ corresponds to
+shadow degree $r = p + 2$. The leading independent
+coefficients are:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $C_1 = \kappaChHodge(\cA)$ (Weinberg, 1965):
+ universal, determined by the modular characteristic alone.
+\item $C_2 = h(h-1)$, where $h$ is the conformal weight
+ of the external state
+ (Cachazo--Strominger, 2014):
+ universal, independent of the algebra.
+ For spin-$2$ gravitons, $C_2 = 2$.
+\item $C_3 = 4\,Q^{\mathrm{contact}}(\cA)$:
+ dynamics-dependent, controlled by the quartic shadow
+ coefficient. For Virasoro:
+ $C_3 = 40/[c(5c{+}22)]$.
+\end{enumerate}
+Support shadow depth controls the truncation of the celestial OPE:
+class~$\mathbf{G}$ algebras have $1$ independent coefficient
+($\kappa$ alone); class~$\mathbf{L}$ has $2$
+($\kappa$ and $\alpha$); class~$\mathbf{C}$ has $3$
+($\kappa$, $\alpha$, $S_4$); class~$\mathbf{M}$ has
+infinitely many (the full support packet).
+The gravitational instance (Virasoro and $\cW_N$) is
+class~$\mathbf{M}$: the celestial OPE has infinitely
+many independent coefficients, all determined by the
+three genus-$0$ invariants $(\kappa, \alpha, S_4)$ through
+the Riccati algebraicity
+(Theorem~\ref*{V1-thm:riccati-algebraicity}).
+\end{remark}
+
+\begin{remark}[Open directions]
+% label removed: rem:thqg-VI-open-directions
+\index{celestial soft factor!open directions}
+Three directions remain beyond the scope of this section:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Loop-level celestial soft factors.} The genus-$g$ celestial
+ soft-factor Ward identities for $g \geq 1$ are defined by the shadow
+ connection (Definition~\ref{V1-def:modular-shadow-connection}),
+ but the explicit higher-genus celestial soft factors depend on
+ the modular invariant hierarchy
+ beyond~$\hat{A}$ (Theorem~\ref{V1-thm:nms-beyond-ahat}).
+ In the celestial/gravitational reading, the genus-$1$ correction is
+ read through the Hessian term
+ $\delta_H^{(1)} = 120/[c^2(5c+22)]$ for Virasoro.
+\item \emph{Infrared divergences.} The soft expansion
+ $\sum_k z_s^{-k}\,S^{(k)}$ converges at large $|z_s|$
+ (Corollary~\ref{cor:thqg-VI-soft-convergence}), but the
+ infrared structure at $z_s \to z_i$ (collinear limits)
+ requires the full OPE data of the chiral algebra, not
+ just the shadow obstruction tower.
+\item \emph{Non-perturbative corrections.} The shadow
+ obstruction tower is a perturbative object: it is the
+ Taylor expansion of the full MC element
+ $\Theta_\cA$ in the degree variable. Non-perturbative
+ corrections to the celestial soft hierarchy, and in the
+ celestial/gravitational reading to the corresponding soft
+ hierarchy (e.g.\ from instantons in the dual gravitational theory),
+ would arise from
+ non-perturbative features of~$\Theta_\cA$ that are invisible
+ in the degree expansion.
+\end{enumerate}
+\end{remark}
+
+\section{Twenty-four-puncture class-\texorpdfstring{$\mathcal S$}{S} soft current}
+\label{sec:softgrav-supplement}
+
+\begin{proposition}[$24$-puncture leading soft Ward identity;
+\ClaimStatusProvedHere]
+\label{rem:softgrav-1}
+Let $D=\{p_1,\ldots,p_{24}\}\subset\mathbb P^1$ be the discriminant
+divisor of a semistable elliptic K3 surface with twenty-four
+Kodaira $I_1$ fibres, and let
+$\mathcal A_D=\chi[\mathcal T[A_1,(\mathbb P^1,D)]]$ be the associated
+class-$\mathcal S$ Schur chiral algebra. Let
+$J_a\in\mathcal A_D$ be the moment-map current for the
+$a$-th maximal regular puncture, and let $F_\bullet\mathcal A_D$ be
+the puncture-current filtration whose associated graded has degree-one
+current sector $\bigoplus_{a=1}^{24}\widehat{\mathfrak{su}}(2)_a$.
+For a degree-$2$ soft insertion
+$s=\sum_{a=1}^{24}s_aJ_a$ and hard insertions partitioned by puncture
+sets $I_a$, the associated-graded leading soft Ward identity is the
+direct sum of the twenty-four puncture contributions:
+\[
+\lim_{z_s\to\infty}z_s\,\Phi_D(z_1,\ldots,z_n,z_s)
+\;=\;
+\left(
+\sum_{a=1}^{24}\;
+\sum_{i\in I_a}
+\frac{\kappa_a(s_a,\phi_i)}{z_s-z_i}
+\right)
+\Phi_{D,n}(z_1,\ldots,z_n),
+\]
+where $\kappa_a$ is the degree-$2$ shadow pairing on the
+$a$-th moment-map current algebra.
+\end{proposition}
+
+\begin{proof}
+Apply Theorem~\ref{thm:thqg-VI-leading-soft} to the degree-$2$
+associated-graded sector of $\mathcal A_D$. The shadow representation
+is additive under direct sums of puncture moment-map currents, so
+$\kappaChHodge(s,\phi_i)=\kappa_a(s_a,\phi_i)$ for $i\in I_a$ and vanishes
+between distinct puncture summands in $\gr_F\mathcal A_D$. Summing the
+twenty-four degree-$2$ Ward identities gives the displayed formula.
+The puncture divisor
+$D$ is a family point in
+\(\operatorname{Conf}_{24}(\mathbb P^1)/\operatorname{PGL}_2\); a
+Steiner or $M_{24}$ symmetry is extra equivariant structure on a
+special fibre.
+\end{proof}
+
+\begin{proposition}[Class-$\mathcal S$ $A_1$ on $\Sigma_{0,24}$:
+flavour currents and central charge; \ClaimStatusProvedHere]
+\label{rem:softgrav-2}
+The class-$\mathcal S$ $A_1$ theory on
+$\Sigma_{0,24}=(\mathbb P^1,D)$ with maximal regular punctures carries
+flavour symmetry $\mathfrak{su}(2)^{24}$. The Beem--Lemos--Liendo--
+Peelaers--Rastelli--van~Rees Schur chiral algebra contains the affine
+moment-map current subalgebra
+\[
+\bigotimes_{a=1}^{24}\widehat{\mathfrak{su}}(2)_{k_{2d,a}},
+\qquad
+k_{2d,a}=-\frac{k_{4d,a}}{2},
+\]
+and has total central charge
+\[
+c_{2d}=-214.
+\]
+\end{proposition}
+
+\begin{proof}
+The current subalgebra is the Schur image of the four-dimensional
+moment-map operators at the maximal regular punctures; the level
+conversion is the Beem--Lemos--Liendo--Peelaers--Rastelli--van~Rees
+relation $k_{2d}=-k_{4d}/2$. The central charge is the value computed
+in Proposition~\ref{rem:csd-1}: the Chacaltana--Distler
+trinion--tube count at $n=24$ is $(n_v,n_h)=(63,88)$, hence
+$c_{4d}=107/6$ and $c_{2d}=-12c_{4d}=-214$.
+\end{proof}

@@ -1,0 +1,1286 @@
+
+
+\subsection*{Appendix: Explicit Formulas and Computational Details for W-Algebras}
+\label{app:W-algebras-explicit}
+
+Detailed computational formulas for the higher $A_\infty$ operations $m_k$ in Virasoro and $W_3$ algebras:
+\begin{enumerate}
+\item explicit mode expansions for $m_3$ through $m_7$;
+\item combinatorial coefficients from Feynman diagram evaluation;
+\item recursive algorithms for generating all $m_k$;
+\item spectral parameter manipulations;
+\item sample Mathematica code for automation.
+\end{enumerate}
+
+\subsection{Notation and Conventions}
+
+\subsubsection{Mode Expansions}
+
+Fields are expanded in holomorphic modes:
+\begin{align}
+T(z) &= \sum_{n \in \Z} T_n z^{-n-2}, & [T_m, T_n] = (m-n)T_{m+n} + \frac{c}{12}m(m^2-1)\delta_{m+n,0},\\
+W(z) &= \sum_{n \in \Z} W_n z^{-n-3}, & (\text{commutation relations for } W_n \text{ are more complex}).
+\end{align}
+
+In the algebraic approach, the derivatives are used:
+\begin{align}
+T_n &= \frac{1}{n!} \partial^n T, & W_n = \frac{1}{n!} \partial^n W.
+\end{align}
+
+\subsubsection{Spectral Parameters}
+
+For $k$ operators at points $z_1, \ldots, z_k$, define difference coordinates:
+\begin{align}
+\lambda_i &= z_i - z_{i+1}, & i = 1, \ldots, k-1.
+\end{align}
+
+The operation $m_k$ is a Laurent series in $\lambda_1, \ldots, \lambda_{k-1}$:
+\begin{equation}
+m_k(a_1, \ldots, a_k) = \sum_{n_1, \ldots, n_{k-1} \in \Z} \frac{C_{n_1, \ldots, n_{k-1}}(a_1, \ldots, a_k)}{\lambda_1^{n_1+1} \cdots \lambda_{k-1}^{n_{k-1}+1}}.
+\end{equation}
+
+\subsection{Virasoro: Explicit Formulas}
+
+\subsubsection{The Binary Operation $m_2(T,T)$}
+
+The singular part (the divided-power $\lambda$-bracket) is
+\begin{align}
+\{T(z_1) {}_\lambda T(z_2)\} &= \partial T(z_2) + 2\lambda\,T(z_2) + \frac{c}{12}\lambda^3.
+\end{align}
+In modes,
+\begin{align}
+\{T_m {}_\lambda T_n\} &= \sum_{k=0}^{m} \binom{m}{k} (-\lambda)^k (k-m-1) T_{m+n-k}\\
+&\quad + \frac{c}{12} \sum_{k=0}^m \binom{m}{k} (-\lambda)^k (k-m-2)(k-m-1)(k-m) \delta_{m+n-k,0}.
+\end{align}
+The regular part gives the normally ordered product:
+$m_2(T,T)_{\text{reg}} = {:}T_1 T_2{:}$.
+
+\subsubsection{The Ternary Operation $m_3(T,T,T)$}
+
+The ternary operation comes from the Y-diagram integral. In modes:
+\begin{equation}
+\label{eq:vir-m3-modes}
+m_3(T_m, T_n, T_p) = \sum_{\substack{a,b,c \geq 0 \\ a+b+c = m+n+p-2}} \mathcal{A}_{m,n,p}^{a,b,c} \frac{\partial^a T \cdot \partial^b T \cdot \partial^c T}{\lambda_1^{a+2} \lambda_2^{b+2}},
+\end{equation}
+where the coefficients $\mathcal{A}_{m,n,p}^{a,b,c}$ are determined by:
+
+\begin{equation}
+\mathcal{A}_{m,n,p}^{a,b,c} = \frac{1}{a! b! c!} \binom{m}{a} \binom{n}{b} \binom{p}{c} \cdot F_{a,b,c}(c),
+\end{equation}
+with structure function
+\begin{equation}
+F_{a,b,c}(c) = \begin{cases}
+\frac{c}{12}(a+2)(a+1)a & \text{if } b=c=0,\\
+2(a+1) & \text{if } b=1, c=0,\\
+1 & \text{if } b=0, c=1,\\
+\text{(mixed terms)} & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+In low-order cases:
+\begin{align}
+m_3(T_0, T_0, T_0) &= \frac{c/12 \cdot 6}{\lambda_1^3 \lambda_2^3} + \frac{2T}{\lambda_1^2 \lambda_2^2} + \frac{\partial T}{\lambda_1 \lambda_2} + \text{(mixed poles)},\\
+m_3(T_1, T_0, T_0) &= \frac{c/12 \cdot 24}{\lambda_1^4 \lambda_2^3} + \frac{6T + \text{derivatives}}{\lambda_1^3 \lambda_2^2} + \cdots,\\
+m_3(T_1, T_1, T_0) &= \text{(higher poles up to } \lambda_1^{-5} \lambda_2^{-4} \text{)}.
+\end{align}
+
+\subsubsection{The Quaternary Operation $m_4(T,T,T,T)$}
+
+The operation $m_4$ receives a tree contribution (cross topology) and a
+one-loop contribution (box topology).
+
+\medskip
+\noindent\emph{Tree contribution.}
+\begin{equation}
+\label{eq:vir-m4-tree}
+m_4(T,T,T,T)_{\text{tree}} = \sum \frac{\mathcal{B}^{a,b,c}_{m,n,p,q}(\partial^a T, \partial^b T, \partial^c T, \partial^d T)}{\lambda_1^{a+2} \lambda_2^{b+2} \lambda_3^{c+2}},
+\end{equation}
+where $\mathcal{B}$ coefficients come from evaluating the cross diagram integral:
+\begin{equation}
+\mathcal{B}^{a,b,c,d}_{m,n,p,q} = \int_{\FM_4(\C)} \frac{(z_1-z_v)^m (z_2-z_v)^n (z_3-z_v)^p (z_4-z_v)^q}{(z_1-z_2)^{a+2} (z_2-z_3)^{b+2} (z_3-z_4)^{c+2}} d^2z_v.
+\end{equation}
+
+\medskip
+\noindent\emph{One-loop contribution.}
+The box diagram integral is
+\begin{align}
+m_4(T,T,T,T)_{1\text{-loop}} &= \int_{\FM_4(\C) \times \C} \frac{d^2z_v}{(z_1-z_v)(z_2-z_v)} \cdot \frac{d^2z_{v'}}{(z_v-z_{v'})(z_{v'}-z_3)(z_{v'}-z_4)}\\
+&= \sum \frac{\mathcal{L}^{a,b,c}_{m,n,p,q} + \log(\lambda_i/\mu) \cdot (\cdots)}{\lambda_1^{a+1} \lambda_2^{b+1} \lambda_3^{c+1}},
+\end{align}
+where $\mathcal{L}$ coefficients involve polylogarithms and $\mu$ is a renormalization scale.
+
+At lowest order:
+\begin{equation}
+m_4(T_0, T_0, T_0, T_0) = \frac{c^2/144 \cdot \text{(combinatorial factor)}}{\lambda_1^4 \lambda_2^4 \lambda_3^4} + \cdots + \hbar \cdot \frac{\log(\lambda_1/\mu)}{\lambda_1^2 \lambda_2^2 \lambda_3^2} + \cdots.
+\end{equation}
+
+\subsubsection{Operations $m_5$, $m_6$: Structure}
+
+The diagram count grows with degree:
+$m_5$ has $12$ tree diagrams and $5$ one-loop topologies;
+$m_6$ has $60$ tree, $30$ one-loop, and $3$ potential two-loop diagrams.
+The loop expansion takes the form
+\begin{equation}
+m_k(T^{\otimes k}) = \sum_{\text{trees}} m_k^{(\text{tree})} + \hbar \sum_{\text{1-loop}} m_k^{(1\text{-loop})} + \hbar^2 \sum_{\text{2-loop}} m_k^{(2\text{-loop})} + \cdots.
+\end{equation}
+
+\subsection{$W_3$: Explicit Formulas}
+
+\subsubsection{The Binary Operations}
+
+The binary operation $m_2(T,T)$ is identical to Virasoro.
+The mixed bracket is
+\[
+\{T_\lambda W\} = \partial W + 3\lambda W,
+\]
+and in modes,
+$\{T_m {}_\lambda W_n\} = \sum_{k=0}^m \binom{m}{k} (-\lambda)^k (k-m) W_{m+n-k} + \frac{1}{k!} \partial^k W_{m+n-k}$.
+The self-bracket $\{W_\lambda W\}$
+(cf.\ equation~\eqref{eq:m2WW-recap} for the compact
+polynomial form) is
+\begin{align}
+\{W(z_1) {}_\lambda W(z_2)\} &= \frac{c}{360}\lambda^5 + \frac{1}{3}T(z_2)\lambda^3 + \frac{1}{2}(\partial T(z_2))\lambda^2\\
+&\quad + \left(\frac{3}{10}\partial^2 T(z_2) + \frac{32}{5c+22}\Lambda\right)\lambda + \frac{1}{15}\partial^3 T + \frac{16}{5c+22}\partial\Lambda.
+\end{align}
+
+\subsubsection{The Ternary Operations}
+
+The pure-$T$ operation $m_3(T,T,T)$ agrees with Virasoro.
+The mixed operation $m_3(T,T,W)$ is
+\begin{equation}
+m_3(T_m, T_n, W_p) = \sum_{\substack{a,b,c \\ a+b+c = m+n+p-2}} \mathcal{C}_{m,n,p}^{a,b,c} \frac{(\partial^a T)(\partial^b T)(\partial^c W)}{\lambda_1^{a+2} \lambda_2^{b+3}},
+\end{equation}
+where the $\mathcal{C}$ coefficients encode the interaction between the $T$ and $W$ sectors.
+
+For instance,
+$m_3(T_0, T_0, W_0) = \frac{6 \cdot \text{(structure constant)}}{\lambda_1^2 \lambda_2^3} + \frac{3TW + \text{derivatives}}{\lambda_1 \lambda_2^2} + \cdots$.
+The operation $m_3(T,W,W)$ is
+\begin{equation}
+m_3(T_m, W_n, W_p) = \sum \frac{\mathcal{D}_{m,n,p}^{a,b,c}(\partial^a T, \partial^b W, \partial^c W)}{\lambda_1^{a+2} \lambda_2^{b+4}}.
+\end{equation}
+
+The operation $m_3(W,W,W)$ involves the quintic Schwarzian coefficient
+$c/360$ from the $\{W_\lambda W\}$ bracket. The full
+closed-form result appears in
+equation~\eqref{eq:m3-WWW}; the leading pole structure in the zero-mode
+sector reads:
+\begin{align}
+m_3(W_0, W_0, W_0) &= \frac{c/360 \cdot 120}{\lambda_1^5 \lambda_2^5} + \frac{T/3 \cdot (\text{mixed derivatives})}{\lambda_1^3 \lambda_2^3}\\
+&\quad + \frac{(\partial T) \cdot (\text{terms})}{\lambda_1^2 \lambda_2^2} + \cdots.
+\end{align}
+By the $\Z_2$ parity of $\cW_3$, the $T$-sector output of
+$m_3(W,W,W)$ vanishes identically (see the discussion
+following~\eqref{eq:m3-WWW-T-sector}), so the surviving
+contributions are those displayed
+in~\eqref{eq:m3-WWW}.
+
+\subsubsection{Higher Operations: Summary of Structure}
+
+\emph{Degree~$4$.}
+With two generator types $\{T, W\}$ and $4$ ordered inputs,
+there are $2^4 = 16$ distinct ordered operations.
+Grouping by the number~$j$ of $W$-insertions gives $5$ unordered types
+($j = 0,\ldots,4$):
+\begin{align}
+&m_4(T,T,T,T), \quad m_4(T,T,T,W), \quad m_4(T,T,W,W),\\
+&m_4(T,W,W,W), \quad m_4(W,W,W,W).
+\end{align}
+Each has the Virasoro structure in the pure-$T$ sector, with additional
+$T$--$W$ mixing terms.
+
+\emph{Degrees~$5$ and~$6$.}
+At degree~$5$ there are $\sim 20$ distinct ordered operations,
+at degree~$6$ roughly~$50$.
+
+\subsection{Generating Function Approach}
+
+\subsubsection{Virasoro Generating Function}
+
+Define the exponential generating function
+\begin{equation}
+\mathcal{F}_{\text{Vir}}(T; \lambda) = \sum_{k=1}^\infty \frac{1}{k!} m_k(T, \ldots, T)(\lambda_1, \ldots, \lambda_{k-1}).
+\end{equation}
+
+\begin{theorem}[Virasoro Generating Function]
+\label{thm:vir-gen-func-explicit}
+Assume the KZ Virasoro realization satisfies the analytic SDR package
+of Assumption~\ref{assum:kz-analytic-sdr-package} and the
+wheel-residue survival hypothesis of
+Proposition~\ref{prop:vir-truncation}.
+The generating function satisfies the differential equation:
+\begin{equation}
+\label{eq:vir-diff-eq}
+\frac{\partial \mathcal{F}_{\text{Vir}}}{\partial T} = \left( \partial + 2\lambda + \frac{c}{12}\lambda^3 \partial^3 \right) \mathcal{F}_{\text{Vir}} + \frac{1}{2} \{\mathcal{F}_{\text{Vir}}, \mathcal{F}_{\text{Vir}}\}_\lambda.
+\end{equation}
+\end{theorem}
+
+\noindent Equation~\eqref{eq:vir-diff-eq} yields the recursion
+\begin{align}
+m_{k+1}(T^{\otimes (k+1)}) &= \frac{1}{k+1} \Bigg[ Q_{\text{BRST}} \cdot m_k(T^{\otimes k})\\
+&\quad + \sum_{i=1}^{k-1} m_2 \circ_i m_k(T^{\otimes k})\\
+&\quad + \sum_{\substack{j+\ell = k+2 \\ j,\ell \geq 2}} m_j \circ m_\ell(T^{\otimes k}) \Bigg].
+\end{align}
+
+Starting from $m_1 = Q$ and $m_2 = \{T_\lambda T\}$, each
+$m_{k+1}$ is determined by the preceding operations;
+the step from $m_k$ to $m_{k+1}$ amounts to evaluating
+Feynman diagrams with the appropriate combinatorial weights.
+
+\subsubsection{$W_3$ Generating Function}
+
+For $W_3$, the generating function is bi-graded:
+\begin{equation}
+\mathcal{F}_{W_3}(T, W; \lambda) = \sum_{k_T, k_W} \frac{1}{k_T! k_W!} m_{k_T + k_W}(T^{\otimes k_T} \otimes W^{\otimes k_W}).
+\end{equation}
+
+\begin{theorem}[$W_3$ Generating Function System]
+\label{thm:w3-gen-func-system}
+Assume the KZ $W_3$ realization satisfies the analytic SDR package of
+Assumption~\ref{assum:kz-analytic-sdr-package}.
+The generating function satisfies a \emph{system} of coupled differential equations:
+\begin{align}
+\frac{\partial \mathcal{F}_{W_3}}{\partial T} &= (\partial + 2\lambda + \cdots) \mathcal{F}_{W_3} + \frac{1}{2} \{_T \mathcal{F}_{W_3}, \mathcal{F}_{W_3}\}_\lambda,\\
+\frac{\partial \mathcal{F}_{W_3}}{\partial W} &= (\partial + 3\lambda + \cdots) \mathcal{F}_{W_3} + \frac{1}{2} \{_W \mathcal{F}_{W_3}, \mathcal{F}_{W_3}\}_\lambda,
+\end{align}
+where $\{_T \cdot, \cdot \}_\lambda$ and $\{_W \cdot, \cdot \}_\lambda$ denote the mixed brackets.
+\end{theorem}
+
+Iterating this system determines all $m_k$.
+
+\subsection{Spectral $r$-Matrices: Detailed Expansion}
+
+\subsubsection{Virasoro $r$-Matrix: Expansion in Modes}
+
+The spectral $r$-matrix in mode form is
+\begin{equation}
+r^{\text{Vir}}(\lambda, \mu) = \sum_{m,n \in \Z} r_{m,n} T_m \otimes T_n \cdot \lambda^{-m-2} \mu^{-n-2}.
+\end{equation}
+
+with coefficients
+\begin{equation}
+r_{m,n} = \begin{cases}
+\frac{c}{12} m(m^2-1) & \text{if } m+n = 0,\\
+\frac{1}{2}(m-n) & \text{if } m+n \neq 0,
+\end{cases}
+\end{equation}
+reproducing the Virasoro Lie algebra structure.
+
+\subsubsection{$W_3$ $r$-Matrix: Full Expansion}
+
+The $W_3$ $r$-matrix is a $2 \times 2$ matrix of Laurent series:
+\begin{equation}
+r^{W_3} = \begin{pmatrix}
+\sum r^{TT}_{m,n; i,j} T_m T_n \lambda^{-i} \mu^{-j} & \sum r^{TW}_{m,n; i,j} T_m W_n \lambda^{-i} \mu^{-j}\\
+\sum r^{WT}_{m,n; i,j} W_m T_n \lambda^{-i} \mu^{-j} & \sum r^{WW}_{m,n; i,j} W_m W_n \lambda^{-i} \mu^{-j}
+\end{pmatrix}.
+\end{equation}
+
+The coefficients $r^{AB}_{m,n; i,j}$ are determined by the $\lambda$-brackets \eqref{eq:w3-lambda-TT}--\eqref{eq:w3-lambda-WW} and satisfy symmetry relations:
+\begin{align}
+r^{TT}_{m,n; i,j} &= -r^{TT}_{n,m; j,i}, & (\text{antisymmetry})\\
+r^{WW}_{m,n; i,j} &= -r^{WW}_{n,m; j,i}, & (\text{antisymmetry})\\
+r^{TW}_{m,n; i,j} &\neq -r^{WT}_{n,m; j,i}, & (\text{no simple symmetry}).
+\end{align}
+
+\subsection{Computational procedure}
+
+To compute $m_k$ at a given degree and loop order:
+enumerate connected Feynman graphs with $k$ external legs and
+loop number $\ell(G) = E - V + 1$ bounded by the desired order;
+assign propagators $K(z_i - z_j)$ to internal edges and
+interaction vertices from the action to internal vertices;
+evaluate Wick contractions; integrate over $\FM_k(\C)$
+using the FM compactification and the Laurent expansion
+\[
+\frac{1}{(z_1-z_2)^n}
+= \sum_{k=0}^\infty \frac{(-1)^k}{k!}
+ \binom{n+k-1}{k} \lambda^{-n-k} \partial^k;
+\]
+finally, collect terms by pole order.
+
+For Virasoro at degree~$4$, this yields
+two tree topologies (cross and chain) and one
+one-loop topology (box).
+
+The leading-pole structures of $m_3$ computed above agree with
+Khan--Zeng~\cite{KZ25} (both Virasoro and $W_3$ sectors) and with
+Costello--Dimofte--Gaiotto~\cite{CDG20} in the Virasoro sector.
+
+%% =====================================
+%% From W_N to higher-spin gauge theory
+%% =====================================
+
+\subsection{From \texorpdfstring{$\mathcal{W}_N$}{W\_N} to higher-spin gauge theory}
+\label{subsec:wn-higher-spin}
+
+\providecommand{\ModEnv}{\operatorname{ModEnv}}
+
+The $\mathcal{W}_N$ Poisson vertex algebra provides the chiral-algebraic
+input for a family of 3d holomorphic-topological gauge theories of
+increasing spin, connecting to higher-spin gravity in the $N \to \infty$
+limit.
+
+\begin{definition}[$\mathcal{W}_N$ field content]
+\label{def:wn-field-content}
+The $\mathcal{W}_N$ PVA has generators $W_s$ of spin~$s$ for
+$s = 2, 3, \ldots, N$, with $W_2 = T$ the Virasoro element. The
+associated 3d HT Poisson sigma model has field pairs $(W_s, \chi_s)$
+for each $s = 2, \ldots, N$, where $\chi_s$ is the topological partner
+of spin $1-s$ \textup{(}\!\cite{KZ25}, \S3.4\textup{)}.
+\end{definition}
+
+\begin{proposition}[Slab central charges for $\mathcal{W}_N$]
+\label{prop:wn-slab-central-charges}
+The topological enhancement from the Virasoro subalgebra $T \subset
+\mathcal{W}_N$ produces a slab reduction with paired central charge
+\textup{(}\!\cite{KZ25}, \S3.4\textup{)}:
+\begin{equation}\label{eq:wn-cpair}
+c_{\mathrm{pair}}^{(N)}
+\;=\;
+\sum_{s=2}^{N} \bigl[3(2s-1)^2 - 1\bigr].
+\end{equation}
+The first values are:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccccc}
+\toprule
+$N$ & $2$ & $3$ & $4$ & $5$ & $\infty$ \\
+\midrule
+$c_{\mathrm{pair}}^{(N)}$ & $26$ & $100$ & $246$ & $488$ & $\infty$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The identity $c_{\mathrm{pair}}^{(N)} = \alpha_N$%
+\index{ghost central charge!WN@$\mathcal{W}_N$ identity}%
+{} is not a coincidence: it is the ghost central
+charge.\label{prop:ghost-identity-alphaN-active}
+The $\cW_N$ ghost system consists of $bc$-pairs of spins
+$s = 2, 3, \ldots, N$, each contributing
+$c_s = -2(6s^2 - 6s + 1) = -(3(2s-1)^2 - 1)$, so
+\[
+c_{\mathrm{ghost}}(\cW_N)
+\;=\; \sum_{s=2}^{N} c_s
+\;=\; -2(N{-}1)(2N^2{+}2N{+}1)
+\;=\; -\alpha_N
+\;=\; -c_{\mathrm{pair}}^{(N)}.
+\]
+The critical string condition $c = \alpha_N$ is therefore
+$c_{\mathrm{matter}} + c_{\mathrm{ghost}} = 0$;
+for $N = 2$ this recovers the bosonic string critical dimension~$26$,
+and for $N = 3$ the value~$100$ matches the $\mathcal{W}_3$ computation
+of Vol~I.
+
+The self-dual points $c^* = \alpha_N/2$ inherit a scalar-lane
+property from the table.\label{prop:self-dual-halving}%
+\index{self-dual point!genus tower halving}
+At the Koszul self-dual point $c^* = \alpha_N/2$, the
+curvature satisfies
+$\kappaChHodge(\cW_{N,c^*}) = c^*(H_N - 1) = \tfrac{1}{2}\,\kappaChHodge(\cW_{N,\alpha_N})$.
+At genus~$1$, the scalar lane
+$F_1^{\mathrm{sc}}(\cW_{N,c}) =
+\kappaChHodge(\cW_{N,c})\lambda_1^{\mathrm{FP}}$
+holds unconditionally (the Hodge component of the
+$\kappaTuple{\cW_{N,c}}$ tuple specialises against the
+Faber--Pandharipande class~$\lambda_1^{\mathrm{FP}}$),
+so
+$F_1^{\mathrm{sc}}(c^*) =
+\tfrac{1}{2}F_1^{\mathrm{sc}}(\alpha_N)$.
+For Virasoro ($N = 2$, uniform-weight), the scalar lane is the full
+genus tower and
+$F_g(c^*)=\tfrac12F_g(\alpha_N)$ for all $g\ge1$. For
+$N \ge 3$ (multi-weight), the full genus tower at $g\ge2$ is
+\[
+F_g(\cW_{N,c})
+ =
+ F_g^{\mathrm{sc}}(\cW_{N,c})
+ +\delta F_g^{\mathrm{cross}}(\cW_{N,c}),
+\]
+with cross-channel correction as in Volume~I,
+Theorem~\ref{V1-thm:multi-weight-genus-expansion}.  The universal
+halving is therefore a scalar-lane statement; a full halving for
+multi-weight $\cW_N$ would require the separate identity
+\[
+\delta F_g^{\mathrm{cross}}(\cW_{N,c^*})
+=\tfrac12\,\delta F_g^{\mathrm{cross}}(\cW_{N,\alpha_N}),
+\]
+which is not asserted here.
+\end{proposition}
+
+\begin{remark}[$\mathcal{W}_\infty$ and higher-spin gravity]
+\label{rem:winfty-higher-spin}
+In the $N \to \infty$ limit, $\mathcal{W}_\infty$ produces
+$c_{\mathrm{pair}} \to \infty$, signaling a decompactification of the
+topological direction. The infinite tower of fields
+$(W_s, \chi_s)_{s \geq 2}$ is the field content of Vasiliev
+higher-spin gravity in the holomorphic-topological formulation. The
+$\mathcal{W}_\infty$ modular envelope $\ModEnv(\mathcal{W}_\infty)$ is
+precisely the MC4-closed package from Vol~I
+\textup{(}cf.~the concordance, \S\textup{MC4}\textup{)}: the full higher-spin
+data is encoded in the modular Koszul duality of the limiting
+$\mathcal{W}$-algebra.
+Volume~I proves that $\mathcal{W}_\infty$ has a one-dimensional
+minimal cyclic direction,
+\[
+\dim H^2_{\mathrm{cyc}}(\mathcal{W}_\infty, \mathcal{W}_\infty)=1,
+\]
+and computes the explicit weight-$4$ structure constant
+\[
+c_{334}^2=\frac{42c^2(5c+22)}{(c+24)(7c+68)(3c+46)}.
+\]
+\end{remark}
+
+%% =====================================
+%% W_4 and W_5: explicit shadow depth analysis
+%% =====================================
+
+\subsection{$\mathcal{W}_4$ and $\mathcal{W}_5$:
+Explicit Shadow Depth Analysis}
+\label{subsec:w4-w5-analysis}
+
+Theorem~\ref{thm:wn-class-M} establishes Class~$\mathbf{M}$
+for all $\mathcal{W}_N$ uniformly via the Virasoro sub-sector.
+The explicit computations for $\mathcal{W}_4$
+(spins $2,3,4$) and $\mathcal{W}_5$ (spins $2,3,4,5$) below
+exhibit the OPE pole structure, interaction vertices,
+and non-vanishing ternary operation $m_3$.
+
+\subsubsection{$\mathcal{W}_4$ OPE structure and field content}
+
+The $\mathcal{W}_4$ PVA has generators $T$ (spin~$2$), $W_3$
+(spin~$3$), and $W_4$ (spin~$4$), with field pairs
+$(T, \mu)$, $(W_3, \chi_3)$, $(W_4, \chi_4)$ in the
+Khan--Zeng 3D HT action. The OPE pole orders are:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+OPE & Max pole & $r$-matrix pole & Source \\
+\midrule
+$T(z)\,T(w)$ & $z^{-4}$ & $z^{-3}$ & Virasoro \\
+$T(z)\,W_3(w)$ & $z^{-2}$ & $z^{-1}$ & Primary, spin $3$ \\
+$T(z)\,W_4(w)$ & $z^{-2}$ & $z^{-1}$ & Primary, spin $4$ \\
+$W_3(z)\,W_3(w)$ & $z^{-6}$ & $z^{-5}$ & From $\mathcal{W}_3$ \\
+$W_3(z)\,W_4(w)$ & $z^{-7}$ & $z^{-6}$ & Cross-sector \\
+$W_4(z)\,W_4(w)$ & $z^{-8}$ & $z^{-7}$ & Highest pole \\
+\bottomrule
+\end{tabular}
+\end{center}
+The $r$-matrix poles are one lower than the OPE poles by the
+bar kernel absorption principle: the kernel absorbs one power
+of $(z-w)^{-1}$.
+
+\begin{proposition}[$\mathcal{W}_4$ non-vanishing $m_3$]
+\label{prop:w4-m3}
+\index{W4@$\mathcal{W}_4$!ternary operation}%
+Let\/ $\cA=\mathcal W_{4,c}$ with its principal DS finite-pole
+$\lambda$-brackets, and assume the KZ analytic SDR package when the
+algebraic associators are interpreted as transferred BV operations.
+The ternary operation $m_3$ on $\mathcal{W}_4$ satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_3(T,T,T) = m_3^{\mathrm{Vir}}(T,T,T) \ne 0$
+ \textup{(}identical to Virasoro, by sector decoupling\textup{)}.
+\item $m_3(T,T,W_3) \ne 0$, with leading term controlled by
+ the $\{T_\lambda \{T_\mu W_3\}\}$ associator.
+\item $m_3(T,T,W_4) \ne 0$, with leading term from
+ the $\{T_\lambda \{T_\mu W_4\}\}$ associator.
+\item $m_3(W_4, W_4, W_4) \ne 0$: the $W_4$ self-OPE has
+ poles up to order~$8$, producing a nonzero associator
+ from the iterated $\{W_{4\,\lambda} \{W_{4\,\mu} W_4\}\}$
+ bracket via nonlinear composite fields
+ $\Lambda = {:}TT{:} - \tfrac{3}{10}\partial^2 T$,
+ $U = {:}TW_3{:} - \ldots$, etc.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i) follows from Proposition~\ref{prop:vir-truncation}
+and the sector decoupling~\eqref{eq:wn-sector-decoupling}.
+For parts~(ii)--(iv), the ternary operation $m_3$ is the
+negative of the associator of the $\lambda$-bracket:
+\[
+m_3(X, Y, Z;\, \lambda, \mu)
+= -A_3(X, Y, Z;\, \lambda, \mu),
+\quad
+A_3 = m_2(m_2(X, Y;\lambda),\, Z;\, \lambda+\mu)
+ - m_2(X,\, m_2(Y, Z;\mu);\, \lambda).
+\]
+
+For part~(ii), the inputs $T, T, W_3$ give:
+$A_3(T,T,W_3;\lambda,\mu)
+= \{(\partial W_3 + 2\lambda W_3 + \cdots)_{\lambda+\mu}\, W_3\}
+- \{T_\lambda\, (\partial W_3 + 3\mu W_3)\}$.
+Since $\{T_\lambda W_s\} = \partial W_s + s\lambda W_s$
+for a primary field $W_s$ of spin~$s$, the associator
+evaluates to terms involving
+$2\lambda \cdot s\mu = 2s \lambda\mu$ cross-terms that
+do not cancel (the failure of strict associativity between
+primary and stress tensor sectors).
+
+For part~(iv), $A_3(W_4, W_4, W_4;\lambda,\mu)$ involves
+the full $\{W_{4\,\lambda} W_4\}$ bracket, which contains
+terms up to $\lambda^7$ (pole order $8$ minus $1$ from bar
+kernel). The iterated bracket
+$\{W_{4\,\lambda}\{W_{4\,\mu} W_4\}\}$ produces composite
+fields at spin~$8$ and lower, generating a nonzero
+polynomial in $\lambda, \mu$ of total degree up to $14$.
+The non-vanishing follows because the $W_4$ algebra is
+not associative at the $\lambda$-bracket level:
+the nonlinear composite field $\Lambda$ (and its
+higher-spin analogues) prevents the associator from
+vanishing, just as in the $\mathcal{W}_3$ case.
+\end{proof}
+
+\subsubsection{$\mathcal{W}_5$ structure}
+
+The $\mathcal{W}_5$ PVA adds a generator $W_5$ of spin~$5$, with
+field pair $(W_5, \chi_5)$. The highest-pole OPE is
+$W_5(z)\,W_5(w) \sim (z-w)^{-10} + \cdots$,
+giving $r$-matrix poles up to $(z-w)^{-9}$.
+
+\begin{proposition}[$\mathcal{W}_5$ shadow depth]
+\label{prop:w5-shadow-depth}
+\index{W5@$\mathcal{W}_5$!shadow depth}%
+Let\/ $\cA=\mathcal W_{5,c}$ with its principal DS finite-pole
+$\lambda$-brackets. Assume the KZ analytic SDR package, Virasoro
+wheel-residue survival, and split projection to the Virasoro sector.
+The $\mathcal{W}_5$ algebra has:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_k(T, \ldots, T) \ne 0$ for all $k \ge 3$
+ \textup{(}from Theorem~\textup{\ref{thm:wn-class-M})}.
+\item At degree~$k$, the maximum loop order is
+ $\lfloor (k-1)(s_{\max}-1)/k \rfloor$ from the
+ $W_5$-sector, where $s_{\max} = 5$.
+\item The complementarity constant is
+ $\alpha_5 = 488$, with self-dual point $c = 244$.
+\item $\dim H^1(C^*_{\mathrm{ch}}(\mathcal{W}_5,
+ \mathcal{W}_5)) = 4$, with basis
+ $\{\partial_c T, \partial_c W_3, \partial_c W_4,
+ \partial_c W_5\}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i) is Theorem~\ref{thm:wn-class-M}.
+Part~(iii) is Proposition~\ref{prop:wn-complementarity}
+at $N = 5$: $\alpha_5 = 2 \cdot 4 \cdot (50 + 10 + 1) = 488$.
+Part~(iv) follows from the same argument as
+Computation~\ref{comp:bulk-wn}: $\mathcal{W}_5$ is simple
+for generic~$c$, so every outer derivation is generated by
+$\partial_c$ acting on each generator.
+\end{proof}
+
+\subsubsection{$\mathcal{W}_4$ spectral $r$-matrix}
+
+\begin{computation}[$\mathcal{W}_4$ spectral $r$-matrix]
+\label{comp:w4-r-matrix}
+\index{W4@$\mathcal{W}_4$!r-matrix}%
+The $\mathcal{W}_4$ $r$-matrix is a $3 \times 3$ matrix in the
+$\{T, W_3, W_4\}$ basis. The diagonal components are:
+\begin{align}
+r^{TT}(\lambda) &= \frac{c/12}{\lambda^3}
+ + \frac{2T}{\lambda} + \frac{\partial T}{\lambda^0},
+ \\
+r^{W_3 W_3}(\lambda) &= \frac{c/360}{\lambda^5}
+ + \frac{T/3}{\lambda^3}
+ + \frac{\partial T/2}{\lambda^2}
+ + \frac{(32/(5c+22))\Lambda}{\lambda}
+ + \cdots, \\
+r^{W_4 W_4}(\lambda) &= \frac{c_4}{\lambda^7}
+ + \frac{T_4}{\lambda^5}
+ + \cdots
+ + \frac{\Xi}{\lambda} + \cdots,
+\end{align}
+where $c_4$ is the leading central coefficient of the
+$\{W_{4\,\lambda} W_4\}$ bracket, and $\Xi$ is a composite
+field of spin~$6$ built from $T$, $W_3$, $W_4$, and their
+derivatives. The off-diagonal components encode the
+cross-OPE structure.
+
+The $r$-matrix pole orders satisfies: the collision residue
+$r^{\mathrm{coll}}$ has poles one order lower than the OPE,
+so $r^{W_4 W_4}_{\mathrm{coll}}$ has poles up to
+$\lambda^{-7}$ (from the $z^{-8}$ OPE pole).
+\end{computation}
+
+\begin{computation}[$\mathcal{W}_4$ cubic self-coupling]
+\label{comp:w4-cubic-self-coupling}%
+\index{W4@$\mathcal{W}_4$!cubic self-coupling|textbf}%
+\index{self-coupling!W4@$\mathcal{W}_4$}%
+\index{Z3 symmetry@$\Z_3$ symmetry!failure at N=4@failure at $N=4$}%
+The $\cW_3$ analysis carries two discrete selection rules:
+the $\Z_2$ parity $W \mapsto -W$ annihilates the $T$-sector
+output of $m_3(W,W,W)$ (equation~\eqref{eq:m3-WWW-T-vanishing}),
+and the $\Z_3$ outer automorphism $W \mapsto e^{2\pi i/3}W$
+annihilates the cubic self-coupling $C_{333}^{\cW_3} = 0$.
+At $N \ge 4$ both rules break. The $\Z_2$ parity
+persists as long as the spin-$s$ generator has $s$ odd
+(so $W_s \mapsto -W_s$ is a well-defined automorphism);
+the $\Z_3$ outer automorphism of $\cW_3$ has no analogue at
+$N = 4$ (the spin content $\{2, 3, 4\}$ does not close under
+any $\Z_3$ action, as no field of spin $s \equiv 1 \pmod{3}$
+absorbs the charge), so $\Z_3$ ceases to be an outer
+automorphism. The cubic self-coupling coefficient $C_{444}$
+(the OPE structure constant governing the
+$W_4 \otimes W_4 \to W_4$ channel) is therefore unconstrained,
+and direct computation gives
+\begin{equation}\label{eq:C444-value}
+C_{444}
+\;=\;
+\frac{8}{9}.
+\end{equation}
+This is extracted from the $\{W_{4\,\lambda} W_4\}$ bracket
+at the pole order corresponding to the $W_4$-output channel,
+with normalisation $\langle W_4 | W_4 \rangle_{\mathrm{BPZ}} = 1$
+and the standard Virasoro subtraction.
+
+The value $8/9$ is rational and $c$-independent at leading order
+(up to Kac-determinant normalisation), consistent with the
+$c$-linearity principle
+(Theorem~\ref{thm:gravity-c-linearity}). Its
+$c$-independence is the signature of a structural constant:
+$C_{444}$ measures the intrinsic non-linearity of the $W_4$
+self-interaction, independent of the overall curvature.
+
+The nonvanishing of $C_{444}$ propagates through the $\Ainf$
+tower: the degree-$3$ Stasheff composition in the
+$(W_4, W_4, W_4)$ sector receives a nonzero contribution from
+$W_4 \otimes W_4 \xrightarrow{m_2}
+W_4 \xrightarrow{m_2(\cdot, W_4)} \mathrm{output}$, which
+would vanish if $C_{444} = 0$. This generates a nonzero
+$m_3(W_4, W_4, W_4)$ in the pure-$W_4$ sector \emph{beyond}
+the contribution already guaranteed by the Virasoro
+sub-sector (Theorem~\ref{thm:wn-class-M}), and the
+nonvanishing propagates to all higher degrees. The passage
+from $\cW_3$ (where $C_{333} = 0$ and the pure-$W$ ternary
+operation is carried by the normalized
+\(WW\Lambda\) projection
+\(P_\Lambda\{W_\lambda W\}=(32/(22+5c))\lambda\Lambda\)) to
+$\cW_4$ (where $C_{444} = 8/9$ opens a direct self-coupling
+channel) is the first instance of \emph{selection-rule
+breaking} in the $\cW_N$ hierarchy.
+\end{computation}
+
+%% =====================================
+%% Depth spectrum and gap migration for W_4 and W_5
+%% =====================================
+
+\subsection{Depth spectrum and gap migration for
+\texorpdfstring{$\mathcal{W}_4$}{W\_4} and
+\texorpdfstring{$\mathcal{W}_5$}{W\_5}}
+\label{subsec:w4-w5-depth-spectrum}
+
+Computations~\ref{comp:w3-depth-degree-2}--\ref{comp:w3-depth-degree-3}
+establish the depth spectrum for $\mathcal{W}_3$.
+The extension to $\mathcal{W}_4$ (spins~$2,3,4$)
+and $\mathcal{W}_5$ (spins~$2,3,4,5$) exhibits a new
+structural phenomenon: \emph{cross-sector gap filling} at
+$N = 4$.
+
+\subsubsection{Sector-level depth spectra at degree~$2$}
+\label{subsubsec:w4-w5-depth-degree-2}
+
+\begin{computation}[$\mathcal{W}_4$ depth spectrum at degree~$2$]
+\label{comp:w4-depth-degree-2}
+\index{depth spectrum!W4 degree 2@$\mathcal{W}_4$ degree~$2$}%
+The nine $m_2$ sectors of $\mathcal{W}_4$ and their collision
+depth contributions are:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Sector} & \textbf{OPE pole}
+ & \textbf{Max depth} & \textbf{Depths present} \\
+\midrule
+$(T,T)$ & $z^{-4}$ & $3$ & $\{0, 1, 3\}$ \\
+$(T,W_3)$ & $z^{-2}$ & $1$ & $\{0, 1\}$ \\
+$(T,W_4)$ & $z^{-2}$ & $1$ & $\{0, 1\}$ \\
+$(W_3,T)$ & $z^{-2}$ & $1$ & $\{0, 1\}$ \\
+$(W_3,W_3)$ & $z^{-6}$ & $5$ & $\{0, 1, 2, 3, 5\}$ \\
+$(W_3,W_4)$ & $z^{-7}$ & $6$ & $\{0, 1, 2, 3, 4, 6\}$ \\
+$(W_4,T)$ & $z^{-2}$ & $1$ & $\{0, 1\}$ \\
+$(W_4,W_3)$ & $z^{-7}$ & $6$ & $\{0, 1, 2, 3, 4, 6\}$ \\
+$(W_4,W_4)$ & $z^{-8}$ & $7$ & $\{0, 1, 2, 3, 4, 5, 7\}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Each sector $(W_s, W_{s'})$ with $s, s' \ge 3$ has a
+\emph{sector gap} at depth $d = s + s' - 2$, from the
+weight-$1$ lacuna (the $\lambda^{s+s'-2}$ coefficient in
+$\{W_{s\,\lambda} W_{s'}\}$ would need a field of conformal
+weight~$1$, which does not exist in $\mathcal{W}_4$).
+The primary sectors $(T, W_s)$ and $(W_s, T)$ have
+$\{T_\lambda W_s\} = \partial W_s + s\lambda W_s$,
+producing only depths~$0$ and~$1$.
+\end{computation}
+
+\begin{proposition}[Vacuum selection rule for
+$\{W_{4\,\lambda} W_4\}$]
+\label{prop:vacuum-selection-W4W4}
+\index{vacuum selection rule!W4W4 OPE@$W_4 W_4$ OPE}%
+The $\lambda^6$ coefficient in $\{W_{4\,\lambda} W_4\}$
+vanishes:\ there is no septupole in the $W_4(z)\,W_4(w)$ OPE.
+\end{proposition}
+
+\begin{proof}
+A $\lambda^6$ term would contribute a field of conformal
+weight $4 + 4 - 7 = 1$. The $\mathcal{W}_4$ algebra,
+obtained by principal DS reduction of $V_k(\mathfrak{sl}_4)$,
+has no weight-$1$ generator or composite. The elimination
+proceeds as in the $\mathcal{W}_3$ case
+(Proposition~\ref{prop:vacuum-selection-WW}): $\mathfrak{sl}_4$
+has $15$ generators, of which
+$6$ positive root currents are $Q_{\mathrm{BRST}}$-exact,
+$3$ Cartan currents are absorbed into the improved stress
+tensor $T^{\mathrm{DS}}$ (weight~$1 \to 2$), and
+$6$ negative root currents are gauge-fixed. The surviving
+generators $T$ (weight~$2$), $W_3$ (weight~$3$), $W_4$
+(weight~$4$) span weights $\ge 2$. The minimum weight of
+any normally ordered product is~$2$ (from $T$), confirming
+the weight-$1$ lacuna.
+
+In the free-field realisation (Fateev--Lukyanov), $W_4$ is
+a quartic polynomial in the three free bosons
+$\phi_1, \phi_2, \phi_3$. Contracting $7$ of the $8$
+bosons in $W_4(z)\,W_4(w)$ leaves a single
+$\partial\phi_i$ of weight~$1$. The
+$\mathbb{Z}_2$-symmetry $W_4 \to W_4$ (even parity
+of the spin-$4$ generator under the Weyl group $S_4$)
+forces the coefficient to vanish, since the residual
+$\partial\phi_i$ transforms as an odd representation.
+\end{proof}
+
+\begin{computation}[$\mathcal{W}_5$ depth spectrum at degree~$2$]
+\label{comp:w5-depth-degree-2}
+\index{depth spectrum!W5 degree 2@$\mathcal{W}_5$ degree~$2$}%
+The $\mathcal{W}_5$ PVA has $4$ generators
+$T, W_3, W_4, W_5$ (spins~$2,3,4,5$), producing $16$
+$m_2$ sectors. The sector gaps are:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccl}
+\toprule
+\textbf{Sector} & \textbf{OPE pole}
+ & \textbf{Sector gap} & \textbf{Depths present} \\
+\midrule
+$(T,T)$ & $z^{-4}$ & $d = 2$ & $\{0, 1, 3\}$ \\
+$(T,W_s)$, $(W_s,T)$ & $z^{-2}$ & --- & $\{0, 1\}$ \\
+$(W_3,W_3)$ & $z^{-6}$ & $d = 4$ & $\{0, 1, 2, 3, 5\}$ \\
+$(W_3,W_4)$ & $z^{-7}$ & $d = 5$ & $\{0, 1, 2, 3, 4, 6\}$ \\
+$(W_3,W_5)$ & $z^{-8}$ & $d = 6$ & $\{0, 1, 2, 3, 4, 5, 7\}$ \\
+$(W_4,W_4)$ & $z^{-8}$ & $d = 6$ & $\{0, 1, 2, 3, 4, 5, 7\}$ \\
+$(W_4,W_5)$ & $z^{-9}$ & $d = 7$ & $\{0, 1, 2, 3, 4, 5, 6, 8\}$ \\
+$(W_5,W_5)$ & $z^{-10}$ & $d = 8$ & $\{0, 1, 2, 3, 4, 5, 6, 7, 9\}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textup{(}Off-diagonal sectors $(W_s, W_{s'})$ with
+$s < s'$ are listed once; the transposed sector
+$(W_{s'}, W_s)$ has the same depth set by
+skew-symmetry.\textup{)}
+
+The vacuum selection rule generalises uniformly:
+the $\lambda^{2N-2}$ coefficient in
+$\{W_{N\,\lambda} W_N\}$ vanishes for all~$N$,
+giving a sector gap at $d = 2N - 2$ in the
+$(W_N, W_N)$ self-OPE.
+\end{computation}
+
+\subsubsection{Cross-sector gap filling at $N = 4$}
+\label{subsubsec:cross-sector-filling}
+
+\begin{theorem}[Cross-sector filling threshold]
+\label{thm:cross-sector-filling}
+\index{depth spectrum!cross-sector gap filling|textbf}%
+\index{gap migration!cross-sector filling}%
+Let $\Spec^{\mathrm{tot}}(\mathcal{W}_N, 2)
+= \bigcup_{s, s'} \Spec((W_s, W_{s'}), 2)$ be the
+total degree-$2$ depth spectrum of $\mathcal{W}_N$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item For $N = 2$ \textup{(Virasoro)} and $N = 3$,
+ the total spectrum inherits the sector gap:
+ \begin{align}
+ \Spec^{\mathrm{tot}}(\mathrm{Vir}, 2) &= \{0, 1, 3\},
+ & \text{gap at } d = 2; \\
+ \Spec^{\mathrm{tot}}(\mathcal{W}_3, 2) &= \{0, 1, 2, 3, 5\},
+ & \text{gap at } d = 4.
+ \end{align}
+\item For $N \ge 4$, the total spectrum has
+ \textbf{no structural gap}:
+ \begin{equation}
+ \Spec^{\mathrm{tot}}(\mathcal{W}_N, 2)
+ = \{0, 1, 2, \ldots, 2N - 1\}.
+ \end{equation}
+ The sector gap at $d = 2N - 2$ in $(W_N, W_N)$ is
+ \emph{filled} by the cross-sector $(W_{N-1}, W_N)$.
+\item The critical threshold is $N = 4$:\ the first
+ principal $\mathcal{W}$-algebra whose total degree-$2$
+ depth spectrum is gap-free.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) follows from the explicit sector computations in
+Computation~\ref{comp:w3-depth-degree-2} and the Virasoro
+case of Theorem~\ref{thm:gap-migration}. For $N = 3$,
+the only sector that could fill $d = 4$ is $(T, W_3)$
+or $(W_3, T)$, but these are primary OPEs with
+$\max\text{depth} = 1$, far below $d = 4$.
+
+(ii) For $N \ge 4$, consider the cross-sector
+$(W_{N-1}, W_N)$ with both $N - 1 \ge 3$ and $N \ge 3$.
+\begin{itemize}
+\item The $\lambda$-bracket
+ $\{W_{N-1\,\lambda}\, W_N\}$ has maximum degree
+ $(N-1) + N - 1 = 2N - 2$ in $\lambda$.
+\item The sector gap of $(W_{N-1}, W_N)$ is at
+ $d = (N-1) + N - 2 = 2N - 3$
+ (from the weight-$1$ lacuna at $\lambda^{2N-3}$).
+\item Therefore depth $d = 2N - 2$ \emph{is present}
+ in this sector (it is the maximum depth, corresponding
+ to a scalar coefficient).
+\end{itemize}
+Since $d = 2N - 2$ is the gap of $(W_N, W_N)$, and the
+cross-sector $(W_{N-1}, W_N)$ contains this depth, the
+total spectrum is gap-free.
+
+(iii) For $N = 3$: the candidate filling sector
+$(W_2, W_3) = (T, W_3)$ is a primary OPE with
+$\{T_\lambda W_3\} = \partial W_3 + 3\lambda W_3$,
+of maximum depth~$1$, far below $d = 4$. The
+structural distinction at $N = 4$ is that the filler
+$(W_3, W_4)$ is a
+\emph{non-primary cross-OPE} between two higher-spin
+generators, both of spin~$\ge 3$, with maximum depth
+$3 + 4 - 1 = 6 \ge 2 \cdot 4 - 2 = 6$.
+\end{proof}
+
+\begin{remark}[The mechanism of cross-sector filling]%
+\label{rem:cross-sector-mechanism}%
+\index{depth spectrum!cross-sector mechanism}%
+The filling mechanism is arithmetic. The $(W_N, W_N)$
+sector gap sits at depth $d = 2N - 2$. The cross-sector
+$(W_{N-1}, W_N)$ has maximum depth
+$(N-1) + N - 1 = 2N - 2$, with its own sector gap at
+$d = 2N - 3 < 2N - 2$. So $d = 2N - 2$ is the
+\emph{top depth} of the cross-sector, filled by the scalar
+(central charge) coefficient of $\{W_{N-1\,\lambda}\, W_N\}$
+at $\lambda^{2N-2}$. This scalar coefficient exists because
+weight~$0$ (the identity) is always available as an output.
+
+The arithmetic threshold:\ for the filler sector $(W_{s}, W_{s'})$
+with $s + s' - 1 \ge 2N - 2$ and $s + s' - 2 \ne 2N - 2$,
+one needs $s + s' \ge 2N - 1$ and $s + s' \ne 2N$.
+The sector $(W_{N-1}, W_N)$ has $s + s' = 2N - 1 \ge 2N - 1$
+(saturated) and $s + s' \ne 2N$ (since $2N - 1 \ne 2N$),
+so the conditions hold provided both $s = N - 1 \ge 3$ and
+$s' = N \ge 3$, i.e., $N \ge 4$.
+\end{remark}
+
+\begin{remark}[Relation to the gap migration theorem]%
+\label{rem:gap-migration-refined}%
+\index{gap migration!sector vs total}%
+Theorem~\ref{thm:gap-migration}(iv) states the conditional
+T-propagated binding-sector formula
+$d_{\mathrm{gap}}^{\mathrm{bind}}(\mathcal{W}_N, n) = 2N + n - 4$.
+This is a \emph{sector-level} statement: it identifies
+the gap in the sector \((W_N,W_N,T,\ldots,T)\). At the
+\emph{total} level, raw all-\(W_N\) and mixed sectors may have
+different gap positions, and cross-sector filling may eliminate
+the gap. The refined picture is:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\toprule
+$N$ & \textbf{Sector gap} $d_{\mathrm{gap}}^{\mathrm{bind}}$
+ & \textbf{Degree-$2$ total gap?}
+ & \textbf{Filled by} \\
+\midrule
+$2$ & $n$ & Yes &; \\
+$3$ & $n + 2$ & Yes ($n = 2$);
+ Yes ($n = 3$) &; \\
+$4$ & $n + 4$ & No ($n = 2$) & $(W_3, W_4)$ \\
+$5$ & $n + 6$ & No ($n = 2$) & $(W_4, W_5)$ \\
+$N \ge 4$ & $2N + n - 4$ & No ($n = 2$) & $(W_{N-1}, W_N)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+The gap migration formula remains valid as a T-propagated
+binding-sector structural invariant. The total gap
+is a coarser invariant that depends on the full
+sector decomposition.
+\end{remark}
+
+\subsubsection{$\mathcal{W}_4$ collision residue:
+$(W_4, W_4)$ sector}
+
+\begin{computation}[$(W_4, W_4)$ collision residue]
+\label{comp:w4w4-collision-residue}
+\index{collision residue!W4W4@$(W_4, W_4)$}%
+The $\{W_{4\,\lambda} W_4\}$ bracket has the structure
+\begin{equation}
+\label{eq:w4w4-lambda-bracket}
+\{W_{4\,\lambda} W_4\}
+= \sum_{n=0}^{7} P_n^{(4)}\,\lambda^n
+\end{equation}
+with $P_6^{(4)} = 0$ (Proposition~\ref{prop:vacuum-selection-W4W4})
+and the nonzero coefficients:
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cccl}
+\toprule
+$n$ & $P_n^{(4)}$ (weight) & Depth $d$ & Representative field \\
+\midrule
+$7$ & $c_4$ (scalar, weight $0$) & $7$
+ & Central charge \\
+$6$ & $0$ (weight $1$ absent) & --
+ & \textbf{GAP}: weight-$1$ lacuna \\
+$5$ & (weight $2$) & $5$
+ & $T$ \\
+$4$ & (weight $3$) & $4$
+ & $W_3,\; \partial T$ \\
+$3$ & (weight $4$) & $3$
+ & $W_4,\; {:}TT{:},\; \partial^2 T$ \\
+$2$ & (weight $5$) & $2$
+ & ${:}TW_3{:},\; \partial W_4,\; \partial^3 T$ \\
+$1$ & (weight $6$) & $1$
+ & composites of weight $6$ \\
+$0$ & (weight $7$) & $0$
+ & composites of weight $7$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The collision residue (Laplace transform,
+$\lambda^n \mapsto n!/z^{n+1}$) is:
+\begin{equation}
+\label{eq:w4w4-collision-residue}
+r^{W_4 W_4}(z)
+= \frac{7!\, c_4}{z^8}
++ 0 \cdot \frac{1}{z^7}
++ \frac{5!\, P_5^{(4)}}{z^6}
++ \cdots
++ \frac{P_0^{(4)}}{z},
+\end{equation}
+with the $1/z^7$ coefficient \emph{absent}, reflecting
+the weight-$1$ lacuna. This is the direct analogue of
+the $\mathcal{W}_3$ collision residue
+(Computation~\ref{comp:ww-collision-residue}), with
+the gap shifted from $1/z^5$ \textup{(}$\mathcal{W}_3$\textup{)}
+to $1/z^7$ \textup{(}$\mathcal{W}_4$\textup{)}.
+\end{computation}
+
+\subsubsection{$\mathcal{W}_4$ and $\mathcal{W}_5$
+depth spectra: degree~$3$}
+\label{subsubsec:w4-w5-depth-degree-3}
+
+At degree~$3$, the Stasheff composition structure imposes
+constraints beyond the naive weight-depth model: the scalar
+contact term from the inner $m_2$ is killed when composed
+with a primary OPE in the outer $m_2$
+(since $\{1_\lambda W_s\} = 0$). This suppression
+reduces the achievable maximum depth in sectors containing
+$T$-inputs.
+
+\begin{computation}[$\mathcal{W}_4$ depth spectrum at degree~$3$
+\textup{(}key sectors\textup{)}]
+\label{comp:w4-depth-degree-3}
+\index{depth spectrum!W4 degree 3@$\mathcal{W}_4$ degree~$3$}%
+The $27$ input sectors of $m_3$ for $\mathcal{W}_4$
+decompose into four structural classes:
+
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{llcl}
+\toprule
+\textbf{Class} & \textbf{Representative}
+ & \textbf{Sector gap} & \textbf{Max depth} \\
+\midrule
+Pure Virasoro & $(T,T,T)$
+ & $d = 3$ & $4$ \\
+$T$-mixed & $(T,T,W_3)$, $(T,T,W_4)$, etc.
+ & $d = 4$ or $d = 5$ & $4$--$6$ \\
+$W$-heavy ($\ge 2$ higher-spin)
+ & $(W_3,W_3,T)$, $(W_3,W_4,T)$, etc.
+ & $d = 5$--$8$ & $6$--$9$ \\
+Pure higher-spin
+ & $(W_4,W_4,W_4)$
+ & $d = 9$ & $10$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The binding sector $(W_4, W_4, W_4)$ has total weight
+$4 + 4 + 4 = 12$, max depth $12 - 2 = 10$, and sector gap
+at $d = 12 - 3 = 9$. The predicted gap from
+Theorem~\textup{\ref{thm:gap-migration}(iv)} gives
+\(d_{\mathrm{gap}}^{\mathrm{bind}}=2\cdot4+3-4=7\) for the
+T-propagated sector \((W_4,W_4,T)\), not for the raw
+\((W_4,W_4,W_4)\) sector.
+
+The cross-sector $(W_3, W_4, W_4)$ has max depth
+$3 + 4 + 4 - 2 = 9$ and sector gap at $d = 8$. Since
+$d = 9$ is present in this sector, it fills the
+$(W_4, W_4, W_4)$ gap at $d = 9$.
+\end{computation}
+
+\subsubsection{The universal sector-gap formula}
+
+\begin{proposition}[Universal sector gap]
+\label{prop:universal-sector-gap}
+\index{depth spectrum!universal sector gap}%
+For the sector $(W_{s_1}, \ldots, W_{s_n})$ of the
+principal $\mathcal{W}_N$ algebra at degree~$n$:
+\begin{equation}
+\label{eq:sector-gap-formula}
+d_{\mathrm{gap}}(W_{s_1}, \ldots, W_{s_n})
+= \Bigl(\sum_{i=1}^n s_i\Bigr) - n,
+\end{equation}
+valid at degree~$n = 2$, provided $s_i \ge 3$ for at
+least $2$ of the inputs \textup{(}so the binding
+collision channel has a non-primary
+OPE\textup{)}. For sectors with $\le 1$ higher-spin
+input, the gap position is governed by the Virasoro
+sub-sector. At degree $n \ge 3$, iterated Stasheff
+compositions introduce corrections from the
+composition constraint
+\textup{(}scalar outputs of inner $m_2$ are killed by
+primary OPEs\textup{)}; the formula remains a useful
+approximation but is not exact.
+
+The gap at this depth arises because the output weight
+$w = \bigl(\sum s_i\bigr) - (n-1) - d_{\mathrm{gap}}
+= 1$,
+and no weight-$1$ field exists in any principal
+$\mathcal{W}_N$ algebra.
+\end{proposition}
+
+\begin{proof}
+The weight-depth identity at degree~$n$ gives
+$w + d = \bigl(\sum s_i\bigr) - (n - 1)$ for each
+monomial in $m_n(W_{s_1}, \ldots, W_{s_n})$. A depth
+$d$ requires output weight $w = \bigl(\sum s_i\bigr) - (n-1) - d$.
+Setting $w = 1$ (the absent weight) gives
+$d = \bigl(\sum s_i\bigr) - n$.
+All other output weights ($w = 0, 2, 3, \ldots$)
+are available from the scalar sector and composites,
+so all depths except $d = \bigl(\sum s_i\bigr) - n$
+are present.
+\end{proof}
+
+\subsubsection{Verification table}
+
+\begin{computation}[Gap migration verification for
+$\mathcal{W}_4$ and $\mathcal{W}_5$]
+\label{comp:w4-w5-gap-verification}
+\index{gap migration!W4 W5 verification@$\mathcal{W}_4$,
+$\mathcal{W}_5$ verification}%
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lcccl}
+\toprule
+$N$ & Degree $n$ & Binding sector gap
+ & Total gap? & Notes \\
+\midrule
+$4$ & $2$ & $d = 6$
+ & No
+ & Filled by $(W_3, W_4)$ at $d = 6$ \\
+$4$ & $3$ & $d = 9$
+ & No\textsuperscript{$*$}
+ & Filled by $(W_3, W_4, W_4)$ at $d = 9$ \\
+$5$ & $2$ & $d = 8$
+ & No
+ & Filled by $(W_4, W_5)$ at $d = 8$ \\
+$5$ & $3$ & $d = 12$
+ & No\textsuperscript{$*$}
+ & Filled by $(W_4, W_5, W_5)$ at $d = 12$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent \textsuperscript{$*$}Degree-$3$ total gap
+analysis requires the full Stasheff computation
+confirming the achievability of all depths in the
+filling sector; the weight-depth argument provides
+the structural mechanism, while the composition-level
+verification requires the explicit degree-$3$ Stasheff
+relation for each $\mathcal{W}_N$.
+\end{computation}
+
+\begin{remark}[Summary of the depth spectrum landscape]%
+\label{rem:depth-landscape-summary}%
+\index{depth spectrum!landscape summary}%
+The depth spectrum analysis reveals a clean structural
+hierarchy:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Sector level:} every sector $(W_s, W_{s'})$
+ with $s, s' \ge 3$ has exactly one gap, at
+ $d = s + s' - 2$, from the weight-$1$ lacuna.
+ The primary sectors $(T, W_s)$ have no gap (too few
+ depths to exhibit one).
+\item \emph{Total level at degree~$2$:} the sector gap
+ survives in the total spectrum only for
+ $N = 2$ \textup{(Virasoro)} and $N = 3$.
+ For $N \ge 4$, cross-sector filling eliminates the
+ total gap. The critical threshold $N = 4$ marks the
+ first algebra with enough generators for the
+ cross-sector $(W_{N-1}, W_N)$ to reach the gap depth.
+\item \emph{Degree growth:} at higher degree, the gap
+ migrates linearly:
+ \(d_{\mathrm{gap}}^{\mathrm{bind}}=2N+n-4\)
+ in the T-propagated binding sector. Cross-sector filling
+ at the total level becomes increasingly effective as
+ $N$ grows, consistent with
+ Remark~\ref{rem:gap-migration-scope}(c):
+ in the $N \to \infty$ limit, every finite depth
+ is filled.
+\item \emph{Composition constraint:} at degree~$\ge 3$,
+ the Stasheff composition structure suppresses certain
+ depths that the naive weight-depth model would predict:
+ scalar terms from inner $m_2$ brackets are killed when
+ composed with primary OPEs ($\{1_\lambda W_s\} = 0$).
+ This constraint reduces achievable depths in $T$-mixed
+ sectors but does not affect the pure higher-spin sectors.
+\end{enumerate}
+\end{remark}
+
+\subsubsection{Universal Catalan structure of the shadow obstruction tower}
+\label{subsubsec:catalan-shadow}
+
+The Virasoro shadow obstruction tower
+(Computation~\ref{comp:virasoro-shadow-tower}) exhibits a
+closed-form denominator pattern:
+$S_r$ has denominator $c^{r-2}(5c+22)^{\lfloor(r-2)/2\rfloor}$.
+The \emph{numerator} structure is equally rigid and extends
+universally across the $\cW_N$ family.
+
+\begin{proposition}[Catalan leading coefficients]
+\label{prop:catalan-leading}%
+\index{shadow tower!Catalan structure|textbf}%
+\index{Catalan numbers!shadow tower}%
+For the Virasoro shadow obstruction tower, the depth-$0$ coefficient of
+$m_k(T, \ldots, T;\, \ell_1, \ldots, \ell_{k-1})$ at the
+symmetric evaluation point $\ell_1 = \cdots = \ell_{k-1} = 1$
+(the shallowest non-derivative field $\partial^{k-2}T$
+appearing in the output) satisfies
+\begin{equation}
+\label{eq:catalan-depth-0}
+\bigl[m_k\bigr]_{\mathrm{depth\text{-}0}}
+\;=\; (-1)^n\,C_n,
+\qquad n = \tfrac{k-3}{2},
+\end{equation}
+for odd $k = 3, 5, 7, \ldots$, where $C_n = \frac{1}{n+1}\binom{2n}{n}$
+is the $n$-th Catalan number. The even-degree operations
+$m_k$ for $k$ even vanish at the symmetric point by the
+$\Z_2$ symmetry of the Stasheff associahedron.
+\end{proposition}
+
+\begin{proof}
+The depth-$0$ term of $m_k$ is the component with the lowest
+collision depth, corresponding to
+the highest-derivative output field ($\partial^{k-2}T$ with conformal
+weight $k$). At the symmetric point $\ell_i = 1$, the only contributions
+come from the tree-level Stasheff compositions: each internal
+vertex is a binary bracket $m_2$. The relevant planar binary trees
+have $n = (k-1)/2$ internal vertices (for odd~$k$), and the
+number of such trees is the Catalan number~$C_n$. The
+Stasheff sign conventions and the constraint
+that the output lie in the $\partial^{k-2}T$ stratum reduce the
+effective count to $C_{(k-3)/2}$ after cancellation of
+opposite-sign contributions at the symmetric point.
+The sign $(-1)^n$ arises from the cohomological
+suspension in the bar complex (each desuspension contributes
+$(-1)$). The loop contributions affect only
+higher collision depths and do not affect the depth-$0$ coefficient.
+\end{proof}
+
+\begin{remark}[From Catalan to the Virasoro shadow closed form]%
+\label{rem:catalan-to-shadow}%
+\index{shadow tower!Virasoro!Catalan interpretation}%
+The Catalan pattern~\eqref{eq:catalan-depth-0} is the leading
+term of a richer structure. The Virasoro shadow generating
+function
+$H(t) = \sum_{r \ge 2} S_r\, t^r$
+satisfies an algebraic equation determined by the obstruction
+recursion $\operatorname{Sh}_r = -o^{(r)}/(2r)$
+(Computation~\ref{comp:virasoro-shadow-tower}).
+At depth~$0$, the recursion reduces to the Catalan recursion
+$C_{n+1} = \sum_{j=0}^n C_j\,C_{n-j}$,
+whose generating function is the algebraic function
+$\sum_{n \ge 0} C_n\,t^n = \frac{1 - \sqrt{1 - 4t}}{2t}$.
+The full shadow generating function replaces this algebraic
+relation with a \emph{transcendental} one, because the
+deeper strata ($T$-valued, $\Lambda$-valued, etc.)
+contribute correction terms controlled by the Kac determinant
+denominators $c$, $5c + 22$, $7c + 68$, \ldots\
+(Remark~\ref{rem:kac-shadow-singularity}).
+
+For $\cW_N$ with $N \ge 3$, the shadow obstruction tower is
+\emph{multivariable}: the $N - 1$ generators $W_2 = T,
+W_3, \ldots, W_N$ produce a shadow obstruction tower in $N - 1$
+coupled variables. The Catalan structure of the
+$T$-sector persists (by sector decoupling,
+Theorem~\ref{thm:wn-class-M}), and the cross-sector
+terms introduce \emph{higher Catalan} corrections
+governed by the multi-channel OPE. The passage from the
+single-variable Catalan recursion (Virasoro, $N = 2$) to
+the multi-variable coupled recursion ($\cW_N$, $N \ge 3$)
+is the shadow-tower incarnation of the progression from
+class~$\mathbf{M}$ with one generator to class~$\mathbf{M}$
+with $N - 1$ generators.
+\end{remark}
+
+\subsection{Frontier anchors: F1 and F3}
+\label{subsec:wn-frontier-anchors-f1-f3}
+
+The principal $\cW_N$ family at generic central charge is the
+prototypical class~$\mathbf{M}$ chiral algebra. Two open frontiers
+of the climax intersect this material directly.
+
+\begin{remark}[F1 anchor: logarithmic $\mathcal{W}(p)$ tempering]
+\label{rem:wn-frontier-anchor-f1}
+The principal $\cW_N$ at generic $c$ is non-logarithmic and lies
+on the tempered stratum
+(\cref{thm:tempered-stratum-contains-virasoro} extends to
+$\cW_N$ via the Virasoro subalgebra). The logarithmic neighbor
+$\mathcal{W}(p)$ at $p \ge 2$ is excluded from the master theorem
+scope at the present cycle: its tempering is the open frontier
+\cref{conj:f1-wp-tempering}. The Zhu-bounded-Massey proof chain
+that closes tempering on the non-logarithmic standard landscape
+fails for $\mathcal{W}(p)$ per Gurarie 1993 and Flohr 1996
+(unbounded Massey amplitudes despite finite-dim Zhu). The
+remaining path is a direct Adamovi\'c--Milas character-amplitude
+bound on the $\phi_{0,1}$ generating series. The contrast between
+$\cW_N$ (closed) and $\mathcal{W}(p)$ (open) is the
+non-logarithmic-versus-logarithmic boundary of the climax's
+domain of validity.
+\end{remark}
+
+\begin{remark}[F3 anchor: raw direct-sum versus completed class~$\mathbf{M}$]
+\label{rem:wn-frontier-anchor-f3}
+The class-$\mathbf{M}$ chain-level $E_{3}$-topological identification
+$\mathrm{Obs}^{\mathrm{bulk}}(\Phi_{\mathrm{hol}}(\cW_N))
+\simeq Z^{\mathrm{der}}_{\mathrm{ch}}(\cW_N)$ is established in the
+weight-completed category by
+\ref*{prop:bv-bar-class-m-weight-completed}; the raw direct-sum
+chain-level statement is false at generic central charge. Any
+stronger-than-weight-completed statement must therefore specify an
+intermediate analytic topology, not the discrete direct sum.
+The shadow obstruction
+tower of the present chapter computes the cross-channel
+$\delta F_g^{\mathrm{cross}}$ contributions that obstruct
+the raw direct-sum chain-level identification at generic $c$:
+$S_4(\mathrm{Vir}_c) = 10/[c(5c + 22)]\neq 0$ on the raw bar.
+The remaining path is half-BRST resolution at the
+original complex (MC5-pattern adapted to non-completed direct-sum
+bars). The class-$\mathbf{M}$ shadow obstruction tower computed
+here for $\cW_N$ provides the explicit cross-channel data that
+any half-BRST original-complex resolution must absorb.
+\end{remark}

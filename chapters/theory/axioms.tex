@@ -1,0 +1,1966 @@
+\section{Concrete axioms for $A_\infty$ chiral algebras}
+\label{sec:axioms-Ainfty-chiral}
+
+An $\Ainf$ chiral algebra over $C_\ast(W(\SCchtop))$ is operadically
+defined but lacks a finite list of structure maps: the Stasheff
+relations sit inside the Boardman--Vogt resolution rather than as
+identities among named operations. A coordinate presentation by
+multilinear operations $\{m_k\}$ with relations as polynomial
+identities in $\lambda$-brackets, verifiable case by case
+(Virasoro, affine Kac--Moody, $\beta\gamma$), is what a vertex
+algebraist computes.
+
+The axiomatic list is equivalent to the operadic one.
+Sesquilinearity encodes holomorphic translation covariance; the
+Stasheff identities are Stokes' theorem on the Fulton--MacPherson
+compactification $\FM_k(\C)$; the planar ordering convention
+records the $E_1$ colour on~$\R$.
+Theorem~\ref{thm:rectification} and
+Proposition~\ref{prop:operad-implies-axioms} give the coordinate
+expression of the operad.
+
+\subsection{Underlying data and parameters}
+\label{subsec:underlying-data}
+
+The minimal data presenting an $\Ainf$ chiral algebra concretely is:
+a cochain complex $(A, Q)$, a holomorphic translation operator
+$\partial$, a vacuum unit $\mathbf{1}$, and a collection $\{m_k\}$ of
+multilinear operations valued in iterated Laurent series in spectral
+parameters~$\lambda_i$. Sesquilinearity, $A_\infty$ relations, and
+unitality follow in the subsequent subsections; the present
+subsection fixes only the underlying data.
+
+\begin{definition}[$A_\infty$ chiral algebra]
+\label{def:ainfty_chiral}
+Fix a ground field $k$ of characteristic $0$. Let $(A,Q)$ be a cochain complex (cohomological grading), with $Q$ of degree $+1$.
+Choose a closed vacuum unit $\mathbf 1\in A^0$ and put
+$\bar A:=A/k\cdot\mathbf 1$. The first object is the coaugmented
+chiral tensor coalgebra and its coaugmentation coideal
+\[
+\mathrm B^{\mathrm{ch}}(A):=T^c(s^{-1}\bar A)
+=\bigoplus_{n\ge0}(s^{-1}\bar A)^{\otimes n},
+\qquad
+\barBch(A):=\overline{\mathrm B}^{\mathrm{ch}}(A)
+=\bigoplus_{n\ge1}(s^{-1}\bar A)^{\otimes n}.
+\]
+The $n=0$ summand is $k$, and all coderivations below preserve
+$\barBch(A)$. We equip $A$ with:
+\begin{itemize}
+ \item a degree $0$ endomorphism $\partial\colon A\to A$ (holomorphic translation) with $[Q,\partial]=0$,
+ \item the chosen unit satisfying $Q\mathbf 1=0$ and $\partial \mathbf 1=0$,
+ \item multilinear operations (for $k\ge 1$)
+ \begin{equation}
+ \label{eq:mk-type}
+ m_k \colon A^{\otimes k}\longrightarrow A((\lambda_1))\cdots((\lambda_{k-1})),
+ \qquad \deg m_k = 2-k,
+ \end{equation}
+ where $A((\lambda))$ denotes the space of formal Laurent series in $\lambda$ with coefficients in $A$, and $A((\lambda_1))\cdots((\lambda_{k-1}))$ is the iterated Laurent series ring.\footnote{Work in the completed topology so that infinite sums are allowed.}
+\end{itemize}
+We regard $\lambda_1,\dots,\lambda_{k-1}$ as spectral parameters associated to the \emph{differences} of the holomorphic coordinates of inputs $1,\dots,k-1$ relative to the $k$-th input (the ``rightmost'' slot).
+The unary operation is $m_1=Q$. For a homogeneous input $a_i$, put
+$\bar a_i:=|a_i|-1=|s^{-1}a_i|$. The operations above are the
+cogenerator projections of a degree-$1$ coderivation $D_A$ of
+$\mathrm B^{\mathrm{ch}}(A)$:
+\[
+\pi D_A\bigl[s^{-1}a_1|\cdots|s^{-1}a_k\bigr]
+=s^{-1}m_k(a_1,\ldots,a_k),
+\qquad
+\pi\colon\barBch(A)\to s^{-1}\bar A .
+\]
+On a homogeneous bar word,
+\begin{multline}
+\label{eq:axioms-ainfty-coderivation}
+D_A\bigl[s^{-1}a_1|\cdots|s^{-1}a_n\bigr] \\
+=
+\sum_{\substack{k\ge1\\1\le i\le n-k+1}}
+(-1)^{\epsilon(i,k)}
+\bigl[s^{-1}a_1|\cdots|
+s^{-1}m_k(a_i,\ldots,a_{i+k-1})|\cdots|s^{-1}a_n\bigr],
+\qquad
+\epsilon(i,k)=\sum_{r<i}\bar a_r .
+\end{multline}
+The deconcatenation coproduct obeys
+$\Delta D_A=(D_A\otimes\id+\id\otimes D_A)\Delta$ on
+$\mathrm B^{\mathrm{ch}}(A)$. The single equation
+$D_A^2=0$, expanded below with the same suspension convention, is
+the $\Ainf$ chiral relation.
+The axioms imposed on this data are stated in Definition~\ref{def:sesquilinearity}--\ref{def:symmetry-grading} below.
+\end{definition}
+
+\begin{remark}[Categorical origin of the $A_\infty$ chiral algebra]
+\label{rem:categorical-origin}
+The $A_\infty$ chiral algebra $A$ above is the endomorphism algebra $A_b = \RHom_{\cC(J)}(b,b)$ of a vacuum object $b$ in the open-sector factorization category $\cC(J)$ attached to a bulk chiral algebra $J$ (Definition~\ref{def:oc-factorization-category}). The multilinear operations $m_k$ arise from restricting the factorization functors of $\cC(J)$ to iterated self-$\Hom$'s of~$b$ (Theorem~\ref{thm:boundary-algebra-from-vacuum}). The complete invariant of the open sector is the Morita class of~$\cC(J)$, not the quasi-isomorphism class of~$A_b$: distinct compact generators $b, b'$ produce Morita-equivalent algebras $A_b \sim_M A_{b'}$ with equivalent module categories.
+\end{remark}
+
+\begin{remark}[Five primitive objects]
+\label{rem:five-primitive-objects-axioms}
+The boundary chart $A=A_b$ is one member of the primitive package.
+The coaugmented chiral bar coalgebra
+$\mathrm B^{\mathrm{ch}}(A)=k\oplus\barBch(A)$ resolves twisting
+morphisms out of~$A$, with reduced coideal
+$\barBch(A)=\bigoplus_{n\ge1}(s^{-1}\bar A)^{\otimes n}$ carrying the
+bar codifferential. The linear Koszul dual $A^!$ is the cobar algebra built
+from the dual cooperadic data; it differs from $\barB^{\mathrm{ch}}(A)$
+and from the coaugmentation coideal $A^i$. The derived chiral centre
+$\cZ^{\mathrm{der}}_{\mathrm{ch}}(A)$ is the Hochschild object
+controlling bulk observables acting on the boundary. The operad
+$\SCchtop$ is none of these: it is the two-coloured governing
+operad whose open colour acts on~$A$ and whose closed colour acts
+on $\cZ^{\mathrm{der}}_{\mathrm{ch}}(A)$.
+\end{remark}
+
+Definition~\ref{def:ainfty_chiral} is the zero-curvature case: $A$
+sits over a point. Families over a nontrivial base $S$ (genus-$g$
+moduli $\overline{\cM}_g$, level space, coupling parameter)
+generically carry an obstruction to $m_1^2 = 0$, detected by a
+degree-$2$ section of $\cO_S$; the natural enlargement absorbs the
+obstruction as a curvature element $m_0$ of the $A_\infty$
+structure.
+
+\begin{definition}[Curved $A_\infty$ chiral algebra]
+\label{def:curved-ainfty-chiral}
+A \emph{curved $A_\infty$ chiral algebra} over a base $S$ (e.g., $S = \overline{\cM}_g$ for genus-$g$ modular theory) is the data of Definition~\ref{def:ainfty_chiral} together with:
+\begin{itemize}
+\item a \emph{curvature element} $m_0 \in \Gamma(S, \cO_S)$ of cohomological degree~$2$ (a section of the structure sheaf of the base, with no algebra inputs),
+\end{itemize}
+subject to the \emph{curved $A_\infty$ relations}: for each $n \geq 0$,
+\[
+\sum_{\substack{i+j = n+1 \\ i,j \geq 0}} \sum_{s=0}^{n-j} (-1)^{\epsilon(s,j)}\, m_i\bigl(\ldots, m_j(\ldots), \ldots\bigr) \;=\; 0,
+\]
+where the $j=0$ terms contribute $m_0$ insertions. The first three cases are:
+\begin{itemize}
+\item \textbf{At $n=0$:}\; $m_1(m_0) = 0$. The curvature element $m_0$ is closed under the differential~$m_1$.
+\item \textbf{At $n=1$:}\; $m_1^2(x) = m_2(m_0, x) - m_2(x, m_0) = [m_0, x]_{m_2}$. The differential does not square to zero; rather, it squares to the commutator with the curvature (the graded commutator reduces to the ordinary commutator because $|m_0| = 2$ is even).
+\item \textbf{At $n=2$:}\; $m_1(m_2(x,y)) + m_2(m_1(x),y) + (-1)^{|x|}\,m_2(x,m_1(y)) + m_3(m_0,x,y) \pm m_3(x,m_0,y) \pm m_3(x,y,m_0) = 0$. The binary product is $m_1$-linear up to homotopies controlled by $m_3$ and curvature insertions (setting $m_0=0$, this is the graded Leibniz rule: $m_1$ is a derivation of~$m_2$).
+\end{itemize}
+When $m_0 = \kappaChHodge(\cA) \cdot \omega_g$ for a scalar $\kappa$ and a base class $\omega_g$, the $n=1$ relation reads $d_{\barB}^2 = \kappa \cdot \omega_g$ (Volume~I, Theorem~D): the bar differential squares to the curvature obstruction, and this identity is the non-formality at genus $g \geq 1$. Setting $m_0 = 0$ recovers Definition~\ref{def:ainfty_chiral}.
+\end{definition}
+
+\begin{notation}[Spectral convention]
+\label{not:spectral}
+For $n\ge1$ and ordered inputs $a_1,\dots,a_n$, we always write $m_n(a_1,\dots,a_n)$ as a formal Laurent series in $(\lambda_1,\dots,\lambda_{n-1})$ following the convention above. If $I=[p+1,\dots,p+r]$ is a consecutive block, we denote
+\[
+\Lambda_I\;:=\;\lambda_{p+1}+\cdots+\lambda_{p+r-1},
+\]
+and for any index $j>p+r-1$ we define $\lambda^{(I)}_j:=\lambda_j$ (unchanged), whereas the \emph{effective parameter} for the collapsed block $I$ is $\Lambda_I$.
+\end{notation}
+
+\begin{remark}[Operadic formulation]
+\label{rem:operadic-formulation}
+\index{chiral endomorphism operad!operadic formulation}
+The data of Definition~\ref{def:ainfty_chiral} admits an operadic
+reformulation. The \emph{chiral endomorphism operad}
+$\cE\!nd^{\mathrm{ch}}_A$ is the nonsymmetric operad with components
+\[
+\cE\!nd^{\mathrm{ch}}_A(n)
+:=
+\Hom\bigl(A^{\otimes n},\,
+A((\lambda_1))\cdots((\lambda_{n-1}))\bigr),
+\]
+and partial compositions $f \circ_i g$ defined by operadic insertion
+with the block-substitution rule of Notation~\ref{not:spectral}:
+the variable $\lambda_i$ in $f$ is replaced by the block sum
+$\Lambda_I = \lambda_i + \cdots + \lambda_{i+m-2}$, and the
+variables of $g$ are inserted consecutively.
+Associativity of the composition follows from associativity of
+consecutive block-substitution. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item An $A_\infty$ chiral algebra structure on $A$ is a degree-$+1$
+ element $m = \sum_{k \ge 1} m_k \in \prod_{k \ge 1}
+ \cE\!nd^{\mathrm{ch}}_A(k)$ satisfying $[m, m] = 0$, where
+ the bracket is the Gerstenhaber bracket
+ $[f,g] = f\{g\} - (-1)^{(|f|-1)(|g|-1)} g\{f\}$
+ induced by operadic insertion.
+\item The chiral Hochschild cochain complex
+ $\mathrm{C}^\bullet_{\mathrm{ch}}(A, A)
+ = \prod_{n \ge 0} \cE\!nd^{\mathrm{ch}}_A(n+1)[-n]$
+ with differential $\delta = [m, -]$ is a brace dg algebra
+ \textup{(}Volume~I, Theorem~\textup{\ref*{V1-thm:thqg-brace-dg-algebra}}\textup{)}.
+\item The cohomology
+ $\cZ^{\mathrm{der}}_{\mathrm{ch}}(A)
+ := H^*(\mathrm{C}^\bullet_{\mathrm{ch}}(A, A), \delta)$
+ is the \emph{chiral derived center} and carries a Gerstenhaber algebra
+ structure. It is the universal bulk of the holomorphic-topological
+ theory with boundary~$A$
+ \textup{(}Volume~I, Theorem~\textup{\ref*{V1-thm:thqg-swiss-cheese}}\textup{)}.
+\end{enumerate}
+The reformulation aligns the axiomatic definition with the operadic
+machinery of Volume~I, the open/closed factorization construction
+of Part~\ref{part:swiss-cheese}.
+\end{remark}
+
+\begin{remark}[Bar--coderivation isomorphism and the
+$\SCchtop$ colour assignment]
+\label{rem:bar-coder-SCchtop-colour-assignment}
+\index{chiral Hochschild!bar-coderivation isomorphism|textbf}%
+\index{SCchtop@$\SCchtop$ colour assignment!closed = brace, open = $A$}%
+The chiral Hochschild cochain complex of
+\textup{Remark~\ref{rem:operadic-formulation}\,(ii)} carries an
+equivalent presentation via coderivations of the bar coalgebra:
+\begin{equation}\label{eq:bar-coder-iso}
+ \mathrm{C}^{\bullet}_{\mathrm{ch}}(A, A)
+ \;\simeq\;
+ \mathrm{Coder}_0\bigl(\mathrm B^{\mathrm{ch}}(A)\bigr)
+ \;\simeq\;
+ \mathrm{Coder}\bigl(\barBch(A)\bigr),
+ \qquad
+ d_{\mathrm{Hoch}} \;=\; [D_A,\, -\,],
+\end{equation}
+where $\mathrm B^{\mathrm{ch}}(A)=k\oplus\barBch(A)$,
+\(\barBch(A)=T_{c}(s^{-1}\bar A)\), and
+\(D_A=\sum_{r\ge1}D_{m_r}\) is the degree-\(1\) structure
+coderivation of the
+$E_{1}$-chiral bar coalgebra of
+\cref{thm:typed-boundary-holographic-realisation}\,(i), and
+\(\mathrm{Coder}_0\) denotes coaugmentation-preserving coderivations.
+The equivalence is the universal property of the cofree conilpotent tensor coalgebra:
+a coderivation of $T_{c}(V)$ is uniquely determined by its corestriction
+to $V$, which is a degree-$+1$ map $V \to V^{\otimes \le k}$ for each
+$k$, i.e.\ an element of
+$\prod_{n \ge 0} \cE\!nd^{\mathrm{ch}}_{A}(n + 1)[-n]$.
+
+In the $\SCchtop$ operadic language, the chiral Deligne action of
+\(\Coder_0(\mathrm B^{\mathrm{ch}}(A))\) on \(A\) is the two-colour assignment
+\begin{description}
+\item[\textup{closed colour}] \(\Coder_0(\mathrm B^{\mathrm{ch}}(A)) \simeq
+\Zderch{A}\) acts by chiral braces, the closed colour of $\SCchtop$
+(\cref{thm:chiral-higher-deligne}\,(1)--(2));
+\item[\textup{open colour}] $A$ acts by its native $E_{1}$-chiral
+product $m_{2}$, the open colour of $\SCchtop$
+(\cref{def:e1-chiral-algebra}).
+\end{description}
+The mixed (open/closed) operations of $\SCchtop$ are the chiral
+brace insertions \(\nu^{(m)}_{k} \colon
+\Coder_0(\mathrm B^{\mathrm{ch}}(A))^{\otimes k} \otimes A^{\otimes m} \to A\)
+of the proof of \cref{thm:chiral-higher-deligne}\,(2).  The precise
+chiral $A_{\infty}$-Deligne theorem --- the assembly of these data
+into a coherent $\SCchtop$-algebra structure --- is
+\cref{thm:chd-ds-hochschild} on the chirally Koszul locus, with the
+extra two-colour cobar contracting homotopy of
+\cref{rem:chd-universality-hypotheses}.
+\end{remark}
+
+Definition~\ref{def:ainfty_chiral} is the coordinate expression (in spectral parameters $\lambda_i$) of a single global object on the curve~$X$: an algebra structure depending on the ordered positions of the inputs and holomorphic in their separations. The global object is named next.
+
+\begin{definition}[$\Eone$-chiral algebra]
+\label{def:e1-chiral-algebra}
+An \emph{$\Eone$-chiral algebra} on a smooth curve $X$ is an
+$\Eone$-algebra object in the symmetric monoidal dg category of
+$\cD$-modules on~$X$, equipped with chiral operations. Concretely, it is a chiral algebra $\cA$ on~$X$
+equipped with $\Ainf$ operations
+\[
+m_k \colon \cA^{\otimes k} \longrightarrow \cA,
+\qquad k \ge 1,
+\]
+whose structure constants depend on \emph{ordered} configurations,
+with the $\Ainf$ relations (Stasheff associahedra) holding on the
+Fulton--MacPherson compactifications $\FM_k(\C)$. The operations
+$m_k$ encode the OPE poles after $d\!\log$ extraction: an OPE pole
+of order~$p$ contributes to~$m_p$.
+
+This is the open colour of $\SCchtop$: the chiral factor
+$\FM_k(\C)$ governs holomorphic collisions, and the $\Eone$ factor
+$\Eone(m)$ records the topological ordering along~$\R$.
+Definition~\ref{def:ainfty_chiral} is the coordinate expression of
+this structure in spectral parameters.
+\end{definition}
+
+\begin{definition}[$\Eone$-topological algebra]
+\label{def:e1-topological-algebra}
+An \emph{$\Eone$-topological algebra} (equivalently, an
+$\Ainf$-algebra in the classical sense) is an associative algebra up
+to coherent homotopy, with no holomorphic or complex-structure
+dependence. The $\Eone$ operad is modeled by ordered configurations
+of intervals on~$\R$: the operation space $\Eone(k)$ is the space of
+$k$~ordered disjoint subintervals of a standard interval, and the
+$\Ainf$ relations arise from the cellular decomposition of the
+Stasheff associahedra $K_n$.
+
+This is the topological factor of $\SCchtop$: restricting the
+two-colored operad $\SCchtop$ to operations involving only the open
+colour $\mathsf{top}$, and forgetting the $\FM_k(\C)$ factor, yields
+the $\Eone$ operad governing $\Eone$-topological algebras.
+\end{definition}
+
+\begin{remark}[$\Eone$-chiral vs.\ $\Eone$-topological]
+\label{rem:e1-chiral-vs-topological}
+The distinction is the dependence on the complex structure of~$X$.
+An $\Eone$-chiral algebra depends on the complex structure: the OPE
+poles are holomorphic data, and the operations $m_k$ are Laurent
+polynomials in spectral parameters $\lambda_i$ encoding holomorphic
+separations. An $\Eone$-topological algebra carries no such
+dependence: its operations are abstract multilinear maps satisfying
+the Stasheff relations without spectral parameters.
+
+An $\Eone$-chiral algebra restricted to the topological direction
+(forgetting the holomorphic $\FM_k(\C)$ factor, retaining only the
+$\Eone(m)$ ordering) yields an $\Eone$-topological algebra. Operadically,
+this is the forgetful functor
+$\mathrm{Alg}_{\SCchtop} \to \mathrm{Alg}_{\Eone}$ discarding the
+chiral colour.
+
+A conformal vector (Virasoro element) is not part of the $\Eone$
+level: neither the $\Eone$-chiral nor the $\Eone$-topological
+structure carries one. The Virasoro action arises with
+$\Eone$-chiral structure compatible with conformal symmetry, i.e.\
+when $\cA$ is a vertex algebra with a conformal vector.
+\end{remark}
+
+The $\Eone$-chiral notion sits one step below the
+$\Einf$-chiral factorization algebra, its symmetric-descent sibling.
+Pole content is compatible with either structure, so the
+discriminant is locality: a nonzero monodromy class on the ordered
+configuration space obstructing $\Sigma_n$-descent.
+
+\begin{proposition}[$\Eone$-chiral vs.\ $\Einf$-chiral: the locality obstruction]
+\label{prop:e1-chiral-vs-e-infty-chiral-obstruction}
+\leavevmode
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Definitional dichotomy.} An $\Einf$-chiral algebra on~$X$
+is a factorization algebra on $\Ran(X)$ whose $n$-ary operations are
+$\Sigma_n$-equivariant sections over the \emph{unordered} configuration
+space $\Conf_n(X) = (X^n \setminus \Delta)/\Sigma_n$; an
+$\Eone$-chiral algebra is a factorization algebra on the
+\emph{ordered-stratified} Ran space $\Ran(X)^{\mathrm{ord}}$, whose
+$n$-ary operations live on the ordered configuration space
+$\Conf_n^{\mathrm{ord}}(X) = X^n \setminus \Delta$ and are
+\emph{not} required to descend to the $\Sigma_n$-quotient. Poles of
+the OPE are compatible with either structure; the discriminant is
+\emph{locality} (symmetric descent), not pole content.
+\item \emph{Operadic analogy.} $\Einf$-chiral is to $\Eone$-chiral as
+commutative is to associative: an $\Einf$-chiral algebra is a
+commutative algebra object in the factorization ambient
+$\Fact(X)$; an $\Eone$-chiral algebra is an associative algebra
+object in the ordered factorization ambient
+$\Fact^{\mathrm{ord}}(X)$. The inclusion
+$\Fact(X) \hookrightarrow \Fact^{\mathrm{ord}}(X)$ is the chiralisation
+of the inclusion of commutative algebras into associative algebras.
+\item \emph{Obstruction to promotion.} The Yangian $\Yhbar(\fg)$ with
+universal $R$-matrix $R(z_1 - z_2)$ is an $\Eone$-chiral algebra that
+does \emph{not} admit any $\Einf$-chiral completion. Concretely, the
+two evaluation products obtained by composing along
+$(z_1, z_2) \mapsto z_1 \to z_2$ and $(z_1, z_2) \mapsto z_2 \to z_1$
+differ by the $R$-matrix twist:
+\[
+\mu(z_1, z_2) = R(z_1 - z_2) \cdot \tau \cdot \mu(z_2, z_1),
+\]
+and $R(z_1 - z_2) \ne R(z_2 - z_1)$ generically
+(quasi-triangularity is \emph{asymmetric}, not $\Sigma_2$-equivariant).
+Hence no $\Sigma_2$-equivariant lift to operations on
+$\Conf_2(X)$ exists: the $\Sigma_2$-coinvariant of the ordered
+operation $\mu(z_1, z_2)$ is not well-defined as a factorization
+datum on the unordered stratum.
+\item \emph{Factorization-algebra functor.} The functor
+\[
+\Phi_X : \Yhbar(\fg)\text{-}\mathrm{mod} \longrightarrow
+\Fact^{\mathrm{ord}}(X)
+\]
+sending the Yangian to its associated $\Eone$-chiral factorization
+algebra on the ordered Ran space \emph{exists}
+\textup{(}Francis--Gaitsgory \cite{FG12}, IV.5, in the ordered
+variant\textup{)}. The analogous functor to $\Fact(X)$ with
+values in $\Einf$-chiral factorization algebras does \emph{not}
+exist: the obstruction (iii) is detected by the non-vanishing of the
+elementary-transposition monodromy of the local system $\cL_R$ of
+Theorem~A$^{\infty,2}$, and equivalently by the fact that the
+$R$-twisted $\Sigma_n$-descent of the ordered bar
+$B^{\mathrm{ord}}(\Yhbar)$ does not degenerate to ordinary
+$\Sigma_n$-coinvariants.
+\item \emph{Contrast with the $\Einf$-chiral landscape.} The
+Heisenberg, affine Kac--Moody, Virasoro, lattice, and $W$-algebra
+families all carry $\Sigma_n$-equivariant operations on
+$\Conf_n(X)$ with OPE poles of any order; their $R$-matrices, when
+recorded, are \emph{derived} from the OPE via
+$R(z) = \exp(r(z) \cdot \hbar + \cdots)$ applied to the symmetric
+collision residue, hence are $\Sigma_2$-symmetric modulo the
+tautological swap $\tau$. $\Einf$ admits pole-bearing realisations;
+the discriminant from $\Eone$-chiral is locality (symmetric descent),
+not pole content.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}[Sharpness of the distinction]
+\label{rem:e1-einf-chiral-sharp}
+Item (iii) of Proposition~\ref{prop:e1-chiral-vs-e-infty-chiral-obstruction}
+is a nonzero cohomology class — the monodromy of $\cL_R$ on
+$\Conf_n^{\mathrm{ord}}(X)$ — not a presentation artifact. Completion,
+localisation, or higher-categorical replacement do not kill a nonzero
+local-system
+monodromy. The identification
+$\Eone\text{-chiral} \leftrightarrow \mathrm{Assoc}$ in
+$\Fact^{\mathrm{ord}}(X)$ vs.\
+$\Einf\text{-chiral} \leftrightarrow \mathrm{Comm}$ in $\Fact(X)$
+is as sharp as the classical distinction between associative and
+commutative algebras.
+\end{remark}
+
+\subsection{Sesquilinearity and unitality axioms}
+\label{subsec:sesqui}
+
+Definition~\ref{def:ainfty_chiral} equips $A$ with a translation
+operator $\partial$ and operations $m_k$ valued in formal Laurent
+series in the spectral parameters $\lambda_i$. The two data are
+coupled by translation equivariance of the chiral distribution
+kernels: applying $\partial$ to an input is the Fourier transform of
+the infinitesimal translation acting on the corresponding collision
+coordinate. In the divided-power $\lambda$-bracket normalisation this
+is multiplication by the relevant spectral variable. The unit is
+transparent to both structures. Sesquilinearity and unitality record
+these compatibilities as identities in $\partial$ and~$\lambda_i$.
+
+\begin{definition}[Sesquilinearity and unitality]
+\label{def:sesquilinearity}
+The $m_k$ satisfy the following sesquilinearity relations (generalizing the vertex-algebra relations) for $k\ge 2$:
+\begin{align}
+\label{eq:sesqui-left}
+m_k(a_1,\dots,\partial a_i,\dots,a_k)
+&= -\,\lambda_i\cdot m_k(a_1,\dots,a_i,\dots,a_k), && 1\le i\le k-1,\\
+\label{eq:sesqui-right}
+m_k(a_1,\dots,a_{k-1},\partial a_k)
+&= \Bigl(\lambda_1+\cdots+\lambda_{k-1}+\partial\Bigr)\, m_k(a_1,\dots,a_k).
+\end{align}
+\noindent
+\emph{Convention.}\; In equations \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} we use the
+\textbf{independent-parameter convention}: $\lambda_i$ is the spectral parameter
+associated to the $i$-th input (the difference $z_i - z_k$ relative to the
+rightmost slot), and each $\lambda_i$ is treated as an independent formal
+variable. In this convention, sesquilinearity reads
+$m_k(\ldots,\partial a_i,\ldots) = -\lambda_i\cdot m_k(\ldots)$ for
+$1\le i\le k-1$. The alternative \emph{consecutive-difference convention}
+used in Lemma~\ref{lem:sesquilinearity_explicit} defines $\lambda_i$ as the
+difference $z_i - z_{i+1}$ between adjacent insertion points.
+The two conventions are related by the change of variables
+\begin{equation}\label{eq:indep-to-consec}
+ \lambda_i^{\mathrm{indep}} = z_i - z_k
+ = \sum_{j=i}^{k-1} (z_j - z_{j+1})
+ = \sum_{j=i}^{k-1} \lambda_j^{\mathrm{consec}},
+ \qquad 1\le i\le k-1.
+\end{equation}
+In the consecutive convention, the sesquilinearity identities
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} become: for
+$1\le i\le k-1$,
+$m_k(\ldots,\partial a_i,\ldots) = -(\lambda_i+\cdots+\lambda_{k-1})
+\cdot m_k(\ldots)$, and for $i=k$,
+$m_k(\ldots,\partial a_k) = (\partial + \sum_{j=1}^{k-1} j\,\lambda_j)
+\,m_k(\ldots)$.
+(The factor $j\,\lambda_j$ arises from the change of variables: $\sum_{i=1}^{k-1}\lambda_i^{\mathrm{indep}} = \sum_{i=1}^{k-1}\sum_{j=i}^{k-1}\lambda_j^{\mathrm{consec}} = \sum_{j=1}^{k-1}\bigl(\sum_{i=1}^{j}1\bigr)\lambda_j^{\mathrm{consec}} = \sum_{j=1}^{k-1}j\,\lambda_j^{\mathrm{consec}}$, where the double sum is reordered by noting that $\lambda_j^{\mathrm{consec}}$ appears for each $i\le j$.)
+See Lemma~\ref{lem:sesquilinearity_explicit} for the complete derivation.
+
+For $k=1$, $m_1=Q$ and sesquilinearity is $[Q,\partial]=0$.
+There is a (strict) unit $\mathbf 1$ such that
+\begin{align}
+\label{eq:unit-axioms}
+m_1(\mathbf 1)&=0,\qquad \partial\mathbf 1=0,\\
+\label{eq:unit-m2}
+m_2(\mathbf 1,a)&=a,\qquad m_2(a,\mathbf 1)=(-1)^{|a|}a,\\
+\label{eq:unit-higher}
+m_k(\ldots,\mathbf 1,\ldots)&=0\quad \text{for all $k\neq 2$, whenever a unit is inserted}.
+\end{align}
+\noindent
+\emph{Sign justification.}\; The sign $(-1)^{|a|}$ in
+$m_2(a,\mathbf{1})=(-1)^{|a|}a$ arises from the bar desuspension: the
+operations $m_k$ are defined as the components of a degree-$+1$
+coderivation on the bar complex $T^c(s^{-1}\bar A)$, and the
+desuspension $s^{-1}$ produces a Koszul sign $(-1)^{|a|}$ when
+passing through the first input. Concretely, the unshifted product
+$\mu_2$ satisfies $\mu_2(a,\mathbf{1}) = a$, and the shifted operation
+$m_2 = s \circ \mu_2 \circ (s^{-1} \otimes s^{-1})$ acquires the
+sign $(-1)^{|a|}$ from the desuspension isomorphism acting on the
+first tensor factor.
+\end{definition}
+
+\subsection{Planar $A_\infty$ relations with spectral substitution}
+\label{subsec:ainfty-relations}
+
+Sesquilinearity and unitality fix the interaction of each $m_k$ with $\partial$ and the unit. Closure of $\{m_k\}$ under composition remains: boundary faces of $\FM_k(\C)$ collide consecutive inputs, and Stokes' theorem forces the boundary residues to cancel. This cancellation is the Stasheff $A_\infty$ identity, upgraded by the requirement that the spectral parameter carried by the collided block is the \emph{sum} of the inner parameters (translation covariance applied to a cluster centre).
+
+\begin{definition}[$A_\infty$ relations with spectral substitution]
+\label{def:ainfty-relations}
+For each $n\ge 1$, the following \emph{planar} $A_\infty$ identity holds (degree $3-n$):
+\begin{multline}
+\label{eq:ainfty-relation-raw}
+\sum_{\substack{i+j=n+1\\ i,j\ge1}}\;\sum_{s=0}^{n-j}
+(-1)^{\epsilon(s,j)}\;
+m_i\!\Bigl(
+a_1,\dots,a_s,\
+m_j(a_{s+1},\dots,a_{s+j}\,;\,\lambda_{s+1},\dots,\lambda_{s+j-1})
+\ \Big|\\
+\Lambda_{[s+1,\dots,s+j]}
+,\ a_{s+j+1},\dots,a_n;\ \bm\lambda^{\mathrm{out}} \Bigr)
+\;=\;0.
+\end{multline}
+Here:
+\begin{itemize}
+ \item The sign $(-1)^{\epsilon(s,j)}$ is the Koszul sign for $A_\infty$ algebras in cohomological grading. The explicit formula is
+ \[
+ \epsilon(s,j) \;=\; |a_1|+\cdots+|a_s|,
+ \]
+ i.e., the parity of the total degree of the elements that the inner operation $m_j$ passes.%
+ \footnote{Equation~\eqref{eq:axioms-ainfty-coderivation} is the
+ suspended bar convention: the coderivation sign is
+ $\sum_{r<i}(|a_r|-1)$. The expanded identity
+ \eqref{eq:ainfty-relation-raw} is its desuspended coordinate form.
+ The desuspension isomorphism transfers the suspended coderivation
+ equation $D_A^2=0$ into the displayed Stasheff identity, with the
+ signs absorbed into the coordinate operations $m_k$.
+ In particular, for $j=1$: $\epsilon(s,1)=|a_1|+\cdots+|a_s|$,
+ so $Q=m_1$ is a graded derivation of every~$m_k$.}
+ \item The notation $m_i(-\mid \Lambda_{[s+1,\dots,s+j]},-;\bm\lambda^{\mathrm{out}})$ means:
+ the $j$ consecutive inputs $a_{s+1},\dots,a_{s+j}$ are first composed by $m_j$ with the internal spectral variables $(\lambda_{s+1},\dots,\lambda_{s+j-1})$ (relative to the $a_{s+j}$ slot), resulting in one effective input placed at position $s+1$ of the outer $m_i$ with \emph{effective spectral parameter} $\Lambda_{[s+1,\dots,s+j]}$. The other outer spectral variables are given by
+ \[
+ \bm\lambda^{\mathrm{out}} = \bigl(\lambda_1,\dots,\lambda_s,\ \Lambda_{[s+1,\dots,s+j]},\ \lambda_{s+j+1},\dots,\lambda_{n-1}\bigr),
+ \]
+ i.e.\ the inner block is replaced by its sum of parameters, while the rest is unchanged.
+\end{itemize}
+\begin{remark}[Spectral substitution principle]
+\label{rmk:spectral-substitution}
+Equation \eqref{eq:ainfty-relation-raw} encodes that \emph{when a block of inputs is fused first}, the correct spectral parameter inserted in the outer operation is the \emph{sum} of the inner $\lambda$'s, reflecting translation covariance and the convention that all $\lambda_i$ are differences relative to the last slot, the algebraic avatar of momentum conservation for formal distributions.
+\end{remark}
+\end{definition}
+
+\subsection{Symmetry, grading, and parity}
+\label{subsec:symmetry}
+
+The $A_\infty$ chiral algebra is a \emph{planar} (non-commutative) structure: inputs are ordered by the topological direction~$\R_t$; no symmetry under input permutation is imposed. The passage to commutative structures (PVA on cohomology, symmetric bar complex) goes through the exchange cylinder of~\S\ref{sec:PVA_descent}: in the configuration space of two points in the three-dimensional bulk $\C\times\R$, the two line orderings are joined by a path, while the holomorphic projection supplies the half-monodromy around the collision divisor.
+
+\begin{definition}[Symmetry and grading conventions]
+\label{def:symmetry-grading}
+No symmetry beyond the planar order is imposed on the $m_k$ (standard for $A_\infty$ structures). The Koszul rule governs signs in all axioms above; the grading convention is cohomological.
+\end{definition}
+
+\subsection{Regular/singular decomposition of $m_2$}
+\label{subsec:reg-sing}
+\label{def:Laurent-projection}
+
+The binary operation~$m_2$ is a formal Laurent series in one spectral
+parameter~$\lambda$. The regular part (power series in $\lambda$)
+descends to a commutative associative product on cohomology; the
+singular part (negative powers of $\lambda$) descends to a
+$(-1)$-shifted Lie bracket, the $\lambda$-bracket of the PVA
+(Theorem~\ref{thm:cohomology_PVA}).
+
+For $m_2(a,b)\in A((\lambda))$,
+\[
+m_2(a,b) = m_2^{\mathrm{reg}}(a,b)\;+\;m_2^{\mathrm{sing}}(a,b),
+\]
+with $m_2^{\mathrm{reg}}(a,b)\in A[\![\lambda]\!]$ and $m_2^{\mathrm{sing}}(a,b)\in \lambda^{-1}A[\![\lambda^{-1}]\!]$.
+
+\subsection{Consequences: product and bracket on cohomology}
+\label{subsec:product-bracket}
+\label{def:product}
+\label{def:lambda-bracket}
+
+The regular and singular parts of $m_2$ carry distinct algebraic
+content: the regular part descends to a graded-commutative
+associative product on cohomology; the singular part descends to a
+$(-1)$-shifted Lie bracket, the $\lambda$-bracket of vertex-algebra
+theory. The two descents are verified in
+Theorem~\textup{\ref{thm:cohomology_PVA}}.
+
+For $[a],[b]\in H^\bullet(A,Q)$:
+\begin{align}
+\label{eq:prod-def}
+[a]\cdot[b] &:= \Bigl[\, \frac12\bigl(m_2^{\mathrm{reg}}(a,b) + (-1)^{|a||b|}m_2^{\mathrm{reg}}(b,a)\bigr)\,\Bigr],\\
+\label{eq:bracket-def}
+\{[a]{}_\lambda [b]\} &:= \Bigl[\, \frac12\bigl(m_2^{\mathrm{sing}}(a,b) - (-1)^{|a||b|}\; \mathrm{e}^{-(2\lambda+\partial)\partial_\lambda}\,m_2^{\mathrm{sing}}(b,a)\bigr)\,\Bigr].
+\end{align}
+The exponential operator encodes the transformation $\lambda\mapsto -\lambda-\partial$ enforced by vertex skewsymmetry. (Action on formal series: $\mathrm{e}^{\alpha\partial_\lambda}f(\lambda)=f(\lambda+\alpha)$.)
+
+\smallskip\noindent
+\emph{The exponential operator.}\;
+$\mathrm{e}^{\alpha\partial_\lambda}$ acts on $f(\lambda)$ by
+$f(\lambda+\alpha)$. Setting $\alpha = -(2\lambda+\partial)$ gives
+$f(\lambda) \mapsto f(-\lambda-\partial)$, the vertex-algebra
+skew-symmetry substitution. The visible exchange sign is the
+ordinary Koszul sign $(-1)^{|a||b|}$; shifted signs enter the
+Jacobi and Leibniz identities through the bar desuspension.
+
+\smallskip\noindent
+\emph{Symmetrisation in the product.}\;
+$m_2$ is not graded-commutative — it encodes the full OPE, not
+just the commutative normally-ordered product — so the
+symmetrisation in~\eqref{eq:prod-def} is required. The factor
+$\frac{1}{2}$ is well-defined in characteristic~$0$ (a standing
+hypothesis on the ground field, cf.\
+Definition~\ref{def:ainfty_chiral}). If $m_2^{\mathrm{reg}}$ is
+already graded-commutative (Heisenberg algebra), the symmetrisation
+is redundant and $[a]\cdot[b] = [m_2^{\mathrm{reg}}(a,b)]$.
+
+The PVA axioms on $H^\bullet(A, Q)$ are verified in
+Theorem~\ref{thm:cohomology_PVA}.
+
+\subsection{The QME as the $A_\infty$ identity}
+\label{subsec:qme-ainfty}
+
+The $A_\infty$ identities of Definition~\ref{def:ainfty-relations} were derived above as the Stasheff closure forced by Stokes' theorem on $\FM_k(\C)$. For an $A_\infty$ chiral algebra arising from a BV quantization of a 3d holomorphic-topological field theory, the same identities have a second life as the Feynman-diagram expansion of the quantum master equation (QME). The coincidence is not a coincidence: each $A_\infty$ relation is the QME at a fixed diagrammatic weight.
+
+\begin{lemma}[QME implies $A_\infty$ relations]
+\label{lem:QME_to_Ainfty}
+For a physical realisation satisfying Theorem~\ref{thm:physics-bridge}:
+The quantum master equation $\frac{1}{2}\{S_{\mathrm{eff}},S_{\mathrm{eff}}\}_{\mathrm{BV}} + \hbar\Delta S_{\mathrm{eff}}=0$, expanded in Feynman diagrams, is equivalent to the $A_\infty$ identities \eqref{eq:ainfty-relation-raw} for the operations $m_k$ extracted from $S_{\mathrm{eff}}$.
+\end{lemma}
+
+\begin{proof}
+Expand $S_{\mathrm{eff}} = \sum_k \frac{1}{k!} S_k$ where $S_k$ encodes $k$-ary operations. The full QME $\tfrac{1}{2}\{S_{\mathrm{eff}},S_{\mathrm{eff}}\}_{\mathrm{BV}} + \hbar\Delta S_{\mathrm{eff}} = 0$ at each degree $n$ yields precisely the sum over compositions $m_i \circ m_j$ with $i+j=n+1$, matching \eqref{eq:ainfty-relation-raw}. The complete argument appears in \cite{CG17}*{\S5.4} and \cite{CDG20}*{\S3}.
+\end{proof}
+
+\begin{proposition}[Definition~\ref{def:ainfty_chiral} captures the physical structure]
+\label{prop:physical_justification}
+For physical realisations satisfying Theorem~\ref{thm:physics-bridge}, Definition~\ref{def:ainfty_chiral} formalizes the $A_\infty$ chiral algebra structure of Costello--Gwilliam--Gaiotto--Dimofte:
+
+\begin{enumerate}[label=(\roman*)]
+\item The operations $m_k$ encode the factorization product on $\Conf_k(\C)$, recovering the Costello--Gwilliam structure \cite{CG17}.
+
+\item The $A_\infty$ identity \eqref{eq:ainfty-relation-raw} is the quantum master equation
+$\frac{1}{2}\{S_{\mathrm{eff}}, S_{\mathrm{eff}}\}_{\mathrm{BV}} + \hbar \Delta S_{\mathrm{eff}} = 0$
+expanded in Feynman diagrams.
+
+\item The $\lambda$-bracket and form integrands match \cite{CDG20} and Khan--Zeng \cite{KZ25}: spectral parameters $\lambda_i$ encode derivatives via $e^{\lambda z}$ generating functions.
+
+\item The definition recovers known structures:
+binary descent gives ordinary PVAs (Theorem~\ref{thm:cohomology_PVA});
+the additional condition $m_{k \geq 3}=0$ gives formal comparison
+models (Example~\ref{rem:free_chiral});
+one-loop-finite holomorphic theories give Williams structures \cite{GGW21};
+cohomology $H^\bullet(\A,Q)$ yields PVAs matching \cite{CDG20} (Theorem~\ref{thm:cohomology_PVA}).
+
+\item The definition generalizes Tamarkin's chiral Hochschild complex \cite{Tam02}: it is the 3d analogue of 2d Hochschild theory from Poisson sigma models (Section~\ref{sec:chiral_hochschild_expanded}).
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}[Comparison with the physical source]
+\label{rem:physical-source-comparison}
+Costello--Dimofte--Gaiotto \cite{CDG20} isolate the need for an
+$A_\infty$ analogue of a vertex algebra in holomorphic-topological
+field theory. Definition~\ref{def:ainfty_chiral} gives the Vol~II
+model: spectral $A_\infty$ operations, sesquilinearity, unit,
+Stasheff identities, and the logarithmic $\SCchtop$ factorisation
+needed for PVA descent.
+\end{remark}
+
+\subsection{Factorization axiom and cluster limits}
+
+As insertion points collide, the operations decompose according to the boundary stratification of $\FM_k(\C)$. This \emph{cluster factorization} axiom is the bridge between the $m_k$ and the operadic structure of~$\OHT$.
+
+\begin{theorem}[Cluster factorization in homotopy-commutative form]
+\label{thm:cluster_factorization_homotopy}
+Let $(\A, \{m_k\})$ be a logarithmic $\SCchtop$-algebra (a $C_\ast(W(\SCchtop))$-algebra whose weight forms factor as $\omega_k = \omega_k^{\mathrm{hol}} \otimes \omega_k^{\mathrm{top}}$ on $\FM_k(\C) \times \Conf_k(\R)$; the full definition is Definition~\ref{def:log-SC-algebra}) and let $\pi = \{S_1,\ldots,S_r\}$ be a partition of $\{1,\ldots,k\}$ with $|S_j| = k_j$. As points $\{z_i\}_{i \in S_j}$ collide to cluster centers $w_j$ (a limit within $\FM_k(\C)$), the operations satisfy
+\begin{equation}
+\label{eq:cluster_factorization}
+\lim_{z_i \to w_j} m_k(O_1,\ldots,O_k) = \sum_{\sigma \in \Sh(\pi)} (-1)^{\varepsilon(\sigma;O)} \, m_r\big(O'_{\sigma(1)},\ldots,O'_{\sigma(r)}\big),
+\end{equation}
+where $O'_j := m_{k_j}(O_{i_1},\ldots,O_{i_{k_j}})$ for $S_j = \{i_1 < \cdots < i_{k_j}\}$, and spectral parameters compose via
+\begin{equation}
+\label{eq:spectral_composition}
+\lambda_{\text{cluster},j} = \sum_{i \in S_j} \lambda_i + \partial_{w_j}.
+\end{equation}
+Here $\lambda_i$ for $i \in S_j$ denotes the inner spectral parameters relative to the cluster center; the sum runs over $|S_j| - 1$ independent parameters (the last being determined by the constraint $\sum_{i \in S_j} \lambda_i = \Lambda_j - \partial_{w_j}$).
+The shuffle sum $\sum_{\sigma\in\Sh(\pi)}$ arises because the Swiss-cheese
+operations carry a homotopy-commutative structure induced by the symmetric
+group action on $\FM_k(\C)$. For the planar (non-commutative) specialization,
+only the identity shuffle $\sigma=\mathrm{id}$ contributes, and the sum
+reduces to a single term.
+\end{theorem}
+
+\begin{proof}
+The boundary factorisation has geometric, analytic, and spectral
+components.
+
+\textbf{Boundary stratum.} The boundary stratum $D_\pi \subset \partial \FM_k(\C)$ corresponding to partition $\pi$ is canonically isomorphic to
+\[
+D_\pi \cong \FM_r(\C) \times \prod_{j=1}^r
+\FM_{k_j}^{\mathrm{red}}(\C),
+\]
+recording cluster centers $\{w_j\}$ and relative positions within each cluster.
+
+\textbf{Logarithmic residue.} Let $S\subset\{1,\ldots,k\}$ be one
+collision block and choose the inward radial coordinate
+$\varepsilon_S\geq0$ on the corresponding boundary divisor
+$D_S$.  In the FM logarithmic chart the weight form has the local
+normal form
+\[
+\omega_k=d\log\varepsilon_S\wedge\beta_S+\alpha_S,
+\qquad
+\alpha_S,\beta_S\ \text{smooth at }\varepsilon_S=0,
+\]
+and the residue used in the cluster operation is
+\begin{equation}
+\label{eq:cluster-fm-residue}
+\Res_{D_S}(\omega_k)=\beta_S\big|_{\varepsilon_S=0}
+=
+\lim_{\varepsilon_S\to0}
+\bigl(\varepsilon_S\iota_{\partial_{\varepsilon_S}}\omega_k\bigr)
+\big|_{D_S}.
+\end{equation}
+The naive contraction
+$\iota_{\partial_{\varepsilon_S}}\omega_k|_{D_S}$ is not used: for
+logarithmic forms it has a pole of order $\varepsilon_S^{-1}$.
+The boundary orientation is
+\begin{equation}
+\label{eq:cluster-fm-orientation}
+\operatorname{or}\bigl(\FM_k(\C)\bigr)
+=(-d\varepsilon_S)\wedge\operatorname{or}(D_S).
+\end{equation}
+Thus the incidence sign $\epsilon_{D_S}$ in Stokes' theorem is fixed
+by moving the logarithmic normal factor to the outward-normal slot.
+
+For the full partition $\pi$ the ordered iterated residue along the
+normal-crossing stratum $D_\pi$ factors as
+\[
+\Res_{D_\pi}(\omega_k)
+=
+(-1)^{\epsilon_\pi}
+\omega_r(O'_1,\ldots,O'_r) \wedge
+\bigwedge_{j=1}^r \omega_{k_j}(\{O_i\}_{i \in S_j}),
+\]
+where $\epsilon_\pi$ is the incidence sign determined by
+\eqref{eq:cluster-fm-orientation} and the Koszul permutation of
+operator labels.  Equivalently, the collision part of the bar
+coderivation is
+\begin{equation}
+\label{eq:cluster-collision-differential}
+D_{\mathrm{coll}}
+=
+\sum_{\substack{S\subset\{1,\ldots,k\}\\ |S|\ge2}}
+\epsilon_{D_S}\,\Res_{D_S}\otimes m_S .
+\end{equation}
+The identity $D_{\mathrm{coll}}^2=0$ is the image of
+$\partial^2[\FM_k(\C)]=0$.  At a codimension-two corner
+$D_S\cap D_T$, the two ordered normal approaches contribute
+\[
+\int_{(D_S)|_{D_T}}\Res_{D_T}\Res_{D_S}(\omega_k)
++
+\int_{(D_T)|_{D_S}}\Res_{D_S}\Res_{D_T}(\omega_k)=0,
+\]
+because the normal covectors anticommute,
+$d\varepsilon_T\wedge d\varepsilon_S
+=-d\varepsilon_S\wedge d\varepsilon_T$.
+
+\textbf{Spectral composition.} Holomorphic generating functions $e^{\sum_i \lambda_i z_i}$ degenerate to $e^{(\sum_{i \in S_j} \lambda_i) w_j}$ times relative terms, yielding (\ref{eq:spectral_composition}).
+\end{proof}
+
+\begin{remark}[Nonabelian Hodge shadow problem]
+\label{rem:nonabelian_hodge_shadow}
+The shadow obstruction tower of the chiral factor defines the following
+nonabelian Hodge enhancement problem: construct a triple
+$(\Theta_\cA,M_\cA,h_\cA)$ consisting of the MC element
+$\Theta_\cA$ on the flat side, a shadow Higgs field $M_\cA$, and a
+Shapovalov-type harmonic form $h_\cA$, such that
+$d=1+d_{\mathrm{arith}}+d_{\mathrm{alg}}$ is the Hodge decomposition of
+the triple. Cluster factorization does not use this enhancement; its
+construction belongs to the nonabelian Hodge package of Volume~I.
+\end{remark}
+
+\begin{remark}[Kac--Kazhdan / Shapovalov determinant: scope and usage]
+\label{rem:shapovalov-determinant-scope}
+\index{Kac-Kazhdan determinant}\index{Shapovalov determinant!scope}%
+The Kac--Kazhdan / Shapovalov determinant appears as a
+\emph{vanishing-locus control} underlying the class-M shadow tower,
+the critical-level (class FF) structure, and the minimal-model
+null-vector corrections. The following three items fix the scope.
+
+\smallskip
+\textbf{(a) Classical Shapovalov (Virasoro).} On the weight-$n$ graded piece
+of the Verma module $M(c,h)$, the Shapovalov form $G_n(c,h)$ has determinant
+\[
+\det G_n(c,h) \;=\; \prod_{\substack{p,q\ge 1\\ pq\le n}}
+ \bigl(h - h_{p,q}(c)\bigr)^{p(n-pq)},
+\qquad
+h_{p,q}(c) \;=\; \tfrac{1}{4}\bigl(\alpha_+ p + \alpha_- q\bigr)^2 - \tfrac{(\alpha_+ + \alpha_-)^2}{16},
+\]
+with $\alpha_\pm$ determined by $c = 13 - 6(\alpha_+^2 + \alpha_-^2)$
+(Kac 1978; Feigin--Fuchs determinant formula).
+The affine-Lie-algebra generalisation is Kac--Kazhdan 1979
+\cite{KacKazhdan79}: on a Verma module $M(\lambda)$ of $\widehat\fg$,
+\(
+\det G_{\lambda - \mu} \;=\;
+\prod_{\alpha \in \widehat\Delta_+^{\mathrm{re}}}\prod_{n\ge 1}
+ \bigl(\langle \lambda+\rho, \alpha\rangle - n\alpha(\alpha)/2\bigr)^{\mathrm{mult}}
+\times
+\prod_{\delta}(\langle\lambda+\rho,\delta\rangle)^{\dim \fg \cdot P(\cdot)},
+\)
+the second factor the imaginary-root contribution absent from the finite case.
+
+\smallskip
+\textbf{(b) Shadow-tower consequence (class~M, $r_{\max}=\infty$).}
+The class-M assignment for Vir$_c$ at generic $c$ and for
+$\mathcal W_N$ at generic $c$ rests on the following structural fact:
+the Kac--Kazhdan vanishing locus
+$\mathcal Z_{KK} = \{(c,h) : \det G_n(c,h) = 0\text{ for some }n\}$
+is a countable union of \emph{positive-codimension} analytic subvarieties
+of $(c,h)$-parameter space. Away from $\mathcal Z_{KK}$ the Verma module
+is irreducible, no singular vectors appear, and the shadow-tower
+coefficients $S_r$ (Vol.~I, Theorem~D) do not terminate: this is the
+$r_{\max}=\infty$ signature. On $\mathcal Z_{KK}$ (the minimal-model / admissible
+locus), the simple quotient acquires null vectors; the shadow tower is
+corrected \emph{not by termination} but by the explicit null-vector ideal
+(Arakawa $C_2$-cofiniteness for the simple quotient;
+Proposition~\ref*{V1-prop:minimal-model-non-koszul}).
+Class M thus persists on the simple quotient at minimal-model loci.
+
+\smallskip
+\textbf{(c) $\mathcal W$-algebra analog.} For $\mathcal W_N = \mathcal W(\sln_N)$
+at principal nilpotent, the Shapovalov-type determinant on the $N-1$ highest-weight parameters is
+given by the finite-$\mathcal W$ and quantum-$\mathcal W$ comparison
+papers of de~Boer--Tjin~\cite{deBoerTjin93,deBoerTjinRelation93};
+Bouwknegt--Schoutens~\cite{BMP-Wsymmetry} review the
+Drinfeld--Sokolov and coset constructions of the same family.
+The vanishing locus generalises $h_{p,q}(c)$ to a Weyl-group orbit on
+$\mathfrak h^\ast$; positive-codimension away from BRST-degenerate walls.
+This confirms the class-M assignment for $\mathcal W_N$ at generic central
+charge and identifies the minimal-$\mathcal W$-model walls as the
+$\mathcal W$-analog of the $(p,q)$-lattice.
+
+\smallskip
+\textbf{Inputs.} Item~(a) is the classical determinant formula of
+Kac~1978 and Kac--Kazhdan~1979; item~(b) combines the Vol.~I class-M
+calculation with Kac--Kazhdan vanishing; item~(c) is the
+$\mathcal W_N$ analogue of de~Boer--Tjin and Bouwknegt--Schoutens.
+The remark consolidates the Kac--Kazhdan/Shapovalov input used
+downstream in this volume, and fixes the positive-codimension
+convention invoked (implicitly) by the $r_{\max}=\infty$ definition
+of class~M.
+\end{remark}
+
+\begin{remark}[Factorization as operadic composition]
+\label{rem:factorization-as-operadic-composition}
+Cluster factorization~\eqref{eq:cluster_factorization} is the statement that $\A$ is an algebra over the chain operad $\OHT = C_\ast(W(\SCchtop))$: boundary faces in $\FM_k(\C)$ encode operadic compositions in the closed colour, ordered gluings along~$\R$ encode open-colour compositions, and Stokes' theorem (Section~\ref{sec:FM_calculus}) supplies the coherence.
+\end{remark}
+
+\subsection{Explicit coend formula and operadic composition}
+
+The operadic definition of $\OHT$ has a concrete incarnation as a coend producing the operations~$m_k$.
+
+\begin{construction}[Coend formula for $m_k$]
+\label{const:coend-formula-mk}
+Using the $W$--model, the universal element determining $m_k$ is
+\[
+ m_k = \int^{T \in \mathrm{Trees}_k} \!\!\! C_\ast\!\bigl(W(\SCchtop)(T)\bigr)\otimes_{\mathrm{Aut}(T)}
+ \bigotimes_{v \in \mathrm{Vert}(T)} \Bigl(
+ C_\ast\!\bigl(\FM_{\mathrm{in}(v)}(\C)\bigr)\,\widehat{\otimes}\,
+ C_\ast\!\bigl(\Conf_{\mathrm{out}(v)}(\R)\bigr)
+ \Bigr)\, .
+\]
+Closed-colour factors record holomorphic collisions; open-colour factors record ordered
+times; the $W$--parameters on internal edges control homotopies.
+The coend exists because the source category $\mathrm{Trees}_k$ is finite
+(finitely many labelled rooted trees with $k$ leaves) and all tensor
+products are over a field of characteristic~$0$.
+Remark~\ref{rem:bv-resolution-details} clarifies: the vertex-wise factors in the formula are
+determined by the output colour of each vertex, not by an independent
+product decomposition.
+
+\begin{example}[Binary Operation $m_2$ from the Coend]
+For $k=2$, the only tree is the corolla with one internal vertex and two leaves. The coend formula yields
+\[
+m_2 = \cP^{\mathrm{ch}}(2) \otimes \cE_1(1),
+\]
+where $\cP^{\mathrm{ch}}(2)$ encodes the binary chiral operation (holomorphic collision of two points) and $\cE_1(1)$ provides the topological ordering (represented by a single edge/interval).
+
+Explicitly, for operators $a, b \in \A$ at positions $(t_1, z_1), (t_2, z_2)$:
+\[
+m_2(a,b) = \int_{\Gamma \subset \FM_2(\C)} \int_{t_1 < t_2} K(z_1 - z_2, t_1 - t_2) \, a(t_1,z_1) \otimes b(t_2,z_2) \, dt_1 \, dt_2,
+\]
+where $K$ is the propagator kernel; for physical realizations it is supplied by Theorem~\ref{thm:physics-bridge}.
+This integral formula applies to physical realizations satisfying Theorem~\ref{thm:physics-bridge}; for abstract logarithmic $\SCchtop$-algebras, the operation $m_2$ is defined directly by the operad action.
+\end{example}
+
+\begin{remark}[Boardman--Vogt resolution details]
+\label{rem:bv-resolution-details}
+Each internal edge $e$ of a tree $T$ carries a parameter $s_e\in[0,1]$ encoding the time of
+composition. In the two-colour model one works with $W(\SCchtop)(T)$; there is no meaningful
+vertex-wise factor $(P_{\mathrm{ch}}\rtimes E_1)$. Vertex decorations are determined by the output
+colour: closed vertices carry $\FM(\C)$-data; open vertices carry $\FM(\C)\times \Conf(\R)$-data. The
+boundary identifications implement coherent sequential/simultaneous compositions.
+\end{remark}
+\end{construction}
+
+\subsection{Sesquilinearity: Complete Proof}
+
+The sesquilinearity identities
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} were recorded above
+as axioms; the following lemma derives them from one principle:
+$\C$-translation equivariance of the chiral distribution kernels.
+The proof is performed on the Fourier/divided-power coefficients.
+There is no intermediate identity with
+\(\partial_{\lambda_i}m_k\); the translation operator acts on the
+distributional mode and Fourier transforms to multiplication by the
+spectral variable. A convention-reconciliation paragraph at the end
+bridges the independent-parameter form
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} and the
+consecutive-difference form
+\eqref{eq:sesqui_explicit_1}--\eqref{eq:sesqui_explicit_k}.
+
+\begin{lemma}[Sesquilinearity from translation equivariance]
+\label{lem:sesquilinearity_explicit}
+Here we state the result in the \textbf{consecutive-difference
+convention}: the spectral parameter $\lambda_i$ is associated to
+$z_i-z_{i+1}$.  This convention is related to the
+independent-parameter convention of
+equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} by the
+linear change of variables~\eqref{eq:indep-to-consec}.
+
+Let $\partial : \A \to \A$ denote holomorphic translation in $z$. Then the operations $m_k$ satisfy:
+\begin{align}
+\label{eq:sesqui_explicit_1}
+m_k(\partial a_1, a_2, \ldots, a_k)
+ &= -(\lambda_1 + \lambda_2 + \cdots + \lambda_{k-1})\, m_k(a_1, a_2, \ldots, a_k),\\
+\label{eq:sesqui_explicit_i}
+m_k(a_1, \ldots, a_{i-1}, \partial a_i, a_{i+1}, \ldots, a_k)
+ &= -(\lambda_i + \lambda_{i+1} + \cdots + \lambda_{k-1})\, m_k(a_1, \ldots, a_k),
+ \quad 2\le i\le k-1,\\
+\label{eq:sesqui_explicit_k}
+m_k(a_1, \ldots, a_{k-1}, \partial a_k)
+ &= \Bigl(\partial + \sum_{j=1}^{k-1} j\,\lambda_j\Bigr)\, m_k(a_1, \ldots, a_k).
+\end{align}
+Note that \eqref{eq:sesqui_explicit_1} is the $i=1$ case of \eqref{eq:sesqui_explicit_i};
+for $k=2$ it reduces to $-\lambda_1\,m_2$.
+These are obtained from \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}
+via the change of variables~\eqref{eq:indep-to-consec}.
+\end{lemma}
+
+\begin{proof}
+Use the independent variables
+\(\mu_i=z_i-z_k\), \(1\le i\le k-1\), first.  In the
+Fourier/divided-power convention for chiral operations,
+\[
+m_k(a_1,\ldots,a_k;\mu)
+=
+\sum_{\mathbf n\in\mathbb N^{k-1}}
+m_{k,\mathbf n}(a_1,\ldots,a_k)
+\prod_{r=1}^{k-1}\frac{\mu_r^{n_r}}{n_r!}.
+\]
+The coefficient \(m_{k,\mathbf n}\) is the operation paired with the
+normalised collision mode of multi-index \(\mathbf n\). Translation
+equivariance of chiral distributions gives the multivariable
+divided-power mode identity
+\[
+m_{k,\mathbf n}(a_1,\ldots,\partial a_i,\ldots,a_k)
+=
+-\,n_i\,m_{k,\mathbf n-\mathbf e_i}(a_1,\ldots,a_k),
+\qquad 1\le i<k,
+\]
+where the right side is zero when \(n_i=0\).  This is the
+multi-input form of the vertex-algebra covariance
+\((T a)_{(n)}=-n\,a_{(n-1)}\), obtained by applying the
+infinitesimal translation generator to the input and integrating by
+parts on the collision coordinate. Multiplying by the divided powers
+and summing gives
+\[
+m_k(a_1,\ldots,\partial a_i,\ldots,a_k;\mu)
+=-\mu_i\,m_k(a_1,\ldots,a_k;\mu),
+\qquad 1\le i<k.
+\]
+For the last input, \(\partial_{z_k}\) differentiates the output
+section as well as the independent variables
+\(\mu_r=z_r-z_k\). The same translation-equivariance identity
+therefore has one additional output term:
+\[
+m_{k,\mathbf n}(a_1,\ldots,a_{k-1},\partial a_k)
+=
+\partial_A m_{k,\mathbf n}(a_1,\ldots,a_k)
+\;+\;
+\sum_{r=1}^{k-1} n_r\,
+m_{k,\mathbf n-\mathbf e_r}(a_1,\ldots,a_k).
+\]
+After summing the divided-power series this becomes
+\[
+m_k(a_1,\ldots,a_{k-1},\partial a_k;\mu)
+=
+\left(\partial_A+\sum_{r=1}^{k-1}\mu_r\right)
+m_k(a_1,\ldots,a_k;\mu),
+\]
+which is the independent-parameter form
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}.
+
+It remains only to write the same formula in consecutive variables.
+Since
+\[
+\mu_i=\lambda_i+\lambda_{i+1}+\cdots+\lambda_{k-1},
+\]
+the identities for \(1\le i<k\) become
+\[
+m_k(\ldots,\partial a_i,\ldots)
+=-(\lambda_i+\cdots+\lambda_{k-1})m_k(\ldots,a_i,\ldots),
+\]
+which is \eqref{eq:sesqui_explicit_1} for \(i=1\) and
+\eqref{eq:sesqui_explicit_i} for \(2\le i\le k-1\).  For the last
+input,
+\[
+\sum_{i=1}^{k-1}\mu_i
+=
+\sum_{i=1}^{k-1}\sum_{j=i}^{k-1}\lambda_j
+=
+\sum_{j=1}^{k-1} j\,\lambda_j,
+\]
+and this gives \eqref{eq:sesqui_explicit_k}.  No formal derivative
+\(\partial_{\lambda_i}\) appears in the \(\lambda\)-bracket
+normalisation; the operator \(\partial_A\) acts on coefficients and
+the variables \(\lambda_i\) act by multiplication in the divided-power
+generating series.
+\end{proof}
+\subsection{From $W(\mathsf{SC}^{\mathrm{ch,top}})$ to axioms and back}
+\label{sec:operad-to-axioms}
+\label{sec:equivalence}
+
+\subsubsection{From the operad to explicit $m_k$ with spectral substitution}
+\label{subsec:operad-to-mk}
+Let $(A_{\mathsf{ch}},A_{\mathsf{top}})$ be a $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra with underlying complex $A$ and translation operator $\partial$ (from the holomorphic \(\C\)--action). Choose, for each $k\ge1$, a fundamental chain $[\FM_k(\C)]\in C_\ast(\FM_k(\C))$ and similarly for $E_1$ (recording the $t$--ordering). Define
+\[
+m_k(a_1,\dots,a_k)
+:= \bigl\langle\ \rho\bigl([\FM_k(\C)]\times [E_1(\text{ordering})]\bigr)\,,\, a_1\otimes\cdots\otimes a_k\ \bigr\rangle
+\ \in\ A((\lambda_1))\cdots((\lambda_{k-1})),
+\]
+where $\rho$ is the operad action and the \(\lambda\)--dependence is the generating function of the log--forms (residue degrees) on $\FM_k(\C)$ prescribed by the operad.
+Then:
+\begin{enumerate}[label=(\alph*)]
+ \item sesquilinearity \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}
+ follows from equivariance under translations in $\C$: on divided-power
+ modes it is
+ \(m_{k,\mathbf n}(\ldots,\partial a_i,\ldots)
+ =-n_i m_{k,\mathbf n-\mathbf e_i}(\ldots)\), and summing the
+ generating series gives multiplication by the corresponding
+ spectral variable,
+ \item the spectral substitution law in \eqref{eq:ainfty-relation-raw} is the image of the boundary identification of faces in $\partial\FM_k(\C)$ where a consecutive block collapses (the effective parameter is the sum of inner ones).
+\end{enumerate}
+
+\begin{proposition}[Operad $\Rightarrow$ axioms]
+\label{prop:operad-implies-axioms}
+The $m_k$ produced by the $W(\mathsf{SC}^{\mathrm{ch,top}})$--action satisfy the axioms in Section~\ref{sec:axioms-Ainfty-chiral}.
+\end{proposition}
+
+\begin{proof}
+Let $(A_{\mathsf{ch}}, A_{\mathsf{top}})$ be a $C_\ast(W(\mathsf{SC}^{\mathrm{ch,top}}))$-algebra with operad action $\rho$, and let $m_k$ be defined by evaluation on fundamental chains as in \S\ref{subsec:operad-to-mk}:
+\[
+m_k(a_1,\ldots,a_k) := \bigl\langle \rho\bigl([\FM_k(\C)] \times [E_1(\mathrm{ord})]\bigr),\, a_1 \otimes \cdots \otimes a_k \bigr\rangle.
+\]
+The operad action gives each axiom of
+Definition~\ref{def:ainfty_chiral}.
+
+\medskip
+\textbf{(I) Unitality.}
+The operadic unit in $\mathsf{SC}^{\mathrm{ch,top}}$ is the identity element $\mathbf{1} \in \mathsf{SC}^{\mathrm{ch,top}}(1)$, represented by the point $\FM_1(\C) = \mathrm{pt}$. By the operadic unit axiom, $\rho(\mathbf{1}) = \mathrm{id}_A$, so $m_1(\mathbf{1}) = Q(\mathbf{1}) = 0$ (since the differential on the operad restricts to zero on the unit). For $m_2$: the operadic composition $\mathbf{1} \circ_1 c_2 = c_2 = c_2 \circ_2 \mathbf{1}$ (inserting the unit into either slot of the binary corolla) gives $m_2(\mathbf{1}, a) = a$ and $m_2(a, \mathbf{1}) = (-1)^{|a|} a$, where the sign arises from the Koszul rule for the degree-$(-1)$ operation $m_2$ passing element $a$. For $k \geq 3$: the operadic composition $c_k \circ_i \mathbf{1}$ factors through $c_{k-1}$ by the operadic unit law, but the corollas $c_k$ for distinct $k$ are independent generators of $W(\mathsf{SC}^{\mathrm{ch,top}})$, and the unit insertion collapses $c_k \circ_i \mathbf{1}$ to a face of the $W$-construction with Boardman--Vogt parameter $s = 0$, which is $\partial$-exact. Hence $m_k(\ldots, \mathbf{1}, \ldots) = 0$ for $k \geq 3$. This establishes~\eqref{eq:unit-axioms}--\eqref{eq:unit-higher}.
+
+\medskip
+\textbf{(II) Sesquilinearity from translation equivariance.}
+The group \(\C\) acts on the chiral distribution kernels by
+translation, and the infinitesimal action on \(A\) is \(\partial\).
+Writing the operation in independent variables \(\mu_i=z_i-z_k\), the
+Fourier/divided-power coefficients satisfy
+\[
+m_{k,\mathbf n}(\ldots,\partial a_i,\ldots)
+=-n_i\,m_{k,\mathbf n-\mathbf e_i}(\ldots),
+\quad i<k,
+\]
+and
+\[
+m_{k,\mathbf n}(\ldots,\partial a_k)
+=\partial_A m_{k,\mathbf n}(\ldots)
+\;+\;
+\sum_i n_i\,m_{k,\mathbf n-\mathbf e_i}(\ldots).
+\]
+Summing the divided-power series gives
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}.  Passing to
+consecutive variables is the linear substitution
+\(\mu_i=\lambda_i+\cdots+\lambda_{k-1}\), hence
+\(\sum_i\mu_i=\sum_{j=1}^{k-1}j\lambda_j\), exactly as in
+Lemma~\ref{lem:sesquilinearity_explicit}.
+
+\medskip
+\textbf{(III) $A_\infty$ relations and spectral substitution from boundary faces.}
+The differential on $C_\ast(W(\mathsf{SC}^{\mathrm{ch,top}}))$ is the boundary operator $\partial$ on chains of the Boardman--Vogt resolution. On the fundamental chain $[\FM_k(\C)]$, the boundary is $\partial[\FM_k(\C)] = \sum_S \epsilon_{D_S}\,[D_S]$, summing over collision divisors $D_S$ with $|S| \geq 2$. Since $\rho$ is a chain map ($\rho \circ \partial = d \circ \rho$, where $d$ on $\End(A)$ is the commutator with $Q$), applying $\rho$ to both sides gives:
+\[
+d\bigl(\rho([\FM_k(\C)])\bigr) = \sum_S \epsilon_{D_S}\, \rho([D_S]).
+\]
+Each face $D_S \cong \FM_{k-|S|+1}(\C) \times \FM_{|S|}^{\mathrm{red}}(\C)$ factorizes $\rho$ by operadic composition:
+\[
+\rho([D_S]) = \rho([\FM_{k-|S|+1}(\C)]) \circ_{\mathrm{ins}} \rho([\FM_{|S|}(\C)]) = m_{k-|S|+1}(\ldots, m_{|S|}(\ldots), \ldots).
+\]
+The identity $d^2 = 0$ on $\End(A)$ (equivalently $\partial^2 = 0$ on chains) then yields
+\[
+0 = d^2\bigl(\rho([\FM_k(\C)])\bigr) = \sum_{i+j=k+1}\sum_{s=0}^{k-j} (-1)^{\epsilon(s,j)}\, m_i(\ldots, m_j(\ldots), \ldots),
+\]
+which is the $A_\infty$ identity~\eqref{eq:ainfty-relation-raw}. Only
+consecutive subsets $S$ contribute, by
+Theorem~\ref{thm:stokes_arnold}.
+
+The \emph{spectral substitution} law follows from the geometry of the boundary identification. On $D_S$ for $S = \{s{+}1,\ldots,s{+}\ell\}$, the cluster center $u_S$ replaces the $\ell$ points of $S$ by a single effective point. The relative coordinate from $u_S$ to the next external point is $u_S - z_{s+\ell} = \sum_{p=s+1}^{s+\ell-1}(z_p - z_{p+1}) = \Lambda_S$, so the outer operation receives effective spectral parameter $\Lambda_S = \lambda_{s+1} + \cdots + \lambda_{s+\ell-1}$, while the remaining outer parameters are unchanged. This matches the spectral substitution in~\eqref{eq:ainfty-relation-raw} and Remark~\ref{rmk:spectral-substitution}.
+
+\medskip
+\textbf{(IV) Degree.}
+The degree of $m_k$ is $2 - k$. The bar complex $\barB(\cA) = T^c(s^{-1}\bar{\cA})$ carries a total differential $d_{\barB} = \sum_k d_k$ of cohomological degree $+1$. Each $d_k$ is the coderivation with projection
+$d_k|_{(s^{-1}\bar{\cA})^{\otimes k}} = s^{-1} \circ m_k \circ s^{\otimes k}\colon (s^{-1}\cA)^{\otimes k} \to s^{-1}\cA$.
+The degree of this composition is $\deg(s^{-1}) + \deg(m_k) + k\cdot\deg(s) = -1 + \deg(m_k) + k$, and requiring this to equal $+1$ gives $\deg(m_k) = 2 - k$, in agreement with~\eqref{eq:mk-type}. Concretely: $m_1$ (the BRST differential) has degree~$+1$, $m_2$ (the binary product) has degree~$0$, and $m_3$ (the first homotopy) has degree~$-1$.
+\end{proof}
+
+\subsubsection{Rectification: from axioms to a $W(\mathsf{SC}^{\mathrm{ch,top}})$--algebra}
+\label{subsec:rectification}
+Conversely, suppose $A$ carries $(Q,\partial,\{m_k\})$ satisfying the axioms of Section~\ref{sec:axioms-Ainfty-chiral}.
+
+\begin{definition}[Tameness]\label{def:tameness}
+We say that an $A_\infty$ chiral algebra $(A, \{m_k\})$ is \emph{tame} if:
+\begin{enumerate}[label=(\alph*)]
+\item the spectral parameter dependence of $m_k$ is polynomial in $\lambda_i$ (regular part) plus a Laurent tail in $\lambda_i^{-1}$ (singular part) with finitely many negative powers;
+\item the operations $m_k$ are continuous with respect to the natural topology on $A((\lambda_1)) \cdots ((\lambda_{k-1}))$;
+\item for sufficiently large $k$, the operations $m_k$ vanish (truncation).
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Tameness for HT theories]
+\label{rem:tameness-HT}
+For the $A_\infty$ chiral algebras arising from holomorphic-topological
+field theories (Theorem~\ref{thm:physics-bridge}), tameness is
+automatic:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The spectral parameter dependence comes from meromorphic
+ expansions of propagator products, which are rational functions of the
+ $\lambda_i$ with finitely many poles; this gives the
+ polynomial$+$Laurent structure.
+\item Continuity follows from the smooth dependence of the Feynman
+ integrals on the test functions and the topology of the configuration
+ spaces $\FM_k(\C) \times \Conf_k^{<}(\R)$.
+\item Truncation ($m_k = 0$ for $k \gg 0$) holds when the loop order of
+ each Feynman diagram contributing to $m_k$ is bounded by a function
+ that eventually exceeds the loop budget. Concretely, for a theory
+ with $n$-valent interactions whose vertex valence strictly exceeds the
+ $\mu$-slot count, the graph combinatorics force $m_k = 0$ for
+ $k \gg 0$. When the $\mu$-degree equals the vertex valence (as for
+ Virasoro, where each cubic vertex has exactly 2 $\mu$-slots), no such
+ bound applies: diagrams of arbitrarily high loop order contribute at
+ every degree, the $A_\infty$ structure is infinite
+ (cf.\ Proposition~\ref{prop:vir-truncation}), and tameness
+ condition~(c) must be replaced by convergence of the bar codifferential
+ on the completed cofree coalgebra.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}[Axioms $\Rightarrow$ operad]
+\label{thm:rectification}
+Assume $A$ satisfies conditions~\textup{(a)--(b)} of Definition~\ref{def:tameness}. If condition~\textup{(c)} also holds (truncation), then there exists a (canonically defined up to contractible choice) $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$-algebra structure on~$A$ inducing the given $m_k$ by evaluation on fundamental chains as above. More generally, if condition~\textup{(c)} is replaced by convergence of the bar codifferential on the \emph{completed} reduced cofree coalgebra $\widehat{\barBch}(A)=\prod_{n\ge1}(s^{-1}\bar A)^{\otimes n}$ (as holds for the Virasoro and $W_N$ algebras), the same conclusion holds in the completed setting.
+\end{theorem}
+
+\begin{proof}
+The tame \(A_\infty\) data determine an \(E_1\) chiral coalgebra over
+\((\mathrm{ChirAss})^!\); the cobar functor for the two-coloured
+operad \(\mathsf{SC}^{\mathrm{ch,top}}\) turns it into a strict operad
+algebra whose fundamental-chain operations are the original \(m_k\).
+
+\medskip
+\textbf{Bar coalgebra from tame \(A_\infty\) data.}
+The tame $A_\infty$ chiral data $(Q, \partial, \{m_k\}_{k \ge 1})$
+define a codifferential on the cofree conilpotent graded coalgebra
+\[
+ \mathcal{C}_A \;:=\; \barBch(A)
+ \;=\; \bigoplus_{n \ge 1} (s^{-1}\bar{A})^{\otimes n},
+\]
+where $s^{-1}$ is desuspension and $\bar{A} = A / k\cdot\mathbf{1}$
+is the augmentation ideal; the coaugmented coalgebra is
+$\mathrm B^{\mathrm{ch}}(A)=k\oplus\mathcal C_A$. The codifferential
+$d_{\mathcal{C}} \colon \mathcal{C}_A \to \mathcal{C}_A$
+is the unique coderivation whose cogenerator projection
+$\pi \circ d_{\mathcal{C}} \colon \mathcal{C}_A \to s^{-1}\bar{A}$
+encodes the operations $m_k$: explicitly,
+\[
+ \pi \circ d_{\mathcal{C}}\bigl(
+ [a_1 | \cdots | a_n]\bigr)
+ \;=\; \sum_{k=1}^{n}\;\sum_{i=0}^{n-k}
+ (-1)^{\epsilon(i,k)}\,
+ s^{-1}\,m_k(a_{i+1}, \ldots, a_{i+k}).
+\]
+\emph{Square-zero coderivation.} The $A_\infty$ identity
+\eqref{eq:ainfty-relation-raw} is equivalent to the vanishing of
+$\pi \circ d_{\mathcal{C}}^2$. Since $d_{\mathcal{C}}$ is a
+coderivation on a cofree coalgebra, $d_{\mathcal{C}}^2$ is again a
+coderivation; a coderivation on a cofree coalgebra is zero if and
+only if its cogenerator projection is zero \cite{LV12}. Hence
+$d_{\mathcal{C}}^2 = 0$.
+
+\emph{\((\mathrm{ChirAss})^!\)-coalgebra.}
+As a standalone coalgebraic object, $\mathcal{C}_A$ is an $E_1$
+chiral coassociative coalgebra: the deconcatenation coproduct
+encodes the $E_1$ (topological/open) colour, and the codifferential
+$d_{\mathcal{C}}$ from the operations $m_k$ encodes the chiral
+(holomorphic/closed) colour. Concretely, the $m_k$ take values in
+iterated Laurent series
+$A((\lambda_1))\cdots((\lambda_{k-1}))$, encoding the spectral
+parameter dependence along $\FM_k(\C)$. The sesquilinearity axiom
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right} ensures that the
+cogenerator maps intertwine the $\C$--translation action on
+$\FM_k(\C)$ with $\partial$ on $A$.
+The spectral substitution rule (Remark~\ref{rmk:spectral-substitution})
+ensures that the cogenerator maps are compatible with the boundary
+stratification of $\FM_k(\C)$: when a block $I$ collapses, the
+effective spectral parameter is $\Lambda_I = \sum_{i \in I} \lambda_i$,
+matching the face map of the cooperad.
+Together, these equip $\mathcal{C}_A$ with the structure of a
+conilpotent coalgebra over $(\mathrm{ChirAss})^!$
+(the Koszul dual cooperad of the chiral associative operad),
+with the spectral parameter dependence enriching it beyond the
+purely topological $E_1$ bar. The full $\SCchtop$ structure lives
+on the derived chiral center pair $(C^\bullet_{\mathrm{ch}}(A,A), A)$, not
+on $\mathcal{C}_A$ alone: the lift from
+$(\mathrm{ChirAss})^!$-coalgebra to $\mathbf B(\SCchtop)$-coalgebra
+uses the promoted pair $(A,A)$ through the cobar functor on the
+two-coloured operad.
+Tameness (Definition~\ref{def:tameness}) is essential here:
+\begin{itemize}
+ \item condition (a) (polynomial$+$Laurent spectral dependence)
+ ensures that each cogenerator map lands in the algebraic
+ completion $A((\lambda_1))\cdots((\lambda_{k-1}))$, so the
+ pairing with chains on $\FM_k(\C)$ is well-defined;
+ \item condition (b) (continuity) ensures the cogenerator maps
+ extend to the completed tensor products that arise from
+ compositions in the bar cooperad;
+ \item condition (c) (eventual truncation: $m_k = 0$ for $k \gg 0$)
+ ensures that the coalgebra is concentrated in finitely many
+ degrees, so the cofree coderivation is determined by finitely
+ many cogenerator projections and all tree sums terminate.
+\end{itemize}
+
+\medskip
+\textbf{Cobar functor and strict operad algebra.}
+Apply the cobar functor $\Omega$ to $\mathcal{C}_A$:
+\[
+ \widetilde{A} \;:=\; \Omega(\mathcal{C}_A).
+\]
+By definition, $\widetilde{A}$ is the free
+$\mathsf{SC}^{\mathrm{ch,top}}$--algebra on $s\,\mathcal{C}_A$
+(the suspension of the $E_1$ chiral coalgebra), equipped with the
+differential $d_\Omega$ induced by both the internal differential
+$d_{\mathcal{C}}$ and the cooperad cocompositions. Concretely,
+$\widetilde{A}$ is an algebra over
+$\Omega\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})$.
+
+Now invoke homotopy--Koszulity --- at the associated-graded
+level Theorem~\ref{thm:homotopy-Koszul}, for the coupled operad
+Conjecture~\ref{conj:coupled-sc-koszul}, assumed here --- the
+canonical counit
+\[
+ \epsilon \colon
+ \Omega\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})
+ \;\xrightarrow{\;\sim\;}\;
+ \mathsf{SC}^{\mathrm{ch,top}}
+\]
+is a quasi--isomorphism of two--colored dg operads. Therefore
+restriction of structure along $\epsilon$ converts the
+$\Omega\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})$--algebra
+$\widetilde{A}$ into a
+$C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra,
+since $\Omega\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})$
+\emph{is} the Boardman--Vogt resolution
+$W(\mathsf{SC}^{\mathrm{ch,top}})$ (the cobar of the bar is
+the canonical cofibrant replacement of the operad \cite{BM03}).
+Denote the resulting operad algebra structure also by
+$\widetilde{A}$.
+
+\medskip
+\textbf{Fundamental chains.}
+The $C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra
+$\widetilde{A}$ recovers the original operations $m_k$ on
+fundamental chains. The cobar--bar counit
+$\eta_A \colon A \to \Omega(\mathcal{C}_A) = \widetilde{A}$
+embeds $A$ as the weight-$1$ component (single-vertex trees)
+of the cobar complex. For the $k$--corolla $c_k$, the
+structure map of $\widetilde{A}$ evaluated on the fundamental
+chain $[\FM_k(\C)] \times [\mathrm{ord}]$ reduces, on
+weight-$1$ elements, to the cogenerator projection of
+$d_{\mathcal{C}}$:
+\[
+ \widetilde{m}_k(a_1, \ldots, a_k)
+ \;=\; \pi \circ d_{\mathcal{C}}
+ \bigl([a_1 | \cdots | a_k]\bigr)
+ \;=\; m_k(a_1, \ldots, a_k).
+\]
+The spectral parameters are preserved because the
+cogenerator maps encode exactly the Laurent coefficients of
+the $\FM_k(\C)$--forms, and the bar--cobar adjunction respects
+the topology on iterated Laurent series (which is where
+tameness condition~(b) is used).
+
+For composite trees $T$ with internal edges, the structure map
+$\rho(T)$ of $\widetilde{A}$ is determined inductively by the
+operad composition from the corolla data $\{m_k\}$. The
+compatibility conditions are:
+\begin{enumerate}[label=(\roman*)]
+ \item The $A_\infty$ relations \eqref{eq:ainfty-relation-raw}
+ ensure $d_{\mathcal{C}}^2 = 0$, which is exactly the
+ statement that $\rho \circ \partial_{\FM} = d_A \circ \rho$
+ on $C_\ast(\FM_k(\C))$ (boundary maps to compositions).
+ \item Sesquilinearity \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}
+ ensures that $\rho$ intertwines the $\C$--action on $\FM_k(\C)$
+ with $\partial$ on $A$.
+ \item The spectral substitution rule ensures that boundary
+ faces $D_I \cong \FM_r(\C) \times \FM_{|I|}(\C)$ map
+ correctly under $\rho$, with the block--sum
+ $\Lambda_I = \sum_{i \in I} \lambda_i$ as effective parameter.
+\end{enumerate}
+These are precisely the axioms of a
+$C_\ast(W(\mathsf{SC}^{\mathrm{ch,top}}))$--algebra
+(cf.\ the forward direction, Proposition~\ref{prop:operad-implies-axioms}).
+
+\medskip
+\textbf{Uniqueness via Quillen equivalence.}
+It remains to show that the
+$C_\ast\!\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\bigr)$--algebra
+structure is unique up to contractible ambiguity. By
+Theorem~\ref{thm:homotopy-Koszul} and
+Theorem~\ref{thm:scchtop-bar-cobar-adjunction} (for the coupled
+operad, conditionally on
+Conjecture~\ref{conj:coupled-sc-koszul}), the bar--cobar adjunction
+\[
+ \Omega \colon
+ \mathrm{Coalg}_{\mathbf{B}(\mathsf{SC}^{\mathrm{ch,top}})}
+ \rightleftarrows
+ \mathrm{Alg}_{\mathsf{SC}^{\mathrm{ch,top}}}
+ :\! \mathbf{B}
+\]
+is a \emph{Quillen equivalence}: the unit
+$A \to \Omega\mathbf{B}(A)$ and counit
+$\mathbf{B}\Omega(C) \to C$ are weak equivalences.
+Suppose $\rho, \rho'$ are two
+$C_\ast(W(\mathsf{SC}^{\mathrm{ch,top}}))$--algebra structures on
+$A$ that agree on fundamental chains (i.e., induce the same $m_k$).
+Both structures produce the same bar coalgebra $\mathcal{C}_A$
+(since the bar coalgebra is determined by the cogenerator
+projections, which are the $m_k$). The Quillen equivalence ensures
+that the cobar $\Omega(\mathcal{C}_A)$ is the unique (up to weak
+equivalence) operad algebra recovering $\mathcal{C}_A$ via the bar
+construction. More precisely, the mapping space
+\[
+ \mathrm{Map}_{\mathrm{Alg}}^{\mathbf{B}\text{-equiv}}
+ \!\bigl(\widetilde{A}, \widetilde{A}\bigr)
+\]
+of self-equivalences of $\widetilde{A}$ that induce the identity on
+$\mathbf{B}(\widetilde{A}) \cong \mathcal{C}_A$ is contractible:
+the derived unit $\eta \colon \mathrm{id} \xrightarrow{\sim}
+\Omega \circ \mathbf{B}$ of the Quillen equivalence provides a
+canonical contraction.
+(Over a field of characteristic zero, the model category
+$\mathrm{Alg}_{\mathsf{SC}^{\mathrm{ch,top}}}$ is right proper
+and the mapping spaces are computed by derived hom; contractibility
+of the fiber follows from the fact that $\eta_A$ is a weak
+equivalence \cite{Val07, BM03}.)
+
+\medskip
+\textbf{Equivalence of categories.}
+The forgetful functor $U$ (extracting $m_k$ from
+$\rho([\FM_k(\C)] \times [\mathrm{ord}])$) is the construction of
+Proposition~\ref{prop:operad-implies-axioms}. The bar--cobar
+reconstruction above provides an inverse $R$ with
+$U \circ R \cong \mathrm{id}$ on fundamental chains and
+$R \circ U \simeq \mathrm{id}$ by Quillen uniqueness up to
+contractible ambiguity). Hence the homotopy categories are
+equivalent:
+\[
+ \mathrm{Ho}\bigl(\text{tame axiomatic }A_\infty\text{ chiral algebras}\bigr)
+ \;\simeq\;
+ \mathrm{Ho}\bigl(W(\mathsf{SC}^{\mathrm{ch,top}})\text{-algebras with
+ }\partial,\,\mathbf{1}\bigr).
+ \qedhere
+\]
+\end{proof}
+
+\begin{remark}[Lagrangian skeleton and Stokes origin of the $A_\infty$ relations]
+\label{rem:lagrangian-skeleton}
+The rectification theorem (Theorem~\ref{thm:rectification}) and
+its converse (Proposition~\ref{prop:operad-implies-axioms}) have a
+geometric interpretation through the Lagrangian correspondence
+$\mathfrak{S}_b = \mathcal{L}\times_{\mathcal{M}}\mathcal{L}$
+of Remark~\ref{rem:lagrangian-geometry}.
+
+The $A_\infty$ relations \eqref{eq:ainfty-relation-raw} are
+Stokes' theorem on the boundary strata of this correspondence.
+Each codimension-$1$ face of $\FM_k(\C)$ is a collision stratum
+of the Lagrangian (a locus where two or more sheets of
+$\mathcal{L}$ meet transversally), and the sum of residues
+along these faces vanishes by Stokes, which is the Stasheff
+identity $\sum m_i\circ m_j = 0$. The spectral substitution
+law (Remark~\ref{rmk:spectral-substitution}) is the cluster
+structure of the collision strata: when a block of points
+collapses, the Lagrangian sheets merge and the effective
+spectral parameter is the sum of the inner ones, reflecting
+the additivity of the shifted symplectic pairing on strata.
+
+Sesquilinearity \eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}
+is $\C$-equivariance of the Lagrangian embedding: the translation
+action on $\FM_k(\C)$ preserves $\mathcal{L}$, and the spectral
+parameters record the infinitesimal action on the normal bundle.
+Tameness (Definition~\ref{def:tameness}) is the algebraicity
+of the correspondence: the polynomial$+$Laurent structure
+is finite-dimensionality of the fibers, and truncation is
+properness of the projection.
+
+In this language, rectification is the \emph{Lagrangian skeleton
+theorem}: the self-intersection data of $\mathcal{L}$
+determines the correspondence $\mathfrak{S}_b$ and hence the
+$\mathsf{SC}^{\mathrm{ch,top}}$-algebra, just as the
+Steinberg variety is determined by its moment-map fibers
+and recovers the Hecke algebra from the convolution product
+on its Borel--Moore homology.
+\end{remark}
+
+\begin{proposition}[Rectification is the Lagrangian skeleton theorem]
+\label{prop:rectification-lagrangian-skeleton}
+The rectification theorem \textup{(}recovering an
+$\mathsf{SC}^{\mathrm{ch,top}}$-algebra from $A_\infty$ axioms\textup{)}
+is the Lagrangian skeleton theorem: the self-intersection data
+$\mathfrak{S}_b = \mathcal{L}\times_{\mathcal{M}}^h\mathcal{L}$
+with its groupoid structure determines the Lagrangian correspondence,
+and conversely. The $A_\infty$ axioms are the minimal Lagrangian
+skeleton data.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:homotopy-Koszul}, the depth-zero associated
+graded of the operad
+$\mathsf{SC}^{\mathrm{ch,top}}$ is homotopy-Koszul (the coupled
+statement is Conjecture~\ref{conj:coupled-sc-koszul}, assumed
+where the coupled mixed sector is used). Combining this
+with the bar-cobar adjunction (Vol~I, Theorem~A, the twisting morphism representability theorem) gives a Quillen
+equivalence
+\[
+ \Omega\barB \colon
+ \mathsf{SC}^{\mathrm{ch,top}}\text{-}\mathrm{Alg}
+ \;\rightleftarrows\;
+ A_\infty\text{-}\mathrm{Alg}
+ \;\colon\; \barB
+\]
+between $\mathsf{SC}^{\mathrm{ch,top}}$-algebras and $A_\infty$
+algebras satisfying the axioms of Section~\ref{sec:axioms-Ainfty-chiral}.
+In the Lagrangian language: the $A_\infty$ axioms encode the
+Lagrangian $\mathcal{L} \hookrightarrow \mathcal{M}$; the bar
+complex $\barB$ passes to the self-intersection groupoid
+$\mathfrak{S}_b = \mathcal{L}\times_{\mathcal{M}}^h\mathcal{L}$;
+and the cobar functor $\Omega$ recovers the
+$\mathsf{SC}^{\mathrm{ch,top}}$-algebra from the groupoid. The
+Quillen equivalence states that the $A_\infty$ axioms and the
+$\mathsf{SC}^{\mathrm{ch,top}}$-algebra structure determine each
+other: $\barB$ passes from the SC-algebra to the $A_\infty$ data,
+$\Omega$ recovers the SC-algebra from the bar coalgebra, and the
+two operations are inverse on the homotopy category. In the
+Lagrangian interpretation, this is the skeleton theorem: the
+self-intersection data (groupoid) determines the correspondence
+(SC-algebra), and conversely, because the bar-cobar adjunction
+provides the independent algebraic content without circularity.
+\end{proof}
+
+\begin{remark}[Critical level exclusion discipline]
+\label{rem:critical-level-exclusion-discipline}
+Every $\kappa$ formula of the Sugawara form
+\[
+ \kappa_T(k) \;=\; \frac{\dim(\fg)\,(k+h^\vee)}{2h^\vee},
+ \qquad
+ r(z) \;=\; \frac{\Omega}{(k+h^\vee)\,z},
+ \qquad
+ T_{\mathrm{Sug}}(z) \;=\; \frac{1}{2(k+h^\vee)}\,{:}J^a J_a{:}(z),
+\]
+appearing throughout Volume~II (the rational-function prefactor
+$(k+h^\vee)^{-1}\cdot f(k,h^\vee)$) is a rational function of $k$
+with a simple pole at the \emph{critical level} $k=-h^\vee$.
+At that level $T_{\mathrm{Sug}}$ degenerates: the Sugawara vector
+ceases to be a conformal vector and becomes central, and the
+chiral algebra $V_{-h^\vee}(\fg)$ is controlled by a
+\emph{different} operative invariant, the Feigin--Frenkel centre
+$\mathfrak{z}(\widehat{\fg})$ on the space of $\fg^L$-opers
+(Feigin--Frenkel, Frenkel--Gaitsgory, Arakawa).
+
+Every Sugawara-type invariant therefore carries \emph{two companion
+theorems}:
+\begin{enumerate}
+\item[(i)] \textbf{Non-critical regime} $k\neq -h^\vee$: the
+$\kappa_T$-based statement (Sugawara conformal vector,
+$r(z)=\Omega/((k+h^\vee)z)$, $E_3$-topologisation,
+Drinfeld strictification, spectral $R$-matrix, universal
+holography).
+\item[(ii)] \textbf{Critical regime} $k=-h^\vee$: the
+Feigin--Frenkel-based statement. The role of the Sugawara
+invariant is played by
+\[
+ \kappa_T^{\mathrm{FF}} \;:=\; \mathfrak{z}(\widehat{\fg})
+ \;=\; \mathrm{Fun}\,\mathrm{Op}_{\fg^L}(D),
+\]
+an infinite-dimensional polynomial algebra on opers; the chiral
+Hochschild theorem at critical level
+(Theorem~\ref{thm:feigin-frenkel-chirhoch} of
+Chapter~\ref{ch:hochschild}) replaces the non-critical
+concentration statement by an explicit identification of
+$\ChirHoch^0(V_{-h^\vee}(\fg))$ with the Feigin--Frenkel centre.
+\end{enumerate}
+The union of (i) and (ii) covers all levels; neither subsumes
+the other. In particular, the affine $r$-matrix
+$r(z)=\Omega/((k+h^\vee)z)$ diverges at $k=-h^\vee$ and must be
+excluded there; the level-stripped diagnostic $r = 0$ at $k=0$ is a
+fact about the rescaled $r^{\mathrm{Sug}}(z) = k\,\Omega/((k+h^\vee)z)$,
+not about the Killing--Casimir $r$-matrix, and both diagnostics
+coexist with exclusion of the pole at the critical level.
+
+\emph{Scope convention adopted throughout Volume~II.} Every statement
+involving the prefactor $(k+h^\vee)^{-1}$ or the Sugawara vector
+$T_{\mathrm{Sug}}(z)$ carries the implicit hypothesis $k\neq -h^\vee$,
+or is explicitly flagged as a rational function of~$k$ with a simple
+pole at the critical level. Corollaries claimed at \emph{all} levels
+produce the companion critical-level statement in terms of the
+Feigin--Frenkel invariants, or restrict scope to $k\neq -h^\vee$.
+
+\emph{Companion invariants, not exclusions.} The critical level
+is not a pathological exception but the locus where a parallel
+algebraic structure (the Feigin--Frenkel centre) takes over; per the
+fingerprint classification, the Platonic target is the five-class
+stratum $\{G,L,C,M,FF\}$ with $FF$ the canonical $\kappa=0$ companion
+class.
+\end{remark}
+
+\begin{remark}[$S$-transform vs.\ Wick-rotated $R$-matrix: a chiral bridge]
+\label{rem:s-transform-vs-wick-rotation-bridge}
+The $S$-transform and the Wick-rotated $R$-matrix are frequently
+conflated as ``the same modular datum''. They are not: they act on
+different colours of $\SCchtop$ and on different algebraic strata.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{$S$-transform (closed colour).} The $SL_2(\Z)$ generator
+ $\tau \mapsto -1/\tau$ acts on (weak) modular forms and, via Zhu's
+ theorem~\cite{Zhu96}, on the closed-colour chiral homology
+ $H^\bullet_{\mathrm{ch}}(\Sigma_g, \A)$ at $g=1$. At a root of
+ unity it descends to the Verlinde fusion endomorphism of the
+ category of integrable modules
+ \cite{FrenkelZhu92,HuangLepowskyKong}.
+\item \emph{Wick-rotated $R$-matrix (open colour).} The spectral
+ $R$-matrix $R(z) \in \End(V \otimes V)((z))$ is holomorphic on
+ $\Im(z) > 0$ (time-ordered scattering) and extends by analytic
+ continuation to $\Im(z) < 0$ (anti-time-ordered). The Wick
+ rotation $z \mapsto iz$ exchanges the two half-planes and acts on
+ the ordered $E_1$-chiral structure via the monodromy representation
+ $\mathrm{Mon}(R) \colon B_n \to \End(V^{\otimes n})$.
+\item \emph{Bridge at $\tau = is$.} On the Euclidean torus with
+ purely imaginary modulus $\tau = is$ ($s \in \R_{>0}$), the two
+ data coincide as numerical partition-function insertions:
+ \[
+ S \cdot Z_{\A}(\tau) \Big|_{\tau = is}
+ \;=\; \mathrm{tr}_{\mathcal H} \bigl(
+ \mathrm{Mon}(R)_{\mathrm{Wick}} \cdot q^{L_0 - c/24}
+ \bigr) \Big|_{q = e^{-2\pi s}},
+ \]
+ where the right-hand side is the Wick-rotated monodromy trace
+ on the ordered $E_1$ chain model and the left is the $S$-image
+ of the closed-colour character. The categorical content of this
+ identity is:
+ \emph{$S$-transform on closed chiral homology
+ $\;\equiv\;$ Wick-rotated $\mathrm{Mon}(R)$ at $\tau = is$},
+ reading across the closed/open divide of $\SCchtop$ via the
+ annular bar model $B^{\mathrm{ann}}(\A)$.
+\end{enumerate}
+\emph{Scope.} The bridge identity is PROVED for the Heisenberg
+algebra (direct theta-function computation), for affine Kac--Moody
+$V_k(\mathfrak g)$ at non-critical integer level (via
+Frenkel--Zhu~\cite{FrenkelZhu92} and the Knizhnik--Zamolodchikov
+monodromy identification), and for minimal Virasoro models
+$\mathrm{Vir}_{c_{p,q}}$ (via modular-tensor-category
+Verlinde/Reshetikhin--Turaev matching). It is CONJECTURAL for
+non-rational chiral algebras, where both sides require separate
+regularisation and the pairing of closed modular data with open
+braid monodromy is not yet a theorem.
+The $S$-transform (closed colour, complex structure) and the Wick
+rotation of $R$ (open colour, $E_1$ ordering) are thus distinct
+algebraic data that coincide numerically on the Euclidean torus
+slice in the proved scope above, not universally.
+\end{remark}
+
+\subsubsection{$(H1)$--$(H5)$ as the FMP on the derived chiral algebra stack}
+\label{subsec:h-axioms-from-fmp}
+
+The five hypotheses $(H1)$--$(H5)$ used elsewhere in Volume~II
+(one-loop finiteness; propagator meromorphicity and $\R$-regularity;
+configuration-space convergence and AOS relations; factorisation
+compatibility; conformal-vector admissibility) are not a list of
+ad hoc analytic assumptions. They are the axioms of a \emph{formal
+moduli problem} (FMP, in the sense of \cite[Thm.~2.2.4]{Pridham}
+and \cite[Ch.~15, Thm.~1.3.12]{HA}) attached to the derived stack
+$\mathbf{ChirAlg}^{\omega,\mathrm{log}}_X$ of logarithmic
+$\SCchtop$-algebras with conformal vector, presented through the
+factorisation ambient of Francis--Gaitsgory~\cite{FG12}.
+
+\begin{theorem}[$(H1)$--$(H5)$ from the formal moduli problem]
+\label{thm:h-axioms-from-fmp}
+Let $X$ be a smooth curve over a field of characteristic~$0$ and let
+\[
+ \mathcal{F}_{\mathrm{log\text{-}SC}} \colon
+ \mathrm{dgArt}^{\mathrm{aug}}_k \longrightarrow \mathcal{S}
+\]
+be the functor sending an augmented dg Artinian local algebra
+$(R,\mathfrak m)$ to the space of $R$-families of
+logarithmic $\SCchtop$-algebras on $X$ equipped with a
+conformal vector (Definition~\ref{def:log-SC-algebra} plus a
+non-critical Sugawara datum). Then:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{FMP property.} $\mathcal{F}_{\mathrm{log\text{-}SC}}$
+ is an FMP in the sense of
+ \cite[\S2.1]{Pridham} / \cite[Def.~15.1.1.8]{HA}. That is,
+ $\mathcal{F}_{\mathrm{log\text{-}SC}}(k) \simeq \mathrm{pt}$ and
+ $\mathcal{F}_{\mathrm{log\text{-}SC}}$ preserves pullbacks along
+ small surjections.
+\item \emph{Tangent $L_\infty$ structure.} There is a canonical
+ dg Lie (equivalently, $L_\infty$) algebra
+ $\mathfrak g^{\mathrm{SC}}_X$ controlling
+ $\mathcal{F}_{\mathrm{log\text{-}SC}}$ under the Lurie--Pridham
+ equivalence $\mathrm{FMP}_k \simeq L_\infty\text{-}\mathrm{Alg}_k$
+ \cite[\S4]{Pridham},\cite[Thm.~15.3.4.2]{HA}; explicitly
+ $\mathfrak g^{\mathrm{SC}}_X$ is the convolution $L_\infty$
+ algebra associated with the bar twisting cochain
+ $\tau_{\mathrm{SC}} \colon B(\SCchtop) \to \SCchtop$.
+\item \emph{Axiomatic coincidence.} For $(R,\mathfrak m)$ an
+ augmented dg Artinian base, the enumerated hypotheses
+ $(H1)$--$(H5)$ imposed on an $R$-family $(\A/R, \omega, Q, S)$
+ are equivalent, one at a time, to the defining conditions
+ of $\mathcal{F}_{\mathrm{log\text{-}SC}}(R)$:
+ \begin{itemize}
+ \item $(H1)$ \textup{one-loop finiteness} $\iff$ propagator
+ factorisation on $\FM_k(\C) \times \Conf_k(\R)$ extends
+ across the exceptional divisor of the Fulton--MacPherson
+ compactification over~$R$, i.e.\ existence of the
+ $R$-family of weight forms (tangent-obstruction vanishing
+ in $H^2(\mathfrak g^{\mathrm{SC}}_X / R)$);
+ \item $(H2)$ \textup{propagator regularity} $\iff$
+ logarithmic-singularity condition
+ $\omega_k^{\mathrm{hol}} \in \Omega^\bullet_{\log}(\FM_k(\C))$
+ of Definition~\ref{def:log-SC-algebra};
+ \item $(H3)$ \textup{AOS identities on configuration space}
+ $\iff$ Maurer--Cartan equation for $\tau_{\mathrm{SC}}$
+ on the bar cooperad $B(\SCchtop)$;
+ \item $(H4)$ \textup{factorisation compatibility} $\iff$
+ functoriality of $\mathcal{F}_{\mathrm{log\text{-}SC}}$
+ under disjoint-union embeddings
+ $\mathrm{Ran}(U) \hookrightarrow \mathrm{Ran}(X)$ in
+ the chiral Koszul ambient of~\cite{FG12};
+ \item $(H5)$ \textup{conformal-vector admissibility at
+ non-critical level} $\iff$ choice of Sugawara lift
+ $T \in \mathrm{MC}(\mathfrak g^{\mathrm{SC}}_X)$ with
+ $\kappa_T \neq 0$, identifying
+ $\mathcal{F}_{\mathrm{log\text{-}SC}}$ with the
+ non-critical stratum of the FMP.
+ \end{itemize}
+\item \emph{Universality.} Every point of
+ $\mathcal{F}_{\mathrm{log\text{-}SC}}(R)$, equivalently every
+ Maurer--Cartan element of
+ $\mathfrak g^{\mathrm{SC}}_X \otimes \mathfrak m$, is a
+ logarithmic $\SCchtop$-algebra over $R$ satisfying
+ $(H1)$--$(H5)$; conversely every such algebra arises this way.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[Sketch]
+\emph{(i)} The pullback property for $\mathcal{F}_{\mathrm{log\text{-}SC}}$
+reduces to the pullback property for the functor classifying
+$C_\ast(W(\SCchtop))$-algebras, which holds because
+$C_\ast(W(\SCchtop))$ is a cofibrant dg operad (Koszul resolution
+of $\SCchtop$ via the coloured Koszul duality of
+\cite{FG12,HA}) and algebras over cofibrant operads satisfy the
+pullback axiom for FMPs.
+
+\emph{(ii)} Apply the Lurie--Pridham correspondence
+$\mathrm{FMP}_k \simeq L_\infty\text{-}\mathrm{Alg}_k$
+\cite[Thm.~2.2.4]{Pridham},\cite[Thm.~15.3.4.2]{HA}. The
+tangent complex of $\mathcal{F}_{\mathrm{log\text{-}SC}}$ at the
+augmentation $k \to k$ is, by operadic deformation theory, the
+convolution complex
+$\mathfrak g^{\mathrm{SC}}_X =
+\mathrm{Conv}(B(\SCchtop), \mathcal{E}nd_\A^{\mathrm{ch}})$.
+Its $L_\infty$ structure is the standard convolution structure
+of \cite{LV12}. Chiralisation (the extension of the shuffle
+operad ambient to the BD chiral pseudo-tensor on $\mathrm{Ran}(X)$)
+is precisely the Francis--Gaitsgory \cite{FG12} replacement of
+$\otimes$ by $\otimes^{\mathrm{ch}}$; the resulting
+$L_\infty$-algebra in $\mathrm{IndCoh}(\mathrm{Ran}(X))$
+classifies the $R$-family FMP.
+
+\emph{(iii)} The axiomatic coincidence is read off by comparing
+the hypotheses of Theorem~\ref{thm:physics-bridge} (which
+produces logarithmic $\SCchtop$-algebras from BV data) with the
+Maurer--Cartan equation on
+$\mathfrak g^{\mathrm{SC}}_X \otimes \mathfrak m$. Each
+hypothesis corresponds to one component of the defining datum
+(weight form existence, logarithmic-pole condition, MC equation,
+Ran-descent, Sugawara lift).
+
+\emph{(iv)} Universality is the content of the Lurie--Pridham
+correspondence: MC elements of $\mathfrak g^{\mathrm{SC}}_X
+\otimes \mathfrak m$ and $R$-points of the FMP are in
+equivalence.
+\end{proof}
+
+\begin{corollary}[$(H1)$--$(H5)$ are not ad hoc]
+\label{cor:h-axioms-universal}
+The hypotheses $(H1)$--$(H5)$ are equivalent to membership in the
+universal FMP $\mathcal{F}_{\mathrm{log\text{-}SC}}$ classifying
+deformations of logarithmic $\SCchtop$-algebras with conformal
+vector. They are not independent analytic assumptions imposed by
+the construction; they are the component-wise unpacking of a
+single derived-geometric structure (the tangent $L_\infty$ algebra
+$\mathfrak g^{\mathrm{SC}}_X$).
+\end{corollary}
+
+\begin{remark}[Scope]
+\label{rem:fmp-scope}
+Theorem~\ref{thm:h-axioms-from-fmp}(i)--(iv) is proved
+unconditionally in the classical limit of the chiral ambient,
+i.e.\ over the formal disk $D = \Spec k[[z]]$, where
+$\mathfrak g^{\mathrm{SC}}_D$ is a genuine $L_\infty$-algebra over
+$k$ and the Lurie--Pridham correspondence applies directly. For
+the global curve $X$ and, more generally, for families over the
+moduli stack $\overline{\mathcal M}_{g,n}$, the tangent datum is
+the $L_\infty$-algebra
+$\mathfrak g^{\mathrm{SC},\mathrm{mod}}_X$ whose MC elements
+encode modular compatibility; the reduction of $(H1)$--$(H5)$ to
+FMP structure over $\overline{\mathcal M}_{g,n}$ coincides with
+the modular bootstrap (curved Dunn additivity at
+$g\ge 1$, $\kappa_T$-weight form compatibility across stable
+graphs, cf.~Thm.~\ref{thm:curved-dunn-H2-vanishing-all-genera}).
+\end{remark}
+
+\subsubsection{Compatibility with the PVA construction}
+\label{subsec:compat-PVA}
+
+The axiomatic and operadic incarnations of an $\Ainf$ chiral
+algebra having been shown equivalent, it remains to verify that
+the PVA structure produced on cohomology
+(Theorem~\ref{thm:cohomology_PVA}) agrees with the one read
+directly off the associated graded of the operad. This is a
+consistency check, not a new construction.
+
+The proof of the PVA structure on cohomology in
+Section~\ref{sec:axioms-Ainfty-chiral} can be interpreted
+operadically as the statement that the associated graded
+(holomorphic filtration) of $W(\mathsf{SC}^{\mathrm{ch,top}})$ is
+the free product of BD chiral and $E_1$, so the cohomological
+operations descend from the closed color; the bracket is the
+classical limit (residue) of the operadic composites, and
+associativity is the regular part of the $m_2$ identity.
+
+\begin{remark}[Good Z-grading scope for DS reduction]\label{rem:ds-good-grading-scope}
+Quantum Drinfeld--Sokolov reduction $\mathcal{W}_k(\mathfrak{g}, f)$ requires a \emph{good} $\mathbb{Z}$-grading on $\mathfrak{g}$ with $f \in \mathfrak{g}_{-2}$: $\operatorname{ad} f \colon \mathfrak{g}_0 \to \mathfrak{g}_{-2}$ surjective, Kazhdan pairing on $\mathfrak{g}_{1/2}$ non-degenerate, $f$ in a unique nilpotent orbit meeting $\mathfrak{g}_{-2}$. The principal nilpotent always admits a good grading. Classical types $A_n, B_n, C_n, D_n$ admit good gradings on their nilpotent orbits (Kac--Roan--Wakimoto); in exceptional types $E_{6,7,8}, F_4, G_2$ the admissible orbits are the classified good-grading orbits. This is the scope for forming the DS-BRST complex. It is not a DS--Hochschild transport theorem, not a chain-level $\SCchtop$ lift, and not a Koszul-preservation statement. In this volume the DS--Hochschild comparison is proved for principal and hook-type data, with named cover-descent fibres such as Bershadsky--Polyakov checked separately; subregular, minimal beyond named fibres, exceptional good-graded, and exotic nilpotents require case-by-case BRST admissibility, invariant transferred braces, and Hochschild comparison.
+\end{remark}
+
+\begin{remark}[Five $E_1$-chiral notions and the present axioms]
+\label{rem:axioms-five-e1-notions}%
+\index{E_1-chiral algebra@$\Eone$-chiral algebra!five notions}%
+The single phrase ``$\Eone$-chiral algebra'' names at least five
+distinct objects in the literature, none of them interchangeable
+with another at chain level; the present axiomatic notion must be
+anchored canonically among them.
+(A) Strict $\mathrm{ChirAss}$-algebra in $\mathrm{D}\text{-}\mathsf{mod}(X)$
+(Beilinson--Drinfeld pseudo-tensor): the bare strict associative
+chiral algebra.
+(B) $A_\infty$-algebra in $\End^{\mathrm{ch}}_\cA$: the present
+Definition~\ref{def:ainfty_chiral} together with the
+$\Eone$-chiral interpretation of
+Definition~\ref{def:e1-chiral-algebra}; equivalently, an
+$A_\infty$-algebra structure on the chiral endomorphism operad
+of Remark~\ref{rem:operadic-formulation}.
+(C) Etingof--Kazhdan quantum vertex algebra: the Drinfeld-associator-fixed
+quantization of an $\Einf$-chiral seed via the EK braided
+operad isomorphism, well-defined on the chirally Koszul locus.
+(D) $A_\infty$-algebra in the $\Eone$-chiral $\infty$-operad:
+homotopy-coherent $\Eone$-algebra in $\Fact^{\mathrm{ord}}(X)$,
+native to the Gaitsgory--Rozenblyum $(\infty,2)$-categorical
+ambient.
+(E) Factorization algebra on $\Ran^{\mathrm{ord}}(X)$: the
+Francis--Gaitsgory geometric incarnation, with $n$-ary operations
+on $\Conf_n^{\mathrm{ord}}(X)$ not required to descend to
+$\Sigma_n$-coinvariants.
+The present axioms produce (B);
+(B) $\leftrightarrow$ (C) on the Koszul locus via the EK quantization
+isomorphism modulo the choice of Drinfeld associator
+$\Phi \in \GRT_1(\Q)$; (B) $\leftrightarrow$ (D) on the same
+locus via the rectification of $A_\infty$-algebras to algebras
+over a cofibrant operad (Theorem~\ref{thm:rectification});
+(D) $\leftrightarrow$ (E) by Francis--Gaitsgory factorization
+recognition; (A) is \emph{strictly weaker} than (B)--(E) (no
+homotopy data, no associator). The downstream chapters use (B)
+on the formal disk and (D)/(E) on the global curve; no statement
+requires (A) alone, and every statement mentioning (C) carries
+an explicit Drinfeld-associator choice. The bridges are theorems,
+not definitions.
+\end{remark}
+
+\begin{remark}[The axioms as input to the universal-holography theorem]
+\label{rem:axioms-holography-anchor}%
+\index{universal holography!axioms anchor}%
+The axiomatic boundary algebra of
+Definition~\ref{def:ainfty_chiral} is the family-by-family input
+to the universal-holography master theorem
+(Theorem~\ref{thm:universal-holography-master}).
+Each rung specialises this axiomatic input:
+the Heisenberg corollary (Corollary~\ref{cor:rung-heisenberg})
+takes $\cA = \cH_k$ with $\kappaChHodge(\cH_k) = k$, abelian Sugawara
+$T = \tfrac{1}{2k}{:}JJ{:}$, $c = 1$;
+the affine Kac--Moody corollary
+(Corollary~\ref{cor:rung-affine-km}) takes $\cA = V_k(\fg)$ with
+$\kappaChHodge(V_k(\fg)) = \dim(\fg)(k+h^\vee)/(2h^\vee)$ and Sugawara
+stress at non-critical level;
+the Virasoro corollary (Corollary~\ref{cor:rung-virasoro})
+takes $\cA = \mathrm{Vir}_c$ with
+$\kappaChHodge(\mathrm{Vir}_c) = c/2$ and BRST-primitive $G^{(2)}$
+from the Costello--Gaiotto holomorphic Chern--Simons construction;
+the $W_N$ corollary (Corollary~\ref{cor:rung-w-N}) takes
+$\cA = \cW_N(\fg)$ with $\kappaChHodge(\cW_N) = c(H_N - 1)$, where
+$H_N = \sum_{j=1}^N 1/j$ (boundary check at $N=2$:
+$\kappaChHodge(\cW_2) = c/2 = \kappaChHodge(\mathrm{Vir})$); the
+$W_\infty$ corollary (Corollary~\ref{cor:rung-w-infty}) is the
+iterated-Sugawara $E_\infty$-topological limit
+(Theorem~\ref{thm:e-infinity-topologization-ladder}). The
+$\Sigma_n$-coinvariant projection of the ordered axioms is the
+symmetric-bar shadow used in the modular-characteristic
+computation; the ordered axioms themselves carry the full
+$R$-matrix data via the deconcatenation coproduct.
+
+The Volume~I Koszul-reflection identity, on the genus-$0$
+affine/tangent KZ window,
+$\bar\partial = \KZ^*(\nabla_{\mathrm{Arnold}})$ together with
+$\kappaChHodge(\cA) = -c_{\mathrm{ghost}}(\mathrm{BRST})$ is, on the
+present axiomatic side, the comparison between the bar
+differential $d_{\barB}$ on $T^c(s^{-1}\bar\cA)$ assembled from
+the $m_k$ above and the holomorphic Knizhnik--Zamolodchikov
+connection on $\Conf_n(\C)$ pulled back via the collision-residue
+Arnold relations on $\FM_n(\C)$. The universal conductor formula
+$K(\cA) = \kappaChHodge(\cA) + \kappaChHodge(\cA^!)$ and the universal
+trace identity bridge are the characteristic-class shadows of
+the present axiomatic data under the open/closed pentagon of
+equivalences for $\SCchtop$.
+\end{remark}
+
+\begin{remark}[Curved-$A_\infty$ axiomatic support for the K3 BKM
+ Borcherds correction]
+\label{rem:axioms-k3-bkm-curved-ainfty}%
+\index{K3 chiral bialgebra!curved-$A_\infty$ support}%
+\index{Borcherds-imaginary-root relation!axiomatic handle}%
+\index{Hochschild concentration!CY-$3$ extension for K3}%
+The K3 chiral bialgebra target $\cA = \mathbf{H}_{\Delta_5}$ of
+Vol~III, Ch.\,\ref{V3-ch:k3-chiral-bialgebra-platonic}, is compared
+with the axiomatic framework above only through the curved
+$A_\infty$ extension (Definition~\ref{def:curved-ainfty-chiral}) and
+after the finite Hall/CoHA source, pairing, PBW/no-extra-relations,
+radical, parity, completion, inverse-limit, and EK/Heegner gates. In
+that conditional comparison the chain-level generators realise
+$V\subset\cA$ of homogeneous
+OPE-weight~$1$, the quadratic Miki commutators realise $m_2$
+purely in $V\otimes V$, and the Borcherds-imaginary-root relations
+$R_{\mathrm{Borcherds}}$
+\textup{(}Vol~I, Ch.\,\ref{V1-chap:climax-platonic},
+Remark~\textup{\ref{V1-rem:k3-koszul-structure-precise}}\textup{)}
+realise as higher-arity operations $m_k$ with $k\geq 3$ and as
+a non-vanishing curvature element
+\[
+ m_0 \;=\; \omega_{\Delta_5} \;\in\; \Gamma\!\bigl(
+ \overline{\mathcal{A}_2},\, \mathcal{O}_{\overline{\mathcal{A}_2}}\bigr),
+ \qquad
+ \deg \omega_{\Delta_5} = 2,
+\]
+whose EK/Heegner comparison target is the Gritsenko--Nikulin
+denominator cocycle read automorphically. The $n=1$ curved relation of
+Definition~\ref{def:curved-ainfty-chiral}, $m_1^2 = [m_0, -]$,
+encodes the conditional test that the bar differential on the K3 input
+fails to square to zero by the Humbert-divisor obstruction: on
+the Koszul locus $\overline{\mathcal{A}_2}\setminus H_1$ the
+curvature $m_0$ vanishes to second order in local coordinates and
+the ordinary $A_\infty$ relations hold; across $H_1$ the order-$8$
+monodromy of Vol~III,
+Theorem~\textup{\ref{thm:humbert-order-K-kappa}}, is the
+cohomological shadow of non-vanishing $m_0$.
+
+\smallskip
+\noindent\emph{The K3 categorical and chiral supports.}
+Volume~I Theorem~H begins with a family datum
+$H_H(\mathbf H_{\Delta_5};S_{\Delta_5})$ and gives
+\[
+ \ChirHoch^n(\mathbf H_{\Delta_5})
+ \cong H^n(K_{\mathbf H_{\Delta_5},S_{\Delta_5}}),
+ \qquad
+ \operatorname{Supp}\ChirHoch^\bullet(\mathbf H_{\Delta_5})
+ \subseteq S_{\Delta_5}.
+\]
+The HKR theorem computes the categorical Hochschild object of
+$D^b(\mathrm{Coh}(K3\times E))$ in its CY$_3$ ambient.  Its passage
+to the chiral curve chart requires the comparison
+\[
+ q_{\Phi,C}\colon
+ \HH^\bullet(D^b\mathrm{Coh}(K3\times E))longrightarrow
+ \ChirHoch^\bullet(\mathbf H_{\Delta_5}).
+\]
+The K3 comparison problem is to construct $q_{\Phi,C}$ and the
+cochain homotopies that send every categorical degree outside
+$S_{\Delta_5}$ to an exact chart cochain.  The degree-three chart
+group is then determined by the resulting complex.  The
+Schiffmann--Vasserot degree-three CoHA generator supplies a candidate
+source class whose image remains to be computed.
+
+\smallskip
+\noindent\emph{Bar-cobar inversion in the curved lane.}
+On the Koszul locus $\overline{\mathcal{A}_2}\setminus H_1$, the
+bar-cobar counit of Theorem~A, strengthened in the completed
+Positselski Theorem~B \textup{(}Vol~I,
+Theorem~\textup{\ref{V1-thm:theorem-b-platonic-pointer}}\textup{)}
+is the comparison target for $\mathbf{H}_{\Delta_5}$ in the
+curved-$A_\infty$ category with the curved bar functor of
+Positselski\,2011, Memoirs AMS\,212, Ch.~$7$; the
+weight-completed coderived-contraderived equivalence must survive the
+$m_0\ne 0$ deformation because
+$\omega_{\Delta_5}$ is a scalar on the base and does not couple to
+the bar-length filtration. The chain-level chain-homotopy witness
+is the $h_{\mathrm{bar}}^{\Delta_5}$ of
+Remark~\textup{\ref{V1-rem:k3-koszul-structure-precise}}, valued in the
+Positselski curved CDG bar resolution.
+\end{remark}
+
+\section{K3 base-point axioms}
+\label{sec:axioms-supplement}
+
+\begin{remark}[Vol~II axioms of $\mathsf{SC}^{\mathrm{ch,top}}$ at the K3 base point]
+\label{rem:axioms-1}
+The Vol~II axioms of $\mathsf{SC}^{\mathrm{ch,top}}$ ($3$D HT QFT)
+instantiate at the K3 base point with the boundary chart
+$\mathbf H_{\Delta_5}$ at the Schur sector of class-$\mathcal S$ $A_1$
+on $\Sigma_{0,24}$, with Shapere--Tachikawa central charges
+$c_{4d} = 107/6$ and $c_{2d} = -214$,
+the chiral base $\mathrm{Ran}(E^{\mathrm{nod,sm}}_{24})$, and the
+parameter base $\bar{\mathcal A}_2$. The averaging morphism is
+\[
+\mathrm{av}
+=\mathrm{Torelli}_{K3}\circ\mathrm{KugaSatake}\circ j_{\mathrm{Kod}}.
+\]
+The holomorphic-twist axiom gives the chiral boundary algebra; the
+Borcherds--Gritsenko lift gives the automorphic scalar
+$\Delta_5$. These are linked by $\mathrm{av}$, not identified as
+the same object \cite{CostelloHolomorphic,Gaiotto2009}.
+Compare Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+\end{remark}
+
+\begin{remark}[K3 base-point refinement]
+\label{rem:axioms-2}
+At the K3 base point, the Vol~II axioms refine as follows. The
+factorisation axiom is bi-based: Beilinson--Drinfeld factorisation
+lives on $\mathrm{Ran}(E^{\mathrm{nod,sm}}_{24})$, while the
+automorphic line $\mathcal L^{\Delta_5}$ lives over
+$\bar{\mathcal A}_2$. The Borcherds scalar is
+$\Delta_5$ on the Maass spin cover, with
+$\Phi_{10}^{\mathrm{un}}=\Delta_5^2$ on the untwisted Siegel
+cover. The Hall--Drinfeld-double axiom specifies the conditional
+target
+\[
+\mathcal D_\hbar^{\mathrm{red},\mathrm{comp}}(
+  \mathcal Y^{\mathrm{Hall}}_\hbar,
+  \widetilde\Phi^{\mathrm{Sieg\text{-}Bor}}_{\mathrm{Sp}_4},
+  R_{\mathrm{Sieg,dyn}})
+\;\dashrightarrow\;
+\mathbf H_{\Delta_5},
+\]
+after the finite Hall/CoHA source, pairing, PBW/no-extra-relations,
+radical, parity, completion, inverse-limit, and EK/Heegner comparison
+gates. The $R$-matrix axiom supplies the comparator
+$R_{\mathrm{Sieg,dyn}}$ via the Pasol--Zagier
+Kronecker--Eisenstein series. The conductor identity
+\[
+\hbar_{\mathrm{QG}}^2 K^{\kappaChHodge}=-1,\qquad
+K^{\kappaChHodge}=2c_+(\mathrm{Mukai}(K3))=8,
+\]
+fixes the quantum-group specialisation
+$\hbar_{\mathrm{QG}}^2=-1/8$ \cite{PasolZagier2013,EtingofKazhdan2007PartV}.
+Compare Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+\end{remark}

@@ -1,0 +1,2424 @@
+% Section file for Chapter: Twisted Holography and Quantum Gravity
+% Result (G9): Critical String Dichotomy
+
+\section{Critical string dichotomy}
+% label removed: sec:thqg-critical-string-dichotomy
+\label{ch:thqg-critical-string}% alias for dangling \ref{ch:...}
+\index{critical string!dichotomy|textbf}
+\index{Virasoro!c=26@$c=26$ critical string}
+\index{transgression algebra|textbf}
+\index{Clifford completion|textbf}
+
+The Virasoro algebra at $c = 26$ has appeared in three earlier contexts:
+as the uncurved dual $\mathrm{Vir}_{26}^! \simeq \mathrm{Vir}_0$
+(Proposition~\ref{V1-prop:virasoro-c26-selfdual}),
+as the endpoint of the complementarity sum
+$\kappa + \kappa' = c/2 + (26-c)/2 = 13$
+(Proposition~\ref{V1-prop:vir-complementarity}),
+and as the saturation point of the depth-zero resonance shadow
+(Remark~\ref{V1-rem:virasoro-resonance-model}).
+The three facts coalesce into a single structural dichotomy,
+controlled by a Clifford algebra built from the handle
+decomposition of genus-$g$ surfaces.
+
+\begin{remark}[Scope restriction inherited from Volume~I]
+The \ClaimStatusProvedHere{} statements rest on Volume~I
+Theorems \texttt{vir-all-genera}, \texttt{topological-regime},
+\texttt{gravitational-regime}, \texttt{critical-string-dichotomy},
+\texttt{ghost-sector-c26}, \texttt{vir-self-duality-c13} and
+Propositions \texttt{vir-complementarity},
+\texttt{virasoro-c26-selfdual},
+\texttt{genus-g-curvature-package}; their scope qualifiers
+propagate. Load-bearing cross-volume citations carry the explicit
+``Volume~I'' prefix; the semantic content
+(complementarity tallies, regime dichotomy, secondary-anomaly
+data) is inherited without restatement.
+\end{remark}
+
+The curvature $\dfib^{\,2} = \kappaChHodge(\cA) \cdot \omega_g$
+(Convention~\ref{V1-conv:higher-genus-differentials})
+is not an obstruction to be cancelled but a datum to be \emph{transgressed}.
+The transgression algebra $B_\Theta$ is the universal solution to the
+problem of killing the curvature by adjoining an element whose square
+\emph{is} the curvature. The secondary anomaly element
+$u = \eta^2 \in B_\Theta$ is closed and central. Its invertibility or
+vanishing controls everything: when $u$ is invertible, the genus-$g$
+Clifford completion is Morita equivalent to $B_\Theta[u^{-1}]$ via the
+spinor module; when $u = 0$, the Clifford relations degenerate to
+exterior algebra relations, and the bar complex becomes a genuine cochain
+complex tensored with $\bigwedge^{2g+1}$. For the Virasoro at $c = 0$
+(i.e., the Koszul dual of $\mathrm{Vir}_{26}$),
+$u = 0$ is the algebraic exterior/uncurved shadow of the ghost-sector
+simplification that appears in the no-ghost theorem;
+at $c = 13$, the symmetric distribution $\kappa = \kappa' = 13/2$ gives
+the self-dual fixed point of the Feigin--Frenkel involution.
+
+% ======================================================================
+%
+% SUBSECTION: THE TRANSGRESSION ALGEBRA
+%
+% ======================================================================
+
+\subsection{The transgression algebra}
+% label removed: subsec:transgression-algebra
+\index{transgression algebra!construction|textbf}
+
+\subsubsection{Construction from the curved bar complex}
+% label removed: subsubsec:transgression-construction
+
+The genus-$g$ bar complex $(\barB^{(g)}(\cA), \dfib)$ of a cyclic
+chiral algebra~$\cA$ satisfies
+$\dfib^{\,2} = \kappaChHodge(\cA) \cdot \omega_g \cdot \id$
+(Proposition~\ref{V1-prop:genus-g-curvature-package}),
+with $\kappaChHodge(\cA) = \mathrm{Tr}_\cA$
+(Definition~\ref{V1-def:modular-curvature-direct}) and $\omega_g$ the
+Arakelov $(1,1)$-form on the genus-$g$ fiber.
+The transgression algebra is the universal solution to the
+problem of killing this curvature by adjoining a degree-one
+element whose square is the curvature.
+
+\begin{definition}[Transgression algebra]
+% label removed: def:transgression-algebra
+\index{transgression algebra!definition|textbf}
+Let $(B, d)$ be a graded-associative $\Bbbk$-algebra
+equipped with a degree-$1$ derivation $d\colon B \to B$ satisfying the
+\emph{curved} relation
+\begin{equation}% label removed: eq:g9-curved-relation
+d^2(b) = [\lambda, b]
+\qquad
+\text{for all } b \in B,
+\end{equation}
+where $\lambda \in B^2$ is a degree-$2$ central element (the
+\emph{curvature}). The \emph{transgression algebra} of the pair
+$(B, d, \lambda)$ is
+\begin{equation}% label removed: eq:g9-transgression-def
+B_\Theta
+\;:=\;
+B\langle \eta \rangle \big/ (\eta^2 - \lambda),
+\end{equation}
+where $\eta$ is a formal generator of degree~$1$, subject to
+$|\eta| = 1$ and $\eta^2 = \lambda$. The differential extends to
+$B_\Theta$ by
+\begin{equation}% label removed: eq:g9-transgression-diff
+d_{B_\Theta}(\eta) := 0,
+\qquad
+d_{B_\Theta}(b) := d(b) + [\eta, b]
+\quad\text{for } b \in B.
+\end{equation}
+\end{definition}
+
+\begin{remark}[Degree and sign conventions]
+% label removed: rem:g9-transgression-signs
+In~\eqref{V1-eq:g9-transgression-def}, the algebra $B\langle \eta \rangle$
+is the free graded-associative extension of~$B$ by an odd generator
+$\eta$ of degree~$1$, with the Koszul sign rule: $\eta \cdot b =
+(-1)^{|b|} b \cdot \eta$ for homogeneous $b \in B$. The relation
+$\eta^2 = \lambda$ is consistent with graded commutativity: since
+$|\eta| = 1$ is odd, $\eta^2 = \eta \cdot \eta$ is
+\emph{not} forced to vanish in the graded-commutative world (where it
+would be $-\eta^2$); in the associative setting, $\eta^2$ is a
+well-defined degree-$2$ element. The relation $\eta^2 = \lambda$
+identifies this element with the curvature.
+\end{remark}
+
+\begin{proposition}[Transgression kills curvature; \ClaimStatusProvedHere]
+% label removed: prop:transgression-kills-curvature
+\index{transgression algebra!kills curvature}
+The extended differential $d_{B_\Theta}$ on $B_\Theta$ satisfies
+\begin{equation}% label removed: eq:g9-dBT-squared
+d_{B_\Theta}^{\,2} = 0.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Verification: $d_{B_\Theta}^{\,2}$ on generators.
+
+\emph{On $\eta$}:
+$d_{B_\Theta}(\eta) = 0$, so $d_{B_\Theta}^{\,2}(\eta) = 0$.
+
+\emph{On $b \in B$}: Compute
+\begin{align}
+d_{B_\Theta}^{\,2}(b)
+&= d_{B_\Theta}\bigl(d(b) + [\eta, b]\bigr) \notag \\
+&= d_{B_\Theta}(d(b)) + d_{B_\Theta}([\eta, b]) \notag \\
+&= \bigl(d^2(b) + [\eta, d(b)]\bigr)
+ + \bigl([d_{B_\Theta}(\eta), b]
+ + (-1)^{|\eta|}[\eta, d_{B_\Theta}(b)]\bigr). % label removed: eq:g9-dsq-expand
+\end{align}
+The first term in the second parenthesis vanishes since
+$d_{B_\Theta}(\eta) = 0$. Expand the remaining terms:
+\begin{align}
+d_{B_\Theta}^{\,2}(b)
+&= d^2(b) + [\eta, d(b)]
+ - [\eta, d(b) + [\eta, b]] \notag \\
+&= d^2(b) + [\eta, d(b)]
+ - [\eta, d(b)] - [\eta, [\eta, b]] \notag \\
+&= d^2(b) - [\eta, [\eta, b]]. % label removed: eq:g9-dsq-simplify
+\end{align}
+The sign $(-1)^{|\eta|} = -1$ accounts for the negative sign in the
+last line. Now compute the double bracket.
+Using associativity and the relation $\eta^2 = \lambda$:
+\begin{align}
+[\eta, [\eta, b]]
+&= \eta(\eta b - (-1)^{|b|}b\eta)
+ - (-1)^{|b|+1}(\eta b - (-1)^{|b|}b\eta)\eta \notag \\
+&= \eta^2 b - (-1)^{|b|}\eta b \eta
+ - (-1)^{|b|+1}\eta b \eta + (-1)^{2|b|+1}b\eta^2 \notag \\
+&= \lambda b - (-1)^{|b|}\eta b \eta
+ + (-1)^{|b|}\eta b \eta - b\lambda \notag \\
+&= \lambda b - b \lambda \notag \\
+&= [\lambda, b]. % label removed: eq:g9-bracket-curvature
+\end{align}
+Substituting into~\eqref{V1-eq:g9-dsq-simplify}:
+\[
+d_{B_\Theta}^{\,2}(b)
+= d^2(b) - [\lambda, b]
+= [\lambda, b] - [\lambda, b]
+= 0,
+\]
+using $d^2(b) = [\lambda, b]$ from~\eqref{V1-eq:g9-curved-relation}.
+Since $d_{B_\Theta}$ is a derivation and vanishes on all
+generators, $d_{B_\Theta}^{\,2} = 0$ on all of $B_\Theta$.
+\end{proof}
+
+\begin{remark}[Module structure and $\eta$-decomposition]
+% label removed: rem:g9-eta-filtration
+\index{transgression algebra!module structure}
+Since $\eta^2 = \lambda \in B$, any element of $B_\Theta$ can be
+written uniquely as $b_0 + b_1 \eta$ with $b_0, b_1 \in B$.
+Thus $B_\Theta$ is a rank-$2$ free left $B$-module:
+\begin{equation}% label removed: eq:g9-BT-decomposition
+B_\Theta = B \oplus B\eta.
+\end{equation}
+The multiplication rule is
+\begin{equation}% label removed: eq:g9-BT-multiplication
+(a_0 + a_1\eta)(b_0 + b_1\eta)
+= (a_0 b_0 + (-1)^{|a_1|}a_1 b_1 \lambda)
+ + (a_0 b_1 + (-1)^{|a_1|}a_1 b_0)\eta.
+\end{equation}
+\end{remark}
+
+\begin{proposition}[Quotient identification; \ClaimStatusProvedHere]
+% label removed: prop:g9-quotient
+\index{transgression algebra!quotient}
+The quotient by the ideal generated by~$\eta$ recovers the algebra
+modulo its curvature:
+\begin{equation}% label removed: eq:g9-quotient-id
+B_\Theta / (\eta) \;\cong\; B / (\lambda).
+\end{equation}
+The induced differential on $B/(\lambda)$ squares to zero.
+\end{proposition}
+
+\begin{proof}
+From~\eqref{V1-eq:g9-BT-decomposition}, the ideal $(\eta) = B\eta + B\eta^2
+= B\eta + B\lambda$. The quotient
+$B_\Theta/(\eta) = (B \oplus B\eta)/(B\eta + B\lambda)
+\cong B/(B\lambda) = B/(\lambda)$.
+On the quotient, $d_{B_\Theta}(b) = d(b) + [\eta, b] \mapsto d(b)$
+(since $\eta \mapsto 0$), and $d^2(b) = [\lambda, b] \mapsto 0$ since
+$\lambda \mapsto 0$ in $B/(\lambda)$.
+\end{proof}
+
+\subsubsection{Specialization to the bar complex}
+% label removed: subsubsec:transgression-bar
+\index{transgression algebra!bar complex specialization}
+
+Apply the transgression construction to the genus-$g$ bar complex of a
+cyclic chiral algebra~$\cA$. Set:
+\begin{equation}% label removed: eq:g9-specialization
+B := \barB^{(g)}(\cA),
+\quad
+d := \dfib,
+\quad
+\lambda := \kappaChHodge(\cA) \cdot \omega_g.
+\end{equation}
+The curvature $\lambda = \kappa \cdot \omega_g$ is central: it is a scalar
+multiple of the identity in the bar coalgebra tensored with the
+$(1,1)$-class on the fiber.
+
+\begin{definition}[Bar-transgression complex]
+% label removed: def:bar-transgression-complex
+\index{bar-transgression complex|textbf}
+The \emph{bar-transgression complex} of $\cA$ at genus $g$ is
+\begin{equation}% label removed: eq:g9-bar-transgression
+B_\Theta^{(g)}(\cA)
+\;:=\;
+\barB^{(g)}(\cA)\langle \eta \rangle
+\big/ (\eta^2 - \kappaChHodge(\cA) \cdot \omega_g),
+\end{equation}
+with $d_{B_\Theta}^{\,2} = 0$ by
+Proposition~\ref{V1-prop:transgression-kills-curvature}.
+Its cohomology is the \emph{transgressed bar cohomology}
+$H^*(B_\Theta^{(g)}(\cA))$.
+\end{definition}
+
+\begin{remark}[Relation to the MC element]
+% label removed: rem:g9-mc-relation
+\index{transgression algebra!MC element relation}
+The curvature $\kappaChHodge(\cA) \cdot \omega_g$ is the genus-$g$ scalar
+shadow of the universal MC element $\Theta_\cA$:
+$\kappaChHodge(\cA) \cdot \omega_g = \mathrm{Sh}_{g,0}(\Theta_\cA)$
+(Corollary~\ref*{V1-cor:shadow-extraction}).
+The transgression algebra is the universal algebraic solution to
+killing this shadow. The corrected differential $\Dg{g}$
+(Convention~\ref{V1-conv:higher-genus-differentials}) is a
+\emph{geometric} solution using $A$-cycle periods. The universal
+property ensures a comparison map
+\[
+B_\Theta^{(g)}(\cA) \longrightarrow
+(\barB^{(g)}(\cA),\, \Dg{g}),
+\qquad
+\eta \longmapsto
+\sum_{k=1}^g t_k\, \omega_k,
+\]
+which is a dg algebra homomorphism when the $A$-periods are specified.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: THE SECONDARY ANOMALY ELEMENT
+%
+% ======================================================================
+
+\subsection{The secondary anomaly element}
+% label removed: subsec:secondary-anomaly
+\index{secondary anomaly!construction|textbf}
+
+\begin{definition}[Secondary anomaly element]
+% label removed: def:secondary-anomaly
+\index{secondary anomaly!definition|textbf}
+The \emph{secondary anomaly element} of the transgression algebra
+$B_\Theta^{(g)}(\cA)$ is
+\begin{equation}% label removed: eq:g9-secondary-anomaly
+u \;:=\; \eta^2 \;=\; \kappaChHodge(\cA) \cdot \omega_g
+\;\in\; B_\Theta^{(g)}(\cA).
+\end{equation}
+It has cohomological degree $|u| = 2$.
+\end{definition}
+
+\begin{proposition}[Properties of $u$; \ClaimStatusProvedHere]
+% label removed: prop:secondary-anomaly-properties
+\index{secondary anomaly!properties}
+The secondary anomaly element satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Closedness.}\; $d_{B_\Theta}(u) = 0$.
+
+\item \emph{Centrality.}\; $u \cdot b = b \cdot u$ for all $b \in
+B_\Theta^{(g)}(\cA)$.
+
+\item \emph{Factorization.}\; $u = \kappaChHodge(\cA) \cdot \omega_g$, where
+$\kappaChHodge(\cA) \in \Bbbk$ is the scalar modular characteristic and
+$\omega_g \in H^{1,1}(\Sigma_g)$ is the Arakelov class. The element
+$u$ vanishes if and only if $\kappaChHodge(\cA) = 0$.
+
+\item \emph{Shadow obstruction tower level.}\; Under the identification
+$\kappaChHodge(\cA) = \Theta_\cA^{\leq 2}$
+(Definition~\ref{V1-def:modular-curvature-direct}), the
+secondary anomaly is the degree-$2$ shadow evaluated on the genus-$g$
+fiber: $u = \Theta_\cA^{\leq 2}\big|_{\Sigma_g}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(i)} Compute $d_{B_\Theta}(u) = d_{B_\Theta}(\eta^2)$. By the
+Leibniz rule,
+\[
+d_{B_\Theta}(\eta^2) = d_{B_\Theta}(\eta) \cdot \eta
++ (-1)^{|\eta|}\eta \cdot d_{B_\Theta}(\eta) = 0 + 0 = 0,
+\]
+since $d_{B_\Theta}(\eta) = 0$.
+
+\emph{(ii)} For $b \in B$: since $u = \kappa \cdot \omega_g$ is a
+scalar in the center of~$B$, we have $u \cdot b = b \cdot u$. For
+$b = \eta$: $u \cdot \eta = \eta^2 \cdot \eta = \eta \cdot \eta^2 =
+\eta \cdot u$, where the middle step uses centrality of
+$\kappa \cdot \omega_g$ in $B$. Since $B_\Theta = B \oplus B\eta$,
+$u$ commutes with everything.
+
+\emph{(iii)} The factorization is the definition. The Arakelov form
+$\omega_g$ is strictly positive on $\Sigma_g$ for $g \geq 1$
+(Proposition~\ref{V1-prop:genus-g-curvature-package}), so $u = 0$
+iff $\kappaChHodge(\cA) = 0$.
+
+\emph{(iv)} By Definition~\ref{V1-def:modular-curvature-direct},
+$\kappaChHodge(\cA) = \Theta_\cA^{\leq 2}$ is the weight-$2$ shadow.
+\end{proof}
+
+\begin{remark}[The element $u$ as characteristic class]
+% label removed: rem:g9-u-characteristic
+\index{secondary anomaly!as characteristic class}
+Over the moduli space $\overline{\cM}_g$, the element $u$ defines a
+section of the Hodge line bundle scaled by $\kappa$:
+\[
+u \;\in\; H^0\bigl(\overline{\cM}_g,\;
+\kappaChHodge(\cA) \cdot c_1(\mathbb{E})\bigr).
+\]
+Its vanishing $\{u = 0\}$ is the
+\emph{uncurved locus} $\{\kappaChHodge(\cA) = 0\}$: the algebraic
+content of anomaly cancellation.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: CONNECTING HOMOMORPHISM
+%
+% ======================================================================
+
+\subsection{The secondary anomaly as connecting homomorphism}
+% label removed: subsec:secondary-connecting
+\index{secondary anomaly!connecting homomorphism}
+
+The transgression algebra fits into a short exact sequence whose
+connecting homomorphism is a Bockstein operator.
+
+\begin{proposition}[Short exact sequence of the transgression;
+\ClaimStatusProvedHere]
+% label removed: prop:g9-ses-transgression
+There is a short exact sequence of cochain complexes
+\begin{equation}% label removed: eq:g9-ses
+0 \longrightarrow
+B \xrightarrow{\;\cdot\,\eta\;}
+B_\Theta
+\xrightarrow{\;\mathrm{pr}\;}
+B / (\lambda)
+\longrightarrow 0,
+\end{equation}
+where the first map is multiplication by $\eta$ and the second is
+projection modulo the ideal $(\eta)$. The connecting homomorphism
+in the associated long exact sequence is
+\begin{equation}% label removed: eq:g9-connecting
+\delta\colon H^n(B/(\lambda)) \longrightarrow H^{n+1}(B),
+\qquad
+\delta([\bar{b}]) = [d(b)],
+\end{equation}
+where $b \in B$ is any lift of $\bar{b} \in B/(\lambda)$.
+\end{proposition}
+
+\begin{proof}
+Exactness at each term follows from the rank-$2$ decomposition
+$B_\Theta = B \oplus B\eta$: the image of $\cdot\eta$ is $B\eta$,
+which is the kernel of $\mathrm{pr}$. Surjectivity of $\mathrm{pr}$
+and injectivity of $\cdot\eta$ (since $B$ is torsion-free over
+$\Bbbk$) give the short exact sequence.
+
+For the connecting homomorphism: let $\bar{b} \in B/(\lambda)$ be a
+cocycle. Lift to $b \in B$. Then
+$d_{B_\Theta}(b) = d(b) + [\eta, b] \in B_\Theta$. The
+$B\eta$-component of this is $[\eta, b]$, so the projection to
+$B/(\lambda)$ sends $d_{B_\Theta}(b) \mapsto d(b)$ mod~$(\lambda)$.
+The closedness condition means $d(b) \equiv 0 \pmod{\lambda}$, so
+$d(b) = \lambda \cdot c$ for some $c \in B$. The connecting
+homomorphism takes $[\bar{b}]$ to $[d(b)]$ in $H^{n+1}(B)$.
+\end{proof}
+
+\begin{corollary}[Bockstein long exact sequence; \ClaimStatusProvedHere]
+% label removed: cor:g9-bockstein
+\index{Bockstein homomorphism!transgression}
+The long exact sequence reads
+\begin{equation}% label removed: eq:g9-bockstein-les
+\cdots \to
+H^n(B) \xrightarrow{\cdot\eta}
+H^n(B_\Theta) \xrightarrow{\mathrm{pr}}
+H^n(B/(\lambda)) \xrightarrow{\delta}
+H^{n+1}(B) \to \cdots
+\end{equation}
+Classes in $H^*(B/(\lambda))$ that lift to the transgressed bar
+cohomology $H^*(B_\Theta)$ are precisely those annihilated
+by the Bockstein~$\delta$.
+\end{corollary}
+
+\begin{remark}[Spectral sequence of the $\eta$-filtration]
+% label removed: rem:g9-eta-spectral
+\index{spectral sequence!$\eta$-filtration}
+The two-step filtration $F^0 B_\Theta = B_\Theta$,
+$F^1 B_\Theta = B\eta$ gives a spectral sequence with
+$E_1^{0,q} = H^q(B)$, $E_1^{1,q} = H^{q-1}(B)$, and
+$d_1$ is multiplication by $u = \kappa \cdot \omega_g$:
+\[
+E_2^{0,q} = \ker(u\colon H^q(B) \to H^{q+2}(B)),
+\qquad
+E_2^{1,q} = \mathrm{coker}(u\colon H^{q-1}(B) \to H^{q+1}(B)).
+\]
+Degeneration at $E_2$ (forced by the two-step filtration) is the
+algebraic skeleton of the two-regime dichotomy.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: THE CLIFFORD COMPLETION
+%
+% ======================================================================
+
+\subsection{The Clifford completion}
+% label removed: subsec:clifford-completion
+\index{Clifford completion!construction|textbf}
+\index{handle operators|textbf}
+
+The genus-$g$ surface $\Sigma_g$ has first homology
+$H_1(\Sigma_g, \Z) \cong \Z^{2g}$ with the intersection pairing
+$\langle -, - \rangle\colon H_1 \otimes H_1 \to \Z$.
+There exists a symplectic basis $\{A_1, B_1, \ldots, A_g, B_g\}$ with
+\begin{equation}% label removed: eq:g9-intersection
+\langle A_i, B_j \rangle = \delta_{ij},
+\qquad
+\langle A_i, A_j \rangle = 0,
+\qquad
+\langle B_i, B_j \rangle = 0.
+\end{equation}
+The sewing construction of the genus-$g$ bar complex from genus-$0$
+data passes through $g$ handle attachments, one for each pair
+$(A_k, B_k)$.
+
+\begin{definition}[Handle operators]
+% label removed: def:handle-operators
+\index{handle operators!definition|textbf}
+Let $B_\Theta = B_\Theta^{(g)}(\cA)$ be the bar-transgression complex
+at genus~$g$. For each $k = 1, \ldots, g$, define the
+\emph{handle operators}
+\begin{equation}% label removed: eq:g9-handle-ops
+\alpha_k \;:=\; \oint_{A_k} \eta^{(g)},
+\qquad
+\beta_k \;:=\; \oint_{B_k} \eta^{(g)},
+\end{equation}
+where $\eta^{(g)}$ is the degree-$1$ transgression element of
+$B_\Theta^{(g)}(\cA)$, and the integrals are fiber integrals along
+the cycles $A_k$, $B_k \subset \Sigma_g$. Each handle operator has
+degree~$1$ and acts on $B_\Theta^{(g)}(\cA)$ by left multiplication.
+\end{definition}
+
+\begin{remark}[Geometric origin of handle operators]
+% label removed: rem:g9-handle-geometric
+\index{handle operators!geometric origin}
+The fiber integral $\oint_{A_k} \eta^{(g)}$ is the residue of the
+transgression element along the $A_k$-cycle. In the sewing
+construction (Theorem~\ref{thm:heisenberg-sewing}), each handle
+attachment corresponds to a self-sewing of the genus-$0$ surface:
+cutting along a pair of cycles and regluing. The handle operator
+$\alpha_k$ records the $A$-cycle contraction and $\beta_k$ the
+$B$-cycle contraction.
+\end{remark}
+
+\begin{theorem}[Clifford relations for handle operators;
+\ClaimStatusProvedHere]
+% label removed: thm:clifford-relations
+\index{Clifford algebra!handle operators|textbf}
+The handle operators satisfy:
+\begin{align}
+\alpha_i \beta_j + \beta_j \alpha_i &= \delta_{ij}\, u,
+% label removed: eq:g9-clifford-ab \\
+\alpha_i \alpha_j + \alpha_j \alpha_i &= 0,
+% label removed: eq:g9-clifford-aa \\
+\beta_i \beta_j + \beta_j \beta_i &= 0,
+% label removed: eq:g9-clifford-bb
+\end{align}
+where $u = \kappaChHodge(\cA) \cdot \omega_g$ is the secondary anomaly
+element. The generators
+$\{\alpha_1, \beta_1, \ldots, \alpha_g, \beta_g\}$
+generate a Clifford algebra $\mathrm{Cl}_{2g}(u)$ over the ring
+$\Bbbk[u]$.
+\end{theorem}
+
+\begin{proof}
+The proof reduces to the intersection pairing on $H_1(\Sigma_g, \Z)$
+via the sewing calculus.
+
+\emph{Step~1 (Mixed anticommutator, $i \neq j$).}\;
+When $i \neq j$, the cycles $A_i$ and $B_j$ have intersection
+number $\langle A_i, B_j \rangle = 0$. The contractions act on
+disjoint tensor factors of the bar coalgebra. Since $\alpha_i$ and
+$\beta_j$ are odd operators (degree~$1$) on disjoint data,
+$\alpha_i \beta_j = -\beta_j \alpha_i$, giving
+$\alpha_i\beta_j + \beta_j\alpha_i = 0$.
+
+\emph{Step~2 (Mixed anticommutator, $i = j$).}\;
+The cycles $A_i$ and $B_i$ have $\langle A_i, B_i \rangle = 1$.
+The iterated fiber integral of $(\eta^{(g)})^2 = u =
+\kappa \cdot \omega_g$ over the pair $(A_i, B_i)$ evaluates via
+the intersection formula:
+\begin{equation}% label removed: eq:g9-clifford-compute
+\alpha_i \beta_i + \beta_i \alpha_i
+= \oint_{A_i \times B_i}
+ (\eta^{(g)})^2
+= u \cdot \langle A_i, B_i \rangle
+= u.
+\end{equation}
+The last equality uses the normalization~\eqref{V1-eq:g9-intersection}
+of the symplectic basis. The factor~$u$ appears because the
+integrand is $(\eta^{(g)})^2 = u$, and the fiber integral computes
+the intersection number.
+
+\emph{Step~3 (Same-type anticommutators).}\;
+$\langle A_i, A_j \rangle = 0$ for all $i, j$, so
+$\alpha_i \alpha_j + \alpha_j \alpha_i = 0$. Identically for
+$\beta_i \beta_j$.
+
+\emph{Step~4 (Clifford identification).}\;
+Relations~\eqref{V1-eq:g9-clifford-ab}--\eqref{V1-eq:g9-clifford-bb}
+are the defining relations of $\mathrm{Cl}_{2g}(q)$, where
+$q\colon \Bbbk^{2g} \to \Bbbk$ is the quadratic form
+$q(x) = u \cdot Q(x)$ with $Q$ the intersection form:
+\[
+J = \begin{pmatrix}
+0 & I_g \\ -I_g & 0
+\end{pmatrix}
+\]
+in the basis $(\alpha_1, \ldots, \alpha_g, \beta_1, \ldots, \beta_g)$.
+The associated symmetric bilinear form
+$\langle x, y \rangle_{\mathrm{Cl}} = u \cdot \delta_{ij}$ on the
+standard basis follows from the symplectic-to-Clifford passage.
+\end{proof}
+
+\begin{definition}[Clifford completion]
+% label removed: def:clifford-completion
+\index{Clifford completion!definition|textbf}
+The \emph{genus-$g$ Clifford completion} of $\cA$ is the algebra
+\begin{equation}% label removed: eq:g9-clifford-completion
+G_g(\cA)
+\;:=\;
+B_\Theta^{(g)}(\cA)
+\;\otimes_{\Bbbk}\;
+\mathrm{Cl}_{2g}(u),
+\end{equation}
+where $\mathrm{Cl}_{2g}(u)$ is the Clifford algebra generated by
+$\{\alpha_1, \beta_1, \ldots, \alpha_g, \beta_g\}$ subject
+to~\eqref{V1-eq:g9-clifford-ab}--\eqref{V1-eq:g9-clifford-bb}.
+The differential extends by
+$d_{G_g}(\alpha_k) = d_{G_g}(\beta_k) = 0$ and
+$d_{G_g}(b) = d_{B_\Theta}(b)$ for $b \in B_\Theta^{(g)}(\cA)$.
+Then $d_{G_g}^{\,2} = 0$.
+\end{definition}
+
+\begin{remark}[Dimension of the Clifford algebra]
+% label removed: rem:g9-clifford-dimension
+As a $\Bbbk$-vector space, $\mathrm{Cl}_{2g}(u)$ has dimension
+$2^{2g}$. When $u$ is invertible,
+$\mathrm{Cl}_{2g}(u) \cong \mathrm{Mat}_{2^g}(\Bbbk)$ by the
+standard Morita classification. When $u = 0$,
+$\mathrm{Cl}_{2g}(0) = \bigwedge^*(\Bbbk^{2g})$. This
+$u = 0$ vs.\ $u \neq 0$ dichotomy is the structural divide.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: EXPLICIT LOW-GENUS COMPUTATIONS
+%
+% ======================================================================
+
+\subsection{Explicit computations at genus $1$ and $2$}
+% label removed: subsec:g9-low-genus
+\index{Clifford completion!low genus computations}
+
+\subsubsection{Genus $1$: a single handle}
+% label removed: subsubsec:g9-genus-1
+
+At genus $1$, there is a single handle $(A_1, B_1)$ with
+$\langle A_1, B_1 \rangle = 1$. The Clifford algebra is
+$\mathrm{Cl}_2(u)$, generated by $\alpha := \alpha_1$,
+$\beta := \beta_1$ with
+\begin{equation}% label removed: eq:g9-genus1-clifford
+\alpha\beta + \beta\alpha = u,
+\qquad
+\alpha^2 = 0,
+\qquad
+\beta^2 = 0.
+\end{equation}
+
+\emph{Multiplication table.}\;
+As a $\Bbbk$-vector space, $\mathrm{Cl}_2(u)$ has basis
+$\{1, \alpha, \beta, \alpha\beta\}$ with:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|cccc}
+$\cdot$ & $1$ & $\alpha$ & $\beta$ & $\alpha\beta$ \\
+\hline
+$1$ & $1$ & $\alpha$ & $\beta$ & $\alpha\beta$ \\
+$\alpha$ & $\alpha$ & $0$ & $\alpha\beta$ & $0$ \\
+$\beta$ & $\beta$ & $u - \alpha\beta$ & $0$ & $u\beta$ \\
+$\alpha\beta$ & $\alpha\beta$ & $u\alpha$ & $0$ & $u\alpha\beta$
+\end{tabular}
+\end{center}
+
+\emph{Volume element.}\;
+$\mathrm{vol}_1 = \alpha\beta$ satisfies
+$\mathrm{vol}_1^2 = \alpha\beta\alpha\beta =
+\alpha(u - \alpha\beta)\beta = u\,\alpha\beta = u\,\mathrm{vol}_1$.
+
+\emph{Spinor module.}\;
+When $u$ is invertible, define the spinor module
+$S_1 = \Bbbk \cdot v_+ \oplus \Bbbk \cdot v_-$ with
+\begin{equation}% label removed: eq:g9-genus1-spinor
+\alpha \cdot v_+ = v_-,
+\quad
+\alpha \cdot v_- = 0,
+\quad
+\beta \cdot v_+ = 0,
+\quad
+\beta \cdot v_- = u\, v_+.
+\end{equation}
+Verification: $(\alpha\beta + \beta\alpha) \cdot v_\pm =
+u\, v_\pm$. Hence $S_1$ is a $\mathrm{Cl}_2(u)$-module, and
+\begin{equation}% label removed: eq:g9-genus1-morita
+\mathrm{Cl}_2(u) \cong \End_\Bbbk(S_1)
+\cong \mathrm{Mat}_2(\Bbbk)
+\qquad\text{(when $u$ is invertible).}
+\end{equation}
+
+\subsubsection{Genus $2$: two handles}
+% label removed: subsubsec:g9-genus-2
+
+At genus $2$, $H_1(\Sigma_2, \Z) \cong \Z^4$ has symplectic basis
+$(A_1, B_1, A_2, B_2)$ with intersection matrix
+\[
+J_2 = \begin{pmatrix}
+0 & 1 & 0 & 0 \\
+-1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & -1 & 0
+\end{pmatrix}.
+\]
+The Clifford algebra $\mathrm{Cl}_4(u)$ has
+$\dim_\Bbbk = 2^4 = 16$, with basis
+$\alpha_1^{a_1}\beta_1^{b_1}\alpha_2^{a_2}\beta_2^{b_2}$
+for $a_i, b_i \in \{0,1\}$.
+
+\emph{Spinor module.}\;
+When $u$ is invertible, the spinor module $S_2 = \Bbbk^4$ has
+basis $\{v_{++}, v_{+-}, v_{-+}, v_{--}\}$ with
+\begin{alignat}{2}
+\alpha_k \cdot v_{\ldots+_k\ldots}
+ &= v_{\ldots-_k\ldots},
+&\qquad
+\alpha_k \cdot v_{\ldots-_k\ldots}
+ &= 0, \notag \\
+\beta_k \cdot v_{\ldots+_k\ldots}
+ &= 0,
+&\qquad
+\beta_k \cdot v_{\ldots-_k\ldots}
+ &= u\, v_{\ldots+_k\ldots}, % label removed: eq:g9-genus2-spinor
+\end{alignat}
+where the subscript indicates the $k$-th sign position. Hence
+\begin{equation}% label removed: eq:g9-genus2-morita
+\mathrm{Cl}_4(u) \cong \End_\Bbbk(S_2)
+\cong \mathrm{Mat}_4(\Bbbk)
+\qquad\text{(when $u$ is invertible).}
+\end{equation}
+
+\emph{Matrix units.}\;
+The matrix units in terms of Clifford generators:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lll}
+$E_{++,++} = u^{-2}\alpha_1\beta_1\alpha_2\beta_2$, &
+$E_{++,--} = u^{-2}\alpha_1\alpha_2$, &
+$E_{--,++} = \beta_1\beta_2$, \\
+$E_{+-,-+} = u^{-1}\alpha_1\beta_2$, &
+$E_{-+,+-} = u^{-1}\beta_1\alpha_2$, &
+$E_{--,--} = u^{-2}\beta_1\alpha_1\beta_2\alpha_2$.
+\end{tabular}
+\end{center}
+These $16$ matrix units span $\mathrm{Mat}_4$, confirming
+$\mathrm{Cl}_4(u)[u^{-1}] \cong \mathrm{Mat}_4(\Bbbk[u^{\pm 1}])$.
+
+% ======================================================================
+%
+% SUBSECTION: THE TWO REGIMES
+%
+% ======================================================================
+
+\subsection{The two regimes: topological and gravitational}
+% label removed: subsec:two-regimes
+\index{critical string!two regimes|textbf}
+\index{topological regime|textbf}
+\index{gravitational regime|textbf}
+
+The Clifford completion $G_g(\cA) = B_\Theta^{(g)}(\cA) \otimes
+\mathrm{Cl}_{2g}(u)$ admits two fundamentally different structural
+descriptions, determined by the invertibility of
+$u = \kappaChHodge(\cA) \cdot \omega_g$.
+
+\subsubsection{The topological regime: $u$ invertible}
+% label removed: subsubsec:topological-regime
+
+\begin{theorem}[Topological regime; \ClaimStatusProvedHere]
+% label removed: thm:topological-regime
+\index{topological regime!Morita equivalence|textbf}
+Suppose $\kappaChHodge(\cA) \neq 0$, and that we work over a field
+of characteristic~$0$ or characteristic not
+dividing~$\kappaChHodge(\cA)$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The Clifford completion is Morita equivalent to the
+transgression algebra:
+\begin{equation}% label removed: eq:g9-topo-morita
+G_g(\cA)[u^{-1}]
+\;\simeq_{\mathrm{Morita}}\;
+\mathrm{Mat}_{2^g}\bigl(B_\Theta^{(g)}(\cA)[u^{-1}]\bigr).
+\end{equation}
+
+\item The Morita equivalence bimodule is the spinor module
+\begin{equation}% label removed: eq:g9-spinor-bimod
+S_g(\cA)
+\;:=\;
+B_\Theta^{(g)}(\cA)[u^{-1}] \otimes_\Bbbk S_g,
+\end{equation}
+where $S_g = \Bbbk^{2^g}$ is the standard spinor representation of
+$\mathrm{Cl}_{2g}(u)$.
+
+\item The derived categories are equivalent:
+\begin{equation}% label removed: eq:g9-topo-derived
+D(G_g(\cA)[u^{-1}]\text{-}\mathsf{mod})
+\;\simeq\;
+D(B_\Theta^{(g)}(\cA)[u^{-1}]\text{-}\mathsf{mod}).
+\end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(i)} The Clifford algebra $\mathrm{Cl}_{2g}(u)$ over a ring in
+which $u$ is a unit is isomorphic to $\mathrm{Mat}_{2^g}$. Define the
+canonical anticommutation operators
+\begin{equation}% label removed: eq:g9-raising-lowering
+a_k^+ := u^{-1}\alpha_k,
+\qquad
+a_k^- := \beta_k,
+\qquad k = 1, \ldots, g.
+\end{equation}
+These satisfy $a_k^+ a_k^- + a_k^- a_k^+ = 1$,
+$(a_k^+)^2 = (a_k^-)^2 = 0$, and $[a_k^\pm, a_l^\pm]_+ = 0$ for
+$k \neq l$. The Fock space construction gives
+$\mathrm{Cl}_{2g}(u)[u^{-1}] \cong \mathrm{Mat}_{2^g}(\Bbbk)$.
+
+\emph{(ii)} The spinor module $S_g$ is the Fock space with vacuum
+$|0\rangle := v_{+\cdots+}$ satisfying $\beta_k \cdot |0\rangle = 0$
+for all $k$. The $2^g$ basis vectors are
+$\alpha_{k_1}\cdots\alpha_{k_r}|0\rangle$ for
+$1 \leq k_1 < \cdots < k_r \leq g$. Faithfulness of the left action
+(since $u$ is a unit and the lowering operators have full range) gives
+$\mathrm{Cl}_{2g}(u) \xrightarrow{\sim} \End(S_g)$.
+
+\emph{(iii)} Morita-equivalent algebras have equivalent derived
+categories; the functor $- \otimes_{G_g} S_g(\cA)$ provides it.
+\end{proof}
+
+\begin{remark}[Topological meaning of $2^g$]
+% label removed: rem:g9-multiplicity
+\index{topological regime!multiplicity}
+The matrix size $2^g$ is the dimension of the half-spinor
+representation, and $|H^1(\Sigma_g, \Z/2)| = 2^{2g}$ is the number of
+spin structures on $\Sigma_g$. The Morita equivalence reduces the
+Clifford completion to the transgression algebra at the cost of
+choosing a spin structure (the vacuum $|0\rangle$).
+\end{remark}
+
+\subsubsection{The gravitational regime: $u = 0$}
+% label removed: subsubsec:gravitational-regime
+
+\begin{theorem}[Gravitational regime; \ClaimStatusProvedHere]
+% label removed: thm:gravitational-regime
+\index{gravitational regime!exterior algebra|textbf}
+Suppose $\kappaChHodge(\cA) = 0$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The transgression element satisfies $\eta^2 = 0$: the
+bar complex is uncurved ($\dfib^{\,2} = 0$).
+
+\item The Clifford relations degenerate to exterior algebra relations:
+\[
+\alpha_i \beta_j + \beta_j \alpha_i = 0,
+\qquad
+\alpha_i \alpha_j + \alpha_j \alpha_i = 0,
+\qquad
+\beta_i \beta_j + \beta_j \beta_i = 0.
+\]
+
+\item The Clifford completion splits:
+\begin{equation}% label removed: eq:g9-grav-tensor
+G_g(\cA)\big|_{u=0}
+\;\cong\;
+\barB^{(g)}(\cA)
+\;\otimes\; \bigwedge\nolimits^*(\Bbbk^{2g}).
+\end{equation}
+
+\item The exterior algebra has rank $2^{2g}$ with top element
+$\mathrm{vol}_g := \alpha_1 \beta_1 \cdots \alpha_g \beta_g
+\in \bigwedge^{2g}(\Bbbk^{2g})$.
+The Poincar\'e polynomial is $(1+t)^{2g}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(i)} $u = \eta^2 = \kappa \cdot \omega_g = 0$.
+
+\emph{(ii)} Set $u = 0$
+in~\eqref{V1-eq:g9-clifford-ab}--\eqref{V1-eq:g9-clifford-bb}: all
+anticommutators vanish.
+
+\emph{(iii)} When $u = 0$ and $\lambda = 0$, the transgression
+algebra quotient is $B_\Theta/(\eta) = B$ (uncurved), and
+$\mathrm{Cl}_{2g}(0) = \bigwedge^*(\Bbbk^{2g})$.
+
+\emph{(iv)} $\dim\bigwedge^k(\Bbbk^{2g}) = \binom{2g}{k}$;
+$\sum_{k=0}^{2g}\binom{2g}{k}t^k = (1+t)^{2g}$.
+
+The exterior algebra isomorphism in~(iii) is unique: over a
+field, the exterior algebra on $2g$ generators is the unique
+graded-commutative algebra with Hilbert series $(1+t)^{2g}$
+(all generators in degree~$1$, all relations quadratic).
+Any isomorphism $\mathrm{Cl}_{2g}(0) \cong
+\bigwedge^*(\Bbbk^{2g})$ is determined by its restriction to
+the degree-$1$ generators, where it is a linear isomorphism
+$\Bbbk^{2g} \xrightarrow{\sim} \Bbbk^{2g}$; the algebra
+structure forces the extension to all degrees.
+\end{proof}
+
+\begin{remark}[Ghost number in the gravitational regime]
+% label removed: rem:g9-ghost-number
+\index{ghost number!Clifford completion}
+In the BRST language (Remark~\ref{V1-rem:bv-bar-bridge}), the generators
+$\alpha_k$, $\beta_k$ carry ghost number~$1$. The volume element
+$\mathrm{vol}_g$ has ghost number $2g$. In the gravitational regime,
+the BRST cohomology splits by ghost number:
+\[
+H^*(G_g|_{u=0}) \cong
+\bigoplus_{k=0}^{2g} H^{*-k}(\barB^{(g)}(\cA))
+\otimes \bigwedge\nolimits^k(\Bbbk^{2g}).
+\]
+The ghost-number anomaly $2g = \dim H_1(\Sigma_g)$ counts the zero
+modes of the ghost field. The exterior (rather than Clifford) structure
+is equivalent to the vanishing of the ghost-number current anomaly.
+\end{remark}
+
+\begin{remark}[Explicit basis for $\bigwedge^*(\Bbbk^{2g})$]
+% label removed: rem:g9-exterior-basis
+\index{exterior algebra!explicit basis}
+Basis elements are indexed by subsets $I \subset \{1, \ldots, 2g\}$:
+for $I = \{i_1 < \cdots < i_k\}$, set $e_I = \gamma_{i_1}\cdots
+\gamma_{i_k}$ where $(\gamma_1, \ldots, \gamma_{2g}) =
+(\alpha_1, \beta_1, \ldots, \alpha_g, \beta_g)$.
+Low-genus data:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ccl}
+\toprule
+$g$ & $\dim\bigwedge^*(\Bbbk^{2g})$ & Graded dimensions \\
+\midrule
+$1$ & $4$ & $1, 2, 1$ \\
+$2$ & $16$ & $1, 4, 6, 4, 1$ \\
+$3$ & $64$ & $1, 6, 15, 20, 15, 6, 1$ \\
+$4$ & $256$ & $1, 8, 28, 56, 70, 56, 28, 8, 1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: THE VIRASORO AT c = 26
+%
+% ======================================================================
+
+\subsection{The critical string at $c = 26$}
+% label removed: subsec:critical-c26
+\index{critical string!c=26@$c = 26$|textbf}
+\index{Virasoro!c=26@$c=26$!no-ghost theorem}
+
+We specialize the entire construction to the Virasoro algebra.
+The modular characteristic is
+\begin{equation}% label removed: eq:g9-kappa-vir
+\kappaChHodge(\mathrm{Vir}_c) = \frac{c}{2}
+\end{equation}
+(Theorem~\ref{V1-thm:vir-genus1-curvature}), arising from the quartic
+pole $T_{(3)}T = c/2$ in the Virasoro OPE. The completed
+Koszul-dual branch has strict same-family representative
+$\mathrm{Vir}_{26-c}$
+(Example~\ref{V1-ex:virasoro-koszul-dual}).
+
+\subsubsection{The Koszul duality pattern}
+% label removed: subsubsec:koszul-pattern
+\index{Virasoro!Koszul dual}
+
+The complementarity of modular characteristics is
+\begin{equation}% label removed: eq:g9-kappa-sum
+\kappaChHodge(\mathrm{Vir}_c) + \kappaChHodge(\mathrm{Vir}_{26-c})
+= \frac{c}{2} + \frac{26-c}{2} = 13.
+\end{equation}
+The secondary anomaly elements for the Koszul pair are
+\begin{equation}% label removed: eq:g9-u-pair
+u_c = \frac{c}{2} \cdot \omega_g,
+\qquad
+u_{26-c} = \frac{26-c}{2} \cdot \omega_g.
+\end{equation}
+Three central charges are structurally distinguished:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{clccl}
+\toprule
+$c$ & Koszul dual & $\kappa$ & $\kappa'$ & Structural property \\
+\midrule
+$0$ & $\mathrm{Vir}_0^! \simeq \mathrm{Vir}_{26}$ & $0$ & $13$ &
+ Uncurved; gravitational regime \\
+$13$ & $\mathrm{Vir}_{13}^! \simeq \mathrm{Vir}_{13}$ & $13/2$ & $13/2$ &
+ Self-dual; symmetric anomaly \\
+$26$ & $\mathrm{Vir}_{26}^! \simeq \mathrm{Vir}_0$ & $13$ & $0$ &
+ Maximally curved; dual is gravitational \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Two independent vanishing conditions}
+% label removed: subsubsec:effective-curvature
+\index{complementarity asymmetry|textbf}
+
+The Virasoro family at central charge $c$ is controlled by two
+independent scalar conditions. Each governs a different
+structural phenomenon; neither implies the other.
+
+\begin{definition}[Complementarity asymmetry]
+% label removed: def:effective-curvature
+\index{complementarity asymmetry!definition}
+For a Koszul pair $(\cA, \cA^!)$ with modular characteristics
+$\kappa := \kappaChHodge(\cA)$ and $\kappa' := \kappaChHodge(\cA^!)$, the
+\emph{complementarity asymmetry} is
+\begin{equation}% label removed: eq:g9-kappa-eff
+\delta_\kappa \;:=\; \kappa - \kappa'.
+\end{equation}
+Its vanishing is the condition for Koszul self-duality:
+$\delta_\kappa = 0$ if and only if $\kappa = \kappa'$.
+\end{definition}
+
+For the Virasoro, $\delta_\kappa = c/2 - (26-c)/2 = c - 13$.
+
+The complementarity asymmetry is intrinsic to the Koszul
+pair. It measures how unevenly the anomaly budget is
+distributed between $\cA$ and $\cA^!$. The second
+invariant is extrinsic: it belongs to the physical
+matter--ghost system, not to the Koszul pair.
+
+\begin{definition}[Effective curvature]
+\index{effective curvature!definition}
+The \emph{effective curvature} of a matter--ghost coupling is
+\[
+\kappa_{\mathrm{eff}} \;:=\;
+\kappaChHodge(\mathrm{matter}) + \kappaChHodge(\mathrm{ghost}),
+\]
+where the ghost contribution comes from the physical ghost
+system (the $bc$ system in the Virasoro case, with
+$\kappa_{bc} = -13$ at all central charges). Its vanishing
+is anomaly cancellation.
+\end{definition}
+
+For the Virasoro at central charge $c$,
+$\kappa_{\mathrm{eff}} = c/2 + (-13) = (c-26)/2$. The
+effective curvature is \emph{not} the sum
+$\kappa + \kappa' = c/2 + (26-c)/2 = 13$, which is a
+topological invariant of the Koszul pair (it never vanishes).
+
+The two conditions are related by
+$\delta_\kappa = 2\kappa_{\mathrm{eff}} + 13$ and vanish
+at different central charges, $13$ units apart:
+\[
+\delta_\kappa = 0
+\;\;\Longleftrightarrow\;\;
+c = 13
+\quad\text{(Koszul self-duality)},
+\qquad
+\kappa_{\mathrm{eff}} = 0
+\;\;\Longleftrightarrow\;\;
+c = 26
+\quad\text{(anomaly cancellation)}.
+\]
+
+\begin{remark}[Family dependence]
+% label removed: rem:g9-complementarity-constraint
+The complementarity sum $\kappa + \kappa'$ depends on the
+family. For affine Kac--Moody algebras,
+$\kappa + \kappa' = 0$
+(Remark~\ref{V1-rem:vir-vs-km-complementarity}):
+self-duality forces $\kappa = 0$, and if one identifies the
+ghost system with the Koszul dual then
+$\kappa_{\mathrm{eff}} = \kappa + \kappa' = 0$
+identically. For the Virasoro, $\kappa + \kappa' = 13$:
+self-duality distributes the anomaly symmetrically at
+$\kappa = \kappa' = 13/2$, and anomaly cancellation
+requires the separate $bc$ ghost mechanism.
+\end{remark}
+
+
+\begin{remark}[The de Sitter side of Koszul duality]
+\label{rem:ads-ds-koszul}
+\index{Koszul duality!AdS/dS interpretation}
+\index{de Sitter!negative kappa regime}
+The complementarity identity
+$\kappaChHodge(\mathrm{Vir}_c) + \kappaChHodge(\mathrm{Vir}_{26-c}) = 13$
+admits a gravitational reading. When $c < 26$, both
+$\kappaChHodge(\mathrm{Vir}_c) = c/2$ and
+$\kappaChHodge(\mathrm{Vir}_{26-c}) = (26-c)/2$ are positive:
+the Koszul pair lives entirely on the anti-de~Sitter side
+of the anomaly budget. At $c = 26$ the dual characteristic
+$\kappaChHodge(\mathrm{Vir}_{26-c}) = (26-c)/2$ vanishes;
+the Koszul dual is uncurved, and the matter system
+absorbs the full anomaly $\kappaChHodge(\mathrm{Vir}_{26}) = 13$.
+
+For $c > 26$ the Koszul dual has
+$\kappaChHodge(\mathrm{Vir}_{26-c}) = (26-c)/2 < 0$:
+the secondary anomaly $u_{26-c} = \kappaChHodge(\mathrm{Vir}_{26-c})\cdot\omega_g$
+reverses sign, and the fiberwise curvature
+$\dfib^{\,2} = \kappaChHodge(\mathrm{Vir}_{26-c})\cdot\omega_g$
+on the Koszul-dual side becomes negative.
+This is the de~Sitter regime of Koszul duality:
+the dual algebra $\mathrm{Vir}_{26-c}^{}$
+carries a curvature of cosmological sign.
+
+The self-dual point $c = 13$ sits at the transition.
+There $\kappaChHodge(\mathrm{Vir}_{13}) = \kappaChHodge(\mathrm{Vir}_{13}^!) = 13/2$,
+and the anomaly budget is distributed symmetrically
+between the algebra and its Koszul dual.
+The complementarity sum $\kappa + \kappa^{\prime} = 13$
+is the total curvature shared by the AdS and dS sectors;
+at $c = 13$ the boundary between them passes through
+the fixed point of the Feigin--Frenkel involution.
+\end{remark}
+\subsubsection{The dichotomy theorem}
+% label removed: subsubsec:dichotomy-theorem
+
+\begin{theorem}[Critical string dichotomy for the Virasoro;
+\ClaimStatusProvedHere]
+% label removed: thm:critical-string-dichotomy
+\index{critical string!dichotomy theorem|textbf}
+The genus-$g$ Clifford completion $G_g(\mathrm{Vir}_c)$ realizes two
+regimes:
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Topological regime} ($c \neq 0$):\;
+$u_c = (c/2) \cdot \omega_g \neq 0$. The Clifford completion is
+Morita equivalent to the transgression algebra:
+\[
+G_g(\mathrm{Vir}_c)
+\simeq_{\mathrm{Morita}}
+\mathrm{Mat}_{2^g}\bigl(B_\Theta^{(g)}(\mathrm{Vir}_c)[u_c^{-1}]\bigr).
+\]
+The genus-$g$ free energy is
+\begin{equation}% label removed: eq:g9-partition-topo
+F_g(\mathrm{Vir}_c)
+= \frac{c}{2} \cdot \lambda_g^{\mathrm{FP}},
+\end{equation}
+recovering Volume~I Theorem~\ref{V1-thm:vir-all-genera}.
+
+\item \emph{Gravitational regime} ($c = 0$):\;
+$u_0 = 0$. The Clifford completion splits:
+\[
+G_g(\mathrm{Vir}_0)
+\cong
+\barB^{(g)}(\mathrm{Vir}_0)
+\otimes \bigwedge\nolimits^*(\Bbbk^{2g}).
+\]
+The bar complex is a genuine cochain complex ($\dfib^{\,2} = 0$)
+and the exterior factor is the ghost sector.
+
+\item \emph{The $c = 26$ algebra}\/ is in the topological regime
+($\kappa = 13 \neq 0$), but its Koszul dual $\mathrm{Vir}_0$ is in
+the gravitational regime. The combined Clifford completion is
+\begin{equation}% label removed: eq:g9-combined-clifford
+G_g(\mathrm{Vir}_{26}) \otimes G_g(\mathrm{Vir}_0)
+\;\cong\;
+G_g(\mathrm{Vir}_{26})
+\otimes \barB^{(g)}(\mathrm{Vir}_0)
+\otimes \bigwedge\nolimits^*(\Bbbk^{2g}).
+\end{equation}
+The scalar genus-$g$ obstruction budget is carried by
+$\mathrm{Vir}_{26}$; the dual $\mathrm{Vir}_0$ has zero scalar
+curvature and still carries its uncurved bar complex together with
+the exterior ghost factor.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Parts (i) and (ii) are direct applications of
+Volume~I Theorems~\ref{V1-thm:topological-regime}
+and~\ref{V1-thm:gravitational-regime} to $\cA = \mathrm{Vir}_c$ with
+$\kappa = c/2$. The free energy
+formula~\eqref{V1-eq:g9-partition-topo} is Volume~I Theorem~\ref{V1-thm:vir-all-genera}.
+
+For (iii): $\mathrm{Vir}_{26}$ has $\kappa = 13 \neq 0$
+(topological); $\mathrm{Vir}_0$ has $\kappa = 0$ (gravitational).
+The tensor product follows from K\"unneth. The
+scalar complementarity statement is
+Volume~I Proposition~\ref{V1-prop:vir-complementarity}: $F_g(\mathrm{Vir}_{26}) +
+F_g(\mathrm{Vir}_0) = 13 \cdot \lambda_g^{\mathrm{FP}} + 0 =
+13 \cdot \lambda_g^{\mathrm{FP}}$.
+\end{proof}
+
+\begin{remark}[Ghost zero modes in bar-cobar language]
+% label removed: rem:g9-no-ghost
+\index{no-ghost theorem!bar-cobar interpretation}
+The classical no-ghost theorem states that the physical states of the
+$c = 26$ bosonic string are transverse oscillators. In the
+framework, the Koszul dual $\mathrm{Vir}_{26}^! \simeq \mathrm{Vir}_0$
+is in the gravitational regime: $u_0 = 0$, so the handle part of the
+dual ghost sector is the exterior algebra
+$\bigwedge^*(\Bbbk^{2g})$ with no Clifford entanglement, and
+$\barB^{(g)}(\mathrm{Vir}_0)$ is a genuine cochain complex with no
+scalar curvature correction. This gives an algebraic model for the
+ghost zero-mode count. The passage from this exterior handle sector to
+transverse physical states is the Goddard--Thorn and
+Frenkel--Garland--Zuckerman spectral-sequence collapse, recorded below
+as theorem data in the Clifford-degeneration statement. The ghost
+oscillators are the $b$-$c$ modes; the standard zero-mode relation
+$\{b_0,c_0\}=1$ supplies the BRST contracting pair, while the
+$u_0=0$ Clifford degeneration supplies the exterior handle algebra.
+
+The ghost-number anomaly $2g$ is the count of ghost zero modes
+on $\Sigma_g$. The exterior (vs.\ Clifford) structure of the ghost
+sector is equivalent to the vanishing of the dual's curvature.
+\end{remark}
+
+\subsubsection{Clifford data for the Virasoro at all genera}
+% label removed: subsubsec:vir-clifford-data
+
+\begin{computation}[Genus-$g$ Virasoro Clifford data]
+% label removed: comp:g9-vir-clifford-data
+\index{Virasoro!Clifford completion data}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{cccccl}
+\toprule
+$c$ & $\kappa$ & $u$ & $\mathrm{Cl}_{2g}(u)$ &
+$\dim$ & Regime \\
+\midrule
+$0$ & $0$ & $0$ &
+$\bigwedge^*(\Bbbk^{2g})$ & $2^{2g}$ &
+Gravitational \\
+$1$ & $1/2$ & $(1/2)\omega_g$ &
+$\mathrm{Mat}_{2^g}(\Bbbk)$ & $2^{2g}$ &
+Topological \\
+$13$ & $13/2$ & $(13/2)\omega_g$ &
+$\mathrm{Mat}_{2^g}(\Bbbk)$ & $2^{2g}$ &
+Topological (self-dual) \\
+$26$ & $13$ & $13\omega_g$ &
+$\mathrm{Mat}_{2^g}(\Bbbk)$ & $2^{2g}$ &
+Topological (dual: gravitational) \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+
+\medskip\noindent
+Genus-$g$ free energy at selected central charges:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+{\small
+\begin{tabular}{ccccc}
+\toprule
+$c$ & $F_1$ & $F_2$ & $F_3$ &
+$F_g$ \\
+\midrule
+$0$ & $0$ & $0$ & $0$ & $0$ \\
+$1$ & $\frac{1}{48}$ & $\frac{7}{11520}$ &
+$\frac{31}{1935360}$ &
+$\frac{1}{2}\lambda_g^{\mathrm{FP}}$ \\
+$13$ & $\frac{13}{48}$ & $\frac{91}{11520}$ &
+$\frac{403}{1935360}$ &
+$\frac{13}{2}\lambda_g^{\mathrm{FP}}$ \\
+$26$ & $\frac{13}{24}$ & $\frac{91}{5760}$ &
+$\frac{403}{967680}$ &
+$13\,\lambda_g^{\mathrm{FP}}$ \\
+\bottomrule
+\end{tabular}
+}
+\end{center}
+where $\lambda_g^{\mathrm{FP}} = \frac{2^{2g-1}-1}{2^{2g-1}} \cdot
+\frac{|B_{2g}|}{(2g)!}$. These agree with Volume~I
+Theorem~\ref{V1-thm:vir-all-genera} and Volume~I
+Computation~\ref{V1-comp:vir-physical-cc}.
+\end{computation}
+
+% ======================================================================
+%
+% SUBSECTION: THE GHOST SECTOR AT c = 26
+%
+% ======================================================================
+
+\subsection{The exterior algebra structure at $c = 26$}
+% label removed: subsec:exterior-c26
+\index{critical string!exterior algebra structure}
+
+At $c = 26$, the algebra itself is in the topological regime, but its
+\emph{dual} $\mathrm{Vir}_0$ is in the gravitational regime. The ghost
+sector of the combined Koszul pair is an exterior algebra.
+
+\begin{theorem}[Ghost sector at $c = 26$; \ClaimStatusProvedHere]
+% label removed: thm:ghost-sector-c26
+\index{ghost sector!c=26@$c=26$|textbf}
+For the Koszul dual $\mathrm{Vir}_{26}^! \simeq \mathrm{Vir}_0$
+at genus~$g$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The Clifford completion of $\mathrm{Vir}_0$ is
+\begin{equation}% label removed: eq:g9-ghost-sector
+G_g(\mathrm{Vir}_0)
+\cong \barB^{(g)}(\mathrm{Vir}_0) \otimes
+\bigwedge\nolimits^*\bigl(H_1(\Sigma_g, \Bbbk)\bigr).
+\end{equation}
+
+\item The generators are identified with $H_1$-classes:
+$\alpha_k \leftrightarrow [A_k]$, $\beta_k \leftrightarrow [B_k]$.
+
+\item The top exterior power
+$\bigwedge^{2g}(H_1(\Sigma_g)) \cong \Bbbk$ is generated by
+$\mathrm{vol}_g = \alpha_1\beta_1 \cdots \alpha_g\beta_g$.
+
+\item The ghost-number operator
+$N_{\mathrm{gh}} = \sum_{k=1}^g(\alpha_k\partial_{\alpha_k} +
+\beta_k\partial_{\beta_k})$ has eigenvalues $0, 1, \ldots, 2g$.
+The ghost-number anomaly is $2g$: the path-integral measure requires
+insertion of $\mathrm{vol}_g$ to produce a nonzero result.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(i)} is Theorem~\ref{V1-thm:gravitational-regime}(iii) applied to
+$\mathrm{Vir}_0$ (where $\kappa = 0$ and $\lambda = 0$).
+
+\emph{(ii)} The handle operators are fiber integrals of $\eta^{(g)}$
+over cycles. When $u = 0$, these satisfy purely exterior algebra
+relations, identifying them with $H_1(\Sigma_g, \Bbbk)$.
+
+\emph{(iii)} $\bigwedge^{2g}(H_1) \cong \det(H_1)$ is one-dimensional.
+
+\emph{(iv)} The ghost-number operator is the standard
+$\bigwedge$-grading.
+\end{proof}
+
+\begin{remark}[Comparison with BRST ghost counting]
+% label removed: rem:g9-brst-comparison
+\index{BRST cohomology!c=26@$c=26$ comparison}
+In the BRST approach, the ghost system has $c_{\mathrm{ghost}} = -26$,
+giving total $c_{\mathrm{matter}} + c_{\mathrm{ghost}} = 0$. The
+genus-$g$ ghost determinant produces the factor
+$\bigwedge^{3g-3}(H^0(\Sigma_g, K^2))$ in the path-integral measure.
+The bar-cobar ghost sector is $\bigwedge^{2g}(H_1(\Sigma_g))$, not
+$\bigwedge^{3g-3}$. The discrepancy arises from different
+gradings: bar-cobar ghosts count \emph{homological} cycles
+(intersection form on $H_1$); BRST ghosts count \emph{conformal}
+zero modes ($b$-ghost on $H^0(K^2)$). The Riemann--Roch relation
+$\dim H^0(K^2) = 3g-3$ (for $g \geq 2$) connects the two counts
+via Serre duality and the period matrix.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: SELF-DUALITY AT c = 13
+%
+% ======================================================================
+
+\subsection{Self-duality at $c = 13$}
+% label removed: subsec:self-duality-c13
+\index{Virasoro!c=13@$c=13$!self-duality|textbf}
+
+The Feigin--Frenkel involution $c \mapsto 26 - c$ has its fixed point
+at $c = 13$. At this central charge, the Virasoro is Koszul self-dual
+in the \emph{curved} sense.
+
+\begin{theorem}[Virasoro self-duality at $c = 13$;
+\ClaimStatusProvedHere]
+% label removed: thm:vir-self-duality-c13
+\index{Virasoro!c=13@$c=13$!self-duality theorem}
+At $c = 13$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\mathrm{Vir}_{13}^! \simeq \mathrm{Vir}_{13}$: Koszul
+self-duality.
+
+\item $\kappaChHodge(\mathrm{Vir}_{13}) = 13/2$: symmetric anomaly budget,
+$\kappa = \kappa' = 13/2$.
+
+\item The secondary anomalies coincide:
+$u_{13} = u'_{13} = (13/2) \cdot \omega_g$.
+
+\item The Clifford completions are isomorphic:
+$G_g(\mathrm{Vir}_{13}) \cong G_g(\mathrm{Vir}_{13}^!)$, both
+topological.
+
+\item Symmetric complementarity:
+\begin{equation}% label removed: eq:g9-c13-complementarity
+F_g(\mathrm{Vir}_{13}) = F_g(\mathrm{Vir}_{13}^!)
+= \frac{13}{2} \cdot \lambda_g^{\mathrm{FP}},
+\end{equation}
+with total $F_g + F_g' = 13 \cdot \lambda_g^{\mathrm{FP}}$.
+
+\item Complementarity asymmetry vanishes: $\delta_\kappa = 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(i)} On the strict same-family Virasoro comparison surface,
+$\mathrm{Vir}_{26-c}$ equals $\mathrm{Vir}_{13}$ at $c = 13$, giving
+the Virasoro fixed point.
+\emph{(ii)--(vi)} follow from (i) and the definitions.
+\end{proof}
+
+\begin{remark}[Two self-duality points]
+% label removed: rem:g9-two-self-dualities
+\index{Virasoro!two self-dualities}
+The Virasoro has two distinct self-duality points:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Quadratic self-duality at $c = 0$}
+(Theorem~\ref{V1-thm:virasoro-self-duality}). Here $\kappa = 0$: the bar
+complex is a genuine cochain complex, self-duality is of \emph{classical}
+(quadratic) type ($\mathrm{Vir}_0^{!_{\mathrm{quad}}} \simeq \mathrm{Vir}_0$),
+and the Clifford completion is in the gravitational
+regime. The chiral Koszul dual remains
+$\mathrm{Vir}_0^! = \mathrm{Vir}_{26} \neq \mathrm{Vir}_0$.
+
+\item \emph{Chiral Koszul self-duality at $c = 13$}
+(Theorem~\ref{V1-thm:vir-self-duality-c13}). Here $\kappa = 13/2 \neq 0$:
+the bar complex is curved, self-duality is of \emph{modular}
+(Feigin--Frenkel) type, and the Clifford completion is in the topological
+regime.
+\end{enumerate}
+At $c = 0$, ghosts are free (exterior algebra); at $c = 13$, ghosts
+are entangled (Clifford algebra with $u = (13/2)\omega_g \neq 0$).
+The two self-dualities are genuinely different: $c = 0$ kills the
+curvature; $c = 13$ distributes it symmetrically.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: THE DICHOTOMY SUMMARY
+%
+% ======================================================================
+
+\subsection{The critical dichotomy: structural summary}
+% label removed: subsec:dichotomy-summary
+\index{critical string!dichotomy!summary}
+
+\begin{theorem}[Critical string dichotomy: structural summary;
+\ClaimStatusProvedHere]
+% label removed: thm:critical-dichotomy-summary
+\index{critical string!dichotomy!structural summary}
+The genus-$g$ algebraic structure of the Virasoro Koszul pair
+$(\mathrm{Vir}_c, \mathrm{Vir}_{26-c})$ is controlled by
+$\kappa = c/2$, $\kappa' = (26-c)/2$,
+$\delta_\kappa = c - 13$, and falls into the following
+pattern:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lccc}
+\toprule
+& $c < 13$ & $c = 13$ & $c > 13$ \\
+\midrule
+$\delta_\kappa$ & $< 0$ & $= 0$ & $> 0$ \\
+Dominant anomaly & Dual $\mathrm{Vir}_{26-c}$ &
+Equal & $\mathrm{Vir}_c$ \\
+Self-dual? & No & Yes & No \\
+Both regimes & Topological & Topological & Topological \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip\noindent
+The two boundary cases:
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{lcc}
+\toprule
+& $c = 0$ & $c = 26$ \\
+\midrule
+$\delta_\kappa$ & $-13$ & $+13$ \\
+$\mathrm{Vir}_c$ regime & Gravitational & Topological \\
+$\mathrm{Vir}_{26-c}$ regime & Topological & Gravitational \\
+Ghost sector & $\bigwedge^*(H_1)$ at $c=0$ &
+$\bigwedge^*(H_1)$ at $c'=0$ \\
+Anomaly budget & Entirely on dual & Entirely on algebra \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\smallskip\noindent
+The dichotomy is:
+
+\emph{At $c = 26$, the Koszul dual $\mathrm{Vir}_0$ is in the
+gravitational regime \textup{(}$u = 0$, exterior algebra ghosts,
+uncurved bar complex\textup{)}, while $\mathrm{Vir}_{26}$ itself
+carries the entire anomaly budget. At $c = 0$, the roles are
+reversed. At $c = 13$, the anomaly is shared equally and the system
+is self-dual.}
+\end{theorem}
+
+\begin{proof}
+Compilation of Volume~I
+Theorems~\ref{V1-thm:critical-string-dichotomy},
+\ref{V1-thm:ghost-sector-c26},
+and~\ref{V1-thm:vir-self-duality-c13}, together with Volume~I
+Proposition~\ref{V1-prop:vir-complementarity}.
+\end{proof}
+
+% ======================================================================
+%
+% SUBSECTION: SHADOW TOWER AT CRITICAL POINTS
+%
+% ======================================================================
+
+\subsection{The shadow obstruction tower at the critical points}
+% label removed: subsec:shadow-critical
+\index{shadow tower!critical points}
+
+The critical string dichotomy interacts with the shadow obstruction tower
+$\Theta_\cA^{\leq r}$ through the modular characteristic
+$\kappa = \Theta_\cA^{\leq 2}$.
+
+\begin{proposition}[Shadow obstruction tower at critical central charges;
+\ClaimStatusProvedHere]
+% label removed: prop:shadow-critical
+\index{shadow tower!critical central charges}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{At $c = 0$}: $\kappa = 0$. The quartic pole vanishes, so
+the OPE is purely quadratic ($T_{(3)}T = 0$) and the bar complex is
+uncurved. The universal genus-$1$ scalar term vanishes, but
+$\kappa = 0$ does not by itself determine the higher-degree shadow
+tower.
+
+\item \emph{At $c = 13$}: $\kappa = 13/2 \neq 0$. The shadow obstruction tower
+is nonzero at every level: $\Theta^{\leq 2} = 13/2$,
+$\Theta^{\leq 4}$ involves the quartic resonance class
+$Q^{\mathrm{contact}} = 10/[13(5\cdot 13 + 22)] = 10/1131$.
+The tower is infinite ($r_{\max} = \infty$, mixed type) and
+self-dual: $\Theta_{\mathrm{Vir}_{13}}^{\leq r} =
+\Theta_{\mathrm{Vir}_{13}^!}^{\leq r}$ at every level.
+
+\item \emph{At $c = 26$}: $\kappa = 13 \neq 0$. The quartic
+contact invariant is
+$Q^{\mathrm{contact}} = 10/[26 \cdot 152] = 5/1976$.
+The dual algebra $\mathrm{Vir}_0$ lies on the uncurved scalar locus,
+so $\Theta_{\mathrm{Vir}_0}^{\min} = 0$ and
+$F_1(\mathrm{Vir}_0) = 0$. This scalar datum does not determine the
+dual higher-degree shadow obstruction tower. Thus the nonzero scalar and quartic
+data exhibited here come from $\mathrm{Vir}_{26}$, while the dual
+higher-degree tower is not fixed by $\kappaChHodge(\mathrm{Vir}_0)=0$ alone.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(i)} $\kappaChHodge(\mathrm{Vir}_0) = 0$; at $c = 0$ the quartic pole
+vanishes and the OPE is quadratic. Hence the scalar class
+$\Theta_{\mathrm{Vir}_0}^{\min}$ and the universal genus-$1$ scalar
+term vanish, but no conclusion about the full higher-degree tower
+follows from $\kappaChHodge(\mathrm{Vir}_0)=0$ alone.
+
+\emph{(ii)} Self-duality implies $\Theta_{\mathrm{Vir}_{13}}^{\leq r}
+= \Theta_{\mathrm{Vir}_{13}^!}^{\leq r}$. The quartic invariant
+evaluates via $Q^{\mathrm{contact}} = 10/[c(5c+22)]|_{c=13}$.
+
+\emph{(iii)} $\kappaChHodge(\mathrm{Vir}_0) = 0$ gives the vanishing of the
+dual scalar class $\Theta_{\mathrm{Vir}_0}^{\min}$ and of
+$F_1(\mathrm{Vir}_0)$; the higher-degree dual tower is not determined
+by this scalar input alone.
+\end{proof}
+
+\begin{remark}[Depth-zero resonance shadow revisited]
+% label removed: rem:g9-depth-zero-revisited
+\index{depth-zero resonance shadow!revisited}
+The same-family shadow partner $\mathrm{Vir}_{26-c}$ controls
+M/S-level complementarity
+(Remark~\ref{V1-rem:virasoro-resonance-model}). At $c = 26$, this
+partner is $\mathrm{Vir}_0$, the dual algebra on the uncurved scalar
+locus, not a trivial algebra. The depth-zero resonance shadow
+saturates only at the scalar/genus-$1$ level; higher-degree data of the
+dual partner are not fixed by that cancellation. This is the
+algebraic content of the critical string: the universal scalar budget
+closes at $c = 26$, while the non-scalar shadow obstruction tower still requires
+separate control.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: HODGE-CLIFFORD COMPATIBILITY
+%
+% ======================================================================
+
+\subsection{The Hodge-theoretic content}
+% label removed: subsec:hodge-dichotomy
+\index{Hodge theory!critical string dichotomy}
+
+\begin{proposition}[Hodge--Clifford compatibility;
+\ClaimStatusProvedHere]
+% label removed: prop:hodge-clifford
+\index{Hodge theory!Clifford compatibility}
+The Clifford algebra $\mathrm{Cl}_{2g}(u)$ is compatible with the
+Hodge decomposition $H^1(\Sigma_g, \C) = H^{1,0} \oplus H^{0,1}$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The $A$-cycle operators $\alpha_k$ correspond to
+$H^{1,0}(\Sigma_g)$ (holomorphic differentials).
+
+\item The $B$-cycle operators $\beta_k$ correspond to
+$H^{0,1}(\Sigma_g)$ (antiholomorphic differentials).
+
+\item The Clifford relation $\alpha_i \beta_j + \beta_j \alpha_i =
+\delta_{ij}\, u$ encodes the Hodge--Riemann relation:
+\[
+\int_{\Sigma_g} \omega_i \wedge \bar\omega_j = \delta_{ij}\, \omega_g,
+\]
+where $\{\omega_1, \ldots, \omega_g\}$ are the normalized abelian
+differentials ($\oint_{A_l}\omega_k = \delta_{kl}$).
+
+\item The period matrix $\Omega_{kl} = \oint_{B_l}\omega_k$ appears as
+the overlap $\langle \alpha_k, \beta_l \rangle = \Omega_{kl}$ in the
+complexified Clifford algebra.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(i)--(ii)} The symplectic basis $(A_k, B_k)$ is Poincar\'e dual
+to the Hodge basis $(\omega_k, \bar\omega_k)$.
+
+\emph{(iii)} The Riemann bilinear relation gives
+$\frac{i}{2}\int_{\Sigma_g}\omega_k \wedge \bar\omega_l =
+(\operatorname{Im}\Omega)_{kl}$ in the Arakelov normalization.
+Integration against $u = \kappa \cdot \omega_g$ yields
+$\kappa \cdot \delta_{kl} = \delta_{kl}\, u$, matching the
+Clifford relation.
+
+\emph{(iv)} $\Omega_{kl} = \oint_{B_l}\omega_k$ determines the
+$\alpha_k$--$\beta_l$ overlap in the complexification.
+\end{proof}
+
+\begin{remark}[The Arakelov metric as Clifford trace]
+% label removed: rem:g9-arakelov-clifford
+\index{Arakelov metric!Clifford trace}
+The Arakelov form $\omega_g = \frac{i}{2}\sum_{k=1}^g
+\omega_k \wedge \bar\omega_k$
+(Proposition~\ref{V1-prop:genus-g-curvature-package}) is the trace of the
+Clifford form: $\omega_g = \frac{1}{2g}\sum_{k=1}^g
+(\alpha_k\beta_k + \beta_k\alpha_k)|_{u=1}$.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: CLIFFORD SPECTRAL SEQUENCE
+%
+% ======================================================================
+
+\subsection{The spectral sequence of the Clifford filtration}
+% label removed: subsec:clifford-spectral
+\index{spectral sequence!Clifford filtration}
+
+\begin{construction}[Clifford spectral sequence]
+% label removed: constr:clifford-spectral
+\index{spectral sequence!Clifford|textbf}
+The Clifford degree filtration on $G_g(\cA)$,
+\begin{equation}% label removed: eq:g9-clifford-filtration
+F^p G_g := B_\Theta^{(g)}(\cA) \otimes
+\bigoplus_{k \leq p} \mathrm{Cl}_{2g}^{(k)}(u),
+\end{equation}
+where $\mathrm{Cl}_{2g}^{(k)}$ is the span of products of at most $k$
+generators, is compatible with $d_{G_g}$ (since handle operators are
+closed). The $E_1$ page is
+\begin{equation}% label removed: eq:g9-clifford-E1
+E_1^{p,q} = H^{p+q}(B_\Theta^{(g)}(\cA))
+\otimes \mathrm{gr}^p_{\mathrm{Cl}}\,\mathrm{Cl}_{2g}(u).
+\end{equation}
+\end{construction}
+
+\begin{proposition}[Degeneration; \ClaimStatusProvedHere]
+% label removed: prop:clifford-spectral-degeneration
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Gravitational regime} ($u = 0$): degeneration at $E_1$;
+$\mathrm{gr}_{\mathrm{Cl}}^* = \bigwedge^*(\Bbbk^{2g})$; hence
+$H^*(G_g|_{u=0}) \cong H^*(B) \otimes \bigwedge^*(\Bbbk^{2g})$.
+
+\item \emph{Topological regime} ($u$ invertible): degeneration at
+$E_1$; $\mathrm{gr}_{\mathrm{Cl}}^*$ is the associated graded of a
+matrix algebra; $H^*(G_g[u^{-1}]) \cong
+\mathrm{Mat}_{2^g}(H^*(B_\Theta[u^{-1}]))$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+In both cases, the handle operators are closed and the Clifford
+multiplication preserves the filtration, so $d_r = 0$ for $r \geq 1$.
+\end{proof}
+
+% ======================================================================
+%
+% SUBSECTION: BOSONIC STRING IDENTIFICATIONS
+%
+% ======================================================================
+
+\subsection{The $c = 26$ algebra and the bosonic string}
+% label removed: subsec:bosonic-string
+\index{bosonic string!bar-cobar interpretation|textbf}
+
+\begin{proposition}[Bosonic string structural identifications;
+\ClaimStatusProvedHere]
+% label removed: prop:bosonic-string-identifications
+\index{bosonic string!structural identifications}
+At $c = 26$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Scalar anomaly budget.}\;
+$F_g(\mathrm{Vir}_{26}) = 13 \cdot \lambda_g^{\mathrm{FP}}$,
+$F_g(\mathrm{Vir}_0) = 0$.
+
+\item \emph{Koszul pair.}\;
+$(\mathrm{Vir}_{26}, \mathrm{Vir}_0)$ with $\kappa + \kappa' = 13$,
+maximally asymmetric: $|\delta_\kappa| = 13$.
+
+\item \emph{Ghost sector.}\;
+$\bigwedge^*(H_1(\Sigma_g)) \cong \bigwedge^{2g}$, ghost-number
+anomaly $2g$.
+
+\item \emph{Generating function.}\;
+$\sum_{g=1}^\infty F_g(\mathrm{Vir}_{26})\,x^{2g}
+= 13(x/(2\sin(x/2)) - 1)$
+with radius of convergence $|x| = 2\pi$.
+
+\item \emph{Transgression.}\;
+$B_\Theta^{(g)}(\mathrm{Vir}_{26})$ has $u = 13\omega_g$
+(strongly topological); $B_\Theta^{(g)}(\mathrm{Vir}_0)$ has
+$\eta^2 = 0$ (uncurved).
+
+\item \emph{Combined Clifford.}\;
+\begin{equation}% label removed: eq:g9-combined-final
+G_g(\mathrm{Vir}_{26}) \otimes G_g(\mathrm{Vir}_0)
+\cong
+\mathrm{Mat}_{2^g}(B_\Theta^{(g)}(\mathrm{Vir}_{26})[u^{-1}])
+\otimes \barB^{(g)}(\mathrm{Vir}_0)
+\otimes \bigwedge\nolimits^*(\Bbbk^{2g}).
+\end{equation}
+
+\item \emph{Physical content.}\; Morita reduction gives
+\begin{equation}% label removed: eq:g9-physical-content
+D(G_g(\mathrm{Vir}_{26}) \otimes G_g(\mathrm{Vir}_0)
+\text{-}\mathsf{mod})
+\simeq
+D\bigl(B_\Theta[u^{-1}] \otimes \barB(\mathrm{Vir}_0) \otimes
+\bigwedge\nolimits^*(\Bbbk^{2g})\text{-}\mathsf{mod}\bigr).
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+All items follow from the established theorems:
+(i) Theorem~\ref{V1-thm:vir-all-genera};
+(ii) complementarity;
+(iii) Theorem~\ref{V1-thm:ghost-sector-c26};
+(iv) Remark~\ref{V1-rem:vir-trichotomy-genera};
+(v) Definitions~\ref{V1-def:transgression-algebra}
+and~\ref{V1-def:bar-transgression-complex};
+(vi) Theorems~\ref{V1-thm:topological-regime}
+and~\ref{V1-thm:gravitational-regime};
+(vii) Theorem~\ref{V1-thm:topological-regime}(iii).
+\end{proof}
+
+% ======================================================================
+%
+% SUBSECTION: KM CONTRAST AND W_N EXTENSION
+%
+% ======================================================================
+
+\subsection{The affine Kac--Moody contrast}
+% label removed: subsec:km-contrast
+\index{affine Kac--Moody!critical string contrast}
+
+\begin{remark}[Complementarity sum comparison]
+% label removed: rem:g9-km-contrast
+\index{complementarity!sum comparison}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\toprule
+Family & $\kappa + \kappa'$ & Self-dual point &
+Gravitational locus \\
+\midrule
+$\widehat{\fg}_k$ &
+$0$ & $k = -h^\vee$ (critical; excluded) &
+$\kappa = 0$ iff $k = -h^\vee$ \\
+$\mathrm{Vir}_c$ &
+$13$ & $c = 13$ &
+$\kappa = 0$ iff $c = 0$ \\
+$\mathcal{W}_N$ &
+$\ne 0$ (generically) & exists for each $N$ &
+$\kappa = 0$ at isolated $c$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+For affine Kac--Moody at non-critical level, $\kappa + \kappa' = 0$
+and $\kappa \neq 0$: there is no gravitational regime. The
+critical string dichotomy is intrinsically a Virasoro/$\cW_N$
+phenomenon.
+\end{remark}
+
+\subsection{The $\mathcal{W}_N$ generalization}
+% label removed: subsec:wn-dichotomy
+\index{W-algebra@$\mathcal{W}$-algebra!critical dichotomy}
+
+\begin{remark}[$\mathcal{W}_N$ complementarity sums]
+% label removed: rem:g9-wn-sums
+\index{W-algebra@$\mathcal{W}$-algebra!complementarity sums}
+The modular characteristic is $\kappaChHodge(\mathcal{W}_{N,c}) = c \cdot
+\varrho(\mathfrak{sl}_N)$ where $\varrho = \sum_{i=1}^{N-1}(m_i+1)^{-1}$
+is the anomaly ratio.
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ccccc}
+\toprule
+$N$ & $\varrho(\mathfrak{sl}_N)$ & $\kappa$ &
+$\kappa + \kappa'$ & Self-dual $c$ \\
+\midrule
+$2$ & $1/2$ & $c/2$ & $13$ & $13$ \\
+$3$ & $5/6$ & $5c/6$ & $250/3$ & $50$ \\
+$N$ & $H_N - 1$ & $c(H_N - 1)$ &
+$c_{\mathrm{crit}}(H_N-1)$ & $c_{\mathrm{crit}}/2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+Here $H_N = \sum_{k=1}^N 1/k$ is the harmonic number. The
+transgression algebra, Clifford completion, and two-regime dichotomy
+carry through with $\kappa = c \cdot \varrho$ in place of $c/2$.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: HOLOGRAPHIC INTERPRETATION
+%
+% ======================================================================
+
+\subsection{Relation to the holographic datum}
+% label removed: subsec:holographic-relation
+\index{holographic modular Koszul datum!critical string}
+
+\begin{remark}[Holographic interpretation]
+% label removed: rem:g9-holographic
+\index{holographic modular Koszul datum!critical string interpretation}
+In the holographic setting
+(\S\ref{V1-sec:frontier-modular-holography-platonic}):
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The \emph{topological regime} ($u$ invertible) corresponds to
+the interacting bulk: nontrivial curvature, nonzero shadow obstruction tower,
+bulk gravity determined by the Yangian $r(z)$ and the shadow
+connection $\nabla^{\mathrm{hol}}$.
+
+\item The \emph{gravitational regime} ($u = 0$) has vanishing scalar
+curvature. The boundary bar complex is uncurved; its higher
+cohomological content is not killed by the scalar shadow, and the
+ghost sector is $\bigwedge^*(H_1(\Sigma_g))$.
+
+\item The \emph{self-dual point} ($\delta_\kappa = 0$)
+corresponds to self-conjugacy under gravitational $S$-duality (G4):
+the bulk and defect sectors contribute equally.
+
+\item At $c = 26$, the holographic datum
+$\mathcal{H}(\mathrm{Vir}_{26})$ is maximally asymmetric: the defect
+sector ($\mathrm{Vir}_0$, gravitational) has zero scalar curvature,
+and the bulk sector ($\mathrm{Vir}_{26}$, topological) carries the
+nonzero scalar anomaly. This is the bosonic string from the
+holographic perspective.
+\end{enumerate}
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: THE LOCALIZATION SEQUENCE
+%
+% ======================================================================
+
+\subsection{The localization sequence}
+% label removed: subsec:localization-sequence
+\index{localization sequence!Clifford completion}
+
+The two regimes are connected by a localization sequence in the
+secondary anomaly $u$. This is the algebraic analog of the passage
+from generic central charge to the critical point.
+
+\begin{theorem}[Localization sequence; \ClaimStatusProvedHere]
+% label removed: thm:localization-sequence
+\index{localization sequence!theorem|textbf}
+There is a localization fiber sequence of dg algebras:
+\begin{equation}% label removed: eq:g9-localization
+G_g(\cA)/(u)
+\;\longrightarrow\;
+G_g(\cA)
+\;\longrightarrow\;
+G_g(\cA)[u^{-1}],
+\end{equation}
+with the following properties:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The left term $G_g(\cA)/(u) = \barB^{(g)}(\cA) \otimes
+\bigwedge^*(\Bbbk^{2g})$ is the gravitational regime:
+the Clifford algebra with $u = 0$.
+
+\item The right term $G_g(\cA)[u^{-1}] \simeq_{\mathrm{Morita}}
+\mathrm{Mat}_{2^g}(B_\Theta[u^{-1}])$ is the topological regime.
+
+\item The long exact sequence in cohomology reads:
+\begin{equation}% label removed: eq:g9-localization-les
+\cdots \to
+H^n(G_g/(u)) \xrightarrow{\iota}
+H^n(G_g) \xrightarrow{j}
+H^n(G_g[u^{-1}]) \xrightarrow{\partial}
+H^{n+1}(G_g/(u)) \to \cdots
+\end{equation}
+The connecting homomorphism $\partial$ measures the failure of
+cohomology classes in the topological regime to extend to the
+gravitational regime.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The sequence~\eqref{V1-eq:g9-localization} is the standard localization
+for a central element $u$ in a dg algebra: the fiber of
+$G_g \to G_g[u^{-1}]$ is $G_g/(u^\infty) = \mathrm{colim}_n\,
+G_g/(u^n)$. Since $u$ is central and $u^2 = \kappa^2 \cdot \omega_g^2
+\in B$ (where $\omega_g^2$ is a $(2,2)$-class on $\Sigma_g$), the
+$u$-torsion stabilizes after finitely many steps. For the Clifford
+algebra, setting $u = 0$ in the
+relations~\eqref{V1-eq:g9-clifford-ab}--\eqref{V1-eq:g9-clifford-bb} gives
+the exterior algebra, confirming (i). Part (ii) is
+Theorem~\ref{V1-thm:topological-regime}. Part (iii) is the long exact
+sequence of the fiber-cofiber sequence in the dg category.
+\end{proof}
+
+\begin{corollary}[Localization for the Virasoro; \ClaimStatusProvedHere]
+% label removed: cor:g9-localization-vir
+\index{localization sequence!Virasoro}
+For the Virasoro, the localization sequence specializes to:
+\begin{equation}% label removed: eq:g9-localization-vir
+\barB^{(g)}(\mathrm{Vir}_c) \otimes \bigwedge\nolimits^{2g}
+\;\longrightarrow\;
+G_g(\mathrm{Vir}_c)
+\;\longrightarrow\;
+\mathrm{Mat}_{2^g}(B_\Theta^{(g)}(\mathrm{Vir}_c)[(c/2)^{-1}]).
+\end{equation}
+The connecting homomorphism is
+\begin{equation}% label removed: eq:g9-connecting-vir
+\partial\colon
+H^n(\mathrm{Mat}_{2^g}(B_\Theta[(c/2)^{-1}]))
+\longrightarrow
+H^{n+1}(\barB^{(g)}(\mathrm{Vir}_c))
+\otimes \bigwedge\nolimits^{2g}.
+\end{equation}
+At $c = 0$ the localization by \(u^{-1}\) is absent, since
+\(u=0\); the uncurved complex
+$\barB^{(g)}(\mathrm{Vir}_0) \otimes \bigwedge^{2g}$ is the
+remaining term. At $c = 26$ the dual \(\mathrm{Vir}_0\) term is
+uncurved, so the connecting homomorphism $\partial$ measures the
+scalar-curvature passage from the topological regime to the
+gravitational regime and not a disappearance of the bar complex.
+\end{corollary}
+
+\begin{proof}
+Set $u = (c/2)\omega_g$. The left term is $G_g/(u)$; the right is
+$G_g[u^{-1}]$. The statements about $c = 0$ and $c = 26$ follow from
+the vanishing of $u$ and the maximality of $\kappa$ respectively.
+\end{proof}
+
+% ======================================================================
+%
+% SUBSECTION: PRIMITIVITY AND BIALGEBRA STRUCTURE
+%
+% ======================================================================
+
+\subsection{Primitivity of the secondary anomaly}
+% label removed: subsec:primitivity
+\index{secondary anomaly!primitivity}
+\index{bialgebra!transgression algebra}
+
+The bar coalgebra $\barB^{(g)}(\cA)$ carries a coalgebra structure
+from the deconcatenation coproduct. The transgression element $\eta$
+and the secondary anomaly $u = \eta^2$ interact with this coproduct in
+a controlled way.
+
+\begin{proposition}[Bialgebra extension; \ClaimStatusProvedHere]
+% label removed: prop:g9-bialgebra
+\index{bialgebra!transgression extension}
+The transgression algebra $B_\Theta^{(g)}(\cA)$ carries a unique
+dg bialgebra structure extending the coalgebra on
+$\barB^{(g)}(\cA)$, determined by
+\begin{equation}% label removed: eq:g9-eta-coproduct
+\Delta(\eta) = \eta \otimes 1 + 1 \otimes \eta,
+\qquad
+\varepsilon(\eta) = 0.
+\end{equation}
+In particular, $\eta$ is primitive.
+\end{proposition}
+
+\begin{proof}
+The coproduct~\eqref{V1-eq:g9-eta-coproduct} is forced by the
+requirement that $\Delta$ be an algebra map: $\Delta(\eta^2) =
+\Delta(\eta)^2 = (\eta \otimes 1 + 1 \otimes \eta)^2 =
+\eta^2 \otimes 1 + \eta \otimes \eta + \eta \otimes \eta +
+1 \otimes \eta^2 = \lambda \otimes 1 + 2\eta \otimes \eta +
+1 \otimes \lambda$. Here $\lambda = \kappa \cdot \omega_g$ is
+the curvature class on $\overline{\cM}_g$, not a fibrewise
+coalgebra element: it lives in $H^{2}(\overline{\cM}_g)$ via
+the Hodge bundle, and its primitivity in $B_\Theta^{(g)}(\cA)$
+is the statement that the
+period-corrected differential
+$\Dg{g}$ of Volume~I,
+Remark~\ref{V1-rem:sc-higher-genus}\textup{(iii)}, is a
+coderivation of~$\Delta$. The fibrewise differential
+$\dfib$ is \emph{not} a coderivation
+(Volume~I,
+Remark~\ref{V1-rem:sc-higher-genus}\textup{(ii)}); only after
+the Fay trisecant period correction does the curved
+$E_1$ dg coalgebra structure persist, and only then does
+the Hodge curvature class push forward to a primitive element
+of $B_\Theta^{(g)}(\cA)$. The counit $\varepsilon(\eta) = 0$
+follows from $\varepsilon(\lambda) = 0$. Coassociativity:
+$(\Delta \otimes \id)\Delta(\eta) = \eta \otimes 1 \otimes 1 +
+1 \otimes \eta \otimes 1 + 1 \otimes 1 \otimes \eta =
+(\id \otimes \Delta)\Delta(\eta)$.
+\end{proof}
+
+\begin{corollary}[Primitivity of the secondary anomaly;
+\ClaimStatusProvedHere]
+% label removed: cor:g9-u-coproduct
+The secondary anomaly element is primitive:
+\begin{equation}% label removed: eq:g9-u-coproduct
+\Delta(u) = u \otimes 1 + 1 \otimes u.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Direct computation from Proposition~\ref{V1-prop:g9-bialgebra}.
+Using $\Delta(\eta) = \eta \otimes 1 + 1 \otimes \eta$ and the
+graded multiplication in $B_\Theta \otimes B_\Theta$
+(Koszul sign rule: $(a \otimes b)(c \otimes d)
+= (-1)^{|b||c|}\,ac \otimes bd$):
+\begin{align*}
+\Delta(u) &= \Delta(\eta)^2
+= (\eta \otimes 1 + 1 \otimes \eta)^2 \\
+&= \eta^2 \otimes 1
+ + (\eta \otimes 1)(1 \otimes \eta)
+ + (1 \otimes \eta)(\eta \otimes 1)
+ + 1 \otimes \eta^2 \\
+&= u \otimes 1
+ + \eta \otimes \eta
+ + (-1)^{|\eta||\eta|}\eta \otimes \eta
+ + 1 \otimes u \\
+&= u \otimes 1
+ + \eta \otimes \eta
+ - \eta \otimes \eta
+ + 1 \otimes u \\
+&= u \otimes 1 + 1 \otimes u.
+\end{align*}
+The cross terms cancel because $|\eta| = 1$ is odd:
+$(1 \otimes \eta)(\eta \otimes 1) = (-1)^{|\eta||\eta|}\eta \otimes \eta
+= -\eta \otimes \eta$.
+\end{proof}
+
+\begin{remark}[Primitivity and the Milnor--Moore theorem]
+% label removed: rem:g9-milnor-moore
+\index{Milnor--Moore theorem!transgression}
+When $B_\Theta$ is connected and locally finite, the Milnor--Moore
+theorem identifies the primitive elements of $H^*(B_\Theta)$ with the
+indecomposables of the associated Lie algebra. Since $u$ is primitive
+(Corollary~\ref{V1-cor:g9-u-coproduct}), its cohomology class
+$[u] \in \mathrm{Prim}(H^*(B_\Theta))$ generates a one-dimensional
+abelian sub-Lie algebra. Its vanishing ($\kappa = 0$) is the
+condition for the Lie algebra to lose this generator, the algebraic
+avatar of the critical string.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: THE TRANSGRESSION AS UNIVERSAL PROPERTY
+%
+% ======================================================================
+
+\subsection{The universal property of the transgression algebra}
+% label removed: subsec:universal-property
+\index{transgression algebra!universal property}
+
+\begin{proposition}[Universal property; \ClaimStatusProvedHere]
+% label removed: prop:g9-universal
+\index{transgression algebra!universal property|textbf}
+Let $(B, d, \lambda)$ be a curved dg algebra with
+$d^2 = [\lambda, -]$. For any dg algebra $(C, d_C)$ with
+$d_C^2 = 0$ and any dg algebra map $f\colon B \to C$ such that
+$f(\lambda) = \xi^2$ for some $\xi \in C^1$ with $d_C(\xi) = 0$,
+there exists a unique dg algebra map $\tilde{f}\colon B_\Theta \to C$
+extending $f$ with $\tilde{f}(\eta) = \xi$:
+\[
+\begin{tikzcd}
+B \arrow[r, hook] \arrow[d, "f"'] &
+B_\Theta \arrow[dl, dashed, "\exists!\,\tilde{f}"] \\
+C &
+\end{tikzcd}
+\]
+\end{proposition}
+
+\begin{proof}
+Define $\tilde{f}(b_0 + b_1\eta) = f(b_0) + f(b_1)\xi$ for
+$b_0, b_1 \in B$. This is well-defined on $B_\Theta$ because
+$\tilde{f}(\eta^2 - \lambda) = \xi^2 - f(\lambda) = 0$.
+It is an algebra map: $\tilde{f}$ preserves the
+multiplication~\eqref{V1-eq:g9-BT-multiplication} because $f$ is an
+algebra map and $\xi$ centralizes $\im(f)$ (since $f(\lambda) = \xi^2$
+is central in $C$, and $\xi$ commutes with $\im(f)$ by the
+same centrality argument used for $\eta$). It respects the
+differential: $\tilde{f}(d_{B_\Theta}(b)) = \tilde{f}(d(b) +
+[\eta, b]) = f(d(b)) + [f(\eta), f(b)] = d_C(f(b)) +
+[\xi, f(b)] = d_C(\tilde{f}(b))$ using $d_C \circ f = f \circ d$
+(since $f$ is a dg map, with the correction that $d^2 = [\lambda, -]$
+maps to $d_C^2 = 0$ via $f(\lambda) = \xi^2$). Uniqueness: any
+extension must send $\eta \mapsto \xi$ (there is no choice), and
+the value on $B$ is fixed by $f$.
+\end{proof}
+
+\begin{corollary}[The comparison map is universal;
+\ClaimStatusProvedHere]
+% label removed: cor:g9-comparison-universal
+The comparison map $B_\Theta^{(g)}(\cA) \to (\barB^{(g)}(\cA),
+\Dg{g})$ of Remark~\ref{V1-rem:g9-mc-relation} is the unique factorization
+of the identity on $\barB^{(g)}(\cA)$ through the transgression
+algebra, with $\eta$ sent to the period-dependent element
+$\sum_k t_k \omega_k$ whose square is $\kappa \cdot \omega_g$ (by the
+Lagrangian property of the $A$-cycle subspace).
+\end{corollary}
+
+% ======================================================================
+%
+% SUBSECTION: DEFORMATION OF THE CLIFFORD COMPLETION
+%
+% ======================================================================
+
+\subsection{Deformation theory of the Clifford completion}
+% label removed: subsec:clifford-deformation
+\index{Clifford completion!deformation theory}
+
+The Clifford completion $G_g(\cA)$ depends on the central charge
+parameter through $u = \kappaChHodge(\cA) \cdot \omega_g$. The variation of
+$G_g$ with $\kappa$ is controlled by the deformation theory of
+Clifford algebras.
+
+\begin{proposition}[Deformation of the Clifford algebra;
+\ClaimStatusProvedHere]
+% label removed: prop:g9-clifford-deformation
+\index{Clifford algebra!deformation theory}
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The family $\{\mathrm{Cl}_{2g}(u)\}_{u \in \Bbbk}$ is a flat
+deformation of $\bigwedge^*(\Bbbk^{2g})$ over $\Bbbk$, with fiber
+$\bigwedge^*(\Bbbk^{2g})$ at $u = 0$ and
+$\mathrm{Mat}_{2^g}(\Bbbk)$ at $u \neq 0$.
+
+\item The Hochschild cohomology controlling the deformation is
+\begin{equation}% label removed: eq:g9-HH-clifford
+\HH^2(\mathrm{Cl}_{2g}(u), \mathrm{Cl}_{2g}(u))
+=
+\begin{cases}
+\Bbbk & \text{if } u = 0, \\
+0 & \text{if } u \neq 0.
+\end{cases}
+\end{equation}
+The one-dimensional space at $u = 0$ is generated by the
+anticommutator deformation $\alpha_i\beta_j + \beta_j\alpha_i
+\mapsto \delta_{ij}\,\epsilon$.
+
+\item The deformation is unobstructed: $\HH^3(\bigwedge^*(\Bbbk^{2g}),
+\bigwedge^*(\Bbbk^{2g})) = 0$ for the relevant component.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(i)} The Clifford algebra is a filtered deformation of the
+exterior algebra: the associated graded of $\mathrm{Cl}_{2g}(u)$
+(filtered by word length) is $\bigwedge^*(\Bbbk^{2g})$ for all $u$,
+including $u = 0$. Flatness is clear: $\mathrm{Cl}_{2g}(u)$ is free
+of rank $2^{2g}$ as a $\Bbbk$-module for all $u$.
+
+\emph{(ii)} For $u \neq 0$, $\mathrm{Cl}_{2g}(u) \cong
+\mathrm{Mat}_{2^g}(\Bbbk)$, and $\HH^*(\mathrm{Mat}_n, \mathrm{Mat}_n)
+\cong \HH^*(\Bbbk, \Bbbk) = \Bbbk$ concentrated in degree $0$ by
+Morita invariance. In particular, $\HH^2 = 0$: matrix algebras are
+rigid. For $u = 0$, $\HH^2(\bigwedge^*(\Bbbk^{2g})) = \Bbbk$,
+generated by the single parameter $u$.
+
+\emph{(iii)} The obstruction space $\HH^3$ for the exterior algebra
+vanishes in the relevant weight: the deformation class $u$ has weight
+$2$ (it changes the anticommutator from $0$ to $u \cdot \delta_{ij}$),
+and the cup product $[u] \cup [u] \in \HH^4$ is the only potential
+obstruction, which vanishes by the centrality of $u$.
+\end{proof}
+
+\begin{remark}[The wall-crossing at $u = 0$]
+% label removed: rem:g9-wall-crossing
+\index{wall-crossing!Clifford completion}
+The deformation theory reveals that $u = 0$ is a \emph{wall}: for
+$u \neq 0$ the algebra is rigid (a matrix algebra), while at $u = 0$
+it acquires a one-dimensional deformation parameter. The Clifford
+completion ``jumps'' across this wall, from a matrix algebra to an
+exterior algebra, and the jump is irreversible (the exterior algebra
+is not Morita equivalent to any matrix algebra). This is the algebraic
+wall-crossing underlying the critical string dichotomy: the passage
+through $\kappa = 0$ is a genuine phase transition in the derived
+category.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: GENUS-g TRACE FORMULA
+%
+% ======================================================================
+
+\subsection{The genus-$g$ trace formula}
+% label removed: subsec:trace-formula
+\index{trace formula!Clifford completion}
+
+In the topological regime, the Morita equivalence allows computation of
+traces on $G_g$ via traces on $B_\Theta$.
+
+\begin{proposition}[Trace formula; \ClaimStatusProvedHere]
+% label removed: prop:g9-trace-formula
+\index{trace formula!genus-g@genus-$g$}
+When $u$ is invertible, any trace $\mathrm{tr}\colon B_\Theta \to \Bbbk$
+extends to a trace on $G_g$ by the formula
+\begin{equation}% label removed: eq:g9-trace-formula
+\mathrm{Tr}_{G_g}(b \otimes C) =
+2^g \cdot \mathrm{tr}(b) \cdot \mathrm{tr}_{\mathrm{Cl}}(C),
+\end{equation}
+where $\mathrm{tr}_{\mathrm{Cl}}\colon \mathrm{Cl}_{2g}(u)
+\to \Bbbk$ is the reduced Clifford trace (normalized so that
+$\mathrm{tr}_{\mathrm{Cl}}(1) = 1$).
+\end{proposition}
+
+\begin{proof}
+Under the Morita equivalence
+$G_g[u^{-1}] \cong \mathrm{Mat}_{2^g}(B_\Theta[u^{-1}])$, a trace on
+$\mathrm{Mat}_{2^g}(R)$ is $\sum_{i=1}^{2^g}\mathrm{tr}(R_{ii})$.
+The factor $2^g$ is the matrix size. The Clifford trace is the
+composition of the matrix trace with the identification
+$\mathrm{Cl}_{2g}(u) \cong \mathrm{Mat}_{2^g}$.
+\end{proof}
+
+\begin{corollary}[Genus-$g$ partition function via trace;
+\ClaimStatusProvedHere]
+% label removed: cor:g9-partition-trace
+\index{partition function!trace formula}
+For a Koszul chiral algebra $\cA$ with $\kappaChHodge(\cA) \neq 0$, the
+genus-$g$ free energy satisfies
+\begin{equation}% label removed: eq:g9-Fg-trace
+F_g(\cA) = \frac{1}{2^g}\,\mathrm{Tr}_{G_g}\bigl(
+(-1)^F \cdot q^{L_0}\bigr)
+= \kappaChHodge(\cA) \cdot \lambda_g^{\mathrm{FP}},
+\end{equation}
+where the second equality uses the genus universality theorem
+(Theorem~\ref{V1-thm:genus-universality}). The factor $1/2^g$ accounts
+for the Morita multiplicity.
+\end{corollary}
+
+\begin{remark}[The partition function at $u = 0$]
+% label removed: rem:g9-partition-u0
+\index{partition function!gravitational regime}
+In the gravitational regime ($u = 0$), the trace formula degenerates:
+the Clifford trace is replaced by the supertrace on
+$\bigwedge^*(\Bbbk^{2g})$, which is
+$\mathrm{str} = \sum_{k=0}^{2g}(-1)^k\binom{2g}{k} =
+(1-1)^{2g} = 0$ for $g \geq 1$. This vanishing is consistent with
+$F_g(\mathrm{Vir}_0) = 0$: the protected scalar trace is zero because
+the supertrace over the exterior algebra vanishes.
+\end{remark}
+
+% ======================================================================
+%
+% SUBSECTION: OPEN QUESTIONS
+%
+% ======================================================================
+
+\subsection{Further directions}
+% label removed: subsec:further-directions
+
+\begin{remark}[Open questions]
+% label removed: rem:g9-open-questions
+\index{critical string!open questions}
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Does $G_g(\cA)$ carry a natural BV algebra structure
+extending the BV/bar dictionary of Remark~\ref{V1-rem:bv-bar-bridge}? The quantum master
+equation on $G_g$ should encode genus-$g$ sewing relations.
+
+\item Is there a super-Clifford version for $\mathcal{N} = 1$ at
+$c = 15$, replacing $\mathrm{Cl}_{2g}$ with a super-Clifford algebra
+$\mathrm{sCl}_{2g|2g}$?
+
+\item The Hodge--Clifford compatibility
+(Proposition~\ref{V1-prop:hodge-clifford}) suggests a connection to the
+Mukai Hodge structure on $K(\Sigma_g)$. Does the spectral sequence of
+Construction~\ref{V1-constr:clifford-spectral} compute the Mukai pairing?
+
+\item At $c = 13$, does the Clifford completion carry an enhanced
+symmetry reflecting self-duality, beyond the $\Z/2$ of the Koszul
+involution?
+
+\item The wall-crossing at $u = 0$
+(Remark~\ref{V1-rem:g9-wall-crossing}) should have a categorical lift:
+a derived equivalence between the gravitational and topological
+regimes that degenerates at $u = 0$. Can this be made precise using
+the formalism of perverse sheaves on the $\kappa$-line?
+
+\item The localization sequence
+(Theorem~\ref{V1-thm:localization-sequence}) suggests a
+``semi-classical limit'' interpretation: the gravitational regime is
+the $u \to 0$ limit of the topological regime, analogous to the
+$\hbar \to 0$ limit in deformation quantization. The secondary
+anomaly $u = \kappa \cdot \omega_g$ plays the role of Planck's
+constant.
+\end{enumerate}
+\end{remark}
+
+%=======================================================================
+% c = 26 no-ghost theorem as a chain-level Clifford-degeneration computation
+%=======================================================================
+
+\subsection{The $c=26$ BRST anomaly and Clifford degeneration}
+\label{sec:critical-string-clifford-degeneration}
+
+The preceding sections exhibited the $u\to 0$ degeneration of the
+Clifford completion as the algebraic dichotomy associated to the
+critical value $c=26$. The BRST matter--ghost system adds the
+Goddard--Thorn filtration; the Clifford degeneration is the anomaly
+calculation on the $E_1$ page, and the no-ghost theorem is the
+collapse of that filtered complex.
+
+\begin{theorem}[$c=26$ BRST anomaly cancellation and Clifford degeneration;
+\ClaimStatusProvedHere]
+\label{thm:c26-no-ghost-clifford-degeneration}
+\index{no-ghost theorem!Clifford degeneration}
+\index{critical string!chain-level no-ghost}
+Let $\cA_{\mathrm{str}}$ be the bosonic string vertex algebra at
+$c = 26$, assembled as the matter--ghost pair
+$V_{\mathrm{matter}}^{c=26} \otimes V_{bc}^{c=-26}$ with total
+central charge zero. Let $Q_{\mathrm{BRST}}$ be the BRST differential
+and $\cH_{\mathrm{phys}}(\cA_{\mathrm{str}}) :=
+H^\bullet(Q_{\mathrm{BRST}})$ the physical state space. Assume the
+standard Goddard--Thorn hypotheses: the matter module has intercept one,
+positive-energy grading, and nondegenerate transverse oscillator form,
+and the Goddard--Thorn filtration has the Frenkel--Garland--Zuckerman
+collapse
+\[
+E_1 \cong \cF_{\perp}\otimes H^\bullet(\Bbbk b_0\oplus \Bbbk c_0,
+Q_0),
+\qquad
+E_1 = E_\infty .
+\]
+Here $Q_0$ is the zero-mode component of $Q_{\mathrm{BRST}}$ on the
+$b_0,c_0$ sector.
+Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item At $c^{\mathrm{matter}}=26$ (the critical string value), the
+Clifford completion
+(Section~\ref{app:anomaly-completed-topological-holography})
+of the matter--ghost BRST pair $\cA_{\mathrm{str}}$ degenerates:
+the effective handle anomaly
+$\kappa_{\mathrm{eff}}^{\mathrm{BRST}} =
+\kappaChHodge(\text{matter},c=26)+\kappaChHodge(\text{ghost},c=-26)$ is zero, so
+$u_{\mathrm{eff}}=\kappa_{\mathrm{eff}}^{\mathrm{BRST}}\omega_g=0$ and
+the handle Clifford algebra becomes
+$\bigwedge^*(\Bbbk^{2g})$.
+\item The $b_0,c_0$ zero modes form the usual odd Heisenberg pair
+$\{b_0,c_0\}=1$, $b_0^2=c_0^2=0$. This pair is the contracting
+homotopy on the longitudinal--ghost factor of the filtered BRST
+complex, while the exterior handle algebra records the vanished
+secondary anomaly.
+\item The physical state space is canonically identified with the
+transverse oscillator cohomology:
+\[
+\cH_{\mathrm{phys}}(\cA_{\mathrm{str}})
+\;\cong\;
+\cF_{\perp}.
+\]
+Longitudinal and nonzero ghost oscillators lie in
+$Q_{\mathrm{BRST}}$-exact pairs.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Effective anomaly vanishing at $c=26$: matter contributes
+$\kappaChHodge(\text{matter}) = c^{\mathrm{matter}}/2 = 13$ (or
+$\kappa = c$ in the convention of
+\S~\ref{subsec:tholog-coda}); the $bc$-ghost system contributes
+$\kappaChHodge(\text{ghost}) = -13$. Total $\kappa_{\mathrm{eff}}=0$,
+so the secondary anomaly $u_{\mathrm{eff}}$ vanishes. Substituting
+$u=0$ in the handle Clifford relations gives the exterior algebra
+$\bigwedge^*(\Bbbk^{2g})$, by the gravitational-regime theorem above.
+
+The $bc$ zero modes are not the handle Clifford generators; they form
+the standard odd Heisenberg pair $\{b_0,c_0\}=1$ inside the BRST
+complex. The operator $b_0$ is the contracting homotopy for the
+longitudinal--ghost summand in the Goddard--Thorn filtered complex.
+The assumed Frenkel--Garland--Zuckerman collapse identifies the
+abutment with the transverse oscillator factor $\cF_\perp$, proving
+the displayed cohomology isomorphism.
+\end{proof}
+
+\begin{remark}[From Clifford relation to Goddard--Thorn]
+\label{rem:clifford-to-no-ghost}
+The standard proof of no-ghost (Goddard--Thorn~\cite{GoddardThornNoGhost},
+Frenkel--Garland--Zuckerman~\cite{FrenkelGarlandZuckerman}) is a
+delicate spectral sequence argument. The Clifford-degeneration
+statement isolates the anomaly calculation inside that proof: at
+$c=26$, the matter and ghost modular characteristics cancel, the
+handle Clifford algebra degenerates to an exterior algebra, and the
+Goddard--Thorn filtration collapses onto transverse oscillators.
+\end{remark}
+
+\begin{remark}[Celestial consequence]
+\label{rem:c26-celestial}
+Via the universal celestial holography theorem
+(Theorem~\ref{thm:universal-celestial-holography} in the
+celestial-holography-core chapter), the $c=26$
+no-ghost theorem is the celestial statement that the physical
+soft-graviton sector of the bosonic string is the transverse
+$\mathfrak{w}_{1+\infty}$ subalgebra, with longitudinal and ghost
+soft modes $Q_{\mathrm{BRST}}$-exact. The Clifford degeneration
+is precisely the shadow-class reduction $\mathbf C \rightsquigarrow
+\mathbf G$ at the critical locus.
+\end{remark}
+
+\section{K3 class-\texorpdfstring{$\mathcal S$}{S} boundary constant}
+\label{sec:csd-supplement}
+
+\begin{proposition}[Class-$\mathcal S$ $A_1$ anomaly at twenty-four
+punctures; \ClaimStatusProvedHere]
+\label{rem:csd-1}
+Let $\Sigma_{0,24}=(\mathbb P^1,D)$ with $|D|=24$, as for the
+discriminant divisor of a semistable elliptic K3 surface with
+twenty-four Kodaira $I_1$ fibres. The class-$\mathcal S$ theory
+$\mathcal T[A_1,\Sigma_{0,24}]$ with maximal regular punctures has
+\[
+n_v = 21\cdot 3 = 63,\qquad
+n_h = 22\cdot 4 = 88.
+\]
+Its four-dimensional and Schur-VOA central charges are
+\[
+c_{4d}
+\;=\;
+\frac{2n_v+n_h}{12}
+\;=\;
+\frac{126+88}{12}
+\;=\;
+\frac{107}{6},
+\qquad
+c_{2d}
+\;=\;
+-12c_{4d}
+\;=\;
+-214.
+\]
+\end{proposition}
+
+\begin{proof}
+A genus-zero surface with $n$ punctures decomposes into $n-2$
+trinions and $n-3$ tubes. For $A_1$, each trinion $T_2$ contributes
+$(n_v,n_h)=(0,4)$ and each tube contributes three vector multiplets,
+so at $n=24$ one obtains $(n_v,n_h)=(63,88)$. The
+Shapere--Tachikawa anomaly formula gives
+$c_{4d}=(2n_v+n_h)/12=107/6$, equivalently
+$c_{4d}=(5n-13)/6$ at genus zero. The Beem--Lemos--Liendo--Peelaers--
+Rastelli--van~Rees Schur functor gives $c_{2d}=-12c_{4d}$.
+For $n=4$ the same formula gives $c_{4d}=7/6$, the
+$\mathrm{SU}(2)$ $N_f=4$ sanity check. The number $-312$ and the
+factorisation $-12\cdot 26$ do not occur in this class-$\mathcal S$
+anomaly calculation. The divisor $D$ varies in
+\(\operatorname{Conf}_{24}(\mathbb P^1)/\operatorname{PGL}_2\); an
+$M_{24}$-equivariant fibre is additional level structure on special
+fibres, while the central-charge computation is the family statement.
+\end{proof}

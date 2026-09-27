@@ -1,0 +1,643 @@
+\documentclass[11pt]{amsart}
+\usepackage[localtheorems]{raeez-math-template}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\fh}{\mathfrak{h}}
+\providecommand{\fsl}{\mathfrak{sl}}
+\providecommand{\fso}{\mathfrak{so}}
+\providecommand{\fsp}{\mathfrak{sp}}
+\renewcommand{\hbar}{\hslash}
+
+\title{Non-simply-laced chiral coproducts via $\sigma$-orbifold folding}
+\author{Raeez Lorgat}
+\date{April 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Diagram folding compares ADE Yangians with non-simply-laced Yangians
+through folded/orbit RTT presentations. It is not used here as a
+general fixed-point theorem
+$Y_\hbar(\fg)^\sigma=Y_\hbar(\fg^\sigma)$; that equality is false in
+this generality. The chiral lift is subtler. Equivariance of the
+Jindal--Kaubrys--Latyntsev critical CoHA vertex coproduct~\cite{JKL}
+gives a coproduct on invariants only after the landing condition
+\[
+  \Delta(V^\sigma) \subset V^\sigma \otimes V^\sigma
+\]
+is proved. Diagonal $\sigma$-equivariance alone gives
+$\Delta(V^\sigma)\subset (V\otimes V)^\sigma$, which may contain
+nontrivial tensor sectors. The descent criterion has four parts:
+potential invariance, Hecke equivariance, finite-orbifold $E_1$
+preservation, and an independent sector-vanishing calculation, followed
+by the spectral-parameter and root-length normalisations needed for an
+RTT comparison. The Yangian-level $A_3$ coproduct equivariance is
+explicit; the chiral folded coproducts are governed by the landing
+obstruction.
+\end{abstract}
+
+\section{Setup: folding, orbifold route, and the four checks}
+\label{sec:setup-folding}
+
+Let $\fg^{\mathrm{simply}}$ be a simply-laced simple Lie algebra
+($A$, $D$, or $E$) and $\sigma \in \mathrm{Aut}(\mathrm{Dyn}(\fg^{\mathrm{simply}}))$
+a Dynkin automorphism of order $d \in \{2, 3\}$. The Langlands-dual
+folding identifies the $\sigma$-invariant simple Lie algebra
+\[
+  \fg \;=\; (\fg^{\mathrm{simply}})^{\sigma}
+\]
+with the non-simply-laced simple Lie algebra of the indicated type:
+\[
+  B_N \;=\; (D_{N+1})^{\mathbb{Z}/2}, \qquad
+  C_N \;=\; (A_{2N-1})^{\mathbb{Z}/2}, \qquad
+  F_4 \;=\; (E_6)^{\mathbb{Z}/2}, \qquad
+  G_2 \;=\; (D_4)^{\mathbb{Z}/3}.
+\]
+(The Lie type and the chosen RTT representation are separate data.
+The order-two $A_3$ example below gives the type-$C_2$ fold, identified
+with $B_2$ only after the exceptional isomorphism
+$\fsp_4\simeq\fso_5$.)
+
+The affine level on the folded current algebra is the level induced by
+restricting the parent invariant form. We denote it by $k_\sigma$; it
+equals the parent symbol $k$ only after a trace-form convention has
+been fixed. In the standard non-simply-laced convention one must also
+record the long-root/short-root normalisation.
+
+\paragraph{Orbifold route.}
+Vol~II catalogues the orbifold route: $\mathbb{Z}/n$-invariants of an
+$E_n$-algebra (factorisation algebra, chiral algebra, vertex algebra)
+preserve the $E_n$-structure; the invariant subalgebra is an
+$E_n$-algebra whose spectral data descends from the parent. Coalgebra
+operations require the landing condition in \textup{(C4)}.
+
+\paragraph{The four checks.}
+For an order-two descended chiral coproduct to close inside
+$V_{k_\sigma}(\fg) \otimes V_{k_\sigma}(\fg)$, four conditions must
+hold:
+\begin{enumerate}[label=\textup{(C\arabic*)}]
+\item \textbf{Potential $\sigma$-invariance.}
+  The preprojective potential $W$ on the parent $\sigma$-equivariant
+  quiver is $\sigma$-invariant: $\sigma^* W = W$.
+\item \textbf{Hecke correspondence equivariance.}
+  The Hecke correspondence on
+  $\mathrm{Rep}(\mathrm{Dyn}(\fg^{\mathrm{simply}}), \mathbf{d})$ is
+  $\sigma$-equivariant: extensions of representations commute with
+  Dynkin-diagram automorphisms.
+\item \textbf{Orbifold $E_n$-preservation.}
+  Taking $\sigma$-invariants of an $E_1$-chiral algebra produces an
+  $E_1$-chiral algebra. For a chiral coalgebra, equivariance produces
+  a map to $(V\otimes V)^\sigma$; closure in
+  $V^\sigma\otimes V^\sigma$ is a separate assertion. Once landing is
+  known, the parent coassociativity and vertex-bialgebra/coaction
+  identities restrict; without landing there is no coalgebra structure
+  on the invariant object.
+\item \textbf{Sign-sector vanishing.}
+  The descended coproduct lands in
+  $V_{k_\sigma}(\fg) \otimes V_{k_\sigma}(\fg)
+  = V^+ \otimes V^+ \subset
+  (V^+ \oplus V^-) \otimes (V^+ \oplus V^-)$: the
+  sign-eigenspace-to-sign-eigenspace component
+  $V^- \otimes V^-$ vanishes.
+\end{enumerate}
+For the order-three triality fold the landing condition uses the
+character decomposition
+$V=\bigoplus_{\chi\in\widehat{\mathbb Z/3}}V^\chi$; diagonal
+invariance permits the neutral summands
+$V^{\chi_1}\otimes V^{\chi_2}$ and
+$V^{\chi_2}\otimes V^{\chi_1}$, and those summands must be killed by a
+separate landing calculation.
+
+\begin{definition}[Landing obstruction]
+\label{def:landing-obstruction}
+Let $\Gamma$ be a finite cyclic group acting by chiral bialgebra
+automorphisms on a chiral coalgebra $(V,\Delta)$. Over characteristic
+zero write
+\[
+  V=\bigoplus_{\chi\in\widehat{\Gamma}} V^\chi .
+\]
+Equivariance gives
+\[
+  \Delta(V^1)
+  \subset
+  (V\otimes V)^\Gamma
+  =
+  \bigoplus_{\chi\psi=1} V^\chi\otimes V^\psi .
+\]
+The landing obstruction is
+\[
+  \mathcal L_\Gamma(\Delta)
+  :=
+  \operatorname{pr}_{\mathrm{nt}}\circ \Delta|_{V^1}
+  \in
+  \operatorname{Hom}\!\left(
+    V^1,\,
+    \bigoplus_{\chi\ne 1}V^\chi\otimes V^{\chi^{-1}}
+  \right),
+\]
+where $\operatorname{pr}_{\mathrm{nt}}$ projects away from
+$V^1\otimes V^1$. For completed chiral tensor products the same
+definition is made in the completed Hom-space.
+\end{definition}
+
+\begin{proposition}[Landing-obstruction descent criterion]
+\label{prop:landing-obstruction-criterion}
+Let $(V,\Delta)$ be an $E_1$-chiral bialgebra with an action of a
+finite cyclic group $\Gamma$ by chiral bialgebra automorphisms. Then
+$V^\Gamma$ inherits the $E_1$-chiral algebra structure. The coproduct
+$\Delta$ restricts to a chiral coproduct
+\[
+  V^\Gamma \longrightarrow V^\Gamma\otimes V^\Gamma
+\]
+if and only if $\mathcal L_\Gamma(\Delta)=0$. In that case the
+restricted coproduct is coassociative and satisfies the inherited
+vertex-bialgebra/coaction identities.
+\end{proposition}
+
+\begin{proof}
+Finite invariants preserve algebra objects, so $V^\Gamma=V^1$ inherits
+the $E_1$-chiral multiplication. Since $\Delta$ is
+$\Gamma$-equivariant,
+$\Delta(V^1)$ lies in
+$\bigoplus_{\chi\psi=1}V^\chi\otimes V^\psi$. It lies in
+$V^1\otimes V^1$ exactly when the projection to the direct sum of the
+nontrivial neutral character sectors vanishes, which is precisely
+$\mathcal L_\Gamma(\Delta)=0$. Coassociativity and the
+vertex-bialgebra identities are equations in the parent object; after
+landing, both sides of each equation lie in the fixed tensor powers and
+the equations restrict.
+\end{proof}
+
+\begin{remark}[Drinfeld--Sokolov compatibility]
+\label{rem:folding-vs-ds}
+Folding is orthogonal to Drinfeld--Sokolov. DS
+reduction descends along a $\mathbb{C}$-linear BRST differential from
+$V_k(\fg)$ to $\cW_k(\fg, f)$: it stays at fixed diagram and
+trades the loop direction for a conformal-weight grading. Folding, by
+contrast, descends along a finite-group action and produces a
+smaller Lie algebra at the same place in the Koszul hierarchy. The
+expected compatibility is a comparison between DS reduction of the
+fixed-current subalgebra and the corresponding invariant sector of
+$\cW_k(\fg^{\mathrm{simply}}, f_{\mathrm{prin}})$. It is not used as
+a fixed-point theorem for the full orbifold vertex algebra. We use
+this compatibility only to compare folded chiral algebras with their
+Drinfeld--Sokolov reductions.
+\end{remark}
+
+\section{Yangian-level folding}
+\label{sec:yangian-folding-complete}
+
+The Yangian-level folding fixes notation and gives the comparison
+object for any chiral lift.
+
+\begin{proposition}[Coproduct equivariance for the $A_3$ orbit fold]%
+\label{prop:yangian-folding-B2}%
+Let $\sigma$ be the $A_3$ Dynkin involution $\sigma(1) = 3$,
+$\sigma(2) = 2$. Then $\sigma$ lifts to the RTT generators of
+$Y_\hbar(\fsl_4)$ via $\sigma(T_{ij}(u)) = T_{5-i, 5-j}(u)$, the
+matrix coproduct $\Delta(T_{ij}(u)) = \sum_a T_{i a}(u) \otimes T_{a
+j}(u)$ is $\sigma$-equivariant. Hence
+\[
+  \Delta\bigl(Y_\hbar(\fsl_4)^\sigma\bigr)
+  \subset
+  \bigl(Y_\hbar(\fsl_4)\otimes Y_\hbar(\fsl_4)\bigr)^\sigma .
+\]
+Let $Y_\hbar(\fsl_4)=Y^+\oplus Y^-$ be the induced eigenspace
+decomposition. The obstruction to a fixed-subalgebra coproduct is
+\[
+  \mathcal L^Y_\sigma(\Delta)
+  :=
+  \operatorname{pr}_{Y^-\otimes Y^-}\circ \Delta|_{Y^+}
+  \in \operatorname{Hom}(Y^+,Y^-\otimes Y^-).
+\]
+The fixed subspace carries the restricted matrix coproduct if and only
+if $\mathcal L^Y_\sigma(\Delta)=0$. This is not the fixed-point
+assertion $Y_\hbar(\fsl_4)^\sigma=Y_\hbar(\fsp_4)$. The
+four-dimensional symplectic RTT presentation of $Y_\hbar(\fsp_4)$ is a
+comparison target only after the folded/orbit relations, the spectral
+parameter, and the invariant-form normalisation have been fixed. Under
+the exceptional Lie algebra isomorphism $\fsp_4\simeq\fso_5$,
+comparison with the five-dimensional orthogonal vector RTT realisation
+requires a separate normalisation of the $P$ and $Q$ terms.
+\end{proposition}
+
+\begin{proof}
+The matrix coproduct equivariance is an index substitution:
+\[
+  \Delta(\sigma T_{ij})(u)
+  \;=\; \Delta(T_{5-i,5-j})(u)
+  \;=\; \sum_a T_{5-i,a}(u) \otimes T_{a,5-j}(u)
+  \;=\; \sum_b \sigma(T_{ib}(u)) \otimes \sigma(T_{bj}(u))
+\]
+after substituting $a = 5 - b$, and the right-hand side equals
+$(\sigma \otimes \sigma) \Delta(T_{ij})(u)$. This proves
+equivariance and hence the displayed inclusion into diagonal
+invariants. For an order-two action the diagonal invariant tensor
+square decomposes as $(Y^+\otimes Y^+)\oplus(Y^-\otimes Y^-)$, so the
+projection to $Y^-\otimes Y^-$ is the exact obstruction to landing in
+$Y^+\otimes Y^+$. Molev's type-$C$ presentation supplies the
+symplectic RTT comparison only after that presentation and its
+normalisation data have been chosen. The exceptional identification
+with $B_2$ is an isomorphism of Lie algebras. The four-dimensional
+symplectic and five-dimensional orthogonal RTT modules remain different
+realisations.
+\end{proof}
+
+\begin{remark}[Orthogonal/symplectic RTT scope]
+\label{rem:molev-folding}
+Molev, Arnaudon--Molev--Ragoucy, and Guay--Regelskis--Wendlandt supply
+orthogonal and symplectic RTT presentations and coproducts
+\cite{Molev03, AMR06, GRW18}. They are comparison targets for the
+standard type-$B$ and type-$C$ folded constructions, not fixed-point
+theorems for ADE Yangian invariants. The RTT normalisation is part of
+the data: type $B$ uses the orthogonal vector realisation and type $C$
+uses the symplectic defining realisation. These sources do not by
+themselves supply exceptional $F_4$ or $G_2$ RTT comparisons. Any such
+comparison must be imported from a separate exceptional Yangian source.
+\end{remark}
+
+\section{Chiral-level folding: the four checks}
+\label{sec:chiral-folding-checks}
+
+The chiral lift starts from the Jindal--Kaubrys--Latyntsev~\cite{JKL}
+critical CoHA vertex coproduct on the corresponding ADE quiver with
+potential. Identifying this CoHA object with the affine chiral algebra
+under discussion is an additional input. In the $A_3$ model the
+coproduct has the form
+\[
+  \Delta^{v}_{A_3}\;:\; V_k(\fsl_4) \longrightarrow
+  V_k(\fsl_4) \otimes V_k(\fsl_4)
+\]
+and one asks whether it descends to the invariant object
+$V_k(\fsl_4)^{\sigma}$. The first two checks are geometric; the
+sector-landing check, the induced level $k_\sigma$, and the
+spectral-parameter convention are independent.
+
+\subsection*{(C1) $\sigma$-invariance of the preprojective potential}
+
+\begin{lemma}[$\sigma$-invariant preprojective potential]%
+\label{lem:potential-invariance}%
+The preprojective potential $W = \mathrm{Tr}(aba'b' - a'b'ab)$ on the
+$A_3$ preprojective quiver is invariant under the Dynkin involution
+$\sigma(1) = 3$, $\sigma(2) = 2$, which lifts to the arrow action
+$\sigma\colon a \leftrightarrow b'$, $\sigma\colon a' \leftrightarrow
+b$. By trace cyclicity, $\sigma^*W = W$.
+\end{lemma}
+
+\begin{proof}
+$\sigma^*W = \mathrm{Tr}(\sigma(a)\sigma(b)\sigma(a')\sigma(b') -
+\sigma(a')\sigma(b')\sigma(a)\sigma(b)) = \mathrm{Tr}(b'ab a' -
+ba'b'a) = \mathrm{Tr}(aba'b' - a'b'ab) = W$ by cyclicity.
+\end{proof}
+
+\subsection*{(C2) Hecke correspondence equivariance}
+
+\begin{lemma}[Hecke correspondence is $\sigma$-equivariant]%
+\label{lem:hecke-equivariance}%
+The Hecke correspondence
+\[
+  \mathrm{Rep}(A_3, \mathbf{d})
+  \xleftarrow{\;p\;} \mathcal{Z}
+  \xrightarrow{\;q\;}
+  \mathrm{Rep}(A_3, \mathbf{d}')\times \mathrm{Rep}(A_3, \mathbf{d}-\mathbf{d}')
+\]
+is $\sigma$-equivariant: the subrepresentation parameter $\mathcal{Z}
+= \{(M' \hookrightarrow M)\}$ carries the diagonal
+$\sigma$-action, and both projections commute with $\sigma^*$. The
+pushforward-pullback $q_!\, p^*$ commutes with $\sigma^*$ at the level
+of constructible sheaves and at the level of vanishing cycles
+$\phi_W$.
+\end{lemma}
+
+\begin{proof}
+Geometric naturality: if $(M' \hookrightarrow M)$ is a
+subrepresentation, so is $(\sigma M' \hookrightarrow \sigma M)$,
+because the Dynkin automorphism is a quiver automorphism. The
+vanishing cycle functor $\phi_W$ commutes with $\sigma^*$ because
+$\sigma^*W = W$ by Lemma~\ref{lem:potential-invariance} and
+$\phi$ is natural in the pair (space, function).
+\end{proof}
+
+\subsection*{(C3) Orbifold $E_n$-preservation}
+
+\begin{lemma}[Orbifold $E_1$-chiral preservation]%
+\label{lem:orbifold-E1}%
+If $V$ is an $E_1$-chiral algebra on a smooth curve $X$ and
+$\sigma\colon V\to V$ is a finite-order automorphism, then the
+$\sigma$-invariants $V^\sigma$ inherit an $E_1$-chiral algebra
+structure. If $V$ is also a chiral coalgebra with
+$\sigma$-equivariant coproduct $\Delta$, then
+$\Delta(V^\sigma)\subset (V\otimes V)^\sigma$; it lands in
+$V^\sigma\otimes V^\sigma$ precisely when the nontrivial tensor-sector
+components vanish.
+\end{lemma}
+
+\begin{proof}
+The finite-orbifold lemma gives the algebra statement. Explicitly, the
+restriction
+of the chiral multiplication $\mu_z\colon V \boxtimes V \to
+\Delta_! V$ to $V^\sigma \boxtimes V^\sigma$ lands in
+$\Delta_!(V^\sigma)$ because the multiplication is
+$\sigma$-equivariant by construction. For the coalgebra statement,
+Proposition~\ref{prop:landing-obstruction-criterion} gives the exact
+landing criterion.
+\end{proof}
+
+\subsection*{(C4) Sign-sector vanishing}
+
+\begin{lemma}[Sign-sector vanishing criterion]%
+\label{lem:sign-sector-vanishing}%
+Let $V=V^+\oplus V^-$ be the $\sigma$-eigenspace decomposition. The
+restriction $\Delta^v|_{V^+}$ descends to a coproduct on $V^+$ if and
+only if
+\[
+  \mathcal L_{\mathbb Z/2}(\Delta^v)
+  =
+  \operatorname{pr}_{V^-\otimes V^-}\circ \Delta^v|_{V^+}
+  =0 .
+\]
+\end{lemma}
+
+\begin{proof}
+For an order-two action,
+$(V\otimes V)^\sigma=(V^+\otimes V^+)\oplus(V^-\otimes V^-)$. Thus a
+$\sigma$-equivariant coproduct on $V$ restricts to a coproduct
+$V^+\to V^+\otimes V^+$ exactly when its projection to the second
+summand vanishes. The JKL vertex bialgebra identity and the VOA
+automorphism property preserve the eigenspace decomposition; they do
+not alone force the $V^-\otimes V^-$ projection to vanish.
+\end{proof}
+
+\subsection*{Consequence: the folded chiral coproduct}
+
+\begin{proposition}[Landing-obstruction coproduct for $C_2$]%
+\label{prop:folded-chiral-B2}%
+Assume the JKL critical CoHA vertex coproduct identifies with the
+chiral object attached to the $A_3$ affine input. Write
+$V_k(\fsl_4)^{\sigma,\mathrm{cur}}$ for the affine subalgebra
+generated by the fixed current Lie algebra
+$(\fsl_4)^\sigma\simeq\fsp_4$; this is the image of
+$V_{k_\sigma}(\fsp_4)$ in the chosen affine quotient convention. The
+obstruction to a descended coproduct is
+\[
+  \mathcal L_{\mathbb Z/2}(\Delta^v_{A_3})
+  \in
+  \operatorname{Hom}(V^+,V^-\otimes V^-).
+\]
+The fixed-current image carries the descended coproduct if and only if
+$\mathcal L_{\mathbb Z/2}(\Delta^v_{A_3})=0$. When it vanishes, the map
+\[
+  \Delta^{v}_{C_2} \;:=\; \Delta^{v}_{A_3}\big|_{V_k(\fsl_4)^{\sigma,\mathrm{cur}}}
+  \;:\;
+  V_{k_\sigma}(\fsp_4) \longrightarrow
+  V_{k_\sigma}(\fsp_4) \otimes V_{k_\sigma}(\fsp_4)
+\]
+is a chiral coproduct on $V_{k_\sigma}(\fsp_4)$, coassociative and
+compatible with the vertex operator map. If, in addition, the
+matrix-element evaluation is taken in the same spectral parameter and
+invariant-form convention as the symplectic RTT presentation, it
+compares with the RTT matrix coproduct of
+Proposition~\ref{prop:yangian-folding-B2}.
+\end{proposition}
+
+\begin{proof}
+Lemmas~\ref{lem:potential-invariance}--\ref{lem:sign-sector-vanishing}
+and Proposition~\ref{prop:landing-obstruction-criterion} give the
+descent criterion: (C1) and (C2) combine to give
+$\sigma$-equivariance of $\Delta^v_{A_3}$ at the level of the
+vanishing-cycle sheaf; (C3) ensures the fixed-current subalgebra
+inherits the chiral algebra structure; the vanishing of
+$\mathcal L_{\mathbb Z/2}(\Delta^v_{A_3})$ is exactly the statement
+that the coproduct closes inside $V^+ \otimes V^+$. The parent
+coassociativity and vertex-bialgebra identities then restrict. The RTT
+matrix-element comparison is exactly the remaining normalisation input:
+the spectral variable, the $\hbar$ convention, and the induced
+non-simply-laced invariant form must agree with the chosen symplectic
+RTT presentation.
+\end{proof}
+
+\section{Extension: $B_N, C_N, F_4$}
+\label{sec:extension-BCF}
+
+The same four checks apply to the remaining non-triality foldings.
+
+\begin{theorem}[Landing-obstruction theorem for $B_N, C_N, F_4$]%
+\label{thm:folded-chiral-BCF}%
+Let $(\fg^{\mathrm{simply}}, \sigma, \fg)$ run over the pairs
+$(D_{N+1}, \mathbb{Z}/2, B_N)$,
+$(A_{2N-1}, \mathbb{Z}/2, C_N)$, and
+$(E_6, \mathbb{Z}/2, F_4)$, and let $k_\sigma$ be the induced level on
+the fixed current algebra. The three geometric checks construct a
+$\sigma$-equivariant parent chiral coproduct, and the obstruction to a
+folded coproduct is the Hom-valued class
+\[
+  \mathcal L_{\mathbb Z/2}(\Delta^v_{\fg^{\mathrm{simply}}})
+  \in
+  \operatorname{Hom}\!\left(
+    V^+,\,
+    V^-\otimes V^-
+  \right).
+\]
+More explicitly:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item The preprojective potential on the corresponding double quiver
+  is $\sigma$-invariant (trace cyclicity);
+\item The Hecke correspondence is $\sigma$-equivariant (geometric
+  naturality);
+\item Orbifold $E_1$-chiral preservation applies (the orbifold-route lemma);
+\item The sector-vanishing condition of
+  Lemma~\ref{lem:sign-sector-vanishing} is an additional explicit
+  calculation, equivalently
+  $\mathcal L_{\mathbb Z/2}(\Delta^v_{\fg^{\mathrm{simply}}})=0$.
+\end{enumerate}
+If the JKL-to-affine identification holds, the fixed-current image of
+$V_{k_\sigma}(\fg)$ carries a chiral coproduct $\Delta^v_{\fg}$ if and
+only if
+$\mathcal L_{\mathbb Z/2}(\Delta^v_{\fg^{\mathrm{simply}}})=0$.
+This does not identify the full invariant vertex algebra with the
+fixed-current affine algebra unless a separate generation theorem is
+supplied. For the $B$ and $C$ series, comparison with the orthogonal or
+symplectic RTT matrix coproduct is a separate Molev-type input and
+requires the spectral-parameter and root-length normalisations. No
+$F_4$ RTT comparison is asserted without an exceptional source.
+\end{theorem}
+
+\begin{proof}
+Each of (a)--(c) is the relevant extension of the $A_3$ argument of
+\S\ref{sec:chiral-folding-checks}. Trace cyclicity
+in (a) is diagram-independent; Hecke equivariance in (b) is
+geometric; orbifold preservation in (c) is via the orbifold-route
+lemma. Proposition~\ref{prop:landing-obstruction-criterion} identifies
+the remaining obstruction group and proves the if-and-only-if descent
+statement. When the obstruction vanishes, coassociativity and the
+coaction identities restrict from the parent coproduct.
+\end{proof}
+
+\begin{remark}[Matching with Drinfeld--Sokolov]
+There is a natural comparison between DS reduction of the fixed-current
+subalgebra and the invariant sector of the principal $\cW$-algebra
+$\cW_k(\fg^{\mathrm{simply}}, f_{\mathrm{prin}})$ when $\sigma$
+preserves the principal nilpotent. If this BRST/invariant comparison is
+a quasi-isomorphism in the chosen level convention, the coproduct
+constructed by Theorem~\ref{thm:folded-chiral-BCF} descends to the folded
+$\cW$-algebra. This is an additional compatibility input, not an
+automatic fixed-point theorem for the full orbifold $\cW$-algebra.
+\end{remark}
+
+\section{$G_2$: the triality obstruction}
+\label{sec:G2-triality}
+
+The folding $G_2 = (D_4)^{\mathbb{Z}/3}$ is the order-$3$ Dynkin
+automorphism permuting the three outer legs. Two genuine obstructions
+appear.
+
+\begin{proposition}[Triality landing obstruction for $G_2$]%
+\label{prop:G2-folding-obstruction}%
+Let $u\in V^{\chi_1}$ and $v\in V^{\chi_2}$ be the two spin-four
+triality fields in the $D_4$ parent, and suppose that the leading
+coproduct on this doublet is primitive:
+\[
+  \Delta(u)=u\otimes 1+1\otimes u,\qquad
+  \Delta(v)=v\otimes 1+1\otimes v
+\]
+modulo lower-spin fixed fields. Then the invariant polynomial sector
+\[
+  \mathbb C[u,v]^{\mathbb Z/3}
+  =
+  \mathbb C[x,y,z]/(xy-z^3),
+  \qquad
+  x=u^3,\quad y=v^3,\quad z=uv,
+\]
+does not inherit the restricted parent coproduct. The obstruction
+\[
+  \mathcal L_{\mathbb Z/3}(\Delta^v_{D_4})
+  \in
+  \operatorname{Hom}\!\left(
+    V^{\chi_0},\,
+    V^{\chi_1}\otimes V^{\chi_2}
+    \oplus
+    V^{\chi_2}\otimes V^{\chi_1}
+  \right)
+\]
+is nonzero unless an additional quotient, coideal, or modified folded
+coproduct kills the displayed nontrivial neutral character sectors.
+\end{proposition}
+
+\begin{proof}
+The diagonal $\mathbb Z/3$ action is the symplectic action of type
+$\frac{1}{3}(1,2)$ on the $(u,v)$-plane. Hence the invariant ring is
+the $A_2$ du Val surface
+$\mathbb C[u^3,v^3,uv]\cong\mathbb C[x,y,z]/(xy-z^3)$.
+The primitive coproduct gives
+\[
+\begin{aligned}
+  \Delta(z)
+    &= z\otimes 1+u\otimes v+v\otimes u+1\otimes z,\\
+  \Delta(x)
+    &= x\otimes 1+3u^2\otimes u+3u\otimes u^2+1\otimes x,\\
+  \Delta(y)
+    &= y\otimes 1+3v^2\otimes v+3v\otimes v^2+1\otimes y .
+\end{aligned}
+\]
+The middle terms of $\Delta(z)$ lie in
+$V^{\chi_1}\otimes V^{\chi_2}\oplus
+V^{\chi_2}\otimes V^{\chi_1}$. The middle terms of
+$\Delta(x)$ and $\Delta(y)$ lie in the same nontrivial neutral
+summands after reducing characters modulo~$3$. These tensor factors
+are diagonal invariants but not elements of
+$V^{\chi_0}\otimes V^{\chi_0}$. Therefore the parent coproduct lands
+in $(V\otimes V)^{\mathbb Z/3}$ and fails to land in the tensor square
+of the fixed sector. This is exactly
+$\mathcal L_{\mathbb Z/3}(\Delta^v_{D_4})\neq 0$ on the primitive
+triality doublet.
+\end{proof}
+
+\paragraph{Obstructions.}
+\begin{enumerate}[label=\textup{(O\arabic*)}]
+\item \emph{Cyclic quotient singularity.}
+  The natural triality doublet has local action of type
+  $\frac{1}{3}(1,2)$, not $\frac{1}{3}(1,1)$. Thus
+  $\mathbb{C}^2/\mathbb{Z}_3$ is the $A_2$ du Val surface and admits
+  a crepant resolution. The singular geometry is not the obstruction
+  to the coproduct. Proposition~\ref{prop:G2-folding-obstruction}
+  identifies the obstruction as landing: the invariant ring is
+  crepant, but the primitive parent coproduct still produces
+  nontrivial neutral character sectors.
+\item \emph{Third roots of unity in the spectral parameter.}
+  The JKL vertex bialgebra axiom $\Delta^v(Y(a, z)b) = Y^{(2)}(\Delta^v(a),
+  z)\Delta^v(b)$, twisted by $\mathbb{Z}/3$, requires a
+  $\mathbb{Z}/3$-equivariant enhancement with a spectral twist by
+  cube roots of unity. The sign-sector decomposition
+  $V = V^+ \oplus V^-$ of the order-$2$ case generalises to a
+  character decomposition $V = V^{\chi_0} \oplus V^{\chi_1} \oplus V^{\chi_2}$;
+  the vanishing lemma
+  (Lemma~\ref{lem:sign-sector-vanishing}) now requires vanishing of
+  every component except $V^{\chi_0}\otimes V^{\chi_0}$. In
+  particular the neutral nontrivial summands
+  $V^{\chi_1}\otimes V^{\chi_2}$ and
+  $V^{\chi_2}\otimes V^{\chi_1}$ are diagonal
+  $\mathbb{Z}/3$-invariants but must still vanish for the coproduct to
+  land in $V^{\chi_0}\otimes V^{\chi_0}$.
+\end{enumerate}
+
+The Yangian-level triality comparison is a folded/orbit presentation,
+not a general fixed-point equality. The chiral lift requires the
+triality-sector calculation and a genuine $G_2$ Yangian source for
+the RTT comparison.
+
+\section{Summary}
+\label{sec:summary-folding}
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Yangian level.} The $A_3$ coproduct equivariance is
+  explicit (Proposition~\ref{prop:yangian-folding-B2}); comparison
+  with type $C_2$ uses a folded/orbit presentation plus spectral and
+  invariant-form normalisation. The orthogonal and symplectic RTT
+  sources cover the $B$ and $C$ comparison targets, while $F_4$ and
+  $G_2$ require separate exceptional sources.
+\item \textbf{Order-$2$ chiral descent.}
+  Theorem~\ref{thm:folded-chiral-BCF}: the obstruction to a folded
+  chiral coproduct for $B_N, C_N, F_4$ is the class
+  $\mathcal L_{\mathbb Z/2}(\Delta^v_{\fg^{\mathrm{simply}}})$ in
+  $\operatorname{Hom}(V^+,V^-\otimes V^-)$; its vanishing is necessary
+  and sufficient after the JKL-to-affine identification, with induced
+  level and root-length normalisation fixed.
+\item \textbf{Triality case.} $G_2 = (D_4)^{\mathbb{Z}/3}$
+  (Proposition~\ref{prop:G2-folding-obstruction}); the primitive
+  triality doublet has a nonzero landing obstruction. A folded
+  $G_2$ coproduct therefore requires an additional quotient, coideal,
+  or modified coproduct plus the cube-root spectral convention.
+\end{enumerate}
+
+The four checks are the folding discipline: potential invariance,
+Hecke equivariance, finite-orbifold $E_1$ preservation, and sector
+vanishing. The first three are geometric. The fourth is the deciding
+coproduct calculation.
+
+\begin{thebibliography}{99}
+\bibitem{JKL} S.~Jindal, S.~Kaubrys, A.~Latyntsev,
+\emph{Critical CoHAs, vertex coalgebras, and deformed Drinfeld
+coproducts}, arXiv:2603.21707 (2026).
+\bibitem{Molev03} A.~Molev,
+\emph{Yangians and Classical Lie Algebras}, AMS Mathematical Surveys
+and Monographs vol.~143 (2007).
+\bibitem{AMR06} D.~Arnaudon, A.~Molev, E.~Ragoucy,
+\emph{On the $R$-matrix realization of Yangians and their
+representations}, Ann.\ Henri Poincar\'e~7 (2006).
+\bibitem{GRW18} N.~Guay, V.~Regelskis, C.~Wendlandt,
+\emph{Equivalences between three presentations of orthogonal and
+symplectic Yangians}, Lett.\ Math.\ Phys.\ 109 (2019).
+\end{thebibliography}
+
+\end{document}

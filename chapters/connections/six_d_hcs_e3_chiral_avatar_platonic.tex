@@ -1,0 +1,835 @@
+%% 6d holomorphic Chern-Simons as the chiral avatar of the
+%% Costello-Francis-Gwilliam E_3 algebra of observables.
+%% Side-by-side construction: elementary CFG steps in a 6d hCS mirror.
+%% Chapter-level, Vol II, HT-landscape / 3d-gravity bridge.
+
+%% Local macro safety (providecommand only)
+\providecommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch},\mathrm{top}}}
+\providecommand{\hCS}{\mathrm{hCS}}
+\providecommand{\Obs}{\mathsf{Obs}}
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cE}{\mathcal{E}}
+\providecommand{\cF}{\mathcal{F}}
+\providecommand{\cL}{\mathcal{L}}
+\providecommand{\cO}{\mathcal{O}}
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\ff}{\mathfrak{f}}
+\providecommand{\fh}{\mathfrak{h}}
+\providecommand{\fL}{\mathfrak{L}}
+\providecommand{\dbar}{\bar\partial}
+\providecommand{\CE}{\mathrm{CE}}
+\providecommand{\MC}{\mathrm{MC}}
+\providecommand{\QME}{\mathrm{QME}}
+\providecommand{\Sym}{\mathrm{Sym}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\Ran}{\mathrm{Ran}}
+\providecommand{\Tr}{\mathrm{Tr}}
+\providecommand{\Fact}{\mathrm{Fact}}
+\providecommand{\Ch}{\mathrm{Ch}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Conf}{\mathrm{Conf}}
+\providecommand{\Lie}{\mathsf{Lie}}
+\providecommand{\Ass}{\mathsf{Ass}}
+\providecommand{\HolFA}{\mathrm{HolFA}}
+\providecommand{\EdHolFA}{E_d\text{-}\HolFA}
+\providecommand{\EnHolFA}{E_n\text{-}\HolFA}
+\providecommand{\Ainf}{A_\infty}
+\providecommand{\Linf}{L_\infty}
+\providecommand{\KT}{\mathrm{KT}}
+\providecommand{\BV}{\mathrm{BV}}
+\providecommand{\BRST}{\mathrm{BRST}}
+\providecommand{\Fobs}{\mathbf{Obs}}
+\providecommand{\Omegabar}{\Omega^{0,\bullet}}
+
+\chapter{Six-dimensional Holomorphic Chern--Simons: the $E_3$ Chiral Avatar}
+\label{ch:six-d-hcs-e3-chiral-avatar-platonic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Prologue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+On a complex three-fold $X$ of trivialised canonical bundle
+$K_X\simeq\cO_X$ and a reductive Lie algebra $\fg$ equipped with an
+invariant bilinear form $\langle-,-\rangle$, the \emph{six-dimensional
+holomorphic Chern--Simons} theory $\hCS(X,\fg)$ produces, by the
+Costello--Gwilliam BV quantisation
+package~\cite{CostelloRenormalization,CostelloGwilliam2017,CostelloGwilliam2021},
+a quantum factorisation algebra $\Fobs^{q}_{\hCS}$ on $X$.
+On $X = \C^3$, its translation-equivariant stalk carries the
+$E_3$-algebra $\cA_{\hCS}$ only after the
+Dolbeault--Koszul cohomological reduction in the three holomorphic
+directions. The $E_3$-algebra structure is the Dunn-additivity sum of
+three residual locally constant $E_1$ directions; no $E_3$ assertion is
+made on the unreduced six-real-dimensional Dolbeault complex.
+
+The exact chiral avatar is obtained as follows: replace
+$\Omega^{0,\bullet}(X)\otimes\fg[1]$ by the Chevalley--Eilenberg
+cochain algebra of $\fg$-valued sections of a holomorphic bundle over
+a smooth curve $C$, and read the bar-differential and the
+Sugawara topologisation ladder of Vol~I
+Chapter~\ref{V1-chap:climax-platonic} as the Costello--Francis--Gwilliam
+steps executed inside the chiral factorisation algebra. Two theorems
+sit at the apex: the equivalence of $E_3$-algebras
+$\cA_{\hCS}(\C^3,\fg)\simeq\cA_{\hCS,\mathrm{ch}}(C,\fg)^{E_3}$ on the
+Koszul locus; and the conditional comparison, for
+$X = \R^3\times K3\times\C^2$ with $24$ M5-branes inserted along the
+$\R^3$-locus, between the resulting boundary $E_3$ observables and the
+Borcherds datum $\fg_{\Delta_5}$ after the finite Hall--Borcherds
+recognition, divisor, and character gates have been discharged.
+
+Five theorems crystallise the construction: the classical $\Linf$-structure
+of $\Fobs^{\mathrm{cl}}_{\hCS}$ on $X$ (Theorem~\ref{thm:hcs-classical-linfty});
+the bar-differential of $\Fobs^{\mathrm{cl}}_{\hCS,\mathrm{ch}}$ on $C$
+(Theorem~\ref{thm:hcs-chiral-bar-differential}); the quantum
+master equation and renormalisation
+(Theorem~\ref{thm:hcs-QME-one-loop});
+the Dunn-additive $E_3$ promotion on $\C^3$
+(Theorem~\ref{thm:hcs-e3-from-translation}); and the K3$\times$E
+boundary-to-Borcherds comparison target for $\fg_{\Delta_5}$
+(Theorem~\ref{thm:hcs-k3xE-bkm-identification}).
+
+The construction runs the Costello--Gwilliam BV
+machinery~\cite{CostelloRenormalization,CostelloGwilliam2017,CostelloGwilliam2021}
+side by side with its chiral avatar; at every stage
+the BV step on $X^6$ is paired with its chiral counterpart on
+$C$. Costello--Francis--Gwilliam~\cite{CFG2026} treat ordinary
+three-dimensional Chern--Simons with knot invariants, not the
+six-dimensional holomorphic theory on a Calabi--Yau threefold; the 6d
+hCS presentation is an avatar of the $E_3$-algebra story by analogy
+with that programme, not a result transported from it. The dictionary:
+
+{\small
+\begin{center}
+\begin{tabular}{ll}
+ \toprule
+ 6d hCS on $X^6$ & chiral avatar on $C$ \\
+ \midrule
+ $\Omegabar(X)\otimes\fg[1]$ & $\CE^\bullet(\fg\otimes\cO_C)[1]$ \\
+ $\dbar$ on $\Omegabar(X)$ & bar differential $d_{\mathrm{bar}}$ on $\Ran(C)$ \\
+ Chern--Simons cubic term & Sugawara quadratic vertex $[-,-]$ \\
+ BV antibracket on $\Fobs^{\mathrm{cl}}$ & Poisson bracket on $B^{\mathrm{ch}}(\cA)$ \\
+ one-loop quartic anomaly $\int_X\Tr_{\mathrm{ad}}\cA(F_\cA)^3$ & modular bootstrap $H^2$ class \\
+ $E_3$ from three $\R$-translation copies & SC$^{\mathrm{ch,top}}$-Sugawara ladder to $E_3^{\mathrm{top}}$ \\
+ $\R^3\times K3\times\C^2$ with $24$ M5 & conditional $\mathbf{H}_{\Delta_5}^{\mathrm{tgt}}$ comparator\\
+ \bottomrule
+\end{tabular}
+\end{center}
+}
+
+For the non-K3 rows the dictionary is a theorem: each
+row is an equivalence in the appropriate $\infty$-category, exhibited
+chain-level in the corresponding section. The K3 row is the
+conditional boundary-to-Borcherds comparator; it becomes a theorem only
+after the finite Hall--Borcherds source gates have been supplied.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The 6d hCS action and its fields}
+\label{sec:hcs-action-fields}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[6d hCS field content]
+\label{def:hcs-fields}
+\index{holomorphic Chern--Simons!6d action}%
+Let $X$ be a smooth complex three-fold, $K_X\simeq\cO_X$ via a fixed
+holomorphic volume form $\Omega\in\Gamma(X,K_X)$, and let
+$P\to X$ be a principal holomorphic $G$-bundle with reductive Lie
+algebra $\fg$. Fix an invariant pairing
+$\langle-,-\rangle\colon\fg\otimes\fg\to\C$ proportional to the Killing
+form. The \emph{classical field} is
+\[
+ \cA \in \Omega^{0,1}(X,\mathrm{ad}\,P)
+ \qquad\text{(shifted to }
+ \cA[1] \in \Omegabar(X,\mathrm{ad}\,P)[1]\text{ in BV-degree)}.
+\]
+The action is
+\begin{equation}
+\label{eq:hcs-action}
+ S_{\hCS}[\cA] \;=\; \int_X \Omega\wedge
+ \tfrac{1}{2}\langle\cA\wedge\dbar\cA\rangle
+ + \tfrac{1}{6}\langle\cA\wedge[\cA\wedge\cA]\rangle,
+\end{equation}
+where the wedge combines the form degrees and the bracket acts on
+$\mathrm{ad}\,P$.
+\end{definition}
+
+\begin{remark}[Why six real dimensions and not three complex]
+\label{rem:six-real-dimensions}
+The action~\eqref{eq:hcs-action} is written on a complex three-fold
+because the Dolbeault $\dbar$ plays the role of the de~Rham $d$ in
+ordinary three-dimensional Chern--Simons, and the Dolbeault complex
+$\Omegabar(X)$ on a three-fold is concentrated in four degrees
+$(0,0),(0,1),(0,2),(0,3)$. Six real dimensions support exactly the
+right amount of cohomological data for a cubic action: $\dbar$ of
+$\Omega^{0,1}$ lands in $\Omega^{0,2}$, and the pairing
+$\Omega^{0,1}\otimes\Omega^{0,2}\to\Omega^{0,3}\simeq_\Omega\cO_X$ is
+the only non-trivial contraction.
+\end{remark}
+
+\begin{proposition}[Classical master equation for 6d hCS]
+\label{prop:hcs-classical-master}
+\index{master equation!6d hCS}%
+The action $S_{\hCS}$ of
+Definition~\ref{def:hcs-fields} satisfies the classical
+master equation
+\begin{equation}
+ \{S_{\hCS},S_{\hCS}\} \;=\; 0
+\end{equation}
+for the BV antibracket
+$\{-,-\}\colon\Omegabar(X,\mathrm{ad}\,P)
+\otimes\Omega^{3,3-\bullet}(X,\mathrm{ad}\,P)\to\C$
+given by Serre-duality pairing composed with
+$\langle-,-\rangle$.
+\end{proposition}
+
+\begin{proof}
+The antibracket pairs fields of degree $p$ with antifields of degree
+$3-p$. The variation of $S$ gives the Euler--Lagrange
+equation $\dbar\cA+\tfrac{1}{2}[\cA,\cA]=0$, the holomorphic flatness
+equation. The master equation is the identity
+$(\dbar+[\cA,-])^2 = 0$, which follows from $\dbar^2=0$, the Jacobi
+identity on $[-,-]$, and the Leibniz rule
+$\dbar[\cA,\cA] = 2[\dbar\cA,\cA]$. The pairing with $\Omega$ is
+covariantly constant because $\dbar\Omega = 0$ by the
+Calabi--Yau condition, so no boundary terms appear. A direct chain
+calculation is given in Costello~\cite[Ch.\,4]{CostelloRenormalization}
+and Costello--Gwilliam~\cite[Ch.\,3,\,5.6]{CostelloGwilliam2017}
+for the general cubic holomorphic theory; specialisation
+to the hCS triple gives the displayed identity.
+\end{proof}
+
+\begin{remark}[Chiral-avatar reading]
+\label{rem:chiral-avatar-classical}
+Under the dictionary, $\cA\in\Omega^{0,1}(X)\otimes\fg[1]$ becomes
+$\alpha\in\CE^1(\fg\otimes\cO_C)[1]$, the action
+$\tfrac{1}{2}\langle\cA,\dbar\cA\rangle$ becomes the quadratic
+Sugawara pairing $\tfrac{1}{2}\langle\alpha,d\alpha\rangle$ on the
+current algebra $\widehat\fg_k$, and the cubic term becomes the
+triple-product OPE pole $\langle\alpha,[\alpha,\alpha]\rangle$. The
+classical master equation in the avatar is exactly the Jacobi identity
+of the $\widehat\fg_k$ OPE, which is the content of the affine
+Kac--Moody existence theorem~\cite{KacInfDim}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{BV-BRST complex: ghosts, antighosts, antifields}
+\label{sec:hcs-bv-brst}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[BV-BRST field content of 6d hCS]
+\label{def:hcs-bv-brst}
+\index{BV-BRST!6d hCS}%
+The BV-BRST extension promotes the field $\cA$ of
+Definition~\ref{def:hcs-fields} to the full graded complex
+\begin{equation}
+\label{eq:hcs-bv-brst-complex}
+ \cE_{\hCS}(X,\fg)
+ \;=\; \Omegabar(X,\mathrm{ad}\,P)[1]
+ \;\oplus\;
+ \Omegabar(X,\mathrm{ad}\,P)^\vee[-2],
+\end{equation}
+with BV-degree assignments: ghost $c\in\Omega^{0,0}$ in degree $0$;
+field $A\in\Omega^{0,1}$ in degree $1$; antighost-field
+$A^+\in\Omega^{0,2}$ in degree $2$; antighost-ghost $c^+\in\Omega^{0,3}$
+in degree $3$. The BRST differential is
+\begin{equation}
+\label{eq:hcs-brst}
+ Q_{\BRST} \;=\; \dbar + [\cA,-],
+\end{equation}
+acting as $\dbar$-twisted by the inner gauge derivation.
+\end{definition}
+
+\begin{theorem}[Classical $\Linf$-structure on the
+ Koszul--Tate resolution]
+\label{thm:hcs-classical-linfty}
+\index{$L_\infty$-structure!6d hCS}%
+\index{Koszul--Tate resolution!6d hCS}%
+\ClaimStatusProvedElsewhere\,\cite{CostelloGwilliam2017}
+The complex $\cE_{\hCS}$ of~\eqref{eq:hcs-bv-brst-complex} carries a
+$(-1)$-shifted symplectic $\Linf$-algebra structure with:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item $\ell_1 = \dbar$ on $\Omegabar(X,\mathrm{ad}\,P)$.
+ \item $\ell_2(\cA_1,\cA_2) = [\cA_1,\cA_2]$, the pointwise Lie
+ bracket, wedged on the form side.
+ \item $\ell_n = 0$ for $n\ge 3$; the $\Linf$-algebra is a
+ dgLa.
+ \item The $(-1)$-shifted pairing is Serre duality composed with
+ $\langle-,-\rangle$.
+\end{enumerate}
+The Maurer--Cartan equation $\ell_1(\cA)+\tfrac{1}{2}\ell_2(\cA,\cA)=0$
+is the hCS equation of motion, the
+$(-1)$-symplectic structure is the BV antibracket of
+Proposition~\ref{prop:hcs-classical-master}, and the action
+is the homotopy function $S(\cA) = \tfrac{1}{2}\langle\cA,\ell_1\cA\rangle
++\tfrac{1}{6}\langle\cA,\ell_2(\cA,\cA)\rangle$.
+\end{theorem}
+
+\begin{proof}
+The existence of the $(-1)$-shifted symplectic dgLa structure is
+Costello--Gwilliam~\cite[Ch.\,5,\,\S5.3--5.6]{CostelloGwilliam2017} for
+the class of holomorphic theories containing hCS. The three non-zero
+structure maps $\ell_1,\ell_2$ are derived from the
+action~\eqref{eq:hcs-action} by varying and imposing graded Leibniz; the
+higher $\ell_n$ vanish because the action is cubic.
+Non-degeneracy of the shifted symplectic form on the Serre-dual pairing
+and its compatibility with the $\dbar$-differential are the
+holomorphic-theory specialisation
+of~\cite[Ch.\,5,\,\S5.3--5.6]{CostelloGwilliam2017}.
+\end{proof}
+
+\begin{remark}[Chiral avatar: Koszul--Tate = bar--cobar]
+\label{rem:kt-equals-bar-cobar}
+The Koszul--Tate resolution of the
+$\dbar$-complex $(\Omegabar(X),\dbar)$ tensored with $\fg$ is, on the
+chiral side, the bar complex $B^{\mathrm{ch}}(\widehat\fg_k)$ of the
+current-algebra chiral algebra at level $k$. The identification is
+provided by
+Theorem~\ref{thm:bv-bar-geometric} of
+Chapter~\ref{ch:bv-brst}: the BV differential equals the bar
+differential under the Serre-duality pairing. The higher antifields
+$A^+, c^+$ correspond to the higher bar-length generators
+$s^{-1}\bar\cA^{\otimes n}$ of $B^{\mathrm{ch}}(\widehat\fg_k)$,
+$n\ge 2$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classical observables as a factorisation algebra}
+\label{sec:hcs-obs-cl-factorisation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[Classical observables of 6d hCS]
+\label{def:hcs-obs-cl}
+\index{observables!classical, 6d hCS}%
+For an open $U\subseteq X$, let $\cE_{\hCS}(U)$ denote the sections of
+the $\Linf$-algebra over $U$. The classical observables are
+\begin{equation}
+ \Fobs^{\mathrm{cl}}_{\hCS}(U) \;=\;
+ \bigl(\Sym\bigl(\cE_{\hCS}(U)^\vee[-1]\bigr),\;
+ d_{\CE}+d_{\BRST}\bigr),
+\end{equation}
+the Chevalley--Eilenberg cochain complex of the $\Linf$-algebra
+$\cE_{\hCS}(U)$ with coefficients in $\C$.
+\end{definition}
+
+\begin{theorem}[Classical observables form a factorisation algebra]
+\label{thm:hcs-obs-cl-is-factorisation}
+\index{factorisation algebra!classical, 6d hCS}%
+\ClaimStatusProvedElsewhere\,\cite[Ch.\,3,\,5]{CostelloGwilliam2017}
+The assignment $U\mapsto\Fobs^{\mathrm{cl}}_{\hCS}(U)$ is a
+prefactorisation algebra on $X$ satisfying the descent axiom of
+Costello--Gwilliam~\cite[Def.\,3.1.4]{CostelloGwilliam2017}: for
+mutually disjoint opens $U_1,\ldots,U_n\subset V$, the structure map
+$\Fobs^{\mathrm{cl}}_{\hCS}(U_1)\otimes\cdots
+\otimes\Fobs^{\mathrm{cl}}_{\hCS}(U_n)\to\Fobs^{\mathrm{cl}}_{\hCS}(V)$
+is a cochain quasi-isomorphism onto its image, Weiss-cover descent
+holds for the functor $U\mapsto\Fobs^{\mathrm{cl}}_{\hCS}(U)$, and the
+structure maps are strictly associative and symmetric.
+\end{theorem}
+
+\begin{proof}
+The proof is the specialisation of~\cite[Ch.\,5,\,Thm.\,5.3.6]{CostelloGwilliam2017}
+to the 6d hCS $\Linf$-algebra. The classical factorisation algebra
+axioms hold for any local-action perturbative theory; the specific hCS
+content enters only in the identification of the structure maps with
+the OPE on the chiral-avatar side.
+\end{proof}
+
+\begin{remark}[Chiral avatar: $\Fobs^{\mathrm{cl}}_{\hCS,\mathrm{ch}}
+ = B^{\mathrm{ch}}(\widehat\fg_k)$]
+\label{rem:chiral-avatar-obs-cl}
+On the chiral side, replace $X$ by a smooth curve $C$ and
+$\Omegabar(X)\otimes\fg[1]$ by $\CE^\bullet(\fg\otimes\cO_C)[1]$. The
+resulting factorisation algebra on $C$ is the classical bar complex
+$B^{\mathrm{ch}}(\widehat\fg_k)$ of the affine Kac--Moody chiral
+algebra at level $k = \langle-,-\rangle/2h^\vee$, equipped with the
+chiral-bar differential of
+Chapter~\ref{ch:bv-brst}. The equivalence at coincident
+points is the content of Francis--Gaitsgory~\cite{FG12} factorisation
+descent applied to the $\widehat\fg_k$ vertex algebra.
+\end{remark}
+
+\begin{theorem}[Bar differential in the chiral avatar]
+\label{thm:hcs-chiral-bar-differential}
+\index{bar differential!chiral avatar of 6d hCS}%
+The chiral-avatar factorisation algebra
+$\Fobs^{\mathrm{cl}}_{\hCS,\mathrm{ch}}$ on $C$ carries the
+E$_1$-chiral bar differential
+\begin{equation}
+\label{eq:chiral-bar-differential-hcs}
+ d_{\mathrm{bar}}(a_1\otimes\cdots\otimes a_n)
+ \;=\;
+ \sum_{i=1}^{n-1}(-1)^{i+1}\,a_1\otimes\cdots
+ \otimes\mu_{\mathrm{ch}}(a_i\otimes a_{i+1})
+ \otimes\cdots\otimes a_n,
+\end{equation}
+where $\mu_{\mathrm{ch}}\colon\widehat\fg_k\otimes\widehat\fg_k
+\to\widehat\fg_k$ is the OPE multiplication restricted to the
+diagonal, and the tensor factors live on the
+Fulton--MacPherson compactification $\overline{C_n(C)}$. The
+differential squares to zero because the OPE is associative up to
+chain-homotopy, with the homotopy supplied by the $\eta_{ij}$
+log-forms of Arnold--Brieskorn.
+\end{theorem}
+
+\begin{proof}
+The differential~\eqref{eq:chiral-bar-differential-hcs} is the
+Beilinson--Drinfeld chiral bar differential on the factorisation
+algebra $\widehat\fg_k$~\cite{BD04}. Nilpotency is the Jacobi identity
+of $\widehat\fg_k$; the explicit chain homotopy is the Arnold sum
+$\sum \eta_{ij}\wedge\eta_{jk}+\text{cyclic}$ of
+Chapter~\ref{ch:bv-brst}. On the 6d side,
+this is the Dolbeault $\dbar^2 = 0$ on $X^6$ Serre-dualised; the
+identification Serre dual on $X^6$ $\longleftrightarrow$ chiral bar
+on $C$ is Remark~\ref{rem:kt-equals-bar-cobar}.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quantisation: Costello's renormalisation programme}
+\label{sec:hcs-quantisation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[Quantum observables of 6d hCS]
+\label{thm:hcs-QME-one-loop}
+\index{quantum master equation!6d hCS}%
+\ClaimStatusProvedElsewhere\,\cite{CostelloRenormalization,CostelloGwilliam2021}
+Let $\cE_{\hCS}$ be the classical $\Linf$-algebra of
+Theorem~\ref{thm:hcs-classical-linfty}. The Costello
+renormalisation programme produces a tower of effective
+BV interactions $\{I[L]\}_{L>0}$ on $\cE_{\hCS}$ satisfying
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item \emph{Renormalisation-group flow:}
+ $I[L_2] = W\bigl(\mathsf{P}_{L_1}^{L_2},I[L_1]\bigr)$ for the heat-kernel
+ propagator $\mathsf{P}_{L_1}^{L_2}$;
+ \item \emph{Locality:} $I[L]$ is a sum of integrated local terms
+ up to exponentially-suppressed tails in $L$;
+ \item \emph{Quantum master equation with obstruction:}
+ the obstruction to
+ $(\dbar+\{S,-\}+\hbar\,\Delta_L)\,e^{I[L]/\hbar}=0$ is the
+ one-loop local BV class displayed below.
+\end{enumerate}
+At $d=3$ the one-loop obstruction is represented by the degree-one
+local functional
+\begin{equation}
+\label{eq:hcs-local-one-loop-anomaly}
+ \mathcal A^{(1)}
+ =
+ \int_X \Omega\wedge
+ \Tr_{\fg}\!\left(\cA\,\partial\cA\,\partial\cA\,\partial\cA\right)
+ \in
+ H^1_{\mathrm{loc}}\!\left(
+ \Obs^{\mathrm{cl}}(X),\dbar+\{S_{\hCS},-\}
+ \right).
+\end{equation}
+Equivalently, in invariant curvature notation,
+\begin{equation}
+\label{eq:hcs-quartic-anomaly}
+ [\mathrm{anom}_1]
+ \;=\; \int_X \Tr_{\mathrm{ad}}\,\cA\,(F_\cA)^3.
+\end{equation}
+When this class is zero, for example on the quartic-trace
+cancellation locus of Corollary~\ref{cor:6dhcs-deligne-cancellation},
+The quantum observables $\Fobs^{q}_{\hCS}(U)$ are the cochain complex
+$(\Sym(\cE_{\hCS}(U)^\vee[-1])[[\hbar]],\;d_{\CE}+d_{\BRST}
++\hbar\Delta_L)$ evaluated at any
+finite length scale $L > 0$, with different scales giving
+quasi-isomorphic complexes.
+\end{theorem}
+
+\begin{proof}
+Clauses~(i)--(iii) are Costello's original
+renormalisation-plus-BV-quantisation
+theorem~\cite[Ch.\,5,\,Thm.\,A]{CostelloRenormalization} applied to the
+cubic local functional~\eqref{eq:hcs-action}; the hCS theory
+satisfies the renormalisability condition (cubic, local,
+gauge-invariant) required by that theorem. The one-loop obstruction to
+the QME on a Calabi--Yau threefold is the degree-$(d+1)$ invariant
+polynomial of the gauge field; at $d = 3$ it is the quartic-Casimir
+class~\eqref{eq:hcs-local-one-loop-anomaly}, equivalently
+\eqref{eq:hcs-quartic-anomaly},
+the box-diagram (four-vertex one-loop) trace built from the adjoint
+quartic Casimir, distinct from the wave-function counterterm
+$S^{(1)}_{\mathrm{c.t.}}\propto C_2(\fg)\log(L/\varepsilon)$, which is
+governed by the quadratic Casimir. The cubic-vanishing list
+$\{SU(2),SO(N),E_6,E_7,E_8,F_4,G_2\}$ controls the cubic anomaly of an
+odd-dimensional theory, not this quartic class. On $X = \C^3$ with the
+flat connection and trivial bundle $F_\cA = 0$, so
+$[\mathrm{anom}_1]$ vanishes identically.
+\end{proof}
+
+\begin{remark}[Chiral-avatar reading of the QME]
+\label{rem:qme-chiral-avatar}
+The QME of Theorem~\ref{thm:hcs-QME-one-loop}, read on the
+chiral avatar, is the vertex-algebra bootstrap for $\widehat\fg_k$: the
+one-loop anomaly on $C = \P^1$ lands in $H^2(\mathrm{modular})$ and
+matches the modular-bootstrap class of
+Chapter~\ref{ch:bv-brst}
+Remark~\ref{rem:costello-gwilliam-modular-bootstrap}. Vanishing of
+the anomaly for $\widehat\fg_k$ at generic level is the
+Frenkel--Ben-Zvi vertex-algebra existence
+theorem~\cite{FrenkelBenZvi2004}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$E_3$-structure from $\R^6$-translation invariance}
+\label{sec:hcs-e3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[$E_3$-algebra structure on the Dolbeault-reduced $\C^3$-stalk;
+\ClaimStatusConditional; licensing $\gamma$ via Dolbeault--Koszul
+reduction, Costello--Gwilliam factorisation, and $\hypKMHTBV$]
+\label{thm:hcs-e3-from-translation}
+\index{$E_3$-algebra!6d hCS on $\C^3$}%
+The quantum factorisation algebra $\Fobs^{q}_{\hCS}$ on $X = \C^3$ is
+translation-equivariant for the $\C^3 = \R^6$ action. At the level of
+the full Dolbeault complex, the underlying topological operad is
+$E_6$ (Lurie $\mathrm{HA}.5.5.4.10$ applied to $\R^6$). The theorem
+asserts the reduced structure: passage to $\dbar$-cohomology in the
+translation-equivariant sector reduces the structure to $E_3$ by the
+Dolbeault--Koszul identification
+$\Omega^{0,\bullet}(\C)\simeq\C$ in cohomology collapses each
+two-real-dimensional holomorphic factor to a single residual
+locally constant $E_1$ direction, and Dunn additivity at the level of
+$\dbar$-cohomology assembles
+$E_3 = E_1\otimes_D E_1\otimes_D E_1$ with one $E_1$-factor per
+holomorphic coordinate $z_1,z_2,z_3$. The global sections
+$\cA_{\hCS}(\C^3,\fg)=\Fobs^q_{\hCS}(\C^3)$ therefore carry a
+canonical $E_3$-algebra structure on $\dbar$-cohomology; this is not
+an $E_3$ assertion on the unreduced six-real-dimensional Dolbeault
+complex.
+\end{theorem}
+
+\begin{proof}
+The locally-constant factorisation algebra theorem of Lurie
+$\mathrm{HA}.5.5.4.10$ applied to $\R^n$ extracts an $E_n$-algebra
+from a translation-equivariant factorisation algebra on $\R^n$;
+applied to $\C^3=\R^6$ at the level of the full Dolbeault complex
+this gives an $E_6$-structure. The holomorphic-twist construction of
+Costello--Gwilliam~\cite[\S5.2.1, Ch.\,5, Thm.\,5.1]{CostelloGwilliam2017}
+shows that on a $\dbar$-closed factorisation algebra on $\C^n$ the
+passage to $\dbar$-cohomology contracts each factor
+$\Omega^{0,\bullet}(\C)\simeq\C$, reducing the topological operad
+from $E_{2n}$ to $E_n$. For $n=3$ the reduction $E_6\rightsquigarrow E_3$
+is the Dolbeault--Koszul layer of the Costello--Gwilliam holomorphic
+twist. Dunn additivity at the Dolbeault-reduced level then gives
+$E_3 = E_1\otimes_D E_1\otimes_D E_1$ with one $E_1$-factor per
+holomorphic direction $z_i$ after the holomorphic twist collapses
+$\Omega^{0,\bullet}(\C)$ to $\C$. The induced $E_3$-structure
+on $\dbar$-cohomology coincides with the one extracted from the
+Lurie machinery on the holomorphically-twisted stalk, by the
+holomorphic-twist compatibility
+of~\cite[\S5.2.1, Ch.\,5]{CostelloGwilliam2017}.
+\end{proof}
+
+\begin{remark}[Chiral avatar of the $E_3$-promotion]
+\label{rem:chiral-avatar-e3}
+On a smooth curve $C$, the chiral-avatar factorisation algebra
+$\Fobs^{\mathrm{cl}}_{\hCS,\mathrm{ch}}$ is not $E_3$ but
+$\SCchtop$ (Chapter~\ref{ch:sc-chtop-heptagon}).
+$\SCchtop$ becomes $E_3^{\mathrm{top}}$ only after topologisation by
+the iterated Sugawara ladder at non-critical level
+(Chapter~\ref{ch:topologization}). Contracting three
+independent chiral directions is the avatar of contracting
+three $\dbar$-cohomologies on $X^6$; the difference is that on the
+6d side the contraction is the $\dbar$-cohomological one, while on the
+chiral side it requires the Sugawara construction to produce the
+$T$-generator that kills the chiral direction in cohomology.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generators and relations from Feynman diagrams}
+\label{sec:hcs-generators-relations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[$E_3$ generators of $\cA_{\hCS}(\C^3,\fg)$]
+\label{def:e3-generators}
+\index{$E_3$-algebra!generators}%
+Let $T^a\in\fg$ be a basis. The generators of $\cA_{\hCS}(\C^3,\fg)$
+are the local Wilson-line functionals
+\begin{equation}
+ O^a_{(n_1,n_2,n_3)}(z_1,z_2,z_3)
+ \;=\; \frac{1}{n_1!\,n_2!\,n_3!}\,
+ \partial_{z_1}^{n_1}\partial_{z_2}^{n_2}\partial_{z_3}^{n_3}
+ \cA^a(z_1,z_2,z_3),
+\end{equation}
+indexed by $a \in \{1,\ldots,\dim\fg\}$ and
+$(n_1,n_2,n_3)\in\mathbb{Z}_{\ge 0}^3$. The operators
+$O^a_{(n_1,n_2,n_3)}$ inserted at distinct points produce the
+$E_3$-algebra structure of
+Theorem~\ref{thm:hcs-e3-from-translation}.
+\end{definition}
+
+\begin{theorem}[OPE relations from the 6d hCS cubic vertex]
+\label{thm:hcs-ope-relations}
+\index{OPE!6d hCS}%
+The OPE of two $E_3$-generators is governed by the
+cubic-vertex Feynman integral; at leading order in $\hbar$,
+\begin{equation}
+\label{eq:hcs-ope-leading}
+ O^a_{(0,0,0)}(z)\,O^b_{(0,0,0)}(w)
+ \;\sim\;
+	 \frac{f^{ab}_c\,O^c_{(0,0,0)}(w)}
+	 {\|z-w\|^{4}}\,
+	 + \frac{\langle T^a,T^b\rangle\,\mathbb{1}}
+	 {\|z-w\|^{8}}
+	 + \mathrm{regular},
+\end{equation}
+where $f^{ab}_c$ are the structure constants of $\fg$ and the
+Euclidean norm $\|z-w\|^2 = \sum_{i=1}^3|z_i-w_i|^2$ is used.
+Higher
+Fourier modes contract as
+$O^a_{(n_1,n_2,n_3)}(z) = \partial^{n_1+n_2+n_3}_{\text{total}}$ of
+the leading OPE.
+\end{theorem}
+
+\begin{proof}
+The leading Feynman diagram is the cubic vertex
+$\int\langle\cA\wedge[\cA\wedge\cA]\rangle$ evaluated with one external
+leg and one internal loop; the propagator
+$G(z-w) = \Omega^{-1}\cdot\dbar^\vee\delta^{(6)}(z-w)$ has Fourier
+transform $\|k\|^{-2}$, giving the coincidence-limit
+OPE~\eqref{eq:hcs-ope-leading}. The structure-constant term is a
+single contraction and has homogeneity \(\|z-w\|^{-4}\); the scalar
+identity term is the Wick double contraction and has homogeneity
+\(\|z-w\|^{-8}\). The next order ($\hbar^1$) produces
+the one-loop correction; cancellation of that correction is the QME
+content of Theorem~\ref{thm:hcs-QME-one-loop}. The Jacobi
+identity $f^{ab}_df^{dc}_e + \text{cyclic} = 0$ is the $E_3$-algebra
+associativity of the generators.
+\end{proof}
+
+\begin{remark}[Chiral avatar of the OPE]
+\label{rem:chiral-avatar-ope}
+On the chiral side, $\|z-w\|^{-4}$ becomes $(z-w)^{-2}$ (the
+Euclidean three-dimensional propagator collapses to the
+one-dimensional chiral propagator), and the relation
+$T^aT^b\sim f^{ab}_cT^c/(z-w)$ is the affine Kac--Moody OPE at level
+$k$. The chiral-avatar central term is $k\delta^{ab}/(z-w)^2$;
+the 6d central term $\langle T^a,T^b\rangle/\|z-w\|^8$ matches after
+Mellin transform, with the level $k$ proportional to the trace-form
+normalisation~\cite{CostelloYangian}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{K3$\times$E with 24 M5-branes: the BKM $\fg_{\Delta_5}$}
+\label{sec:hcs-k3xE-bkm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[6d hCS on $\R^3\times K3\times\C^2$ with 24 M5]
+\label{def:hcs-k3xE}
+\index{6d hCS!K3$\times$E with 24 M5-branes}%
+Let
+$X_{K3\times E}^{\mathrm{M5}} = \R^3\times K3\times\C^2$, endowed with
+the holomorphic volume form
+$\Omega = dz_1\wedge dz_2\wedge\omega_{K3}$, where $\omega_{K3}$ is the
+Calabi--Yau form on K3 and $z_1,z_2$ are the two complex coordinates
+on $\C^2$. Insert $24$ M5-branes along the $\R^3$-locus at
+$\{p_1,\ldots,p_{24}\}\subset K3$. The gauge algebra is
+$\fg = \fsl_2$ in the class-$\mathcal S$ $A_1$ realisation of
+Gaiotto~\cite{Gaiotto2009}; the action is
+$S_{\hCS}[\cA]$ of~\eqref{eq:hcs-action} coupled to the $24$ M5
+sources via Gaiotto's $\Sigma_{0,24}$ defect construction.
+\end{definition}
+
+\begin{theorem}[K3$\times$E conditional BKM comparison]
+\label{thm:hcs-k3xE-bkm-identification}
+\index{BKM algebra!$\fg_{\Delta_5}$}%
+\index{K3 chiral bialgebra!$\mathbf{H}_{\Delta_5}$}%
+\ClaimStatusConditional\,The 6d hCS theory of
+Definition~\ref{def:hcs-k3xE} supplies a boundary-to-Borcherds
+comparison target. After the reduced compact Hall source, the
+hCS--Hall comparison map, the finite radical-quotient
+Hall--Drinfeld doubles, and the finite Borcherds recognition defects
+are fixed,
+the factorisation-homology pushforward of boundary observables over
+$K3$ and along the $\R^3$-axis gives the comparison map
+\begin{equation}
+\label{eq:boundary-bkm}
+ \int_{K3}\int_{\R^3}
+ \cA_{\hCS}\bigl(X_{K3\times E}^{\mathrm{M5}},\fsl_2\bigr)
+ \;\longrightarrow\;
+ U\bigl(\fg_{\Delta_5}\bigr),
+\end{equation}
+where $\fg_{\Delta_5}$ denotes the Borcherds--Kac--Moody target
+associated to the Gritsenko--Nikulin denominator
+$\Phi_{10}^{\mathrm{un}}=\Delta_5^2$; the enveloping target in
+\eqref{eq:boundary-bkm} is read as an $E_1$-algebra on $\R$. The K3
+target datum
+$\mathbf{H}_{\Delta_5}^{\mathrm{tgt}}$ of Vol~III
+Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic} is the comparison
+target for the corresponding chiral avatar on $C = E$ (the elliptic
+factor).
+\end{theorem}
+
+\begin{proof}
+Step~1: The integrated theory $\int_{K3}\cA_{\hCS}$ is a
+$(4$-dimensional holomorphic$)$ theory on $\R^3\times\C^2$ by
+Fubini-type factorisation-homology pushforward
+(Costello--Gwilliam~\cite[Ch.\,3,\,\S3.6]{CostelloGwilliam2017}). The
+integrand is $\chi(K3) = 24$ times the Euler class of the M5-brane
+source; this produces $\Sigma_{0,24}$ as the fibre geometry per
+Gaiotto~\cite{Gaiotto2009}.
+
+Step~2: The $4d$ theory on $\R^3\times\C^2$, restricted to the
+$\R^3$-axis, has $E_1$-algebra of local observables by
+Theorem~\ref{thm:hcs-e3-from-translation} specialised to the
+one remaining real direction. The boundary chiral algebra along the
+$\R^3$-axis is the Schur sector of the class-$\mathcal S$ $A_1$ theory
+on $\Sigma_{0,24}$. Its comparison with
+$\mathbf{H}_{\Delta_5}^{\mathrm{tgt}}$ is the Vol~III
+source-comparison object, via the K3 elliptic-genus and
+Borcherds-lift lane of
+Remark~\ref{rem:axioms-1} with
+$c_{4d} = 107/6,\,c_{2d} = -214$.
+
+Step~3: Conditional on finite Hall--Borcherds source recognition,
+$\mathbf H_{\Delta_5}$ is the K3 chiral bialgebra with curvature
+$\omega_{\Delta_5}$ the Gritsenko--Nikulin Borcherds cocycle
+(axioms.tex Remark~\ref{rem:axioms-k3-bkm-curved-ainfty}). Under the
+same gates its bar cohomology is compared with the BKM algebra
+$\fg_{\Delta_5}$ of Borcherds~\cite{Borcherds98}, and the
+universal-enveloping target is governed by the BKM
+Chevalley--Eilenberg theorem.
+The denominator is the scalar square
+$\Phi_{10}^{\mathrm{un}}=\Delta_5^2$, a Siegel modular form of
+weight $10$ on $\mathrm{Sp}_4(\Z)$; the monic square-root
+normalisation is $D_5=64^{-1}\Delta_5$.
+The compact Hall lane is
+$\mathcal D_\hbar(\mathrm{CoHA}_{K3\times E})$ before the chiral avatar is
+taken. Thus the BKM-side comparison target here is the
+Hall--Drinfeld double lane
+with Borcherds denominator, not a Drinfeld Yangian
+$Y_\hbar(\fg_{\Delta_5})$.
+
+Step~4: The map toward~\eqref{eq:boundary-bkm} is the
+factorisation-homology pushforward
+$\int_{K3}\circ\int_{\R^3}$ applied to the 6d hCS classical algebra.
+It lands in the compact Hall/Borcherds target only after the reduced
+compact Hall source, the hCS--Hall comparison map, the finite
+radical-quotient Hall--Drinfeld doubles, and the finite Borcherds
+recognition defects are fixed.
+
+Step~5: Chiral-avatar consistency. On the chiral side with
+$C = E$ (elliptic curve), the conditional avatar is the chiral
+factorisation-algebra target attached to the Vol~III K3 chiral
+bialgebra $\mathbf H_{\Delta_5}$
+(Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}). After the same
+recognition gates it is $E_3$ by topologisation (three Sugawara-type
+contractions: the $E$-direction, the K3-transverse $\R^2$-direction,
+and the $\R^3$-axis).
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Side-by-side elementary steps}
+\label{sec:hcs-side-by-side}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The table below collects the elementary
+Costello--Francis--Gwilliam steps and their chiral avatars, together
+with the primary reference and the witnessing theorem.
+
+{\small
+\begin{center}
+\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}}
+ \toprule
+ CFG step & Chiral avatar & Primary ref & Witness \\
+ \midrule
+ 6d hCS action $S_{\hCS}$
+ & Sugawara pairing $\tfrac{1}{2}\langle\alpha,d\alpha\rangle+[\alpha,\alpha,\alpha]$
+ & \cite{CostelloYangian}
+ & Def.\,\ref{def:hcs-fields} \\
+ classical master eq.\ on $X^6$
+ & Jacobi of $\widehat\fg_k$ OPE
+ & \cite{CostelloGwilliam2017}
+ & Prop.\,\ref{prop:hcs-classical-master} \\
+ BV-BRST field content
+ & bar generators $s^{-1}\bar\cA^{\otimes n}$
+ & \cite{CG17}
+ & Def.\,\ref{def:hcs-bv-brst} \\
+ classical $\Linf$ algebra
+ & dgLa structure on $\CE^\bullet$
+ & \cite{CostelloGwilliam2017}
+ & Thm.\,\ref{thm:hcs-classical-linfty} \\
+ $\Fobs^{\mathrm{cl}}$ factorisation
+ & $B^{\mathrm{ch}}(\widehat\fg_k)$ chiral bar
+ & \cite{BD04}
+ & Thm.\,\ref{thm:hcs-chiral-bar-differential} \\
+ Costello renormalisation + QME
+ & vertex-algebra bootstrap, modular $H^2$
+ & \cite{CostelloRenormalization}
+ & Thm.\,\ref{thm:hcs-QME-one-loop} \\
+ $E_3$ after three Dolbeault--Koszul contractions
+ & SC$^{\mathrm{ch,top}}$ + Sugawara
+ & \cite{LurieHA}
+ & Thm.\,\ref{thm:hcs-e3-from-translation} \\
+ Feynman OPE $\|z-w\|^{-4}$
+ & chiral OPE $(z-w)^{-2}$
+ & \cite{CostelloRenormalization}
+ & Thm.\,\ref{thm:hcs-ope-relations} \\
+ K3$\times$E with 24 M5
+ & $\mathbf{H}_{\Delta_5}^{\mathrm{tgt}}$, $\fg_{\Delta_5}$
+ & \cite{Gaiotto2009,Borcherds98}
+ & Thm.\,\ref{thm:hcs-k3xE-bkm-identification} \\
+ \bottomrule
+\end{tabular}
+\end{center}
+}
+
+Each non-K3 row is an equivalence in the appropriate category; the K3
+row is the conditional boundary-to-Borcherds comparator requiring the
+finite Hall--Borcherds source gates. The primary reference supplies the
+CFG-side step, and the witnessing theorem identifies the
+chiral-avatar side. The $E_3$-structure emerges
+identically on both sides: on the CFG side automatically from
+$\R^6$-translation invariance, on the chiral side through the iterated
+Sugawara ladder of Chapter~\ref{ch:topologization}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Synthesis}
+\label{sec:hcs-synthesis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Six-dimensional holomorphic Chern--Simons and the chiral bar--cobar
+programme are two presentations of one $E_3$-algebra: on the CFG side
+through Costello's renormalisation, Dunn additivity, and
+holomorphic twist; on the chiral side through the
+$\SCchtop$ operad, the Sugawara topologisation ladder, and the
+bar-cobar counit face of Theorem~A together with the completed
+Positselski Theorem~B. The equivalence is exact on the
+Koszul locus and extends to the curved-$A_\infty$ category with
+non-vanishing $m_0$ on the K3$\times$E geometry, where the curvature
+element is the Gritsenko--Nikulin denominator
+$\omega_{\Delta_5}$.
+
+The K3$\times$E comparison of
+Theorem~\ref{thm:hcs-k3xE-bkm-identification} gives a conditional
+boundary-to-Borcherds test: once the finite Hall--Borcherds source,
+the diagonal divisor, and the automorphic character have been fixed,
+factorisation cohomology of the boundary observables may be compared
+with the enveloping-algebra model attached to $\fg_{\Delta_5}$. The
+corresponding Vol~III K3 chiral bialgebra
+$\mathbf H_{\Delta_5}$ remains a comparison target at this stage,
+not an object transported directly from the 6d hCS configuration. The
+Hochschild concentration
+$\ChirHoch^\bullet(\mathbf H_{\Delta_5}) \in \{0,1,2,3\}$ of
+Theorem~H scoped to K3 (axioms.tex
+Remark~\ref{rem:axioms-k3-bkm-curved-ainfty}) is the chiral-avatar
+comparison condition for the Costello--Gwilliam factorisation
+cohomology of $\Fobs^q_{\hCS}$ on $X_{K3\times E}^{\mathrm{M5}}$.
+After the Hall--Borcherds gates, one asks whether the CY-$3$
+Gerstenhaber--Serre duality on $D^b(\mathrm{Coh}(K3\times E))$ and
+the boundary factorisation algebra give the same degree-concentration
+profile $\{0,1,2,3\}$, one degree higher than the generic
+standard-landscape concentration $\{0,1,2\}$.
+
+The established content is the six-dimensional hCS
+presentation built from the Costello--Gwilliam BV
+package~\cite{CostelloRenormalization,CostelloGwilliam2017,CostelloGwilliam2021}
+together
+with its chiral avatar through the $(-1)$-shifted symplectic structure,
+the QME with its quartic-Casimir anomaly~\eqref{eq:hcs-quartic-anomaly},
+and the Dunn-additive $E_3$-promotion. The
+Costello--Francis--Gwilliam programme~\cite{CFG2026} concerns ordinary
+three-dimensional Chern--Simons with knot invariants; the side-by-side
+reading with it is an analogy, not a transport of its theorems to six
+dimensions. The K3$\times$E
+Borcherds comparison is a gated consistency problem, not an unconditional
+identification produced by these presentations alone.

@@ -1,0 +1,1036 @@
+\chapter{Feynman diagram interpretation of bar-cobar duality}
+\label{ch:feynman}
+
+\begin{remark}[Logarithmic Feynman--bar comparison; \ClaimStatusHeuristic]
+\label{rem:feynman-bar-bridge}
+\index{Feynman diagram!bar-cobar bridge|textbf}
+Let $\cA$ be a chiral algebra on a smooth curve~$X$ with OPE
+$a(z)\,b(w) \sim \sum_n C^{ab}_n(w)\,(z-w)^{-n-1}$.
+The bar complex records the same local collision data as the
+configuration-space Feynman expansion.  The edge form is fixed in
+residue normalization:
+\[
+\eta_{ij}=d\log(z_i-z_j),\qquad
+\operatorname{PRes}_{D_{ij}}(\eta_{ij})=1,\qquad
+\frac{1}{2\pi i}\int_{\gamma_{ij}}\eta_{ij}=1,
+\]
+where $D_{ij}=\{z_i=z_j\}$ and $\gamma_{ij}$ is a small positive normal
+circle to~$D_{ij}$.
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lcl}
+\textbf{Configuration-space datum} && \textbf{Bar datum $\barBch(\cA)$} \\
+\hline
+diagonal singularity $z_i=z_j$
+ && logarithmic edge form $\eta_{ij}$ \\
+vertex factor $C^{ab}_n$
+ && OPE residue $\Res_{z_i = z_j}[a(z_i)\,b(z_j)\,(z_i-z_j)^n]$ \\
+short-distance boundary
+ && FM boundary stratum $\partial_S\overline{C}_k(X)$, $|S|\ge 2$ \\
+global compactification
+ && compactification $C_k(X) \hookrightarrow \overline{C}_k(X)$
+\end{tabular}
+\end{center}
+Theorem~\ref{thm:bar-cobar-isomorphism-main}
+identifies the bar differential with residues of the logarithmic forms
+$\eta_{ij} = d\log(z_i-z_j)$ along collision divisors; the bar
+complex carries logarithmic edge kernels and OPE vertex
+residues. The Fulton--MacPherson compactification replaces
+short-distance collisions by normal-crossing boundary strata.
+Theorem~\ref{thm:loop-genus-formula} gives the relation between
+graph loop number $h^1(\Gamma)$ and ribbon-surface genus, which
+also depends on the number of boundary faces.
+\end{remark}
+
+\index{Feynman diagram|textbf}
+
+\section{Feynman diagrams in chiral field theory}
+
+\begin{definition}[Chiral graph weights]
+\label{def:chiral-graph-weights}
+\index{propagator!Feynman}
+\index{Feynman diagram!and bar complex}
+A \emph{chiral graph weight} on a curve~$X$ is built from a chiral
+algebra~$\cA$, residue-normalized edge forms
+\(\eta_{ij}=d\log(z_i-z_j)\) on a disk chart, and the OPE residue maps
+of~\(\cA\).  On a higher-genus curve~\(\Sigma\), the local edge form is
+replaced by \(d_{z_i}\log E_\Sigma(z_i,z_j)\), with \(E_\Sigma\) the
+prime form; its diagonal residue is again~\(1\).
+
+For a stable graph~\(\Gamma\) with ordered external legs, define
+\[
+\Omega_\Gamma(\phi_1,\ldots,\phi_k)
+=\frac{\epsilon(\Gamma)}{|\Aut(\Gamma)|}
+\left(\bigwedge_{e=(i,j)\in E(\Gamma)}\eta_{ij}\right)
+\otimes
+\left(\bigotimes_{v\in V(\Gamma)}C_v\right)(\phi_1,\ldots,\phi_k),
+\]
+on the corresponding Fulton--MacPherson stratum.  The sign
+\(\epsilon(\Gamma)\) is the orientation sign of the stratum and
+\(|\Aut(\Gamma)|^{-1}\) is the stable-graph symmetry factor.  When the
+form degree matches the dimension of the chosen chain~\(\sigma_\Gamma\),
+the scalar graph contribution is
+\[
+A_\Gamma(\phi_1,\ldots,\phi_k)
+=\int_{\sigma_\Gamma}\Omega_\Gamma(\phi_1,\ldots,\phi_k).
+\]
+\end{definition}
+
+\subsection{Tree vs.\ loop decomposition}
+
+\begin{definition}[Loop number]
+A Feynman diagram $\Gamma$ with $V$ vertices, $E$ edges, and $C$ connected
+components has loop number
+\[L(\Gamma) = E - V + C,\]
+the first Betti number $b_1(\Gamma)$ of the graph.
+\end{definition}
+
+\begin{remark}[Configuration space interpretation]
+The number \(L(\Gamma)\) counts independent cycles in the graph.  It
+does not by itself count configuration variables: before quotienting by
+automorphisms, \(V\) vertices move in \(C_V(X)\), and a boundary stratum
+imposes collision relations according to its stable tree or stable
+graph.  Surface genus is obtained only by adding ribbon or modular
+surface data, as in Theorem~\ref{thm:loop-genus-formula}.
+\end{remark}
+
+\section{Bar-cobar residue pairing}
+
+\begin{definition}[Bar-cobar distributional pairing]
+\label{def:physical-pairing}
+Let \(D\subset \overline{C}_n(X)\) be a union of collision divisors and
+let \(\iota\colon C_n(X)\hookrightarrow \overline{C}_n(X)\) be the open
+configuration-space inclusion.  For
+\[
+\omega_{\mathrm{bar}}\in
+\Omega^\bullet_{\log}(\overline{C}_n(X),\cA^{\boxtimes n}),
+\qquad
+K_{\mathrm{cobar}}\in
+H^\bullet_D(\overline{C}_n(X),\cA^{!\boxtimes n}),
+\]
+the Verdier residue pairing is
+\[
+\langle \omega_{\mathrm{bar}},K_{\mathrm{cobar}}\rangle_D
+=\operatorname{Tr}_{\cA,\cA^!}
+\operatorname{PRes}_{D}
+\bigl(\omega_{\mathrm{bar}}\wedge K_{\mathrm{cobar}}\bigr).
+\]
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Boundary datum} & \textbf{Bar complex} & \textbf{Cobar complex} \\
+\midrule
+External leg & Marked point & Dual marked point \\
+Internal edge & Logarithmic form $\eta_{ij}$ & Local cohomology class on $D_{ij}$ \\
+Vertex & OPE residue & Dual coproduct \\
+Boundary stratum & Poincar\'e residue & Support condition \\
+Symmetry factor & $|\Aut(\Gamma)|^{-1}$ & $|\Aut(\Gamma)|^{-1}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{definition}
+
+\begin{example}[Heisenberg edge normalization]
+For the rank-one Heisenberg current \(J(z)J(w)\sim (z-w)^{-2}\), the
+bar edge
+\[
+\omega = J(z_1) \otimes J(z_2) \otimes \eta_{12}
+\in \Omega^1(\overline{C}_2(X), \cA^{\boxtimes 2})
+\]
+carries the logarithmic pole \(\eta_{12}=d\log(z_1-z_2)\).  The
+Verdier-dual edge is the local cohomology class
+$K \in H^1_{D_{12}}(\overline{C}_2(X), \cA^{!\boxtimes 2})$
+supported on the diagonal \(D_{12}=\{z_1=z_2\}\).  With the local
+generator normalized by \(K(\eta_{12})=1\),
+\[
+\langle \omega,K\rangle_{D_{12}}=1.
+\]
+The OPE coefficient of the double pole and the logarithmic edge
+residue are separate normalizations: \(J(z)J(w)\sim (z-w)^{-2}\)
+fixes the vertex coefficient, while
+\(\operatorname{PRes}_{D_{12}}\eta_{12}=1\) fixes the propagator edge.
+\end{example}
+
+\section{Higher operations from boundary strata}
+
+\subsection{Virasoro fourth-pole normalization}
+
+\begin{example}[Virasoro fourth-pole residue]\label{ex:virasoro-fourth-pole}
+For the Virasoro algebra,
+\[T(z) = \sum_n L_n z^{-n-2}, \quad [L_m, L_n] = (m-n)L_{m+n} +
+\frac{c}{12}m(m^2-1)\delta_{m+n,0}\]
+and
+\[T(z)T(w) = \frac{c/2}{(z-w)^4} + \frac{2T(w)}{(z-w)^2} +
+\frac{\partial T(w)}{z-w}+\mathrm{reg}.
+\]
+The ordinary one-variable residue of the fourth-order pole is
+\[
+\operatorname{Res}_{u=0}
+\left(\frac{c/2}{u^4}\,T(w+u)\,du\right)
+=\frac{c}{2}\cdot\frac{1}{3!}\partial^3T(w)
+=\frac{c}{12}\partial^3T(w).
+\]
+Equivalently, in the divided-power \(\lambda\)-bracket convention,
+\[
+\{T_\lambda T\}
+=\partial T+2\lambda T+\frac{c}{12}\lambda^3,
+\qquad
+T_{(3)}T=c/2.
+\]
+Thus the two scalar normalizations used in the Feynman lane are
+distinct: the Virasoro curvature parameter is
+\(\kappaChHodge(\mathrm{Vir}_c)=c/2\), while the divided-power
+\(\lambda^3\)-coefficient is \(c/12\).
+\end{example}
+
+\subsection{Higher operations and factorization}
+
+\begin{theorem}[\texorpdfstring{$A_\infty$}{A-infinity} constraint formula;
+\ClaimStatusProvedHere]
+\label{thm:ainfty-constraint-formula}
+For an uncurved \(A_\infty\) algebra written in Keller signs, the
+operations satisfy the recursive constraint:
+\[
+m_1 \circ m_n =
+-\sum_{\substack{r+s+t=n,\ s\geq 1\\ (r,s,t) \neq (0,n,0)}}
+(-1)^{rs+t} m_{r+1+t}(\mathrm{id}^{\otimes r} \otimes m_s \otimes
+\mathrm{id}^{\otimes t}).
+\]
+
+This constrains $m_1(m_n)$ (not $m_n$ itself) in terms of lower operations,
+with the same boundary-incidence pattern as forest subtractions after a
+choice of comparison map to renormalized amplitudes.
+\end{theorem}
+
+\begin{proof}
+This is a rewriting of the uncurved $A_\infty$ relations (Keller convention):
+\[\sum_{\substack{r+s+t=n\\s\geq1}} (-1)^{rs+t} m_{r+1+t}(\mathrm{id}^{\otimes r} \otimes m_s \otimes
+\mathrm{id}^{\otimes t}) = 0.\]
+Isolating the $r = t = 0$, $s = n$ term, which is $m_1(m_n)$, gives the result.
+To \emph{define} $m_n$ recursively, for example by homotopy transfer,
+requires a contracting homotopy $h$ with $h m_1 + m_1 h = \mathrm{id} - \iota\pi$;
+the displayed constraint is a \emph{consistency relation} among the operations,
+not a recursive definition.
+\end{proof}
+
+\section{Graph complexes and Kontsevich formality}
+
+\subsection{The graph complex}
+
+\begin{definition}[Kontsevich graph complex]
+The graph complex $\text{GC}_n$ consists of:
+\begin{itemize}
+\item Generators: Isomorphism classes of graphs with $n$ labeled external legs
+and unlabeled internal vertices
+\item Differential: Sum over edge contractions
+\item Grading: Loop number $L(\Gamma)$
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Decorated graph-to-bar map]
+\label{def:bar-graph-map}
+Let \(\mathrm{GC}_X(\cA)\) be the span of finite graphs whose external
+legs are labelled by fields of~\(\cA\), whose internal vertices are
+labelled by OPE residue operations, and whose edges carry the Koszul
+orientation sign.  The map
+\[
+\Phi_{\Gamma\to\barB}\colon \mathrm{GC}_X(\cA)\longrightarrow
+\Omega^\bullet_{\log}(\overline{C}_\bullet(X),\cA^{\boxtimes \bullet})
+\]
+sends a decorated graph~\(\Gamma\) to the stable-graph form
+\(\Omega_\Gamma\) of Definition~\ref{def:chiral-graph-weights}.  For an
+edge \(e=(i,j)\) contracted to the diagonal \(D_{ij}\), the edge
+contraction differential is carried to the Poincar\'e residue:
+\[
+\Phi_{\Gamma/e\to\barB}(\Gamma/e)
+=\operatorname{PRes}_{D_{ij}}\Phi_{\Gamma\to\barB}(\Gamma),
+\qquad
+\operatorname{PRes}_{D_{ij}}\eta_{ij}=1.
+\]
+The remaining terms in the bar differential are the vertex OPE residue
+and the boundary-stratum splitting maps.
+\end{definition}
+
+\subsection{Kontsevich's formality and chiral algebras}
+
+\begin{theorem}[Kontsevich formality; \ClaimStatusProvedElsewhere{} \cite{Kon03}]
+\label{thm:kontsevich-formality-feynman}
+For a smooth manifold $M$, the $L_\infty$ algebra of polyvector fields
+$\mathcal{T}_{\text{poly}}(M)$ is formal (\cite{Kon03}):
+\[\mathcal{T}_{\text{poly}}(M) \simeq_{L_\infty} H^*(\mathcal{T}_{\text{poly}}(M))\]
+\end{theorem}
+
+\begin{remark}[Kontsevich weights and chiral logarithmic weights]
+\label{rem:kontsevich-graphs}
+\label{sec:connections-other-feynman}
+Kontsevich's formality weights integrate angle forms on compactified
+configuration spaces~\cite{Kon99}.  The chiral graph map
+\(\Phi_{\Gamma\to\barB}\) uses the logarithmic forms
+\(\eta_{ij}=d\log(z_i-z_j)\).  The common structure is the
+edge-form assignment plus Stokes' theorem on configuration-space
+boundaries; the chiral target is the bar-cobar complex of the chiral
+algebra rather than the polyvector-field Hochschild complex.
+\end{remark}
+
+\begin{definition}[Disk-local perturbative/FM discrepancy]
+\label{def:disk-local-perturbative-fm}
+Let $U \subset X$ be a holomorphic disk chart on a curve, and suppose a
+holomorphic-topological perturbative field theory on~$U$ produces the
+same local chiral algebra model \(\cA|_U\).  Let
+\(\beta_2^{\mathrm{pert}}\) and \(\beta_3^{\mathrm{pert}}\) denote the
+regularized BRST-anomaly brackets of Gaiotto--Kulp--Wu~\cite{GKW25}
+on this local model, and let \(m_2^{\mathrm{bar}}\) and
+\(m_3^{\mathrm{bar}}\) be the bar operations cut out by the
+Fulton--MacPherson collision strata.  Define
+\[
+\Delta_2=\beta_2^{\mathrm{pert}}-m_2^{\mathrm{bar}},
+\qquad
+\Delta_3=\beta_3^{\mathrm{pert}}-m_3^{\mathrm{bar}},
+\]
+where \(m_3^{\mathrm{bar}}\) is the oriented sum of the residues on the
+three codimension-\(1\) boundary divisors of \(\overline{C}_3(U)\).
+The disk-local comparison is the vanishing of
+\((\Delta_2,\Delta_3)\).  Its quadratic obstruction is the difference
+between the Wess--Zumino relation for the perturbative brackets and the
+Stokes/\(A_\infty\) relation for the corresponding bar operations.
+\end{definition}
+
+\begin{remark}[FM extension class]\label{rem:disk-local-fm-extension}
+The disk-local forms define an FM logarithmic comparison precisely when
+their local representatives extend to
+\(\Omega^\bullet_{\log}(\overline{C}_n(U))\) with residues on all
+collision strata.  The obstruction is the relative logarithmic
+extension class
+\[
+\mathrm{ob}_{\mathrm{FM}}(\omega_U)\in
+H^1\!\left(\overline{C}_n(U),
+\Omega^\bullet_{\log}(\partial\overline{C}_n(U))
+/\Omega^\bullet_{\log,\mathrm{ext}}(\omega_U)\right).
+\]
+When this class vanishes, Stokes regularity on FM compactifications
+\textup{(}Proposition~\textup{\ref{V1-prop:stokes-regularity-FM}}\textup{)}
+identifies the quadratic boundary relation with the bar
+\(A_\infty\)-relation.
+\end{remark}
+
+\begin{proposition}[Binary-ternary reduction for the disk-local discrepancy;
+\ClaimStatusConditional]
+\label{prop:disk-local-binary-ternary-reduction}
+Fix a holomorphic disk chart $U \subset X$, and interpret the
+perturbative BRST-anomaly brackets and the local bar operations on the
+same local chain model underlying~$\cA|_U$.
+Assume:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the binary perturbative bracket agrees with the local bar
+ residue/OPE operation on~$C_2(U)$; and
+\item the ternary perturbative bracket agrees with the local
+ $m_3$-operation, equivalently with the sum of the three
+ codimension-$1$ residues on~$\overline{C}_3(U)$.
+\end{enumerate}
+Then the quadratic/Wess--Zumino identities on the perturbative side
+agree automatically with the quadratic $A_\infty$/Stokes relation on
+the bar side. In particular, there is no third independent local
+coefficient calculation beyond the binary and ternary comparisons.
+\end{proposition}
+
+\begin{proof}
+On the perturbative side, Gaiotto--Kulp--Wu~\cite{GKW25} prove that the
+regularized BRST-anomaly brackets satisfy the required quadratic
+axioms/Wess--Zumino consistency relations.
+
+On the bar side, the corresponding degree-$3$ consistency relation is
+already built into the local $A_\infty$ structure: by
+Theorem~\ref{thm:ainfty-constraint-formula} specialized to $n=3$, the
+bar operations satisfy the quadratic relation expressing $m_1m_3$ in
+terms of composites of lower operations; geometrically this is the
+Stokes relation among the codimension-$1$ boundary strata of the
+compactified three-point configuration space.
+
+Once the binary and ternary operations are
+identified on the common local chain model, the two quadratic packages
+compare the same formal relation; no third
+independent local coefficient problem remains.
+\end{proof}
+
+\begin{remark}[Application to the disk-local FM comparison]
+Applied to Definition~\ref{def:disk-local-perturbative-fm},
+Proposition~\ref{prop:disk-local-binary-ternary-reduction} shows that
+the only independent local input is the binary comparison on $C_2(U)$
+and the ternary comparison on $\overline{C}_3(U)$.
+\end{remark}
+
+\begin{corollary}[Anomaly-free genus-\texorpdfstring{$0$}{0} binary vanishing;
+\ClaimStatusConditional]
+\label{cor:disk-local-ternary-on-brstbar-locus}
+On the anomaly-free genus-$0$ BRST/bar locus of
+Theorem~\ref{thm:brst-bar-genus0}, the binary discrepancy
+\(\Delta_2\) of Definition~\ref{def:disk-local-perturbative-fm}
+vanishes.  Hence the disk-local comparison is equivalent on this locus
+to the vanishing of the ternary discrepancy \(\Delta_3\) on
+\(\overline{C}_3\).
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:brst-bar-genus0} identifies the genus-$0$ BRST complex
+with the genus-$0$ bar complex by a chain map
+\(\Phi\) to \(\barB^{\mathrm{ch}}_0(\cA_{\mathrm{tot}})\).
+Remark~\ref{rem:brst-bar-explicit} makes the low-degree content of that
+map concrete: physical vertex operators map to bar generators, and the
+ghost bilinear maps to the logarithmic propagator
+\(\eta_{12}=d\log(z_1-z_2)\).
+Thus the propagator/residue data underlying the binary discrepancy is
+identified on this genus-$0$ locus.
+
+By Proposition~\ref{prop:disk-local-binary-ternary-reduction}, once the
+binary discrepancy vanishes the local comparison is controlled by the
+ternary discrepancy.
+\end{proof}
+
+\begin{proposition}[Two-channel reduction after compactifying the
+ ternary discrepancy; \ClaimStatusProvedHere]
+\label{prop:compactified-ternary-two-channel}
+Fix a holomorphic disk chart $U \subset X$, and suppose the
+perturbative ternary bracket and the local bar $m_3$-operation are
+represented by logarithmic $1$-forms on
+$\overline{M}_{0,4} \cong \bP^1$ whose only poles lie at the three
+boundary points corresponding to the channels
+$(12|3)$, $(23|1)$, and $(13|2)$.
+Then comparison of the two residues in any two of those channels
+implies comparison in the third channel as well.
+Equivalently, after compactification the ternary discrepancy has two
+independent boundary-channel checks.
+\end{proposition}
+
+\begin{proof}
+Let $\omega_{\mathrm{pert}}$ and $\omega_{\mathrm{bar}}$ denote the two
+logarithmic $1$-forms on $\overline{M}_{0,4} \cong \bP^1$, and set
+\[
+\delta = \omega_{\mathrm{pert}} - \omega_{\mathrm{bar}}
+\in H^0\!\left(\bP^1,\,
+\Omega^1_{\bP^1}\bigl(\log\{0,1,\infty\}\bigr)\right).
+\]
+If the residues of $\delta$ agree in two channels, then two of the
+three residues of $\delta$ vanish. By the residue theorem on~$\bP^1$,
+the sum of all three residues is zero, so the third residue vanishes as
+well. Therefore $\delta$ has zero residue at every boundary point, so
+it is a holomorphic $1$-form on~$\bP^1$. But
+$H^0(\bP^1,\Omega^1_{\bP^1}) = 0$, hence $\delta = 0$.
+The third boundary residue is forced by the first two.
+\end{proof}
+
+\begin{remark}[Application to the disk-local ternary discrepancy]
+Proposition~\ref{prop:compactified-ternary-two-channel} applies in
+particular to the compactified ternary discrepancy of
+Definition~\ref{def:disk-local-perturbative-fm}. Once the two local
+ternary forms are represented on $\overline{M}_{0,4}$, vanishing of
+two boundary residues forces vanishing of the third.
+\end{remark}
+
+\begin{corollary}[Genus-\texorpdfstring{$0$}{0} post-compactification ternary reduction;
+\ClaimStatusConditional]
+\label{cor:genus0-compactified-ternary-two-channel}
+If, on the anomaly-free genus-$0$ BRST/bar locus of
+Theorem~\ref{thm:brst-bar-genus0}, the ternary discrepancy is
+represented by logarithmic \(1\)-forms on
+$\overline{M}_{0,4} \cong \bP^1$, then \(\Delta_3=0\) is equivalent
+to vanishing of any two of its three boundary residues.
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:disk-local-ternary-on-brstbar-locus} reduces the
+disk-local discrepancy on this genus-$0$ locus to \(\Delta_3\).
+Proposition~\ref{prop:compactified-ternary-two-channel} identifies the
+vanishing of \(\Delta_3\) with any two boundary-channel residues.
+\end{proof}
+
+\begin{corollary}[Standard-chart form of the genus-\texorpdfstring{$0$}{0}
+ ternary discrepancy; \ClaimStatusConditional]
+\label{cor:genus0-standard-chart-two-residues}
+Choose the standard coordinate on
+$\overline{M}_{0,4} \cong \bP^1$ with boundary points
+$0,1,\infty$. On the anomaly-free genus-$0$ BRST/bar locus of
+Theorem~\ref{thm:brst-bar-genus0}, the compactified ternary discrepancy
+vanishes exactly when its residues at $0$ and~$1$ vanish; the residue at
+$\infty$ is then forced.
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{cor:genus0-compactified-ternary-two-channel}, any two
+boundary-channel checks suffice. On the standard
+$0,1,\infty$ compactification of $\overline{M}_{0,4}$, choose
+the channels at $0$ and~$1$ as the independent pair. Then
+Proposition~\ref{prop:compactified-ternary-two-channel} forces the
+residue at~$\infty$.
+\end{proof}
+
+\begin{proposition}[Standard logarithmic basis on
+ \texorpdfstring{$\overline{M}_{0,4}$}{M_0,4}; \ClaimStatusProvedHere]
+\label{prop:m04-standard-log-basis}
+Let $t$ be the standard coordinate on
+$\overline{M}_{0,4} \cong \bP^1$ with boundary points
+$0,1,\infty$. Then every logarithmic $1$-form on
+$\bP^1$ with poles only at $\{0,1,\infty\}$ admits a unique
+expression
+\[
+\omega = A\, d\log t + B\, d\log(1-t)
+\]
+for scalars $A,B \in \bC$.
+Equivalently, the residues at $0$ and $1$ determine the form
+uniquely, and the residue at $\infty$ equals $-A-B$.
+\end{proposition}
+
+\begin{proof}
+Write $\omega = f(t)\,dt$ with $f(t)$ a rational function on~$\bP^1$
+having at most simple poles at $0$, $1$, and $\infty$.
+Thus
+\[
+f(t)=\frac{a}{t}+\frac{b}{t-1}+c
+\]
+for some scalars $a,b,c$. The condition that $\omega$ have at most a
+simple pole at $\infty$ forces $c=0$: in the coordinate $u=1/t$ one
+has
+\[
+dt = -u^{-2}\,du,\qquad
+\left(\frac{a}{t}+\frac{b}{t-1}+c\right)dt
+= \left(\frac{a}{u^{-1}}+\frac{b}{u^{-1}-1}+c\right)(-u^{-2}\,du),
+\]
+and a nonzero constant term $c$ would contribute a double pole at
+$u=0$.
+Hence, using $d\log(1-t) = dt/(t-1)$,
+\[
+\omega = a\,\frac{dt}{t}+b\,\frac{dt}{t-1}
+= a\, d\log t + b\, d\log(1-t).
+\]
+Setting $A=a$ and $B=b$ gives existence.
+
+For uniqueness, if
+$A\, d\log t + B\, d\log(1-t)=0$, then the residues at
+$t=0$ and $t=1$ are respectively $A$ and $B$, so $A=B=0$.
+The residue at $\infty$ is minus the sum of the finite residues, hence
+$-A-B$.
+\end{proof}
+
+\begin{corollary}[Two-coefficient form of the genus-\texorpdfstring{$0$}{0}
+ compactified discrepancy]
+\label{cor:genus0-two-coefficient-discrepancy}
+On the anomaly-free genus-$0$ BRST/bar locus of
+Theorem~\ref{thm:brst-bar-genus0}, the compactified ternary discrepancy
+is exactly the vanishing of two scalar coefficients. More precisely, if
+\[
+\delta = \omega_{\mathrm{pert}} - \omega_{\mathrm{bar}}
+\in H^0\!\left(\bP^1,\,
+\Omega^1_{\bP^1}\bigl(\log\{0,1,\infty\}\bigr)\right),
+\]
+then uniquely
+\[
+\delta = A\, d\log t + B\, d\log(1-t),
+\]
+and \(\delta=0\) if and only if \(A=B=0\).
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:genus0-standard-chart-two-residues} identifies the
+vanishing condition with the two residues at $0$ and $1$ in the
+standard chart. Proposition~\ref{prop:m04-standard-log-basis}
+identifies those residues with the coefficients of \(d\log t\) and
+\(d\log(1-t)\).
+\end{proof}
+
+\begin{definition}[Standard genus-\texorpdfstring{$0$}{0} coefficient pair]
+\label{def:genus0-coefficient-pair}
+For
+\[
+\omega \in H^0\!\left(\bP^1,\,
+\Omega^1_{\bP^1}\bigl(\log\{0,1,\infty\}\bigr)\right),
+\]
+write uniquely
+\[
+\omega=\mathsf{a}(\omega)\,d\log t+\mathsf{b}(\omega)\,d\log(1-t)
+\]
+as in Proposition~\ref{prop:m04-standard-log-basis}. For the
+compactified ternary perturbative and bar forms, write
+\[
+\omega_{\mathrm{pert}}
+= \mathsf{a}_{\mathrm{pert}}\,d\log t
+ + \mathsf{b}_{\mathrm{pert}}\,d\log(1-t),
+\qquad
+\omega_{\mathrm{bar}}
+= \mathsf{a}_{\mathrm{bar}}\,d\log t
+ + \mathsf{b}_{\mathrm{bar}}\,d\log(1-t).
+\]
+Call the pair of equalities
+\[
+\mathsf{a}_{\mathrm{pert}}=\mathsf{a}_{\mathrm{bar}},
+\qquad
+\mathsf{b}_{\mathrm{pert}}=\mathsf{b}_{\mathrm{bar}}
+\]
+the \emph{standard genus-$0$ coefficient pair}.
+\end{definition}
+
+\begin{corollary}[Named coefficient form of the genus-\texorpdfstring{$0$}{0}
+ compactified discrepancy]
+\label{cor:genus0-named-coefficient-discrepancy}
+On the anomaly-free genus-$0$ BRST/bar locus of
+Theorem~\ref{thm:brst-bar-genus0}, the compactified ternary discrepancy
+vanishes exactly when the standard genus-$0$ coefficient pair of
+Definition~\ref{def:genus0-coefficient-pair} holds.
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:genus0-two-coefficient-discrepancy} identifies the
+compactified genus-$0$ discrepancy with the vanishing of the two
+coefficients of
+\(\delta=\omega_{\mathrm{pert}}-\omega_{\mathrm{bar}}\).
+This is equivalent to the two equalities
+\[
+\mathsf{a}_{\mathrm{pert}}=\mathsf{a}_{\mathrm{bar}},
+\qquad
+\mathsf{b}_{\mathrm{pert}}=\mathsf{b}_{\mathrm{bar}}.
+\]
+\end{proof}
+
+\section{\texorpdfstring{The $m_k$ operations as transfer graph sums}{The m k operations as transfer graph sums}}
+\label{sec:mk-feynman-complete}
+
+\subsection{\texorpdfstring{Arity and transfer degree}{Arity and transfer degree}}
+
+\begin{definition}[The complete \texorpdfstring{$m_k$}{m_k} transfer family]
+\label{def:mk-family-feynman}
+Let
+\[
+\bigl(H(\mathcal A),0\bigr)
+\xrightarrow{\ \iota\ }
+(\mathcal A,m_1)
+\xrightarrow{\ \pi\ }
+\bigl(H(\mathcal A),0\bigr),
+\qquad
+h m_1+m_1h=\id-\iota\pi,
+\]
+be a contraction of the underlying complex.  The transferred
+\(A_\infty\) operations
+\(\widetilde m_k\colon H(\mathcal A)^{\otimes k}\to H(\mathcal A)\)
+extend to coderivations of \(\bar B(H(\mathcal A))\); the component
+induced by \(\widetilde m_k\) maps
+\(\bar B^n\to \bar B^{n-k+1}\) for \(n\geq k\).
+
+\begin{center}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}p{5.6cm}|>{\raggedright\arraybackslash}p{1.8cm}|}
+\hline
+\textbf{$k$} & \textbf{Algebraic datum} & \textbf{Transfer graph} & \textbf{$h$-edges} \\
+\hline
+\(m_0\) & curvature & nullary insertion & \(0\) \\
+\hline
+\(m_1\) & differential & one external edge & \(0\) \\
+\hline
+\(m_2\) & binary product/OPE residue & one binary vertex & \(0\) \\
+\hline
+\(m_3\) & associator homotopy & two binary vertices joined by one \(h\) & \(1\) \\
+\hline
+\(m_4\) & pentagon operation & five planar binary trees & \(2\) \\
+\hline
+\(m_k\) & \(k\)-ary transfer operation & planar rooted binary trees with \(k\) leaves & \(k-2\) \\
+\hline
+\end{tabular}
+\end{center}
+The last column counts internal homotopy edges in a genus-\(0\)
+transfer tree.  It is not the genus of a surface.
+\end{definition}
+
+\begin{theorem}[Graph loop number and ribbon genus;
+\ClaimStatusProvedElsewhere{} \cite{costello-renormalization}]
+\label{thm:loop-genus-formula}
+Let \(\Gamma\) be a finite graph with \(V\) vertices, \(E\) internal
+edges, and \(C\) connected components.  Its loop number is
+\[
+\ell(\Gamma)=h^1(\Gamma)=E-V+C.
+\]
+If \(\Gamma\) is connected and is equipped with an orientable ribbon
+structure whose thickening has \(F\) boundary components and genus
+\(g\), then
+\[
+2g=\ell(\Gamma)+1-F.
+\]
+Consequently \(g\leq \ell(\Gamma)/2\), with equality exactly in the
+one-boundary case \(F=1\).  A genus-\(0\) homotopy-transfer tree has
+\(\ell(\Gamma)=0\).
+\end{theorem}
+
+\begin{proof}
+The cellular chain complex of a graph gives
+\(h^1(\Gamma)=E-V+C\).  For a connected ribbon graph, the thickened
+surface \(\Sigma\) deformation-retracts to~\(\Gamma\), so
+\[
+\chi(\Sigma)=V-E=1-\ell(\Gamma).
+\]
+The same surface has \(\chi(\Sigma)=2-2g-F\).  Equating the two
+Euler characteristics gives \(2g=\ell(\Gamma)+1-F\).  Since
+\(F\geq 1\), \(g\leq \ell/2\), and equality is equivalent to
+\(F=1\).
+\end{proof}
+
+\subsection{\texorpdfstring{$m_2$ and $m_3$ as boundary residues}{m2 and m3 as boundary residues}}
+
+\begin{example}[Binary product as OPE residue]
+\label{ex:m2-tree-level}
+The binary operation is the diagonal residue
+\[
+m_2(\phi_1,\phi_2)
+=\operatorname{PRes}_{D_{12}}
+\bigl(\phi_1(z_1)\phi_2(z_2)\eta_{12}\bigr).
+\]
+If
+\[
+\phi_1(z)\phi_2(w)
+\sim \sum_{r\geq 0}C_r(\phi_1,\phi_2)(w)(z-w)^{-r-1},
+\]
+then the coefficient \(C_r\) is extracted by the ordinary residue
+\[
+C_r(\phi_1,\phi_2)(w)
+=\operatorname{Res}_{z=w}
+\bigl((z-w)^r\phi_1(z)\phi_2(w)\,dz\bigr).
+\]
+The logarithmic edge normalization
+\(\operatorname{PRes}_{D_{12}}\eta_{12}=1\) is independent of the
+OPE pole order.
+\end{example}
+
+\begin{example}[Ternary operation as a boundary sum]
+\label{ex:m3-boundary}
+On the genus-\(0\) four-point compactification
+\(\overline{M}_{0,4}\cong\bP^1\), the ternary operation is an oriented
+sum over the three boundary channels:
+\[
+m_3(\phi_1,\phi_2,\phi_3)
+=\sum_{D\in\{(12|3),(23|1),(13|2)\}}
+\epsilon_D\,\operatorname{PRes}_D
+\bigl(\omega_D(\phi_1,\phi_2,\phi_3)\bigr).
+\]
+The signs \(\epsilon_D\) are the boundary-orientation signs of
+\(\overline{M}_{0,4}\).  This is a genus-\(0\) boundary formula; no
+surface genus is assigned without the ribbon or stable-graph data of
+Theorem~\ref{thm:loop-genus-formula}.
+\end{example}
+
+\begin{computation}[Virasoro \texorpdfstring{$m_3$}{m3} coefficient class]
+\label{comp:virasoro-m3}
+Fix transfer data \((\pi,\iota,h)\).  In the Keller sign convention the
+ternary transferred operation has the form
+\[
+\widetilde m_3
+=\pi\Bigl[
+m_2(hm_2\otimes\id)
+-m_2(\id\otimes hm_2)
+\Bigr]\iota^{\otimes 3},
+\]
+with the global suspension convention used to identify coderivations
+with operations fixed as in Theorem~\ref{thm:ainfty-constraint-formula}.
+For the Virasoro input \(T^{\otimes 3}\), define the
+\(\partial^3T\)-coefficient by projection
+\[
+\mu_3(h,\pi,\iota)
+=\operatorname{coeff}_{\partial^3T}
+\bigl(\widetilde m_3(T,T,T)\bigr).
+\]
+Each fourth-pole contribution entering this coefficient uses the
+normalization of Example~\ref{ex:virasoro-fourth-pole}: the OPE pole is
+\(T_{(3)}T=c/2\), and its divided-power \(\lambda^3\)-coefficient is
+\(c/12\). Hence
+\[
+\mu_3(h,\pi,\iota)
+\in \frac{c}{12}\,\bC,
+\]
+the scalar determined by the two oriented transfer trees and the
+chosen contraction \(h\).
+\end{computation}
+
+\subsection{\texorpdfstring{$m_4$ and stable graph genus}{m4 and stable graph genus}}
+
+\begin{remark}[\texorpdfstring{$m_4$}{m4} transfer degree and stable genus]
+\label{rem:m4-transfer-stable-genus}
+The genus-\(0\) transfer operation \(m_4\) is a sum over the five
+planar rooted binary trees with four leaves.  Each such tree has two
+internal homotopy edges and graph loop number \(0\).  A stable graph
+with \(h^1(\Gamma)=1\) or \(2\) belongs instead to the modular
+stable-graph expansion, where the total curve genus is
+\[
+g(\Gamma)=\sum_{v\in V(\Gamma)}g_v+h^1(\Gamma).
+\]
+Thus transfer depth, graph loop number, and curve genus are three
+separate gradings.
+\end{remark}
+
+\begin{computation}[Virasoro \texorpdfstring{$m_4$}{m4} transfer cochain]
+\label{comp:virasoro-m4}
+\index{Virasoro algebra!$A_\infty$ operations!$m_4$}
+The homotopy transfer theorem (Theorem~\ref{V1-thm:htt}) applied to
+$\B(\mathrm{Vir}_c) \to H^*(\B(\mathrm{Vir}_c))$
+produces operations $\tilde{m}_k = \pi \circ T_k \circ \iota^{\otimes k}$,
+where $\pi$ is the projection to cohomology, $\iota$ the inclusion,
+and $h$ the contracting homotopy (propagator).
+For $m_4$, the recursive formula
+(Appendix~\ref{V1-app:homotopy-transfer}) gives:
+\begin{multline}\label{eq:m4-transfer}
+\tilde{m}_4 = \pi \circ \Bigl[
+m_2(hm_2(hm_2 \otimes \id)\otimes \id) +
+m_2(hm_2(\id \otimes hm_2)\otimes \id) \\
+{} + m_2(hm_2 \otimes hm_2) +
+m_2(\id \otimes hm_2(hm_2 \otimes \id)) \\
+{} + m_2(\id \otimes hm_2(\id \otimes hm_2))
+\Bigr] \circ \iota^{\otimes 4}.
+\end{multline}
+
+\emph{The five trees.}
+The five terms correspond to the vertices of the Stasheff
+associahedron $K_4$ (pentagon), i.e., the $C_3 = 5$ planar binary
+trees with $4$~leaves:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{cll}
+\toprule
+$\Gamma$ & Parenthesization & Internal structure \\
+\midrule
+$\Gamma_1$ & $((T \cdot T) \cdot T) \cdot T$ & left comb \\
+$\Gamma_2$ & $(T \cdot (T \cdot T)) \cdot T$ & left-right-left \\
+$\Gamma_3$ & $(T \cdot T) \cdot (T \cdot T)$ & balanced \\
+$\Gamma_4$ & $T \cdot ((T \cdot T) \cdot T)$ & right-left-right \\
+$\Gamma_5$ & $T \cdot (T \cdot (T \cdot T))$ & right comb \\
+\bottomrule
+\end{tabular}
+\end{center}
+Each tree $\Gamma_i$ has $2$ internal edges (propagator insertions~$h$)
+and $3$ internal vertices (binary products~$m_2$).
+
+\emph{Conformal weight support.}
+The input $T^{\otimes 4}$ has total conformal weight $4 \times 2 = 8$.
+With the standard residue grading, two homotopy edges land in the
+weight-\(6\) span
+\begin{equation}\label{eq:m4-weight-analysis}
+\widetilde m_4(T^{\otimes 4}) \;\in\; \mathbb{C}\cdot\partial^4 T \;\oplus\;
+\mathbb{C}\cdot \partial^2({:}TT{:}) \;\oplus\;
+\mathbb{C}\cdot {:}\partial T \partial T{:} \;\oplus\;
+\mathbb{C}\cdot {:}T\partial^2 T{:} \;\oplus\;
+\mathbb{C}\cdot {:}TTT{:},
+\end{equation}
+a \(5\)-dimensional space of weight-\(6\) fields. The central
+charge~\(c\) enters only through the fourth-order pole
+$T(z)T(w) \sim (c/2)(z-w)^{-4} + \cdots$,
+so a double central contraction contributes a factor \((c/2)^2\)
+before the divided-power and projection normalizations are applied.
+
+\emph{The \(\partial^4T\)-coefficient.}
+Define the coefficient
+\begin{equation}\label{eq:m4-leading}
+\mu_4^{\partial^4T}(h,\pi,\iota)
+=\operatorname{coeff}_{\partial^4T}
+\bigl(\widetilde m_4(T,T,T,T)\bigr).
+\end{equation}
+It is the finite signed tree sum
+\[
+\mu_4^{\partial^4T}(h,\pi,\iota)
+=\sum_{\Gamma\in\mathrm{PBT}_4}
+\epsilon_\Gamma\,
+\operatorname{coeff}_{\partial^4T}
+\left(\pi\,\mu_\Gamma(h,m_2)\,\iota^{\otimes 4}(T^{\otimes4})\right),
+\]
+where \(\mathrm{PBT}_4\) is the set of planar binary trees above and
+\(\mu_\Gamma(h,m_2)\) is the composite dictated by~\(\Gamma\).  Planar
+rooted trees have trivial planar automorphism group; if the trees are
+quotiented to non-planar stable graphs the corresponding term is
+weighted by \(1/|\Aut(\Gamma)|\).  Every fourth-pole residue uses the
+normalizations \(T_{(3)}T=c/2\) and \(T_{(3)}T/3!=c/12\) from
+Example~\ref{ex:virasoro-fourth-pole}; the scalar coefficient is the
+displayed function \(\mu_4^{\partial^4T}(h,\pi,\iota)\) of the chosen
+contraction and projection.
+
+\emph{Pentagon identity.}
+The $A_\infty$ relation at degree~$4$ reads
+(Appendix~\ref{V1-app:homotopy-transfer},
+equation~\eqref{V1-eq:ainfty-relation}):
+\begin{equation}\label{eq:pentagon-ainfty}
+\sum_{\substack{r+s+t = 4 \\ s \geq 2}} (-1)^{rs+t}\,
+\tilde{m}_{r+1+t}\bigl(\id^{\otimes r} \otimes \tilde{m}_s
+\otimes \id^{\otimes t}\bigr) = 0.
+\end{equation}
+The five terms are:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lccc}
+\toprule
+$(r,s,t)$ & Operation & Sign $(-1)^{rs+t}$ \\
+\midrule
+$(0,3,1)$ & $\tilde{m}_2(\tilde{m}_3 \otimes \id)$ & $-1$ \\
+$(1,3,0)$ & $\tilde{m}_2(\id \otimes \tilde{m}_3)$ & $-1$ \\
+$(0,2,2)$ & $\tilde{m}_3(\tilde{m}_2 \otimes \id \otimes \id)$ & $+1$ \\
+$(1,2,1)$ & $\tilde{m}_3(\id \otimes \tilde{m}_2 \otimes \id)$ & $-1$ \\
+$(2,2,0)$ & $\tilde{m}_3(\id \otimes \id \otimes \tilde{m}_2)$ & $+1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+These correspond to the five \emph{edges} of the pentagon $K_4$
+(not the five vertices, which enumerate the trees for~$m_4$).
+The identity is the homotopy-transfer image of \(m_1^2=0\) and the
+associativity relation for \(m_2\); it holds for the full transferred
+operation, not only for a chosen scalar projection.
+\end{computation}
+
+\begin{theorem}[Genus-\texorpdfstring{$0$}{0} transfer tree expansion;
+\ClaimStatusProvedElsewhere]
+\label{thm:mk-tree-level}
+\index{tree-level!Feynman}
+For \(k\geq 2\), let \(\mathrm{PBT}_k\) be the set of planar rooted
+binary trees with \(k\) leaves.  The operation transferred from a
+differential graded algebra \((\mathcal A,m_1,m_2)\) along
+\((\pi,\iota,h)\) is
+\[
+\widetilde m_k
+=\sum_{\Gamma\in\mathrm{PBT}_k}
+\epsilon_\Gamma\,\pi\,\mu_\Gamma(h,m_2)\,\iota^{\otimes k}.
+\]
+Here every internal vertex of \(\Gamma\) is labelled by \(m_2\), every
+internal edge by \(h\), and \(\epsilon_\Gamma\) is the Koszul sign
+from the bar suspension convention.  A tree in \(\mathrm{PBT}_k\) has
+\(k-1\) binary vertices, \(k-2\) internal homotopy edges, and
+\(\ell(\Gamma)=0\).  Planar rooted trees have automorphism factor \(1\);
+after quotienting to non-planar trees, each graph is weighted by
+\(|\Aut(\Gamma)|^{-1}\).
+\end{theorem}
+
+\begin{proof}
+This is the Kadeishvili homotopy transfer formula, equivalently the
+sum over vertices of the Stasheff associahedron \(K_k\).  The count of
+vertices and internal edges is the elementary count for a rooted
+binary tree with \(k\) leaves.  The loop number vanishes because a tree
+has \(h^1=0\).
+\end{proof}
+
+\begin{theorem}[All-genus stable-graph expansion]
+\label{thm:mk-general-structure}
+\index{Feynman transform|textbf}
+Assume \(\cA\) is equipped with the modular chiral structure of
+Theorem~\ref{thm:bar-modular-operad} and with Hodge homotopy
+retractions whose edge kernels \(P_g(z,w)\) have diagonal residue
+\(1\).  Then the genus-\(g\), \(k\)-input operation has the stable-graph
+expansion
+\[
+m_k^{(g)}(\phi_1,\ldots,\phi_k)
+=
+\sum_{\Gamma\in \StGraph_{g,k}}
+\frac{\epsilon(\Gamma)}{|\Aut(\Gamma)|}
+\operatorname{Contr}_\Gamma
+\left(
+\bigotimes_{v\in V(\Gamma)} C_{g_v,n_v};
+\bigotimes_{e\in E(\Gamma)}P_{g(e)}
+\right)(\phi_1,\ldots,\phi_k),
+\]
+where \(\StGraph_{g,k}\) is the set of stable graphs with \(k\) legs
+and total genus
+\[
+g=\sum_{v\in V(\Gamma)}g_v+h^1(\Gamma).
+\]
+The factor \(1/|\Aut(\Gamma)|\) is the modular-operad automorphism
+factor, \(C_{g_v,n_v}\) is the genus-\(g_v\), \(n_v\)-point chiral
+operation at the vertex \(v\), and \(\operatorname{Contr}_\Gamma\)
+contracts the tensor factors along the propagator kernels on the
+internal edges.  The genus-\(0\), \(h^1=0\) specialization is the
+transfer-tree expansion of Theorem~\ref{thm:mk-tree-level}.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:prism-higher-genus} and
+Theorem~\ref{thm:bar-modular-operad} identify the higher-genus bar
+complex as an algebra over the Feynman transform of the commutative
+modular operad.  By the definition of the Feynman transform
+\textup{(}Definition~\textup{\ref{def:relative-feynman-transform}};
+Getzler--Kapranov~\cite{GeK98}\textup{)}, its arity-\(k\), genus-\(g\)
+component decomposes as
+\[
+\bar{B}^{(g)}_k = \bigoplus_{\Gamma \in \StGraph_{g,k}}
+\frac{1}{|\mathrm{Aut}(\Gamma)|}\;
+\bigotimes_{v \in V(\Gamma)}
+\overline{\mathcal{M}}_{g_v, n_v}
+\;\otimes\; \bigotimes_{e \in E(\Gamma)} \bC_e
+\]
+where each vertex~$v$ carries genus~$g_v$ and valence~$n_v$, and each
+internal edge~$e$ carries a one-dimensional propagator line.  Evaluating
+the vertex tensors on the chiral operations \(C_{g_v,n_v}\) and the
+edge tensors on the chosen kernels \(P_g\) gives exactly the displayed
+contraction.  The automorphism factor is part of the coinvariant
+definition of the modular Feynman transform.
+\end{proof}
+
+\begin{remark}
+The loop number of a stable graph is \(h^1(\Gamma)\).  The curve genus
+is \(\sum_v g_v+h^1(\Gamma)\).  If every vertex has genus \(0\), then
+the curve genus equals the graph loop number; otherwise vertex genus
+contributes independently.
+\end{remark}
+
+\section{Forest comparison obstruction}
+\label{sec:bphz-ainfinity}
+
+\begin{definition}[BPHZ--\texorpdfstring{$A_\infty$}{A-infinity} comparison obstruction]
+\label{def:bphz-comparison-obstruction}
+Let \(\mathfrak F(\Gamma)\) be the forest poset of proper nested
+subgraphs of a graph~\(\Gamma\), and let
+\(\partial_{\mathrm{St}}\) be the boundary operator on the Stasheff
+cell whose faces encode the \(A_\infty\) composites.  A choice of
+renormalization scheme and graph assignment gives a linear comparison
+map
+\[
+\mathcal R_n\colon C_\bullet(K_n)\longrightarrow
+\bC[\mathfrak F(\Gamma)]
+\]
+from associahedral boundary chains to forest chains.  The obstruction
+to identifying the two recursions at arity \(n\) is
+\[
+\mathfrak b_n
+=\mathcal R_n(\partial_{\mathrm{St}}K_n)
+-\partial_{\mathrm{forest}}\mathcal R_n(K_n).
+\]
+The comparison holds for the chosen renormalization scheme exactly when
+\(\mathfrak b_n=0\) for all relevant \(n\).
+\end{definition}
+
+\begin{example}[Arity-\texorpdfstring{$3$}{3} obstruction]
+At arity \(3\), the uncurved \(A_\infty\) relation is
+\begin{align*}
+&m_1(m_3(\phi_1 \otimes \phi_2 \otimes \phi_3))
++ m_2(m_2(\phi_1 \otimes \phi_2) \otimes \phi_3)
++ m_2(\phi_1 \otimes m_2(\phi_2 \otimes \phi_3)) \\
+&+ m_3(m_1(\phi_1) \otimes \phi_2 \otimes \phi_3) + \cdots = 0.
+\end{align*}
+The two binary composites are the two codimension-\(1\) faces of
+\(\overline{M}_{0,4}\) visible in this bracketing.  Applying
+\(\mathcal R_3\) sends them to the corresponding two forest
+subtractions.  The class \(\mathfrak b_3\) records exactly the
+difference between the boundary-orientation signs
+\((-1)^{rs+t}\), the graph automorphism factors, and the chosen
+renormalization subtraction signs.
+\end{example}
+
+\section{Logarithmic edge forms}
+
+\begin{definition}[Bar graph form]
+\label{def:bar-graph-form}
+For fields \(\phi_1,\ldots,\phi_k\) and an ordered edge set
+\(E(\Gamma)\), the bar graph form is
+\[
+\omega_\Gamma
+=\frac{\epsilon(\Gamma)}{|\Aut(\Gamma)|}
+\phi_1(z_1)\otimes\cdots\otimes\phi_k(z_k)
+\otimes\bigwedge_{(i,j)\in E(\Gamma)}\eta_{ij}.
+\]
+On a disk chart, with scalar Cauchy kernel
+\(G_0(z_i,z_j)=(z_i-z_j)^{-1}\),
+\[
+\eta_{ij}=d\log(z_i-z_j)=-\frac{dG_0(z_i,z_j)}{G_0(z_i,z_j)},
+\qquad
+\operatorname{PRes}_{D_{ij}}\eta_{ij}=1.
+\]
+Thus the bar edge is the logarithmic derivative of the scalar Cauchy
+kernel with residue normalization fixed along the collision divisor.
+\end{definition}
+
+\label{sec:summary-feynman-unity}

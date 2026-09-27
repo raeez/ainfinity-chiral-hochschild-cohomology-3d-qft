@@ -1,0 +1,981 @@
+\documentclass[11pt]{article}
+\usepackage[localtheorems]{raeez-math-template}
+\usepackage[all]{xy}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cC}{\mathcal{C}}
+\providecommand{\cD}{\mathcal{D}}
+\providecommand{\cH}{\mathcal{H}}
+\providecommand{\cQ}{\mathcal{Q}}
+\providecommand{\cW}{\mathcal{W}}
+\providecommand{\Ran}{\mathrm{Ran}}
+\providecommand{\Mod}{\mathrm{Mod}}
+\providecommand{\Rep}{\mathrm{Rep}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Hom}{\mathrm{Hom}}
+\providecommand{\RHom}{\mathrm{RHom}}
+\providecommand{\HH}{\mathrm{HH}}
+\providecommand{\ChirHoch}{\mathrm{ChirHoch}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\op}{\mathrm{op}}
+\providecommand{\Cat}{\mathrm{Cat}}
+\providecommand{\bC}{\mathbb{C}}
+\providecommand{\bR}{\mathbb{R}}
+\providecommand{\bZ}{\mathbb{Z}}
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\fgl}{\mathfrak{gl}}
+\providecommand{\fsl}{\mathfrak{sl}}
+\providecommand{\fso}{\mathfrak{so}}
+\providecommand{\fkm}{\hat{\mathfrak{g}}}
+\providecommand{\Ainf}{A_\infty}
+\providecommand{\dlog}{d\!\log}
+\providecommand{\Yhbar}{Y_{\hbar}}
+\providecommand{\FM}{\mathrm{FM}}
+\providecommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch},\mathrm{top}}}
+\providecommand{\Bord}{\overline{B}^{\,\mathrm{ord}}}
+\providecommand{\BSigma}{\overline{B}^{\,\Sigma}}
+
+\title{Bar-chain models of $E_1$-chiral quantum groups\\
+and the $E_N$ ladder}
+\author{Raeez Lorgat}
+\date{April 2026}
+
+\begin{document}
+\maketitle
+
+%% ====================================================================
+\section{The Yangian as $E_1$-chiral quantum group}
+\label{sec:yangian}
+%% ====================================================================
+
+The RTT Yangian $Y_\hbar(\fgl_2)$ is presented by generators
+$t^{(r)}_{ij}$, $1 \le i,j \le 2$, $r \ge 1$, assembled into the
+generating series $T(u) = \mathbf{1} + \sum_{r \ge 1} T^{(r)} u^{-r}$
+with $T^{(r)} = (t^{(r)}_{ij})$, subject to the RTT relation
+\begin{equation}\label{eq:rtt}
+R(u-v)\, T_1(u)\, T_2(v) = T_2(v)\, T_1(u)\, R(u-v),
+\qquad
+R(z) = 1 - \frac{\hbar\, P}{z},
+\end{equation}
+where $P \in \End(\bC^2 \otimes \bC^2)$ is the permutation.
+The special Yangian for $\fsl_2$ is obtained only after imposing the
+quantum-determinant constraint; this first calculation uses the
+unreduced RTT algebra.  The deformation parameter $\hbar$ is formal, and
+the specialization $\hbar=0$ is the commutative degeneration with
+trivial $R$-matrix.
+
+\smallskip
+\noindent\textit{Multiplication.}
+The RTT relation~\eqref{eq:rtt} defines a $\bZ$-filtered associative
+algebra.  For formal $\hbar$ it is not commutative:
+$[t^{(1)}_{ij},\, t^{(1)}_{kl}]
+= \hbar(\delta_{kj} t^{(1)}_{il} - \delta_{il} t^{(1)}_{kj})$.
+Multiplication is $E_1$ and no more.
+
+\smallskip
+\noindent\textit{Coproduct.}
+The spectral coproduct
+\begin{equation}\label{eq:coproduct}
+\Delta_z \colon Y_\hbar(\fgl_2) \to
+Y_\hbar(\fgl_2) \,\widehat{\otimes}\, Y_\hbar(\fgl_2),
+\qquad
+\Delta_z(T(u)) = T(u) \,\dot\otimes\, T(u-z),
+\end{equation}
+that is,
+$\Delta_z(t_{ij}(u)) =
+\sum_a t_{ia}(u) \otimes t_{aj}(u-z)$,
+is coassociative: $(\id \widehat{\otimes}\, \Delta_w) \circ \Delta_z
+= (\Delta_z \widehat{\otimes}\, \id) \circ \Delta_{z+w}$.  At $z=0$
+it reduces to the RTT Drinfeld coproduct
+$\Delta_0(T(u)) = T(u) \dot\otimes T(u)$.
+
+\smallskip
+\noindent\textit{$R$-matrix and quasi-triangularity.}
+The Yang $R$-matrix $R(z) = 1 - \hbar P/z$ satisfies the Yang--Baxter equation
+\begin{equation}\label{eq:ybe}
+R_{12}(z_1 - z_2)\, R_{13}(z_1 - z_3)\, R_{23}(z_2 - z_3)
+= R_{23}(z_2 - z_3)\, R_{13}(z_1 - z_3)\, R_{12}(z_1 - z_2).
+\end{equation}
+It is the fundamental representation-level $R$-matrix.  Algebra-level
+quasi-triangularity for a module category uses the completed universal
+$R$-matrix; on fundamental evaluation modules the displayed finite
+matrix gives the usual RLL intertwining relation.
+
+\smallskip
+\noindent\textit{Braided module category.}
+For finite-dimensional evaluation modules $M_u$, $N_v$ of
+$Y_\hbar(\fgl_2)$, the spectral coproduct
+\eqref{eq:coproduct} defines a fusion product $M \otimes_z N$ by
+pulling back the $(Y_\hbar \widehat\otimes Y_\hbar)$-action.
+The braiding
+\[
+\beta_{M_u,N_v} \colon M_u \otimes N_v
+\xrightarrow{\;\; R_{M,N}(u-v) \cdot \sigma \;\;}
+N_v \otimes M_u
+\]
+satisfies the braid relation by \eqref{eq:ybe}.
+
+\smallskip
+\noindent\textit{What makes $Y_\hbar(\fsl_2)$ genuinely $E_1$.}
+The RTT relation \eqref{eq:rtt} is \emph{not} derived from a local OPE
+on a curve.  There is no vertex algebra $V$ for which
+$Y_\hbar(\fsl_2)$ arises as a chiral envelope.  The ordering of
+tensor factors is independent input.  In the hierarchy
+\[
+E_1\text{-chiral}
+\;\supsetneq\;
+E_\infty\text{-chiral (vertex algebras)},
+\]
+the Yangian sits in $E_1 \setminus E_\infty$: genuinely nonlocal.
+
+This example earns the following definition.
+
+
+%% ====================================================================
+\section{$E_1$-chiral quantum groups}
+\label{sec:def}
+%% ====================================================================
+
+\begin{definition}[Ordered Koszul chiral algebra (Vol~I
+\ref*{V1-thm:e1-chiral-notions-collapse},
+\ref*{V1-def:ordered-fact-dmod})]%
+\label{def:ordered-koszul-chiral-algebra-standalone}%
+An $E_1$-chiral algebra $\cA$ on a smooth curve $X$ is
+\emph{ordered Koszul} if (i) its ordered bar complex
+$\Bord(\cA) = T^c(s^{-1}\bar\cA)$ over the pure braid Orlik--Solomon
+operad $\mathrm{OS}(\mathrm{PBr}_n)$ is quadratic-Koszul in the
+Shelton--Yuzvinsky sense; (ii) the induced $\Ainf$-structure
+$\{m_k^{\mathrm{ord}}\}_{k\ge 2}$ on $\cA$ satisfies the Stasheff
+boundary-of-associahedra relations; (iii) the $R$-twisted
+$\Sigma_n$-descent identifying $\Bord(\cA)$ with the symmetric-bar
+shadow $\BSigma(\cA)$ holds at the level of chain complexes.
+\end{definition}
+
+\begin{proposition}[Yangian as ordered-Koszul $E_1$-chiral algebra
+(Vol~I
+\ref*{V1-thm:yangian-e1}, \ref*{V1-prop:yangian-koszul})]%
+\label{prop:yangian-ordered-koszul-standalone}%
+On the rational ordered Ran surface of the affine line, the Yangian
+$\Yhbar(\fg)^{\mathrm{ch}}$ in Drinfeld's second presentation is an
+ordered Koszul $E_1$-chiral algebra in the sense of
+Definition~\ref{def:ordered-koszul-chiral-algebra-standalone}.  The
+Etingof--Kazhdan avatar is a quantum vertex algebra with $S$-locality,
+not an ordinary symmetric chiral algebra.  Its braiding operator
+satisfies
+\[
+  S^{21}(z)=S^{-1}(-z);
+\]
+for the bare rational matrix $R_0(z)=1-\hbar P/z$ this requires a
+scalar normalisation $f(z)$ with
+$f(z)f(-z)=(1-\hbar^2/z^2)^{-1}$.  Even after this unitarisation,
+$S$ is nontrivial.  Therefore ordinary symmetric descent to an
+arbitrary smooth curve is not part of the proposition.  Global curve
+versions require separate rational, trigonometric, or elliptic
+KZ/KZB descent data.
+\end{proposition}
+
+\begin{remark}[Why the Yangian is the archetypal $E_1$-chiral input]%
+\label{rem:yangian-archetypal}%
+The five notions of $E_1$-chiral algebra (strict $\mathrm{ChirAss}$,
+$A_\infty$ in $\End^{\mathrm{ch}}_\cA$, Etingof--Kazhdan quantum VA,
+$A_\infty$ in $E_1$-chiral, factorization on $\Ran^{\mathrm{ord}}(X)$)
+coincide on the ordered Koszul locus where the Drinfeld associator
+acts freely, through
+Proposition~\ref{prop:yangian-ordered-koszul-standalone}. The Yangian
+sits in the complement of $E_\infty$-chiral (standard vertex algebras)
+and is genuinely nonlocal.
+\end{remark}
+
+\begin{definition}[$E_1$-chiral quantum group]%
+\label{def:e1-chiral-qg}%
+An \textbf{$E_1$-chiral quantum group} on a smooth curve $X$ is a
+chiral bialgebra datum
+$(\cA,\, \mu,\, \Delta^{\mathrm{ch}},\, R,\, \Phi)$ where:
+\begin{enumerate}[label=(\roman*)]
+\item $\cA$ is an $E_1$-chiral algebra on $X$: an $E_1$-algebra object in
+  factorisation algebras on $X$;
+\item $\mu$ is the $E_1$-chiral multiplication (the $\Ainf$-structure
+  $\{m_k\}_{k \ge 2}$ encoding the ordered OPE);
+\item $\Delta^{\mathrm{ch}} \colon
+  \cA \to (\cA \widehat{\otimes}\cA)((z))$ is a completed spectral
+  chiral coproduct on $\cA$;
+\item $\Phi$ is a fixed Drinfeld associator and
+  $\Delta^{\mathrm{ch}}$ is coassociative up to conjugation by~$\Phi$;
+\item $R(z)$ is either the completed universal $R$-matrix for the chosen
+  module category or its evaluation on specified modules, satisfying the
+  Yang--Baxter and $R\Delta=\Delta^{\op}R$ intertwining identities in
+  that completion.
+\end{enumerate}
+An antipode is not part of the chiral bialgebra datum.  It is additional
+Drinfeld-double or Hopf data, and it does not lift automatically to the
+vertex/chiral level.
+\end{definition}
+
+The coproduct $\Delta^{\mathrm{ch}}$ is structure on $\cA$.  It is not the
+deconcatenation coproduct on the bar complex $B(\cA)$:
+deconcatenation is a structural feature of any bar construction
+and carries no information about $\cA$ beyond what the product
+already encodes.
+
+\begin{theorem}[Categorical level shift]\label{thm:level-shift}
+Let $(\cA,\mu,\Delta^{\mathrm{ch}},R,\Phi)$ be an $E_1$-chiral quantum
+group datum.
+Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $\cA$ is an $E_1$-algebra.
+\item On any module category on which $\Delta^{\mathrm{ch}}$, $R$, and
+  $\Phi$ converge, $\Mod_\cA$ is braided monoidal.  Its associativity is
+  controlled by~$\Phi$, and the spectral dependence comes from the
+  $\cD$-module translation parameter.
+\item The derived chiral centre $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+  := \ChirHoch^\bullet(\cA, \cA)$ carries the proved $E_2$-chiral brace
+  action.  The two-coloured $\SCchtop$ bulk-boundary action on
+  $(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$ requires the heptagon
+  hypotheses, and a strict $E_3^{\mathrm{top}}$ refinement requires
+  explicit topologisation data.
+\end{enumerate}
+No single-colour $E_3^{\mathrm{top}}$ structure is produced by the
+definition alone.
+\end{theorem}
+
+\begin{proof}
+(a) is the definition.
+
+(b) The coproduct $\Delta^{\mathrm{ch}}$ defines the monoidal product
+$M \otimes_\Delta N$ on $\Mod_\cA$ by restriction of scalars
+along $\Delta^{\mathrm{ch}}$.  Coassociativity up to $\Phi$ gives the
+associator of $\otimes_\Delta$.  The completed $R$-matrix and
+quasi-triangularity give the braiding natural transformation
+$\beta_{M,N} \colon M \otimes N \to N \otimes M$
+satisfying the hexagon axioms (which follow from the YBE
+\eqref{eq:ybe} and the pentagon for~$\Phi$).
+
+(c) The chiral higher Deligne theorem (Vol~II
+\ref*{thm:chiral-higher-deligne}): for an $E_1$-chiral algebra
+$\cA$ on a smooth curve $X$, the chiral Hochschild cochains
+$\ChirHoch^\bullet(\cA, \cA)$ carry the canonical $E_2$-chiral brace
+structure.  The mixed $\SCchtop$ universal property is conditional on
+the two-coloured cobar contracting homotopy, and the strict
+$E_3^{\mathrm{top}}$ action appears only after explicit inner-stress
+topologisation.  The chain-level action is associator-dependent; its
+cohomological $E_2$ brace shadow is associator-free.
+\end{proof}
+
+
+%% ====================================================================
+\section{The bar complex: what it sees and what it does not}
+\label{sec:bar}
+%% ====================================================================
+
+Let $\cA$ be an $E_1$-chiral algebra on a smooth curve $X$.
+
+\begin{proposition}[Bar complex as $E_1$ coalgebra
+{\cite[Theorem~A]{Vol1}}]\label{prop:bar}
+For an augmented ordered $E_1$-chiral algebra, the reduced ordered bar
+coalgebra
+\begin{align*}
+\Bord(\cA) &= T^c(s^{-1}\bar\cA)
+  = \bigoplus_{n \ge 0} (s^{-1}\bar\cA)^{\otimes n},
+&
+d_B &= \sum_{k \ge 2} \sum_i m_k^{(i)},\\
+\Delta(a_1|\cdots|a_n)
+  &= \sum_{i=0}^{n}
+    (a_1|\cdots|a_i)
+    \otimes
+    (a_{i+1}|\cdots|a_n).
+\end{align*}
+is an $E_1$ dg coassociative coalgebra on $\Ran(X)$ at genus~$0$.
+The differential $d_B$ is a coderivation of $\Delta$.  Under the usual
+augmented, conilpotent, completed hypotheses, the cobar construction
+gives bar-cobar inversion $\Omega\Bord(\cA) \simeq \cA$.
+\end{proposition}
+
+The two-sided bar model computes
+$k \otimes_\cA^{\mathbf{L}} k$ with augmentation boundary conditions.
+This is distinct from factorisation homology of the line:
+$\int_\bR \cA \simeq \cA$.  The identity
+$\Omega\Bord(\cA)\simeq \cA$ is inversion, not Koszul duality; the
+Koszul dual $A^!$ is obtained from bar cohomology together with the
+Verdier/completed duality data.
+
+\begin{proposition}[Classical $r$-matrix from collision residues]
+\label{prop:r-classical}
+Let $\cA = V_k(\fg)$ be the Kac--Moody vertex algebra at level $k$.
+The genus-$0$, degree-$2$ collision residue of the bar differential gives
+\begin{equation}\label{eq:classical-r}
+r(z) = \frac{k\,\Omega}{z},
+\end{equation}
+where $\Omega \in \fg \otimes \fg$ is the Casimir.  This $r(z)$
+satisfies the classical Yang--Baxter equation.
+\end{proposition}
+
+\begin{proof}
+The current OPE has two different singular channels:
+\[
+J^a(z)J^b(w)\sim
+\frac{k\,\delta^{ab}}{(z-w)^2}
++\frac{f^{ab}_{c}J^c(w)}{z-w}.
+\]
+The double pole records the level pairing.  The KZ/factorisation
+connection packages this invariant form as the split Casimir channel
+$k\,\Omega/(z_1-z_2)$ on two insertions; this is the normalization used
+in~\eqref{eq:classical-r}.  The CYBE is the codimension-two
+compatibility on $\mathrm{FM}_3(\bC)$, equivalently the Jacobi identity
+for the split Casimir.
+\end{proof}
+
+\begin{proposition}[Curved modular bar curvature]\label{prop:curvature}
+In the curved modular bar model, under the rank-one clean-intersection
+or scalar-diagonal hypotheses on the curvature channel, the fibre
+differential has
+\begin{equation}\label{eq:curvature}
+d_{\mathrm{fib}}^2 = \kappa_{\mathrm{ch}} \cdot \omega_g,
+\end{equation}
+where $\kappa_{\mathrm{ch}}$ is the shadow obstruction class and
+$\omega_g$ is the Arakelov $(1,1)$-form on the genus-$g$ surface,
+normalised so that $\int_{\Sigma_g} \omega_g = 1$.
+The genus-$0$ ordered bar differential remains a genuine differential;
+the curvature belongs to the modular genus-$g$ extension, not to the
+ordinary dg coalgebra of Proposition~\ref{prop:bar}.
+\end{proposition}
+
+The bar complex sees the \emph{product} (fusion, encoded in $d_B$)
+and the \emph{classical $r$-matrix} (from collision residues).
+
+It does \emph{not} see:
+\begin{enumerate}[label=(\roman*)]
+\item the chiral coproduct $\Delta \colon \cA \to \cA \otimes \cA$
+  (the coproduct encodes splitting, not fusion; it is independent
+  algebraic structure);
+\item the full quantum $R$-matrix $R(z)$ (only its classical limit
+  $r(z)$ appears in the shadow tower);
+\item quasi-triangularity or the antipode.
+\end{enumerate}
+
+The shadow obstruction tower $\{F_g\}_{g \ge 1}$, extracted from
+\eqref{eq:curvature}, detects collision data.  The coproduct encodes
+the opposite operation and is invisible to the tower.
+
+Sources of the chiral coproduct: Gaiotto--Rap\v{c}\'ak--Zhou
+\cite{GRZ} construct coproducts on deformed double current algebras
+of $\fgl_K$ from M2--M5 fusions;
+Jindal--Kaubrys--Latyntsev \cite{JKL} construct vertex coproducts
+on CoHAs of quivers with potential, recovering Drinfeld's deformed
+coproduct for ADE quivers.
+
+
+%% ====================================================================
+\section{The $E_N$ ladder}
+\label{sec:ladder}
+%% ====================================================================
+
+For an $E_1$-chiral algebra $\cA$ on $X$, the following structures form
+a ladder only after the relevant direction has been made topological.
+The mixed operad $\SCchtop$ is two-coloured and directional; Dunn
+additivity enters only after explicit topologisation data have replaced
+the chiral direction by a topological one.
+
+\subsection*{$E_1$: the boundary algebra}
+
+$\cA$ is $E_1$-chiral: an $E_1$-algebra in factorisation algebras
+on $X$.  The bar complex $\Bord(\cA)$ is the $E_1$ dg coassociative
+coalgebra of Proposition~\ref{prop:bar}.
+
+\subsection*{$E_1 \to E_2$: Hochschild and Deligne}
+
+\begin{theorem}[$E_2$ on the derived centre]\label{thm:e2}
+The chiral derived centre
+\[
+Z^{\mathrm{der}}_{\mathrm{ch}}(\cA) = C^\bullet_{\mathrm{ch}}(\cA,\cA)
+\]
+carries the $E_2$-chiral brace structure.  This is the chiral
+Deligne--Tamarkin output, after the chosen associator has strictified
+the brace action:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the holomorphic part: the chiral algebra structure of
+  $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ on $X$;
+\item the ordered part: the $\Ainf$-algebra structure in the
+  transverse direction.
+\end{enumerate}
+The pair $(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\, \cA)$ is the
+Swiss-cheese datum: the bulk acts on the boundary through the
+two-coloured chiral-topological structure.
+\end{theorem}
+
+\subsection*{$E_2 \to E_3$-chiral: chiral higher Deligne}
+
+The $E_3$-chiral structure on
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA) = \ChirHoch^\bullet(\cA, \cA)$
+is governed by the chiral higher Deligne theorem
+(Vol~II \ref*{thm:chiral-higher-deligne}).  Its proved core is the
+$E_2$-chiral brace action.  The $\SCchtop$ universal property and any
+strict $E_3^{\mathrm{top}}$ refinement require the heptagon and
+topologisation hypotheses stated in Vol~II
+\ref*{thm:chiral-higher-deligne}.
+
+\begin{theorem}[Chiral higher Deligne (Vol~II
+\ref*{thm:chiral-higher-deligne})]%
+\label{thm:chiral-higher-deligne-standalone}%
+Let $\cA$ be an $E_1$-chiral algebra on a smooth complex curve $X$ in
+the Koszul locus, and fix a Drinfeld associator. Then
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ carries the proved $E_2$-chiral
+brace action.  If the two-coloured $(\SCchtop)^!$ cobar contracting
+homotopy exists, the pair
+$(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$ satisfies the
+$\SCchtop$ universal bulk-boundary property.  If, in addition,
+inner-stress topologisation data are supplied, this mixed datum refines
+to a strict $E_3^{\mathrm{top}}$ structure.
+\end{theorem}
+
+\begin{theorem}[$E_3$-chiral realisation for Kac--Moody {\cite{CFG}}]%
+\label{thm:e3-km}%
+For $\cA = V_k(\fg)$ at non-critical level $k \ne -h^\vee$,
+holomorphic Chern--Simons theory on $X \times \bR$ provides the
+3d HT bulk.  The factorisation algebra of observables on
+$X \times \bR$ gives the mixed 3d HT bulk, and its restriction to
+the boundary $X \times \{0\}$ recovers $V_k(\fg)$. This geometric
+realisation agrees with the chiral higher Deligne mixed structure of
+Theorem~\ref{thm:chiral-higher-deligne-standalone} on cohomology; the
+chain-level comparison is associator-dependent and model-specific.
+\end{theorem}
+
+Kac--Moody has a proved gauge-theoretic realisation at non-critical
+level.  Drinfeld--Sokolov and freely generated PVA cases require their
+own BRST or Poisson-sigma hypotheses in addition to Dunn additivity.
+
+\subsection*{$E_3$-chiral $\to$ $E_3$-topological: topologisation}
+
+\begin{theorem}[Topologisation for Kac--Moody]%
+\label{thm:topologise}%
+Let $\cA = V_k(\fg)$ at non-critical level $k \ne -h^\vee$.
+Write $T(z) = \{Q, G(z)\}$ where $T(z)$ is the Sugawara conformal
+vector, $Q$ is the BRST operator, and $G(z)$ is the antighost.
+Then, on the topologised cohomology model:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Translations along $X$ are $Q$-exact on the chain-level
+  antighost refinement of Vol~I
+  \ref*{V1-thm:chain-level-E3-top-class-L}, so the complex structure
+  of $X$ is irrelevant in the chain-level BRST cohomology.
+\item The mixed structure on
+  $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$
+  (Theorem~\ref{thm:chiral-higher-deligne-standalone},
+  Theorem~\ref{thm:e3-km}) descends to an
+  $E_3$-topological structure after the chiral translation has become
+  $Q$-exact.
+\item The resulting $E_3$-topological theory is Chern--Simons at
+  level $k + h^\vee$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Topologisation tower with hypotheses (Vol~I
+\ref*{V1-thm:topologization-tower},
+Vol~II \ref*{thm:e-infinity-topologization-ladder})]%
+\label{thm:topologisation-tower-standalone}%
+On a chain model carrying the required stress-tower data:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item class G (Heisenberg, nonzero level) reaches $E_3^{\mathrm{top}}$
+  through the abelian Sugawara field;
+\item class L ($V_k(\fg)$, $k \ne -h^\vee$) $E_3^{\mathrm{top}}$
+  on the topologised cohomology model; a strict original-chain lift
+  requires the antighost homotopy equation;
+\item class C ($\beta\gamma$, $bc$) $E_3^{\mathrm{top}}$ via FMS
+  bosonisation reducing to class G.
+\end{enumerate}
+In the weight-completed category:
+\begin{enumerate}[label=\textup{(\roman*)}]\setcounter{enumi}{3}
+\item class M (Virasoro, $\cW_N$) $E_3^{\mathrm{top}}$ via half-BRST
+  and the MC5 weight-completed mechanism
+  (\ref*{V1-thm:completed-bar-cobar-strong}
+  + \ref*{V1-prop:standard-strong-filtration}).
+\end{enumerate}
+At critical level $k = -h^\vee$, Sugawara degenerates and the
+derived centre retains its $E_2$-chiral brace shadow. The
+Feigin--Frenkel centre supplies a commutative horizontal sector, but
+the non-critical topologisation ladder is absent: no
+$E_3^{\mathrm{top}}$ rung is attained for the full affine algebra
+without a non-critical conformal vector.
+
+\noindent
+Higher-spin extension (Vol~II
+\ref*{thm:e-infinity-topologization-ladder}): the first $k$ pairwise
+commuting inner stress tensors, with coherent homotopies and continuous
+action on the chosen chain model, yield $E_{k+2}^{\mathrm{top}}$.
+For $\cW_\infty$ this is a weight-filtered inverse-limit statement under
+the same convergence hypotheses. The raw original complex requires a
+separate convergence theorem.
+\end{theorem}
+
+\begin{conjecture}[Topologisation for general conformal chiral
+algebras, original complex class M]%
+\label{conj:topologise-general}%
+Let $\cA$ be a class-M chiral algebra at non-critical level. The
+weight-completed $E_3^{\mathrm{top}}$ structure of
+Theorem~\ref{thm:topologisation-tower-standalone}(iv) lifts to an
+$E_3^{\mathrm{top}}$ structure on the original complex. For
+Virasoro and principal $\cW_N$ at generic central charge, this
+original-complex lift remains conjectural. BP (minimal
+$\cW^{(2)}(\fsl_3)$) has a strict chain-level original-complex proof via branched-cover
+integralisation plus Galois descent (Vol~II
+\ref*{chap:bp-chain-level-strict-platonic}), indicating the route
+for general class~M is branched-cover reduction to class~L upstairs.
+\end{conjecture}
+
+At the \emph{critical level} $k = -h^\vee$, the Sugawara
+construction degenerates.  No non-critical conformal vector is
+available, so the non-critical topologisation ladder fails.  The
+derived centre remains $E_2$-chiral and has the enlarged
+Feigin--Frenkel horizontal centre; this commutative sector is a
+degenerate critical-level topological shadow, not an
+$E_3^{\mathrm{top}}$ structure on the full affine algebra.
+
+\begin{remark}[The generic case is $\mathrm{SC}^{\mathrm{ch,top}}$,
+not $E_3$]
+$E_3$-topological requires \emph{both} a conformal vector at
+non-critical level \emph{and} a 3d holomorphic-topological bulk
+theory.  Chiral algebras lacking these inputs, such as critical-level
+Kac--Moody $V_{-h^\vee}(\mathfrak{g})$, $E_1$-chiral algebras
+(Yangians), and Calabi--Yau functor outputs, carry the generic
+first-class structure $\mathrm{SC}^{\mathrm{ch,top}}$, in which
+the holomorphic and topological colours remain distinct.
+
+The Heisenberg algebra $\mathcal{H}_k$ ($k \ne 0$) and lattice
+VOAs are \emph{not} stuck at $\mathrm{SC}^{\mathrm{ch,top}}$:
+$\mathcal{H}_k$ carries the abelian Sugawara conformal vector
+$T = \frac{1}{2k}{:}JJ{:}$ ($c = 1$) and abelian holomorphic
+Chern--Simons theory provides the 3d HT bulk, so
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\mathcal{H}_k)$ reaches
+$E_3$-topological (the same proof as for non-abelian
+Kac--Moody, Theorem~\ref{thm:topologise}).
+\end{remark}
+
+
+%% ====================================================================
+\section{The modular operad and the curved-Dunn range}
+\label{sec:frontier}
+%% ====================================================================
+
+The chiral-$\Ainf$ modular operad is the ambient object for the
+$E_2 \to E_3$ step.  Curved Dunn additivity has a conditional
+higher-genus vanishing range and a separate genus-one curved
+comparison; these are not the same assertion.
+
+\begin{theorem}[Chiral-$\Ainf$ modular operad (Vol~II
+\texttt{ch:modular-swiss-cheese-operad})]%
+\label{thm:chiral-Ainf-modular-operad}%
+The modular operad $\mathcal{O}^{\mathrm{ch}\text{-}\Ainf}$ exists
+and its algebras consist of:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item an $E_1$-chiral algebra structure on $X$
+  (governed by $\SCchtop$ on within-surface strata);
+\item an $\Ainf$-algebra structure in the transverse direction $\bR$;
+\item compatibility between transverse $\Ainf$-operations and the
+  $E_1$ ordering on $X$;
+\item at genus $g \ge 1$: curvature
+  $d^2_{\mathrm{fib}} = \kappa_{\mathrm{ch}}(\cA) \cdot \omega_g$
+  as the bar intrinsic obstruction to extending the genus-$0$
+  structure to higher genera.
+\end{enumerate}
+The genus-$0$ part of $\mathcal{O}^{\mathrm{ch}\text{-}\Ainf}$
+is $\SCchtop \times E_1^{\mathrm{tr}}$.
+\end{theorem}
+
+\begin{theorem}[Conditional curved-Dunn higher-genus range]%
+\label{thm:curved-dunn-higher-genus-range}%
+Assume the modular-bootstrap degree-two vanishing and the low-degree
+bridge comparison between the modular-bootstrap complex and the
+curved-Dunn twisting-cochain complex. At genus $g \ge 2$, the curved
+modular bar complex of
+$\mathcal{O}^{\mathrm{ch}\text{-}\Ainf}$ factorises as a twisted
+Eilenberg--Zilber tensor product
+\[
+  \mathbf{B}_{\mathrm{mod}}(\mathcal{O}^{\mathrm{ch}\text{-}\Ainf})
+  \;\simeq\;
+  \mathbf{B}_{\mathrm{mod}}(\SCchtop)
+  \;\otimes^{\tau}\;
+  \mathbf{B}(E_1^{\mathrm{tr}}),
+\]
+with twisting cochain $\tau$ built recursively from $R$-matrix
+monodromy at each genus-raising clutching. In this range the
+curved-Dunn obstruction
+$H^2(\mathrm{TCo}^\bullet_g(\cA), d_0) = 0$ transports from the
+modular-bootstrap complex via the explicit bridge map of Vol~II
+\ref*{prop:modular-bootstrap-to-curved-dunn-bridge}; the vanishing is
+therefore conditional on that bridge.
+The genus-one statement is the separate curved tensor-product
+comparison of Vol~II \ref*{prop:genus1-twisted-tensor-product}; the
+uniform $H^2$-vanishing statement requires the higher-genus bridge.
+\end{theorem}
+
+\subsection*{The unified chiral quantum group}
+
+The following families supply chiral bialgebra or line-algebra data
+(Yangian
+$\Yhbar(\fg)$, affine Yangian $\Yhbar(\fkm)$, shifted Yangian
+$Y_\mu(\fg)$, truncated shifted $Y^\lambda_\mu(\fg)$ = BFN Coulomb
+branch, finite $W$-algebra $W^{\mathrm{fin}}(\fg, f)$ on the
+topological line, principal affine $W_k(\fg, f_{\mathrm{prin}})$,
+non-principal affine
+$W_k(\fg, f)$, Bershadsky--Polyakov $W_k(\fsl_3, f_{\mathrm{min}})$,
+orthogonal coideal $\cQ^\theta$).  They are organized by the
+four-parameter notation $Q_\fg^{k, f, \mu}$ when the ambient category is
+fixed.  The finite $W$-algebra row is topological $E_1$ data until a
+chiral BRST lift is chosen.
+
+\begin{theorem}[Chiral bialgebra comparison, ordered Koszul locus
+(Vol~I
+\ref*{V1-thm:chiral-qg-equiv})]%
+\label{thm:chiral-bialgebra-equiv-standalone}%
+On the ordered Koszul locus
+(Definition~\ref{def:ordered-koszul-chiral-algebra-standalone}), the
+three structures: vertex $R$-matrix data, $\Ainf$ chiral operations,
+and a completed spectral chiral coproduct
+$\Delta^{\mathrm{ch}}\colon \cA\to(\cA\widehat{\otimes}\cA)((z))$,
+are linked by comparison maps after fixing a Drinfeld associator,
+completion, spectral coordinate, and bialgebra transport datum.  Any
+``two determine the third'' statement means that the corresponding
+Maurer--Cartan transport problem has been solved in that completed
+model.  The $\mathrm{GRT}_1$ torsor changes associator/formality data;
+it does not create the spectral parameter or turn bar
+deconcatenation into the Yangian coproduct.  A Hopf antipode is
+additional structure and is obstructed at the vertex-algebraic level
+in the $\cW_{1+\infty}$ family.
+\end{theorem}
+
+\begin{theorem}[$\fgl_N$ chiral bialgebra, conditional range
+(Vol~I
+\ref*{V1-thm:glN-chiral-qg})]%
+\label{thm:gl-N-chiral-qg-conditional-standalone}%
+The principal $\cW_N$ is reconstructed as the intersection of
+Feigin--Frenkel screening kernels inside a rank-$(N-1)$ Heisenberg,
+\[
+  \cW_N \;=\;
+  \bigcap_{i=1}^{N-1} \ker Q_{\alpha_i} \;\subset\; \Pi_{\mathrm{FF}},
+\]
+after the central Heisenberg convention has been fixed and removed.
+Equivalently, in the rectangular $Y$-algebra notation it is the
+$(K,L)=(1,N)$ fibre.  The chiral coproduct is obtained by transport
+from the Gaiotto--Rap\v{c}\'ak--Zhou/Yangian side only under the
+screening compatibility, coideal/truncation stability, and explicit
+transport map $\theta_N$; it is not obtained by simply restricting a
+primitive coproduct on the screening parent.  The datum is not a
+chiral Hopf algebra; the antipode lift is obstructed.  Non-principal
+$\cW$-hook types require parabolic-screening input.
+\end{theorem}
+
+\begin{theorem}[Class-M weight-completed chiral bialgebra (Vol~I
+\ref*{V1-thm:w-infty-chiral-qg})]%
+\label{thm:w-infty-chiral-qg-standalone}%
+For $\cW_{1+\infty}$ at generic nondegenerate parameters, the
+R-matrix, chiral $A_\infty$ operations, and spectral chiral coproduct
+form a chiral bialgebra datum in the weight-completed category.  The
+direct-sum class-M chain-level lift is obstructed at weight~$4$ by
+nonvanishing $S_4(\mathrm{Vir}_c) = 10/[c(5c+22)]$.  Degenerate or
+truncation loci require separate analysis.
+\end{theorem}
+
+\begin{theorem}[Spectral--categorical bridge (Vol~I
+\ref*{V1-thm:chiral-qg-equiv})]%
+\label{thm:spectral-categorical-standalone}%
+The $E_2$-Gerstenhaber braiding on
+$\ChirHoch^\bullet(\cA, \cA)$ from chiral higher Deligne is
+associator-dependent: trivial on $H^0$, homotopic on cochains. The
+categorical braiding is recovered as the $\hbar$-expansion of the
+$R$-matrix braiding under the $\mathrm{GRT}_1$ torsor action of
+Drinfeld associators. Position-dependence on
+$\Mod_\cA$ arises from the $\cD$-module structure via the
+KZB realisation of the spectral parameter.
+\end{theorem}
+
+\begin{theorem}[Class-M global triangle, weight-completed (Vol~II
+\ref*{cor:universal-holography-class-M})]%
+\label{thm:class-M-global-triangle-standalone}%
+For class-M $\cA$ at generic central charge,
+\[
+  \cA_{\mathrm{bulk}}
+  \;\simeq\;
+  Z^{\mathrm{der}}_{\mathrm{ch}}(\cA_{\mathrm{boundary}})
+  \;\simeq\;
+  \mathrm{HH}^*_{\mathrm{ch}}(\cA^{!}_{\mathrm{line}})
+\]
+holds in the weight-completed category (Vol~I
+\ref*{V1-thm:completed-bar-cobar-strong} +
+\ref*{V1-prop:standard-strong-filtration}). At chain level on the
+original complex, the DS--Hochschild bridge (Vol~II
+\ref*{thm:chd-ds-hochschild}) reduces the class-M identification
+to the class-L identification under its SDR and mixed-action
+hypotheses for principal and hook-type
+Drinfeld--Sokolov reductions (Virasoro, principal $\cW_N$, hook-type
+$\cW_k(\fg, f)$).
+\end{theorem}
+
+
+%% ====================================================================
+\section{The comparison triangle for $\mathcal{W}_{1+\infty}$}
+\label{sec:equiv-triangle}
+%% ====================================================================
+
+The bar complex detects multiplication and collision residues.  It does
+not manufacture the chiral coproduct.  For
+$\mathcal{W}_{1+\infty}$ the stable comparison has three independent
+inputs:
+\begin{equation}\label{eq:triangle}
+\xymatrix@C=3em{
+& \Ainf\text{-operations } \{m_k\} \\
+R\text{-matrix } R(z) \ar[ur] \ar[rr]
+&& \text{spectral coproduct } \Delta_z .
+}
+\end{equation}
+The arrows in \eqref{eq:triangle} are comparison maps after choices of
+associator, completion, coordinates, and normalisation.  They are not
+canonical inverse functors on an undeclared category.
+
+\subsection*{The $R$-matrix input and the $A_\infty$ obligation}
+
+The structure function of $\mathcal{W}_{1+\infty} \simeq
+Y(\widehat{\fgl}_1)$ is
+\begin{equation}\label{eq:structure-fn}
+g(u) = \frac{(u - h_1)(u - h_2)(u - h_3)}{(u + h_1)(u + h_2)(u + h_3)},
+\qquad h_1 + h_2 + h_3 = 0.
+\end{equation}
+Set
+\[
+  \sigma_2=h_1h_2+h_1h_3+h_2h_3,\qquad
+  \sigma_3=h_1h_2h_3,\qquad
+  \psi(u)=1+\sigma_3\sum_{j\ge0}\psi_j u^{-j-1}.
+\]
+The triality parameters
+$\lambda_i=-\psi_0\sigma_3/h_i$ satisfy
+$\lambda_1^{-1}+\lambda_2^{-1}+\lambda_3^{-1}=0$, and the
+central charge convention is
+\[
+  c=-\sigma_2\psi_0-\sigma_3^2\psi_0^3
+  =1+\prod_{i=1}^3(\lambda_i-1).
+\]
+The MO $R$-matrix on the charge-$n$ Fock space $\mathcal{F}_n$ has
+diagonal eigenvalues
+$R_{\lambda\lambda}(u) = \prod_{s \in \lambda} g(u + c(s))$
+where $c(s) = h_1 i + h_2 j$ is the content of box $s = (i,j)$
+in partition $\lambda$ \cite{Vol3}.
+
+A chain-level reconstruction of the operations $m_n$ from this
+$R$-matrix requires a top-degree form on the Stasheff cell $K_n$,
+regularisation along collision faces, and Stokes boundary identities
+whose boundary terms are the Stasheff relations.  The schematic product
+$\bigwedge_{i<j}d\log(z_i-z_j)$ is not such a form: it has degree
+$n(n-1)/2$, while $\dim K_n=n-2$.  Thus the $R$-matrix-to-$A_\infty$
+arrow in \eqref{eq:triangle} is a proof obligation until the
+degree-matched propagator and its boundary calculus are supplied.
+
+\subsection*{The bar dual gives multiplication}
+
+\begin{proposition}[Deconcatenation and the dual product]
+\label{constr:beta}
+The ordered bar complex
+\[
+B^{\mathrm{ord}}(\mathcal{W}_{1+\infty})
+\;=\;
+T^c(s^{-1}\overline{\mathcal{W}_{1+\infty}})
+\]
+with bar differential $d_B = \sum_{k \ge 2} m_k^{(i)}$ and
+deconcatenation coproduct has a completed linear dual
+\[
+\bigl(B^{\mathrm{ord}}(\mathcal{W}_{1+\infty})\bigr)^\vee.
+\]
+Deconcatenation dualises to the convolution product on this dual.  It
+does not produce the spectral coproduct on the affine Yangian.
+\end{proposition}
+
+\begin{proof}
+For a coalgebra $C$, the dual $C^\vee$ carries multiplication
+$(f*g)(c)=(f\otimes g)(\Delta_Cc)$.  On the completed ordered bar dual
+this reads
+\[
+ (f*g)([v_1|\cdots|v_n])
+ =
+ \sum_{i=0}^n
+ (-1)^{|g|(|v_1|+\cdots+|v_i|)}
+ f([v_1|\cdots|v_i])\,g([v_{i+1}|\cdots|v_n]).
+\]
+It is a convolution product, not a spectral coproduct.  A coproduct on
+a Koszul dual algebra requires additional bialgebra or factorisation
+data.  The line
+Koszul dual
+\[
+\cA^!_{\mathrm{line}}
+\;=\;
+H^*\bigl(B^{\mathrm{ord}}(\mathcal{W}_{1+\infty})\bigr)^\vee
+\]
+is therefore not identified with the original boundary algebra by
+bar-cobar inversion.  The five objects
+$\cA$, $B(\cA)$, $H^\ast B(\cA)$, $\cA^!$, and
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ remain distinct.
+\end{proof}
+
+\subsection*{The affine-Yangian coproduct input}
+
+\begin{proposition}[Stable-envelope spectral coproduct]
+\label{prop:gamma-inverse}
+Let $\mathcal F_a$ be the completed equivariant $K$-theoretic Fock
+module on which the Maulik--Okounkov stable-envelope $R$-matrix
+$R^{\mathrm{MO}}_{a,b}(z)$ acts.  After a chamber and normalization
+are fixed, the Gauss factors of $R^{\mathrm{MO}}_{a,b}(z)$ give the
+Schiffmann--Vasserot spectral coproduct
+\begin{equation}\label{eq:gamma-coprod}
+\Delta_z^{\mathrm{SV}} \colon
+Y(\widehat{\fgl}_1)
+\;\longrightarrow\;
+Y(\widehat{\fgl}_1) \,\widehat{\otimes}\,
+Y(\widehat{\fgl}_1)
+\end{equation}
+on the completed affine Yangian.  In Drinfeld-current notation,
+the current formulas are not naive all-mode identities.  They are
+normal-ordered shorthand after completion, chamber choice, and
+stable-envelope scalar normalisation.  In the Heisenberg-corrected
+low-mode sector one has
+\[
+  \Delta(\psi_3)
+  =
+  \Delta_0(\psi_3)
+  +6\sigma_3\sum_{m>0}m\,J_m\otimes J_{-m},
+\]
+where $\Delta_0$ denotes the tensor-shifted primitive part.  The
+remaining Drinfeld-current formulas are read in this same completed
+normal-ordered sense.
+\end{proposition}
+
+\begin{proof}
+This imported geometric input comes from stable envelopes.
+Deconcatenation in the bar construction does not supply it.  The stable-envelope
+$R$-matrix satisfies the Yang--Baxter equation and intertwines the
+two tensor-order actions.  Its Gauss decomposition, in the
+normalization used by Schiffmann and Vasserot, identifies the diagonal
+and triangular factors with completed Drinfeld currents of
+$Y(\widehat{\fgl}_1)$.  The Heisenberg correction displayed above is
+the first low-mode place where the completed coproduct differs from a
+raw current substitution.  Coassociativity and quasi-triangularity are
+part of the stable-envelope tensor-functor formalism after completion.
+\end{proof}
+
+\begin{remark}[What the bar comparison must prove]
+\label{rem:class-M-obstruction}
+The comparison triangle~\eqref{eq:triangle} leaves
+\eqref{eq:gamma-coprod} as external input.  It asks for a chain-level lift of the
+already constructed spectral coproduct to the chosen chiral model.
+For class~L, the ordinary bar-cobar comparison is a quasi-isomorphism
+under the usual conilpotence and completion hypotheses, so the lift is
+available on the stated chain model.  For class~M, the direct-sum
+complex is not the right ambient category.  The nonzero shadow
+coefficient
+\[
+S_4(\mathrm{Vir}_c)=\frac{10}{c(5c+22)}
+\]
+is the first visible obstruction to treating the direct-sum
+bar-cobar map as a chain-level equivalence.  The correct comparison
+uses the weight-completed or pro-completed model.
+\end{remark}
+
+\begin{theorem}[Weight-completed class-M bialgebra scope]
+\label{thm:chain-level-coprod-weight-completed}%
+For $\mathcal{W}_{1+\infty}$ at the generic nondegenerate levels
+covered by Vol~I \ref*{V1-thm:w-infty-chiral-qg}, the completed
+Schiffmann--Vasserot coproduct~\eqref{eq:gamma-coprod} lifts to the
+weight-completed $\Ainf$ model used in that theorem.  The resulting
+object is a completed chiral bialgebra with associator and
+$R$-matrix.  The raw direct-sum complex is outside this theorem.
+\end{theorem}
+
+\begin{proof}
+Vol~I \ref*{V1-thm:w-infty-chiral-qg} supplies the completed
+identification between the $\mathcal W_{1+\infty}$ side and the
+affine-Yangian side.  Proposition~\ref{prop:gamma-inverse} supplies
+the spectral coproduct on the Yangian side.  Transporting it across
+that completed comparison gives the stated completed chiral bialgebra
+structure.  No assertion is made for the direct-sum chain complex,
+where the weight-four shadow obstruction remains visible.
+\end{proof}
+
+\begin{remark}[Positive half and full affine Yangian]
+The Jindal--Kaubrys--Latyntsev vertex coproduct gives a chain-level
+construction for the positive half
+$Y^+(\widehat{\fgl}_1)\simeq \mathrm{CoHA}(\bC^3)$.  Passing from the
+positive half to the full affine Yangian requires the compatible
+opposite half, the Drinfeld double pairing, and the completed
+topology.  The positive-half construction alone supplies only the
+positive-half coproduct.
+\end{remark}
+
+
+%% ====================================================================
+%% References
+%% ====================================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{Vol1}
+R.~Lorgat,
+\textit{Chiral bar, chiral cobar: Koszul duality, modular invariants,
+  and the quantum geometry of vertex algebras},
+Volume~I (2026).
+
+\bibitem{Vol2}
+R.~Lorgat,
+\textit{$A_\infty$-chiral algebras and 3D holomorphic-topological QFT},
+Volume~II (2026).
+
+\bibitem{Vol3}
+R.~Lorgat,
+\textit{Calabi--Yau categories, quantum groups, and BPS algebras},
+Volume~III (2026).
+
+\bibitem{GRZ}
+D.~Gaiotto, M.~Rap\v{c}\'ak, and Y.~Zhou,
+\textit{Deformed double current algebras, matrix extended
+  $\mathcal{W}_\infty$ algebras, coproducts, and intertwiners from
+  the M2--M5 intersection},
+arXiv:2309.16929 (2023).
+
+\bibitem{CostelloWittenYamazaki}
+K.~Costello, E.~Witten, and M.~Yamazaki,
+\textit{Gauge Theory and Integrability, I},
+ICCM Notices~6 (2018), 46--119; arXiv:1709.09993.
+
+\bibitem{JKL}
+S.~Jindal, S.~Kaubrys, and A.~Latyntsev,
+\textit{Critical CoHAs, vertex coalgebras, and deformed Drinfeld
+  coproducts},
+arXiv:2603.21707 (2026).
+
+\bibitem{CL}
+K.~Costello and S.~Li,
+\textit{Twisted supergravity and its quantization},
+arXiv:1606.00365 (2016).
+
+\bibitem{CFG}
+K.~Costello, J.~Francis, and O.~Gwilliam,
+\textit{Chern--Simons factorisation algebras and knot polynomials},
+arXiv:2602.12412 (2026).
+
+\bibitem{BD}
+A.~Beilinson and V.~Drinfeld,
+\textit{Chiral Algebras},
+AMS Colloquium Publications, vol.~51 (2004).
+
+\bibitem{Lurie-HA}
+J.~Lurie,
+\textit{Higher Algebra},
+available at the author's website (2017).
+
+\end{thebibliography}
+
+\end{document}

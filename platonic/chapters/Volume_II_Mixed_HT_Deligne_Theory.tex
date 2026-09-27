@@ -1,0 +1,929 @@
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{Mixed Holomorphic--Topological Deligne Theory}
+\chapter*{Book entrance: Mixed Holomorphic--Topological Deligne Theory}
+\addcontentsline{toc}{chapter}{Book entrance: Mixed Holomorphic--Topological Deligne Theory}
+\begin{summarybox}
+Hamiltonian jets, shifted cotangent fields, universal branes, Duflo quantization, and the all-arity open--closed map.
+\end{summarybox}
+\part{Finite Hamiltonian geometry}
+
+\chapter{The formal symplectic plane}
+\section{Hamiltonians and the Poisson bracket}
+Let $V=\C^2$ with coordinates $(z_1,z_2)$ and symplectic form
+\[
+ \omega=\dd z_1\wedge\dd z_2.
+\]
+Let $\mathfrak m=(z_1,z_2)$.  The pointed formal Hamiltonian Lie algebra is
+\[
+ \h=\mathfrak m^2\subset\C\llbracket z_1,z_2\rrbracket,
+ \qquad
+ \{f,g\}=\partial_{z_1}f\,\partial_{z_2}g-
+          \partial_{z_2}f\,\partial_{z_1}g.
+\]
+It consists of Hamiltonians whose vector fields fix the chosen Darboux point.  The shifted order filtration $F^p\h=\mathfrak m^{p+2}$ is complete and obeys
+\[
+ \{F^p\h,F^q\h\}\subset F^{p+q}\h.
+\]
+The affine Hamiltonian algebra $\h^{\mathrm{aff}}=\C\llbracket z_1,z_2\rrbracket/\C$ also contains translations.  Its linear sector is adjoined separately when a moving brane or center-of-mass coordinate is required.
+
+Write $R_r=\Sym^r(V^\vee)$ for the homogeneous polynomials of degree $r$.  The bracket obeys
+\[
+ \{R_r,R_s\}\subset R_{r+s-2}.
+\]
+For $d\ge2$ define the finite jet quotient
+\[
+ \h_{\le d}=\bigoplus_{r=2}^{d}R_r,
+\]
+where every bracket component of degree greater than $d$ is set equal to zero.
+
+\begin{theorem}[Finite Hamiltonian jet algebra]
+The truncated bracket makes $\h_{\le d}$ a finite-dimensional Lie algebra.  Its dimension is
+\[
+ \dim\h_{\le d}=\frac{d(d+3)}2-2.
+\]
+The quadratic part is
+\[
+ R_2\cong\mathfrak{sl}_2,
+\]
+and each $R_r$ is the irreducible $\mathfrak{sl}_2$-module $\Sym^r(\C^2)$.
+\end{theorem}
+\begin{proof}
+The Jacobiator of the polynomial Poisson bracket vanishes before truncation.  Projection to degrees at most $d$ preserves this identity because the discarded terms form a Lie ideal.  The dimension is
+\[
+ \sum_{r=2}^{d}(r+1)
+ =\frac{d(d+3)}2-2.
+\]
+Quadratic Hamiltonians act linearly on $V$ and preserve $\omega$; this identifies $R_2$ with $\mathfrak{sp}(V)=\mathfrak{sl}_2$.  The standard action on homogeneous polynomials gives the final statement.
+\end{proof}
+
+\section{Unimodularity}
+\begin{theorem}[Unimodularity of every finite jet]
+For every $d\ge2$ and every $x\in\h_{\le d}$,
+\[
+ \Tr_{\h_{\le d}}(\ad_x)=0.
+\]
+\end{theorem}
+\begin{proof}
+A homogeneous Hamiltonian of degree greater than two raises polynomial degree.  Its adjoint action is strictly upper triangular in the decomposition $\bigoplus_{r=2}^{d}R_r$, hence has trace zero.  A quadratic Hamiltonian belongs to $\mathfrak{sl}_2$.  Its action on each finite-dimensional $\mathfrak{sl}_2$-module $R_r$ has trace zero.  Linearity gives the result.
+\end{proof}
+
+\begin{corollary}[Canonical finite BV measure]
+The linear odd symplectic space $T^*[-1]\h_{\le d}[1]$ has a translation-invariant Berezinian for which the cotangent BF Hamiltonian satisfies the quantum master equation.
+\end{corollary}
+\begin{proof}
+Choose dual linear coordinates on the shifted cotangent space and use their constant Berezinian.  The classical term vanishes by Jacobi, while the BV divergence is the adjoint trace.  Unimodularity makes that trace zero.
+\end{proof}
+
+\chapter{The shifted cotangent theory}
+\section{The Lie algebra and its functions}
+Put
+\[
+ \g_d=T^*[-1]\h_{\le d}
+ =\h_{\le d}\ltimes\h_{\le d}^\vee[-1],
+\]
+where $\h_{\le d}$ acts on the dual by the coadjoint action and the shifted dual is abelian.
+
+\begin{proposition}[Chevalley--Poisson identification]
+There is a canonical isomorphism of commutative dg algebras
+\[
+ C^*_{\CE}(\g_d)
+ \cong
+ C^*\!\left(\h_{\le d},\Sym(\h_{\le d})\right).
+\]
+The differential on the right is the Chevalley differential for the adjoint action on $\Sym(\h_{\le d})$.  Under the identification $\Sym(\h_{\le d})=\Ocal(\h_{\le d}^*)$, it is the linear Poisson differential.
+\end{proposition}
+\begin{proof}
+The dual of $\h_{\le d}^\vee[-1]$ shifted by $[-1]$ is $\h_{\le d}$ in degree zero.  Chevalley cochains therefore contain polynomial functions on $\h_{\le d}^*$ and exterior ghosts for $\h_{\le d}$.  The semidirect bracket produces the coadjoint action, which is the Hamiltonian action of the linear Poisson tensor.
+\end{proof}
+
+\section{The BV action}
+Choose dual bases $e_a$ and $e^a$.  Let $c^a$ be the ghost coordinates and $b_a$ the cotangent coordinates.  The finite action is
+\[
+ S_d=\frac12 b_c f^c{}_{ab}c^ac^b.
+\]
+The canonical BV bracket satisfies
+\[
+ \frac12\{S_d,S_d\}=0
+\]
+by Jacobi.
+
+\begin{theorem}[Exact finite quantum master equation]
+With the translation-invariant BV Laplacian,
+\[
+ \Delta S_d=\sum_b\Tr(\ad e_b)c^b=0.
+\]
+Consequently
+\[
+ \frac12\{S_d,S_d\}+\hbarq\Delta S_d=0
+\]
+for every $d$.
+\end{theorem}
+\begin{proof}
+Contracting one field and one antifield in the cubic Hamiltonian gives the divergence of the adjoint vector field.  The preceding unimodularity theorem makes every coefficient vanish.
+\end{proof}
+
+\chapter{The universal boundary brane}
+\section{Polarization}
+Place the cotangent theory on a half-plane.  The standard Lagrangian boundary condition fixes the cotangent field and leaves the $\h_{\le d}$ field free.  Boundary observables form the Rees enveloping algebra
+\[
+ U_\hbar(\h_{\le d})
+ =T(\h_{\le d})\llbracket\hbarq\rrbracket/
+ \angles{xy-yx-\hbarq[x,y]}.
+\]
+The Poincar\'e--Birkhoff--Witt symmetrization gives a filtered vector-space isomorphism
+\[
+ \operatorname{sym}_\hbar:\Sym(\h_{\le d})\llbracket\hbarq\rrbracket
+ \xrightarrow{\sim}U_\hbar(\h_{\le d}).
+\]
+
+\begin{theorem}[Boundary quantization]
+The factorization algebra of boundary observables of the finite cotangent theory is locally constant and its value on an interval is $U_\hbar(\h_{\le d})$.  Fusion of adjacent intervals is multiplication in the enveloping algebra.
+\end{theorem}
+\begin{proof}
+Canonical quantization turns the linear boundary phase space $\h_{\le d}^*$ into the Gutt star algebra.  For a linear Poisson bracket the Gutt product is transported by PBW to $U_\hbar(\h_{\le d})$.  Excision identifies ordered interval fusion with multiplication.
+\end{proof}
+
+\part{The exact open--closed equivalence}
+
+\chapter{Hochschild cochains of the universal brane}
+\section{The Cartan--Eilenberg model}
+For every finite-dimensional Lie algebra $\flie$ there is a natural quasi-isomorphism
+\[
+ C^\bullet_{\HH}(U\flie,U\flie)
+ \simeq C^*(\flie,U\flie_{\ad}).
+\]
+The same statement holds for the Rees algebra after $\hbarq$-adic completion.
+
+\begin{proposition}[Filtered Hochschild model]
+There is a filtered quasi-isomorphism
+\[
+ C^\bullet_{\HH}\!
+ \left(U_\hbar(\h_{\le d}),U_\hbar(\h_{\le d})\right)
+ \simeq
+ C^*\!\left(\h_{\le d},U_\hbar(\h_{\le d})_{\ad}\right).
+\]
+Its associated graded is
+\[
+ C^*\!\left(\h_{\le d},\Sym(\h_{\le d})\right).
+\]
+\end{proposition}
+\begin{proof}
+Resolve the diagonal bimodule by the Chevalley--Eilenberg bimodule resolution
+\[
+ U_\hbar(\flie)\tensor\Lambda^\bullet\flie\tensor U_\hbar(\flie).
+\]
+Applying bimodule homomorphisms into $U_\hbar(\flie)$ gives the Chevalley complex with adjoint coefficients.  PBW identifies the associated graded coefficient module with $\Sym\flie$.
+\end{proof}
+
+\chapter{The Kontsevich--Duflo map}
+\section{Linear Poisson formality}
+Let $\pi_d$ be the linear Poisson bivector on $\h_{\le d}^*$.  Kontsevich's stable formality morphism, twisted by $\pi_d$, gives a filtered $\Linf$ quasi-isomorphism from polyvectors with differential $[\pi_d,-]$ to Hochschild cochains of the star algebra.  Tamarkin's refinement transports the full homotopy Gerstenhaber structure.
+
+\begin{theorem}[Finite mixed-HT Deligne equivalence]
+For every $d\ge2$ there is a filtered homotopy-$\Etwo$ quasi-isomorphism
+\[
+ \Phi_d:
+ C^*_{\CE}\bigl(T^*[-1]\h_{\le d}\bigr)\llbracket\hbarq\rrbracket
+ \xrightarrow{\sim}
+ C^\bullet_{\HH}\!
+ \left(U_\hbar(\h_{\le d}),U_\hbar(\h_{\le d})\right).
+\]
+Its classical term is the Hochschild--Kostant--Rosenberg map.  On invariant degree-zero functions it is the Duflo map
+\[
+ \operatorname{Duf}
+ =\operatorname{sym}_\hbar\circ j^{1/2}(\hbarq\partial),
+ \qquad
+ j^{1/2}(x)=
+ \det_{\h_{\le d}}^{1/2}
+ \left(\frac{\sinh(\ad_x/2)}{\ad_x/2}\right).
+\]
+\end{theorem}
+\begin{proof}
+Kontsevich formality identifies the dg Lie algebra of polyvectors on $\h_{\le d}^*$, twisted by the Maurer--Cartan element $\hbarq\pi_d$, with the Hochschild dg Lie algebra of the corresponding star product.  The star algebra of a linear Poisson structure is identified with the Rees enveloping algebra by PBW.  Tamarkin formality lifts the equivalence from dg Lie algebras to homotopy $\Etwo$ algebras.  The wheel graphs in the first Taylor coefficient sum to $j^{1/2}$, which gives Duflo on invariants.
+\end{proof}
+
+\section{The boundary action}
+The brace operad acts on the pair
+\[
+ \left(C^\bullet_{\HH}(A,A),A\right)
+\]
+for every associative algebra $A$.  The closed color is the derived centre and the open color is the algebra itself.
+
+\begin{corollary}[All-arity open--closed structure]
+Fix a stable formality morphism and a compatible Swiss-cheese refinement.  Transport through $\Phi_d$ gives the pair
+\[
+ \left(
+ C^*_{\CE}(T^*[-1]\h_{\le d})\llbracket\hbarq\rrbracket,
+ U_\hbar(\h_{\le d})
+ \right)
+\]
+a homotopy Swiss-cheese action associated with that refinement.  Its binary closed bracket is the Poisson bracket, its open product is the enveloping product, and its first mixed operation is the quantized Hamiltonian action.
+\end{corollary}
+\begin{proof}
+The brace operad acts on Hochschild cochains together with the algebra on which they act.  The chosen homotopy-$\Etwo$ formality map transports the closed colour and every mixed brace to the Chevalley--Poisson model.  The binary and first mixed operations are its first Taylor components.
+\end{proof}
+
+\chapter{The formal inverse limit}
+\section{Weight completion}
+Let $F^{>d}\h$ be the Hamiltonians of polynomial degree greater than $d$.  Then
+\[
+ \h=\varprojlim_d\h_{\le d}.
+\]
+Define
+\[
+ \widehat U_\hbar(\h)=\varprojlim_d U_\hbar(\h_{\le d})
+\]
+and complete every cochain complex in polynomial weight.
+
+\begin{theorem}[Continuous formal-Darboux equivalence]
+A stable formality morphism can be chosen compatibly with the quotient maps $\h_{\le d+1}\to\h_{\le d}$.  It induces a continuous homotopy-$\Etwo$ quasi-isomorphism
+\[
+ \Phi_\infty:
+ C^*_{\CE,\mathrm{cont}}\bigl(T^*[-1]\h\bigr)\llbracket\hbarq\rrbracket
+ \xrightarrow{\sim}
+ C^\bullet_{\HH,\mathrm{cont}}
+ \left(\widehat U_\hbar(\h),\widehat U_\hbar(\h)\right).
+\]
+A compatible Swiss-cheese refinement gives the full formal mixed holomorphic--topological open--closed structure of the pointed Hamiltonian BF sector.  Its cohomological Gerstenhaber structure is independent of the chosen chain-level refinement.
+\end{theorem}
+\begin{proof}
+The Taylor coefficients of a stable formality morphism are universal finite sums of graphs.  In any fixed polynomial weight, finitely many jets and graphs contribute.  The maps therefore commute with the jet projections.  The finite complexes form Mittag--Leffler towers in each weight, so inverse limit preserves the finite-level quasi-isomorphisms.  Brace operations are defined by finite insertion in every weight and pass to the same limit.
+\end{proof}
+
+\begin{principle}[Universal brane principle]
+The boundary algebra $\widehat U_\hbar(\h)$ is the universal formal Hamiltonian brane.  Finite matrix branes are representation-theoretic images of this algebra.  The bulk is its complete derived centre.
+\end{principle}
+
+
+\part{The finite-jet laboratory}
+
+\chapter{The first three Hamiltonian jets}
+\section{Quadratic Hamiltonians}
+Set
+\[
+ e=\frac12z_1^2,
+ \qquad
+ f=-\frac12z_2^2,
+ \qquad
+ h=-z_1z_2.
+\]
+A direct differentiation gives
+\[
+ \{h,e\}=2e,
+ \qquad
+ \{h,f\}=-2f,
+ \qquad
+ \{e,f\}=h.
+\]
+Thus $\h_{\le2}=R_2$ is $\mathfrak{sl}_2$ with its standard Chevalley basis.  The finite cotangent theory for $d=2$ is the linear BV theory of $T^*[-1]\mathfrak{sl}_2$ and its boundary algebra is $U_\hbar(\mathfrak{sl}_2)$.
+
+\section{Cubic Hamiltonians}
+Let
+\[
+ v_j=z_1^{3-j}z_2^j,
+ \qquad 0\le j\le3.
+\]
+Then
+\[
+ \{h,v_j\}=(3-2j)v_j,
+ \qquad
+ \{e,v_j\}=jv_{j-1},
+ \qquad
+ \{f,v_j\}=(3-j)v_{j+1},
+\]
+with the boundary terms understood as zero.  Hence $R_3$ is the irreducible highest-weight-three module.
+
+\begin{proposition}[The cubic jet algebra]
+The degree-three jet algebra is the semidirect product
+\[
+ \h_{\le3}\cong\mathfrak{sl}_2\ltimes\Sym^3(\C^2),
+\]
+where the second summand is abelian.
+\end{proposition}
+\begin{proof}
+The bracket of two cubic polynomials has degree four and vanishes in the degree-three quotient.  The bracket with a quadratic polynomial is the displayed $\mathfrak{sl}_2$ action.
+\end{proof}
+
+\section{The first nonlinear layer}
+Write $w_k=z_1^{4-k}z_2^k$, $0\le k\le4$.  In $\h_{\le4}$ the cubic modes satisfy
+\begin{equation}\label{eq:vol2-cubic-quartic}
+ \{v_i,v_j\}=3(j-i)w_{i+j-1},
+\end{equation}
+whenever the index lies between $0$ and $4$; the coefficient makes every remaining case vanish.
+
+\begin{calculation}[Two brackets]
+\[
+ \{z_1^3,z_2^3\}=9z_1^2z_2^2=9w_2,
+ \qquad
+ \{z_1^2z_2,z_1z_2^2\}=3z_1^2z_2^2=3w_2.
+\]
+The two independent cubic pairs reach the same quartic channel with amplitudes in the ratio $3:1$.
+\end{calculation}
+\begin{proof}
+Differentiate each monomial in the two symplectic coordinates and substitute in the Poisson formula.  The first pair gives $3z_1^2\cdot3z_2^2$.  The second gives $2z_1z_2\cdot2z_1z_2-z_1^2\cdot z_2^2=3z_1^2z_2^2$.
+\end{proof}
+
+\begin{theorem}[The quartic jet presentation]
+The Lie algebra $\h_{\le4}$ is generated by $e,f,h,v_0,v_1,v_2,v_3$.  Its relations are the $\mathfrak{sl}_2$ relations, the irreducible action on the $v_j$, formula \eqref{eq:vol2-cubic-quartic}, and the induced $\mathfrak{sl}_2$ action on $R_4$.  The quartic subspace is abelian in the quotient.
+\end{theorem}
+\begin{proof}
+Quadratic and cubic generators produce every quartic monomial through \eqref{eq:vol2-cubic-quartic}.  Brackets involving a quartic and a cubic have degree five, and brackets of two quartics have degree six, so both vanish after projection.  Jacobi follows from the polynomial Poisson bracket before projection.
+\end{proof}
+
+\chapter{Moyal quantization in coordinates}
+\section{The bidifferential formula}
+For polynomials on $\C^2$, the Moyal product is
+\begin{equation}\label{eq:vol2-moyal}
+ f\star g
+ =\sum_{n\ge0}\frac1{n!}\left(\frac{\hbarq}{2}\right)^n
+ \sum_{r=0}^n(-1)^r\binom nr
+ (\partial_1^{n-r}\partial_2^rf)
+ (\partial_1^r\partial_2^{n-r}g).
+\end{equation}
+Every polynomial pair gives a finite sum.
+
+\begin{theorem}[Quadratic exactness]
+For polynomials $f,g$ of degree at most two,
+\[
+ [f,g]_\star=\hbarq\{f,g\}.
+\]
+Thus the quadratic Moyal algebra is the Rees enveloping algebra of $\mathfrak{sl}_2$ together with the Heisenberg translations when linear Hamiltonians are retained.
+\end{theorem}
+\begin{proof}
+The commutator retains the odd powers of the Poisson bidifferential.  Derivatives of order three vanish on quadratics, so the first-order term is the entire commutator.
+\end{proof}
+
+\begin{calculation}[Cubic correction]
+For $f=z_1^3$ and $g=z_2^3$,
+\[
+ f\star g-g\star f
+ =9\hbarq z_1^2z_2^2+\frac32\hbarq^3.
+\]
+The first term quantizes the quartic Hamiltonian channel.  The constant is the first wheel-free ordering correction visible beyond the quadratic Lie algebra.
+\end{calculation}
+\begin{proof}
+In \eqref{eq:vol2-moyal}, the odd orders are $n=1$ and $n=3$.  The first contributes $9\hbarq z_1^2z_2^2$.  The third contributes $2(\hbarq/2)^3(3!)=3\hbarq^3/2$.
+\end{proof}
+
+\section{Weyl generators}
+Let $q$ act by multiplication and let $p=\hbarq\partial_q$.  Then
+\[
+ [p,q]=\hbarq.
+\]
+Weyl ordering identifies polynomial symbols with differential operators.  The Moyal formula is the pullback of operator composition under this identification.
+
+\chapter{Chevalley coordinates and the Poisson differential}
+Choose a basis $e_a$ of $\h_{\le d}$ with structure constants $[e_a,e_b]=f^c{}_{ab}e_c$.  Let $c^a$ be the odd Chevalley coordinate and let $x_a$ be the even coordinate on $\h_{\le d}^*$.  Then
+\begin{equation}\label{eq:vol2-ce-coordinate}
+ d_{\CE}c^c=-\frac12f^c{}_{ab}c^ac^b,
+ \qquad
+ d_{\CE}x_a=f^c{}_{ab}c^b x_c.
+\end{equation}
+The first equation is the Lie bracket.  The second is the coadjoint action.
+
+\begin{proposition}[Hamiltonian interpretation]
+For a polynomial $F(x)$,
+\[
+ d_{\CE}F
+ =c^a\{x_a,F\}_{\mathrm{lin}}.
+\]
+Consequently $d_{\CE}^2=0$ is the Jacobi identity for the linear Poisson tensor.
+\end{proposition}
+\begin{proof}
+The linear Poisson bracket is $\{x_a,x_b\}=f^c{}_{ab}x_c$.  The Leibniz rule gives \eqref{eq:vol2-ce-coordinate} on every polynomial.  The square is one half of the Schouten bracket of the Poisson tensor with itself.
+\end{proof}
+
+\section{The \texorpdfstring{$\mathfrak{sl}_2$}{sl2} invariant}
+For the quadratic jet, identify the coordinate functions with $e,f,h$.  The invariant
+\[
+ q=2ef+\frac12h^2
+\]
+is $d_{\CE}$-closed.  Its Duflo image is $\Omega+1/2$.  The local open--closed map therefore sends the classical radius of the coadjoint orbit to the quantum Casimir with its exact zero-point energy.
+
+\chapter{Residue duality and the formal current algebra}
+\section{The continuous dual}
+Let
+\[
+ \rho_{ab}=z_1^{-a-1}z_2^{-b-1}\,\dd z_1\dd z_2,
+ \qquad a,b\ge0.
+\]
+The Grothendieck residue pairing is
+\[
+ \operatorname{Res}_0\left(z_1^iz_2^j\rho_{ab}\right)
+ =\delta_{ia}\delta_{jb}.
+\]
+The continuous dual of $\C\llbracket z_1,z_2\rrbracket$ is the direct sum of the $\rho_{ab}$.  The continuous dual of the pointed algebra $\h=\mathfrak m^2$ is the span of the modes with $a+b\ge2$.  The two modes of total degree one pair with the translation sector of $\h^{\mathrm{aff}}$.
+
+\begin{proposition}[Coadjoint current formula]
+For $f=z_1^iz_2^j$ and $\rho_{ab}$,
+\[
+ \ad_f^*(\rho_{ab})(g)
+ =-\rho_{ab}(\{f,g\}).
+\]
+In the residue basis this is a finite linear combination of modes of bidegree
+\[
+ (a-i+1,b-j+1).
+\]
+\end{proposition}
+\begin{proof}
+The definition is the coadjoint action.  The Poisson bracket lowers the total degree of $fg$ by two, so residue conservation fixes the displayed bidegree.  The Poisson formula contains two derivative terms.
+\end{proof}
+
+The shifted cotangent current algebra
+\[
+ \g=\h\ltimes\h^\vee_{\mathrm{cont}}[-1]
+\]
+is therefore a complete topological Lie algebra with a continuous invariant pairing.  Its finite jet quotients are precisely the $\g_d$ used above.
+
+\chapter{All-arity open--closed operations}
+\section{Hochschild braces}
+For Hochschild cochains $F\in C^p(A,A)$ and $G_i\in C^{q_i}(A,A)$, the brace
+\[
+ F\{G_1,\ldots,G_r\}
+\]
+is the signed sum over ordered insertions of the $G_i$ into the inputs of $F$.  The brace identities state that a nested insertion is the sum over all ways of distributing the inner insertions among the outer slots.
+
+\begin{theorem}[Brace realization of the universal centre]
+For $A=U_\hbar(\h_{\le d})$, choose the Tamarkin--Kontsevich homotopy-Gerstenhaber refinement of $\Phi_d$.  It transports the homotopy Schouten operations of polyvector fields to the Hochschild brace algebra.  The binary operation is the Gerstenhaber bracket, and the mixed operation with one boundary word is the quantized Hamiltonian action.
+\end{theorem}
+\begin{proof}
+Kontsevich formality is an algebra over a cofibrant resolution of the Gerstenhaber operad.  Tamarkin's formality identifies that resolution with the brace operad.  Twisting by the linear Poisson Maurer--Cartan element produces the differential and preserves every brace operation.
+\end{proof}
+
+\section{The first mixed identities}
+Let $F$ be a closed cochain and $a,b$ boundary operators.  The first Swiss-cheese identities are
+\[
+ F\cdot(ab)=(F_{(1)}\cdot a)(F_{(2)}\cdot b),
+\]
+for the coproduct encoded by the brace diagonal, and
+\[
+ [F,G]\cdot a
+ =F\cdot(G\cdot a)-(-1)^{|F||G|}G\cdot(F\cdot a).
+\]
+For linear Hamiltonians these are the Leibniz rule and the commutator identity of derivations.  Higher braces provide their coherent homotopies.
+
+\begin{corollary}[All-arity formal-Darboux theorem]
+The inverse limit $\Phi_\infty$ equips the pair
+\[
+ \left(
+ C^*_{\CE}(T^*[-1]\h),
+ \widehat U_\hbar(\h)
+ \right)
+\]
+with a complete homotopy Swiss-cheese algebra.  Its closed color is the full derived centre of the universal boundary algebra.
+\end{corollary}
+\begin{proof}
+Every fixed polynomial weight receives finitely many brace insertions, so the finite-level Swiss-cheese operations commute with the jet projections.  Their separated inverse limit gives the complete action.  Morita theory identifies Hochschild cochains of the boundary algebra with its derived centre.
+\end{proof}
+
+\chapter{Finite Chan--Paton ranks}
+\section{Rank one}
+For $N=1$, the commuting equation is automatic.  The boundary coordinate algebra is $\C[x,y]$, and
+\[
+ J_1(f)=f(x,y).
+\]
+The necklace bracket reduces to the ordinary Poisson bracket.  Restriction to $f\in\mathfrak m^2$ gives the defining pointed-Hamiltonian representation.  The two linear Hamiltonians act by translations and recover the affine center-of-mass extension.
+
+\section{Rank two and Cayley--Hamilton reduction}
+For a $2\times2$ matrix $X$,
+\[
+ X^2-(\Tr X)X+(\det X)I=0.
+\]
+Hence every trace containing two consecutive powers of $X$ reduces to traces with $X$-degree at most one after adjoining $\Tr X$ and $\det X$.  The same statement holds for $Y$.  On the commuting locus, simultaneous diagonalization identifies the invariant algebra with the symmetric polynomials in two ordered pairs.
+
+\begin{proposition}[First finite-rank trace relation]
+For commuting $2\times2$ matrices,
+\[
+ p_{20}=p_{10}^2-2\det X,
+ \qquad
+ p_{02}=p_{01}^2-2\det Y,
+\]
+and
+\[
+ p_{11}^2-p_{20}p_{02}
+ =-\bigl(x_1y_2-x_2y_1\bigr)^2.
+\]
+The stable generators remain independent until a relation forced by the rank is reached.
+\end{proposition}
+\begin{proof}
+Write the joint eigenvalues as $(x_1,y_1)$ and $(x_2,y_2)$ and expand both sides.
+\end{proof}
+
+\section{Stable passage}
+The transition from rank $N$ to rank $N+1$ adds a zero eigenvalue.  Each fixed weighted degree stabilizes once $N$ exceeds that degree.  The inverse limit is therefore the completed multisymmetric algebra.  The stable trace is an exact quotient of the universal centre on the polynomial trace sector.
+
+
+\part{Global holomorphic symplectic descent}
+
+\chapter{Fedosov descent}
+\section{The Weyl algebroid}
+Let $(S,\omega)$ be a holomorphic symplectic surface.  The bundle of formal Weyl algebras has fibre the completed Weyl algebra of a formal symplectic plane.  A holomorphic symplectic connection and a Fedosov one-form define a flat connection
+\[
+ D_F=\nabla+\frac1\hbarq[\gamma,-]
+\]
+whose flat sections form a deformation-quantization algebroid $\mathcal W_{S,\hbar}$.
+
+\begin{theorem}[Globalized formality on a holomorphic symplectic surface]
+Fix a stable formality morphism and a compatible homotopy-$\Etwo$ refinement.  There is a sheafwise homotopy-$\Etwo$ quasi-isomorphism
+\[
+ \Phi_S:
+ \left(\PV_S\llbracket\hbarq\rrbracket,[\hbarq\pi,-]\right)
+ \xrightarrow{\sim}
+ C^\bullet_{\HH}(\mathcal W_{S,\hbar},\mathcal W_{S,\hbar}),
+\]
+where $\pi=\omega^{-1}$.  A change of holomorphic symplectic connection or Fedosov one-form gives a gauge-equivalent resolution and a homotopic quasi-isomorphism.  Holomorphic symplectomorphisms act equivariantly on the resulting homotopy class.
+\end{theorem}
+\begin{proof}
+Fedosov resolutions replace both sheaves by acyclic sheaves of formal fibrewise polyvectors and polydifferential operators.  The fixed covariant formality morphism acts fibrewise and intertwines the Fedosov differentials.  A change of connection or Fedosov one-form is a gauge transformation in the pronilpotent resolution and therefore gives a homotopy.
+\end{proof}
+
+\begin{corollary}[Global mixed-HT centre]
+The deformation-quantization category $\Perf(\mathcal W_{S,\hbar})$ has Morita centre
+\[
+ Z_{\mathrm{Mor}}\bigl(\Perf(\mathcal W_{S,\hbar})\bigr)
+ \simeq
+ \R\Gamma\!
+ \left(S,\PV_S\llbracket\hbarq\rrbracket,[\hbarq\pi,-]\right).
+\]
+For a K3 surface this gives a global open--closed equivalence for the Hamiltonian BF sector.
+\end{corollary}
+\begin{proof}
+The Morita centre of perfect modules over an algebroid is the derived global section complex of its Hochschild cochains.  Apply the globalized formality equivalence and then derived global sections.  A K3 surface is holomorphic symplectic, so the stated Hamiltonian sector is the resulting Poisson-BV complex.
+\end{proof}
+
+\chapter{Factorization and descent}
+\section{The algebraic mixed-HT realization}
+The sheaf
+\[
+ \mathcal P_S=
+ \left(\PV_S\llbracket\hbarq\rrbracket,[\hbarq\pi,-]\right)
+\]
+is a sheaf of complete homotopy-$\Etwo$ algebras.  Dunn additivity gives its locally constant factorization realization in two oriented topological directions.  The holomorphic sheaf variable retains the dependence on $S$.
+
+\begin{theorem}[Algebraic factorization realization]
+The homotopy-$\Etwo$ sheaf $\mathcal P_S$ determines a complete mixed holomorphic--topological factorization algebra
+\[
+ \Acal^{\mathrm{alg}}_{S,\mathrm{bulk}}
+\quad\text{on}\quad
+ \R^2_{\mathrm{top}}\times S.
+\]
+Its universal boundary category is $\Perf(\mathcal W_{S,\hbar})$, and the bulk--boundary morphism is a local equivalence
+\[
+ \Acal^{\mathrm{alg}}_{S,\mathrm{bulk}}
+ \xrightarrow{\sim}
+ Z^{\mathrm{der}}_{\mathrm{Mor}}
+ \bigl(\Perf(\mathcal W_{S,\hbar})\bigr).
+\]
+On every formal Darboux chart the map is the completed Kontsevich--Duflo equivalence.
+\end{theorem}
+\begin{proof}
+The factorization envelope of a complete homotopy-$\Etwo$ algebra is locally constant on oriented two-disks.  Sheafwise application to $\mathcal P_S$ gives the first assertion.  The Fedosov algebroid is the boundary quantization of the same linear Poisson data.  Globalized formality identifies its Hochschild cochains with $\mathcal P_S$, and Morita invariance identifies Hochschild cochains with the centre of the perfect-module category.  The construction is local on $S$ and therefore respects factorization descent.
+\end{proof}
+
+\section{BV realization}
+The cyclic Lie sheaf of formal Hamiltonians has the shifted-cotangent action
+\[
+ S_{\mathrm{BF}}(A,B)
+ =\int_{\R^2\times S}
+ \left\langle B,(\dd+\dbar)A+\frac12[A,A]\right\rangle.
+\]
+Its classical observables map to $\Acal^{\mathrm{alg}}_{S,\mathrm{bulk}}$ by the Chevalley--Poisson identification.  A compatible gauge fixing, extension of graph weights to compactified configurations, and solution of the quantum master equation produce a perturbative factorization realization of the same algebraic bulk--boundary map.  The finite jet zero modes carry the exact quantum measure constructed above.
+
+\part{Matrix branes and trace geometry}
+
+\chapter{The derived commuting stack}
+Let $X,Y\in\mathfrak{gl}_N$ and let $\psi\in\mathfrak{gl}_N[1]$.  The Koszul differential
+\[
+ QX=QY=0,
+ \qquad
+ Q\psi=[X,Y]
+\]
+resolves the commuting equation.  The simultaneous conjugation action gives the boundary cdga
+\[
+ A_N=C^*_{\CE}\!\left(
+ \mathfrak{gl}_N,
+ \Sym(\mathfrak{gl}_N\oplus\mathfrak{gl}_N\oplus\mathfrak{gl}_N[1])
+ \right).
+\]
+
+\begin{proposition}[Representation of the universal brane]
+Substitution of matrices defines a Lie morphism
+\[
+ \rho_N:\h\longrightarrow\Der(A_N),
+ \qquad
+ f\longmapsto\delta_f,
+\]
+which integrates to an algebra morphism
+\[
+ \widehat U_\hbar(\h)\longrightarrow\End(A_N)\llbracket\hbarq\rrbracket,
+ \qquad f\longmapsto\hbarq\,\delta_f.
+\]
+Thus the $N$-brane stack is a representation of the universal boundary algebra.
+\end{proposition}
+\begin{proof}
+For a polynomial Hamiltonian $f$, cyclic differentiation gives the matrix vector field
+\[
+ \delta_f(X)=-\partial_Y^{\mathrm{cyc}}f(X,Y),
+ \qquad
+ \delta_f(Y)=\partial_X^{\mathrm{cyc}}f(X,Y).
+\]
+The cyclic Euler identity implies $\delta_f([X,Y])=0$.  Hence $\delta_f$ commutes with the Koszul differential $Q\psi=[X,Y]$.  The same formulas are equivariant for simultaneous conjugation, so $\delta_f$ descends to a derivation of the Chevalley--Eilenberg quotient $A_N$.  The trace-moment-map calculation gives
+\[
+ [\delta_f,\delta_g]=\delta_{\{f,g\}},
+\]
+first for polynomial Hamiltonians and then continuously for the formal completion.  This proves that $\rho_N$ is a continuous Lie morphism.  The assignment $f\mapsto\hbarq\delta_f$ satisfies
+\[
+ [\hbarq\delta_f,\hbarq\delta_g]
+ =\hbarq^2\delta_{\{f,g\}}
+ =\hbarq\,(\hbarq\delta_{\{f,g\}}),
+\]
+which is the Rees relation.  The universal property of the completed Rees enveloping algebra gives the displayed morphism.  It is the universal boundary action evaluated in the $N$-dimensional Chan--Paton representation.
+\end{proof}
+
+\chapter{Necklace Hamiltonians}
+Let
+\[
+ F=\C\angles{x,y},
+ \qquad
+ F_{\mathrm{cyc}}=F/[F,F].
+\]
+For a cyclic word $f$, define cyclic derivatives by cutting the word at every occurrence of the selected letter.  Put
+\[
+ \delta_f(x)=-\partial_y^{\mathrm{cyc}}f,
+ \qquad
+ \delta_f(y)=\partial_x^{\mathrm{cyc}}f.
+\]
+
+\begin{theorem}[Necklace Lie algebra]
+The bracket
+\[
+ \{f,g\}_{\mathrm{neck}}
+ =\left[
+ \partial_x^{\mathrm{cyc}}f\,
+ \partial_y^{\mathrm{cyc}}g-
+ \partial_y^{\mathrm{cyc}}f\,
+ \partial_x^{\mathrm{cyc}}g
+ \right]_{\mathrm{cyc}}
+\]
+makes $F_{\mathrm{cyc}}/\C$ a Lie algebra.  The assignment $f\mapsto\delta_f$ is a Lie morphism.  It preserves the moment map:
+\[
+ \delta_f([x,y])=0.
+\]
+\end{theorem}
+\begin{proof}
+The cyclic Euler identity is
+\[
+ [x,\partial_x^{\mathrm{cyc}}f]+[y,\partial_y^{\mathrm{cyc}}f]=0.
+\]
+It gives the moment-map statement.  The canonical double Poisson bracket on the free algebra descends to the displayed necklace bracket; its Jacobi identity gives the first assertion.  Evaluation on generators gives $[\delta_f,\delta_g]=\delta_{\{f,g\}_{\mathrm{neck}}}$.
+\end{proof}
+
+\begin{theorem}[Trace moment map]
+For
+\[
+ J_N(f)=\Tr f(X,Y),
+\]
+one has
+\[
+ \{J_N(f),J_N(g)\}_{\mathcal M_N}
+ =J_N\!\left(\{f,g\}_{\mathrm{neck}}\right),
+\]
+where $\mathcal M_N=\mathfrak{gl}_N^2$ carries $\Tr(\dd X\wedge\dd Y)$.
+\end{theorem}
+\begin{proof}
+The differential of a trace is the matrix evaluation of the cyclic derivative.  Contracting the two differentials with the inverse trace symplectic form gives the necklace formula.
+\end{proof}
+
+\chapter{Stable traces}
+On the semisimple commuting locus write the joint eigenvalues as $(x_i,y_i)$.  Define
+\[
+ p_{ab}^{(N)}=\sum_{i=1}^{N}x_i^ay_i^b.
+\]
+
+\begin{theorem}[Stable multisymmetric Poisson algebra]
+The inverse stable trace algebra is the completed polynomial algebra
+\[
+ \Pcal_\infty=
+ \C\llbracket p_{ab}\mid a,b\ge0,\ a+b>0\rrbracket.
+\]
+Its Poisson bracket is
+\[
+ \{p_{ab},p_{cd}\}
+ =(ad-bc)p_{a+c-1,b+d-1}.
+\]
+\end{theorem}
+\begin{proof}
+The stable fundamental theorem for multisymmetric functions gives polynomial generators $p_{ab}$.  The bracket follows from $\{x_i,y_j\}=\delta_{ij}$ and the Leibniz rule.
+\end{proof}
+
+\begin{remark}
+The stable trace algebra is a quotient of the universal closed algebra after representation and scalarization.  The universal centre retains Hochschild classes, stabilizer directions, and higher central operations that vanish under the trace.
+\end{remark}
+
+\chapter{The two-brane cone}
+Separate center-of-mass and relative coordinates.  Put
+\[
+ u=x_1-x_2,
+ \qquad
+ v=y_1-y_2,
+ \qquad
+ E=\frac12u^2,
+ \quad
+ F=-\frac12v^2,
+ \quad
+ H=-uv.
+\]
+Then
+\[
+ H^2+4EF=0.
+\]
+
+\begin{proposition}[The $A_1$ Kirillov--Kostant cone]
+With $\{u,v\}=2$,
+\[
+ \{H,E\}=4E,
+ \qquad
+ \{H,F\}=-4F,
+ \qquad
+ \{E,F\}=2H.
+\]
+After the evident rescaling this is the $\mathfrak{sl}_2$ Lie--Poisson bracket on the nilpotent cone.
+\end{proposition}
+\begin{proof}
+The three identities follow by direct differentiation.  The quadratic equation is the determinant-zero equation for the traceless matrix
+\[
+ \begin{pmatrix}H&2E\\2F&-H\end{pmatrix}.
+\]
+\end{proof}
+
+\part{Wheel corrections and exact quantum structure}
+
+\chapter{The Duflo wheel}
+For $\mathfrak{sl}_2$ take generators
+\[
+ [h,e]=2e,
+ \qquad
+ [h,f]=-2f,
+ \qquad
+ [e,f]=h.
+\]
+The invariant polynomial and the quadratic Casimir are
+\[
+ q=2ef+\frac12h^2,
+ \qquad
+ \Omega=ef+fe+\frac12h^2.
+\]
+
+\begin{calculation}[The zero-point shift]
+The Duflo map gives
+\[
+ \operatorname{Duf}(q)=\Omega+\frac12.
+\]
+On the irreducible highest-weight-$n$ module,
+\[
+ \left(\Omega+\frac12\right)\big|_{V_n}
+ =\frac{(n+1)^2}{2}\id.
+\]
+\end{calculation}
+\begin{proof}
+For $\mathfrak{sl}_2$, the second wheel in $j^{1/2}(\partial)$ is the constant shift by $\rho^2=1/2$ in the stated normalization.  The Casimir eigenvalue is $n(n+2)/2$.
+\end{proof}
+
+The shift is the algebraic one-loop term in the open--closed map.  Higher wheels assemble into $j^{1/2}$.
+
+\chapter{The full local theorem}
+Let
+\[
+ \Acal_{\mathrm{bulk}}^{\mathrm{alg}}
+ =\operatorname{Fact}_{\Etwo}
+ \left(
+ C^*_{\CE,\mathrm{cont}}
+ \bigl(T^*[-1]\h\bigr)\llbracket\hbarq\rrbracket
+ \right)
+\]
+be the factorization envelope in the two topological directions, with the formal holomorphic coefficient retained at the Darboux point.
+
+\begin{theorem}[Universal mixed holomorphic--topological Deligne theorem]
+Let
+\[
+ \Ccal_{\partial}=\Perf\bigl(\widehat U_\hbar(\h)\bigr).
+\]
+The formality morphism induces a quasi-isomorphism of complete homotopy-$\Etwo$ factorization algebras
+\[
+ \Acal_{\mathrm{bulk}}^{\mathrm{alg}}
+ \xrightarrow{\sim}
+ Z^{\mathrm{der}}_{\mathrm{Mor}}(\Ccal_{\partial}).
+\]
+At the fixed formal Darboux insertion point this map is $\Phi_\infty$.  Its restriction to every finite matrix brane is the Rees-scaled necklace representation followed by the Hochschild action.
+\end{theorem}
+\begin{proof}
+The continuous formality theorem gives the complete homotopy-$\Etwo$ equivalence at the Darboux point.  Factorization envelopes preserve equivalences between complete $\Etwo$ algebras.  Morita invariance identifies the centre of the perfect-module category with continuous Hochschild cochains.  The matrix representation $f\mapsto\hbarq\delta_f$ is a module map, so restriction is functorial.
+\end{proof}
+
+\begin{corollary}[Global K3 Hamiltonian sector]
+Let $S$ be a K3 surface with holomorphic symplectic form.  The Fedosov category $\Perf(\mathcal W_{S,\hbar})$ has derived centre equivalent to the global algebraic Hamiltonian bulk $\Acal^{\mathrm{alg}}_{S,\mathrm{bulk}}$.  The equivalence carries the Duflo wheel, cyclic chains, and the selected homotopy Swiss-cheese action.
+\end{corollary}
+\begin{proof}
+Apply globalized formality and the algebraic factorization realization.  Fedosov descent transports the fixed graph operations, including wheel and brace terms, while Morita invariance transports cyclic chains and the centre action.
+\end{proof}
+
+\chapter{The harmonic square}
+The four complexes
+\[
+ C^*_{\CE}(T^*[-1]\h),
+ \qquad
+ C^*_{\HH}(\widehat U\h,\widehat U\h),
+ \qquad
+ \Ocal(\Rep_\infty B)^{GL_\infty},
+ \qquad
+ H_*^{\CE}(\mathfrak{gl}_\infty B)
+\]
+are connected by explicit maps.  The first two are equivalent by formality.  The stable trace map reaches the third.  Loday--Quillen--Tsygan identifies the primitives of the fourth with shifted cyclic homology.  Their common input is the cyclic Hamiltonian class, and each construction retains a different amount of structure.
+
+\begin{theorem}[Four realizations of cyclic primitives]
+For a unital algebra $B$ and a Hamiltonian Lie map $\h\to HC_0(B)$, the following maps are functorial:
+\[
+ C^*_{\CE}(T^*[-1]\h)
+ \xrightarrow{\Phi_\infty}
+ C^*_{\HH}(\widehat U\h,\widehat U\h),
+\]
+\[
+ \h\longrightarrow HC_0(B)
+ \longrightarrow\Ocal(\Rep_NB)^{GL_N},
+\]
+\[
+ \widehat\Sym HC_0(B)
+ \longrightarrow\Ocal(\Rep_\infty B)^{GL_\infty},
+\]
+\[
+ \Sym\bigl(HC_{*-1}(B)\bigr)
+ \xrightarrow{\sim}
+ H_*^{\CE}(\mathfrak{gl}_\infty B).
+\]
+The first map preserves the homotopy Gerstenhaber structure, the second preserves the necklace Poisson bracket, the third preserves multiplication, and the fourth preserves the Hopf structure.
+\end{theorem}
+\begin{proof}
+The first arrow is the inverse limit of the finite-jet Kontsevich--Duflo formality maps.  The graph formulas preserve braces and the Schouten bracket up to their canonical coherent homotopies, and compatibility with jet quotients passes this structure to the complete limit.
+
+A cyclic class $[b]\in HC_0(B)=B/[B,B]$ defines the invariant function
+\[
+ \operatorname{Tr}_N([b])(\rho)=\operatorname{Tr}(\rho(b))
+\]
+on the representation scheme.  Cyclicity makes this function independent of the representative of $[b]$.  The double-Poisson or Hamiltonian hypothesis on $\h\to HC_0(B)$ converts the necklace bracket into the Poisson bracket of trace functions, which proves the second assertion.
+
+Products of single traces define compatible multisymmetric functions as $N$ grows.  The universal property of the completed symmetric algebra therefore gives the third map.  Its multiplicativity is built into the passage from a cyclic primitive to its multi-trace exponential assembly.
+
+The stable Lie algebra $\mathfrak{gl}_\infty B$ has block-sum coproduct.  The Loday--Quillen--Tsygan theorem identifies its primitive homology with $HC_{*-1}(B)$ and identifies the full stable homology with the free graded-commutative Hopf algebra on those primitives.  This gives the fourth isomorphism and its Hopf compatibility.  Naturality of formality, trace evaluation, stabilization, and the Loday--Quillen--Tsygan map proves functoriality of the four constructions.
+\end{proof}
+
+\chapter{Synthesis}
+The finite jets supply exact BV theories.  Their boundary quantizations supply universal branes.  Linear Poisson formality identifies bulk and centre.  Universal graph formulas pass to the formal limit.  Fedosov descent globalizes the equivalence.  Matrix substitution produces finite Chan--Paton branes, necklace Hamiltonians, and stable traces.  The Duflo wheels measure the quantum difference between symmetric and enveloping coordinates.
+
+The complete chain is
+\[
+\begin{tikzcd}[column sep=large,row sep=large]
+ C^*_{\CE}(T^*[-1]\h)
+ \arrow[r,"\Phi_\infty","\sim"']
+ \arrow[d,"\text{representation}"'] &
+ C^*_{\HH}(\widehat U_\hbar\h,\widehat U_\hbar\h)
+ \arrow[d,"\text{module action}"]\\
+ \Ocal(\Rep_N)^{GL_N}
+ \arrow[r,"\text{central action}"'] &
+ C^*_{\HH}(A_N,A_N).
+\end{tikzcd}
+\]
+The upper arrow is the universal open--closed equivalence.  The lower row is its finite-brane image.  This order retains the centre before taking traces and retains the field theory before taking its character.
+
+\part{Technical appendices to the preceding book}
+\chapter{Signs in the shifted cotangent complex}
+Let $e_a$ have degree zero and let $e^a[-1]$ have degree $-1$.  The Chevalley generators dual to them have degrees $1$ and $0$.  Thus
+\[
+ C^*_{\CE}(T^*[-1]\flie)
+ =\Sym\bigl(\flie^\vee[-1]\oplus\flie\bigr).
+\]
+The degree-zero polynomial factor is $\Sym\flie=\Ocal(\flie^*)$.  The differential on a polynomial $p$ is
+\[
+ (d_{\CE}p)(x)=\ad_xp,
+\]
+which is the linear Poisson differential.
+
+\chapter{A direct Jacobi check for Hamiltonian jets}
+For monomials
+\[
+ f=z_1^az_2^b,
+ \qquad
+ g=z_1^cz_2^d,
+\]
+one has
+\[
+ \{f,g\}=(ad-bc)z_1^{a+c-1}z_2^{b+d-1}.
+\]
+Substitution of three monomials gives a scalar multiple of
+\[
+ \det((a,b),(c,d))\,\det((a+c-1,b+d-1),(e,f)) + \mathrm{cyclic}.
+\]
+Writing the three coefficients in terms of the $2\times2$ determinants of the exponent vectors shows pairwise cancellation.  The coordinate-free proof is $[\pi,\pi]_{\mathrm{Sch}}=0$ for $\pi=\partial_{z_1}\wedge\partial_{z_2}$.
+
+\chapter{Bibliographic note}
+The finite and global formality maps used above are the linear and covariant forms of Kontsevich formality and its Fedosov globalization \cite{KontsevichDQ,DolgushevCov,CalaqueDolgushevHalbout}.  The Hochschild model of enveloping algebras is the Cartan--Eilenberg comparison.  The all-arity centre action is the Deligne--Tamarkin brace action \cite{McClureSmith,KontsevichSoibelmanDeligne}.  The global deformation-quantization category is the holomorphic Weyl algebroid.  The matrix trace and necklace formulas are the noncommutative symplectic moment-map construction.

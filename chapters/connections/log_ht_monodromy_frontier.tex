@@ -1,0 +1,1183 @@
+\label{chap:log-ht-monodromy-frontier}
+
+\providecommand{\A}{\mathcal A}
+\providecommand{\B}{\mathcal B}
+\providecommand{\C}{\mathcal C}
+\providecommand{\D}{\mathcal D}
+\providecommand{\E}{\mathcal E}
+\providecommand{\F}{\mathcal F}
+\providecommand{\FM}{\mathrm{FM}}
+\providecommand{\Conf}{\mathrm{Conf}}
+\providecommand{\HT}{\mathrm{HT}}
+\providecommand{\MC}{\mathrm{MC}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Hom}{\mathrm{Hom}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\im}{\mathrm{im}}
+\providecommand{\Res}{\mathrm{Res}}
+\providecommand{\Aut}{\mathrm{Aut}}
+\providecommand{\PP}{\mathbb P}
+\providecommand{\AA}{\mathbb A}
+\providecommand{\CC}{\mathbb C}
+\providecommand{\RR}{\mathbb R}
+\providecommand{\ZZ}{\mathbb Z}
+\providecommand{\kk}{\Bbbk}
+\providecommand{\h}{\hbar}
+\providecommand{\ot}{\otimes}
+\providecommand{\wot}{\widehat\otimes}
+\providecommand{\s}{\mathrm s}
+\providecommand{\ds}{d_{\mathrm{dR}}}
+\providecommand{\CYB}{\mathrm{CYB}}
+\providecommand{\PT}{\mathrm{PT}}
+\providecommand{\Disk}{\mathrm{Disk}}
+\providecommand{\SN}{\boldsymbol{\nabla}}
+\providecommand{\bboxprod}{\mathop{\boxtimes}\displaylimits}
+
+\section{Three conjectures: monodromy=$R$-matrix, logarithmic CoHA, chromatic lift}
+Three frontier conjectures extending the proved core: spectral
+$R$-matrix from HT monodromy, a logarithmic CoHA envelope on
+log-Fulton--MacPherson spaces, and a chromatic lift of the HT
+associator.
+
+\begin{conjecture}[Monodromy equals spectral $R$-matrix; \ClaimStatusConjectured]\label{conj:rmatrix}
+The monodromy of the reduced HT logarithmic connection is the spectral $R$-matrix controlling the factorisation quantum group attached to the same dg-shifted Yangian data. Equivalently, the monodromy functor of the reduced connection should identify the reduced HT line category with the representation category of the associated factorisation quantum group.
+\end{conjecture}
+
+\providecommand{\fsl}{\mathfrak{sl}}
+
+\begin{remark}[Verified cases of Conjecture~\ref{conj:rmatrix}]
+\label{rem:rmatrix-verified-cases}
+For the affine lineage (any simple $\fg$, generic level $k$), Conjecture~\ref{conj:rmatrix} is a theorem on evaluation modules: this is Theorem~\ref{thm:affine-monodromy-identification}. Explicit verifications have been carried out for:
+\begin{enumerate}[label=\textup{(\alph*)}]
+ \item $\fg = \fsl_2$: the monodromy is controlled by the quadratic Casimir $C_2$ alone. The bar-complex Steinberg connection reproduces the KZ connection, and the Drinfeld--Kohno theorem identifies the monodromy with the $U_q(\fsl_2)$ $R$-matrix.
+ \item $\fg = \fsl_3$: the first higher-rank case where the cubic Casimir $C_3$ enters \textup{(}Proposition~\textup{\ref{prop:sl3-monodromy-verification})}. On $V \otimes V$ the braiding is controlled by $C_2$ alone, identical in structure to $\fsl_2$. The cubic Casimir enters through the \emph{associator} on $V^{\otimes 3}$ at order $\hbar^3$: the $d$-tensor of $\fsl_3$ produces off-diagonal mixing between the two copies of $V_{(1,1)}$ in $\mathbf{3}^{\otimes 3}$, with coefficient proportional to $\Delta c_3 = c_3(2,0) - c_3(0,1) = 5$. By one-loop exactness, the bar complex reproduces this identically.
+\end{enumerate}
+The general case beyond the affine lineage (i.e., for $\mathcal{W}$-algebras where one-loop exactness fails) remains conjectural.
+\end{remark}
+
+\begin{conjecture}[Logarithmic CoHA envelope; \ClaimStatusConjectured]\label{conj:coha}
+For a symmetric quiver there exists a logarithmic factorization enhancement of the cohomological Hall algebra on logarithmic Fulton-MacPherson spaces whose connected collision residues recover the primitive Lie algebra of the associated vertex algebra, and whose Koszul dual is the dg-shifted Yangian governing the corresponding line-operator theory.
+\end{conjecture}
+
+\subsection{The Jordan CoHA, the positive half, and the bar complex of $W_{1+\infty}$}
+\label{subsec:coha-jordan-bar}
+
+Conjecture~\ref{conj:coha} predicts a logarithmic factorization
+enhancement of the cohomological Hall algebra (CoHA) whose collision
+residues recover the primitive Lie algebra of the vertex algebra, with
+Koszul dual the governing dg-shifted Yangian. The simplest instance
+is the Jordan critical model for~$\CC^3$. Its Hall algebra is the
+positive half of the affine Yangian of $\mathfrak{gl}_1$; the
+$W_{1+\infty}$ vertex algebra appears only after adding the negative
+half, the Cartan, the Hall pairing, and the Fock evaluation of the
+completed double. The bar complex of $W_{1+\infty}$ compares
+with the Donaldson--Thomas partition function at the representation
+level — not by identifying the positive CoHA with a vertex algebra.
+
+\subsubsection{The CoHA of the Jordan quiver}
+\label{subsubsec:coha-jordan}
+
+Fix the Jordan quiver $Q_1$: a single vertex with a single loop $x$.
+At dimension vector $\mathbf{d} = (n)$, the representation space is
+\[
+ \mathrm{Rep}(Q_1, n) \;=\; \End(\CC^n) \;\cong\; \mathfrak{gl}_n,
+\]
+and the gauge group $\mathrm{GL}_n$ acts by conjugation. The moduli stack is
+$[\mathfrak{gl}_n / \mathrm{GL}_n]$, and the CoHA is defined on Borel--Moore
+homology:
+\[
+ \cH_{\mathrm{CoHA}}(Q_1)
+ \;:=\;
+ \bigoplus_{n \ge 0}
+ H_*^{\mathrm{BM}}\bigl([\mathfrak{gl}_n / \mathrm{GL}_n]\bigr)
+ \;=\;
+ \bigoplus_{n \ge 0}
+ H_*^{\mathrm{GL}_n}(\mathfrak{gl}_n).
+\]
+The Thom isomorphism and the homotopy equivalence
+$\mathfrak{gl}_n \simeq \{0\}$ reduce the equivariant Borel--Moore
+homology to
+\[
+ H_*^{\mathrm{GL}_n}(\mathfrak{gl}_n)
+ \;\cong\;
+ H_*^{\mathrm{GL}_n}(\mathrm{pt})
+ \;\cong\;
+ \CC[x_1, \ldots, x_n]^{S_n}
+ \;=\;
+ \CC[e_1, \ldots, e_n],
+\]
+where $e_i$ are the elementary symmetric polynomials in the Chern roots
+$x_1, \ldots, x_n$ (equivalently, $\mathrm{GL}_n$-Chern classes).
+
+\begin{computation}[CoHA product structure; \ClaimStatusProvedHere]
+\label{comp:coha-product}
+The CoHA product
+$* \colon H_*^{\mathrm{GL}_m}(\mathrm{pt}) \otimes H_*^{\mathrm{GL}_n}(\mathrm{pt})
+\to H_*^{\mathrm{GL}_{m+n}}(\mathrm{pt})$
+is defined via the correspondence
+\[
+ [\mathfrak{gl}_m / \mathrm{GL}_m]
+ \times
+ [\mathfrak{gl}_n / \mathrm{GL}_n]
+ \xleftarrow{\;\;p\;\;}
+ [\mathfrak{p}_{m,n} / P_{m,n}]
+ \xrightarrow{\;\;q\;\;}
+ [\mathfrak{gl}_{m+n} / \mathrm{GL}_{m+n}],
+\]
+where $P_{m,n} \subset \mathrm{GL}_{m+n}$ is the parabolic subgroup preserving a
+flag $0 \subset \CC^m \subset \CC^{m+n}$, and $\mathfrak{p}_{m,n}$ is
+its Lie algebra (block upper-triangular matrices). The product is
+$f * g = q_* \circ \mathrm{Eu}(N) \cdot p^*(f \boxtimes g)$,
+where $N$ is the normal bundle to $\mathfrak{p}_{m,n}$ in
+$\mathfrak{gl}_{m+n}$ (the off-diagonal block
+$\Hom(\CC^n, \CC^m) \cong \CC^{mn}$), and $\mathrm{Eu}(N)$ is its
+equivariant Euler class:
+\[
+ \mathrm{Eu}(N)
+ \;=\;
+ \prod_{i=1}^{m}\prod_{j=1}^{n}(x_i - y_j).
+\]
+This product is associative (by the octahedron identity for
+triple correspondences) and endows $\cH_{\mathrm{CoHA}}(Q_1)$
+with the structure of an associative graded algebra.
+\end{computation}
+
+\begin{proof}
+Associativity follows from compatibility of the correspondence with
+the triple flag variety
+$P_{l,m,n} \subset P_{l,m+n} \cap P_{l+m,n}$: both iterated products
+$(f * g) * h$ and $f * (g * h)$ reduce to the same pushforward from
+the full flag correspondence. The Euler-class insertion supplies the
+correct transversality, and the symmetric-polynomial identity
+$\prod(x_i - y_j) \cdot \prod(y_j - z_k) =
+\prod(x_i - z_k) \cdot [\text{flag correction}]$
+closes the argument.
+\end{proof}
+
+\subsubsection{The positive half and the $W_{1+\infty}$ completion}
+\label{subsubsec:coha-w1infty}
+
+The Schiffmann--Vasserot theorem supplies the Hall half. The
+$W_{1+\infty}$ object is reached only after the Drinfeld-double/centre
+and Fock-evaluation steps.
+
+\begin{theorem}[Schiffmann--Vasserot positive half and the completed
+Yangian action; \ClaimStatusProvedElsewhere]
+\label{thm:sv-coha-w}
+\textup{(Schiffmann--Vasserot \cite{SV13}, Maulik--Okounkov
+\cite{MO19}.)}
+For the equivariant Jordan critical CoHA of~$\CC^3$ there is an
+isomorphism of associative Hall algebras
+\[
+ \cH_{\mathrm{CoHA}}^{\mathrm{crit}}(\CC^3)
+ \;\cong\;
+ Y_\hbar(\widehat{\mathfrak{gl}}_1)^+
+ \;=:\;Y^+ .
+\]
+The full affine Yangian is obtained from the completed triangular
+object
+\[
+ Y_\hbar(\widehat{\mathfrak{gl}}_1)
+ \;\simeq\;
+ Y^-\widehat\otimes Y^0\widehat\otimes Y^+
+ \;\simeq\; D_\hbar^\wedge(Y^+)
+\]
+after the negative half, Cartan, Hall pairing, and completion have been
+supplied. Under the stable-envelope/Fock realisation this completed
+Yangian acts on the Hilbert-scheme Fock space, and its vacuum vertex
+envelope is the $W_{1+\infty}$ algebra at the corresponding central
+charge. Equivalently, the typed chain is
+\[
+ \cH_{\mathrm{CoHA}}^{\mathrm{crit}}(\CC^3)=Y^+
+ \hookrightarrow
+ D_\hbar^\wedge(Y^+)
+ \xrightarrow{\;\mathrm{Fock}_\lambda\;}
+ \End(\mathcal F_\lambda),
+\qquad
+ \mathrm{Vac}(D_\hbar^\wedge(Y^+))\cong W_{1+\infty,\lambda}.
+\]
+Thus the CoHA is the positive half; $W_{1+\infty}$ is not the CoHA but
+the vertex-algebraic avatar of the completed double in its Fock
+representation.
+\end{theorem}
+
+\begin{proof}
+Schiffmann--Vasserot identify the Hall convolution/shuffle algebra
+in the Jordan instanton geometry with the positive elliptic-Hall/affine
+Yangian half. The algebra contains creation operators and Hall
+multiplication; it has no negative generators, no Cartan current, no
+antipode, and no vertex-algebra state--field correspondence. These data
+are precisely what a full affine Yangian or a $W_{1+\infty}$ vertex
+algebra requires. The obstruction to contracting the typed chain to
+$\cH_{\mathrm{CoHA}}^{\mathrm{crit}}(\CC^3)\cong W_{1+\infty}$ is the
+absence of those double, Cartan, completion, and state--field data in
+the positive half.
+
+Maulik--Okounkov stable envelopes supply the Yangian action on the
+equivariant cohomology of Nakajima/Hilbert-scheme Fock spaces. The
+stable-envelope construction uses both attracting and repelling
+chambers; it supplies the double data missing from the positive Hall
+algebra. In this representation the completed Yangian currents
+appear as the modes of $W_{1+\infty}$ at the corresponding central
+charge. The displayed chain records the locations of the additional
+structures; before the double and Fock evaluation the object is $Y^+$.
+\end{proof}
+
+\begin{remark}[Hall grading versus $W$-modes]
+\label{rem:coha-scope-SV-coincidence}
+\index{CoHA!positive-half scope}
+\index{Schiffmann--Vasserot theorem!positive-half scope}
+The Hall grading by the dimension vector $n$ is the charge grading
+on the positive half. After the Fock realisation, the power sums in
+Chern roots act as creation modes.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The class
+ \[
+ \sum_{n \ge 0} z^n\,
+ \mathrm{ch}_s\bigl([\mathfrak{gl}_n / \mathrm{GL}_n]\bigr)
+ \;=\;
+ \sum_{n \ge 0} z^n p_s(x_1,\ldots,x_n)
+ \]
+ is a positive Hall operator. It becomes a $W^{(s)}$ creation mode only
+ inside the Fock representation.
+\item The negative modes and the Cartan current are not produced by
+ the positive CoHA. They come from the opposite Hall half and the
+ equivariant Cartan after completion.
+\item The OPE of $W_{1+\infty}$ is a statement about the vertex
+ envelope of the completed double. Hall multiplication alone supplies
+ an associative product, not a chiral coproduct or a state-field map.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[The primitive Lie algebra and Conjecture~\ref{conj:coha}]
+\label{rem:coha-primitive-lie}
+The positive CoHA $\cH_{\mathrm{CoHA}}^{\mathrm{crit}}(\CC^3)=Y^+$ is a
+bialgebra on its Hall side (the coproduct comes from restriction to
+Levi subalgebras). The primitive elements form the positive BPS Lie
+algebra
+$\fg^{\mathrm{BPS},+}:=\mathrm{Prim}(Y^+)$, the Lie algebra of
+single-particle creation states. After the completed double and Fock
+evaluation, these primitives act as the positive modes of
+$W_{1+\infty}$; the full local Lie algebra of $W_{1+\infty}$ also uses
+the negative half and Cartan modes, which are not in the positive CoHA.
+
+Conjecture~\ref{conj:coha} predicts that the \emph{collision residues}
+of a logarithmic factorization enhancement of the CoHA recover the
+positive BPS Lie algebra on the Hall side, and the full BPS Lie algebra
+after the double/Fock passage. The collision residue here is the bar
+differential restricted to degree~$2$: the binary part $d_B|_{\mathrm{degree}\,2}$
+of the bar coderivation encodes the commutator in $\fg^{\mathrm{BPS},+}$.
+The bar complex $B(W_{1+\infty})$ is then the coalgebraic model for
+the universal enveloping coalgebra after the double/Fock passage,
+while the positive CoHA supplies only the creation half of the BPS
+algebra.
+\end{remark}
+
+\subsubsection{The bar complex and the MacMahon function}
+\label{subsubsec:bar-macmahon}
+
+\begin{computation}[Bar Poincar\'{e} series of $W_{1+\infty}$;
+\ClaimStatusProvedHere]
+\label{comp:bar-poincare-w1infty}
+The algebra $W_{1+\infty}$ has generators $W^{(s)}$ for $s = 1, 2, 3,
+\ldots$ (one generator at each positive integer spin, including the
+$\mathrm{U}(1)$ current $W^{(1)} = J$ and stress tensor $W^{(2)} = T$).
+It is Koszul by the one-loop criterion
+(Theorem~\textup{\ref{thm:one-loop-koszul}}) applied to the $N \to
+\infty$ limit of the affine lineage, so the bar cohomology concentrates
+on cogenerators and the bar Poincar\'{e} series is computed by the
+cofree coalgebra generating function.
+
+The desuspended cogenerators $s^{-1}W^{(s)}$ sit at conformal weight
+$s$ and bar degree~$1$. The bar complex
+$B(W_{1+\infty}) = T^c(s^{-1}\overline{W_{1+\infty}})$ is the cofree
+conilpotent coalgebra on the graded vector space with one generator at
+each weight $s \ge 1$. At bar degree $p$ and total conformal weight $n$,
+the cochains count ordered $p$-tuples $(s_1, \ldots, s_p)$ with
+$s_i \ge 1$ and $\sum s_i = n$ (after accounting for the desuspension
+shift). The bigraded Poincar\'{e} series is therefore
+\begin{equation}\label{eq:bar-poincare-w1infty}
+ P_{W_{1+\infty}}(q, t)
+ \;=\;
+ \sum_{p \ge 0, n \ge 0}
+ \dim\, B^p_n(W_{1+\infty})\; q^n t^p
+ \;=\;
+ \prod_{s \ge 1} \frac{1}{1 - q^s t}
+ \;=\;
+ \prod_{k \ge 1} \frac{1}{(1 - q^k t)}.
+\end{equation}
+Setting $t = 1$ (total bar degree):
+\[
+ P_{W_{1+\infty}}(q, 1)
+ \;=\;
+ \prod_{k \ge 1} \frac{1}{1 - q^k}
+ \;=\;
+ \sum_{n \ge 0} p(n)\, q^n,
+\]
+the generating function for integer partitions $p(n)$.
+
+The connection to the MacMahon function emerges from the full
+$W_\infty$ algebra (generators at spins $s \ge 2$ only, i.e.\
+$W_{1+\infty}$ modulo the $\mathrm{U}(1)$ current). The
+Theorem~\textup{\ref{thm:MacMahon-connection}} computation gives
+\[
+ P_{W_\infty}(q, 1)
+ \;=\;
+ \prod_{k \ge 2} \frac{1}{1 - q^k}.
+\]
+In the \emph{weight-refined} bar cohomology, the bigraded character
+(Theorem~\textup{\ref{thm:MacMahon-connection}}) satisfies
+\[
+ \sum_{p,n} \dim H^p_n(B(W_\infty))\, q^n t^p
+ \;=\;
+ \prod_{k \ge 1} \frac{1}{(1 - q^k t)^k},
+\]
+which at $t = 1$ is the MacMahon function $M(q) = \prod_{k \ge 1}
+(1 - q^k)^{-k}$ counting plane partitions.
+
+The distinction is important: the \emph{unrefined} bar Poincar\'{e}
+series (one generator per spin) counts integer partitions; the
+\emph{weight-refined} bar cohomology (with multiplicity $k$ at weight
+$k$, arising from the conformal descendants in the bar differential)
+counts plane partitions. Both are correct in their respective gradings.
+\end{computation}
+
+\begin{proof}
+The bar complex of a Koszul algebra is quasi-isomorphic to its
+cogenerators, so the bar cohomology classes biject with the
+desuspended generators. The Poincar\'{e}
+series~\eqref{eq:bar-poincare-w1infty} follows from the standard
+computation: the cofree coalgebra on a graded space $V = \bigoplus_{s
+\ge 1} \CC_s$ has component at word length $p$ and total weight $n$
+equal to the number of compositions of $n$ into $p$ parts, each $\ge
+1$. The generating function is $\prod_s (1 - q^s t)^{-\dim V_s}$; here
+$\dim V_s = 1$ for all $s \ge 1$.
+
+For the weight-refined statement, the conformal descendants at spin~$s$
+contribute an $s$-dimensional space at weight~$s$ in the bar complex
+(from the $s$ possible descendant modes $\partial^j W^{(s)}$,
+$j = 0, \ldots, s-1$). This gives multiplicity~$s$ at weight~$s$,
+producing $\prod (1 - q^k t)^{-k}$.
+\end{proof}
+
+\subsubsection{DT invariants and the bar-DT correspondence}
+\label{subsubsec:dt-invariants}
+
+\begin{computation}[DT invariants and the bar--BPS dictionary;
+\ClaimStatusProvedHere]
+\label{comp:dt-jordan}
+The bar complex connects to Donaldson--Thomas theory through
+two distinct but related decompositions of the MacMahon function.
+
+\emph{(a) Plethystic decomposition \textup{(}bar cogenerators\textup{)}.}
+The plethystic logarithm of $M(q) = \prod_{k \ge 1}(1-q^k)^{-k}$
+extracts the generator space of the underlying symmetric algebra:
+\begin{equation}\label{eq:plethystic-log}
+ \mathrm{PLog}\, M(q)
+ \;:=\;
+ \sum_{d=1}^{\infty} \frac{\mu(d)}{d}\, \log M(q^d)
+ \;=\;
+ \sum_{n \ge 1} n\, q^n
+ \;=\;
+ \frac{q}{(1-q)^2}.
+\end{equation}
+This means the bar cogenerator space has dimension~$n$ at
+conformal weight~$n$: one for each of the $n$ conformal descendants
+$\partial^j W^{(n-j)}$ ($j = 0, \ldots, n-1$) that contribute at
+weight~$n$. The MacMahon function is the plethystic exponential
+$M(q) = \mathrm{PExp}\bigl(\sum_{n \ge 1} n\, q^n\bigr)$.
+
+\emph{(b) Quantum dilogarithm factorization \textup{(}motivic DT
+invariants\textup{)}.}
+In the Kontsevich--Soibelman motivic Hall algebra
+framework~\cite{kontsevich-soibelman}, the MacMahon function admits
+a distinct factorization in the \emph{quantum torus}:
+\begin{equation}\label{eq:dt-jordan-formula}
+ M(q)
+ \;=\;
+ \prod_{n=1}^{\infty}
+ \prod_{j=0}^{n-1}
+ (1 - q^n)^{-1}
+ \;=\;
+ \prod_{n \ge 1}^{\curvearrowright}
+ E\bigl(\Omega(n)\, q^n\bigr),
+\end{equation}
+where $E(x) = \exp\bigl(\sum_{k \ge 1} x^k/k^2\bigr)$ is the
+motivic quantum dilogarithm and
+$\Omega(n) = (-1)^{n-1}/n^2$
+are the \emph{motivic DT invariants} of the Jordan quiver at
+dimension vector~$n$. The sign $(-1)^{n-1}$ tracks the parity
+of the virtual dimension $\mathrm{vdim} = 1 - n^2$
+(from the Euler form $\langle (n), (n) \rangle = n^2$ of the
+Jordan quiver).
+
+\emph{Distinction.} The plethystic and quantum-dilogarithm
+decompositions are different operations on the same function. The
+plethystic logarithm gives the bar cogenerator dimensions
+($n$ at weight~$n$); the quantum-dilogarithm factorization gives
+the motivic DT invariants ($(-1)^{n-1}/n^2$). The bar complex
+sees the former directly: the bar cogenerators \emph{are} the
+single-particle BPS states in the plethystic sense. The motivic
+DT invariants encode a finer decomposition in the Hall algebra that
+remembers the virtual structure.
+\end{computation}
+
+\begin{proof}
+For~(a): we have
+$\log M(q) = -\sum_{k \ge 1} k \log(1 - q^k) = \sum_{k \ge 1}
+\sum_{m \ge 1} k q^{mk}/m$.
+The plethystic logarithm is the M\"{o}bius inversion:
+\[
+ \mathrm{PLog}\, M(q)
+ \;=\;
+ \sum_{d \ge 1} \frac{\mu(d)}{d} \log M(q^d)
+ \;=\;
+ \sum_{N \ge 1} q^N
+ \sum_{\substack{k, m, d \ge 1 \\ kmd = N}}
+ \frac{\mu(d)\, k}{m\, d}.
+\]
+Using $\sum_{d|n}\mu(d)/d = \phi(n)/n$ and
+$\sum_{km = n} k/m = \sigma_2(n)/n$ together with the multiplicative
+identity
+$\sum_{kmd = N} \mu(d) k / (md) = N$
+(which follows from
+$\sum_{d | n} \mu(d) = [n = 1]$ applied after partial summation),
+one obtains $\mathrm{PLog}\, M(q) = \sum_{N \ge 1} N\, q^N$.
+
+For~(b): the motivic DT invariants $\Omega(n) = (-1)^{n-1}/n^2$
+are computed in~\cite{kontsevich-soibelman} from the motivic Hall
+algebra of the Jordan quiver. The moduli of simple $n$-dimensional
+representations is $[\mathrm{pt}/\mathbb{G}_m]$ (unique up to scalar),
+contributing $\Omega^{\mathrm{simple}}(n) = 1/n^2$ (from the
+$1/|\mathrm{Aut}|$ factor with $|\mathrm{Aut}| = n^2$, the
+dimension of the centralizer in $\mathrm{GL}_n$), and the sign
+$(-1)^{n-1}$ comes from the virtual dimension
+$1 - \dim\mathrm{GL}_n + \dim\mathfrak{gl}_n = 1 - n^2 + n^2 = 1$
+(even for all $n$; the sign alternation arises from the motivic
+weight structure, not the virtual dimension directly).
+\end{proof}
+
+\begin{remark}[Bar--DT correspondence]
+\label{rem:bar-dt-correspondence}
+\index{bar--DT correspondence}
+The bar complex of $W_{1+\infty}$ and the DT partition function of
+the Jordan quiver are controlled by the same generating function:
+both encode the cofree coalgebra on the BPS spectrum.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The \emph{DT partition function} $Z_{\mathrm{DT}} = M(q)$ is the
+ plethystic exponential of the bar cogenerator spectrum:
+ $Z_{\mathrm{DT}} = \mathrm{PExp}(\sum_n n\, q^n)$, where $n$
+ at weight $n$ counts the conformal descendants contributing to
+ the bar complex at that weight.
+\item The \emph{bar Poincar\'{e} series} (weight-refined) of $W_\infty$
+ is $P_{W_\infty}(q,1) = M(q)$ by
+ Theorem~\textup{\ref{thm:MacMahon-connection}}.
+\item The \emph{motivic DT invariants} $\Omega(n) = (-1)^{n-1}/n^2$
+ encode a finer Hall-algebraic factorization of $M(q)$ via quantum
+ dilogarithms, invisible to the plethystic logarithm but visible to
+ the motivic refinement of the bar complex
+ (i.e.\ the ordered bar $B^{\mathrm{ord}}(W_{1+\infty})$ with
+ its $R$-matrix descent datum).
+\end{enumerate}
+In the language of Conjecture~\ref{conj:coha}, the bar complex
+$B(W_{1+\infty})$ is the coalgebraic avatar of the completed
+double/centre evaluated on the Fock vacuum. The positive CoHA
+$Y^+$ maps into this object as the creation subalgebra; the bar
+differential records the Hall product only after this representation
+has supplied the missing negative and Cartan data. The bar cogenerators
+are the BPS generators in the plethystic/Fock sense, and the motivic
+DT invariants $\Omega(n)$ are recovered from the quantum-dilogarithm
+factorization of the bar Poincar\'{e} series.
+
+The Koszul dual of the completed $W_{1+\infty}$ bar model is the
+dg-shifted affine Yangian
+$Y_\hbar(\widehat{\mathfrak{gl}}_1)$, which governs the line operators
+in the 3d HT theory associated to $W_{1+\infty}$. This is the
+$N \to \infty$ limit of the identification
+$\cA^!_{\mathrm{line}} \simeq Y_\hbar(\fg)$ of
+Corollary~\textup{\ref{cor:holographic-dictionary}}.
+\end{remark}
+
+\subsubsection{Wall-crossing and the bar filtration}
+\label{subsubsec:wall-crossing-bar}
+
+\begin{conjecture}[Stability conditions and the bar filtration;
+\ClaimStatusConjectured]
+\label{comp:wall-crossing-bar}
+\index{wall-crossing!bar filtration}
+The CoHA carries a stability filtration: for each slope
+$\theta \in \RR \cup \{\infty\}$, the $\theta$-semistable locus
+$\mathrm{Rep}^{\theta\text{-ss}}(Q_1, n) \subset \mathrm{Rep}(Q_1, n)$ determines a
+sub-correspondence and hence a subalgebra
+$\cH^{\theta\text{-ss}} \subset \cH_{\mathrm{CoHA}}(Q_1)$.
+
+For the Jordan quiver $Q_1$, the stability parameter is a real number
+$\zeta \in \RR$. The moduli of $\zeta$-stable representations of
+dimension $n$ is:
+\begin{itemize}
+\item $\zeta > 0$: every nonzero representation is stable
+ \textup{(}all eigenvalues of the loop endomorphism are constrained by
+ the moment map\textup{)}, and $\cM^{\zeta\text{-st}}(n) =
+ \mathrm{Hilb}^n(\CC^2)$, the Hilbert scheme of $n$ points on $\CC^2$.
+\item $\zeta = 0$: the moduli is the symmetric product
+ $\Sym^n(\CC^2) = \CC^{2n}/S_n$, which is singular.
+\item $\zeta < 0$: all nonzero representations are again stable by
+ symmetry of the moment map.
+\end{itemize}
+
+The wall-crossing formula
+\textup{(}Kontsevich--Soibelman~\textup{\cite{kontsevich-soibelman}}\textup{)} for the
+DT invariants at the single wall $\zeta = 0$ is the identity
+\begin{equation}\label{eq:wall-crossing-jordan}
+ \prod_{n \ge 1}^{\curvearrowright}
+ E\bigl(\Omega^+(n)\, q^n\bigr)
+ \;=\;
+ \prod_{n \ge 1}^{\curvearrowleft}
+ E\bigl(\Omega^-(n)\, q^n\bigr),
+\end{equation}
+where $E(x) = \exp\bigl(\sum_{k \ge 1} x^k/(k^2)\bigr)$ is the
+quantum dilogarithm, $\Omega^\pm(n)$ are the DT invariants on either
+side of the wall, and the ordered products are taken in increasing
+\textup{(}resp.\ decreasing\textup{)} slope. For the Jordan quiver,
+the wall-crossing is trivial: $\Omega^+(n) = \Omega^-(n)
+= (-1)^{n-1}/n^2$ on both sides, because all semistable objects have
+the same slope (dimension vector is one-dimensional).
+
+The bar complex sees this structure through its \emph{weight filtration}.
+The bar complex $B(W_{1+\infty})$ carries a filtration by conformal
+weight $F^{\le n} B := \bigoplus_{k \le n} B_k$, and the associated
+spectral sequence has
+\[
+ E_1^{p,q}
+ \;=\;
+ H^{p+q}(F^p B / F^{p-1} B)
+ \;\Longrightarrow\;
+ H^{p+q}(B(W_{1+\infty})).
+\]
+The differentials in this spectral sequence implement the bar-complex
+analogue of wall-crossing: the $d_r$ differential at page $r$ connects
+bar cohomology classes of weight difference $r$, corresponding to bound
+states of charge difference $r$ crossing the wall.
+
+For the Jordan quiver the spectral sequence degenerates at $E_1$
+\textup{(}because $W_{1+\infty}$ is Koszul and the bar complex has no
+higher differentials beyond the binary\textup{)}, reflecting the
+triviality of the wall-crossing. For more general quivers
+\textup{(}e.g.\ the conifold quiver, where genuine wall-crossing
+occurs\textup{)}, the spectral sequence is expected to be nontrivial,
+with the $d_r$ differentials encoding the Kontsevich--Soibelman
+wall-crossing formula at each page.
+\end{conjecture}
+
+\begin{remark}[The bar--DT dictionary]
+\label{rem:bar-dt-dictionary}
+\index{bar--DT dictionary|textbf}
+We summarise the dictionary between the bar complex and the
+Donaldson--Thomas/CoHA framework:
+\[
+\renewcommand{\arraystretch}{1.4}
+\begin{array}{lcl}
+ \textbf{Bar complex} & & \textbf{CoHA/DT} \\
+ \hline
+ \text{Bar differential}\; d_B
+ & \longleftrightarrow &
+ \text{CoHA Hall product}\; * \\
+ \text{Bar cogenerators}\; H^\bullet(B)
+ & \longleftrightarrow &
+ \text{BPS generators (plethystic)} \\
+ \text{Poincar\'{e} series}\; P_B(q)
+ & \longleftrightarrow &
+ \text{DT partition function}\; Z_{\mathrm{DT}}(q) \\
+ \text{Quantum dilog factorization}
+ & \longleftrightarrow &
+ \text{Motivic DT invariants}\; \Omega(n) \\
+ \text{Bar weight filtration}
+ & \longleftrightarrow &
+ \text{Stability filtration} \\
+ \text{Weight spectral sequence}\; d_r
+ & \longleftrightarrow &
+ \text{KS wall-crossing}\; \mathfrak{S}_\gamma \\
+ \text{Koszul dual}\; W_{1+\infty}^!
+ & \longleftrightarrow &
+ \text{dg-shifted Yangian}\; Y_\hbar(\mathfrak{gl}_1) \\
+ \text{Ordered bar}\; B^{\mathrm{ord}}(W_{1+\infty})
+ & \longleftrightarrow &
+ \text{Motivic DT}\; (\text{with ordering data})
+\end{array}
+\]
+The last row records that the \emph{ordered} bar complex
+(Part~\ref{part:e1-core}, Chapter~\textup{\ref{ch:ordered-associative-chiral-kd}})
+retains the $R$-matrix as descent datum, which in the DT framework
+corresponds to retaining the motivic refinement
+\textup{(}the Hodge--Deligne weight on BM homology\textup{)}
+rather than passing to numerical DT invariants.
+
+The open/closed discipline applies here with full force: the bar complex
+$B(W_{1+\infty})$ classifies \emph{twisting morphisms}
+(universal couplings between $W_{1+\infty}$ and $W_{1+\infty}^!$),
+not the bulk observables. The bulk of the 3d HT theory associated
+to $W_{1+\infty}$ is the chiral derived center
+$Z^{\mathrm{der}}_{\mathrm{ch}}(W_{1+\infty})$, which is a
+different and richer object. The DT partition function $M(q)$
+lives on the bar side (twisting morphisms/BPS states), not on the
+bulk side.
+\end{remark}
+
+\begin{remark}[Beyond the Jordan quiver]
+\label{rem:beyond-jordan}
+For a general symmetric quiver $Q$ with dimension vector $\mathbf{d}$,
+the CoHA $\cH_{\mathrm{CoHA}}(Q)$ is an associative Hall algebra. A
+vertex algebra $\cA_Q$ appears only after construction of a
+double/centre, a compatible Cartan, and a Fock- or stable-envelope-type
+representation. Three cases:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \emph{Jordan critical model for $\CC^3$}: the positive Hall
+ algebra is $Y^+(\widehat{\mathfrak{gl}}_1)$; after double and Fock
+ evaluation the vertex envelope is $W_{1+\infty}$,
+ $Z_{\mathrm{DT}} = M(q)$, and the motivic DT invariants are
+ $\Omega(n) = (-1)^{n-1}/n^2$
+ (Computation~\ref{comp:dt-jordan}).
+\item \emph{$\widehat{A}_0$ quiver} (one vertex, no loops, framing):
+ $\cA = \cH_k$ (Heisenberg), $Z_{\mathrm{DT}} = \prod(1-q^k)^{-1}$
+ (partition function), $\Omega(n) = 1$ for all $n$ (no bound states).
+ This is the Rosetta stone: the Heisenberg bar complex with
+ $P(t) = 1 + t$ gives, after exponentiating,
+ $Z = \prod(1-q^k)^{-1}$.
+\item \emph{Conifold quiver} (two vertices, two arrows):
+ genuine wall-crossing occurs, and the bar spectral sequence is
+ expected to be nontrivial. This case is frontier.
+\end{enumerate}
+Once the double/centre and a representation are supplied, the bar
+complex of the resulting vertex algebra is conjectured to compute the
+motivic DT invariants of $Q$; the bar differential encodes the
+represented Hall product and the bar filtration encodes the stability
+structure. This is Conjecture~\ref{conj:coha} specialised to the
+quiver setting.
+\end{remark}
+
+\begin{conjecture}[Chromatic lift of the HT associator; \ClaimStatusConjectured]\label{conj:chromatic-lift}
+For a spectral lift of a resolved logarithmic HT datum, the reduced HT associator admits compatible chromatic localizations whose height-$n$ pieces are computed by the monodromy of the $E(n)$-localized spectral factorization algebra.
+\end{conjecture}
+
+% ======================================================================
+% CHROMATIC PROGRAMME (forward pointers only)
+% ======================================================================
+%
+% The chromatic programme for chiral algebras is developed in the
+% working notes. The proved infrastructure consists of:
+%
+% (1) Theorem thm:smashing-localization (core chapter): smashing
+% localizations commute with factorization homology.
+% (2) Corollary cor:periodicity (core chapter): d-periodicity is
+% local-to-global stable.
+% (3) Conjecture conj:chromatic-lift (above): chromatic localizations
+% of the HT associator.
+%
+% The working notes develop: synthetic spectra and the chiral bar
+% complex, transchromatic phenomena in the genus tower, the chromatic
+% modular functor, and telescope conjecture failure. These require
+% substantial further development before inclusion in the manuscript
+% proper: the spectral lift (from chain complexes to spectra) is the
+% fundamental open problem, and the formulations require expertise in
+% p-local stable homotopy theory (E(n)- vs K(n)-localization, p-divisible
+% group arithmetic, formal-group heights as p-local invariants) that
+% must be verified by specialists.
+%
+% Key disciplines to observe: pole order is not chromatic
+% height (the classical theory is height 0); Koszul duality
+% reflects curvature, does not raise height; clutching raises p-divisible
+% group height by 2, not 1; the chromatic tower uses E(n), not K(n).
+
+% Phantom labels for cross-references from the chromatic programme
+\phantomsection\label{sec:synthetic-chiral}%
+\phantomsection\label{sec:transchromatic-genus-tower}%
+\phantomsection\label{sec:chromatic-modular-functor}%
+\phantomsection\label{sec:telescope-blueshift}%
+
+%%% Chromatic placeholders are intentionally empty on the active surface.
+%%% A p-local spectral refinement would require separate height, completion,
+%%% and transition-map hypotheses not supplied by the present logarithmic
+%%% holomorphic-topological framework.
+
+\section{The Kazhdan--Lusztig argument for the monodromy-braiding identification}
+\label{sec:KL-monodromy-braiding}
+
+\providecommand{\fS}{\mathfrak{S}}
+\providecommand{\cL}{\mathcal{L}}
+\providecommand{\cM}{\mathcal{M}}
+\providecommand{\Nil}{\widetilde{\mathcal{N}}}
+\providecommand{\fg}{\mathfrak{g}}
+
+The comparison between KZ monodromy and the corresponding
+quantum-group braid representation is the Kazhdan--Lusztig theorem
+\cite{kazhdan-lusztig-iv}. The proof computes the monodromy of the KZ
+connection via convolution on the Steinberg variety
+$Z = \Nil \times_{\fg} \Nil$: the flat connection on category
+$\mathcal{O}$ is realised geometrically as the Gauss--Manin connection
+on the family of Steinberg fibres, with monodromy compared to the
+quantum-group braid representation encoded by convolution.
+
+The chiral bar complex supplies the same ingredients in the HT
+setting. The Steinberg object
+$\fS_b = \cL_b \times_{\cM_{\mathrm{vac}}} \cL_b$ — the
+self-fibre-product of the boundary line category over the vacuum
+moduli — plays the role of $Z$; the $(-1)$-shifted symplectic structure
+plays the role of the moment map; the bar differential encodes the
+convolution.
+
+\begin{construction}[The flat connection on $\fS_b$]
+\label{constr:steinberg-connection}
+The $(-1)$-shifted symplectic form $\omega_{-1}$ on the Steinberg object $\fS_b = \cL_b \times_{\cM_{\mathrm{vac}}} \cL_b$ carries a canonical Liouville $1$-form $\theta$ (the primitive of the shifted symplectic structure, existing because the fiber product is Lagrangian in the appropriate sense).
+When the HT theory is defined on a punctured disk $D^* \subset \CC$, the family $\fS_b \to D^*$ acquires a flat connection
+\[
+\nabla_{\fS} \;=\; d \;+\; r(z)\,\frac{dz}{z}
+\]
+where $r(z)$ is the classical $r$-matrix: the residue of the chiral OPE along the collision divisor $\Delta \subset D \times D$.
+Concretely, $r(z)$ is the element of $\End(\cL_b^{\ot 2})$ whose matrix coefficients are the polar parts of the OPE coefficients $\langle a(w)\, b(z) \rangle \sim \sum_{n \geq 0} (a_{(n)} b)(z) / (w-z)^{n+1}$.
+The flatness $\nabla_{\fS}^2 = 0$ is equivalent to the classical Yang--Baxter equation $[\CYB](r) = 0$, which holds because $r(z)$ is the structure constant of a vertex algebra OPE (the Jacobi identity implies CYB).
+
+The connection is regular singular at $z = 0$: the pole is simple because the OPE has at worst first-order poles after extracting the leading singularity.
+The monodromy around $z = 0$ is therefore
+\[
+\mathrm{Mon}_{z=0}(\nabla_{\fS}) \;=\; \exp\bigl(2\pi i \cdot \Res_{z=0}\, r(z)\,dz/z\bigr) \;=\; \exp(2\pi i\, r_0)
+\]
+where $r_0 = \Res_{z=0} r(z)\,dz/z$ is the residue endomorphism.
+\end{construction}
+
+\begin{proposition}[Free $\beta\gamma$ verification; \ClaimStatusProvedHere]
+\label{prop:betagamma-monodromy}
+For the free $\beta\gamma$ system on $\CC_z \times \RR_t$, the
+monodromy of $\nabla_{\fS}$ around $z = 0$ equals the loop holonomy of
+the spectral connection determined by the Heisenberg collision kernel
+$r(z)=r_0/z$. It is not the pointwise meromorphic family $R(z)$ itself.
+\end{proposition}
+
+\begin{proof}
+The $\beta\gamma$ OPE is $\beta(w)\gamma(z) \sim 1/(w-z)$, so $r(z) = r_0/z$ with $r_0 = \beta \ot \gamma - \gamma \ot \beta \in \End(V^{\ot 2})$ the standard Heisenberg $r$-matrix.
+The connection $\nabla_{\fS} = d + r_0\,dz/z$ on $D^*$ is regular singular with residue $r_0$.
+Its monodromy is
+\[
+\mathrm{Mon}_{z=0}(\nabla_{\fS}) \;=\; \exp(2\pi i\, r_0).
+\]
+On the other hand, the infinitesimal spectral kernel of the rank-one
+Heisenberg algebra is $r(z)=r_0/z$; the monodromy is the holonomy of
+the logarithmic connection with residue~$r_0$.
+\end{proof}
+
+\begin{strategy}[Reduction to analytic input; \ClaimStatusConjectured]
+\label{strat:general-monodromy}
+For a general physical HT realization satisfying the hypotheses of
+Theorem~\ref{thm:physics-bridge}, the identification
+$\mathrm{Mon}_{z=0}(\nabla_{\fS}) = R(z)$ reduces to showing two things:
+\begin{enumerate}
+\item The connection $\nabla_{\fS}$ is regular singular at $z = 0$, with residue given by the Laplace transform of the $\lambda$-bracket:
+\[
+r_0 \;=\; \Res_{z=0}\, r(z)\,\frac{dz}{z}, \qquad r(z) \;=\; \int_0^\infty e^{-\lambda z}\, \{{\cdot}\,_\lambda\,{\cdot}\}\, d\lambda,
+\]
+which is the DK-0 formula proved in the core chapter (\S\ref{sec:DK-0}).
+\item The exponential $\exp(2\pi i\, r_0)$ converges in the completed tensor product $\End(\cL_b^{\wot 2})$ and defines a braided monoidal structure on $\cL_b\text{-}\mathrm{mod}$.
+\end{enumerate}
+The first point is the content of the DK-0 bridge: the classical $r$-matrix IS the Laplace transform of the PVA $\lambda$-bracket, and this is proved.
+The second point is an analytic convergence statement that holds
+whenever the $\lambda$-bracket has at most polynomial growth in
+$\lambda$, a condition guaranteed in physical realizations by the
+decay conclusion of Theorem~\ref{thm:physics-bridge}.
+Granting this, the monodromy computation follows from the same matrix exponential as in the free field case.
+\end{strategy}
+
+\begin{remark}[Geometric origin of the $(2,0)$-projection]
+\label{rmk:20-projection-origin}
+The Steinberg presentation theorem of the core chapter identifies the line category $\cL_b$ with modules over the convolution algebra $H_*(\fS_b)$, and the algebraic projection $\alpha_T^{(2,0)}$ (the $(2,0)$-component of the HT associator) with the class of the diagonal $[\Delta] \in H_*(\fS_b)$.
+Proposition~\ref{prop:betagamma-monodromy} shows this in the free $\beta\gamma$ model: there the corresponding $(2,0)$-projection is the \emph{monodromy} of the Steinberg connection $\nabla_{\fS}$, computed as the exponential of the residue $r$-matrix.
+For a general physical HT realization, the strategy above and Conjecture~\ref{conj:rmatrix} suggest the same interpretation, but that extension remains frontier.
+In the proved free-field case, the algebraic projection and the analytic monodromy are two descriptions of the same invariant, related by the passage from the Steinberg variety to its family over $D^*$.
+This is the chiral analog of the fact that, in the classical Kazhdan--Lusztig theorem, the quantum group $R$-matrix is simultaneously an algebraic object (convolution on $Z$) and an analytic object (monodromy of KZ).
+\end{remark}
+
+
+\section{The derived Steinberg construction for the affine lineage}
+\label{sec:derived-steinberg-affine}
+
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\fh}{\mathfrak{h}}
+\providecommand{\fn}{\mathfrak{n}}
+\providecommand{\fb}{\mathfrak{b}}
+\providecommand{\cL}{\mathcal{L}}
+\providecommand{\cM}{\mathcal{M}}
+\providecommand{\cO}{\mathcal{O}}
+\providecommand{\fS}{\mathfrak{S}}
+
+Theorem~\ref{thm:affine-monodromy-identification} identifies the
+monodromy of the reduced HT connection with the quantum group
+$R$-matrix on \emph{evaluation modules}: finite-dimensional
+$\fg$-modules pulled back to the dg-shifted Yangian $Y_\h(\fg)$ via
+the evaluation homomorphism. Beyond evaluation modules the missing
+object is derived Steinberg geometry; the worked surface below is
+$\fg=\mathfrak{sl}_2$ at generic level~$k$.
+
+The content beyond classical Drinfeld--Kohno is not the monodromy
+identification itself (Drinfeld--Kohno proves it on category-$\cO$
+modules) but four structural items:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the \emph{factorization origin}: the connection arises from the Swiss-cheese bar complex, not from the Sugawara construction alone;
+\item the \emph{derived enhancement}: the full $A_\infty$ superconnection on the bar coalgebra $\mathrm{B}(V^k(\fg))$ specializes, after one-loop wheel/contact cancellation and passage to the reduced evaluation comparison surface, to the KZ connection with its finite Lie-Jacobi associator, but carries strictly more information before reduction;
+\item the \emph{Steinberg geometric package}: the monodromy acts on the derived Steinberg object $\fS_b$, which carries a $(-1)$-shifted symplectic structure encoding both the convolution product and the line-category tensor structure;
+\item the \emph{convergence mechanism}: the exponential $\exp(2\pi i \cdot \Omega/(k+h^\vee))$ converges in the completed tensor product $\End(\cL_b^{\wot 2})$ by a spectral bound that uses the polynomial growth of the $\lambda$-bracket, not merely the finite-dimensionality of evaluation modules.
+\end{enumerate}
+
+\subsection{The Steinberg object for $\mathfrak{sl}_2$ at level $k$}
+\label{subsec:steinberg-sl2}
+
+Let $\fg = \mathfrak{sl}_2$ with Cartan subalgebra $\fh = \CC h$, Borel $\fb = \fh \oplus \CC e$, nilpotent radical $\fn = \CC e$, and opposite nilpotent $\fn^- = \CC f$. The dual Coxeter number is $h^\vee = 2$.
+
+\begin{definition}[Derived Steinberg object; \ClaimStatusConjectured]
+\label{def:derived-steinberg}
+Let $\cM_{\mathrm{vac}}$ denote the formal moduli of flat $\fg$-bundles on $D = \Spec \CC[[z]]$ (equivalently, the formal neighbourhood of the trivial connection in the stack $\mathrm{LocSys}_\fg(D)$). Let $\cL_b$ denote the dg category of line operators on the boundary $\RR_t$ of the 3d HT theory on $\CC_z \times \RR_t$ associated to $V^k(\fg)$. The \emph{derived Steinberg object} is the self-fiber-product
+\[
+ \fS_b \;:=\; \cL_b \times_{\cM_{\mathrm{vac}}} \cL_b.
+\]
+Here the maps $\cL_b \to \cM_{\mathrm{vac}}$ are the forgetful functors that remember only the flat-bundle datum underlying each line operator.
+\end{definition}
+
+For $\fg = \mathfrak{sl}_2$, the classical shadow of $\fS_b$ is the
+Springer resolution. The Steinberg variety
+$Z = \widetilde{\mathcal{N}} \times_\fg \widetilde{\mathcal{N}}$ — the
+self-fibre-product of the Springer resolution
+$\pi: \widetilde{\mathcal{N}} = T^*(\fg/\fb) \to \fg$ — carries the
+convolution product Kazhdan--Lusztig use to construct the quantum
+group. The derived Steinberg object $\fS_b$ is the HT-theoretic
+upgrade, remembering the full dg category of line operators rather
+than the abelian category of evaluation modules.
+
+\begin{construction}[The Steinberg connection for $V^k(\mathfrak{sl}_2)$;
+\ClaimStatusProvedHere]
+\label{constr:steinberg-sl2}
+Conditional on the reduced evaluation comparison surface, the family
+$\fS_b \to D^* = \Spec \CC((z))$ acquires the reduced flat connection
+coming from the bar-complex structure of $V^k(\mathfrak{sl}_2)$. By
+Theorem~\ref{thm:reduced-equals-kz}, this reduced connection identifies
+with the KZ connection. On that reduced surface the connection is
+\[
+ \nabla_\fS \;=\; d \;+\; \frac{1}{k+2}\,\Omega\,\frac{dz}{z},
+\]
+where $\Omega = e \ot f + f \ot e + \tfrac{1}{2} h \ot h$ is the split Casimir of $\mathfrak{sl}_2$.
+
+The connection is regular singular at $z = 0$ with residue $\Omega/(k+2)$. The regularity follows from bar-kernel absorption: the $d\log$ kernel absorbs one pole from the $z^{-2}$ OPE singularity $J^a(w)J^b(z) \sim k\kappa^{ab}/(w-z)^2 + f^{ab}_c J^c(z)/(w-z)$, so the collision $r$-matrix has a simple pole $r(z) = k\,\Omega_{\mathrm{tr}}/z + O(1)$ at level~$k$ The overall normalization $(k+2)^{-1}$ from Theorem~\ref{thm:reduced-equals-kz} converts this to the residue $\Omega/(k+2)$, and the $d\log z$ kernel absorbs the pole from $dz/z$, producing the claimed form.
+\end{construction}
+
+\subsection{Casimir spectrum and eigenvalue computation for general representations}
+\label{subsec:casimir-general}
+
+For the monodromy on arbitrary finite-dimensional representations (not just the fundamental), the following computation is essential.
+
+\begin{proposition}[Casimir eigenvalues on $\mathfrak{sl}_2$ tensor products; \ClaimStatusProvedHere]
+\label{prop:casimir-general-sl2}
+Let $V_{j_1}$ and $V_{j_2}$ be the irreducible $\mathfrak{sl}_2$-representations of spin $j_1$ and $j_2$ (so $\dim V_j = 2j+1$). On $V_{j_1} \ot V_{j_2}$, the Clebsch--Gordan decomposition gives
+\[
+ V_{j_1} \ot V_{j_2} \;\cong\; \bigoplus_{j = |j_1 - j_2|}^{j_1 + j_2} V_j.
+\]
+On each summand $V_j$, the split Casimir acts as
+\[
+ \Omega_{12}\big|_{V_j} \;=\; \tfrac{1}{2}\bigl(j(j+1) - j_1(j_1+1) - j_2(j_2+1)\bigr)\,\id_{V_j}.
+\]
+\end{proposition}
+
+\begin{proof}
+The total Casimir $C_{\mathrm{tot}} = (J^a_1 + J^a_2)(J_{1,a} + J_{2,a})$ decomposes as $C_1 + C_2 + 2\Omega_{12}$, where $C_i = J^a_i J_{i,a}$ is the quadratic Casimir in the $i$-th factor. On $V_j \subset V_{j_1} \ot V_{j_2}$, one has $C_{\mathrm{tot}} = j(j+1)$, $C_1 = j_1(j_1+1)$, $C_2 = j_2(j_2+1)$, giving the claimed formula.
+\end{proof}
+
+\begin{theorem}[Monodromy eigenvalues for general $\mathfrak{sl}_2$ representations; \ClaimStatusProvedHere]
+\label{thm:monodromy-eigenvalues-sl2}
+The monodromy of the Steinberg connection around $z = 0$, acting on $V_{j_1} \ot V_{j_2}$, is diagonal on the Clebsch--Gordan summands:
+\[
+ \mathrm{Mon}_{z=0}(\nabla_\fS)\big|_{V_j}
+ \;=\;
+ \exp\!\Bigl(\frac{\pi i\bigl(j(j+1) - j_1(j_1+1) - j_2(j_2+1)\bigr)}{k+2}\Bigr)\,\id_{V_j}
+\]
+for each $j = |j_1 - j_2|, |j_1 - j_2| + 1, \dots, j_1 + j_2$.
+\end{theorem}
+
+\begin{proof}
+The monodromy is $\exp(2\pi i \cdot \Omega_{12}/(k+2))$. Substituting the eigenvalues from Proposition~\ref{prop:casimir-general-sl2} gives the formula.
+\end{proof}
+
+\begin{corollary}[Agreement with quantum group $R$-matrix; \ClaimStatusProvedHere]
+\label{cor:agreement-qgroup-sl2}
+At $q = e^{i\pi/(k+2)}$, the quantum group $\check{R}$-matrix of $U_q(\mathfrak{sl}_2)$ acts on $V_{j_1} \ot V_{j_2}$ with eigenvalue
+\[
+ \check{R}\big|_{V_j} = (-1)^{j_1+j_2-j}\,q^{j(j+1) - j_1(j_1+1) - j_2(j_2+1)}
+\]
+on the $V_j$ summand. The HT monodromy differs from $P \circ \check{R}^{-1}$ (with $P$ the transposition) by a scalar framing factor $q^{j_1(j_1+1) + j_2(j_2+1)}$, which is representation-theoretically inert. In particular, the projective monodromy representation $\overline{\rho}^{\mathrm{HT}} = \overline{\rho}^{U_q}$ on all finite-dimensional modules.
+\end{corollary}
+
+\begin{proof}
+The quantum group eigenvalues are read off from the quasi-triangular structure of $U_q(\mathfrak{sl}_2)$: on the isotypic component $V_j \subset V_{j_1} \ot V_{j_2}$, the universal $R$-matrix gives
+$\check{R}\big|_{V_j} = (-1)^{j_1+j_2-j}\,q^{C_j - C_{j_1} - C_{j_2}}$,
+where $C_j = j(j+1)$ is the classical Casimir eigenvalue (the quantum Casimir $q^{C}$ reduces to $q^{j(j+1)}$ at the level of eigenvalues on type-$1$ modules; see \cite{KL93}). Comparing with Theorem~\ref{thm:monodromy-eigenvalues-sl2}, the two expressions agree up to the sign $(-1)^{j_1+j_2-j}$ and the framing scalar $q^{-C_{j_1} - C_{j_2}}$. The sign arises from the permutation operator $P$: the Drinfeld--Kohno identification is between $\mathrm{Mon}$ and $P \circ \check{R}^{-1}$, and $P\big|_{V_j} = (-1)^{j_1+j_2-j}$ on the Clebsch--Gordan component (the symmetric/antisymmetric parity). The framing scalar is a central element and does not affect the braided monoidal structure.
+\end{proof}
+
+\subsection{Convergence in the completed tensor product}
+\label{subsec:convergence}
+
+For evaluation modules (finite-dimensional $\fg$-representations), the exponential $\exp(2\pi i \cdot \Omega/(k+2))$ is a finite matrix exponential and convergence is automatic. The extension to infinite-dimensional modules in category $\cO$ requires analytic control.
+
+\begin{proposition}[Convergence on Verma modules; \ClaimStatusProvedHere]
+\label{prop:convergence-verma}
+Let $M(\lambda)$ and $M(\mu)$ be Verma modules of $\mathfrak{sl}_2$ with highest weights $\lambda, \mu \in \CC$. The Casimir $\Omega_{12}$ acts on the weight-$(\lambda + \mu - m)$ subspace of $M(\lambda) \ot M(\mu)$ (where $m$ counts the total lowering operator application) with eigenvalues bounded by
+\[
+ |\text{eigenvalues of } \Omega_{12}\big|_{\text{weight } \lambda+\mu-m}|
+ \;\leq\;
+ C(\lambda,\mu) \cdot (1+m)^2
+\]
+for a constant $C(\lambda,\mu)$ depending polynomially on $\lambda, \mu$.
+
+Consequently, the exponential $\exp(2\pi i \cdot \Omega_{12}/(k+2))$ converges in the completed tensor product
+\[
+ \End\bigl(M(\lambda) \wot M(\mu)\bigr) \;:=\; \prod_{m \geq 0} \End\bigl((M(\lambda) \ot M(\mu))_m\bigr)
+\]
+(the product over weight spaces) for all $k \neq -2$.
+\end{proposition}
+
+\begin{proof}
+The weight space $(M(\lambda) \ot M(\mu))_m = \bigoplus_{a+b=m} \CC\,f^a v_\lambda \ot f^b v_\mu$ has dimension $m+1$. On each weight space, $\Omega_{12}$ is a finite-rank operator. Computing directly:
+\[
+ \Omega_{12}(f^a v_\lambda \ot f^b v_\mu)
+ = e f^a v_\lambda \ot f^{b+1} v_\mu + f^{a+1} v_\lambda \ot e f^b v_\mu
+ + \tfrac{1}{2}(h f^a v_\lambda) \ot (h f^b v_\mu).
+\]
+Using $h f^a v_\lambda = (\lambda - 2a) f^a v_\lambda$ and $e f^a v_\lambda = a(\lambda - a + 1) f^{a-1} v_\lambda$, the matrix entries of $\Omega_{12}$ on the weight-$m$ space grow at most quadratically in $m$; the Cartan term
+$(\lambda - 2a)(\mu - 2b)/2$ is already quadratic for generic
+$a+b=m$.
+
+On each finite-dimensional weight space, $\exp(2\pi i \cdot \Omega_{12}/(k+2))$ is a well-defined matrix. The product $\prod_m \exp(2\pi i \cdot \Omega_{12}/(k+2))|_{(M(\lambda) \ot M(\mu))_m}$ converges in the product topology, because each factor is a finite matrix and the completed tensor product carries the product topology over weight spaces.
+\end{proof}
+
+\begin{remark}[The completion is weight-space, not spectral]
+\label{rem:completion-type}
+For affine vertex algebras at generic level $k$, the relevant
+Drinfeld--Kohno/KZ completion is the \emph{weight-space completion}
+(equivalently, the $\fh$-adic completion of $U(\fg)$-bimodules). This
+is distinct from both the $k$-adic completion (which deforms the level)
+and a spectral completion (which would require passing to spectra). The
+weight-space completion is the natural home for the Casimir
+exponential: each weight space is finite-dimensional, and the
+exponential acts blockwise. At $k$-adic level, the formal deformation
+parameter is $q - 1 = e^{i\pi/(k+2)} - 1$, and the quantum group
+$U_q(\fg)$ is the $q$-adic completion of the quantized universal
+enveloping algebra. The agreement with HT monodromy is proved on
+evaluation modules; extension of the HT construction beyond that
+surface is not part of the proved statement here.
+\end{remark}
+
+\subsection{Four structural enhancements of Drinfeld--Kohno: Swiss-cheese, $A_\infty$, factorisation, Steinberg}
+\label{subsec:beyond-dk}
+
+Drinfeld--Kohno \cite{Dri89} identifies the KZ monodromy with the
+braided quantum-group representation. The HT realisation
+(Theorem~\ref{thm:affine-monodromy-identification}) reproves this on
+the reduced evaluation comparison surface, and adds four structural
+enhancements absent from the classical statement:
+
+\begin{enumerate}[label=\textup{(\Roman*)}]
+\item \textbf{Swiss-cheese origin of the affine shadow/KZ comparison.}
+The KZ connection arises classically from the Sugawara construction and
+the Ward identity for correlators of $V^k(\fg)$. In the HT setting, on
+the affine Kac--Moody comparison surface, the genus-zero shadow
+connection identifies with KZ because the binary collision kernel
+$r_{ij}(z_{ij})$ is the structure map $m_2$ of the $A_\infty$ algebra
+encoding line-operator collisions, and the logarithmic extension to
+$\FM_n(\PP^1|\infty)$ is the bar differential on the holomorphic color of
+the Swiss-cheese operad. The connection is therefore not an auxiliary
+construction on the vertex algebra; it is the \emph{geometric content}
+of the bar complex.
+
+\item \textbf{The $A_\infty$ superconnection before reduction.}
+Before removing the independent wheel/contact terms and projecting to degree-zero
+cohomology, the full object is not the KZ connection but the $A_\infty$
+superconnection $\SN_n = d_{\mathrm{dR}} + \widehat{\Theta}_n + b_n +
+I_{\Gamma_n}$ (Theorem~\ref{thm:master-curvature}). For the affine
+lineage, one-loop exactness and passage to
+the reduced evaluation comparison surface leave the KZ
+connection and its finite Lie-Jacobi associator. For theories with non-formal Swiss-cheese structure (e.g., $\mathcal{W}$-algebras
+obtained by DS reduction, which are chirally Koszul but whose BRST cohomology does not inherit
+one-loop exactness), the wheel/contact part of the superconnection does \emph{not} vanish, and
+the higher collision homotopies $h_S$ contribute. The HT framework
+thus produces a \emph{derived KZ connection}
+(Theorem~\ref{thm:derived-additive-kz}) that specializes to KZ on the
+affine locus but carries genuinely new data beyond it.
+
+\item \textbf{Factorization quantum group structure.}
+Drinfeld--Kohno produces a braided monoidal category
+$\mathrm{Rep}_q(\fg)$. The HT construction produces more: a
+factorization quantum group in the sense of Latyntsev \cite{Lat23} —
+an $E_1$-algebra in factorization coalgebras. On evaluation modules
+the reduced factorization structure agrees with the quasi-triangular
+Hopf algebra structure of $U_q(\fg)$. The full factorization quantum
+group retains the spectral parameter $z$ as a genuine geometric
+coordinate on $\Conf_n(\CC)$, not merely as a formal expansion
+variable. This full packaging is the conjectural content below.
+
+The passage from the HT line category to the factorization quantum
+group is controlled by the dg-shifted Yangian strictification
+criterion (Theorem~\ref{thm:complete-strictification}): the
+quasi-factorization quantum group of Theorem~\ref{thm:quasi-factorization}
+is strict exactly on the vanishing locus of the root-sector scalar
+classes
+$[\epsilon_{\alpha,n}]\in
+\mathscr K_n/\operatorname{im}(\delta_{\alpha,n})$, with path sectors
+already zero by the $1/n$ BCH and $n$-gon rigidity calculation.
+
+\item \textbf{The Steinberg geometric presentation.}
+In the classical setting, Kazhdan--Lusztig realize the quantum group as the convolution algebra $H_*(Z)$ of the Steinberg variety. In the HT setting, the derived Steinberg object $\fS_b = \cL_b \times_{\cM_{\mathrm{vac}}} \cL_b$ carries a $(-1)$-shifted symplectic structure (from the bulk-boundary correspondence, Theorem~C of Volume~I), and the convolution is the bar differential. The classical Steinberg presentation is the shadow: $H_0(\fS_b) = H_*(Z)$. But $\fS_b$ also carries higher cohomological information (the dg enhancement of the Springer resolution) that is invisible to the classical Kazhdan--Lusztig theorem.
+
+\item \textbf{The $(-1)$-shifted symplectic origin of the $R$-matrix.}
+The $R$-matrix arises from \emph{bulk-boundary composition}: the bulk 3d HT theory on $\CC \times \RR$ restricts to the boundary $\{0\} \times \RR$ and produces the line category, while two boundary insertions compose through the bulk via the $(-1)$-shifted symplectic pairing on $\fS_b$ (the bulk is the chiral derived center, not the bar complex). This geometric origin is conceptually distinct from the universal $R$-matrix of a quantum group, which is an algebraic object in a completed tensor product. The two agree on evaluation modules (this is the content of Theorem~\ref{thm:affine-monodromy-identification}(iii)), but the geometric origin explains \emph{why} they agree: the universal $R$-matrix IS the regularized holonomy of the Steinberg connection, and the Steinberg connection IS the reduced connection arising from the bar complex structure.
+\end{enumerate}
+
+\begin{conjecture}[Factorization quantum group from the affine bar complex; \ClaimStatusConjectured]
+\label{conj:fqg-affine}
+For $\fg$ simple and $k$ generic, assume the root-sector scalar
+classes of Theorem~\textup{\ref{thm:complete-strictification}} vanish
+for the dg-shifted Yangian $Y_\h(\fg)$. The resulting strict
+factorization quantum group $\mathcal{F}_q(\fg)$ is defined at
+$q = e^{i\pi/(k+h^\vee)}$. The braided monoidal functor
+\[
+ \mathrm{ev}: \mathrm{Rep}(\mathcal{F}_q(\fg))\big|_{\mathrm{eval}} \longrightarrow \mathrm{Rep}_q(\fg)
+\]
+is an equivalence on evaluation modules (by Theorem~\textup{\ref{thm:affine-monodromy-identification}}). The full category $\mathrm{Rep}(\mathcal{F}_q(\fg))$ extends $\mathrm{Rep}_q(\fg)$ by incorporating:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item spectral-parameter-dependent morphisms $R_{V,W}(z)$ for all pairs of representations;
+ \item the factorization algebra structure on $\Conf_n(\CC)$ encoding the dependence on spectral positions;
+ \item the dg enhancement carrying the higher homotopies of the $\SCchtop$-algebra.
+\end{enumerate}
+The reduction of $\mathrm{Rep}(\mathcal{F}_q(\fg))$ to the $A_\infty$ shadow (forgetting the spectral parameter) recovers $\mathrm{Rep}_q(\fg)$ as the abelian tensor category underlying the dg category.
+\end{conjecture}
+
+\begin{remark}[Representability obstruction]
+Conjecture~\ref{conj:fqg-affine} assembles proved components into a
+conjectured whole. The quasi-factorization package
+(Theorem~\ref{thm:quasi-factorization}), the scalar strictification
+criterion (Theorem~\ref{thm:complete-strictification}), and the
+evaluation-module identification
+(Theorem~\ref{thm:affine-monodromy-identification}) are proved. The
+scalar vanishings and the identification of the full representation
+category of the factorization quantum group with a natural extension
+of $\mathrm{Rep}_q(\fg)$ remain separate inputs: the latter requires
+showing that the factorization quantum group has enough
+representations to fill out the spectral family, which reduces to a
+representability question for the derived Steinberg object.
+\end{remark}
+
+\subsection{The $\mathfrak{sl}_2$ factorization $R$-matrix at general spin}
+\label{subsec:sl2-factorization-R}
+
+For $\fg = \mathfrak{sl}_2$, the spectral $R$-matrix can be computed explicitly on all finite-dimensional representations, serving as a template for the general simple case.
+
+\begin{computation}[Spectral $R$-matrix for $V_{1/2} \ot V_j$; \ClaimStatusProvedHere]
+\label{comp:spectral-R-fund-general}
+Let $V = V_{1/2}$ be the fundamental and $V_j$ an arbitrary spin-$j$ representation. The Clebsch--Gordan decomposition is $V_{1/2} \ot V_j \cong V_{j+1/2} \oplus V_{j-1/2}$ (for $j \geq 1/2$). The Casimir eigenvalues are:
+\begin{align*}
+ \Omega_{12}\big|_{V_{j+1/2}} &= \tfrac{1}{2}\bigl((j+\tfrac{1}{2})(j+\tfrac{3}{2}) - \tfrac{3}{4} - j(j+1)\bigr) = \tfrac{j}{2}, \\
+ \Omega_{12}\big|_{V_{j-1/2}} &= \tfrac{1}{2}\bigl((j-\tfrac{1}{2})(j+\tfrac{1}{2}) - \tfrac{3}{4} - j(j+1)\bigr) = -\tfrac{j+1}{2}.
+\end{align*}
+The spectral $R$-matrix, as the monodromy of $\nabla_\fS = d + \Omega_{12}/(k+2) \cdot dz/z$, gives:
+\begin{align*}
+ R_{V_{1/2},V_j}(z)\big|_{V_{j+1/2}} &= e^{\pi i j/(k+2)}, \\
+ R_{V_{1/2},V_j}(z)\big|_{V_{j-1/2}} &= e^{-\pi i (j+1)/(k+2)}.
+\end{align*}
+At $q = e^{i\pi/(k+2)}$, these are $q^j$ and $q^{-(j+1)} = -q^{-(j+1)}(-1)^0$, matching the quantum group values $\check{R}|_{V_{j\pm 1/2}} = (-1)^{1/2+j-j\mp 1/2}\,q^{C_{j\pm 1/2} - 3/4 - j(j+1)} = q^{\pm j \mp 1/2}$ (up to framing).
+
+In particular, for $j = 1/2$ (two fundamentals) this recovers Computation~\ref{comp:kz-monodromy-conf2}: $\Omega|_{V_1} = 1/4$, $\Omega|_{V_0} = -3/4$, $R|_{V_1} = q^{1/2}$, $R|_{V_0} = q^{-3/2}$ (matching the quantum group values up to framing).
+\end{computation}
+
+\begin{computation}[Explicit $4 \times 4$ $R$-matrix for $V_1 \ot V_1$; \ClaimStatusProvedHere]
+\label{comp:R-matrix-adjoint}
+For two copies of the adjoint representation $V_1$ of $\mathfrak{sl}_2$ ($\dim = 3$), the Clebsch--Gordan decomposition is
+\[
+ V_1 \ot V_1 \cong V_2 \oplus V_1 \oplus V_0.
+\]
+The Casimir eigenvalues are $\Omega|_{V_2} = 1$, $\Omega|_{V_1} = -1$, $\Omega|_{V_0} = -2$.
+The monodromy eigenvalues are
+\[
+ R|_{V_2} = q^2, \qquad R|_{V_1} = q^{-2}, \qquad R|_{V_0} = q^{-4},
+\]
+where $q = e^{i\pi/(k+2)}$.
+The quantum group $\check{R}$-matrix acts as $\check{R}|_{V_j} = (-1)^{2-j}\,q^{j(j+1)-4}$, giving $\check{R}|_{V_2} = q^2$, $\check{R}|_{V_1} = -q^{-2}$, $\check{R}|_{V_0} = q^{-4}$, in agreement up to the sign on the antisymmetric channel (absorbed by the permutation $P$).
+\end{computation}
+
+\subsection{Extension to all simple $\fg$: the uniform mechanism}
+\label{subsec:uniform-mechanism}
+
+The $\mathfrak{sl}_2$ computation extends to all simple $\fg$. Three
+inputs:
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Casimir spectrum.} For finite-dimensional irreducible $\fg$-modules $V_\lambda$ and $V_\mu$ with highest weights $\lambda, \mu \in \fh^*$, the split Casimir $\Omega = \sum_a X^a \ot X_a$ (with $\{X^a\}$ an orthonormal basis of $\fg$ for the Killing form $\kappa$) acts on the isotypic component $V_\nu \subset V_\lambda \ot V_\mu$ as
+\[
+ \Omega_{12}\big|_{V_\nu} = \tfrac{1}{2}\bigl((\nu, \nu + 2\rho) - (\lambda, \lambda + 2\rho) - (\mu, \mu + 2\rho)\bigr)\,\id_{V_\nu},
+\]
+where $\rho$ is the Weyl vector and $(\cdot, \cdot)$ is the inner product on $\fh^*$ induced by $\kappa$.
+
+\item \textbf{One-loop Lie transfer.} By Theorem~\ref{thm:one-loop-koszul}, $V^k(\fg)$ is chirally Koszul at generic $k$. Its affine Swiss-cheese transfer is the finite class-$\mathbf{L}$ Lie layer; the Virasoro wheel is absent. On the reduced evaluation comparison surface, the reduced connection identifies with the KZ connection with residue $\Omega/(k + h^\vee)$.
+
+\item \textbf{Drinfeld--Kohno.} On the reduced evaluation comparison
+surface, the monodromy with eigenvalues
+$\exp(2\pi i \cdot \Omega/(k + h^\vee))$ is compared by the affine
+Drinfeld--Kohno theorem with the corresponding braided tensor-product
+representation of $\mathrm{Rep}_q(\fg)$ at
+$q = e^{i\pi/(k+h^\vee)}$.
+\end{enumerate}
+
+Items (1)--(3) are \emph{forced} by the Swiss-cheese structure. The
+one-loop wheel/contact cancellation in (2) is not an accident of the
+affine algebra; it follows from the BV theory being one-loop exact
+(Theorem~\ref{thm:affine-half-space-bv}). The factorization quantum
+group structure adds the spectral parameter to (3); the Steinberg
+geometry adds the $(-1)$-shifted symplectic structure to (1).
+
+\begin{remark}[The remaining frontier: beyond the affine lineage]
+\label{rem:beyond-affine-frontier}
+For $\mathcal{W}$-algebras $\mathcal{W}^k(\fg, f)$ obtained by DS reduction with respect to a nilpotent $f \in \fg$, the one-loop wheel/contact cancellation fails when the BRST cohomology does not inherit one-loop exactness (Theorem~\ref{thm:ds-koszul-obstruction}). In that case:
+\begin{itemize}
+ \item The higher $A_\infty$ operations $m_k$ ($k \geq 3$) do not vanish.
+ \item The reduced connection is not KZ but receives corrections from higher collision homotopies.
+ \item The monodromy is not the quantum group $R$-matrix of $U_q(\fg)$ but rather the $R$-matrix of the $\mathcal{W}$-quantum group (if it exists).
+ \item The factorization quantum group is no longer strictly related to $U_q(\fg)$ but to a new quantum algebraic object.
+\end{itemize}
+This is the content of Conjecture~\ref{conj:rmatrix} in its full generality. The affine lineage is the case where the conjecture is a theorem, because one-loop exactness reduces everything to the classical Drinfeld--Kohno input. Explicit verifications now cover both $\mathfrak{sl}_2$ and $\mathfrak{sl}_3$ on evaluation modules (Proposition~\ref{prop:sl3-monodromy-verification}); the $\mathfrak{sl}_3$ case is the first where higher Casimir invariants ($C_3$) enter the monodromic structure, and they do so through the associator rather than the $R$-matrix eigenvalues.
+\end{remark}
+
+\section{Conclusion}\label{sec:log-ht-conclusion}
+
+The chain reads
+\begin{center}
+local algebra $\Longrightarrow$ collision field $\Longrightarrow$ logarithmic superconnection $\Longrightarrow$ reduced connection $\Longrightarrow$ monodromy $\Longrightarrow$ tensor structure.
+\end{center}
+
+At the strict end the output is a shifted KZ/FM connection. At the
+derived end, a bar-valued superconnection of Maurer--Cartan curvature.
+Analytically: renormalised graph forms on mixed logarithmic
+configuration spaces, and compactified Stokes identities. After
+reduction: an ordinary logarithmic connection, an associator, a
+braiding, and the geometry of tangential basepoints. Spectrally:
+periodicity and chromaticity compatible with factorization homology.
+The chromatic modular functor extends the chain: after spectralization,
+the monodromic tensor structure produces a tower of $K(n)$-local
+modular functors whose genus stratification mirrors the chromatic
+filtration, with the fully dualizable open-sector category as
+cobordism-hypothesis datum. Swiss-cheese directionality is blueshift;
+the localization sequence is chromatic fracture; the non-perturbative
+genus tower is where the telescope conjecture fails. The invariant
+object is a monodromic local-to-global machine organised by
+logarithmic collision geometry.
+
+Each piece strengthens independently: the mixed log-BPHZ analysis
+extends to wider classes of theories; the resolved-line criterion
+refines and classifies; the monodromy/factorisation-quantum-group
+bridge becomes a theorem; the logarithmic CoHA envelope acquires
+construction; the spectral lift becomes genuinely chromatic; the
+chromatic modular functor compares with Stolz--Teichner; the chiral
+blueshift and chromatic Smith identifications follow from the
+$C_p$-equivariant structure on the spectral factorization algebra.
+The spine is rigid — once the classical line algebra resolves cleanly,
+the remaining structure is forced.

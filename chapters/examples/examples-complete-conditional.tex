@@ -1,0 +1,388 @@
+\section{Complete Computations: Nonabelian Affine Extension}
+\label{sec:examples_complete_conditional}
+
+The material below extends the complete computations of
+Section~\ref{sec:examples_complete} to the nonabelian setting.
+The physics-bridge verification
+(Proposition~\ref{prop:su2-hypotheses}) records the precise hypotheses under
+which $SU(2)$ Chern--Simons lies in the scope of
+Theorem~\ref{thm:physics-bridge}. The explicit
+$\Ainf$ computation through degree~$4$ proceeds at the
+chain level before the comparison model enters; cohomological tower
+termination uses the one-loop Koszul affine comparison model with
+compatible nullhomotopies. The Jacobi mechanism for $m_4^H = 0$ and the
+cohomological tower bound $r_{\max} = 3$ appear in
+Propositions~\ref{prop:su2-m3}--\ref{prop:su2-truncation}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example IV: Nonabelian Chern--Simons ($SU(2)$ at level $k$)}
+\label{ex:nonabelian_CS_complete}
+\index{Chern--Simons!nonabelian|textbf}
+\index{Kac--Moody algebra!affine sl2@affine $\mathfrak{sl}_2$}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The cubic self-coupling of the gauge field produces nonvanishing
+$m_3$, and in the standard affine HT gauge realization the
+open-colour Koszul dual is the Yangian $Y(\mathfrak{sl}_2)$.
+
+\subsubsection{HT twist and field content}
+
+Fix 3d $SU(2)$ Chern--Simons theory on $\R_t \times \C_z$
+at level~$k$. The action is
+\begin{equation}\label{eq:su2-cs-action}
+S = \frac{k}{4\pi} \int_{\R \times \C}
+ \operatorname{tr}\!\Bigl(
+ A \wedge dA + \tfrac{2}{3}\, A \wedge A \wedge A
+ \Bigr).
+\end{equation}
+After the HT twist and BV gauge fixing, the field content on
+$\R_t \times \C_z$ is:
+\begin{itemize}
+\item Gauge field components
+ $A_z^a(t,z)$ ($a = 1,2,3$ for
+ $\mathfrak{sl}_2 = \operatorname{span}\{e,f,h\}$),
+ of cohomological degree~$0$;
+\item Antifield/ghost $c^a(t,z)$ of degree~$1$;
+\item Lagrange multiplier
+ $A_{\bar z}^a(t,z)$ of degree~$0$.
+\end{itemize}
+
+\subsubsection{BV-BRST differential and propagator}
+
+The BV-BRST differential acts by
+\begin{equation}\label{eq:su2-brst}
+Q \cdot A_z^a = d_t c^a + f^a{}_{bc}\, A_z^b\, c^c,
+\qquad
+Q \cdot c^a = \tfrac{1}{2}\, f^a{}_{bc}\, c^b\, c^c,
+\end{equation}
+where $f^a{}_{bc}$ are the structure constants of
+$\mathfrak{sl}_2$ (with $[e,f] = h$, $[h,e] = 2e$,
+$[h,f] = -2f$). Compared with the abelian case,
+$Q$ carries a \emph{quadratic} term from the gauge
+self-interaction.
+
+The HT propagator is the same as for abelian CS:
+\begin{equation}\label{eq:su2-propagator}
+\langle A_z^a(t_1,z_1)\, A_{\bar z}^b(t_2,z_2) \rangle
+= \frac{\delta^{ab}}{2\pi} \cdot
+ \frac{\Theta(t_1 - t_2)}{z_1 - z_2}.
+\end{equation}
+The Killing form $\delta^{ab}$ (normalized to
+$\operatorname{tr}(t^a t^b) = \frac{1}{2}\delta^{ab}$
+in the fundamental representation) couples the color indices.
+
+\subsubsection{Binary operation $m_2$ and $\lambda$-bracket}
+
+The binary operation $m_2$ is computed from the propagator
+\eqref{eq:su2-propagator} via the same FM integral as in the
+abelian case, with the OPE now producing color-dependent
+residues.
+
+\begin{proposition}[$\mathfrak{sl}_2$ $\lambda$-bracket]
+\label{prop:su2-lambda-bracket}
+Setting
+$J^a(z) := A_z^a(t,z)|_{t=0}$ (boundary current), the
+$\lambda$-bracket is:
+\begin{equation}\label{eq:su2-lambda}
+\{J^a{}_\lambda J^b\}
+= f^{ab}{}_c\, J^c + k\, \delta^{ab}\, \lambda.
+\end{equation}
+This is the defining relation of the affine Kac--Moody algebra
+$\widehat{\mathfrak{sl}}_2$ at level~$k$.
+\end{proposition}
+
+\begin{proof}
+The singular part of $m_2(J^a, J^b)$ is extracted from the
+simple-pole residue of the propagator
+$\langle A_z^a(z_1)\, A_{\bar z}^b(z_2)\rangle$ at $z_1 = z_2$.
+The structure constant term $f^{ab}{}_c\, J^c$ comes from the
+cubic vertex $f^a{}_{bc}\, A_z^b\, c^c$ in the BRST differential
+\eqref{eq:su2-brst}: the tree-level Feynman diagram with one
+internal vertex and two external legs produces a simple-pole
+contribution proportional to $f^{ab}{}_c$. The central term
+$k\, \delta^{ab}\, \lambda$ comes from the double-pole residue of
+the free propagator, exactly as in the abelian case.
+\end{proof}
+
+\subsubsection{The cubic operation $m_3$}
+
+Unlike the abelian case, the nonabelian cubic vertex generates a
+nonvanishing $m_3$.
+
+\begin{proposition}[Nonabelian $m_3$: explicit formula]
+\label{prop:su2-m3}
+The cubic $\Ainf$ operation $m_3$ for
+$\widehat{\mathfrak{sl}}_2$ at level~$k$ is nonzero at chain
+level. In the Chevalley basis $\{e, f, h\}$, the general
+structural form of the Stasheff associator is
+\begin{equation}\label{eq:su2-m3}
+\begin{split}
+m_3(J^a, J^b, J^c;\, \lambda_{12}, \lambda_{23})
+&= \bigl(f^{ab}{}_d\, f^{dc}{}_g
+ - f^{bc}{}_d\, f^{ad}{}_g\bigr)\, J^g \\
+&\quad + \bigl(f^{ab}{}_d\, \delta^{dc}\,(\lambda_{12}+\lambda_{23})
+ - f^{bc}{}_d\, \delta^{ad}\, \lambda_{12}\bigr)\, k,
+\end{split}
+\end{equation}
+where the field-dependent part is the Jacobi expression
+$[[J^a, J^b], J^c] - [J^a, [J^b, J^c]]$ (the difference of
+the two $m_2 \circ m_2$ compositions), and the spectral-parameter
+terms couple the central extension to the structure constants.
+The nonvanishing triples are precisely those spanning a path
+through the root system:
+\begin{alignat}{2}
+m_3(e, f, h) &= -2h + 2k\lambda_{23}, &\qquad
+m_3(h, e, f) &= 2h + 2k\lambda_{23}, \notag \\
+m_3(e, h, f) &= -2k\lambda_{23}, &\qquad
+m_3(f, e, h) &= 2h + 2k\lambda_{23}, \notag \\
+m_3(h, f, e) &= -2h + 2k\lambda_{23}, &\qquad
+m_3(f, h, e) &= 2k\lambda_{23}. \label{eq:su2-m3-explicit}
+\end{alignat}
+All triples with repeated root generators give $m_3 = 0$.
+On the chosen one-loop Koszul affine comparison model, the supplied
+transfer homotopy makes the nonzero triples $Q$-boundaries. This is a
+model-specific witness, not a consequence of ordinary
+topological contractibility.
+\end{proposition}
+
+\begin{proof}
+The explicit components~\eqref{eq:su2-m3-explicit} are computed by
+evaluating the Stasheff associator
+$A_3(J^a, J^b, J^c;\, \lambda_{12}, \lambda_{23})
+= m_2(m_2(J^a, J^b;\, \lambda_{12}),\, J^c;\,
+\lambda_{12} + \lambda_{23})
+- m_2(J^a,\, m_2(J^b, J^c;\, \lambda_{23});\, \lambda_{12})$
+on all independent generator triples. The computation uses only
+the $\lambda$-bracket~\eqref{eq:su2-lambda}, conformal
+sesquilinearity, and the vacuum rule that
+$m_2(\mathbf{1}, a)=a$ has no singular part.
+The nonvanishing triples are precisely those where the Jacobi
+expression $f^{ab}{}_d f^{dc}{}_g - f^{bc}{}_d f^{ad}{}_g$ is
+nonzero. Triples with repeated root generators give $A_3 = 0$
+by two mechanisms: adjacent repetitions vanish
+because $m_2(e,e) = m_2(f,f) = 0$; non-adjacent repetitions
+such as $(e,f,e)$ vanish because the two compositions in the
+Stasheff difference cancel; explicitly,
+$f^{ef}{}_h\, f^{he}{}_e = f^{fe}{}_h\, f^{eh}{}_e = 2$, so
+the Jacobi expression
+$f^{ef}{}_h f^{he}{}_e - f^{fe}{}_h f^{eh}{}_e = 0$ and both
+spectral terms vanish by $\delta^{he} = 0$.
+
+The chain-level $m_3$ is obtained by antidifferentiation on
+$\FM_3(\C) \cong [0,1]$; the specific
+$\lambda_{23}$ dependence in~\eqref{eq:su2-m3-explicit}
+corresponds to the left-endpoint gauge. Its boundary decomposes into
+two codimension-$1$ faces ($z_1 \to z_2$ and $z_2 \to z_3$), whose
+contributions are the compositions $m_2 \circ m_2$. The Lie conformal
+Jacobi identity identifies this boundary with the associator defect.
+Passing from this boundary identity to $[m_3]=0$ requires the
+compatible transfer homotopy specified by the affine comparison model.
+\end{proof}
+
+\subsubsection{Higher operations $m_{k \geq 4}$}
+
+\begin{proposition}[Termination of the $\Ainf$ tower at degree~$3$]
+\label{prop:su2-truncation}
+For $\widehat{\mathfrak{sl}}_2$ at level~$k$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $m_4 = 0$ on cohomology: the quartic Stasheff obstruction
+ $A_4(J^a, J^b, J^c, J^d)$ vanishes identically by the Jacobi
+ identity applied twice. The field-dependent part assembles
+ iterated structure constant contractions
+ $f^{ab}{}_p f^{pc}{}_q f^{qd}{}_r$ whose Stasheff-signed sum
+ is the generalised Jacobi identity at depth~$3$; the central
+ terms cancel by the residue theorem on $\FM_4(\C)$.
+\item $m_4 \neq 0$ at chain level: the square Feynman diagram
+ with three cubic vertices contributes degree~$2$, matching
+ $\FM_4(\C)$. Its transferred cohomology class is annihilated by the
+ compatible affine nullhomotopy.
+\item $m_{k \geq 5} = 0$ at all levels by AOS degree counting:
+ a tree with $k$ external legs requires $k-2$ vertices of
+ degree~$1$ each; for $k \geq 5$, the logarithmic form degree
+ exceeds the dimension of $\FM_k(\C)$.
+\item On the chosen one-loop Koszul affine comparison model, the
+ Virasoro wheel is absent while the Lie--Jacobi transfer survives.
+ The PVA on $H^\bullet$ is $\widehat{\mathfrak{sl}}_2$ at level~$k$
+ with the standard $\lambda$-bracket. Shadow depth $r_{\max} = 3$
+ (class~$\mathbf{L}$).
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(i): the quartic Stasheff obstruction on the quadruple
+$(e, f, e, f)$ (passing through all three root spaces) is computed
+term by term. Of the five Stasheff terms, two vanish because
+$m_3(e,f,e) = m_3(f,e,f) = 0$ (repeated root spaces); the
+remaining three produce field-dependent parts $+2h$ and $-2h$ that
+cancel, plus spectral-parameter terms that cancel by the residue
+theorem. For general quadruples, the field-dependent part
+assembles into the Stasheff-signed sum of iterated contractions
+$f^{ab}{}_p f^{pc}{}_q f^{qd}{}_r$, which vanishes by applying
+the Jacobi identity $f^{ab}{}_p f^{pc}{}_q = f^{ac}{}_p f^{bp}{}_q
++ f^{bc}{}_p f^{ap}{}_q$ and then pairwise cancellation.
+
+Part~(ii): the diagram with $k=4$ external legs and $2$ cubic
+vertices has degree $2$, matching $\FM_4(\C)$. The structure
+constant contraction $f^{a}{}_{de}\, f^{e}{}_{fg}\, f^{fbc}$
+is generically nonvanishing.
+
+Part~(iii): a tree-level diagram with $k$ legs and $v = k - 2$
+trivalent internal vertices has total degree $k-2$. For
+$k \geq 5$, the AOS relations force the integral to vanish.
+
+Part~(iv): by induction on degree on the specified comparison model.
+Base case: $m_4^H = 0$ from
+part~(i). Inductive step: for $k \geq 5$, the Stasheff relation
+involves only $m_2$ and $m_3$ after the higher transferred operations
+are annihilated by the nullhomotopy hypothesis. The compositions
+$m_3 \circ m_3$ at degree $5$
+produce iterated structure constant contractions of depth~$4$,
+which vanish by the same Jacobi mechanism.
+\end{proof}
+
+\subsubsection{Cohomology and PVA structure}
+
+\begin{theorem}[PVA for nonabelian CS]
+\label{thm:su2-pva}
+Let\/ $\cA$ be a logarithmic\/ $\SCchtop$-algebra. The cohomology
+$H^\bullet(\A_{\text{CS}}, Q)$ is the affine Kac--Moody PVA
+$\widehat{\mathfrak{sl}}_2$ at level~$k$: a
+$(-1)$-shifted Poisson vertex algebra with
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item generators $J^a$ ($a = 1,2,3$) of degree~$0$;
+\item commutative product (regular part of $m_2$);
+\item $\lambda$-bracket \eqref{eq:su2-lambda}.
+\end{enumerate}
+The PVA axioms (sesquilinearity, skewsymmetry, Jacobi, Leibniz)
+hold by the general descent theorem
+(Theorem~\ref{thm:cohomology_PVA}).
+\end{theorem}
+
+\subsubsection{Koszul dual and Yangian structure}
+
+On the chirally Koszul locus,
+Theorem~\ref{thm:lines_as_modules} identifies
+$\mathcal{C}_{\mathrm{line}} \simeq \cA^!_{\mathrm{line}}\text{-}\mathbf{mod}$;
+the open-colour Koszul dual $\cA^!_{\mathrm{line}}$ controls line
+operators.
+
+\begin{theorem}[Koszul dual is $Y(\mathfrak{sl}_2)$]
+\label{thm:su2-yangian}
+For the standard affine HT gauge realization with closed colour
+$\widehat{\mathfrak{sl}}_2$ at level~$k$, the open-colour Koszul dual is the Yangian
+$Y(\mathfrak{sl}_2)$, a dg-shifted Yangian
+(Theorem~\ref{thm:Koszul_dual_Yangian}) with:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item RTT presentation: $R_{12}(u-v)\, T_1(u)\, T_2(v)
+ = T_2(v)\, T_1(u)\, R_{12}(u-v)$;
+\item spectral $R$-matrix from the Laplace transform
+ (Proposition~\ref{prop:field-theory-r}):
+ \begin{equation}\label{eq:su2-rmatrix}
+ r(z) = \frac{k\,\Omega}{z},
+ \qquad
+ \Omega = \sum_{a=1}^3 t^a \otimes t^a
+ \in \mathfrak{sl}_2 \otimes \mathfrak{sl}_2,
+ \end{equation}
+ where $\Omega$ is the Casimir element and $k$ is the affine level; at $k = 0$ the $r$-matrix vanishes identically;
+\item the classical $r$-matrix \eqref{eq:su2-rmatrix} satisfies
+ the classical Yang--Baxter equation
+ $[r_{12}, r_{13}] + [r_{12}, r_{23}] + [r_{13}, r_{23}] = 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The $\lambda$-bracket \eqref{eq:su2-lambda} has singular part
+$f^{ab}{}_c\, J^c / (z_1 - z_2) + k\, \delta^{ab} / (z_1 - z_2)^2$.
+The Laplace transform
+$r^{ab}(z) = \int_0^\infty e^{-\lambda z}\, \{J^a{}_\lambda J^b\}\, d\lambda$
+gives
+\[
+r^{ab}(z) = \frac{f^{ab}{}_c\, J^c}{z} + \frac{k\, \delta^{ab}}{z^2}.
+\]
+The field-dependent term $f^{ab}{}_c\, J^c/z$ is operator-valued and
+does not contribute to the classical $r$-matrix tensor; the central
+term $k\,\delta^{ab}/z^2$, after $d\log$ absorption (reducing the
+pole order by one), yields the collision $r$-matrix
+$r(z) = k\,\Omega_{\mathrm{tr}}/z$, the standard rational
+$r$-matrix for $\widehat{\mathfrak{sl}}_2$ at level~$k$. The CYBE follows from the
+Jacobi identity of $\mathfrak{sl}_2$ (the same argument as
+Theorem~\ref{thm:YBE} restricted to the $3$-dimensional case).
+
+The open-colour Yangian identification
+$\cA^!_{\mathrm{line}} \simeq Y(\mathfrak{sl}_2)$ is the
+affine specialization of
+Theorem~\ref{thm:Koszul_dual_Yangian}; the RTT presentation is
+the one encoded by the spectral $R$-matrix
+\eqref{eq:su2-rmatrix}.
+\end{proof}
+
+\subsubsection{Genus-$1$ curvature}
+
+\begin{proposition}[Curvature for $\widehat{\mathfrak{sl}}_2$]
+\label{prop:su2-curvature}
+The genus-$1$ curvature
+(Volume~I, Theorem~D, the modular characteristic) evaluates to
+\begin{equation}\label{eq:su2-curvature}
+\kappaChHodge(\widehat{\mathfrak{sl}}_2, k) = \frac{3(k + 2)}{4},
+\end{equation}
+where $3 = \dim(\mathfrak{sl}_2)$ and $h^\vee = 2$ is the
+dual Coxeter number. By complementarity (Volume~I, Theorem~C):
+\begin{equation}
+\kappaChHodge(\widehat{\mathfrak{sl}}_{2,k})
++ \kappaChHodge(\widehat{\mathfrak{sl}}_{2,-k-4}) = 0.
+\end{equation}
+The Koszul dual level is $k' = -k - 2h^\vee = -k - 4$
+(Feigin--Frenkel involution).
+\end{proposition}
+
+\begin{proof}
+The central charge of $\widehat{\mathfrak{sl}}_2$ at level~$k$
+is $c = 3k/(k+2)$ (Sugawara formula with $\dim\mathfrak{sl}_2 = 3$
+and $h^\vee = 2$). The curvature $\kappaChHodge(V_k(\mathfrak{sl}_2)) = \dim\mathfrak{g}\cdot(k+h^\vee)/(2h^\vee) = 3(k+2)/4$, matching Volume~I's computation.
+Under $k \mapsto k' = -k - 2h^\vee = -k - 4$:
+$\kappaChHodge(V_{k'}(\mathfrak{sl}_2)) = 3(k'+2)/4 = 3(-k-4+2)/4 = 3(-k-2)/4 = -3(k+2)/4 = -\kappaChHodge(V_k(\mathfrak{sl}_2))$,
+confirming complementarity $\kappaChHodge(V_k(\mathfrak{sl}_2)) + \kappaChHodge(V_{k'}(\mathfrak{sl}_2)) = 0$.
+\end{proof}
+
+\subsubsection{Verification of the physics-bridge inputs}
+\label{subsubsec:su2-verification}
+
+\begin{proposition}[Physics-bridge verification for $SU(2)$ CS]
+\label{prop:su2-hypotheses}
+$SU(2)$ Chern--Simons theory at integer level~$k \geq 1$ lies in the
+scope of Theorem~\ref{thm:physics-bridge}.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item BV data and one-loop finiteness: the action
+ \eqref{eq:su2-cs-action} is a classical BV theory with well-defined
+ HT twist. Gauge fixing yields a propagator with standard properties.
+ One-loop finiteness holds because 3d CS is topological: the only
+ UV divergence is the one-loop shift $k \to k + h^\vee$
+ (renormalization of the level), which is finite.
+\item The propagator \eqref{eq:su2-propagator} is meromorphic in~$z$
+ (simple pole at $z_1 = z_2$), exponential decay in~$t$
+ (Heaviside step function).
+\item The interaction vertex $f^a{}_{bc}$
+ is polynomial in the fields; Feynman integrands are
+ logarithmic forms on $\FM_k(\C)$. AOS relations hold by
+ the theory of configuration space integrals for
+ polynomial interactions. Stokes exactness holds on
+ $\FM_k(\C)$ by the compactification's smooth-with-corners
+ structure.
+\end{enumerate}
+Theorem~\ref{thm:physics-bridge} applies; the resulting
+observables form a logarithmic $\SCchtop$-algebra, and the induced
+factorization compatibility is part of the resulting
+$C_\ast(W(\SCchtop))$-algebra structure.
+\end{proposition}
+
+\subsection{Summary Table for the Nonabelian Affine Extension}
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Theory} & $m_2$ & $m_3$ & $m_{k \geq 4}$ & $H^\bullet(\A, Q)$ \\
+\hline
+$SU(2)$ CS & $\frac{f^{ab}{}_c J^c}{z_{12}} + \frac{k\delta^{ab}}{z_{12}^2}$ & $\neq 0$ (explicit) & $m_4^H = 0$ on the specified comparison model; $m_{\geq 5} = 0$ by degree counting & $\widehat{\mathfrak{sl}}_2$ at level $k$ \\
+\hline
+\end{tabular}
+\end{center}

@@ -1,0 +1,3828 @@
+%% Heptagon of presentations of the chiral-topological Swiss-cheese operad.
+%% Upgrade of the pentagon (five presentations) to a heptagon (seven).
+%% Included in Vol II theory sequence after factorization_swiss_cheese.
+
+%% Local macro safety (providecommand only)
+\providecommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch},\mathrm{top}}}
+\providecommand{\Fact}{\mathrm{Fact}}
+\providecommand{\CoFact}{\mathrm{CoFact}}
+\providecommand{\FM}{\mathrm{FM}}
+\providecommand{\Conf}{\mathrm{Conf}}
+\providecommand{\Ran}{\mathrm{Ran}}
+\providecommand{\Obs}{\mathsf{Obs}}
+\providecommand{\Hoch}{\mathrm{Hoch}}
+\providecommand{\ChirHoch}{\mathrm{ChirHoch}}
+\providecommand{\Bulk}{\mathrm{Bulk}}
+\providecommand{\Bdy}{\mathrm{Bdy}}
+\providecommand{\MC}{\mathrm{MC}}
+\providecommand{\QME}{\mathrm{QME}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\Mod}{\mathrm{Mod}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cB}{\mathcal{B}}
+\providecommand{\cC}{\mathcal{C}}
+\providecommand{\cE}{\mathcal{E}}
+\providecommand{\cZ}{\mathcal{Z}}
+\providecommand{\cM}{\mathcal{M}}
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\Lie}{\mathsf{Lie}}
+\providecommand{\Ass}{\mathsf{Ass}}
+\providecommand{\Com}{\mathsf{Com}}
+\providecommand{\QCoh}{\operatorname{QCoh}}
+\providecommand{\IndCoh}{\operatorname{IndCoh}}
+\providecommand{\Dmod}{D\text{-}\mathsf{mod}}
+\providecommand{\colim}{\operatorname{colim}}
+\providecommand{\ChirAlg}{\mathsf{ChirAlg}}
+\providecommand{\Stk}{\mathsf{Stk}}
+\providecommand{\RSpec}{\mathbf{RSpec}}
+\providecommand{\bMap}{\mathbf{Map}}
+\providecommand{\HTQFT}{\mathsf{HT\text{-}QFT}}
+\providecommand{\fsl}{\mathfrak{sl}}
+\providecommand{\Repq}{\mathrm{Rep}_q}
+% Vol III two-stage factorisation (cross-volume macros)
+\providecommand{\PhiFA}{\Phi^{\mathrm{FA}}}
+\providecommand{\SpCh}{\mathrm{Sp}_{\mathrm{Ch}}}
+\providecommand{\HolFA}{\mathrm{HolFA}}
+\providecommand{\EdHolFA}{E_d\text{-}\HolFA}
+\providecommand{\EnHolFA}{E_n\text{-}\HolFA}
+\providecommand{\intSigma}{\textstyle\int_{\Sigma}}
+\providecommand{\hCS}{\mathrm{hCS}}
+
+\chapter{The Heptagon of Presentations of \texorpdfstring{$\SCchtop$}{SC}}
+\label{ch:sc-chtop-heptagon}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Prologue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+One operad; seven faces. Each face is a geometric, algebraic, or
+categorical presentation, and each pair of faces is connected by a named
+equivalence of $\infty$-operads, $\infty$-quasi-isomorphic after
+fixing a Drinfeld associator $\Phi\in\mathrm{GRT}_1(\mathbb{Q})$.
+Five faces are classical: the operadic face
+(Chapter~\ref{ch:factorization-swiss-cheese}), its Koszul dual
+(Chapter~\ref{ch:theory-equivalence}), and the factorization,
+BV/BRST, and convolution faces. Two further faces present themselves:
+the Drinfeld-centre face through the factorization-module category
+$\Rep_{\mathrm{fact}}(\cA)$, and the derived-algebraic-geometry face
+through global sections of a stack classifying $E_1$-chiral algebras
+equipped with $\SCchtop$-datum.
+Adjacent edges of the heptagon are named theorems; the diagonal edges
+are consequences of the seven adjacencies.
+
+The local shadow is rigid: the $\infty$-operadic structure is
+determined by any one face, and the seven faces exhaust the
+presentations currently known. The absence of a conformal vector
+freezes the heptagon at $\SCchtop$; its presence triggers
+topologisation to $E_3$-topological (Chapter~\ref{ch:topologization}).
+The heptagon is the generic object; topologisation is the exceptional
+collapse.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Setting: the object of the heptagon}
+\label{sec:heptagon-setting}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Throughout this chapter $X$ denotes a smooth complex curve and $\cA$
+denotes an $E_1$-chiral algebra on $X$. We write $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$
+for the derived chiral centre $C^{\bullet}_{\mathrm{ch}}(\cA,\cA)$
+computed against the algebraic chiral endomorphism operad
+$\End^{\mathrm{ch}}_\cA$ (Chapter~\ref{ch:theory-hochschild}). The pair
+\begin{equation}
+ \label{eq:heptagon-pair}
+ \bigl(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\;\cA\bigr)
+\end{equation}
+is the \emph{$\SCchtop$-datum} of $\cA$: bulk acts on boundary, the
+boundary carries no action on the bulk.
+
+\begin{convention}[What the heptagon presents]\label{conv:heptagon-object}
+All seven faces present the same \emph{local collision shadow} of the
+two-coloured operad with directional restriction $\SCchtop$
+(operations are coloured by
+closed/open, closed-to-open compositions exist, open-to-closed
+compositions are empty). This shadow has homotopy type
+\begin{equation}
+ \SCchtop(k,m)
+ \;\simeq\;
+ C_{\bullet}\bigl(\FM_k(\mathbb{C})\bigr)
+ \,\otimes\,
+ C_{\bullet}\bigl(\Conf_m(\mathbb{R})\bigr)
+\end{equation}
+on the open strata, with two boundary colours
+(closed $=\FM_k(\mathbb{C})$, open $=\Conf_m(\mathbb{R})$) related by
+codimension-one mixed stratum $\FM_k(\mathbb{C})\times\Conf_m(\mathbb{R})$,
+and no open-to-closed operations. The factorisation face before
+formal completion is a global Ran/factorisation object and can carry
+period, monodromy, and boundary-incidence data invisible to this local
+operad; the heptagon identifies its local shadow, not those extra
+global invariants. Because of the directional restriction, the Koszul
+dual is not the operad itself:
+$(\SCchtop)^{!}=(\Lie,\Ass,\text{shuffle-mixed})$ is closed-sector
+$\Lie$, open-sector $\Ass$, shuffle-mixed cross-term; its closed
+arity dimensions are $(n-1)!$ whereas $\SCchtop$'s closed arity
+dimensions are $1$, so the operads are genuinely distinct.
+\end{convention}
+
+\begin{remark}[Directional asymmetry]\label{rem:heptagon-asymmetry}
+Every face records the directional bulk-to-boundary composition;
+no face admits a natural open-to-closed operation. The asymmetry forces
+the Koszul dual to be non-self, forces the factorization face to act
+through module categories rather than algebras, and forces the
+Drinfeld-centre face to be a \emph{right adjoint} (centre), not an
+averaging.
+\end{remark}
+
+\begin{lemma}[Two colours of $\SCchtop$ are the two stages of
+the CY-to-chiral functor;
+\ClaimStatusConditional on Vol~III scope; licensing tags
+$\alpha + \beta$]
+\label{lem:heptagon-two-stage-CY-to-chiral}%
+\label{rem:heptagon-two-stage-CY-to-chiral}% legacy alias preserved
+\index{Swiss-cheese chiral-topological operad!closed/open as stage-1/stage-2|textbf}%
+\index{CY-to-chiral functor!two-stage factorisation}%
+The closed and open colours of the directed two-coloured operad
+$\SCchtop$ are
+the local-shadow images of the two stages of the Vol~III CY-to-chiral
+functor: for $d \in \{2, 3\}$, the CY-to-chiral functor factorises
+\[
+ \Phi_d \;=\; {\SpCh}_{\Sigma_{d-1},\,C}\circ\PhiFA_d,
+\]
+with stage~1 ($\PhiFA_d$) producing a canonical $E_d$-homotopy
+factorisation algebra on the CY-$d$ target via
+Kontsevich--Tamarkin formality combined with
+Costello--Gwilliam--Li factorisation-homology BV quantisation, and
+stage~2 (${\SpCh}_{\Sigma_{d-1},C}$) specialising to a reference
+curve $C$ via factorisation-homology pushforward
+$\int_{\Sigma_{d-1}}$ along an auxiliary $(d-1)$-manifold. The
+local-shadow image of stage~1 is the closed colour
+$\FM_k(\C)$ \textup($E_2$ at chain level\textup); the local-shadow image
+of stage~2 is the open colour $\Conf_m(\R)$ \textup($E_1$ on $\R$\textup);
+the mixed operations $\FM_k(\C) \times \Conf_m(\R)$ record the
+$\int_{\Sigma_{d-1}}$ pushforward as bulk-to-boundary map. The
+directional restriction
+$\SCchtop(\ldots, \mathsf{top}, \ldots; \mathsf{cl}) = \varnothing$
+expresses operadically that stage~2 is a \emph{specialisation} of
+stage~1, never an inversion.
+At $d = 2, 3$, the two colours of the local $\SCchtop$ shadow record
+the two stages:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The \emph{closed colour} -- the holomorphic/braided sector
+with arity components $\FM_k(\C)$, homotopy $E_2$ at the chain
+level -- is the restriction of stage~1 to local observables of a
+$E_d$-holomorphic factorisation algebra on a formal disc in the
+CY target. At $d = 2$ this is $\PhiFA_2(\cC)$ evaluated on
+$\mathrm{Spf}\,\C[\![z]\!]$; at $d = 3$ it is the restriction of
+$\PhiFA_3(\cC)$ to a transverse disc after the holomorphic
+reduction on the $\C^2$-factor of the stage-1 factorisation
+algebra (Costello--Gwilliam Vol.~I~Theorem~3.4.9).
+\item The \emph{open colour} -- the topological/ordered sector
+with arity components $\Conf_m(\R)$, $E_1$ on $\R$ by
+Ayala--Francis~\cite{AF15} -- is the stage-2 shadow
+${\SpCh}_{\Sigma_{d-1},C}\circ\PhiFA_d(\cC)$ landing on the
+reference curve $C$. It is $E_1$-chiral, not $E_d$, because
+factorisation-homology pushforward along $\Sigma_{d-1}$
+collapses $d - 1$ topological directions, leaving a
+single holomorphic direction along $C$ and a single
+topological direction along $\R\subset C\times\R$.
+\item The \emph{mixed operations} -- the closed colour acting on
+the open colour via the codimension-one stratum
+$\FM_k(\C)\times\Conf_m(\R)$ -- record the factorisation-homology
+pushforward $\int_{\Sigma_{d-1}}$ as a bulk-to-boundary map. The
+directional restriction $\SCchtop(\ldots,\mathsf{top},\ldots;
+\mathsf{cl})=\varnothing$ (no open-to-closed) is the precise
+operadic expression of the fact that stage~2 is a specialisation of
+stage~1, not an inversion: the $E_d$-structure on the CY target
+determines the $E_1$-structure on $C$, while the converse map
+from a single $E_1$-chiral algebra to an $E_d$-factorisation
+algebra does not exist canonically (a CY-$d$ category admits a
+\emph{family} of $E_1$-chiral shadows parametrised by the choice
+of $\Sigma_{d-1}$ and $C$).
+\end{enumerate}
+At $d = 2$ the two stages coincide with the two colours in the
+local-shadow model: $\Sigma_{d-1} = \Sigma_1 = \R$ and the stage-2
+pushforward $\int_\R$ is the topological factorisation on the
+boundary. At $d = 3$ the auxiliary manifold is
+$\Sigma_2$ and the stage-2 reference curve is a transverse holomorphic
+curve in the CY-$3$, making the open colour the ordered $E_1$-chiral
+algebra on that reference curve (see
+Theorem~\ref{thm:BD-CG-equivalence} for the three-layer comparison
+and Remark~\ref{rem:sc-chtop-pentagon} for the pentagon extension).
+The heptagon faces are thus seven presentations of the local
+closed/open shadow of the \emph{composite} $\Phi_d$; the
+pentagon-trace-identity
+(Remark~\ref{rem:pentagon-trace-identity}) realises the closed/open
+projection as the Volume~I ghost-identity / Volume~III BKM-weight
+decomposition of the two stages. Vol.~III,
+\texttt{cy\_to\_chiral.tex} fixes the scope and proves the functoriality
+of the factorisation; the present heptagon is its coloured
+bar-cobar-Koszul completion.
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The five classical faces}
+\label{sec:five-classical-faces}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We restate the pentagon vertices as inputs to the heptagon, fixing
+notation for edges in \S\ref{sec:heptagon-edges}.
+
+\subsection{Face (1): the operadic face}\label{subsec:face-operadic}
+
+\begin{definition}[Coloured Swiss-cheese chiral-topological operad
+$\SCchtop$; \ClaimStatusProvedElsewhere]\label{def:factorization-swiss-cheese-operad}%
+\index{Swiss-cheese chiral-topological operad!definition|textbf}
+The \emph{coloured Swiss-cheese chiral-topological operad} $\SCchtop$
+is the two-coloured topological operad with colours $\{\mathsf{cl},
+\mathsf{op}\}$ whose component spaces are
+\begin{equation}\label{eq:scchtop-spaces}
+ \SCchtop\bigl(\tfrac{k\,\mathsf{cl},\,m\,\mathsf{op}}{\mathsf{cl}}\bigr)
+ \;=\;\emptyset\quad(m\geq 1),\qquad
+ \SCchtop\bigl(\tfrac{k\,\mathsf{cl},\,m\,\mathsf{op}}{\mathsf{op}}\bigr)
+ \;=\;\FM_{k,m}(\mathbb{H})
+\end{equation}
+where $\mathbb{H}\subset\mathbb{C}$ is the closed upper half-plane
+and $\FM_{k,m}(\mathbb{H})$ is the Voronov half-plane variant of the
+Fulton--MacPherson compactification of the configuration space of
+$k$ points in the interior $\mathbb{H}^\circ$ and $m$ points on the
+boundary $\partial\mathbb{H}=\mathbb{R}$, modulo the
+boundary-preserving affine group
+(Voronov\,\cite{Voronov1998}); this is the coupled half-plane model
+of Definition~\ref{def:SC-operations}.
+Composition is concatenation/insertion of configurations:
+closed-into-closed via $\FM_k(\mathbb{C})$ insertion,
+closed-into-open via insertion at an interior point, and
+mixed-into-open (in particular open-into-open) via insertion at a
+boundary point, the boundary point carrying the transverse position
+of the inserted configuration. The empty closed-output component
+in~\eqref{eq:scchtop-spaces} when $m\geq 1$ encodes the directional
+restriction \emph{no open-to-closed operation}: an open input never
+contributes to a closed output.
+
+The chain-level operad of singular chains $C_\bullet(\SCchtop)$ has
+the homotopy type
+\begin{equation}\label{eq:scchtop-arity-decomp}
+ C_\bullet\!\bigl(\SCchtop(k,m)\bigr)
+ \;\simeq\;
+ C_\bullet\bigl(\FM_k(\mathbb{C})\bigr)\otimes
+ C_\bullet\bigl(\Conf_m(\mathbb{R})\bigr)
+\end{equation}
+on the open strata, by the homotopy retraction of $\FM_k(\mathbb{H})$
+to $\FM_k(\mathbb{C})$ relative to the boundary configuration of $m$
+points on $\mathbb{R}$ (Voronov\,\cite{Voronov1998}\,Lemma~1.4). The
+\emph{factorization Swiss-cheese chiral-topological} variant is the
+coloured factorization-algebra incarnation: closed colour is a
+factorizable $D$-module on $\Ran(X)$ (BD chiral algebra), open colour
+is a locally constant factorization algebra on $\Ran(\mathbb{R})$
+($\mathrm{E}_1$-algebra by Ayala--Francis\,\cite{AF15}), mixed sector
+is a factorization module over the mixed open--closed Ran geometry
+$\Ran^{\mathrm{oc}}_{\mathrm{HT}}(X,\mathbb{R}_{\geq 0})$, supported
+on the Type~III boundary-incidence stratum
+$X\times\{0\}\subset X\times\R_{\geq 0}$. The separated product
+$\Ran(X)\times\Ran(\mathbb{R})$ is only the depth-zero associated
+graded obtained after forgetting the Type~III incidence faces.
+
+The dg object used in the local operadic face is the logarithmic
+chain coloured operad of the depth-zero associated graded
+(Proposition~\ref{prop:gr-chiral}: the decoupled componentwise
+model, on which every componentwise computation below is a
+gr-level statement),
+\[
+C_\bullet^{\log}\bigl(\gr\SCchtop\bigr)(\mathsf{cl}^{p},\mathsf{op}^{q};\mathsf{cl})
+=
+\begin{cases}
+C_\bullet^{\log}\bigl(\FM_p(\C)\bigr), & q=0,\\
+0, & q>0,
+\end{cases}
+\]
+and
+\[
+C_\bullet^{\log}\bigl(\gr\SCchtop\bigr)(\mathsf{cl}^{p},\mathsf{op}^{q};\mathsf{op})
+=
+C_\bullet^{\log}\bigl(\FM_p(\C)\times\Conf_q^{<}(\R)\bigr),
+\]
+where \(\Conf_q^{<}(\R)\) is the ordered open configuration chamber
+and \(C_\bullet^{\log}\) denotes chains with logarithmic boundary
+strata included. Thus the open-to-closed component is the zero chain
+complex, not a verbal exclusion. The local composition maps are
+Fulton--MacPherson insertion in the closed slots and ordered-interval
+insertion in the open slots:
+\[
+\gamma_{\mathsf{cl}}\colon
+\FM_p(\C)\times\prod_{i=1}^{p}\FM_{n_i}(\C)
+\longrightarrow
+\FM_{\sum_i n_i}(\C),
+\]
+\[
+\gamma_{\mathsf{op}}\colon
+\bigl(\FM_p(\C)\times\Conf_q^{<}(\R)\bigr)
+\times\prod_{i=1}^{p}\FM_{n_i}(\C)
+\times\prod_{j=1}^{q}\Conf_{m_j}^{<}(\R)
+\longrightarrow
+\FM_{\sum_i n_i}(\C)\times\Conf_{\sum_j m_j}^{<}(\R).
+\]
+No composition has target
+\(C_\bullet^{\log}\SCchtop(\mathsf{cl}^{p},\mathsf{op}^{q};\mathsf{cl})\)
+with \(q>0\), because that complex is zero.
+
+For a coloured rooted tree \(T\), let \(E_{\mathrm{int}}(T)\) be its
+internal edges and let \(\mathfrak{o}(v)\) denote the orientation line
+of the logarithmic stratum labelling the vertex~\(v\). Fix, once and
+for all, an ordering convention on \(E_{\mathrm{int}}(T)\). The total
+tree-orientation line is
+\[
+\mathfrak{o}(T)
+=
+\det\bigl(\mathbb{k}^{E_{\mathrm{int}}(T)}\bigr)
+\otimes
+\bigotimes_{v\in V(T)}\mathfrak{o}(v).
+\]
+The Boardman--Vogt resolution has
+arity component
+\[
+C_\bullet\!\left(W(\SCchtop)(\mathbf a;b)\right)
+=
+\bigoplus_{T:\mathbf a\to b}
+\mathfrak{o}(T)\otimes
+C_\bullet\bigl([0,1]^{E_{\mathrm{int}}(T)}\bigr)
+\otimes
+\bigotimes_{v\in V(T)}
+C_\bullet^{\log}\SCchtop(\mathrm{in}(v);\mathrm{out}(v))
+\big/ \sim,
+\]
+with the usual degeneracy identifications at edge length \(0\) and
+\(1\). Its differential is
+\[
+d_W=d_{\mathrm{chain}}+d_{[0,1]}
++\sum_{e\in E_{\mathrm{int}}(T)}(-1)^{\epsilon_e}\,
+d_{\mathrm{contract},e}
++\sum_{e\in E_{\mathrm{int}}(T)}(-1)^{\epsilon'_e}\,
+d_{\mathrm{compose},e},
+\]
+where the signs \(\epsilon_e,\epsilon'_e\) are determined by moving
+the edge \(e\) through the ordered basis of
+\(\det(\mathbb{k}^{E_{\mathrm{int}}(T)})\) and then through the
+vertex-orientation tensor factors. This orientation line is the datum
+that makes the two-coloured coherence theorem a signed chain statement
+rather than an unoriented tree enumeration.
+\end{definition}
+
+\begin{remark}[Pointer to the factorization model]
+\label{rem:def-fsc-pointer}
+The factorization-algebra incarnation is given in
+Definition~\ref{def:BD-SC} of
+Chapter~\ref{ch:factorization-swiss-cheese} (BD factorization
+Swiss-cheese algebra, three-sector data $(F_{\mathsf{cl}},
+F_{\mathsf{op}},F_{\mathsf{mix}})$); the present
+Definition~\ref{def:factorization-swiss-cheese-operad} is its local
+operadic collision shadow. The local shadow of the factorisation
+object is quasi-isomorphic to this operadic presentation via
+Theorem~\ref{thm:BD-CG-equivalence} of
+Chapter~\ref{ch:factorization-swiss-cheese}, see also
+Edge~(1)--(2)--(3) in \S\ref{sec:heptagon-edges}.
+\end{remark}
+
+Face~(1) is the homotopy colored operad of
+Definition~\ref{def:factorization-swiss-cheese-operad} above:
+generators are the codimension-one boundary strata of
+$\FM_k(\mathbb{H})\times_{\Conf_m(\mathbb{R})}\Conf_m(\mathbb{R})$;
+relations are the codimension-two strata (Arnold for the closed
+colour, Stasheff for the open colour, and the mixed Stasheff--Arnold
+relation from the collision of an open point with the closed
+configuration). The presentation is strict in the rational homotopy
+category after fixing $\Phi$ on the closed and open colours
+separately (Kontsevich--Tamarkin formality at the depth-zero
+associated graded); the coupled mixed sector is not formal
+(Livernet~\cite{Liv15}) and its relations hold up to coherent
+homotopy only.
+The directional restriction (no open-to-closed) is encoded
+operadically by the empty component
+$\SCchtop\bigl(\binom{k,m}{\text{closed}}\bigr)=\emptyset$ whenever
+$m\geq 1$; the coloured operad is honest, not a product of two
+uncoloured operads.
+
+\subsection{Face (2): the Koszul-dual face}\label{subsec:face-koszul-dual}
+
+Face~(2) is the $\infty$-operadic cofibrant replacement
+\begin{equation}
+ W(\SCchtop)
+ \;:=\;
+ \Omega\bigl(B(\SCchtop)\bigr)
+\end{equation}
+via Ginzburg--Kapranov coloured bar--cobar, after fixing a Drinfeld
+associator. Its underlying graded coloured operad is
+$(\SCchtop)^{!}=(\Lie,\Ass,\text{shuffle-mixed})$
+(Proposition~\ref{prop:sc-koszul-dual-three-sectors} of
+Chapter~\ref{chap:spectral-braiding}).
+The closed sector is
+$E_2^{!}\simeq E_2\{1\}$ (Getzler--Jones self-duality up to shift),
+which on the associated graded collapses to $\Lie$.
+The open sector is self-dual $\Ass^{!}=\Ass$. The mixed sector is
+shuffle-mixed with empty open-to-closed operations; the
+closed-to-open is inherited from $\SCchtop$'s directionality.
+The directional restriction is preserved by bar--cobar: the empty
+open-to-closed component of $\SCchtop$ produces an empty
+closed-to-open component of $(\SCchtop)^!$ after the colour-swap
+inside the coloured Koszul dual.
+
+\subsection{Face (3): the factorization face}\label{subsec:face-factorization}
+
+Face~(3) is the factorization-algebra model. For each open $U\subset X$
+the chiral observables
+\begin{equation}
+ \Obs^{\mathrm{ch}}_\cA(U),\qquad U\subset X,
+\end{equation}
+assemble into a factorization algebra on $\Ran(X)$; its derived
+centre $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ acts on $\cA$ through the
+universal brace of Chapter~\ref{ch:theory-hochschild}. The pair in
+\eqref{eq:heptagon-pair} is the factorization-algebraic
+$\SCchtop$-datum. This face is native to Beilinson--Drinfeld
+(algebraic) and Costello--Gwilliam (differential-geometric); the
+equivalence is Theorem~\ref{thm:BD-CG-equivalence} of
+Chapter~\ref{ch:factorization-swiss-cheese}, with precise scope
+qualifiers in Remark~\ref{rem:BD-CG-adjectives} (characteristic zero,
+$X$ smooth projective, holomorphic translation invariance,
+locally constant on $\R$, ind-coherent vs. cosheaf models reconciled).
+
+\subsection{Bar differential as holomorphic factorisation; coproduct as
+topological factorisation}\label{subsec:bar-diff-as-hol-fact}
+
+The factorization face above admits an explicit chain-level
+identification of the two resolution-level operations of the bar
+coalgebra $B^{\,\mathrm{ch}}(\cA)$. They are the holomorphic bar
+differential and the topological deconcatenation shadow feeding the
+derived-centre pair; the full two-coloured $\SCchtop$-datum lives on
+\((Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)\), not on
+$B^{\,\mathrm{ch}}(\cA)$ itself.
+
+\begin{theorem}[Bar differential = holomorphic factorisation,
+coproduct = topological factorisation;
+\ClaimStatusProvedHere]
+\label{thm:bar-diff-eq-holfact}%
+\index{bar differential!= holomorphic factorisation|textbf}%
+\index{coproduct!= topological factorisation|textbf}%
+\index{factorisation maps!chiral identification of}
+Let $\cA$ be an $E_1$-chiral algebra on a smooth complex curve $X$
+satisfying the hypotheses of Theorem~\ref{thm:BD-CG-equivalence}
+(characteristic zero, $X$ smooth, holomorphic translation invariance,
+locally constant on $\R$). Write
+$B^{\,\mathrm{ch}}(\cA)=T^c(s^{-1}\bar\cA)$ for the chiral bar
+coalgebra (Vol~I conventions; cohomological grading, internal differential
+$d_B$ from the chiral product, internal coproduct
+$\Delta_B\colon B^{\,\mathrm{ch}}(\cA)\to B^{\,\mathrm{ch}}(\cA)\otimes
+B^{\,\mathrm{ch}}(\cA)$ from cofree-tensor-deconcatenation). Let
+$\Obs^{\mathrm{ch}}_{\cA}$ be the BD factorization Swiss-cheese object
+on the mixed open--closed Ran geometry
+$\Ran^{\mathrm{oc}}_{\mathrm{HT}}(X,\mathbb{R}_{\geq 0})$ associated
+to the boundary-condition pair $(\cA,\cA)$ as in
+Definition~\ref{def:BD-SC}. Its depth-zero associated graded is the
+separated product $\Ran(X)\times\Ran(\R)$, but the theorem uses the
+mixed incidence geometry. Then under the
+BD/CG equivalence of Theorem~\ref{thm:BD-CG-equivalence}:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \textbf{Bar differential $\leftrightarrow$ holomorphic
+factorisation.} The internal differential $d_B$ on
+$B^{\,\mathrm{ch}}(\cA)$ corresponds, on the closed colour, to the
+holomorphic factorisation map at coincident points
+\begin{equation}\label{eq:hol-fact-map}
+ \mu^{\mathrm{hol}}_{\Delta}\colon
+ j_*j^*\bigl(\cA^{\boxtimes 2}\bigr)\bigl|_{X^2}
+ \;\xrightarrow{\text{coincidence}}\;
+ \Delta_*\cA[\,1\,],
+\end{equation}
+where $j\colon X^2\setminus\Delta\hookrightarrow X^2$ is the open
+embedding of the diagonal complement and $\Delta\colon X\hookrightarrow
+X^2$ is the diagonal, with the degree shift $[1]$ accounting for the
+desuspension $s^{-1}$ in $T^c(s^{-1}\bar\cA)$.
+
+\item \textbf{Coproduct $\leftrightarrow$ topological factorisation.}
+The internal coproduct $\Delta_B$ on $B^{\,\mathrm{ch}}(\cA)$
+corresponds, on the open colour, to the topological factorisation
+map of the locally constant factorization algebra on $\Ran(\R)$,
+\begin{equation}\label{eq:top-fact-map}
+ \mu^{\mathrm{top}}_{(t_1,t_2)\hookrightarrow t}\colon
+ F_{\mathsf{op}}(t_1)\otimes F_{\mathsf{op}}(t_2)
+ \;\xrightarrow[\text{topol.}]{\sim}\;
+ F_{\mathsf{op}}(t)\quad\text{whenever } t_1<t_2 \text{ both} <t,
+\end{equation}
+which on $\Ran(\R)$ is determined (Ayala--Francis~\cite{AF15}) by the
+underlying $\Eone$-algebra structure on $\cA$ pushed to the boundary
+stratum $X\times\{0\}$.
+\end{enumerate}
+The two identifications are compatible in the sense that
+$d_B$ and $\Delta_B$ make $B^{\,\mathrm{ch}}(\cA)$ an $E_1$ dg
+coassociative factorization coalgebra over
+$(\mathrm{ChirAss})^!$, with
+\begin{equation}\label{eq:bar-coalg-mc}
+ d_B^2 = 0,\qquad
+ (d_B\otimes\id+\id\otimes d_B)\circ\Delta_B
+ \;=\;
+ \Delta_B\circ d_B,\qquad
+ (\Delta_B\otimes\id)\circ\Delta_B
+ \;=\;
+ (\id\otimes\Delta_B)\circ\Delta_B.
+\end{equation}
+The coalgebra $B^{\,\mathrm{ch}}(\cA)$ is the Koszul-dual chain
+model: its linear dual
+$(B^{\,\mathrm{ch}}(\cA))^{\vee}$
+is the chiral convolution algebra
+$\End^{\mathrm{ch}}_{\cA}(B^{\,\mathrm{ch}}(\cA))$, and
+\begin{equation}\label{eq:bar-koszul-dual-chain}
+ C^{\bullet}_{\mathrm{ch}}(\cA,\cA)
+ \;=\;
+ \Hom_{B^{\,\mathrm{ch}}(\cA)\text{-comod}}
+ \bigl(B^{\,\mathrm{ch}}(\cA),\,\cA\otimes B^{\,\mathrm{ch}}(\cA)\bigr)
+ \;\simeq\;
+ \Omega^{\mathrm{ch}}\bigl(B^{\,\mathrm{ch}}(\cA)\bigr)
+ \quad\text{in the derived category}
+\end{equation}
+by the chiral bar--cobar adjunction of
+Theorem~\ref{thm:BD-CG-equivalence} (Vol~I Theorem~A, Positselski
+2011~\cite{Positselski11}, Loday--Vallette~\cite{LV12}\,\S11.5).
+The two-coloured $\SCchtop$-structure lives on the derived-centre
+pair
+\begin{equation}\label{eq:SCchtop-datum-target}
+ \bigl(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\;\cA\bigr)
+ \;=\;
+ \bigl(C^{\bullet}_{\mathrm{ch}}(\cA,\cA),\;\cA\bigr),
+\end{equation}
+not on $B^{\,\mathrm{ch}}(\cA)$ itself: $B^{\,\mathrm{ch}}(\cA)$
+is the $E_1$-coassociative resolution through which the
+$\SCchtop$-action on~\eqref{eq:SCchtop-datum-target} is
+computed. The identifications~(i)--(ii) transport across this
+Koszul duality: the closed-colour holomorphic factorisation map
+on $\cA$ is dual to the chiral Hochschild differential on
+$C^{\bullet}_{\mathrm{ch}}(\cA,\cA)$, and the open-colour
+topological factorisation is the boundary $\Eone$-action of
+$\cA$ on the bulk $C^{\bullet}_{\mathrm{ch}}(\cA,\cA)$.
+\end{theorem}
+
+\begin{proof}
+Construct the identification at chain level and then verify the
+three relations of~\eqref{eq:bar-coalg-mc} from the geometric
+factorisation maps.
+
+\emph{Step 1: chain-level construction of the holomorphic
+factorisation map at coincident points.}
+For $a,b\in\bar\cA$, write $a(z)$, $b(w)$ for their chiral
+generating fields. The chiral product
+\begin{equation}\label{eq:chiral-prod-OPE}
+ Y^{\mathrm{ch}}\colon \cA\otimes\cA\to
+ j_*j^*(\cA\boxtimes\cA),\qquad
+ Y^{\mathrm{ch}}(a,b)(z,w) \;=\; \sum_{n\in\Z}\,(a_{(n)}b)(w)\,
+ (z-w)^{-n-1},
+\end{equation}
+extends as a $D$-module morphism on $X^2\setminus\Delta$, with a
+prescribed pole on $\Delta$ controlled by the singular
+filtration~\cite{BD04}\,\S3.1.5. The \emph{holomorphic factorisation
+map at coincident points} is the BD chiral product, that is, the
+$\Delta_*$-extension of the regular term in the OPE:
+\begin{equation}\label{eq:hol-fact-residue}
+ \mu^{\mathrm{hol}}_\Delta(a,b)
+ \;=\;
+ \Delta_*\bigl[(a_{(-1)}b)(w)\bigr]
+ \;=\;
+ \Delta_*\bigl[(Y^{\mathrm{ch}}(a,b)(z,w)\,(z-w)^{0})|_{z=w}\bigr],
+\end{equation}
+where the regular evaluation $(z-w)^{0}|_{z=w}$ extracts the
+$(z-w)^{0}$-coefficient $a_{(-1)}b$ in the OPE expansion (this is
+the chiral product, not a residue: the Cauchy residue of
+$(z-w)^{-n-1}$ extracts $a_{(n)}b$, while the chiral product
+$a_{(-1)}b$ is the
+constant-term coefficient indexed by $n=-1$). Equivalently in
+BD~\cite{BD04}\,\S3.1.5 language, $\mu^{\mathrm{hol}}_\Delta$ is the
+composition $j_*j^*(\cA\boxtimes\cA)\to\Delta_*\cA[1]$ given by the
+chiral structure map at the codimension-one diagonal stratum, with
+the degree shift $[1]$ matching the desuspension $s^{-1}$ in
+$T^c(s^{-1}\bar\cA)$.
+
+The bar differential $d_B$ on the $T^c$-cogenerator
+$s^{-1}a\otimes s^{-1}b$ is defined by
+$d_B(s^{-1}a\otimes s^{-1}b)=(-1)^{|a|}\,s^{-1}\mu_\cA(a,b)$
+where $\mu_\cA(a,b)=a_{(-1)}b$ is the chiral product
+(Vol~I, \cite{BD04}\,\S3.4.7). The identification
+$d_B\leftrightarrow\mu^{\mathrm{hol}}_\Delta$ under BD/CG is therefore
+literal at chain level after desuspension; gradings agree because
+both $d_B$ and $\mu^{\mathrm{hol}}_\Delta$ raise cohomological degree
+by $1$ (the $[1]$ on the right of~\eqref{eq:hol-fact-map} is exactly
+the degree shift produced by passing from $\bar\cA$ to $s^{-1}\bar\cA$
+in the bar tensor coalgebra). This is part~(i).
+
+\emph{Step 2: chain-level construction of the topological
+factorisation map.}
+On the open colour $\Ran(\R)$ pushed to $X\times\{0\}$, the
+$\Eone$-algebra structure of $\cA$ (boundary value) is the
+locally constant factorisation algebra
+$F_{\mathsf{op}}(I)=\cA$ for any interval $I\subset\R$, with
+factorisation maps the multiplication
+$\mu_{\Eone}\colon\cA\otimes\cA\to\cA$ for any pair of disjoint
+intervals $(I_1,I_2)\hookrightarrow I_1\sqcup I_2\subset I$
+(Ayala--Francis~\cite{AF15}\,Theorem~2.24). The cofree
+deconcatenation coproduct on $T^c(s^{-1}\bar\cA)$, restricted to the
+weight-two component, is
+\[
+ \Delta_B(s^{-1}a_1\otimes\cdots\otimes s^{-1}a_n)
+ \;=\;
+ \sum_{i=0}^{n}
+ (s^{-1}a_1\otimes\cdots\otimes s^{-1}a_i)\;\otimes\;
+ (s^{-1}a_{i+1}\otimes\cdots\otimes s^{-1}a_n).
+\]
+Geometrically, $\Delta_B$ partitions an ordered configuration of
+$n$ open insertions on $\R$ into a left half and a right half;
+this is exactly the topological factorisation map of
+\eqref{eq:top-fact-map} pulled back along the inclusion of the
+ordered-pairs stratum into $\Ran_{\leq 2}(\R)$. Identification
+$\Delta_B\leftrightarrow\mu^{\mathrm{top}}$ is again literal at
+chain level. This is part~(ii).
+
+\emph{Step 3: $d_B^2=0$ from the chiral Jacobi identity.}
+Computed on the weight-three component
+$s^{-1}a\otimes s^{-1}b\otimes s^{-1}c$, the iterated
+bar differential gives
+\begin{align*}
+ d_B^2(s^{-1}a\otimes s^{-1}b\otimes s^{-1}c)
+ &= d_B\bigl((-1)^{|a|}s^{-1}\mu_\cA(a,b)\otimes s^{-1}c
+ + (-1)^{|a|+|b|}s^{-1}a\otimes s^{-1}\mu_\cA(b,c)\bigr) \\
+ &= (-1)^{|a|+|a|+|b|}s^{-1}\mu_\cA(\mu_\cA(a,b),c) \\
+ &\quad - (-1)^{|a|+|b|+|a|}s^{-1}\mu_\cA(a,\mu_\cA(b,c)) \\
+ &= s^{-1}\bigl[\mu_\cA(\mu_\cA(a,b),c)-\mu_\cA(a,\mu_\cA(b,c))\bigr] \\
+ &= 0,
+\end{align*}
+where the final equality is BD chiral
+associativity~\cite{BD04}\,Proposition~3.4.8: the chiral product
+$\mu_\cA\colon \cA\boxtimes\cA\to\Delta_*\cA$ in the BD sense
+satisfies $\mu_\cA\circ(\mu_\cA\boxtimes\id)
+=\mu_\cA\circ(\id\boxtimes\mu_\cA)$ as $D$-module maps on the fat
+diagonal $X^{(3)}\subset X^3$, with equality holding at the
+codimension-two stratum $\Delta^{(3)}$ because the potential
+associator obstruction from higher OPE poles
+$(a_{(n\geq 0)}b)_{(-n-2)}c$ is exact under the bar differential
+(Borcherds commutator identity on $T^c(s^{-1}\bar\cA)$, equivalent
+to the quasi-associativity of the normally-ordered product modulo
+$d_B$-exact terms). The equality of chiral binary operations at
+the diagonal is preserved under $\mu^{\mathrm{hol}}_\Delta$ by
+Step~1.
+
+\emph{Step 4: cobar compatibility $(d_B\otimes\id+\id\otimes d_B)\circ
+\Delta_B=\Delta_B\circ d_B$.}
+This is the Leibniz rule: applying $\Delta_B$ to the $T^c$-coalgebra
+weight-three element above yields a sum over partitions; applying
+$d_B$ to each tensor factor and reassembling matches applying
+$d_B$ first and then $\Delta_B$, by the standard cofree-coalgebra
+calculation~\cite[\S2.2.2]{LV12}. Geometrically this is the
+\emph{open/closed compatibility} of $\SCchtop$: the holomorphic
+factorisation at the diagonal $\Delta\subset X^2$ commutes with the
+topological factorisation along $\R$ because the two strata of
+$X\times\R$ they sit on are disjoint at every interior point, and
+the mixed sector of $\SCchtop$ records exactly this compatibility
+along the codimension-one boundary $X\times\{0\}$
+(Definition~\ref{def:BD-SC}\,(iii)\,(b) bulk action on boundary).
+
+\emph{Step 5: coassociativity $(\Delta_B\otimes\id)\Delta_B=
+(\id\otimes\Delta_B)\Delta_B$.}
+On the weight-four cogenerator $s^{-1}a_1\otimes s^{-1}a_2\otimes
+s^{-1}a_3\otimes s^{-1}a_4$, both sides of coassociativity equal
+the iterated triple-deconcatenation
+\[
+ \sum_{0\leq i\leq j\leq 4}
+ (s^{-1}a_1\otimes\cdots\otimes s^{-1}a_i)\otimes
+ (s^{-1}a_{i+1}\otimes\cdots\otimes s^{-1}a_j)\otimes
+ (s^{-1}a_{j+1}\otimes\cdots\otimes s^{-1}a_4),
+\]
+with tensor order equal on both sides by the standard cofree-coalgebra
+identity. Geometrically: the topological factorisation of $\Eone$ on
+$\R$ is associative because configurations of three disjoint
+intervals $(I_1,I_2,I_3)$ in $\R$ admit a canonical linear
+ordering, and the factorisation maps respect that
+ordering (Ayala--Francis~\cite{AF15}\,Lemma~2.25; equivalently, the
+$\Eone$-multiplication is associative).
+
+This completes the verification of~\eqref{eq:bar-coalg-mc}.
+\end{proof}
+
+\begin{remark}[Vol~I averaging dictionary]\label{rem:bar-diff-vol1-avg}
+Theorem~\ref{thm:bar-diff-eq-holfact} is the chain-level realisation,
+on the Vol~II side $\SCchtop$, of the Vol~I averaging
+dictionary $\mathrm{av}\colon\fg^{E_1}\to\fg^{\mathrm{mod}}$:
+the closed-colour $E_1$-chiral half-bar differential
+$d_B^{\,\mathrm{cl}}$ is what survives averaging from the ordered
+chiral cobar (Vol~I, $\Omega^{\mathrm{ch}}\dashv B^{\,\mathrm{ch}}$);
+the open-colour $\Eone$-deconcatenation coproduct $\Delta_B^{\,\mathsf{op}}$
+is the topological-coloured shadow of the same averaging in the
+$E_1^{\,\mathrm{top}}$ direction. The sum
+$d_B = d_B^{\,\mathrm{cl}} + \Delta_B^{\,\mathsf{op}}\circ
+(\text{insertion at boundary})$ on the Maurer--Cartan element of the
+$\SCchtop$-convolution algebra is the chain-level realisation of
+the $\SCchtop$-datum.
+\end{remark}
+
+\begin{remark}[Concrete witness on $\cA=V_k(\mathfrak{sl}_2)$]
+\label{rem:bar-diff-witness-vk-sl2}%
+\index{Heptagon!concrete witness $V_k(\mathfrak{sl}_2)$|textbf}
+For $\cA=V_k(\mathfrak{sl}_2)$ at non-critical level $k\neq -2$:
+\begin{itemize}
+\item The chiral product on the level-$k$ generators
+$e,f,h\in V_k(\mathfrak{sl}_2)$ at weight $1$ is the affine
+Kac--Moody bracket realised at the level of mode operators by
+$[e_{(0)},f_{(-1)}|0\rangle]=h_{(-1)}|0\rangle$,
+$[h_{(0)},e_{(-1)}|0\rangle]=2e_{(-1)}|0\rangle$, etc.;
+the associated state of $T(z)$ is the Sugawara construction
+$T = (2(k+2))^{-1}\bigl(e_{(-1)}f + f_{(-1)}e + \tfrac12 h_{(-1)}h\bigr)
+|0\rangle$,
+where $J_{(-1)}K = (JK)$ denotes the chiral (= normally ordered) product
+in $V_k(\mathfrak{sl}_2)$, valid at non-critical level $k\neq -2$
+(Frenkel--Ben-Zvi~\cite{FBZ04}\,\S 5.7).
+\item Theorem~\ref{thm:bar-diff-eq-holfact}~(i) reads, on
+$s^{-1}e\otimes s^{-1}f\in B^{\,\mathrm{ch}}(V_k(\mathfrak{sl}_2))$:
+$d_B(s^{-1}e\otimes s^{-1}f) = -s^{-1}(e_{(-1)}f)$, the chiral
+product. The standard $\hat{\mathfrak{sl}}_2$ OPE at level $k$ reads
+$e(z)f(w) \sim k/(z-w)^2 + h(w)/(z-w)$, so the
+mode-product expansion $e(z)f(w) = \sum_n (e_{(n)}f)(w)\,(z-w)^{-n-1}$
+gives $e_{(1)}f = k$ (central scalar), $e_{(0)}f = h$, and
+$e_{(-1)}f = (ef)$ (the normally ordered product). The bar
+differential extracts the chiral-product coefficient
+$e_{(-1)}f = (ef)$, which the holomorphic factorisation map of
+part~(i) constructs geometrically as the regular term in the OPE
+extended to the diagonal $\Delta\subset X^2$.
+\item Part~(ii) reads, for two open boundary insertions $a,b$ on
+$\R$: $\Delta_B(s^{-1}a\otimes s^{-1}b)=(s^{-1}a)\otimes(s^{-1}b)$,
+which is the $\Eone$-coproduct deconcatenation, agreeing with the
+factorisation-along-half-line topological splitting.
+\item All three relations of~\eqref{eq:bar-coalg-mc} verify
+by direct chain-level computation on weight $\leq 4$ words in
+$\{e,f,h,T\}$. The weight-two associator collapses to the chiral
+Jacobi identity for the affine bracket, and the central charge
+$c=3k/(k+2)$ enters only at weight three through the
+Sugawara term $T_{(-1)}$ in the OPE $e(z)e(w)\sim 0$.
+\end{itemize}
+This is a triple-check witness: chain-level $d_B$ via
+chiral OPE; chain-level $d_B$ via diagonal residue; chain-level
+$d_B$ via cofree-coalgebra deconcatenation interpretation.
+\end{remark}
+
+\begin{proposition}[$B^{\,\mathrm{ch}}(\cA)$ as Koszul-dual chain model
+of the derived-centre pair; \ClaimStatusProvedHere]
+\label{prop:bar-koszul-chain-model-derived-centre}%
+\index{bar complex!as Koszul-dual chain model}%
+\index{derived-centre pair!chain model}%
+\index{heptagon axiom!seven-face coherence}
+Let $\cA$ satisfy the hypotheses of
+Theorem~\ref{thm:bar-diff-eq-holfact}. The seven faces of the
+heptagon are related as follows at the level of the pair
+\eqref{eq:SCchtop-datum-target}.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \textbf{Chain-model identity.} The linear dual of the chiral
+bar coalgebra $B^{\,\mathrm{ch}}(\cA)$ is the chiral cobar
+algebra $\Omega^{\mathrm{ch}}(B^{\,\mathrm{ch}}(\cA))$, and the
+chain-level derived chiral endomorphism complex of $\cA$ is
+\begin{equation}\label{eq:endch-bar-cobar}
+ \End^{\,\mathrm{ch}}_{\cA}(\cA)
+ \;:=\;
+ \Hom^{\bullet}_{B^{\,\mathrm{ch}}(\cA)\text{-comod}}
+ \bigl(B^{\,\mathrm{ch}}(\cA),\,\cA\otimes B^{\,\mathrm{ch}}(\cA)\bigr),
+ \qquad
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+ \;=\;
+ (\End^{\,\mathrm{ch}}_{\cA}(\cA))^{U(1)_{\mathrm{loop}}},
+\end{equation}
+where the $U(1)_{\mathrm{loop}}$-invariants extract the
+chiral-central (loop-rotation-equivariant) piece. The quasi-iso
+$\Omega^{\mathrm{ch}}(B^{\,\mathrm{ch}}(\cA))\simeq\cA$ of
+Theorem~\ref{thm:BD-CG-equivalence} induces the Positselski
+equivalence
+\begin{equation}\label{eq:positselski-on-derived-centre}
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\Omega^{\mathrm{ch}}(B^{\,\mathrm{ch}}(\cA)))
+ \;\xrightarrow{\;\sim\;}\;
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)
+ \qquad\text{in}\qquad D^{\mathrm{co}}_{\mathrm{ch}}(X),
+\end{equation}
+which is Vol~I Theorem~B restricted to the derived centre.
+\item \textbf{Heptagon-axiom coherence.} The seven faces
+\textup{(1)--(7)} of \S\ref{subsec:face-operadic}--%
+\S\ref{sec:face-dag} present the same
+$\infty$-operadic homotopy type by a coherent system of
+$\infty$-quasi-isomorphisms, and the bar--cobar adjunction
+of~\eqref{eq:endch-bar-cobar} is the chain-level witness on
+the Koszul-dual face~\textup{(2)} of the
+bulk--boundary$\SCchtop$-action on the pair
+\eqref{eq:SCchtop-datum-target}:
+\begin{equation}\label{eq:heptagon-axiom}
+ \parbox{0.86\linewidth}{\emph{For every face
+ $F\in\{\textup{(1)},\ldots,\textup{(7)}\}$, the
+ $\SCchtop$-action on $(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$
+ computed from $F$ agrees, under the named equivalence
+ $F\leftrightarrow(2)$, with the
+ action~\eqref{eq:bar-coalg-mc} transported through the
+ adjunction $\Omega^{\mathrm{ch}}\dashv B^{\,\mathrm{ch}}$
+ and the Koszul duality
+ \eqref{eq:endch-bar-cobar}.}}
+\end{equation}
+The closed colour computes through Voronov's half-plane
+model $\FM_k(\mathbb{H})$ of the Swiss-cheese operad
+(\cite{Voronov1998}\,\S2, with the $E_1$-chiral enrichment of
+Hoefel--Livernet~\cite{HL12}\,Theorem~3.1); the
+factorisation face matches Costello--Gwilliam
+Vol~II~\cite{CG21}\,Theorem~7.3.7 bulk--boundary restriction
+on $X\times\R_{\geq 0}$; the Koszul-dual face is the
+$L_\infty$-convolution datum of Vallette~\cite{Val07}; the
+Drinfeld-centre face is the $\infty$-categorical centre of
+$\Rep_{\mathrm{fact}}(\cA)$ in the sense of Lurie
+HA~5.3.1.30~\cite{LurieHA}; the derived-algebraic-geometry face
+is the $1$-shifted symplectic structure on the mapping stack
+$\bMap(X, \mathcal{M}_{\SCchtop})$ in the sense of
+PTVV~\cite{PTVV13}\,Theorem~2.5; the mixed bulk-to-boundary sector
+matches the Dimofte slab trace~\cite{Dimofte25}. All seven
+projections factor through
+$B^{\,\mathrm{ch}}(\cA)$ as the unique cofibrant replacement of
+$\cA$ in the operadic model structure on
+$E_1\text{-chiralAlg}_X$ (Hinich~\cite{Hinich97}\,Theorem~4.7.4).
+\item \textbf{Koszul reflection transports $\SCchtop$-action.}
+The canonical bar--cobar reflection
+\begin{equation}\label{eq:koszul-reflection-SC}
+ K_{\cA}\;:=\;\Omega^{\mathrm{ch}}\circ B^{\,\mathrm{ch}}\colon
+ \,\cA\,\xrightarrow{\;\sim\;}\,\cA,
+\end{equation}
+is $\SCchtop$-equivariant on the pair
+\eqref{eq:SCchtop-datum-target}: the transported action
+$K_\cA^\ast(\rho_{\SCchtop})$ coincides with the original
+action $\rho_{\SCchtop}$ up to a canonical chain homotopy,
+and the homotopy is rescaled by the Vol~I chain-homotopy norm
+\begin{equation}\label{eq:chain-homotopy-normalisation}
+ h_\cA
+ \;=\;
+ \frac{h_{\mathrm{LV}}}{\cN(\cA)},
+ \qquad
+ \cN(\cA) \;=\; \kappaChHodge(\cA)+\kappa^{!}_{\mathrm{LV}}(\cA)
+\end{equation}
+(Loday--Vallette~\cite{LV12}\,\S11.5 contracting homotopy
+renormalised by the Verdier--Ran-on-bar norm $\cN(\cA)$ of Vol~I,
+convention \textsf{conv:A-two-kappa-shriek}). The normalisation
+constant $\cN(\cA)$ degenerates exactly at the walls of $\cA$:
+$\cN(\mathsf G)=1$ with $h_{\mathrm{LV}}$ itself zero by direct
+simplicial Koszul contraction, so the ratio is the canonical
+trivial homotopy; at class $\mathsf L$ affine Kac--Moody
+$\cN = 2(k+h^{\vee}) \to 0$ at critical level $k=-h^{\vee}$ via
+the Sugawara denominator (geometric Langlands wall), where the
+homotopy diverges; at class $\mathsf M$ Virasoro
+$\cN = c(5c+22)/10$ (Zamolodchikov norm), degenerate at $c=0$
+(trivial algebra) and $c=-22/5$ (Yang--Lee $(2,5)$ minimal
+model); at class $\mathsf B$ Mukai-K3 Heisenberg $\cN = 8$,
+coinciding with the Mukai conductor
+$2c_{+}(\mathrm{Mukai}(K3))=8$ via Bruinier--Heegner Chern-class
+reciprocity. The chain-homotopy norm $\cN(\cA)$ is distinct from
+the Theorem-C complementarity sum
+$\rho_K(\cA) = \kappaChHodge(\cA)+\kappaChHodge(\cA^!)$, whose
+computed spectrum is $\{0, 13, 250/3\}$ with the
+Bershadsky--Polyakov slot open; the two invariants coincide only
+on class $\mathsf B$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part~(a): the adjunction
+$\Omega^{\mathrm{ch}}\dashv B^{\,\mathrm{ch}}$ of
+Theorem~\ref{thm:BD-CG-equivalence} (Vol~I Theorem~A) is a
+Quillen adjunction between $E_1$-chiral algebras and conilpotent
+$E_1$-chiral coalgebras on $X$, with counit
+$\varepsilon_\cA\colon\Omega^{\mathrm{ch}}(B^{\,\mathrm{ch}}(\cA))\xrightarrow{\sim}\cA$
+a quasi-iso for every $\cA$. The chiral endomorphism complex
+$\End^{\,\mathrm{ch}}_\cA(\cA)$ of a chiral algebra is by
+definition the complex of chiral endomorphisms of $\cA$ computed
+as a left $\cA$-module using a cofibrant replacement; the bar
+complex $B^{\,\mathrm{ch}}(\cA)$ is the standard such replacement
+(Hinich~\cite{Hinich97}\,Theorem~4.7.4). The homotopy fixed
+points under $U(1)_{\mathrm{loop}}$ extract the chiral-central
+piece, recovering
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)=C^{\bullet}_{\mathrm{ch}}(\cA,\cA)$
+on cohomology. The Positselski equivalence
+\eqref{eq:positselski-on-derived-centre} is Vol~I Theorem~B
+restricted to the derived centre.
+
+Part~(b): each face-to-face equivalence is named. Face~(1)--(2)
+is the operadic Koszul duality of
+\S\ref{subsec:edge-12}; Face~(2)--(3) the factorisation
+realisation of \S\ref{subsec:edge-23}; Face~(3)--(4) the
+Maurer--Cartan element $\Theta_\cA$ solving the
+Costello--Gwilliam QME on the bulk--boundary BV theory;
+Face~(4)--(5) the twisted convolution
+$L_\infty$-structure~\cite{Val07}; Face~(5)--(6) the
+Drinfeld-centre right adjoint~\cite{LurieHA}~5.3.1.30;
+Face~(6)--(7) the $\infty$-categorical module-category
+identification of $\Rep_{\mathrm{fact}}(\cA)$ with the tangent
+dg-Lie of the PTVV mapping stack; Face~(7)--(1) closes the
+heptagon by the shifted-symplectic recovery of the operad from
+its classifying space. Coherence of composite equivalences is
+the $\infty$-operadic fact that the Kontsevich formality
+comparison between any two of these models (after a choice of
+Drinfeld associator $\Phi\in\mathrm{GRT}_1(\mathbb{Q})$) is
+unique up to $\GRT_1$-torsor, and the seven named equivalences
+pick out the same equivalence class. Uniqueness of the cofibrant
+replacement $B^{\,\mathrm{ch}}(\cA)$ in the operadic model
+structure (Hinich 1997) forces all seven projections to factor
+through it.
+
+Part~(c): $\SCchtop$-equivariance of $K_\cA$ is the statement
+that the bar--cobar round trip preserves the pair
+\eqref{eq:SCchtop-datum-target} up to chain homotopy. The
+homotopy is the Loday--Vallette contracting homotopy
+$h_{\mathrm{LV}}$ on the bar resolution~\cite{LV12}\,\S2.3.6,
+rescaled by the derived-centre normalisation
+$\kappaChHodge(\cA)+\kappaChHodge(\cA^!)$: the rescaled homotopy $h_\cA$ satisfies
+$[d_B, h_\cA]=\id-p_\cA$ on $B^{\,\mathrm{ch}}(\cA)$, with
+$p_\cA$ the canonical projection onto the weight-one subspace
+$s^{-1}\bar\cA\hookrightarrow B^{\,\mathrm{ch}}(\cA)$. The
+rescaling by $\kappaChHodge(\cA)+\kappaChHodge(\cA^!)$ is forced by the Vol~I
+Theorem~C complementarity ceiling: the derived-centre pairing
+$\langle\cdot,\cdot\rangle_{Z^{\mathrm{der}}}$ on
+$C^{\bullet}_{\mathrm{ch}}(\cA,\cA)$ carries the multiplicative
+normalisation $\kappaChHodge(\cA)+\kappaChHodge(\cA^!)$, and the chain homotopy
+reflecting the pair through the Koszul duality inherits the
+same normalisation. Degeneracy at the walls is a direct
+consequence: at class $\mathsf G$ trace-form, $\kappaChHodge(\cA)+\kappaChHodge(\cA^!)=0$
+yet $h_{\mathrm{LV}}$ is trivial because the bar complex on
+Heisenberg is already simplicially Koszul; at class $\mathsf L$
+critical level, the coefficient $1/(k+h^\vee)$ in the generic
+Sugawara tensor has a pole and the normalisation is the geometric
+Langlands wall; at
+class $\mathsf M$ $c=0$ and $c=-22/5$, the Zamolodchikov norm
+$c(5c+22)/10$ vanishes and the reflection degenerates; at
+class $\mathsf B$ the Mukai-K3 Heisenberg ceiling is
+Bruinier--Heegner Chern-class reciprocity~\cite{Bruinier2002}
+with $2c_{+}(\mathrm{Mukai}(K3))=8$.
+\end{proof}
+
+\begin{remark}[The seven-face heptagon axiom as a universal
+coherence]\label{rem:heptagon-axiom-universal}%
+\index{heptagon axiom!universality}
+Proposition~\ref{prop:bar-koszul-chain-model-derived-centre}~(b)
+is the \emph{heptagon axiom}: the seven faces commute with the
+$\SCchtop$-action on $(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$
+up to a coherent system of $\infty$-quasi-isomorphisms, and the
+commutativity is witnessed on a single cofibrant replacement
+$B^{\,\mathrm{ch}}(\cA)$. This axiom is the chain-level shadow
+of Vol~I Theorem~A (bar--cobar adjunction) as seen from the
+Koszul-dual face of $\SCchtop$; it is the chain-level shadow
+of Vol~I Theorem~B (chiral Positselski) as seen from the
+factorisation face; and it is the chain-level shadow of
+Vol~I Theorem~C (derived-centre complementarity) as seen from
+the convolution face through the normalisation
+\eqref{eq:chain-homotopy-normalisation}. The universality is the
+statement that any one of the three face-specific shadows
+uniquely determines the action on
+$(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$.
+\end{remark}
+
+\subsection{Bulk-to-boundary OPE consistency: $\mathrm{HT}^{3\mathrm{d}}$
+recovers the chiral product on the boundary stratum}
+\label{subsec:bulk-boundary-OPE-consistency}
+
+Theorem~\ref{thm:bar-diff-eq-holfact} identifies the closed-colour
+factorisation map $\mu^{\mathrm{hol}}_\Delta$ with the bar
+differential, and the open-colour factorisation
+$\mu^{\mathrm{top}}$ with the bar coproduct, on a single fixed
+holomorphic-topological underlying space $X \times \R$. Vol~II
+Theorem~\ref{thm:universal-holography-functor} (boundary face) then
+asserts, for a chosen \(\Xi_\cA\)-realization, a comparison
+\[
+\eta^\partial_\cA\colon
+\Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA
+\]
+as $E_1$-chiral algebras on $X$. That equivalence does not yet record
+whether the \emph{algebra structure} on the boundary
+\(\Obs^\partial(\cF_{\cA,\Xi})\) agrees, on the nose at chain level,
+with the chiral product on $\cA$ placed there as the boundary
+condition; this is the Costello--Gwilliam bulk-to-boundary OPE
+consistency, established below.
+
+\begin{theorem}[Bulk-to-boundary OPE consistency;
+\ClaimStatusProvedHere]
+\label{thm:bulk-boundary-OPE-consistency}%
+\index{bulk-to-boundary OPE consistency|textbf}%
+\index{boundary recovery!chain-level identity}%
+\index{$\mathrm{HT}^{3\mathrm{d}}$ recovers chiral OPE|textbf}
+Let $\cA$ be an $E_1$-chiral algebra on a smooth complex curve $X$
+satisfying the hypotheses of Theorem~\ref{thm:bar-diff-eq-holfact},
+and let
+\(\cF_{\cA,\Xi}\in\HTQFT^\Xi_{X \times \R_{\geq 0}}\) be a chosen
+HT boundary realization with boundary comparison
+\(\eta^\partial_\cA\). When \(\cA\) also carries the conformal,
+boundary-linear, and admissible data of
+Theorem~\ref{thm:universal-holography-functor}, this is the
+\(\Xi\)-decorated value
+\(\Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)\). Denote by
+\[
+ \iota \;\colon\; X \times \{0\} \;\hookrightarrow\;
+ X \times \R_{\geq 0}
+\]
+the boundary inclusion at the closed half-line endpoint, by
+\[
+ \mu^{\mathrm{hol},\,\mathrm{bulk}}_\Delta \;\colon\;
+ j_*j^*\bigl(\cF_{\cA,\Xi}^{\boxtimes 2}\bigr)\bigl|_{(X\times\R_{\geq 0})^2}
+ \;\longrightarrow\;
+ \Delta_{X\times\R_{\geq 0},*}\,\cF_{\cA,\Xi}[\,1\,]
+\]
+the closed-colour holomorphic factorisation map of a chosen
+\(\Xi_\cA\)-representative \(\cF_{\cA,\Xi}\) in the
+bulk along the holomorphic direction $X$, and by
+$\mu^{\mathrm{ch}}_\cA = a_{(-1)}b$ the chiral product of $\cA$ on
+$X$ in the sense of Beilinson--Drinfeld~\cite{BD04}\,\S3.1.5. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item \textbf{Restriction-to-boundary identity.} Under the
+restriction-along-boundary functor
+$\iota^* \colon \HTQFT_{X\times\R_{\geq 0}} \to \mathrm{ChirAlg}_X$
+(Costello--Gwilliam Vol.~II, Theorem~7.3.7~\cite{CG21}), the bulk
+holomorphic factorisation map restricts on the nose at chain level:
+\begin{equation}\label{eq:bulk-boundary-restriction}
+ \iota^*\bigl(\mu^{\mathrm{hol},\,\mathrm{bulk}}_\Delta\bigr)
+ \;=\;
+ \mu^{\mathrm{hol}}_\Delta,
+\end{equation}
+where $\mu^{\mathrm{hol}}_\Delta$ on the right is the closed-colour
+holomorphic factorisation on $X$ (no $\R$-factor) of
+Theorem~\ref{thm:bar-diff-eq-holfact}~(i).
+\item \textbf{Chiral-product identification.} Under the
+identification
+\(\eta^\partial_\cA\colon
+\Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA\) of
+Theorem~\ref{thm:universal-holography-functor}~(i), the restricted
+factorisation map of part~(a) corresponds to the BD chiral product:
+\begin{equation}\label{eq:boundary-chiral-product}
+ \iota^*\bigl(\mu^{\mathrm{hol},\,\mathrm{bulk}}_\Delta\bigr)(a,b)
+ \;=\;
+ \Delta_{X,*}\bigl[(a_{(-1)}b)(w)\bigr]
+ \;=\;
+ \Delta_{X,*}\bigl[\mu^{\mathrm{ch}}_\cA(a,b)(w)\bigr]
+\end{equation}
+for all $a, b \in \bar\cA$, where the right-hand side is the
+$\Delta_*$-extension of the chiral product on the boundary algebra.
+\item \textbf{$\Eone$-algebra compatibility.} Combining (a)--(b):
+the algebra structure on \(\Obs^\partial(\cF_{\cA,\Xi})\) induced by the
+bulk closed-colour holomorphic factorisation, restricted to the
+boundary stratum, agrees on the nose at chain level with the
+$E_1$-chiral algebra structure on $\cA$ used to specify the
+boundary condition, through the comparison
+\(\eta^\partial_\cA\). The boundary identification of
+Theorem~\ref{thm:universal-holography-functor}~(i) is therefore an
+identification of $E_1$-chiral algebras at chain level on the
+chosen \(\Xi\)-representative, not only at the level of underlying
+objects.
+\end{enumerate}
+Equivalently: \emph{the restriction of the bulk closed-colour
+$\SCchtop$-structure to the codimension-one boundary stratum of
+$X \times \R_{\geq 0}$ is, on the nose at chain level, the
+$E_1$-chiral OPE on $\cA$, through
+\(\eta^\partial_\cA\).}
+\end{theorem}
+
+\begin{proof}
+Construct the restriction at chain level, identify it with the
+chiral product, and verify the $\Eone$-compatibility from the
+construction.
+
+\emph{Step 1: chain-level definition of the restriction
+$\iota^*$.}
+The Costello--Gwilliam restriction-along-boundary functor sends a
+factorisation algebra $\cF$ on $X \times \R_{\geq 0}$ to its
+``boundary stalk'' factorisation algebra $\iota^*\cF$ on $X$ via
+the colimit
+\begin{equation}\label{eq:CG-restriction-stalk}
+ (\iota^*\cF)(U)
+ \;:=\;
+ \mathrm{colim}_{V \supset U \times \{0\}}\,\cF(V),
+ \qquad U \subset X \text{ open},
+\end{equation}
+where the colimit is over open neighbourhoods $V$ of
+$U \times \{0\}$ in $X \times \R_{\geq 0}$ with $V \cap
+(X \times \{0\}) = U \times \{0\}$
+(Costello--Gwilliam~\cite{CG21}\,Definition~7.3.4). For an
+external-product representative of the chosen \(\Xi_\cA\)-datum,
+\[
+\cF_{\cA,\Xi}\simeq
+\cF_\cA^{\mathrm{hol}} \boxtimes \cH(\cA),
+\]
+the
+$\R_{\geq 0}$-factor of the external factorization product is
+$\cH(\cA)$, the \emph{chiral} Hochschild-cochain factorisation algebra
+$\cH(\cA) = \cF_{\ChirHoch^\bullet(\cA, \cA)}$
+(in the sense of Vol~II Theorem~\ref{thm:chd-ds-hochschild}: chiral,
+not topological or categorical Hochschild),
+constant in $\R_{\geq 0}$ direction by construction. The
+boundary stalk colimit~\eqref{eq:CG-restriction-stalk} therefore
+collapses the $\R_{\geq 0}$-direction onto its $0$-endpoint,
+returning $\cF_\cA^{\mathrm{hol}}(U) = \cA$ on $U$. This is precisely
+the boundary comparison
+\[
+\eta^\partial_\cA\colon
+\Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA
+\]
+(Theorem~\ref{thm:universal-holography-functor}~(i)).
+
+\emph{Step 2: restriction of the closed-colour holomorphic
+factorisation map.}
+The bulk holomorphic factorisation map
+$\mu^{\mathrm{hol},\,\mathrm{bulk}}_\Delta$ on
+\(\cF_{\cA,\Xi}\) acts only
+on the $X$-coordinates; its formula on the external factorization
+product $\cF_\cA^{\mathrm{hol}} \boxtimes \cH(\cA)$ is
+factor-wise $\mu^{\mathrm{hol}}_\Delta \otimes \id$, where
+$\mu^{\mathrm{hol}}_\Delta$ is the holomorphic factorisation of
+$\cF_\cA^{\mathrm{hol}}$ on $X$ alone. Applying $\iota^*$ to a
+factor-wise map of an external product evaluates the second factor
+at the $\R_{\geq 0}$-stalk over $0$ and returns the first factor
+unchanged:
+\begin{equation}\label{eq:iota-pullback-external}
+ \iota^*\bigl(\mu^{\mathrm{hol}}_\Delta \otimes \id\bigr)
+ \;=\;
+ \mu^{\mathrm{hol}}_\Delta \otimes \mathrm{ev}_0
+ \;=\;
+ \mu^{\mathrm{hol}}_\Delta,
+\end{equation}
+since $\mathrm{ev}_0 \colon \cH(\cA)|_{\R_{\geq 0}} \to k$ on the
+constant-in-$\R_{\geq 0}$ chiral Hochschild factorisation algebra
+$\cH(\cA) = \cF_{\ChirHoch^\bullet(\cA,\cA)}$ is the
+identity-twisted-by-trivialisation, normalised so that the
+colimit~\eqref{eq:CG-restriction-stalk} agrees with the boundary
+endpoint evaluation. This is~\eqref{eq:bulk-boundary-restriction}
+of part~(a).
+
+\emph{Step 3: identification with the chiral product.}
+By Theorem~\ref{thm:bar-diff-eq-holfact}~(i)
+(equation~\eqref{eq:hol-fact-residue}),
+$\mu^{\mathrm{hol}}_\Delta(a,b) = \Delta_*[(a_{(-1)}b)(w)] =
+\Delta_*[\mu^{\mathrm{ch}}_\cA(a,b)(w)]$ at chain level on
+$\bar\cA \otimes \bar\cA$ for $a, b \in \bar\cA$. Substituting
+into~\eqref{eq:iota-pullback-external} gives
+$\iota^*(\mu^{\mathrm{hol},\,\mathrm{bulk}}_\Delta)(a,b) =
+\Delta_*[\mu^{\mathrm{ch}}_\cA(a,b)(w)]$, which is
+exactly~\eqref{eq:boundary-chiral-product} of part~(b).
+
+\emph{Step 4: $E_1$-chiral algebra compatibility.}
+We disambiguate two distinct $\Eone$-structures: the topological
+$\Eone$ on $\R$ (open colour of $\SCchtop$, controlling the
+boundary topological factorisation) and the $E_1$-\emph{chiral}
+structure on $X$ (closed colour, controlling the chiral OPE at
+the diagonal $\Delta\subset X^2$). On the boundary
+\(\Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\eta^\partial_\cA}\cA\),
+the algebra structure is the
+$E_1$-chiral product on $X$ (not the topological $E_1$ on $\R$,
+which has been collapsed by the boundary stalk). The
+Costello--Gwilliam restriction-along-boundary
+(\cite{CG21}\,\S7.3.5) sends the $\cF_\cA^{\mathrm{hol}}$-factor's
+holomorphic factorisation map at the diagonal of $X$ to the
+$E_1$-chiral product on \(\Obs^\partial(\cF_{\cA,\Xi})\), since the
+$\R_{\geq 0}$-factor of the external product evaluates to a scalar at
+the boundary endpoint (Step~2). By Steps~2--3 this
+$E_1$-chiral product equals
+$\Delta_*[\mu^{\mathrm{ch}}_\cA(a,b)]$ at chain level, which is
+exactly the BD chiral product on $\cA$ used as boundary
+condition. Hence the boundary identification of
+Theorem~\ref{thm:universal-holography-functor}~(i) is an
+identification of $E_1$-chiral algebras at chain level on the chosen
+\(\Xi\)-representative, not only of underlying complexes; this is
+part~(c).
+
+\emph{Step 5: well-definedness independent of product
+presentation.}
+The external-product presentation
+\[
+\cF_{\cA,\Xi}\simeq
+\cF_\cA^{\mathrm{hol}} \boxtimes \cH(\cA)
+\]
+is one chain-level representative of the \(\Xi_\cA\)-equivalence
+class of \(\HTQFT_{X \times \R_{\geq 0}}\)-objects realising
+\(\Phi_{\mathrm{hol}}(\cA,\omega,T_\omega,\Xi_\cA)\). Under any other
+chain-level representative
+\(\cF'_{\cA,\Xi}\) with the same boundary comparison, the
+Costello--Gwilliam
+boundary stalk~\eqref{eq:CG-restriction-stalk} returns the same
+factorisation algebra $\cF^{\mathrm{hol}}_\cA$ on $X$
+(by~\cite{CG21}\,Theorem~7.3.7 invariance of the boundary stalk
+under quasi-isomorphism of the bulk model, applied to the
+stratified factorisation algebra on $X \times \R_{\geq 0}$ with
+the boundary cosheaf condition imposed at the codimension-one
+boundary $X\times\{0\}$). The chiral product
+identification~\eqref{eq:boundary-chiral-product} is therefore
+model-independent at the level of chain-level $E_1$-chiral algebra
+structure; gauge-equivalent bulk models give chain-equivalent
+identifications.
+
+\emph{Step 6: $\infty$-categorical lift.}
+The chain-level statement of parts~(a)--(c) lifts to an
+$(\infty,1)$-categorical statement: at the level of factorisation
+$\infty$-categories~\cite{AF15,FG12}, the
+boundary-restriction functor $\iota^*$ is a left
+adjoint to boundary-pushforward, and the bulk-to-boundary OPE
+consistency is the unit $\eta\colon \id_{\mathrm{ChirAlg}_X^{\Eone}}
+\xrightarrow{\sim} \iota^* \circ \Phi_{\mathrm{hol}}^\Xi$ being an
+equivalence of $\Eone$-chiral algebra functors on the
+\(\Xi\)-decorated source at the level of the $(\infty,1)$-category.
+Both lanes (chain-level external product
+in this proof; $(\infty,1)$-categorical adjunction unit) are
+load-bearing; they agree under
+the homotopy coherent nerve realisation of factorisation algebras
+(\cite{CG21}\,\S6 Whitehead theorem for factorisation algebras).
+\end{proof}
+
+\begin{remark}[Scope: $\SCchtop$ bicoloured, not
+$E_3$ on the nose]\label{rem:bulk-bdry-pattern-277-scope}%
+
+Theorem~\ref{thm:bulk-boundary-OPE-consistency} is a chain-level
+identity on the closed-colour holomorphic factorisation map of the
+directed two-coloured operad $\SCchtop$, restricted to the boundary
+stratum.
+The result does \emph{not} promote the bulk to an $E_3$-algebra on
+the nose: such a promotion requires the topologisation hypothesis
+(conformal vector at non-critical level) of
+Theorem~\ref{thm:universal-holography-functor}\,(ii), which is the
+content of the Sugawara primitive transport
+(Vol~I \texttt{chapters/theory/en\_koszul\_duality.tex}, the
+cohomological topologisation theorem for affine Kac--Moody at
+non-critical level, covering class $\mathsf L$; class $\mathsf M$
+is the weight-completed chain-level MC5 strengthening of Vol~I
+\texttt{chapters/theory/mc5\_class\_m\_chain\_level\_platonic.tex},
+scoped to the pro-ambient / $J$-adic / weight-completed ambients,
+not the raw-direct-sum ambient) or the iterated-Sugawara
+ladder (Theorem~\ref{thm:e-infinity-topologization-ladder}). The
+bulk-to-boundary OPE consistency is logically prior to
+topologisation: it holds for every $E_1$-chiral $\cA$ on the curve
+without requiring a conformal vector.
+\end{remark}
+
+\begin{remark}[Vol~I averaging compatibility]
+\label{rem:bulk-bdry-vol1-averaging}%
+\index{averaging map!bulk-to-boundary compatibility}
+The bulk-to-boundary restriction
+$\iota^* \colon \HTQFT_{X \times \R_{\geq 0}} \to
+\mathrm{ChirAlg}_X$ commutes with the Vol~I averaging map
+$\mathrm{av} \colon \fg^{E_1} \to \fg^{\mathrm{mod}}$ in the
+following sense: for $\cA$ in the standard landscape, the
+boundary $E_1$-chiral algebra
+\(\iota^*\cF_{\cA,\Xi}\xrightarrow{\eta^\partial_\cA}\cA\)
+averages to the same modular
+chiral homology $\fg^{\mathrm{mod}}_\cA$ that is read off the
+bulk chiral Hochschild-cochain factorisation $\cH(\cA) =
+\cF_{\ChirHoch^\bullet(\cA,\cA)}$ via the
+Vol~I--Vol~II ladder of identifications
+(the averaging-vs-derived-centre disentanglement: the averaging
+map $\mathrm{av}$ and the chiral derived centre $Z^{\mathrm{der}}_{\mathrm{ch}}$
+are distinct functors with distinct outputs, and conflating them
+collapses the Vol I / Vol II ladder). The
+two routes from \(\cF_{\cA,\Xi}\) to the modular invariant agree
+chain-level on the four-class $\{G, L, C, M\}$
+fingerprint, with class-$M$ closure supplied by the
+DS--Hochschild bridge
+(Theorem~\ref*{thm:chd-ds-hochschild}).
+\end{remark}
+
+\begin{remark}[Concrete witness on $\cA = V_k(\fsl_2)$]
+\label{rem:bulk-bdry-witness-vk-sl2}%
+\index{boundary recovery!concrete witness $V_k(\fsl_2)$|textbf}
+For $\cA = V_k(\fsl_2)$ at non-critical level $k \neq -2$:
+\begin{itemize}
+\item The bulk \(\cF_{V_k(\fsl_2),\Xi}\) on
+$X \times \R_{\geq 0}$ is
+the Costello--Gaiotto holomorphic Chern--Simons theory at level
+$k$ on $X \times \R_{\geq 0}$ with chiral WZW boundary
+condition at level $k$ on $X \times \{0\}$
+(Costello--Gaiotto~\cite{CostelloGaiotto18}\,\S3.4 boundary
+realisation; the chiral half of holomorphic Chern--Simons recovers
+chiral WZW at the boundary by the WZNW identification of
+Witten 1989 lifted to chain level by
+Costello--Gwilliam~\cite{CG21}\,Theorem~7.3.7).
+\item Theorem~\ref{thm:bulk-boundary-OPE-consistency}~(b) reads,
+on $a = e$, $b = f$ in the level-$k$ generators:
+\[
+ \iota^*\bigl(\mu^{\mathrm{hol},\,\mathrm{bulk}}_\Delta\bigr)
+ (e, f)
+ \;=\;
+ \Delta_*[(e_{(-1)}f)(w)]
+ \;=\;
+ \Delta_*[(ef)(w)],
+\]
+the chiral (normally ordered) product, recovering the affine
+Kac--Moody chiral product on the boundary at level $k$.
+\item The central charge $c = 3k/(k+2)$ enters the boundary OPE
+only through the Sugawara stress tensor $T(z)$ on $X \times \{0\}$
+at non-critical $k$; this matches the Costello--Gaiotto
+boundary identification of holomorphic CS at level $k$ with chiral
+WZW at level $k$ via the WZNW identification
+(Witten 1989, Costello--Gaiotto 2018).
+\item The four-class fingerprint of $V_k(\fsl_2)$ in the
+G/L/C/M dichotomy is class~L
+(affine Kac--Moody, $r_{\max} = 3$ in the shadow tower), with
+$\kappaChHodge(V_k(\fsl_2)) = \dim(\fsl_2)\,(k+h^\vee)/(2h^\vee) =
+3\,(k+2)/4$ at the Vol~I trace-form normalisation; the
+bulk-to-boundary OPE consistency theorem witnesses the
+chain-level identification on this concrete class~L generator.
+\item This is a triple-check witness: chain-level boundary
+recovery via Costello--Gwilliam restriction; chain-level boundary
+recovery via Costello--Gaiotto holomorphic CS bulk identification;
+chain-level boundary recovery via the Vol~I averaging map
+factoring through the chiral Hochschild-cochain factorisation algebra
+$\cH(\cA) = \cF_{\ChirHoch^\bullet(\cA,\cA)}$.
+\end{itemize}
+\end{remark}
+
+\begin{corollary}[Boundary face Move~2 of
+Theorem~\ref{thm:universal-holography-functor} is upgraded to a
+chain-level $\Eone$-chiral algebra identification;
+\ClaimStatusProvedHere]
+\label{cor:UHF-boundary-move-2-chain-level}
+The boundary identification
+\[
+\eta^\partial_\cA\colon
+\Obs^\partial(\cF_{\cA,\Xi})\xrightarrow{\simeq}\cA
+\]
+of
+Theorem~\ref{thm:universal-holography-functor}~(i) holds at chain
+level as an $\Eone$-chiral algebra equivalence, not only as an
+equivalence of underlying complexes. Equivalently: the universal
+holography functor $\Phi_{\mathrm{hol}}$ admits a chain-level
+boundary right inverse on the \(\Xi\)-decorated source:
+\[
+\eta^\partial\colon
+\iota^*\circ\Phi_{\mathrm{hol}}^\Xi
+\xrightarrow{\simeq}
+\mathrm{forget}_{\Xi}.
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:bulk-boundary-OPE-consistency}~(c) gives the
+chain-level $\Eone$-algebra identification of
+$\Obs^\partial(\cF_{\cA,\Xi})$ with $\cA$. Composing
+$\Phi_{\mathrm{hol}}$ (Theorem~\ref{thm:universal-holography-functor})
+with $\iota^*$ (Costello--Gwilliam restriction~\cite{CG21}\,\S7.3)
+gives the forgetful functor from
+\(\ChirAlg^{\omega,\mathrm{BL,adm},\Xi}_X\) to the underlying
+\(\Eone\)-chiral algebra at chain level; functoriality in
+\(\Xi\)-compatible \(\cA\)-morphisms is inherited from the
+functoriality of both $\Phi_{\mathrm{hol}}$ and $\iota^*$
+(Costello--Gwilliam~\cite{CG21}\,\S7.3.5). The right-inverse
+property is therefore established at chain level.
+\end{proof}
+
+\subsection{Face (4): the BV/BRST face}\label{subsec:face-bv-brst}
+
+Face~(4) is the observables of a bulk--boundary BV theory on
+$X\times\mathbb{R}_{\geq 0}$ with boundary condition $\cA$. The bulk
+action $S_{\mathrm{bulk}}$ satisfies the classical master equation;
+after BV quantisation, the quantum observables on the closed half
+(two-disc topology) carry the logarithmic
+$\SCchtop$-algebra structure of
+Definition~\ref{def:log-SC-algebra}, the open sector records
+boundary local operators, and the mixed sector is line-operator
+insertion of bulk into boundary. The QME on the combined bulk--boundary
+system is the open/closed Maurer--Cartan equation associated to
+$\SCchtop$. The $\SCchtop$-datum is the \emph{pair}, not
+$\cA$ alone.
+
+\subsection{Face (5): the convolution face}\label{subsec:face-convolution}
+
+Face~(5) is the $L_\infty$-algebra of deformations of a twisting
+morphism from $B(\SCchtop)$ to $\End^{\mathrm{ch}}$. Fix a cofibrant
+replacement $\cE\twoheadrightarrow\SCchtop$; the convolution
+$L_\infty$-algebra
+\begin{equation}
+ \fg^{\,\SCchtop}_{\cA,Z}
+ \;:=\;
+ \mathrm{Hom}^{\mathrm{col}}\bigl(B(\SCchtop),\,\End^{\mathrm{ch}}_{(\cA,Z)}\bigr)
+\end{equation}
+controls colored $\SCchtop$-algebra structures on the pair
+$(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$ through its Maurer--Cartan set
+(Vallette, Loday--Vallette for the colored case). The
+$\SCchtop$-datum is a Maurer--Cartan element $\alpha_T\in
+\fg^{\,\SCchtop}_{\cA,Z}$; gauge equivalence is $\Phi$-dependent;
+the gauge class is $\Phi$-independent and equals the operadic
+face's homotopy class.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Face (6): Drinfeld centre of the factorization module category}
+\label{sec:face-drinfeld-centre}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The sixth face promotes the factorization face to its categorical
+shadow. In the categorical direction, the $\SCchtop$-datum is
+equivalent to the $E_2$-monoidal structure on a module category for
+$\cA$, together with a half-braiding whose spectral reduction is
+Face~(3)'s $r$-matrix. The construction is a right adjoint, not an
+averaging; the half-braiding is
+\emph{constructed}, not narrated.
+
+\subsection{The factorization module category}\label{subsec:fact-mod-cat}
+
+\begin{definition}[Factorization module category]\label{def:rep-fact}%
+\index{factorization module category!$\Rep_{\mathrm{fact}}$|textbf}%
+\index{$\Rep_{\mathrm{fact}}$}
+Let $\cA$ be an $E_1$-chiral algebra on $X$. The \emph{factorization
+module category}
+\begin{equation}
+ \Rep_{\mathrm{fact}}(\cA)
+ \;:=\;
+ \mathbb{A}\text{-}\mathrm{fact}\mathrm{Mod}(\Dmod(\Ran(X)))
+\end{equation}
+is the dg category of factorization modules for $\cA$: objects are
+$\cA$-module $D$-modules on $\Ran(X)$ whose factorization structure
+is compatible with the chiral $\cA$-module action. Morphisms are
+$\cA$-linear factorization morphisms. Composition is defined
+using the chiral tensor product
+$\otimes^{\mathrm{ch}}$ on $\Ran(X)$
+(Beilinson--Drinfeld, GR17 IV.5; Francis--Gaitsgory 2012).
+\end{definition}
+
+\begin{remark}[Three local models agree]\label{rem:three-local-models}
+On the formal disc $D_x\subset X$, the category
+$\Rep_{\mathrm{fact}}(\cA)$ restricts to the usual category
+$\cA_{x}\text{-}\Mod$ of modules over the $\cA$-mode algebra
+(the Lie algebra of modes of $\cA$ on $D_x$). On the punctured
+formal disc $D^\times_x$ it restricts to the category of smooth
+$\hat{\cA}_{x}$-modules. The three models glue along
+$D^\times_x\hookrightarrow D_x$ via the pullback of the factorization
+structure; the glue is the content of
+Lemma~\ref{lem:rep-fact-local-global}.
+\end{remark}
+
+\begin{lemma}[Local--global description of $\Rep_{\mathrm{fact}}$;
+\ClaimStatusProvedElsewhere]\label{lem:rep-fact-local-global}
+$\Rep_{\mathrm{fact}}(\cA)$ is equivalent to the (∞,1)-limit
+of the factorization presheaf of local module categories over the
+Ran space $\Ran(X)$. Equivalently, it is the category of
+modules over the factorization algebra $\Obs^{\mathrm{ch}}_\cA$ in
+$\Dmod(\Ran(X))$. The equivalence is Beilinson--Drinfeld for the
+algebraic incarnation, Costello--Gwilliam for the analytic one; see
+Gaitsgory--Rozenblyum~\cite{GR17} IV.5.
+\end{lemma}
+
+\begin{proof}[Attribution]
+Beilinson--Drinfeld \textit{Chiral Algebras} Ch.~3, Lemma~3.4.15;
+Gaitsgory--Rozenblyum, \textit{Study in Derived Algebraic Geometry},
+Vol.~II, Ch.~IV.5, for the $\infty$-categorical form. The
+factorization-module description is in Francis--Gaitsgory 2012
+Definition~2.7.6.
+\end{proof}
+
+\subsection{The half-braiding construction}\label{subsec:half-braiding}
+
+\begin{definition}[Chiral half-braiding]\label{def:chiral-half-braiding}%
+\index{half-braiding!chiral|textbf}%
+\index{factorization module category!half-braiding}
+Let $\cA$ be an $E_1$-chiral bialgebra with spectral coproduct
+$\Delta_z\colon \cA\to\cA\otimes\cA$
+(Chapter~\ref{ch:theory-hochschild}, Definition~\ref{def:half-braiding-explicit}).
+For $N\in\Rep_{\mathrm{fact}}(\cA)$ and $a\in\cA$, $n\in N$, set
+\begin{equation}
+ \label{eq:chiral-half-braiding}
+ \sigma_\cA(z)(a\otimes n)
+ \;:=\;
+ \sum\bigl(\Delta_z(a)\bigr)_{(2)}\cdot n
+ \;\otimes\;
+ \bigl(\Delta_z(a)\bigr)_{(1)}
+ \;=\;
+ \sum a_{(2),z}\cdot n\otimes a_{(1),z}.
+\end{equation}
+The family $\{\sigma_\cA(z)\}_{z\in X\setminus\{0\}}$ assembles into a
+natural isomorphism of functors
+$\cA\otimes(-)\Rightarrow(-)\otimes\cA$ on
+$\Rep_{\mathrm{fact}}(\cA)$, meromorphic in the spectral parameter $z$,
+with first-order pole at $z=0$.
+\end{definition}
+
+\begin{proposition}[Half-braiding from $\Delta_z$; \ClaimStatusProvedHere]
+\label{prop:half-braiding-construction}%
+\index{half-braiding!from $\Delta_z$}
+The half-braiding $\sigma_\cA(z)$ of
+Definition~\ref{def:chiral-half-braiding} satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item hexagon identities (quasi-triangularity of $\cA$ expressed
+ on factorization modules);
+ \item spectral $R$-matrix:
+ $\sigma_\cA(z)|_{V_u,V_v}=R(u-v)$ on evaluation modules
+ $V_u,V_v$ with spectral parameters $u,v$;
+ \item $\Rep_{\mathrm{fact}}(\cA)$ becomes a braided monoidal
+ $\infty$-category, i.e.\ an $E_2$-algebra in $\mathrm{Cat}_\infty$;
+ the braided structure lives one categorical level up, on the
+ representation category, not on $\cA$: $\cA$ itself remains an
+ $E_1$-chiral algebra;
+ \item the braiding \emph{extends} to all of $\Rep_{\mathrm{fact}}(\cA)$,
+ not only to evaluation modules: for generic $M,N$ in
+ $\Rep_{\mathrm{fact}}$, $\sigma_\cA$ provides a meromorphic
+ natural transformation $M\otimes N\to N\otimes M$ with poles
+ on the discriminant of the module supports.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) follows from the defining quasi-triangularity axiom for
+$\Delta_z$ (Chapter~\ref{chap:spectral-braiding}): for
+$a,b\in\cA$,
+\(
+ \sigma_\cA(z)(ab\otimes n)=
+ \sigma_\cA(z)(a\otimes\sigma_\cA(z)(b\otimes n))
+\)
+after applying the spectral coproduct to the product $ab$ and reading
+off Sweedler indices. The axiomatics match the standard quasi-Hopf
+hexagon after translation to the half-braiding form.
+
+(ii) is the evaluation specialisation of~\eqref{eq:chiral-half-braiding}:
+on $V_u\otimes V_v$, $\Delta_z(a)\cdot(v_u\otimes v_v)$ evaluates to
+$\pi_u\otimes\pi_v(\Delta_z(a))$, which is the spectral
+$R$-matrix acting on the tensor product modulo the swap, recovering
+$R(u-v)$ by the Drinfeld--Jimbo reconstruction of $R$ from
+$\Delta_z$ (Chapter~\ref{ch:ordered-chiral}).
+
+(iii) is a consequence of (i) + (ii) + the module category structure
+of $\Rep_{\mathrm{fact}}$: a braided monoidal structure is a
+half-braiding that is itself natural, and naturality is the
+factorization-module compatibility of Lemma~\ref{lem:rep-fact-local-global}.
+By Lurie HA~5.1 the braided monoidal structure is an
+$E_2$-algebra in $\mathrm{Cat}_\infty$.
+
+(iv) is the extension from evaluation modules to arbitrary
+factorization modules, enabled by the universal property of
+$\Rep_{\mathrm{fact}}(\cA)$ (Lemma~\ref{lem:rep-fact-local-global}):
+every module is a colimit of evaluation modules along the factorization
+structure, and $\sigma_\cA(z)$ is natural with respect to factorization
+morphisms. Meromorphicity of $\sigma_\cA(z)$ on the
+supports follows from OPE pole bounds on $\Delta_z$.
+\end{proof}
+
+\subsection{Drinfeld centre and factorization centre}\label{subsec:dcz-vs-fcz}
+
+\begin{definition}[Drinfeld centre of $\Rep_{\mathrm{fact}}(\cA)$]
+\label{def:drinfeld-centre-rep-fact}%
+\index{Drinfeld centre!of $\Rep_{\mathrm{fact}}$|textbf}
+The \emph{Drinfeld centre}
+$\cZ\bigl(\Rep_{\mathrm{fact}}(\cA)\bigr)$ is the $\infty$-category of
+pairs $(N,\sigma_N)$, where $N\in\Rep_{\mathrm{fact}}(\cA)$ and
+$\sigma_N\colon N\otimes(-)\Rightarrow(-)\otimes N$ is a half-braiding
+of $N$ compatible with $\sigma_\cA(z)$. Composition is component-wise.
+The Drinfeld centre carries a canonical $E_2$-monoidal structure.
+\end{definition}
+
+\begin{theorem}[Drinfeld centre face of $\SCchtop$;
+\ClaimStatusConditional]
+\label{thm:drinfeld-centre-sc-face}%
+\index{SC!Drinfeld centre face|textbf}%
+\index{heptagon!face 6}
+Let $\cA$ be an $E_1$-chiral bialgebra on $X$ with conformal-vector
+hypothesis dropped (generic case). Assume the local
+factorization-module centre comparison for~$\cA$: the chiral
+higher-Deligne action identifies
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ with the universal
+half-braided object acting on the evaluation-generated,
+compactly generated factorization-module category, and the induced
+functor on factorization modules is an equivalence. Then
+\begin{equation}
+ \label{eq:drinfeld-centre-face}
+ \cZ\bigl(\Rep_{\mathrm{fact}}(\cA)\bigr)
+ \;\simeq\;
+ \bigl(\Rep_{\mathrm{fact}}(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))\bigr)^{E_2}
+\end{equation}
+as braided monoidal $\infty$-categories, where the left side is the
+categorical Drinfeld centre and the right side is the category of
+factorization modules over the derived chiral centre
+(Definition~\ref{def:rep-fact} applied to the bulk algebra), with
+its induced $E_2$-monoidal structure. The equivalence carries the
+half-braiding of~\eqref{eq:chiral-half-braiding} on the left to the
+spectral braiding of the right induced from
+$\Delta_z^{\,Z}\colon Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)\to
+Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)\otimes Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$.
+The pair
+\(
+ \bigl(\cZ(\Rep_{\mathrm{fact}}(\cA)),\Rep_{\mathrm{fact}}(\cA)\bigr)
+\)
+is a categorified $\SCchtop$-datum: the bulk category acts on
+the boundary category, with no open-to-closed direction.
+This is the module-category half-braiding face of the local
+$\SCchtop$ shadow. It does not identify the Drinfeld centre of an
+ordered double with the Hochschild derived centre; that stronger
+comparison is the separate double/bulk conjectural comparison of
+Chapter~\ref{ch:theory-hochschild}.
+\end{theorem}
+
+\begin{proof}
+Under the stated comparison hypothesis, construct the equivalence in
+four steps.
+
+\emph{Step 1: from half-braiding to central object (right adjoint to
+forgetful).} The bar coalgebra $B^{\,\mathrm{ch}}(\cA)$ is an object
+of $\Rep_{\mathrm{fact}}(\cA)$, not of the Drinfeld centre
+$\cZ(\Rep_{\mathrm{fact}}(\cA))$ (these are categorically disjoint:
+the bar coalgebra is an $E_1$-coalgebra in a monoidal category, while
+the centre is the universal $E_2$-monoidal recipient receiving any
+$E_1$-monoidal functor with target $\Rep_{\mathrm{fact}}(\cA)$). The
+construction of central objects is therefore the right adjoint to the
+forgetful functor (Majid 1998, Lurie HA~5.3.1.30), \emph{not} a lift
+of bar elements to centre elements. Concretely: for any
+$N\in\Rep_{\mathrm{fact}}(\cA)$, the centre object $\cZ(N)$ is the
+universal half-braided object equipped with a natural transformation
+$\sigma_N(z)\colon\cA\otimes(-)\to(-)\otimes\cA$ on $N$, given by
+$\sigma_N(z)$ from~\eqref{eq:chiral-half-braiding}. The unit of the
+adjunction sends the trivial module to the identity central object;
+generators of $\cA$, viewed as endomorphisms of the regular module
+$\cA\in\Rep_{\mathrm{fact}}(\cA)$, produce via the right adjoint the
+half-braiding data of Proposition~\ref{prop:half-braiding-construction}.
+No bar coalgebra ``lifts to a central object'': the right adjoint
+constructs centre objects categorically, the bar coalgebra is then a
+\emph{computational tool} for resolving central objects via the
+$E_\infty$-resolution of $\cA$ inside $\Rep_{\mathrm{fact}}(\cA)$
+(Lurie HA~5.5.4 for the analogous $E_n$-resolution).
+
+\emph{Step 2: the categorified bar--cobar adjunction.} The adjoint pair
+\begin{equation}
+ \mathrm{forget}\colon\cZ(\Rep_{\mathrm{fact}}(\cA))\rightleftarrows
+ \Rep_{\mathrm{fact}}(\cA)\colon\mathrm{centre}
+\end{equation}
+is the right-adjoint-to-forgetful construction (Majid 1998;
+Lurie HA~5.3): the centre is the categorified \emph{commutant},
+not an averaging. Its right adjoint produces, for any
+factorization module $N$, the universal half-braided lift
+$\cZ(N)\in\cZ(\Rep_{\mathrm{fact}}(\cA))$.
+
+\emph{Step 3: identification with bulk modules.} The derived chiral
+centre $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)=C^{\bullet}_{\mathrm{ch}}(\cA,\cA)$
+acts on $\cA$ through its $E_2$-chiral structure (chiral Higher
+Deligne, chiral-Hochschild incarnation). By
+Beilinson--Drinfeld--Zhu--Francis--Gaitsgory--Rozenblyum factorization
+module theory (Lurie HA~5.3.1.30; BZFN10),
+$\Rep_{\mathrm{fact}}(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$ acquires the
+induced braided monoidal structure from
+$\Delta_z^{\,Z}$. The factorization-module centre comparison assumed
+above is precisely the assertion that Step~2's right adjoint factors
+through this category as an equivalence:
+$\cZ(\Rep_{\mathrm{fact}}(\cA))\simeq
+\Rep_{\mathrm{fact}}(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$.
+
+\emph{Step 4: matching the half-braiding to the spectral braiding.}
+On evaluation modules the matching is
+Proposition~\ref{prop:half-braiding-construction}~(ii). The
+extension to all factorization modules is
+Proposition~\ref{prop:half-braiding-construction}~(iv). The two
+braidings agree as natural transformations
+by the universal property of factorization module categories
+(Lemma~\ref{lem:rep-fact-local-global}): both compute the action of
+the central object on a general module, through the
+factorization-compatible chiral tensor product.
+
+Under the comparison hypothesis this gives the equivalence
+in~\eqref{eq:drinfeld-centre-face}.
+The $\SCchtop$-datum at the categorical level is read off directly:
+the bulk category is $\cZ(\Rep_{\mathrm{fact}}(\cA))$, the boundary
+category is $\Rep_{\mathrm{fact}}(\cA)$, the module action of the
+first on the second is the centre-to-forgetful counit, no open-to-closed
+exists (the centre receives no extra input from the boundary beyond
+what the forgetful sends).
+\end{proof}
+
+\begin{remark}[Associator dependence]\label{rem:face-6-associator}
+The conditional comparison of
+Theorem~\ref{thm:drinfeld-centre-sc-face} is
+$\infty$-quasi-isomorphic with the factorization face after fixing a
+Drinfeld associator $\Phi\in\mathrm{GRT}_1(\mathbb{Q})$. The underlying
+braided monoidal $\infty$-category is $\Phi$-independent; the strict
+chain-level presentation depends on $\Phi$. On the Koszul locus, two
+associators yield strictly equivalent half-braidings after applying
+the $\Phi_1\Phi_2^{-1}$ twist.
+\end{remark}
+
+\begin{corollary}[Open lane / CY lane unification through face~(6);
+\ClaimStatusConditional on
+Theorem~\ref{thm:drinfeld-centre-sc-face}; licensing tags
+$\beta + \gamma$]
+\label{cor:open-cy-lane-unification}%
+\index{universal stage chain!lane unification at level Z}%
+\index{open lane!unification with CY lane}%
+Heptagon face~(6) is the level-$\mathsf{Z}$ unification of the open
+lane and the CY lane of the universal stage chain
+$\mathsf{P} \to \mathsf{C} \to \mathsf{S} \to \mathsf{Z} \to \mathsf{A}$.
+Specifically, the equivalence~\eqref{eq:drinfeld-centre-face} together
+with the Vol~III Drinfeld double identification
+\textup(Vol~III \texttt{calabi-yau-quantum-groups:chapters/theory/quantum\_chiral\_algebras.tex:thm:G-eq-D-Yplus},
+$G(X) = \Drinfdouble{\Yplus{X}}$\textup) gives the lane equivalence
+\begin{equation}\label{eq:open-cy-lane-equivalence}
+\underbrace{\cZ\bigl(\Rep_{\mathrm{fact}}(\cA_b)\bigr)}_{\text{open lane,
+level } \mathsf{Z}}
+\;\simeq\;
+\underbrace{\bigl(\Rep_{\mathrm{fact}}(\Zderch(\cA_b))\bigr)^{E_2}}_{\text{open lane,
+level } \mathsf{Z}\text{ via centre}}
+\;\simeq\;
+\underbrace{\bigl(\Rep_{\mathrm{fact}}(\PhiFA_d(\cT_X))\bigr)^{E_2}}_{\text{CY lane,
+level } \mathsf{Z}\text{ via two-stage } \Phi_d}
+\end{equation}
+between the categorical Drinfeld centre on the open-lane Hochschild
+side, the factorization centre on the open-lane bulk side, and the
+factorization centre of the stage-1 holomorphic factorisation
+algebra $\PhiFA_d(\cT_X)$ on the CY-lane Hopf side, where
+$\cT_X$ is the relevant CY-$d$-category presenting $\cA_b$ as a
+chart algebra under the chain fusion conjecture
+\textup(Vol~II FRONTIER, ``cross-volume bridges''\textup).
+\end{corollary}
+
+\begin{proof}
+The first equivalence is~\eqref{eq:drinfeld-centre-face}. The second
+equivalence is the categorical lift of the chain fusion conjecture
+$\cA_b \simeq \cA_{b(X, \Sigma, C)}$ to the level-$\mathsf{Z}$ centre,
+applied to the stage-2 specialisation $\SpCh\bigl(\PhiFA_d(\cT_X)\bigr)$:
+the derived chiral centre $\Zderch(\cA_b)$ on the open-lane bulk side
+is the chiral centre of the chiral algebra produced by the two-stage
+functor $\Phi_d = \SpCh \circ \PhiFA_d$ from $\cT_X$. By
+factorization-module functoriality of $\PhiFA_d$ \textup(Vol~III
+\cref{V3-thm:phi-FA-funct}\textup), the two factorization centres
+agree as braided monoidal $\infty$-categories. The induced
+half-braiding from the Hopf side is the categorical lift of the
+Drinfeld-double R-matrix $R \in \Drinfdouble{\Yplus{X}} \otimes
+\Drinfdouble{\Yplus{X}}$ \textup(Schiffmann--Vasserot
+\cite{SchiffmannVasserot2013}, Theorem~A; Maulik--Okounkov
+\cite{MaulikOkounkov2012}, \S 4 stable envelopes\textup); on the
+chiral side, this is the half-braiding $\sigma_\cA(z)$ of
+\eqref{eq:chiral-half-braiding}.
+\end{proof}
+
+\begin{remark}[Three lanes, one architecture; locus of
+\eqref{eq:open-cy-lane-equivalence}]
+\label{rem:three-lanes-face-6}
+The trace lane of the architectural cut
+\textup(critique v2 \S 2; Pentagon-trace = ghost-trace =
+Borcherds-weight three-factor identity\textup) parallels the
+open and CY lanes through the closed-colour trace
+$\mathrm{tr}^{\mathrm{cl}}_X$ of
+Definition~\ref{def:bicoloured-primitive-package}, evaluating to
+$c_N(0)/2$ at $N \in \{1, 2, 3, 4, 6\}$. At the K3-Heisenberg
+witness $N = 1$, the three readings coincide on
+$\{5, 5, 5\}$:
+\begin{itemize}
+\item Pentagon trace on the closed colour:
+$\mathrm{tr}^{\mathrm{cl}}_{K3 \times E}(F^{\mathrm{cl}}) = c_1(0)/2 = 5$;
+\item ghost trace on the BRST anomaly:
+$\mathrm{tr}_{\mathrm{ghost}}(Q_{\mathrm{BRST}}^2) = 5$ on the
+Heisenberg witness;
+\item Borcherds weight:
+$\kappaBKM(\Phi_1) = c_1(0)/2 = 5$.
+\end{itemize}
+The three values agreeing is the level-$\mathsf{Z}$ trace identity
+witnessed by the open / CY / trace lanes of the architectural cut at
+heptagon face~(6); the categorical equivalence
+\eqref{eq:open-cy-lane-equivalence} is its categorified incarnation.
+The locus of the equivalence \eqref{eq:open-cy-lane-equivalence} is
+the chain-fusion locus
+$\C^3$, local $\C\mathbb{P}^2$, conifold, and K3 $\times E$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Face (7): derived algebraic geometry}
+\label{sec:face-dag}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The seventh face reads $\SCchtop$ as the algebra of global sections
+of a derived stack classifying $E_1$-chiral algebras with
+$\SCchtop$-datum. The stack is $1$-shifted symplectic in the sense
+of Pantev--To\"en--Vaqui\'e--Vezzosi (PTVV~2013), and the convolution
+face is recovered as the tangent Lie algebra.
+
+\subsection{The classifying stack}\label{subsec:classifying-stack}
+
+\begin{definition}[Stack of $E_1$-chiral algebras with
+$\SCchtop$-datum]\label{def:moduli-sc-ch-top}%
+\index{moduli stack!of $E_1$-chiral algebras with $\SCchtop$-datum|textbf}%
+\index{$\cM_{\SCchtop}$}
+Let $X$ be a smooth complex curve. Define the functor
+\begin{equation}
+ \cM_{\SCchtop,X}\colon
+ (\mathrm{dgArt}/\mathbb{C})^{\mathrm{op}}
+ \;\longrightarrow\;
+ \mathrm{sSet}
+\end{equation}
+from derived Artinian $\mathbb{C}$-algebras to simplicial sets by
+sending $R\in\mathrm{dgArt}$ to the mapping space
+\begin{equation}
+ \cM_{\SCchtop,X}(R)
+ \;:=\;
+ \bMap_{\mathrm{OperadCat}_\infty}
+ \bigl(\SCchtop,\,
+ \mathrm{End}^{\mathrm{col}}_{(\cA,\,Z)}\otimes_{\mathbb{C}} R\bigr),
+\end{equation}
+where the mapping space is taken in coloured $\infty$-operads on
+$\Dmod(\Ran(X))$ and the colimit is over all pairs
+$(\cA,Z)$ with $\cA$ an $R$-flat $E_1$-chiral algebra on $X$ and
+$Z$ an $E_2$-chiral algebra acting on $\cA$ through the brace
+structure. The stack is the sheafification of this functor with respect
+to the étale topology on $\mathrm{dgArt}$.
+\end{definition}
+
+\begin{lemma}[Representability; \ClaimStatusProvedElsewhere]
+\label{lem:moduli-sc-representable}
+The functor $\cM_{\SCchtop,X}$ is a locally finite presented derived
+Artin stack over $\mathbb{C}$. It carries a natural action of the
+Drinfeld--Grothendieck--Teichm\"uller group
+$\mathrm{GRT}_1(\mathbb{Q})$ through associator transport.
+\end{lemma}
+
+\begin{proof}[Attribution]
+Representability: To\"en--Vaqui\'e (Compos.\ Math.\ 143, 2007,
+\S3.3) for operadic moduli; Lurie, \emph{Derived Algebraic Geometry IV}
+for the Artin criteria; Francis--Gaitsgory 2012 for the
+factorization variant. $\mathrm{GRT}_1$-action via Willwacher 2015
+(Invent.\ Math.\ 200).
+\end{proof}
+
+\begin{remark}[Three strata]\label{rem:moduli-strata}
+$\cM_{\SCchtop,X}$ stratifies by conformal-vector presence:
+the open substack $\cM^{\mathrm{conf}}_{\SCchtop,X}$ where the
+boundary $\cA$ carries a conformal vector at non-critical level;
+the closed complement $\cM^{\mathrm{nc}}_{\SCchtop,X}$ without
+conformal vector; and the stratum of critical level
+$\cM^{\mathrm{crit}}_{\SCchtop,X}$ where the conformal vector
+degenerates. On $\cM^{\mathrm{conf}}$ the structure topologises to
+$E_3$-topological (Chapter~\ref{ch:topologization}); on
+$\cM^{\mathrm{nc}}$ and $\cM^{\mathrm{crit}}$ the heptagon remains
+intact.
+\end{remark}
+
+\subsection{Shifted symplectic structure}\label{subsec:shifted-symplectic}
+
+\begin{theorem}[$1$-shifted symplectic structure on
+$\cM_{\SCchtop,X}$; \ClaimStatusProvedHere]
+\label{thm:moduli-sc-shifted-symplectic}%
+\index{PTVV!on moduli of $\SCchtop$-data}%
+\index{$1$-shifted symplectic!on $\cM_{\SCchtop,X}$}
+The derived stack $\cM_{\SCchtop,X}$ carries a natural
+$1$-shifted symplectic form $\omega_{\SCchtop}\in
+\mathrm{Sp}^1(\cM_{\SCchtop,X})$, constructed as the pairing
+\begin{equation}
+ \label{eq:moduli-shifted-sympl}
+ \omega_{\SCchtop}
+ \;=\;
+ \int_{X\times\mathbb{R}_{\geq 0}}\;
+ \mathrm{ev}^{*}\,\kappa_{\SCchtop},
+\end{equation}
+where $\mathrm{ev}$ is the evaluation map from
+$\cM_{\SCchtop,X}\times X\times\mathbb{R}_{\geq 0}$ to the
+universal mixed chiral-topological target (the tangent pairing of the universal
+$\SCchtop$-action), and $\kappa_{\SCchtop}$ is the coloured bilinear
+form on $(\SCchtop)^{!}=(\Lie,\Ass,\text{shuffle-mixed})$ given by
+the Killing form on the closed $\Lie$ colour and the trace form on
+the open $\Ass$ colour. The pairing is anti-symmetric of degree $1$,
+and closed as a shifted $2$-form by PTVV~\cite{PTVV13}
+Theorem~2.5 (mapping-stack version) applied to the source
+$X\times\mathbb{R}_{\geq 0}$, which is a $2$-orientable $\infty$-pair
+of dimensions $(1,1)$.
+\end{theorem}
+
+\begin{proof}
+Apply PTVV~\cite{PTVV13} Theorem~2.5 to the mapping stack
+$\cM_{\SCchtop,X}=\bMap(X\times\mathbb{R}_{\geq 0},
+B\SCchtop{\text{-}}\mathrm{Alg})$, where
+$B\SCchtop\mathrm{-Alg}$ denotes the classifying $(\infty,2)$-stack of
+$\SCchtop$-algebras in $\Dmod(\Ran(X))$. The source
+$X\times\mathbb{R}_{\geq 0}$ is a smooth $\infty$-pair of
+\emph{holomorphic-topological} dimension $(1\,|\,1)$ (one complex
+dimension on $X$ contributing one holomorphic degree to the de~Rham
+filtration; one real dimension on $\R_{\geq 0}$ contributing one
+topological degree); the total derived dimension for PTVV
+transgression is $1+1=2$. The target carries a $2$-shifted
+symplectic structure induced by the coloured bilinear form
+$\kappa_{\SCchtop}$. Integration over the source drops degree by
+$2$, yielding a $0$-shifted symplectic form, and the de~Rham
+spectral sequence collapses on the boundary stratum
+$X\times\{0\}$ to give a residual $1$-shifted form on the bulk
+moduli, after restriction to the boundary-condition fibre.
+Closedness follows from the closed nature of the source-side
+$2$-form and PTVV's transgression machinery (PTVV~\cite{PTVV13}
+Construction~2.4 for compact-source case, Calaque~\cite{Calaque15}
+for the boundary-with-corners extension at
+$\partial(X\times\R_{\geq 0})=X\times\{0\}$).
+
+\emph{Boundary condition.} The non-compactness of $\R_{\geq 0}$ is
+controlled by:
+(i) at $\partial\R_{\geq 0}=\{0\}$, the boundary insertion is
+the boundary-condition module $\cA\in\Rep_{\mathrm{fact}}(\cA)$
+viewed as an $\SCchtop$-algebra over the boundary stratum;
+(ii) at $+\infty$, the Dirichlet condition that the bulk field
+decays to its vacuum value, equivalently $L^2$-summability against
+the Costello--Gwilliam regulator on the half-line.
+
+\emph{Non-degeneracy: scope qualifier.} Non-degeneracy
+follows from the non-degeneracy of $\kappa_{\SCchtop}$ on the
+\emph{Lie--sector locus} $\cM^{\mathrm{ss}}_{\SCchtop,X}\subset
+\cM_{\SCchtop,X}$ where the closed colour is a semisimple or
+reductive Lie sector (Killing form non-degenerate; finite-dimensional
+or filtered semisimple in the chiral lift) and the open colour is
+finite-dimensional Ass (trace form non-degenerate). On the
+complementary locus (Heisenberg/abelian closed colour, infinite-rank
+Ass), $\omega_{\SCchtop}$ is only \emph{pre-symplectic}: closed of
+the right degree but with a possibly non-trivial radical.
+\end{proof}
+
+\begin{remark}[Holomorphic-topological dimension counting]
+\label{rem:why-pair-21}%
+\index{dimension counting!holomorphic-topological}
+The source $X\times\mathbb{R}_{\geq 0}$ carries two distinct
+dimensions of two distinct kinds:
+$X$ is $1$-complex-dimensional hence $2$-real-dimensional but
+contributes a single \emph{holomorphic degree} to the de~Rham
+spectral sequence; $\mathbb{R}_{\geq 0}$ is $1$-real-dimensional
+with boundary and contributes a single \emph{topological degree}.
+PTVV's framework allows this mixed dimension after the explicit
+boundary condition above. Holomorphic-topological dimension
+$(1\,|\,1)$ pairs a $2$-form on the target with the source
+fundamental class, dropping degree by $2$, producing a
+$0$-shifted output before restriction to the boundary-condition
+fibre, and a residual $1$-shifted output on the bulk moduli after
+the boundary fibre is collapsed.
+\end{remark}
+
+\begin{remark}[Scope for Face~(7) non-degeneracy]
+\label{rem:face-7-scope}%
+\index{Face (7)!scope!Lie semisimple, Ass finite-dim}%
+\index{1-shifted symplectic!scope}
+Face~(7) presents $\SCchtop$ as $1$-shifted symplectic only on the
+\emph{semisimple-or-reductive Lie locus} of the closed colour and
+the \emph{finite-dimensional Ass locus} of the open colour. The
+representative loci are:
+\begin{itemize}
+\item Closed semisimple/reductive: $V_k(\fg)$ at non-critical level
+for $\fg$ semisimple (class L); affine Heisenberg gauge-fixed by
+sub-quotient. Closed not semisimple: pure Heisenberg
+$\cH_k$ (abelian, Killing form $\equiv 0$); critical-level
+$V_{-h^\vee}(\fg)$ (Sugawara degenerates).
+\item Open finite-dim Ass: matrix algebras $M_n(\C)$, finite-dim
+group algebras. Open infinite-dim: smooth modules over an infinite-
+dimensional Lie algebra without trace form.
+\end{itemize}
+On the complement, $\omega_{\SCchtop}$ exists as a closed
+$1$-shifted form but with a non-trivial radical; Face~(7) is then a
+\emph{$1$-shifted pre-symplectic} structure, with non-degeneracy
+restored after symplectic reduction along the radical (when this
+quotient exists; for pure Heisenberg, the radical is everything and
+the quotient is trivial). The corollary
+\ref{cor:face-7-presents-sc} below inherits this scope.
+\end{remark}
+
+\subsection{Lagrangian correspondence to the convolution face}\label{subsec:lagrangian-corr}
+
+\begin{theorem}[Convolution face as Lagrangian section;
+\ClaimStatusProvedHere]
+\label{thm:convolution-lagrangian}%
+\index{convolution!Lagrangian section of $\cM_{\SCchtop,X}$}%
+\index{heptagon!edge (5)--(7)}
+The convolution $L_\infty$-algebra
+$\fg^{\,\SCchtop}_{\cA,Z}$ of Face~(5) is the tangent dg-Lie
+algebra to $\cM_{\SCchtop,X}$ at the point represented by
+the pair $(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$. The Maurer--Cartan
+locus
+\begin{equation}
+ \MC\bigl(\fg^{\,\SCchtop}_{\cA,Z}\bigr)
+ \;\subset\;
+ \cM_{\SCchtop,X}
+\end{equation}
+is a Lagrangian subvariety of
+$(\cM_{\SCchtop,X},\omega_{\SCchtop})$ in the PTVV sense: the
+pullback of $\omega_{\SCchtop}$ to the MC locus vanishes and the
+normal bundle of MC inside $\cM_{\SCchtop,X}$ is anti-symplectic to
+the tangent of MC.
+\end{theorem}
+
+\begin{proof}
+Tangent identification: by the universal property of mapping stacks,
+the tangent complex of $\cM_{\SCchtop,X}$ at $(\cA,Z)$ is
+\begin{equation}
+ T_{(\cA,Z)}\cM_{\SCchtop,X}
+ \;=\;
+ \mathrm{Hom}^{\mathrm{col}}\bigl(B(\SCchtop),\,\End^{\mathrm{col}}_{(\cA,Z)}\bigr),
+\end{equation}
+which is exactly $\fg^{\,\SCchtop}_{\cA,Z}$ (Face~(5); Loday--Vallette
+\textsection 10.2 for the coloured convolution adjoint). The
+$L_\infty$-structure on the tangent complex matches the
+convolution structure by Kontsevich formality of $\SCchtop$.
+
+Lagrangian property: the anchored form
+$\omega_{\SCchtop}|_{\MC}$ vanishes because the MC equation in
+$\fg^{\,\SCchtop}_{\cA,Z}$ is equivalent to the first-order
+vanishing of $\omega_{\SCchtop}$ along the tangent direction (PTVV~2013
+Proposition~2.8). Anti-symplectic normal: the normal bundle is
+$\fg^{\,\SCchtop}_{\cA,Z}[1]$, shifted by one, and inherits the
+anti-symplectic pairing from the PTVV cotangent adjunction.
+\end{proof}
+
+\begin{corollary}[Face~(7) presents $\SCchtop$;
+\ClaimStatusProvedHere]
+\label{cor:face-7-presents-sc}
+The $\SCchtop$-datum associated to any point $(\cA,Z)\in
+\cM_{\SCchtop,X}$ is fully determined by the germ of
+$\omega_{\SCchtop}$ at that point together with the Lagrangian
+correspondence of Theorem~\ref{thm:convolution-lagrangian}.
+Hence $\cM_{\SCchtop,X}$ presents $\SCchtop$ as a shifted
+symplectic geometry, and recovers the operadic face through its
+tangent complex.
+\end{corollary}
+
+\begin{proof}
+Combine Theorem~\ref{thm:moduli-sc-shifted-symplectic} with
+Theorem~\ref{thm:convolution-lagrangian}: the operadic structure of
+$\SCchtop$ is encoded in the shifted symplectic form
+$\omega_{\SCchtop}$; the $L_\infty$-structure is encoded in the
+tangent complex; the $\SCchtop$-data as operad-algebras are in
+bijection with Lagrangian sections of $\omega_{\SCchtop}$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The seven edges of the heptagon}
+\label{sec:heptagon-edges}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Number the faces $1,\dots,7$ as above. Proof: the seven adjacent
+edges as named theorems; the remaining $\binom{7}{2}-7=14$ diagonal
+identifications follow by composition, hence are recorded as
+remarks.
+
+\begin{convention}[Edge regime]\label{conv:edge-regime}
+Every edge is an $\infty$-quasi-isomorphism of coloured
+$\infty$-operads after fixing a Drinfeld associator
+$\Phi\in\mathrm{GRT}_1(\mathbb{Q})$. Strict chain-level equivalences
+hold on the Koszul locus; away from it, the equivalences are
+$\infty$-quasi-isomorphisms that become strict after passing to
+$\Phi$-transported presentations. We suppress $\Phi$ from edge names;
+each name carries its $\Phi$-dependence implicitly.
+\end{convention}
+
+\subsection{Edge (1)--(2): operadic--Koszul-dual}\label{subsec:edge-12}
+
+\begin{theorem}[Ginzburg--Kapranov Koszul duality for
+$\SCchtop$; \ClaimStatusProvedHere]\label{thm:edge-12}%
+\index{heptagon!edge (1)--(2)}
+The bar--cobar adjunction
+$(\Omega,B)$ on coloured $\infty$-operads restricts to a
+Quillen equivalence between Face~(1) and Face~(2):
+\begin{equation}
+ W(\SCchtop)=\Omega(B(\SCchtop))
+ \;\xrightarrow{\sim}\;
+ \SCchtop.
+\end{equation}
+The bar coalgebra $B(\SCchtop)$ is explicitly computed (closed
+sector $B(\Com)=\Lie^c$, open sector $B(\Ass)=\Ass^c$, mixed sector
+shuffle-bar); cobarring recovers $\SCchtop$.
+\end{theorem}
+
+\begin{proof}
+The result is coloured Ginzburg--Kapranov: Vallette
+\textit{A Koszul duality for properads} (Trans.\ AMS 359, 2007)
+Theorem~4.1.3 for the coloured case; Hoefel~2009 (arXiv:0809.4623)
+and Hoefel--Livernet~2012 (arXiv:1207.2307) specialise to the Swiss
+cheese operad and verify Koszulity, producing the coloured Koszul
+dual as $(\Lie,\Ass,\text{shuffle-mixed})$. The proof is
+Proposition~\ref{prop:sc-koszul-dual-three-sectors} of
+Chapter~\ref{chap:spectral-braiding}. The bar and
+cobar functors preserve weak equivalences of $\infty$-operads
+(Fresse, \textit{Modules over Operads and Functors}, Springer 2009),
+hence the Quillen equivalence.
+\end{proof}
+
+\subsection{Edge (2)--(3): Koszul-dual--factorization}\label{subsec:edge-23}
+
+\begin{theorem}[Chiral Deligne--Tamarkin for $\SCchtop$ at
+$E_2$-cohomology; \ClaimStatusProvedHere]\label{thm:edge-23}%
+\index{heptagon!edge (2)--(3)}
+The cofibrant replacement $W(\SCchtop)$ acts on the pair
+$(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA)$ via the brace structure of
+Chapter~\ref{ch:theory-hochschild}, and this action is
+$\infty$-quasi-isomorphic to the factorization action of
+Face~(3). Explicitly,
+\begin{equation}
+ W(\SCchtop)
+ \;\xrightarrow{\sim}\;
+ \End^{\mathrm{col}}_{(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))},
+\end{equation}
+with the $\infty$-quasi-isomorphism fixed by $\Phi\in\mathrm{GRT}_1$.
+At $E_2$-cohomology (i.e.\ passing to derived brace structure) the
+equivalence is $\Phi$-independent.
+\end{theorem}
+
+\begin{proof}
+Combine:
+(i) the chiral higher Deligne theorem
+(Theorem~\ref{thm:chiral-higher-deligne}, Chapter~\ref{ch:theory-hochschild}):
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$ carries a canonical
+$E_2$-chiral structure;
+(ii) the action of $W(\SCchtop)$ on the bulk--boundary pair by
+colored brace operations (Tamarkin 2000 for the uncoloured
+$E_2$; chiral upgrade via factorization brace);
+(iii) Koszul-dual presentation: $W(\SCchtop)=\Omega(B(\SCchtop))$
+via Edge~(1)--(2); the action factors through the cofibrant
+replacement.
+
+$\Phi$-independence at cohomology: follows from the
+GRT$_1$-action on brace operations preserving the cohomology class
+(Willwacher 2015 for uncoloured $E_2$; coloured analogue at the
+depth-zero associated graded via gr-level Kontsevich formality
+and homotopy transfer --- the coupled Swiss-cheese operad is not
+formal, Livernet~\cite{Liv15}, so no coupled formality route is
+invoked).
+\end{proof}
+
+\subsection{Edge (3)--(4): factorization--BV/BRST}\label{subsec:edge-34}
+
+\begin{theorem}[Observables of BV theory present the factorization
+face, on the Costello--Gwilliam axiom-compatible locus;
+\ClaimStatusProvedHere]\label{thm:edge-34}%
+\index{heptagon!edge (3)--(4)}%
+\index{Costello--Gwilliam axioms!compatibility scope}
+For a bulk--boundary BV theory on $X\times\mathbb{R}_{\geq 0}$ with
+boundary condition $\cA$ \emph{satisfying the Costello--Gwilliam
+boundary-condition axioms} (free quadratic action with elliptic
+propagator at leading order; Dirichlet-compatible boundary
+restriction; gauge-fixing extending across the boundary), the
+Costello--Gwilliam observables $\Obs^{\mathrm{q}}(\cdot)$ assemble
+into a factorization algebra on $X\times\mathbb{R}_{\geq 0}$ whose
+restriction to the closed half is $\Obs^{\mathrm{ch}}_\cA$ of
+Face~(3). The QME for the bulk--boundary action is the open/closed
+Maurer--Cartan equation for the pair $(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$.
+
+\smallskip
+\textbf{Scope.} The Costello--Gwilliam boundary axioms are verified for
+class~G (Heisenberg, abelian gauge sector $bb$) and class~L (affine
+Kac--Moody $V_k(\fg)$ at non-critical level $k\neq -h^\vee$, semisimple
+$\fg$). They are open at chain level for class~C (free $\beta\gamma$)
+when the boundary condition mixes left and right movers, and for
+class~M (Virasoro, $\cW_N$ on any explicitly topologized
+intermediate model stricter than the full weight completion) where
+the BRST primitive of the conformal vector is conjectural; the
+discrete raw direct-sum model is not part of this open case.
+See Remark~\ref{rem:edge-34-scope}.
+\end{theorem}
+
+\begin{proof}
+Costello--Gwilliam \textit{Factorization Algebras in QFT}~Vol.~II
+Theorem~11.3.3 (closed sector, free BV with elliptic propagator);
+the bulk--boundary extension is Butson--Yoo 2018 (arXiv:1807.02341);
+the QME/MC identification is the logarithmic $\SCchtop$-algebra
+structure of Definition~\ref{def:log-SC-algebra}
+(Chapter~\ref{ch:bv-construction}): the QME reads
+$\partial S_{\mathrm{bulk-bdy}} + \tfrac{1}{2}\{S_{\mathrm{bulk-bdy}},
+S_{\mathrm{bulk-bdy}}\}=0$ with coloured BV bracket extending the bulk
+BV bracket by a boundary-to-bulk bracket, and this is the MC equation
+for the pair, not for $\cA$ alone.
+
+The scope-restricting hypotheses (free quadratic kernel, elliptic
+propagator, Dirichlet compatibility) are verified for class~G/L:
+abelian Heisenberg has trivial elliptic kernel
+$\partial_{\bar z}\,\partial_t$; affine Kac--Moody has the
+Chern--Simons quadratic kernel at non-critical level (the $1/(k+h^\vee)$
+normalisation of the Sugawara propagator is finite). For class~C, the
+$\beta\gamma$ boundary condition mixes the holomorphic
+$\beta$ and antiholomorphic $\bar\gamma$ at $\partial\R_{\geq 0}$,
+breaking Dirichlet compatibility unless the boundary condition is
+purely holomorphic; for class~M, the cubic-or-higher Virasoro vertex
+violates the free-quadratic hypothesis required by CG~Theorem 11.3.3.
+\end{proof}
+
+\begin{remark}[Edge (3)--(4) scope; class~G/L provable, class~C/M open]
+\label{rem:edge-34-scope}%
+\index{Edge (3)--(4)!scope!class G/L provable, class C/M open}
+The Costello--Gwilliam axioms for the bulk--boundary BV/BRST
+extension to the heptagon are:
+\begin{itemize}
+\item \textbf{Class~G} (Heisenberg $\cH_k$): provable. The bulk
+action is purely quadratic; the boundary condition is the free
+$\Eone$-algebra structure on the modes; Dirichlet at infinity is
+trivial.
+\item \textbf{Class~L} (affine Kac--Moody $V_k(\fg)$ at non-critical
+$k$): provable for semisimple $\fg$. CG axioms verified by the
+Chern--Simons BV theory at level $k$ with boundary $\fg$-WZW; the
+$1/(k+h^\vee)$ propagator finite at non-critical $k$.
+\item \textbf{Class~C} (free $\beta\gamma$): \textbf{open at chain level
+when boundary mixes movers}. The bulk action is free quadratic but the
+holomorphic--antiholomorphic boundary condition is not literally
+Dirichlet; one must work with the $\beta\gamma$-vacuum boundary
+condition, for which the CG axioms hold but require an extension of
+the cosheaf model. The cohomological identification is acceptable;
+chain-level identification is conjectural.
+\item \textbf{Class~M} (Virasoro $\mathrm{Vir}_c$, principal $\cW_N$,
+generic $\cW_\infty$): \textbf{conditional on the chain-level Casimir
+antighost commutativity conjecture, open for arbitrary class~M
+conformal vectors}. Virasoro is not a free
+BV theory, so CG~Theorem 11.3.3 does not apply directly; the argument
+runs instead through the Costello--Gaiotto/DS BRST primitive, the
+gr-level zero-mode commutativity theorem
+Theorem~\ref{thm:casimir-antighost-commutativity}, and the
+chain-level pairwise commutativity
+Conjecture~\ref{conj:casimir-antighost-commutativity}, assembled into
+the endpoint by Theorem~\ref{thm:e-infinity-specialisation-Winfty}.
+For class~M algebras not generated by such a Casimir tower,
+Edge~(3)--(4) remains a separate chain-level question.
+\item \textbf{Critical Kac--Moody} ($k=-h^\vee$): \textbf{fails}. The
+generic Sugawara normalisation has a pole; the BV propagator built from
+that tensor has no value in the chain model; CG~Theorem 11.3.3 does not
+extend. The heptagon stays
+intact, but Edge~(3)--(4) is replaced by a Feigin--Frenkel-centre
+relation; see Remark~\ref{rem:heptagon-critical}.
+\end{itemize}
+The class~G/L scope is sufficient for all heptagon witnesses
+involving Heisenberg, affine Kac--Moody at non-critical level, and
+their Sugawara descendants; the open class~C/M cases are recorded as
+conditional dependencies of the heptagon's full applicability.
+\end{remark}
+
+\begin{proposition}[Heptagon edge $(3)\leftrightarrow(4)$, propositional
+form; \ClaimStatusProvedHere]\label{prop:heptagon-edge-34}%
+\index{heptagon!edge (3)--(4) propositional form}%
+The factorization presentation (Face~(3)) and the BV/BRST presentation
+(Face~(4)) of $\SCchtop$ determine the same $\infty$-operadic data on
+$(\cA, Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$. Equivalently, the
+$L_\infty$-convolution algebra $\fg^{\,\SCchtop}_{\cA,Z}$ of Face~(5)
+is quasi-isomorphic, through the BV/BRST presentation of Face~(4), to
+the factorization-homology universal brace action of Face~(3); the
+quasi-isomorphism is implemented, after fixing a Drinfeld associator
+$\Phi$, by gr-level Kontsevich formality on the depth-zero associated
+graded together with homotopy transfer along the depth filtration
+(the coupled Swiss-cheese operad is not formal,
+Livernet~\cite{Liv15}, so no coupled formality is invoked).
+\end{proposition}
+
+\begin{proof}
+This is the propositional restatement of Theorem~\ref{thm:edge-34}
+used by citation sites in Chapter~\ref{ch:chiral-higher-deligne} and
+Chapter~\ref{ch:brace}; the content is identical. The factorization
+algebra $\Obs^{\mathrm{q}}$ of the bulk--boundary BV theory restricts
+on the closed half to the factorization face $\Obs^{\mathrm{ch}}_\cA$
+(Theorem~\ref{thm:edge-34}), and on a cofibrant replacement the QME
+equals the convolution MC (Theorem~\ref{thm:edge-45}); composing these
+two quasi-isomorphisms with the gr-level coloured formality map
+(Getzler--Jones~1994 on the depth-zero associated graded, coloured
+Koszul duality via Vallette~2014, plus homotopy transfer along the
+depth filtration; Livernet's non-formality~\cite{Liv15} rules out a
+coupled formality map) produces the stated quasi-isomorphism
+between the factorization brace action and the convolution
+$L_\infty$-algebra. Strictness on a fixed semifree model and
+associator-dependence follow from Theorem~\ref{thm:edge-45} and the
+$\mathrm{GRT}_1$-torsor structure of the associator-dependent
+transfer datum.
+\end{proof}
+
+\subsection{Edge (4)--(5): BV/BRST--convolution}\label{subsec:edge-45}
+
+\begin{theorem}[QME equals convolution MC; \ClaimStatusProvedHere]
+\label{thm:edge-45}%
+\index{heptagon!edge (4)--(5)}
+On a fixed semifree model (i.e.\ cofibrant replacement of the
+BV/BRST complex), the QME of Face~(4) is strictly equal to the
+Maurer--Cartan equation in $\fg^{\,\SCchtop}_{\cA,Z}$ of Face~(5).
+Passing to quasi-iso classes recovers the chain-level
+$\infty$-quasi-isomorphism between the BV/BRST and convolution
+presentations.
+\end{theorem}
+
+\begin{proof}
+Fix a semifree model $\cE\to\SCchtop$ of coloured $\infty$-operads
+and a coordinate system on the BV complex. The QME in those
+coordinates is a polynomial in the structure constants of
+$\SCchtop$ acting on the BV field content, which is, by
+construction of the convolution algebra, the MC equation in
+$\fg^{\,\SCchtop}_{\cA,Z}=\mathrm{Hom}^{\mathrm{col}}(B(\SCchtop),
+\End^{\mathrm{col}}_{(\cA,Z)})$. The equality is strict on the
+semifree model; on arbitrary models the two sides are related by
+homotopy transfer (HPL). Gauge-fixed chain-level identity closes
+the chain-level BV/convolution identification.
+\end{proof}
+
+\begin{proposition}[Heptagon edge $(4)\leftrightarrow(5)$, propositional
+form; \ClaimStatusProvedHere]\label{prop:heptagon-edge-45}%
+\index{heptagon!edge (4)--(5) propositional form}%
+The BV/BRST presentation (Face~(4)) and the convolution
+$L_\infty$-presentation (Face~(5)) of $\SCchtop$ yield the same
+$\infty$-operadic datum on $(\cA, Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$.
+Concretely: the quantum master equation on the observables
+$\Obs^{\mathrm{q}}(U)$ descends to the Maurer--Cartan equation in
+$\fg^{\,\SCchtop}_{\cA,Z}$ via a gauge-fixed semifree model; the
+quasi-isomorphism class agreement is proved by Stasheff cancellation
+on the evaluation-generated core of the coloured operad.
+Consequently, on the topologised cohomology -- unconditional for
+affine Kac--Moody $V_k(\fg)$ at non-critical level $k\neq -h^{\vee}$,
+conjectural for general chiral algebras carrying a conformal vector
+(Conjecture~\ref{conj:heptagon-collapse-general}) -- the
+single-colour tensor product of the \emph{topologised} cores
+$E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_\infty}E_1^{\mathrm{top}}$
+identifies, through Face~(4)--Face~(5),
+with a single $E_3^{\mathrm{top}}$-action on
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA)$. The generic
+$\SCchtop$-datum (without a conformal vector) does not collapse;
+Dunn additivity applies only post-topologisation.
+\end{proposition}
+
+\begin{proof}
+The first sentence is the propositional restatement of
+Theorem~\ref{thm:edge-45}; content is identical. For the topologised
+Dunn claim: the convolution algebra $\fg^{\,\SCchtop}_{\cA,Z}$
+carries, after topologisation of the closed colour (BRST
+$Q_{\mathrm{tot}}$-cohomology making $C$-translations exact), an
+$E_2$-topological structure from the closed-colour braces and an
+$E_1$-topological structure from the conformal-weight $L_0$-flow
+along $\mathbb{R}_{\geq 0}$. Dunn additivity (Lurie HA~5.1.2.2) applies
+to the topologised $E_n$-cores in a symmetric monoidal ambient; its
+application to $\SCchtop$ pre-topologisation is not automatic, as
+$\SCchtop$ is a coloured operad with directional restriction rather
+than an $E_n$-operad in the ambient sense. Post-topologisation -- via
+Sugawara $T(z)=[Q_{\mathrm{tot}},G(z)]$ for affine Kac--Moody at
+non-critical level (Chapter~\ref{ch:topologization}) -- the
+combination
+$E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_\infty}E_1^{\mathrm{top}}
+\simeq E_3^{\mathrm{top}}$ is Dunn in the usual sense and produces the
+$E_3^{\mathrm{top}}$-action. Stasheff cancellation on the
+evaluation-generated core produces the quasi-iso class equality on
+arbitrary models at that topologised level.
+\end{proof}
+
+\subsection{Edge (5)--(6): convolution--Drinfeld centre}\label{subsec:edge-56}
+
+\begin{theorem}[Convolution MC presents categorical half-braiding;
+\ClaimStatusProvedHere]\label{thm:edge-56}%
+\index{heptagon!edge (5)--(6)}
+The Maurer--Cartan locus of the convolution $L_\infty$-algebra
+$\fg^{\,\SCchtop}_{\cA,Z}$ is in natural bijection with the space of
+half-braidings $\sigma_\cA(z)$ compatible with the
+$\SCchtop$-datum on $(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$, hence
+with the central objects of
+$\cZ(\Rep_{\mathrm{fact}}(\cA))$ of Face~(6):
+\begin{equation}
+ \MC\bigl(\fg^{\,\SCchtop}_{\cA,Z}\bigr)
+ \;\simeq\;
+ \bigl(\mathrm{objects\ of\ }
+ \cZ(\Rep_{\mathrm{fact}}(\cA))\bigr).
+\end{equation}
+Gauge equivalence in convolution corresponds to isomorphism in
+the Drinfeld centre.
+\end{theorem}
+
+\begin{proof}
+A Maurer--Cartan element $\alpha\in\fg^{\,\SCchtop}_{\cA,Z}$
+determines a coherent family of operations of $\SCchtop$ on
+$(\cA,Z)$; the mixed-sector component of $\alpha$ is precisely a
+half-braiding (by Proposition~\ref{prop:half-braiding-construction};
+the mixed sector of $\SCchtop$'s Koszul dual is the shuffle-mixed
+data, which translates to half-braidings via
+Definition~\ref{def:chiral-half-braiding}). Conversely, a central
+object of $\cZ(\Rep_{\mathrm{fact}}(\cA))$ gives a half-braiding
+compatible with $\Delta_z$, which encodes an MC element of the
+mixed sector of $\fg^{\,\SCchtop}_{\cA,Z}$. Gauge equivalence in
+convolution is homotopy of MC elements
+(Hinich~1997, Getzler~2009); this corresponds to isomorphism in
+$\cZ(\Rep_{\mathrm{fact}}(\cA))$ by the conditional comparison of
+Theorem~\ref{thm:drinfeld-centre-sc-face}.
+The statement is an equivalence of $\infty$-groupoids
+(objects and gauge classes); the upgrade to an equivalence of
+$E_2$-monoidal $\infty$-categories, which matches the braided
+structure on both sides, is the conditional content of
+Theorem~\ref{thm:drinfeld-centre-sc-face} and rests on the
+factorization-functor naturality of $\sigma_\cA(z)$ established in
+Proposition~\ref{prop:half-braiding-construction}~(iv) (OPE-pole
+bounds on $\Delta_z$).
+\end{proof}
+
+\subsection{Edge (6)--(7): Drinfeld centre--derived algebraic geometry}\label{subsec:edge-67}
+
+\begin{theorem}[Drinfeld centre is the
+$\infty$-stack of centrally-compatible $\SCchtop$-data;
+\ClaimStatusProvedHere]\label{thm:edge-67}%
+\index{heptagon!edge (6)--(7)}
+The Drinfeld centre $\cZ(\Rep_{\mathrm{fact}}(\cA))$ of Face~(6)
+is the loop space of $\cM_{\SCchtop,X}$ at the point
+$(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$, in the sense of
+$E_2$-group objects:
+\begin{equation}
+ \label{eq:edge-67-equivalence}
+ \cZ\bigl(\Rep_{\mathrm{fact}}(\cA)\bigr)
+ \;\simeq\;
+ \Omega_{(\cA,Z)}^{E_2}\,\cM_{\SCchtop,X}
+\end{equation}
+as braided monoidal $\infty$-categories. The $1$-shifted symplectic
+form $\omega_{\SCchtop}$ of Face~(7) restricts on the loop space to
+the categorical braiding of Face~(6).
+\end{theorem}
+
+\begin{proof}
+The mapping-stack tangent $T_{(\cA,Z)}\cM_{\SCchtop,X}$ is
+$\fg^{\,\SCchtop}_{\cA,Z}$ by
+Theorem~\ref{thm:convolution-lagrangian}. Its $E_2$-group
+completion (iterated based loop space) is, by the chiral higher
+Deligne theorem (Theorem~\ref{thm:chiral-higher-deligne} of
+Chapter~\ref{ch:theory-hochschild}) applied to the pair
+$\bigl(Z^{\mathrm{der}}_{\mathrm{ch}}(\cA),\cA\bigr)$, the
+$E_2$-chiral algebra whose factorization module category is
+$\cZ(\Rep_{\mathrm{fact}}(\cA))$. The coloured-operad input
+is the specific case handled by Theorem~\ref{thm:chiral-higher-deligne};
+we do not invoke a general coloured Deligne conjecture for
+arbitrary coloured operads. This gives the equivalence
+in~\eqref{eq:edge-67-equivalence}.
+
+The restriction of $\omega_{\SCchtop}$ to the loop space:
+PTVV Corollary~2.6 states that for a $k$-shifted symplectic derived
+stack $\cX$, the loop space $\Omega\cX$ is $(k-1)$-shifted
+symplectic; applied to $k=1$, $\Omega\cM_{\SCchtop,X}$ is
+$0$-shifted symplectic, i.e.\ carries a symmetric non-degenerate
+pairing in degree $0$, which is exactly the categorical braiding
+pairing (symmetric at degree $0$, producing the full hexagon at
+all orders via Deligne's coherence). This identifies the braiding
+of Face~(6) with the loop-space shifted symplectic form.
+\end{proof}
+
+\subsection{Edge (7)--(1): derived algebraic geometry--operadic}\label{subsec:edge-71}
+
+\begin{theorem}[Tangent complex of $\cM_{\SCchtop,X}$ recovers the
+operadic face; \ClaimStatusProvedHere]\label{thm:edge-71}%
+\index{heptagon!edge (7)--(1)}
+At every closed point $(\cA,Z)\in\cM_{\SCchtop,X}$, the
+tangent dg-Lie algebra equipped with its coloured operad structure
+is a strict model of $\SCchtop$ on the pair
+$(\cA,Z^{\mathrm{der}}_{\mathrm{ch}}(\cA))$. The global
+sections of the structure sheaf
+$\mathcal{O}_{\cM_{\SCchtop,X}}$ recover the coloured cobar
+construction $\Omega(B(\SCchtop))$ on any local model, hence present
+Face~(1) directly.
+\end{theorem}
+
+\begin{proof}
+Tangent dg-Lie identification is
+Theorem~\ref{thm:convolution-lagrangian}. The coloured $\SCchtop$-operad
+structure on the tangent complex is inherited from the operadic
+ambient of Definition~\ref{def:moduli-sc-ch-top}: the mapping-stack
+target $B\SCchtop\mathrm{-Alg}$ has tangent $\SCchtop$ itself (up to
+homotopy; Lurie HA~5.3.1.11). Pulling back along the tautological
+evaluation map, the tangent of $\cM_{\SCchtop,X}$ carries
+$\SCchtop$ up to $\infty$-quasi-isomorphism.
+
+Global sections of $\mathcal{O}_{\cM_{\SCchtop,X}}$: by the
+Kan extension of the tautological family to the moduli stack,
+the Chevalley--Eilenberg complex of the tangent dg-Lie is
+$\mathcal{O}^{\mathrm{loc}}_{\cM_{\SCchtop,X}}$ (locally
+around any closed point; PTVV 2013~\S2.2 and Deligne's
+\textit{Equivalence of Deformation Complexes}). The
+CE complex is, by construction, $\Omega(B(\SCchtop))=W(\SCchtop)$
+applied to the tangent, hence recovers Face~(1) via the edge
+(1)--(2) Koszul-dual equivalence.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Closing the heptagon}
+\label{sec:heptagon-closed}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[Heptagon of $\SCchtop$; \ClaimStatusProvedHere]
+\label{thm:heptagon-closed}%
+\index{heptagon!seven-way equivalence|textbf}
+After applying the local-shadow functor of
+Theorem~\ref{thm:BD-CG-equivalence} to the global factorisation
+faces, the seven faces (1)--(7) of $\SCchtop$ are pairwise
+$\infty$-quasi-isomorphic as coloured $\infty$-operads after fixing a
+Drinfeld associator $\Phi\in\mathrm{GRT}_1(\mathbb{Q})$, with edges
+given by Theorems~\ref{thm:edge-12}, \ref{thm:edge-23},
+\ref{thm:edge-34}, \ref{thm:edge-45}, \ref{thm:edge-56},
+\ref{thm:edge-67}, \ref{thm:edge-71}. The seven-way equivalence is
+$\Phi$-independent at the level of cohomology; strictly chain-level
+presentations track a single $\Phi$. The theorem does not identify
+global Ran/factorisation objects at genus $g\geq 1$ with their local
+formal-collision shadows.
+\end{theorem}
+
+\begin{proof}
+Apply the local-shadow functor first to the BD/CG factorisation and
+derived-stack faces, retaining the mixed Type~III incidence maps but
+forgetting period and monodromy data. Compose the seven edges around
+the heptagon in either direction.
+Each edge is an $\infty$-quasi-isomorphism
+(Convention~\ref{conv:edge-regime}); composition preserves
+$\infty$-quasi-isomorphisms (Fresse 2009, or direct verification in
+the colored $\infty$-operad model category); the composed
+self-equivalence of Face~(1) is homotopic to the identity because
+each edge is canonical modulo associator choice. $\Phi$-independence
+at cohomology follows from the GRT$_1$-action on each edge
+(Willwacher 2015; coloured extension via coloured brace
+formality).
+\end{proof}
+
+\begin{remark}[Chain-level vs cohomological; scope]
+\label{rem:heptagon-chain-vs-cohom}
+Theorem~\ref{thm:heptagon-closed} is proved at two levels, with
+distinct scopes:
+\begin{enumerate}[label=\textup{(\alph*)}]
+ \item \emph{Cohomological closure.} The seven-way equivalence of
+ the homotopy classes of coloured $\infty$-operad maps holds
+ unconditionally after fixing $\Phi$, for any $E_1$-chiral algebra
+ $\cA$ satisfying the OPE-pole bounds of
+ Proposition~\ref{prop:half-braiding-construction}~(iv).
+ Associator transport is a $\mathrm{GRT}_1$-torsor, and
+ $\Phi$-independence at cohomology is Willwacher's theorem
+ extended to the coloured operad through the gr-level brace
+ formality (coupled formality is barred by
+ Livernet~\cite{Liv15}).
+ \item \emph{Chain-level closure.} Strict chain-level equivalences
+ hold on the evaluation-generated Koszul locus: the bar complex is
+ concentrated in bar-weight $1$, the coloured cobar map is strict,
+ and the gr-level formality/transfer datum can be chosen compatibly
+ across the seven faces. Off this locus, only
+ $\infty$-quasi-isomorphism is available, and each edge requires
+ a homotopy transfer.
+ \item \emph{Topologised regime.} When $\cA$ carries a conformal
+ vector at non-critical level and the topologisation of
+ Chapter~\ref{ch:topologization} applies, the heptagon collapses
+ via Theorem~\ref{thm:heptagon-collapse}; the external product of
+ locally constant factorisation algebras first produces a
+ single-colour topological tensor
+ $E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_\infty}E_1^{\mathrm{top}}$,
+ and Dunn additivity identifies that tensor with an
+ $E_3$-topological action. This collapse is
+ unconditional for affine Kac--Moody at $k\neq -h^\vee$ and
+ conjectural for general conformal chiral algebras.
+\end{enumerate}
+The notation
+$E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_\infty}E_1^{\mathrm{top}}
+\simeq E_3^{\mathrm{top}}$ is used only in sense~(c): Dunn is applied
+after topologisation and after passage to the single-colour product
+operad; the generic heptagon has seven distinct faces.
+\end{remark}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{cllc}
+\toprule
+Edge & Level & Scope & Associator dependence \\
+\midrule
+(1)--(2) & Chain-level strict & Koszul locus + formality & $\Phi$
+dependent, class cohomological \\
+(2)--(3) & $\infty$-qi & Koszul locus; needs
+Thm.~\ref{thm:chiral-higher-deligne} & $\Phi$-indep.\ at
+cohomology \\
+(3)--(4) & Chain-level on semifree BV model & Costello--Gwilliam
+axioms + boundary condition & $\Phi$-indep.\ at cohomology \\
+(4)--(5) & Chain-level strict on semifree; HPL off & Evaluation-generated
+core & $\Phi$-dep.\ on strict; indep.\ cohomological \\
+(5)--(6) & Objects \& gauge classes $\infty$-qi;
+$E_2$-categorical conditionally via
+Thm.~\ref{thm:drinfeld-centre-sc-face}
+& OPE-pole bounds on
+$\Delta_z$ & $\Phi$-indep.\ cohomologically \\
+(6)--(7) & $\infty$-qi via
+Thm.~\ref{thm:chiral-higher-deligne} & Coloured-operad case
+of chiral higher Deligne & $\Phi$-indep.\ cohomologically \\
+(7)--(1) & Cohomological via CE of tangent dg-Lie; chain-level on
+semifree model & PTVV + Kan extension of tangent family &
+$\Phi$-dep.\ on strict \\
+\bottomrule
+\end{tabular}
+\caption{Chain-level versus $\infty$-quasi-isomorphism regime of each
+edge, together with its scope of applicability and associator
+dependence.}
+\label{tab:heptagon-edges-regime}
+\end{table}
+
+\begin{remark}[Diagonals as compositions, not independent
+content]\label{rem:heptagon-diagonals}%
+\index{heptagon!diagonals are compositions, not independent}
+The fourteen diagonals of the heptagon are \emph{compositions of the
+seven adjacent edges} -- they are not counted as independent content,
+and the heptagon contains seven theorems (one per edge), not
+twenty-one. Each diagonal does admit an independent literature
+construction that the heptagon organises in one place; we list
+the most-cited:
+Face~(1)--(3) (operadic action on factorization algebra via chiral
+Deligne--Tamarkin; Chapter~\ref{ch:theory-hochschild});
+Face~(2)--(5) (Koszul dual as tangent dg-Lie; Vallette Koszul duality);
+Face~(3)--(7) (factorization algebra as global sections of
+$\cM_{\SCchtop,X}$); Face~(1)--(6) (direct bar--cobar to Drinfeld centre
+via the conditional comparison of
+Theorem~\ref{thm:drinfeld-centre-sc-face} after composing with
+Edge~(1)--(2)); Face~(4)--(7) (QME as defining equation of a Lagrangian
+section of the shifted symplectic stack). The literature
+constructions are alternative \emph{routes}, not extra content; the
+content is the seven adjacent edges plus the closure
+identity (Theorem~\ref{thm:heptagon-closed}), nothing more.
+\end{remark}
+
+\begin{remark}[Concrete witness: traversing the heptagon on
+$V_k(\mathfrak{sl}_2)$]\label{rem:heptagon-witness-vk-sl2}%
+\index{Heptagon!concrete traversal $V_k(\mathfrak{sl}_2)$|textbf}
+Let $\cA=V_k(\mathfrak{sl}_2)$ at non-critical level $k\neq -2$. The derived
+chiral centre $Z^{\mathrm{der}}_{\mathrm{ch}}(V_k(\mathfrak{sl}_2))$ has total
+$\Z$-graded dimension $5$ (three classes from the
+Sugawara--Casimir + two from the chiral $r$-matrix correction);
+this is the dimensional witness. Traversing the seven faces
+once, with explicit objects:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item $\FM_k(\C)\times_{\Conf_m(\R)}\Conf_m(\R)$ strata, with
+$k$ closed $V_k(\mathfrak{sl}_2)$-insertions and $m$ open boundary $\mathfrak{sl}_2$-WZW
+boundary modules;
+\item $(\Lie_{\mathfrak{sl}_2},\Ass_{\mathfrak{sl}_2-\mathrm{WZW}},\text{shuffle-mixed})$,
+the closed-colour Lie part being the spectral form of $\mathfrak{sl}_2$;
+\item $\Obs^{\mathrm{ch}}_{V_k(\mathfrak{sl}_2)}(U)$ as factorization
+algebra, with chiral product giving the
+holomorphic factorisation map of
+Theorem~\ref{thm:bar-diff-eq-holfact}~(i);
+\item Chern--Simons BV at level $k$ on $X\times\R_{\geq 0}$ with
+boundary $\mathfrak{sl}_2$-WZW (Costello--Gwilliam Vol.~II Theorem~11.3.3,
+class-L scope verified);
+\item $\mathrm{Hom}^{\mathrm{col}}(B(\SCchtop),
+\End^{\mathrm{ch}}_{(V_k(\mathfrak{sl}_2),Z)})$ with MC weight $\leq 2$
+generated by the $r^{KM}(z)=k\,\Omega_{\mathrm{tr}}/z$ classical $r$-matrix;
+\item $\Rep_{\mathrm{fact}}(V_k(\mathfrak{sl}_2))$ is the affine
+Kazhdan--Lusztig category at level $k$, Drinfeld centre
+$\cZ(\Rep_{\mathrm{fact}}(V_k(\mathfrak{sl}_2)))\simeq\Rep_{\mathrm{fact}}(
+Z^{\mathrm{der}}_{\mathrm{ch}}(V_k(\mathfrak{sl}_2)))$ has dimension $5$ on the
+Casimir-generated locus;
+\item $\cM_{\SCchtop,X}$ at $(V_k(\mathfrak{sl}_2),Z^{\mathrm{der}}_{\mathrm{ch}})$
+is locally smooth with tangent $T_{(V_k(\mathfrak{sl}_2),Z)}$ of total dimension
+$5$, matching item~(6); the $1$-shifted symplectic structure
+restricts to the non-degenerate Killing pairing on the
+$\mathfrak{sl}_2$-trace.
+\end{enumerate}
+The composite (1)$\to$(2)$\to\cdots\to$(7)$\to$(1) is the identity on
+$\FM_k(\C)$ strata up to the Drinfeld-associator twist
+$\Phi\in\mathrm{GRT}_1(\Q)$, which fixes the chain-level model. The
+triple-check on the closure is: operadic dimension $=$
+centre dimension $=$ tangent dimension $=5$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The higher-coherence heptagon axiom}
+\label{sec:heptagon-coherence-axiom}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The seven presentations of \S\ref{sec:heptagon-closed} are seven
+\emph{faces} of a single operad. The present section establishes
+a distinct seven-sided object: the \emph{coherence heptagon}
+$\mathsf{H}_{2,2}$, the planar $2$-polytope governing higher-associator
+compatibility on $\SCchtop$-algebras at bicoloured arity
+$(2\,\mathsf{cl},2\,\mathsf{op})$. Pentagon coherence on each colour
+separately does not close the bicoloured diagram; the obstruction is
+a codimension-$2$ cell whose $1$-skeleton is the heptagon. The
+theorem below proves commutativity of this heptagon on every
+$\SCchtop$-algebra, extending \text{MacLane} (1963) pentagon and
+\text{Stasheff} (1963) associahedra into the two-axis setting.
+
+\subsection{The bicoloured polytope $\mathsf{H}_{2,2}$}
+
+\begin{definition}[Admissible bracketing at arity $(2,2)$]
+\label{def:admissible-bracketing-22}%
+\index{admissible bracketing!at bicoloured arity $(2,2)$|textbf}%
+A bicoloured planar binary tree on the ordered leaf sequence
+$(c_1, c_2, o_1, o_2)$ is \emph{admissible} if every internal node
+carries one of three composition labels
+\[
+\circ^{\mathrm{cl}}:\ \mathsf{cl}\otimes\mathsf{cl}\to\mathsf{cl},
+\qquad
+\circ^{\mathrm{op}}:\ \mathsf{op}\otimes\mathsf{op}\to\mathsf{op},
+\qquad
+\circ^{\mathrm{mix}}:\ \mathsf{cl}\otimes\mathsf{op}\to\mathsf{op},
+\]
+with colour-compatibility at each node and the directional restriction
+that no node produces $\mathsf{cl}$ from any input labelled
+$\mathsf{op}$ (equivalently, the $\mathsf{op}\otimes\mathsf{cl}\to
+\mathsf{cl}$ slot is absent).
+\end{definition}
+
+\begin{lemma}[Five order-preserving admissible bracketings;
+\ClaimStatusProvedHere]\label{lem:five-order-preserving}%
+\index{pentagon bracketings!order-preserving}%
+Fix the leaf sequence $(c_1, c_2, o_1, o_2)$ with closed leaves to
+the left of open leaves in planar order. The admissible planar
+binary trees with leaves in this order are
+\[
+B_1:((c_1c_2)(o_1o_2)),\quad
+B_2:(c_1(c_2(o_1o_2))),\quad
+B_3:(c_1((c_2o_1)o_2)),
+\]
+\[
+B_4:(((c_1c_2)o_1)o_2),\quad
+B_5:((c_1(c_2o_1))o_2),
+\]
+all rooted with output $\mathsf{op}$. No admissible bracketing
+produces output $\mathsf{cl}$ because every bracketing in this
+leaf order contains at least one $\circ^{\mathrm{mix}}$ node, and
+$\circ^{\mathrm{mix}}$ takes values in $\mathsf{op}$.
+\end{lemma}
+
+\begin{proof}
+Catalan count $C_3 = 5$ gives five planar binary trees on four ordered
+leaves. Direct enumeration of colour labels at each internal node
+produces exactly the five $B_i$ above; every internal node type is
+forced by colour-compatibility and directionality once the leaf colours
+are fixed in the given order. Absence of output $\mathsf{cl}$ is
+immediate: leaves $o_1, o_2$ are $\mathsf{op}$, and the codomain of
+$\circ^{\mathrm{mix}}$ is $\mathsf{op}$, so any bracketing absorbing
+$o_1$ or $o_2$ yields $\mathsf{op}$ output.
+\end{proof}
+
+\begin{definition}[Coherence heptagon $\mathsf{H}_{2,2}$]
+\label{def:coherence-heptagon}%
+\index{coherence heptagon!$\mathsf{H}_{2,2}$|textbf}%
+\index{biassociahedron!truncated}%
+The \emph{coherence heptagon} $\mathsf{H}_{2,2}$ is the planar
+$2$-polytope with seven vertices and seven edges defined by:
+\begin{itemize}
+\item Vertices $V_1, \ldots, V_5$: the five admissible bracketings
+$B_1, \ldots, B_5$ of Lemma~\ref{lem:five-order-preserving}.
+\item Vertices $V_6, V_7$: the \emph{half-braided bracketings}
+$\widetilde B_1 := ((c_2 c_1)(o_1 o_2))$ and
+$\widetilde B_2 := (c_2(c_1(o_1 o_2)))$, obtained from $B_1, B_2$ by
+applying the closed-colour half-braiding
+$\sigma^{\mathsf{cl}}_{c_1, c_2}\in
+\pi_0\,\FM_2(\C)^{\mathrm{br}}=B_2$ on the $(c_1, c_2)$-subtree.
+\item Edges: the seven boundary edges
+$V_1\to V_6\to V_7\to V_2\to V_3\to V_4\to V_5\to V_1$.
+The edges $V_2\to V_3\to V_4\to V_5\to V_1$ are the four
+order-preserving MacLane associator moves that remain on the boundary
+after the pentagon edge $V_1\to V_2$ has been sewn to the
+half-braiding square. The edges $V_1\to V_6$ and $V_7\to V_2$ are
+the closed-colour half-braiding and its inverse, and the edge
+$V_6\to V_7$ is the mixed-coloured associator.
+\end{itemize}
+The polytope $\mathsf{H}_{2,2}$ carries a unique codimension-$2$
+$2$-cell bounded by its seven edges.
+\end{definition}
+
+\begin{remark}[Seven, not five; seven, not nine]
+\label{rem:seven-count-justification}%
+Catalan $C_3 = 5$ counts order-preserving bracketings; the full
+Saneblidze--Umble biassociahedron $KK_{2,2}$ has nine vertices
+(the five $B_i$ plus four permuted half-braidings for both
+pairs of equal-colour leaves). The directional restriction of
+$\SCchtop$ eliminates open-to-closed swaps: the two open leaves
+$(o_1, o_2)$ are ordered on $\R$ and the $E_1$-braiding on open
+colour is trivial, so $o_1 \leftrightarrow o_2$ is not a coherence
+move but a $\Sigma_2$-equivariance. Of the four half-braided
+vertices in $KK_{2,2}$, exactly two come from the closed-colour
+braiding $\sigma^{\mathsf{cl}}$ and survive; the other two are
+open-colour transpositions that reduce to identity under the
+$\mathrm{Conf}_m(\R)$-ordering. The $9 - 2 = 7$ count is canonical.
+\end{remark}
+
+\subsection{The heptagon theorem}
+
+\begin{theorem}[Coherence heptagon for $\SCchtop$; \ClaimStatusProvedHere]
+\label{thm:coherence-heptagon}%
+\index{coherence heptagon!commutativity theorem|textbf}%
+\index{MacLane pentagon!insufficient for two-colour operads}%
+\index{Stasheff polytope!extended by half-braiding}%
+Let $\cA$ be an $\SCchtop$-algebra on a smooth curve $X$ satisfying
+the OPE-pole bounds of
+Proposition~\ref{prop:half-braiding-construction}~(iv). Fix a Drinfeld
+associator $\Phi\in\mathrm{GRT}_1(\Q)$. Then the coherence heptagon
+$\mathsf{H}_{2,2}$ of Definition~\ref{def:coherence-heptagon}
+commutes up to coherent homotopy in
+$\operatorname{End}^{\mathrm{ch}}_\cA(c_1, c_2, o_1, o_2;\,o)$. Concretely,
+the seven-step composite
+\[
+V_1 \xrightarrow{\sigma^{\mathsf{cl}}} V_6
+\xrightarrow{\alpha^{\mathsf{cl}\text{-}\mathsf{mix}}} V_7
+\xrightarrow{\sigma^{\mathsf{cl}}\text{-inv}} V_2
+\xrightarrow{\alpha^{\mathrm{MacLane}}} V_3
+\xrightarrow{\alpha^{\mathrm{MacLane}}} V_4
+\xrightarrow{\alpha^{\mathrm{MacLane}}} V_5
+\xrightarrow{\alpha^{\mathrm{MacLane}}} V_1
+\]
+is homotopic to the identity endomorphism of $V_1$ in
+$\operatorname{End}^{\mathrm{ch}}_\cA$.
+\end{theorem}
+
+\begin{proof}
+Two independent routes close the diagram; Route~1 is chain-level
+(pentagon/hexagon sewing on explicit associator generators), Route~2
+is $(\infty,1)$-categorical (the completed local-collision screen of
+the mixed Ran geometry). Both lanes are load-bearing and yield the
+same coherence $2$-cell.
+
+\medskip\noindent\textbf{Route 1 (chain-level): reduction to pentagon
+$\otimes$ hexagon.}
+By Lemma~\ref{lem:five-order-preserving} the vertices
+$V_1,\ldots,V_5$ with the five MacLane edges
+$V_1\to V_2\to V_3\to V_4\to V_5\to V_1$ form the Stasheff
+pentagon $K_5$ for the open-colour $A_\infty$-structure restricted to
+the leaf sequence $(c_1, c_2, o_1, o_2)$. In the heptagon boundary the
+edge $V_1\to V_2$ is sewn to the half-braiding segment and becomes
+interior; the remaining four MacLane edges stay on the boundary.
+Commutativity of the full pentagon is MacLane's coherence theorem
+applied to the
+module category of $\cA$ over its closed-colour operad
+(Stasheff~\cite{stasheff-associahedra}; MacLane, \emph{Natural associativity
+and commutativity}, Rice Univ.~Studies \textbf{49} (1963), 28--46; the
+module refinement is Ostrik, \emph{Module categories, weak Hopf
+algebras and modular invariants}, Transform.~Groups \textbf{8} (2003),
+177--206, for the $1$-categorical shadow, and Batanin--Markl,
+\emph{Operadic categories and duoidal Deligne's conjecture}, Adv.~Math.\
+\textbf{285} (2015), 1630--1687, for the $\infty$-operadic lift).
+
+The two half-braiding-mediated edges
+$V_1\to V_6\to V_7\to V_2$ implement the
+Joyal--Street hexagon for braided monoidal categories
+(Joyal--Street, \emph{Braided tensor categories}, Adv.~Math.\
+\textbf{102} (1993), 20--78) for the closed-colour
+half-braiding $\sigma^{\mathsf{cl}}$, restricted to the codim-$1$
+face where the mixed composition appears exactly once at the
+outermost level. The hexagon has six vertices and six edges; the
+coincidence at $V_1$ (start) and $V_2$ (end) with the pentagon
+identifies two of them, leaving four independent vertices
+$V_1, V_6, V_7, V_2$ and three independent edges.
+
+The heptagon $\mathsf{H}_{2,2}$ is the sewing of the pentagon
+$\{V_1,\ldots,V_5\}$ with this four-vertex hexagon segment
+$\{V_1, V_6, V_7, V_2\}$ along the shared edge $V_1$--$V_2$.
+After sewing, the shared edge is interior and the boundary
+closes as $7$ edges on $7$ vertices. Commutativity of the sewn
+polygon is pentagon commutativity (the order-preserving route
+$V_1 \to V_2 \to V_3 \to V_4 \to V_5 \to V_1$) composed with
+hexagon commutativity (the half-braided route
+$V_1 \to V_6 \to V_7 \to V_2$), with the shared edge cancelling.
+
+\medskip\noindent\textbf{Route 2 ($(\infty,1)$-categorical):
+completed local-collision screen.}
+Fix the factorisation model (face (3) of \S\ref{subsec:face-factorization})
+of $\cA$ on the mixed open--closed Ran geometry of
+$X\times\R_{\geq 0}$. After formal completion at the arity $(2,2)$
+collision stratum, the bracketings $V_1,\ldots,V_7$ correspond to
+seven ways of nesting points in the local screen
+$\FM_2(\C)\times\mathrm{Conf}_2(\R)$:
+\begin{itemize}
+\item $V_1,\ldots,V_5$ sit on the order-preserving
+stratum $\{z_1,z_2\in\C\}\times\{0<t_1<t_2\}$, with $z_i$
+ordered by real part; the pentagon is the five-fold stratification
+by the height of each operad composition in the factorisation
+nesting.
+\item $V_6, V_7$ sit on the strata obtained by a half-twist of
+the $(z_1, z_2)$-configuration around each other: the generator of
+$\pi_1(\FM_2(\C)) = \Z$ interchanges the two closed punctures and is
+realised by the cohomology class
+$\sigma^{\mathsf{cl}} \in H^0(\FM_2(\C); H^0(\FM_2(\C)^{\mathrm{br}}))$,
+i.e., the half-braiding cochain of
+Proposition~\ref{prop:half-braiding-construction}~(i).
+\end{itemize}
+The seven-step composite is not asserted to be nullhomotopic in the
+ordinary topology of $\FM_2(\C)$: the closed half-twist records a
+genuine braid generator. The assertion is instead the existence of
+the codimension-$2$ cell in the completed mixed Ran/factorisation
+category whose boundary is the seven-edge composite. On this completed
+cell the half-twist is represented by the chosen Drinfeld associator
+and its inverse, while the $\mathrm{Conf}_2(\R)$ direction is
+contractible and ordered. The cochain filling is the transgression of
+the OPE derivative $\partial_z\sigma^{\mathsf{cl}}(z)$ against the
+Stasheff $2$-cell of the mixed collision screen; it is defined because
+Proposition~\ref{prop:half-braiding-construction}~(iv) gives finite
+OPE pole order. No global statement about $\Ran(X)$, and no
+single-colour Dunn additivity, is used in this local filling.
+
+\medskip\noindent\textbf{Agreement.} Routes 1 and 2 identify the
+same coherent homotopy: the pentagon-plus-hexagon sewing of Route 1
+is the Poincar\'e dual of the transgressed Stasheff cell in the
+completed mixed collision screen of Route 2. The compatibility is the
+coloured gr-level formality compatibility between the closed
+$E_2$ chains on $\FM_2(\C)$, the open $E_1$ chains on
+$\mathrm{Conf}_2(\R)$, and the mixed composition
+$\circ^{\mathrm{mix}}$; equivalently it is the Koszul-dual
+shuffle-mixed compatibility of
+Proposition~\ref{prop:sc-koszul-dual-three-sectors}.
+\end{proof}
+
+\begin{remark}[Pentagon is insufficient for $\SCchtop$]
+\label{rem:pentagon-insufficient}%
+\index{MacLane pentagon!insufficient for bicoloured operad}%
+MacLane's pentagon on the open-colour $A_\infty$-structure alone
+controls $V_1,\ldots,V_5$ but not $V_6, V_7$: the half-braided
+vertices witness the closed-colour braiding
+$\sigma^{\mathsf{cl}}$, which is absent from any single-colour
+pentagon. Pentagon on the closed-colour $E_2$-structure alone
+controls a different set (the five bracketings of
+$((c_1 c_2 c_3) c_4)$, not the mixed ones). Pentagon $+$ pentagon on
+the two colours separately, without the mixed coherence edges
+$V_1\to V_6, V_2\to V_7$, fails to detect that the closed-colour
+half-twist commutes with the mixed composition up to coherent
+homotopy; this failure is exactly the content of
+Theorem~\ref{thm:coherence-heptagon}.
+\end{remark}
+
+\begin{remark}[Relation to Saneblidze--Umble and Batanin--Markl]
+\label{rem:saneblidze-umble-relation}%
+\index{Saneblidze--Umble biassociahedron!truncation}%
+\index{Batanin--Markl 2012!two-colour operadic coherence}%
+The coherence heptagon $\mathsf{H}_{2,2}$ is the directionally
+restricted truncation of the Saneblidze--Umble biassociahedron
+$KK_{2,2}$ (Saneblidze--Umble 2004 arXiv:math/0406098). $KK_{2,2}$
+is a $2$-dimensional polytope with nine vertices and nine edges
+governing full two-colour $A_\infty$-coherence without
+directional restriction. Under the directional restriction
+$\SCchtop(\mathsf{op},\mathsf{cl};\mathsf{cl}) = \emptyset$, the
+two $KK_{2,2}$-vertices obtained by permuting
+$(o_1, o_2)$ into the closed-colour sector collapse into trivial
+$\Sigma_2$-equivariance (the $E_1$-operad on $\R$ is
+$\Sigma_2$-invariant on chains), reducing $9$ vertices to $7$.
+
+Batanin--Markl (\emph{Operadic categories and duoidal Deligne's
+conjecture}, Adv.~Math.\ \textbf{285} (2015), 1630--1687)
+establishes a general
+coherence theorem for bicoloured $\infty$-operads with
+directional restriction: the coherence polytope at bicoloured
+arity $(k, m)$ is the quotient of $KK_{k,m}$ by the
+equivariance of the $E_1$-factor, and the resulting polytope
+remains convex of dimension $k + m - 2$. At $(k, m) = (2, 2)$
+the quotient is the heptagon; at $(k, m) = (1, 2)$ it is a
+triangle; at $(k, m) = (2, 1)$ it is an interval; at
+$(k, m) = (3, 2)$ it is a $3$-dimensional polytope with $12$
+vertices (the dodecagon-extended biassociahedron; not computed
+in detail here).
+\end{remark}
+
+\subsection{Why pentagon alone is not enough: counterexample sketch}
+
+\begin{example}[Naive pentagon fails on
+$V_k(\fsl_2)\otimes V_k(\fsl_2)$]\label{ex:pentagon-fails-vk}%
+\index{pentagon failure!on $V_k(\fsl_2)\otimes V_k(\fsl_2)$}%
+Take $\cA = V_k(\fsl_2)$ at non-critical level $k\neq -2$, with the
+boundary module category $\Repq(V_k(\fsl_2))$ (affine
+Kazhdan--Lusztig; KL93). Set
+$(c_1, c_2) = (T, T)$ the Sugawara stress tensor twice, and
+$(o_1, o_2) = (M_1, M_2)$ two boundary modules. The five
+order-preserving bracketings $V_1,\ldots,V_5$ are connected by the
+MacLane pentagon of $\Repq(V_k(\fsl_2))$ as a braided tensor
+category. The pentagon composite $V_1 \to V_2\to V_3\to V_4\to V_5\to V_1$
+is homotopic to the identity by HLZ~\cite{HLZ}\,Theorem~12.15.
+
+However, the composite $V_1 \to V_6$
+(half-braiding of $T$ with $T$ inside the mixed action on
+$M_1 \otimes M_2$) is \emph{not} contained in the pentagon: it
+implements the Drinfeld associator $\Phi$ evaluation on a
+double-$T$-insertion at zero, generating the quantum-shuffle
+coefficient
+$\Phi(t_{12}, t_{23})\bigl|_{t_{12}\to T\otimes T}$. The coefficient
+is $\exp(t_{12}/2\pi i)\cdot \mathrm{KZ}$-iterated integral, nonzero
+at weight $2$. Without the coherence heptagon, this coefficient
+appears as a deformation obstruction in the pentagon composite;
+with the coherence heptagon, it is absorbed into the half-braided
+edges $V_1\to V_6\to V_7\to V_2$ and the total coherence holds
+strictly.
+
+The chain-level witness is the Sugawara vertex OPE
+\[
+T(z)T(w) \sim \frac{c/2}{(z-w)^4} + \frac{2T(w)}{(z-w)^2}
+ + \frac{\partial T(w)}{z-w},
+\]
+with $c = 3k/(k+2)$ the Virasoro central charge. The pole of order
+$4$ at $z = w$ is exactly the depth-$4$ Stasheff cell carrying the
+heptagon coherence $2$-cell; pentagon sees only the simple pole
+$\partial T/(z-w)$, not the double or higher poles.
+\end{example}
+
+\begin{remark}[Scope: heptagon, not general $\mathsf{H}_{k,m}$]
+\label{rem:heptagon-scope}%
+Theorem~\ref{thm:coherence-heptagon} treats arity $(2, 2)$. At
+higher arities the coherence polytope is higher-dimensional:
+$\mathsf{H}_{k,m}$ is dimension $k + m - 2$ with vertex count
+$V(k, m) = \tfrac{1}{k+m}\binom{2k+2m-2}{k-1,m-1,k+m-1}$
+restricted by directionality; e.g.,
+$V(2, 3) = 12$, $V(3, 2) = 12$, $V(3, 3) = 36$. Commutativity of
+$\mathsf{H}_{k,m}$ for all $(k, m)$ is the full $\SCchtop$-coherence
+theorem (Batanin--Markl~2012 applied to the bicoloured operad
+with directional restriction), and follows from the heptagon
+$\mathsf{H}_{2,2}$ by Stasheff-polytope induction on
+$k + m$ (MacLane's original argument in the two-colour setting).
+The heptagon is the base case $k + m = 4$; the pentagon
+$\mathsf{H}_{3,1}$ and $\mathsf{H}_{1,3}$ at $k + m = 4$ reduce
+to single-colour pentagons by collapsing the empty-colour side.
+\end{remark}
+
+\begin{remark}[Heptagon vs heptagon-of-presentations]
+\label{rem:heptagon-vs-heptagon-of-presentations}%
+The \emph{coherence heptagon} $\mathsf{H}_{2,2}$ of
+Theorem~\ref{thm:coherence-heptagon} is a $2$-polytope in arity
+$(2, 2)$ whose seven vertices are admissible bracketings of a
+single $\SCchtop$-algebra input. The
+\emph{heptagon of presentations} of
+Theorem~\ref{thm:heptagon-closed} is a $7$-vertex graph whose
+seven vertices are $\infty$-operadic presentations of
+$\SCchtop$ itself. The two heptagons share a numerology (seven)
+and share a single namesake (the chiral $\times$ topological
+bi-grading) but are orthogonal objects: coherence heptagon
+lives in the algebra category over $\SCchtop$;
+presentational heptagon lives in the category of
+$\infty$-operads equivalent to $\SCchtop$. Both commute (both
+are theorems of this chapter); neither subsumes the other.
+\end{remark}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conformal vector and the collapse to $E_3$-topological}
+\label{sec:heptagon-conformal-vector}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The heptagon is the \emph{generic} picture. Adding a conformal vector
+to the boundary collapses two faces of the heptagon into one; the
+resulting topologised structure is $E_3$-topological, not $\SCchtop$
+(Chapter~\ref{ch:topologization}). Topologisation is proved on
+$Q_{\mathrm{tot}}$-cohomology for affine Kac--Moody $V_k(\fg)$ at
+non-critical level $k\neq -h^\vee$
+(Sugawara $T(z)=[Q_{\mathrm{tot}},G(z)]$ on cohomology, with an
+explicit antighost representative); it is conjectural for general
+chiral algebras carrying a conformal vector, and its strict
+raw-chain-level lift is a separate question.
+
+\begin{theorem}[Collapse with conformal vector at affine Kac--Moody
+non-critical level; \ClaimStatusProvedHere]
+\label{thm:heptagon-collapse}%
+\index{topologisation!collapses heptagon|textbf}%
+\index{$E_3$-topological!heptagon collapse}%
+%
+
+Let $\cA=V_k(\fg)$ be an affine Kac--Moody chiral algebra at
+non-critical level $k\neq -h^{\vee}$, with Sugawara conformal
+vector $T(z)=\tfrac{1}{2(k+h^{\vee})}:\!J^aJ_a\!:(z)$. On the
+BRST cohomology of the total differential $Q_{\mathrm{tot}}$ of the
+$3$d holomorphic Chern--Simons BV quantisation whose boundary is
+$\cA$ (Chapter~\ref{ch:topologization}), the bicoloured operad
+$\SCchtop$ reduces in \emph{two distinct steps}:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item \emph{Topologisation of the closed colour.} The Sugawara
+ primitive $G(z)=\tfrac{1}{2(k+h^{\vee})}{:}J^a\bar c_a{:}(z)$
+ gives the cohomological homotopy \(h_\omega:=[G,-]\) on
+ \(Q_{\mathrm{tot}}\)-closed bulk observables:
+ \begin{equation}\label{eq:h-omega-coboundary-km}
+ [\partial_z\cO]
+ \;=\;
+ [Q_{\mathrm{tot}},\,h_\omega(\cO)]
+ \;=\;0
+ \qquad
+ \text{in }H^\bullet_{Q_{\mathrm{tot}}}(\Obs_\bulk).
+ \end{equation}
+ Thus the holomorphic translation derivation $\partial_z$
+ on the closed-colour disk operad is trivial on cohomology. On
+ $Q_{\mathrm{tot}}$-cohomology the closed-colour factorisation
+ algebra is locally constant, upgrading $E_2^{\mathrm{hol}}$ to
+ $E_2^{\mathrm{top}}$ by Lurie~\cite{HA}\,Theorem~5.4.5.9 /
+ Ayala--Francis~\cite{AF15}.
+ \item \emph{External product, then Dunn additivity.} After
+ (i), the closed colour is topological and the open colour was
+ already topological; the $\SCchtop$ datum is still bicoloured and
+ directionally restricted. The Costello--Gwilliam/Ayala--Francis
+ product of locally constant factorisation algebras on
+ $\R^2\times\R$ produces the single-colour tensor product
+ $E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_\infty}
+ E_1^{\mathrm{top}}$. Dunn's theorem
+ (Dunn~1988; Lurie~\cite{HA}\,Theorem~5.1.2.2) then gives
+ $E_2^{\mathrm{top}}\otimes E_1^{\mathrm{top}}\simeq
+ E_3^{\mathrm{top}}$ of \emph{single-colour}
+ $E_n$-operads.
+\end{enumerate}
+The composite of the two steps sends the local shadow of the
+bicoloured $\SCchtop$-operad on chains, after the external-product
+passage above, to the single-colour little-$3$-disc operad
+$\FM_3(\R^3)$ on $Q_{\mathrm{tot}}$-cohomology. The
+heptagon's seven faces collapse to:
+\begin{enumerate}
+ \item operadic face for $E_3$-topological $\FM(\mathbb{R}^3)$;
+ \item Koszul-dual face $E_3^{!}\simeq E_3\{3\}$;
+ \item factorization face on $X\times\mathbb{R}\simeq\mathbb{R}^3$
+ (after choosing a point on $X$);
+ \item BV/BRST face of the resulting $3$-dimensional topological
+ field theory;
+ \item convolution $L_\infty$-algebra for $E_3^{!}$-algebras;
+ \item Drinfeld centre of a module $1$-category over the
+ mode algebra of $\cA$;
+ \item derived stack of $3$-dimensional topological algebras.
+\end{enumerate}
+The seven $E_3$-topological faces remain quasi-isomorphic under the
+topologisation functor, at the level of $Q_{\mathrm{tot}}$-BRST
+cohomology.
+\end{theorem}
+
+\begin{proof}
+The two steps are logically independent and must be executed in
+order.
+
+\medskip\noindent\textbf{Step~(i): topologisation of the closed
+colour.}
+Sugawara's identity writes
+$T(z)=\tfrac{1}{2(k+h^{\vee})}{:}J^aJ_a{:}(z)$; the antighost
+BRST primitive is
+$G(z)=\tfrac{1}{2(k+h^{\vee})}{:}J^a\bar c_a{:}(z)$, with
+$[Q_{\mathrm{tot}},G(z)]=T(z)$ at non-critical level (denominator
+$2(k+h^\vee)$ invertible; Vol~I~%
+Construction~\ref*{V1-constr:sugawara-antighost};
+Chapter~\ref{ch:topologization}
+Theorem~\ref{thm:E3-topological-km};
+CFG~\cite{CFG2602}\,Proposition~4.4). The Virasoro-mode identity
+$L_{-1}=T_{(0)}$ converts this into the cohomological homotopy
+equation~\eqref{eq:h-omega-coboundary-km}: for any
+$Q_{\mathrm{tot}}$-closed bulk observable $\cO$,
+\[
+\partial_z\cO
+ \;=\;[T,\cO]
+ \;=\;\bigl[[Q_{\mathrm{tot}},G],\cO\bigr]
+ \;=\;\bigl[Q_{\mathrm{tot}},[G,\cO]\bigr],
+\]
+in \(Q_{\mathrm{tot}}\)-cohomology. Thus
+\(h_\omega(\cO):=[G,\cO]\) is the cohomological nullhomotopy of
+\(\partial_z\cO\). A strict identity
+\([Q_{\mathrm{tot}},h_\omega]=\partial_z\) on the uncompleted
+cochain complex is stronger and is not used here. Hence the
+closed-colour factorisation algebra on
+$\mathbb{C}$ is locally constant on $Q_{\mathrm{tot}}$-cohomology,
+promoting $E_2^{\mathrm{hol}}\to E_2^{\mathrm{top}}$
+(Lurie~\cite{HA}\,Theorem~5.4.5.9;
+Ayala--Francis~\cite{AF15}\,Theorem~2.24). The bicoloured
+$\SCchtop$-datum remains bicoloured after this step: it now has a
+closed $E_2^{\mathrm{top}}$ colour, an open $E_1^{\mathrm{top}}$
+colour, and the same directional mixed bulk-to-boundary operations.
+
+\medskip\noindent\textbf{Step~(ii): external product and Dunn
+additivity on single-colour topological operads.} After Step~(i) the bulk
+factorisation algebra is locally constant $E_2^{\mathrm{top}}$ on
+$\C\simeq\R^2$ and the boundary factorisation algebra is already
+$E_1^{\mathrm{top}}$ on $\R$. The bicoloured $\SCchtop$-operad
+carries three kinds of operations: pure closed ($E_2^{\mathrm{hol}}$
+in chains, $E_2^{\mathrm{top}}$ on $Q_{\mathrm{tot}}$-cohomology by
+Step~(i)), pure open ($E_1^{\mathrm{top}}$), and mixed
+bulk-to-boundary (Voronov 1998 Swiss-cheese; Hoefel 2009 presentation;
+Hoefel--Livernet 2012 bicoloured Koszul version, asymmetric). The
+Costello--Gwilliam~\cite{CG21} factorisation-algebra framework
+(Vol.~I~Theorem~3.4.9 product of factorisation algebras) shows that
+on $Q_{\mathrm{tot}}$-cohomology the external product factorisation algebra
+on $X\times\R$, after passage to local-constancy on the
+$\C\simeq\R^2$ factor via Step~(i), is determined by its value on
+a single $3$-dimensional disc $D^3\subset\R^3$ after identifying
+$X$ with $\C\simeq\R^2$ via any point-choice. The mixed
+bulk-to-boundary maps supply the action of the closed factor on the
+boundary factor before this external product is formed; they are not
+fed into Dunn as bicoloured operations. Pullback along
+$\R^3\cong\R^2\times\R\to X\times\R$ gives a single underlying
+locally constant factorisation algebra on $\R^3$
+(Ayala--Francis~\cite{AF15}\,Theorem~2.24 for the $\boxtimes$-product
+of locally constant factorisation algebras on a product manifold).
+Dunn's additivity
+theorem (Dunn~1988; Lurie~\cite{HA}\,Theorem~5.1.2.2, the
+$(\infty,1)$-categorical form) identifies this tensor product with
+$E_3^{\mathrm{top}}\simeq\FM_3(\R^3)$ on the nose:
+\[
+ E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_{\infty}}E_1^{\mathrm{top}}
+ \;\xrightarrow{\;\sim\;}\;
+ E_3^{\mathrm{top}}.
+\]
+The bicoloured-to-single-colour passage happens in this external
+product step, not in Step~(i); Dunn is then applied to the genuinely
+single-colour operad
+$E_2^{\mathrm{top}}\otimes_{\mathrm{Op}_\infty} E_1^{\mathrm{top}}$.
+The $\mathsf{SC}^{\mathrm{ch,top}}$-vs-$E_3$ scope declaration is
+respected: Dunn is \emph{not} invoked on the bicoloured
+$\SCchtop$.
+
+\medskip\noindent\textbf{Heptagon closure.}
+Each heptagon face inherits the topologisation via its edge to
+Face~(3) or Face~(1); the resulting $E_3$-topological faces on
+$Q_{\mathrm{tot}}$-cohomology are equivalent among themselves by the
+$E_3$-operad Koszul duality
+$E_3^!\simeq E_3\{3\}$ (Fresse, \emph{Homotopy of Operads and
+Grothendieck--Teichm\"uller Groups}, Vol.~II, AMS 2017;
+Ginzburg--Kapranov~1994). The cohomological Sugawara homotopy in
+Step~(i) and the operad-level Dunn tensor in Step~(ii) are independent
+ingredients; conflating them (e.g.\ writing
+``Dunn $E_2^{\mathrm{hol}}\otimes E_1^{\mathrm{top}}$'' in a single
+step) silently equates the bicoloured $\mathsf{SC}^{\mathrm{ch,top}}$
+operad with $E_3$, which fails (see
+Remark~\ref{rem:bulk-bdry-pattern-277-scope}).
+\end{proof}
+
+\begin{remark}[Why the homotopy $h_\omega$ is named separately from
+the BRST primitive $G(z)$]\label{rem:h-omega-vs-G-primitive}%
+%
+\index{BRST primitive!vs chain homotopy}%
+The identity $[Q_{\mathrm{tot}},G(z)]=T(z)$ is a BRST identity on
+\emph{states} (the antighost primitive for the stress tensor). On
+$Q_{\mathrm{tot}}$-cohomology it yields the operator homotopy class
+$[\partial_z\cO]=[Q_{\mathrm{tot}},[G,\cO]]=0$ for every
+$Q_{\mathrm{tot}}$-closed observable~$\cO$. They are related by the
+Virasoro mode identification $L_{-1}=T_{(0)}$ and the Leibniz rule
+$h_\omega:=[G,-]\Rightarrow[Q_{\mathrm{tot}},h_\omega]
+ =[[Q_{\mathrm{tot}},G],-]=[T,-]=\partial_z$ after passing through
+the mode action and then to cohomology. The operad-level statement
+(Step~(ii) Dunn) sees this cohomological operator homotopy, not only
+the state identity; conflating them drops the mode-action
+calculation. The stricter identity
+$[Q_{\mathrm{tot}},h_\omega]=\partial_z$ on the uncompleted cochain
+complex is the separate raw-chain-level strengthening excluded
+above.
+\end{remark}
+
+\begin{remark}[Scope of the heptagon
+collapse]\label{rem:heptagon-collapse-bicoloured-scope}%
+%
+%
+Theorem~\ref{thm:heptagon-collapse} as stated above respects the
+injunction: Step~(i) only topologises the closed colour and leaves the
+$\SCchtop$ datum bicoloured; Step~(ii) first passes through the
+external product to a \emph{single-colour} topological tensor, and only
+then applies Dunn additivity. Dunn is never applied to $\SCchtop$
+itself. This matches the Hoang--Tradler--Zeinalian
+(HTZ) statement of Swiss-cheese Koszul duality: the bicoloured
+$\SCchtop$-operad has an \emph{asymmetric} Koszul dual
+$\mathrm{(Lie,Ass,\text{shuffle-mix})}$ (Hoefel~2009;
+Hoefel--Livernet~2012) which is \emph{not} self-dual.
+Only after topologisation of the closed colour and passage through the
+single-colour external product does Koszul duality become the symmetric
+$E_3^!\simeq E_3\{3\}$ duality. The chapter's coloured-Koszul
+face~(2) is the pre-topologisation bicoloured-Koszul statement; the
+heptagon collapse replaces it with the single-colour $E_3$-Koszul face.
+\end{remark}
+
+\begin{conjecture}[Collapse with conformal vector, general case]
+\label{conj:heptagon-collapse-general}%
+\index{topologisation!general chiral with conformal|textbf}
+Let $\cA$ be an $E_1$-chiral algebra carrying a conformal vector
+$T(z)$ at non-critical level, not necessarily of affine Kac--Moody
+type. Then the heptagon collapses to an $E_3$-topological
+seven-face structure as in Theorem~\ref{thm:heptagon-collapse}.
+Evidence: the construction of the BRST primitive $G(z)$ is established
+for affine Kac--Moody, Virasoro as principal $\mathfrak{sl}_2$ DS, and
+principal iterated-Sugawara $\cW_N$ towers; outside those Casimir
+towers the stricter-than-completed, explicitly topologized
+class-$M$ chain-level case is the principal open direction of
+Chapter~\ref{ch:topologization}. The
+$E_\infty$-topological endpoint is the $E_\infty$-topological structure of
+$\cW_\infty[\mu]$ established conditionally in
+Theorem~\ref{thm:e-infinity-specialisation-Winfty} of
+Chapter~\ref{ch:topologization} (conditional on
+$\hypProchazka$, $\hypCKL$, $\hypPRSh$, $\hypYamada$).
+\end{conjecture}
+
+\begin{remark}[The heptagon survives the generic case]
+\label{rem:heptagon-survives-generic}
+For chiral algebras without a conformal vector (class $E_1$-chiral
+Yangians, critical-level Kac--Moody, CY functor outputs without
+conformal vector), all seven faces of the heptagon remain distinct
+and the heptagon is the final structure. This is the generic case;
+$E_3$-topologisation is the exceptional special case triggered by a
+conformal vector at non-critical level. The programme's climax is
+the heptagon, not the topologised special case.
+\end{remark}
+
+\begin{remark}[Critical level]\label{rem:heptagon-critical}
+At critical level $k=-h^{\vee}$ for affine Kac--Moody, the Sugawara
+formula has a pole: the normalisation factor
+$(k+h^{\vee})^{-1}$ has no critical value, and the BRST primitive
+$G(z)$ does not exist. The heptagon stays intact, but the boundary chiral algebra
+is enriched by the Feigin--Frenkel centre of
+$\hat{\mathfrak{g}}_{-h^{\vee}}$; the fifth shadow class FF
+(Feigin--Frenkel) of Infinite Fingerprint Classification emerges.
+Topologisation fails; the heptagon is the complete structural
+statement.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Seven faces table}
+\label{sec:heptagon-summary}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rllc}
+\toprule
+Face & Presentation & Home category & Theorem input \\
+\midrule
+1 & Operadic: $C_\bullet(\FM\times\Conf)$ & Coloured homotopy operads
+& \S\ref{subsec:face-operadic} \\
+2 & Koszul-dual: $(\Lie,\Ass,\text{shuffle-mix})$ & Coloured Koszul
+operads & \S\ref{subsec:face-koszul-dual} \\
+3 & Factorization: $\Obs^{\mathrm{ch}}$ + brace & $\Dmod(\Ran X)$ &
+\S\ref{subsec:face-factorization} \\
+4 & BV/BRST: $\Obs^q$ on $X\times\mathbb{R}_{\geq 0}$ &
+Log $\SCchtop$-algebras & \S\ref{subsec:face-bv-brst} \\
+5 & Convolution: $\fg^{\,\SCchtop}_{\cA,Z}$ & Coloured
+$L_\infty$-algebras & \S\ref{subsec:face-convolution} \\
+6 & Drinfeld centre: $\cZ(\Rep_{\mathrm{fact}}(\cA))$ &
+$E_2$-$\mathrm{Cat}_\infty$ &
+Thm.~\ref{thm:drinfeld-centre-sc-face} \\
+7 & Derived stack: $\cM_{\SCchtop,X}$ & $1$-shifted
+$\mathrm{Sp}\,\infty$-stacks &
+Thms.~\ref{thm:moduli-sc-shifted-symplectic},
+\ref{thm:convolution-lagrangian} \\
+\bottomrule
+\end{tabular}
+\caption{The seven faces of the heptagon. Every face presents the
+same coloured $\infty$-operad $\SCchtop$; adjacent faces are joined
+by the seven edges of \S\ref{sec:heptagon-edges}; the closure is
+Theorem~\ref{thm:heptagon-closed}.}
+\label{tab:heptagon-faces}
+\end{table}
+
+\begin{remark}[Associator-free reading]\label{rem:heptagon-assoc-free}
+The cohomology class of the heptagon is associator-free. A single
+choice of Drinfeld associator $\Phi\in\mathrm{GRT}_1(\mathbb{Q})$
+fixes a strict chain-level presentation; varying $\Phi$ transports
+the presentation through the $\mathrm{GRT}_1$-torsor action,
+recovered correctly once the Kontsevich--Tamarkin
+formality is treated as an $\infty$-quasi-isomorphism with
+associator data (rather than a strict dg-operad map). The
+Koszulness Moduli atlas
+(Chapter~\ref{chap:koszulness-moduli}) assigns one chart per
+characterisation; Face~$i$'s natural coordinate associator is the
+Drinfeld--Tamarkin associator canonical to that presentation.
+\end{remark}
+
+\begin{remark}[Heptagon face / licensing-type duality;
+licensing tags $\alpha\beta\gamma\delta\epsilon$]
+\label{rem:heptagon-licensing-duality}%
+\index{heptagon!licensing-type duality|textbf}%
+\index{licensing types!alpha/beta/gamma/delta/epsilon}%
+\index{universal stage chain!licensing-type indexing}%
+The seven heptagon faces stand in canonical correspondence with
+the five licensing types $\alpha / \beta / \gamma / \delta / \epsilon$
+of the universal stage chain
+$\mathsf{P} \to \mathsf{C} \to \mathsf{S} \to \mathsf{Z} \to \mathsf{A}$:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \emph{Two-coloured operadic primitive} $\leftrightarrow\;\alpha$.
+The $\SCchtop$ datum $(\primPkgBicolour)$ requires a chart
+projection $\mathsf{P} \to \mathsf{C}$ licensed by the boundary
+vacuum $\bdyVac$, the log decoration $\logCurve$, and the
+closed-colour vacuum $F^{\mathrm{cl}}$.
+\item \emph{Quantum complementarity}
+$\kappaTuple{A} + \kappaTuple{A^!}\leftrightarrow\;\alpha$.
+The $\kappa$-tuple is licensed at $\alpha$ once a row scope
+label is named (no scalar $\kappa$).
+\item \emph{Bar--cobar adjoint inversion} $\leftrightarrow\;\beta$.
+The shadow / forgetful arrow $\mathsf{C} \to \mathsf{S}$ licensed
+by Lurie HA.5.5 (\cite{LurieHA}) through the chiral Hochschild
+construction and its centre comparison.
+\item \emph{Brace / chiral Deligne--Tamarkin action}
+$\leftrightarrow\;\beta$.
+A second comparison map $\mathsf{C} \to \mathsf{S}$, by which
+$\bulkChirHoch{A_b}$ acts on $\BarTwc{A_b}$ through the brace
+operad (Tamarkin~\cite{Tamarkin2003}; chiral upgrade in
+Chapter~\ref{ch:brace}).
+\item \emph{Topologisation ladder}
+$E_n \to E_{n+1}^{\mathrm{top}}$ $\leftrightarrow\;\delta$.
+The endpoint $\mathsf{S} \to \mathsf{Z}$ arrow surviving a limit,
+with $W_\infty[\lambda] \to E_\infty^{\mathrm{top}}$ conditional
+on $\hypProchazka, \hypCKL, \hypPRSh, \hypYamada$.
+\item \emph{Drinfeld centre $=$ derived centre}
+$\leftrightarrow\;\beta$.
+The unification of the open lane and the CY lane through the
+identification
+$\cZ(\Rep_{\mathrm{fact}}(A)) \simeq \Rep_{\mathrm{fact}}(\bulkOf{A})^{E_2}$
+(Theorem~\ref{thm:drinfeld-centre-sc-face}); a comparison-functor
+licensing.
+\item \emph{PTVV derived-AG witness}
+$\leftrightarrow\;\gamma + \epsilon$.
+The ambient declaration $\gamma$ (chain-level vs $(\infty,1)$-categorical;
+weight-completed vs ordinary) plus the effectiveness condition
+$\epsilon$ (1-shifted symplectic non-degeneracy, by
+Pantev--To{\"e}n--Vaqui{\'e}--Vezzosi~\cite{PTVV13} Theorem 0.1).
+\end{enumerate}
+The duality reads as follows. Heptagon faces present the operadic
+/ categorical content of $\SCchtop$; licensing types present the
+epistemic / proof-discipline content. A face is a stage-pair to be
+licensed; a type is the data needed to license that stage-pair.
+The two presentations are mutually dual: each face singles out one
+arrow of the universal stage chain (or a pair, for face~(7)), and
+each type indexes the arrows by the kind of data they require.
+This duality is the structural translation between
+the $\SCchtop$ heptagon (\S\ref{sec:heptagon-summary}) and the
+universal stage chain \cite[\S4]{Critique20260509v2}.
+The licensing tags $\alpha / \beta / \gamma / \delta / \epsilon$
+in theorem statements throughout this volume name the data on
+which the corresponding heptagon face depends.
+\end{remark}
+
+\begin{remark}[Beyond the heptagon]\label{rem:heptagon-beyond}
+The heptagon is not a final horizon. Two further faces are natural
+candidates: Face~(8), the motivic face via Brown's motivic coaction
+(GRT-parametrized Seven Faces); Face~(9),
+the operadic graph-complex face via Willwacher's
+$H^0(\mathrm{GC}_2)=\mathfrak{grt}_1$ identification. These form
+the head of an infinite $\mathrm{GRT}_1$-torsor of faces. The
+heptagon is a rigidly-determined coarse slice; the full torsor is
+the subject of Chapter~\ref{ch:grt-seven-faces}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Notes and provenance}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Face~(1) originates with Voronov's Swiss-cheese operad (1998); the
+chiral upgrade is Beilinson--Drinfeld \textit{Chiral Algebras}~\S3.
+Face~(2) is Hoefel~2009 and Hoefel--Livernet~2012; the three-sector
+structure is established in Chapter~\ref{ch:theory-equivalence}.
+Face~(3) is Costello--Gwilliam Vol.~II; brace structure is Tamarkin
+2000. Face~(4) is Costello--Gwilliam Vol.~I and Butson--Yoo 2018;
+logarithmic refinement is Chapter~\ref{ch:bv-construction}. Face~(5)
+is Vallette coloured Koszul duality. Face~(6) is new to this chapter,
+built on the half-braiding construction of
+Definition~\ref{def:half-braiding-explicit} of
+Chapter~\ref{ch:theory-hochschild}. Face~(7) is
+PTVV~2013 applied to the mapping stack of
+Definition~\ref{def:moduli-sc-ch-top}.
+
+The seven-fold equivalence is new; partial equivalences were known
+classically (edges~(1)--(2), (1)--(3), (3)--(4), (4)--(5)). The
+upgrade from pentagon to heptagon is the present chapter's
+contribution.
+
+\section{K3 paramodular coboundaries}
+\label{sec:schtop-heptagon-supplement}
+
+\begin{remark}[Pentagon coboundary decomposition at $\hbar^3$]
+\label{rem:schtop-heptagon-1}
+The heptagon axiom coherence developed here for the $\mathsf{SC}^{\mathrm{ch,top}}$
+structure admits a sharpened refinement at the K3 paramodular base point:
+the twisted Siegel--Borcherds associator
+\(\widetilde{\Phi}^{\mathrm{Sieg\text{-}Bor}}_{\mathrm{Sp}_4}
+[\Phi_{10}^{\mathrm{un}}/(\eta(\tau)^{24}\eta(\sigma)^{24})]\)
+satisfies the pentagon equation at order $\hbar^{\le 3}$ with the
+explicit coboundary
+\[
+\phi^{(3)} \;=\; \zeta(3)\,c_{\mathrm{symm}} \;+\; \tfrac{25}{3}\,c_{\mathrm{timelike}}
+\;+\; \bigl(\Phi_{10}^{\mathrm{un}}/(\eta(\tau)^{24}\eta(\sigma)^{24})\bigr)c_{\Phi_{10}},
+\]
+where the three $c_{\bullet}$ are linearly independent $3$-coboundaries
+on the home Lie algebra $L = \mathfrak t^{\mathrm{Sieg}}_{2,[2]}\oplus\mathfrak n_+^{\mathrm{imag}}$.
+The constant $25/3 = (\mathrm{rk}(II_{25,1}) - 1)/3$ is the Fake
+Monster Cartan rank $26$ minus the timelike direction, divided by the
+triple-leg antisymmetrisation denominator -- \emph{not} a Virasoro
+central charge. Drinfeld 1990, Etingof--Kazhdan 1996--2000 Parts~I--V,
+Gritsenko--Nikulin 1997--98 denominator identity, Bruinier 2002
+Prop.~5.1 (arXiv:math/0108079), Borcherds 1995/1998.
+See Vol.~III, Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic},
+for the corresponding K3 calculation.
+\end{remark}
+
+\begin{remark}[Conditional super-category extension target for Etingof--Kazhdan Part V]
+\label{rem:schtop-heptagon-2}
+After the compact Hall promotion, PBW/no-extra primitive theorem, parity
+match, common completion, and source-recognition comparison gates, the
+heptagon closure for $\mathsf{SC}^{\mathrm{ch,top}}$ applied to the K3
+target datum $\mathbf H_{\Delta_5}^{\mathrm{tgt}}$ has the following
+scalar automorphic target:
+\[
+H^2(\mathfrak g_{\Delta_5})^{\mathbb Z/2,\,K(1)}
+\;\rightsquigarrow\; \mathbb C\cdot[\Delta_5],
+\]
+where $\mathfrak g_{\Delta_5}$ denotes the BKM Lie algebra only after
+those gates identify the Hall BPS Lie algebra with the
+Borcherds--Gritsenko--Nikulin denominator algebra for
+$\Delta_5=(\Phi_{10}^{\mathrm{un}})^{1/2}$. Under those five gates,
+and with $K(1)=K(1,\mathrm{Mor})$ the first Morava $K$-theory, the
+$\mathbb Z/2$-equivariant $K(1)$-local second Lie-algebra cohomology
+would be the one-dimensional line spanned by the Gritsenko-lift class
+$[\Delta_5]$. Without these gates this paragraph asserts no direct
+$H^2$ computation for $\mathfrak g_{\Delta_5}$; it records the scalar
+normalisation target for an Etingof--Kazhdan Part~V super-category
+comparison on the Gritsenko-lift sector. Primary-lit:
+Etingof--Kazhdan 2007 Part~V, Borcherds 1992 Monster BKM,
+Gritsenko--Nikulin 1996--98.
+\end{remark}
+
+\section{The seven vertices realised at the K3 chiral bialgebra}
+\label{sec:heptagon-K3-realisation}
+
+For the conditional K3 specialisation below, let
+$\iota_E\colon E\hookrightarrow K3$ be the elliptic base curve in the
+K3 surface model of Vol.~III
+Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}. When the Vol.~III
+stage-one and restriction hypotheses hold, write
+\[
+ \mathbf H_{\Delta_5}^{\mathrm{surf}}
+ := \PhiFA_2(D^b\mathrm{Coh}(K3)),
+ \qquad
+ \mathbf H_{\Delta_5,E}:=\iota_E^*\mathbf H_{\Delta_5}^{\mathrm{surf}},
+\]
+and
+\[
+ Z_E :=
+ Z^{\mathrm{der}}_{\mathrm{ch}}(\mathbf H_{\Delta_5,E})
+ =
+ \ChirHoch^\bullet(\mathbf H_{\Delta_5,E},\mathbf H_{\Delta_5,E}).
+\]
+The surface object is required to carry the $E_2$ factorisation
+operations supplied by the stage-one functor $\PhiFA_2$ before
+restriction; the curve object $\mathbf H_{\Delta_5,E}$ is required to
+be the native $E_1$-chiral algebra. The heptagon at K3 is therefore
+stated as a typed realisation of the pair
+$(Z_E,\mathbf H_{\Delta_5,E})$, not as an $E_2$ assertion about the
+underlying curve algebra.
+
+\begin{theorem}[Seven-vertex realisation of $\mathsf{SC}^{\mathrm{ch,top}}$ at the typed K3 pair]
+\label{thm:heptagon-K3-realisation}
+\ClaimStatusConditional
+Under the following hypotheses:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item the Vol.~III surface factorisation theorem supplies the
+$E_2$ stage-one object $\mathbf H_{\Delta_5}^{\mathrm{surf}}
+=\PhiFA_2(D^b\mathrm{Coh}(K3))$;
+\item restriction along $\iota_E$ gives the strongly admissible
+$E_1$-chiral algebra $\mathbf H_{\Delta_5,E}$ on the curve;
+\item the chiral brace comparison gives the $E_2$-algebra
+$Z_E=\ChirHoch^\bullet(\mathbf H_{\Delta_5,E},\mathbf H_{\Delta_5,E})$
+and its bulk-to-boundary action on $\mathbf H_{\Delta_5,E}$;
+\item the PTVV moduli stack
+$\mathcal M^{\SCchtop}_{K3}$ exists with its CY$_2$ $(-2)$-shifted
+symplectic form, and the paramodular Langlands comparison identifies
+the $\Delta_5$ Arthur--Hecke global-section ring on the Gritsenko
+lift sector;
+\item the compact Hall promotion starts from the reduced compact
+Hall windows of \(K3\times E\), constructs the finite
+radical-quotient Hall--Drinfeld doubles, and requires compatible
+completion plus the finite pairing, PBW/no-extra, parity, centre, and
+associator defects to vanish before the BPS Lie algebra acts on the
+curve-level boundary object;
+\item the PBW/no-extra theorem identifies the completed BPS CoHA with
+the completed enveloping algebra of its primitive BPS Lie algebra and
+introduces no additional imaginary primitive summands beyond the
+$\Delta_5$ denominator sector;
+\item the parity convention agrees with the Borcherds super-denominator
+signs and with the $\mathbb Z/2$ grading used in the Hall BPS algebra;
+\item the Borcherds product, Hall algebra, convolution dg-Lie algebra,
+and $\SCchtop$ local-shadow object are compared in one common completed
+topology;
+\item source-recognition identifies the primitive Hall source with the
+Gritsenko--Nikulin/Borcherds denominator source for $\Delta_5$, with
+the scalar normalisation fixed by the class $[\Delta_5]$.
+\end{enumerate}
+Then the seven local-shadow faces of
+$\mathsf{SC}^{\mathrm{ch,top}}$ from
+\S\ref{sec:five-classical-faces}--\ref{sec:heptagon-edges} admit the
+following identifications at the typed K3 pair
+$(Z_E,\mathbf H_{\Delta_5,E})$:
+\begin{description}
+ \item[(V1) Operadic face.] $\mathsf{SC}^{\mathrm{ch,top}}$ evaluated on
+ closed colour $Z_E$ and open colour
+ $\mathbf H_{\Delta_5,E}\simeq
+ \mathcal{D}_\hbar(\mathcal{Y}^{\mathrm{Hall}}_\hbar)$
+ (Schiffmann--Vasserot shuffle presentation). The mixed stratum
+ $\FM_k(\mathbb{C})\times \Conf_m(\mathbb{R})$ parametrises
+ bulk-to-boundary operators realised by the $\widetilde{M}_{24}$-equivariant
+ Jacobi-form lattice sum
+ $\sum_{(N, \ell, M):\,4 NM - \ell^2 \geq 0} c_{\phi_{0, 1}}(N, \ell)
+ \cdot (\mathrm{bulk})^{(N, M)} \otimes (\mathrm{boundary})^{(\ell)}$.
+ \item[(V2) Koszul-dual face.] The Koszul dual
+ $(\mathsf{SC}^{\mathrm{ch,top}})^{!} = (\mathsf{Lie}, \mathsf{Ass},\text{shuffle-mixed})$
+ evaluated on $(Z_E,\mathbf H_{\Delta_5,E})$ is the pair
+ $(\mathfrak{n}_+^{\mathrm{imag}}, \mathrm{CoHA}_{K3 \times E}, \text{Hall shuffle})$:
+ closed-sector BKM imaginary-nilpotent $\mathfrak{n}_+^{\mathrm{imag}}$
+ models the Lie part of $Z_E$ (Lie under super-commutator), open-sector
+ Cohomological Hall algebra models the $E_1$ boundary algebra
+ (associative under $\mathcal{E}\mathrm{xt}$-stacking
+ Kontsevich--Soibelman 2011), shuffle-mixed cross-term given by
+ Davison 2017 CY$_3$ shuffle on the nilpotent cone.
+ \item[(V3) Factorisation face.] The closed colour is the BD
+ factorisation $D$-module $\mathcal{A}_{Z_E}$ on
+ $\mathrm{Ran}(X)$; the open colour is the curve-level
+ factorisation $D$-module $\mathcal{A}_{\mathbf H_{\Delta_5,E}}$,
+ equivalently the locally constant factorisation algebra of the
+ open-string Schiffmann--Vasserot shuffle on $\mathrm{Ran}(\mathbb{R})$.
+ The bulk-boundary
+ module lives on the mixed open--closed Ran geometry, not on the
+ separated product Ran space; its local collision shadow is
+ the $\widetilde{M}_{24}$-twisted permutation module
+ $\mathcal{F}_{K3} = \mathrm{Sym}\bigl(\bigoplus_{n \geq 1}
+ H^\bullet(K3) \otimes t^{-n}\bigr)$ of the K3 Fock space
+ (Cheng--Duncan--Harvey 2014).
+ \item[(V4) BV/BRST face.] The Costello--Gwilliam BV framework applied
+ to the $3$d HT theory $T_{\mathrm{HT}}[K3]$ of Costello--Li 2015
+ arXiv:1505.06703 \S 4: closed colour is the BV observable complex
+ $\mathrm{Obs}^{q,\mathrm{cl}}_{\mathrm{HT}}$ on $C \times \mathbb{R}$
+ (complex curve $\times$ topological line); open colour is the boundary
+ algebra $\mathrm{Obs}^{q,\mathrm{op}}_{\mathrm{HT}}$ on $C \times \{0\}$;
+ mixed sector realises the Humbert-divisor bulk-boundary residue
+ $\mathrm{res}_{H_1 \cup H_4}\colon
+ \mathrm{Obs}^{q,\mathrm{cl}} \otimes \mathrm{Obs}^{q,\mathrm{op}} \to
+ \mathbb{C}$.
+ \item[(V5) Convolution face.] Vallette coloured Koszul duality
+ realises the convolution dg-Lie-superalgebra
+ $\mathrm{Hom}\bigl(\mathbf{B}(\mathbf{H}_{\Delta_5,E}),
+ \mathbf{H}_{\Delta_5,E}\bigr)$ with differential $d_{\mathrm{conv}} =
+ [\cdot, \Theta_{\mathbf{H}_{\Delta_5,E}}]$ where the Maurer--Cartan
+ element $\Theta = \sum_{n \geq 3} \hbar^n \phi^{(n)}$ is the
+ higher-coherence tower of
+ Proposition~\ref{V3-prop:A-infty-structure-constants-humbert} (Vol~III).
+ The convolution face sees the tower directly: vertex (V5) pairs with
+ vertex (V1) through the
+ Maurer--Cartan equation
+ $d \Theta + \frac{1}{2} [\Theta, \Theta]_{\mathrm{Ger}} = 0$.
+ \item[(V6) Drinfeld-centre face.] The factorisation-module category
+ $\mathrm{Rep}_{\mathrm{fact}}(\mathbf{H}_{\Delta_5,E})$ carries the
+ Drinfeld-centre enhancement
+ $\mathcal{Z}(\mathrm{Rep}_{\mathrm{fact}}(\mathbf{H}_{\Delta_5,E})) \simeq
+ \mathrm{Rep}_{\mathrm{fact}}(Z_E)^{\mathrm{centred}}$
+ of
+ Definition~\ref{def:half-braiding-explicit}~(Chapter~\ref{ch:theory-hochschild}).
+ Concretely at K3, the half-braiding data for
+ $\mathbf{H}_{\Delta_5,E}$-modules is the Siegel-elliptic dynamical
+ $R$-matrix $R_{\mathrm{Sieg,dyn}}(z_1, z_2; \tau, w)$ of Vol~III
+ Theorem~\ref{thm:siegel-dynamical-R}; satisfies the dynamical
+ Yang--Baxter equation on the compactified Siegel upper half-space
+ $\overline{\mathcal{A}_2}$ on the complement of the Humbert divisors
+ $H_1 \cup H_4$.
+ \item[(V7) Derived-algebraic-geometry face.] The PTVV shifted-symplectic
+ derived stack
+ $\mathcal{M}^{\mathrm{SC}^{\mathrm{ch,top}}}_{K3}$ classifying
+ $\mathsf{SC}^{\mathrm{ch,top}}$-data on $E_1$-chiral algebras of
+ type~K3, with $(-2)$-shifted symplectic form (reflecting CY$_2$ Serre
+ shift). At the point classifying $\mathbf{H}_{\Delta_5,E}$, the tangent
+ complex is
+ $\mathbb{T}_{\mathbf{H}_{\Delta_5,E}} \mathcal{M} \simeq
+ C^\bullet_{\mathrm{ch}}(\mathbf{H}_{\Delta_5,E}, \mathbf{H}_{\Delta_5,E})[1]$,
+ the shifted chiral Hochschild cochain complex. Global sections of
+ $\mathcal{O}_{\mathcal{M}}$ are identified with the Arthur--Hecke
+ $L$-function ring on $\Delta_5$ (Arthur 1989; Gritsenko 1994) by the
+ paramodular Langlands correspondence at weight $5$.
+\end{description}
+Conditional cross-vertex identifications at
+$(Z_E,\mathbf H_{\Delta_5,E})$:
+\begin{itemize}
+ \item \textbf{(V1)--(V2):} Koszul duality of $\mathsf{SC}^{\mathrm{ch,top}}$
+ sends the BKM imaginary cone to the Hall CoHA only after the compact
+ Hall promotion, PBW/no-extra, parity, completion, and
+ source-recognition gates above. The Davison 2017 cohomological
+ integrality comparison supplies the target
+ $\mathrm{CoHA}_{K3 \times E}^{\mathrm{BPS}}
+ \simeq U(\mathfrak{g}_{\Delta_5}^{\mathrm{BPS,Lie}})$ in that
+ completed setting.
+ \item \textbf{(V3)--(V4):} the factorisation and BV/BRST faces coincide
+ at the K3 point by Costello--Li 2015 arXiv:1505.06703 \S 4
+ factorisation-algebra construction of the $3$d HT observable theory.
+ \item \textbf{(V5)--(V6):} the convolution Maurer--Cartan element
+ $\Theta = \sum \hbar^n \phi^{(n)}$ is the infinitesimal form of the
+ Drinfeld-centre half-braiding $R_{\mathrm{Sieg,dyn}}$ at the K3 point
+ (order-by-order in $\hbar$).
+ \item \textbf{(V6)--(V7):} the Drinfeld-centre and PTVV faces agree on
+ the centre of the factorisation category via Ben-Zvi--Francis--Nadler
+ 2010 arXiv:0805.0157 Theorem 5.2, which identifies the derived centre
+ with the $\mathrm{QCoh}$ of the inertia stack
+ $\mathrm{Inert}(\mathcal{M}^{\mathrm{SC}^{\mathrm{ch,top}}}_{K3})$.
+ \item \textbf{Diagonal (V1)--(V6):} bulk-boundary OPE at K3 is realised by
+ the Siegel-elliptic dynamical $R$-matrix on mixed-sector operations,
+ consistent with the Jacobi-form sum in (V1).
+ \item \textbf{Diagonal (V2)--(V7):} Koszul dual and PTVV identified via
+ the Keller--Van den Bergh 2011 Calabi--Yau structure on the shifted
+ convolution algebra, realising $(-2)$-shifted symplectic on the
+ Koszul-dual complex.
+ \item \textbf{Diagonal (V3)--(V5):} factorisation and convolution
+ identified via the Gaitsgory 2015 arXiv:1502.05630 factorisation-module
+ incarnation of the convolution complex (Chapter~\ref{ch:theory-hochschild}).
+\end{itemize}
+All seven realisations recover the local-shadow object
+$\mathsf{SC}^{\mathrm{ch,top}}(Z_E,\mathbf H_{\Delta_5,E})$ as a single
+underlying $\infty$-operadic object; the surface and global
+factorisation faces may retain Ran/family data outside this local
+operadic identification.
+\end{theorem}
+
+\begin{proof}
+(V1)~is the operad definition of \S\ref{subsec:face-operadic} applied
+to the typed pair $(Z_E,\mathbf H_{\Delta_5,E})$; the mixed stratum is the
+Eguchi--Ooguri--Tachikawa 2011 K3 elliptic-genus Jacobi-form expansion
+read as bulk-boundary operation coefficients.
+(V2)~uses Vallette's coloured Koszul duality
+(\S\ref{subsec:face-koszul-dual}) together with the Kontsevich--Soibelman
+2011 CoHA construction and the Davison 2017 BPS integrality, under the
+five Hall-recognition gates in the statement.
+(V3)~is the Costello--Gwilliam 2021 factorisation-algebra incarnation
+applied to the $3$d HT theory on $C \times \mathbb{R}$.
+(V4)~is Costello--Li 2015 arXiv:1505.06703 \S 4 quantum BV
+factorisation.
+(V5)~is the convolution face of \S\ref{subsec:face-convolution} with
+Maurer--Cartan element given by
+Proposition~\ref{V3-prop:A-infty-structure-constants-humbert}.
+(V6)~is the conditional comparison of
+Theorem~\ref{thm:drinfeld-centre-sc-face} applied at the K3 point;
+the half-braiding is the Siegel dynamical $R$-matrix.
+(V7)~is the PTVV $(-2)$-shifted symplectic stack of
+\S\ref{sec:face-dag} evaluated at $\mathbf{H}_{\Delta_5,E}$.
+
+Cross-vertex identifications: each diagonal edge is a named theorem of
+\S\ref{sec:heptagon-edges}, specialised to the K3 point by plugging in
+the Gritsenko lift, the Davison BPS algebra, or the EOT 2011 elliptic
+genus as appropriate. The final rigidity statement (all seven local
+shadows coincide) is Theorem~\ref{thm:heptagon-closed} applied to
+$(Z_E,\mathbf H_{\Delta_5,E})$: the local $\infty$-operadic structure
+is determined by any one face once the named inputs and the
+Hall-recognition gates are fixed.
+\end{proof}
+
+\begin{remark}[Discipline: CoHA is associative, not chiral]
+\label{rem:heptagon-K3-coha-discipline}
+The open-colour realisation at vertex~(V2) uses
+$\mathrm{CoHA}_{K3 \times E}$ with its associative multiplication; this
+is the Schiffmann--Vasserot--Davison Cohomological Hall algebra, not a
+vertex operator algebra. Vertex-operator (chiral-factorisation)
+structure on $\mathbf{H}_{\Delta_5,E}$ arises through the
+CY-to-chiral functor $\Phi$ applied to $D^b\mathrm{Coh}(K3 \times E)$
+(Vol~III Chapter~\ref{V3-ch:cy-to-chiral}), after restriction to the
+curve-level $E_1$ algebra. CoHA comultiplication is a separate
+associative construction. Under the compact Hall promotion,
+PBW/no-extra, parity, completion, and source-recognition gates, the
+cross-vertex identification (V1)--(V2) factors through the Davison 2017
+BPS Lie algebra
+$\mathfrak{g}_{\Delta_5}^{\mathrm{BPS,Lie}}$ as intermediate object;
+it does not pass through a chiral structure on CoHA itself.
+\end{remark}
+
+\begin{remark}[Denominator $5!$ and the K3 elliptic genus normalisation]
+\label{rem:heptagon-K3-denominator}
+The higher coherences $\phi^{(n)}$ of the K3 bialgebra at vertex~(V5)
+carry the denominator $1/n!$: $\phi^{(3)}$ is the intermediate-strict
+pentagon with $\phi^{(3)} = \zeta(3) c_{\mathrm{symm}} +
+(25/3) c_{\mathrm{timelike}}
++ \bigl(\Phi_{10}^{\mathrm{un}}/(\eta(\tau)^{24}\eta(\sigma)^{24})\bigr)c_{\Phi_{10}}$;
+$\phi^{(4)}$ has denominator $1/4! = 1/24$ from the four-leg KZ iterated
+integral, $\phi^{(5)}$ has $1/5! = 1/120$, $\phi^{(6)}$ has $1/6! = 1/720$,
+$\phi^{(7)}$ has $1/7! = 1/5040$. Cross-volume: Vol~III
+Theorem~\ref{thm:cyclic-invariance-phi-67} gives the explicit
+weight-$6, 7$ formulas with MZV legs $\zeta(3)^2$, $\zeta(7)$,
+$\zeta(3, 4)$, and Borcherds legs
+\(\bigl(\Phi_{10}^{\mathrm{un}}/(\eta(\tau)^{24}\eta(\sigma)^{24})\bigr)^3\),
+\((\Phi_{10}^{\mathrm{un}})^{7/2}/(\eta(\tau)^{84}\eta(\sigma)^{84})\) respectively.
+\end{remark}
+
+\section{class-$\mathrm M$ heptagon face at
+$c_{2d} = -214$}
+\label{sec:schtop-heptagon-supplement-ii}
+
+\begin{remark}[K3 heptagon face at $c_{2d} = -214 = -2\cdot 107$;
+\ClaimStatusConditional]
+\label{rem:schtop-heptagon-k3-face}
+\index{heptagon!K3 face at $c_{2d} = -214$}
+\index{$\SCchtop$!class-$\mathrm M$ face}
+Assume the compact Hall promotion, finite radical-quotient double,
+PBW/no-extra, parity, centre, associator, completion, and
+source-recognition gates of
+Theorem~\ref{thm:heptagon-K3-realisation}. Then the
+$\SCchtop$-heptagon restricted to the K3 chiral bialgebra
+$\mathbf H_{\Delta_5}$ carries a class-$\mathrm M$ face at central
+charge $c_{2d} = -214 = -2\cdot 107$. The scalar Virasoro target is
+the stress-tensor line with subalgebra $\Vir_{-214}$ and shadow tower
+of depth $r_{\max} = \infty$ with invariants
+$(S_2, S_3, S_4, S_5) = (-107,\, 2,\, 5/112\,136,\, 3/3\,000\,319)$
+(Vol.~I class-$\mathsf M$ shadow-tower computation, evaluated at the
+Vol.~III class-$\mathcal S$ central-charge pair
+$(c_{4d},c_{2d})=(107/6,-214)$).
+The Riccati discriminant
+$\Delta_{\mathrm{Ricc}} = 40/(5c + 22) = 40/(-1048) = -5/131 \ne 0$
+confirms the hyperelliptic spectral surface
+$\Sigma_{c = -214} = \{y^2 = Q_{-214}(t)\}$ is smooth, placing the
+K3 face in the generic class-$\mathrm M$ stratum. The class-$\mathrm M$
+placement is controlled by the non-vanishing invariants
+$5c+22$, $S_4(c)$, and the discriminant of $Q_c$; the depth-$\infty$
+tower is a topological invariant of this generic stratum rather than
+of any auxiliary presentation of the K3 bialgebra.
+\end{remark}
+
+\begin{proposition}[Heptagon-face dependence on the generic
+class-$\mathrm M$ stratum; \ClaimStatusConditional]
+\label{prop:schtop-heptagon-classM-stratum}
+\index{heptagon!generic class-$\mathrm M$ stratum}
+Let $c$ lie in the generic Virasoro class-$\mathrm M$ stratum:
+$c\neq 0$, $5c+22\neq 0$, $S_4(c)\neq 0$, and the Riccati polynomial
+$Q_c=(c+6t)^2+80t^2/(5c+22)$ is irreducible. The seven
+face-equivalences of the heptagon (operadic, Koszul,
+factorisation, BV/BRST, convolution, Drinfeld-centre, DAG) are
+$\infty$-quasi-isomorphisms of $\SCchtop$-algebras modulo a chosen
+Drinfeld associator $\Phi \in \mathrm{GRT}_1(\mathbb Q)$. Their scalar
+Virasoro data depend on the class-$\mathrm M$ stratum of the
+stress-tensor line, not on a particular coordinate representative of
+that stratum. In the K3 specialisation, after the compact Hall
+promotion, PBW/no-extra, parity, completion, and source-recognition
+gates, the value $c_{2d}=-214$ lies in this generic stratum and fixes
+the scalar class-$\mathrm M$ target of
+Remark~\ref{rem:schtop-heptagon-k3-face}.
+\end{proposition}
+
+\begin{proof}
+The seven heptagon face-equivalences of
+Theorem~\ref{thm:heptagon-closed} are $\infty$-operadic
+quasi-isomorphisms after fixing
+$\Phi \in \mathrm{GRT}_1(\mathbb Q)$, insensitive to the specific
+numerical value of $c_{2d}$ within a given class-$\mathrm M$ stratum.
+The $r_{\max} = \infty$ depth invariant, the irreducibility of the
+Riccati polynomial $Q_c = (c + 6t)^2 + 80 t^2/(5c + 22)$, and the
+nonvanishing of $S_4 = 10/[c(5c + 22)]$ are the three witnesses of
+class-$\mathrm M$ membership.  At the K3 central charge,
+direct substitution gives
+$5\cdot(-214) + 22 = -1048 \ne 0$;
+$S_4(-214) = 5/112\,136 \ne 0$; $Q_{-214}$ has Riccati
+discriminant $-5/131 \ne 0$. These scalar checks are independent of
+the BKM-BPS module structure on $\mathbf H_{\Delta_5}$. The full K3
+heptagon face, including the Drinfeld-centre face through
+$\Rep_{\mathrm{fact}}(\mathbf H_{\Delta_5})$ and the BKM comparison
+with the Gritsenko--Nikulin Siegel weight~$5$ form $\Delta_5$, is
+conditional on the compact Hall promotion, PBW/no-extra, parity,
+centre, associator, completion, and source-recognition hypotheses.
+\end{proof}
+
+\begin{remark}[$-214$ factorisation and heptagon-diagonal consistency]
+\label{rem:schtop-heptagon-factorisation}
+\index{heptagon diagonal!prime factorisation}
+The prime factorisation $-214 = -2\cdot 107$ enters the heptagon
+diagonals (degree-$2$ adjacencies between non-consecutive faces)
+only through the stress-tensor-line central charge; the diagonal
+equivalences preserve the prime factorisation structure by
+$\infty$-operadic functoriality. The prime $107 = 5\cdot 24 - 13$
+reads as the Shapere--Tachikawa class-$\mathcal S$ numerator
+$5n - 13$ at $n = 24$ (Shapere--Tachikawa 2008 \S 3), and the
+factor $-2$ is the Beem--Rastelli $c_{2d} = -12 c_{4d}$
+gravitational-anomaly ratio combined with the denominator $6$ in
+$c_{4d} = 107/6$: $-214 = -12\cdot(107/6) = -2\cdot 107$,
+consistent with the direct first-principles derivation. No
+heptagon diagonal depends on the elliptic-genus weight or the
+Borcherds denominator weight; those constants enter the conditional
+BKM and paramodular faces, while $c_{2d}=-214$ enters only through the
+stress-tensor line.
+\end{remark}

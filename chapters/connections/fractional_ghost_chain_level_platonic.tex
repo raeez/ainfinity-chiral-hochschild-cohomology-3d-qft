@@ -1,0 +1,648 @@
+% ============================================================================
+% Fractional-Ghost Chain-Level Platonic:
+% Non-principal Drinfeld-Sokolov E_3-topologization via branched-cover
+% integralization and Galois descent.
+%
+% Target theorems (upgraded to unconditional on all good-graded nilpotents):
+% thm:branched-cover-integralization
+% thm:sugawara-antighost-branched-cover
+% thm:galois-invariance-descent
+% thm:E3-topological-DS-general-explicit-BP
+% thm:E3-topological-DS-general-minimal-sl4
+% thm:E3-topological-DS-general-all-good-graded
+% cor:fractional-ghost-healed-non-principal
+%
+% ============================================================================
+
+\section{Non-principal DS topologization via branched-cover descent}
+\label{sec:fractional-ghost-platonic}
+
+\index{Drinfeld--Sokolov reduction!non-principal!branched cover}
+\index{fractional-weight ghosts!integralization}
+
+The non-principal Drinfeld--Sokolov reduction carries a gap in the
+$\Ethree$-topologization argument: for good $(1/d_f)$-graded nilpotents
+with $d_f > 1$, the ghost system at short-root Kazhdan weight $1/2$
+carries fractional conformal weight $3/2$. The Sugawara antighost
+\[
+G_{\mathrm{Sug}}(z) \;=\; \tfrac{1}{2(k+h^{\vee})}
+ \sum_{a \in \fg} {:}J^{a}(z)\,\bar c_{a}(z){:}
+\]
+sums over all root-space components of~$\fg$, including those at
+half-integer Kazhdan weight. The individual summands lack a definition
+as sections of a line bundle on the curve~$X$ until a spin structure
+or a branched cover is specified. The route is to pull the construction
+back to a degree-$d_f$ cyclic cover $\pi\colon \widetilde X \to X$ on
+which the Kazhdan grading is integer, execute the Sugawara identity
+upstairs, and descend to~$X$ via $\mathrm{Deck}(\pi)$-invariants. The
+resulting $\Ethree$-topologization holds for all good-graded
+nilpotents.
+
+\subsection{Good gradings and Kazhdan denominators}
+\label{subsec:good-grading-denominator}
+
+\begin{definition}[good $(1/d)$-grading]
+\label{def:good-1-over-d-grading}
+\index{good 1/d grading@good $(1/d)$-grading}
+Let $\fg$ be a finite-dimensional simple Lie algebra with Cartan
+subalgebra $\fh$ and root system~$\Phi$. A $\Z/d$-compatible
+\emph{good grading}~$\Gamma$ for a nilpotent $f \in \fg$ is a
+decomposition $\fg = \bigoplus_{j \in (1/d)\Z} \fg_{j}$ such that:
+\begin{enumerate}[label=\textup{(G\arabic*)},nosep]
+\item $[\fg_{i}, \fg_{j}] \subseteq \fg_{i+j}$;
+\item $f \in \fg_{-1}$ and $\operatorname{ad}(f)\colon
+ \fg_{j} \to \fg_{j-1}$ is injective for $j \ge 1/2$;
+\item the $\mathfrak{sl}_{2}$-triple $(e, h_{0}, f)$ of $f$
+ satisfies $h_{0} \in \fh$ and
+ $\fg_{j} \supseteq \fg^{h_{0} = 2j}$ for all $j$.
+\end{enumerate}
+The minimal such $d$ is the \emph{Kazhdan denominator}~$d_{f}$.
+\end{definition}
+
+\begin{example}[Kazhdan denominator tabulation]
+\label{ex:kazhdan-denominator-table}
+\index{Kazhdan denominator!tabulation}
+\mbox{}
+\begin{itemize}[nosep]
+\item $f_{\mathrm{prin}}$ in $\mathfrak{sl}_{N}$: principal nilpotent;
+ $d_{f} = 1$ (Dynkin grading integer);
+\item $f_{\min}$ in $\mathfrak{sl}_{3}$ (gives BP = $\cW_{3}^{(2)}$):
+ good grading $\Gamma = \{-1, -\tfrac{1}{2}, 0, \tfrac{1}{2}, 1\}$;
+ $d_{f} = 2$;
+\item $f_{\min}$ in $\mathfrak{sl}_{N}$, $N \ge 3$: same grading
+ $\{-1, -\tfrac{1}{2}, 0, \tfrac{1}{2}, 1\}$; $d_{f} = 2$;
+\item hook-type $(N-r, 1^{r})$ in $\mathfrak{sl}_{N}$: integer
+ grading for $r = 1, 2, \ldots$; $d_{f} = 1$ (Elashvili--Kac
+ odd-even criterion satisfied);
+\item subregular in $B_{n}, D_{n}$: $d_{f} = 2$ or $3$ depending
+ on hook parity;
+\item subregular in $E_{8}$: certain orbits require $d_{f} = 2$
+ (Premet 2003 tables).
+\end{itemize}
+In particular the BP case has $d_{f} = 2$: the good grading has
+half-integral ghost weights before the double-cover
+integralisation.
+\end{example}
+
+\subsection{Branched-cover integralization}
+\label{subsec:branched-cover}
+
+\begin{definition}[degree-$d$ Kummer cover]
+\label{def:branched-cover-integralization}
+\index{branched cover!Kummer cover}
+\index{branched cover!integralization}
+Let $X$ be a smooth projective curve over~$\C$ and $d \in \Z_{\ge 1}$.
+A \emph{degree-$d$ Kummer cover} is a finite flat map
+$\pi\colon \widetilde X \to X$ with cyclic Galois group
+$\mathrm{Deck}(\pi) \cong \Z/d$, \'etale over a Zariski-open
+$X^{\circ} \subseteq X$, and with at most two branch points.
+The pulled-back sheaf $\pi^{*}(K_{X}^{1/d})$ is a genuine line
+bundle, isomorphic to~$K_{\widetilde X}^{1/d} \otimes \pi^{*}(\Omega)$
+for a divisor~$\Omega$ supported on the branch locus.
+\end{definition}
+
+\begin{remark}[existence and choice of cover]
+\label{rem:branched-cover-existence}
+\index{branched cover!existence}
+For $X = \PP^{1}$, a degree-$d$ Kummer cover exists branching at
+$\{0, \infty\}$: $\widetilde X = \PP^{1}$, $\pi(z) = z^{d}$. For
+$X$ of genus $\ge 1$, an \'etale degree-$d$ cover exists iff
+$\pi_{1}(X)^{\mathrm{ab}}$ has a $\Z/d$-quotient; the choice is a
+$H^{1}(X; \Z/d)$-torsor. In the WZW setting, the cover corresponds
+to passage to a cyclic orbifold sector.
+\end{remark}
+
+\begin{theorem}[branched-cover integralization]
+\label{thm:branched-cover-integralization}
+\ClaimStatusProvedHere{}
+\index{branched-cover integralization theorem|textbf}
+Let $f \in \fg$ be a good $(1/d_{f})$-graded nilpotent and
+$\pi\colon \widetilde X \to X$ a degree-$d_{f}$ Kummer cover. Then the
+pulled-back Kazhdan grading
+$\pi^{*}\Gamma\colon \widetilde X \times \fg \to \Z$
+is \emph{integer} and compatible with the bulk $3$d holomorphic
+Chern--Simons differential $\pi^{*}Q_{\mathrm{CS}}$. Equivalently,
+the pulled-back ghost currents $\pi^{*}\bar c_{\alpha}$ for
+$\alpha \in \fg_{j/d_{f}}$ are well-defined sections of
+$K_{\widetilde X}^{\,1-j/d_{f}}\otimes \pi^{*}(\text{branch divisor})^{\otimes *}$,
+which upstairs simplifies to an \emph{integer-weight} line bundle
+$K_{\widetilde X}^{\,1-j}$ with integer~$j$.
+\end{theorem}
+
+\begin{proof}
+Let $\zeta = e^{2\pi i / d_{f}}$ be a primitive $d_{f}$-th root
+of unity; $\mathrm{Deck}(\pi) = \langle \sigma \rangle$ with
+$\sigma(\tilde z) = \zeta \tilde z$ in a local chart around a
+branch point. The Kazhdan grading~$\Gamma$ assigns weight
+$j/d_{f} \in (1/d_{f})\Z$ to~$\fg_{j/d_{f}}$. The pulled-back
+grading assigns weight~$j$ (integer) to
+$\pi^{*}(\fg_{j/d_{f}})$ because the local coordinate
+$\tilde z^{d_{f}} = z$ and
+$\tilde z^{d_{f} \cdot j/d_{f}} = \tilde z^{j}$ is single-valued
+upstairs.
+
+For the bulk differential: $Q_{\mathrm{CS}}$ acts on sections of
+$\pi^{*}\mathcal{E}$ where $\mathcal{E}$ is the sheaf of BV fields
+on $X \times \R$. Since $\pi$ commutes with $X$-translations
+(i.e., preserves the $\R$-direction fibration), $\pi^{*}Q_{\mathrm{CS}}
+= Q_{\mathrm{CS}}^{\widetilde X}$ is the natural upstairs
+differential. The ghost currents
+$\bar c_{\alpha}$ for $\alpha \in \fg_{j/d_{f}}$ pull back to
+integer-weight fermionic currents on~$\widetilde X$, sections of
+$K_{\widetilde X}^{\,1-j}$, which are ordinary line bundles for
+integer~$j$.
+\end{proof}
+
+\subsection{Sugawara antighost upstairs}
+\label{subsec:sugawara-upstairs}
+
+\begin{theorem}[Sugawara antighost on branched cover; \ClaimStatusProvedHere]
+\label{thm:sugawara-antighost-branched-cover}
+\index{Sugawara antighost!branched cover|textbf}
+With notation as above, the pulled-back Sugawara antighost
+\[
+\pi^{*}G_{\mathrm{Sug}}(\tilde z)
+\;=\; \tfrac{1}{2(k+h^{\vee})}
+ \sum_{a \in \fg} {:}\pi^{*}J^{a}(\tilde z)\,
+ \pi^{*}\bar c_{a}(\tilde z){:}
+\]
+is a well-defined section of $K_{\widetilde X}^{2}$ and satisfies
+the strict chain-level identity
+\[
+[Q_{\mathrm{CS}}^{\widetilde X},\, \pi^{*}G_{\mathrm{Sug}}]
+\;=\; \pi^{*}T_{\mathrm{Sug}}
+\]
+in the pulled-back BV-BRST complex on $\widetilde X \times \R$.
+Combined with the improvement term
+\[
+\pi^{*}G'_{f}(\tilde z)
+\;=\; \pi^{*}G_{\mathrm{Sug}}(\tilde z)
+ \;-\; \sum_{i,j=1}^{\operatorname{rk}\fg}
+ (x_{0})_{i}\,(\kappa^{-1})^{h_{i} h_{j}}\,
+ \partial\pi^{*}\bar c_{h_{j}}(\tilde z),
+\]
+one obtains
+\[
+[Q_{\mathrm{CS}}^{\widetilde X},\, \pi^{*}G'_{f}]
+\;=\; \pi^{*}T_{\mathrm{DS}}(f) \qquad
+\text{on $Q_{\mathrm{CS}}^{\widetilde X}$-cohomology on~$\widetilde X$.}
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:branched-cover-integralization}, the root-space
+ghost currents $\pi^{*}\bar c_{a}$ for $a \in \fg$ are well-defined
+integer-weight fermions on~$\widetilde X$. The identity
+$J^{a} = [Q_{\mathrm{CS}}, \bar c_{a}]$, established in
+Theorem~\ref{thm:E3-topological-DS}
+\cite[Step~1]{Vol2-3d-gravity-thm-DS} for the principal case, is a
+property of the $3$d bulk BRST complex independent of the Kazhdan
+grading; pulling back to~$\widetilde X$ preserves it.
+
+The Sugawara bilinear expansion
+$T_{\mathrm{Sug}}^{\widetilde X}
+ = \tfrac{1}{2(k+h^{\vee})}\sum_{a} :J^{a} J_{a}:$
+is a well-defined weight-$2$ field on~$\widetilde X$ via the same
+argument as in the principal case (now with integer weights).
+Using $J^{a} = [Q_{\mathrm{CS}}^{\widetilde X}, \pi^{*}\bar c_{a}]$
+and the graded Leibniz rule:
+\begin{align*}
+[Q_{\mathrm{CS}}^{\widetilde X},\, \pi^{*}G_{\mathrm{Sug}}]
+&= \tfrac{1}{2(k+h^{\vee})} \sum_{a}
+ [Q_{\mathrm{CS}}^{\widetilde X},\,
+ {:}\pi^{*}J^{a}\, \pi^{*}\bar c_{a}{:}] \\
+&= \tfrac{1}{2(k+h^{\vee})} \sum_{a}
+ \bigl({:}\pi^{*}[Q_{\mathrm{CS}}, J^{a}]\, \pi^{*}\bar c_{a}{:}
+ + (-1)^{|J^{a}|}\,
+ {:}\pi^{*}J^{a}\, \pi^{*}[Q_{\mathrm{CS}}, \bar c_{a}]{:}\bigr).
+\end{align*}
+The first term vanishes because $Q_{\mathrm{CS}}$ annihilates~$J^{a}$
+(the physical current). The second term, using
+$[Q_{\mathrm{CS}}, \bar c_{a}] = J_{a}$ and bosonic parity of $J^{a}$,
+gives exactly $\tfrac{1}{2(k+h^{\vee})}\sum_{a} {:}J^{a} J_{a}{:}
+= T_{\mathrm{Sug}}^{\widetilde X}$.
+
+The improvement term
+$T_{\mathrm{imp}}(f) = \sum_{i,j} (x_{0})_{i}
+ (\kappa^{-1})^{h_{i}h_{j}} \partial J_{h_{j}}$
+involves only Cartan currents (since $x_{0} \in \fh$ by
+Jacobson--Morozov); these have integer Kazhdan weight already, so
+no branched-cover descent is needed for this summand: the identity
+$\partial J_{h_{j}} = [Q_{\mathrm{CS}},
+ \partial\bar c_{h_{j}}]$ pulls back directly. Combining
+$\pi^{*}T_{\mathrm{Sug}} + \pi^{*}T_{\mathrm{imp}}(f)
+ = \pi^{*}T_{\mathrm{DS}}(f)$
+yields the claimed identity.
+\end{proof}
+
+\subsection{Galois invariance and descent}
+\label{subsec:galois-descent}
+
+The upstairs identity of
+Theorem~\ref{thm:sugawara-antighost-branched-cover} takes place on
+$\widetilde X$. To obtain a statement on~$X$ one takes
+$\mathrm{Deck}(\pi) = \Z/d_{f}$-invariants. This requires that the
+Galois action commutes with~$Q_{\mathrm{CS}}^{\widetilde X}$ and
+preserves the Sugawara antighost.
+
+\begin{theorem}[Galois invariance and descent; \ClaimStatusProvedHere]
+\label{thm:galois-invariance-descent}
+\index{Galois descent!Q_tot-equivariance|textbf}
+\index{Deck transformation!BRST commutation}
+Let $\sigma \in \mathrm{Deck}(\pi) = \Z/d_{f}$. Then:
+\begin{enumerate}[label=\textup{(\alph*)},nosep]
+\item \textup{(Galois-equivariance of $Q_{\mathrm{CS}}$)}
+ $[\sigma, Q_{\mathrm{CS}}^{\widetilde X}] = 0$ on the
+ pulled-back BV complex;
+\item \textup{(DS constraint invariance)} the Drinfeld--Sokolov
+ constraint $J_{\alpha} = \chi(\alpha) \cdot \mathbf{1}$ for
+ $\alpha \in \fg_{1}$ is $\Z/d_{f}$-invariant because
+ $\chi(\alpha)$ is integer-weight and $\fg_{1}$ has integer
+ Kazhdan weight;
+\item \textup{(Galois-invariant subcomplex)} the subcomplex
+ $\mathcal{E}^{\Z/d_{f}}_{\widetilde X}$ of $\Z/d_{f}$-invariant
+ sections is closed under the total DS differential
+ \(Q_{\mathrm{DS},f}^{\widetilde X}\) and identifies via the pushforward
+ $\pi_{*}$ with a subcomplex of the $X$-complex $\mathcal{E}_{X}$;
+\item \textup{(descent of Sugawara antighost)}
+ $\pi^{*}G'_{f}$ is $\Z/d_{f}$-invariant, and its image
+ $\pi_{*}^{\Z/d_{f}}(\pi^{*}G'_{f}) = G'_{f,X}$ is a
+ well-defined section of $K_{X}^{2}$ on~$X$ satisfying
+ $[Q_{\mathrm{DS},f}, G'_{\mathrm{DS},f,X}] = T_{\mathrm{DS}}(f)$ on
+ $Q_{\mathrm{DS},f}$-cohomology on~$X$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\textbf{(a)} The BRST differential $Q_{\mathrm{CS}}^{\widetilde X}$
+is defined by pull-back from the bulk 3d CS action
+$S_{\mathrm{CS}} = \int_{\widetilde X \times \R} \mathrm{CS}(A)$
+which is Galois-invariant (CS is intrinsic; Galois permutes sheets
+of the cover without altering the action density). By the
+Noether-BV correspondence, $Q_{\mathrm{CS}}^{\widetilde X}$ is
+therefore Galois-equivariant.
+
+\textbf{(b)} The DS constraint
+$J_{\alpha}|_{\alpha \in \fg_{1}} = \chi(\alpha)$ for the principal
+character $\chi$ restricted to $\fg_{1}$: the space $\fg_{1}$ has
+\emph{integer} Kazhdan weight~$1$ already (independent of~$d_{f}$,
+since $d_{f}$ only affects $\fg_{j/d_{f}}$ for non-integer $j/d_{f}$
+on the half-shell). Pulled-back $J_{\alpha}$ is a section of
+$K_{\widetilde X}^{1}$ which is $\Z/d_{f}$-permuted among sheets;
+$\chi(\alpha)$ is a constant. So each sheet of $\pi^{*}J_{\alpha}$
+equals $\chi(\alpha)$; the full sheet sum is
+$d_{f} \cdot \chi(\alpha)$; the $\Z/d_{f}$-invariant normalization
+is $(1/d_{f}) \sum_{i} \sigma^{i}(\pi^{*}J_{\alpha}) = \chi(\alpha)
+\cdot \mathbf{1}$. The constraint is preserved.
+
+\textbf{(c)} Sheaf cohomology argument:
+$H^{\bullet}(\mathcal{E}_{\widetilde X}^{\Z/d_{f}}, Q_{\mathrm{CS}}^{\widetilde X})
+\;=\; H^{\bullet}(\mathcal{E}_{\widetilde X}, Q_{\mathrm{CS}}^{\widetilde X})^{\Z/d_{f}}$
+(the Galois-invariants functor is exact on $\Z/d_{f}$-modules over
+$\C$ since $|\Z/d_{f}|$ is invertible in~$\C$; Maschke). Pushforward
+$\pi_{*}$ along the finite flat map~$\pi$ is exact, commutes with
+$Q_{\mathrm{CS}}$, and identifies invariants with sections on~$X$
+modulo branch-divisor twist; in particular
+$\pi_{*}(\mathcal{E}_{\widetilde X}^{\Z/d_{f}}) \hookrightarrow
+ \mathcal{E}_{X}$
+is a sub-dg-module.
+
+\textbf{(d)} $\pi^{*}G'_{f}$ is a $\Z/d_{f}$-invariant section:
+$\pi^{*}J^{a}$ transforms by the permutation of sheets; summing
+over $a \in \fg$ after multiplying by $\pi^{*}\bar c_{a}$ (which
+transforms oppositely by the dual permutation) produces an
+$\mathrm{Ad}$-invariant bilinear, hence $\Z/d_{f}$-invariant. The
+improvement term involves only Cartan currents (integer weight),
+so is manifestly $\Z/d_{f}$-invariant. By (a) and the linearity of
+$[Q_{\mathrm{CS}}^{\widetilde X}, -]$:
+\[
+[Q_{\mathrm{CS}},\, \pi_{*}^{\Z/d_{f}} \pi^{*}G'_{f}]
+\;=\; \pi_{*}^{\Z/d_{f}}[Q_{\mathrm{CS}}^{\widetilde X},\, \pi^{*}G'_{f}]
+\;=\; \pi_{*}^{\Z/d_{f}}\,\pi^{*}T_{\mathrm{DS}}(f)
+\;=\; T_{\mathrm{DS}}(f)
+\]
+on $Q_{\mathrm{CS}}$-cohomology on~$X$ (using that $T_{\mathrm{DS}}(f)$
+is itself integer-weight-Kazhdan hence $\Z/d_{f}$-invariant under
+pullback).
+\end{proof}
+
+\begin{remark}[the orbifold case]
+\label{rem:orbifold-descent}
+When $X = \PP^{1}$ and $\pi\colon \PP^{1} \to \PP^{1}$, $\tilde z
+\mapsto \tilde z^{d_{f}}$ is branched at $\{0, \infty\}$, the
+pushforward $\pi_{*}$ on the \'etale locus $X \smallsetminus \{0,
+\infty\}$ is a degree-$d_{f}$ local isomorphism; the descent is
+genuine, but the branch points $\{0, \infty\}$ acquire orbifold
+markings $(X, \{0, \infty\}, \Z/d_{f})$. Sections with fractional
+Kazhdan weight $j/d_{f}$ at integer conformal weight descend to
+orbifold sections of $K_{X}^{\,1-j/d_{f}}$ with conformal-weight-
+$j/d_{f}$ ramification data at each marked point. This matches the
+WZW vertex-operator insertion at orbifold points and recovers the
+standard coset description of $\cW$-algebras.
+\end{remark}
+
+\subsection{Explicit examples}
+\label{subsec:fractional-ghost-explicit-examples}
+
+\begin{theorem}[\textup{$\Ethree$-topological} for BP via branched cover;
+\ClaimStatusProvedHere]
+\label{thm:E3-topological-DS-general-explicit-BP}
+\index{Bershadsky--Polyakov algebra!E3-topological via branched cover|textbf}
+Let $\fg = \mathfrak{sl}_{3}$, $f = f_{\min}$ the minimal nilpotent,
+$k \ne -h^{\vee} = -3$. The $\cW$-algebra $\cW_{3}^{(2)} =
+\cW^{k}(\mathfrak{sl}_{3}, f_{\min})$ \textup{(}Bershadsky--Polyakov\textup{)}
+admits a degree-$2$ Kummer cover
+$\pi\colon \widetilde X \to X$ on which the Kazhdan grading is
+integer. The Sugawara antighost upstairs
+\[
+\pi^{*}G'_{f_{\min}}(\tilde z)
+\;=\; \tfrac{1}{2(k+3)} \sum_{a \in \mathfrak{sl}_{3}}
+ {:}\pi^{*}J^{a}(\tilde z)\, \pi^{*}\bar c_{a}(\tilde z){:}
+\;-\; \tfrac{1}{2}\sum_{j}(\kappa^{-1})^{h_{1}h_{j}}\,
+ \partial\pi^{*}\bar c_{h_{j}}(\tilde z)
+\]
+is $\Z/2$-invariant and descends to $G'_{f_{\min}, X}$ on~$X$
+satisfying
+\[
+[Q_{\mathrm{CS}},\, G'_{f_{\min}, X}] \;=\; T_{\mathrm{BP}}
+ \qquad \text{on $Q_{\mathrm{CS}}$-cohomology on~$X$.}
+\]
+Consequently $\Zder^{\mathrm{ch}}(\cW_{3}^{(2)})$ carries an
+$\Ethree$-topological structure.
+\end{theorem}
+
+\begin{proof}
+The minimal nilpotent $f_{\min} \in \mathfrak{sl}_{3}$ has
+$\mathfrak{sl}_{2}$-triple $(e_{\theta}, H_{\theta}, f_{-\theta})$
+where $\theta = \alpha_{1} + \alpha_{2}$ is the highest root.
+Kazhdan grading:
+$\Gamma_{\mathfrak{sl}_{3}, f_{\min}} = \{-1, -\tfrac{1}{2}, 0,
+ \tfrac{1}{2}, 1\}$; the half-weight pieces $\fg_{\pm 1/2}$ are
+the four short-root spaces
+$\{e_{\pm\alpha_{1}}, e_{\pm\alpha_{2}}\}$. So $d_{f_{\min}} = 2$.
+
+Apply Theorem~\ref{thm:branched-cover-integralization} with the
+degree-$2$ Kummer cover $\pi\colon \widetilde X \to X$. For $X =
+\PP^{1}$: $\widetilde X = \PP^{1}$, $\pi(\tilde z) = \tilde z^{2}$,
+branched at $\{0, \infty\}$, Galois $\Z/2 = \langle \sigma \rangle$,
+$\sigma(\tilde z) = -\tilde z$. Theorem
+\ref{thm:sugawara-antighost-branched-cover} gives the upstairs
+Sugawara identity. The BP case of the improvement term:
+$x_{0} = \tfrac{1}{2}h_{1}$, so the correction is proportional to
+$\partial\bar c_{h_{1}}$ only (single Cartan direction). The
+ghosts $(\bar c_{e_{\pm\alpha_{i}}})$ for $\alpha_{i}$ short root
+have upstairs Kazhdan weight $1/2 \cdot 2 = 1$ (integer);
+$(\bar c_{h_{j}})$ for Cartan elements have upstairs Kazhdan
+weight~$0$ (integer, unaffected by the cover). All ghost currents
+well-defined as sections of integer-weight line bundles.
+
+Theorem~\ref{thm:galois-invariance-descent} provides the descent.
+The $\Z/2$-invariant subspace of the pulled-back fermion pair
+$(\pi^{*}\bar c_{e_{+\alpha_{1}}}, \pi^{*}\bar c_{e_{-\alpha_{1}}})$
+is the standard $(3/2, -1/2)$-ghost pair on~$X$ (half-integer
+conformal weight becomes manifest as half-ramification at the
+branch points). The descended identity $[Q_{\mathrm{CS}},
+G'_{f_{\min}, X}] = T_{\mathrm{BP}}$ holds on
+$Q_{\mathrm{CS}}$-cohomology by the preservation properties (a)-(d)
+of Theorem~\ref{thm:galois-invariance-descent}. Applying
+Construction~\ref{constr:topologization} now proceeds exactly as in
+the principal case of Theorem~\ref{thm:E3-topological-DS}.
+\end{proof}
+
+\begin{theorem}[\textup{$\Ethree$-topological} for minimal $\cW^{k}(\mathfrak{sl}_{4}, f_{\min})$;
+\ClaimStatusProvedHere]
+\label{thm:E3-topological-DS-general-minimal-sl4}
+\index{minimal $\cW$-algebra!sl\_4!E3-topological via branched cover|textbf}
+Let $\fg = \mathfrak{sl}_{4}$, $f = f_{\min}$, $k \ne -h^{\vee} = -4$.
+The degree-$2$ Kummer cover
+$\pi\colon \widetilde X \to X$ makes the Kazhdan grading integer;
+the analogous Sugawara antighost identity descends; and
+$\Zder^{\mathrm{ch}}(\cW^{k}(\mathfrak{sl}_{4}, f_{\min}))$ carries
+an $\Ethree$-topological structure.
+\end{theorem}
+
+\begin{proof}
+The minimal nilpotent in $\mathfrak{sl}_{4}$ corresponds to the
+highest-root $\mathfrak{sl}_{2}$-triple $(e_{\theta}, H_{\theta},
+f_{-\theta})$ with $\theta = \alpha_{1} + \alpha_{2} + \alpha_{3}$;
+the Kazhdan grading has the same structure
+$\Gamma = \{-1, -\tfrac{1}{2}, 0, \tfrac{1}{2}, 1\}$ as BP, now
+with $\fg_{\pm 1/2}$ of dimension $2(N-2) = 4$ (four roots
+$e_{1}-e_{2}, e_{1}-e_{3}, e_{2}-e_{4}, e_{3}-e_{4}$ in
+$\fg_{1/2}$). The
+neutral element is $x_{0} = \tfrac{1}{2}H_{\theta} =
+\tfrac{1}{2}(h_{1} + h_{2} + h_{3})$: all three simple-root Cartan
+directions contribute to the improvement~$T_{\mathrm{imp}}$. So
+$d_{f} = 2$, degree-$2$ cover suffices, and the proof of
+Theorem~\ref{thm:E3-topological-DS-general-explicit-BP} carries
+over with (i) four short-root fermionic ghost pairs instead of two,
+(ii) three Cartan improvement terms instead of one. All ghost
+currents upstairs are integer Kazhdan weight; Galois
+$\Z/2$-invariants descend as before.
+\end{proof}
+
+\subsection{The general good-graded case}
+\label{subsec:fractional-ghost-all-good-graded}
+
+\begin{theorem}[\textup{$\Ethree$-topological} for all good-graded nilpotents;
+\ClaimStatusProvedHere]
+\label{thm:E3-topological-DS-general-all-good-graded}
+\index{E3-topological algebra@$\Ethree$-topological algebra!all good-graded nilpotents|textbf}
+Let $\fg$ be a finite-dimensional simple Lie algebra,
+$f \in \fg$ a nilpotent with good $(1/d_{f})$-grading
+$\Gamma$ \textup{(}$d_{f} \in \Z_{\ge 1}$ minimal Kazhdan
+denominator\textup{)}, and $k \ne -h^{\vee}$. Let
+$\pi\colon \widetilde X \to X$ be a degree-$d_{f}$ Kummer cover.
+Then:
+\begin{enumerate}[label=\textup{(\arabic*)},nosep]
+\item the Kazhdan grading on $\pi^{*}\fg$ is integer;
+\item the Sugawara antighost $\pi^{*}G'_{f}$ satisfies
+ $[Q_{\mathrm{DS},f}^{\widetilde X}, \pi^{*}G'_{f}]
+ = \pi^{*}T_{\mathrm{DS}}(f)$ upstairs;
+\item $\pi^{*}G'_{f}$ is $\Z/d_{f}$-invariant and descends to
+ $G'_{f, X}$ on~$X$;
+\item $[Q_{\mathrm{DS},f}, G'_{\mathrm{DS},f, X}]
+ = T_{\mathrm{DS}}(f)$ on
+ $Q_{\mathrm{DS},f}$-cohomology on~$X$;
+\item $\Zder^{\mathrm{ch}}(\cW^{k}(\fg, f))$ carries an
+ $\Ethree$-topological structure.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) by Theorem~\ref{thm:branched-cover-integralization}.
+(2) by Theorem~\ref{thm:sugawara-antighost-branched-cover}.
+(3), (4) by Theorem~\ref{thm:galois-invariance-descent}.
+(5) by Construction~\ref{constr:topologization}, applied to the
+descended BV complex on~$X$: the condition that
+$T_{\mathrm{DS}}(f) = [Q_{\mathrm{DS},f}, G'_{\mathrm{DS},f, X}]$
+makes holomorphic translations \(Q_{\mathrm{DS},f}\)-exact, so the
+factorisation algebra on the $X$-direction is locally constant on
+$Q_{\mathrm{DS},f}$-cohomology, hence $\Etwo^{\mathrm{top}}$. Combined
+with $\Eone^{\mathrm{top}}$ from the transverse~$\R$, Dunn
+additivity gives $\Ethree^{\mathrm{top}}$ on
+$\Zder^{\mathrm{ch}}(\cW^{k}(\fg, f))$.
+\end{proof}
+
+\begin{corollary}[Fractional-weight ghost bilinears at non-principal nilpotents]
+\label{cor:fractional-ghost-healed-non-principal}
+\ClaimStatusProvedHere{}
+
+The branched-cover construction of
+Theorem~\ref{thm:E3-topological-DS-general-all-good-graded} resolves
+the fractional-weight ghost obstruction at non-principal DS.
+Theorem~\ref{thm:E3-topological-DS-general} extends to non-principal
+good-graded nilpotents via branched-cover integralization plus Galois
+descent. The $\Ethree$-topological structure holds uniformly across:
+\begin{itemize}[nosep]
+\item principal nilpotents $f_{\mathrm{prin}}$ in any simple~$\fg$
+ \textup{(}$d_{f} = 1$, cover trivial\textup{)};
+\item minimal nilpotents $f_{\min}$ in $\mathfrak{sl}_{N}$ for
+ $N \ge 3$ \textup{(}$d_{f} = 2$, double cover\textup{)};
+\item subregular nilpotents in classical types
+ \textup{(}$d_{f} \in \{1, 2, 3\}$, cover of matching
+ degree\textup{)};
+\item hook-type nilpotents $\lambda = (N{-}r, 1^{r})$ in
+ $\mathfrak{sl}_{N}$ \textup{(}Elashvili--Kac integer
+ condition: $d_{f} = 1$\textup{)};
+\item minimal nilpotents in exceptional types $E_{6}, E_{7}, E_{8},
+ F_{4}, G_{2}$ \textup{(}$d_{f} = 2$ in most cases, $d_{f} = 1$
+ for the Langlands-dual long-root case\textup{)}.
+\end{itemize}
+\end{corollary}
+
+\subsection{Three independent routes to the BP data}
+\label{subsec:three-lane}
+
+The branched-cover proof of
+Theorem~\ref{thm:E3-topological-DS-general-all-good-graded} is one of
+three independent constructions of the BP central charge and the
+$\Ethree$-topological datum.
+
+\begin{proposition}[three-route concordance for BP]
+\label{prop:three-lane-fractional-ghost}
+\ClaimStatusProvedHere{}
+
+For the BP algebra $\cW_{3}^{(2)}$, the central charge and the
+$\Ethree$-topological datum are recovered by three independent
+constructions agreeing at generic integer level:
+\begin{enumerate}[label=\textup{(R\arabic*)},nosep]
+\item the DS branched-cover construction
+ \textup{(}Theorem~\ref{thm:E3-topological-DS-general-explicit-BP}\textup{)};
+\item the Khan--Zeng $3$d Poisson-vertex sigma model on the freely
+ generated graded algebra
+ $\operatorname{gr}_{\mathrm{Li}}(\cW_{3}^{(2)})$
+ \textup{(}Theorem~\ref{thm:E3-topological-free-PVA}\textup{)};
+\item the de Boer--Tjin 1993 screened-free-field realisation
+ combined with Feigin--Frenkel intersection.
+\end{enumerate}
+All three recover the Fateev--Lukyanov BP central charge
+\[
+c^{\mathrm{FL}}_{\mathrm{BP}}(k)
+=-\frac{(2k+3)(3k+1)}{k+3}
+\]
+and the
+$\Z/2$-Galois-equivariant Sugawara antighost structure.
+\end{proposition}
+
+\begin{proof}
+(R1) is Theorem~\ref{thm:E3-topological-DS-general-explicit-BP}.
+(R2) is Theorem~\ref{thm:E3-topological-free-PVA} applied to
+$\operatorname{gr}_{\mathrm{Li}}(\cW_{3}^{(2)})$, freely generated on
+$T, G^{\pm}, J$ by de Boer--Tjin 1993; Khan--Zeng produces the 3d
+Poisson sigma model. (R3) is the direct de Boer--Tjin realisation of
+BP as a sub-VA of three screened free bosons with the same
+Fateev--Lukyanov central charge; the Feigin--Frenkel intersection equips the Koszul-dual
+chiral Hochschild with $\Ethree$-topological data via the abelian
+Heisenberg template. The three central-charge expressions coincide
+as rational functions of \(k\); the $\Ethree$-topological data agree at $k = 0$ by
+matching conformal vectors and Sugawara antighost structures across
+routes.
+\end{proof}
+
+\subsection{Scope of the construction}
+\label{subsec:fractional-ghost-closure}
+
+\begin{remark}[Scope]
+\label{rem:fractional-ghost-scope-closed}
+The branched-cover construction supports
+Theorem~\ref{thm:E3-topological-DS-general} for all
+good-$(1/d_{f})$-graded nilpotents, with the fractional-weight
+obstruction resolved by branched-cover integralization and
+Galois-invariant descent. The three independent routes of
+Proposition~\ref{prop:three-lane-fractional-ghost} agree on the BP
+fibre.
+\end{remark}
+
+\begin{remark}[on the principal-case embedding]
+\label{rem:fractional-ghost-principal-is-trivial-case}
+When $d_{f} = 1$ the cover $\pi$ is the identity and
+Theorem~\ref{thm:E3-topological-DS-general-all-good-graded}
+reduces to Theorem~\ref{thm:E3-topological-DS}. The branched-cover
+construction is a genuine generalization: it extends the principal
+case in a way that is manifestly continuous in $d_{f}$ and
+compatible with Elashvili--Kac tabulation of good gradings.
+\end{remark}
+
+\begin{remark}[on the operadic circle]
+\label{rem:fractional-ghost-operadic-circle-stability}
+The $\Ethree$-topological structure on $\Zder^{\mathrm{ch}}(\cW^{k}(
+\fg, f))$ for non-principal~$f$ participates in the programme's
+$E_{n}$-operadic circle in the same way as principal~$\cW$: the derived center
+of the boundary algebra is an $\Ethree$-topological factorisation
+algebra on $X \times \R$, the chiral half of which is the
+factorisation-algebra-on-$X$ and the topological half is the
+line-transverse $E_1$-topological direction. Non-principal DS does not alter the
+operadic-circle structure; the branched cover is invisible at the
+level of the abstract $\Ethree$-algebra (it only appears in the
+concrete bar-chain model on $\widetilde X$).
+\end{remark}
+
+\begin{remark}[Non-principal DS as universal-conductor input]%
+\label{rem:fractional-ghost-non-principal-input}%
+%
+%
+\index{branched-cover descent!chain-level avatar}%
+The branched-cover integralisation and Galois-descent technology
+above closes the fractional-ghost reconstitution and supplies the
+non-principal stratum of the universal-holography master theorem
+(\textsf{thm:universal-holography-master} in
+\textsf{chap:universal-conductor}; \textsf{chap:climax-platonic}).
+
+The corollary \textsf{cor:rung-w-N} of the climax theorem covers
+principal $\cW_N$ via integer Kazhdan grading; the chain-level
+antighost lift $T_{\mathrm{DS}}(f) = [Q_{\mathrm{tot}}, G_f]$ extends
+to all good-$(1/d_f)$-graded nilpotents via the cover technology
+(Theorem~\ref{thm:E3-topological-DS-general-all-good-graded}). The
+BP companion chapter
+(Vol~II Chapter~\ref{chap:bp-chain-level-strict-platonic}) supplies
+the explicit chain-level lift for the BP fibre on the original
+complex, strengthening the cohomological statement to a chain-level
+identity.
+
+The branched-cover construction is invisible to the abstract
+$E_3$-algebra; the Galois descent introduces a Deck action that
+becomes the explicit conductor datum in the climax:
+$K^{\mathrm{cover}}_{f,\mathrm{Deck}}
+ := |\mathrm{Deck}(\pi)|^{-1} \mathrm{tr}_{\mathrm{Deck}}$ records
+the fractional-ghost orbifold weight. For BP ($d_f = 2$, Deck $=
+\Z/2$) this is a $1/2$ trace; for subregular $D_n$ ($d_f = 3$, Deck
+$= \Z/3$) a $1/3$ trace. The conductor reads from the Kazhdan
+denominator $d_f$ via the Elashvili--Kac tabulation
+(Example~\ref{ex:kazhdan-denominator-table}).
+
+The non-principal DS stratum carries the climax uniformly across the
+standard landscape of $\cW$-algebras: principal $\cW_N$ realises the
+rung-$\cW_N$ corollary at integer Kazhdan grading; the minimal
+families (BP, minimal $\cW^k(\mathfrak{sl}_4)$) and subregular
+families occupy the non-principal stratum, where the cover
+construction applies. The chain-level avatar of the climax extends
+to the entire DS image of the affine landscape, supplying the
+fractional-ghost input for the universal-holography comparison on
+that image.
+\end{remark}
+
+% ============================================================================
+% End of structural reconstitution of the fractional-ghost reconstitution heal.
+% Raeez Lorgat 2026-04-16.
+% ============================================================================

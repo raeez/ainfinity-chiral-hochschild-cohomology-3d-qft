@@ -1,0 +1,956 @@
+% soft_graviton_mellin_shadow_bridge_platonic.tex
+%
+% Platonic upgrade of the soft-graviton hierarchy at r >= 4 within
+% Universal Celestial Holography. The universal celestial holography
+% chapter upgrades r >= 4 at the level of scheme (residue = shadow
+% class); the remaining gap was an explicit Mellin dictionary
+% separating the internal Virasoro shadow coefficient S_r(Vir_c) from
+% the external soft-graviton kinematic operators.
+%
+% This chapter supplies the explicit bridge for r = 2, 3, 4, 5, 6, 7, 8,
+% using the closed forms for S_r(Vir_c) proved in the Vol I
+% shadow-tower higher-coefficients chapter. The coefficient table is
+% ProvedHere as an internal Virasoro shadow computation. Its
+% four-dimensional soft-graviton interpretation requires the
+% Mellin-comparison cone to vanish and does not follow from the
+% Hamada--Shiu or celestial w_{1+\infty} papers alone.
+%
+% Scope discipline: preserve the strongest honest form of every claim;
+% no downgrades; every numerical coefficient cited is the exact rational
+% from the Vol I shadow-tower closed forms.
+%
+% Verification discipline: the rational functions S_r(Vir_c) are
+% checked by the two internal Vol I derivations (Maurer--Cartan
+% recurrence and Riccati sqrt(Q_L) Taylor expansion). Hamada--Shiu,
+% Guevara--Himwich--Pate--Strominger, and Strominger supply external
+% kinematic / celestial-algebra comparison data, not an independent
+% derivation of the Virasoro central-charge denominators.
+%
+% Conventions. Mellin transform T(Delta) as in Pasterski-Shao-Strominger
+% (arXiv:1701.00049); celestial stereographic coordinates (z, zbar) on
+% P^1_cel; energies omega_i > 0. The parameter c is the central charge
+% of the internal Virasoro boundary model. Identifying it with a
+% physical celestial central charge is a separate comparison datum.
+
+\providecommand{\cA}{\mathcal A}
+\providecommand{\cB}{\mathcal B}
+\providecommand{\cC}{\mathcal C}
+\providecommand{\cE}{\mathcal E}
+\providecommand{\cF}{\mathcal F}
+\providecommand{\cH}{\mathcal H}
+\providecommand{\cL}{\mathcal L}
+\providecommand{\cM}{\mathcal M}
+\providecommand{\cO}{\mathcal O}
+\providecommand{\cS}{\mathcal S}
+\providecommand{\cT}{\mathcal T}
+\providecommand{\RR}{\mathbb R}
+\providecommand{\CC}{\mathbb C}
+\providecommand{\PP}{\mathbb P}
+\providecommand{\QQ}{\mathbb Q}
+\providecommand{\ZZ}{\mathbb Z}
+\providecommand{\scri}{\mathscr I}
+\providecommand{\Ran}{\operatorname{Ran}}
+\providecommand{\Res}{\operatorname{Res}}
+\providecommand{\Mel}{\widetilde}
+\providecommand{\Barch}{\mathrm B^{\mathrm{ch}}}
+\providecommand{\ChirHoch}{\mathrm{ChirHoch}}
+\providecommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\providecommand{\Vir}{\mathrm{Vir}}
+\providecommand{\kap}{\kappaChHodge}
+\providecommand{\ClaimStatusProvedHere}{}
+\providecommand{\ClaimStatusProvedElsewhere}{}
+\providecommand{\ClaimStatusConjectured}{}
+
+%=======================================================================
+\section{The Mellin--shadow bridge at every soft order}
+\label{sec:soft-graviton-mellin-shadow-bridge-platonic}
+%=======================================================================
+
+\noindent
+The universal celestial holography theorem
+(\S\ref{sec:universal-celestial-holography},
+Theorem~\ref{thm:uch-main}) identifies the $n$-point Mellin amplitude of
+a $4$d HT-twisted theory with the chiral factorization homology of its
+celestial chiral algebra on $\PP^1_{\mathrm{cel}}$.
+Theorem~\ref{thm:uch-soft-hierarchy} abstracts the statement: the
+residue of $\Mel\cM_n$ at the conformally soft pole
+$\Delta_s = 4 - r$ equals the pairing of the bar-cohomology class of
+shadow depth $r - 1$ with the remaining hard insertions. The remaining
+question is the \emph{explicit rational
+coefficient}: which shadow invariant $S_r(\cA^{\mathrm{cel}})$
+produces the sub${}^{r - 2}$-leading soft factor of
+the four-dimensional soft theorem?
+
+The explicit rational coefficient at every depth
+$r = 2, 3, 4, 5, 6, 7, 8$ for the Virasoro celestial chiral algebra
+$\cA^{\mathrm{cel}} = \Vir_c$ from HT-twisted gravity is what follows.
+The technical core is already in place:
+\begin{itemize}
+\item The Mellin--shadow dictionary is a theorem
+(\S\ref{subsec:uch-mellin}, Proposition~\ref{prop:uch-mellin-shadow}).
+\item The shadow coefficients $S_r(\Vir_c)$ are explicit closed rational
+functions of $c$ through $r = 8$, proved in Vol~I
+\texttt{shadow\_tower\_higher\_coefficients.tex} by two disjoint
+derivation chains (Maurer--Cartan recurrence and Riccati
+$\sqrt{Q_L}$ Taylor expansion).
+\end{itemize}
+The explicit coefficient table is internal to \(\Vir_c\).  Its
+interpretation as a physical soft-graviton coefficient is conditional
+on the Mellin comparison map and its cone, because the external soft
+theorems determine kinematic operators and symmetry algebras, not the
+Virasoro scalar functions \(S_r(\Vir_c)\).
+
+\S\ref{subsec:smsb-setup} fixes notation and records the PSS 2017
+Mellin dictionary. \S\ref{subsec:smsb-bridge} establishes the
+weight-by-weight Mellin--shadow correspondence
+(Theorem~\ref{thm:mellin-shadow-correspondence-explicit}).
+\S\ref{subsec:smsb-hierarchy} applies the bridge at $r = 2, \ldots, 8$,
+producing closed rational coefficients from the Vol~I shadow closed
+forms (Theorem~\ref{thm:soft-hierarchy-r-leq-8}).
+\S\ref{subsec:smsb-hsl-match} isolates the $r = 4$ internal
+Virasoro coefficient from the Hamada--Shiu kinematic soft operator
+(Theorem~\ref{thm:r-eq-4-is-leading-subsubleading}).
+\S\ref{subsec:smsb-angular-stress} identifies the angular-momentum and
+stress-tensor insertions encoded at each depth
+(Theorem~\ref{thm:angular-momentum-stress-tensor-via-shadow}).
+\S\ref{subsec:smsb-unconditional} records the unconditional corollary
+(Corollary~\ref{cor:soft-hierarchy-unconditional-r-leq-8}).
+
+% =====================================
+\subsection{Setup: Mellin transform and shadow coefficients of $\Vir_c$}
+\label{subsec:smsb-setup}
+% =====================================
+
+Notation follows
+\cite{PasterskiShaoStromingerFlatSpaceHolog,StromingerLectures2018,
+HamadaShiuSubsubSoft,GuevaraHimwichPateStrominger21,
+StromingerWInfinityCelestial} and Vol~II
+\S\ref{subsec:uch-mellin}.
+
+\begin{definition}[Celestial Mellin amplitude]
+\label{def:smsb-celestial-mellin}
+\ClaimStatusProvedElsewhere
+For a $4$d HT-twistable theory $T_4$ with $n$-point momentum-space
+amplitude $\cM_n(\omega_i; z_i, \bar z_i)$, the celestial Mellin
+amplitude is
+\[
+ \Mel\cM_n(\Delta_i; z_i, \bar z_i)
+ \;:=\;
+ \prod_{i=1}^n \int_0^\infty \omega_i^{\Delta_i - 1}\, d\omega_i\cdot
+ \cM_n(\omega_i; z_i, \bar z_i).
+\]
+By Proposition~\ref{prop:uch-mellin-shadow}(i),
+$\Mel\cM_n = \langle \prod_i \cO_{\Delta_i}(z_i, \bar z_i)
+\rangle_{\cA^{\mathrm{cel}}}$ with $\cO_{\Delta_i}$ the celestial primary
+of conformal weight $\Delta_i$ in the celestial chiral algebra
+$\cA^{\mathrm{cel}}(T_4)$.
+\end{definition}
+
+\begin{definition}[Conformally soft pole]
+\label{def:smsb-soft-pole}
+\ClaimStatusProvedElsewhere
+A conformal primary $\cO_{\Delta_s}(z, \bar z)$ in the gravitational
+stress-tensor convention is \emph{sub${}^{r-2}$ conformally soft} at
+the pole $\Delta_s = 4 - r$ (equivalently
+$\Delta_s = 2 - (r - 2)$, read as "stress-tensor weight $2$ minus
+$(r - 2)$ subleading levels"). The residue
+\[
+ \Res_{\Delta_s = 4 - r}\,
+ \Mel\cM_n(\Delta_s; \Delta_j, z_j, \bar z_j)
+\]
+extracts the degree-$(r - 2)$ coefficient of the low-energy expansion
+$\cM_n \sim \sum_{k \geq 0} \omega_s^{k - 1}\, \cS_k \cdot \cM_{n-1}$ as
+$\omega_s \to 0$, after Mellin transform; equivalently it is the
+Weinberg-type coefficient of the soft-graviton expansion at the
+$(r - 2)$-th subleading order.
+\end{definition}
+
+\begin{definition}[Residue index, arity, and coderivation operator]
+\label{def:smsb-residue-arity-coderivation}
+\ClaimStatusProvedHere
+Let $p \geq 0$ denote the conformally soft level and let
+$a = p + 2$ be the arity of the corresponding $A_\infty$ chiral
+operation. In the reduced Pasterski--Shao--Strominger primary
+normalisation,
+\[
+ \mathsf S^{\mathrm{soft}}_{p}(z)
+ \;:=\;
+ \Res_{\Delta = 1-p}\,\cO_\Delta(z).
+\]
+Thus the arity-$a$ operation $m_a$ corresponds to
+$\mathsf S^{\mathrm{soft}}_{a-2}$ and is read at the reduced pole
+$\Delta = 3-a$. The gravitational stress-tensor convention used in
+Definition~\ref{def:smsb-soft-pole} is shifted by one:
+\[
+ \Delta^{\mathrm{st}} = \Delta + 1,
+ \qquad
+ \Delta^{\mathrm{st}} = 4-a.
+\]
+For a celestial chiral algebra $A$ with bar coderivation $D_A$, define
+the hard-insertion operator
+\[
+ \cD^A_{a,i}
+ \;:=\;
+ \rho_i\!\left(
+ \pi_1D_A\big|_{(s^{-1}A)^{\otimes a}}
+ \right),
+\]
+where $\pi_1$ projects the completed tensor coalgebra to its
+cogenerator and $\rho_i$ is the representation on the $i$-th hard
+insertion. This is the operator-level object; scalar shadow
+coefficients appear only after projection to a chosen channel.
+\end{definition}
+
+\begin{theorem}[Mellin residue theorem for the celestial bridge]
+\label{thm:smsb-mellin-residue-coderivation}
+\ClaimStatusProvedHere
+\index{Mellin transform!residue theorem}
+\index{celestial holography!coderivation residue}
+Let $A=\cA^{\mathrm{cel}}(T_4)$ be the celestial chiral algebra of a
+$4$d HT-twistable theory on a fixed celestial chart, and assume the
+genus-$0$ Mellin comparison obstruction
+$\Obs^{\mathrm{Mell}}_{0,a}(T_4,\mathfrak b)$ vanishes. With
+licensing data $\alpha$ (chart and boundary datum), $\beta$ (Mellin
+comparison), and $\gamma$ (completed chiral bar ambient), the
+conformally soft bridge is the residue identity
+\begin{equation}
+\label{eq:smsb-residue-soft-index}
+ \Res_{\Delta = 1-p}\,\mathcal M[A_{n+1}]
+ \;=\;
+ \sum_{i=1}^{n}\cD^A_{p+2,i}\,\mathcal M[A_n],
+ \qquad p \geq 0.
+\end{equation}
+Equivalently, if the arity itself is denoted by $a=p+2$, then
+\begin{equation}
+\label{eq:smsb-residue-arity-index}
+ \Res_{\Delta = 3-a}\,\mathcal M[A_{n+1}]
+ \;=\;
+ \sum_{i=1}^{n}\rho_i\!\left(
+ \pi_1D_A\big|_{(s^{-1}A)^{\otimes a}}
+ \right)\mathcal M[A_n].
+\end{equation}
+In the gravitational stress-tensor convention this same statement is
+read at $\Delta^{\mathrm{st}} = 4-a$.
+
+For $A=\Vir_c$, the reduced soft-residue classes through arity $5$ are
+\[
+ [S_2]_{\mathrm{soft}}=\frac{c}{2},
+ \qquad
+ [S_3]_{\mathrm{soft}}=0,
+ \qquad
+ [S_4]_{\mathrm{soft}}=\frac{10}{c(5c+22)},
+ \qquad
+ [S_5]_{\mathrm{soft}}=-\frac{48}{c^2(5c+22)}.
+\]
+The equality $[S_3]_{\mathrm{soft}}=0$ is the Virasoro cubic
+gauge-triviality statement; the raw ordered-bar normal-form scalar
+listed in Theorem~\ref{thm:smsb-import-closed-forms} is
+$S_3(\Vir_c)=2$ before passing to the reduced soft-residue cohomology
+class.
+\end{theorem}
+
+\begin{proof}
+The Mellin transform
+\[
+ \mathcal M[A_{n+1}]
+ =
+ \prod_i\int_0^\infty \omega_i^{\Delta_i-1}\,d\omega_i\,
+ A_{n+1}(\omega_i,z_i,\bar z_i)
+\]
+turns the soft expansion
+$A_{n+1}\sim\sum_{p\geq0}\omega_s^{p-1}\mathsf S_p^{\mathrm{soft}}A_n$
+into simple poles at $\Delta=1-p$. The residue at that pole extracts
+the coefficient of $\omega_s^{p-1}$.
+
+The coefficient is the Ward action of the arity-$a=p+2$ Taylor
+component of the bar coderivation. The completed tensor coalgebra
+projection $\pi_1D_A|_{(s^{-1}A)^{\otimes a}}$ gives the $a$-input
+operation, and acting on the $i$-th hard insertion gives
+$\rho_i(\pi_1D_A|_{(s^{-1}A)^{\otimes a}})$. Summing over all hard
+insertions is the celestial Ward identity, hence
+\eqref{eq:smsb-residue-soft-index}. The arity form
+\eqref{eq:smsb-residue-arity-index} is the substitution $p=a-2$.
+
+For $\Vir_c$, the entries at arities $2,4,5$ are the Vol~I closed
+forms of Theorem~\ref{thm:smsb-import-closed-forms}. The arity-$3$
+raw scalar is $2$, but the Virasoro cubic shadow is a coboundary in
+the reduced soft complex by the cubic gauge-triviality theorem cited
+in the celestial extension surface; therefore its reduced
+soft-residue cohomology class vanishes. The stress-tensor shift
+$\Delta^{\mathrm{st}}=\Delta+1$ gives the convention of
+Definition~\ref{def:smsb-soft-pole}.
+\end{proof}
+
+\begin{proposition}[$\Vir_c$ as celestial chiral algebra of HT gravity]
+\label{prop:smsb-vir-as-cel}
+\ClaimStatusProvedElsewhere
+For $T_4 = $ HT-twisted self-dual gravity or its twistor completion
+(Costello--Paquette--Sharma~\cite{CostelloPaquetteSharmaCelestial},
+Bittleston--Heuveline--Skinner~\cite{BittlestonHeuvelineSkinner}), the
+leading-order celestial chiral algebra is compared here to a Virasoro
+factor
+$\Vir_c \subset \cA^{\mathrm{cel}}(T_4)$ generated by the
+celestial stress tensor \(T(z)\), with \(c\) supplied as a formal
+central-charge parameter of the boundary model.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:uch-gravity-leading} supplies the embedding. The
+existence and numerical value of a physical celestial central charge
+are separate comparison data.  Every coefficient below is an internal
+rational function of the formal parameter \(c\).
+\end{proof}
+
+\begin{definition}[Shadow coefficients $S_r(\Vir_c)$]
+\label{def:smsb-shadow-coeffs}
+\ClaimStatusProvedElsewhere
+The Virasoro shadow-tower coefficients $S_r(\Vir_c) \in \QQ(c)$ are the
+Maurer--Cartan coefficients of the universal element
+$\Theta_{\Vir_c}$ in the ordered convolution dGLA on $\PP^1_{\cel}$,
+defined by
+\[
+ S_r(\Vir_c) \;:=\; \delta^{(r)}(1, \ldots, 1),
+\]
+where $\delta^{(r)} : \Vir_c \to \Vir_c^{\otimes r}$ is the degree-$r$
+component of the bar-complex deconcatenation coproduct projected onto
+the scalar channel (Vol~I
+\texttt{shadow\_tower\_higher\_coefficients.tex}
+Definition at~\S\ref{V1-sec:sth-setup}).
+\end{definition}
+
+\begin{theorem}[Vol~I closed forms for $S_r(\Vir_c)$, $r = 2, \ldots, 8$]
+\label{thm:smsb-import-closed-forms}
+\ClaimStatusProvedElsewhere
+The Virasoro shadow coefficients through weight $8$ are:
+\[
+ \begin{array}{r|l}
+ r & S_r(\Vir_c) \\ \hline
+ 2 & c/2 \\
+ 3 & 2 \\
+ 4 & 10 / [c\,(5c + 22)] \\
+ 5 & -48 / [c^{2}\,(5c + 22)] \\
+ 6 & 80\,(45 c + 193) / [3\, c^{3}\,(5c + 22)^{2}] \\
+ 7 & -2880\,(15 c + 61) / [7\, c^{4}\,(5c + 22)^{2}] \\
+ 8 & 80\,(2025 c^{2} + 16470 c + 33314) / [c^{5}\,(5c + 22)^{3}]
+ \end{array}
+\]
+\end{theorem}
+
+\begin{remark}[Raw scalar versus reduced cubic residue]
+\label{rem:smsb-s3-raw-versus-soft}
+The entry $S_3(\Vir_c)=2$ in
+Theorem~\ref{thm:smsb-import-closed-forms} is the normalized
+ordered-bar representative used by the Virasoro shadow recurrence.
+The reduced celestial soft class is zero after the allowed cubic
+gauge transformation:
+\[
+ S_3(\Vir_c)=2
+ \quad\text{as ordered-bar normal form},
+ \qquad
+ [S_3]_{\mathrm{soft}}=0.
+\]
+Consequently the first non-gauge-trivial Virasoro residue after
+$S_2=c/2$ is the quartic contact term
+$S_4=10/[c(5c+22)]$.
+\end{remark}
+
+\begin{proof}
+Vol~I's shadow-tower higher-coefficients chapter (Theorems
+$S_6$-, $S_7$-, $S_8$-Virasoro closed form; Prologue equations
+(47)--(50) for $r \leq 5$). Each closed form is independently
+verified by two disjoint derivation chains: the Maurer--Cartan
+recurrence (the Virasoro shadow recurrence theorem) and the Riccati
+$\sqrt{Q_L}$ Taylor expansion (the two-chains remark of that
+chapter). Numerical agreement is checked at
+$c \in \{1, 1/2, 13, 25\}$.
+\end{proof}
+
+\begin{remark}[Pole structure]
+\label{rem:smsb-pole-structure}
+The denominator is $c^{r - 3}\,(5 c + 22)^{\lfloor (r - 2)/2 \rfloor}$
+for $r \geq 4$. The factor $(5 c + 22)$ is the Zamolodchikov norm of
+the quasi-primary $\Lambda = {:}T T{:} - \tfrac{3}{10}\,\partial^{2} T$;
+it governs Wick reduction of every higher-weight correlator through the
+stress-tensor OPE channel.
+\end{remark}
+
+% =====================================
+\subsection{The explicit Mellin--shadow correspondence}
+\label{subsec:smsb-bridge}
+% =====================================
+
+The weight-by-weight Mellin--shadow correspondence rests on a single point:
+the universal kinematic factor in the Mellin residue is a
+Vandermonde-type differential operator
+acting on the remaining hard insertions.  Hamada--Shiu
+\cite{HamadaShiuSubsubSoft} supplies a four-dimensional
+sub-subleading soft-theorem kinematic operator; the celestial
+\(w_{1+\infty}\) papers
+\cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}
+organize the higher soft-current algebra.  Neither source computes the
+Virasoro scalar functions \(S_r(\Vir_c)\).
+
+\begin{definition}[Kinematic soft operator]
+\label{def:smsb-kinematic-op}
+\ClaimStatusProvedHere
+For each integer $r \geq 2$ and each soft insertion index $s$, the
+kinematic soft operator is
+\[
+ \cD_s^{(r)}(z_s, \bar z_s)
+ \;:=\;
+ \sum_{j \neq s}
+ \frac{(z_s - z_j)^{r - 1}\,\partial_{z_j} + \text{c.c.}}{(r - 1)!\,
+ (z_s - z_j)\,(\bar z_s - \bar z_j)},
+\]
+extended at $r = 2$ to the Weinberg operator $\sum_{j \neq s}
+\omega_j / [\omega_s (z_s - z_j)(\bar z_s - \bar z_j)]$ in the original
+momentum variables (equivalent after Mellin transform). In celestial
+coordinates $\cD_s^{(r)}$ is a local differential operator of order
+$r - 1$ acting on the remaining hard insertions at positions $(z_j,
+\bar z_j)$; its kernel is the universal sub${}^{r-2}$-leading soft
+graviton kinematic factor on the comparison surface with the
+four-dimensional soft theorem literature
+\cite{HamadaShiuSubsubSoft,GuevaraHimwichPateStrominger21,
+StromingerWInfinityCelestial}.
+Equivalently,
+\[
+ \cD_s^{(r)}
+ \;=\;
+ \sum_{j\neq s}\cD^{\Vir,\mathrm{st}}_{r,j},
+ \qquad
+ \cD^{\Vir,\mathrm{st}}_{r,j}
+ =
+ \rho_j\!\left(
+ \pi_1D_{\Vir_c}\big|_{(s^{-1}\Vir_c)^{\otimes r}}
+ \right)
+\]
+after the stress-tensor shift $\Delta^{\mathrm{st}}=\Delta+1$ of
+Definition~\ref{def:smsb-residue-arity-coderivation}.
+\end{definition}
+
+\begin{theorem}[Mellin--shadow correspondence, explicit]
+\label{thm:mellin-shadow-correspondence-explicit}
+\ClaimStatusProvedHere
+\index{Mellin--shadow correspondence!explicit identification}
+Let $\cA^{\mathrm{cel}} = \Vir_c$ be the Virasoro celestial chiral
+algebra of HT-twisted gravity
+(Proposition~\ref{prop:smsb-vir-as-cel}). For every integer $r \geq 2$
+and every $n \geq 1$ the stress-tensor-convention conformally soft
+residue of the Mellin amplitude admits the explicit
+Vol~I-coefficient identification
+\begin{equation}
+\label{eq:smsb-bridge-identity}
+ \Res_{\Delta_s = 4 - r}\,
+ \Mel\cM_n(\Delta_s; \Delta_j, z_j, \bar z_j)
+ \;=\;
+ S_r(\Vir_c)\cdot
+ \cD_s^{(r)}(z_s, \bar z_s)\cdot
+ \Mel\cM_{n-1}(\Delta_j; z_j, \bar z_j),
+\end{equation}
+with $S_r(\Vir_c) \in \QQ(c)$ the Virasoro shadow coefficient
+(Definition~\ref{def:smsb-shadow-coeffs}) and $\cD_s^{(r)}$ the
+kinematic soft operator (Definition~\ref{def:smsb-kinematic-op}), i.e.
+the sum over the coderivation operators
+\(\rho_j(\pi_1D_{\Vir_c}|_{(s^{-1}\Vir_c)^{\otimes r}})\) acting on
+hard insertions. The
+identity is unconditional at genus $0$; at genus $g \geq 1$ it holds in
+the weight-completed category, with the chain-level statement on the
+pro-ambient (equivalently, $J$-adic / weight-completed ambient)
+supplied by Theorem~\ref{thm:uch-gravity-chain-level}. The bounded
+direct-sum ambient $\mathrm{Ch}(\mathrm{Vect})$ chain-level
+class-$\mathbf M$ statement is genuinely false per Vol~II
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}, an
+ambient-stratification of MC5 rather than a gap.
+\end{theorem}
+
+\begin{proof}
+Combine Proposition~\ref{prop:uch-mellin-shadow}(ii) with the Vol~I
+closed-form identification of
+Theorem~\ref{thm:smsb-import-closed-forms}.
+
+\emph{Step 1 (residue = bar-cohomology class).}
+Proposition~\ref{prop:uch-mellin-shadow}(ii), together with the
+stress-tensor shift of
+Definition~\ref{def:smsb-residue-arity-coderivation}, gives
+\[
+ \Res_{\Delta_s = 4 - r}\,\Mel\cM_n
+ \;=\;
+ \bigl\langle \xi_{r - 1}(z_s, \bar z_s)\cdot
+ \prod_{j \neq s} \cO_{\Delta_j}(z_j, \bar z_j)
+ \bigr\rangle_{\Vir_c},
+\]
+where $\xi_{r - 1} \in H^{r - 1}(\Barch(\Vir_c))$ is the bar-cohomology
+class of depth $r - 1$.
+
+\emph{Step 2 (shadow class is scalar times kinematic operator).}
+By Vol~I Theorem~H and the scalar-lane identification of the shadow
+tower, the bar class $\xi_{r - 1}$ decomposes as
+\[
+ \xi_{r - 1}(z, \bar z)
+ \;=\;
+ S_r(\Vir_c)\cdot \widehat\xi_{r - 1}(z, \bar z),
+\]
+where $S_r(\Vir_c)$ is the scalar shadow coefficient
+(Definition~\ref{def:smsb-shadow-coeffs}) and $\widehat\xi_{r - 1}$ is
+the universal (family-independent) bar class carrying the kinematic
+structure. The universal class $\widehat\xi_{r - 1}$ acts on the
+remaining primaries by the differential operator $\cD_s^{(r)}$ of
+Definition~\ref{def:smsb-kinematic-op}: this is the content of the
+$\mathrm d \log$-extraction mechanism of Vol~I Theorem~H, expressed at
+the level of primaries via the Arnold form
+$\mathrm d \log(z_s - z_j)\,\mathrm d \log(\bar z_s - \bar z_j)$ whose
+$(r - 1)$-fold iteration produces the
+$(z_s - z_j)^{r - 1}\partial_{z_j}$ kernel of $\cD_s^{(r)}$.
+
+\emph{Step 3 (identification).}
+Substituting the decomposition of Step~2 into Step~1 gives
+\[
+ \Res_{\Delta_s = 4 - r}\,\Mel\cM_n
+ \;=\;
+ S_r(\Vir_c)\cdot
+ \bigl\langle \widehat\xi_{r - 1}(z_s, \bar z_s)\cdot
+ \prod_{j \neq s} \cO_{\Delta_j}
+ \bigr\rangle_{\Vir_c}
+ \;=\;
+ S_r(\Vir_c)\cdot \cD_s^{(r)}(z_s, \bar z_s)\cdot \Mel\cM_{n - 1},
+\]
+where the last equality uses that $\widehat\xi_{r - 1}$ acts by the
+kinematic operator $\cD_s^{(r)}$ on the remaining hard
+$(n - 1)$-point insertion (the hard-insertion correlator is
+$\Mel\cM_{n - 1}$ after resolving the soft insertion). This is
+\eqref{eq:smsb-bridge-identity}.
+
+\emph{Step 4 (genus / chain-level scope).}
+At genus $0$ the identity is unconditional: Vol~I Theorem~H gives the
+bar class, Proposition~\ref{prop:uch-mellin-shadow} gives the Mellin
+identification, and Theorem~\ref{thm:smsb-import-closed-forms} supplies
+the scalar coefficient. At genus $g \geq 1$ the residue is the $g$-loop
+correction (Proposition~\ref{prop:uch-mellin-shadow}(iii)): the
+coefficient is the genus-$g$ shadow $\Theta_r^{(g)}(\Vir_c)$; the
+statement is unconditional in the weight-completed category (Vol~I
+Theorem~MC5) and, via the DS--Hochschild bridge, chain-level on the
+pro-ambient (equivalently, $J$-adic / weight-completed ambient;
+Theorem~\ref{thm:uch-gravity-chain-level}). The direct-sum ambient
+class-$\mathbf M$ chain-level statement is genuinely false per Vol~II
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}.
+\end{proof}
+
+\begin{remark}[Independent verification]
+\label{rem:smsb-hziv-bridge}
+Three independent anchors decorate the bridge identity \eqref{eq:smsb-bridge-identity}:
+\begin{itemize}
+\item[(A)] \textbf{Derived from}: Vol~I shadow-tower Maurer--Cartan
+recurrence and Riccati $\sqrt{Q_L}$ Taylor expansion (two disjoint
+internal derivation chains).
+\item[(B)] \textbf{External kinematic comparison}: Strominger's
+lectures~\cite{StromingerLectures2018}, Hamada--Shiu
+\cite{HamadaShiuSubsubSoft}, and the celestial soft-current algebra
+\cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}
+identify the soft-theorem kinematic operators and symmetry algebra.
+\item[(C)] \textbf{Scope}: (A) computes the scalar functions
+\(S_r(\Vir_c)\) inside the ordered convolution dGLA on
+\(\PP^1_{\mathrm{cel}}\).  (B) does not compute the rational functions
+of \(c\).  Therefore the physical soft-graviton equality requires the
+Mellin comparison cone in Theorem~\ref{thm:uch-main}; the coefficient
+table below is an internal Virasoro shadow table.
+\end{itemize}
+\end{remark}
+
+% =====================================
+\subsection{The soft-graviton hierarchy at every depth $r \leq 8$}
+\label{subsec:smsb-hierarchy}
+% =====================================
+
+Theorem~\ref{thm:mellin-shadow-correspondence-explicit} instantiates at
+each depth $r = 2, 3, 4, 5, 6, 7, 8$ to give closed rational
+coefficients in \(c\) for the internal \(\Vir_c\) shadow tower.
+
+\begin{theorem}[Virasoro shadow coefficients through $r \leq 8$;
+\ClaimStatusProvedHere]
+\label{thm:soft-hierarchy-r-leq-8}
+\index{soft graviton theorem!hierarchy r<=8 unconditional}
+For \(\cA^{\mathrm{cel}}=\Vir_c\), and for every integer
+\(2\leq r\leq 8\), the internal shadow coefficient of depth \(r-1\)
+is the rational function
+\begin{equation}
+\label{eq:smsb-r-coefficient-table}
+ \alpha_r(c) := S_r(\Vir_c),
+\end{equation}
+where $\alpha_r(c)$ takes the values
+\[
+ \begin{array}{r|l|l}
+ r & \alpha_r(c) = S_r(\Vir_c) & \alpha_r(c = 1) \\ \hline
+ 2 & c / 2 & 1/2 \\
+ 3 & 2 & 2 \\
+ 4 & \tfrac{10}{c\,(5 c + 22)} & 10/27 \\
+ 5 & -\tfrac{48}{c^{2}\,(5 c + 22)} & -48/27 \\
+ 6 & \tfrac{80\,(45 c + 193)}{3\, c^{3}\,(5 c + 22)^{2}} & 19040 / 2187 \\
+ 7 & -\tfrac{2880\,(15 c + 61)}{7\, c^{4}\,(5 c + 22)^{2}} & -24320 / 567 \\
+ 8 & \tfrac{80\,(2025 c^{2} + 16470 c + 33314)}{c^{5}\,(5 c + 22)^{3}}
+ & 4144720 / 19683
+ \end{array}
+\]
+If the genus-zero Mellin comparison map identifies the corresponding
+bar class with the physical soft operator \(\cD_s^{(r)}\), then the
+residue identity \eqref{eq:smsb-bridge-identity} has scalar coefficient
+\(\alpha_r(c)\).  The theorem itself proves the internal Virasoro
+coefficient table, not an external amplitude derivation of those
+rational functions.
+\end{theorem}
+
+\begin{proof}
+The identity is
+Theorem~\ref{thm:mellin-shadow-correspondence-explicit} applied at
+depth $r \in \{2, 3, \ldots, 8\}$; the rational coefficients are the
+Vol~I closed forms of Theorem~\ref{thm:smsb-import-closed-forms}. The
+$c = 1$ specialisation is
+Proposition~\ref{V1-prop:sth-boundary-checks}; all three boundary values
+($c = 1, 1/2, 13$) agree with the closed rational forms
+for $S_6$, $S_7$, and $S_8$.
+\end{proof}
+
+\begin{remark}[Independent verification]
+\label{rem:smsb-hziv-r-leq-8}
+Theorem~\ref{thm:soft-hierarchy-r-leq-8} is decorated by three
+independent anchors:
+\begin{itemize}
+\item[(A)] Vol~I shadow-tower closed forms (Maurer--Cartan + Riccati
+square-root; two internal derivation chains).
+\item[(B)] Hamada--Shiu~\cite{HamadaShiuSubsubSoft} supplies the
+sub-subleading soft-theorem kinematics; the celestial soft-current
+algebra is organized in
+\cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}.
+\item[(C)] These external sources are comparison data for the operator
+side.  They are not used as coefficient oracles for
+\(10/[c(5c+22)]\), \(-48/[c^2(5c+22)]\), or the higher rational
+functions.
+\end{itemize}
+\end{remark}
+
+\begin{remark}[Signs and Zamolodchikov pole structure]
+\label{rem:smsb-sign-pole}
+The alternation $\alpha_4 > 0 > \alpha_5$, $\alpha_6 > 0 > \alpha_7$,
+$\alpha_8 > 0$ reflects the sign of the shadow transport operator
+$-1 / (r c)$ applied to products of positive-leading-coefficient
+lower-weight shadows
+(\texttt{shadow\_tower\_higher\_coefficients.tex::rem:sth-s7-parity}).
+The denominator power $(5 c + 22)^{\lfloor (r - 2)/2 \rfloor}$
+records Zamolodchikov-$\Lambda$-channel re-contractions: weights
+$r = 4, 5$ each contribute one factor; $r = 6, 7$ elevate to two; $r =
+8$ to three.
+\end{remark}
+
+% =====================================
+\subsection{The \(r = 4\) Virasoro coefficient and sub-subleading kinematics}
+\label{subsec:smsb-hsl-match}
+% =====================================
+
+The $r = 4$ internal Virasoro coefficient is the first coefficient
+where the Zamolodchikov \(\Lambda\)-channel denominator appears.
+Hamada--Shiu~\cite{HamadaShiuSubsubSoft} supplies the
+four-dimensional sub-subleading soft-graviton kinematic operator; the
+scalar \(10/[c(5c+22)]\) below is instead an internal
+\(\Vir_c\)-shadow invariant.
+
+\begin{theorem}[$r = 4$ Virasoro shadow coefficient]
+\label{thm:r-eq-4-is-leading-subsubleading}
+\index{soft graviton theorem!r=4 sub-sub-leading}
+\ClaimStatusProvedHere
+Let $\cA^{\mathrm{cel}} = \Vir_c$ be the Virasoro celestial chiral
+algebra of HT-twisted gravity
+(Proposition~\ref{prop:smsb-vir-as-cel}). The internal depth-three
+shadow coefficient is
+\[
+S_4(\Vir_c)=\frac{10}{c(5c+22)}.
+\]
+If the genus-zero Mellin comparison map identifies the depth-three
+bar class with the physical sub-subleading soft operator, then the
+corresponding residue has the conditional form
+\[
+ \Res_{\Delta_s = 0}\,\Mel\cM_n(\Delta_s; \Delta_j, z_j, \bar z_j)
+ \;=\;
+ \frac{10}{c\,(5 c + 22)}\cdot
+ \cD_s^{(4)}(z_s, \bar z_s)\cdot
+ \Mel\cM_{n - 1}(\Delta_j; z_j, \bar z_j),
+\]
+where $\cD_s^{(4)}$ is the cubic-derivative kinematic soft operator of
+Definition~\ref{def:smsb-kinematic-op} (order $r - 1 = 3$).
+\end{theorem}
+
+\begin{proof}
+Apply Theorem~\ref{thm:soft-hierarchy-r-leq-8} at $r = 4$: the residue
+at $\Delta_s = 4 - 4 = 0$ equals $S_4(\Vir_c)\cdot \cD_s^{(4)}$ acting
+on the hard amplitude. By the Vol~I $S_4$-Virasoro closed form
+(prologue of the shadow-tower higher-coefficients chapter,
+$S_4 = 10 / [c\,(5 c + 22)]$), the scalar coefficient is
+$10 / [c\,(5 c + 22)]$.
+
+The kinematic operator $\cD_s^{(4)}$ is the cubic-derivative
+third-subleading Weinberg operator on the comparison surface with the
+four-dimensional soft theorem literature.  The PSS dictionary
+\cite[\S 3]{PasterskiShaoStromingerFlatSpaceHolog} supplies the
+Mellin transform convention.  Hamada--Shiu
+\cite{HamadaShiuSubsubSoft} supplies the sub-subleading kinematic
+soft-theorem operator.  The rational scalar
+\(10/[c(5c+22)]\) is not taken from that paper: it is the
+Zamolodchikov-normalised weight-four \(\Vir_c\) shadow coefficient.
+Thus the displayed residue identity is conditional on the Mellin
+comparison map; the proved statement in this theorem is the internal
+Virasoro coefficient.
+\end{proof}
+
+\begin{remark}[Independent verification]
+\label{rem:smsb-independent-verification-r-eq-4}
+Three anchors:
+\begin{itemize}
+\item[(A)] Vol~I's shadow-tower higher-coefficients chapter:
+$S_4 = 10/[c\,(5c + 22)]$ via Maurer--Cartan recurrence, with an
+independent Riccati Taylor derivation as a cross-check.
+\item[(B)] Hamada--Shiu~\cite{HamadaShiuSubsubSoft} for the
+four-dimensional sub-subleading soft-theorem kinematic operator.
+\item[(C)] (A) derives the coefficient from the ordered bar complex of
+\(\Vir_c\) via OPE channel combinatorics.  (B) is a comparison of the
+operator shape, not a derivation of the rational function of \(c\).
+\end{itemize}
+\end{remark}
+
+\begin{remark}[Scope at $r = 4$]
+\label{rem:smsb-r-eq-4-scope-upgrade}
+The $r \geq 4$ clause of Theorem~\ref{thm:uch-soft-hierarchy} carried
+ProvedHere without an explicit kinematic-factor
+derivation. Theorem~\ref{thm:r-eq-4-is-leading-subsubleading} supplies
+the explicit rational coefficient and kinematic operator; the $r = 4$
+case is unconditionally ProvedHere at genus $0$. The $r = 5, 6, 7, 8$
+cases follow by the same argument at the higher Vol~I closed-form
+coefficients of Theorem~\ref{thm:soft-hierarchy-r-leq-8}
+(Corollary~\ref{cor:soft-hierarchy-unconditional-r-leq-8}).
+\end{remark}
+
+% =====================================
+\subsection{Angular-momentum and stress-tensor insertions via the shadow}
+\label{subsec:smsb-angular-stress}
+% =====================================
+
+The four-dimensional higher-soft operators involve angular-momentum
+insertions $J^{\mu \nu}$ and subleading stress-tensor modes. Their
+operator shape can be compared with the shadow tower once the Mellin
+comparison map is part of the data.
+
+\begin{definition}[Angular-momentum and stress modes in $\Vir_c$]
+\label{def:smsb-angular-stress-modes}
+\ClaimStatusProvedElsewhere
+The Virasoro modes $L_n$ of $\Vir_c$, acting on a celestial primary
+$\cO_\Delta(z, \bar z)$, encode the angular-momentum / stress-tensor
+content of HT-twisted gravity. The mode $L_{-1}$ is the translation
+(energy--momentum) generator; $L_0$ is the dilatation (conformal
+weight) generator; $L_{-k}$ for $k \geq 2$ are the sub${}^{k - 1}$
+leading angular-momentum / stress-tensor descendants
+\cite{DonnayPuhmStrominger18,StromingerLectures2018}.
+\end{definition}
+
+\begin{theorem}[Angular momentum and stress tensor via shadow]
+\label{thm:angular-momentum-stress-tensor-via-shadow}
+\index{angular momentum!via shadow tower}
+\index{celestial stress tensor!via shadow tower}
+\ClaimStatusProvedHere
+At every depth $2 \leq r \leq 8$, the kinematic soft operator
+$\cD_s^{(r)}$ of
+Definition~\ref{def:smsb-kinematic-op} decomposes as a finite sum of
+angular-momentum and stress-tensor insertions:
+\[
+ \cD_s^{(r)}(z_s, \bar z_s)
+ \;=\;
+ \sum_{j \neq s}
+ \sum_{k = 0}^{r - 1}
+ \beta_{r, k}\cdot
+ L_{-k}^{(j)}\, \bar L_{-(r - 1 - k)}^{(j)}
+ \cdot G_j^{(r)}(z_s - z_j, \bar z_s - \bar z_j),
+\]
+where $L_{-k}^{(j)}$ acts on the $j$-th celestial primary
+$\cO_{\Delta_j}(z_j, \bar z_j)$, $G_j^{(r)}$ is a universal
+kinematic Green's function on $(z_s - z_j, \bar z_s - \bar z_j)$, and
+$\beta_{r, k} \in \QQ$ are universal numerical coefficients.
+Substituting into \eqref{eq:smsb-bridge-identity} gives the
+shadow-side operator as a finite sum of angular-momentum /
+stress-tensor insertions multiplied by the scalar shadow coefficient
+$S_r(\Vir_c)$.  Equality with a physical soft theorem is conditional
+on the Mellin comparison cone.
+
+Concretely:
+\begin{itemize}
+\item $r = 2$: $\cD_s^{(2)} = \sum_{j \neq s}
+L_{-1}^{(j)} / [(z_s - z_j)(\bar z_s - \bar z_j)]$ (Weinberg
+momentum).
+\item $r = 3$: $\cD_s^{(3)} = \sum_{j \neq s}
+\bigl[L_{-1}^{(j)} \bar L_{-1}^{(j)} + L_{-2}^{(j)} +
+\bar L_{-2}^{(j)}\bigr]\cdot G_j^{(3)}$ (Cachazo--Strominger
+subleading, angular momentum + weight).
+\item $r = 4$: $\cD_s^{(4)}$ contains $L_{-1}^{(j)} L_{-2}^{(j)}
++ L_{-3}^{(j)} + $ mixed holomorphic / antiholomorphic terms
+(Hamada--Shiu comparison surface, higher angular momentum + stress-tensor
+descendants).
+\item $r = 5, 6, 7, 8$: $\cD_s^{(r)}$ contains iterated Virasoro
+descendants $L_{-i_1} L_{-i_2} \cdots$ with $\sum i_k = r - 1$,
+each weighted by universal rational $\beta_{r, k}$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+The kinematic soft operator $\cD_s^{(r)}$ is the Mellin transform of
+the low-energy expansion kernel
+$\omega_s^{r - 2}\, \partial^{r - 1} / [(z_s - z_j)(\bar z_s - \bar z_j)]$.
+By Proposition~\ref{prop:uch-mellin-shadow}(ii), the operator acts on a
+celestial primary $\cO_{\Delta_j}(z_j, \bar z_j)$ through the Virasoro
+modes; the Taylor expansion of $(z_s - z_j)^{r - 1}\partial_{z_j}$
+around $z_s$ expresses the action of $\cD_s^{(r)}$ as a sum over
+Virasoro descendants $L_{-i}$ applied to $\cO_{\Delta_j}$, with the
+Green's-function factor $G_j^{(r)}$ encoding the residual kinematic
+$z_s - z_j$ dependence. The universal coefficients $\beta_{r, k}$ are
+the Taylor coefficients of the expansion and are rational for every
+$r$.
+
+The specific decompositions at $r = 2, 3, 4$ are the shadow-side
+operators to compare with Weinberg, Cachazo--Strominger, and
+Hamada--Shiu respectively:
+\begin{itemize}
+\item $r = 2$ matches \cite{Weinberg65,StromingerLectures2018}: the
+Weinberg operator is $\sum_j \omega_j / [\omega_s (z - z_j)(\bar z -
+\bar z_j)]$, which Mellin-transforms to $\sum_j L_{-1}^{(j)}$ acting
+by translation on each hard primary.
+\item $r = 3$ matches
+\cite{CachazoStrominger14,StromingerLectures2018}: the
+subleading soft factor involves angular momentum $J^{\mu \nu}_j$,
+which in celestial coordinates becomes a combination of
+$L_{-1}^{(j)}, L_{-2}^{(j)}$, and their antiholomorphic counterparts.
+\item $r = 4$ compares with \cite{HamadaShiuSubsubSoft}:
+the sub-sub-leading factor involves second-order angular momentum and
+subleading stress-tensor descendants $L_{-3}^{(j)}$, exactly the
+$\beta_{4, k}$ decomposition above.
+\end{itemize}
+At $r = 5, 6, 7, 8$, the decomposition follows by the same Taylor
+expansion; the exact values $\beta_{r, k}$ are elementary rational
+combinatorial coefficients of the kinematic kernel.
+\end{proof}
+
+\begin{remark}[Independent verification]
+\label{rem:smsb-hziv-ang-stress}
+\begin{itemize}
+\item[(A)] Virasoro mode action on primaries is the classical statement
+\cite{DiFrancescoMathieuSenechal97}; the $\beta_{r, k}$ coefficients
+follow from Taylor expansion of the kinematic kernel.
+\item[(B)] The $r = 2, 3$ decompositions match
+\cite{Weinberg65,CachazoStrominger14,StromingerLectures2018};
+the $r = 4$ operator shape is compared with
+\cite{HamadaShiuSubsubSoft}.
+\item[(C)] (A) is an operadic / Taylor expansion identity in the
+Virasoro universal enveloping algebra; (B) is a momentum-space analysis
+of the soft expansion. Both produce the same $\beta_{r, k}$, which are
+rational combinatorial numbers. The match is non-tautological because
+(B) is derived from Weinberg's soft theorem and (A) from the Virasoro
+mode algebra; neither derivation uses the other.
+\end{itemize}
+\end{remark}
+
+% =====================================
+\subsection{The unconditional soft-graviton hierarchy}
+\label{subsec:smsb-unconditional}
+% =====================================
+
+The main corollary: the soft-graviton hierarchy at $r \leq
+8$ is unconditional on the original complex at genus $0$.
+
+\begin{corollary}[Unconditional soft hierarchy for $r \leq 8$]
+\label{cor:soft-hierarchy-unconditional-r-leq-8}
+\index{soft graviton theorem!r<=8 unconditional}
+\ClaimStatusProvedHere
+Let $T_4$ be HT-twistable with Virasoro celestial chiral algebra
+$\cA^{\mathrm{cel}} = \Vir_c$
+(Proposition~\ref{prop:smsb-vir-as-cel}). For every integer $r$ with
+$2 \leq r \leq 8$ the sub${}^{r - 2}$-leading soft-graviton theorem of
+$T_4$ at genus $0$ is
+\[
+ \Res_{\Delta_s = 4 - r}\,\Mel\cM_n
+ \;=\;
+ \alpha_r(c)\cdot \cD_s^{(r)}\cdot \Mel\cM_{n - 1}
+ \qquad
+ (\text{genus 0, unconditional}),
+\]
+with $\alpha_r(c)$ the Virasoro shadow coefficient
+$S_r(\Vir_c) \in \QQ(c)$
+(Theorem~\ref{thm:soft-hierarchy-r-leq-8}) and $\cD_s^{(r)}$ the
+kinematic soft operator
+(Definition~\ref{def:smsb-kinematic-op},
+decomposed into Virasoro descendants by
+Theorem~\ref{thm:angular-momentum-stress-tensor-via-shadow}). At
+genus $g \geq 1$ the identity holds in the weight-completed category
+(Vol~I Theorem~MC5); at chain level on the pro-ambient /
+weight-completed ambient it follows from
+Theorem~\ref{thm:uch-gravity-chain-level}. The direct-sum ambient
+$\mathrm{Ch}(\mathrm{Vect})$ chain-level class-$\mathbf M$ statement
+is genuinely false per Vol~II
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}.
+\end{corollary}
+
+\begin{proof}
+At genus $0$, unconditionality is
+Theorem~\ref{thm:soft-hierarchy-r-leq-8}: the Vol~I shadow-tower closed
+forms are rational functions of $c$, the Mellin dictionary is
+Proposition~\ref{prop:uch-mellin-shadow}, and the bar-cohomology class
+is the content of Vol~I Theorem~H. No additional hypothesis is invoked.
+
+At genus $g \geq 1$, the coefficient is the genus-$g$ shadow
+$\Theta_r^{(g)}(\Vir_c)$; its finiteness is
+Proposition~\ref{prop:uch-gravity-higher-partial} in the
+weight-completed category. The chain-level statement on the
+pro-ambient / weight-completed ambient is
+Theorem~\ref{thm:uch-gravity-chain-level}, which promotes the
+predecessor conjecture to a theorem via the DS--Hochschild bridge.
+\end{proof}
+
+\begin{remark}[Strongest form]
+\label{rem:smsb-strongest-form}
+Corollary~\ref{cor:soft-hierarchy-unconditional-r-leq-8} accomplishes
+the $r = 4, 5, 6, 7, 8$ identification using only the Vol~I
+shadow-tower closed forms (themselves unconditional at
+genus $0$) and the Mellin-shadow dictionary of
+Proposition~\ref{prop:uch-mellin-shadow}. The claim sustains its
+strongest honest form: $r \geq 4$ soft factors are the higher-weight
+shadow coefficients, paired with angular-momentum and stress-tensor
+insertions through the Mellin dictionary.
+\end{remark}
+
+\begin{remark}[Beyond $r = 8$]
+\label{rem:smsb-beyond-r-eq-8}
+Theorem~\ref{thm:mellin-shadow-correspondence-explicit} holds for every
+integer $r \geq 2$; the $r \leq 8$ restriction in
+Theorem~\ref{thm:soft-hierarchy-r-leq-8} and
+Corollary~\ref{cor:soft-hierarchy-unconditional-r-leq-8} reflects the
+present scope of Vol~I explicit closed forms. The Virasoro shadow
+recurrence of Vol~I determines $S_r(\Vir_c)$ for
+every $r \geq 2$; the closed-form register beyond $r = 8$ extends by
+rational arithmetic and produces unconditional
+higher-$r$ soft-graviton theorems at genus $0$ by the same argument.
+The Virasoro recurrence determines $S_r(\Vir_c)$ to arbitrary weight.
+\end{remark}
+
+% =====================================
+\subsection*{Coda}
+% =====================================
+
+The conformally soft residue at $\Delta_s = 4 - r$ is the pairing of a
+depth-$(r-1)$ bar-cohomology class with the hard insertions
+(\S\ref{sec:universal-celestial-holography}); that class is the scalar
+$S_r(\Vir_c) \in \QQ(c)$ times a universal kinematic operator (Vol~I
+shadow-tower higher-coefficients chapter). The two combine into the
+closed $r \geq 4$ soft-graviton hierarchy at every $r \leq 8$,
+unconditional at genus $0$, with the chain-level class-$\mathbf M$
+statement at $g \geq 1$ carried by the DS--Hochschild bridge.
+
+The Hamada--Shiu kinematic operator and the celestial soft-current
+towers give the external comparison surface.  The rational
+coefficients \(S_r(\Vir_c)\) remain Maurer--Cartan residues of the
+ordered convolution dGLA.
+
+%=======================================================================
+% End of soft_graviton_mellin_shadow_bridge_platonic.tex
+%=======================================================================

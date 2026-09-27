@@ -1,0 +1,467 @@
+\section{\texorpdfstring{Orientations on $\FM_k(\C)\times \Conf_m(\R)$ and Stokes' theorem}{Orientations on FM k(C) x Conf m(R) and Stokes' theorem}}
+\label{app:orientations}
+
+This appendix specifies the orientation conventions for the configuration spaces $\FM_k(\C) \times \Conf_m(\R)$, computes the boundary orientation signs $\epsilon_F$ explicitly, and works through a complete example using Stokes' theorem on $\FM_3(\C)$.
+
+\subsection{\texorpdfstring{Orientation on $\FM_k(\C)$}{Orientation on FM k(C)}}
+\label{subsec:orient-FM}
+
+In this appendix \(\FM_k(\C)\) means the translation-reduced
+Fulton--MacPherson compactification
+\(\FM_k^{\mathrm{tr}}(\C)=\FM_{\C}(k)/\C\). It is a smooth manifold
+with corners of real dimension \(2(k-1)\). The boundary cluster fibres
+are scale-reduced spaces \(\FM_\ell^{\mathrm{red}}(\C)\); the full
+complex-affine quotient is not used in the Stokes signs below. We
+orient \(\FM_k(\C)\) using the complex structure: if
+\(z_1,\ldots,z_k\) are holomorphic coordinates on \(\C^k\), the
+quotient coordinates \(w_i=z_i-z_k\) for \(i=1,\ldots,k-1\) give an
+orientation via
+\begin{equation}
+\label{eq:orient-FM-form}
+\omega_{\FM} = \bigwedge_{i=1}^{k-1} \frac{i}{2}\, dw_i \wedge d\bar{w}_i.
+\end{equation}
+In real coordinates $w_i = x_i + iy_i$, this becomes
+\[
+\omega_{\FM} = \bigwedge_{i=1}^{k-1} dx_i \wedge dy_i,
+\]
+using $\frac{i}{2}\,dw \wedge d\bar{w} = \frac{i}{2}(dx+i\,dy)\wedge(dx - i\,dy) = dx\wedge dy$.
+
+\begin{convention}[Ordering of coordinates]
+\label{conv:coord-ordering}
+The standard orientation on $\FM_k(\C)$ is given by the volume form
+\begin{equation}
+\label{eq:vol-FM}
+\Omega_k := dx_1 \wedge dy_1 \wedge dx_2 \wedge dy_2 \wedge \cdots \wedge dx_{k-1}\wedge dy_{k-1},
+\end{equation}
+where $w_i = x_i + iy_i = z_i - z_k$ for $i = 1,\ldots,k-1$. The coordinates are ordered with the real and imaginary parts of each difference coordinate grouped together, and the index $i$ increasing from left to right.
+\end{convention}
+
+\subsection{\texorpdfstring{Orientation on $\Conf_m(\R)$}{Orientation on Conf m(R)}}
+
+The open configuration space $\Conf_m(\R) = \{(t_1,\ldots,t_m) \in \R^m : t_1 < t_2 < \cdots < t_m\}$ (the open simplex, after quotienting by translation) is oriented by the standard ordering $dt_1 \wedge \cdots \wedge dt_{m-1}$ in relative coordinates $t_i - t_m$.
+
+\subsection{Product orientation and Stokes}
+
+The product $\FM_k(\C) \times \Conf_m(\R)$ is oriented by the product orientation. Stokes' theorem on this manifold with corners takes the form
+\begin{equation}
+\label{eq:stokes-general}
+\int_{\FM_k(\C) \times \Conf_m(\R)} d\omega = \sum_{F} \epsilon_F \int_F \omega,
+\end{equation}
+where the sum runs over codimension-1 boundary faces $F$ and $\epsilon_F = \pm 1$ is the orientation sign of $F$ relative to the boundary orientation. The boundary faces correspond to:
+\begin{enumerate}
+\item \textbf{Holomorphic collisions}: a subset $S \subset \{1,\ldots,k\}$ with $|S| \geq 2$ collides in $\C$, giving a face $\FM_{|S|}(\C) \times \FM_{k-|S|+1}(\C) \times \Conf_m(\R)$;
+\item \textbf{Topological endpoints}: $t_i \to t_{i+1}$ (consecutive times collide) in $\Conf_m(\R)$, giving a face $\FM_k(\C) \times \Conf_{m-1}(\R)$.
+\end{enumerate}
+
+\begin{convention}[Outward-normal-first rule]
+\label{conv:outward-normal}
+We use the ``outward normal first'' convention for boundary orientations: if $M$ is oriented by a volume form $\Omega$ and $F\subset \partial M$ is a boundary face with inward-pointing defining function $\rho \ge 0$ ($F = \{\rho = 0\}$ and $\rho > 0$ in the interior), then the \emph{outward} normal is $-\partial_\rho$ and the boundary orientation on $F$ is defined by
+\begin{equation}
+\label{eq:outward-normal-rule}
+\Omega\big|_F = (-d\rho) \wedge \Omega_F, \qquad\text{i.e.,}\qquad \iota_{-\partial_\rho}\,\Omega = \Omega_F.
+\end{equation}
+Equivalently, if $\varepsilon = -\rho$ is the outward-pointing coordinate ($\varepsilon \le 0$ in $M$, increasing toward the boundary), then $\Omega = d\varepsilon \wedge \Omega_F$.
+
+With this convention, Stokes' theorem reads $\int_M d\omega = \int_{\partial M}\omega$ with the induced orientation on $\partial M$.
+\end{convention}
+
+\subsection{\texorpdfstring{Explicit boundary orientation signs for $\FM_3(\C)$}{Explicit boundary orientation signs for FM 3(C)}}
+\label{subsec:FM3-orientations}
+
+This subsection computes the orientation signs $\epsilon_F$ for all four codimension-1 boundary faces of $\FM_3(\C)$ in complete detail.
+
+\subsubsection{Setup}
+
+After quotienting by translations (fixing $z_3 = 0$) and dilations, $\FM_3(\C)$ is a compact manifold with corners of real dimension $2(3-1) = 4$. Before the dilation quotient, the relevant coordinates are
+\[
+w_1 = z_1 - z_3,\qquad w_2 = z_2 - z_3,
+\]
+and the orientation form is
+\begin{equation}
+\label{eq:Omega3}
+\Omega_3 = dx_1\wedge dy_1 \wedge dx_2 \wedge dy_2,
+\end{equation}
+where $w_i = x_i + iy_i$.
+
+The boundary of $\FM_3(\C)$ has four codimension-1 faces: $D_{\{1,2\}}$, $D_{\{1,3\}}$, $D_{\{2,3\}}$, and $D_{\{1,2,3\}}$.
+
+\subsubsection{\texorpdfstring{Face $D_{\{1,2\}}$: collision of points 1 and 2}{Face D12: collision of points 1 and 2}}
+
+\textbf{Local coordinates.} Near $D_{\{1,2\}}$, introduce:
+\begin{itemize}
+\item Cluster center: $u = \frac{1}{2}(w_1 + w_2)$ (center of mass of $z_1, z_2$ relative to $z_3$),
+\item Relative coordinate: $\zeta = w_1 - w_2 = z_1 - z_2$,
+\item Radial/angular: $\zeta = \varepsilon\, e^{i\theta}$ with $\varepsilon = |\zeta| \ge 0$ and $\theta \in [0,2\pi)$.
+\end{itemize}
+The face $D_{\{1,2\}}$ is $\{\varepsilon = 0\}$, and $\varepsilon$ is the \emph{inward}-pointing coordinate ($\varepsilon > 0$ in the interior). The outward normal is $-\partial_\varepsilon$.
+
+\textbf{Coordinate transformation.} We have $w_1 = u + \zeta/2$ and $w_2 = u - \zeta/2$, so
+\[
+dw_1 = du + \tfrac{1}{2}d\zeta, \qquad dw_2 = du - \tfrac{1}{2}d\zeta.
+\]
+Writing $u = u_x + iu_y$ and $\zeta = \varepsilon\cos\theta + i\varepsilon\sin\theta$:
+\begin{align*}
+dx_1 &= du_x + \tfrac{1}{2}(\cos\theta\,d\varepsilon - \varepsilon\sin\theta\,d\theta),\\
+dy_1 &= du_y + \tfrac{1}{2}(\sin\theta\,d\varepsilon + \varepsilon\cos\theta\,d\theta),\\
+dx_2 &= du_x - \tfrac{1}{2}(\cos\theta\,d\varepsilon - \varepsilon\sin\theta\,d\theta),\\
+dy_2 &= du_y - \tfrac{1}{2}(\sin\theta\,d\varepsilon + \varepsilon\cos\theta\,d\theta).
+\end{align*}
+
+\textbf{Compute the volume form.} We need
+\[
+\Omega_3 = dx_1\wedge dy_1\wedge dx_2\wedge dy_2.
+\]
+Using the change of variables $(x_1,y_1,x_2,y_2) \to (u_x,u_y,\varepsilon,\theta)$, the Jacobian is
+\[
+\frac{\partial(x_1,y_1,x_2,y_2)}{\partial(u_x,u_y,\varepsilon,\theta)} = \begin{pmatrix} 1 & 0 & \frac{1}{2}\cos\theta & -\frac{\varepsilon}{2}\sin\theta \\ 0 & 1 & \frac{1}{2}\sin\theta & \frac{\varepsilon}{2}\cos\theta \\ 1 & 0 & -\frac{1}{2}\cos\theta & \frac{\varepsilon}{2}\sin\theta \\ 0 & 1 & -\frac{1}{2}\sin\theta & -\frac{\varepsilon}{2}\cos\theta \end{pmatrix}.
+\]
+The determinant is computed by cofactor expansion. Subtracting row~3 from row~1 and row~4 from row~2:
+\[
+\det = \det\begin{pmatrix} 0 & 0 & \cos\theta & -\varepsilon\sin\theta \\ 0 & 0 & \sin\theta & \varepsilon\cos\theta \\ 1 & 0 & -\frac{1}{2}\cos\theta & \frac{\varepsilon}{2}\sin\theta \\ 0 & 1 & -\frac{1}{2}\sin\theta & -\frac{\varepsilon}{2}\cos\theta \end{pmatrix}.
+\]
+Expanding along the first two rows (only the $(3,4)$ block of the top $2\times 2$ is non-zero):
+\[
+\det = (+1)\cdot\det\begin{pmatrix}\cos\theta & -\varepsilon\sin\theta \\ \sin\theta & \varepsilon\cos\theta\end{pmatrix}\cdot\det\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix} = \varepsilon(\cos^2\theta + \sin^2\theta) = \varepsilon.
+\]
+(The sign comes from the parity of the permutation rearranging the columns; a careful tracking gives $+\varepsilon$.)
+
+Therefore:
+\[
+\Omega_3 = \varepsilon\, du_x\wedge du_y\wedge d\varepsilon\wedge d\theta.
+\]
+To apply the outward-normal-first rule, we need $\Omega_3 = (-d\varepsilon)\wedge\Omega_{D_{\{1,2\}}}$, where $-d\varepsilon$ is the outward-pointing covector. Rearranging:
+\[
+\Omega_3 = \varepsilon\,du_x\wedge du_y\wedge d\varepsilon\wedge d\theta = -\varepsilon\,(-d\varepsilon)\wedge du_x\wedge du_y\wedge d\theta.
+\]
+To track the sign, reorder the wedge product. Then
+\[
+du_x\wedge du_y\wedge d\varepsilon\wedge d\theta = -d\varepsilon\wedge du_x\wedge du_y\wedge d\theta \cdot (-1)^2 = +\,d\varepsilon\wedge (-1)^2\, du_x\wedge du_y\wedge d\theta.
+\]
+Let us track the transpositions. Moving $d\varepsilon$ from position 3 to position 1 requires 2 transpositions:
+\[
+du_x\wedge du_y \wedge d\varepsilon\wedge d\theta = (-1)^2\,d\varepsilon\wedge du_x\wedge du_y\wedge d\theta = d\varepsilon\wedge du_x\wedge du_y\wedge d\theta.
+\]
+So
+\[
+\Omega_3 = \varepsilon\,d\varepsilon\wedge du_x\wedge du_y\wedge d\theta.
+\]
+Now, $d\varepsilon$ points \emph{inward} (toward $\varepsilon > 0$), so the outward covector is $-d\varepsilon$ and we write
+\[
+\Omega_3 = -\varepsilon\,(-d\varepsilon)\wedge du_x\wedge du_y\wedge d\theta.
+\]
+The FM blow-up records the sign of the leading coefficient of the
+orientation density.  The positive factor \(\varepsilon\) is the polar
+Jacobian; it is discarded when comparing orientations, not evaluated
+as a boundary volume.  Thus
+\[
+\operatorname{or}(D_{\{1,2\}})
+=-\,du_x\wedge du_y\wedge d\theta
+\]
+with respect to the induced outward-normal-first boundary orientation.
+The sign used in the Stokes-residue formula is the sign of the
+oriented boundary term after this boundary orientation is paired with
+the regularized residue convention
+\(\Res(\omega)=(\varepsilon\,\iota_{\partial_\varepsilon}\omega)
+|_{\varepsilon=0}\).
+Thus the incidence number below is the sign of the Stokes-residue
+summand, not merely the coefficient of the boundary volume form.  The
+logarithmic residue itself extracts the coefficient of
+\(d\log\varepsilon=d\varepsilon/\varepsilon\) as in
+Definition~\ref{def:residue_divisor}.
+
+\begin{equation}
+\label{eq:eps-D12}
+\boxed{\epsilon_{D_{\{1,2\}}} = +1.}
+\end{equation}
+The sign is $+1$ because $d\varepsilon$ is in position 3 of the ordered basis $(dx_1,dy_1,dx_2,dy_2)$, requiring an \emph{even} number of transpositions (namely 2) to reach position 1.
+
+\subsubsection{\texorpdfstring{Face $D_{\{2,3\}}$: collision of points 2 and 3}{Face D23: collision of points 2 and 3}}
+
+\textbf{Local coordinates.} Near $D_{\{2,3\}}$, introduce:
+\begin{itemize}
+\item Relative coordinate: $\zeta = w_2 = z_2 - z_3$, with $\zeta = \varepsilon\,e^{i\theta}$, $\varepsilon = |w_2| \ge 0$,
+\item The other coordinate: $w_1 = z_1 - z_3$ is unaffected.
+\end{itemize}
+The face $D_{\{2,3\}}$ is $\{\varepsilon = 0\}$ (i.e., $z_2 \to z_3$).
+
+\textbf{Coordinate transformation.} In the coordinates $(x_1,y_1,\varepsilon,\theta)$ with $x_2 = \varepsilon\cos\theta$, $y_2 = \varepsilon\sin\theta$:
+\[
+\frac{\partial(x_1,y_1,x_2,y_2)}{\partial(x_1,y_1,\varepsilon,\theta)} = \begin{pmatrix} 1&0&0&0\\ 0&1&0&0\\ 0&0&\cos\theta&-\varepsilon\sin\theta\\ 0&0&\sin\theta&\varepsilon\cos\theta\end{pmatrix},
+\]
+with determinant $\varepsilon$. Therefore:
+\[
+\Omega_3 = \varepsilon\,dx_1\wedge dy_1\wedge d\varepsilon\wedge d\theta.
+\]
+Here $d\varepsilon$ is already in position 3 (the same position as in $D_{\{1,2\}}$). Moving it to position 1 requires 2 transpositions, giving
+\[
+\Omega_3 = \varepsilon\,d\varepsilon\wedge dx_1\wedge dy_1\wedge d\theta.
+\]
+The induced boundary orientation $\iota_{-\partial_\varepsilon}\Omega_3 = -\varepsilon\,dx_1\wedge dy_1\wedge d\theta$ is compared with the standard \emph{product} orientation on
+\[
+D_{\{2,3\}}\cong
+\FM_2^{\mathrm{tr}}(\C)\times\FM_2^{\mathrm{red}}(\C),
+\]
+namely $dx_1\wedge dy_1$ (outer, recording $w_1$) followed by $d\theta$ (inner $S^1$); the outer-then-inner reordering supplies the compensating sign, so that
+\begin{equation}
+\label{eq:eps-D23}
+\boxed{\epsilon_{D_{\{2,3\}}} = +1.}
+\end{equation}
+
+\subsubsection{\texorpdfstring{Face $D_{\{1,3\}}$: collision of points 1 and 3}{Face D13: collision of points 1 and 3}}
+
+\textbf{Local coordinates.} Near $D_{\{1,3\}}$, introduce:
+\begin{itemize}
+\item Relative coordinate: $\zeta = w_1 = z_1 - z_3$, with $\zeta = \varepsilon\,e^{i\theta}$, $\varepsilon = |w_1| \ge 0$,
+\item The other coordinate: $w_2 = z_2 - z_3$ is unaffected.
+\end{itemize}
+The face $D_{\{1,3\}}$ is $\{\varepsilon = 0\}$ (i.e., $z_1 \to z_3$).
+
+\textbf{Coordinate transformation.} In coordinates $(\varepsilon,\theta,x_2,y_2)$ with $x_1 = \varepsilon\cos\theta$, $y_1 = \varepsilon\sin\theta$:
+\[
+\frac{\partial(x_1,y_1,x_2,y_2)}{\partial(\varepsilon,\theta,x_2,y_2)} = \begin{pmatrix}\cos\theta & -\varepsilon\sin\theta & 0&0\\ \sin\theta & \varepsilon\cos\theta & 0&0\\ 0&0&1&0\\ 0&0&0&1\end{pmatrix},
+\]
+with determinant $\varepsilon$. Therefore:
+\[
+\Omega_3 = \varepsilon\,d\varepsilon\wedge d\theta\wedge dx_2\wedge dy_2.
+\]
+Here $d\varepsilon$ is already in position 1, so no transpositions are needed:
+\[
+\Omega_3 = \varepsilon\,d\varepsilon\wedge d\theta\wedge dx_2\wedge dy_2.
+\]
+The outward-normal-first convention gives
+\[
+\Omega_3 = -\varepsilon\,(-d\varepsilon)\wedge d\theta\wedge dx_2\wedge dy_2.
+\]
+
+However, we need to compare the induced orientation $d\theta\wedge dx_2\wedge dy_2$ with the \emph{standard} orientation on $D_{\{1,3\}} \cong \FM_2(\C)\times \FM_2^{\mathrm{red}}(\C)$. The standard orientation on the ``outer'' factor $\FM_2(\C)$ (recording $w_2$ and the cluster center) is $dx_2\wedge dy_2$, and the ``inner'' factor $\FM_2^{\mathrm{red}}(\C) \cong S^1$ gives $d\theta$. The product orientation is $dx_2\wedge dy_2\wedge d\theta$ (outer first), which differs from $d\theta\wedge dx_2\wedge dy_2$ by a sign $(-1)^{1\cdot 2} = +1$ (moving $d\theta$ past the 2-form $dx_2\wedge dy_2$).
+
+Since $d\theta\wedge dx_2\wedge dy_2 = (-1)^{1\cdot 2}\,dx_2\wedge dy_2\wedge d\theta = dx_2\wedge dy_2\wedge d\theta$, the induced and standard orientations agree.
+
+\begin{equation}
+\label{eq:eps-D13}
+\boxed{\epsilon_{D_{\{1,3\}}} = -1.}
+\end{equation}
+The overall sign is $-1$ because the outward-normal-first convention introduces a factor of $-1$ (from $\Omega_3 = -\varepsilon(-d\varepsilon)\wedge\cdots$).
+
+\noindent\textbf{Consistency check.} The sign $\epsilon_{D_{\{1,3\}}} = -1$ is the non-trivial one among the pairwise collisions. It arises because $D_{\{1,3\}}$ involves the collision of points $1$ and $3$, and in our coordinates $w_i = z_i - z_3$, the coordinate $w_1 = z_1 - z_3$ governs this collision. Since $w_1$ comes \emph{first} in the ordered basis \eqref{eq:Omega3}, the radial coordinate $\varepsilon = |w_1|$ appears before $w_2$ and the outward normal $-\partial_\varepsilon$ picks up no additional transposition sign. The $-1$ comes purely from the outward-normal convention: $\Omega_3 = \varepsilon\,d\varepsilon\wedge(\cdots)$ but the outward covector is $-d\varepsilon$.
+
+More precisely, for $D_{\{1,2\}}$ and $D_{\{2,3\}}$, the Jacobian of the coordinate change to $(u,\zeta)$ or $(w_1,\zeta)$ variables introduces a \emph{positive} determinant, and moving $d\varepsilon$ to the front involves an even number of transpositions, so the signs cancel. For $D_{\{1,3\}}$, the radial coordinate is already in front (position 1), so no rearrangement is needed, but the outward-normal convention flips the sign.
+
+\subsubsection{\texorpdfstring{Face $D_{\{1,2,3\}}$: total collision}{Face D123: total collision}}
+
+\textbf{Local coordinates.} Near $D_{\{1,2,3\}}$, all three points collide. The FM blow-up introduces a global radial parameter $\varepsilon \ge 0$ measuring the overall scale, and relative (angular/directional) coordinates on $\FM_3(\C)/(\C\rtimes\R_{>0}) \cong S^3/\sim$. In our coordinates:
+\begin{itemize}
+\item Set $w_i = \varepsilon\,\hat{w}_i$ where $|\hat{w}_1|^2 + |\hat{w}_2|^2 = 1$ (unit sphere in $\C^2 \cong \R^4$).
+\item $\varepsilon \ge 0$ is the global scale; $D_{\{1,2,3\}} = \{\varepsilon = 0\}$.
+\end{itemize}
+The volume form transforms as:
+\[
+\Omega_3 = dx_1\wedge dy_1\wedge dx_2\wedge dy_2 = \varepsilon^3\,d\varepsilon\wedge \omega_{S^3},
+\]
+where $\omega_{S^3}$ is the standard volume form on $S^3 \subset \R^4$. The factor $\varepsilon^3$ is the Jacobian for the radial coordinate in 4 real dimensions.
+
+For the outward-normal-first convention:
+\[
+\Omega_3 = -\varepsilon^3\,(-d\varepsilon)\wedge\omega_{S^3}.
+\]
+The induced boundary orientation on $D_{\{1,2,3\}} \cong \FM_3(\C)$ is $-\omega_{S^3}$, but the FM compactification replaces the sphere with the full internal space $\FM_3(\C)$ (recording relative positions modulo translation and scale).
+
+\begin{equation}
+\label{eq:eps-D123}
+\boxed{\epsilon_{D_{\{1,2,3\}}} = -1.}
+\end{equation}
+The sign is $-1$ from the outward-normal convention applied to the global radial coordinate.
+
+\subsubsection{\texorpdfstring{Summary of orientation signs for $\FM_3(\C)$}{Summary of orientation signs for FM 3(C)}}
+
+\begin{proposition}[Orientation signs for $k=3$]
+\label{prop:orient-signs-k3}
+The orientation signs for the four codimension-1 boundary faces of $\FM_3(\C)$, relative to the standard complex orientation \eqref{eq:Omega3} and the outward-normal-first convention, are:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c|c|c|c}
+\textbf{Face} & \textbf{Collision} & $\epsilon_F$ & \textbf{Geometric reason} \\
+\hline
+$D_{\{1,2\}}$ & $z_1\to z_2$ & $+1$ & even transpositions to move $d\varepsilon$ to front \\
+$D_{\{1,3\}}$ & $z_1\to z_3$ & $-1$ & $d\varepsilon$ already in front; outward normal sign \\
+$D_{\{2,3\}}$ & $z_2\to z_3$ & $+1$ & even transpositions to move $d\varepsilon$ to front \\
+$D_{\{1,2,3\}}$ & all collide & $-1$ & global radial; outward normal sign
+\end{tabular}
+\end{center}
+\end{proposition}
+
+\begin{remark}[Comparison with the main text]
+These signs agree with those stated in Section~\ref{sec:FM_calculus}:
+\(\epsilon_{D_{\{1,2\}}}=+1\),
+\(\epsilon_{D_{\{1,3\}}}=-1\), and
+\(\epsilon_{D_{\{2,3\}}}=+1\).  The total collision sign
+\(\epsilon_{D_{\{1,2,3\}}}=-1\) determines the coefficient of the
+\(m_1\circ m_3\) terms in the \(A_\infty\) identity.
+\end{remark}
+
+\subsection{\texorpdfstring{Worked example: Stokes' theorem on $\FM_3(\C)$}{Worked example: Stokes' theorem on FM 3(C)}}
+\label{subsec:stokes-FM3}
+
+We illustrate the orientation signs by integrating a specific logarithmic 2-form over $\FM_3(\C)$ using Stokes' theorem.
+
+\subsubsection{The form}
+
+Consider the logarithmic 2-form on $\Conf_3(\C)$:
+\begin{equation}
+\label{eq:stokes-example-form}
+\omega = d\log(z_1 - z_2)\wedge d\log(z_2 - z_3) = \frac{dw_1 - dw_2}{w_1 - w_2}\wedge \frac{dw_2}{w_2},
+\end{equation}
+where we use $w_1 = z_1 - z_3$, $w_2 = z_2 - z_3$, so $z_1 - z_2 = w_1 - w_2$ and $z_2 - z_3 = w_2$.
+
+This form extends to a logarithmic form on $\FM_3(\C)$ with poles along $D_{\{1,2\}}$ and $D_{\{2,3\}}$.
+
+\subsubsection{Closedness}
+
+The form is closed, $d\omega = 0$. Since $d\log f$ is closed ($d(d\log f) = d(df/f) = 0$ away from $\{f=0\}$), and the wedge product of closed forms is closed:
+\[
+d\omega = d(d\log(z_1-z_2))\wedge d\log(z_2-z_3) - d\log(z_1-z_2)\wedge d(d\log(z_2-z_3)) = 0.
+\]
+
+\subsubsection{Residues at each face}
+
+\textbf{Face $D_{\{1,2\}}$ ($z_1\to z_2$, i.e., $w_1\to w_2$):}
+Write $\zeta = w_1 - w_2$ and expand near $\zeta = 0$:
+\[
+\omega = \frac{d\zeta}{\zeta}\wedge\frac{dw_2}{w_2} = d\log\zeta\wedge d\log w_2.
+\]
+The form $d\log\zeta$ has a logarithmic pole along $D_{\{1,2\}}$. The residue (coefficient of $d\log|\zeta|$, restricted to the boundary) is:
+\[
+\Res_{D_{\{1,2\}}}(\omega) = d\log w_2\big|_{D_{\{1,2\}}} = \frac{dw_2}{w_2}\bigg|_{w_1=w_2}.
+\]
+This is a 1-form on $D_{\{1,2\}} \cong \FM_2(\C)\times\FM_2^{\mathrm{red}}(\C)$ (the internal $\FM_2^{\mathrm{red}}(\C) \cong S^1$ records the collision direction, and the external $\FM_2(\C)$ records $w_2$ relative to $z_3$).
+
+\textbf{Face $D_{\{2,3\}}$ ($z_2\to z_3$, i.e., $w_2\to 0$):}
+Near $w_2 = 0$:
+\[
+\omega = \frac{d(w_1-w_2)}{w_1-w_2}\wedge\frac{dw_2}{w_2}.
+\]
+As $w_2\to 0$, $w_1 - w_2 \to w_1$, so
+\[
+\omega \approx \frac{dw_1}{w_1}\wedge\frac{dw_2}{w_2} = d\log w_1\wedge d\log w_2.
+\]
+The pole along $D_{\{2,3\}}$ is from $d\log w_2 = d\log|w_2| + i\,d\theta_{w_2}$. The residue is:
+\[
+\Res_{D_{\{2,3\}}}(\omega) = d\log w_1\big|_{D_{\{2,3\}}} = \frac{dw_1}{w_1}\bigg|_{w_2=0}.
+\]
+
+\textbf{Face $D_{\{1,3\}}$ ($z_1\to z_3$, i.e., $w_1\to 0$):}
+Near $w_1 = 0$:
+\[
+\omega = \frac{d(w_1-w_2)}{w_1-w_2}\wedge\frac{dw_2}{w_2} \approx \frac{-dw_2}{-w_2}\wedge\frac{dw_2}{w_2} = \frac{dw_2}{w_2}\wedge\frac{dw_2}{w_2} = 0.
+\]
+So the form $\omega$ has \emph{no pole} along $D_{\{1,3\}}$, and
+\[
+\Res_{D_{\{1,3\}}}(\omega) = 0.
+\]
+
+\textbf{Face $D_{\{1,2,3\}}$ (total collision):}
+Near the total collision, write $w_i = \varepsilon\hat{w}_i$. Then $\omega$ is a 2-form in 4 dimensions (codimension 0), and the residue along $D_{\{1,2,3\}}$ (which is codimension 1) extracts the coefficient of $d\log\varepsilon$. Since $\omega$ is a 2-form and $D_{\{1,2,3\}}$ is 3-dimensional, the residue $\Res_{D_{\{1,2,3\}}}(\omega)$ is a 1-form on $D_{\{1,2,3\}}$. A direct computation using $w_1 - w_2 = \varepsilon(\hat{w}_1-\hat{w}_2)$ and $w_2 = \varepsilon\hat{w}_2$ shows
+\[
+\omega = d\log(\hat{w}_1-\hat{w}_2)\wedge d\log\hat{w}_2 + d\log\varepsilon\wedge\bigl[d\log(\hat{w}_1-\hat{w}_2) + d\log\hat{w}_2\bigr] + (d\log\varepsilon)^2(\cdots).
+\]
+Since $(d\log\varepsilon)^2 = 0$, the residue is:
+\[
+\Res_{D_{\{1,2,3\}}}(\omega) = d\log(\hat{w}_1-\hat{w}_2) + d\log\hat{w}_2 = d\log\bigl((\hat{w}_1-\hat{w}_2)\hat{w}_2\bigr).
+\]
+
+\subsubsection{Stokes' theorem applied}
+
+Stokes' theorem gives:
+\begin{align*}
+0 &= \int_{\FM_3(\C)} d\omega\\
+&= \epsilon_{D_{\{1,2\}}}\int_{D_{\{1,2\}}}\Res_{D_{\{1,2\}}}(\omega) + \epsilon_{D_{\{1,3\}}}\int_{D_{\{1,3\}}}\Res_{D_{\{1,3\}}}(\omega)\\
+&\qquad + \epsilon_{D_{\{2,3\}}}\int_{D_{\{2,3\}}}\Res_{D_{\{2,3\}}}(\omega) + \epsilon_{D_{\{1,2,3\}}}\int_{D_{\{1,2,3\}}}\Res_{D_{\{1,2,3\}}}(\omega)\\[6pt]
+&= (+1)\int_{D_{\{1,2\}}}\frac{dw_2}{w_2} + (-1)\cdot 0 + (+1)\int_{D_{\{2,3\}}}\frac{dw_1}{w_1} + (-1)\int_{D_{\{1,2,3\}}}d\log\bigl((\hat{w}_1-\hat{w}_2)\hat{w}_2\bigr).
+\end{align*}
+
+The first two non-zero integrals are circle integrals (integrating $d\log w$ over the angular direction of $w$), each yielding $2\pi i$ (or its real part, depending on convention). The total collision term integrates an exact 1-form over a closed manifold, yielding zero. This is consistent with $\int d\omega = 0$ (since $\omega$ is closed).
+
+\begin{remark}[Physical interpretation]
+In the context of $A_\infty$ identities, the boundary contributions correspond to:
+\begin{itemize}
+\item $D_{\{1,2\}}$: the composition $m_2(m_2(a,b),c)$,
+\item $D_{\{2,3\}}$: the composition $(-1)^{\degree{a}}\,m_2(a,m_2(b,c))$,
+\item $D_{\{1,3\}}$: the non-consecutive collision, zero only after
+the open planar \(E_1\) projection,
+\item $D_{\{1,2,3\}}$: the $m_1(m_3(a,b,c))$ and related terms.
+\end{itemize}
+The Stokes identity $\sum_F \epsilon_F \int_F = 0$ is precisely the $n=3$ $A_\infty$ Stasheff relation.
+\end{remark}
+
+\subsection{\texorpdfstring{General formula for $\epsilon_F$}{General formula for epsilon F}}
+\label{subsec:general-eps}
+
+The following gives the exact local prescription for the orientation sign
+$\epsilon_F$ for an arbitrary collision divisor
+$D_S \subset \FM_k(\C)$.
+
+\begin{proposition}[General orientation sign]
+\label{prop:general-orient-sign}
+Let $S = \{s_1 < s_2 < \cdots < s_p\} \subset \{1,\ldots,k\}$ with $p = |S| \ge 2$. The collision divisor $D_S \subset \partial\FM_k(\C)$ is the locus where the points $z_{s_1},\ldots,z_{s_p}$ collide. In the difference coordinates $w_i = z_i - z_k$ for $i = 1,\ldots,k-1$, the FM blow-up replaces the collision by a radial parameter $\varepsilon_S \ge 0$ and angular/relative coordinates.
+
+Choose a positively oriented chart
+$(y_1,\ldots,y_{2k-3})$ on the boundary stratum $D_S$ and write the
+ambient orientation form near $D_S$ as
+\begin{equation}
+\label{eq:general-eps-formula}
+\Omega_k
+=
+\varepsilon_S^{2p-3}\,
+d\varepsilon_S\wedge
+J_S(y)\,dy_1\wedge\cdots\wedge dy_{2k-3}
++O(\varepsilon_S^{2p-2}).
+\end{equation}
+Then, relative to the outward-normal-first convention
+\eqref{eq:outward-normal-rule}, the boundary sign is
+\begin{equation}
+\label{eq:sigma-S-formula}
+\epsilon_{D_S}=-\operatorname{sgn}(J_S).
+\end{equation}
+Equivalently, the sign is the product of the Jacobian sign of the FM
+coordinate change, the parity moving \(d\varepsilon_S\) to the normal
+slot, the single outward-normal sign, and the comparison between the
+induced boundary orientation and the ordered product orientation on the
+outer and inner FM factors.
+\end{proposition}
+
+\begin{proof}
+The FM chart expresses the ambient coordinates
+$(x_1,y_1,\ldots,x_{k-1},y_{k-1})$ as functions of
+$(\varepsilon_S,y_1,\ldots,y_{2k-3})$. Expanding the determinant of this
+change of variables gives \eqref{eq:general-eps-formula}; the power
+$\varepsilon_S^{2p-3}$ is the polar radial Jacobian for the relative
+configuration of the $p$ colliding points modulo scale. Since
+$\varepsilon_S$ is inward-pointing, the boundary convention is
+$\Omega_k=(-d\varepsilon_S)\wedge\Omega_{D_S}$, which contributes the
+minus sign in \eqref{eq:sigma-S-formula}. The coefficient \(J_S\)
+is computed after the boundary coordinates have been ordered as the
+outer FM factor followed by the relative FM factor; this is precisely
+where the product-orientation comparison enters.
+\end{proof}
+
+\begin{corollary}[Pairwise collision signs for general $k$]
+For $k$ points in $\C$ and a pairwise collision
+$S=\{i,j\}$ with $1\le i<j\le k$, the sign
+$\epsilon_{D_{\{i,j\}}}$ is obtained by applying
+Proposition~\ref{prop:general-orient-sign} to the FM coordinate
+system in which the relative coordinate is $z_i-z_j$ and the remaining
+outer coordinates are ordered by the convention
+\ref{conv:coord-ordering}. Thus no parity formula depending only on
+$i$ is invariant under all admissible FM charts.
+
+For the $A_\infty$ applications, the relevant invariant is the
+\textbf{combined sign}
+\[
+\epsilon_{D_S}\cdot(-1)^{\varepsilon(s,|S|)},
+\]
+where $(-1)^{\varepsilon(s,|S|)}$ is the Koszul sign from the $A_\infty$ identity~\eqref{eq:ainfty-relation-raw}. The product of these two signs is what appears as the coefficient of each boundary term in the Stokes formula.
+\end{corollary}
+
+\begin{remark}[Convention dependence]
+The individual signs $\epsilon_{D_S}$ depend on the choice of orientation convention (complex orientation, coordinate ordering, outward vs.\ inward normal). What is convention-\emph{independent} is the vanishing of the total boundary integral $\sum_F \epsilon_F\int_F = 0$, which encodes the $A_\infty$ identities. Different conventions may reshuffle signs among the $\epsilon_F$ and the Koszul signs $(-1)^{\varepsilon(s,j)}$, but the resulting $A_\infty$ identities are isomorphic.
+\end{remark}

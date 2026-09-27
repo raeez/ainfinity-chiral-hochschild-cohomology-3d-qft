@@ -1,0 +1,1189 @@
+% universal_celestial_holography.tex
+%
+% Universal Celestial Holography: the 4d HT twist to 2d chiral
+% factorization-homology correspondence.
+%
+% Macro hygiene: every non-core macro is guarded by \providecommand so the
+% chapter survives extraction into standalones.
+
+\providecommand{\cA}{\mathcal A}
+\providecommand{\cB}{\mathcal B}
+\providecommand{\cC}{\mathcal C}
+\providecommand{\cE}{\mathcal E}
+\providecommand{\cF}{\mathcal F}
+\providecommand{\cH}{\mathcal H}
+\providecommand{\cI}{\mathcal I}
+\providecommand{\cL}{\mathcal L}
+\providecommand{\cM}{\mathcal M}
+\providecommand{\cO}{\mathcal O}
+\providecommand{\cP}{\mathcal P}
+\providecommand{\cS}{\mathcal S}
+\providecommand{\cT}{\mathcal T}
+\providecommand{\cW}{\mathcal W}
+\providecommand{\RR}{\mathbb R}
+\providecommand{\CC}{\mathbb C}
+\providecommand{\PP}{\mathbb P}
+\providecommand{\ZZ}{\mathbb Z}
+\providecommand{\NN}{\mathbb N}
+\providecommand{\HH}{\mathbb H}
+\providecommand{\scri}{\mathscr I}
+\providecommand{\Ran}{\operatorname{Ran}}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Obs}{\operatorname{Obs}}
+\providecommand{\Cone}{\operatorname{Cone}}
+\providecommand{\gr}{\operatorname{gr}}
+\providecommand{\End}{\operatorname{End}}
+\providecommand{\Hom}{\operatorname{Hom}}
+\providecommand{\Res}{\operatorname{Res}}
+\providecommand{\Mel}{\widetilde}
+\providecommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch,top}}}
+\providecommand{\Barch}{\mathrm B^{\mathrm{ch}}}
+\providecommand{\BarchOrd}{\mathrm B^{\mathrm{ch},\mathrm{ord}}}
+\providecommand{\ChirHoch}{\mathrm{ChirHoch}}
+\providecommand{\dlog}{\mathrm d\log}
+\providecommand{\delbar}{\bar\partial}
+\providecommand{\vf}{\boldsymbol\eta}
+\providecommand{\wtc}{\mathfrak w_{1+\infty}}
+\providecommand{\kap}{\kappaChHodge}
+
+%=======================================================================
+\section{Universal celestial holography}
+\label{sec:universal-celestial-holography}
+%=======================================================================
+
+\noindent
+Celestial holography compares four-dimensional scattering in an
+asymptotically flat spacetime with a two-dimensional conformal system
+on the celestial sphere at null infinity. The HT-twisted comparison
+appears in separate families: gauge theory in
+Costello--Paquette~\cite{CostelloPaquetteTwistedSugraStates,
+CostelloPaquetteIIBTwist}, twistor gravity in
+Costello--Costello--Paquette--Sharma~\cite{CostelloPaquetteSharmaCelestial}
+and Bittleston--Heuveline--Skinner~\cite{BittlestonHeuvelineSkinner},
+stress-tensor and $\wtc$ structure in
+Donnay--Puhm--Strominger~\cite{DonnayPuhmStrominger18} and
+Strominger~\cite{StromingerWInfinityCelestial}, soft-graviton hierarchies
+in Hamada--Shiu~\cite{HamadaShiuSubsubSoft} and the celestial
+soft-current algebra
+\cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}.
+The common form is a
+filtered theorem for HT twists equipped with boundary data whose QME
+anomaly, celestial gluing class, and Mellin-comparison cone
+obstructions vanish.
+
+The boundary algebra of the $3$d HT reduction is an $E_1$-chiral
+algebra on the celestial sphere once the gluing obstruction vanishes.
+Its factorization homology on $\PP^1$, equipped with the $\SCchtop$
+structure supplied by the chiral Deligne theorem, is the associated
+graded of the perturbative celestial OPE algebra in the HT-twisted
+sector. The boundary shadow tower supplies the associated graded of the
+HT soft-current comparison; filtered equality is equivalent to
+vanishing of the cone classes.
+
+The HT reduction, boundary chiral algebra, gluing class, and Mellin
+comparison maps determine the theorem. The four standard regimes ---
+self-dual gauge, gauge with matter, gravity, and Yang--Mills --- are
+instances with distinct boundary-realization hypotheses. The
+Mellin--shadow dictionary identifies the soft residues with
+bar-cohomology classes; the Heisenberg and Virasoro examples
+exhibit the two extremal shadow behaviours.
+
+% =====================================
+\subsection{Setup: the 4d HT twist and its 2d celestial boundary}
+\label{subsec:uch-setup}
+% =====================================
+
+Fix a $4$d quantum field theory $T_4$ admitting a holomorphic--topological
+twist in the sense of Costello--Li~\cite{CL16,
+CL16}. Concretely, $T_4$ is a BV theory on $\RR^4$
+equipped with a nilpotent supercharge $Q$ such that its cohomology
+splits the four real coordinates into two holomorphic ($\CC$) and two
+topological ($\RR \times \RR$) directions:
+\[
+\RR^4_{T_4}
+\;\leadsto\;
+\RR^2_{\text{top}} \times \CC_{\text{hol}}
+\;\leadsto\;
+\RR^2_{\text{top}} \times \CC_{\text{hol}} \times \CC_{\text{hol}}
+\text{ (after}\;(2,2)\;\text{splitting)}.
+\]
+In the celestial-holography setup the natural geometry is
+\begin{equation}
+\label{eq:uch-geometry}
+M_4 = \RR_u \times \RR_v \times \CC_z \times \CC_{\bar z'}
+\quad\text{with celestial sphere}\quad
+\PP^1_{\text{cel}} \subset \scri^+,
+\end{equation}
+where $u, v$ parametrize the null slab near $\scri^+$ and $(z, \bar z')$
+are independent holomorphic coordinates on the celestial sphere (a
+doubling that is an artefact of the $(2,2)$ signature; the physical
+celestial sphere is recovered by the chiral half
+$\bar z' = \bar z$).
+
+\begin{definition}[HT-twist and its 3d reduction]
+\label{def:uch-ht-twist}
+Let $T_4^{\mathrm{HT}}$ denote the HT twist of $T_4$. Its \emph{3d HT
+reduction} $T_3^{\mathrm{HT}}(T_4)$ is the $3$d HT field theory on
+$\RR_u \times \CC_z$ obtained by KK reduction along $\RR_v$ of the
+BV complex of $T_4^{\mathrm{HT}}$, retaining the $v$-zero modes.
+Costello--Li's reduction lemma
+\cite[Thm.~6.2]{CL16} guarantees this is again an
+HT theory.
+\end{definition}
+
+\begin{definition}[Boundary chiral algebra]
+\label{def:uch-boundary-chiral-algebra}
+Impose a transverse Dirichlet / zero-flux boundary condition
+$\mathfrak b$ at
+$u = 0$ on $T_3^{\mathrm{HT}}(T_4)$. The resulting boundary observables
+form a chiral algebra on $\CC_z$, the \emph{celestial chiral algebra}
+\[
+\cA^{\mathrm{cel}}(T_4,\mathfrak b)
+\;:=\;
+H^\bullet\!\bigl(\Obs_\partial^{\text{BV}}(T_3^{\mathrm{HT}}(T_4)),\,Q\bigr),
+\]
+of Costello--Gaiotto~\cite{CostelloGaiottoBoundaryVOA}. Its
+globalization to $\PP^1_{\text{cel}}$ is the celestial-sphere
+chiral algebra on which this chapter is based.
+\end{definition}
+
+\begin{definition}[Celestial comparison classes]
+\label{def:uch-comparison-classes}
+For a boundary condition $\mathfrak b$ of $T_3^{\mathrm{HT}}(T_4)$,
+let
+\[
+\gamma_{\mathrm{cel}}(T_4,\mathfrak b)
+\in
+H^1\!\bigl(\PP^1_{\mathrm{cel}},
+\mathcal{Aut}_{\mathrm{ch}}(\cA^{\mathrm{cel}})\bigr)
+\]
+be the gluing class for the local celestial chiral algebra. For every
+genus $g$ and shadow depth $r$, let
+\[
+\mu_{g,r}\colon
+\gr^r H^\bullet\!\bigl(\Barch(\cA^{\mathrm{cel}})\bigr)^{(g)}
+\longrightarrow
+\gr^r\mathrm{Soft}^{(g)}_{\mathrm{HT}}(T_4)
+\]
+be the $d\log$ Mellin comparison map. Its filtered lifting obstruction
+and ambiguity are
+\[
+\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)
+\in H^2\!\bigl(\Cone(\mu_{g,r})\bigr),
+\qquad
+\mathrm{Amb}^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)
+= H^1\!\bigl(\Cone(\mu_{g,r})\bigr).
+\]
+\end{definition}
+
+\begin{remark}[Chiral, not topological]
+\label{rem:uch-chiral-not-topological}
+Despite the topological $\RR_u$ direction,
+$\cA^{\mathrm{cel}}(T_4,\mathfrak b)$ is a genuine chiral algebra on
+$\PP^1_{\text{cel}}$, not a topological associative algebra. The
+holomorphic structure comes from the
+$\bar\partial_z$-Cauchy--Riemann complex in $\cI^+$. The celestial
+sphere is topological as a manifold but chiral as a support of OPE
+data. The Hamada--Shiu and celestial soft-current comparison terms
+live on the chiral support, not in a topological associative reduction.
+\end{remark}
+
+Three external constructions supply the boundary algebra.
+
+\medskip
+\noindent\textbf{Costello--Paquette: gauge-theoretic celestial
+boundary.} For self-dual Yang--Mills with gauge Lie algebra
+$\mathfrak g$, the HT twist reduces to $4$d Chern--Simons on
+$\CC_z \times \RR^2_{\text{top}}$ after partial topological
+localization. The boundary is the Kac--Moody current algebra
+$V_k(\mathfrak g)$ at level $k$ determined by the one-loop
+$\beta$-function~\cite{CostelloPaquetteTwistedSugraStates}.
+
+\medskip
+\noindent\textbf{Bittleston--Heuveline--Skinner: twistor-gravity
+celestial algebra.} For twistor-theoretic self-dual gravity, the
+celestial boundary carries a chiral $\wtc$-algebra after anomaly
+cancellation~\cite{BittlestonHeuvelineSkinner}; the
+Adamo--Bogna--Mason--Sharma analysis~\cite{AdamoMasonSharmaCelestial}
+matches tree-level soft theorems.
+
+\medskip
+\noindent\textbf{Paquette--Williams: factorization-algebra HT
+quantization.} For a general HT theory, the boundary observables
+assemble into a chiral factorization algebra on the boundary complex
+line; under flatness and $Q$-exactness of bulk translations, this
+factorization algebra is a vertex/chiral algebra
+in the Beilinson--Drinfeld sense~\cite{PaquetteWilliamsHT,
+GwilliamWilliams25, WangWilliams24}.
+
+\medskip
+These constructions supply $\cA^{\mathrm{cel}}(T_4,\mathfrak b)$ in
+their respective regimes. The theorem packages the common categorical
+statement and isolates the filtered comparison at the Mellin cone.
+
+% =====================================
+\subsection{The universal theorem}
+\label{subsec:uch-theorem}
+% =====================================
+
+The theorem has three layers:
+(a) existence and naturality of $\cA^{\mathrm{cel}}$;
+(b) the $\SCchtop$-structure on the pair
+$(\cA^{\mathrm{cel}}, Z^{\mathrm{der}}_{\mathrm{ch}}(\cA^{\mathrm{cel}}))$;
+(c) the Mellin-shadow correspondence identifying the associated graded
+of celestial OPE with chiral factorization homology of
+$\cA^{\mathrm{cel}}$ on $\PP^1_{\text{cel}}$, with filtered lifts
+governed by cone cohomology.
+
+\begin{theorem}[Universal celestial holography;
+\ClaimStatusConditional]
+\label{thm:uch-main}
+\index{celestial holography!universal theorem|textbf}
+Let $T_4$ be a perturbative local BV theory on $\RR^4$ equipped
+with HT-twist data in the ansatz class of
+Definition~\ref{def:uch-ht-twist} --- the source objects of this
+chapter are these BV--HT pairs, not arbitrary $4$d QFTs --- with
+twist $T_4^{\mathrm{HT}}$ and a transverse boundary condition
+$\mathfrak b$
+for which the boundary QME anomaly and the gluing class
+$\gamma_{\mathrm{cel}}(T_4,\mathfrak b)$ vanish. Let
+$\cA^{\mathrm{cel}} := \cA^{\mathrm{cel}}(T_4,\mathfrak b)$
+(Definition~\ref{def:uch-boundary-chiral-algebra}). Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Existence and functoriality.)}
+$\cA^{\mathrm{cel}}$ is a well-defined chiral algebra on
+$\PP^1_{\text{cel}}$, equal to the $Q$-cohomology of the boundary
+observables of $T_3^{\mathrm{HT}}(T_4)$ with boundary condition
+$\mathfrak b$. The assignment
+$(T_4,\mathfrak b)\mapsto\cA^{\mathrm{cel}}(T_4,\mathfrak b)$ is a
+covariant functor on the category whose objects are the BV--HT
+pairs of the stated ansatz class (perturbative local BV theories on
+$\RR^4$ with HT-twist data, Definition~\ref{def:uch-ht-twist}, and
+admissible boundary condition) and whose morphisms are $Q$-equivariant
+BV maps preserving the null reduction, the boundary condition, and the
+vanishing of $\gamma_{\mathrm{cel}}$.
+
+\item \emph{($\SCchtop$-structure.)}
+Let $Z^{\mathrm{der}}_{\mathrm{ch}}(\cA^{\mathrm{cel}}) :=
+C^\bullet_{\mathrm{ch}}(\cA^{\mathrm{cel}},\cA^{\mathrm{cel}})$ denote
+the derived chiral centre computed via the bar resolution. The pair
+$\bigl(\cA^{\mathrm{cel}},\; Z^{\mathrm{der}}_{\mathrm{ch}}(\cA^{\mathrm{cel}})\bigr)$
+is canonically an algebra over $\SCchtop$: the closed colour is an
+$E_2$-chiral algebra structure on $Z^{\mathrm{der}}_{\mathrm{ch}}$
+(chiral higher Deligne, Theorem~\ref{thm:chiral-higher-deligne}), and the
+open colour is the $E_1$-chiral structure of $\cA^{\mathrm{cel}}$
+itself, with the mixed sector supplied by the universal brace.
+
+\item \emph{(Celestial OPE and chiral factorization homology.)}
+The associated graded of the HT-twisted celestial OPE algebra is the
+associated graded of chiral factorization homology:
+\[
+\gr\,\mathrm{OPE}_{\text{cel}}(T_4,\mathfrak b)
+\;\cong\;
+\gr\!\left(\int_{\PP^1_{\text{cel}}}\!\cA^{\mathrm{cel}}\right).
+\]
+The exact filtered equality
+\[
+\mathrm{OPE}_{\text{cel}}(T_4,\mathfrak b)
+\;\cong\;
+\int_{\PP^1_{\text{cel}}}\!\cA^{\mathrm{cel}},
+\]
+evaluated in the twisted sense that respects the $\SCchtop$-structure
+of~\textup{(ii)}, holds if and only if
+\[
+\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)=0
+\qquad
+\text{for all } g,r.
+\]
+The possible choices of exact filtered lift form a torsor for
+\(\prod_{g,r}H^1(\Cone(\mu_{g,r}))\).
+\end{enumerate}
+\end{theorem}
+
+The three clauses are proved in sequence.
+
+\begin{proof}[Proof of Theorem~\ref{thm:uch-main}]
+\emph{(i).}
+The bulk HT twist is a local BV theory on $\RR^4$ with a nilpotent
+supercharge $Q$. By Costello--Li~\cite[Thm.~6.2]{CL16}
+the KK reduction along $\RR_v$ preserves the HT structure on $\RR_u
+\times \CC_z$. By Costello--Gaiotto~\cite{CostelloGaiottoBoundaryVOA}
+the transverse Dirichlet boundary condition at $u=0$ yields a
+boundary chiral algebra: the boundary observables form a
+factorization algebra on $\CC_z$, and the chiral-algebra axiom
+(quantum master equation restricted to the boundary) follows from
+the HT twist data, transversality, and the vanishing
+boundary anomaly. $Q$-cohomology preserves these structures. The
+condition $\gamma_{\mathrm{cel}}(T_4,\mathfrak b)=0$ is the
+descent condition from the affine celestial chart to
+$\PP^1_{\text{cel}}$. Functoriality follows because the chosen
+morphisms preserve the BV differential, the null zero-mode reduction,
+the boundary condition, and the descent cocycle.
+
+\emph{(ii).}
+By Vol~I Theorem~C and the chiral higher Deligne theorem
+(Theorem~\ref{thm:chiral-higher-deligne}), the derived chiral centre
+of any chiral algebra carries an $E_2$-chiral structure. The pair
+$(\cA^{\mathrm{cel}}, Z^{\mathrm{der}}_{\mathrm{ch}}(\cA^{\mathrm{cel}}))$
+is an algebra over $\SCchtop$ through the bulk-to-boundary brace action:
+the closed colour is the $E_2$-chiral Gerstenhaber structure on
+$Z^{\mathrm{der}}_{\mathrm{ch}}$; the open colour is the $E_1$-chiral
+structure on $\cA^{\mathrm{cel}}$; the mixed sector is the universal
+brace action supplied by the bar complex. This is the abstract
+Swiss-cheese action of Vol~II
+(\S\ref{sec:CG-factorization-SC}, Theorem~\ref{V1-thm:sc-chtop-bulk-boundary}).
+No conformal vector enters at this stage; the $\SCchtop$ structure
+exists for every $\cA^{\mathrm{cel}}$, independent of any Sugawara construction.
+
+\emph{(iii).}
+Chiral factorization homology on $\PP^1_{\text{cel}}$ is by
+Beilinson--Drinfeld \cite{BeilinsonDrinfeldChiral} the global sections
+of the Ran-space factorization sheaf of $\cA^{\mathrm{cel}}$; its
+$n$-point support is Costello--Gwilliam's $n$-point observables in the
+free-field sector. On the boundary side, the celestial OPE is the
+Strominger dictionary~\cite{StromingerLectures2018}: momentum-space
+scattering amplitudes become correlation functions of conformal
+primaries on the celestial sphere. The content of (iii) is that the
+associated graded of the two sides agrees as chiral factorization
+data, not merely as linear spaces. This is checked level by level on
+the OPE expansion:
+collinear singularities of $4$d scattering map to OPE poles of
+$\cA^{\mathrm{cel}}$ (Fan--Pasterski--Shao~\cite{FanPasterskiShaoCelOPE});
+soft limits map to $\dlog$-extraction on the bar complex
+(Proposition~\ref{prop:uch-mellin-shadow}); and the $\SCchtop$
+structure of (ii) is the celestial incarnation of the bulk--boundary
+Swiss-cheese correspondence. Lifting from associated graded to the
+filtered factorization datum is exactly the obstruction problem for
+the maps $\mu_{g,r}$ of Definition~\ref{def:uch-comparison-classes}.
+\end{proof}
+
+\begin{corollary}[Bulk recovery; \ClaimStatusConditional]
+\label{cor:uch-bulk-recovery}
+For every pair $(T_4,\mathfrak b)$ satisfying the hypotheses of
+Theorem~\ref{thm:uch-main}, the associated graded of the perturbative
+partition function of $T_4$ on $\RR^4$ (or on any $\RR^4$-like
+asymptotically flat spacetime) is determined by
+$\cA^{\mathrm{cel}}(T_4,\mathfrak b)$ together with its
+$\SCchtop$-enriched factorization homology on $\PP^1_{\text{cel}}$.
+The exact filtered partition function has a lift from the same
+boundary data precisely when the classes
+$\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)$ vanish; the set of
+filtered lifts is the torsor for
+\(\prod_{g,r}H^1(\Cone(\mu_{g,r}))\) from
+Theorem~\ref{thm:uch-main}.
+\end{corollary}
+
+\begin{proof}
+The associated graded of the bulk $n$-point function factors through
+the chiral factorization homology of the boundary algebra on the
+celestial sphere, by Theorem~\ref{thm:uch-main}(iii). Perturbative
+expansion on $\RR^4$ lifts to the tree / loop expansion of the
+boundary factorization algebra when the comparison-cone obstruction
+vanishes.
+\end{proof}
+
+\begin{remark}[Scope boundaries]
+\label{rem:uch-scope}
+Theorem~\ref{thm:uch-main} is an algebraic statement about the
+perturbative / HT-twisted sector. Non-perturbative bulk effects
+(instantons, giant gravitons, smooth horizons) lie outside its reach;
+they correspond to vertex-operator insertions in $\cA^{\mathrm{cel}}$
+of singular conformal weight or to analytic continuations of the
+factorization homology beyond the HT-perturbative patch. The theorem
+gives an associated-graded / filtered statement in the
+perturbative sector; non-perturbative reconstruction of $T_4$ from the
+celestial datum lies outside the scope.
+\end{remark}
+
+% =====================================
+\subsection{Coverage: four regimes}
+\label{subsec:uch-coverage}
+% =====================================
+
+The hypotheses of Theorem~\ref{thm:uch-main} are realized by the
+following four canonical regimes.
+
+\subsubsection*{(a) Self-dual gauge via Costello--Gaiotto}
+
+\begin{proposition}[Celestial chiral algebra of self-dual gauge theory; \ClaimStatusProvedElsewhere]
+\label{prop:uch-sdgauge}
+Let $T_4 = $ self-dual Yang--Mills with gauge Lie algebra $\mathfrak g$
+and level parameter $k \in \ZZ$ (or $k \in \CC$ in the
+HT-regularized sense), equipped with the Costello--Gaiotto boundary
+condition $\mathfrak b$ for which the boundary anomaly and
+$\gamma_{\mathrm{cel}}$ vanish. Then
+\[
+\cA^{\mathrm{cel}}(T_4,\mathfrak b) \;=\; V_k(\mathfrak g),
+\]
+the affine Kac--Moody vertex algebra of $\mathfrak g$ at level $k$.
+The level is the Costello--Paquette one-loop boundary anomaly
+coefficient.
+\end{proposition}
+
+\begin{proof}
+This is Costello--Paquette~\cite[Thm.~1.1]{CostelloPaquetteTwistedSugraStates}:
+the bulk $4$d Chern--Simons on $\CC_z \times \RR^2_{\text{top}}$ has
+Costello--Gaiotto boundary algebra $V_k(\mathfrak g)$. The same result
+is obtained by twistor methods in Costello--Paquette--Sharma's
+\cite{CostelloPaquetteSharmaCelestial}. The HT twist of
+$4$d Yang--Mills reduces to this self-dual sector in the
+leading-in-$\hbar$ / one-loop-exact sense~\cite{CL16};
+the level-shift by the dual Coxeter number is the one-loop
+$\beta$-function.
+\end{proof}
+
+Evaluation of Theorem~\ref{thm:uch-main}(ii,iii) on
+$\cA^{\mathrm{cel}} = V_k(\mathfrak g)$ yields the Kac--Moody
+celestial OPE algebra predicted by
+Strominger~\cite{StromingerWInfinityCelestial} and Fan--Pasterski--Shao
+\cite{FanPasterskiShaoCelOPE}, with Kac--Moody obstruction coefficient
+$\kap(V_k(\mathfrak g)) = \dim(\mathfrak g) (k + h^\vee)/(2 h^\vee)$
+(Vol~I census C3). The critical level $k = -h^\vee$ corresponds to
+the chirality-bound limit where the celestial algebra degenerates to
+the Feigin--Frenkel centre: no soft tower, only opers.
+
+\subsubsection*{(b) Gauge with matter via Drinfeld--Sokolov reduction}
+
+\begin{proposition}[Celestial chiral algebra of $\cN{=}2$ gauge theory
+via DS; \ClaimStatusConditional]
+\label{prop:uch-ds-matter}
+Let $T_4$ be an $\cN{=}2$ gauge theory with gauge algebra
+$\mathfrak g$ and matter in a representation $R$, and let
+$T_4^{\mathrm{HT}}$ be its HT twist of Costello--Gwilliam /
+Paquette--Williams type with transverse boundary condition
+$\mathfrak b$ whose QME anomaly and celestial gluing class vanish.
+Assume the boundary superpotential supplies a first-class
+Drinfeld--Sokolov datum $f$. Then
+\[
+\cA^{\mathrm{cel}}(T_4,\mathfrak b) \;=\; H^\bullet_{\mathrm{DS},f}\!\bigl(V_k(\mathfrak g)
+\otimes F_R\bigr),
+\]
+where $F_R$ is the $bc$-ghost / $\beta\gamma$-matter system of
+representation $R$, $f$ is the Drinfeld--Sokolov datum determined by
+the superpotential, and $H^\bullet_{\mathrm{DS},f}$ is the
+Drinfeld--Sokolov BRST reduction. In particular, the class of
+$\cA^{\mathrm{cel}}$ is
+\begin{itemize}
+\item class~$\mathbf L$ (logarithmic / affine) for $f = 0$,
+\item class~$\mathbf M$ (modular) for $f$ principal.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+The $4$d HT twist of an $\cN{=}2$ gauge theory has boundary the
+tensor product of the Kac--Moody algebra $V_k(\mathfrak g)$ with a
+matter vertex algebra $F_R$, by Costello--Gwilliam's chiral
+factorization quantization applied to the HT-twisted BV action
+\cite{CostelloGwilliamVolI, CostelloGwilliamVolII}. The
+superpotential contributes a first-class BRST constraint which, in
+the boundary chiral algebra, is precisely the Drinfeld--Sokolov
+reduction at data $f$~\cite[\S 5]{PaquetteWilliamsHT}. The class
+assignment is the characteristic-datum classification of
+Part~\ref{part:examples}: $f=0$ reduces trivially (class~$\mathbf L$),
+principal $f$ produces $\cW_N$-algebras (class~$\mathbf M$).
+\end{proof}
+
+\begin{remark}[Hook-type and subregular reductions]
+\label{rem:uch-ds-hook}
+For non-principal $f$ at hook type (rank $\leq N-3$) the reduction
+is covered by Kac--Roan--Wakimoto~\cite{KRW03} and
+Arakawa~\cite{Ara07}; the celestial algebra is a non-principal
+$\cW_N$-algebra. For subregular $f$ the reduction decomposes as a
+product of a principal $\cW_{N-2}$-algebra times $\mathfrak{sl}_2$
+current algebra times a $\beta\gamma$-system (Vol~I theorem on
+non-principal W).
+\end{remark}
+
+\subsubsection*{(c) Gravity via Virasoro and $\wtc$}
+
+\begin{proposition}[Celestial chiral algebra of HT twisted gravity,
+leading order; \ClaimStatusProvedElsewhere]
+\label{prop:uch-gravity-leading}
+Let $T_4 = $ self-dual Einstein gravity or its twistor-theoretic
+completion (Costello--Paquette--Sharma, Bittleston--Heuveline--Skinner),
+equipped with a transverse boundary condition $\mathfrak b$ for which
+the boundary anomaly and $\gamma_{\mathrm{cel}}$ vanish. Then at
+leading order in the HT twist,
+\[
+\cA^{\mathrm{cel}}(T_4,\mathfrak b) \;\supseteq\; \mathrm{Vir}_c
+\;\hookrightarrow\; \wtc^{\wedge},
+\]
+with the Virasoro stress tensor (the spin-$2$ generator of $\wtc$)
+arising from the soft-graviton mode $\Delta = 2$ and the rest of the
+$\wtc$-tower from the soft-graviton tower
+$\Delta = 2, 1, 0, -1, \dots$ of
+Strominger~\cite{StromingerWInfinityCelestial}; the symbol
+$\wtc^{\wedge}$ denotes the weight-completion of $\wtc$, required
+because $\wtc$ is not finitely strongly generated and the
+large-spin tail accumulates only after completion
+(the completion is the $N \to \infty$ limit of $\cW_N$ at per-spin
+rate governed by the finite-spin $\cW_N$ ladder). On the original
+complex only the Virasoro sub-VOA is chain-level controlled; the full
+$\wtc$ chain-level statement requires the class-$\mathbf M$ weight-completed
+category. The class of $\cA^{\mathrm{cel}}$ is~$\mathbf M$ (modular) and
+the shadow depth is infinite.
+\end{proposition}
+
+\begin{proof}
+The leading soft-graviton theorem gives the supertranslation current.
+The Virasoro stress-tensor sector belongs to the subleading
+superrotation channel in the boundary comparison datum. The $\wtc$
+extension is constructed explicitly in
+\cite{StromingerWInfinityCelestial,
+GuevaraHimwichPateStrominger21,
+AdamoMasonSharmaCelestial,
+BittlestonHeuvelineSkinner}. Embedding into $\cA^{\mathrm{cel}}$ is
+Theorem~\ref{thm:uch-main}(i) applied to the HT twist of twistor
+gravity with the chosen boundary datum.
+\end{proof}
+
+\begin{proposition}[Higher-order shadow--soft coefficient; \ClaimStatusProvedHere]
+\label{prop:uch-gravity-higher-partial}
+With $T_4$ as in Proposition~\ref{prop:uch-gravity-leading},
+the genus-$g$ shadow coefficient
+$\Theta_r^{(g)}(\cA^{\mathrm{cel}})$ encodes the $g$-loop correction
+to the sub${}^{r-2}$-leading soft-graviton theorem. The obstruction
+group governing finiteness vanishes on the original complex for
+classes $\mathbf G, \mathbf L, \mathbf C$ and on the
+weight-completed ambient for class $\mathbf M$.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:uch-mellin-shadow}(iii) the shadow
+coefficient is the $g$-loop correction to the Mellin amplitude at the
+reduced pole $\Delta_s^{\mathrm{red}}=3-r$, equivalently the
+stress-tensor pole $\Delta_s^{\mathrm{st}}=4-r$. Finiteness is the
+modular-bootstrap
+$H^2 = 0$ condition (Vol~I Theorem~MC4); for classes
+$\mathbf G, \mathbf L, \mathbf C$ it is Vol~I Theorem~MC4, and for
+class $\mathbf M$ it is the weight-completed statement of Vol~I
+Theorem~MC5.
+\end{proof}
+
+\begin{theorem}[Chain-level class $\mathbf M$ identification on the
+pro-ambient; \ClaimStatusConditional]
+\label{thm:uch-gravity-chain-level}
+For class $\mathbf M$ celestial algebras arising from HT-twisted
+gravity, the identification of the genus-$g$ shadow coefficient with
+the $g$-loop sub${}^{r-2}$-leading soft theorem holds chain-level on
+the \emph{pro-object ambient $\mathrm{pro}\text{-}\mathrm{Ch}(\mathrm{Vect})$,
+equivalently on the $J$-adic topological or weight-completed ambient
+of Vol~I Theorem~MC5}, transported through the
+Drinfeld--Sokolov--Hochschild bridge, with the completed
+bar-coalgebra/coderivation-transfer package and bounded-shift HPL
+convergence as part of the datum. On the bounded direct-sum ambient
+$\mathrm{Ch}(\mathrm{Vect})$ the direct-sum comparison fails by the
+ambient-stratified class-$\mathbf M$ obstruction of
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}.
+\end{theorem}
+
+\begin{proof}
+The chain-level pairing is the Virasoro chiral Hochschild complex
+$\mathrm{ChirHoch}^\bullet(\mathrm{Vir}_c)$ on the pro-ambient. The
+genus-$g$ shadow coefficient is the $(r{-}2)$-th bracket on the
+weight-$g$ stratum of $\mathrm{ChirHoch}^\bullet(\mathrm{Vir}_c)$ by
+Proposition~\ref{prop:uch-gravity-higher-partial}, and the
+sub${}^{r-2}$-leading soft theorem is its Mellin-transformed avatar
+by Theorem~\ref{thm:uch-soft-hierarchy}\,(iii). We transport the
+identification through DS in four steps.
+
+	\emph{Step 1 (DS--Hochschild bridge).} Invoke
+Theorem~\ref{thm:chd-ds-hochschild} from the chiral higher Deligne
+chapter with its completed DS bar-coalgebra SDR, induced transfer on
+\(\Coder_0(B^{\mathrm{ch}}(-))\), and bounded-shift HPL hypotheses:
+for any non-critical level $k \neq -2$ on that surface,
+\[
+\mathrm{ChirHoch}^\bullet(\mathrm{Vir}_{c(k)})
+\;\simeq\;
+\mathrm{ChirHoch}^\bullet\!\bigl(\mathrm{DS}_{f_{\mathrm{prin}}} V_k(\mathfrak{sl}_2)\bigr)
+\;\simeq\;
+H^\bullet_{\mathrm{DS}}\!\bigl(\mathrm{ChirHoch}^\bullet(V_k(\mathfrak{sl}_2))\bigr),
+\]
+as chain-level $E_2$-chiral Gerstenhaber algebras, where
+$c(k) = 1 - 6(k+1)^2/(k+2)$ is the Feigin--Frenkel central charge.
+The bridge is not obtained by applying Hochschild cochains to the DS
+algebra retract.  It is the coderivation transfer induced by the
+completed DS bar-coalgebra SDR, and its HPL convergence is the
+bounded-shift/weight-completed estimate.
+
+\emph{Step 2 (Chain-level $V_k(\mathfrak{sl}_2)$ side).} At
+non-critical level, $V_k(\mathfrak{sl}_2)$ is class $\mathbf L$, and its
+chiral Hochschild complex is controlled at chain level on the original
+complex by the Vol~I PBW/Koszul class-$\mathbf L$ finite-propagation
+theorem, not by a lisse \(C_2\)-finite hypothesis:
+$\mathrm{ChirHoch}^\bullet(V_k(\mathfrak{sl}_2))$ is a chain-level
+quasi-isomorphism away from the modular-bootstrap obstruction, which
+vanishes by $H^2 = 0$ in Vol~I Theorem~MC4 for class $\mathbf L$.
+
+\emph{Step 3 (DS preserves chain-level qiso).} The Drinfeld--Sokolov
+reduction functor $\mathrm{DS}_{f_{\mathrm{prin}}}$ is exact on the
+Kazhdan-graded category (Arakawa, Feigin--Frenkel).  For Hochschild
+cochains this exactness becomes a comparison only after the supplied
+bar-coalgebra intertwining and coderivation-transfer package is
+installed.  Applying $H^\bullet_{\mathrm{DS}}$ to the chain-level model of
+$\mathrm{ChirHoch}^\bullet(V_k(\mathfrak{sl}_2))$ yields a chain-level
+model of $\mathrm{ChirHoch}^\bullet(\mathrm{Vir}_{c(k)})$ on the
+Kazhdan-graded / weight-completed ambient.
+
+\emph{Step 4 (Pro-ambient limit).} The weight-filtered tower
+$\{F^{R+1}\mathrm{ChirHoch}^\bullet(\mathrm{Vir}_{c(k)})\}_{R \geq 0}$
+has finite-dimensional quotients $F^{R} / F^{R+1}$ by
+conformal-weight finiteness, so the Milnor / Mittag-Leffler apparatus
+of Proposition~\ref{prop:bv-bar-class-m-weight-completed} promotes
+the finite-stage chain-level quasi-isomorphisms to the inverse limit.
+The inverse limit is the pro-object bar complex; equivalently, the
+$J$-adic topological chain complex; equivalently, the weight-completed
+ambient. In any of these three equivalent ambients, the chain-level
+identification holds.
+
+On the bounded direct-sum ambient $\mathrm{Ch}(\mathrm{Vect})$ the
+identification fails: the harmonic-source analysis of
+Proposition~\ref{prop:bv-bar-class-m-weight-completed} gives a
+permanent cubic source regenerating nonzero higher harmonic
+discrepancies $\delta_r^{\mathrm{harm}} =
+c_r(\mathrm{Vir}_c) \cdot m_0^{\lfloor r/2 \rfloor - 1}$ at every
+stage, and a strict direct-sum comparison would have to absorb
+infinitely many nonvanishing higher corrections by a single ordinary
+chain-homotopy package. The class-$\mathbf M$ chain-level comparison
+therefore fails on the direct-sum ambient and holds on the
+pro-ambient.
+\end{proof}
+
+\begin{remark}[Class $\mathbf M$ gravity ambient]
+\label{rem:uch-gravity-chain-level-promotion}
+Theorem~\ref{thm:uch-gravity-chain-level} is a pro-ambient theorem.
+On the bounded direct-sum ambient $\mathrm{Ch}(\mathrm{Vect})$ the
+class-$\mathbf M$ direct-sum chain-level MC5 statement fails by the
+permanent cubic source of
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}. The
+pro-ambient statement rests on three inputs:
+\begin{enumerate}
+\item Theorem~\ref{thm:chd-ds-hochschild} (chiral higher Deligne
+chapter): chain-level DS--Hochschild compatibility bridge on the
+Kazhdan-graded / weight-completed ambient, under the completed
+bar-coalgebra SDR, induced coderivation transfer, and bounded-shift HPL
+package.
+\item Modular-bootstrap $H^2 = 0$ in the class-$\mathbf M$
+weight-completed category, extending Vol~I Theorem~MC4.
+\item Chain-level chiral Hochschild complex of the Feigin--Frenkel
+regime on the Kazhdan-graded ambient, supplying the
+$V_k(\mathfrak{sl}_2)$-side chain model used in Step~2.
+\end{enumerate}
+Against the Vol~I class-$\mathbf M$ pro-ambient reformulation, the
+statement can be read as chain-level MC5 on the
+\emph{ambient-neutral} original complex realised as its canonical
+inverse limit in
+$\mathrm{pro}\text{-}\mathrm{Ch}(\mathrm{Vect})$; under that reading
+the weight-completion is an ambient choice rather than a mathematical
+obstruction. This ambient statement is restricted to the gravity lane.
+\end{remark}
+
+\subsubsection*{(d) Yang--Mills via HT-twisted $\cN{=}2$}
+
+\begin{proposition}[Celestial chiral algebra of HT-twisted Yang--Mills
+on the Schur locus; \ClaimStatusConditional]
+\label{prop:uch-ym}
+Let $T_4$ be an $\cN{=}2$ Yang--Mills SCFT with gauge algebra
+$\mathfrak g$, conformal matter, gauge-anomaly cancellation, and an
+HT boundary realization whose Schur sector is the boundary observable
+algebra. Then the celestial chiral algebra is the Beem--Rastelli
+$4$d/2d chiral algebra
+\cite{BeemRastelliChiralAlgebras4d,BLLRvR15} restricted to the HT
+sector:
+\[
+\cA^{\mathrm{cel}}(T_4,\mathfrak b) \;=\; \chi(T_4),
+\]
+where $\chi$ is the Beem--Rastelli functor. The shadow class is
+$\mathbf L$ for pure gauge, $\mathbf M$ for conformal with matter of
+class-$\cS$ type.
+\end{proposition}
+
+\begin{proof}
+Costello--Gwilliam's chiral quantization of the HT-twisted BV
+Yang--Mills action gives the boundary chiral algebra as the Schur
+sector of the $\cN{=}2$ BPS algebra, which is the Beem--Rastelli
+chiral algebra $\chi(T_4)$ by
+\cite[\S 4]{PaquetteWilliamsHT}. The class assignment is the Vol~I
+census applied to the known vertex algebras in the image of $\chi$:
+affine Kac--Moody (pure gauge, class $\mathbf L$), $\cW_N$ for class
+$\cS$ (class $\mathbf M$), and more exotic cases for non-Lagrangian
+theories.
+\end{proof}
+
+\begin{remark}[Boundary data per regime]
+\label{rem:uch-coverage-scope}
+The four regimes of \S\ref{subsec:uch-coverage} carry distinct
+boundary data.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item Self-dual gauge (Proposition~\ref{prop:uch-sdgauge}):
+the HT twist is algebraic; the $4$d Chern--Simons bulk realizes it;
+Costello--Gaiotto boundary VOA is $V_k(\mathfrak g)$ as a chiral
+algebra on $\CC_z$, after the boundary anomaly is cancelled.
+\item Gauge with matter (Proposition~\ref{prop:uch-ds-matter}):
+the datum is conformal $\cN{=}2$ matter with HT-twist-unobstructed
+superpotential. For non-conformal matter, the spectral-flow ambiguity
+of Theorem~\ref{thm:uch-main}(i) propagates into the
+Drinfeld--Sokolov datum and the class assignment becomes local
+(per-fibre) rather than global.
+\item Gravity (Proposition~\ref{prop:uch-gravity-leading}):
+the Virasoro sub-VOA is chain-level on the original complex for the
+HT-twisted gravity theories satisfying the boundary datum above; the
+full $\wtc^{\wedge}$ is chain-level only after weight-completion. The
+large-spin tail (spin $s \ge 3$) accumulates only in the completed
+class-$\mathbf M$ category.
+\item Yang--Mills (Proposition~\ref{prop:uch-ym}):
+the Beem--Rastelli $\chi$-functor is defined on $\cN{=}2$ SCFTs, not
+on arbitrary YM. The identification
+$\cA^{\mathrm{cel}}(T_4,\mathfrak b) = \chi(T_4)$ is valid on the
+SCFT locus (conformal matter, gauge anomaly cancellation); for
+non-conformal $\cN{=}2$ YM the celestial algebra
+exists by Costello--Gwilliam HT quantisation but is not the
+$\chi$-image, and Proposition~\ref{prop:uch-ym} reduces to the
+(b) DS route with spectral-flow ambiguity. The $\chi$-functor's
+range is a proper subcategory of all chiral algebras, characterised
+by Beem--Rastelli Schur conditions; the HT-twisted perturbative
+content outside this range is described by the
+Costello--Gwilliam boundary VOA directly, without routing through
+$\chi$.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Non-Lagrangian examples]
+\label{rem:uch-nonlagrangian}
+For Argyres--Douglas theories and other non-Lagrangian $\cN{=}2$
+SCFTs, the Beem--Rastelli functor still produces a vertex algebra
+(logarithmic or fractional-level). This supplies the boundary chiral
+algebra entering Theorem~\ref{thm:uch-main} once an HT boundary
+realization and the vanishing classes of
+Definition~\ref{def:uch-comparison-classes} are supplied. The relevant
+vertex algebras are admissible-level affine, class-$\cS$ $\cW$-algebras, or the
+Kac--Kazhdan / Adamovi\'c logarithmic families of~\cite{ACK24, ACK24b,
+Adamovic03}.
+\end{remark}
+
+% =====================================
+\subsection{Mellin--shadow dictionary}
+\label{subsec:uch-mellin}
+% =====================================
+
+The Mellin--shadow dictionary is the filtered bridge between the
+$4$d momentum-space amplitude and the celestial OPE. The associated
+graded is the $d\log$ extraction map on the chiral bar complex.
+
+\begin{proposition}[Mellin--shadow dictionary; \ClaimStatusProvedHere]
+\label{prop:uch-mellin-shadow}
+\index{Mellin transform!shadow dictionary}
+\index{celestial holography!Mellin--shadow}
+Let $(T_4,\mathfrak b)$ satisfy the hypotheses of
+Theorem~\ref{thm:uch-main}, and let $\cA^{\mathrm{cel}}$ be its
+celestial chiral algebra. Let $\cM_n(\omega_i, z_i, \bar z_i)$ be
+the $n$-point momentum-space amplitude of $T_4$ in the HT-twisted
+sector, parametrized by energies $\omega_i$ and celestial
+stereographic coordinates $(z_i, \bar z_i)$. The Mellin transform
+\begin{equation}
+\label{eq:uch-mellin}
+\Mel\cM_n(\Delta_i, z_i, \bar z_i)
+\;:=\;
+\prod_{i=1}^n \int_0^\infty \omega_i^{\Delta_i - 1}\,d\omega_i\cdot
+\cM_n(\omega_i, z_i, \bar z_i)
+\end{equation}
+satisfies:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Celestial correlation function.)}
+$\Mel\cM_n = \bigl\langle \prod_{i=1}^n \cO_{\Delta_i}(z_i, \bar z_i)
+\bigr\rangle_{\cA^{\mathrm{cel}}}$,
+the $n$-point correlation function of celestial primaries in
+$\cA^{\mathrm{cel}}$, with $\cO_{\Delta_i}$ the conformal primary of
+conformal weight $\Delta_i$, in the HT-twisted perturbative sector.
+\item \emph{(Conformally soft bar-cohomology classes.)}
+For each integer $k \geq 0$, the conformally soft pole
+$\Delta_i \to 1 - k$ has associated graded paired with a
+bar-cohomology class
+$[\xi_k] \in H^k(\Barch(\cA^{\mathrm{cel}}))$.
+The filtered residue formula
+\[
+\Res_{\Delta_i = 1-k}\,\Mel\cM_n
+\;=\;
+\bigl\langle \xi_k(z_i, \bar z_i)\cdot
+\prod_{j \neq i} \cO_{\Delta_j}(z_j, \bar z_j)
+\bigr\rangle_{\cA^{\mathrm{cel}}}
+\]
+holds exactly when the class
+\[
+\Obs^{\mathrm{Mell}}_{0,k}(T_4,\mathfrak b)
+\in H^2\!\bigl(\Cone(\mu_{0,k})\bigr)
+\]
+vanishes; the choices of such filtered residues form a torsor for
+$H^1(\Cone(\mu_{0,k}))$. Without this vanishing it is the
+associated-graded comparison.
+\item \emph{(Genus expansion.)}
+The associated graded of the full Mellin amplitude admits a genus
+expansion controlled by the shadow tower:
+$Z^{\mathrm{sh}}(\hbar) := \exp\!\bigl(\sum_{g \geq 0} \hbar^{2g}
+F_g\bigr)$, where $F_g = \Theta_{\cA^{\mathrm{cel}}}^{(g)}$ is the
+genus-$g$ shadow coefficient of $\cA^{\mathrm{cel}}$. The filtered
+genus expansion is obtained when all
+$\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)$ vanish, with choices
+parametrized by \(\prod_{g,r}H^1(\Cone(\mu_{g,r}))\).
+\item \emph{($\SCchtop$ compatibility.)}
+Under the Mellin correspondence, bulk chiral braces in
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cA^{\mathrm{cel}})$ correspond to
+soft--soft OPEs, and boundary products in $\cA^{\mathrm{cel}}$
+correspond to Mellin convolutions.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{(i).}
+This is the original Pasterski--Shao--Strominger dictionary
+\cite[\S 3]{PasterskiShaoStromingerFlatSpaceHolog}, expressed in
+the HT-twisted sector. The Mellin transform converts momentum-space
+energy weights $\omega_i$ into conformal weights $\Delta_i$ on the
+celestial sphere; Lorentz invariance of $T_4$ becomes $SL(2,\CC)$
+conformal invariance of the celestial correlator; boundary
+observables of the HT twist (= $\cA^{\mathrm{cel}}$) are the
+primaries~\cite[\S 2]{StromingerLectures2018}.
+
+\emph{(ii).}
+At the pole $\Delta_i = 1 - k$ the Mellin integrand behaves as
+$\omega_i^{-k}\,d\omega_i$, extracting the degree-$k$ coefficient in
+the low-energy expansion of $\cM_n$. This degree-$k$ coefficient is,
+by $Q$-exactness of the HT-twisted boundary differential, equal to
+the $k$-th iteration of the bar coproduct on the shadow. The
+$\dlog$-extraction mechanism of Vol~I Theorem~H (the theorem-H pointer
+\texttt{thm:theorem-h-platonic-pointer}, and corresponding
+$\cA^{\mathrm{cel}}$ instance in Theorem~\ref{thm:ch-core-helicity-splitting})
+identifies the associated graded of this coefficient with the
+bar-cohomology class $[\xi_k] \in H^k(\Barch(\cA^{\mathrm{cel}}))$.
+The pairing with the other insertions is by definition of the
+$n$-point factorization homology. The passage from associated graded
+to filtered equality is the lifting problem for $\mu_{0,k}$, with
+obstruction in $H^2(\Cone(\mu_{0,k}))$ and ambiguity torsor
+$H^1(\Cone(\mu_{0,k}))$.
+
+\emph{(iii).}
+Genus $g \geq 1$ corrections arise from the genus-$g$ stratum of the
+Mok~\cite{Mok25LogFM} logarithmic Fulton--MacPherson compactification
+$\overline{\cM}_{g,n}(\PP^1_{\text{cel}})$ relevant for factorization
+homology on the celestial sphere. The bar differential acquires
+curvature $d^2 = \kap \cdot \omega_g$ on the genus-$g$ stratum
+(Vol~I Theorem~D), and the shadow coefficient $\Theta^{(g)}$ is the
+$g$-loop associated-graded obstruction. The filtered agreement with
+the perturbative $4$d expansion is governed by
+$\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)$.
+
+\emph{(iv).}
+Compatibility with $\SCchtop$ is a consequence of
+Theorem~\ref{thm:uch-main}(ii): the Mellin transform is linear and
+extends to the tensor powers $\cA^{\mathrm{cel},\otimes n}$ by
+multiplicativity; under this extension, closed-colour chiral braces
+correspond to the soft-soft collisions of celestial insertions (a
+soft graviton colliding with another soft graviton produces a
+boundary-OPE brace), and open-colour products correspond to Mellin
+convolution on the conformal dimensions.
+\end{proof}
+
+\begin{remark}[Celestial Weinberg residue]
+\label{rem:uch-weinberg-identification}
+The residue at $\Delta_s=2$ is the depth-$1$ instance of
+Proposition~\ref{prop:uch-mellin-shadow}. Its associated graded is the
+Weinberg soft insertion; the exact filtered Weinberg identity is
+equivalent to
+$\Obs^{\mathrm{Mell}}_{0,1}(T_4,\mathfrak b)=0$.
+\end{remark}
+
+% =====================================
+\subsection{Soft-theorem hierarchy}
+\label{subsec:uch-soft}
+% =====================================
+
+The leading (Weinberg), subleading (Cachazo--Strominger), and
+sub${}^{r-2}$-leading soft graviton /
+soft gluon comparison terms are shadow-tower classes on the associated
+graded. The exact filtered soft hierarchy is the vanishing theorem on
+the Mellin comparison cone.
+
+Two conformal-dimension conventions are in use. The reduced
+Pasterski--Shao--Strominger primary convention has soft level $p$ at
+$\Delta^{\mathrm{red}}=1-p$. The gravitational stress-tensor
+normalisation used for the Virasoro factor is shifted by one:
+$\Delta^{\mathrm{st}}=\Delta^{\mathrm{red}}+1$. Thus an arity-$r$
+shadow operation, with $p=r-2$, appears at
+$\Delta^{\mathrm{red}}=3-r$ in the reduced convention and at
+$\Delta^{\mathrm{st}}=4-r$ in the stress-tensor convention used below.
+
+\begin{theorem}[Universal soft-theorem hierarchy; \ClaimStatusConditional]
+\label{thm:uch-soft-hierarchy}
+\index{soft graviton theorem!universal hierarchy}
+Let $(T_4,\mathfrak b)$ satisfy the hypotheses of
+Theorem~\ref{thm:uch-main}, with celestial chiral algebra
+$\cA^{\mathrm{cel}}$. For every integer $r \geq 2$ and every genus
+$g \geq 0$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The associated graded of the $g$-loop sub${}^{r-2}$-leading
+soft-graviton (resp.\ soft-gluon) theorem of $T_4$ is the residue
+\[
+\Res_{\Delta_s = 2 - (r-2)}\,
+\Mel\cM_n(\Delta_s; \Delta_j, z_j, \bar z_j)
+\;=\;
+\bigl\langle \xi_{r-1}^{(g)}\cdot
+\prod_{j \neq s} \cO_{\Delta_j}
+\bigr\rangle_{\cA^{\mathrm{cel}}},
+\]
+where $\xi_{r-1}^{(g)} \in H^{r-1}\!\bigl(\Barch(\cA^{\mathrm{cel}})\bigr)$
+is the shadow class of depth $r-1$ at genus $g$, determined by the
+shadow coefficient $\Theta_{r-1}^{(g)}$.
+
+\item For $r \in \{2, 3\}$ the associated-graded match reproduces
+Weinberg and Cachazo--Strominger. It is exact at genus~$0$ when
+$\Obs^{\mathrm{Mell}}_{0,r}(T_4,\mathfrak b)=0$; at $g \geq 1$ it is
+exact on the original complex for classes
+$\mathbf G, \mathbf L, \mathbf C$, and holds in the weight-completed
+category for class $\mathbf M$ (Vol~I Theorem~MC5). The chain-level
+statement on the pro-ambient / weight-completed ambient for class
+$\mathbf M$ at $g \geq 1$ is
+Theorem~\ref{thm:uch-gravity-chain-level}; the bounded direct-sum ambient
+$\mathrm{Ch}(\mathrm{Vect})$ chain-level comparison fails by
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}; the completed
+comparison is the ambient-stratified MC5 statement.
+
+\item For $r \geq 4$ the associated-graded match holds at genus~$0$
+for $\cA^{\mathrm{cel}}$ of any class. It is an exact filtered
+identity precisely when
+$\Obs^{\mathrm{Mell}}_{0,r}(T_4,\mathfrak b)=0$. At $g \geq 1$ the
+same criterion is evaluated on the original complex for classes
+$\mathbf G, \mathbf L, \mathbf C$, and in the weight-completed
+category for class $\mathbf M$.
+
+\item The bar cohomology of $\cA^{\mathrm{cel}}$ is the associated
+graded of the HT-twisted celestial-OPE soft data:
+\[
+H^\bullet\!\bigl(\Barch(\cA^{\mathrm{cel}})\bigr)
+\;\cong\;
+\gr\!\left(
+\bigoplus_{r \geq 0} \bigoplus_{g \geq 0}
+\;\text{sub}^r\text{-leading soft data at genus } g
+\right).
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{(i).}
+This is Proposition~\ref{prop:uch-mellin-shadow}(ii) applied in the
+reduced convention at
+$\Delta_s^{\mathrm{red}}\to 1-(r-2)=3-r$, then rewritten in the
+stress-tensor convention
+$\Delta_s^{\mathrm{st}}=\Delta_s^{\mathrm{red}}+1=4-r$. The
+associated graded of the Mellin residue extracts the shadow class of
+depth $r-1$ at genus $g$, paired with the remaining hard insertions.
+
+\emph{(ii).}
+At \(r=2\), the associated graded is the leading soft channel, i.e.\
+the supertranslation/energy-momentum Ward identity of Weinberg's soft
+theorem. At \(r=3\), the associated graded is the subleading
+superrotation channel; its shadow is the Virasoro stress tensor and
+its soft theorem is Cachazo--Strominger's subleading theorem
+\cite{CachazoStrominger14,StromingerLectures2018}.
+
+\emph{(iii).}
+At $r \geq 4$, the associated-graded coefficient extracted by the
+shadow residue is computed level by level on the OPE of $T(z)$ with
+itself (for gravitons) or $J^a(z)$ with itself (for gluons). By
+Proposition~\ref{prop:uch-mellin-shadow}(ii) this coefficient is
+\[
+\Theta_{r-1}^{(g)}\!\bigl(\cA^{\mathrm{cel}}\bigr)
+\cdot
+\text{universal kinematic factor},
+\]
+and the universal kinematic factor is compared with the
+four-dimensional soft-theorem operators of
+Hamada--Shiu~\cite{HamadaShiuSubsubSoft} and the celestial
+soft-current algebra
+\cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}.
+The scalar coefficient remains the shadow coefficient of the boundary
+chiral algebra at depth \(r-1\); no external paper is used as a
+coefficient oracle for this rational function. The exact filtered
+statement is the vanishing
+of $\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)$. Genus
+$g \geq 1$ finiteness is Vol~I Theorem~MC4; at class $\mathbf M$ it
+holds in the weight-completed category (Vol~I Theorem~MC5).
+
+\emph{(iv).}
+The Koszul bigrading on $\Barch(\cA^{\mathrm{cel}})$ assigns a pair
+$(r, g) = (\text{shadow depth}, \text{genus})$ to each cohomology
+class. The celestial-OPE side has a parallel associated-graded
+bigrading by soft order and loop order. Both bigradings are preserved
+by the Mellin correspondence of Proposition~\ref{prop:uch-mellin-shadow}.
+The cone class records exactly whether the bigraded associated-graded
+soft datum lifts to an equality of filtered celestial residues; the
+$H^1$ of the same cone records the ambiguity of the lift.
+\end{proof}
+
+\begin{remark}[Higher-$r$ cone criterion]
+\label{rem:uch-fm103-resolution}
+For $r\geq 4$, Theorem~\ref{thm:uch-soft-hierarchy} gives the
+associated-graded shadow coefficient directly from
+\(\Theta^{(g)}_{r-1}\). The filtered coefficient is the same number
+after a choice of lift precisely on the obstruction-free locus
+$\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)=0$; the choice is unique
+when $H^1(\Cone(\mu_{g,r}))=0$.
+\end{remark}
+
+% =====================================
+\subsection{Celestial duals: Heisenberg and Virasoro}
+\label{subsec:uch-duals}
+% =====================================
+
+The Heisenberg and Virasoro celestial duals are the two fundamental
+shadows of Vol~I. They exhibit the extremal behaviours in the
+G/L/C/M classification: finite shadow tower with vanishing loop correction
+for Heisenberg, infinite tower with modular completion for Virasoro.
+
+\begin{proposition}[Celestial dual of Heisenberg; \ClaimStatusProvedHere]
+\label{prop:uch-celestial-heisenberg}
+Let $(T_4,\mathfrak b)$ satisfy the hypotheses of
+Theorem~\ref{thm:uch-main}, with celestial chiral algebra
+$\cA^{\mathrm{cel}}(T_4,\mathfrak b) = \cH_k$, the Heisenberg vertex
+algebra at level $k \neq 0$. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The celestial OPE algebra is abelian Kac--Moody: a single
+$U(1)$ current $J(z)$ with OPE $J(z)J(w) \sim k/(z-w)^2$,
+corresponding to a single conformally soft photon / soft tower.
+\item The shadow tower is finite: $\kap(\cH_k) = k$ and all higher
+$\Theta^{(g)}_r$ vanish for $g + r \geq 2$. The soft-theorem
+hierarchy truncates at $r = 2$ (Weinberg only).
+\item The $\SCchtop$-structure collapses: $\cA^{\mathrm{cel}}$ is of
+class $\mathbf G$, hence SC-formal (Vol~I, SC-formality equivalent
+to class $\mathbf G$), and the $E_3$-topological structure on
+$Z^{\mathrm{der}}_{\mathrm{ch}}(\cH_k)$ is supplied by the abelian
+Sugawara construction $T = (1/2k)\!:\!JJ\!:$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) follows from Proposition~\ref{prop:uch-sdgauge} applied to
+$\mathfrak g = \mathfrak{u}(1)$, $k \neq 0$. (ii) is the Vol~I
+census for class $\mathbf G$: finite shadow tower with only
+$\kap = k$ surviving. (iii) is the abelian Sugawara construction
+$T = (1/2k)\!:\!JJ\!:$ at arbitrary $k \neq 0$, which realises
+Heisenberg as the boundary of abelian holomorphic Chern--Simons.
+\end{proof}
+
+\begin{proposition}[Celestial dual of Virasoro; \ClaimStatusProvedHere]
+\label{prop:uch-celestial-virasoro}
+Let $(T_4,\mathfrak b)$ satisfy the hypotheses of
+Theorem~\ref{thm:uch-main}, with
+$\cA^{\mathrm{cel}}(T_4,\mathfrak b) = \mathrm{Vir}_c$ at central
+charge $c$. For the displayed $S_4$ formula assume
+$c(5c+22)\ne0$.
+Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The celestial OPE algebra contains the full stress-tensor
+sector: a chiral Virasoro algebra at central charge $c$ acting on
+the celestial primaries, with \(c\) supplied as part of the Virasoro
+boundary comparison datum.
+\item The shadow tower is infinite: $\kap(\mathrm{Vir}_c) = c/2$,
+$S_2 = c/2$, $S_4 = 10/[c(5c + 22)]$ (the Virasoro $S_2$ and
+$S_4$ closed forms of Vol~I), and the higher
+coefficients are the Virasoro shadow invariants of Vol~I census. The
+internal shadow tower has all orders \(r \geq 2\). Its comparison with
+four-dimensional soft gravitons requires the Mellin comparison cone.
+\item The celestial \(\wtc\)-algebra is a separate soft-current algebra
+containing a Virasoro spin-\(2\) sector; it is not produced by
+completing \(\mathrm{Vir}_c\). At genus \(g \geq 1\), the Virasoro
+shadow obstruction tower is evaluated in the weight-completed
+class-\(\mathbf M\) ambient (Vol~I Theorem~MC5).
+\item $\cA^{\mathrm{cel}}$ is self-dual at $c = 13$:
+$\mathrm{Vir}_{13}^{!} = \mathrm{Vir}_{13}$, since Virasoro Koszul
+duality is $c \leftrightarrow 26 - c$. This is the algebraic shadow
+of the
+$c = 26$ critical-string cancellation.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) is part of the boundary comparison datum: the HT-twisted celestial
+OPE algebra is assumed to contain a Virasoro stress-tensor sector.
+Theorem~\ref{thm:uch-main}(iii) places this sector inside the
+associated graded of the HT-twisted celestial OPE algebra. The
+numerical value of a physical celestial central charge is not supplied
+by this proposition.
+
+(ii) is the Vol~I census for Virasoro. The shadow-invariant
+identities $S_2 = \kap = c/2$ and $S_4 = 10/[c(5c + 22)]$ are
+the Zamolodchikov shadow coefficients on the non-singular Virasoro
+surface $c(5c+22)\ne0$; evaluation at $c = 100$ gives
+$S_4 \approx 10/(100 \cdot 522) \approx 1.91 \times 10^{-4}$,
+matching the asymptotic $\sim 2/c^2$.
+
+(iii) follows by separating the two algebras. Strominger's
+\(\wtc\)-construction~\cite{StromingerWInfinityCelestial} supplies the
+celestial soft-current algebra. The Vol~I class-\(\mathbf M\) theorem
+controls the Virasoro shadow tower in the weight-completed ambient.
+The bounded direct-sum chain-level comparison is excluded by
+Proposition~\ref{prop:bv-bar-class-m-weight-completed}.
+
+(iv) follows from the Virasoro Koszul-duality rule
+$c + c' = 26$ of Vol~I: the Koszul dual of
+$\mathrm{Vir}_c$ is $\mathrm{Vir}_{26-c}$, self-dual at $c = 13$.
+The celestial interpretation: at $c = 13$ the celestial gravity
+sector is Koszul self-dual, which is the algebraic incarnation of
+the critical-string cancellation at $c = 26 = 2 \cdot 13$ on the
+matter-plus-ghost partition.
+\end{proof}
+
+\begin{remark}[Extension to $\wtc$ as celestial algebra]
+\label{rem:uch-winfty-celestial}
+Proposition~\ref{prop:uch-celestial-virasoro} extends verbatim to
+$\wtc$ as celestial algebra after replacing $\wtc$ by its
+weight-completion $\wtc^{\wedge}$. Since $\wtc$ is not finitely
+generated as a vertex algebra, the Koszul locus in Vol~I is
+$\wtc^{\wedge}$, and the class $\mathbf M$ classification is applied
+in the weight-completed ambient. The associated graded of the
+celestial soft-current algebra is compared with the shadow tower of
+\(\wtc^{\wedge}\), with external kinematic input from
+Hamada--Shiu~\cite{HamadaShiuSubsubSoft} and the celestial
+soft-current algebra
+\cite{GuevaraHimwichPateStrominger21,StromingerWInfinityCelestial}.
+The filtered identification is governed by the Mellin cone classes.
+\end{remark}
+
+% =====================================
+\subsection*{Scope of the universal celestial correspondence}
+% =====================================
+
+\begin{enumerate}
+\item \emph{Perturbative theorem.} For anomaly-free, globally glued
+HT boundary data, $\cA^{\mathrm{cel}}$ is a celestial chiral algebra,
+its $\SCchtop$-factorization homology supplies the associated graded
+of the perturbative celestial OPE algebra, and the comparison is exact
+on the vanishing locus of
+$\Obs^{\mathrm{Mell}}_{g,r}(T_4,\mathfrak b)$, with choices
+parametrized by \(\prod_{g,r}H^1(\Cone(\mu_{g,r}))\).
+
+\item \emph{Scope.} The image of the functor is a proper
+subcategory of chiral algebras characterized by
+Beem--Rastelli-type Schur conditions and by the existence of the
+boundary data in Definition~\ref{def:uch-boundary-chiral-algebra}.
+The theorem is perturbative; non-perturbative reconstruction of $T_4$,
+construction of arbitrary $2$d chiral algebras from $4$d HT data, and
+statements about black-hole entropy or the cosmological constant lie
+outside its range.
+
+\item \emph{Soft hierarchy.} Proposition~\ref{prop:uch-mellin-shadow}
+identifies the associated graded of each Mellin soft residue with the
+corresponding bar-cohomology class. Theorem~\ref{thm:uch-soft-hierarchy}
+supplies the associated-graded shadow hierarchy and the exact filtered
+hierarchy on the obstruction-free locus.
+
+\item \emph{Chirality.} The chirality of the celestial
+algebra is genuine: it is a chiral algebra on $\PP^1$, not a
+topological associative algebra, even though the celestial sphere is a
+topological manifold. The $\SCchtop$-structure is the precise home
+of this chiral/topological split.
+\end{enumerate}
+
+%=======================================================================
+% End of universal_celestial_holography.tex
+%=======================================================================

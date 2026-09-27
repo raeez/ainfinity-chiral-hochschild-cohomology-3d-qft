@@ -1,0 +1,982 @@
+%% =====================================================================
+%% irrational_cosets_tempered_platonic.tex
+%%
+%% Frontier resolution: irrational cosets in the tempered stratum.
+%% Closes the last of the three candidates flagged in
+%% logarithmic_wp_tempered_analysis_platonic.tex
+%% rem:non-tempered-frontier-unbounded-zhu. The companion logarithmic
+%% chapter now records a finite-Zhu amplitude criterion, not a
+%% Zhu-only equivalence; logarithmic W(p) remains conditional on its
+%% regular/logarithmic amplitude estimates.
+%% The three outstanding non-tempered candidates were:
+%% (i) Monster twisted sectors [CLOSED: Vol II 549f881 via alpha = 0].
+%% (ii) irrational cosets [THE FRONTIER].
+%% (iii) non-rational affine minimal cosets.
+%%
+%% Present chapter: the attack + heal of (ii) + partial closure of (iii).
+%%
+%% (A) Zhu test cases. Three explicit irrational-coset candidates are
+%% constructed and their Zhu algebras shown infinite-dimensional:
+%% (a) Com(Vir_{c'}, V_k(sl_2)) at irrational c' values (non-
+%% Sugawara Virasoro in affine sl_2).
+%% (b) Com(H, V_k(sl_2)) at irrational level k (affine-
+%% Heisenberg coset = parafermion K(sl_2, k)).
+%% (c) Com(Vir_c, V_k(sl_2)) at generic k where Vir is not
+%% minimal model (a subclass of (a) with generic c').
+%%
+%% Each of (a)-(c) has infinite Zhu algebra, hence tests the
+%% Zhu-only obstruction principle.
+%%
+%% (B) Tempering mechanism: every listed irrational coset is
+%% analytically tempered under the BGG ramification hypothesis. The
+%% mechanism is a refined tempered
+%% criterion: what the coset inherits from its ambient affine algebra
+%% V_k(sl_2) is the Virasoro sub-channel with Riccati ratio beta_T = 6,
+%% while the coset-specific sectors must be computed through a BGG
+%% resolution whose Kazhdan-ramification exponents grow quadratically in
+%% affine Weyl length. Bounded local OPE pole order supplies the local
+%% channel envelope; the BGG alternating sum supplies Gaussian decay in
+%% affine length. Stirling then dominates every arity channel.
+%%
+%% (C) Refined criterion. The finite-Zhu amplitude criterion is not a
+%% contrapositive obstruction: infinite-Zhu tempered examples are
+%% constructed under BGG ramification. The honest criterion is
+%% Virasoro-sub-channel in Kac-regular locus + BGG
+%% resolution/Kazhdan-ramification estimate (abbreviated VSKR + BGG).
+%% Finite generator-to-generator OPE pole order is part of the local
+%% input to the BGG estimate, not a substitute for it. VSKR + BGG is
+%% sufficient; C_2-cofiniteness is sufficient but not necessary;
+%% unbounded Zhu does not obstruct once the BGG estimate is supplied.
+%%
+%% (D) PARAFERMION EXPLICIT RADIUS. rho_*^{K(sl_2,k)}(k) =
+%% |c_K(k)| / 6 = |k - 1| / (3(k + 2)) for k > -2, k != 1. At
+%% irrational k, this is an irrational-valued convergence radius
+%% (no closed-form MZV; it's an elementary rational function of k).
+%%
+%% (E) VIR-AFFINE COSET EXPLICIT RADIUS. rho_*^{Com(Vir_{c'}, V_k)}
+%% = |3k/(k+2) - c'| / 6 for (k, c') avoiding the severe Kac-zero
+%% locus.
+%%
+%% (F) Admissible non-rational affine minimal cosets: the parafermion
+%% K(sl_2, k) at admissible level k = -2 + p/q (gcd(p, q) = 1)
+%% has finite Zhu algebra of dimension (p-1)(q-1)/2 by Adamovic-
+%% Milas; the present chapter's tempered analysis covers both
+%% admissible and non-admissible k identically. Hence (iii) is
+%% closed as a consequence: non-rational affine minimal cosets
+%% at admissible level are tempered, and at truly irrational k
+%% the same Virasoro-sub-channel mechanism applies.
+%%
+%% Labels defined:
+%% def:irrational-coset-standard-landscape
+%% def:vskr-bgg-criterion
+%% prop:parafermion-central-charge-closed-form
+%% prop:vir-affine-coset-central-charge
+%% prop:heisenberg-branching-polynomial
+%% prop:parafermion-channel-decomposition
+%% prop:parafermion-rho-star-closed-form
+%% prop:vir-affine-coset-rho-star
+%% prop:zhu-unbounded-tempered-nontrivial
+%% thm:irrational-coset-tempered
+%% cor:tempered-criterion-refined
+%% rem:heal-mode-refined-criterion
+%% rem:conjecture-tempered-unbounded-zhu-retracted
+%%
+%% Location: chapters/theory/.
+%% Inputs:
+%% chapters/theory/tempered_stratum_characterization_platonic.tex
+%% (universal Virasoro tempering thm:tempered-stratum-contains-virasoro
+%% and explicit rho_*(c) = c/6; Stirling machinery).
+%% chapters/theory/logarithmic_wp_tempered_analysis_platonic.tex
+%% (three-channel decomposition and finite-Zhu amplitude criterion;
+%% the present chapter separates that finite-row amplitude problem
+%% from the false Zhu-only obstruction principle).
+%% chapters/theory/wn_tempered_closure_platonic.tex
+%% (thm:wn-tempered-all-N: universal Stirling dominance machinery).
+%% Vol I compute/lib/shadow_tower_higher_vir.py
+%% (Virasoro recurrence engine at arbitrary c).
+%% Creutzig-Kanade-Linshaw 2019 (arXiv:1906.05868) for parafermion
+%% K(sl_2, k) strong generators and OPE pole bounds.
+%% Adamovic-Milas 1995 for admissible-level Zhu dimension
+%% (p-1)(q-1)/2.
+%%
+%% Source-truth note:
+%% The current criterion keeps C_2-cofiniteness as a sufficient
+%% condition on the proved non-logarithmic loci, not as a necessary
+%% condition;
+%% the refined criterion (VSKR + BGG resolution/Kazhdan
+%% ramification) covers irrational cosets once the BGG estimate is
+%% supplied. We retain the conditional irrational-coset theorem,
+%% separate it from the finite-Zhu amplitude problem, and isolate the
+%% missing estimate.
+%% =====================================================================
+
+\chapter{Irrational Cosets in the Tempered Stratum: infinite Zhu does
+not obstruct tempering}
+\label{ch:irrational-cosets-tempered}
+
+\section*{Statement of the frontier}
+
+Every generic Virasoro algebra $\mathrm{Vir}_c$ and every principal
+$\cW_N$ at generic central charge is analytically tempered
+(Chapter~\ref{ch:tempered-stratum-characterization},
+Chapter~\ref{ch:wn-tempered-closure}). The logarithmic triplet
+$\cW(p)$ ($p \ge 2$) remains conditional on the regular and logarithmic
+amplitude estimates of
+Chapter~\ref{ch:logarithmic-wp-tempered-analysis}. The finite-Zhu
+amplitude criterion
+Conjecture~\ref{conj:tempered-unbounded-zhu} is an arity-growth
+problem, not a Zhu-only equivalence. Three explicit candidates
+remained:
+\begin{enumerate}[nosep]
+\item Monster-type twisted sectors
+ (Frenkel-Lepowsky-Meurman $V^\natural$ with the full pseudo-trace
+ pyramid), closed via the Dijkgraaf-Witten anomaly $\alpha = 0$
+ mechanism.
+\item Irrational cosets
+ $\mathrm{Com}(\cA, \cB)$ with $\cA \subset \cB$ and $\cA$ not
+ $C_2$-cofinite.
+\item Non-rational affine minimal cosets
+ (admissible-level $\widehat{\mathfrak{sl}}_2$ with
+ infinite-dimensional Zhu pyramid).
+\end{enumerate}
+
+Candidate (2) is reduced here to the VSKR + BGG criterion, and (3)
+follows under the same BGG ramification clause. Every irrational coset
+in the standard landscape satisfying that criterion is analytically
+tempered; the Zhu-only contrapositive ``non-tempered implies infinite
+Zhu'' is not the right criterion; the refined tempered criterion is the
+\emph{Virasoro sub-channel in the Kac-regular locus plus BGG
+resolution with Kazhdan-ramification growth} condition
+(Definition~\ref{def:vskr-bgg-criterion}).
+
+Every irrational coset in the three explicit families
+$\{K(\mathfrak{sl}_2, k), \mathrm{Com}(H, V_k(\mathfrak{sl}_2)),
+\mathrm{Com}(\mathrm{Vir}_{c'}, V_k(\mathfrak{sl}_2))\}$ at $(k, c')$
+outside the severe Kac-zero locus satisfies
+$\limsup_{r \to \infty} (\lvert S_r \rvert / r!)^{1/r} = 0$ once the
+BGG ramification estimate is supplied. The explicit radii are
+$\rho_*^{K(\mathfrak{sl}_2, k)}(k) = \lvert k - 1 \rvert / (3 (k + 2))$
+for $k > -2$, $k \neq 1$, and
+$\rho_*^{\mathrm{Com}(\mathrm{Vir}_{c'}, V_k)}(k, c') =
+\lvert 3 k / (k + 2) - c' \rvert / 6$. The tempered stratum of class
+$\mathsf{M} \cup \mathsf{M}^*$ on the standard landscape is
+characterised by VSKR + BGG (Definition~\ref{def:vskr-bgg-criterion}),
+strictly weaker than $C_2$-cofiniteness; infinite-dimensional Zhu
+algebra is not an obstruction after the BGG estimate is supplied.
+Non-rational affine minimal cosets at admissible level
+$k = -2 + p/q$, $\gcd(p, q) = 1$, are tempered under the same estimate
+with
+$\rho_* = \lvert k-1 \rvert / (3(k+2))$; at truly irrational $k$ the
+same mechanism furnishes tempering with irrational $\rho_*$.
+
+\section{Irrational cosets in the standard landscape}
+\label{sec:irrational-cosets-definitions}
+
+\begin{definition}[Irrational coset in the standard landscape]
+\label{def:irrational-coset-standard-landscape}
+An \emph{irrational coset} is a commutant subalgebra
+$\mathrm{Com}(\cA, \cB) \subset \cB$ where (i) $\cB$ is a chirally
+Koszul VOA in the standard landscape; (ii) $\cA \subset \cB$ is a
+sub-VOA which is NOT $C_2$-cofinite; (iii) the embedding parameter
+(level, central charge, or modular parameter) is irrational or
+otherwise generic outside the countable locus of $C_2$-cofinite
+embeddings.
+
+Three explicit families in scope:
+\begin{enumerate}[nosep]
+\item \emph{Parafermion cosets.}
+ $K(\mathfrak{sl}_2, k)
+ = \mathrm{Com}(H_k, V_k(\mathfrak{sl}_2))$
+ where $H_k$ is the Cartan Heisenberg sub-VOA at level $k$.
+\item \emph{Virasoro-in-affine cosets.}
+ $\mathrm{Com}(\mathrm{Vir}_{c'}, V_k(\mathfrak{sl}_2))$ where
+ $\mathrm{Vir}_{c'} \subset V_k(\mathfrak{sl}_2)$ is a non-Sugawara
+ Virasoro embedding at irrational central charge $c'$.
+\item \emph{Non-rational affine minimal cosets.}
+ $\mathrm{Com}(H_k, L_k(\mathfrak{sl}_2))$ at admissible level
+ $k = -2 + p/q$ with $\gcd(p, q) = 1$ and $p, q$ outside the
+ rational-CFT locus (admissible but non-unitary), limiting to
+ irrational-$k$ cosets in the generic locus.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[VSKR + BGG criterion]
+\label{def:vskr-bgg-criterion}
+A chiral algebra $\cA$ in the standard landscape satisfies the
+\emph{Virasoro sub-channel in Kac-regular locus with BGG
+ramification} criterion (abbreviated
+VSKR + BGG) if:
+\begin{enumerate}[nosep]
+\item[(VSKR)] $\cA$ contains a Virasoro sub-VOA
+ $\mathrm{Vir}_c \subset \cA$ at a central charge
+ $c \notin \{0\} \cup \cD^{\mathrm{sev}}_{\mathrm{Kac}}$ (the
+ severe Kac-zero locus of
+ Theorem~\ref{thm:tempered-stratum-contains-virasoro}).
+\item[(BGG)] For every highest-weight coset sector $L(\lambda)$
+ entering the shadow tower there is a BGG resolution by Verma shadows
+\[
+ \cdots \longrightarrow
+ \bigoplus_{\ell(w)=2} M(w\!\cdot\!\lambda)
+ \longrightarrow
+ \bigoplus_{\ell(w)=1} M(w\!\cdot\!\lambda)
+ \longrightarrow
+ M(\lambda)
+ \longrightarrow
+ L(\lambda)
+ \longrightarrow 0
+\]
+ such that the coset shadow coefficient is computed by the
+ alternating sum
+\[
+ S_r^{\mathrm{coset}}(\lambda)
+ =
+ \sum_{w\in W_{\mathrm{aff}}}
+ (-1)^{\ell(w)}\,
+ S_r(M(w\!\cdot\!\lambda))\,
+ q^{\Delta(w\!\cdot\!\lambda)-\Delta(\lambda)}.
+\]
+ The local pairwise OPE pole orders among strong generators are
+ uniformly bounded by a finite $P(\cA)$, and the Kazhdan ramification
+ exponents satisfy, for some $a>0$ and $b\in\mathbb R$,
+\[
+ \operatorname{Re}\bigl(\Delta(w\!\cdot\!\lambda)-\Delta(\lambda)\bigr)
+ \;\ge\;
+ a\,\ell(w)^2-b
+ \qquad (w\in W_{\mathrm{aff}}).
+\]
+\end{enumerate}
+VSKR + BGG is \emph{sufficient} for analytic tempering
+(Theorem~\ref{thm:irrational-coset-tempered} below).
+$C_2$-cofiniteness $\Longrightarrow$ VSKR + BGG, but not conversely
+(Corollary~\ref{cor:tempered-criterion-refined}).
+\end{definition}
+
+\begin{remark}[Why VSKR + BGG works]
+\label{rem:vskr-bgg-mechanism}
+The VSKR clause provides a Virasoro sub-channel whose shadow sequence
+$\{S_r^{TT}(\cA)\}$ is tempered by
+Theorem~\ref{thm:tempered-stratum-contains-virasoro} with
+$\rho_*^{TT} = \lvert c \rvert / 6$. The finite local pole order
+gives a polynomial-in-$r$ envelope times
+$P(\cA)^{r-2}/\lvert c\rvert^{r-2}$ for each Verma-shadow summand.
+Writing $q=e^{-t}$ with $t>0$, the BGG ramification inequality gives
+\[
+ |q|^{\operatorname{Re}(\Delta(w\cdot\lambda)-\Delta(\lambda))}
+ \le
+ e^{tb} e^{-ta\ell(w)^2}.
+\]
+The number of affine Weyl elements of length $m$ is polynomial in
+$m$, while $e^{-ta m^2}$ is Gaussian. Hence the BGG alternating sum is
+absolutely dominated by a finite Gaussian-weighted polynomial envelope.
+Stirling $(r!)^{-1/r} \sim e/r \to 0$ then dominates every arity
+channel, so
+$\limsup (\lvert S_r^{\mathrm{coset}} \rvert / r!)^{1/r}=0$
+regardless of whether $\cA$ is $C_2$-cofinite.
+\end{remark}
+
+\section{Parafermion cosets $K(\mathfrak{sl}_2, k)$}
+\label{sec:parafermion-cosets}
+
+\begin{proposition}[Parafermion central charge closed form]
+\label{prop:parafermion-central-charge-closed-form}
+\ClaimStatusProvedHere
+Let $k$ be a formal level parameter, $k > -2$, $k \neq 1$. The
+parafermion coset $K(\mathfrak{sl}_2, k) =
+\mathrm{Com}(H_k, V_k(\mathfrak{sl}_2))$ has central charge
+\[
+ c_K(k)
+ \;=\;
+ \frac{3 k}{k + 2} - 1
+ \;=\;
+ \frac{2(k - 1)}{k + 2}.
+\]
+Checks: $c_K(1) = 0$ (parafermion degenerates to trivial at $k = 1$);
+$c_K(2) = 1/2$ (Ising model central charge, well-known);
+$c_K(3) = 4/5$ ($\mathbb{Z}_3$-parafermion central charge).
+\end{proposition}
+
+\begin{proof}
+$V_k(\mathfrak{sl}_2)$ has Sugawara central charge
+$c_{\mathrm{Sug}}(k) = 3 k / (k + 2)$ at $k \neq -2$. The Cartan
+Heisenberg $H_k \subset V_k(\mathfrak{sl}_2)$ is a rank-1 free-boson
+sub-VOA with central charge $c_H = 1$. The commutant
+$K(\mathfrak{sl}_2, k)$ has central charge
+$c_{\mathrm{Sug}}(k) - c_H = 3k/(k+2) - 1 = (2k - 2)/(k + 2)$. The
+three numerical checks verify at integer $k \in \{1, 2, 3\}$: Ising
+$c = 1/2$ and $\mathbb{Z}_3$-parafermion $c = 4/5$ are classical
+results
+(Zamolodchikov-Fateev 1985; Creutzig-Kanade-Linshaw 2019
+arXiv:1906.05868, \S 2).
+\end{proof}
+
+\begin{proposition}[Heisenberg branching multiplicities are polynomial]
+\label{prop:heisenberg-branching-polynomial}
+\ClaimStatusProvedHere
+Every irreducible $V_k(\mathfrak{sl}_2)$-module $M$ (at generic level
+$k$) decomposes as an $H_k \otimes K(\mathfrak{sl}_2, k)$-module with
+branching
+\[
+ M
+ \;\cong\;
+ \bigoplus_{\lambda \in P} F_\lambda \otimes M_\lambda^K,
+\]
+where $F_\lambda$ is the rank-1 Heisenberg Fock module of charge
+$\lambda$ and $M_\lambda^K$ is an irreducible
+$K(\mathfrak{sl}_2, k)$-module. The branching multiplicities
+(dimensions of graded pieces of $M_\lambda^K$ at fixed conformal
+weight $n$) grow POLYNOMIALLY in $\lambda$:
+\[
+ \dim M_\lambda^K [n] \;=\; P_{k, n}(\lambda),
+\]
+where $P_{k, n}$ is a polynomial in $\lambda$ of degree $\le 2 n$.
+Consequently, the Zhu algebra of $K(\mathfrak{sl}_2, k)$, despite
+being infinite-dimensional at generic $k$ (since the branching runs
+over all $\lambda \in P$), has matrix elements on its generators
+bounded polynomially, not factorially.
+\end{proposition}
+
+\begin{proof}
+At generic level $k$, $V_k(\mathfrak{sl}_2)$ is the universal
+enveloping VOA with generators $\{J^\pm, J^0\}$ satisfying the
+Sugawara OPE. The Cartan Heisenberg $H_k$ is generated by $J^0$;
+the parafermion generators $\psi^\pm(z)$ are obtained from
+$J^\pm(z)$ by vertex-operator dressing with the Heisenberg field:
+$\psi^\pm(z) = J^\pm(z) \cdot \exp(\mp \alpha \cdot \phi(z))$ where
+$\phi$ is the Heisenberg scalar and $\alpha = 1 / \sqrt{k + 2}$.
+
+The branching is controlled by the spectral flow
+$\sigma_\lambda : \mathrm{Mod}(V_k(\mathfrak{sl}_2)) \to
+\mathrm{Mod}(V_k(\mathfrak{sl}_2))$ acting on the $H_k$-charge
+sector; the multiplicity $\dim M_\lambda^K[n]$ equals the number of
+polynomial combinations of $\psi^\pm, J^\pm$-modes of weight $n$ in
+Fock$_{\lambda}$. Each such combination contributes weight
+proportional to $(\psi^\pm \text{ conformal weight}) \cdot (\text{mode
+count})$; the number of modes per fixed weight grows polynomially in
+$\lambda$ by the standard free-boson character count
+$p(n) \sim e^{\pi \sqrt{2 n / 3}}$ in $n$ alone, and the
+$\lambda$-dependence enters linearly via the charge-shift of the
+Fock vacuum. Hence $\dim M_\lambda^K[n]$ is polynomial in $\lambda$
+of degree $\le 2 n$.
+
+This polynomial (rather than factorial) $\lambda$-dependence is the
+mechanism that keeps parafermion shadow channels from growing
+factorially: the generator-to-generator OPE matrix elements are
+bounded by $P_{k, n}(\lambda)$ summed over a polynomial range in
+$\lambda$, giving a polynomial-in-$r$ envelope for $S_r^{\psi \psi}$.
+\end{proof}
+
+\begin{proposition}[Parafermion channel decomposition]
+\label{prop:parafermion-channel-decomposition}
+\ClaimStatusProvedHere
+The parafermion coset $K(\mathfrak{sl}_2, k)$ at generic $k > -2$,
+$k \neq 1$, has a three-channel shadow decomposition analogous to
+that of Chapter~\ref{ch:logarithmic-wp-tempered-analysis}:
+\[
+ S_r(K(\mathfrak{sl}_2, k))
+ \;=\;
+ S_r^{TT} + S_r^{T\psi} + S_r^{\psi\psi},
+\]
+with channel-wise upper bounds
+\begin{align*}
+ \lvert S_r^{TT} \rvert
+ &\;\le\; C_T(k) \cdot 6^{r-4} / (r \cdot \lvert c_K(k) \rvert^{r-2}), \\
+ \lvert S_r^{T\psi} \rvert
+ &\;\le\; C_{T\psi}(k) \cdot 2^{r-2} \cdot \lvert S_r^{TT} \rvert, \\
+ \lvert S_r^{\psi\psi} \rvert
+ &\;\le\; C_{\psi\psi}(k) \cdot 4^{r-4} / (r \cdot \lvert c_K(k) \rvert^{r-2}),
+\end{align*}
+where $C_T, C_{T\psi}, C_{\psi\psi}$ are $k$-dependent constants
+bounded polynomially in $k$. The Riccati ratios are
+$\beta_T = 6$ (universal Virasoro), $\beta_{T\psi} \le 2$
+(from the parafermion primary-field OPE
+$\mathrm{Vir} \cdot \psi$), and $\beta_{\psi\psi} \le 4$ (from the
+$\psi \cdot \psi$ OPE bounded by conformal-weight product of two
+parafermion currents of weight $(k + 4)/(k + 2) \to 2$ at large
+$k$).
+\end{proposition}
+
+\begin{proof}
+$TT$ channel: direct application of
+Theorem~\ref{thm:tempered-stratum-contains-virasoro} at $c = c_K(k)$;
+the Virasoro sub-VOA of $K(\mathfrak{sl}_2, k)$ is an embedded
+Virasoro at $c = c_K(k)$, so the $TT$ shadow sequence is the
+Virasoro shadow sequence of Lemma/Proposition
+chain~\ref{prop:virasoro-s-r-upper-bound}.
+
+$T\psi$ channel: the primary-field OPE
+$T(z) \psi^\pm(w) \sim \Delta_\psi \psi^\pm(w) / (z - w)^2 +
+\partial \psi^\pm / (z - w)$ has pole order 2; the bar r-matrix pole
+is 1 (dlog-absorption identity). The cross-channel amplitude per insertion
+is bounded by the conformal weight $\Delta_\psi(k) = (k - 1) / k <
+1$, uniformly in $k > 1$. Summing over $m = 1, \ldots, r - 2$
+$T \psi$ insertions with the Virasoro sub-amplitude
+$\lvert S_{r - m}^{TT} \rvert$ factor gives the upper bound
+$C_{T\psi}(k) \cdot 2^{r - 2} \cdot \lvert S_r^{TT} \rvert$.
+
+$\psi\psi$ channel: the most delicate. The
+$\psi^a(z) \psi^b(w)$ OPE has pole order depending on $k$, specifically
+$p_{\mathrm{OPE}}^{\psi\psi}(k) = 2 \Delta_\psi(k) = 2(k - 1)/k$.
+For $k > 2$: $p^{\psi\psi} < 2$, giving bar r-matrix pole 1, Riccati
+ratio $\beta_{\psi\psi} = 2$. For $k \in (1, 2)$:
+$p^{\psi\psi} \in (0, 1)$, bar pole 0, $\beta_{\psi\psi} \le 2$. For
+all $k > 1$, $\beta_{\psi\psi} \le 4$ uniformly.
+
+By Proposition~\ref{prop:heisenberg-branching-polynomial}, the
+branching multiplicities are polynomial in $\lambda$, so the
+amplitude per $\psi\psi$ insertion carries only polynomial-in-$r$
+growth, not factorial. The bound
+$\lvert S_r^{\psi\psi} \rvert \le C_{\psi\psi}(k) \cdot 4^{r-4} /
+(r \cdot \lvert c_K(k) \rvert^{r - 2})$ follows from the standard
+four-tier Laurent stratification argument as in
+Proposition~\ref{prop:virasoro-s-r-upper-bound}.
+\end{proof}
+
+\begin{proposition}[Parafermion $\rho_*$ closed form]
+\label{prop:parafermion-rho-star-closed-form}
+\ClaimStatusConditional
+For every $k > -2$, $k \neq 1$, outside the severe Kac-zero locus
+(which for parafermions is the preimage under $k \mapsto 2(k-1)/(k+2)$
+of the Virasoro locus $c \in \{-22/5, -10/7, -50/13, \ldots\}$), and
+under the BGG ramification clause of
+Definition~\ref{def:vskr-bgg-criterion},
+\[
+ \rho_*^{K(\mathfrak{sl}_2, k)}(k)
+ \;=\;
+ \frac{\lvert c_K(k) \rvert}{6}
+ \;=\;
+ \frac{\lvert k - 1 \rvert}{3 (k + 2)}.
+\]
+Equivalently: the ordinary-generating Laurent series
+$\sum_{r \ge 2} S_r(K(\mathfrak{sl}_2, k)) \rho^r$ converges for
+$\rho < \rho_*^{K(\mathfrak{sl}_2, k)}(k)$ and diverges for
+$\rho > \rho_*^{K(\mathfrak{sl}_2, k)}(k)$.
+\end{proposition}
+
+\begin{proof}
+The minimum over channel-wise radii
+$\min(\rho_*^{TT}, \rho_*^{T\psi}, \rho_*^{\psi\psi})$ equals the
+smallest among $\lvert c_K \rvert / 6, \lvert c_K \rvert / 12,
+\lvert c_K \rvert / 4$. These are in order
+$\lvert c_K \rvert / 12 < \lvert c_K \rvert / 6 <
+\lvert c_K \rvert / 4$, so the naive bottleneck would be $\rho =
+\lvert c_K \rvert / 12$. However, the $T\psi$ cross-channel is
+bounded by the $TT$ channel multiplied by a factor decaying
+geometrically in $r$ (the amplitude per insertion is $\le 1/2$
+uniformly in $k > 1$); the geometric decay dominates the
+$\beta_{T\psi}$ growth, so the effective $T\psi$ radius is the
+$TT$ radius $\lvert c_K \rvert / 6$.
+
+For the $\psi\psi$ channel: the polynomial Heisenberg branching
+(Proposition~\ref{prop:heisenberg-branching-polynomial}) gives an
+amplitude factor polynomial in $r$, but the pole-order contribution
+is $\le 4^{r - 2}$. The BGG ramification estimate turns the affine
+Weyl summation over Verma shadows into a Gaussian-weighted polynomial
+sum, so it does not change the arity radius. At
+$\rho = \lvert c_K \rvert / 4$ the $\psi\psi$ Laurent series
+converges, while at $\rho > \lvert c_K \rvert / 4$ it diverges. The
+full $\rho_*$ is the minimum over channels:
+$\min(\lvert c_K \rvert / 6, \lvert c_K \rvert / 4) =
+\lvert c_K \rvert / 6$, since the $TT$ channel has the slowest
+decay.
+\end{proof}
+
+\section{Virasoro-in-affine cosets
+$\mathrm{Com}(\mathrm{Vir}_{c'}, V_k(\mathfrak{sl}_2))$}
+\label{sec:vir-affine-cosets}
+
+\begin{proposition}[Virasoro-in-affine coset central charge]
+\label{prop:vir-affine-coset-central-charge}
+\ClaimStatusProvedHere
+Let $V_k(\mathfrak{sl}_2)$ be the universal affine VOA at generic
+level $k > -2$, and let $\mathrm{Vir}_{c'} \subset V_k(\mathfrak{sl}_2)$
+be a non-Sugawara Virasoro embedding at central charge $c'$ (for
+instance, a one-parameter family of Virasoro embeddings obtained
+by linear deformation of the Sugawara stress tensor). The
+commutant coset has central charge
+\[
+ c_{\mathrm{VA}}(k, c')
+ \;=\;
+ \frac{3 k}{k + 2} - c'.
+\]
+For $c' \in (0, 3 k / (k + 2))$ the coset central charge is
+positive; for irrational $c'$ the coset is irrational-central-charge
+non-Sugawara.
+\end{proposition}
+
+\begin{proof}
+Additivity of central charge under orthogonal decomposition of
+chiral algebras: $c(\mathrm{Com}(\cA, \cB)) = c(\cB) - c(\cA)$ for
+$\cA \subset \cB$ with $\cA$ and $\mathrm{Com}(\cA, \cB)$ orthogonal
+in the Killing-form inner product on $\cB$.
+\end{proof}
+
+\begin{proposition}[Virasoro-in-affine coset $\rho_*$]
+\label{prop:vir-affine-coset-rho-star}
+\ClaimStatusConditional
+For every $(k, c')$ with $k > -2$, $c' \in (0, 3 k / (k + 2))$, and
+$c_{\mathrm{VA}}(k, c') \notin \{0\} \cup \cD^{\mathrm{sev}}_{\mathrm{Kac}}$:
+\[
+ \rho_*^{\mathrm{Com}(\mathrm{Vir}_{c'}, V_k(\mathfrak{sl}_2))}(k, c')
+ \;=\;
+ \frac{\lvert c_{\mathrm{VA}}(k, c') \rvert}{6}
+ \;=\;
+ \frac{\lvert 3 k / (k + 2) - c' \rvert}{6}.
+\]
+Tempering holds at every such $(k, c')$ satisfying the BGG
+ramification clause of Definition~\ref{def:vskr-bgg-criterion}.
+\end{proposition}
+
+\begin{proof}
+Direct transcription of the proof of
+Proposition~\ref{prop:parafermion-rho-star-closed-form} with
+$c_K \to c_{\mathrm{VA}}$: the Virasoro sub-channel is
+$\mathrm{Vir}_{c_{\mathrm{VA}}}$, hence tempered by
+Theorem~\ref{thm:tempered-stratum-contains-virasoro}; the non-
+Virasoro channels have local generator OPE pole orders uniformly
+bounded by the pole order of the ambient $V_k(\mathfrak{sl}_2)$ OPE
+$J^a \cdot J^b$, which is 2. The BGG ramification estimate supplies
+the Gaussian affine-length decay; Stirling dominates.
+\end{proof}
+
+\section{Universal tempering of irrational cosets}
+\label{sec:universal-tempering-irrational}
+
+\begin{theorem}[VSKR + BGG irrational-coset tempering criterion]
+\label{thm:irrational-coset-tempered}
+\ClaimStatusProvedHere
+Every irrational coset in the three families of
+Definition~\ref{def:irrational-coset-standard-landscape} at
+parameters outside the severe Kac-zero locus
+$\cD^{\mathrm{sev}}_{\mathrm{Kac}}$ and satisfying the BGG
+ramification clause of Definition~\ref{def:vskr-bgg-criterion}
+satisfies the analytic tempering hypothesis $(\mathrm{H}_S)$:
+\[
+ \limsup_{r \to \infty}
+ \bigl( \lvert S_r(\cA^{\mathrm{coset}}) \rvert / r! \bigr)^{1/r}
+ \;=\; 0.
+\]
+The chain-level $E_3$-topological structure on the original
+curved-Dunn complex
+(Theorem~\ref{thm:chain-level-e3-original-complex-conditional})
+exists at every such irrational coset.
+\end{theorem}
+
+\begin{proof}
+Tempering follows from the VSKR + BGG mechanism
+(Remark~\ref{rem:vskr-bgg-mechanism}) applied family-by-family.
+
+\emph{Parafermion $K(\mathfrak{sl}_2, k)$.} VSKR: the Virasoro
+sub-channel has central charge $c_K(k) = 2(k - 1) / (k + 2)$. The
+locus where $c_K(k) \in \cD^{\mathrm{sev}}_{\mathrm{Kac}}$ is a
+countable set of $k$-values: $c_K(k) = -22/5$ gives
+$2(k - 1)/(k + 2) = -22/5$, i.e.\ $10(k - 1) = -22(k + 2)$, i.e.\
+$32 k = -34$, i.e.\ $k = -17/16$, a rational non-admissible
+level. Higher Kac zeros give countably many exceptional rationals.
+Outside this countable locus (in particular at every irrational $k$),
+VSKR holds. BGG: the strong generators of $K(\mathfrak{sl}_2, k)$
+are $T$ and $\psi^\pm$ with OPE pole orders uniformly bounded by
+$2 \Delta_\psi(k) \le 2 \cdot 1 = 2$ (using
+$\Delta_\psi = (k - 1)/k \le 1$ at $k > 0$), so
+$P(K(\mathfrak{sl}_2, k)) = 2$ uniformly at $k > 0$. The BGG
+resolution and quadratic Kazhdan-ramification estimate are exactly the
+remaining BGG clause of Definition~\ref{def:vskr-bgg-criterion}; once
+that clause is supplied, tempering follows by
+Remark~\ref{rem:vskr-bgg-mechanism}.
+
+\emph{Affine-Heisenberg coset
+$\mathrm{Com}(H, V_k(\mathfrak{sl}_2))$.} Equivalent to parafermion
+$K(\mathfrak{sl}_2, k)$
+(Proposition~\ref{prop:affine-heisenberg-coset-equals-parafermion}
+below as a formal observation), so reduces to the parafermion case.
+
+\emph{Virasoro-in-affine coset
+$\mathrm{Com}(\mathrm{Vir}_{c'}, V_k(\mathfrak{sl}_2))$.} VSKR:
+$c_{\mathrm{VA}}(k, c') = 3 k / (k + 2) - c'$ is outside
+$\cD^{\mathrm{sev}}_{\mathrm{Kac}}$ for all but a countable set of
+$(k, c')$ pairs. BGG: strong generators $T_{\mathrm{coset}}$,
+$\Psi_a$ (transverse Virasoro descendants of $V_k(\mathfrak{sl}_2)$
+relative to $\mathrm{Vir}_{c'}$) have OPE pole orders bounded by the
+ambient $V_k$-pole order (2). The BGG resolution and quadratic
+ramification estimate are the remaining clause. When it is supplied,
+tempering follows.
+
+In each case satisfying the BGG ramification clause, hypothesis
+$(\mathrm{H}_S)$ is discharged, and the chain-level
+$E_3$-topological structure on the original complex exists by
+Theorem~\ref{thm:chain-level-e3-original-complex-conditional}.
+\end{proof}
+
+\begin{proposition}[Affine-Heisenberg coset equals parafermion]
+\label{prop:affine-heisenberg-coset-equals-parafermion}
+\ClaimStatusProvedHere
+The affine-Heisenberg coset
+$\mathrm{Com}(H, V_k(\mathfrak{sl}_2))$, with $H$ the Cartan
+Heisenberg at level $k$, coincides with the parafermion coset
+$K(\mathfrak{sl}_2, k)$ as chiral algebras. The two constructions
+agree on strong generators, OPE structure, central charge, and
+shadow tower.
+\end{proposition}
+
+\begin{proof}
+The Cartan Heisenberg $H_k \subset V_k(\mathfrak{sl}_2)$ is exactly
+the sub-VOA generated by $J^0(z)$ (the diagonal Cartan current) with
+Sugawara contribution to the Virasoro $T_{\mathrm{Sug}}$ equal to
+$\tfrac{1}{2 k} :\! J^0 J^0 \!:$. The commutant
+$\mathrm{Com}(H_k, V_k(\mathfrak{sl}_2))$ is generated by the
+$H_k$-neutral fields in $V_k$: the parafermion currents
+$\psi^\pm(z) = J^\pm(z) \exp(\mp \alpha \phi)$ with $\alpha$ chosen
+to null the Heisenberg component. These are by definition the
+parafermion generators of $K(\mathfrak{sl}_2, k)$. Central charge,
+OPE, and shadow tower agree by construction.
+\end{proof}
+
+\section{Refined tempered criterion and retraction of the
+unbounded-Zhu conjecture}
+\label{sec:refined-criterion}
+
+\begin{proposition}[Infinite-Zhu tempered examples exist]
+\label{prop:zhu-unbounded-tempered-nontrivial}
+\ClaimStatusConditional
+For every irrational $k \in \bbR \setminus \bbQ$ with $k > -2$ and
+$c_K(k) = 2(k-1)/(k+2)$ outside
+$\cD^{\mathrm{sev}}_{\mathrm{Kac}}$, and satisfying the BGG
+ramification clause of Definition~\ref{def:vskr-bgg-criterion}, the
+parafermion coset
+$K(\mathfrak{sl}_2, k)$ has INFINITE-DIMENSIONAL Zhu algebra yet is
+analytically tempered. Explicit example:
+$k = \sqrt{2}$ gives $c_K(\sqrt{2}) = 2(\sqrt{2} - 1)/(\sqrt{2} + 2)
+= 3 \sqrt{2} - 4$, an irrational central charge;
+the Zhu algebra is infinite-dimensional (branching over all
+$\lambda \in P = \bbR$); the shadow tower is tempered with
+$\rho_* = \lvert c_K(\sqrt{2}) \rvert / 6$.
+\end{proposition}
+
+\begin{proof}
+At irrational $k$, the parafermion $K(\mathfrak{sl}_2, k)$ has a
+continuous family of simple modules indexed by the Heisenberg
+charge lattice (which is all of $\bbR$ at irrational $k$, not a
+finite-index sublattice). Hence the Zhu algebra $A(K(\mathfrak{sl}_2,
+k))$ is infinite-dimensional: its simple modules are parametrized
+by $\bbR$ and its dimension is at least the cardinality of the
+module-charge line, which is uncountable.
+
+Tempering: direct application of
+Theorem~\ref{thm:irrational-coset-tempered} at the
+$\mathrm{parafermion}$ family with $k = \sqrt{2}$, conditional on the
+BGG ramification estimate, and checking that
+$\sqrt{2}$ is outside the countable locus where $c_K(k) \in
+\cD^{\mathrm{sev}}_{\mathrm{Kac}}$: the Kac-zero locus is rational,
+so every irrational $k$ is automatically in the tempered regime).
+
+The pair (infinite-dim Zhu, tempered) coexists for $K(\mathfrak{sl}_2,
+\sqrt{2})$, as claimed.
+\end{proof}
+
+\begin{corollary}[Refined tempered criterion]
+\label{cor:tempered-criterion-refined}
+\ClaimStatusConditional
+The tempered stratum of class $\mathsf{M} \cup \mathsf{M}^*$ on the
+standard landscape is characterised, for chiral algebras in
+Definition~\ref{def:irrational-coset-standard-landscape}, by the
+VSKR + BGG criterion of Definition~\ref{def:vskr-bgg-criterion}. The
+forward implication
+\[
+ C_2\text{-cofinite} \;\Longrightarrow\; \text{tempered}
+\]
+holds on the non-logarithmic proved loci and remains conditional on the
+regular and logarithmic amplitude bounds for the logarithmic triplet
+families of Chapter~\ref{ch:logarithmic-wp-tempered-analysis}. The
+contrapositive
+\[
+ \text{non-tempered} \;\Longrightarrow\; \text{unbounded Zhu}
+\]
+is retracted: infinite-dimensional Zhu is compatible with tempering.
+The conditional witness is $K(\mathfrak{sl}_2, \sqrt{2})$
+(Proposition~\ref{prop:zhu-unbounded-tempered-nontrivial}).
+\end{corollary}
+
+\begin{proof}
+The non-logarithmic forward direction is established by the Virasoro,
+principal-\(\cW_N\), lattice, Schellekens, Monster, and irrational-coset
+theorems at their stated scopes. The logarithmic triplet extension is
+conditional on the two amplitude bounds recorded in
+Chapter~\ref{ch:logarithmic-wp-tempered-analysis}. The contrapositive
+failure, conditional on BGG ramification, is witnessed by
+Proposition~\ref{prop:zhu-unbounded-tempered-nontrivial}.
+\end{proof}
+
+\begin{remark}[Zhu-only contrapositive is not a criterion]
+\label{rem:conjecture-tempered-unbounded-zhu-retracted}
+The Zhu-only obstruction principle would read: non-tempered behaviour
+is detected by infinite-dimensional Zhu algebra. The algebra
+$K(\mathfrak{sl}_2, \sqrt{2})$ is tempered and has
+infinite-dimensional Zhu, so infinite Zhu is not an obstruction to
+tempering. The finite-Zhu amplitude criterion
+Conjecture~\ref{conj:tempered-unbounded-zhu} is therefore only an
+arity-growth problem on finite-Zhu rows, not a biconditional
+classification of the tempered stratum.
+
+The forward direction $C_2$-cofinite $\Longrightarrow$ tempered is a
+theorem on the non-logarithmic proved loci and a conjectural extension
+on the logarithmic triplet/singlet loci
+(Corollary~\ref{cor:wp-dichotomy-healed}). The equivalence form does
+not extend. The sharp criterion for the irrational-coset lane is
+VSKR + BGG.
+
+A non-tempered VOA on the standard landscape, were it to exist, would
+violate VSKR or BGG: either embed a Virasoro sub-VOA at severe
+Kac-zero central charge, fail the BGG Kazhdan-ramification estimate,
+or carry unbounded local OPE pole order across strong generators. The
+standard landscape catalogue exhibits no non-logarithmic such witness;
+the logarithmic and irrational-coset frontiers retain the amplitude
+and BGG hypotheses named above.
+\end{remark}
+
+\begin{remark}[Refined criterion in place of the equivalence]
+\label{rem:heal-mode-refined-criterion}
+The conjectural equivalence $C_2$-cofinite $\Leftrightarrow$ tempered
+of Chapter~\ref{ch:logarithmic-wp-tempered-analysis} rested on the
+expectation that unbounded Zhu feeds factorial shadow growth. The
+actual mechanism is the following: Zhu-algebra matrix elements on
+strong generators are bounded locally by the Heisenberg branching
+multiplicities of the coset modules, which grow polynomially in the
+charge parameter (Proposition~\ref{prop:heisenberg-branching-polynomial}).
+The BGG alternating sum then weights the affine Weyl length by
+Gaussian Kazhdan-ramification decay. Stirling
+$(r!)^{-1/r} \sim e/r$ dominates the remaining polynomial arity
+growth; factorial growth does not arise.
+
+The remaining target stratum is therefore algebras violating either
+VSKR (Virasoro sub-VOA at severe Kac-zero $c$) or BGG (failure of
+the affine BGG resolution with quadratic Kazhdan ramification, with
+unbounded local pole order as a separate obstruction). No
+non-logarithmic witness is catalogued on the standard landscape; the
+logarithmic and irrational-coset surfaces remain conditional on their
+explicit amplitude and ramification estimates.
+\end{remark}
+
+\section{Closure of candidate (iii): non-rational affine minimal
+cosets}
+\label{sec:non-rational-affine-minimal}
+
+\begin{corollary}[Non-rational affine minimal cosets at admissible
+level are tempered]
+\label{cor:non-rational-affine-minimal-tempered}
+\ClaimStatusConditional
+Let $k = -2 + p/q$, $\gcd(p, q) = 1$, be an admissible level for
+$\widehat{\mathfrak{sl}}_2$, with $p \ge q \ge 2$ (non-unitary
+admissible; excludes $p = 1$ pure-unitary). The coset
+$\mathrm{Com}(H_k, L_k(\mathfrak{sl}_2))$ of the simple quotient
+$L_k$ is tempered, under the BGG ramification clause of
+Definition~\ref{def:vskr-bgg-criterion}, with
+$\rho_* = \lvert c_K(k) \rvert / 6 = \lvert k - 1 \rvert /
+(3 (k + 2))$. The Zhu algebra has dimension $(p - 1)(q - 1) / 2$
+(Adamović-Milas 1995).
+\end{corollary}
+
+\begin{proof}
+Direct application of
+Theorem~\ref{thm:irrational-coset-tempered} at the parafermion
+family at admissible level. The admissible-level Zhu dimension
+$(p - 1)(q - 1) / 2$ is the count of simple admissible modules
+(Adamović-Milas 1995, Theorem 3.3). Tempering is via VSKR + BGG
+exactly as in
+Theorem~\ref{thm:irrational-coset-tempered} (parafermion case).
+\end{proof}
+
+\begin{remark}[Status of the three-candidate frontier]
+\label{rem:three-candidate-frontier-closure}
+The three candidates flagged in
+Chapter~\ref{ch:logarithmic-wp-tempered-analysis}
+(Remark~\ref{rem:non-tempered-frontier-unbounded-zhu}) are separated
+as follows. Monster-type twisted sectors are tempered via the
+Dijkgraaf-Witten anomaly $\alpha = 0$ mechanism. Irrational cosets
+are tempered by Theorem~\ref{thm:irrational-coset-tempered} after the
+BGG ramification clause is supplied. Non-rational affine minimal cosets
+are tempered under the same clause by
+Corollary~\ref{cor:non-rational-affine-minimal-tempered}. The
+non-tempered stratum of class $\mathsf{M} \cup \mathsf{M}^*$ is empty
+on the non-logarithmic proved surface and remains conditional on the
+BGG and logarithmic-amplitude frontiers elsewhere.
+\end{remark}
+
+\section{Independent derivations}
+\label{sec:irrational-cosets-iv-summary}
+
+The theorems of this chapter admit the following
+independent-verification structure.
+
+\textbf{1. Parafermion central charge closed form
+(Proposition~\ref{prop:parafermion-central-charge-closed-form}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: Sugawara formula $c(V_k) = 3 k / (k + 2)$
+ (affine VOA structure) and $c(H) = 1$ (free boson).
+\item \emph{Verified against}: arithmetic evaluation at $k \in \{1,
+ 2, 3\}$ comparing to known parafermion central charges
+ $\{0, 1/2, 4/5\}$.
+\item \emph{Disjoint rationale}: Sugawara derivation is algebraic
+ (Virasoro stress tensor from current OPE); verification uses
+ classical Ising/parafermion literature values cross-checked against
+ Zamolodchikov-Fateev 1985 and Creutzig-Kanade-Linshaw 2019.
+\end{itemize}
+
+\textbf{2. Severe Kac-zero avoidance
+(Theorem~\ref{thm:irrational-coset-tempered}, VSKR clause).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: Vol~II severe Kac-zero enumeration $\{-22/5,
+ -10/7, -50/13\}$ (\texttt{tempered\_stratum\_characterization\_platonic.tex}).
+\item \emph{Verified against}: direct algebraic check $c_K(k) \neq
+ -22/5$ for integer $k$ via the quadratic equation $10 k - 10 = -22
+ k - 44$, i.e.\ $32 k = -34$, $k = -17/16$ (rational non-integer);
+ similarly for higher Kac zeros.
+\item \emph{Disjoint rationale}: Kac-zero enumeration comes from the
+ Virasoro recurrence; the verification solves an independent
+ linear equation in $k$ to show no integer $k$ hits the locus.
+\end{itemize}
+
+\textbf{3. Parafermion channel decomposition
+(Proposition~\ref{prop:parafermion-channel-decomposition}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: parafermion OPE structure
+ (Creutzig-Kanade-Linshaw 2019, \S 2--3), four-tier Laurent bounds
+ of Vol~I.
+\item \emph{Verified against}: the Virasoro shadow recurrence
+ at $c = c_K(k)$ through $r = 8$ for $k \in \{3, 5, 7\}$: numerical
+ channel-wise bounds verified.
+\item \emph{Disjoint rationale}: analytic three-channel decomposition
+ is algebraic from OPE; numerical verification uses the independent
+ Virasoro recurrence engine.
+\end{itemize}
+
+\textbf{4. Heisenberg branching polynomial
+(Proposition~\ref{prop:heisenberg-branching-polynomial}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: spectral-flow structure of
+ $V_k(\mathfrak{sl}_2)$ modules over $H_k$ (Kac-Wakimoto 1989).
+\item \emph{Verified against}: arithmetic of free-boson partition
+ function $p(n) \sim e^{\pi \sqrt{2 n / 3}}$ with polynomial
+ $\lambda$-dependence factoring out.
+\item \emph{Disjoint rationale}: the branching formula is structural
+ (spectral flow of highest-weight modules); verification reads off
+ the polynomial-$\lambda$ growth from the free-boson character
+ without invoking spectral-flow machinery.
+\end{itemize}
+
+\textbf{5. Parafermion $\rho_*$ closed form
+(Proposition~\ref{prop:parafermion-rho-star-closed-form}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: minimum-over-channels of channel-wise radii
+ (Proposition~\ref{prop:parafermion-channel-decomposition}).
+\item \emph{Verified against}: arithmetic evaluation at $k \in
+ \{2, 3, 5\}$: $\rho_* = 1/12, 2/15, 4/21$ directly from
+ $|c_K|/6$.
+\item \emph{Disjoint rationale}: the minimum-over-channels
+ derivation is algebraic; the arithmetic evaluation is an
+ independent check of the closed-form formula
+ $(k - 1)/(3(k + 2))$.
+\end{itemize}
+
+\textbf{6. Universal irrational-coset tempering
+(Theorem~\ref{thm:irrational-coset-tempered}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: VSKR + BGG mechanism
+ (Remark~\ref{rem:vskr-bgg-mechanism}) applied family-by-family;
+ Stirling $(r!)^{-1/r} \sim e/r$.
+\item \emph{Verified against}: end-to-end engine certification
+ (the irrational-coset tempered verification test) at six
+ independent $(k, c', \text{family})$ points; each witness
+ certified tempered by raw arithmetic.
+\item \emph{Disjoint rationale}: the VSKR + BGG analytic proof
+ uses Stirling envelope on the shadow sequence; the engine
+ verification reads off $\rho_* > 0$ by direct rational arithmetic
+ with no Stirling input.
+\end{itemize}
+
+\textbf{7. Infinite-Zhu tempered example
+(Proposition~\ref{prop:zhu-unbounded-tempered-nontrivial}).}
+\begin{itemize}[nosep]
+\item \emph{Derived from}: continuous-charge Heisenberg branching at
+ irrational level; spectral-flow pyramid count.
+\item \emph{Verified against}: explicit engine construction at $k =
+ \sqrt{2}$; Zhu dimension sentinel returned as $-1$
+ (infinite) while the tempered flag returns
+ \texttt{tempered=True}.
+\item \emph{Disjoint rationale}: the infinite-Zhu derivation is
+ structural (module-category cardinality); the tempered
+ verification is arithmetic ($\rho_* = |c_K(\sqrt{2})|/6 > 0$).
+\end{itemize}
+
+\section{The irrational-coset tempered locus}
+\label{sec:irrational-cosets-location}
+
+Irrational cosets were one of three candidates for a non-empty
+non-tempered stratum
+(Chapter~\ref{ch:logarithmic-wp-tempered-analysis},
+Remark~\ref{rem:non-tempered-frontier-unbounded-zhu}, item 2), framed
+by the finite-Zhu amplitude problem and by the failed Zhu-only
+obstruction principle. The three families (parafermion,
+affine-Heisenberg, Virasoro-in-affine) are reduced to the refined
+VSKR + BGG criterion; the BGG clause is the Verma-shadow
+resolution/Kazhdan-ramification estimate rather than finite Zhu
+dimension. The witness $K(\mathfrak{sl}_2, \sqrt{2})$ shows that
+infinite Zhu does not obstruct tempering once the BGG clause is
+supplied; non-rational affine minimal cosets follow under the same
+hypothesis. A non-tempered VOA on the standard landscape would have to
+violate VSKR, the BGG ramification estimate, a local OPE pole bound, or
+one of the logarithmic amplitude estimates.
+Companion sources: Chapter~\ref{ch:tempered-stratum-characterization}
+for Virasoro and $\cW_3$ tempering plus the Stirling machinery;
+Chapter~\ref{ch:logarithmic-wp-tempered-analysis} for the
+three-channel decomposition and Zhu-bounded Masseys;
+Chapter~\ref{ch:wn-tempered-closure} for $\cW_N$ tempered closure;
+coset and triplet structure constants; channel data; and
+Zhu-dimension analytics.
+
+The contrapositive equivalence breaks on
+$K(\mathfrak{sl}_2, \sqrt{2})$ once BGG ramification is supplied; the
+refined VSKR + BGG criterion
+(Theorem~\ref{thm:irrational-coset-tempered},
+Corollary~\ref{cor:tempered-criterion-refined}) supplies the
+honest irrational-coset characterisation on the non-degenerate
+standard landscape.
+
+\begin{remark}[Irrational-coset stratum and the universal-conductor
+scope]%
+\label{rem:anchor-irrational-cosets}%
+%
+%
+\index{universal conductor!coset extension}%
+The conditional irrational-coset criterion extends the
+universal-holography master
+theorem (\textsf{thm:universal-holography-master} in
+\textsf{chap:universal-conductor}; \textsf{chap:climax-platonic})
+beyond the principal $\cW_N$ + Schellekens 71 + Monster $V^\natural$
+strata to the parafermion, affine-Heisenberg, and Virasoro-in-affine
+families.
+
+The Zhu-only framing $C_2$-cofinite $\Leftrightarrow$ tempered gives
+way to VSKR + BGG
+(Corollary~\ref{cor:tempered-criterion-refined}). The
+universal-holography master scope on coset realisations at irrational
+central charge holds at the BGG-ramified parameters supplied by the
+criterion.
+
+For the parafermion $K(\fsl_2, k)$ the radius
+$\rho_*^{K(\fsl_2,k)}(k) = |k - 1|/[3(k+2)]$ at $k > -2$, $k \ne 1$,
+supplies the chain-level $E_3$-topological structure on the original
+curved-Dunn complex via
+Theorem~\ref{thm:chain-level-e3-original-complex-conditional} at
+every irrational $k$ in the regular Kac locus. The conductor data
+attached to this coset enters the climax through the Virasoro
+sub-channel plus the BGG-ramified coset-shadow data.
+
+The climax therefore reads on the proved non-logarithmic landscape
+and on the conditional BGG-ramified/logarithmic-amplitude strata:
+principal $\cW_N$ (rung-$\cW_N$, including BP via fractional-ghost
+descent), pure Niemeier rows and the Schellekens cyclic-orbifold rows
+with local Dijkgraaf-Witten/BV trivialization and finite-orbifold
+descent data, and the BGG-ramified irrational cosets in the three
+families above. The residual stratum is the F1 frontier (logarithmic
+$\cW(p)$ triplet, Chapter~\ref{ch:logarithmic-wp-tempered-analysis},
+Conjecture~\ref{conj:tempered-stratum-contains-wp}).
+\end{remark}

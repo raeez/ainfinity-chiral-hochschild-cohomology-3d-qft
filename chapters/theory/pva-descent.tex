@@ -1,0 +1,1206 @@
+\section{Cohomological Descent: From $A_\infty$ to Poisson Vertex Algebras}
+% label removed: sec:PVA_descent
+% label removed: sec:Ainfty-to-PVA
+
+\paragraph{Discipline: classical $\lambda$-Jacobi versus quantum lift.}
+Classical $\lambda$-Jacobi: \ClaimStatusProvedHere{} (PVA descent at the
+classical level closes unconditionally on the proved scope of
+Definition~\ref{def:log-SC-algebra}). All-loop quantum lift:
+\ClaimStatusConditional{} on the four endpoint hypotheses
+$\hypKZSDR,\,\hypStokes,\,\hypReflWts,\,\hypTLift$
+(Khan--Zeng analytic SDR; Fulton--MacPherson Stokes datum;
+reflected weights / wall-crossing under analytic continuation;
+chain-level lift of the topological homotopy
+$T = [Q_{\mathrm{tot}}, G]$ to the all-loop quantum object).
+The classical-to-quantum bridge is
+the all-loop PVA--quantum HT lifting problem: a unified PVA-quantum
+HT theory with the classical $\lambda$-Jacobi limit and an
+$E_3$-lift on $Q$-cohomology. Throughout this section, every theorem statement that
+depends on the all-loop quantum lift carries the four $\hyp$ tags;
+classical statements remain unconditional. Primary citations:
+Khan--Zeng \cite{KZ25}, Costello \cite{Costello2011Renorm},
+Costello--Gwilliam \cite{CG17}, Lurie HA chap.~5 \cite{LurieHA}.
+
+A classical Poisson vertex algebra carries a commutative product
+and a $(-1)$-shifted $\lambda$-bracket; the $\Ainf$ chiral
+algebra of a 3d HT theory carries a tower of multilinear
+operations $\{m_k\}_{k \ge 1}$ and a BV-BRST differential
+$Q = m_1$ with no a priori commutativity. Which $\Ainf$ chiral
+algebras admit a classical PVA description, and in which sense?
+A naive comparison fails: cohomology with respect to~$Q$ might
+collapse the quantum data entirely, or it might preserve higher
+operations $m_{k \ge 3}$ that have no classical counterpart.
+The answer must specify which operations survive, which
+vanish, and whether the resulting structure satisfies the PVA
+axioms on the nose.
+
+Passing to cohomology with respect to~$Q$ supplies the binary
+classical answer. The regular part of~$m_2$ descends to a
+commutative product, and the singular part descends to a
+$(-1)$-shifted $\lambda$-bracket satisfying the PVA axioms.
+Higher operations require a separate compatible nullhomotopy datum;
+contractibility of $\Conf_k^{<}(\R)$ alone is not such a datum.
+
+\begin{maintheorem}[Cohomological descent to PVA]
+% label removed: thm:cohomology-PVA-main
+Let $(\A, \{m_k\}, Q)$ be an $A_\infty$ chiral algebra arising from a
+3d HT theory presented as a logarithmic $\SCchtop$-algebra
+(Definition~\ref{def:log-SC-algebra}). Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{(Classical $\lambda$-Jacobi; \ClaimStatusProvedHere.)}
+ The cohomology $H^\bullet(\A,Q)$ inherits a commutative product
+ \textup(from the regular part of~$m_2$\textup) and a
+ $(-1)$-shifted $\lambda$-bracket
+ \textup(from the singular part of~$m_2$\textup);
+\item \emph{(Classical $\lambda$-Jacobi; \ClaimStatusProvedHere.)}
+ These operations satisfy the axioms of a Poisson vertex algebra
+ \textup(sesquilinearity, skew-symmetry, Jacobi identity, vacuum,
+ Leibniz rule\textup);
+\item \emph{(Higher-operation vanishing; \ClaimStatusConditional{} on
+ compatible topological nullhomotopies.)}
+ If compatible topological nullhomotopies are supplied, the
+ higher operations $m_{k \geq 3}$ vanish in cohomology;
+\item \emph{(All-loop quantum lift; \ClaimStatusConditional{} on
+ $\hypKZSDR,\,\hypStokes,\,\hypReflWts,\,\hypTLift$.)}
+ Under the four endpoint hypotheses
+ $\hypKZSDR$ (Khan--Zeng analytic spectral-decomposition
+ representation \cite{KZ25}),
+ $\hypStokes$ (Stokes-data choice on the Fulton--MacPherson
+ compactification),
+ $\hypReflWts$ (reflected weights under analytic continuation),
+ and $\hypTLift$ (chain-level lift of $T = [Q_{\mathrm{tot}}, G]$
+ to the all-loop quantum object),
+ the classical PVA structure on $H^\bullet(\A,Q)$ lifts to an
+ all-loop quantum vertex algebra on the same generators with the
+ same classical $\lambda$-Jacobi limit; this is Construction
+ Problem~3.
+\end{enumerate}
+\end{maintheorem}
+
+The formal restatement with all axioms is
+Theorem~\ref{thm:cohomology_PVA}; the component proofs appear in
+\S\S\ref{sec:PVA_axioms_complete}--\ref{sec:higher_vanish}.
+
+\subsection{Poisson Vertex Algebra Axioms: Complete Verification}
+% label removed: sec:PVA_axioms_complete
+
+Theorem~\ref{thm:cohomology_PVA} is verified axiom by axiom, following Khan--Zeng \cite{KZ25}. Throughout, $H^\bullet(\A, Q)$ denotes cohomology with respect to the BV-BRST differential $Q = m_1$.
+
+\begin{definition}[Poisson Vertex Algebra Axioms]
+% label removed: def:PVA_axioms
+A \textbf{Poisson vertex algebra} is a vector space $V$ equipped with:
+\begin{enumerate}[label=(\roman*)]
+\item A translation operator $\partial : V \to V$;
+\item A vacuum vector $|0\rangle \in V$;
+\item A binary operation (the $\lambda$-bracket)
+\[
+\{-_\lambda -\} : V \otimes V \longrightarrow V((\lambda))
+\]
+\end{enumerate}
+satisfying the following axioms:
+
+\textbf{(PVA1) Sesquilinearity}: For all $a, b \in V$,
+\begin{align}
+\{\partial a_\lambda b\} &= -\lambda \{a_\lambda b\},\\
+\{a_\lambda \partial b\} &= (\partial + \lambda) \{a_\lambda b\}.
+\end{align}
+
+\textbf{(PVA2) Skew-symmetry}: For homogeneous $a, b \in V$,
+\[
+\{a_\lambda b\} = -(-1)^{|a||b|}\{b_{-\lambda - \partial} a\}, % label removed: eq:PVA2
+\]
+where the right side means $\{b_\mu a\}|_{\mu = -\lambda - \partial}$ (substitute $\mu = -\lambda - \partial$ and expand).
+
+\textbf{(PVA3) Jacobi Identity}: For all $a, b, c \in V$,
+\[
+\{ a_\lambda \{b_\mu c\} \} - \{ b_\mu \{a_\lambda c\} \} = \{ \{a_\lambda b\}_{\lambda + \mu} c \}. % label removed: eq:PVA3
+\]
+
+\textbf{(PVA4) Vacuum}: $|0\rangle$ satisfies
+\[
+\{a_\lambda |0\rangle\} = 0, \quad \partial |0\rangle = 0, \quad \lim_{\lambda \to 0} a(\lambda) |0\rangle = a,
+\]
+where $a(\lambda) := \sum_{n < 0} a_{(n)} \lambda^{-n-1}$ is the normally ordered part.
+
+\textbf{(PVA5) Leibniz Rule}: If $V$ has an associative product $\cdot : V \otimes V \to V$ (commutative), then
+\[
+\{a_\lambda (bc)\} = \{a_\lambda b\} c + \{a_\lambda c\} b. % label removed: eq:PVA5
+\]
+\end{definition}
+
+\begin{remark}[Unshifted vs.\ $(-1)$-shifted PVA]
+% label removed: rmk:shifted-PVA-signs
+The above defines an \emph{unshifted} PVA. In the $(-1)$-shifted
+PVA used here, the visible vertex-algebra skewsymmetry keeps the
+ordinary Koszul sign, while the Jacobi and Leibniz identities carry
+the shifted signs coming from the bar desuspension.
+\end{remark}
+
+\begin{remark}[Convention: $V((\lambda))$ vs.\ $V{[\lambda]}$]
+% label removed: rmk:Laurent_vs_poly
+We use $V((\lambda))$ (formal Laurent series) rather than $V[\lambda]$ (polynomials) to accommodate the mode expansion of vertex algebras. The $\lambda$-bracket takes values in $V[\lambda]$ (polynomial in $\lambda$) for standard PVAs; the Laurent series setting allows for the vertex algebra OPE expansion and reduces to the polynomial setting after the Borel transform. Concretely, the \emph{polynomial} $\lambda$-bracket $\{a_\lambda b\}_{\mathrm{poly}} = \sum_{n \geq 0} a_{(n)} b \cdot \lambda^n / n!$ (as in \cite{Kac98}) is related to the OPE mode expansion $\sum_{n \geq 0} a_{(n)} b / \lambda^{n+1}$ by a formal Borel--Laplace transform. Throughout this section, sesquilinearity and other PVA axioms are stated and verified using the chain-level sesquilinearity of $m_2$ (Equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}), which directly gives $m_2(\partial a, b) = -\lambda \cdot m_2(a,b)$. This is compatible with the polynomial convention, where $\{\partial a_\lambda b\} = -\lambda \{a_\lambda b\}$ holds by definition.
+\end{remark}
+
+\begin{remark}[Connection to $m_2$]
+The singular part of \(m_2\) is an OPE kernel, not yet the polynomial
+PVA bracket. If
+\[
+m_2(a,b)_{\mathrm{sing}}
+=\sum_{n\ge0}\frac{a_{(n)}b}{\zeta^{n+1}},
+\]
+then the PVA bracket is its Borel transform
+\[
+\{a_\lambda b\}
+=\sum_{n\ge0}a_{(n)}b\,\frac{\lambda^n}{n!}.
+\]
+The Laurent variable \(\zeta\) records the collision pole; the
+polynomial variable \(\lambda\) records the same coefficients in the
+PVA convention.
+
+The shift by $(-1)$ in ``$(-1)$-shifted $\lambda$-bracket''
+(mentioned in Theorem~\ref{thm:cohomology_PVA}) refers to the
+bar-desuspended cohomological convention. The visible skewsymmetry is
+the ordinary vertex-algebra identity with sign $(-1)^{|a||b|}$; the
+shifted signs enter the three-point Jacobi and Leibniz identities
+through the coderivation on $T^c(s^{-1}\bar A)$.
+
+\textbf{Convention.}
+This chapter uses \(\lambda\) for the polynomial PVA bracket and
+\(\zeta^{-1}\) for the OPE kernel. The two encode the same modes, but
+sesquilinearity is a polynomial identity in \(\lambda\).
+\end{remark}
+
+\subsubsection{Proof of Sesquilinearity (PVA1)}
+
+\begin{lemma}[Sesquilinearity verification;
+\ClaimStatusProvedHere; licensing $\gamma$ via the logarithmic
+chain/pro ambient $\hypAmbientPro$]
+In the polynomial divided-power convention, the $\lambda$-bracket
+\(\{-_\lambda-\}\) defined from the singular coefficients of \(m_2\)
+satisfies the sesquilinearity axioms (PVA1).
+\end{lemma}
+
+\begin{proof}
+The proof uses the chain-level sesquilinearity of $m_2$ (Equations~\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}), which states:
+\[
+m_2(\partial a, b) = -\lambda \cdot m_2(a, b), \qquad m_2(a, \partial b) = (\lambda + \partial) \cdot m_2(a,b).
+\]
+
+\textbf{Step 1: Derive (PVA1a).} The vertex-algebra mode identity
+\((\partial a)_{(n)}=-n\,a_{(n-1)}\), with \(a_{(-1)}=0\), gives after
+Borel transform:
+\[
+\{\partial a_\lambda b\}
+=\sum_{n\ge0}(\partial a)_{(n)}b\,\frac{\lambda^n}{n!}
+=-\lambda\sum_{m\ge0}a_{(m)}b\,\frac{\lambda^m}{m!}
+=-\lambda\{a_\lambda b\},
+\]
+which proves the first sesquilinearity identity.
+
+\begin{remark}[On the mode expansion derivation]
+% label removed: rmk:mode_convention_warning
+The Laurent OPE kernel satisfies the corresponding translation identity
+before Borel transform. The displayed PVA axiom is the same identity
+after the singular kernel has been converted to divided powers of
+\(\lambda\).
+\end{remark}
+
+\textbf{Step 2: Derive (PVA1b).} The second translation identity
+\(a_{(n)}\partial b=\partial(a_{(n)}b)+n\,a_{(n-1)}b\) gives:
+\[
+\{a_\lambda \partial b\}
+=\sum_{n\ge0}a_{(n)}\partial b\,\frac{\lambda^n}{n!}
+=(\partial+\lambda)\{a_\lambda b\},
+\]
+where $\partial$ acts on the coefficient algebra $\A$ and commutes with
+the Borel transform. This proves the second sesquilinearity identity.
+\end{proof}
+
+\subsubsection{Proof of Skew-Symmetry (PVA2)}
+
+\begin{remark}[Alternative derivation of PVA2 via vertex algebra modes]
+% label removed: lem:PVA2_proof
+If one \emph{assumes} the vertex algebra mode commutation relations
+(specifically the skew-symmetry axiom $a_{(n)} b = (-1)^{|a||b|}
+\sum_{j \geq 0} \frac{(-1)^{n+j+1}}{j!} \partial^j(b_{(n+j)} a)$, see
+\cite[Theorem~3.3.2]{Kac98}), then PVA2 follows by a direct reindexing
+of the mode expansion. This gives a clean algebraic proof but is
+\emph{not} self-contained: it relies on VA axioms rather than deriving
+them. For a self-contained geometric proof from the $A_\infty$ structure
+(via the involution on $\FM_2(\C)$), see Proposition~\ref{prop:PVA2_proof}.
+\end{remark}
+
+\subsubsection{Proof of Jacobi Identity (PVA3)}
+
+The Jacobi identity is the hardest axiom and the technical heart of the PVA descent. Unlike sesquilinearity and skew-symmetry (which follow from chain-level properties of $m_2$ alone), the Jacobi identity requires the full $n=3$ $A_\infty$ Stasheff identity and a geometric argument on $\FM_3(\C)$.
+
+\begin{lemma}[Jacobi identity verification;
+\ClaimStatusProvedHere; licensing $\gamma$ via the logarithmic
+chain/pro ambient $\hypAmbientPro$, the oriented $\FM_3$ incidence
+convention, and Arnold--Orlik--Solomon corner cancellation]
+% label removed: lem:PVA3_proof
+% label removed: prop:AOS-implies-Jacobi
+Assume the logarithmic $\SCchtop$-axioms of
+Definition~\ref{def:log-SC-algebra} (factorisation
+$\widetilde\omega_k = \omega_k^{\mathrm{hol}} \wedge \omega_k^{\mathrm{top}}$
+and FM regularity). Let $[a],[b],[c]\in H^\bullet(\A,Q)$ be cohomology classes with representatives $a,b,c$ satisfying $Qa=Qb=Qc=0$. Then the signed Jacobiator
+\[
+J_{\lambda,\mu}(a,b,c)
+:=
+\{a_\lambda\{b_\mu c\}\}
+-
+(-1)^{(|a|+1)(|b|+1)}\{b_\mu\{a_\lambda c\}\}
+-
+\{\{a_\lambda b\}_{\lambda+\mu}c\}
+\]
+lies in \(\operatorname{im}Q\). Hence the $(-1)$-shifted $\lambda$-bracket satisfies the Jacobi identity:
+\begin{equation}
+% label removed: eq:Jacobi_shifted
+\{a_\lambda \{b_\mu c\}\} - (-1)^{(|a|+1)(|b|+1)} \{b_\mu \{a_\lambda c\}\} = \{\{a_\lambda b\}_{\lambda+\mu} c\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The proof is the legacy split form of Theorem~\ref{thm:Jacobi}.  Its
+load-bearing content is the signed three-face Stokes identity on
+\(\FM_3(\C)\): the doubly singular interior homotopy
+\(K_3^{\mathrm{Jac}}(a,b,c)\) satisfies
+\[
+J_{\lambda,\mu}(a,b,c)=QK_3^{\mathrm{Jac}}(a,b,c)
+\]
+up to the global suspension sign. The three pairwise boundary
+contributions are
+\[
+\mathfrak J_{23}=\{a_\lambda\{b_\mu c\}\},\qquad
+\mathfrak J_{13}=
+-(-1)^{(|a|+1)(|b|+1)}\{b_\mu\{a_\lambda c\}\},\qquad
+\mathfrak J_{12}=-\{\{a_\lambda b\}_{\lambda+\mu}c\}.
+\]
+Arnold--Orlik--Solomon cancellation at the codimension-\(2\) corners
+removes the remaining corner terms. Therefore
+\(J_{\lambda,\mu}(a,b,c)\in\operatorname{im}Q\), and the displayed
+Jacobi identity follows on cohomology.  The following paragraphs keep
+the older expansion of the same Stokes identity, with the signed
+Jacobiator above fixing the normalization.
+
+\medskip
+\textbf{Step 1: The $n=3$ $A_\infty$ identity with all signs.}
+From Definition~\ref{def:ainfty-relations}, the Stasheff identity at $n=3$ on inputs $a,b,c$ involves compositions $m_i \circ m_j$ with $i+j=4$. Expanding all terms with Koszul signs $\epsilon(s,j) = |a_1|+\cdots+|a_s|$, the identity reads:
+\begin{align}
+% label removed: eq:n3_Ainfty_full
+0 &= m_1\bigl(m_3(a,b,c)\bigr) \notag\\
+ &\quad + m_3\bigl(m_1(a),b,c\bigr)
+ + (-1)^{|a|}\, m_3\bigl(a,m_1(b),c\bigr)
+ + (-1)^{|a|+|b|}\, m_3\bigl(a,b,m_1(c)\bigr) \notag\\
+ &\quad + m_2\!\bigl(m_2(a,b)\big|_{\Lambda_{\{1,2\}}},\, c;\, \Lambda_{\{1,2\}},\lambda_2\bigr)
+ + (-1)^{|a|}\, m_2\!\bigl(a,\, m_2(b,c)\big|_{\lambda_2};\, \lambda_1, \lambda_2\bigr) \notag\\
+ &\quad + m_1\!\bigl(m_3(a,b,c)\bigr)\text{-type cross terms (all accounted for above)}.
+\end{align}
+More precisely, the six terms arise from $(i,j) \in \{(1,3),(3,1),(2,2)\}$ with appropriate insertion positions $s$. Writing them out with spectral parameters:
+\begin{itemize}
+\item \emph{$(i,j)=(1,3)$, $s=0$}: $m_1\bigl(m_3(a,b,c;\lambda_1,\lambda_2)\bigr)$. Sign: $\epsilon(0,3)=0$, so $+1$.
+\item \emph{$(i,j)=(3,1)$, $s=0$}: $m_3\bigl(m_1(a),b,c;\lambda_1,\lambda_2\bigr)$. Sign: $\epsilon(0,1)=0$, so $+1$.
+\item \emph{$(i,j)=(3,1)$, $s=1$}: $m_3\bigl(a,m_1(b),c;\lambda_1,\lambda_2\bigr)$. Sign: $(-1)^{\epsilon(1,1)} = (-1)^{|a|}$.
+\item \emph{$(i,j)=(3,1)$, $s=2$}: $m_3\bigl(a,b,m_1(c);\lambda_1,\lambda_2\bigr)$. Sign: $(-1)^{|a|+|b|}$.
+\item \emph{$(i,j)=(2,2)$, $s=0$}: $m_2\!\bigl(m_2(a,b;\lambda_1),c;\Lambda_{\{1,2\}},\lambda_2\bigr)$ where $\Lambda_{\{1,2\}} = \lambda_1 + \lambda_2$ is the effective spectral parameter for the fused block (spectral substitution, Remark~\ref{rmk:spectral-substitution}). Sign: $\epsilon(0,2) = 0$, so $+1$.
+\item \emph{$(i,j)=(2,2)$, $s=1$}: $m_2\!\bigl(a,m_2(b,c;\lambda_2);\lambda_1,\lambda_2\bigr)$. Sign: $\epsilon(1,2) = |a|$, so $(-1)^{|a|}$.
+\end{itemize}
+
+Assembling, the $n=3$ identity is:
+\begin{align}
+% label removed: eq:n3_assembled
+0 &= \underbrace{m_1\bigl(m_3(a,b,c)\bigr)}_{\text{(I)}}
+ + \underbrace{m_3(Qa,b,c) + (-1)^{|a|} m_3(a,Qb,c) + (-1)^{|a|+|b|} m_3(a,b,Qc)}_{\text{(II)}} \notag\\
+ &\quad + \underbrace{m_2\!\bigl(m_2(a,b;\lambda_1),c;\lambda_1{+}\lambda_2,\lambda_2\bigr)}_{\text{(III)}}
+ + \underbrace{(-1)^{|a|}\, m_2\!\bigl(a,m_2(b,c;\lambda_2);\lambda_1,\lambda_2\bigr)}_{\text{(IV)}}.
+\end{align}
+Here we wrote $m_1 = Q$ to make the roles transparent.
+
+\medskip
+\textbf{Step 2: Projection to cohomology.}
+Let $a,b,c$ be $Q$-closed representatives of classes in $H^\bullet(\A,Q)$. Then:
+\begin{itemize}
+\item Terms (II) vanish: $Qa = Qb = Qc = 0$.
+\item Term (I) is $Q$-exact: $Q\bigl(m_3(a,b,c)\bigr)$, so it vanishes in cohomology.
+\end{itemize}
+Therefore, in cohomology:
+\begin{equation}
+% label removed: eq:n3_cohomology
+\bigl[m_2\!\bigl(m_2(a,b;\lambda_1),c;\lambda_1{+}\lambda_2,\lambda_2\bigr)\bigr]
++ (-1)^{|a|}\,\bigl[m_2\!\bigl(a,m_2(b,c;\lambda_2);\lambda_1,\lambda_2\bigr)\bigr]
+= -\bigl[Q\bigl(m_3(a,b,c)\bigr)\bigr] = 0.
+\end{equation}
+
+\emph{Caution}: This does \textbf{not} mean $m_2$ is associative at the
+chain level. Equation~\eqref{eq:n3_cohomology} states that the two
+$m_2 \circ m_2$ compositions differ by the $Q$-boundary
+$Qm_3(a,b,c)$. The associativity holds only as a cohomological
+identity, and the $m_3$ boundary term must be tracked when decomposing
+into singular parts.
+
+\medskip
+\textbf{Step 3: Decomposition into singular and regular parts.}
+The key to extracting the Jacobi identity is to analyze the \emph{singular} parts of the iterated $m_2$ compositions. Recall from \S\ref{subsec:reg-sing} that $m_2(a,b;\lambda) = m_2^{\mathrm{reg}}(a,b;\lambda) + m_2^{\mathrm{sing}}(a,b;\lambda)$, and the $\lambda$-bracket is $\{a_\lambda b\} = [m_2^{\mathrm{sing}}(a,b;\lambda)]$.
+
+Consider the composition $m_2(m_2(a,b;\lambda_1),c;\lambda_1{+}\lambda_2,\lambda_2)$. Decomposing the inner $m_2(a,b;\lambda_1)$ into regular and singular parts:
+\begin{align*}
+m_2\bigl(m_2(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr)
+&= m_2\bigl(m_2^{\mathrm{reg}}(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr) \\
+&\quad + m_2\bigl(m_2^{\mathrm{sing}}(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr).
+\end{align*}
+Now decompose the \emph{outer} $m_2$ into its singular and regular parts in the variable $\lambda_1+\lambda_2$. Four sectors emerge:
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{reg--reg}: $m_2^{\mathrm{reg}}\bigl(m_2^{\mathrm{reg}}(a,b),c\bigr)$, contributing to the associativity of the commutative product on $H^\bullet$.
+\item \textbf{sing--reg}: $m_2^{\mathrm{sing}}\bigl(m_2^{\mathrm{reg}}(a,b),c;\lambda_1{+}\lambda_2\bigr)$, contributing to the Leibniz rule (PVA5), not to Jacobi.
+\item \textbf{reg--sing}: $m_2^{\mathrm{reg}}\bigl(m_2^{\mathrm{sing}}(a,b;\lambda_1),c\bigr)$, contributing to Leibniz in the other slot.
+\item \textbf{sing--sing}: $m_2^{\mathrm{sing}}\bigl(m_2^{\mathrm{sing}}(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr)$; this is the Jacobi-relevant sector.
+\end{enumerate}
+The Jacobi identity involves only sector (d). We therefore extract the \emph{doubly singular} part of~\eqref{eq:n3_cohomology}: singular in both the inner spectral parameter ($\lambda_1$ or $\lambda_2$) and the outer spectral parameter ($\lambda_1+\lambda_2$ or $\lambda_1$ respectively).
+
+\medskip
+\textbf{Step 4: Identification of doubly-singular terms with iterated brackets.}
+The doubly-singular part of term (III) in~\eqref{eq:n3_cohomology} is:
+\begin{equation}
+% label removed: eq:term_III_sing
+\bigl[m_2^{\mathrm{sing}}\bigl(m_2^{\mathrm{sing}}(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr)\bigr]_{\mathrm{sing\text{-}sing}}.
+\end{equation}
+We claim this equals $\{a_\lambda \{b_\mu c\}\}\big|_{\lambda=\lambda_1,\,\mu=\lambda_2}$ after appropriate rewriting.
+
+To see this, note that the outer $m_2$ acts on two inputs: $m_2^{\mathrm{sing}}(a,b;\lambda_1) \in \A((\lambda_1))$ and $c$, with outer spectral parameter $\Lambda = \lambda_1 + \lambda_2$. The \emph{spectral substitution principle} (Remark~\ref{rmk:spectral-substitution}) dictates that the effective parameter for the fused first slot is $\Lambda_{\{1,2\}} = \lambda_1 + \lambda_2$. Taking the singular part in $\Lambda$ extracts the $\lambda$-bracket of $m_2^{\mathrm{sing}}(a,b)$ with $c$ at spectral parameter $\lambda_1+\lambda_2$.
+
+However, this is \emph{not} the same as $\{\{a_{\lambda_1} b\}_{\lambda_1+\lambda_2}\, c\}$, which would be the iterated bracket with spectral substitution. In the iterated bracket $\{a_{\lambda_1}\{b_{\lambda_2} c\}\}$, the outer bracket acts on $a$ and $\{b_{\lambda_2} c\}$ at spectral parameter $\lambda_1$. Writing this in terms of $m_2$:
+\[
+\{a_{\lambda_1}\{b_{\lambda_2} c\}\} = \bigl[m_2^{\mathrm{sing}}\bigl(a,\, m_2^{\mathrm{sing}}(b,c;\lambda_2);\, \lambda_1\bigr)\bigr].
+\]
+This is the doubly-singular part of term (IV) (up to the Koszul sign $(-1)^{|a|}$).
+
+Similarly, the doubly-singular part of term (III) is:
+\[
+\bigl[m_2^{\mathrm{sing}}\bigl(m_2^{\mathrm{sing}}(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr)\bigr].
+\]
+This involves $m_2$ applied to $\{a_{\lambda_1} b\}$ and $c$ at spectral parameter $\lambda_1 + \lambda_2$, which is $\{\{a_{\lambda_1} b\}_{\lambda_1+\lambda_2}\, c\}$, precisely the right-hand side of the Jacobi identity~\eqref{eq:Jacobi_shifted}, with the spectral substitution $\Lambda_{\{1,2\}} = \lambda_1 + \lambda_2$ producing the shifted parameter.
+
+\medskip
+\textbf{Step 5: The Stokes/FM$_3$ argument and the role of $m_3$.}
+The content of Step~4 is that the doubly-singular projection of the
+$n=3$ Stokes identity records two planar pairwise faces. The full
+Jacobi identity also needs the non-consecutive $D_{\{1,3\}}$ face.
+That face is not a new higher operation on cohomology; it is recovered
+from the exchange cylinder and carries the shifted sign dictated by
+bar desuspension.
+
+By Theorem~\ref{thm:stokes_cluster}, the operation $m_3(a,b,c)$ on $Q$-closed inputs arises from integrating the weight form $\widetilde{\omega}_3$ over $\FM_3(\C) \times \Conf_3(\R)$. Stokes' theorem on $\FM_3(\C)$ gives:
+\[
+\int_{\FM_3(\C)} d\widetilde{\omega}_3
+= \sum_{\substack{S \subseteq \{1,2,3\} \\ |S| \geq 2}}
+\epsilon_{D_S}\int_{D_S}\Res_{D_S}(\widetilde{\omega}_3).
+\]
+The relevant codimension-1 boundary divisors are (cf.\ \S\ref{sec:FM_calculus}):
+\begin{itemize}
+\item $D_{\{1,2\}}$: points $z_1,z_2$ collide. The residue factorizes as $m_2(a,b;\lambda_1) \otimes c$, giving the composition $m_2(m_2(a,b),c)$ at outer parameter $\lambda_1+\lambda_2$. Incidence sign: $\epsilon_{D_{\{1,2\}}} = +1$.
+\item $D_{\{2,3\}}$: points $z_2,z_3$ collide. The residue gives $a \otimes m_2(b,c;\lambda_2)$, yielding $m_2(a,m_2(b,c))$ at outer parameter $\lambda_1$. Incidence sign: $\epsilon_{D_{\{2,3\}}} = +1$.
+\item $D_{\{1,3\}}$: points $z_1,z_3$ collide (non-consecutive). By the planar ordering constraint (Remark~\ref{rem:nonconsecutive_vanishing}), this stratum contributes zero in the planar $A_\infty$ structure for ordered inputs.
+\item $D_{\{1,2,3\}}$: all three points collide. This gives $m_1(m_3(a,b,c))$ and terms with $m_3(m_1(\cdot),\cdot,\cdot)$. On $Q$-closed inputs, these are $Q$-exact.
+\end{itemize}
+
+Therefore, on $Q$-closed inputs, the Stokes identity becomes:
+\begin{equation}
+% label removed: eq:Stokes_n3
+Q\bigl(m_3(a,b,c)\bigr) = -m_2\!\bigl(m_2(a,b;\lambda_1),c;\lambda_1{+}\lambda_2\bigr) - (-1)^{|a|}\, m_2\!\bigl(a,m_2(b,c;\lambda_2);\lambda_1\bigr),
+\end{equation}
+confirming~\eqref{eq:n3_cohomology}. The chain-level operation $m_3(a,b,c)$ is a \emph{specific} homotopy witnessing the failure of strict associativity of $m_2$: it is the integral over the \emph{interior} of $\FM_3(\C)$.
+
+Now extract the doubly-singular part of~\eqref{eq:Stokes_n3}. Since $Q$ commutes with the regular/singular decomposition (it acts on coefficients in $\A$, not on spectral parameters), the doubly-singular part of $Q(m_3)$ is $Q(m_3^{\mathrm{sing\text{-}sing}})$, which vanishes in cohomology. Therefore in $H^\bullet$:
+\begin{equation}
+% label removed: eq:Jacobi_pre
+0 = \{\{a_\lambda b\}_{\lambda+\mu}\, c\} + (-1)^{|a|}\,\{a_\lambda \{b_\mu c\}\} + \bigl(\text{doubly-singular part of } (-1)^{|a|}\, m_2(a,m_2(b,c))\bigr).
+\end{equation}
+
+The remaining doubly-singular term is:
+\[
+(-1)^{|a|}\,\bigl[m_2^{\mathrm{sing}}\bigl(a,m_2^{\mathrm{sing}}(b,c;\mu);\lambda\bigr)\bigr]
+= (-1)^{|a|}\, \{a_\lambda \{b_\mu c\}\}.
+\]
+To obtain the Jacobi identity, we must carefully identify which iterated bracket each $m_2 \circ m_2$ term produces.
+
+There are exactly two $m_2 \circ m_2$ terms on the right side of~\eqref{eq:Stokes_n3}:
+\begin{enumerate}
+\item[(III)] $m_2(m_2(a,b;\lambda),c;\lambda{+}\mu)$: the inner operation fuses $a,b$ at parameter $\lambda$, and the outer acts on the result and $c$ at parameter $\lambda+\mu$ (spectral substitution).
+\item[(IV)] $(-1)^{|a|}\,m_2(a,m_2(b,c;\mu);\lambda)$: the inner fuses $b,c$ at parameter $\mu$, the outer acts on $a$ and the result at parameter $\lambda$.
+\end{enumerate}
+
+The doubly-singular part of (III) is $\{\{a_\lambda b\}_{\lambda+\mu}\, c\}$: the inner singular part gives $\{a_\lambda b\}$, and the outer singular part (in $\lambda+\mu$) gives the bracket at $\lambda+\mu$.
+
+The doubly-singular part of (IV) is $(-1)^{|a|}\,\{a_\lambda \{b_\mu c\}\}$: the inner singular part gives $\{b_\mu c\}$, and the outer singular part (in $\lambda$) gives the bracket of $a$ with the result.
+
+So the $n=3$ identity on cohomology gives:
+\begin{equation}
+% label removed: eq:Jacobi_pre_two_terms
+\{\{a_\lambda b\}_{\lambda+\mu}\, c\}
++ (-1)^{|a|}\, \{a_\lambda \{b_\mu c\}\}
+= 0 \quad \text{(in cohomology)}.
+\end{equation}
+This is the \emph{planar} identity, involving only two of the three Jacobi terms.
+The ``missing'' third term $\{b_\mu \{a_\lambda c\}\}$ is not directly visible in the planar $A_\infty$ structure; it arises from the \emph{homotopy-commutativity} of $m_2$ in cohomology (Proposition~\ref{prop:PVA2_proof}).
+
+The missing term is the contribution of the $D_{\{1,3\}}$ face.
+Its sign is the shifted Koszul sign from the bar desuspension, not
+the visible skewsymmetry sign of the $\lambda$-bracket. Equivalently,
+equation~\eqref{eq:Jacobi_pre_two_terms}, being valid for
+\emph{all} triples $a,b,c$, can be applied with the roles of $a$ and
+$b$ exchanged:
+\[
+\{\{b_\mu a\}_{\mu+\lambda}\, c\}
++ (-1)^{|b|}\, \{b_\mu \{a_\lambda c\}\}
+= 0.
+\]
+The exchange cylinder identifies the first term with the
+$D_{\{1,2\}}$ contribution and the shifted sign in the
+$D_{\{1,3\}}$ term, giving
+\[
+(-1)^{(|a|+1)(|b|+1)}\, \{b_\mu\{a_\lambda c\}\}
+= \{\{a_\lambda b\}_{\lambda+\mu}\, c\}
++ (-1)^{|a|}\, \{a_\lambda\{b_\mu c\}\},
+\]
+from which the full Jacobi identity follows:
+\begin{equation}
+% label removed: eq:Jacobi_assembled
+\{\{a_\lambda b\}_{\lambda+\mu}\, c\}
++ (-1)^{|a|}\, \{a_\lambda \{b_\mu c\}\}
+- (-1)^{(|a|+1)(|b|+1)}\, \{b_\mu \{a_\lambda c\}\}
+= 0.
+\end{equation}
+
+\medskip
+\textbf{Step 6: AOS cancellation at codimension-2 corners.}
+The identity~\eqref{eq:Jacobi_assembled} follows from Stokes' theorem on $\FM_3(\C)$ provided the codimension-2 corner contributions cancel. The codimension-2 strata of $\FM_3(\C)$ arise from pairwise intersections of the divisors $D_{\{1,2\}}$, $D_{\{1,3\}}$, $D_{\{2,3\}}$. The relevant corners are:
+\begin{itemize}
+\item $D_{\{1,2\}} \cap D_{\{2,3\}}$: nested collision $z_1 \to z_2 \to z_3$ (hierarchical cluster). This corner admits two factorizations: collide $\{1,2\}$ first then merge with $3$, or collide $\{2,3\}$ first then merge with $1$.
+\item $D_{\{1,2\}} \cap D_{\{1,3\}}$: collision $z_1 \to z_2$ and $z_1 \to z_3$ simultaneously, i.e.\ all three collide with $z_1$ as center.
+\item $D_{\{1,3\}} \cap D_{\{2,3\}}$: similarly, all three collide with $z_3$ as center.
+\end{itemize}
+
+By Lemma~\ref{lem:Arnold_cancellation} (Arnold cancellation), the two factorizations of each codimension-2 corner contribute with opposite signs and cancel:
+\[
+\int_{D_S|_{D_T}} \Res_{D_S}\bigl(\Res_{D_T}(\widetilde{\omega}_3)\bigr) + \int_{D_T|_{D_S}} \Res_{D_T}\bigl(\Res_{D_S}(\widetilde{\omega}_3)\bigr) = 0
+\]
+for each pair $(S,T)$. Concretely, the sign reversal comes from the anticommutativity $d\varepsilon_S \wedge d\varepsilon_T = -d\varepsilon_T \wedge d\varepsilon_S$ of the normal directions to the two divisors meeting at the corner (cf.\ Definition~\ref{def:codim2-corners}). This is the content of the Arnold--Orlik--Solomon relations in the FM setting: the logarithmic forms $d\log(z_i - z_j)$ satisfy $d\log(z_1-z_2) \wedge d\log(z_2-z_3) + d\log(z_2-z_3) \wedge d\log(z_3-z_1) + d\log(z_3-z_1) \wedge d\log(z_1-z_2) = 0$, which is precisely the Arnold relation ensuring that iterated residues at corners cancel.
+
+Therefore all codimension-2 contributions vanish, and the Stokes identity receives contributions only from codimension-1 faces. This validates~\eqref{eq:Jacobi_assembled}.
+
+\medskip
+\textbf{Conclusion.}
+Rearranging~\eqref{eq:Jacobi_assembled}:
+\[
+\{a_\lambda \{b_\mu c\}\} - (-1)^{(|a|+1)(|b|+1)}\, \{b_\mu \{a_\lambda c\}\} = \{\{a_\lambda b\}_{\lambda+\mu}\, c\},
+\]
+which is the Jacobi identity~\eqref{eq:Jacobi_shifted} for the $(-1)$-shifted PVA. The sign $(-1)^{(|a|+1)(|b|+1)}$ is the correct Koszul sign for a $(-1)$-shifted Lie bracket (the bracket has degree $-1$, so elements enter with shifted degree $|a|+1$).
+\end{proof}
+
+\begin{remark}[Role of $m_3$ and spectral substitution]
+% label removed: rem:m3_spectral_substitution
+The proof makes transparent why the spectral substitution principle (Remark~\ref{rmk:spectral-substitution}) is essential for the Jacobi identity. The composition $m_2(m_2(a,b;\lambda),c)$ at boundary $D_{\{1,2\}}$ evaluates the outer bracket at spectral parameter $\Lambda_{\{1,2\}} = \lambda + \mu$ (the sum of inner parameters), producing the shifted bracket $\{\{a_\lambda b\}_{\lambda+\mu}\, c\}$. Without spectral substitution, the identity would relate brackets at \emph{unrelated} spectral parameters and could not close into the Jacobi form.
+
+At the chain level, the operation $m_3(a,b,c)$ is a specific homotopy
+witnessing the failure of $m_2$-associativity, constructed as the
+interior integral $\int_{\FM_3(\C)^{\circ}} \widetilde{\omega}_3$.
+Its $Q$-boundary is invisible in cohomology, while its boundary
+contributions via Stokes are precisely the three $\lambda$-bracket
+compositions appearing in the Jacobi identity.
+\end{remark}
+
+\begin{remark}[Geometric origin of the three Jacobi terms]
+% label removed: rem:geometric_Jacobi
+The three signed summands of
+\(J_{\lambda,\mu}=\mathfrak J_{23}+\mathfrak J_{13}+\mathfrak J_{12}\)
+correspond to the three codimension-1 boundary faces of $\FM_3(\C)$:
+\begin{center}
+\begin{tabular}{lcl}
+$D_{\{2,3\}}$ & $\longleftrightarrow$ & $\{a_\lambda \{b_\mu c\}\}$ \\
+$D_{\{1,3\}}$ & $\longleftrightarrow$ & $-(-1)^{(|a|+1)(|b|+1)}\,\{b_\mu \{a_\lambda c\}\}$ \\
+$D_{\{1,2\}}$ & $\longleftrightarrow$ & $-\{\{a_\lambda b\}_{\lambda+\mu}\, c\}$
+\end{tabular}
+\end{center}
+This is a manifestation of a general principle: Lie algebra identities for factorization algebras are shadows of Stokes' theorem on configuration spaces. The Jacobi identity is the $k=3$ case; the $k=4$ case would give the ``Jacobi--Jacobi'' coherence, and so on for higher homotopies encoded in the $A_\infty$ structure.
+\end{remark}
+
+\subsubsection{Conditional vanishing of higher operations in cohomology}
+
+It remains to name the extra datum under which direct higher
+operations are \(Q\)-exact, and hence vanish on cohomology, for
+\(k\ge3\).
+
+\begin{theorem}[Higher operations are \(Q\)-exact under compatible topological
+nullhomotopies; \ClaimStatusConditional; licensing $\gamma+\varepsilon$
+via the logarithmic chain/pro ambient $\hypAmbientPro$, the relative
+compactified ordered topological factor, compatible topological
+nullhomotopies in
+Definition~\textup{\ref{def:compatible-topological-nullhomotopy}}, and
+the factorisation
+\(\widetilde\omega_k=\omega_k^{\mathrm{hol}}\wedge\omega_k^{\mathrm{top}}\)]
+% label removed: thm:m3_vanishes
+Under the logarithmic $\SCchtop$-axioms of
+Definition~\ref{def:log-SC-algebra} together with compatible topological
+nullhomotopies (Definition~\ref{def:compatible-topological-nullhomotopy}),
+for all $k \geq 3$ and all \(Q\)-closed representatives
+\(a_1,\ldots,a_k\in\A\), the direct higher operation \(m_k\) is
+$Q$-exact:
+\[
+m_k(a_1,\ldots,a_k)=Qh_{k-1}(a_1,\ldots,a_k)
+\]
+for some homotopy $h_{k-1} : \A^{\otimes k} \to \A((\lambda_1)) \cdots ((\lambda_{k-1}))$ of degree $2-k$. Consequently, $m_k = 0$ in cohomology.
+Without the supplied relative bounding chains, no higher-operation
+vanishing statement is asserted.
+\end{theorem}
+
+\begin{proof}
+The homotopy $h_{k-1}$ is supplied by the compatible
+nullhomotopy datum. The complete argument appears as
+Proposition~\ref{prop:m3_vanish}; we summarize the point here.
+
+For $k \geq 3$, the operation $m_k$ involves integration over the
+ordered topological configuration space. This space is contractible,
+but the compactified configuration space has collision faces, and
+those faces are the Stasheff boundary terms. A valid homotopy must
+fill the topological chain relative to these operadic faces and
+identify the remaining boundary with the output $Q$-boundary.
+Ordinary contractibility of the open ordered configuration space is
+not enough; the nullhomotopy is a relative compactified
+operadic-chain datum.
+
+For $k=2$, the topological chain is $0$-dimensional (a point in a
+contractible space with $H_0 \neq 0$), so $m_2$ is \emph{not} a
+boundary and persists on cohomology. See
+Proposition~\ref{prop:m3_vanish} for full details.
+\end{proof}
+
+\begin{remark}[Formality fails for $d'=1$]
+The proof uses $d' = 1$ (one topological direction) and the compatible
+nullhomotopy datum above. For $d' \geq 2$, formality claims require
+the relevant formality theorem and hypotheses. For $d' = 1$, quantum
+corrections can persist at the chain level, so the chain-level
+structure remains genuinely $A_\infty$ even when the binary PVA shadow
+descends to cohomology.
+\end{remark}
+
+
+\begin{remark}[Graded/Shifted PVAs]
+In applications to BV-BRST cohomology, we encounter
+\emph{$(-1)$-shifted PVAs}, where the $\lambda$-bracket has
+cohomological degree $-1$. The visible vertex-algebra skewsymmetry
+uses the ordinary Koszul sign; the shifted Koszul signs occur in the
+three-point Jacobi and Leibniz identities.
+\end{remark}
+
+\subsection{Statement of Main Theorem}
+
+\begin{theorem}[Cohomology is a PVA]
+% label removed: thm:cohomology_PVA
+Let $(\A, \{m_k\}, Q)$ be an $A_\infty$ chiral algebra presented as a
+logarithmic $\SCchtop$-algebra (Definition~\ref{def:log-SC-algebra}).
+Then:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{(\ClaimStatusProvedHere; classical $\lambda$-Jacobi.)}
+The cohomology $H^\bullet(\A,Q)$ inherits a commutative product (from $m_2$ in cohomology, which is commutative up to $Q$-exact terms);
+
+\item \emph{(\ClaimStatusProvedHere; classical $\lambda$-Jacobi.)}
+The $\lambda$-bracket $\{a_\lambda b\} := [m_2(a,b)]$ (cohomology class of $m_2(a,b)$) is well-defined on $H^\bullet(\A,Q)$ and satisfies axioms (PVA1)--(PVA4);
+
+\item \emph{(\ClaimStatusConditional{} on compatible topological
+nullhomotopies.)}
+Under compatible topological nullhomotopies, the higher
+operations $m_{k \geq 3}$ vanish in cohomology: for any $Q$-closed
+elements $a_1,\ldots,a_k \in \A$,
+\[
+m_k(a_1,\ldots,a_k) = Q(h_{k-1}(a_1,\ldots,a_k))
+\]
+for some explicit homotopy $h_{k-1}$;
+
+\item \emph{(\ClaimStatusConditional{} on
+$\hypKZSDR,\,\hypStokes,\,\hypReflWts,\,\hypTLift$; all-loop quantum lift.)}
+Under the four endpoint hypotheses (Khan--Zeng analytic SDR
+\cite{KZ25,Costello2011Renorm,CG17}; Stokes-data choice on the
+Fulton--MacPherson compactification; reflected weights / wall-crossing
+under analytic continuation; chain-level lift of
+$T = [Q_{\mathrm{tot}}, G]$), the classical PVA on $H^\bullet(\A,Q)$
+lifts to an all-loop quantum vertex algebra with the same classical
+$\lambda$-Jacobi limit. This lift is Construction Problem~3.
+\end{enumerate}
+\end{theorem}
+
+The proof occupies the rest of this section.
+
+\subsection{Well-Definedness of the $\lambda$-Bracket in Cohomology}
+
+\begin{proposition}[$A_\infty$ identity at degree $2$: $m_1$--$m_2$ compatibility;
+\ClaimStatusProvedHere; licensing $\gamma$ via the logarithmic
+chain/pro ambient $\hypAmbientPro$]
+% label removed: prop:m1_m2
+The $k=2$ case of the $A_\infty$ identity \eqref{eq:ainfty-relation-raw} reads:
+\[
+Q(m_2(a,b)) + m_2(Qa,b) + (-1)^{|a|} m_2(a,Qb)=0.
+\]
+Equivalently,
+\[
+Q(m_2(a,b))=-m_2(Qa,b)-(-1)^{|a|}m_2(a,Qb).
+\]
+\end{proposition}
+
+\begin{proof}
+This is the $n=2$ specialization of \eqref{eq:ainfty-relation-raw}: the only terms in the sum have $(i,j)\in\{(1,2),(2,1)\}$, giving $m_1(m_2(a,b)) + m_2(m_1(a),b) + (-1)^{|a|}m_2(a,m_1(b))=0$.
+\end{proof}
+
+\begin{lemma}[Regular and singular binary descent to cohomology;
+\ClaimStatusProvedHere; licensing $\gamma$ via the logarithmic
+chain/pro ambient $\hypAmbientPro$]
+% label removed: lem:lambda_descends
+Work in the logarithmic chain/pro ambient $\hypAmbientPro$, and split
+\(m_2=m_2^{\mathrm{reg}}+m_2^{\mathrm{sing}}\) into the regular
+binary product and the singular OPE kernel. The singular coefficients
+are packaged as the polynomial \(\lambda\)-bracket by the Borel
+transform convention of Appendix~\ref{app:pva-expanded-repaired}. For
+\(Q\)-closed elements \(a,b\in\A\), the regular product
+\(\mu(a,b)\) and the singular polynomial bracket \(\{a_\lambda b\}\)
+are \(Q\)-closed, and their cohomology classes are independent of the
+chosen \(Q\)-closed representatives.
+\end{lemma}
+
+\begin{proof}
+Using the preceding \(k=2\) \(A_\infty\) identity,
+\[
+Q(m_2(a,b)) + m_2(Qa,b) + (-1)^{|a|} m_2(a,Qb)=0.
+\]
+The differential \(Q\) acts on the coefficient complex and commutes
+with the regular projection, the singular projection, and the Borel
+transform of singular coefficients. Therefore
+\[
+Q\mu(a,b)=-\mu(Qa,b)-(-1)^{|a|}\mu(a,Qb),
+\]
+and coefficientwise
+\[
+Q(a_{(n)}b)=-(Qa)_{(n)}b-(-1)^{|a|}a_{(n)}(Qb).
+\]
+If \(Qa=Qb=0\), these identities make both \(\mu(a,b)\) and every
+coefficient of \(\{a_\lambda b\}\) \(Q\)-closed. If
+\(a'=a+Q\alpha\), then
+\[
+m_2(a',b) = m_2(a,b) + m_2(Q\alpha,b) = m_2(a,b) - Q(m_2(\alpha,b)) - (-1)^{|\alpha|} m_2(\alpha,Qb),
+\]
+which differs from \(m_2(a,b)\) by a \(Q\)-boundary because \(Qb=0\).
+The regular projection and every singular coefficient projection
+preserve this \(Q\)-boundary. The same argument applies to changes in
+\(b\).
+\end{proof}
+
+\subsection{Verification of PVA Axioms}
+
+Verification: axioms (PVA1)--(PVA4) for the descended $\lambda$-bracket on $H^\bullet(\A,Q)$.
+
+\subsubsection{(PVA1) Sesquilinearity}
+
+\begin{proposition}[Sesquilinearity in cohomology;
+\ClaimStatusProvedHere; licensing $\gamma$ via the logarithmic
+chain/pro ambient $\hypAmbientPro$]
+The singular polynomial bracket on \(H^\bullet(\A,Q)\) satisfies
+\[
+\{\partial a_\lambda b\}=-\lambda\{a_\lambda b\},
+\qquad
+\{a_\lambda\partial b\}=(\lambda+\partial)\{a_\lambda b\}.
+\]
+\end{proposition}
+
+\begin{proof}
+At the chain level, \(m_2\) satisfies
+\eqref{eq:sesqui-left}--\eqref{eq:sesqui-right}.  Equivalently,
+\[
+(\partial a)_{(n)}b=-n\,a_{(n-1)}b,\qquad
+a_{(n)}(\partial b)=\partial(a_{(n)}b)+n\,a_{(n-1)}b,
+\]
+with \(a_{(-1)}b=0\). The Borel transform converts these two
+coefficient identities into the displayed polynomial
+\(\lambda\)-identities.  Since \(\partial\) and \(\lambda\) commute
+with \(Q\), the regular/singular binary descent lemma above carries
+the identities to cohomology.
+\end{proof}
+
+\subsubsection{(PVA2) Skew-Symmetry}
+
+Skew-symmetry requires more work, as it relates $m_2(a,b)$ to $m_2(b,a)$.
+
+\begin{proposition}[Skew-symmetry in cohomology;
+\ClaimStatusProvedHere; licensing $\alpha+\gamma$ via boundary chart
+$b$ and the logarithmic chain/pro ambient $\hypAmbientPro$]
+On $H^\bullet(\A,Q)$, the $\lambda$-bracket satisfies the visible
+vertex-algebra skewsymmetry convention
+\[
+\{a_\lambda b\}
+= -(-1)^{|a||b|}\{b_{-\lambda-\partial}a\}^{\to}.
+\]
+\end{proposition}
+
+\begin{proof}
+Use the exchange cylinder in the three-dimensional bulk.  In
+coordinates one may take
+\[
+t_1(s)=-\cos(\pi s),\quad t_2(s)=\cos(\pi s),\qquad
+z_1(s)=r e^{\pi i s},\quad z_2(s)=-r e^{\pi i s}.
+\]
+Then the holomorphic collision coordinate is
+\[
+\zeta(s)=z_1(s)-z_2(s)=2r\,e^{\pi i s}.
+\]
+Thus the holomorphic projection traverses the half-boundary arc of
+\(\FM_2(\C)\), from angle \(0\) to angle \(\pi\), while the
+topological coordinate changes the \(E_1\)-ordering.  The square of
+this exchange projects to the full generator of
+\(\pi_1(\FM_2(\C))\cong\Z\).  No braid-group \(\Z\) is assigned to the
+full ordered configuration space of two points in \(\C\times\R\).
+
+Pull the two-point logarithmic kernel to this cylinder.  Cartan--Stokes
+gives an oriented endpoint identity.  After projection to the singular
+sector it has the form
+\[
+m_2^{\mathrm{sing}}(a,b;\zeta)
++(-1)^{|a||b|}\tau^\ast m_2^{\mathrm{sing}}(b,a;\zeta)
+=QH_{\mathrm{ex}}^{\mathrm{sing}}(a,b;\zeta)
+\]
+plus the standard \(Q\)-exact input-correction terms.  Here
+\(\tau^\ast\) is induced by \(\zeta\mapsto-\zeta\) and the exchange of
+inputs.  Since \(d\log(-\zeta)=d\log\zeta\), the logarithmic form
+itself supplies no sign; the minus sign in cohomology is the oriented
+boundary sign in the Stokes identity.  Applying the Borel transform and
+the translation transfer converts \(\tau^\ast\) into
+\(\lambda\mapsto-\lambda-\partial\), giving
+\[
+\{a_\lambda b\}
+= -(-1)^{|a||b|}\{b_{-\lambda-\partial}a\}^{\to}.
+\]
+\end{proof}
+
+\subsubsection{(PVA5) Leibniz Rule}
+
+\begin{proposition}[Leibniz rule in cohomology;
+\ClaimStatusProvedHere; licensing $\gamma$ via the logarithmic
+chain/pro ambient $\hypAmbientPro$, the oriented $\FM_3$ incidence
+convention, the unsuspended regular product, and the divided-power
+Borel transform]
+% label removed: prop:PVA3_proof
+For all cohomology classes \([a],[b],[c]\in H^\bullet(\A,Q)\), the
+signed Leibniz defect
+\[
+\mathcal L_\lambda(a;b,c)
+:=
+\{a_\lambda(b\cdot c)\}
+-
+\{a_\lambda b\}\cdot c
+-
+(-1)^{(|a|+1)|b|}\,b\cdot\{a_\lambda c\}
+\]
+lies in \(\operatorname{im}Q\). Hence the descended bracket satisfies
+the shifted PVA Leibniz rule
+\[
+\{[a]_\lambda([b]\cdot[c])\}
+=
+\{[a]_\lambda[b]\}\cdot[c]
++
+(-1)^{(|a|+1)|b|}\,[b]\cdot\{[a]_\lambda[c]\}.
+\]
+\end{proposition}
+
+\begin{proof}
+We must show
+\[
+\{a_\lambda (b\cdot c)\}
+=
+\{a_\lambda b\}\cdot c
++
+(-1)^{(|a|+1)|b|}b\cdot\{a_\lambda c\}
+\]
+in $H^\bullet(\A,Q)$, where $b\cdot c := [m_2^{\mathrm{reg}}(b,c)|_{\mu=0}]$ is the
+commutative product and $\{a_\lambda b\} := [m_2^{\mathrm{sing}}(a,b)]$ is the
+$\lambda$-bracket.
+Equivalently, the mixed regular--singular Stokes argument gives
+\[
+\mathcal L_\lambda(a;b,c)=QK_3^{\mathrm{Leib}}(a;b,c),
+\]
+where \(K_3^{\mathrm{Leib}}\) is the mixed component of the interior
+\(m_3\)-homotopy.
+
+\textbf{Step 1 (Decompose $m_2(a, b\cdot c)$).}
+On cohomology classes $[a],[b],[c]$, the expression $m_2(a, b\cdot c)$
+is computed by first forming $b\cdot c = m_2^{\mathrm{reg}}(b,c)|_{\mu=0}$
+(which is well-defined in cohomology), then applying $m_2(a,-)$ at
+spectral parameter~$\lambda$. The singular part in~$\lambda$ gives
+$\{a_\lambda (b\cdot c)\}$.
+
+\textbf{Step 2 (Apply the $n=3$ identity).}
+The $n=3$ $A_\infty$ identity~\eqref{eq:n3_assembled} on $Q$-closed inputs
+$(a,b,c)$ gives, in cohomology:
+\[
+m_2\bigl(m_2(a,b;\lambda),\,c;\,\lambda{+}\mu\bigr)
++ (-1)^{|a|}\, m_2\bigl(a,\,m_2(b,c;\mu);\,\lambda\bigr)
+= 0.
+\]
+Decompose each $m_2$ factor into regular and singular parts. There
+are four sectors (sing--sing, sing--reg, reg--sing, reg--reg) in each term.
+
+\textbf{Step 3 (Extract the sing--reg sector).}
+Consider the sector that is \emph{singular} in the outer parameter
+and \emph{regular} in the inner parameter.
+
+From term~(III), the sing--reg sector is
+$[m_2^{\mathrm{sing}}(m_2^{\mathrm{reg}}(a,b)|_{\lambda},\, c)]_{\lambda+\mu}$.
+Setting $\mu=0$ (evaluating the regular inner part), this equals
+$\{(a\cdot_\lambda b)_{\lambda}\, c\}$, where $a\cdot_\lambda b :=
+m_2^{\mathrm{reg}}(a,b)|_\lambda$ is the $\lambda$-dependent regular product.
+At $\lambda=0$, this contributes $\{a_\lambda b\}\cdot c$
+(the bracket $\{a_\lambda b\}$ times $c$ via the product).
+
+From term~(IV), the sing--reg sector (singular in $\lambda$,
+regular in $\mu$) gives
+$(-1)^{|a|}\,[m_2^{\mathrm{sing}}(a,\, m_2^{\mathrm{reg}}(b,c)|_{\mu=0};\,\lambda)]
+= (-1)^{|a|}\, \{a_\lambda(b\cdot c)\}$.
+
+\textbf{Step 4 (Extract the reg--sing sector).}
+From term~(III), the reg--sing sector (regular in $\lambda+\mu$,
+singular in $\lambda$) contributes
+$[m_2^{\mathrm{reg}}(\{a_\lambda b\},\, c)]_{\mu=0} = \{a_\lambda b\}\cdot c$.
+
+From term~(IV), the reg--sing sector (regular in $\lambda$,
+singular in $\mu$) gives
+$(-1)^{|a|}\, [m_2^{\mathrm{reg}}(a,\, \{b_\mu c\})|_{\lambda=0}]
+= (-1)^{|a|}\, a\cdot\{b_\mu c\}
+$. After applying the shifted transposition and moving the
+degree-\((-1)\) bracket past \(b\), this is the signed mixed
+contribution
+\[
+(-1)^{(|a|+1)|b|}\,b\cdot\{a_\lambda c\}.
+\]
+
+\textbf{Step 5 (Assemble).}
+The $n=3$ identity forces the sum of all four sectors to vanish.
+The sing--sing sector gives the Jacobi identity (already proved).
+The reg--reg sector gives associativity of the product.
+The mixed sectors (sing--reg and reg--sing) give the signed
+Leibniz defect:
+\[
+\{a_\lambda(b\cdot c)\}
+=
+\{a_\lambda b\}\cdot c
++
+(-1)^{(|a|+1)|b|}\,b\cdot\{a_\lambda c\},
+\]
+which is the Leibniz rule~\eqref{eq:PVA5}.
+\end{proof}
+
+\begin{proposition}[Vacuum Axiom in Cohomology;
+\ClaimStatusProvedHere; licensing $\gamma$ via the strict unital
+$A_\infty$-chiral structure in the logarithmic chain/pro ambient
+$\hypAmbientPro$, the unsuspended regular product, and the
+regular/singular projection]
+% label removed: prop:PVA4_proof
+The unit $\mathbf{1}\in A^0$ descends to a vacuum vector in
+$H^\bullet(\A,Q)$ satisfying
+\[
+[\mathbf 1]\cdot[a]=[a]\cdot[\mathbf 1]=[a],\qquad
+\{[\mathbf 1]_\lambda[a]\}=0,\qquad
+\{[a]_\lambda[\mathbf 1]\}=0,\qquad
+\partial[\mathbf 1]=0.
+\]
+\end{proposition}
+\begin{proof}
+The strict unit axioms \eqref{eq:unit-m2}--\eqref{eq:unit-higher} give
+the ordinary unit identities for the unsuspended regular product,
+\[
+\mu_2^{\mathrm{reg}}(\mathbf 1,a;0)=a,\qquad
+\mu_2^{\mathrm{reg}}(a,\mathbf 1;0)=a,
+\]
+and \(m_k(\ldots,\mathbf 1,\ldots)=0\) for \(k\ne2\).  The binary
+unit kernels are constant in the collision parameter, so both
+singular projections vanish:
+\[
+m_2^{\mathrm{sing}}(\mathbf 1,a)=0,\qquad
+m_2^{\mathrm{sing}}(a,\mathbf 1)=0.
+\]
+Thus the Borel-transformed brackets with the unit on either side are
+zero.  Since \(Q\mathbf 1=0\) and \(\partial\mathbf 1=0\), the class
+\([\mathbf 1]\) is a translation-invariant vacuum vector in
+\(H^\bullet(\A,Q)\).  This is (PVA4).
+\end{proof}
+
+\subsection{Vanishing of higher operations in cohomology}
+% label removed: sec:higher_vanish
+
+The $m_k$ with $k \geq 3$ vanish in cohomology only after compatible
+topological nullhomotopies are supplied.
+\begin{proposition}[Higher operations are \(Q\)-exact under compatible
+nullhomotopies; \ClaimStatusProvedHere; licensing $\gamma+\varepsilon$
+via the logarithmic chain/pro ambient $\hypAmbientPro$, the relative
+compactified ordered topological factor, compatible topological
+nullhomotopies, and the factored logarithmic weight form]
+% label removed: prop:m3_vanish
+Assume the logarithmic $\SCchtop$-axioms of
+Definition~\ref{def:log-SC-algebra} together with compatible topological
+nullhomotopies for the ordered topological factors
+(Definition~\ref{def:compatible-topological-nullhomotopy}).
+For $k \geq 3$ and $Q$-closed elements $a_1,\ldots,a_k \in \A$, there exists a homotopy $h_{k-1}(a_1,\ldots,a_k)$ such that
+\[
+m_k(a_1,\ldots,a_k) = Q(h_{k-1}(a_1,\ldots,a_k)).
+\]
+Consequently, under these supplied nullhomotopies, the direct
+operation \(m_k\) represents zero on \(H^\bullet(\A,Q)\).  Ordinary
+contractibility of the open ordered configuration space is not enough
+for this conclusion.
+\end{proposition}
+\begin{proof}
+The proof uses the supplied relative bounding chains.
+
+\textbf{Step 1 (Topological contractibility).}
+The operation $m_k$ is defined by integrating a weight form over the
+product $\FM_k(\C) \times \Conf_k^{<}(\R)$, where
+$\Conf_k^{<}(\R) = \{t_1 < \cdots < t_k\}/\text{translation}$
+is the ordered configuration of $k$ points on $\R$ modulo translation.
+Writing \(s_j=t_{j+1}-t_j\), this space is diffeomorphic to the
+positive orthant \(\R^{k-1}_{>0}\), hence is contractible.  This open
+contractibility is only the homological background for the relative
+compactified filling below.
+
+\textbf{Step 2 (Relative bounding chain).}
+For $k \geq 3$, the topological chain underlying $m_k$ lies in the
+compactified ordered topological factor. The hypothesis
+supplies a relative $(k{-}1)$-chain $\Gamma_{k-1}$ with
+$\partial_{\mathrm{rel}} \Gamma_{k-1} = \Gamma_k^{\mathrm{top}}$, where
+$\Gamma_k^{\mathrm{top}}$ is the topological component of the
+integration cycle for $m_k$.
+
+Define the homotopy
+\[
+h_{k-1}(a_1,\ldots,a_k) := \int_{\FM_k(\C) \times \Gamma_{k-1}}
+\widetilde{\omega}_k(a_1,\ldots,a_k).
+\]
+By Stokes' theorem in the topological direction and by compatibility
+with the operadic collision boundary,
+\[
+Q\bigl(h_{k-1}(a_1,\ldots,a_k)\bigr)
+= \int_{\FM_k(\C) \times \partial_{\mathrm{rel}}\Gamma_{k-1}} \widetilde{\omega}_k
+= \int_{\FM_k(\C) \times \Gamma_k^{\mathrm{top}}} \widetilde{\omega}_k
+= m_k(a_1,\ldots,a_k),
+\]
+where the first equality uses the correspondence between $d_t$ and the
+BV-BRST differential $Q$ in the HT gauge
+(Definition~\ref{def:log-SC-algebra}).
+
+\textbf{Step 3 (Why $k=2$ is different).}
+For $k=2$, the topological chain lies in $C_0(\Conf_2^{<}(\R))$
+(a $0$-chain, i.e., a point). Since $H_0 \neq 0$, this chain is
+\emph{not} a boundary, so the argument does not apply. This is why
+$m_2$ persists on cohomology (giving the product and $\lambda$-bracket)
+while $m_{k \geq 3}$ become $Q$-exact only under the compatible
+nullhomotopy hypothesis.
+\end{proof}
+
+\begin{remark}[The Role of $d'=1$]
+Proposition \ref{prop:m3_vanish} requires the compatible
+nullhomotopy datum in one topological direction. For $d' \geq 2$,
+formality claims require the relevant formality theorem and
+hypotheses. For $d'=1$, higher operations can persist at the chain
+level, while the binary PVA shadow still descends to cohomology.
+\end{remark}
+
+\begin{remark}[Physical interpretation of contractibility]
+Contractibility of $\Conf_k^{<}(\mathbb{R})$ says that
+\emph{time-ordered} configurations of $k$ operators on the topological
+line are homotopically trivial in the open configuration space. The
+holomorphic direction $\mathbb{C}$ carries OPE data, while the
+topological direction $\mathbb{R}$ carries the bar-complex ordering.
+Vanishing of $m_{k \geq 3}$ requires a compatible relative filling
+against the operadic boundary; it is not a consequence of ordinary
+contractibility alone.
+\end{remark}
+
+\begin{remark}[Why $d'=1$ produces PVAs and $d'=2$ produces $E_2$ algebras]
+% label removed: rem:contractibility-and-d-prime
+The topological simplex
+$\Conf_k^{<}(\R) \cong \Delta^{k-2}_{\circ}$ is contractible
+because $\R$ is $1$-dimensional. This supports the $d'=1$
+PVA shadow on cohomology, while $d'=2$ theories (e.g.,
+4d holomorphic-topological theories on $\C \times \R^2$) would
+produce $E_2$ algebras: when $d'=2$, the ordered configuration
+space $\Conf_k^{<}(\R^2)$ has nontrivial topology (it is a
+$K(\mathrm{PBr}_k,1)$, the classifying space of the pure braid
+group), so the higher operations $m_{k \geq 3}$ need not be
+cohomologically trivial. In the $d'=1$ case a relative
+nullhomotopy can trivialize the relevant $m_k$ on cohomology, but
+not at the chain level,
+where, for instance, the Landau--Ginzburg model
+(Section~\ref{sec:examples_complete}) has a genuine $m_3$.
+\end{remark}
+
+\subsection{Completion of Proof of Theorem \ref{thm:cohomology_PVA}}
+
+\begin{proof}[Proof of Theorem \ref{thm:cohomology_PVA}]
+We have now established the binary PVA theorem and the separate
+conditional higher-operation criterion:
+
+\textbf{(i) Commutative product:} The regular part of \(m_2\) descends
+to cohomology by the regular/singular binary descent lemma above, yielding a product that
+is associative and commutative on $H^\bullet(\A,Q)$ by the two- and
+three-point identities.
+
+\textbf{(ii) PVA axioms:} Sesquilinearity is the proposition above;
+the remaining PVA axioms are verified in the following
+skew-symmetry, Jacobi, and Leibniz propositions.
+
+\textbf{(iii) Conditional higher-operation criterion:} Proposition
+\ref{prop:m3_vanish} is a separate statement: if compatible
+topological nullhomotopies are supplied, then the direct operations
+\(m_{k\ge3}\) are \(Q\)-exact on \(Q\)-closed inputs.
+
+Therefore the binary operations define a Poisson vertex algebra on
+\(H^\bullet(\A,Q)\), and the higher-operation vanishing is available
+only under the additional nullhomotopy datum.
+\end{proof}
+
+\begin{remark}[Transition to chiral Hochschild cohomology]
+% label removed: rem:transition-to-hochschild
+The PVA captures the commutative shadow. The full
+noncommutative deformation theory lives in the chiral Hochschild
+complex: the chain-level $A_\infty$ operations $\{m_k\}$ organize
+into a brace algebra, whose descent produces the Gerstenhaber
+bracket on $\mathrm{ChirHoch}^\ast(\A)$. The PVA bracket is the
+degree-$(-1)$ component of the Gerstenhaber bracket; the Leibniz
+rule is a shadow of brace compatibility.
+Section~\ref{sec:chiral_hochschild} develops this perspective.
+\end{remark}
+
+\begin{remark}[PVA descent recovers Coisson]
+% label removed: rem:pva-descent-coisson
+When the topological direction collapses ($\R = \mathrm{pt}$), the
+$\mathsf{SC}^{\mathrm{ch,top}}$ structure degenerates to pure
+holomorphic factorization. The $(-1)$-shifted PVA on
+$H^\bullet(\A, Q)$ then recovers the Coisson structure of
+Beilinson--Drinfeld (Volume~I, Definition~\ref{V1-def:coisson}): a
+commutative $D_X$-algebra with $\lambda$-bracket encoding the
+classical limit of the OPE.
+\end{remark}
+
+\begin{remark}[Formality obstruction and genus-$1$ curvature]
+% label removed: rem:formality-genus1-curvature
+At genus $g \geq 1$, the compatible-nullhomotopy criterion of
+Proposition~\ref{prop:m3_vanish} acquires a genuine obstruction:
+the configuration space $\mathrm{Conf}_k(\Sigma_g)$ has nontrivial
+higher homology from the fundamental group, so ordinary
+contractibility cannot supply the required relative bounding chains.
+In Volume~I's language, this obstruction manifests as the curvature
+$d_{\mathrm{fib}}^2 = \kappaChHodge(\cA) \cdot \omega_g$. The genus-$1$
+failure of formality is precisely the conformal anomaly.
+\end{remark}
+
+% ================================================================
+% HOMOTOPY CHIRAL ALGEBRAS AND DESCENT
+% ================================================================
+
+\subsection{Homotopy chiral algebra structure on descent complexes}
+% label removed: subsec:hca-descent
+\index{homotopy chiral algebra!PVA descent}
+
+The binary descent and the exact Jacobiator defects produce the PVA
+structure. Compatible nullhomotopies are an additional datum, needed
+only when one wants the transferred higher operations to vanish on
+cohomology. At the chain level the $A_\infty$ operations
+$\{m_k\}_{k \geq 3}$ are generically nonzero. Malikov--Schechtman~\cite{MS24}
+provide a complementary perspective: the \v{C}ech complex of the sheaf
+of boundary chiral algebras carries the structure of a
+\emph{homotopy chiral algebra} (HCA), whose MC element
+$\Phi_{\cA_\partial} \in \operatorname{MC}(\mathfrak{g}^{\check{C}}_{\cA_\partial})$
+satisfies $D\Phi + \tfrac{1}{2}[\Phi,\Phi] = 0$
+(Volume~I, Theorem~\ref{V1-thm:cech-hca}). The PVA is the strict
+shadow of $\Phi_{\cA_\partial}$ obtained by passing to cohomology.
+
+\begin{conjecture}[HCA structure on boundary \v{C}ech complex;
+\ClaimStatusConjectured]
+% label removed: prop:hca-boundary-cech
+Let $\cA_\partial$ be the sheaf of boundary chiral algebras on a
+curve~$X$ obtained by interval compactification of a 3d
+holomorphic-topological theory presented as a logarithmic
+$\SCchtop$-algebra (Definition~\ref{def:log-SC-algebra}). The HCA
+quantum lift to a full all-loop modular MC datum requires the four
+endpoint hypotheses
+$\hypKZSDR,\,\hypStokes,\,\hypReflWts,\,\hypTLift$
+(Construction Problem~3).
+For an affine open cover $\mathcal{U}$ of~$X$,
+the Moore complex $M\check{C}^\bullet(\mathcal{U};\cA_\partial)$
+carries HCA operations $\{F_n\}_{n \geq 1}$ satisfying:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $F_1 = d_M$ is the \v{C}ech differential;
+\item $F_2$ is the chiral product restricted to pairwise intersections,
+ whose cohomological shadow is the PVA $\lambda$-bracket
+ of Theorem~\textup{\ref{thm:raviolo-PVA}};
+\item $F_3$ is the Jacobiator homotopy when
+ $\check{C}^2(\mathcal{U};\cA_\partial) \neq 0$
+ \textup{(}three or more overlapping opens\textup{)};
+ for minimal covers with $\check{C}^2 = 0$, one has $F_3 = 0$
+ by Volume~I, Proposition~\textup{\ref{V1-prop:two-element-strict}},
+ and the Jacobi identity for the PVA holds already at the chain
+ level;
+\item the full collection $\{F_n\}$ forms an $L_\infty$ algebra in
+ the pseudo-tensor category of $\cD_X$-modules.
+\end{enumerate}
+\end{conjecture}
+
+\begin{remark}[PVA as strict truncation of HCA]
+% label removed: rem:pva-strict-truncation-hca
+The PVA structure on $H^\bullet(\cA_\partial, Q)$ is the
+\emph{strict truncation} of the HCA: the sesquilinearity,
+skew-symmetry, Jacobi identity, and Leibniz rule of the PVA
+(Theorem~\ref{thm:raviolo-PVA}) are all consequences of the
+$L_\infty$ relations holding \emph{up to exact terms} on the
+\v{C}ech complex, with those exact terms becoming zero on
+cohomology. In particular:
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ll}
+\textbf{Chain-level HCA} & \textbf{Cohomological PVA} \\
+\hline
+$F_2$ (chiral bracket) & $\lambda$-bracket $\{a_\lambda b\}$ \\
+$d_M F_3 + F_3 d_M = \mathrm{Jac}$ & Jacobi identity \\
+$F_3$ (Jacobiator homotopy) & exact Jacobiator defect \\
+$\{F_n\}_{n \geq 4}$ & outside the binary PVA shadow; conditional on
+compatible nullhomotopies \\
+\end{tabular}
+\end{center}
+The formality obstruction at genus~$g \geq 1$
+(Remark~\ref{rem:formality-genus1-curvature}) has a clean HCA
+interpretation: the \v{C}ech complex on a higher-genus curve has
+nontrivial cohomology in the fundamental group's contribution to
+$H_\bullet(\Conf_k(\Sigma_g))$, which prevents the higher
+$F_n$ from being cohomologically trivial. The curvature
+$d_{\mathrm{fib}}^2 = \kappa \cdot \omega_g$ is precisely
+the genus-$1$ obstruction to extending the strict PVA to an
+honest chiral algebra on the family.
+\end{remark}
+
+\begin{remark}[Vertex Lie Jacobi family and the $\lambda$-bracket]
+% label removed: rem:vertex-lie-lambda
+\index{vertex Lie algebra!lambda-bracket@$\lambda$-bracket}
+The Malikov--Schechtman vertex Lie Jacobi family \cite{MS24},
+\[
+[a_{(m)}, b_{(n)}]c
+= \sum_{j \geq 0} \binom{m}{j}(a_{(j)}b)_{(m+n-j)}c,
+\]
+encodes the same data as the $\lambda$-bracket
+$\{a_\lambda b\} = \sum_{n \geq 0} a_{(n)}b \cdot \lambda^n/n!$
+of the PVA\@. The Jacobi identity family at fixed $m,n$ is the
+coefficient of $\lambda^m \mu^n$ in the PVA Jacobi identity
+$\{a_\lambda \{b_\mu c\}\} - \{b_\mu \{a_\lambda c\}\}
+= \{\{a_\lambda b\}_{\lambda+\mu}\, c\}$.
+On the \v{C}ech complex, this identity holds only up to the
+homotopy $F_3$; on cohomology it becomes exact. The
+Eilenberg--Zilber operad $\mathcal{Y}(n)$ of \cite{MS24}
+controls exactly which $\lambda$-bracket identities require
+homotopy corrections and which hold strictly.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 5 -- RAVIOLO RESTRICTION, ČECH/THOM–SULLIVAN MODEL, COINVARIANTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

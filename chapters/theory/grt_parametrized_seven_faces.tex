@@ -1,0 +1,1002 @@
+%% GRT-Parametrized Nine Faces of the Collision Residue.
+%% Constructs the torsor realization of Face_K(A) over GRT_1(K), promotes
+%% the historical ``seven faces'' to rational finite-gauge representatives
+%% where verified, and adjoins Brown's motivic-period face F8 and
+%% Willwacher's operadic face F9 after the relevant scalar extension.
+%%
+%% Vol II theory sequence. Depends on factorization_swiss_cheese,
+%% sc_chtop_heptagon, and Vol I seven_faces (standalone).
+%%
+%% Macro safety: all control sequences used in this file are guarded
+%% by \providecommand here; no \newcommand.
+
+\providecommand{\SCchtop}{\mathsf{SC}^{\mathrm{ch},\mathrm{top}}}
+\providecommand{\FM}{\mathrm{FM}}
+\providecommand{\Conf}{\mathrm{Conf}}
+\providecommand{\Ran}{\mathrm{Ran}}
+\providecommand{\MC}{\mathrm{MC}}
+\providecommand{\End}{\mathrm{End}}
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cB}{\mathcal{B}}
+\providecommand{\cF}{\mathcal{F}}
+\providecommand{\cL}{\mathcal{L}}
+\providecommand{\cW}{\mathcal{W}}
+\providecommand{\Walg}{\mathcal{W}}
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\fgrt}{\mathfrak{grt}_1}
+\providecommand{\GRT}{\mathrm{GRT}_1}
+\providecommand{\GT}{\mathrm{GT}_1}
+\providecommand{\Lie}{\mathsf{Lie}}
+\providecommand{\Ass}{\mathsf{Ass}}
+\providecommand{\Face}{\mathrm{Face}}
+\providecommand{\Fsuper}{\mathrm{Face}^{\mathrm{super}}}
+\providecommand{\Gsuper}{\mathrm{GRT}^{\mathrm{super}}}
+\providecommand{\Res}{\operatorname{Res}}
+\providecommand{\coll}{\mathrm{coll}}
+\providecommand{\Vir}{\mathrm{Vir}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\GC}{\mathsf{GC}}
+\providecommand{\Def}{\mathrm{Def}}
+\providecommand{\Tam}{\mathrm{Tam}}
+\providecommand{\KZ}{\mathrm{KZ}}
+\providecommand{\rat}{\mathrm{rat}}
+\providecommand{\mot}{\mathrm{mot}}
+\providecommand{\MZV}{\mathrm{MZV}}
+\providecommand{\grt}{\mathrm{grt}}
+\providecommand{\DNP}{\mathrm{DNP}}
+\providecommand{\GZ}{\mathrm{GZ}}
+\providecommand{\FFR}{\mathrm{FFR}}
+\providecommand{\STS}{\mathrm{STS}}
+\providecommand{\Gaud}{\mathrm{Gaud}}
+\providecommand{\Sug}{\mathrm{Sug}}
+\providecommand{\Bbbk}{\mathbb{k}}
+
+\chapter{The GRT-Parametrized Nine Faces of the Collision Residue}
+\label{ch:grt-seven-faces}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Prologue}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Seven literatures name a single element of the $E_1$ ordered
+convolution algebra,
+\[
+ r(z) \;=\; \Res^{\coll}_{0,2}\bigl(\Theta_{\cA}\bigr)
+ \;\in\; \cA^{!}\otimes\cA^{!}[\![z^{-1}]\!],
+\]
+in seven normalisations, seven Casimir bases, seven connection
+conventions. Vol~I read the seven as vertices of a star and
+proved a seven-way equivalence through the bar hub. The hub is
+the origin of a torsor for the Drinfeld
+Grothendieck--Teichm\"uller group $\GRT(K)$ acting by associator
+transport. Each face is an associator-coordinate chart over a
+coefficient field $K$; the seven rational finite-gauge
+representatives admit two canonical companions, Brown's motivic
+face $F_8$ and Willwacher's operadic face $F_9$, comparable after
+scalar extension to a common coefficient field. The face space is
+a scheme over $\GRT$, and ``seven'' is the rational finite-gauge
+slice.
+
+The torsor presentation closes four confusions. The
+landscape-census chained equality
+$k\cdot\Omega_{\mathrm{tr}}/z = \Omega/((k+h^{\vee})z)$ is a
+Casimir rescaling in the finite inner gauge subgroup
+$\GRT^{\mathrm{fin}}\subset\GRT$, a tensor identity between
+normalisations, not a rational-function identity. The
+F1$\leftrightarrow$F4 identification is the injection of $r(z)$
+into Drinfeld associator data; the MZV tail
+$\Phi_{\KZ}-\Phi_{\rat}$ is invisible to $r(z)$. The F7 entry
+splits: F7 (Gaudin simple-pole) and F7$'$ (class-M top $A_\infty$
+$m_3$) coincide on class L and separate on class M. The
+Heisenberg-versus-symplectic-fermion asymmetry is a
+$\mathbb{Z}/2$-factor on collision residues, absorbed into the
+super-variant
+$\Gsuper_K = \GRT(K)\rtimes(\mathbb{Z}/2)^{|\mathrm{odd}|}$.
+
+Section~\ref{sec:grt-setup} defines $\Face_K(\cA)$ as the scheme
+of chain-level presentations of $r(z)$ compatible with the
+bar-intrinsic dGLA and establishes the canonical $\GRT$-torsor
+structure. Section~\ref{sec:grt-nine} enumerates the nine faces
+F1--F9. Section~\ref{sec:grt-torsor-thm} states the master
+theorem: $\Face_K(\cA)$ is a $\GRT(K)$-torsor after a coefficient
+field and formality base point are fixed. Section~\ref{sec:f1-f4}
+proves the F1$\leftrightarrow$F4 injection and the MZV
+invisibility. Section~\ref{sec:f7-disambig} separates F7 from
+F7$'$ between class L and class M. Section~\ref{sec:grtfin}
+reads the Casimir rescaling as a $\GRT^{\mathrm{fin}}$ gauge.
+Section~\ref{sec:super} installs the super-variant.
+Sections~\ref{sec:f8-motivic} and~\ref{sec:f9-willwacher}
+install $F_8$ (Brown motivic) and $F_9$ (Willwacher operadic) as
+higher cochain faces. Section~\ref{sec:f8-f9-dual} identifies
+$F_8$ and $F_9$ as geometric and operadic incarnations of one
+orbit after scalar extension.
+
+\begin{convention}[Coefficient field and binary residue]
+\label{conv:grt-coefficient-field}
+\index{GRT torsor!coefficient field}%
+\index{collision residue!binary degree}%
+Torsor statements sit over a characteristic-zero coefficient
+field $K$ after a formality base point. $\Face_K(\cA)$ is the
+chain-level face space after scalar extension to $K$; the acting
+group is $\GRT(K)$. The historical faces $F_1,\ldots,F_7$ are
+rational finite-gauge presentations where the transport is
+binary or connection-level. Brown's face $F_8$ lives over the
+motivic period algebra, or over its real period realisation;
+Willwacher's face $F_9$ is defined over $\mathbb Q$ at the
+graph-complex Lie-algebra level. The
+$F_8\leftrightarrow F_9$ comparison is a comparison after scalar
+extension to a common coefficient field; $F_8$ is not a rational
+point of $\GRT(\mathbb Q)$.
+
+The symbol $r(z)$ denotes the binary degree-two collision
+residue. MZV and graph-complex data enter higher cochain
+operations, starting with the arity-three twisting component
+$\tau_{(3)}$ and the $A_\infty$ operation $m_3$; the cohomological
+binary residue is invariant.
+\end{convention}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Setup: \texorpdfstring{$\Face_K(\cA)$}{Face_K(A)} as a GRT-torsor}
+\label{sec:grt-setup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Fix a chirally Koszul chiral algebra $\cA$ in the standard
+landscape and a characteristic-zero coefficient field $K$
+(Convention~\ref{conv:grt-coefficient-field}).
+$\Theta_{\cA}^{E_1}\in\mathfrak{g}^{E_1}_{\cA}$ is the universal
+Maurer--Cartan element in the ordered convolution algebra (Vol~I,
+\S\text{shadow-tower}); the degree-$2$ collision residue is
+\[
+ r(z) \;=\; \Res^{\coll}_{0,2}(\Theta_{\cA}^{E_1}).
+\]
+
+\begin{definition}[\label{def:face-space}Face space]
+A \emph{chain-level presentation} of $r(z)$ compatible with the
+bar-intrinsic dGLA is the datum of
+\begin{enumerate}[(a)]
+\item a chain model $\mathfrak{m}$ of the $E_1$-chiral convolution
+dGLA, together with a chain-level realisation of $\Theta_{\cA}^{E_1}$
+as a strict $\MC$-element in $\mathfrak{m}$;
+\item a Casimir basis $(C_\alpha)_{\alpha\in I}$ for the
+binary-degree component of $\mathfrak{m}$, inducing a coordinate
+presentation $r(z) = \sum_\alpha r^\alpha(z)\,C_\alpha$;
+\item a connection convention $\nabla$ with respect to which
+$\Theta_{\cA}^{E_1}$ satisfies the flat-section equation
+$\nabla\Phi = 0$;
+\item a Drinfeld associator $\Phi\in\GRT(K)$ providing the
+isomorphism of $\infty$-operads
+$\Tam_\Phi\colon B(\cA)\xrightarrow{\sim} B_\Phi(\cA)$ (Tamarkin).
+\end{enumerate}
+The equivalence classes of such presentations after scalar
+extension to $K$, modulo strict $\MC$-gauge equivalence in
+$\mathfrak{m}$, form the \emph{face space} $\Face_K(\cA)$.
+\end{definition}
+
+\begin{remark}[Base point: $F_1$ as identity]
+\label{rem:f1-base-point}
+The bar hub $F_1$ — the twisting morphism
+$\pi_{\cA}\colon B(\cA)\to\cA$ with deconcatenation coproduct and
+identity Drinfeld datum $\Phi = \id$ — is a distinguished point of
+$\Face_K(\cA)$. Fixing $F_1$ as origin converts the torsor into a
+group; throughout the chapter $F_1$ is the identity coset.
+\end{remark}
+
+\begin{proposition}[GRT-action on $\Face_K(\cA)$]
+\label{prop:grt-action-face}
+After fixing $K$, a formality base point, and a chain model, the
+group $\GRT(K)$ acts freely and transitively on the
+associator-coordinate component of $\Face_K(\cA)$. The abstract
+free-transitive action is Tamarkin--Drinfeld--Willwacher formality;
+the assertion that a named face is a $K$-point is per-face, with
+the coefficient-field scope of
+Convention~\ref{conv:grt-coefficient-field}.
+\end{proposition}
+
+\begin{proof}
+Tamarkin's theorem (Tamarkin 1998; Gerstenhaber--Voronov;
+Willwacher 2015, Thm.~1.1) constructs a free transitive action of
+$\GRT(K)$ on quasi-isomorphism classes of formality transfers
+$E_2\xrightarrow{\sim} B(\Ass^{!})$. This action descends to the
+bar-intrinsic dGLA of any associative chiral algebra through the
+canonical functor $\Ass\to\ChirAss$. For $\Phi\in\GRT(K)$ and a
+presentation $(\mathfrak{m},r,\nabla,\Phi_0)$ the action returns
+the presentation with associator $\Phi\cdot\Phi_0$, Casimir basis
+pulled back by the finite inner gauge of $\Phi$, and connection
+convention $\nabla^\Phi = \Phi\cdot\nabla$. Freeness — $\GRT(K)$
+acts without fixed points on formality transfers — is Drinfeld's
+1991 Leningrad theorem. Transitivity is the pentagon axiom with
+Tamarkin--Kontsevich formality on the associator-coordinate
+component. Passage from an abstract associator coordinate to a
+named face is per-$K$: F8 and F9 require the scalar extensions of
+Convention~\ref{conv:grt-coefficient-field}.
+\end{proof}
+
+\begin{corollary}[\label{cor:face-torsor}Torsor structure]
+Once $F_1$ is fixed as base point, the map $\Phi\mapsto\Phi\cdot F_1$
+is a bijection from $\GRT(K)$ to the associator-coordinate component of
+$\Face_K(\cA)$. That component is a principal homogeneous
+$\GRT(K)$-space, canonically a torsor.
+\end{corollary}
+
+\begin{remark}[Torsor versus star]
+\label{rem:torsor-vs-star}
+Vol~I's seven-face programme drew the seven presentations as a
+star with the bar hub at the centre, routing every pairwise
+identification through $F_1$. The star is the accessibility
+diagram; the groupoid of gauge transports between non-hub
+vertices is the torsor. The edge $F_i\to F_j$ is an element
+$\Phi_{ji}\in\GRT(K)$ after scalar extension to a common
+coefficient field; the star is the subgraph of edges through
+$F_1 = \id$.
+\end{remark}
+
+\begin{remark}[Star diagram and torsor action]
+The seven-way equivalence of presentations is the
+$\GRT(K)$-orbit relation. The bar hub is a base point; every
+non-hub edge is an associator transport in the torsor.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Nine-face enumeration}
+\label{sec:grt-nine}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Table~\ref{tab:nine-faces} lists the nine face coordinates. Seven
+are historical rational finite-gauge coordinates; F8 and F9 enter
+as higher cochain coordinates after the scalar extensions of
+Convention~\ref{conv:grt-coefficient-field}.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Face & Name & Reference \\
+\midrule
+$F_1$ & Bar hub; $\pi_{\cA}\colon B(\cA)\to\cA$, deconcatenation coproduct
+ & Ginzburg--Kapranov 1994; Loday--Vallette Ch.~11 \\
+$F_2$ & DNP R-twist on open colour
+ & Dimofte--Niu--Py arXiv:2508.11749 \\
+$F_3$ & KZ classical PVA $r$-matrix
+ & De Sole--Kac arXiv:0712.1045 \\
+$F_4$ & GZ26 commuting differentials
+ & Gaiotto--Zeng 2026, sphere Hamiltonians \\
+$F_5$ & Yangian classical $r$-matrix
+ & Drinfeld 1985 (Leningrad); RTT presentation \\
+$F_6$ & Gaudin Hamiltonian simple-pole
+ & Feigin--Frenkel--Reshetikhin 1994 \\
+$F_7$ & Sklyanin tensor; $F_7'$ class-M top $A_\infty$ operation
+ & STS 1983; Mizoguchi--Ohtsuki (see \S\ref{sec:f7-disambig}) \\
+$F_8$ & Brown motivic-period higher cochain face
+ & Brown 2012 arXiv:1102.1312 \\
+$F_9$ & Willwacher operadic face; $\fgrt$-action on $\GC_2$
+ & Willwacher 2015 arXiv:1009.1654 \\
+\bottomrule
+\end{tabular}
+\caption{Nine canonical face coordinates. Seven are the historical
+rational finite-gauge presentations where verified; the last two are
+motivic-period and graph-complex higher cochain coordinates.}
+\label{tab:nine-faces}
+\end{table}
+
+\begin{remark}[The cardinality nine]
+The seven-face enumeration selects the coordinates writable
+without motivic or graph-complex machinery. Brown's motivic face
+$F_8$ and Willwacher's operadic face $F_9$ enter as higher cochain
+coordinates at the generators of $\fgrt = \mathrm{Lie}(\GRT)$.
+Truncation to seven preserves the binary residue $r(z)$ and hides
+the associator-dependent tower.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The master theorem: \texorpdfstring{$\Face_K(\cA)$}{Face_K(A)} is a
+$\GRT(K)$-torsor}
+\label{sec:grt-torsor-thm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{theorem}[\label{thm:seven-faces-as-GRT-torsor}Seven faces as a
+$\GRT$-torsor over a fixed coefficient field]
+Let $\cA$ be chirally Koszul in the standard landscape and
+$r(z) = \Res^{\coll}_{0,2}(\Theta_{\cA}^{E_1})$. After fixing the
+coefficient field $K$ and a formality base point, the
+associator-coordinate component of $\Face_K(\cA)$ is a principal
+homogeneous $\GRT(K)$-space. For every pair of faces $F_i,F_j$ defined
+over a common coefficient field $K$ there exists a unique associator
+$\Phi_{ij}\in\GRT(K)$ such that
+\[
+ F_i \;=\; \Phi_{ij}\cdot F_j.
+\]
+The binary historical faces $F_1,\dots,F_6$ and the Gaudin/Sklyanin
+simple-pole face $F_7$ are related by rational finite-gauge transports
+where the Casimir and connection conventions have been fixed.
+The class-M face $F_7'$, Brown's $F_8$, and Willwacher's $F_9$ are
+higher cochain faces; they enter the same torsor only after the scalar
+extensions named in Convention~\ref{conv:grt-coefficient-field}.
+\end{theorem}
+
+\begin{proof}
+Combine Proposition~\ref{prop:grt-action-face} and
+Corollary~\ref{cor:face-torsor}. The rational finite-gauge claim
+on the binary historical faces names the explicit transport from
+$F_1$ after the Casimir and connection convention are fixed:
+
+\smallskip\noindent
+\emph{$\Phi_{12}$ (Bar $\to$ DNP $R$-twist).} The DNP $R$-twist
+acts on the Drinfeld spectral coproduct,
+\[
+\Delta_z^R = R(z)\Delta_z R(z)^{-1},\qquad
+R(z) = 1 + \hbar r(z) + O(\hbar^2).
+\]
+The bar deconcatenation coproduct retains the
+topological-factorisation structure. At order $\hbar$ the twist is
+the identity on the associator: $\Phi_{12}\in\GRT^{\mathrm{fin}}$.
+
+\smallskip\noindent
+\emph{$\Phi_{13}$ (Bar $\to$ KZ PVA).} The KZ convention writes
+$r(z) = \Omega/((k+h^\vee)z)$ in the Killing--Casimir basis; the
+transport is the Casimir rescaling with simple-pole shift
+$k\mapsto k+h^\vee$, both in $\GRT^{\mathrm{fin}}$
+(Section~\ref{sec:grtfin}).
+
+\smallskip\noindent
+\emph{$\Phi_{14}$ (Bar $\to$ GZ26).} The Gaiotto--Zeng commuting
+differentials are the Laplace transform of the Fay kernel in the
+$r$-matrix presentation; the Laplace transform is the identity on
+the associator. Commutativity is flatness of $\nabla^\Phi$ on the
+sphere (Section~\ref{sec:f1-f4}).
+
+\smallskip\noindent
+\emph{$\Phi_{15}$ (Bar $\to$ Yangian).} The classical limit
+$R_{\mathrm{Yang}}(u)-1 = \frac{\hbar P}{u}+O(\hbar^2)$ is a
+rational function in $u$ with no leading MZV data, so
+$\Phi_{15}\in\GRT^{\mathrm{fin}}$.
+
+\smallskip\noindent
+\emph{$\Phi_{16}$ (Bar $\to$ Gaudin).} The Gaudin residue
+$H_i^{\Gaud} = \sum_{j\neq i}\Omega_{ij}/(z_i-z_j)$ is the
+simple-pole reduction of $F_1$'s binary-degree component;
+$\Phi_{16}$ is the finite inner gauge of the simple-pole
+truncation.
+
+\smallskip\noindent
+\emph{$\Phi_{17}$ (Bar $\to$ STS; $F_7'$ top $m_3$ separately).}
+On class G/L the Sklyanin tensor sits in
+$\mathrm{Sym}^2(\fg)^{\fg}\otimes \mathbb{Q}((z))$; its associator
+is a finite rational twist, $\Phi_{17}\in\GRT^{\mathrm{fin}}$. On
+class M the additional entry is $F_7'$ — the top $A_\infty$
+operation — whose transport carries MZV-coefficient corrections
+at weight $\geq 3$ in the higher cochain tower
+(Section~\ref{sec:f7-disambig}).
+
+\smallskip
+Uniqueness of $\Phi_{ij}$ follows from freeness of the
+$\GRT$-action (Proposition~\ref{prop:grt-action-face}) after
+scalar extension to a common coefficient field. The motivic and
+operadic associators $\Phi_{18},\Phi_{19}$ enter in
+Sections~\ref{sec:f8-motivic} and~\ref{sec:f9-willwacher} under
+Convention~\ref{conv:grt-coefficient-field}.
+\end{proof}
+
+\begin{remark}[Star diagram and torsor transports]
+Vol~I's seven-way chain
+$F_1\Leftrightarrow F_2\Leftrightarrow\cdots\Leftrightarrow F_7$
+is, on the binary historical slice, the statement that the finite
+transports $\Phi_{1i}$ belong to $\GRT^{\mathrm{fin}}$. The
+transports are associator-valued; the torsor statement separates
+the higher cochain faces from the binary residue.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{F1\texorpdfstring{$\leftrightarrow$}{<->}F4 injection;
+invisibility of MZV tail}
+\label{sec:f1-f4}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The Drinfeld associator carries MZV data at all odd weights
+$w\geq 3$. The residue $r(z)$ receives only the binary-degree
+projection of that data.
+
+\begin{theorem}[\label{thm:f1-f4-injection}F1$\leftrightarrow$F4 injection]
+Let $K$ be a characteristic-zero coefficient field containing the
+coefficients of the two associators being compared. Let
+$\Phi_{\KZ},\Phi_{\rat}\in\GRT(K(\!(\hbar)\!))$ be the
+Knizhnik--Zamolodchikov and rational associator realisations after
+scalar extension to $K$, and let $r(z)$ be the binary collision
+residue. The map
+$\mu\colon\GRT(K)\to
+\cA^{!}\otimes\cA^{!}[\![z^{-1}]\!]$,
+$\Phi\mapsto \Phi\cdot r(z)$, factors through the binary-degree
+quotient $\GRT^{(2)}_K := \GRT(K)/\GRT^{(\geq 3)}(K)$, where
+$\GRT^{(\geq 3)}$ is the pro-unipotent radical of associators
+trivial at binary degree. Equivalently,
+\[
+ \Phi_{\KZ}\cdot r(z) \;=\; \Phi_{\rat}\cdot r(z);
+\]
+the MZV tail $\Phi_{\KZ}-\Phi_{\rat}$ is invisible to $r(z)$.
+\end{theorem}
+
+\begin{proof}
+The collision residue $r(z)$ is homogeneous of bar-degree $2$, and
+the associator action on bar-degree-$2$ elements factors through
+the abelianisation of the universal enveloping filtration at
+degree $\leq 2$. Write $\Phi = 1 + \sum_{w\geq 2}\hbar^w\phi_w$ with
+$\phi_w\in\fgrt$ of $\fgrt$-weight $w$. The $\fgrt$-action on
+$r(z)$ is
+\[
+ \Phi\cdot r(z) \;=\; r(z) + \sum_{w\geq 2}\hbar^w [\phi_w,r(z)]_{\mathrm{Ger}},
+\]
+where $[-,-]_{\mathrm{Ger}}$ is the Gerstenhaber bracket on
+$\mathfrak{g}^{E_1}_{\cA}$. At bar-degree $2$ this bracket is
+the classical Lie bracket on binary operations; $\phi_w$ for
+$w\geq 3$ is supported on bar-degree $\geq 3$ and produces a
+bar-degree $\geq 4$ correction. Projection to bar-degree $2$
+annihilates all $w\geq 3$ contributions. Since $\Phi_{\KZ}-\Phi_{\rat}$
+has zero weight-$2$ component (both associators are group-like with
+identical quadratic part, the unique element of the pentagon axiom
+at weight $2$), their action on $r(z)$ agrees. This proves the
+factoring claim; the equivalent statement
+$\Phi_{\KZ}\cdot r(z) = \Phi_{\rat}\cdot r(z)$ is the difference
+vanishing.
+\end{proof}
+
+\begin{remark}[Content of Theorem~\ref{thm:f1-f4-injection}]
+The associator carries an infinite tower of MZV coefficients
+$\zeta(3),\zeta(5),\zeta(7),\dots$ (odd weights); the residue
+$r(z)$ is a polynomial in $1/z$ with coefficients in
+$\cA^{!}\otimes\cA^{!}$, and the MZV tower does not couple to the
+binary-degree collision channel: the MZV invisibility is a
+structural, not accidental, feature of the binary-degree truncation.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{F7 disambiguation: Gaudin vs class-M top $A_\infty$ operation}
+\label{sec:f7-disambig}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[\label{def:f7-f7prime}$F_7$ vs $F_7'$]
+\begin{enumerate}[(i)]
+\item $F_7$ \emph{(Gaudin simple-pole)}: the canonical element
+$t^{(2)}\in(\fg\otimes\fg)^{\fg}$ times the universal simple pole
+$1/z$, giving the generator of the Gaudin Hamiltonian chain; defined
+for all classes G/L/C/M.
+\item $F_7'$ \emph{(class-M top $A_\infty$ $m_3$)}: the degree-$3$
+component of the $A_\infty$ structure on $B(\cA)$ dual to the
+Gerstenhaber algebra of the derived chiral centre; defined only
+when the shadow tower has non-trivial $m_3$, i.e. on class M
+chiral algebras with $r_{\max}\geq 3$.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[\label{prop:f7-split}F7 vs F7$'$ split]
+On class L (affine Kac--Moody), $F_7' = 0$ while
+$F_7=t^{(2)}/z$ remains the binary Gaudin simple-pole face. Thus the
+two symbols agree only after projecting to the higher bar-degree-three
+lane where $F_7'$ lives: the projection of $F_7$ to that lane is zero.
+On class M (Virasoro, $\Walg_N$), $F_7'$ is the chain-level obstruction
+to constant-coproduct and is not a binary residue. Its simple-pole
+shadow is $F_7$, while the genuine degree-three component is
+\[
+ \operatorname{gr}_3(F_7')
+ \;=\;
+ \sum_{w\geq 3} \hbar^w\,m_3^{(w)}
+\]
+in the bar-degree-$3$ component of $B(\cA)$, where each
+$m_3^{(w)}$ is a weight-$w$ MZV-valued correction supplied by
+$\phi_w\in\fgrt$ at bar-degree~$3$.
+\end{proposition}
+
+\begin{proof}
+On class L the full $A_\infty$ structure on $B(V_k(\fg))$ truncates
+at $m_2$ (Vol~I, prop:depth-gap-trichotomy, $d_{\mathrm{alg}}=1$).
+Hence $m_3 = 0$ strictly, and $F_7' = 0$. The Gaudin element
+$F_7 = t^{(2)}/z$ is the binary-degree-$2$ component and is
+independent of $m_3$. On class M, $r_{\max} = \infty$ (Vol I,
+class M fingerprint), so the ternary operation is a genuine higher
+cochain datum. The displayed formula follows from the bar-degree
+decomposition of $\Theta_{\cA}^{E_1}$: the bar-degree-$3$
+Maurer--Cartan component is precisely the $A_\infty$ ternary
+operation. Its binary simple-pole shadow is recorded by $F_7$, but
+the higher operation itself is not equal to a binary residue. The MZV weight
+structure of the $m_3^{(w)}$ is supplied by the $\fgrt$-action
+through the $\phi_w$ generators.
+\end{proof}
+
+\begin{remark}[On the $\mathrm{F}_7$ ambiguity]
+The ambiguity recorded earlier arose from the implicit
+identification $F_7 = F_7'$. On class L the higher lane is zero, not
+equal to the nonzero Gaudin residue. On class M the distinction is
+substantive: $F_7$ is a simple-pole binary shadow and $F_7'$ is the
+chain-level top operation carrying the MZV-weighted $m_3$ series. The
+$\GRT$-torsor makes this difference visible as associator-dependent
+data at bar-degree $3$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Landscape-census chained-equality: Casimir rescaling
+as \texorpdfstring{$\GRT^{\mathrm{fin}}$}{GRT-fin} gauge}
+\label{sec:grtfin}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{proposition}[\label{prop:grtfin-casimir}Casimir rescaling
+and KZ level convention]
+For affine Kac--Moody $V_k(\fg)$, the two common presentations of
+$r(z)$,
+\[
+ r^{\mathrm{tr}}(z) \;=\; \frac{k\cdot\Omega_{\mathrm{tr}}}{z},
+ \qquad
+ r^{\KZ}(z) \;=\; \frac{\Omega}{(k+h^\vee)\,z},
+\]
+satisfy the tensor identity
+\[
+ \Omega_{\mathrm{tr}} \;=\; \frac{1}{2h^\vee}\,\Omega,
+\]
+where $\Omega_{\mathrm{tr}}$ is the trace-form Casimir and $\Omega$
+is the Killing-normalised Casimir. The trace-form collision residue is
+therefore
+\[
+ r^{\mathrm{tr}}(z)=\frac{k}{2h^\vee}\frac{\Omega}{z}.
+\]
+The comparison with $r^{\KZ}(z)$ is not a tensor identity in one level
+coordinate; it is a KZ/Sugawara connection-convention comparison after
+level normalisation. In particular the ``chained equality''
+$k\cdot\Omega_{\mathrm{tr}}/z = \Omega/((k+h^\vee)z)$ is false as a
+rational-function identity.
+\end{proposition}
+
+\begin{proof}
+The trace form on $\fg$ is $\langle X,Y\rangle_{\mathrm{tr}}
+= \operatorname{tr}_{\mathrm{def}}(XY)$ in the defining
+representation; the Killing form is
+$\langle X,Y\rangle_K = \operatorname{tr}(\operatorname{ad}X\cdot
+\operatorname{ad}Y) = 2h^\vee\langle X,Y\rangle_{\mathrm{tr}}$
+(standard Lie-algebraic identity). Hence
+$\Omega = 2h^\vee\Omega_{\mathrm{tr}}$ (contracting with the
+Killing form inverse rescales by the inverse factor), giving
+$\Omega_{\mathrm{tr}} = \Omega/(2h^\vee)$. Substituting into
+$r^{\mathrm{tr}}(z)$:
+\[
+ r^{\mathrm{tr}}(z) \;=\; \frac{k}{z}\cdot\frac{\Omega}{2h^\vee}
+ \;=\; \frac{k}{2h^\vee}\cdot\frac{\Omega}{z}.
+\]
+Comparing with $r^{\KZ}(z) = \Omega/((k+h^\vee)z)$, the two
+expressions agree only after changing both the Casimir normalisation
+and the connection-level convention. The additive shift
+$k\mapsto k+h^\vee$ is the Sugawara/KZ convention shift, not an
+equality of tensors in the same coordinate. Both are valid coordinate
+presentations in their respective Casimir bases and level conventions;
+the bridge between them exists after that convention
+change.
+\end{proof}
+
+\begin{remark}[Casimir rescaling as tensor identity]
+The tensor identity and the level rescaling are distinct gauge
+transformations. Proposition~\ref{prop:grtfin-casimir} separates them:
+Casimir rescaling is the tensor identity, while level rescaling is the
+Sugawara/KZ connection convention. The two presentations are comparable
+only after both moves are named; they are not the same Casimir in the
+same level convention.
+\end{remark}
+
+\begin{remark}[Compatibility with level-stripped $r$-matrix convention]
+Proposition~\ref{prop:grtfin-casimir} preserves the level-stripped convention: in the
+trace-form convention $r^{\mathrm{tr}}(z)|_{k=0}=0$; in the KZ
+convention $r^{\KZ}(z)|_{k=0} = \Omega/(h^\vee z)\neq 0$ for
+non-abelian $\fg$ (the Lie bracket persists abelian-limit). The
+$\GRT^{\mathrm{fin}}$ transport carries one convention's boundary
+behaviour to the other through the level rescaling, consistently
+with the bridge identity
+$k\Omega_{\mathrm{tr}} \leftrightarrow \Omega/(k+h^\vee)$ as a
+connection-normalisation comparison at generic $k$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Super-variant: odd generators and the $\mathbb{Z}/2$-factor}
+\label{sec:super}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[\label{def:grt-super}Super-$\GRT$]
+For a chiral algebra $\cA$ with a $\mathbb{Z}/2$-graded generator
+set $\{g_i\}$ with $|\mathrm{odd}|$ generators of odd parity, define
+\[
+ \Gsuper_K \;:=\; \GRT(K)\,\rtimes\,(\mathbb{Z}/2)^{|\mathrm{odd}|},
+\]
+where the semidirect factor records the parity-coordinate convention
+on ordered half-edges in the collision-residue-to-Laplace comparison.
+\end{definition}
+
+\begin{proposition}[\label{prop:super-variant}Super-variant torsor]
+For a super-chiral algebra $\cA$, the face space
+$\Fsuper(\cA)$ is a torsor over $\Gsuper_K$ after the parity-coordinate
+convention is fixed. Heisenberg
+(purely even, $p_{\max}=2$) and symplectic fermion (single odd
+generator, $p_{\max}=1$) lie on distinct $\Gsuper_K$-orbits; the
+separating invariant is the $\mathbb{Z}/2$-character of the
+odd-odd OPE channel, not the algebra automorphism
+$X\mapsto -X$ on both tensor legs.
+\end{proposition}
+
+\begin{proof}
+The $\mathbb{Z}/2$-factor acts on the orientation line of the ordered
+half-edge carrying an odd generator; this records the Koszul sign
+appearing when the collision residue is compared with the Laplace
+kernel. It is not the simultaneous generator sign
+$X_i\mapsto(-1)^{|i|}X_i$ on both tensor legs, which would leave an
+odd-odd tensor unchanged.
+For Heisenberg ($|\mathrm{odd}|=0$) the odd sector is empty and
+$r(z)$ is purely even; for symplectic fermion
+($|\mathrm{odd}|=1$) the generator $\psi$ has OPE pole order $1$
+(simple pole) and the collision residue is supported in the odd-odd
+OPE channel of even total tensor parity. The two algebras have distinct collision-channel
+characters under $\mathbb{Z}/2$, hence lie on distinct
+$\Gsuper_K$-orbits. Transitivity of $\Gsuper_K$ on within-parity
+classes follows from Proposition~\ref{prop:grt-action-face}
+applied separately to each parity sector.
+\end{proof}
+
+\begin{remark}[Odd-generator collision residue sign]
+For odd generators the collision residue
+$r^{\coll}(z)$ differs from the Laplace-transform $r(z)$ by a
+sign factor. In the super-variant formulation this sign is a
+$\mathbb{Z}/2$-action on $\Face_K(\cA)$; the two residues are
+realisations of the same $\Gsuper_K$-orbit in different
+parity-sector coordinates. The Heisenberg-vs-symplectic-fermion
+residue diagnostic is closed by Proposition~\ref{prop:super-variant}.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The motivic face \texorpdfstring{$F_8$}{F8}}
+\label{sec:f8-motivic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Brown's motivic programme (Brown 2012, arXiv:1102.1312) constructs
+a coaction of the motivic Galois group $\mathcal{G}^{\mot}$ on the
+ring $\mathcal{Z}^{\mot}$ of motivic multiple zeta values; this
+coaction lifts to an action on the Drinfeld associator $\Phi_{\KZ}$
+and hence, after scalar extension, on the higher cochain part of
+$\Face_K(\cA)$.
+
+\begin{definition}[\label{def:f8-motivic}Motivic face]
+The \emph{motivic face} is
+\[
+ F_8 \;:=\; \Phi_{\mot}\cdot F_1,
+\]
+where $\Phi_{\mot}$ is the motivic associator viewed as an element of
+$\GRT(\mathcal{Z}^{\mot})$, or after real period realisation as an
+element of $\GRT(\mathbb{R})$. It is realised on the higher cochain
+tower as
+\[
+ \Theta_{\geq3}^{\mot}
+ \;=\;
+ \Theta_{\geq3}^{\rat}
+ \;+\;
+ \sum_{w=3,5,7,\dots}\zeta^{\mot}(w)\,\Theta^{(w)}_{\geq3},
+\]
+while the binary residue $r(z)$ remains unchanged by
+Theorem~\ref{thm:f1-f4-injection}.
+\end{definition}
+
+\begin{theorem}[\label{thm:motivic-face-F8}Motivic face is a $\GRT$-orbit]
+The motivic face $F_8$ is a well-defined higher cochain point of
+$\Face_{\mathcal Z^{\mot}}(\cA)$, and after real period realisation a
+point of $\Face_{\mathbb R}(\cA)$. Its binary residue agrees with
+$F_1$; its non-trivial content begins in bar degree at least three.
+\end{theorem}
+
+\begin{proof}
+The motivic coaction of Brown 2012 (Thm.~1.1) gives a Hopf
+algebra coaction
+$\Delta^{\mot}\colon\mathcal{Z}^{\mot}\to
+\mathcal{Z}^{\mot}\otimes(\mathcal{Z}^{\mot}/\zeta(2))$, inducing
+a $\mathcal{G}^{\mot}$-module structure on $\mathcal{Z}^{\mot}$.
+The KZ associator $\Phi_{\KZ}$ has motivic lift $\Phi_{\KZ}^{\mot}
+\in\GRT(\mathcal{Z}^{\mot})$ (Brown 2012, \S3); composition with
+the canonical realisation $\mathcal{Z}^{\mot}\to\mathbb{R}$
+supplies a real point of $\GRT(\mathbb R)$, not a rational point of
+$\GRT(\mathbb Q)$. Applying
+Proposition~\ref{prop:grt-action-face} over
+$K=\mathcal{Z}^{\mot}$ or $K=\mathbb R$, the element
+$\Phi_{\mot}\cdot F_1$ is a well-defined higher cochain face. By
+Theorem~\ref{thm:f1-f4-injection}, the binary-degree component of
+$F_8$ is identical to that of $F_1$; the non-triviality of $F_8$ lies
+entirely at bar-degree $\geq 3$, carrying the MZV-weighted corrections
+$\zeta^{\mot}(w)\,\Theta^{(w)}_{\geq3}$.
+\end{proof}
+
+\begin{remark}[Odd-weight generation of $\fgrt$]
+The conjectural structure of $\fgrt$ (Drinfeld, Kassel--Turaev)
+says $\fgrt \simeq \mathrm{Lie}(\sigma_3,\sigma_5,\sigma_7,\dots)$
+with odd-weight generators; the motivic lift by Brown is the
+universal construction realising this as a
+$\mathcal{G}^{\mot}$-module. Each generator $\sigma_{2k+1}$
+($k\geq 1$) supplies an independent MZV tail at weight $2k+1$,
+which in Definition~\ref{def:f8-motivic} enters as the
+coefficient of $\zeta^{\mot}(2k+1)$ in the higher cochain tower
+$\Theta_{\geq3}^{\mot}$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The operadic face \texorpdfstring{$F_9$}{F9}}
+\label{sec:f9-willwacher}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Willwacher's theorem (Willwacher 2015, arXiv:1009.1654) identifies
+$H^0$ of Kontsevich's graph complex $\GC_2$ with $\fgrt$; this
+gives the $\fgrt$-action on the deformation complex of the $E_2$
+operad, and via Tamarkin chain, on $B(\cA)$.
+
+\begin{definition}[\label{def:f9-willwacher}Operadic face]
+The \emph{operadic face} is
+\[
+ F_9 \;:=\; \Phi_{\mathrm{Wil}}\cdot F_1,
+\]
+where $\Phi_{\mathrm{Wil}}\in\GRT(\mathbb{Q})$ is the associator
+whose Lie-algebra element $\log\Phi_{\mathrm{Wil}}\in\fgrt$ is a
+Willwacher graph cocycle representative (a bivalent-graph cocycle
+in $\GC_2$ of odd loop-order).
+\end{definition}
+
+\begin{theorem}[\label{thm:willwacher-face-F9}Willwacher face is a
+$\GRT$-orbit]
+After fixing the rational graph-complex model and the Tamarkin chain,
+the Willwacher face $F_9$ is a well-defined higher cochain point of
+$\Face_{\mathbb Q}(\cA)$.
+The Tamarkin chain
+\[
+ \GC_2 \;\xrightarrow{\ \simeq\ }\; \Def(E_2)
+ \;\xrightarrow{\ \simeq\ }\; \Def\bigl(B(-)\bigr)
+\]
+realises $\log\Phi_{\mathrm{Wil}}\in H^0(\GC_2) = \fgrt$ as an
+infinitesimal deformation of the bar differential on $B(\cA)$;
+exponentiating gives the $\GRT(\mathbb Q)$-element
+$\Phi_{\mathrm{Wil}}$ which acts on $F_1$ to produce $F_9$.
+\end{theorem}
+
+\begin{proof}
+Willwacher 2015, Thm.~1.1, gives the isomorphism
+$H^0(\GC_2)\simeq\fgrt$. The Tamarkin chain (Tamarkin 1998,
+reformulated in Willwacher 2015 \S9) is a zigzag of
+quasi-isomorphisms of $L_\infty$-algebras connecting $\GC_2$
+to the deformation complex $\Def(E_2)$ of the $E_2$-operad, and
+the canonical formality functor
+$\Def(E_2)\xrightarrow{\sim}\Def(B(-))$ transports $\fgrt$-action
+to the deformation complex of the bar construction. A Willwacher
+graph cocycle $\gamma\in\GC_2$ of loop order $2k+1$ (odd-loop
+cocycles span $\fgrt$ at weight $2k+1$) defines an infinitesimal
+deformation of the bar differential on $B(\cA)$ along the
+Tamarkin chain; exponentiating to the group-level gives
+$\Phi_{\mathrm{Wil}} := \exp(\gamma)\in\GRT(\mathbb{Q})$. Applying
+Proposition~\ref{prop:grt-action-face}, the element
+$\Phi_{\mathrm{Wil}}\cdot F_1$ is a well-defined face, which we
+denote $F_9$. The transport is independent of the choice of
+cocycle representative up to exact terms, since the isomorphism
+$H^0(\GC_2)\simeq\fgrt$ is canonical.
+\end{proof}
+
+\begin{remark}[Tamarkin chain as motivic--operadic bridge]
+The Tamarkin chain converts a graph-complex cocycle (operadic
+data) into an associator (algebraic data). It is the structural
+bridge between $F_8$ (motivic, geometric) and $F_9$ (operadic,
+combinatorial). Both faces enter the torsor at the same
+$\fgrt$-generator level and are identified up to associator gauge.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Duality corollary: $F_8$ and $F_9$ as geometric vs operadic
+incarnations of one $\GRT$-orbit}
+\label{sec:f8-f9-dual}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{corollary}[\label{cor:f8-f9-dual}F8--F9 duality]
+After scalar extension to a coefficient field containing both the
+motivic-period realisation of $\Phi_{\mot}$ and the rational
+Willwacher representative $\Phi_{\mathrm{Wil}}$, the faces $F_8$ and
+$F_9$ lie on the same $\GRT$-orbit. The connecting associator is
+\[
+ \Phi_{89} = \Phi_{\mathrm{Wil}}\cdot\Phi_{\mot}^{-1}
+\]
+in that common scalar extension. This is not a claim that
+$\Phi_{\mot}$ is a rational point of $\GRT(\mathbb Q)$.
+\end{corollary}
+
+\begin{proof}
+By Theorems~\ref{thm:motivic-face-F8} and~\ref{thm:willwacher-face-F9},
+$F_8 = \Phi_{\mot}\cdot F_1$ and $F_9 = \Phi_{\mathrm{Wil}}\cdot F_1$.
+Hence
+$F_9 = (\Phi_{\mathrm{Wil}}\Phi_{\mot}^{-1})\cdot F_8$, and the
+connecting associator is
+$\Phi_{89} := \Phi_{\mathrm{Wil}}\Phi_{\mot}^{-1}$ in the common
+coefficient field.
+The Tamarkin chain sends Brown's motivic associator to a graph
+cocycle representative of the same $\fgrt$-class (Willwacher 2015,
+\S9; Deligne--Terasoma lift), realising the identification at the
+infinitesimal level. The orbit-equivalence follows from the free
+and transitive $\GRT$-action on $\Face_K(\cA)$.
+\end{proof}
+
+\begin{remark}[Geometric vs operadic]
+$F_8$ is ``geometric'' in the sense that its construction uses
+configuration spaces of points on $\mathbb{P}^1$ (iterated-integral
+realisation of MZVs). $F_9$ is ``operadic'' in the sense that its
+construction uses graph complexes (combinatorial realisation of
+$\fgrt$). Corollary~\ref{cor:f8-f9-dual} records that the two
+constructions are two coordinates on the same torsor orbit; the
+geometry/operad duality is encoded in the Tamarkin chain.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Synopsis and external references}
+\label{sec:grt-synopsis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The construction upgrades the Vol~I seven-face programme to a
+$\GRT(K)$-torsor $\Face_K(\cA)$ after a coefficient field and formality
+base point are fixed, with historical rational finite-gauge coordinates
+$F_1,\dots,F_7$, two higher cochain additions $F_8$ (Brown motivic
+period) and $F_9$ (Willwacher operadic), and an explicit super-variant
+$\Fsuper$. The master theorem is
+Theorem~\ref{thm:seven-faces-as-GRT-torsor}, under the
+coefficient-field and concrete-face hypotheses of
+Convention~\ref{conv:grt-coefficient-field}. The four compatibility
+statements are:
+Casimir rescaling vs chained equality
+(Proposition~\ref{prop:grtfin-casimir}),
+F1$\leftrightarrow$F4 MZV-invisibility
+(Theorem~\ref{thm:f1-f4-injection}),
+F7 vs F7$'$ split (Proposition~\ref{prop:f7-split}),
+and the coefficient-field split for motivic versus operadic faces
+(Convention~\ref{conv:grt-coefficient-field}).
+
+External anchors:
+\begin{itemize}
+\item Drinfeld 1991 ``On quasitriangular quasi-Hopf algebras'',
+Leningrad Math.~J.~2: the definition and basic properties of
+$\GRT$.
+\item Brown 2012, arXiv:1102.1312, ``Mixed Tate motives over
+$\mathbb{Z}$'': the motivic coaction on MZVs and the motivic
+associator.
+\item Willwacher 2015, arXiv:1009.1654, ``M.~Kontsevich's graph
+complex and the Grothendieck--Teichm\"uller Lie algebra'':
+$H^0(\GC_2)\simeq\fgrt$ and the action on $\Def(E_2)$.
+\item Tamarkin 1998, ``Another proof of M.~Kontsevich formality
+theorem'': the Tamarkin chain
+$\GC_2\to\Def(E_2)\to\Def(B(-))$.
+\item Loday--Vallette, \emph{Algebraic Operads}, Ch.~11--12: the
+bar-cobar framework and twisting morphisms.
+\end{itemize}
+
+These three anchors are independent verification sources for
+Theorems~\ref{thm:seven-faces-as-GRT-torsor},
+\ref{thm:motivic-face-F8}, \ref{thm:willwacher-face-F9},
+and~\ref{cor:f8-f9-dual}. Each is disjoint from the derivation
+route used in the chapter proofs: Drinfeld 1991 supplies the
+$\GRT$ group-theoretic backbone, Brown 2012 supplies the motivic
+associator independently of graph-complex machinery, and
+Willwacher 2015 supplies the operadic realisation independently of
+motivic machinery.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Associator action and slab-bimodule}
+\label{sec:grt-qualifiers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The $\GRT$-torsor master Theorem~\ref{thm:seven-faces-as-GRT-torsor}
+has three ambient hypotheses: fixed coefficient field, fixed
+formality base point, and diagonal slab-bimodule restriction. These
+hypotheses determine the precise content of the torsor statement.
+
+\begin{remark}[Cohomology vs.\ cochain associator action]
+\label{rem:grt-cohomology-vs-cochain}
+The $\GRT(K)$-action on $\Face_K(\cA)$ of
+Proposition~\ref{prop:grt-action-face} is a strict groupoid action
+on the associator-coordinate component after the coefficient field is
+fixed; this is the content of Tamarkin's theorem combined with
+Kontsevich--Tamarkin formality.
+At the level of cohomology classes in
+$H^{*}(\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA))$, however, the
+$\GRT$-action factors through the abelianisation
+$\GRT^{\mathrm{ab}} = \fgrt^{\mathrm{ab}}$, which is the
+$\bQ$-vector space of Drinfeld weight-$\geq 2$ generators modulo
+Lie commutators; the binary-degree projection
+of Theorem~\ref{thm:f1-f4-injection} kills the entire
+$\fgrt$-bracket-content of $\Phi$. Hence:
+\begin{itemize}
+\item[(a)] \emph{Cohomological face} $r(z)$ \emph{is associator-independent.}
+ Two associators $\Phi_1, \Phi_2 \in \GRT(K)$ produce the
+ same $r(z)\in H^{*}(\cZ^{\mathrm{der}}_{\mathrm{ch}}(\cA))^{\otimes 2}$
+ binary-degree class.
+\item[(b)] \emph{Cochain-level face} $r(z)|^{\Phi}$
+ \emph{depends on $\Phi$.} The choice of $\Phi$ fixes a strict
+ representative; the transport between $r(z)|^{\Phi_1}$ and
+ $r(z)|^{\Phi_2}$ is an explicit cochain-level associator transport
+ along the Tamarkin chain (Section~\ref{sec:f9-willwacher}).
+\end{itemize}
+The cohomological reading is the canonical one for cross-volume
+identifications (Vol I bar invariants, Vol III $\Phi$ functor); the
+cochain-level reading is the technical realisation needed to compute
+explicit higher Massey products (e.g.\ the F7$'$ class-M top
+$A_\infty$ operation of Proposition~\ref{prop:f7-split}, where MZV
+weights $\geq 3$ enter as cochain-level associator data).
+\end{remark}
+
+\begin{remark}[Abstract Koszul-locus scope of the torsor theorem]
+\label{rem:grt-abstract-vs-concrete}
+Theorem~\ref{thm:seven-faces-as-GRT-torsor} is proved abstractly only
+after fixing $K$ and a formality base point on the chirally Koszul
+locus for any
+$\SCchtop$-algebra in the standard 3d HT landscape: the
+$\GRT(K)$-torsor structure is a consequence of Tamarkin's formality
+and is independent of the specific algebra. The
+\emph{concrete} construction of all face transports
+$\Phi_{1i}$ as explicit rational finite-gauge associators is verified
+only for the binary historical coordinates in the $\fsl_2$-Yangian and
+affine KM at non-critical level; F8 and F9 require the scalar
+extensions of Convention~\ref{conv:grt-coefficient-field};
+the elliptic case is partial (KZB associator constructed at the
+classical level, full quantum-$R$-matrix
+quasi-triangularity at finite $\hbar$ open); the toroidal case is
+not included in this torsor construction. See
+Remark~\ref{rem:concrete-vs-abstract-scope} of the
+unified-chiral-quantum-group chapter and
+Remark~\ref{rem:dnp-master-concrete-vs-abstract} of the
+DNP-identification-master chapter.
+\end{remark}
+
+\begin{remark}[Slab is a bimodule: $r(z)$ as diagonal-bimodule data]
+\label{rem:grt-slab-bimodule-scope}
+The face space $\Face_K(\cA)$ enters 3d HT physics as the space of
+chain-level presentations of the $r$-matrix datum on the
+\emph{diagonal} of the Dimofte $D|T|N$ slab bimodule
+$(\cA_{\mathrm{L}} = \cA_{\mathrm{R}} = \cA)$. The off-diagonal slab
+carries an $r$-matrix in
+$\cA_{\mathrm{L}}^{!}\otimes\cA_{\mathrm{R}}^{!}[\![z^{-1}]\!]$ that
+mediates the categorified bimodule structure; the corresponding
+face space $\Face(\cA_{\mathrm{L}}, \cA_{\mathrm{R}})$ is a torsor
+over a generalised $\GRT$-groupoid. The diagonal restriction
+recovers the diagonal $\GRT(K)$-torsor on
+$\Face_K(\cA, \cA) = \Face_K(\cA)$ after scalar extension.
+\end{remark}
+
+\begin{remark}[Compareerences to the climax]
+\label{rem:grt-climax-anchors}
+The torsor master Theorem~\ref{thm:seven-faces-as-GRT-torsor}
+threads three reconstitution anchors:
+\begin{itemize}
+\item[(a)] \emph{Universal holography master.} Each face
+ $F_i \in \Face_K(\cA)$ is a coordinate presentation of the
+ boundary-to-bulk obstruction $r(z)$ in the universal-holography
+ functor $\Phi_{\mathrm{hol}}\colon \cA\mapsto T_{\cA}$
+ (Theorem~\ref{thm:universal-holography-master}). The five rungs
+ (Corollaries~\ref{cor:rung-heisenberg}, \ref{cor:rung-affine-km},
+ \ref{cor:rung-virasoro}, \ref{cor:rung-w-N},
+ \ref{cor:rung-w-infty}) each produce a $\GRT(K)$-torsor
+ of seven-face presentations via the present theorem; the $\fgrt$
+ generators $\sigma_3, \sigma_5, \dots$ specialise to the higher-spin
+ stress tensors of the $E_{n}$-topologisation ladder
+ (Theorem~\ref{thm:e-infinity-topologization-ladder}).
+\item[(b)] \emph{Universal conductor.} The Volume~I universal-conductor
+ $K = c + c^{!}$ is the $\GRT^{\mathrm{fin}}$-invariant scalar
+ pinning the absolute Casimir normalisation of $F_1$. The conductor
+ formula expresses the ghost charge as the trace of a specific
+ $\fgrt^{\mathrm{ab}}$-cocycle representative on the binary-degree
+ bar component, recovering the
+ $\GRT^{\mathrm{fin}}$-classification of $F_1, \dots, F_7$ as a
+ refinement of the conductor's Casimir-rescaling axis.
+\item[(c)] \emph{Volume~III $\Phi$ functor.} The Volume~III
+ CY-to-chiral functor $\Phi$ pulls back the present $\GRT$-torsor
+ structure to $\mathrm{Coh}(X)$: each CY target carries a seven-face
+ torsor associated with $\Phi(X)$, with explicit identifications at
+ K3 (via the Mukai-orthogonal Yangian
+ $Y_{\hbar}(\mathfrak{so}(4,20))$, with the
+ $Y_{\hbar}(\mathfrak{so}(4|20))$ Hodge-parity refinement under its
+ parity hypothesis), $\bC^{3}$
+ (via Schiffmann--Vasserot CoHA), and toric CY${}_{3}$ (via
+ Maulik--Okounkov $r$-matrix). The
+ Tamarkin chain of Section~\ref{sec:f9-willwacher} is the operadic
+ bridge; the motivic face $F_8$ specialises in Volume~III to the
+ Brown motivic associator on the moduli of CY-period configurations.
+ Scope: $n=2$ for $d\le 2$, $n=1$ for $d\ge 3$.
+\end{itemize}
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% End of chapter.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

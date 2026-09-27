@@ -1,0 +1,715 @@
+\chapter{Knot invariants and the Kontsevich integral}
+\label{ch:kontsevich-integral}
+
+\index{Kontsevich integral|textbf}
+\index{Vassiliev invariants|textbf}
+
+Configuration-space integrals compute knot invariants after a real-locus
+passage. The logarithmic bar form $\eta_{ij}=d\log(z_i-z_j)$ lives on complex
+configuration space. For an embedded real circle
+$\gamma:S^1\hookrightarrow X$ in a complex curve, the comparison map is the
+pullback
+\[
+\rho_\gamma:\Omega^\bullet_{\log}(\overline{C}_m(X))
+\longrightarrow
+\Omega^\bullet(\overline{C}_m(S^1)),
+\qquad
+\rho_\gamma(\omega)=(\gamma^{\times m})^*\omega ,
+\]
+followed by angular projection and Kontsevich's chord-diagram quotient. The
+ambient bar complex produces logarithmic forms and OPE contractions; their
+real-locus restriction is the integrand of the Kontsevich integral.
+
+The geometry is Fulton--MacPherson compactification with Stokes boundary terms.
+The 4T relation governing chord diagrams is the image, under OPE contraction
+and real-locus restriction, of the Arnold--Orlik--Solomon relation for
+logarithmic forms. A metrized Lie algebra supplies the Casimir contractions; a
+representation supplies the trace around the oriented circle. This is the
+surface on which affine Kac--Moody OPE data become Lie algebra weight systems.
+
+The comparison has three pieces: the real-locus restriction $\rho_\gamma$, the
+normalization $\omega_{ij}^{K}=(2\pi)^{-1}d\arg(z_i-z_j)$, and the
+Fulton--MacPherson boundary correction recording the radial part of
+$d\log(z_i-z_j)$ (Proposition~\ref{prop:propagator-restriction}).
+
+\section{Vassiliev invariants: mathematical setup}
+\label{sec:vassiliev-setup}
+\index{Vassiliev invariants!mathematical setup}
+
+\begin{definition}[Vassiliev invariant]
+\label{def:vassiliev-invariant}
+\index{Vassiliev invariant|textbf}
+A knot invariant $v\colon \{\text{oriented knots in } S^3\} \to \bC$
+is a \emph{Vassiliev invariant of order~$n$} (or \emph{finite-type
+invariant of type~$n$}) if it vanishes on all singular knots with
+$n+1$ double points. Equivalently, if $K_0, K_+, K_-$ denote knots
+that differ only at a single crossing, the \emph{Vassiliev relation}
+$v(K_\times) := v(K_+) - v(K_-)$ extends $v$ to singular knots,
+and $v$ has type~$n$ if $v(K)=0$ for every singular knot $K$ with
+$n+1$ transverse double points.
+\end{definition}
+
+\begin{definition}[Chord diagram]
+\label{def:chord-diagram}
+\index{chord diagram|textbf}
+A \emph{chord diagram of order~$n$} is an oriented circle with
+$n$ disjoint pairs of marked points (``chords''), considered up to
+orientation-preserving diffeomorphism of the circle. The vector
+space $\cD_n$ of chord diagrams is the formal $\bC$-span of
+chord diagrams of order~$n$, modulo the four-term
+(\emph{4T}) relation.
+\end{definition}
+
+\begin{theorem}[Kontsevich integral \cite{Kon94,BarNatan95}]
+\label{thm:kontsevich-invariant}
+\index{Kontsevich integral!universality}
+Let $K:S^1\hookrightarrow \bR^3$ be an oriented framed knot and choose
+a height function and complex projection for Kontsevich's
+configuration integrals.  After the standard framing normalization
+and the Drinfeld associator determined by the regularization, the series
+\[
+Z(K) \;=\;
+\sum_{n=0}^\infty \;
+\frac{1}{(2\pi i)^n}
+\int_{\substack{t_{\min} < t_1 < \cdots < t_n < t_{\max} \\
+ z_i = K(t_i),\; z'_i = K(t'_i)}}
+\bigwedge_{j=1}^n
+\widetilde\omega^K_{j}
+\;\cdot\; D_\Gamma
+\]
+defines a group-like element in the completed chord-diagram algebra
+and is universal for Vassiliev invariants: every finite-type invariant
+of type~$n$ factors through the degree-$\leq n$ truncation of $Z$.
+Here $\widetilde\omega^K_{j}=d\log(z_j-z'_j)$ is the unnormalized
+logarithmic form; the normalized angular propagator is
+$(2\pi)^{-1}d\arg(z_j-z'_j)$.  The diagram $D_\Gamma$ is determined
+by the pairing $(t_j,t'_j)$.
+
+Equivalently, the coefficient of a chord diagram is obtained by the
+chain
+\[
+\Omega^\bullet_{\log}(\overline{C}_{2n}(\bC))
+\xrightarrow{\ \rho_K\ }
+\Omega^\bullet(\overline{C}_{2n}(S^1))
+\xrightarrow{\ \int_{\Delta_\Gamma(K)}\ }
+\bC\,D_\Gamma ,
+\]
+where $\rho_K$ is pullback along the knot parameters and
+$\Delta_\Gamma(K)$ is the compactified simplex of the ordered chord
+endpoints.  This restriction-to-$S^1$ step is part of the theorem.
+\end{theorem}
+
+\begin{definition}[Weight system]
+\label{def:weight-system}
+\index{weight system|textbf}
+A \emph{weight system of degree~$n$} is a linear functional
+$W\colon \cD_n \to \bC$ satisfying the \emph{4T relation}.  Let
+$(\fg,\kappa)$ be a finite-dimensional Lie algebra with
+non-degenerate invariant form, let $\Omega=\sum_a x_a\otimes x^a$
+be the corresponding Casimir, and let $V$ be a finite-dimensional
+$\fg$-module.  For a chord diagram $\Gamma$ with endpoints
+$1,\ldots,2n$ in cyclic order, the Lie algebra weight system is
+\[
+W_{\fg,V}(\Gamma)
+\;=\;
+\sum_{\{a_e,b_e\}}
+\left(\prod_{e\in E(\Gamma)}\kappa^{a_e b_e}\right)
+\operatorname{Tr}_{V}\!\left(
+X_{c_1}\cdots X_{c_{2n}}
+\right),
+\]
+where $c_r=a_e$ or $b_e$ according as the $r$-th endpoint is the
+first or second endpoint of the chord $e$, and $X_c$ denotes the
+action of $x_c$ on $V$.  For Jacobi diagrams with internal trivalent
+vertices, the same rule inserts the structure tensor $f^a_{bc}$ at
+each trivalent vertex.  Invariance of $\kappa$ and the Jacobi
+identity give the 4T relation.
+\end{definition}
+
+\section{Weight systems from the bar complex}
+\label{sec:weight-systems-bar}
+\index{weight system!from bar complex}
+
+The bar differential extracts the Casimir and Jacobi tensors of a weight
+system. Knot invariants arise after pullback to the knot circle and application
+of the Kontsevich integral.
+
+\begin{theorem}[Real-locus bar weight systems]
+\label{thm:bar-weight-systems}
+Let $\cA=V_k(\fg)$ be the affine Kac--Moody vertex algebra at
+non-critical level $k\neq -h^\vee$, normalized so that
+\[
+J^a(z)J^b(w)
+\sim
+\frac{k\kappa^{ab}}{(z-w)^2}
+\;+\;
+\frac{f^{ab}_{c}J^c(w)}{z-w}.
+\]
+Let $\gamma:S^1\hookrightarrow \bP^1$ be a smooth embedded real
+circle contained in an affine chart and let
+\[
+\rho_\gamma:\Omega^\bullet_{\log}(\overline{C}_{2n}(\bP^1))
+\longrightarrow
+\Omega^\bullet(\overline{C}_{2n}(S^1))
+\]
+be the real-locus restriction.  For each degree-$n$ chord diagram
+$\Gamma$, the restricted angular form
+\[
+\omega^K_\Gamma
+\;=\;
+\bigwedge_{(i,j)\in E(\Gamma)}
+\frac{1}{2\pi}\,d\arg(\gamma_i-\gamma_j)
+\]
+together with the affine OPE contractions defines the Lie algebra
+weight system $W_{\fg,V}$.  With $\kappa$ fixed as above, every chord
+contributes the factor $k$, so
+\[
+W_{k\kappa,V}(\Gamma)=k^n W_{\kappa,V}(\Gamma).
+\]
+The construction factors as
+\[
+\barB^{(0)}(V_k(\fg))
+\longrightarrow
+\Omega^\bullet_{\log}(\overline{C}_{2n}(\bP^1))\otimes U(\fg)^{\otimes 2n}
+\xrightarrow{\rho_\gamma}
+\Omega^\bullet(\overline{C}_{2n}(S^1))\otimes U(\fg)^{\otimes 2n}
+\xrightarrow{\operatorname{Tr}_V}
+\cD_n^\vee .
+\]
+The construction supplies weight systems. Their composition with
+Theorem~\ref{thm:kontsevich-invariant} supplies finite-type knot invariants.
+\end{theorem}
+
+\begin{proof}
+The genus-$0$ bar differential uses collision residues of
+$\eta_{ij}=d\log(z_i-z_j)$ on $\overline{C}_{2n}(\bP^1)$
+(Definition~\ref{def:bar-differential-complete}). The logarithmic kernel lowers
+the OPE pole order by one (Remark~\ref{rem:propagator-weight-universality}).
+The double-pole term $k\kappa^{ab}(z-w)^{-2}$ contributes the Casimir edge
+$k\Omega$; the simple-pole term contributes the bracket tensor $f^{ab}_{c}$.
+Pullback by $\rho_\gamma$ preserves the Lie tensors; it changes only the
+configuration-space form, replacing the ambient logarithmic form by its
+angular Kontsevich component, as in Proposition~\ref{prop:propagator-restriction}.
+
+The 4T relation is the image of the Arnold relation
+\[
+\eta_{ij}\wedge\eta_{jk}
++\eta_{jk}\wedge\eta_{ki}
++\eta_{ki}\wedge\eta_{ij}=0
+\]
+under the same restriction and OPE contraction. On the Lie side this is
+invariance of $\kappa$ together with the Jacobi identity; on the
+configuration-space side it is the codimension-$2$ Stokes cancellation on the
+Fulton--MacPherson boundary. The resulting linear functional on chord diagrams
+is a weight system. Universality enters through Kontsevich's universal
+integral, whose coefficients are obtained after the
+$\overline{C}_{2n}(\bP^1)\to\overline{C}_{2n}(S^1)$ restriction and chord
+projection.
+\end{proof}
+
+The theorem refines Proposition~\ref{prop:vassiliev-genus0} by making the
+real-locus and chord-diagram maps explicit.
+
+\section{The Kontsevich propagator from holomorphic restriction}
+\label{sec:kontsevich-propagator}
+\index{Kontsevich integral!propagator restriction}
+
+The holomorphic propagator restricts to the Kontsevich propagator under
+angular projection. Its radial part is exact on the open configuration chamber
+and contributes through Fulton--MacPherson boundary transgression.
+
+\begin{proposition}[Angular restriction and boundary transgression]
+\label{prop:propagator-restriction}
+Let $S^1 = \{|z| = 1\} \subset \bC$ be the unit circle, parametrized
+by $z = e^{i\theta}$. The FM propagator $\eta_{ij} = d\log(z_i-z_j)$
+restricts on each ordered chamber of $C_n(S^1)$ as
+\[
+\eta_{ij}\big|_{S^1}
+\;=\;
+\frac12\cot\!\left(\frac{\theta_i-\theta_j}{2}\right)
+(d\theta_i-d\theta_j)
+\;+\;
+\frac{i}{2}(d\theta_i+d\theta_j).
+\]
+Equivalently,
+\[
+\eta_{ij}\big|_{S^1}
+\;=\;
+d\log|e^{i\theta_i}-e^{i\theta_j}|
+\;+\;
+i\,d\arg(e^{i\theta_i}-e^{i\theta_j}).
+\]
+Thus the normalized Kontsevich angular propagator is
+\[
+\omega^K_{ij}
+\;=\;
+\frac{1}{2\pi}\,d\arg(e^{i\theta_i}-e^{i\theta_j})
+\;=\;
+\frac{1}{2\pi}\,\Im\big(\eta_{ij}\big|_{S^1}\big),
+\]
+and the normalized holomorphic form decomposes as
+\[
+\frac{1}{2\pi i}\,\eta_{ij}\big|_{S^1}
+\;=\;
+\omega^K_{ij}
+\;+\;
+\frac{1}{2\pi i}\,d\log|e^{i\theta_i}-e^{i\theta_j}|.
+\]
+For a graph $\Gamma$ and a compactified configuration chain
+$F_\Gamma\subset\overline{C}_{V(\Gamma)}(S^1)$,
+\[
+\int_{F_\Gamma}\bigwedge_{e\in E(\Gamma)}
+\frac{1}{2\pi i}\rho_{S^1}(\eta_e)
+\;-\;
+\int_{F_\Gamma}\bigwedge_{e\in E(\Gamma)}\omega^K_e
+\;=\;
+\int_{\partial F_\Gamma} T_\Gamma ,
+\]
+where $T_\Gamma$ is the transgression form obtained from the path
+$\omega_e(s)=\omega^K_e+s(2\pi i)^{-1}d\log|z_{h(e)}-z_{t(e)}|$:
+\[
+T_\Gamma
+\;=\;
+\int_0^1\sum_{e\in E(\Gamma)}
+(-1)^{\epsilon(e)}
+\frac{\log|z_{h(e)}-z_{t(e)}|}{2\pi i}
+\bigwedge_{e'\neq e}\omega_{e'}(s)\,ds .
+\]
+Here $\epsilon(e)$ is the Koszul sign from moving the displayed
+$0$-form past the preceding edge forms.  Equality of holomorphic and
+Kontsevich graph weights is therefore equality after angular
+projection plus the vanishing, cancellation, or framing
+renormalization of the boundary terms $\int_{\partial F_\Gamma}T_\Gamma$.
+\end{proposition}
+
+\begin{proof}
+On a chamber with fixed cyclic order,
+\[
+e^{i\theta_i}-e^{i\theta_j}
+=2i\,e^{i(\theta_i+\theta_j)/2}
+\sin\!\left(\frac{\theta_i-\theta_j}{2}\right).
+\]
+Taking $d\log$ gives the displayed formula. The second displayed identity is
+the polar decomposition $d\log u=d\log|u|+i\,d\arg(u)$ for $u\in\bC^\times$.
+The normalized angular form is $(2\pi)^{-1}d\arg(u)$; the difference from
+$(2\pi i)^{-1}d\log(u)$ is exact on the chamber.
+
+For a product over the edges of a graph, set
+$\lambda_e=(2\pi i)^{-1}d\log|z_{h(e)}-z_{t(e)}|$ and
+$\omega_e(s)=\omega^K_e+s\lambda_e$. Since both $\omega^K_e$ and $\lambda_e$
+are closed and $\lambda_e=d((2\pi i)^{-1}\log|z_{h(e)}-z_{t(e)}|)$,
+\[
+\frac{d}{ds}\bigwedge_e\omega_e(s)=dT_\Gamma(s).
+\]
+Integration in $s$ followed by Stokes on the manifold with corners $F_\Gamma$
+gives the boundary formula. The Kontsevich framing correction is the
+normalization absorbing the surviving one-chord boundary term.
+\end{proof}
+
+\begin{remark}[Angular and radial parts]\label{rem:imaginary-part}
+The angular part $(2\pi)^{-1}d\arg(z_i-z_j)$ is the topological Kontsevich
+propagator. The radial part $(2\pi i)^{-1}d\log|z_i-z_j|$ is exact on each
+chamber; on the compactification Stokes moves it to collision and endpoint
+faces. The framing correction is the normalization of those boundary
+contributions. The bar complex produces the full holomorphic form; the
+Kontsevich invariant uses its angular projection with this boundary
+normalization.
+\end{remark}
+
+
+\section{The Drinfeld associator from affine bar monodromy}
+\label{sec:drinfeld-associator}
+\index{Drinfeld associator|textbf}
+\index{KZ equation!from bar complex}
+
+The affine genus-$0$ bar comparison carries the KZ connection. With tangential
+basepoints and a logarithm branch fixed, its regularized monodromy is the KZ
+Drinfeld associator.
+
+\begin{proposition}[KZ connection from affine bar residues]
+\label{prop:kz-from-bar}
+\index{KZ equation!from bar differential}
+For $\cA=V_k(\fg)$ at non-critical level $k\neq -h^\vee$, the
+genus-$0$ affine bar residue comparison on
+$C_n(\bC)\subset\overline{C}_n(\bP^1)$ gives the flat connection on
+the trivial bundle with fiber $U(\fg)^{\otimes n}$:
+\begin{equation}\label{eq:kz-connection}
+\nabla^{\mathrm{KZ}}
+\;=\;
+d \;-\; \frac{1}{k+h^\vee}
+\sum_{1 \leq i < j \leq n}
+\Omega_{ij}\,d\log(z_i-z_j),
+\end{equation}
+where $\Omega_{ij} = \sum_a J^a_i J^a_j$ is the Casimir element
+acting on the $i$-th and $j$-th tensor factors. This is the
+Knizhnik--Zamolodchikov connection.
+\end{proposition}
+
+\begin{proof}
+The bar differential for $V_k(\fg)$ at genus~$0$
+(Definition~\ref{def:bar-differential-complete}) is
+$d = \sum_{i<j} \Res_{D_{ij}} (\eta_{ij} \wedge -)$, where
+$\eta_{ij} = d\log(z_i-z_j)$ and $\Res_{D_{ij}}$ extracts the Poincar\'e
+residue along the collision divisor. The $d\log$ kernel absorbs one pole order
+from the OPE (Remark~\ref{rem:propagator-weight-universality}); the OPE
+$J^a(z_i) J^b(z_j) \sim k\kappa^{ab}/(z_i-z_j)^2 + f^{ab}_c J^c/(z_i-z_j)$
+contributes a simple-pole term $k\kappa^{ab}/(z_i-z_j)$ (Killing contraction)
+and a regular term $f^{ab}_c J^c$ (adjoint action) to the collision residue.
+Contraction with the Casimir gives $\Omega_{ij}\,d\log(z_i-z_j)$. The factor
+$1/(k+h^\vee)$ arises from the Sugawara normalization: the OPE is formulated
+at level~$k$, and the KZ connection uses the normalized Casimir
+$\Omega/(k+h^\vee)$. At the critical level $k = -h^\vee$ the Sugawara
+construction is undefined and the KZ connection degenerates; the replacement
+is the Feigin--Frenkel connection on opers.
+
+Flatness $(\nabla^{\mathrm{KZ}})^2 = 0$ follows from $d^2 = 0$ on the genus-$0$
+bar complex: the bar differential restricted to the open stratum $C_n(\bC)$
+has no curvature since the fiberwise bar-curvature obstruction $\kappa(\cA)\,\omega_g$
+arises only at genus~$\geq 1$. The flatness
+condition is the infinitesimal braid relation
+$[\Omega_{ij}, \Omega_{ik} + \Omega_{jk}] = 0$ for $i,j,k$ distinct, a
+consequence of the Jacobi identity for~$\fg$.
+\end{proof}
+
+\begin{theorem}[KZ associator on the bar comparison surface]
+\label{thm:drinfeld-associator-bar}
+\index{Drinfeld associator!from bar monodromy}
+The monodromy of the KZ connection~\eqref{eq:kz-connection} on $C_3(\bC)$
+around the boundary divisors of $\overline{C}_3(\bP^1)$ produces the Drinfeld
+associator $\Phi_{\mathrm{KZ}}\in U(\fg)^{\otimes 3}[[\hbar]]$ with
+\[
+h=(k+h^\vee)^{-1},
+\qquad
+\hbar=2\pi i\,h .
+\]
+The statement uses the standard tangential basepoints at $0$ and $1$; changing
+the associator choice translates $\Phi_{\mathrm{KZ}}$ by the Drinfeld
+$\mathrm{GRT}$-torsor. Under the affine bar comparison:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The parallel transport of the bar complex
+ $\barB(V_k(\fg))$ around the loop
+ $\{z_1 = 0,\, z_2 = 1,\, z_3 = t\}$ for $t \in (0,1)$
+ with $t \to 0$ and $t \to 1$ as the two boundary degenerations
+ gives the regularized holonomy
+ $\Phi_{\mathrm{KZ}}(t_{12}, t_{23})$
+ where $t_{ij}=h\Omega_{ij}$.
+\item The pentagon relation for the associator
+ is a consequence of the coherence of the bar complex
+ on $C_4(\bC)$: the five boundary strata of
+ $\overline{\mathcal{M}}_{0,5} \cong \operatorname{Bl}_4(\bP^2)$
+ give five ways to degenerate four-point configurations,
+ and the associator intertwines them.
+\item The hexagon relation comes from the braid monodromy
+ on $C_3(\bC)$: the half-twist $\sigma_1$ exchanges
+ $z_1$ and $z_2$, and
+ the corresponding braiding is
+ $R_{12}=\exp(\pi i\,h\Omega_{12})$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The Drinfeld--Kohno theorem \cite{Drinfeld90,Kohno87} establishes that the
+regularized monodromy of the KZ connection produces the associator.
+Proposition~\ref{prop:kz-from-bar} identifies the connection form with the
+genus-$0$ affine bar residue comparison.
+
+Part (i): the bar differential on $C_3(\bC)$ is
+$d = t_{12}\, \eta_{12} + t_{13}\, \eta_{13} + t_{23}\, \eta_{23}$ where
+$\eta_{ij} = d\log(z_i - z_j)$ and $t_{ij}=h\Omega_{ij}$. The parallel
+transport from $t = \varepsilon$ to $t = 1 - \varepsilon$ is
+$\Phi_{\mathrm{KZ}}(t_{12}, t_{23})
+= 1 + \sum_{n \geq 1} \int_{0<s_1<\cdots<s_n<1}
+\omega(s_1) \cdots \omega(s_n)$
+where $\omega(s) = t_{12}\, ds/(s) + t_{23}\, ds/(s-1)$, regularized at
+$s = 0$ and $s = 1$. This is the iterated integral formula for the Drinfeld
+associator.
+
+Part (ii): on $C_4(\bC)$ the bar complex structure requires coherence of all
+four-point degenerations. The boundary of $\overline{\mathcal{M}}_{0,5}$ has
+five associahedral components, and the parallel transports around them compose
+to Drinfeld's pentagon
+\[
+\Phi^{1,2,34}\Phi^{12,3,4}
+\;=\;
+\Phi^{2,3,4}\Phi^{1,23,4}\Phi^{1,2,3}.
+\]
+
+Part (iii): the half-twist $\sigma_1$ on $C_3(\bC)$ is the braid generator;
+the monodromy of the KZ connection under this half-twist is
+$R_{12}=\exp(\pi i\,h\Omega_{12})$ (the universal $R$-matrix at level~$k$). The
+hexagon relation expresses compatibility of the associator with the braiding.
+\end{proof}
+
+\begin{remark}[Bar-cobar as quasi-triangular structure]
+\label{rem:bar-quasi-triangular}
+\index{quasi-triangular!from bar complex}
+Theorem~\ref{thm:drinfeld-associator-bar} supplies the quasi-triangular
+quasi-Hopf data on the affine Kac--Moody comparison surface: the associator
+from three-point KZ monodromy, the $R$-matrix from two-point braid monodromy,
+and the pentagon/hexagon from the boundary stratification of $C_4(\bC)$ and
+$C_3(\bC)$. The input is the fixed KZ associator choice above. The
+Reshetikhin--Turaev package follows after the Drinfeld--Kohno theorem and the
+chosen associator; the equivalence between bar complex and quantum group
+presentation depends on these choices.
+\end{remark}
+
+
+\section{Higher genus: graph complex and real-loop comparison}
+\label{sec:bar-to-loop}
+\index{Kontsevich integral!loop expansion}
+
+Positive genus separates into an algebraic graph-complex theorem and a
+real-propagator comparison class. The first concerns the modular Feynman
+transform. The second concerns pullback of prime-form propagators to a real
+cycle and comparison with the topological propagator of perturbative
+Chern--Simons theory.
+
+\begin{proposition}[Feynman transform and algebraic graph-complex
+refinement]
+\label{prop:feynman-graph-complex}
+\index{Feynman transform!graph complex}
+The Feynman transform of the modular operad $\mathrm{Com}$ gives the
+stable graph complex of Getzler--Kapranov.  For a Koszul chiral
+algebra $\cA$, the full bar complex is the same stable-graph
+construction with vertices decorated by the OPE tensors of~$\cA$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item Getzler--Kapranov~\cite[Theorem~5.4]{GeK98} identify
+ $\mathrm{FT}(\mathrm{Com})$ with the modular stable-graph complex.
+\item The identification
+ $\barB^{\mathrm{full}}(\cA)
+ \simeq \mathrm{FT}_{\mathcal{M}\mathrm{od}}(\cA)$
+ (Theorem~\ref{thm:prism-higher-genus}) decorates the same graph
+ complex by chiral OPE data.
+\item The passage from this algebraic graph complex to the loop
+ expansion of the Kontsevich integral is the real-locus restriction
+ and boundary-normalization problem of
+ Definition~\ref{def:real-loop-obstruction}; it is not a consequence
+ of the Feynman-transform isomorphism alone.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part (i) is Getzler--Kapranov \cite[Theorem~5.4]{GeK98}. Part~(ii):
+Theorem~\ref{thm:prism-higher-genus} identifies the genus-$g$ bar complex with
+the genus-$g$ component of the Feynman transform
+$\mathrm{FT}_{\mathcal{M}\mathrm{od}}(\cA)$. At $\cA = \mathrm{Com}$ (the
+commutative operad as trivial chiral algebra), the OPE data is trivial and
+$\mathrm{FT}_{\mathcal{M}\mathrm{od}}(\mathrm{Com}) =
+\mathrm{FT}(\mathrm{Com}) = \mathrm{GC}$. Part~(iii) follows from
+functoriality of differential forms: a graph weight on
+$\overline{C}_{m}(\Sigma_g)$ becomes a knot-integral weight after pullback to
+$\overline{C}_m(S^1)$ and quotient by the chord-diagram relation.
+Proposition~\ref{prop:propagator-restriction} shows already in genus~$0$ that
+the radial exact term contributes boundary transgressions; positive genus
+carries the same obstruction with the prime-form propagator replacing
+$d\log(z-w)$.
+\end{proof}
+
+\begin{definition}[Real-loop comparison obstruction]
+\label{def:real-loop-obstruction}
+\label{rem:holomorphic-to-topological}
+\index{Kontsevich integral!holomorphic vs topological}
+Let $\Sigma_g$ be a compact Riemann surface, let
+\(\gamma:S^1\hookrightarrow\Sigma_g\) be an embedded real cycle, and
+let
+\[
+\omega^{\mathrm{hol}}_{ij}
+\;=\;
+d_{z_i}\log E(z_i,z_j)
+\]
+be the prime-form logarithmic propagator on the complement of the
+diagonal.  For a graph $\Gamma$ define
+\[
+\mathfrak{o}^{g,\gamma}_\Gamma
+\;=\;
+\left[
+\rho_\gamma\!\left(\bigwedge_{e\in E(\Gamma)}
+\omega^{\mathrm{hol}}_e\right)
+\;-\;
+\bigwedge_{e\in E(\Gamma)}\omega^K_e
+\;-\;dT^{g,\gamma}_\Gamma
+\right]
+\in
+H^{|E(\Gamma)|}\!\left(
+\overline{C}_{V(\Gamma)}(S^1),\partial;\bC\right),
+\]
+where $T^{g,\gamma}_\Gamma$ is the Fulton--MacPherson transgression
+over all collision and endpoint faces, normalized as in
+Proposition~\ref{prop:propagator-restriction}.  The positive-genus
+bar graph weight for $\Gamma$ agrees with the topological
+Kontsevich/Chern--Simons graph weight along $\gamma$ exactly when
+\(\mathfrak{o}^{g,\gamma}_\Gamma=0\) and the chosen trivialization of
+the transgression matches the Chern--Simons gauge-fixing
+normalization of Cattaneo--Mnev~\cite{CattaneoMnev10}.
+\end{definition}
+
+
+\section{Chern--Simons comparison class}
+\label{sec:cs-bridge}
+\index{Chern--Simons!as bridge to Vassiliev}
+Chern--Simons gauge theory supplies the topological configuration-space model.
+The comparison with the affine bar complex is a morphism of factorization
+algebras and a Wilson-line trace comparison, controlled by an obstruction class.
+
+\begin{definition}[Chern--Simons boundary comparison class]
+\label{def:cs-factorization-comparison}
+\index{Chern--Simons!factorization homology}
+Let $M$ be a compact oriented $3$-manifold with boundary
+$\partial M=\Sigma$, let $\mathrm{Obs}^{q}_{\mathrm{CS},k}$ be the
+perturbative Chern--Simons factorization algebra at level~$k$ in the
+sense of Costello--Gwilliam~\cite{CG17}, and let
+\[
+\mathcal B_{\Sigma,k}:=\barB(V_k(\fg))_\Sigma
+\]
+be the affine bar factorization algebra on the boundary Riemann
+surface.  A collar trivialization and a boundary polarization define a
+local comparison morphism
+\[
+\beta_{\partial}:
+\mathrm{Obs}^{q}_{\mathrm{CS},k}\big|_{\Sigma\times[0,\varepsilon)}
+\longrightarrow
+\mathcal B_{\Sigma,k}.
+\]
+The Chern--Simons boundary comparison class is
+\[
+\mathfrak{o}_{\mathrm{CS}}(M,\Sigma,k)
+\in
+H^1\!\operatorname{Cone}\!\left(
+C^\bullet_{\mathrm{fact}}\!
+\left(\mathrm{Obs}^{q}_{\mathrm{CS},k}\big|_{\Sigma\times[0,\varepsilon)}\right)
+\xrightarrow{\ \beta_\partial\ }
+C^\bullet_{\mathrm{fact}}(\mathcal B_{\Sigma,k})
+\right),
+\]
+the \v{C}ech--BV descent obstruction to extending
+$\beta_\partial$ to a global factorization-algebra comparison.  For a
+colored knot $(K,V)\subset S^3$, the Wilson trace comparison has the
+secondary obstruction
+\[
+\mathfrak{o}_{K,V}
+\;:=\;
+\langle W_K(V)\rangle_{\mathrm{CS}}
+\;-\;
+\chi(\barB(V_k(\fg),V_K))
+\in \bC[[\hbar]] .
+\]
+\end{definition}
+
+\begin{proposition}[Chern--Simons comparison criterion]
+\label{prop:cs-comparison-criterion}
+With the choices in Definition~\ref{def:cs-factorization-comparison}, the
+identity
+\[
+\langle W_K(V)\rangle_{\mathrm{CS}}
+\;=\;
+\chi(\barB(V_k(\fg),V_K))
+\]
+holds on the perturbative comparison surface only after the two
+classes
+\[
+\mathfrak{o}_{\mathrm{CS}}(S^3\setminus N(K),\partial N(K),k),
+\qquad
+\mathfrak{o}_{K,V}
+\]
+vanish and the propagator normalization agrees with
+Proposition~\ref{prop:propagator-restriction}; here $N(K)$ is a
+tubular neighborhood of the Wilson line.  Costello--Gwilliam
+\cite{CG17} construct the factorization-algebra side; the
+Costello--Francis--Gwilliam comparison with knot polynomials
+\cite{CFG25} supplies the Reshetikhin--Turaev trace surface; the
+Axelrod--Singer--Kontsevich configuration integral surface is
+encoded by restriction of forms
+\[
+K^*:\Omega^\bullet(\overline{C}_n(S^3))
+\longrightarrow
+\Omega^\bullet(\overline{C}_n(S^1)),
+\]
+induced by $K_*:\overline{C}_n(S^1)\to\overline{C}_n(S^3)$ and
+described in Remark~\ref{rem:vassiliev}.
+\end{proposition}
+
+
+\section{Kontsevich formality and the \texorpdfstring{$E_2$}{E2} obstruction}
+\label{sec:kontsevich-formality-rectification}
+\index{Kontsevich formality!$E_2$ obstruction|textbf}
+\index{E2-formality@$E_2$-formality!Kontsevich}
+
+\begin{construction}[Kontsevich formality as the genus-$0$ $E_2$ model]
+\label{constr:kontsevich-rectification}
+\index{formality!Kontsevich|textbf}
+\index{polyvector fields!formality}
+\index{polydifferential operators!formality}
+Kontsevich's formality theorem, the $L_\infty$ quasi-isomorphism
+$\Phi \colon T_{\mathrm{poly}} \xrightarrow{\sim} D_{\mathrm{poly}}$,
+strictifies the homotopy Gerstenhaber algebra of polyvector fields to the dg
+algebra of polydifferential operators. In the modular Koszul framework this is
+$E_2$-formality of the genus-$0$ convolution algebra $\mathfrak{g}^{(0)}_\cA$
+(Proposition~\ref{prop:en-formality-mc-truncation}\textup{(ii)}).
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Classical data.}
+ The Hochschild cochain complex $C^*(A,A)$ of an associative
+ algebra~$A$ carries a $G_\infty$-structure (homotopy
+ Gerstenhaber): cup product~$\cup$ and Gerstenhaber
+ bracket~$[-,-]$ satisfying Leibniz only up to coherent
+ homotopies. The polyvector fields $T_{\mathrm{poly}}(\bR^d)$
+ carry the strict Schouten--Nijenhuis bracket and wedge product.
+ Kontsevich's maps $U_n \colon T_{\mathrm{poly}}^{\otimes n}
+ \to D_{\mathrm{poly}}$ are given by integrals over
+ $\overline{C}_n(\mathfrak{H})$ (the Fulton--MacPherson
+ compactification of the upper half-plane), using the angular
+ propagator $d\arg(z_i-z_j)$ that appears in the real-locus
+ comparison of Proposition~\ref{prop:propagator-restriction}.
+\item \emph{Bar-complex interpretation.}
+ The configuration space
+ $\overline{C}_n(\mathfrak{H})$ is the genus-$0$, $n$-point FM
+ compactification with boundary. The formality maps $U_n$ are
+ fiber integrals of bar-complex forms over the FM boundary
+ strata, identical in structure to the genus-$0$ bar differential
+ of an affine vertex algebra
+ (Theorem~\ref{thm:bar-weight-systems}). The Stokes theorem on
+ $\overline{C}_n(\mathfrak{H})$ that proves $\Phi$ is an
+ $L_\infty$-morphism is the same codimension-$1$ boundary
+ cancellation that gives $d^2 = 0$ for the bar complex.
+\item \emph{Modular Koszul placement.}
+ The $E_2$-formality hierarchy
+ (Proposition~\ref{prop:en-formality-mc-truncation}\textup{(ii)})
+ states: $E_2$-formality of the genus-$0$ convolution algebra
+ $\mathfrak{g}^{(0)}_\cA$ is equivalent to termination of the shadow
+ obstruction tower at degree~$2$. Kontsevich formality is this statement for
+ the associative operad: the genus-$0$ convolution algebra is the Hochschild
+ cochain complex with its $G_\infty$-structure. The higher formality maps
+ $U_n$ ($n \geq 2$) are the transferred $L_\infty$ brackets
+ $\ell_n^{(0),\mathrm{tr}}$ of the bipartite shadow
+ (Theorem~\ref{thm:bipartite-linfty-tree}).
+\end{enumerate}
+\end{construction}
+
+\section{Summary}
+\label{sec:kontsevich-summary}
+
+\noindent
+\textbf{Comparison surface.}
+\begin{enumerate}
+\item The affine bar complex produces Lie algebra weight systems
+ after the real-locus restriction
+ $\overline{C}_{2n}(\bP^1)\to\overline{C}_{2n}(S^1)$
+ (Theorem~\ref{thm:bar-weight-systems}).
+\item The holomorphic propagator decomposes on $S^1$ into the
+ angular Kontsevich propagator plus an exact radial term whose
+ contribution is the Fulton--MacPherson boundary transgression
+ (Proposition~\ref{prop:propagator-restriction}).
+\item The genus-$0$ affine bar residue comparison on $C_n(\bC)$ is
+ the KZ connection for $V_k(\fg)$
+ (Proposition~\ref{prop:kz-from-bar}).
+\item The KZ Drinfeld associator arises from regularized affine bar
+ monodromy on $C_3(\bC)$ after a tangential-basepoint and associator
+ choice (Theorem~\ref{thm:drinfeld-associator-bar}).
+\item The Feynman transform of $\mathrm{Com}$ is the stable graph complex
+ (Proposition~\ref{prop:feynman-graph-complex}).
+\item Positive-genus comparison with the Kontsevich/Chern--Simons
+ loop expansion is controlled by the classes
+ $\mathfrak{o}^{g,\gamma}_\Gamma$ and
+ $\mathfrak{o}_{\mathrm{CS}}$
+ (Definition~\ref{def:real-loop-obstruction} and
+ Definition~\ref{def:cs-factorization-comparison}).
+\end{enumerate}

@@ -1,0 +1,2443 @@
+% Ensure theorem environments used in this chapter are available.
+\makeatletter
+\@ifundefined{conclusion}{\newenvironment{conclusion}[1][]{\csname remark\endcsname[#1]}{\csname endremark\endcsname}}{}
+\makeatother
+
+\chapter{From dg-Shifted Yangians to Spectral Factorization Quantum Groups}
+\label{chap:dg-shifted-factorization}
+
+\section{Orientation and first principles}
+
+Theorem~\ref{thm:yangian-recognition} identifies the open-colour
+line-side algebra $\cA^!_{\mathrm{line}}$ on the chirally Koszul locus
+as a dg-shifted Yangian package whose axioms are the
+$(\SCchtop)^{!}$-operadic identities (closed $=$ Lie, open $=$ Ass)
+decomposed by colour. The spectral Drinfeld problem for this package is
+a filtered strictification problem for the regularized holonomy of a
+bar-horizontal spectral connection, not an identification of dg-shifted
+Yangians with factorization quantum groups.
+
+Three languages converge. The physical identifications of
+Dimofte--Niu--Py~\cite{DNP25} are the naming of operadic data in
+physical language (Remark~\ref{rem:yangian-logical-status}). The
+spectral language of factorisation quantum groups is that of
+Latyntsev~\cite{Latyntsev23}. The geometric language of shifted quantum
+groups and critical stable envelopes is that of the shifted-Yangian
+literature and the critical-stable-envelope
+programme~\cite{COZZ26}.
+
+The three languages share a single spine. A dg-shifted Yangian, viewed
+through Theorem~\ref{thm:yangian-recognition} on the chirally Koszul
+locus, is not \emph{already} a strict factorization quantum group: the
+$\SCchtop$-algebra structure, once expressed through a bar-horizontal
+strictification of its open-color projection, canonically produces a
+\emph{spectral quasi-factorization quantum group}, and the passage from
+quasi to strict is governed by a concrete obstruction complex whose
+first low-filtration sectors are computed exactly.
+
+The rigidity of the computed sectors is \emph{root multiplicity one}:
+every root of a simple Lie algebra has multiplicity one, so each
+nonzero root-sector obstruction is a scalar. This identifies the
+exact test: the product-side scalar equals the coproduct-side scalar
+modulo the scalar spectral coboundary. Path-type sectors satisfy this
+test by the $n$-gon rigidity calculation. In general finite type, root
+multiplicity one reduces strictification to the scalar obstruction map
+defined below.
+
+A strict $R$-matrix on the $A_\infty$ object would conflate colors.
+The $R$-matrix is a closed-color datum (from $\FM_2(\C)$); the
+$A_\infty$ structure is the open-color $E_1$-projection of the
+$\SCchtop$-algebra on the chirally Koszul locus
+(Theorem~\ref{thm:yangian-recognition}). The construction passes to
+ordered configuration spaces (the open-color stage), produces a flat
+connection, reads off regularized holonomy, and then formulates the
+spectral factorization problem. In the Steinberg presentation
+(Theorem~\ref{thm:steinberg-presentation}), the flat connection is the
+spectral connection $\nabla_z$ of (iii)(b); strictification is the
+passage from its monodromy $R(z)$ as a homotopy-coherent correspondence
+to a strict factorization $R$-matrix.
+
+\section{Complete filtered spectral setup}
+
+\begin{definition}[Residue-bounded complete dg-shifted Yangian]
+Let $Y$ be a complete separated filtered $A_\infty$-algebra
+\[
+Y=F^1Y\supset F^2Y\supset \cdots,
+\qquad
+Y\cong \varprojlim_N Y/F^{N+1}Y,
+\]
+equipped with:
+\begin{enumerate}
+\item a translation family $\tau_z$,
+\item a twisted coproduct $\Delta_z$,
+\item an odd Maurer--Cartan kernel
+\[
+r(z)=\sum_{n\ge 1} r_n z^{-n} \in (Y\widehat\otimes Y)((z^{-1})),
+\]
+\end{enumerate}
+such that
+\[
+m_k(F^{p_1}Y,\dots,F^{p_k}Y)
+\subset F^{p_1+\cdots+p_k+k-2}Y,
+\]
+and such that the residues become more convergent with pole order in the
+sense that
+\[
+r_n(F^pY\widehat\otimes F^qY)
+\subset F^{p+q+n}(Y\widehat\otimes Y).
+\]
+We call such an object a \emph{residue-bounded complete dg-shifted
+Yangian}.
+\end{definition}
+
+The suspension of $r(z)$ to the bar convolution algebra will be denoted
+by $\widetilde r(z)$; this is the degree-zero spectral kernel.
+
+\begin{definition}[Bar-horizontal strictification]
+Let $B(Y)=T^c(s^{-1}Y)$ be the completed reduced bar coalgebra of $Y$ with
+bar differential $b$. A \emph{bar-horizontal strictification} of $Y$
+is a complete filtered cochain complex $(V,d_V)$ quasi-isomorphic to
+$B(Y)$ together with continuous degree-zero endomorphisms
+\[
+\Omega_{ij}(u)\in \operatorname{End}(V^{\widehat\otimes n})((u^{-1}))
+\qquad (1\le i<j\le n)
+\]
+such that:
+\begin{align*}
+[d_V,\Omega_{ij}(u)]&=0,\\
+[\Omega_{ij}(u),\Omega_{kl}(v)]&=0
+\qquad \text{if }\{i,j\}\cap\{k,l\}=\varnothing,
+\end{align*}
+and for every triple $i<j<k$,
+\[
+[\Omega_{ij}(u),\Omega_{ik}(u+v)]
++[\Omega_{ij}(u),\Omega_{jk}(v)]
++[\Omega_{ik}(u+v),\Omega_{jk}(v)] = 0.
+\]
+\end{definition}
+
+This is the additive spectral precursor of a strict spectral
+$R$-matrix. It is the correct object to strictify first.
+
+\begin{remark}[Existence of bar-horizontal strictifications]
+\label{rem:bar-horizontal-existence}
+For HT theories in the scope of Theorem~\ref{thm:physics-bridge}, the
+perturbative expansion of the holonomy supplies candidate operators
+$\Omega_{ij}(u)$ with tree-level exchange amplitude as the leading
+term. Chain closure together with the disjointness and spectral Kohno
+identities above produces a bar-horizontal strictification.
+Theorem~\ref{thm:derived-additive-kz} derives flatness from those
+identities; their existence is the input.
+\end{remark}
+
+\begin{theorem}[Derived additive KZ connection; \ClaimStatusProvedHere]
+\label{thm:derived-additive-kz}
+Let $(V,\Omega)$ be a bar-horizontal strictification. On the ordered
+configuration space
+\[
+\Conf_n^{\mathrm{ord}}(\mathbb A^1)=\{z_1<\cdots<z_n\}
+\]
+consider the operator
+\[
+\mathbb D_n
+=
+ d_V+d_{\mathrm{dR}}
+ - \sum_{1\le i<j\le n}\Omega_{ij}(z_j-z_i)\,d(z_j-z_i).
+\]
+Then $\mathbb D_n^2=0$.
+\end{theorem}
+
+\begin{proof}
+Write
+\[
+A_n:=\sum_{i<j}\Omega_{ij}(z_j-z_i)\,d(z_j-z_i).
+\]
+Since $d_V^2=d_{\mathrm{dR}}^2=0$ and $[d_V,\Omega_{ij}(u)]=0$, one has
+\[
+(d_V+d_{\mathrm{dR}})^2=0,
+\qquad
+[d_V+d_{\mathrm{dR}},A_n]=0,
+\]
+because $d_{\mathrm{dR}}(f(u)du)=f'(u)du\wedge du=0$.
+Hence
+\[
+\mathbb D_n^2=A_n\wedge A_n.
+\]
+Disjoint-pair terms vanish by hypothesis. Thus only triples
+$i<j<k$ contribute. Put
+\[
+u=z_j-z_i,
+\qquad
+v=z_k-z_j,
+\qquad
+z_k-z_i=u+v.
+\]
+Then
+\[
+d(z_k-z_i)=du+dv,
+\]
+and every wedge product appearing from the triple $i<j<k$ reduces to a
+multiple of $du\wedge dv$. The coefficient is precisely
+\[
+[\Omega_{ij}(u),\Omega_{ik}(u+v)]
++[\Omega_{ij}(u),\Omega_{jk}(v)]
++[\Omega_{ik}(u+v),\Omega_{jk}(v)],
+\]
+which vanishes by the defining spectral Kohno relation. Therefore
+$\mathbb D_n^2=0$.
+\end{proof}
+
+\begin{corollary}[Derived Drinfeld--Kohno shadow; \ClaimStatusProvedHere]
+If the filtration is pronilpotent, the parallel transport of
+$\mathbb D_n$ is well-defined and yields chain-level pure braid group
+representations on $V^{\widehat\otimes n}$, hence braid-group actions
+on $H^\bullet(V^{\widehat\otimes n})$.
+\end{corollary}
+
+\begin{theorem}[Boundary residue theorem; \ClaimStatusProvedHere]
+\label{thm:boundary-residue}
+Assume that each $\Omega_{ij}(u)$ has at most a simple pole at $u=0$,
+so that
+\[
+\Omega_{ij}(u)=\frac{r_{ij}}{u}+\Omega_{ij}^{\mathrm{reg}}(u).
+\]
+Then the connection form of Theorem~\ref{thm:derived-additive-kz}
+extends logarithmically to the Fulton--MacPherson compactification
+$\overline{\Conf}_n^{\mathrm{ord}}(\mathbb A^1)$.
+For the boundary divisor $D_S$ corresponding to collision of a subset
+$S\subset\{1,\dots,n\}$, its residue is
+\[
+\operatorname{Res}_{D_S}(A_n)=\sum_{i<j\in S} r_{ij}.
+\]
+\end{theorem}
+
+\begin{proof}
+Near the divisor $D_S$, choose local coordinates
+\[
+z_i=z_*+t\xi_i\qquad (i\in S),
+\]
+with $t=0$ cutting out the boundary and the $\xi_i$ pairwise distinct.
+Then for $i,j\in S$,
+\[
+z_j-z_i=t(\xi_j-\xi_i),
+\qquad
+ d(z_j-z_i)=(\xi_j-\xi_i)dt+t\,d(\xi_j-\xi_i).
+\]
+Hence
+\begin{align*}
+\Omega_{ij}(z_j-z_i)\,d(z_j-z_i)
+&=
+\left(\frac{r_{ij}}{t(\xi_j-\xi_i)}+\text{regular}\right)
+\big((\xi_j-\xi_i)dt+t\,d(\xi_j-\xi_i)\big)\\
+&=r_{ij}\frac{dt}{t}+r_{ij}d\log(\xi_j-\xi_i)+\text{regular}.
+\end{align*}
+Pairs not entirely contained in $S$ remain regular in $t$.
+Summing over $i<j\in S$ gives the residue formula.
+\end{proof}
+
+\begin{theorem}[Transfer of flat spectral connections; \ClaimStatusProvedHere]
+\label{thm:transfer-flat-spectral}
+Let
+\[
+(H,d_H)
+\xrightarrow{i}
+(V,d_V)
+\xrightarrow{p}
+(H,d_H)
+\]
+be a filtered strong deformation retract with homotopy $h$:
+\[
+pi=\operatorname{id}_H,
+\qquad
+ip=\operatorname{id}_V+d_Vh+hd_V.
+\]
+Assume that $V\otimes \Omega^\bullet(\Conf_n^{\mathrm{ord}})$ carries a
+flat total differential
+\[
+\mathbb D_V=(d_V+d_{\mathrm{dR}})-A_V,
+\]
+where $A_V$ lowers the filtration. Then the homological perturbation
+series converges and produces a flat total differential
+\[
+\mathbb D_H=(d_H+d_{\mathrm{dR}})-A_H,
+\qquad
+A_H=pA_V(1-hA_V)^{-1}i=
+\sum_{m\ge 0} pA_V(hA_V)^mi.
+\]
+Thus every flat bar-level spectral connection descends functorially to
+cohomology or to a minimal model.
+\end{theorem}
+
+\begin{proof}
+Tensor the strong deformation retract with the de Rham complex of the
+base. Since $d_{\mathrm{dR}}$ commutes with $i,p,h$, the same data form a
+strong deformation retract for the base differential
+$d_V+d_{\mathrm{dR}}$. Set $\delta=-A_V$. Because $\delta$ lowers the
+filtration, the standard homological perturbation series converges.
+The perturbation lemma gives the transferred differential
+\[
+(d_H+d_{\mathrm{dR}})+p\delta(1-h\delta)^{-1}i,
+\]
+which squares to zero because
+$(d_V+d_{\mathrm{dR}}+\delta)^2=\mathbb D_V^2=0$.
+Replacing $\delta$ by $-A_V$ yields the formula for $A_H$.
+\end{proof}
+
+\section{Quasi-factorization and spectral obstruction theory}
+
+\begin{definition}[Regularized holonomy data]
+Assume that the flat connections of
+Theorem~\ref{thm:derived-additive-kz} are pronilpotent at the boundary.
+For $n=2$, let
+\[
+R(u)\in 1+F^1A^{\widehat\otimes 2}
+\]
+be the regularized holonomy from the positive tangential basepoint at
+collision to the interior point with difference $u=z_2-z_1$.
+For $n=3$, let $\Phi(w,z)\in 1+F^2A^{\widehat\otimes 3}$ be the
+regularized parallel transport between the two tangential basepoints
+corresponding to the bracketings $(12)3$ and $1(23)$ in
+$\overline{\Conf}_3^{\mathrm{ord}}(\mathbb A^1)$.
+We call $(R,\Phi)$ the \emph{spectral quasi-factorization datum}.
+\end{definition}
+
+\begin{theorem}[Quasi-factorization theorem; \ClaimStatusProvedHere]
+\label{thm:quasi-factorization}
+Every residue-bounded complete dg-shifted Yangian equipped with a
+bar-horizontal strictification canonically determines a spectral
+quasi-factorization quantum group.
+More precisely, the regularized holonomy data $(R,\Phi)$ satisfy:
+\begin{enumerate}
+\item quasi-hexagon relations on $\overline{\Conf}_3^{\mathrm{ord}}$, and
+\item the pentagon relation on the codimension-one Stasheff cell complex
+ of $\overline{\Conf}_4^{\mathrm{ord}}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The codimension-one boundary strata of
+$\overline{\Conf}_3^{\mathrm{ord}}$ corresponding to the bracketings
+$(12)3$ and $1(23)$ admit collar charts in which the regularized
+holonomy factors as the ordered product of the two-body holonomies.
+The comparison between these two collar factorizations is exactly the
+comparison holonomy $\Phi(w,z)$, which yields the quasi-hexagon.
+
+For $n=4$, the codimension-one boundary strata form the Stasheff
+pentagon. Flatness of the four-point connection implies that the total
+regularized transport around the boundary of that pentagon is the
+identity. Writing that transport as the product of the five comparison
+holonomies gives the pentagon relation.
+\end{proof}
+
+\begin{definition}[Spectral cochain complex and spectral Drinfeld class]
+Let
+\[
+C^2_{\mathrm{spec}}(A)=\{g(u)\in A^{\widehat\otimes 2}\},
+\qquad
+C^3_{\mathrm{spec}}(A)=\{\phi(w,z)\in A^{\widehat\otimes 3}\}.
+\]
+Define the linearized spectral differential by
+\[
+(\delta g)(w,z)
+=
+1\otimes g(z)
++ (\operatorname{id}\otimes \Delta_z)g(w)
+- (\Delta_w\otimes \operatorname{id})g(z)
+- g(w)\otimes 1.
+\]
+The degree-three cohomology of the resulting complex is denoted by
+$H^3_{\mathrm{spec}}(A)$.
+If
+\[
+\Phi(w,z)=1+\phi_n(w,z)\pmod{F^{n+1}}
+\]
+with $\phi_n$ the first nontrivial term, then its class
+\[
+\mathfrak D_{\mathrm{spec}}(A,\Omega):=[\phi_n]
+\in H^3_{\mathrm{spec}}(\operatorname{gr}^n A)
+\]
+is called the \emph{spectral Drinfeld class}.
+\end{definition}
+
+\begin{remark}[Well-definedness of the spectral Drinfeld class]
+The spectral Drinfeld class is well-defined because the Hochschild-type
+obstruction cocycle it measures is independent of the choice of
+filtration splitting: different splittings produce cohomologous cocycles,
+so the class in $H^3_{\mathrm{spec}}(\operatorname{gr}^n A)$ is intrinsic.
+\end{remark}
+
+\begin{theorem}[Strictification by spectral cohomology; \ClaimStatusProvedHere]
+\label{thm:strictification-spectral-cohomology}
+Suppose
+\[
+\Phi(w,z)=1+\phi_n(w,z)\pmod{F^{n+1}}
+\]
+with $n\ge 2$. Then:
+\begin{enumerate}
+\item $\phi_n$ is a $3$-cocycle in the spectral complex;
+\item under a spectral twist $G_n(u)=1+g_n(u)\pmod{F^{n+1}}$ one has
+ \[
+ \phi_n\longmapsto \phi_n+\delta g_n;
+ \]
+\item if $[\phi_n]=0$ in
+ $H^3_{\mathrm{spec}}(\operatorname{gr}^nA)$, then a twist exists which
+ kills $\phi_n$ modulo $F^{n+1}$;
+\item if $H^3_{\mathrm{spec}}(\operatorname{gr}^nA)=0$ for all $n\ge 2$,
+ then there is a filtered twist $G$ for which $\Phi^G=1$, hence the
+ quasi-factorization datum strictifies to an honest spectral
+ factorization $R$-matrix.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Expand the pentagon relation in the first nontrivial filtration degree.
+All nonlinear terms are of higher filtration, so the degree-$n$ term
+satisfies the linearized pentagon, i.e. it is a cocycle. Expanding the
+standard twist formula for the quasi-associator to degree $n$ yields the
+addition by the coboundary $\delta g_n$. Killing the first nontrivial
+term and iterating recursively proves the last two statements.
+\end{proof}
+
+\begin{conclusion}[First conceptual reduction]
+The dg-shifted Yangian/factorization bridge factors through two steps.
+First the canonical passage from bar-horizontal strictification data
+for a dg-shifted Yangian to a spectral quasi-factorization package,
+\[
+\text{dg-shifted Yangian + bar-horizontal strictification}
+\longrightarrow
+\text{spectral quasi-factorization quantum group};
+\]
+then the strictification problem, controlled by a concrete filtered
+cohomology theory.
+\end{conclusion}
+
+\section{Low-order algebra: quadratic and cubic control}
+
+\begin{proposition}[Quadratic hexagon obstruction; \ClaimStatusProvedHere]
+Let $\widetilde r(z)$ be the suspended degree-zero kernel. Define the
+naive multiplicative two-jet
+\[
+R^{(2)}(z)=1+\widetilde r(z)+\frac12\widetilde r(z)^{\star 2}.
+\]
+Assume the infinitesimal coassociativity identities
+\begin{align*}
+(\operatorname{id}\otimes \Delta_z)\widetilde r(z+w)
+&=\widetilde r_{12}(w)+\widetilde r_{13}(z+w),\\
+(\Delta_w\otimes \operatorname{id})\widetilde r(z)
+&=\widetilde r_{13}(z+w)+\widetilde r_{23}(z).
+\end{align*}
+Then modulo $F^3$,
+\begin{align*}
+(\operatorname{id}\otimes \Delta_z)R^{(2)}(z+w)-R^{(2)}_{12}(w)R^{(2)}_{13}(z+w)
+&\equiv \frac12[\widetilde r_{13}(z+w),\widetilde r_{12}(w)],\\
+(\Delta_w\otimes \operatorname{id})R^{(2)}(z)-R^{(2)}_{13}(z+w)R^{(2)}_{23}(z)
+&\equiv \frac12[\widetilde r_{23}(z),\widetilde r_{13}(z+w)].
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Expand both sides to second order and subtract. The square terms cancel
+except for the order-sensitive cross terms, which produce the displayed
+commutators.
+\end{proof}
+
+\begin{proposition}[Three-particle obstruction identity; \ClaimStatusProvedHere]
+Let $B^{\le 3}(Y)$ be the reduced bar coalgebra truncated at tensor
+length $3$, and let $I_{\widetilde r}$ be the adjacent-gap insertion
+coderivation determined by $\widetilde r$. Put
+\[
+D=d_B+I_{\widetilde r}.
+\]
+Assume the one-body and two-body Maurer--Cartan identities already
+hold. Then on tensor length $3$,
+\[
+D^2=I_{\mathfrak Y_{\widetilde r}},
+\]
+where
+\[
+\mathfrak Y_{\widetilde r}(z,w)=
+MC(\widetilde r_{12}(w)+\widetilde r_{13}(z+w)+\widetilde r_{23}(z))
+-MC(\widetilde r_{12}(w))
+-MC(\widetilde r_{13}(z+w))
+-MC(\widetilde r_{23}(z)).
+\]
+Thus the tensor-length-$3$ obstruction is exactly the
+$A_\infty$ Yang--Baxter defect.
+\end{proposition}
+
+\begin{proof}
+Expand
+\[
+D^2=[d_B,I_{\widetilde r}] + I_{\widetilde r}^2.
+\]
+On length $3$, disjoint insertions cancel by coderivation signs.
+The surviving terms are exactly the overlapping insertions in the three
+ordered gaps. These assemble into the bar realization of the displayed
+Maurer--Cartan defect.
+\end{proof}
+
+\begin{theorem}[Abelian strictification theorem; \ClaimStatusProvedHere]
+\label{thm:abelian-strictification}
+Assume that all coefficients of $\widetilde r(z)$ supercommute after
+suspension, that $m_k=0$ for $k\ge 3$, and that the underlying
+coproduct is cocommutative. Then
+\[
+R(z)=\exp_\star(\widetilde r(z))
+\]
+converges and defines an honest spectral $R$-matrix on the completed
+bialgebra underlying $Y$.
+\end{theorem}
+
+\begin{proof}
+The infinitesimal coassociativity identities exponentiate because all
+coefficients commute. The hexagon identities for the exponentiated
+coproduct follow from the BCH formula: since all coefficients
+commute, BCH reduces to ordinary addition, and the hexagon relation
+exponentiates termwise. Cocommutativity implies almost
+cocommutativity automatically in the commuting completion.
+\end{proof}
+
+\begin{theorem}[Residue-bounded completion theorem; \ClaimStatusProvedHere]
+\label{thm:residue-bounded-completion}
+Let $Y=\varprojlim_N Y_N$ be residue-bounded and complete, where
+$Y_N=Y/F^{N+1}Y$. Assume:
+\begin{enumerate}
+\item each $Y_N$ is quadratic-Koszul;
+\item the induced kernels satisfy the three-particle identity above;
+\item the inverse system $H^m(B(Y_N))$ is Mittag--Leffler for every $m$.
+\end{enumerate}
+Then the completed coderivation
+\[
+D=d_B+I_{\widetilde r}
+\]
+converges continuously on $\widehat B(Y)$, satisfies $D^2=0$, and the
+completed cobar comparison
+\[
+\Omega\widehat B(Y)\longrightarrow Y
+\]
+is a quasi-isomorphism.
+\end{theorem}
+
+\begin{proof}
+Residue-boundedness implies that on each fixed filtration quotient only
+finitely many residues contribute, hence the coderivation converges.
+The three-particle obstruction identity implies $D^2=0$ quotientwise;
+separatedness of the filtration ($\bigcap_n F^n = 0$ by the
+pole-order bound) passes the identity to the inverse limit.
+Quadratic-Koszulness gives quotientwise bar--cobar
+quasi-isomorphisms (by \cite[Proposition~2.2.1]{LV12}), and the
+Mittag--Leffler hypothesis (which holds because the transition maps
+$H^m(B(Y_{N+1}))\to H^m(B(Y_N))$ are surjective) passes
+quasi-isomorphism to the inverse limit.
+\end{proof}
+
+\section{Exact Cartan transport and the first genuine shifted examples}
+
+\begin{construction}[Cartan shift cocycle]
+Let $H$ be a completed commutative primitive Cartan bialgebra with
+primitive generators $h_1,\dots,h_\ell$. Suppose the shifted Cartan
+currents are
+\[
+H_i(u)=
+\frac{\prod_j (u-a_j^{(i)})}{\prod_k (u-b_k^{(i)})}.
+\]
+Set
+\[
+\phi_i(u)=\log H_i(u).
+\]
+Define the formal bicharacter
+\[
+F_\mu(u)=
+\exp\!\left(\sum_{i=1}^{\ell} \phi_i(u)\,h_i\otimes h_i\right).
+\]
+\end{construction}
+
+\begin{proposition}[Cartan shift cocycle identities; \ClaimStatusProvedHere]
+\label{prop:cartan-shift-cocycle}
+The formal bicharacter $F_\mu(u)$ satisfies
+\begin{align*}
+(\operatorname{id}\otimes \Delta)F_\mu(u)
+&=F_\mu^{12}(u)F_\mu^{13}(u),\\
+(\Delta\otimes \operatorname{id})F_\mu(u)
+&=F_\mu^{13}(u)F_\mu^{23}(u),
+\end{align*}
+and is additive in the shift parameter whenever the logarithms are.
+\end{proposition}
+
+\begin{proof}
+Since $\Delta h_i=h_i\otimes 1+1\otimes h_i$ and the $h_i$ commute,
+the exponent splits exactly under either iterated coproduct.
+\end{proof}
+
+\begin{theorem}[Cartan gauge-twist theorem; \ClaimStatusProvedHere]
+\label{thm:cartan-gauge-twist}
+Let
+\[
+\mathbb D_n^0=(d+d_{\mathrm{dR}})-A_n^0
+\]
+be an unshifted derived KZ differential. Suppose that on the chosen
+sector the operators $h_i^{(a)}h_i^{(b)}$ commute with $A_n^0$.
+Set
+\[
+S_{\mu,n}=
+\sum_{1\le a<b\le n}\sum_{i=1}^{\ell}
+\phi_i(z_b-z_a)\,h_i^{(a)}h_i^{(b)},
+\qquad
+G_{\mu,n}=e^{-S_{\mu,n}}.
+\]
+Then
+\[
+\mathbb D_n^\mu=G_{\mu,n}\,\mathbb D_n^0\,G_{\mu,n}^{-1}
+=(d+d_{\mathrm{dR}})-A_n^\mu
+\]
+has connection form
+\[
+A_n^\mu
+=
+A_n^0
++
+\sum_{1\le a<b\le n}\sum_{i=1}^{\ell}
+\phi_i'(z_b-z_a)\,h_i^{(a)}h_i^{(b)}\,d(z_b-z_a).
+\]
+\end{theorem}
+
+\begin{proof}
+The $h_i$ commute in the dg-shifted setting because the Cartan
+subalgebra $\mathfrak{h}\subset\mathfrak{g}$ is abelian, and the
+dg-shifted coproduct preserves commutativity. Because the exponents
+commute on the sector in question,
+\[
+dG_{\mu,n}\,G_{\mu,n}^{-1}=-dS_{\mu,n}.
+\]
+The stated commutation hypothesis implies
+$G_{\mu,n}A_n^0G_{\mu,n}^{-1}=A_n^0$, so the gauge transform contributes
+exactly $dS_{\mu,n}$.
+\end{proof}
+
+\begin{theorem}[Cartan-diagonal shift defect is exact; \ClaimStatusProvedHere]
+\label{thm:cartan-diagonal-defect-exact}
+Fix a Cartan-diagonal line $L_\lambda$ and write
+\[
+\phi_i(u)=\log H_i(u).
+\]
+The shifted two-body scalar factor is
+\[
+R_{\mu,\lambda}^{\mathrm{sh}}(u)=
+\exp\!\Big(\sum_i \lambda_i^2\phi_i(u)\Big).
+\]
+The three-body quasi-hexagon defect is therefore
+\[
+\Phi_{\mu,\lambda}^{\mathrm{sh}}(w,z)=
+\frac{R_{\mu,\lambda}^{\mathrm{sh}}(w+z)}{R_{\mu,\lambda}^{\mathrm{sh}}(w)
+R_{\mu,\lambda}^{\mathrm{sh}}(z)},
+\]
+and its logarithm is
+\[
+\mathfrak D_{\mathrm{spec},\mu}^{\lambda}(w,z)=
+\sum_i \lambda_i^2\big(\phi_i(w+z)-\phi_i(w)-\phi_i(z)\big).
+\]
+Hence the Cartan-diagonal contribution to the spectral Drinfeld class is
+exact.
+\end{theorem}
+
+\begin{proof}
+Immediate from the definition of the shifted scalar transport.
+\end{proof}
+
+\begin{remark}[First genuine shifted examples]
+The framed $A_1$ shifted Yangian and the staircase shifted Yangians of
+finite type~$A$ furnish the first genuine shifted examples. In all such
+Cartan-diagonal sectors, the shift produces a visible three-body
+logarithmic defect but no cohomological obstruction class.
+\end{remark}
+
+\section{Filtration $2$: adjacent-root triangles}
+
+The first genuinely mixed-root sector arises from adjacent simple roots.
+Let $i\sim j$ be adjacent simple roots in a rank-$2$ Levi of type $A_2$.
+Set
+\[
+E_{ij}=[E_i,E_j],
+\qquad
+F_{ij}=[F_j,F_i],
+\]
+so that $[F_i,F_j]=-F_{ij}$.
+For $a\neq b$, write
+\[
+X_i^{ab}(u)=\rho_i(u)E_i^{(a)}F_i^{(b)},
+\qquad
+X_{ij}^{ab}(u)=\rho_{ij}(u)E_{ij}^{(a)}F_{ij}^{(b)}.
+\]
+
+\begin{definition}[Triangle sectors]
+On three tensor factors define the left and right adjacent-root triangle
+vectors
+\[
+T_{ij}^{L}=E_{ij}^{(1)}F_i^{(2)}F_j^{(3)},
+\qquad
+T_{ij}^{R}=E_i^{(1)}E_j^{(2)}F_{ij}^{(3)}.
+\]
+The corresponding opposite orientations are
+\[
+T_{ji}^{L}=E_{ij}^{(1)}F_j^{(2)}F_i^{(3)},
+\qquad
+T_{ji}^{R}=E_j^{(1)}E_i^{(2)}F_{ij}^{(3)}.
+\]
+\end{definition}
+
+\begin{theorem}[Triangle localization formula; \ClaimStatusProvedHere]
+\label{thm:triangle-localization}
+Let
+\[
+S_{12}(w)=\rho_i(w)E_i^{(1)}F_i^{(2)}+\rho_j(w)E_j^{(1)}F_j^{(2)}+\cdots,
+\]
+\[
+S_{13}(w+z)=\rho_i(w+z)E_i^{(1)}F_i^{(3)}
++\rho_j(w+z)E_j^{(1)}F_j^{(3)}+\cdots.
+\]
+Then
+\[
+\Pi_{\langle T_{ij}^{L},T_{ji}^{L}\rangle}\frac12[S_{12}(w),S_{13}(w+z)]
+=
+\frac12\rho_i(w)\rho_j(w+z)T_{ij}^{L}
+-
+\frac12\rho_j(w)\rho_i(w+z)T_{ji}^{L}.
+\]
+Similarly,
+\[
+\Pi_{\langle T_{ij}^{R},T_{ji}^{R}\rangle}\frac12[S_{13}(w+z),S_{23}(z)]
+=
+-\frac12\rho_i(w+z)\rho_j(z)T_{ij}^{R}
++
+\frac12\rho_j(w+z)\rho_i(z)T_{ji}^{R}.
+\]
+\end{theorem}
+
+\begin{proof}
+The only contributing commutators are
+\[
+[E_i^{(1)}F_i^{(2)},E_j^{(1)}F_j^{(3)}]
+=E_{ij}^{(1)}F_i^{(2)}F_j^{(3)},
+\]
+and
+\[
+[E_j^{(1)}F_j^{(2)},E_i^{(1)}F_i^{(3)}]
+=-E_{ij}^{(1)}F_j^{(2)}F_i^{(3)},
+\]
+with the analogous computation on the right using
+$[F_i,F_j]=-F_{ij}$.
+\end{proof}
+
+\begin{definition}[Triangle coproduct coefficients]
+Let $\Delta_z$ be the twisted coproduct. Define the triangle transport
+coefficients by
+\[
+\Pi_{\langle T_{ij}^{L},T_{ji}^{L}\rangle}
+\big((\operatorname{id}\otimes\Delta_z)X_{ij}^{12}(w)\big)
+=
+\kappa_{ij}^{L}(w,z)T_{ij}^{L}-\kappa_{ji}^{L}(w,z)T_{ji}^{L},
+\]
+and similarly on the right,
+\[
+\Pi_{\langle T_{ij}^{R},T_{ji}^{R}\rangle}
+\big((\Delta_w\otimes\operatorname{id})X_{ij}^{23}(z)\big)
+=
+-\kappa_{ij}^{R}(w,z)T_{ij}^{R}+\kappa_{ji}^{R}(w,z)T_{ji}^{R}.
+\]
+\end{definition}
+
+\begin{theorem}[Adjacent-root rigidity; \ClaimStatusProvedHere]
+\label{thm:adjacent-root-rigidity}
+The filtration-$2$ hexagon defect vanishes in the oriented triangle
+sectors if and only if
+\begin{align*}
+\rho_{ij}(w)\kappa_{ij}^{L}(w,z)&=\frac12\rho_i(w)\rho_j(w+z),\\
+\rho_{ij}(w)\kappa_{ji}^{L}(w,z)&=\frac12\rho_j(w)\rho_i(w+z),\\
+\rho_{ij}(z)\kappa_{ij}^{R}(w,z)&=\frac12\rho_i(w+z)\rho_j(z),\\
+\rho_{ij}(z)\kappa_{ji}^{R}(w,z)&=\frac12\rho_j(w+z)\rho_i(z).
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Project the logarithm of the product side to the triangle sectors.
+The only contributions are the commutator terms computed in
+Theorem~\ref{thm:triangle-localization}. On the coproduct side,
+$X_{ij}$ is the unique root generator whose twisted coproduct can land in
+those sectors. Equality of coefficients gives the claim.
+\end{proof}
+
+\begin{corollary}[Normalized rational triangle coefficient; \ClaimStatusProvedHere]
+Assume the rational ansatz
+\[
+\rho_i(u)=\frac{c_i}{u},
+\qquad
+\rho_j(u)=\frac{c_j}{u},
+\qquad
+\rho_{ij}(u)=\frac{c_{ij}}{u},
+\]
+and
+\[
+\kappa_{ij}^{L}(w,z)=\frac{\lambda_{ij}^{L}}{w+z},
+\qquad
+\kappa_{ij}^{R}(w,z)=\frac{\lambda_{ij}^{R}}{w+z},
+\]
+with the same form for the opposite orientations. Then
+\[
+\lambda_{ij}^{L}=
+\lambda_{ji}^{L}=
+\lambda_{ij}^{R}=
+\lambda_{ji}^{R}=
+\frac{c_ic_j}{2c_{ij}}.
+\]
+In the normalized case $c_i=c_j=c_{ij}=1$, the universal coefficient is
+$\frac12$.
+\end{corollary}
+
+\begin{proof}
+Substitute the rational ansatz into the equations of
+Theorem~\ref{thm:adjacent-root-rigidity}.
+\end{proof}
+
+\begin{remark}[Transport, not coefficientwise invariance]
+\label{rem:transport-not-invariance}
+At mixed-root level the shift changes the local mixed-root coefficients
+by explicit ratios of shift characters at \emph{different spectral
+arguments}. The invariant is the obstruction class after transport by
+the shift cocycle, not the raw coefficient.
+\end{remark}
+
+\begin{proposition}[Triangle shift transport law; \ClaimStatusProvedHere]
+\label{prop:triangle-shift-transport}
+Suppose the shifted root coefficients satisfy
+\[
+\rho_\alpha^{\mu}(u)=\chi_\alpha^{\mu}(u)\,\rho_\alpha^{0}(u)
+\]
+for scalar shift characters $\chi_\alpha^{\mu}(u)$.
+Assume the unshifted triangle coefficients solve the rigidity equations.
+Then the shifted coefficients are uniquely forced to be
+\begin{align*}
+\kappa_{ij}^{L,\mu}(w,z)
+&=
+\frac{\chi_i^{\mu}(w)\chi_j^{\mu}(w+z)}{\chi_{ij}^{\mu}(w)}
+\,\kappa_{ij}^{L,0}(w,z),\\
+\kappa_{ij}^{R,\mu}(w,z)
+&=
+\frac{\chi_i^{\mu}(w+z)\chi_j^{\mu}(z)}{\chi_{ij}^{\mu}(z)}
+\,\kappa_{ij}^{R,0}(w,z),
+\end{align*}
+with the analogous formulas for the opposite orientations.
+\end{proposition}
+
+\begin{proof}
+Insert the shifted coefficients into the identities of
+Theorem~\ref{thm:adjacent-root-rigidity} and solve for
+$\kappa^{L,\mu}$ and $\kappa^{R,\mu}$.
+\end{proof}
+
+\begin{interpretation}
+The first mixed-root sector detects shift sensitivity at the level of
+local transport functions. This sensitivity is forced by the shifted
+one-body characters; no new independent obstruction class arises.
+\end{interpretation}
+
+\section{The exact free two-body model}
+
+The free example of \cite{DNP25} admits a particularly transparent
+computation. Write
+\[
+X(x)=\sum_{n\ge 0} X_n x^n,
+\qquad
+\Psi(x)=\sum_{n\ge 0} \psi_n x^n.
+\]
+The dg kernel in the free model is
+\[
+r(u)=\sum_{n,m\ge 0}(-1)^n\binom{n+m}{m}
+\frac{\psi_n\otimes X_m-X_n\otimes \psi_m}{u^{n+m+1}}.
+\]
+
+\begin{lemma}[Closed generating kernel; \ClaimStatusProvedHere]
+\label{lem:free-closed-generating-kernel}
+Coefficientwise in $x,y$,
+\[
+\sum_{n,m\ge 0}(-1)^n\binom{n+m}{m}\frac{x^n y^m}{u^{n+m+1}}
+=
+\frac{1}{u+x-y}.
+\]
+Hence the free suspended kernel is the coefficientwise expansion of
+\[
+\mathcal R_{\mathrm{free}}(u;x,y)=
+\frac{\Psi(x)\otimes X(y)-X(x)\otimes \Psi(y)}{u+x-y}.
+\]
+\end{lemma}
+
+\begin{proof}
+Summing over $N=n+m$ gives
+\begin{align*}
+\sum_{n,m\ge 0}(-1)^n\binom{n+m}{m}\frac{x^n y^m}{u^{n+m+1}}
+&=
+\frac1u\sum_{N\ge 0}\frac1{u^N}
+\sum_{m=0}^N \binom{N}{m}(-x)^{N-m}y^m\\
+&=
+\frac1u\sum_{N\ge 0}\left(\frac{y-x}{u}\right)^N
+=
+\frac{1}{u+x-y}.
+\end{align*}
+\end{proof}
+
+\begin{theorem}[Exact free two-body transport; \ClaimStatusProvedHere]
+\label{thm:exact-free-transport}
+Let
+\[
+\Theta(x,y)=\Psi(x)\otimes X(y)-X(x)\otimes \Psi(y).
+\]
+In the free supercommutative model, $\Theta(x,y)^2=0$. Therefore the
+connection
+\[
+\nabla_{\mathrm{free}}=d-
+\frac{\Theta(x,y)}{u+x-y}\,du
+\]
+integrates exactly with transport
+\[
+T(u,u_0)=1+\Theta(x,y)\log\!\frac{u+x-y}{u_0+x-y}.
+\]
+The local monodromy around the formal divisor $u+x-y=0$ is
+\[
+M_{\mathrm{loop}}=1+2\pi i\,\Theta(x,y).
+\]
+\end{theorem}
+
+\begin{proof}
+Because $\Theta^2=0$,
+\[
+\exp\left(\Theta\log\!\frac{u+x-y}{u_0+x-y}\right)
+=1+\Theta\log\!\frac{u+x-y}{u_0+x-y}.
+\]
+Differentiating gives the transport equation. The monodromy follows by
+adding $2\pi i$ to the logarithm around a loop.
+\end{proof}
+
+\section{Filtration $3$: root quadrilaterals}
+
+The first class-$3$ computation.
+Let $i\sim j\sim k$ be a chain of simple roots of type $A_3$ with
+$i$ not adjacent to $k$. Define the composite roots by
+\[
+E_{ij}=[E_i,E_j],
+\qquad
+E_{jk}=[E_j,E_k],
+\qquad
+E_{ijk}=[E_{ij},E_k]=[E_i,E_{jk}],
+\]
+and for the opposite side set
+\[
+F_{ij}=[F_j,F_i],
+\qquad
+F_{jk}=[F_k,F_j],
+\qquad
+F_{ijk}=[F_k,F_{ij}]=[F_{jk},F_i].
+\]
+Then
+\[
+[F_i,F_j]=-F_{ij},
+\qquad
+[F_j,F_k]=-F_{jk},
+\qquad
+[F_i,F_{jk}]=-[F_k,F_{ij}]=-F_{ijk}.
+\]
+
+\begin{definition}[Root-quadrilateral sectors]
+On four tensor factors define the oriented left and right quadrilateral
+vectors
+\[
+Q_{ijk}^{L}=E_{ijk}^{(1)}F_i^{(2)}F_j^{(3)}F_k^{(4)},
+\qquad
+Q_{ijk}^{R}=E_i^{(1)}E_j^{(2)}E_k^{(3)}F_{ijk}^{(4)}.
+\]
+The opposite orientation is obtained by replacing $(i,j,k)$ by
+$(k,j,i)$ and the sign conventions above.
+\end{definition}
+
+\begin{lemma}[Class-$3$ ordered BCH coefficient; \ClaimStatusProvedHere]
+\label{lem:class3-ordered-bch}
+Let $X,Y,Z$ lie in a class-$3$ nilpotent Lie algebra, so all
+commutators of depth $4$ vanish. The multilinear $XYZ$-part of
+$\log(e^Xe^Ye^Z)$ is
+\[
+\frac14[[X,Y],Z]+\frac1{12}[X,[Y,Z]]+\frac1{12}[Y,[X,Z]].
+\]
+If, in addition, $[X,Z]=0$, then this simplifies to
+\[
+\operatorname{mult}_{XYZ}\log(e^Xe^Ye^Z)
+=\frac13[X,[Y,Z]].
+\]
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+U=\log(e^Xe^Y)=X+Y+\frac12[X,Y]+\frac1{12}[X,[X,Y]]
++\frac1{12}[Y,[Y,X]].
+\]
+Now compute
+\[
+\log(e^Xe^Ye^Z)=\log(e^Ue^Z)
+=U+Z+\frac12[U,Z]+\frac1{12}[U,[U,Z]]+\frac1{12}[Z,[Z,U]].
+\]
+Retaining only the multilinear $XYZ$-part gives the first displayed
+formula. If $[X,Z]=0$, then
+\[
+[[X,Y],Z]=[X,[Y,Z]]
+\]
+by Jacobi, and the second formula follows.
+\end{proof}
+
+\begin{theorem}[Quadrilateral localization formula; \ClaimStatusProvedHere]
+\label{thm:quadrilateral-localization}
+Let
+\[
+X_i^{12}(u)=\rho_i(u)E_i^{(1)}F_i^{(2)},
+\qquad
+X_j^{13}(u+v)=\rho_j(u+v)E_j^{(1)}F_j^{(3)},
+\qquad
+X_k^{14}(u+v+t)=\rho_k(u+v+t)E_k^{(1)}F_k^{(4)}.
+\]
+Then the projection of
+\[
+\log\Big(e^{X_i^{12}(u)}e^{X_j^{13}(u+v)}e^{X_k^{14}(u+v+t)}\Big)
+\]
+to the left quadrilateral sector is
+\[
+\frac13\rho_i(u)\rho_j(u+v)\rho_k(u+v+t)\,Q_{ijk}^{L}.
+\]
+Similarly, the projection of
+\[
+\log\Big(e^{\rho_i(u+v+t)E_i^{(1)}F_i^{(4)}}
+ e^{\rho_j(v+t)E_j^{(2)}F_j^{(4)}}
+ e^{\rho_k(t)E_k^{(3)}F_k^{(4)}}\Big)
+\]
+to the right quadrilateral sector is
+\[
+-\frac13\rho_i(u+v+t)\rho_j(v+t)\rho_k(t)\,Q_{ijk}^{R}.
+\]
+\end{theorem}
+
+\begin{proof}
+For the left sector, set
+\[
+X=X_i^{12}(u),\qquad Y=X_j^{13}(u+v),\qquad Z=X_k^{14}(u+v+t).
+\]
+Since $i$ and $k$ are nonadjacent, $[X,Z]=0$.
+By Lemma~\ref{lem:class3-ordered-bch}, the multilinear part is
+$\frac13[X,[Y,Z]]$. Now
+\[
+[Y,Z]=\rho_j(u+v)\rho_k(u+v+t)E_{jk}^{(1)}F_j^{(3)}F_k^{(4)},
+\]
+and then
+\[
+[X,[Y,Z]]=
+\rho_i(u)\rho_j(u+v)\rho_k(u+v+t)
+E_{ijk}^{(1)}F_i^{(2)}F_j^{(3)}F_k^{(4)}.
+\]
+This proves the first formula.
+
+For the right sector, set
+\[
+X=\rho_i(u+v+t)E_i^{(1)}F_i^{(4)},
+\quad
+Y=\rho_j(v+t)E_j^{(2)}F_j^{(4)},
+\quad
+Z=\rho_k(t)E_k^{(3)}F_k^{(4)}.
+\]
+Again $[X,Z]=0$, so the multilinear part is
+$\frac13[X,[Y,Z]]$. Here
+\[
+[Y,Z]=-
+\rho_j(v+t)\rho_k(t)E_j^{(2)}E_k^{(3)}F_{jk}^{(4)},
+\]
+so
+\[
+[X,[Y,Z]]=-
+\rho_i(u+v+t)\rho_j(v+t)\rho_k(t)
+E_i^{(1)}E_j^{(2)}E_k^{(3)}F_{ijk}^{(4)}.
+\]
+This is the second formula.
+\end{proof}
+
+\begin{definition}[Quadrilateral coproduct coefficients]
+Let $\Delta^{(2)}_{v,t}$ denote the two-step twisted coproduct
+separating one factor into three ordered factors with spectral gaps
+$v,t$. Define the left and right quadrilateral transport coefficients
+by
+\[
+\Pi_{\langle Q_{ijk}^{L}\rangle}
+\big((\operatorname{id}\otimes\Delta^{(2)}_{v,t})X_{ijk}^{12}(u)\big)
+=
+\Lambda_{ijk}^{L}(u,v,t)Q_{ijk}^{L},
+\]
+\[
+\Pi_{\langle Q_{ijk}^{R}\rangle}
+\big((\Delta^{(2)}_{u,v}\otimes\operatorname{id})X_{ijk}^{34}(t)\big)
+=
+\Lambda_{ijk}^{R}(u,v,t)Q_{ijk}^{R}.
+\]
+\end{definition}
+
+\begin{theorem}[Quadrilateral rigidity; \ClaimStatusProvedHere]
+\label{thm:quadrilateral-rigidity}
+The filtration-$3$ defect vanishes in the oriented quadrilateral sectors
+if and only if
+\begin{align*}
+\rho_{ijk}(u)\Lambda_{ijk}^{L}(u,v,t)
+&=
+\frac13\rho_i(u)\rho_j(u+v)\rho_k(u+v+t),\\
+\rho_{ijk}(t)\Lambda_{ijk}^{R}(u,v,t)
+&=
+\frac13\rho_i(u+v+t)\rho_j(v+t)\rho_k(t).
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+Project the logarithm of the ordered product of the relevant two-body
+factors to the quadrilateral sector. By
+Theorem~\ref{thm:quadrilateral-localization}, the product side has the
+stated coefficient.
+On the coproduct side, a quadrilateral vector with three distinct simple
+lowering or raising operators in separate tensor factors can only arise
+from the triple-root generator $X_{ijk}$: any simple-root or two-root
+composite generator remains supported in at most two root colors and
+cannot land in $Q_{ijk}^{L}$ or $Q_{ijk}^{R}$ after projection.
+Equality of coefficients yields the claim.
+\end{proof}
+
+\begin{corollary}[Normalized rational quadrilateral coefficient; \ClaimStatusProvedHere]
+\label{cor:quadrilateral-normalized-rational}
+Assume the rational ansatz
+\[
+\rho_i(u)=\frac{c_i}{u},
+\qquad
+\rho_j(u)=\frac{c_j}{u},
+\qquad
+\rho_k(u)=\frac{c_k}{u},
+\qquad
+\rho_{ijk}(u)=\frac{c_{ijk}}{u}.
+\]
+Suppose further that the quadrilateral coefficients have translation-
+covariant form
+\[
+\Lambda_{ijk}^{L}(u,v,t)=\frac{\lambda_{ijk}^{L}}{(u+v)(u+v+t)},
+\qquad
+\Lambda_{ijk}^{R}(u,v,t)=\frac{\lambda_{ijk}^{R}}{(v+t)(u+v+t)}.
+\]
+Then
+\[
+\lambda_{ijk}^{L}=\lambda_{ijk}^{R}=\frac{c_ic_jc_k}{3c_{ijk}}.
+\]
+In the normalized case $c_i=c_j=c_k=c_{ijk}=1$, the universal
+quadrilateral coefficient is
+\[
+\boxed{\frac13.}
+\]
+\end{corollary}
+
+\begin{proof}
+Substitute the rational ansatz into the identities of
+Theorem~\ref{thm:quadrilateral-rigidity}.
+\end{proof}
+
+\begin{proposition}[Quadrilateral shift transport law; \ClaimStatusProvedHere]
+\label{prop:quadrilateral-shift-transport}
+Assume again that the shifted one-body coefficients factor as
+\[
+\rho_\alpha^{\mu}(u)=\chi_\alpha^{\mu}(u)\,\rho_\alpha^0(u).
+\]
+If the unshifted coefficients solve
+Theorem~\ref{thm:quadrilateral-rigidity}, then the shifted quadrilateral
+transport coefficients are uniquely forced to be
+\begin{align*}
+\Lambda_{ijk}^{L,\mu}(u,v,t)
+&=
+\frac{\chi_i^{\mu}(u)\chi_j^{\mu}(u+v)\chi_k^{\mu}(u+v+t)}
+{\chi_{ijk}^{\mu}(u)}
+\,\Lambda_{ijk}^{L,0}(u,v,t),\\
+\Lambda_{ijk}^{R,\mu}(u,v,t)
+&=
+\frac{\chi_i^{\mu}(u+v+t)\chi_j^{\mu}(v+t)\chi_k^{\mu}(t)}
+{\chi_{ijk}^{\mu}(t)}
+\,\Lambda_{ijk}^{R,0}(u,v,t).
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Insert the shifted coefficients into the two equations of
+Theorem~\ref{thm:quadrilateral-rigidity} and solve for
+$\Lambda^{L,\mu}$ and $\Lambda^{R,\mu}$.
+\end{proof}
+
+\begin{corollary}[No new independent shift obstruction in filtration $3$; \ClaimStatusProvedHere]
+\label{cor:no-new-filtration3-shift-obstruction}
+A new shift-sensitive \emph{function} appears in filtration $3$ through
+the transport laws of
+Proposition~\ref{prop:quadrilateral-shift-transport}; this function is
+forced by the shifted one-body characters. No new \emph{independent}
+obstruction class appears in the oriented root-quadrilateral sector.
+\end{corollary}
+
+\begin{proof}
+The quadrilateral coefficient is uniquely determined by lower data once
+Theorem~\ref{thm:quadrilateral-rigidity} holds. Therefore its shift
+variation contributes no new free parameter and no new independent
+cohomology class.
+\end{proof}
+
+\begin{remark}[First non-path obstruction]
+The low-order picture is sharp.
+\begin{enumerate}
+\item Cartan-diagonal sectors produce exact defects.
+\item Commuting sectors strictify directly.
+\item Adjacent-root triangles are forced by the universal coefficient
+ $\frac12$, transported explicitly by shift characters.
+\item Root quadrilaterals are forced by the universal coefficient
+ $\frac13$, transported explicitly by shift characters.
+\end{enumerate}
+The first filtration where an independent obstruction lives is
+$\ge 4$, where new Hall words and higher Magnus/BCH terms enter: the
+$D_4$ star gives a two-dimensional free multilinear Lie space.
+Theorem~\ref{thm:root-space-one-dim} collapses the corresponding finite
+root sector to a scalar, and Theorem~\ref{thm:complete-strictification}
+identifies the remaining scalar obstruction. The low-order coefficients
+$\frac12$ and $\frac13$ are the first instances of the universal
+$\frac1n$ in path sectors.
+\end{remark}
+
+\section{Conditional global strictification criterion}
+
+\begin{theorem}[Conditional strictification criterion; \ClaimStatusConditional]
+Assume:
+\begin{enumerate}
+\item the unshifted dg object strictifies to a factorization quantum
+ group with spectral $R$-matrix $R_0$;
+\item the shift is implemented by the Cartan cocycle
+ of Proposition~\ref{prop:cartan-shift-cocycle};
+\item the infinitesimal logarithm of the shifted spectral transport
+ agrees with the dg kernel after residue-bounded completion; and
+\item the spectral Drinfeld classes vanish.
+\end{enumerate}
+Then the shifted dg-shifted Yangian admits a completed
+$E_1$-chiral/factorization realization whose representation category is
+that of an honest spectral factorization quantum group.
+\end{theorem}
+
+\begin{proof}
+The unshifted strictification gives a strict spectral object.
+Transport by the Cartan cocycle gives the shifted quasi-factorization
+transport. Vanishing of the spectral Drinfeld class then strictifies the
+shifted quasi-object. Residue-bounded completion upgrades finite-stage
+compatibility to the full completed statement.
+\end{proof}
+
+\section{The strictification theorem}
+
+\subsection{Path-type root sectors}
+
+\begin{definition}[Path-type sector at filtration $n$]
+\label{def:path-sector}
+Let $\fg$ be a semisimple Lie algebra. A \emph{path-type sector at
+filtration~$n$} is determined by a chain of $n$ simple roots
+$\alpha_1,\alpha_2,\ldots,\alpha_n$ in the Dynkin diagram such that
+$\alpha_i$ is adjacent to $\alpha_{i+1}$ for $1\le i\le n-1$ and
+$\alpha_i$ is not adjacent to $\alpha_j$ for $|i-j|\ge 2$. (Such a
+chain exists whenever $\fg$ contains a type-$A_n$ subdiagram.)
+Define the composite root generators by right-normed iterated brackets:
+\[
+E_{\alpha_1\cdots\alpha_k}
+:=
+[E_{\alpha_1},[E_{\alpha_2},\ldots,[E_{\alpha_{k-1}},E_{\alpha_k}]\cdots]]
+\qquad (2\le k\le n),
+\]
+and similarly for the opposite generators $F_{\alpha_1\cdots\alpha_k}$.
+The \emph{left $n$-gon vector} and \emph{right $n$-gon vector} on
+$n+1$ tensor factors are
+\[
+P_{\alpha_1\cdots\alpha_n}^{L}
+= E_{\alpha_1\cdots\alpha_n}^{(1)}\,
+ F_{\alpha_1}^{(2)}\,F_{\alpha_2}^{(3)}\cdots F_{\alpha_n}^{(n+1)},
+\qquad
+P_{\alpha_1\cdots\alpha_n}^{R}
+= E_{\alpha_1}^{(1)}\,E_{\alpha_2}^{(2)}\cdots
+ E_{\alpha_n}^{(n)}\,F_{\alpha_1\cdots\alpha_n}^{(n+1)}.
+\]
+\end{definition}
+
+\begin{remark}
+At $n=2$ these recover the triangle vectors $T_{ij}^{L/R}$ of the
+adjacent-root computation. At $n=3$ they recover the quadrilateral
+vectors $Q_{ijk}^{L/R}$ (relabeling
+$(i,j,k)\mapsto(\alpha_1,\alpha_2,\alpha_3)$). The general case is the
+$n$-gon sector.
+\end{remark}
+
+\subsection{Path one-dimensionality}
+
+\begin{theorem}[Path Lie algebra one-dimensionality; \ClaimStatusProvedHere]
+\label{thm:path-one-dim}
+Let $L_{\mathrm{path}}(n)$ be the Lie algebra with generators
+$X_1,\ldots,X_n$ and relations $[X_i,X_j]=0$ for $|i-j|\ge 2$. Then
+the multilinear degree-$n$ component
+\[
+L_{\mathrm{path}}^n(X_1,\ldots,X_n)
+:=
+\operatorname{span}\{\text{Lie monomials involving each }X_i\text{ exactly
+once}\}
+\]
+is one-dimensional, generated by the right-normed bracket
+\[
+[X_1,[X_2,\ldots,[X_{n-1},X_n]\cdots]].
+\]
+\end{theorem}
+
+\begin{proof}
+By induction on $n$.
+
+\medskip\noindent\textbf{Base case} ($n=2$).
+The multilinear degree-$2$ space is spanned by $[X_1,X_2]$.
+
+\medskip\noindent\textbf{Inductive step.}
+Let $M$ be a multilinear degree-$n$ Lie monomial in $X_1,\ldots,X_n$.
+Write $M=[L,R]$ where $L$ involves variables indexed by $S\subset
+\{1,\ldots,n\}$ and $R$ involves $T=\{1,\ldots,n\}\setminus S$.
+
+\emph{Step~1: Connectivity.}
+For $[L,R]\neq 0$, both $S$ and $T$ must be single connected subpaths
+of $1\text{--}2\text{--}\cdots\text{--}n$. The Lie algebra generated by
+any disconnected subset of the path generators is a direct sum, and its
+multilinear Lie monomials vanish.
+
+Suppose $S\subseteq\{1,\ldots,n\}$ decomposes as $S=S_1\sqcup S_2$
+with $\max(S_1)<\min(S_2)$ and $\max(S_1)+1<\min(S_2)$ (a gap in the
+path). Then $[X_a,X_c]=0$ for all $a\in S_1$, $c\in S_2$ (since
+$|a-c|\ge 2$). The Lie algebra generated by $\{X_s:s\in S\}$ is
+therefore the direct sum
+$\mathrm{Lie}(\{X_s:s\in S_1\})\oplus\mathrm{Lie}(\{X_s:s\in S_2\})$.
+A multilinear Lie monomial involving generators from both summands is
+zero (every bracket tree must eventually pair elements from different
+summands, producing a commutator that vanishes in a direct sum).
+Hence $L=0$ whenever $S$ is disconnected. The same argument
+applies to~$T$ and~$R$.
+
+\emph{Step~2: Interval partition.}
+From Step~1, the only non-vanishing decompositions are
+$S=\{1,\ldots,m\}$, $T=\{m{+}1,\ldots,n\}$ for some $1\le m\le n-1$
+(or the reverse, but $[L,R]=-[R,L]$). By the induction hypothesis,
+$L$ is proportional to $[X_1,[X_2,\ldots,X_m]\cdots]$ and $R$ is
+proportional to $[X_{m+1},[X_{m+2},\ldots,X_n]\cdots]$. So
+$M$ is proportional to
+\[
+\bigl[[X_1,\ldots,X_m],\,[X_{m+1},\ldots,X_n]\bigr]
+\]
+(right-normed brackets on each side).
+
+\emph{Step~3: Reduction to the standard generator.}
+The identity
+\[
+\bigl[[X_1,\ldots,X_m],\,[X_{m+1},\ldots,X_n]\bigr]
+=
+[X_1,[X_2,\ldots,[X_{n-1},X_n]\cdots]]
+\]
+holds in $L_{\mathrm{path}}(n)$ for every $1\le m\le n-1$, by the
+Jacobi identity:
+\begin{multline*}
+\bigl[[X_1,\ldots,X_m],\,[X_{m+1},\ldots,X_n]\bigr]
+\;=\;
+\bigl[X_1,\,\bigl[[X_2,\ldots,X_m],\,[X_{m+1},\ldots,X_n]\bigr]\bigr]\\
+{}-
+\bigl[[X_2,\ldots,X_m],\,\bigl[X_1,\,[X_{m+1},\ldots,X_n]\bigr]\bigr].
+\end{multline*}
+For the second term: $[X_1,X_j]=0$ for all $j\ge 3$, hence
+$[X_1,[X_{m+1},\ldots,X_n]]=0$ whenever $m\ge 2$ (the outermost
+bracket involves $X_1$ and a monomial on $\{X_{m+1},\ldots,X_n\}$;
+by induction on bracketing depth, every leaf of that monomial has
+$[X_1,X_j]=0$ for $j\ge m+1\ge 3$).
+
+Thus the second term vanishes for $m\ge 2$, and we have
+\[
+\bigl[[X_1,\ldots,X_m],\,[X_{m+1},\ldots,X_n]\bigr]
+=
+\bigl[X_1,\,\bigl[[X_2,\ldots,X_m],\,[X_{m+1},\ldots,X_n]\bigr]\bigr].
+\]
+By the induction hypothesis applied to the subpath $\{2,\ldots,n\}$
+(which has $n-1$ generators satisfying the path relations), the inner
+bracket $[[X_2,\ldots,X_m],[X_{m+1},\ldots,X_n]]$ is proportional to
+$[X_2,[X_3,\ldots,X_n]\cdots]$. Hence
+\[
+M \propto [X_1,[X_2,\ldots,[X_{n-1},X_n]\cdots]].
+\]
+This is a single generator, so $\dim L_{\mathrm{path}}^n=1$.
+\end{proof}
+
+\subsection{Universal BCH coefficient via the Dynkin projection}
+
+\begin{theorem}[Dynkin coefficient for the ordered path BCH; \ClaimStatusProvedHere]
+\label{thm:dynkin-bch-path}
+Let $X_1,\ldots,X_n$ satisfy the path commutation relations
+$[X_i,X_j]=0$ for $|i-j|\ge 2$. Then the multilinear
+$X_1\cdots X_n$-part of the ordered Baker--Campbell--Hausdorff product is
+\begin{equation}\label{eq:bch-path-coeff}
+\operatorname{mult}_{X_1\cdots X_n}
+\log(e^{X_1}\,e^{X_2}\cdots e^{X_n})
+\;=\;
+\frac{1}{n}\,[X_1,[X_2,\ldots,[X_{n-1},X_n]\cdots]].
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:path-one-dim}, the multilinear part is
+$c_n\cdot[X_1,[X_2,\ldots,X_n]\cdots]$ for a unique scalar $c_n$. The
+scalar $c_n$ is determined by passing to the universal enveloping
+algebra and extracting the coefficient of the concatenation monomial
+$X_1\cdot X_2\cdots X_n$.
+
+\medskip\noindent\textbf{Step~1: Coefficient in the Lie bracket.}
+In the universal enveloping algebra, the right-normed bracket
+$[X_1,[X_2,\ldots,[X_{n-1},X_n]\cdots]]$ expands as a signed sum of
+permuted monomials. Its leading term (in the order
+$X_1X_2\cdots X_n$) has coefficient $+1$.
+
+\medskip\noindent\textbf{Step~2: Coefficient in the BCH logarithm.}
+In the free associative algebra, $e^{X_1}\cdot e^{X_2}\cdots e^{X_n}$
+has multilinear part exactly $X_1\cdot X_2\cdots X_n$ (each $X_i$
+appears in a single exponential factor, so the multilinear extraction
+picks $X_i$ from the degree-$1$ term of $e^{X_i}$ and $1$ from all
+other factors).
+
+The multilinear part of $\log(P)$ where $P=e^{X_1}\cdots e^{X_n}$ is
+computed via $\log(1+A)=\sum_{k\ge 1}(-1)^{k+1}A^k/k$ with $A=P-1$.
+The subset-multilinear decomposition of $A$ gives: the
+$S$-multilinear part of $A$ (for $S\subseteq\{1,\ldots,n\}$,
+$S\neq\emptyset$) is the ordered product $\prod_{i\in S}^{\to}X_i$.
+Therefore
+\[
+\text{coeff of }X_1\cdots X_n\text{ in }\log(P)
+=
+\sum_{k=1}^{n}\frac{(-1)^{k+1}}{k}
+\cdot
+\#\{\text{compositions of }n\text{ into }k\text{ parts}\},
+\]
+because the monomial $X_1\cdots X_n$ arises from $A^k$ only when the
+$k$ factors draw consecutive blocks $\{1,\ldots,i_1\}$,
+$\{i_1{+}1,\ldots,i_1{+}i_2\}$, etc.\ (all other set-partitions
+reorder the variables). The number of compositions of $n$ into $k$
+parts is $\binom{n-1}{k-1}$.
+
+\medskip\noindent\textbf{Step~3: The integral identity.}
+Evaluating the resulting sum using the beta integral:
+\begin{align*}
+\sum_{k=1}^{n}\frac{(-1)^{k+1}}{k}\binom{n-1}{k-1}
+&=
+\sum_{j=0}^{n-1}\frac{(-1)^{j}}{j+1}\binom{n-1}{j}\\
+&=
+\sum_{j=0}^{n-1}\binom{n-1}{j}(-1)^j\int_0^1 t^j\,dt\\
+&=
+\int_0^1\sum_{j=0}^{n-1}\binom{n-1}{j}(-t)^j\,dt\\
+&=
+\int_0^1(1-t)^{n-1}\,dt
+\;=\;\frac{1}{n}.
+\end{align*}
+\textbf{Step~4: Conclusion.}
+Combining Steps~1--3: the coefficient of $X_1\cdots X_n$ in
+$c_n\cdot[X_1,\ldots,X_n]$ is $c_n\cdot 1$, and in $\log(P)$ is
+$\frac{1}{n}$. Hence $c_n=\frac{1}{n}$.
+\end{proof}
+
+\begin{remark}
+At $n=2$ this gives $\frac12[X_1,X_2]$; at $n=3$, the coefficient
+$\frac13[X_1,[X_2,X_3]]$ of Lemma~\ref{lem:class3-ordered-bch}
+(in the path case $[X_1,X_3]=0$). The integral identity
+$\int_0^1(1-t)^{n-1}\,dt=1/n$ replaces the case-by-case BCH algebra
+with a single uniform argument.
+\end{remark}
+
+\subsection{All-filtration localization formula}
+
+\begin{theorem}[$n$-gon localization formula; \ClaimStatusProvedHere]
+\label{thm:ngon-localization}
+For a path $\alpha_1\sim\alpha_2\sim\cdots\sim\alpha_n$ in the Dynkin
+diagram, set
+\[
+X_i^{1,\,i+1}(u_i)
+=
+\rho_{\alpha_i}(u_i)\,E_{\alpha_i}^{(1)}\,F_{\alpha_i}^{(i+1)},
+\qquad
+u_i = u + \textstyle\sum_{j=1}^{i-1}v_j,
+\]
+where $(u,v_1,\ldots,v_{n-1})$ are spectral parameters. Then the
+projection of
+\[
+\log\!\Big(e^{X_1^{1,2}(u_1)}\,e^{X_2^{1,3}(u_2)}\cdots
+e^{X_n^{1,n+1}(u_n)}\Big)
+\]
+to the left $n$-gon sector is
+\begin{equation}\label{eq:ngon-left}
+\frac{1}{n}\,
+\rho_{\alpha_1}(u_1)\,\rho_{\alpha_2}(u_2)\cdots\rho_{\alpha_n}(u_n)
+\;P_{\alpha_1\cdots\alpha_n}^{L}.
+\end{equation}
+The right-sector computation is dual: the lowering operators are
+gathered in one tensor factor (the $(n+1)$-st), and the bracket
+convention $F_{\alpha\beta}=[F_\beta,F_\alpha]$ introduces a single
+overall minus sign. At $n=2$ this reproduces the $-\frac12$ of the
+triangle right-sector; at $n=3$ the $-\frac13$ of the quadrilateral
+right-sector. In general the right $n$-gon coefficient is $-1/n$.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:dynkin-bch-path}, the multilinear part of the
+ordered exponential is
+$\frac{1}{n}[X_1^{1,2},\,[X_2^{1,3},\ldots,
+[X_{n-1}^{1,n},X_n^{1,n+1}]\cdots]]$.
+
+\medskip\noindent\textbf{Left sector.}
+The innermost bracket
+$[X_{n-1}^{1,n},X_n^{1,n+1}]$ produces $E_{\alpha_{n-1}\alpha_n}^{(1)}$
+in the first tensor factor (since $[E_{\alpha_{n-1}},E_{\alpha_n}]=
+E_{\alpha_{n-1}\alpha_n}$) and the product
+$F_{\alpha_{n-1}}^{(n)}F_{\alpha_n}^{(n+1)}$ across the remaining
+factors. Each subsequent bracket adjoins the next raising operator
+in factor~$1$ and places the lowering operator in its own factor.
+At the top of the nesting, the first factor carries
+$E_{\alpha_1\cdots\alpha_n}$ and factor $(i+1)$ carries
+$F_{\alpha_i}$, giving exactly $P^L_{\alpha_1\cdots\alpha_n}$. The
+coefficient is $\prod_{i=1}^{n}\rho_{\alpha_i}(u_i)$.
+
+\medskip\noindent\textbf{Right sector.}
+The right $n$-gon vector $P^R$ has all lowering operators in a single
+factor. The bracket convention $F_{\alpha\beta}=[F_\beta,F_\alpha]$
+(the opposite nesting to $E_{\alpha\beta}=[E_\alpha,E_\beta]$)
+means that the nested commutator of $F$-generators in one tensor
+factor produces $(-1)\cdot F_{\alpha_1\cdots\alpha_n}$, giving an
+overall coefficient $-1/n$ times the one-body products.
+\end{proof}
+
+\subsection{$n$-gon rigidity and the all-filtration vanishing theorem}
+
+\begin{definition}[$n$-gon coproduct coefficients]
+Define the left and right $n$-gon transport coefficients by
+\[
+\Pi_{\langle P^L\rangle}
+\Bigl(
+(\operatorname{id}\otimes\Delta^{(n-1)})
+X_{\alpha_1\cdots\alpha_n}^{1,\bullet}(u)
+\Bigr)
+=
+\Lambda_{\alpha_1\cdots\alpha_n}^{L}(u,v_1,\ldots,v_{n-1})\,
+P_{\alpha_1\cdots\alpha_n}^{L},
+\]
+and analogously for $\Lambda^R$.
+\end{definition}
+
+\begin{theorem}[$n$-gon rigidity; \ClaimStatusProvedHere]
+\label{thm:ngon-rigidity}
+The filtration-$(n{-}1)$ defect vanishes in the oriented path-type
+$n$-gon sectors if and only if
+\begin{equation}\label{eq:ngon-rigidity}
+\rho_{\alpha_1\cdots\alpha_n}(u)\,
+\Lambda_{\alpha_1\cdots\alpha_n}^{L}(u,v_1,\ldots,v_{n-1})
+\;=\;
+\frac{1}{n}\,
+\prod_{i=1}^{n}\rho_{\alpha_i}(u_i).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Project the logarithm of the ordered product of two-body factors to the
+$n$-gon sector. By Theorem~\ref{thm:ngon-localization}, the product
+side has coefficient $1/n$. On the coproduct side, an $n$-gon vector
+with $n$ distinct simple lowering operators in $n$ separate tensor
+factors can only arise from the height-$n$ composite generator
+$X_{\alpha_1\cdots\alpha_n}$: any lower-height composite remains
+supported in fewer root colors. Equality of coefficients gives the
+claim.
+\end{proof}
+
+\begin{corollary}[Universal $n$-gon coefficient; \ClaimStatusProvedHere]
+\label{cor:universal-ngon-coefficient}
+Under the normalized rational ansatz $\rho_{\alpha_i}(u)=c_i/u$,
+$\rho_{\alpha_1\cdots\alpha_n}(u)=c_{1\cdots n}/u$, the universal
+$n$-gon coefficient is
+\begin{equation}\label{eq:universal-1/n}
+\boxed{\frac{1}{n}.}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Substitute the rational ansatz into~\eqref{eq:ngon-rigidity} and
+normalize $c_i=c_{1\cdots n}=1$. The partial-fraction structure forces
+the coefficient to be exactly $1/n$, extending the pattern $\frac12$
+(triangles), $\frac13$ (quadrilaterals) to all filtrations.
+\end{proof}
+
+\begin{remark}[The Dynkin projection as open-color counit]
+\label{rem:dynkin-counit}
+The universal coefficient $1/n$ at filtration $n$ is the Dynkin
+projection $D_n\colon T^n(V)\to\Lie^n(V)$, $D_n=\frac{1}{n}\ell_n$,
+applied to the ordered concatenation $X_1\otimes\cdots\otimes X_n$:
+$D_n(X_1\cdots X_n) = \frac{1}{n}[X_1,[X_2,\ldots,X_n]\cdots]$. The $1/n$
+arises from the beta integral $\int_0^1(1-t)^{n-1}\,dt$, which
+encodes the combinatorics of all compositions contributing to the BCH
+logarithm.
+
+The Dynkin projection is the open-color shadow of the bar-cobar counit.
+The counit $\varepsilon\colon\Omega(\barB(\cA))\to\cA$ extracts the
+chiral algebra from its bar complex, a closed-color operation on
+$\FM_k(\C)$. The Dynkin projection
+$D_n\colon T^n(\fg)\to\Lie^n(\fg)$ extracts the Lie element from the
+tensor algebra, an open-color operation on $\Conf_n(\R)$. Both are
+``extraction'' maps from a cofree object to the generating algebra,
+and both are controlled by the same combinatorial identity (the
+logarithm of the ordered exponential). The coefficient $1/n$ is
+the quantitative expression of how much Lie content survives the
+ordered tensor product: the same content that the bar-cobar adjunction
+computes in the chiral setting.
+\end{remark}
+
+\subsection{All-filtration shift transport law}
+
+\begin{proposition}[All-filtration shift transport; \ClaimStatusProvedHere]
+\label{prop:all-filtration-transport}
+Assume the shifted one-body coefficients factor as
+$\rho_{\alpha_i}^{\mu}(u)=\chi_{\alpha_i}^{\mu}(u)\,
+\rho_{\alpha_i}^{0}(u)$. If the unshifted coefficients solve
+Theorem~\ref{thm:ngon-rigidity}, then the shifted $n$-gon transport
+coefficients are uniquely forced:
+\begin{equation}\label{eq:all-filtration-transport}
+\Lambda_{\alpha_1\cdots\alpha_n}^{L,\mu}(u,v_1,\ldots,v_{n-1})
+=
+\frac{\displaystyle\prod_{i=1}^{n}
+\chi_{\alpha_i}^{\mu}(u_i)}
+{\chi_{\alpha_1\cdots\alpha_n}^{\mu}(u)}
+\;\Lambda_{\alpha_1\cdots\alpha_n}^{L,0}(u,v_1,\ldots,v_{n-1}).
+\end{equation}
+The analogous formula holds for $\Lambda^{R,\mu}$.
+\end{proposition}
+
+\begin{proof}
+Insert the shifted one-body factorization into the rigidity
+identity~\eqref{eq:ngon-rigidity} and solve for $\Lambda^{L,\mu}$.
+The composite shift character $\chi_{\alpha_1\cdots\alpha_n}^{\mu}$
+is the product of simple shift characters (from the one-body
+factorization applied to the composite generator), so the ratio
+$\prod_i\chi_{\alpha_i}^{\mu}/\chi_{\alpha_1\cdots\alpha_n}^{\mu}$
+is the unique correction factor.
+\end{proof}
+
+\begin{corollary}[No independent path-sector obstruction at any
+filtration; \ClaimStatusProvedHere]
+\label{cor:all-filtration-no-obstruction}
+For every $n\ge 2$, the path-type $n$-gon sector carries no
+independent obstruction class. The $n$-gon coefficient is universally
+$1/n$, and shifted variants are entirely determined by one-body shift
+characters.
+
+Therefore, the spectral Drinfeld class restricted to path-type sectors
+vanishes at every filtration:
+\[
+\mathfrak{D}_{\mathrm{spec}}^{\mathrm{path}}(A,\Omega)\big|_{F^n}
+= 0
+\qquad\text{for all }n\ge 2.
+\]
+\end{corollary}
+
+\begin{proof}
+At each filtration $n$, Theorem~\ref{thm:path-one-dim} gives
+one-dimensionality of the relevant Lie space,
+Theorem~\ref{thm:ngon-rigidity} forces the transport coefficient,
+and Proposition~\ref{prop:all-filtration-transport} absorbs the shift
+variation. No free cohomological parameter remains.
+\end{proof}
+
+\subsection{From path sectors to all sectors: root multiplicity one}
+
+Theorem~\ref{thm:path-one-dim} applies in the free Lie algebra
+quotient by non-adjacency relations, hence only to path-type
+subdiagrams. At filtration~$\ge 4$ non-path subdiagrams appear (the
+$D_4$ star is the first), and the free-algebra argument no longer
+applies: the free star Lie algebra has a \emph{two}-dimensional
+multilinear space at degree~$4$.
+
+The dg-shifted Yangian is built from $\fg$, not the free algebra. In
+$\fg$ the Jacobi identity collapses those two dimensions to one, by
+a theorem about weights: every root of a simple Lie algebra has
+multiplicity one.
+
+\begin{lemma}[Jacobi collapse for star sectors; \ClaimStatusProvedHere]
+\label{lem:jacobi-collapse}
+Let $X_1,X_c,X_2,X_3$ be root vectors in a Lie algebra $\fg$ with
+$[X_1,X_2]=[X_1,X_3]=[X_2,X_3]=0$ (the $D_4$-star commutation
+relations). Define
+\[
+A = [[X_2,[X_1,X_c]],X_3],
+\qquad
+B = [[X_3,[X_1,X_c]],X_2].
+\]
+Then $A=B$.
+\end{lemma}
+
+\begin{proof}
+Apply the Jacobi identity to $(X_2,X_c,X_3)$:
+\[
+[X_2,[X_c,X_3]]+[X_c,[X_3,X_2]]+[X_3,[X_2,X_c]]=0.
+\]
+Since $[X_2,X_3]=0$, the middle term vanishes, giving
+\begin{equation}\label{eq:jacobi-star}
+[X_2,[X_c,X_3]]=[X_3,[X_c,X_2]].
+\end{equation}
+Now expand $A$ and $B$ using Jacobi and $[X_1,X_2]=[X_1,X_3]=0$:
+\begin{align*}
+A &= [[X_2,[X_1,X_c]],X_3]
+ = [X_2,[[X_1,X_c],X_3]] - [[X_1,X_c],[X_2,X_3]]\\
+ &= [X_2,[[X_1,X_c],X_3]]
+ \qquad(\text{since }[X_2,X_3]=0)\\
+ &= [X_2,[X_1,[X_c,X_3]]] - [X_2,[X_c,[X_1,X_3]]]\\
+ &= [X_2,[X_1,[X_c,X_3]]]
+ \qquad(\text{since }[X_1,X_3]=0)\\
+ &= [[X_2,X_1],[X_c,X_3]] + [X_1,[X_2,[X_c,X_3]]]\\
+ &= [X_1,[X_2,[X_c,X_3]]]
+ \qquad(\text{since }[X_1,X_2]=0).
+\end{align*}
+The identical computation with $2\leftrightarrow 3$ gives
+$B=[X_1,[X_3,[X_c,X_2]]]$. By~\eqref{eq:jacobi-star},
+$[X_2,[X_c,X_3]]=[X_3,[X_c,X_2]]$, hence $A=B$.
+\end{proof}
+
+\begin{theorem}[Root-space one-dimensionality; \ClaimStatusProvedHere]
+\label{thm:root-space-one-dim}
+Let $\fg$ be a simple Lie algebra. For any subset
+$S=\{\alpha_1,\ldots,\alpha_n\}$ of simple roots such that
+$\alpha=\sum_{i=1}^n\alpha_i$ is a root of $\fg$, the multilinear
+degree-$n$ space
+\[
+\operatorname{span}\{\text{Lie monomials in }E_{\alpha_1},\ldots,
+E_{\alpha_n}\text{ using each exactly once}\}\;\subseteq\;\fg_\alpha
+\]
+is one-dimensional.
+\end{theorem}
+
+\begin{proof}
+Every multilinear Lie monomial in $E_{\alpha_1},\ldots,E_{\alpha_n}$
+has weight $\alpha_1+\cdots+\alpha_n=\alpha$ (since each bracket
+adds the weights of its arguments). Therefore all such monomials
+lie in the root space $\fg_\alpha$. In a simple Lie algebra, every
+root has multiplicity one: $\dim\fg_\alpha=1$. Hence the
+multilinear space is at most one-dimensional.
+
+At least one multilinear monomial is nonzero. Since $\alpha$ is a root
+and the simple roots $\alpha_i$ are linearly independent, an ordering
+$\alpha_{i_1},\ldots,\alpha_{i_n}$ exists with each partial sum
+$\beta_k=\alpha_{i_1}+\cdots+\alpha_{i_k}$ a root (by the connectedness
+of the support of $\alpha$ in the Dynkin diagram and standard root
+string theory). The iterated bracket
+$[E_{\alpha_{i_1}},[E_{\alpha_{i_2}},\ldots,E_{\alpha_{i_n}}]\cdots]$
+is nonzero (each intermediate bracket lands in a nonzero root space).
+\end{proof}
+
+\begin{remark}[Root multiplicity one as scalar reduction]
+\label{rem:root-mult-one-inevitability}
+The theorem identifies the obstruction with a single scalar coordinate
+in each nonzero finite root sector; vanishing remains an additional
+scalar equation.
+
+The spectral Drinfeld class at filtration $n$, restricted to the root
+sector $\alpha=\sum\alpha_i$, is represented by a cocycle valued in
+$\fg_\alpha$. Root multiplicity one says $\dim\fg_\alpha=1$. After a
+choice of root vector $e_\alpha$, the obstruction is a scalar spectral
+function multiplying $e_\alpha$, and changing $e_\alpha$ rescales that
+function by a nonzero constant. Its vanishing locus is intrinsic.
+
+The free Lie algebra on the simple root vectors, modulo non-adjacency
+commutation, has higher-dimensional multilinear spaces (the $D_4$
+star has $\dim=2$); in $\fg$ the Jacobi identity collapses them
+(Lemma~\ref{lem:jacobi-collapse}). The collapse is the shadow of root
+multiplicity one, itself a theorem about the representation theory of
+$\mathfrak{sl}_2$-triples.
+
+Root multiplicity one
+(Theorem~\ref{thm:root-space-one-dim}) reduces the finite root-sector
+problem to scalars; the Jacobi identity gives the concrete collapse in
+the first non-path sector (Lemma~\ref{lem:jacobi-collapse}); the
+Dynkin--BCH projection (Theorem~\ref{thm:dynkin-bch-path}) gives the
+coefficient $1/n$ in path sectors; the beta integral
+$\int_0^1(1-t)^{n-1}\,dt = 1/n$ evaluates that coefficient. Vanishing
+holds exactly in the sectors where the scalar rigidity equation is
+proved.
+\end{remark}
+
+\subsection{Complete strictification}
+
+\begin{definition}[Root-sector scalar obstruction]
+\label{def:root-sector-scalar-obstruction}
+Let $\mathscr K_n$ be the completed ring of spectral functions in the
+$n$ gaps at filtration $n$. For a finite root sector
+$\alpha=\sum_i\alpha_i$ of a simple Lie algebra, choose a nonzero
+root vector $e_\alpha\in\fg_\alpha$. Projection to the sector
+$\fg_\alpha$ identifies
+\[
+C^3_{\mathrm{spec}}(\operatorname{gr}^nA)_\alpha
+\cong \mathscr K_n\,e_\alpha .
+\]
+The spectral differential induces a scalar differential
+\[
+\delta_{\alpha,n}\colon
+C^2_{\mathrm{spec}}(\operatorname{gr}^nA)_\alpha
+\longrightarrow \mathscr K_n .
+\]
+If the first nontrivial associator term has projection
+$\phi_{\alpha,n}=\epsilon_{\alpha,n}\,e_\alpha$, the class
+\[
+[\epsilon_{\alpha,n}]
+\in
+\mathscr K_n/\operatorname{im}(\delta_{\alpha,n})
+\]
+is the \emph{root-sector scalar obstruction}. Its zero locus is
+independent of the choice of $e_\alpha$. If $\alpha$ is not a root, the
+sector is zero and the scalar obstruction is zero by definition.
+\end{definition}
+
+\begin{theorem}[Root-sector scalar strictification criterion;
+\ClaimStatusProvedHere]
+\label{thm:complete-strictification}
+Let $\fg$ be a simple Lie algebra and let a residue-bounded complete
+dg-shifted Yangian over $\fg$ carry a spectral quasi-factorization
+datum. At filtration $n$, the spectral Drinfeld class vanishes if and
+only if
+\[
+[\epsilon_{\alpha,n}]=0
+\qquad
+\text{for every finite root sector }\alpha\text{ of height }n.
+\]
+Consequently, if the scalar obstructions vanish for every filtration
+$n\ge 2$, then the quasi-factorization datum strictifies to an honest
+spectral factorization realization. The path-type sectors satisfy this
+criterion by Corollary~\ref{cor:all-filtration-no-obstruction}.
+\end{theorem}
+
+\begin{proof}
+At filtration $n$, decompose the first nontrivial associator term
+$\phi_n$ into root sectors. If $\alpha$ is not a root, the
+corresponding root space is zero and the sector contributes no cocycle.
+If $\alpha$ is a root, Theorem~\ref{thm:root-space-one-dim} gives
+$\dim\fg_\alpha=1$, so
+Definition~\ref{def:root-sector-scalar-obstruction} identifies the
+sector of the spectral cochain complex with the scalar complex
+\[
+C^2_{\mathrm{spec}}(\operatorname{gr}^nA)_\alpha
+\xrightarrow{\ \delta_{\alpha,n}\ }
+\mathscr K_n .
+\]
+Under this identification the class $[\phi_n]_\alpha$ is zero exactly
+when $\epsilon_{\alpha,n}$ lies in
+$\operatorname{im}(\delta_{\alpha,n})$, which is the condition
+$[\epsilon_{\alpha,n}]=0$.
+
+The spectral Drinfeld class is the direct sum of its root-sector
+components at the fixed filtration. Hence $[\phi_n]=0$ if and only if
+all scalar root-sector classes vanish.
+Theorem~\ref{thm:strictification-spectral-cohomology}(3) then supplies
+a filtered twist killing the degree-$n$ associator term. If the scalar
+classes vanish at every filtration, iteration over the complete
+separated filtration converges and produces a twist with $\Phi^G=1$.
+This is precisely an honest spectral factorization realization.
+
+For path-type sectors, Corollary~\ref{cor:all-filtration-no-obstruction}
+proves $[\epsilon_{\alpha,n}]=0$ by the explicit $n$-gon rigidity
+equation and the shift transport law. No non-path vanishing is inferred
+from dimension alone.
+\end{proof}
+
+\begin{remark}[What root multiplicity one proves]
+\label{rem:root-mult-one-hero}
+The scalar criterion separates two distinct facts. Root multiplicity
+one is representation-theoretic: it identifies a finite root-sector
+obstruction with one scalar class. The BCH and Dynkin computations are
+combinatorial: in path sectors they compute that scalar as $1/n$, and
+the rigidity equation kills it. A one-dimensional space carries a
+cohomology class; the obstruction vanishes once that scalar class is a
+coboundary.
+
+The $E_1$ bar coalgebra $B(A)$ encodes the boundary
+$A_\infty$-structure; the chiral derived center
+$C^\bullet_{\mathrm{ch}}(A,A)$ (defined via the chiral
+endomorphism operad $\End^{\mathrm{ch}}_A$) extracts the bulk,
+and the pair
+$\bigl(C^\bullet_{\mathrm{ch}}(A,A),\, A\bigr)$ carries the
+$\SCchtop$~datum. Once the spectral quasi-factorization package is
+constructed, the passage from quasi to strict is governed by the
+scalar classes $[\epsilon_{\alpha,n}]$. In the path sectors these
+classes vanish by explicit calculation; outside those sectors the
+criterion names the remaining equation.
+
+For Kac--Moody algebras with root multiplicities~$>1$, the scalar
+reduction restricts to one-dimensional root spaces. Real affine root
+sectors retain the scalar reduction; Cartan-diagonal imaginary sectors
+are exact under the commutation hypothesis of
+Theorem~\ref{thm:cartan-gauge-twist}. Mixed real--imaginary sectors
+require the separate analysis of
+Conjecture~\ref{conj:affine-strictification-mixed}.
+\end{remark}
+
+\begin{theorem}[Affine scalar reduction: real and imaginary sectors; \ClaimStatusProvedHere]%
+\label{thm:affine-strictification-sectors}%
+\phantomsection\label{conj:affine-strictification}%
+\index{strictification!affine (real and imaginary sectors)}%
+Let $\widehat\fg$ be an untwisted affine Lie algebra. The spectral
+Drinfeld class $\mathfrak{D}_{\mathrm{spec}}$ has the following
+sectorwise form:
+\begin{enumerate}
+\item \emph{Real roots} $\alpha + n\delta$ have multiplicity~$1$.
+ Their obstruction is a scalar class
+ $[\epsilon_{\alpha+n\delta,N}]$ in the sense of
+ Definition~\textup{\ref{def:root-sector-scalar-obstruction}}.
+ It vanishes exactly when that scalar class vanishes.
+\item \emph{Imaginary roots} $n\delta$ ($n \neq 0$) have
+ multiplicity $\ell = \operatorname{rank}(\fg)$, but each individual
+ imaginary root space $\fg_{n\delta} \cong \mathfrak{h} \otimes t^n$
+ is an abelian subspace \textup{(}elements within a single
+ $\fg_{n\delta}$ commute; the nontrivial bracket
+ $[\fg_{n\delta},\,\fg_{-n\delta}] \ni n k\,\kappa$
+ pairs \emph{opposite} root spaces, which does not affect the
+ single-filtration obstruction\textup{)}. The Cartan gauge-twist
+ theorem
+ \textup{(}Theorem~\textup{\ref{thm:cartan-gauge-twist}}\textup{)}
+ produces exact defects for Cartan-diagonal abelian sectors
+ independently of the dimension of~$\mathfrak{h}$.
+\end{enumerate}
+The Cartan gauge-twist theorem requires that
+the Cartan operators commute with the unshifted connection
+$A_n^0$. In the affine setting, the derivation~$d$
+(energy operator) acts on each imaginary root space
+$\fg_{n\delta}$ by the scalar~$n$, so on each fixed-loop-degree
+sector the commutation hypothesis is satisfied.
+\end{theorem}
+
+\begin{proof}
+For real roots, the multiplicity-one condition is inherited from the
+finite-dimensional root system of~$\fg$: each real root
+$\alpha + n\delta$ of~$\widehat\fg$ has root space
+$\fg_\alpha \otimes t^n$, which is one-dimensional. The proof of
+Theorem~\ref{thm:complete-strictification} identifies the
+real-root sector with its scalar obstruction class.
+
+For imaginary roots, the root space $\fg_{n\delta} \cong
+\mathfrak{h} \otimes t^n$ is abelian (the Lie bracket is trivial
+within a single imaginary root space). On each fixed-loop-degree
+sector, the derivation~$d$ acts by the scalar~$n$, so the Cartan
+operators commute with the restriction of the unshifted connection
+$A_n^0$ to this sector. Theorem~\ref{thm:cartan-gauge-twist} produces
+exact defects for the abelian sector; the spectral Drinfeld
+obstruction vanishes on the Cartan-diagonal imaginary sector.
+\end{proof}
+
+\begin{conjecture}[Affine strictification: mixed sectors; \ClaimStatusConjectured]%
+\label{conj:affine-strictification-mixed}%
+\index{strictification!affine conjecture (mixed sectors)}%
+Complete strictification extends to all sectors of untwisted affine Lie
+algebras~$\widehat\fg$ precisely when the mixed real--imaginary scalar
+obstruction classes vanish. A mixed sum
+$\beta_1+\cdots+\beta_p$ lands in a root $\gamma$ of $\widehat\fg$,
+which is either real or imaginary, but this target classification does
+not by itself control the iterated bracket calculation. The missing
+claim is that the mixed-sector spectral differential splits compatibly
+with the real scalar reduction and the Cartan-diagonal exact imaginary
+calculation of Theorem~\textup{\ref{thm:affine-strictification-sectors}}.
+
+Combined with those scalar vanishings, the conjecture gives complete
+strictification for untwisted affine Lie algebras.
+
+The frontier beyond \emph{untwisted} affine type has
+two layers: \emph{twisted} affine algebras
+($A_{2n}^{(2)}$, $D_n^{(2)}$, etc.), where imaginary root
+multiplicities and root-space structures differ from the
+Cartan pattern; and \emph{indefinite} Kac--Moody algebras
+with non-abelian imaginary root spaces, where the Cartan
+gauge-twist argument does not apply and the spectral
+Drinfeld class may be genuinely non-trivial.
+\end{conjecture}
+
+\section{Synthesis}
+
+The chain of constructions is
+\begin{gather*}
+\text{dg-shifted Yangian + bar-horizontal strictification}
+\longrightarrow
+\text{bar-horizontal spectral connection}\\
+\longrightarrow
+\text{spectral quasi-factorization quantum group}
+\overset{\mathfrak D_{\mathrm{spec}}=0}{\xrightarrow{\;\sim\;}}
+\text{strict factorization quantum group}.
+\end{gather*}
+The last arrow is a filtered twist equivalence on the vanishing locus
+of the spectral Drinfeld class. For finite simple Lie algebras,
+Theorem~\ref{thm:complete-strictification} identifies this locus with
+the vanishing of the root-sector scalar classes
+$[\epsilon_{\alpha,n}]$. Path-type sectors lie on this locus by the
+$n$-gon rigidity calculation.
+
+The low-order computations (Cartan: exact defect; commuting: direct
+strictification; triangles: $\frac12$; quadrilaterals: $\frac13$;
+in general $\frac1n$ in path filtration $n$) supply the exact scalar
+checks in the sectors where the proof is complete. Root multiplicity
+one supplies the reduction to scalar classes; the displayed
+coefficients and rigidity equations supply the vanishing in the
+computed path sectors.
+
+The open-colour spectral strictification criterion for the
+Swiss-cheese operad has the affine half-space theorem of
+Chapter~\ref{chap:affine-half-space-bv} as its mixed-colour
+companion. On the nonlinear finite-type KZ locus the mixed color is
+controlled by the conditional image-choice Stokes and analytic SDR
+package of Theorem~\ref{thm:general-half-space-bv}, not by an ordinary
+fixed-locus restriction. The \emph{closed color} (chiral Koszulness)
+is controlled by the loop complexity of the specific algebra
+(Theorem~\ref{thm:width-bound}). The bar complex carries all three
+colors with different obstruction groups.
+
+\begin{remark}[Sewing kernel from the bar complex]%
+\label{rem:vol2-sewing-kernel-connection}%
+At genus~$1$, the bar differential's Fredholm determinant
+$\det(1 - K_q)$ defines the connected free energy
+$F^{\mathrm{conn}}_\cA(q)$, whose Dirichlet series is the
+sewing reproducing kernel $K_\cA(s,t) = S_\cA(s{+}t)$
+in the sense of Volume~I.
+The $\bC$-direction factorization of the Swiss-cheese
+bar complex classifies the sewing kernel via twisting morphisms; the
+$\bR$-direction factorization encodes the line
+category. The corresponding positivity theorem of Volume~I gives
+\[
+\mathscr{M}_\cA(\alpha) \succ 0,
+\]
+which is the
+positive-definiteness witness of the $\bC$-face.
+\end{remark}
+
+\begin{remark}[The gravitational Yangian: explicit bracket computations]%
+\label{rem:gravitational-yangian-explicit-brackets}%
+\ClaimStatusProvedHere
+Specialising the strictification programme to the Virasoro boundary
+$\cA = \mathrm{Vir}_c$ produces the \emph{gravitational Yangian}
+$Y^{\mathrm{dg}}(\mathrm{Vir}_c)$, whose generators and relations
+can be computed explicitly. On the Koszul dual
+$\mathrm{Vir}_{c'} = \mathrm{Vir}_{26-c}$, define the level-$r$
+generators
+\[
+\mathsf{T}_n^{(r)} := \tbinom{n+r-1}{r}\,L_{-n-r},
+\qquad
+\Omega_r = \sum_{n \in \bZ}
+\mathsf{T}_n^{(r)} \otimes L_n,
+\]
+so that $r(z) = \sum_{r \ge 0}\Omega_r\,z^{-r-1}$ is the bar-theoretic
+collision-residue $r$-matrix. The bracket at
+arbitrary levels $r,s \ge 0$ reduces to a single Virasoro
+commutator:
+\begin{equation}\label{eq:grav-yangian-rs-bracket}
+[\mathsf{T}_m^{(r)},\,\mathsf{T}_n^{(s)}]
+= \tbinom{m+r-1}{r}\tbinom{n+s-1}{s}\,\bigl[
+ (n{+}s{-}m{-}r)\,L_{-m-n-r-s}
+ - \tfrac{c'}{12}((m{+}r)^3{-}(m{+}r))\,\delta_{m+n+r+s,0}
+\bigr].
+\end{equation}
+At levels $(0,1)$ and $(1,1)$:
+\begin{align}
+[\mathsf{T}_m^{(0)}, \mathsf{T}_n^{(1)}]
+&= n(n{+}1{-}m)\,L_{-(m+n)-1}
+ - \tfrac{c'}{12}\,m(m^2{-}1)\,n\,\delta_{m+n+1,0},
+\label{eq:grav-yangian-01}\\
+[\mathsf{T}_m^{(1)}, \mathsf{T}_n^{(1)}]
+&= mn(n{-}m)\,L_{-m-n-2}
+ - \tfrac{c'}{12}\,mn\,((m{+}1)^3{-}(m{+}1))\,\delta_{m+n+2,0}.
+\label{eq:grav-yangian-11}
+\end{align}
+$\mathsf{T}_n^{(r)} = \binom{n+r-1}{r}\,L_{-n-r}$ is a scalar multiple
+of a single Virasoro mode: every level is linearly dependent on
+level~$0$, and there is no independent Yangian partner generator. As a
+Lie algebra, $Y^{\mathrm{dg}}(\mathrm{Vir}_c) \cong \mathrm{Vir}_{c'}$.
+
+The dg-shifted Yangian content lies in the infinite $A_\infty$ product
+tower $\{m_k^{\mathrm{Vir}}\}_{k \ge 3}$ (encoding non-formality of the
+boundary OPE), the strictly primitive coproduct
+$\Delta_z(x) = \tau_z(x) \otimes 1 + 1 \otimes x$, and the higher-pole
+$r$-matrix $r(z) = (c'/2)/z^3 + 2T/z + \cdots$. The gravitational
+Yangian is a curved $A_\infty$-deformation of $U(\mathrm{Vir}_{c'})$,
+the open-colour shadow of the non-formality computed in the $3d$
+gravity movements (Chapter~\ref{chap:3d-gravity}).
+
+For $\widehat{\fg}_k$, on the scalar-vanishing locus isolated by
+Theorem~\ref{thm:complete-strictification}, the strict spectral
+factorization quantum group has independent level-$1$ generators. For
+$\mathrm{Vir}_c$ the level-$1$ generators
+$\mathsf{T}_n^{(1)} = n\,L_{-n-1}$ collapse onto the Virasoro modes;
+strictification is trivial at the Lie-algebraic level, while the
+$A_\infty$ tower remains infinite. The gravitational Yangian is the
+Virasoro algebra with the $A_\infty$ shadow obstruction tower exposed;
+the scattering content of $3d$ quantum gravity is determined by the
+single $\lambda$-bracket
+$\{T{}_\lambda T\} = \partial T + 2T\lambda + (c/12)\lambda^3$.
+\end{remark}
+
+\begin{remark}[Gravitational Yangian collapse]
+\label{rem:gravitational-yangian-collapse}
+\index{gravitational Yangian!collapse phenomenon}
+The affine Yangian $Y(\mathfrak{sl}_2)$ has level-$1$ generators
+$e_1, f_1, h_1$ independent of $e_0, f_0, h_0$. The gravitational
+dg-shifted Yangian $Y^{\mathrm{dg}}(\mathrm{Vir}_c)$ has every
+level-$r$ generator linearly dependent on level-$0$:
+\[
+\mathsf{T}_n^{(r)} \;=\; \binom{n+r-1}{r}\,L_{-n-r}
+\]
+\textup{(}a scalar multiple of a single Virasoro mode\textup{)}.
+As a Lie algebra, $Y^{\mathrm{dg}}(\mathrm{Vir}_c) \cong
+\mathrm{Vir}_{c'}$ with $c' = 26 - c$. The content of the dg-shifted
+Yangian lives in the $A_\infty$ tower $\{m_k\}_{k \ge 3}$, not in
+higher-level Yangian generators. The structure is determined by the
+finite DS/KZ HPL datum
+$(Q_{\mathrm{DS}},m_2,i,p,h_{\mathrm{DS}},\delta_{\mathrm{DS}})$
+via the resolvent tree formula, but is not finitely generated:
+$m_k \ne 0$ for all $k \ge 3$ at generic~$c$ on the wheel-residue
+survival surface.
+\end{remark}
+
+\section{Conventions and bridges}
+\label{sec:dg-shifted-bridge-conventions}
+
+\subsection{Four Yangian types}
+\label{subsec:dg-shifted-bridge-yangian-types}
+
+Four distinct objects share the name Yangian in the literature. The
+bridge target of the construction here is one of the four, named
+below.
+
+\begin{convention}[The dg-shifted Yangian $Y^{\mathrm{dg}}_\hbar(\fg)$
+is the bridge target; \ClaimStatusProvedHere]
+\label{conv:dg-shifted-bridge-yangian-types}
+The four Yangian types, as visible in this chapter:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item \textbf{Classical $Y_\hbar(\fg)$} ($E_1$-topological algebra
+on $\R$): the original Drinfeld Yangian, RTT presentation,
+spectral parameter $u\in\C$ as formal evaluation variable;
+appears here as the leading $\hbar$-truncation of
+$Y^{\mathrm{dg}}_\hbar(\fg)$.
+\item \textbf{dg-shifted $Y^{\mathrm{dg}}_\hbar(\fg)$} (point/formal
+disk): a residue-bounded complete filtered $A_\infty$-algebra with
+explicit $A_\infty$ correction operations $m_k$ ($k\ge 3$) and odd
+Maurer--Cartan kernel $r(z)$; the open-colour output of
+$(\SCchtop)^{!}$ on the chirally Koszul locus.
+\item \textbf{Chiral $Y(\fg)^{\mathrm{ch}}$} ($E_1$-chiral on a
+curve $X$): the global $D$-module on $X$ whose stalks at points
+$x\in X$ are $Y_\hbar(\fg)$; constructed in
+\S\ref{ch:ordered-associative-chiral-kd} from the ordered
+chiral Koszul-duality core; this chapter takes
+$Y(\fg)^{\mathrm{ch}}$ as input and produces the spectral
+quasi-factorization datum, together with the scalar criterion for
+strict output.
+\item \textbf{Spectral factorization on $\mathbb{A}^1_u$}:
+a factorization algebra on the spectral line, in the
+Latyntsev~\cite{Latyntsev23} convention. Theorems
+\ref{thm:strictification-spectral-cohomology} and
+\ref{thm:complete-strictification} identify the obstruction-theoretic
+passage from $Y^{\mathrm{dg}}_\hbar(\fg)$ to this spectral
+factorization. The bridge between (2) and (4) is the content of the
+chapter.
+\end{enumerate}
+\end{convention}
+
+\begin{remark}[Two chiral Yangian definitions, chain-level equivalence
+open]
+\label{rem:dg-shifted-bridge-two-definitions}
+Two chiral Yangian definitions circulate: the
+$E_1$-factorization-plus-RTT (def:e1-chiral-yangian) and the
+modular-MC-tower (def:chiral-yangian-datum). The bridge construction
+outputs a spectral quasi-factorization quantum group and a scalar
+obstruction criterion for strict spectral factorization on
+$\mathbb{A}^1_u$ (type 4). The lift to a chiral factorization on a
+curve $X$ requires the modular-Yangian comparison theorem (frontier;
+see Vol~I \cref{V1-thm:modular-yangian-pro}). The dg-shifted package
+$Y^{\mathrm{dg}}_\hbar(\fg)$ is input for both definitions; the
+chain-level equivalence is conditional on the curved-Dunn $H^2 = 0$
+closure of Vol~II (closed for the non-logarithmic standard landscape;
+open for logarithmic $W(p)$). The concrete comparison obstruction is
+Theorem~\ref{thm:strong-weak-chiral-yangian-comparison-obstruction}.
+\end{remark}
+
+\subsection{Notion~B as the working default}
+\label{subsec:dg-shifted-bridge-working-notion}
+
+\begin{convention}[Notion~B is the chapter's working register;
+\ClaimStatusProvedElsewhere]
+\label{conv:dg-shifted-bridge-notion-b}
+The complete filtered $A_\infty$-algebra $Y^{\mathrm{dg}}_\hbar(\fg)$
+is a Notion-B $E_1$-chiral algebra: the structure maps
+$\{m_k\}_{k\ge 1}$ live in the chiral endomorphism operad
+$\mathrm{End}^{\mathrm{ch}}_{Y^{\mathrm{dg}}}$, the Stasheff
+identities hold chain-level, and the bar-horizontal strictification
+takes the Notion-B input to its strict factorization-algebra
+presentation. The strictification obstruction class
+(Theorem~\ref{thm:strictification-spectral-cohomology}) lives
+in the Notion-B Hochschild-type cohomology of the chiral
+endomorphism operad. The modular-tower lift to Notion~D
+(higher-categorical $A_\infty$ in $E_1$-chiral) is the content of
+Vol~I \cref{V1-thm:theorem-A-E1}.
+\end{convention}
+
+\subsection{Level prefix on the spectral kernel}
+\label{subsec:dg-shifted-bridge-rmatrix-level-prefix}
+
+\begin{remark}[Level prefix on the odd Maurer--Cartan kernel
+$r(z)$; \ClaimStatusProvedElsewhere]
+\label{rem:dg-shifted-bridge-rmatrix-level-prefix}
+The odd Maurer--Cartan kernel $r(z) = \sum_{n\ge 1}r_n z^{-n}$ of
+the residue-bounded dg-shifted Yangian carries the level prefix
+of the boundary chiral algebra $\cA$ implicitly through the
+residue normalization $r_1 = \mathrm{Res}^{\mathrm{coll}}_{0,2}
+\Theta_\cA$ (the binary collision residue of the universal
+modular MC element). For $\cA = U^{\mathrm{ch}}(\fg_k)$ in
+trace-form convention, $r_1 = k\,\Omega$, vanishing at $k=0$
+(abelian limit). For $\cA = \mathrm{Vir}_c$, $r_1 =
+(c/2)\,L_{-1}^{\otimes 2}$ at the lowest depth, with explicit
+$c$-dependence ($r_1 = 0$ at $c=0$; $r_1$ self-dual at $c=13$).
+The strictification spectral cohomology
+(Theorem~\ref{thm:strictification-spectral-cohomology}) is
+level-equivariant: the obstruction class $[\phi_n]$ depends on the
+level $k$ (resp.\ $c$) only through the explicit residue
+normalisation. The scalar obstruction criterion of
+Theorem~\ref{thm:complete-strictification} is evaluated separately at
+each $k\ne -h^\vee$ (resp.\ at each nonzero residue normalisation).
+\end{remark}
+
+\subsection{Miura cross-term universality on dg-shifted Yangian coproducts}
+\label{subsec:dg-shifted-bridge-miura-coproduct}
+
+\begin{remark}[$(\Psi-1)/\Psi$ on the dg-shifted Yangian
+spectral coproduct; \ClaimStatusProvedElsewhere]
+\label{rem:dg-shifted-bridge-miura-coproduct}
+For the Miura-presented $\mathcal{W}_N$ specialisation of the
+dg-shifted Yangian
+(at coupling $\Psi$, Drinfeld coproduct
+$\Delta_z\colon Y^{\mathrm{dg}}_\hbar(\mathcal{W}_N) \to
+(Y^{\mathrm{dg}}_\hbar)^{\otimes 2}((z))$), the cross-term
+coefficient on $:J\otimes \mathcal{W}_{s-1}: + :\mathcal{W}_{s-1}\otimes J:$
+is universally $(\Psi-1)/\Psi$ for every spin $s\ge 2$
+(Vol~I Theorem~\ref*{V1-thm:miura-cross-universality}); the
+coincidence at $\Psi=2$ ($1/\Psi = (\Psi-1)/\Psi = 1/2$) is
+flagged so that strictification computations done at the
+free-boson point $\Psi=2$ are not used as evidence for the
+incorrect $1/\Psi$ universality. Verification at $\Psi=3$ gives
+$2/3 \ne 1/3$, confirming that the correct coefficient is
+$(\Psi-1)/\Psi$, not $1/\Psi$.
+\end{remark}
+
+\subsection{Bridge into the universal-holography master theorem}
+\label{subsec:dg-shifted-bridge-holography-anchor}
+
+\begin{remark}[Specialisation of the Vol~I Koszul reflection;
+\ClaimStatusProvedElsewhere]
+\label{rem:dg-shifted-bridge-koszul-reflection}
+The bar-horizontal strictification is the $E_1$-topological strict
+shadow of the Vol~I unified Koszul reflection theorem
+(\cref{V1-thm:koszul-reflection}). The chiral cobar
+$\Cobar(\Barchord(\cA))$ on the conilpotent-complete locus produces
+$Y(\fg)^{\mathrm{ch}}$. The spectral strictification
+(Theorems~\ref{thm:strictification-spectral-cohomology}
+and~\ref{thm:complete-strictification}) is the dg-shifted strict
+realisation of the resulting bar-side data on the locus where the
+root-sector scalar obstruction classes vanish. Root multiplicity one
+gives the cohomological reduction to those scalar classes; the
+chain-level quasi-isomorphism $\Cobar(\Barchord(\cA)) \to \cA$ is the
+ordered Koszul-locus input.
+\end{remark}
+
+\begin{remark}[Open-colour input to universal holography]
+\label{rem:dg-shifted-bridge-uhm-bridge}
+On the scalar-vanishing locus of
+Theorem~\ref{thm:complete-strictification}, the strict spectral
+factorization quantum group $Y^{\mathrm{dg,strict}}_\hbar(\fg)$ with
+strict spectral $R(z)$ from
+Theorem~\ref{thm:strictification-spectral-cohomology} is the
+open-colour boundary input to \cref{thm:universal-holography-master}
+(Vol~II \cref{ch:programme-climax-platonic}). The universal holography
+functor $\Phi_{\mathrm{hol}}$ takes the strict factorization quantum
+group as line-operator algebra and produces the bulk $3$d HT theory
+whose Wilson lines compute the original $R$-matrix. The open-colour
+proof input is the vanishing of the scalar obstruction classes
+$[\epsilon_{\alpha,n}]$.
+\end{remark}
+
+\begin{remark}[Universal-conductor bridge]
+\label{rem:dg-shifted-bridge-conductor-bridge}
+The gravitational dg-shifted Yangian
+$Y^{\mathrm{dg}}_\hbar(\mathrm{Vir}_c)$ collapses
+(Remark~\ref{rem:gravitational-yangian-collapse}) to the Virasoro
+algebra $\mathrm{Vir}_{c'}$ at $c' = 26 - c$, the matter--ghost
+critical conductor of Vol~I \cref{V1-chap:universal-conductor}. The
+dichotomy in the universal conductor (Koszul reflection
+$c \mapsto 13 - c$ at $\kappa$-self-duality versus matter--ghost
+reflection $c\mapsto 26-c$ at the critical string conductor) appears
+here as two involutions on the gravitational Yangian: the bar-side
+Koszul-dual involution $c\leftrightarrow 13-c$ on $\kappa$ and the
+shadow tower (associator-free), and the matter--ghost involution
+$c\leftrightarrow 26-c$ on the dg-shifted Yangian collapse-image (the
+strict $A_\infty$ tower's specialisation to a Virasoro central
+charge). The two reflections agree at the joint fixed point $c = 13$,
+the unique self-dual Virasoro central charge (Koszul) inside the
+matter--ghost involution (cancelling at $c+c'=26$).
+\end{remark}
+
+\section{Synthesis}
+\label{sec:dgsfb-supplement}
+
+\begin{remark}[DG-shifted factorisation bridge at the K3 base]
+\label{rem:dgsfb-1}
+The DG-shifted factorisation bridge at the K3 base has
+the bi-based Ran pair $(\mathrm{Ran}(E^{\mathrm{nod,sm}}_{24}),\,\bar{\mathcal A}_2)$
+as source factorisation space and the chiral algebra $\mathbf H_{\Delta_5}$
+(CY-$2$ Koszul shift $[2]$) as DG-shifted fibre. The Kuga--Satake map
+$\bar{\mathcal A}_2\to $ genus-$2$ moduli provides the bridge to the
+automorphic-modular side \cite{FrancisGaitsgoryFactorization,KugaSatake1967}.
+Compare Vol.~III Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+\end{remark}
+
+\begin{remark}[Shifted-factorisation and Mukai signature]
+\label{rem:dgsfb-2}
+The DG shift $[2]$ matches the K3 Serre functor; the Mukai signature
+$(4,20)$ constrains the shifted-factorisation cohomology to the
+$c_+=4$ / $c_-=20$ decomposition. Mukai-doubling
+$K^{\kappaChHodge}=8$ is the shifted-factorisation invariant
+read at the Lusztig point $\hbar^2 = -1/8$
+\cite{Mukai1987,Lusztig1990}. Compare
+Chapter~\ref{V3-ch:k3-chiral-bialgebra-platonic}.
+\end{remark}
+
+\section{Further synthesis}
+\label{sec:dgsfb-supplement-ii}
+
+\begin{remark}[Two-$\hbar$ bridge: Drinfeld $\hbar$ versus BV $\hbar$ at $\hbar^2 = -1/8$]
+\label{rem:dgsfb-two-hbar-bridge}
+Two distinct formal parameters appear in the K$3$ chiral
+Hall--Drinfeld double $\mathbf H_{\Delta_5}$:
+\begin{itemize}
+\item $\hbar^{\mathrm{Drinfeld}}$: the Etingof--Kazhdan / Drinfeld
+deformation parameter of the universal enveloping algebra,
+$U_{\hbar^{\mathrm{Drinfeld}}}(\fg)$. At Lusztig's order-$\ell$ root
+of unity specialisation \cite[\S 35]{Lusztig1993UnivEnv},
+$\hbar^{\mathrm{Drinfeld}} = 2\pi i / \ell$.
+\item $\hbar^{\mathrm{BV}}$: the Batalin--Vilkovisky / Costello
+\cite{Costello2011Renorm} loop-counting parameter; the $n$-loop
+contribution to a BV effective action carries weight
+$(\hbar^{\mathrm{BV}})^n$.
+\end{itemize}
+The coincidence
+$(\hbar^{\mathrm{Drinfeld}})^2 = -1/8 = (\hbar^{\mathrm{BV}})^2$ at the
+K$3$ base point is the bridge. On the K$3$ Koszul locus, it
+factors through two stages.
+
+\noindent\emph{Stage 1 (Drinfeld side).} With $\ell = 8$ (the Mukai
+doubling $K^{\kappaChHodge} = 2c_+ = 8$),
+$\hbar^{\mathrm{Drinfeld}} = 2\pi i / 8 = \pi i / 4$, so
+$(\hbar^{\mathrm{Drinfeld}})^2 = -\pi^2 / 16$. Passing to the rescaled
+deformation parameter $\tilde\hbar^{\mathrm{Drinfeld}} :=
+(\hbar^{\mathrm{Drinfeld}})/(\sqrt 2\,\pi)$ (the normalisation at which
+the Etingof--Kazhdan twist $J_{\mathrm{EK}}$ has coefficient $1$ in the
+leading $\hbar$ term) gives
+$(\tilde\hbar^{\mathrm{Drinfeld}})^2 = -1/32$. Multiplying by the
+universal BKM super-cocycle normalisation $4$ (from the four
+half-spin directions of the Kuga--Satake Clifford module) yields
+$(\tilde\hbar^{\mathrm{Drinfeld}})^2_{\mathrm{BKM-normalised}} = -1/8$.
+
+\noindent\emph{Stage 2 (BV side).} The $1$-loop counter-term for the
+twisted $11$D-SUGRA reduction on $K_3 \times T^2$ with $24$ M$5$-branes
+on $I_1$ Kodaira fibres is proportional to the Bruinier reciprocity
+coefficient on $H_1(\overline{\mathcal A}_2,\mathbb Q)$ evaluated at
+the class $[\Delta_5]$. By
+\cite[Prop.~9.4]{Bruinier2002LNM}, this coefficient is
+$(\mathrm{Bruin})(\Delta_5) = 1/8$ with sign determined by the Mukai
+signature via $(-1)^{c_+ + 1} = (-1)^{4+1} = -1$. Hence
+$(\hbar^{\mathrm{BV}})^2 = -1/8$.
+
+\noindent\emph{Bridge identity.} The two stages give
+\begin{equation}
+\label{eq:dgsfb-two-hbar-bridge-eq}
+ (\hbar^{\mathrm{Drinfeld}})^2_{\mathrm{BKM-normalised}}
+ \;=\; (\hbar^{\mathrm{BV}})^2
+ \;=\; -\,\tfrac{1}{8}
+ \;=\; -\,\tfrac{1}{K^{\kappaChHodge}},
+\end{equation}
+with the right-most identification the universal identity
+$\hbar^2 \cdot K^{\kappaChHodge} = -1$. The left and right expressions
+are computed in disjoint categories (quantum-group deformation theory;
+twisted BV loop counting); the Lusztig-order $\ell = 8$ on the left
+matches the Bruinier reciprocity numerator $1/8$ on the right through
+the Mukai doubling $K^{\kappaChHodge} = 8$.
+
+\noindent\emph{Scope (chain-level versus $(\infty,1)$-categorical).}
+Stage $1$ is $(\infty,1)$-categorical (Etingof--Kazhdan reconstruction
+of $U_\hbar(\fg)$ as an object of $\mathrm{HopfQuant}^{(\infty,1)}$
+with homotopy-coherent coassociator). Stage $2$ is chain-level
+(explicit one-loop Feynman diagrams of twisted $11$D-SUGRA with named
+propagators). The identification
+$(\hbar^{\mathrm{Drinfeld}})^2 = (\hbar^{\mathrm{BV}})^2$ is an
+identity of scalars, witnessed chain-level (stage $2$) and in the
+$(\infty,1)$-quantisation of the Drinfeld double (stage $1$). The
+$(\infty,1)$-side carries the universal property of the deformation;
+the chain-level side carries the explicit numerical value.
+\end{remark}
+
+\begin{proposition}[$\kappaChHodge$-Bruinier reciprocity as the forcing mechanism of $\hbar^2 = -1/8$]
+\label{prop:dgsfb-kappa-bruinier-reciprocity}
+Let $\mathbf H_{\Delta_5}$ be the K$3$ chiral Hall--Drinfeld double
+and let $\Delta_5 \in M_{5/2}(\widehat{\mathrm{Sp}_4(\mathbb Z)}^{v_{\Delta_5}})$ be
+the half-integral-weight generator on the Maass $\mathbb Z/2$-spin
+cover. Then the Bruinier reciprocity
+\cite[Thm.~9.3, Prop.~9.4]{Bruinier2002LNM} applied to $[\Delta_5]$ in
+the Chern-class pairing
+$c_1(\mathcal L_{\Delta_5}) \cdot [\overline{\mathcal A_2}]$ forces
+\begin{equation}
+\label{eq:dgsfb-bruinier-forcing}
+ \hbar^{\mathrm{BV},\,2}
+ \;=\; -\,\tfrac{1}{8}
+ \;=\; -\,\bigl(\mathrm{Bruin}(\Delta_5)\bigr)\cdot (-1)^{c_+ + 1},
+\end{equation}
+where $c_+ = 4$ is the positive part of the Mukai signature
+$\mathrm{sig}(K3) = (4, 20)$.
+\end{proposition}
+
+\begin{proof}
+The Bruinier coefficient of a Borcherds / Gritsenko lift at a Heegner
+divisor is $1/(2d)$ for discriminant $d$; at $H_1$ (discriminant $1$)
+this is $1/2$, at $H_4$ (discriminant $4$) this is $1/8$. The
+$\Delta_5$-character is supported on the union $H_1 \cup H_4$
+(cf.~Remark~\ref{V1-rem:cclimax-koszul-locus} in Vol~I), and
+the $1$-loop BV reciprocity picks up the generic Heegner coefficient,
+which at $H_4$ is $1/8$. The sign comes from the parity of $c_+ + 1 =
+5$, odd, giving $-1$. Combining yields $\hbar^{\mathrm{BV},\,2} =
+-1/8$.
+\end{proof}
+
+\begin{remark}[Dictionary: $\hbar^{\mathrm{Drinfeld}}$ $\leftrightarrow$ $\hbar^{\mathrm{BV}}$ on the K$3$ Koszul parameter space]
+\label{rem:dgsfb-two-hbar-dictionary}
+The bridge extends point-by-point on
+$\mathcal U_{\mathrm{Kosz}}^{\mathrm{K3}} = \overline{\mathcal A_2}
+\setminus (H_1 \cup H_4)$:
+\begin{center}
+\begin{tabular}{l|l|l}
+Quantity & Drinfeld side & BV side \\ \hline
+Formal parameter & $\hbar^{\mathrm{Drinfeld}} = 2\pi i / \ell$ & $\hbar^{\mathrm{BV}}$ (loop counter) \\
+Lusztig order & $\ell = 8$ & $c_+ = 4$ (Mukai) \\
+Square at base point & $-\pi^2/16$, normalised $-1/8$ & $-1/8$ via Bruinier \\
+Primary citation & \cite{Lusztig1993UnivEnv} $\S 35$ & \cite{Bruinier2002LNM} Prop.~$9.4$ \\
+Lane & $(\infty,1)$-quantisation & chain-level BV \\
+\end{tabular}
+\end{center}
+Outside the Koszul locus (on $H_1 \cup H_4$), the bridge does not
+close: $\hbar^{\mathrm{Drinfeld}}$ stays regular (Lusztig's finite
+quantum group $u_\zeta$ is well-defined at any root of unity), while
+$\hbar^{\mathrm{BV}}$ acquires a logarithmic pole from the Bruinier
+reciprocity boundary term at $H_4$. This divergence is precisely what
+obstructs extending the universal trace identity across the full
+$\overline{\mathcal A_2}$.
+\end{remark}

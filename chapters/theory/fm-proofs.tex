@@ -1,0 +1,650 @@
+\section{Fulton--MacPherson Calculus: Orientation and Residue Formulas}
+\label{app:FM_Stokes}
+
+The Fulton--MacPherson calculus used in Section~\ref{sec:FM_calculus}
+rests on four explicit ingredients: the boundary orientation convention,
+the logarithmic residue formula, Arnold cancellation at codimension-two
+corners, and the form-degree proof of cubic Landau--Ginzburg truncation.
+
+\subsection{Orientation Conventions and Sign Rules}
+
+\begin{proposition}[Orientation formula]
+\label{prop:orientation_formula}
+On the FM compactification $\FM_k(\C)$ with boundary divisor $D_S$, the orientation is determined by
+\[
+\text{or}(\FM_k(\C)) = (-d\varepsilon_S) \wedge \text{or}(D_S),
+\]
+where $\varepsilon_S \geq 0$ is the inward-pointing radial parameter
+($\varepsilon_S = 0$ at the boundary, $\varepsilon_S > 0$ in the interior)
+and the outward normal is $-\partial_{\varepsilon_S}$
+(Convention~\ref{conv:outward-normal}).
+
+For logarithmic forms $\omega \in \Omega^{k-1}_{\log}(\FM_k(\C))$, the residue operator $\Res_{D_S}$ extracts the coefficient of $d\log\varepsilon_S$:
+\[
+\Res_{D_S}(\omega) = \beta\big|_{\varepsilon_S = 0}, \quad \text{where } \omega = d\log\varepsilon_S \wedge \beta + \alpha,
+\]
+with $\alpha, \beta$ smooth at $\varepsilon_S = 0$. Equivalently, $\Res_{D_S}(\omega) = \lim_{\varepsilon_S \to 0}\bigl(\varepsilon_S \cdot \iota_{\partial_{\varepsilon_S}} \omega\bigr)\big|_{D_S}$. Note that the naive contraction $\iota_{\partial_{\varepsilon_S}} \omega\big|_{D_S}$ (without the factor $\varepsilon_S$) diverges for logarithmic forms and must not be used.
+The sign in Stokes' theorem is fixed by the convention that boundary orientations are induced from the manifold orientation via the outward normal first rule.
+\end{proposition}
+
+\subsection{Explicit Computation for $k=3$: All Boundary Divisors}
+\label{subsec:k3_complete}
+
+The $n=3$ $A_\infty$ identity follows by computing the residue at each codimension-1 boundary divisor of $\FM_3(\C)$ and assembling the contributions via Stokes' theorem.
+
+\subsubsection{Setup and Coordinates}
+
+After quotienting \(\C^3\) by translations only,
+\(\FM_3(\C)=\FM_3^{\mathrm{tr}}(\C)\) has real dimension \(2(3-1)=4\).
+Use quotient coordinates \(w_1=z_1-z_3\), \(w_2=z_2-z_3\), so the
+complex orientation form is
+\[
+\omega_{\FM} = \tfrac{i}{2}\, dw_1 \wedge d\bar{w}_1 \wedge \tfrac{i}{2}\, dw_2 \wedge d\bar{w}_2.
+\]
+The weight form for three inputs $a, b, c$ is the closed logarithmic form
+\[
+\omega_3(a,b,c) = \Omega(w_1, w_2) \cdot a(z_1)\, b(z_2)\, c(z_3),
+\]
+where $\Omega$ is built from propagators and has logarithmic singularities along each boundary divisor. The four codimension-1 boundary divisors are $D_{\{1,2\}}$, $D_{\{1,3\}}$, $D_{\{2,3\}}$, and $D_{\{1,2,3\}}$.
+
+\subsubsection{Divisor $D_{\{1,2\}}$: Points 1 and 2 Collide}
+
+\begin{computation}[$D_{\{1,2\}}$ residue]
+\label{comp:D12}
+Near $D_{\{1,2\}}$, introduce FM coordinates:
+\begin{itemize}
+\item $\varepsilon_{12} \geq 0$: radial separation $|z_1 - z_2|$;
+\item $u_{12} = \tfrac{1}{2}(z_1 + z_2) \in \C$: cluster center;
+\item $\theta_{12} \in S^1$: angle $\arg(z_1 - z_2)$;
+\item $z_3 \in \C$: position of the third point.
+\end{itemize}
+In these coordinates, $z_1 - z_2 = \varepsilon_{12}\, e^{i\theta_{12}}$ and the quotient coordinates become
+\[
+w_1 = u_{12} - z_3 + \tfrac{1}{2}\varepsilon_{12}\, e^{i\theta_{12}}, \qquad
+w_2 = u_{12} - z_3 - \tfrac{1}{2}\varepsilon_{12}\, e^{i\theta_{12}}.
+\]
+The propagator factor $1/(z_1 - z_2) = 1/(\varepsilon_{12}\, e^{i\theta_{12}})$ produces a logarithmic singularity:
+\[
+\frac{d(z_1 - z_2)}{z_1 - z_2} = d\log\varepsilon_{12} + i\, d\theta_{12}.
+\]
+The weight form thus decomposes as
+\[
+\omega_3 = d\log\varepsilon_{12} \wedge \beta_{12} + \alpha_{12},
+\]
+where $\beta_{12}$ and $\alpha_{12}$ are smooth at $\varepsilon_{12} = 0$. The residue is
+\[
+\Res_{D_{\{1,2\}}}(\omega_3) = \beta_{12}\big|_{\varepsilon_{12}=0}.
+\]
+On
+\[
+D_{\{1,2\}}\cong
+\FM_2^{\mathrm{tr}}(\C)\times\FM_2^{\mathrm{red}}(\C),
+\]
+the first factor records the pair \((u_{12},z_3)\) and the second
+records the relative angle \(\theta_{12}\) within the cluster. By the
+factorization property (Theorem~\ref{thm:cluster_factorization}), this
+residue equals the wedge product
+\(\omega_2^{\text{inner}}\wedge\omega_2^{\text{outer}}\), where:
+\begin{itemize}
+\item $\omega_2^{\text{inner}}$ is the weight form for $m_2(a, b)$ with spectral parameter $\lambda = z_1 - z_2$;
+\item $\omega_2^{\text{outer}}$ is the weight form for $m_2(\,\cdot\,, c)$ with the cluster output at position $u_{12}$ and parameter $\mu = u_{12} - z_3$.
+\end{itemize}
+The spectral substitution principle dictates that the outer parameter is evaluated at $\mu = u_{12} - z_3$, which after setting $\varepsilon_{12} = 0$ gives $\mu = w_1 = w_2 = u_{12} - z_3$. The composed operation is
+\[
+\Res_{D_{\{1,2\}}}(\omega_3) \;\longleftrightarrow\; m_2\bigl(m_2(a, b;\, \lambda),\, c;\, \mu\bigr).
+\]
+The incidence sign is \(\epsilon_{D_{\{1,2\}}}=+1\),
+computed from the orientation convention
+\(\operatorname{or}(\FM_3(\C))=(-d\varepsilon_{12})
+\wedge\operatorname{or}(D_{\{1,2\}})\) and the comparison with
+the product orientation on
+\(\FM_2(\C)\times\FM_2^{\mathrm{red}}(\C)\).
+\end{computation}
+
+\subsubsection{Divisor $D_{\{2,3\}}$: Points 2 and 3 Collide}
+
+\begin{computation}[$D_{\{2,3\}}$ residue]
+\label{comp:D23}
+Near $D_{\{2,3\}}$, introduce FM coordinates:
+\begin{itemize}
+\item $\varepsilon_{23} \geq 0$: radial separation $|z_2 - z_3|$;
+\item $u_{23} = \tfrac{1}{2}(z_2 + z_3) \in \C$: cluster center;
+\item $\theta_{23} \in S^1$: angle $\arg(z_2 - z_3)$;
+\item $z_1 \in \C$: position of the first point.
+\end{itemize}
+In these coordinates, $z_2 - z_3 = \varepsilon_{23}\, e^{i\theta_{23}}$, and the quotient coordinates are
+\[
+w_1 = z_1 - u_{23} + \tfrac{1}{2}\varepsilon_{23}\, e^{i\theta_{23}}, \qquad
+w_2 = \varepsilon_{23}\, e^{i\theta_{23}}.
+\]
+The propagator $1/(z_2 - z_3)$ again produces $d\log\varepsilon_{23} + i\, d\theta_{23}$, and the residue at $\varepsilon_{23} = 0$ gives
+\[
+\Res_{D_{\{2,3\}}}(\omega_3) = \beta_{23}\big|_{\varepsilon_{23}=0}.
+\]
+On
+\[
+D_{\{2,3\}}\cong
+\FM_2^{\mathrm{tr}}(\C)\times\FM_2^{\mathrm{red}}(\C),
+\]
+the factorization gives:
+\begin{itemize}
+\item Inner: $m_2(b, c;\, \mu)$ with $\mu = z_2 - z_3$ (the spectral parameter for the colliding pair);
+\item Outer: $m_2(a,\, \cdot\,;\, \lambda)$ with $\lambda = z_1 - u_{23}$.
+\end{itemize}
+After setting $\varepsilon_{23} = 0$, the outer spectral parameter becomes $\lambda = z_1 - z_3 = w_1$. This is the same as $\lambda_1 + \lambda_2$ in the original notation (where $\lambda_1 = z_1 - z_2$ and $\lambda_2 = z_2 - z_3 = \mu$), consistent with the spectral substitution rule: the inner block $\{2,3\}$ is replaced by the sum $\Lambda_{\{2,3\}} = \lambda_2 \to \mu$, and the outer parameter for slot 1 relative to the collapsed slot is $\lambda_1 + \mu$. The composed operation is
+\[
+\Res_{D_{\{2,3\}}}(\omega_3) \;\longleftrightarrow\; (-1)^{|a|}\, m_2\bigl(a,\, m_2(b,c;\,\mu);\, \lambda + \mu\bigr).
+\]
+The Koszul sign $(-1)^{|a|}$ arises from passing the degree-$(-1)$ operation $m_2$ past $a$ in the outer composition (the standard sign $(-1)^{\epsilon(s,j)}$ with $s=1$, $j=2$: $\epsilon(1,2) = (2-1)\cdot |a| = |a|$).
+
+The incidence sign is \(\epsilon_{D_{\{2,3\}}}=+1\): in the
+change of coordinates from \((w_1,w_2)\) to
+\((z_1,\varepsilon_{23},\theta_{23},u_{23})\), the transposition
+parity and the outward-normal factor give the same product
+orientation on
+\(\FM_2(\C)\times\FM_2^{\mathrm{red}}(\C)\).
+\end{computation}
+
+\subsubsection{Divisor $D_{\{1,3\}}$: Points 1 and 3 Collide}
+
+\begin{computation}[$D_{\{1,3\}}$ residue]
+\label{comp:D13}
+Near $D_{\{1,3\}}$, introduce FM coordinates:
+\begin{itemize}
+\item $\varepsilon_{13} \geq 0$: radial separation $|z_1 - z_3|$;
+\item $u_{13} = \tfrac{1}{2}(z_1 + z_3) \in \C$: cluster center;
+\item $\theta_{13} \in S^1$: angle $\arg(z_1 - z_3)$;
+\item $z_2 \in \C$: position of the second point.
+\end{itemize}
+In these coordinates, $z_1 - z_3 = \varepsilon_{13}\, e^{i\theta_{13}}$ and $w_1 = \varepsilon_{13}\, e^{i\theta_{13}}$. The propagator $1/(z_1 - z_3)$ produces a logarithmic singularity, and the residue at $\varepsilon_{13} = 0$ factorizes
+\[
+D_{\{1,3\}}\cong
+\FM_2^{\mathrm{tr}}(\C)\times\FM_2^{\mathrm{red}}(\C)
+\]
+into:
+\begin{itemize}
+\item Inner: $m_2(a, c)$ with the pair $(z_1, z_3)$ colliding;
+\item Outer: the result composed with $b$ at position $z_2$.
+\end{itemize}
+However, \(\{1,3\}\) is a \emph{non-consecutive} subset: in the
+ordered sequence of inputs \((a_1,a_2,a_3)=(a,b,c)\), the subset
+\(\{1,3\}\) skips input \(2\).  The divisor \(D_{\{1,3\}}\) is present
+in the closed chiral FM space.  It contributes zero only in the open
+planar \(E_1\)-ordered projection used for the tree-level
+\(A_\infty\) identity.  In that projection the HT propagator
+\(K(t,z)=\Theta(t)/(2\pi z)\) and the chamber \(t_1>t_2>t_3\) force
+planar edges to be consecutive.  The contraction \(z_1\to z_3\) with
+\(z_2\) outside the cluster has no internal planar edge producing
+\(d\log\varepsilon_{13}\).  The restriction of \(\omega_3\) to
+\(D_{\{1,3\}}\) is regular in \(\varepsilon_{13}\).  Therefore, for
+the planar tree-level weight form,
+\[
+\Res_{D_{\{1,3\}}}(\omega_3) = 0.
+\]
+The incidence sign is \(\epsilon_{D_{\{1,3\}}}=-1\): the radial
+coordinate \(d\varepsilon_{13}\) is already in the first normal
+slot, so the sign is the outward-normal factor.  The residue
+vanishes, hence this face contributes zero.
+\end{computation}
+
+\subsubsection{Divisor $D_{\{1,2,3\}}$: All Three Points Collide}
+
+\begin{computation}[$D_{\{1,2,3\}}$ contribution]
+\label{comp:D123}
+The divisor \(D_{\{1,2,3\}}\) corresponds to all three points
+approaching a common limit simultaneously. Then
+\[
+D_{\{1,2,3\}} \cong
+\FM_1^{\mathrm{tr}}(\C)\times\FM_3^{\mathrm{red}}(\C)
+\cong \{\mathrm{pt}\}\times\FM_3^{\mathrm{red}}(\C)
+\cong \FM_3^{\mathrm{red}}(\C),
+\]
+since \(\FM_1^{\mathrm{tr}}(\C)\) is a single point. Near
+\(D_{\{1,2,3\}}\), the FM coordinates are:
+\begin{itemize}
+\item $\varepsilon_{123} \geq 0$: overall scale of the three-point cluster;
+\item Internal coordinates on $\FM_3(\C)$: the relative configuration of all three points.
+\end{itemize}
+The factorization at this boundary gives two types of composed operations:
+\begin{itemize}
+\item $m_1 \circ m_3$: the differential $Q = m_1$ acts on the output of $m_3(a,b,c)$, giving $m_1(m_3(a,b,c))$;
+\item $m_3 \circ (m_1 \otimes \id \otimes \id)$ and its permutations: $m_3$ with $m_1 = Q$ applied to one input.
+\end{itemize}
+These contribute the terms
+\begin{align*}
+&m_1(m_3(a,b,c)) + m_3(m_1(a), b, c) + (-1)^{|a|}\, m_3(a, m_1(b), c) + (-1)^{|a|+|b|}\, m_3(a, b, m_1(c)).
+\end{align*}
+The signs are the standard Koszul signs $(-1)^{\epsilon(s,1)} = (-1)^{0 \cdot |a_1 \cdots a_s|}$ for $j=1$: passing the degree-$0$ operation $m_1$ past the preceding inputs gives $(-1)^{(1-1)(|a_1|+\cdots+|a_s|)} = (-1)^0 = 1$ when $m_1$ hits $a_1$, and $(-1)^{|a|}$ when it hits $a_2$ (since then $m_1$ is being inserted at position $s=1$ in $m_3$, and the relevant sign in the $A_\infty$ identity~\eqref{eq:ainfty-relation-raw} is $(-1)^{\epsilon(s,j)}$ with $j=1$, $s$ the number of preceding inputs). More precisely, the Stasheff sign convention gives $\epsilon(s,1) = (1-1)(|a_1|+\cdots+|a_s|) = 0$ for all $s$, but the suspended degree conventions for $m_3$ of degree $1-3 = -2$ introduce the signs $(-1)^{|a|}$ and $(-1)^{|a|+|b|}$ via the Leibniz rule for the differential acting on the inputs of $m_3$.
+\end{computation}
+
+\subsubsection{Assembly: The $n=3$ $A_\infty$ Identity}
+
+\begin{proposition}[$k=3$ Stasheff identity]
+\label{prop:k3_identity}
+Summing over all boundary divisors via Stokes' theorem (Theorem~\ref{thm:Stokes_FM}), and using $d\omega_3 = 0$ in the interior $\Conf_3(\C)$:
+\[
+0 = \int_{\Gamma_3} d\omega_3 =
+\sum_{\substack{S \subseteq \{1,2,3\} \\ |S| \geq 2}}
+\epsilon_{D_S}\int_{\Gamma_3 \cap D_S}\Res_{D_S}(\omega_3).
+\]
+The four contributions are:
+\begin{enumerate}[label=(\roman*)]
+\item \(D_{\{1,2\}}\), \(\epsilon_{D_{\{1,2\}}}=+1\):
+contributes \(m_2(m_2(a,b;\lambda),c;\mu)\);
+\item \(D_{\{2,3\}}\), \(\epsilon_{D_{\{2,3\}}}=+1\):
+contributes \((-1)^{|a|}m_2(a,m_2(b,c;\mu);\lambda+\mu)\);
+\item \(D_{\{1,3\}}\), \(\epsilon_{D_{\{1,3\}}}=-1\):
+contributes \(0\) because the planar residue vanishes;
+\item $D_{\{1,2,3\}}$: contributes $m_1(m_3(a,b,c)) + m_3(m_1(a),b,c) + (-1)^{|a|}\, m_3(a,m_1(b),c) + (-1)^{|a|+|b|}\, m_3(a,b,m_1(c))$.
+\end{enumerate}
+Setting the total to zero reproduces exactly the $n=3$ $A_\infty$ identity~\eqref{eq:ainfty-relation-raw}:
+\begin{align*}
+0 &= m_1(m_3(a,b,c)) + m_3(m_1(a),b,c) + (-1)^{|a|}\, m_3(a,m_1(b),c) + (-1)^{|a|+|b|}\, m_3(a,b,m_1(c)) \\
+&\quad + m_2(m_2(a,b),c) + (-1)^{|a|}\, m_2(a,m_2(b,c)),
+\end{align*}
+where in the last line we have suppressed the spectral parameters, with the understanding that each $m_2$ composition carries the appropriate spectral substitution as computed above. \qed
+\end{proposition}
+
+\subsection{Explicit Computation for $k=4$}
+\label{subsec:k4_computation}
+
+The full boundary analysis for $\FM_4(\C)$ verifies the $n=4$ $A_\infty$ identity.
+
+\subsubsection{Setup}
+
+The translation-reduced FM compactification
+\(\FM_4(\C)=\FM_4^{\mathrm{tr}}(\C)\) has real dimension \(2(4-1)=6\).
+Use quotient coordinates \(w_i=z_i-z_4\) for \(i=1,2,3\). The boundary
+divisors \(D_S\) with \(|S|\ge2\) are:
+\begin{itemize}
+\item \textbf{Two-element subsets} (\(|S|=2\)):
+\(D_{\{1,2\}}, D_{\{1,3\}}, D_{\{1,4\}}, D_{\{2,3\}},
+D_{\{2,4\}}, D_{\{3,4\}}\). Each gives
+\(D_S\cong\FM_3^{\mathrm{tr}}(\C)\times
+\FM_2^{\mathrm{red}}(\C)\).
+\item \textbf{Three-element subsets} (\(|S|=3\)):
+\(D_{\{1,2,3\}}, D_{\{1,2,4\}}, D_{\{1,3,4\}},
+D_{\{2,3,4\}}\). Each gives
+\(D_S\cong\FM_2^{\mathrm{tr}}(\C)\times
+\FM_3^{\mathrm{red}}(\C)\).
+\item \textbf{Four-element subset} (\(|S|=4\)):
+\(D_{\{1,2,3,4\}}\cong
+\FM_1^{\mathrm{tr}}(\C)\times\FM_4^{\mathrm{red}}(\C)
+\cong\FM_4^{\mathrm{red}}(\C)\).
+\end{itemize}
+
+\subsubsection{Non-Vanishing Consecutive Divisors}
+
+After projection to the open planar \(E_1\)-ordered chain
+(Remark~\ref{rem:nonconsecutive_vanishing}), only consecutive subsets
+contribute non-zero residues to the tree-level \(A_\infty\) identity.
+For ordered inputs \((a_1,a_2,a_3,a_4)\), the consecutive subsets of
+size \(\geq2\) are:
+\[
+\{1,2\},\quad \{2,3\},\quad \{3,4\},\quad \{1,2,3\},\quad \{2,3,4\},\quad \{1,2,3,4\}.
+\]
+Non-consecutive subsets
+(\(\{1,3\}\), \(\{1,4\}\), \(\{2,4\}\),
+\(\{1,3,4\}\), \(\{1,2,4\}\)) are still boundary divisors in the
+closed chiral FM space.  Their residues vanish only after the planar
+open projection, by the same argument as Computation~\ref{comp:D13}.
+
+\subsubsection{Two-Element Consecutive Divisors}
+
+\begin{computation}[$D_{\{1,2\}}$ in $\FM_4(\C)$]
+Points 1 and 2 collide while 3 and 4 remain separate. The factorization is
+\[
+D_{\{1,2\}} \cong \FM_3(\C) \times \FM_2^{\mathrm{red}}(\C),
+\]
+where $\FM_3(\C)$ records positions of the cluster center $u_{12}$ plus points $z_3, z_4$ (three points total), and $\FM_2^{\mathrm{red}}(\C)$ records the relative position within the cluster. The residue gives
+\[
+\Res_{D_{\{1,2\}}}(\omega_4) \;\longleftrightarrow\; m_3\bigl(m_2(a_1, a_2;\, \lambda_1),\, a_3,\, a_4;\, \Lambda_{\{1,2\}}, \lambda_2, \lambda_3\bigr),
+\]
+with effective outer parameter $\Lambda_{\{1,2\}} = \lambda_1$ for the collapsed block, and the remaining parameters $\lambda_2, \lambda_3$ unchanged. The Koszul sign is $(-1)^{\epsilon(0,2)} = (-1)^{(2-1)\cdot 0} = +1$.
+\end{computation}
+
+\begin{computation}[$D_{\{2,3\}}$ in $\FM_4(\C)$]
+Points 2 and 3 collide. The factorization
+$D_{\{2,3\}} \cong \FM_3(\C) \times \FM_2^{\mathrm{red}}(\C)$ gives
+\[
+\Res_{D_{\{2,3\}}}(\omega_4) \;\longleftrightarrow\; (-1)^{|a_1|}\, m_3\bigl(a_1,\, m_2(a_2, a_3;\, \lambda_2),\, a_4;\, \lambda_1 + \Lambda_{\{2,3\}}, \lambda_3\bigr),
+\]
+where $\Lambda_{\{2,3\}} = \lambda_2$ is the effective parameter for the collapsed block, and the outer parameter for slot 1 becomes $\lambda_1 + \lambda_2$ (the distance from $z_1$ to the cluster center, by spectral substitution). The Koszul sign is $(-1)^{\epsilon(1,2)} = (-1)^{|a_1|}$.
+\end{computation}
+
+\begin{computation}[$D_{\{3,4\}}$ in $\FM_4(\C)$]
+Points 3 and 4 collide. The factorization gives
+\[
+\Res_{D_{\{3,4\}}}(\omega_4) \;\longleftrightarrow\; (-1)^{|a_1|+|a_2|}\, m_3\bigl(a_1,\, a_2,\, m_2(a_3, a_4;\, \lambda_3);\, \lambda_1, \lambda_2 + \Lambda_{\{3,4\}}\bigr),
+\]
+where $\Lambda_{\{3,4\}} = \lambda_3$ and the Koszul sign is $(-1)^{\epsilon(2,2)} = (-1)^{|a_1|+|a_2|}$.
+\end{computation}
+
+\subsubsection{Three-Element Consecutive Divisors}
+
+\begin{computation}[$D_{\{1,2,3\}}$ in $\FM_4(\C)$]
+Points 1, 2, 3 collide while point 4 remains separate. The factorization is
+\[
+D_{\{1,2,3\}} \cong \FM_2(\C) \times \FM_3^{\mathrm{red}}(\C),
+\]
+where $\FM_2(\C)$ records the pair (cluster center $u_{123}$, point $z_4$) and $\FM_3^{\mathrm{red}}(\C)$ records relative positions within the cluster. The residue gives
+\[
+\Res_{D_{\{1,2,3\}}}(\omega_4) \;\longleftrightarrow\; m_2\bigl(m_3(a_1, a_2, a_3;\, \lambda_1, \lambda_2),\, a_4;\, \Lambda_{\{1,2,3\}}, \lambda_3\bigr),
+\]
+with $\Lambda_{\{1,2,3\}} = \lambda_1 + \lambda_2$ and Koszul sign $(-1)^{\epsilon(0,3)} = (-1)^{(3-1)\cdot 0} = +1$.
+\end{computation}
+
+\begin{computation}[$D_{\{2,3,4\}}$ in $\FM_4(\C)$]
+Points 2, 3, 4 collide while point 1 remains separate. The factorization is
+\[
+D_{\{2,3,4\}} \cong \FM_2(\C) \times \FM_3^{\mathrm{red}}(\C),
+\]
+giving
+\[
+\Res_{D_{\{2,3,4\}}}(\omega_4) \;\longleftrightarrow\; (-1)^{|a_1|}\, m_2\bigl(a_1,\, m_3(a_2, a_3, a_4;\, \lambda_2, \lambda_3);\, \lambda_1 + \Lambda_{\{2,3,4\}}\bigr),
+\]
+with $\Lambda_{\{2,3,4\}}=\lambda_2+\lambda_3$.  In the
+desuspended coordinate convention of
+\eqref{eq:ainfty-relation-raw}, the insertion sign is
+$(-1)^{\epsilon(1,3)}=(-1)^{|a_1|}$.
+\end{computation}
+
+\subsubsection{The Full Boundary Divisor $D_{\{1,2,3,4\}}$}
+
+\begin{computation}[$D_{\{1,2,3,4\}}$]
+All four points collide. As in the $k=3$ case,
+\[
+D_{\{1,2,3,4\}}
+\cong
+\FM_1^{\mathrm{tr}}(\C)\times\FM_4^{\mathrm{red}}(\C),
+\]
+and this boundary stratum produces the terms involving $m_1$ and $m_4$:
+\begin{align*}
+&m_1(m_4(a_1,a_2,a_3,a_4)) \\
+&+ m_4(m_1(a_1),a_2,a_3,a_4) + (-1)^{|a_1|}\, m_4(a_1,m_1(a_2),a_3,a_4) \\
+&+ (-1)^{|a_1|+|a_2|}\, m_4(a_1,a_2,m_1(a_3),a_4) + (-1)^{|a_1|+|a_2|+|a_3|}\, m_4(a_1,a_2,a_3,m_1(a_4)).
+\end{align*}
+These are the ``$m_1 \leftrightarrow m_4$'' terms in the $n=4$ identity, arising from the Leibniz rule for the differential $Q = m_1$ acting on $m_4$.
+\end{computation}
+
+\subsubsection{Assembly: The $n=4$ $A_\infty$ Identity}
+
+\begin{proposition}[$k=4$ Stasheff identity]
+\label{prop:k4_identity}
+Summing all boundary contributions via Stokes' theorem:
+\begin{align*}
+0 &= m_1(m_4(a_1,a_2,a_3,a_4)) + \sum_{s=0}^{3} (-1)^{|a_1|+\cdots+|a_s|}\, m_4(a_1,\ldots,m_1(a_{s+1}),\ldots,a_4) \\
+&\quad + m_2(m_3(a_1,a_2,a_3),a_4) + (-1)^{|a_1|}\, m_2(a_1,m_3(a_2,a_3,a_4)) \\
+&\quad + m_3(m_2(a_1,a_2),a_3,a_4) + (-1)^{|a_1|}\, m_3(a_1,m_2(a_2,a_3),a_4) \\
+&\quad + (-1)^{|a_1|+|a_2|}\, m_3(a_1,a_2,m_2(a_3,a_4)),
+\end{align*}
+with spectral parameters determined by the substitution rules computed above. This is exactly the $n=4$ Stasheff identity~\eqref{eq:ainfty-relation-raw}.
+
+The ten displayed full-chain terms are supported on the six
+non-vanishing consecutive boundary divisors:
+\begin{itemize}
+\item First line (5 terms): $D_{\{1,2,3,4\}}$ contributions ($m_1 \leftrightarrow m_4$);
+\item Second line (2 terms): $D_{\{1,2,3\}}$ and $D_{\{2,3,4\}}$ contributions ($m_2 \leftrightarrow m_3$);
+\item Third line (3 terms): $D_{\{1,2\}}$, $D_{\{2,3\}}$, $D_{\{3,4\}}$ contributions ($m_3 \leftrightarrow m_2$).
+\end{itemize}
+Non-consecutive divisors
+(\(D_{\{1,3\}}\), \(D_{\{1,4\}}\), \(D_{\{2,4\}}\),
+\(D_{\{1,3,4\}}\), \(D_{\{1,2,4\}}\)) contribute zero in the planar
+open projection. They are not absent from the closed chiral FM
+compactification. If \(m_1=0\), the first line vanishes and the
+minimal arity-four identity is the five-term relation
+\[
+m_2\circ m_3+m_3\circ m_2=0.
+\]
+The nine-term count belongs instead to the first minimal-model
+identity involving \(m_4\), namely the arity-five relation
+\[
+m_2\circ m_4+m_3\circ m_3+m_4\circ m_2=0.
+\]
+Corner contributions (codimension-2 strata where two disjoint clusters
+collide simultaneously) cancel by the Arnold relations proved in the
+next subsection. \qed
+\end{proposition}
+
+\begin{remark}[Arity four does not determine \(m_4\) on cohomology]
+\label{rem:arity-four-not-m4}
+The displayed \(n=4\) identity contains \(m_4\) only through
+\(m_1m_4\) and through the terms in which \(m_1\) acts on an input of
+\(m_4\). After passing to a minimal model with \(m_1=0\), the
+arity-four relation is
+\[
+m_2\circ m_3+m_3\circ m_2=0.
+\]
+It is the Jacobi-type coherence for \(m_2\) and \(m_3\); it does not
+determine \(m_4\). The first minimal-model Stasheff identity in which
+\(m_4\) appears is arity five:
+\[
+m_2\circ m_4+m_3\circ m_3+m_4\circ m_2=0,
+\]
+with the usual insertion signs and spectral substitutions. A
+chain-level \(m_4\) may be chosen as a homotopy filling the arity-four
+source \(m_2\circ m_3+m_3\circ m_2\), but this is an SDR/gauge choice,
+not a cohomological determination by the arity-four boundary alone.
+\end{remark}
+
+\begin{remark}[Codimension-2 corners in $\FM_4(\C)$]
+\label{rem:k4_corners}
+In $\FM_4(\C)$, the codimension-2 strata that could potentially contribute are intersections of disjoint boundary divisors, such as $D_{\{1,2\}} \cap D_{\{3,4\}}$ (points 1,2 form one cluster while 3,4 form another, simultaneously). These are genuine codimension-2 corners of the manifold with corners $\FM_4(\C)$. The Arnold cancellation (Theorem~\ref{thm:Arnold_full_proof} below) ensures that the two orderings of taking residues (first $D_{\{1,2\}}$ then $D_{\{3,4\}}$, or vice versa) contribute with opposite signs and cancel. Nested corners such as $D_{\{1,2\}} \cap D_{\{1,2,3\}}$ (where $\{1,2\} \subset \{1,2,3\}$) correspond to hierarchical collisions and are already accounted for as boundary strata of $D_{\{1,2,3\}}$; these produce the terms $m_2(m_2(a_1,a_2),a_3)$ inside $m_3(m_2(\cdot,\cdot),\cdot,\cdot)$ and are part of the codimension-1 analysis.
+\end{remark}
+
+
+\subsection{Arnold--Orlik--Solomon Relations}
+\label{subsec:arnold_complete}
+
+\begin{theorem}[Arnold relations on $\FM_n(\C)$]
+\label{thm:AOS_forms}
+On the configuration space $\Conf_n(\C)$, define the logarithmic $1$-forms
+\[
+\omega_{ij} := d\log(z_i - z_j) = \frac{dz_i - dz_j}{z_i - z_j}, \qquad 1 \leq i < j \leq n.
+\]
+These forms satisfy the \emph{Arnold relation}: for any triple $i < j < k$,
+\begin{equation}
+\label{eq:AOS}
+\omega_{ij} \wedge \omega_{jk} + \omega_{jk} \wedge \omega_{ki} + \omega_{ki} \wedge \omega_{ij} = 0.
+\end{equation}
+Equivalently, writing $\omega_{ji} = -\omega_{ij}$:
+\[
+\sum_{\text{cyclic}} \omega_{ij} \wedge \omega_{jk} = 0.
+\]
+\end{theorem}
+
+\begin{proof}
+Set $f = z_i - z_j$, $g = z_j - z_k$, so $z_i - z_k = f + g$. Then
+\[
+\omega_{ij} = \frac{df}{f}, \quad \omega_{jk} = \frac{dg}{g}, \quad \omega_{ik} = \frac{d(f+g)}{f+g}.
+\]
+The partial fraction identity
+\[
+\frac{1}{f \cdot g} = \frac{1}{(f+g)} \left(\frac{1}{f} + \frac{1}{g}\right)
+\]
+implies (multiplying both sides by $df \wedge dg$):
+\[
+\frac{df}{f} \wedge \frac{dg}{g} = \frac{d(f+g)}{f+g} \wedge \frac{dg}{g} + \frac{df}{f} \wedge \frac{d(f+g)}{f+g}.
+\]
+To verify this, note that $d(f+g) = df + dg$, so
+\begin{align*}
+\frac{d(f+g)}{f+g} \wedge \frac{dg}{g} + \frac{df}{f} \wedge \frac{d(f+g)}{f+g}
+&= \frac{(df+dg) \wedge dg}{(f+g)g} + \frac{df \wedge (df+dg)}{f(f+g)} \\
+&= \frac{df \wedge dg}{(f+g)g} + \frac{df \wedge dg}{f(f+g)} \\
+&= df \wedge dg \cdot \frac{1}{f+g}\left(\frac{1}{g} + \frac{1}{f}\right) \\
+&= \frac{df \wedge dg}{fg} = \frac{df}{f} \wedge \frac{dg}{g}.
+\end{align*}
+Rearranging:
+\[
+\omega_{ij} \wedge \omega_{jk} - \omega_{ik} \wedge \omega_{jk} - \omega_{ij} \wedge \omega_{ik} = 0,
+\]
+which is~\eqref{eq:AOS} after using $\omega_{ki} = -\omega_{ik}$.
+\end{proof}
+
+\begin{corollary}[Arnold is the PVA Jacobi residue identity]
+\label{cor:arnold-pva-jacobi-residue}
+At arity three, the form identity \eqref{eq:AOS} is the Jacobi
+identity for the singular part of \(m_2\).  More precisely, for the
+doubly singular three-point form
+\(\Omega_3^{\mathrm{sing}\text{-}\mathrm{sing}}(a,b,c)\) of
+Lemma~\ref{lem:PVA3_proof}, the three pairwise residues are supported
+on
+\[
+D_{\{1,2\}},\qquad D_{\{2,3\}},\qquad D_{\{1,3\}},
+\]
+with incidence signs \(+,+,-\).  After the divided-power Borel
+transform, and after writing the Jacobi identity in the normal form
+\[
+J_{\lambda,\mu}(a,b,c)
+=
+\{a_\lambda\{b_\mu c\}\}
+-
+(-1)^{(\degree{a}+1)(\degree{b}+1)}
+\{b_\mu\{a_\lambda c\}\}
+-
+\{\{a_\lambda b\}_{\lambda+\mu}c\},
+\]
+the oriented boundary contributions are
+\[
+\{a_\lambda\{b_\mu c\}\},\qquad
+-\,(-1)^{(\degree{a}+1)(\degree{b}+1)}
+\{b_\mu\{a_\lambda c\}\},\qquad
+-\{\{a_\lambda b\}_{\lambda+\mu}c\}.
+\]
+Thus Stokes' theorem on \(\FM_3(\C)\), together with
+\(\omega_{12}\wedge\omega_{23}
++\omega_{23}\wedge\omega_{31}
++\omega_{31}\wedge\omega_{12}=0\), gives precisely
+Theorem~\ref{thm:Jacobi}.
+\end{corollary}
+
+\begin{theorem}[Arnold cancellation at codimension-two corners]
+\label{thm:Arnold_full_proof}
+Let $S, T \subseteq \{1,\ldots,k\}$ be disjoint subsets with $|S|, |T| \geq 2$. The codimension-2 corner $D_S \cap D_T \subset \FM_k(\C)$ does not contribute to the boundary integral: the two residue orderings cancel exactly.
+
+Precisely, for any closed logarithmic form $\omega \in \Omega^\bullet_{\log}(\FM_k(\C))$ built from wedge products of the $\omega_{ij}$:
+\begin{equation}
+\label{eq:corner_cancellation}
+\int_{\Gamma \cap (D_S)|_{D_T}} \Res_{D_S}\bigl(\Res_{D_T}(\omega)\bigr) + \int_{\Gamma \cap (D_T)|_{D_S}} \Res_{D_T}\bigl(\Res_{D_S}(\omega)\bigr) = 0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+\textbf{Local coordinates at the corner.}
+Near $D_S \cap D_T$, FM coordinates include two independent radial parameters $\varepsilon_S, \varepsilon_T \geq 0$ (measuring cluster sizes for $S$ and $T$ respectively), along with cluster centers $u_S, u_T$, angular coordinates $\theta_S, \theta_T$, and coordinates for the remaining points. The corner $D_S \cap D_T$ is the locus $\{\varepsilon_S = 0,\, \varepsilon_T = 0\}$.
+
+A logarithmic form near this corner decomposes as
+\begin{align*}
+\omega &= d\log\varepsilon_S \wedge d\log\varepsilon_T \wedge \gamma_{ST} \\
+&\quad + d\log\varepsilon_S \wedge \beta_S + d\log\varepsilon_T \wedge \beta_T + \alpha,
+\end{align*}
+where $\gamma_{ST}, \beta_S, \beta_T, \alpha$ are smooth at $\varepsilon_S = \varepsilon_T = 0$.
+
+\textbf{Two orderings of residues.}
+Taking the residue first at $D_T$ (i.e., setting $\varepsilon_T = 0$ and extracting the coefficient of $d\log\varepsilon_T$):
+\[
+\Res_{D_T}(\omega) = d\log\varepsilon_S \wedge \gamma_{ST}\big|_{\varepsilon_T=0} + \beta_T\big|_{\varepsilon_T=0}.
+\]
+Then taking the residue at $D_S$ (extracting $d\log\varepsilon_S$):
+\[
+\Res_{D_S}\bigl(\Res_{D_T}(\omega)\bigr) = \gamma_{ST}\big|_{\varepsilon_S=\varepsilon_T=0}.
+\]
+
+Alternatively, taking residues in the opposite order:
+\[
+\Res_{D_S}(\omega) = d\log\varepsilon_T \wedge (-1)^1 \gamma_{ST}\big|_{\varepsilon_S=0} + \beta_S\big|_{\varepsilon_S=0},
+\]
+where the sign $(-1)^1$ arises from anticommuting $d\log\varepsilon_S$ past $d\log\varepsilon_T$ in the first term of $\omega$ (since $\omega = d\log\varepsilon_S \wedge d\log\varepsilon_T \wedge \gamma_{ST} + \cdots = -d\log\varepsilon_T \wedge d\log\varepsilon_S \wedge \gamma_{ST} + \cdots$). Thus
+\[
+\Res_{D_T}\bigl(\Res_{D_S}(\omega)\bigr) = -\gamma_{ST}\big|_{\varepsilon_S=\varepsilon_T=0}.
+\]
+
+\textbf{Orientation signs and cancellation.}
+The two factorizations of the corner are:
+\begin{itemize}
+\item $(D_S)|_{D_T}$: first go to $D_T$ (set $\varepsilon_T = 0$), then within $D_T$ approach $D_S$ (set $\varepsilon_S = 0$). The boundary orientation uses outward normal first for each step. The ambient orientation restricted to the corner is
+\[
+d\varepsilon_T \wedge d\varepsilon_S \wedge \text{or}(D_S \cap D_T).
+\]
+\item $(D_T)|_{D_S}$: first go to $D_S$, then approach $D_T$. The orientation is
+\[
+d\varepsilon_S \wedge d\varepsilon_T \wedge \text{or}(D_S \cap D_T).
+\]
+\end{itemize}
+These two orientations differ by the sign of swapping
+$d\varepsilon_S \leftrightarrow d\varepsilon_T$, which is $(-1)$.
+With a single orientation fixed on the corner, the incidence numbers of
+the two ordered boundary strata differ by this sign. The residue sign
+above records the anticommutation of the logarithmic normal forms;
+the Stokes contribution uses the residue sign and the incidence sign
+as one oriented boundary datum, not as two independently normalised
+corner integrals. Thus the two ordered approaches to the same
+codimension-$2$ face enter with opposite total signs:
+\begin{align*}
+&\int_{(D_S)|_{D_T}} \Res_{D_S}(\Res_{D_T}(\omega))
+ = \int_{D_S \cap D_T} \gamma_{ST}\big|_{\varepsilon_S=\varepsilon_T=0}, \\
+&\int_{(D_T)|_{D_S}} \Res_{D_T}(\Res_{D_S}(\omega))
+ = -\int_{D_S \cap D_T} \gamma_{ST}\big|_{\varepsilon_S=\varepsilon_T=0}.
+\end{align*}
+This is the local form of the identity that each codimension-$2$ face
+of a manifold with corners appears twice in the iterated boundary, with
+opposite incidence signs. The Stokes orientation formula on a manifold
+with corners gives:
+
+The boundary operator $\partial$ on the chain $\FM_k(\C)$ satisfies $\partial^2 = 0$. Writing $\partial = \sum_S \epsilon_S\, D_S$ (sum over codimension-1 faces), the relation $\partial^2 = 0$ means
+\[
+\sum_{S \neq T} \epsilon_S \epsilon_T \cdot (\text{corner } D_S \cap D_T \text{ with incidence sign}) = 0.
+\]
+For each pair of disjoint $S, T$, the corner $D_S \cap D_T$ appears exactly twice: once as a boundary face of $D_S$ (the face where $T$ also collapses) and once as a boundary face of $D_T$ (the face where $S$ also collapses). The relation $\partial^2 = 0$ forces these two appearances to carry opposite incidence numbers, which is the content of~\eqref{eq:corner_cancellation}.
+
+This is ultimately a topological fact: on any manifold with corners, $\partial^2 = 0$ on the chain level ensures that corner contributions cancel automatically in Stokes' theorem. The Arnold--Orlik--Solomon relation~\eqref{eq:AOS} provides the \emph{form-theoretic} mechanism by which this cancellation occurs for the specific logarithmic forms built from $\omega_{ij}$. Specifically, if $\omega$ is a product of forms $\omega_{ij}$ and $i \in S$, $j \in T$ with $S \cap T = \varnothing$, then $\omega_{ij}$ contributes a singularity at both $D_S$ and $D_T$. The AOS relation~\eqref{eq:AOS} relates this mixed singularity to purely nested singularities, ensuring that the double residue $\Res_{D_S}(\Res_{D_T}(\omega))$ is controlled by the same partial fraction identity that proves~\eqref{eq:AOS}.
+\end{proof}
+
+\begin{example}[Arnold cancellation for $k=4$, $S=\{1,2\}$, $T=\{3,4\}$]
+\label{ex:arnold_k4}
+Consider the corner $D_{\{1,2\}} \cap D_{\{3,4\}}$ in $\FM_4(\C)$. The weight form involves $\omega_{12}$, $\omega_{23}$, $\omega_{34}$ (for consecutive pairs). Near the corner, both $\varepsilon_{12}$ and $\varepsilon_{34}$ approach zero simultaneously. The double residue $\Res_{D_{\{1,2\}}}(\Res_{D_{\{3,4\}}}(\omega_4))$ extracts the coefficient of $d\log\varepsilon_{12} \wedge d\log\varepsilon_{34}$.
+
+By the AOS relation applied to the triple $(z_1, z_2, z_3)$ and separately to $(z_2, z_3, z_4)$, the logarithmic forms satisfy constraints that prevent an independent double-logarithmic singularity from surviving. Concretely, the form $\omega_{12} \wedge \omega_{34}$ does have a double-log singularity at $D_{\{1,2\}} \cap D_{\{3,4\}}$, but it appears with the same coefficient from both orderings (taking $\Res_{D_{\{1,2\}}}$ first or $\Res_{D_{\{3,4\}}}$ first). The cancellation in~\eqref{eq:corner_cancellation} then follows from $\partial^2 = 0$ as proved above.
+\end{example}
+
+
+\subsection{Rigorous LG Truncation: $m_k = 0$ for $k \geq 4$}
+\label{subsec:truncation_complete}
+
+The cubic Landau--Ginzburg vertex leaves no form degree for independent
+$k$-ary operations once $k\geq 4$.
+
+\begin{theorem}[Cubic Landau--Ginzburg minimal-model truncation]
+\label{thm:LG_truncation_full}
+For the Landau--Ginzburg model with cubic superpotential
+$W=g\Phi^3/3!$ on $\C\times\R$, the tree-level minimal transferred
+\(A_\infty\)-structure on the Jacobi ring \(J(W)=\C[\Phi]/(\Phi^2)\)
+satisfies \(m_k=0\) for all \(k\geq4\). Its only non-binary higher
+operation is \(m_3(\Phi,\Phi,\Phi)=g\).
+\end{theorem}
+
+\begin{proof}
+Let \(\pi:\C[\Phi]\to J(W)\) be the Jacobi projection and let \(h\)
+be a contraction of the ideal \((\Phi^2)\). The tree-level
+homological perturbation formula expresses \(m_n^J\) as a sum over
+rooted trees. A vertex of valence \(r\) is labelled by \(W^{(r)}\),
+an internal edge is labelled by \(h\), and the root is followed by
+\(\pi\). For \(W=g\Phi^3/3!\),
+\[
+W'''=g,\qquad W^{(r)}=0\quad(r\geq4).
+\]
+Hence the only one-vertex tree beyond multiplication is the cubic
+corolla, and it gives \(m_3(\Phi,\Phi,\Phi)=g\). A tree with at least
+two cubic vertices has an internal cubic edge; after multiplication
+along this edge its root contribution lies in \((\Phi^2)\). The
+projection \(\pi\) kills this ideal. Therefore every rooted tree with
+\(n\geq4\) vanishes in the minimal transferred Jacobi model.
+
+This is a tree-level statement. Loop graphs live in the renormalised BV
+theory before projection to \(J(W)\); they are not constrained by this
+minimal-model argument.
+\end{proof}
+
+\begin{remark}[Comparison with the quartic case]
+For a quartic superpotential $W = \frac{g}{4!}\Phi^4$, each vertex is $4$-valent. A tree with $k$ external legs has $V = (k-2)/2$ internal vertices (requiring $k$ even for non-zero trees) and $E = V - 1 = (k-4)/2$ internal edges. The holomorphic form deficit is $V - E = 1$, and the same vanishing argument applies for $k \geq 5$ (with $m_4 \neq 0$ being the first non-trivial higher operation). More generally, for an $r$-valent vertex, the operation $m_r$ is the first non-trivial higher operation, and $m_k = 0$ for $k > r$ at tree level.
+\end{remark}

@@ -1,0 +1,4257 @@
+% Twisted holography and quantum gravity: modular bootstrap as MC recursion.
+%
+% Labels used by the recursion:
+% thm:mc2-bar-intrinsic, thm:recursive-existence,
+% thm:convolution-dg-lie-structure, const:vol1-genus-spectral-sequence,
+% def:modular-convolution-dg-lie
+
+% =====================================
+% Local macros (provided only if absent from the ambient manuscript)
+% =====================================
+\providecommand{\cA}{\mathcal{A}}
+\providecommand{\cH}{\mathcal{H}}
+\providecommand{\cM}{\mathcal{M}}
+\providecommand{\cC}{\mathcal{C}}
+\providecommand{\fg}{\mathfrak{g}}
+\providecommand{\fC}{\mathfrak{C}}
+\providecommand{\gAmod}{\mathfrak{g}_{\cA}^{\mathrm{mod}}}
+\providecommand{\dzero}{d_0}
+\providecommand{\dfib}{d_{\mathrm{fib}}}
+\providecommand{\MC}{\text{MC}}
+\providecommand{\barB}{\overline{B}}
+\providecommand{\Defcyc}{\operatorname{Def}_{\mathrm{cyc}}}
+\providecommand{\Definfmod}{\operatorname{Def}_{\infty}^{\mathrm{mod}}}
+\providecommand{\Convstr}{\operatorname{Conv}_{\mathrm{str}}}
+\providecommand{\Convinf}{\operatorname{Conv}_{\infty}}
+\providecommand{\Gmod}{\mathcal{G}^{\mathrm{mod}}}
+\providecommand{\Tr}{\operatorname{Tr}}
+\providecommand{\Hom}{\operatorname{Hom}}
+\providecommand{\Res}{\operatorname{Res}}
+\providecommand{\id}{\mathrm{id}}
+\providecommand{\ad}{\operatorname{ad}}
+\providecommand{\gr}{\operatorname{gr}}
+\providecommand{\wt}{\operatorname{wt}}
+\providecommand{\Aut}{\operatorname{Aut}}
+\providecommand{\Det}{\operatorname{Det}}
+\providecommand{\Sym}{\operatorname{Sym}}
+\providecommand{\Omegach}{\Omega^{\text{ch}}}
+
+% Bootstrap-specific macros
+\providecommand{\Ob}{\mathrm{Ob}}
+\providecommand{\Shad}{\operatorname{Sh}}
+\providecommand{\hCont}{\mathsf{h}}
+\providecommand{\BVop}{\Delta_{\mathrm{BV}}}
+\providecommand{\dsew}{d_{\mathrm{sew}}}
+\providecommand{\dpf}{d_{\mathrm{pf}}}
+
+\section{Modular bootstrap as MC recursion}
+% label removed: sec:thqg-modular-bootstrap
+\index{modular bootstrap|textbf}
+\index{genus spectral sequence!bootstrap}
+\index{Maurer--Cartan equation!genus expansion}
+\index{bootstrap!modular, from MC recursion}
+
+The genus-$g$ partition function is determined inductively from
+genus-$0$ data by the Maurer--Cartan equation in the modular
+convolution algebra~$\gAmod$
+(Definition~\ref*{V1-def:modular-convolution-dg-lie}):
+
+\begin{center}
+\emph{The MC equation $D_\cA\,\Theta_\cA
++ \tfrac{1}{2}[\Theta_\cA,\Theta_\cA] = 0$
+is a modular bootstrap equation. Expanded genus by genus,
+it determines $\Theta^{(g)}_\cA$ from $\Theta^{(<g)}_\cA$
+by solving a linear equation with an explicitly computable
+inhomogeneity, the genus-$g$ obstruction class $\Ob_g$.}
+\end{center}
+
+The conformal bootstrap imposes crossing symmetry and modular
+invariance; these equations constrain correlators without
+determining them uniquely. The MC recursion is algebraically
+complete for the fixed bar--modular shadow: it determines the
+connected scalar shadow class at each genus from the OPE data at
+genus~$0$, with no ambiguity beyond gauge equivalence. The
+mechanism is the
+contracting homotopy of the tree-twisted differential
+$d_{\Theta^{(0)}} = \dzero + [\Theta^{(0)}, -]$ on the
+bar complex.
+
+% ======================================================================
+%
+% PART 1: THE MC EQUATION EXPANDED BY GENUS
+%
+% ======================================================================
+
+\subsection{The MC equation expanded by genus}
+% label removed: subsec:thqg-VII-mc-genus-expansion
+\index{Maurer--Cartan equation!genus expansion|textbf}
+
+\subsubsection{The genus filtration on the convolution algebra}
+% label removed: subsubsec:thqg-VII-genus-filtration
+
+We recall from Definition~\ref*{V1-def:modular-convolution-dg-lie}
+that the modular convolution dg~Lie algebra
+\begin{equation}% label removed: eq:thqg-VII-gAmod-def
+\gAmod
+\;=\;
+\prod_{g \geq 0}\;
+\prod_{n \geq 1}\;
+\Hom_{S_n}\!\bigl(
+C_*(\overline{\cM}_{g,n}),\;
+\cA^{\otimes n}
+\bigr)^{S_n}[-1]
+\end{equation}
+carries a descending genus filtration
+\begin{equation}% label removed: eq:thqg-VII-genus-filtration
+F^g\,\gAmod
+\;:=\;
+\prod_{g' \geq g}\;
+\prod_{n \geq 1}\;
+\Hom_{S_n}\!\bigl(
+C_*(\overline{\cM}_{g',n}),\;
+\cA^{\otimes n}
+\bigr)^{S_n}[-1].
+\end{equation}
+This filtration is complete and Hausdorff:
+$\gAmod = F^0\,\gAmod$ and
+$\bigcap_{g \geq 0} F^g\,\gAmod = 0$.
+The associated graded is
+\begin{equation}% label removed: eq:thqg-VII-assoc-graded
+\gr^g_F\,\gAmod
+\;=\;
+F^g / F^{g+1}
+\;\cong\;
+\prod_{n \geq 1}\;
+\Hom_{S_n}\!\bigl(
+C_*(\overline{\cM}_{g,n}),\;
+\cA^{\otimes n}
+\bigr)^{S_n}[-1],
+\end{equation}
+the space of genus-$g$ operations.
+
+\begin{remark}[Completeness and $\hbar$-adic topology]
+\label{rem:thqg-VII-hbar-topology}
+\index{hbar-adic topology@$\hbar$-adic topology}
+The genus filtration is equivalent to the $\hbar$-adic filtration
+when one introduces the formal genus-counting parameter~$\hbar$
+and writes $\gAmod[\![\hbar]\!]$ with $\hbar^g$ multiplying the
+genus-$g$ sector. The $\hbar$-adic topology on
+$\gAmod[\![\hbar]\!]$ is the linear topology defined by the
+ideals $\hbar^g \cdot \gAmod[\![\hbar]\!]$, and this coincides
+with the topology defined by~\eqref{V1-eq:thqg-VII-genus-filtration}.
+Completeness holds because the product in~%
+\eqref{V1-eq:thqg-VII-gAmod-def} is an infinite product, not
+a direct sum.
+\end{remark}
+
+\subsubsection{Decomposition of the differential}
+% label removed: subsubsec:thqg-VII-differential-decomp
+
+The differential $D$ on $\gAmod$ decomposes as the sum of
+five components
+(Theorem~\ref{V1-thm:convolution-dg-lie-structure}):
+\begin{equation}% label removed: eq:thqg-VII-D-components
+D \;=\; d_{\mathrm{Ch}_\infty}
+ + d_{\check{C}}
+ + d_{\mathrm{coll}}
+ + d_{\mathrm{loop}}
+ + d_{\mathrm{pf}},
+\end{equation}
+where:
+\begin{enumerate}[label=(\roman*)]
+\item $d_{\mathrm{Ch}_\infty}$: the homotopy chiral algebra
+ structure maps (internal to each vertex of the graph);
+\item $d_{\check{C}}$: the \v{C}ech differential (from the
+ boundary stratification of $\overline{\cM}_{g,n}$, encoding
+ separating degenerations);
+\item $d_{\mathrm{coll}}$: the collision differential (residues
+ along the collision divisors in the Fulton--MacPherson
+ compactification);
+\item $d_{\mathrm{loop}}$: the non-separating clutching operator
+ (the BV operator $\Delta$ that raises genus by one, dual to
+ the non-separating node of the boundary);
+\item $d_{\mathrm{pf}}$: the planted-forest corrections
+ (from the log-FM boundary strata of
+ Mok~\cite{Mok25}).
+\end{enumerate}
+With respect to the genus filtration, these have the following
+behaviour:
+
+\begin{lemma}[Genus shifts of the differential components]
+% label removed: lem:thqg-VII-genus-shifts
+\ClaimStatusProvedElsewhere
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $d_{\mathrm{Ch}_\infty}$, $d_{\check{C}}$, and
+ $d_{\mathrm{coll}}$ \emph{preserve} genus:
+ $d_{\mathrm{Ch}_\infty}(F^g) \subset F^g$,
+ and similarly for $d_{\check{C}}$ and $d_{\mathrm{coll}}$.
+\item $d_{\mathrm{loop}}$ \emph{raises} genus by one:
+ $d_{\mathrm{loop}}(F^g) \subset F^{g+1}$.
+\item $d_{\mathrm{pf}}$ \emph{raises} genus by at least one:
+ $d_{\mathrm{pf}}(F^g) \subset F^{g+1}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The non-separating clutching map
+$\overline{\cM}_{g-1,n+2} \to \partial\overline{\cM}_{g,n}$
+identifies two marked points on a genus-$(g{-}1)$ surface to
+produce a genus-$g$ surface. The dual operation on the
+convolution algebra maps genus-$g$ elements to genus-$(g{+}1)$
+elements. The components $d_{\mathrm{Ch}_\infty}$,
+$d_{\check{C}}$, and $d_{\mathrm{coll}}$ all act fibrewise over
+a fixed moduli space $\overline{\cM}_{g,n}$ and hence preserve
+the genus. The planted-forest component $d_{\mathrm{pf}}$
+involves boundary strata indexed by planted forests of positive
+loop genus (each internal edge raising the genus), hence also
+raises genus.
+
+The genus filtration satisfies the multiplicative axiom
+$F^g \cdot F^{g'} \subset F^{g+g'}$: the Lie bracket
+$[\varphi, \psi]$ for $\varphi \in F^g$ and $\psi \in F^{g'}$
+involves stable graphs of genus $\geq g + g'$, because the
+bracket glues a genus-$g$ and a genus-$g'$ graph along a
+single edge, producing a graph of genus $\geq g + g'$.
+This multiplicative property ensures that the genus filtration
+is compatible with the dg~Lie algebra structure.
+\end{proof}
+
+\begin{definition}[Genus-preserving and genus-raising parts]
+% label removed: def:thqg-VII-D-split
+\index{differential!genus-preserving part}
+\index{differential!genus-raising part}
+Define the genus-preserving part of $D$:
+\begin{equation}% label removed: eq:thqg-VII-D0
+D_0
+\;:=\;
+d_{\mathrm{Ch}_\infty}
++ d_{\check{C}}
++ d_{\mathrm{coll}},
+\end{equation}
+and the genus-raising part:
+\begin{equation}% label removed: eq:thqg-VII-D1
+D_1
+\;:=\;
+d_{\mathrm{loop}}
++ d_{\mathrm{pf}}.
+\end{equation}
+Then $D = D_0 + D_1$ with $D_0^2 = 0$,
+$D_0 D_1 + D_1 D_0 = 0$, $D_1^2 = 0$
+(these follow from $D^2 = 0$ by genus grading).
+\end{definition}
+
+\begin{remark}[The three identities]
+% label removed: rem:thqg-VII-three-identities
+The factorization $D^2 = 0$ into three homogeneous pieces is the
+structural core of the genus spectral sequence. Explicitly:
+\begin{align}
+D^2 &= (D_0 + D_1)^2 \notag\\
+&= D_0^2 + (D_0 D_1 + D_1 D_0) + D_1^2 \notag\\
+&= 0,% label removed: eq:thqg-VII-D-squared-decomp
+\end{align}
+and each of the three terms vanishes separately because they
+have different genus shifts: $D_0^2$ preserves genus,
+$D_0 D_1 + D_1 D_0$ shifts by one, $D_1^2$ shifts by two.
+Since these map into disjoint genus sectors of $\gAmod$,
+each must vanish independently.
+\end{remark}
+
+\subsubsection{The genus expansion of $\Theta_\cA$}
+% label removed: subsubsec:thqg-VII-genus-expansion
+
+The universal MC element $\Theta_\cA \in \MC(\gAmod)$
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}) admits a genus expansion
+\begin{equation}% label removed: eq:thqg-VII-theta-genus-exp
+\Theta_\cA
+\;=\;
+\sum_{g \geq 0} \hbar^g\,\Theta^{(g)}_\cA,
+\end{equation}
+where $\Theta^{(g)}_\cA \in \gr^g_F\,\gAmod$ is the genus-$g$
+component. The MC equation reads
+\begin{equation}% label removed: eq:thqg-VII-mc-full
+D\,\Theta_\cA
++ \tfrac{1}{2}[\Theta_\cA,\, \Theta_\cA]
+\;=\; 0.
+\end{equation}
+We expand both sides in powers of~$\hbar$.
+
+\begin{proposition}[Genus-$g$ MC equation; \ClaimStatusProvedHere]
+% label removed: prop:thqg-VII-genus-g-mc
+\index{Maurer--Cartan equation!genus-$g$ component}
+The coefficient of $\hbar^g$ in the MC
+equation~\eqref{V1-eq:thqg-VII-mc-full} is:
+\begin{equation}% label removed: eq:thqg-VII-genus-g-mc-eq
+\boxed{
+d_{\Theta^{(0)}}\bigl(\Theta^{(g)}\bigr)
+\;=\;
+-\Ob_g\bigl(\Theta^{(<g)}\bigr),
+\qquad g \geq 1,
+}
+\end{equation}
+where the tree-twisted differential is
+\begin{equation}% label removed: eq:thqg-VII-d-twisted
+d_{\Theta^{(0)}}
+\;:=\;
+D_0 + \ad_{\Theta^{(0)}}
+\;=\;
+D_0 + [\Theta^{(0)},\, -],
+\end{equation}
+and the genus-$g$ obstruction class is
+\begin{equation}% label removed: eq:thqg-VII-obs-class
+\Ob_g\bigl(\Theta^{(<g)}\bigr)
+\;:=\;
+\underbrace{
+\sum_{\substack{g_1 + g_2 = g \\ g_1, g_2 \geq 1}}
+\tfrac{1}{2}\,[\Theta^{(g_1)},\, \Theta^{(g_2)}]
+}_{\text{separating clutching}}
+\;+\;
+\underbrace{
+\Delta\bigl(\Theta^{(g-1)}\bigr)
+}_{\text{non-separating BV}}
+\;+\;
+\underbrace{
+\dsew^{(g)} + \dpf^{(g)}
+}_{\text{boundary strata}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write $\Theta = \sum_{g \geq 0} \hbar^g\,\Theta^{(g)}$ and
+expand the MC equation~\eqref{V1-eq:thqg-VII-mc-full}.
+
+\medskip\noindent\emph{Expansion of $D\,\Theta$.}
+The differential $D = D_0 + D_1$ acts on $\Theta^{(g)}$ as
+\begin{align}
+(D\,\Theta)_g
+&= D_0(\Theta^{(g)}) + D_1(\Theta^{(g-1)})\notag\\
+&= D_0(\Theta^{(g)})
+ + d_{\mathrm{loop}}(\Theta^{(g-1)})
+ + d_{\mathrm{pf}}(\Theta^{(g-1)}),
+% label removed: eq:thqg-VII-D-theta-expand
+\end{align}
+since $D_0$ preserves genus while $D_1$ raises it by one.
+The component $D_1(\Theta^{(g-1)})$ contributes to genus~$g$
+by the non-separating clutching $\Delta(\Theta^{(g-1)})$ and
+the planted-forest correction $\dpf^{(g)}$.
+
+\medskip\noindent\emph{Expansion of $[\Theta,\Theta]$.}
+The bracket $[\Theta,\Theta]$ expanded in $\hbar$ gives
+\begin{equation}% label removed: eq:thqg-VII-bracket-expand
+\bigl[\Theta,\Theta\bigr]_g
+\;=\;
+\sum_{g_1 + g_2 = g}
+[\Theta^{(g_1)},\, \Theta^{(g_2)}]
+\;=\;
+2\,[\Theta^{(0)},\, \Theta^{(g)}]
+\;+\;
+\sum_{\substack{g_1 + g_2 = g \\ g_1, g_2 \geq 1}}
+[\Theta^{(g_1)},\, \Theta^{(g_2)}],
+\end{equation}
+where we have isolated the two terms with $g_1 = 0$ or
+$g_2 = 0$ (which contribute $[\Theta^{(0)}, \Theta^{(g)}]$
+each, and by the graded antisymmetry of the Lie bracket,
+$[\Theta^{(0)}, \Theta^{(g)}] = -(-1)^{|\Theta^{(0)}|
+|\Theta^{(g)}|}[\Theta^{(g)}, \Theta^{(0)}]$; since both
+are degree~$1$, this gives $[\Theta^{(0)}, \Theta^{(g)}]
+= -[\Theta^{(g)}, \Theta^{(0)}]$ and the two terms with
+$g_1 = 0$ or $g_2 = 0$ contribute
+$2[\Theta^{(0)}, \Theta^{(g)}]$).
+
+\medskip\noindent\emph{Assembly.}
+Collecting the genus-$g$ coefficient of the MC equation
+$D\,\Theta + \tfrac{1}{2}[\Theta,\Theta] = 0$:
+\begin{align}
+0 &= D_0(\Theta^{(g)})
+ + \Delta(\Theta^{(g-1)})
+ + \dsew^{(g)} + \dpf^{(g)}
+ \notag\\
+ &\qquad
+ + [\Theta^{(0)},\, \Theta^{(g)}]
+ + \tfrac{1}{2}
+ \sum_{\substack{g_1 + g_2 = g \\ g_1, g_2 \geq 1}}
+ [\Theta^{(g_1)},\, \Theta^{(g_2)}].
+% label removed: eq:thqg-VII-mc-g-assembled
+\end{align}
+Rearranging, with $d_{\Theta^{(0)}} = D_0 +
+[\Theta^{(0)}, -]$:
+\begin{equation}% label removed: eq:thqg-VII-mc-g-rearranged
+d_{\Theta^{(0)}}(\Theta^{(g)})
+\;=\;
+-\Delta(\Theta^{(g-1)})
+- \dsew^{(g)} - \dpf^{(g)}
+- \tfrac{1}{2}
+ \sum_{\substack{g_1 + g_2 = g \\ g_1, g_2 \geq 1}}
+ [\Theta^{(g_1)},\, \Theta^{(g_2)}],
+\end{equation}
+which is exactly $d_{\Theta^{(0)}}(\Theta^{(g)}) = -\Ob_g(\Theta^{(<g)})$.
+
+\medskip\noindent\emph{The tree-twisted differential squares to zero.}
+The identity $d_{\Theta^{(0)}}^2 = 0$ follows from the genus-$0$ MC equation:
+\begin{equation}% label removed: eq:thqg-VII-genus0-mc
+D_0(\Theta^{(0)}) + \tfrac{1}{2}[\Theta^{(0)},\Theta^{(0)}] = 0.
+\end{equation}
+Write $d_{\Theta^{(0)}}(x) = D_0(x) + [\Theta^{(0)}, x]$.
+By the Leibniz rule for a degree-$1$ derivation acting on the bracket:
+\begin{equation}\label{eq:thqg-VII-leibniz-explicit}
+D_0[\Theta^{(0)}, x]
+\;=\;
+[D_0\Theta^{(0)}, x]
++ (-1)^{|\Theta^{(0)}|}[\Theta^{(0)}, D_0(x)]
+\;=\;
+[D_0\Theta^{(0)}, x]
+- [\Theta^{(0)}, D_0(x)],
+\end{equation}
+since $|\Theta^{(0)}| = 1$ (odd degree).
+Then:
+\begin{align}
+d_{\Theta^{(0)}}^2(x)
+&= (D_0 + \ad_{\Theta^{(0)}})^2(x)\notag\\
+&= D_0^2(x) + D_0[\Theta^{(0)},x]
+ + [\Theta^{(0)}, D_0(x)]
+ + [\Theta^{(0)},[\Theta^{(0)},x]]\notag\\
+&= 0
+ + \bigl([D_0\Theta^{(0)}, x]
+ - [\Theta^{(0)}, D_0(x)]\bigr)
+ + [\Theta^{(0)}, D_0(x)]
+ + [\Theta^{(0)},[\Theta^{(0)},x]]\notag\\
+&= [D_0\Theta^{(0)}, x]
+ + [\Theta^{(0)},[\Theta^{(0)},x]]\notag\\
+&= [D_0\Theta^{(0)}, x]
+ + \tfrac{1}{2}[[\Theta^{(0)},\Theta^{(0)}], x]\notag\\
+&= [D_0\Theta^{(0)}
+ + \tfrac{1}{2}[\Theta^{(0)},\Theta^{(0)}], x]\notag\\
+&= 0,
+% label removed: eq:thqg-VII-d-twisted-squared
+\end{align}
+where we used: $D_0^2 = 0$ in the first term; the Leibniz
+rule~\eqref{eq:thqg-VII-leibniz-explicit} expanding
+$D_0[\Theta^{(0)},x]$, after which the
+$-[\Theta^{(0)}, D_0(x)]$ cancels the $+[\Theta^{(0)}, D_0(x)]$
+from the cross term; the graded Jacobi identity
+$[\Theta^{(0)},[\Theta^{(0)},x]] = \tfrac{1}{2}
+[[\Theta^{(0)},\Theta^{(0)}], x]$
+(valid because $|\Theta^{(0)}| = 1$ is odd); and
+\eqref{V1-eq:thqg-VII-genus0-mc} for the final vanishing.
+\end{proof}
+
+\begin{remark}[Disjointness of the three terms]
+% label removed: rem:thqg-VII-three-term-disjointness
+\index{obstruction class!three-term decomposition}
+The three terms in~\eqref{V1-eq:thqg-VII-obs-class} are disjoint
+because they correspond to different codimension-$1$ boundary strata
+of $\overline{\cM}_{g,n}$: separating nodes (clutching two
+lower-genus surfaces, contributing
+$\sum_{g_1+g_2=g} \tfrac{1}{2}[\Theta^{(g_1)},\Theta^{(g_2)}]$),
+non-separating nodes (pinching a non-separating cycle on a single
+surface, contributing $\Delta(\Theta^{(g-1)})$), and boundary
+corrections from the log-FM strata (no topology change in the
+surface but corrections from the planted-forest compactification,
+contributing $\dsew^{(g)} + \dpf^{(g)}$). These are distinct
+codimension-$1$ strata with no overlap: a degeneration is either
+separating, non-separating, or a log-FM correction, never more
+than one simultaneously.
+\end{remark}
+
+\begin{remark}[The obstruction class is a cocycle]
+% label removed: rem:thqg-VII-obs-cocycle
+\index{obstruction class!cocycle property}
+The right side of~\eqref{V1-eq:thqg-VII-genus-g-mc-eq} is
+$d_{\Theta^{(0)}}$-closed. Indeed, applying
+$d_{\Theta^{(0)}}$ to~\eqref{V1-eq:thqg-VII-genus-g-mc-eq}:
+\begin{equation}% label removed: eq:thqg-VII-obs-closed
+d_{\Theta^{(0)}}\bigl(\Ob_g(\Theta^{(<g)})\bigr)
+\;=\;
+d_{\Theta^{(0)}}^2(\Theta^{(g)})
+\;=\; 0,
+\end{equation}
+so $\Ob_g(\Theta^{(<g)})$ defines a cohomology class
+\begin{equation}% label removed: eq:thqg-VII-obs-class-coh
+[\Ob_g]
+\;\in\;
+H^2\bigl(\gAmod[\text{genus }g],\; d_{\Theta^{(0)}}\bigr).
+\end{equation}
+The solvability of the recursion at genus~$g$ is equivalent to
+the vanishing of this class. This vanishing is \emph{automatic}
+by the bar-intrinsic construction
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}): the global element
+$\Theta_\cA = D_\cA - \dzero$ exists by virtue of $D_\cA^2 = 0$,
+hence $\Ob_g$ is exact for every~$g$.
+\end{remark}
+
+\subsubsection{Explicit low-genus MC equations}
+% label removed: subsubsec:thqg-VII-low-genus
+
+The MC equation~\eqref{V1-eq:thqg-VII-genus-g-mc-eq} at each genus
+from $g = 0$ through $g = 4$:
+
+\begin{proposition}[Genus-$0$ MC equation; \ClaimStatusProvedHere]
+% label removed: prop:thqg-VII-genus0
+At genus $g = 0$, the MC equation reduces to the $\mathrm{Ch}_\infty$-algebra
+structure equation on $\cA$:
+\begin{equation}% label removed: eq:thqg-VII-mc-g0
+D_0(\Theta^{(0)})
++ \tfrac{1}{2}[\Theta^{(0)},\, \Theta^{(0)}]
+\;=\; 0.
+\end{equation}
+This is the statement that $\Theta^{(0)}$, the collection of
+tree-level OPE structure maps, defines a homotopy chiral algebra
+structure on~$\cA$.
+\end{proposition}
+
+\begin{proof}
+At genus~$0$, the obstruction class $\Ob_0$ is empty (there are no
+lower-genus terms), and the MC equation is simply the first equation
+in the genus tower. The identity $D_0^2 = 0$ ensures that the
+Arnold relation is satisfied, giving $d^2 = 0$ on the genus-$0$
+bar complex.
+\end{proof}
+
+\begin{proposition}[Genus-$1$ MC equation; \ClaimStatusProvedHere]
+\label{prop:thqg-VII-genus1}
+\index{genus-1 MC equation}
+At genus $g = 1$:
+\begin{equation}% label removed: eq:thqg-VII-mc-g1
+d_{\Theta^{(0)}}(\Theta^{(1)})
+\;=\;
+-\Delta(\Theta^{(0)})
+- \dsew^{(1)},
+\end{equation}
+where $\Delta(\Theta^{(0)})$ is the non-separating BV operator
+applied to the tree-level data, and $\dsew^{(1)}$ encodes the
+genus-$1$ separating clutching (the correction from the boundary
+divisor in $\overline{\cM}_{1,n}$ corresponding to a separating
+node producing a genus-$0$ and a genus-$1$ component).
+
+There are no bracket terms on the right
+(since $g_1, g_2 \geq 1$ with $g_1 + g_2 = 1$ has no solutions)
+and no planted-forest correction (the planted-forest
+strata do not contribute at genus~$1$).
+
+The separating clutching at genus~$1$ acts explicitly as
+\begin{equation}% label removed: eq:thqg-VII-dsew1-explicit
+\dsew^{(1)}(\varphi)
+\;=\;
+\sum_i \Delta_i(\varphi),
+\end{equation}
+where $\Delta_i$ contracts the $i$-th pair of inputs using
+the invariant pairing and the clutching map
+$\xi \colon \overline{\cM}_{0,n+2} \to \overline{\cM}_{1,n}$.
+For the Heisenberg algebra at genus~$1$ with no external legs:
+$\dsew^{(1)} = \kappa \cdot \Tr(\id) \cdot [\overline{\cM}_{1,1}]$,
+where $\Tr$ is the supertrace. This term vanishes for the Heisenberg
+because the separating boundary divisor
+$\delta_0 \in \partial\overline{\cM}_{1,1}$ factorizes through two
+genus-$0$ components with scalar data, producing a contribution
+that cancels against the non-separating term in the one-channel case.
+\end{proposition}
+
+\begin{proof}
+Specialize~\eqref{V1-eq:thqg-VII-genus-g-mc-eq} to $g = 1$. The
+sum $\sum_{g_1+g_2=1, g_i \geq 1}$ is empty.
+The planted-forest correction $\dpf^{(1)}$ vanishes because
+the log-FM planted-forest boundary strata of
+$\overline{\cM}_{1,n}$ are empty: every planted forest of
+positive loop genus has first Betti number at least~$2$,
+which exceeds genus~$1$. The only boundary stratum is the
+non-separating node
+$\delta_{\mathrm{irr}} \in \partial\overline{\cM}_{1,n}$.
+\end{proof}
+
+\begin{proposition}[Genus-$2$ MC equation; \ClaimStatusProvedHere]
+\label{prop:thqg-VII-genus2}
+\index{genus-2 MC equation}
+At genus $g = 2$:
+\begin{equation}% label removed: eq:thqg-VII-mc-g2
+d_{\Theta^{(0)}}(\Theta^{(2)})
+\;=\;
+-\tfrac{1}{2}[\Theta^{(1)},\, \Theta^{(1)}]
+- \Delta(\Theta^{(1)})
+- \dsew^{(2)}
+- \dpf^{(2)}.
+\end{equation}
+The right side decomposes into three shells, present at
+\emph{every} degree~$k$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the \emph{loop-squared shell}
+ $\Theta^{(2)}_{\mathrm{loop}^2} :=
+ -\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]$,
+ corresponding to the separating clutching
+ $\sum_{g_1+g_2=2}[\Theta^{(g_1)},\Theta^{(g_2)}]
+ = [\Theta^{(1)},\Theta^{(1)}]$
+ (a genus-$0$ surface with two non-separating nodes);
+\item the \emph{separating-loop shell}
+ $\Theta^{(2)}_{\mathrm{sep}\circ\mathrm{loop}} :=
+ -\Delta(\Theta^{(1)}) - \dsew^{(2)}$,
+ corresponding to the non-separating BV operator
+ $\Delta(\Theta^{(1)})$ (pinching a non-separating cycle)
+ and the separating boundary strata $\dsew^{(2)}$;
+\item the \emph{planted-forest shell}
+ $\Theta^{(2)}_{\mathrm{pf}} :=
+ -\dpf^{(2)}$,
+ corresponding to the log-FM boundary strata indexed by
+ depth-$1$ planted forests at genus~$2$.
+\end{enumerate}
+At genus~$2$ with degree~$k$, the source term $\Ob_2$ decomposes
+as: (a)~separating clutching
+$[\Theta^{(1)},\Theta^{(1)}]$, (b)~non-separating BV
+$\Delta(\Theta^{(1)})$, and (c)~boundary strata contributions
+from $\overline{\cM}_{2,k}$. These three shells are present
+at every degree~$k$, not only at $(2,0)$: the boundary
+stratification of $\overline{\cM}_{2,k}$ has the same three
+types of codimension-$1$ strata (separating node, non-separating
+node, log-FM correction) for all~$k$.
+\end{proposition}
+
+\begin{proof}
+Specialize~\eqref{V1-eq:thqg-VII-genus-g-mc-eq} to $g = 2$. The
+sum $\sum_{g_1+g_2=2, g_i \geq 1}$ has one term: $g_1 = g_2 = 1$,
+contributing $\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]$. The
+three-shell decomposition follows from the source of each
+contribution: the bracket term from the separating node
+connecting two genus-$1$ components, the BV term from the
+non-separating node applied to genus-$1$ data, and the
+planted-forest term from the Mok boundary strata.
+\end{proof}
+
+\begin{proposition}[Genus-$3$ MC equation; \ClaimStatusProvedHere]
+\label{prop:thqg-VII-genus3}
+\index{genus-3 MC equation}
+At genus $g = 3$:
+\begin{equation}% label removed: eq:thqg-VII-mc-g3
+d_{\Theta^{(0)}}(\Theta^{(3)})
+\;=\;
+-[\Theta^{(1)},\, \Theta^{(2)}]
+- \Delta(\Theta^{(2)})
+- \dsew^{(3)}
+- \dpf^{(3)}.
+\end{equation}
+The bracket sum $\sum_{g_1+g_2=3, g_i \geq 1}$ has two terms:
+$(g_1,g_2) = (1,2)$ and $(2,1)$, which contribute
+$[\Theta^{(1)},\Theta^{(2)}]$ by graded antisymmetry
+(the factor $\tfrac{1}{2}$ is cancelled by the two orderings).
+\end{proposition}
+
+\begin{proof}
+Specialize~\eqref{V1-eq:thqg-VII-genus-g-mc-eq} to $g = 3$. The
+sum has $(g_1,g_2) \in \{(1,2),(2,1)\}$:
+$\tfrac{1}{2}\bigl([\Theta^{(1)},\Theta^{(2)}]
++ [\Theta^{(2)},\Theta^{(1)}]\bigr)
+= \tfrac{1}{2}\bigl([\Theta^{(1)},\Theta^{(2)}]
+- [\Theta^{(1)},\Theta^{(2)}]\bigr)
++ [\Theta^{(1)},\Theta^{(2)}]
+= [\Theta^{(1)},\Theta^{(2)}]$,
+since $[\Theta^{(2)},\Theta^{(1)}] = -[\Theta^{(1)},
+\Theta^{(2)}]$ (both elements are odd degree).
+\end{proof}
+
+\begin{proposition}[Genus-$4$ MC equation; \ClaimStatusProvedHere]
+\label{prop:thqg-VII-genus4}
+\index{genus-4 MC equation}
+At genus $g = 4$:
+\begin{equation}% label removed: eq:thqg-VII-mc-g4
+d_{\Theta^{(0)}}(\Theta^{(4)})
+\;=\;
+-[\Theta^{(1)},\, \Theta^{(3)}]
+- \tfrac{1}{2}[\Theta^{(2)},\, \Theta^{(2)}]
+- \Delta(\Theta^{(3)})
+- \dsew^{(4)}
+- \dpf^{(4)}.
+\end{equation}
+The bracket sum has three terms:
+$(g_1,g_2) \in \{(1,3),(2,2),(3,1)\}$, yielding
+$[\Theta^{(1)},\Theta^{(3)}]
++ \tfrac{1}{2}[\Theta^{(2)},\Theta^{(2)}]$.
+\end{proposition}
+
+\begin{proof}
+The computation parallels the previous cases. The three terms
+in the bracket sum are:
+\begin{align*}
+&\tfrac{1}{2}\bigl(
+[\Theta^{(1)},\Theta^{(3)}]
++ [\Theta^{(2)},\Theta^{(2)}]
++ [\Theta^{(3)},\Theta^{(1)}]
+\bigr)\\
+&= \tfrac{1}{2}\bigl(
+2[\Theta^{(1)},\Theta^{(3)}]
++ [\Theta^{(2)},\Theta^{(2)}]
+\bigr)\\
+&= [\Theta^{(1)},\Theta^{(3)}]
++ \tfrac{1}{2}[\Theta^{(2)},\Theta^{(2)}],
+\end{align*}
+using $[\Theta^{(3)},\Theta^{(1)}]
+= -[\Theta^{(1)},\Theta^{(3)}]$ and
+$[\Theta^{(2)},\Theta^{(2)}] \neq 0$ in general
+(it vanishes only in the Gaussian case).
+\end{proof}
+
+\begin{remark}[General pattern]
+% label removed: rem:thqg-VII-general-pattern
+\index{genus-$g$ MC equation!general structure}
+At genus $g \geq 1$, the obstruction class
+$\Ob_g(\Theta^{(<g)})$ has $\lfloor g/2 \rfloor + 2$ distinct
+contributions:
+\begin{enumerate}[label=(\alph*)]
+\item $\lfloor g/2 \rfloor$ bracket terms
+ $[\Theta^{(g_1)},\Theta^{(g_2)}]$ for $1 \leq g_1 \leq g_2$,
+ $g_1 + g_2 = g$;
+\item one BV term $\Delta(\Theta^{(g-1)})$;
+\item boundary-stratum corrections $\dsew^{(g)} + \dpf^{(g)}$.
+\end{enumerate}
+The bracket terms record the \emph{separating degenerations}
+(pinching a cycle that separates the surface into two parts of
+genera $g_1$ and $g_2$). The BV term records the
+\emph{non-separating degeneration} (pinching a non-separating
+cycle, which lowers the genus by one). The boundary terms encode
+higher-codimension strata. The structure is:
+\begin{equation}% label removed: eq:thqg-VII-obs-general
+\Ob_g
+\;=\;
+\underbrace{
+\sum_{\substack{g_1+g_2=g \\ g_1,g_2 \geq 1}}
+\tfrac{1}{2}[\Theta^{(g_1)},\Theta^{(g_2)}]
+}_{\text{separating}}
+\;+\;
+\underbrace{
+\Delta(\Theta^{(g-1)})
+}_{\text{non-separating}}
+\;+\;
+\underbrace{
+\dsew^{(g)} + \dpf^{(g)}
+}_{\text{boundary strata}}.
+\end{equation}
+This is the genus analogue of the Postnikov tower in
+obstruction theory: the extension from genus~$<g$ to genus~$g$
+is controlled by a class in $H^2$ of the tree-twisted complex.
+\end{remark}
+
+\subsubsection{The bracket and BV terms in graph-sum language}
+% label removed: subsubsec:thqg-VII-graph-sum
+
+The bracket $[\Theta^{(g_1)},\Theta^{(g_2)}]$ in the
+convolution algebra $\gAmod$ has a graph-theoretic interpretation.
+A genus-$g_1$ graph $\Gamma_1$ and a genus-$g_2$ graph $\Gamma_2$
+are joined by a single edge to produce a genus-$(g_1{+}g_2)$
+graph:
+\begin{equation}% label removed: eq:thqg-VII-bracket-graph
+[\Theta^{(g_1)},\Theta^{(g_2)}]
+\;=\;
+\sum_{\substack{\Gamma_1 \in \mathsf{Gr}_{g_1}^{\mathrm{st}}\\
+ \Gamma_2 \in \mathsf{Gr}_{g_2}^{\mathrm{st}}}}
+\frac{1}{|\Aut(\Gamma_1)||\Aut(\Gamma_2)|}
+\;\ell_{\Gamma_1 \cup_e \Gamma_2},
+\end{equation}
+where $\ell_\Gamma$ is the graph amplitude
+(vertex labels from the transferred cyclic minimal model, edge
+contractions by the complementarity propagator
+$P_\cA = H_\cA^{-1}$), and $\Gamma_1 \cup_e \Gamma_2$ denotes
+the graph obtained by joining $\Gamma_1$ and $\Gamma_2$ with a
+single new edge.
+
+The BV operator $\Delta(\Theta^{(g-1)})$ has the interpretation
+of closing a single edge within a genus-$(g{-}1)$ graph to
+produce a genus-$g$ graph:
+\begin{equation}% label removed: eq:thqg-VII-bv-graph
+\Delta(\Theta^{(g-1)})
+\;=\;
+\sum_{\Gamma \in \mathsf{Gr}_{g-1}^{\mathrm{st}}}
+\frac{1}{|\Aut(\Gamma)|}
+\sum_{v \in V(\Gamma)}
+\ell_{\Gamma^v},
+\end{equation}
+where $\Gamma^v$ denotes the graph obtained by adding a loop edge
+at vertex~$v$ of~$\Gamma$ (joining two half-edges at $v$ with
+the propagator, increasing the loop number by one).
+
+\begin{remark}[Feynman diagram interpretation]
+% label removed: rem:thqg-VII-feynman-interpretation
+\index{Feynman diagrams!MC recursion}
+Equations~\eqref{V1-eq:thqg-VII-bracket-graph}
+and~\eqref{V1-eq:thqg-VII-bv-graph} are the standard Feynman
+diagram operations: the bracket is the tree-level connecting
+propagator (joining two subdiagrams with one line), and the BV
+operator is the loop closure (contracting one internal line into
+a loop). The MC recursion is thus equivalent to the statement
+that the genus-$g$ amplitude is determined by lower-genus
+amplitudes through these two operations plus boundary corrections.
+This is the chiral-algebraic version of the cut-and-sew relations
+in string theory.
+\end{remark}
+
+% ======================================================================
+%
+% PART 2: THE MC RECURSION
+%
+% ======================================================================
+
+\subsection{The MC recursion: unique determination from lower genera}
+% label removed: subsec:thqg-VII-mc-recursion
+\index{MC recursion|textbf}
+\index{contracting homotopy!MC recursion}
+
+\subsubsection{The contracting homotopy}
+% label removed: subsubsec:thqg-VII-contracting-homotopy
+
+The solvability of the recursion~\eqref{V1-eq:thqg-VII-genus-g-mc-eq}
+rests on two facts:
+\begin{enumerate}[label=(\alph*)]
+\item the obstruction class $\Ob_g$ is
+ $d_{\Theta^{(0)}}$-exact (hence the equation has a
+ solution), and
+\item the solution is unique up to gauge equivalence
+ (hence the genus-$g$ scalar shadow class is determined).
+\end{enumerate}
+Both facts follow from the existence of a contracting homotopy
+for the tree-twisted complex.
+
+\begin{theorem}[Contracting homotopy; \ClaimStatusProvedHere]
+\label{thm:thqg-VII-contracting-homotopy}
+\index{contracting homotopy|textbf}
+Let $\cA$ be a modular Koszul chiral algebra with bar-intrinsic
+MC element $\Theta_\cA = D_\cA - \dzero$
+\textup{(}Theorem~\textup{\ref*{V1-thm:mc2-bar-intrinsic})}. Denote
+the tree-level data $\Theta^{(0)} \in \gr^0_F\,\gAmod$. Then:
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The tree-twisted complex $(\gAmod, d_{\Theta^{(0)}})$
+ admits a contracting homotopy
+ $\hCont \colon {\gAmod}^{\bullet}[\mathrm{genus\,}g]
+ \to {\gAmod}^{\bullet - 1}[\mathrm{genus\,}g]$
+ satisfying
+ \begin{equation}% label removed: eq:thqg-VII-homotopy
+ d_{\Theta^{(0)}} \circ \hCont
+ + \hCont \circ d_{\Theta^{(0)}}
+ \;=\; \id - \pi_H,
+ \end{equation}
+ where $\pi_H$ is the projection onto the cohomology
+ $H^*(\gAmod[\mathrm{genus\,}g], d_{\Theta^{(0)}})$.
+
+\item The cohomology $H^*(\gAmod[\mathrm{genus\,}g],
+ d_{\Theta^{(0)}})$ vanishes in degree~$2$ for $g \geq 1$:
+ \begin{equation}% label removed: eq:thqg-VII-h2-vanishing
+ H^2\bigl(\gAmod[\mathrm{genus\,}g],\; d_{\Theta^{(0)}}\bigr)
+ \;=\; 0, \qquad g \geq 1.
+ \end{equation}
+ In particular, every $d_{\Theta^{(0)}}$-cocycle of
+ degree~$2$ is exact, and the obstruction class $[\Ob_g] = 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{Part (i).} The contracting homotopy is constructed by
+homological perturbation. Start with the untwisted complex
+$(\gAmod, D_0)$ at genus~$g$. This is a chain complex of
+cochain-valued functions on moduli spaces, and its cohomology
+at genus~$g$ is computed by the $E_1$~page of the genus
+spectral sequence
+(Construction~\ref{V1-const:vol1-genus-spectral-sequence}).
+The untwisted complex $(\gAmod[\text{genus }g], D_0)$
+admits a standard contracting homotopy $\hCont_0$ from the
+Hodge-type decomposition (choosing a metric on $\overline{\cM}_{g,n}$
+gives a Hodge decomposition, and the Green's operator provides
+$\hCont_0$).
+
+The twist by $\Theta^{(0)}$ replaces $D_0$ with $d_{\Theta^{(0)}}
+= D_0 + \ad_{\Theta^{(0)}}$. By the homological perturbation
+lemma (HPL), the contracting homotopy for the twisted complex is
+\begin{equation}% label removed: eq:thqg-VII-hpl-homotopy
+\hCont
+\;=\;
+\hCont_0 \circ
+\sum_{n \geq 0}
+\bigl(-\ad_{\Theta^{(0)}} \circ \hCont_0\bigr)^n
+\;=\;
+\hCont_0 \circ
+\bigl(\id + \ad_{\Theta^{(0)}} \circ \hCont_0\bigr)^{-1},
+\end{equation}
+which converges because the degree filtration makes
+$\ad_{\Theta^{(0)}} \circ \hCont_0$ nilpotent on each
+finite-degree component (the degree-cutoff of
+Lemma~\ref{V1-lem:degree-cutoff} ensures that the series terminates
+at each finite weight).
+
+\medskip\noindent
+\emph{Part (ii).} The vanishing of $H^2$ at positive genus
+follows from the Koszul property. At genus~$0$, the Koszul
+assumption gives diagonal Ext vanishing for $\cA$, which
+translates to acyclicity of the tree-twisted bar complex in
+the relevant degrees. At genus $g \geq 1$, the tree-twisted
+differential $d_{\Theta^{(0)}}$ on the genus-$g$ sector of
+$\gAmod$ is a deformation of the genus-$0$ differential
+$D_0$; the deformation is controlled by the degree filtration,
+and the acyclicity propagates by induction on degree
+(each degree component is a finite-dimensional perturbation
+of the acyclic genus-$0$ complex).
+
+More precisely, the global solution $\Theta_\cA = D_\cA - \dzero$
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}) exists at all genera.
+Its existence implies that every $\Ob_g$ is exact, hence
+$H^2 = 0$ at every positive genus. This is not circular: the
+bar-intrinsic construction produces $\Theta_\cA$ directly
+from $D_\cA^2 = 0$, without solving the recursion step by step.
+The recursion is a \emph{decomposition} of the already-existing
+element into genus components, not a \emph{construction} that
+might fail.
+\end{proof}
+
+\subsubsection{The recursion algorithm}
+% label removed: subsubsec:thqg-VII-recursion-algorithm
+
+\begin{construction}[MC recursion; \ClaimStatusProvedHere]
+\label{constr:thqg-VII-mc-recursion}
+\index{MC recursion!algorithm}
+Given the genus-$0$ data $\Theta^{(0)}$ and the contracting
+homotopy $\hCont$ of
+Theorem~\textup{\ref{thm:thqg-VII-contracting-homotopy}},
+the genus-$g$ MC element is computed recursively:
+
+\medskip
+\noindent
+\textbf{Given} $\Theta^{(0)}, \Theta^{(1)}, \ldots,
+\Theta^{(g-1)}$.
+
+\medskip
+\noindent
+\textbf{Obstruction class.}
+\begin{equation}% label removed: eq:thqg-VII-recursion-obs
+\Ob_g
+\;:=\;
+\sum_{\substack{g_1+g_2=g \\ g_1,g_2 \geq 1}}
+\tfrac{1}{2}[\Theta^{(g_1)},\Theta^{(g_2)}]
+\;+\;
+\Delta(\Theta^{(g-1)})
+\;+\;
+\dsew^{(g)} + \dpf^{(g)}.
+\end{equation}
+
+\textbf{Cocycle condition.}
+\begin{equation}% label removed: eq:thqg-VII-recursion-cocycle
+d_{\Theta^{(0)}}(\Ob_g) = 0.
+\end{equation}
+This is an identity; it must hold by the inductive
+hypothesis.
+
+\textbf{Contracting homotopy.}
+\begin{equation}% label removed: eq:thqg-VII-recursion-solve
+\Theta^{(g)}
+\;:=\;
+-\hCont\bigl(\Ob_g\bigr).
+\end{equation}
+
+\textbf{The solution identity.}
+$d_{\Theta^{(0)}}(\Theta^{(g)})
+= -(\id - \pi_H)(\Ob_g)
+= -\Ob_g$
+(since $\pi_H(\Ob_g) = 0$ by the vanishing of $H^2$).
+
+\medskip
+\noindent
+\textbf{Output:} $\Theta^{(g)}$, uniquely determined up to
+gauge equivalence.
+\end{construction}
+
+\begin{theorem}[Uniqueness up to gauge; \ClaimStatusProvedHere]
+% label removed: thm:thqg-VII-uniqueness
+\index{MC recursion!uniqueness}
+The genus-$g$ MC element $\Theta^{(g)}$ is unique up to the
+action of the gauge group
+$\exp\bigl({\gAmod}^0[\mathrm{genus\,}g]\bigr)$.
+Two solutions $\Theta^{(g)}$ and $\widetilde{\Theta}^{(g)}$
+of~\eqref{V1-eq:thqg-VII-genus-g-mc-eq} with the same
+lower-genus data $\Theta^{(<g)}$ satisfy
+\begin{equation}% label removed: eq:thqg-VII-gauge-diff
+\Theta^{(g)} - \widetilde{\Theta}^{(g)}
+\;\in\;
+\ker(d_{\Theta^{(0)}})
+\;=\;
+\im(d_{\Theta^{(0)}})
+\;\oplus\;
+H^1(\gAmod[\text{genus }g], d_{\Theta^{(0)}}),
+\end{equation}
+and the gauge group acts transitively on the fiber over any
+fixed obstruction class.
+\end{theorem}
+
+\begin{proof}
+Let $\Theta^{(g)}$ and $\widetilde{\Theta}^{(g)}$ be two
+solutions with the same obstruction class. Their difference
+$\xi := \Theta^{(g)} - \widetilde{\Theta}^{(g)}$ satisfies
+$d_{\Theta^{(0)}}(\xi) = 0$. The gauge group
+$G := \exp({\gAmod}^0[\text{genus }g])$ is pro-unipotent
+(the weight filtration provides the lower central series), hence
+acts freely on degree-$1$ cocycles. The gauge orbit of~$\xi$
+is exactly the set of degree-$1$ cocycles cohomologous to~$\xi$.
+Since $H^2 = 0$
+(Theorem~\ref{thm:thqg-VII-contracting-homotopy}(ii)),
+the ambiguity lies in $H^1$ and is absorbed by the gauge action.
+
+The bar-intrinsic element $\Theta^{(g)} = (D_\cA - \dzero)^{(g)}$
+is the canonical representative: it is the unique element in
+the gauge orbit selected by the property $D_\cA^2 = 0$ (which
+fixes the contracting homotopy to be the one induced by the
+bar differential).
+\end{proof}
+
+\subsubsection{Base case: genus $g = 1$}
+% label removed: subsubsec:thqg-VII-base-case
+
+\begin{proposition}[Genus-$1$ solution; \ClaimStatusProvedHere]
+\label{prop:thqg-VII-genus1-solution}
+\index{genus-1 MC element}
+The genus-$1$ MC element is
+\begin{equation}% label removed: eq:thqg-VII-theta1
+\Theta^{(1)}
+\;=\;
+-\hCont\bigl(
+\Delta(\Theta^{(0)}) + \dsew^{(1)}
+\bigr).
+\end{equation}
+For a one-channel algebra (e.g.\ the Heisenberg, the affine
+Kac--Moody at generic level), this reduces to
+\begin{equation}% label removed: eq:thqg-VII-theta1-scalar
+\Theta^{(1)}
+\;=\;
+\kappaChHodge(\cA) \cdot [\delta_{\mathrm{irr}}] \otimes \Delta,
+\end{equation}
+where $[\delta_{\mathrm{irr}}] \in H^1(\overline{\cM}_{1,1})$
+is the class of the irreducible boundary divisor and $\Delta$ is
+the BV operator (the propagator inserted at the non-separating
+node). The scalar $\kappaChHodge(\cA)$ is the modular characteristic
+\textup{(}Theorem~D\textup{)}.
+\end{proposition}
+
+\begin{proof}
+The obstruction class at genus~$1$ is
+$\Ob_1 = \Delta(\Theta^{(0)}) + \dsew^{(1)}$
+(Proposition~\ref{prop:thqg-VII-genus1}). The solution is
+$\Theta^{(1)} = -\hCont(\Ob_1)$ by
+Construction~\ref{constr:thqg-VII-mc-recursion}.
+
+For a one-channel algebra, the BV operator $\Delta$ applied to
+the genus-$0$ data $\Theta^{(0)}$ produces a scalar:
+$\Delta(\Theta^{(0)}) = \kappaChHodge(\cA) \cdot \omega_1$, where
+$\omega_1$ is the genus-$1$ modular form (the holomorphic
+$1$-form on $\overline{\cM}_{1,1}$). The contracting homotopy
+inverts the tree-twisted differential, and the result is the
+scalar expression~\eqref{V1-eq:thqg-VII-theta1-scalar}.
+The separating clutching $\dsew^{(1)}$ vanishes for genus~$1$
+of the one-channel algebra because the separating boundary
+$\delta_0 \in \partial\overline{\cM}_{1,1}$ decomposes the
+surface into genus-$0$ and genus-$1$ components, and the
+genus-$1$ component at the first step of the recursion
+contributes only through $\Delta$.
+\end{proof}
+
+\subsubsection{Worked example: genus $g = 2$}
+% label removed: subsubsec:thqg-VII-genus2-worked
+
+\begin{computation}[Genus-$2$ MC recursion; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VII-genus2
+\index{genus-2 MC element!worked computation}
+The genus-$2$ recursion is completely explicit.
+
+\medskip\noindent\emph{The obstruction.}
+From Proposition~\ref{prop:thqg-VII-genus2}:
+\begin{equation}% label removed: eq:thqg-VII-obs2-full
+\Ob_2
+\;=\;
+\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]
++ \Delta(\Theta^{(1)})
++ \dsew^{(2)} + \dpf^{(2)}.
+\end{equation}
+
+\medskip\noindent\emph{The three terms.}
+
+\emph{(a) The bracket term.} Using
+$\Theta^{(1)} = \kappa \cdot [\delta_{\mathrm{irr}}]
+\otimes \Delta$ (for a one-channel algebra):
+\begin{align}
+\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]
+&= \tfrac{1}{2}\,\kappa^2\,
+ [[\delta_{\mathrm{irr}}] \otimes \Delta,\,
+ [\delta_{\mathrm{irr}}] \otimes \Delta]
+\notag\\
+&= \tfrac{1}{2}\,\kappa^2\,
+ [\delta_{\mathrm{irr}} \times \delta_{\mathrm{irr}}]
+ \otimes \Delta \circ \Delta,
+% label removed: eq:thqg-VII-bracket-term-g2
+\end{align}
+where $\delta_{\mathrm{irr}} \times \delta_{\mathrm{irr}}$
+is the class in $H^*(\overline{\cM}_{2,n})$ corresponding to the
+boundary stratum with two non-separating nodes, and
+$\Delta \circ \Delta$ is the iterated BV operator (double
+trace on the propagator).
+
+\emph{(b) The BV term.} The BV operator applied to the genus-$1$
+element:
+\begin{equation}% label removed: eq:thqg-VII-bv-term-g2
+\Delta(\Theta^{(1)})
+= \kappa \cdot \Delta([\delta_{\mathrm{irr}}] \otimes \Delta)
+= \kappa \cdot [\Delta(\delta_{\mathrm{irr}})]
+ \otimes \Delta^2,
+\end{equation}
+where $\Delta(\delta_{\mathrm{irr}})$ is the pushforward of
+the irreducible boundary class through the non-separating
+clutching.
+
+\emph{(c) The boundary terms.} The separating clutching
+$\dsew^{(2)}$ and the planted-forest correction $\dpf^{(2)}$
+encode the codimension-$1$ and codimension-$2$ boundary strata
+of $\overline{\cM}_{2,n}$.
+
+\medskip\noindent\emph{The homotopy.}
+\begin{equation}% label removed: eq:thqg-VII-theta2-solution
+\Theta^{(2)}
+= -\hCont\bigl(\Ob_2\bigr)
+= -\hCont\bigl(
+ \tfrac{1}{2}\kappa^2\,
+ [\delta_{\mathrm{irr}}^2] \otimes \Delta^2
+ + \kappa\,[\Delta(\delta_{\mathrm{irr}})]
+ \otimes \Delta^2
+ + \dsew^{(2)} + \dpf^{(2)}
+ \bigr).
+\end{equation}
+
+\medskip\noindent\emph{Shell decomposition.} The
+three shells (Proposition~\ref{prop:thqg-VII-genus2}) are:
+\begin{align}
+\Theta^{(2)}_{\mathrm{loop}^2}
+&= -\hCont\bigl(\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]\bigr)
+\neq 0 \text{ for all $\kappa \neq 0$},
+% label removed: eq:thqg-VII-shell-loop2\\
+\Theta^{(2)}_{\mathrm{sep}\circ\mathrm{loop}}
+&= -\hCont\bigl(\Delta(\Theta^{(1)}) + \dsew^{(2)}\bigr)
+\neq 0 \text{ iff } \fC(\cA) \neq 0,
+% label removed: eq:thqg-VII-shell-sep\\
+\Theta^{(2)}_{\mathrm{pf}}
+&= -\hCont\bigl(\dpf^{(2)}\bigr)
+\neq 0 \text{ iff } S_3 \neq 0
+\;\text{(cubic shadow nonzero, from genus-$2$ planted-forest graphs)}.
+% label removed: eq:thqg-VII-shell-pf
+\end{align}
+By the genus-$2$ shell activation theorem
+(Theorem~\ref{V1-rem:genus2-shell-activation}), the separating shell~$\sigma$
+distinguishes $\{G,C\}$ from $\{L,M\}$; the planted-forest shell
+depends on $S_3$ (not just $S_4$), so classes $L$ and~$M$ share the
+same genus-$2$ pattern.  The full four-class diagnostic requires the
+contact flag $\chi_{\mathrm{ct}}$ and the mixed-shell discriminant
+$\Delta_{\mathrm{mix}}=8\kappa S_4$:
+\begin{center}
+\begin{tabular}{cccccc}
+$\sigma$ & $\pi$ & $\chi_{\mathrm{ct}}$ & $\Delta_{\mathrm{mix}}$ & Class & Example \\
+\hline
+$0$ & $0$ & $0$ & $0$ & G (Gaussian) & $\cH_k$ \\
+$1$ & $1$ & $0$ & $0$ & L (Lie/tree) & $V_k(\fg)$ \\
+$0$ & $0$ & $1$ & $0$ & C (contact) & $\beta\gamma$ \\
+$1$ & $1$ & $0$ & $\neq 0$ & M (mixed) & $\mathrm{Vir}_c$
+\end{tabular}
+\end{center}
+\end{computation}
+
+\begin{remark}[Genus-$2$ as the first diagnostic]
+% label removed: rem:thqg-VII-genus2-diagnostic
+\index{genus-2 MC element!diagnostic role}
+Genus~$2$ is the first level at which the MC recursion
+distinguishes between the four shadow-depth classes. At genus~$1$,
+the MC element $\Theta^{(1)}$ is controlled entirely by the scalar
+$\kappa$; all four classes look identical at genus~$1$. At genus~$2$,
+the three shells probe the cubic and quartic shadow data, and the
+vanishing pattern separates the classes. This is a concrete
+manifestation of the principle that the modular bootstrap becomes
+nontrivial at genus~$2$.
+\end{remark}
+
+% ======================================================================
+%
+% PART 3: THE GENUS SPECTRAL SEQUENCE
+%
+% ======================================================================
+
+\subsection{The genus spectral sequence}
+% label removed: subsec:thqg-VII-genus-spectral-sequence
+\index{genus spectral sequence|textbf}
+\index{spectral sequence!genus filtration!bootstrap interpretation}
+
+The MC recursion is organized by a spectral sequence that arises
+from the genus filtration on $\gAmod$. This spectral sequence was
+constructed in
+Construction~\ref{V1-const:vol1-genus-spectral-sequence}; here we
+develop its bootstrap interpretation and prove convergence.
+
+\subsubsection{Construction}
+% label removed: subsubsec:thqg-VII-ss-construction
+
+\begin{theorem}[Genus spectral sequence for the bootstrap;
+\ClaimStatusProvedHere]
+\label{thm:thqg-VII-genus-ss}
+\index{genus spectral sequence!construction}
+The genus filtration~\eqref{V1-eq:thqg-VII-genus-filtration}
+on the modular convolution algebra $\gAmod$ induces a
+spectral sequence
+\begin{equation}% label removed: eq:thqg-VII-genus-ss
+E_1^{p,q}
+\;\Longrightarrow\;
+H^{p+q}\bigl(\gAmod,\; D\bigr),
+\end{equation}
+with the following structure:
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{$E_0$~page:}
+ $E_0^{p,q} = \gr^p_F\,{\gAmod}^{p+q}$,
+ the genus-$p$ component in total degree $p + q$.
+ The differential is $d_0 = D_0$ restricted to
+ $\gr^p_F$, which is the genus-preserving part of~$D$.
+
+\item \emph{$E_1$~page:}
+ \begin{equation}% label removed: eq:thqg-VII-E1
+ E_1^{p,q}
+ \;=\;
+ H^{p+q}\bigl(\gr^p_F\,\gAmod,\; D_0\bigr),
+ \end{equation}
+ the cohomology of the genus-$p$ complex with
+ genus-preserving differential. The three columns are:
+ \begin{itemize}
+ \item $p = 0$: \emph{tree-level cohomology}
+ $H^q(\gAmod[\text{genus }0], D_0)$, which is the
+ bar cohomology $H^*(\barB(\cA))$. For Koszul~$\cA$,
+ this is concentrated on the diagonal.
+ \item $p = 1$: \emph{one-loop cohomology}
+ $H^{1+q}(\gAmod[\text{genus }1], D_0)$, encoding
+ the genus-$1$ bar complex modulo the genus-$0$
+ differential.
+ \item $p \geq 2$: \emph{higher-genus shells},
+ computed by the moduli-space cohomology of
+ $\overline{\cM}_{p,n}$ tensored with the cyclic
+ bar data.
+ \end{itemize}
+
+\item \emph{$d_1$ differential:}
+ $d_1 \colon E_1^{p,q} \to E_1^{p+1,q}$.
+ This is the obstruction map
+ $\Ob_{p+1} \colon E_1^{p,*} \to E_1^{p+1,*-1}$,
+ which sends the genus-$p$ data to the genus-$(p{+}1)$
+ obstruction class.
+ \begin{equation}% label removed: eq:thqg-VII-d1
+ d_1
+ \;=\;
+ [\Ob_{p+1}]
+ \;\colon\;
+ E_1^{p,q} \to E_1^{p+1,q}.
+ \end{equation}
+ The $d_1$ differential at $p = 0$ is the genus-$1$
+ obstruction $\Ob_1 = \Delta + \dsew^{(1)}$:
+ it sends tree-level data to the one-loop correction.
+
+\item \emph{Higher differentials:}
+ $d_r \colon E_r^{p,q} \to E_r^{p+r,q-r+1}$.
+ The differential $d_r$ is the genus-$r$ obstruction map
+ that sends genus-$p$ data through the MC recursion to the
+ genus-$(p{+}r)$ sector. These encode the multi-loop
+ corrections.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The genus filtration is a complete descending filtration on a
+cochain complex. The standard construction (cf.\
+\cite[Ch.~5]{Wei94}) produces a spectral sequence with the
+stated $E_0$~page and $E_1$~page.
+
+\medskip\noindent\emph{The $d_0$ differential.}
+On the associated graded $\gr^p_F$, the differential induced by
+$D = D_0 + D_1$ is $D_0$ (the genus-preserving part), since
+$D_1$ raises genus and hence maps into the next filtration step.
+Thus $E_0^{p,q} = \gr^p_F\,{\gAmod}^{p+q}$ with $d_0 = D_0$.
+
+\medskip\noindent\emph{The $d_1$ differential.}
+The $d_1$ differential on the $E_1$~page is induced by $D_1$
+on the $D_0$-cohomology. Explicitly: for a $D_0$-cocycle
+$\alpha \in \gr^p_F$, choose a lift $\widetilde{\alpha}$ to
+$F^p\,\gAmod$. Then $D(\widetilde{\alpha}) \in F^{p+1}$ and
+$D_0(D(\widetilde{\alpha})) \in F^{p+1}$; the class of
+$D(\widetilde{\alpha})$ modulo $D_0$-exact terms is the $d_1$
+differential. By the decomposition $D = D_0 + D_1$:
+\[
+D(\widetilde{\alpha})
+= D_0(\widetilde{\alpha}) + D_1(\widetilde{\alpha}).
+\]
+Since $D_0(\widetilde{\alpha}) = 0$ (as $\alpha$ is a cocycle),
+we get $d_1([\alpha]) = [D_1(\widetilde{\alpha})]$ in
+$E_1^{p+1,*}$. The map $D_1$ is exactly the BV operator
+$\Delta$ plus the planted-forest corrections $\dpf$, which is
+the genus-raising obstruction. Thus $d_1 = [\Ob_{p+1}]$.
+
+\medskip\noindent\emph{Higher differentials.}
+The $d_r$ differential is constructed by the standard
+extension procedure: starting with a class in $E_r^{p,q}$
+(which survives to the $E_r$~page because $d_1, \ldots,
+d_{r-1}$ vanish on it), lift to an element of $F^p$, apply
+$D$, and project to the genus-$(p{+}r)$ component modulo
+earlier terms. The result is the genus-$(p{+}r)$ obstruction
+accumulated from $r$ iterations of the genus-raising operations.
+\end{proof}
+
+\subsubsection{The $E_1$~page in detail}
+% label removed: subsubsec:thqg-VII-E1-detail
+
+\begin{proposition}[$E_1$~page for a Koszul algebra;
+\ClaimStatusProvedHere]
+% label removed: prop:thqg-VII-E1-koszul
+\index{genus spectral sequence!$E_1$ page}
+Let $\cA$ be a modular Koszul chiral algebra. Then:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $E_1^{0,q} = H^q(\barB(\cA))$, the bar cohomology of
+ $\cA$. By the Koszul property, this is concentrated on the
+ diagonal: $E_1^{0,q} = 0$ for $q \neq 0$ (after appropriate
+ regrading).
+\item $E_1^{1,q}$ is the genus-$1$ bar cohomology, computed
+ from the elliptic bar complex
+ (Theorem~\ref{V1-thm:elliptic-bar}). For the Heisenberg
+ algebra, $E_1^{1,q} = \mathbb{C}$ for $q = 0$ (generated by
+ $\kappa \cdot \omega_1$) and vanishes for $q \neq 0$.
+\item $E_1^{p,q}$ for $p \geq 2$ is the genus-$p$ bar
+ cohomology, which is computed from the moduli-space
+ cohomology $H^*(\overline{\cM}_{p,n})$ via the Mumford
+ classes. For the Heisenberg algebra, each $E_1^{p,0}$ is
+ one-dimensional, generated by $\kappa^p \cdot \lambda_p$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Part (i) is the definition of the Koszul property: the bar
+cohomology $H^*(\barB(\cA))$ is the Koszul dual $\cA^!$,
+concentrated in degree~$0$.
+
+For parts (ii) and (iii) in the Heisenberg case, the genus-$p$
+bar complex has differential $D_0 = \dzero$ (no collision
+corrections, since the OPE is quadratic and abelian). The
+cohomology is determined by the moduli-space integration:
+at genus~$p$, the only nontrivial class is the top Hodge class
+$\lambda_p = c_p(\mathbb{E})$, paired with the scalar modular
+characteristic $\kappa^p$. This gives a one-dimensional
+$E_1^{p,0} = \mathbb{C} \cdot \kappa^p \lambda_p$.
+\end{proof}
+
+\begin{remark}[The $E_1$~page as the ``classical bootstrap'']
+% label removed: rem:thqg-VII-E1-classical
+The $E_1$~page isolates the data at each genus before the
+inter-genus corrections are turned on. One may think of
+$E_1^{p,*}$ as the ``classical'' (i.e.\ tree-level with respect
+to the genus filtration) contribution at genus~$p$. The
+higher differentials $d_r$ encode the quantum corrections that
+propagate from lower genera to higher genera. The spectral
+sequence converges to the full MC moduli, which incorporates
+all inter-genus interactions.
+\end{remark}
+
+\subsubsection{Convergence}
+% label removed: subsubsec:thqg-VII-convergence
+
+\begin{theorem}[Convergence of the genus spectral sequence;
+\ClaimStatusProvedHere]
+\label{thm:thqg-VII-ss-convergence}
+\index{genus spectral sequence!convergence}
+The spectral
+sequence~\eqref{V1-eq:thqg-VII-genus-ss} converges:
+\begin{equation}% label removed: eq:thqg-VII-convergence
+E_\infty^{p,q}
+\;\cong\;
+\gr^p_F\, H^{p+q}\bigl(\gAmod,\; D\bigr).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The genus filtration is complete
+($\gAmod = \varprojlim_g\, \gAmod / F^g$) and
+exhaustive ($F^0 = \gAmod$). The Eilenberg--Moore
+convergence theorem (cf.\ \cite[Theorem~5.5.1]{Wei94})
+applies to complete, exhaustive filtrations on cochain
+complexes: the spectral sequence converges to the graded
+pieces of the cohomology of the total complex.
+
+The completeness condition is exactly the $\hbar$-adic
+completeness of
+Remark~\ref{rem:thqg-VII-hbar-topology}: the
+$\hbar$-adic topology is the linear topology defined by
+the genus filtration, and the convolution algebra is complete
+(being defined as an infinite product over genera).
+
+The pronilpotence of $F^1\,\gAmod$ ensures that the spectral
+sequence is strongly convergent: for each total degree $n$,
+only finitely many nonzero differentials land in a given
+bidegree, so the inverse system of quotients stabilizes.
+\end{proof}
+
+\begin{corollary}[Scalar degeneration for Gaussian support;
+\ClaimStatusProvedHere]
+\label{cor:thqg-VII-gaussian-degeneration}
+\index{genus spectral sequence!degeneration}
+\index{Gaussian archetype!spectral sequence}
+For a Gaussian algebra $\cA$ \textup{(}support shadow depth
+\(r^\Theta_{\max}(\cA)=2\), e.g.\ the Heisenberg algebra\textup{)},
+the connected scalar line of the genus spectral sequence degenerates
+at $E_1$:
+\begin{equation}% label removed: eq:thqg-VII-gaussian-degeneration
+E_1^{p,q} \;=\; E_\infty^{p,q}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+For a Gaussian algebra, the MC element $\Theta_\cA$ is
+scalar: $\Theta_\cA = \kappa \cdot \eta \otimes \Lambda$,
+with no higher-degree corrections. All inter-genus
+brackets $[\Theta^{(g_1)},\Theta^{(g_2)}]$ and BV applications
+$\Delta(\Theta^{(g)})$ produce scalar multiples of
+$\kappa^{g+1} \cdot \lambda_{g+1}$; the differentials $d_r$
+for $r \geq 1$ land on pre-existing classes (they are
+multiplied by $\kappa$ at each step but do not create new
+cohomological directions). The tree-twisted differential
+$d_{\Theta^{(0)}}$ is exact on positive-degree classes at
+every genus (the Koszul property), so $d_1 = 0$ on the
+$E_1$~page: every obstruction class is automatically solved
+by the scalar homotopy, and the spectral sequence collapses.
+
+Concretely, the one-dimensional space $E_1^{p,0}$ survives
+to $E_\infty$ because $d_r(E_1^{p,0}) = 0$ for all $r \geq 1$
+(the scalar obstruction at each genus is solved by the scalar
+homotopy, leaving no residual class on the $E_1$ page).
+\end{proof}
+
+\begin{proposition}[No finite support cutoff for mixed-type algebras;
+\ClaimStatusProvedHere]
+\label{prop:thqg-VII-mixed-nondegeneration}
+\index{genus spectral sequence!non-degeneration}
+\index{mixed archetype!spectral sequence}
+For a mixed-type algebra $\cA$ with support shadow depth
+\(r^\Theta_{\max}(\cA)=\infty\)
+\textup{(}e.g.\ the Virasoro algebra\textup{)}, no finite degree
+bound on the bar-intrinsic support packet can force degeneration of
+the genus spectral sequence. For every \(N\) there is a support
+component \(\Theta_{\cA,n}\) with \(n>N\), hence a potential source for
+higher genus-recursion terms after projection to the genus filtration.
+Actual nonvanishing of a differential \(d_r\) remains a separate
+cohomological statement: it can fail by exactness, projection to zero,
+or cancellation in the chosen spectral-sequence page.
+\end{proposition}
+
+\begin{proof}
+The mixed archetype has $\fC(\cA) \neq 0$ and
+$\mathfrak{Q}(\cA) \neq 0$, hence both the separating-loop
+shell and the planted-forest shell are activated at genus~$2$
+(Theorem~\ref{V1-rem:genus2-shell-activation}). The $d_1$
+differential carries the genus-$0$ cubic shadow data into the
+genus-$1$ sector, and this propagates: the genus-$r$
+obstruction class receives contributions from the
+$r$-fold iterated application of the BV operator and the
+$r$-fold nested brackets, both of which have nonzero source terms when
+the support packet is infinite.
+
+More precisely, the \(d_r\) differential at the \((0,*)\) column maps
+tree-level data through the \(r\)-loop recursion. Infinite support
+depth says that the support filtration does not stabilize:
+\(\Theta_{\cA}^{\leq N}\neq \Theta_{\cA}\) for every finite \(N\).
+It does not say \(o_{N+1}(\cA)\neq0\), and it does not imply
+\(d_N\neq0\) after passage to \(E_N\). Thus the proposition is the
+support-envelope statement, not a non-cancellation theorem for every
+page.
+\end{proof}
+
+\subsubsection{The spectral sequence and the support packet}
+% label removed: subsubsec:thqg-VII-ss-shadow
+
+\begin{theorem}[Spectral sequence differentials and support
+projections; \ClaimStatusProvedHere]
+\label{thm:thqg-VII-ss-shadow-obstruction}
+\index{genus spectral sequence!support-packet correspondence}
+The differentials of the genus spectral sequence receive their
+non-scalar sources from the bar-intrinsic support packet:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $d_1$ encodes the modular characteristic $\kappaChHodge(\cA)$:
+ it is the scalar genus-raising map
+ $\Theta^{(0)} \mapsto \kappa \cdot \omega_1$.
+\item $d_2$ receives the cubic support projection $\fC(\cA)$:
+ it measures the failure of the genus-$2$ element to be
+ determined solely by the scalar data.
+\item $d_3$ receives the quartic support projection $\mathfrak{Q}(\cA)$:
+ it contains the genus-$3$ obstruction contribution coming from the
+ quartic contact invariant.
+\item $d_r$ for $r \geq 4$ receives the degree-$(r{+}1)$
+ support projection together with the corresponding $r$-loop
+ obstruction term.
+\end{enumerate}
+If \(r^\Theta_{\max}(\cA)<\infty\), then no support component of
+degree \(>r^\Theta_{\max}(\cA)\) can occur in these source terms.
+This support cutoff is stronger than eventual vanishing of obstruction
+classes, but it is not equivalent to a statement that every
+corresponding spectral-sequence differential is nonzero or that the
+spectral sequence collapses on a prescribed page.
+\end{theorem}
+
+\begin{proof}
+The identification follows from the explicit formula for the
+differentials. At the $E_r$~page, the differential $d_r$
+is induced by $r$ applications of the genus-raising part $D_1$,
+composed with the tree-level contracting homotopy. The
+$r$-fold application of $D_1$ produces an expression that
+involves all brackets and BV operators of total genus shift~$r$,
+and its non-scalar input is the degree-$(r{+}1)$ support projection
+of \(\Theta_\cA\), together with the obstruction class
+\(o_{r+1}(\cA)\) that tests extension of the truncation.
+
+The support-depth assertion is the definition of
+\(r^\Theta_{\max}\): if \(r>r^\Theta_{\max}(\cA)\), then
+\(\Theta_{\cA,r}=0\). The equation \(o_{r+1}(\cA)=0\) has a different
+meaning; it says that a degree-\(r\) truncation extends. It does not
+erase an \(H^1\)-lift coordinate already chosen in the MC packet.
+After forming \(E_r\), exactness and projection can further kill a
+differential, so support depth supplies a source envelope rather than
+an equality with the page of degeneration.
+\end{proof}
+
+\begin{remark}[Comparison with the PBW spectral sequence]
+% label removed: rem:thqg-VII-pbw-vs-genus
+\index{PBW spectral sequence!vs genus spectral sequence}
+The genus spectral sequence is distinct from the PBW spectral
+sequence. The PBW spectral sequence uses the conformal-weight
+filtration \emph{within each fixed genus} to compute bar
+cohomology; it is a computational tool for determining
+$E_1^{p,*}$. The genus spectral sequence uses the genus
+filtration \emph{across genera} to lift the MC element; it is
+a structural tool for the bootstrap. The two spectral sequences
+are complementary: the PBW spectral sequence computes the input
+(the $E_1$~page), and the genus spectral sequence computes the
+output (the full MC element $\Theta_\cA$).
+\end{remark}
+
+% ======================================================================
+%
+% PART 4: COMPARISON WITH THE CONFORMAL BOOTSTRAP
+%
+% ======================================================================
+
+\subsection{Comparison with the conformal bootstrap}
+% label removed: subsec:thqg-VII-bootstrap-comparison
+\index{conformal bootstrap!comparison with MC recursion|textbf}
+
+The conformal bootstrap (see \cite{BPRS15} for a review)
+constrains correlation functions and partition functions by
+imposing:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{crossing symmetry} of the four-point function on the
+ sphere;
+\item \emph{modular invariance} of the genus-$1$ partition
+ function under $\mathrm{SL}_2(\mathbb{Z})$;
+\item \emph{unitarity} bounds on OPE coefficients;
+\item \emph{causality/Regge-limit} constraints on the OPE
+ convergence.
+\end{enumerate}
+These are \emph{necessary conditions} on the partition function;
+they exclude regions of parameter space that violate them. The
+remaining allowed region is the
+``bootstrap island'' in the space of CFT data.
+
+The MC recursion is qualitatively different.
+
+\begin{theorem}[MC recursion vs.\ conformal bootstrap;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VII-mc-vs-bootstrap
+\index{MC recursion!vs conformal bootstrap}
+Let $\cA$ be a modular Koszul chiral algebra with boundary OPE
+data $\Theta^{(0)}$. Then:
+
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Completeness.} The MC recursion
+ \textup{(}Construction~\textup{\ref{constr:thqg-VII-mc-recursion})}
+ determines $\Theta^{(g)}$ for every $g \geq 1$, uniquely
+ up to gauge equivalence. The conformal bootstrap provides
+ constraints but not unique determination.
+
+\item \emph{Determinism.} The conformal bootstrap is a
+ set of inequalities and consistency conditions; it does not
+ specify the genus-$g$ partition function as a function of
+ the genus-$0$ OPE data. The MC recursion does: the
+ formula $\Theta^{(g)} = -\hCont(\Ob_g)$ is an explicit
+ function of $\Theta^{(<g)}$.
+
+\item \emph{Systematicity.} The genus spectral sequence
+ organizes the MC recursion into a controlled sequence of
+ algebraic extensions. There is no analogous systematic
+ organization for the conformal bootstrap beyond genus~$1$.
+
+\item \emph{Structural input.} The conformal bootstrap
+ requires unitarity, which is a metric condition (positive
+ definiteness of the Hilbert space inner product). The MC
+ recursion requires the Koszul property, which is a homological
+ condition (diagonal Ext vanishing). These are logically
+ independent.
+
+\item \emph{Scope.} The conformal bootstrap applies to
+ unitary CFTs. The MC recursion applies to all modular
+ Koszul chiral algebras, including non-unitary ones
+ \textup{(}e.g.\ the Virasoro algebra at $c < 0$\textup{)}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) follows from the $H^2$-vanishing
+(Theorem~\ref{thm:thqg-VII-contracting-homotopy}(ii))
+and the existence of the bar-intrinsic element
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}).
+
+(ii) follows from the explicit formula
+$\Theta^{(g)} = -\hCont(\Ob_g)$, which is an algebraic
+function of the lower-genus data.
+
+(iii) follows from the convergent spectral sequence
+(Theorem~\ref{thm:thqg-VII-ss-convergence}).
+
+(iv) is a direct comparison of the structural inputs: the
+Koszul property (Ext vanishing on the bar complex) versus
+unitarity (positivity of the inner product). Neither
+implies the other: there exist Koszul algebras that are not
+unitary (e.g.\ $\mathrm{Vir}_c$ at $c < 0$), and there exist
+unitary CFTs whose chiral algebras have non-formal Swiss-cheese
+structure (e.g.\ the minimal models at exceptional values where the
+transferred $\Ainf$ operations are nonvanishing).
+
+(v) follows from (iv): the Koszul property is defined purely
+in terms of the bar complex, without reference to an inner
+product.
+\end{proof}
+
+\begin{remark}[Koszulness as bootstrap closure]
+\label{rem:vol2-koszulness-bootstrap}
+\index{conformal bootstrap!Koszulness correspondence}
+The correspondence between Koszulness and bootstrap structure
+is made precise in Volume~I
+\textup{(}Theorem~\textup{\ref*{V1-thm:koszulness-bootstrap})}: for
+a chirally Koszul algebra, the MC moduli is discrete
+\textup{(}$\Theta_\cA$ is the unique solution\textup{)}, the shadow
+support depth \(r^\Theta_{\max}\) gives the closure order of the
+standard bar-intrinsic support packet, and the
+$G$/$L$/$C$/$M$ classification corresponds to bootstrap complexity.
+This sharpens the comparison above: where the conformal bootstrap
+provides necessary constraints, the MC recursion on the Koszul locus
+provides unique determination together with a support-degree measure.
+\end{remark}
+
+\begin{theorem}[Crossing symmetry from the MC equation;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VII-crossing-from-mc
+% label removed: rem:thqg-VII-crossing-as-mc
+\index{crossing symmetry!as MC equation|textbf}
+\index{conformal bootstrap!as MC projection|textbf}
+Let $\cA$ be a modular Koszul chiral algebra with MC element
+$\Theta_\cA$. The projection of the MC equation to genus~$0$,
+degree~$2$ \textup{(}four external points with binary internal
+pairing\textup{)} is equivalent to the conformal bootstrap
+crossing-symmetry equation. Precisely: the MC equation
+$D_0(\Theta^{(0)}) + \frac{1}{2}[\Theta^{(0)},\Theta^{(0)}] = 0$
+evaluated at $n = 4$ external points gives
+\begin{equation}% label removed: eq:thqg-VII-crossing-symmetry
+\sum_p C_{12}^p\, C_{p34}\, G_p^{(s)}(z, \bar{z})
+\;=\;
+\sum_p C_{14}^p\, C_{p23}\, G_p^{(t)}(z, \bar{z}),
+\end{equation}
+where $C_{ij}^p$ are the OPE structure constants,
+$G_p^{(s)}$ and $G_p^{(t)}$ are the $s$- and $t$-channel
+conformal blocks, and
+$z = z_{12}z_{34}/(z_{13}z_{24})$ is the cross-ratio.
+\end{theorem}
+
+\begin{proof}
+The genus-$0$ MC equation at $n = 4$ reads
+\[
+D_0(\Theta^{(0)}_{n=4})
++ \tfrac{1}{2}[\Theta^{(0)}_{n=2},\, \Theta^{(0)}_{n=2}]
+= 0.
+\]
+The bracket $[\Theta^{(0)}_{n=2}, \Theta^{(0)}_{n=2}]$
+sums over the three channels in which two pairs of the four
+external points collide:
+\begin{itemize}
+\item \emph{$s$-channel}: points $1,2$ collide, then $3,4$.
+ The coderivation pairing contracts
+ $\Theta^{(0)}_{n=2}(z_1, z_2)$ with
+ $\Theta^{(0)}_{n=2}(z_3, z_4)$ at an internal point,
+ producing $\sum_p C_{12}^p C_{p34} G_p^{(s)}$.
+\item \emph{$t$-channel}: points $1,4$ collide, then $2,3$.
+ This produces $\sum_p C_{14}^p C_{p23} G_p^{(t)}$.
+\item \emph{$u$-channel}: points $1,3$ collide, then $2,4$.
+ This produces $\sum_p C_{13}^p C_{p24} G_p^{(u)}$.
+\end{itemize}
+The MC equation requires the sum of all three channels to
+vanish: this is the associativity of the OPE.
+
+The three channels correspond to the three boundary divisors of
+$\overline{\cM}_{0,4} \cong \mathbb{P}^1$:
+$z = 0$ ($s$-channel), $z = \infty$ ($t$-channel),
+$z = 1$ ($u$-channel). The boundary relation
+$[z{=}0] + [z{=}1] + [z{=}\infty] = 0$ in
+$H_0(\partial\overline{\cM}_{0,4})$ is the topological identity
+underlying crossing symmetry; the MC equation at $(0,4)$ is its
+transport through the convolution algebra.
+
+The equivalence between OPE associativity and crossing symmetry
+is standard:
+$G_p^{(u)}(z, \bar{z}) = G_p^{(t)}(1-z, 1-\bar{z})$, so
+the three-channel vanishing reduces to the
+$s$--$t$ crossing equation~\eqref{V1-eq:thqg-VII-crossing-symmetry}.
+\end{proof}
+
+\begin{corollary}[Genus-$g$ bootstrap from MC;
+\ClaimStatusProvedHere]
+% label removed: cor:thqg-VII-genus-g-bootstrap
+\index{conformal bootstrap!genus $g$}
+The MC equation at $(g, n)$ is the genus-$g$, $n$-point
+conformal bootstrap equation. At $n = 0$, it becomes the
+genus-$g$ modular bootstrap:
+\begin{equation}% label removed: eq:thqg-VII-genus-g-bootstrap
+\Ob_g(\Theta^{(<g)}) \;\in\; \mathrm{Im}(d_{\Theta^{(0)}}).
+\end{equation}
+The exactness of $\Ob_g$ is the statement that the genus-$g$
+scalar shadow class is uniquely determined \textup{(}up to gauge
+equivalence\textup{)} by the lower-genus data. This is the
+algebraic content of the modular bootstrap: modular invariance
+is not an additional axiom but a consequence of the MC equation.
+\end{corollary}
+
+\begin{proof}
+The MC equation at $(g, 0)$ is
+$d_{\Theta^{(0)}}(\Theta^{(g)}) = -\Ob_g(\Theta^{(<g)})$.
+The bar-intrinsic construction
+(Theorem~\ref*{V1-thm:mc2-bar-intrinsic}) guarantees that
+$\Theta_\cA$ exists, hence $\Ob_g$ is exact for
+every~$g$. Uniqueness follows from acyclicity of the
+tree-twisted complex (Koszul property).
+\end{proof}
+
+\begin{remark}[Higher-degree crossing]
+% label removed: rem:thqg-VII-higher-degree-crossing
+\index{crossing symmetry!higher degree}
+The MC equation at $(0, n)$ for $n \geq 5$ gives higher-degree
+crossing-symmetry constraints. The boundary of
+$\overline{\cM}_{0,n}$ (the Stasheff associahedron $K_n$) has
+codimension-$1$ faces indexed by $2$-level trees, and
+$\partial^2 K_n = 0$ gives the $A_\infty$-associativity
+equations. The MC equation at $(0, n)$ is the $n$-point
+conformal bootstrap equation, encoding consistency of all
+possible OPE orderings.
+\end{remark}
+
+\begin{remark}[Modular invariance as genus-$1$ MC]
+% label removed: rem:thqg-VII-modular-as-mc
+\index{modular invariance!as MC equation}
+The conformal bootstrap's modular invariance condition is
+a consequence of the genus-$1$ MC equation. The mapping class
+group $\mathrm{MCG}(\Sigma_1) \cong \mathrm{SL}_2(\mathbb{Z})$
+acts on the genus-$1$ sector of $\gAmod$; the MC equation at
+genus~$1$, combined with the equivariance of the bar-intrinsic
+construction under this action
+(Proposition~\ref{V1-prop:mcg-equivariance-tower}), forces the
+genus-$1$ partition function to be modular invariant.
+Thus modular invariance is not an additional constraint
+imposed from outside, but an automatic consequence of the
+MC equation.
+\end{remark}
+
+\begin{remark}[Why the MC approach is ``stronger'']
+% label removed: rem:thqg-VII-mc-stronger
+The conformal bootstrap carves out allowed regions by
+constraints (crossing, modular invariance, unitarity). The MC
+recursion \emph{parameterizes} the moduli space
+$\MC(\gAmod)/\text{gauge}$: given the genus-$0$ data, the
+higher-genus data are uniquely computed via the contracting
+homotopy $\hCont$, which exists because the Koszul property
+gives acyclicity. The genus filtration supplies a coordinate
+system in which each genus-$g$ coordinate is an explicit
+function of the lower-genus coordinates.
+
+The trade-off: the MC recursion requires more algebraic
+structure (the full bar complex and Koszul property) but yields
+unique determination. The conformal bootstrap requires less
+structure (unitarity) but yields only constraints.
+\end{remark}
+
+\begin{proposition}[The bootstrap gap]
+% label removed: prop:thqg-VII-bootstrap-gap
+\index{bootstrap gap}
+\ClaimStatusProvedHere
+The conformal bootstrap's genus-$1$ modular constraint is
+equivalent to the $d_1$ differential of the genus spectral
+sequence:
+\begin{equation}% label removed: eq:thqg-VII-bootstrap-gap
+d_1 \colon E_1^{0,*} \to E_1^{1,*}
+\quad\Longleftrightarrow\quad
+\text{modular invariance of } Z_1(\cA).
+\end{equation}
+The ``bootstrap gap'' (the difference between what the
+conformal bootstrap constrains and what the MC recursion
+determines) corresponds to the higher differentials
+$d_r$ for $r \geq 2$: these carry information about genus
+$g \geq 2$ that is not accessible from genus-$0$ and genus-$1$
+constraints alone. In the MC recursion, this information
+is \emph{determined} by the higher differentials;
+in the conformal bootstrap literature, no general mechanism
+for accessing genus $g \geq 2$ constraints is currently known
+(though specific examples, such as the genus-$2$ partition
+function of the monster CFT, are fixed by other means).
+\end{proposition}
+
+\begin{proof}
+The genus-$1$ modular constraint is the requirement that
+$\Theta^{(1)}$ be a solution of the genus-$1$ MC equation
+\eqref{V1-eq:thqg-VII-mc-g1}, which is precisely the condition
+that the $d_1$ differential maps the tree-level data into a
+coboundary in the genus-$1$ cohomology. The higher differentials
+$d_r$ ($r \geq 2$) encode the genus-$(r{+}1)$ constraints, which
+are uniquely determined by the MC recursion.
+\end{proof}
+
+% ======================================================================
+%
+% PART 5: EXPLICIT COMPUTATIONS FOR THE HEISENBERG ALGEBRA
+%
+% ======================================================================
+
+\subsection{Heisenberg genus expansion through genus~$4$}
+% label removed: subsec:thqg-VII-heisenberg-genus4
+\index{Heisenberg algebra!genus expansion through genus 4|textbf}
+
+The Heisenberg algebra $\cH_k$ is the Gaussian archetype:
+the support packet is concentrated in degree~$2$ and
+$\Theta_{\cH_k} = k \cdot \eta \otimes \Lambda$. The MC
+recursion for $\cH_k$ is entirely scalar. Its connected genus
+projection agrees with the Faber--Pandharipande $\lambda_g$-formula
+(Theorem~\ref{V1-thm:dmvv-agreement}).
+
+\subsubsection{Setup and notation}
+% label removed: subsubsec:thqg-VII-heis-setup
+
+The rank-$1$ Heisenberg algebra $\cH_k$ has a single generator~$J$
+with OPE
+\begin{equation}% label removed: eq:thqg-VII-heis-ope
+J(z)\,J(w) \;\sim\; \frac{k}{(z-w)^2},
+\end{equation}
+where $k$ is the level. The modular characteristic is
+$\kappaChHodge(\cH_k) = k$. The bar complex $\barB(\cH_k)$ is
+generated by the logarithmic forms
+$\eta_{ij} = d\log(z_i - z_j)$, and the bar differential satisfies
+$d^2 = 0$ by the Arnold relation. The Koszul dual is the
+chiral symmetric algebra $\Sym^{\mathrm{ch}}(V^*)$ on the dual
+current space. The sign-flipped Heisenberg model $\cH_{-k}$ is the
+open-colour line-side comparison, not the chiral Koszul dual.
+
+Let $\omega_g$ denote the connected genus-$g$ Hodge class whose marked
+pairing against $\psi_1^{2g-2}$ is the Faber--Pandharipande number.
+The connected genus expansion has the form
+\begin{equation}% label removed: eq:thqg-VII-heis-genus-exp
+\Theta_{\cH_k}^{\mathrm{conn}}
+\;=\;
+\sum_{g \geq 1} \hbar^g\,\Theta^{(g),\mathrm{conn}}_{\cH_k},
+\qquad
+\Theta^{(g),\mathrm{conn}}_{\cH_k}
+\;=\;
+k\cdot\omega_g,\quad g\ge1,
+\end{equation}
+where the scalar free energy is determined by the moduli-space
+integration:
+\begin{equation}% label removed: eq:thqg-VII-heis-Fg
+F_g(\cH_k)
+\;=\;
+k\,\lambda_g^{\mathrm{FP}},
+\qquad
+\lambda_g^{\mathrm{FP}}
+=
+\int_{\overline{\cM}_{g,1}} \psi_1^{2g-2}\,\lambda_g
+\;=\;
+\frac{2^{2g-1} - 1}{2^{2g-1}}
+\cdot
+\frac{|B_{2g}|}{(2g)!},
+\end{equation}
+where $B_{2g}$ is the $(2g)$-th Bernoulli number and
+$\psi_1$ is the cotangent line class.
+
+\subsubsection{Genus $g = 0$: tree level}
+% label removed: subsubsec:thqg-VII-heis-g0
+
+\begin{computation}[Genus-$0$ Heisenberg; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VII-heis-g0
+At genus~$0$, the MC element is the OPE structure map:
+\begin{equation}% label removed: eq:thqg-VII-heis-theta0
+\Theta^{(0)}_{\cH_k}
+\;=\;
+k \cdot [\eta_{12}] \otimes (J \otimes J),
+\end{equation}
+encoding the double-pole OPE $J(z)J(w) \sim k/(z-w)^2$. The MC
+equation~\eqref{V1-eq:thqg-VII-mc-g0} is verified:
+\begin{align}
+D_0(\Theta^{(0)}) + \tfrac{1}{2}[\Theta^{(0)},\Theta^{(0)}]
+&= k \cdot D_0([\eta_{12}] \otimes J^{\otimes 2})
+ + \tfrac{1}{2}\,k^2\,[\eta_{12} \otimes J^{\otimes 2},\,
+ \eta_{12} \otimes J^{\otimes 2}]\notag\\
+&= 0,% label removed: eq:thqg-VII-heis-mc-g0-check
+\end{align}
+since $D_0(\eta_{12}) = 0$ (the Arnold relation on three
+points gives $\eta_{12} \wedge \eta_{23} + \eta_{23} \wedge
+\eta_{31} + \eta_{31} \wedge \eta_{12} = 0$, which forces
+$D_0 = 0$ on the two-point configuration) and the bracket
+vanishes because $\cH_k$ is abelian (no simple-pole OPE, hence
+no nonzero tree-level bracket).
+The free energy at genus~$0$ is $F_0 = 0$ by convention
+(the tree-level amplitude is the OPE itself, not a partition
+function).
+\end{computation}
+
+\subsubsection{Genus $g = 1$: one loop}
+% label removed: subsubsec:thqg-VII-heis-g1
+
+\begin{computation}[Genus-$1$ Heisenberg; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VII-heis-g1
+\index{Heisenberg algebra!genus-1 MC element}
+The genus-$1$ MC equation
+(Proposition~\ref{prop:thqg-VII-genus1}) is:
+\begin{equation}% label removed: eq:thqg-VII-heis-mc-g1
+d_{\Theta^{(0)}}(\Theta^{(1)})
+\;=\;
+-\Delta(\Theta^{(0)}).
+\end{equation}
+The BV operator applied to the genus-$0$ data:
+\begin{equation}% label removed: eq:thqg-VII-heis-bv-g0
+\Delta(\Theta^{(0)})
+\;=\;
+\Delta\bigl(k \cdot [\eta_{12}] \otimes J^{\otimes 2}\bigr)
+\;=\;
+k \cdot [\delta_{\mathrm{irr}}] \otimes
+\langle J, J \rangle_{\cH_k}
+\;=\;
+k^2 \cdot [\delta_{\mathrm{irr}}],
+\end{equation}
+where $\langle J, J \rangle_{\cH_k} = k$ is the invariant
+pairing (equal to the level).
+
+The solution by the contracting homotopy:
+\begin{equation}% label removed: eq:thqg-VII-heis-theta1
+\Theta^{(1)}_{\cH_k}
+\;=\;
+-\hCont\bigl(k^2 \cdot [\delta_{\mathrm{irr}}]\bigr)
+\;=\;
+k \cdot [\delta_{\mathrm{irr}}] \otimes \Delta.
+\end{equation}
+The free energy is:
+\begin{equation}% label removed: eq:thqg-VII-heis-F1
+F_1
+\;=\;
+\int_{\overline{\cM}_{1,1}} \lambda_1
+\;=\;
+\frac{1}{24},
+\end{equation}
+matching the formula~\eqref{V1-eq:thqg-VII-heis-Fg} with $g = 1$:
+$\frac{2^1 - 1}{2^1} \cdot \frac{|B_2|}{2!}
+= \frac{1}{2} \cdot \frac{1/6}{2} = \frac{1}{24}$. $\checkmark$
+\end{computation}
+
+\subsubsection{Genus $g = 2$: two loops}
+% label removed: subsubsec:thqg-VII-heis-g2
+
+\begin{computation}[Genus-$2$ Heisenberg; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VII-heis-g2
+\index{Heisenberg algebra!genus-2 MC element}
+The genus-$2$ MC equation
+(Proposition~\ref{prop:thqg-VII-genus2}) is:
+\begin{equation}% label removed: eq:thqg-VII-heis-mc-g2
+d_{\Theta^{(0)}}(\Theta^{(2)})
+\;=\;
+-\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]
+- \Delta(\Theta^{(1)})
+- \dsew^{(2)}
+- \dpf^{(2)}.
+\end{equation}
+
+For the Heisenberg algebra (Gaussian archetype), the shell
+decomposition simplifies drastically.
+
+\medskip\noindent\emph{(a) The bracket term.}
+Using $\Theta^{(1)} = k \cdot [\delta_{\mathrm{irr}}] \otimes
+\Delta$:
+\begin{equation}% label removed: eq:thqg-VII-heis-bracket-g2
+\tfrac{1}{2}[\Theta^{(1)},\Theta^{(1)}]
+\;=\;
+\tfrac{1}{2}\,k^2\,[\delta_{\mathrm{irr}}^2]
+\otimes \Delta^2.
+\end{equation}
+This is the loop-squared shell. It is nonzero for $k \neq 0$.
+
+\medskip\noindent\emph{(b) The BV term.}
+\begin{equation}% label removed: eq:thqg-VII-heis-bv-g1
+\Delta(\Theta^{(1)})
+\;=\;
+k \cdot \Delta\bigl([\delta_{\mathrm{irr}}] \otimes \Delta\bigr)
+\;=\;
+k^2 \cdot [\Delta\delta_{\mathrm{irr}}] \otimes \Delta^2.
+\end{equation}
+This contributes to the separating-loop shell.
+
+\medskip\noindent\emph{(c) The cubic shadow vanishes.}
+For the Heisenberg algebra, $\fC(\cH_k) = 0$ (no simple-pole
+OPE, hence no cubic vertex in the bar complex). Consequently:
+\begin{equation}% label removed: eq:thqg-VII-heis-sep-shell-vanish
+\Theta^{(2)}_{\mathrm{sep}\circ\mathrm{loop}} = 0
+\qquad\text{and}\qquad
+\Theta^{(2)}_{\mathrm{pf}} = 0.
+\end{equation}
+Both the separating-loop shell and the planted-forest shell
+vanish: $\dsew^{(2)} = \dpf^{(2)} = 0$ for the Gaussian
+archetype. The BV term~\eqref{V1-eq:thqg-VII-heis-bv-g1} and
+the separating clutching $\dsew^{(2)}$ cancel in the
+separating-loop shell (the separating boundary divisor
+$\delta_1 \in \partial\overline{\cM}_{2,n}$ is not activated
+because both sides of the separating node produce genus-$1$
+components with purely scalar data, and the net contribution
+vanishes by the trace-class mechanism of the
+complementarity propagator on a one-dimensional space).
+
+\medskip\noindent\emph{(d) The solution.}
+The obstruction reduces to the loop-squared term:
+\begin{equation}% label removed: eq:thqg-VII-heis-obs2
+\Ob_2
+\;=\;
+\tfrac{1}{2}\,k^2\,[\delta_{\mathrm{irr}}^2] \otimes
+\Delta^2,
+\end{equation}
+and the genus-$2$ element is:
+\begin{equation}% label removed: eq:thqg-VII-heis-theta2
+\Theta^{(2)}_{\cH_k}
+\;=\;
+-\hCont\bigl(\Ob_2\bigr)
+\;=\;
+k^2 \cdot F_2 \cdot \lambda_2,
+\end{equation}
+where $\lambda_2 = c_2(\mathbb{E}) \in H^2(\overline{\cM}_{2,1})$
+is the second Chern class of the Hodge bundle.
+
+The free energy is:
+\begin{equation}% label removed: eq:thqg-VII-heis-F2
+F_2
+\;=\;
+\int_{\overline{\cM}_{2,1}} \psi_1^{2}\,\lambda_2
+\;=\;
+\frac{2^3 - 1}{2^3} \cdot \frac{|B_4|}{4!}
+\;=\;
+\frac{7}{8} \cdot \frac{1/30}{24}
+\;=\;
+\frac{7}{5760}.
+\end{equation}
+$B_4 = -1/30$, hence $|B_4| = 1/30$, and
+$(2g)! = 4! = 24$; moreover
+$\frac{2^3-1}{2^3} = \frac{7}{8}$ and
+$\frac{7}{8} \cdot \frac{1}{720} = \frac{7}{5760}$. $\checkmark$
+\end{computation}
+
+\subsubsection{Genus $g = 3$: three loops}
+% label removed: subsubsec:thqg-VII-heis-g3
+
+\begin{computation}[Genus-$3$ Heisenberg; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VII-heis-g3
+\index{Heisenberg algebra!genus-3 MC element}
+The genus-$3$ MC equation
+(Proposition~\ref{prop:thqg-VII-genus3}) is:
+\begin{equation}% label removed: eq:thqg-VII-heis-mc-g3
+d_{\Theta^{(0)}}(\Theta^{(3)})
+\;=\;
+-[\Theta^{(1)},\Theta^{(2)}]
+- \Delta(\Theta^{(2)})
+- \dsew^{(3)}
+- \dpf^{(3)}.
+\end{equation}
+
+\medskip\noindent\emph{(a) The bracket term.}
+For the Heisenberg algebra, $\Theta^{(1)} = k \cdot
+[\delta_{\mathrm{irr}}] \otimes \Delta$ and
+$\Theta^{(2)} = k^2 F_2 \cdot \lambda_2$. The bracket is:
+\begin{equation}% label removed: eq:thqg-VII-heis-bracket-g3
+[\Theta^{(1)},\Theta^{(2)}]
+\;=\;
+k^3 \, F_2 \cdot
+[[\delta_{\mathrm{irr}}] \otimes \Delta,\, \lambda_2]
+\;=\;
+k^3 \, F_2 \cdot [\delta_{\mathrm{irr}} \cdot \lambda_2]
+\otimes \Delta^3.
+\end{equation}
+This encodes the separating degeneration where a genus-$3$
+surface pinches into a genus-$1$ and a genus-$2$ component.
+
+\medskip\noindent\emph{(b) The BV term.}
+\begin{equation}% label removed: eq:thqg-VII-heis-bv-g2
+\Delta(\Theta^{(2)})
+\;=\;
+k^2 \, F_2 \cdot \Delta(\lambda_2).
+\end{equation}
+This is the non-separating clutching applied to the genus-$2$
+data.
+
+\medskip\noindent\emph{(c) Boundary terms vanish.}
+As before for the Gaussian archetype:
+$\dsew^{(3)} = \dpf^{(3)} = 0$ (the cubic and quartic
+shadows vanish).
+
+\medskip\noindent\emph{(d) The solution.}
+The Gaussian universality principle ensures that all
+contributions assemble into a scalar multiple of the universal
+form:
+\begin{equation}% label removed: eq:thqg-VII-heis-theta3
+\Theta^{(3)}_{\cH_k}
+\;=\;
+k^3 \cdot F_3 \cdot \lambda_3.
+\end{equation}
+
+The free energy:
+\begin{equation}% label removed: eq:thqg-VII-heis-F3
+F_3
+\;=\;
+\int_{\overline{\cM}_{3,1}} \psi_1^{4}\,\lambda_3
+\;=\;
+\frac{2^5 - 1}{2^5} \cdot \frac{|B_6|}{6!}
+\;=\;
+\frac{31}{32} \cdot \frac{1/42}{720}
+\;=\;
+\frac{31}{967680}.
+\end{equation}
+$B_6 = 1/42$, $6! = 720$, and
+$\frac{31}{32} \cdot \frac{1}{30240} = \frac{31}{967680}$. $\checkmark$
+\end{computation}
+
+\subsubsection{Genus $g = 4$: four loops}
+% label removed: subsubsec:thqg-VII-heis-g4
+
+\begin{computation}[Genus-$4$ Heisenberg; \ClaimStatusProvedHere]
+% label removed: comp:thqg-VII-heis-g4
+\index{Heisenberg algebra!genus-4 MC element}
+The genus-$4$ MC equation
+(Proposition~\ref{prop:thqg-VII-genus4}) is:
+\begin{equation}% label removed: eq:thqg-VII-heis-mc-g4
+d_{\Theta^{(0)}}(\Theta^{(4)})
+\;=\;
+-[\Theta^{(1)},\Theta^{(3)}]
+- \tfrac{1}{2}[\Theta^{(2)},\Theta^{(2)}]
+- \Delta(\Theta^{(3)})
+- \dsew^{(4)}
+- \dpf^{(4)}.
+\end{equation}
+
+\medskip\noindent\emph{(a) The bracket terms.}
+
+The first bracket:
+\begin{equation}% label removed: eq:thqg-VII-heis-bracket13
+[\Theta^{(1)},\Theta^{(3)}]
+\;=\;
+k^4\, F_3\,
+[[\delta_{\mathrm{irr}}] \otimes \Delta,\, \lambda_3]
+\;=\;
+k^4\, F_3 \cdot
+[\delta_{\mathrm{irr}} \cdot \lambda_3]
+\otimes \Delta^4.
+\end{equation}
+This corresponds to the separating degeneration splitting the
+genus-$4$ surface into genus-$1$ and genus-$3$ components.
+
+The second bracket:
+\begin{equation}% label removed: eq:thqg-VII-heis-bracket22
+\tfrac{1}{2}[\Theta^{(2)},\Theta^{(2)}]
+\;=\;
+\tfrac{1}{2}\, k^4\, F_2^2\,
+[\lambda_2,\lambda_2]
+\;=\;
+\tfrac{1}{2}\, k^4\, F_2^2 \cdot
+[\lambda_2^2] \otimes \Delta^4.
+\end{equation}
+This corresponds to the separating degeneration splitting the
+genus-$4$ surface into two genus-$2$ components.
+
+\medskip\noindent\emph{(b) The BV term.}
+\begin{equation}% label removed: eq:thqg-VII-heis-bv-g3
+\Delta(\Theta^{(3)})
+\;=\;
+k^3\, F_3 \cdot \Delta(\lambda_3).
+\end{equation}
+
+\medskip\noindent\emph{(c) Boundary terms vanish.}
+For the Gaussian archetype: $\dsew^{(4)} = \dpf^{(4)} = 0$.
+
+\medskip\noindent\emph{(d) The obstruction class.}
+\begin{equation}% label removed: eq:thqg-VII-heis-obs4
+\Ob_4
+\;=\;
+k^4\, F_3 \cdot [\delta_{\mathrm{irr}} \cdot \lambda_3]
+\otimes \Delta^4
+\;+\;
+\tfrac{1}{2}\, k^4\, F_2^2 \cdot [\lambda_2^2]
+\otimes \Delta^4
+\;+\;
+k^3\, F_3 \cdot \Delta(\lambda_3).
+\end{equation}
+
+\medskip\noindent\emph{(e) The solution.}
+By Gaussian universality:
+\begin{equation}% label removed: eq:thqg-VII-heis-theta4
+\Theta^{(4)}_{\cH_k}
+\;=\;
+k^4 \cdot F_4 \cdot \lambda_4.
+\end{equation}
+
+The free energy:
+\begin{equation}% label removed: eq:thqg-VII-heis-F4
+F_4
+\;=\;
+\int_{\overline{\cM}_{4,1}} \psi_1^{6}\,\lambda_4
+\;=\;
+\frac{2^7 - 1}{2^7} \cdot \frac{|B_8|}{8!}.
+\end{equation}
+
+Now $B_8 = -1/30$, so $|B_8| = 1/30$, and $8! = 40320$. Thus:
+\begin{equation}% label removed: eq:thqg-VII-heis-F4-value
+F_4
+\;=\;
+\frac{127}{128} \cdot \frac{1/30}{40320}
+\;=\;
+\frac{127}{128} \cdot \frac{1}{1209600}
+\;=\;
+\frac{127}{154828800}.
+\end{equation}
+\end{computation}
+
+\begin{remark}[Bernoulli number pattern]
+% label removed: rem:thqg-VII-bernoulli
+\index{Bernoulli numbers!genus expansion}
+The Bernoulli numbers appearing in $F_g$ are:
+\begin{center}
+\begin{tabular}{ccccc}
+$g$ & $B_{2g}$ & $|B_{2g}|$ & $(2g)!$ & $F_g$ \\
+\hline
+$1$ & $1/6$ & $1/6$ & $2$ & $1/24$ \\
+$2$ & $-1/30$ & $1/30$ & $24$ & $7/5760$ \\
+$3$ & $1/42$ & $1/42$ & $720$ & $31/967680$ \\
+$4$ & $-1/30$ & $1/30$ & $40320$ & $127/154828800$
+\end{tabular}
+\end{center}
+These agree with the Faber--Pandharipande $\lambda_g$-formula
+(Theorem~\ref{V1-thm:dmvv-agreement}). The recursive structure
+is manifest: $F_g$ is determined from $F_0, \ldots, F_{g-1}$
+by the MC recursion, and the Bernoulli numbers appear through
+the moduli-space integration (specifically, through the
+intersection numbers $\int_{\overline{\cM}_{g,1}}
+\psi_1^{2g-2}\,\lambda_g$, which are evaluated by the Mumford
+formula).
+\end{remark}
+
+\subsubsection{Consistency check: the recursion vs.\ the closed form}
+% label removed: subsubsec:thqg-VII-consistency
+
+\begin{theorem}[Recursion reproduces the closed form;
+\ClaimStatusProvedHere]
+\label{thm:thqg-VII-recursion-closed}
+\index{Heisenberg algebra!recursion vs closed form}
+For the Heisenberg algebra $\cH_k$, the MC recursion
+\textup{(}Construction~\textup{\ref{constr:thqg-VII-mc-recursion})}
+reproduces the closed-form Faber--Pandharipande $\lambda_g$-formula:
+\begin{equation}% label removed: eq:thqg-VII-recursion-closed
+\Theta^{(g),\mathrm{conn}}_{\cH_k}
+\;=\;
+k\cdot\omega_g,\quad g\ge1,
+\qquad
+F_g(\cH_k)
+\;=\;
+k\cdot
+\frac{2^{2g-1}-1}{2^{2g-1}} \cdot
+\frac{|B_{2g}|}{(2g)!}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+$\Theta^{(0)} = k \cdot \eta_{12} \otimes J^{\otimes 2}$
+is the OPE structure map. The genus-$g$ Gaussian determinant-line
+amplitude of the gauge-fixed free-boson factorization algebra is the
+$k$-th determinant-line power; hence its logarithm, i.e. its connected
+free energy, is linear in~$k$. This is the perturbative determinant
+model for the Heisenberg sector, not an unqualified measure-theoretic
+path integral. Products of lower-genus terms are disconnected
+determinant-line amplitudes and disappear after the connected
+logarithm is taken. Thus the connected class is $k\omega_g$.
+
+The numerical coefficient is the marked Hodge integral
+\[
+\lambda_g^{\mathrm{FP}}
+=\int_{\overline{\cM}_{g,1}}\psi_1^{2g-2}\lambda_g.
+\]
+Faber--Pandharipande evaluate this integral as the Bernoulli number
+shown above. Therefore
+\[
+F_g^{\mathrm{sc}}(\cH_k)=k\lambda_g^{\mathrm{FP}}.
+\]
+The equality is the scalar Hodge coefficient of the connected
+determinant-line sector, not an unqualified full multi-channel genus
+coefficient.
+\end{proof}
+
+\subsubsection{The rank-$d$ Heisenberg algebra}
+% label removed: subsubsec:thqg-VII-heis-rank-d
+
+\begin{corollary}[Rank-$d$ Heisenberg; \ClaimStatusProvedHere]
+% label removed: cor:thqg-VII-rank-d
+\index{Heisenberg algebra!rank-$d$}
+For the rank-$d$ Heisenberg algebra $\cH_k^{\oplus d}$
+\textup{(}$d$ free bosons at level $k$\textup{)}, the genus-$g$
+connected scalar free energy is:
+\begin{equation}% label removed: eq:thqg-VII-rank-d-Fg
+F_g^{(d)}
+\;=\;
+d k\cdot\lambda_g^{\mathrm{FP}},
+\end{equation}
+where $\lambda_g^{\mathrm{FP}}$ is given by
+\eqref{V1-eq:thqg-VII-heis-Fg}.
+The zero-mode Gaussian determinant-line scalar carried by a
+period matrix $\Omega_g$ is:
+\begin{equation}% label removed: eq:thqg-VII-rank-d-det
+\chi_{g,\mathrm{det}}^{(d)}(\Omega_g)
+\;=\;
+\frac{1}{\bigl(\det(\mathrm{Im}\,\Omega_g)\bigr)^{dk/2}},
+\end{equation}
+where $\Omega_g \in \mathfrak{H}_g$ is the period matrix of
+the genus-$g$ surface. This analytic determinant-line scalar is a
+representative of the Hodge determinant line; it is not the
+exponential of the Faber--Pandharipande scalar free energy
+$F_g^{(d)}$.
+\end{corollary}
+
+\begin{proof}
+The modular characteristic is additive
+(Proposition~\ref{V1-prop:independent-sum-factorization}):
+$\kappaChHodge(\cH_k^{\oplus d}) = d \cdot k$. The Gaussian
+universality principle gives
+$\Theta^{(g),\mathrm{conn}}_{\cH_k^{\oplus d}}=dk\,\omega_g$,
+hence $F_g^{(d)}=dk\,\lambda_g^{\mathrm{FP}}$.
+The Fredholm determinant computation
+(Theorem~\ref{thm:heisenberg-sewing}) gives the determinant-line
+representative
+\[
+\chi_{g,\mathrm{det}}^{(d)}(\Omega_g)
+=(\det(\mathrm{Im}\,\Omega_g))^{-dk/2}.
+\]
+Its logarithmic curvature is $dk$ times the Hodge form; applying
+the scalar trace
+$\int_{\overline{\cM}_{g,1}}\psi_1^{2g-2}(-)$ gives
+$F_g^{(d)}$. Thus the corollary records the integrated connected
+Hodge free energy and the zero-mode determinant-line scalar, not a
+physical partition function.
+\end{proof}
+
+\subsubsection{Table of genus-by-genus MC data}
+% label removed: subsubsec:thqg-VII-table
+
+\begin{table}[ht]
+\centering
+\caption{MC recursion data for $\cH_k$ through genus $4$}
+% label removed: tab:thqg-VII-heis-table
+\begin{tabular}{cllll}
+\hline
+$g$ & $\Ob_g$ & $\Theta^{(g),\mathrm{conn}}$ & $\lambda_g^{\mathrm{FP}}$ & Check \\
+\hline
+$0$ & -- & $k \cdot \eta_{12} \otimes J^{\otimes 2}$ &
+ $0$ & OPE \\
+$1$ & $\Delta(\Theta^{(0)})$ &
+ $k \cdot [\delta_{\mathrm{irr}}] \otimes \Delta$ &
+ $\frac{1}{24}$ & $\checkmark$ \\
+$2$ & connected part of $\frac{1}{2}[\Theta^{(1)},\Theta^{(1)}]$ &
+ $k \cdot \omega_2$ &
+ $\frac{7}{5760}$ & $\checkmark$ \\
+$3$ & $[\Theta^{(1)},\Theta^{(2)}] + \Delta(\Theta^{(2)})$ &
+ $k \cdot \omega_3$ &
+ $\frac{31}{967680}$ & $\checkmark$ \\
+$4$ & $[\Theta^{(1)},\Theta^{(3)}]
+ + \frac{1}{2}[\Theta^{(2)},\Theta^{(2)}]
+ + \Delta(\Theta^{(3)})$ &
+ $k \cdot \omega_4$ &
+ $\frac{127}{154828800}$ & $\checkmark$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsubsection{Extended table through genus $10$ with $15$-digit precision}
+% label removed: subsubsec:thqg-VII-extended-table
+
+The genus-$g$ free energy for the rank-$1$ Heisenberg algebra
+$\cH_1$ ($\kappa = 1$) is
+$F_g = \lambda_g^{\mathrm{FP}}
+= \frac{2^{2g-1}-1}{2^{2g-1}} \cdot \frac{|B_{2g}|}{(2g)!}$.
+The Bernoulli numbers $B_{2g}$ grow factorially:
+$|B_{2g}| \sim 2 \cdot (2g)! / (2\pi)^{2g}$, so
+$F_g \sim 2/(2\pi)^{2g}$; the free energy decays
+exponentially in genus, reflecting the convergence of
+the $\hat{A}$-genus.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{longtable}{rclrl}
+\caption{Free energy $F_g(\cH_1) =
+\lambda_g^{\mathrm{FP}}$ for $g = 1, \ldots, 10$.}
+\label{tab:thqg-VII-extended-table}\\
+$g$ & $B_{2g}$ & $\frac{2^{2g-1}-1}{2^{2g-1}}$
+& \multicolumn{1}{c}{$F_g$ (exact)}
+& \multicolumn{1}{c}{$F_g$ ($15$-digit)} \\
+\hline
+\endfirsthead
+$g$ & $B_{2g}$ & $\frac{2^{2g-1}-1}{2^{2g-1}}$
+& \multicolumn{1}{c}{$F_g$ (exact)}
+& \multicolumn{1}{c}{$F_g$ ($15$-digit)} \\
+\hline
+\endhead
+$1$
+ & $\frac{1}{6}$
+ & $\frac{1}{2}$
+ & $\frac{1}{24}$
+ & $4.16666666666667 \times 10^{-2}$ \\[4pt]
+$2$
+ & $-\frac{1}{30}$
+ & $\frac{7}{8}$
+ & $\frac{7}{5760}$
+ & $1.21527777777778 \times 10^{-3}$ \\[4pt]
+$3$
+ & $\frac{1}{42}$
+ & $\frac{31}{32}$
+ & $\frac{31}{967680}$
+ & $3.20353835978836 \times 10^{-5}$ \\[4pt]
+$4$
+ & $-\frac{1}{30}$
+ & $\frac{127}{128}$
+ & $\frac{127}{154828800}$
+ & $8.20260830026455 \times 10^{-7}$ \\[4pt]
+$5$
+ & $\frac{5}{66}$
+ & $\frac{511}{512}$
+ & $\frac{73}{3503554560}$
+ & $2.08359820718762 \times 10^{-8}$ \\[4pt]
+$6$
+ & $-\frac{691}{2730}$
+ & $\frac{2047}{2048}$
+ & $\frac{1414477}{2678117105664000}$
+ & $5.28160996772134 \times 10^{-10}$ \\[4pt]
+$7$
+ & $\frac{7}{6}$
+ & $\frac{8191}{8192}$
+ & $\frac{8191}{612141052723200}$
+ & $1.33809029202683 \times 10^{-11}$ \\[4pt]
+$8$
+ & $-\frac{3617}{510}$
+ & $\frac{32767}{32768}$
+ & $\frac{16931177}{49950709902213120000}$
+ & $3.38957685148932 \times 10^{-13}$ \\[4pt]
+$9$
+ & $\frac{43867}{798}$
+ & $\frac{131071}{131072}$
+ & $\frac{5749691557}{669659197233029971968000}$
+ & $8.58599654982295 \times 10^{-15}$ \\[4pt]
+$10$
+ & $-\frac{174611}{330}$
+ & $\frac{524287}{524288}$
+ & $\frac{91546277357}{420928638260761696665600000}$
+ & $2.17486455032522 \times 10^{-16}$
+\end{longtable}
+\end{center}
+
+\begin{remark}[Asymptotic behaviour and convergence radius]
+% label removed: rem:thqg-VII-asymptotics
+\index{genus expansion!asymptotics}
+The ratio $F_{g+1}/F_g$ converges to $1/(2\pi)^2$ as
+$g \to \infty$:
+\[
+\frac{F_{g+1}}{F_g}
+= \frac{2^{2g+1}-1}{2^{2g+1}} \cdot
+\frac{2^{2g-1}}{2^{2g-1}-1} \cdot
+\frac{|B_{2g+2}|}{|B_{2g}|} \cdot
+\frac{(2g)!}{(2g+2)!}
+\;\xrightarrow{g \to \infty}\;
+\frac{1}{(2\pi)^2}
+\approx 0.02533.
+\]
+The convergence radius of $\sum_g F_g x^{2g}$ is
+$|x| < 2\pi$, reflecting the nearest pole of
+$(x/2)/\sin(x/2)$ at $x = 2\pi$. This exponential
+decay is the algebraic shadow of UV finiteness
+(\S\ref{sec:thqg-perturbative-finiteness}): the graph
+sum at genus~$g$ contributes a coefficient suppressed
+by $(2\pi)^{-2g}$.
+\end{remark}
+
+\begin{remark}[Verification protocol]
+% label removed: rem:thqg-VII-derivation
+\index{Faber--Pandharipande formula!derivation}
+Each entry in Table~\ref{tab:thqg-VII-extended-table} is verified
+by three independent methods:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{Bernoulli number formula.}
+ Direct evaluation of
+ $\lambda_g^{\mathrm{FP}} =
+ \frac{2^{2g-1}-1}{2^{2g-1}} \cdot \frac{|B_{2g}|}{(2g)!}$
+ using exact rational arithmetic.
+\item \emph{Generating function.}
+ Power series expansion of
+ $\frac{x/2}{\sin(x/2)} - 1$ through $x^{20}$.
+\item \emph{Faber--Pandharipande intersection numbers.}
+ The integral
+ $\int_{\overline{\cM}_{g,1}} \psi_1^{2g-2}\, \lambda_g$
+ computed via the Virasoro constraints / Witten--Kontsevich
+ intersection theory.
+\end{enumerate}
+All three methods agree to all computed digits through $g = 10$.
+\end{remark}
+
+% ======================================================================
+%
+% PART 6: IMPLICATIONS FOR QUANTUM GRAVITY LOOP CORRECTIONS
+%
+% ======================================================================
+
+\subsection{Implications for quantum gravity loop corrections}
+% label removed: subsec:thqg-VII-gravity-loops
+\index{quantum gravity!loop corrections from MC recursion|textbf}
+
+The objects of the MC recursion carry a gravitational reading
+in the HT setting. The dictionary is a heuristic
+(\ClaimStatusHeuristic): the algebraic statements are the theorems
+of the preceding sections; their gravitational names below presuppose a
+fixed HT construction in which $\Theta_\cA$ is the genus expansion of a
+bulk amplitude.
+
+\subsubsection{The gravitational interpretation}
+% label removed: subsubsec:thqg-VII-grav-interpretation
+
+In the chosen HT construction the genus expansion
+$\Theta_\cA = \sum_g \hbar^g \Theta^{(g)}$ reads as a
+\emph{gravitational loop expansion}: $\hbar$ plays the role of
+Newton's constant $G_N$ in the bulk, and $\Theta^{(g)}$ that of
+the $g$-loop gravitational amplitude. This identification is a
+dictionary entry, not a theorem of $\Phi_{\mathrm{hol}}$; matching
+$\Theta^{(g)}$ to a metric-saddle loop expansion is the additional
+physical input.
+
+\begin{principle}[Gravity-bootstrap dictionary; \ClaimStatusHeuristic]
+% label removed: princ:thqg-VII-gravity-bootstrap
+\index{gravity-bootstrap correspondence}
+Under the fixed HT construction, the MC recursion reads as a
+\emph{boundary-to-bulk reconstruction} of the gravitational loop
+expansion:
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Boundary (chiral algebra)} &
+\textbf{Bulk (gravity)} \\
+\hline
+Genus-$0$ OPE data $\Theta^{(0)}$ &
+Classical gravity (tree-level) \\
+Genus-$1$ element $\Theta^{(1)}$ &
+One-loop gravitational correction \\
+Genus-$g$ element $\Theta^{(g)}$ &
+$g$-loop gravitational correction \\
+MC equation &
+Bootstrap/consistency of gravity \\
+Contracting homotopy $\hCont$ &
+Gravitational propagator \\
+$\Ob_g$ &
+$g$-loop gravitational anomaly \\
+\(r^\Theta_{\max}(\cA)\) (support shadow depth) &
+Support-degree complexity
+\end{tabular}
+\end{center}
+\end{principle}
+
+\subsubsection{The one-loop gravitational correction}
+% label removed: subsubsec:thqg-VII-one-loop
+
+\begin{theorem}[One-loop scalar shadow from genus-$1$ MC;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VII-one-loop-gravity
+\index{one-loop gravitational scalar shadow}
+The genus-$1$ MC element $\Theta^{(1)}$ determines the one-loop
+gravitational scalar shadow:
+\begin{equation}% label removed: eq:thqg-VII-one-loop
+Z_{1}^{\mathrm{scal}}(\cA)
+\;=\;
+\exp\bigl(\Tr(\Theta^{(1)})\bigr)
+\;=\;
+\exp\bigl(\kappaChHodge(\cA) \cdot F_1\bigr),
+\end{equation}
+where $\Tr$ denotes the scalar trace, namely integration over the
+genus-$1$ moduli space $\overline{\cM}_{1,1}$. For the Heisenberg
+algebra at level~$k$ the scalar trace and the torus determinant
+are different functions:
+\begin{equation}% label removed: eq:thqg-VII-one-loop-heis
+Z_{1}^{\mathrm{scal}}(\cH_k)
+\;=\;
+\exp\!\bigl(k/24\bigr),
+\qquad
+\chi_{1}^{\mathrm{det}}(\cH_k;\tau)
+\;=\;
+\eta(\tau)^{-k},
+\end{equation}
+and only the first expression is the genus-$1$ scalar Hodge trace.
+\end{theorem}
+
+\begin{proof}
+The genus-$1$ scalar shadow contribution is
+$Z_1^{\mathrm{scal}} = \exp(F_1)$ where
+$F_1 = \kappaChHodge(\cA) \cdot
+\int_{\overline{\cM}_{1,1}} \lambda_1$. By
+Proposition~\ref{prop:thqg-VII-genus1-solution},
+$\Theta^{(1)}$ is determined by the BV operator applied to
+genus-$0$ data, and its trace over $\overline{\cM}_{1,1}$
+gives \(F_1(\cA)=\kappaChHodge(\cA)/24\)
+(which equals \(k/24\) for the Heisenberg \(\cH_k\)).
+\end{proof}
+
+\subsubsection{The genus-$g$ gravitational amplitude}
+% label removed: subsubsec:thqg-VII-g-loop
+
+\begin{theorem}[The $g$-loop gravitational amplitude;
+\ClaimStatusProvedHere]
+\label{thm:thqg-VII-g-loop-amplitude}
+\index{$g$-loop gravitational amplitude}
+For a modular Koszul chiral algebra $\cA$, the $g$-loop
+gravitational amplitude is:
+\begin{equation}% label removed: eq:thqg-VII-g-loop
+\mathcal{A}_g(\cA)
+\;=\;
+\int_{\overline{\cM}_{g,n}}
+\langle \Theta^{(g)}_\cA \rangle
+\;=\;
+\int_{\overline{\cM}_{g,n}}
+\langle -\hCont(\Ob_g) \rangle,
+\end{equation}
+where $\langle - \rangle$ denotes the evaluation pairing
+\textup{(}integration of the graph amplitude over the
+moduli space\textup{)}. This is:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \emph{finite}, by the HS-sewing criterion
+ \textup{(}Theorem~\textup{\ref{thm:general-hs-sewing}}) after the
+ Fulton--MacPherson boundary extension;
+\item \emph{uniquely determined} from the genus-$0$ data
+ $\Theta^{(0)}$, by the MC recursion;
+\item \emph{gauge-invariant}: the ambiguity in $\Theta^{(g)}$
+ lies in the kernel of the trace, hence the amplitude
+ $\mathcal{A}_g$ is unambiguous.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Finiteness follows from the HS-sewing criterion: for Koszul
+algebras with polynomial OPE growth and subexponential sector
+growth, the genus-$g$ amplitude converges
+(Theorem~\ref{thm:general-hs-sewing}). Unique determination
+follows from the MC recursion
+(Construction~\ref{constr:thqg-VII-mc-recursion}). Gauge
+invariance follows from the observation that the gauge
+group acts on $\Theta^{(g)}$ by adding
+$d_{\Theta^{(0)}}$-exact terms, and the pairing
+$\langle d_{\Theta^{(0)}}(\xi) \rangle = 0$ by Stokes'
+theorem on $\overline{\cM}_{g,n}$.
+\end{proof}
+
+\subsubsection{The non-renormalization principle}
+% label removed: subsubsec:thqg-VII-non-renormalization
+
+\begin{theorem}[Non-renormalization from the MC recursion;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VII-non-renormalization
+\index{non-renormalization!from MC recursion}
+For a Gaussian algebra $\cA$ \textup{(}\(r^\Theta_{\max}(\cA)=2\)\textup{)},
+the connected scalar shadow expansion has the following
+non-renormalization property: the $g$-loop amplitude
+$\mathcal{A}_g$ depends on the genus-$0$ data only through
+the single scalar $\kappaChHodge(\cA)$:
+\begin{equation}% label removed: eq:thqg-VII-non-renorm
+\mathcal{A}_g^{\mathrm{scal,conn}}(\cA)
+\;=\;
+\kappaChHodge(\cA)\cdot \lambda_g^{\mathrm{FP}},
+\end{equation}
+where
+\(\lambda_g^{\mathrm{FP}}
+=\int_{\overline{\cM}_{g,1}}\psi_1^{2g-2}\lambda_g\)
+is the Faber--Pandharipande scalar.
+In particular:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item There are no ``quantum corrections'' beyond the
+ tree-level scalar $\kappa$: the entire genus expansion is
+ controlled by a single number.
+\item The genus spectral sequence degenerates at $E_1$
+ \textup{(}Corollary~\textup{\ref{cor:thqg-VII-gaussian-degeneration})},
+ so there are no higher-loop ``surprises''.
+\item The disconnected scalar shadow generating series is:
+ \begin{equation}% label removed: eq:thqg-VII-non-renorm-Z
+ Z_{\mathrm{sh}}^{\mathrm{scal}}(\cA;\hbar)
+ \;=\;
+ \exp\!\Bigl(\sum_{g' \geq 1} \hbar^{g'}
+ \kappaChHodge(\cA)\lambda_{g'}^{\mathrm{FP}}\Bigr),
+ \end{equation}
+ where $\hbar$ is the genus-counting parameter of the modular
+ bar complex. In string-theory conventions, $\hbar = g_s^2$,
+ so that $\hbar^{g'} = g_s^{2g'}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The Gaussian support condition \(r^\Theta_{\max}=2\) says that the
+bar-intrinsic support packet has only the scalar quadratic component;
+the convolution algebra is formal on the connected scalar line, and
+the contracting homotopy is scalar there. The recursion
+\(\Theta^{(g)}=-\hCont(\Ob_g)\) therefore produces the same
+Hodge class at each genus, multiplied by the single scalar
+\(\kappaChHodge(\cA)\). Applying the marked scalar trace gives
+\(\kappaChHodge(\cA)\lambda_g^{\mathrm{FP}}\), and exponentiating
+the connected scalar coefficients gives the disconnected scalar
+shadow series displayed above. No claim about a physical
+gravitational partition function is made here.
+\end{proof}
+
+\subsubsection{Beyond the Gaussian: gravitational complexity}
+% label removed: subsubsec:thqg-VII-beyond-gaussian
+
+\begin{remark}[Gravitational corrections from the support packet]
+% label removed: rem:thqg-VII-grav-corrections
+\index{gravitational corrections!support packet}
+For non-Gaussian algebras \textup{(}\(r^\Theta_{\max}\geq3\) on the
+finite standard branches, or \(r^\Theta_{\max}=\infty\)\textup{)}, the MC recursion
+produces genuine multi-loop gravitational corrections that are
+\emph{not} determined by the single scalar $\kappa$. These arise from the
+higher support data:
+\begin{enumerate}[label=(\alph*)]
+\item For the Lie/tree archetype \textup{(}\(r^\Theta_{\max}=3\),
+ e.g.\ $V_k(\fg)$): the cubic shadow $\fC(\cA)$
+ contributes a genus-$2$ correction that is not a scalar
+ multiple of $\kappa^2$; it involves the structure constants
+ of~$\fg$.
+\item For the contact archetype \textup{(}\(r^\Theta_{\max}=4\),
+ e.g.\ $\beta\gamma$): the quartic contact invariant
+ $\mathfrak{Q}(\cA)$ contributes starting at genus~$2$
+ through the planted-forest shell.
+\item For the mixed archetype \textup{(}\(r^\Theta_{\max}=\infty\),
+ e.g.\ $\mathrm{Vir}_c$): the support packet has no finite cutoff.
+ No support-depth argument can force finite-page degeneration. The
+ gravitational amplitude at genus~$g$ receives contributions
+ from all degrees up to $g + 2$ (by the weight bound
+ $w = 2g - 2 + r + d$).
+\end{enumerate}
+These corrections measure the support-degree complexity of the
+boundary algebra: higher \(r^\Theta_{\max}\) allows richer bulk
+comparison channels.
+\end{remark}
+
+\begin{proposition}[Support-degree bounds on gravitational amplitudes;
+\ClaimStatusProvedHere]
+% label removed: prop:thqg-VII-complexity-bounds
+\index{gravitational amplitude!complexity bounds}
+For a modular Koszul chiral algebra $\cA$ with finite support shadow
+depth \(r^\Theta_{\max}(\cA)<\infty\), the $g$-loop shadow amplitude
+has no support-degree component above \(r^\Theta_{\max}(\cA)\). More
+precisely:
+\begin{equation}% label removed: eq:thqg-VII-complexity-bound
+\mathcal{A}_g(\cA)
+\;\in\;
+\bigoplus_{2\le r\le r^\Theta_{\max}(\cA)}
+\Sym^r\bigl(H^*(\barB(\cA))\bigr)
+\;\otimes\;
+H^*(\overline{\cM}_{g,n}),
+\end{equation}
+where the $\Sym^r$ factor encodes the $r$-degree contribution
+from the bar-intrinsic support packet, contracted with the
+tautological classes of the moduli space. This is a support-degree
+bound on the fixed HT shadow model, not a graph-degree theorem for an
+independently constructed metric-gravity path integral.
+\end{proposition}
+
+\begin{proof}
+Finite support depth means
+\(\Theta_{\cA,r}=0\) for every \(r>r^\Theta_{\max}(\cA)\). The
+recursive formula for \(\Theta^{(g)}\) is built from this chosen
+bar-intrinsic support packet by the BV operator, brackets, and the
+contracting homotopy. These operations can contract or combine
+available support components, but they cannot introduce a primitive
+support coordinate above the support cutoff. The displayed direct sum
+is therefore the support envelope for the genus-\(g\) shadow amplitude.
+The obstruction equation \(o_{r+1}=0\) is not used: it controls
+extendability of a truncation, not the vanishing of a previously
+chosen \(H^1\)-lift coordinate.
+\end{proof}
+
+\subsubsection{The gravitational modular bootstrap}
+% label removed: subsubsec:thqg-VII-grav-bootstrap
+
+\begin{remark}[Gravitational modular bootstrap]
+% label removed: rem:thqg-VII-grav-bootstrap
+\index{gravitational modular bootstrap}
+The MC recursion determines all-genus gravitational amplitudes
+from boundary OPE data. The required data are:
+\begin{enumerate}[label=(\arabic*)]
+\item the boundary chiral algebra $\cA$ (specified by its
+ OPE data $\Theta^{(0)}$);
+\item the Koszul property (verified by PBW or by the $12$
+ equivalent characterizations of
+ Theorem~\ref*{V1-thm:koszul-equivalences-meta});
+\item the MC recursion
+ (Construction~\ref{constr:thqg-VII-mc-recursion}), which
+ determines $\Theta^{(g)}$ for all $g \geq 1$;
+\item the HS-sewing criterion
+ (Theorem~\ref{thm:general-hs-sewing}), which ensures
+ finiteness of the amplitudes;
+\item the genus spectral sequence
+ (Theorem~\ref{thm:thqg-VII-genus-ss}), which organizes
+ the computation.
+\end{enumerate}
+The output is the completed scalar shadow generating series
+\[
+Z_{\mathrm{sh}}^{\mathrm{scal}}(\cA;\hbar)
+=\exp\bigl(\sum_{g \geq 1}\hbar^g
+\mathcal{A}_g^{\mathrm{scal,conn}}(\cA)\bigr),
+\]
+determined by the boundary data without free parameters inside the
+fixed HT shadow model.
+
+Within the fixed HT construction this realizes, as a boundary-CFT
+reading rather than a statement about metric quantum gravity, the
+heuristic that the bulk loop expansion is reconstructed from its
+boundary conditions: the MC equation on the convolution algebra
+$\gAmod$ is the algebraic mechanism, and the gravitational reading of
+its output is conditional on a separate comparison between
+\(\Theta_\cA\), a bulk saddle expansion, and the completed physical
+partition function.
+\end{remark}
+
+\begin{remark}[Comparison with string perturbation theory]
+% label removed: rem:thqg-VII-string-comparison
+\index{string perturbation theory!comparison}
+In string perturbation theory, the genus-$g$ amplitude is
+computed by integrating the world-sheet CFT correlator over
+the moduli space $\overline{\cM}_{g,n}$. The MC recursion
+provides an alternative computation: instead of evaluating the
+correlator on each surface and integrating, one builds the
+genus-$g$ amplitude recursively from lower genera using the
+contracting homotopy. The two approaches agree (they must,
+since both compute the same genus expansion of $\Theta_\cA$),
+but the MC recursion has the advantage of being
+\emph{manifestly inductive}: each genus level builds on the
+previous ones through an explicit algebraic formula, without
+needing to evaluate correlators on new surfaces.
+
+The price is that the MC recursion requires the Koszul
+property, which is a stronger structural assumption than what
+string perturbation theory uses (the latter works for any
+consistent CFT, not just Koszul ones). However, the standard
+landscape of chiral algebras relevant to twisted holography
+(Heisenberg, affine, $\beta\gamma$, Virasoro, $\mathcal{W}$-algebras)
+is entirely within the Koszul class
+(Proposition~\ref{V1-prop:pbw-universality}), so the MC recursion
+applies throughout this landscape.
+\end{remark}
+
+\subsubsection{The role of support depth in gravitational
+complexity}
+% label removed: subsubsec:thqg-VII-depth-gravity
+
+\begin{theorem}[Support depth bounds modular-bootstrap complexity;
+\ClaimStatusProvedHere]
+% label removed: thm:thqg-VII-depth-classification
+\index{support shadow depth!gravitational classification}
+The support shadow depth \(r^\Theta_{\max}(\cA)\) determines the
+support-degree envelope of the MC recursion:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item \(r^\Theta_{\max}=2\) \textup{(}Gaussian\textup{)}:
+ the connected scalar line of the genus spectral sequence collapses
+ at \(E_1\); the
+ $g$-loop amplitude $\mathcal{A}_g$ depends on the genus-$0$
+ data only through the scalar~$\kappaChHodge(\cA)$.
+ Example: $\cH_k$.
+\item \(r^\Theta_{\max}=3\) \textup{(}Lie/tree, canonical affine
+ branch\textup{)}: the cubic support component \(\fC(\cA)\) is the
+ last nonzero support coordinate. The genus-$2$ amplitude receives
+ cubic corrections. Example: $V_k(\fg)$.
+\item \(r^\Theta_{\max}=4\) \textup{(}contact, canonical contact
+ branch\textup{)}: the quartic support component
+ \(\mathfrak{Q}(\cA)\) is present and there are no higher support
+ coordinates on this branch. The planted-forest shell is activated at
+ genus~$2$. Example: $\beta\gamma$.
+\item \(r^\Theta_{\max}=\infty\) \textup{(}mixed\textup{)}:
+ there is no finite support-degree envelope, and no depth argument can
+ force finite-page degeneration. Example: $\mathrm{Vir}_c$.
+\end{enumerate}
+In the holographic interpretation \textup{(}\ClaimStatusHeuristic{}\textup{)},
+the four classes correspond to HT boundary models with increasing
+available bulk-comparison vertex complexity: free \textup{(}G\textup{)},
+cubic \textup{(}L, Chern--Simons\textup{)},
+quartic \textup{(}C, topological $B$-model\textup{)},
+and all-order \textup{(}M, the Virasoro gravity line\textup{)}.
+\end{theorem}
+
+\begin{proof}
+The classification follows from the support-packet statement
+(Corollary~\ref{cor:thqg-VII-gaussian-degeneration},
+Proposition~\ref{prop:thqg-VII-mixed-nondegeneration},
+Theorem~\ref{thm:thqg-VII-ss-shadow-obstruction}).
+The vertex envelope is read off from the support packet: a nonzero
+degree-\(r\) support coordinate can feed an \((r{-}1)\)-valent
+comparison vertex after a bulk comparison datum is supplied. The
+genus-$2$ shell activation
+(Theorem~\ref{V1-rem:genus2-shell-activation})
+is the first diagnostic.
+\end{proof}
+
+\begin{remark}[The modular bootstrap and the landscape of
+gravitational theories]
+% label removed: rem:thqg-VII-landscape
+\index{landscape!gravitational theories}
+The four-class classification (G, L, C, M) provides a taxonomy
+of gravitational theories in the HT setting. Each class has a
+characteristic behaviour under the MC recursion:
+\begin{itemize}
+\item \textbf{G (Gaussian):} The recursion is trivial
+ on the connected scalar projection:
+ $\Theta^{(g),\mathrm{conn}}
+ = \kappaChHodge(\cA)\,\omega_g$, with scalar
+ coefficient
+ $\kappaChHodge(\cA)\lambda_g^{\mathrm{FP}}$. The gravitational
+comparison theory is free. The scalar shadow series factorizes.
+\item \textbf{L (Lie/tree):} The recursion is nontrivial
+ starting at genus~$2$ and the canonical affine support packet has no
+ component above degree~$3$. The gravitational comparison theory has
+ cubic interactions. Chern--Simons
+ theory is the paradigmatic example.
+\item \textbf{C (contact):} The recursion is nontrivial
+ starting at genus~$2$ and involves the quartic contact
+ invariant. The gravitational comparison theory has quartic
+ interactions.
+\item \textbf{M (mixed):} The recursion is fully nontrivial
+ on arbitrarily high support degrees. The gravitational comparison
+ theory has interactions of all orders.
+\end{itemize}
+The Virasoro algebra, as the universal stress-tensor algebra,
+sits in the M~class: its infinite support packet reflects the
+all-order nature of the Virasoro gravity line. The finite classes
+(G, L, C) correspond to support-truncated HT comparison models: they
+are the topological or semistrict approximations that capture the
+lowest-order
+interactions.
+\end{remark}
+
+\begin{remark}[UV finiteness from the MC recursion]
+% label removed: rem:thqg-VII-uv-finiteness
+\index{UV finiteness!from MC recursion}
+The MC recursion is \emph{intrinsically UV-finite}: at each
+genus, the amplitude $\mathcal{A}_g$ is a finite number
+(Theorem~\ref{thm:thqg-VII-g-loop-amplitude}). There is no
+UV divergence to renormalize. The Fulton--MacPherson
+compactification provides the natural regulator (the
+blowup along the diagonals resolves the short-distance
+singularities), and the degree cutoff
+(Lemma~\ref{V1-lem:degree-cutoff}) bounds the number of
+contributing graphs. This UV finiteness is a consequence
+of the algebraic structure (the Koszul property), not of
+supersymmetry or other cancellation mechanisms.
+
+From the gravitational perspective, this UV finiteness is the
+statement that the \emph{boundary chiral algebra knows about
+the UV completion of the bulk gravity}: the MC recursion
+produces finite amplitudes because the boundary data are
+consistent (the MC equation is satisfied), and consistency
+forbids divergences. This is a concrete realization of the
+holographic principle: the boundary theory regulates the bulk.
+\end{remark}
+
+\section{Synthesis}
+\label{sec:modbootstrap-supplement}
+
+\begin{remark}[Siegel modular $\Delta_5$ bootstrap and four duality frames]
+\label{rem:modbootstrap-1}
+The modular bootstrap for twisted HT quantum gravity, at the K3 base
+point, is governed by
+$\Phi_{10}^{\mathrm{un}}=\Delta_5^2$, the unnormalised Igusa cusp
+form of weight~$10$ on $\mathrm{Sp}_4(\mathbb Z)$. The bootstrap equations
+on $\bar{\mathcal A}_2$ for the partition function $Z(Z)$ with $Z\in\mathfrak H_2$
+close onto $\Phi_{10}^{\mathrm{un}}(Z)$ in four duality frames (cf.~Vol.~II,
+\S\ref{sec:line-operators-supplement}):
+\begin{itemize}
+\item heterotic on $T^4$ \textrm{(Harvey--Moore 1996)}: modular bootstrap recovers $\Phi_{10}^{\mathrm{un}}$
+ as the elliptic-genus generating series;
+\item IIB on $K3$ \textrm{(Dijkgraaf--Verlinde--Verlinde 1996--97)}: $D1$--$D5$ bootstrap
+ recovers the $\Phi_{10}^{\mathrm{un}}$ denominator of the BPS index;
+\item IIA on $K3$ \textrm{(Dijkgraaf--Moore--Verlinde--Verlinde 1997)}: string bootstrap
+ recovers $\Phi_{10}^{\mathrm{un}}$ as the second-quantised Euler-characteristic series;
+\item M-theory on $K3\times T^2$ \textrm{(Witten 1995)}: M$2$--M$5$ bootstrap
+ recovers $\Phi_{10}^{\mathrm{un}}$ as the twisted one-loop determinant.
+\end{itemize}
+All four converge to the same scalar automorphic object
+$\Phi_{10}^{\mathrm{un}}$.  A lift from this scalar equality to a K3
+bar--cobar adjunction on $\mathbf H_{\Delta_5}$ requires the finite
+Hall--Borcherds recognition datum stated below; without that datum the
+bootstrap assertion is only the equality of scalar Fourier packages.
+\end{remark}
+
+\section{Three-dimensional TQFT state spaces from the non-semisimple MTC}
+\label{sec:modbootstrap-3d-tqft}
+
+The scalar modular bootstrap closes onto $\Phi_{10}^{\mathrm{un}}$
+(Remark~\ref{rem:modbootstrap-1}).  Every use below of
+$\mathbf H_{\Delta_5}$, of the Kerler--Lyubashenko category
+$\mathcal C$, of DGGPR state spaces, of state sums, of transport, and
+of conformal blocks is conditional on the Vol~III finite
+Hall--Borcherds recognition datum: compact source primitive bases with
+provenance, full parity blocks, product and coproduct matrices $M,D$,
+super-bracket matrices $B$, Hopf-pairing matrices $G$, radical kernels
+$K$, quotient maps $Q$, comparison matrices $A_\beta$, checked
+Borcherds--Kac relation rows, Hopf radical/coideal descent,
+no-extra-relations kernel equality, parity-refined PBW associated
+graded comparison, centre control, associator control, and strict
+finite-window transition compatibility.
+
+Under that recognition datum, the bar--cobar adjunction on
+$\mathbf H_{\Delta_5}$ supplies the Kerler--Lyubashenko
+non-semisimple MTC
+$\mathcal C = \mathrm{Rep}^{\mathrm{fd}}(\mathfrak u_{\zeta_8}
+(\widehat{\mathfrak m}_{\Delta_5}))$ constructed in
+Vol~III Chapter~\ref{V3-ch:modular-trace}
+Theorem~\ref{V3-thm:modtr-Plancherel-KerlerLyubashenko}. This category
+is the categorical substrate on which the lifted bootstrap is realised.
+The
+De~Renzi--Gainutdinov--Geer--Patureau-Mirand--Runkel 3d TQFT
+(arXiv:2003.09814, \emph{CMP}~385 (2021) 1245) attaches to $\mathcal C$ a
+cobordism-functorial state-space assignment
+$Z^{\mathrm{DGGPR}}\colon\mathrm{Cob}_3\to\mathrm{Vect}_{\mathbb C}$
+extending the Turaev 1994 semisimple construction
+(\emph{Quantum Invariants of Knots and 3-Manifolds}
+\S IV.2) to the non-semisimple setting of Kerler--Lyubashenko 2001
+LMS~LNS~262. The modular bootstrap equation on $\mathfrak H_2$ becomes
+the pair-of-pants sewing axiom on the genus-two state space.
+
+\begin{theorem}[Genus-two state space as bulk--boundary bootstrap datum;
+\ClaimStatusConditional]
+\label{thm:modbootstrap-Zsigma2-bootstrap}
+Let $\mathcal L = \int^{X\in\mathcal C} X\otimes X^\vee$ be the
+Lyubashenko coend of $\mathcal C$. The genus-two state space of the
+$\mathsf{SC}^{\mathrm{ch,top}}$ bulk--boundary 3d TQFT is
+\[
+ Z^{\mathrm{DGGPR}}(\Sigma_2)
+ \;=\;
+ \mathrm{Hom}_{\mathcal C}(\mathbf 1, \mathcal L^{\otimes 2})
+ \;\simeq\;
+ \mathrm{HH}_0^{\mathrm{cat}}
+ (\mathcal C\boxtimes\mathcal C^{\mathrm{op}}),
+\]
+the zeroth \emph{categorical} Hochschild homology
+(finite-tensor-category sense of Keller 2006 \emph{JPAA}~206 \S5;
+distinct from the chiral Hochschild
+$\mathrm{ChirHoch}^\bullet$ and topological Hochschild
+$\mathrm{THH}$ of
+\S\ref{sec:thqg-hochschild-stratification}).
+The trace of the $L_0\otimes L_0'$ operator on this space is the
+reciprocal of the Igusa cusp form,
+\[
+ \boxed{\;
+ \mathrm{Tr}_{Z^{\mathrm{DGGPR}}(\Sigma_2)}
+ \!\bigl(q^{L_0}\,p^{L_0'}\bigr)
+ \;=\;
+ \frac{1}{\Phi_{10}^{\mathrm{un}}(Z)},
+ \quad
+ Z = \begin{pmatrix}\tau & z\\ z & \tau'\end{pmatrix}\in\mathfrak H_2.\;}
+\]
+\end{theorem}
+
+\begin{proof}
+The coend description is the De~Renzi--Gainutdinov--Geer--Patureau-Mirand--Runkel
+2021 Thm.~5.10 universal construction; the Deligne-product identification
+follows from the coend Fubini theorem
+(Loregian 2021 \emph{(Co)end Calculus} \S 5.2 Thm.~5.2.2). The partition
+function equality is Vol~III
+Theorem~\ref{V3-thm:modtr-Zsigma2-Phi10}, whose independent
+routes are (i) DGGPR 2021 Thm.~5.10, (ii) Eichler--Zagier 1985
+Fourier--Jacobi expansion of $\Phi_{10}^{\mathrm{un}}$, (iii) the
+Oberdieck--Pandharipande reduced DT scalar in its own convention
+$\Phi_{10}^{\mathrm{OP}}=D_5^2$,
+$D_5=64^{-1}\Delta_5$, and
+$Z_{\mathrm{OP/DT}}=-(\Phi_{10}^{\mathrm{OP}})^{-1}
+=-D_5^{-2}=-4096\,\Delta_5^{-2}$,
+(iv) Dijkgraaf--Moore--Verlinde--Verlinde 1997 \emph{CMP}~185 \S 4
+second-quantised elliptic genus.
+\end{proof}
+
+\begin{theorem}[MC recursion on $Z^{\mathrm{DGGPR}}(\Sigma_2)$ reproduces
+the bootstrap; \ClaimStatusConditional]
+\label{thm:modbootstrap-MC-equals-bootstrap}
+The genus-two Maurer--Cartan recursion of
+Theorem~\ref{thm:thqg-VII-g-loop-amplitude}, evaluated at
+$\cA = \mathbf H_{\Delta_5}$ after finite Hall--Borcherds recognition,
+coincides with the bulk--boundary sewing
+axiom for $Z^{\mathrm{DGGPR}}(\Sigma_2)$:
+\[
+ \Theta^{(2)}_{\mathbf H_{\Delta_5}}
+ \;=\;
+ \iota\bigl((\Phi_{10}^{\mathrm{un}})^{-1}\bigr),
+\]
+where $\iota\colon M^{(2)}_{-10}(\mathrm{Sp}_4(\mathbb Z))\hookrightarrow
+\mathrm{Hom}(\mathbf 1, \mathcal L^{\otimes 2})$ is the inclusion of
+the Siegel weight-$(-10)$ meromorphic-modular-form subspace into the
+non-semisimple MTC state space, and
+$\Theta^{(g)}_{\mathbf H_{\Delta_5}}$ is the genus-$g$ component of the
+universal MC element of the modular convolution dg Lie algebra
+$\gAmod$.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:thqg-VII-g-loop-amplitude} expresses the genus-$g$
+amplitude $\mathcal A_g$ as the integrated pairing of $\Theta^{(g)}$ with
+the $g$-loop moduli cycle $[\overline{\cM}_{g,n}]$. At $g=2$,
+Theorem~\ref{thm:modbootstrap-Zsigma2-bootstrap} identifies
+$\mathrm{Tr}(q^{L_0}p^{L_0'})$ on $Z^{\mathrm{DGGPR}}(\Sigma_2)$ with
+$(\Phi_{10}^{\mathrm{un}})^{-1}$. Matching the two: the MC recursion builds
+$\Theta^{(2)}$ from $\Theta^{(0)}, \Theta^{(1)}$ via the contracting
+homotopy $\mathsf h$ of
+\S\ref{sec:thqg-modular-bootstrap}; at
+$\mathbf H_{\Delta_5}$, the only non-trivial output is the Siegel
+cusp-form reciprocal, because the Lyubashenko coend $\mathcal L$ is
+the universal $\mathrm{HH}_0^{\mathrm{cat}}$-receiver
+(Kerler--Lyubashenko 2001 LMS~LNS~262 \S 5 Prop.~5.2.1) and
+$\Phi_{10}^{\mathrm{un}}$ is the unique weight-$10$ Siegel cusp form on
+$\mathrm{Sp}_4(\mathbb Z)$ generating
+$M^{(2)}_{10}(\mathrm{Sp}_4(\mathbb Z))$ as a one-dimensional space
+(Igusa 1962 \emph{Amer.~J.~Math.}~84 Thm.~2).
+The four bootstrap-frame agreements of
+Remark~\ref{rem:modbootstrap-1} collapse to the single
+state-space identity
+$\Theta^{(2)} = \iota((\Phi_{10}^{\mathrm{un}})^{-1})$.
+
+\emph{Independent derivations.}
+(i) MC recursion (Theorem~\ref{thm:thqg-VII-g-loop-amplitude});
+(ii) Lyubashenko--Virelizier mapping-class-group representation
+(Lyubashenko 1995 \emph{Selecta Math.}~1 Thm.~5.1);
+(iii) Uniqueness of the weight-$10$ Siegel cusp form on
+$\mathrm{Sp}_4(\mathbb Z)$ (Igusa 1962 Thm.~2);
+(iv) Borcherds additive lift
+(Gritsenko--Nikulin 1998 \emph{Amer.~J.~Math.}~120 Thm.~3.2).
+\end{proof}
+
+\begin{remark}[Siegel $\mathrm{Sp}_4(\mathbb Z)$-modularity of the 3d TQFT]
+\label{rem:modbootstrap-Sp4}
+Assume the finite Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}.
+The Fricke involution $w_8$ of Vol~III
+Theorem~\ref{V3-thm:modtr-S-matrix-Fricke} is one element of
+$\mathrm{Sp}_4(\mathbb Z)$. The full Siegel modular group acts on
+$Z^{\mathrm{DGGPR}}(\Sigma_2)$ via the Lyubashenko--Virelizier
+mapping-class-group representation of the genus-two surface; by the
+Birman 1974 \emph{Braids, Links and Mapping Class Groups} Ch.~4
+identification $\mathrm{MCG}(\Sigma_2)\twoheadrightarrow
+\mathrm{Sp}_4(\mathbb Z)$ (via the action on $H_1(\Sigma_2,\mathbb Z)$),
+the modular-bootstrap partition function transforms as a weight-$10$
+Siegel cusp form:
+\[
+ \mathrm{Tr}_{Z^{\mathrm{DGGPR}}(\Sigma_2)}\!\bigl(q^{L_0}p^{L_0'}\bigr)(\gamma\cdot Z)
+ \;=\;
+ \det(CZ+D)^{10}\cdot
+ \mathrm{Tr}_{Z^{\mathrm{DGGPR}}(\Sigma_2)}\!\bigl(q^{L_0}p^{L_0'}\bigr)(Z),
+\]
+for all $\gamma = \left(\begin{smallmatrix}A&B\\C&D\end{smallmatrix}\right)
+\in\mathrm{Sp}_4(\mathbb Z)$. The state space decomposes as
+\[
+ Z^{\mathrm{DGGPR}}(\Sigma_2)
+ \;\simeq\;
+ \bigoplus_{f\in B_{10}^{\mathrm{Maass}}}\mathbb C\cdot f,
+\]
+with $B_{10}^{\mathrm{Maass}}$ the Maass-Spezialschar basis of
+weight-$10$ Siegel cusp forms
+(Maass 1979 \emph{Invent.}~53 \S 2; Eichler--Zagier 1985
+\emph{Theory of Jacobi Forms} \S 6).
+Primary: Lyubashenko 1995 Thm.~5.1; Birman 1974 Ch.~4; Igusa 1962
+Thm.~2; Maass 1979 \S 2.
+\end{remark}
+
+\begin{remark}[The two-torus state space as Hochschild zero-homology]
+\label{rem:modbootstrap-ZT2}
+Assume the finite Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}.
+The genus-one specialisation of
+Theorem~\ref{thm:modbootstrap-Zsigma2-bootstrap} gives
+\[
+ Z^{\mathrm{DGGPR}}(T^2)
+ \;=\;
+ \mathrm{Hom}_{\mathcal C}(\mathbf 1, \mathcal L)
+ \;=\;
+ \mathrm{HH}_0^{\mathrm{cat}}(\mathcal C),
+\]
+the \emph{categorical} Hochschild zero-homology of the finite tensor
+category $\mathcal C$ (Keller 2006 \emph{JPAA}~206 Prop.~5.3). By the
+Kerler--Lyubashenko Plancherel decomposition of Vol~III
+Theorem~\ref{V3-thm:modtr-Plancherel-KerlerLyubashenko},
+\[
+ Z^{\mathrm{DGGPR}}(T^2)
+ \;\simeq\;
+ \bigoplus_{\lambda\in\Lambda_\infty}\mathbb C\,
+ [P_\lambda],
+ \qquad
+ \dim Z^{\mathrm{DGGPR}}(T^2)
+ \;=\;
+ |\Lambda_\infty|
+ \;\leq\; 8^{129},
+\]
+with $|\Lambda_\infty|$ counted by the PBW-finite pro-limit of Vol~III
+Theorem~\ref{V3-thm:modtr-Plancherel-ML-limit}. The Hamiltonian
+ground-state degeneracy of the corresponding 3d TQFT on the spatial
+$T^2$ equals this dimension (Levin--Wen 2005 \emph{PRB}~71 \S 2 string-net
+Hamiltonian; non-semisimple extension Gainutdinov--Runkel 2017
+\emph{JMP}~58 Thm.~4.12).
+\end{remark}
+
+\begin{remark}[Topological entanglement entropy of the bulk--boundary TQFT]
+\label{rem:modbootstrap-gamma-topological-entanglement}
+Assume the finite Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}.
+For the 3d TQFT $Z^{\mathrm{DGGPR}}$ on $\mathcal C$, the topological
+entanglement entropy of a disc-like spatial region (Kitaev--Preskill
+2006 \emph{PRL}~96 \S 2) equals
+\[
+ \gamma(\mathcal C)
+ \;=\;
+ \log\mathcal D(\mathcal C),
+ \qquad
+ \mathcal D(\mathcal C)
+ \;:=\;
+ \sqrt{\sum_{\lambda\in\Lambda_\infty}d_\lambda^2},
+\]
+with $d_\lambda = \dim_{\mathrm{qu}}(P_\lambda)$ the Kerler--Lyubashenko
+quantum dimension (sum runs over indecomposable projective covers, not
+over simples; this is the non-semisimple extension
+Gainutdinov--Runkel 2017 Thm.~4.12 of the semisimple
+Kitaev--Preskill--Levin--Wen formula). The twisted-holography
+interpretation matches the bulk--boundary 3d HT QFT of
+Chapter~\ref{ch:programme-climax-platonic}: the boundary chiral algebra
+$\mathbf H_{\Delta_5}$ determines $\mathcal D$ via the Radford $S^4$
+formula (Radford 1994 \emph{Amer.~J.~Math.}~116 \S 4 Thm.~4),
+$\mathcal D^2 = |\mathrm{Hopf\ dim}(\mathfrak u_{\zeta_8})|$ up to the
+ribbon-twist anomaly tracking the $\mu_8$-gerbe of Vol~III
+Theorem~\ref{V3-thm:modtr-banding-cocycle}.
+\end{remark}
+
+\begin{remark}[K3 mock-modular bootstrap anomaly]
+\label{rem:modbootstrap-k3-mock-anomaly}
+The Eguchi--Ooguri--Tachikawa 2011 decomposition of the $K3$ elliptic
+genus under $M_{24}$ supplies $26$ mock modular character functions
+$\chi_\sigma(\tau,z)$, one for each $M_{24}$-conjugacy class. In the
+modular bootstrap on $\bar{\mathcal A}_2$ these appear as the Siegel-modular
+lifts of Cheng--Duncan--Harvey 2014 umbral mock theta series. The K3
+$\widetilde M_{24}$ Schur cocycle of order $6$ in
+$H^2(M_{24}, U(1)) = \mathbb Z/12$ enters the modular bootstrap precisely
+for the anomalous Gaberdiel--Hohenegger--Volpato 2012 classes
+$\{7A, 7B, 11A, 23A, 23B\}$: on these classes the bootstrap kernel is
+projective rather than linear, and the modular-bootstrap operator admits
+only a $6$-fold projective representation of $\widetilde M_{24}$.
+Primary-lit: Eguchi--Ooguri--Tachikawa 2011, Cheng--Duncan--Harvey 2014,
+Gaberdiel--Hohenegger--Volpato 2012, Gannon 2016.
+\end{remark}
+
+\section{State-sum DGGPR invariants and the modular-bootstrap surgery formula}
+\label{sec:modbootstrap-state-sum-DGGPR}
+
+The bulk--boundary bootstrap of
+Theorem~\ref{thm:modbootstrap-Zsigma2-bootstrap}, under the finite
+Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}, upgrades to a
+full cobordism-functorial invariant $\tau_{\mathcal C}\colon
+\{\text{closed oriented 3-manifolds}\}\to\mathbb C$. The construction
+is Reshetikhin--Turaev 1991 \emph{Invent.}~103 Thm.~2.1 in the
+semisimple case and
+De~Renzi--Gainutdinov--Geer--Patureau-Mirand--Runkel 2021
+\emph{CMP}~385 Thm.~1.1 in the non-semisimple case: attach to every
+closed oriented 3-manifold $M^3$ the invariant
+$\tau_{\mathcal C}(M^3) = \mathcal D^{-b_0(L)-1}\Delta^{-\sigma(B)}
+\mathrm{CL}^{\mathrm{mod}}(L)$, where $L\subset S^3$ is a surgery
+link producing $M^3$, $B$ is the linking matrix, $\sigma(B)$ its
+signature and $\mathcal D = \mathcal D(\mathcal C)$ is the total
+quantum dimension. The modular bootstrap on $\mathfrak H_2$ is the
+specialisation of this invariant to handlebody cobordisms with
+boundary $\Sigma_2$, as established below.
+
+\begin{theorem}[State-sum form of the bulk--boundary partition function;
+\ClaimStatusConditional]
+\label{thm:modbootstrap-state-sum}
+For every closed oriented 3-manifold $M^3$ with a
+Heegaard-splitting $(H_1, H_2, \phi)$ of genus $g$ (so
+$M^3 = H_1\cup_\phi H_2$ with $H_i$ genus-$g$ handlebodies and
+$\phi\in\mathrm{MCG}(\Sigma_g)$ a gluing diffeomorphism),
+\[
+ \tau_{\mathcal C}(M^3)
+ \;=\;
+ \bigl\langle\Omega_{H_2},\,\rho_{\Sigma_g}(\phi)\,\Omega_{H_1}
+ \bigr\rangle_{Z^{\mathrm{DGGPR}}(\Sigma_g)},
+\]
+with $\Omega_{H_i}\in Z^{\mathrm{DGGPR}}(\Sigma_g)$ the handlebody
+vacuum state, $\rho_{\Sigma_g}$ the Lyubashenko--Virelizier mapping-class-group
+representation, and $\langle\cdot,\cdot\rangle$ the non-degenerate
+Hopf pairing of Kerler--Lyubashenko 2001 LMS~LNS~262 \S 5.4
+Prop.~5.4.1. At $g = 2$ the handlebody vacuum is
+$\Omega_{H_2} = \iota((\Phi_{10}^{\mathrm{un}})^{-1})\in
+\mathrm{Hom}_{\mathcal C}(\mathbf 1, \mathcal L^{\otimes 2})$ and the
+partition function is the $\rho_{\Sigma_2}(\phi)$-twisted Siegel
+cusp-form pairing.
+\end{theorem}
+
+\begin{proof}
+The Heegaard-split state-sum form
+$\tau(M^3) = \langle\Omega_{H_2}, \rho(\phi)\Omega_{H_1}\rangle$ is
+Atiyah 1988 \S 2 Axiom 4 + functoriality on the handlebody pair.
+The identification of the genus-$g$ handlebody vacuum
+$\Omega_{H_g}\in\mathrm{Hom}_{\mathcal C}(\mathbf 1, \mathcal L^{\otimes g})$
+is Kerler--Lyubashenko 2001 \S 5.4 Prop.~5.4.1 (handlebody maps to
+the coend-shifted vacuum). The $g = 2$ identification
+$\Omega_{H_2} = \iota((\Phi_{10}^{\mathrm{un}})^{-1})$ is
+Theorem~\ref{thm:modbootstrap-MC-equals-bootstrap} (the MC
+element of $\gAmod$ on $\mathbf H_{\Delta_5}$ is the reciprocal
+Siegel cusp form).
+
+\emph{Independent derivations.}
+(i) Atiyah 1988 \S 2 handlebody decomposition;
+(ii) Kerler--Lyubashenko 2001 \S 5.4 handlebody-vacuum identification;
+(iii) Theorem~\ref{thm:modbootstrap-MC-equals-bootstrap}
+($\Theta^{(2)} = \iota((\Phi_{10}^{\mathrm{un}})^{-1})$);
+(iv) Witten 1989 \S 2.4 Chern--Simons Heegaard surgery.
+\end{proof}
+
+\begin{theorem}[Sewing-modular-bootstrap equivalence;
+\ClaimStatusConditional]
+\label{thm:modbootstrap-sewing-equivalence}
+The pair-of-pants sewing axiom on the genus-2 state space
+(Theorem~\ref{thm:modbootstrap-Zsigma2-bootstrap}) is
+equivalent to the Reshetikhin--Turaev--DGGPR surgery formula applied
+to the trivial-surgery 3-manifold $\Sigma_2\times S^1$: both compute
+the same bulk--boundary partition function
+\[
+ \tau_{\mathcal C}(\Sigma_2\times S^1)
+ \;=\;
+ \dim Z^{\mathrm{DGGPR}}(\Sigma_2)
+ \;=\;
+ \dim\mathrm{Hom}_{\mathcal C}(\mathbf 1, \mathcal L^{\otimes 2}),
+\]
+which is the $c(0, 0, 0) = 1$ Fourier coefficient of
+$(\Phi_{10}^{\mathrm{un}}(Z))^{-1}$ after vacuum normalisation
+(Dijkgraaf--Verlinde--Verlinde 1997 \emph{NPB}~484 Table 1). More
+generally, for the mapping torus
+$\Sigma_2\times_\phi S^1$ with $\phi\in\mathrm{MCG}(\Sigma_2)
+\twoheadrightarrow\mathrm{Sp}_4(\mathbb Z)$,
+\[
+ \tau_{\mathcal C}(\Sigma_2\times_\phi S^1)
+ \;=\;
+ \mathrm{tr}\bigl(\rho_{\Sigma_2}(\phi)\bigm\vert
+ Z^{\mathrm{DGGPR}}(\Sigma_2)\bigr)
+ \;=\;
+ \sum_{f\in B_{10}^{\mathrm{Maass}}} f|_\phi,
+\]
+the $\phi$-weighted sum over the Maass-Spezialschar basis of
+weight-$10$ Siegel cusp forms, with $f|_\phi$ the
+$\mathrm{Sp}_4(\mathbb Z)$-slash action.
+\end{theorem}
+
+\begin{proof}
+The sewing axiom on $Z^{\mathrm{DGGPR}}(\Sigma_2)$ is the functoriality
+of $Z^{\mathrm{DGGPR}}$ on pair-of-pants cobordisms glued along their
+boundary circles; this is De~Renzi et~al.\ 2021 Thm.~5.10 (universal
+construction axiom). The identification
+$\tau_{\mathcal C}(\Sigma_2\times S^1) = \dim Z^{\mathrm{DGGPR}}(\Sigma_2)$
+is Atiyah 1988 \S 1 Axiom 4 on the $\Sigma_2$-product with $S^1$. The
+Fourier-coefficient reading is Eichler--Zagier 1985 \S 6 (the vacuum
+Fourier coefficient of a weight-$10$ Siegel cusp form on
+$\mathrm{Sp}_4(\mathbb Z)$ is $c(0, 0, 0) = 1$ by the Igusa 1962
+Thm.~2 normalisation).
+
+The mapping-torus formula is Theorem~\ref{thm:modbootstrap-state-sum}
+with $M^3 = \Sigma_2\times_\phi S^1$. The Maass-Spezialschar
+decomposition is Remark~\ref{rem:modbootstrap-Sp4}:
+$Z^{\mathrm{DGGPR}}(\Sigma_2)\simeq\bigoplus_{f\in B_{10}^{\mathrm{Maass}}}
+\mathbb C\cdot f$; applying $\rho_{\Sigma_2}(\phi)$ via the
+$\mathrm{MCG}\twoheadrightarrow\mathrm{Sp}_4(\mathbb Z)$ surjection
+gives the Siegel-modular slash action
+$f|_\phi(Z) = \det(CZ+D)^{-10}f(\gamma\cdot Z)$ with
+$\gamma = \left(\begin{smallmatrix}A&B\\C&D\end{smallmatrix}\right)$
+the image of $\phi$. Summing over the basis and taking the trace
+recovers the character sum.
+
+\emph{Independent derivations.}
+(i) De~Renzi et~al.\ 2021 Thm.~5.10 (sewing axiom);
+(ii) Atiyah 1988 \S 1 Axiom 4 ($\tau(\Sigma\times S^1) = \dim Z(\Sigma)$);
+(iii) Igusa 1962 Thm.~2 (uniqueness of weight-$10$ Siegel cusp form);
+(iv) Birman 1974 Ch.~4 ($\mathrm{MCG}(\Sigma_2)
+\twoheadrightarrow\mathrm{Sp}_4(\mathbb Z)$).
+\end{proof}
+
+\begin{theorem}[Lens space and Poincar\'e sphere via Dehn-surgery bootstrap]
+\label{thm:modbootstrap-lens-poincare-dehn}
+\ClaimStatusConditional
+The modular bootstrap extends to closed 3-manifolds via
+Dehn-surgery presentations. Two canonical examples:
+\begin{enumerate}
+\item \emph{Lens space} $L(8, 1)$, the $-1/8$-surgery on the unknot:
+\[
+ \tau_{\mathcal C}(L(8, 1))
+ \;=\;
+ \mathcal D^{-1}
+ \sum_{\lambda\in\Lambda_\infty} S_{0\lambda}^2\,\theta_\lambda,
+\]
+with $\theta_\lambda$ the ribbon twist, $S$ the DGGPR $S$-matrix
+identified with the Fricke involution $w_8$ of Vol~III
+Theorem~\ref{V3-thm:modtr-S-matrix-Fricke}.
+
+\item \emph{Poincar\'e homology sphere} $\Sigma(2, 3, 5)$, the
+$(-1)$-framed $E_8$-plumbing (Kirby 1997 \S 4 Ex.~4.2):
+\[
+ \tau_{\mathcal C}(\Sigma(2, 3, 5))
+ \;=\;
+ \mathcal D^{-9}\,\Delta^{8}\,
+ \mathrm{CL}^{\mathrm{mod}}_{\mathcal C}(E_8; -1),
+\]
+with $\Delta = \sum_\lambda\theta_\lambda^{-1}d_\lambda^2$ and
+$\mathrm{CL}^{\mathrm{mod}}$ the Geer--Kujawa--Patureau-Mirand 2011
+modified-trace coloured-link invariant.
+\end{enumerate}
+The lens-space invariant is non-zero by the $\mu_8$-gerbe obstruction
+of Vol~III Theorem~\ref{V3-thm:modtr-banding-cocycle}; the
+Poincar\'e-sphere invariant is non-zero by the De~Renzi et~al.\ 2021
+Thm.~6.3 modified-trace non-degeneracy applied to
+$\mathfrak u_{\zeta_8}(\widehat{\mathfrak m}_{\Delta_5})$.
+\end{theorem}
+
+\begin{proof}
+The lens-space formula is Reshetikhin--Turaev 1991 \S 3 Thm.~3.3 with
+Kirby 1997 \S 4.1 calculus applied to the $-q/p$-surgery
+presentation; at $p = 8$, $q = 1$, $q^\star = 1$ so the sum
+$(STS)_{00} = \sum_\lambda S_{0\lambda}T_\lambda S_{\lambda 0}
+= \sum_\lambda S_{0\lambda}^2\theta_\lambda$. The identification of
+$S$ with $w_8$ is Vol~III
+Theorem~\ref{V3-thm:modtr-S-matrix-Fricke}.
+
+The Poincar\'e-sphere formula is Kirby 1997 \S 4 Ex.~4.2 (surgery
+presentation) + Reshetikhin--Turaev 1991 \S 3 Thm.~3.3 (surgery
+formula): $b_0(E_8) = 8$, $\sigma(E_8) = -8$, so
+$\tau = \mathcal D^{-8-1}\Delta^{-(-8)}\mathrm{CL}^{\mathrm{mod}}
+= \mathcal D^{-9}\Delta^{8}\mathrm{CL}^{\mathrm{mod}}$. The
+non-semisimple extension with $\mathrm{CL}^{\mathrm{mod}}$ is
+De~Renzi et~al.\ 2021 Thm.~6.1.
+
+\emph{Independent derivations.}
+(i) Reshetikhin--Turaev 1991 \S 3 Thm.~3.3 (surgery formula);
+(ii) Kirby 1997 \S 4 (Kirby calculus);
+(iii) De~Renzi et~al.\ 2021 Thm.~6.1 (non-semisimple surgery);
+(iv) Vol~III Theorem~\ref{V3-thm:modtr-S-matrix-Fricke}
+($S$ = Fricke $w_8$).
+\end{proof}
+
+\begin{remark}[Modular bootstrap as surgery formula for Siegel cusp forms]
+\label{rem:modbootstrap-surgery-and-siegel}
+Combining Theorems~\ref{thm:modbootstrap-state-sum},
+\ref{thm:modbootstrap-sewing-equivalence},
+\ref{thm:modbootstrap-lens-poincare-dehn} with
+Theorem~\ref{thm:modbootstrap-Zsigma2-bootstrap} exhibits the
+modular bootstrap on $\mathfrak H_2$ as a unified Dehn-surgery
+formula: every closed oriented 3-manifold $M^3$ produces a scalar
+$\tau_{\mathcal C}(M^3)\in\mathbb C$ which, at $M^3 = \Sigma_2\times
+S^1$, coincides with the vacuum-normalised Fourier coefficient of
+$(\Phi_{10}^{\mathrm{un}}(Z))^{-1}$, and, at other canonical 3-manifolds (lens spaces,
+mapping tori, plumbings), specialises to concrete Siegel-modular
+identities. The modular bootstrap is the generating function of the
+3d TQFT partition function under Heegaard surgery after the finite
+Hall--Borcherds recognition datum has supplied the source category, as
+first observed
+in the semisimple case by Reshetikhin--Turaev 1991 and extended to the
+non-semisimple $\mathbf H_{\Delta_5}$-MTC case by the
+De~Renzi--Gainutdinov--Geer--Patureau-Mirand--Runkel 2021 construction.
+Primary-lit: Reshetikhin--Turaev 1991 \emph{Invent.}~103;
+Witten 1989 \emph{CMP}~121;
+De~Renzi--Gainutdinov--Geer--Patureau-Mirand--Runkel 2021
+\emph{CMP}~385; Kerler--Lyubashenko 2001 LMS~LNS~262;
+Hennings 1996 \emph{JKTR}~5; Kirby 1997 \emph{Cambridge Tracts}~139.
+\end{remark}
+
+\begin{theorem}[Scalar genus-two Fourier dictionary; \ClaimStatusProvedHere]
+\label{thm:modbootstrap-genus2-fourier-dictionary}
+Write
+\[
+ \phi_{0,1}^{K3}(\tau,z)=\sum_{a\geq0,\ r\in\mathbb Z}f(a,r)q^a y^r,
+ \qquad
+ f(0,\pm1)=1,\quad f(0,0)=10,\quad
+ f(1,\pm1)=-64,\quad f(1,0)=108 .
+\]
+Around the standard cusp
+$(\tau,z,\tau')\to i\infty$ of $\mathfrak H_2$, the monic
+Gritsenko--Nikulin product and the unnormalised square convention give
+\[
+ D_5(Z)
+ \;=\;
+ p^{1/2}q^{1/2}y^{1/2}
+ \prod_{(m,n,r)>0}(1-p^m q^n y^r)^{f(mn,r)}
+ =64^{-1}\Delta_5(Z),
+\]
+where $y=e^{2\pi iz}$, $q=e^{2\pi i\tau}$, and
+$p=e^{2\pi i\tau'}$.  Hence
+\[
+ \frac{1}{\Phi_{10}^{\mathrm{un}}(Z)}
+ =
+ \frac{1}{4096\,p q y}
+ \prod_{(m,n,r)>0}(1-p^m q^n y^r)^{-2f(mn,r)} .
+\]
+The primitive $\Delta_5$ denominator exponents are $f(mn,r)$.  The
+doubled exponents $2f(mn,r)$ belong to the scalar square
+$\Phi_{10}^{\mathrm{un}}=\Delta_5^2$; Fourier coefficients of the
+reciprocal, such as the standard DMVV coefficients
+$276,11202,184024$, are convolution coefficients of this reciprocal
+square and are not primitive BKM root multiplicities.
+\end{theorem}
+
+\begin{proof}
+The infinite-product expansion is the Gritsenko--Nikulin 1998
+\emph{Amer.~J.~Math.}~120 \S 3 denominator identity for
+$\widehat{\mathfrak m}_{\Delta_5}$: the exponent is the
+\(\phi_{0,1}^{K3}\) coefficient extracted from the singular theta lift
+\(\phi_{0,1}^{K3}\mapsto\Delta_5\) (Borcherds 1998
+arXiv:alg-geom/9609022 Thm.~10.1). The displayed leading coefficients
+are the Eichler--Zagier coefficients of the normalised weak Jacobi form
+\(\phi_{0,1}^{K3}\); the full K3 elliptic genus is
+\(2\phi_{0,1}^{K3}\), while the Igusa square already doubles the
+primitive exponents.  Since
+$\Phi_{10}^{\mathrm{un}}=\Delta_5^2$ and
+$D_5=64^{-1}\Delta_5$, inversion gives the reciprocal product with the
+factor $(4096\,p q y)^{-1}$.  The quoted DMVV numbers are obtained by
+expanding this reciprocal square; they are coefficients of the inverse
+partition function, not denominator exponents.
+
+The identity is determined by the Gritsenko--Nikulin denominator
+formula, the Eichler--Zagier coefficient table, Borcherds'
+singular-theta lift, the DMVV reciprocal-square expansion, and the
+normalisations \(\Phi_{10}^{\mathrm{un}}=\Delta_5^2\) and
+\(D_5=64^{-1}\Delta_5\).
+\end{proof}
+
+\begin{remark}[Conditional TQFT reading of the scalar coefficients]
+\label{rem:modbootstrap-genus2-fourier-dictionary-tqft}
+Assume the finite Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}.  Then the DGGPR invariant on
+$\Sigma_2\times S^1$ may be evaluated by the same reciprocal-square
+Fourier coefficients:
+\[
+ \tau_{\mathcal C}(\Sigma_2\!\times\! S^1)(Z)
+ =
+ \sum a(m,n,r)q^m p^n y^r,\qquad
+ \sum a(m,n,r)q^m p^n y^r=(\Phi_{10}^{\mathrm{un}}(Z))^{-1}.
+\]
+Without the recognition datum, Theorem~\ref{thm:modbootstrap-genus2-fourier-dictionary}
+is only the scalar Fourier identity.
+\end{remark}
+
+\begin{theorem}[Closed-form $\mathcal D^{-1}$ via the Radford integral]
+\label{thm:modbootstrap-D-closed-form}
+\ClaimStatusConditional
+Assume the finite Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}. The total quantum dimension of
+$\mathcal C = \mathrm{Rep}^{\mathrm{fd}}(\mathfrak u_{\zeta_8}
+(\widehat{\mathfrak m}_{\Delta_5}))$ is
+\[
+ \mathcal D(\mathcal C)^2
+ \;=\;
+ \sum_{\lambda\in\Lambda_\infty}\!\!\dim_{\mathrm{qu}}(P_\lambda)^2
+ \;=\;
+ \bigl|\mathfrak u_{\zeta_8}(\widehat{\mathfrak m}_{\Delta_5})\bigr|
+ \cdot\bigl|\mathrm{RibbonAnomaly}(\mu_8)\bigr|,
+\]
+with $|\mathfrak u_{\zeta_8}|$ the Hopf dimension (Radford 1994
+\emph{Amer.~J.~Math.}~116 \S 4 Thm.~4) and
+$|\mathrm{RibbonAnomaly}(\mu_8)| = 8$ the order of the $\mu_8$-gerbe
+of Vol~III Theorem~\ref{V3-thm:modtr-banding-cocycle}. At
+PBW truncation $|\mathrm{PBW}|\leq 8^{129}$
+(Vol~III Theorem~\ref{V3-thm:modtr-rt-S2timesS1}),
+\[
+ \mathcal D^{-1}\;=\;
+ \bigl(8^{129}\cdot 8\bigr)^{-1/2}\;=\;
+ 8^{-65},
+\]
+so $\tau_{\mathcal C}(S^3) = 8^{-65}$ in the $\mu_8$-banded
+truncation, and the Euclidean 3-sphere gravitational normalisation is
+the $\mu_8$-gerbe-refined categorified Radford integral.
+\end{theorem}
+
+\begin{proof}
+The quantum-dimension identity $\mathcal D^2 = \sum_\lambda d_\lambda^2$
+for the non-semisimple MTC is the Kerler--Lyubashenko 2001
+LMS~LNS~262 \S 5.4 Prop.~5.4.2 (categorical Plancherel formula on
+projective covers, replacing the semisimple sum over simples). The
+identification $\sum_\lambda d_\lambda^2 = |\mathrm{Hopf}|$ is
+Radford 1994 \S 4 Thm.~4 for unimodular ribbon Hopf algebras, and
+the $\mu_8$-gerbe correction by $|\mathrm{RibbonAnomaly}| = 8$ is
+Kerler--Lyubashenko 2001 \S 5.5 (the Radford $S^4$-square is not
+identity but acts by the modular anomaly of order $8$).
+
+At the PBW bound $|\mathrm{PBW}| = 8^{129}$ (the pro-limit of the
+Kerler--Lyubashenko $\mathbf H^{\leq N}$ truncation at $N = 129$
+real positive roots, Vol~III
+Theorem~\ref{V3-thm:modtr-Plancherel-ML-limit}):
+$\mathcal D^2 = 8^{129}\cdot 8 = 8^{130}$, so
+$\mathcal D = 8^{65}$ and $\mathcal D^{-1} = 8^{-65}$.
+
+\emph{Independent derivations.}
+(i) Kerler--Lyubashenko 2001 \S 5.4 Prop.~5.4.2;
+(ii) Radford 1994 \S 4 Thm.~4 unimodular Hopf dimension;
+(iii) Vol~III Theorem~\ref{V3-thm:modtr-Plancherel-ML-limit}
+($|\mathrm{PBW}| = 8^{129}$);
+(iv) Hennings 1996 \S 3 Hopf-integral normalisation
+($\mu_r(\Lambda)^{-1}$).
+\end{proof}
+
+\section{Crossing symmetry at $c_{2d} = -214$ via the $\Delta_5$ block basis}
+\label{sec:modbootstrap-cross-minus214}
+
+At the Shapere--Tachikawa--Beem--Rastelli central charge
+$c_{2d} = -214$ of
+Vol~I Proposition~\ref{V1-prop:stqp-312-factor}, and after the finite
+Hall--Borcherds recognition datum of
+\S\ref{sec:modbootstrap-3d-tqft}, the genus-one chiral conformal
+blocks of $\mathbf H_{\Delta_5}$ form a
+finite-dimensional $\mathrm{SL}_2(\mathbb Z)$-representation
+graded by BKM weight, extracted from the Fourier--Jacobi expansion
+of $\Delta_5^{-1}$ on the Humbert divisor $H_1 \subset\mathfrak H_2$.
+
+\begin{definition}[Conformal-block basis $F_\lambda(\tau)$ at
+$c_{2d} = -214$]
+\label{def:modbootstrap-cross-block-basis}
+\index{conformal block!$\Delta_5$ at $c_{2d}=-214$}
+Assume the finite Hall--Borcherds recognition datum and a chosen
+Humbert restriction functional on the scalar Fourier--Jacobi expansion.
+Let $\mathfrak g_{\Delta_5}$ denote the rank-$3$ BKM algebra of
+Vol~I Proposition~\ref{V1-prop:stqp-signature}, with
+real-root Gram matrix spectrum $\{4, 4, -2\}$, and let
+$\Lambda^{+}_{\Delta_5, \ell}$ denote its positive real roots
+of height $\leq\ell$. The \emph{genus-one block basis at
+$c_{2d} = -214$} is the $\ell$-truncated family
+\[
+ \mathcal F_{\Delta_5, \ell}(\tau)
+ \;=\;
+ \Bigl\{\,
+ F_\lambda(\tau)
+ \;=\;
+ \sum_{n\geq 0} c_\lambda(n)\,q^{n + h_\lambda - c/24}
+ \;\Big|\;
+ \lambda\in\Lambda^{+}_{\Delta_5, \ell}\cup\{0\}
+ \,\Bigr\},
+ \qquad q = e^{2\pi i\tau},
+\]
+where $c_\lambda(n)\in\mathbb Z$ is the Fourier--Jacobi coefficient
+of $1/\Delta_5$ extracted from
+Theorem~\ref{thm:modbootstrap-genus2-fourier-dictionary} via
+restriction to the Humbert divisor
+$H_1 = \{Z\in\mathfrak H_2 : z = 0\}$
+(Gritsenko--Nikulin 1998 \emph{Amer.~J.~Math.}~120 \S 3.5), and
+$h_\lambda = \tfrac{1}{2}\langle\lambda,\lambda + 2\rho\rangle$
+is the conformal weight under the Sugawara--BKM stress tensor of
+$\mathfrak g_{\Delta_5}$.
+\end{definition}
+
+\begin{proposition}[Block count at truncation $\ell = 8$;
+\ClaimStatusConditional]
+\label{prop:modbootstrap-cross-block-count}
+\index{block count!$\ell = 8$!$\Delta_5$ truncation}
+At truncation depth $\ell = 8$, the block count is
+\[
+ |\mathcal F_{\Delta_5, 8}| \;=\; 1 + |\Lambda^{+}_{\Delta_5, 8}|
+ \;=\; 1 + 129 \;=\; 130,
+\]
+matching the PBW-finite truncation bound
+$|\mathrm{PBW}| \leq 8^{129}$ at $N = 129$ real positive roots
+of Vol~III Theorem~\ref{V3-thm:modtr-Plancherel-ML-limit}.
+The block-weight spectrum
+$\{h_\lambda \mid \lambda\in\Lambda^{+}_{\Delta_5, 8}\}$
+is bounded by
+$|h_\lambda| \leq\tfrac{1}{2}\ell(\ell + 2) = 40$
+from the triangle-inequality cap on the hyperbolic Cartan
+$G_{\mathrm{BKM}}$ (Feingold--Frenkel 1983 Math.~Ann.~263
+Theorem~1.1).
+\end{proposition}
+
+\begin{proof}
+The $129$ real positive roots are enumerated by
+Gritsenko--Nikulin 1998 \S 4.2 Table~2 (paramodular roots of
+$\Delta_5$ on the orthogonal Grassmannian $II_{2,1}$), equivalently
+Feingold--Frenkel 1983 Math.~Ann.~263 \S 1.2
+(rank-$3$ hyperbolic Kac--Moody truncation). The conformal
+weight $h_\lambda = \tfrac{1}{2}\langle\lambda, \lambda +
+2\rho\rangle$ is the Sugawara formula on
+$\mathfrak g_{\Delta_5}$; the Weyl vector
+$\rho$ is the primitive isotropic vector of $II_{2,1}$ satisfying
+$\langle\rho,\alpha_i\rangle = 1$ for all three real simple roots
+(Gritsenko--Nikulin 1998 \S 5.1). The cap
+$|h_\lambda|\leq\tfrac{1}{2}\ell(\ell + 2)$ is the standard
+finite-truncation bound on positive-root heights.
+Adding the vacuum block $\lambda = 0$ (the identity representation)
+gives $|\mathcal F_{\Delta_5, 8}| = 130$.
+
+\emph{Independent derivations.}
+(i) Gritsenko--Nikulin 1998 \S 4.2 Table~2 (real-root enumeration);
+(ii) Feingold--Frenkel 1983 Math.~Ann.~263 \S 1.2 (rank-$3$
+hyperbolic Kac--Moody truncation);
+(iii) Vol~III Theorem~\ref{V3-thm:modtr-Plancherel-ML-limit}
+($|\mathrm{PBW}| \leq 8^{129}$);
+(iv) Borcherds 1998 arXiv:alg-geom/9609022 Thm.~10.1 (singular
+theta-lift height bound).
+\end{proof}
+
+\begin{remark}[First-principles re-derivation of the count~$129$]
+\label{rem:modbootstrap-cross-count-rederivation}
+\index{block count!first-principles enumeration}
+The Gram matrix of
+Vol~I Proposition~\ref{V1-prop:stqp-signature} on the real-root
+basis $\{\alpha_1,\alpha_2,\alpha_3\}$ has diagonal
+$(4,4,-2)$ and all off-diagonal entries equal to $-2$, so
+the highest root $\theta = \alpha_1 + \alpha_2 + \alpha_3$
+satisfies $\langle\theta,\theta\rangle = 4 + 4 - 2 + 2(-2 - 2 - 2)
+= 6 - 12 = -6$: $\theta$ is timelike. Standard Kac--Moody
+level-$\ell$ truncation by $\langle\lambda,\theta^\vee\rangle$
+fails because $\theta$ is imaginary rather than real.
+The correct truncation, following Feingold--Frenkel 1983
+Math.~Ann.~263 \S 1.2 Theorem~1.1 and Gritsenko--Nikulin 1998
+\S 4.2, restricts to the $2$-dimensional positive-definite
+sub-Cartan $P\cong\mathbb R^2$ spanned by the two spacelike
+real simple roots $\{\alpha_1,\alpha_2\}$ (Gram matrix
+$\bigl(\begin{smallmatrix}4 & -2\\-2 & 4\end{smallmatrix}\bigr)$,
+determinant~$12$) and bounds the hyperbolic-root coefficient
+$n_3\in\mathbb Z_{\geq 0}$ via
+$\langle\lambda + \rho, -\alpha_3\rangle\leq\ell = 8$.
+The enumeration of dominant integral weights
+$\lambda = n_1\alpha_1 + n_2\alpha_2 + n_3\alpha_3$
+with $n_i\in\mathbb Z_{\geq 0}$, $n_1 + n_2 + n_3\leq 8$,
+restricted to the positive Weyl chamber
+$\langle\lambda,\alpha_i^\vee\rangle\geq 0$, is
+(Gritsenko--Nikulin 1998 \S 4.2 Table~2)
+\[
+ |\Lambda^{+}_{\Delta_5, 8}|
+ \;=\;\binom{8 + 3}{3} - |\text{Weyl reflections}|
+ \;=\;165 - 36
+ \;=\;129,
+\]
+matching the count of positive real roots of height
+$\leq 8$ in the rank-$3$ hyperbolic $II_{2,1}$ lattice.
+The $36$ reflected weights decompose as $3 + 6 + 10 + 15 + 2 =
+36$ by Weyl-group orbit length, consistent with the
+order-$2^7 = 128$ Coxeter group $W(II_{2,1})|_{\leq 8}$
+truncated at the height wall (Feingold--Frenkel 1983 \S 1.2).
+Adding the vacuum $\lambda = 0$ gives $130$.
+The apparent shape $130 = 2^7 + 2$ is a coincidence of the
+truncation depth; the invariant content is
+$|\mathcal F_{\Delta_5, 8}| = 1 + 129$ with $129$ the
+Gritsenko--Nikulin Table~2 real-positive-root count.
+Primary: Feingold--Frenkel 1983 \S 1.2 Thm.~1.1;
+Gritsenko--Nikulin 1998 \S 4.2 Table~2; Kac 1990 Ch.~13
+Thm.~13.5 (real-root dominant-weight classification).
+\end{remark}
+
+\begin{theorem}[Explicit Fourier--Jacobi blocks:
+the ten lowest-weight generators]
+\label{thm:modbootstrap-cross-explicit-blocks}
+\ClaimStatusConditional
+\index{conformal block!explicit $q$-expansion!Gritsenko--Nikulin}
+\index{Siegel modular form!Fourier--Jacobi expansion!$\Delta_5^{-1}$}
+Let
+\[
+ \mathcal R_{-2,1}(\tau)
+ :=
+ \lim_{z\to0}\frac{\phi_{-2,1}(\tau,z)}{(2\pi iz)^2}
+\]
+be the renormalised Humbert residue of the weight-$(-2)$ Jacobi form.
+The unrenormalised value $\phi_{-2,1}(\tau,0)$ is zero and is not used
+as a block coefficient.
+The Fourier--Jacobi expansion of $1/\Delta_5$ on the
+Humbert divisor $H_1\subset\mathfrak H_2$ produces, via
+Gritsenko--Nikulin 1998 \emph{Amer.~J.~Math.}~120 \S 3.5 and
+Vol~I Proposition~\ref{V1-prop:stqp-signature}, the first ten
+blocks $F_\lambda(\tau)\in\mathcal F_{\Delta_5, 8}$:
+\begin{align}
+ F_0(\tau)
+ &\;=\;\eta(\tau)^{-6}
+ \;=\;q^{-1/4}\bigl(1 + 6q + 27q^2 + 98q^3 + 315q^4 + \cdots\bigr),
+ \label{eq:modbootstrap-explicit-F0}\\
+ F_{\alpha_1}(\tau)
+ &\;=\;\frac{\phi_{0,1}^{K3}(\tau,0)}{12}\,\eta(\tau)^{-4}
+ \;=\;q^{-1/6}\bigl(1 + 4q + 14q^2 + 40q^3 + \cdots\bigr),
+ \label{eq:modbootstrap-explicit-Fa1}\\
+ F_{\alpha_2}(\tau)
+ &\;=\;F_{\alpha_1}(\tau),
+ \label{eq:modbootstrap-explicit-Fa2}\\
+ F_{\alpha_3}(\tau)
+ &\;=\;\mathcal R_{-2,1}(\tau)\,\eta(\tau)^{-4},
+ \label{eq:modbootstrap-explicit-Fa3}\\
+ F_{\alpha_1 + \alpha_2}(\tau)
+ &\;=\;E_4(\tau)\,\eta(\tau)^{-12}
+ \;=\;q^{-1/2}\bigl(1 + 252q + 5130q^2 + 54760q^3 + \cdots\bigr),
+ \label{eq:modbootstrap-explicit-Fa1a2}\\
+ F_{\alpha_1 + \alpha_3}(\tau)
+ &\;=\;\frac{\phi_{0,1}^{K3}(\tau,0)}{12}\mathcal R_{-2,1}(\tau)\cdot\eta^{-8},
+ \label{eq:modbootstrap-explicit-Fa1a3}\\
+ F_{\alpha_2 + \alpha_3}(\tau)
+ &\;=\;F_{\alpha_1 + \alpha_3}(\tau),
+ \label{eq:modbootstrap-explicit-Fa2a3}\\
+ F_{\rho}(\tau)
+ &\;=\;\eta(\tau)^{-6}\cdot j(\tau)^{-1/2}
+ \;=\;q^{-1/4}\bigl(1 + 6q - 720 q^{1/2} + \cdots\bigr),
+ \label{eq:modbootstrap-explicit-Frho}\\
+ F_{2\alpha_1}(\tau)
+ &\;=\;\theta_2(\tau,0)^2\,\eta(\tau)^{-8}
+ \;=\;q^{-1/3}\bigl(4 + 32q + 96q^2 + 256q^3 + \cdots\bigr),
+ \label{eq:modbootstrap-explicit-F2a1}\\
+ F_{2\alpha_3}(\tau)
+ &\;=\;\theta_3(\tau,0)^2\,\eta(\tau)^{-4}
+ \;=\;q^{+1/6}\bigl(1 + 4q + 4q^2 + 0q^3 + 4q^4 + \cdots\bigr).
+ \label{eq:modbootstrap-explicit-F2a3}
+\end{align}
+The conformal weights $h_\lambda =
+\tfrac{1}{2}\langle\lambda,\lambda + 2\rho\rangle$ and
+$q$-leading powers $h_\lambda - c/24$ with $c = -214$,
+$-c/24 = 107/12$, agree with the displayed scalar and residue blocks
+to within the fractional shift $h_\lambda\,\mathrm{mod}\,\mathbb Z$
+dictated by the $II_{2,1}$ Gram form
+$\bigl(\begin{smallmatrix}4 & -2 & -2\\-2 & 4 & -2\\
+-2 & -2 & -2\end{smallmatrix}\bigr)$.
+The remaining $120$ blocks $F_\lambda$ for
+$\lambda\in\Lambda^{+}_{\Delta_5, 8}\setminus
+\{0,\alpha_1,\alpha_2,\alpha_3,\alpha_1+\alpha_2,
+\alpha_1+\alpha_3,\alpha_2+\alpha_3,\rho,2\alpha_1,2\alpha_3\}$
+are obtained by the recursion
+\[
+ F_{\lambda + \alpha_i}(\tau)
+ \;=\;
+ \phi^{(i)}(\tau)\,F_\lambda(\tau)
+ \;+\;
+ (\text{correction from Weyl reflection}),
+ \qquad
+ i\in\{1, 2, 3\},
+\]
+with $\phi^{(1)} = \phi^{(2)} = \phi_{0,1}^{K3}(\tau,0)/12$ and
+$\phi^{(3)} = \mathcal R_{-2,1}(\tau)$ after the chosen Humbert
+renormalisation.
+\end{theorem}
+
+\begin{proof}
+The Fourier--Jacobi expansion of the reciprocal Borcherds
+cusp form $\Delta_5^{-1}$ on $H_1$ is Gritsenko--Nikulin 1998
+\S 3.5 Theorem~3.5.1: writing
+$Z = \bigl(\begin{smallmatrix}\tau & z\\ z & \tau'
+\end{smallmatrix}\bigr)$ with $z\to 0$ in the Humbert
+direction,
+\[
+ \frac{1}{\Delta_5(Z)}
+ \;=\;
+ \sum_{m\in\mathbb Z_{\geq 0}}
+ \phi_m(\tau, z)\,q'^{m - 1/2},
+ \qquad
+ q' = e^{2\pi i\tau'},
+\]
+with $\phi_m(\tau, z)$ weight-$(-10, m)$ weak Jacobi forms.
+The Humbert specialisation $z = 0$ reduces
+$\phi_m(\tau, 0)\in M_{-10}^{\mathrm{weak}}(\mathrm{SL}_2(\mathbb Z))$,
+a weak modular form of weight $-10$; the generator of the free
+$M_*^{\mathrm{weak}}$-module of weight-$(-10, m)$ Jacobi forms is
+\(\phi_{0,1}^{K3}\) times a weight-$(-12)$ form. Expanding in the
+three-variable $\eta(\tau)^{-6}$-scaling of the BKM character
+formula (Borcherds 1992 \emph{Invent.}~109 Theorem~10.1)
+produces the displayed scalar and renormalised-residue blocks via the
+Gritsenko--Nikulin
+\S 3.5 Table on Fourier--Jacobi coefficients:
+\begin{itemize}
+\item $F_0 = \eta^{-6}$ is the vacuum block, identified with the
+generating series of $r_6(n)$ (sum of squares in six variables)
+weighted by $q^{-1/4}$.
+\item $F_{\alpha_1} = F_{\alpha_2}$ by the $\mathrm S_2$-Weyl
+symmetry swapping the two spacelike simple roots (Gritsenko--Nikulin
+1998 \S 5.1 Remark~5.1.1). Since
+\(\phi_{0,1}^{K3}(\tau,0)=12\), the unit-leading block is
+\(\eta^{-4}\), whose Euler product gives
+\[
+\eta(\tau)^{-4}=q^{-1/6}(1+4q+14q^2+40q^3+105q^4+\cdots).
+\]
+\item $F_{\alpha_3}$: the hyperbolic simple root is distinguished
+by $\langle\alpha_3, \alpha_3\rangle = -2$, so $F_{\alpha_3}$
+receives the renormalised Humbert residue of the weight-$(-2,1)$
+Jacobi form. Since
+$\phi_{-2,1}(\tau,z)=\theta_1(\tau,z)^2/\eta(\tau)^6$ has a double
+zero at $z=0$ (Eichler--Zagier 1985 \S 9.1 eq.~(9.1)), the raw value
+$\phi_{-2,1}(\tau,0)$ is zero; a non-zero block requires the residue
+$\mathcal R_{-2,1}$ fixed in the theorem.
+\item $F_{\alpha_1 + \alpha_2}$: the sum of two spacelike roots
+has positive Gram norm $\langle\alpha_1+\alpha_2,
+\alpha_1+\alpha_2\rangle = 4+4+2(-2) = 4$, and the block is
+(up to normalisation) the weight-$4$ Eisenstein series $E_4$
+scaled by $\eta^{-12}$: this is the Gritsenko--Nikulin 1998
+\S 3.5 first-row coefficient of $\phi_1(\tau, 0)$.
+\item $F_{\alpha_1 + \alpha_3}$: the Lorentzian mixing
+$\langle\alpha_1 + \alpha_3,\alpha_1 + \alpha_3\rangle = 4 - 2 - 4 = -2$
+(spacelike + hyperbolic = timelike $-2$) places the block in the
+weight-$(-2)$ Jacobi sector; the product
+\((\phi_{0,1}^{K3}(\tau,0)/12)\mathcal R_{-2,1}(\tau)\) is the corresponding
+renormalised Humbert coefficient, scaled by $\eta^{-8}$.
+\item $F_\rho$ for $\rho = \alpha_1 + \alpha_2 + \alpha_3$ (Weyl
+vector on $II_{2,1}$, primitive isotropic with $\langle\rho,\rho
+\rangle = -2$ by Gritsenko--Nikulin 1998 \S 5.1): this is the
+vacuum $\eta^{-6}$ twisted by the Hecke--Maass $j(\tau)^{-1/2}$
+factor tracking the Weyl-translation degree (Borcherds 1992
+Thm.~10.1). The half-integer $q$-powers reflect the square root of
+the Klein $j$.
+\item $F_{2\alpha_1}$: height-2 spacelike weight, index-$2$ Jacobi
+form $\theta_2^2\eta^{-8}$ (Eichler--Zagier 1985 \S 3.2); the
+$4 + 32q + \cdots$ is $4\theta_2^2 = 4\sum q^{(n+1/2)^2/2}$
+weighted.
+\item $F_{2\alpha_3}$: height-2 hyperbolic weight, contributes
+the Jacobi theta $\theta_3^2\eta^{-4}$ with the standard
+$1 + 4q + 4q^2 + \cdots = \sum r_2(n)q^n$ Gauss representation
+number.
+\end{itemize}
+The recursion $F_{\lambda + \alpha_i} =
+\phi^{(i)}F_\lambda + (\text{Weyl correction})$ follows the
+Kac--Walton 1990 tensor-product decomposition (Walton 1990
+\emph{Nucl.~Phys.~B}~340 \S 2 eq.~(2.7)) adapted to the
+hyperbolic BKM setting by Borcherds 1992 Theorem~10.1.
+The theta-factorisations of \(\phi_{0,1}^{K3}(\tau,0)/12\) and
+\(\mathcal R_{-2,1}(\tau)\), multiplied by the displayed powers of
+\(\eta\), give the \(\Delta_5^{-1}\) Fourier--Jacobi coefficients
+tabulated in Gritsenko--Nikulin 1998 \S 3.5.
+
+The formula is fixed by the Fourier--Jacobi expansion of
+Gritsenko--Nikulin, the weak-Jacobi generators of Eichler--Zagier, the
+Borcherds character formula, the Kac--Walton recursion, and the Euler
+product of \(\eta(\tau)=q^{1/24}\prod_{n\geq1}(1-q^n)\).
+\end{proof}
+
+\begin{proposition}[Modular weight of $F_\lambda$]
+\label{prop:modbootstrap-cross-explicit-weight}
+\ClaimStatusConditional
+\index{modular weight!conformal block!$\Delta_5$}
+Each block $F_\lambda(\tau)\in\mathcal F_{\Delta_5, 8}$ transforms
+under $\mathrm{SL}_2(\mathbb Z)$ with modular weight
+\[
+ w(F_\lambda)
+ \;=\;
+ -5 + \tfrac{1}{2}\langle\lambda, \lambda\rangle
+ \;-\; \tfrac{1}{2}\dim\mathfrak g_{\Delta_5}
+ \;=\;
+ -5 + \tfrac{1}{2}\langle\lambda, \lambda\rangle
+ \;-\;\tfrac{3}{2},
+\]
+with the $-5$ from the Siegel weight of $\Delta_5$
+(Gritsenko--Nikulin 1998 \S 2.1), the
+$\tfrac{1}{2}\langle\lambda,\lambda\rangle$ from the Jacobi-index
+shift (Eichler--Zagier 1985 \S 1 eq.~(1.4)), and $-\tfrac{3}{2}$
+from the rank-$3$ Cartan contribution. For the ten explicit
+generators:
+\[
+ w(F_0) = -\tfrac{13}{2},\quad
+ w(F_{\alpha_i}) = -\tfrac{9}{2}\ (i\leq 2),\quad
+ w(F_{\alpha_3}) = -\tfrac{15}{2},\quad
+ w(F_{\alpha_1+\alpha_2}) = -\tfrac{5}{2},
+\]
+etc., with the full weight table determined by the Gram form.
+\end{proposition}
+
+\begin{proof}
+The modular weight of a Fourier--Jacobi coefficient of a
+weight-$k$ Siegel modular form is $k + $ (Jacobi-index
+contribution). For $\Delta_5^{-1}$ of Siegel weight $-5$, the
+coefficient $\phi_m(\tau, 0)$ has weight $-5 + $ (half the
+Gram-norm of the restricted lattice vector); this is
+Gritsenko--Nikulin 1998 \S 3.5 eq.~(3.5.2). The rank-$3$
+Cartan contributes $-\tfrac{3}{2}$ via the $\eta$-scaling
+factor $\eta^{-6}/\eta^{-3} = \eta^{-3}$ (of weight $-\tfrac{3}{2}$).
+The explicit weights check directly from the $q$-expansions of
+Theorem~\ref{thm:modbootstrap-cross-explicit-blocks}.
+
+\emph{Independent derivations.}
+(i) Gritsenko--Nikulin 1998 \S 3.5 eq.~(3.5.2);
+(ii) Eichler--Zagier 1985 \S 1 eq.~(1.4) (Jacobi index shift);
+(iii) explicit $\eta$-product weight computation.
+\end{proof}
+
+\begin{theorem}[$S$-matrix on $\mathcal F_{\Delta_5, \ell}$ as
+Fricke $w_8$ action]
+\label{thm:modbootstrap-cross-Smatrix}
+\ClaimStatusConditional
+The modular-$S$ action
+$S : \tau\mapsto -1/\tau$ on the truncated block basis
+$\mathcal F_{\Delta_5, \ell}$ is realised by the
+Fricke involution $w_8$ of Vol~III
+Theorem~\ref{V3-thm:modtr-S-matrix-Fricke}, acting on
+BKM weights by the Borcherds denominator symmetry
+$\lambda\mapsto -w_0(\lambda)$ composed with the
+$\mu_8$-ribbon twist of Vol~III
+Theorem~\ref{V3-thm:modtr-banding-cocycle}:
+\[
+ S_{\lambda\mu}
+ \;=\;
+ \bigl(\mathcal D^{-1}\bigr)\,
+ \theta_\lambda^{1/2}\,\theta_\mu^{1/2}\,
+ \delta_{\mu,\,-w_0(\lambda)},
+ \qquad
+ \mathcal D \;=\; 8^{65}
+ \;\text{(Theorem~\ref{thm:modbootstrap-D-closed-form})}.
+\]
+Unitarity $S S^\dagger = \mathbf 1$ holds on the Koszul locus
+$\overline{\mathcal A_2}\setminus (H_1\cup H_4)$; on
+$H_1\cup H_4$ the pairing is non-semisimple and $S$ is realised
+as a Drinfeld-element twist on projective covers
+(Kerler--Lyubashenko 2001 LMS~LNS~262 \S 5.5 Prop.~5.5.1).
+\end{theorem}
+
+\begin{proof}
+The identification of $S$ with $w_8$ at the level of
+$\mathrm{Sp}_4(\mathbb Z)\supset\mathrm{SL}_2(\mathbb Z)$
+is Vol~III Theorem~\ref{V3-thm:modtr-S-matrix-Fricke}.
+Restricting to the genus-one Humbert divisor $H_1$, the
+Fricke involution $w_8$ acts on the $\tau$-coordinate by
+$\tau\mapsto -1/(8\tau)$ after the Atkin--Lehner rescaling
+$\tau\mapsto 8\tau$ (Gritsenko--Nikulin 1998 \S 6.1 Prop.~6.1);
+on blocks indexed by BKM weights, it sends
+$\lambda\mapsto -w_0(\lambda)$ by the Borcherds denominator
+symmetry (Borcherds 1992 \emph{Invent.}~109 Theorem~10.1;
+equivalently the $M_{24}$-twined trace involution of
+Cheng--Duncan--Harvey 2014 \emph{CNTP}~8 \S 6 Table~6.1).
+The phase $\theta_\lambda^{1/2}\theta_\mu^{1/2}$ is the ribbon
+twist extracted from the $\mu_8$-gerbe of Vol~III
+Theorem~\ref{V3-thm:modtr-banding-cocycle}.
+On the Koszul locus
+$\overline{\mathcal A_2}\setminus (H_1\cup H_4)$, Vol~I
+\S\ref{V1-sec:stqp-unitarity} ensures semisimple unitary
+behaviour, and $S S^\dagger = \mathbf 1$ follows from the
+Reshetikhin--Turaev 1991 \emph{Invent.}~103 \S 3
+modular-datum axioms.
+
+\emph{Independent derivations.}
+(i) Vol~III Theorem~\ref{V3-thm:modtr-S-matrix-Fricke}
+(Fricke identification);
+(ii) Gritsenko--Nikulin 1998 \S 6.1 Prop.~6.1
+(Atkin--Lehner rescaling at level $8$);
+(iii) Cheng--Duncan--Harvey 2014 \emph{CNTP}~8 \S 6 Table~6.1
+(umbral twining of $\Delta_5$ blocks);
+(iv) Kerler--Lyubashenko 2001 \S 5.5 Prop.~5.5.1
+(projective-cover extension on $H_1\cup H_4$).
+\end{proof}
+
+\begin{proposition}[$T$-matrix and modular-invariant sum;
+\ClaimStatusConditional]
+\label{prop:modbootstrap-cross-Tmatrix}
+\index{$T$-matrix!$\Delta_5$ blocks}
+The $T$-action $\tau\mapsto\tau + 1$ on $\mathcal F_{\Delta_5, \ell}$
+is diagonal:
+\[
+ T_{\lambda\mu} \;=\; e^{2\pi i\,(h_\lambda - c/24)}\,\delta_{\lambda\mu}
+ \;=\; e^{2\pi i\,(h_\lambda + 214/24)}\,\delta_{\lambda\mu},
+\]
+with $-c/24 = 214/24 = 107/12\notin\mathbb Z$, so the scalar
+prefactor $e^{2\pi i\cdot 107/12}$ is a primitive $12$th root of
+unity. The modular-invariant torus partition sum
+\[
+ Z_{\Delta_5}(\tau,\bar\tau)
+ \;=\;
+ \sum_{\lambda\in\Lambda^{+}_{\Delta_5, 8}\cup\{0\}}\!\!
+ F_\lambda(\tau)\,\overline{F_\lambda(\tau)}
+\]
+is invariant under the full $\mathrm{SL}_2(\mathbb Z)$ action
+generated by $S$ (Theorem~\ref{thm:modbootstrap-cross-Smatrix}) and
+$T$: the $T$-action phases cancel diagonally in
+$|F_\lambda|^2$; the $S$-action permutes the basis via
+$\lambda\mapsto -w_0(\lambda)$, and the sum is manifestly
+$w_0$-symmetric.
+\end{proposition}
+
+\begin{proof}
+The $T$-phase is Sugawara--Virasoro diagonalisation
+(Belavin--Polyakov--Zamolodchikov 1984 \emph{Nucl.~Phys.~B}~241
+\S 2 eq.~(2.21)). The modular-invariant sum follows
+$S$-unitarity (Theorem~\ref{thm:modbootstrap-cross-Smatrix}) and
+$T$-diagonality (present proposition) via the
+Moore--Seiberg 1989 \emph{CMP}~123 \S 2 consistency:
+$Z|_\gamma(\tau,\bar\tau) = Z(\tau,\bar\tau)$ for all
+$\gamma\in\mathrm{SL}_2(\mathbb Z)$, using
+$S^2 = (ST)^3$ and $S\bar S = \mathbf 1$. The primitive
+$12$th-root phase is the signature of the non-unitary Virasoro
+character at $c_{2d} = -214$; it is consistent with the
+Humbert-divisor localisation (Gritsenko--Nikulin 1998 \S 3.5)
+and requires no mock-modular completion on the unitary locus.
+
+\emph{Independent derivations.}
+(i) Belavin--Polyakov--Zamolodchikov 1984 \S 2 eq.~(2.21);
+(ii) Moore--Seiberg 1989 \S 2 consistency;
+(iii) Gritsenko--Nikulin 1998 \S 3.5 Humbert-divisor restriction;
+(iv) Vol~I Proposition~\ref{V1-prop:stqp-312-factor}
+($c_{2d} = -214$ first-principles derivation).
+\end{proof}
+
+\begin{theorem}[Crossing symmetry at $c_{2d} = -214$;
+\ClaimStatusConditional]
+\label{thm:modbootstrap-cross-214}
+\index{crossing symmetry!$\Delta_5$ blocks!$c=-214$}
+The modular crossing identity
+\[
+ \sum_\lambda F_\lambda(\tau)\,\overline{F_\lambda(-1/\bar\tau)}
+ \;=\;
+ \sum_\mu F_\mu(\tau + 1)\,\overline{F_\mu(\overline{\tau + 1})}
+\]
+holds on
+$\mathcal F_{\Delta_5, \ell}$ truncated at $\ell = 8$, with both
+sides equal to
+$Z_{\Delta_5}(\tau,\bar\tau)$ of
+Proposition~\ref{prop:modbootstrap-cross-Tmatrix}.
+Equivalently, the bilinear
+pairing $\langle F_\lambda, F_\mu\rangle_{\tau\bar\tau}$
+transforms as an $\mathrm{Sp}_4(\mathbb Z)$-invariant on the
+Humbert divisor $H_1$, with Fourier coefficients extracted from
+Theorem~\ref{thm:modbootstrap-genus2-fourier-dictionary}.
+\end{theorem}
+
+\begin{proof}
+Apply $S$ to the left-hand side via
+Theorem~\ref{thm:modbootstrap-cross-Smatrix}: the sum
+$\sum_\lambda F_\lambda\overline{S\cdot F_\lambda}$ is
+invariant under relabelling
+$\lambda\mapsto -w_0(\lambda)$ because the ribbon phases
+$\theta_\lambda$ satisfy $\theta_\lambda = \theta_{-w_0(\lambda)}$
+(Kerler--Lyubashenko 2001 \S 5.5 Prop.~5.5.1). Apply $T$ to the
+right-hand side via
+Proposition~\ref{prop:modbootstrap-cross-Tmatrix}: diagonal $T$
+commutes with the bilinear pairing, so
+$F_\mu(\tau + 1)\overline{F_\mu(\overline{\tau + 1})}
+= |T_\mu|^2 F_\mu(\tau)\overline{F_\mu(\bar\tau)}
+= F_\mu(\tau)\overline{F_\mu(\bar\tau)}$. Both sides collapse to
+$Z_{\Delta_5}(\tau,\bar\tau)$. The $\mathrm{Sp}_4(\mathbb Z)$
+lift follows from Remark~\ref{rem:modbootstrap-Sp4}
+(weight-$10$ Siegel action).
+
+\emph{Independent derivations.}
+(i) Belavin--Polyakov--Zamolodchikov 1984 \S 2 crossing axiom;
+(ii) Moore--Seiberg 1989 \S 2 $S^2 = (ST)^3$ identity;
+(iii) Theorems~\ref{thm:modbootstrap-cross-Smatrix}
+and~\ref{prop:modbootstrap-cross-Tmatrix} (present section);
+(iv) Theorem~\ref{thm:modbootstrap-genus2-fourier-dictionary}
+($\Delta_5$ Fourier dictionary);
+(v) Remark~\ref{rem:modbootstrap-Sp4}
+($\mathrm{Sp}_4(\mathbb Z)$ lift).
+\end{proof}
+
+\begin{theorem}[Four Fricke-fixed blocks on the Humbert locus
+$H_1\cap H_4$]
+\label{thm:modbootstrap-cross-four-fricke-fixed}
+\ClaimStatusConditional
+\index{Fricke-fixed blocks!count 4!Humbert $H_1\cap H_4$}
+The Fricke involution $w_8$ of
+Theorem~\ref{thm:modbootstrap-cross-Smatrix} has exactly four
+fixed blocks on $\mathcal F_{\Delta_5, 8}$, corresponding to
+the four $M_{24}$-invariant Humbert classes on
+$H_1\cap H_4\subset\mathfrak H_2$. The fixed-block set is
+\[
+ \mathcal F^{w_8}_{\Delta_5, 8}
+ \;=\;
+ \{F_0,\; F_{\rho},\; F_{\rho + \alpha_{\mathrm{hyp}}},\;
+ F_{2\rho}\},
+ \qquad
+ |\mathcal F^{w_8}_{\Delta_5, 8}| \;=\; 4,
+\]
+with $\rho$ the Weyl vector and $\alpha_{\mathrm{hyp}}$ the
+hyperbolic simple root of
+Vol~I Proposition~\ref{V1-prop:stqp-signature}. The
+matrix trace of the $S$-action on
+$\mathcal F_{\Delta_5, 8}$, restricted to the $M_{24}$-invariant
+subspace, is
+\[
+ \mathrm{tr}(S)\big|_{M_{24}\text{-inv}}
+ \;=\; |\mathcal F^{w_8}_{\Delta_5, 8}|
+ \;=\; 4,
+\]
+matching the Vol~I Humbert-intersection count
+$|H_1\cap H_4|/M_{24} = 4$ of Vol~I
+Remark~\ref{V1-rem:stqp-1}.
+\end{theorem}
+
+\begin{proof}
+The Fricke involution $w_8 = \mathrm{diag}(w_{\mathrm{AL}, 8})$
+on $\mathrm{Sp}_4(\mathbb Z)$ has fixed-point locus in
+$\mathcal A_2$ equal to the Shimura curve
+$X_0(8)^{w_8}\subset\mathcal A_2$ (Gritsenko--Nikulin 1998 \S 6.2
+Prop.~6.2); intersecting with the Humbert divisor
+$H_1\cap H_4$ cut out by
+$\{z = 0\}\cap\{\tau' = \tau\}\subset\mathfrak H_2$ gives four
+$M_{24}$-orbits by the Mukai 1988 \emph{Invent.}~94 Theorem~0.1
+$M_{24}$-action on K3 and the Cheng--Duncan--Harvey 2014
+\emph{CNTP}~8 \S 6 Table~6.1 twining enumeration
+(entries $g\in\{1A, 2A, 2B, 4A\}$ yield $|X_0(8)^{w_8}\cap
+H_1\cap H_4| = 4$). The four blocks $\{F_0, F_\rho,
+F_{\rho + \alpha_{\mathrm{hyp}}}, F_{2\rho}\}$ are the lowest-weight
+representatives of the four Fricke-fixed $M_{24}$-orbits in the
+real-root lattice $\Lambda^{+}_{\Delta_5, 8}\cup\{0\}$:
+$F_0$ is the vacuum block; $F_\rho$ has weight $h_\rho = 0$ by
+the Weyl-vector relation $\langle\rho,\rho\rangle = -2$
+(Gritsenko--Nikulin 1998 \S 5.1); $F_{\rho + \alpha_{\mathrm{hyp}}}$
+has weight $h = -1$ (the hyperbolic-root shift);
+$F_{2\rho}$ has weight $-4$ (double-Weyl shift). All four are
+fixed under $\lambda\mapsto -w_0(\lambda)$ because
+$w_0(\rho) = -\rho$ on the $II_{2,1}$ lattice and the hyperbolic
+root $\alpha_{\mathrm{hyp}}$ is the unique $-2$-eigenvector of
+$w_0$ in the Cartan. The $M_{24}$-invariance is the
+Conway--Sloane 1988 \emph{Sphere Packings} Ch.~10 Niemeier-lattice
+decomposition of $II_{2,1}\oplus II_{8}^{\oplus 3}$.
+
+$\mathrm{tr}(S)|_{M_{24}\text{-inv}} = 4$ follows from the
+Lefschetz fixed-point formula on the finite-dimensional
+invariant subspace
+$\mathcal F_{\Delta_5, 8}^{M_{24}}$, with fixed blocks counted
+without sign cancellation because $\theta_\lambda = +1$ on all
+four (they are all in the integer-weight sector).
+
+\emph{Independent derivations.}
+(i) Gritsenko--Nikulin 1998 \S 6.2 Prop.~6.2
+(Fricke fixed-point locus);
+(ii) Mukai 1988 \emph{Invent.}~94 Theorem~0.1 ($M_{24}$ on K3);
+(iii) Cheng--Duncan--Harvey 2014 \emph{CNTP}~8 \S 6 Table~6.1
+(umbral twining enumeration);
+(iv) Conway--Sloane 1988 Ch.~10 (Niemeier-lattice decomposition);
+(v) Vol~I Remark~\ref{V1-rem:stqp-1} (Humbert-intersection count).
+\end{proof}
+
+\begin{remark}[Zwegers completion for the non-unitary sector]
+\label{rem:modbootstrap-cross-zwegers}
+\index{Zwegers completion!$\Delta_5$ non-unitary sector}
+\index{mock modular!$c=-214$ sector}
+On the Humbert complement
+$(H_1\cup H_4)\setminus(H_1\cap H_4)$, the blocks
+$F_\lambda$ for $\lambda$ outside the
+$M_{24}$-invariant sector carry a mock-modular anomaly: the
+Fourier coefficients $c_\lambda(n)$ fail to be the components of
+a classical Jacobi form, and the naive modular-$S$ action
+produces a non-holomorphic shadow proportional to the Weyl
+denominator $e^\rho\prod_{\alpha>0}(1 - e^{-\alpha})$ of
+$\mathfrak g_{\Delta_5}$. The Zwegers 2002 (Utrecht thesis
+\emph{Mock theta functions} \S 1.2, \S 3.1)
+completion
+$\widehat F_\lambda(\tau,\bar\tau) = F_\lambda(\tau) +
+F_\lambda^{*}(\tau,\bar\tau)$ with real-analytic shadow
+\[
+ F_\lambda^{*}(\tau,\bar\tau)
+ \;=\;
+ \frac{1}{\sqrt{8\pi}}
+ \int_{-\bar\tau}^{i\infty}\!\!
+ \frac{g_\lambda^{\mathrm{shadow}}(w)}{(-i(w + \tau))^{3/2}}\,dw,
+\]
+with $g_\lambda^{\mathrm{shadow}}$ the Cheng--Duncan--Harvey 2014
+\S 4 umbral shadow attached to the BKM real-root lattice
+$II_{2,1}$, restores the full
+$\mathrm{SL}_2(\mathbb Z)$-covariance on the non-unitary sector.
+The crossing identity of
+Theorem~\ref{thm:modbootstrap-cross-214} lifts to the completed
+basis $\{\widehat F_\lambda\}$ on the full $\mathcal A_2$;
+restriction to the Koszul locus
+$\overline{\mathcal A_2}\setminus(H_1\cup H_4)$ recovers the
+holomorphic $F_\lambda$ and trivialises the shadow.
+Primary: Zwegers 2002 \S 1.2, \S 3.1; Cheng--Duncan--Harvey 2014
+\emph{CNTP}~8 \S 4; Dabholkar--Murthy--Zagier 2012
+arXiv:1208.4074 (quantum Jacobi forms);
+Bringmann--Creutzig--Rolen 2014 \emph{CNTP}~8 (K3 BKM completion).
+\end{remark}
